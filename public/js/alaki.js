@@ -1,0 +1,5 @@
+
+function salam() {
+    alert('saldsa');
+}
+

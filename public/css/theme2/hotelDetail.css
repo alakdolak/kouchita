@@ -1,0 +1,625 @@
+.ui_overlay:before {
+    right: 120px;
+    left: auto;
+}
+
+.editBtn {
+    /*background: url('../../images/icon_edit.png') no-repeat center center #f0f0f0;*/
+}
+
+.imgContainer:before {
+    height: 0 !important;
+}
+
+.hover {
+    position: relative;
+    clear: both;
+    margin: 6px 18px;
+    padding: 6px;
+    background: #FFF;
+    border: 1px solid #ECEAE2;
+    border-bottom-color: #DDDBD0;
+}
+
+.btn-primary:focus {
+    box-shadow: 0 0 0 0 !important;
+}
+
+.btn-success:focus {
+    box-shadow: 0 0 0 0 !important;
+}
+.gm-style-iw {
+    top: 15px !important;
+    left: 10px !important;
+    max-width: 300px;
+    max-height: 300px !important;
+    background-color: #fff;
+    box-shadow: 0 1px 6px rgba(178, 178, 178, 0.6);
+    border: 1px solid rgba(72, 181, 233, 0.6);
+    border-radius: 10px 10px 10px 10px;
+}
+
+td {
+    max-width: 120px !important;
+    width: auto !important;
+}
+
+.detailListItem {
+    max-width: 120px !important;
+    width: auto !important;
+    padding: 0 !important;
+}
+
+.titleInTable {
+    color: #4dc7bc;
+}
+.progress-container {
+    width: 100%;
+    height: 8px;
+    background: #ccc;
+}
+
+.progress-bar {
+    height: 8px;
+    background: #4caf50;
+    width: 0;
+}
+.is-create-trip {
+    color: #00AF87 !important;
+    background-blend-mode: overlay;
+    width: 150px;
+    height: 150px;
+    cursor: pointer;
+    margin: 0 0 10px 0;
+    border-radius: 2px;
+    display: -webkit-box;
+    display: flex;
+    line-height: initial;
+    transition: background-color .2s ease, corder-color .2s ease;
+    border: 1px solid #f5f5f5;
+    justify-content: space-around;
+    background-color: #e5e5e5;
+}
+
+.ui_icon:before {
+    content: "\e02f";
+    display: inline-block;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    font-size: inherit;
+    line-height: 1;
+    font-family: 'Shazde_Regular' !important;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    speak: none;
+}
+
+.is-create-trip .tile-content {
+    align-self: center;
+    margin: 10px;
+    padding: 0;
+    box-sizing: inherit;
+    cursor: pointer;
+}
+
+.castle:before {
+    color: #963019;
+}
+
+#PAGE {
+    overflow: hidden;
+}
+
+
+.menu {
+    background: #fff;
+    color: #16174f;
+    font-size: 13px;
+    font-weight: bolder;
+    /*box-shadow: 2px 2px 5px #888888;*/
+    border-bottom: 1px solid #E6E6E6;
+    height: 40px;
+    line-height: 40px;
+    letter-spacing: 1px;
+}
+
+@media (max-width: 1023px) and (min-width: 768px) {
+    .my_moblie_hidden {
+        display: none !important;
+    }
+}
+
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.btn-default {
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+}
+
+.rec {
+    cursor: pointer;
+}
+input[type="checkbox"], input[type="radio"] {
+    display: none;
+}
+
+input[type="checkbox"] + label, input[type="radio"] + label {
+    color: #666666;
+}
+
+input[type="checkbox"] + label span, input[type="radio"] + label span {
+    display: inline-block;
+    width: 19px;
+    height: 19px;
+    margin: -2px 10px 0 0;
+    vertical-align: middle;
+    background: url('../../images/check_radio_sheet.png') left top no-repeat;
+    cursor: pointer;
+}
+
+input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label span {
+    background: url('../../images/check_radio_sheet.png') -19px top no-repeat;
+}
+
+.red-heart-fill:before {
+    color: #963019 !important;
+}
+
+.red-heart:hover:before {
+    color: #963019 !important;
+}
+
+.labelForCheckBox:before {
+    background-color: transparent !important;
+    border: none !important;
+    content: "" !important;
+}
+
+div.ppr_rup.ppr_priv_location_detail_header .rating_and_popularity > span:nth-child(n+2):before {
+    margin-right: 4px !important;
+}
+
+input[type="checkbox"] + label span, input[type="radio"] + label span {
+    margin: -4px 0 0 0 !important;
+}
+
+.ui_input_checkbox {
+    margin-right: 0 !important;
+}
+
+p {
+    word-break: break-all;
+    white-space: normal;
+}
+
+.loader {
+    background-image: url("../../images/loading.svg");
+    width: 100px;
+    height: 100px;
+}
+
+.ui_overlay:before {
+    content: none !important;
+}
+
+/*--hotel list Icon--*/
+
+.shTIcon {
+    font-family: shazde_regular2 !important;
+    font-size: 20px;
+}
+
+.passengerIcon:before {
+    content: '\E0DF';
+    color: #4DC7BC;
+}
+
+.minusPlusIcons {
+    font-family: 'Shazde_Regular2' !important;
+    font-size: 25px;
+    line-height: 25px;
+    color: #30b4a6;
+    cursor: pointer;
+    display: inline-block;
+    float: left;
+}
+
+.plus:before {
+    content: '\E031';
+}
+
+.minus:before {
+    content: '\E034';
+}
+
+.searchBottomArrowIcone:before {
+    content: '\E04A';
+    position: absolute;
+    top: 12px;
+    cursor: pointer;
+}
+
+.searchTopArrowIcone:before {
+    content: '\E044';
+    position: absolute;
+    top: 12px;
+    cursor: pointer;
+}
+
+.arrowPassengerIcone:before {
+    left: 10%;
+}
+
+.closeXicon:before {
+    content: '\E02C';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    cursor: pointer;
+    color: #4dc7bc;
+    font-size: 1.5em;
+}
+.offerBox {
+    width: 100%;
+    border-bottom: 2px solid #e5e5e5;
+    margin: 3px 0;
+    padding: 4px 0;
+}
+
+.lableCalender {
+    position: relative;
+    margin: 6px;
+    width: 44%;
+    height: 30px;
+    cursor: pointer;
+}
+
+.inputLableCalender {
+    width: 80px;
+    padding: 7px;
+    position: absolute;
+    top: 1px;
+    right: 35px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.salePrice {
+    color: red;
+    border-top: 2px solid red;
+    padding-top: 5px;
+    width: 70px;
+    margin: -15px auto 0;
+}
+
+.other10_Offer {
+    text-align: center;
+    font-size: 1.1em;
+    color: #050c93;
+    margin: 3px 0 10px 0;
+}
+.numBetweenMinusPlusBtn {
+    float: left;
+    margin-top: 2px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+/*room section*/
+.roomBox {
+    width: 80%;
+    padding: 3px 8px;
+    border: 2px solid #E5E5E5;
+    border-radius: 10px;
+    text-align: right;
+    font-weight: 700;
+    margin: 8px auto;
+    position: relative;
+}
+
+/*pop up*/
+.roomPassengerPopUp {
+    text-align: center !important;
+    position: absolute;
+    background-color: white;
+    padding: 10px;
+    top: 55px;
+    right: 12%;
+    left: 12%;
+    border-radius: 5px;
+    z-index: 999;
+    border: 2px solid #e5e5e5;
+}
+
+.rowOfPopUp {
+    height: 28px;
+    font-size: 1.2em;
+    margin-bottom: 5px;
+    clear: both;
+}
+
+.selectAgeChild {
+    direction: rtl;
+    border: none !important;
+}
+
+.childrenPopUpAlert {
+    width: 100%;
+    margin-bottom: 5px;
+    color: red;
+    font-size: 0.8em;
+}
+
+.childAge {
+    width: 32%;
+    height: 45px;
+    float: right;
+}
+/*search btn section*/
+.srchBox {
+    width: 44%;
+    margin: 0 auto;
+}
+
+.srchBtn {
+    background-color: #4DC7BC;
+    border: none;
+    color: white;
+    font-size: 1.3em;
+    border-radius: 10px;
+    padding: 8px 30px;
+}
+
+.explainSrch {
+    font-size: 1.4em;
+    color: black;
+    text-align: center;
+    margin: 15px 7px;
+}
+
+.explainRoom {
+    font-size: 0.9em;
+    color: #93321b;
+    position: absolute;
+    bottom: 5px;
+    margin: 0 7px;
+}
+.roomBox_IS_10 {
+    margin-top: 20px;
+    position: relative;
+}
+
+.roomBox_IS_2 {
+    height: 330px;
+    margin-top: 112px;
+    border: 1px solid black;
+    padding: 7px;
+}
+
+.roomBoxRezerved {
+    width: 28%;
+    padding: 3px 8px;
+    border: 2px solid #E5E5E5;
+    border-radius: 10px;
+    text-align: right;
+    font-weight: 700;
+    position: relative;
+    display: inline-block;
+}
+
+.eachRooms {
+    border-bottom: 2px solid lightgray;
+    padding: 5px;
+    margin: 3px 0;
+    font-size: 1.2em;
+}
+
+.roomPic {
+    width: 25%;
+    height: 130px;
+    margin-top: 3px;
+    float: right;
+    border-left: 2px solid #e5e5e5;
+}
+
+.roomDetails {
+    width: 55%;
+    border-left: 2px solid #e5e5e5;
+    display: inline-block;
+    padding: 7px;
+}
+
+.roomPrices {
+    width: 19%;
+    float: left;
+    padding: 7px;
+}
+
+.roomRow {
+    width: 47%;
+    display: inline-block;
+    padding: 0 7px 0 2px;
+}
+
+.roomName {
+    font-size: 1.2em;
+    font-weight: 700;
+    line-height: 40px;
+    display: inline-block;
+}
+
+.roomPerson {
+    float: left;
+}
+
+.personIcon:before {
+    content: '\E06E';
+    color: #4dc7bc;
+    font-size: 14px !important;
+}
+
+.roomNumber {
+    width: 65%;
+    padding: 6px 9px;
+    border: 2px solid #E5E5E5;
+    border-radius: 10px;
+    font-weight: 700;
+    margin: auto;
+}
+
+.roomOptionTitle {
+    color: #4dc7bc;
+    padding-top: 5px;
+}
+
+/*style of chek box*/
+.check-box__item {
+    padding-top: 5px;
+    position: relative;
+    text-align: left;
+    width: 57%;
+    margin: 0 auto;
+}
+
+.labelEdit {
+    position: absolute;
+    left: 19px;
+    top: 7px;
+    font-size: 0.8em;
+    color: gray;
+}
+
+/*end of style of chek box*/
+.roomOption {
+    color: gray;
+    display: inline-block;
+}
+
+.roomAdditionalOption {
+    display: inline-block;
+    margin: 0 5px 0;
+}
+.priceRow_IS_2 {
+    margin: 7% 0;
+    font-weight: 400;
+}
+
+.lable_IS_2 {
+    font-size: 1.2em;
+    font-weight: 700;
+    color: #4dc7bc;
+    display: inline-block;
+}
+.viewOffersBtn {
+    background: #fcc156;
+    border-color: #fcc156;
+    line-height: 25px;
+    width: 75px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-left: 13px;
+}
+
+.reservBtn, .specOfferBtn {
+    color: #fff;
+    line-height: 10px;
+    border-radius: 10px;
+    width: 100px;
+}
+
+.specOfferBtn {
+    background: #4DC7BC;
+    border-color: #4DC7BC;
+}
+
+.reservBtn {
+    background: #963019;
+    border-color: #963019;
+}
+
+.rezervedBtn {
+    background: #4DC7BC;
+    border-color: #4DC7BC;
+    line-height: 14px;
+    border-radius: 7px;
+    width: 110px;
+    padding-bottom: 10px;
+    font-weight: 700;
+}
+
+.getAlarm {
+    position: fixed;
+    left: 30%;
+    right: 30%;
+    top: 19%;
+    bottom: auto;
+    overflow: auto;
+    max-height: 500px;
+    z-index: 10000001;
+    direction: rtl;
+    text-align: right;
+}
+
+.alarmHeaderText {
+    font-size: 1.3em;
+    font-weight: 700;
+    color: #4a4a4a;
+}
+
+.alarmSubHeaderText {
+    margin: 7px 0 1px;
+    color: #888686;
+}
+
+.alarmBoxCityName {
+    border: 2px solid #E5E5E5;
+    border-radius: 10px;
+    width: 33%;
+    padding: 7px;
+    font-size: 0.8em;
+}
+
+.alarmInputCityName {
+    width: 90%;
+    border: none !important;
+}
+
+.alarmInputCityName:focus {
+    border: none !important;
+    color: #4DC7BC;
+}
+
+.alarmPopUpBotton {
+    background: #4DC7BC;
+    border-color: #4DC7BC;
+    color: #fff;
+    line-height: 24px;
+    font-size: 1em;
+    width: 100px;
+    border-radius: 7px;
+}

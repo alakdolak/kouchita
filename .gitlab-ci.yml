@@ -1,0 +1,40 @@
+variables:
+  GIT_STRATEGY: none
+
+before_script:
+  - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+  - git remote set-url origin $CI_REPOSITORY_URL
+  - git pull
+  
+build-master:
+  stage: build
+  script:
+    - docker build -t "$CI_REGISTRY_IMAGE" -t "$CI_REGISTRY_IMAGE/production:$CI_COMMIT_SHA" deploy/fpm
+    - docker push "$CI_REGISTRY_IMAGE/production:$CI_COMMIT_SHA"
+    - docker push "$CI_REGISTRY_IMAGE"
+  only:
+    - master
+
+
+deploy_production:
+  stage: deploy
+  script:
+    - export PRODUCTION_IMAGE="$CI_REGISTRY_IMAGE/production:$CI_COMMIT_SHA"
+    - docker-compose pull production
+    - docker-compose up -d
+    - docker-compose exec -T production sh -c "cp -fv .env.prod .env"
+    - docker-compose exec -T production sh -c "mv resources/views/URL.php vendor/laravel/framework/src/Illuminate/Support/Facades/URL.php"
+    - docker-compose exec -T production sh -c "composer install --no-interaction --ansi"
+    - docker-compose exec -T production sh -c "php artisan migrate"
+    - docker-compose exec -T production sh -c "php artisan config:cache"
+    - docker-compose exec -T production sh -c "mv helpers.php vendor/laravel/framework/src/Illuminate/Foundation/helpers.php"
+    - docker-compose exec -T production sh -c "mv Str.php vendor/laravel/framework/src/Illuminate/Support/Str.php"
+  only:
+    - master
+  cache:
+    key: $CI_COMMIT_REF_SLUG
+    paths:
+    - vendor/
+  environment:
+    name: production
+    url: https://shazdemosfer.com
