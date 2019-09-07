@@ -119,10 +119,7 @@
          <div class="photoUploader">
 
             <div class="headerBar">
-                 <h3 id="photoUploadHeader" style="margin-right: 40px" class="photoUploadHeader"><span>افزودن تصویر به </span>
-                    <span>
-                       {{--{{$place->name}}--}}
-                    </span></h3>
+                 <h3 id="photoUploadHeader" style="margin-right: 40px" class="photoUploadHeader"><span>افزودن تصویر به </span><span>{{$place->name}}</span></h3>
                  <div id="photoUploadTipsLink" class="headerLink tipsLink">
                     <span onclick="$('#guidelinesOverlay').removeClass('hidden')">قوانین سایت</span>
                     <span id="guidelinesOverlay" class="hidden ui_overlay ui_popover arrow_top guidelinesOverlayParent ui_tooltip " style="position: fixed; right: 460px; left: auto; top: 82px; bottom: auto;">
@@ -384,7 +381,7 @@
 
       $.ajax({
          type: 'post',
-         {{--url: '{{route('addPhotoToPlace', ['placeId' => $place->id, 'kindPlaceId' => $kindPlaceId])}}',--}}
+         url: '{{route('addPhotoToPlace', ['placeId' => $place->id, 'kindPlaceId' => $kindPlaceId])}}',
          data: {
             'fileName': uploadedImageName,
             'url': $("#image_file").attr('src'),

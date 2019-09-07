@@ -23,12 +23,12 @@ deploy_production:
     - docker-compose pull production
     - docker-compose up -d
     - docker-compose exec -T production sh -c "cp -fv .env.prod .env"
-    - docker-compose exec -T production sh -c "mv resources/views/URL.php vendor/laravel/framework/src/Illuminate/Support/Facades/URL.php"
+    - docker-compose exec -T production sh -c "cp resources/views/URL.php vendor/laravel/framework/src/Illuminate/Support/Facades/URL.php"
     - docker-compose exec -T production sh -c "composer install --no-interaction --ansi"
     - docker-compose exec -T production sh -c "php artisan migrate"
     - docker-compose exec -T production sh -c "php artisan config:cache"
-    - docker-compose exec -T production sh -c "mv helpers.php vendor/laravel/framework/src/Illuminate/Foundation/helpers.php"
-    - docker-compose exec -T production sh -c "mv Str.php vendor/laravel/framework/src/Illuminate/Support/Str.php"
+    - docker-compose exec -T production sh -c "cp helpers.php vendor/laravel/framework/src/Illuminate/Foundation/helpers.php"
+    - docker-compose exec -T production sh -c "cp Str.php vendor/laravel/framework/src/Illuminate/Support/Str.php"
   only:
     - master
   cache:

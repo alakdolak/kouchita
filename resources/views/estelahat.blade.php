@@ -165,9 +165,10 @@
 
                             <select style="width: 40%;border-radius: 6px;margin-top:5px;direction: rtl" onchange="search()" class="field dropdown" id="goyeshCities">
                                 <option class="dropdownItem" selected value="none">انتخاب</option>
-{{--                                @foreach($goyeshCities as $itr)--}}
-{{--                                    <option class="dropdownItem" value="{{$itr->id}}">{{$itr->name}}</option>--}}
-{{--                                @endforeach--}}
+
+                                @foreach($goyeshCities as $itr)
+                                    <option class="dropdownItem" value="{{$itr->id}}">{{$itr->name}}</option>
+                                @endforeach
                                 <option class="dropdownItem" value="-1">همه</option>
                             </select>
                             <br><br>
@@ -187,28 +188,21 @@
                 <div class="recommendedCard" id="estelah">
                     <div style="height: auto;padding: 10px;padding-bottom: 50px;">
                         <div class="row">
-{{--                            @foreach($tags as $tag)--}}
+
+                            @foreach($tags as $tag)
                                 <div class="col-xs-3" style="border:1px solid #4DC7BC;padding: 0;text-align: center; max-height: 400px; overflow: auto">
-                                    <div class="col-xs-12" style="background: #4DC7BC;padding: 10px;">
-{{--                                        {{$tag->name}}--}}
-                                    </div>
+                                    <div class="col-xs-12" style="background: #4DC7BC;padding: 10px;">{{$tag->name}}</div>
                                     <div class="col-xs-12" style="padding: 10px;">
-{{--                                        @foreach($tag->words as $word)--}}
+                                        @foreach($tag->words as $word)
                                             <div class="col-xs-12 estelahatrow">
-                                                <div class="col-xs-4">
-{{--                                                    {{$word->estelah}}--}}
-                                                </div>
-                                                <div class="col-xs-4">
-{{--                                                    {{$word->talafoz}}--}}
-                                                </div>
-                                                <div class="col-xs-4">
-{{--                                                    {{$word->maani}}--}}
-                                                </div>
+                                                <div class="col-xs-4">{{$word->estelah}}</div>
+                                                <div class="col-xs-4">{{$word->talafoz}}</div>
+                                                <div class="col-xs-4">{{$word->maani}}</div>
                                             </div>
-{{--                                        @endforeach--}}
+                                        @endforeach
                                     </div>
                                 </div>
-{{--                            @endforeach--}}
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -217,25 +211,26 @@
         </div>
     </div>
 
-{{--    <script>--}}
-{{--        $('.login-button').click(function() {--}}
 
-{{--            var url = '{{route('estelahat', ['goyesh' => $goyesh])}}';--}}
+    <script>
+        $('.login-button').click(function() {
 
-{{--            $(".dark").show();--}}
-{{--            showLoginPrompt(url);--}}
-{{--        });--}}
+            var url = '{{route('estelahat', ['goyesh' => $goyesh])}}';
 
-{{--        function hideElement(val) {--}}
-{{--            $("#" + val).addClass('hidden');--}}
-{{--            $(".dark").hide();--}}
-{{--        }--}}
+            $(".dark").show();
+            showLoginPrompt(url);
+        });
 
-{{--        function showElement(val) {--}}
-{{--            $(".dark").show();--}}
-{{--            $("#" + val).removeClass('hidden');--}}
-{{--        }--}}
-{{--    </script>--}}
+        function hideElement(val) {
+            $("#" + val).addClass('hidden');
+            $(".dark").hide();
+        }
+
+        function showElement(val) {
+            $(".dark").show();
+            $("#" + val).removeClass('hidden');
+        }
+    </script>
 
     <div class="ui_backdrop dark" style="display: none; z-index: 10000000"></div>
 @stop

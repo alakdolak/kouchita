@@ -177,7 +177,9 @@ $kindPlaceId = 10; ?>
                                                 @endif
                                                         <article class="im-article grid-carousel grid-2 row post type-post status-publish format-standard has-post-thumbnail hentry">
                                                             <div class="im-entry-thumb">
-                                                                <a class="im-entry-thumb-link" href="" title="{{$post->title}}">
+
+                                                                <a class="im-entry-thumb-link" href="{{route('gardeshnameInner', ['postId' => $post->id])}}" title="{{$post->title}}">
+
                                                                     <img class="lazy-img" data-src="{{$post->pic}}" alt="{{$post->alt}}" />
                                                                 </a>
                                                                 <div class="im-entry-header">
@@ -196,7 +198,14 @@ $kindPlaceId = 10; ?>
                                                                                 <span class="entry-date published updated">{{$post->date}}</span>
                                                                             </div>
                                                                             <div class="comments-link im-meta-item">
-                                                                                <a href=""><i class="fa fa-comment-o"></i>۰</a>
+
+                                                                                <a href=""><i class="fa fa-comment-o"></i>{{$post->msgs}}</a>
+                                                                            </div>
+                                                                            <div class="author vcard im-meta-item">
+                                                                                <a class="url fn n">
+                                                                                    <i class="fa fa-user"></i>{{$post->username}}
+                                                                                </a>
+
                                                                             </div>
                                                                             <div class="post-views im-meta-item"><i class="fa fa-eye"></i>{{$post->seen}}
                                                                             </div>
@@ -233,7 +242,9 @@ $kindPlaceId = 10; ?>
                                                         @if($i == 0)
                                                             <article class="im-article content-2col col-md-6 col-sm-12 post type-post status-publish format-standard has-post-thumbnail hentry category-2068">
                                                                 <div class="im-entry-thumb">
-                                                                    <a class="im-entry-thumb-link" href="" title="{{$post->title}}">
+
+                                                                    <a class="im-entry-thumb-link" href="{{route('gardeshnameInner', ['postId' => $post->id])}}" title="{{$post->title}}">
+
                                                                         <img class="lazy-img" data-src="{{$post->pic}}" alt="{{$post->alt}}" />
                                                                     </a>
                                                                     <header class="im-entry-header">
@@ -254,6 +265,16 @@ $kindPlaceId = 10; ?>
                                                                     <div class="iranomag-meta clearfix">
                                                                         <div class="posted-on im-meta-item">
                                                                             <span class="entry-date published updated">{{$post->date}}</span>
+                                                                        </div>
+
+                                                                        <div class="comments-link im-meta-item">
+                                                                            <a href=""><i class="fa fa-comment-o"></i>{{$post->msgs}}</a>
+                                                                        </div>
+
+                                                                        <div class="author vcard im-meta-item">
+                                                                            <a class="url fn n">
+                                                                                <i class="fa fa-user"></i>{{$post->username}}
+                                                                            </a>
                                                                         </div>
 
                                                                         <div class="post-views im-meta-item">
@@ -286,6 +307,17 @@ $kindPlaceId = 10; ?>
                                                                             <div class="posted-on im-meta-item">
                                                                                 <span class="entry-date published updated">{{$post->date}}</span>
                                                                             </div>
+
+                                                                            <div class="comments-link im-meta-item">
+                                                                                <a href=""><i class="fa fa-comment-o"></i>{{$post->msgs}}</a>
+                                                                            </div>
+
+                                                                            <div class="author vcard im-meta-item">
+                                                                                <a class="url fn n">
+                                                                                    <i class="fa fa-user"></i>{{$post->username}}
+                                                                                </a>
+                                                                            </div>
+
                                                                             <div class="post-views im-meta-item">
                                                                                 <i class="fa fa-eye"></i>{{$post->seen}}
                                                                             </div>
@@ -322,7 +354,9 @@ $kindPlaceId = 10; ?>
                                                             @if($i == 0)
                                                                 <article class="im-article content-2col content-2col-nocontent col-md-12 post type-post status-publish format-standard has-post-thumbnail hentry">
                                                                     <div class="im-entry-thumb">
-                                                                        <a class="im-entry-thumb-link" href="" title="{{$post->title}}">
+
+                                                                        <a class="im-entry-thumb-link" href="{{route('gardeshnameInner', ['postId' => $post->id])}}" title="{{$post->title}}">
+
                                                                             <img class="lazy-img" data-src="{{$post->pic}}" alt="{{$post->alt}}" />
                                                                         </a>
                                                                         <header class="im-entry-header">
@@ -343,6 +377,16 @@ $kindPlaceId = 10; ?>
                                                                         <div class="iranomag-meta clearfix">
                                                                             <div class="posted-on im-meta-item">
                                                                                 <span class="entry-date published updated">{{$post->date}}</span>
+                                                                            </div>
+
+                                                                            <div class="comments-link im-meta-item">
+                                                                                <a href=""><i class="fa fa-comment-o"></i>{{$post->msgs}}</a>
+                                                                            </div>
+
+                                                                            <div class="author vcard im-meta-item">
+                                                                                <a class="url fn n">
+                                                                                    <i class="fa fa-user"></i>{{$post->username}}
+                                                                                </a>
                                                                             </div>
 
                                                                             <div class="post-views im-meta-item">
@@ -376,6 +420,17 @@ $kindPlaceId = 10; ?>
                                                                                             <div class="posted-on im-meta-item">
                                                                                                 <span class="entry-date published updated">{{$post->date}}</span>
                                                                                             </div>
+
+                                                                                            <div class="comments-link im-meta-item">
+                                                                                                <a href=""><i class="fa fa-comment-o"></i>{{$post->msgs}}</a>
+                                                                                            </div>
+
+                                                                                            <div class="author vcard im-meta-item">
+                                                                                                <a class="url fn n">
+                                                                                                    <i class="fa fa-user"></i>{{$post->username}}
+                                                                                                </a>
+                                                                                            </div>
+
                                                                                             <div class="post-views im-meta-item">
                                                                                                 <i class="fa fa-eye"></i>{{$post->seen}}
                                                                                             </div>
@@ -413,7 +468,9 @@ $kindPlaceId = 10; ?>
                                                             @if($i == 0)
                                                                 <article class="im-article content-2col content-2col-nocontent col-md-12 post type-post status-publish format-standard has-post-thumbnail hentry">
                                                                     <div class="im-entry-thumb">
-                                                                        <a class="im-entry-thumb-link" href="" title="{{$post->title}}">
+
+                                                                        <a class="im-entry-thumb-link" href="{{route('gardeshnameInner', ['postId' => $post->id])}}" title="{{$post->title}}">
+
                                                                             <img class="lazy-img" data-src="{{$post->pic}}" alt="{{$post->alt}}" />
                                                                         </a>
                                                                         <header class="im-entry-header">
@@ -434,6 +491,17 @@ $kindPlaceId = 10; ?>
                                                                         <div class="iranomag-meta clearfix">
                                                                             <div class="posted-on im-meta-item">
                                                                                 <span class="entry-date published updated">{{$post->date}}</span>
+                                                                            </div>
+
+
+                                                                            <div class="comments-link im-meta-item">
+                                                                                <a href=""><i class="fa fa-comment-o"></i>{{$post->msgs}}</a>
+                                                                            </div>
+
+                                                                            <div class="author vcard im-meta-item">
+                                                                                <a class="url fn n">
+                                                                                    <i class="fa fa-user"></i>{{$post->username}}
+                                                                                </a>
                                                                             </div>
 
                                                                             <div class="post-views im-meta-item">
@@ -506,7 +574,9 @@ $kindPlaceId = 10; ?>
 
                                                                 <article class="im-article content-column clearfix post type-post status-publish format-standard has-post-thumbnail hentry">
                                                                     <div class="im-entry-thumb col-md-5 col-sm-12">
-                                                                        <a style="width: 303px !important;" class="im-entry-thumb-link" href="" title="{{$post->title}}">
+
+                                                                        <a style="width: 303px !important;" class="im-entry-thumb-link" href="{{route('gardeshnameInner', ['postId' => $post->id])}}" title="{{$post->title}}">
+
                                                                             <img style="width: 303px !important; height: 189px !important;" class="lazy-img" data-src="{{$post->pic}}" alt="{{$post->alt}}" />
                                                                         </a>
                                                                     </div>
@@ -534,11 +604,13 @@ $kindPlaceId = 10; ?>
                                                                                 <span class="entry-date published updated">{{$post->date}}</span>
                                                                             </div>
                                                                             <div class="comments-link im-meta-item">
-                                                                                <a href=""><i class="fa fa-comment-o"></i>۰</a>
+
+                                                                                <a href=""><i class="fa fa-comment-o"></i>{{$post->msgs}}</a>
                                                                             </div>
                                                                             <div class="author vcard im-meta-item">
-                                                                                <a class="url fn n" href="/author/writer/">
-                                                                                    <i class="fa fa-user"></i>شازده مسافر
+                                                                                <a class="url fn n">
+                                                                                    <i class="fa fa-user"></i>{{$post->username}}
+
                                                                                 </a>
                                                                             </div>
                                                                             <div class="post-views im-meta-item">
@@ -625,6 +697,25 @@ $kindPlaceId = 10; ?>
 @if(!Auth::check())
     @include('layouts.loginPopUp')
 @endif
+
+
+<script>
+
+    $(".login-button").click(function () {
+        $(".dark").show();
+        showLoginPrompt('{{Request::url()}}');
+    });
+    function hideElement(e) {
+        $(".dark").hide(), $("#" + e).addClass("hidden")
+    }
+
+    function showElement(e) {
+        $("#" + e).removeClass("hidden"), $(".dark").show()
+    }
+
+</script>
+
+<div class="ui_backdrop dark" style="display: none; z-index: 10000000;"></div>
 
 </body>
 </html>

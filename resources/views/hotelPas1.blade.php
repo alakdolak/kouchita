@@ -2,6 +2,7 @@
 $state = "تهران";
 $backURL = route('home');
 $kindPlaceId = 10; ?>
+
 <!DOCTYPE html>
 <html>
 <head>

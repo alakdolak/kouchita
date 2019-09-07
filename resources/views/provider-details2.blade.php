@@ -1132,7 +1132,7 @@
                                     </center>
                                 </div>
                                 <div>
-                                    <button class="tourListPurchaseBtn">مشاهده صفحه</button>
+                                    <button class="providerServicePageLinkBtn">مشاهده صفحه</button>
                                 </div>
                             </div>
                             <div class="col-xs-6">
@@ -1184,7 +1184,7 @@
                                     </center>
                                 </div>
                                 <div>
-                                    <button class="tourListPurchaseBtn">مشاهده صفحه</button>
+                                    <button class="providerServicePageLinkBtn">مشاهده صفحه</button>
                                 </div>
                             </div>
                             <div class="col-xs-6">
@@ -1236,7 +1236,7 @@
                                     </center>
                                 </div>
                                 <div>
-                                    <button class="tourListPurchaseBtn">مشاهده صفحه</button>
+                                    <button class="providerServicePageLinkBtn">مشاهده صفحه</button>
                                 </div>
                             </div>
                             <div class="col-xs-6">
@@ -1270,7 +1270,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="mainDivLittleBlock col-xs-4">
+                        <div class="providerServiceLittleBlock col-xs-4">
                             <div id="littleBoxLogoBox" class="circleBase type2"></div>
                             <center class="tourDetailsLittleBox inline-block full-width">
                                 <b class="inline-block full-width">تور جهانگردی من</b>

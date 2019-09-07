@@ -1,4 +1,5 @@
-<?php //$mode = "profile"; $user = Auth::user(); ?>
+
+<?php $mode = "profile"; $user = Auth::user(); ?>
 @extends('layouts.bodyProfile')
 
 @section('header')

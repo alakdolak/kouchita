@@ -1,5 +1,6 @@
 <span id="share_box"
       style="display: none; width: 22%;height: 60px;background: #FFF;position: absolute;left: 7%;z-index: 10;box-shadow: rgb(136, 136, 136) 1px 4px 8px;padding: 10px;">
+<<<<<<< HEAD
     <a target="_blank" style="cursor: pointer; float: left;margin-left: 5px;" class="link"
        {{--{{($config->facebookNoFollow) ? 'rel="nofollow"' : ''}}--}}
     href="https://www.facebook.com/sharer/sharer.php?u={{Request::url()}}">
@@ -17,6 +18,21 @@
     </a>
     <a target="_blank" style="cursor: pointer; float: left;margin-left: 5px;" class="link"
        {{--{{($config->twitterNoFollow) ? 'rel="nofollow"' : ''}}--}}
+=======
+    <a target="_blank" style="cursor: pointer; float: left;margin-left: 5px;" class="link" {{($config->facebookNoFollow) ? 'rel="nofollow"' : ''}}
+    href="https://www.facebook.com/sharer/sharer.php?u={{Request::url()}}">
+        <div style="background-image: url('{{URL::asset('images') . '/share.png'}}');width: 30px;height: 30px;background-size: 30px;background-position:  0 0;background-repeat:  no-repeat;display: inline-block;"></div>
+    </a>
+    <a target="_blank" style="cursor: pointer; float: left;margin-left: 5px;" class="link" {{($config->telegramNoFollow) ? 'rel="nofollow"' : ''}}
+    href="https://telegram.me/share/url?url={{Request::url()}}">
+        <div style="background-image: url('{{URL::asset('images') . '/share.png'}}');width: 30px;height: 30px;background-size: 30px;background-position:  0 -60px;background-repeat:  no-repeat;display: inline-block;border-radius: 4px;"></div>
+    </a>
+    <a target="_blank" style="cursor: pointer; float: left;margin-left: 5px;" class="link" {{($config->googlePlusNoFollow) ? 'rel="nofollow"' : ''}}
+    href="https://plus.google.com/share?url={{str_replace('%20', '', Request::url())}}">
+        <div style="background-image: url('{{URL::asset('images') . '/share.png'}}');width: 30px;height: 30px;background-size: 30px;background-position:  0 -30px;background-repeat:  no-repeat;display: inline-block;"></div>
+    </a>
+    <a target="_blank" style="cursor: pointer; float: left;margin-left: 5px;" class="link" {{($config->twitterNoFollow) ? 'rel="nofollow"' : ''}}
+>>>>>>> 7cbfd2e57ae6406017b4c8ad2b228a5b32355d83
     href="https://twitter.com/home?status={{Request::url()}}">
         <div style="background-image: url('{{URL::asset('images') . '/share.png'}}');width: 30px;height: 30px;background-size: 30px;background-position:  0 -90px;background-repeat:  no-repeat;display: inline-block;"></div>
     </a>

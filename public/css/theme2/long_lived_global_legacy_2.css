@@ -7479,6 +7479,7 @@ DIV.ppr_rup.ppr_priv_masthead_search 100% {
 }
 }
 @-ms-keyframes shake {
+<<<<<<< HEAD
 DIV.ppr_rup.ppr_priv_masthead_search_0 {
     -ms-transform: translate(2px, 0px);
 }
@@ -7510,6 +7511,39 @@ DIV.ppr_rup.ppr_priv_masthead_search_90 {
     -ms-transform: translate(2px, 0px);
 }
 DIV.ppr_rup.ppr_priv_masthead_search_100 {
+=======
+DIV.ppr_rup.ppr_priv_masthead_search 0 {
+    -ms-transform: translate(2px, 0px);
+}
+DIV.ppr_rup.ppr_priv_masthead_search 10% {
+    -ms-transform: translate(-1px, 0px);
+}
+DIV.ppr_rup.ppr_priv_masthead_search 20% {
+    -ms-transform: translate(-3px, 0px);
+}
+DIV.ppr_rup.ppr_priv_masthead_search 30% {
+    -ms-transform: translate(0px, 0px);
+}
+DIV.ppr_rup.ppr_priv_masthead_search 40% {
+    -ms-transform: translate(1px, 0px);
+}
+DIV.ppr_rup.ppr_priv_masthead_search 50% {
+    -ms-transform: translate(-1px, 0px);
+}
+DIV.ppr_rup.ppr_priv_masthead_search 60% {
+    -ms-transform: translate(-3px, 0px);
+}
+DIV.ppr_rup.ppr_priv_masthead_search 70% {
+    -ms-transform: translate(2px, 0px);
+}
+DIV.ppr_rup.ppr_priv_masthead_search 80% {
+    -ms-transform: translate(-1px, 0px);
+}
+DIV.ppr_rup.ppr_priv_masthead_search 90% {
+    -ms-transform: translate(2px, 0px);
+}
+DIV.ppr_rup.ppr_priv_masthead_search 100% {
+>>>>>>> 7cbfd2e57ae6406017b4c8ad2b228a5b32355d83
     -ms-transform: translate(1px, 0px);
 }
 }

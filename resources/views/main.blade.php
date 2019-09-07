@@ -142,10 +142,8 @@
                 url = '{{route('main')}}';
         @elseif($placeMode == "restaurant")
                 url = '{{route('mainMode', ['mode' => 'restaurant'])}}';
-        @elseif($placeMode == "amaken")
-                url = '{{route('mainMode', ['mode' => 'amaken'])}}';
         @else
-                url = '{{route('mainMode', ['mode' => 'tour'])}}';
+                url = '{{route('mainMode', ['mode' => 'amaken'])}}';
         @endif
     </script>
 
@@ -1716,6 +1714,12 @@
                 }
             }])
         </script>
+        <script src=""/>
+
+        <script>
+            var imageBasePath = '{{URL::asset('images')}}';
+        </script>
+        <script async src="{{URL::asset('js/slideBar.js')}}"/>
 
         <span id="statePane" class="ui_overlay ui_modal editTags hidden"
               style="position: fixed; left: 30%; right: 30%; top:19%; bottom: auto;overflow: auto;max-height: 500px;z-index: 10000001;">

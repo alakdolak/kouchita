@@ -33,6 +33,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $tag5
  * @property string $tag6
  * @property string $tag7
+ * @property string $tag8
  * @property string $tag9
  * @property string $tag10
  * @property string $tag11
