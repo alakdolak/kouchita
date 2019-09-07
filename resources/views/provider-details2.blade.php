@@ -1270,6 +1270,63 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="mainDivLittleBlock col-xs-4">
+                            <div id="littleBoxLogoBox" class="circleBase type2"></div>
+                            <center class="tourDetailsLittleBox inline-block full-width">
+                                <b class="inline-block full-width">تور جهانگردی من</b>
+                                <div id="tourDetailsLittleBoxImg">
+                                </div>
+                                <div class="inline-block tourDetailsLittleBox2ndDiv">
+                                    <div class="inline-block full-width">
+                                        <span class="greenFontColor">مقصد:</span>
+                                        <span>مقصد</span>
+                                    </div>
+                                    <div class="inline-block full-width">
+                                        <span class="greenFontColor">حرکت از:</span>
+                                        <span>مبدأ</span>
+                                    </div>
+                                    <div class="inline-block full-width">
+                                        <span class="greenFontColor">از</span>
+                                        <span>تاریخ شروع</span>
+                                    </div>
+                                    <div class="inline-block full-width">
+                                        <span class="greenFontColor">تا</span>
+                                        <span>تاریخ پایان</span>
+                                    </div>
+                                    <div class="inline-block full-width">
+                                        <span>چند</span>
+                                        <span class="greenFontColor">روز و</span>
+                                        <span>چند</span>
+                                        <span class="greenFontColor">شب</span>
+                                    </div>
+                                </div>
+                                <div class="tourDetailsPriceBox" >
+                                    <div class="priceDiv">
+                                        <span>شروع قیمت از:</span>
+                                        <span>650.000</span>
+                                        <hr>
+                                        <span class="afterDiscountPrice">550.000</span>
+                                    </div>
+                                    <div class="full-width inline-block">
+                                        <div class="discountAlerts">
+                                            <span>10 درصد تخفیف ویژه نوروز</span>
+                                            <span>10 درصد تخفیف ثبت نام گروهی</span>
+                                            <span>تخفیف ویژه کودکان</span>
+                                        </div>
+                                        <div class="moreOffersBtn">
+                                            <button class=" btn btn-warning">مشاهده پیشنهاد</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="fastReserveTour2" class="fastReserveTour">رزرو آنی</div>
+                                <div id="mustSeeTour2" class="mustSeeTour">باید دید</div>
+                                <div id="groupDiscountTour2" class="groupDiscountTour">تخفیف گروهی</div>
+                                <div id="discountBoxTour2" class="discountBoxTour">
+                                    <span>10%</span>
+                                </div>
+                            </center>
+                            <button id="toggleTourDetailsLittleBoxMoreInfo" class="toggleTourDetailsMoreInfo">بیشتر</button>
+                        </div>
                     </div>
                     {{--@if(session('goDate') != null && $rooms != null)--}}
                     <div id="roomChoice" class="hr_btf_wrap"
