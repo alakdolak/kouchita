@@ -316,7 +316,6 @@
     <script>
         var showUserBriefDetail = '{{route('showUserBriefDetail')}}';
         var opOnComment = '{{route('opOnComment')}}';
-        var homePath = '{{route('home')}}';
         var sendAnsDir = '{{route('sendAns2')}}';
         var hotelDetails = '{{route('hotelDetails', ['placeId' => $placeId, 'placeName' => $place->name])}}';
         var questionList = '{{route('seeAllAns', ['questionId' => $question->id])}}';
@@ -408,7 +407,7 @@
                     newElement += "<div class='memberOverlay simple container moRedesign'>";
                     newElement += "<div class='innerContent'>";
                     newElement += "<div class='memberOverlayRedesign g10n'>";
-                    newElement += "<a href='" + homePath + "/otherProfile/" + username + "'>";
+                    newElement += "<a href='" + homeURL + "/otherProfile/" + username + "'>";
                     newElement += "<h3 class='username reviewsEnhancements'>" + username + "</h3>";
                     newElement += "</a>";
                     newElement += "<div class='memberreviewbadge'>";
@@ -496,7 +495,7 @@
         function likeAns(logId) {
 
             if(!hasLogin) {
-                url = homePath + "/seeAllAns/" + questionId + "/like/" + logId;
+                url = homeURL + "/seeAllAns/" + questionId + "/like/" + logId;
                 showLoginPrompt(url);
                 return;
             }
@@ -526,7 +525,7 @@
         function dislikeAns(logId) {
 
             if(!hasLogin) {
-                url = homePath + "/seeAllAns/" + questionId + "/dislike/" + logId;
+                url = homeURL + "/seeAllAns/" + questionId + "/dislike/" + logId;
                 showLoginPrompt(url);
                 return;
             }
@@ -571,7 +570,7 @@
                 return;
 
             if(!hasLogin) {
-                url = homePath + "/seeAllAns/" + questionId + "/sendAns/" + $("#ansText").val();
+                url = homeURL + "/seeAllAns/" + questionId + "/sendAns/" + $("#ansText").val();
                 showLoginPrompt(url);
                 return;
             }
@@ -599,7 +598,7 @@
                 return;
 
             if(!hasLogin) {
-                url = homePath + "/seeAllAns/" + questionId + "/sendAns/" + ans;
+                url = homeURL + "/seeAllAns/" + questionId + "/sendAns/" + ans;
                 showLoginPrompt(url);
                 return;
             }
@@ -615,7 +614,7 @@
                     if(response == "ok")
                         document.location.href = questionList;
                     else if(response == "nok") {
-                        document.location.href = homePath + "/seeAllAns/" + questionId + "/err";
+                        document.location.href = homeURL + "/seeAllAns/" + questionId + "/err";
                     }
                 }
             });
@@ -707,7 +706,7 @@
                 return;
 
             if(!hasLogin) {
-                url = homePath + "/seeAllAns/" + questionId + "/report/" + selectedLogId;
+                url = homeURL + "/seeAllAns/" + questionId + "/report/" + selectedLogId;
                 showLoginPrompt(url);
                 return;
             }
@@ -741,7 +740,7 @@
         function showReportPrompt(logId) {
 
             if(!hasLogin) {
-                url = homePath + "/seeAllAns/" + questionId + "/report/" + logId;
+                url = homeURL + "/seeAllAns/" + questionId + "/report/" + logId;
                 showLoginPrompt(url);
                 return;
             }

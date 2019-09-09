@@ -328,7 +328,6 @@ box-shadow: 0 2px 3px 0px #CCC;padding-left: 0;padding-right:0;">
         var sendReportDir = '{{route('sendReport2')}}';
         var getReportsDir = '{{route('getReports')}}';
         var opOnComment = '{{route('opOnComment')}}';
-        var homePath = '{{route('home')}}';
         var getPhotosDir = '{{route('getPhotos')}}';
         var placeId = '{{$log->placeId}}';
         var kindPlaceId = '{{$log->kindPlaceId}}';
@@ -428,7 +427,7 @@ box-shadow: 0 2px 3px 0px #CCC;padding-left: 0;padding-right:0;">
                     newElement += "<div class='memberOverlay simple container moRedesign'>";
                     newElement += "<div class='innerContent'>";
                     newElement += "<div class='memberOverlayRedesign g10n'>";
-                    newElement += "<a href='" + homePath + "/otherProfile/" + username + "'>";
+                    newElement += "<a href='" + homeURL + "/otherProfile/" + username + "'>";
                     newElement += "<h3 class='username reviewsEnhancements'>" + username + "</h3>";
                     newElement += "</a>";
                     newElement += "<div class='memberreviewbadge'>";
@@ -607,7 +606,7 @@ box-shadow: 0 2px 3px 0px #CCC;padding-left: 0;padding-right:0;">
                 return;
 
             if(!hasLogin) {
-                url = homePath + "/seeAllAns/" + questionId + "/report/" + selectedLogId;
+                url = homeURL + "/seeAllAns/" + questionId + "/report/" + selectedLogId;
                 showLoginPrompt(url);
                 return;
             }
@@ -641,7 +640,7 @@ box-shadow: 0 2px 3px 0px #CCC;padding-left: 0;padding-right:0;">
         function showReportPrompt(logId) {
 
             if(!hasLogin) {
-                url = homePath + "/seeAllAns/" + questionId + "/report/" + logId;
+                url = homeURL + "/seeAllAns/" + questionId + "/report/" + logId;
                 showLoginPrompt(url);
                 return;
             }

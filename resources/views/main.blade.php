@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
     <head>
     @include('layouts.topHeader')
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
@@ -131,7 +132,6 @@
     </style>
 
     <script>
-        var homePath = '{{route('home')}}';
         var searchDir = '{{route('heyYou')}}';
         var kindPlaceId = '{{$kindPlaceId}}';
         var getStates = '{{route('getStates')}}';
@@ -210,25 +210,25 @@
             overflow: auto;
             float: right;
             border: solid #E5E5E5 !important;
-            border-radius:  0px 10px 10px 0px !important;
+            border-radius:  0 10px 10px 0 !important;
         }
         .searchDivForScroll_phone {
             max-height: 290px;
             overflow: auto;
             border: solid #E5E5E5 !important;
-            border-radius:  10px 10px 0px 0px !important;
+            border-radius:  10px 10px 0 0 !important;
         }
         .searchDivForScroll-button {
             float: right;
             border-style: inherit !important;
-            border-radius:  10px 0px 0px 10px !important;
+            border-radius:  10px 0 0 10px !important;
             margin-bottom: 8px;
         }
         .searchDivForScroll-phoneButton {
             width: 42%;
             margin: 0 !important;
             border-style: inherit !important;
-            border-radius:  0px 0px 0px 10px !important;
+            border-radius:  0 0 0 10px !important;
             font-size: 20px;
         }
     </style>
@@ -248,7 +248,7 @@
         <div class="page" ng-app="mainApp">
             <div class="ppr_rup ppr_priv_homepage_hero">
                 <div class="homeHero default_home" style="padding: 0 !important;/*background-image: url('`s://static.tacdn.com/img2/branding/homepage/home-tab1-hero-1367x520-beach-prog.jpg');*/width: 100%; background-position:50% bottom">
-                    <div class="ui_container container" style="width: 100%; max-width: 100%; padding: 0px;">
+                    <div class="ui_container container" style="width: 100%; max-width: 100%; padding: 0;">
                         <div class="placement_wrap">
                             <div class="placement_wrap_row">
                                 <div class="placement_wrap_cell">
@@ -257,11 +257,11 @@
                                             <div class="ui_columns datepicker_box trip_search metaDatePicker rounded_lockup usePickerTypeIcons preDates noDates with_children hideOnPhone" style="position: absolute;right: 6%;top: 20%;width: 68%;z-index: 10000000;">
                                                 <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column is-4 search_typeahead wctx-tripsearch searchDivForScroll">
                                                     <div class="ui_picker">
-                                                                <span class="typeahead_align ui_typeahead">
-                                                                    <input onkeyup="search(event)" type="text" id="placeName" class="typeahead_input" placeholder="شهر یا نام هتل"/>
-                                                                    <input type="hidden" id="placeId">
-                                                                    <span class="ui_icon map-pin-fill pickerType typeahead_icon"></span>
-                                                                </span>
+                                                        <span class="typeahead_align ui_typeahead">
+                                                            <input onkeyup="search(event)" type="text" id="placeName" class="typeahead_input" placeholder="شهر یا نام هتل"/>
+                                                            <input type="hidden" id="placeId">
+                                                            <span class="ui_icon map-pin-fill pickerType typeahead_icon"></span>
+                                                        </span>
                                                         <div id="result" class="data_holder"></div>
                                                     </div>
                                                 </div>
@@ -273,7 +273,7 @@
                                                     <span class="ui_loader dark fill"></span>
                                                 </div>
                                                 <div style="clear: both"></div>
-                                                {{--<div class="ui_column" style="width: 35%;padding: 10px !important;float: right;border-radius:  0px 10px 10px 0px;">--}}
+                                                {{--<div class="ui_column" style="width: 35%;padding: 10px !important;float: right;border-radius:  0 10px 10px 0;">--}}
                                                     {{--<div class="ui_picker" style="color: #b7b7b7 !important;">--}}
                                                         {{--<label id="calendar-container-edit-1placeDate" class="dateLabel">--}}
                                                             {{--<span class="ui_icon calendar" style="color: #30b4a6 !important; font-size: 20px; line-height: 32px; position: absolute; right: 7px;"></span>--}}
@@ -285,7 +285,7 @@
                                                         {{--</label>--}}
                                                     {{--</div>--}}
                                                 {{--</div>--}}
-                                                {{--<div class="ui_column" style="min-width: 15%; max-width: 40%; float: right;border-radius:  10px 0px 0px 10px;">--}}
+                                                {{--<div class="ui_column" style="min-width: 15%; max-width: 40%; float: right;border-radius:  10px 0 0 10px;">--}}
                                                     {{--<div class="ui_picker" style="padding: 4px 0 0 0;">--}}
                                                         {{--<span class="ui_icon friends pickerType" style="margin: 0 !important;float: right"></span>--}}
                                                         {{--<div style="float: right;">--}}
@@ -373,7 +373,7 @@
                                                         {{--</label>--}}
                                                     {{--</div>--}}
                                                 {{--</div>--}}
-                                                {{--<div class="ui_column" style="width: 58%;float: right;border-radius:  0px 0px 10px 0px;">--}}
+                                                {{--<div class="ui_column" style="width: 58%;float: right;border-radius:  0 0 10px 0;">--}}
                                                     {{--<div class="ui_picker" style="padding: 10px 10px 5px 0;">--}}
                                                         {{--<span class="ui_icon friends pickerType" style="margin: 0 !important;float: right;font-size: 50px"></span>--}}
                                                         {{--<div style="float: right;">--}}
@@ -440,616 +440,7 @@
                     </div>
                 </div>
             </div>
-
-            <div class="ui_container">
-                <div class="ppr_rup ppr_priv_homepage_shelves">
-
-                    <div class="homepage_shelves_widget hideOnPhone">
-                        <div class="prw_rup prw_homepage_messaging_brand">
-                            <div id="brand_messaging" class="ui_columns is-hidden-mobile">
-                                <div class="ui_column is-12">
-                                    <div style="direction: rtl;text-align: center;" class="brand_header green"><h1>ایران را باهم بشناسیم</h1></div>
-                                    <div style="direction: rtl;text-align: center;"> همین حالا با اشتراک تجربیات خود به عنوان یک گردشگر ، خود را به دوستانتان معرفی کنید.</div>
-                                    @if(!Auth::check())
-                                        <div class="login-button" style="cursor: pointer; direction: rtl;text-align: center;font-size: 13px;color: #4DC7BC;">
-                                            <span class="ui_icon arrow-left"></span> ساخت پروفایل
-                                        </div>
-                                    @endif
-                                </div>
-                                <div class="ui_column is-4 right-col" style="overflow: visible;direction: rtl;text-align: center;float: left;position: relative">
-                                    <div style="overflow: visible;" class="inner">
-                                        <div class="icon-mainpage"><span class="ui_icon my-trips"></span></div>
-                                        <div class="text">
-                                            <h2 style="margin-top: 22px;" class="en_US large white">برنامه ریزی کنید</h2>
-                                            <div class="en_US small white">تمامی مراحل سفر خود را از خرید بلیط تا رزرو هتل با بهترین قیمت ها برنامه ریزی کنید.</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="ui_column is-4 right-col" style="overflow: visible; direction: rtl;text-align: center;float: left;position: relative;">
-                                    <div style="overflow: visible;background: #FFF ;border:  1px solid #4DC7BC;" class="inner" id="middle-box">
-                                        <div class="icon-mainpage" style="background:#4DC7BC;">
-                                            <span style="color:#FFF;" class="ui_icon seat-flat-bed"></span>
-                                        </div>
-                                        <div style="color:#4dc7bc;" class="text">
-                                            <h2 style="color:#4dc7bc;margin-top: 22px;" class="en_US large white">خواندن نقد گردشگران</h2>
-                                            <div style="color:#4dc7bc;" class="en_US small white">با خواندن نقد دوستان خود ، بهتر و راحت تر انتخاب کنید</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="ui_column is-4 right-col" style="direction: rtl;text-align: center;float: left;position: relative;">
-                                    <div style="overflow: visible;" class="inner">
-                                        <div class="icon-mainpage"><span class="ui_icon search"></span></div>
-                                        <div class="text">
-                                            <h2 style="margin-top: 22px;" class="en_US large white"> مقصد سفر </h2>
-                                            <div class="en_US small white">فقط کافیست مقصد خود را وارد کنید</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div style="clear: both;"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="homepage_shelves_widget hideOnPhone">
-                        <div class="prw_rup prw_shelves_shelf_widget">
-                            <div class="shelf_container poi_by_tag rebrand shelf_row_2">
-                                <div class="shelf_header">
-                                    <div class="shelf_title">
-                                        <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
-                                        <div class="shelf_title_container">
-                                            <a href="" class="ui_link ui_header h2">
-                                                <h3>سایرخدمات</h3>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="shelf_item_container ui_columns is-mobile is-multiline">
-                                    <div class="prw_rup prw_shelves_geo_shelf_item_widget ui_column is-3-tablet is-6-mobile">
-                                        <div class="poi">
-                                            <div style="cursor: pointer" onclick="chooseState('sanaye')" class="thumbnail">
-                                                <div class="prw_rup prw_common_thumbnail_no_style_responsive" data-prwidget-name="common_thumbnail_no_style_responsive" data-prwidget-init="">
-                                                    <div class="prv_thumb has_image">
-                                                        <div class="image_wrapper landscape landscapeWide">
-                                                            <img src="{{URL::asset('images/sanayedasti.jpg')}}" alt="" class="image">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <span style="direction: rtl;" class="item name" title="Santa Cruz">صنایع دستی </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="prw_rup prw_shelves_geo_shelf_item_widget ui_column is-3-tablet is-6-mobile">
-                                        <div class="poi">
-                                            <div style="cursor: pointer" onclick="chooseState('soghat')" class="thumbnail">
-                                                <div class="prw_rup prw_common_thumbnail_no_style_responsive" data-prwidget-name="common_thumbnail_no_style_responsive" data-prwidget-init="">
-                                                    <div class="prv_thumb has_image">
-                                                        <div class="image_wrapper landscape landscapeWide">
-                                                            <img src="{{URL::asset('images/soghat.jpg')}}" alt="" class="image">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <span style="direction: rtl;" class="item name" title="Santa Cruz"> سوغات</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="prw_rup prw_shelves_geo_shelf_item_widget ui_column is-3-tablet is-6-mobile">
-                                        <div class="poi">
-                                            <div class="thumbnail" style="cursor: pointer"
-                                                 onclick="chooseState('ghazamahali')">
-                                                <div class="prw_rup prw_common_thumbnail_no_style_responsive" data-prwidget-name="common_thumbnail_no_style_responsive" data-prwidget-init="">
-                                                    <div class="prv_thumb has_image">
-                                                        <div class="image_wrapper landscape landscapeWide">
-                                                            <img src="{{URL::asset('images/lfood.jpg')}}" alt="" class="image">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <span style="direction: rtl;" class="item name" title="Santa Cruz"> غذای محلی</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="prw_rup prw_shelves_geo_shelf_item_widget ui_column is-3-tablet is-6-mobile"
-                                         onclick="chooseGoyesh()">
-                                        <div class="poi">
-                                            <a class="thumbnail" style="cursor: pointer">
-                                                <div class="prw_rup prw_common_thumbnail_no_style_responsive" data-prwidget-name="common_thumbnail_no_style_responsive" data-prwidget-init="">
-                                                    <div class="prv_thumb has_image">
-                                                        <div class="image_wrapper landscape landscapeWide">
-                                                            <img src="{{URL::asset('images/estelahat.jpg')}}" alt="" class="image">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <span style="direction: rtl;" class="item name" title="Santa Cruz"> اصطلاحات محلی</span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div style="margin-top: 20px;" class="shelf_container poi_by_tag rebrand shelf_row_2">
-                                <div class="shelf_header">
-                                    <div class="shelf_title">
-                                        <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
-                                        <div class="shelf_title_container">
-                                            <a class="ui_link ui_header h2"><h3>شاید خوشتان بیاید</h3></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="shelf_item_container ui_columns is-mobile is-multiline">
-                                    <div class="prw_rup prw_shelves_geo_shelf_item_widget ui_column is-3-tablet is-6-mobile">
-                                        <div class="poi">
-                                            <a href="{{route('soon')}}" class="thumbnail">
-                                                <div class="prw_rup prw_common_thumbnail_no_style_responsive" data-prwidget-name="common_thumbnail_no_style_responsive" data-prwidget-init="">
-                                                    <div class="prv_thumb has_image">
-                                                        <div class="image_wrapper landscape landscapeWide"><img src="{{URL::asset('images/lebas.jpg')}}" alt="" class="image"></div>
-                                                    </div>
-                                                </div>
-                                                <span style="direction: rtl;" class="item name" title="Santa Cruz">لباس محلی </span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="prw_rup prw_shelves_geo_shelf_item_widget ui_column is-3-tablet is-6-mobile">
-                                        <div class="poi">
-                                            <div onclick="chooseStateAmaken()" class="thumbnail" style="cursor: pointer">
-                                                <div class="prw_rup prw_common_thumbnail_no_style_responsive" data-prwidget-name="common_thumbnail_no_style_responsive" data-prwidget-init="">
-                                                    <div class="prv_thumb has_image">
-                                                        <div class="image_wrapper landscape landscapeWide"><img src="{{URL::asset('images/tarikhi.jpg')}}" alt="" class="image"></div>
-                                                    </div>
-                                                </div>
-                                                <span style="direction: rtl;" class="item name" title="Santa Cruz">  جاذبه ها</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="prw_rup prw_shelves_geo_shelf_item_widget ui_column is-3-tablet is-6-mobile">
-                                        <div class="poi">
-                                            <div onclick="chooseStateMajara()" class="thumbnail" style="cursor: pointer">
-                                                <div class="prw_rup prw_common_thumbnail_no_style_responsive" data-prwidget-name="common_thumbnail_no_style_responsive" data-prwidget-init="">
-                                                    <div class="prv_thumb has_image">
-                                                        <div class="image_wrapper landscape landscapeWide"><img src="{{URL::asset('images/majarajooi.jpg')}}" alt="" class="image"></div>
-                                                    </div>
-                                                </div>
-                                                <span style="direction: rtl;" class="item name" title="Santa Cruz"> سفرهای ماجراجویانه </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="prw_rup prw_shelves_geo_shelf_item_widget ui_column is-3-tablet is-6-mobile">
-                                        <div class="poi">
-                                            <a href="{{route('soon')}}" class="thumbnail">
-                                                <div class="prw_rup prw_common_thumbnail_no_style_responsive" data-prwidget-name="common_thumbnail_no_style_responsive" data-prwidget-init="">
-                                                    <div class="prv_thumb has_image">
-                                                        <div class="image_wrapper landscape landscapeWide"><img src="{{URL::asset('images/boom.jpg')}}" alt="" class="image"></div>
-                                                    </div>
-                                                </div>
-                                                <span style="direction: rtl;" class="item name" title="Santa Cruz"> بوم گردی </span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="hideOnScreen row">
-                        <div class="col-xs-12">
-                            <a class="col-xs-4 squareDiv" href="{{route('mainMode', ['mode' => 'amaken'])}}" style="color: #30b4a6 !important;">
-                                <div class="phoneIcon atraction"></div>
-                                <div class="textIcon">جاذبه ها</div>
-                            </a>
-                            <a class="col-xs-4 squareDiv" href="{{route('tickets')}}" style="color: #30b4a6 !important;">
-                                <div class="phoneIcon ticket"></div>
-                                <div class="textIcon">بلیط</div>
-                            </a>
-                            <a class="col-xs-4 squareDiv" href="{{route('main')}}" style="color: #30b4a6 !important;">
-                                <div class="phoneIcon hotel"></div>
-                                <div class="textIcon">هتل</div>
-                            </a>
-                            {{--<div class="col-xs-4 squareDiv" onclick="$('#phoneSearchPopUp').removeClass('hidden')">--}}
-                            {{--<div class="phoneIcon atraction"></div>--}}
-                            {{--<div class="textIcon">جاذبه ها</div>--}}
-                            {{--</div>--}}
-                            {{--<div class="col-xs-4 squareDiv">--}}
-                            {{--<a href="{{route('tickets')}}">--}}
-                            {{--<div class="phoneIcon ticket"></div>--}}
-                            {{--<div class="textIcon">بلیط</div>--}}
-                            {{--</a>--}}
-                            {{--</div>--}}
-                            {{--<div class="col-xs-4 squareDiv">--}}
-                            {{--<a href="{{route('main')}}">--}}
-                            {{--<div class="phoneIcon hotel"></div>--}}
-                            {{--<div class="textIcon">هتل</div>--}}
-                            {{--</a>--}}
-                            {{--</div>--}}
-                        </div>
-                        <div style="clear: both"></div>
-                        <div class="col-xs-12">
-                            <div class="col-xs-4 squareDiv" onclick="$('#phoneSearchPopUp').removeClass('hidden')">
-                                <div class="phoneIcon ghazamahali"></div>
-                                <div class="textIcon">غذای محلی</div>
-                            </div>
-                            <div class="col-xs-4 squareDiv" onclick="$('#phoneSearchPopUp').removeClass('hidden')">
-                                <div class="phoneIcon soghat"></div>
-                                <div class="textIcon">سوغات</div>
-                            </div>
-                            <a class="col-xs-4 squareDiv" href="{{route('mainMode', ['mode' => 'restaurant'])}}" style="color: #30b4a6 !important;">
-                                <div class="phoneIcon restaurant"></div>
-                                <div class="textIcon">رستوران</div>
-                            </a>
-                            {{--<div class="col-xs-4 squareDiv">--}}
-                            {{--<a href="{{route('mainMode', ['mode' => 'restaurant'])}}">--}}
-                            {{--<div class="phoneIcon restaurant"></div>--}}
-                            {{--<div class="textIcon">رستوران</div>--}}
-                            {{--</a>--}}
-                            {{--</div>--}}
-                        </div>
-                        <div style="clear: both"></div>
-                        <div class="col-xs-4"></div>
-                        <div class="col-xs-4" onclick="$('#phoneMenuBarPopUp').removeClass('hidden')" style="margin-top: -2px; text-align: center;">
-                            <span style="font-size: 30px; font-weight: bold"><span class="phoneIcon downArrow"></span>گزینه های بیشتر</span>
-                        </div>
-                        <div class="col-xs-4"></div>
-                    </div>
-
-                    <center>
-                        <div class="loader hidden"></div>
-                    </center>
-
-                    <div id="AdviceControllerId" class="homepage_shelves_widget" ng-controller="AdviceController">
-                        <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show">
-                            <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff" style="direction: rtl;">
-                                <div class="shelf_header">
-                                    <div class="shelf_title">
-                                        <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
-                                        <div class="shelf_title_container">
-                                            <a class="ui_link ui_header h2">
-                                                <h3>پیشنهاد های ویژه</h3>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="shelf_item_container ui_columns is-mobile is-multiline">
-                                    <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-3-tablet is-6-mobile" ng-repeat="itr in data">
-                                        <div class="poi">
-                                            <a href="[[itr.url]]" class="thumbnail">
-                                                <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                    <div class="prv_thumb has_image">
-                                                        <div class="image_wrapper landscape landscapeWide">
-                                                            <img ng-src="[[itr.pic]]" alt="[[itr.name]]" class="image"/>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <div class="detail" style="direction: rtl">
-                                                <a href="[[itr.url]]" class="item poi_name ui_link">[[itr.name]]</a>
-                                                <div class="item rating-widget">
-                                                    <div class="prw_rup prw_common_location_rating_simple">
-                                                        <span class="[[itr.classRate]]"></span>
-                                                    </div>
-                                                    <span class="reviewCount">[[itr.reviews]] </span><span>نقد </span>
-                                                </div>
-                                                <div class="item tags">[[itr.city]] <span>در </span>
-                                                    <span>[[itr.state]]</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    @if($placeMode == "hotel")
-                        <div id="HotelControllerId" class="homepage_shelves_widget" ng-controller="HotelController">
-                            <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show">
-                                <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff" style="direction: rtl;">
-                                    <div class="shelf_header">
-                                        <div class="shelf_title">
-                                            <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
-                                            <div class="shelf_title_container">
-                                                <a class="ui_link ui_header h2">
-                                                    <h3>هتل های دیدنی</h3>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="shelf_item_container ui_columns is-mobile is-multiline">
-                                        <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-3-tablet is-6-mobile" ng-repeat="itr in data">
-                                            <div class="poi">
-                                                <a href="[[itr.url]]" class="thumbnail">
-                                                    <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                        <div class="prv_thumb has_image">
-                                                            <div class="image_wrapper landscape landscapeWide">
-                                                                <img ng-src="[[itr.pic]]" alt="[[itr.name]]" class="image"/>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                                <div class="detail" style="direction: rtl">
-                                                    <a href="[[itr.url]]" class="item poi_name ui_link">[[itr.name]]</a>
-                                                    <div class="item rating-widget">
-                                                        <div class="prw_rup prw_common_location_rating_simple">
-                                                            <span class="[[itr.classRate]]"></span>
-                                                        </div>
-                                                        <span class="reviewCount">[[itr.reviews]] </span><span>نقد </span>
-                                                    </div>
-                                                    <div class="item tags">[[itr.city]] <span>در </span>
-                                                        <span>[[itr.state]]</span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @elseif($placeMode == "restaurant")
-                        <div id="RestaurantControllerId" class="homepage_shelves_widget"
-                             ng-controller="RestaurantController">
-                            <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show">
-                                <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff" style="direction: rtl;">
-                                    <div class="shelf_header">
-                                        <div class="shelf_title">
-                                            <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
-                                            <div class="shelf_title_container">
-                                                <a class="ui_link ui_header h2">
-                                                    <h3>رستوران های دیدنی</h3>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="shelf_item_container ui_columns is-mobile is-multiline">
-                                        <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-3-tablet is-6-mobile" ng-repeat="itr in data">
-                                            <div class="poi">
-                                                <a href="[[itr.url]]" class="thumbnail">
-                                                    <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                        <div class="prv_thumb has_image">
-                                                            <div class="image_wrapper landscape landscapeWide">
-                                                                <img ng-src="[[itr.pic]]" alt="[[itr.name]]" class="image"/>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                                <div class="detail" style="direction: rtl">
-                                                    <a href="[[itr.url]]" class="item poi_name ui_link">[[itr.name]]</a>
-                                                    <div class="item rating-widget">
-                                                        <div class="prw_rup prw_common_location_rating_simple">
-                                                            <span class="[[itr.classRate]]"></span>
-                                                        </div>
-                                                        <span class="reviewCount">[[itr.reviews]] </span><span>نقد </span>
-                                                    </div>
-                                                    <div class="item tags">[[itr.city]] <span>در </span>
-                                                        <span>[[itr.state]]</span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @else
-                        <div id="AmakenControllerId" class="homepage_shelves_widget" ng-controller="AmakenController">
-                            <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show">
-                                <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff" style="direction: rtl;">
-                                    <div class="shelf_header">
-                                        <div class="shelf_title">
-                                            <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
-                                            <div class="shelf_title_container">
-                                                <a class="ui_link ui_header h2">
-                                                    <h3>اماکن دیدنی</h3>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="shelf_item_container ui_columns is-mobile is-multiline">
-                                        <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-3-tablet is-6-mobile" ng-repeat="itr in data">
-                                            <div class="poi">
-                                                <a href="[[itr.url]]" class="thumbnail">
-                                                    <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                        <div class="prv_thumb has_image">
-                                                            <div class="image_wrapper landscape landscapeWide">
-                                                                <img ng-src="[[itr.pic]]" alt="[[itr.name]]" class="image"/>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                                <div class="detail" style="direction: rtl">
-                                                    <a href="[[itr.url]]" class="item poi_name ui_link">[[itr.name]]</a>
-                                                    <div class="item rating-widget">
-                                                        <div class="prw_rup prw_common_location_rating_simple">
-                                                            <span class="[[itr.classRate]]"></span>
-                                                        </div>
-                                                        <span class="reviewCount">[[itr.reviews]] </span>
-                                                        <span>نقد </span>
-                                                    </div>
-                                                    <div class="item tags">[[itr.city]] <span>در </span>
-                                                        <span>[[itr.state]]</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @endif
-
-                    @if(Auth::check())
-                        <div id="RecentlyControllerId" class="homepage_shelves_widget" ng-controller="RecentlyController">
-                            <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show">
-                                <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff" style="direction: rtl;">
-                                    <div class="shelf_header">
-                                        <div class="shelf_title">
-                                            <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
-                                            <div class="shelf_title_container">
-                                                <a class="ui_link ui_header h2">
-                                                    <h3>بازدید های اخیر</h3>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="shelf_item_container ui_columns is-mobile is-multiline">
-                                        <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-3-tablet is-6-mobile" ng-repeat="itr in data">
-                                            <div class="poi">
-                                                <a href="[[itr.url]]" class="thumbnail">
-                                                    <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                        <div class="prv_thumb has_image">
-                                                            <div class="image_wrapper landscape landscapeWide">
-                                                                <img ng-src="[[itr.pic]]" alt="[[itr.name]]" class="image"/>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                                <div class="detail" style="direction: rtl">
-                                                    <a href="[[itr.url]]" class="item poi_name ui_link">[[itr.name]]</a>
-                                                    <div class="item rating-widget">
-                                                        <div class="prw_rup prw_common_location_rating_simple">
-                                                            <span class="[[itr.classRate]]"></span>
-                                                        </div>
-                                                        <span class="reviewCount">[[itr.reviews]] </span>
-                                                        <span>نقد </span>
-                                                    </div>
-                                                    <div class="item tags">[[itr.city]] <span>در </span>
-                                                        <span>[[itr.state]]</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @endif
-
-                    @if($placeMode == "hotel" || $placeMode == "restaurant")
-                        <div id="AmakenControllerId" class="homepage_shelves_widget" ng-controller="AmakenController">
-                            <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show">
-                                <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff" style="direction: rtl;">
-                                    <div class="shelf_header">
-                                        <div class="shelf_title">
-                                            <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
-                                            <div class="shelf_title_container">
-                                                <a class="ui_link ui_header h2"><h3>اماکن دیدنی</h3></a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="shelf_item_container ui_columns is-mobile is-multiline">
-                                        <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-3-tablet is-6-mobile" ng-repeat="itr in data">
-                                            <div class="poi">
-                                                <a href="[[itr.url]]" class="thumbnail">
-                                                    <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                        <div class="prv_thumb has_image">
-                                                            <div class="image_wrapper landscape landscapeWide">
-                                                                <img ng-src="[[itr.pic]]" alt="[[itr.name]]" class="image"/>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                                <div class="detail" style="direction: rtl">
-                                                    <a href="[[itr.url]]" class="item poi_name ui_link">[[itr.name]]</a>
-                                                    <div class="item rating-widget">
-                                                        <div class="prw_rup prw_common_location_rating_simple">
-                                                            <span class="[[itr.classRate]]"></span>
-                                                        </div>
-                                                        <span class="reviewCount">[[itr.reviews]]</span>
-                                                        <span>نقد </span>
-                                                    </div>
-                                                    <div class="item tags">[[itr.city]] <span>در </span><span>[[itr.state]]</span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @else
-                        <div id="HotelControllerId" class="homepage_shelves_widget" ng-controller="HotelController">
-                            <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show">
-                                <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff" style="direction: rtl;">
-                                    <div class="shelf_header">
-                                        <div class="shelf_title">
-                                            <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
-                                            <div class="shelf_title_container">
-                                                <a class="ui_link ui_header h2"><h3>هتل های دیدنی</h3></a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="shelf_item_container ui_columns is-mobile is-multiline">
-                                        <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-3-tablet is-6-mobile" ng-repeat="itr in data">
-                                            <div class="poi">
-                                                <a href="[[itr.url]]" class="thumbnail">
-                                                    <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                        <div class="prv_thumb has_image">
-                                                            <div class="image_wrapper landscape landscapeWide">
-                                                                <img ng-src="[[itr.pic]]" alt="[[itr.name]]" class="image"/>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                                <div class="detail" style="direction: rtl">
-                                                    <a href="[[itr.url]]" class="item poi_name ui_link">[[itr.name]]</a>
-                                                    <div class="item rating-widget">
-                                                        <div class="prw_rup prw_common_location_rating_simple">
-                                                            <span class="[[itr.classRate]]"></span>
-                                                        </div>
-                                                        <span class="reviewCount">[[itr.reviews]]</span>
-                                                        <span>نقد </span>
-                                                    </div>
-                                                    <div class="item tags">[[itr.city]] <span>در </span><span>[[itr.state]]</span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @endif
-
-                    <div id="FoodControllerId" class="homepage_shelves_widget" ng-controller="FoodController">
-                        <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show">
-                            <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff" style="direction: rtl;">
-                                <div class="shelf_header">
-                                    <div class="shelf_title">
-                                        <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
-                                        <div class="shelf_title_container">
-                                            <a class="ui_link ui_header h2"><h3>غذاهای لذیذ</h3></a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="shelf_item_container ui_columns is-mobile is-multiline">
-                                    <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-3-tablet is-6-mobile" ng-repeat="itr in data">
-                                        <div class="poi">
-                                            <a href="[[itr.url]]" class="thumbnail">
-                                                <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                    <div class="prv_thumb has_image">
-                                                        <div class="image_wrapper landscape landscapeWide">
-                                                            <img ng-src="[[itr.pic]]" alt="[[itr.name]]" class="image"/>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <div class="detail" style="direction: rtl">
-                                                <a href="[[itr.url]]" class="item poi_name ui_link">[[itr.name]]</a>
-                                                <div class="item rating-widget">
-                                                    <div class="prw_rup prw_common_location_rating_simple">
-                                                        <span class="[[itr.classRate]]"></span>
-                                                    </div>
-                                                    <span class="reviewCount">[[itr.reviews]]</span><span>نقد </span>
-                                                </div>
-                                                <div class="item tags">[[itr.city]] <span>در </span><span>[[itr.state]]</span></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
+            @include('layouts.middleBanner')
         </div>
 
         @include('layouts.placeFooter')
@@ -1061,7 +452,6 @@
         {{--@include('layouts.phonePopUp')--}}
 
         <script defer>
-            var currIdx = 0, suggestions = [];
             var passenger = 0;
 
             function redirect() {
@@ -1194,79 +584,71 @@
                 $("#placeName").val(t), $("#placeId").val(e), $("#result").empty(), redirect()
             }
 
-            function hideElement(e) {
-                $(".dark").hide(), $("#" + e).addClass("hidden")
-            }
+            {{--function chooseState(e) {--}}
+            {{--    $.ajax({--}}
+            {{--        type: "post", url: getStates, success: function (t) {--}}
+            {{--            for (t = JSON.parse(t), newElement = "", i = 0; i < t.length; i++) newElement += "<option value='{{route('home') . '/adab-list/'}}" + t[i].name + "/" + e + "'>" + t[i].name + "</option>";--}}
+            {{--            $("#states").empty().append(newElement), $("#statePane").removeClass("hidden"), $(".dark").show()--}}
+            {{--        }--}}
+            {{--    })--}}
+            {{--}--}}
 
-            function showElement(e) {
-                $("#" + e).removeClass("hidden"), $(".dark").show()
-            }
+            {{--function chooseStateAmaken() {--}}
+            {{--    $.ajax({--}}
+            {{--        type: "post", url: getStates, success: function (e) {--}}
+            {{--            for (e = JSON.parse(e), newElement = "", i = 0; i < e.length; i++) newElement += "<option value='{{route('home') . '/amakenList/'}}" + e[i].name + "/state'>" + e[i].name + "</option>";--}}
+            {{--            $("#states").empty().append(newElement), $("#statePane").removeClass("hidden"), $(".dark").show()--}}
+            {{--        }--}}
+            {{--    })--}}
+            {{--}--}}
 
-            function chooseState(e) {
-                $.ajax({
-                    type: "post", url: getStates, success: function (t) {
-                        for (t = JSON.parse(t), newElement = "", i = 0; i < t.length; i++) newElement += "<option value='{{route('home') . '/adab-list/'}}" + t[i].name + "/" + e + "'>" + t[i].name + "</option>";
-                        $("#states").empty().append(newElement), $("#statePane").removeClass("hidden"), $(".dark").show()
-                    }
-                })
-            }
+            {{--function getCities() {--}}
+            {{--    var e = $("#states2").val(), t = $("#states2 option:selected").attr("data-val");--}}
+            {{--    $.ajax({--}}
+            {{--        type: "post", url: "{{route('getCitiesDir')}}", data: {stateId: e}, success: function (e) {--}}
+            {{--            for (e = JSON.parse(e), newElement = "<option value='{{route('home') . '/majaraList/'}}" + t + "/state'> استان " + t + "</option>", i = 0; i < e.length; i++) newElement += "<option value='{{route('home') . '/majaraList/'}}" + e[i].name + "/city'>شهر " + e[i].name + "</option>";--}}
+            {{--            $("#cities").empty().append(newElement)--}}
+            {{--        }--}}
+            {{--    })--}}
+            {{--}--}}
 
-            function chooseStateAmaken() {
-                $.ajax({
-                    type: "post", url: getStates, success: function (e) {
-                        for (e = JSON.parse(e), newElement = "", i = 0; i < e.length; i++) newElement += "<option value='{{route('home') . '/amakenList/'}}" + e[i].name + "/state'>" + e[i].name + "</option>";
-                        $("#states").empty().append(newElement), $("#statePane").removeClass("hidden"), $(".dark").show()
-                    }
-                })
-            }
+            {{--function chooseStateMajara() {--}}
+            {{--    $.ajax({--}}
+            {{--        type: "post", url: getStates, success: function (e) {--}}
+            {{--            for (e = JSON.parse(e), newElement = "", i = 0; i < e.length; i++) newElement += "<option data-val='" + e[i].name + "' value='" + e[i].id + "'>" + e[i].name + "</option>";--}}
+            {{--            $(".dark").show(), $("#states2").empty().append(newElement), e.length > 0 && getCities(), $("#statePane2").removeClass("hidden")--}}
+            {{--        }--}}
+            {{--    })--}}
+            {{--}--}}
 
-            function getCities() {
-                var e = $("#states2").val(), t = $("#states2 option:selected").attr("data-val");
-                $.ajax({
-                    type: "post", url: "{{route('getCitiesDir')}}", data: {stateId: e}, success: function (e) {
-                        for (e = JSON.parse(e), newElement = "<option value='{{route('home') . '/majaraList/'}}" + t + "/state'> استان " + t + "</option>", i = 0; i < e.length; i++) newElement += "<option value='{{route('home') . '/majaraList/'}}" + e[i].name + "/city'>شهر " + e[i].name + "</option>";
-                        $("#cities").empty().append(newElement)
-                    }
-                })
-            }
+            {{--function chooseGoyesh() {--}}
+            {{--    $.ajax({--}}
+            {{--        type: "post", url: getGoyesh, success: function (e) {--}}
+            {{--            for (e = JSON.parse(e), newElement = "", i = 0; i < e.length; i++) newElement += "<option value='{{route('home') . '/estelahat/'}}" + e[i].name + "'>" + e[i].name + "</option>";--}}
+            {{--            $(".dark").show(), $("#goyesh").empty().append(newElement), $("#goyeshPane").removeClass("hidden")--}}
+            {{--        }--}}
+            {{--    })--}}
+            {{--}--}}
 
-            function chooseStateMajara() {
-                $.ajax({
-                    type: "post", url: getStates, success: function (e) {
-                        for (e = JSON.parse(e), newElement = "", i = 0; i < e.length; i++) newElement += "<option data-val='" + e[i].name + "' value='" + e[i].id + "'>" + e[i].name + "</option>";
-                        $(".dark").show(), $("#states2").empty().append(newElement), e.length > 0 && getCities(), $("#statePane2").removeClass("hidden")
-                    }
-                })
-            }
+            {{--function showBookMarks(e) {--}}
+            {{--    $("#" + e).empty(), $.ajax({--}}
+            {{--        type: "post", url: getBookMarksPath, success: function (t) {--}}
+            {{--            for (t = JSON.parse(t), i = 0; i < t.length; i++) element = "<div>", element += "<a class='masthead-recent-card' target='_self' href='" + t[i].placeRedirect + "'>", element += "<div class='media-left'>", element += "<div class='thumbnail' style='background-image: url(" + t[i].placePic + ");'></div>", element += "</div>", element += "<div class='content-right'>", element += "<div class='poi-title'>" + t[i].placeName + "</div>", element += "<div class='rating'>", element += "<div class='ui_bubble_rating bubble_45'></div><br/>" + t[i].placeReviews + " مشاهده ", element += "</div>", element += "<div class='geo'>" + t[i].placeCity + "</div>", element += "</div>", element += "</a></div>", $("#" + e).append(element)--}}
+            {{--        }--}}
+            {{--    })--}}
+            {{--}--}}
 
-            function chooseGoyesh() {
-                $.ajax({
-                    type: "post", url: getGoyesh, success: function (e) {
-                        for (e = JSON.parse(e), newElement = "", i = 0; i < e.length; i++) newElement += "<option value='{{route('home') . '/estelahat/'}}" + e[i].name + "'>" + e[i].name + "</option>";
-                        $(".dark").show(), $("#goyesh").empty().append(newElement), $("#goyeshPane").removeClass("hidden")
-                    }
-                })
-            }
+            {{--function getRecentlyViews(e) {--}}
+            {{--    $("#" + e).empty(), $.ajax({--}}
+            {{--        type: "post", url: getRecentlyPath, success: function (t) {--}}
+            {{--            for (t = JSON.parse(t), i = 0; i < t.length; i++) element = "<div>", element += "<a class='masthead-recent-card' style='text-align: right !important;' target='_self' href='" + t[i].placeRedirect + "'>", element += "<div class='media-left' style='padding: 0 12px !important; margin: 0 !important;'>", element += "<div class='thumbnail' style='background-image: url(" + t[i].placePic + ");'></div>", element += "</div>", element += "<div class='content-right'>", element += "<div class='poi-title'>" + t[i].placeName + "</div>", element += "<div class='rating'>", 5 == t[i].placeRate ? element += "<div class='ui_bubble_rating bubble_50'></div>" : 4 == t[i].placeRate ? element += "<div class='ui_bubble_rating bubble_40'></div>" : 3 == t[i].placeRate ? element += "<div class='ui_bubble_rating bubble_30'></div>" : 2 == t[i].placeRate ? element += "<div class='ui_bubble_rating bubble_20'></div>" : element += "<div class='ui_bubble_rating bubble_10'></div>", element += "<br/>" + t[i].placeReviews + " نقد ", element += "</div>", element += "<div class='geo'>" + t[i].placeCity + "/ " + t[i].placeState + "</div>", element += "</div>", element += "</a></div>", $("#" + e).append(element)--}}
+            {{--        }--}}
+            {{--    })--}}
+            {{--}--}}
 
-            function showBookMarks(e) {
-                $("#" + e).empty(), $.ajax({
-                    type: "post", url: getBookMarksPath, success: function (t) {
-                        for (t = JSON.parse(t), i = 0; i < t.length; i++) element = "<div>", element += "<a class='masthead-recent-card' target='_self' href='" + t[i].placeRedirect + "'>", element += "<div class='media-left'>", element += "<div class='thumbnail' style='background-image: url(" + t[i].placePic + ");'></div>", element += "</div>", element += "<div class='content-right'>", element += "<div class='poi-title'>" + t[i].placeName + "</div>", element += "<div class='rating'>", element += "<div class='ui_bubble_rating bubble_45'></div><br/>" + t[i].placeReviews + " مشاهده ", element += "</div>", element += "<div class='geo'>" + t[i].placeCity + "</div>", element += "</div>", element += "</a></div>", $("#" + e).append(element)
-                    }
-                })
-            }
-
-            function getRecentlyViews(e) {
-                $("#" + e).empty(), $.ajax({
-                    type: "post", url: getRecentlyPath, success: function (t) {
-                        for (t = JSON.parse(t), i = 0; i < t.length; i++) element = "<div>", element += "<a class='masthead-recent-card' style='text-align: right !important;' target='_self' href='" + t[i].placeRedirect + "'>", element += "<div class='media-left' style='padding: 0 12px !important; margin: 0 !important;'>", element += "<div class='thumbnail' style='background-image: url(" + t[i].placePic + ");'></div>", element += "</div>", element += "<div class='content-right'>", element += "<div class='poi-title'>" + t[i].placeName + "</div>", element += "<div class='rating'>", 5 == t[i].placeRate ? element += "<div class='ui_bubble_rating bubble_50'></div>" : 4 == t[i].placeRate ? element += "<div class='ui_bubble_rating bubble_40'></div>" : 3 == t[i].placeRate ? element += "<div class='ui_bubble_rating bubble_30'></div>" : 2 == t[i].placeRate ? element += "<div class='ui_bubble_rating bubble_20'></div>" : element += "<div class='ui_bubble_rating bubble_10'></div>", element += "<br/>" + t[i].placeReviews + " نقد ", element += "</div>", element += "<div class='geo'>" + t[i].placeCity + "/ " + t[i].placeState + "</div>", element += "</div>", element += "</a></div>", $("#" + e).append(element)
-                    }
-                })
-            }
-
-            function showRecentlyViews(e) {
-                $("#my-trips-not").is(":hidden") ? ($("#alert").hide(), $("#my-trips-not").show(), $("#profile-drop").hide(), $("#bookmarkmenu").hide(), getRecentlyViews(e)) : ($("#alert").hide(), $("#my-trips-not").hide(), $("#profile-drop").hide(), $("#bookmarkmenu").hide())
-            }
+            // function showRecentlyViews(e) {
+            //     $("#my-trips-not").is(":hidden") ? ($("#alert").hide(), $("#my-trips-not").show(), $("#profile-drop").hide(), $("#bookmarkmenu").hide(), getRecentlyViews(e)) : ($("#alert").hide(), $("#my-trips-not").hide(), $("#profile-drop").hide(), $("#bookmarkmenu").hide())
+            // }
             //    For Date
             function assignDate(from, id, btnId) {
                 $("#" + id).css("visibility", "visible");
@@ -1300,42 +682,59 @@
                 changePassengersNo(0);
             });
 
-            $(".login-button").click(function () {
-                $(".dark").show(), showLoginPrompt(url)
-            }), $(document).ready(function () {
-                $("#Settings").on({
-                    mouseenter: function () {
-                        $(".settingsDropDown").show()
-                    }, mouseleave: function () {
-                        $(".settingsDropDown").hide()
-                    }
-                }), $("#nameTop").click(function (e) {
-                    $("#profile-drop").is(":hidden") ? ($("#profile-drop").show(), $("#my-trips-not").hide(), $("#alert").hide(), $("#bookmarkmenu").hide()) : ($("#profile-drop").hide(), $("#my-trips-not").hide(), $("#alert").hide(), $("#bookmarkmenu").hide())
-                }), $("#memberTop").click(function (e) {
-                    $("#profile-drop").is(":hidden") ? ($("#profile-drop").show(), $("#my-trips-not").hide(), $("#bookmarkmenu").hide(), $("#alert").hide()) : ($("#profile-drop").hide(), $("#my-trips-not").hide(), $("#bookmarkmenu").hide(), $("#alert").hide())
-                }), $("#bookmarkicon").click(function (e) {
-                    $("#bookmarkmenu").is(":hidden") ? ($("#bookmarkmenu").show(), $("#my-trips-not").hide(), $("#profile-drop").hide(), $("#alert").hide(), showBookMarks("bookMarksDiv")) : ($("#bookmarkmenu").hide(), $("#my-trips-not").hide(), $("#profile-drop").hide(), $("#alert").hide())
-                }), $(".notification-bell").click(function (e) {
-                    $("#alert").is(":hidden") ? ($("#alert").show(), $("#my-trips-not").hide(), $("#profile-drop").hide(), $("#bookmarkmenu").hide()) : ($("#alert").hide(), $("#my-trips-not").hide(), $("#profile-drop").hide(), $("#bookmarkmenu").hide())
-                }), $("#close_span_search").click(function (e) {
-                    $("#searchspan").animate({height: "0vh"}), $("#myCloseBtn").addClass("hidden")
-                }), $("#openSearch").click(function (e) {
-                    $("#myCloseBtn").removeClass("hidden"), $("#searchspan").animate({height: "100vh"})
-                })
-            }), $("body").on("click", function () {
-                $("#profile-drop").hide(), $("#my-trips-not").hide(), $("#alert").hide(), $("#bookmarkmenu").hide()
-            }), $(".global-nav-actions").on("click", function (e) {
-                e.stopPropagation()
-            });
+            // $(".login-button").click(function () {
+            //     $(".dark").show(), showLoginPrompt(url)
+            // }), $(document).ready(function () {
+            //     $("#Settings").on({
+            //         mouseenter: function () {
+            //             $(".settingsDropDown").show()
+            //         }, mouseleave: function () {
+            //             $(".settingsDropDown").hide()
+            //         }
+            //     }), $("#nameTop").click(function (e) {
+            //         $("#profile-drop").is(":hidden") ? ($("#profile-drop").show(), $("#my-trips-not").hide(), $("#alert").hide(), $("#bookmarkmenu").hide()) : ($("#profile-drop").hide(), $("#my-trips-not").hide(), $("#alert").hide(), $("#bookmarkmenu").hide())
+            //     }), $("#memberTop").click(function (e) {
+            //         $("#profile-drop").is(":hidden") ? ($("#profile-drop").show(), $("#my-trips-not").hide(), $("#bookmarkmenu").hide(), $("#alert").hide()) : ($("#profile-drop").hide(), $("#my-trips-not").hide(), $("#bookmarkmenu").hide(), $("#alert").hide())
+            //     }), $("#bookmarkicon").click(function (e) {
+            //         $("#bookmarkmenu").is(":hidden") ? ($("#bookmarkmenu").show(), $("#my-trips-not").hide(), $("#profile-drop").hide(), $("#alert").hide(), showBookMarks("bookMarksDiv")) : ($("#bookmarkmenu").hide(), $("#my-trips-not").hide(), $("#profile-drop").hide(), $("#alert").hide())
+            //     }), $(".notification-bell").click(function (e) {
+            //         $("#alert").is(":hidden") ? ($("#alert").show(), $("#my-trips-not").hide(), $("#profile-drop").hide(), $("#bookmarkmenu").hide()) : ($("#alert").hide(), $("#my-trips-not").hide(), $("#profile-drop").hide(), $("#bookmarkmenu").hide())
+            //     }), $("#close_span_search").click(function (e) {
+            //         $("#searchspan").animate({height: "0vh"}), $("#myCloseBtn").addClass("hidden")
+            //     }), $("#openSearch").click(function (e) {
+            //         $("#myCloseBtn").removeClass("hidden"), $("#searchspan").animate({height: "100vh"})
+            //     })
+            // }), $("body").on("click", function () {
+            //     $("#profile-drop").hide(), $("#my-trips-not").hide(), $("#alert").hide(), $("#bookmarkmenu").hide()
+            // }), $(".global-nav-actions").on("click", function (e) {
+            //     e.stopPropagation()
+            // });
 
         </script>
-
-        <script src=""/>
 
         <script>
             var imageBasePath = '{{URL::asset('images')}}';
+            var getLastRecentlyMainPath = '{{route('getLastRecentlyMain')}}';
+            var getAdviceMainPath = '{{route('getAdviceMain')}}';
+            var getHotelsMainPath = '{{route('getHotelsMain')}}';
+            var getAmakensMainPath = '{{route('getAmakensMain')}}';
+            var getRestaurantsMainPath = '{{route('getRestaurantsMain')}}';
+            var getFoodsMainPath = '{{route('getFoodsMain')}}';
+            var getCitiesDir = "{{route('getCitiesDir')}}";
+
+            var config = {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;',
+                    'X-CSRF-TOKEN': '{{csrf_token()}}'
+                }
+            };
         </script>
-        <script async src="{{URL::asset('js/slideBar.js')}}"/>
+
+        <script defer src="{{URL::asset('js/mainPageSuggestions.js')}}"></script>
+
+        <script async src="{{URL::asset('js/middleBanner.js')}}"></script>
+
+        <script async src="{{URL::asset('js/slideBar.js')}}"></script>
 
         <span id="statePane" class="ui_overlay ui_modal editTags hidden"
               style="position: fixed; left: 30%; right: 30%; top:19%; bottom: auto;overflow: auto;max-height: 500px;z-index: 10000001;">

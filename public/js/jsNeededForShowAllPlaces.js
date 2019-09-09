@@ -72,7 +72,7 @@ function showQuestions(arr, idx) {
         newElement += "</span></DIV>";
         newElement += "<div class='username'>" + arr[i].visitorId + "</div>";
         newElement += "</div></div>";
-        newElement += "<div class='ui_column is-8'><a href='" + homePath + "/seeAllAns/" + arr[i].id + "'>" + arr[i].text + "</a>";
+        newElement += "<div class='ui_column is-8'><a href='" + homeURL + "/seeAllAns/" + arr[i].id + "'>" + arr[i].text + "</a>";
         newElement += "<div class='question_date'>" + arr[i].date + "</div>";
         newElement += "<span class='ui_button secondary small' id='showAll_" + arr[i].id + "' onclick='showAllAns(\"" + arr[i].id + "\", -1)'>نمایش " + arr[i].ansNum + " جواب</span> ";
         newElement += "<span class='ui_button secondary small hidden' id='hideAll_" + arr[i].id + "' onclick='showAllAns(\"" + arr[i].id + "\", 1)'>پنهان کردن جواب ها</span>";
@@ -578,7 +578,7 @@ function showDetails(username) {
             newElement += "<div class='memberOverlay simple container moRedesign'>";
             newElement += "<div class='innerContent'>";
             newElement += "<div class='memberOverlayRedesign g10n'>";
-            newElement += "<a href='" + homePath + "/otherProfile/" + username + "'>";
+            newElement += "<a href='" + homeURL + "/otherProfile/" + username + "'>";
             newElement += "<h3 class='username reviewsEnhancements'>" + username + "</h3>";
             newElement += "</a>";
             newElement += "<div class='memberreviewbadge'>";
@@ -754,7 +754,7 @@ function showComments(arr, idx) {
                         break;
                 }
                 newElement += "<span class='ratingDate relativeDate' style='float: right;'>نوشته شده در تاریخ " + arr[i].date + " </span></div>";
-                newElement += "<div class='quote isNew'><a href='" + homePath + "/showReview/" + arr[i].id + "'><span class='noQuotes'>" + arr[i].subject + "</span></a></div>";
+                newElement += "<div class='quote isNew'><a href='" + homeURL + "/showReview/" + arr[i].id + "'><span class='noQuotes'>" + arr[i].subject + "</span></a></div>";
                 newElement += "<DIV class='prw_rup prw_reviews_text_summary_hsx'>";
                 newElement += "<div>";
                 newElement += "<div><p>" + arr[i].text + "</p></div>";

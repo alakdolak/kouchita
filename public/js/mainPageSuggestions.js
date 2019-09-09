@@ -1,14 +1,8 @@
 
-var config = {
-    headers: {
-        'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;',
-        'X-CSRF-TOKEN': '{{csrf_token()}}'
-    }
-};
-
 var data = $.param({});
 
 (function () {
+
     var app = angular.module("mainApp", ['infinite-scroll'], function ($interpolateProvider) {
         $interpolateProvider.startSymbol('[[');
         $interpolateProvider.endSymbol(']]')
@@ -39,7 +33,7 @@ var data = $.param({});
                     return;
             }
             $scope.disable = !0;
-            $http.post('{{route('getLastRecentlyMain')}}', {}).then(function (response) {
+            $http.post(getLastRecentlyMainPath, {}).then(function (response) {
                 if (response.data != null && response.data.length > 0)
                     $scope.show = !0;
                 for (i = 0; i < response.data.length; i++) {
@@ -69,7 +63,8 @@ var data = $.param({});
             $('.loader').removeClass('hidden');
 
             $scope.disable = !0;
-            $http.post('{{route('getAdviceMain')}}', data, config).then(function (response) {
+            $http.post(getAdviceMainPath, data, config).then(function (response) {
+
                 if (response.data != null && response.data.length > 0)
                     $scope.show = !0;
                 for (i = 0; i < response.data.length; i++) {
@@ -106,7 +101,7 @@ var data = $.param({});
             }
 
             $scope.disable = !0;
-            $http.post('{{route('getHotelsMain')}}', data, config).then(function (response) {
+            $http.post(getHotelsMainPath, data, config).then(function (response) {
                 if (response.data != null && response.data.length > 0)
                     $scope.show = !0;
                 for (i = 0; i < response.data.length; i++) {
@@ -140,7 +135,7 @@ var data = $.param({});
                     return;
             }
             $scope.disable = !0;
-            $http.post('{{route('getAmakensMain')}}', data, config).then(function (response) {
+            $http.post(getAmakensMainPath, data, config).then(function (response) {
                 if (response.data != null && response.data.length > 0)
                     $scope.show = !0;
                 for (i = 0; i < response.data.length; i++) {
@@ -152,6 +147,7 @@ var data = $.param({});
             })
         }
     });
+
     app.controller('RestaurantController', function ($scope, $http) {
         $scope.show = !1;
         $scope.disable = !1;
@@ -172,7 +168,7 @@ var data = $.param({});
                     return;
             }
             $scope.disable = !0;
-            $http.post('{{route('getRestaurantsMain')}}', data, config).then(function (response) {
+            $http.post(getRestaurantsMainPath, data, config).then(function (response) {
                 if (response.data != null && response.data.length > 0)
                     $scope.show = !0;
                 for (i = 0; i < response.data.length; i++) {
@@ -184,6 +180,7 @@ var data = $.param({});
             })
         }
     });
+
     app.controller('FoodController', function ($scope, $http) {
         $scope.show = !1;
         $scope.disable = !1;
@@ -203,7 +200,7 @@ var data = $.param({});
                     return;
             }
             $scope.disable = !0;
-            $http.post('{{route('getFoodsMain')}}', data, config).then(function (response) {
+            $http.post(getFoodsMainPath, data, config).then(function (response) {
                 if (response.data != null && response.data.length > 0)
                     $scope.show = !0;
                 for (i = 0; i < response.data.length; i++) {
@@ -215,4 +212,5 @@ var data = $.param({});
             })
         }
     })
-})()
+
+})();

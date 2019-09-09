@@ -437,7 +437,6 @@
     var getCommentDir = '{{route('getComment')}}';
     var deleteUserPicFromCommentDir = '{{route('deleteUserPicFromComment')}}';
     var searchForCityDir = '{{route('searchForCity')}}';
-    var homePath = '{{route('home')}}';
 
     var selectedPlaceStyle = '{{(isset($comment)) ? $comment->placeStyleId : -1}}';
     var selectedSeasonTrip = '{{(isset($comment)) ? $comment->seasonTrip : -1}}';

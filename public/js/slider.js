@@ -247,7 +247,7 @@ $(slider_Opts.slider_Wrap).each(function () {
 
             thisVal = "#sliderItem_" + currIdx;
 
-            newElement = "<div class='o-slider--item' id='sliderItem_" + currIdx + "' data-image='" + homePath + "/images/" + imgPath[currIdx] + "' style='background-image: url(\"" + homePath + "/images/" + imgPath[currIdx] + "\");'>";
+            newElement = "<div class='o-slider--item' id='sliderItem_" + currIdx + "' data-image='" + homeURL + "/images/" + imgPath[currIdx] + "' style='background-image: url(\"" + homeURL + "/images/" + imgPath[currIdx] + "\");'>";
             newElement += "<div class='o-slider-textWrap'>";
             newElement += "<span class='a-divider'></span>";
             newElement += "<h2 class='o-slider-subTitle'>" + titles[currIdx] + "</h2>";

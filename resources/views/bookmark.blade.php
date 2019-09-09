@@ -1222,9 +1222,9 @@
                         newElement += "<div class='col-xs-12'>";
                         newElement += "<span>" + response[i]['username'] + "</span>";
                         if(response[i]["delete"] == 1) {
-                            newElement += "<button style='margin-right: 10px;padding: 0px 9px;' class='ui_button secondary' onclick='deleteMember(\"" + response[i]['username'] + "\")' data-toggle='tooltip' title='حذف عضو'><span class='' style=''><img src='" + homePath + "/images/deleteIcon.gif'/> </span></button>";
+                            newElement += "<button style='margin-right: 10px;padding: 0px 9px;' class='ui_button secondary' onclick='deleteMember(\"" + response[i]['username'] + "\")' data-toggle='tooltip' title='حذف عضو'><span class='' style=''><img src='" + homeURL + "/images/deleteIcon.gif'/> </span></button>";
                             if (owner == 1) {
-                                newElement += "<br><a onclick='memberDetails(\"" + response[i]['username'] + "\")' style='cursor: pointer; text-align: center;color: #16174f;'>جزئیات<img src='" + homePath + "/images/blackNavArrowDown.gif' width='7' height='4' hspace='10' border='0' align='absmiddle'/></a>";
+                                newElement += "<br><a onclick='memberDetails(\"" + response[i]['username'] + "\")' style='cursor: pointer; text-align: center;color: #16174f;'>جزئیات<img src='" + homeURL + "/images/blackNavArrowDown.gif' width='7' height='4' hspace='10' border='0' align='absmiddle'/></a>";
                                 newElement += "<div class='hidden' id='details_" + response[i]['username'] + "'></div>"
                             }
                         }

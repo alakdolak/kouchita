@@ -72,7 +72,7 @@ function showDetails(username) {
             newElement += "<div class='memberOverlay simple container moRedesign'>";
             newElement += "<div class='innerContent'>";
             newElement += "<div class='memberOverlayRedesign g10n'>";
-            newElement += "<a href='" + homePath + "/otherProfile/" + username + "'>";
+            newElement += "<a href='" + homeURL + "/otherProfile/" + username + "'>";
             newElement += "<h3 class='username reviewsEnhancements'>" + username + "</h3>";
             newElement += "</a>";
             newElement += "<div class='memberreviewbadge'>";
@@ -255,7 +255,7 @@ function sendReport() {
         return;
 
     if(!hasLogin) {
-        url = homePath + "/seeAllAns/" + questionId + "/report/" + selectedLogId;
+        url = homeURL + "/seeAllAns/" + questionId + "/report/" + selectedLogId;
         showLoginPrompt(url);
         return;
     }
@@ -289,7 +289,7 @@ function closeReportPrompt() {
 function showReportPrompt(logId) {
 
     if(!hasLogin) {
-        url = homePath + "/seeAllAns/" + questionId + "/report/" + logId;
+        url = homeURL + "/seeAllAns/" + questionId + "/report/" + logId;
         showLoginPrompt(url);
         return;
     }

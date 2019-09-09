@@ -508,11 +508,11 @@ function showSimilars(idxArr, idxPane) {
         
         newElement += '<div style="cursor: pointer;" onclick="document.location.href = ';
         if(placeModes[idxPane] == 'hotel')
-            newElement += homePath + "/hotel-details/" + similars[idxArr][i].id + "/" + similars[idxArr][i].name;
+            newElement += homeURL + "/hotel-details/" + similars[idxArr][i].id + "/" + similars[idxArr][i].name;
         else if(placeModes[idxPane] == 'amaken')
-            newElement += homePath + "/amaken-details/" + similars[idxArr][i].id + "/" + similars[idxArr][i].name;
+            newElement += homeURL + "/amaken-details/" + similars[idxArr][i].id + "/" + similars[idxArr][i].name;
         else if(placeModes[idxPane] == 'restaurant')
-            newElement += homePath + "/restaurant-details/" + similars[idxArr][i].id + "/" + similars[idxArr][i].name;
+            newElement += homeURL + "/restaurant-details/" + similars[idxArr][i].id + "/" + similars[idxArr][i].name;
 
         newElement += '" class="ui_column is-3 rec">';
         newElement += '<div class="recommendedCard">';
@@ -583,7 +583,7 @@ function showNearbyHotels(idxArr, idxPane) {
     for(i = 0; i < nearbyHotels[idxArr].length; i++) {
 
         newElement += '<div style="cursor: pointer;" onclick="document.location.href = ';
-        newElement += homePath + "/hotel-details/" + nearbyHotels[idxArr][i].id + "/" + nearbyHotels[idxArr][i].name;
+        newElement += homeURL + "/hotel-details/" + nearbyHotels[idxArr][i].id + "/" + nearbyHotels[idxArr][i].name;
 
         newElement += '" class="prw_rup prw_common_btf_nearby_poi_entry ui_column is-6 poiTile">';
         newElement += '<div class="ui_columns is-gapless is-mobile poiEntry shownOnMap">';
@@ -634,7 +634,7 @@ function showNearbyAmakens(idxArr, idxPane) {
     for(i = 0; i < nearbyAmakens[idxArr].length; i++) {
 
         newElement += '<div style="cursor: pointer;" onclick="document.location.href = ';
-        newElement += homePath + "/amaken-details/" + nearbyAmakens[idxArr][i].id + "/" + nearbyAmakens[idxArr][i].name;
+        newElement += homeURL + "/amaken-details/" + nearbyAmakens[idxArr][i].id + "/" + nearbyAmakens[idxArr][i].name;
 
         newElement += '" class="prw_rup prw_common_btf_nearby_poi_entry ui_column is-6 poiTile">';
         newElement += '<div class="ui_columns is-gapless is-mobile poiEntry shownOnMap">';
@@ -685,7 +685,7 @@ function showNearbyRestaurants(idxArr, idxPane) {
     for(i = 0; i < nearbyRestaurants[idxArr].length; i++) {
 
         newElement += '<div style="cursor: pointer;" onclick="document.location.href = ';
-        newElement += homePath + "/restaurant-details/" + nearbyRestaurants[idxArr][i].id + "/" + nearbyRestaurants[idxArr][i].name;
+        newElement += homeURL + "/restaurant-details/" + nearbyRestaurants[idxArr][i].id + "/" + nearbyRestaurants[idxArr][i].name;
 
         newElement += '" class="prw_rup prw_common_btf_nearby_poi_entry ui_column is-6 poiTile">';
         newElement += '<div class="ui_columns is-gapless is-mobile poiEntry shownOnMap">';
