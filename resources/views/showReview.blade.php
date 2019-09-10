@@ -261,7 +261,7 @@ box-shadow: 0 2px 3px 0px #CCC;padding-left: 0;padding-right:0;">
                         </div>
                         <div class="ratings_and_types">
                             <a href="{{route('review', ['placeId' => $log->placeId, 'kindPlaceId' => $log->kindPlaceId])}}" class="rndBtn ui_button primary button_war" style="float: left !important; margin-right: 5px">نقد</a>
-                            @if(Auth::user()->level == 1)
+                            @if(Auth::check() && Auth::user()->level == 1)
                                 <button onclick="removeReview('{{$log->id}}')" class="rndBtn ui_button primary
                                 button_war" style="float: left !important;
                                 ">حذف</button>

@@ -921,6 +921,7 @@ function prevMonthGre(type) {
 }
 
 function nowCalendar() {
+
     if (checkOpen) {
         text = '';
         text2 = '';

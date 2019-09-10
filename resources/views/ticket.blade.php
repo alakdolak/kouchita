@@ -20,9 +20,6 @@ $kindPlaceId = 10; ?>
           href='{{URL::asset('css/theme2/hr_north_star.css?v=2')}}'/>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/icons.css?v=1')}}'/>
 
-    <script src= {{URL::asset("js/calendar.js") }}></script>
-    <script src= {{URL::asset("js/jalali.js") }}></script>
-
     <script>
         var getStates = '{{route('getStates')}}';
         var getGoyesh = '{{route('getGoyesh')}}';
@@ -34,6 +31,7 @@ $kindPlaceId = 10; ?>
         var getRestaurantsMainPath = '{{route('getRestaurantsMain')}}';
         var getFoodsMainPath = '{{route('getFoodsMain')}}';
         var getCitiesDir = "{{route('getCitiesDir')}}";
+        var checkOpen = false;
 
         var config = {
             headers: {
@@ -42,6 +40,9 @@ $kindPlaceId = 10; ?>
             }
         };
     </script>
+
+    <script src= {{URL::asset("js/calendar.js") }}></script>
+    <script src= {{URL::asset("js/jalali.js") }}></script>
 
     <style>
         h2 {

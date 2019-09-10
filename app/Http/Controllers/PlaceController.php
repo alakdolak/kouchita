@@ -29,6 +29,10 @@ use App\models\User;
 use App\models\UserOpinion;
 use Exception;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Redirect;
 
 class PlaceController extends Controller {
 

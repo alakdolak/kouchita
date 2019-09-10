@@ -17,7 +17,9 @@
         "league/oauth2-google": "^2.0",
         "phpmailer/phpmailer": "^6.0",
         "phpunit/phpunit": "~5.7",
-        "predis/predis": "^1.1"
+        "predis/predis": "^1.1",
+        "ext-curl": "*",
+        "ext-json": "*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

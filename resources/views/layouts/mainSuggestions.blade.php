@@ -359,3 +359,5 @@
         </div>
     </div>
 </div>
+
+@include('layouts.calendar')

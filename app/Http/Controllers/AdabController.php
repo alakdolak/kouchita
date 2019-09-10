@@ -11,7 +11,11 @@ use App\models\PlaceStyle;
 use App\models\SectionPage;
 use App\models\State;
 use App\models\Tag;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\View;
 
 class AdabController extends Controller {
 
