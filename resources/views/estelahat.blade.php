@@ -165,6 +165,7 @@
 
                             <select style="width: 40%;border-radius: 6px;margin-top:5px;direction: rtl" onchange="search()" class="field dropdown" id="goyeshCities">
                                 <option class="dropdownItem" selected value="none">انتخاب</option>
+
                                 @foreach($goyeshCities as $itr)
                                     <option class="dropdownItem" value="{{$itr->id}}">{{$itr->name}}</option>
                                 @endforeach
@@ -187,6 +188,7 @@
                 <div class="recommendedCard" id="estelah">
                     <div style="height: auto;padding: 10px;padding-bottom: 50px;">
                         <div class="row">
+
                             @foreach($tags as $tag)
                                 <div class="col-xs-3" style="border:1px solid #4DC7BC;padding: 0;text-align: center; max-height: 400px; overflow: auto">
                                     <div class="col-xs-12" style="background: #4DC7BC;padding: 10px;">{{$tag->name}}</div>
@@ -208,6 +210,7 @@
             </div>
         </div>
     </div>
+
 
     <script>
         $('.login-button').click(function() {

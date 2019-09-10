@@ -2,7 +2,8 @@
 $state = "تهران";
 $backURL = route('home');
 $kindPlaceId = 10; ?>
-        <!DOCTYPE html>
+
+<!DOCTYPE html>
 <html>
 <head>
     {{--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>--}}

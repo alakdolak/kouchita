@@ -1,3 +1,4 @@
+
 <?php $mode = "profile"; $user = Auth::user(); ?>
 @extends('layouts.bodyProfile')
 

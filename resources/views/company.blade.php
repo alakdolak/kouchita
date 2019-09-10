@@ -23,6 +23,7 @@
         <div class="col-xs-12">
             <h3>شرکت</h3>
         </div>
+
         @if(count($company) == 0)
             <div class="col-xs-12">
                 <h4 class="warning_color">شرکتی وجود ندارد</h4>

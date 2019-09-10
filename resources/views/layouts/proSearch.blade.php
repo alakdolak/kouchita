@@ -565,6 +565,61 @@
                         <div class="col-xs-12" style="border-bottom: 2px solid #6d6d6d; padding: 0px !important;">
                             <div class="col-xs-7" style="color: #6d6d6d; height: inherit;">
                             <div class='ui_input_checkbox' style="float: right; width: 50px; cursor: pointer; position: relative">
+<<<<<<< HEAD
+                                {{--@if($placeMode == "amaken")--}}
+                                    {{--<img class="lantern" data-val="on" id="amakenFilter" width="50px" height="100px" src="{{URL::asset('images/on_lamp.gif')}}">--}}
+                                {{--@else--}}
+                                    {{--<img class="lantern" data-val="off" id="amakenFilter" width="50px" height="100px" src="{{URL::asset('images/off_lamp.png')}}">--}}
+                                {{--@endif--}}
+                                <center style="top: 104%; left: 15%; width: 70%; position: absolute">اماکن</center>
+                            </div>
+                            <div class='ui_input_checkbox' style="float: right; width: 50px; cursor: pointer; position: relative">
+                                {{--@if($placeMode == "hotel")--}}
+                                    {{--<img class="lantern" data-val="on" id="hotelFilter" width="50px" height="100px" src="{{URL::asset('images/on_lamp.gif')}}">--}}
+                                {{--@else--}}
+                                    {{--<img class="lantern" data-val="off" id="hotelFilter" width="50px" height="100px" src="{{URL::asset('images/off_lamp.png')}}">--}}
+                                {{--@endif--}}
+                                <center style="top: 104%; left: 15%; width: 70%; position: absolute">هتل</center>
+                            </div>
+                            <div class='ui_input_checkbox' style="float: right; width: 50px; cursor: pointer; position: relative">
+                                {{--@if($placeMode == "restaurant")--}}
+                                    {{--<img class="lantern" data-val="on" id="restaurantFilter" width="50px" height="100px" src="{{URL::asset('images/on_lamp.gif')}}">--}}
+                                {{--@else--}}
+                                    {{--<img class="lantern" data-val="off" id="restaurantFilter" width="50px" height="100px" src="{{URL::asset('images/off_lamp.png')}}">--}}
+                                {{--@endif--}}
+                                <center style="top: 104%; left: 15%; width: 70%; position: absolute">رستوران</center>
+                            </div>
+                            <div class='ui_input_checkbox' style="float: right; width: 50px; cursor: pointer; position: relative">
+                                {{--@if($placeMode == "majara")--}}
+                                    {{--<img class="lantern" data-val="on" id="majaraFilter" width="50px" height="100px" src="{{URL::asset('images/on_lamp.gif')}}">--}}
+                                {{--@else--}}
+                                    {{--<img class="lantern" data-val="off" id="majaraFilter" width="50px" height="100px" src="{{URL::asset('images/off_lamp.png')}}">--}}
+                                {{--@endif--}}
+                                <center style="top: 104%; left: 15%; width: 70%; position: absolute">ماجراجویی</center>
+                            </div>
+                            <div class='ui_input_checkbox' style="float: right; width: 50px; cursor: pointer; position: relative">
+                                {{--@if($placeMode == "soghat")--}}
+                                    {{--<img class="lantern" data-val="on" id="soghatFilter" width="50px" height="100px" src="{{URL::asset('images/on_lamp.gif')}}">--}}
+                                {{--@else--}}
+                                    {{--<img class="lantern" data-val="off" id="soghatFilter" width="50px" height="100px" src="{{URL::asset('images/off_lamp.png')}}">--}}
+                                {{--@endif--}}
+                                <center style="top: 104%; left: 15%; width: 70%; position: absolute">سوغات</center>
+                            </div>
+                            <div class='ui_input_checkbox' style="float: right; width: 50px; cursor: pointer; position: relative">
+                                {{--@if($placeMode == "ghazamahali")--}}
+                                    {{--<img class="lantern" data-val="on" id="ghazamahaliFilter" width="50px" height="100px" src="{{URL::asset('images/on_lamp.gif')}}">--}}
+                                {{--@else--}}
+                                    {{--<img class="lantern" data-val="off" id="ghazamahaliFilter" width="50px" height="100px" src="{{URL::asset('images/off_lamp.png')}}">--}}
+                                {{--@endif--}}
+                                <center style="top: 104%; left: 15%; width: 70%; position: absolute">غذا محلی</center>
+                            </div>
+                            <div class='ui_input_checkbox' style="float: right; width: 50px; cursor: pointer; position: relative">
+                                {{--@if($placeMode == "sanaye")--}}
+                                    {{--<img class="lantern" data-val="on" id="sanayeFilter" width="50px" height="100px" src="{{URL::asset('images/on_lamp.gif')}}">--}}
+                                {{--@else--}}
+                                    {{--<img class="lantern" data-val="off" id="sanayeFilter" width="50px" height="100px" src="{{URL::asset('images/off_lamp.png')}}">--}}
+                                {{--@endif--}}
+=======
                                 @if($placeMode == "amaken")
                                     <img class="lantern" data-val="on" id="amakenFilter" width="50px" height="100px" src="{{URL::asset('images/on_lamp.gif')}}">
                                 @else
@@ -618,6 +673,7 @@
                                 @else
                                     <img class="lantern" data-val="off" id="sanayeFilter" width="50px" height="100px" src="{{URL::asset('images/off_lamp.png')}}">
                                 @endif
+>>>>>>> 7cbfd2e57ae6406017b4c8ad2b228a5b32355d83
                                 <center style="top: 104%; left: 15%; width: 70%; position: absolute">صنایع</center>
                             </div>
                         </div>

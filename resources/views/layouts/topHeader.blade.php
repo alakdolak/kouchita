@@ -9,11 +9,11 @@
 </script>
 
 <link rel="icon" href="{{URL::asset('images/fav.png')}}" type="image/png"/>
-<meta name="csrf-token" content="{{ csrf_token() }}" />
-<meta name="viewport" content="width=device-width" />
+<script src="{{URL::asset('js/jQuery.js')}}"></script>
+<meta name="csrf-token" content="{{ csrf_token() }}"/>
+<meta name="viewport" content="width=device-width"/>
 <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
 
-<script src="{{URL::asset('js/jQuery.js')}}"></script>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script type="text/javascript">
@@ -81,6 +81,7 @@
         url('{{URL::asset('fonts/woff/IRANSansWeb(FaNum)_Medium.woff')}}') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
         url('{{URL::asset('fonts/ttf/IRANSansWeb(FaNum)_Medium.ttf')}}') format('truetype');
     }
+
     @font-face {
         font-family: 'IRANSansWeb';
         font-style: normal;
@@ -91,6 +92,7 @@
         url('{{URL::asset('fonts/woff/IRANSansWeb(FaNum)_Light.woff')}}') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
         url('{{URL::asset('fonts/ttf/IRANSansWeb(FaNum)_Light.ttf')}}') format('truetype');
     }
+
     @font-face {
         font-family: 'IRANSansWeb';
         font-style: normal;
@@ -101,6 +103,7 @@
         url('{{URL::asset('fonts/woff/IRANSansWeb(FaNum)_UltraLight.woff')}}') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
         url('{{URL::asset('fonts/ttf/IRANSansWeb(FaNum)_UltraLight.ttf')}}') format('truetype');
     }
+
     @font-face {
         font-family: 'IRANSansWeb';
         font-style: normal;
@@ -116,7 +119,7 @@
 
 <style>
     /*in Phone*/
-    @media only screen and (max-width:600px) {
+    @media only screen and (max-width: 600px) {
         .hideOnPhone {
             display: none;
             width: 0;
@@ -151,10 +154,3 @@
     }
 
 </script>
-{{--<script src="{{URL::asset('js/persianumber.js')}}"></script>--}}
-
-{{--<script>--}}
-    {{--$(document).ready(function () {--}}
-        {{--$(document.body).persiaNumber();--}}
-    {{--});--}}
-{{--</script>--}}

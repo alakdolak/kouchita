@@ -321,6 +321,27 @@
                                                 </div>
                                                 <div style="clear: both"></div>
                                             </div>
+                                        @elseif($placeMode == "tour")
+                                            <div class="ui_columns datepicker_box trip_search metaDatePicker rounded_lockup usePickerTypeIcons preDates noDates with_children hideOnPhone" style="position: absolute;right: 6%;top: 20%;width: 68%;z-index: 10000000;">
+                                                <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column is-4 search_typeahead wctx-tripsearch searchDivForScroll">
+                                                    <div class="ui_picker">
+                                                                <span class="typeahead_align ui_typeahead">
+                                                                    <input onkeyup="search(event)" type="text" id="placeName" class="typeahead_input" placeholder="شهر یا نام رستوران"/>
+                                                                    <input type="hidden" id="placeId">
+                                                                    <span class="ui_icon map-pin-fill pickerType typeahead_icon"></span>
+                                                                </span>
+                                                        <div id="result" class="data_holder"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="is-2 prw_rup prw_common_form_submit ui_column submit_wrap searchDivForScroll-button">
+                                                    <button onclick="redirect()" class="autoResize form_submit ">
+                                                        <span class="ui_icon search submit_icon"></span>
+                                                        <span class="submit_text">جستجو رستوران</span>
+                                                    </button>
+                                                    <span class="ui_loader dark fill"></span>
+                                                </div>
+                                                <div style="clear: both"></div>
+                                            </div>
                                         @else
                                             <div class="ui_columns datepicker_box trip_search metaDatePicker rounded_lockup usePickerTypeIcons preDates noDates with_children hideOnPhone" style="position: absolute;right: 6%;top: 20%;width: 68%;z-index: 10000000;">
                                                 <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column is-4 search_typeahead wctx-tripsearch searchDivForScroll">
@@ -395,6 +416,25 @@
                                                 </div>
                                             </div>
                                         @elseif($placeMode == "restaurant")
+                                            <div class="trip_search rounded_lockup usePickerTypeIcons hideOnScreen" style="width: 60%;position: absolute;top: 44%;left: 50%;transform: translate(-50%, -50%);z-index: 10000000;">
+                                                <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column" onclick="$('#phoneSearchPopUp').removeClass('hidden')" style="width: 70%; float: right; max-height: 300px; overflow: auto;border-radius: 0 25px 25px 0;">
+                                                    <div class="ui_picker" style="padding: 10px !important;">
+                                                                <span class="typeahead_align ui_typeahead">
+                                                                    <input onkeyup="search(event)" type="text" id="placeName" class="typeahead_input" style="width: 100%;font-size: 35px; line-height: 50px !important; float:right; border: none; margin-right: 5px" placeholder="شهر یا نام رستوران"/>
+                                                                    <input type="hidden" id="placeId">
+                                                                </span>
+                                                        <div id="resultPhone" class="data_holder"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="prw_rup prw_common_form_submit ui_column submit_wrap" style="width: 30%;border-radius: 25px 0 0 25px;margin: 0 !important;">
+                                                    <button onclick="redirect()" class="form_submit" style="font-size: 35px; line-height: 64px">
+                                                        <span class="ui_icon search submit_icon"></span>
+                                                        <span class="submit_text">جستجو</span>
+                                                    </button>
+                                                    <span class="ui_loader dark fill"></span>
+                                                </div>
+                                            </div>
+                                        @elseif($placeMode == "tour")
                                             <div class="trip_search rounded_lockup usePickerTypeIcons hideOnScreen" style="width: 60%;position: absolute;top: 44%;left: 50%;transform: translate(-50%, -50%);z-index: 10000000;">
                                                 <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column" onclick="$('#phoneSearchPopUp').removeClass('hidden')" style="width: 70%; float: right; max-height: 300px; overflow: auto;border-radius: 0 25px 25px 0;">
                                                     <div class="ui_picker" style="padding: 10px !important;">
