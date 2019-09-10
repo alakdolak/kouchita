@@ -333,4 +333,77 @@ class AmakenController extends Controller {
             'sections' => SectionPage::wherePage(getValueInfo('hotel-detail'))->get()));
 
     }
+
+    public function getAmakensMain()
+    {
+
+        $activityId = Activity::whereName('نظر')->first()->id;
+        $kindPlaceId = Place::whereName('اماکن')->first()->id;
+        $place1 = DB::select("select amaken.id, amaken.name, amaken.cityId, amaken.file, amaken.pic_1, COUNT(*) as matches from amaken, log WHERE confirm = 1 and log.activityId = " . $activityId . " and log.placeId = amaken.id and log.kindPlaceId = " . $kindPlaceId . " GROUP BY(log.placeId) ORDER by matches limit 0, 4");
+
+        $reminder = 4 - count($place1);
+        $z = "(";
+        $first = true;
+
+        foreach ($place1 as $itr) {
+            if ($first)
+                $first = false;
+            else
+                $z .= ',';
+
+            $z .= $itr->id;
+        }
+
+        $z .= ')';
+
+        if (!$first)
+            $place1 = array_merge($place1, DB::select('select id, name, cityId, file, pic_1, 0 as matches from 
+              amaken WHERE id not in ' . $z . 'limit 0, ' . $reminder));
+        else
+            $place1 = array_merge($place1, DB::select('select id, name, cityId, file, pic_1, 0 as matches from 
+              amaken limit 0, ' . $reminder));
+
+        foreach ($place1 as $itr) {
+            if (file_exists((__DIR__ . '/../../../../assets/_images/amaken/' . $itr->file . '/f-1.jpg')))
+                $itr->pic = URL::asset('_images/amaken/' . $itr->file . '/f-1.jpg');
+            else
+                $itr->pic = URL::asset('_images/nopic/blank.jpg');
+
+            $itr->reviews = $itr->matches;
+            $itr->rate = getRate($itr->id, $kindPlaceId)[1];
+            $itr->url = route('amakenDetails', ['placeId' => $itr->id, 'placeName' => $itr->name]);
+            $itr->kindPlaceId = $kindPlaceId;
+        }
+
+        foreach ($place1 as $itr) {
+
+            if ($itr == null) {
+                $itr = null;
+                continue;
+            }
+
+            $itr->present = true;
+
+            if ($itr->kindPlaceId != 8) {
+                $city = Cities::whereId($itr->cityId);
+                if ($city == null) {
+                    $itr->present = false;
+                    continue;
+
+                }
+
+                $itr->city = $city->name;
+                $itr->state = State::whereId($city->stateId)->name;
+            } else {
+                $city = State::whereId($itr->stateId);
+                if ($city == null) {
+                    $itr = null;
+                    continue;
+                }
+                $itr->state = $itr->city = $city->name;
+            }
+        }
+
+        echo json_encode($place1);
+    }
 }
