@@ -25,7 +25,6 @@
         var placeModes = [];
         var getQuestions = '{{route('getQuestions')}}';
         var showAllAnsDir = '{{route('showAllAns')}}';
-        var homePath = '{{route('home')}}';
         var getPlaceStyles = '{{route('getPlaceStyles')}}';
         var getSrcCities = '{{route('getSrcCities')}}';
         var getTags = '{{route('getTags')}}';

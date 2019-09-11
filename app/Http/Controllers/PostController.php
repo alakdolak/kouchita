@@ -16,6 +16,62 @@ use Illuminate\Support\Facades\View;
 
 class PostController extends Controller {
 
+    public function gardeshname($page = 1) {
+
+        $today = getToday()["date"];
+
+        $posts = \DB::table('post')->join('favoritePost', 'postId', 'post.id')->where('date', '<=', $today)->select('creator', 'post.id', 'post.categoryColor', 'post.backColor', 'post.color', 'post.title', 'post.seen', 'post.created_at', 'post.pic', 'post.alt', 'post.category')->take(5)->get();
+
+        foreach ($posts as $post) {
+            $post->pic = \URL::asset('posts/' . $post->pic);
+            $post->date = convertDate($post->created_at);
+            $post->category = getPostTranslated($post->category);
+            $post->msgs = PostComment::wherePostId($post->id)->whereStatus(true)->count();
+            $post->username = User::whereId($post->creator)->username;
+        }
+
+        $bannerPosts = DB::table('post')->join('bannerPosts', 'postId', 'post.id')->where('date', '<=', $today)->select('creator', 'post.id', 'post.categoryColor', 'post.backColor', 'post.color', 'post.title', 'post.seen', 'post.created_at', 'post.pic', 'post.alt', 'post.category')->take(5)->get();
+
+        foreach ($bannerPosts as $post) {
+            $post->pic = URL::asset('posts/' . $post->pic);
+            $post->date = convertDate($post->created_at);
+            $post->category = getPostTranslated($post->category);
+            $post->msgs = PostComment::wherePostId($post->id)->whereStatus(true)->count();
+            $post->username = User::whereId($post->creator)->username;
+        }
+
+        $recentlyPosts = Post::join('users', 'users.id', 'post.creator')->where('date', '<=', $today)->select('username', 'post.id', 'categoryColor', 'backColor', 'color', 'title', 'seen', 'post.created_at', 'pic', 'alt', 'category')->orderBy('created_at', 'DESC')->take(5)->get();
+
+        foreach ($recentlyPosts as $post) {
+            $post->pic = URL::asset('posts/' . $post->pic);
+            $post->date = convertDate($post->created_at);
+            $post->category = getPostTranslated($post->category);
+            $post->msgs = PostComment::wherePostId($post->id)->whereStatus(true)->count();
+        }
+
+        $mostSeenPosts = Post::join('users', 'users.id', 'post.creator')->where('date', '<=', $today)->select('username', 'post.id', 'categoryColor', 'backColor', 'color', 'title', 'seen', 'post.created_at', 'pic', 'alt', 'category')->orderBy('seen', 'DESC')->take(5)->get();
+
+        foreach ($mostSeenPosts as $post) {
+            $post->pic = URL::asset('posts/' . $post->pic);
+            $post->date = convertDate($post->created_at);
+            $post->category = getPostTranslated($post->category);
+            $post->msgs = PostComment::wherePostId($post->id)->whereStatus(true)->count();
+        }
+
+        $skip = ($page - 1) * 5;
+        $allPosts = Post::join('users', 'users.id', 'post.creator')->where('date', '<=', $today)->select('username', 'post.id', 'categoryColor', 'backColor', 'color', 'title', 'seen', 'description', 'post.created_at', 'pic', 'alt', 'category')->orderBy('created_at', 'DESC')->skip($skip)->take(5)->get();
+
+        foreach ($allPosts as $post) {
+            $post->pic = URL::asset('posts/' . $post->pic);
+            $post->date = convertDate($post->created_at);
+            $post->category = getPostTranslated($post->category);
+            $post->msgs = PostComment::wherePostId($post->id)->whereStatus(true)->count();
+        }
+
+        return view('gardeshname2', ['favoritePosts' => $posts, 'bannerPosts' => $bannerPosts, 'recentlyPosts' => $recentlyPosts,
+            'mostSeenPosts' => $mostSeenPosts, 'allPosts' => $allPosts, 'page' => $page, 'pageLimit' => ceil(Post::where('date', '<=', $today)->count() / 5)]);
+    }
+    
     public function gardeshnameInner($postId) {
 
         include_once __DIR__ . '/Common.php';
@@ -109,6 +165,16 @@ class PostController extends Controller {
 
         return view('gardeshnameInner', ['post' => $post, 'tags' => $tags, 'author' => $aboutMe,
             'creatorPhoto' => $creatorPhoto]);
+    }
+
+    public function specificPost($id) {
+
+        $post = \App\models\Post::whereId($id);
+
+        if($post == null)
+            return \Redirect::route('home');
+
+        return view('specificPost', ['post' => $post]);
     }
 
     public function sendPostComment() {

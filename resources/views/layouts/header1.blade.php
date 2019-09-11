@@ -40,33 +40,7 @@
                             <div id="taplc_global_nav_links_0" class="ppr_rup ppr_priv_global_nav_links" data-placement-name="global_nav_links">
                                 <div class="global-nav-links-container">
                                     <ul class="global-nav-links-menu" style="margin-top: 7px;">
-<<<<<<< HEAD
-                                        {{--@if($placeMode == "hotel")--}}
-                                            {{--<li><a style="color: #963019 !important;" href="{{route('main')}}" id="global-nav-hotels" class="unscoped global-nav-link ui_tab " data-tracking-label="hotels">هتل</a></li>--}}
-                                        {{--@else--}}
-                                            {{--<li><a href="{{route('main')}}" id="global-nav-hotels" class="unscoped global-nav-link ui_tab " data-tracking-label="hotels">هتل</a></li>--}}
-                                        {{--@endif--}}
-                                        {{--@if($placeMode == "restaurant")--}}
-                                            {{--<li><a style="color: #963019 !important;" href="{{route('mainMode', ['mode' => 'restaurant'])}}" id="global-nav-vr" class="unscoped global-nav-link ui_tab">رستوران ها</a></li>--}}
-                                        {{--@else--}}
-                                            {{--<li><a href="{{route('mainMode', ['mode' => 'restaurant'])}}" id="global-nav-vr" class="unscoped global-nav-link ui_tab">رستوران ها</a></li>--}}
-                                        {{--@endif--}}
-                                        {{--@if($placeMode == "amaken")--}}
-                                            {{--<li><a style="color: #963019 !important;" href="{{route('mainMode', ['mode' => 'amaken'])}}" id="global-nav-restaurants" class="unscoped global-nav-link ui_tab">جاذبه ها</a></li>--}}
-                                        {{--@else--}}
-                                            {{--<li><a href="{{route('mainMode', ['mode' => 'amaken'])}}" id="global-nav-restaurants" class="unscoped global-nav-link ui_tab">جاذبه ها</a></li>--}}
-                                        {{--@endif--}}
-                                        {{--@if($placeMode == "ticket")--}}
-                                            {{--<li><a style="color: #963019 !important;" href="{{route('tickets')}}" class="unscoped global-nav-link ui_tab ">بلیط</a></li>--}}
-                                        {{--@else--}}
-                                            {{--<li><a href="{{route('tickets')}}" class="unscoped global-nav-link ui_tab ">بلیط</a></li>--}}
-                                        {{--@endif--}}
-                                        {{--@if($placeMode == "tour")--}}
-                                            {{--<li><a style="color: #963019 !important;" href="{{route('mainMode', ['mode' => 'tour'])}}" id="global-nav-hotels" class="unscoped global-nav-link ui_tab " data-tracking-label="hotels">تور</a></li>--}}
-                                        {{--@else--}}
-                                            {{--<li><a href="{{route('mainMode', ['mode' => 'tour'])}}" id="global-nav-hotels" class="unscoped global-nav-link ui_tab " data-tracking-label="hotels">تور</a></li>--}}
-                                        {{--@endif--}}
-=======
+
                                         @if($placeMode == "hotel")
                                             <li><a style="color: #963019 !important;" href="{{route('main')}}" id="global-nav-hotels" class="unscoped global-nav-link ui_tab " data-tracking-label="hotels">هتل</a></li>
                                         @else
@@ -87,7 +61,11 @@
                                         @else
                                             <li><a href="{{route('tickets')}}" class="unscoped global-nav-link ui_tab ">بلیط</a></li>
                                         @endif
->>>>>>> 7cbfd2e57ae6406017b4c8ad2b228a5b32355d83
+                                        @if($placeMode == "tour")
+                                            <li><a style="color: #963019 !important;" href="{{route('mainMode', ['mode' => 'tour'])}}" id="global-nav-hotels" class="unscoped global-nav-link ui_tab " data-tracking-label="hotels">تور</a></li>
+                                        @else
+                                            <li><a href="{{route('mainMode', ['mode' => 'tour'])}}" id="global-nav-hotels" class="unscoped global-nav-link ui_tab " data-tracking-label="hotels">تور</a></li>
+                                        @endif
                                         <li class="" data-element=".masthead-dropdown-Flights"><a href="{{route('soon')}}" class="unscoped global-nav-link ui_tab " data-tracking-label="Flights">جشنواره ها</a></li>
                                         <li class="" data-element=".masthead-dropdown-Flights"><a href="{{route('soon')}}" class="unscoped global-nav-link ui_tab " data-tracking-label="Flights"> آداب و رسوم</a></li>
 

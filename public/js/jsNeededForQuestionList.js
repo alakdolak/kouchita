@@ -67,7 +67,7 @@ function showDetails(username) {
             newElement += "<div class='innerContent'>";
             newElement += "<div class='memberOverlayRedesign g10n'>";
             newElement += "<a href='#'>";
-            newElement += "<h3 onclick='document.location.href = \"" + homePath + "/otherProfile/" + username + "\"' class='username reviewsEnhancements'>" + username + "</h3>";
+            newElement += "<h3 onclick='document.location.href = \"" + homeURL + "/otherProfile/" + username + "\"' class='username reviewsEnhancements'>" + username + "</h3>";
             newElement += "</a>";
             newElement += "<div class='memberreviewbadge'>";
             newElement += "<div class='badgeinfo'>";
@@ -154,7 +154,7 @@ function showDetails(username) {
 function likeAns(logId) {
 
     if(!hasLogin) {
-        url = homePath + "/seeAllAns/" + questionId + "/like/" + logId;
+        url = homeURL + "/seeAllAns/" + questionId + "/like/" + logId;
         showLoginPrompt(url);
         return;
     }
@@ -184,7 +184,7 @@ function likeAns(logId) {
 function dislikeAns(logId) {
 
     if(!hasLogin) {
-        url = homePath + "/seeAllAns/" + questionId + "/dislike/" + logId;
+        url = homeURL + "/seeAllAns/" + questionId + "/dislike/" + logId;
         showLoginPrompt(url);
         return;
     }
@@ -229,7 +229,7 @@ function sendAns(logId) {
         return;
 
     if(!hasLogin) {
-        url = homePath + "/seeAllAns/" + questionId + "/sendAns/" + $("#ansText").val();
+        url = homeURL + "/seeAllAns/" + questionId + "/sendAns/" + $("#ansText").val();
         showLoginPrompt(url);
         return;
     }
@@ -257,7 +257,7 @@ function sendAns2(logId, ans) {
         return;
 
     if(!hasLogin) {
-        url = homePath + "/seeAllAns/" + questionId + "/sendAns/" + ans;
+        url = homeURL + "/seeAllAns/" + questionId + "/sendAns/" + ans;
         showLoginPrompt(url);
         return;
     }
@@ -273,7 +273,7 @@ function sendAns2(logId, ans) {
             if(response == "ok")
                 document.location.href = questionList;
             else if(response == "nok") {
-                document.location.href = homePath + "/seeAllAns/" + questionId + "/err";
+                document.location.href = homeURL + "/seeAllAns/" + questionId + "/err";
             }
         }
     });
@@ -365,7 +365,7 @@ function sendReport() {
         return;
 
     if(!hasLogin) {
-        url = homePath + "/seeAllAns/" + questionId + "/report/" + selectedLogId;
+        url = homeURL + "/seeAllAns/" + questionId + "/report/" + selectedLogId;
         showLoginPrompt(url);
         return;
     }
@@ -399,7 +399,7 @@ function closeReportPrompt() {
 function showReportPrompt(logId) {
 
     if(!hasLogin) {
-        url = homePath + "/seeAllAns/" + questionId + "/report/" + logId;
+        url = homeURL + "/seeAllAns/" + questionId + "/report/" + logId;
         showLoginPrompt(url);
         return;
     }

@@ -886,7 +886,6 @@
         var getReportsDir = '{{route('getReports')}}';
         var sendReportDir = '{{route('sendReport2')}}';
         var getPhotoFilter = '{{route('getPhotoFilter')}}';
-        var homePath = '{{route('home')}}';
         var getPhotosDir = '{{route('getPhotos')}}';
         var showUserBriefDetail = '{{route('showUserBriefDetail')}}';
         var hotelDetailsInAddPhotoMode = '{{route('adabDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'addPhoto'])}}';
@@ -1112,7 +1111,7 @@
                                 break;
                         }
                         newElement += "<span class='ratingDate relativeDate' style='float: right;'>نوشته شده در تاریخ " + arr[i].date + " </span></div>";
-                        newElement += "<div class='quote isNew'><a href='" + homePath + "/showReview/" + arr[i].id + "'><h2 style='font-size: 1em;' class='noQuotes'>" + arr[i].subject + "</h2></a></div>";
+                        newElement += "<div class='quote isNew'><a href='" + homeURL + "/showReview/" + arr[i].id + "'><h2 style='font-size: 1em;' class='noQuotes'>" + arr[i].subject + "</h2></a></div>";
                         newElement += "<div class='prw_rup prw_reviews_text_summary_hsx'>";
                         newElement += "<div class='entry'>";
                         newElement += "<p class='partial_entry' id='partial_entry_" + arr[i].id + "' style='line-height: 20px; max-height: 70px; overflow: hidden; padding: 10px; font-size: 12px'>" + arr[i].text;
@@ -1396,7 +1395,7 @@
                 newElement += "</span></div>";
                 newElement += "<div class='username'>" + arr[i].visitorId + "</div>";
                 newElement += "</div></div>";
-                newElement += "<div class='ui_column is-8' style='position: relative'><a href='" + homePath + "/seeAllAns/" + arr[i].id + "'>" + arr[i].text + "</a>";
+                newElement += "<div class='ui_column is-8' style='position: relative'><a href='" + homeURL + "/seeAllAns/" + arr[i].id + "'>" + arr[i].text + "</a>";
                 newElement += "<div class='question_date'>" + arr[i].date + "<span class='iapSep'>|</span><span style='cursor: pointer;font-size:10px;' onclick='showReportPrompt(\"" + arr[i].id + "\")' class='ui_icon'>گزارش تخلف</span></div>";
                 if(i == 0) {
                     newElement += "<div id='targetHelp_15' style='max-width: 100px; margin: 0 !important; float: right;' class='targets row'><span class='col-xs-12 ui_button primary small answerButton' onclick='showAnsPane(\"" + arr[i].id + "\")'>پاسخ ";
@@ -1564,7 +1563,7 @@
                 return;
 
             if(!hasLogin) {
-                url = homePath + "/seeAllAns/" + questionId + "/report/" + selectedLogId;
+                url = homeURL + "/seeAllAns/" + questionId + "/report/" + selectedLogId;
                 showLoginPrompt(url);
                 return;
             }
@@ -1598,7 +1597,7 @@
         function showReportPrompt(logId) {
 
             if(!hasLogin) {
-                url = homePath + "/seeAllAns/" + questionId + "/report/" + logId;
+                url = homeURL + "/seeAllAns/" + questionId + "/report/" + logId;
                 showLoginPrompt(url);
                 return;
             }
@@ -2179,7 +2178,7 @@
                     newElement += "<div class='memberOverlay simple container moRedesign'>";
                     newElement += "<div class='innerContent'>";
                     newElement += "<div class='memberOverlayRedesign g10n'>";
-                    newElement += "<a href='" + homePath + "/otherProfile/" + username + "'>";
+                    newElement += "<a href='" + homeURL + "/otherProfile/" + username + "'>";
                     newElement += "<h3 class='username reviewsEnhancements'>" + username + "</h3>";
                     newElement += "</a>";
                     newElement += "<div class='memberreviewbadge'>";
