@@ -3197,6 +3197,6 @@ class PlaceController extends Controller {
     public function video360()
     {
         $videoSrc = '_images/movie.mp4';
-        return view('video360', array('videoSrc' => $videoSrc));
+        return view('video3602', array('videoSrc' => $videoSrc));
     }
 }
