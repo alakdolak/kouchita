@@ -74,34 +74,6 @@
                                 <div class="global-nav-links-container">
                                     <ul class="global-nav-links-menu" style="margin-top: 7px;">
 
-<<<<<<< HEAD
-                                        {{--@if($placeMode == "hotel")--}}
-                                            {{--<li><a href="{{route('hotelList', ['city' => $state, 'mode' => 'state'])}}" style="color: #963019 !important;" id="global-nav-hotels" class="unscoped global-nav-link ui_tab " data-tracking-label="hotels">هتل</a></li>--}}
-                                        {{--@elseif($placeMode != "policies")--}}
-                                            {{--<li><a href="{{route('hotelList', ['city' => $state, 'mode' => 'state'])}}" id="global-nav-hotels" class="unscoped global-nav-link ui_tab " data-tracking-label="hotels">هتل</a></li>--}}
-                                        {{--@else--}}
-                                            {{--<li><a href="{{route('mainMode', ['mode' => 'hotel'])}}" id="global-nav-hotels" class="unscoped global-nav-link ui_tab " data-tracking-label="hotels">هتل</a></li>--}}
-                                        {{--@endif--}}
-                                        {{--@if($placeMode == "restaurant")--}}
-                                            {{--<li><a href="{{route('restaurantList', ['city' => $state, 'mode' => 'state'])}}" style="color: #963019 !important;" id="global-nav-restaurants" class="unscoped global-nav-link ui_tab">رستوران ها</a></li>--}}
-                                        {{--@elseif($placeMode != "policies")--}}
-                                            {{--<li><a href="{{route('restaurantList', ['city' => $state, 'mode' => 'state'])}}" id="global-nav-restaurants" class="unscoped global-nav-link ui_tab">رستوران ها</a></li>--}}
-                                        {{--@else--}}
-                                            {{--<li><a href="{{route('mainMode', ['mode' => 'restaurant'])}}" id="global-nav-hotels" class="unscoped global-nav-link ui_tab " data-tracking-label="hotels">رستوران ها</a></li>--}}
-                                        {{--@endif--}}
-                                        {{--@if($placeMode == "amaken")--}}
-                                            {{--<li><a href="{{route('amakenList', ['city' => $state, 'mode' => 'state'])}}" style="color: #963019 !important;" id="global-nav-amaken" class="unscoped global-nav-link ui_tab">جاذبه ها</a></li>--}}
-                                        {{--@elseif($placeMode != "policies")--}}
-                                            {{--<li><a href="{{route('amakenList', ['city' => $state, 'mode' => 'state'])}}" id="global-nav-amaken" class="unscoped global-nav-link ui_tab">جاذبه ها</a></li>--}}
-                                        {{--@else--}}
-                                            {{--<li><a href="{{route('mainMode', ['mode' => 'amaken'])}}" id="global-nav-hotels" class="unscoped global-nav-link ui_tab " data-tracking-label="hotels">جاذبه ها</a></li>--}}
-                                        {{--@endif--}}
-                                        {{--@if($placeMode == "ticket")--}}
-                                            {{--<li><a style="color: #963019 !important;" href="{{route('tickets')}}" class="unscoped global-nav-link ui_tab ">بلیط</a></li>--}}
-                                        {{--@else--}}
-                                            {{--<li><a href="{{route('tickets')}}" class="unscoped global-nav-link ui_tab ">بلیط</a></li>--}}
-                                        {{--@endif--}}
-=======
                                         @if($placeMode == "hotel")
                                             <li><a href="{{route('hotelList', ['city' => $state, 'mode' => 'state'])}}" style="color: #963019 !important;" id="global-nav-hotels" class="unscoped global-nav-link ui_tab " data-tracking-label="hotels">هتل</a></li>
                                         @elseif($placeMode != "policies")
@@ -128,7 +100,6 @@
                                         @else
                                             <li><a href="{{route('tickets')}}" class="unscoped global-nav-link ui_tab ">بلیط</a></li>
                                         @endif
->>>>>>> 7cbfd2e57ae6406017b4c8ad2b228a5b32355d83
                                         <li class="" data-element=".masthead-dropdown-Flights"><a href="{{route('soon')}}" class="unscoped global-nav-link ui_tab " data-tracking-label="Flights">جشنواره ها</a></li>
                                         <li class="" data-element=".masthead-dropdown-Flights"><a href="" class="unscoped global-nav-link ui_tab " data-tracking-label="Flights"> آداب و رسوم</a></li>
 
