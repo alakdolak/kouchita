@@ -43,7 +43,7 @@
         </div>
 
         <div class="page" ng-app="mainApp">
-            <div class="ppr_rup ppr_priv_homepage_hero">
+            <div class="ppr_rup ppr_priv_homepage_hero ">
                 <div id="homeHero-id" class="homeHero default_home">
                     <div class="ui_container container" id="mainDivContainerMainPage">
                         <div class="placement_wrap">
@@ -162,7 +162,7 @@
                                             </div>
                                         @endif
                                     </div>
-                                    <div class="ppr_rup ppr_priv_trip_search phoneBanner hideOnScreen">
+                                    <div class="ppr_rup ppr_priv_trip_search phoneBanner hideOnScreen mainDivSearchInputPhonePage">
                                         @if($placeMode == "hotel")
                                             <div class="ui_columns trip_search rounded_lockup usePickerTypeIcons mainDivSearchInputPhonePage">
                                                 <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column search_typeahead wctx-tripsearch searchDivForScroll_phone">
@@ -205,7 +205,7 @@
                                                     {{--</div>--}}
                                                 {{--</div>--}}
                                                 <div class="prw_rup prw_common_form_submit ui_column submit_wrap searchDivForScroll-phoneButton">
-                                                    <button onclick="redirect()" class="autoResize form_submit" style="font-size: 30px; line-height: 54px;">
+                                                    <button onclick="redirect()" class="autoResize form_submit">
                                                         <span class="ui_icon search submit_icon"></span>
                                                         <span onclick="window.location = '{{route('main', ['mode' => 'hotel'])}}'" class="submit_text">جستجو هتل</span>
                                                     </button>
@@ -213,18 +213,18 @@
                                                 </div>
                                             </div>
                                         @elseif($placeMode == "restaurant")
-                                            <div class="trip_search rounded_lockup usePickerTypeIcons hideOnScreen" style="width: 60%;position: absolute;top: 44%;left: 50%;transform: translate(-50%, -50%);z-index: 10000000;">
-                                                <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column" onclick="$('#phoneSearchPopUp').removeClass('hidden')" style="width: 70%; float: right; max-height: 300px; overflow: auto;border-radius: 0 25px 25px 0;">
-                                                    <div class="ui_picker" style="padding: 10px !important;">
+                                            <div class="trip_search rounded_lockup usePickerTypeIcons hideOnScreen">
+                                                <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column" onclick="$('#phoneSearchPopUp').removeClass('hidden')">
+                                                    <div class="ui_picker">
                                                                 <span class="typeahead_align ui_typeahead">
-                                                                    <input onkeyup="search(event)" type="text" id="placeName" class="typeahead_input" style="width: 100%;font-size: 35px; line-height: 50px !important; float:right; border: none; margin-right: 5px" placeholder="شهر یا نام رستوران"/>
+                                                                    <input onkeyup="search(event)" type="text" id="placeName" class="typeahead_input" placeholder="شهر یا نام رستوران"/>
                                                                     <input type="hidden" id="placeId">
                                                                 </span>
                                                         <div id="resultPhone" class="data_holder"></div>
                                                     </div>
                                                 </div>
-                                                <div class="prw_rup prw_common_form_submit ui_column submit_wrap" style="width: 30%;border-radius: 25px 0 0 25px;margin: 0 !important;">
-                                                    <button onclick="redirect()" class="form_submit" style="font-size: 35px; line-height: 64px">
+                                                <div class="prw_rup prw_common_form_submit ui_column submit_wrap">
+                                                    <button onclick="redirect()" class="form_submit">
                                                         <span class="ui_icon search submit_icon"></span>
                                                         <span class="submit_text">جستجو</span>
                                                     </button>
@@ -232,18 +232,18 @@
                                                 </div>
                                             </div>
                                         @elseif($placeMode == "tour")
-                                            <div class="trip_search rounded_lockup usePickerTypeIcons hideOnScreen" style="width: 60%;position: absolute;top: 44%;left: 50%;transform: translate(-50%, -50%);z-index: 10000000;">
-                                                <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column" onclick="$('#phoneSearchPopUp').removeClass('hidden')" style="width: 70%; float: right; max-height: 300px; overflow: auto;border-radius: 0 25px 25px 0;">
+                                            <div class="trip_search rounded_lockup usePickerTypeIcons hideOnScreen">
+                                                <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column" onclick="$('#phoneSearchPopUp').removeClass('hidden')">
                                                     <div class="ui_picker" style="padding: 10px !important;">
                                                                 <span class="typeahead_align ui_typeahead">
-                                                                    <input onkeyup="search(event)" type="text" id="placeName" class="typeahead_input" style="width: 100%;font-size: 35px; line-height: 50px !important; float:right; border: none; margin-right: 5px" placeholder="شهر یا نام رستوران"/>
+                                                                    <input onkeyup="search(event)" type="text" id="placeName" class="typeahead_input" placeholder="شهر یا نام رستوران"/>
                                                                     <input type="hidden" id="placeId">
                                                                 </span>
                                                         <div id="resultPhone" class="data_holder"></div>
                                                     </div>
                                                 </div>
-                                                <div class="prw_rup prw_common_form_submit ui_column submit_wrap" style="width: 30%;border-radius: 25px 0 0 25px;margin: 0 !important;">
-                                                    <button onclick="redirect()" class="form_submit" style="font-size: 35px; line-height: 64px">
+                                                <div class="prw_rup prw_common_form_submit ui_column submit_wrap">
+                                                    <button onclick="redirect()" class="form_submit">
                                                         <span class="ui_icon search submit_icon"></span>
                                                         <span class="submit_text">جستجو</span>
                                                     </button>
@@ -251,18 +251,18 @@
                                                 </div>
                                             </div>
                                         @else
-                                            <div class="trip_search rounded_lockup usePickerTypeIcons hideOnScreen" style="width: 60%;position: absolute;top: 44%;left: 50%;transform: translate(-50%, -50%);z-index: 10000000;">
-                                                <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column" onclick="$('#phoneSearchPopUp').removeClass('hidden')" style="width: 70%; float: right; max-height: 300px; overflow: auto;border-radius: 0 25px 25px 0;">
-                                                    <div class="ui_picker" style="padding: 10px !important;">
+                                            <div class="trip_search rounded_lockup usePickerTypeIcons hideOnScreen">
+                                                <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column" onclick="$('#phoneSearchPopUp').removeClass('hidden')">
+                                                    <div class="ui_picker" >
                                                                 <span class="typeahead_align ui_typeahead">
-                                                                    <input onkeyup="search(event)" type="text" id="placeName" class="typeahead_input" style="width: 100%;font-size: 35px; line-height: 50px !important; float:right; border: none; margin-right: 5px" placeholder="شهر یا نام مکان موردنظر"/>
+                                                                    <input onkeyup="search(event)" type="text" id="placeName" class="typeahead_input" placeholder="شهر یا نام مکان موردنظر"/>
                                                                     <input type="hidden" id="placeId">
                                                                 </span>
                                                         <div id="resultPhone" class="data_holder"></div>
                                                     </div>
                                                 </div>
-                                                <div class="prw_rup prw_common_form_submit ui_column submit_wrap" style="width: 30%;border-radius: 25px 0 0 25px;margin: 0 !important;">
-                                                    <button onclick="redirect()" class="form_submit" style="font-size: 35px; line-height: 64px">
+                                                <div class="prw_rup prw_common_form_submit ui_column submit_wrap" >
+                                                    <button onclick="redirect()" class="form_submit">
                                                         <span class="ui_icon search submit_icon"></span>
                                                         <span class="submit_text">جستجو</span>
                                                     </button>
@@ -573,8 +573,7 @@
 
         <script async src="{{URL::asset('js/slideBar.js')}}"></script>
 
-        <span id="statePane" class="ui_overlay ui_modal editTags hidden"
-              style="position: fixed; left: 30%; right: 30%; top:19%; bottom: auto;overflow: auto;max-height: 500px;z-index: 10000001;">
+        <span id="statePane1" class="statePane ui_overlay ui_modal editTags hidden pop-up-Panes">
 
             <div class="header_text">استان مورد نظر</div>
             <div class="subheader_text">
@@ -582,21 +581,17 @@
             </div>
             <div class="body_text">
 
-                <select style="margin-top: 25px;" id="states"></select>
+                <select  id="states"></select>
 
-                <div style="margin-top: 25px;" class="submitOptions">
-                    <button onclick="document.location.href = $('#states').val()"
-                            style="color: #FFF;background-color: #4dc7bc;border-color:#4dc7bc;"
-                            class="btn btn-success">تایید</button>
-                    <input type="submit" onclick="$('.dark').hide(); $('#statePane').addClass('hidden')" value="خیر"
-                           class="btn btn-default">
+                <div class="submitOptions">
+                    <button onclick="document.location.href = $('#states').val()" class="btn btn-success">تایید</button>
+                    <input type="submit" onclick="$('.dark').hide(); $('#statePane').addClass('hidden')" value="خیر" class="btn btn-default">
                 </div>
             </div>
             <div onclick="$('#statePane').addClass('hidden'); $('.dark').hide()" class="ui_close_x"></div>
         </span>
 
-        <span id="statePane2" class="ui_overlay ui_modal editTags hidden"
-              style="position: fixed; left: 30%; right: 30%; top:19%; bottom: auto;overflow: auto;max-height: 500px;z-index: 10000001;">
+        <span id="statePane2" class="statePane ui_overlay ui_modal editTags hidden pop-up-Panes">
 
             <div class="header_text">شهر مورد نظر</div>
             <div class="subheader_text">
@@ -604,36 +599,30 @@
             </div>
             <div class="body_text">
 
-                <select style="margin-top: 25px;" onchange="getCities()" id="states2"></select>
+                <select  onchange="getCities()" id="states2"></select>
 
-                <select style="margin-top: 25px;" id="cities"></select>
+                <select  id="cities"></select>
 
-                <div style="margin-top: 25px;" class="submitOptions">
-                    <button onclick="document.location.href = $('#cities').val()"
-                            style="color: #FFF;background-color: #4dc7bc;border-color:#4dc7bc;"
-                            class="btn btn-success">تایید</button>
-                    <input type="submit" onclick="$('.dark').hide(); $('#statePane2').addClass('hidden')" value="خیر"
-                           class="btn btn-default">
+                <div class="submitOptions">
+                    <button onclick="document.location.href = $('#cities').val()" class="btn btn-success">تایید</button>
+                    <input type="submit" onclick="$('.dark').hide(); $('#statePane2').addClass('hidden')" value="خیر" class="btn btn-default">
                 </div>
             </div>
             <div onclick="$('#statePane2').addClass('hidden'); $('.dark').hide()" class="ui_close_x"></div>
         </span>
 
-        <span id="goyeshPane" class="ui_overlay ui_modal editTags hidden" style="position: fixed; left: 30%; right: 30%; top:19%; bottom: auto;overflow: auto;max-height: 500px;z-index: 10000001;">
+        <span id="goyeshPane" class="ui_overlay ui_modal editTags hidden pop-up-Panes">
             <div class="header_text">گویش مورد نظر</div>
             <div class="subheader_text">
            گویش مورد نظر خود را از بین گویش های موجود انتخاب کنید
             </div>
             <div class="body_text">
 
-                <select style="margin-top: 25px;" id="goyesh"></select>
+                <select id="goyesh"></select>
 
-                <div style="margin-top: 25px;" class="submitOptions">
-                    <button onclick="document.location.href = $('#goyesh').val()"
-                            style="color: #FFF;background-color: #4dc7bc;border-color:#4dc7bc;"
-                            class="btn btn-success">تایید</button>
-                    <input type="submit" onclick="$('.dark').hide(); $('#goyeshPane').addClass('hidden')" value="خیر"
-                           class="btn btn-default">
+                <div class="submitOptions">
+                    <button onclick="document.location.href = $('#goyesh').val()" class="btn btn-success">تایید</button>
+                    <input type="submit" onclick="$('.dark').hide(); $('#goyeshPane').addClass('hidden')" value="خیر" class="btn btn-default">
                 </div>
             </div>
             <div onclick="$('#goyeshPane').addClass('hidden'); $('.dark').hide()" class="ui_close_x"></div>
