@@ -45,13 +45,13 @@
         <div class="page" ng-app="mainApp">
             <div class="ppr_rup ppr_priv_homepage_hero">
                 <div id="homeHero-id" class="homeHero default_home">
-                    <div class="ui_container container" style="width: 100%; max-width: 100%; padding: 0;">
+                    <div class="ui_container container" id="mainDivContainerMainPage">
                         <div class="placement_wrap">
                             <div class="placement_wrap_row">
                                 <div class="placement_wrap_cell">
-                                    <div id="sliderBarDIV" class="ppr_rup ppr_priv_trip_search hideOnPhone" style="max-width: 100%; overflow: hidden">
+                                    <div id="sliderBarDIV" class="ppr_rup ppr_priv_trip_search hideOnPhone">
                                         @if($placeMode == "hotel")
-                                            <div class="ui_columns datepicker_box trip_search metaDatePicker rounded_lockup usePickerTypeIcons preDates noDates with_children hideOnPhone" style="position: absolute;right: 6%;top: 20%;width: 68%;z-index: 10000000;">
+                                            <div class="ui_columns datepicker_box trip_search metaDatePicker rounded_lockup usePickerTypeIcons preDates noDates with_children hideOnPhone mainDivSearchInputMainPage">
                                                 <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column is-4 search_typeahead wctx-tripsearch searchDivForScroll">
                                                     <div class="ui_picker">
                                                         <span class="typeahead_align ui_typeahead">
@@ -98,7 +98,7 @@
                                                 <div style="clear: both"></div>
                                             </div>
                                         @elseif($placeMode == "restaurant")
-                                            <div class="ui_columns datepicker_box trip_search metaDatePicker rounded_lockup usePickerTypeIcons preDates noDates with_children hideOnPhone" style="position: absolute;right: 6%;top: 20%;width: 68%;z-index: 10000000;">
+                                            <div class="ui_columns datepicker_box trip_search metaDatePicker rounded_lockup usePickerTypeIcons preDates noDates with_children hideOnPhone mainDivSearchInputMainPage">
                                                 <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column is-4 search_typeahead wctx-tripsearch searchDivForScroll">
                                                     <div class="ui_picker">
                                                                 <span class="typeahead_align ui_typeahead">
@@ -119,7 +119,7 @@
                                                 <div style="clear: both"></div>
                                             </div>
                                         @elseif($placeMode == "tour")
-                                            <div class="ui_columns datepicker_box trip_search metaDatePicker rounded_lockup usePickerTypeIcons preDates noDates with_children hideOnPhone" style="position: absolute;right: 6%;top: 20%;width: 68%;z-index: 10000000;">
+                                            <div class="ui_columns datepicker_box trip_search metaDatePicker rounded_lockup usePickerTypeIcons preDates noDates with_children hideOnPhone mainDivSearchInputMainPage">
                                                 <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column is-4 search_typeahead wctx-tripsearch searchDivForScroll">
                                                     <div class="ui_picker">
                                                                 <span class="typeahead_align ui_typeahead">
@@ -140,7 +140,7 @@
                                                 <div style="clear: both"></div>
                                             </div>
                                         @else
-                                            <div class="ui_columns datepicker_box trip_search metaDatePicker rounded_lockup usePickerTypeIcons preDates noDates with_children hideOnPhone" style="position: absolute;right: 6%;top: 20%;width: 68%;z-index: 10000000;">
+                                            <div class="ui_columns datepicker_box trip_search metaDatePicker rounded_lockup usePickerTypeIcons preDates noDates with_children hideOnPhone mainDivSearchInputMainPage">
                                                 <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column is-4 search_typeahead wctx-tripsearch searchDivForScroll">
                                                     <div class="ui_picker">
                                                                 <span class="typeahead_align ui_typeahead">
@@ -164,11 +164,11 @@
                                     </div>
                                     <div class="ppr_rup ppr_priv_trip_search phoneBanner hideOnScreen">
                                         @if($placeMode == "hotel")
-                                            <div class="ui_columns trip_search rounded_lockup usePickerTypeIcons" style="width: 45%;position: absolute;top: 44%;left: 50%;transform: translate(-50%, -50%);z-index: 10000000;">
+                                            <div class="ui_columns trip_search rounded_lockup usePickerTypeIcons mainDivSearchInputPhonePage">
                                                 <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column search_typeahead wctx-tripsearch searchDivForScroll_phone">
                                                     <div class="ui_picker">
                                                                 <span class="typeahead_align ui_typeahead">
-                                                                    <input onkeyup="search(event)" type="text" id="placeName" class="typeahead_input" style="padding: 8px 10px; font-size: 30px; line-height: 30px;" placeholder="شهر یا نام هتل"/>
+                                                                    <input onkeyup="search(event)" type="text" id="placeName" class="typeahead_input mainSearchInputPhonePage"  placeholder="شهر یا نام هتل"/>
                                                                     <input type="hidden" id="placeId">
                                                                     <span class="ui_icon map-pin-fill pickerType typeahead_icon"></span>
                                                                 </span>
