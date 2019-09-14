@@ -1,27 +1,3 @@
-<style>
-    .bubble_40:after {
-        content: "\e00d\e00b\e00b\e00b\e00b" !important;
-    }
-    .bubble_30:after {
-        content: "\e00d\e00d\e00b\e00b\e00b" !important;
-    }
-    .bubble_20:after {
-        content: "\e00d\e00d\e00d\e00b\e00b" !important;
-    }
-    .bubble_10:after {
-        content: "\e00d\e00d\e00d\e00d\e00b" !important;
-    }
-    .photoviewerSidebarWrapper .captionArea{
-        direction: rtl !important;
-    }
-    .photoviewerSidebarWrapper .location{
-        text-align: center;
-    }
-    .glyphicon {
-        font-family: 'Glyphicons Halflings' !important;
-    }
-</style>
-
 <script>
     var getBookMarksPath = '{{route('getBookMarks')}}';
 </script>
@@ -33,42 +9,66 @@
         <div class="global-nav global-nav-single-line has-links ">
             <div class="global-nav-top">
                 <div class="global-nav-bar global-nav-green">
-                    <div class="ui_container global-nav-bar-container" style="direction: rtl;">
+                    <div class="ui_container global-nav-bar-container rtl" >
                         <div class="global-nav-hamburger is-hidden-tablet"><span class="ui_icon menu-bars"></span></div>
                         <a href="{{route('main')}}" class="global-nav-logo"><img src="{{URL::asset('images/logo.svg')}}" alt="شازده مسافر" class="global-nav-img global-nav-svg"/></a>
                         <div class="global-nav-links ui_tabs inverted is-hidden-mobile">
                             <div id="taplc_global_nav_links_0" class="ppr_rup ppr_priv_global_nav_links" data-placement-name="global_nav_links">
                                 <div class="global-nav-links-container">
-                                    <ul class="global-nav-links-menu" style="margin-top: 7px;">
+                                    <ul class="global-nav-links-menu headerMainList">
 
                                         @if($placeMode == "hotel")
-                                            <li><a style="color: #963019 !important;" href="{{route('main')}}" id="global-nav-hotels" class="unscoped global-nav-link ui_tab " data-tracking-label="hotels">هتل</a></li>
+                                            <li>
+                                                <a href="{{route('main')}}" id="global-nav-hotels" class="unscoped global-nav-link ui_tab redColor " data-tracking-label="hotels">هتل</a>
+                                            </li>
                                         @else
-                                            <li><a href="{{route('main')}}" id="global-nav-hotels" class="unscoped global-nav-link ui_tab " data-tracking-label="hotels">هتل</a></li>
+                                            <li>
+                                                <a href="{{route('main')}}" id="global-nav-hotels" class="unscoped global-nav-link ui_tab " data-tracking-label="hotels">هتل</a>
+                                            </li>
                                         @endif
                                         @if($placeMode == "restaurant")
-                                            <li><a style="color: #963019 !important;" href="{{route('mainMode', ['mode' => 'restaurant'])}}" id="global-nav-vr" class="unscoped global-nav-link ui_tab">رستوران ها</a></li>
+                                            <li>
+                                                <a href="{{route('mainMode', ['mode' => 'restaurant'])}}" id="global-nav-vr" class="unscoped global-nav-link ui_tab redColor">رستوران ها</a>
+                                            </li>
                                         @else
-                                            <li><a href="{{route('mainMode', ['mode' => 'restaurant'])}}" id="global-nav-vr" class="unscoped global-nav-link ui_tab">رستوران ها</a></li>
+                                            <li>
+                                                <a href="{{route('mainMode', ['mode' => 'restaurant'])}}" id="global-nav-vr" class="unscoped global-nav-link ui_tab">رستوران ها</a>
+                                            </li>
                                         @endif
                                         @if($placeMode == "amaken")
-                                            <li><a style="color: #963019 !important;" href="{{route('mainMode', ['mode' => 'amaken'])}}" id="global-nav-restaurants" class="unscoped global-nav-link ui_tab">جاذبه ها</a></li>
+                                            <li>
+                                                <a href="{{route('mainMode', ['mode' => 'amaken'])}}" id="global-nav-restaurants" class="unscoped global-nav-link ui_tab redColor">جاذبه ها</a>
+                                            </li>
                                         @else
-                                            <li><a href="{{route('mainMode', ['mode' => 'amaken'])}}" id="global-nav-restaurants" class="unscoped global-nav-link ui_tab">جاذبه ها</a></li>
+                                            <li>
+                                                <a href="{{route('mainMode', ['mode' => 'amaken'])}}" id="global-nav-restaurants" class="unscoped global-nav-link ui_tab">جاذبه ها</a>
+                                            </li>
                                         @endif
                                         @if($placeMode == "ticket")
-                                            <li><a style="color: #963019 !important;" href="{{route('tickets')}}" class="unscoped global-nav-link ui_tab ">بلیط</a></li>
+                                            <li>
+                                                <a href="{{route('tickets')}}" class="unscoped global-nav-link ui_tab redColor ">بلیط</a>
+                                            </li>
                                         @else
-                                            <li><a href="{{route('tickets')}}" class="unscoped global-nav-link ui_tab ">بلیط</a></li>
+                                            <li>
+                                                <a href="{{route('tickets')}}" class="unscoped global-nav-link ui_tab ">بلیط</a>
+                                            </li>
                                         @endif
-
-                                        <li class="" data-element=".masthead-dropdown-Flights"><a href="{{route('soon')}}" class="unscoped global-nav-link ui_tab " data-tracking-label="Flights">جشنواره ها</a></li>
                                         @if($placeMode == "tour")
-                                            <li><a style="color: #963019 !important;" href="{{route('mainMode', ['mode' => 'tour'])}}" id="global-nav-hotels" class="unscoped global-nav-link ui_tab " data-tracking-label="hotels">تور</a></li>
+                                            <li>
+                                                <a href="{{route('mainMode', ['mode' => 'tour'])}}" id="global-nav-tours" class="unscoped global-nav-link ui_tab redColor " data-tracking-label="hotels">تور</a>
+                                            </li>
                                         @else
-                                            <li><a href="{{route('mainMode', ['mode' => 'tour'])}}" id="global-nav-hotels" class="unscoped global-nav-link ui_tab " data-tracking-label="hotels">تور</a></li>
+                                            <li>
+                                                <a href="{{route('mainMode', ['mode' => 'tour'])}}" id="global-nav-tours" class="unscoped global-nav-link ui_tab " data-tracking-label="hotels">تور</a>
+                                            </li>
                                         @endif
-                                        <li class="" data-element=".masthead-dropdown-Flights"><a href="{{route('soon')}}" class="unscoped global-nav-link ui_tab " data-tracking-label="Flights"> آداب و رسوم</a></li>
+                                        <li class="" data-element=".masthead-dropdown-Flights">
+                                            <a href="{{route('soon')}}" class="unscoped global-nav-link ui_tab " data-tracking-label="Flights">جشنواره ها</a>
+                                        </li>
+
+                                        <li class="" data-element=".masthead-dropdown-Flights">
+                                            <a href="{{route('soon')}}" class="unscoped global-nav-link ui_tab " data-tracking-label="Flights"> آداب و رسوم</a>
+                                        </li>
 
                                     </ul>
 
@@ -76,11 +76,11 @@
                             </div>
                         </div>
 
-                        <div class="global-nav-actions" style="display: flex">
+                        <div class="global-nav-actions flex" >
                             @if(Auth::check())
 
                                 <div class="ppr_rup ppr_priv_global_nav_action_trips">
-                                    <div style="cursor: pointer" id="bookmarkicon" class="ppr_rup ppr_priv_global_nav_action_profile">
+                                    <div id="bookmarkicon" class="ppr_rup ppr_priv_global_nav_action_profile">
                                         <span class="ui_icon casino"></span>
                                     </div>
                                 </div>
@@ -165,7 +165,7 @@
                                             for(i = 0; i < response.length; i++) {
 
                                                 if(response[i].url != -1)
-                                                    newElement += '<div style="min-height: 60px"><div class="modules-engagement-notification-dropdown"><div style="float: right; margin: 10px; padding-top: 0; height: 50px; margin-top: 0; width: 50px; z-index: 10000000000001 !important;"><img onclick="document.location.href = \'' + response[i].url + '\'" style="margin-top: -10px; cursor: pointer" width="50px" height="50px" src="' + response[i].pic + '"></div><div style="margin-right: 70px" class="notifdd_empty"><span>' + response[i].customText + '</span></div></div></div>';
+                                                    newElement += '<div id="notificationBox"><div class="modules-engagement-notification-dropdown"><div><img onclick="document.location.href = \'' + response[i].url + '\'" width="50px" height="50px" src="' + response[i].pic + '"></div><div class="notifdd_empty"><span>' + response[i].customText + '</span></div></div></div>';
                                                 else
                                                     newElement += '<div onclick="document.location.href = \'{{route('msgs')}}\'" style="cursor: pointer; min-height: 60px"><div class="modules-engagement-notification-dropdown"><div style="float: right; margin: 10px; padding-top: 0; height: 50px; margin-top: 0; width: 50px; z-index: 10000000000001 !important;"></div><div style="margin-right: 70px" class="notifdd_empty"><span>' + response[i].customText + '</span></div></div></div>';
                                             }
@@ -187,90 +187,25 @@
                                 </script>
                             @endif
 
-                            <style>
-
-                                    .ui_jewel.marked_for_attention:before {
-                                        display: block;
-                                        position: absolute;
-                                        top: -1.05em;
-                                        left: .025em;
-                                        width: 100%;
-                                        height: 100%;
-                                        font-size: 2em;
-                                        line-height: 1;
-                                        font-family: sans-serif;
-                                        color: #fff;
-                                        content: '\00b7';
-                                    }
-                                    DIV.ppr_rup.ppr_priv_global_nav_action_inbox .ui_jewel {
-                                        height: 16px;
-                                        left: 15px;
-                                        cursor: pointer;
-                                    }
-                                    .ui_jewel.marked_for_attention {
-                                        min-height: 16px;
-                                        position: absolute;
-                                        z-index: 1;
-                                        top: 6px;
-                                        right: auto;
-                                        bottom: auto;
-                                        left: 12px;
-                                    }
-                                    .ui_jewel {
-                                        display: inline-block;
-                                        min-width: 16px;
-                                        padding: 3px 5px;
-                                        border-radius: 100%;
-                                        box-sizing: border-box;
-                                        background-color: #EF6945;
-                                        font-weight: bold;
-                                        font-size: 10px;
-                                        line-height: 1;
-                                        color: #fff;
-                                        text-align: center;
-                                        vertical-align: middle;
-                                    }
-                        </style>
-
                             <div id="alertBtn" onclick="getAlertItems()" class="ppr_rup ppr_priv_global_nav_action_notif">
                                 <div class="masthead_notification" title="اعلانات">
                                     <div class="masthead_notifctr_btn">
                                         <div class="masthead_notifctr_sprite ui_icon notification-bell"></div>
                                         <div id="alertPane" class="ui_jewel marked_for_attention">0</div>
-                                        <div id="alert" class="masthead_notifctr_dropdown hidden" style="z-index: 100000000001 !important; left: -10px !important; top: 40px !important">
+                                        <div id="alert" class="masthead_notifctr_dropdown hidden">
                                             <div class="notifdd_title">پیام ها</div>
 
                                             <div id="alertLoader" class="notifdd_loading hidden">
                                                 <div class="ui_spinner"></div>
                                             </div>
 
-                                            <div onscroll="scrolled(this)" style="max-height: 405px; overflow: auto" id="alertItems"></div>
-                                            <div onclick="superAccess = true; getAlertItems();" id="showMoreItemsAlert" style="background-color: transparent; color: black; border: none; width: 100%" class="btn btn-success"> نمایش موارد بیشتر</div>
+                                            <div onscroll="scrolled(this)" id="alertItems"></div>
+                                            <div onclick="superAccess = true; getAlertItems();" id="showMoreItemsAlert" class="btn btn-success"> نمایش موارد بیشتر</div>
 
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-                            <style>
-                                .masthead_notifctr_dropdown:before {
-                                    content: '';
-                                    position: absolute;
-                                    left: 24px;
-                                    top: -10px;
-                                    margin-left: -10px;
-                                    width: 0;
-                                    height: 0;
-                                    border-left: 10px solid transparent;
-                                    border-right: 10px solid transparent;
-                                    border-bottom: 10px solid #fff;
-                                    -webkit-filter: drop-shadow(0 0 0 #b7b7b7);
-                                    filter: drop-shadow(0 0 0 #b7b7b7);
-                                    box-shadow: 0 0 0 #b7b7b7\9;
-                                    -webkit-filter: drop-shadow(0 0 0 #999);
-                                    filter: drop-shadow(0 0 0 #999);
-                                }
-                            </style>
 
                             <div class="ppr_rup ppr_priv_global_nav_action_profile">
                                 <div class="global-nav-profile global-nav-utility">
@@ -280,14 +215,29 @@
                                             <span id="memberTop" class="name">{{$user->username}}</span>
                                         </div>
                                     @endif
-                                    <div style="z-index: 1000000000000 !important;" class="global-nav-overlays-container"> <div id="profile-drop" class="ui_overlay ui_flyout global-nav-flyout global-nav-utility" style="display:none; position: absolute; bottom: auto; z-index: 10000; background: rgb(255, 255, 255) none repeat scroll 0% 0%; padding: 0px 18px; left: -13px; top: 43px;box-shadow: 0 4px 16px 0 rgba(0,0,0,0.2);"><ul class="global-nav-profile-menu">
-                                                <li class="subItem"><a href="{{URL('profile')}}" class="subLink" data-tracking-label="UserProfile_viewProfile">صفحه کاربری</a></li>
-                                                <li class="subItem rule"><a href="{{route('soon')}}" class="subLink global-nav-submenu-divided" data-tracking-label="UserProfile_bookings">رزروها</a></li>
-                                                <li class="subItem "><a href="{{route('soon')}}" class="subLink" data-tracking-label="UserProfile_inbox">پروازها</a></li>
-                                                <li class="subItem rule"><a href="{{URL('messages')}}" class="subLink global-nav-submenu-divided" data-tracking-label="UserProfile_messages">پیام ها</a> </li>
-                                                <li class="subItem"><a href="{{URL('accountInfo')}}" class="subLink" data-tracking-label="UserProfile_settings">اطلاعات کاربر </a></li>
-                                                <li class="subItem"><a href="{{route('logout')}}" class="subLink" data-tracking-label="UserProfile_signout">خروج</a></li>
-                                            </ul></div>
+                                    <div id="profile-drop-mainDiv" class="global-nav-overlays-container">
+                                        <div id="profile-drop" class="ui_overlay ui_flyout global-nav-flyout global-nav-utility">
+                                            <ul class="global-nav-profile-menu">
+                                                <li class="subItem">
+                                                    <a href="{{URL('profile')}}" class="subLink" data-tracking-label="UserProfile_viewProfile">صفحه کاربری</a>
+                                                </li>
+                                                <li class="subItem rule">
+                                                    <a href="{{route('soon')}}" class="subLink global-nav-submenu-divided" data-tracking-label="UserProfile_bookings">رزروها</a>
+                                                </li>
+                                                <li class="subItem ">
+                                                    <a href="{{route('soon')}}" class="subLink" data-tracking-label="UserProfile_inbox">پروازها</a>
+                                                </li>
+                                                <li class="subItem rule">
+                                                    <a href="{{URL('messages')}}" class="subLink global-nav-submenu-divided" data-tracking-label="UserProfile_messages">پیام ها</a>
+                                                </li>
+                                                <li class="subItem">
+                                                    <a href="{{URL('accountInfo')}}" class="subLink" data-tracking-label="UserProfile_settings">اطلاعات کاربر </a>
+                                                </li>
+                                                <li class="subItem">
+                                                    <a href="{{route('logout')}}" class="subLink" data-tracking-label="UserProfile_signout">خروج</a>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

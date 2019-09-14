@@ -321,8 +321,8 @@ if(Auth::check()) {
 
                 for(i = 0; i < response.length; i++) {
                     element = "<div>";
-                    element += "<a class='masthead-recent-card' style='text-align: right !important;' target='_self' href='" + response[i].placeRedirect + "'>";
-                    element += "<div class='media-left' style='padding: 0 12px !important; margin: 0 !important;'>";
+                    element += "<a class='masthead-recent-card' id='masthead-recent-card-recent-view' target='_self' href='" + response[i].placeRedirect + "'>";
+                    element += "<div class='media-left' id='media-left-recent-view'>";
                     element += "<div class='thumbnail' style='background-image: url(" + response[i].placePic + ");'></div>";
                     element += "</div>";
                     element += "<div class='content-right'>";
@@ -354,11 +354,11 @@ if(Auth::check()) {
     }
 </script>
 
-<div id="my-trips-not" class="ui_overlay ui_flyout global-nav-flyout global-nav-utility trips-flyout-container" style="display: none; bottom: auto;left: 150px;position: absolute;top: 35px">
+<div id="my-trips-not" class="ui_overlay ui_flyout global-nav-flyout global-nav-utility trips-flyout-container">
     <div>
         <div class="styleguide" id="masthead-saves-container">
-            <div id="masthead-recent" class="" style="background-color: #f9f9f9">
-                <div style="text-align: right; padding: 0 24px;" class="recent-header-container">
+            <div id="masthead-recent" class="">
+                <div class="recent-header-container">
                     <a class="recent-header" href="{{route('recentlyViewTotal')}}" target="_self">بازدیدهای اخیر </a>
                 </div>
                 <div class="masthead-recent-cards-container">
@@ -373,7 +373,7 @@ if(Auth::check()) {
                 </div>
                 <div class="see-all-button-container"><a href="{{route('recentlyViewTotal')}}" target="_self" class="see-all-button">مشاهده تمامی موارد </a></div>
             </div>
-            <div id="masthead-trips" style="overflow: auto; max-height: 400px">
+            <div id="masthead-trips">
                 <div class="trips-header-container"><a class="trips-header" target="_self" href="{{URL('myTrips')}}">سفر های من </a></div>
                 <div id="masthead-trips-tiles-region">
                     <div id="trips-tiles" class="column">
@@ -386,33 +386,37 @@ if(Auth::check()) {
                             </a>
 
                             @foreach($trips as $trip)
-                                <div style="width: 150px; height: 150px; border: 2px solid #a0a0a0;cursor: pointer;" onclick="document.location.href = '{{route('tripPlaces', ['tripId' => $trip->id])}}'" class="trip-images ui_columns is-gapless is-multiline is-mobile">
+                                <div onclick="document.location.href = '{{route('tripPlaces', ['tripId' => $trip->id])}}'" class="trip-images ui_columns is-gapless is-multiline is-mobile">
                                     @if($trip->placeCount > 0)
-                                        <div class="trip-image ui_column is-6" style="background: url('{{$trip->pic1}}') repeat 0 0; background-size: 100% 100%"></div>
+                                        <div class="trip-image ui_column is-6 placeCount0" style="background: url('{{$trip->pic1}}')" ></div>
                                     @else
-                                        <div class="trip-image trip-image-empty ui_column is-6" style="background-color: #cfcfcf"></div>
+                                        <div class="trip-image trip-image-empty ui_column is-6 placeCount0Else"></div>
                                     @endif
                                     @if($trip->placeCount > 1)
-                                        <div class="trip-image ui_column is-6" style="background: url('{{$trip->pic2}}')  repeat 0 0; background-size: 100% 100%"></div>
+                                        <div class="trip-image ui_column is-6 placeCount0" style="background: url('{{$trip->pic1}}')" ></div>
                                     @else
-                                        <div class="trip-image trip-image-empty ui_column is-6" style="background-color: #cfcfcf"></div>
+                                        <div class="trip-image trip-image-empty ui_column is-6  placeCount0Else"></div>
                                     @endif
                                     @if($trip->placeCount > 2)
-                                        <div class="trip-image ui_column is-6" style="background: url('{{$trip->pic3}}') repeat 0 0; background-size: 100% 100%"></div>
+                                        <div class="trip-image ui_column is-6 placeCount0" style="background: url('{{$trip->pic1}}')" ></div>
                                     @else
-                                        <div class="trip-image trip-image-empty ui_column is-6" style="background-color: #cfcfcf"></div>
+                                        <div class="trip-image trip-image-empty ui_column is-6 placeCount0Else"></div>
                                     @endif
                                     @if($trip->placeCount > 3)
-                                        <div class="trip-image ui_column is-6" style="background: url('{{$trip->pic4}}') repeat 0 0; background-size: 100% 100%"></div>
+                                        <div class="trip-image ui_column is-6 placeCount0" style="background: url('{{$trip->pic1}}')" ></div>
                                     @else
-                                        <div class="trip-image trip-image-empty ui_column is-6" style="background-color: #cfcfcf"></div>
+                                        <div class="trip-image trip-image-empty ui_column is-6 placeCount0Else"></div>
                                     @endif
                                 </div>
-                                <div class="create-trip-text" style="font-size: 1.2em;">{{$trip->name}} </div>
+                                <div class="create-trip-text">{{$trip->name}} </div>
                                 @if($trip->to_ != "" && $trip->from_ != "")
-                                    <div class="create-trip-text" style="padding: 5px; font-size: 11px; margin-bottom: 7px; border-bottom:1px solid #4DC7BC;">{{convertStringToDate2($trip->to_)}} <p style="color: #4DC7BC; display: inline;">الی</p> {{convertStringToDate2($trip->from_)}} </div>
+                                    <div class="create-trip-text">
+                                        {{convertStringToDate2($trip->to_)}}
+                                        <p>الی</p>
+                                        {{convertStringToDate2($trip->from_)}}
+                                    </div>
                                 @else
-                                    <div class="create-trip-text" style="padding :5px; margin-bottom: 7px; border-bottom:1px solid #4DC7BC;">بدون تاریخ</div>
+                                    <div class="create-trip-text">بدون تاریخ</div>
                                 @endif
                             @endforeach
                         </div>
@@ -423,31 +427,11 @@ if(Auth::check()) {
     </div>
 </div>
 
-<style>
-    .ui_overlay:before {
-        content: '';
-        position: absolute;
-        left: 24px;
-        top: -10px;
-        margin-left: -10px;
-        width: 0;
-        height: 0;
-        border-left: 10px solid transparent;
-        border-right: 10px solid transparent;
-        border-bottom: 10px solid #fff;
-        -webkit-filter: drop-shadow(0 0 0 #b7b7b7);
-        filter: drop-shadow(0 0 0 #b7b7b7);
-        box-shadow: 0 0 0 #b7b7b7 \9;
-        -webkit-filter: drop-shadow(0 0 0 #999);
-        filter: drop-shadow(0 0 0 #999);
-    }
-</style>
-
-<div id="bookmarkmenu" class="ui_overlay ui_flyout global-nav-flyout global-nav-utility trips-flyout-container" style="display: none; bottom: auto;left: 187px; position: absolute; top: 35px">
+<div id="bookmarkmenu" class="ui_overlay ui_flyout global-nav-flyout global-nav-utility trips-flyout-container">
     <div>
         <div class="styleguide" id="masthead-saves-container">
-            <div id="masthead-recent" class="" style="background-color: #f9f9f9">
-                <div style="text-align: right; padding: 0 24px;" class="recent-header-container">
+            <div id="masthead-recent" class="">
+                <div class="recent-header-container">
                     <a class="recent-header" href="{{route('recentlyViewTotal')}}" target="_self"> نشانه گذاری شده ها </a>
                 </div>
                 <div class="masthead-recent-cards-container" id="bookMarksDiv">
