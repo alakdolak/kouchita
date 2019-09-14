@@ -100,6 +100,7 @@
                                         @else
                                             <li><a href="{{route('tickets')}}" class="unscoped global-nav-link ui_tab ">بلیط</a></li>
                                         @endif
+
                                         <li class="" data-element=".masthead-dropdown-Flights"><a href="{{route('soon')}}" class="unscoped global-nav-link ui_tab " data-tracking-label="Flights">جشنواره ها</a></li>
                                         <li class="" data-element=".masthead-dropdown-Flights"><a href="" class="unscoped global-nav-link ui_tab " data-tracking-label="Flights"> آداب و رسوم</a></li>
 

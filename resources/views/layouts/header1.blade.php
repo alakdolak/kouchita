@@ -40,6 +40,7 @@
                             <div id="taplc_global_nav_links_0" class="ppr_rup ppr_priv_global_nav_links" data-placement-name="global_nav_links">
                                 <div class="global-nav-links-container">
                                     <ul class="global-nav-links-menu" style="margin-top: 7px;">
+
                                         @if($placeMode == "hotel")
                                             <li><a style="color: #963019 !important;" href="{{route('main')}}" id="global-nav-hotels" class="unscoped global-nav-link ui_tab " data-tracking-label="hotels">هتل</a></li>
                                         @else
@@ -60,7 +61,13 @@
                                         @else
                                             <li><a href="{{route('tickets')}}" class="unscoped global-nav-link ui_tab ">بلیط</a></li>
                                         @endif
+
                                         <li class="" data-element=".masthead-dropdown-Flights"><a href="{{route('soon')}}" class="unscoped global-nav-link ui_tab " data-tracking-label="Flights">جشنواره ها</a></li>
+                                        @if($placeMode == "tour")
+                                            <li><a style="color: #963019 !important;" href="{{route('mainMode', ['mode' => 'tour'])}}" id="global-nav-hotels" class="unscoped global-nav-link ui_tab " data-tracking-label="hotels">تور</a></li>
+                                        @else
+                                            <li><a href="{{route('mainMode', ['mode' => 'tour'])}}" id="global-nav-hotels" class="unscoped global-nav-link ui_tab " data-tracking-label="hotels">تور</a></li>
+                                        @endif
                                         <li class="" data-element=".masthead-dropdown-Flights"><a href="{{route('soon')}}" class="unscoped global-nav-link ui_tab " data-tracking-label="Flights"> آداب و رسوم</a></li>
 
                                     </ul>

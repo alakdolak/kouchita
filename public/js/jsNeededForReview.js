@@ -214,7 +214,7 @@ function getComment() {
             $("#placeStyle_" + selectedPlaceStyle).addClass('selected');
             if(response.reviewPic != -1) {
                 $("#userPhoto").attr('src', response.reviewPic);
-                $("#close_btn").append("<div onclick='deleteUserPicFromComment()' style='cursor: pointer; color: #963019 !important;position: absolute;top: -18px;right: 0; background: url(\'" + homePath + "/images/closepic.png\');width: 35px;display: block;height: 35px;'></div>");
+                $("#close_btn").append("<div onclick='deleteUserPicFromComment()' style='cursor: pointer; color: #963019 !important;position: absolute;top: -18px;right: 0; background: url(\'" + homeURL + "/images/closepic.png\');width: 35px;display: block;height: 35px;'></div>");
                 $("#userPhoto").show();
             }
             else {
