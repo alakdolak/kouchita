@@ -62,11 +62,18 @@ if ($total == 0)
     <link rel="stylesheet" href="{{URL::asset('css/theme2/cropper.css')}}">
     <link rel="stylesheet" href="{{URL::asset('css/theme2/hotelDetail.css')}}">
 
+    {{--vr--}}
+    <link rel="stylesheet" href="/vr2/video-js.css">
+    <link rel="stylesheet" href="/vr2/videojs-vr.css">
+    <script src="/vr2/video.js"></script>
+    <script src="/vr2/videojs-vr.js"></script>
+
 @stop
 
 @section('main')
     <script src= {{URL::asset("js/calendar.js") }}></script>
     <script src= {{URL::asset("js/jalali.js") }}></script>
+
 
     <style>
         .changeWidth {
@@ -724,8 +731,7 @@ if ($total == 0)
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tileWrap" onclick="document.location.href = '{{route('video360')}}'"
-                                     style="height:33.333332%;">
+                                <div class="tileWrap" style="height:33.333332%;" onclick="showModal()">
                                     <div class="prw_rup prw_hotels_flexible_album_thumb tile">
                                         <div class="albumThumbnail">
                                             <div class="prw_rup prw_common_centered_image"><span class="imgWrap "
@@ -1947,6 +1953,46 @@ if ($total == 0)
             </div>
         </div>
     </div>
+
+
+    <!-- The Modal -->
+    {{--vr--}}
+    <div class="modal" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal body -->
+                <div class="modal-body">
+                    @if($video != null)
+                    <video  width="640" height="300" id="my-video" class="video-js vjs-default-skin">
+                        <source src="{{URL::asset($video)}}" type="video/mp4">
+                    </video>
+                    @else
+                        ویدیویی برای نمایش موجود نمی باشد.
+                    @endif
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        (function(window, videojs) {
+            var player = window.player = videojs('my-video');
+            player.mediainfo = player.mediainfo || {};
+            player.mediainfo.projection = '360';
+
+            // AUTO is the default and looks at mediainfo
+            var vr = window.vr = player.vr({projection: 'AUTO', debug: true, forceCardboard: false});
+        }(window, window.videojs));
+
+        $('#myModal').on('hidden.bs.modal', function () {
+            player.pause();
+        });
+
+        function showModal(){
+            $('#myModal').modal('toggle');
+            player.play();
+        }
+
+    </script>
 
     @include('hotelDetailsPopUp')
     @include('editor')
