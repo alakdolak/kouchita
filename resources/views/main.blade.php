@@ -12,124 +12,7 @@
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/masthead-saves.css?v=2')}}'/>
     <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/hr_north_star.css?v=2')}}'/>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/icons.css?v=1')}}' />
-
-    <style>
-        .homepage_shelves_widget {
-            min-height: 100px
-        }
-
-        .icon-mainpage {
-            width: 50px;
-            height: 50px;
-            background: #FFF;
-            position: absolute;
-            bottom: -14%;
-            right: 43%;
-            border-radius: 100%;
-            border: 1px solid #CCC
-        }
-
-        .icon-mainpage span {
-            color: #4DC7BC;
-            font-size: 26px;
-            line-height: 50px
-        }
-
-        #middle-box:hover {
-            background: #ededed !important
-        }
-
-        .o-slider-next {
-            left: 24%;
-            right: auto
-        }
-
-        .o-slider-prev span {
-            top: 250px !important
-        }
-
-        .o-slider-next span {
-            top: 250px !important
-        }
-
-        .o-slider-pagination {
-            width: 25% !important;
-            top: 450px
-        }
-
-        .loader {
-            background-image: url("{{URL::asset('images/loading.svg')}}");
-            width: 100px;
-            height: 100px;
-        }
-    </style>
-
-    <style>
-        .phoneBanner {
-            background-image: url("{{URL::asset('images/phoneBanner.jpg')}}");
-            background-size: 100% 100%;
-            height: 90vh;
-        }
-
-        @media screen and (max-width: 600px) {
-            /*DIV.ppr_rup.ppr_priv_homepage_hero .placement_wrap .placement_wrap_cell {*/
-                /*display: grid !important;*/
-            /*}*/
-            /*.o-sliderContainer {*/
-                /*height: 250px;*/
-            /*}*/
-            .nearby_cuisines .ui_columns.is-multiline .ui_column, .recently_viewed .ui_columns.is-multiline .ui_column, .recommended_poi_list .ui_columns.is-multiline .ui_column, .poi_by_tag .ui_columns.is-multiline .ui_column, .flights_airline_reviews .ui_columns.is-multiline .ui_column, .attraction_products_by_group .ui_columns.is-multiline .ui_column, .poi_by_taxonomy .ui_columns.is-multiline .ui_column {
-                width: 386px !important;
-            }
-            .image_wrapper.landscape.landscapeWide .image {
-                width: -webkit-fill-available !important;
-            }
-            .ui_column .thumbnail {
-                height: 250px !important;
-            }
-            .image_wrapper {
-                height: -webkit-fill-available;
-            }
-            DIV.prw_rup.prw_shelves_rebrand_poi_shelf_item_widget .detail .item.poi_name {
-                font-size: 30px;
-                line-height: 30px;
-            }
-            DIV.prw_rup.prw_shelves_shelf_widget .shelf_container.rebrand .shelf_header .ui_icon.travelers-choice-badge {
-                display: inherit;
-            }
-            h3 {
-                font-size: 200%;
-            }
-            DIV.prw_rup.prw_shelves_rebrand_poi_shelf_item_widget .detail .item.poi_name {
-                font-size: 32px;
-                line-height: 40px;
-            }
-            DIV.prw_rup.prw_shelves_rebrand_poi_shelf_item_widget .detail .item.tags {
-                padding-top: 4px;
-                font-size: 24px;
-                line-height: 32px;
-            }
-            DIV.prw_rup.prw_shelves_rebrand_poi_shelf_item_widget .detail .item.rating-widget .reviewCount {
-                font-size: 24px;
-                line-height: 32px;
-                margin: 0 10px;
-            }
-            body {
-                font-size: x-large;
-            }
-        }
-    </style>
-    {{--calender in phone--}}
-    <style>
-        @media screen and (max-width: 600px) {
-            #ui-datepicker-div {
-                width: 17em !important;
-            }
-            .ui-datepicker-multi-2 .ui-datepicker-group {
-                width: 100% !important;
-            }
-        }
-    </style>
+    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/mainModifiedStyles.css')}}' />
 
     <script>
         var searchDir = '{{route('heyYou')}}';
@@ -147,92 +30,6 @@
         @endif
     </script>
 
-    <style>
-        .dateLabel {
-            position: relative;
-            width: 150px;
-            height: 30px;
-            /*border: 1px solid #e5e5e5;*/
-            border-radius: 3px;
-            /*box-shadow: 0 7px 12px -7px #e5e5e5 inset;*/
-            margin: 0 !important;
-            cursor: pointer;
-            float: right;
-            max-width: 40%;
-        }
-        .dateLabel_phone {
-            height: 30px;
-        }
-        .inputDateLabel {
-            background: transparent;
-            width: 100px;
-            border: none;
-            /*font-size: 75%;*/
-            position: absolute;
-            top: 5px;
-            right: 35px;
-            cursor: pointer;
-        }
-        .inputDateLabel_phone {
-            width: 85%;
-            border: none;
-            font-size: 30px;
-            line-height: 40px;
-            position: absolute;
-            top: 7px;
-            right: 65px;
-        }
-        .minusPlusBtn {
-            width: 17px;
-            height: 17px;
-            cursor: pointer;
-            display: inline-block;
-            background-image: url('{{URL::asset('images/icons.jpg')}}');
-            background-size: 72px;
-        }
-        @media screen and (max-width: 600px){
-            .minusPlusBtn {
-                width: 44px;
-                height: 44px;
-                background-size: 185px;
-            }
-        }
-        {{--.minusPlusBtn_phone {--}}
-            {{--width: 26px;--}}
-            {{--height: 26px;--}}
-            {{--display: inline-block;--}}
-            {{--background-image: url('{{URL::asset('images') . 'icons.jpg'}}');--}}
-            {{--background-size: 115px;--}}
-            {{--background-repeat: no-repeat;--}}
-        {{--}--}}
-        .searchDivForScroll {
-            max-height: 390px;
-            overflow: auto;
-            float: right;
-            border: solid #E5E5E5 !important;
-            border-radius:  0 10px 10px 0 !important;
-        }
-        .searchDivForScroll_phone {
-            max-height: 290px;
-            overflow: auto;
-            border: solid #E5E5E5 !important;
-            border-radius:  10px 10px 0 0 !important;
-        }
-        .searchDivForScroll-button {
-            float: right;
-            border-style: inherit !important;
-            border-radius:  10px 0 0 10px !important;
-            margin-bottom: 8px;
-        }
-        .searchDivForScroll-phoneButton {
-            width: 42%;
-            margin: 0 !important;
-            border-style: inherit !important;
-            border-radius:  0 0 0 10px !important;
-            font-size: 20px;
-        }
-    </style>
-
     </head>
 
     <body class="rebrand_2017 desktop HomeRebranded  js_logging">
@@ -246,15 +43,15 @@
         </div>
 
         <div class="page" ng-app="mainApp">
-            <div class="ppr_rup ppr_priv_homepage_hero">
-                <div class="homeHero default_home" style="padding: 0 !important;/*background-image: url('`s://static.tacdn.com/img2/branding/homepage/home-tab1-hero-1367x520-beach-prog.jpg');*/width: 100%; background-position:50% bottom">
-                    <div class="ui_container container" style="width: 100%; max-width: 100%; padding: 0;">
+            <div class="ppr_rup ppr_priv_homepage_hero ">
+                <div id="homeHero-id" class="homeHero default_home">
+                    <div class="ui_container container" id="mainDivContainerMainPage">
                         <div class="placement_wrap">
                             <div class="placement_wrap_row">
                                 <div class="placement_wrap_cell">
-                                    <div id="sliderBarDIV" class="ppr_rup ppr_priv_trip_search hideOnPhone" style="max-width: 100%; overflow: hidden">
+                                    <div id="sliderBarDIV" class="ppr_rup ppr_priv_trip_search hideOnPhone">
                                         @if($placeMode == "hotel")
-                                            <div class="ui_columns datepicker_box trip_search metaDatePicker rounded_lockup usePickerTypeIcons preDates noDates with_children hideOnPhone" style="position: absolute;right: 6%;top: 20%;width: 68%;z-index: 10000000;">
+                                            <div class="ui_columns datepicker_box trip_search metaDatePicker rounded_lockup usePickerTypeIcons preDates noDates with_children hideOnPhone mainDivSearchInputMainPage">
                                                 <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column is-4 search_typeahead wctx-tripsearch searchDivForScroll">
                                                     <div class="ui_picker">
                                                         <span class="typeahead_align ui_typeahead">
@@ -301,7 +98,7 @@
                                                 <div style="clear: both"></div>
                                             </div>
                                         @elseif($placeMode == "restaurant")
-                                            <div class="ui_columns datepicker_box trip_search metaDatePicker rounded_lockup usePickerTypeIcons preDates noDates with_children hideOnPhone" style="position: absolute;right: 6%;top: 20%;width: 68%;z-index: 10000000;">
+                                            <div class="ui_columns datepicker_box trip_search metaDatePicker rounded_lockup usePickerTypeIcons preDates noDates with_children hideOnPhone mainDivSearchInputMainPage">
                                                 <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column is-4 search_typeahead wctx-tripsearch searchDivForScroll">
                                                     <div class="ui_picker">
                                                                 <span class="typeahead_align ui_typeahead">
@@ -322,7 +119,7 @@
                                                 <div style="clear: both"></div>
                                             </div>
                                         @elseif($placeMode == "tour")
-                                            <div class="ui_columns datepicker_box trip_search metaDatePicker rounded_lockup usePickerTypeIcons preDates noDates with_children hideOnPhone" style="position: absolute;right: 6%;top: 20%;width: 68%;z-index: 10000000;">
+                                            <div class="ui_columns datepicker_box trip_search metaDatePicker rounded_lockup usePickerTypeIcons preDates noDates with_children hideOnPhone mainDivSearchInputMainPage">
                                                 <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column is-4 search_typeahead wctx-tripsearch searchDivForScroll">
                                                     <div class="ui_picker">
                                                                 <span class="typeahead_align ui_typeahead">
@@ -343,7 +140,7 @@
                                                 <div style="clear: both"></div>
                                             </div>
                                         @else
-                                            <div class="ui_columns datepicker_box trip_search metaDatePicker rounded_lockup usePickerTypeIcons preDates noDates with_children hideOnPhone" style="position: absolute;right: 6%;top: 20%;width: 68%;z-index: 10000000;">
+                                            <div class="ui_columns datepicker_box trip_search metaDatePicker rounded_lockup usePickerTypeIcons preDates noDates with_children hideOnPhone mainDivSearchInputMainPage">
                                                 <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column is-4 search_typeahead wctx-tripsearch searchDivForScroll">
                                                     <div class="ui_picker">
                                                                 <span class="typeahead_align ui_typeahead">
@@ -365,13 +162,13 @@
                                             </div>
                                         @endif
                                     </div>
-                                    <div class="ppr_rup ppr_priv_trip_search phoneBanner hideOnScreen">
+                                    <div class="ppr_rup ppr_priv_trip_search phoneBanner hideOnScreen mainDivSearchInputPhonePage">
                                         @if($placeMode == "hotel")
-                                            <div class="ui_columns trip_search rounded_lockup usePickerTypeIcons" style="width: 45%;position: absolute;top: 44%;left: 50%;transform: translate(-50%, -50%);z-index: 10000000;">
+                                            <div class="ui_columns trip_search rounded_lockup usePickerTypeIcons mainDivSearchInputPhonePage">
                                                 <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column search_typeahead wctx-tripsearch searchDivForScroll_phone">
                                                     <div class="ui_picker">
                                                                 <span class="typeahead_align ui_typeahead">
-                                                                    <input onkeyup="search(event)" type="text" id="placeName" class="typeahead_input" style="padding: 8px 10px; font-size: 30px; line-height: 30px;" placeholder="شهر یا نام هتل"/>
+                                                                    <input onkeyup="search(event)" type="text" id="placeName" class="typeahead_input mainSearchInputPhonePage"  placeholder="شهر یا نام هتل"/>
                                                                     <input type="hidden" id="placeId">
                                                                     <span class="ui_icon map-pin-fill pickerType typeahead_icon"></span>
                                                                 </span>
@@ -408,7 +205,7 @@
                                                     {{--</div>--}}
                                                 {{--</div>--}}
                                                 <div class="prw_rup prw_common_form_submit ui_column submit_wrap searchDivForScroll-phoneButton">
-                                                    <button onclick="redirect()" class="autoResize form_submit" style="font-size: 30px; line-height: 54px;">
+                                                    <button onclick="redirect()" class="autoResize form_submit">
                                                         <span class="ui_icon search submit_icon"></span>
                                                         <span onclick="window.location = '{{route('main', ['mode' => 'hotel'])}}'" class="submit_text">جستجو هتل</span>
                                                     </button>
@@ -416,18 +213,18 @@
                                                 </div>
                                             </div>
                                         @elseif($placeMode == "restaurant")
-                                            <div class="trip_search rounded_lockup usePickerTypeIcons hideOnScreen" style="width: 60%;position: absolute;top: 44%;left: 50%;transform: translate(-50%, -50%);z-index: 10000000;">
-                                                <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column" onclick="$('#phoneSearchPopUp').removeClass('hidden')" style="width: 70%; float: right; max-height: 300px; overflow: auto;border-radius: 0 25px 25px 0;">
-                                                    <div class="ui_picker" style="padding: 10px !important;">
+                                            <div class="trip_search rounded_lockup usePickerTypeIcons hideOnScreen">
+                                                <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column" onclick="$('#phoneSearchPopUp').removeClass('hidden')">
+                                                    <div class="ui_picker">
                                                                 <span class="typeahead_align ui_typeahead">
-                                                                    <input onkeyup="search(event)" type="text" id="placeName" class="typeahead_input" style="width: 100%;font-size: 35px; line-height: 50px !important; float:right; border: none; margin-right: 5px" placeholder="شهر یا نام رستوران"/>
+                                                                    <input onkeyup="search(event)" type="text" id="placeName" class="typeahead_input" placeholder="شهر یا نام رستوران"/>
                                                                     <input type="hidden" id="placeId">
                                                                 </span>
                                                         <div id="resultPhone" class="data_holder"></div>
                                                     </div>
                                                 </div>
-                                                <div class="prw_rup prw_common_form_submit ui_column submit_wrap" style="width: 30%;border-radius: 25px 0 0 25px;margin: 0 !important;">
-                                                    <button onclick="redirect()" class="form_submit" style="font-size: 35px; line-height: 64px">
+                                                <div class="prw_rup prw_common_form_submit ui_column submit_wrap">
+                                                    <button onclick="redirect()" class="form_submit">
                                                         <span class="ui_icon search submit_icon"></span>
                                                         <span class="submit_text">جستجو</span>
                                                     </button>
@@ -435,18 +232,18 @@
                                                 </div>
                                             </div>
                                         @elseif($placeMode == "tour")
-                                            <div class="trip_search rounded_lockup usePickerTypeIcons hideOnScreen" style="width: 60%;position: absolute;top: 44%;left: 50%;transform: translate(-50%, -50%);z-index: 10000000;">
-                                                <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column" onclick="$('#phoneSearchPopUp').removeClass('hidden')" style="width: 70%; float: right; max-height: 300px; overflow: auto;border-radius: 0 25px 25px 0;">
+                                            <div class="trip_search rounded_lockup usePickerTypeIcons hideOnScreen">
+                                                <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column" onclick="$('#phoneSearchPopUp').removeClass('hidden')">
                                                     <div class="ui_picker" style="padding: 10px !important;">
                                                                 <span class="typeahead_align ui_typeahead">
-                                                                    <input onkeyup="search(event)" type="text" id="placeName" class="typeahead_input" style="width: 100%;font-size: 35px; line-height: 50px !important; float:right; border: none; margin-right: 5px" placeholder="شهر یا نام رستوران"/>
+                                                                    <input onkeyup="search(event)" type="text" id="placeName" class="typeahead_input" placeholder="شهر یا نام رستوران"/>
                                                                     <input type="hidden" id="placeId">
                                                                 </span>
                                                         <div id="resultPhone" class="data_holder"></div>
                                                     </div>
                                                 </div>
-                                                <div class="prw_rup prw_common_form_submit ui_column submit_wrap" style="width: 30%;border-radius: 25px 0 0 25px;margin: 0 !important;">
-                                                    <button onclick="redirect()" class="form_submit" style="font-size: 35px; line-height: 64px">
+                                                <div class="prw_rup prw_common_form_submit ui_column submit_wrap">
+                                                    <button onclick="redirect()" class="form_submit">
                                                         <span class="ui_icon search submit_icon"></span>
                                                         <span class="submit_text">جستجو</span>
                                                     </button>
@@ -454,18 +251,18 @@
                                                 </div>
                                             </div>
                                         @else
-                                            <div class="trip_search rounded_lockup usePickerTypeIcons hideOnScreen" style="width: 60%;position: absolute;top: 44%;left: 50%;transform: translate(-50%, -50%);z-index: 10000000;">
-                                                <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column" onclick="$('#phoneSearchPopUp').removeClass('hidden')" style="width: 70%; float: right; max-height: 300px; overflow: auto;border-radius: 0 25px 25px 0;">
-                                                    <div class="ui_picker" style="padding: 10px !important;">
+                                            <div class="trip_search rounded_lockup usePickerTypeIcons hideOnScreen">
+                                                <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column" onclick="$('#phoneSearchPopUp').removeClass('hidden')">
+                                                    <div class="ui_picker" >
                                                                 <span class="typeahead_align ui_typeahead">
-                                                                    <input onkeyup="search(event)" type="text" id="placeName" class="typeahead_input" style="width: 100%;font-size: 35px; line-height: 50px !important; float:right; border: none; margin-right: 5px" placeholder="شهر یا نام مکان موردنظر"/>
+                                                                    <input onkeyup="search(event)" type="text" id="placeName" class="typeahead_input" placeholder="شهر یا نام مکان موردنظر"/>
                                                                     <input type="hidden" id="placeId">
                                                                 </span>
                                                         <div id="resultPhone" class="data_holder"></div>
                                                     </div>
                                                 </div>
-                                                <div class="prw_rup prw_common_form_submit ui_column submit_wrap" style="width: 30%;border-radius: 25px 0 0 25px;margin: 0 !important;">
-                                                    <button onclick="redirect()" class="form_submit" style="font-size: 35px; line-height: 64px">
+                                                <div class="prw_rup prw_common_form_submit ui_column submit_wrap" >
+                                                    <button onclick="redirect()" class="form_submit">
                                                         <span class="ui_icon search submit_icon"></span>
                                                         <span class="submit_text">جستجو</span>
                                                     </button>
@@ -776,8 +573,7 @@
 
         <script async src="{{URL::asset('js/slideBar.js')}}"></script>
 
-        <span id="statePane" class="ui_overlay ui_modal editTags hidden"
-              style="position: fixed; left: 30%; right: 30%; top:19%; bottom: auto;overflow: auto;max-height: 500px;z-index: 10000001;">
+        <span id="statePane1" class="statePane ui_overlay ui_modal editTags hidden pop-up-Panes">
 
             <div class="header_text">استان مورد نظر</div>
             <div class="subheader_text">
@@ -785,21 +581,17 @@
             </div>
             <div class="body_text">
 
-                <select style="margin-top: 25px;" id="states"></select>
+                <select  id="states"></select>
 
-                <div style="margin-top: 25px;" class="submitOptions">
-                    <button onclick="document.location.href = $('#states').val()"
-                            style="color: #FFF;background-color: #4dc7bc;border-color:#4dc7bc;"
-                            class="btn btn-success">تایید</button>
-                    <input type="submit" onclick="$('.dark').hide(); $('#statePane').addClass('hidden')" value="خیر"
-                           class="btn btn-default">
+                <div class="submitOptions">
+                    <button onclick="document.location.href = $('#states').val()" class="btn btn-success">تایید</button>
+                    <input type="submit" onclick="$('.dark').hide(); $('#statePane').addClass('hidden')" value="خیر" class="btn btn-default">
                 </div>
             </div>
             <div onclick="$('#statePane').addClass('hidden'); $('.dark').hide()" class="ui_close_x"></div>
         </span>
 
-        <span id="statePane2" class="ui_overlay ui_modal editTags hidden"
-              style="position: fixed; left: 30%; right: 30%; top:19%; bottom: auto;overflow: auto;max-height: 500px;z-index: 10000001;">
+        <span id="statePane2" class="statePane ui_overlay ui_modal editTags hidden pop-up-Panes">
 
             <div class="header_text">شهر مورد نظر</div>
             <div class="subheader_text">
@@ -807,36 +599,30 @@
             </div>
             <div class="body_text">
 
-                <select style="margin-top: 25px;" onchange="getCities()" id="states2"></select>
+                <select  onchange="getCities()" id="states2"></select>
 
-                <select style="margin-top: 25px;" id="cities"></select>
+                <select  id="cities"></select>
 
-                <div style="margin-top: 25px;" class="submitOptions">
-                    <button onclick="document.location.href = $('#cities').val()"
-                            style="color: #FFF;background-color: #4dc7bc;border-color:#4dc7bc;"
-                            class="btn btn-success">تایید</button>
-                    <input type="submit" onclick="$('.dark').hide(); $('#statePane2').addClass('hidden')" value="خیر"
-                           class="btn btn-default">
+                <div class="submitOptions">
+                    <button onclick="document.location.href = $('#cities').val()" class="btn btn-success">تایید</button>
+                    <input type="submit" onclick="$('.dark').hide(); $('#statePane2').addClass('hidden')" value="خیر" class="btn btn-default">
                 </div>
             </div>
             <div onclick="$('#statePane2').addClass('hidden'); $('.dark').hide()" class="ui_close_x"></div>
         </span>
 
-        <span id="goyeshPane" class="ui_overlay ui_modal editTags hidden" style="position: fixed; left: 30%; right: 30%; top:19%; bottom: auto;overflow: auto;max-height: 500px;z-index: 10000001;">
+        <span id="goyeshPane" class="ui_overlay ui_modal editTags hidden pop-up-Panes">
             <div class="header_text">گویش مورد نظر</div>
             <div class="subheader_text">
            گویش مورد نظر خود را از بین گویش های موجود انتخاب کنید
             </div>
             <div class="body_text">
 
-                <select style="margin-top: 25px;" id="goyesh"></select>
+                <select id="goyesh"></select>
 
-                <div style="margin-top: 25px;" class="submitOptions">
-                    <button onclick="document.location.href = $('#goyesh').val()"
-                            style="color: #FFF;background-color: #4dc7bc;border-color:#4dc7bc;"
-                            class="btn btn-success">تایید</button>
-                    <input type="submit" onclick="$('.dark').hide(); $('#goyeshPane').addClass('hidden')" value="خیر"
-                           class="btn btn-default">
+                <div class="submitOptions">
+                    <button onclick="document.location.href = $('#goyesh').val()" class="btn btn-success">تایید</button>
+                    <input type="submit" onclick="$('.dark').hide(); $('#goyeshPane').addClass('hidden')" value="خیر" class="btn btn-default">
                 </div>
             </div>
             <div onclick="$('#goyeshPane').addClass('hidden'); $('.dark').hide()" class="ui_close_x"></div>
