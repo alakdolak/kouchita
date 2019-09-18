@@ -13,10 +13,8 @@
 </head>
 <body>
 
-<video width="640" height="300" id="my-video" class="video-js vjs-default-skin" controls playsinline>
+<video width="640" height="300" id="my-video" class="video-js vjs-default-skin" autoplay>
     <source src="/vr2/eagle-360.mp4" type="video/mp4">
-    {{--<source src="/vr2/coriolis_eac.webm" type="video/webm">--}}
-    {{--<source src="/vr2/lcs15_rect.webm" type="video/webm">--}}
 </video>
 
 </body>
