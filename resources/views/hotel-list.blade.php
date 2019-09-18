@@ -6,6 +6,7 @@
     <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/eatery_overview.css?v=2')}}'/>
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/long_lived_global_legacy_2.css?v=1')}}"/>
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/hotelLists.css')}}"/>
+    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/calendar.css')}}"/>
 
     <title>
         @if($placeMode == "hotel")
@@ -58,15 +59,13 @@
                                     @endif
                                     {{$city}}
                                 </h1>
-                                <div style="height: 50px;margin-bottom: 25px;">
+                                <div>
                                     <div class="srchBox">
                                         <button class="srchBtn" onclick="inputSearch(0)">جستجو</button>
                                     </div>
                                     <div class="roomBox">
-                                        <div id="roomDetail"
-                                             style="font-size: 1.1em; display: inline-block; cursor: pointer;"
-                                             onclick="togglePassengerNoSelectPane()">
-                                            <span id="room_number" style="float: right;" class="room"></span>&nbsp;
+                                        <div id="roomDetail" onclick="togglePassengerNoSelectPane()">
+                                            <span id="room_number" class="room"></span>&nbsp;
                                             <span>اتاق</span>&nbsp;-&nbsp;
                                             <span id="adult_number" class="adult"></span>
                                             <span>بزرگسال</span>&nbsp;
@@ -76,22 +75,19 @@
                                             {{--</span>--}}
                                             {{--<span>بچه</span>&nbsp;--}}
                                         </div>
-                                        <div class="shTIcon passengerIcon"
-                                             style="font-size: 25px; display: inline-block; cursor: pointer;"
-                                             onclick="togglePassengerNoSelectPane()"></div>
+                                        <div id="roomCapacityBoxIcon" onclick="togglePassengerNoSelectPane()"
+                                             class="shTIcon passengerIcon"></div>
                                         <div id="passengerArrowDown" onclick="togglePassengerNoSelectPane()"
-                                             class="shTIcon searchBottomArrowIcone arrowPassengerIcone"
-                                             style="display: inline-block;"></div>
+                                             class="shTIcon searchBottomArrowIcone arrowPassengerIcone"></div>
                                         <div id="passengerArrowUp" onclick="togglePassengerNoSelectPane()"
-                                             class="shTIcon searchTopArrowIcone arrowPassengerIcone hidden"
-                                             style="display: inline-block;"></div>
+                                             class="shTIcon searchTopArrowIcone arrowPassengerIcone hidden"></div>
 
 
                                         <div class="roomPassengerPopUp hidden " id="passengerNoSelectPane"
                                              onmouseleave="addClassHidden('passengerNoSelectPane'); passengerNoSelect = false;">
                                             <div class="rowOfPopUp">
-                                                <span style="float: right;">اتاق</span>
-                                                <div style="float: left; margin-right: 25px;">
+                                                <span class="float-right">اتاق</span>
+                                                <div class="float-left">
                                                     <div onclick="changeRoomPassengersNum(-1, 3)"
                                                          class="shTIcon minusPlusIcons minus"></div>
                                                     <span class='numBetweenMinusPlusBtn room' id="roomNumInSelect">
@@ -102,8 +98,8 @@
                                                 </div>
                                             </div>
                                             <div class="rowOfPopUp">
-                                                <span style="float: right;">بزرگسال</span>
-                                                <div style="float: left">
+                                                <span class="float-right">بزرگسال</span>
+                                                <div class="float-left">
                                                     <div onclick="changeRoomPassengersNum(-1, 2)"
                                                          class="shTIcon minusPlusIcons minus"></div>
                                                     <span class='numBetweenMinusPlusBtn adult'
@@ -138,8 +134,8 @@
                                             <span onclick="changeTwoCalendar(2); nowCalendar()" class="ui_icon calendar calendarIcon"></span>
                                             <input onclick="assignDate('{{convertStringToDate(getToday()["date"])}}', 'calendar-container-edit-1placeDate_phone', 'backDate_phone')" name="date" id="goDate" type="text" class="inputDateLabel" placeholder="تاریخ رفت" required readonly>
                                         </label>
-                                        <label id="calendar-container-edit-2placeDate" class="dateLabel" style="margin-right: 14px !important;">
-                                            <span style="color: #30b4a6 !important; font-size: 20px; line-height: 32px; position: absolute; right: 7px;">تا</span>
+                                        <label id="calendar-container-edit-2placeDate" class="dateLabel">
+                                            <span>تا</span>
                                             <input name="date" id="backDate" type="text" class="inputDateLabel" placeholder="تاریخ برگشت" required readonly>
                                         </label>
                                     </div>
