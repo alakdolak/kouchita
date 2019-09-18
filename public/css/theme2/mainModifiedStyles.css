@@ -205,6 +205,7 @@
 /*{{--background-size: 115px;--}}*/
 /*{{--background-repeat: no-repeat;--}}*/
 /*{{--}--}}*/
+
 .searchDivForScroll {
     max-height: 390px;
     overflow: auto;
@@ -335,6 +336,19 @@
     color: #FFF;
     background-color: #4dc7bc;
     border-color: #4dc7bc;
+}
+
+#searchDivForScroll {
+    padding: 3px 4px 3px;
+}
+
+#searchDivForScroll > div:nth-child(1) {
+    padding: 10px !important;
+}
+
+#darkModeMainPage {
+    display: none;
+    z-index: 10000000;
 }
 
 /*header1 styles*/
