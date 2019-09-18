@@ -6,9 +6,6 @@
     <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/eatery_overview.css?v=2')}}'/>
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/long_lived_global_legacy_2.css?v=1')}}"/>
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/hotelLists.css')}}"/>
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/calendar.css')}}"/>
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/loginPopUp.css')}}' />
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/footer.css')}}' />
 
     <title>
         @if($placeMode == "hotel")
@@ -168,22 +165,23 @@
 
                                                     <div class="single_filter_pois">
 
-                                                        <div class="title ui_columns"><span
-                                                                    class="titleWrap ui_column is-9"><a
-                                                                        class="titleLink"></a></span><a
-                                                                    class="view_all ui_column is-3"></a></div>
+                                                        <div class="title ui_columns">
+                                                            <span class="titleWrap ui_column is-9">
+                                                                <a class="titleLink"></a>
+                                                            </span>
+                                                            <a class="view_all ui_column is-3"></a>
+                                                        </div>
 
                                                         <div ng-repeat="packet in packets" class="option">
                                                             <div class="Price_3 ui_columns is-mobile">
 
-                                                                <div ng-repeat="place in packet.places"
-                                                                     class="ui_column is-3 is-mobile">
-                                                                    <div class="poi">
+                                                                <div ng-repeat="place in packet.places" class="ui_column is-3 is-mobile">
+                                                                    <div class="poi listBoxesMainDivs">
 
                                                                         <a href="[[place.redirect]]" class="thumbnail">
                                                                             <div class="prw_rup prw_common_centered_thumbnail">
-                                                                                <div class="sizing_wrapper" style="width:200px;height:120px;">
-                                                                                    <div class="centering_wrapper" style="margin-top:-66px;">
+                                                                                <div class="sizing_wrapper">
+                                                                                    <div class="centering_wrapper">
                                                                                         <img ng-src='[[place.pic]]'
                                                                                              width="100%" height="100%"
                                                                                              class='photo_image'
@@ -215,7 +213,7 @@
                                                                                 </div>
                                                                                 <a target="_blank" class="review_count" href="">
                                                                                     [[place.avgRate]]
-                                                                                    <span style="color: #16174F;">نقد</span>
+                                                                                    <span>نقد</span>
                                                                                 </a>
                                                                             </div>
                                                                             <div class="item">استان:
@@ -246,8 +244,7 @@
                             </div>
                         </div>
 
-                        <div class="lhr ui_column is-3 hideCount reduced_height"
-                             ng-controller="FilterController as filterCntl" style="direction: rtl;">
+                        <div class="lhr ui_column is-3 hideCount reduced_height rtl" ng-controller="FilterController as filterCntl">
 
                             <div class="ppr_rup ppr_priv_restaurant_filters">
                                 <div class="verticalFilters placements">
@@ -255,10 +252,8 @@
                                         <div class="prw_rup prw_restaurants_restaurant_filters">
                                             <div class="lhrFilterBlock jfy_filter_bar_selectedFilters selectedFilters">
                                                 <div class="filterGroupTitle">
-                                                    <img ng-show="showPic" ng-src="{{URL::asset('images/adv.jpg')}}"
-                                                         style="width: 100%;"/>
-                                                    <img ng-show="showPic" ng-src="{{URL::asset('images/bom.jpg')}}"
-                                                         style="margin-top: 18px;width: 100%;"/>
+                                                    <img ng-show="showPic" ng-src="{{URL::asset('images/adv.jpg')}}">
+                                                    <img ng-show="showPic" ng-src="{{URL::asset('images/bom.jpg')}}">
                                                 </div>
                                                 <br>
                                             </div>
@@ -1288,6 +1283,6 @@ $("#global-nav-hotels").attr('href', '{{route('hotelList', ['city' => $city, 'mo
 </script>
 
 <script src="{{URL::asset('js/adv.js')}}"></script>
-<div class="ui_backdrop dark" style="display: none; z-index: 10000000"></div>
+<div class="ui_backdrop dark" id="darkModeMainPage" ></div>
 </body>
 </html>

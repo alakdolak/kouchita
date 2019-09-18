@@ -13,9 +13,7 @@
     <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/hr_north_star.css?v=2')}}'/>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/icons.css?v=1')}}' />
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/mainPageModifiedStyles.css')}}' />
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/calendar.css')}}' />
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/loginPopUp.css')}}' />
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/footer.css')}}' />
 
     <script>
         var searchDir = '{{route('heyYou')}}';

@@ -612,6 +612,9 @@ $authUrl = $client->createAuthUrl();
 
 </script>
 
+
+<link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/loginPopUp.css')}}' />
+
 {{--loginPopUp--}}
 <span id="loginPopUp" onkeyup="if(event.keyCode == 13) login($('#username_main').val(), $('#password_main').val())" class="pop-up ui_modal hidden">
     <div>

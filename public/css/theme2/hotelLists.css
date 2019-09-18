@@ -331,6 +331,30 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     }
 }
 
+.listBoxesMainDivs > a:nth-child(1) > div > div {
+    width: 200px;
+    height: 120px;
+}
+
+.listBoxesMainDivs > a:nth-child(1) > div > div > div {
+    margin-top: -66px;
+}
+
+.listBoxesMainDivs > a:nth-child(1) > div:nth-child(3) > div:nth-child(2) > a > span {
+    color: #16174F;
+}
+
+#EATERY_FILTERS_CONT > div:nth-child(1) > div > div > img:nth-child(1) {
+    width: 100%;
+}
+
+#EATERY_FILTERS_CONT > div:nth-child(1) > div > div > img:nth-child(2) {
+    margin-top: 18px;
+    width: 100%;
+}
+
+
+
 #darkModeMainPage {
     display: none;
     z-index: 10000000;
