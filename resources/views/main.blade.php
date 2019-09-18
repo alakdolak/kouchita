@@ -12,7 +12,7 @@
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/masthead-saves.css?v=2')}}'/>
     <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/hr_north_star.css?v=2')}}'/>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/icons.css?v=1')}}' />
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/mainModifiedStyles.css')}}' />
+    <link rel='stylesheet' type='text/css' href='{{URL::asset('mainPageModifiedStyles.css')}}' />
 
     <script>
         var searchDir = '{{route('heyYou')}}';
