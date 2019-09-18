@@ -7,6 +7,8 @@
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/long_lived_global_legacy_2.css?v=1')}}"/>
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/hotelLists.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/calendar.css')}}"/>
+    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/loginPopUp.css')}}' />
+    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/footer.css')}}' />
 
     <title>
         @if($placeMode == "hotel")
@@ -111,8 +113,8 @@
                                                 </div>
                                             </div>
                                             {{--<div class="rowOfPopUp">--}}
-                                                {{--<span style="float: right;">بچه</span>--}}
-                                                {{--<div style="float: left">--}}
+                                                {{--<span class="float-right">بچه</span>--}}
+                                                {{--<div class="float-left">--}}
                                                     {{--<div onclick="changeRoomPassengersNum(-1, 1)"--}}
                                                          {{--class="shTIcon minusPlusIcons minus"></div>--}}
                                                     {{--<span class='numBetweenMinusPlusBtn children'--}}
@@ -153,44 +155,10 @@
             <div class="wrap"></div>
 
             <div id="BODYCON" class="col easyClear poolX adjust_padding new_meta_chevron_v2" ng-app="mainApp">
-
-                <style>
-                    .loader {
-                        /*border: 16px solid #f3f3f3;*/
-                        /*border-radius: 50%;*/
-                        background-image: url("{{URL::asset('images/loading.svg')}}");
-                        /*border-top: 16px solid blue;*/
-                        /*border-right: 16px solid green;*/
-                        /*border-bottom: 16px solid red;*/
-                        width: 100px;
-                        height: 100px;
-                        /*-webkit-animation: spin 2s linear infinite;*/
-                        /*animation: spin 2s linear infinite;*/
-                    }
-
-                    @-webkit-keyframes spin {
-                        0% {
-                            -webkit-transform: rotate(0deg);
-                        }
-                        100% {
-                            -webkit-transform: rotate(360deg);
-                        }
-                    }
-
-                    @keyframes spin {
-                        0% {
-                            transform: rotate(0deg);
-                        }
-                        100% {
-                            transform: rotate(360deg);
-                        }
-                    }
-                </style>
-
                 <div class="eateryOverviewContent">
                     <div class="ui_columns is-partitioned is-mobile">
 
-                        <div class="ui_column is-9" ng-controller="PlaceController as cntr" style="direction: rtl;">
+                        <div class="ui_column is-9 rtl" ng-controller="PlaceController as cntr">
                             <div infinite-scroll="myPagingFunction()" class="coverpage">
                                 <div class="ppr_rup ppr_priv_restaurants_coverpage_content">
                                     <div>
@@ -214,10 +182,8 @@
 
                                                                         <a href="[[place.redirect]]" class="thumbnail">
                                                                             <div class="prw_rup prw_common_centered_thumbnail">
-                                                                                <div class="sizing_wrapper"
-                                                                                     style="width:200px;height:120px;">
-                                                                                    <div class="centering_wrapper"
-                                                                                         style="margin-top:-66px;">
+                                                                                <div class="sizing_wrapper" style="width:200px;height:120px;">
+                                                                                    <div class="centering_wrapper" style="margin-top:-66px;">
                                                                                         <img ng-src='[[place.pic]]'
                                                                                              width="100%" height="100%"
                                                                                              class='photo_image'
@@ -234,9 +200,11 @@
                                                                         <div class="detail">
 
                                                                             <div class="item name "
-                                                                                 title="[[place.name]]"><a
-                                                                                        class="poiTitle" target="_blank"
-                                                                                        href="[[place.redirect]]">[[place.name]]</a>
+                                                                                 title="[[place.name]]">
+                                                                                <a class="poiTitle" target="_blank"
+                                                                                        href="[[place.redirect]]">
+                                                                                    [[place.name]]
+                                                                                </a>
                                                                             </div>
 
                                                                             <div class="item rating-count">
@@ -245,15 +213,17 @@
                                                                                         <span class="[[place.ngClass]]"></span>
                                                                                     </div>
                                                                                 </div>
-                                                                                <a target="_blank" class="review_count"
-                                                                                   href="">[[place.avgRate]] <span
-                                                                                            style="color: #16174F;">نقد</span>
+                                                                                <a target="_blank" class="review_count" href="">
+                                                                                    [[place.avgRate]]
+                                                                                    <span style="color: #16174F;">نقد</span>
                                                                                 </a>
                                                                             </div>
-                                                                            <div class="item">استان: <span>[[place.state]]</span>
+                                                                            <div class="item">استان:
+                                                                                <span>[[place.state]]</span>
                                                                             </div>
                                                                             <div class="item">شهر:
-                                                                                <span>[[place.city]]</span></div>
+                                                                                <span>[[place.city]]</span>
+                                                                            </div>
                                                                             <div class="booking"></div>
                                                                         </div>
                                                                     </div>
