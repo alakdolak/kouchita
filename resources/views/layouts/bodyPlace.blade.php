@@ -14,6 +14,10 @@
         @yield('meta')
 
         <style>
+            body {
+                font-family: 'IRANSansWeb' !important;
+            }
+
             .glyphicon {
                 font-family: 'Glyphicons Halflings' !important;
             }
@@ -22,7 +26,7 @@
 </head>
 
 
-    <body class="fall_2013_refresh_hr_top css_commerce_buttons ltr domn_en_US lang_en globalNav2011_reset rebrand_2017 hr_tabs_placement_test tabs_below_meta hr_tabs north_star nostalgic flat_buttons sitewide xo_pin_user_review_to_top track_back" style="font-family: 'IRANSansWeb' !important;">
+    <body class="fall_2013_refresh_hr_top css_commerce_buttons ltr domn_en_US lang_en globalNav2011_reset rebrand_2017 hr_tabs_placement_test tabs_below_meta hr_tabs north_star nostalgic flat_buttons sitewide xo_pin_user_review_to_top track_back">
 
         @if(!Auth::check())
             @include('layouts.loginPopUp')
