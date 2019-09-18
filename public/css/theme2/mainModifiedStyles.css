@@ -1362,7 +1362,6 @@ input[type="checkbox"]:checked + label span {
     padding: 40px 20px !important;
     height: auto;
     overflow: auto;
-    display: block !important;
 }
 
 #loginPopUp > div:nth-child(1) > img, #EnterEmail-loginPopUp > div:nth-child(1) > img, #EnterPhone-loginPopUp > div:nth-child(1) > img,
