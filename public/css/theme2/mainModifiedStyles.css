@@ -1553,7 +1553,7 @@ input[type="checkbox"]:checked + label span {
     padding-left: 22px;
     padding-right: 20px;
     border-radius: 10px;
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 3px 0px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 2px 3px 0;
 }
 
 #loginErrUserName {
@@ -1607,7 +1607,7 @@ input[type="checkbox"]:checked + label span {
     background: #4DC7BC;
     color: #FFF;
     border-radius: 10px;
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 3px 0px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 2px 3px 0;
 }
 
 #ForgetPassword > div:nth-child(2) > div:nth-child(2) > label > div {
