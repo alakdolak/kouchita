@@ -84,37 +84,32 @@ if ($total == 0)
     </style>
 
     {{--alarm--}}
-    <span class="ui_overlay ui_modal editTags getAlarm"
-          style="padding: 10px 10px 1px !important; z-index: 201; display: none">
-        <div class="shTIcon clsIcon" style="float: left; color: #4DC7BC; font-size: 2em"></div>
+    <span class="ui_overlay ui_modal editTags getAlarm">
+        <div class="shTIcon clsIcon"></div>
         <div class="alarmHeaderText"> آیا می خواهید کمترین قیمت ها را به شما اطلاع دهیم </div>
         <div class="alarmSubHeaderText"> هنگامی که قیمت پرواز های </div>
         <div class="ui_column ui_picker alarmBoxCityName">
-            <div class="shTIcon locationIcon" style="display: inline-block"></div>
+            <div class="shTIcon locationIcon inline-block"></div>
             <input id="fromWarning" class="alarmInputCityName" placeholder="شهر مبدأ">
-            <div id="resultSrc" class="data_holder"
-                 style="max-height: 160px; overflow: auto;"></div>
+            <div id="resultSrc" class="data_holder"></div>
         </div>
         <div class="alarmSubHeaderText"> به </div>
         <div class="ui_column ui_picker alarmBoxCityName">
-            <div class="shTIcon locationIcon" style="display: inline-block"></div>
+            <div class="shTIcon locationIcon inline-block"></div>
             <input id="toWarning" class="alarmInputCityName" placeholder="شهر مقصد">
-            <div id="resultDest" class="data_holder"
-                 style="max-height: 160px; overflow: auto;"></div>
+            <div id="resultDest" class="data_holder"></div>
         </div>
         <div class="alarmSubHeaderText"> کاهش یابد به شما اطلاع دهیم </div>
-        <div class="check-box__item hint-system"
-             style="text-align: right; width: 100%; font: 1em; color: #4A4A4A; padding-top: 0 !important;">
-            <label class="labelEdit" style="width: 50% !important; font-weight: 100; top: 0 !important; color: #888686"> سایر پیشنهادات را نیز به من اطلاع دهید </label>
-            <input type="checkbox" id="otherOffers" name="otherOffer" value="سایر پیشنهادات"
-                   style="display: inline-block; !important;">
+        <div class="check-box__item hint-system" id="notifyOtherSuggestionDiv">
+            <label class="labelEdit"> سایر پیشنهادات را نیز به من اطلاع دهید </label>
+            <input type="checkbox" id="otherOffers" name="otherOffer" value="سایر پیشنهادات">
         </div>
         @if(!Auth::check())
-            <div class="ui_column ui_picker alarmBoxCityName" style="width: 60% !important; display: inline-block">
-            <input id="emailWarning" class="alarmInputCityName" placeholder="آدرس ایمیل خود را وارد کنید">
-        </div>
+            <div class="ui_column ui_picker alarmBoxCityName" id="addYourEmailDivFlightNotification">
+                <input id="emailWarning" class="alarmInputCityName" placeholder="آدرس ایمیل خود را وارد کنید">
+            </div>
         @endif
-        <div style="float: left">
+        <div class="float-left">
             <button class="btn alarmPopUpBotton" type="button"> دریافت هشدار </button>
         </div>
     </span>
@@ -124,7 +119,7 @@ if ($total == 0)
              data-placement-name="global_nav_onpage_assets">
             <div class="ui_container">
                 <div class="ui_columns easyClear">
-                    <div class="ui_column" style="direction: rtl;position: relative;">
+                    <div class="ui_column rtl relative-position">
                         @include('layouts.shareBox')
                         <div ID="taplc_trip_planner_breadcrumbs_0" class="ppr_rup ppr_priv_trip_planner_breadcrumbs">
                             <ul class="breadcrumbs">
@@ -268,44 +263,45 @@ if ($total == 0)
         </div>
     </div>
 
-    <div class="ppr_rup ppr_priv_hr_atf_north_star_nostalgic" style="position: relative;">
+    <div class="ppr_rup ppr_priv_hr_atf_north_star_nostalgic relative-position">
 
-        <div class="atf_header_wrapper" style="position: relative;">
-            <div class="atf_header ui_container is-mobile full_width" style="position: relative;">
+        <div class="atf_header_wrapper relative-position">
+            <div class="atf_header ui_container is-mobile full_width relative-position">
 
-                <div class="ppr_rup ppr_priv_location_detail_header" style="position: relative;">
+                <div class="ppr_rup ppr_priv_location_detail_header relative-position">
                     <h1 id="HEADING" class="heading_title " property="name">{{$place->name}}</h1>
 
                     <div class="rating_and_popularity">
                         <span class="header_rating">
                            <div class="rs rating" rel="v:rating">
-                               <div class="prw_rup prw_common_bubble_rating overallBubbleRating" style="float: right;">
+                               <div class="prw_rup prw_common_bubble_rating overallBubbleRating float-left">
                                     @if($avgRate == 5)
-                                       <span class="ui_bubble_rating bubble_50" style="font-size:16px;"
+                                       <span class="ui_bubble_rating bubble_50 font-size-16"
                                              property="ratingValue" content="5" alt='5 of 5 bubbles'></span>
                                    @elseif($avgRate == 4)
-                                       <span class="ui_bubble_rating bubble_40" style="font-size:16px;"
+                                       <span class="ui_bubble_rating bubble_40 font-size-16"
                                              property="ratingValue" content="4" alt='4 of 5 bubbles'></span>
                                    @elseif($avgRate == 3)
-                                       <span class="ui_bubble_rating bubble_30" style="font-size:16px;"
+                                       <span class="ui_bubble_rating bubble_30 font-size-16"
                                              property="ratingValue" content="3" alt='3 of 5 bubbles'></span>
                                    @elseif($avgRate == 2)
-                                       <span class="ui_bubble_rating bubble_20" style="font-size:16px;"
+                                       <span class="ui_bubble_rating bubble_20 font-size-16"
                                              property="ratingValue" content="2" alt='2 of 5 bubbles'></span>
                                    @elseif($avgRate == 1)
-                                       <span class="ui_bubble_rating bubble_10" style="font-size:16px;"
+                                       <span class="ui_bubble_rating bubble_10 font-size-16"
                                              property="ratingValue" content="1" alt='1 of 5 bubbles'></span>
                                    @endif
                                </div>
-                               <a class="more taLnk" href="#REVIEWS" style="margin-right: 15px;">
+                               <a class="more taLnk" id="moreTaLnkReviewHeader" href="#REVIEWS">
                                    <span property="v:count" id="commentCount"></span> نقد
                                </a>
                            </div>
                         </span>
-                        <span class="header_popularity popIndexValidation" style="margin-right: 0 !important">
-                        <a> {{$total}} امتیاز</a></span>
+                        <span class="header_popularity popIndexValidation" id="scoreSpanHeader">
+                            <a> {{$total}} امتیاز</a>
+                        </span>
                     </div>
-                    <div style="position: relative">
+                    <div class="relative-position">
 
                         {{--<div style="width: 110px;height: 29px;position: absolute;left: 100px;border: 1px solid black;cursor: pointer;" onclick="changeStatetoReserved()">--}}
                         {{--<span class="ui_button" style="padding: 0">تغییر به حالت رزرو</span>--}}
@@ -314,13 +310,13 @@ if ($total == 0)
                         {{--<span class="ui_button" style="padding: 0">تغییر به حالت غیر رزرو</span>--}}
                         {{--</div>--}}
 
-                        <span class="ui_button_overlay" style="position: relative; float: left">
-                            <div id="targetHelp_7" class="targets" style="float: right; position: relative">
+                        <span class="ui_button_overlay relative-position float-left">
+                            <div id="targetHelp_7" class="targets relative-position float-right">
                                 <span onclick="saveToTrip()"
                                       class="ui_button saves ui_icon {{($save) ? "red-heart-fill" : "red-heart"}} ">لیست سفر</span>
                                 <div id="helpSpan_7" class="helpSpans row hidden">
                                     <span class="introjs-arrow"></span>
-                                    <p class="col-xs-12" style="font-size: 12px; line-height: 1.428 !important;">
+                                    <p class="col-xs-12">
                                         در هر مکانی که هستید با زدن این دکمه می توانید، آن مکان را به لیست سفرهای خود اضافه کنید. به سادگی همراه با دوستان تان سفر های خود را برنامه ریزی کنید. به سادگی همین دکمه...
                                     </p>
                                     <button data-val="7" class="btn btn-success nextBtnsHelp"
@@ -331,12 +327,12 @@ if ($total == 0)
                                 </div>
                             </div>
                             @if($hasLogin)
-                                <div id="targetHelp_8" class="targets" style="float: left;">
+                                <div id="targetHelp_8" class="targets float-left">
                                     <span onclick="bookMark()"
                                           class="ui_button casino save-location-7306673 ui_icon {{($bookMark) ? "castle" : "red-heart"}} ">نشانه گذاری</span>
                                     <div id="helpSpan_8" class="helpSpans hidden row">
                                         <span class="introjs-arrow"></span>
-                                        <p style="font-size: 12px; line-height: 1.428 !important;">شاید بعدا بخواهید دوباره به همین مکان باز گردید. پس آن را نشان کنید تا از منوی بالا هر وقت که خواستید دوباره به آن باز گردید.</p>
+                                        <p>شاید بعدا بخواهید دوباره به همین مکان باز گردید. پس آن را نشان کنید تا از منوی بالا هر وقت که خواستید دوباره به آن باز گردید.</p>
                                         <button data-val="8" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_8">بعدی</button>
                                         <button data-val="8" class="btn btn-primary backBtnsHelp" id="backBtnHelp_8">قبلی</button>
                                         <button class="btn btn-danger exitBtnHelp">خروج</button>
@@ -383,20 +379,20 @@ if ($total == 0)
             </div>
         </div>
 
-        <div class="atf_meta_and_photos_wrapper" style="position: relative;">
-            <div class="atf_meta_and_photos ui_container is-mobile easyClear" style="position: relative;">
+        <div class="atf_meta_and_photos_wrapper relative-postion">
+            <div class="atf_meta_and_photos ui_container is-mobile easyClear relative-postion">
                 @if($placeMode == "hotel")
-                    <div id="bestPrice" class="meta"
-                         style="position: relative; @if(session('goDate') != null && session('backDate') != null) display: none @endif ">
-                        <div id="targetHelp_9" class="targets " style="float: left">
+                    <div id="bestPrice" class="meta relative-position"
+                         style="@if(session('goDate') != null && session('backDate') != null) display: none @endif ">
+                        <div id="targetHelp_9" class="targets  float-left">
                             @if($place->reserveId == null)
-                                <div style="width: 100%; height: 100%; position: absolute; z-index: 9; background-color: #000000cf; display: flex; justify-content: center; align-items: center;">
-                                    <div style="color: white; font-size: 20px; font-weight: bold; text-align: center; padding: 0 20px; direction: rtl;">
+                                <div class="offlineReserveErr" >
+                                    <div>
                                         متاسفانه در حال حاضر امکان رزرو انلاین برای این مرکز موجود نمی باشد.
                                     </div>
                                 </div>
                             @endif
-                            <div class="meta_inner">
+                            <div class="meta_inner" id="bestPriceInnerDiv">
                                 <form id="form_hotel" method="post" action="{{route('makeSessionHotel')}}">
                                     {{csrf_field()}}
                                     <input type="hidden" name="adult" id="form_adult">
@@ -412,39 +408,28 @@ if ($total == 0)
                                     <input type="hidden" name="id" value="{{$place->id}}">
                                 </form>
                                 <div class="ppr_rup ppr_priv_hr_atf_north_star_traveler_info_nostalgic">
-                                    <div class="title" style="color: #a3513d;">بهترین قیمت اقامت</div>
+                                    <div class="title">بهترین قیمت اقامت</div>
                                     <div class="metaDatePicker easyClear">
-                                        <div class="prw_rup prw_datepickers_hr_north_star_dates_nostalgic"
-                                             style="border:2px solid #e5e5e5; border-radius: 10px; width: 80%; margin: 0 auto">
-                                            <label class="lableCalender" style="margin-left: 0 !important;">
+                                        <div class="prw_rup prw_datepickers_hr_north_star_dates_nostalgic">
+                                            <label class="lableCalender">
                                                     <span onclick="changeTwoCalendar(2); nowCalendar()"
                                                           class="ui_icon calendar calendarIcon"></span>
                                                 <input name="GoDate" type="text" id="goDate" placeholder="تاریخ رفت"
                                                        class="inputLableCalender" readonly value="{{session('goDate')}}">
                                             </label>
-                                            <label class="lableCalender" style="margin-right: 0 !important;">
+                                            <label class="lableCalender">
                                                 <span class="ui_icon calendar"></span>
                                                 <input value="{{session('backDate')}}" name="BackDate" type="text"
                                                        id="backDate"
                                                        placeholder="تاریخ برگشت" readonly class="inputLableCalender">
                                             </label>
-
-                                            <style>
-                                                td {
-                                                    width: 14% !important;
-                                                }
-                                            </style>
-                                            <div style="width: 1100px; position: absolute; left: -40%; top: 90%;">
+                                            <div>
                                                 @include('layouts.calendar')
                                             </div>
                                         </div>
                                         <div class="roomBox">
-                                            <div class="shTIcon passengerIcon"
-                                                 style="font-size: 25px; display: inline-block; cursor: pointer;"
-                                                 onclick="togglePassengerNoSelectPane()"></div>
-                                            <div id="roomDetail"
-                                                 style="font-size: 1.1em; display: inline-block; cursor: pointer;"
-                                                 onclick="togglePassengerNoSelectPane()">
+                                            <div class="shTIcon passengerIcon" onclick="togglePassengerNoSelectPane()"></div>
+                                            <div id="roomDetail" onclick="togglePassengerNoSelectPane()">
                                                 <span class="room" id="num_room">{{--{{$room}}--}}</span>&nbsp;
                                                 <span>اتاق</span>&nbsp;-&nbsp;
                                                 <span class="adult" id="num_adult">{{--{{$adult}}--}}</span>
@@ -453,17 +438,15 @@ if ($total == 0)
                                                 {{--<span>بچه</span>&nbsp;--}}
                                             </div>
                                             <div id="passengerArrowDown" onclick="togglePassengerNoSelectPane()"
-                                                 class="shTIcon searchBottomArrowIcone arrowPassengerIcone"
-                                                 style="display: inline-block;"></div>
+                                                 class="shTIcon searchBottomArrowIcone arrowPassengerIcone inline-block"></div>
                                             <div id="passengerArrowUp" onclick="togglePassengerNoSelectPane()"
-                                                 class="shTIcon searchTopArrowIcone arrowPassengerIcone hidden"
-                                                 style="display: inline-block;"></div>
+                                                 class="shTIcon searchTopArrowIcone arrowPassengerIcone hidden inline-block"></div>
 
                                             <div class="roomPassengerPopUp hidden" id="passengerNoSelectPane"
                                                  onmouseleave="addClassHidden('passengerNoSelectPane'); passengerNoSelect = false;">
                                                 <div class="rowOfPopUp">
-                                                    <span style="float: right;">اتاق</span>
-                                                    <div style="float: left; margin-right: 25px;">
+                                                    <span class="float-left">اتاق</span>
+                                                    <div>
                                                         <div onclick="changeRoomPassengersNum(-1, 3)"
                                                              class="shTIcon minusPlusIcons minus"></div>
                                                         <span class='numBetweenMinusPlusBtn room'
@@ -473,8 +456,8 @@ if ($total == 0)
                                                     </div>
                                                 </div>
                                                 <div class="rowOfPopUp">
-                                                    <span style="float: right;">بزرگسال</span>
-                                                    <div style="float: left">
+                                                    <span class="float-left">بزرگسال</span>
+                                                    <div class="float-left">
                                                         <div onclick="changeRoomPassengersNum(-1, 2)"
                                                              class="shTIcon minusPlusIcons minus"></div>
                                                         <span class='numBetweenMinusPlusBtn adult'
@@ -484,8 +467,8 @@ if ($total == 0)
                                                     </div>
                                                 </div>
                                                 <div class="rowOfPopUp">
-                                                    {{--<span style="float: right;">بچه</span>--}}
-                                                    {{--<div style="float: left">--}}
+                                                    {{--<span class="float-left">بچه</span>--}}
+                                                    {{--<div class="float-left">--}}
                                                     {{--<div onclick="changeRoomPassengersNum(-1, 1)"--}}
                                                     {{--class="shTIcon minusPlusIcons minus"></div>--}}
                                                     {{--<span class='numBetweenMinusPlusBtn children'--}}
@@ -525,40 +508,28 @@ if ($total == 0)
                             <button class="btn btn-danger exitBtnHelp">خروج</button>
                         </div>
                     </div>
-                    <div id="bestPriceRezerved" class="meta"
-                         style="position: relative; @if(session('goDate') == null && session('backDate') == null) display: none @endif  ">
-                        <div id="targetHelp_9" class="targets" style="float: left">
+                    <div id="bestPriceRezerved" class="meta relative-position"
+                         style="@if(session('goDate') == null && session('backDate') == null) display: none @endif">
+                        <div id="targetHelp_9" class="targets float-left">
                             @if($place->reserveId == null)
-                                <div style="width: 100%; height: 100%; position: absolute; z-index: 9; background-color: #000000cf; display: flex; justify-content: center; align-items: center;">
-                                    <div style="color: white; font-size: 20px; font-weight: bold; text-align: center; padding: 0 20px; direction: rtl;">
+                                <div class="offlineReserveErr">
+                                    <div>
                                         متاسفانه در حال حاضر امکان رزرو انلاین برای این مرکز موجود نمی باشد.
                                     </div>
                                 </div>
                             @endif
                             @if(session('goDate') != null)
-                                <div class="meta_inner">
+                                <div class="meta_inner" id="">
                                     <div class="ppr_rup ppr_priv_hr_atf_north_star_traveler_info_nostalgic">
                                         <div class="metaDatePicker easyClear">
-                                            <div style="border-bottom: 1.5px solid #e5e5e5">
-                                                <style>
-                                                    .closeXicon2:before{
-                                                        position: absolute !important;
-                                                        top: 10px !important;
-                                                    }
-                                                </style>
-                                                <div class="shTIcon closeXicon closeXicon2"
-                                                     onclick="changeStatetounReserved()"></div>
-                                                <div class="prw_rup prw_datepickers_hr_north_star_dates_nostalgic"
-                                                     style="width: 70%;">
-                                                    <label class="lableCalender"
-                                                           style="margin: 6px 0 6px 6px !important;">
+                                            <div id="date_input_main_div">
+                                                <div class="shTIcon closeXicon closeXicon2" onclick="changeStatetounReserved()"></div>
+                                                <div class="prw_rup prw_datepickers_hr_north_star_dates_nostalgic">
+                                                    <label class="lableCalender" id="date_input_label">
                                                         <span class="ui_icon calendar"></span>
-                                                        <input type="text" id="date_input"
-                                                               placeholder="{{session('goDate')}}"
-                                                               class="inputLableCalender">
+                                                        <input type="text" id="date_input" placeholder="{{session('goDate')}}" class="inputLableCalender">
                                                     </label>
-                                                    <label class="lableCalender"
-                                                           style="margin: 6px 0 6px 6px !important;">
+                                                    <label class="lableCalender">
                                                         <span class="ui_icon calendar"></span>
                                                         <input type="text" id="date_input_end_inHotel"
                                                                placeholder="{{session('backDate')}}"
@@ -568,15 +539,14 @@ if ($total == 0)
                                             </div>
                                             <div class="offerBox">
                                                 @if($rooms != null)
-                                                    <div style="font-size: 1.1em; color: #a3513d;">بهترین قیمت</div>
+                                                    <div id="bestPriceTitleWithRoom">بهترین قیمت</div>
                                                     <div>کمترین قیمت برای هرشب اقامت</div>
                                                     <div>
-                                                        <div style="font-size: 1.4em; display: inline-block"
-                                                             id="minimumPrice">{{$place->minPrice}}
+                                                        <div id="minimumPrice">{{$place->minPrice}}
                                                             {{--<div class="salePrice" style="width: 54px; margin: -14px 0 0 0">550.000</div>--}}
                                                         </div>
-                                                        <div style="float: left">
-                                                            <div style="float:right; margin: 2px 10px;">
+                                                        <div class="float-left">
+                                                            <div id="fromAliBabaLink">
                                                                 <div>از علی بابا</div>
                                                                 <img src="" alt="">
                                                             </div>
@@ -585,16 +555,16 @@ if ($total == 0)
                                                             </button>
                                                         </div>
                                                     </div>
-                                                    <div style="font-size: 0.9em; color: red; margin: 2px 0;">
+                                                    <div id="savePercentage">
                                                         {{--<div style="display: inline-block">ده درصد تخفیف ویژه نوروز</div>--}}
-                                                        <div style="float: left">{{$place->savePercent}} درصد ذخیره
+                                                        <div class="float-left">{{$place->savePercent}} درصد ذخیره
                                                         </div>
                                                     </div>
-                                                    <div style="margin: 1% 0;">
+                                                    <div id="bestPriceBtn">
                                                         {{--<button class="btn specOfferBtn" type="button">پیشنهاد ویژه</button>--}}
                                                         <button class="btn specOfferBtn"
                                                                 type="button">{{$place->service}}</button>
-                                                        {{--<button class="btn reservBtn" type="button" style="float: left">رزرو آنی</button>--}}
+                                                        {{--<button class="btn reservBtn float-left" type="button">رزرو آنی</button>--}}
                                                     </div>
                                                 @else
                                                     <div>
@@ -609,7 +579,7 @@ if ($total == 0)
                                             {{--<div style="font-size: 1.4em; display: inline-block">650.000--}}
                                             {{--<div class="salePrice" style="width: 54px; margin: -14px 0 0 0">550.000</div>--}}
                                             {{--</div>--}}
-                                            {{--<div style="float: left">--}}
+                                            {{--<div class="float-left">--}}
                                             {{--<div style="float:right; margin: 2px 10px;">--}}
                                             {{--<div>از علی بابا</div>--}}
                                             {{--<img src="" alt="">--}}
@@ -622,14 +592,14 @@ if ($total == 0)
                                             {{--</div>--}}
                                             {{--<div style="margin: 1% 0;">--}}
                                             {{--<button class="btn specOfferBtn" type="button">پیشنهاد ویژه</button>--}}
-                                            {{--<button class="btn reservBtn" type="button" style="float: left">رزرو آنی</button>--}}
+                                            {{--<button class="btn reservBtn float-left" type="button">رزرو آنی</button>--}}
                                             {{--</div>--}}
                                             {{--</div>--}}
 
                                             {{--<div class="offerBox">--}}
                                             {{--<div>--}}
                                             {{--<div style="font-size: 1.4em; display: inline-block; line-height: 40px;">650.000</div>--}}
-                                            {{--<div style="float: left">--}}
+                                            {{--<div class="float-left">--}}
                                             {{--<div style="float:right; margin: 2px 10px;">--}}
                                             {{--<div>از علی بابا</div>--}}
                                             {{--<img src="" alt="">--}}
@@ -663,12 +633,12 @@ if ($total == 0)
                         </div>
                     </div>
                 @endif
-                <div class="prw_rup prw_common_location_photos photos" style="position: relative;">
-                    <div id="targetHelp_10" class="targets" style="height: 400px;">
-                        <div class="inner" style="max-width: 752px; max-height: 338px;">
-                            <div class="primaryWrap" style="width:75%;">
+                <div class="prw_rup prw_common_location_photos photos relative-postion">
+                    <div id="targetHelp_10" class="targets">
+                        <div class="inner">
+                            <div class="primaryWrap">
                                 <div class="prw_rup prw_common_mercury_photo_carousel">
-                                    <div class="carousel bignav" style="max-height: 338px;">
+                                    <div class="carousel bignav">
                                         <div class="carousel_images carousel_images_header">
                                             <div class="see_all_count_wrap" onclick="getPhotos(-1)">
                                                 <span class="see_all_count"><span class="ui_icon camera"></span>تمام عکس ها {{$userPhotos + $sitePhotos}} </span>
@@ -683,20 +653,18 @@ if ($total == 0)
                                 </div>
                             </div>
                             <div class="secondaryWrap">
-                                <div class="tileWrap" style="height:33.333332%;">
+                                <div class="tileWrap">
                                     <div class="prw_rup prw_hotels_flexible_album_thumb tile">
                                         <div class="albumThumbnail">
                                             <div class="prw_rup prw_common_centered_image">
                                                 @if($sitePhotos != 0)
-                                                    <span onclick="getPhotos(-1)" class="imgWrap"
-                                                          style="max-width:200px;max-height:113px;">
+                                                    <span onclick="getPhotos(-1)" class="imgWrap imgWrap1stTemp">
                                                         <img alt="{{$place->alt1}}" src="{{$thumbnail}}"
                                                              class="centeredImg" style=" min-width:152px; "
                                                              width="100%"/>
                                                     </span>
                                                 @else
-                                                    <span class="imgWrap"
-                                                          style="max-width:200px;max-height:113px;"></span>
+                                                    <span class="imgWrap imgWrap1stTemp"></span>
                                                 @endif
                                             </div>
                                             @if($sitePhotos != 0)
@@ -713,7 +681,7 @@ if ($total == 0)
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tileWrap" style="height:33.333332%;">
+                                <div class="tileWrap" >
                                     <div class="prw_rup prw_hotels_flexible_album_thumb tile">
                                         <div class="albumThumbnail">
                                             <div class="prw_rup prw_common_centered_image">
@@ -731,7 +699,7 @@ if ($total == 0)
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tileWrap" style="height:33.333332%;" onclick="showModal()">
+                                <div class="tileWrap"  onclick="showModal()">
                                     <div class="prw_rup prw_hotels_flexible_album_thumb tile">
                                         <div class="albumThumbnail">
                                             <div class="prw_rup prw_common_centered_image"><span class="imgWrap "
@@ -761,9 +729,8 @@ if ($total == 0)
     </div>
 
     <div id="MAINWRAP"
-         class=" full_meta_photos_v3  full_meta_photos_v4  big_pic_mainwrap_tweaks horizontal_xsell ui_container is-mobile"
-         style="position: relative;">
-        <div id="MAIN" class="Hotel_Review prodp13n_jfy_overflow_visible" style="position: relative;">
+         class=" full_meta_photos_v3  full_meta_photos_v4  big_pic_mainwrap_tweaks horizontal_xsell ui_container is-mobile relative-postion">
+        <div id="MAIN" class="Hotel_Review prodp13n_jfy_overflow_visible relative-postion">
             <div id="BODYCON" ng-app="mainApp"
                  class="col easyClear bodLHN poolB adjust_padding new_meta_chevron new_meta_chevron_v2"
                  style="position: relative;">
@@ -786,7 +753,7 @@ if ($total == 0)
                     <div class="col-xs-2  changeWidth"><a href="#introduction">معرفی کلی</a></div>
                 </div>
                 <div style="height: 90px;background-color: rgb(248,248,248);"></div>
-                <div class="hr_btf_wrap" style="position: relative;">
+                <div class="hr_btf_wrap relative-postion">
                     <div id="introduction" class="ppr_rup ppr_priv_location_detail_overview">
                         <div class="block_wrap" data-tab="TABS_OVERVIEW">
                             <div class="block_header"
@@ -972,9 +939,8 @@ if ($total == 0)
                             <div class="column_wrap ui_columns is-mobile"
                                  style="width: 100%; direction: rtl; position: relative;">
                                 <div class="content_column ui_column is-10 roomBox_IS_10">
-                                    <div class="ppr_rup ppr_priv_location_reviews_container" style="position: relative">
-                                        <div id="rooms" class="ratings_and_types concepts_and_filters block_wrap"
-                                             style="position: relative">
+                                    <div class="ppr_rup ppr_priv_location_reviews_container relative-position">
+                                        <div id="rooms" class="ratings_and_types concepts_and_filters block_wrap relative-position">
                                             <div class="header_group block_header"
                                                  style="position: relative; padding-bottom: 2%; border-bottom: solid lightgray 1.5px; display: flex; align-items: center">
                                                 <h3 class="tabs_header reviews_header block_title"
@@ -1008,7 +974,7 @@ if ($total == 0)
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="roomRow" style="float: left">
+                                                            <div class="roomRow float-left">
                                                                 <div class="roomNumber">
                                                                     <div style="color: #4dc7bc; display: inline-block; line-height: 24px">
                                                                         تعداد اتاق
@@ -1074,7 +1040,7 @@ if ($total == 0)
                                                         <div>
                                                             <div style="display: inline-block">
                                                                 از {{$rooms[$i]->provider}}</div>
-                                                            <img style="float: left">
+                                                            <img class="float-left">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1088,7 +1054,7 @@ if ($total == 0)
                                                                 <div class="roomRow "
                                                                      style="width: 100%; margin-bottom: 2%;">
                                                                     <div class="roomName">{{$rooms[$i]->name}}</div>
-                                                                    <div class="shTIcon closeXicon" style="float: left;"
+                                                                    <div class="shTIcon closeXicon float-left"
                                                                          onclick="document.getElementById('room_info{{$i}}').style.display = 'none'">
                                                                     </div>
                                                                 </div>
@@ -1138,7 +1104,7 @@ if ($total == 0)
                                     <div class="priceRow_IS_2">
                                         <div>
                                             <div class="lable_IS_2">تعداد اتاق</div>
-                                            <div style="float: left" id="totalNumRoom"></div>
+                                            <div class="float-left" id="totalNumRoom"></div>
                                         </div>
                                         <div style="text-align: center;" id="discriptionNumRoom">
                                         </div>
@@ -1201,7 +1167,7 @@ if ($total == 0)
                                             </div>
                                             <div class="priceRow_IS_2">
                                                 <div style="margin-bottom: 15px;">
-                                                    <div style="float: left"><span id="check_total_num_room"></span>اتاق
+                                                    <div class="float-left"><span id="check_total_num_room"></span>اتاق
                                                     </div>
                                                     <div class="lable_IS_2">تعداد اتاق</div>
                                                 </div>
@@ -1210,7 +1176,7 @@ if ($total == 0)
                                                 </div>
                                             </div>
                                             <div style="margin: 7% 0; text-align: center; position: absolute; bottom: 0; left: 0px; width: 100%; padding-right: 5%;">
-                                                <span style="float: right;">
+                                                <span class="float-left">
                                                     {{$rooms[0]->provider}}
                                                 </span>
                                                 {{--<a href="{{url('buyHotel')}}">--}}
@@ -1239,8 +1205,7 @@ if ($total == 0)
                                                          style="display: flex; flex-direction: column; margin-bottom: 2%;">
                                                         <span class="header_rating">
                                                    <div class="rs rating" rel="v:rating">
-                                                       <div class="prw_rup prw_common_bubble_rating overallBubbleRating"
-                                                            style="float: right;">
+                                                       <div class="prw_rup prw_common_bubble_rating overallBubbleRating float-left">
                                                             @if($avgRate == 5)
                                                                <span class="ui_bubble_rating bubble_50"
                                                                      style="font-size:16px;"
@@ -1315,10 +1280,9 @@ if ($total == 0)
                         <div class="column_wrap ui_columns is-mobile"
                              style="width: 100%; direction: rtl; position: relative;">
                             <div class="content_column ui_column is-8" style="margin-top: 20px; position: relative;">
-                                <div class="ppr_rup ppr_priv_location_reviews_container" style="position: relative">
-                                    <div id="REVIEWS" class="ratings_and_types concepts_and_filters block_wrap"
-                                         style="position: relative">
-                                        <div class="header_group block_header" style="position: relative">
+                                <div class="ppr_rup ppr_priv_location_reviews_container relative-position">
+                                    <div id="REVIEWS" class="ratings_and_types concepts_and_filters block_wrap relative-position">
+                                        <div class="header_group block_header relative-position">
                                             <div id="targetHelp_11" class="targets row"
                                                  style="max-width: 100px; float: left">
                                                 <span style="color: #FFF !important;"
@@ -1589,8 +1553,7 @@ if ($total == 0)
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="ppr_rup ppr_priv_location_review_keyword_search"
-                                                 style="position: relative">
+                                            <div class="ppr_rup ppr_priv_location_review_keyword_search relative-position">
                                                 <div id="taplc_location_review_keyword_search_hotels_0_search">
                                                     <label class="title"
                                                            for="taplc_location_review_keyword_search_hotels_0_q">نمایش
@@ -1601,8 +1564,8 @@ if ($total == 0)
                                                             <div class="search-input ">
                                                                 <div class="search-submit"
                                                                      onclick="comments($('#comment_search_text').val())">
-                                                                    <div class="submit"><span
-                                                                                class="ui_icon search search-icon"/>
+                                                                    <div class="submit">
+                                                                        <span class="ui_icon search search-icon"></span>
                                                                     </div>
                                                                 </div>
                                                                 <input type="text" autocomplete="off"
@@ -1696,10 +1659,10 @@ if ($total == 0)
                         </div>
                     </div>
 
-                    <div id="photosDiv" class="ppr_rup ppr_priv_hr_btf_north_star_photos" style="position: relative;">
-                        <div class="block_wrap" style="position: relative;">
-                            <div class="block_header" data-tab="TABS_PHOTOS" style="position: relative;">
-                                <div id="targetHelp_13" class="targets" style="float: left;">
+                    <div id="photosDiv" class="ppr_rup ppr_priv_hr_btf_north_star_photos relative-postion">
+                        <div class="block_wrap relative-postion">
+                            <div class="block_header" data-tab="TABS_PHOTOS relative-postion">
+                                <div id="targetHelp_13" class="targets float-left">
                                     <a style="color: #FFF !important;" onclick="showAddPhotoPane()"
                                        class="ui_button primary button_war">افزودن عکس </a>
                                     <div id="helpSpan_13" class="helpSpans hidden row">
@@ -1783,7 +1746,7 @@ if ($total == 0)
                                              style="padding-bottom: 22px;padding-top: 22px;">
                                             <div id="map" class="ui_column is-12 mapTile prv_map clickable"
                                                  style="float: right; height:224px; border: 1px solid #000;"></div>
-                                            <div style="clear: both;"></div>
+                                            <div class="clear-both"></div>
                                         </div>
                                         <div class="prw_rup prw_common_btf_nearby_poi_grid poiGrid hotel"
                                              style="border-color: #CCCCCC !important;">
@@ -1816,7 +1779,7 @@ if ($total == 0)
                                                     </a>
                                                 </div>
 
-                                                <div style="clear: both;"></div>
+                                                <div class="clear-both"></div>
                                             </div>
                                         </div>
                                         <div class="prw_rup prw_common_btf_nearby_poi_grid poiGrid eatery"
@@ -1851,7 +1814,7 @@ if ($total == 0)
                                                     </a>
                                                 </div>
 
-                                                <div style="clear: both;"></div>
+                                                <div class="clear-both"></div>
                                             </div>
                                         </div>
                                         <div class="prw_rup prw_common_btf_nearby_poi_grid poiGrid attraction"
@@ -1887,7 +1850,7 @@ if ($total == 0)
                                                     </a>
                                                 </div>
 
-                                                <div style="clear: both;"></div>
+                                                <div class="clear-both"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -1896,11 +1859,11 @@ if ($total == 0)
                         </div>
                     </div>
 
-                    <div id="ansAndQeustionDiv" class="ppr_rup ppr_priv_location_qa" style="position: relative;">
-                        <div data-tab="TABS_ANSWERS" class="block_wrap" style="position: relative">
-                            <div class="block_header" style="position: relative">
-                                <div id="targetHelp_14" class="targets" style="float: left;">
-                                    <span class="ui_button primary fr" onclick="showAskQuestion()" style="float: left;">سوال بپرس</span>
+                    <div id="ansAndQeustionDiv" class="ppr_rup ppr_priv_location_qa relative-postion">
+                        <div data-tab="TABS_ANSWERS" class="block_wrap relative-position">
+                            <div class="block_header relative-position">
+                                <div id="targetHelp_14" class="targets float-left">
+                                    <span class="ui_button primary fr float-left" onclick="showAskQuestion()">سوال بپرس</span>
                                     <div id="helpSpan_14" class="helpSpans hidden row">
                                         <span class="introjs-arrow"></span>
                                         <p>اگر سوالی دارید با فشردن این دکمه از دوستانتان بپرسید تا شما را یاری
@@ -1923,20 +1886,19 @@ if ($total == 0)
                                 <textarea style="width: 100%;" name="topicText" id="questionTextId"
                                           class="topicText ui_textarea"
                                           placeholder="سلام هرچی میخواهی بپرسید. بدون خجالت"></textarea>
-                                <span onclick="$('#rules').removeClass('hidden')" class="postingGuidelines"
-                                      style="float: right;">راهنما و قوانین</span>
+                                <span onclick="$('#rules').removeClass('hidden')" class="postingGuidelines float-left">راهنما و قوانین</span>
                                 <div class="underForm" style="float: left;margin-right: 10px;">
                                     <span class="ui_button primary formSubmit" onclick="askQuestion()">ثبت</span>
                                     <span class="ui_button secondary formCancel"
                                           onclick="hideAskQuestion()">انصراف</span>
                                 </div>
-                                <div style="clear: both;"></div>
+                                <div class="clear-both"></div>
                             </div>
-                            <div style="clear: both;"></div>
+                            <div class="clear-both"></div>
 
-                            <div class="block_body_top" style="position: relative">
+                            <div class="block_body_top relative-position">
 
-                                <div class="prw_rup prw_common_location_topic" style="position: relative">
+                                <div class="prw_rup prw_common_location_topic relative-position">
                                     <div style="direction: rtl; position: relative"
                                          class="question is-mobile ui_column is-12" id="questionsContainer"></div>
                                 </div>
@@ -4188,7 +4150,7 @@ if ($total == 0)
                         newElement += '<label class="labelForCheckBox" for="cat_file_' + response[i].id + '">';
                         newElement += '<span></span>&nbsp;&nbsp;';
                         newElement += response[i].name + '</label>'
-                        newElement += '</div><div style="clear: both"></div>';
+                        newElement += '</div><div class="clear-both"></div>';
                     }
                     $("#photoTags").empty().append(newElement);
                 }

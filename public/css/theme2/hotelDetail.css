@@ -28,6 +28,7 @@
 .btn-success:focus {
     box-shadow: 0 0 0 0 !important;
 }
+
 .gm-style-iw {
     top: 15px !important;
     left: 10px !important;
@@ -53,6 +54,7 @@ td {
 .titleInTable {
     color: #4dc7bc;
 }
+
 .progress-container {
     width: 100%;
     height: 8px;
@@ -64,6 +66,7 @@ td {
     background: #4caf50;
     width: 0;
 }
+
 .is-create-trip {
     color: #00AF87 !important;
     background-blend-mode: overlay;
@@ -161,6 +164,7 @@ td {
 .rec {
     cursor: pointer;
 }
+
 input[type="checkbox"], input[type="radio"] {
     display: none;
 }
@@ -281,6 +285,7 @@ p {
     color: #4dc7bc;
     font-size: 1.5em;
 }
+
 .offerBox {
     width: 100%;
     border-bottom: 2px solid #e5e5e5;
@@ -321,6 +326,7 @@ p {
     color: #050c93;
     margin: 3px 0 10px 0;
 }
+
 .numBetweenMinusPlusBtn {
     float: left;
     margin-top: 2px;
@@ -378,6 +384,7 @@ p {
     height: 45px;
     float: right;
 }
+
 /*search btn section*/
 .srchBox {
     width: 44%;
@@ -407,6 +414,7 @@ p {
     bottom: 5px;
     margin: 0 7px;
 }
+
 .roomBox_IS_10 {
     margin-top: 20px;
     position: relative;
@@ -522,6 +530,7 @@ p {
     display: inline-block;
     margin: 0 5px 0;
 }
+
 .priceRow_IS_2 {
     margin: 7% 0;
     font-weight: 400;
@@ -533,6 +542,7 @@ p {
     color: #4dc7bc;
     display: inline-block;
 }
+
 .viewOffersBtn {
     background: #fcc156;
     border-color: #fcc156;
@@ -580,9 +590,216 @@ p {
     bottom: auto;
     overflow: auto;
     max-height: 500px;
-    z-index: 10000001;
+    z-index: 201;
     direction: rtl;
     text-align: right;
+    padding: 10px 10px 1px !important;
+    display: none;
+}
+
+.getAlarm > div:nth-child(1) {
+    float: left;
+    color: #4DC7BC;
+    font-size: 2em
+}
+
+#resultSrc {
+    max-height: 160px;
+    overflow: auto;
+}
+
+#resultDest {
+    max-height: 160px;
+    overflow: auto;
+}
+
+#notifyOtherSuggestionDiv {
+    text-align: right;
+    width: 100%;
+    font: 1em;
+    color: #4A4A4A;
+    padding-top: 0 !important;
+}
+
+#otherOffers {
+    display: inline-block;
+!important;
+}
+
+#notifyOtherSuggestionDiv > label {
+    width: 50% !important;
+    font-weight: 100;
+    top: 0 !important;
+    color: #888686
+}
+
+#addYourEmailDivFlightNotification {
+    width: 60% !important;
+    display: inline-block
+}
+
+#totalNumRoom {
+    float: left;
+}
+
+#moreTaLnkReviewHeader {
+    margin-right: 15px;
+}
+
+#scoreSpanHeader {
+    margin-right: 0 !important
+}
+
+#helpSpan_7 > p, #helpSpan_8 > p {
+    font-size: 12px;
+    line-height: 1.428 !important;
+}
+
+#offlineReserveErr {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 9;
+    background-color: #000000cf;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.offlineReserveErr > div {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    padding: 0 20px;
+    direction: rtl;
+}
+
+#bestPriceInnerDiv > div > div:nth-child(1) {
+    color: #a3513d;
+}
+
+#bestPriceInnerDiv > div > div:nth-child(2) > div:nth-child(1) {
+    border: 2px solid #e5e5e5;
+    border-radius: 10px;
+    width: 80%;
+    margin: 0 auto;
+}
+
+#bestPriceInnerDiv > div > div:nth-child(2) > div:nth-child(1) > label {
+    margin-left: 0 !important;
+}
+
+#bestPriceInnerDiv > div > div:nth-child(2) > div:nth-child(1) > div {
+    width: 1100px;
+    position: absolute;
+    left: -40%;
+    top: 90%;
+}
+
+#bestPriceInnerDiv > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) {
+    font-size: 25px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+#roomDetail {
+    font-size: 1.1em;
+    display: inline-block;
+    cursor: pointer;
+}
+
+#passengerNoSelectPane > div:nth-child(1) > div:nth-child(2) {
+    float: left;
+    margin-right: 25px;
+}
+
+#date_input_main_div {
+    border-bottom: 1.5px solid #e5e5e5;
+}
+
+#date_input_main_div > div:nth-child(2) {
+    width: 70%;
+}
+
+#date_input_main_div > div:nth-child(2) > label {
+    margin: 6px 0 6px 6px !important;
+}
+
+#bestPriceTitleWithRoom {
+    font-size: 1.1em;
+    color: #a3513d;
+}
+
+#minimumPrice {
+    font-size: 1.4em;
+    display: inline-block
+}
+
+#fromAliBabaLink {
+    float: right;
+    margin: 2px 10px;
+}
+
+#savePercentage {
+    font-size: 0.9em;
+    color: red;
+    margin: 2px 0;
+}
+
+#bestPriceBtn {
+    margin: 1% 0;
+}
+
+#targetHelp_10 {
+    height: 400px;
+}
+
+#targetHelp_10 > div:nth-child(1) {
+    max-width: 752px;
+    max-height: 338px;
+}
+
+#targetHelp_10 > div:nth-child(1) > div:nth-child(1) {
+    width: 75%;
+}
+
+#targetHelp_10 > div:nth-child(1) > div:nth-child(1) > div > div {
+    max-height: 338px;
+}
+
+#targetHelp_10 > div:nth-child(1) > div:nth-child(2) > div {
+    height: 33.333332%;
+}
+
+.imgWrap1stTemp {
+    max-width: 200px;
+    max-height: 113px;
+}
+
+.closeXicon2:before {
+    position: absolute !important;
+    top: 10px !important;
+}
+
+.clear-both {
+    clear: both;
+}
+
+.float-left {
+    float: left;
+}
+
+.rtl {
+    direction: rtl;
+}
+
+.relative-position {
+    position: relative;
+}
+
+.font-size-16 {
+    font-size: 16px;
 }
 
 .alarmHeaderText {
