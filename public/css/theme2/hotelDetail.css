@@ -736,6 +736,11 @@ p {
     display: inline-block
 }
 
+#minimumPrice {
+    width: 54px;
+    margin: -14px 0 0 0;
+}
+
 #fromAliBabaLink {
     float: right;
     margin: 2px 10px;
@@ -777,9 +782,254 @@ p {
     max-height: 113px;
 }
 
+.imgWrap1stTemp > img {
+    min-width: 152px;
+}
+
+#imgWrap3rdLine {
+    min-width: 113px;
+}
+
+#BODYCON > div:nth-child(1) {
+    padding: 15px 0;
+    height: 70px !important;
+    text-align: center;
+    box-shadow: 0px 4px 5px #888888;
+}
+
 .closeXicon2:before {
     position: absolute !important;
     top: 10px !important;
+}
+
+#BODYCON > div:nth-child(3) {
+    height: 90px;
+    background-color: rgb(248, 248, 248);
+}
+
+#introduction > div > div:nth-child(1) {
+    border: none !important;
+    padding: 7px 0 !important;
+    margin: 0 !important
+}
+
+#introduction > div > div:nth-child(1) > h3 {
+    padding-top: 10px;
+}
+
+#introduction > div > div:nth-child(2) {
+    margin: 15px 0 !important;
+}
+
+#showMore {
+    float: left;
+    cursor: pointer;
+    color: #4dc7bc;
+    font-size: 13px;
+}
+
+#introductionText {
+    direction: rtl;
+    font-size: 14px;
+    max-height: 21px;
+    overflow: hidden;
+}
+
+#map-small {
+    width: 310px;
+    height: 270px;
+}
+
+#introduction > div > div:nth-child(3) > div:nth-child(2) > div:nth-child(2) {
+    direction: ltr;
+    border-width: 0 0 0 1px;
+}
+
+#clientConnectionsLines {
+    direction: rtl;
+    display: block !important;
+}
+
+#clientConnectionsAddress {
+    white-space: normal;
+}
+
+#clientConnectionsAddress > div:nth-child(1) {
+    margin-right: -5px;
+}
+
+#clientConnectionsAddress > div:nth-child(3), #clientConnectionsPhone > div:nth-child(2), #clientConnectionsWebsite > a {
+    font-size: 12px;
+}
+
+#clientConnectionsPhone > div:nth-child(1) {
+    margin-right: -4px;
+}
+
+#clientConnectionsWebsite {
+    margin-right: -8px;
+}
+
+#tagsName > h3 {
+    direction: rtl;
+    padding: 8px 0;
+}
+
+#roomChoiceDiv {
+    position: relative;
+    padding-bottom: 2%;
+    border-bottom: solid lightgray 1.5px;
+    display: flex;
+    align-items: center;
+}
+
+#roomChoiceDiv > h3 {
+    float: right;
+    line-height: 45px
+}
+
+#roomChoiceDiv > div {
+    display: inline-block;
+    margin-right: 5%;
+}
+
+#roomDetailsMainDiv > div:nth-child(1) > div:nth-child(1) {
+    border-bottom: 1.5px solid #e5e5e5;
+    width: 52%;
+}
+
+#roomDetailsMainDiv > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) {
+    margin: -5px 0
+}
+
+#roomDetailsMainDiv > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) {
+    margin: -10px 0
+}
+
+#roomDetailsMainDiv > div:nth-child(1) > div:nth-child(2) > div > div {
+    color: #4dc7bc;
+    display: inline-block;
+    line-height: 24px
+}
+
+#roomDetailsMainDiv > div:nth-child(1) > div:nth-child(2) > div > select {
+    float: left;
+    border: none;
+}
+
+#roomDetailsMainDiv > div:nth-child(2) > div:nth-child(2) {
+    float: left;
+    border-bottom: 1.5px solid #e5e5e5;
+}
+
+#roomDetailsMainDiv > div:nth-child(3) {
+    margin-top: 5px
+}
+
+#roomDetailsMainDiv > div:nth-child(3) > div:nth-child(2) {
+    float: left;
+    margin-top: 5px;
+}
+
+#roomPricesMainDiv > div:nth-child(1) {
+    color: #4dc7bc;
+}
+
+#roomPricesMainDiv > div:nth-child(2) {
+    text-align: center
+}
+
+#roomPricesMainDiv > div:nth-child(2) > div:nth-child(1) {
+    font-size: 1.4em
+}
+
+.extraBedPrices > div:nth-child(2) {
+    font-size: 0.6em;
+    color: red;
+}
+
+.roomInfos {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: #00000094;
+    top: 0;
+    left: 0;
+    z-index: 99;
+    display: none;
+    justify-content: center;
+    align-items: center
+}
+
+.roomInfos > div {
+    background-color: white;
+    padding: 10px;
+}
+
+.roomInfos > div > div > div:nth-child(1) {
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+}
+
+.roomInfos > div > div > div:nth-child(1) > div:nth-child(1) {
+    width: 100%;
+    margin-bottom: 2%;
+}
+
+.roomInfos > div > div > div:nth-child(1) > div:nth-child(3) {
+    width: 85%;
+    margin-bottom: 2%;
+}
+
+.roomInfos > div > div > div:nth-child(1) > div:nth-child(5) {
+    float: left;
+    margin-top: 5px;
+    display: flex;
+    flex-direction: column
+}
+
+#roomchoice > div > div:nth-child(2) > div:nth-child(1) {
+    margin-top: 0 !important;
+}
+
+#totalPriceOneDay {
+    text-align: left;
+}
+
+#totalPrice {
+    font-size: 1.2em;
+    text-align: left
+}
+
+.display-none {
+    display: none;
+}
+
+.display-block {
+    display: block;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.tag {
+    margin: 5px;
+    float: right;
+    direction: rtl;
+}
+
+.font-size-28 {
+    font-size: 28px;
+}
+
+.ltrImp {
+    direction: ltr !important;
+}
+
+.ltr {
+    direction: ltr;
 }
 
 .clear-both {

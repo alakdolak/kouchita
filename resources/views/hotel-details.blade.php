@@ -543,7 +543,7 @@ if ($total == 0)
                                                     <div>کمترین قیمت برای هرشب اقامت</div>
                                                     <div>
                                                         <div id="minimumPrice">{{$place->minPrice}}
-                                                            {{--<div class="salePrice" style="width: 54px; margin: -14px 0 0 0">550.000</div>--}}
+                                                            {{--<div class="salePrice">550.000</div>--}}
                                                         </div>
                                                         <div class="float-left">
                                                             <div id="fromAliBabaLink">
@@ -556,7 +556,7 @@ if ($total == 0)
                                                         </div>
                                                     </div>
                                                     <div id="savePercentage">
-                                                        {{--<div style="display: inline-block">ده درصد تخفیف ویژه نوروز</div>--}}
+                                                        {{--<div class="display-inline-block">ده درصد تخفیف ویژه نوروز</div>--}}
                                                         <div class="float-left">{{$place->savePercent}} درصد ذخیره
                                                         </div>
                                                     </div>
@@ -588,7 +588,7 @@ if ($total == 0)
                                             {{--</div>--}}
                                             {{--</div>--}}
                                             {{--<div style="font-size: 0.9em; color: red; margin: 2px 0;">--}}
-                                            {{--<div style="display: inline-block">ده درصد تخفیف ویژه نوروز</div>--}}
+                                            {{--<div class="display-inline-block">ده درصد تخفیف ویژه نوروز</div>--}}
                                             {{--</div>--}}
                                             {{--<div style="margin: 1% 0;">--}}
                                             {{--<button class="btn specOfferBtn" type="button">پیشنهاد ویژه</button>--}}
@@ -659,9 +659,7 @@ if ($total == 0)
                                             <div class="prw_rup prw_common_centered_image">
                                                 @if($sitePhotos != 0)
                                                     <span onclick="getPhotos(-1)" class="imgWrap imgWrap1stTemp">
-                                                        <img alt="{{$place->alt1}}" src="{{$thumbnail}}"
-                                                             class="centeredImg" style=" min-width:152px; "
-                                                             width="100%"/>
+                                                        <img alt="{{$place->alt1}}" src="{{$thumbnail}}" class="centeredImg" width="100%"/>
                                                     </span>
                                                 @else
                                                     <span class="imgWrap imgWrap1stTemp"></span>
@@ -685,7 +683,7 @@ if ($total == 0)
                                     <div class="prw_rup prw_hotels_flexible_album_thumb tile">
                                         <div class="albumThumbnail">
                                             <div class="prw_rup prw_common_centered_image">
-                                                <span class="imgWrap " style="max-width:200px;max-height:113px;">
+                                                <span class="imgWrap imgWrap1stTemp">
                                                     {{--@if($userPhotos != 0)--}}
                                                     {{--<img onclick="getPhotos(-3)" src="{{$logPhoto['pic']}}"--}}
                                                     {{--class="centeredImg" style=" min-width:152px; "--}}
@@ -695,20 +693,22 @@ if ($total == 0)
                                             </div>
                                             <div {{($userPhotos != 0) ? "onclick=getPhotos(-3)" : "" }}  class="albumInfo">
                                                 <span class="ui_icon camera">&nbsp;</span>عکس های
-                                                کاربران {{$userPhotos}}</div>
+                                                کاربران {{$userPhotos}}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="tileWrap"  onclick="showModal()">
                                     <div class="prw_rup prw_hotels_flexible_album_thumb tile">
                                         <div class="albumThumbnail">
-                                            <div class="prw_rup prw_common_centered_image"><span class="imgWrap "
-                                                                                                 style="max-width:200px;max-height:113px;"><img
-                                                            src="https://static.tacdn.com/img2/x.gif"
-                                                            class="centeredImg" style=" min-width:113px; "
-                                                            width="100%"/></span></div>
-                                            <div class="albumInfo"><span class="ui_icon camera">&nbsp;</span>محتواهای
-                                                تعاملی
+                                            <div class="prw_rup prw_common_centered_image">
+                                                <span class="imgWrap imgWrap1stTemp">
+                                                    <img src="https://static.tacdn.com/img2/x.gif" id="imgWrap3rdLine" class="centeredImg" width="100%"/>
+                                                </span>
+                                            </div>
+                                            <div class="albumInfo">
+                                                <span class="ui_icon camera">&nbsp;</span>
+                                                محتواهای تعاملی
                                             </div>
                                         </div>
                                     </div>
@@ -732,10 +732,8 @@ if ($total == 0)
          class=" full_meta_photos_v3  full_meta_photos_v4  big_pic_mainwrap_tweaks horizontal_xsell ui_container is-mobile relative-postion">
         <div id="MAIN" class="Hotel_Review prodp13n_jfy_overflow_visible relative-postion">
             <div id="BODYCON" ng-app="mainApp"
-                 class="col easyClear bodLHN poolB adjust_padding new_meta_chevron new_meta_chevron_v2"
-                 style="position: relative;">
-                <div class="col-xs-12 menu"
-                     style="padding: 15px 0; height: 70px !important; text-align: center;box-shadow: 0px 4px 5px #888888;">
+                 class="col easyClear bodLHN poolB adjust_padding new_meta_chevron new_meta_chevron_v2 relative-position">
+                <div class="col-xs-12 menu">
                     <div class="col-xs-2 changeWidth"><a href="#ansAndQeustionDiv">سوال و جواب</a></div>
                     <div class="col-xs-2 changeWidth"><a href="#nearbyDiv">مکان های نزدیک</a></div>
                     <div class="col-xs-2 changeWidth"><a href="#photosDiv">عکس ها</a></div>
@@ -752,31 +750,25 @@ if ($total == 0)
                     @endif
                     <div class="col-xs-2  changeWidth"><a href="#introduction">معرفی کلی</a></div>
                 </div>
-                <div style="height: 90px;background-color: rgb(248,248,248);"></div>
+                <div></div>
                 <div class="hr_btf_wrap relative-postion">
                     <div id="introduction" class="ppr_rup ppr_priv_location_detail_overview">
                         <div class="block_wrap" data-tab="TABS_OVERVIEW">
-                            <div class="block_header"
-                                 style="border: none !important;padding: 7px 0 !important; margin: 0 !important">
-                                <h3 class="block_title" style="padding-top: 10px;">معرفی کلی </h3>
+                            <div class="block_header">
+                                <h3 class="block_title">معرفی کلی </h3>
                             </div>
-                            <div style="margin: 15px 0 !important;">
-                                <div id="showMore" onclick="showMore()"
-                                     style="float: left; cursor: pointer;color:#4dc7bc; font-size: 13px;"
-                                     class="hidden">بیشتر
+                            <div>
+                                <div id="showMore" onclick="showMore()" class="hidden">بیشتر
                                 </div>
-                                <div class="overviewContent" id="introductionText"
-                                     style="direction: rtl; font-size: 14px; max-height: 21px; overflow: hidden;">{{$place->description}}</div>
+                                <div class="overviewContent" id="introductionText">{{$place->description}}</div>
                             </div>
                             <div class="overviewContent">
                                 <div class="prw_rup prw_common_static_map_no_style staticMap">
-                                    <div id="map-small" class="prv_map clickable"
-                                         style='width:310px;height:270px;'></div>
+                                    <div id="map-small" class="prv_map clickable" ></div>
                                 </div>
-                                <div class="ui_columns is-multiline is-mobile reviewsAndDetails"
-                                     style="direction: ltr;">
+                                <div class="ui_columns is-multiline is-mobile reviewsAndDetails ltrImp">
                                     <div class="ui_column is-6 details">
-                                        <div style="direction: rtl;">
+                                        <div class="rtl">
                                             <?php $k = -1; ?>
 
                                             @if($placeMode == "hotel")
@@ -788,29 +780,28 @@ if ($total == 0)
                                             @endif
                                         </div>
                                     </div>
-                                    <div class="ui_column  is-6 reviews"
-                                         style="direction: ltr;border-width: 0 0px 0 1px;">
+                                    <div class="ui_column  is-6 reviews">
                                         <div class="rating">
                                             <span class="overallRating">{{$avgRate}} </span>
                                             <div class="prw_rup prw_common_bubble_rating overallBubbleRating">
                                                 @if($avgRate == 5)
-                                                    <span class="ui_bubble_rating bubble_50" style="font-size:28px;"
+                                                    <span class="ui_bubble_rating bubble_50 font-size-28"
                                                           property="ratingValue" content="5"
                                                           alt='5 of 5 bubbles'></span>
                                                 @elseif($avgRate == 4)
-                                                    <span class="ui_bubble_rating bubble_40" style="font-size:28px;"
+                                                    <span class="ui_bubble_rating bubble_40 font-size-28"
                                                           property="ratingValue" content="4"
                                                           alt='4 of 5 bubbles'></span>
                                                 @elseif($avgRate == 3)
-                                                    <span class="ui_bubble_rating bubble_30" style="font-size:28px;"
+                                                    <span class="ui_bubble_rating bubble_30 font-size-28"
                                                           property="ratingValue" content="3"
                                                           alt='3 of 5 bubbles'></span>
                                                 @elseif($avgRate == 2)
-                                                    <span class="ui_bubble_rating bubble_20" style="font-size:28px;"
+                                                    <span class="ui_bubble_rating bubble_20 font-size-28"
                                                           property="ratingValue" content="2"
                                                           alt='2 of 5 bubbles'></span>
                                                 @elseif($avgRate == 1)
-                                                    <span class="ui_bubble_rating bubble_10" style="font-size:28px;"
+                                                    <span class="ui_bubble_rating bubble_10 font-size-28"
                                                           property="ratingValue" content="1"
                                                           alt='1 of 5 bubbles'></span>
                                                 @endif
@@ -876,21 +867,20 @@ if ($total == 0)
                                                 </li>
                                             </ul>
                                         </div>
-                                        <div class="prw_rup prw_common_atf_header_bl"
-                                             style="direction: rtl; display: block !important;">
-                                            <div class="blEntry address" style="white-space: normal;">
-                                                <span class="ui_icon map-pin" style="margin-right: -5px;"></span>
+                                        <div class="prw_rup prw_common_atf_header_bl" id="clientConnectionsLines">
+                                            <div class="blEntry address" id="clientConnectionsAddress">
+                                                <span class="ui_icon map-pin"></span>
                                                 <span class="street-address">آدرس : </span>
-                                                <span style="font-size: 12px;">{{$place->address}}</span>
+                                                <span>{{$place->address}}</span>
                                             </div>
                                             @if(!empty($place->phone))
-                                                <div class="blEntry phone">
-                                                    <span class="ui_icon phone" style="margin-right: -4px;"></span>
-                                                    <span style="font-size: 12px;">{{$place->phone}}</span>
+                                                <div class="blEntry phone" id="clientConnectionsPhone">
+                                                    <span class="ui_icon phone" style=""></span>
+                                                    <span style="">{{$place->phone}}</span>
                                                 </div>
                                             @endif
                                             @if(!empty($place->site))
-                                                <div class="blEntry website" style="margin-right: -8px;">
+                                                <div class="blEntry website" id="clientConnectionsWebsite" style="">
                                                     <span class="ui_icon laptop"></span>
                                                     <?php
                                                     if (strpos($place->site, 'http') === false)
@@ -902,15 +892,8 @@ if ($total == 0)
                                                 </div>
                                             @endif
                                         </div>
-                                        <style>
-                                            .tag {
-                                                margin: 5px;
-                                                float: right;
-                                                direction: rtl;
-                                            }
-                                        </style>
-                                        <div>
-                                            <h3 style="direction: rtl; padding: 8px 0;">برچسب ها:</h3>
+                                        <div id="tagsName">
+                                            <h3>برچسب ها:</h3>
                                             <span class="tag">{{$place->tag1}}</span>
                                             <span class="tag">{{$place->tag2}}</span>
                                             <span class="tag">{{$place->tag3}}</span>
@@ -933,19 +916,15 @@ if ($total == 0)
                         </div>
                     </div>
                     @if(session('goDate') != null && $rooms != null)
-                        <div id="roomChoice" class="ppr_rup ppr_priv_location_detail_two_column"
-                             style="position: relative; display: block">
+                        <div id="roomChoice" class="ppr_rup ppr_priv_location_detail_two_column display-block relative-position">
 
-                            <div class="column_wrap ui_columns is-mobile"
-                                 style="width: 100%; direction: rtl; position: relative;">
+                            <div class="column_wrap ui_columns is-mobile relative-position full-width rtl">
                                 <div class="content_column ui_column is-10 roomBox_IS_10">
                                     <div class="ppr_rup ppr_priv_location_reviews_container relative-position">
                                         <div id="rooms" class="ratings_and_types concepts_and_filters block_wrap relative-position">
-                                            <div class="header_group block_header"
-                                                 style="position: relative; padding-bottom: 2%; border-bottom: solid lightgray 1.5px; display: flex; align-items: center">
-                                                <h3 class="tabs_header reviews_header block_title"
-                                                    style="float: right; line-height: 45px"> انتخاب اتاق </h3>
-                                                <div class="srchBox" style="display: inline-block; margin-right: 5%;">
+                                            <div class="header_group block_header" id="roomChoiceDiv">
+                                                <h3 class="tabs_header reviews_header block_title"> انتخاب اتاق </h3>
+                                                <div class="srchBox">
                                                     <button class="srchBtn" onclick="editSearch()">ویرایش جستجو</button>
                                                 </div>
                                             </div>
@@ -955,19 +934,20 @@ if ($total == 0)
                                                         <img src="{{$rooms[$i]->pic}}" width="100%" height="100%"
                                                              alt='{{$rooms[$i]->name}}'>
                                                     </div>
-                                                    <div class="roomDetails">
+                                                    <div class="roomDetails" id="roomDetailsMainDiv">
                                                         <div>
-                                                            <div class="roomRow"
-                                                                 style="border-bottom: 1.5px solid #e5e5e5; width: 52%;">
+                                                            <div class="roomRow">
                                                                 <div class="roomName"
-                                                                     onclick="document.getElementById('room_info{{$i}}').style.display = 'flex'">{{$rooms[$i]->name}}</div>
+                                                                     onclick="document.getElementById('room_info{{$i}}').style.display = 'flex'">
+                                                                    {{$rooms[$i]->name}}
+                                                                </div>
                                                                 <div class="roomPerson">
-                                                                    <div style="margin: -5px 0">
+                                                                    <div>
                                                                         @for($j = 0; $j < ceil($rooms[$i]->capacity->adultCount/2); $j++)
                                                                             <span class="shTIcon personIcon"></span>
                                                                         @endfor
                                                                     </div>
-                                                                    <div style="margin: -10px 0">
+                                                                    <div>
                                                                         @for($j = 0; $j < floor($rooms[$i]->capacity->adultCount/2); $j++)
                                                                             <span class="shTIcon personIcon"></span>
                                                                         @endfor
@@ -976,11 +956,10 @@ if ($total == 0)
                                                             </div>
                                                             <div class="roomRow float-left">
                                                                 <div class="roomNumber">
-                                                                    <div style="color: #4dc7bc; display: inline-block; line-height: 24px">
+                                                                    <div>
                                                                         تعداد اتاق
                                                                     </div>
                                                                     <select name="room_Number" id="roomNumber{{$i}}"
-                                                                            style="float: left; border: none;"
                                                                             onclick="changeNumRoom({{$i}}, this.value)">
                                                                         @for($j = 0; $j < 11; $j++)
                                                                             <option value="{{$j}}">{{$j}}</option>
@@ -993,25 +972,22 @@ if ($total == 0)
                                                             <div class="roomRow">
                                                                 <div class="roomOptionTitle">امکانات اتاق</div>
                                                             </div>
-                                                            <div class="roomRow"
-                                                                 style="float: left; border-bottom: 1.5px solid #e5e5e5">
-                                                                <div class="check-box__item hint-system"
+                                                            <div class="roomRow">
+                                                                <div class="check-box__item hint-system hidden"
                                                                      @if(!($rooms[$i]->priceExtraGuest != null && $rooms[$i]->priceExtraGuest != ''))style="display: none;" @endif>
-                                                                    <label class="labelEdit">استفاده از تخت
-                                                                        اضافه</label>
+                                                                    <label class="labelEdit">استفاده از تخت اضافه</label>
                                                                     <input type="checkbox" id="additional_bed{{$i}}"
-                                                                           name="additionalBed" value="1"
-                                                                           style="display: inline-block; !important;"
+                                                                           name="additionalBed" value="1" class="inline-block"
                                                                            onclick="changeRoomPrice({{$i}}); changeNumRoom({{$i}}, this.value)">
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div style="margin-top: 5px">
+                                                        <div>
 
                                                             <div class="roomRow">
                                                                 <div class="roomOption">{{$rooms[$i]->roomFacility}} </div>
                                                             </div>
-                                                            <div class="roomRow" style="float: left; margin-top: 5px;">
+                                                            <div class="roomRow">
 
                                                                 @if($rooms[$i]->priceExtraGuest != null && $rooms[$i]->priceExtraGuest != '')
                                                                     <div class="roomAdditionalOption">تخت اضافه</div>
@@ -1020,17 +996,17 @@ if ($total == 0)
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="roomPrices">
-                                                        <div style="color: #4dc7bc">قیمت</div>
-                                                        <div style="text-align: center">
-                                                            <div style="font-size: 1.4em">{{floor($rooms[$i]->perDay[0]->price/1000)*1000}}
+                                                    <div class="roomPrices" id="roomPricesMainDiv">
+                                                        <div>قیمت</div>
+                                                        <div>
+                                                            <div>{{floor($rooms[$i]->perDay[0]->price/1000)*1000}}
                                                                 @if($rooms[$i]->priceExtraGuest != null && $rooms[$i]->priceExtraGuest != '')
-                                                                    <div id="extraBedPrice{{$i}}"
-                                                                         style="display: none;">
-                                                                        <div class="salePrice">{{floor($rooms[$i]->priceExtraGuest/1000)*1000 + floor($rooms[$i]->perDay[0]->price/1000)*1000}}</div>
-                                                                        <div style="font-size: 0.6em; color: red;">
-                                                                            <div>با
-                                                                                احتساب {{floor($rooms[$i]->priceExtraGuest/1000)*1000}}</div>
+                                                                    <div id="extraBedPrice{{$i}}" class="display-none extraBedPrices">
+                                                                        <div class="salePrice">
+                                                                            {{floor($rooms[$i]->priceExtraGuest/1000)*1000 + floor($rooms[$i]->perDay[0]->price/1000)*1000}}
+                                                                        </div>
+                                                                        <div>
+                                                                            <div>با احتساب {{floor($rooms[$i]->priceExtraGuest/1000)*1000}}</div>
                                                                             <div>با تخت اضافه</div>
                                                                         </div>
                                                                     </div>
@@ -1038,21 +1014,17 @@ if ($total == 0)
                                                             </div>
                                                         </div>
                                                         <div>
-                                                            <div style="display: inline-block">
+                                                            <div class="inline-block">
                                                                 از {{$rooms[$i]->provider}}</div>
                                                             <img class="float-left">
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div id="room_info{{$i}}"
-                                                     style="position: fixed; width: 100%; height: 100%; background-color: #00000094; top: 0; left: 0; z-index: 99; display: none; justify-content: center; align-items: center">
-                                                    <div class="container"
-                                                         style="background-color: white; padding: 10px;">
-                                                        <div class="row" style="direction :rtl;">
-                                                            <div class="col-md-8"
-                                                                 style="display: flex; flex-direction: column; font-size: 20px;">
-                                                                <div class="roomRow "
-                                                                     style="width: 100%; margin-bottom: 2%;">
+                                                <div id="room_info{{$i}}" class="roomInfos">
+                                                    <div class="container">
+                                                        <div class="row rtl">
+                                                            <div class="col-md-8">
+                                                                <div class="roomRow">
                                                                     <div class="roomName">{{$rooms[$i]->name}}</div>
                                                                     <div class="shTIcon closeXicon float-left"
                                                                          onclick="document.getElementById('room_info{{$i}}').style.display = 'none'">
@@ -1061,26 +1033,23 @@ if ($total == 0)
                                                                 <div class="roomRow">
                                                                     <div class="roomOptionTitle">امکانات اتاق</div>
                                                                 </div>
-                                                                <div class="roomRow"
-                                                                     style="width:85%; margin-bottom: 2%;">
+                                                                <div class="roomRow">
                                                                     <div class="roomOption">{{$rooms[$i]->roomFacility}} </div>
                                                                 </div>
                                                                 <div class="roomRow">
                                                                     <div class="roomOptionTitle">امکانات ویژه</div>
                                                                 </div>
-                                                                <div class="roomRow"
-                                                                     style="float: left; margin-top: 5px; display: flex; flex-direction: column">
+                                                                <div class="roomRow">
                                                                     @if($rooms[$i]->priceExtraGuest != null && $rooms[$i]->priceExtraGuest != '')
-                                                                        <div class="roomAdditionalOption">تخت اضافه
+                                                                        <div class="roomAdditionalOption">
+                                                                            تخت اضافه
                                                                         </div>
                                                                     @endif
                                                                     <div class="roomAdditionalOption">{{$rooms[$i]->roomService}}</div>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
-                                                                <img src="{{$rooms[$i]->pic}}" width="100%"
-                                                                     height="100%"
-                                                                     alt='{{$rooms[$i]->name}}'>
+                                                                <img src="{{$rooms[$i]->pic}}" width="100%" height="100%" alt='{{$rooms[$i]->name}}'>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1091,15 +1060,19 @@ if ($total == 0)
                                     </div>
                                 </div>
 
-                                <div class="is-2 roomBox_IS_2" style="width: 100%;">
-                                    <div class="priceRow_IS_2" style="margin-top: 0 !important;">
+                                <div class="is-2 roomBox_IS_2 full-width">
+                                    <div class="priceRow_IS_2">
                                         <div>قیمت کل برای یک شب</div>
-                                        <div id="totalPriceOneDay" style="text-align: left;">0</div>
+                                        <div id="totalPriceOneDay">0</div>
                                     </div>
                                     <div class="priceRow_IS_2">
-                                        <div><span class="lable_IS_2">قیمت کل </span> برای<span id="numDay"></span>شب
+                                        <div>
+                                            <span class="lable_IS_2">قیمت کل </span>
+                                            برای
+                                            <span id="numDay"></span>
+                                            شب
                                         </div>
-                                        <div style="font-size: 1.2em; text-align: left" id="totalPrice">0</div>
+                                        <div id="totalPrice">0</div>
                                     </div>
                                     <div class="priceRow_IS_2">
                                         <div>
