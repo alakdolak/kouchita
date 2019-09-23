@@ -612,172 +612,107 @@ $authUrl = $client->createAuthUrl();
 
 </script>
 
-<style>
 
-    input[type="checkbox"]{
-        display:none;
-    }
-
-    input[type="checkbox"] + label{
-        color:#666666;
-    }
-
-    input[type="checkbox"] + label span{
-        display:inline-block;
-        width:19px;
-        height:19px;
-        margin:-2px 10px 0 0;
-        vertical-align:middle;
-        background:url('{{URL::asset('images/check_radio_sheet.png')}}') left top no-repeat;
-        cursor:pointer;
-    }
-
-    input[type="checkbox"]:checked + label span{
-        background:url('{{URL::asset('images/check_radio_sheet.png')}}') -19px top no-repeat;
-    }
-
-    .labelForCheckBox:before{
-        background-color: transparent !important;
-        border: none !important;
-        content: "" !important;
-    }
-
-    @media(max-width: 1150px){
-        #loginPopUp, #EnterEmail-loginPopUp, #EnterPhone-loginPopUp,
-        #Send_AND_EnterCode-loginPopUp, #EnterPassword-loginPopUp,
-        #EnterUsername-loginPopUp, #ForgetPassword, #Email_ForgetPass, #Phone_ForgetPass{
-            left: 21%;
-            right: 21%;
-        }
-    }
-
-    @media(min-width: 1151px) and (max-width: 1500px){
-        #loginPopUp, #EnterEmail-loginPopUp, #EnterPhone-loginPopUp,
-        #Send_AND_EnterCode-loginPopUp, #EnterPassword-loginPopUp,
-        #EnterUsername-loginPopUp, #ForgetPassword, #Email_ForgetPass, #Phone_ForgetPass{
-            left: 24%;
-            right: 24%;
-        }
-    }
-
-    @media(min-width: 1501px) and (max-width: 1850px){
-        #loginPopUp, #EnterEmail-loginPopUp, #EnterPhone-loginPopUp,
-        #Send_AND_EnterCode-loginPopUp, #EnterPassword-loginPopUp,
-        #EnterUsername-loginPopUp, #ForgetPassword, #Email_ForgetPass, #Phone_ForgetPass{
-            left: 28%;
-            right: 28%;
-        }
-    }
-
-    @media(min-width: 1851px){
-        #loginPopUp, #EnterEmail-loginPopUp, #EnterPhone-loginPopUp,
-        #Send_AND_EnterCode-loginPopUp, #EnterPassword-loginPopUp,
-        #EnterUsername-loginPopUp, #ForgetPassword, #Email_ForgetPass, #Phone_ForgetPass{
-            left: 32%;
-            right: 32%;
-        }
-    }
-</style>
+<link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/loginPopUp.css')}}' />
 
 {{--loginPopUp--}}
-<span id="loginPopUp" onkeyup="if(event.keyCode == 13) login($('#username_main').val(), $('#password_main').val())" class="pop-up ui_modal hidden" style="position: fixed;width: auto;top: 7%;bottom: auto;z-index: 10000001;padding: 40px 20px !important;height: auto;overflow: auto;">
+<span id="loginPopUp" onkeyup="if(event.keyCode == 13) login($('#username_main').val(), $('#password_main').val())" class="pop-up ui_modal hidden">
     <div>
-        <img src="{{URL::asset('images/logo.svg')}}" style="margin-bottom: 20px; width: 100%; height: 50px;">
+        <img src="{{URL::asset('images/logo.svg')}}">
     </div>
-    <div class="col-xs-12" style="direction: rtl;">
-        <div class="loginPaneInLoginPopUp col-xs-6" style="border-right: 1px solid #cccccc">
-            <div style="font-size: 14px !important;" class="header_text">در حال حاضر عضو شازده مسافر هستید؟!</div>
+    <div class="col-xs-12 rtl">
+        <div class="loginPaneInLoginPopUp col-xs-6">
+            <div class="header_text">در حال حاضر عضو شازده مسافر هستید؟!</div>
             <div>
                 <div>
-                    <label style="width: 100%">
-                        <span style=" padding-top: 8px;"> نام کاربری </span>
-                        <input style="width:85%;padding: 7px;text-align: center;margin-top: 8px;border-radius: 5px;border: 1px solid #CCC;" type="text" id="username_main" maxlength="40" required autofocus>
+                    <label>
+                        <span> نام کاربری </span>
+                        <input type="text" id="username_main" maxlength="40" required autofocus>
                     </label>
                 </div>
                 <div>
-                    <label style="width: 100%">
-                        <span style=" padding-top: 8px;">رمز عبور</span>
-                        <input style="width:85%;padding: 7px;text-align: center;margin-top: 8px;border-radius: 5px;border: 1px solid #CCC;" type="password" id="password_main" maxlength="40" required>
-                        <a onclick="ShowForgetPass()" style="cursor: pointer; font-size: 11px; padding-top: 8px; display: block;">رمز عبور خود را فراموش کردید؟</a>
+                    <label>
+                        <span>رمز عبور</span>
+                        <input type="password" id="password_main" maxlength="40" required>
+                        <a onclick="ShowForgetPass()">رمز عبور خود را فراموش کردید؟</a>
                     </label>
                 </div>
             </div>
-            <div style=" padding-top: 8px;">
-                <button onclick="login($('#username_main').val(), $('#password_main').val())" class="btn btn-info active" style="background: #4DC7BC;border-color: #4DC7BC;padding-left: 22px;padding-right: 20px;border-radius: 10px;;box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 3px 0px;">ورود</button>
-                <p style="margin-top: 10px; color: #963019" id="loginErr"></p>
+            <div>
+                <button onclick="login($('#username_main').val(), $('#password_main').val())" class="btn btn-info active">ورود</button>
+                <p id="loginErr"></p>
             </div>
         </div>
         <div class="registerPaneInLoginPopUp col-xs-6">
-            <div style="font-size: 14px !important;" class="header_text">عضو نیستید !!</div>
-            <button class="btn" style="width: 90%; margin: 0 5px 15px 5px;background: #4DC7BC;color: #FFF;border-radius: 10px;box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 3px 0px;" onclick="showLoginEmail()">
-                {{--<img src="{{URL::asset('images/email.png')}}" style="width: 20px; float: right; margin-left: 10px">--}}
-                <div style="background-size: 20px;background-position:  0 0;width: 20px;height:  20px;float:  right;background-image: url('{{URL::asset('images') . 'loginPopup.png'}}');background-repeat:  no-repeat;margin-left:  10px;"></div>
-                <span style="float: right;">ایمیل</span>
+            <div class="header_text">عضو نیستید !!</div>
+            <button class="btn" onclick="showLoginEmail()">
+                {{--<img src="{{URL::asset('images/email.png')}}">--}}
+                <div></div>
+                <span>ایمیل</span>
             </button>
-            <button class="btn" style="width: 90%; margin: 0 5px 15px 5px;background: #4DC7BC;color: #FFF;border-radius: 10px;box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 3px 0px; " onclick="showLoginPhone()">
-                {{--<img src="{{URL::asset('images/Telephone.png')}}" style="width: 20px; float: right; margin-left: 10px">--}}
-                <div style="background-size: 20px;background-position:  0 -41px;width: 20px;height:  20px;float:  right;background-image: url('{{URL::asset('images') . 'loginPopup.png'}}');background-repeat:  no-repeat;margin-left:  10px;"></div>
-                <span style="float: right;" >تلفن همراه</span></button>
-            <button class="btn" onclick="document.location.href = '{{$authUrl}}'" style="width: 90%; margin: 0 5px 15px 5px;background: #4DC7BC;color: #FFF;border-radius: 10px;box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 3px 0px;">
-                {{--<img src="{{URL::asset('images/google.png')}}" style="width: 20px; float: right; margin-left: 10px">--}}
-                <div style="background-size: 20px;background-position:  0 -21px;width: 20px;height:  20px;float:  right;background-image: url('{{URL::asset('images') . 'loginPopup.png'}}');background-repeat:  no-repeat;margin-left:  10px;"></div>
-                <span style="float: right;">گوگل</span>
+            <button class="btn" onclick="showLoginPhone()">
+                {{--<img src="{{URL::asset('images/Telephone.png')}}">--}}
+                <div></div>
+                <span  >تلفن همراه</span></button>
+            <button class="btn" onclick="document.location.href = '{{$authUrl}}'">
+                {{--<img src="{{URL::asset('images/google.png')}}">--}}
+                <div></div>
+                <span>گوگل</span>
             </button>
-            <div style="font-size: 14px !important; text-align: justify" class="header_text">همین حالا به سادگی در شازده مسافر عضو شوید و از امکانات آن استفاده کنید.
-                </div>
+            <div class="header_text">همین حالا به سادگی در شازده مسافر عضو شوید و از امکانات آن استفاده کنید.</div>
         </div>
     </div>
     <div class="ui_close_x" onclick="hideElement('loginPopUp')"></div>
 </span>
 
 {{--Enter Email in login PopUp--}}
-<span id="EnterEmail-loginPopUp" onkeyup="if(event.keyCode == 13) login($('#username_email').val(), $('#password_email').val())" class="pop-up ui_modal hidden" style="position: fixed;width: auto;top: 7%;bottom: auto;z-index: 10000001;padding: 40px 20px !important;height: auto;overflow: auto;">
+<span id="EnterEmail-loginPopUp" onkeyup="if(event.keyCode == 13) login($('#username_email').val(), $('#password_email').val())" class="pop-up ui_modal hidden">
     <div>
-        <img src="{{URL::asset('images/logo.svg')}}" style="margin-bottom: 20px; width: 100%; height: 50px;">
+        <img src="{{URL::asset('images/logo.svg')}}">
     </div>
-    <div class="col-xs-12" style="direction: rtl;">
-        <div class="col-xs-6" style="border-right: 1px solid #cccccc">
-            <div style="font-size: 14px !important;" class="header_text">در حال حاضر عضو شازده مسافر هستید؟!</div>
+    <div class="col-xs-12 rtl">
+        <div class="col-xs-6">
+            <div class="header_text">در حال حاضر عضو شازده مسافر هستید؟!</div>
             <div>
                 <div>
-                    <label style=" width: 100%;">
-                        <span style=" padding-top: 8px;"> نام کاربری </span>
-                        <input style="width:85%;padding: 7px;text-align: center;margin-top: 8px;border-radius: 5px;border: 1px solid #CCC;" type="text" id="username_email" maxlength="40" required autofocus>
+                    <label>
+                        <span> نام کاربری </span>
+                        <input type="text" id="username_email" maxlength="40" required autofocus>
                     </label>
                 </div>
                 <div>
-                    <label style=" width: 100%;">
-                        <span style=" padding-top: 8px;">رمز عبور</span>
-                        <input style="max-width: 85%; width:85%;padding: 7px;text-align: center;margin-top: 8px;border-radius: 5px;border: 1px solid #CCC;" type="password" id="password_email" class="password" maxlength="40" required>
-                        <a onclick="ShowForgetPass()" style="cursor:pointer; font-size: 11px; padding-top: 8px; display: block;">رمز عبور خود را فراموش کردید؟</a>
+                    <label>
+                        <span>رمز عبور</span>
+                        <input type="password" id="password_email" class="password" maxlength="40" required>
+                        <a onclick="ShowForgetPass()">رمز عبور خود را فراموش کردید؟</a>
                     </label>
                 </div>
             </div>
-            <div style=" padding-top: 8px;">
-                <button onclick="login($('#username_email').val(), $('#password_email').val())" class="btn btn-info active" style="background: #4DC7BC;border-color: #4DC7BC;padding-left: 22px;padding-right: 20px;border-radius: 10px;;box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 3px 0px;">ورود</button>
-                <p style="margin-top: 10px" id="loginErr"></p>
+            <div>
+                <button onclick="login($('#username_email').val(), $('#password_email').val())" class="btn btn-info active">ورود</button>
+                <p id="loginErr"></p>
             </div>
         </div>
         <div class="col-xs-6">
-            <div style="font-size: 14px !important;" class="header_text">عضو شوید:</div>
+            <div class="header_text">عضو شوید:</div>
             <div>
                 <div>
                     <label>
-                        <span style=" padding-top: 8px;"> آدرس ایمیل </span>
-                        <input style="width:85%;padding: 7px;text-align: center;margin-top: 8px;border-radius: 5px;border: 1px solid #CCC;" type="email" id="email" maxlength="40" required autofocus>
+                        <span> آدرس ایمیل </span>
+                        <input type="email" id="email" maxlength="40" required autofocus>
                     </label>
                 </div>
                 <div>
                     <label>
-                        <span style=" padding-top: 8px;">رمز عبور</span>
-                        <input style="width:85%;padding: 7px;text-align: center;margin-top: 8px;border-radius: 5px;border: 1px solid #CCC;" type="password" id="password_In_Email_registry" maxlength="40" required>
+                        <span>رمز عبور</span>
+                        <input type="password" id="password_In_Email_registry" maxlength="40" required>
                     </label>
                 </div>
             </div>
-            <div style=" padding-top: 8px;">
-                <button type="button" onclick="showLoginUsername()" class="btn btn-info active" style="background: #4DC7BC;border-color: #4DC7BC;padding-left: 22px;padding-right: 20px;border-radius: 10px;box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 3px 0px;">ثبت</button>
-                <button type="button" onclick="Return()" class="btn btn-default" style="border-radius: 10px;box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 3px 0px;" >بازگشت</button>
-                <p style="margin-top: 10px" id="loginErrEmail"></p>
+            <div>
+                <button type="button" onclick="showLoginUsername()" class="btn btn-info active">ثبت</button>
+                <button type="button" onclick="Return()" class="btn btn-default">بازگشت</button>
+                <p id="loginErrEmail"></p>
             </div>
         </div>
     </div>
@@ -785,47 +720,47 @@ $authUrl = $client->createAuthUrl();
 </span>
 
 {{--Enter Phone in login PopUp--}}
-<span id="EnterPhone-loginPopUp" onkeyup="if(event.keyCode == 13) login($('#username_phone').val(), $('#password_phone').val())" class="pop-up ui_modal hidden" style="position: fixed;width: auto;top: 7%;bottom: auto;z-index: 10000001;padding: 40px 20px !important;height: auto;overflow: auto;">
+<span id="EnterPhone-loginPopUp" onkeyup="if(event.keyCode == 13) login($('#username_phone').val(), $('#password_phone').val())" class="pop-up ui_modal hidden">
     <div>
-        <img src="{{URL::asset('images/logo.svg')}}" style="margin-bottom: 20px; width: 100%; height: 50px;">
+        <img src="{{URL::asset('images/logo.svg')}}">
     </div>
-    <div class="col-xs-12" style="direction: rtl;">
-        <div class="col-xs-6" style="border-right: 1px solid #cccccc">
-            <div style="font-size: 14px !important;" class="header_text">در حال حاضر عضو شازده مسافر هستید؟!</div>
-            <div>
-                <div>
-                    <label style=" width: 100%;">
-                        <span style=" padding-top: 8px;"> نام کاربری </span>
-                        <input style="width:85%;padding: 7px;text-align: center;margin-top: 8px;border-radius: 5px;border: 1px solid #CCC;" type="text" id="username_phone" maxlength="40" required autofocus>
-                    </label>
-                </div>
-                <div>
-                    <label style=" width: 100%;">
-                        <span style=" padding-top: 8px;">رمز عبور</span>
-                        <input style="width:85%;padding: 7px;text-align: center;margin-top: 8px;border-radius: 5px;border: 1px solid #CCC;" type="password" id="password_phone" class="password" maxlength="40" required>
-                        <a onclick="ShowForgetPass()" style="cursor:pointer; font-size: 11px; padding-top: 8px; display: block;">رمز عبور خود را فراموش کردید؟</a>
-                    </label>
-                </div>
-            </div>
-            <div style=" padding-top: 8px;">
-                <button onclick="login($('#username_phone').val(), $('#password_phone').val())" class="btn btn-info active" style="background: #4DC7BC;border-color: #4DC7BC;padding-left: 22px;padding-right: 20px;border-radius: 10px;;box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 3px 0px;">ورود</button>
-                <p style="margin-top: 10px" id="loginErr"></p>
-            </div>
-        </div>
+    <div class="col-xs-12 rtl">
         <div class="col-xs-6">
-            <div style="font-size: 14px !important;" class="header_text">عضو شوید:</div>
+            <div class="header_text">در حال حاضر عضو شازده مسافر هستید؟!</div>
             <div>
                 <div>
                     <label>
-                        <span style=" padding-top: 8px;">موبایل خود را وارد کنید </span>
-                        <input style="width:85%;padding: 7px;text-align: center;margin-top: 8px;border-radius: 5px;border: 1px solid #CCC;" placeholder="09xxxxxxxxx" type="tel" id="phoneNum" maxlength="40" required autofocus>
+                        <span> نام کاربری </span>
+                        <input type="text" id="username_phone" maxlength="40" required autofocus>
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <span>رمز عبور</span>
+                        <input type="password" id="password_phone" class="password" maxlength="40" required>
+                        <a onclick="ShowForgetPass()">رمز عبور خود را فراموش کردید؟</a>
                     </label>
                 </div>
             </div>
-            <div style=" padding-top: 8px;">
-                <button type="button" onclick="showLoginCode()" class="btn btn-info active"  style="background: #4DC7BC;border-color: #4DC7BC;padding-left: 22px;padding-right: 20px;border-radius: 10px;box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 3px 0px;">ثبت</button>
-                <button type="button" onclick="Return()" class="btn btn-default" style="border-radius: 10px;box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 3px 0px;" >بازگشت</button>
-                <p style="margin-top: 10px" id="loginErrPhonePass1"></p>
+            <div>
+                <button onclick="login($('#username_phone').val(), $('#password_phone').val())" class="btn btn-info active">ورود</button>
+                <p id="loginErr"></p>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="header_text">عضو شوید:</div>
+            <div>
+                <div>
+                    <label>
+                        <span>موبایل خود را وارد کنید </span>
+                        <input placeholder="09xxxxxxxxx" type="tel" id="phoneNum" maxlength="40" required autofocus>
+                    </label>
+                </div>
+            </div>
+            <div>
+                <button type="button" onclick="showLoginCode()" class="btn btn-info active">ثبت</button>
+                <button type="button" onclick="Return()" class="btn btn-default">بازگشت</button>
+                <p id="loginErrPhonePass1"></p>
             </div>
         </div>
     </div>
@@ -833,53 +768,53 @@ $authUrl = $client->createAuthUrl();
 </span>
 
 {{--Send & Enter Code in login PopUp--}}
-<span id="Send_AND_EnterCode-loginPopUp" onkeyup="if(event.keyCode == 13) login($('#username_2').val(), $('#password_2').val())" class="pop-up ui_modal hidden" style="position: fixed;width: auto;top: 7%;bottom: auto;z-index: 10000001;padding: 40px 20px !important;height: auto;overflow: auto;">
+<span id="Send_AND_EnterCode-loginPopUp" onkeyup="if(event.keyCode == 13) login($('#username_2').val(), $('#password_2').val())" class="pop-up ui_modal hidden">
     <div>
-        <img src="{{URL::asset('images/logo.svg')}}" style="margin-bottom: 20px; width: 100%; height: 50px;">
+        <img src="{{URL::asset('images/logo.svg')}}">
     </div>
-    <div class="col-xs-12" style="direction: rtl;">
-        <div class="col-xs-6" style="border-right: 1px solid #cccccc">
-            <div style="font-size: 14px !important;" class="header_text">در حال حاضر عضو شازده مسافر هستید؟!</div>
-            <div>
-                <div>
-                    <label style=" width: 100%;">
-                        <span style=" padding-top: 8px;"> نام کاربری </span>
-                        <input style="width:85%;padding: 7px;text-align: center;margin-top: 8px;border-radius: 5px;border: 1px solid #CCC;" type="text" id="username_2" maxlength="40" required autofocus>
-                    </label>
-                </div>
-                <div>
-                    <label style=" width: 100%;">
-                        <span style=" padding-top: 8px;">رمز عبور</span>
-                        <input style="width:85%;padding: 7px;text-align: center;margin-top: 8px;border-radius: 5px;border: 1px solid #CCC;" type="password" id="password_2" class="password" maxlength="40" required>
-                        <a onclick="ShowForgetPass()" style="cursor: pointer; font-size: 11px; padding-top: 8px; display: block;">رمز عبور خود را فراموش کردید؟</a>
-                    </label>
-                </div>
-            </div>
-            <div style=" padding-top: 8px;">
-                <button onclick="login($('#username_2').val(), $('#password_2').val())" class="btn btn-info active" style="background: #4DC7BC;border-color: #4DC7BC;padding-left: 22px;padding-right: 20px;border-radius: 10px;;box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 3px 0px;">ورود</button>
-                <p style="margin-top: 10px" id="loginErr"></p>
-            </div>
-        </div>
+    <div class="col-xs-12 rtl">
         <div class="col-xs-6">
-            <div style="font-size: 14px !important;" class="header_text">لطفا کد اعتبار سنجی را وارد نمایید:</div>
+            <div class="header_text">در حال حاضر عضو شازده مسافر هستید؟!</div>
             <div>
                 <div>
                     <label>
-                        <span style="font-size: 12px !important;" class="header_text">این کد به گوشی شما ارسال گردیده است.</span>
-
-                        <span style=" padding-top: 8px;"> کد اعتبار سنجی </span>
-                        <input style="margin-bottom: 5px;width:85%;padding: 7px;text-align: center;margin-top: 8px;border-radius: 5px;border: 1px solid #CCC;" type="text" maxlength="40" id="activationCode" required autofocus>
-                        <p id="reminderTimePane" style="padding-top: 8px;font-size: 10px;">
-                            <span>  زمان باقی مانده برای ارسال مجدد کد اعتبار سنجی شما :</span>
-                            <span id="reminderTime"></span>
-                        </p>
-                        <button style="background: #963019;border-color: #963019;" onclick="resendActivationCode()" disabled id="resendActivationCode" class="btn btn-success"> ارسال مجدد کد اعتبار سنجی </button>
+                        <span> نام کاربری </span>
+                        <input type="text" id="username_2" maxlength="40" required autofocus>
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <span>رمز عبور</span>
+                        <input id="password_2" class="password" maxlength="40" required>
+                        <a onclick="ShowForgetPass()">رمز عبور خود را فراموش کردید؟</a>
                     </label>
                 </div>
             </div>
-            <div style=" padding-top: 8px;">
-                <button type="button" onclick="showLoginPassword()" class="btn btn-info active"  style="background: #4DC7BC;border-color: #4DC7BC;padding-left: 22px;padding-right: 20px;border-radius: 10px;box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 3px 0px;">ثبت</button>
-                <p style="margin-top: 10px;color: #963019;" id="loginErrActivationCode"></p>
+            <div>
+                <button onclick="login($('#username_2').val(), $('#password_2').val())" class="btn btn-info active">ورود</button>
+                <p id="loginErr"></p>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="header_text">لطفا کد اعتبار سنجی را وارد نمایید:</div>
+            <div>
+                <div>
+                    <label>
+                        <span class="header_text">این کد به گوشی شما ارسال گردیده است.</span>
+
+                        <span> کد اعتبار سنجی </span>
+                        <input type="text" maxlength="40" id="activationCode" required autofocus>
+                        <p id="reminderTimePane">
+                            <span>  زمان باقی مانده برای ارسال مجدد کد اعتبار سنجی شما :</span>
+                            <span id="reminderTime"></span>
+                        </p>
+                        <button onclick="resendActivationCode()" disabled id="resendActivationCode" class="btn btn-success"> ارسال مجدد کد اعتبار سنجی </button>
+                    </label>
+                </div>
+            </div>
+            <div>
+                <button type="button" onclick="showLoginPassword()" class="btn btn-info active">ثبت</button>
+                <p id="loginErrActivationCode"></p>
             </div>
         </div>
     </div>
@@ -887,46 +822,46 @@ $authUrl = $client->createAuthUrl();
 </span>
 
 {{--Enter Password in login PopUp--}}
-<span id="EnterPassword-loginPopUp" onkeyup="if(event.keyCode == 13) login($('#username_3').val(), $('#password_3').val())" class="pop-up ui_modal hidden" style="position: fixed;width: auto;top: 7%;bottom: auto;z-index: 10000001;padding: 40px 20px !important;height: auto;overflow: auto;">
+<span id="EnterPassword-loginPopUp" onkeyup="if(event.keyCode == 13) login($('#username_3').val(), $('#password_3').val())" class="pop-up ui_modal hidden">
     <div>
-        <img src="{{URL::asset('images/logo.svg')}}" style="margin-bottom: 20px; width: 100%; height: 50px;">
+        <img src="{{URL::asset('images/logo.svg')}}">
     </div>
-    <div class="col-xs-12" style="direction: rtl;">
-        <div class="col-xs-6" style="border-right: 1px solid #cccccc">
-            <div style="font-size: 14px !important;" class="header_text">در حال حاضر عضو شازده مسافر هستید؟!</div>
-            <div>
-                <div>
-                    <label style=" width: 100%;">
-                        <span style=" padding-top: 8px;"> نام کاربری </span>
-                        <input style="width:85%;padding: 7px;text-align: center;margin-top: 8px;border-radius: 5px;border: 1px solid #CCC;" type="text" id="username_3" maxlength="40" required autofocus>
-                    </label>
-                </div>
-                <div>
-                    <label style=" width: 100%;">
-                        <span style=" padding-top: 8px;">رمز عبور</span>
-                        <input style="width:85%;padding: 7px;text-align: center;margin-top: 8px;border-radius: 5px;border: 1px solid #CCC;" type="password" id="password_3" class="password" maxlength="40" required>
-                        <a onclick="ShowForgetPass()" style="cursor: pointer; font-size: 11px; padding-top: 8px; display: block;">رمز عبور خود را فراموش کردید؟</a>
-                    </label>
-                </div>
-            </div>
-            <div style=" padding-top: 8px;">
-                <button onclick="login($('#username_3').val(), $('#password_3').val())" class="btn btn-info active" style="background: #4DC7BC;border-color: #4DC7BC;padding-left: 22px;padding-right: 20px;border-radius: 10px;;box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 3px 0px;">ورود</button>
-                <p style="margin-top: 10px" id="loginErr"></p>
-            </div>
-        </div>
+    <div class="col-xs-12 rtl">
         <div class="col-xs-6">
-            <div style="font-size: 14px !important;" class="header_text">رمز عبور خود را وارد نمایید:</div>
+            <div class="header_text">در حال حاضر عضو شازده مسافر هستید؟!</div>
             <div>
                 <div>
                     <label>
-                        <span style=" padding-top: 8px;">رمز عبور</span>
-                        <input style="width:85%;padding: 7px;text-align: center;margin-top: 8px;border-radius: 5px;border: 1px solid #CCC;" type="password" id="password_In_Phone_registry" maxlength="40" required>
+                        <span> نام کاربری </span>
+                        <input type="text" id="username_3" maxlength="40" required autofocus>
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <span>رمز عبور</span>
+                        <input type="password" id="password_3" class="password" maxlength="40" required>
+                        <a onclick="ShowForgetPass()">رمز عبور خود را فراموش کردید؟</a>
                     </label>
                 </div>
             </div>
-            <div style="padding-top: 8px;">
-                <button type="button" onclick="showLoginUsername()" class="btn btn-info active"  style="background: #4DC7BC;border-color: #4DC7BC;padding-left: 22px;padding-right: 20px;border-radius: 10px;box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 3px 0px;">ثبت</button>
-                <p style="margin-top: 10px" id="loginErr"></p>
+            <div>
+                <button onclick="login($('#username_3').val(), $('#password_3').val())" class="btn btn-info active">ورود</button>
+                <p id="loginErr"></p>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="header_text">رمز عبور خود را وارد نمایید:</div>
+            <div>
+                <div>
+                    <label>
+                        <span>رمز عبور</span>
+                        <input type="password" id="password_In_Phone_registry" maxlength="40" required>
+                    </label>
+                </div>
+            </div>
+            <div>
+                <button type="button" onclick="showLoginUsername()" class="btn btn-info active" >ثبت</button>
+                <p id="loginErr"></p>
             </div>
         </div>
     </div>
@@ -934,126 +869,118 @@ $authUrl = $client->createAuthUrl();
 </span>
 
 {{--Enter Username in login PopUp--}}
-<span id="EnterUsername-loginPopUp" class="pop-up ui_modal hidden" style="position: fixed;width: auto;top: 7%;bottom: auto;z-index: 10000001;padding: 40px 20px !important;height: auto;overflow: auto;">
+<span id="EnterUsername-loginPopUp" class="pop-up ui_modal hidden">
     <div>
-        <img src="{{URL::asset('images/logo.svg')}}" style="margin-bottom: 20px; width: 100%; height: 50px;">
+        <img src="{{URL::asset('images/logo.svg')}}">
     </div>
-    <div class="col-xs-12" style="direction: rtl;">
-        <div class="col-xs-6" style="border-right: 1px solid #cccccc">
+    <div class="col-xs-12 rtl">
+        <div class="col-xs-6">
             <script async src='https://www.google.com/recaptcha/api.js'></script>
 
             <input id='checked' onchange='checkedCheckBox()' type='checkbox' value='-1'>
             <label class='labelForCheckBox' for='checked'>
                 <span></span>&nbsp;
             </label>
-
-            <span style="font-size: 14px;"> شرایط استفاده و <a target="_blank" href="{{route('policies')}}">قوانین سایت</a> را مطالعه کرده و با آن موافقم.</span>
-
+            <span> شرایط استفاده و
+                <a target="_blank" href="{{route('policies')}}">قوانین سایت</a>
+                را مطالعه کرده و با آن موافقم.
+            </span>
             <div>
-                <div class="g-recaptcha" data-sitekey="6LcaSzwUAAAAAOl9ZYs_u90DLJjRh1-SRW-fp4Z0" style="margin-left: 30px;transform:scale(0.77);-webkit-transform:scale(0.77);transform-origin:right;-webkit-transform-origin:right;"></div>
+                <div class="g-recaptcha" data-sitekey="6LcaSzwUAAAAAOl9ZYs_u90DLJjRh1-SRW-fp4Z0"></div>
             </div>
             <br>
-             <button id="submitAndFinishBtn" type="button" onclick="registerAndLogin()" class="btn btn-info active" disabled style="background: #4DC7BC;border-color: #4DC7BC;padding-left: 22px;padding-right: 20px;border-radius: 10px;box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 3px 0px;">ثبت</button>
-            <p style="margin-top: 10px;color: #963019;" id="loginErrUserName"></p>
+             <button id="submitAndFinishBtn" type="button" onclick="registerAndLogin()" class="btn btn-info active" disabled>ثبت</button>
+            <p id="loginErrUserName"></p>
         </div>
         <div class="col-xs-6">
-
-
-            <div style="font-size: 14px !important;" class="header_text">قدم آخر!</div>
+            <div class="header_text">قدم آخر!</div>
             <div>
                 <label>
-                    <span style="font-size: 12px !important;" class="header_text">نام کاربری خود را انتخاب کنید.دوستانتان در سایت شما را با این نام خواهند شناخت.</span>
-                    <span style=" padding-top: 8px;">نام کاربری</span>
-                    <input style="width:85%;padding: 7px;text-align: center;margin-top: 8px;border-radius: 5px;border: 1px solid #CCC;" type="text" id="username_final" maxlength="40" required>
-                    <br/>
-                    <br/>
-                    <span style="font-size: 12px !important;" class="header_text">در صورتی که دوستانتان شما را معرفی کرده اند، کد معرف خود را در کادر زیر وارد کنید.</span>
-                    <span style=" padding-top: 8px;">کد معرف</span>
-                    <input style="width:60%;padding: 7px;text-align: center;margin-top: 8px;border-radius: 5px;border: 1px solid #CCC;" type="text" id="invitationCode" maxlength="6">
+                    <span class="header_text">نام کاربری خود را انتخاب کنید.دوستانتان در سایت شما را با این نام خواهند شناخت.</span>
+                    <span>نام کاربری</span>
+                    <input type="text" id="username_final" maxlength="40" required>
+                    <br>
+                    <br>
+                    <span class="header_text">در صورتی که دوستانتان شما را معرفی کرده اند، کد معرف خود را در کادر زیر وارد کنید.</span>
+                    <span>کد معرف</span>
+                    <input type="text" id="invitationCode" maxlength="6">
                 </label>
             </div>
-            <div style=" padding-top: 8px;">
-
-
-
-
-
-
-            </div>
+            <div></div>
         </div>
     </div>
     <div class="ui_close_x" onclick="document.location.href = '{{route('main')}}'"></div>
 </span>
 
 {{--Forget Password in login PopUp--}}
-<span id="ForgetPassword" class="pop-up ui_modal hidden" style="position: fixed;width: auto;top: 7%;bottom: auto;z-index: 10000001;padding: 40px 20px !important;height: auto;overflow: auto;">
+<span id="ForgetPassword" class="pop-up ui_modal hidden">
     <div>
-        <img src="{{URL::asset('images/logo.svg')}}" style="margin-bottom: 20px; width: 100%; height: 50px;">
+        <img src="{{URL::asset('images/logo.svg')}}">
     </div>
-    <div class="col-xs-12" style="direction: rtl; text-align: center;">
-        <div style="font-size: 14px !important;" class="header_text">برای بازیابی رمزعبور تان از کدام طریق اقدام میکنید:</div>
+    <div class="col-xs-12">
+        <div class="header_text">برای بازیابی رمزعبور تان از کدام طریق اقدام میکنید:</div>
         <div>
             <label>
-                <button class="btn" style="width: 90%; margin: 0 5px 15px 5px;background: #4DC7BC;color: #FFF;border-radius: 10px;box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 3px 0px;" onclick="ShowEmail_ForgetPass()">
-                    <div style="background-size: 20px;background-position:  0 0;width: 20px;height:  20px;float:  right;background-image: url('{{URL::asset('images') . 'loginPopup.png'}}');background-repeat:  no-repeat;margin-left:  10px;"></div>
-                    <span style="float: right;">ایمیل</span>
+                <button class="btn" onclick="ShowEmail_ForgetPass()">
+                    <div></div>
+                    <span>ایمیل</span>
                 </button>
-                <button class="btn" style="width: 90%; margin: 0 5px 15px 5px;background: #4DC7BC;color: #FFF;border-radius: 10px;box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 3px 0px;" onclick="ShowPhone_ForgetPass()">
-                    <div style="background-size: 20px;background-position:  0 -41px;width: 20px;height:  20px;float:  right;background-image: url('{{URL::asset('images') . 'loginPopup.png'}}');background-repeat:  no-repeat;margin-left:  10px;"></div>
-                    <span style="float: right;" >تلفن همراه</span>
+                <button class="btn" onclick="ShowPhone_ForgetPass()">
+                    <div></div>
+                    <span>تلفن همراه</span>
                 </button>
             </label>
         </div>
-        <div style=" padding-top: 8px;">
-            <button type="button" onclick="Return()" class="btn btn-default" style="border-radius: 10px;box-shadow: rgba(0, 0, 0, 0.2) 0 2px 3px 0;">بازگشت</button>
-            <p style="margin-top: 10px" id="loginErr"></p>
+        <div>
+            <button type="button" onclick="Return()" class="btn btn-default">بازگشت</button>
+            <p id="loginErr"></p>
         </div>
     </div>
     <div class="ui_close_x" onclick="hideElement('ForgetPassword')"></div>
 </span>
 
 {{--Enter Email for ForgetPass in login PopUp--}}
-<span id="Email_ForgetPass" class="pop-up ui_modal hidden" style="position: fixed;width: auto;top: 7%;bottom: auto;z-index: 10000001;padding: 40px 20px !important;height: auto;overflow: auto;">
+<span id="Email_ForgetPass" class="pop-up ui_modal hidden">
     <div>
-        <img src="{{URL::asset('images/logo.svg')}}" style="margin-bottom: 20px; width: 100%; height: 50px;">
+        <img src="{{URL::asset('images/logo.svg')}}">
     </div>
-    <div class="col-xs-12" style="direction: rtl; text-align: center;">
+    <div class="col-xs-12 rtl">
         <div>
             <label>
-                <span style=" padding-top: 8px;"> آدرس ایمیل </span>
-                <input style="width:85%;padding: 7px;text-align: center;margin-top: 8px;border-radius: 5px;border: 1px solid #CCC;" type="email" id="forget_email" maxlength="40" required autofocus>
+                <span> آدرس ایمیل </span>
+                <input type="email" id="forget_email" maxlength="40" required autofocus>
             </label>
         </div>
-        <div style=" padding-top: 8px;">
-            <button type="button" onclick="retrievePasByEmail()" class="btn btn-info active"  style="background: #4DC7BC;border-color: #4DC7BC;padding-left: 22px;padding-right: 20px;border-radius: 10px;box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 3px 0px;">ثبت</button>
-            <button type="button" onclick="ShowForgetPass()" class="btn btn-default" style="border-radius: 10px;box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 3px 0px;" >بازگشت</button>
-            <p style="margin-top: 10px" id="loginErrResetPasByEmail"></p>
+        <div>
+            <button type="button" onclick="retrievePasByEmail()" class="btn btn-info active" >ثبت</button>
+            <button type="button" onclick="ShowForgetPass()" class="btn btn-default" >بازگشت</button>
+            <p id="loginErrResetPasByEmail"></p>
         </div>
     </div>
     <div class="ui_close_x" onclick="hideElement('Email_ForgetPass')"></div>
 </span>
 
 {{--Enter Phone for ForgetPass in login PopUp--}}
-<span id="Phone_ForgetPass" class="pop-up ui_modal hidden" style="position: fixed;width: auto;top: 7%;bottom: auto;z-index: 10000001;padding: 40px 20px !important;height: auto;overflow: auto;">
+<span id="Phone_ForgetPass" class="pop-up ui_modal hidden">
     <div>
-        <img src="{{URL::asset('images/logo.svg')}}" style="margin-bottom: 20px; width: 100%; height: 50px;">
+        <img src="{{URL::asset('images/logo.svg')}}">
     </div>
-    <div class="col-xs-12" style="direction: rtl; text-align: center;">
+    <div class="col-xs-12">
         <div>
             <label>
-                <span style=" padding-top: 8px;"> شماره موبایل خود را وارد نمایید </span>
-                <input style="width:55%;padding: 7px;text-align: center;margin-top: 8px;border-radius: 5px;border: 1px solid #CCC;" placeholder="09xxxxxxxxx" type="tel" id="forget_phone" maxlength="40" required autofocus>
-                <p id="reminderTimePaneForget" class="hidden" style="padding-top: 8px;">
+                <span> شماره موبایل خود را وارد نمایید </span>
+                <input placeholder="09xxxxxxxxx" type="tel" id="forget_phone" maxlength="40" required autofocus>
+                <p id="reminderTimePaneForget" class="hidden">
                     <span> : زمان باقی مانده برای ارسال مجدد پسورد جدید </span>
                     <span id="reminderTimeForget"></span>
                 </p>
                 <button onclick="resendActivationCodeForget()" disabled id="resendActivationCodeForget" class="btn btn-success hidden"> ارسال مجدد کد فعال سازی </button>
             </label>
         </div>
-        <div style=" padding-top: 8px;">
-            <button type="button" onclick="retrievePasByPhone()" class="btn btn-info active"  style="background: #4DC7BC;border-color: #4DC7BC;padding-left: 22px;padding-right: 20px;border-radius: 10px;box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 3px 0px;">ثبت</button>
-            <button type="button" onclick="ShowForgetPass()" class="btn btn-default" style="border-radius: 10px;box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 3px 0px;" >بازگشت</button>
-            <p style="margin-top: 10px" id="loginErrResetPasByPhone"></p>
+        <div>
+            <button type="button" onclick="retrievePasByPhone()" class="btn btn-info active">ثبت</button>
+            <button type="button" onclick="ShowForgetPass()" class="btn btn-default">بازگشت</button>
+            <p id="loginErrResetPasByPhone"></p>
         </div>
     </div>
     <div class="ui_close_x" onclick="hideElement('Phone_ForgetPass')"></div>

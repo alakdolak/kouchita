@@ -5,7 +5,7 @@
 
 <div id="AdviceControllerId" class="homepage_shelves_widget" ng-controller="AdviceController">
     <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show">
-        <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff" style="direction: rtl;">
+        <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff rtl">
             <div class="shelf_header">
                 <div class="shelf_title">
                     <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
@@ -29,7 +29,7 @@
                                 </div>
                             </div>
                         </a>
-                        <div class="detail" style="direction: rtl">
+                        <div class="detail rtl">
                             <a href="[[itr.url]]" class="item poi_name ui_link">[[itr.name]]</a>
                             <div class="item rating-widget">
                                 <div class="prw_rup prw_common_location_rating_simple">
@@ -51,7 +51,7 @@
 @if($placeMode == "hotel")
     <div id="HotelControllerId" class="homepage_shelves_widget" ng-controller="HotelController">
         <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show">
-            <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff" style="direction: rtl;">
+            <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff rtl">
                 <div class="shelf_header">
                     <div class="shelf_title">
                         <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
@@ -75,7 +75,7 @@
                                     </div>
                                 </div>
                             </a>
-                            <div class="detail" style="direction: rtl">
+                            <div class="detail rtl">
                                 <a href="[[itr.url]]" class="item poi_name ui_link">[[itr.name]]</a>
                                 <div class="item rating-widget">
                                     <div class="prw_rup prw_common_location_rating_simple">
@@ -96,7 +96,7 @@
     <div id="RestaurantControllerId" class="homepage_shelves_widget"
          ng-controller="RestaurantController">
         <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show">
-            <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff" style="direction: rtl;">
+            <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff rtl">
                 <div class="shelf_header">
                     <div class="shelf_title">
                         <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
@@ -120,7 +120,7 @@
                                     </div>
                                 </div>
                             </a>
-                            <div class="detail" style="direction: rtl">
+                            <div class="detail rtl">
                                 <a href="[[itr.url]]" class="item poi_name ui_link">[[itr.name]]</a>
                                 <div class="item rating-widget">
                                     <div class="prw_rup prw_common_location_rating_simple">
@@ -140,7 +140,7 @@
 @else
     <div id="AmakenControllerId" class="homepage_shelves_widget" ng-controller="AmakenController">
         <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show">
-            <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff" style="direction: rtl;">
+            <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff rtl">
                 <div class="shelf_header">
                     <div class="shelf_title">
                         <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
@@ -164,7 +164,7 @@
                                     </div>
                                 </div>
                             </a>
-                            <div class="detail" style="direction: rtl">
+                            <div class="detail rtl">
                                 <a href="[[itr.url]]" class="item poi_name ui_link">[[itr.name]]</a>
                                 <div class="item rating-widget">
                                     <div class="prw_rup prw_common_location_rating_simple">
@@ -188,7 +188,7 @@
 @if(Auth::check())
     <div id="RecentlyControllerId" class="homepage_shelves_widget" ng-controller="RecentlyController">
         <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show">
-            <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff" style="direction: rtl;">
+            <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff rtl">
                 <div class="shelf_header">
                     <div class="shelf_title">
                         <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
@@ -212,7 +212,7 @@
                                     </div>
                                 </div>
                             </a>
-                            <div class="detail" style="direction: rtl">
+                            <div class="detail rtl">
                                 <a href="[[itr.url]]" class="item poi_name ui_link">[[itr.name]]</a>
                                 <div class="item rating-widget">
                                     <div class="prw_rup prw_common_location_rating_simple">
@@ -236,7 +236,7 @@
 @if($placeMode == "hotel" || $placeMode == "restaurant")
     <div id="AmakenControllerId" class="homepage_shelves_widget" ng-controller="AmakenController">
         <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show">
-            <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff" style="direction: rtl;">
+            <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff rtl">
                 <div class="shelf_header">
                     <div class="shelf_title">
                         <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
@@ -258,7 +258,7 @@
                                     </div>
                                 </div>
                             </a>
-                            <div class="detail" style="direction: rtl">
+                            <div class="detail rtl">
                                 <a href="[[itr.url]]" class="item poi_name ui_link">[[itr.name]]</a>
                                 <div class="item rating-widget">
                                     <div class="prw_rup prw_common_location_rating_simple">
@@ -278,7 +278,7 @@
 @else
     <div id="HotelControllerId" class="homepage_shelves_widget" ng-controller="HotelController">
         <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show">
-            <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff" style="direction: rtl;">
+            <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff rtl">
                 <div class="shelf_header">
                     <div class="shelf_title">
                         <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
@@ -300,7 +300,7 @@
                                     </div>
                                 </div>
                             </a>
-                            <div class="detail" style="direction: rtl">
+                            <div class="detail rtl">
                                 <a href="[[itr.url]]" class="item poi_name ui_link">[[itr.name]]</a>
                                 <div class="item rating-widget">
                                     <div class="prw_rup prw_common_location_rating_simple">
@@ -321,7 +321,7 @@
 
 <div id="FoodControllerId" class="homepage_shelves_widget" ng-controller="FoodController">
     <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show">
-        <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff" style="direction: rtl;">
+        <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff rtl">
             <div class="shelf_header">
                 <div class="shelf_title">
                     <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
@@ -343,7 +343,7 @@
                                 </div>
                             </div>
                         </a>
-                        <div class="detail" style="direction: rtl">
+                        <div class="detail rtl">
                             <a href="[[itr.url]]" class="item poi_name ui_link">[[itr.name]]</a>
                             <div class="item rating-widget">
                                 <div class="prw_rup prw_common_location_rating_simple">

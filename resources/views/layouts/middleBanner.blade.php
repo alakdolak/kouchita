@@ -6,39 +6,41 @@
             <div class="prw_rup prw_homepage_messaging_brand">
                 <div id="brand_messaging" class="ui_columns is-hidden-mobile">
                     <div class="ui_column is-12">
-                        <div style="direction: rtl;text-align: center;" class="brand_header green"><h1>ایران را باهم بشناسیم</h1></div>
-                        <div style="direction: rtl;text-align: center;"> همین حالا با اشتراک تجربیات خود به عنوان یک گردشگر ، خود را به دوستانتان معرفی کنید.</div>
+                        <div  class="brand_header green" id="knewIranTogetherText"><h1>ایران را باهم بشناسیم</h1></div>
+                        <div  id="shareInfoTitleText"> همین حالا با اشتراک تجربیات خود به عنوان یک گردشگر ، خود را به دوستانتان معرفی کنید.</div>
                         @if(!Auth::check())
-                            <div class="login-button" style="cursor: pointer; direction: rtl;text-align: center;font-size: 13px;color: #4DC7BC;">
+                            <div class="login-button" id="createAccountMiddleBanner">
                                 <span class="ui_icon arrow-left"></span> ساخت پروفایل
                             </div>
                         @endif
                     </div>
-                    <div class="ui_column is-4 right-col" style="overflow: visible;direction: rtl;text-align: center;float: left;position: relative">
-                        <div style="overflow: visible;" class="inner">
-                            <div class="icon-mainpage"><span class="ui_icon my-trips"></span></div>
+                    <div class="ui_column is-4 right-col tripleBoxMiddleBanner" id="tripPlanBoxMiddleBanner">
+                        <div class="inner">
+                            <div class="icon-mainpage">
+                                <span class="ui_icon my-trips"></span>
+                            </div>
                             <div class="text">
-                                <h2 style="margin-top: 22px;" class="en_US large white">برنامه ریزی کنید</h2>
+                                <h2 class="en_US large white">برنامه ریزی کنید</h2>
                                 <div class="en_US small white">تمامی مراحل سفر خود را از خرید بلیط تا رزرو هتل با بهترین قیمت ها برنامه ریزی کنید.</div>
                             </div>
                         </div>
                     </div>
-                    <div class="ui_column is-4 right-col" style="overflow: visible; direction: rtl;text-align: center;float: left;position: relative;">
-                        <div style="overflow: visible;background: #FFF ;border:  1px solid #4DC7BC;" class="inner" id="middle-box">
-                            <div class="icon-mainpage" style="background:#4DC7BC;">
-                                <span style="color:#FFF;" class="ui_icon seat-flat-bed"></span>
+                    <div class="ui_column is-4 right-col tripleBoxMiddleBanner">
+                        <div class="inner" id="middle-box">
+                            <div class="icon-mainpage">
+                                <span class="ui_icon seat-flat-bed"></span>
                             </div>
-                            <div style="color:#4dc7bc;" class="text">
-                                <h2 style="color:#4dc7bc;margin-top: 22px;" class="en_US large white">خواندن نقد گردشگران</h2>
-                                <div style="color:#4dc7bc;" class="en_US small white">با خواندن نقد دوستان خود ، بهتر و راحت تر انتخاب کنید</div>
+                            <div class="text">
+                                <h2 class="en_US large white">خواندن نقد گردشگران</h2>
+                                <div class="en_US small white">با خواندن نقد دوستان خود ، بهتر و راحت تر انتخاب کنید</div>
                             </div>
                         </div>
                     </div>
-                    <div class="ui_column is-4 right-col" style="direction: rtl;text-align: center;float: left;position: relative;">
-                        <div style="overflow: visible;" class="inner">
+                    <div class="ui_column is-4 right-col tripleBoxMiddleBanner">
+                        <div class="inner">
                             <div class="icon-mainpage"><span class="ui_icon search"></span></div>
                             <div class="text">
-                                <h2 style="margin-top: 22px;" class="en_US large white"> مقصد سفر </h2>
+                                <h2 class="en_US large white"> مقصد سفر </h2>
                                 <div class="en_US small white">فقط کافیست مقصد خود را وارد کنید</div>
                             </div>
                         </div>
@@ -64,7 +66,7 @@
                     <div class="shelf_item_container ui_columns is-mobile is-multiline">
                         <div class="prw_rup prw_shelves_geo_shelf_item_widget ui_column is-3-tablet is-6-mobile">
                             <div class="poi">
-                                <div style="cursor: pointer" onclick="chooseState('sanaye')" class="thumbnail">
+                                <div onclick="chooseState('sanaye')" class="thumbnail otherServicesBoxes">
                                     <div class="prw_rup prw_common_thumbnail_no_style_responsive" data-prwidget-name="common_thumbnail_no_style_responsive" data-prwidget-init="">
                                         <div class="prv_thumb has_image">
                                             <div class="image_wrapper landscape landscapeWide">
@@ -72,13 +74,13 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <span style="direction: rtl;" class="item name" title="Santa Cruz">صنایع دستی </span>
+                                    <span class="item name rtl" title="Santa Cruz">صنایع دستی </span>
                                 </div>
                             </div>
                         </div>
                         <div class="prw_rup prw_shelves_geo_shelf_item_widget ui_column is-3-tablet is-6-mobile">
                             <div class="poi">
-                                <div style="cursor: pointer" onclick="chooseState('soghat')" class="thumbnail">
+                                <div  onclick="chooseState('soghat')" class="thumbnail otherServicesBoxes">
                                     <div class="prw_rup prw_common_thumbnail_no_style_responsive" data-prwidget-name="common_thumbnail_no_style_responsive" data-prwidget-init="">
                                         <div class="prv_thumb has_image">
                                             <div class="image_wrapper landscape landscapeWide">
@@ -86,13 +88,13 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <span style="direction: rtl;" class="item name" title="Santa Cruz"> سوغات</span>
+                                    <span class="item name rtl" title="Santa Cruz"> سوغات</span>
                                 </div>
                             </div>
                         </div>
                         <div class="prw_rup prw_shelves_geo_shelf_item_widget ui_column is-3-tablet is-6-mobile">
                             <div class="poi">
-                                <div class="thumbnail" style="cursor: pointer"
+                                <div class="thumbnail otherServicesBoxes" "
                                      onclick="chooseState('ghazamahali')">
                                     <div class="prw_rup prw_common_thumbnail_no_style_responsive" data-prwidget-name="common_thumbnail_no_style_responsive" data-prwidget-init="">
                                         <div class="prv_thumb has_image">
@@ -101,14 +103,14 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <span style="direction: rtl;" class="item name" title="Santa Cruz"> غذای محلی</span>
+                                    <span class="item name rtl" title="Santa Cruz"> غذای محلی</span>
                                 </div>
                             </div>
                         </div>
                         <div class="prw_rup prw_shelves_geo_shelf_item_widget ui_column is-3-tablet is-6-mobile"
                              onclick="chooseGoyesh()">
                             <div class="poi">
-                                <a class="thumbnail" style="cursor: pointer">
+                                <a class="thumbnail otherServicesBoxes">
                                     <div class="prw_rup prw_common_thumbnail_no_style_responsive" data-prwidget-name="common_thumbnail_no_style_responsive" data-prwidget-init="">
                                         <div class="prv_thumb has_image">
                                             <div class="image_wrapper landscape landscapeWide">
@@ -116,13 +118,13 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <span style="direction: rtl;" class="item name" title="Santa Cruz"> اصطلاحات محلی</span>
+                                    <span class="item name rtl" title="Santa Cruz"> اصطلاحات محلی</span>
                                 </a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div style="margin-top: 20px;" class="shelf_container poi_by_tag rebrand shelf_row_2">
+                <div class="shelf_container poi_by_tag rebrand shelf_row_2" id="youMayLikeIt">
                     <div class="shelf_header">
                         <div class="shelf_title">
                             <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
@@ -140,31 +142,31 @@
                                             <div class="image_wrapper landscape landscapeWide"><img src="{{URL::asset('images/lebas.jpg')}}" alt="" class="image"></div>
                                         </div>
                                     </div>
-                                    <span style="direction: rtl;" class="item name" title="Santa Cruz">لباس محلی </span>
+                                    <span class="item name rtl" title="Santa Cruz">لباس محلی </span>
                                 </a>
                             </div>
                         </div>
                         <div class="prw_rup prw_shelves_geo_shelf_item_widget ui_column is-3-tablet is-6-mobile">
                             <div class="poi">
-                                <div onclick="chooseStateAmaken()" class="thumbnail" style="cursor: pointer">
+                                <div onclick="chooseStateAmaken()" class="thumbnail youMayLikeItBoxes">
                                     <div class="prw_rup prw_common_thumbnail_no_style_responsive" data-prwidget-name="common_thumbnail_no_style_responsive" data-prwidget-init="">
                                         <div class="prv_thumb has_image">
                                             <div class="image_wrapper landscape landscapeWide"><img src="{{URL::asset('images/tarikhi.jpg')}}" alt="" class="image"></div>
                                         </div>
                                     </div>
-                                    <span style="direction: rtl;" class="item name" title="Santa Cruz">  جاذبه ها</span>
+                                    <span class="item name rtl" title="Santa Cruz">  جاذبه ها</span>
                                 </div>
                             </div>
                         </div>
                         <div class="prw_rup prw_shelves_geo_shelf_item_widget ui_column is-3-tablet is-6-mobile">
                             <div class="poi">
-                                <div onclick="chooseStateMajara()" class="thumbnail" style="cursor: pointer">
+                                <div onclick="chooseStateMajara()" class="thumbnail youMayLikeItBoxes">
                                     <div class="prw_rup prw_common_thumbnail_no_style_responsive" data-prwidget-name="common_thumbnail_no_style_responsive" data-prwidget-init="">
                                         <div class="prv_thumb has_image">
                                             <div class="image_wrapper landscape landscapeWide"><img src="{{URL::asset('images/majarajooi.jpg')}}" alt="" class="image"></div>
                                         </div>
                                     </div>
-                                    <span style="direction: rtl;" class="item name" title="Santa Cruz"> سفرهای ماجراجویانه </span>
+                                    <span class="item name rtl" title="Santa Cruz"> سفرهای ماجراجویانه </span>
                                 </div>
                             </div>
                         </div>
@@ -176,7 +178,7 @@
                                             <div class="image_wrapper landscape landscapeWide"><img src="{{URL::asset('images/boom.jpg')}}" alt="" class="image"></div>
                                         </div>
                                     </div>
-                                    <span style="direction: rtl;" class="item name" title="Santa Cruz"> بوم گردی </span>
+                                    <span class="item name rtl" title="Santa Cruz"> بوم گردی </span>
                                 </a>
                             </div>
                         </div>
@@ -187,15 +189,15 @@
 
         <div class="hideOnScreen row">
             <div class="col-xs-12">
-                <a class="col-xs-4 squareDiv" href="{{route('mainMode', ['mode' => 'amaken'])}}" style="color: #30b4a6 !important;">
+                <a class="col-xs-4 squareDiv" href="{{route('mainMode', ['mode' => 'amaken'])}}">
                     <div class="phoneIcon atraction"></div>
                     <div class="textIcon">جاذبه ها</div>
                 </a>
-                <a class="col-xs-4 squareDiv" href="{{route('tickets')}}" style="color: #30b4a6 !important;">
+                <a class="col-xs-4 squareDiv" href="{{route('tickets')}}">
                     <div class="phoneIcon ticket"></div>
                     <div class="textIcon">بلیط</div>
                 </a>
-                <a class="col-xs-4 squareDiv" href="{{route('main')}}" style="color: #30b4a6 !important;">
+                <a class="col-xs-4 squareDiv" href="{{route('main')}}">
                     <div class="phoneIcon hotel"></div>
                     <div class="textIcon">هتل</div>
                 </a>
@@ -226,7 +228,7 @@
                     <div class="phoneIcon soghat"></div>
                     <div class="textIcon">سوغات</div>
                 </div>
-                <a class="col-xs-4 squareDiv" href="{{route('mainMode', ['mode' => 'restaurant'])}}" style="color: #30b4a6 !important;">
+                <a class="col-xs-4 squareDiv" href="{{route('mainMode', ['mode' => 'restaurant'])}}" >
                     <div class="phoneIcon restaurant"></div>
                     <div class="textIcon">رستوران</div>
                 </a>
@@ -239,8 +241,8 @@
             </div>
             <div style="clear: both"></div>
             <div class="col-xs-4"></div>
-            <div class="col-xs-4" onclick="$('#phoneMenuBarPopUp').removeClass('hidden')" style="margin-top: -2px; text-align: center;">
-                <span style="font-size: 30px; font-weight: bold"><span class="phoneIcon downArrow"></span>گزینه های بیشتر</span>
+            <div class="col-xs-4 moreOptionsSquareDiv" onclick="$('#phoneMenuBarPopUp').removeClass('hidden')">
+                <span><span class="phoneIcon downArrow"></span>گزینه های بیشتر</span>
             </div>
             <div class="col-xs-4"></div>
         </div>
