@@ -1002,6 +1002,261 @@ p {
     text-align: left
 }
 
+#discriptionNumRoom {
+    text-align: center;
+}
+
+#roomchoice > div > div:nth-child(2) > div:nth-child(4) {
+    margin: 7% 0;
+    text-align: center;
+}
+
+#check_room {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: #00000094;
+    top: 0;
+    left: 0;
+    z-index: 99;
+    display: none;
+    justify-content: center;
+    align-items: center
+}
+
+#check_room > div {
+    background-color: lightgray;
+    padding: 10px;
+    max-height: 85%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+#check_room > div > div:nth-child(1) {
+    direction: rtl;
+    text-align: center;
+    padding: 10px;
+}
+
+#check_room > div > div:nth-child(1) > span:nth-child(1) {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+#check_room > div > div:nth-child(1) > span:nth-child(2) {
+    font-size: 20px;
+}
+
+.closeXicon:before {
+    position: relative;
+    top: 0;
+}
+
+#check_room > div > div:nth-child(2) > div:nth-child(1) {
+    font-size: 15px;
+    position: fixed
+}
+
+#check_room > div > div:nth-child(2) > div:nth-child(1) > div {
+    width: 100%;
+    direction: rtl;
+    margin: 0;
+    background-color: white;
+    border: none;
+    position: relative;
+    box-shadow: 0 0 20px 0 gray;
+}
+
+#check_total_price {
+    font-size: 1.2em;
+    text-align: left
+}
+
+#check_room > div > div:nth-child(2) > div:nth-child(1) > div > div:nth-child(2) > div:nth-child(1) {
+    margin-bottom: 15px;
+}
+
+#check_description {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+#check_room > div > div:nth-child(2) > div:nth-child(1) > div > div:nth-child(3) {
+    margin: 7% 0;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    left: 0px;
+    width: 100%;
+    padding-right: 5%;
+}
+
+#check_room > div > div:nth-child(2) > div:nth-child(1) > div > div:nth-child(3) > button {
+    float: left;
+    margin-left: 5%;
+    color: white;
+}
+
+#check_room > div > div:nth-child(2) > div:nth-child(2) {
+    float: right;
+    width: 60%;
+}
+
+#check_room > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    direction: rtl;
+}
+
+#check_room > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) {
+    font-weight: bold;
+    font-size: 15px;
+    margin-bottom: 1%;
+}
+
+#check_room > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) {
+    width: 60%;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    box-shadow: 0 0 20px 0 gray;
+}
+
+#check_room > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) {
+    padding: 5px;
+}
+
+#check_room > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) {
+    display: flex;
+    flex-direction: column;
+}
+
+#check_room > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 5%;
+}
+
+#hotelRatingMainDivRoomChoice {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2%;
+}
+
+#hotelRatingMainDivRoomChoice > span:nth-child(2) {
+    margin-right: 0 !important;
+}
+
+#hotelRatesDivs {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 5px;
+}
+
+#selectedRoomMainDiv {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    direction: rtl;
+}
+
+#selectedRoomMainDiv > div:nth-child(1) {
+    font-weight: bold;
+    font-size: 15px;
+    margin-bottom: 1%;
+}
+
+#selectedRoomMainDiv > div:nth-child(3) > div {
+    background: white;
+    margin: 1px 1px 10px 1px;
+    box-shadow: 0 0 20px 0 gray;
+}
+
+#selectedRoomMainDiv > div:nth-child(3) > div > div {
+    font-size: 15px;
+    padding: 2%
+}
+
+#reviewsDiv > div {
+    width: 100%;
+    direction: rtl;
+    position: relative;
+}
+
+#reviewsDiv > div > div:nth-child(1) {
+    margin-top: 20px;
+    position: relative;
+}
+
+#targetHelp_11 {
+    max-width: 100px;
+    float: left
+}
+
+#targetHelp_11 > span:nth-child(1) {
+    color: #FFF !important;
+}
+
+#moreCities > div > div:nth-child(1) {
+    font-size: 18px
+}
+
+#reviewsDiv > div > div:nth-child(2) {
+    margin-top: 45px !important;
+}
+
+#test > div:nth-child(1) {
+    border-bottom: 1px solid #4DC7BC !important;
+}
+
+#test .imgWrap {
+    max-width: 364px;
+    max-height: 166px;
+}
+
+#test .imgWrap img {
+    min-width: 209px;
+}
+
+#targetHelp_13 > a {
+    color: #FFF !important;
+}
+
+#photosDiv .block_body_top .bignav {
+    max-height: 424px;
+}
+
+#photosDiv .block_body_top .imgWrap {
+    max-width: 267px;
+    max-height: 200px;
+}
+
+#photosDiv .block_body_top .imgWrap img {
+    min-width:267px
+}
+
+.poiTile {
+    float: left;
+}
+
+.full-height {
+    height: 100%;
+}
+
+.text-align-left {
+    text-align: left;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.color-darkred {
+    color: #92321b
+}
+
 .display-none {
     display: none;
 }

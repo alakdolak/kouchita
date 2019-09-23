@@ -1079,25 +1079,25 @@ if ($total == 0)
                                             <div class="lable_IS_2">تعداد اتاق</div>
                                             <div class="float-left" id="totalNumRoom"></div>
                                         </div>
-                                        <div style="text-align: center;" id="discriptionNumRoom">
+                                        <div id="discriptionNumRoom">
                                         </div>
                                     </div>
-                                    <div style="margin: 7% 0; text-align: center">
+                                    <div>
                                         <button class="btn rezervedBtn" type="button" onclick="showReserve()">رزرو
                                         </button>
                                     </div>
                                     <div>
                                         {{--<div>--}}
                                         {{--<div>حداکثر سن کودک</div>--}}
-                                        {{--<div style="color: #92321b">یک سال بدون اخذ هزینه</div>--}}
+                                        {{--<div class="color-darkred">یک سال بدون اخذ هزینه</div>--}}
                                         {{--</div>--}}
                                         {{--<div>--}}
                                         {{--<div>ساعت تحویل و تخلیه اتاق</div>--}}
-                                        {{--<div style="color: #92321b">14:00</div>--}}
+                                        {{--<div class="color-darkred">14:00</div>--}}
                                         {{--</div>--}}
                                         {{--<div>--}}
                                         {{--<div>قوانین کنسلی</div>--}}
-                                        {{--<div style="color: #92321b">لورم ییی</div>--}}
+                                        {{--<div class="color-darkred">لورم ییی</div>--}}
                                         {{--</div>--}}
                                         {{$place->policy}}
                                     </div>
@@ -1105,118 +1105,103 @@ if ($total == 0)
                             </div>
                         </div>
 
-                        <div id="check_room"
-                             style="position: fixed; width: 100%; height: 100%; background-color: #00000094; top: 0; left: 0; z-index: 99; display: none; justify-content: center; align-items: center">
-                            <div class="container" style="background-color: lightgray; padding: 10px; max-height: 85%; overflow-y: auto; overflow-x: hidden">
-                                <div class="row" style="direction :rtl; text-align: center; padding: 10px;">
-                                    <span style="font-size: 30px; font-weight: bold;">
+                        <div id="check_room">
+                            <div class="container">
+                                <div class="row">
+                                    <span>
                                         شهر{{$city->name}}
                                     </span>
-                                    <span style="font-size: 20px;">
+                                    <span>
                                         {{session('goDate')}}-{{session('backDate')}}
                                     </span>
-                                    <style>
-                                        .closeXicon:before{
-                                            position: relative;
-                                            top: 0px;
-                                        }
-                                    </style>
-                                    <span class="shTIcon closeXicon"
-                                          onclick="document.getElementById('check_room').style.display = 'none';"
-                                          style="float: left;">
+                                    <span class="shTIcon closeXicon float-left"
+                                          onclick="document.getElementById('check_room').style.display = 'none';">
                                     </span>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-3" style="font-size: 15px; position: fixed">
-                                        <div class="is-2 roomBox_IS_2"
-                                             style="width: 100%; direction: rtl; margin: 0; background-color: white; border: none; position: relative; box-shadow: 0 0 20px 0px gray;">
+                                    <div class="col-md-3">
+                                        <div class="is-2 roomBox_IS_2">
                                             <div class="priceRow_IS_2">
-                                                <div><span class="lable_IS_2">قیمت کل </span> برای<span
-                                                            id="check_num_day"></span>شب
+                                                <div>
+                                                    <span class="lable_IS_2">قیمت کل </span>
+                                                    برای
+                                                    <span id="check_num_day"></span>
+                                                    شب
                                                 </div>
-                                                <div style="font-size: 1.2em; text-align: left" id="check_total_price">
+                                                <div id="check_total_price">
                                                     0
                                                 </div>
                                             </div>
-                                            <div class="priceRow_IS_2">
-                                                <div style="margin-bottom: 15px;">
-                                                    <div class="float-left"><span id="check_total_num_room"></span>اتاق
+                                            <div class="priceRow_IS_2" >
+                                                <div>
+                                                    <div class="float-left">
+                                                        <span id="check_total_num_room"></span>
+                                                        اتاق
                                                     </div>
                                                     <div class="lable_IS_2">تعداد اتاق</div>
                                                 </div>
-                                                <div style="text-align: center; display: flex; flex-direction: column;"
-                                                     id="check_description">
+                                                <div id="check_description">
                                                 </div>
                                             </div>
-                                            <div style="margin: 7% 0; text-align: center; position: absolute; bottom: 0; left: 0px; width: 100%; padding-right: 5%;">
+                                            <div>
                                                 <span class="float-left">
                                                     {{$rooms[0]->provider}}
                                                 </span>
                                                 {{--<a href="{{url('buyHotel')}}">--}}
-                                                <button class="btn rezervedBtn" type="button" onclick="updateSession()" style="float: left; margin-left: 5%; color: white;">
+                                                <button class="btn rezervedBtn" type="button" onclick="updateSession()">
                                                     تایید و ادامه
                                                 </button>
                                                 {{--</a>--}}
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-9" style="float: right; width: 60%;">
-                                        <div class="row"
-                                             style="padding: 10px; display: flex; flex-direction: column; direction: rtl">
-                                            <div style="font-weight: bold; font-size: 15px; margin-bottom: 1%;">هتل انتخابی شما</div>
-                                            <div style="width: 60%; background-color: white; display: flex; flex-direction: row; box-shadow: 0 0 20px 0px gray;">
-                                                <div class="col-md-7" style="padding: 5px;">
-                                            <span class="imgWrap" style="max-width:200px;max-height:113px;">
-                                                        <img alt="{{$place->alt1}}" src="{{$thumbnail}}"
-                                                             class="centeredImg" style=" min-width:152px; "
-                                                             width="100%"/>
+                                    <div class="col-md-9">
+                                        <div class="row">
+                                            <div>هتل انتخابی شما</div>
+                                            <div>
+                                                <div class="col-md-7">
+                                                    <span class="imgWrap imgWrap1stTemp">
+                                                        <img alt="{{$place->alt1}}" src="{{$thumbnail}}" class="centeredImg" width="100%"/>
                                                     </span>
                                                 </div>
-                                                <div class="col-md-5" style="display: flex; flex-direction: column;">
-                                                    <div style=" font-size: 20px; font-weight: bold; margin-bottom: 5%;">{{$place->name}}</div>
-                                                    <div class="rating_and_popularity"
-                                                         style="display: flex; flex-direction: column; margin-bottom: 2%;">
+                                                <div class="col-md-5">
+                                                    <div>{{$place->name}}</div>
+                                                    <div class="rating_and_popularity" id="hotelRatingMainDivRoomChoice">
                                                         <span class="header_rating">
-                                                   <div class="rs rating" rel="v:rating">
-                                                       <div class="prw_rup prw_common_bubble_rating overallBubbleRating float-left">
-                                                            @if($avgRate == 5)
-                                                               <span class="ui_bubble_rating bubble_50"
-                                                                     style="font-size:16px;"
-                                                                     property="ratingValue" content="5"
-                                                                     alt='5 of 5 bubbles'></span>
-                                                           @elseif($avgRate == 4)
-                                                               <span class="ui_bubble_rating bubble_40"
-                                                                     style="font-size:16px;"
-                                                                     property="ratingValue" content="4"
-                                                                     alt='4 of 5 bubbles'></span>
-                                                           @elseif($avgRate == 3)
-                                                               <span class="ui_bubble_rating bubble_30"
-                                                                     style="font-size:16px;"
-                                                                     property="ratingValue" content="3"
-                                                                     alt='3 of 5 bubbles'></span>
-                                                           @elseif($avgRate == 2)
-                                                               <span class="ui_bubble_rating bubble_20"
-                                                                     style="font-size:16px;"
-                                                                     property="ratingValue" content="2"
-                                                                     alt='2 of 5 bubbles'></span>
-                                                           @elseif($avgRate == 1)
-                                                               <span class="ui_bubble_rating bubble_10"
-                                                                     style="font-size:16px;"
-                                                                     property="ratingValue" content="1"
-                                                                     alt='1 of 5 bubbles'></span>
-                                                           @endif
-                                                       </div>
-                                                   </div>
-                                                </span>
-                                                        <span class="header_popularity popIndexValidation"
-                                                              style="margin-right: 0 !important">
-                                                    <a class="more taLnk" href="#REVIEWS">
-                                                           <span property="v:count" id="commentCount"></span> نقد
-                                                       </a>
-                                                    <a> {{$total}} امتیاز</a>
-                                                </span>
+                                                            <div class="rs rating" rel="v:rating">
+                                                                <div class="prw_rup prw_common_bubble_rating overallBubbleRating float-left">
+                                                                    @if($avgRate == 5)
+                                                                       <span class="ui_bubble_rating bubble_50 font-size-16"
+                                                                             property="ratingValue" content="5"
+                                                                             alt='5 of 5 bubbles'></span>
+                                                                   @elseif($avgRate == 4)
+                                                                       <span class="ui_bubble_rating bubble_40 font-size-16"
+                                                                             property="ratingValue" content="4"
+                                                                             alt='4 of 5 bubbles'></span>
+                                                                   @elseif($avgRate == 3)
+                                                                       <span class="ui_bubble_rating bubble_30 font-size-16"
+                                                                             property="ratingValue" content="3"
+                                                                             alt='3 of 5 bubbles'></span>
+                                                                   @elseif($avgRate == 2)
+                                                                       <span class="ui_bubble_rating bubble_20 font-size-16"
+                                                                             property="ratingValue" content="2"
+                                                                             alt='2 of 5 bubbles'></span>
+                                                                   @elseif($avgRate == 1)
+                                                                       <span class="ui_bubble_rating bubble_10 font-size-16"
+                                                                             property="ratingValue" content="1"
+                                                                             alt='1 of 5 bubbles'></span>
+                                                                   @endif
+                                                                </div>
+                                                           </div>
+                                                        </span>
+                                                        <span class="header_popularity popIndexValidation">
+                                                            <a class="more taLnk" href="#REVIEWS">
+                                                                <span property="v:count" id="commentCount"></span> نقد
+                                                            </a>
+                                                            <a> {{$total}} امتیاز</a>
+                                                        </span>
                                                     </div>
-                                                    <div style="display: flex; flex-direction: row; margin-bottom: 5px;">
+                                                    <div id="hotelRatesDivs">
                                                         <div class="titleInTable">درجه هتل</div>
                                                         <div class="highlightedAmenity detailListItem">{{$place->rate}}</div>
                                                     </div>
@@ -1229,14 +1214,12 @@ if ($total == 0)
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row"
-                                             style="padding: 10px; display: flex; flex-direction: column; direction: rtl">
-                                            <div style="font-weight: bold; font-size: 15px; margin-bottom: 1%;">اتاق های انتخابی شما</div>
-                                            <div id="selected_rooms">
-                                            </div>
+                                        <div class="row" id="selectedRoomMainDiv">
+                                            <div>اتاق های انتخابی شما</div>
+                                            <div id="selected_rooms"></div>
                                             <div>
-                                                <div class="row" style="background: white; margin: 1px; box-shadow: 0 0 20px 0px gray; margin-bottom: 10px; ">
-                                                    <div class="col-md-12" style="font-size: 15px; padding: 2%">
+                                                <div class="row">
+                                                    <div class="col-md-12">
                                                         {{$place->policy}}
                                                     </div>
                                                 </div>
@@ -1248,19 +1231,18 @@ if ($total == 0)
                             </div>
                         </div>
                     @endif
-                    <div id="reviewsDiv" class="ppr_rup ppr_priv_location_detail_two_column"
-                         style="position: relative;">
-                        <div class="column_wrap ui_columns is-mobile"
-                             style="width: 100%; direction: rtl; position: relative;">
-                            <div class="content_column ui_column is-8" style="margin-top: 20px; position: relative;">
+                    <div id="reviewsDiv" class="ppr_rup ppr_priv_location_detail_two_column relative-position">
+                        <div class="column_wrap ui_columns is-mobile">
+                            <div class="content_column ui_column is-8">
                                 <div class="ppr_rup ppr_priv_location_reviews_container relative-position">
                                     <div id="REVIEWS" class="ratings_and_types concepts_and_filters block_wrap relative-position">
                                         <div class="header_group block_header relative-position">
-                                            <div id="targetHelp_11" class="targets row"
-                                                 style="max-width: 100px; float: left">
-                                                <span style="color: #FFF !important;"
-                                                      onclick="showAddReviewPageHotel('{{route('review', ['placeId' => $place->id, 'kindPlaceId' => $kindPlaceId])}}')"
-                                                      class="button_war write_review ui_button primary col-xs-12">نوشتن نقد</span>
+                                            <div id="targetHelp_11" class="targets row">
+                                                <span
+                                                    onclick="showAddReviewPageHotel('{{route('review', ['placeId' => $place->id, 'kindPlaceId' => $kindPlaceId])}}')"
+                                                    class="button_war write_review ui_button primary col-xs-12">
+                                                    نوشتن نقد
+                                                </span>
                                                 <div id="helpSpan_11" class="helpSpans hidden">
                                                     <span class="introjs-arrow"></span>
                                                     <p>اگر تجربه ای از این مکان دارید به ما بگویید تا دوستانتان هم
@@ -1278,8 +1260,8 @@ if ($total == 0)
                                                         class="reviews_header_count block_title"></span></h3>
                                         </div>
                                         <div id="targetHelp_12" class="targets">
-                                            <div ID="taplc_location_review_filter_controls_hotels_0"
-                                                 class="ppr_rup ppr_priv_location_review_filter_controls">
+                                            <div id="taplc_location_review_filter_controls_hotels_0"
+                                                class="ppr_rup ppr_priv_location_review_filter_controls">
                                                 <div id="filterControls" class="with_histogram">
                                                     <div class="main ui_columns is-mobile">
                                                         <div id="ratingFilter" class="ui_column is-5 rating">
@@ -1288,13 +1270,9 @@ if ($total == 0)
                                                                 <li class="filterItem">
                                                                     <span class="toggle">
                                                                         <div class='ui_input_checkbox'>
-                                                                            <input onclick="filter()" id="excellent"
-                                                                                   type="checkbox"
-                                                                                   name="filterComment[]" value="rate_5"
-                                                                                   class="filterInput">
-
-                                                                            <label class='labelForCheckBox'
-                                                                                   for='excellent'>
+                                                                            <input onclick="filter()" id="excellent" type="checkbox"
+                                                                                   name="filterComment[]" value="rate_5" class="filterInput">
+                                                                            <label class='labelForCheckBox' for='excellent'>
                                                                                 <span></span>&nbsp;&nbsp;
                                                                             </label>
                                                                         </div>
@@ -1302,8 +1280,7 @@ if ($total == 0)
                                                                     <label class="filterLabel">
                                                                         <div class="row_label">عالی</div>
                                                                         <span class="row_bar">
-                                                                            <span class="row_fill"
-                                                                                  style="width:{{$rates[4] * 100 / $total}}%;"></span>
+                                                                            <span class="row_fill" style="width:{{$rates[4] * 100 / $total}}%;"></span>
                                                                         </span>
                                                                         <span>{{$rates[4]}}</span>
                                                                     </label>
@@ -1315,9 +1292,7 @@ if ($total == 0)
                                                                             <input onclick="filter()" type="checkbox"
                                                                                    id="very_good" name="filterComment[]"
                                                                                    value="rate_4" class="filterInput">
-
-                                                                            <label class='labelForCheckBox'
-                                                                                   for='very_good'>
+                                                                            <label class='labelForCheckBox' for='very_good'>
                                                                                 <span></span>&nbsp;&nbsp;
                                                                             </label>
                                                                         </div>
@@ -1326,8 +1301,7 @@ if ($total == 0)
                                                                     <label class="filterLabel">
                                                                         <div class="row_label">خوب</div>
                                                                         <span class="row_bar">
-                                                                            <span class="row_fill"
-                                                                                  style="width:{{$rates[3] * 100 / $total}}%;"></span>
+                                                                            <span class="row_fill" style="width:{{$rates[3] * 100 / $total}}%;"></span>
                                                                         </span>
                                                                         <span>{{$rates[3]}}</span>
                                                                     </label>
@@ -1340,8 +1314,7 @@ if ($total == 0)
                                                                                   id="average" name="filterComment[]"
                                                                                   value="rate_3" class="filterInput">
 
-                                                                            <label class='labelForCheckBox'
-                                                                                   for='average'>
+                                                                            <label class='labelForCheckBox' for='average'>
                                                                                 <span></span>&nbsp;&nbsp;
                                                                             </label>
                                                                         </div>
@@ -1349,8 +1322,7 @@ if ($total == 0)
                                                                     <label class="filterLabel">
                                                                         <div class="row_label">معمولی</div>
                                                                         <span class="row_bar">
-                                                                            <span class="row_fill"
-                                                                                  style="width:{{$rates[2] * 100 / $total}}%;"></span>
+                                                                            <span class="row_fill" style="width:{{$rates[2] * 100 / $total}}%;"></span>
                                                                         </span>
                                                                         <span>{{$rates[2]}}</span>
                                                                     </label>
@@ -1360,9 +1332,7 @@ if ($total == 0)
                                                                     <span class="toggle">
                                                                         <div class='ui_input_checkbox'>
                                                                             <input onclick="filter()" type="checkbox"
-                                                                                   name="filterComment[]" value="rate_2"
-                                                                                   id="poor" class="filterInput">
-
+                                                                                   name="filterComment[]" value="rate_2" id="poor" class="filterInput">
                                                                             <label class='labelForCheckBox' for='poor'>
                                                                                 <span></span>&nbsp;&nbsp;
                                                                             </label>
@@ -1371,8 +1341,7 @@ if ($total == 0)
                                                                     <label class="filterLabel">
                                                                         <div class="row_label">ضعیف</div>
                                                                         <span class="row_bar">
-                                                                            <span class="row_fill"
-                                                                                  style="width:{{$rates[1] * 100 / $total}}%;"></span>
+                                                                            <span class="row_fill" style="width:{{$rates[1] * 100 / $total}}%;"></span>
                                                                         </span>
                                                                         <span>{{$rates[1]}}</span>
                                                                     </label>
@@ -1384,9 +1353,7 @@ if ($total == 0)
                                                                             <input onclick="filter()" type="checkbox"
                                                                                    name="filterComment[]" value="rate_1"
                                                                                    id="very_poor" class="filterInput">
-
-                                                                            <label class='labelForCheckBox'
-                                                                                   for='very_poor'>
+                                                                            <label class='labelForCheckBox' for='very_poor'>
                                                                                 <span></span>&nbsp;&nbsp;
                                                                             </label>
                                                                         </div>
@@ -1394,8 +1361,7 @@ if ($total == 0)
                                                                     <label class="filterLabel">
                                                                         <div class="row_label">خیلی بد</div>
                                                                         <span class="row_bar">
-                                                                            <span class="row_fill"
-                                                                                  style="width:{{$rates[0] * 100 / $total}}%;"></span>
+                                                                            <span class="row_fill" style="width:{{$rates[0] * 100 / $total}}%;"></span>
                                                                         </span>
                                                                         <span>{{$rates[0]}}</span>
                                                                     </label>
@@ -1505,7 +1471,7 @@ if ($total == 0)
                                                 </div>
                                                 <div id="moreCities" class="hidden">
                                                     <div class="ppr_rup ppr_priv_location_review_filter_controls">
-                                                        <div style="font-size: 18px" class="title">شهر ها</div>
+                                                        <div class="title">شهر ها</div>
                                                         <ul class="langs">
                                                             @for($i = 4; $i < count($srcCities); $i++)
                                                                 <li class="filterItem">
@@ -1581,51 +1547,45 @@ if ($total == 0)
                                 </div>
                                 <div class="ppr_rup ppr_priv_new_hotel_promo"></div>
                             </div>
-                            <div class="ad_column ui_column is-4" style="margin-top: 45px !important;">
+                            <div class="ad_column ui_column is-4">
                                 {{--<img width="100%" height="100%" id="ad_1">--}}
                             </div>
                         </div>
                     </div>
 
-                    <div id="similars" ng-controller="SimilarController as similar"
-                         class="ppr_rup ppr_priv_hr_btf_similar_hotels">
+                    <div id="similars" ng-controller="SimilarController as similar" class="ppr_rup ppr_priv_hr_btf_similar_hotels">
                         <center>
                             <div class="loader hidden"></div>
                         </center>
-                        <div id="test" infinite-scroll="myPagingFunction()" class="outerShell block_wrap"
-                             ng-show="show">
-                            <div class="block_header" style="border-bottom: 1px solid #4DC7BC !important;">
+                        <div id="test" infinite-scroll="myPagingFunction()" class="outerShell block_wrap" ng-show="show">
+                            <div class="block_header">
                                 <h3 class="block_title">[[similar.title]]</h3>
                             </div>
                             <div class="ui_columns is-mobile recs">
-                                <div ng-repeat="place in places"
-                                     {{--ng-click="redirect(place.redirect)"--}}
-                                     style="cursor: pointer;" class="ui_column is-3 rec">
+                                <div ng-repeat="place in places" {{--ng-click="redirect(place.redirect)"--}} class="cursor-pointer ui_column is-3 rec">
                                     <a href="[[place.redirect]]">
                                         <div class="recommendedCard">
-                                        <div class="imageContainer">
-                                            <div class="prw_rup prw_common_centered_image">
-                                                <span class="imgWrap" style="max-width:364px;max-height:166px;">
-                                                    <img ng-src="[[place.pic]]" alt="[[place.alt1]]" class="centeredImg"
-                                                         style=" min-width:209px; " width="100%"/>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <div class="hotelName" dir="auto" style="height: auto">[[place.name]]</div>
-                                            <div class="ratings">
-                                            <span>
-                                                <div class="prw_rup prw_common_bubble_rating bubbleRating">
-                                                    <span class="[[place.ngClass]]" style="font-size:16px;"
-                                                          property="ratingValue"
-                                                          content="5"></span>
+                                            <div class="imageContainer">
+                                                <div class="prw_rup prw_common_centered_image">
+                                                    <span class="imgWrap">
+                                                        <img ng-src="[[place.pic]]" alt="[[place.alt1]]" class="centeredImg" width="100%"/>
+                                                    </span>
                                                 </div>
-                                            </span>
-                                                <a style="text-align: left;" class="reviewCount">[[place.reviews]]
-                                                    نقد</a>
+                                            </div>
+                                            <div class="content">
+                                                <div class="hotelName" dir="auto" style="height: auto">[[place.name]]</div>
+                                                <div class="ratings">
+                                                <span>
+                                                    <div class="prw_rup prw_common_bubble_rating bubbleRating">
+                                                        <span class="[[place.ngClass]] font-size-16"
+                                                              property="ratingValue"
+                                                              content="5"></span>
+                                                    </div>
+                                                </span>
+                                                <a class="text-align-left reviewCount">[[place.reviews]]نقد</a>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
                                     </a>
                                 </div>
                             </div>
@@ -1636,7 +1596,7 @@ if ($total == 0)
                         <div class="block_wrap relative-postion">
                             <div class="block_header" data-tab="TABS_PHOTOS relative-postion">
                                 <div id="targetHelp_13" class="targets float-left">
-                                    <a style="color: #FFF !important;" onclick="showAddPhotoPane()"
+                                    <a onclick="showAddPhotoPane()"
                                        class="ui_button primary button_war">افزودن عکس </a>
                                     <div id="helpSpan_13" class="helpSpans hidden row">
                                         <span class="introjs-arrow"></span>
@@ -1655,24 +1615,26 @@ if ($total == 0)
                                 <h3 class="block_title">عکس ها</h3>
                             </div>
                             <div class="block_body_top" ng-controller="LogPhotoController as logC">
-                                <div class="ui_columns is-mobile" style="direction: ltr;">
+                                <div class="ui_columns is-mobile ltrImp">
                                     <div class="carousel_wrapper ui_column is-6">
                                         <div class="prw_rup prw_common_mercury_photo_carousel carousel_outer">
-                                            <div class="carousel bignav" style="max-height: 424px;">
-                                                <div class="carousel-images carousel_images_footer"
-                                                     style="height: 100%">
-                                                    <div ng-click="ngGetPhotos(-3)" class="see_all_count_wrap"><span
-                                                                class="see_all_count"><span
-                                                                    class="ui_icon camera"></span>همه عکس ها {{$userPhotos}} </span>
+                                            <div class="carousel bignav">
+                                                <div class="carousel-images carousel_images_footer full-height">
+                                                    <div ng-click="ngGetPhotos(-3)" class="see_all_count_wrap">
+                                                        <span class="see_all_count">
+                                                            <span class="ui_icon camera"></span>
+                                                            همه عکس ها {{$userPhotos}}
+                                                        </span>
                                                     </div>
-                                                    <div class="entry_cta_wrap"><span class="entry_cta"><span
-                                                                    class="ui_icon expand"></span>اندازه بزرگ عکس </span>
+                                                    <div class="entry_cta_wrap">
+                                                        <span class="entry_cta">
+                                                            <span class="ui_icon expand"></span>
+                                                            اندازه بزرگ عکس
+                                                        </span>
                                                     </div>
                                                 </div>
-                                                <div onclick="photoRoundRobin2(-1)"
-                                                     class="left-nav left-nav-footer hidden"></div>
-                                                <div onclick="photoRoundRobin2(1)"
-                                                     class="right-nav right-nav-footer hidden"></div>
+                                                <div onclick="photoRoundRobin2(-1)" class="left-nav left-nav-footer hidden"></div>
+                                                <div onclick="photoRoundRobin2(1)" class="right-nav right-nav-footer hidden"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -1681,9 +1643,9 @@ if ($total == 0)
                                              class="prw_rup prw_hotels_flexible_album_thumb albumThumbnailWrap ui_column is-6">
                                             <div class="albumThumbnail">
                                                 <div class="prw_rup prw_common_centered_image">
-                                                    <span class="imgWrap" style="max-width:267px;max-height:200px;">
+                                                    <span class="imgWrap">
                                                         <img ng-click="ngGetPhotos(log.id)" ng-src="[[log.text]]"
-                                                             class="centeredImg" style=" min-width:267px" width="100%"/>
+                                                             class="centeredImg" width="100%"/>
                                                     </span>
                                                 </div>
                                                 <div ng-click="ngGetPhotos(log.id)" class="albumInfo">
@@ -1705,13 +1667,6 @@ if ($total == 0)
 
                         <div class="column_wrap ui_columns is-mobile">
                             <div class="content_column ui_column is-8">
-
-                                <style>
-                                    .poiTile {
-                                        float: left;
-                                    }
-                                </style>
-
                                 <div class="ppr_rup ppr_priv_location_nearby">
                                     <div class="nearbyContainer outerShell block_wrap">
                                         <div class="block_header"><h3 class="block_title">مکان های نزدیک</h3></div>
