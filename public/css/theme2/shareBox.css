@@ -15,3 +15,78 @@
     float: left;
     margin-left: 5px;
 }
+
+#share_box > a:nth-child(1) > div {
+    background-image: url('../../images/share.png');
+    width: 30px;
+    height: 30px;
+    background-size: 30px;
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    display: inline-block;
+}
+
+#share_box > a:nth-child(2) > div {
+    background-image: url('../../images/share.png');
+    width: 30px;
+    height: 30px;
+    background-size: 30px;
+    background-position: 0 -60px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    border-radius: 4px;
+}
+
+#share_box > a:nth-child(3) > div {
+    background-image: url('../../images/share.png');
+    width: 30px;
+    height: 30px;
+    background-size: 30px;
+    background-position: 0 -30px;
+    background-repeat: no-repeat;
+    display: inline-block;
+}
+
+#share_box > a:nth-child(4) > div {
+    background-image: url('../../images/share.png');
+    width: 30px;
+    height: 30px;
+    background-size: 30px;
+    background-position: 0 -90px;
+    background-repeat: no-repeat;
+    display: inline-block;
+}
+
+#share_box > span {
+    cursor: pointer;
+    float: right;
+    margin-left: 5px;
+    line-height: 28px;
+    font-size: 14px;
+}
+
+div:nth-child(2) > a {
+    cursor: pointer;
+    float: left;
+}
+
+div:nth-child(2) > a > div {
+    background-size: 28px;
+    background-position: 0 -29px;
+    width: 28px;
+    height: 28px;
+    background-image: url('../../images/help_share.png');
+    background-repeat: no-repeat;
+}
+
+div:nth-child(2) > div {
+    cursor: pointer;
+    background-size: 28px;
+    background-position: 0 0;
+    width: 28px;
+    height: 28px;
+    background-image: url('../../images/help_share.png');
+    background-repeat: no-repeat;
+    float: right;
+    margin-left: 5px;
+}
