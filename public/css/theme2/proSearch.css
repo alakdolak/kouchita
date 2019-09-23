@@ -70,7 +70,7 @@
 
 #searchspan {
     direction: rtl;
-    /*overflow: hidden;*/
+    overflow: hidden;
     background-color: #f4f4f4;
     height: 0;
     position: fixed;
