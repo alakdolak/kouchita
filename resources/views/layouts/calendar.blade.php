@@ -1,3 +1,5 @@
+<link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/calendar.css')}}' data-rup='long_lived_global_legacy'/>
+
 <div id="container1" class="calenderBase">
     <div id="calendarJalali">
         <div id="calendarJalali1">

@@ -1,0 +1,136 @@
+
+.relative-position {
+    position: relative;
+}
+
+.red-color {
+    color: #963019 !important;
+}
+
+/*1st box style*/
+
+#masthead-recent {
+    background-color: #4dc7bc;
+}
+
+.bubble_40:after {
+    content: "\e00d\e00b\e00b\e00b\e00b" !important;
+}
+
+.bubble_30:after {
+    content: "\e00d\e00d\e00b\e00b\e00b" !important;
+}
+
+.bubble_20:after {
+    content: "\e00d\e00d\e00d\e00b\e00b" !important;
+}
+
+.bubble_10:after {
+    content: "\e00d\e00d\e00d\e00d\e00b" !important;
+}
+
+.photoviewerSidebarWrapper .captionArea {
+    direction: rtl !important;
+}
+
+.photoviewerSidebarWrapper .location {
+    text-align: center;
+}
+
+.global-nav-bar-container .ui_icon {
+    color: #FFF;
+}
+
+.global-nav-bar-container .ui_tab {
+    color: #FFF !important;
+}
+
+.global-nav-actions .ui_icon {
+    color: #FFF !important;
+}
+
+#nameTop {
+    color: #FFF !important;
+}
+
+.global-nav-profile-menu .subItem a:hover {
+    background: transparent !important;
+}
+
+@media (max-width: 1023px) and (min-width: 768px) {
+    .global-nav-bar-container .ui_tab {
+
+        color: #000 !important;
+    }
+}
+
+@media (max-width: 1023px) and (min-width: 768px) {
+    .is-hidden-mobile {
+        display: none !important;
+    }
+}
+
+.masthead > div > div > div > div {
+    background-color: #4DC7BC !important;
+    position: relative;
+}
+
+#taplc_global_nav_links_0 ul {
+    margin-top: 7px;
+}
+
+#bookmarkicon {
+    cursor: pointer;
+}
+
+#helpSpan_1 > p, #helpSpan_2 > p, #helpSpan_3 > p, #helpSpan_4 > p, #helpSpan_5 > p, #helpSpan_6 > p {
+    line-height: 1.428 !important;
+}
+
+#alert {
+    left: -10px !important;
+    top: 40px !important;
+    display: none;
+}
+
+#profile-drop {
+    display: none;
+    position: absolute;
+    bottom: auto;
+    z-index: 10000;
+    background: none 0% 0% repeat scroll rgb(255, 255, 255);
+    padding: 0 18px;
+    left: 20px;
+    top: 43px;
+    box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+/*2nd style box after targetHelp_3*/
+
+
+.masthead_notifctr_dropdown:before {
+    content: '';
+    position: absolute;
+    left: 24px;
+    top: -10px;
+    margin-left: -10px;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #fff;
+    -webkit-filter: drop-shadow(0 0 0 #b7b7b7);
+    filter: drop-shadow(0 0 0 #b7b7b7);
+    box-shadow: 0 0 0 #b7b7b7 \9;
+    -webkit-filter: drop-shadow(0 0 0 #999);
+    filter: drop-shadow(0 0 0 #999);
+}
+
+/*3rd style box after taplc_global_nav_action_notif_0*/
+
+
+.dropMenu .subLink:hover, .dropMenu .subItem .subLink:hover, .dropMenu .taLnk:hover a, .subItem .subLink:hover, .subItemNoLink .subNoLink:hover,
+.expandSubItem .expandSubLink:hover {
+    color: #16174f !important;
+
+}

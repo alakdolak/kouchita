@@ -4,6 +4,8 @@
 
 <?php $user = Auth::user() ?>
 
+<link rel="stylesheet" href="{{URL::asset('css/theme2/header1.css')}}">
+
 <div class="masthead">
     <div id="taplc_global_nav_0" class="ppr_rup ppr_priv_global_nav">
         <div class="global-nav global-nav-single-line has-links ">

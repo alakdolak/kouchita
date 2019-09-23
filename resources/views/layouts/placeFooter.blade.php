@@ -1,4 +1,5 @@
 <?php $config = \App\models\ConfigModel::first() ?>
+<link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/footer.css')}}' />
 
 {{--footer html--}}
 <div class="clear-both"></div>

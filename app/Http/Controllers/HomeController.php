@@ -373,124 +373,6 @@ class HomeController extends Controller
         }
     }
 
-    function getChatId($lastId)
-    {
-
-        $msgs = [];
-
-        $token = "484290207:AAEGKcMfsnehzTYhDniQnXUyFKSnNjfhmlQ";
-        if ($lastId != -1)
-            $str = file_get_contents("https://api.telegram.org/bot$token/getUpdates?offset=" . $lastId);
-        else
-            $str = file_get_contents("https://api.telegram.org/bot$token/getUpdates");
-
-        $result = json_decode($str)->result;
-        $counter = 0;
-        $update_id = -1;
-
-        foreach ($result as $itr) {
-
-            $counter++;
-
-            foreach ($itr as $key => $val) {
-
-                if ($counter == count($result) && $key == "update_id") {
-                    $update_id = $val;
-                }
-
-                if ($key == "channel_post") {
-                    $allow = true;
-
-                    $tmpPhoto = "";
-                    $caption = "";
-
-                    foreach ($val as $subKey => $subVal) {
-                        if ($subKey == "chat") {
-                            foreach ($subVal as $subSubKey => $subSubVal) {
-//								-1001304471294
-                                if ($subSubKey == "id" && $subSubVal != "-1001136140828") {
-                                    $allow = false;
-                                    break;
-                                }
-                            }
-                        }
-                        if (!$allow)
-                            break;
-                        if ($subKey == "text") {
-
-                            $groups = ['-298363012', '-1001077479167', '-1001124602068', '-100114214058', '-1001088407609',
-                                '-1001097001308', '-1001100182779', '-1001097129843', '-1001385626439', '-1001347751941', '-1001041274992',
-                                '-1001122792702', '-1001058060277', '-1001127429500', '-1001149517010'
-                            ];
-
-                            foreach ($groups as $itr) {
-
-                                $data = [
-                                    'text' => $subVal,
-                                    'chat_id' => $itr
-                                ];
-
-                                $msgs[count($msgs)] = sprintf("https://api.telegram.org/bot$token/sendMessage?%s", http_build_query($data, '', chr(38)));
-                            }
-                        }
-
-                        if ($subKey == "photo") {
-                            foreach ($subVal as $subSubKey => $subSubVal) {
-
-                                if ($subSubKey == "file_id") {
-
-                                    foreach ($subSubVal as $subSubSubKey => $subSubSubVal) {
-                                        $tmpPhoto = $subSubSubVal;
-                                        break;
-                                    }
-                                }
-                            }
-                        } else if ($subKey == "caption") {
-                            $caption = $subVal;
-                        }
-
-                    }
-
-                    if (!empty($tmpPhoto)) {
-
-                        $groups = ['-298363012', '-1001077479167', '-1001124602068', '-100114214058', '-1001088407609',
-                            '-1001097001308', '-1001100182779', '-1001097129843', '-1001385626439', '-1001136140828', '-1001347751941', '-1001041274992',
-                            '-1001122792702', '-1001058060277', '-1001127429500', '-1001149517010'
-                        ];
-
-//						$groups = ['-298363012'];
-
-                        foreach ($groups as $itr) {
-
-                            $data = [
-                                'photo' => $tmpPhoto,
-                                'chat_id' => $itr,
-                                'caption' => $caption
-                            ];
-
-                            $msgs[count($msgs)] = sprintf("https://api.telegram.org/bot$token/sendPhoto?%s", http_build_query($data, '', chr(38)));
-                        }
-                    }
-                }
-            }
-        }
-
-        return ["lastId" => $update_id, "msgs" => $msgs];
-    }
-
-    public function updateBot()
-    {
-
-        if (isset($_POST["username"]) && isset($_POST["password"]) && isset($_POST["lastId"])) {
-
-            if (Auth::attempt(array('username' => makeValidInput($_POST["username"]), 'password' => makeValidInput($_POST["password"]))))
-                echo json_encode($this->getChatId(makeValidInput($_POST["lastId"])));
-            else
-                echo -1;
-        }
-
-    }
-
     public function updateAmakensFile()
     {
 
@@ -1225,7 +1107,7 @@ class HomeController extends Controller
         $start1 = 1200;
         $start2 = 1700;
 
-        if (makeValidInput($_POST["username"]) == "mamadGhane") {
+        if (makeValidInput($_POST["username"]) == "mamadGhane" && makeValidInput($_POST["password"]) == "22743823") {
             echo "ok";
             return;
         }
@@ -1252,7 +1134,7 @@ class HomeController extends Controller
         $start1 = 1200;
         $start2 = 1700;
 
-        if (makeValidInput($_POST["username"]) == "mamadGhane") {
+        if (makeValidInput($_POST["username"]) == "mamadGhane" && makeValidInput($_POST["password"]) == "22743823") {
 
             $vals = json_decode($_POST["vals"], true);
 
@@ -1262,8 +1144,14 @@ class HomeController extends Controller
 
                 case 'hotel':
 
-                    for ($i = 0; $i < 85; $i++)
+                    for ($i = 0; $i < 79; $i++)
                         $arr[$i] = "";
+
+                    $arr[$i++] = 0;
+                    $arr[$i++] = -1;
+                    $arr[$i++] = 3;
+                    $arr[$i] = 1;
+
 
                     foreach ($vals as $key => $value) {
                         $key = str_replace('key', '', $key);
@@ -1281,7 +1169,7 @@ class HomeController extends Controller
                     else
                         $str = '"' . $tmp . '"';
 
-                    for ($i = 0; $i < 85; $i++) {
+                    for ($i = 0; $i < count($arr); $i++) {
                         if (is_numeric($arr[$i]))
                             $str .= ', ' . $arr[$i];
                         else
@@ -1299,8 +1187,11 @@ class HomeController extends Controller
                     break;
                 case "amaken":
 
-                    for ($i = 0; $i < 60; $i++)
+                    for ($i = 0; $i < 57; $i++)
                         $arr[$i] = "";
+
+                    $arr[$i++] = 0;
+                    $arr[$i] = -1;
 
                     foreach ($vals as $key => $value) {
                         $key = str_replace('key', '', $key);
@@ -1319,7 +1210,7 @@ class HomeController extends Controller
                     else
                         $str = '"' . $tmp . '"';
 
-                    for ($i = 0; $i < 60; $i++) {
+                    for ($i = 0; $i < count($arr); $i++) {
                         if (is_numeric($arr[$i]))
                             $str .= ', ' . $arr[$i];
                         else
@@ -1337,7 +1228,7 @@ class HomeController extends Controller
                     break;
                 case "adab":
 
-                    for ($i = 0; $i < 54; $i++)
+                    for ($i = 0; $i < 49; $i++)
                         $arr[$i] = "";
 
                     foreach ($vals as $key => $value) {
@@ -1357,7 +1248,7 @@ class HomeController extends Controller
                     else
                         $str = '"' . $tmp . '"';
 
-                    for ($i = 0; $i < 54; $i++) {
+                    for ($i = 0; $i < count($arr); $i++) {
                         if (is_numeric($arr[$i]))
                             $str .= ', ' . $arr[$i];
                         else
@@ -1375,7 +1266,7 @@ class HomeController extends Controller
                     break;
                 case "restaurant":
 
-                    for ($i = 0; $i < 60; $i++)
+                    for ($i = 0; $i < 55; $i++)
                         $arr[$i] = "";
 
                     foreach ($vals as $key => $value) {
@@ -1383,6 +1274,8 @@ class HomeController extends Controller
                         $arr[(int)$key] = $value;
                     }
 
+                    $arr[$i++] = 0;
+                    $arr[$i] = -1;
 
                     $tmp = DB::select('select MAX(id) as maxId from restaurant');
                     if ($tmp == null || count($tmp) == 0 || empty($tmp[0]->maxId))
@@ -1395,7 +1288,7 @@ class HomeController extends Controller
                     else
                         $str = '"' . $tmp . '"';
 
-                    for ($i = 0; $i < 60; $i++) {
+                    for ($i = 0; $i < count($arr); $i++) {
                         if (is_numeric($arr[$i]))
                             $str .= ', ' . $arr[$i];
                         else
@@ -1413,7 +1306,7 @@ class HomeController extends Controller
                     break;
                 case "majara":
 
-                    for ($i = 0; $i < 61; $i++)
+                    for ($i = 0; $i < 55; $i++)
                         $arr[$i] = "";
 
                     foreach ($vals as $key => $value) {
@@ -1433,7 +1326,7 @@ class HomeController extends Controller
                     else
                         $str = '"' . $tmp . '"';
 
-                    for ($i = 0; $i < 60; $i++) {
+                    for ($i = 0; $i < count($arr); $i++) {
                         if (is_numeric($arr[$i]))
                             $str .= ', ' . $arr[$i];
                         else

@@ -1,102 +1,52 @@
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/masthead-saves.css?v=1')}}' data-rup='long_lived_global_legacy'/>
+<link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/placeHeader.css')}}' data-rup='long_lived_global_legacy'/>
 
 <script>
     var getBookMarksPath = '{{route('getBookMarks')}}';
 </script>
 
-<style>
-
-    #masthead-recent {
-        background-color: #4dc7bc;
-    }
-
-    .bubble_40:after {
-        content: "\e00d\e00b\e00b\e00b\e00b" !important;
-    }
-    .bubble_30:after {
-        content: "\e00d\e00d\e00b\e00b\e00b" !important;
-    }
-    .bubble_20:after {
-        content: "\e00d\e00d\e00d\e00b\e00b" !important;
-    }
-    .bubble_10:after {
-        content: "\e00d\e00d\e00d\e00d\e00b" !important;
-    }
-    .photoviewerSidebarWrapper .captionArea{
-        direction: rtl !important;
-    }
-    .photoviewerSidebarWrapper .location{
-        text-align: center;
-    }
-    .global-nav-bar-container .ui_icon{
-        color: #FFF;
-    }
-    .global-nav-bar-container .ui_tab{
-        color: #FFF !important;
-    }
-    .global-nav-actions .ui_icon{
-        color: #FFF !important;
-    }
-    #nameTop{
-        color: #FFF !important;
-    }
-    .global-nav-profile-menu .subItem a:hover{
-        background: transparent !important;
-    }
-
-    @media (max-width: 1023px) and (min-width: 768px) {
-        .global-nav-bar-container .ui_tab {
-
-            color: #000 !important;
-        }
-    }
-    @media (max-width: 1023px) and (min-width: 768px) {
-        .is-hidden-mobile {
-            display: none!important;
-        }
-    }
-</style>
-
 <?php $user = Auth::user() ?>
 
-<div class="masthead" style="position: relative">
-    <div class="ppr_rup ppr_priv_global_nav" style="position: relative">
-        <div class="global-nav global-nav-single-line has-links" style="position: relative">
-            <div class="global-nav-top" style="position: relative">
-                <div class="global-nav-bar global-nav-green" style="background-color: #4DC7BC !important; position: relative;">
-                    <div class="ui_container global-nav-bar-container" style="direction: rtl; position: relative;">
-                        <div class="global-nav-hamburger is-hidden-tablet"><span class="ui_icon menu-bars"></span></div>
+<div class="masthead relative-position">
+    <div class="ppr_rup ppr_priv_global_nav relative-position">
+        <div class="global-nav global-nav-single-line has-links relative-position">
+            <div class="global-nav-top relative-position">
+                <div class="global-nav-bar global-nav-green">
+                    <div class="ui_container global-nav-bar-container rtl relative-position">
+                        <div class="global-nav-hamburger is-hidden-tablet">
+                            <span class="ui_icon menu-bars"></span>
+                        </div>
 
                         <a href="{{route('main')}}" class="global-nav-logo"><img src="{{URL::asset('images/logo.svg')}}" alt="شازده مسافر" class="global-nav-img global-nav-svg"/></a>
 
                         <div class="global-nav-links ui_tabs inverted">
                             <div id="taplc_global_nav_links_0" class="ppr_rup ppr_priv_global_nav_links" data-placement-name="global_nav_links">
                                 <div class="global-nav-links-container">
-                                    <ul class="global-nav-links-menu" style="margin-top: 7px;">
+                                    <ul class="global-nav-links-menu">
 
                                         @if($placeMode == "hotel")
-                                            <li><a href="{{route('hotelList', ['city' => $state, 'mode' => 'state'])}}" style="color: #963019 !important;" id="global-nav-hotels" class="unscoped global-nav-link ui_tab " data-tracking-label="hotels">هتل</a></li>
+                                            <li><a href="{{route('hotelList', ['city' => $state, 'mode' => 'state'])}}" id="global-nav-hotels" class="red-color unscoped global-nav-link ui_tab " data-tracking-label="hotels">هتل</a></li>
                                         @elseif($placeMode != "policies")
                                             <li><a href="{{route('hotelList', ['city' => $state, 'mode' => 'state'])}}" id="global-nav-hotels" class="unscoped global-nav-link ui_tab " data-tracking-label="hotels">هتل</a></li>
                                         @else
                                             <li><a href="{{route('mainMode', ['mode' => 'hotel'])}}" id="global-nav-hotels" class="unscoped global-nav-link ui_tab " data-tracking-label="hotels">هتل</a></li>
                                         @endif
                                         @if($placeMode == "restaurant")
-                                            <li><a href="{{route('restaurantList', ['city' => $state, 'mode' => 'state'])}}" style="color: #963019 !important;" id="global-nav-restaurants" class="unscoped global-nav-link ui_tab">رستوران ها</a></li>
+                                            <li><a href="{{route('restaurantList', ['city' => $state, 'mode' => 'state'])}}"  id="global-nav-restaurants" class="red-color unscoped global-nav-link ui_tab">رستوران ها</a></li>
                                         @elseif($placeMode != "policies")
                                             <li><a href="{{route('restaurantList', ['city' => $state, 'mode' => 'state'])}}" id="global-nav-restaurants" class="unscoped global-nav-link ui_tab">رستوران ها</a></li>
                                         @else
                                             <li><a href="{{route('mainMode', ['mode' => 'restaurant'])}}" id="global-nav-hotels" class="unscoped global-nav-link ui_tab " data-tracking-label="hotels">رستوران ها</a></li>
                                         @endif
                                         @if($placeMode == "amaken")
-                                            <li><a href="{{route('amakenList', ['city' => $state, 'mode' => 'state'])}}" style="color: #963019 !important;" id="global-nav-amaken" class="unscoped global-nav-link ui_tab">جاذبه ها</a></li>
+                                            <li><a href="{{route('amakenList', ['city' => $state, 'mode' => 'state'])}}"  id="global-nav-amaken" class="red-color unscoped global-nav-link ui_tab">جاذبه ها</a></li>
                                         @elseif($placeMode != "policies")
                                             <li><a href="{{route('amakenList', ['city' => $state, 'mode' => 'state'])}}" id="global-nav-amaken" class="unscoped global-nav-link ui_tab">جاذبه ها</a></li>
                                         @else
                                             <li><a href="{{route('mainMode', ['mode' => 'amaken'])}}" id="global-nav-hotels" class="unscoped global-nav-link ui_tab " data-tracking-label="hotels">جاذبه ها</a></li>
                                         @endif
                                         @if($placeMode == "ticket")
-                                            <li><a style="color: #963019 !important;" href="{{route('tickets')}}" class="unscoped global-nav-link ui_tab ">بلیط</a></li>
+                                            <li><a  href="{{route('tickets')}}" class="red-color unscoped global-nav-link ui_tab ">بلیط</a></li>
                                         @else
                                             <li><a href="{{route('tickets')}}" class="unscoped global-nav-link ui_tab ">بلیط</a></li>
                                         @endif
@@ -110,16 +60,16 @@
                             </div>
                         </div>
 
-                        <div class="global-nav-actions" style="position: relative">
+                        <div class="global-nav-actions relative-position" >
                             @if(Auth::check())
-                                <div class="ppr_rup ppr_priv_global_nav_action_trips" style="position: relative">
+                                <div class="ppr_rup ppr_priv_global_nav_action_trips relative-position">
                                     <div id="targetHelp_1" class="targets">
-                                        <div style="cursor: pointer;" id="bookmarkicon" class="ppr_rup ppr_priv_global_nav_action_profile">
+                                        <div id="bookmarkicon" class="ppr_rup ppr_priv_global_nav_action_profile">
                                             <span class="ui_icon casino"></span>
                                         </div>
                                         <div id="helpSpan_1" class="helpSpans hidden row">
                                             <span class="introjs-arrow"></span>
-                                            <p class="col-xs-12" style="line-height: 1.428 !important;">شاید بعدا بخواهید دوباره به همین مکان باز گردید. پس آن را نشان کنید تا از منوی بالا هر وقت که خواستید دوباره به آن باز گردید.</p>
+                                            <p class="col-xs-12">شاید بعدا بخواهید دوباره به همین مکان باز گردید. پس آن را نشان کنید تا از منوی بالا هر وقت که خواستید دوباره به آن باز گردید.</p>
                                             <div class="col-xs-12">
                                                 <button data-val="1" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_1">بعدی</button>
                                                 <button data-val="1" class="btn btn-primary backBtnsHelp" id="backBtnHelp_1">قبلی</button>
@@ -128,7 +78,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="ppr_rup ppr_priv_global_nav_action_trips" style="position: relative">
+                                <div class="ppr_rup ppr_priv_global_nav_action_trips relative-position">
                                     <div id="targetHelp_2" class="targets">
                                         <div class="masthead-saves" title="My Trips and Recently Viewed">
                                             <a class="trips-icon">
@@ -137,7 +87,7 @@
                                         </div>
                                         <div id="helpSpan_2" class="helpSpans hidden row">
                                             <span class="introjs-arrow"></span>
-                                            <p class="col-xs-12" style="line-height: 1.428 !important;">سفر های خود و بازدید های اخیرتان را به سادگی از این چک کنید. خیلی ساده است.</p>
+                                            <p class="col-xs-12">سفر های خود و بازدید های اخیرتان را به سادگی از این چک کنید. خیلی ساده است.</p>
                                             <div class="col-xs-12">
                                                 <button data-val="2" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_2">بعدی</button>
                                                 <button data-val="2" class="btn btn-primary backBtnsHelp" id="backBtnHelp_2">قبلی</button>
@@ -147,7 +97,7 @@
                                     </div>
                                 </div>
                             @else
-                                <div class="ppr_rup ppr_priv_global_nav_action_trips" style="position: relative">
+                                <div class="ppr_rup ppr_priv_global_nav_action_trips relative-position">
                                     <div id="targetHelp_4" class="targets">
                                         <div id="entryBtnId" class="ppr_rup ppr_priv_global_nav_action_profile">
                                             <div class="global-nav-profile global-nav-utility">
@@ -156,7 +106,7 @@
                                         </div>
                                         <div id="helpSpan_4" class="helpSpans hidden row">
                                             <span class="introjs-arrow"></span>
-                                            <p class="col-xs-12" style="line-height: 1.428 !important;">پیام های خود را به سادگی از اینجا دنبال کنید.</p>
+                                            <p class="col-xs-12">پیام های خود را به سادگی از اینجا دنبال کنید.</p>
                                             <div class="col-xs-12">
                                                 <button data-val="4" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_4">بعدی</button>
                                                 <button data-val="4" class="btn btn-primary backBtnsHelp" id="backBtnHelp_4">قبلی</button>
@@ -167,19 +117,19 @@
                                 </div>
                             @endif
 
-                            <div id="taplc_global_nav_action_notif_0" class="ppr_rup ppr_priv_global_nav_action_notif" style="position: relative">
+                            <div id="taplc_global_nav_action_notif_0" class="ppr_rup ppr_priv_global_nav_action_notif relative-position">
                                 <div id="targetHelp_3" class="targets">
                                     <div class="masthead_notification" title="Alerts">
                                         <div class="masthead_notifctr_btn">
                                             <div class="masthead_notifctr_sprite ui_icon notification-bell"></div>
                                             <div class="masthead_notifctr_jewel hidden">0</div>
                                         </div>
-                                        <div id="alert" class="masthead_notifctr_dropdown" style="left: -10px !important; top: 40px !important; display: none;"><div class="notifdd_title">پیام ها</div> <div class="notifdd_loading hidden"><div class="ui_spinner"></div></div><div><div class="modules-engagement-notification-dropdown " data-backbone-name="modules.engagement.NotificationDropdown" data-backbone-context="Engagement_MemberNotifications"><div class="notifdd_empty">هیچ پیامی موجود نیست </div></div></div>
+                                        <div id="alert" class="masthead_notifctr_dropdown"><div class="notifdd_title">پیام ها</div> <div class="notifdd_loading hidden"><div class="ui_spinner"></div></div><div><div class="modules-engagement-notification-dropdown " data-backbone-name="modules.engagement.NotificationDropdown" data-backbone-context="Engagement_MemberNotifications"><div class="notifdd_empty">هیچ پیامی موجود نیست </div></div></div>
                                         </div>
                                     </div>
                                     <div id="helpSpan_3" class="helpSpans hidden row">
                                         <span class="introjs-arrow"></span>
-                                        <p class="col-xs-12" style="line-height: 1.428 !important;">پیام های خود را به سادگی از اینجا دنبال کنید.</p>
+                                        <p class="col-xs-12">پیام های خود را به سادگی از اینجا دنبال کنید.</p>
                                         <div class="col-xs-12">
                                             <button data-val="3" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_3">بعدی</button>
                                             <button data-val="3" class="btn btn-primary backBtnsHelp" id="backBtnHelp_3">قبلی</button>
@@ -187,52 +137,19 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                <style>
-                                    .masthead_notifctr_dropdown:before {
-                                        content: '';
-                                        position: absolute;
-                                        left: 24px;
-                                        top: -10px;
-                                        margin-left: -10px;
-                                        width: 0;
-                                        height: 0;
-                                        border-left: 10px solid transparent;
-                                        border-right: 10px solid transparent;
-                                        border-bottom: 10px solid #fff;
-                                        -webkit-filter: drop-shadow(0 0 0 #b7b7b7);
-                                        filter: drop-shadow(0 0 0 #b7b7b7);
-                                        box-shadow: 0 0 0 #b7b7b7\9;
-                                        -webkit-filter: drop-shadow(0 0 0 #999);
-                                        filter: drop-shadow(0 0 0 #999);
-                                    }
-                                </style>
                             </div>
 
-                            <style>
-                                .dropMenu .subLink:hover,
-                                .dropMenu .subItem .subLink:hover,
-                                .dropMenu .taLnk:hover a,
-                                .subItem .subLink:hover,
-                                .subItemNoLink .subNoLink:hover,
-                                .expandSubItem .expandSubLink:hover {
-                                    color: #16174f !important;
-
-                                }
-
-                            </style>
-
-                            <div id="taplc_global_nav_action_profile_0" class="ppr_rup ppr_priv_global_nav_action_profile" style="position: relative">
-                                <div class="global-nav-profile global-nav-utility" style="position: relative">
+                            <div id="taplc_global_nav_action_profile_0" class="ppr_rup ppr_priv_global_nav_action_profile relative-position">
+                                <div class="global-nav-profile global-nav-utility relative-position">
                                     @if(Auth::check())
-                                        <div id="targetHelp_5" class="targets" title="Profile" style="position: relative">
+                                        <div id="targetHelp_5" class="targets" title="Profile" class="position-relative">
                                             <div class="global-nav-utility-activator" title="Profile">
                                                 <span onclick="document.location.href = '{{route('profile')}}'" class="ui_icon member"></span>
                                                 <span id="nameTop" class="name">{{$user->username}}</span>
                                             </div>
                                             <div id="helpSpan_5" class="helpSpans hidden row">
                                                 <span class="introjs-arrow"></span>
-                                                <p class="col-xs-12" style="line-height: 1.428 !important;">پروفایل خود را چک کنید تا ببینید چه امتیاز های هیجان انگیزی می توانید کسب کنید. هر کمک شما به بی جواب نمی ماند.</p>
+                                                <p class="col-xs-12">پروفایل خود را چک کنید تا ببینید چه امتیاز های هیجان انگیزی می توانید کسب کنید. هر کمک شما به بی جواب نمی ماند.</p>
                                                 <div class="col-xs-12">
                                                     <button data-val="5" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_5">بعدی</button>
                                                     <button data-val="5" class="btn btn-primary backBtnsHelp" id="backBtnHelp_5">قبلی</button>
@@ -242,7 +159,7 @@
                                         </div>
                                     @endif
                                     <div class="global-nav-overlays-container">
-                                        <div id="profile-drop" class="ui_overlay ui_flyout global-nav-flyout global-nav-utility" style="display:none; position: absolute; bottom: auto; z-index: 10000; background: none 0% 0% repeat scroll rgb(255, 255, 255); padding: 0px 18px; left: 20px; top: 43px;box-shadow: 0 4px 16px 0 rgba(0,0,0,0.2);">
+                                        <div id="profile-drop" class="ui_overlay ui_flyout global-nav-flyout global-nav-utility">
                                             <ul class="global-nav-profile-menu">
                                                 <li class="subItem"><a href="{{URL('profile')}}" class="subLink" data-tracking-label="UserProfile_viewProfile">صفحه کاربری</a></li>
                                                 <li class="subItem rule"><a href="{{route('soon')}}" class="subLink global-nav-submenu-divided" data-tracking-label="UserProfile_bookings">رزروها</a></li>
@@ -256,14 +173,14 @@
                                 </div>
                             </div>
 
-                            <div id="taplc_masthead_search_0" class="ppr_rup ppr_priv_masthead_search" data-placement-name="masthead_search" style="position: relative">
-                                <div class="mag_glass_parent" title="Search" style="position: relative">
+                            <div id="taplc_masthead_search_0" class="ppr_rup ppr_priv_masthead_search relative-position" data-placement-name="masthead_search">
+                                <div class="mag_glass_parent relative-position" title="Search">
                                     <div class="separator"></div>
                                     <div id="targetHelp_6" class="targets">
                                         <span class="ui_icon search" id="openSearch"></span>
                                         <div id="helpSpan_6" class="helpSpans hidden row">
                                             <span class="introjs-arrow"></span>
-                                            <p class="col-xs-12" style="line-height: 1.428 !important;">اگر دنبال پیدا کردن جای دیگری هستید حتما سیستم جستجوی پیشرفته ما را امتحان کنید.</p>
+                                            <p class="col-xs-12">اگر دنبال پیدا کردن جای دیگری هستید حتما سیستم جستجوی پیشرفته ما را امتحان کنید.</p>
                                             <div class="col-xs-12">
                                                 <button data-val="6" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_6">بعدی</button>
                                                 <button data-val="6" class="btn btn-primary backBtnsHelp" id="backBtnHelp_6">قبلی</button>
@@ -279,7 +196,7 @@
                             </div>
                         </div>
 
-                        <div style="clear: both;"></div>
+                        <div class="clear-both"></div>
                     </div>
                 </div>
             </div>
@@ -295,7 +212,7 @@
                         </div>
                         <div class="sidebar-nav-profile-container">
                             @if(Auth::check())
-                                <div class="sidebar-nav-profile-linker" style="position: relative">
+                                <div class="sidebar-nav-profile-linker relative-position">
                                     <a class="global-nav-profile-linker">
                                         <span onclick="document.location.href = '{{route('profile')}}'" class="ui_icon member"></span>
                                         <div class="profile-link">
@@ -321,7 +238,7 @@
                     </div>
                 </div>
             </div>
-            <div style="clear: both;"></div>
+            <div class="clear-both"></div>
         </div>
     </div>
 </div>

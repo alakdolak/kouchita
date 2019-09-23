@@ -98,6 +98,7 @@
 
 <script async src="{{URL::asset("js/bootstrap-datepicker.js")}}"></script>
 <link rel="stylesheet" href="{{URL::asset('css/theme2/bootstrap-datepicker.css?v=1')}}">
+<link rel="stylesheet" href="{{URL::asset('css/theme2/pop-up-create-trip.css')}}">
 
 <div id="pop-up-create-trip" class="ui_modal_card saves-settings-modal create-trip-modal is-active">
     <div class="modal-background" onclick=""></div>

@@ -12,7 +12,7 @@
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/masthead-saves.css?v=2')}}'/>
     <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/hr_north_star.css?v=2')}}'/>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/icons.css?v=1')}}' />
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/mainModifiedStyles.css')}}' />
+    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/mainPageModifiedStyles.css')}}' />
 
     <script>
         var searchDir = '{{route('heyYou')}}';
@@ -69,7 +69,7 @@
                                                     </button>
                                                     <span class="ui_loader dark fill"></span>
                                                 </div>
-                                                <div style="clear: both"></div>
+                                                <div class="clear-both"></div>
                                                 {{--<div class="ui_column" style="width: 35%;padding: 10px !important;float: right;border-radius:  0 10px 10px 0;">--}}
                                                     {{--<div class="ui_picker" style="color: #b7b7b7 !important;">--}}
                                                         {{--<label id="calendar-container-edit-1placeDate" class="dateLabel">--}}
@@ -95,7 +95,7 @@
                                                         {{--</div>--}}
                                                     {{--</div>--}}
                                                 {{--</div>--}}
-                                                <div style="clear: both"></div>
+                                                <div class="clear-both"></div>
                                             </div>
                                         @elseif($placeMode == "restaurant")
                                             <div class="ui_columns datepicker_box trip_search metaDatePicker rounded_lockup usePickerTypeIcons preDates noDates with_children hideOnPhone mainDivSearchInputMainPage">
@@ -116,7 +116,7 @@
                                                     </button>
                                                     <span class="ui_loader dark fill"></span>
                                                 </div>
-                                                <div style="clear: both"></div>
+                                                <div class="clearboth"></div>
                                             </div>
                                         @elseif($placeMode == "tour")
                                             <div class="ui_columns datepicker_box trip_search metaDatePicker rounded_lockup usePickerTypeIcons preDates noDates with_children hideOnPhone mainDivSearchInputMainPage">
@@ -137,7 +137,7 @@
                                                     </button>
                                                     <span class="ui_loader dark fill"></span>
                                                 </div>
-                                                <div style="clear: both"></div>
+                                                <div class="clear-both"></div>
                                             </div>
                                         @else
                                             <div class="ui_columns datepicker_box trip_search metaDatePicker rounded_lockup usePickerTypeIcons preDates noDates with_children hideOnPhone mainDivSearchInputMainPage">
@@ -158,7 +158,7 @@
                                                     </button>
                                                     <span class="ui_loader dark fill"></span>
                                                 </div>
-                                                <div style="clear: both"></div>
+                                                <div class="clear-both"></div>
                                             </div>
                                         @endif
                                     </div>
@@ -234,7 +234,7 @@
                                         @elseif($placeMode == "tour")
                                             <div class="trip_search rounded_lockup usePickerTypeIcons hideOnScreen">
                                                 <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column" onclick="$('#phoneSearchPopUp').removeClass('hidden')">
-                                                    <div class="ui_picker" style="padding: 10px !important;">
+                                                    <div class="ui_picker">
                                                                 <span class="typeahead_align ui_typeahead">
                                                                     <input onkeyup="search(event)" type="text" id="placeName" class="typeahead_input" placeholder="شهر یا نام رستوران"/>
                                                                     <input type="hidden" id="placeId">
@@ -628,7 +628,7 @@
             <div onclick="$('#goyeshPane').addClass('hidden'); $('.dark').hide()" class="ui_close_x"></div>
         </span>
 
-        <div class="ui_backdrop dark" style="display: none; z-index: 10000000;"></div>
+        <div class="ui_backdrop dark" id="darkModeMainPage"></div>
 
         <script src="{{URL::asset('js/adv.js')}}"></script>
     </body>

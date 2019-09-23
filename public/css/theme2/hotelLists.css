@@ -1,0 +1,361 @@
+.float-right {
+    float: right;
+}
+
+.float-left {
+    float: left;
+}
+
+.rtl {
+    direction: rtl;
+}
+
+.clear-both {
+    clear: both;
+}
+
+/*1st box styles*/
+
+input[type="checkbox"], input[type="radio"] {
+    display: none !important;
+}
+
+input[type="checkbox"] + label, input[type="radio"] + label {
+    color: #666666;
+}
+
+input[type="checkbox"] + label span, input[type="radio"] + label span {
+    display: inline-block;
+    width: 19px;
+    height: 19px;
+    margin: -2px 10px 0 0;
+    vertical-align: middle;
+    background: url('../../images/check_radio_sheet.png') left top no-repeat;
+    cursor: pointer;
+}
+
+input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label span {
+    background: url('../../images/check_radio_sheet.png') -19px top no-repeat;
+}
+
+.moreItems {
+    display: block;
+    text-align: center;
+    margin-top: 5px;
+    cursor: pointer;
+    text-align: -webkit-right;
+}
+
+.lessItems {
+    display: block;
+    text-align: center;
+    margin-top: 5px;
+    cursor: pointer;
+    text-align: -webkit-right;
+}
+
+.moreItems2 {
+    display: block;
+    text-align: center;
+    margin-top: 5px;
+    cursor: pointer;
+    text-align: -webkit-right;
+}
+
+.lessItems2 {
+    display: block;
+    text-align: center;
+    margin-top: 5px;
+    cursor: pointer;
+    text-align: -webkit-right;
+}
+
+/*2nd box styles*/
+
+.filterGroupTitle {
+    color: #963019 !important;
+}
+
+/*3rd box styles*/
+/*hotel list Icon*/
+
+.shTIcon {
+    font-family: shazde_regular2 !important;
+    font-size: 20px;
+}
+
+.passengerIcon:before {
+    content: '\E0DF';
+    color: #4DC7BC;
+}
+
+.minusPlusIcons {
+    font-family: 'Shazde_Regular2' !important;
+    font-size: 25px;
+    line-height: 25px;
+    color: #30b4a6;
+    cursor: pointer;
+    display: inline-block;
+    float: left;
+}
+
+.plus:before {
+    content: '\E031';
+}
+
+.minus:before {
+    content: '\E034';
+}
+
+.calendarIcon {
+    color: #30b4a6 !important;
+    font-size: 22px;
+    top: -2px;
+}
+
+.searchBottomArrowIcone:before {
+    content: '\E04A';
+    position: absolute;
+    top: 14px;
+    cursor: pointer;
+}
+
+.searchTopArrowIcone:before {
+    content: '\E044';
+    position: absolute;
+    top: 14px;
+    cursor: pointer;
+}
+
+.arrowPassengerIcone:before {
+    left: 10%;
+}
+
+/*3rd box styles*/
+/*details of hotel*/
+
+.numBetweenMinusPlusBtn {
+    float: left;
+    margin-top: 2px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+/*calender section*/
+.calenderBox {
+    width: 22%;
+    padding: 7px 8px;
+    border: 2px solid #E5E5E5;
+    display: inline-block;
+    position: absolute;
+    right: 22%;
+    border-radius: 10px;
+    text-align: right;
+    font-weight: 700;
+}
+
+.dateLabel {
+    position: relative;
+    width: 150px;
+    height: 30px;
+    border-radius: 3px;
+    margin: 0 !important;
+    cursor: pointer;
+    float: right;
+    max-width: 40%;
+}
+
+.inputDateLabel {
+    background: transparent;
+    width: 85px;
+    border: none;
+    position: absolute;
+    top: 7px;
+    right: 24%;
+    cursor: pointer;
+    text-align: center;
+}
+
+/*room section*/
+.roomBox {
+    width: 18%;
+    padding: 5px 8px;
+    border: 2px solid #E5E5E5;
+    display: inline-block;
+    position: absolute;
+    right: 46%;
+    border-radius: 10px;
+    text-align: right;
+    font-weight: 700;
+}
+
+/*search btn section*/
+.srchBox {
+    display: inline-block;
+    position: absolute;
+    right: 65%;
+}
+
+.srchBtn {
+    background-color: #4DC7BC;
+    border: none;
+    color: white;
+    width: 100%;
+    font-size: 2.2em;
+    border-radius: 10px;
+    padding: 5px 30px;
+}
+
+/*pop up*/
+.roomPassengerPopUp {
+    text-align: center !important;
+    position: absolute;
+    background-color: white;
+    padding: 10px;
+    top: 55px;
+    right: 12%;
+    left: 12%;
+    border-radius: 5px;
+    z-index: 999;
+    border: 2px solid #e5e5e5;
+}
+
+.rowOfPopUp {
+    height: 28px;
+    font-size: 1.2em;
+    margin-bottom: 5px;
+    clear: both;
+}
+
+.selectAgeChild {
+    direction: rtl;
+    border: none !important;
+}
+
+/*4th box styles*/
+
+.childrenPopUpAlert {
+    width: 100%;
+    margin-bottom: 5px;
+    color: red;
+    font-size: 0.8em;
+}
+
+.childAge {
+    width: 32%;
+    height: 45px;
+    float: right;
+}
+
+#container1 {
+    top: 400px !important;
+}
+
+/*inline styles*/
+
+#p13n_welcome_message > div:nth-child(2) {
+    height: 50px;
+    margin-bottom: 25px;
+}
+
+#roomDetail {
+    font-size: 1.1em;
+    display: inline-block;
+    cursor: pointer;
+}
+
+#room_number {
+    float: right;
+}
+
+#roomCapacityBoxIcon {
+    font-size: 25px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+#passengerArrowDown {
+    display: inline-block;
+}
+
+#passengerArrowUp {
+    display: inline-block;
+}
+
+#passengerNoSelectPane > div:nth-child(1) > div:nth-child(2) {
+    margin-right: 25px;
+}
+
+#calendar-container-edit-2placeDate {
+    margin-right: 14px !important;
+}
+
+#calendar-container-edit-2placeDate > span {
+    color: #30b4a6 !important;
+    font-size: 20px;
+    line-height: 32px;
+    position: absolute;
+    right: 7px;
+}
+
+/*5th style Box After #BODYCON*/
+
+.loader {
+    /*border: 16px solid #f3f3f3;*/
+    /*border-radius: 50%;*/
+    background-image: url('../../images/loading.svg');
+    /*border-top: 16px solid blue;*/
+    /*border-right: 16px solid green;*/
+    /*border-bottom: 16px solid red;*/
+    width: 100px;
+    height: 100px;
+    /*-webkit-animation: spin 2s linear infinite;*/
+    /*animation: spin 2s linear infinite;*/
+}
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.listBoxesMainDivs > a:nth-child(1) > div > div {
+    width: 200px;
+    height: 120px;
+}
+
+.listBoxesMainDivs > a:nth-child(1) > div > div > div {
+    margin-top: -66px;
+}
+
+.listBoxesMainDivs > a:nth-child(1) > div:nth-child(3) > div:nth-child(2) > a > span {
+    color: #16174F;
+}
+
+#EATERY_FILTERS_CONT > div:nth-child(1) > div > div > img:nth-child(1) {
+    width: 100%;
+}
+
+#EATERY_FILTERS_CONT > div:nth-child(1) > div > div > img:nth-child(2) {
+    margin-top: 18px;
+    width: 100%;
+}
+
+
+
+#darkModeMainPage {
+    display: none;
+    z-index: 10000000;
+}

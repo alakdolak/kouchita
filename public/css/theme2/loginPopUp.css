@@ -1,0 +1,334 @@
+input[type="checkbox"] {
+    display: none;
+}
+
+input[type="checkbox"] + label {
+    color: #666666;
+}
+
+input[type="checkbox"] + label span {
+    display: inline-block;
+    width: 19px;
+    height: 19px;
+    margin: -2px 10px 0 0;
+    vertical-align: middle;
+    background: url('../../images/check_radio_sheet.png') left top no-repeat;
+    cursor: pointer;
+}
+
+input[type="checkbox"]:checked + label span {
+    background: url('../../images/check_radio_sheet.png') -19px top no-repeat;
+}
+
+.labelForCheckBox:before {
+    background-color: transparent !important;
+    border: none !important;
+    content: "" !important;
+}
+
+@media (max-width: 1150px) {
+    #loginPopUp, #EnterEmail-loginPopUp, #EnterPhone-loginPopUp,
+    #Send_AND_EnterCode-loginPopUp, #EnterPassword-loginPopUp,
+    #EnterUsername-loginPopUp, #ForgetPassword, #Email_ForgetPass, #Phone_ForgetPass {
+        left: 21%;
+        right: 21%;
+    }
+}
+
+@media (min-width: 1151px) and (max-width: 1500px) {
+    #loginPopUp, #EnterEmail-loginPopUp, #EnterPhone-loginPopUp,
+    #Send_AND_EnterCode-loginPopUp, #EnterPassword-loginPopUp,
+    #EnterUsername-loginPopUp, #ForgetPassword, #Email_ForgetPass, #Phone_ForgetPass {
+        left: 24%;
+        right: 24%;
+    }
+}
+
+@media (min-width: 1501px) and (max-width: 1850px) {
+    #loginPopUp, #EnterEmail-loginPopUp, #EnterPhone-loginPopUp,
+    #Send_AND_EnterCode-loginPopUp, #EnterPassword-loginPopUp,
+    #EnterUsername-loginPopUp, #ForgetPassword, #Email_ForgetPass, #Phone_ForgetPass {
+        left: 28%;
+        right: 28%;
+    }
+}
+
+@media (min-width: 1851px) {
+    #loginPopUp, #EnterEmail-loginPopUp, #EnterPhone-loginPopUp,
+    #Send_AND_EnterCode-loginPopUp, #EnterPassword-loginPopUp,
+    #EnterUsername-loginPopUp, #ForgetPassword, #Email_ForgetPass, #Phone_ForgetPass {
+        left: 32%;
+        right: 32%;
+    }
+}
+
+#loginPopUp, #EnterEmail-loginPopUp, #EnterPhone-loginPopUp, #Send_AND_EnterCode-loginPopUp, #EnterPassword-loginPopUp, #EnterUsername-loginPopUp,
+#ForgetPassword, #Email_ForgetPass, #Phone_ForgetPass {
+    position: fixed;
+    width: auto;
+    top: 7%;
+    bottom: auto;
+    z-index: 10000001;
+    padding: 40px 20px !important;
+    height: auto;
+    overflow: auto;
+}
+
+#loginPopUp > div:nth-child(1) > img, #EnterEmail-loginPopUp > div:nth-child(1) > img, #EnterPhone-loginPopUp > div:nth-child(1) > img,
+#Send_AND_EnterCode-loginPopUp > div:nth-child(1) > img, #EnterPassword-loginPopUp > div:nth-child(1) > img,
+#EnterUsername-loginPopUp > div:nth-child(1) > img, #ForgetPassword > div:nth-child(1) > img, #Email_ForgetPass > div:nth-child(1) > img,
+#Phone_ForgetPass > div:nth-child(1) > img {
+    margin-bottom: 20px;
+    width: 100%;
+    height: 50px;
+}
+
+.loginPaneInLoginPopUp, #EnterEmail-loginPopUp > div:nth-child(2) > div:nth-child(1), #EnterPhone-loginPopUp > div:nth-child(2) > div:nth-child(1),
+#Send_AND_EnterCode-loginPopUp > div:nth-child(2) > div:nth-child(1), #EnterPassword-loginPopUp > div:nth-child(2) > div:nth-child(1),
+#EnterUsername-loginPopUp > div:nth-child(2) > div:nth-child(1) {
+    border-right: 1px solid #cccccc;
+}
+
+.loginPaneInLoginPopUp > div:nth-child(1), #EnterEmail-loginPopUp > div:nth-child(2) > div > div:nth-child(1),
+#Send_AND_EnterCode-loginPopUp > div:nth-child(2) > div > div:nth-child(1), #EnterPassword-loginPopUp > div:nth-child(2) > div > div:nth-child(1),
+#EnterPhone-loginPopUp > div:nth-child(2) > div > div:nth-child(1), .registerPaneInLoginPopUp > div:first-child, .registerPaneInLoginPopUp > div:last-child {
+    font-size: 14px !important;
+}
+
+.loginPaneInLoginPopUp > div:nth-child(2) > div > label,
+#EnterEmail-loginPopUp > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div > label,
+#EnterPhone-loginPopUp > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div > label,
+#Send_AND_EnterCode-loginPopUp > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div > label,
+#EnterPassword-loginPopUp > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div > label {
+    width: 100%;
+}
+
+.loginPaneInLoginPopUp > div:nth-child(2) > div > label > span, .loginPaneInLoginPopUp > div:nth-child(3),
+#EnterEmail-loginPopUp > div:nth-child(2) > div:last-child > div:last-child,
+#EnterPhone-loginPopUp > div:nth-child(2) > div:last-child > div:last-child,
+#Send_AND_EnterCode-loginPopUp > div:nth-child(2) > div:last-child > div:last-child,
+#EnterPassword-loginPopUp > div:nth-child(2) > div:last-child > div:last-child,
+#EnterEmail-loginPopUp > div:nth-child(2) > div > div:nth-child(2) > div > label > span,
+#EnterPhone-loginPopUp > div:nth-child(2) > div > div:nth-child(2) > div > label > span,
+#Send_AND_EnterCode-loginPopUp > div:nth-child(2) > div > div:nth-child(2) > div > label > span,
+#EnterPassword-loginPopUp > div:nth-child(2) > div > div:nth-child(2) > div > label > span,
+#EnterEmail-loginPopUp > div:nth-child(2) > div:nth-child(1) > div:nth-child(3),
+#EnterPhone-loginPopUp > div:nth-child(2) > div:nth-child(1) > div:nth-child(3),
+#Send_AND_EnterCode-loginPopUp > div:nth-child(2) > div:nth-child(1) > div:nth-child(3),
+#EnterPassword-loginPopUp > div:nth-child(2) > div:nth-child(1) > div:nth-child(3) {
+    padding-top: 8px;
+}
+
+.registerPaneInLoginPopUp > button > img {
+    width: 20px;
+    float: right;
+    margin-left: 10px
+}
+
+#Send_AND_EnterCode-loginPopUp > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div > label > span:nth-child(1) {
+    font-size: 12px !important;
+}
+
+#resendActivationCode {
+    background: #963019;
+    border-color: #963019;
+}
+
+#reminderTimePane {
+    padding-top: 8px;
+    font-size: 10px;
+}
+
+.loginPaneInLoginPopUp > div:nth-child(2) > div > label > input,
+#EnterEmail-loginPopUp > div:nth-child(2) > div > div:nth-child(2) > div > label > input,
+#EnterPhone-loginPopUp > div:nth-child(2) > div > div:nth-child(2) > div > label > input,
+#Send_AND_EnterCode-loginPopUp > div:nth-child(2) > div > div:nth-child(2) > div > label > input,
+#EnterPassword-loginPopUp > div:nth-child(2) > div > div:nth-child(2) > div > label > input,
+#Email_ForgetPass > div:nth-child(2) > div > label > input, #forget_phone {
+    width: 85%;
+    padding: 7px;
+    text-align: center;
+    margin-top: 8px;
+    border-radius: 5px;
+    border: 1px solid #CCC;
+}
+
+.loginPaneInLoginPopUp > div:nth-child(2) > div > label > a,
+#EnterEmail-loginPopUp > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div > label > a,
+#EnterPhone-loginPopUp > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div > label > a,
+#Send_AND_EnterCode-loginPopUp > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div > label > a,
+#EnterPassword-loginPopUp > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div > label > a {
+    cursor: pointer;
+    font-size: 11px;
+    padding-top: 8px;
+    display: block;
+}
+
+.loginPaneInLoginPopUp > div:nth-child(3) > button, #EnterEmail-loginPopUp > div:nth-child(2) > div:nth-child(1) > div:nth-child(3) > button,
+#EnterEmail-loginPopUp > div:nth-child(2) > div:nth-child(2) > div:nth-child(3) > button:nth-child(1),
+#EnterPhone-loginPopUp > div:nth-child(2) > div > div:nth-child(3) > button:nth-child(1),
+#Send_AND_EnterCode-loginPopUp > div:nth-child(2) > div > div:nth-child(3) > button:nth-child(1),
+#EnterPassword-loginPopUp > div:nth-child(2) > div > div:nth-child(3) > button:nth-child(1),
+#Email_ForgetPass > div:nth-child(2) > div:nth-child(2) > button:nth-child(1),
+#Phone_ForgetPass > div:nth-child(2) > div:nth-child(2) > button:nth-child(1) {
+    background: #4DC7BC;
+    border-color: #4DC7BC;
+    padding-left: 22px;
+    padding-right: 20px;
+    border-radius: 10px;;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 2px 3px 0;
+}
+
+#EnterPhone-loginPopUp > div:nth-child(2) > div > div:nth-child(3) > button:nth-child(2),
+#EnterEmail-loginPopUp > div:nth-child(2) > div:nth-child(2) > div:nth-child(3) > button:nth-child(2),
+#Email_ForgetPass > div:nth-child(2) > div:nth-child(2) > button:nth-child(2),
+#Phone_ForgetPass > div:nth-child(2) > div:nth-child(2) > button:nth-child(2) {
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 2px 3px 0;
+}
+
+#loginErr, #loginErrEmail, #loginErrActivationCode {
+    margin-top: 10px;
+    color: #963019;
+}
+
+#loginErrPhonePass1, #loginErrResetPasByEmail, #loginErrResetPasByPhone {
+    margin-top: 10px;
+}
+
+.registerPaneInLoginPopUp > button {
+    width: 90%;
+    margin: 0 5px 15px 5px;
+    background: #4DC7BC;
+    color: #FFF;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 2px 3px 0;
+}
+
+.registerPaneInLoginPopUp > button > div {
+    background-size: 20px;
+    width: 20px;
+    height: 20px;
+    float: right;
+    background-image: url('../../images/loginPopup.png');
+    background-repeat: no-repeat;
+    margin-left: 10px;
+}
+
+.registerPaneInLoginPopUp > button:nth-child(2) > div {
+    background-position: 0 0;
+}
+
+.registerPaneInLoginPopUp > button:nth-child(3) > div {
+    background-position: 0 -41px;
+}
+
+.registerPaneInLoginPopUp > button:nth-child(4) > div {
+    background-position: 0 -21px;
+}
+
+.registerPaneInLoginPopUp > button > span {
+    float: right;
+}
+
+#EnterUsername-loginPopUp > div:nth-child(2) > div > span {
+    font-size: 14px;
+}
+
+#EnterUsername-loginPopUp > div:nth-child(2) > div:nth-child(1) > div > div {
+    margin-left: 30px;
+    transform: scale(0.77);
+    -webkit-transform: scale(0.77);
+    transform-origin: right;
+    -webkit-transform-origin: right;
+}
+
+#submitAndFinishBtn {
+    background: #4DC7BC;
+    border-color: #4DC7BC;
+    padding-left: 22px;
+    padding-right: 20px;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 2px 3px 0;
+}
+
+#loginErrUserName {
+    margin-top: 10px;
+    color: #963019;
+}
+
+#EnterUsername-loginPopUp > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) {
+    font-size: 14px !important;
+}
+
+#EnterUsername-loginPopUp > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > label > span:nth-child(1),
+#EnterUsername-loginPopUp > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > label > span:nth-child(6) {
+    font-size: 12px !important;
+}
+
+#EnterUsername-loginPopUp > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > label > span:nth-child(2),
+#EnterUsername-loginPopUp > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > label > span:nth-child(7),
+#EnterUsername-loginPopUp > div:nth-child(2) > div:nth-child(2) > div:nth-child(3),
+#ForgetPassword > div:nth-child(2) > div:nth-child(3), #Email_ForgetPass > div:nth-child(2) > div > label > span,
+#Email_ForgetPass > div:nth-child(2) > div:nth-child(2), #Phone_ForgetPass > div:nth-child(2) > div > label > span, #reminderTimePaneForget,
+#Phone_ForgetPass > div:nth-child(2) > div:nth-child(2) {
+    padding-top: 8px;
+}
+
+#invitationCode {
+    width: 60% !important;
+}
+
+#username_final, #invitationCode {
+    width: 85%;
+    padding: 7px;
+    text-align: center;
+    margin-top: 8px;
+    border-radius: 5px;
+    border: 1px solid #CCC;
+}
+
+#ForgetPassword > div:nth-child(2), #Phone_ForgetPass > div:nth-child(2) {
+    direction: rtl;
+    text-align: center;
+}
+
+#ForgetPassword > div:nth-child(2) > div:nth-child(1) {
+    font-size: 14px !important;
+}
+
+#ForgetPassword > div:nth-child(2) > div:nth-child(2) > label > button {
+    width: 90%;
+    margin: 0 5px 15px 5px;
+    background: #4DC7BC;
+    color: #FFF;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 2px 3px 0;
+}
+
+#ForgetPassword > div:nth-child(2) > div:nth-child(2) > label > div {
+    background-size: 20px;
+    width: 20px;
+    height: 20px;
+    float: right;
+    background-image: url('../../images/loginPopup.png');
+    background-repeat: no-repeat;
+    margin-left: 10px;
+}
+
+#ForgetPassword > div:nth-child(2) > div:nth-child(2) > label > div:nth-child(1) {
+    background-position: 0 0;
+}
+
+#ForgetPassword > div:nth-child(2) > div:nth-child(2) > label > div:nth-child(2) {
+    background-position: 0 -41px;
+}
+
+#ForgetPassword > div:nth-child(2) > div:nth-child(2) > label > span {
+    float: right;
+}
+
+#ForgetPassword > div:nth-child(2) > div:nth-child(3) > button {
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 2px 3px 0;
+}
