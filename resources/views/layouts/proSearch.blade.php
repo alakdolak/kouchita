@@ -69,12 +69,12 @@
         offset  = elemRect.top;
         offset2 = elemRect.left;
 
-        newFilter = "<div id='elevator' style='position: absolute; border-radius: 6px; width: 100px; height: 30px; background-color: #4DC7BC; color: white; top: " + offset + "px; left: " + offset2 + "px'><center style='margin-top: 5px;'>" + val + "</center></div>";
+        newFilter = "<div id='elevator' style=' top: " + offset + "px; left: " + offset2 + "px'><center>" + val + "</center></div>";
         $("#searchspan").append(newFilter);
 
         destX = windowW * 0.7 - (filters.length % 3 * 110) - document.getElementById('filterDiv').getBoundingClientRect().left;
         marginTop = Math.floor(filters.length / 3) * 40;
-        newElement = "<div class='hidden' id='cityFilterDest_" + cityId + "' style='position: absolute; float: right; color: white; top: 40px; background-color: #4dc7bc; left: " + (destX - 115) + "px; border-radius: 6px; width: 100px; height: 30px'><center><span class='glyphicon glyphicon-remove' onclick='removeFilter(\"cityFilterDest_" + cityId + "\")' style='line-height: 28px; margin-right: 8px; float: right; cursor: pointer'></span><span style='line-height: 28px; margin-left: 10px'>" + val + "</span></span></center></div>";
+        newElement = "<div class='hidden cityFiltersProSearch' id='cityFilterDest_" + cityId + "' style='left: " + (destX - 115) + "px;'><center><span class='glyphicon glyphicon-remove' onclick='removeFilter(\"cityFilterDest_" + cityId + "\")'></span><span'>" + val + "</span></span></center></div>";
         $("#filters").append(newElement);
 
         selectedElement = document.getElementById("elevator");
@@ -87,7 +87,7 @@
     function addToFilter2(val) {
 
         destX = windowW * 0.8 - (filters.length * 110) - document.getElementById('filterDiv').getBoundingClientRect().left;
-        newElement = "<div onclick='removeFilter(\"" + val + "\")' id='selectedFilter_" + val + "' style='position: absolute; float: right; color: #6d6d6d; border-radius: 6px; background-color: #f4f4f4; left: " + destX + "px; width: 1px; height: 1px'></div>";
+        newElement = "<div onclick='removeFilter(\"" + val + "\")' class='selectedFiltersProSearch' id='selectedFilter_" + val + "' style='left: " + destX + "px;'></div>";
         $("#filters").append(newElement);
         selectedVal = 'selectedFilter_' + val;
         filters[filters.length] = selectedVal;
@@ -99,7 +99,7 @@
         w = $("#" + selectedVal).css('width').split('px')[0];
 
         if(w >= 100) {
-            newElement = "<center style='margin-top: 35px; color: black' class='rotate-text'>" + selectedText + "</center>";
+            newElement = "<center class='mg-tp-35 color-black rotate-text'>" + selectedText + "</center>";
             $("#" + selectedVal).append(newElement);
             counter = 0;
             for(j = 0; j < compareList.length; j++) {
@@ -188,15 +188,15 @@
                 newElement = "";
                 for(i = 0; i < response.length; i++) {
                     if(response[i].kindPlace == 'هتل')
-                        newElement += "<p class='searchElement'><span onclick='addToCompareList(\"" + response[i].kindPlaceId + "\", \"" + response[i].id + "\", \"" + response[i].name + "\")' style='float: right' data-toggle='tooltip' title='افزودن به مقایسه ها' class='glyphicon glyphicon-plus'></span><span style='margin-right: 7px' onclick='document.location.href = \"{{route('home')}}/hotel-details/" + response[i].id + "/" + response[i].name + "\"'>" + response[i].name + " در " + response[i].cityName + "</span></p>";
+                        newElement += "<p class='searchElement'><span onclick='addToCompareList(\"" + response[i].kindPlaceId + "\", \"" + response[i].id + "\", \"" + response[i].name + "\")' data-toggle='tooltip' title='افزودن به مقایسه ها' class='float-right glyphicon glyphicon-plus'></span><span class='mg-rt-7' onclick='document.location.href = \"{{route('home')}}/hotel-details/" + response[i].id + "/" + response[i].name + "\"'>" + response[i].name + " در " + response[i].cityName + "</span></p>";
                     else if(response[i].kindPlace == 'رستوران')
-                        newElement += "<p class='searchElement'><span onclick='addToCompareList(\"" + response[i].kindPlaceId + "\", \"" + response[i].id + "\", \"" + response[i].name + "\")' style='float: right' data-toggle='tooltip' title='افزودن به مقایسه ها' class='glyphicon glyphicon-plus'></span><span style='margin-right: 7px' onclick='document.location.href = \"{{route('home')}}/restaurant-details/" + response[i].id + "/" + response[i].name + "\"'>" + response[i].name + " در " + response[i].cityName + "</span></p>";
+                        newElement += "<p class='searchElement'><span onclick='addToCompareList(\"" + response[i].kindPlaceId + "\", \"" + response[i].id + "\", \"" + response[i].name + "\")' data-toggle='tooltip' title='افزودن به مقایسه ها' class='float-right glyphicon glyphicon-plus'></span><span class='mg-rt-7' onclick='document.location.href = \"{{route('home')}}/restaurant-details/" + response[i].id + "/" + response[i].name + "\"'>" + response[i].name + " در " + response[i].cityName + "</span></p>";
                     else if(response[i].kindPlace == 'اماکن')
-                            newElement += "<p class='searchElement'><span onclick='addToCompareList(\"" + response[i].kindPlaceId + "\", \"" + response[i].id + "\", \"" + response[i].name + "\")' style='float: right' data-toggle='tooltip' title='افزودن به مقایسه ها' class='glyphicon glyphicon-plus'></span><span style='margin-right: 7px' onclick='document.location.href = \"{{route('home')}}/amaken-details/" + response[i].id + "/" + response[i].name + "\"'>" + response[i].name + " در " + response[i].cityName + "</span></p>";
+                            newElement += "<p class='searchElement'><span onclick='addToCompareList(\"" + response[i].kindPlaceId + "\", \"" + response[i].id + "\", \"" + response[i].name + "\")' data-toggle='tooltip' title='افزودن به مقایسه ها' class='float-right glyphicon glyphicon-plus'></span><span class='mg-rt-7' onclick='document.location.href = \"{{route('home')}}/amaken-details/" + response[i].id + "/" + response[i].name + "\"'>" + response[i].name + " در " + response[i].cityName + "</span></p>";
                     else if(response[i].kindPlace == 'آداب')
-                        newElement += "<p class='searchElement'><span onclick='addToCompareList(\"" + response[i].kindPlaceId + "\", \"" + response[i].id + "\", \"" + response[i].name + "\")' style='float: right' data-toggle='tooltip' title='افزودن به مقایسه ها' class='glyphicon glyphicon-plus'></span><span style='margin-right: 7px' onclick='document.location.href = \"{{route('home')}}/adab-details/" + response[i].id + "/" + response[i].name + "\"'>" + response[i].name + " در " + response[i].cityName + "</span></p>";
+                        newElement += "<p class='searchElement'><span onclick='addToCompareList(\"" + response[i].kindPlaceId + "\", \"" + response[i].id + "\", \"" + response[i].name + "\")' data-toggle='tooltip' title='افزودن به مقایسه ها' class='float-right glyphicon glyphicon-plus'></span><span class='mg-rt-7' onclick='document.location.href = \"{{route('home')}}/adab-details/" + response[i].id + "/" + response[i].name + "\"'>" + response[i].name + " در " + response[i].cityName + "</span></p>";
                     else
-                        newElement += "<p class='searchElement'><span onclick='addToCompareList(\"" + response[i].kindPlaceId + "\", \"" + response[i].id + "\", \"" + response[i].name + "\")' style='float: right' data-toggle='tooltip' title='افزودن به مقایسه ها' class='glyphicon glyphicon-plus'></span><span style='margin-right: 7px' onclick='document.location.href = \"{{route('home')}}/majara-details/" + response[i].id + "/" + response[i].name + "\"'>" + response[i].name + " در " + response[i].cityName + "</span></p>";
+                        newElement += "<p class='searchElement'><span onclick='addToCompareList(\"" + response[i].kindPlaceId + "\", \"" + response[i].id + "\", \"" + response[i].name + "\")' data-toggle='tooltip' title='افزودن به مقایسه ها' class='float-right glyphicon glyphicon-plus'></span><span class='mg-rt-7' onclick='document.location.href = \"{{route('home')}}/majara-details/" + response[i].id + "/" + response[i].name + "\"'>" + response[i].name + " در " + response[i].cityName + "</span></p>";
                 }
 
                 $("#resultPlace").append(newElement)
@@ -381,7 +381,7 @@
 
                 newElement = "";
                 for(i = 0; i < response.length; i++) {
-                    newElement += "<p><span onclick='setCityName(\"" + response[i].cityName + "\", \"" + response[i].id + "\")' style='margin-left: 10px;background-color: #4DC7BC; color: white; padding: 4px 8px !important; font-size: 10px !important;' class='btn btn-success glyphicon glyphicon-plus'></span><span>" + response[i].cityName + " در " + response[i].stateName + "</span></p>";
+                    newElement += "<p><span id='greenBtnProSearch' onclick='setCityName(\"" + response[i].cityName + "\", \"" + response[i].id + "\")' class='btn btn-success glyphicon glyphicon-plus'></span><span>" + response[i].cityName + " در " + response[i].stateName + "</span></p>";
                 }
 
                 $("#resultCity").append(newElement);
@@ -497,40 +497,10 @@
     
 </script>
 
-<style>
-    .rotate-text {
-        -webkit-animation: rotation 1s 1 linear;
-    }
-    .center {
-        margin: auto;
-        width: 83%;
-        padding: 10px;
-    }
-    @-webkit-keyframes rotation {
-        from {
-            -webkit-transform: rotate(0deg);
-        }
-        to {
-            -webkit-transform: rotate(359deg);
-        }
-    }
+<link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/proSearch.css')}}'/>
 
-    .ui_input_checkbox {
-        margin-right: 7px;
-    }
 
-    .lantern {
-        height: 100px !important;
-    }
-
-    .searchElement{
-        cursor: pointer;
-        border-bottom: 2px solid gray;
-        padding-bottom: 5px;
-    }
-</style>
-
-<div id="searchspan" class="ui_overlay ui_modal fullwidth no_padding ppr_rup ppr_priv_masthead_search" style="direction: rtl; overflow: hidden; background-color: #f4f4f4; height: 0; position: fixed; left: 0; right: auto; top: 0; bottom: auto">
+<div id="searchspan" class="ui_overlay ui_modal fullwidth no_padding ppr_rup ppr_priv_masthead_search">
     <div class="body_text">
         <div class="search_overlay_content ui_container">
             <div id="DUAL_SEARCH_LOADER_CONTAINER" class="dual_search_loader_container">
@@ -540,142 +510,135 @@
                 </div>
             </div>
 
-            <div class="row" style="margin-top: 50px">
+            <div class="row mg-tp-50" id="mainDivProSearch">
 
                 <div class="col-xs-12">
                     <div class="col-xs-5">
-                        <div id="addToFilterCityBtn" style="cursor: pointer; text-align: center; float: right; margin-top: 10px; width: 200px; padding: 10px; border-radius: 6px; background-color: #4DC7BC; color: white" class="inner" onclick="goTo()"><span>برو به</span><span>&nbsp;</span><span id="searchKeyCity"></span></div>
+                        <div id="addToFilterCityBtn" class="inner" onclick="goTo()"><span>برو به</span><span>&nbsp;</span><span id="searchKeyCity"></span></div>
                     </div>
                     <div class="col-xs-7">
-                        <div class="where_with_highlight" style="width: 60% !important; float: left">
-                            <input onkeyup="searchCity()" id="GEO_SCOPED_SEARCH_INPUT" class="text geoScopeInput" style="color: #6d6d6d; border-color: #6d6d6d !important;" value="" placeholder="نام شهر را وارد کنید" autocomplete="off" type="text">
-                            <p id="currentCity" style="margin: 10px 0 5px !important;"></p>
+                        <div class="where_with_highlight" id="enterCityNameProSearch">
+                            <input onkeyup="searchCity()" id="GEO_SCOPED_SEARCH_INPUT" class="text geoScopeInput" value="" placeholder="نام شهر را وارد کنید" autocomplete="off" type="text">
+                            <p id="currentCity"></p>
                         </div>
-                        <div id="resultCity" class="data_holder" style="width: 200px; max-height: 135px; color: #6d6d6d; overflow: auto; margin-top: 10px;"></div>
+                        <div id="resultCity" class="data_holder"></div>
                     </div>
                 </div>
 
-                <center class="col-xs-12" style="width: 70%; margin-left: 15%; margin-top: 15px; height: 5px; box-shadow: 5px 5px 5px #888888;"></center>
+                <center class="col-xs-12" id="dividerBoxCenterProSearch"></center>
 
-                <center class="col-xs-12" style="margin-top: 40px; padding: 0">
+                <center class="col-xs-12">
 
                     <div class="col-xs-2"></div>
 
-                    <div class="col-xs-8" style="position: relative !important;">
-                        <div class="col-xs-12" style="border-bottom: 2px solid #6d6d6d; padding: 0px !important;">
-                            <div class="col-xs-7" style="color: #6d6d6d; height: inherit;">
-                            <div class='ui_input_checkbox' style="float: right; width: 50px; cursor: pointer; position: relative">
+                    <div class="col-xs-8">
+                        <div class="col-xs-12">
+                            <div class="col-xs-7">
+                                <div class='ui_input_checkbox'>
 
-                                @if($placeMode == "amaken")
-                                    <img class="lantern" data-val="on" id="amakenFilter" width="50px" height="100px" src="{{URL::asset('images/on_lamp.gif')}}">
-                                @else
-                                    <img class="lantern" data-val="off" id="amakenFilter" width="50px" height="100px" src="{{URL::asset('images/off_lamp.png')}}">
-                                @endif
-                                <center style="top: 104%; left: 15%; width: 70%; position: absolute">اماکن</center>
-                            </div>
-                            <div class='ui_input_checkbox' style="float: right; width: 50px; cursor: pointer; position: relative">
-                                @if($placeMode == "hotel")
-                                    <img class="lantern" data-val="on" id="hotelFilter" width="50px" height="100px" src="{{URL::asset('images/on_lamp.gif')}}">
-                                @else
-                                    <img class="lantern" data-val="off" id="hotelFilter" width="50px" height="100px" src="{{URL::asset('images/off_lamp.png')}}">
-                                @endif
-                                <center style="top: 104%; left: 15%; width: 70%; position: absolute">هتل</center>
-                            </div>
-                            <div class='ui_input_checkbox' style="float: right; width: 50px; cursor: pointer; position: relative">
-                                @if($placeMode == "restaurant")
-                                    <img class="lantern" data-val="on" id="restaurantFilter" width="50px" height="100px" src="{{URL::asset('images/on_lamp.gif')}}">
-                                @else
-                                    <img class="lantern" data-val="off" id="restaurantFilter" width="50px" height="100px" src="{{URL::asset('images/off_lamp.png')}}">
-                                @endif
-                                <center style="top: 104%; left: 15%; width: 70%; position: absolute">رستوران</center>
-                            </div>
-                            <div class='ui_input_checkbox' style="float: right; width: 50px; cursor: pointer; position: relative">
-                                @if($placeMode == "majara")
-                                    <img class="lantern" data-val="on" id="majaraFilter" width="50px" height="100px" src="{{URL::asset('images/on_lamp.gif')}}">
-                                @else
-                                    <img class="lantern" data-val="off" id="majaraFilter" width="50px" height="100px" src="{{URL::asset('images/off_lamp.png')}}">
-                                @endif
-                                <center style="top: 104%; left: 15%; width: 70%; position: absolute">ماجراجویی</center>
-                            </div>
-                            <div class='ui_input_checkbox' style="float: right; width: 50px; cursor: pointer; position: relative">
-                                @if($placeMode == "soghat")
-                                    <img class="lantern" data-val="on" id="soghatFilter" width="50px" height="100px" src="{{URL::asset('images/on_lamp.gif')}}">
-                                @else
-                                    <img class="lantern" data-val="off" id="soghatFilter" width="50px" height="100px" src="{{URL::asset('images/off_lamp.png')}}">
-                                @endif
-                                <center style="top: 104%; left: 15%; width: 70%; position: absolute">سوغات</center>
-                            </div>
-                            <div class='ui_input_checkbox' style="float: right; width: 50px; cursor: pointer; position: relative">
-                                @if($placeMode == "ghazamahali")
-                                    <img class="lantern" data-val="on" id="ghazamahaliFilter" width="50px" height="100px" src="{{URL::asset('images/on_lamp.gif')}}">
-                                @else
-                                    <img class="lantern" data-val="off" id="ghazamahaliFilter" width="50px" height="100px" src="{{URL::asset('images/off_lamp.png')}}">
-                                @endif
-                                <center style="top: 104%; left: 15%; width: 70%; position: absolute">غذا محلی</center>
-                            </div>
-                            <div class='ui_input_checkbox' style="float: right; width: 50px; cursor: pointer; position: relative">
-                                @if($placeMode == "sanaye")
-                                    <img class="lantern" data-val="on" id="sanayeFilter" width="50px" height="100px" src="{{URL::asset('images/on_lamp.gif')}}">
-                                @else
-                                    <img class="lantern" data-val="off" id="sanayeFilter" width="50px" height="100px" src="{{URL::asset('images/off_lamp.png')}}">
-                                @endif
+                                    @if($placeMode == "amaken")
+                                        <img class="lantern" data-val="on" id="amakenFilter" width="50px" height="100px" src="{{URL::asset('images/on_lamp.gif')}}">
+                                    @else
+                                        <img class="lantern" data-val="off" id="amakenFilter" width="50px" height="100px" src="{{URL::asset('images/off_lamp.png')}}">
+                                    @endif
+                                    <center>اماکن</center>
+                                </div>
+                                <div class='ui_input_checkbox'>
+                                    @if($placeMode == "hotel")
+                                        <img class="lantern" data-val="on" id="hotelFilter" width="50px" height="100px" src="{{URL::asset('images/on_lamp.gif')}}">
+                                    @else
+                                        <img class="lantern" data-val="off" id="hotelFilter" width="50px" height="100px" src="{{URL::asset('images/off_lamp.png')}}">
+                                    @endif
+                                    <center>هتل</center>
+                                </div>
+                                <div class='ui_input_checkbox'>
+                                    @if($placeMode == "restaurant")
+                                        <img class="lantern" data-val="on" id="restaurantFilter" width="50px" height="100px" src="{{URL::asset('images/on_lamp.gif')}}">
+                                    @else
+                                        <img class="lantern" data-val="off" id="restaurantFilter" width="50px" height="100px" src="{{URL::asset('images/off_lamp.png')}}">
+                                    @endif
+                                    <center>رستوران</center>
+                                </div>
+                                <div class='ui_input_checkbox'>
+                                    @if($placeMode == "majara")
+                                        <img class="lantern" data-val="on" id="majaraFilter" width="50px" height="100px" src="{{URL::asset('images/on_lamp.gif')}}">
+                                    @else
+                                        <img class="lantern" data-val="off" id="majaraFilter" width="50px" height="100px" src="{{URL::asset('images/off_lamp.png')}}">
+                                    @endif
+                                    <center>ماجراجویی</center>
+                                </div>
+                                <div class='ui_input_checkbox'>
+                                    @if($placeMode == "soghat")
+                                        <img class="lantern" data-val="on" id="soghatFilter" width="50px" height="100px" src="{{URL::asset('images/on_lamp.gif')}}">
+                                    @else
+                                        <img class="lantern" data-val="off" id="soghatFilter" width="50px" height="100px" src="{{URL::asset('images/off_lamp.png')}}">
+                                    @endif
+                                    <center>سوغات</center>
+                                </div>
+                                <div class='ui_input_checkbox'>
+                                    @if($placeMode == "ghazamahali")
+                                        <img class="lantern" data-val="on" id="ghazamahaliFilter" width="50px" height="100px" src="{{URL::asset('images/on_lamp.gif')}}">
+                                    @else
+                                        <img class="lantern" data-val="off" id="ghazamahaliFilter" width="50px" height="100px" src="{{URL::asset('images/off_lamp.png')}}">
+                                    @endif
+                                    <center>غذا محلی</center>
+                                </div>
+                                <div class='ui_input_checkbox'>
+                                    @if($placeMode == "sanaye")
+                                        <img class="lantern" data-val="on" id="sanayeFilter" width="50px" height="100px" src="{{URL::asset('images/on_lamp.gif')}}">
+                                    @else
+                                        <img class="lantern" data-val="off" id="sanayeFilter" width="50px" height="100px" src="{{URL::asset('images/off_lamp.png')}}">
+                                    @endif
 
-                                <center style="top: 104%; left: 15%; width: 70%; position: absolute">صنایع</center>
+                                    <center>صنایع</center>
+                                </div>
                             </div>
-                        </div>
                             <div class="col-xs-5 where_with_highlight">
-                            <div style="position: relative">
-                                <input onkeyup="searchInPlaces()" style="position: absolute; right: 0; top: 40px; color: #6d6d6d; border: none !important;" id="GEO_SCOPED_SEARCH_INPUT2" class="text geoScopeInput" placeholder="هر کجا که می خواهید بروید را وارد کنید" autocomplete="off" type="text">
+                                <div class="position-relative">
+                                    <input onkeyup="searchInPlaces()" id="GEO_SCOPED_SEARCH_INPUT2" class="text geoScopeInput" placeholder="هر کجا که می خواهید بروید را وارد کنید" autocomplete="off" type="text">
+                                </div>
                             </div>
                         </div>
-                        </div>
-                        <div class="col-xs-12" id="filterDiv" style="height: 100px;position: relative !important;">
-                            <div id="filters" style="position: relative"></div>
+                        <div class="col-xs-12" id="filterDiv">
+                            <div id="filters" class="position-relative"></div>
                         </div>
                     </div>
 
                     <div class="col-xs-2">
-                        <div id="resultPlace" class="data_holder" style="max-height: 200px; color: #4DC7BC; overflow: auto; margin-top: 25%; "></div>
+                        <div id="resultPlace" class="data_holder"></div>
                     </div>
                 </center>
 
                 {{--<div class="col-xs-12">--}}
                     {{--<div class="col-xs-2"></div>--}}
-                    {{--<div class="col-xs-8" id="filterDiv" style="margin-top: 20px">--}}
+                    {{--<div class="col-xs-8" id="filterDivCM">--}}
                         {{--<div id="filters"></div>--}}
                     {{--</div>--}}
                     {{--<div class="col-xs-2"></div>--}}
                 {{--</div>--}}
 
-                <div class="col-xs-12" style="height: 200px; margin-top: 4%;">
+                <div class="col-xs-12">
                     <div class="col-xs-12">
                         @for($i = 1; $i < 5; $i++)
-                            <div style="width: 22%; height: 180px; float: right; position: relative">
-                                <div style="width: 180px; margin: auto; height: inherit">
-                                    <span id="removeDiv_{{$i}}" onclick="removeFromCompareList('{{$i}}')" class="hidden glyphicon glyphicon-remove" style="cursor: pointer; position: absolute; top: -12px; background-color: #dddddd"></span>
-                                    <div id="compare_{{$i}}_text" style="height: 30px;" class="hidden center"></div>
-                                    <div id="compare_{{$i}}_pic" style="height: 150px;" class="hidden center"></div>
-                                    <div style="padding: 10px" id="compare_{{$i}}_plus_div">
-                                        <span style="padding: 70px 70px; border: 2px dotted #626262; font-size: 15px" class="glyphicon glyphicon-plus"></span>
+                            <div id="mainDivCompareProSearch">
+                                <div>
+                                    <span id="removeDiv_{{$i}}" onclick="removeFromCompareList('{{$i}}')" class="hidden glyphicon glyphicon-remove"></span>
+                                    <div id="compare_{{$i}}_text" class="hidden center"></div>
+                                    <div id="compare_{{$i}}_pic" class="hidden center"></div>
+                                    <div id="compare_{{$i}}_plus_div">
+                                        <span class="glyphicon glyphicon-plus"></span>
                                     </div>
                                 </div>
                             </div>
                         @endfor
-                        <div style="margin: 7px 0 0 47px; float: left"><button id="compare" onclick="compare()" class="btn btn-primary hidden" style="border: none; background-color: #4DC7BC">مقایسه کن</button></div>
+                        <div id="mainDivCompareProSearchBtn">
+                            <button id="compare" onclick="compare()" class="btn btn-primary hidden">مقایسه کن</button>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div id="myCloseBtn" class="hidden" onclick="closeInFireFox()" draggable="true" ondragend="dropMenu(event)" ondrop="dropMenu(event)" ondrag="dragging(event)" style="height: 50px; background: url('{{URL::asset('images/menu-icon.png')}}');
-                    background-size: 100% 100%;
-                    background-repeat: no-repeat no-repeat;
-                    border: none;
-                    width: 50px;
-                    position: fixed;
-                    top: 93%;
-                    color: white;
-                    cursor: pointer;
-                    left: 48%;">
+            <div id="myCloseBtn" class="hidden" onclick="closeInFireFox()" draggable="true" ondragend="dropMenu(event)" ondrop="dropMenu(event)" ondrag="dragging(event)">
             </div>
 
         </div>

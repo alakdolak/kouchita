@@ -1,7 +1,8 @@
-<span id="share_box"
-      style="display: none; width: 22%;height: 60px;background: #FFF;position: absolute;left: 7%;z-index: 10;box-shadow: rgb(136, 136, 136) 1px 4px 8px;padding: 10px;">
+<link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/shareBox.css')}}'/>
 
-    <a target="_blank" style="cursor: pointer; float: left;margin-left: 5px;" class="link" {{($config->facebookNoFollow) ? 'rel="nofollow"' : ''}}
+<span id="share_box">
+
+    <a target="_blank" style="" class="link" {{($config->facebookNoFollow) ? 'rel="nofollow"' : ''}}
     href="https://www.facebook.com/sharer/sharer.php?u={{Request::url()}}">
         <div style="background-image: url('{{URL::asset('images') . '/share.png'}}');width: 30px;height: 30px;background-size: 30px;background-position:  0 0;background-repeat:  no-repeat;display: inline-block;"></div>
     </a>
