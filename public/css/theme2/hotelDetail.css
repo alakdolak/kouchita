@@ -1440,12 +1440,34 @@ p {
     color: #92321b
 }
 
+#writeTheFirstReviewer {
+    color: #FFF !important;
+    max-width: 100px;
+    float: right;
+}
+
+.height-auto {
+    height: auto;
+}
+
 .mg-2percent {
     margin: 2% 0;
 }
 
+.mg-rt-0 {
+    margin-right: 0;
+}
+
+.padding-0 {
+    padding: 0;
+}
+
 .font-size-085em {
     font-size: 0.85em;
+}
+
+.font-size-12 {
+    font-size: 12px;
 }
 
 .width-33percent {
@@ -1458,6 +1480,10 @@ p {
 
 .flex-direction-row {
     flex-direction: row;
+}
+
+.bg-size-100-100 {
+    background-size: 100% 100%;
 }
 
 .bg-color-grey {
