@@ -1,0 +1,71 @@
+/*1st box of styles*/
+.glyphicon {
+    font-family: 'Glyphicons Halflings' !important;
+}
+
+.bubble_40:after {
+    content: "\e00d\e00b\e00b\e00b\e00b" !important;
+}
+
+.bubble_30:after {
+    content: "\e00d\e00d\e00b\e00b\e00b" !important;
+}
+
+.bubble_20:after {
+    content: "\e00d\e00d\e00d\e00b\e00b" !important;
+}
+
+.bubble_10:after {
+    content: "\e00d\e00d\e00d\e00d\e00b" !important;
+}
+
+/*2nd box of styles*/
+
+.global-nav-links-menu a {
+    color: #FFF !important;
+}
+
+.modules-membercenter-persistent-header-achievements .persistent-header a {
+    color: #16174f !important;
+}
+
+.persistent-header a:hover {
+    color: #963019 !important;
+    text-decoration: none;
+}
+
+@media (max-width: 600px) {
+    #PAGE {
+        width: max-content !important;
+    }
+}
+
+@media (max-width: 600px) {
+    footer {
+        width: 1024px;
+    }
+}
+
+.loader {
+    background-image: url("../../images/loading.svg");
+
+    width: 100px;
+    height: 100px;
+}
+
+.position-relative {
+    position: relative;
+}
+
+.bg-color-greenImp {
+    background-color: #4dc7bc !important
+}
+
+#bookmarkicon {
+    z-index: 100000010101001;
+    cursor: pointer;
+}
+
+#bookmarkicon > span {
+    z-index: 100000010101001 !important;
+}

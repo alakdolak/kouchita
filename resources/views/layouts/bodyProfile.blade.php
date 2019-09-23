@@ -17,6 +17,7 @@
         <link rel="stylesheet" href="{{URL::asset('css/theme2/help.css?v=1')}}">
         <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/universal_new.css?v=1')}}' data-rup='universal_new'/>
         <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/masthead-saves.css?v=1')}}' data-rup='long_lived_global_legacy'/>
+        <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/bodyProfile.css')}}' data-rup='long_lived_global_legacy'/>
 
 
 
@@ -34,10 +35,10 @@
         <?php endif; ?>
         <link rel="stylesheet" type="text/css" media="screen, print" href="{{URL::asset('css/theme2/mbr_profile.css?v=1')}}"/>
         <!--[if IE 6]>
-        <link rel="stylesheet" type="text/css" media="screen, print" href="{{URL::asset('css/theme2/winIE6.css?v=1')}}" />
+        <link rel="stylesheet" type="text/css" media="screen, print" href="{{URL::asset('css/theme2/winIE6.css')}}" />
         <![endif]-->
         <!--[if IE 7]>
-        <link rel="stylesheet" type="text/css" media="screen, print" href="{{URL::asset('css/theme2/winIE7.css?v=1')}}" />
+        <link rel="stylesheet" type="text/css" media="screen, print" href="{{URL::asset('css/theme2/winIE7.css')}}" />
         <![endif]-->
 
         <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/modules_member_center.css?v=4')}}' data-rup='modules_member_center'/>
@@ -47,68 +48,22 @@
             var getRecentlyPath = '{{route('recentlyViewed')}}';
             var getBookMarksPath = '{{route('getBookMarks')}}';
         </script>
-        <style>
-            .glyphicon {
-                font-family: 'Glyphicons Halflings' !important;
-            }
-            .bubble_40:after {
-                content: "\e00d\e00b\e00b\e00b\e00b" !important;
-            }
-            .bubble_30:after {
-                content: "\e00d\e00d\e00b\e00b\e00b" !important;
-            }
-            .bubble_20:after {
-                content: "\e00d\e00d\e00d\e00b\e00b" !important;
-            }
-            .bubble_10:after {
-                content: "\e00d\e00d\e00d\e00d\e00b" !important;
-            }
-        </style>
-
-        <style>
-            .global-nav-links-menu a{
-                color: #FFF !important;
-            }
-            .modules-membercenter-persistent-header-achievements .persistent-header a{
-                color: #16174f !important;
-            }
-            .persistent-header a:hover{
-                color:#963019 !important;
-                text-decoration: none;
-            }
-            @media(max-width: 600px){
-                #PAGE{
-                    width: max-content !important;
-                }
-            }
-            @media(max-width: 600px){
-                footer{
-                    width: 1024px;
-                }
-            }
-            .loader {
-                background-image: url("{{URL::asset('images/loading.svg')}}");
-
-                width: 100px;
-                height: 100px;
-            }
-        </style>
     @show
 </head>
 
-<body class="ltr domn_en_US lang_en long_prices globalNav2011_reset rebrand_2017 css_commerce_buttons flat_buttons sitewide xo_pin_user_review_to_top track_back" style="position: relative">
+<body class="ltr domn_en_US lang_en long_prices globalNav2011_reset rebrand_2017 css_commerce_buttons flat_buttons sitewide xo_pin_user_review_to_top track_back position-relative">
 
 @include('layouts.pop-up-create-trip')
 
 <div id="fb-root"></div>
 
-<div id="PAGE" class=" non_hotels_like desktop scopedSearch" style="position: relative;">
-    <div class="masthead" style="position: relative">
-        <div ID="taplc_global_nav_0" class="ppr_rup ppr_priv_global_nav" style="position: relative">
-            <div class="global-nav global-nav-single-line has-links" style="position: relative">
-                <div class="global-nav-top" style="position: relative">
-                    <div class="global-nav-bar global-nav-green" style="background-color: #4dc7bc !important; position: relative">
-                        <div class="ui_container global-nav-bar-container" style="position: relative">
+<div id="PAGE" class=" non_hotels_like desktop scopedSearch position-relative">
+    <div class="masthead position-relative">
+        <div ID="taplc_global_nav_0" class="ppr_rup ppr_priv_global_nav position-relative">
+            <div class="global-nav global-nav-single-line has-links position-relative">
+                <div class="global-nav-top position-relative">
+                    <div class="global-nav-bar global-nav-green position-relative bg-color-greenImp">
+                        <div class="ui_container global-nav-bar-container position-relative">
                             <div class="global-nav-hamburger is-hidden-tablet"><span class="ui_icon menu-bars"></span></div>
 
                             <a href="{{route('main')}}" class="global-nav-logo  "><img src="{{URL::asset('images/logo.svg')}}" alt="شازده مسافر" class="global-nav-img global-nav-svg"/></a>
@@ -128,11 +83,11 @@
                                 </div>
                             </div>
 
-                            <div class="global-nav-actions" style="position: relative">
+                            <div class="global-nav-actions position-relative">
                                 @if(Auth::check())
-                                    <div id="targetHelp_1" class="targets ppr_rup ppr_priv_global_nav_action_trips" style="position: relative">
-                                        <div style="z-index: 100000010101001; cursor: pointer;" id="bookmarkicon" class="ppr_rup ppr_priv_global_nav_action_profile">
-                                            <span style="z-index: 100000010101001 !important;" class="ui_icon casino"></span>
+                                    <div id="targetHelp_1" class="targets ppr_rup ppr_priv_global_nav_action_trips position-relative">
+                                        <div id="bookmarkicon" class="ppr_rup ppr_priv_global_nav_action_profile">
+                                            <span class="ui_icon casino"></span>
                                         </div>
                                         <div id="helpSpan_1" class="helpSpans hidden row">
                                             <span class="introjs-arrow"></span>
@@ -145,7 +100,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="ppr_rup ppr_priv_global_nav_action_trips" style="position: relative">
+                                    <div class="ppr_rup ppr_priv_global_nav_action_trips position-relative">
                                         <div id="targetHelp_2" class="targets masthead-saves" title="My Trips and Recently Viewed">
                                             <a class="trips-icon">
                                                 <span onclick="showRecentlyViews('recentlyViewed')" class="ui_icon my-trips"></span>
@@ -162,7 +117,7 @@
                                         </div>
                                     </div>
                                 @else
-                                    <div class="ppr_rup ppr_priv_global_nav_action_trips" style="position: relative">
+                                    <div class="ppr_rup ppr_priv_global_nav_action_trips position-relative">
                                         <div id="entryBtnId" class="ppr_rup ppr_priv_global_nav_action_profile">
                                             <div class="global-nav-profile global-nav-utility">
                                                 <a class="ui_button secondary small login-button" title="Join">عضویت / ورود</a>
@@ -171,8 +126,8 @@
                                     </div>
                                 @endif
 
-                                <div class="ppr_rup ppr_priv_global_nav_action_notif" style="position: relative">
-                                    <div id="targetHelp_3" class="masthead_notification targets" title="Alerts" style="position: relative">
+                                <div class="ppr_rup ppr_priv_global_nav_action_notif position-relative">
+                                    <div id="targetHelp_3" class="masthead_notification targets position-relative" title="Alerts">
                                         <div class="masthead_notifctr_btn">
                                             <div class="masthead_notifctr_sprite ui_icon notification-bell"></div>
                                             <div class="masthead_notifctr_jewel hidden">0</div>
@@ -218,10 +173,10 @@
                                     }
                                 </style>
 
-                                <div id="taplc_global_nav_action_profile_0" class="ppr_rup ppr_priv_global_nav_action_profile" style="position: relative">
-                                    <div class="global-nav-profile global-nav-utility" style="position: relative">
+                                <div id="taplc_global_nav_action_profile_0" class="ppr_rup ppr_priv_global_nav_action_profile position-relative">
+                                    <div class="global-nav-profile global-nav-utility position-relative">
                                         @if(Auth::check())
-                                            <div id="targetHelp_4" class="targets" title="Profile" style="position: relative">
+                                            <div id="targetHelp_4" class="targets position-relative" title="Profile">
                                                 <span onclick="document.location.href = '{{route('profile')}}'" class="ui_icon member"></span>
                                                 <span id="nameTop" class="name">{{$user->username}}</span>
                                                 <div id="helpSpan_4" class="helpSpans hidden row">
@@ -302,10 +257,10 @@
         </div>
     </div>
 
-    <div id="MAINWRAP" style="position: relative">
+    <div id="MAINWRAP" class="position-relative">
 
         <div class="modules-membercenter-persistent-header-achievements" style="background-color: #fcc156 !important; position: relative">
-            <ul class="persistent-header" style="position: relative">
+            <ul class="persistent-header position-relative">
                 @if($mode == "profile")
                     <li id="Profile" class="profile"><a style="color: #963019 !important" href="{{URL('profile')}}">صفحه کاربری</a> </li>
                 @else
@@ -317,7 +272,7 @@
                     <li id="BadgeCollection" class="badgeCollection"><a style="color: #16174f" href="{{route('badge')}}">مدال های گردشگری</a> </li>
                 @endif
 
-                <li class="travelMap targets" id="targetHelp_5" style="position: relative">
+                <li class="travelMap targets position-relative" id="targetHelp_5">
                     <a style="color: #16174f" href="{{route('soon')}}">سفرنامه من</a>
                     <div id="helpSpan_5" class="helpSpans hidden row">
                         <span class="introjs-arrow"></span>
