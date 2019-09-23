@@ -704,3 +704,5 @@ Route::group(array('middleware' => ['throttle:30', 'nothing', 'auth']), function
     Route::post('deleteUserPicFromComment', array('as' => 'deleteUserPicFromComment', 'uses' => 'PlaceController@deleteUserPicFromComment'));
 });
 
+
+Route::get('emailtest', 'HomeController@emailtest');

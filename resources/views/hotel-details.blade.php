@@ -63,10 +63,10 @@ if ($total == 0)
     <link rel="stylesheet" href="{{URL::asset('css/theme2/hotelDetail.css')}}">
 
     {{--vr--}}
-    <link rel="stylesheet" href="/vr2/video-js.css">
-    <link rel="stylesheet" href="/vr2/videojs-vr.css">
-    <script src="/vr2/video.js"></script>
-    <script src="/vr2/videojs-vr.js"></script>
+    <link rel="stylesheet" href="{{URL::asset('vr2/video-js.css')}}">
+    <link rel="stylesheet" href="{{URL::asset('vr2/videojs-vr.css')}}">
+    <script src="{{URL::asset('vr2/video.js')}}"></script>
+    <script src="{{URL::asset('vr2/videojs-vr.js')}}"></script>
 
 @stop
 

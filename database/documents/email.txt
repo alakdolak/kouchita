@@ -1,0 +1,15 @@
+kiavash 1398/06/27
+
+for email i create a function in common.php:
+    sendEmail($text, $subject, $to)
+
+the $text argument can be html codes;
+
+for set settings you must add follow elements to .env:
+    {
+        mail_host_main = mail.koochita.com
+        mail_username_main = info@koochita.com
+        mail_password_main = pass123456
+    }
+        this values are defaults
+
