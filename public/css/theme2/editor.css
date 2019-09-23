@@ -1,0 +1,105 @@
+#editPane {
+    padding: 0;
+    width: 50%;
+    right: auto;
+    height: 90%;
+    top: 5%;
+    position: fixed;
+    left: 25%;
+}
+
+#editPane > div:nth-child(1) > div:nth-child(1) {
+    max-height: 600px;
+    overflow: auto
+}
+
+#actions {
+    margin: 20px
+}
+
+#photoEditor {
+    padding: 0;
+    width: 860px;
+    height: 90%;
+    top: 5%;
+    position: fixed;
+    left: 50%;
+    margin-left: -430px;
+    display: block !important;
+}
+
+#photoUploadHeader {
+    margin-right: 40px
+}
+
+#guidelinesOverlay {
+    position: fixed;
+    right: 460px;
+    left: auto;
+    top: 82px;
+    bottom: auto;
+}
+
+#uploader-dlg {
+    overflow: auto;
+    max-height: 100%
+}
+
+#uploader-dlg > div:nth-child(1) > div:nth-child(1) {
+    max-width: 100%
+}
+
+#uploader-dlg > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) {
+    width: 250px;
+    height: 200px
+}
+
+#image_file {
+    width: 213px;
+    height: 168px;
+    transform: rotate(0deg);
+}
+
+#uploader-dlg > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) {
+    width: 150px;
+    height: 150px;
+}
+
+#image_file_2 {
+    width: 100px;
+    height: 100px;
+    transform: rotate(0deg);
+}
+
+#uploader-dlg > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) {
+    margin-right: 30px
+}
+
+#uploader-dlg > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > form {
+    margin-left: 30px
+}
+
+#photoTags {
+    border: none !important;
+    float: right !important;
+}
+
+#description {
+    min-height: 100px;
+    max-height: 100px;
+    overflow: auto;
+}
+
+#pic {
+    padding: 9px 16px 8px;
+    position: absolute;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    display: none
+}
+
+#dropArea > div:nth-child(1) > div:nth-child(1) > label > div {
+    z-index: 1000
+}

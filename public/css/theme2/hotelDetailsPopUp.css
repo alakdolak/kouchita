@@ -56,7 +56,6 @@
     bottom: auto;
     overflow: auto;
     max-height: 500px;
-    display: block !important;
 }
 
 #reportPane .body_text .submitOptions button {
