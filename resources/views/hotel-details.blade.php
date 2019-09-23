@@ -1662,24 +1662,22 @@ if ($total == 0)
                         </div>
                     </div>
 
-                    <div id="nearbyDiv" ng-controller="NearbyController as nearby"
-                         class="ppr_rup ppr_priv_location_detail_two_column">
-
+                    <div id="nearbyDiv" ng-controller="NearbyController as nearby" class="ppr_rup ppr_priv_location_detail_two_column">
                         <div class="column_wrap ui_columns is-mobile">
                             <div class="content_column ui_column is-8">
                                 <div class="ppr_rup ppr_priv_location_nearby">
                                     <div class="nearbyContainer outerShell block_wrap">
-                                        <div class="block_header"><h3 class="block_title">مکان های نزدیک</h3></div>
-                                        <div class="ui_columns neighborhood"
-                                             style="padding-bottom: 22px;padding-top: 22px;">
-                                            <div id="map" class="ui_column is-12 mapTile prv_map clickable"
-                                                 style="float: right; height:224px; border: 1px solid #000;"></div>
+                                        <div class="block_header">
+                                            <h3 class="block_title">مکان های نزدیک</h3>
+                                        </div>
+                                        <div class="ui_columns neighborhood">
+                                            <div id="map" class="ui_column is-12 mapTile prv_map clickable"></div>
                                             <div class="clear-both"></div>
                                         </div>
-                                        <div class="prw_rup prw_common_btf_nearby_poi_grid poiGrid hotel"
-                                             style="border-color: #CCCCCC !important;">
-                                            <div class="sectionTitleWrap"><span
-                                                        class="sectionTitle">هتل های نزدیک</span></div>
+                                        <div class="prw_rup prw_common_btf_nearby_poi_grid poiGrid hotel">
+                                            <div class="sectionTitleWrap">
+                                                <span class="sectionTitle">هتل های نزدیک</span>
+                                            </div>
                                             <div class="ui_columns is-multiline container">
 
                                                 <div ng-repeat="hotel in hotels"
@@ -1687,18 +1685,15 @@ if ($total == 0)
                                                     <a href="[[hotel.redirect]]">
                                                         <div class="ui_columns is-gapless is-mobile poiEntry shownOnMap">
                                                         <div class="prw_rup prw_common_centered_image ui_column is-4 thumbnailWrap">
-                                                            <span class="imgWrap"
-                                                                  style="max-width:94px;max-height:80px;">
+                                                            <span class="imgWrap">
                                                                 <img alt="[[hotel.alt1]]" title="[[hotel.name]]"
-                                                                     ng-src="[[hotel.pic]]" class="centeredImg"
-                                                                     style=" min-width:80px; " width="100%"/>
+                                                                     ng-src="[[hotel.pic]]" class="centeredImg" width="100%"/>
                                                             </span>
                                                         </div>
                                                         <div title="[[hotel.name]]" class="poiInfo ui_column is-8">
                                                             <div class="poiName">[[hotel.name]]</div>
                                                             <div class="prw_rup prw_common_bubble_rating rating">
-                                                                <span class="[[hotel.ngClass]]" style="font-size:16px;"
-                                                                      property="ratingValue" content="5"></span>
+                                                                <span class="[[hotel.ngClass]]" property="ratingValue" content="5"></span>
                                                             </div>
                                                             <div class="reviewCount">[[hotel.reviews]] نقد</div>
                                                             <div class="distance">[[hotel.distance]] کلیومتر فاصله</div>
@@ -1710,10 +1705,10 @@ if ($total == 0)
                                                 <div class="clear-both"></div>
                                             </div>
                                         </div>
-                                        <div class="prw_rup prw_common_btf_nearby_poi_grid poiGrid eatery"
-                                             style="border-color: #CCCCCC !important;">
-                                            <div class="sectionTitleWrap"><span
-                                                        class="sectionTitle">رستوران های نزدیک</span></div>
+                                        <div class="prw_rup prw_common_btf_nearby_poi_grid poiGrid eatery">
+                                            <div class="sectionTitleWrap">
+                                                <span class="sectionTitle">رستوران های نزدیک</span>
+                                            </div>
                                             <div class="ui_columns is-multiline container">
 
                                                 <div ng-repeat="res in restaurants"
@@ -1722,18 +1717,15 @@ if ($total == 0)
                                                     <a href="[[res.redirect]]">
                                                         <div class="ui_columns is-gapless is-mobile poiEntry shownOnMap">
                                                         <div class="prw_rup prw_common_centered_image ui_column is-4 thumbnailWrap">
-                                                            <span class="imgWrap"
-                                                                  style="max-width:94px;max-height:80px;">
+                                                            <span class="imgWrap">
                                                                 <img alt="[[res.alt1]]" title="[[res.name]]"
-                                                                     ng-src="[[res.pic]]" class="centeredImg"
-                                                                     style=" min-width:80px; " width="100%"/>
+                                                                     ng-src="[[res.pic]]" class="centeredImg" width="100%"/>
                                                             </span>
                                                         </div>
                                                         <div title="[[res.name]]" class="poiInfo ui_column is-8">
                                                             <div class="poiName">[[res.name]]</div>
-                                                            <div class="prw_rup prw_common_bubble_rating rating">
-                                                                <span class="[[res.ngClass]]" style="font-size:16px;"
-                                                                      property="ratingValue" content="5"></span>
+                                                            <div class="prw_rup prw_common_bubble_rating rating font-size-16">
+                                                                <span class="[[res.ngClass]]" property="ratingValue" content="5"></span>
                                                             </div>
                                                             <div class="reviewCount">[[res.reviews]] نقد</div>
                                                             <div class="distance">[[res.distance]] کلیومتر فاصله</div>
@@ -1745,10 +1737,10 @@ if ($total == 0)
                                                 <div class="clear-both"></div>
                                             </div>
                                         </div>
-                                        <div class="prw_rup prw_common_btf_nearby_poi_grid poiGrid attraction"
-                                             style="border-color: #CCCCCC !important;">
-                                            <div class="sectionTitleWrap"><span
-                                                        class="sectionTitle">اماکن گردشگری نزدیک</span></div>
+                                        <div class="prw_rup prw_common_btf_nearby_poi_grid poiGrid attraction">
+                                            <div class="sectionTitleWrap">
+                                                <span class="sectionTitle">اماکن گردشگری نزدیک</span>
+                                            </div>
                                             <div class="ui_columns is-multiline container">
 
                                                 <div ng-repeat="amaken in amakens"
@@ -1756,25 +1748,22 @@ if ($total == 0)
                                                      class="prw_rup prw_common_btf_nearby_poi_entry ui_column is-6 poiTile">
                                                     <a href="[[amaken.redirect]]">
                                                         <div class="ui_columns is-gapless is-mobile poiEntry shownOnMap">
-                                                        <div class="prw_rup prw_common_centered_image ui_column is-4 thumbnailWrap">
-                                                            <span class="imgWrap"
-                                                                  style="max-width:94px;max-height:80px;">
-                                                                <img alt="[[amaken.alt1]]" title="[[amaken.name]]"
-                                                                     ng-src="[[amaken.pic]]" class="centeredImg"
-                                                                     style=" min-width:80px; " width="100%"/>
-                                                            </span>
-                                                        </div>
-                                                        <div title="[[amaken.name]]" class="poiInfo ui_column is-8">
-                                                            <div class="poiName">[[amaken.name]]</div>
-                                                            <div class="prw_rup prw_common_bubble_rating rating">
-                                                                <span class="[[amaken.ngClass]]" style="font-size:16px;"
-                                                                      property="ratingValue" content="5"></span>
+                                                            <div class="prw_rup prw_common_centered_image ui_column is-4 thumbnailWrap">
+                                                                <span class="imgWrap">
+                                                                    <img alt="[[amaken.alt1]]" title="[[amaken.name]]"
+                                                                         ng-src="[[amaken.pic]]" class="centeredImg" width="100%"/>
+                                                                </span>
                                                             </div>
-                                                            <div class="reviewCount">[[amaken.reviews]] نقد</div>
-                                                            <div class="distance">[[amaken.distance]] کلیومتر فاصله
+                                                            <div title="[[amaken.name]]" class="poiInfo ui_column is-8">
+                                                                <div class="poiName">[[amaken.name]]</div>
+                                                                <div class="prw_rup prw_common_bubble_rating rating font-size-16">
+                                                                    <span class="[[amaken.ngClass]]" property="ratingValue" content="5"></span>
+                                                                </div>
+                                                                <div class="reviewCount">[[amaken.reviews]] نقد</div>
+                                                                <div class="distance">[[amaken.distance]] کلیومتر فاصله
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
                                                     </a>
                                                 </div>
 
@@ -1787,7 +1776,7 @@ if ($total == 0)
                         </div>
                     </div>
 
-                    <div id="ansAndQeustionDiv" class="ppr_rup ppr_priv_location_qa relative-postion">
+                    <div id="ansAndQeustionDiv" class="ppr_rup ppr_priv_location_qa relative-position">
                         <div data-tab="TABS_ANSWERS" class="block_wrap relative-position">
                             <div class="block_header relative-position">
                                 <div id="targetHelp_14" class="targets float-left">
@@ -1807,15 +1796,14 @@ if ($total == 0)
                                 </div>
                                 <h3 class="block_title">سوال و جواب</h3>
                             </div>
-                            <div style="max-width: 60%; float: right; direction: rtl;"
-                                 class="askQuestionForm hidden control">
+                            <div class="askQuestionForm hidden control">
                                 <div class="askExplanation">سوال خودتو بپرس تا کسانی که می دونند کمکت کنند.</div>
                                 <div class="overlayNote">سوال شما به صورت عمومی نمایش داده خواهد شد.</div>
-                                <textarea style="width: 100%;" name="topicText" id="questionTextId"
+                                <textarea name="topicText" id="questionTextId"
                                           class="topicText ui_textarea"
                                           placeholder="سلام هرچی میخواهی بپرسید. بدون خجالت"></textarea>
                                 <span onclick="$('#rules').removeClass('hidden')" class="postingGuidelines float-left">راهنما و قوانین</span>
-                                <div class="underForm" style="float: left;margin-right: 10px;">
+                                <div class="underForm">
                                     <span class="ui_button primary formSubmit" onclick="askQuestion()">ثبت</span>
                                     <span class="ui_button secondary formCancel"
                                           onclick="hideAskQuestion()">انصراف</span>
@@ -1827,12 +1815,10 @@ if ($total == 0)
                             <div class="block_body_top relative-position">
 
                                 <div class="prw_rup prw_common_location_topic relative-position">
-                                    <div style="direction: rtl; position: relative"
-                                         class="question is-mobile ui_column is-12" id="questionsContainer"></div>
+                                    <div class="rtl relative-position question is-mobile ui_column is-12" id="questionsContainer"></div>
                                 </div>
 
-                                <div class="prw_rup prw_common_north_star_pagination"
-                                     id="pageNumQuestionContainer"></div>
+                                <div class="prw_rup prw_common_north_star_pagination" id="pageNumQuestionContainer"></div>
                             </div>
 
                             <div class="shouldUpdateOnLoad"></div>

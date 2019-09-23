@@ -1234,12 +1234,57 @@ p {
 }
 
 #photosDiv .block_body_top .imgWrap img {
-    min-width:267px
+    min-width: 267px
 }
 
 .poiTile {
     float: left;
 }
+
+#nearbyDiv > div > div > div > div > div:nth-child(2) {
+    padding-bottom: 22px;
+    padding-top: 22px;
+}
+
+#nearbyDiv .poiGrid {
+    border-color: #CCCCCC !important;
+}
+
+#nearbyDiv .poiGrid .poiTile .imgWrap {
+    max-width: 94px;
+    max-height: 80px;
+}
+
+#nearbyDiv .poiGrid .poiTile .imgWrap img {
+    min-width: 80px;
+}
+
+#nearbyDiv .poiGrid .poiTile .poiInfo span {
+    font-size: 16px;
+}
+
+#map {
+    float: right;
+    height: 224px;
+    border: 1px solid #000;
+}
+
+#ansAndQeustionDiv > div > div:nth-child(2) {
+    max-width: 60%;
+    float: right;
+    direction: rtl;
+}
+
+#questionTextId {
+    width: 100%;
+}
+
+#ansAndQeustionDiv > div > div:nth-child(2) > div:nth-child(5) {
+    float: left;
+    margin-right: 10px;
+}
+
+#ansAndQeustionDiv > div > div:nth-child(4)
 
 .full-height {
     height: 100%;
