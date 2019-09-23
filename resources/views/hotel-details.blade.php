@@ -878,19 +878,19 @@ if ($total == 0)
                                             </div>
                                             @if(!empty($place->phone))
                                                 <div class="blEntry phone" id="clientConnectionsPhone">
-                                                    <span class="ui_icon phone" style=""></span>
-                                                    <span style="">{{$place->phone}}</span>
+                                                    <span class="ui_icon phone"></span>
+                                                    <span>{{$place->phone}}</span>
                                                 </div>
                                             @endif
                                             @if(!empty($place->site))
-                                                <div class="blEntry website" id="clientConnectionsWebsite" style="">
+                                                <div class="blEntry website" id="clientConnectionsWebsite">
                                                     <span class="ui_icon laptop"></span>
                                                     <?php
                                                     if (strpos($place->site, 'http') === false)
                                                         $place->site = 'http://' . $place->site;
                                                     ?>
                                                     <a target="_blank" href="{{$place->site}}" {{($config->externalSiteNoFollow) ? 'rel="nofollow"' : ''}}>
-                                                        <span style="font-size: 12px;">{{$place->site}}</span>
+                                                        <span class="font-size-12">{{$place->site}}</span>
                                                     </a>
                                                 </div>
                                             @endif
@@ -1576,7 +1576,7 @@ if ($total == 0)
                                                 </div>
                                             </div>
                                             <div class="content">
-                                                <div class="hotelName" dir="auto" style="height: auto">[[place.name]]</div>
+                                                <div class="hotelName height-auto" dir="auto">[[place.name]]</div>
                                                 <div class="ratings">
                                                 <span>
                                                     <div class="prw_rup prw_common_bubble_rating bubbleRating">
@@ -3136,25 +3136,25 @@ if ($total == 0)
                             newElement += "<div id='trip_" + response[i].id + "' onclick='' class='trip-images ui_columns is-gapless is-multiline is-mobile tripResponse'>";
                         if (response[i].placeCount > 0) {
                             tmp = "url('" + response[i].pic1 + "')";
-                            newElement += "<div class='trip-image ui_column is-6' style='background: " + tmp + " repeat 0 0; background-size: 100% 100%'></div>";
+                            newElement += "<div class='trip-image ui_column is-6 bg-size-100-100' style='background: " + tmp + " repeat 0 0'></div>";
                         }
                         else
-                            newElement += "<div class='trip-image trip-image-empty ui_column is-6' style='background-color: #cfcfcf'></div>";
+                            newElement += "<div class='trip-image trip-image-empty ui_column is-6 bg-color-grey'></div>";
                         if (response[i].placeCount > 1) {
                             tmp = "url('" + response[i].pic2 + "')";
-                            newElement += "<div class='trip-image ui_column is-6' style='background: " + tmp + " repeat 0 0; background-size: 100% 100%'></div>";
+                            newElement += "<div class='trip-image ui_column is-6 bg-size-100-100' style='background: " + tmp + " repeat 0 0'></div>";
                         }
                         else
-                            newElement += "<div class='trip-image trip-image-empty ui_column is-6' style='background-color: #cfcfcf'></div>";
+                            newElement += "<div class='trip-image trip-image-empty ui_column is-6 bg-color-grey'></div>";
                         if (response[i].placeCount > 1) {
                             tmp = "url('" + response[i].pic3 + "')";
-                            newElement += "<div class='trip-image ui_column is-6' style='background: " + tmp + " repeat 0 0; background-size: 100% 100%'></div>";
+                            newElement += "<div class='trip-image ui_column is-6 bg-size-100-100' style='background: " + tmp + " repeat 0 0'></div>";
                         }
                         else
-                            newElement += "<div class='trip-image trip-image-empty ui_column is-6' style='background-color: #cfcfcf'></div>";
+                            newElement += "<div class='trip-image trip-image-empty ui_column is-6 bg-color-grey'></div>";
                         if (response[i].placeCount > 1) {
                             tmp = "url('" + response[i].pic4 + "')";
-                            newElement += "<div class='trip-image ui_column is-6' style='background: " + tmp + " repeat 0 0; background-size: 100% 100%'></div>";
+                            newElement += "<div class='trip-image ui_column is-6 bg-size-100-100' style='background: " + tmp + " repeat 0 0'></div>";
                         }
                         else
                             newElement += "<div class='trip-image trip-image-empty ui_column is-6 bg-color-grey'></div>";
@@ -3493,7 +3493,7 @@ if ($total == 0)
                     var newElement = "<p id='pagination-details' class='pagination-details'><b>" + response[0] + "</b> از <b>" + response[1] + "</b> نقد</p>";
                     if (response[1] == 0) {
                         tmp = "<p id='beTheFirstReviewer'>اولین نفری باشید که درباره ی این مکان نقد می نویسید</p>";
-                        tmp += "<span style='color: #FFF !important; max-width: 100px; float: right;' onclick='document.location.href = showAddReviewPageHotel('{{route('review', ['placeId' => $place->id, 'kindPlaceId' => $kindPlaceId])}}')' class='button_war write_review ui_button primary col-xs-12'>نوشتن نقد</span>";
+                        tmp += "<span id='writeTheFirstReviewer' onclick='document.location.href = showAddReviewPageHotel('{{route('review', ['placeId' => $place->id, 'kindPlaceId' => $kindPlaceId])}}')' class='button_war write_review ui_button primary col-xs-12'>نوشتن نقد</span>";
                         $("#reviewsContainer").empty().append(tmp);
                     }
                     for (i = 0; i < arr.length; i++) {
@@ -4412,7 +4412,7 @@ if ($total == 0)
             if (total <= 1)
                 return "";
             t = total - filters.length;
-            newElement = "<div class='col-xs-12 relative-position'><div class='col-xs-12 bubbles' style='padding: 0; margin-right: 0; margin-left: " + ((400 - (t * 18)) / 2) + "px'>";
+            newElement = "<div class='col-xs-12 relative-position'><div class='col-xs-12 bubbles padding-0 mg-rt-0' style='margin-left: " + ((400 - (t * 18)) / 2) + "px'>";
             for (i = 1; i < total; i++) {
                 if (!isInFilters(i)) {
                     if (i == curr)
@@ -4807,21 +4807,21 @@ if ($total == 0)
                         reserve_text += '<span>دارد</span>\n';
                         extra.push(true);
                     } else {
-                        reserve_money_text += '<span style="float: left;">' + dotedNumber(Math.floor(price / 1000) * 1000) + '</span>';
+                        reserve_money_text += '<span class="float-left">' + dotedNumber(Math.floor(price / 1000) * 1000) + '</span>';
                         reserve_text += '<span>ندارد</span>\n';
                         extra.push(false);
                     }
                     text += '</div>';
                     reserve_money_text += '</div>';
                     reserve_text += '</div>\n' +
-                        '</div><div class="row" style="display: flex; flex-direction: row;">\n' +
+                        '</div><div class="row display-flex flex-direction-row">\n' +
                         '<div>\n' +
-                        '<span style="color: #92321b"> صبحانه مجانی: </span>\n' +
+                        '<span class="color-darkred"> صبحانه مجانی: </span>\n' +
                         '<span>دارد</span>\n' +
                         '</div>\n' +
                         '</div>\n' +
                         '</div>\n';
-                    reserve_text += '<div class="col-md-3"><img src="'+rooms[i].pic+'" style="width: 100%;"></div></div>';
+                    reserve_text += '<div class="col-md-3"><img src="'+rooms[i].pic+'" class="full-width"></div></div>';
                 }
             }
             totalMoney += totalPerDayMoney * numDay;
