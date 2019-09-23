@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('specificPost/{id}', ['as' => 'specificPost', 'uses' => 'PostController@specificPost']);
 
+Route::get('updateBot', 'HomeController@updateBot');
+
 Route::get('gardeshname', function(){
     return view('gardeshname');
 });
@@ -178,11 +180,11 @@ Route::group(array('middleware' => ['throttle:30']), function () {
 
 });
 
+Route::post('uploadExcels', 'HomeController@uploadExcels');
+
+Route::post('doUploadExcels', 'HomeController@doUploadExcels');
+
 Route::group(array('middleware' => ['throttle:30', 'auth', 'adminAccess']), function () {
-
-    Route::post('uploadExcels', 'HomeController@uploadExcels');
-
-    Route::post('doUploadExcels', 'HomeController@doUploadExcels');
 
     Route::get('fillState', 'HomeController@fillState');
 
@@ -196,7 +198,7 @@ Route::group(array('middleware' => ['throttle:30', 'auth', 'adminAccess']), func
 
     Route::get('updateAmakensFile', 'HomeController@updateAmakensFile');
 
-    Route::any('updateBot', 'HomeController@updateBot');
+//    Route::any('updateBot', 'HomeController@updateBot');
 
     Route::get('export/{mode}', 'HomeController@export');
 

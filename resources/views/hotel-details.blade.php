@@ -63,10 +63,13 @@ if ($total == 0)
     <link rel="stylesheet" href="{{URL::asset('css/theme2/hotelDetail.css')}}">
 
     {{--vr--}}
-    <link rel="stylesheet" href="/vr2/video-js.css">
-    <link rel="stylesheet" href="/vr2/videojs-vr.css">
-    <script src="/vr2/video.js"></script>
-    <script src="/vr2/videojs-vr.js"></script>
+
+    @if($video != null)
+        <link rel="stylesheet" href="{{URL::asset('vr2/video-js.css')}}">
+        <link rel="stylesheet" href="{{URL::asset('vr2/videojs-vr.css')}}">
+        <script src="{{URL::asset('vr2/video.js')}}"></script>
+        <script src="{{URL::asset('vr2/videojs-vr.js')}}"></script>
+    @endif
 
 @stop
 
@@ -1831,25 +1834,26 @@ if ($total == 0)
     </div>
 
 
-    <!-- The Modal -->
-    {{--vr--}}
-    <div class="modal" id="myModal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <!-- Modal body -->
-                <div class="modal-body">
-                    @if($video != null)
-                    <video  width="640" height="300" id="my-video" class="video-js vjs-default-skin">
-                        <source src="{{URL::asset($video)}}" type="video/mp4">
-                    </video>
-                    @else
-                        ویدیویی برای نمایش موجود نمی باشد.
-                    @endif
+    @if($video != null)
+        <!-- The Modal -->
+        {{--vr--}}
+        <div class="modal" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        @if($video != null)
+                            <video  width="640" height="300" id="my-video" class="video-js vjs-default-skin">
+                            <source src="{{URL::asset('vr2/contents/' . $video)}}" type="video/mp4">
+                        </video>
+                        @else
+                            ویدیویی برای نمایش موجود نمی باشد.
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <script>
+        <script>
         (function(window, videojs) {
             var player = window.player = videojs('my-video');
             player.mediainfo = player.mediainfo || {};
@@ -1869,6 +1873,7 @@ if ($total == 0)
         }
 
     </script>
+    @endif
 
     @include('hotelDetailsPopUp')
     @include('editor')
