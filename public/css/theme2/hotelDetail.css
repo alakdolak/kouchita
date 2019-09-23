@@ -1284,7 +1284,217 @@ p {
     margin-right: 10px;
 }
 
-#ansAndQeustionDiv > div > div:nth-child(4)
+#myTotalPane {
+    width: 100%
+}
+
+#itemPicInExtendedMap {
+    height: 80px;
+    width: 40%;
+    display: inline-block;
+}
+
+#myTotalPane > a:nth-child(2) {
+    display: inline-block;
+    margin-right: 5%;
+    font-size: 110%;
+}
+
+#myTotalPane > div:nth-child(3) {
+    display: block;
+    margin-top: -18%;
+    margin-right: 45%;
+}
+
+#star1 {
+    font-size: 20px;
+}
+
+#rev1 {
+    margin-right: 10%;
+    font-size: 115%;
+}
+
+#extendedMapDistanceHeader {
+    margin-right: 42%;
+    margin-top: 2%
+}
+
+#address1 {
+    display: block;
+    font-size: 130%;
+    margin-top: 6%;
+}
+
+.tripResponse {
+    width: 150px;
+    height: 150px;
+    border: 2px solid #4DC7BC;
+    cursor: pointer;
+}
+
+#pagination-details {
+    clear: both;
+    padding: 12px 0 !important;
+}
+
+#beTheFirstReviewer {
+    font-size: 15px;
+    color: #b7b7b7;
+    float: right;
+    margin: 8px 5px 8px 20px !important
+}
+
+.imgWrap .fixedAspect {
+    max-width: 80px;
+    padding-bottom: 100.000%
+}
+
+.partial-entry-paragraph {
+    line-height: 20px;
+    max-height: 70px;
+    overflow: hidden;
+    padding: 10px;
+    font-size: 12px
+}
+
+.showMoreReviewDiv {
+    color: #16174f;
+    cursor: pointer;
+    text-align: left;
+}
+
+#reportSpanReviews {
+    cursor: pointer;
+    font-size: 10px;
+    color: #16174f
+}
+
+#showReportReviews2 {
+    cursor: pointer;
+    font-size: 10px;
+}
+
+#targetHelp_15 {
+    max-width: 100px;
+    margin: 0 !important;
+    float: right;
+}
+
+.showAllComments {
+    float: right;
+    margin-top: 12px
+}
+
+#customDefinedReport {
+    width: 375px;
+    height: 120px;
+    padding: 5px !important;
+    margin-top: 5px;
+}
+
+#custom-define-report {
+    visibility: hidden
+}
+
+#arrowHotelDetails {
+    margin: 0 30px 155px 0;
+}
+
+#notInFiltersDiv {
+    border: 1px solid #ccc;
+    background-color: #ccc;
+    border-radius: 50%;
+    margin-right: 2px;
+    width: 12px;
+    height: 12px;
+    float: left;
+}
+
+#isInFilterDiv {
+    border: 1px solid #333;
+    background-color: black;
+    border-radius: 50%;
+    margin-right: 2px;
+    width: 12px;
+    height: 12px;
+    float: left
+}
+
+#changeNumRoomMainDiv {
+    background: white;
+    margin: 1px 1px 10px 1px;
+    box-shadow: 0 0 20px 0 gray;
+}
+
+#changeNumRoomMainDiv > div:nth-child(1) {
+    font-size: 15px;
+    padding-top: 2%;
+}
+
+#changeNumRoomMainDiv > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) {
+    width: 33%
+}
+
+#changeNumRoomMainDiv > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > span:nth-child(1) {
+    color: #92321b
+}
+
+.mg-2percent {
+    margin: 2% 0;
+}
+
+.font-size-085em {
+    font-size: 0.85em;
+}
+
+.width-33percent {
+    width: 33%;
+}
+
+.display-flex {
+    display: flex;
+}
+
+.flex-direction-row {
+    flex-direction: row;
+}
+
+.bg-color-grey {
+    background-color: #cfcfcf
+}
+
+.mg-rt-22percent {
+    margin-right: 22%;
+}
+
+.font-size-1em {
+    font-size: 1em;
+}
+
+.font-size-10 {
+    font-size: 10px;
+}
+
+.text-align-center {
+    text-align: center;
+}
+
+.mg-bt-5 {
+    margin-bottom: 5px;
+}
+
+.border-radius-100 {
+    border-radius: 100%;
+}
+
+.border-bottom-grey {
+    border-bottom: 1px solid #E3E3E3
+}
+
+.display-inline {
+    display: inline;
+}
 
 .full-height {
     height: 100%;
@@ -1324,6 +1534,18 @@ p {
     font-size: 28px;
 }
 
+.font-size-20 {
+    font-size: 20px;
+}
+
+.font-size-20Imp {
+    font-size: 20px !important;
+}
+
+.font-size-12em {
+    font-size: 1.2em
+}
+
 .ltrImp {
     direction: ltr !important;
 }
@@ -1338,6 +1560,14 @@ p {
 
 .float-left {
     float: left;
+}
+
+.float-right {
+    float: right;
+}
+
+.float-rightImp {
+    float: right !important;
 }
 
 .rtl {

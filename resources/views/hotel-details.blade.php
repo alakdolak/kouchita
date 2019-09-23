@@ -2384,17 +2384,17 @@ if ($total == 0)
                     // classRatingHover.content = '5';
                     break;
             }
-            var hoverContent = "<div id='myTotalPane' style='width:100%'><img id='itemPicInExtendedMap' style='height: 80px; width: 40%; display:inline-block;' src=" + '{{URL::asset('images/loading.svg')}}' + " >" +
-                "<a href='" + name.url + "' style='display: inline-block; margin-right: 5%; font-size: 110%;'>" + name.name + "</a>" +
-                "<div class='rating' style='display: block;margin-top: -18%; margin-right: 45%;'>" +
+            var hoverContent = "<div id='myTotalPane'><img id='itemPicInExtendedMap' src=" + '{{URL::asset('images/loading.svg')}}' + " >" +
+                "<a href='" + name.url + ">" + name.name + "</a>" +
+                "<div class='rating'>" +
                 "<span id='rateNum1' class='overallRating'> </span>" +
-                "<div class='prw_rup prw_common_bubble_rating overallBubbleRating' style='display: inline;'>" +
-                "<span id='star1' class='" + classRatingHover + "' style='font-size:20px;' property='ratingValue' content='' ></span>" +
+                "<div class='prw_rup prw_common_bubble_rating overallBubbleRating inline'>" +
+                "<span id='star1' class='" + classRatingHover + " property='ratingValue' content='' ></span>" +
                 "</div>" +
-                "<span id='rev1' class='autoResize' style='margin-right: 10%;font-size: 115%;'>" + name.reviews + "نقد </span>" +
+                "<span id='rev1' class='autoResize'>" + name.reviews + "نقد </span>" +
                 "</div>" +
-                "<h1 style='margin-right:42%; margin-top:2%'>فاصله :" + name.distance * 1000 + "متر</h1>" +
-                "<h1 id='address1' style='display: block; font-size: 130%; margin-top: 6%;'>" + name.address + "</h1>" +
+                "<h1 id='extendedMapDistanceHeader'>فاصله :" + name.distance * 1000 + "متر</h1>" +
+                "<h1 id='address1'>" + name.address + "</h1>" +
                 "</div>";
             var infowindow = new google.maps.InfoWindow({
                 content: hoverContent,
@@ -3121,13 +3121,13 @@ if ($total == 0)
                     response = JSON.parse(response);
                     var newElement = "<div class='row'>";
                     for (i = 0; i < response.length; i++) {
-                        newElement += "<div class='col-xs-3' style='cursor: pointer' onclick='addToSelectedTrips(\"" + response[i].id + "\")'>";
+                        newElement += "<div class='col-xs-3' class='cursor-pointer' onclick='addToSelectedTrips(\"" + response[i].id + "\")'>";
                         if (response[i].select == "1") {
-                            newElement += "<div id='trip_" + response[i].id + "' style='width: 150px; height: 150px; border: 2px solid #4DC7BC;cursor: pointer;' onclick='' class='trip-images ui_columns is-gapless is-multiline is-mobile'>";
+                            newElement += "<div id='trip_" + response[i].id + "' onclick='' class='trip-images ui_columns is-gapless is-multiline is-mobile tripResponse'>";
                             selectedTrips[selectedTrips.length] = response[i].id;
                         }
                         else
-                            newElement += "<div id='trip_" + response[i].id + "' style='width: 150px; height: 150px; border: 2px solid #a0a0a0;cursor: pointer;' onclick='' class='trip-images ui_columns is-gapless is-multiline is-mobile'>";
+                            newElement += "<div id='trip_" + response[i].id + "' onclick='' class='trip-images ui_columns is-gapless is-multiline is-mobile tripResponse'>";
                         if (response[i].placeCount > 0) {
                             tmp = "url('" + response[i].pic1 + "')";
                             newElement += "<div class='trip-image ui_column is-6' style='background: " + tmp + " repeat 0 0; background-size: 100% 100%'></div>";
@@ -3151,13 +3151,13 @@ if ($total == 0)
                             newElement += "<div class='trip-image ui_column is-6' style='background: " + tmp + " repeat 0 0; background-size: 100% 100%'></div>";
                         }
                         else
-                            newElement += "<div class='trip-image trip-image-empty ui_column is-6' style='background-color: #cfcfcf'></div>";
-                        newElement += "</div><div class='create-trip-text' style='font-size: 1.2em;'>" + response[i].name + "</div>";
+                            newElement += "<div class='trip-image trip-image-empty ui_column is-6 bg-color-grey'></div>";
+                        newElement += "</div><div class='create-trip-text font-size-12em'>" + response[i].name + "</div>";
                         newElement += "</div>";
                     }
                     newElement += "<div class='col-xs-3'>";
                     newElement += "<a onclick='showPopUp()' class='single-tile is-create-trip'>";
-                    newElement += "<div class='tile-content' style='font-size: 20px !important; text-align: center'>";
+                    newElement += "<div class='tile-content text-align-center font-size-20Imp'>";
                     newElement += "<span class='ui_icon plus'></span>";
                     newElement += "<div class='create-trip-text'>ایجاد سفر</div>";
                     newElement += "</div></a></div>";
@@ -3484,26 +3484,26 @@ if ($total == 0)
                     response = JSON.parse(response);
                     $(".seeAllReviews").empty().append(response[1] + " نقد");
                     $(".reviews_header_count").empty().append("(" + response[1] + " نقد)");
-                    var newElement = "<p id='pagination-details' class='pagination-details' style='clear: both; padding: 12px 0 !important;'><b>" + response[0] + "</b> از <b>" + response[1] + "</b> نقد</p>";
+                    var newElement = "<p id='pagination-details' class='pagination-details'><b>" + response[0] + "</b> از <b>" + response[1] + "</b> نقد</p>";
                     if (response[1] == 0) {
-                        tmp = "<p style='font-size: 15px; color: #b7b7b7; float: right; margin: 8px 5px 8px 20px !important'>اولین نفری باشید که درباره ی این مکان نقد می نویسید</p>";
+                        tmp = "<p id='beTheFirstReviewer'>اولین نفری باشید که درباره ی این مکان نقد می نویسید</p>";
                         tmp += "<span style='color: #FFF !important; max-width: 100px; float: right;' onclick='document.location.href = showAddReviewPageHotel('{{route('review', ['placeId' => $place->id, 'kindPlaceId' => $kindPlaceId])}}')' class='button_war write_review ui_button primary col-xs-12'>نوشتن نقد</span>";
                         $("#reviewsContainer").empty().append(tmp);
                     }
                     for (i = 0; i < arr.length; i++) {
-                        newElement += "<div style='border-bottom: 1px solid #E3E3E3;' class='review'>";
+                        newElement += "<div class='border-bottom-grey' class='review'>";
                         newElement += "<div class='prw_rup prw_reviews_basic_review_hsx'>";
                         newElement += "<div class='reviewSelector'>";
                         newElement += "<div class='review hsx_review ui_columns is-multiline inlineReviewUpdate provider0'>";
-                        newElement += "<div class='ui_column is-2' style='float: right;'>";
+                        newElement += "<div class='ui_column is-2 float-right'>";
                         newElement += "<div class='prw_rup prw_reviews_member_info_hsx'>";
                         newElement += "<div class='member_info'>";
                         newElement += "<div class='avatar_wrap'>";
                         newElement += "<div class='prw_rup prw_common_centered_image qa_avatar' onmouseleave='$(\".img_popUp\").addClass(\"hidden\");' onmouseenter='showBriefPopUp(this, \"" + arr[i].visitorId + "\")'>";
-                        newElement += "<span class='imgWrap fixedAspect' style='max-width:80px; padding-bottom:100.000%'>";
-                        newElement += "<img src='" + arr[i].visitorPic + "' class='centeredImg' height='100%' style='border-radius: 100%;'/>";
+                        newElement += "<span class='imgWrap fixedAspect'>";
+                        newElement += "<img src='" + arr[i].visitorPic + "' class='centeredImg border-radius-100' height='100%'/>";
                         newElement += "</span></div>";
-                        newElement += "<div class='username' style='text-align: center;margin-top: 5px;'>" + arr[i].visitorId + "</div>";
+                        newElement += "<div class='username text-align-center mg-bt-5'>" + arr[i].visitorId + "</div>";
                         newElement += "</div>";
                         newElement += "<div class='memberOverlayLink'>";
                         newElement += "<div class='memberBadgingNoText'><span class='ui_icon pencil-paper'></span><span class='badgetext'>" + arr[i].comments + "</span>&nbsp;&nbsp;";
@@ -3511,7 +3511,7 @@ if ($total == 0)
                         newElement += "<span class='ui_icon thumbs-down-fill'></span><span id='commentDislikes_" + arr[i].id + "' data-val='" + arr[i].dislikes + "' class='badgetext'>" + arr[i].dislikes + "</span>";
                         newElement += "</div>";
                         newElement += "</div></div></div></div>";
-                        newElement += "<div class='ui_column is-9' style='float: right;'>";
+                        newElement += "<div class='ui_column is-9 float-right'>";
                         newElement += "<div class='innerBubble'>";
                         newElement += "<div class='wrap'>";
                         newElement += "<div class='rating reviewItemInline'>";
@@ -3532,17 +3532,17 @@ if ($total == 0)
                                 newElement += "<span class='ui_bubble_rating bubble_10'></span>";
                                 break;
                         }
-                        newElement += "<span class='ratingDate relativeDate' style='float: right;'>نوشته شده در تاریخ " + arr[i].date + " </span></div>";
-                        newElement += "<div class='quote isNew'><a href='" + homeURL + "/showReview/" + arr[i].id + "'><h2 style='font-size: 1em;' class='noQuotes'>" + arr[i].subject + "</h2></a></div>";
+                        newElement += "<span class='ratingDate relativeDate float-right'>نوشته شده در تاریخ " + arr[i].date + " </span></div>";
+                        newElement += "<div class='quote isNew'><a href='" + homeURL + "/showReview/" + arr[i].id + "'><h2 class='font-size-1em noQuotes'>" + arr[i].subject + "</h2></a></div>";
                         newElement += "<div class='prw_rup prw_reviews_text_summary_hsx'>";
                         newElement += "<div class='entry'>";
-                        newElement += "<p class='partial_entry' id='partial_entry_" + arr[i].id + "' style='line-height: 20px; max-height: 70px; overflow: hidden; padding: 10px; font-size: 12px'>" + arr[i].text;
+                        newElement += "<p class='partial_entry partial-entry-paragraph' id='partial_entry_" + arr[i].id + "'>" + arr[i].text;
                         newElement += "</p>";
-                        newElement += "<div style='color: #16174f;cursor: pointer;text-align: left;' id='showMoreReview_" + arr[i].id + "' class='hidden' onclick='showMoreReview(" + arr[i].id + ")'>بیشتر</div></div></div>";
+                        newElement += "<div id='showMoreReview_" + arr[i].id + "' class='hidden showMoreReviewDiv' onclick='showMoreReview(" + arr[i].id + ")'>بیشتر</div></div></div>";
                         if (arr[i].pic != -1)
                             newElement += "<div><img id='reviewPic_" + arr[i].id + "' class='hidden' width='150px' height='150px' src='" + arr[i].pic + "'></div>";
                         newElement += "<div class='prw_rup prw_reviews_vote_line_hsx'>";
-                        newElement += "<div class='tooltips wrap'><span style='cursor: pointer;font-size: 10px;color: #16174f' onclick='showReportPrompt(\"" + arr[i].id + "\")' class='taLnk no_cpu ui_icon '>گزارش تخلف</span></div>";
+                        newElement += "<div class='tooltips wrap'><span id='reportSpanReviews' onclick='showReportPrompt(\"" + arr[i].id + "\")' class='taLnk no_cpu ui_icon '>گزارش تخلف</span></div>";
                         newElement += "<div class='helpful redesigned hsx_helpful'>";
                         newElement += "<span onclick='likeComment(\"" + arr[i].id + "\")' class='thankButton hsx_thank_button'>";
                         newElement += "<span class='helpful_text'><span class='ui_icon thumbs-up-fill emphasizeWithColor'></span><span class='numHelp emphasizeWithColor'></span><span class='thankUser'>" + arr[i].visitorId + " </span></span>";
@@ -3621,18 +3621,18 @@ if ($total == 0)
             var newElement;
 
             for (i = 0; i < arr.length; i++) {
-                newElement = "<div class='ui_column is-12' style='position: relative'><div class='ui_column is-2' style='float: right;'>";
+                newElement = "<div class='ui_column is-12 relative-position float-right'><div class='ui_column is-2'>";
                 newElement += "<div class='avatar_wrap'>";
                 newElement += "<div class='prw_rup prw_common_centered_image qa_avatar' onmouseleave='$(\".img_popUp\").addClass(\"hidden\");' onmouseenter='showBriefPopUp(this, \"" + arr[i].visitorId + "\")'>";
-                newElement += "<span class='imgWrap fixedAspect' style='max-width:80px; padding-bottom:100.000%'>";
+                newElement += "<span class='imgWrap fixedAspect'>";
                 newElement += "<img src='" + arr[i].visitorPic + "' class='centeredImg' height='100%'/>";
                 newElement += "</span></div>";
                 newElement += "<div class='username'>" + arr[i].visitorId + "</div>";
                 newElement += "</div></div>";
-                newElement += "<div class='ui_column is-8' style='position: relative'><a href='" + homeURL + "/seeAllAns/" + arr[i].id + "'>" + arr[i].text + "</a>";
-                newElement += "<div class='question_date'>" + arr[i].date + "<span class='iapSep'>|</span><span style='cursor: pointer;font-size:10px;' onclick='showReportPrompt(\"" + arr[i].id + "\")' class='ui_icon'>گزارش تخلف</span></div>";
+                newElement += "<div class='ui_column is-8 relative-position'><a href='" + homeURL + "/seeAllAns/" + arr[i].id + "'>" + arr[i].text + "</a>";
+                newElement += "<div class='question_date'>" + arr[i].date + "<span class='iapSep'>|</span><span id='showReportReviews2' onclick='showReportPrompt(\"" + arr[i].id + "\")' class='ui_icon'>گزارش تخلف</span></div>";
                 if (i == 0) {
-                    newElement += "<div id='targetHelp_15' style='max-width: 100px; margin: 0 !important; float: right;' class='targets row'><span class='col-xs-12 ui_button primary small answerButton' onclick='showAnsPane(\"" + arr[i].id + "\")'>پاسخ ";
+                    newElement += "<div id='targetHelp_15' class='targets row'><span class='col-xs-12 ui_button primary small answerButton' onclick='showAnsPane(\"" + arr[i].id + "\")'>پاسخ ";
                     newElement += "</span>";
                     newElement += '<div id="helpSpan_15" class="helpSpans hidden">';
                     newElement += '<span class="introjs-arrow"></span>';
@@ -3646,10 +3646,10 @@ if ($total == 0)
                     newElement += "</div>";
                 }
                 else {
-                    newElement += "<span class='ui_button primary small answerButton' style='float: right;' onclick='showAnsPane(\"" + arr[i].id + "\")'>پاسخ ";
+                    newElement += "<span class='ui_button primary small answerButton float-right' onclick='showAnsPane(\"" + arr[i].id + "\")'>پاسخ ";
                     newElement += "</span>";
                 }
-                newElement += "<span style='float: right; margin-top: 12px' class='ui_button secondary small' id='showAll_" + arr[i].id + "' onclick='showAllAns(\"" + arr[i].id + "\", -1)'>نمایش " + arr[i].ansNum + " جواب</span> ";
+                newElement += "<span class='showAllComments ui_button secondary small' id='showAll_" + arr[i].id + "' onclick='showAllAns(\"" + arr[i].id + "\", -1)'>نمایش " + arr[i].ansNum + " جواب</span> ";
                 newElement += "<span class='ui_button secondary small hidden' id='hideAll_" + arr[i].id + "' onclick='showAllAns(\"" + arr[i].id + "\", 1)'>پنهان کردن جواب ها</span>";
                 newElement += "<div class='confirmDeleteExplanation hidden'>آیا می خواهی این سوال حذف شود ؟</div>";
                 newElement += "<span class='ui_button primary small delete hidden'>Delete</span>";
@@ -3659,13 +3659,13 @@ if ($total == 0)
                 newElement += "<div class='whatIsYourAnswer'>جواب شما چیست ؟</div>";
                 newElement += "<textarea class='answerText ui_textarea' id='answerText_" + arr[i].id + "' placeholder='سلام ، جواب خود را وارد کنید'></textarea>";
                 newElement += "<ul class='errors hidden'></ul>";
-                newElement += "<a target='_blank' href='" + soon + "' class='postingGuidelines' style='float: left;'>راهنما  و قوانین</a>";
+                newElement += "<a target='_blank' href='" + soon + "' class='postingGuidelines float-left'>راهنما  و قوانین</a>";
                 newElement += "<div><span class='ui_button primary small formSubmit' onclick='sendAns(\"" + arr[i].id + "\")'>ارسال</span>";
                 newElement += "<span class='ui_button secondary small' onclick='hideAnsPane()'>لغو</span></div>";
                 newElement += "<div class='captcha_here'></div>";
                 newElement += "</div>";
-                newElement += "<div id='response_" + arr[i].id + "' class='answerList hidden' style='clear:both !important;'>";
-                newElement += "</div><p id='ans_err_" + arr[i].id + "'></p></div></div><div style='clear: both;'></div> ";
+                newElement += "<div id='response_" + arr[i].id + "' class='answerList hidden clear-both'>";
+                newElement += "</div><p id='ans_err_" + arr[i].id + "'></p></div></div><div class='clear-both'></div> ";
                 $("#questionsContainer").append(newElement);
             }
             $("#pageNumQuestionContainer").empty();
@@ -3709,7 +3709,7 @@ if ($total == 0)
         function customReport() {
             if ($("#custom-checkBox").is(':checked')) {
                 var newElement = "<div class='col-xs-12'>";
-                newElement += "<textarea id='customDefinedReport' style='width: 375px; height:120px; padding: 5px !important; margin-top: 5px;' maxlength='1000' required placeholder='حداکثر 1000 کاراکتر'></textarea>";
+                newElement += "<textarea id='customDefinedReport' maxlength='1000' required placeholder='حداکثر 1000 کاراکتر'></textarea>";
                 newElement += "</label></div>";
                 $("#custom-define-report").empty().append(newElement).css("visibility", "visible");
             }
@@ -3752,7 +3752,7 @@ if ($total == 0)
                     newElement += "<span></span>&nbsp;&nbsp;";
                     newElement += "سایر موارد</label>";
                     newElement += "</div></div>";
-                    newElement += "<div id='custom-define-report' style='visibility: hidden'></div>";
+                    newElement += "<div id='custom-define-report'></div>";
                     newElement += "</div>";
                     $("#reports").append(newElement);
                     if (response != "" && response.length > 0 && response[0].text != "") {
@@ -3876,9 +3876,9 @@ if ($total == 0)
                     for (i = 0; i < response.length; i++) {
                         newElement += "<div class='prw_rup prw_common_location_posting'>";
                         newElement += "<div class='response'>";
-                        newElement += "<div class='header' style='margin-right:22%;'><span>پاسخ از " + response[i].visitorId + "</span> | ";
+                        newElement += "<div class='header mg-rt-22percent'><span>پاسخ از " + response[i].visitorId + "</span> | ";
                         newElement += "<span class='iapSep'>|</span>";
-                        newElement += "<span style='cursor: pointer;font-size:10px;' onclick='showReportPrompt(\"" + response[i].id + "\")' class='ui_icon '>گزارش تخلف</span>";
+                        newElement += "<span onclick='showReportPrompt(\"" + response[i].id + "\")' class='ui_icon cursor-pointer font-size-10'>گزارش تخلف</span>";
                         newElement += "</div>";
                         newElement += "<div class='content'>";
                         newElement += "<div class='abbreviate'>" + response[i].text;
@@ -4059,7 +4059,7 @@ if ($total == 0)
                     response = JSON.parse(response);
                     newElement = "";
                     for (i = 0; i < response.length; i++) {
-                        newElement += '<div class="ui_input_checkbox radioOption" style="float: right !important;">';
+                        newElement += '<div class="ui_input_checkbox radioOption float-rightImp">';
                         newElement += '<input type="radio" name="mask" value="' + response[i].id + '" id="cat_file_' + response[i].id + '">';
                         newElement += '<label class="labelForCheckBox" for="cat_file_' + response[i].id + '">';
                         newElement += '<span></span>&nbsp;&nbsp;';
@@ -4086,7 +4086,7 @@ if ($total == 0)
                     response = JSON.parse(response);
                     total = response.excellent + response.veryGood + response.average + response.bad + response.veryBad;
                     total /= 100;
-                    var newElement = "<div class='arrow' style='margin: 0 30px 155px 0;'></div>";
+                    var newElement = "<div class='arrow' id='arrowHotelDetails'></div>";
                     newElement += "<div class='body_text'>";
                     newElement += "<div class='memberOverlay simple container moRedesign'>";
                     newElement += "<div class='innerContent'>";
@@ -4406,13 +4406,13 @@ if ($total == 0)
             if (total <= 1)
                 return "";
             t = total - filters.length;
-            newElement = "<div class='col-xs-12' style='position: relative'><div class='col-xs-12 bubbles' style='padding: 0; margin-right: 0; margin-left: " + ((400 - (t * 18)) / 2) + "px'>";
+            newElement = "<div class='col-xs-12 relative-position'><div class='col-xs-12 bubbles' style='padding: 0; margin-right: 0; margin-left: " + ((400 - (t * 18)) / 2) + "px'>";
             for (i = 1; i < total; i++) {
                 if (!isInFilters(i)) {
                     if (i == curr)
-                        newElement += "<div style='border: 1px solid #ccc; background-color: #ccc; border-radius: 50%; margin-right: 2px; width: 12px; height: 12px; float: left'></div>";
+                        newElement += "<div id='notInFiltersDiv'></div>";
                     else
-                        newElement += "<div onclick='show(\"" + i + "\", 1)' class='helpBubble' style='border: 1px solid #333; background-color: black; border-radius: 50%; margin-right: 2px; width: 12px; height: 12px; float: left'></div>";
+                        newElement += "<div id='isInFilterDiv' onclick='show(\"" + i + "\", 1)' class='helpBubble'></div>";
                 }
             }
             newElement += "</div></div>";
@@ -4641,7 +4641,7 @@ if ($total == 0)
                     $("#childrenPassengerNumInSelect1").empty().append(children);
                     break;
             }
-            var text = '<span style="float: right;">' + room + '</span>&nbsp;\n' +
+            var text = '<span class="float-right">' + room + '</span>&nbsp;\n' +
                 '                                                <span>اتاق</span>&nbsp;-&nbsp;\n' +
                 '                                                <span id="childPassengerNo">' + adult + '</span>\n' +
                 '                                                <span>بزرگسال</span>&nbsp;-&nbsp;\n' +
@@ -4770,33 +4770,33 @@ if ($total == 0)
                     num_room_code.push(numRoom);
                     room_name.push(rooms[i].name);
                     text += '<div><span>X' + numRoom + '</span>' + rooms[i].name;
-                    reserve_money_text += '<div><span style="float: right">X' + numRoom + '</span><span style="float: right">' + rooms[i].name + '</span>';
-                    reserve_text += '<div class="row" style="background: white; margin: 1px; box-shadow: 0 0 20px 0px gray; margin-bottom: 10px; ">\n' +
-                        '<div class="col-md-9" style="font-size: 15px; padding-top: 2%;">\n' +
-                        '<div class="row" style="display: flex; flex-direction: row;">\n' +
-                        '<div style="width: 33%">\n' +
-                        '<span style="color: #92321b">نام اتاق: </span>\n' +
+                    reserve_money_text += '<div><span class="float-right">X' + numRoom + '</span><span class="float-right">' + rooms[i].name + '</span>';
+                    reserve_text += '<div id="changeNumRoomMainDiv" class="row">\n' +
+                        '<div class="col-md-9">\n' +
+                        '<div class="row display-flex flex-direction-row">\n' +
+                        '<div>\n' +
+                        '<span class="color-darkred">نام اتاق: </span>\n' +
                         '<span>' + rooms[i].name + '</span>\n' +
                         '</div>\n' +
-                        '<div style="width: 33%">\n' +
-                        '<span style="color: #92321b">تاریخ ورود: </span>\n' +
+                        '<div class=".width-33percent">\n' +
+                        '<span class="color-darkred">تاریخ ورود: </span>\n' +
                         '<span>{{session("goDate")}}</span>\n' +
                         '</div>\n' +
-                        '<div style="width: 33%">\n' +
-                        '<span style="color: #92321b">تاریخ خروج: </span>\n' +
+                        '<div class=".width-33percent">\n' +
+                        '<span class="color-darkred">تاریخ خروج: </span>\n' +
                         '<span>{{session("backDate")}}</span>\n' +
                         '</div>\n' +
                         '</div>\n' +
-                        '<div class="row" style="display: flex; flex-direction: row; margin-bottom: 2%; margin-top: 2%;">\n' +
-                        '<div style="width: 33%">\n' +
-                        '<span style="color: #92321b">تعداد مسافر: </span>\n' +
+                        '<div class="row display-flex flex-direction-row mg-2percent">\n' +
+                        '<div class=".width-33percent">\n' +
+                        '<span class="color-darkred">تعداد مسافر: </span>\n' +
                         '<span>' + rooms[i].capacity.adultCount + '</span>\n' +
                         '</div>\n' +
-                        '<div style="width: 33%">\n' +
-                        '<span style="color: #92321b">سرویس تخت اضافه: </span>\n';
+                        '<div class=".width-33percent">\n' +
+                        '<span class="color-darkred">سرویس تخت اضافه: </span>\n';
                     if (extraBed) {
-                        text += '<span style="font-size: 0.85em">با تخت اضافه</span>';
-                        reserve_money_text += '<span style="font-size: 0.85em; float: right">با تخت اضافه</span><span style="float: left;">' + dotedNumber((Math.floor(priceExtraBed / 1000) * 1000) + (Math.floor(price / 1000) * 1000)) + '</span>';
+                        text += '<span class="font-size-085em">با تخت اضافه</span>';
+                        reserve_money_text += '<span class="font-size-0.85em float-right">با تخت اضافه</span><span class="float-left">' + dotedNumber((Math.floor(priceExtraBed / 1000) * 1000) + (Math.floor(price / 1000) * 1000)) + '</span>';
                         totalPerDayMoney += numRoom * Math.floor(priceExtraBed / 1000) * 1000;
                         reserve_text += '<span>دارد</span>\n';
                         extra.push(true);
