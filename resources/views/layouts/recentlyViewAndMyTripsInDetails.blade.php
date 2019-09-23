@@ -321,8 +321,8 @@ if(Auth::check()) {
 
                 for(i = 0; i < response.length; i++) {
                     element = "<div>";
-                    element += "<a class='masthead-recent-card' style='text-align: right !important;' target='_self' href='" + response[i].placeRedirect + "'>";
-                    element += "<div class='media-left' style='padding: 0 12px !important; margin: 0 !important;'>";
+                    element += "<a class='masthead-recent-card text-align-rightImp' target='_self' href='" + response[i].placeRedirect + "'>";
+                    element += "<div class='media-left' id='mediaLeftRecentViewDetails'>";
                     element += "<div class='thumbnail' style='background-image: url(" + response[i].placePic + ");'></div>";
                     element += "</div>";
                     element += "<div class='content-right'>";

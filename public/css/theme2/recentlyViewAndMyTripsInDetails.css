@@ -94,3 +94,12 @@
     -webkit-filter: drop-shadow(0 0 0 #999);
     filter: drop-shadow(0 0 0 #999);
 }
+
+.text-align-rightImp {
+    text-align: right !important;
+}
+
+#mediaLeftRecentViewDetails {
+    padding: 0 12px !important;
+    margin: 0 !important;
+}
