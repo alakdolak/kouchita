@@ -25,7 +25,6 @@
     position: fixed;
     left: 50%;
     margin-left: -430px;
-    display: block !important;
 }
 
 #photoUploadHeader {

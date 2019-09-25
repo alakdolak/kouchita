@@ -1,0 +1,42 @@
+
+#pop-up-create-trip {
+    z-index: 100000000001;
+    /*visibility: hidden*/
+}
+
+#trip-title-input-region > div > label {
+    color: #2c2c2c;
+    font-size: 100% !important;
+}
+
+#date-pop-up {
+    z-index: 10000000001;
+    /*visibility: hidden;*/
+}
+
+#date_input_start_label, #date_input_end_label {
+    position: relative;
+    margin: 6px;
+    width: 100%;
+    height: 30px;
+    border: 1px solid #e5e5e5;
+    border-radius: 2px;
+    box-shadow: 0 7px 12px -7px #e5e5e5 inset;
+}
+
+#date_input_start_label > span, #date_input_end_label > span {
+    color: #30b4a6 !important;
+    font-size: 20px;
+    line-height: 32px;
+    position: absolute;
+    right: 7px;
+}
+
+#date_input_start, #date_input_end {
+    padding: 7px;
+    position: absolute;
+    top: 1px;
+    right: 35px;
+    border: none;
+    background: transparent;
+}

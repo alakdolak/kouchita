@@ -65,12 +65,12 @@
     font-size: 14px;
 }
 
-div:nth-child(2) > a {
+#lastDivOfShareBox > a {
     cursor: pointer;
     float: left;
 }
 
-div:nth-child(2) > a > div {
+#lastDivOfShareBox > a > div {
     background-size: 28px;
     background-position: 0 -29px;
     width: 28px;
@@ -79,7 +79,7 @@ div:nth-child(2) > a > div {
     background-repeat: no-repeat;
 }
 
-div:nth-child(2) > div {
+#lastDivOfShareBox > div {
     cursor: pointer;
     background-size: 28px;
     background-position: 0 0;
