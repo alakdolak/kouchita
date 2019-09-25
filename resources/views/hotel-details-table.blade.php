@@ -1,10 +1,10 @@
 
-<link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/hotelDetailsTable.css')}}'/>
+<link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('placeDetailsTable.css')}}'/>
 
 @if($k == -1)
-    <table id="mainHotelDetailsTable">
+    <table class="mainPlaceDetailsTable">
 @else
-    <table class="tableDiv elseHotelDetailsTable" id="table_{{$k}}">
+    <table class="tableDiv elsePlaceDetailsTable" id="table_{{$k}}">
 @endif
 
     <tr>

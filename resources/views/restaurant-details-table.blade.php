@@ -1,7 +1,10 @@
+
+<link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('placeDetailsTable.css')}}'/>
+
 @if($k == -1)
-    <table style="width: 100%; font-size: 14px">
+    <table class="mainPlaceDetailsTable">
 @else
-    <table class="tableDiv" id="table_{{$k}}" style="width: 40%; height: 150px; font-size: 10px; float: left; margin-right: 10px; direction: rtl">
+    <table class="tableDiv elsePlaceDetailsTable" id="table_{{$k}}">
 @endif
 
     <tr>
