@@ -91,7 +91,7 @@
                                         </div>
                                         <div id="helpSpan_1" class="helpSpans hidden row">
                                             <span class="introjs-arrow"></span>
-                                            <p class="col-xs-12" style="line-height: 1.428 !important;">شاید بعدا بخواهید دوباره به همین مکان باز گردید. پس آن را نشان کنید تا از منوی بالا هر وقت که خواستید دوباره به آن باز گردید.</p>
+                                            <p class="col-xs-12 line-height-1428-imp">شاید بعدا بخواهید دوباره به همین مکان باز گردید. پس آن را نشان کنید تا از منوی بالا هر وقت که خواستید دوباره به آن باز گردید.</p>
                                             <div class="col-xs-12">
                                                 <button data-val="1" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_1">بعدی</button>
                                                 <button data-val="1" class="btn btn-primary backBtnsHelp" id="backBtnHelp_1">قبلی</button>
@@ -107,7 +107,7 @@
                                             </a>
                                             <div id="helpSpan_2" class="helpSpans hidden row">
                                                 <span class="introjs-arrow"></span>
-                                                <p class="col-xs-12" style="line-height: 1.428 !important;">سفر های خود و بازدید های اخیرتان را به سادگی از این چک کنید. خیلی ساده است.</p>
+                                                <p class="col-xs-12 line-height-1428-imp">سفر های خود و بازدید های اخیرتان را به سادگی از این چک کنید. خیلی ساده است.</p>
                                                 <div class="col-xs-12">
                                                     <button data-val="2" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_2">بعدی</button>
                                                     <button data-val="2" class="btn btn-primary backBtnsHelp" id="backBtnHelp_2">قبلی</button>
@@ -134,45 +134,27 @@
                                         </div>
                                         <div id="helpSpan_3" class="helpSpans hidden row">
                                             <span class="introjs-arrow"></span>
-                                            <p class="col-xs-12" style="line-height: 1.428 !important;">پیام های خود را به سادگی از اینجا دنبال کنید.</p>
+                                            <p class="col-xs-12 line-height-1428-imp">پیام های خود را به سادگی از اینجا دنبال کنید.</p>
                                             <div class="col-xs-12">
                                                 <button data-val="3" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_3">بعدی</button>
                                                 <button data-val="3" class="btn btn-primary backBtnsHelp" id="backBtnHelp_3">قبلی</button>
                                                 <button class="btn btn-danger exitBtnHelp">خروج</button>
                                             </div>
                                         </div>
-                                        <div id="alert" class="masthead_notifctr_dropdown " style="left: -10px !important; top: 40px !important; display: none;"><div class="notifdd_title">پیام ها</div><div class="notifdd_loading hidden"><div class="ui_spinner"></div></div><div><div class="modules-engagement-notification-dropdown " data-backbone-name="modules.engagement.NotificationDropdown" data-backbone-context="Engagement_MemberNotifications"><div class="notifdd_empty">هیچ پیامی موجود نیست </div></div></div></div>
+                                        <div id="alert" class="masthead_notifctr_dropdown ">
+                                            <div class="notifdd_title">پیام ها</div>
+                                            <div class="notifdd_loading hidden">
+                                                <div class="ui_spinner"></div>
+                                            </div>
+                                            <div>
+                                                <div class="modules-engagement-notification-dropdown " data-backbone-name="modules.engagement.NotificationDropdown"
+                                                     data-backbone-context="Engagement_MemberNotifications">
+                                                    <div class="notifdd_empty">هیچ پیامی موجود نیست </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-
-                                <style>
-                                    .masthead_notifctr_dropdown:before {
-                                        content: '';
-                                        position: absolute;
-                                        left: 24px;
-                                        top: -10px;
-                                        margin-left: -10px;
-                                        width: 0;
-                                        height: 0;
-                                        border-left: 10px solid transparent;
-                                        border-right: 10px solid transparent;
-                                        border-bottom: 10px solid #fff;
-                                        -webkit-filter: drop-shadow(0 0 0 #b7b7b7);
-                                        filter: drop-shadow(0 0 0 #b7b7b7);
-                                        box-shadow: 0 0 0 #b7b7b7\9;
-                                        -webkit-filter: drop-shadow(0 0 0 #999);
-                                        filter: drop-shadow(0 0 0 #999);
-                                    }
-                                    .dropMenu .subLink:hover,
-                                    .dropMenu .subItem .subLink:hover,
-                                    .dropMenu .taLnk:hover a,
-                                    .subItem .subLink:hover,
-                                    .subItemNoLink .subNoLink:hover,
-                                    .expandSubItem .expandSubLink:hover {
-                                        color: #16174f !important;
-                                    }
-                                </style>
-
                                 <div id="taplc_global_nav_action_profile_0" class="ppr_rup ppr_priv_global_nav_action_profile position-relative">
                                     <div class="global-nav-profile global-nav-utility position-relative">
                                         @if(Auth::check())
@@ -181,7 +163,7 @@
                                                 <span id="nameTop" class="name">{{$user->username}}</span>
                                                 <div id="helpSpan_4" class="helpSpans hidden row">
                                                     <span class="introjs-arrow"></span>
-                                                    <p class="col-xs-12" style="line-height: 1.428 !important;"> پروفایل خود را چک کنید تا ببینید چه امتیاز های هیجان انگیزی می توانید کسب کنید. هر کمک شما به بی جواب نمی ماند.</p>
+                                                    <p class="col-xs-12 line-height-1428-imp"> پروفایل خود را چک کنید تا ببینید چه امتیاز های هیجان انگیزی می توانید کسب کنید. هر کمک شما به بی جواب نمی ماند.</p>
                                                     <div class="col-xs-12">
                                                         <button data-val="4" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_4">بعدی</button>
                                                         <button data-val="4" class="btn btn-primary backBtnsHelp" id="backBtnHelp_4">قبلی</button>
@@ -191,7 +173,7 @@
                                             </div>
                                         @endif
                                         <div class="global-nav-overlays-container">
-                                            <div id="profile-drop" class="ui_overlay ui_flyout global-nav-flyout global-nav-utility" style="display:none; position: absolute; bottom: auto; z-index: 10000; background:none 0% 0% repeat scroll rgb(255, 255, 255); padding: 0px 18px; left: 20px; top: 43px;box-shadow: 0 4px 16px 0 rgba(0,0,0,0.2);">
+                                            <div id="profile-drop" class="ui_overlay ui_flyout global-nav-flyout global-nav-utility">
                                                 <ul class="global-nav-profile-menu">
                                                     <li class="subItem"><a href="{{URL('profile')}}" class="subLink" data-tracking-label="UserProfile_viewProfile">صفحه کاربری</a></li>
                                                     <li class="subItem rule"><a href="{{route('soon')}}" class="subLink global-nav-submenu-divided" data-tracking-label="UserProfile_bookings">رزروها</a></li>
@@ -210,7 +192,7 @@
                                 </div>
                             </div>
 
-                            <div style="clear: both;"></div>
+                            <div class="clear-both"></div>
                         </div>
                     </div>
                 </div>
@@ -252,31 +234,39 @@
                     </div>
                 </div>
             </div>
-                <div style="clear: both;"></div>
+                <div class="clear-both"></div>
             </div>
         </div>
     </div>
 
     <div id="MAINWRAP" class="position-relative">
 
-        <div class="modules-membercenter-persistent-header-achievements" style="background-color: #fcc156 !important; position: relative">
+        <div class="modules-membercenter-persistent-header-achievements">
             <ul class="persistent-header position-relative">
                 @if($mode == "profile")
-                    <li id="Profile" class="profile"><a style="color: #963019 !important" href="{{URL('profile')}}">صفحه کاربری</a> </li>
+                    <li id="Profile" class="profile">
+                        <a id="profileLinkColor1" href="{{URL('profile')}}">صفحه کاربری</a>
+                    </li>
                 @else
-                    <li id="Profile" class="profile"><a style="color: #16174f" href="{{URL('profile')}}">صفحه کاربری</a> </li>
+                    <li id="Profile" class="profile">
+                        <a id="profileLinkColor2" href="{{URL('profile')}}">صفحه کاربری</a>
+                    </li>
                 @endif
                 @if($mode == "badge")
-                    <li id="BadgeCollection" class="badgeCollection"><a style="color: #963019 !important" href="{{route('badge')}}">مدال های گردشگری</a> </li>
+                    <li id="BadgeCollection" class="badgeCollection">
+                        <a id="BadgeCollectionLinkColor1" href="{{route('badge')}}">مدال های گردشگری</a>
+                    </li>
                 @else
-                    <li id="BadgeCollection" class="badgeCollection"><a style="color: #16174f" href="{{route('badge')}}">مدال های گردشگری</a> </li>
+                    <li id="BadgeCollection" class="badgeCollection">
+                        <a id="BadgeCollectionLinkColor2" href="{{route('badge')}}">مدال های گردشگری</a>
+                    </li>
                 @endif
 
                 <li class="travelMap targets position-relative" id="targetHelp_5">
-                    <a style="color: #16174f" href="{{route('soon')}}">سفرنامه من</a>
+                    <a href="{{route('soon')}}">سفرنامه من</a>
                     <div id="helpSpan_5" class="helpSpans hidden row">
                         <span class="introjs-arrow"></span>
-                        <div class="col-xs-12" style="color: black !important; line-height: 1.428 !important; font-weight: normal !important; direction: rtl !important; text-align: start">
+                        <div class="col-xs-12">
                             <p>با استفاده از این منو می توانید به سایر بخش های پروفایل کاربری خود بروید.</p>
                         </div>
                         <div class="col-xs-12">
@@ -289,20 +279,28 @@
 
                 <li id="Saves" class="saves"></li>
                 @if($mode == "message")
-                    <li id="Messages" class="messages"><a style="color: #963019 !important" href="{{URL('messages')}}">پیام ها</a> </li>
+                    <li id="Messages" class="messages">
+                        <a id="messageLinkColor1" href="{{URL('messages')}}">پیام ها</a>
+                    </li>
                 @else
-                    <li id="Messages" class="messages"><a style="color: #16174f " href="{{URL('messages')}}">پیام ها</a> </li>
+                    <li id="Messages" class="messages">
+                        <a id="messageLinkColor2" href="{{URL('messages')}}">پیام ها</a>
+                    </li>
                 @endif
-                <li id="Bookings" class="bookings"><a style="color: #16174f" href="{{route('soon')}}">رزروها</a> </li>
-                <li id="PaymentOptions" class="paymentOptions"><a style="color: #16174f" href="{{route('soon')}}">پروازها</a> </li>
+                <li id="Bookings" class="bookings">
+                    <a id="bookingLinkColor1" href="{{route('soon')}}">رزروها</a>
+                </li>
+                <li id="PaymentOptions" class="paymentOptions">
+                    <a id="paymentOptionsLinkColor" href="{{route('soon')}}">پروازها</a>
+                </li>
                 @if($mode == "setting")
-                    <li id="Settings" style="color: #963019 !important" class="settings">
+                    <li id="Settings" class="settingColor1 settings">
                 @else
-                    <li id="Settings" style="color: #16174f" class="settings">
+                    <li id="Settings" class="settingColor2 settings">
                 @endif
                     تنظیمات
                     <div class="settingsArrow"></div>
-                    <div class="settingsDropDown" style="width: 200px !important;">
+                    <div class="settingsDropDown" id="settingDropDownMainDiv">
                         <a href="{{URL('accountInfo')}}">اطلاعات کاربر</a>
                         <?php
                             $level = Auth::user()->level;
@@ -474,7 +472,7 @@
                         for(i = 0; i < response.length; i++) {
                             element = "<div>";
                             element += "<a class='masthead-recent-card' style='text-align: right !important;' target='_self' href='" + response[i].placeRedirect + "'>";
-                            element += "<div class='media-left' style='padding: 0 12px !important; margin: 0 !important;'>";
+                            element += "<div class='media-left' id='MediaLeftBodyProfile'>";
                             element += "<div class='thumbnail' style='background-image: url(" + response[i].placePic + ");'></div>";
                             element += "</div>";
                             element += "<div class='content-right'>";
@@ -708,15 +706,15 @@
                 element2 += "<div class='cs-colheader-points'>خلاصه</div>";
                 element2 += "<div class='cs-colheader-rating'>امتیاز</div>";
                 element2 += "</div><ul><li class='cs-rating'>";
-                element2 += "<div class='cs-rating-thumb' style='z-index: 100'><a href='" + contents[idx][i].placeRedirect + "'><img src='" + contents[idx][i].placePic + "'></a></div>";
+                element2 += "<div class='cs-rating-thumb z-index-100'><a href='" + contents[idx][i].placeRedirect + "'><img src='" + contents[idx][i].placePic + "'></a></div>";
                 element2 += "<center class='cs-rating-date'>" + contents[idx][i].date + "</center>";
                 element2 += "<div class='cs-rating-geo'>" + contents[idx][i].visitorId + "</div>";
 
                 element2 += "<center>";
                 if (contents[idx][i].pic != "")
-                    element2 += "<div class='cs-rating-location'><a><img style='width: 100%; vertical-align: middle' src='" + contents[idx][i].pic + "'></a></div>";
+                    element2 += "<div class='cs-rating-location'><a id='cs-rating-location-link'><img src='" + contents[idx][i].pic + "'></a></div>";
                 else
-                    element2 += "<div class='cs-rating-location' style='text-align: center'><a>" + contents[idx][i].text + "</a></div>";
+                    element2 += "<div class='cs-rating-location text-align-center'><a>" + contents[idx][i].text + "</a></div>";
                 element2 += "</center>";
 
                 if (contents[idx][i].point != -1) {
@@ -748,19 +746,19 @@
             if (page < Math.ceil(limit / 5))
                 element2 += "<button onclick='sendAjaxRequestToGiveActivity(" + activityId + "," + uId + ", " + kindPlaceId + ", \"myActivities\", \"myActivitiesContent\", " + (page + 1) + ", " + limit + ")' id='cs-paginate-next'>بعدی</button>";
 
-            element2 += "<div class='cs-pagination-bar-inner' style='direction: ltr'>";
+            element2 += "<div class='cs-pagination-bar-inner direction-ltr'>";
 
             for (i = 1; i <= Math.ceil(limit / 5); i++) {
                 if (i == page)
-                    element2 += "<button style='cursor: pointer; color: black' onclick='sendAjaxRequestToGiveActivity(" + activityId + "," + uId + ", " + kindPlaceId + ", \"myActivities\", \"myActivitiesContent\", " + i + ", " + limit + ")' class='cs-paginate-goto active'>" + i + "</button>";
+                    element2 += "<button onclick='sendAjaxRequestToGiveActivity(" + activityId + "," + uId + ", " + kindPlaceId + ", \"myActivities\", \"myActivitiesContent\", " + i + ", " + limit + ")' class='color-black cursor-pointer cs-paginate-goto active'>" + i + "</button>";
                 else
-                    element2 += "<button style='cursor: pointer' onclick='sendAjaxRequestToGiveActivity(" + activityId + "," + uId + ", " + kindPlaceId + ", \"myActivities\", \"myActivitiesContent\", " + i + ", " + limit + ")' class='cs-paginate-goto active'>" + i + "</button>";
+                    element2 += "<button onclick='sendAjaxRequestToGiveActivity(" + activityId + "," + uId + ", " + kindPlaceId + ", \"myActivities\", \"myActivitiesContent\", " + i + ", " + limit + ")' class='cursor-pointer cs-paginate-goto active'>" + i + "</button>";
             }
 
             element2 += "</div></div>";
         }
         else
-            element2 = "<div style='margin-right: 40%' class='loader'></div>";
+            element2 = "<div class='margin-rt-40per loader'></div>";
 
         $("#" + contentId).append(element2);
     }
@@ -786,15 +784,15 @@
                     element = "<div class='tagContainer'>";
                     element += "<input class='tagSelection' name='memberTag' value='" + response[i].id + "' type='checkbox'>";
                     if (response[i].selected) {
-                        element += "<label id='tripStyle_" + response[i].id + "' style='color: white; background-color: #4dc7bc;' class='tag tagBubble' onclick='toggleTripStyles(" + response[i].id + ")'>";
+                        element += "<label id='tripStyle_" + response[i].id + "' class='tripStyleBodyProfile tag tagBubble' onclick='toggleTripStyles(" + response[i].id + ")'>";
 
-                        element += "<div class='tagText'  style='padding-left: 12px; padding-right: 12px'>" + response[i].name + "</div>";
+                        element += "<div class='tagText tagTextBodyPlace'>" + response[i].name + "</div>";
                         tripStyles[tripStyles.length] = response[i].id;
                     }
                     else {
                         element += "<label id='tripStyle_" + response[i].id + "' class='tag tagBubble' onclick='toggleTripStyles(" + response[i].id + ")'>";
 
-                        element += "<div class='tagText' style='padding-left: 12px; padding-right: 12px'>" + response[i].name + "</div>";
+                        element += "<div class='tagText tagTextBodyPlace'>" + response[i].name + "</div>";
                     }
                     element += "</label>";
                     element += "</div>";
