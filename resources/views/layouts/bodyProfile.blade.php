@@ -320,7 +320,6 @@
                             <a title="Levels" href="{{route('tripStyles')}}">سبک سفر جدید</a>
                             <a title="ages" href="{{route('placeStyles')}}">سبک مکان</a>
                             <a title="Levels" href="{{route('defaultPics')}}">تصاویر پیش فرض</a>
-                            <a title="ages" href="{{route('ages')}}">مدیریت سن ها</a>
                             <a title="tags" href="{{route('tags')}}">تگ ها</a>
                             <a title="ages" href="{{route('picItems')}}">آیتم تصاویر</a>
                             <a title="ages" href="{{route('opinions')}}">مدیریت نظرات</a>

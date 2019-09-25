@@ -61,26 +61,6 @@
     <link rel="stylesheet" href="{{URL::asset('css/theme2/cropper.css')}}">
 
     <style>
-        .ui_overlay:before {
-            right: 120px;
-            left: auto;
-        }
-        .editBtn {
-            background: url('{{URL::asset("images/icon_edit.png")}}') no-repeat center center #f0f0f0;
-        }
-        .imgContainer:before {
-            height: 0 !important;
-        }
-        .hover {
-            position: relative;
-            clear: both;
-            margin: 6px 18px;
-            padding: 6px;
-            background: #FFF;
-            border: 1px solid #ECEAE2;
-            border-bottom-color: #DDDBD0;
-        }
-
         .btn-primary:focus {
             box-shadow: 0 0 0 0 !important;
         }
