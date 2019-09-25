@@ -1,7 +1,7 @@
 
 #pop-up-create-trip {
     z-index: 100000000001;
-    /*visibility: hidden*/
+    visibility: hidden
 }
 
 #trip-title-input-region > div > label {
@@ -11,7 +11,7 @@
 
 #date-pop-up {
     z-index: 10000000001;
-    /*visibility: hidden;*/
+    visibility: hidden;
 }
 
 #date_input_start_label, #date_input_end_label {
