@@ -21,18 +21,18 @@
 /*inline styles*/
 
 #my-trips-not {
-    /*display: none;*/
+    display: none;
     bottom: auto;
-    left: 160px;
+    left: 156px;
     position: absolute;
-    top: 50px;
+    top: 20px;
 }
 
-.masthead-recent {
+.masthead-recent-class {
     background-color: #f9f9f9
 }
 
-.masthead-recent > div:nth-child(1) {
+.masthead-recent-class > div:nth-child(1) {
     text-align: right;
     padding: 0 24px;
 }
@@ -74,9 +74,9 @@
 #bookmarkmenu {
     display: none;
     bottom: auto;
-    left: 195px;
+    left: 197px;
     position: absolute;
-    top: 10px
+    top: 20px
 }
 
 .font-size-12em {

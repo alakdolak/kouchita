@@ -72,7 +72,7 @@
 
 #alert {
     left: -10px !important;
-    top: 40px !important;
+    top: 48px !important;
     display: none;
 }
 
@@ -111,7 +111,7 @@
     background: none 0% 0% repeat scroll rgb(255, 255, 255);
     padding: 0 18px;
     left: 20px;
-    top: 43px;
+    top: 48px;
     box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.2);
 }
 

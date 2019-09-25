@@ -299,7 +299,7 @@ if(Auth::check()) {
         }
     }
 }
-?>\
+?>
 
 <link rel="stylesheet" href="{{URL::asset('css/theme2/recentlyViewAndMyTrips.css')}}">
 
@@ -359,7 +359,7 @@ if(Auth::check()) {
 <div id="my-trips-not" class="ui_overlay ui_flyout global-nav-flyout global-nav-utility trips-flyout-container">
     <div>
         <div class="styleguide" id="masthead-saves-container">
-            <div class="masthead-recent">
+            <div id="masthead-recent" class="masthead-recent">
                 <div class="recent-header-container">
                     <a class="recent-header" href="{{route('recentlyViewTotal')}}" target="_self">بازدیدهای اخیر </a>
                 </div>
@@ -414,7 +414,7 @@ if(Auth::check()) {
                                 @if($trip->to_ != "" && $trip->from_ != "")
                                     <div class="create-trip-text" id="createTripTextRecentlyViewBodyProfile">
                                         {{convertStringToDate2($trip->to_)}}
-                                        <p>الی</p>
+                                        <p style="">الی</p>
                                         {{convertStringToDate2($trip->from_)}}
                                     </div>
                                 @else
@@ -432,7 +432,7 @@ if(Auth::check()) {
 <div id="bookmarkmenu" class="ui_overlay ui_flyout global-nav-flyout global-nav-utility trips-flyout-container">
     <div>
         <div class="styleguide" id="masthead-saves-container">
-            <div class="masthead-recent">
+            <div id="masthead-recent" class="masthead-recent-class">
                 <div class="recent-header-container">
                     <a class="recent-header" href="{{route('recentlyViewTotal')}}" target="_self"> نشانه گذاری شده ها </a>
                 </div>
