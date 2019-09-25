@@ -10,7 +10,7 @@
 {{--            <li class="footTitle"><b> شرکای ما را بشناسید</b></li>--}}
 {{--        </ul>--}}
 {{--    </div>--}}
-    <div>
+    <div id="ourDescriptionDiv">
         <div class="footerLogo">
             <img src="{{URL::asset('images/logo.svg')}}" class="content-icon" width="100%">
         </div>
@@ -24,10 +24,22 @@
                         با خبر بشید و توضیحاتش رو هم کامل بخونین، بعدش راحت دل رو به دریا بزنین و راه بیوفتین.
                     </p>
                 </li>
-                <li class="aboutShazde">شاید بخواهید در خصوص <a href="{{route('policies')}}"> حریم خصوصی و قوانین سایت </a> بیشتر بدانید.</li>
-                <li class="aboutShazde">در صورت نیاز به کمک، صفحه <a href="#"> راهنما </a> را بخوانید و در صورت نیاز <a href="#"> با ما تماس بگیرید. </a></li>
-                <li class="aboutShazde">این سایت متعلق به مجموعه شازده مسافر می باشد؛ <a href="#"> درباره ما </a> بیشتر بدانید.</li>
-                <li class="aboutShazde">شازده مسافر محصولی از <a href="#"> بوگن دیزاین </a> می باشد؛ ما را بیشتر بشناسید.</li>
+                <li class="aboutShazde">شاید بخواهید در خصوص
+                    <a href="{{route('policies')}}"> حریم خصوصی و قوانین سایت </a>
+                    بیشتر بدانید.</li>
+                <li class="aboutShazde">در صورت نیاز به کمک، صفحه
+                    <a href="#"> راهنما </a>
+                    را بخوانید و در صورت نیاز
+                    <a href="#"> با ما تماس بگیرید. </a>
+                </li>
+                <li class="aboutShazde">این سایت متعلق به مجموعه شازده مسافر می باشد؛
+                    <a href="#"> درباره ما </a>
+                    بیشتر بدانید.
+                </li>
+                <li class="aboutShazde">شازده مسافر محصولی از
+                    <a href="#"> بوگن دیزاین </a>
+                    می باشد؛ ما را بیشتر بشناسید.
+                </li>
             </ul>
         </div>
     </div>

@@ -220,7 +220,7 @@ footer li > img, .small-ico {
     }
 }
 
-#knowOurPartnersDiv {
+#knowOurPartnersDiv , #ourDescriptionDiv {
     float: right;
     width: 30%;
 }
@@ -246,4 +246,8 @@ footer li > img, .small-ico {
 
 .footerLogo > img {
     margin-top: 10px;
+}
+
+.clear-both {
+    clear: both;
 }
