@@ -18,6 +18,8 @@
     </style>
 @stop
 
+<link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/activities.css')}}'/>
+
 @section('main')
     <center class="row">
         <div class="col-xs-12">
@@ -40,11 +42,11 @@
                         <span>
                             {{$activity->rate}}
                         </span>
-                        <button name="editActivity" value="{{$activity->id}}" class="btn btn-info" data-toggle="tooltip" title="ویرایش فعالیت" style="width: auto">
-                            <span class="glyphicon glyphicon-edit" style="margin-left: 30%"></span>
+                        <button name="editActivity" value="{{$activity->id}}" class="btn btn-info width-auto" data-toggle="tooltip" title="ویرایش فعالیت">
+                            <span class="glyphicon glyphicon-edit mg-tp-30per"></span>
                         </button>
-                        <button name="deleteActivity" value="{{$activity->id}}" class="btn btn-danger" data-toggle="tooltip" title="حذف فعالیت" style="width: auto">
-                            <span class="glyphicon glyphicon-remove" style="margin-left: 30%"></span>
+                        <button name="deleteActivity" value="{{$activity->id}}" class="btn btn-danger width-auto" data-toggle="tooltip" title="حذف فعالیت">
+                            <span class="glyphicon glyphicon-remove mg-tp-30per"></span>
                         </button>
                     </div>
                 @endforeach
@@ -54,8 +56,8 @@
         @if($mode2 == "see")
             <div class="col-xs-12">
                 <a href="{{URL('addActivity')}}">
-                    <button class="btn btn btn-default" style="width: auto; border-radius: 50% 50% 50% 50%" data-toggle="tooltip" title="اضافه کردن فعالیت جدید">
-                        <span class="glyphicon glyphicon-plus" style="margin-left: 30%"></span>
+                    <button class="btn btn btn-default width-auto border-radius-50per" data-toggle="tooltip" title="اضافه کردن فعالیت جدید">
+                        <span class="glyphicon glyphicon-plus mg-tp-30per"></span>
                     </button>
                 </a>
             </div>
@@ -82,7 +84,7 @@
                 </div>
                 <div class="col-xs-12">
                     <p class="warning_color">{{$msg}}</p>
-                    <input type="submit" name="addActivity" value="اضافه کن" class="btn btn-primary" style="width: auto; margin-top: 10px">
+                    <input type="submit" name="addActivity" value="اضافه کن" class="btn btn-primary width-auto mg-tp-10">
                 </div>
             </form>
         @elseif($mode2 == "edit")
@@ -108,8 +110,8 @@
                 </div>
                 <div class="col-xs-12">
                     <p class="warning_color">{{$msg}}</p>
-                    <input type="text" name="activityId" value="{{$selectedActivity->id}}" style="visibility: hidden">
-                    <input type="submit" name="doEditActivity" value="ویرایش کن" class="btn btn-primary" style="width: auto; margin-top: 10px">
+                    <input type="text" name="activityId" value="{{$selectedActivity->id}}" class="visibility-hidden">
+                    <input type="submit" name="doEditActivity" value="ویرایش کن" class="btn btn-primary width-auto mg-tp-10">
                 </div>
             </form>
         @endif
