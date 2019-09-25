@@ -23,6 +23,7 @@ class ActivityController extends Controller {
 
     public function showActivities() {
 
+
         $activities = Activity::all();
 
         return view('activities', array('activities' => $activities, 'mode2' => 'see'));
