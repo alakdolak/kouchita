@@ -1,0 +1,297 @@
+/*1st box of styles*/
+
+input[type="checkbox"] {
+    display: none;
+}
+
+input[type="checkbox"] + label {
+    color: #666666;
+}
+
+input[type="checkbox"] + label span {
+    display: inline-block;
+    width: 19px;
+    height: 19px;
+    margin: -2px 10px 0 0;
+    vertical-align: middle;
+    background: url('../../../images/check_radio_sheet.png') left top no-repeat;
+    cursor: pointer;
+}
+
+input[type="checkbox"]:checked + label span {
+    background: url('../../../images/check_radio_sheet.png') -19px top no-repeat;
+}
+
+.labelForCheckBox:before {
+    background-color: transparent !important;
+    border: none !important;
+    content: "" !important;
+}
+
+#saves-all-trips .all-trips-header .header-sort-container .sort-options li.selected:after {
+    position: relative !important;
+    right: 5px !important;
+}
+
+.ui_tabs {
+    white-space: inherit !important;
+}
+
+.helpSpans p {
+    font-size: 14px;
+    line-height: 2em;
+    text-align: justify;
+}
+
+.nextBtnsHelp {
+    margin-left: 5px !important;
+}
+
+/*inline styles*/
+
+#sort-option-recent {
+    padding: 0 10px;
+    border-radius: 2px;
+    margin-top: 15px;
+}
+
+#targetHelp_9 {
+    float: left;
+}
+
+#targetHelp_6 {
+    width: 30%;
+    float: right;
+}
+
+#targetHelp_7 {
+    width: 33%;
+    float: right;
+}
+
+#targetHelp_8 {
+    width: 37%;
+    float: right;
+}
+
+#saves-view-tabs {
+    position: relative;
+    margin-right: 12px;
+}
+
+#initHelpDiv, #initHelpDivElse {
+    background-size: 28px;
+    background-position: 0 -29px;
+    width: 28px;
+    height: 28px;
+    background-repeat: no-repeat;
+}
+
+#trip-dates-region {
+    display: none;
+}
+
+#manageTripsBtn {
+    padding: 1px 13px !important;
+}
+
+#manageTripsBtn > span {
+    color: #4DC7BC;
+}
+
+.tripsRowExpandableDiv {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#placeInfo {
+    position: fixed;
+    width: 40%;
+    left: 31%;
+    right: auto;
+    top: 41%;
+    bottom: auto;
+}
+
+#addPlaceToTripPrompt {
+    position: fixed;
+    width: 39%;
+    left: 30%;
+    right: auto;
+    top: 24%;
+    bottom: auto;
+}
+
+#manageTripVerifyBtn {
+    color: #FFF;
+    background-color: #4dc7bc;
+    border-color: #4dc7bc;
+}
+
+#managePlaceTextDiv {
+    direction: rtl;
+    margin-bottom: 29px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+#expandableTripDate {
+    float: left;
+    padding: 5px 0;
+    color: #4DC7BC;
+}
+
+#expandableTripTitleText {
+    cursor: pointer;
+    font-size: 1.5em;
+    padding: 5px 0;
+}
+
+#map {
+    border: 2px solid black;
+    height: 200px
+}
+
+#newComment {
+    width: 100%;
+    padding: 5px;
+    float: right !important;
+    border-radius: 5px;
+    border: 1px solid #ccc
+}
+
+#keyAndResultMainDiv {
+    margin-top: 20px;
+    border: 2px solid #CCC;
+    border-radius: 7px;
+}
+
+#key {
+    border: none;
+    margin-top: 10px;
+}
+
+#result {
+    max-height: 160px;
+    overflow: auto;
+    margin-top: 10px;
+}
+
+#bookMarkPlaceSuggestion {
+    cursor: pointer;
+    padding: 5px 20px;
+    border-bottom: 1px solid #CCC
+}
+
+#tripNote {
+    border-radius: 5px;
+    border: 1px solid #CCC;
+    padding: 5px;
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    min-height: 110px;
+}
+
+#eliminateUserBtn {
+    margin-right: 10px;
+    padding: 0 9px;
+}
+
+#DetailsLink {
+    cursor: pointer;
+    text-align: center;
+    color: #16174f;
+}
+
+.filtersDivBookmark {
+    border: 1px solid #ccc;
+    background-color: #ccc;
+    border-radius: 50%;
+    margin-right: 2px;
+    width: 12px;
+    height: 12px;
+    float: left
+}
+
+.filtersDivBookmarkElse {
+    border: 1px solid #333;
+    background-color: black;
+    border-radius: 50%;
+    margin-right: 2px;
+    width: 12px;
+    height: 12px;
+    float: left
+}
+
+.tripDetailsMoreInfoBtnBookMarkPlace {
+    margin: 10px auto 10px;
+    background-size: 60%;
+    background-position-x: center;
+    padding: 6px 12px;
+}
+
+#sendBtnBookMarkPlace {
+    color: #FFF;
+    background-color: #4dc7bc;
+    border-color: #4dc7bc;
+    border-radius: 5%;
+    width: 100%;
+    margin-top: 17px;
+}
+
+.padding-0 {
+    padding: 0;
+}
+
+.mg-rt-0 {
+    margin-right: 0;
+}
+
+.position-relative {
+    position: relative;
+}
+
+.dark-red {
+    color: #963019
+}
+
+.red {
+    color: red;
+}
+
+.font-size-16 {
+    font-size: 16px;
+}
+
+.display-none {
+    display: none;
+}
+
+.rtl {
+    direction: rtl
+}
+
+.mg-tp-12 {
+    margin-top: 12px;
+}
+
+.mg-tp-10 {
+    margin-top: 10px;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.float-left {
+    float: left;
+}
+
+.float-right {
+    float: right;
+}
+
+.margin-auto {
+    margin: auto;
+}

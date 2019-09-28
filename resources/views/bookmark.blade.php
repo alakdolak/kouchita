@@ -5,80 +5,35 @@
     @parent
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <link rel="stylesheet" href="{{URL::asset('css/theme2/saves-rest-client.css?v=1')}}">
-
-    <style>
-
-        input[type="checkbox"] {
-            display:none;
-        }
-
-        input[type="checkbox"] + label {
-            color:#666666;
-        }
-
-        input[type="checkbox"] + label span {
-            display:inline-block;
-            width:19px;
-            height:19px;
-            margin:-2px 10px 0 0;
-            vertical-align:middle;
-            background:url('{{URL::asset('images/check_radio_sheet.png')}}') left top no-repeat;
-            cursor:pointer;
-        }
-
-        input[type="checkbox"]:checked + label span {
-            background:url('{{URL::asset('images/check_radio_sheet.png')}}') -19px top no-repeat;
-        }
-
-        .labelForCheckBox:before{
-            background-color: transparent !important;
-            border: none !important;
-            content: "" !important;
-        }
-
-        #saves-all-trips .all-trips-header .header-sort-container .sort-options li.selected:after {
-            position: relative !important;
-            right: -65px !important;
-        }
-        .ui_tabs {
-            white-space: inherit !important;
-        }
-        .helpSpans p{
-            font-size: 14px;
-            line-height: 2em;
-            text-align: justify;
-        }
-        .nextBtnsHelp{
-            margin-left: 5px !important;
-        }
-    </style>
 @stop
 
 @section('main')
 
     @include('layouts.pop-up-create-trip')
 
-    <div id="MAIN" class="Saves prodp13n_jfy_overflow_visible" style="position: relative;">
-        <div id="BODYCON" ng-app="mainApp" class="col easyClear poolB adjust_padding new_meta_chevron_v2" style="position: relative;">
+    <link rel="stylesheet" href="{{URL::asset('css/theme2/specific designs/bookmark.css')}}">
+
+    <div id="MAIN" class="Saves prodp13n_jfy_overflow_visible">
+        <div id="BODYCON" ng-app="mainApp" class="col easyClear poolB adjust_padding new_meta_chevron_v2">
             <div class="wrpHeader"></div>
-            <div id="saves-body" class="styleguide" style="position: relative;">
-                <div id="saves-root-view" style="position: relative;">
-                    <div id="saves-all-trips" style="position: relative;">
+            <div id="saves-body" class="styleguide">
+                <div id="saves-root-view">
+                    <div id="saves-all-trips">
                         <div class="saves-title title">سفرهای من</div>
                         <div id="saves-view-tabs-placeholder"></div>
-                        <div id="saves-view-tabs-container" style="position: relative;">
-                            <div class="ui_container" style="position: relative;">
-                                <div class="ui_columns" style="position: relative;">
-                                    <div class="trips-header ui_column" style="position: relative;">
-                                        <div style="position: relative;">
-                                            <div class="all-trips-header" style="position: relative;">
-                                                <div class="header-sort-container" style="position: relative;">
-                                                    <ul class="sort-options" style="margin-top: 12px;">
+                        <div id="saves-view-tabs-container">
+                            <div class="ui_container">
+                                <div class="ui_columns">
+                                    <div class="trips-header ui_column">
+                                        <div>
+                                            <div class="all-trips-header">
+                                                <div class="header-sort-container">
+                                                    <ul class="sort-options mg-tp-12">
                                                         <li id="sort-option-name" data-sort="name">نام</li>
-                                                        <li id="sort-option-recent" data-sort="recent" class="selected" style="padding-right: 20px; border-radius: 2px">بازدید اخیر</li>
+                                                        <li id="sort-option-recent" data-sort="recent" class="selected">بازدید اخیر</li>
                                                     </ul>
-                                                    <div id="targetHelp_9" class="targets" style="float: left;">
-                                                        <span class="sort-text"> :مرتب شده بر اساس </span>
+                                                    <div id="targetHelp_9" class="targets">
+                                                        <span class="sort-text"> مرتب شده بر اساس: </span>
                                                         <div id="helpSpan_9" class="helpSpans hidden row">
                                                             <span class="introjs-arrow"></span>
                                                             <p>در این قسمت می توانید اطلاعات را با فیلتر های موجود مرتب کنید.</p>
@@ -91,8 +46,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div id="saves-view-tabs" class="ui_column is-6 ui_tabs" style="position: relative; margin-right: 12px;">
-                                        <div id="targetHelp_6" class="targets" style="width: 30%; float: right;">
+                                    <div id="saves-view-tabs" class="ui_column is-6 ui_tabs">
+                                        <div id="targetHelp_6" class="targets">
                                             <div onclick="document.location.href = '{{route('myTrips')}}'" class="ui_tab">سفرهای من</div>
                                             <div id="helpSpan_6" class="helpSpans hidden row">
                                                 <span class="introjs-arrow"></span>
@@ -102,7 +57,7 @@
                                                 <button class="btn btn-danger exitBtnHelp">خروج</button>
                                             </div>
                                         </div>
-                                        <div id="targetHelp_7" class="targets" style="width: 33%; float: right;">
+                                        <div id="targetHelp_7" class="targets">
                                             <a data-tab-link="recent" href="{{route('recentlyViewTotal')}}" class="ui_tab">بازدید های اخیر</a>
                                             <div id="helpSpan_7" class="helpSpans hidden row">
                                                 <span class="introjs-arrow"></span>
@@ -112,7 +67,7 @@
                                                 <button class="btn btn-danger exitBtnHelp">خروج</button>
                                             </div>
                                         </div>
-                                        <div id="targetHelp_8" class="targets" style="width: 37%; float: right;">
+                                        <div id="targetHelp_8" class="targets">
                                             <a data-tab-link="all_saves" href="{{route('bookmark')}}" class="ui_tab active">نشانه گذاری شده ها</a>
                                             <div id="helpSpan_8" class="helpSpans hidden row">
                                                 <span class="introjs-arrow"></span>
@@ -125,12 +80,12 @@
                                     </div>
                                     <div class="ui_column">
                                         {{--@if($sumTmp == 0)--}}
-                                        <a style="cursor: pointer; float: left;" class="link" onclick="initHelp(12, [1, 2, 3, 4, 5], 'MAIN', 100, 400)">
-                                            <div style="background-size: 28px;background-position:  0 -29px;width: 28px;height:  28px;background-image: url('{{URL::asset('images') . '/help_share.png'}}');background-repeat:  no-repeat;"></div>
+                                        <a class="link float-left cursor-pointer" onclick="initHelp(12, [1, 2, 3, 4, 5], 'MAIN', 100, 400)">
+                                            <div id="initHelpDiv" style="background-image: url('{{URL::asset('images') . '/help_share.png'}}')"></div>
                                         </a>
                                         {{--@else--}}
-                                        {{--<a style="cursor: pointer" class="link" onclick="initHelp(16, [], 'MAIN', 100, 400)">--}}
-                                                {{--<div style="background-size: 28px;background-position:  0 -29px;width: 28px;height:  28px;background-image: url('{{URL::asset('images') . 'help_share.png'}}');background-repeat:  no-repeat;"></div>--}}
+                                        {{--<a class="cursor-pointer link" onclick="initHelp(16, [], 'MAIN', 100, 400)">--}}
+                                                {{--<div id="initHelpDivElse" style="background-image: url('{{URL::asset('images') . 'help_share.png'}}')"></div>--}}
                                             {{--</a>--}}
                                         {{--@endif--}}
                                     </div>
@@ -139,7 +94,7 @@
                         </div>
                         @if($placesCount == 0)
                             <div id="saves-itinerary-container">
-                                <div id="trip-dates-region" style="display: none;"></div>
+                                <div id="trip-dates-region"></div>
                                 <div id="trip-side-by-side">
                                     <div class="ui_columns">
                                         <div id="trip-items-region" class="ui_column " data-column-name="items">
@@ -158,32 +113,34 @@
                             </div>
                         @else
 
-                            <div id="saves-all-trips" style="position: relative;">
-                                <div ng-controller="PlaceController as cntr" id="saves-view-tabs-container" style="position: relative;">
-                                    <div infinite-scroll="myPagingFunction()" class="trips-container ui_container" style="position: relative;">
-                                        <div ng-repeat="packet in packets" class="trips-container-inner ui_columns is-multiline" style="position: relative;">
-                                            <div ng-repeat="place in packet.places" class="trip-tile-container ui_column is-3" style="position: relative;">
-                                                <div class="trip-tile ui_card is-fullwidth" style="position: relative;">
-                                                    <div class="trip-header" style="position: relative;">
-                                                        <div style="right: 0; position: relative;">
-                                                            <span style="float: right;">[[place.name]]</span>
-                                                            <div id="[[($index == 0 && packet.no == 1) ? 'targetHelp_10' : '']]" class="targets" style="float: left;">
-                                                                <button style="padding: 1px 13px !important;" ng-click="addToTrip(place.placeId, place.kindPlaceId)" class="ui_button secondary trip-add-dates">
-                                                                    <span style="color: #4DC7BC;" class="ui_icon my-trips"></span>
+                            <div id="saves-all-trips">
+                                <div ng-controller="PlaceController as cntr" id="saves-view-tabs-container">
+                                    <div infinite-scroll="myPagingFunction()" class="trips-container ui_container">
+                                        <div ng-repeat="packet in packets" class="trips-container-inner ui_columns is-multiline">
+                                            <div ng-repeat="place in packet.places" class="trip-tile-container ui_column is-3">
+                                                <div class="trip-tile ui_card is-fullwidth">
+                                                    <div class="trip-header">
+                                                        <div>
+                                                            <span class="float-right">[[place.name]]</span>
+                                                            <div id="[[($index == 0 && packet.no == 1) ? 'targetHelp_10' : '']]" class="targets float-left">
+                                                                <button id="manageTripsBtn" ng-click="addToTrip(place.placeId, place.kindPlaceId)" class="ui_button secondary trip-add-dates">
+                                                                    <span class="ui_icon my-trips"></span>
                                                                 </button>
                                                             </div>
                                                         </div>
                                                         <div class="trip-date">&nbsp;</div>
                                                     </div>
-                                                    <img style="cursor: pointer" ng-click="redirect(place.url)" ng-src='[[place.placePic]]' width="230px">
-                                                    <div class="trip-details ui_columns is-mobile is-fullwidth" style="position: relative;">
-                                                        <div id="[[($index == 0 && packet.no == 1) ? 'targetHelp_11' : '']]" class="targets" style="margin: auto;">
-                                                            <button class="ui_button secondary trip-add-dates" ng-click="showPlaceInfo('showPlaceInfo_' + place.id, place.placeId, place.kindPlaceId, place.x, place.y, -1, packet.no)" id="showPlaceInfo_[[place.id]]" style="margin: 10px auto 10px; background: url('{{URL::asset('images/tripplace.png')}}') no-repeat; background-size: 60%;background-position-x:center;  padding: 6px 12px;"></button>
+                                                    <img class="cursor-pointer" ng-click="redirect(place.url)" ng-src='[[place.placePic]]' width="230px">
+                                                    <div class="trip-details ui_columns is-mobile is-fullwidth">
+                                                        <div id="[[($index == 0 && packet.no == 1) ? 'targetHelp_11' : '']]" class="targets margin-auto">
+                                                            <button class="tripDetailsMoreInfoBtnBookMarkPlace ui_button secondary trip-add-dates"
+                                                                    ng-click="showPlaceInfo('showPlaceInfo_' + place.id, place.placeId, place.kindPlaceId, place.x, place.y, -1, packet.no)"
+                                                                    id="showPlaceInfo_[[place.id]]" style=" background: url('{{URL::asset('images/tripplace.png')}}') no-repeat;"></button>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="trip-tile-container ui_column is-12 hidden" style=" border: 1px solid #ccc; border-radius: 5px;" id="row_[[packet.no]]"></div>
+                                            <div class="trip-tile-container ui_column is-12 hidden tripsRowExpandableDiv" id="row_[[packet.no]]"></div>
                                         </div>
                                         <center>
                                             <div class="loader hidden"></div>
@@ -198,11 +155,11 @@
         </div>
     </div>
 
-    <span id="placeInfo" class="pop-up ui_overlay ui_modal find-location-modal-container fade_short fade_in hidden" style="position: fixed; width: 40%; left: 31%; right: auto; top: 41%; bottom: auto;">
+    <span id="placeInfo" class="pop-up ui_overlay ui_modal find-location-modal-container fade_short fade_in hidden">
         <div class="body_text">
             <div>
                 <div class="find_location_modal">
-                    <div style="direction: rtl" class="header_text">اطلاعات مکان</div>
+                    <div class="header_text rtl">اطلاعات مکان</div>
                     <div class="ui_typeahead" id="placeParameters">
                     </div>
                 </div>
@@ -210,19 +167,19 @@
         </div>
         <div class="ui_close_x" onclick="hideElement('placeInfo')"></div>
     </span>
-    <div class="ui_backdrop dark" style="display: none;"></div>
-    <span id="addPlaceToTripPrompt" class="pop-up ui_overlay ui_modal find-location-modal-container fade_short fade_in item hidden" style="position: fixed; width: 39%; left: 30%; right: auto; top: 24%; bottom: auto;">
+    <div class="ui_backdrop dark display-none"></div>
+    <span id="addPlaceToTripPrompt" class="pop-up ui_overlay ui_modal find-location-modal-container fade_short fade_in item hidden">
         <div class="body_text">
             <div>
                 <div class="find_location_modal">
-                    <div style="direction: rtl;margin-bottom: 29px;font-size: 30px;font-weight: bold;" class="header_text">مدیریت مکان</div>
-                    <div class="ui_typeahead" style="direction: rtl" id="tripsForPlace">
+                    <div id="managePlaceTextDiv" class="header_text">مدیریت مکان</div>
+                    <div class="ui_typeahead rtl" id="tripsForPlace">
                     </div>
                 </div>
             </div>
         </div>
-        <div class="submitOptions" style="direction: rtl">
-            <button style="color: #FFF;background-color: #4dc7bc;border-color:#4dc7bc;" onclick="assignPlaceToTrip()" class="btn btn-success">تایید</button>
+        <div class="submitOptions rtl">
+            <button id="manageTripVerifyBtn" onclick="assignPlaceToTrip()" class="btn btn-success">تایید</button>
             <input type="submit" onclick="hideElement('addPlaceToTripPrompt')" value="خیر" class="btn btn-default">
         </div>
         <div class="ui_close_x" onclick="hideElement('addPlaceToTripPrompt')"></div>
@@ -420,36 +377,36 @@
 
                         response = JSON.parse(response);
 
-                        newElement = "<div class='col-xs-12' style='direction: rtl;'>";
+                        newElement = "<div class='col-xs-12 rtl'>";
 
 
                         newElement += "<div class='col-xs-6'>";
                         if(response["date"] != null)
-                            newElement += "<p style='float: left;padding: 5px 0;color: #4DC7BC;'>تاریخ بازدید: " + response["date"] + "</p>";
+                            newElement += "<p class='expandableTripDate'>تاریخ بازدید: " + response["date"] + "</p>";
                         newElement += "</div>";
                         newElement += "<div class='col-xs-6'>";
-                        newElement += "<p onclick='document.location.href = \""+ response['url'] +"\"' style='cursor: pointer; font-size: 1.5em; padding: 5px 0;'>" + response["name"] + "</p>";
+                        newElement += "<p id='expandableTripTitleText' onclick='document.location.href = \""+ response['url'] +"\"'>" + response["name"] + "</p>";
                         newElement += "</div>";
-                        newElement += "<div class='col-xs-4' id='map' style='border: 2px solid black; height: 200px'></div>";
+                        newElement += "<div class='col-xs-4' id='map'></div>";
 
                         newElement += '<div class="col-xs-4"><DIV class="prw_rup prw_common_bubble_rating overallBubbleRating">';
                         if(response["point"] == 5)
-                            newElement += '<span class="ui_bubble_rating bubble_50" style="font-size:16px;" property="ratingValue" content="5" alt="5 of 5 bubbles"></span>';
+                            newElement += '<span class="ui_bubble_rating bubble_50 font-size-16px" property="ratingValue" content="5" alt="5 of 5 bubbles"></span>';
                         else if(response["point"] == 4)
-                            newElement += '<span class="ui_bubble_rating bubble_40" style="font-size:16px;" property="ratingValue" content="5" alt="4 of 5 bubbles"></span>';
+                            newElement += '<span class="ui_bubble_rating bubble_40 font-size-16px" property="ratingValue" content="5" alt="4 of 5 bubbles"></span>';
                         else if(response["point"] == 3)
-                            newElement += '<span class="ui_bubble_rating bubble_30" style="font-size:16px;" property="ratingValue" content="5" alt="3 of 5 bubbles"></span>';
+                            newElement += '<span class="ui_bubble_rating bubble_30 font-size-16px" property="ratingValue" content="5" alt="3 of 5 bubbles"></span>';
                         else if(response["point"] == 2)
-                            newElement += '<span class="ui_bubble_rating bubble_20" style="font-size:16px;" property="ratingValue" content="5" alt="2 of 5 bubbles"></span>';
+                            newElement += '<span class="ui_bubble_rating bubble_20 font-size-16px" property="ratingValue" content="5" alt="2 of 5 bubbles"></span>';
                         else
-                            newElement += '<span class="ui_bubble_rating bubble_10" style="font-size:16px;" property="ratingValue" content="5" alt="1 of 5 bubbles"></span>';
+                            newElement += '<span class="ui_bubble_rating bubble_10 font-size-16px" property="ratingValue" content="5" alt="1 of 5 bubbles"></span>';
                         newElement += "</DIV>";
 
                         newElement += "<p>" + response["city"] + "/" + response["state"] + "</p>";
                         newElement += "<p>" + response["address"] + "</p>";
                         newElement += "</div>";
                         newElement += "<div class='col-xs-4'>";
-                        newElement += "<div><img onclick='document.location.href = \""+ response['url'] +"\"' width='200px' height='200px' style='cursor: pointer' src='" + response["pic"] +  "'></div>";
+                        newElement += "<div><img onclick='document.location.href = \""+ response['url'] +"\"' width='200px' height='200px' class='cursor-pointer' src='" + response["pic"] +  "'></div>";
                         newElement += "</div>";
                         newElement += "</div>";
 
@@ -464,12 +421,12 @@
                                 newElement += "</div>";
                             }
 
-                            newElement += "<div class='col-xs-2' style='margin-top: 10px;'>";
-                            newElement += "<button class='btn btn-primary' onclick='addComment(\"" + tripPlaceId + "\")' data-toggle='tooltip' title='ارسال نظر' style='color: #FFF; background-color: #4dc7bc; border-color:#4dc7bc; border-radius: 5%; width: 100%; margin-top: 17px;'>ارسال</button>";
+                            newElement += "<div class='col-xs-2 mg-tp-10'>";
+                            newElement += "<button id='sendBtnBookMarkPlace' class='btn btn-primary' onclick='addComment(\"" + tripPlaceId + "\")' data-toggle='tooltip' title='ارسال نظر'>ارسال</button>";
                             newElement += "</div>";
 
-                            newElement += "<div class='col-xs-10' style='margin-top: 10px;'>";
-                            newElement += "<textarea id='newComment' placeholder='یادداشت خود را وارد نمایید (حداکثر 300 کارکتر)' maxlength='300' style='width: 100%; padding: 5px; float: right !important; border-radius: 5px; border: 1px solid #ccc'></textarea>";
+                            newElement += "<div class='col-xs-10 mg-tp-10'>";
+                            newElement += "<textarea id='newComment' placeholder='یادداشت خود را وارد نمایید (حداکثر 300 کارکتر)' maxlength='300'></textarea>";
                             newElement += "</div>";
                         }
 
@@ -626,7 +583,7 @@
 
                     response = JSON.parse(response);
 
-                    newElement = "<div class='row' style='direction: rtl'><div style='float: right;' class='col-xs-4'><select id='stateId' onchange='getCities(this.value)'>";
+                    newElement = "<div class='row rtl'><div class='float-right col-xs-4'><select id='stateId' onchange='getCities(this.value)'>";
 
                     newElement += "<option selected value='-1'>استان</option>";
 
@@ -636,12 +593,12 @@
 
                     newElement += "</select></div>";
 
-                    newElement += "<div class='col-xs-4' style='float: right;'><select id='cityId'></select></div>";
+                    newElement += "<div class='col-xs-4 float-right'><select id='cityId'></select></div>";
                     newElement += "<div class='col-xs-4'><select onchange='search()' id='placeKind'></select></div>";
 
-                    newElement += "<div class='col-xs-12' style='margin-top: 20px; border: 2px solid #CCC; border-radius: 7px;'>";
-                    newElement += "<input id='key' onkeyup='search()' style='border: none; margin-top: 10px;' type='text' maxlength='50' placeholder='هتل ، رستوران و اماکن'>";
-                    newElement += "<div id='result' class='data_holder' style='max-height: 160px; overflow: auto; margin-top: 10px;'></div>";
+                    newElement += "<div class='col-xs-12' id='keyAndResultMainDiv'>";
+                    newElement += "<input id='key' onkeyup='search()' type='text' maxlength='50' placeholder='هتل ، رستوران و اماکن'>";
+                    newElement += "<div id='result' class='data_holder'></div>";
                     newElement += "</div>";
 
 
@@ -673,7 +630,7 @@
             placeKind = $("#placeKind").val();
 
             if(placeKind == -1) {
-                $("#result").empty().append("<p style='color: #963019'>لطفا مکان مورد نظر خود را مشخص کنید</p>");
+                $("#result").empty().append("<p class='dark-red'>لطفا مکان مورد نظر خود را مشخص کنید</p>");
                 return;
             }
 
@@ -702,7 +659,7 @@
                         currIdx = -1;
 
                         for(i = 0; i < response.length; i++) {
-                            newElement += "<div style='cursor: pointer; padding: 5px 20px; border-bottom: 1px solid #CCC' class='suggest' id='suggest_" + i + "'  onclick='addPlace(\"" + response[i].id + "\")'> " + response[i].name + "<span> - </span><span>در</span><span>&nbsp;</span>" + response[i].cityName + "<span>&nbsp;در</span>" + response[i].stateName + "<span>&nbsp;آدرس</span><span>&nbsp;</span>" + response[i].address + "</div>";
+                            newElement += "<div class='suggest bookMarkPlaceSuggestion' id='suggest_" + i + "'  onclick='addPlace(\"" + response[i].id + "\")'> " + response[i].name + "<span> - </span><span>در</span><span>&nbsp;</span>" + response[i].cityName + "<span>&nbsp;در</span>" + response[i].stateName + "<span>&nbsp;آدرس</span><span>&nbsp;</span>" + response[i].address + "</div>";
                         }
 
                         $("#result").empty().append(newElement);
@@ -847,7 +804,7 @@
             if(tripName != "" && date_input_start != "" && date_input_start != "") {
 
                 if(date_input_start > date_input_end) {
-                    newElement = "<p style='color: red'>تاریخ پایان از تاریخ شروع باید بزرگ تر باشد</p>";
+                    newElement = "<p class='color-red'>تاریخ پایان از تاریخ شروع باید بزرگ تر باشد</p>";
                     $("#error").empty().append(newElement);
                     return;
                 }
@@ -866,7 +823,7 @@
                             document.location.href = tripPlaces;
                         }
                         else if(response == "nok3") {
-                            newElement = "<p style='color: red'>تاریخ پایان از تاریخ شروع باید بزرگ تر باشد</p>";
+                            newElement = "<p class='color-red'>تاریخ پایان از تاریخ شروع باید بزرگ تر باشد</p>";
                             $("#error").empty().append(newElement);
                         }
                     }
@@ -1003,7 +960,7 @@
             if(date_input_start != "" && date_input_start != "") {
 
                 if(date_input_start > date_input_end) {
-                    newElement = "<p style='color: red'>تاریخ پایان از تاریخ شروع باید بزرگ تر باشد</p>";
+                    newElement = "<p class='color-red'>تاریخ پایان از تاریخ شروع باید بزرگ تر باشد</p>";
                     $("#error2").empty().append(newElement);
                     return;
                 }
@@ -1023,7 +980,7 @@
                     }
                     else if(response == "nok3") {
                         $("#error2").empty();
-                        newElement = "<p style='color: red'>تاریخ پایان از تاریخ شروع باید بزرگ تر باشد</p>";
+                        newElement = "<p class='color-red'>تاریخ پایان از تاریخ شروع باید بزرگ تر باشد</p>";
                         $("#error2").append(newElement);
                     }
                 }
@@ -1066,11 +1023,11 @@
                     $("#notePrompt").empty();
 
                     if(response != "empty") {
-                        newElement = "<textarea id='tripNote' style='border-radius: 5px;border:1px solid #CCC;padding: 5px;max-width: 100%; width: 100%; height: auto;min-height: 110px;'>";
+                        newElement = "<textarea id='tripNote'>";
                         newElement += response;
                     }
                     else {
-                        newElement = "<textarea id='tripNote' style='border-radius: 5px;border:1px solid #CCC;padding: 5px;max-width: 100%;width: 100%; height: auto;min-height: 110px;' placeholder='یادداشتی موجود نیست'>";
+                        newElement = "<textarea id='tripNote' placeholder='یادداشتی موجود نیست'>";
                     }
 
                     newElement += "</textarea>";
@@ -1222,9 +1179,9 @@
                         newElement += "<div class='col-xs-12'>";
                         newElement += "<span>" + response[i]['username'] + "</span>";
                         if(response[i]["delete"] == 1) {
-                            newElement += "<button style='margin-right: 10px;padding: 0px 9px;' class='ui_button secondary' onclick='deleteMember(\"" + response[i]['username'] + "\")' data-toggle='tooltip' title='حذف عضو'><span class='' style=''><img src='" + homeURL + "/images/deleteIcon.gif'/> </span></button>";
+                            newElement += "<button id='eliminateUserBtn' class='ui_button secondary' onclick='deleteMember(\"" + response[i]['username'] + "\")' data-toggle='tooltip' title='حذف عضو'><span class='' ><img src='" + homeURL + "/images/deleteIcon.gif'/> </span></button>";
                             if (owner == 1) {
-                                newElement += "<br><a onclick='memberDetails(\"" + response[i]['username'] + "\")' style='cursor: pointer; text-align: center;color: #16174f;'>جزئیات<img src='" + homeURL + "/images/blackNavArrowDown.gif' width='7' height='4' hspace='10' border='0' align='absmiddle'/></a>";
+                                newElement += "<br><a id='DetailsLink' onclick='memberDetails(\"" + response[i]['username'] + "\")'>جزئیات<img src='" + homeURL + "/images/blackNavArrowDown.gif' width='7' height='4' hspace='10' border='0' align='absmiddle'/></a>";
                                 newElement += "<div class='hidden' id='details_" + response[i]['username'] + "'></div>"
                             }
                         }
@@ -1282,7 +1239,7 @@
                     response = JSON.parse(response);
 
                     newElement = "<div class='row'>";
-                    newElement += "<div class='col-xs-12' style='margin-top: 10px'>";
+                    newElement += "<div class='col-xs-12 mg-tp-10'>";
                     newElement += "<div class='ui_input_checkbox'>";
                     if(response.addPlace == 1)
                         newElement += "<input id='addPlaceLevel' onclick='changeAddPlace(\"" + username + "\")' checked type='checkbox'>";
@@ -1292,7 +1249,7 @@
                     newElement += "<label for='addPlaceLevel' class='labelForCheckBox'><span></span>&nbsp;&nbsp;افزودن مکان</label>";
                     newElement += "</div></div>";
 
-                    newElement += "<div class='col-xs-12' style='margin-top: 10px'>";
+                    newElement += "<div class='col-xs-12 mg-tp-10'>";
                     newElement += "<div class='ui_input_checkbox'>";
                     if(response.addFriend == 1)
                         newElement += "<input id='addFriendLevel' onclick='changeAddFriend(\"" + username + "\")' checked type='checkbox'>";
@@ -1301,7 +1258,7 @@
 
                     newElement += "<label class='labelForCheckBox' for='addFriendLevel'><span></span>&nbsp;&nbsp;دعوت دوستان</label></div></div>";
 
-                    newElement += "<div class='col-xs-12' style='margin-top: 10px'>";
+                    newElement += "<div class='col-xs-12 mg-tp-10'>";
                     newElement += "<div class='ui_input_checkbox'>";
                     if(response.changePlaceDate == 1)
                         newElement += "<input id='changePlaceDateLevel' onclick='changePlaceDate(\"" + username + "\")' checked type='checkbox'>";
@@ -1309,7 +1266,7 @@
                         newElement += "<input id='changePlaceDateLevel' onclick='changePlaceDate(\"" + username + "\")' type='checkbox'>";
                     newElement += "<label class='labelForCheckBox' for='changePlaceDateLevel'><span></span>&nbsp;&nbsp;تغییر زمان مکان های سفر</label></div></div>";
 
-                    newElement += "<div class='col-xs-12' style='margin-top: 10px'>";
+                    newElement += "<div class='col-xs-12 mg-tp-10'>";
                     newElement += "<div class='ui_input_checkbox'>";
                     if(response.changeTripDate == 1)
                         newElement += "<input id='changeDate' onclick='changeTripDate(\"" + username + "\")' checked type='checkbox'>";
@@ -1521,14 +1478,14 @@
                 return "";
 
             t = total - filters.length;
-            newElement = "<div class='col-xs-12' style='position: relative'><div class='col-xs-12 bubbles' style='padding: 0; margin-right: 0; margin-left: " + ((400 - (t * 18)) / 2) + "px'>";
+            newElement = "<div class='col-xs-12 position-relative'><div class='col-xs-12 bubbles padding-0 mg-rt-0' style='margin-left: " + ((400 - (t * 18)) / 2) + "px'>";
 
             for (i = 1; i < total; i++) {
                 if(!isInFilters(i)) {
                     if(i == curr)
-                        newElement += "<div style='border: 1px solid #ccc; background-color: #ccc; border-radius: 50%; margin-right: 2px; width: 12px; height: 12px; float: left'></div>";
+                        newElement += "<div class='filtersDivBookmark'></div>";
                     else
-                        newElement += "<div onclick='show(\"" + i + "\", 1)' class='helpBubble' style='border: 1px solid #333; background-color: black; border-radius: 50%; margin-right: 2px; width: 12px; height: 12px; float: left'></div>";
+                        newElement += "<div onclick='show(\"" + i + "\", 1)' class='helpBubble filtersDivBookmarkElse'></div>";
                 }
             }
 
