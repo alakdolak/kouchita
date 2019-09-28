@@ -15,6 +15,18 @@
         <title>لیست غذاهای محلی</title>
     @endif
     <style>
+        .moreItems{
+            display: block;
+            text-align: center;
+            margin-top: 5px;
+            cursor: pointer;
+        }
+        .lessItems{
+            display: block;
+            text-align: center;
+            margin-top: 5px;
+            cursor: pointer;
+        }
         .loader {
             background-image: url("{{URL::asset('images/loading.svg')}}");
 

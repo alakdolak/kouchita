@@ -175,12 +175,24 @@
                                         <div class="global-nav-overlays-container">
                                             <div id="profile-drop" class="ui_overlay ui_flyout global-nav-flyout global-nav-utility">
                                                 <ul class="global-nav-profile-menu">
-                                                    <li class="subItem"><a href="{{URL('profile')}}" class="subLink" data-tracking-label="UserProfile_viewProfile">صفحه کاربری</a></li>
-                                                    <li class="subItem rule"><a href="{{route('soon')}}" class="subLink global-nav-submenu-divided" data-tracking-label="UserProfile_bookings">رزروها</a></li>
-                                                    <li class="subItem "><a href="{{route('soon')}}" class="subLink" data-tracking-label="UserProfile_inbox">پروازها</a></li>
-                                                    <li class="subItem rule"><a href="{{URL('messages')}}" class="subLink global-nav-submenu-divided" data-tracking-label="UserProfile_messages">پیام ها</a> </li>
-                                                    <li class="subItem"><a href="{{URL('accountInfo')}}" class="subLink" data-tracking-label="UserProfile_settings">اطلاعات کاربر </a></li>
-                                                    <li class="subItem"><a href="{{route('logout')}}" class="subLink" data-tracking-label="UserProfile_signout">خروج</a></li>
+                                                    <li class="subItem">
+                                                        <a href="{{URL('profile')}}" class="subLink" data-tracking-label="UserProfile_viewProfile">صفحه کاربری</a>
+                                                    </li>
+                                                    <li class="subItem rule">
+                                                        <a href="{{route('soon')}}" class="subLink global-nav-submenu-divided" data-tracking-label="UserProfile_bookings">رزروها</a>
+                                                    </li>
+                                                    <li class="subItem ">
+                                                        <a href="{{route('soon')}}" class="subLink" data-tracking-label="UserProfile_inbox">پروازها</a>
+                                                    </li>
+                                                    <li class="subItem rule">
+                                                        <a href="{{URL('messages')}}" class="subLink global-nav-submenu-divided" data-tracking-label="UserProfile_messages">پیام ها</a>
+                                                    </li>
+                                                    <li class="subItem">
+                                                        <a href="{{URL('accountInfo')}}" class="subLink" data-tracking-label="UserProfile_settings">اطلاعات کاربر </a>
+                                                    </li>
+                                                    <li class="subItem">
+                                                        <a href="{{route('logout')}}" class="subLink" data-tracking-label="UserProfile_signout">خروج</a>
+                                                    </li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -197,43 +209,43 @@
                     </div>
                 </div>
                 <div class="sidebar-nav-wrapper hidden">
-                <div class="sidebar-nav-backdrop"></div>
-                <div class="sidebar-nav-container">
-                    <div class="ui_container">
-                        <div class="sidebar-nav-header">
-                            <div class="sidebar-nav-close">
-                                <div class="ui_icon times"></div>
-                            </div>
-                            <a href="/" class="global-nav-logo"><img src='{{URL::asset('images/logo.png')}}' alt="شازده مسافر" class="global-nav-img"/></a>
-                        </div>
-                        @if(Auth::check())
-                            <div class="sidebar-nav-profile-container">
-                                <div class="sidebar-nav-profile-linker">
-                                    <a class="global-nav-profile-linker">
-                                        <span onclick="document.location.href = '{{route('profile')}}'" class="ui_icon member"></span>
-                                        <div class="profile-link">
-                                            <div class="profile-name">{{$user->username}}</div>
-                                            <div class="profile-link-text">صفحه کاربری</div>
-                                        </div>
-                                    </a>
+                    <div class="sidebar-nav-backdrop"></div>
+                    <div class="sidebar-nav-container">
+                        <div class="ui_container">
+                            <div class="sidebar-nav-header">
+                                <div class="sidebar-nav-close">
+                                    <div class="ui_icon times"></div>
                                 </div>
-                                <p class="sidebar-nav-title">اکانت من</p>
-                                <div class="sidebar-nav-profile">
-                                    <li class="subItem"><a href="{{route('soon')}}" class="subLink global-nav-submenu-divided">سفرهای من</a></li>
-                                    <li class="subItem"><a href="{{route('soon')}}" class="subLink global-nav-submenu-divided" data-tracking-label="UserProfile_ManagementCenter">رزروها</a></li>
-                                    <li class="subItem"><a href="{{route('soon')}}" class="subLink" data-tracking-label="UserProfile_inbox">پروازها</a></li>
-                                    <li class="subItem"><a href="{{route('logout')}}" class="subLink" data-tracking-label="UserProfile_signout">خروج</a></li>
-                                </div>
+                                <a href="/" class="global-nav-logo"><img src='{{URL::asset('images/logo.png')}}' alt="شازده مسافر" class="global-nav-img"/></a>
                             </div>
-                        @endif
-                        <div class="sidebar-nav-links-container">
-                            <p class="sidebar-nav-title">Browse</p>
-                            <div class="sidebar-nav-links"></div>
-                            <div class="sidebar-nav-links-more"></div>
+                            @if(Auth::check())
+                                <div class="sidebar-nav-profile-container">
+                                    <div class="sidebar-nav-profile-linker">
+                                        <a class="global-nav-profile-linker">
+                                            <span onclick="document.location.href = '{{route('profile')}}'" class="ui_icon member"></span>
+                                            <div class="profile-link">
+                                                <div class="profile-name">{{$user->username}}</div>
+                                                <div class="profile-link-text">صفحه کاربری</div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <p class="sidebar-nav-title">اکانت من</p>
+                                    <div class="sidebar-nav-profile">
+                                        <li class="subItem"><a href="{{route('soon')}}" class="subLink global-nav-submenu-divided">سفرهای من</a></li>
+                                        <li class="subItem"><a href="{{route('soon')}}" class="subLink global-nav-submenu-divided" data-tracking-label="UserProfile_ManagementCenter">رزروها</a></li>
+                                        <li class="subItem"><a href="{{route('soon')}}" class="subLink" data-tracking-label="UserProfile_inbox">پروازها</a></li>
+                                        <li class="subItem"><a href="{{route('logout')}}" class="subLink" data-tracking-label="UserProfile_signout">خروج</a></li>
+                                    </div>
+                                </div>
+                            @endif
+                            <div class="sidebar-nav-links-container">
+                                <p class="sidebar-nav-title">Browse</p>
+                                <div class="sidebar-nav-links"></div>
+                                <div class="sidebar-nav-links-more"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
                 <div class="clear-both"></div>
             </div>
         </div>
