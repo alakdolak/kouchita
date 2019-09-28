@@ -21,7 +21,7 @@
 @section('main')
 
 
-    <link rel="stylesheet" href="{{URL::asset('css/theme2/specific designs/addMeta.css')}}">
+    <link rel="stylesheet" href="{{URL::asset('css/theme2/specific designs/profile.css')}}">
 
     <center class="row">
         @if($mode2 == 'select1')
