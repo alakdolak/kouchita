@@ -1150,7 +1150,9 @@ class HomeController extends Controller
                     $arr[$i++] = 0;
                     $arr[$i++] = -1;
                     $arr[$i++] = 3;
-                    $arr[$i] = 1;
+                    $arr[$i++] = 1;
+                    $arr[$i++] = null;
+                    $arr[$i] = null;
 
 
                     foreach ($vals as $key => $value) {
