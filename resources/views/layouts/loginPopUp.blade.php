@@ -10,8 +10,8 @@ require_once (__DIR__ . '/../../../app/Http/Controllers/glogin/libraries/Google/
 
 //Insert your cient ID and secret
 //You can get it from : https://console.developers.google.com/
-$client_id = '774684902659-20aeg6um0856j5li2uuu9ombu2pcbqv9.apps.googleusercontent.com';
-$client_secret = 'ARyU8-RXFJZD5jl5QawhpHne';
+$client_id = '204875713143-vgh7o6lfh1m8phas09n7ia8psgmk3bbi.apps.googleusercontent.com';
+$client_secret = '0kHyl_hsKamEH6SX-_9xmkWq';
 $redirect_uri =  route('loginWithGoogle');
 
 /************************************************
