@@ -299,11 +299,7 @@ Route::group(array('middleware' => ['throttle:30', 'nothing', 'auth', 'adminAcce
 
     Route::post('opOnReport/{mode}', array('as' => 'opOnReport', 'uses' => 'ReportController@opOnReport'));
 
-    Route::any('specialAdvice', array('as' => 'specialAdvice', 'uses' => 'HomeController@specialAdvice'));
-
     Route::post('findPlace', array('as' => 'findPlace', 'uses' => 'HomeController@findPlace'));
-
-    Route::post('submitAdvice', array('as' => 'submitAdvice', 'uses' => 'HomeController@submitAdvice'));
 
 });
 

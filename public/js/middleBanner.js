@@ -2,6 +2,7 @@
 var currIdx, suggestions = [];
 
 function chooseState(e) {
+
     $.ajax({
         type: "post",
         url: getStates,
@@ -15,7 +16,7 @@ function chooseState(e) {
             }
 
             $("#states").empty().append(newElement);
-            $("#statePane").removeClass("hidden");
+            $("#statePane1").removeClass("hidden");
             $(".dark").show();
         }
     })
@@ -36,7 +37,7 @@ function chooseStateAmaken() {
             }
 
             $("#states").empty().append(newElement);
-            $("#statePane").removeClass("hidden");
+            $("#statePane1").removeClass("hidden");
             $(".dark").show();
         }
     })

@@ -585,10 +585,10 @@
 
                 <div class="submitOptions">
                     <button onclick="document.location.href = $('#states').val()" class="btn btn-success">تایید</button>
-                    <input type="submit" onclick="$('.dark').hide(); $('#statePane').addClass('hidden')" value="خیر" class="btn btn-default">
+                    <input type="submit" onclick="$('.dark').hide(); $('#statePane1').addClass('hidden')" value="خیر" class="btn btn-default">
                 </div>
             </div>
-            <div onclick="$('#statePane').addClass('hidden'); $('.dark').hide()" class="ui_close_x"></div>
+            <div onclick="$('#statePane1').addClass('hidden'); $('.dark').hide()" class="ui_close_x"></div>
         </span>
 
         <span id="statePane2" class="statePane ui_overlay ui_modal editTags hidden pop-up-Panes">
