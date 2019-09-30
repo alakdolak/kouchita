@@ -64,12 +64,12 @@ if ($total == 0)
 
     {{--vr--}}
 
-{{--    @if($video != null)--}}
-{{--        <link rel="stylesheet" href="{{URL::asset('vr2/video-js.css')}}">--}}
-{{--        <link rel="stylesheet" href="{{URL::asset('vr2/videojs-vr.css')}}">--}}
-{{--        <script src="{{URL::asset('vr2/video.js')}}"></script>--}}
-{{--        <script src="{{URL::asset('vr2/videojs-vr.js')}}"></script>--}}
-{{--    @endif--}}
+    @if(isset($video) && $video != null)
+        <link rel="stylesheet" href="{{URL::asset('vr2/video-js.css')}}">
+        <link rel="stylesheet" href="{{URL::asset('vr2/videojs-vr.css')}}">
+        <script src="{{URL::asset('vr2/video.js')}}"></script>
+        <script src="{{URL::asset('vr2/videojs-vr.js')}}"></script>
+    @endif
 
 @stop
 
@@ -711,7 +711,7 @@ if ($total == 0)
                                             </div>
                                             <div class="albumInfo">
                                                 <span class="ui_icon camera">&nbsp;</span>
-                                                محتواهای تعاملی {{$video == null ? 0 : 1}}
+                                                محتواهای تعاملی {{(!isset($video) || $video == null) ? 0 : 1}}
                                             </div>
                                         </div>
                                     </div>
@@ -1834,7 +1834,7 @@ if ($total == 0)
     </div>
 
 
-    @if($video != null)
+    @if(isset($video) && $video != null)
         <!-- The Modal -->
         {{--vr--}}
         <div class="modal" id="myModal">
@@ -1842,13 +1842,10 @@ if ($total == 0)
                 <div class="modal-content">
                     <!-- Modal body -->
                     <div class="modal-body" style="justify-content: center; display: flex;">
-                        @if($video != null)
-                            <video id="my-video" class="video-js vjs-default-skin" controls style=" max-height: 80vh;">
-                                <source src="{{URL::asset('vr2/contents/' . $video)}}" type="video/mp4">
-                            </video>
-                        @else
-                            ویدیویی برای نمایش موجود نمی باشد.
-                        @endif
+                        <video id="my-video" class="video-js vjs-default-skin" controls style=" max-height: 80vh;">
+                            <source src="{{URL::asset('vr2/contents/' . $video)}}" type="video/mp4">
+                        </video>
+{{--                            ویدیویی برای نمایش موجود--}}
                     </div>
                 </div>
             </div>

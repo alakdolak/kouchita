@@ -2874,10 +2874,10 @@ class PlaceController extends Controller {
 
     public function getAdviceMain() {
 
-        if (Cache::has('suggestedPlaces')) {
-            echo \GuzzleHttp\json_encode(Cache::get('suggestedPlaces'));
-            return;
-        }
+//        if (Cache::has('suggestedPlaces')) {
+//            echo \GuzzleHttp\json_encode(Cache::get('suggestedPlaces'));
+//            return;
+//        }
 
         $activityId = Activity::whereName('نظر')->first()->id;
         $places = SpecialAdvice::all();
