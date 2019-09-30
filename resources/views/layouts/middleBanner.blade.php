@@ -1,3 +1,4 @@
+<link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/middleBanner.css')}}'/>
 
 <div class="ui_container">
     <div class="ppr_rup ppr_priv_homepage_shelves">
@@ -45,7 +46,7 @@
                             </div>
                         </div>
                     </div>
-                    <div style="clear: both;"></div>
+                    <div class="clear-both"></div>
                 </div>
             </div>
         </div>
@@ -94,8 +95,7 @@
                         </div>
                         <div class="prw_rup prw_shelves_geo_shelf_item_widget ui_column is-3-tablet is-6-mobile">
                             <div class="poi">
-                                <div class="thumbnail otherServicesBoxes" "
-                                     onclick="chooseState('ghazamahali')">
+                                <div class="thumbnail otherServicesBoxes" onclick="chooseState('ghazamahali')">
                                     <div class="prw_rup prw_common_thumbnail_no_style_responsive" data-prwidget-name="common_thumbnail_no_style_responsive" data-prwidget-init="">
                                         <div class="prv_thumb has_image">
                                             <div class="image_wrapper landscape landscapeWide">
@@ -218,7 +218,7 @@
                 {{--</a>--}}
                 {{--</div>--}}
             </div>
-            <div style="clear: both"></div>
+            <div class="clear-both"></div>
             <div class="col-xs-12">
                 <div class="col-xs-4 squareDiv" onclick="$('#phoneSearchPopUp').removeClass('hidden')">
                     <div class="phoneIcon ghazamahali"></div>
@@ -239,7 +239,7 @@
                 {{--</a>--}}
                 {{--</div>--}}
             </div>
-            <div style="clear: both"></div>
+            <div class="clear-both"></div>
             <div class="col-xs-4"></div>
             <div class="col-xs-4 moreOptionsSquareDiv" onclick="$('#phoneMenuBarPopUp').removeClass('hidden')">
                 <span><span class="phoneIcon downArrow"></span>گزینه های بیشتر</span>

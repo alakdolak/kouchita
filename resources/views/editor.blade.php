@@ -1,5 +1,5 @@
 
-
+<link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/editor.css')}}'/>
 
 <!--[if lt IE 9]>
 <div class="alert alert-warning alert-dismissible fade show m-0 rounded-0" role="alert">
@@ -11,9 +11,9 @@
 <![endif]-->
 
 
-<span id="editPane" class="ui_overlay ui_modal photoUploadOverlay hidden" style="padding: 0; width: 50%; right: auto; height: 90%; top: 5%; position: fixed; left: 25%">
-     <div class="body_text">
-        <div class="row" style="max-height: 600px; overflow: auto">
+<span id="editPane" class="ui_overlay ui_modal photoUploadOverlay hidden">
+   <div class="body_text">
+      <div class="row">
          <center class="col-md-12">
             <!-- <h3>Demo:</h3> -->
             <div class="img-container">
@@ -21,108 +21,108 @@
             </div>
          </center>
       </div>
-        <div class="row" id="actions">
-      <center class="col-md-12 docs-buttons" style="margin: 20px">
+      <div class="row" id="actions">
+         <center class="col-md-12 docs-buttons">
 
-         <div class="btn-group">
-            <button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="rotate" data-option="-45" title="Rotate Left">
-               <span class="docs-tooltip" data-toggle="tooltip" title="cropper.rotate(-45)">
-                 <span class="fa fa-rotate-left"></span>
-               </span>
-            </button>
+            <div class="btn-group">
+               <button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="rotate" data-option="-45" title="Rotate Left">
+                  <span class="docs-tooltip" data-toggle="tooltip" title="cropper.rotate(-45)">
+                    <span class="fa fa-rotate-left"></span>
+                  </span>
+               </button>
 
-            <button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="rotate" data-option="45" title="Rotate Right">
-               <span class="docs-tooltip" data-toggle="tooltip" title="cropper.rotate(45)">
-                 <span class="fa fa-rotate-right"></span>
-               </span>
-            </button>
-         </div>
+               <button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="rotate" data-option="45" title="Rotate Right">
+                  <span class="docs-tooltip" data-toggle="tooltip" title="cropper.rotate(45)">
+                    <span class="fa fa-rotate-right"></span>
+                  </span>
+               </button>
+            </div>
 
-         <div class="btn-group">
-            <button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="scaleX" data-option="-1" title="Flip Horizontal">
-               <span class="docs-tooltip" data-toggle="tooltip" title="cropper.scaleX(-1)">
-                 <span class="fa fa-arrows-h"></span>
-               </span>
-            </button>
+            <div class="btn-group">
+               <button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="scaleX" data-option="-1" title="Flip Horizontal">
+                  <span class="docs-tooltip" data-toggle="tooltip" title="cropper.scaleX(-1)">
+                    <span class="fa fa-arrows-h"></span>
+                  </span>
+               </button>
 
-            <button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="scaleY" data-option="-1" title="Flip Vertical">
-               <span class="docs-tooltip" data-toggle="tooltip" title="cropper.scaleY(-1)">
-                 <span class="fa fa-arrows-v"></span>
-               </span>
-            </button>
-         </div>
+               <button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="scaleY" data-option="-1" title="Flip Vertical">
+                  <span class="docs-tooltip" data-toggle="tooltip" title="cropper.scaleY(-1)">
+                    <span class="fa fa-arrows-v"></span>
+                  </span>
+               </button>
+            </div>
 
-         <div class="btn-group">
-            <button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="crop" title="Crop">
-               <span class="docs-tooltip" data-toggle="tooltip" title="cropper.crop()">
-                 <span class="fa fa-check"></span>
-               </span>
-            </button>
+            <div class="btn-group">
+               <button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="crop" title="Crop">
+                  <span class="docs-tooltip" data-toggle="tooltip" title="cropper.crop()">
+                    <span class="fa fa-check"></span>
+                  </span>
+               </button>
 
-            <button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="clear" title="Clear">
-               <span class="docs-tooltip" data-toggle="tooltip" title="cropper.clear()">
-                 <span class="fa fa-remove"></span>
-               </span>
-            </button>
-         </div>
+               <button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="clear" title="Clear">
+                  <span class="docs-tooltip" data-toggle="tooltip" title="cropper.clear()">
+                    <span class="fa fa-remove"></span>
+                  </span>
+               </button>
+            </div>
 
-         <div class="btn-group btn-group-crop">
+            <div class="btn-group btn-group-crop">
 
-            <button id="saveBtn" type="button" onclick="successBtnClicked(this)" class="btn btn-success" data-method="getCroppedCanvas" data-option="{ &quot;width&quot;: 466, &quot;height&quot;: 367 }">
-               <span class="docs-tooltip" data-toggle="tooltip" id="saveBtnSpan" title="cropper.getCroppedCanvas({ width: 466, height: 367 })">
-                 ذخیره
-               </span>
-            </button>
+               <button id="saveBtn" type="button" onclick="successBtnClicked(this)" class="btn btn-success" data-method="getCroppedCanvas" data-option="{ &quot;width&quot;: 466, &quot;height&quot;: 367 }">
+                  <span class="docs-tooltip" data-toggle="tooltip" id="saveBtnSpan" title="cropper.getCroppedCanvas({ width: 466, height: 367 })">
+                    ذخیره
+                  </span>
+               </button>
 
-            <button id="saveBtn2" type="button" onclick="successBtnClicked(this)" class="btn btn-success hidden" data-method="getCroppedCanvas" data-option="{ &quot;width&quot;: 100, &quot;height&quot;: 100 }">
-               <span class="docs-tooltip" data-toggle="tooltip" id="saveBtnSpan" title="cropper.getCroppedCanvas({ width: 100, height: 100 })">
-                 ذخیره
-               </span>
-            </button>
-         </div>
+               <button id="saveBtn2" type="button" onclick="successBtnClicked(this)" class="btn btn-success hidden" data-method="getCroppedCanvas" data-option="{ &quot;width&quot;: 100, &quot;height&quot;: 100 }">
+                  <span class="docs-tooltip" data-toggle="tooltip" id="saveBtnSpan" title="cropper.getCroppedCanvas({ width: 100, height: 100 })">
+                    ذخیره
+                  </span>
+               </button>
+            </div>
 
-         <!-- Show the cropped image in modal -->
-         <div class="modal fade docs-cropped" id="getCroppedCanvasModal" role="dialog" aria-hidden="true" aria-labelledby="getCroppedCanvasTitle" tabindex="-1">
-            <div class="modal-dialog">
-               <div class="modal-content">
-                  <div class="modal-header">
-                     <h5 class="modal-title" id="getCroppedCanvasTitle">Cropped</h5>
-                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                     </button>
-                  </div>
-                  <div class="modal-body"></div>
-                  <div class="modal-footer">
-                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                     <a class="btn btn-primary" id="download" href="javascript:void(0);" download="cropped.jpg">Download</a>
+            <!-- Show the cropped image in modal -->
+            <div class="modal fade docs-cropped" id="getCroppedCanvasModal" role="dialog" aria-hidden="true" aria-labelledby="getCroppedCanvasTitle" tabindex="-1">
+               <div class="modal-dialog">
+                  <div class="modal-content">
+                     <div class="modal-header">
+                        <h5 class="modal-title" id="getCroppedCanvasTitle">Cropped</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                           <span aria-hidden="true">&times;</span>
+                        </button>
+                     </div>
+                     <div class="modal-body"></div>
+                     <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <a class="btn btn-primary" id="download" href="javascript:void(0);" download="cropped.jpg">Download</a>
+                     </div>
                   </div>
                </div>
+            </div><!-- /.modal -->
+
+            <div id="scripts">
+
+               <script src="{{URL::asset('js/editorCommon.js')}}"></script>
+               <script src="{{URL::asset('js/cropper.js')}}"></script>
+               <script src="{{URL::asset('js/mainCrop.js')}}"></script>
             </div>
-         </div><!-- /.modal -->
 
-         <div id="scripts">
-
-            <script src="{{URL::asset('js/editorCommon.js')}}"></script>
-            <script src="{{URL::asset('js/cropper.js')}}"></script>
-            <script src="{{URL::asset('js/mainCrop.js')}}"></script>
-         </div>
-
-      </center><!-- /.docs-buttons -->
+         </center><!-- /.docs-buttons -->
+      </div>
    </div>
-     </div>
 </span>
 
-<span id="photoEditor" class="ui_overlay ui_modal photoUploadOverlay hidden" style="padding: 0px; width: 860px; height: 90%; top: 5%; position: fixed; left: 50%; margin-left: -430px;">
+<span id="photoEditor" class="ui_overlay ui_modal photoUploadOverlay hidden">
 
      <div class="body_text">
 
          <div class="photoUploader">
 
             <div class="headerBar">
-                 <h3 id="photoUploadHeader" style="margin-right: 40px" class="photoUploadHeader"><span>افزودن تصویر به </span><span>{{$place->name}}</span></h3>
+                 <h3 id="photoUploadHeader" class="photoUploadHeader"><span>افزودن تصویر به </span><span>{{$place->name}}</span></h3>
                  <div id="photoUploadTipsLink" class="headerLink tipsLink">
                     <span onclick="$('#guidelinesOverlay').removeClass('hidden')">قوانین سایت</span>
-                    <span id="guidelinesOverlay" class="hidden ui_overlay ui_popover arrow_top guidelinesOverlayParent ui_tooltip " style="position: fixed; right: 460px; left: auto; top: 82px; bottom: auto;">
+                    <span id="guidelinesOverlay" class="hidden ui_overlay ui_popover arrow_top guidelinesOverlayParent ui_tooltip">
                         <div class="header_text"></div>
                         <div class="body_text">
                            <div class="guidelinesOverlay">
@@ -132,7 +132,10 @@
                                  <li>Original, non-copyrighted images</li>
                                  <li>Non-commercial</li>
                                  <li>Virus-free</li>
-                                 <li>In <b>.gif</b>, <b>.jpg</b>, or <b>.png</b> format</li>
+                                 <li>In
+                                    <b>.gif</b>,
+                                    <b>.jpg</b>, or
+                                    <b>.png</b> format</li>
                                  <li>No more than 50 photos per upload</li>
                               </ul>
                               <div class="listFtr">Read our complete <a href="https://www.tripadvisorsupport.com/hc/en-us/articles/200615067-Photo-Guidelines" target="_blank" class="js_popFraud">photo submission guidelines</a>.</div>
@@ -143,39 +146,39 @@
                  </div>
               </div>
 
-            <div id="uploader-dlg" class="uploaderDlg hasFiles" style="overflow: auto; max-height: 100%">
+            <div id="uploader-dlg" class="uploaderDlg hasFiles">
 
                <div class="template itemRow loading">
 
-                  <div class="row" style="max-width: 100%">
+                  <div class="row">
 
                      <div class="col-xs-4">
-                        <div class="preview" style="width: 250px; height: 200px">
+                        <div class="preview">
                            <div class="imgContainer">
-                              <img id="image_file" style="width: 213px; height: 168px; transform: rotate(0deg);">
+                              <img id="image_file">
                            </div>
                            <div onclick="doEdit(213 / 168)" class="action editBtn"></div>
                         </div>
 
-                        <div style="clear:both;"></div>
+                        <div class="clear-both"></div>
 
-                        <div class="preview" style="width: 150px; height: 150px;">
+                        <div class="preview">
                            <div class="imgContainer">
-                              <img id="image_file_2" style="width: 100px; height: 100px; transform: rotate(0deg);">
+                              <img id="image_file_2">
                            </div>
                            <div onclick="doEdit(1)" class="action editBtn"></div>
                         </div>
                      </div>
 
-                     <div class="col-xs-6" style="margin-right: 30px">
-                        <form style="margin-left: 30px" class="photoForm roomType">
+                     <div class="col-xs-6">
+                        <form class="photoForm roomType">
                            <div class="field category">
-                              <div class="formFieldTitle" style="text-align: center">دسته <span>(الزامی)</span></div>
-                              <div id="photoTags" class="column first" style="border: none !important; float: right !important;"></div>
+                              <div class="formFieldTitle text-align-center">دسته <span>(الزامی)</span></div>
+                              <div id="photoTags" class="column first"></div>
                            </div>
                            <div class="field description">
                               <div class="maxChars"><span>توضیحات</span><span>(اختیاری)</span></div>
-                              <input style="min-height: 100px; max-height: 100px; overflow: auto;" type="text" id="description" placeholder="حداکثر 100 کاراکتر" maxlength="100" onkeypress="return event.keyCode != 13;">
+                              <input type="text" id="description" placeholder="حداکثر 100 کاراکتر" maxlength="100" onkeypress="return event.keyCode != 13;">
                            </div>
                         </form>
                      </div>
@@ -188,9 +191,9 @@
                <div  id="dropArea" class="startScreen infoScreen">
                   <div class="inner">
                      <div>
-                        <input id="pic" type="file" style="padding: 9px 16px 8px; position: absolute; right: 0; width: 100%; height: 100%; top: 0; display: none">
+                        <input id="pic" type="file">
                         <label for="pic">
-                           <div class="ui_button primary addPhotoBtn" style="z-index: 1000">
+                           <div class="ui_button primary addPhotoBtn">
                               <span>Select photos from your computer</span>
                            </div>
                         </label>

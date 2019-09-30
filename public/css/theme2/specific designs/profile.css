@@ -1,0 +1,340 @@
+
+#MODULES_MEMBER_CENTER {
+    padding-bottom: 20px;
+}
+
+#arrowDown {
+    background-size: 64px;
+    background-position: -26px -223px;
+    width: 15px;
+    height: 15px;
+    background-image: url('../../../images/profile.png');
+    background-repeat: no-repeat;
+}
+
+#arrowUp {
+    background-size: 64px;
+    background-position: -26px -290px;
+    width: 15px;
+    height: 15px;
+    background-image: url('../../../images/profile.png');
+    background-repeat: no-repeat;
+}
+
+.leftProfile {
+    position: relative;
+}
+
+#infoDiv {
+    position: absolute;
+    right: 80px;
+    top: 110px;
+    min-width: 120px;
+    font-size: 0.75em;
+    z-index: 1001;
+}
+
+#targetHelp_6 > p {
+    font-size: 17px;
+    margin-top: 23px;
+}
+
+#myHonorsText {
+    text-align: right;
+    right: 0;
+}
+
+#myHonorsText > a {
+    cursor: pointer
+}
+
+#myHonorsText > a > div {
+    background-size: 28px;
+    background-position: 0 -29px;
+    width: 28px;
+    height: 28px;
+    background-repeat: no-repeat;
+}
+
+.ageSince {
+    float: left;
+}
+
+#targetHelp_14 {
+    padding: 7px;
+    width: 100%;
+    border-top: 1px solid #E6E6E6;
+    padding-top: 16px !important;
+}
+
+#phoneNum {
+    border-bottom: 1px solid #CCC !important;
+    padding: 7px;
+    width: 300px;
+    background-color: transparent;
+    border: none;
+    float: right;
+    margin-left: 60px;
+}
+
+#targetHelp_14 > div:nth-child(3) {
+    float: right;
+    padding: 10px;
+    width: 180px;
+    background-color: #4DC7BC;
+    border: none
+}
+
+#sendMsg {
+    color: #963019;
+    padding-top: 5px
+}
+
+.badgeStyles {
+    min-width: 280px !important;
+    padding: 10px !important;
+    position: absolute;
+    right: auto;
+    top: 450px;
+    bottom: auto
+}
+
+.badgeDesc {
+    text-align: center !important;
+}
+
+.badgeAchievementHelpText {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    border-top: none !important;
+}
+
+#activityDiv {
+    position: absolute;
+    left: 62%;
+    top: 0;
+    font-size: 0.75em;
+    z-index: 1001;
+}
+
+#earnPointDesc {
+    font-size: 11px;
+    text-align: justify;
+    margin: 20px 0 !important;
+}
+
+.scoreLegendFirstBox {
+    text-align: right !important;
+    width: 10px !important;
+}
+
+.scoreLegendSecondBox {
+    text-align: right !important;
+}
+
+.scoreLegendThirdBox {
+    text-align: left !important;
+}
+
+.scoreLegendThirdBox > span {
+    color: #963019;
+    font-size: 18px;
+}
+
+#overlayInnerDiv > img {
+    cursor: pointer;
+    color: rgb(77, 199, 188) !important;
+    width: 15px;
+    top: 1%;
+    right: 2%;
+}
+
+#overlayInnerDiv > div:last-child, #levelDiv > div:last-child {
+    position: absolute;
+    top: 20%;
+    left: 0;
+}
+
+#levelDiv {
+    position: absolute;
+    left: 49%;
+    top: -10px;
+    font-size: 0.75em;
+    z-index: 1001;
+}
+
+#levelUpDesc {
+    font-size: 11px;
+    text-align: justify;
+    margin: 20px 0 !important;
+}
+
+.lastBoxLevelTable {
+    text-align: left !important;
+}
+
+.lastBoxLevelTable > span {
+    color: #963019;
+    font-size: 18px
+}
+
+#overlayInnerDiv > img {
+    cursor: pointer;
+    color: rgb(77, 199, 188) !important;
+    width: 15px;
+    top: 1%;
+    right: 2%;
+}
+
+#nextBtnHelp_15 {
+    background-color: #5cb85c !important;
+    border: #5cb85c !important;
+}
+
+#backBtnHelp_15 {
+    background-color: #337ab7 !important;
+    border: #337ab7 !important;
+}
+
+#exitBtnHelp_15 {
+    background-color: #d9534f !important;
+    border: #d9534f !important;
+}
+
+#tagPrompt {
+    position: fixed;
+    left: 28%;
+    right: auto;
+    top: 25%;
+    bottom: auto;
+    width: 46%;
+}
+
+#submitBtnTripStyle {
+    background-color: #4dc7bc;
+    border-color: #4dc7bc;
+.
+}
+
+.filtersBoxProfilePage {
+    border: 1px solid #ccc;
+    background-color: #ccc;
+    border-radius: 50%;
+    margin-right: 2px;
+    width: 12px;
+    height: 12px;
+    float: left;
+}
+
+.filtersBoxProfilePageElse {
+    border: 1px solid #333;
+    background-color: black;
+    border-radius: 50%;
+    margin-right: 2px;
+    width: 12px;
+    height: 12px;
+    float: left
+}
+
+.display-none {
+    display: none;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.position-relative {
+    position: relative;
+}
+
+.font-size-12 {
+    font-size: 12px;
+}
+
+.dark-blue {
+    color: #16174f;
+}
+
+.mg-tp-10 {
+    margin-top: 10px;
+}
+
+.mg-tp-20imp {
+    margin-top: 20px !important;
+}
+
+.mg-tp-25imp {
+    margin-top: 25px !important;
+}
+
+.pd-tp-0Imp {
+    padding-top: 0 !important;
+}
+
+.padding-0 {
+    padding: 0;
+}
+
+.mg-rt-0 {
+    margin-right: 0;
+}
+
+/*add Meta*/
+
+.width-auto {
+    width: auto;
+}
+
+#mainTextArea {
+    width: 60%;
+    height: 400px
+}
+
+/*ads*/
+
+#addNewAdsBtn {
+    width: auto;
+    border-radius: 50% 50% 50% 50%
+}
+
+.editDateTripLabel {
+    position: relative;
+    margin: 6px;
+    width: 100%;
+    height: 30px;
+    border: 1px solid #e5e5e5;
+    border-radius: 2px;
+    box-shadow: 0 7px 12px -7px #e5e5e5 inset;
+}
+
+.editDateTripSpan {
+    color: #30b4a6 !important;
+    font-size: 20px;
+    line-height: 32px;
+    position: absolute;
+    right: 7px;
+}
+
+.editDateTripInput {
+    padding: 7px;
+    position: absolute;
+    top: 1px;
+    right: 35px;
+    border: none;
+    background: transparent;
+}
+
+.mg-lt-30per {
+    margin-left: 30%;
+}
+
+.max-width-200 {
+    max-width: 200px;
+}
+
+/*ages*/
+
+.border-radius-50per {
+    border-radius: 50%;
+}

@@ -149,7 +149,7 @@
                         <input id="date_input_end" placeholder="روز/ماه/سال" required readonly type="text">
                     </label>
                 </div>
-                <div style="clear: both;"></div>
+                <div class="clear-both"></div>
             </div>
         </div>
         <div class="modal-card-foot">

@@ -1,0 +1,34 @@
+
+#mainPlaceDetailsTable {
+    width: 100%;
+    font-size: 14px
+}
+
+.elsePlaceDetailsTable {
+    width: 40%;
+    height: 150px;
+    font-size: 10px;
+    float: left;
+    margin-right: 10px;
+    direction: rtl;
+}
+
+.titleInTable {
+    color: #4dc7bc;
+}
+
+td {
+    max-width: 120px !important;
+    width: auto !important;
+    line-height: 2.7;
+}
+
+td > div {
+    margin-bottom: 0 !important;
+}
+
+.detailListItem {
+    max-width: 120px !important;
+    width: auto !important;
+    padding: 0 !important;
+}

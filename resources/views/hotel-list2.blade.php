@@ -6,6 +6,7 @@
     <link rel='stylesheet' type='text/css' media='screen, print'
           href='{{URL::asset('css/theme2/eatery_overview.css?v=2')}}'/>
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/long_lived_global_legacy_2.css?v=1')}}"/>
+    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/hotelList2.css')}}"/>
 
     <title>
         @if($placeMode == "hotel")

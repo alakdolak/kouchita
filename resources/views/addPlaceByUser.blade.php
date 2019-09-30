@@ -135,6 +135,7 @@
             width: 24%;
             display: inline-block;
         }
+
     </style>
 
     <style>

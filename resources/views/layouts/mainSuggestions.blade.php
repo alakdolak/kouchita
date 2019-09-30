@@ -51,7 +51,7 @@
 @if($placeMode == "hotel")
     <div id="HotelControllerId" class="homepage_shelves_widget" ng-controller="HotelController">
         <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show">
-            <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff rtl">
+            <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
                 <div class="shelf_header">
                     <div class="shelf_title">
                         <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
@@ -96,7 +96,7 @@
     <div id="RestaurantControllerId" class="homepage_shelves_widget"
          ng-controller="RestaurantController">
         <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show">
-            <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff rtl">
+            <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
                 <div class="shelf_header">
                     <div class="shelf_title">
                         <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
@@ -140,7 +140,7 @@
 @else
     <div id="AmakenControllerId" class="homepage_shelves_widget" ng-controller="AmakenController">
         <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show">
-            <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff rtl">
+            <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
                 <div class="shelf_header">
                     <div class="shelf_title">
                         <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
@@ -188,7 +188,7 @@
 @if(Auth::check())
     <div id="RecentlyControllerId" class="homepage_shelves_widget" ng-controller="RecentlyController">
         <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show">
-            <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff rtl">
+            <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
                 <div class="shelf_header">
                     <div class="shelf_title">
                         <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
@@ -236,7 +236,7 @@
 @if($placeMode == "hotel" || $placeMode == "restaurant")
     <div id="AmakenControllerId" class="homepage_shelves_widget" ng-controller="AmakenController">
         <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show">
-            <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff rtl">
+            <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
                 <div class="shelf_header">
                     <div class="shelf_title">
                         <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
@@ -278,7 +278,7 @@
 @else
     <div id="HotelControllerId" class="homepage_shelves_widget" ng-controller="HotelController">
         <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show">
-            <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff rtl">
+            <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
                 <div class="shelf_header">
                     <div class="shelf_title">
                         <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
@@ -321,7 +321,7 @@
 
 <div id="FoodControllerId" class="homepage_shelves_widget" ng-controller="FoodController">
     <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show">
-        <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff rtl">
+        <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
             <div class="shelf_header">
                 <div class="shelf_title">
                     <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>

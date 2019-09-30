@@ -19,6 +19,9 @@
 @stop
 
 @section('main')
+
+    <link rel="stylesheet" href="{{URL::asset('css/theme2/specific designs/profile.css')}}">
+
     <center class="row">
         <div class="col-xs-12">
             <h3>سنین</h3>
@@ -35,8 +38,8 @@
                         <span>
                             {{$age->name}}
                         </span>
-                        <button name="ageId" value="{{$age->id}}" class="btn btn-danger" data-toggle="tooltip" title="حذف سن" style="width: auto">
-                            <span class="glyphicon glyphicon-remove" style="margin-left: 30%"></span>
+                        <button name="ageId" value="{{$age->id}}" class="btn btn-danger width-auto" data-toggle="tooltip" title="حذف سن">
+                            <span class="glyphicon glyphicon-remove mg-lt-30per"></span>
                         </button>
                     </div>
                 @endforeach
@@ -46,8 +49,8 @@
         @if($mode2 == "see")
             <div class="col-xs-12">
                 <a href="{{URL('addAge')}}">
-                    <button class=" btn btn-default" style="width: auto; border-radius: 50% 50% 50% 50%" data-toggle="tooltip" title="اضافه کردن سن جدید">
-                        <span class="glyphicon glyphicon-plus" style="margin-left: 30%"></span>
+                    <button class=" btn btn-default border-radius-50per width-auto" data-toggle="tooltip" title="اضافه کردن سن جدید">
+                        <span class="glyphicon glyphicon-plus mg-lt-30per"></span>
                     </button>
                 </a>
             </div>
@@ -62,7 +65,7 @@
                 </div>
                 <div class="col-xs-12">
                     <p class="warning_color">{{$msg}}</p>
-                    <input type="submit" name="addAge" value="اضافه کن" class="btn btn-primary" style="width: auto; margin-top: 10px">
+                    <input type="submit" name="addAge" value="اضافه کن" class="btn btn-primary width-auto mg-tp-10">
                 </div>
             </form>
         @endif

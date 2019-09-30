@@ -10,20 +10,22 @@
 
 
 
-    <div id="MAIN" class="MemberProfile
-           prodp13n_jfy_overflow_visible
-           ">
+    <div id="MAIN" class="MemberProfile prodp13n_jfy_overflow_visible">
         <div id="BODYCON" class="col easyClear poolX adjust_padding new_meta_chevron_v2">
             <div class="wrpHeader">
             </div>
             <div class="mc-badge-collection-container">
                 <h1 class="heading wrap">
-                    <div class="modules-membercenter-badge-collection-header " data-backbone-name="modules.membercenter.BadgeCollectionHeader" data-backbone-context="Achievements_Badges, Social_CompositeMember, Member">
-                        <div class="header"><span></span>مدال های من</div>
+                    <div class="modules-membercenter-badge-collection-header " data-backbone-name="modules.membercenter.BadgeCollectionHeader"
+                         data-backbone-context="Achievements_Badges, Social_CompositeMember, Member">
+                        <div class="header">
+                            <span></span>مدال های من
+                        </div>
                         <div class="sub-header">نمی شود از مدال های زیر چشم پوشی کرد. پس حتما امتیازات مورد نیاز را کسب کنید تا یک گردشگر پر افتخار باشید.</div>
                     </div>
                 </h1>
-                <div class="modules-membercenter-badge-collection " data-backbone-name="modules.membercenter.BadgeCollection" data-backbone-context="Achievements_Badges, Social_CompositeMember, LoggedInMember, Achievements_BadgeFlyoutView, Member, features">
+                <div class="modules-membercenter-badge-collection " data-backbone-name="modules.membercenter.BadgeCollection"
+                     data-backbone-context="Achievements_Badges, Social_CompositeMember, LoggedInMember, Achievements_BadgeFlyoutView, Member, features">
                     <ul data-list="earnedBadges">
 
                     </ul>

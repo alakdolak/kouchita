@@ -614,3 +614,40 @@ function sendSMS($destNum, $text, $template, $token2 = "") {
         return -1;
     }
 }
+
+function sendEmail($text, $subject, $to){
+    $mail = new PHPMailer(true);// Passing `true` enables exceptions
+
+    try {
+        //Server settings
+        $mail->SMTPDebug = 2;                                 // Enable verbose debug output
+        $mail->isSMTP();                                      // Set mailer to use SMTP
+        $mail->Host = env('mail_host_main', 'mail.koochita.com');  // Specify main and backup SMTP servers
+        $mail->SMTPAuth = true;             // Enable SMTP authentication
+        $mail->CharSet = 'UTF-8';
+        $mail->Username = env('mail_username_main', 'info@koochita.com');                 // SMTP username
+        $mail->Password = env('mail_password_main', 'pass123456');                           // SMTP password
+        $mail->SMTPOptions = array(
+            'ssl' => array(
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed' => true
+            )
+        );
+        $mail->Port = 587;                                    // TCP port to connect to
+
+        //Recipients
+        $mail->setFrom( env('mail_username_main', 'info@koochita.com'), 'koochita');
+        $mail->addAddress($to);
+
+        //Content
+        $mail->isHTML(true);                                  // Set email format to HTML
+        $mail->Subject = $subject;
+        $mail->Body = $text;
+        $mail->send();
+    }
+    catch (Exception $e) {
+        echo 'nok';
+        dd($e);
+    }
+}

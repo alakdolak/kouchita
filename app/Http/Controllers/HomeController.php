@@ -2148,4 +2148,12 @@ class HomeController extends Controller
             return json_decode($response)->data[0]->policy;
         }
     }
+
+    public function emailtest()
+    {
+        $text = '<h1>welcome to koochita</h1>';
+        $to = 'kiavashbc@gmail.com';
+        $subject = 'welcome massage';
+        sendEmail($text, $subject, $to);
+    }
 }

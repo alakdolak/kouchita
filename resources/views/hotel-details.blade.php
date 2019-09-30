@@ -64,12 +64,12 @@ if ($total == 0)
 
     {{--vr--}}
 
-    @if($video != null)
-        <link rel="stylesheet" href="{{URL::asset('vr2/video-js.css')}}">
-        <link rel="stylesheet" href="{{URL::asset('vr2/videojs-vr.css')}}">
-        <script src="{{URL::asset('vr2/video.js')}}"></script>
-        <script src="{{URL::asset('vr2/videojs-vr.js')}}"></script>
-    @endif
+{{--    @if($video != null)--}}
+{{--        <link rel="stylesheet" href="{{URL::asset('vr2/video-js.css')}}">--}}
+{{--        <link rel="stylesheet" href="{{URL::asset('vr2/videojs-vr.css')}}">--}}
+{{--        <script src="{{URL::asset('vr2/video.js')}}"></script>--}}
+{{--        <script src="{{URL::asset('vr2/videojs-vr.js')}}"></script>--}}
+{{--    @endif--}}
 
 @stop
 
@@ -711,7 +711,7 @@ if ($total == 0)
                                             </div>
                                             <div class="albumInfo">
                                                 <span class="ui_icon camera">&nbsp;</span>
-                                                محتواهای تعاملی
+                                                محتواهای تعاملی {{$video == null ? 0 : 1}}
                                             </div>
                                         </div>
                                     </div>
@@ -1838,14 +1838,14 @@ if ($total == 0)
         <!-- The Modal -->
         {{--vr--}}
         <div class="modal" id="myModal">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <!-- Modal body -->
-                    <div class="modal-body">
+                    <div class="modal-body" style="justify-content: center; display: flex;">
                         @if($video != null)
-                            <video  width="640" height="300" id="my-video" class="video-js vjs-default-skin">
-                            <source src="{{URL::asset('vr2/contents/' . $video)}}" type="video/mp4">
-                        </video>
+                            <video id="my-video" class="video-js vjs-default-skin" controls style=" max-height: 80vh;">
+                                <source src="{{URL::asset('vr2/contents/' . $video)}}" type="video/mp4">
+                            </video>
                         @else
                             ویدیویی برای نمایش موجود نمی باشد.
                         @endif
@@ -1854,15 +1854,16 @@ if ($total == 0)
             </div>
         </div>
         <script>
-        (function(window, videojs) {
-            var player = window.player = videojs('my-video');
-            player.mediainfo = player.mediainfo || {};
-            player.mediainfo.projection = '360';
+            var player;
+            (function(window, videojs) {
+                player = window.player = videojs('my-video');
+                player.mediainfo = player.mediainfo || {};
+                player.mediainfo.projection = '360';
 
-            // AUTO is the default and looks at mediainfo
-            var vr = window.vr = player.vr({projection: 'AUTO', debug: true, forceCardboard: false});
-        }(window, window.videojs));
-
+                // AUTO is the default and looks at mediainfo
+                var vr = window.vr = player.vr({projection: '360', debug: false, forceCardboard: false});
+            }(window, window.videojs));
+        //
         $('#myModal').on('hidden.bs.modal', function () {
             player.pause();
         });
@@ -3496,7 +3497,7 @@ if ($total == 0)
                         $("#reviewsContainer").empty().append(tmp);
                     }
                     for (i = 0; i < arr.length; i++) {
-                        newElement += "<div class='border-bottom-grey' class='review'>";
+                        newElement += "<div class='border-bottom-grey inline-block full-width' class='review'>";
                         newElement += "<div class='prw_rup prw_reviews_basic_review_hsx'>";
                         newElement += "<div class='reviewSelector'>";
                         newElement += "<div class='review hsx_review ui_columns is-multiline inlineReviewUpdate provider0'>";

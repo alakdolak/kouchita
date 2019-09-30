@@ -1,0 +1,192 @@
+/*1st box of styles*/
+.glyphicon {
+    font-family: 'Glyphicons Halflings' !important;
+}
+
+.bubble_40:after {
+    content: "\e00d\e00b\e00b\e00b\e00b" !important;
+}
+
+.bubble_30:after {
+    content: "\e00d\e00d\e00b\e00b\e00b" !important;
+}
+
+.bubble_20:after {
+    content: "\e00d\e00d\e00d\e00b\e00b" !important;
+}
+
+.bubble_10:after {
+    content: "\e00d\e00d\e00d\e00d\e00b" !important;
+}
+
+/*2nd box of styles*/
+
+.global-nav-links-menu a {
+    color: #FFF !important;
+}
+
+.modules-membercenter-persistent-header-achievements .persistent-header a {
+    color: #16174f !important;
+}
+
+.persistent-header a:hover {
+    color: #963019 !important;
+    text-decoration: none;
+}
+
+@media (max-width: 600px) {
+    #PAGE {
+        width: max-content !important;
+    }
+}
+
+@media (max-width: 600px) {
+    footer {
+        width: 1024px;
+    }
+}
+
+.loader {
+    background-image: url("../../images/loading.svg");
+
+    width: 100px;
+    height: 100px;
+}
+
+.position-relative {
+    position: relative;
+}
+
+.bg-color-greenImp {
+    background-color: #4dc7bc !important
+}
+
+#bookmarkicon {
+    z-index: 100000010101001;
+    cursor: pointer;
+}
+
+#bookmarkicon > span {
+    z-index: 100000010101001 !important;
+}
+
+#alert {
+    left: -10px !important;
+    top: 48px !important;
+    display: none;
+}
+
+.masthead_notifctr_dropdown:before {
+    content: '';
+    position: absolute;
+    left: 24px;
+    top: -10px;
+    margin-left: -10px;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #fff;
+    -webkit-filter: drop-shadow(0 0 0 #b7b7b7);
+    filter: drop-shadow(0 0 0 #b7b7b7);
+    box-shadow: 0 0 0 #b7b7b7 \9;
+    -webkit-filter: drop-shadow(0 0 0 #999);
+    filter: drop-shadow(0 0 0 #999);
+}
+
+.dropMenu .subLink:hover,
+.dropMenu .subItem .subLink:hover,
+.dropMenu .taLnk:hover a,
+.subItem .subLink:hover,
+.subItemNoLink .subNoLink:hover,
+.expandSubItem .expandSubLink:hover {
+    color: #16174f !important;
+}
+
+#profile-drop {
+    display: none;
+    position: absolute;
+    bottom: auto;
+    z-index: 10000;
+    background: none 0% 0% repeat scroll rgb(255, 255, 255);
+    padding: 0 18px;
+    left: 20px;
+    top: 48px;
+    box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+#MAINWRAP > div:nth-child(1) {
+    background-color: #fcc156 !important;
+    position: relative;
+}
+
+#profileLinkColor1, #BadgeCollectionLinkColor1, #messageLinkColor1, #bookingLinkColor1, .settingColor1 {
+    color: #963019 !important
+}
+
+#profileLinkColor2, #BadgeCollectionLinkColor2, #targetHelp_5 > a, #messageLinkColor2, #paymentOptionsLinkColor, .settingColor2 {
+    color: #16174f
+}
+
+#helpSpan_5 > div:nth-child(2) {
+    color: black !important;
+    line-height: 1.428 !important;
+    font-weight: normal !important;
+    direction: rtl !important;
+    text-align: start
+}
+
+#settingDropDownMainDiv {
+    width: 200px !important;
+}
+
+#MediaLeftBodyProfile {
+    padding: 0 12px !important;
+    margin: 0 !important;
+}
+
+#cs-rating-location-link > img {
+    width: 100%;
+    vertical-align: middle
+}
+
+.tripStyleBodyProfile {
+    color: white;
+    background-color: #4dc7bc;
+}
+
+.tagTextBodyPlace {
+    padding: 0 12px;
+}
+
+.line-height-1428-imp {
+    line-height: 1.428 !important;
+}
+
+.clea-both {
+    clear: both;
+}
+
+.z-index-100 {
+    z-index: 100;
+}
+
+.text-align-center {
+    text-align: center;
+}
+
+.direction-ltr {
+    direction: ltr
+}
+
+.color-black {
+    color: black;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.margin-rt-40per {
+    margin-right: 40%;
+}

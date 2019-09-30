@@ -1,0 +1,68 @@
+#knewIranTogetherText, #shareInfoTitleText {
+    direction: rtl;
+    text-align: center;
+}
+
+#createAccountMiddleBanner {
+    cursor: pointer;
+    direction: rtl;
+    text-align: center;
+    font-size: 13px;
+    color: #4DC7BC;
+}
+
+.tripleBoxMiddleBanner {
+    overflow: visible;
+    direction: rtl;
+    text-align: center;
+    float: left;
+    position: relative;
+}
+
+.tripleBoxMiddleBanner > div {
+    overflow: visible !important;
+}
+
+.tripleBoxMiddleBanner h2 {
+    margin-top: 22px !important;
+}
+
+.tripleBoxMiddleBanner:nth-child(3) > div {
+    background: #FFF !important;
+    border: 1px solid #4DC7BC;
+}
+
+.tripleBoxMiddleBanner:nth-child(3) > div > div:nth-child(1) {
+    background: #4DC7BC;
+}
+
+.tripleBoxMiddleBanner:nth-child(3) > div > div:nth-child(1) > span {
+    color: #FFF;
+}
+
+.tripleBoxMiddleBanner:nth-child(3) > div > div:nth-child(2), .tripleBoxMiddleBanner:nth-child(3) > div > div:nth-child(2) > h2,
+.tripleBoxMiddleBanner:nth-child(3) > div > div:nth-child(2) > div {
+    color: #4dc7bc;
+}
+
+.otherServicesBoxes, .youMayLikeItBoxes {
+    cursor: pointer
+}
+
+#youMayLikeIt {
+    margin-top: 20px;
+}
+
+.squareDiv > .phoneIcon::before {
+    color: #30b4a6 !important;
+}
+
+.moreOptionsSquareDiv {
+    margin-top: -2px;
+    text-align: center;
+}
+
+.moreOptionsSquareDiv > span {
+    font-size: 30px;
+    font-weight: bold;
+}

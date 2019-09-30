@@ -50,7 +50,8 @@ footer li > img, .small-ico {
 
 .footDown {
     float: right;
-    width: 70%;
+    width: 100%;
+    padding-left: 10px;
 }
 
 .footDown a {
@@ -220,7 +221,7 @@ footer li > img, .small-ico {
     }
 }
 
-#knowOurPartnersDiv {
+#knowOurPartnersDiv , #ourDescriptionDiv {
     float: right;
     width: 30%;
 }
@@ -244,6 +245,10 @@ footer li > img, .small-ico {
     margin-right: 4px
 }
 
-.footerLogo > img {
-    margin-top: 10px;
+/*.footerLogo > img {*/
+/*    margin-top: 10px;*/
+/*}*/
+
+.clear-both {
+    clear: both;
 }

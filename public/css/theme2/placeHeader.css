@@ -1,3 +1,6 @@
+.rtl {
+    direction: rtl;
+}
 
 .relative-position {
     position: relative;

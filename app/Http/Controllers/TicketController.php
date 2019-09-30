@@ -332,12 +332,17 @@ class TicketController extends Controller {
                 echo "0";
                 return;
             }
+//            $tmp = new TicketNotify();
+//            $tmp->email = $email;
+//            $tmp->date = $date;
+//            $tmp->from = $from;
+//            $tmp->to = $to;
 
-            $tmp = new TicketNotify();
+            $tmp = new Notify();
             $tmp->email = $email;
-            $tmp->date = $date;
-            $tmp->from = $from;
-            $tmp->to = $to;
+            $tmp->news = 1;
+            $tmp->events = 1;
+            $tmp->mode = 1;
 
             $tmp->save();
             echo "1";

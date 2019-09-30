@@ -1,0 +1,1 @@
+ALTER TABLE notify ADD mode INTEGER;

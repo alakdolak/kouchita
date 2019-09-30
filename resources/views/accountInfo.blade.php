@@ -5,37 +5,24 @@
 
     @parent
     <link rel="stylesheet" type="text/css" media="screen, print" href="{{URL::asset('css/theme2/account_info.css?v=1')}}"/>
-    <style>
-        .account_info_form .row{
-            padding-right: 30px;
-        }
-        #result {
-            max-width: 200px;
-            max-height: 400px;
-            overflow: auto;
-            border: 2px solid #ccc;
-            padding: 10px;
-            margin-right: 10px;
-        }
-    </style>
 @stop
 
 @section('main')
 
-    <div id="MAIN" class="Settings
-         prodp13n_jfy_overflow_visible
-    ">
+    <link rel="stylesheet" type="text/css" media="screen, print" href="{{URL::asset('css/theme2/account_info.css?v=1')}}"/>
+
+    <div id="MAIN" class="Settings prodp13n_jfy_overflow_visible">
         <div id="BODYCON" class="col easyClear poolB adjust_padding new_meta_chevron_v2">
             <div class="wrpHeader">
             </div>
             <div id="main_content">
-                <h1 class="heading wrap" style="padding-bottom: 10px;padding-right: 12px;" id="HEADER_DEFAULT">
+                <h1 class="heading wrap" id="HEADER_DEFAULT">
                 اطلاعات کاربری
                 </h1>
 
                 @if($mode2 == 0)
                     <div class="col-xs-12">
-                        <h5 style="float: right; padding: 10px; color: #963019">{{$msg}}</h5>
+                        <h5 id="accountInfoMode2">{{$msg}}</h5>
                     </div>
                 @endif
 
@@ -63,7 +50,9 @@
                                 <div class="row">
                                     <div class="col four">
                                         <fieldset>
-                                          <label for="username">نام کاربری ( این نام معرف شما برای دیگران است .) <div style="display: inline-block;background-size: 28px;background-position:  -10PX -40px;width: 8px;height:  13px;background-image: url('{{URL::asset('images') . '/profile.png'}}');background-repeat:  no-repeat;"></div></label>
+                                          <label for="username">نام کاربری ( این نام معرف شما برای دیگران است .)
+                                              <div id="accountInfoUserNameDiv"></div>
+                                          </label>
                                             <input placeholder="نام کاربری" class="text memberData formElem" type="text" name="username" value="{{$user->username}}"/>
                                         </fieldset>
                                     </div>
@@ -181,9 +170,9 @@
                                             </script>
 
                                             @if($reminder == 300)
-                                                <h5 style="float: right; padding: 10px; color: #963019">کد اعتبارسنجی به شماره وارد شده ارسال گردید</h5>
+                                                <h5 class="accountInfoHelpTexts">کد اعتبارسنجی به شماره وارد شده ارسال گردید</h5>
                                             @else
-                                                <h5 style="float: right; padding: 10px; color: #963019">از آخرین ارسال پیامک باید 5 دقیقه بگذرد</h5>
+                                                <h5 class="accountInfoHelpTexts">از آخرین ارسال پیامک باید 5 دقیقه بگذرد</h5>
                                             @endif
 
                                             <script>
@@ -195,32 +184,32 @@
                                                 <input id="activationCode" type="text">
                                             </div>
 
-                                            <div class="col-xs-12" style="margin-top: 10px">
+                                            <div class="col-xs-12 mg-tp-10">
                                                 <span onclick="checkAuth()" class="btn btn-success">اعمال کد</span>
                                                 <span onclick="resend()" id="resend" class="btn btn-primary" disabled>دریافت مجدد کد</span>
                                             </div>
 
-                                            <div class="col-xs-12" style="margin-top: 10px">
+                                            <div class="col-xs-12 mg-tp-10">
                                                 <p><span>زمان باقی مانده برای ارسال مجدد کد</span><span>&nbsp;</span><span id="reminderTime"></span></p>
                                             </div>
 
-                                            <div class="col-xs-12" style="margin-top: 10px">
-                                                <h5 id="errAuth" style="float: right; padding: 10px; color: #963019"></h5>
+                                            <div class="col-xs-12 mg-tp-10">
+                                                <h5 id="errAuth"></h5>
                                             </div>
 
                                         @else
                                             <fieldset>
-                                                <input type="submit" name="savePass1Info" class="btn btn-success" style="padding: 5px; margin: 0 7px;background-color: #4dc7bc;border-color:#4dc7bc;" value="ذخیره">
+                                                <input id="savePass1Info" type="submit" name="savePass1Info" class="btn btn-success" value="ذخیره">
                                             </fieldset>
                                             @if($mode2 == 1)
-                                                <h5 style="float: right; padding: 10px; color: #963019">{{$msg}}</h5>
+                                                <h5 class="accountInfoHelpTexts">{{$msg}}</h5>
                                             @endif
                                         @endif
                                     </div>
                                 </div>
                             </form>
 
-                                <h1 class="heading wrap" style="padding-bottom: 10px;padding-top: 30px;padding-right: 12px;" id="HEADER_DEFAULT">
+                                <h1 class="heading wrap" id="HEADER_DEFAULT2">
                                     درباره من
                                 </h1>
 
@@ -230,14 +219,14 @@
 
                                     <div class="subtitle">خودتان را توصیف کنید :</div>
                                     <fieldset>
-                                        <textarea style="border-radius: 6px;padding: 7px;height: 83px;border: 1px solid #c8c8c8;" placeholder="خودتان را توصیف کنید" name="introduction" required class="field textBox" rows="5" cols="50" maxlength="1000">{{($aboutMe != null) ? $aboutMe->introduction : ""}}</textarea>
+                                        <textarea placeholder="خودتان را توصیف کنید" id="introduceYourSelfTextBox" name="introduction" required class="field textBox" rows="5" cols="50" maxlength="1000">{{($aboutMe != null) ? $aboutMe->introduction : ""}}</textarea>
                                     </fieldset>
 
                                     <div class="col twelve">
-                                        <fieldset style="padding-top: 35px;">
+                                        <fieldset class="pd-tp-35">
 
                                             <label class="fieldLabel" for="age">سن :</label>
-                                            <select style="width: 20%;border-radius: 6px;" id="age" class="field dropdown" name="ageId">
+                                            <select id="age" class="field dropdown" name="ageId">
                                                 <option class="dropdownItem" value="0">انتخاب</option>
                                                 @foreach($ages as $age)
                                                     @if($aboutMe != null && $aboutMe->ageId == $age->id)
@@ -252,11 +241,11 @@
                                     </div>
 
                                     <div class="col twelve">
-                                        <fieldset style="padding-top: 35px;">
+                                        <fieldset class="pd-tp-35">
 
                                                 <label class="fieldLabel" for="gender">جنسیت</label>
                                         {{--<div class="dropdownBox">--}}
-                                                <select style="width: 30%;" id="gender" class="field dropdown" name="sex">
+                                                <select id="gender" class="field dropdown" name="sex">
 
                                                     @if($aboutMe == null || $aboutMe->sex == 2)
                                                         <option class="dropdownItem" selected value="2">ترجیح میدم جواب ندهم</option>
@@ -282,27 +271,26 @@
 
                                 </div>
 
-                                <div class="row" style="margin-top: 20px">
+                                <div class="row pd-tp-20">
                                     <div class="col four">
                                         <fieldset>
-                                            <input type="submit" class="btn btn-success" name="savePass2Info" style="padding: 5px; margin: 0 7px;background-color: #4dc7bc;border-color:#4dc7bc;" value="ذخیره">
+                                            <input type="submit" id="savePass2Info" class="btn btn-success" name="savePass2Info" value="ذخیره">
                                         </fieldset>
                                         @if($mode2 == 2)
-                                            <h5 style="float: right; padding: 10px; color: #963019">{{$msg}}</h5>
+                                            <h5 class="accountInfoHelpTexts">{{$msg}}</h5>
                                         @endif
                                     </div>
                                 </div>
                             </form>
 
+                            <h1 class="heading wrap" id="HEADER_DEFAULT3">
+                                رمز عبور
+                            </h1>
 
+                            <span id="ERRORS">
+                               <ul id="errors" class="errors"></ul>
+                            </span>
 
-
-                                <h1 class="heading wrap" style="padding-bottom: 10px;padding-top: 30px;padding-right: 12px;" id="HEADER_DEFAULT">
-                                    رمز عبور
-                                </h1>
-<span id="ERRORS">
-   <ul id="errors" class="errors"></ul>
-</span>
                             <form action="{{route('changePas')}}" method="post" class="mc-form mc-grid account_info_form">
                                 {{csrf_field()}}
                                 <div class="row">
@@ -323,40 +311,40 @@
                                             <input placeholder="تکرار رمز عبور جدید" type="password" name="repeatPassword" class="fauxInput"/>
                                         </fieldset>
 
-                                        <fieldset style="margin-top: 20px">
-                                            <input type="submit" class="btn btn-success" style="padding: 5px; margin: 0 7px;background-color: #4dc7bc;border-color:#4dc7bc;" value="تغییر رمز عبور">
+                                        <fieldset class="pd-tp-20">
+                                            <input id="changePasswordAccountInfo" type="submit" class="btn btn-success" value="تغییر رمز عبور">
                                         </fieldset>
                                         @if($mode2 == 3)
-                                            <h5 style="float: right; padding: 10px; color: #963019">{{$msg}}</h5>
+                                            <h5 class="accountInfoHelpTexts">{{$msg}}</h5>
                                         @endif
                                     </div>
                                 </div>
 
                                 <hr/>
-                                <span onclick="openSpan()" style="padding-right: 12px;" class="taLnk closeAccount">حذف کامل صفحه کاربری</span>
+                                <span onclick="openSpan()" class="pd-rt-12 taLnk closeAccount">حذف کامل صفحه کاربری</span>
                             </form>
                         </div>
                     </div>
                 </div>
-<span class="ui_overlay ui_modal editTags" id="deleteProfile" style="visibility: hidden; position: fixed; left: 34%; right: auto; top: 29%; bottom: auto;width: 30%;">
+                <div class="ui_overlay ui_modal editTags" id="deleteProfile">
 
                     <p>آیا از حذف کامل اطلاعات کاربری خود مطمئن هستید ؟</p>
-                    <p style="font-size: 10px;">با این کار تمام فعالیت های شما به همراه این حساب کاربری برای همیشه حذف خواهد شد.</p>
-<br><br>
+                    <p class="font-size-10">با این کار تمام فعالیت های شما به همراه این حساب کاربری برای همیشه حذف خواهد شد.</p>
+                    <br><br>
                     <div class="body_text">
 
                         <div class="submitOptions">
-                            <button style="background-color: #4dc7bc;border-color:#4dc7bc;" onclick="deleteAccount()" class="btn btn-success">مطمئنم</button>
+                            <button id="ensureBtnDeleteAccountAccountInfo" onclick="deleteAccount()" class="btn btn-success">مطمئنم</button>
                             <input type="submit" onclick="closeSpan()" value="لغو" class="btn btn-default">
                         </div>
                     </div>
                     <div onclick="closeSpan()" class="ui_close_x"></div>
 
-                </span>
+                </div>
             </div>
         </div>
         </div>
-        <div class="ui_backdrop dark" style="display: none;"></div>
+        <div class="ui_backdrop dark display-none"></div>
     </div>
     <script>
 
@@ -409,7 +397,7 @@
                         newElement = "نتیجه ای یافت نشد";
 
                     for(i = 0; i < response.length; i++)
-                        newElement += "<p style='cursor: pointer' onclick='addCity(\"" + response[i].name + "\")'>" + response[i].name + "</p>";
+                        newElement += "<p class='cursor-pointer' onclick='addCity(\"" + response[i].name + "\")'>" + response[i].name + "</p>";
 
                     $("#result").empty().append(newElement).removeClass('hidden');
 
