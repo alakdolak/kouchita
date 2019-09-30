@@ -225,9 +225,9 @@ input[type="checkbox"]:checked + label span {
 }
 
 .tripDetailsMoreInfoBtnBookMarkPlace {
-    margin: 10px auto 10px;
-    background-size: 60%;
-    background-position-x: center;
+    margin: 10px auto 10px !important;
+    background-size: 60% !important;
+    background-position-x: center !important;
     padding: 6px 12px;
 }
 

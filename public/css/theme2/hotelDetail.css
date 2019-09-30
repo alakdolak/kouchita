@@ -1431,6 +1431,15 @@ p {
     float: right;
 }
 
+.content > a {
+    display: inline-block;
+    padding-bottom: 10px;
+}
+
+DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
+    display: inline;
+}
+
 .height-auto {
     height: auto;
 }
@@ -1509,6 +1518,10 @@ p {
 
 .full-height {
     height: 100%;
+}
+
+.full-width {
+    width: 100%;
 }
 
 .text-align-left {

@@ -64,12 +64,12 @@ if ($total == 0)
 
     {{--vr--}}
 
-    @if($video != null)
-        <link rel="stylesheet" href="{{URL::asset('vr2/video-js.css')}}">
-        <link rel="stylesheet" href="{{URL::asset('vr2/videojs-vr.css')}}">
-        <script src="{{URL::asset('vr2/video.js')}}"></script>
-        <script src="{{URL::asset('vr2/videojs-vr.js')}}"></script>
-    @endif
+{{--    @if($video != null)--}}
+{{--        <link rel="stylesheet" href="{{URL::asset('vr2/video-js.css')}}">--}}
+{{--        <link rel="stylesheet" href="{{URL::asset('vr2/videojs-vr.css')}}">--}}
+{{--        <script src="{{URL::asset('vr2/video.js')}}"></script>--}}
+{{--        <script src="{{URL::asset('vr2/videojs-vr.js')}}"></script>--}}
+{{--    @endif--}}
 
 @stop
 
@@ -3497,7 +3497,7 @@ if ($total == 0)
                         $("#reviewsContainer").empty().append(tmp);
                     }
                     for (i = 0; i < arr.length; i++) {
-                        newElement += "<div class='border-bottom-grey' class='review'>";
+                        newElement += "<div class='border-bottom-grey inline-block full-width' class='review'>";
                         newElement += "<div class='prw_rup prw_reviews_basic_review_hsx'>";
                         newElement += "<div class='reviewSelector'>";
                         newElement += "<div class='review hsx_review ui_columns is-multiline inlineReviewUpdate provider0'>";
