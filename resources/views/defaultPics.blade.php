@@ -15,6 +15,26 @@
         .row {
             direction: rtl;
         }
+
+        .mg-lt-30per {
+            margin-left: 30%;
+        }
+
+        .border-radius-50per {
+            border-radius: 50%;
+        }
+
+        .width-auto {
+            width: auto;
+        }
+
+        .width-80per {
+            width: 80%;
+        }
+
+        .mg-tp-10 {
+            margin-top: 10px;
+        }
     </style>
 @stop
 
@@ -23,7 +43,7 @@
     <center class="row">
         <div class="col-xs-12">
             <h3>تصاویر پیش فرض</h3>
-            <div class="line" style="width: 80%"></div>
+            <div class="line width-80per"></div>
         </div>
         @if(count($pics) == 0)
             <div class="col-xs-12">
@@ -36,8 +56,8 @@
                     <div class="col-xs-12">
                         <img width="100px" height="100px" src="{{URL::asset('defaultPic') . '/' . $pic->name}}">
 
-                        <button name="deletePic" value="{{$pic->id}}" class="btn btn-danger" data-toggle="tooltip" title="حذف تصویر" style="width: auto">
-                            <span class="glyphicon glyphicon-remove" style="margin-left: 30%"></span>
+                        <button name="deletePic" value="{{$pic->id}}" class="btn btn-danger width-auto" data-toggle="tooltip" title="حذف تصویر">
+                            <span class="glyphicon glyphicon-remove mg-lt-30per"></span>
                         </button>
                     </div>
                 @endforeach
@@ -47,8 +67,8 @@
         @if($mode2 == "see")
             <div class="col-xs-12">
                 <a href="{{URL('addPic')}}">
-                    <button class="btn btn-primary" style="width: auto; border-radius: 50% 50% 50% 50%" data-toggle="tooltip" title="اضافه کردن تصویر جدید">
-                        <span class="glyphicon glyphicon-plus" style="margin-left: 30%"></span>
+                    <button class="btn btn-primary width-auto border-radius-50per" data-toggle="tooltip" title="اضافه کردن تصویر جدید">
+                        <span class="glyphicon glyphicon-plus mg-lt-30per"></span>
                     </button>
                 </a>
             </div>
@@ -63,7 +83,7 @@
                 </div>
                 <div class="col-xs-12">
                     <p class="warning_color">{{$msg}}</p>
-                    <input type="submit" class="btn btn-primary" name="addPic" value="اضافه کن" style="width: auto; margin-top: 10px">
+                    <input type="submit" class="btn btn-primary width-auto mg-tp-10" name="addPic" value="اضافه کن" style="width: auto; margin-top: 10px">
                 </div>
             </form>
         @endif
