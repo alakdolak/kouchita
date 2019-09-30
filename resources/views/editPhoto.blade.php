@@ -11,19 +11,18 @@
 
 @section('main')
 
-    <div id="MAIN" class="Settings
-     prodp13n_jfy_overflow_visible
-    ">
+    <div id="MAIN" class="Settings prodp13n_jfy_overflow_visible">
         <div id="BODYCON" class="col easyClear poolX adjust_padding new_meta_chevron_v2">
             <div class="wrpHeader">
             </div>
-            <h1 class="heading wrap" style="padding-bottom: 10px;padding-right: 12px;">
- عکس خود را ویرایش کنید
-                    <!--<a class="lnkReturnTo" href="/">Continue browsing &raquo;</a>--> </h1>
+            <h1 class="heading wrap" id="mainProfileHeadingEditPhoto">
+                عکس خود را ویرایش کنید
+                <!--<a class="lnkReturnTo" href="/">Continue browsing &raquo;</a>-->
+            </h1>
 
-            <div class="avatarUI" style="height: 550px;">
+            <div class="avatarUI height-550">
 
-                <div class="currentAvatar" style="border: 1px solid #ebebeb;height: 33%;">
+                <div class="currentAvatar">
                     <div class="circularAvWrap">
                         <img id="secondaryContainer" src="{{URL::asset($photo)}}" class="circularAvatar" alt="Photo"/>
                     </div>
@@ -48,7 +47,7 @@
                                     <div class="fileContainer">
                                         <input name="newPic" id="photo" type="file"/>
                                     </div>
-                                    <div class="uploadImgCropper crop" style="position:relative;">
+                                    <div class="uploadImgCropper crop" style="">
                                         <img class="cropImg"/>
                                     </div>
                                     <div class="instructions oldBrowser">
@@ -58,14 +57,14 @@
                                         Drag and resize the circle to crop your image. Click "Set as public photo" when you're satisfied. </div>-->
                                 </div>
                                 <div id="uploadBtn" class="popupButtons" hidden>
-                                    <center style="margin-top: 10px">
-                                        <input type="submit" name="submitPhoto" style="padding: 5px; margin-left: 10px;background-color: #4dc7bc;border-color:#4dc7bc;" class="btn btn-success " value="عوض کردن تصویر پروفایل">
-                                        <input type="submit" name="cancel" style="padding: 5px" class="btn btn-default commonBtn" value="لغو">
+                                    <center>
+                                        <input type="submit" name="submitPhoto" class="btn btn-success " value="عوض کردن تصویر پروفایل">
+                                        <input type="submit" name="cancel" class="btn btn-default commonBtn" value="لغو">
                                     </center>
                                 </div>
 
                                 @if(isset($msg) && !empty($msg))
-                                    <center style="margin-top: 20px; color: #963019">
+                                    <center class="mg-tp-20px color-darkred">
                                         {{$msg}}
                                     </center>
                                 @endif
@@ -75,9 +74,9 @@
                             </div>
 
                             <div id="defaultPhotoBtn" class="popupButtons" hidden>
-                                <center style="margin-top: 10px">
-                                    <input type="submit" onclick="submitPhoto('{{$user->id}}', 'secondaryContainer')" style="padding: 5px; margin-left: 10px;background-color: #4dc7bc;border-color:#4dc7bc;" class="btn btn-success " value="عوض کردن تصویر پروفایل">
-                                    <input type="submit" style="padding: 5px" class="btn btn-default commonBtn" value="لغو">
+                                <center class="mg-tp-10">
+                                    <input type="submit" onclick="submitPhoto('{{$user->id}}', 'secondaryContainer')" class="btn btn-success " value="عوض کردن تصویر پروفایل">
+                                    <input type="submit" class="btn btn-default commonBtn" value="لغو">
                                 </center>
                             </div>
                         </div>
@@ -165,7 +164,7 @@
 
                     for(i = 0; i < response.length; i++) {
                         newElement += "<div class='circularAvWrap'>";
-                        newElement += "<img id='" + response[i].name + "' onclick='changePhoto(id, \"mainContainer\")' style='cursor: pointer;' src='" + response[i].name + "' class='circularAvatar'/>";
+                        newElement += "<img id='" + response[i].name + "' onclick='changePhoto(id, \"mainContainer\")' src='" + response[i].name + "' class='cursor-pointer circularAvatar'/>";
                         newElement += "</div>";
                     }
 

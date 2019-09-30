@@ -1349,12 +1349,6 @@ div.saveBody150 {
     text-align: center;
 }
 
-#MAIN .heading {
-    position: relative;
-    margin: 13px 0 15px;
-    padding-right: 180px;
-}
-
 #MAIN .heading .lnkReturnTo {
     position: absolute;
     right: 12px;
@@ -1955,12 +1949,6 @@ div.saveBody150 {
     background: none;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 12px;
-}
-
-#MAIN .heading {
-    position: relative;
-    margin: 13px 0 15px;
-    padding-right: 180px;
 }
 
 #MAIN .heading sup {
@@ -6334,58 +6322,6 @@ body.has-modal-open {
     background-image: url('/img2/travelmap/fave_small.png');
 }
 
-.sprite-globe_0 {
-    background-image: url('/img2/travelmap/globe_percent_0.png');
-}
-
-.sprite-globe_1 {
-    background-image: url('/img2/travelmap/globe_percent_1.png');
-}
-
-.sprite-globe_2 {
-    background-image: url('/img2/travelmap/globe_percent_2.png');
-}
-
-.sprite-globe_3 {
-    background-image: url('/img2/travelmap/globe_percent_3.png');
-}
-
-.sprite-globe_4 {
-    background-image: url('/img2/travelmap/globe_percent_4.png');
-}
-
-.sprite-globe_5 {
-    background-image: url('/img2/travelmap/globe_percent_5.png');
-}
-
-.sprite-globe_6 {
-    background-image: url('/img2/travelmap/globe_percent_6.png');
-}
-
-.sprite-globe_7 {
-    background-image: url('/img2/travelmap/globe_percent_7.png');
-}
-
-.sprite-globe_8 {
-    background-image: url('/img2/travelmap/globe_percent_8.png');
-}
-
-.sprite-globe_9 {
-    background-image: url('/img2/travelmap/globe_percent_9.png');
-}
-
-.sprite-globe_10 {
-    background-image: url('/img2/travelmap/globe_percent_10.png');
-}
-
-.sprite-globe_11 {
-    background-image: url('/img2/travelmap/globe_percent_11.png');
-}
-
-.sprite-globe_12 {
-    background-image: url('/img2/travelmap/globe_percent_12.png');
-}
-
 .sprite-greenFriend {
     background-image: url('/img2/travelmap/invite_friends_icon.png');
 }
@@ -6717,8 +6653,55 @@ body.has-modal-open {
     border-color: #4dc7bc;
 }
 
+/*edit photo*/
+
+#mainProfileHeadingEditPhoto {
+    padding-right: 12px !important;
+    padding-bottom: 10px !important;
+}
+
+.currentAvatar {
+    border: 1px solid #ebebeb;
+    height: 33% !important;
+}
+
+.uploadImgCropper .crop {
+    position: relative;
+}
+
+#uploadBtn > center {
+    margin-top: 10px
+}
+
+#uploadBtn > center > input:nth-child(1) , #defaultPhotoBtn > center > input:nth-child(1) {
+    padding: 5px;
+    margin-left: 10px;
+    background-color: #4dc7bc;
+    border-color: #4dc7bc;
+}
+
+#uploadBtn > center > input:nth-child(2) , #defaultPhotoBtn > center > input:nth-child(2) {
+    padding: 5px
+}
+
+
+
+/*public definitions*/
+
+.color-darkred {
+    color: #963019
+}
+
+.height-550 {
+    height: 550px;
+}
+
 .mg-tp-10 {
     margin-top: 10px;
+}
+
+.mg-tp-20 {
+    margin-top: 20px;
 }
 
 .pd-tp-35 {
@@ -6739,6 +6722,10 @@ body.has-modal-open {
 
 .display-none {
     display: none;
+}
+
+.display-block {
+    display: block;
 }
 
 .cursor-pointer {
