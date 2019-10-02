@@ -7,12 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Laravel\Passport\HasApiTokens;
-
-//use Illuminate\Auth\UserTrait;
-//use Illuminate\Auth\UserInterface;
-//use Illuminate\Auth\Reminders\RemindableTrait;
-//use Illuminate\Auth\Reminders\RemindableInterface;
 
 
 /**
@@ -40,16 +34,15 @@ use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable{
 
-    use HasApiTokens, Notifiable;
+    use Notifiable;
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
 
-
     protected $table = 'users';
-
+    protected $primaryKey = 'id';
     /**
      * The attributes excluded from the model's JSON form.
      *

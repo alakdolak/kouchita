@@ -14,7 +14,6 @@ return [
     */
 
     'defaults' => [
-//        'guard' => 'custom',
         'guard' => 'web',
         'passwords' => 'users',
     ],
@@ -38,18 +37,13 @@ return [
 
     'guards' => [
 
-        'custom' => [
-            'driver' => 'session',
-            'provider' => 'customProvider',
-        ],
-
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
         ],
 
         'api' => [
-            'driver' => 'passport',
+            'driver' => 'token',
             'provider' => 'users',
         ],
     ],
@@ -76,11 +70,6 @@ return [
             'driver' => 'eloquent',
             'model' => App\models\User::class,
         ],
-
-        'customProvider' => [
-            'driver' => 'custom-user-provider',
-            'model' => App\models\User::class,
-        ]
 
 //         'users' => [
 //             'driver' => 'database',
