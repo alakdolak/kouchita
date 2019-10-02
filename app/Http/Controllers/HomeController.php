@@ -1526,20 +1526,15 @@ class HomeController extends Controller
             $username = makeValidInput($_POST['username']);
             $password = makeValidInput($_POST['password']);
 
-            try {
-                if (Auth::attempt(array('username' => $username, 'password' => $password), true)) {
-                    if (Auth::user()->status != 0) {
-                        RetrievePas::whereUId(Auth::user()->id)->delete();
-                        echo "ok";
-                        return;
-                    } else {
-                        echo "nok2";
-                        return;
-                    }
+            if (Auth::attempt(array('username' => $username, 'password' => $password), true)) {
+                if (Auth::user()->status != 0) {
+                    RetrievePas::whereUId(Auth::user()->id)->delete();
+                    echo "ok";
+                    return;
+                } else {
+                    echo "nok2";
+                    return;
                 }
-            }
-            catch (\Exception $x) {
-                dd($x->getMessage());
             }
         }
 
