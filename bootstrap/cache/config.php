@@ -242,11 +242,11 @@
       'mysql' => 
       array (
         'driver' => 'mysql',
-        'host' => '127.0.0.1',
+        'host' => 'mysql_pro',
         'port' => '3306',
-        'database' => 'admin_shazde',
-        'username' => 'administrator_persoulio',
-        'password' => 'yGrn65~6',
+        'database' => 'pro',
+        'username' => 'pro',
+        'password' => 'pro',
         'unix_socket' => '',
         'charset' => 'utf8mb4',
         'collation' => 'utf8mb4_unicode_ci',
