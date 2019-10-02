@@ -1522,21 +1522,26 @@ class HomeController extends Controller
     public function doLogin()
     {
 
+        dd("Asd");
         if (isset($_POST["username"]) && isset($_POST["password"])) {
 
             $username = makeValidInput($_POST['username']);
             $password = makeValidInput($_POST['password']);
 
-            if (Auth::attempt(array('username' => $username, 'password' => $password), true)) {
-                if(Auth::user()->status != 0) {
-                    RetrievePas::whereUId(Auth::user()->id)->delete();
-                    echo "ok";
-                    return;
+            try {
+                if (Auth::attempt(array('username' => $username, 'password' => $password), true)) {
+                    if (Auth::user()->status != 0) {
+                        RetrievePas::whereUId(Auth::user()->id)->delete();
+                        echo "ok";
+                        return;
+                    } else {
+                        echo "nok2";
+                        return;
+                    }
                 }
-                else {
-                    echo "nok2";
-                    return;
-                }
+            }
+            catch (\Exception $x) {
+                dd($x->getMessage());
             }
         }
 
