@@ -886,7 +886,7 @@ $authUrl = $client->createAuthUrl();
                 را مطالعه کرده و با آن موافقم.
             </span>
             <div>
-                <div class="g-recaptcha" data-sitekey="6LcaSzwUAAAAAOl9ZYs_u90DLJjRh1-SRW-fp4Z0"></div>
+                <div class="g-recaptcha" data-sitekey="6LfiELsUAAAAAO3Pk-c6cKm1HhvifWx9S8nUtxTb"></div>
             </div>
             <br>
              <button id="submitAndFinishBtn" type="button" onclick="registerAndLogin()" class="btn btn-info active" disabled>ثبت</button>
