@@ -38,8 +38,8 @@ class AuthServiceProvider extends ServiceProvider
 //
 //        Passport::refreshTokensExpireIn(Carbon::now()->addDays(7));
 
-        Auth::provider('custom-user-provider',function($app, array $config)  {
-            return new CustomUserProvider($app['hash'], $config['model']);
-        });
+//        Auth::provider('custom-user-provider',function($app, array $config)  {
+//            return new CustomUserProvider($app['hash'], $config['model']);
+//        });
     }
 }
