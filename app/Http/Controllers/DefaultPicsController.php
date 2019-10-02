@@ -66,7 +66,7 @@ class DefaultPicsController extends Controller {
             $picName = DefaultPic::whereId($picId)->name;
 
             if($picName != null && !empty($picName)) {
-                $targetFile = __DIR__ . '/../../../public/defaultPic/' . $picName;
+                $targetFile = __DIR__ . '/../../../../assets/defaultPic/' . $picName;
                 if(file_exists($targetFile))
                     unlink($targetFile);
                 DefaultPic::destroy($picId);

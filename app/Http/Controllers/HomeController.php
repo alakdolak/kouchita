@@ -229,7 +229,7 @@ class HomeController extends Controller
     public function fillState()
     {
 
-        $path = __DIR__ . '/../../../public/alaki.xlsx';
+        $path = __DIR__ . '/../../../../assets/alaki.xlsx';
 
         $excelReader = PHPExcel_IOFactory::createReaderForFile($path);
         $excelObj = $excelReader->load($path);
@@ -257,7 +257,7 @@ class HomeController extends Controller
     public function fillTrain()
     {
 
-        $path = __DIR__ . '/../../../public/alaki.xlsx';
+        $path = __DIR__ . '/../../../../assets/alaki.xlsx';
 
         $excelReader = PHPExcel_IOFactory::createReaderForFile($path);
         $excelObj = $excelReader->load($path);
@@ -282,7 +282,7 @@ class HomeController extends Controller
     public function fillAirLine()
     {
 
-        $path = __DIR__ . '/../../../public/alaki.xlsx';
+        $path = __DIR__ . '/../../../../assets/alaki.xlsx';
 
         $excelReader = PHPExcel_IOFactory::createReaderForFile($path);
         $excelObj = $excelReader->load($path);
@@ -310,7 +310,7 @@ class HomeController extends Controller
     public function fillCity()
     {
 
-        $path = __DIR__ . '/../../../public/alaki.xlsx';
+        $path = __DIR__ . '/../../../../assets/alaki.xlsx';
 
         $excelReader = PHPExcel_IOFactory::createReaderForFile($path);
         $excelObj = $excelReader->load($path);
