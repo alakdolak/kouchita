@@ -1521,8 +1521,6 @@ class HomeController extends Controller
 
     public function doLogin()
     {
-
-        dd("Asd");
         if (isset($_POST["username"]) && isset($_POST["password"])) {
 
             $username = makeValidInput($_POST['username']);
