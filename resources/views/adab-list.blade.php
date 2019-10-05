@@ -14,26 +14,7 @@
     @else
         <title>لیست غذاهای محلی</title>
     @endif
-    <style>
-        .moreItems{
-            display: block;
-            text-align: center;
-            margin-top: 5px;
-            cursor: pointer;
-        }
-        .lessItems{
-            display: block;
-            text-align: center;
-            margin-top: 5px;
-            cursor: pointer;
-        }
-        .loader {
-            background-image: url("{{URL::asset('images/loading.svg')}}");
-
-            width: 100px;
-            height: 100px;
-        }
-    </style>
+    <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/specific designs/adabList.css?v=2')}}'/>
 </head>
 <body id="BODY_BLOCK_JQUERY_REFLOW" class=" r_map_position_ul_fake ltr domn_en_US lang_en long_prices globalNav2011_reset rebrand_2017 css_commerce_buttons flat_buttons sitewide xo_pin_user_review_to_top track_back">
 
@@ -70,7 +51,7 @@
 
                 <div class="eateryOverviewContent">
                     <div class="ui_columns is-partitioned is-mobile">
-                        <div class="ui_column is-9" ng-controller="PlaceController as cntr" style="direction: rtl;">
+                        <div class="ui_column is-9 direction-rtl" ng-controller="PlaceController as cntr">
                             <div infinite-scroll="myPagingFunction()" class="coverpage">
                                 <DIV class="ppr_rup ppr_priv_restaurants_coverpage_content">
                                     <div>
@@ -78,15 +59,20 @@
                                             <div class="coverpage_widget">
                                                 <div class="section">
                                                     <div class="single_filter_pois">
-                                                        <div class="title ui_columns"><span class="titleWrap ui_column is-9"><a class="titleLink"></a></span><a class="view_all ui_column is-3" ></a></div>
+                                                        <div class="title ui_columns">
+                                                            <span class="titleWrap ui_column is-9">
+                                                                <a class="titleLink"></a>
+                                                            </span>
+                                                            <a class="view_all ui_column is-3" ></a>
+                                                        </div>
                                                         <div ng-repeat="packet in packets" class="option">
                                                             <div class="Price_3 ui_columns is-mobile">
                                                                 <div ng-repeat="place in packet.places" class="ui_column is-3">
                                                                     <div class="poi">
                                                                         <a href="[[place.redirect]]" class="thumbnail">
                                                                             <DIV class="prw_rup prw_common_centered_thumbnail" >
-                                                                                <div class="sizing_wrapper" style="width:200px;height:120px;">
-                                                                                    <div class="centering_wrapper" style="margin-top:-66px;">
+                                                                                <div class="sizing_wrapper" id="imagesMainDivAdabList">
+                                                                                    <div class="centering_wrapper mg-tp_66">
                                                                                         <img ng-src='[[place.pic]]' width="100%" height="100%" class='photo_image' alt='[[place.name]]'>
                                                                                     </div>
                                                                                 </div>
@@ -98,14 +84,18 @@
                                                                             </div>
                                                                         </DIV>
                                                                         <div class="detail">
-                                                                            <div class="item name " title="[[place.name]]"><a class="poiTitle" target="_blank" href="[[place.redirect]]">[[place.name]]</a></div>
+                                                                            <div class="item name " title="[[place.name]]">
+                                                                                <a class="poiTitle" target="_blank" href="[[place.redirect]]">[[place.name]]</a>
+                                                                            </div>
                                                                             <div class="item rating-count">
                                                                                     <div class="rating-widget">
                                                                                         <DIV class="prw_rup prw_common_location_rating_simple">
                                                                                             <span class="[[place.ngClass]]"></span>
                                                                                         </DIV>
                                                                                     </div>
-                                                                                    <a target="_blank" class="review_count" href="">[[place.avgRate]] <span style="color: #16174F;">نقد</span> </a>
+                                                                                    <a target="_blank" class="review_count" href="">[[place.avgRate]]
+                                                                                        <span class="color-darkBlue">نقد</span>
+                                                                                    </a>
                                                                                 </div>
                                                                             <div class="booking"></div>
                                                                         </div>
@@ -125,33 +115,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="lhr ui_column is-3 hideCount reduced_height" style="direction: rtl;">
-                            <style>
-                                input[type="checkbox"], input[type="radio"]{
-                                    display:none !important;
-                                }
-
-                                input[type="checkbox"] + label, input[type="radio"] + label{
-                                    color:#666666;
-                                }
-
-                                input[type="checkbox"] + label span, input[type="radio"] + label span {
-                                    display:inline-block;
-                                    width:19px;
-                                    height:19px;
-                                    margin:-2px 10px 0 0;
-                                    vertical-align:middle;
-                                    background:url('{{URL::asset('images/check_radio_sheet.png')}}') left top no-repeat;
-                                    cursor:pointer;
-                                }
-
-                                input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label span{
-                                    background:url('{{URL::asset('images/check_radio_sheet.png')}}') -19px top no-repeat;
-
-                                }
-
-                            </style>
-
+                        <div class="lhr ui_column is-3 hideCount reduced_height direction-rtl">
                             <DIV class="ppr_rup ppr_priv_restaurant_filters">
                                 <div class="verticalFilters placements">
                                     <div id="EATERY_FILTERS_CONT" class="eatery_filters" >
@@ -495,6 +459,6 @@
 
 <script src="{{URL::asset('js/adv.js')}}"></script>
 
-<div class="ui_backdrop dark" style="display: none; z-index: 10000000"></div>
+<div class="ui_backdrop dark" id="darkModeAdabList"></div>
 </body>
 </html>

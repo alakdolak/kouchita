@@ -336,7 +336,7 @@
                             <a title="ages" href="{{route('picItems')}}">آیتم تصاویر</a>
                             <a title="ages" href="{{route('opinions')}}">مدیریت نظرات</a>
                             <a title="ages" href="{{route('questions')}}">سوالات نظرسنجی</a>
-                            <a title="ages" href="{{route('specialAdvice')}}">پیشنهاد های ویژه</a>
+{{--                            <a title="ages" href="{{route('specialAdvice')}}">پیشنهاد های ویژه</a>--}}
                             <a title="ages" href="{{route('reports')}}">گزارشات</a>
                             <a title="ages" href="{{route('goyeshTags')}}">تگ های گویش</a>
                             <a title="ages" href="{{route('ageSentences')}}">توضیحات سن برای بلیط</a>

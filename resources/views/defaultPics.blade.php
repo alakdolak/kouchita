@@ -83,7 +83,7 @@
                 </div>
                 <div class="col-xs-12">
                     <p class="warning_color">{{$msg}}</p>
-                    <input type="submit" class="btn btn-primary width-auto mg-tp-10" name="addPic" value="اضافه کن" style="width: auto; margin-top: 10px">
+                    <input type="submit" class="btn btn-primary width-auto mg-tp-10" name="addPic" value="اضافه کن">
                 </div>
             </form>
         @endif
