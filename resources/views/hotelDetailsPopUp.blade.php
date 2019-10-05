@@ -52,7 +52,7 @@
     <div class="ui_close_x" onclick="hideElement('photoSubmitted')"></div>
 </span>
 
-<div class="ui_backdrop dark display-none"></div>
+<div class="ui_backdrop dark" id="hotelDetailsPopUpDarkMode"></div>
 
 <span id="reportPane" class="ui_overlay ui_modal editTags hidden">
     <div class="header_text">گزارش</div>
