@@ -58,88 +58,91 @@
                                     @endif
                                     {{$city}}
                                 </h1>
-                                <div>
-                                    <div class="srchBox">
-                                        <button class="srchBtn" onclick="inputSearch(0)">جستجو</button>
-                                    </div>
-                                    <div class="roomBox">
-                                        <div id="roomDetail" onclick="togglePassengerNoSelectPane()">
-                                            <span id="room_number" class="room"></span>&nbsp;
-                                            <span>اتاق</span>&nbsp;-&nbsp;
-                                            <span id="adult_number" class="adult"></span>
-                                            <span>بزرگسال</span>&nbsp;
-                                            {{---&nbsp;--}}
-                                            {{--<span class="children">--}}
-{{--{{$children}}--}}
-                                            {{--</span>--}}
-                                            {{--<span>بچه</span>&nbsp;--}}
+
+                                @if($placeMode == "hotel")
+                                    <div>
+                                        <div class="srchBox">
+                                            <button class="srchBtn" onclick="inputSearch(0)">جستجو</button>
                                         </div>
-                                        <div id="roomCapacityBoxIcon" onclick="togglePassengerNoSelectPane()"
-                                             class="shTIcon passengerIcon"></div>
-                                        <div id="passengerArrowDown" onclick="togglePassengerNoSelectPane()"
-                                             class="shTIcon searchBottomArrowIcone arrowPassengerIcone"></div>
-                                        <div id="passengerArrowUp" onclick="togglePassengerNoSelectPane()"
-                                             class="shTIcon searchTopArrowIcone arrowPassengerIcone hidden"></div>
+                                        <div class="roomBox">
+                                            <div id="roomDetail" onclick="togglePassengerNoSelectPane()">
+                                                <span id="room_number" class="room"></span>&nbsp;
+                                                <span>اتاق</span>&nbsp;-&nbsp;
+                                                <span id="adult_number" class="adult"></span>
+                                                <span>بزرگسال</span>&nbsp;
+                                                {{---&nbsp;--}}
+                                                {{--<span class="children">--}}
+    {{--{{$children}}--}}
+                                                {{--</span>--}}
+                                                {{--<span>بچه</span>&nbsp;--}}
+                                            </div>
+                                            <div id="roomCapacityBoxIcon" onclick="togglePassengerNoSelectPane()"
+                                                 class="shTIcon passengerIcon"></div>
+                                            <div id="passengerArrowDown" onclick="togglePassengerNoSelectPane()"
+                                                 class="shTIcon searchBottomArrowIcone arrowPassengerIcone"></div>
+                                            <div id="passengerArrowUp" onclick="togglePassengerNoSelectPane()"
+                                                 class="shTIcon searchTopArrowIcone arrowPassengerIcone hidden"></div>
 
 
-                                        <div class="roomPassengerPopUp hidden " id="passengerNoSelectPane"
-                                             onmouseleave="addClassHidden('passengerNoSelectPane'); passengerNoSelect = false;">
-                                            <div class="rowOfPopUp">
-                                                <span class="float-right">اتاق</span>
-                                                <div class="float-left">
-                                                    <div onclick="changeRoomPassengersNum(-1, 3)"
-                                                         class="shTIcon minusPlusIcons minus"></div>
-                                                    <span class='numBetweenMinusPlusBtn room' id="roomNumInSelect">
-{{--                                                        {{$room}}--}}
-                                                    </span>
-                                                    <div onclick="changeRoomPassengersNum(1, 3)"
-                                                         class="shTIcon minusPlusIcons plus"></div>
+                                            <div class="roomPassengerPopUp hidden " id="passengerNoSelectPane"
+                                                 onmouseleave="addClassHidden('passengerNoSelectPane'); passengerNoSelect = false;">
+                                                <div class="rowOfPopUp">
+                                                    <span class="float-right">اتاق</span>
+                                                    <div class="float-left">
+                                                        <div onclick="changeRoomPassengersNum(-1, 3)"
+                                                             class="shTIcon minusPlusIcons minus"></div>
+                                                        <span class='numBetweenMinusPlusBtn room' id="roomNumInSelect">
+    {{--                                                        {{$room}}--}}
+                                                        </span>
+                                                        <div onclick="changeRoomPassengersNum(1, 3)"
+                                                             class="shTIcon minusPlusIcons plus"></div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="rowOfPopUp">
-                                                <span class="float-right">بزرگسال</span>
-                                                <div class="float-left">
-                                                    <div onclick="changeRoomPassengersNum(-1, 2)"
-                                                         class="shTIcon minusPlusIcons minus"></div>
-                                                    <span class='numBetweenMinusPlusBtn adult'
-                                                          id="adultPassengerNumInSelect">
-{{--                                                        {{$adult}}--}}
-                                                    </span>
-                                                    <div onclick="changeRoomPassengersNum(1, 2)"
-                                                         class="shTIcon minusPlusIcons plus"></div>
+                                                <div class="rowOfPopUp">
+                                                    <span class="float-right">بزرگسال</span>
+                                                    <div class="float-left">
+                                                        <div onclick="changeRoomPassengersNum(-1, 2)"
+                                                             class="shTIcon minusPlusIcons minus"></div>
+                                                        <span class='numBetweenMinusPlusBtn adult'
+                                                              id="adultPassengerNumInSelect">
+    {{--                                                        {{$adult}}--}}
+                                                        </span>
+                                                        <div onclick="changeRoomPassengersNum(1, 2)"
+                                                             class="shTIcon minusPlusIcons plus"></div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            {{--<div class="rowOfPopUp">--}}
-                                                {{--<span class="float-right">بچه</span>--}}
-                                                {{--<div class="float-left">--}}
-                                                    {{--<div onclick="changeRoomPassengersNum(-1, 1)"--}}
-                                                         {{--class="shTIcon minusPlusIcons minus"></div>--}}
-                                                    {{--<span class='numBetweenMinusPlusBtn children'--}}
-                                                          {{--id="childrenPassengerNumInSelect">--}}
-                                                        {{--{{$children}}--}}
-                                                    {{--</span>--}}
-                                                    {{--<div onclick="changeRoomPassengersNum(1, 1)"--}}
-                                                         {{--class="shTIcon minusPlusIcons plus"></div>--}}
+                                                {{--<div class="rowOfPopUp">--}}
+                                                    {{--<span class="float-right">بچه</span>--}}
+                                                    {{--<div class="float-left">--}}
+                                                        {{--<div onclick="changeRoomPassengersNum(-1, 1)"--}}
+                                                             {{--class="shTIcon minusPlusIcons minus"></div>--}}
+                                                        {{--<span class='numBetweenMinusPlusBtn children'--}}
+                                                              {{--id="childrenPassengerNumInSelect">--}}
+                                                            {{--{{$children}}--}}
+                                                        {{--</span>--}}
+                                                        {{--<div onclick="changeRoomPassengersNum(1, 1)"--}}
+                                                             {{--class="shTIcon minusPlusIcons plus"></div>--}}
+                                                    {{--</div>--}}
                                                 {{--</div>--}}
-                                            {{--</div>--}}
-                                            {{--<div class="childrenPopUpAlert">--}}
-                                                {{--سن بچه را در زمان ورود به هتل وارد کنید--}}
-                                            {{--</div>--}}
-                                            {{--<div class="childBox"></div>--}}
+                                                {{--<div class="childrenPopUpAlert">--}}
+                                                    {{--سن بچه را در زمان ورود به هتل وارد کنید--}}
+                                                {{--</div>--}}
+                                                {{--<div class="childBox"></div>--}}
+                                            </div>
+                                        </div>
+                                        <div class="calenderBox">
+                                            <label id="calendar-container-edit-1placeDate" class="dateLabel">
+                                                <span onclick="changeTwoCalendar(2); nowCalendar()" class="ui_icon calendar calendarIcon"></span>
+                                                <input onclick="assignDate('{{convertStringToDate(getToday()["date"])}}', 'calendar-container-edit-1placeDate_phone', 'backDate_phone')" name="date" id="goDate" type="text" class="inputDateLabel" placeholder="تاریخ رفت" required readonly>
+                                            </label>
+                                            <label id="calendar-container-edit-2placeDate" class="dateLabel">
+                                                <span>تا</span>
+                                                <input name="date" id="backDate" type="text" class="inputDateLabel" placeholder="تاریخ برگشت" required readonly>
+                                            </label>
                                         </div>
                                     </div>
-                                    <div class="calenderBox">
-                                        <label id="calendar-container-edit-1placeDate" class="dateLabel">
-                                            <span onclick="changeTwoCalendar(2); nowCalendar()" class="ui_icon calendar calendarIcon"></span>
-                                            <input onclick="assignDate('{{convertStringToDate(getToday()["date"])}}', 'calendar-container-edit-1placeDate_phone', 'backDate_phone')" name="date" id="goDate" type="text" class="inputDateLabel" placeholder="تاریخ رفت" required readonly>
-                                        </label>
-                                        <label id="calendar-container-edit-2placeDate" class="dateLabel">
-                                            <span>تا</span>
-                                            <input name="date" id="backDate" type="text" class="inputDateLabel" placeholder="تاریخ برگشت" required readonly>
-                                        </label>
-                                    </div>
-                                </div>
-                                @include('layouts.calendar')
+                                    @include('layouts.calendar')
+                                @endif
                             </div>
                         </div>
                     </div>

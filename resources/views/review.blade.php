@@ -502,23 +502,23 @@
         });
     });
 
-    function removeReview() {
+    @if(isset($lig))
+        function removeReview() {
 
-        $.ajax({
-            type: 'post',
-            url: '{{route('removeReview')}}',
-            data: {
-                'logId': '{{$log->id}}'
-            },
-            success: function(response) {
-                if(response == "ok")
-                    document.location.href = '{{route('hotelDetails', ['placeId' => $placeId, 'placeName' => 
-                    $placeName])}}';
-            }
-        });
-
-
-    }
+            $.ajax({
+                type: 'post',
+                url: '{{route('removeReview')}}',
+                data: {
+                    'logId': '{{$log->id}}'
+                },
+                success: function(response) {
+                    if(response == "ok")
+                        document.location.href = '{{route('hotelDetails', ['placeId' => $placeId, 'placeName' =>
+                        $placeName])}}';
+                }
+            });
+        }
+    @endif
 
     function sendComment(status) {
 

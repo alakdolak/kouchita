@@ -229,7 +229,7 @@ class HomeController extends Controller
     public function fillState()
     {
 
-        $path = __DIR__ . '/../../../public/alaki.xlsx';
+        $path = __DIR__ . '/../../../../assets/alaki.xlsx';
 
         $excelReader = PHPExcel_IOFactory::createReaderForFile($path);
         $excelObj = $excelReader->load($path);
@@ -257,7 +257,7 @@ class HomeController extends Controller
     public function fillTrain()
     {
 
-        $path = __DIR__ . '/../../../public/alaki.xlsx';
+        $path = __DIR__ . '/../../../../assets/alaki.xlsx';
 
         $excelReader = PHPExcel_IOFactory::createReaderForFile($path);
         $excelObj = $excelReader->load($path);
@@ -282,7 +282,7 @@ class HomeController extends Controller
     public function fillAirLine()
     {
 
-        $path = __DIR__ . '/../../../public/alaki.xlsx';
+        $path = __DIR__ . '/../../../../assets/alaki.xlsx';
 
         $excelReader = PHPExcel_IOFactory::createReaderForFile($path);
         $excelObj = $excelReader->load($path);
@@ -310,7 +310,7 @@ class HomeController extends Controller
     public function fillCity()
     {
 
-        $path = __DIR__ . '/../../../public/alaki.xlsx';
+        $path = __DIR__ . '/../../../../assets/alaki.xlsx';
 
         $excelReader = PHPExcel_IOFactory::createReaderForFile($path);
         $excelObj = $excelReader->load($path);
@@ -741,6 +741,7 @@ class HomeController extends Controller
             $user->password = Hash::make(makeValidInput($_POST["password"]));
             $user->email = makeValidInput($_POST["email"]);
             $user->level = 0;
+            $user->cityId = Cities::first()->id;
             $user->created_at = date('Y-m-d h:m:s');
             $user->updated_at = date('Y-m-d h:m:s');
             $user->invitationCode = $invitationCode;
@@ -977,8 +978,8 @@ class HomeController extends Controller
 
             //Insert your cient ID and sexcret
             //You can get it from : https://console.developers.google.com/
-            $client_id = '774684902659-20aeg6um0856j5li2uuu9ombu2pcbqv9.apps.googleusercontent.com';
-            $client_secret = 'ARyU8-RXFJZD5jl5QawhpHne';
+            $client_id = '204875713143-vgh7o6lfh1m8phas09n7ia8psgmk3bbi.apps.googleusercontent.com';
+            $client_secret = '0kHyl_hsKamEH6SX-_9xmkWq';
             $redirect_uri = route('loginWithGoogle');
 
             /************************************************
@@ -1520,19 +1521,17 @@ class HomeController extends Controller
 
     public function doLogin()
     {
-
         if (isset($_POST["username"]) && isset($_POST["password"])) {
 
             $username = makeValidInput($_POST['username']);
             $password = makeValidInput($_POST['password']);
 
             if (Auth::attempt(array('username' => $username, 'password' => $password), true)) {
-                if(Auth::user()->status != 0) {
+                if (Auth::user()->status != 0) {
                     RetrievePas::whereUId(Auth::user()->id)->delete();
                     echo "ok";
                     return;
-                }
-                else {
+                } else {
                     echo "nok2";
                     return;
                 }

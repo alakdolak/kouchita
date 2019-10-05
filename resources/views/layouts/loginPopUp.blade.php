@@ -10,8 +10,8 @@ require_once (__DIR__ . '/../../../app/Http/Controllers/glogin/libraries/Google/
 
 //Insert your cient ID and secret
 //You can get it from : https://console.developers.google.com/
-$client_id = '774684902659-20aeg6um0856j5li2uuu9ombu2pcbqv9.apps.googleusercontent.com';
-$client_secret = 'ARyU8-RXFJZD5jl5QawhpHne';
+$client_id = '204875713143-vgh7o6lfh1m8phas09n7ia8psgmk3bbi.apps.googleusercontent.com';
+$client_secret = '0kHyl_hsKamEH6SX-_9xmkWq';
 $redirect_uri =  route('loginWithGoogle');
 
 /************************************************
@@ -886,7 +886,7 @@ $authUrl = $client->createAuthUrl();
                 را مطالعه کرده و با آن موافقم.
             </span>
             <div>
-                <div class="g-recaptcha" data-sitekey="6LcaSzwUAAAAAOl9ZYs_u90DLJjRh1-SRW-fp4Z0"></div>
+                <div class="g-recaptcha" data-sitekey="6LfiELsUAAAAAO3Pk-c6cKm1HhvifWx9S8nUtxTb"></div>
             </div>
             <br>
              <button id="submitAndFinishBtn" type="button" onclick="registerAndLogin()" class="btn btn-info active" disabled>ثبت</button>
