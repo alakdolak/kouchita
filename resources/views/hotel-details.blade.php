@@ -646,9 +646,6 @@ if ($total == 0)
                                             <div class="see_all_count_wrap" onclick="getPhotos(-1)">
                                                 <span class="see_all_count"><span class="ui_icon camera"></span>تمام عکس ها {{$userPhotos + $sitePhotos}} </span>
                                             </div>
-                                            <div class="entry_cta_wrap">
-                                                <span class="entry_cta"><span class="ui_icon expand"></span>اندازه بزرگ عکس </span>
-                                            </div>
                                         </div>
                                         <div onclick="photoRoundRobin(-1)" class="left-nav left-nav-header"></div>
                                         <div onclick="photoRoundRobin(1)" class="right-nav right-nav-header"></div>
@@ -1627,12 +1624,6 @@ if ($total == 0)
                                                         <span class="see_all_count">
                                                             <span class="ui_icon camera"></span>
                                                             همه عکس ها {{$userPhotos}}
-                                                        </span>
-                                                    </div>
-                                                    <div class="entry_cta_wrap">
-                                                        <span class="entry_cta">
-                                                            <span class="ui_icon expand"></span>
-                                                            اندازه بزرگ عکس
                                                         </span>
                                                     </div>
                                                 </div>
