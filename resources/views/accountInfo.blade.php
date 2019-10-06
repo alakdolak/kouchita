@@ -9,7 +9,6 @@
 
 @section('main')
 
-    <link rel="stylesheet" type="text/css" media="screen, print" href="{{URL::asset('css/theme2/account_info.css?v=1')}}"/>
 
     <div id="MAIN" class="Settings prodp13n_jfy_overflow_visible">
         <div id="BODYCON" class="col easyClear poolB adjust_padding new_meta_chevron_v2">

@@ -336,7 +336,7 @@
                             <a title="ages" href="{{route('picItems')}}">آیتم تصاویر</a>
                             <a title="ages" href="{{route('opinions')}}">مدیریت نظرات</a>
                             <a title="ages" href="{{route('questions')}}">سوالات نظرسنجی</a>
-                            <a title="ages" href="{{route('specialAdvice')}}">پیشنهاد های ویژه</a>
+{{--                            <a title="ages" href="{{route('specialAdvice')}}">پیشنهاد های ویژه</a>--}}
                             <a title="ages" href="{{route('reports')}}">گزارشات</a>
                             <a title="ages" href="{{route('goyeshTags')}}">تگ های گویش</a>
                             <a title="ages" href="{{route('ageSentences')}}">توضیحات سن برای بلیط</a>
@@ -482,7 +482,7 @@
 
                         for(i = 0; i < response.length; i++) {
                             element = "<div>";
-                            element += "<a class='masthead-recent-card' style='text-align: right !important;' target='_self' href='" + response[i].placeRedirect + "'>";
+                            element += "<a class='masthead-recent-card text-align-rightImp' target='_self' href='" + response[i].placeRedirect + "'>";
                             element += "<div class='media-left' id='MediaLeftBodyProfile'>";
                             element += "<div class='thumbnail' style='background-image: url(" + response[i].placePic + ");'></div>";
                             element += "</div>";

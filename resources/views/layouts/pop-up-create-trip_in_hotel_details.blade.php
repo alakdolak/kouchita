@@ -89,9 +89,9 @@
 <script async src="{{URL::asset("js/bootstrap-datepicker.js")}}"></script>
 
 <link rel="stylesheet" href="{{URL::asset('css/theme2/bootstrap-datepicker.css?v=1')}}">
-{{--<link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/popUpCreateTripInHotelDetails.css')}}'/>--}}
+<link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/pop-up-create-trip.css')}}'/>
 
-<div id="pop-up-create-trip" style="visibility: hidden" class="ui_modal_card saves-settings-modal create-trip-modal is-active">
+<div id="pop-up-create-trip" class="ui_modal_card saves-settings-modal create-trip-modal is-active">
     <div class="modal-background" onclick=""></div>
     <div class="modal-card rtl">
         <div class="ui_close_x" onclick="closePopUp()"></div>
@@ -114,7 +114,7 @@
     </div>
 </div>
 
-<div id="date-pop-up" style="visibility: hidden" class="ui_modal_card saves-settings-modal create-trip-modal is-active">
+<div id="date-pop-up" class="ui_modal_card saves-settings-modal create-trip-modal is-active">
     <div class="modal-background" onclick=""></div>
     <div class="modal-card">
         <div class="ui_close_x" onclick="closePopUp()"></div>
