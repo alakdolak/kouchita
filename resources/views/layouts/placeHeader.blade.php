@@ -124,7 +124,15 @@
                                             <div class="masthead_notifctr_sprite ui_icon notification-bell"></div>
                                             <div class="masthead_notifctr_jewel hidden">0</div>
                                         </div>
-                                        <div id="alert" class="masthead_notifctr_dropdown"><div class="notifdd_title">پیام ها</div> <div class="notifdd_loading hidden"><div class="ui_spinner"></div></div><div><div class="modules-engagement-notification-dropdown " data-backbone-name="modules.engagement.NotificationDropdown" data-backbone-context="Engagement_MemberNotifications"><div class="notifdd_empty">هیچ پیامی موجود نیست </div></div></div>
+                                        <div id="alert" class="masthead_notifctr_dropdown"><div class="notifdd_title">پیام ها</div>
+                                            <div class="notifdd_loading hidden">
+                                                <div class="ui_spinner"></div>
+                                            </div>
+                                            <div>
+                                                <div class="modules-engagement-notification-dropdown " data-backbone-name="modules.engagement.NotificationDropdown" data-backbone-context="Engagement_MemberNotifications">
+                                                    <div class="notifdd_empty">هیچ پیامی موجود نیست </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div id="helpSpan_3" class="helpSpans hidden row">
