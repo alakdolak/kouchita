@@ -819,7 +819,7 @@ body.has-modal-open {
 .ui_backdrop.dark {
     background-color: #000;
     background-color: rgba(0, 0, 0, 0.8);
-    filter: alpha(opacity 80);
+    filter: alpha(80);
     -moz-opacity: .8;
     -khtml-opacity: .8;
     opacity: .8;
@@ -827,7 +827,7 @@ body.has-modal-open {
 .ui_backdrop.light {
     background-color: #fff;
     background-color: rgba(255, 255, 255, 0.8);
-    filter: alpha(opacity 80);
+    filter: alpha(80);
     -moz-opacity: .8;
     -khtml-opacity: .8;
     opacity: .8;
@@ -952,7 +952,7 @@ body.has-modal-open {
 .ui_flyout .spinnershade.dark {
     background-color: #000;
     background-color: rgba(0, 0, 0, 0.8);
-    filter: alpha(opacity 80);
+    filter: alpha(80);
     -moz-opacity: .8;
     -khtml-opacity: .8;
     opacity: .8;
@@ -963,7 +963,7 @@ body.has-modal-open {
 .ui_flyout .spinnershade.light {
     background-color: #fff;
     background-color: rgba(255, 255, 255, 0.8);
-    filter: alpha(opacity 80);
+    filter: alpha(80);
     -moz-opacity: .8;
     -khtml-opacity: .8;
     opacity: .8;
@@ -3620,7 +3620,7 @@ body.has-modal-open {
     align-items: center;
 }
 @media(min-width:768px) {
-    .ui_columns: not(.is-desktop) {
+    .ui_columns:not(.is-desktop) {
     display: -webkit-box;
     display: flex;
 }
@@ -4423,7 +4423,7 @@ body.has-modal-open {
     align-items: center;
 }
 .ui_loader>span {
-    display: -webkit-inline-box;
+    /*display: -webkit-inline-box;*/
     display: inline-flex;
     width: 10px;
     height: 8px;
