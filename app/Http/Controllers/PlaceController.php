@@ -2874,10 +2874,10 @@ class PlaceController extends Controller {
 
     public function getAdviceMain() {
 
-        if (Cache::has('suggestedPlaces')) {
-            echo \GuzzleHttp\json_encode(Cache::get('suggestedPlaces'));
-            return;
-        }
+//        if (Cache::has('suggestedPlaces')) {
+//            echo \GuzzleHttp\json_encode(Cache::get('suggestedPlaces'));
+//            return;
+//        }
 
         $activityId = Activity::whereName('نظر')->first()->id;
         $places = SpecialAdvice::all();
@@ -2899,7 +2899,7 @@ class PlaceController extends Controller {
                 case 3:
                     $places[$i] = Restaurant::whereId($places[$i]->placeId);
 
-                    if (file_exists(__DIR__ . '/../../../public/restaurant/' . $places[$i]->file . '/f-1.jpg'))
+                    if (file_exists(__DIR__ . '/../../../../assets/_images/restaurant/' . $places[$i]->file . '/f-1.jpg'))
                         $places[$i]->pic = URL::asset('_images/restaurant/' . $places[$i]->file . '/f-1.jpg');
                     else
                         $places[$i]->pic = URL::asset('_images/nopic/blank.jpg');

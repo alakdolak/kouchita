@@ -16,6 +16,8 @@ use App\models\saveApiInfo;
 use App\models\State;
 use App\models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\URL;
 
 class HotelReservationController extends Controller {
 

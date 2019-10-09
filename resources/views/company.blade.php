@@ -15,6 +15,12 @@
         .row {
             direction: rtl;
         }
+        .width-auto {
+            width: auto;
+        }
+        .mg-lt-30per {
+            margin-left: 30%;
+        }
     </style>
 @stop
 
@@ -36,8 +42,8 @@
                         <span>
                             {{$it->name}}
                         </span>
-                        <button name="deleteCompany" value="{{$it->id}}" class="btn btn-danger" data-toggle="tooltip" title="حذف شرکت" style="width: auto">
-                            <span class="glyphicon glyphicon-remove" style="margin-left: 30%"></span>
+                        <button name="deleteCompany" value="{{$it->id}}" class="btn btn-danger width-auto" data-toggle="tooltip" title="حذف شرکت">
+                            <span class="glyphicon glyphicon-remove mg-lt-30per"></span>
                         </button>
                     </div>
                 @endforeach
@@ -55,7 +61,7 @@
                 </div>
                 <div class="col-xs-12">
                     <p class="warning_color">{{$msg}}</p>
-                    <input type="submit" name="addCom" value="اضافه کن" class="btn btn-primary" style="width: auto; margin-top: 10px">
+                    <input type="submit" name="addCom" value="اضافه کن" class="btn btn-primary width-auto mg-lt-30per">
                 </div>
             </form>
         @endif

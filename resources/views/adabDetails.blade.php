@@ -50,6 +50,7 @@
 
 @section('header')
     @parent
+    <link rel="stylesheet" href="{{URL::asset('css/theme2/specific designs/adabDetails.css')}}">
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/photo_albums_stacked.css?v=1')}}'/>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/media_albums_extended.css')}}'/>
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/popUp.css?v=1')}}">
@@ -59,15 +60,6 @@
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/popUp.css?v=1')}}">
     <link rel="stylesheet" href="{{URL::asset('css/theme2/help.css?v=1')}}">
     <link rel="stylesheet" href="{{URL::asset('css/theme2/cropper.css')}}">
-
-    <style>
-        .btn-primary:focus {
-            box-shadow: 0 0 0 0 !important;
-        }
-        .btn-success:focus {
-            box-shadow: 0 0 0 0 !important;
-        }
-    </style>
 @stop
 
 @section('main')

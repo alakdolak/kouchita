@@ -57,6 +57,8 @@
 
     @include('layouts.pop-up-create-trip')
 
+    <link rel="stylesheet" href="{{URL::asset('css/theme2/specific designs/profile.css')}}">
+
     <center class="row">
         <div class="col-xs-12">
             <h3>تبلیغات</h3>
@@ -79,12 +81,12 @@
                             <span> از {{$ad->from_}} تا {{$ad->to_}}</span>
                             <span> استان ها </span> <span>{{$ad->states}}</span>
 
-                            <a href="{{route('editAd', ['adId' => $ad->id])}}" class="btn btn-info" data-toggle="tooltip" title="ویرایش تبلیغ" style="width: auto">
-                                <span class="glyphicon glyphicon-edit" style="margin-left: 30%"></span>
+                            <a href="{{route('editAd', ['adId' => $ad->id])}}" class="btn btn-info width-auto" data-toggle="tooltip" title="ویرایش تبلیغ">
+                                <span class="glyphicon glyphicon-edit mg-lt-30per"></span>
                             </a>
 
-                            <button name="adId" value="{{$ad->id}}" class="btn btn-danger" data-toggle="tooltip" title="حذف تبلیغ" style="width: auto">
-                                <span class="glyphicon glyphicon-remove" style="margin-left: 30%"></span>
+                            <button name="adId" value="{{$ad->id}}" class="btn btn-danger width-auto" data-toggle="tooltip" title="حذف تبلیغ">
+                                <span class="glyphicon glyphicon-remove mg-lt-30per"></span>
                             </button>
                         </div>
                     @endforeach
@@ -93,8 +95,8 @@
 
             <div class="col-xs-12">
                 <a href="{{URL::route('addAds')}}">
-                    <button class="btn btn btn-default" style="width: auto; border-radius: 50% 50% 50% 50%" data-toggle="tooltip" title="اضافه کردن تبلیغ جدید">
-                        <span class="glyphicon glyphicon-plus" style="margin-left: 30%"></span>
+                    <button class="btn btn btn-default" id="addNewAdsBtn" data-toggle="tooltip" title="اضافه کردن تبلیغ جدید">
+                        <span class="glyphicon glyphicon-plus mg-lt-30per"></span>
                     </button>
                 </a>
             </div>
@@ -147,28 +149,28 @@
                     </label>
                 </div>
                 <div class="col-xs-12">
-                    <div class="ui_column" style="max-width: 200px">
+                    <div class="ui_column max-width-200">
                         <div id="date_btn_start_edit">تاریخ شروع</div>
-                        <label style="position: relative; margin:6px; width: 100%; height: 30px; border: 1px solid #e5e5e5; border-radius: 2px; box-shadow: 0 7px 12px -7px #e5e5e5 inset;">
-                            <span onclick="editDateTrip()" class="ui_icon calendar" style="color: #30b4a6 !important; font-size: 20px; line-height: 32px; position: absolute; right: 7px;"></span>
-                            <input name="startDate" id="date_input_start_edit_2" placeholder="روز/ماه/سال" required readonly style="padding: 7px; position: absolute; top: 1px; right: 35px; border: none; background: transparent;" type="text">
+                        <label class="editDateTripLabel">
+                            <span onclick="editDateTrip()" class="ui_icon calendar editDateTripSpan"></span>
+                            <input name="startDate" id="date_input_start_edit_2" placeholder="روز/ماه/سال" required readonly class="editDateTripInput" type="text">
                         </label>
                     </div>
                 </div>
 
                 <div class="col-xs-12">
-                    <div class="ui_column" style="max-width: 200px">
+                    <div class="ui_column max-width-200">
                         <div id="date_btn_end_edit">تاریخ اتمام</div>
-                        <label style="position: relative; margin:6px; width: 100%; height: 30px; border: 1px solid #e5e5e5; border-radius: 2px; box-shadow: 0 7px 12px -7px #e5e5e5 inset;">
-                            <span onclick="editDateTripEnd()" class="ui_icon calendar" style="color: #30b4a6 !important; font-size: 20px; line-height: 32px; position: absolute; right: 7px;"></span>
-                            <input name="endDate" id="date_input_end_edit_2" placeholder="روز/ماه/سال" required readonly style="padding: 7px; position: absolute; top: 1px; right: 35px; border: none; background: transparent;" type="text">
+                        <label class="editDateTripLabel">
+                            <span onclick="editDateTripEnd()" class="ui_icon calendar editDateTripSpan"></span>
+                            <input name="endDate" id="date_input_end_edit_2" placeholder="روز/ماه/سال" required readonly class="editDateTripInput" type="text">
                         </label>
                     </div>
                 </div>
 
                 <div class="col-xs-12">
                     <p class="warning_color">{{$msg}}</p>
-                    <input type="submit" name="addPublicity" value="اضافه کن" class="btn btn-primary" style="width: auto; margin-top: 10px">
+                    <input type="submit" name="addPublicity" value="اضافه کن" class="btn btn-primary width-auto mg-tp-10">
                 </div>
             </form>
         @else
@@ -241,7 +243,7 @@
 
                 <div class="col-xs-12">
                     <label>
-                        <input onchange="writeFileName(this.value)" id="photo" type="file" name="pic" style="display: none">
+                        <input onchange="writeFileName(this.value)" id="photo" type="file" name="pic" class="display-none">
                         <label for="photo">
                             <div class="ui_button primary addPhotoBtn">تصویر </div>
                         </label>
@@ -249,28 +251,28 @@
                     </label>
                 </div>
                 <div class="col-xs-12">
-                    <div class="ui_column" style="max-width: 200px">
+                    <div class="ui_column max-width-200">
                         <div id="date_btn_start_edit">تاریخ شروع</div>
-                        <label style="position: relative; margin:6px; width: 100%; height: 30px; border: 1px solid #e5e5e5; border-radius: 2px; box-shadow: 0 7px 12px -7px #e5e5e5 inset;">
-                            <span onclick="editDateTrip()" class="ui_icon calendar" style="color: #30b4a6 !important; font-size: 20px; line-height: 32px; position: absolute; right: 7px;"></span>
-                            <input value="{{convertStringToDate($ad->from_)}}" name="startDate" id="date_input_start_edit_2" placeholder="روز/ماه/سال" required readonly style="padding: 7px; position: absolute; top: 1px; right: 35px; border: none; background: transparent;" type="text">
+                        <label class="editDateTripLabel">
+                            <span onclick="editDateTrip()" class="ui_icon calendar editDateTripSpan"></span>
+                            <input value="{{convertStringToDate($ad->from_)}}" name="startDate" id="date_input_start_edit_2" placeholder="روز/ماه/سال" required readonly class="editDateTripInput" type="text">
                         </label>
                     </div>
                 </div>
 
                 <div class="col-xs-12">
-                    <div class="ui_column" style="max-width: 200px">
+                    <div class="ui_column max-width-200">
                         <div id="date_btn_end_edit">تاریخ اتمام</div>
-                        <label style="position: relative; margin:6px; width: 100%; height: 30px; border: 1px solid #e5e5e5; border-radius: 2px; box-shadow: 0 7px 12px -7px #e5e5e5 inset;">
-                            <span onclick="editDateTripEnd()" class="ui_icon calendar" style="color: #30b4a6 !important; font-size: 20px; line-height: 32px; position: absolute; right: 7px;"></span>
-                            <input value="{{convertStringToDate($ad->to_)}}" name="endDate" id="date_input_end_edit_2" placeholder="روز/ماه/سال" required readonly style="padding: 7px; position: absolute; top: 1px; right: 35px; border: none; background: transparent;" type="text">
+                        <label class="editDateTripLabel">
+                            <span onclick="editDateTripEnd()" class="ui_icon calendar editDateTripSpan"></span>
+                            <input value="{{convertStringToDate($ad->to_)}}" name="endDate" id="date_input_end_edit_2" placeholder="روز/ماه/سال" required readonly class="editDateTripInput" type="text">
                         </label>
                     </div>
                 </div>
 
                 <div class="col-xs-12">
                     <p class="warning_color">{{$msg}}</p>
-                    <input type="submit" name="addPublicity" value="ویرایش" class="btn btn-primary" style="width: auto; margin-top: 10px">
+                    <input type="submit" name="addPublicity" value="ویرایش" class="btn btn-primary width-auto mg-tp-10">
                 </div>
             </form>
         @endif

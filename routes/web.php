@@ -301,11 +301,7 @@ Route::group(array('middleware' => ['throttle:30', 'nothing', 'auth', 'adminAcce
 
     Route::post('opOnReport/{mode}', array('as' => 'opOnReport', 'uses' => 'ReportController@opOnReport'));
 
-    Route::any('specialAdvice', array('as' => 'specialAdvice', 'uses' => 'HomeController@specialAdvice'));
-
     Route::post('findPlace', array('as' => 'findPlace', 'uses' => 'HomeController@findPlace'));
-
-    Route::post('submitAdvice', array('as' => 'submitAdvice', 'uses' => 'HomeController@submitAdvice'));
 
 });
 
@@ -628,7 +624,7 @@ Route::group(array('middleware' => ['throttle:30', 'nothing']), function () {
 
     Route::post('getAmakenListElems/{city}/{mode}', array('as' => 'getAmakenListElems', 'uses' => 'AmakenController@getAmakenListElems'));
 
-    Route::post('getRestaurantListElems/{city}/{mode}', array('as' => 'getRestaurantListElems', 'uses' => 'HotelController@getRestaurantListElems'));
+    Route::post('getRestaurantListElems/{city}/{mode}', array('as' => 'getRestaurantListElems', 'uses' => 'RestaurantController@getRestaurantListElems'));
 
     Route::post('getAdabListElems/{city}/{mode}', array('as' => 'getAdabListElems', 'uses' => 'AdabController@getAdabListElems'));
 

@@ -49,6 +49,8 @@
 
     @section('main')
 
+        <link rel="stylesheet" href="{{URL::asset('css/theme2/specific designs/profile.css')}}">
+
         <script>
 
             var getActivitiesNumPath = '{{route('ajaxRequestToGetActivitiesNum')}}';
@@ -77,15 +79,15 @@
 
         </script>
 
-        <div id="MAIN" class="MemberProfile prodp13n_jfy_overflow_visible" style="margin: 0 auto !important;">
+        <div id="MAIN" class="MemberProfile prodp13n_jfy_overflow_visible">
 
-            <div id="BODYCON" class="col easyClear poolB adjust_padding new_meta_chevron_v2" style="position: relative">
+            <div id="BODYCON" class="col easyClear poolB adjust_padding new_meta_chevron_v2">
                 <div class="wrpHeader"></div>
-                <div id="MODULES_MEMBER_CENTER" class="mc_achievements" style="position: relative;padding-bottom: 20px;">
+                <div id="MODULES_MEMBER_CENTER" class="mc_achievements">
 
-                    <div class="leftProfile" style="position: relative">
+                    <div class="leftProfile">
 
-                        <div id="infoDiv" style="position: absolute; right: 80px; top: 110px; min-width: 120px; font-size: 0.75em; z-index: 1001;" class="profileLinksDropdown overlay oldoly noBackdrop relative relAbove item hidden">
+                        <div id="infoDiv" class="profileLinksDropdown overlay oldoly noBackdrop relative relAbove item hidden">
 
                             <div class="inner" id="overlayInnerDiv">
                                 <a name="edit-profile" class="menu-link" href="{{route('accountInfo')}}">ویرایش اطلاعات کاربری</a>
@@ -94,18 +96,18 @@
                             </div>
                         </div>
 
-                        <div class="modules-membercenter-member-profile" style="position: relative">
+                        <div class="modules-membercenter-member-profile position-relative">
 
-                            <div class="profileBlock" style="position: relative">
+                            <div class="profileBlock">
 
                                 <div id="targetHelp_6" class="targets col-xs-8">
 
-                                    <p style="font-size: 17px;margin-top: 23px;" class="since"><b>{{(!empty($user->first_name)) ? $user->first_name : $user->username}}</b></p>
+                                    <p class="since"><b>{{(!empty($user->first_name)) ? $user->first_name : $user->username}}</b></p>
 
                                     <div id="helpSpan_6" class="helpSpans hidden">
                                         <span class="introjs-arrow"></span>
                                         <p>
-                                            دوستانتان فعالیت های شما را با این نام و عکس ماربری می بینند.شما می توانید به راحتی اقدام به تعویض ان ها نمایید. از منوی زیر اقدام کنید.
+                                            دوستانتان فعالیت های شما را با این نام و عکس گاربری می بینند.شما می توانید به راحتی اقدام به تعویض ان ها نمایید. از منوی زیر اقدام کنید.
                                         </p>
                                         <button data-val="6" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_6">بعدی</button>
                                         <button data-val="6" class="btn btn-primary backBtnsHelp" id="backBtnHelp_6">قبلی</button>
@@ -121,15 +123,15 @@
                                     @endif
                                 </div>
 
-                                <div class="nameContent" style="position: relative">
-                                    <div class="name" style="position: relative">
+                                <div class="nameContent">
+                                    <div class="name">
                                         <div data-direction="right" id="targetHelp_7" class="targets profileLinks">
                                             <div data-val="off" onclick="if($(this).attr('data-val') == 'off') { showElement('infoDiv'); showElement2('arrowUp'); hideElement2('arrowDown'); $(this).attr('data-val', 'on'); } else  { hideElement('infoDiv'); hideElement2('arrowUp'); showElement2('arrowDown'); $(this).attr('data-val', 'off'); }">
                                                 {{--<img id="arrowDown" src="{{URL::asset('images/arrow_down.png')}}" class="profLinksArrowUp" height="15" width="15"/>--}}
-                                                <div id="arrowDown" style="background-size: 64px;background-position:  -26px -223px;width: 15px;height:  15px;background-image: url('{{URL::asset('images') . '/profile.png'}}');background-repeat:  no-repeat;"></div>
+                                                <div id="arrowDown"></div>
 
                                                 {{--<img id="arrowUp" src="{{URL::asset('images/arrow_up.png')}}" class="profLinksArrowDown" hidden="hidden" height="15" width="15"/>--}}
-                                                <div id="arrowUp" hidden="hidden" style="background-size: 64px;background-position:  -26px -290px;width: 15px;height:  15px;background-image: url('{{URL::asset('images') . '/profile.png'}}');background-repeat:  no-repeat;"></div>
+                                                <div id="arrowUp" hidden="hidden"></div>
                                                 <div class="overlayContents item">
                                                     <a name="edit-profile" class="menu-link" href="{{URL('accountInfo')}}">ویرایش اطلاعات کاربری</a>
                                                     <a name="edit-photo" class="menu-link" href="{{URL('editPhoto')}}">ویرایش عکس</a>
@@ -139,7 +141,7 @@
 
                                             <div id="helpSpan_7" class="helpSpans hidden">
                                                 <span class="introjs-arrow"></span>
-                                                <p style="font-size: 12px">
+                                                <p class="font-size-12">
                                                     از طریق این منو می توانید در هر لحظه اطلاعات کاربری خود را تغییر دهید.
                                                 </p>
                                                 <button data-val="7" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_7">بعدی</button>
@@ -151,7 +153,7 @@
                                 </div>
 
 
-                                <div class="ageSince" style="float: left;">
+                                <div class="ageSince">
                                     <p class="since">تاریخ عضویت</p>
                                     <p class="since">{{$user->created}}</p>
                                 </div>
@@ -163,7 +165,9 @@
 
                                 <div class="hometown"></div>
                             </div>
-                            <div class="aboutMeDesc"><a style="color: #16174f;" href="{{URL('accountInfo')}}" class="update">به روز رسانی اطلاعات </a></div>
+                            <div class="aboutMeDesc">
+                                <a href="{{URL('accountInfo')}}" class="update">به روز رسانی اطلاعات </a>
+                            </div>
                         </div>
 
                         <?php $i = 0; $allow = true; ?>
@@ -172,7 +176,7 @@
                             @if($counts[$i] != 0)
                                 @if($allow)
                                     <?php $allow = false; ?>
-                                    <div id="targetHelp_12" class="targets modules-membercenter-content-summary" style="position: relative">
+                                    <div id="targetHelp_12" class="targets modules-membercenter-content-summary">
 
                                         <div id="helpSpan_12" class="helpSpans hidden">
                                             <span class="introjs-arrow"></span>
@@ -197,7 +201,7 @@
                                         </div>
                                     </div>
                                 @else
-                                    <div class="targets modules-membercenter-content-summary" style="position: relative">
+                                    <div class="targets modules-membercenter-content-summary">
 
                                         <div class="member-points">
                                             <ul class="counts">
@@ -216,8 +220,8 @@
                             <?php $i++; ?>
                         @endforeach
 
-                        <div class="modules-membercenter-member-tag" style="position: relative">
-                            <div id="targetHelp_13" class="memberTags targets" style="position: relative">
+                        <div class="modules-membercenter-member-tag">
+                            <div id="targetHelp_13" class="memberTags targets">
 
                                 <div id="helpSpan_13" class="helpSpans hidden">
                                     <span class="introjs-arrow"></span>
@@ -244,28 +248,28 @@
                     </div>
 
 
-                    <div class="rightContributions" style="position: relative">
+                    <div class="rightContributions">
 
                         <div class="modules-membercenter-progress-header " data-backbone-name="modules.membercenter.ProgressHeader" data-backbone-context="Social_CompositeMember, Member">
-                            <div class="title" style="text-align: right;right: 0;">افتخارات من </div>
+                            <div class="title" id="myHonorsText">افتخارات من </div>
                             <?php
                                 $sumTmp = 0;
                                 for ($i = 0; $i < count($counts); $i++)
                                     $sumTmp += $counts[$i];
                             ?>
                             @if($sumTmp == 0)
-                                <a style="cursor: pointer" class="link" onclick="initHelp(16, [12], 'MAIN', 100, 400)">
-                                    <div style="background-size: 28px;background-position:  0 -29px;width: 28px;height:  28px;background-image: url('{{URL::asset('images') . '/help_share.png'}}');background-repeat:  no-repeat;"></div>
+                                <a class="link" onclick="initHelp(16, [12], 'MAIN', 100, 400)">
+                                    <div style="background-image: url('{{URL::asset('images') . '/help_share.png'}}');"></div>
                                 </a>
                             @else
-                                <a style="cursor: pointer" class="link" onclick="initHelp(16, [], 'MAIN', 100, 400)">
-                                    <div style="background-size: 28px;background-position:  0 -29px;width: 28px;height:  28px;background-image: url('{{URL::asset('images') . '/help_share.png'}}');background-repeat:  no-repeat;"></div>
+                                <a class="link" onclick="initHelp(16, [], 'MAIN', 100, 400)">
+                                    <div style="background-image: url('{{URL::asset('images') . '/help_share.png'}}')"></div>
                                 </a>
                             @endif
                         </div>
 
-                        <div class="memberPointInfo" style="position: relative">
-                            <div class="modules-membercenter-total-points" style="position: relative">
+                        <div class="memberPointInfo">
+                            <div class="modules-membercenter-total-points">
                                 <div data-direction="left" id="targetHelp_8" class="targets">
                                     <div class="points_info tripcollectiveinfo" onclick="showElement('activityDiv')">
                                         <div class="label"> امتیاز کل </div>
@@ -286,17 +290,23 @@
                             <div class="modules-membercenter-level-progress">
                                 <div data-direction="left" id="targetHelp_9" class="targets progress_info tripcollectiveinfo">
                                     <div onclick="showElement('levelDiv')">
-                                    <div class="labels">
-                                        <div class="right label">مرحله فعلی</div>
-                                        <div class="left label">مرحله بعدی</div>
-                                    </div>
-                                    <div class="progress_indicator">
-                                        <div class="current_badge myBadge">{{$userLevels[1]->name}}</div>
-                                        <div class="meter"><span id="progressId" class="progress"></span></div>
-                                        <div class="next_badge myBadge"> {{$userLevels[0]->name}} </div>
-                                    </div>
-                                    <div class="points_to_go" style="margin-top: 20px"><span class="points"><b>{{$userLevels[1]->floor - $totalPoint}} </b>امتیاز  مانده به مرحله بعدی </span></div>
-                                    <div class="clear fix"> </div>
+                                        <div class="labels">
+                                            <div class="right label">مرحله فعلی</div>
+                                            <div class="left label">مرحله بعدی</div>
+                                        </div>
+                                        <div class="progress_indicator">
+                                            <div class="current_badge myBadge">{{$userLevels[1]->name}}</div>
+                                            <div class="meter">
+                                                <span id="progressId" class="progress"></span>
+                                            </div>
+                                            <div class="next_badge myBadge"> {{$userLevels[0]->name}} </div>
+                                        </div>
+                                        <div class="points_to_go mg-tp-20">
+                                            <span class="points">
+                                                <b>{{$userLevels[1]->floor - $totalPoint}} </b>امتیاز  مانده به مرحله بعدی
+                                            </span>
+                                        </div>
+                                        <div class="clear fix"></div>
                                     </div>
 
                                     <div id="helpSpan_9" class="helpSpans hidden">
@@ -312,8 +322,8 @@
                             </div>
                         </div>
 
-                        <div class="modules-membercenter-badge-teaser" style="position: relative">
-                            <div id="targetHelp_10" class="targets header" style="position: relative">
+                        <div class="modules-membercenter-badge-teaser">
+                            <div id="targetHelp_10" class="targets header">
 
                                 <div id="helpSpan_10" class="helpSpans hidden">
                                     <span class="introjs-arrow"></span>
@@ -325,8 +335,8 @@
                                     <button class="btn btn-danger exitBtnHelp">خروج</button>
                                 </div>
 
-                                <div class="name"> نشان های افتخار من (<a style="color: #16174f" class="totalBadges" href="{{URL('badges')}}">{{$medals}} عدد</a>)</div>
-                                <a style="color: #16174f" class="trophyCase" href="{{route('badge')}}">صفحه نشان ها</a>
+                                <div class="name"> نشان های افتخار من (<a class="totalBadges" href="{{URL('badges')}}">{{$medals}} عدد</a>)</div>
+                                <a class="trophyCase" href="{{route('badge')}}">صفحه نشان ها</a>
                                 <div class="clear fix"></div>
                             </div>
 
@@ -336,8 +346,8 @@
                                 }
                             </script>
 
-                            <div class="badgeList" style="position: relative; padding: 0 !important;">
-                                <div class="badgeItems noCurrent" style="position: relative">
+                            <div class="badgeList">
+                                <div class="badgeItems noCurrent">
                                     <?php $i = 0; ?>
 
                                     @foreach($nearestMedals as $nearestMedal)
@@ -352,7 +362,7 @@
                                 </div>
                             </div>
 
-                            <div id="targetHelp_11" class="header targets" style="position: relative">
+                            <div id="targetHelp_11" class="header targets">
 
                                 <div id="helpSpan_11" class="helpSpans hidden">
                                     <span class="introjs-arrow"></span>
@@ -387,13 +397,13 @@
                                 </div>
                             </div>
 
-                            <div id="targetHelp_14" class="targets col-xs-12" style="padding: 7px; width: 100%;  position: relative;border-top: 1px solid #E6E6E6;padding-top: 16px !important;">
+                            <div id="targetHelp_14" class="targets col-xs-12">
                                 <p>دوستان خود را به شازده مسافر معرفی کنید و امتیاز بگیرید</p>
-                                <input autocomplete="off" id="phoneNum" style="border-bottom: 1px solid #CCC !important; padding: 7px; width: 300px; background-color: transparent; border: none; float: right;margin-left: 60px;" type="text" placeholder="09xxxxxxxxx">
-                                <div onclick="sendCode()" style="float: right; padding: 10px; width: 180px; background-color: #4DC7BC; border: none" class="btn btn-primary">ارسال کد معرف به دوستان</div>
+                                <input autocomplete="off" id="phoneNum" type="text" placeholder="09xxxxxxxxx">
+                                <div onclick="sendCode()" class="btn btn-primary">ارسال کد معرف به دوستان</div>
                                 <div id="msgContainer" class="col-xs-12 hidden">
                                     <center>
-                                        <p style="color: #963019; padding-top: 5px" id="sendMsg"></p>
+                                        <p id="sendMsg"></p>
                                     </center>
                                 </div>
 
@@ -421,17 +431,27 @@
                             $i++;
                             ?>
 
-                            <span id="badge_{{$nearestMedal["medal"]->id}}" class="item hidden ui_overlay ui_popover arrow_right badgeDesc badgeContainer" style="min-width: 280px !important; padding: 10px !important; position: absolute; right: auto; top: 450px; bottom: auto">
+                            <span id="badge_{{$nearestMedal["medal"]->id}}" class="item hidden ui_overlay ui_popover arrow_right badgeDesc badgeContainer badgeStyles">
                                 <div class="header_text">
                                     <div class="text">{{$nearestMedal["medal"]->activityId}}</div>
                                 </div>
-                                <div class="body_text">
+                                <div class="body_text ">
                                     <div class="body_text">
-                                        <div class="desc" style="text-align: center !important;">
+                                        <div class="desc badgeDesc">
                                             @if($nearestMedal["kindPlaceId"] == -1)
                                                 این مدال بعد از{{$nearestMedal["needed"]}}  {{$nearestMedal["medal"]->activityId}} بدست می آید
                                             @else
-                                                <p><span style="margin-top: 0 !important; padding-top: 0 !important; border-top: none !important;">این مدال بعد از&nbsp;</span><span style="margin-top: 0 !important; padding-top: 0 !important; border-top: none !important;">{{$nearestMedal["needed"]}}</span><span style="margin-top: 0 !important; padding-top: 0 !important; border-top: none !important;">&nbsp;</span><span style="margin-top: 0 !important; padding-top: 0 !important; border-top: none !important;">&nbsp;</span><span style="margin-top: 0 !important; padding-top: 0 !important; border-top: none !important;">{{$nearestMedal["medal"]->activityId}}</span><span style="margin-top: 0 !important; padding-top: 0 !important; border-top: none !important;">&nbsp;در&nbsp;</span><span style="margin-top: 0 !important; padding-top: 0 !important; border-top: none !important;">{{$nearestMedal["kindPlaceId"]}}</span><span style="margin-top: 0 !important; padding-top: 0 !important; border-top: none !important;">&nbsp;</span><span style="margin-top: 0 !important; padding-top: 0 !important; border-top: none !important;"s>بدست می آید</span></p>
+                                                <p>
+                                                    <span class="badgeAchievementHelpText">این مدال بعد از&nbsp;</span>
+                                                    <span class="badgeAchievementHelpText">{{$nearestMedal["needed"]}}</span>
+                                                    <span class="badgeAchievementHelpText">&nbsp;</span>
+                                                    <span class="badgeAchievementHelpText">&nbsp;</span>
+                                                    <span class="badgeAchievementHelpText">{{$nearestMedal["medal"]->activityId}}</span>
+                                                    <span class="badgeAchievementHelpText">&nbsp;در&nbsp;</span>
+                                                    <span class="badgeAchievementHelpText">{{$nearestMedal["kindPlaceId"]}}</span>
+                                                    <span class="badgeAchievementHelpText">&nbsp;</span>
+                                                    <span class="badgeAchievementHelpText">بدست می آید</span>
+                                                </p>
                                             @endif
                                         </div>
                                     </div>
@@ -440,38 +460,38 @@
                             </span>
                         @endforeach
 
-                        <div id="activityDiv" style="position: absolute; left: 62%; top: 0; font-size: 0.75em; z-index: 1001;" class="infoFlyout tripcollectivePoints overlay oldoly noBackdrop relative item hidden">
+                        <div id="activityDiv" class="infoFlyout tripcollectivePoints overlay oldoly noBackdrop relative item hidden">
                             <div class="inner withClose" id="overlayInnerDiv">
                                 <div class="overlaycontents">
-                                    <div class="title" style="margin-top: 25px">چگونه امتیاز جمع آوری کنم؟</div>
-                                    <div class="description" style="font-size: 11px; text-align: justify; margin: 20px 0 !important;">هر اقدام شما در سایت، علاوه بر اینکه به ما و دوستانتان کمک می کند امتیاز ویژه ای نیز دارد. لیست امتیازات زیر را از دست ندهید. جمع آوری امتیاز نتایج شگفت انگیزی خواهد داشت.</div>
+                                    <div class="title mg-tp-25imp">چگونه امتیاز جمع آوری کنم؟</div>
+                                    <div class="description" id="earnPointDesc">هر اقدام شما در سایت، علاوه بر اینکه به ما و دوستانتان کمک می کند امتیاز ویژه ای نیز دارد. لیست امتیازات زیر را از دست ندهید. جمع آوری امتیاز نتایج شگفت انگیزی خواهد داشت.</div>
                                     <table class="score-legend">
                                         @foreach($activities as $activity)
                                             <tr>
-                                                <td style="text-align: right !important; width: 10px !important;">
+                                                <td class="scoreLegendFirstBox">
                                                     <img width="22px" src="{{URL::asset('activities') . '/' . $activity->pic}}" class="icon"/>
                                                 </td>
-                                                <td style="text-align: right !important;"> {{$activity->name}}</td>
-                                                <td class="right-col" style="text-align: left !important;">
-                                                    <span class="number" style="color: #963019; font-size: 18px">{{$activity->rate}} امتیاز</span>
+                                                <td class="scoreLegendSecondBox"> {{$activity->name}}</td>
+                                                <td class="scoreLegendThirdBox right-col">
+                                                    <span class="number">{{$activity->rate}} امتیاز</span>
                                                 </td>
                                             </tr>
                                         @endforeach
                                     </table>
                                 </div>
-                                <img src="{{URL::asset('images/close.svg')}}" class="closeBtn" onclick="hideElement('activityDiv')" style="cursor: pointer; color: rgb(77, 199, 188) !important; width: 15px; top: 3%; right: 2%;"/>
-                                <div style="position: absolute; top: 27%; left: 0;" class="arrow_left"></div>
+                                <img src="{{URL::asset('images/close.svg')}}" class="closeBtn" onclick="hideElement('activityDiv')"/>
+                                <div class="arrow_left"></div>
                             </div>
                         </div>
 
 
-                        <div id="levelDiv" style="position: absolute; left: 47%; top: 0; font-size: 0.75em; z-index: 1001;" class="infoFlyout tripcollectiveLevels overlay oldoly noBackdrop relative item hidden">
+                        <div id="levelDiv" class="infoFlyout tripcollectiveLevels overlay oldoly noBackdrop relative item hidden">
 
                             <div class="inner withClose" id="overlayInnerDiv">
                                 <div class="overlaycontents">
-                                    <div class="title" style="margin-top: 25px">برای هر مرحله امتیاز مشخصی می خواهید.</div>
+                                    <div class="title mg-tp-25imp">برای هر مرحله امتیاز مشخصی می خواهید.</div>
 
-                                    <div class="description" style="font-size: 11px; text-align: justify; margin: 20px 0 !important;">هرچه بیشتر امتیاز کسب کنید، اعتبار بیشتری پیدا خواهید کرد. و معروف تر می شوید. مرحله ای که در آن هستید برای دیگران نمایش داده می شود تا بدانند شما چقدر حرفه ای هستید.</div>
+                                    <div class="description" id="levelUpDesc">هرچه بیشتر امتیاز کسب کنید، اعتبار بیشتری پیدا خواهید کرد. و معروف تر می شوید. مرحله ای که در آن هستید برای دیگران نمایش داده می شود تا بدانند شما چقدر حرفه ای هستید.</div>
 
                                     <table class="level-legend">
                                         @foreach($levels as $level)
@@ -479,16 +499,16 @@
                                                 <td class="myLevel">
                                                     <span class="number">{{$level->name}}</span>
                                                 </td>
-                                                <td class="right-col" style="text-align: left !important;">
-                                                    <span style="color: #963019; font-size: 18px"> {{$level->floor}} امتیاز</span>
+                                                <td class="right-col lastBoxLevelTable">
+                                                    <span> {{$level->floor}} امتیاز</span>
                                                 </td>
                                             </tr>
                                         @endforeach
                                     </table>
                                 </div>
-                                <img src="{{URL::asset('images/close.svg')}}" class="closeBtn" onclick="hideElement('levelDiv')" style="cursor: pointer; color: rgb(77, 199, 188) !important; width: 15px; top: 1%; right: 2%;"/>
+                                <img src="{{URL::asset('images/close.svg')}}" class="closeBtn" onclick="hideElement('levelDiv')"/>
                             </div>
-                            <div style="position: absolute; top: 20%; left: 0;" class="arrow_left"></div>
+                            <div class="arrow_left"></div>
                         </div>
                     </div>
 
@@ -497,23 +517,28 @@
                 </div>
 
 
-                <div class="modules-membercenter-content-stream " data-backbone-name="modules.membercenter.ContentStream" data-backbone-context="Social_CompositeMember, Achievements_Counts, Member, MemberCenter_ContentStreamComposite">
-                    <div class="cs-points-bonus-description hidden"><span class="cs-points-bonus-title">Bonus points</span> are available on occasion across the site. Keep an eye out for opportunities to get extra points!</div>
+                <div class="modules-membercenter-content-stream " data-backbone-name="modules.membercenter.ContentStream"
+                     data-backbone-context="Social_CompositeMember, Achievements_Counts, Member, MemberCenter_ContentStreamComposite">
+                    <div class="cs-points-bonus-description hidden">
+                        <span class="cs-points-bonus-title">Bonus points</span>
+                        are available on occasion across the site. Keep an eye out for opportunities to get extra points!
+                    </div>
                 </div>
-                <div id="myActivitiesDiv" class="modules-membercenter-content-stream" style="position: relative">
+                <div id="myActivitiesDiv" class="modules-membercenter-content-stream">
 
-                    <div id="targetHelp_15" class="targets cs-header" style="position: relative">
-                        <div class="cs-header-points"><span class="label">امتیاز کل</span> <span class="points">{{$totalPoint}}</span></div>
+                    <div id="targetHelp_15" class="targets cs-header">
+                        <div class="cs-header-points">
+                            <span class="label">امتیاز کل</span>
+                            <span class="points">{{$totalPoint}}</span>
+                        </div>
                         <p class="cs-header-title">فعالیت های من </p>
 
                         <div id="helpSpan_15" class="helpSpans hidden">
                             <span class="introjs-arrow"></span>
-                            <p>
-                                شما می توانید تمامم فعالیت های خود در سایت را در این قسمت مشاهده نمایید. از فیلتر های موجود نیز برای دسترسی راحت تر به فعالیت های خود استفاده کنید.
-                            </p>
-                            <button style="background-color: #5cb85c !important; border: #5cb85c !important;" data-val="15" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_15">بعدی</button>
-                            <button style="background-color: #337ab7 !important; border: #337ab7 !important;" data-val="15" class="btn btn-primary backBtnsHelp" id="backBtnHelp_15">قبلی</button>
-                            <button style="background-color: #d9534f !important; border: #d9534f !important;" class="btn btn-danger exitBtnHelp">خروج</button>
+                            <p>شما می توانید تمامم فعالیت های خود در سایت را در این قسمت مشاهده نمایید. از فیلتر های موجود نیز برای دسترسی راحت تر به فعالیت های خود استفاده کنید.</p>
+                            <button data-val="15" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_15">بعدی</button>
+                            <button data-val="15" class="btn btn-primary backBtnsHelp" id="backBtnHelp_15">قبلی</button>
+                            <button class="btn btn-danger exitBtnHelp" id="exitBtnHelp_15">خروج</button>
                         </div>
                     </div>
 
@@ -521,7 +546,7 @@
                         <?php $i = 0; $allow = true; ?>
                         @foreach($activities as $activity)
                             @if($counts[$i] > 0)
-                                <li style="cursor: pointer">
+                                <li class="cursor-pointer">
                                     <a class="headerActivity" id='headerActivity_{{$activity->id}}' onclick="sendAjaxRequestToGiveActivity('{{$activity->id}}', '{{$user->id}}', -1, 'myActivities', 'myActivitiesContent', 1, '{{$counts[$i]}}')">
 
                                         @if($allow)
@@ -551,10 +576,10 @@
                 </div>
 
 
-                <span id="tagPrompt" class="ui_overlay ui_modal editTags item hidden" style="position: fixed; left: 28%; right: auto; top: 25%; bottom: auto;width: 46%;">
+                <span id="tagPrompt" class="ui_overlay ui_modal editTags item hidden">
                     <div class="header_text">من چه گردشگری هستم ؟</div>
-                    <div class="subheader_text" style="margin-top: 10px">
-               سه مورد یا بیشتر را انتخاب کنید
+                    <div class="subheader_text mg-tp-10">
+                       سه مورد یا بیشتر را انتخاب کنید
                     </div>
                     <div class="body_text">
                         <fieldset id="memberTags">
@@ -568,14 +593,14 @@
                             </div>
                         </fieldset>
                         <div class="submitOptions">
-                            <button id="submitBtnTripStyle" style="background-color: #4dc7bc;border-color: #4dc7bc;" onclick="updateMyTripStyle('{{$user->id}}', 'tagPrompt')" class="btn btn-success" disabled>تایید</button>
+                            <button id="submitBtnTripStyle" onclick="updateMyTripStyle('{{$user->id}}', 'tagPrompt')" class="btn btn-success" disabled>تایید</button>
                             <input type="submit" onclick="closeTripStyles('tagPrompt')" id="skipBtn" value="خیر" class="btn btn-default">
                         </div>
                     </div>
                     <div onclick="closeTripStyles('tagPrompt')" class="ui_close_x"></div>
                 </span>
 
-                <div class="ui_backdrop dark" style="display: none;"></div>
+                <div class="ui_backdrop dark display-none"></div>
             </div>
         </div>
 
@@ -707,14 +732,14 @@
                     return "";
 
                 t = total - filters.length;
-                newElement = "<div class='col-xs-12' style='position: relative'><div class='col-xs-12 bubbles' style='padding: 0; margin-right: 0; margin-left: " + ((400 - (t * 18)) / 2) + "px'>";
+                newElement = "<div class='col-xs-12 position-relative'><div class='col-xs-12 bubbles padding-0 mg-rt-0' style='margin-left: " + ((400 - (t * 18)) / 2) + "px'>";
 
                 for (i = 1; i < total; i++) {
                     if(!isInFilters(i)) {
                         if(i == curr)
-                            newElement += "<div style='border: 1px solid #ccc; background-color: #ccc; border-radius: 50%; margin-right: 2px; width: 12px; height: 12px; float: left'></div>";
+                            newElement += "<div class='filtersBoxProfilePage'></div>";
                         else
-                            newElement += "<div onclick='show(\"" + i + "\", 1)' class='helpBubble' style='border: 1px solid #333; background-color: black; border-radius: 50%; margin-right: 2px; width: 12px; height: 12px; float: left'></div>";
+                            newElement += "<div onclick='show(\"" + i + "\", 1)' class='helpBubble filtersBoxProfilePageElse'></div>";
                     }
                 }
 

@@ -5,7 +5,7 @@
 
 <div id="AdviceControllerId" class="homepage_shelves_widget" ng-controller="AdviceController">
     <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show">
-        <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff rtl">
+        <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
             <div class="shelf_header">
                 <div class="shelf_title">
                     <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>

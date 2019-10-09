@@ -31,14 +31,15 @@ class AuthServiceProvider extends ServiceProvider
     {
 
         $this->registerPolicies();
-        Passport::routes();
 
-        Passport::tokensExpireIn(Carbon::now()->addDays(7));
+//        Passport::routes();
+//
+//        Passport::tokensExpireIn(Carbon::now()->addDays(7));
+//
+//        Passport::refreshTokensExpireIn(Carbon::now()->addDays(7));
 
-        Passport::refreshTokensExpireIn(Carbon::now()->addDays(7));
-
-        Auth::provider('custom-user-provider',function($app, array $config)  {
-            return new CustomUserProvider($app['hash'], $config['model']);
-        });
+//        Auth::provider('custom-user-provider',function($app, array $config)  {
+//            return new CustomUserProvider($app['hash'], $config['model']);
+//        });
     }
 }

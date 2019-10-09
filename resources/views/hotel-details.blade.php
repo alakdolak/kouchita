@@ -64,7 +64,7 @@ if ($total == 0)
 
     {{--vr--}}
 
-    @if($video != null)
+    @if(isset($video) && $video != null)
         <link rel="stylesheet" href="{{URL::asset('vr2/video-js.css')}}">
         <link rel="stylesheet" href="{{URL::asset('vr2/videojs-vr.css')}}">
         <script src="{{URL::asset('vr2/video.js')}}"></script>
@@ -646,9 +646,6 @@ if ($total == 0)
                                             <div class="see_all_count_wrap" onclick="getPhotos(-1)">
                                                 <span class="see_all_count"><span class="ui_icon camera"></span>تمام عکس ها {{$userPhotos + $sitePhotos}} </span>
                                             </div>
-                                            <div class="entry_cta_wrap">
-                                                <span class="entry_cta"><span class="ui_icon expand"></span>اندازه بزرگ عکس </span>
-                                            </div>
                                         </div>
                                         <div onclick="photoRoundRobin(-1)" class="left-nav left-nav-header"></div>
                                         <div onclick="photoRoundRobin(1)" class="right-nav right-nav-header"></div>
@@ -711,7 +708,7 @@ if ($total == 0)
                                             </div>
                                             <div class="albumInfo">
                                                 <span class="ui_icon camera">&nbsp;</span>
-                                                محتواهای تعاملی {{$video == null ? 0 : 1}}
+                                                محتواهای تعاملی {{(!isset($video) || $video == null) ? 0 : 1}}
                                             </div>
                                         </div>
                                     </div>
@@ -1629,12 +1626,6 @@ if ($total == 0)
                                                             همه عکس ها {{$userPhotos}}
                                                         </span>
                                                     </div>
-                                                    <div class="entry_cta_wrap">
-                                                        <span class="entry_cta">
-                                                            <span class="ui_icon expand"></span>
-                                                            اندازه بزرگ عکس
-                                                        </span>
-                                                    </div>
                                                 </div>
                                                 <div onclick="photoRoundRobin2(-1)" class="left-nav left-nav-footer hidden"></div>
                                                 <div onclick="photoRoundRobin2(1)" class="right-nav right-nav-footer hidden"></div>
@@ -1834,7 +1825,7 @@ if ($total == 0)
     </div>
 
 
-    @if($video != null)
+    @if(isset($video) && $video != null)
         <!-- The Modal -->
         {{--vr--}}
         <div class="modal" id="myModal">
@@ -1842,13 +1833,10 @@ if ($total == 0)
                 <div class="modal-content">
                     <!-- Modal body -->
                     <div class="modal-body" style="justify-content: center; display: flex;">
-                        @if($video != null)
-                            <video id="my-video" class="video-js vjs-default-skin" controls style=" max-height: 80vh;">
-                                <source src="{{URL::asset('vr2/contents/' . $video)}}" type="video/mp4">
-                            </video>
-                        @else
-                            ویدیویی برای نمایش موجود نمی باشد.
-                        @endif
+                        <video id="my-video" class="video-js vjs-default-skin" controls style=" max-height: 80vh;">
+                            <source src="{{URL::asset('vr2/contents/' . $video)}}" type="video/mp4">
+                        </video>
+{{--                            ویدیویی برای نمایش موجود--}}
                     </div>
                 </div>
             </div>
@@ -3497,7 +3485,7 @@ if ($total == 0)
                         $("#reviewsContainer").empty().append(tmp);
                     }
                     for (i = 0; i < arr.length; i++) {
-                        newElement += "<div class='border-bottom-grey' class='review'>";
+                        newElement += "<div class='border-bottom-grey inline-block full-width' class='review'>";
                         newElement += "<div class='prw_rup prw_reviews_basic_review_hsx'>";
                         newElement += "<div class='reviewSelector'>";
                         newElement += "<div class='review hsx_review ui_columns is-multiline inlineReviewUpdate provider0'>";

@@ -80,7 +80,7 @@ class ActivityController extends Controller {
             $activityPic = Activity::whereId($activityId)->pic;
 
             if($activityPic != null && !empty($activityPic)) {
-                $targetFile = __DIR__ . '/../../../public/activities/' . $activityPic;
+                $targetFile = __DIR__ . '/../../../../assets/activities/' . $activityPic;
                 if(file_exists($targetFile))
                     unlink($targetFile);
                 Activity::destroy($activityId);
@@ -117,7 +117,7 @@ class ActivityController extends Controller {
                         if (empty($err)) {
                             $err = upload($targetFile, "pic", "تغییر فعالیت");
                             if(empty($err)) {
-                                $targetFile = __DIR__ . '/../../../public/activities/' . $activity->pic;
+                                $targetFile = __DIR__ . '/../../../../assets/activities/' . $activity->pic;
                                 if(file_exists($targetFile))
                                     unlink($targetFile);
                                 $activity->pic = $file["name"];

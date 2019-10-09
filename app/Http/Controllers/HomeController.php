@@ -16,32 +16,23 @@ use App\models\LogModel;
 use App\models\Majara;
 use App\models\Message;
 use App\models\OpOnActivity;
-use App\models\Place;
 use App\models\Report;
 use App\models\ReportsType;
 use App\models\Restaurant;
 use App\models\RetrievePas;
-use App\models\SpecialAdvice;
 use App\models\State;
 use App\models\Train;
 use App\models\User;
 use App\models\saveApiInfo;
-use Carbon\Carbon;
 use Exception;
 use Google_Client;
 use Google_Service_Oauth2;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
-use Illuminate\Support\Facades\View;
-use PHPExcel;
-use PHPExcel_IOFactory;
-use PHPExcel_Writer_Excel2007;
 use PHPMailer\PHPMailer\PHPMailer;
 
 class HomeController extends Controller
@@ -242,7 +233,7 @@ class HomeController extends Controller
     public function fillState()
     {
 
-        $path = __DIR__ . '/../../../public/alaki.xlsx';
+        $path = __DIR__ . '/../../../../assets/alaki.xlsx';
 
         $excelReader = PHPExcel_IOFactory::createReaderForFile($path);
         $excelObj = $excelReader->load($path);
@@ -270,7 +261,7 @@ class HomeController extends Controller
     public function fillTrain()
     {
 
-        $path = __DIR__ . '/../../../public/alaki.xlsx';
+        $path = __DIR__ . '/../../../../assets/alaki.xlsx';
 
         $excelReader = PHPExcel_IOFactory::createReaderForFile($path);
         $excelObj = $excelReader->load($path);
@@ -295,7 +286,7 @@ class HomeController extends Controller
     public function fillAirLine()
     {
 
-        $path = __DIR__ . '/../../../public/alaki.xlsx';
+        $path = __DIR__ . '/../../../../assets/alaki.xlsx';
 
         $excelReader = PHPExcel_IOFactory::createReaderForFile($path);
         $excelObj = $excelReader->load($path);
@@ -323,7 +314,7 @@ class HomeController extends Controller
     public function fillCity()
     {
 
-        $path = __DIR__ . '/../../../public/alaki.xlsx';
+        $path = __DIR__ . '/../../../../assets/alaki.xlsx';
 
         $excelReader = PHPExcel_IOFactory::createReaderForFile($path);
         $excelObj = $excelReader->load($path);
@@ -432,40 +423,6 @@ class HomeController extends Controller
     public function showSafarname($city)
     {
         return view('safarname', array('city' => $city));
-    }
-
-    public function specialAdvice()
-    {
-
-        return view('specialAdvice', array('kindPlaceIds' => Place::all(),
-            'user' => Auth::user()));
-    }
-
-    public function submitAdvice()
-    {
-
-        if (isset($_POST["placeId"]) && isset($_POST["kindPlaceId"]) && isset($_POST["mode"])) {
-
-            $mode = makeValidInput($_POST["mode"]);
-            if ($mode > 4 || $mode < 0)
-                return "nok";
-
-            $advice = SpecialAdvice::find($mode);
-            if ($advice == null) {
-                $advice = new SpecialAdvice();
-                $advice->id = $mode;
-            }
-
-            $advice->placeId = makeValidInput($_POST["placeId"]);
-            $advice->kindPlaceId = makeValidInput($_POST["kindPlaceId"]);
-            try {
-                $advice->save();
-                return "ok";
-            } catch (Exception $x) {
-            }
-        }
-
-        return "nok";
     }
 
     public function totalSearch()
@@ -614,7 +571,7 @@ class HomeController extends Controller
 
         if (isset($_POST["captcha"])) {
             $response = $_POST["captcha"];
-            $privatekey = "6LcaSzwUAAAAAKY8yd4AOp4WsCTkDWl54fBV0pay";
+            $privatekey = "6LfiELsUAAAAALYmxpnjNQHcEPlhQdbGKpNpl7k4";
 
             $verify = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret={$privatekey}&response={$response}");
             $captcha_success = json_decode($verify);
@@ -788,6 +745,7 @@ class HomeController extends Controller
             $user->password = Hash::make(makeValidInput($_POST["password"]));
             $user->email = makeValidInput($_POST["email"]);
             $user->level = 0;
+            $user->cityId = Cities::first()->id;
             $user->created_at = date('Y-m-d h:m:s');
             $user->updated_at = date('Y-m-d h:m:s');
             $user->invitationCode = $invitationCode;
@@ -1024,8 +982,8 @@ class HomeController extends Controller
 
             //Insert your cient ID and sexcret
             //You can get it from : https://console.developers.google.com/
-            $client_id = '774684902659-20aeg6um0856j5li2uuu9ombu2pcbqv9.apps.googleusercontent.com';
-            $client_secret = 'ARyU8-RXFJZD5jl5QawhpHne';
+            $client_id = '204875713143-vgh7o6lfh1m8phas09n7ia8psgmk3bbi.apps.googleusercontent.com';
+            $client_secret = '0kHyl_hsKamEH6SX-_9xmkWq';
             $redirect_uri = route('loginWithGoogle');
 
             /************************************************
@@ -1154,7 +1112,9 @@ class HomeController extends Controller
                     $arr[$i++] = 0;
                     $arr[$i++] = -1;
                     $arr[$i++] = 3;
-                    $arr[$i] = 1;
+                    $arr[$i++] = 1;
+                    $arr[$i++] = null;
+                    $arr[$i] = null;
 
 
                     foreach ($vals as $key => $value) {
@@ -1565,19 +1525,17 @@ class HomeController extends Controller
 
     public function doLogin()
     {
-
         if (isset($_POST["username"]) && isset($_POST["password"])) {
 
             $username = makeValidInput($_POST['username']);
             $password = makeValidInput($_POST['password']);
 
             if (Auth::attempt(array('username' => $username, 'password' => $password), true)) {
-                if(Auth::user()->status != 0) {
+                if (Auth::user()->status != 0) {
                     RetrievePas::whereUId(Auth::user()->id)->delete();
                     echo "ok";
                     return;
-                }
-                else {
+                } else {
                     echo "nok2";
                     return;
                 }

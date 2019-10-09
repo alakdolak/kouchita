@@ -1,0 +1,11 @@
+/*first Box Of style*/
+
+.btn-primary:focus {
+    box-shadow: 0 0 0 0 !important;
+}
+.btn-success:focus {
+    box-shadow: 0 0 0 0 !important;
+}
+
+/*inline styles*/
+

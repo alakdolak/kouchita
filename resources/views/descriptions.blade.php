@@ -15,6 +15,30 @@
         .row {
             direction: rtl;
         }
+
+        .mg-lt-30per {
+            margin-left: 30%;
+        }
+
+        .border-radius-50per {
+            border-radius: 50%;
+        }
+
+        .width-auto {
+            width: auto;
+        }
+
+        .width-80per {
+            width: 80%;
+        }
+
+        .mg-tp-10 {
+            margin-top: 10px;
+        }
+
+        .visibility-hidden {
+            visibility: hidden;
+        }
     </style>
 @stop
 
@@ -22,7 +46,7 @@
     <center class="row">
         <div class="col-xs-12">
             <h3>توضیحات</h3>
-            <div class="line" style="width: 80%"></div>
+            <div class="line width-80per"></div>
         </div>
         @if(count($descriptions) == 0)
             <div class="col-xs-12">
@@ -36,11 +60,11 @@
                         <span>
                             {{$description->description}}
                         </span>
-                        <button name="editDesc" value="{{$description->id}}" class="btn btn-info" data-toggle="tooltip" title="ویرایش توضیح" style="width: auto">
-                            <span class="glyphicon glyphicon-edit" style="margin-left: 30%"></span>
+                        <button name="editDesc" value="{{$description->id}}" class="btn btn-info width-auto" data-toggle="tooltip" title="ویرایش توضیح">
+                            <span class="glyphicon glyphicon-edit mg-lt-30per"></span>
                         </button>
-                        <button name="deleteDesc" value="{{$description->id}}" class="btn btn-danger" data-toggle="tooltip" title="حذف توضیح" style="width: auto">
-                            <span class="glyphicon glyphicon-remove" style="margin-left: 30%"></span>
+                        <button name="deleteDesc" value="{{$description->id}}" class="btn btn-danger width-auto" data-toggle="tooltip" title="حذف توضیح">
+                            <span class="glyphicon glyphicon-remove mg-lt-30per"></span>
                         </button>
                     </div>
                 @endforeach
@@ -50,8 +74,8 @@
         @if($mode == "see")
             <div class="col-xs-12">
                 <a href="{{URL('addDescription')}}">
-                    <button class=" btn btn-default" style="width: auto; border-radius: 50% 50% 50% 50%" data-toggle="tooltip" title="اضافه کردن توضیح جدید">
-                        <span class="glyphicon glyphicon-plus" style="margin-left: 30%"></span>
+                    <button class=" btn btn-default width-auto border-radius-50per" data-toggle="tooltip" title="اضافه کردن توضیح جدید">
+                        <span class="glyphicon glyphicon-plus mg-lt-30per"></span>
                     </button>
                 </a>
             </div>
@@ -66,7 +90,7 @@
                 </div>
                 <div class="col-xs-12">
                     <p class="warning_color">{{$msg}}</p>
-                    <input type="submit" name="addDesc" value="اضافه کن" class="btn btn-primary" style="width: auto; margin-top: 10px">
+                    <input type="submit" name="addDesc" value="اضافه کن" class="btn btn-primary width-auto mg-tp-10">
                 </div>
             </form>
         @elseif($mode == "edit")
@@ -80,8 +104,8 @@
                 </div>
                 <div class="col-xs-12">
                     <p class="warning_color">{{$msg}}</p>
-                    <input type="text" name="descId" value="{{$selectedDesc->id}}" style="visibility: hidden">
-                    <input type="submit" name="doEditDesc" value="ویرایش کن" class="btn btn-primary" style="width: auto; margin-top: 10px">
+                    <input type="text" name="descId" value="{{$selectedDesc->id}}" class="visibility-hidden">
+                    <input type="submit" name="doEditDesc" value="ویرایش کن" class="btn btn-primary mg-tp-10 width-auto">
                 </div>
             </form>
         @endif
