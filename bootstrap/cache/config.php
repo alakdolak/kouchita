@@ -253,6 +253,7 @@
         'database' => 'admin_shazde',
         'username' => 'administrator_persoulio',
         'password' => 'yGrn65~6',
+
         'unix_socket' => '',
         'charset' => 'utf8mb4',
         'collation' => 'utf8mb4_unicode_ci',
