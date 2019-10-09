@@ -382,22 +382,22 @@
       if(desc == "")
          desc = -1;
 
-      $.ajax({
-         type: 'post',
-         url: '{{route('addPhotoToPlace', ['placeId' => $place->id, 'kindPlaceId' => $kindPlaceId])}}',
-         data: {
-            'fileName': uploadedImageName,
-            'url': $("#image_file").attr('src'),
-            'url2': $("#image_file_2").attr('src'),
-            'desc': desc,
-            'filter': selected
-         },
-         success: function (response) {
-            response = JSON.parse(response);
-            if(response.status == "ok")
-                 document.location.href = response.url;
-         }
-      });
+      {{--$.ajax({--}}
+         {{--type: 'post',--}}
+         {{--url: '{{route('addPhotoToPlace', ['placeId' => $place->id, 'kindPlaceId' => $kindPlaceId])}}',--}}
+         {{--data: {--}}
+            {{--'fileName': uploadedImageName,--}}
+            {{--'url': $("#image_file").attr('src'),--}}
+            {{--'url2': $("#image_file_2").attr('src'),--}}
+            {{--'desc': desc,--}}
+            {{--'filter': selected--}}
+         {{--},--}}
+         {{--success: function (response) {--}}
+            {{--response = JSON.parse(response);--}}
+            {{--if(response.status == "ok")--}}
+                 {{--document.location.href = response.url;--}}
+         {{--}--}}
+      {{--});--}}
    }
 
 </script>
