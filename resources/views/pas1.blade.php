@@ -17,92 +17,10 @@ $kindPlaceId = 10; ?>
     <link rel='stylesheet' type='text/css' media='screen, print'
           href='{{URL::asset('css/theme2/hr_north_star.css?v=2')}}'/>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/icons.css?v=1')}}'/>
+    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/passStyle.css?v=1')}}'/>
 
     <script src= {{URL::asset("js/calendar.js") }}></script>
     <script src= {{URL::asset("js/jalali.js") }}></script>
-
-    <style>
-        .mainDiv {
-            width: 90%;
-            margin: 5% auto;
-            direction: rtl;
-        }
-        .inputBox {
-            padding: 2px 7px;
-            font-size: 0.8em;
-            display: inline-block;
-            border: 1px solid #cccccc;
-            border-radius: 5px;
-            background-color: #ebebeb;
-            line-height: 30px;
-            margin: 10px 0;
-        }
-        .inputBoxText {
-            width: 35%;
-            border-left: 1px solid #d8d8d8;
-            display: inline-block;
-        }
-        .inputBoxInput {
-            width: 65%;
-            text-align: center;
-            border: none;
-            float: left;
-            background-color: transparent;
-        }
-        .inputBoxSelect {
-            width: 20%;
-            border: none;
-            background-color: transparent;
-        }
-        /*input[type="checkbox"] {*/
-            /*background-color: #4DC7BC;*/
-        /*}*/
-    </style>
-
-    <style>
-        .afterBuyIcon {
-            font-family: shazde_regular2 !important;
-            display: inline-block;
-        }
-        .redStar:before {
-            content: '\E00B';
-            font-size: 0.5em;
-            color: #92321b;
-            position: absolute;
-            top: -5px;
-            left: -10px;
-        }
-        .bottomArrowIcon:before {
-            content: '\E04A';
-            color: black;
-        }
-    </style>
-
-    <style>
-        .check-box__item {
-            padding-top: 5px;
-            padding-bottom: 5px;
-            position: relative;
-        }
-    </style>
-    <style>
-        .afterBuyBtn {
-            color: white;
-            line-height: 15px;
-            display: inline-block;
-            border-radius: 7px;
-            text-align: center;
-            margin: 5px 0;
-            font-size: 1.1em;
-        }
-    </style>
-    <style>
-        .inlineBorder {
-            border-bottom: 1.8px solid #aeaeae;
-            margin: 10px 0;
-        }
-    </style>
-
 </head>
 
 <body id="BODY_BLOCK_JQUERY_REFLOW"

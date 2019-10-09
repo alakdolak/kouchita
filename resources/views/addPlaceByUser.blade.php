@@ -28,12 +28,15 @@
             left: 50%;
             top: 50%;
             transform: translate(-50%, -50%);
+            border-radius: 10px;
+            box-shadow: 0px 0px 30px grey;
         }
         .headerOfBox {
             background-color: #4DC7BC;
             color: white;
             padding: 10px;
             font-size: 2em;
+            border-radius: 5px 5px 0 0;
         }
         .bodyOfBox {
             height: max-content;
@@ -41,8 +44,10 @@
             font-size: 1.3em;
         }
         .footerOfBox {
-            height: 75px;
-            padding: 0 20px 20px;
+            height: 45px;
+            margin: 20px;
+            padding-top: 10px;
+            border-top: 1px solid #4DC7BC;
         }
         .btn:hover,.btn:active {
             color: white;
@@ -67,12 +72,25 @@
         }
         .steps {
             position: absolute;
-            width: 7%;
-            height: 60%;
-            top: -35%;
-            border-radius: 2px;
+            border-radius: 50%;
             background-color: #E5E5E5;
-            display: inline-block;
+        }
+        .bigCircle {
+            width: 25px;
+            height: 25px;
+        }
+        .middleCircle {
+            width: 17px;
+            height: 17px;
+            margin: 4px;
+            z-index: 10;
+            background-color: #ffffff;
+        }
+        .littleCircle {
+            width: 9px;
+            height: 9px;
+            margin: 8px;
+            z-index: 100;
         }
         .completeStep {
             background-color: #4DC7BC;
@@ -96,13 +114,11 @@
             margin: 12px 0 0;
         }
         #stepName {
-            display: inline-block;
-            width: 15%;
-            text-align: center;
             color: #4dc7bc;
-            font-size: 2em;
+            font-size: 1.5em;
             position: absolute;
-            left: 50%;
+            left: 45%;
+            margin: 6px;
             transform: translate(-50%);
         }
         #map {
@@ -178,7 +194,7 @@
 
     <div class="bodyStyle">
         <div class="box">
-            <div class="headerOfBox">اضافه کردن مقصد جدید</div>
+            <div class="headerOfBox">شما در حال ایجاد یک مقصد جدید هستید...</div>
             <div class="bodyOfBox" id="step0"> از اینکه اطلاعات خود را با ما در میان می گذارید سپاس گذاریم. لطفا در چند قدم ساده، به پرسش های ما پاسخ دهید. </div>
             <div class="bodyOfBox hidden" id="step1">
                 <div>لطفا نوع مکان را انتخاب کنید و پس از آن در بین دسته بندی ها بهترین گزینه را انتخاب کنید.</div>
@@ -524,16 +540,43 @@
                 </div>
             </div>
             <div class="footerOfBox">
-                <div style="position: relative; width: 100%; margin: auto; border-top: 1px solid #4DC7BC; padding-bottom: 20px">
-                    <div data-val="1" class="steps hidden" style="right: 21%"></div>
-                    <div data-val="3" class="steps hidden" style="right: 41%"></div>
-                    <div data-val="4" class="steps hidden" style="right: 51%"></div>
-                    <div data-val="5" class="steps hidden" style="right: 61%"></div>
-                    <div data-val="6" class="steps hidden" style="right: 71%"></div>
-                    <div data-val="2" class="steps hidden" style="right: 31%"></div>
+                <div style="position: relative; width: 25%; top: 15%; margin: 0px 60% 0 0;">
+
+                    <div data-val="1" class="steps bigCircle hidden" style="right: 0%"></div>
+                    <div data-val="1" class="steps middleCircle hidden" style="right: 0%"></div>
+                    <div data-val="1" class="steps littleCircle hidden" style="right: 0%"></div>
+
+                    <div data-val="2" class="steps bigCircle hidden" style="right: 20%"></div>
+                    <div data-val="2" class="steps middleCircle hidden" style="right: 20%"></div>
+                    <div data-val="2" class="steps littleCircle hidden" style="right: 20%"></div>
+
+                    <div data-val="3" class="steps bigCircle hidden" style="right: 40%"></div>
+                    <div data-val="3" class="steps middleCircle hidden" style="right: 40%"></div>
+                    <div data-val="3" class="steps littleCircle hidden" style="right: 40%"></div>
+
+                    <div data-val="4" class="steps bigCircle hidden" style="right: 60%"></div>
+                    <div data-val="4" class="steps middleCircle hidden" style="right: 60%"></div>
+                    <div data-val="4" class="steps littleCircle hidden" style="right: 60%"></div>
+
+                    <div data-val="5" class="steps bigCircle hidden" style="right: 80%"></div>
+                    <div data-val="5" class="steps middleCircle hidden" style="right: 80%"></div>
+                    <div data-val="5" class="steps littleCircle hidden" style="right: 80%"></div>
+
+                    <div data-val="6" class="steps bigCircle hidden" style="right: 100%"></div>
+                    <div data-val="6" class="steps middleCircle hidden" style="right: 100%"></div>
+                    <div data-val="6" class="steps littleCircle hidden" style="right: 100%"></div>
+
+
+
+                    {{--<div data-val="1" class="steps hidden" style="right: 21%"></div>--}}
+                    {{--<div data-val="3" class="steps hidden" style="right: 41%"></div>--}}
+                    {{--<div data-val="4" class="steps hidden" style="right: 51%"></div>--}}
+                    {{--<div data-val="5" class="steps hidden" style="right: 61%"></div>--}}
+                    {{--<div data-val="6" class="steps hidden" style="right: 71%"></div>--}}
+                    {{--<div data-val="2" class="steps hidden" style="right: 31%"></div>--}}
                 </div>
                 <button class="btn boxNextBtn" type="button" id="nextStep" onclick="changeSteps(1)">شروع</button>
-                <div class="hidden" id="stepName">قدم اول</div>
+                <div class="hidden" id="stepName">گام اول</div>
                 <button class="btn boxPreviousBtn" type="button" id="previousStep" onclick="changeSteps(-1)">بازگشت</button>
             </div>
         </div>
@@ -600,23 +643,23 @@
 //for change color of each box of step
             $('#step' + currentSteps).removeClass('hidden');
 
-            $(".steps").removeClass('completeStep').each(function() {
+            $(".bigCircle, .littleCircle").removeClass('completeStep').each(function() {
                 if($(this).attr('data-val') <= currentSteps)
                     $(this).addClass('completeStep');
             });
 //for change name of step
             if (currentSteps == 1){
-                $('#stepName').html('قدم اول');
+                $('#stepName').html('گام اول');
             } else if(currentSteps == 2){
-                $('#stepName').html('قدم دوم');
+                $('#stepName').html('گام دوم');
             } else if(currentSteps == 3){
-                $('#stepName').html('قدم سوم');
+                $('#stepName').html('گام سوم');
             } else if(currentSteps == 4){
-                $('#stepName').html('قدم چهارم');
+                $('#stepName').html('گام چهارم');
             } else if(currentSteps == 5){
-                $('#stepName').html('قدم پنجم');
+                $('#stepName').html('گام پنجم');
             } else if(currentSteps == 6){
-                $('#stepName').html('قدم آخر');
+                $('#stepName').html('گام آخر');
             } else if(currentSteps == 7){
                 $('#stepName').html('موفق شدید');
             }

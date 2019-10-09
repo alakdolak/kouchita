@@ -148,6 +148,8 @@ Route::group(array('middleware' => ['throttle:30']), function () {
 
     Route::any('searchForStates', array('as' => 'searchForStates', 'uses' => 'HomeController@searchForStates'));
 
+    Route::get('cityPage', 'HomeController@cityPage');
+
     Route::get('abbas', 'HomeController@abbas');
 
     Route::any('hotelList2/{city}/{mode}', array('as' => 'hotelList2', 'uses' => 'HotelReservationController@showHotelList2'));
