@@ -120,7 +120,7 @@
             <div class="ui_container">
                 <div class="ui_columns easyClear">
                     <div class="ui_column" style="direction: rtl;position: relative;">
-                        @include('layouts.shareBox')
+{{--                        @include('layouts.shareBox')--}}
                         <div ID="taplc_trip_planner_breadcrumbs_0" class="ppr_rup ppr_priv_trip_planner_breadcrumbs">
                             <ul class="breadcrumbs">
                                 {{--@if($placeMode == "hotel")--}}

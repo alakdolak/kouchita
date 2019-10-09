@@ -706,3 +706,19 @@ Route::group(array('middleware' => ['throttle:30', 'nothing', 'auth']), function
 
 
 Route::get('emailtest', 'HomeController@emailtest');
+
+Route::get('/tour/index', function (){
+    $placeMode = 'tour';
+    $state = 'تهران';
+    return view('tour.tour', compact(['placeMode', 'state']));
+});
+Route::get('/tour/details', function (){
+    $placeMode = 'tour';
+    $state = 'تهران';
+    return view('tour.tour-details', compact(['placeMode', 'state']));
+});
+Route::get('/tour/lists', function (){
+    $placeMode = 'tour';
+    $state = 'تهران';
+    return view('tour.tour-lists', compact(['placeMode', 'state']));
+});

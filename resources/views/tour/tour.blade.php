@@ -295,13 +295,13 @@
 </head>
 
 <body class="rebrand_2017 desktop HomeRebranded  js_logging">
-    <div class="header hideOnPhone">
-        @include('layouts.header1')
-    </div>
+    {{--<div class="header hideOnPhone">--}}
+        {{--@include('layouts.header1')--}}
+    {{--</div>--}}
 
-    <div class="hideOnScreen">
-        @include('layouts.header1Phone')
-    </div>
+    {{--<div class="hideOnScreen">--}}
+        {{--@include('layouts.header1Phone')--}}
+    {{--</div>--}}
 
     <div class="page" ng-app="mainApp">
         <div class="ppr_rup ppr_priv_homepage_hero">
