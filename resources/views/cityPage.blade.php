@@ -12,7 +12,7 @@
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/long_lived_global_legacy_2.css?v=2')}}"/>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/masthead-saves.css?v=2')}}'/>
     <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/hr_north_star.css?v=2')}}'/>
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/icons.css?v=1')}}' />
+    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/icons.css?v=2')}}' />
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/mainPageModifiedStyles.css')}}' />
 
     <script>
@@ -126,8 +126,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-7">
-
+                <div class="col-xs-7" style="background: url('{{URL::asset('images/majarajooi.jpg')}}')">
                 </div>
             </div>
             <div>
@@ -135,6 +134,10 @@
             </div>
         </div>
     </div>
+</div>
+
+<div ng-app="mainApp">
+    @include('layouts.mainSuggestions')
 </div>
 
 @include('layouts.placeFooter')
