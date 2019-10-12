@@ -1569,8 +1569,10 @@ class HomeController extends Controller
 
                     $user = Auth::user();
                     if ($user->status != 0) {
-                        if(!Auth::check())
+
+                        if(!Auth::check()) {
                             Auth::login($user);
+                        }
                         return \redirect()->back();
 
                     } else {

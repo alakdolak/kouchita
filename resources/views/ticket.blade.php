@@ -18,7 +18,7 @@ $kindPlaceId = 10; ?>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/masthead-saves.css?v=2')}}'/>
     <link rel='stylesheet' type='text/css' media='screen, print'
           href='{{URL::asset('css/theme2/hr_north_star.css?v=2')}}'/>
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/icons.css?v=1')}}'/>
+    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/icons.css?v=1')}}'/>
 
     <script>
         var getStates = '{{route('getStates')}}';
@@ -452,6 +452,21 @@ $kindPlaceId = 10; ?>
         }
         .leftInCalenderGre:before {
             left: 17%;
+        }
+    </style>
+
+    <style>
+        .squareDiv {
+            height: 35vh;
+            color: #30b4a6 !important;
+            background-color: white;
+            border: 1px solid lightgray;
+            display: inline-block;
+            text-align: center;
+            cursor: pointer;
+        }
+        .squareDiv:hover {
+            border:2px solid #30b4a6;
         }
     </style>
 

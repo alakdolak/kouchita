@@ -1,0 +1,94 @@
+.icons {
+    font-family: 'Shazde_Regular2' !important;
+}
+
+/*....................*/
+.hotel:before {
+    content: '\E000';
+}
+.ticket:before {
+    content: '\E004';
+}
+.atraction:before {
+    content: '\E002';
+}
+.restaurant:before {
+    content: '\E001';
+}
+.soghat:before {
+    content: '\E005';
+}
+.ghazamahali:before {
+    content: '\E006';
+}
+.majara:before {
+    content: '\E009';
+}
+.sanaye:before {
+    content: '\E00A';
+}
+.lebas:before {
+    content: '\E05A';
+}
+.boom:before {
+    content: '\E05B';
+}
+.estelah:before {
+    content: '\E06C';
+}
+.location:before {
+    content: '\E019';
+}
+.downArrow {
+    font-size: 40px;
+}
+.downArrow:before {
+    content: '\E04A';
+    color: #30b4a6;
+}
+.plus:before {
+    content: '\E031';
+}
+.minus:before {
+    content: '\E034';
+}
+.close:before {
+    content: '\E02C';
+}
+.redStar:before {
+    content: '\E00B';
+}
+
+/*..........city page Icons..........*/
+.cityPageIcon {
+    font-family: 'Shazde_Regular2' !important;
+    font-size: 40px;
+    margin-top: 8%;
+}
+.textCityPageIcon {
+    color: black;
+    font-size: 12px;
+    font-weight: 800;
+    margin-top: 0%;
+    margin-bottom: 15%;
+}
+
+/*..........phone popUp Icons..........*/
+.phoneIcons {
+    font-family: 'Shazde_Regular2' !important;
+    font-size: 40px;
+    direction: rtl;
+    line-height: 40px;
+    color: #30b4a6;
+    margin: 2% 5% 2% 0;
+}
+.phoneIcon {
+    font-family: 'Shazde_Regular2' !important;
+    font-size: 80px;
+    margin-top: 8%;
+}
+.textIcon {
+    color: black;
+    font-size: 25px;
+    margin-top: -1%;
+}
