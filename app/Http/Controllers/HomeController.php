@@ -1531,7 +1531,7 @@ class HomeController extends Controller
             $password = makeValidInput($_POST['password']);
 
             $credentials  = ['username' => $username, 'password' => $password];
-
+//
             if (Auth::attempt($credentials, true)) {
                 if (Auth::user()->status != 0) {
                     RetrievePas::whereUId(Auth::user()->id)->delete();
