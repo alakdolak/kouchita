@@ -1,0 +1,601 @@
+var hotelMap = [];
+var amakenMap = [];
+var restMap = [];
+var majaraMap = [];
+var newHotelMap = [];
+var newRestMap = [];
+var newAmakenMap = [];
+var newMajaraMap = [];
+var isHotelOn = 1;
+var isRestaurantOn = [1, 1];
+var isAmakenOn = [1, 1, 1, 1, 1, 1];
+var map1;
+var markersHotel = [];
+var markersRest = [];
+var markersFast = [];
+var markersMus = [];
+var markersPla = [];
+var markersShc = [];
+var markersFun = [];
+var markersAdv = [];
+var markersNat = [];
+var iconBase = '{{URL::asset('images') . '/'}}';
+var icons = {
+    hotel: iconBase + 'mhotel.png',
+    pla: iconBase + 'matr_pla.png',
+    mus: iconBase + 'matr_mus.png',
+    shc: iconBase + 'matr_shc.png',
+    nat: iconBase + 'matr_nat.png',
+    fun: iconBase + 'matr_fun.png',
+    adv: iconBase + 'matr_adv.png',
+    vil: iconBase + 'matr_vil',
+    fastfood: iconBase + 'mfast.png',
+    rest: iconBase + 'mrest.png'
+};
+var kindIcon;
+var isMapAchieved = false;
+var newBounds = [];
+var newBound;
+var numOfNewHotel = 0;
+var numOfNewAmaken = 0;
+var numOfNewRest = 0;
+var numOfNewMajara = 0;
+var availableHotelIdMarker = [];
+var availableRestIdMarker = [];
+var availableAmakenlIdMarker = [];
+var availableMajaraIdMarker = [];
+var num = 0;
+var isItemClicked = false;
+
+function showExtendedMap() {
+    if (!isMapAchieved) {
+        $('.dark').show();
+        showElement('mapState');//mapState
+        isMapAchieved = true;
+        init2();
+    }
+    else {
+        $("#mapState").removeClass('hidden');
+    }
+}
+
+function init2() {
+    var mapOptions = {
+        zoom: 18,
+        center: new google.maps.LatLng(x, y),
+        styles: [{
+            "featureType": "landscape",
+            "stylers": [{"hue": "#FFA800"}, {"saturation": 0}, {"lightness": 0}, {"gamma": 1}]
+        }, {
+            "featureType": "road.highway",
+            "stylers": [{"hue": "#53FF00"}, {"saturation": -73}, {"lightness": 40}, {"gamma": 1}]
+        }, {
+            "featureType": "road.arterial",
+            "stylers": [{"hue": "#FBFF00"}, {"saturation": 0}, {"lightness": 0}, {"gamma": 1}]
+        }, {
+            "featureType": "road.local",
+            "stylers": [{"hue": "#00FFFD"}, {"saturation": 0}, {"lightness": 30}, {"gamma": 1}]
+        }, {
+            "featureType": "water",
+            "stylers": [{"hue": "#00BFFF"}, {"saturation": 6}, {"lightness": 8}, {"gamma": 1}]
+        }, {
+            "featureType": "poi",
+            "stylers": [{"hue": "#679714"}, {"saturation": 33.4}, {"lightness": -25.4}, {"gamma": 1}]
+        }
+        ]
+    };
+    var mapElementSmall = document.getElementById('mapState1');
+    map1 = new google.maps.Map(mapElementSmall, mapOptions);
+    google.maps.event.addListenerOnce(map1, 'idle', function () {
+        newBound = map1.getBounds();
+        newBounds[0] = newBound.getNorthEast().lat();
+        newBounds[1] = newBound.getNorthEast().lng();
+        newBounds[2] = newBound.getSouthWest().lat();
+        newBounds[3] = newBound.getSouthWest().lng();
+        addNewPlace(newBounds);
+        zoomChangeOrCenterChange();
+    });
+}
+
+function toggleHotelsInExtendedMap(value) {
+    if (isHotelOn == value) {
+        document.getElementById('hotelImg').src = "{{URL::asset('images') . '/'}}mhoteloff.png";
+        isHotelOn = 0;
+        mySetMap(isHotelOn, markersHotel);
+    }
+    else {
+        document.getElementById('hotelImg').src = "{{URL::asset('images') . '/'}}mhotel.png";
+        isHotelOn = 1;
+        mySetMap(isHotelOn, markersHotel);
+    }
+}
+
+function toggleRestaurantsInExtendedMap(value) {
+    if (isRestaurantOn[0] == value) {
+        document.getElementById('restImg').src = "{{URL::asset('images') . '/'}}mrestoff.png";
+        isRestaurantOn[0] = 0;
+        mySetMap(isRestaurantOn[0], markersRest);
+    }
+    else {
+        document.getElementById('restImg').src = "{{URL::asset('images') . '/'}}mrest.png";
+        isRestaurantOn[0] = 1;
+        mySetMap(isRestaurantOn[0], markersRest);
+    }
+}
+
+function toggleFastFoodsInExtendedMap(value) {
+    if (isRestaurantOn[1] == value) {
+        document.getElementById('fastImg').src = "{{URL::asset('images') . '/'}}mfastoff.png";
+        isRestaurantOn[1] = 0;
+        mySetMap(isRestaurantOn[1], markersFast);
+    }
+    else {
+        document.getElementById('fastImg').src = "{{URL::asset('images') . '/'}}mfast.png";
+        isRestaurantOn[1] = 1;
+        mySetMap(isRestaurantOn[1], markersFast);
+    }
+}
+
+function toggleMuseumsInExtendedMap(value) {
+    if (isAmakenOn[0] == value) {
+        document.getElementById('musImg').src = "{{URL::asset('images') . '/'}}matr_musoff.png";
+        isAmakenOn[0] = 0;
+        mySetMap(isAmakenOn[0], markersMus);
+    }
+    else {
+        document.getElementById('musImg').src = "{{URL::asset('images') . '/'}}matr_mus.png";
+        isAmakenOn[0] = 1;
+        mySetMap(isAmakenOn[0], markersMus);
+    }
+}
+
+function toggleHistoricalInExtendedMap(value) {
+    if (isAmakenOn[1] == value) {
+        document.getElementById('plaImg').src = "{{URL::asset('images') . '/'}}matr_plaoff.png";
+        isAmakenOn[1] = 0;
+        mySetMap(isAmakenOn[1], markersPla);
+    }
+    else {
+        document.getElementById('plaImg').src = "{{URL::asset('images') . '/'}}matr_pla.png";
+        isAmakenOn[1] = 1;
+        mySetMap(isAmakenOn[1], markersPla);
+    }
+}
+
+function toggleShopCenterInExtendedMap(value) {
+    if (isAmakenOn[2] == value) {
+        document.getElementById('shcImg').src = "{{URL::asset('images') . '/'}}matr_shcoff.png";
+        isAmakenOn[2] = 0;
+        mySetMap(isAmakenOn[2], markersShc);
+    }
+    else {
+        document.getElementById('shcImg').src = "{{URL::asset('images') . '/'}}matr_shc.png";
+        isAmakenOn[2] = 1;
+        mySetMap(isAmakenOn[2], markersShc);
+    }
+}
+
+function toggleFunCenterInExtendedMap(value) {
+    if (isAmakenOn[3] == value) {
+        document.getElementById('funImg').src = "{{URL::asset('images') . '/'}}matr_funoff.png";
+        isAmakenOn[3] = 0;
+        mySetMap(isAmakenOn[3], markersFun);
+    }
+    else {
+        document.getElementById('funImg').src = "{{URL::asset('images') . '/'}}matr_fun.png";
+        isAmakenOn[3] = 1;
+        mySetMap(isAmakenOn[3], markersFun);
+    }
+}
+
+function toggleMajaraCenterInExtendedMap(value) {
+    if (isAmakenOn[5] == value) {
+        document.getElementById('advImg').src = "{{URL::asset('images') . '/'}}matr_advoff.png";
+        isAmakenOn[5] = 0;
+        mySetMap(isAmakenOn[5], markersAdv);
+    }
+    else {
+        document.getElementById('advImg').src = "{{URL::asset('images') . '/'}}matr_adv.png";
+        isAmakenOn[5] = 1;
+        mySetMap(isAmakenOn[5], markersAdv);
+    }
+}
+
+function toggleNaturalsInExtendedMap(value) {
+    if (isAmakenOn[4] == value) {
+        document.getElementById('natImg').src = "{{URL::asset('images') . '/'}}matr_natoff.png";
+        isAmakenOn[4] = 0;
+        mySetMap(isAmakenOn[4], markersNat);
+    }
+    else {
+        document.getElementById('natImg').src = "{{URL::asset('images') . '/'}}matr_nat.png";
+        isAmakenOn[4] = 1;
+        mySetMap(isAmakenOn[4], markersNat);
+    }
+}
+
+function addMarker() {
+    var marker;
+    for (i = numOfNewHotel; i < hotelMap.length; i++) {
+        marker = new google.maps.Marker({
+            position: new google.maps.LatLng(hotelMap[i].C, hotelMap[i].D),
+            map: map1,
+            title: hotelMap[i].name,
+            icon: {
+                url: icons.hotel,
+                scaledSize: new google.maps.Size(35, 35)
+            }
+        });
+        var hotelDetail = {
+            url: '{{route('home') . '/hotel-details/'}}',
+            name: hotelMap[i].name
+        };
+        hotelDetail.url = hotelDetail.url + hotelMap[i].id + '/' + hotelMap[i].name;
+        markersHotel[i] = marker;
+        hotelMap[i].kind = 4;
+        hotelMap[i].url = hotelDetail.url;
+        hotelMap[i].first = true;
+        hotelMap[i].pic = "{{URL::asset('images/loading.svg')}}";
+        availableHotelIdMarker[i] = hotelMap[i].id;
+        numOfNewHotel = hotelMap.length;
+        clickable(markersHotel[i], hotelMap[i]);
+    }
+    for (i = numOfNewRest; i < restMap.length; i++) {
+        if (restMap[i].kind_id == 1)
+            kindIcon = icons.rest;
+        else
+            kindIcon = icons.fastfood;
+        marker = new google.maps.Marker({
+            position: new google.maps.LatLng(restMap[i].C, restMap[i].D),
+            map: map1,
+            title: restMap[i].name,
+            icon: {
+                url: kindIcon,
+                scaledSize: new google.maps.Size(35, 35)
+            }
+        });
+        var restDetail = {
+            url: '{{route('home') . '/restaurant-details/'}}',
+            name: restMap[i].name
+        };
+        restDetail.url = restDetail.url + restMap[i].id + '/' + restMap[i].name;
+        restMap[i].kind = 3;
+        restMap[i].url = restDetail.url;
+        restMap[i].first = true;
+        restMap[i].pic = "{{URL::asset('images/loading.svg')}}";
+        numOfNewRest = restMap.length;
+        availableRestIdMarker[i] = restMap[i].id;
+        clickable(marker, restMap[i]);
+        if (restMap[i].kind_id == 1) {
+            markersRest[markersRest.length] = marker;
+        }
+        else {
+            markersFast[markersFast.length] = marker;
+        }
+    }
+    for (i = numOfNewAmaken; i < amakenMap.length; i++) {
+        if (amakenMap[i].mooze == 1)
+            kindIcon = icons.mus;
+        else if (amakenMap[i].tarikhi == 1)
+            kindIcon = icons.pla;
+        else if (amakenMap[i].tabiatgardi == 1)
+            kindIcon = icons.nat;
+        else if (amakenMap[i].tafrihi == 1)
+            kindIcon = icons.fun;
+        else if (amakenMap[i].markazkharid == 1)
+            kindIcon = icons.shc;
+        else
+            kindIcon = icons.pla;
+        marker = new google.maps.Marker({
+            position: new google.maps.LatLng(amakenMap[i].C, amakenMap[i].D),
+            map: map1,
+            title: amakenMap[i].name,
+            icon: {
+                url: kindIcon,
+                scaledSize: new google.maps.Size(35, 35)
+            }
+        });
+        var amakenDetail = {
+            url: '{{route('home') . '/amaken-details/'}}',
+            name: amakenMap[i].name
+        };
+        amakenDetail.url = amakenDetail.url + amakenMap[i].id + '/' + amakenMap[i].name;
+        amakenMap[i].kind = 1;
+        amakenMap[i].url = amakenDetail.url;
+        amakenMap[i].first = true;
+        numOfNewAmaken = amakenMap.length;
+        availableAmakenlIdMarker[i] = amakenMap[i].id;
+        amakenMap[i].pic = "{{URL::asset('images/loading.svg')}}";
+        clickable(marker, amakenMap[i]);
+        if (amakenMap[i].mooze == 1)
+            markersMus[markersMus.length] = marker;
+        else if (amakenMap[i].tarikhi == 1)
+            markersPla[markersPla.length] = marker;
+        else if (amakenMap[i].tabiatgardi == 1)
+            markersNat[markersNat.length] = marker;
+        else if (amakenMap[i].tafrihi == 1)
+            markersFun[markersFun.length] = marker;
+        else if (amakenMap[i].markazkharid == 1)
+            markersShc[markersShc.length] = marker;
+        else
+            markersPla[markersPla.length] = marker;
+    }
+    for (i = numOfNewMajara; i < majaraMap.length; i++) {
+        marker = new google.maps.Marker({
+            position: new google.maps.LatLng(majaraMap[i].C, majaraMap[i].D),
+            map: map1,
+            title: majaraMap[i].name,
+            icon: {
+                url: icons.adv,
+                scaledSize: new google.maps.Size(35, 35)
+            }
+        });
+        var majaraDetail = {
+            url: '{{route('home') . '/hotel-details/'}}',
+            name: majaraMap[i].name
+        };
+        majaraDetail.url = majaraDetail.url + majaraMap[i].id + '/' + majaraMap[i].name;
+        markersAdv[i] = marker;
+        majaraMap[i].kind = 6;
+        majaraMap[i].url = majaraDetail;
+        majaraMap[i].first = true;
+        majaraMap[i].pic = "{{URL::asset('images/loading.svg')}}";
+        majaraMap[i].address = majaraMap[i].dastresi;
+        numOfNewMajara = majaraMap.length;
+        availableMajaraIdMarker[i] = majaraMap[i].id;
+        clickable(markersAdv[i], majaraMap[i]);
+    }
+    mySetMap(isHotelOn, markersHotel);
+    mySetMap(isRestaurantOn[0], markersRest);
+    mySetMap(isRestaurantOn[1], markersFast);
+    mySetMap(isAmakenOn[0], markersMus);
+    mySetMap(isAmakenOn[1], markersPla);
+    mySetMap(isAmakenOn[2], markersShc);
+    mySetMap(isAmakenOn[3], markersFun);
+    mySetMap(isAmakenOn[4], markersNat);
+    mySetMap(isAmakenOn[5], majaraMap);
+}
+
+function mySetMap(isSet, marker) {
+    if (isSet == 1) {
+        for (var i = 0; i < marker.length; i++) {
+            marker[i].setMap(map1);
+        }
+    }
+    else
+        for (var i = 0; i < marker.length; i++) {
+            marker[i].setMap(null);
+        }
+}
+
+// bounds
+function zoomChangeOrCenterChange() {
+    google.maps.event.addListener(map1, 'bounds_changed', function () {
+        // map1.setOptions({draggable: false})
+        newBound = map1.getBounds();
+        newBounds[0] = newBound.getNorthEast().lat();
+        newBounds[1] = newBound.getNorthEast().lng();
+        newBounds[2] = newBound.getSouthWest().lat();
+        newBounds[3] = newBound.getSouthWest().lng();
+        addNewPlace(newBounds)
+    });
+}
+
+function addNewPlace(newBounds) {
+    var hotelId = JSON.stringify(availableHotelIdMarker);
+    var restId = JSON.stringify(availableRestIdMarker);
+    var amakenId = JSON.stringify(availableAmakenlIdMarker);
+    var majaraId = JSON.stringify(availableMajaraIdMarker);
+    $.ajax({
+        type: 'post',
+        url: '{{route('newPlaceForMap')}}',
+        data: {
+            'swLat': newBounds[2],
+            'swLng': newBounds[3],
+            'neLat': newBounds[0],
+            'neLng': newBounds[1],
+            'C': x,
+            'D': y,
+            'hotelId': hotelId,
+            'restId': restId,
+            'amakenId': amakenId,
+            'majaraId': majaraId
+        },
+        success: function (response) {
+            response = JSON.parse(response);
+            newHotelMap = response.hotel;
+            newRestMap = response.rest;
+            newAmakenMap = response.amaken;
+            newMajaraMap = response.majara;
+            afterSuccess();
+        }
+    });
+}
+
+function afterSuccess() {
+    for (i = 0; i < newHotelMap.length; i++) {
+        hotelMap[hotelMap.length] = newHotelMap[i];
+    }
+    for (i = 0; i < newMajaraMap.length; i++) {
+        majaraMap[majaraMap.length] = newMajaraMap[i];
+    }
+    for (i = 0; i < newRestMap.length; i++) {
+        restMap[restMap.length] = newRestMap[i];
+    }
+    for (i = 0; i < newAmakenMap.length; i++) {
+        amakenMap[amakenMap.length] = newAmakenMap[i];
+    }
+    addMarker();
+}
+
+function clickable(marker, name) {
+    google.maps.event.addListener(marker, 'click', function () {
+        document.getElementById('placeInfoInExtendedMap').style.display = 'inline';
+        document.getElementById('url').innerHTML = name.name;
+        document.getElementById('url').href = name.url;
+        isItemClicked = true;
+        if (name.first)
+            getPic(name);
+        else {
+            $("#placeInfoPicInExtendedMap").attr('src', name.pic);
+        }
+        switch (name.rate) {
+            case 1:
+                document.getElementById('star').className = "ui_bubble_rating bubble_10";
+                document.getElementById('star').content = '1';
+                document.getElementById('rateNum').innerHTML = '1';
+                break;
+            case 2:
+                document.getElementById('star').className = "ui_bubble_rating bubble_20";
+                document.getElementById('star').content = '2';
+                document.getElementById('rateNum').innerHTML = '2';
+                break;
+            case 3:
+                document.getElementById('star').className = "ui_bubble_rating bubble_30";
+                document.getElementById('star').content = '3';
+                document.getElementById('rateNum').innerHTML = '3';
+                break;
+            case 4:
+                document.getElementById('star').className = "ui_bubble_rating bubble_40";
+                document.getElementById('star').content = '4';
+                document.getElementById('rateNum').innerHTML = '4';
+                break;
+            case 5:
+                document.getElementById('star').className = "ui_bubble_rating bubble_50";
+                document.getElementById('star').content = '5';
+                document.getElementById('rateNum').innerHTML = '5';
+                break;
+        }
+        switch (name.kind) {
+            case 4:
+                document.getElementById('nearTitle').innerHTML = 'سایر هتل ها';
+                break;
+            case 3:
+                document.getElementById('nearTitle').innerHTML = 'سایر رستوران ها';
+                break;
+            case 1:
+                document.getElementById('nearTitle').innerHTML = 'سایر اماکن ';
+                break;
+        }
+        document.getElementById('rev').innerHTML = name.reviews + "نقد";
+        document.getElementById('address').innerHTML = "آدرس : " + name.address;
+        var scope = angular.element(document.getElementById("nearbyInExtendedMap")).scope();
+        scope.$apply(function () {
+            scope.findNearPlaceForMap(name);
+        });
+    });
+    var classRatingHover;
+    switch (name.rate) {
+        case 1:
+            // classRatingHover.className = 'ui_bubble_rating bubble_10';
+            classRatingHover = 'ui_bubble_rating bubble_10';
+            // classRatingHover.content = '1';
+            break;
+        case 2:
+            classRatingHover = 'ui_bubble_rating bubble_20';
+            // classRatingHover.content = '2';
+            break;
+        case 3:
+            classRatingHover = 'ui_bubble_rating bubble_30';
+            // classRatingHover.content = '3';
+            break;
+        case 4:
+            classRatingHover = 'ui_bubble_rating bubble_40';
+            // classRatingHover.content = '4';
+            break;
+        case 5:
+            classRatingHover = 'ui_bubble_rating bubble_50';
+            // classRatingHover.content = '5';
+            break;
+    }
+    var hoverContent = "<div id='myTotalPane'><img id='itemPicInExtendedMap' src=" + '{{URL::asset('images/loading.svg')}}' + " >" +
+    "<a href='" + name.url + ">" + name.name + "</a>" +
+    "<div class='rating'>" +
+    "<span id='rateNum1' class='overallRating'> </span>" +
+    "<div class='prw_rup prw_common_bubble_rating overallBubbleRating inline'>" +
+    "<span id='star1' class='" + classRatingHover + " property='ratingValue' content='' ></span>" +
+    "</div>" +
+    "<span id='rev1' class='autoResize'>" + name.reviews + "نقد </span>" +
+    "</div>" +
+    "<h1 id='extendedMapDistanceHeader'>فاصله :" + name.distance * 1000 + "متر</h1>" +
+    "<h1 id='address1'>" + name.address + "</h1>" +
+    "</div>";
+    var infowindow = new google.maps.InfoWindow({
+        content: hoverContent,
+        maxWidth: 350
+    });
+    google.maps.event.addListener(marker, 'mouseover', function () {
+        if (name.first)
+            getPic(name);
+        else {
+            $("#itemPicInExtendedMap").attr('src', name.pic);
+        }
+        infowindow.open(map1, marker);
+    });
+    google.maps.event.addListener(marker, 'mouseout', function () {
+        infowindow.close(map1, marker);
+    });
+    google.maps.event.addListener(infowindow, 'domready', function () {
+        var iwOuter = $('.gm-style-iw');
+        var iwBackground = iwOuter.prev();
+        // Removes background shadow DIV
+        iwBackground.children(':nth-child(2)').css({'display': 'none'});
+        // Removes white background DIV
+        iwBackground.children(':nth-child(4)').css({'display': 'none'});
+        // Moves the infowindow 115px to the right.
+        iwOuter.parent().parent().css({left: '0px', 'overflow': 'none'});
+        // Moves the shadow of the arrow 76px to the left margin.
+        iwBackground.children(':nth-child(1)').attr('style', function (i, s) {
+            return s + 'left: 76px !important;'
+        });
+        // Moves the arrow 76px to the left margin.
+        iwBackground.children(':nth-child(3)').attr('style', function (i, s) {
+            return s + 'left: 0px !important;'
+        });
+        // Changes the desired tail shadow color.
+        iwBackground.children(':nth-child(3)').find('div').children().css({
+            'box-shadow': 'rgba(72, 181, 233, 0.6) 0px 1px 6px',
+            'z-index': '1'
+        });
+        // Reference to the div that groups the close button elements.
+        var iwCloseBtn = iwOuter.next();
+        // Apply the desired effect to the close button
+        iwCloseBtn.css({display: 'none'});
+        $("#myTotalPane").parent().attr('style', function (i, s) {
+            return s + 'min-height: 152px !important; max-height: 200px !important;'
+        })
+    });
+}
+
+function getPic(name) {
+    $.ajax({
+        type: 'post',
+        url: '{{route('getPlacePicture')}}',
+        data: {
+            'kindPlaceId': name.kind,
+            'placeId': name.id
+        },
+        success: function (response) {
+            $("#itemPicInExtendedMap").attr('src', response);
+            $("#placeInfoPicInExtendedMap").attr('src', name.pic);
+            name.first = false;
+            name.pic = response;
+        }
+    });
+}
+
+function getJustPic(name) {
+    $.ajax({
+        type: 'post',
+        url: '{{route('getPlacePicture')}}',
+        data: {
+            'kindPlaceId': name.kind,
+            'placeId': name.id
+        },
+        success: function (response) {
+            name.pic = response;
+            name.first = false;
+            $("#itemNearbyPic_" + name.id + "_" + name.kind).attr('src', response);
+        }
+    });
+}

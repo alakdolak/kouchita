@@ -1,3 +1,43 @@
+.cityPageLittleMenu {
+    color: #30b4a6 !important;
+    border: 1px solid lightgray;
+    text-align: center;
+    cursor: pointer;
+    padding: 1px !important;
+    height: 100px;
+}
+.cityPageLittleMenu:hover {
+    border:2px solid #30b4a6;
+}
+.cityPageIcon {
+    font-family: 'Shazde_Regular2' !important;
+    font-size: 40px;
+    margin-top: 8%;
+}
+.textCityPageIcon {
+    color: black;
+    font-size: 12px;
+    font-weight: 800;
+    margin-top: 0%;
+    margin-bottom: 15%;
+}
+
+.border-top-grey {
+    border-top: 2px solid gray;
+    margin: 2px 0;
+}
+.border-right-grey {
+    border-right: 2px solid gray;
+}
+.border-left-grey {
+    border-left: 2px solid gray;
+}
+.border-bottom-grey {
+    border-bottom: 2px solid gray;
+    margin: 2px 0;
+}
+
+/*......................*/
 .squareDiv {
     height: 35vh;
     color: #30b4a6 !important;

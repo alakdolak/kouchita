@@ -1508,8 +1508,17 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     border-radius: 100%;
 }
 
+.border-top-grey {
+    border-top: 1px solid #E3E3E3;
+}
+.border-right-grey {
+    border-right: 1px solid #E3E3E3;
+}
+.border-left-grey {
+    border-left: 1px solid #E3E3E3;
+}
 .border-bottom-grey {
-    border-bottom: 1px solid #E3E3E3
+    border-bottom: 1px solid #E3E3E3;
 }
 
 .display-inline {

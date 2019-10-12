@@ -38,6 +38,10 @@ use PHPMailer\PHPMailer\PHPMailer;
 class HomeController extends Controller
 {
 
+    public function cityPage() {
+        return view('cityPage');
+    }
+
     public function abbas()
     {
         return view('addPlaceByUser');

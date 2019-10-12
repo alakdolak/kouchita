@@ -148,6 +148,8 @@ Route::group(array('middleware' => ['throttle:30']), function () {
 
     Route::any('searchForStates', array('as' => 'searchForStates', 'uses' => 'HomeController@searchForStates'));
 
+    Route::get('cityPage', 'HomeController@cityPage');
+
     Route::get('abbas', 'HomeController@abbas');
 
     Route::any('hotelList2/{city}/{mode}', array('as' => 'hotelList2', 'uses' => 'HotelReservationController@showHotelList2'));
@@ -704,3 +706,19 @@ Route::group(array('middleware' => ['throttle:30', 'nothing', 'auth']), function
 
 
 Route::get('emailtest', 'HomeController@emailtest');
+
+Route::get('/tour/index', function (){
+    $placeMode = 'tour';
+    $state = 'تهران';
+    return view('tour.tour', compact(['placeMode', 'state']));
+});
+Route::get('/tour/details', function (){
+    $placeMode = 'tour';
+    $state = 'تهران';
+    return view('tour.tour-details', compact(['placeMode', 'state']));
+});
+Route::get('/tour/lists', function (){
+    $placeMode = 'tour';
+    $state = 'تهران';
+    return view('tour.tour-lists', compact(['placeMode', 'state']));
+});

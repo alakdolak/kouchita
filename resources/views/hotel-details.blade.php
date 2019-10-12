@@ -2470,8 +2470,12 @@ if ($total == 0)
             });
         }
     </script>
-
+    <script async src="{{URL::asset('pageJs/hoteldetails.js')}}"></script>
     <script>
+        $(document).ready(function(){
+            console.log(iconBase)
+        });
+
         var app = angular.module("mainApp", ['infinite-scroll'], function ($interpolateProvider) {
             $interpolateProvider.startSymbol('[[');
             $interpolateProvider.endSymbol(']]');

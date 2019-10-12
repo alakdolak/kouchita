@@ -5,7 +5,6 @@ namespace Illuminate\Support\Facades;
 /**
  * @see \Illuminate\Routing\UrlGenerator
  */
-
 class URL extends Facade
 {
     /**
@@ -13,12 +12,15 @@ class URL extends Facade
      *
      * @return string
      */
-    protected static function getFacadeAccessor(){
+    protected static function getFacadeAccessor()
+    {
         return 'url';
     }
+
     static function asset($path, $secure = null) {
         $tmp = explode('/', $path);
         if(count($tmp) > 0) {
+
             $stub = "";
             for($i = 1; $i < count($tmp); $i++) {
                 if($i != count($tmp) - 1)
@@ -28,19 +30,19 @@ class URL extends Facade
             }
 
             switch ($tmp[0]) {
-                case "css":
-                    return self::cdn('cssCDN') . $stub;
                 case "_images":
-                    return self::cdn('_image_CDN') . $stub;
-                case "js":
-                    return self::cdn('jsCDN') . $stub;
-                case "images":
-                    return self::cdn('imageCDN') . $stub;
-                case "fonts":
-                    return self::cdn('fontCDN') . $stub;
-                
+                case "defaultPic":
+                case "userPhoto":
+                case "userProfile":
+                case "activities":
+                case "ads":
+                case "posts":
+                case "vr2":
+                    return 'http://localhost/assets/' . $tmp[0] . '/' . $stub;
+//                    return 'http://assets.baligh.ir/' . $tmp[0] . '/' . $stub;
             }
         }
+
         return app('url')->asset($path, $secure);
     }
 
