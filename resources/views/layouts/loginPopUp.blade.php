@@ -147,7 +147,7 @@ $authUrl = $client->createAuthUrl();
                     if(response == "ok") {
                         hideElement('loginPopUp');
                         // return document.location.href = selectedUrl;
-                        document.location.reload();
+                        // document.location.reload();
                     }
                     else if(response == "nok2") {
                         $("#loginErr").empty().append('حساب کاربری شما غیر فعال شده است');
