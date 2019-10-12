@@ -1531,11 +1531,12 @@ class HomeController extends Controller
             $password = makeValidInput($_POST['password']);
 
             $credentials  = ['username' => $username, 'password' => $password];
-//
+
             if (Auth::attempt($credentials, true)) {
                 $user = Auth::user();
                 if ($user->status != 0) {
-//                    RetrievePas::whereUId(Auth::user()->id)->delete();
+                    RetrievePas::whereUId(Auth::user()->id)->delete();
+
                     if(!Auth::check())
                         Auth::login($user);
 
@@ -1552,7 +1553,34 @@ class HomeController extends Controller
     }
 
     public function checkLogin() {
-        echo (Auth::check()) ? "ok" : "nok";
+
+        if(Auth::check()) {
+            return \redirect()->back();
+        }
+        else{
+            if (isset($_POST["username"]) && isset($_POST["password"])) {
+
+                $username = makeValidInput($_POST['username']);
+                $password = makeValidInput($_POST['password']);
+
+                $credentials  = ['username' => $username, 'password' => $password];
+//
+                if (Auth::attempt($credentials, true)) {
+
+                    $user = Auth::user();
+                    if ($user->status != 0) {
+                        if(!Auth::check())
+                            Auth::login($user);
+                        return \redirect()->back();
+
+                    } else {
+                        return \redirect()->back();
+                    }
+                }
+            }
+        }
+
+//        echo (Auth::check()) ? "ok" : "nok";
     }
 
     public function logout()

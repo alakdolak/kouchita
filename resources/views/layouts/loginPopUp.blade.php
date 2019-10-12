@@ -148,6 +148,10 @@ $authUrl = $client->createAuthUrl();
                         hideElement('loginPopUp');
                         // return document.location.href = selectedUrl;
                         // document.location.reload();
+                        document.getElementById('form_userName').value = username;
+                        document.getElementById('form_pass').value = password;
+
+                        $('#second_login').submit();
                     }
                     else if(response == "nok2") {
                         $("#loginErr").empty().append('حساب کاربری شما غیر فعال شده است');
@@ -618,6 +622,11 @@ $authUrl = $client->createAuthUrl();
 
 {{--loginPopUp--}}
 <span id="loginPopUp" onkeyup="if(event.keyCode == 13) login($('#username_main').val(), $('#password_main').val())" class="pop-up ui_modal hidden">
+    <form id="second_login" method="post" action="{{route('checkLogin')}}" style="display: none;">
+        <input name="_token" value="{{csrf_token()}}" type="hidden">
+        <input id="form_userName" name="username" type="hidden">
+        <input id="form_pass" name="password" type="hidden">
+    </form>
     <div>
         <img src="{{URL::asset('images/logo.svg')}}">
     </div>
