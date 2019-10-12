@@ -1553,7 +1553,6 @@ class HomeController extends Controller
     }
 
     public function checkLogin() {
-dd('in');
         if(Auth::check()) {
             return \redirect()->back();
         }
