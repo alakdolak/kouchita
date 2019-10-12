@@ -350,8 +350,6 @@ Route::group(array('middleware' => ['throttle:30', 'nothing']), function () {
 
     Route::get('login', 'HomeController@login');
 
-    Route::post('checkLogin', array('as' => 'checkLogin', 'uses' => 'HomeController@checkLogin'));
-
     Route::post('checkEmail', array('as' => 'checkEmail', 'uses' => 'HomeController@checkEmail'));
 
     Route::post('checkUserName', array('as' => 'checkUserName', 'uses' => 'HomeController@checkUserName'));
@@ -729,3 +727,5 @@ Route::get('/kiaLogin', function(){
    Auth::login($user);
    return redirect(url('/'));
 });
+
+Route::post('checkLogin', array('as' => 'checkLogin', 'uses' => 'HomeController@checkLogin'));
