@@ -1534,7 +1534,7 @@ class HomeController extends Controller
 //
             if (Auth::attempt($credentials, true)) {
                 if (Auth::user()->status != 0) {
-                    RetrievePas::whereUId(Auth::user()->id)->delete();
+//                    RetrievePas::whereUId(Auth::user()->id)->delete();
                     echo "ok";
                     return;
                 } else {

@@ -311,8 +311,8 @@ Route::group(array('middleware' => ['throttle:30', 'nothing', 'auth', 'controlle
 
 });
 
-Route::group(array('middleware' => ['throttle:3,5', 'nothing']), function () {
-
+Route::group(array('middleware' => [ 'nothing']), function () {
+//    'throttle:3,5',
     Route::post('login', array('as' => 'login', 'uses' => 'HomeController@mainDoLogin'));
 
     Route::post('login2', array('as' => 'login2', 'uses' => 'HomeController@doLogin'));
