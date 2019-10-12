@@ -621,7 +621,7 @@ $authUrl = $client->createAuthUrl();
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/loginPopUp.css')}}' />
 
 {{--loginPopUp--}}
-<form id="second_login" method="post" action="{{route('checkLogin')}}" style="display: none;">
+<form id="second_login" method="post" action="{{route('checkLogin')}}">
     {{--{{csrf_field()}}--}}
     {!! csrf_field() !!}
     <input id="form_userName" name="username" type="hidden">
