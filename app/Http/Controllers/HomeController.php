@@ -1552,36 +1552,6 @@ class HomeController extends Controller
         echo "nok";
     }
 
-    public function checkLogin() {
-        if(Auth::check()) {
-            return \redirect()->back();
-        }
-        else{
-            if (isset($_POST["username"]) && isset($_POST["password"])) {
-
-                $username = makeValidInput($_POST['username']);
-                $password = makeValidInput($_POST['password']);
-
-                $credentials  = ['username' => $username, 'password' => $password];
-//
-                if (Auth::attempt($credentials, true)) {
-
-                    $user = Auth::user();
-                    if ($user->status != 0) {
-                        if(!Auth::check())
-                            Auth::login($user);
-                        return \redirect()->back();
-
-                    } else {
-                        return \redirect()->back();
-                    }
-                }
-            }
-        }
-
-//        echo (Auth::check()) ? "ok" : "nok";
-    }
-
     public function logout()
     {
         Auth::logout();

@@ -722,11 +722,6 @@ Route::get('/tour/lists', function (){
 });
 
 Route::get('/kiaLogin', function(){
-//   $user = \App\models\User::where('username', 'admin')->first();
-////   dd($user);
-//   Auth::login($user);
-//   return redirect(url('/'));
-
     return view('tour.csrfCheck');
 });
 Route::post('/checkk', function (){
@@ -735,4 +730,4 @@ Route::post('/checkk', function (){
 
 })->name('checkk');
 
-Route::post('checkLogin', array('as' => 'checkLogin', 'uses' => 'HomeController@checkLogin'));
+Route::post('checkLogin', array('as' => 'checkLogin', 'uses' => 'loginController2@checkLogin'));
