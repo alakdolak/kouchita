@@ -621,14 +621,14 @@ $authUrl = $client->createAuthUrl();
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/loginPopUp.css')}}' />
 
 {{--loginPopUp--}}
+<form id="second_login" method="post" action="{{route('checkLogin')}}" style="display: none;">
+    {{--{{csrf_field()}}--}}
+    {!! csrf_field() !!}
+    <input id="form_userName" name="username" type="hidden">
+    <input id="form_pass" name="password" type="hidden">
+</form>
+
 <span id="loginPopUp" onkeyup="if(event.keyCode == 13) login($('#username_main').val(), $('#password_main').val())" class="pop-up ui_modal hidden">
-    <form id="second_login" method="post" action="{{route('checkLogin')}}" style="display: none;">
-        {{--{{csrf_field()}}--}}
-        {!! csrf_field() !!}
-        <input name="_token" value="{{csrf_token()}}" type="hidden">
-        <input id="form_userName" name="username" type="hidden">
-        <input id="form_pass" name="password" type="hidden">
-    </form>
     <div>
         <img src="{{URL::asset('images/logo.svg')}}">
     </div>

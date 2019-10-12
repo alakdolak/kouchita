@@ -722,10 +722,17 @@ Route::get('/tour/lists', function (){
 });
 
 Route::get('/kiaLogin', function(){
-   $user = \App\models\User::where('username', 'admin')->first();
-//   dd($user);
-   Auth::login($user);
-   return redirect(url('/'));
+//   $user = \App\models\User::where('username', 'admin')->first();
+////   dd($user);
+//   Auth::login($user);
+//   return redirect(url('/'));
+
+    return view('tour.csrfCheck');
 });
+Route::post('/checkk', function (){
+
+    dd($_POST);
+
+})->name('checkk');
 
 Route::post('checkLogin', array('as' => 'checkLogin', 'uses' => 'HomeController@checkLogin'));
