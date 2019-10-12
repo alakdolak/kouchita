@@ -3008,7 +3008,6 @@ class PlaceController extends Controller {
     }
 
     public function showMainPage($mode = "hotel") {
-
         switch ($mode) {
             case "amaken":
             default:

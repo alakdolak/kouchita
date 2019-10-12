@@ -57,6 +57,7 @@ class User extends Authenticatable{
 
     public function getRememberToken()
     {
+//        dd('dfjdkfjkd');
         return $this->remember_token;
     }
 

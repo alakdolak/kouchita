@@ -9,6 +9,7 @@
     text-align: center;
     font-size: 13px;
     color: #4DC7BC;
+    margin-bottom: 20px;
 }
 
 .tripleBoxMiddleBanner {
@@ -27,22 +28,22 @@
     margin-top: 22px !important;
 }
 
-.tripleBoxMiddleBanner:nth-child(3) > div {
+.tripleBoxMiddleBannerWhite > div {
     background: #FFF !important;
     border: 1px solid #4DC7BC;
 }
 
-.tripleBoxMiddleBanner:nth-child(3) > div > div:nth-child(1) {
+.tripleBoxMiddleBannerWhite > div > div:nth-child(1) {
     background: #4DC7BC;
 }
 
-.tripleBoxMiddleBanner:nth-child(3) > div > div:nth-child(1) > span {
+.tripleBoxMiddleBannerWhite > div > div:nth-child(1) > span {
     color: #FFF;
 }
 
-.tripleBoxMiddleBanner:nth-child(3) > div > div:nth-child(2), .tripleBoxMiddleBanner:nth-child(3) > div > div:nth-child(2) > h2,
-.tripleBoxMiddleBanner:nth-child(3) > div > div:nth-child(2) > div {
-    color: #4dc7bc;
+.tripleBoxMiddleBannerWhite > div > div:nth-child(2), .tripleBoxMiddleBannerWhite > div > div:nth-child(2) > h2,
+.tripleBoxMiddleBannerWhite > div > div:nth-child(2) > div {
+    color: #4dc7bc !important;
 }
 
 .otherServicesBoxes, .youMayLikeItBoxes {

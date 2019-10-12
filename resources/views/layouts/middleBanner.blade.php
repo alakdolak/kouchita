@@ -14,35 +14,35 @@
                                 <span class="ui_icon arrow-left"></span> ساخت پروفایل
                             </div>
                         @endif
-                    </div>
-                    <div class="ui_column is-4 right-col tripleBoxMiddleBanner" id="tripPlanBoxMiddleBanner">
-                        <div class="inner">
-                            <div class="icon-mainpage">
-                                <span class="ui_icon my-trips"></span>
-                            </div>
-                            <div class="text">
-                                <h2 class="en_US large white">برنامه ریزی کنید</h2>
-                                <div class="en_US small white">تمامی مراحل سفر خود را از خرید بلیط تا رزرو هتل با بهترین قیمت ها برنامه ریزی کنید.</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="ui_column is-4 right-col tripleBoxMiddleBanner">
-                        <div class="inner" id="middle-box">
-                            <div class="icon-mainpage">
-                                <span class="ui_icon seat-flat-bed"></span>
-                            </div>
-                            <div class="text">
-                                <h2 class="en_US large white">خواندن نقد گردشگران</h2>
-                                <div class="en_US small white">با خواندن نقد دوستان خود ، بهتر و راحت تر انتخاب کنید</div>
+                        <div class="ui_column is-4 right-col tripleBoxMiddleBanner">
+                            <div class="inner">
+                                <div class="icon-mainpage">
+                                    <span class="ui_icon my-trips"></span>
+                                </div>
+                                <div class="text">
+                                    <h2 class="en_US large white">برنامه ریزی کنید</h2>
+                                    <div class="en_US small white">تمامی مراحل سفر خود را از خرید بلیط تا رزرو هتل با بهترین قیمت ها برنامه ریزی کنید.</div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="ui_column is-4 right-col tripleBoxMiddleBanner">
-                        <div class="inner">
-                            <div class="icon-mainpage"><span class="ui_icon search"></span></div>
-                            <div class="text">
-                                <h2 class="en_US large white"> مقصد سفر </h2>
-                                <div class="en_US small white">فقط کافیست مقصد خود را وارد کنید</div>
+                        <div class="ui_column is-4 right-col tripleBoxMiddleBanner tripleBoxMiddleBannerWhite">
+                            <div class="inner" id="middle-box">
+                                <div class="icon-mainpage">
+                                    <span class="ui_icon seat-flat-bed"></span>
+                                </div>
+                                <div class="text">
+                                    <h2 class="en_US large white">خواندن نقد گردشگران</h2>
+                                    <div class="en_US small white">با خواندن نقد دوستان خود ، بهتر و راحت تر انتخاب کنید</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ui_column is-4 right-col tripleBoxMiddleBanner">
+                            <div class="inner">
+                                <div class="icon-mainpage"><span class="ui_icon search"></span></div>
+                                <div class="text">
+                                    <h2 class="en_US large white"> مقصد سفر </h2>
+                                    <div class="en_US small white">فقط کافیست مقصد خود را وارد کنید</div>
+                                </div>
                             </div>
                         </div>
                     </div>
