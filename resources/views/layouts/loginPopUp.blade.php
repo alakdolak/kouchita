@@ -625,7 +625,7 @@ $authUrl = $client->createAuthUrl();
     <form id="second_login" method="post" action="{{route('checkLogin')}}" style="display: none;">
         {{--{{csrf_field()}}--}}
         {!! csrf_field() !!}
-        {{--<input name="_token" value="{{csrf_token()}}" type="hidden">--}}
+        <input name="_token" value="{{csrf_token()}}" type="hidden">
         <input id="form_userName" name="username" type="hidden">
         <input id="form_pass" name="password" type="hidden">
     </form>
