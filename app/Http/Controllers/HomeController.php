@@ -1530,11 +1530,16 @@ class HomeController extends Controller
             $username = makeValidInput($_POST['username']);
             $password = makeValidInput($_POST['password']);
 
-            if (Auth::attempt(array('username' => $username, 'password' => $password), true)) {
-                if(Auth::check())
-                    dd('t');
-                if (Auth::user()->status != 0) {
+            $credentials  = ['username' => $username, 'password' => $password];
+
+            if (Auth::attempt($credentials, true)) {
+                $user = Auth::user();
+                if ($user->status != 0) {
                     RetrievePas::whereUId(Auth::user()->id)->delete();
+
+                    if(!Auth::check())
+                        Auth::login($user);
+
                     echo "ok";
                     return;
                 } else {
@@ -1548,7 +1553,32 @@ class HomeController extends Controller
     }
 
     public function checkLogin() {
-        echo (Auth::check()) ? "ok" : "nok";
+
+        if(Auth::check()) {
+            return \redirect()->back();
+        }
+        else{
+            if (isset($_POST["username"]) && isset($_POST["password"])) {
+
+                $username = makeValidInput($_POST['username']);
+                $password = makeValidInput($_POST['password']);
+
+                $credentials  = ['username' => $username, 'password' => $password];
+
+                if (Auth::attempt($credentials, true)) {
+
+                    $user = Auth::user();
+                    if ($user->status != 0) {
+                        if(!Auth::check())
+                            Auth::login($user);
+                        return \redirect()->back();
+
+                    } else {
+                        return \redirect()->back();
+                    }
+                }
+            }
+        }
     }
 
     public function logout()
