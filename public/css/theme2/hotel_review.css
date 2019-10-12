@@ -5037,10 +5037,6 @@ DIV.prw_rup.prw_datepickers_desktop_horizontal_styleguide_icon .ui_icon.calendar
     margin-top: 2px;
     padding-left: 4px;
 }
-.rtl #HEADING_GROUP .placeTypeText {
-    margin: 0 4px;
-    float: right;
-}
 form span.error_msg {
     display: none;
     font-style: italic;
