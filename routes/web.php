@@ -721,13 +721,4 @@ Route::get('/tour/lists', function (){
     return view('tour.tour-lists', compact(['placeMode', 'state']));
 });
 
-Route::get('/kiaLogin', function(){
-    return view('tour.csrfCheck');
-});
-Route::post('/checkk', function (){
-
-    dd($_POST);
-
-})->name('checkk');
-
-Route::post('checkLogin', array('as' => 'checkLogin', 'uses' => 'loginController2@checkLogin'));
+Route::post('checkLogin', array('as' => 'checkLogin', 'uses' => 'HomeController@checkLogin'));

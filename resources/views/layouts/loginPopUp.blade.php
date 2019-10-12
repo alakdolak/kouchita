@@ -146,12 +146,12 @@ $authUrl = $client->createAuthUrl();
                 success: function (response) {
                     if(response == "ok") {
                         hideElement('loginPopUp');
-                        // return document.location.href = selectedUrl;
+                        return document.location.href = selectedUrl;
                         // document.location.reload();
                         document.getElementById('form_userName').value = username;
                         document.getElementById('form_pass').value = password;
 
-                        $('#second_login').submit();
+                        // $('#second_login').submit();
                     }
                     else if(response == "nok2") {
                         $("#loginErr").empty().append('حساب کاربری شما غیر فعال شده است');

@@ -16,6 +16,7 @@ class VerifyCsrfToken extends BaseVerifier
         'notifyFlight',
         'uploadExcels',
         'doUploadExcels',
+        'login2'
 //        'checkLogin'
     ];
 }
