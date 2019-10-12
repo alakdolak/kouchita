@@ -1555,7 +1555,6 @@ class HomeController extends Controller
     public function checkLogin() {
 
         if(Auth::check()) {
-            dd('1');
             return \redirect()->back();
         }
         else{
@@ -1570,8 +1569,8 @@ class HomeController extends Controller
 
                     $user = Auth::user();
                     if ($user->status != 0) {
+
                         if(!Auth::check()) {
-                            dd('2');
                             Auth::login($user);
                         }
                         return \redirect()->back();
