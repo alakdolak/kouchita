@@ -1532,7 +1532,7 @@ class HomeController extends Controller
 
             $credentials  = ['username' => $username, 'password' => $password];
 
-            if (Auth::attempt($credentials)) {
+            if (Auth::attempt($credentials, true)) {
                 if (Auth::user()->status != 0) {
                     RetrievePas::whereUId(Auth::user()->id)->delete();
                     echo "ok";
