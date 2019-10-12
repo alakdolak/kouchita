@@ -24,6 +24,24 @@
     }
 </style>
 
+<style>
+
+    .squareDiv {
+        height: 35vh;
+        color: #30b4a6 !important;
+        background-color: white;
+        border: 1px solid lightgray;
+        display: inline-block;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .squareDiv:hover {
+        border:2px solid #30b4a6;
+    }
+
+</style>
+
 {{--<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyAJDZx6o16HhpxY94dimKjwiJyQSAGK14k"></script>--}}
 {{--<script src="{{URL::asset('js/getLocation.js')}}"></script>--}}
 
@@ -140,7 +158,7 @@
             float: right;
         }
 
-        .icons {
+        .phoneIcons {
             font-family: 'Shazde_Regular2' !important;
             font-size: 40px;
             direction: rtl;
@@ -158,7 +176,7 @@
         <div class="modal-card-body row">
             <input style="direction: rtl" onkeyup="searchForMobile(event)" id="mobilePlaceName" class="inputDiv" placeholder="به کجا می روید؟">
             <input type="hidden" id="mobilePlaceId">
-            <div class="icons location" style="float: right"></div>
+            <div class="phoneIcons location" style="float: right"></div>
             <div class="haminHavali">همین حوالی</div>
             <div style="clear: both"></div>
             <div id="partialResult" style="max-height: 180vh; overflow: auto; margin: 2% 5% 2% 0;"></div>
@@ -173,18 +191,18 @@
         <div class="modal-card-body row" style="height: 150vh">
             <input class="inputDiv" placeholder="به کجا می روید؟" required>
             <input class="inputDiv" placeholder="در کجا؟">
-            <div class="icons hotel"></div>
-            <div class="icons ticket"></div>
-            <div class="icons atraction"></div>
-            <div class="icons restaurant"></div>
-            <div class="icons soghat"></div>
-            <div class="icons ghazamahali"></div>
-            <div class="icons majara"></div>
-            <div class="icons sanaye"></div>
-            <div class="icons lebas"></div>
-            <div class="icons boom"></div>
-            <div class="icons estelah"></div>
-            <div class="icons location" style="float: right"></div>
+            <div class="phoneIcons hotel"></div>
+            <div class="phoneIcons ticket"></div>
+            <div class="phoneIcons atraction"></div>
+            <div class="phoneIcons restaurant"></div>
+            <div class="phoneIcons soghat"></div>
+            <div class="phoneIcons ghazamahali"></div>
+            <div class="phoneIcons majara"></div>
+            <div class="phoneIcons sanaye"></div>
+            <div class="phoneIcons lebas"></div>
+            <div class="phoneIcons boom"></div>
+            <div class="phoneIcons estelah"></div>
+            <div class="phoneIcons location" style="float: right"></div>
             <div onclick="getCurrentLocation()" class="haminHavali">همین حوالی</div>
         </div>
     </div>
