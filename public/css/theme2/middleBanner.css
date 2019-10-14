@@ -54,6 +54,19 @@
     margin-top: 20px;
 }
 
+.squareDiv {
+    height: 35vh;
+    color: #30b4a6 !important;
+    background-color: white;
+    border: 1px solid lightgray;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+}
+.squareDiv:hover {
+    border:2px solid #30b4a6;
+}
+
 .squareDiv > .phoneIcon::before {
     color: #30b4a6 !important;
 }
