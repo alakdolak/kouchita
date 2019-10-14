@@ -16,6 +16,33 @@
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/cityPage.css?v=1')}}' />
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/mainPageModifiedStyles.css')}}' />
 
+    <script type='text/javascript' src='{{URL::asset('js/jquery_12.js')}}'></script>
+    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/gardeshname.min.css?v=1.1')}}"/>
+
+    <style>
+        footer ul {
+            padding: 0 !important;
+        }
+
+        .content-2col .im-entry {
+            min-height: 15px !important;
+        }
+
+        .widget ul li{
+            list-style: none;
+            margin-bottom: 70px;
+            position: relative;
+            margin-top: 20px;
+        }
+        .homepage_shelves_widget{
+            min-height: 0px;
+        }
+        .image_wrapper{
+            height: 130px;
+        }
+    </style>
+
+
     <script>
         var searchDir = '{{route('heyYou')}}';
         var kindPlaceId = '{{$kindPlaceId}}';
@@ -50,24 +77,12 @@
         <div style="margin-top: 20px; font-size: 1.5em; font-weight: 800">شهر {{$city->name}}</div>
     </div>
     <div class="row">
-        <div class="col-lg-4" style="text-align: right;">
-            <div style="font-weight: 500">تازه های گردشنامه</div>
-            <div style="position: relative">
-                <div style="width: 100%; height: 40vh;">
-
-                </div>
-                <div style="position: absolute; bottom: 0; padding: 10px;">
-                    <div style="font-size: 0.9em; padding: 2px; background-color: gray; width: 25%; text-align: center; margin: 5px; border-radius: 3px; opacity: .9; color: white;">
-                        استان {{$city->state}}
-                    </div>
-                    <div>
-                        مناره گسکر یا مناره بازار، یکی از زیباترین و با شکوه ترین بناهای به جا مانده از دوره سلجوقی
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="col-lg-8 border-left-grey">
             <div class="row" style="background-color: #e5e5e5; margin-right: 0;">
+                <div class="col-xs-7">
+                    <img src="{{URL::asset('_images/city/'.$city->image)}}" style="width: 100%">
+                </div>
+
                 <div class="col-xs-5" style="padding: 15px 0 !important;">
                     <div class="col-xs-12">
                         <a class="col-xs-4 cityPageLittleMenu" href="{{route('mainMode', ['mode' => 'amaken'])}}" style="color: #30b4a6 !important;">
@@ -127,19 +142,184 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-7">
-                    <img src="{{URL::asset('_images/city/'.$city->image)}}" style="width: 100%">
-                </div>
             </div>
-            <div style="padding: 25px; text-align: justify">
+            <div style="padding: 25px; text-align: justify; font-size: 18px;">
                 {{$city->description}}
+            </div>
+
+            <div ng-app="mainApp">
+                @include('layouts.mainSuggestions')
+            </div>
+        </div>
+
+        <div class="col-lg-4" style="text-align: right;">
+            {{--<div style="font-weight: 500"></div>--}}
+            <h4>
+                تازه های گردشنامه
+            </h4>
+            <div style="position: relative">
+                <?php $i = 0; ?>
+                @foreach($cityPost as $post)
+                    @if($i == 0)
+                        <article class="im-article grid-carousel grid-2 row post type-post status-publish format-standard has-post-thumbnail hentry">
+                            <div class="im-entry-thumb">
+                                <a class="im-entry-thumb-link" href="{{route('gardeshnameInner', ['postId' => $post->id])}}" title="{{$post->title}}">
+                                    <img class="lazy-img" src="{{$post->pic}}"  alt="{{$post->alt}}" style="opacity: 1; width: 100%">
+                                </a>
+                                <div class="im-entry-header">
+                                    <div class="im-entry-category">
+                                        <div class="iranomag-meta clearfix">
+                                            <div class="cat-links im-meta-item">
+                                                <a style="background-color: {{$post->backColor}}; color: {{$post->categoryColor}} !important;" href="" title="{{$post->category}}">{{$post->category}}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h2 class="im-entry-title">
+                                        <a style="color: {{$post->color}}" href="" rel="bookmark">{{$post->title}}</a>
+                                    </h2>
+                                    <div class="im-entry-footer">
+                                        <div class="iranomag-meta clearfix">
+                                            <div class="posted-on im-meta-item">
+                                                <span class="entry-date published updated">{{$post->date}}</span>
+                                            </div>
+                                            <div class="comments-link im-meta-item">
+                                                <a href="">
+                                                    <i class="fa fa-comment-o"></i>
+                                                    {{$post->msgs}}
+                                                </a>
+                                            </div>
+                                            <div class="author vcard im-meta-item">
+                                                <a class="url fn n">
+                                                    <i class="fa fa-user"></i>{{$post->username}}
+                                                </a>
+
+                                            </div>
+                                            <div class="post-views im-meta-item">
+                                                <i class="fa fa-eye"></i>{{$post->seen}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    @else
+                        @if($i == 1)
+                            <div class="col-md-12">
+                                <div class="widget">
+                                    <ul>
+                        @endif
+                        <li class="widget-10104im-widgetclearfix">
+                            <figure class="im-widget-thumb">
+                                <a href="" title="{{$post->title}}">
+                                    <img src="{{$post->pic}}" alt="{{$post->alt}}"/>
+                                </a>
+                            </figure>
+                            <div class="im-widget-entry">
+                                <header class="im-widget-entry-header">
+                                    <h4 class='im-widget-entry-title'>
+                                        <a style="color: {{$post->color}} !important;" href='' title='{{$post->title}}'>{{$post->title}}</a>
+                                    </h4>
+                                </header>
+                                <div class="iranomag-meta clearfix">
+                                    <div class="posted-on im-meta-item">
+                                        <span class="entry-date published updated">{{$post->date}}</span>
+                                    </div>
+                                    <div class="comments-link im-meta-item">
+                                        <a href="">
+                                            <i class="fa fa-comment-o"></i>{{$post->msgs}}
+                                        </a>
+                                    </div>
+                                    <div class="author vcard im-meta-item">
+                                        <a class="url fn n">
+                                            <i class="fa fa-user"></i>{{$post->username}}
+                                        </a>
+                                    </div>
+                                    <div class="post-views im-meta-item">
+                                        <i class="fa fa-eye"></i>{{$post->seen}}
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        @if($i == count($cityPost) - 1)
+                                    </ul>
+                                </div>
+                            </div>
+                        @endif
+                    @endif
+
+                    <?php $i++; ?>
+
+                @endforeach
+
+                <div class="row" style="border-bottom: solid black 2px; margin-bottom: 10px;">
+                    <div class="col-md-12" style="text-align: center; padding: 20px;">
+                        <button class="btn btn-success" style="background-color: #30b4a6; border-radius: 10px; font-size: 20px;">مشاهده همه مقالات</button>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <h4>
+                        بیشترین بازدید
+                    </h4>
+                </div>
+                <?php $i = 0; ?>
+                @foreach($mostSeenPosts as $post)
+                    @if($i == 0)
+                        <div class="col-md-12">
+                            <div class="widget">
+                                <ul>
+                    @endif
+                    <li class="widget-10104im-widgetclearfix">
+                        <figure class="im-widget-thumb">
+                            <a href="" title="{{$post->title}}">
+                                <img src="{{$post->pic}}" alt="{{$post->alt}}"/>
+                            </a>
+                        </figure>
+                        <div class="im-widget-entry">
+                            <header class="im-widget-entry-header">
+                                <h4 class='im-widget-entry-title'>
+                                    <a style="color: {{$post->color}} !important;" href='' title='{{$post->title}}'>{{$post->title}}</a>
+                                </h4>
+                            </header>
+                            <div class="iranomag-meta clearfix">
+                                <div class="posted-on im-meta-item">
+                                    <span class="entry-date published updated">{{$post->date}}</span>
+                                </div>
+                                <div class="comments-link im-meta-item">
+                                    <a href="">
+                                        <i class="fa fa-comment-o"></i>{{$post->msgs}}
+                                    </a>
+                                </div>
+                                <div class="author vcard im-meta-item">
+                                    <a class="url fn n">
+                                        <i class="fa fa-user"></i>{{$post->username}}
+                                    </a>
+                                </div>
+                                <div class="post-views im-meta-item">
+                                    <i class="fa fa-eye"></i>{{$post->seen}}
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    @if($i == count($cityPost) - 1)
+                                </ul>
+                            </div>
+                        </div>
+                    @endif
+
+                <?php $i++; ?>
+
+                @endforeach
+
+                <div class="row" style="margin-bottom: 10px;">
+                    <div class="col-md-12" style="text-align: center; padding: 20px;">
+                        <button class="btn btn-success" style="background-color: #30b4a6; border-radius: 10px; font-size: 20px;">مشاهده همه مقالات</button>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
-</div>
-
-<div ng-app="mainApp">
-    @include('layouts.mainSuggestions')
 </div>
 
 @include('layouts.placeFooter')
