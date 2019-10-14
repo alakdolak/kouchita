@@ -1,0 +1,1 @@
+ALTER TABLE `post` ADD `cityId` INT(11) NULL DEFAULT NULL AFTER `description`;

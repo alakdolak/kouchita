@@ -41,12 +41,12 @@
 <div class="ui_container" style="background-color: white; direction: rtl;">
     <div class="border-bottom-grey" style="text-align: right; background-color: white; padding: 5px 0px 7px;">
         <div style="font-size: 0.8em; font-weight: 500">
-            <div style="display: inline-block">شهر مقصد</div>
+            <div style="display: inline-block">شهر {{$city->name}}</div>
             <div style="display: inline-block"> < </div>
-            <div style="display: inline-block">نام استان</div>
+            <div style="display: inline-block">استان {{$city->state}}</div>
             <div class="ui_close_x" style="left: 30px !important; top: 15px !important;"></div>
         </div>
-        <div style="margin-top: 20px; font-size: 1.5em; font-weight: 800">شهر مقصد</div>
+        <div style="margin-top: 20px; font-size: 1.5em; font-weight: 800">شهر {{$city->name}}</div>
     </div>
     <div class="row">
         <div class="col-lg-4" style="text-align: right;">
@@ -57,7 +57,7 @@
                 </div>
                 <div style="position: absolute; bottom: 0; padding: 10px;">
                     <div style="font-size: 0.9em; padding: 2px; background-color: gray; width: 25%; text-align: center; margin: 5px; border-radius: 3px; opacity: .9; color: white;">
-                        استان گیلان
+                        استان {{$city->state}}
                     </div>
                     <div>
                         مناره گسکر یا مناره بازار، یکی از زیباترین و با شکوه ترین بناهای به جا مانده از دوره سلجوقی
@@ -126,11 +126,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-7" style="background: url('{{URL::asset('images/majarajooi.jpg')}}')">
+                <div class="col-xs-7">
+                    <img src="{{URL::asset('_images/city/'.$city->image)}}" style="width: 100%">
                 </div>
             </div>
-            <div>
-                 لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگر ها و متون بلکه روزنامه و مجله در ستون و سطر آنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز وکاربرد های متنوع با هدف بهبود ابزار های کاربردی می باشد. کتاب های زیادی در شصت و سه درصد گزشته، را می طلبد
+            <div style="padding: 25px; text-align: justify">
+                {{$city->description}}
             </div>
         </div>
     </div>
