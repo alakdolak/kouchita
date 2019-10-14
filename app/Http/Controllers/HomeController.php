@@ -38,24 +38,16 @@ use PHPMailer\PHPMailer\PHPMailer;
 class HomeController extends Controller
 {
 
-    public function cityPage($city = '') {
+    public function cityPage($city) {
 
-        if($city == '') {
-            $city = Cities::where('name', 'تهران')->first();
-        }
-        else {
-            $city = Cities::where('name', $city)->first();
-
-            if ($city == null)
-                $city = Cities::where('name', 'تهران')->first();
+        $city = Cities::whereName($city)->first();
+        if($city == null || $city->description == null) {
+            return Redirect::route('home');
         }
 
-        $city->state = State::find($city->stateId)->name;
-
-        $today = getToday()["date"];
+        $city->state = State::whereId($city->stateId)->name;
 
         return view('cityPage', compact(['city']));
-
     }
 
     public function abbas()

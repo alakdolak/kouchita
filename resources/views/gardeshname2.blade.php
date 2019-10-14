@@ -1,7 +1,7 @@
 <?php $placeMode = "ticket";
 $state = 'اصفهان';
 $kindPlaceId = 10; ?>
-        <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     @include('layouts.topHeader')
@@ -20,16 +20,6 @@ $kindPlaceId = 10; ?>
     </style>
 
     <script type='text/javascript' src='{{URL::asset('js/jquery_12.js')}}'></script>
-
-    <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-        ga('create', 'UA-112233400-1', 'auto');
-        ga('require', 'displayfeatures');
-        ga('send', 'pageview');
-    </script>
 
     <style>
 
@@ -62,15 +52,12 @@ $kindPlaceId = 10; ?>
                             <button id="off-canvas-on" class="off-canvas-on" ><i class="fa fa-navicon"></i></button>
                         </div>
                         <div class="im-mobile-logo col-sm-8 col-xs-8">
-                            <a href="/" rel="home">
-                                <img class="im-header-logo-image" src="https://gardeshname.shazdemosafer.com/wp-content/uploads/2016/08/logo-shazde.jpg" alt="شازده مسافر">
-                            </a>
                         </div>
                         <div class="im-search im-slide-block col-sm-2 col-xs-2">
                             <div class="search-btn slide-btn">
                                 <i class="fa fa-search"></i>
                                 <div class="im-search-panel im-slide-panel">
-                                    <form action="https://gardeshname.shazdemosafer.com" name="searchform" method="get">
+                                    <form action="" name="searchform" method="get">
                                         <fieldset class="search-fieldset">
                                             <div class="input-group">
                                                 <input type="search" class="form-control" name="s" placeholder="عبارت جستجو را اینجا وارد کنید..." required />
@@ -79,14 +66,15 @@ $kindPlaceId = 10; ?>
             </span>
                                             </div>
                                         </fieldset>
-                                    </form>                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </header>
         </div>
-        <div class="container"><div class="im-header-mobile-ad col-md-12 text-center"><p><img class="aligncenter size-full wp-image-4151" src="https://gardeshname.shazdemosafer.com/wp-content/uploads/2016/08/C._Flammarion_-_Universum_-_Paris_1888_-_Colored_Heliocentric_Panorama2-2.jpg" alt="شازده مسافر" width="1600" height="365" /></p></div></div></div>
+        <div class="container"><div class="im-header-mobile-ad col-md-12 text-center"><p><img class="aligncenter size-full wp-image-4151" src="{{URL::asset('images/gardeshname_banner.jpg')}}" alt="شازده مسافر" width="1600" height="365" /></p></div></div></div>
 
     <div class="hidden visible-sm visible-xs">
         <div id="im-header-offconvas" class="im-header-offconvas">
@@ -670,14 +658,9 @@ $kindPlaceId = 10; ?>
 
     <a href="#" id="back-to-top" title="بازگشت به ابتدای صفحه"><i class="fa fa-arrow-up"></i></a>
 
-    <script type='text/javascript' src='https://gardeshname.shazdemosafer.com/wp-content/themes/iranomag/assets/js/bundle.min.js'></script>
-    <script type='text/javascript'>
-        /* <![CDATA[ */
-        var imAjax = {"ajaxurl":"https:\/\/gardeshname.shazdemosafer.com\/wp-admin\/admin-ajax.php"};
-        /* ]]> */
-    </script>
-    <script type='text/javascript' src='https://gardeshname.shazdemosafer.com/wp-content/themes/iranomag/assets/js/min/voter-script.min.js'></script>
-    <script type='text/javascript' src='https://gardeshname.shazdemosafer.com/wp-content/plugins/js_composer/assets/js/dist/js_composer_front.min.js?ver=4.12'></script>
+    <script type='text/javascript' src='{{URL::asset('js/gardeshname.js')}}'></script>
+
+
     <script type="text/javascript">
         jQuery('.lazy-img').unveil(300, function () {
             "use strict";
