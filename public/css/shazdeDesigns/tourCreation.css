@@ -1,0 +1,185 @@
+/*1st box of styles*/
+.textTitle {
+    font-size: 1.3em;
+    font-weight: 900;
+    color: #92321b;
+    margin: 5px 0;
+}
+
+.class_passengerPane {
+    text-align: center !important;
+    background-color: white;
+    position: absolute;
+    padding: 10px;
+    top: 25px;
+    left: 0;
+    border-radius: 5px;
+}
+
+.class_passengerOldPane {
+    text-align: center !important;
+    position: absolute;
+    background-color: #ebebeb;
+    padding: 10px;
+    top: 45px;
+    left: 0;
+    border-radius: 5px;
+    width: 200px;
+}
+
+.labelEdit {
+    position: absolute;
+    right: 20px;
+    top: 7px;
+    font-size: 0.8em;
+    font-weight: 100;
+}
+
+.numBetweenMinusPlusBtn {
+    float: right;
+    margin-top: -2px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.minusPlusBtn {
+    width: 17px;
+    height: 17px;
+    cursor: pointer;
+    display: inline-block;
+    float: right;
+    background-image: url('../../images/icons.jpg');
+    background-size: 72px;
+}
+
+@media screen and (max-width: 600px) {
+    .minusPlusBtn {
+        width: 44px;
+        height: 44px;
+        background-size: 185px;
+    }
+}
+
+/*start styling*/
+
+body {
+    background-color: #eeeeee;
+}
+
+.ppr_priv_hr_atf_north_star_nostalgic {
+    margin-bottom: 0 !important;
+}
+
+.atf_meta_and_photos_wrapper {
+    background-color: #dedede;
+}
+
+#termsAndConditionMainBox {
+    background-color: #eeeeee;
+    padding: 30px 0;
+}
+
+.easyClear::after {
+    display: none;
+}
+
+DIV.ppr_rup.ppr_priv_hr_atf_north_star_nostalgic .atf_meta_and_photos_wrapper::before {
+    display: none;
+}
+
+.tourCreationMainTitle {
+    font-size: 17px;
+    color: black;
+    width: 100%;
+    display: inline-block;
+    margin-top: 30px;
+}
+
+.circleBase {
+    border-radius: 50%;
+    /*behavior: url(PIE.htc); !* remove if you don't care about IE8 *!*/
+}
+
+.type2 {
+    width: 45px;
+    height: 45px;
+    background: #ccc;
+    /*border: 3px solid #000;*/
+    /*position: absolute;*/
+}
+
+.tourAgencyLogo {
+    margin-top: 15px;
+    width: 65px;
+    height: 65px;
+    display: inline-block;
+}
+
+#tourAgencyName {
+    display: inline-block;
+    color: black;
+    font-size: 14px;
+    position: absolute;
+    top: 70px;
+    right: 90px;
+}
+
+#StartCreationTourBox {
+    direction: rtl;
+    text-align: justify;
+    display: inline-block;
+    margin: 15px 0;
+    line-height: 1.8;
+}
+
+#preStartText {
+    line-height: 3;
+    font-weight: 700;
+    font-size: 18px;
+    display: inline-block;
+}
+
+#termsAndConditionAcceptBox {
+    padding: 25px 20px;
+    text-align: center;
+    background-color: white;
+    display: inline-block;
+}
+
+#termsAndConditionText {
+    display: inline-block;
+    width: 70%;
+    float: right;
+}
+
+#termsAndConditionText > span {
+    width: 100%;
+    display: inline-block;
+    text-align: justify;
+    direction: rtl;
+}
+
+#termsAndConditionText > span:nth-child(1) {
+    font-weight: 700;
+    margin-bottom: 5px;
+    font-size: 18px;
+}
+
+#termsAndConditionText > span:not(:nth-child(1)) {
+    color: darkred;
+    font-size: 13px;
+}
+
+#termsAndConditionBtn {
+    display: inline-block;
+    background-color: #4dc7bc;
+    width: 150px;
+    color: white;
+    line-height: 2;
+    font-size: 15px;
+    margin-top: 3px;
+}
+
+footer {
+    margin-top: 0 !important;
+}

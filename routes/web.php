@@ -10,6 +10,10 @@ Route::get('gardeshname', function(){
     return view('gardeshname');
 });
 
+Route::get('tourCreation', function(){
+    return view('tour/tourCreation');
+});
+
 Route::get('gardeshname2/{page?}', 'PostController@gardeshname')->name('gardeshname');
 
 Route::get('gardeshnameInner/{postId}', ['as' => 'gardeshnameInner', 'uses' => 'PostController@gardeshnameInner']);

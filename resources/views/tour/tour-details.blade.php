@@ -61,7 +61,6 @@
     <link rel="stylesheet" href="{{URL::asset('css/theme2/help.css?v=1')}}">
     <link rel="stylesheet" href="{{URL::asset('css/theme2/cropper.css')}}">
     <link rel="stylesheet" href="{{URL::asset('css/theme2/tourDetails.css')}}">
-    {{--<link rel="stylesheet" href="{{URL::asset('css/theme2/hotelDetail.css')}}">--}}
 
 @stop
 
@@ -79,8 +78,7 @@
     </style>
 
     {{--alarm--}}
-    <span class="ui_overlay ui_modal editTags getAlarm"
-          style="padding: 10px 10px 1px !important; z-index: 201; display: none">
+    <span class="ui_overlay ui_modal editTags getAlarm"style="padding: 10px 10px 1px !important; z-index: 201; display: none">
         <div class="shTIcon clsIcon" style="float: left; color: #4DC7BC; font-size: 2em"></div>
         <div class="alarmHeaderText"> آیا می خواهید کمترین قیمت ها را به شما اطلاع دهیم </div>
         <div class="alarmSubHeaderText"> هنگامی که قیمت پرواز های </div>
