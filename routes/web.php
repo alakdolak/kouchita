@@ -152,7 +152,7 @@ Route::group(array('middleware' => ['throttle:30']), function () {
 
     Route::any('searchForStates', array('as' => 'searchForStates', 'uses' => 'HomeController@searchForStates'));
 
-    Route::get('cityPage', 'HomeController@cityPage');
+    Route::get('cityPage/{city}', ['as' => 'cityPage', 'uses' => 'HomeController@cityPage']);
 
     Route::get('abbas', 'HomeController@abbas');
 

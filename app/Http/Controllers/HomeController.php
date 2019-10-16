@@ -16,6 +16,8 @@ use App\models\LogModel;
 use App\models\Majara;
 use App\models\Message;
 use App\models\OpOnActivity;
+use App\models\Post;
+use App\models\PostComment;
 use App\models\Report;
 use App\models\ReportsType;
 use App\models\Restaurant;
@@ -24,6 +26,7 @@ use App\models\State;
 use App\models\Train;
 use App\models\User;
 use App\models\saveApiInfo;
+use Carbon\Carbon;
 use Exception;
 use Google_Client;
 use Google_Service_Oauth2;
@@ -38,8 +41,53 @@ use PHPMailer\PHPMailer\PHPMailer;
 class HomeController extends Controller
 {
 
-    public function cityPage() {
-        return view('cityPage');
+    public function cityPage($city) {
+
+        $today = getToday()["date"];
+
+        $city = Cities::whereName($city)->first();
+        if($city == null || $city->description == null) {
+            return Redirect::route('home');
+        }
+
+        $city->state = State::whereId($city->stateId)->name;
+
+        $cityPost = Post::where('cityId', $city->id)->where('date', '<=', $today)->orderBy('date','ASCD')->take(2)->get();
+        if(count($cityPost) < 5){
+            $num = 5 - count($cityPost);
+            $cityPost2 = Post::where('date', '<=', $today)->orderBy('date','ASCD')->take($num)->get();
+            if(count($cityPost) == 0)
+                $cityPost = $cityPost2;
+            else
+                $cityPost = array_merge($cityPost, $cityPost2);
+        }
+
+        $lastMonth = Carbon::now()->subMonth();
+        $mostSeenPosts = Post::where('date', '<=', $today)->where('created_at', '>=', $lastMonth)->orderBy('seen', 'ASCD')->take(5)->get();
+
+        foreach ($cityPost as $post) {
+            $post->pic = URL::asset('posts/' . $post->pic);
+            $date0 =substr($post->date,0,4);
+            $date1 = substr($post->date,4,2);
+            $date2 = substr($post->date,6,2);
+
+            $post->date = $date0 . '/' . $date1 . '/' . $date2;
+            $post->category = getPostTranslated($post->category);
+            $post->msgs = PostComment::wherePostId($post->id)->whereStatus(true)->count();
+        }
+        foreach ($mostSeenPosts as $post) {
+            $post->pic = URL::asset('posts/' . $post->pic);
+
+            $date0 =substr($post->date,0,4);
+            $date1 = substr($post->date,4,2);
+            $date2 = substr($post->date,6,2);
+
+            $post->date = $date0 . '/' . $date1 . '/' . $date2;
+            $post->category = getPostTranslated($post->category);
+            $post->msgs = PostComment::wherePostId($post->id)->whereStatus(true)->count();
+        }
+
+        return view('cityPage', compact(['city', 'cityPost', 'mostSeenPosts']));
     }
 
     public function abbas()
