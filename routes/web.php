@@ -14,8 +14,12 @@ Route::get('tourCreationFirstPage', function(){
     return view('tour/tourCreationFirstPage');
 });
 
-Route::get('tourCreationMainPage', function(){
-    return view('tour/tourCreationMainPage');
+Route::get('tourCreationGeneralInfo', function(){
+    return view('tour/tourCreationGeneralInfo');
+});
+
+Route::get('tourCreationSpecificInfo', function(){
+    return view('tour/tourCreationSpecificInfo');
 });
 
 Route::get('gardeshname2/{page?}', 'PostController@gardeshname')->name('gardeshname');

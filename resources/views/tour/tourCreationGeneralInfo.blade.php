@@ -34,7 +34,7 @@ $kindPlaceId = 10; ?>
             <div class="atf_header ui_container is-mobile full_width">
 
                 <div class="ppr_rup ppr_priv_location_detail_header relative-position">
-                    <h1 id="HEADING"  property="name">
+                    <h1 id="HEADING" property="name">
                         <b class="tourCreationMainTitle">شما در حال ایجاد یک تور جدید هستید</b>
                     </h1>
                     <div class="tourAgencyLogo circleBase type2"></div>
@@ -122,14 +122,14 @@ $kindPlaceId = 10; ?>
                                     $('#destinationListTourCreation').toggle()
                                 });
                                 $('#addNewDestinationTourCreation').click(function () {
-                                    $('#addNewDestinationPopUpTourCreation').toggle()
+                                    $('#addNewDestinationTourCreationBox').toggle()
                                 });
                             })
                         </script>
                     </div>
                     <div>
                         <input ng-model="sort" type="checkbox" id="c01" value="rate"/>
-                        <label for="c01" >
+                        <label for="c01">
                             <span></span>
                         </label>
                         <span id="cityTourCheckBoxLabel">
@@ -137,7 +137,7 @@ $kindPlaceId = 10; ?>
                         </span>
                     </div>
                 </div>
-                <div id="addNewDestinationTourCreation" >
+                <div id="addNewDestinationTourCreationBox" class="hidden-div">
                     <div id="addNewDestinationTitleTourCreation">
                         اضافه کردن مکان جدید
                     </div>
@@ -313,19 +313,21 @@ $kindPlaceId = 10; ?>
                         </label>
 
                         <script>
-                            $(document).ready(function(){
-                                $(".tourLevelIcons").mouseenter(function(){
+                            $(document).ready(function () {
+                                $(".tourLevelIcons").mouseenter(function () {
                                     $(this).css("background-color", "#4DC7BC"),
-                                        $(this).css("color" , "white");
+                                        $(this).css("color", "white");
                                 });
-                                $(".tourLevelIcons").mouseleave(function(){
+                                $(".tourLevelIcons").mouseleave(function () {
                                     $(this).css("background-color", "#e5e5e5"),
-                                        $(this).css("color" , "black");
+                                        $(this).css("color", "black");
                                 });
                             });
                         </script>
                     </center>
-                    <div class="inboxHelpSubtitle">انتخاب گزینه‌های نابینایان، و دانش‌آموزان با گزینه‌های دیگر مجاز می‌باشد.</div>
+                    <div class="inboxHelpSubtitle">انتخاب گزینه‌های نابینایان، و دانش‌آموزان با گزینه‌های دیگر مجاز
+                        می‌باشد.
+                    </div>
                 </div>
             </div>
             <div class="ui_container">
@@ -336,7 +338,7 @@ $kindPlaceId = 10; ?>
                     <div class="concentrationChoseTourCreation">
                         <div class="col-xs-2">
                             <input ng-model="sort" type="checkbox" id="c40" value="rate"/>
-                            <label for="c40" >
+                            <label for="c40">
                                 <span></span>
                             </label>
                             <span class="concentrationKindTourCreation">
@@ -345,7 +347,7 @@ $kindPlaceId = 10; ?>
                         </div>
                         <div class="col-xs-2">
                             <input ng-model="sort" type="checkbox" id="c41" value="rate"/>
-                            <label for="c41" >
+                            <label for="c41">
                                 <span></span>
                             </label>
                             <span class="concentrationKindTourCreation">
@@ -354,7 +356,7 @@ $kindPlaceId = 10; ?>
                         </div>
                         <div class="col-xs-2">
                             <input ng-model="sort" type="checkbox" id="c42" value="rate"/>
-                            <label for="c42" >
+                            <label for="c42">
                                 <span></span>
                             </label>
                             <span class="concentrationKindTourCreation">
@@ -363,7 +365,7 @@ $kindPlaceId = 10; ?>
                         </div>
                         <div class="col-xs-2">
                             <input ng-model="sort" type="checkbox" id="c43" value="rate"/>
-                            <label for="c43" >
+                            <label for="c43">
                                 <span></span>
                             </label>
                             <span class="concentrationKindTourCreation">
@@ -372,7 +374,7 @@ $kindPlaceId = 10; ?>
                         </div>
                         <div class="col-xs-2">
                             <input ng-model="sort" type="checkbox" id="c44" value="rate"/>
-                            <label for="c44" >
+                            <label for="c44">
                                 <span></span>
                             </label>
                             <span class="concentrationKindTourCreation">
@@ -381,7 +383,7 @@ $kindPlaceId = 10; ?>
                         </div>
                         <div class="col-xs-2">
                             <input ng-model="sort" type="checkbox" id="c45" value="rate"/>
-                            <label for="c45" >
+                            <label for="c45">
                                 <span></span>
                             </label>
                             <span class="concentrationKindTourCreation">
@@ -390,7 +392,7 @@ $kindPlaceId = 10; ?>
                         </div>
                         <div class="col-xs-2">
                             <input ng-model="sort" type="checkbox" id="c46" value="rate"/>
-                            <label for="c46" >
+                            <label for="c46">
                                 <span></span>
                             </label>
                             <span class="concentrationKindTourCreation">
@@ -399,7 +401,7 @@ $kindPlaceId = 10; ?>
                         </div>
                         <div class="col-xs-2">
                             <input ng-model="sort" type="checkbox" id="c47" value="rate"/>
-                            <label for="c47" >
+                            <label for="c47">
                                 <span></span>
                             </label>
                             <span class="concentrationKindTourCreation">
@@ -408,7 +410,7 @@ $kindPlaceId = 10; ?>
                         </div>
                         <div class="col-xs-2">
                             <input ng-model="sort" type="checkbox" id="c48" value="rate"/>
-                            <label for="c48" >
+                            <label for="c48">
                                 <span></span>
                             </label>
                             <span class="concentrationKindTourCreation">
@@ -417,7 +419,7 @@ $kindPlaceId = 10; ?>
                         </div>
                         <div class="col-xs-2">
                             <input ng-model="sort" type="checkbox" id="c49" value="rate"/>
-                            <label for="c49" >
+                            <label for="c49">
                                 <span></span>
                             </label>
                             <span class="concentrationKindTourCreation">
@@ -425,7 +427,9 @@ $kindPlaceId = 10; ?>
                             </span>
                         </div>
                     </div>
-                    <div class="inboxHelpSubtitle">از بین گزینه‌های فوقمواردی را که بهتر تمرکز تور شما را بیان می‌کند، انتخاب نمایید.</div>
+                    <div class="inboxHelpSubtitle">از بین گزینه‌های فوقمواردی را که بهتر تمرکز تور شما را بیان می‌کند،
+                        انتخاب نمایید.
+                    </div>
                 </div>
             </div>
             <div class="ui_container">
@@ -436,7 +440,7 @@ $kindPlaceId = 10; ?>
                     <div class="tourTypeChoseChoseTourCreation">
                         <div class="col-xs-2">
                             <input ng-model="sort" type="checkbox" id="c50" value="rate"/>
-                            <label for="c50" >
+                            <label for="c50">
                                 <span></span>
                             </label>
                             <span class="tourTypeChoseTourCreation">
@@ -445,7 +449,7 @@ $kindPlaceId = 10; ?>
                         </div>
                         <div class="col-xs-2">
                             <input ng-model="sort" type="checkbox" id="c51" value="rate"/>
-                            <label for="c51" >
+                            <label for="c51">
                                 <span></span>
                             </label>
                             <span class="tourTypeChoseTourCreation">
@@ -454,7 +458,7 @@ $kindPlaceId = 10; ?>
                         </div>
                         <div class="col-xs-2">
                             <input ng-model="sort" type="checkbox" id="c52" value="rate"/>
-                            <label for="c52" >
+                            <label for="c52">
                                 <span></span>
                             </label>
                             <span class="tourTypeChoseTourCreation">
@@ -463,7 +467,7 @@ $kindPlaceId = 10; ?>
                         </div>
                         <div class="col-xs-2">
                             <input ng-model="sort" type="checkbox" id="c53" value="rate"/>
-                            <label for="c53" >
+                            <label for="c53">
                                 <span></span>
                             </label>
                             <span class="tourTypeChoseTourCreation">
@@ -472,7 +476,7 @@ $kindPlaceId = 10; ?>
                         </div>
                         <div class="col-xs-2">
                             <input ng-model="sort" type="checkbox" id="c54" value="rate"/>
-                            <label for="c54" >
+                            <label for="c54">
                                 <span></span>
                             </label>
                             <span class="tourTypeChoseTourCreation">
@@ -481,7 +485,7 @@ $kindPlaceId = 10; ?>
                         </div>
                         <div class="col-xs-2">
                             <input ng-model="sort" type="checkbox" id="c55" value="rate"/>
-                            <label for="c55" >
+                            <label for="c55">
                                 <span></span>
                             </label>
                             <span class="tourTypeChoseTourCreation">
@@ -490,7 +494,7 @@ $kindPlaceId = 10; ?>
                         </div>
                         <div class="col-xs-2">
                             <input ng-model="sort" type="checkbox" id="c56" value="rate"/>
-                            <label for="c56" >
+                            <label for="c56">
                                 <span></span>
                             </label>
                             <span class="tourTypeChoseTourCreation">
@@ -499,7 +503,7 @@ $kindPlaceId = 10; ?>
                         </div>
                         <div class="col-xs-2">
                             <input ng-model="sort" type="checkbox" id="c57" value="rate"/>
-                            <label for="c57" >
+                            <label for="c57">
                                 <span></span>
                             </label>
                             <span class="tourTypeChoseTourCreation">
@@ -508,7 +512,7 @@ $kindPlaceId = 10; ?>
                         </div>
                         <div class="col-xs-2">
                             <input ng-model="sort" type="checkbox" id="c58" value="rate"/>
-                            <label for="c58" >
+                            <label for="c58">
                                 <span></span>
                             </label>
                             <span class="tourTypeChoseTourCreation">
@@ -517,7 +521,7 @@ $kindPlaceId = 10; ?>
                         </div>
                         <div class="col-xs-2">
                             <input ng-model="sort" type="checkbox" id="c59" value="rate"/>
-                            <label for="c59" >
+                            <label for="c59">
                                 <span></span>
                             </label>
                             <span class="tourTypeChoseTourCreation">
@@ -525,7 +529,8 @@ $kindPlaceId = 10; ?>
                             </span>
                         </div>
                     </div>
-                    <div class="inboxHelpSubtitle">تیپ گردشگران خود را با انتخاب یک یا چند گزینه‌ی فوق، انتخاب نمایید.</div>
+                    <div class="inboxHelpSubtitle">تیپ گردشگران خود را با انتخاب یک یا چند گزینه‌ی فوق، انتخاب نمایید.
+                    </div>
                 </div>
             </div>
             <div class="ui_container">
@@ -541,7 +546,9 @@ $kindPlaceId = 10; ?>
                             </label>
                         </div>
                     </div>
-                    <div class="inboxHelpSubtitle">تورهای خصوصی برای گروه محدودی از مخاطبان برگزار می‌شوند و مخاطبان می‌توانند تجربه‌ای خصوصی داشته باشند.</div>
+                    <div class="inboxHelpSubtitle">تورهای خصوصی برای گروه محدودی از مخاطبان برگزار می‌شوند و مخاطبان
+                        می‌توانند تجربه‌ای خصوصی داشته باشند.
+                    </div>
                     <div class="fullwidthDiv">
                         <div id="tourBestSeasonTitleTourCreation" class="halfWidthDiv">
                             تور شما در چه فصلی بهترین تجربه را در اختیار کاربران قرار می‌دهد؟
@@ -549,7 +556,7 @@ $kindPlaceId = 10; ?>
                         <div id="tourBestSeasonChoseTourCreation" class="halfWidthDiv">
                             <div class="col-xs-3">
                                 <input ng-model="sort" type="checkbox" id="c56" value="rate"/>
-                                <label for="c56" >
+                                <label for="c56">
                                     <span></span>
                                 </label>
                                 <span class="tourTypeChoseTourCreation">
@@ -558,7 +565,7 @@ $kindPlaceId = 10; ?>
                             </div>
                             <div class="col-xs-3">
                                 <input ng-model="sort" type="checkbox" id="c57" value="rate"/>
-                                <label for="c57" >
+                                <label for="c57">
                                     <span></span>
                                 </label>
                                 <span class="tourTypeChoseTourCreation">
@@ -567,7 +574,7 @@ $kindPlaceId = 10; ?>
                             </div>
                             <div class="col-xs-3">
                                 <input ng-model="sort" type="checkbox" id="c58" value="rate"/>
-                                <label for="c58" >
+                                <label for="c58">
                                     <span></span>
                                 </label>
                                 <span class="tourTypeChoseTourCreation">
@@ -576,7 +583,7 @@ $kindPlaceId = 10; ?>
                             </div>
                             <div class="col-xs-3">
                                 <input ng-model="sort" type="checkbox" id="c59" value="rate"/>
-                                <label for="c59" >
+                                <label for="c59">
                                     <span></span>
                                 </label>
                                 <span class="tourTypeChoseTourCreation">
@@ -593,7 +600,8 @@ $kindPlaceId = 10; ?>
         </form>
     </div>
 
-@include('layouts.placeFooter')
+    @include('layouts.placeFooter')
+</div>
 
 </body>
 </html>

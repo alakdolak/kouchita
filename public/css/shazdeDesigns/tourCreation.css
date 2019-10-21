@@ -320,7 +320,7 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     color: #4dc7bc;
 }
 
-#addNewDestinationTourCreation {
+#addNewDestinationTourCreationBox {
     background-color: white;
     z-index: 1;
     direction: rtl;
@@ -340,11 +340,11 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     font-weight: 700;
 }
 
-#addNewDestinationTourCreation > div {
+#addNewDestinationTourCreationBox > div {
     display: inline-block;
 }
 
-#addNewDestinationTourCreation input {
+#addNewDestinationTourCreationBox input {
     width: auto;
 }
 
@@ -360,7 +360,7 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     width: 70px;
 }
 
-#addNewDestinationTourCreation .btn-group-toggle {
+#addNewDestinationTourCreationBox .btn-group-toggle {
     margin: 0 8px;
 }
 
