@@ -222,99 +222,12 @@ Route::group(array('middleware' => ['throttle:30', 'auth', 'adminAccess']), func
 
 Route::group(array('middleware' => ['throttle:30', 'nothing', 'auth', 'adminAccess']), function (){
 
-
     Route::get('test/{c}', array('as' => 'test', 'uses' => 'TestController@start'));
 
     Route::post('testMethod', array('as' => 'testMethod', 'uses' => 'TestController@methodTest'));
-
-    Route::get('addMeta', 'MetaController@selectAddMeta')->name('addMeta');
-
-    Route::get('addMeta/kind={kind}', 'MetaController@selectAddMeta');
-
-    Route::get('addMeta/kind={kind}/id={id}', 'MetaController@addMeta');
-
     Route::post('changeMeta/kind={kind}/id={id}', 'MetaController@changeMeta');
 
-    Route::any('seeActivities', array('as' => 'activities', 'uses' => 'ActivityController@showActivities'));
-
-    Route::any('addActivity', array('as' => 'addActivity', 'uses' => 'ActivityController@addActivity'));
-
-    Route::post('opOnActivity', array('as' => 'opOnActivity', 'uses' => 'ActivityController@opOnActivity'));
-
-    Route::any('descriptions',  array('as' => 'descriptions', 'uses' => 'BlockController@showDescriptions'));
-
-    Route::any('addDescription', array('as' => 'addDescription', 'uses' => 'BlockController@addDescription'));
-
-    Route::post('opOnDescription', array('as' => 'opOnDescription', 'uses' => 'BlockController@opOnDescription'));
-
-    Route::any('places', array('as' => 'places', 'uses' => 'PlaceController@showPlaces'));
-
-    Route::any('addPlace', array('as' => 'addPlace', 'uses' => 'PlaceController@addPlace'));
-
-    Route::post('opOnPlace', array('as' => 'opOnPlace', 'uses' => 'PlaceController@opOnPlace'));
-
-    Route::any('medals', array('as' => 'medals', 'uses' => 'MedalController@showMedals'));
-
-    Route::any('addMedal', array('as' => 'addMedal', 'uses' => 'MedalController@addMedal'));
-
-    Route::post('opOnMedal', array('as' => 'opOnMedal', 'uses' => 'MedalController@opOnMedal'));
-
-    Route::any('levels', array('as' => 'levels', 'uses' => 'LevelController@showLevels'));
-
-    Route::any('addLevel', array('as' => 'addLevel', 'uses' => 'LevelController@addLevel'));
-
-    Route::post('opOnLevel', array('as' => 'opOnLevel', 'uses' => 'LevelController@opOnLevel'));
-
-    Route::get('defaultPics', array('as' => 'defaultPics', 'uses' => 'DefaultPicsController@showPics'));
-
-    Route::any('addPic', array('as' => 'addPic', 'uses' => 'DefaultPicsController@addPic'));
-
-    Route::post('opOnPic', array('as' => 'opOnPic', 'uses' => 'DefaultPicsController@opOnPic'));
-
-    Route::any('ageSentences', array('as' => 'ageSentences', 'uses' => 'HomeController@ageSentences'));
-
-    Route::any('goyeshTags', array('as' => 'goyeshTags', 'uses' => 'GoyeshTagController@tags'));
-
-    Route::any('addGoyeshTag', array('as' => 'addGoyeshTag', 'uses' => 'GoyeshTagController@addTag'));
-
-    Route::post('opOnGoyeshTag', array('as' => 'opOnGoyeshTag', 'uses' => 'GoyeshTagController@opOnTag'));
-
-    Route::any('tags/{mode?}', array('as' => 'tags', 'uses' => 'TagController@tags'));
-
-    Route::any('addTag/{mode}', array('as' => 'addTag', 'uses' => 'TagController@addTag'));
-
-    Route::post('opOnTag/{mode}', array('as' => 'opOnTag', 'uses' => 'TagController@opOnTag'));
-
-    Route::any('picItems/{mode?}', array('as' => 'picItems', 'uses' => 'PicItemsController@picItems'));
-
-    Route::any('addPicItem/{mode}', array('as' => 'addPicItem', 'uses' => 'PicItemsController@addPicItem'));
-
-    Route::post('opOnPicItem/{mode}', array('as' => 'opOnPicItem', 'uses' => 'PicItemsController@opOnPicItem'));
-
-    Route::any('opinions/{mode?}', array('as' => 'opinions', 'uses' => 'OpinionController@opinions'));
-
-    Route::any('addOpinion/{mode}', array('as' => 'addOpinion', 'uses' => 'OpinionController@addOpinion'));
-
-    Route::post('opOnOpinion/{mode}', array('as' => 'opOnOpinion', 'uses' => 'OpinionController@opOnOpinion'));
-
-    Route::any('questions/{mode?}', array('as' => 'questions', 'uses' => 'QuestionController@questions'));
-
-    Route::any('addQuestion/{mode}', array('as' => 'addQuestion', 'uses' => 'QuestionController@addQuestion'));
-
-    Route::post('opOnQuestion/{mode}', array('as' => 'opOnQuestion', 'uses' => 'QuestionController@opOnQuestion'));
-
-    Route::any('placeStyles/{mode?}', array('as' => 'placeStyles', 'uses' => 'PlaceStyleController@placeStyles'));
-
-    Route::post('opOnPlaceStyle/{mode}', array('as' => 'opOnPlaceStyle', 'uses' => 'PlaceStyleController@opOnPlaceStyle'));
-
-    Route::any('reports/{mode?}', array('as' => 'reports', 'uses' => 'ReportController@reports'));
-
-    Route::any('addReport/{mode}', array('as' => 'addReport', 'uses' => 'ReportController@addReport'));
-
-    Route::post('opOnReport/{mode}', array('as' => 'opOnReport', 'uses' => 'ReportController@opOnReport'));
-
     Route::post('findPlace', array('as' => 'findPlace', 'uses' => 'HomeController@findPlace'));
-
 });
 
 Route::group(array('middleware' => ['throttle:30', 'nothing', 'auth', 'controllerAccess']), function (){
@@ -397,13 +310,6 @@ Route::group(array('middleware' => ['throttle:30', 'nothing', 'auth']), function
     Route::post('getTripStyles', array('as' => 'getTripStyles', 'uses' => 'TripStyleController@getTripStyles'));
 
     Route::post('updateTripStyles', array('as' => 'updateTripStyles', 'uses' => 'TripStyleController@updateTripStyles'));
-
-    Route::any('tripStyles', array('as' => 'tripStyles', 'uses' => 'TripStyleController@tripStyles'));
-
-    Route::any('addTripStyle', array('as' => 'addTripStyle', 'uses' => 'TripStyleController@addTripStyle'));
-
-    Route::post('opOnTripStyle', array('as' => 'opOnTripStyle', 'uses' => 'TripStyleController@opOnTripStyle'));
-
 });
 
 Route::group(array('middleware' => ['throttle:30', 'nothing', 'auth']), function () {
@@ -468,7 +374,7 @@ Route::group(array('middleware' => ['throttle:30', 'nothing', 'auth']), function
 
     Route::post('doEditPhoto', array('as' => 'doEditPhoto', 'uses' => 'ProfileController@doEditPhoto'));
 
-    Route::post('getDefaultPics', array('as' => 'defaultPics', 'uses' => 'ProfileController@getDefaultPics'));
+    Route::post('getDefaultPics', array('as' => 'getDefaultPics', 'uses' => 'ProfileController@getDefaultPics'));
 
     Route::post('submitPhoto', array('as' => 'submitPhoto', 'uses' => 'ProfileController@submitPhoto'));
 

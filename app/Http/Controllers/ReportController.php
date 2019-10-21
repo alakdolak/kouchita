@@ -22,58 +22,11 @@ use Illuminate\Support\Facades\View;
 
 class ReportController extends Controller {
 
-    public function reports($mode = "") {
-
-        if($mode == "")
-            return view("reports", array('kindPlaceIds' => Place::all(),
-                'user' => Auth::user()));
-
-        return view("reports", array('reports' => ReportsType::whereKindPlaceId($mode)->get(), 'kindPlaceId' => $mode,
-            'mode2' => 'see', 'user' => Auth::user()));
-    }
-
-    public function addReport($mode) {
-
-        $msg = "";
-
-        if(isset($_POST["addReport"]) && isset($_POST["reportDesc"])) {
-
-            $report = new ReportsType();
-            $report->description = makeValidInput($_POST["reportDesc"]);
-            $report->kindPlaceId = $mode;
-
-            try {
-                $report->save();
-                return Redirect::to(route('reports', ['mode2' => $mode]));
-            }
-            catch (Exception $e) {
-                $msg = "گزارش مورد نظر در سامانه موجود است";
-            }
-        }
-
-        return view("reports", array('reports' => ReportsType::whereKindPlaceId($mode)->get(), 'kindPlaceId' => $mode,
-            'mode2' => 'add', 'user' => Auth::user(), 'msg' => $msg));
-    }
-
-    public function opOnReport($mode) {
-
-        if(isset($_POST["reportId"])) {
-            $reportId = makeValidInput($_POST["reportId"]);
-            ReportsType::destroy($reportId);
-            return Redirect::to(route('reports', ['mode2' => $mode]));
-        }
-
-        return Redirect::to(route('reports', ['mode2' => $mode]));
-    }
-
     public function getReports($page = 1) {
-
-
         $pageTmp = ($page - 1) * 10;
         $logs = LogModel::whereActivityId(Activity::whereName('گزارش')->first()->id)->orderBy('date', 'DESC')->skip($pageTmp)->limit(10)->get();
 
         foreach ($logs as $log) {
-
             $delete = false;
 
             $reports = Report::whereLogId($log->id)->get();
@@ -174,6 +127,5 @@ class ReportController extends Controller {
         return view('reportControl', array('currPage' => $page, 'user' => Auth::user(), 'logs' => $logs, 'total' => LogModel::whereActivityId(Activity::whereName('گزارش')->first()->id)->count()));
 
     }
-    
 
 }

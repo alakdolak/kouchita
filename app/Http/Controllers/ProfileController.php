@@ -122,7 +122,7 @@ class ProfileController extends Controller {
             else
                 $user->picture = $photo->name;
         }
-
+        
         return view('profile', array('activities' => $activities,
             'counts' => $counts, 'totalPoint' => getUserPoints($user->id), 'levels' => Level::orderBy('floor', 'ASC')->get(),
             'userLevels' => nearestLevel($user->id), 'medals' => getMedals($user->id),
