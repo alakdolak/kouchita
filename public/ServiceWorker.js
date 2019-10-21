@@ -2,7 +2,7 @@ const filesToCache = [
     './offlineMode/offline.html',
     './offlineMode/soon.gif'
 ];
-const staticCacheName = 'pages-cache-v2-normal';
+const staticCacheName = 'pages-cache-v1-normal';
 
 self.addEventListener('install', event => {
     console.log('Attempting to install service worker and cache static assets');
@@ -33,7 +33,6 @@ self.addEventListener('activate', event => {
 
 self.addEventListener('fetch', event => {
 
-    if(event.request.mode == 'navigate') {
         event.respondWith(
             caches.match(event.request)
                 .then(response => {
@@ -45,9 +44,14 @@ self.addEventListener('fetch', event => {
 
                     return fetch(event.request)
                 }).catch(error => {
-                return caches.match('./offlineMode/offline.html');
+
+                    console.log(error)
+                    if(event.request.mode == 'navigate') {
+                        return caches.match('./offlineMode/offline.html');
+                    }
+
             })
         );
-    }
+
 });
 

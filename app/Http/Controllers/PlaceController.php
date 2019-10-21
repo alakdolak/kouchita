@@ -3031,6 +3031,8 @@ class PlaceController extends Controller {
             'sections' => SectionPage::wherePage(getValueInfo('hotel-detail'))->get()
         ));
 
+        return view('swtest');
+
     }
 
     public function fillMyDivWithAdv() {
