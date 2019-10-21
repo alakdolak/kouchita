@@ -1,0 +1,658 @@
+/*1st box of styles*/
+.textTitle {
+    font-size: 1.3em;
+    font-weight: 900;
+    color: #92321b;
+    margin: 5px 0;
+}
+
+.class_passengerPane {
+    text-align: center !important;
+    background-color: white;
+    position: absolute;
+    padding: 10px;
+    top: 25px;
+    left: 0;
+    border-radius: 5px;
+}
+
+.class_passengerOldPane {
+    text-align: center !important;
+    position: absolute;
+    background-color: #ebebeb;
+    padding: 10px;
+    top: 45px;
+    left: 0;
+    border-radius: 5px;
+    width: 200px;
+}
+
+.labelEdit {
+    position: absolute;
+    right: 20px;
+    top: 7px;
+    font-size: 0.8em;
+    font-weight: 100;
+}
+
+.numBetweenMinusPlusBtn {
+    float: right;
+    margin-top: -2px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.minusPlusBtn {
+    width: 17px;
+    height: 17px;
+    cursor: pointer;
+    display: inline-block;
+    float: right;
+    background-image: url('../../images/icons.jpg');
+    background-size: 72px;
+}
+
+@media screen and (max-width: 600px) {
+    .minusPlusBtn {
+        width: 44px;
+        height: 44px;
+        background-size: 185px;
+    }
+}
+
+/*start styling*/
+
+body {
+    background-color: #eeeeee;
+}
+
+.ppr_priv_hr_atf_north_star_nostalgic {
+    margin-bottom: 0 !important;
+}
+
+.atf_meta_and_photos_wrapper {
+    background-color: #dedede;
+}
+
+.easyClear::after {
+    display: none;
+}
+
+DIV.ppr_rup.ppr_priv_hr_atf_north_star_nostalgic .atf_meta_and_photos_wrapper::before {
+    display: none;
+}
+
+.circleBase {
+    border-radius: 50%;
+    /*behavior: url(PIE.htc); !* remove if you don't care about IE8 *!*/
+}
+
+.type2 {
+    width: 45px;
+    height: 45px;
+    background: #ccc;
+    /*border: 3px solid #000;*/
+    /*position: absolute;*/
+}
+
+.darkGreyBox {
+    direction: rtl;
+    display: inline-block;
+    margin: 15px 0;
+    width: 100%;
+}
+
+.lightGreyBox {
+    background-color: #eeeeee;
+    padding: 30px 0;
+}
+
+.whiteBox {
+    background-color: white;
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 10px;
+    direction: rtl;
+    padding: 25px 20px;
+}
+
+/*tour creation 1st page styles*/
+
+#termsAndConditionMainBox {
+
+}
+
+.tourCreationMainTitle {
+    font-size: 17px;
+    color: black;
+    width: 100%;
+    display: inline-block;
+    margin-top: 30px;
+}
+
+.tourAgencyLogo {
+    margin-top: 15px;
+    width: 65px;
+    height: 65px;
+    display: inline-block;
+}
+
+#tourAgencyName {
+    display: inline-block;
+    color: black;
+    font-size: 14px;
+    position: absolute;
+    top: 70px;
+    right: 90px;
+}
+
+#StartCreationTourBox {
+    text-align: justify;
+    line-height: 1.8;
+}
+
+#preStartText {
+    line-height: 3;
+    font-weight: 700;
+    font-size: 18px;
+    display: inline-block;
+}
+
+#termsAndConditionAcceptBox {
+    text-align: center;
+}
+
+#termsAndConditionText {
+    display: inline-block;
+    width: 70%;
+    float: right;
+}
+
+#termsAndConditionText > span {
+    width: 100%;
+    display: inline-block;
+    text-align: justify;
+    direction: rtl;
+}
+
+#termsAndConditionText > span:nth-child(1) {
+    font-weight: 700;
+    margin-bottom: 5px;
+    font-size: 18px;
+}
+
+#termsAndConditionText > span:not(:nth-child(1)) {
+    color: darkred;
+    font-size: 13px;
+}
+
+#termsAndConditionBtn {
+    display: inline-block;
+    background-color: #4dc7bc;
+    width: 150px;
+    color: white;
+    line-height: 2;
+    font-size: 18px;
+    margin-top: 3px;
+}
+
+footer {
+    margin-top: 0 !important;
+}
+
+/*tour creation general infos styles*/
+
+@font-face {
+    font-weight: normal;
+    font-style: normal;
+    font-family: 'shazdemosafer-tour';
+    src: url('../../fonts/shazdemosafer-tour.otf');
+    src: url('../../fonts/shazdemosafer-tour.otf') format('embedded-opentype'),
+    url('../../fonts/shazdemosafer-tour.woff2?v003.200') format('woff2'),
+    url('../../fonts/shazdemosafer-tour.woff?v003.200') format('woff'),
+    url('../../fonts/shazdemosafer/Shazdemosafer.ttf?v003.200') format('truetype');
+}
+
+input[type="checkbox"], input[type="radio"] {
+    display: none !important;
+}
+
+input[type="checkbox"] + label, input[type="radio"] + label {
+    color: #666666;
+}
+
+input[type="checkbox"] + label span, input[type="radio"] + label span {
+    display: inline-block;
+    width: 19px;
+    height: 19px;
+    margin: -2px 0 0 0;
+    vertical-align: middle;
+    background: url('../../images/check_radio_sheet.png') 1px top no-repeat;
+    cursor: pointer;
+}
+
+input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label span {
+    background: url('../../images/check_radio_sheet.png') -18px top no-repeat;
+}
+
+.formName {
+    display: inline-block;
+    width: 50%;
+    font-weight: 700;
+    float: right;
+    font-size: 18px;
+    line-height: 2.5;
+}
+
+.tourCreationStepInfo {
+    display: inline-block;
+    width: 50%;
+    text-align: left;
+}
+
+.tourCreationStepInfo > span {
+    display: inline-block;
+    width: 100%;
+}
+
+.tourCreationStepInfo > span:last-child {
+    font-size: 12px;
+    color: darkblue;
+}
+
+#tourNameInputBoxMainDiv {
+    width: 100%;
+}
+
+.inputBox {
+    width: 270px;
+}
+
+.inputBoxText {
+    width: 25%;
+}
+
+.inputBoxText > div > span {
+    color: darkred;
+}
+
+.inboxHelpSubtitle {
+    display: inline-block;
+    width: 100%;
+    color: darkred;
+    font-size: 13px;
+}
+
+.InlineTourInputBoxesMainDiv {
+    display: inline-block;
+    width: 49%;
+}
+
+#tourDestinationInputBox {
+    position: relative;
+}
+
+.hidden-div {
+    display: none;
+}
+
+#destinationListTourCreation {
+    position: absolute;
+    background-color: white;
+    border: 1px solid #E5E5E5;
+    padding: 20px 15px;
+    z-index: 1;
+    width: 190px;
+    left: 5px;
+}
+
+#destinationListTourCreation > div {
+    display: inline-block;
+    width: 100%;
+}
+
+#destinationListTourCreation > div:nth-child(1) {
+    color: darkblue;
+    cursor: pointer;
+}
+
+#destinationListTourCreation > div:nth-child(3) {
+    color: #4dc7bc;
+}
+
+#addNewDestinationTourCreationBox {
+    background-color: white;
+    z-index: 1;
+    direction: rtl;
+    position: fixed;
+    width: 35%;
+    left: 35%;
+    right: auto;
+    top: 40%;
+    bottom: auto;
+    overflow: hidden;
+    padding: 10px;
+}
+
+#addNewDestinationTitleTourCreation {
+    width: 100%;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+#addNewDestinationTourCreationBox > div {
+    display: inline-block;
+}
+
+#addNewDestinationTourCreationBox input {
+    width: auto;
+}
+
+#tourOriginStateInputBox , #tourNewOriginInputBox {
+    width: auto;
+}
+
+#tourOriginStateInputBox > div , #tourNewOriginInputBox > div {
+    width: auto;
+}
+
+#tourNewOriginInputBox > input {
+    width: 70px;
+}
+
+#addNewDestinationTourCreationBox .btn-group-toggle {
+    margin: 0 8px;
+}
+
+#verifyNewDestinationTourCreation {
+    background-color: #4DC7BC;
+    /*background-image: url("../../images/tourCreation/approve.png");*/
+    padding: 2px;
+    font-size: 15px;
+    width: 30px;
+    border: 0;
+    border-radius: 4px;
+}
+
+#verifyNewDestinationTourCreation > img {
+    width: 20px;
+    margin-top: 4px;
+}
+
+#closeNewDestinationTourCreation {
+    background-color: darkred;
+    /*background-image: url("../../images/tourCreation/close.png");*/
+    padding: 2px;
+    font-size: 15px;
+    width: 30px;
+    border: 0;
+    border-radius: 4px;
+}
+
+#closeNewDestinationTourCreation > img {
+      width: 18px;
+      margin-top: 3px;
+}
+
+.addNewDestinationBtn {
+    padding: 0 5px;
+}
+
+#cityTourCheckBoxLabel {
+    font-size: 13px;
+    font-weight: 500;
+    color: black;
+}
+
+#tourKindChoseTitleTourCreation {
+    display: inline-block;
+    width: 100%;
+}
+
+#tourKindChoseTitleTourCreation > span {
+    display: inline-block;
+}
+
+#tourKindChoseTitleTourCreation > span:first-child , #tourLevelChoseTitleTourCreation  > span:first-child,
+#concentrationChoseTitleTourCreation , #tourTypeChoseTitleTourCreation > span:first-child ,
+#nonGovernmentalTitleTourCreation > span:first-child {
+    font-weight: 700;
+}
+
+#tourKindChoseTitleTourCreation > span:last-child , #tourLevelChoseTitleTourCreation  > span:last-child {
+    font-size: 12px;
+    color: darkblue;
+    margin-right: 5px;
+}
+
+.tourKindIconsTourCreation , .tourLevelIconsTourCreation{
+    margin: 10px 0;
+    padding: 0 10px;
+}
+
+.tourKindIconsTourCreation > label , .tourLevelIconsTourCreation > label {
+    width: 70px;
+    position: relative;
+}
+
+.tourKindIcons {
+    margin-bottom: 0;
+    background: #e5e5e5;
+    width: 100%;
+    font-size: 40px;
+    height: 60px;
+    position: relative;
+    color: white;
+    text-align: center;
+}
+
+.tourKindNames {
+    margin-bottom: 0;
+    color: black;
+    background: inherit;
+    position: absolute;
+    top: 19px;
+    font-weight: 500;
+    font-size: 14px;
+    text-align: center;
+    width: 100%;
+}
+
+#hikingKindTourName {
+    top: 9px;
+}
+
+#cityKindTour::before {
+    content: '\E0E0';
+    font-family: shazdemosafer-tour;
+    right: 13px;
+}
+
+#hikingKindTour::before {
+    content: '\E0E1';
+    font-family: shazdemosafer-tour;
+}
+
+#villageKindTour::before {
+    content: '\E0E2';
+    font-family: shazdemosafer-tour;
+}
+
+#adventureKindTour::before {
+    content: '\E0E3';
+    font-family: shazdemosafer-tour;
+}
+
+#healthKindTour::before {
+    content: '\E0E4';
+    font-family: shazdemosafer-tour;
+}
+
+#recreationalKindTour::before {
+    content: '\E0E5';
+    font-family: shazdemosafer-tour;
+}
+
+#artisticKindTour::before {
+    content: '\E0E6';
+    font-family: shazdemosafer-tour;
+}
+
+#sportsKindTour::before {
+    content: '\E0E7';
+    font-family: shazdemosafer-tour;
+}
+
+#scientificKindTour::before {
+    content: '\E0E8';
+    font-family: shazdemosafer-tour;
+}
+
+#culturalKindTour::before {
+    content: '\E0E9';
+    font-family: shazdemosafer-tour;
+}
+
+#ProfessionalKindTour::before {
+    content: '\E0EA';
+    font-family: shazdemosafer-tour;
+}
+
+.tourLevelGradeDiv {
+    margin: 0 10px;
+    width: 40px;
+}
+
+.tourLevelIcons {
+    background: #e5e5e5;
+    width: 100%;
+    font-size: 55px;
+    height: 60px;
+    position: relative;
+    color: black;
+    margin-bottom: 0;
+}
+
+.tourLevelIconsTourCreation > label > sub {
+    bottom: 0;
+}
+
+.tourLevelIcons::before {
+    position: absolute;
+}
+
+#easyLevelTour::before {
+    content: '\E0EC';
+    font-family: shazdemosafer-tour;
+    top: -10px;
+    left: 8px;
+}
+
+#lightLevelTour::before {
+    content: '\E0ED';
+    font-family: shazdemosafer-tour;
+    top: -9px;
+    left: 5px;
+}
+
+#activeLevelTour::before {
+    content: '\E0F4';
+    font-family: shazdemosafer-tour;
+    top: -9px;
+    right: 7px;
+}
+
+#hardLevelTour::before {
+    content: '\E0F5';
+    font-family: shazdemosafer-tour;
+    top: -8px;
+    left: 5px;
+}
+
+#professionalLevelTour::before {
+    content: '\E0EB';
+    font-family: shazdemosafer-tour;
+    top: -9px;
+    left: 6px;
+}
+
+#blindLevelTour::before {
+    content: '\E0F6';
+    font-family: shazdemosafer-tour;
+    top: -8px;
+    left: 2px;
+}
+
+#disabledLevelTour::before {
+    content: '\E0F8';
+    font-family: shazdemosafer-tour;
+    top: -8px;
+    left: 6px;
+}
+
+#studentLevelTour::before {
+    content: '\E0EC';
+    font-family: shazdemosafer-tour;
+    top: -9px;
+    left: 9px;
+}
+
+.concentrationChoseTourCreation , .tourTypeChoseChoseTourCreation{
+    direction: rtl;
+    margin: 15px 0 10px;
+    display: inline-block;
+}
+
+.concentrationChoseTourCreation > div , .tourTypeChose > div , .tourTypeChoseChoseTourCreation > div ,
+#tourBestSeasonTitleTourCreation , #tourBestSeasonChoseTourCreation , #tourBestSeasonChoseTourCreation > div {
+    float: right;
+}
+
+.btn-group-toggle {
+    background-color: #E5E5E5;
+    border-radius: 7px;
+    direction: rtl;
+    border: 1px solid #b4b4b4;
+    margin-right: 8px;
+}
+
+.btn.active, .btn:active {
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    background-color: #4dc7bc;
+    border-radius: 7px;
+    color: white;
+}
+
+.btn-group > label {
+    padding: 1px 8px;
+    font-size: 13px;
+}
+
+.fullwidthDiv {
+    width: 100%;
+    display: inline-block;
+}
+
+.halfWidthDiv {
+    width: 50%;
+    display: inline-block;
+}
+
+#tourBestSeasonTitleTourCreation , #tourBestSeasonChoseTourCreation {
+    margin-top: 15px;
+}
+
+#goToSecondStep {
+    float: left;
+    background-color: #4dc7bc;
+    width: 110px;
+    color: white;
+    line-height: 1.8;
+    font-size: 15px;
+    margin: 0 0 50px;
+}
+
+/*tour creation specific infos styles*/
+
+

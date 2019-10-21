@@ -64,7 +64,7 @@
                                                         <div id="result" class="data_holder"></div>
                                                     </div>
                                                 </div>
-                                                <div class="is-3 prw_rup prw_common_form_submit ui_column submit_wrap searchDivForScroll-button">
+                                                <div class="is-3 prw_rup prw_common_form_submit ui_column submit_wrap searchDivForScroll-button" id="firstPageSearchBtn">
                                                     <button onclick="redirect()" class="autoResize form_submit ">
                                                         <span class="ui_icon search submit_icon"></span>
                                                         <span onclick="window.location = '{{route('main', ['mode' => 'hotel'])}}'" class="submit_text">جستجو هتل</span>

@@ -62,7 +62,13 @@ $kindPlaceId = 10; ?>
             <div class="inputBoxText" style="width: 40%"> امتیاز موجود </div>
             <div class="inputBoxInput" style="width: 60%"> 1005000 </div>
         </div>
-        <div> برای این بلیط هر امتیاز شما معادل <span style="color: #92321b"> 1000 </span> تومان تخفیف می باشد. توجه حداکثر مبلغ قابل تخفیف <span style="color: #92321b"> 50000 </span> تومان می باشد </div>
+        <div>
+            برای این بلیط هر امتیاز شما معادل
+            <span style="color: #92321b"> 1000 </span>
+            تومان تخفیف می باشد. توجه حداکثر مبلغ قابل تخفیف
+            <span style="color: #92321b"> 50000 </span>
+            تومان می باشد
+        </div>
         <div>
             <div class="inputBox" style="width: 18%;">
                 <div class="inputBoxText" style="width: 60%">
