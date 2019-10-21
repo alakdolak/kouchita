@@ -46,7 +46,7 @@ $kindPlaceId = 10; ?>
 
         <div class="atf_meta_and_photos_wrapper">
             <div class="atf_meta_and_photos ui_container is-mobile easyClear">
-                <div class="prw_rup" id="StartCreationTourBox">
+                <div class="prw_rup darkGreyBox" id="StartCreationTourBox">
                     <h1 id="preStartText">پیش از شروع ....</h1>
                     <p>
                         ما برای جلب رضایت کاربرانمان اطلاعات کاملی را از شما درخواست می‌کنیم. مسئولیت صحت اطلاعات وارد و یا کافی بودن آن برعهده‌ی شماست. اما پیشنهاد ما بر ارائه‌ی کامل و دقیق اطلاعات مطابق مراحل گام به گام طراحی شده می‌باشد. توجه کنید تمام تلاش ما حمایت همزمان از ارائه‌دهنده و مصرف‌کننده می‌باشد و ارائه‌ی هرگونه اطلاعات نادرست و یا ناقض به گونه‌ای که احتمال استفاده از آن برای تضییع حقوق مصرف‌کنندگان باشد از نظر ما مردود است. با ارائه‌ی شفاف اطلاعات به حقوق یکدیگر حترام می‌گذاریم. ما هم تلاش خود را به کتر بردیم تا با استفاده از داده‌های شما انتخاب کاربران را آگاهانه‌تر نماییم. خواهشمندیم به مرام‌نامه‌ی ما احترام بگذارید و تا حد امکان اطلاعاتی جامع، کامل و دقیق ارائه دهید.
@@ -66,9 +66,9 @@ $kindPlaceId = 10; ?>
         </div>
     </div>
 
-    <div id="termsAndConditionMainBox" class="Hotel_Review prodp13n_jfy_overflow_visible">
+    <div id="termsAndConditionMainBox" class="Hotel_Review prodp13n_jfy_overflow_visible lightGreyBox">
         <div class="ui_container">
-            <div class="menu ui_container" id="termsAndConditionAcceptBox">
+            <div class="menu ui_container whiteBox" id="termsAndConditionAcceptBox">
                 <div id="termsAndConditionText">
                     <span>اگر با مرامنامه‌ی ما و قوانین و مقررات سایت هستید، لطفاً اطلاعات لازم را آماده نموده و شروع نمایید.</span>
                     <span>نگران نباشید. شما همواره از طریق پروفایل خود امکان ادامه ایجاد تور را خواهید داشت. هر اطلاعاتی که وارد می‌کنید به صورت موقت ذخیره می‌شود مگر آن‌که هشداری مبنی بر عدم صحت آن دریافت کنید.</span>

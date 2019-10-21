@@ -208,7 +208,7 @@
 
 .searchDivForScroll {
     max-height: 390px;
-    overflow: auto;
+    /*overflow: auto;*/
     float: right;
     border: solid #E5E5E5 !important;
     border-radius: 0 10px 10px 0 !important;
@@ -350,4 +350,18 @@
 #darkModeMainPage {
     display: none;
     z-index: 10000000;
+}
+
+#firstPageSearchBtn {
+    background-color: inherit;
+}
+
+#firstPageSearchBtn > button {
+    height: auto;
+}
+
+#result {
+    overflow-y: auto;
+    /*margin-top: 10px;*/
+    max-height: 335px;
 }

@@ -10,8 +10,12 @@ Route::get('gardeshname', function(){
     return view('gardeshname');
 });
 
-Route::get('tourCreation', function(){
-    return view('tour/tourCreation');
+Route::get('tourCreationFirstPage', function(){
+    return view('tour/tourCreationFirstPage');
+});
+
+Route::get('tourCreationMainPage', function(){
+    return view('tour/tourCreationMainPage');
 });
 
 Route::get('gardeshname2/{page?}', 'PostController@gardeshname')->name('gardeshname');
@@ -152,7 +156,7 @@ Route::group(array('middleware' => ['throttle:30']), function () {
 
     Route::any('searchForStates', array('as' => 'searchForStates', 'uses' => 'HomeController@searchForStates'));
 
-    Route::get('cityPage/{city}', ['as' => 'cityPage', 'uses' => 'HomeController@cityPage']);
+    Route::get('cityPage', 'HomeController@cityPage');
 
     Route::get('abbas', 'HomeController@abbas');
 
