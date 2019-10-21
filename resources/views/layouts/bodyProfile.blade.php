@@ -323,23 +323,24 @@
                         @endif
 
                         @if(Auth::user()->level == 1)
-                            <a title="Add meta" href="{{route('addMeta')}}">اضافه کردن meta</a>
-                            <a title="Activities" href="{{route('activities')}}">فعالیت ها</a>
                             <a title="Descriptions" href="{{route('descriptions')}}">توضیحات</a>
-                            <a title="Places" href="{{route('places')}}">اماکن</a>
-                            <a title="Medals" href="{{route('medals')}}">مدال ها</a>
-                            <a title="Levels" href="{{route('levels')}}">سطوح</a>
-                            <a title="Levels" href="{{route('tripStyles')}}">سبک سفر جدید</a>
                             <a title="ages" href="{{route('placeStyles')}}">سبک مکان</a>
                             <a title="Levels" href="{{route('defaultPics')}}">تصاویر پیش فرض</a>
-                            <a title="tags" href="{{route('tags')}}">تگ ها</a>
-                            <a title="ages" href="{{route('picItems')}}">آیتم تصاویر</a>
-                            <a title="ages" href="{{route('opinions')}}">مدیریت نظرات</a>
-                            <a title="ages" href="{{route('questions')}}">سوالات نظرسنجی</a>
-{{--                            <a title="ages" href="{{route('specialAdvice')}}">پیشنهاد های ویژه</a>--}}
-                            <a title="ages" href="{{route('reports')}}">گزارشات</a>
-                            <a title="ages" href="{{route('goyeshTags')}}">تگ های گویش</a>
-                            <a title="ages" href="{{route('ageSentences')}}">توضیحات سن برای بلیط</a>
+
+                            {{--<a title="Add meta" href="{{route('addMeta')}}">اضافه کردن meta</a>--}}
+                            {{--<a title="Activities" href="{{route('activities')}}">فعالیت ها</a>--}}
+                            {{--<a title="Places" href="{{route('places')}}">اماکن</a>--}}
+                            {{--<a title="Medals" href="{{route('medals')}}">مدال ها</a>--}}
+                            {{--<a title="Levels" href="{{route('levels')}}">سطوح</a>--}}
+                            {{--<a title="Levels" href="{{route('tripStyles')}}">سبک سفر جدید</a>--}}
+                            {{--<a title="tags" href="{{route('tags')}}">تگ ها</a>--}}
+                            {{--<a title="ages" href="{{route('picItems')}}">آیتم تصاویر</a>--}}
+                            {{--<a title="ages" href="{{route('opinions')}}">مدیریت نظرات</a>--}}
+                            {{--<a title="ages" href="{{route('questions')}}">سوالات نظرسنجی</a>--}}
+                            {{--<a title="ages" href="{{route('specialAdvice')}}">پیشنهاد های ویژه</a>--}}
+                            {{--<a title="ages" href="{{route('reports')}}">گزارشات</a>--}}
+                            {{--<a title="ages" href="{{route('goyeshTags')}}">تگ های گویش</a>--}}
+                            {{--<a title="ages" href="{{route('ageSentences')}}">توضیحات سن برای بلیط</a>--}}
                         @endif
                     </div>
                 </li>
