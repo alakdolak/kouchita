@@ -22,6 +22,10 @@ Route::get('tourCreationSpecificInfo', function(){
     return view('tour/tourCreationSpecificInfo');
 });
 
+Route::get('tourCreationFinancialInfo', function(){
+    return view('tour/tourCreationFinancialInfo');
+});
+
 Route::get('gardeshname2/{page?}', 'PostController@gardeshname')->name('gardeshname');
 
 Route::get('gardeshnameInner/{postId}', ['as' => 'gardeshnameInner', 'uses' => 'PostController@gardeshnameInner']);

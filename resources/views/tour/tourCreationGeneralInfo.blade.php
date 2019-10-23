@@ -38,14 +38,14 @@ $kindPlaceId = 10; ?>
                         <b class="tourCreationMainTitle">شما در حال ایجاد یک تور جدید هستید</b>
                     </h1>
                     <div class="tourAgencyLogo circleBase type2"></div>
-                    <b id="tourAgencyName">آژانس ستاره طلایی</b>
+                    <b class="tourAgencyName">آژانس ستاره طلایی</b>
                 </div>
             </div>
         </div>
 
         <div class="atf_meta_and_photos_wrapper">
             <div class="atf_meta_and_photos ui_container is-mobile easyClear">
-                <div class="prw_rup darkGreyBox" id="tourDetailsMainFormHeading">
+                <div class="prw_rup darkGreyBox tourDetailsMainFormHeading">
                     <b class="formName">اطلاعات تور</b>
                     <div class="tourCreationStepInfo">
                         <span>
@@ -65,13 +65,13 @@ $kindPlaceId = 10; ?>
         </div>
     </div>
 
-    <div id="tourDetailsMainFormMainDiv" class="Hotel_Review prodp13n_jfy_overflow_visible lightGreyBox">
+    <div id="tourDetailsMainForm1stStepMainDiv" class="Hotel_Review prodp13n_jfy_overflow_visible lightGreyBox">
         <form method="" action="">
             <div class="ui_container">
                 <div class="menu ui_container whiteBox" id="">
                     <div id="tourNameInputBoxMainDiv">
-                        <div class="inputBox" id="tourNameInputBox">
-                            <div class="inputBoxText">
+                        <div class="inputBoxGeneralInfo inputBox" id="tourNameInputBox">
+                            <div class="inputBoxTextGeneralInfo inputBoxText">
                                 <div>
                                     نام تور
                                     <span>*</span>
@@ -84,8 +84,8 @@ $kindPlaceId = 10; ?>
                         با وارد کردن نام شهر گزینه‌های موجود نمایش داده می‌شود تا از بین آن‌ها انتخاب نمایید. اگر نام شهر خود را نیافتید از گزینه‌ی اضافه کردن استفاده نمایید. توجه کنید اگر مبدأ یا مقصد شما جاذبه می‌باشد، آن را وارد نمایید.
                     </span>
                     <div class="InlineTourInputBoxesMainDiv">
-                        <div class="inputBox InlineTourInputBoxes" id="tourOriginInputBox">
-                            <div class="inputBoxText">
+                        <div class="inputBoxGeneralInfo inputBox InlineTourInputBoxes" id="tourOriginInputBox">
+                            <div class="inputBoxTextGeneralInfo inputBoxText">
                                 <div>
                                     مبدأ
                                     <span>*</span>
@@ -95,8 +95,8 @@ $kindPlaceId = 10; ?>
                         </div>
                     </div>
                     <div class="InlineTourInputBoxesMainDiv">
-                        <div class="inputBox InlineTourInputBoxes" id="tourDestinationInputBox">
-                            <div class="inputBoxText">
+                        <div class="inputBoxGeneralInfo inputBox InlineTourInputBoxes" id="tourDestinationInputBox">
+                            <div class="inputBoxTextGeneralInfo inputBoxText">
                                 <div>
                                     مقصد
                                     <span>*</span>
@@ -122,7 +122,7 @@ $kindPlaceId = 10; ?>
                                     $('#destinationListTourCreation').toggle()
                                 });
                                 $('#addNewDestinationTourCreation').click(function () {
-                                    $('#addNewDestinationTourCreationBox').toggle()
+                                    $('#addNewDestinationBoxTourCreation').toggle()
                                 });
                             })
                         </script>
@@ -137,47 +137,7 @@ $kindPlaceId = 10; ?>
                         </span>
                     </div>
                 </div>
-                <div id="addNewDestinationTourCreationBox" class="hidden-div">
-                    <div id="addNewDestinationTitleTourCreation">
-                        اضافه کردن مکان جدید
-                    </div>
-                    <div class="inputBox InlineTourInputBoxes" id="tourNewOriginInputBox">
-                        <div class="inputBoxText">
-                            <div>
-                                نام
-                                <span>*</span>
-                            </div>
-                        </div>
-                        <input class="inputBoxInput" type="text" placeholder="فارسی">
-                    </div>
-                    <div class="inputBox InlineTourInputBoxes" id="tourOriginStateInputBox">
-                        <div class="inputBoxText">
-                            <div>
-                                استان
-                                <span>*</span>
-                            </div>
-                        </div>
-                        <input class="inputBoxInput" type="text" placeholder="انتخاب از بین گزینه ها">
-                    </div>
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label class="btn btn-secondary">
-                            <input type="radio" name="options" id="option1" autocomplete="off">جاذبه
-                        </label>
-                        <label class="btn btn-secondary active">
-                            <input type="radio" name="options" id="option2" autocomplete="off" checked>شهر
-                        </label>
-                    </div>
-                    <div class="ui_container addNewDestinationBtn">
-                        <button id="verifyNewDestinationTourCreation">
-                            <img src="{{URL::asset('images/tourCreation/approve.png')}}">
-                        </button>
-                    </div>
-                    <div class="ui_container addNewDestinationBtn">
-                        <button id="closeNewDestinationTourCreation">
-                            <img src="{{URL::asset('images/tourCreation/close.png')}}">
-                        </button>
-                    </div>
-                </div>
+
             </div>
             <div class="ui_container">
                 <div class="menu ui_container whiteBox">
@@ -501,12 +461,12 @@ $kindPlaceId = 10; ?>
                                 اقتصادی
                             </span>
                         </div>
-                        <div class="col-xs-2">
+                        <div class="col-xs-2" id="specialWeatherTourCreation">
                             <input ng-model="sort" type="checkbox" id="c57" value="rate"/>
                             <label for="c57">
                                 <span></span>
                             </label>
-                            <span class="tourTypeChoseTourCreation">
+                            <span class="tourTypeChoseTourCreation" >
                                 آب و هوای خاص
                             </span>
                         </div>
@@ -598,6 +558,48 @@ $kindPlaceId = 10; ?>
                 <button id="goToSecondStep" class="btn">گام بعدی</button>
             </div>
         </form>
+    </div>
+
+    <div id="addNewDestinationBoxTourCreation" class="hidden-div">
+        <div id="addNewDestinationTitleTourCreation">
+            اضافه کردن مکان جدید
+        </div>
+        <div class="inputBoxGeneralInfo inputBox InlineTourInputBoxes" id="tourNewOriginInputBox">
+            <div class="inputBoxTextGeneralInfo inputBoxText">
+                <div>
+                    نام
+                    <span>*</span>
+                </div>
+            </div>
+            <input class="inputBoxInput" type="text" placeholder="فارسی">
+        </div>
+        <div class="inputBoxGeneralInfo inputBox InlineTourInputBoxes" id="tourOriginStateInputBox">
+            <div class="inputBoxTextGeneralInfo inputBoxText">
+                <div>
+                    استان
+                    <span>*</span>
+                </div>
+            </div>
+            <input class="inputBoxInput" type="text" placeholder="انتخاب از بین گزینه ها">
+        </div>
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <label class="btn btn-secondary">
+                <input type="radio" name="options" id="option1" autocomplete="off">جاذبه
+            </label>
+            <label class="btn btn-secondary active">
+                <input type="radio" name="options" id="option2" autocomplete="off" checked>شهر
+            </label>
+        </div>
+        <div class="ui_container addNewDestinationBtn">
+            <button id="verifyNewDestinationTourCreation">
+                <img src="{{URL::asset('images/tourCreation/approve.png')}}">
+            </button>
+        </div>
+        <div class="ui_container addNewDestinationBtn">
+            <button id="closeNewDestinationTourCreation">
+                <img src="{{URL::asset('images/tourCreation/close.png')}}">
+            </button>
+        </div>
     </div>
 
     @include('layouts.placeFooter')
