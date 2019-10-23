@@ -759,6 +759,10 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     width: 130px;
 }
 
+#mainClassificationOfTransportationInputDiv select {
+    width: 85%;
+}
+
 .transportationKindChosenOnes {
     background-color: #f6f6f6;
     border-radius: 4px;
@@ -875,16 +879,25 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     margin-top: 15px;
 }
 
-.glyphicon {
-    font-family: 'Glyphicons Halflings' !important;
-}
-
 .styled-select {
     -moz-appearance:none; /* Firefox */
     -webkit-appearance:none; /* Safari and Chrome */
-    border:0;
-    background: url('../../images/arrow-button.svg')  no-repeat;
     height: 30px;
+}
+
+.select-side {
+    width: auto;
+    display: inline-block;
+    pointer-events: none;
+    position: absolute;
+    left: 10px;
+    top: 12px;
+}
+
+.select-side > i {
+    float: left;
+    color: gray;
+    font-size: 10px;
 }
 
 

@@ -96,7 +96,10 @@ $kindPlaceId = 10; ?>
                                     <span>*</span>
                                 </div>
                             </div>
-                            <select class="inputBoxInput styled-select glyphicon glyphicon-arrow-down" type="text" placeholder="انتخاب کنید">
+                            <div class="select-side">
+                                <i class="glyphicon glyphicon-triangle-bottom"></i>
+                            </div>
+                            <select class="inputBoxInput styled-select" type="text" placeholder="انتخاب کنید">
 
                             </select>
                         </div>
@@ -143,7 +146,10 @@ $kindPlaceId = 10; ?>
                                     <span>*</span>
                                 </div>
                             </div>
-                            <select class="inputBoxInput" type="text" placeholder="انتخاب کنید">
+                            <div class="select-side">
+                                <i class="glyphicon glyphicon-triangle-bottom"></i>
+                            </div>
+                            <select class="inputBoxInput styled-select" type="text" placeholder="انتخاب کنید">
 
                             </select>
                         </div>
@@ -189,15 +195,19 @@ $kindPlaceId = 10; ?>
                     <div class="inboxHelpSubtitle">
                         حمل و نقل فرعی مرتبط با انتقال مسافران در داخل مقصد و در طول برگزاری تور می‌باشد.
                     </div>
-                    <div class="inputBox col-xs-12 relative-position">
+                    <div class="inputBox col-xs-12 relative-position" id="mainClassificationOfTransportationInputDiv">
                         <div class="inputBoxText" id="mainClassificationOfTransportationLabel">
                             <div>
                                 دسته‌بندی اصلی
                                 <span>*</span>
                             </div>
                         </div>
-                        <select class="inputBoxInput" type="text" placeholder="انتخاب کنید">
-
+                        <div class="select-side">
+                            <i class="glyphicon glyphicon-triangle-bottom"></i>
+                        </div>
+                        <select class="inputBoxInput styled-select" type="text" placeholder="انتخاب کنید">
+                            <option>قطار</option>
+                            <option>هواپیما</option>
                         </select>
                         <div class="transportationKindChosenMainDiv">
                             <div class="transportationKindChosenOnes col-xs-2">
