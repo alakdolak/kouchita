@@ -14,6 +14,8 @@
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/icons.css?v=1')}}' />
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/mainPageModifiedStyles.css')}}' />
 
+    <link rel="manifest"  href="{{URL::asset('offlineMode/manifest.json')}}">
+
     <script>
         var searchDir = '{{route('heyYou')}}';
         var kindPlaceId = '{{$kindPlaceId}}';
@@ -631,6 +633,20 @@
         <div class="ui_backdrop dark" id="darkModeMainPage"></div>
 
         <script src="{{URL::asset('js/adv.js')}}"></script>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function(){
+                navigator.serviceWorker.register('{{URL::asset("ServiceWorker.js")}}').then(
+                    registration => {
+                        console.log('Service Worker is registered', registration);
+                    }).catch(
+                    err => {
+                        console.error('Registration failed:', err);
+                    });
+            })
+        }
+    </script>
     </body>
 </html>
 

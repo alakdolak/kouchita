@@ -1687,41 +1687,6 @@ class HomeController extends Controller
         return view('alaki', array('tripId' => $tripId));
     }
 
-    public function ageSentences()
-    {
-
-        if (isset($_POST["saveChange"]) && isset($_POST["adultInner"])
-            && isset($_POST["childInnerMax"]) && isset($_POST["childInnerMin"])
-            && isset($_POST["infantInner"]) && isset($_POST["adultExternal"])
-            && isset($_POST["childExternalMax"]) && isset($_POST["childExternalMin"])
-            && isset($_POST["infantExternal"])) {
-
-            $config = ConfigModel::first();
-            $config->adultInner = makeValidInput($_POST["adultInner"]);
-            $config->childInnerMax = makeValidInput($_POST["childInnerMax"]);
-            $config->childInnerMin = makeValidInput($_POST["childInnerMin"]);
-            $config->infantInner = makeValidInput($_POST["infantInner"]);
-            $config->adultExternal = makeValidInput($_POST["adultExternal"]);
-            $config->childExternalMax = makeValidInput($_POST["childExternalMax"]);
-            $config->childExternalMin = makeValidInput($_POST["childExternalMin"]);
-            $config->infantExternal = makeValidInput($_POST["infantExternal"]);
-            $config->save();
-        }
-
-        $config = ConfigModel::first();
-
-        return view('childAge', array('adultInner' => $config->adultInner,
-            'childInnerMax' => $config->childInnerMax,
-            'childInnerMin' => $config->childInnerMin,
-            'infantInner' => $config->infantInner,
-            'adultExternal' => $config->adultExternal,
-            'childExternalMax' => $config->childExternalMax,
-            'childExternalMin' => $config->childExternalMin,
-            'infantExternal' => $config->infantExternal,
-            'user' => Auth::user()));
-
-    }
-
     public function getAlertsCount()
     {
 

@@ -152,7 +152,7 @@
 
     <script>
         var selfUrl = '{{route('getReports', ['page' => $currPage])}}';
-        var deleteLogsDir = '{{route('deleteLogs')}}';
+        {{--var deleteLogsDir = '{{route('deleteLogs')}}';--}}
     </script>
     <script>
 
