@@ -137,7 +137,7 @@ DIV.ppr_rup.ppr_priv_hr_atf_north_star_nostalgic .atf_meta_and_photos_wrapper::b
     display: inline-block;
 }
 
-#tourAgencyName {
+.tourAgencyName {
     display: inline-block;
     color: black;
     font-size: 14px;
@@ -264,12 +264,16 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     width: 100%;
 }
 
-.inputBox {
+.inputBoxGeneralInfo {
     width: 270px;
 }
 
-.inputBoxText {
+.inputBoxTextGeneralInfo {
     width: 25%;
+}
+
+.inputBoxText {
+    font-weight: 700;
 }
 
 .inputBoxText > div > span {
@@ -320,7 +324,7 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     color: #4dc7bc;
 }
 
-#addNewDestinationTourCreationBox {
+#addNewDestinationBoxTourCreation {
     background-color: white;
     z-index: 1;
     direction: rtl;
@@ -340,11 +344,11 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     font-weight: 700;
 }
 
-#addNewDestinationTourCreationBox > div {
+#addNewDestinationBoxTourCreation > div {
     display: inline-block;
 }
 
-#addNewDestinationTourCreationBox input {
+#addNewDestinationBoxTourCreation input {
     width: auto;
 }
 
@@ -360,7 +364,7 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     width: 70px;
 }
 
-#addNewDestinationTourCreationBox .btn-group-toggle {
+#addNewDestinationBoxTourCreation .btn-group-toggle {
     margin: 0 8px;
 }
 
@@ -608,6 +612,10 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     float: right;
 }
 
+#specialWeatherTourCreation {
+    padding-left: 0 !important;
+}
+
 .btn-group-toggle {
     background-color: #E5E5E5;
     border-radius: 7px;
@@ -643,7 +651,7 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     margin-top: 15px;
 }
 
-#goToSecondStep {
+#goToSecondStep , #goToThirdStep{
     float: left;
     background-color: #4dc7bc;
     width: 110px;
@@ -654,5 +662,230 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
 }
 
 /*tour creation specific infos styles*/
+
+.whiteBoxSpecificInfo {
+    padding: 30px 35px;
+}
+
+#mainTransportationTitleTourCreation {
+    font-weight: 700;
+    font-size: 18px;
+    width: 100%;
+}
+
+#mainTransportationHelpTourCreation {
+    width: 100%;
+    color: darkred;
+    font-size: 13px;
+}
+
+#tourTransportationResponsibility {
+    margin-top: 15px;
+}
+
+.transportationDetailsMainBoxes {
+    position: relative;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.transportationDetailsMainBoxes > div {
+    float: right;
+    display: inline-block;
+    margin: 10px;
+}
+
+.transportationTitleBoxes {
+    position: absolute;
+    right: -73px;
+    width: 90px;
+    color: white;
+    font-size: 13px;
+    transform: rotate(90deg);
+    border-radius: 4px;
+    font-weight: 700;
+    top: 35px;
+    text-align: center;
+}
+
+#toTheDestinationTitleBox{
+    background-color: #4DC7BC;
+}
+
+#fromTheDestinationTitleBox{
+    background-color: darkred;
+}
+
+.transportationStartTimeTourCreation , .transportationKindTourCreation {
+    margin-right: 0 !important;
+}
+
+.transportationStartTimeTourCreation > input {
+    display: inline-block;
+    width: 30%;
+}
+
+.transportationStartTimeTourCreation > input:nth-child(2) {
+    border-right: 1px solid #d8d8d8 ;
+}
+
+.transportationMapPinningTourCreation {
+    background-color: #4DC7BC;
+    color: white;
+    float: right;
+    border-radius: 4px;
+    border: none;
+    font-size: 14px;
+    margin: 10px 0;
+    line-height: 30px;
+    padding: 2px 6px;
+    width: 15.7%;
+}
+
+@media (max-width: 1187px) {
+    .transportationMapPinningTourCreation {
+        font-size: 13px;
+        width: 15.5%;
+    }
+}
+
+.boxTitlesTourCreation {
+    width: 100%;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+#mainClassificationOfTransportationLabel {
+    width: 130px;
+}
+
+.transportationKindChosenOnes {
+    background-color: #f6f6f6;
+    border-radius: 4px;
+    line-height: 2;
+    margin: 0 5px;
+}
+
+.transportationKindChosenOnes > span {
+    float: left;
+    color: red;
+    margin-top: 6px;
+}
+
+.transportationKindChosenMainDiv {
+    position: absolute;
+    width: 84%;
+    top: 5px;
+    left: 30px;
+}
+
+.tourFoodOfferQuestions {
+    margin-top: 15px;
+}
+
+#tourFoodMealTitleTourCreation , #tourFoodMealChoseTourCreation {
+    margin-top: 15px;
+    float: right;
+}
+
+#tourFoodMealTitleTourCreation {
+    width: 300px;
+}
+
+#tourFoodMealChoseTourCreation {
+    width: 500px;
+}
+
+.addTourPlacesTourCreation {
+    float: right;
+    margin-top: 15px;
+    display: inline-block;
+}
+
+.addTourPlacesTourCreation > div {
+    display: inline-block;
+    float: right;
+}
+
+.addTourPlacesPicTourCreation {
+    width: 90px;
+    height: 90px;
+}
+
+.addTourPlacesNameTourCreation {
+    margin-top: 10px;
+}
+
+.addTourPlacesRateTourCreation {
+    float: right;
+    width: 100%;
+}
+
+.addTourPlacesNameTourCreation > div , .addTourPlacesNameTourCreation > b {
+    width: 100%;
+    line-height: 1.8;
+}
+
+.addTourPlacesNameTourCreation > div {
+    font-size: 13px;
+}
+
+.addTourPlacesNameTourCreation > div:last-child {
+    color: #8b8b8b;
+}
+
+.addTourPlacesNameTourCreation > b {
+    font-size: 15px;
+}
+
+.addTourPlacesBtnDivTourCreation {
+    margin-top: 15px;
+    float: inherit;
+    padding-right: 30px;
+    display: inline-block;
+}
+
+.addTourPlacesBtnCreation {
+    width: 90px;
+    height: 90px;
+    background: white;
+    border: 2px solid #d5d3d3;
+    float: right;
+}
+
+.addTourPlacesBtnCreation > img {
+    margin: 15px 0 5px;
+    width: 35px;
+}
+
+.addTourPlacesBtnCreation > div {
+    color: #d5d3d3;
+    font-size: 14px;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.font-size-14 {
+    font-size: 14px;
+}
+
+.mg-tp-15 {
+    margin-top: 15px;
+}
+
+.glyphicon {
+    font-family: 'Glyphicons Halflings' !important;
+}
+
+.styled-select {
+    -moz-appearance:none; /* Firefox */
+    -webkit-appearance:none; /* Safari and Chrome */
+    border:0;
+    background: url('../../images/arrow-button.svg')  no-repeat;
+    height: 30px;
+}
+
 
 
