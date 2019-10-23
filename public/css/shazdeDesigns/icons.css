@@ -62,15 +62,8 @@
 /*..........city page Icons..........*/
 .cityPageIcon {
     font-family: 'Shazde_Regular2' !important;
-    font-size: 40px;
-    margin-top: 8%;
-}
-.textCityPageIcon {
-    color: black;
-    font-size: 12px;
-    font-weight: 800;
-    margin-top: 0%;
-    margin-bottom: 15%;
+    font-size: 35px;
+    color: #30b4a6;
 }
 
 /*..........phone popUp Icons..........*/
