@@ -18,8 +18,19 @@
 }
 /*end of css of header*/
 
+/*css of main box*/
+.cpMainBox {
+    background-color: #e5e5e5;
+    margin: 15px 0 !important;
+    padding: 15px 15px 15px 0 !important;
+}
+.cpPic {
+    width: 100%;
+    height: 320px
+}
+
 /*css of little menu*/
-.cityPageLittleMenu {
+.cpLittleMenu {
     color: #30b4a6 !important;
     border: 1px solid lightgray;
     text-align: center;
@@ -27,7 +38,7 @@
     padding: 1px !important;
     height: 80px;
 }
-.cityPageLittleMenu:hover {
+.cpLittleMenu:hover {
     border:2px solid #30b4a6;
 }
 .textCityPageIcon {
@@ -36,6 +47,7 @@
     font-weight: 600;
 }
 /*end of css of little menu*/
+/*end of css of main box*/
 
 .cpTitle {
     font-size: 18px;
@@ -83,18 +95,18 @@
 }
 
 /*css of borders*/
-.border-top-grey {
-    border-top: 2px solid gray;
+.cpBorderTop {
+    border-top: 2px solid #f3f3f3;
     margin: 2px 0;
 }
-.border-right-grey {
-    border-right: 2px solid gray;
+.cpBorderRight {
+    border-right: 2px solid #f3f3f3;
 }
-.border-left-grey {
-    border-left: 2px solid gray;
+.cpBorderLeft {
+    border-left: 2px solid #f3f3f3;
 }
-.border-bottom-grey {
-    border-bottom: 2px solid gray;
+.cpBorderBottom {
+    border-bottom: 2px solid #f3f3f3;
     margin: 2px 0;
 }
 /*end of css of borders*/

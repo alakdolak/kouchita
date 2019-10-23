@@ -49,6 +49,9 @@
 .plus:before {
     content: '\E031';
 }
+.plus2:before {
+    content: '\E02F';
+}
 .minus:before {
     content: '\E034';
 }

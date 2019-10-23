@@ -59,7 +59,7 @@
     @include('layouts.placeHeader')
 </div>
 <div class="ui_container cpBody">
-    <div class="border-bottom-grey cpHeader">
+    <div class="cpBorderBottom cpHeader">
         <div class="cpHeaderRouteOfCityName">
             <span>استان {{$city->state}}</span>
             <span> > </span>
@@ -69,77 +69,77 @@
         <div class="cpHeaderCityName">شهر {{$city->name}}</div>
     </div>
     <div class="row">
-        <div class="col-lg-9 border-left-grey">
-            <div class="row" style="background-color: #e5e5e5; margin-right: 0;">
-                <div class="col-xs-8" style="padding: 15px 0 !important;">
-                    <img src="{{URL::asset('_images/city/'.$city->image)}}" style="width: 100%; height: 320px">
+        <div class="col-lg-9 cpBorderLeft">
+            <div class="row cpMainBox">
+                <div class="col-xs-8" style="padding:0 !important;">
+                    <img class="cpPic" src="{{URL::asset('_images/city/'.$city->image)}}">
                 </div>
-                <div class="col-xs-4" style="padding: 15px 0 !important;">
+                <div class="col-xs-4" style="padding:0 !important;">
                     <div class="col-xs-12">
-                        <a class="col-xs-4 cityPageLittleMenu" href="{{route('main')}}">
+                        <a class="col-xs-4 cpLittleMenu" href="{{route('main')}}">
                             <div class="cityPageIcon hotel"></div>
                             <div class="textCityPageIcon">هتل</div>
                         </a>
-                        <a class="col-xs-4 cityPageLittleMenu" href="{{route('tickets')}}">
+                        <a class="col-xs-4 cpLittleMenu" href="{{route('tickets')}}">
                             <div class="cityPageIcon ticket"></div>
                             <div class="textCityPageIcon">بلیط</div>
                         </a>
-                        <a class="col-xs-4 cityPageLittleMenu" href="{{route('mainMode', ['mode' => 'amaken'])}}">
+                        <a class="col-xs-4 cpLittleMenu" href="{{route('mainMode', ['mode' => 'amaken'])}}">
                             <div class="cityPageIcon atraction"></div>
                             <div class="textCityPageIcon">جاذبه ها</div>
                         </a>
                     </div>
                     <div style="clear: both"></div>
                     <div class="col-xs-12">
-                        <a class="col-xs-4 cityPageLittleMenu" href="{{route('mainMode', ['mode' => 'restaurant'])}}">
+                        <a class="col-xs-4 cpLittleMenu" href="{{route('mainMode', ['mode' => 'restaurant'])}}">
                             <div class="cityPageIcon restaurant"></div>
                             <div class="textCityPageIcon">رستوران</div>
                         </a>
-                        <div class="col-xs-4 cityPageLittleMenu">
+                        <div class="col-xs-4 cpLittleMenu">
                             <div class="cityPageIcon soghat"></div>
                             <div class="textCityPageIcon">سوغات</div>
                         </div>
-                        <div class="col-xs-4 cityPageLittleMenu">
+                        <div class="col-xs-4 cpLittleMenu">
                             <div class="cityPageIcon ghazamahali"></div>
                             <div class="textCityPageIcon">غذای محلی</div>
                         </div>
                     </div>
                     <div style="clear: both"></div>
                     <div class="col-xs-12">
-                        <div class="col-xs-4 cityPageLittleMenu">
+                        <div class="col-xs-4 cpLittleMenu">
                             <div class="cityPageIcon majara"></div>
                             <div class="textCityPageIcon">ماجراجویی</div>
                         </div>
-                        <div class="col-xs-4 cityPageLittleMenu">
+                        <div class="col-xs-4 cpLittleMenu">
                             <div class="cityPageIcon sanaye"></div>
                             <div class="textCityPageIcon">صنایع دستی</div>
                         </div>
-                        <div class="col-xs-4 cityPageLittleMenu">
+                        <div class="col-xs-4 cpLittleMenu">
                             <div class="cityPageIcon lebas"></div>
                             <div class="textCityPageIcon">لباس محلی</div>
                         </div>
                     </div>
                     <div style="clear: both"></div>
                     <div class="col-xs-12">
-                        <div class="col-xs-4 cityPageLittleMenu">
+                        <div class="col-xs-4 cpLittleMenu">
                             <div class="cityPageIcon boom"></div>
                             <div class="textCityPageIcon">بوم گردی</div>
                         </div>
-                        <div class="col-xs-4 cityPageLittleMenu">
+                        <div class="col-xs-4 cpLittleMenu">
                             <div class="cityPageIcon estelah"></div>
                             <div class="textCityPageIcon">اصطلاحات محلی</div>
                         </div>
-                        {{--<div class="col-xs-4 cityPageLittleMenu"></div>--}}
+                        {{--<div class="col-xs-4 cpLittleMenu"></div>--}}
                     </div>
                 </div>
             </div>
-            <div class="cpDescription">
+            <div class="cpDescription cpBorderBottom">
                 {{$city->description}}
             </div>
-            <div ng-app="mainApp" class="border-bottom-grey">
+            <div ng-app="mainApp" class="cpBorderBottom">
                 @include('layouts.mainSuggestions')
             </div>
-            <div class="border-bottom-grey">
+            <div class="cpBorderBottom">
                 <div class="cpTitle">دوستان شما چه می گویند</div>
                 <div style="width: 100%;">
                     <div class="cpFriendsBoxPic">
@@ -158,7 +158,7 @@
                 </div>
                 <div class="cpFriendsFooter">نمایش چهار نقد اخیر در دو ستون دو ردیفه با دکمه بیشتر و قابلیت لود در صفحه مانند صفحه هتل دیتیل</div>
             </div>
-            <div class="border-bottom-grey">
+            <div class="cpBorderBottom">
                 <div class="cpMap"></div>
             </div>
         </div>
@@ -261,7 +261,7 @@
 
                 @endforeach
 
-                <div class="row border-bottom-grey" style="margin: 0px;">
+                <div class="row cpBorderBottom" style="margin: 0px;">
                     <div class="col-md-12" style="text-align: center; padding: 20px;">
                         <button class="btn btn-success" style="background-color: #30b4a6; border-radius: 10px; font-size: 20px;">مشاهده همه مقالات</button>
                     </div>

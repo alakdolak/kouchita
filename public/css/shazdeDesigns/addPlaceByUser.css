@@ -1,0 +1,277 @@
+.bodyStyle {
+    width: 100%;
+    height: 120vh;
+    background-color: white;
+    direction: rtl;
+    position: relative;
+}
+.box {
+    position: absolute;
+    width: 50%;
+    height: auto;
+    border: 2px solid #4DC7BC;
+    left: 50%;
+    top: 15%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    box-shadow: 0px 0px 30px #e0e0e0;
+}
+.headerOfBox {
+    background-color: #4DC7BC;
+    color: white;
+    padding: 8px 10px;
+    font-size: 2em;
+    border-radius: 5px 5px 0 0;
+}
+.bodyOfBox {
+    height: 70px;
+    padding: 5px 20px 0;
+    position: relative;
+}
+.stepTitle {
+    font-size: 1.25em;
+    font-weight: 600;
+}
+.boxNotice {
+    width: 75%;
+    position: absolute;
+    bottom: 0;
+    color: #963019;
+}
+.stepNotice {
+    font-size: 0.88em;
+    color: #963019;
+}
+.bodyOfSteps {
+    position: absolute;
+    margin: 0 2%;
+    width: 96%;
+    box-shadow: 0px 0px 30px #e0e0e0;
+    padding: 3%;
+}
+.footerOfBox {
+    height: 45px;
+    margin: 5px 20px 25px;
+    padding-top: 10px;
+    border-top: 1px solid #4DC7BC;
+}
+.btn:hover,.btn:active {
+    color: white;
+    opacity: 0.8;
+    border-radius: 5px;
+}
+.btn:focus {
+    color: white;
+    border-radius: 5px;
+}
+.boxNextBtn {
+    background: #4DC7BC;
+    border-color: #4DC7BC;
+    float: left;
+    color: white;
+}
+.boxPreviousBtn {
+    background: #963019;
+    border-color: #963019;
+    float: right;
+    color: white;
+}
+.steps {
+    position: absolute;
+    border-radius: 50%;
+    background-color: #E5E5E5;
+}
+.bigCircle {
+    width: 25px;
+    height: 25px;
+}
+.middleCircle {
+    width: 17px;
+    height: 17px;
+    margin: 4px;
+    z-index: 10;
+    background-color: #ffffff;
+}
+.littleCircle {
+    width: 9px;
+    height: 9px;
+    margin: 8px;
+    z-index: 100;
+}
+.completeStep {
+    background-color: #4DC7BC;
+}
+.categories {
+    margin: 1px;
+    padding: 10px 0;
+    width: 12%;
+    display: inline-block;
+    border: 1.5px solid #e5e5e5;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.categories:hover {
+    border: 1.5px solid #30b4a6;
+}
+.selectCategory {
+    padding: 0px 10px;
+    width: 20%;
+    border: 1.5px solid #e5e5e5;
+    border-radius: 6px;
+    position: absolute;
+    left: 20px;
+    top: 8%;
+}
+.nameOfSelectCategory {
+    position: absolute;
+    left: 6%;
+    top: 30%;
+    font-weight: 500;
+}
+.iconsOfCategories {
+    font-size: 40px;
+    direction: rtl;
+    margin: 4% 1%;
+    line-height: 40px;
+    color: black;
+    cursor: pointer;
+}
+.iconOfSelectCategory {
+    font-size: 30px;
+    margin: 0;
+    line-height: 40px;
+    color: black;
+    cursor: default;
+}
+.stepInputBox {
+    width: 40%;
+    display: inline-block;
+    padding: 2px 7px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    background-color: #ebebeb;
+    line-height: 30px;
+    margin: 10px 0;
+}
+.stepInputBoxText {
+    padding-left: 15px;
+    border-left: 1px solid #d8d8d8;
+    display: inline-block;
+}
+.stepInputBoxInput {
+    width: 80%;
+    padding-left: 3%;
+    text-align: center;
+    border: none;
+    float: left;
+    background-color: transparent;
+}
+.stepInputBoxRequired {
+    display: inline-block;
+    position: relative
+}
+.stepInputIconRequired {
+    font-size: 0.5em;
+    color: #92321b;
+    position: absolute;
+    top: -5px;
+    left: -10px;
+}
+.addresText{
+    width: 100%;
+    height: 110px;
+    resize: none;
+    border-radius: 5px;
+    background-color: #EEEEEE;
+    padding: 8px;
+    margin: 12px 0 0;
+}
+#stepName {
+    color: #4dc7bc;
+    font-size: 1.5em;
+    position: absolute;
+    left: 47%;
+    margin: 6px;
+    transform: translate(-50%);
+}
+#map {
+    height:150px;
+    border: 1px solid #4DC7BC;
+    border-radius: 5px;
+    padding: 10px;
+}
+.mapBtn {
+    background: #4DC7BC;
+    border-color: #4DC7BC;
+    color: white;
+    width: 100%;
+    margin: 10px 0;
+}
+.listItem {
+    padding: 10px 0px;
+    border-bottom: 1px solid #cccccc;
+}
+.subListItem {
+    display: inline-block;
+    width: 80%;
+}
+.detailListItem {
+    width: 24%;
+    display: inline-block;
+}
+.step5Title {
+    display: inline-block;
+    width: 20%;
+    float: right;
+    font-weight: 500;
+}
+.step5Description {
+    font-weight: 500;
+    margin: 5px 0;
+}
+.step5NewPlace {
+    margin: 5px 10px;
+    display: inline-block;
+    width: 100%;
+}
+.step5AddPlace {
+    background: #4DC7BC;
+    border-color: #4DC7BC;
+    color: white;
+    margin: 0 5px;
+}
+.step5RemovePlace {
+    background: #963019;
+    border-color: #963019;
+    color: white;
+}
+.step6picBox {
+    width: 22%;
+    padding: 7px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+}
+.step6pic {
+    height: 130px;
+    position: relative;
+    color: #4DC7BC;
+    background-color: #e5e5e5;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+}
+.step6plusText {
+    position: absolute;
+    bottom: 18%;
+    right: 7%;
+    font-size: 1.2em;
+    font-weight: 500;
+}
+.step6plusIcon {
+    position: absolute;
+    bottom: -7%;
+    left: 2%;
+    font-size: 5em;
+}
+.step6picText {
+    padding: 10px;
+}
