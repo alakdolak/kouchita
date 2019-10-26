@@ -136,6 +136,7 @@ var data = $.param({});
             }
             $scope.disable = !0;
             $http.post(getAmakensMainPath, data, config).then(function (response) {
+
                 if (response.data != null && response.data.length > 0)
                     $scope.show = !0;
                 for (i = 0; i < response.data.length; i++) {

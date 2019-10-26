@@ -263,10 +263,11 @@ class TicketController extends Controller {
                     );
                 }
                 elseif(makeValidInput($_POST["additional"]) != -1) {
-                    $tickets = DB::select('select i1.id, i2.num from innerFlightTicket i1 JOIN (select id, flightId, count(*) as num, min(price) as minPrice from innerFlightTicket WHERE `from` = "' . makeValidInput($_POST["src"]) .
+                    $tickets = DB::select('select i1.id, i1.noTicket, i2.num from innerFlightTicket i1 JOIN (select id, flightId, noTicket, count(*) as num, min(price) as minPrice from innerFlightTicket WHERE `from` = "' . makeValidInput($_POST["src"]) .
                         '" and `isBusiness` = 0 and `to` = "' . makeValidInput($_POST["dest"]) . '" and `date` = ' . $date . " and `free` > 0" .
-                        ' group by(`flightId`)) i2 on i1.price = i2.minPrice and i1.flightId = i2.flightId'
+                        ' group by `noTicket`, `time`) i2 on i1.price = i2.minPrice and i1.noTicket = i2.noTicket'
                     );
+//                    $tickets  = DB::select('SELECT min(maxPrice), id, noTicket, isBusiness, `from`, `to`, `date` FROM innerFlightTicket  WHERE `date` = ' . $date . ' and `isBusiness` = 0 and `to` = "' . makeValidInput($_POST["dest"]) . '" AND `from` = "' . makeValidInput($_POST["src"]) .'" GROUP BY noTicket, time');
                 }
                 else {
                     $tickets = DB::select('select i1.id, i2.num from innerFlightTicket i1 JOIN (select id, flightId, count(*) as num, min(price) as minPrice from innerFlightTicket WHERE `from` = "' . makeValidInput($_POST["src"]) .
@@ -289,7 +290,6 @@ class TicketController extends Controller {
 //            dd('select i1.id, i2.num from innerFlightTicket i1 JOIN (select id, flightId, count(*) as num, min(price) as minPrice from innerFlightTicket WHERE `from` = "' . makeValidInput($_POST["src"]) .
 //                '" and `to` = "' . makeValidInput($_POST["dest"]) . '" and `date` = ' . $date . " and `free` > 0" .
 //                ' group by(`flightId`) having id > ' . $lastId . ') i2 on i1.price = i2.minPrice and i1.flightId = i2.flightId');
-
             $out = [];
             $counter = 0;
 
