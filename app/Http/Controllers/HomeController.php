@@ -52,7 +52,7 @@ class HomeController extends Controller
 
         $city->state = State::whereId($city->stateId)->name;
 
-        $cityPost = Post::where('cityId', $city->id)->where('date', '<=', $today)->orderBy('date','ASCD')->take(2)->get();
+        $cityPost = Post::where('cityId', $city->id)->where('date', '<=', $today)->orderBy('date','ASCD')->take(5)->get();
         if(count($cityPost) < 5){
             $num = 5 - count($cityPost);
             $cityPost2 = Post::where('date', '<=', $today)->orderBy('date','ASCD')->take($num)->get();
@@ -63,7 +63,7 @@ class HomeController extends Controller
         }
 
         $lastMonth = Carbon::now()->subMonth();
-        $mostSeenPosts = Post::where('date', '<=', $today)->where('created_at', '>=', $lastMonth)->orderBy('seen', 'ASCD')->take(5)->get();
+        $mostSeenPosts = Post::where('date', '<=', $today)->where('date', '>=', $lastMonth)->orderBy('seen', 'ASCD')->take(5)->get();
 
         foreach ($cityPost as $post) {
             $post->pic = URL::asset('posts/' . $post->pic);
@@ -87,7 +87,11 @@ class HomeController extends Controller
             $post->msgs = PostComment::wherePostId($post->id)->whereStatus(true)->count();
         }
 
-        return view('cityPage', compact(['city', 'cityPost', 'mostSeenPosts']));
+        $allAmaken = Amaken::where('cityId', $city->id)->select(['id', 'name', 'C', 'D', 'mooze', 'tarikhi', 'tabiatgardi', 'tafrihi', 'markazkharid'])->get();
+        $allHotels = Hotel::where('cityId', $city->id)->select(['id', 'name', 'C', 'D'])->get();
+        $allRestaurant = Restaurant::where('cityId', $city->id)->select(['id', 'name', 'C', 'D', 'kind_id'])->get();
+
+        return view('cityPage', compact(['city', 'cityPost', 'mostSeenPosts', 'allAmaken', 'allHotels', 'allRestaurant']));
     }
 
     public function abbas()

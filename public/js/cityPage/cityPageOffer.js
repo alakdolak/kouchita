@@ -1,6 +1,4 @@
 
-var data = $.param({});
-
 (function () {
 
     var app = angular.module("mainApp", ['infinite-scroll'], function ($interpolateProvider) {

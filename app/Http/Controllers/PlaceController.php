@@ -3133,6 +3133,69 @@ class PlaceController extends Controller {
         }
     }
 
+    public function getRandomFood()
+    {
+        $place4 = null;
+        if(isset($_POST['cityId'])) {
+            $stateId = Cities::find($_POST['cityId'])->stateId;
+            $place4 = Adab::whereCategory(3)->where('stateId', $stateId)->inRandomOrder()->take(4)->get();
+        }
+        elseif(isset($_POST['stateId'])) {
+            $stateId = $_POST['stateId'];
+            $place4 = Adab::whereCategory(3)->where('stateId', $stateId)->inRandomOrder()->take(4)->get();
+        }
+
+        if($place4 == null || count($place4) == 0)
+            $place4 = Adab::whereCategory(3)->inRandomOrder()->take(4)->get();
+
+
+        $kindPlaceId = Place::whereName('آداب')->first()->id;
+        foreach ($place4 as $itr) {
+            if (file_exists((__DIR__ . '/../../../../assets/_images/adab/ghazamahali/' . $itr->file . '/f-1.jpg')))
+                $itr->pic = URL::asset('_images/adab/ghazamahali/' . $itr->file . '/f-1.jpg');
+            else
+                $itr->pic = URL::asset('_images/nopic/blank.jpg');
+
+            $itr->reviews = 0;
+            $itr->rate = getRate($itr->id, $kindPlaceId)[1];
+            $itr->url = route('adabDetails', ['placeId' => $itr->id, 'placeName' => $itr->name]);
+            $itr->city = State::whereId($itr->stateId)->name;
+            $itr->state = $itr->city;
+            $itr->kindPlaceId = $kindPlaceId;
+        }
+
+        foreach ($place4 as $itr) {
+
+            if ($itr == null) {
+                $itr = null;
+                continue;
+            }
+
+            $itr->present = true;
+
+            if ($itr->kindPlaceId != 8) {
+                $city = Cities::whereId($itr->cityId);
+                if ($city == null) {
+                    $itr->present = false;
+                    continue;
+
+                }
+
+                $itr->city = $city->name;
+                $itr->state = State::whereId($city->stateId)->name;
+            } else {
+                $city = State::whereId($itr->stateId);
+                if ($city == null) {
+                    $itr = null;
+                    continue;
+                }
+                $itr->state = $itr->city = $city->name;
+            }
+        }
+
+        echo json_encode($place4);
+    }
+
     public function video360()
     {
         $videoSrc = '_images/movie.mp4';

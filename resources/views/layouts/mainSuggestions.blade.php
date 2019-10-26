@@ -186,6 +186,7 @@
 @endif
 
 @if(Auth::check())
+
     <div id="RecentlyControllerId" class="homepage_shelves_widget" ng-controller="RecentlyController">
         <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show">
             <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">

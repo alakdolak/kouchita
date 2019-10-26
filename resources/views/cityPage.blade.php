@@ -159,7 +159,9 @@
                 <div class="cpFriendsFooter">نمایش چهار نقد اخیر در دو ستون دو ردیفه با دکمه بیشتر و قابلیت لود در صفحه مانند صفحه هتل دیتیل</div>
             </div>
             <div class="cpBorderBottom">
-                <div class="cpMap"></div>
+                <div class="cpMap">
+                    <div id="map-small" class="prv_map clickable" style="width: 100%; height: 100%;"></div>
+                </div>
             </div>
         </div>
         <div class="col-lg-3" style="text-align: right;">
@@ -599,10 +601,10 @@
     var imageBasePath = '{{URL::asset('images')}}';
     var getLastRecentlyMainPath = '{{route('getLastRecentlyMain')}}';
     var getAdviceMainPath = '{{route('getAdviceMain')}}';
-    var getHotelsMainPath = '{{route('getHotelsMain')}}';
-    var getAmakensMainPath = '{{route('getAmakensMain')}}';
+    var getHotelsMainPath = '{{route('getRandomHotel')}}';
+    var getAmakensMainPath = '{{route('getRandomAmaken')}}';
     var getRestaurantsMainPath = '{{route('getRestaurantsMain')}}';
-    var getFoodsMainPath = '{{route('getFoodsMain')}}';
+    var getFoodsMainPath = '{{route('getRandomFood')}}';
     var getCitiesDir = "{{route('getCitiesDir')}}";
 
     var config = {
@@ -611,9 +613,14 @@
             'X-CSRF-TOKEN': '{{csrf_token()}}'
         }
     };
+
+    var data = $.param({
+        cityId: '{{$city->id}}',
+    });
 </script>
 
-<script defer src="{{URL::asset('js/mainPageSuggestions.js')}}"></script>
+{{--<script defer src="{{URL::asset('js/mainPageSuggestions.js')}}"></script>--}}
+<script defer src="{{URL::asset('js/cityPage/cityPageOffer.js')}}"></script>
 
 <script async src="{{URL::asset('js/middleBanner.js')}}"></script>
 
@@ -677,6 +684,142 @@
 <div class="ui_backdrop dark" id="darkModeMainPage"></div>
 
 <script src="{{URL::asset('js/adv.js')}}"></script>
+
+{{--map--}}
+
+<script>
+    var x = '{{$city->x}}';
+    var y = '{{$city->y}}';
+    var all_amaken = {!! $allAmaken !!};
+    var all_hotels = {!! $allHotels !!};
+    var all_restaurant = {!! $allRestaurant !!};
+    var iconBase = '{{URL::asset('images') . '/'}}';
+    var icons = {
+        hotel: {
+            icon: iconBase + 'mhotel.png'
+        },
+        amaken1: {
+            icon: iconBase + 'matr_pla.png'
+        },
+        amaken2: {
+            icon: iconBase + 'matr_mus.png'
+        },
+        amaken3: {
+            icon: iconBase + 'matr_shc.png'
+        },
+        amaken4: {
+            icon: iconBase + 'matr_nat.png'
+        },
+        amaken5: {
+            icon: iconBase + 'matr_fun.png'
+        },
+        fastfood: {
+            icon: iconBase + 'mfast.png'
+        },
+        rest: {
+            icon: iconBase + 'mrest.png'
+        }
+    };
+
+
+    function init() {
+        var x = '{{$city->x}}';
+        var y = '{{$city->y}}';
+        var place_name = '{{ $city->name }}';
+        var mapOptions = {
+            zoom: 10,
+            center: new google.maps.LatLng(x, y),
+            // How you would like to style the map.
+            // This is where you would paste any style found on Snazzy Maps.
+            styles: [{
+                "featureType": "landscape",
+                "stylers": [{"hue": "#FFA800"}, {"saturation": 0}, {"lightness": 0}, {"gamma": 1}]
+            }, {
+                "featureType": "road.highway",
+                "stylers": [{"hue": "#53FF00"}, {"saturation": -73}, {"lightness": 40}, {"gamma": 1}]
+            }, {
+                "featureType": "road.arterial",
+                "stylers": [{"hue": "#FBFF00"}, {"saturation": 0}, {"lightness": 0}, {"gamma": 1}]
+            }, {
+                "featureType": "road.local",
+                "stylers": [{"hue": "#00FFFD"}, {"saturation": 0}, {"lightness": 30}, {"gamma": 1}]
+            }, {
+                "featureType": "water",
+                "stylers": [{"hue": "#00BFFF"}, {"saturation": 6}, {"lightness": 8}, {"gamma": 1}]
+            }, {
+                "featureType": "poi",
+                "stylers": [{"hue": "#679714"}, {"saturation": 33.4}, {"lightness": -25.4}, {"gamma": 1}]
+            }]
+        };
+        // Get the HTML DOM element that will contain your map
+        // We are using a div with id="map" seen below in the <body>
+        var mapElementSmall = document.getElementById('map-small');
+        // Create the Google Map using our element and options defined above
+        var map2 = new google.maps.Map(mapElementSmall, mapOptions);
+
+        var marker;
+
+        // set amaken marker
+        for(i = 0; i < all_amaken.length; i++) {
+            if (all_amaken[i].mooze == 1)
+                kindAmaken = 'amaken2';
+            else if (all_amaken[i].tarikhi == 1)
+                kindAmaken = 'amaken1';
+            else if (all_amaken[i].tabiatgardi == 1)
+                kindAmaken = 'amaken4';
+            else if (all_amaken[i].tafrihi == 1)
+                kindAmaken = 'amaken5';
+            else if (all_amaken[i].markazkharid == 1)
+                kindAmaken = 'amaken3';
+            else
+                kindAmaken = 'amaken2';
+
+            marker = new google.maps.Marker({
+                position: new google.maps.LatLng(all_amaken[i]['C'], all_amaken[i]['D']),
+                icon: {
+                    url: icons[kindAmaken].icon,
+                    scaledSize: new google.maps.Size(35, 35)
+                },
+                map: map2,
+                title: all_amaken[i]['name']
+            });
+        }
+
+        // set hotels marker
+        for(i = 0; i < all_hotels.length; i++) {
+            marker = new google.maps.Marker({
+                position: new google.maps.LatLng(all_hotels[i]['C'], all_hotels[i]['D']),
+                icon: {
+                    url: icons['hotel'].icon,
+                    scaledSize: new google.maps.Size(35, 35)
+                },
+                map: map2,
+                title: all_hotels[i]['name']
+            });
+        }
+
+        // set restaurant marker
+        for(i = 0; i < all_restaurant.length; i++) {
+            if (all_restaurant[i].kind_id == 1)
+                kindRestaurant = 'rest';
+            else
+                kindRestaurant = 'fastfood';
+
+            marker = new google.maps.Marker({
+                position: new google.maps.LatLng(all_restaurant[i]['C'], all_restaurant[i]['D']),
+                icon: {
+                    url: icons[kindRestaurant].icon,
+                    scaledSize: new google.maps.Size(35, 35)
+                },
+                map: map2,
+                title: all_restaurant[i]['name']
+            });
+        }
+    }
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyCdVEd4L2687AfirfAnUY1yXkx-7IsCER0&callback=init"></script>
+
 </body>
 </html>
 
