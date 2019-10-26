@@ -340,11 +340,9 @@ class AmakenController extends Controller {
 
     public function getAmakensMain()
     {
-
         $activityId = Activity::whereName('نظر')->first()->id;
         $kindPlaceId = Place::whereName('اماکن')->first()->id;
         $place1 = DB::select("select amaken.id, amaken.name, amaken.cityId, amaken.file, amaken.pic_1, COUNT(*) as matches from amaken, log WHERE confirm = 1 and log.activityId = " . $activityId . " and log.placeId = amaken.id and log.kindPlaceId = " . $kindPlaceId . " GROUP BY(log.placeId) ORDER by matches limit 0, 4");
-
         $reminder = 4 - count($place1);
         $z = "(";
         $first = true;
@@ -374,6 +372,63 @@ class AmakenController extends Controller {
                 $itr->pic = URL::asset('_images/nopic/blank.jpg');
 
             $itr->reviews = $itr->matches;
+            $itr->rate = getRate($itr->id, $kindPlaceId)[1];
+            $itr->url = route('amakenDetails', ['placeId' => $itr->id, 'placeName' => $itr->name]);
+            $itr->kindPlaceId = $kindPlaceId;
+        }
+
+        foreach ($place1 as $itr) {
+
+            if ($itr == null) {
+                $itr = null;
+                continue;
+            }
+
+            $itr->present = true;
+
+            if ($itr->kindPlaceId != 8) {
+                $city = Cities::whereId($itr->cityId);
+                if ($city == null) {
+                    $itr->present = false;
+                    continue;
+
+                }
+
+                $itr->city = $city->name;
+                $itr->state = State::whereId($city->stateId)->name;
+            } else {
+                $city = State::whereId($itr->stateId);
+                if ($city == null) {
+                    $itr = null;
+                    continue;
+                }
+                $itr->state = $itr->city = $city->name;
+            }
+        }
+
+        echo json_encode($place1);
+    }
+
+    public function getRandomAmaken()
+    {
+        if(isset($_POST['cityId']))
+            $place1 = Amaken::where('cityId', $_POST['cityId'])->select(['name', 'id', 'cityId', 'file', 'pic_1'])->inRandomOrder()->limit(4)->get();
+        else
+            $place1 = Amaken::select(['name', 'id', 'cityId', 'file', 'pic_1'])->inRandomOrder()->limit(4)->get();
+
+        $kindPlaceId = Place::whereName('اماکن')->first()->id;
+        $activityId = Activity::whereName('نظر')->first()->id;
+
+        foreach ($place1 as $itr) {
+            $condition = ['activityId' => $activityId, 'placeId' => $itr->id, 'kindPlaceId' => $kindPlaceId];
+            $match = LogModel::where($condition)->count();
+
+            if (file_exists((__DIR__ . '/../../../../assets/_images/amaken/' . $itr->file . '/f-1.jpg')))
+                $itr->pic = URL::asset('_images/amaken/' . $itr->file . '/f-1.jpg');
+            else
+                $itr->pic = URL::asset('_images/nopic/blank.jpg');
+
+            $itr->reviews = $match;
             $itr->rate = getRate($itr->id, $kindPlaceId)[1];
             $itr->url = route('amakenDetails', ['placeId' => $itr->id, 'placeName' => $itr->name]);
             $itr->kindPlaceId = $kindPlaceId;
