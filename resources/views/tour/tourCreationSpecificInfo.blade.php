@@ -205,7 +205,7 @@ $kindPlaceId = 10; ?>
                         <div class="select-side">
                             <i class="glyphicon glyphicon-triangle-bottom"></i>
                         </div>
-                        <select class="inputBoxInput styled-select" type="text" placeholder="انتخاب کنید">
+                        <select class="inputBoxInput styled-select text-align-right" type="text" placeholder="انتخاب کنید">
                             <option>انتخاب کنید</option>
                             <option>قطار</option>
                             <option>هواپیما</option>
@@ -462,7 +462,7 @@ $kindPlaceId = 10; ?>
                 </div>
             </div>
             <div class="ui_container">
-                <button id="goToThirdStep" class="btn">گام بعدی</button>
+                <button id="goToForthStep" class="btn nextStepBtnTourCreation">گام بعدی</button>
             </div>
         </form>
     </div>

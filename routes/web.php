@@ -26,6 +26,10 @@ Route::get('tourCreationFinancialInfo', function(){
     return view('tour/tourCreationFinancialInfo');
 });
 
+Route::get('tourCreationLanguage&Schedule', function(){
+    return view('tour/tourCreationLanguage&Schedule');
+});
+
 Route::get('gardeshname2/{page?}', 'PostController@gardeshname')->name('gardeshname');
 
 Route::get('gardeshnameInner/{postId}', ['as' => 'gardeshnameInner', 'uses' => 'PostController@gardeshnameInner']);

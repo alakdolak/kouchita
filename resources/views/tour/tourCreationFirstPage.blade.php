@@ -74,7 +74,7 @@ $kindPlaceId = 10; ?>
                     <span>نگران نباشید. شما همواره از طریق پروفایل خود امکان ادامه ایجاد تور را خواهید داشت. هر اطلاعاتی که وارد می‌کنید به صورت موقت ذخیره می‌شود مگر آن‌که هشداری مبنی بر عدم صحت آن دریافت کنید.</span>
                     <span>این فرآیند تقریباً مابین ... الی ... دقیقه زمان می‌برد.</span>
                 </div>
-                <button id="termsAndConditionBtn" class="btn">شروع کنید</button>
+                <button id="termsAndConditionBtn" class="btn nextStepBtnTourCreation">شروع کنید</button>
             </div>
         </div>
     </div>

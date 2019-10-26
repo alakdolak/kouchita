@@ -651,7 +651,7 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     margin-top: 15px;
 }
 
-#goToSecondStep , #goToThirdStep{
+.nextStepBtnTourCreation {
     float: left;
     background-color: #4dc7bc;
     width: 110px;
@@ -722,7 +722,7 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
 
 .transportationStartTimeTourCreation > input {
     display: inline-block;
-    width: 30%;
+    width: 32%;
 }
 
 .transportationStartTimeTourCreation > input:nth-child(2) {
@@ -987,12 +987,18 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     left: 20px;
 }
 
-.tourCapacityNGOTours .inputBoxText {
+.tourCapacityNGOTours .inputBoxText , .specialDiscountBoxes .inputBoxText {
     width: 45%;
 }
 
-.tourCapacityNGOTours .inputBoxInput {
+.tourCapacityNGOTours .inputBoxInput  , .specialDiscountBoxes .inputBoxInput {
     width: 50%;
+}
+
+#tourCapacityCheckbox {
+    font-size: 13px;
+    font-weight: 500;
+    color:black;
 }
 
 .discountLimitationWholesale > div , .discountLimitationWholesale > input {
@@ -1015,8 +1021,81 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
+/*language and schedule infos styles*/
+
+.tourBasicKindsCheckbox {
+    font-size: 13px;
+    font-weight: 500;
+    color:black;
+    width: 85%;
+    display: inline-block;
+    line-height: 1.45;
+    padding-left: 10px;
+}
+
+.tourBasicKindTourCreation {
+    float: right;
+    /*text-align: right;*/
+    padding: 31px 30px;
+    box-shadow: 0 4px 16px 0
+    rgba(0, 0, 0, 0.2);
+    margin: 15px 0 0 20px;
+    width: 30%;
+    border-radius: 5px;
+
+}
+
+.tourBasicKindTourCreationBiggerOne {
+    padding: 18px 30px;
+}
+
+.tourBasicKindTourCreationBiggerOne > label > span {
+    margin-bottom: 15px !important;
+}
+
 .no-border-imp {
     border: 0 !important;
+}
+
+.calendarIconTourCreation {
+    top: 3px !important;
+}
+
+.calendarIconTourCreation > i {
+    color: #4DC7BC !important;
+    font-size: 20px !important;
+}
+
+.tourNthOccurrence {
+    background-color: rgb(251 , 193 , 86);
+    color: white;
+    padding: 2px 15px;
+    display: inline-block;
+    float: right;
+    border-radius: 5px;
+    margin: 10px;
+    font-weight: 700;
+    font-size: 22px;
+}
+
+.width-130 {
+    width: 130px;
+}
+
+.width-45per {
+    width: 45%;
+}
+
+.width-50per {
+    width: 50%;
+}
+
+.width-84per {
+    width: 84%;
+}
+
+.text-align-right {
+    text-align: right;
 }
 
 .float-right {
@@ -1043,12 +1122,28 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     padding: 0;
 }
 
+.pd-lt-3 {
+    padding-left: 3px;
+}
+
 .pd-rt-0 {
     padding-right: 0;
 }
 
+.pd-tp-5 {
+    padding-top: 5px;
+}
+
 .mg-rt-10 {
     margin-right: 10px;
+}
+
+.mg-rt-50 {
+    margin-right: 50px;
+}
+
+.mg-tp-5 {
+    margin-top: 5px;
 }
 
 .mg-tp-12 {

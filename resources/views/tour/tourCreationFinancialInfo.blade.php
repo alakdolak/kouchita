@@ -179,7 +179,7 @@ $kindPlaceId = 10; ?>
             <div class="ui_container">
                 <div class="menu ui_container whiteBox">
                     <div class="boxTitlesTourCreation">
-                        <span>امانات اضافه</span>
+                        <span>امکانات اضافه</span>
                     </div>
                     <div class="inboxHelpSubtitle">
                         سایر امکاناتی که شما در تور با دریافت هزینه‌ی اضافه ارئه می‌دهید را وارد نمایید.
@@ -294,6 +294,15 @@ $kindPlaceId = 10; ?>
                         </div>
                         <input class="inputBoxInput" type="text" placeholder="تعداد">
                     </div>
+                    <div class="fullwidthDiv">
+                        <input ng-model="sort" type="checkbox" id="c01" value="rate"/>
+                        <label for="c01">
+                            <span></span>
+                        </label>
+                        <span id="tourCapacityCheckbox">
+                            با هر ظرفیتی تور برگزار می شود.
+                        </span>
+                    </div>
                 </div>
             </div>
             <div class="ui_container">
@@ -336,7 +345,7 @@ $kindPlaceId = 10; ?>
                             </button>
                         </div>
                     </div>
-                    <div class="fullwidthDiv">
+                    <div class="fullwidthDiv specialDiscountBoxes">
                         <div class="boxTitlesTourCreation">
                             <span>تخفیف ویژه‌ی کودکان</span>
                         </div>
@@ -353,7 +362,7 @@ $kindPlaceId = 10; ?>
                             <input class="inputBoxInput" type="text" placeholder="تعداد">
                         </div>
                     </div>
-                    <div class="fullwidthDiv">
+                    <div class="fullwidthDiv specialDiscountBoxes">
                         <div class="boxTitlesTourCreation">
                             <span>تخفیف‌های مناسبتی و کد تخفیف</span>
                         </div>
@@ -388,7 +397,7 @@ $kindPlaceId = 10; ?>
                 </div>
             </div>
             <div class="ui_container">
-                <button id="goToThirdStep" class="btn">گام بعدی</button>
+                <button id="goToFifthStep" class="btn nextStepBtnTourCreation">گام بعدی</button>
             </div>
         </form>
     </div>

@@ -555,7 +555,7 @@ $kindPlaceId = 10; ?>
                 </div>
             </div>
             <div class="ui_container">
-                <button id="goToSecondStep" class="btn">گام بعدی</button>
+                <button id="goToSecondStep" class="btn nextStepBtnTourCreation">گام بعدی</button>
             </div>
         </form>
     </div>
