@@ -46,7 +46,7 @@ $kindPlaceId = 10; ?>
         <div class="atf_meta_and_photos_wrapper">
             <div class="atf_meta_and_photos ui_container is-mobile easyClear">
                 <div class="prw_rup darkGreyBox tourDetailsMainFormHeading">
-                    <b class="formName">اطلاعات اختصاصی</b>
+                    <b class="formName">اطلاعات مالی</b>
                     <div class="tourCreationStepInfo">
                         <span>
                             گام
@@ -65,34 +65,43 @@ $kindPlaceId = 10; ?>
         </div>
     </div>
 
-    <div id="tourDetailsMainForm2ndtStepMainDiv" class="Hotel_Review prodp13n_jfy_overflow_visible lightGreyBox">
+    <div id="tourDetailsMainForm3rdtStepMainDiv" class="Hotel_Review prodp13n_jfy_overflow_visible lightGreyBox">
         <form method="" action="">
             <div class="ui_container">
-                <div class="menu ui_container whiteBox whiteBoxSpecificInfo">
-                    <div>
-                        <span id="mainTransportationTitleTourCreation">حمل و نقل اصلی</span></div>
-                    <div>
-                        <span id="mainTransportationHelpTourCreation">حمل و نقل اصلی مرتبط با انتقال مسافران از مبدأ به مقصد و بالعکس می‌باشد</span>
+                <div class="menu ui_container whiteBox">
+                    <div class="boxTitlesTourCreation">
+                        قیمت پایه
                     </div>
-                    <div id="tourTransportationResponsibility">
-                        <span>آیا حمل و نقل اصلی برعهده‌ی تور است؟</span>
-                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                            <label class="btn btn-secondary">
-                                <input type="radio" name="options" id="option1" autocomplete="off">خیر
-                            </label>
-                            <label class="btn btn-secondary active">
-                                <input type="radio" name="options" id="option2" autocomplete="off" checked>بلی
-                            </label>
-                        </div>
+                    <div class="inboxHelpSubtitle">
+                        قیمت پایه‌ی تور قیمتی است که فارغ از هرگونه امکانات اضافه بدست آمده است و کمترین قیمتی است که کاربران می‌توانند تور را با آن خریداری نمایند. اگر برخی امکانات و یا کیفیت اقامتگاه تور، قیمت تور را تغییر می‌دهد، آن‌ها را در قسمت‌های بعدی وارد نمایید.
                     </div>
-                    <div class="transportationDetailsMainBoxes">
-                        <div class="transportationTitleBoxes" id="toTheDestinationTitleBox">
-                            رفت
-                        </div>
-                        <div class="inputBox col-xs-4 transportationKindTourCreation">
+                    <div class="tourBasicPriceTourCreation col-xs-6">
+                        <div class="inputBox col-xs-10" id="">
                             <div class="inputBoxText">
                                 <div>
-                                    نوع وسیله
+                                    قیمت پایه
+                                    <span>*</span>
+                                </div>
+                            </div>
+                            <input class="inputBoxInput" type="text" placeholder="ریال">
+                        </div>
+                        <div id="tourInsuranceConfirmation" class="col-xs-10 pd-0">
+                            <span>آیا تور شما دارای بیمه می‌باشد؟</span>
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-secondary">
+                                    <input type="radio" name="options" id="option1" autocomplete="off">خیر
+                                </label>
+                                <label class="btn btn-secondary active">
+                                    <input type="radio" name="options" id="option2" autocomplete="off" checked>بلی
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tourTicketKindTourCreation col-xs-6">
+                        <div class="inputBox col-xs-10" id="">
+                            <div class="inputBoxText">
+                                <div>
+                                    نوع بلیط
                                     <span>*</span>
                                 </div>
                             </div>
@@ -100,363 +109,281 @@ $kindPlaceId = 10; ?>
                                 <i class="glyphicon glyphicon-triangle-bottom"></i>
                             </div>
                             <select class="inputBoxInput styled-select" type="text" placeholder="انتخاب کنید">
-
                             </select>
                         </div>
-                        <div class="inputBox col-xs-5" id="">
-                            <div class="inputBoxText">
-                                <div>
-                                    محل حرکت
-                                    <span>*</span>
-                                </div>
-                            </div>
-                            <input class="inputBoxInput" type="text" placeholder="فارسی">
-                        </div>
-                        <button class="transportationMapPinningTourCreation col-xs-2">نشانه‌گذاری بر روی نقشه</button>
-                        <div class="inputBox col-xs-4 transportationStartTimeTourCreation" id="">
-                            <div class="inputBoxText">
-                                <div>
-                                    ساعت حرکت
-                                    <span>*</span>
-                                </div>
-                            </div>
-                            <input class="inputBoxInput" type="text" placeholder="ساعت">
-                            <input class="inputBoxInput" type="text" placeholder="دقیقه">
-                        </div>
-                        <div class="inputBox col-xs-7" id="">
-                            <div class="inputBoxText">
-                                <div>
-                                    توضیحات تکمیلی
-                                </div>
-                            </div>
-                            <input class="inputBoxInput" type="text" placeholder="حداکثر 100 کاراکتر">
-                        </div>
-                        <div>
-                            <span class="inboxHelpSubtitle">تاریخ رفت تاریخ شروع تور در نظر گرفته شود.</span>
-                        </div>
-                    </div>
-                    <div class="transportationDetailsMainBoxes">
-                        <div class="transportationTitleBoxes" id="fromTheDestinationTitleBox">
-                            برگشت
-                        </div>
-                        <div class="inputBox col-xs-4 transportationKindTourCreation">
-                            <div class="inputBoxText">
-                                <div>
-                                    نوع وسیله
-                                    <span>*</span>
-                                </div>
-                            </div>
-                            <div class="select-side">
-                                <i class="glyphicon glyphicon-triangle-bottom"></i>
-                            </div>
-                            <select class="inputBoxInput styled-select" type="text" placeholder="انتخاب کنید">
-
-                            </select>
-                        </div>
-                        <div class="inputBox col-xs-5" id="">
-                            <div class="inputBoxText">
-                                <div>
-                                    محل حرکت
-                                    <span>*</span>
-                                </div>
-                            </div>
-                            <input class="inputBoxInput" type="text" placeholder="فارسی">
-                        </div>
-                        <button class="transportationMapPinningTourCreation col-xs-2">نشانه‌گذاری بر روی نقشه</button>
-                        <div class="inputBox col-xs-4 transportationStartTimeTourCreation" id="">
-                            <div class="inputBoxText">
-                                <div>
-                                    ساعت حرکت
-                                    <span>*</span>
-                                </div>
-                            </div>
-                            <input class="inputBoxInput" type="text" placeholder="ساعت">
-                            <input class="inputBoxInput" type="text" placeholder="دقیقه">
-                        </div>
-                        <div class="inputBox col-xs-7" id="">
-                            <div class="inputBoxText">
-                                <div>
-                                    توضیحات تکمیلی
-                                </div>
-                            </div>
-                            <input class="inputBoxInput" type="text" placeholder="حداکثر 100 کاراکتر">
-                        </div>
-                        <div>
-                            <span class="inboxHelpSubtitle">تاریخ برگشت تاریخ پایان تور در نظر گرفته شود.</span>
+                        <div class="col-xs-10 pd-0">
+                            <span class="inboxHelpSubtitleBlue">نیاز به راهنمایی دارید؟</span>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="ui_container">
-                <div class="menu ui_container whiteBox whiteBoxSpecificInfo">
+                <div class="menu ui_container whiteBox">
                     <div class="boxTitlesTourCreation">
-                        حمل و نقل فرعی
+                        اقامتگاه‌ها
                     </div>
                     <div class="inboxHelpSubtitle">
-                        حمل و نقل فرعی مرتبط با انتقال مسافران در داخل مقصد و در طول برگزاری تور می‌باشد.
+                        نحوه‌ی اسکان مسافران را در طول تور تعیین نمایید. اگر چند نوع اقامتگاه مدنظر دارید، همگی را وارد نموده و میزان تغییرات قیمت را با توجه به انتخاب آن‌ها ذکر کنید.
                     </div>
-                    <div class="inputBox col-xs-12 relative-position" id="mainClassificationOfTransportationInputDiv">
-                        <div class="inputBoxText" id="mainClassificationOfTransportationLabel">
-                            <div>
-                                دسته‌بندی اصلی
-                                <span>*</span>
-                            </div>
+                    <div class="tourOccupationDetailsTourCreation mg-tp-15 col-xs-12">
+                        <div class="col-xs-2">
+                            <img src="">
                         </div>
+                        <div class="col-xs-2 pd-0 mg-tp-20">
+                            <b class="fullwidthDiv font-size-20">هتل آناهیتا</b>
+                            <span class="tourOccupationGradeTitle">درجه هتل:</span>
+                            <span class="tourOccupationGrade">پنج ستاره</span>
+                        </div>
+                        <div class="inputBox col-xs-3 mg-30-10" id="">
+                            <div class="inputBoxText">
+                                <div>
+                                    نوع اتاق
+                                    <span>*</span>
+                                </div>
+                            </div>
+                            <div class="select-side">
+                                <i class="glyphicon glyphicon-triangle-bottom"></i>
+                            </div>
+                            <select class="inputBoxInput styled-select" type="text" placeholder="انتخاب کنید">
+                                <option>انتخاب کنید</option>
+                            </select>
+                        </div>
+                        <div class="mg-tp-20 mg-rt-10 col-xs-3 pd-0">
+                            <div class="inputBox full-width" id="">
+                                <div class="inputBoxText">
+                                    <div>
+                                        قیمت
+                                        <span>*</span>
+                                    </div>
+                                </div>
+                                <input class="inputBoxInput" type="text" placeholder="ریال">
+                            </div>
+                            <div class="inboxHelpSubtitle">قیمت تور با احتساب این اقامتگاه</div>
+                        </div>
+                        <button class="tourOccupationDetailsBtn copyBtnTourCreation">
+                            <img src="{{"images/tourCreation/copy.png"}}">
+                        </button>
+                        <button class="tourOccupationDetailsBtn deleteBtnTourCreation">
+                            <img src="{{"images/tourCreation/delete.png"}}">
+                        </button>
+                    </div>
+
+                    <center class="addTourPlacesBtnDivTourCreation pd-0 col-xs-4">
+                        <div class="addTourPlacesBtnCreation circleBase type2">
+                            <img src="{{"images/tourCreation/add.png"}}">
+                            <div>اضافه کنید</div>
+                        </div>
+                    </center>
+                </div>
+            </div>
+            <div class="ui_container">
+                <div class="menu ui_container whiteBox">
+                    <div class="boxTitlesTourCreation">
+                        <span>امانات اضافه</span>
+                    </div>
+                    <div class="inboxHelpSubtitle">
+                        سایر امکاناتی که شما در تور با دریافت هزینه‌ی اضافه ارئه می‌دهید را وارد نمایید.
+                    </div>
+                    <div class="inputBox float-right col-xs-2" id="">
+                        <input class="inputBoxInput moreFacilityInputs" type="text" placeholder="نام">
+                    </div>
+                    <div class="inputBox float-right col-xs-3 mg-rt-10" id="">
+                        <input class="inputBoxInput moreFacilityInputs" type="text" placeholder="توضیحات">
+                    </div>
+                    <div class="inputBox float-right col-xs-2 mg-rt-10" id="">
                         <div class="select-side">
                             <i class="glyphicon glyphicon-triangle-bottom"></i>
                         </div>
-                        <select class="inputBoxInput styled-select" type="text" placeholder="انتخاب کنید">
-                            <option>قطار</option>
-                            <option>هواپیما</option>
+                        <select class="inputBoxInput moreFacilityInputs styled-select" type="text" placeholder="انتخاب کنید">
+                            <option>هم‌گروهی</option>
                         </select>
-                        <div class="transportationKindChosenMainDiv">
-                            <div class="transportationKindChosenOnes col-xs-2">
-                                اتوبوس
-                                <span class="glyphicon glyphicon-remove"></span>
-                            </div>
+                    </div>
+                    <div class="inputBox float-right col-xs-3 mg-rt-10 relative-position" id="">
+                        <input class="inputBoxInput moreFacilityInputs" type="text" placeholder="ریال">
+                        <div class="inboxHelpSubtitle" id="subtitleMoreFacility">
+                            میزان افزایش قیمت را وارد نمایید.
                         </div>
                     </div>
+                    <button class="tourMoreFacilityDetailsBtn verifyBtnTourCreation">
+                        <img src="{{"images/tourCreation/approve.png"}}">
+                    </button>
+                    <button class="tourMoreFacilityDetailsBtn deleteBtnTourCreation">
+                        <img src="{{"images/tourCreation/delete.png"}}">
+                    </button>
                     <div class="inboxHelpSubtitle">
-                        در صورت وجود بیشتر از یک وسیله همه‌ی آن‌ها را انتخاب نمایید.
+                        امکاناتی را که امکان انتخاب همزمان آن‌ها موجود نمی‌باشد، در هم‌گروهی‌های یکسان قرار دهید.
                     </div>
                 </div>
             </div>
             <div class="ui_container">
-                <div class="menu ui_container whiteBox whiteBoxSpecificInfo">
+                <div class="menu ui_container whiteBox tourCapacityNGOTours">
                     <div class="boxTitlesTourCreation">
-                        <span>وعده‌ی غذایی</span>
+                        <span>ظرفیت</span>
                     </div>
-                    <div class="tourFoodOfferQuestions">
-                        <span>آیا در طول مدت تور وعده‌ی غذایی ارائه می‌شود؟</span>
-                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                            <label class="btn btn-secondary">
-                                <input type="radio" name="options" id="option1" autocomplete="off">خیر
-                            </label>
-                            <label class="btn btn-secondary active">
-                                <input type="radio" name="options" id="option2" autocomplete="off" checked>بلی
-                            </label>
+                    <div class="inputBox col-xs-3 float-right">
+                        <div class="inputBoxText">
+                            <div>
+                                نوع تور
+                                <span>*</span>
+                            </div>
+                        </div>
+                        <input class="inputBoxInput" type="text" placeholder="خصوصی">
+                    </div>
+                    <div class="col-xs-4 float-right">
+                        <div class="inputBox col-xs-12">
+                            <div class="inputBoxText">
+                                <div>
+                                    حداکثر تعداد افراد
+                                    <span>*</span>
+                                </div>
+                            </div>
+                            <input class="inputBoxInput" type="text" placeholder="تعداد">
+                        </div>
+                        <div class="inputBox col-xs-12">
+                            <div class="inputBoxText">
+                                <div>
+                                    حداقل تعداد افراد
+                                    <span>*</span>
+                                </div>
+                            </div>
+                            <input class="inputBoxInput" type="text" placeholder="تعداد">
+                        </div>
+                    </div>
+                    <div class="inputBox col-xs-5 float-right">
+                        <div class="inputBoxText">
+                            <div>
+                                حداکثر تعداد گروه‌های همزمان
+                                <span>*</span>
+                            </div>
+                        </div>
+                        <input class="inputBoxInput" type="text" placeholder="تعداد">
+                    </div>
+                </div>
+            </div>
+            <div class="ui_container">
+                <div class="menu ui_container whiteBox">
+                    <div class="boxTitlesTourCreation">
+                        <span>ظرفیت</span>
+                    </div>
+                    <div class="inputBox col-xs-3 float-right">
+                        <div class="inputBoxText">
+                            <div>
+                                نوع تور
+                                <span>*</span>
+                            </div>
+                        </div>
+                        <input class="inputBoxInput" type="text" placeholder="گروهی">
+                    </div>
+                    <div class="col-xs-4 float-right">
+                        <div class="inputBox col-xs-12">
+                            <div class="inputBoxText">
+                                <div>
+                                    حداکثر ظرفیت
+                                    <span>*</span>
+                                </div>
+                            </div>
+                            <input class="inputBoxInput" type="text" placeholder="تعداد">
+                        </div>
+                    </div>
+                    <div class="inputBox col-xs-4 float-right">
+                        <div class="inputBoxText">
+                            <div>
+                                حداکثر ظرفیت
+                                <span>*</span>
+                            </div>
+                        </div>
+                        <input class="inputBoxInput" type="text" placeholder="تعداد">
+                    </div>
+                </div>
+            </div>
+            <div class="ui_container">
+                <div class="menu ui_container whiteBox">
+                    <div class="boxTitlesTourCreation">
+                        <span>تخفیف خرید گروهی</span>
+                    </div>
+                    <div class="inboxHelpSubtitle">
+                        تخفیف‌های گروهی به خریداران ظرفیت‌های بالا اعمال می‌شود. شما می‌توانید با تعیین بازه‌های متفاوت تخفیف‌های متفاوتی اعمال نمایید.
+                    </div>
+                    <div class="col-xs-12 pd-0">
+                        <div class="inputBox discountLimitationWholesale float-right">
+                            <div class="inputBoxText">
+                                <div>
+                                    بازه‌ی تخفیف
+                                    <span>*</span>
+                                </div>
+                            </div>
+                            <input class="inputBoxInput" type="text" placeholder="از">
+                            <div class="inputBoxText">
+                                <div>
+                                    الی
+                                </div>
+                            </div>
+                            <input class="inputBoxInput" type="text" placeholder="تا">
+                            <div class="inputBoxText">
+                                <div>
+                                    درصد تخفیف
+                                    <span>*</span>
+                                </div>
+                            </div>
+                            <input class="inputBoxInput no-border-imp" type="text" placeholder="عدد">
+                        </div>
+                        <div class="inline-block mg-tp-12 mg-rt-10">
+                            <button class="wholesaleDiscountLimitationBtn verifyBtnTourCreation">
+                                <img src="{{"images/tourCreation/approve.png"}}">
+                            </button>
+                            <button class="wholesaleDiscountLimitationBtn deleteBtnTourCreation">
+                                <img src="{{"images/tourCreation/delete.png"}}">
+                            </button>
                         </div>
                     </div>
                     <div class="fullwidthDiv">
-                        <div id="tourFoodMealTitleTourCreation" class="halfWidthDiv">
-                            نوع وعده را انتخاب نمایید؟
+                        <div class="boxTitlesTourCreation">
+                            <span>تخفیف ویژه‌ی کودکان</span>
                         </div>
-                        <div id="tourFoodMealChoseTourCreation" class="halfWidthDiv">
-                            <div class="col-xs-3">
-                                <input ng-model="sort" type="checkbox" id="c56" value="rate"/>
-                                <label for="c56">
-                                    <span></span>
-                                </label>
-                                <span class="tourTypeChoseTourCreation">
-                                    صبحانه
-                                </span>
+                        <div class="inboxHelpSubtitle">
+                            تخفیف ویژه برای کودکان و نوجوانان (زیر 12 سال) از این قسمت تعریف می‌گردد.
+                        </div>
+                        <div class="inputBox col-xs-3 float-right">
+                            <div class="inputBoxText">
+                                <div>
+                                    درصد تخفیف
+                                    <span>*</span>
+                                </div>
                             </div>
-                            <div class="col-xs-3">
-                                <input ng-model="sort" type="checkbox" id="c57" value="rate"/>
-                                <label for="c57">
-                                    <span></span>
-                                </label>
-                                <span class="tourTypeChoseTourCreation">
-                                    ناهار
-                                </span>
-                            </div>
-                            <div class="col-xs-3">
-                                <input ng-model="sort" type="checkbox" id="c58" value="rate"/>
-                                <label for="c58">
-                                    <span></span>
-                                </label>
-                                <span class="tourTypeChoseTourCreation">
-                                    شام
-                                </span>
-                            </div>
-                            <div class="col-xs-3">
-                                <input ng-model="sort" type="checkbox" id="c59" value="rate"/>
-                                <label for="c59">
-                                    <span></span>
-                                </label>
-                                <span class="tourTypeChoseTourCreation">
-                                    میان‌وعده
-                                </span>
-                            </div>
+                            <input class="inputBoxInput" type="text" placeholder="تعداد">
                         </div>
                     </div>
-                    <div class="tourFoodOfferQuestions">
-                        <span>آیا وعده‌های غذایی تمام روزهای تور ارائه می‌شود و یا فقط در چند روز خاص قابل ارائه می‌باشد؟</span>
-                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                            <label class="btn btn-secondary">
-                                <input type="radio" name="options" id="option1" autocomplete="off">خیر
-                            </label>
-                            <label class="btn btn-secondary active">
-                                <input type="radio" name="options" id="option2" autocomplete="off" checked>بلی
-                            </label>
+                    <div class="fullwidthDiv">
+                        <div class="boxTitlesTourCreation">
+                            <span>تخفیف‌های مناسبتی و کد تخفیف</span>
+                        </div>
+                        <div class="inboxHelpSubtitle">
+                            در صورت تعریف سیستم تخفیف زیر ، ما از زمان اعلامی شما به صورت خودکار تخفیف خرید در روزهای پایانی را اعمال می‌نماییم.
+                        </div>
+                        <div class="inputBox col-xs-3 float-right">
+                            <div class="inputBoxText">
+                                <div>
+                                    درصد تخفیف
+                                    <span>*</span>
+                                </div>
+                            </div>
+                            <input class="inputBoxInput" type="text" placeholder="تعداد">
+                        </div>
+                        <div class="inputBox col-xs-3 mg-rt-10 float-right">
+                            <div class="inputBoxText">
+                                <div>
+                                    زمان شروع
+                                    <span>*</span>
+                                </div>
+                            </div>
+                            <input class="inputBoxInput" type="text" placeholder="تعداد">
                         </div>
                     </div>
-                    <div class="tourFoodOfferQuestions">
-                        <span>آیا وعده‌های غذایی نیازمند هزینه‌ی اضافی است؟</span>
-                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                            <label class="btn btn-secondary">
-                                <input type="radio" name="options" id="option1" autocomplete="off">خیر
-                            </label>
-                            <label class="btn btn-secondary active">
-                                <input type="radio" name="options" id="option2" autocomplete="off" checked>بلی
-                            </label>
-                        </div>
-                    </div>
-                    <div class="mg-tp-15">
-                        اگر محل ارائه‌ی وعده‌ها مشخص است حتماً آن را وارد نمایید.
-                    </div>
-                    <div class="inboxHelpSubtitle">
-                        ما مجموعه‌ی وسیعی از مزاکز ارائه‌ی غذا را در ردیتابیس خود داریم. با انتخاب گزینه‌ی به علاوه می‌توانید با جستجو در داخل آن‌ها مکان مورد نظر خود را انتخاب و به کاربران اطلاع دهید. تکمیل نمودن اطلاعات تأثیر به سزایی در توجه بیشتر کاربران دارد.
-                    </div>
-                    <div>
-                        <div class="addTourPlacesTourCreation col-xs-4 inline-block">
-                            <div class=" col-xs-5">
-                                <div class="addTourPlacesPicTourCreation circleBase type2"></div>
-                            </div>
-                            <div class="addTourPlacesNameTourCreation col-xs-7">
-                                <b>قنات دو طبقه مون</b>
-                                <div class="prw_rup prw_common_bubble_rating overallBubbleRating addTourPlacesRateTourCreation">
-                                    <span class="ui_bubble_rating bubble_50 font-size-16" property="ratingValue" content="5" alt='5 of 5 bubbles'></span>
-                                    <span>2 نقد</span>
-                                </div>
-                                <div class="inline-block">
-                                    استان: اصفهان
-                                </div>
-                            </div>
-                        </div>
-                        <div class="addTourPlacesTourCreation col-xs-4 inline-block">
-                            <div class=" col-xs-5">
-                                <div class="addTourPlacesPicTourCreation circleBase type2"></div>
-                            </div>
-                            <div class="addTourPlacesNameTourCreation col-xs-7">
-                                <b>قنات دو طبقه مون</b>
-                                <div class="prw_rup prw_common_bubble_rating overallBubbleRating addTourPlacesRateTourCreation">
-                                    <span class="ui_bubble_rating bubble_50 font-size-16" property="ratingValue" content="5" alt='5 of 5 bubbles'></span>
-                                    <span>2 نقد</span>
-                                </div>
-                                <div class="inline-block">
-                                    استان: اصفهان
-                                </div>
-                            </div>
-                        </div>
-                        <div class="addTourPlacesTourCreation col-xs-4 inline-block">
-                            <div class=" col-xs-5">
-                                <div class="addTourPlacesPicTourCreation circleBase type2"></div>
-                            </div>
-                            <div class="addTourPlacesNameTourCreation col-xs-7">
-                                <b>قنات دو طبقه مون</b>
-                                <div class="prw_rup prw_common_bubble_rating overallBubbleRating addTourPlacesRateTourCreation">
-                                    <span class="ui_bubble_rating bubble_50 font-size-16" property="ratingValue" content="5" alt='5 of 5 bubbles'></span>
-                                    <span>2 نقد</span>
-                                </div>
-                                <div class="inline-block">
-                                    استان: اصفهان
-                                </div>
-                            </div>
-                        </div>
-                        <div class="addTourPlacesTourCreation col-xs-4">
-                            <div class=" col-xs-5">
-                                <div class="addTourPlacesPicTourCreation circleBase type2"></div>
-                            </div>
-                            <div class="addTourPlacesNameTourCreation col-xs-7">
-                                <b>قنات دو طبقه مون</b>
-                                <div class="prw_rup prw_common_bubble_rating overallBubbleRating addTourPlacesRateTourCreation">
-                                    <span class="ui_bubble_rating bubble_50 font-size-16" property="ratingValue" content="5" alt='5 of 5 bubbles'></span>
-                                    <span>2 نقد</span>
-                                </div>
-                                <div class="inline-block">
-                                    استان: اصفهان
-                                </div>
-                            </div>
-                        </div>
-                        <center class="addTourPlacesBtnDivTourCreation col-xs-4">
-                            <div class="addTourPlacesBtnCreation circleBase type2">
-                                <img src="{{"images/tourCreation/add.png"}}">
-                                <div>اضافه کنید</div>
-                            </div>
-                        </center>
-                    </div>
-
-                </div>
-            </div>
-            <div class="ui_container">
-                <div class="menu ui_container whiteBox whiteBoxSpecificInfo">
                     <div class="boxTitlesTourCreation">
-                        <span>شهرهایی که می‌بینیم</span>
+                        <span>تخفیف‌های مناسبتی و کد تخفیف</span>
                     </div>
                     <div class="inboxHelpSubtitle">
-                        شهرهایی که در طول تور در آن‌ها برنامه‌ای برای کاربران دارید انتخاب نمایید. توجه نمایید حداقل در این شهر می‌بایست یک برنامه مانند رویداد و یا بازدید داشته باشید. شهر مبدأ و مقصد را وارد نمایید.
-                    </div>
-                    <div>
-                        <div class="addTourPlacesTourCreation col-xs-4 inline-block">
-                            <div class=" col-xs-5">
-                                <div class="addTourPlacesPicTourCreation circleBase type2"></div>
-                            </div>
-                            <div class="addTourPlacesNameTourCreation col-xs-7">
-                                <b>قنات دو طبقه مون</b>
-                                <div class="prw_rup prw_common_bubble_rating overallBubbleRating addTourPlacesRateTourCreation">
-                                    <span class="ui_bubble_rating bubble_50 font-size-16" property="ratingValue" content="5" alt='5 of 5 bubbles'></span>
-                                    <span>2 نقد</span>
-                                </div>
-                                <div class="inline-block">
-                                    استان: اصفهان
-                                </div>
-                            </div>
-                        </div>
-                        <div class="addTourPlacesTourCreation col-xs-4 inline-block">
-                            <div class=" col-xs-5">
-                                <div class="addTourPlacesPicTourCreation circleBase type2"></div>
-                            </div>
-                            <div class="addTourPlacesNameTourCreation col-xs-7">
-                                <b>قنات دو طبقه مون</b>
-                                <div class="prw_rup prw_common_bubble_rating overallBubbleRating addTourPlacesRateTourCreation">
-                                    <span class="ui_bubble_rating bubble_50 font-size-16" property="ratingValue" content="5" alt='5 of 5 bubbles'></span>
-                                    <span>2 نقد</span>
-                                </div>
-                                <div class="inline-block">
-                                    استان: اصفهان
-                                </div>
-                            </div>
-                        </div>
-                        <center class="addTourPlacesBtnDivTourCreation col-xs-4">
-                            <div class="addTourPlacesBtnCreation circleBase type2">
-                                <img src="{{"images/tourCreation/add.png"}}">
-                                <div>اضافه کنید</div>
-                            </div>
-                        </center>
-                    </div>
-                </div>
-            </div>
-            <div class="ui_container">
-                <div class="menu ui_container whiteBox whiteBoxSpecificInfo">
-                    <div class="boxTitlesTourCreation">
-                        <span>جاذبه‌هایی که می‌بینیم</span>
-                    </div>
-                    <div class="inboxHelpSubtitle">
-                        جاذبه‌هایی که در طول تور می‌بینیم را وارد نمایید تا کاربران با تور شما بیشتر آشنا شوند. برای بسیاری از کاربران جاذبه‌های مورد بازدید بسیار مهم است.
-                    </div>
-                    <div>
-                        <div class="addTourPlacesTourCreation col-xs-4 inline-block">
-                            <div class=" col-xs-5">
-                                <div class="addTourPlacesPicTourCreation circleBase type2"></div>
-                            </div>
-                            <div class="addTourPlacesNameTourCreation col-xs-7">
-                                <b>قنات دو طبقه مون</b>
-                                <div class="prw_rup prw_common_bubble_rating overallBubbleRating addTourPlacesRateTourCreation">
-                                    <span class="ui_bubble_rating bubble_50 font-size-16" property="ratingValue" content="5" alt='5 of 5 bubbles'></span>
-                                    <span>2 نقد</span>
-                                </div>
-                                <div class="inline-block">
-                                    استان: اصفهان
-                                </div>
-                            </div>
-                        </div>
-                        <center class="addTourPlacesBtnDivTourCreation col-xs-4">
-                            <div class="addTourPlacesBtnCreation circleBase type2">
-                                <img src="{{"images/tourCreation/add.png"}}">
-                                <div>اضافه کنید</div>
-                            </div>
-                        </center>
+                        در پنل کاربری قادر به تعریف تخفیف‌های مناسبتی خواهید بود. همچنین می‌توانید به تعداد مورد نیاز کد تخفیف با شرایط متفاوت ایجاد و به کاربران خاص خود هدیه دهید.
                     </div>
                 </div>
             </div>

@@ -100,7 +100,7 @@ $kindPlaceId = 10; ?>
                                 <i class="glyphicon glyphicon-triangle-bottom"></i>
                             </div>
                             <select class="inputBoxInput styled-select" type="text" placeholder="انتخاب کنید">
-
+                                <option>انتخاب کنید</option>
                             </select>
                         </div>
                         <div class="inputBox col-xs-5" id="">
@@ -150,7 +150,7 @@ $kindPlaceId = 10; ?>
                                 <i class="glyphicon glyphicon-triangle-bottom"></i>
                             </div>
                             <select class="inputBoxInput styled-select" type="text" placeholder="انتخاب کنید">
-
+                                <option>انتخاب کنید</option>
                             </select>
                         </div>
                         <div class="inputBox col-xs-5" id="">
@@ -206,6 +206,7 @@ $kindPlaceId = 10; ?>
                             <i class="glyphicon glyphicon-triangle-bottom"></i>
                         </div>
                         <select class="inputBoxInput styled-select" type="text" placeholder="انتخاب کنید">
+                            <option>انتخاب کنید</option>
                             <option>قطار</option>
                             <option>هواپیما</option>
                         </select>

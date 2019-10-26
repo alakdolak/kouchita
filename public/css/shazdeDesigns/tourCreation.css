@@ -867,6 +867,166 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     font-size: 14px;
 }
 
+/*financial information tour creation */
+
+.tourBasicPriceTourCreation,
+.tourTicketKindTourCreation,
+#tourInsuranceConfirmation {
+    display: inline-block;
+}
+
+.tourBasicPriceTourCreation {
+    float: right;
+    padding-right: 0;
+}
+.tourBasicPriceTourCreation .inputBox {
+    float: right;
+}
+
+.tourBasicPriceTourCreation .inputBoxText,
+.tourTicketKindTourCreation .inputBoxText {
+    width: 20%;
+}
+
+.tourTicketKindTourCreation .inputBox , .tourTicketKindTourCreation .inboxHelpSubtitleBlue{
+    float: left;
+}
+
+.inboxHelpSubtitleBlue {
+    display: inline-block;
+    width: 100%;
+    color: darkblue;
+    font-size: 13px;
+}
+
+#tourInsuranceConfirmation {
+    float: right;
+}
+
+#tourInsuranceConfirmation > div {
+    float: left;
+}
+
+.tourOccupationDetailsTourCreation {
+    background-color: rgb(213 , 238 , 235);
+    padding: 5px 10px;
+    position: relative;
+}
+
+.tourOccupationDetailsTourCreation > div {
+    display: inline-block;
+    float: right;
+}
+
+.tourOccupationDetailsTourCreation > div:nth-child(1) img {
+    height: 100px;
+}
+
+.tourOccupationGradeTitle {
+    color: #4DC7BC;
+}
+
+.tourOccupationDetailsBtn {
+    position: absolute;
+    left: 20px;
+    border: 0;
+    border-radius: 8px;
+    padding: 3px 17px;
+    box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.copyBtnTourCreation {
+    background-color: rgb(251 , 193 , 86);
+    top: 20px;
+}
+
+.copyBtnTourCreation > img {
+    margin-top: 2px;
+}
+
+.deleteBtnTourCreation {
+    background-color: rgb(148 , 52 , 30);
+    top: 60px;
+}
+
+.deleteBtnTourCreation > img {
+    height: 22px;
+}
+
+.moreFacilityInputs {
+    width: 100%;
+    text-align: right;
+}
+
+#subtitleMoreFacility {
+    position: absolute;
+    right: 0;
+    top: 40px;
+}
+
+.tourMoreFacilityDetailsBtn {
+    position: absolute;
+    top: 85px;
+    border: 0;
+    border-radius: 8px;
+    padding: 3px 17px;
+    box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.verifyBtnTourCreation {
+    left: 80px;
+    background-color: #4DC7BC;
+}
+
+.verifyBtnTourCreation > img {
+    width: 20px;
+    margin-top: 5px;
+}
+
+.deleteBtnTourCreation {
+    left: 20px;
+}
+
+.tourCapacityNGOTours .inputBoxText {
+    width: 45%;
+}
+
+.tourCapacityNGOTours .inputBoxInput {
+    width: 50%;
+}
+
+.discountLimitationWholesale > div , .discountLimitationWholesale > input {
+    width: auto;
+    float: right;
+}
+
+.discountLimitationWholesale .inputBoxInput {
+    border-left: 1px solid #d8d8d8;
+}
+
+.discountLimitationWholesale .inputBoxText {
+    padding: 0 10px;
+}
+
+.wholesaleDiscountLimitationBtn {
+    border: 0;
+    border-radius: 8px;
+    padding: 3px 17px;
+    box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.no-border-imp {
+    border: 0 !important;
+}
+
+.float-right {
+    float: right;
+}
+
+.full-width {
+    width: 100%;
+}
+
 .inline-block {
     display: inline-block;
 }
@@ -875,8 +1035,36 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     font-size: 14px;
 }
 
+.font-size-20 {
+    font-size: 20px;
+}
+
+.pd-0 {
+    padding: 0;
+}
+
+.pd-rt-0 {
+    padding-right: 0;
+}
+
+.mg-rt-10 {
+    margin-right: 10px;
+}
+
+.mg-tp-12 {
+    margin-top: 12px;
+}
+
 .mg-tp-15 {
     margin-top: 15px;
+}
+
+.mg-tp-20 {
+    margin-top: 20px;
+}
+
+.mg-30-10 {
+    margin: 30px 10px;
 }
 
 .styled-select {
