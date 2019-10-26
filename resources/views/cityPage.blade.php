@@ -19,30 +19,6 @@
     <script type='text/javascript' src='{{URL::asset('js/jquery_12.js')}}'></script>
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/gardeshname.min.css?v=1.1')}}"/>
 
-    <style>
-        footer ul {
-            padding: 0 !important;
-        }
-
-        .content-2col .im-entry {
-            min-height: 15px !important;
-        }
-
-        .widget ul li{
-            list-style: none;
-            margin-bottom: 70px;
-            position: relative;
-            margin-top: 20px;
-        }
-        .homepage_shelves_widget{
-            min-height: 0px;
-        }
-        .image_wrapper{
-            height: 130px;
-        }
-    </style>
-
-
     <script>
         var searchDir = '{{route('heyYou')}}';
         var kindPlaceId = '{{$kindPlaceId}}';
@@ -59,6 +35,22 @@
         @endif
     </script>
 
+
+    <style>
+        {{--css of left side--}}
+        .widget ul li{
+            position: relative;
+            margin: 20px 0 40px;
+        }
+
+        /*css of {ng-app="mainApp"}*/
+        .homepage_shelves_widget{
+            min-height: 0px;
+        }
+        .image_wrapper{
+            height: 130px;
+        }
+    </style>
 </head>
 
 <body class="rebrand_2017 desktop HomeRebranded  js_logging">
@@ -66,102 +58,118 @@
 <div class="header hideOnPhone">
     @include('layouts.placeHeader')
 </div>
-<div class="ui_container" style="background-color: white; direction: rtl;">
-    <div class="border-bottom-grey" style="text-align: right; background-color: white; padding: 5px 0px 7px;">
-        <div style="font-size: 0.8em; font-weight: 500">
-            <div style="display: inline-block">شهر {{$city->name}}</div>
-            <div style="display: inline-block"> < </div>
-            <div style="display: inline-block">استان {{$city->state}}</div>
-            <div class="ui_close_x" style="left: 30px !important; top: 15px !important;"></div>
+<div class="ui_container cpBody">
+    <div class="cpBorderBottom cpHeader">
+        <div class="cpHeaderRouteOfCityName">
+            <span>استان {{$city->state}}</span>
+            <span> > </span>
+            <span>شهر {{$city->name}}</span>
+            {{--<div class="ui_close_x" style="left: 30px !important; top: 15px !important;"></div>--}}
         </div>
-        <div style="margin-top: 20px; font-size: 1.5em; font-weight: 800">شهر {{$city->name}}</div>
+        <div class="cpHeaderCityName">شهر {{$city->name}}</div>
     </div>
     <div class="row">
-        <div class="col-lg-8 border-left-grey">
-            <div class="row" style="background-color: #e5e5e5; margin-right: 0;">
-                <div class="col-xs-7">
-                    <img src="{{URL::asset('_images/city/'.$city->image)}}" style="width: 100%">
+        <div class="col-lg-9 cpBorderLeft">
+            <div class="row cpMainBox">
+                <div class="col-xs-8" style="padding:0 !important;">
+                    <img class="cpPic" src="{{URL::asset('_images/city/'.$city->image)}}">
                 </div>
-
-                <div class="col-xs-5" style="padding: 15px 0 !important;">
+                <div class="col-xs-4" style="padding:0 !important;">
                     <div class="col-xs-12">
-                        <a class="col-xs-4 cityPageLittleMenu" href="{{route('mainMode', ['mode' => 'amaken'])}}" style="color: #30b4a6 !important;">
-                            <div class="cityPageIcon atraction"></div>
-                            <div class="textCityPageIcon">جاذبه ها</div>
-                        </a>
-                        <a class="col-xs-4 cityPageLittleMenu" href="{{route('tickets')}}" style="color: #30b4a6 !important;">
-                            <div class="cityPageIcon ticket"></div>
-                            <div class="textCityPageIcon">بلیط</div>
-                        </a>
-                        <a class="col-xs-4 cityPageLittleMenu" href="{{route('main')}}" style="color: #30b4a6 !important;">
+                        <a class="col-xs-4 cpLittleMenu" href="{{route('main')}}">
                             <div class="cityPageIcon hotel"></div>
                             <div class="textCityPageIcon">هتل</div>
                         </a>
-                    </div>
-                    <div style="clear: both"></div>
-                    <div class="col-xs-12">
-                        <div class="col-xs-4 cityPageLittleMenu">
-                            <div class="cityPageIcon ghazamahali"></div>
-                            <div class="textCityPageIcon">غذای محلی</div>
-                        </div>
-                        <div class="col-xs-4 cityPageLittleMenu">
-                            <div class="cityPageIcon soghat"></div>
-                            <div class="textCityPageIcon">سوغات</div>
-                        </div>
-                        <a class="col-xs-4 cityPageLittleMenu" href="{{route('mainMode', ['mode' => 'restaurant'])}}" style="color: #30b4a6 !important;">
-                            <div class="cityPageIcon restaurant"></div>
-                            <div class="textCityPageIcon">رستوران</div>
+                        <a class="col-xs-4 cpLittleMenu" href="{{route('tickets')}}">
+                            <div class="cityPageIcon ticket"></div>
+                            <div class="textCityPageIcon">بلیط</div>
+                        </a>
+                        <a class="col-xs-4 cpLittleMenu" href="{{route('mainMode', ['mode' => 'amaken'])}}">
+                            <div class="cityPageIcon atraction"></div>
+                            <div class="textCityPageIcon">جاذبه ها</div>
                         </a>
                     </div>
                     <div style="clear: both"></div>
                     <div class="col-xs-12">
-                        <div class="col-xs-4 cityPageLittleMenu">
-                            <div class="cityPageIcon lebas"></div>
-                            <div class="textCityPageIcon">لباس محلی</div>
+                        <a class="col-xs-4 cpLittleMenu" href="{{route('mainMode', ['mode' => 'restaurant'])}}">
+                            <div class="cityPageIcon restaurant"></div>
+                            <div class="textCityPageIcon">رستوران</div>
+                        </a>
+                        <div class="col-xs-4 cpLittleMenu">
+                            <div class="cityPageIcon soghat"></div>
+                            <div class="textCityPageIcon">سوغات</div>
                         </div>
-                        <div class="col-xs-4 cityPageLittleMenu">
-                            <div class="cityPageIcon sanaye"></div>
-                            <div class="textCityPageIcon">صنایع دستی</div>
-                        </div>
-
-                        <div class="col-xs-4 cityPageLittleMenu">
-                            <div class="cityPageIcon majara"></div>
-                            <div class="textCityPageIcon">ماجراجویی</div>
+                        <div class="col-xs-4 cpLittleMenu">
+                            <div class="cityPageIcon ghazamahali"></div>
+                            <div class="textCityPageIcon">غذای محلی</div>
                         </div>
                     </div>
                     <div style="clear: both"></div>
                     <div class="col-xs-12">
-                        <div class="col-xs-4 cityPageLittleMenu"></div>
-                        <div class="col-xs-4 cityPageLittleMenu">
-                            <div class="cityPageIcon estelah"></div>
-                            <div class="textCityPageIcon">اصطلاحات محلی</div>
+                        <div class="col-xs-4 cpLittleMenu">
+                            <div class="cityPageIcon majara"></div>
+                            <div class="textCityPageIcon">ماجراجویی</div>
                         </div>
-                        <div class="col-xs-4 cityPageLittleMenu">
+                        <div class="col-xs-4 cpLittleMenu">
+                            <div class="cityPageIcon sanaye"></div>
+                            <div class="textCityPageIcon">صنایع دستی</div>
+                        </div>
+                        <div class="col-xs-4 cpLittleMenu">
+                            <div class="cityPageIcon lebas"></div>
+                            <div class="textCityPageIcon">لباس محلی</div>
+                        </div>
+                    </div>
+                    <div style="clear: both"></div>
+                    <div class="col-xs-12">
+                        <div class="col-xs-4 cpLittleMenu">
                             <div class="cityPageIcon boom"></div>
                             <div class="textCityPageIcon">بوم گردی</div>
                         </div>
+                        <div class="col-xs-4 cpLittleMenu">
+                            <div class="cityPageIcon estelah"></div>
+                            <div class="textCityPageIcon">اصطلاحات محلی</div>
+                        </div>
+                        {{--<div class="col-xs-4 cpLittleMenu"></div>--}}
                     </div>
                 </div>
             </div>
-            <div style="padding: 25px; text-align: justify; font-size: 18px;">
+            <div class="cpDescription cpBorderBottom">
                 {{$city->description}}
             </div>
-
-            <div ng-app="mainApp">
+            <div ng-app="mainApp" class="cpBorderBottom">
                 @include('layouts.mainSuggestions')
             </div>
+            <div class="cpBorderBottom">
+                <div class="cpTitle">دوستان شما چه می گویند</div>
+                <div style="width: 100%;">
+                    <div class="cpFriendsBoxPic">
+                        <div class="cpFriendsEachPic" style="background: url('{{URL::asset('images') . '1.jpg'}}');"> </div>
+                        <div class="cpFriendsEachPic" style="background: url('{{URL::asset('images') . '2.jpg'}}');"> </div>
+                        <div class="cpFriendsEachPic" style="background: url('{{URL::asset('images') . '3.jpg'}}');"> </div>
+                        <div class="cpFriendsEachPic" style="background: url('{{URL::asset('images') . '4.jpg'}}');"> </div>
+                    </div>
+                    <div class="cpFriendsOthersPic" >
+                        به اضافه
+                        <br>
+                        452
+                        <br>
+                        عکس دیگر
+                    </div>
+                </div>
+                <div class="cpFriendsFooter">نمایش چهار نقد اخیر در دو ستون دو ردیفه با دکمه بیشتر و قابلیت لود در صفحه مانند صفحه هتل دیتیل</div>
+            </div>
+            <div class="cpBorderBottom">
+                <div class="cpMap"></div>
+            </div>
         </div>
-
-        <div class="col-lg-4" style="text-align: right;">
+        <div class="col-lg-3" style="text-align: right;">
             {{--<div style="font-weight: 500"></div>--}}
-            <h4>
-                تازه های گردشنامه
-            </h4>
+            <div class="cpTitle">تازه های گردشنامه</div>
             <div style="position: relative">
                 <?php $i = 0; ?>
                 @foreach($cityPost as $post)
                     @if($i == 0)
-                        <article class="im-article grid-carousel grid-2 row post type-post status-publish format-standard has-post-thumbnail hentry">
+                        <article class="im-article grid-carousel grid-2 post type-post status-publish format-standard has-post-thumbnail hentry">
                             <div class="im-entry-thumb">
                                 <a class="im-entry-thumb-link" href="{{route('gardeshnameInner', ['postId' => $post->id])}}" title="{{$post->title}}">
                                     <img class="lazy-img" src="{{$post->pic}}"  alt="{{$post->alt}}" style="opacity: 1; width: 100%">
@@ -204,9 +212,10 @@
                         </article>
                     @else
                         @if($i == 1)
-                            <div class="col-md-12">
-                                <div class="widget">
-                                    <ul>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="widget">
+                                        <ul>
                         @endif
                         <li class="widget-10104im-widgetclearfix">
                             <figure class="im-widget-thumb">
@@ -241,7 +250,8 @@
                             </div>
                         </li>
                         @if($i == count($cityPost) - 1)
-                                    </ul>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         @endif
@@ -251,16 +261,14 @@
 
                 @endforeach
 
-                <div class="row" style="border-bottom: solid black 2px; margin-bottom: 10px;">
+                <div class="row cpBorderBottom" style="margin: 0px;">
                     <div class="col-md-12" style="text-align: center; padding: 20px;">
                         <button class="btn btn-success" style="background-color: #30b4a6; border-radius: 10px; font-size: 20px;">مشاهده همه مقالات</button>
                     </div>
                 </div>
 
-                <div class="row">
-                    <h4>
-                        بیشترین بازدید
-                    </h4>
+                <div class="row" style="margin: 0">
+                    <div class="cpTitle">بیشترین بازدید</div>
                 </div>
                 <?php $i = 0; ?>
                 @foreach($mostSeenPosts as $post)
