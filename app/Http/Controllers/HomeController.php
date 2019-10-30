@@ -88,10 +88,11 @@ class HomeController extends Controller
         }
 
         $allAmaken = Amaken::where('cityId', $city->id)->select(['id', 'name', 'C', 'D', 'mooze', 'tarikhi', 'tabiatgardi', 'tafrihi', 'markazkharid'])->get();
+        $allMajara = Majara::where('cityId', $city->id)->select(['id', 'name', 'C', 'D'])->get();
         $allHotels = Hotel::where('cityId', $city->id)->select(['id', 'name', 'C', 'D'])->get();
         $allRestaurant = Restaurant::where('cityId', $city->id)->select(['id', 'name', 'C', 'D', 'kind_id'])->get();
 
-        return view('cityPage', compact(['city', 'cityPost', 'mostSeenPosts', 'allAmaken', 'allHotels', 'allRestaurant']));
+        return view('cityPage', compact(['city', 'cityPost', 'mostSeenPosts', 'allAmaken', 'allHotels', 'allRestaurant', 'allMajara']));
     }
 
     public function abbas()

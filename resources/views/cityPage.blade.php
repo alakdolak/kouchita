@@ -50,6 +50,16 @@
         .image_wrapper{
             height: 130px;
         }
+        .map_list{
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 10px;
+            background-color: #f3f3f3;
+        }
+        .map_category{
+            width: 50px;
+        }
     </style>
 </head>
 
@@ -161,6 +171,17 @@
             <div class="cpBorderBottom">
                 <div class="cpMap">
                     <div id="map-small" class="prv_map clickable" style="width: 100%; height: 100%;"></div>
+                </div>
+                <div class="map_list" id="show">
+                    <img class="map_category" id="hotelImg" src="http://localhost/kouchita/public/images/mhotel.png" onclick="toggleIconInMap('hotelImg')">
+                    <img class="map_category" id="restImg" src="http://localhost/kouchita/public/images/mrest.png" onclick="toggleIconInMap('restImg')">
+                    <img class="map_category" id="fastImg" src="http://localhost/kouchita/public/images/mfast.png" onclick="toggleIconInMap('fastImg')">
+                    <img class="map_category" id="musImg" src="http://localhost/kouchita/public/images/matr_mus.png" onclick="toggleIconInMap('musImg')">
+                    <img class="map_category" id="plaImg" src="http://localhost/kouchita/public/images/matr_pla.png" onclick="toggleIconInMap('plaImg')">
+                    <img class="map_category" id="shcImg" src="http://localhost/kouchita/public/images/matr_shc.png" onclick="toggleIconInMap('shcImg')">
+                    <img class="map_category" id="funImg" src="http://localhost/kouchita/public/images/matr_fun.png" onclick="toggleIconInMap('funImg')">
+                    <img class="map_category" id="advImg" src="http://localhost/kouchita/public/images/matr_adv.png" onclick="toggleIconInMap('advImg')">
+                    <img class="map_category" id="natImg" src="http://localhost/kouchita/public/images/matr_nat.png" onclick="toggleIconInMap('natImg')">
                 </div>
             </div>
         </div>
@@ -691,6 +712,7 @@
     var x = '{{$city->x}}';
     var y = '{{$city->y}}';
     var all_amaken = {!! $allAmaken !!};
+    var all_majara = {!! $allMajara !!};
     var all_hotels = {!! $allHotels !!};
     var all_restaurant = {!! $allRestaurant !!};
     var iconBase = '{{URL::asset('images') . '/'}}';
@@ -718,8 +740,23 @@
         },
         rest: {
             icon: iconBase + 'mrest.png'
-        }
+        },
+        adv: {
+            icon: iconBase + 'matr_adv.png'
+        },
     };
+
+    var markersHotel = [];
+    var markersRest = [];
+    var markersFast = [];
+    var markersMus = [];
+    var markersPla = [];
+    var markersShc = [];
+    var markersFun = [];
+    var markersAdv = [];
+    var markersNat = [];
+    var majaraMap = [];
+    var map2;
 
 
     function init() {
@@ -751,11 +788,8 @@
                 "stylers": [{"hue": "#679714"}, {"saturation": 33.4}, {"lightness": -25.4}, {"gamma": 1}]
             }]
         };
-        // Get the HTML DOM element that will contain your map
-        // We are using a div with id="map" seen below in the <body>
         var mapElementSmall = document.getElementById('map-small');
-        // Create the Google Map using our element and options defined above
-        var map2 = new google.maps.Map(mapElementSmall, mapOptions);
+        map2 = new google.maps.Map(mapElementSmall, mapOptions);
 
         var marker;
 
@@ -765,8 +799,9 @@
                 kindAmaken = 'amaken2';
             else if (all_amaken[i].tarikhi == 1)
                 kindAmaken = 'amaken1';
-            else if (all_amaken[i].tabiatgardi == 1)
+            else if (all_amaken[i].tabiatgardi == 1) {
                 kindAmaken = 'amaken4';
+            }
             else if (all_amaken[i].tafrihi == 1)
                 kindAmaken = 'amaken5';
             else if (all_amaken[i].markazkharid == 1)
@@ -783,6 +818,19 @@
                 map: map2,
                 title: all_amaken[i]['name']
             });
+
+            if (all_amaken[i].mooze == 1)
+                markersMus[markersMus.length] = marker;
+            else if (all_amaken[i].tarikhi == 1)
+                markersPla[markersPla.length] = marker;
+            else if (all_amaken[i].tabiatgardi == 1)
+                markersNat[markersNat.length] = marker;
+            else if (all_amaken[i].tafrihi == 1)
+                markersFun[markersFun.length] = marker;
+            else if (all_amaken[i].markazkharid == 1)
+                markersShc[markersShc.length] = marker;
+            else
+                markersMus[markersMus.length] = marker;
         }
 
         // set hotels marker
@@ -796,6 +844,21 @@
                 map: map2,
                 title: all_hotels[i]['name']
             });
+            markersHotel[i] = marker;
+        }
+
+        // set majara marker
+        for(i = 0; i < all_majara.length; i++) {
+            marker = new google.maps.Marker({
+                position: new google.maps.LatLng(all_majara[i]['C'], all_majara[i]['D']),
+                icon: {
+                    url: icons['adv'].icon,
+                    scaledSize: new google.maps.Size(35, 35)
+                },
+                map: map2,
+                title: all_majara[i]['name']
+            });
+            majaraMap[i] = marker;
         }
 
         // set restaurant marker
@@ -814,6 +877,70 @@
                 map: map2,
                 title: all_restaurant[i]['name']
             });
+
+
+            if (all_restaurant[i].kind_id == 1)
+                markersRest[markersRest.length] = marker;
+            else
+                markersFast[markersFast.length] = marker;
+        }
+    }
+
+    function toggleIconInMap(_id){
+        var src = document.getElementById(_id).src;
+        var sec = src.split('.');
+        var kind;
+
+        if(sec[0].includes('off')){
+            sec[0] = sec[0].replace('off', '');
+            src2 = sec[0] + '.' + sec[1];
+            kind = 1;
+        }
+        else{
+            src2 = sec[0] + 'off.' + sec[1];
+            kind = 0;
+        }
+        document.getElementById(_id).src = src2 ;
+
+        if(_id == 'hotelImg'){
+            setInMap(kind, markersHotel);
+        }
+        else if(_id == 'restImg'){
+            setInMap(kind, markersRest);
+        }
+        else if(_id == 'fastImg'){
+            setInMap(kind, markersFast);
+        }
+        else if(_id == 'musImg'){
+            setInMap(kind, markersMus);
+        }
+        else if(_id == 'plaImg'){
+            setInMap(kind, markersPla);
+        }
+        else if(_id == 'shcImg'){
+            setInMap(kind, markersShc);
+        }
+        else if(_id == 'funImg'){
+            setInMap(kind, markersFun);
+        }
+        else if(_id == 'advImg'){
+            setInMap(kind, majaraMap);
+        }
+        else if(_id == 'natImg'){
+            setInMap(kind, markersNat);
+        }
+    }
+
+    function setInMap(isSet, marker){
+        if (isSet == 1) {
+            for (var i = 0; i < marker.length; i++) {
+                marker[i].setMap(map2);
+            }
+        }
+        else {
+            for (var i = 0; i < marker.length; i++) {
+                marker[i].setMap(null);
+            }
         }
     }
 </script>
