@@ -1,5 +1,5 @@
 <?php $kindPlaceId = 4; $placeMode = 4; $state = 2; ?>
-<!DOCTYPE html>
+        <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -11,10 +11,11 @@
 
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/long_lived_global_legacy_2.css?v=2')}}"/>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/masthead-saves.css?v=2')}}'/>
-    <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/hr_north_star.css?v=2')}}'/>
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/icons.css?v=2')}}' />
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/cityPage.css?v=1')}}' />
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/mainPageModifiedStyles.css')}}' />
+    <link rel='stylesheet' type='text/css' media='screen, print'
+          href='{{URL::asset('css/theme2/hr_north_star.css?v=2')}}'/>
+    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/icons.css?v=2')}}'/>
+    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/cityPage.css?v=1')}}'/>
+    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/mainPageModifiedStyles.css')}}'/>
 
     <script type='text/javascript' src='{{URL::asset('js/jquery_12.js')}}'></script>
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/gardeshname.min.css?v=1.1')}}"/>
@@ -38,26 +39,29 @@
 
     <style>
         {{--css of left side--}}
-        .widget ul li{
+        .widget ul li {
             position: relative;
             margin: 20px 0 40px;
         }
 
         /*css of {ng-app="mainApp"}*/
-        .homepage_shelves_widget{
+        .homepage_shelves_widget {
             min-height: 0px;
         }
-        .image_wrapper{
+
+        .image_wrapper {
             height: 130px;
         }
-        .map_list{
+
+        .map_list {
             display: flex;
             justify-content: space-around;
             align-items: center;
             padding: 10px;
             background-color: #f3f3f3;
         }
-        .map_category{
+
+        .map_category {
             width: 50px;
         }
     </style>
@@ -153,12 +157,16 @@
                 <div class="cpTitle">دوستان شما چه می گویند</div>
                 <div style="width: 100%;">
                     <div class="cpFriendsBoxPic">
-                        <div class="cpFriendsEachPic" style="background: url('{{URL::asset('images') . '1.jpg'}}');"> </div>
-                        <div class="cpFriendsEachPic" style="background: url('{{URL::asset('images') . '2.jpg'}}');"> </div>
-                        <div class="cpFriendsEachPic" style="background: url('{{URL::asset('images') . '3.jpg'}}');"> </div>
-                        <div class="cpFriendsEachPic" style="background: url('{{URL::asset('images') . '4.jpg'}}');"> </div>
+                        <div class="cpFriendsEachPic"
+                             style="background: url('{{URL::asset('images') . '1.jpg'}}');"></div>
+                        <div class="cpFriendsEachPic"
+                             style="background: url('{{URL::asset('images') . '2.jpg'}}');"></div>
+                        <div class="cpFriendsEachPic"
+                             style="background: url('{{URL::asset('images') . '3.jpg'}}');"></div>
+                        <div class="cpFriendsEachPic"
+                             style="background: url('{{URL::asset('images') . '4.jpg'}}');"></div>
                     </div>
-                    <div class="cpFriendsOthersPic" >
+                    <div class="cpFriendsOthersPic">
                         به اضافه
                         <br>
                         452
@@ -166,22 +174,37 @@
                         عکس دیگر
                     </div>
                 </div>
-                <div class="cpFriendsFooter">نمایش چهار نقد اخیر در دو ستون دو ردیفه با دکمه بیشتر و قابلیت لود در صفحه مانند صفحه هتل دیتیل</div>
+                <div class="cpFriendsFooter">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div id="opinion" class="col-md-10"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="cpBorderBottom">
                 <div class="cpMap">
                     <div id="map-small" class="prv_map clickable" style="width: 100%; height: 100%;"></div>
                 </div>
                 <div class="map_list" id="show">
-                    <img class="map_category" id="hotelImg" src="http://localhost/kouchita/public/images/mhotel.png" onclick="toggleIconInMap('hotelImg')">
-                    <img class="map_category" id="restImg" src="http://localhost/kouchita/public/images/mrest.png" onclick="toggleIconInMap('restImg')">
-                    <img class="map_category" id="fastImg" src="http://localhost/kouchita/public/images/mfast.png" onclick="toggleIconInMap('fastImg')">
-                    <img class="map_category" id="musImg" src="http://localhost/kouchita/public/images/matr_mus.png" onclick="toggleIconInMap('musImg')">
-                    <img class="map_category" id="plaImg" src="http://localhost/kouchita/public/images/matr_pla.png" onclick="toggleIconInMap('plaImg')">
-                    <img class="map_category" id="shcImg" src="http://localhost/kouchita/public/images/matr_shc.png" onclick="toggleIconInMap('shcImg')">
-                    <img class="map_category" id="funImg" src="http://localhost/kouchita/public/images/matr_fun.png" onclick="toggleIconInMap('funImg')">
-                    <img class="map_category" id="advImg" src="http://localhost/kouchita/public/images/matr_adv.png" onclick="toggleIconInMap('advImg')">
-                    <img class="map_category" id="natImg" src="http://localhost/kouchita/public/images/matr_nat.png" onclick="toggleIconInMap('natImg')">
+                    <img class="map_category" id="hotelImg" src="http://localhost/kouchita/public/images/mhotel.png"
+                         onclick="toggleIconInMap('hotelImg')">
+                    <img class="map_category" id="restImg" src="http://localhost/kouchita/public/images/mrest.png"
+                         onclick="toggleIconInMap('restImg')">
+                    <img class="map_category" id="fastImg" src="http://localhost/kouchita/public/images/mfast.png"
+                         onclick="toggleIconInMap('fastImg')">
+                    <img class="map_category" id="musImg" src="http://localhost/kouchita/public/images/matr_mus.png"
+                         onclick="toggleIconInMap('musImg')">
+                    <img class="map_category" id="plaImg" src="http://localhost/kouchita/public/images/matr_pla.png"
+                         onclick="toggleIconInMap('plaImg')">
+                    <img class="map_category" id="shcImg" src="http://localhost/kouchita/public/images/matr_shc.png"
+                         onclick="toggleIconInMap('shcImg')">
+                    <img class="map_category" id="funImg" src="http://localhost/kouchita/public/images/matr_fun.png"
+                         onclick="toggleIconInMap('funImg')">
+                    <img class="map_category" id="advImg" src="http://localhost/kouchita/public/images/matr_adv.png"
+                         onclick="toggleIconInMap('advImg')">
+                    <img class="map_category" id="natImg" src="http://localhost/kouchita/public/images/matr_nat.png"
+                         onclick="toggleIconInMap('natImg')">
                 </div>
             </div>
         </div>
@@ -192,16 +215,21 @@
                 <?php $i = 0; ?>
                 @foreach($cityPost as $post)
                     @if($i == 0)
-                        <article class="im-article grid-carousel grid-2 post type-post status-publish format-standard has-post-thumbnail hentry">
+                        <article
+                                class="im-article grid-carousel grid-2 post type-post status-publish format-standard has-post-thumbnail hentry">
                             <div class="im-entry-thumb">
-                                <a class="im-entry-thumb-link" href="{{route('gardeshnameInner', ['postId' => $post->id])}}" title="{{$post->title}}">
-                                    <img class="lazy-img" src="{{$post->pic}}"  alt="{{$post->alt}}" style="opacity: 1; width: 100%">
+                                <a class="im-entry-thumb-link"
+                                   href="{{route('gardeshnameInner', ['postId' => $post->id])}}"
+                                   title="{{$post->title}}">
+                                    <img class="lazy-img" src="{{$post->pic}}" alt="{{$post->alt}}"
+                                         style="opacity: 1; width: 100%">
                                 </a>
                                 <div class="im-entry-header">
                                     <div class="im-entry-category">
                                         <div class="iranomag-meta clearfix">
                                             <div class="cat-links im-meta-item">
-                                                <a style="background-color: {{$post->backColor}}; color: {{$post->categoryColor}} !important;" href="" title="{{$post->category}}">{{$post->category}}</a>
+                                                <a style="background-color: {{$post->backColor}}; color: {{$post->categoryColor}} !important;"
+                                                   href="" title="{{$post->category}}">{{$post->category}}</a>
                                             </div>
                                         </div>
                                     </div>
@@ -239,40 +267,41 @@
                                 <div class="col-md-12">
                                     <div class="widget">
                                         <ul>
-                        @endif
-                        <li class="widget-10104im-widgetclearfix">
-                            <figure class="im-widget-thumb">
-                                <a href="" title="{{$post->title}}">
-                                    <img src="{{$post->pic}}" alt="{{$post->alt}}"/>
-                                </a>
-                            </figure>
-                            <div class="im-widget-entry">
-                                <header class="im-widget-entry-header">
-                                    <h4 class='im-widget-entry-title'>
-                                        <a style="color: {{$post->color}} !important;" href='' title='{{$post->title}}'>{{$post->title}}</a>
-                                    </h4>
-                                </header>
-                                <div class="iranomag-meta clearfix">
-                                    <div class="posted-on im-meta-item">
-                                        <span class="entry-date published updated">{{$post->date}}</span>
-                                    </div>
-                                    <div class="comments-link im-meta-item">
-                                        <a href="">
-                                            <i class="fa fa-comment-o"></i>{{$post->msgs}}
-                                        </a>
-                                    </div>
-                                    <div class="author vcard im-meta-item">
-                                        <a class="url fn n">
-                                            <i class="fa fa-user"></i>{{$post->username}}
-                                        </a>
-                                    </div>
-                                    <div class="post-views im-meta-item">
-                                        <i class="fa fa-eye"></i>{{$post->seen}}
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        @if($i == count($cityPost) - 1)
+                                            @endif
+                                            <li class="widget-10104im-widgetclearfix">
+                                                <figure class="im-widget-thumb">
+                                                    <a href="" title="{{$post->title}}">
+                                                        <img src="{{$post->pic}}" alt="{{$post->alt}}"/>
+                                                    </a>
+                                                </figure>
+                                                <div class="im-widget-entry">
+                                                    <header class="im-widget-entry-header">
+                                                        <h4 class='im-widget-entry-title'>
+                                                            <a style="color: {{$post->color}} !important;" href=''
+                                                               title='{{$post->title}}'>{{$post->title}}</a>
+                                                        </h4>
+                                                    </header>
+                                                    <div class="iranomag-meta clearfix">
+                                                        <div class="posted-on im-meta-item">
+                                                            <span class="entry-date published updated">{{$post->date}}</span>
+                                                        </div>
+                                                        <div class="comments-link im-meta-item">
+                                                            <a href="">
+                                                                <i class="fa fa-comment-o"></i>{{$post->msgs}}
+                                                            </a>
+                                                        </div>
+                                                        <div class="author vcard im-meta-item">
+                                                            <a class="url fn n">
+                                                                <i class="fa fa-user"></i>{{$post->username}}
+                                                            </a>
+                                                        </div>
+                                                        <div class="post-views im-meta-item">
+                                                            <i class="fa fa-eye"></i>{{$post->seen}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            @if($i == count($cityPost) - 1)
                                         </ul>
                                     </div>
                                 </div>
@@ -286,7 +315,10 @@
 
                 <div class="row cpBorderBottom" style="margin: 0px;">
                     <div class="col-md-12" style="text-align: center; padding: 20px;">
-                        <button class="btn btn-success" style="background-color: #30b4a6; border-radius: 10px; font-size: 20px;">مشاهده همه مقالات</button>
+                        <button class="btn btn-success"
+                                style="background-color: #30b4a6; border-radius: 10px; font-size: 20px;">مشاهده همه
+                            مقالات
+                        </button>
                     </div>
                 </div>
 
@@ -299,54 +331,60 @@
                         <div class="col-md-12">
                             <div class="widget">
                                 <ul>
-                    @endif
-                    <li class="widget-10104im-widgetclearfix">
-                        <figure class="im-widget-thumb">
-                            <a href="" title="{{$post->title}}">
-                                <img src="{{$post->pic}}" alt="{{$post->alt}}"/>
-                            </a>
-                        </figure>
-                        <div class="im-widget-entry">
-                            <header class="im-widget-entry-header">
-                                <h4 class='im-widget-entry-title'>
-                                    <a style="color: {{$post->color}} !important;" href='' title='{{$post->title}}'>{{$post->title}}</a>
-                                </h4>
-                            </header>
-                            <div class="iranomag-meta clearfix">
-                                <div class="posted-on im-meta-item">
-                                    <span class="entry-date published updated">{{$post->date}}</span>
-                                </div>
-                                <div class="comments-link im-meta-item">
-                                    <a href="">
-                                        <i class="fa fa-comment-o"></i>{{$post->msgs}}
-                                    </a>
-                                </div>
-                                <div class="author vcard im-meta-item">
-                                    <a class="url fn n">
-                                        <i class="fa fa-user"></i>{{$post->username}}
-                                    </a>
-                                </div>
-                                <div class="post-views im-meta-item">
-                                    <i class="fa fa-eye"></i>{{$post->seen}}
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    @if($i == count($cityPost) - 1)
+                                    @endif
+                                    <li class="widget-10104im-widgetclearfix">
+                                        <figure class="im-widget-thumb">
+                                            <a href="" title="{{$post->title}}">
+                                                <img src="{{$post->pic}}" alt="{{$post->alt}}"/>
+                                            </a>
+                                        </figure>
+                                        <div class="im-widget-entry">
+                                            <header class="im-widget-entry-header">
+                                                <h4 class='im-widget-entry-title'>
+                                                    <a style="color: {{$post->color}} !important;" href=''
+                                                       title='{{$post->title}}'>{{$post->title}}</a>
+                                                </h4>
+                                            </header>
+                                            <div class="iranomag-meta clearfix">
+                                                <div class="posted-on im-meta-item">
+                                                    <span class="entry-date published updated">{{$post->date}}</span>
+                                                </div>
+                                                <div class="comments-link im-meta-item">
+                                                    <a href="">
+                                                        <i class="fa fa-comment-o"></i>{{$post->msgs}}
+                                                    </a>
+                                                </div>
+                                                <div class="author vcard im-meta-item">
+                                                    <a class="url fn n">
+                                                        <i class="fa fa-user"></i>{{$post->username}}
+                                                    </a>
+                                                </div>
+                                                <div class="post-views im-meta-item">
+                                                    <i class="fa fa-eye"></i>{{$post->seen}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    @if($i == count($cityPost) - 1)
                                 </ul>
                             </div>
                         </div>
                     @endif
 
-                <?php $i++; ?>
+                    <?php $i++; ?>
 
                 @endforeach
 
-                <div class="row" style="margin-bottom: 10px;">
-                    <div class="col-md-12" style="text-align: center; padding: 20px;">
-                        <button class="btn btn-success" style="background-color: #30b4a6; border-radius: 10px; font-size: 20px;">مشاهده همه مقالات</button>
+                @if(count($mostSeenPosts) != 0)
+                    <div class="row" style="margin-bottom: 10px;">
+                        <div class="col-md-12" style="text-align: center; padding: 20px;">
+                            <button class="btn btn-success"
+                                    style="background-color: #30b4a6; border-radius: 10px; font-size: 20px;">مشاهده همه
+                                مقالات
+                            </button>
+                        </div>
                     </div>
-                </div>
+                @endif
 
             </div>
         </div>
@@ -363,11 +401,12 @@
             </div>
             <div class="body_text">
 
-                <select  id="states"></select>
+                <select id="states"></select>
 
                 <div class="submitOptions">
                     <button onclick="document.location.href = $('#states').val()" class="btn btn-success">تایید</button>
-                    <input type="submit" onclick="$('.dark').hide(); $('#statePane').addClass('hidden')" value="خیر" class="btn btn-default">
+                    <input type="submit" onclick="$('.dark').hide(); $('#statePane').addClass('hidden')" value="خیر"
+                           class="btn btn-default">
                 </div>
             </div>
             <div onclick="$('#statePane').addClass('hidden'); $('.dark').hide()" class="ui_close_x"></div>
@@ -381,13 +420,14 @@
             </div>
             <div class="body_text">
 
-                <select  onchange="getCities()" id="states2"></select>
+                <select onchange="getCities()" id="states2"></select>
 
-                <select  id="cities"></select>
+                <select id="cities"></select>
 
                 <div class="submitOptions">
                     <button onclick="document.location.href = $('#cities').val()" class="btn btn-success">تایید</button>
-                    <input type="submit" onclick="$('.dark').hide(); $('#statePane2').addClass('hidden')" value="خیر" class="btn btn-default">
+                    <input type="submit" onclick="$('.dark').hide(); $('#statePane2').addClass('hidden')" value="خیر"
+                           class="btn btn-default">
                 </div>
             </div>
             <div onclick="$('#statePane2').addClass('hidden'); $('.dark').hide()" class="ui_close_x"></div>
@@ -404,7 +444,8 @@
 
                 <div class="submitOptions">
                     <button onclick="document.location.href = $('#goyesh').val()" class="btn btn-success">تایید</button>
-                    <input type="submit" onclick="$('.dark').hide(); $('#goyeshPane').addClass('hidden')" value="خیر" class="btn btn-default">
+                    <input type="submit" onclick="$('.dark').hide(); $('#goyeshPane').addClass('hidden')" value="خیر"
+                           class="btn btn-default">
                 </div>
             </div>
             <div onclick="$('#goyeshPane').addClass('hidden'); $('.dark').hide()" class="ui_close_x"></div>
@@ -412,11 +453,25 @@
 
 <div class="ui_backdrop dark" id="darkModeMainPage"></div>
 
+@include('hotelDetailsPopUp')
+
+
 @if(!Auth::check())
     @include('layouts.loginPopUp')
 @endif
 
 {{--@include('layouts.phonePopUp')--}}
+
+
+{{--<script defer src="{{URL::asset('js/mainPageSuggestions.js')}}"></script>--}}
+<script defer src="{{URL::asset('js/cityPage/cityPageOffer.js')}}"></script>
+
+<script async src="{{URL::asset('js/middleBanner.js')}}"></script>
+
+<script async src="{{URL::asset('js/slideBar.js')}}"></script>
+
+<script src="{{URL::asset('js/adv.js')}}"></script>
+
 
 <script defer>
     var passenger = 0;
@@ -620,10 +675,10 @@
     function assignDate(from, id, btnId) {
         $("#" + id).css("visibility", "visible");
 
-        if(btnId == "date_input2" && $("#date_input1").val().length != 0)
+        if (btnId == "date_input2" && $("#date_input1").val().length != 0)
             from = $("#date_input1").val();
 
-        if(btnId == "date_input2_phone" && $("#date_input1_phone").val().length != 0)
+        if (btnId == "date_input2_phone" && $("#date_input1_phone").val().length != 0)
             from = $("#date_input1_phone").val();
 
         $("#" + btnId).datepicker({
@@ -633,13 +688,15 @@
             dateFormat: "yy/mm/dd"
         });
     }
+
     //    For change passenger for room of hotel
     function changePassengersNo(inc) {
-        if(passenger + inc >= 0)
+        if (passenger + inc >= 0)
             passenger += inc;
         $("#passengerNoSelect").empty().append(passenger);
         $("#passengerNoSelect_phone").empty().append(passenger);
     }
+
     $(document).ready(function () {
 
         changePassengersNo(0);
@@ -697,17 +754,316 @@
     });
 </script>
 
-{{--<script defer src="{{URL::asset('js/mainPageSuggestions.js')}}"></script>--}}
-<script defer src="{{URL::asset('js/cityPage/cityPageOffer.js')}}"></script>
+<script>
+    var _token = '{!! csrf_token() !!}';
+    var hasLogin = {{Auth::check()}};
+    var getReportsDir = '{{route('getReports')}}';
+    var sendReportDir = '{{route('sendReport2')}}';
+    var opOnComment = '{{route('opOnComment')}}';
 
-<script async src="{{URL::asset('js/middleBanner.js')}}"></script>
 
-<script async src="{{URL::asset('js/slideBar.js')}}"></script>
+    function getCityOpinion(){
+        $.ajax({
+            type: 'post',
+            url: '{{route("cityPage.getCityOpinion")}}',
+            data:{
+                '_token' : _token,
+                'cityId' : '{{$city->id}}'
+            },
+            success: function (response){
+                response = JSON.parse(response);
+                fillOpinion(response)
+            }
+        })
+    }
+    function fillOpinion(opinion){
+        var newElement = '';
 
-<script src="{{URL::asset('js/adv.js')}}"></script>
+        for (i = 0; i < opinion.length; i++) {
+            newElement += "<div class='border-bottom-grey inline-block full-width' class='review'>";
+            newElement += "<div class='prw_rup prw_reviews_basic_review_hsx'>";
+            newElement += "<div class='reviewSelector'>";
+            newElement += "<div class='review hsx_review ui_columns is-multiline inlineReviewUpdate provider0'>";
+            newElement += "<div class='ui_column is-2 float-right'>";
+            newElement += "<div class='prw_rup prw_reviews_member_info_hsx'>";
+            newElement += "<div class='member_info'>";
+            newElement += "<div class='avatar_wrap'>";
+            newElement += "<div class='prw_rup prw_common_centered_image qa_avatar' onmouseleave='$(\".img_popUp\").addClass(\"hidden\");' onmouseenter='showBriefPopUp(this, \"" + opinion[i].visitorId + "\")'>";
+            newElement += "<span class='imgWrap fixedAspect'>";
+            newElement += "<img src='" + opinion[i].visitorPic + "' class='centeredImg border-radius-100' height='100%'/>";
+            newElement += "</span></div>";
+            newElement += "<div class='username text-align-center mg-bt-5'>" + opinion[i].visitorId + "</div>";
+            newElement += "</div>";
+            newElement += "<div class='memberOverlayLink'>";
+            newElement += "<div class='memberBadgingNoText'><span class='ui_icon pencil-paper'></span><span class='badgetext'>" + opinion[i].comments + "</span>&nbsp;&nbsp;";
+            newElement += "<span class='ui_icon thumbs-up-fill'></span><span id='commentLikes_" + opinion[i].id + "' data-val='" + opinion[i].likes + "' class='badgetext'>" + opinion[i].likes + "</span>&nbsp;&nbsp;";
+            newElement += "<span class='ui_icon thumbs-down-fill'></span><span id='commentDislikes_" + opinion[i].id + "' data-val='" + opinion[i].dislikes + "' class='badgetext'>" + opinion[i].dislikes + "</span>";
+            newElement += "</div>";
+            newElement += "</div></div></div></div>";
+            newElement += "<div class='ui_column is-9 float-right' style='text-align: right;'>";
+            newElement += "<div class='innerBubble'>";
+            newElement += "<div class='wrap'>";
+            newElement += "<div class='rating reviewItemInline'>";
+            switch (opinion[i].rate) {
+                case 5:
+                    newElement += "<span class='ui_bubble_rating bubble_50'></span>";
+                    break;
+                case 4:
+                    newElement += "<span class='ui_bubble_rating bubble_40'></span>";
+                    break;
+                case 3:
+                    newElement += "<span class='ui_bubble_rating bubble_30'></span>";
+                    break;
+                case 2:
+                    newElement += "<span class='ui_bubble_rating bubble_20'></span>";
+                    break;
+                default:
+                    newElement += "<span class='ui_bubble_rating bubble_10'></span>";
+                    break;
+            }
+            newElement += "<span class='ratingDate relativeDate float-right'>نوشته شده در تاریخ " + opinion[i].date + " در <a href='" + opinion[i].url + "' target='_blank'>" + opinion[i].name + "</a></span></div>";
+            newElement += "<div class='quote isNew'><a href='" + homeURL + "/showReview/" + opinion[i].id + "'><h3 class='font-size-1em noQuotes'>" + opinion[i].subject + "</h3></a></div>";
+            newElement += "<div class='prw_rup prw_reviews_text_summary_hsx'>";
+            newElement += "<div class='entry'>";
+            newElement += "<p class='partial_entry partial-entry-paragraph' id='partial_entry_" + opinion[i].id + "'>" + opinion[i].text;
+            newElement += "</p>";
+            newElement += "<div id='showMoreReview_" + opinion[i].id + "' class='hidden showMoreReviewDiv' onclick='showMoreReview(" + opinion[i].id + ")'>بیشتر</div></div></div>";
+            if (opinion[i].pic != -1)
+                newElement += "<div><img id='reviewPic_" + opinion[i].id + "' class='hidden' width='150px' height='150px' src='" + opinion[i].pic + "'></div>";
+            newElement += "<div class='prw_rup prw_reviews_vote_line_hsx'>";
+            newElement += "<div class='tooltips wrap'><span id='reportSpanReviews' onclick='showReportPrompt(\"" + opinion[i].id + "\")' class='taLnk no_cpu ui_icon '>گزارش تخلف</span></div>";
+            newElement += "<div class='helpful redesigned hsx_helpful'>";
+            newElement += "<span onclick='likeComment(\"" + opinion[i].id + "\")' class='thankButton hsx_thank_button'>";
+            newElement += "<span class='helpful_text'><span class='ui_icon thumbs-up-fill emphasizeWithColor'></span><span class='numHelp emphasizeWithColor'></span><span class='thankUser'>" + opinion[i].visitorId + " </span></span>";
+            newElement += "<div class='buttonShade hidden'><img src='https://static.tacdn.com/img2/generic/site/loading_anim_gry_sml.gif'/></div>";
+            newElement += "</span>";
+            newElement += "<span onclick='dislikeComment(\"" + opinion[i].id + "\")' class='thankButton hsx_thank_button'>";
+            newElement += "<span class='helpful_text'><span class='ui_icon thumbs-down-fill emphasizeWithColor'></span><span class='numHelp emphasizeWithColor'></span><span class='thankUser'>" + opinion[i].visitorId + " </span></span>";
+            newElement += "<div class='buttonShade hidden'><img src='https://static.tacdn.com/img2/generic/site/loading_anim_gry_sml.gif'/></div>";
+            newElement += "</span>";
+            newElement += "</div></div></div>";
+            newElement += "<div class='loadingShade hidden'>";
+            newElement += "<div class='ui_spinner'></div></div></div></div></div></div></div></div>";
+            newElement += '<hr>';
+        }
+
+        document.getElementById('opinion').innerHTML = newElement;
+    }
+
+    getCityOpinion();
+
+    function showReportPrompt(logId) {
+        if (!{{Auth::check()}}) {
+            url = homeURL + "/seeAllAns/" + questionId + "/report/" + logId;
+            showLoginPrompt(url);
+            return;
+        }
+        $('.dark').show();
+        selectedLogId = logId;
+        getReports(logId);
+        showElement('reportPane');
+    }
+
+    function getReports(logId) {
+        $("#reports").empty();
+        $.ajax({
+            type: 'post',
+            url: getReportsDir,
+            data: {
+                'logId': logId
+            },
+            success: function (response) {
+                if (response != "")
+                    response = JSON.parse(response);
+                var newElement = "<div id='reportContainer' class='row'>";
+                if (response != "") {
+                    for (i = 0; i < response.length; i++) {
+                        newElement += "<div class='col-xs-12'>";
+                        newElement += "<div class='ui_input_checkbox'>";
+                        if (response[i].selected == true)
+                            newElement += "<input id='report_" + response[i].id + "' type='checkbox' name='reports' checked value='" + response[i].id + "'>";
+                        else
+                            newElement += "<input id='report_" + response[i].id + "' type='checkbox' name='reports' value='" + response[i].id + "'>";
+                        newElement += "<label class='labelForCheckBox' for='report_" + response[i].id + "'>";
+                        newElement += "<span></span>&nbsp;&nbsp;";
+                        newElement += response[i].description;
+                        newElement += "</label>";
+                        newElement += "</div></div>";
+                    }
+                }
+                newElement += "<div class='col-xs-12'>";
+                newElement += "<div class='ui_input_checkbox'>";
+                newElement += "<input id='custom-checkBox' onchange='customReport()' type='checkbox' name='reports' value='-1'>";
+                newElement += "<label class='labelForCheckBox' for='custom-checkBox'>";
+                newElement += "<span></span>&nbsp;&nbsp;";
+                newElement += "سایر موارد</label>";
+                newElement += "</div></div>";
+                newElement += "<div id='custom-define-report'></div>";
+                newElement += "</div>";
+                $("#reports").append(newElement);
+                if (response != "" && response.length > 0 && response[0].text != "") {
+                    customReport();
+                    $("#customDefinedReport").val(response[0].text);
+                }
+            }
+        });
+    }
+
+    function customReport() {
+        if ($("#custom-checkBox").is(':checked')) {
+            var newElement = "<div class='col-xs-12'>";
+            newElement += "<textarea id='customDefinedReport' maxlength='1000' required placeholder='حداکثر 1000 کاراکتر'></textarea>";
+            newElement += "</label></div>";
+            $("#custom-define-report").empty().append(newElement).css("visibility", "visible");
+        }
+        else {
+            $("#custom-define-report").empty().css("visibility", "hidden");
+        }
+    }
+
+    function closeReportPrompt() {
+        $("#custom-checkBox").css("visibility", 'hidden');
+        $("#custom-define-report").css("visibility", 'hidden');
+        $("#reportPane").addClass('hidden');
+        $('.dark').hide();
+    }
+
+    function sendReport() {
+        customMsg = "";
+        if ($("#customDefinedReport").val() != null)
+            customMsg = $("#customDefinedReport").val();
+        var checkedValuesReports = $("input:checkbox[name='reports']:checked").map(function () {
+            return this.value;
+        }).get();
+        if (checkedValuesReports.length <= 0)
+            return;
+        if (!hasLogin) {
+            url = homeURL + "/seeAllAns/" + questionId + "/report/" + selectedLogId;
+            showLoginPrompt(url);
+            return;
+        }
+        $.ajax({
+            type: 'post',
+            url: sendReportDir,
+            data: {
+                "logId": selectedLogId,
+                "reports": checkedValuesReports,
+                "customMsg": customMsg
+            },
+            success: function (response) {
+                if (response == "ok") {
+                    alert('گزارش شما با موفقیت ثبت شد.')
+                    closeReportPrompt();
+                }
+                else {
+                    $("#errMsgReport").append('مشکلی در انجام عملیات مورد نقد رخ داده است');
+                }
+            }
+        });
+    }
+
+    function likeComment(logId) {
+        $.ajax({
+            type: 'post',
+            url: opOnComment,
+            data: {
+                'logId': logId,
+                'mode': 'like'
+            },
+            success: function (response) {
+                if (response == "1") {
+                    $("#commentLikes_" + logId).empty()
+                        .attr('data-val', parseInt($("#commentLikes_" + logId).attr('data-val')) + 1)
+                        .append($("#commentLikes_" + logId).attr('data-val'));
+                }
+                else if (response == "2") {
+                    $("#commentLikes_" + logId).empty()
+                        .attr('data-val', parseInt($("#commentLikes_" + logId).attr('data-val')) + 1)
+                        .append($("#commentLikes_" + logId).attr('data-val'));
+                    $("#commentDislikes_" + logId).empty()
+                        .attr('data-val', parseInt($("#commentDislikes_" + logId).attr('data-val')) - 1)
+                        .append($("#commentDislikes_" + logId).attr('data-val'));
+                }
+            }
+        });
+    }
+
+    function likeAns(logId) {
+        $.ajax({
+            type: 'post',
+            url: opOnComment,
+            data: {
+                'logId': logId,
+                'mode': 'like'
+            },
+            success: function (response) {
+                if (response == "1") {
+                    $("#score_" + logId).empty()
+                        .attr('data-val', parseInt($("#score_" + logId).attr('data-val')) + 1)
+                        .append($("#score_" + logId).attr('data-val'));
+                }
+                else if (response == "2") {
+                    $("#score_" + logId).empty()
+                        .attr('data-val', parseInt($("#score_" + logId).attr('data-val')) + 2)
+                        .append($("#score_" + logId).attr('data-val'));
+                }
+            }
+        });
+    }
+
+    function dislikeAns(logId) {
+        $.ajax({
+            type: 'post',
+            url: opOnComment,
+            data: {
+                'logId': logId,
+                'mode': 'dislike'
+            },
+            success: function (response) {
+                if (response == "1") {
+                    $("#score_" + logId).empty()
+                        .attr('data-val', parseInt($("#score_" + logId).attr('data-val')) - 1)
+                        .append($("#score_" + logId).attr('data-val'));
+                }
+                else if (response == "2") {
+                    $("#score_" + logId).empty()
+                        .attr('data-val', parseInt($("#score_" + logId).attr('data-val')) - 2)
+                        .append($("#score_" + logId).attr('data-val'));
+                }
+            }
+        });
+    }
+
+    function dislikeComment(logId) {
+        $.ajax({
+            type: 'post',
+            url: opOnComment,
+            data: {
+                'logId': logId,
+                'mode': 'dislike'
+            },
+            success: function (response) {
+                if (response == "1") {
+                    $("#commentDislikes_" + logId).empty()
+                        .attr('data-val', parseInt($("#commentDislikes_" + logId).attr('data-val')) + 1)
+                        .append($("#commentDislikes_" + logId).attr('data-val'));
+                }
+                else if (response == "2") {
+                    $("#commentDislikes_" + logId).empty()
+                        .attr('data-val', parseInt($("#commentDislikes_" + logId).attr('data-val')) + 1)
+                        .append($("#commentDislikes_" + logId).attr('data-val'));
+                    $("#commentLikes_" + logId).empty()
+                        .attr('data-val', parseInt($("#commentLikes_" + logId).attr('data-val')) - 1)
+                        .append($("#commentLikes_" + logId).attr('data-val'));
+                }
+            }
+        });
+    }
+
+</script>
+
 
 {{--map--}}
-
 <script>
     var x = '{{$city->x}}';
     var y = '{{$city->y}}';
@@ -794,7 +1150,7 @@
         var marker;
 
         // set amaken marker
-        for(i = 0; i < all_amaken.length; i++) {
+        for (i = 0; i < all_amaken.length; i++) {
             if (all_amaken[i].mooze == 1)
                 kindAmaken = 'amaken2';
             else if (all_amaken[i].tarikhi == 1)
@@ -834,7 +1190,7 @@
         }
 
         // set hotels marker
-        for(i = 0; i < all_hotels.length; i++) {
+        for (i = 0; i < all_hotels.length; i++) {
             marker = new google.maps.Marker({
                 position: new google.maps.LatLng(all_hotels[i]['C'], all_hotels[i]['D']),
                 icon: {
@@ -848,7 +1204,7 @@
         }
 
         // set majara marker
-        for(i = 0; i < all_majara.length; i++) {
+        for (i = 0; i < all_majara.length; i++) {
             marker = new google.maps.Marker({
                 position: new google.maps.LatLng(all_majara[i]['C'], all_majara[i]['D']),
                 icon: {
@@ -862,7 +1218,7 @@
         }
 
         // set restaurant marker
-        for(i = 0; i < all_restaurant.length; i++) {
+        for (i = 0; i < all_restaurant.length; i++) {
             if (all_restaurant[i].kind_id == 1)
                 kindRestaurant = 'rest';
             else
@@ -886,52 +1242,52 @@
         }
     }
 
-    function toggleIconInMap(_id){
+    function toggleIconInMap(_id) {
         var src = document.getElementById(_id).src;
         var sec = src.split('.');
         var kind;
 
-        if(sec[0].includes('off')){
+        if (sec[0].includes('off')) {
             sec[0] = sec[0].replace('off', '');
             src2 = sec[0] + '.' + sec[1];
             kind = 1;
         }
-        else{
+        else {
             src2 = sec[0] + 'off.' + sec[1];
             kind = 0;
         }
-        document.getElementById(_id).src = src2 ;
+        document.getElementById(_id).src = src2;
 
-        if(_id == 'hotelImg'){
+        if (_id == 'hotelImg') {
             setInMap(kind, markersHotel);
         }
-        else if(_id == 'restImg'){
+        else if (_id == 'restImg') {
             setInMap(kind, markersRest);
         }
-        else if(_id == 'fastImg'){
+        else if (_id == 'fastImg') {
             setInMap(kind, markersFast);
         }
-        else if(_id == 'musImg'){
+        else if (_id == 'musImg') {
             setInMap(kind, markersMus);
         }
-        else if(_id == 'plaImg'){
+        else if (_id == 'plaImg') {
             setInMap(kind, markersPla);
         }
-        else if(_id == 'shcImg'){
+        else if (_id == 'shcImg') {
             setInMap(kind, markersShc);
         }
-        else if(_id == 'funImg'){
+        else if (_id == 'funImg') {
             setInMap(kind, markersFun);
         }
-        else if(_id == 'advImg'){
+        else if (_id == 'advImg') {
             setInMap(kind, majaraMap);
         }
-        else if(_id == 'natImg'){
+        else if (_id == 'natImg') {
             setInMap(kind, markersNat);
         }
     }
 
-    function setInMap(isSet, marker){
+    function setInMap(isSet, marker) {
         if (isSet == 1) {
             for (var i = 0; i < marker.length; i++) {
                 marker[i].setMap(map2);
@@ -944,8 +1300,9 @@
         }
     }
 </script>
-
 <script src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyCdVEd4L2687AfirfAnUY1yXkx-7IsCER0&callback=init"></script>
+
+
 
 </body>
 </html>

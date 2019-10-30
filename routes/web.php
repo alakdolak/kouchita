@@ -170,6 +170,8 @@ Route::group(array('middleware' => ['throttle:30']), function () {
 
     Route::get('cityPage/{city}', 'HomeController@cityPage');
 
+    Route::post('/cityPage/getCityOpinion', 'HomeController@getCityOpinion')->name('cityPage.getCityOpinion');
+
     Route::get('abbas', 'HomeController@abbas');
 
     Route::any('hotelList2/{city}/{mode}', array('as' => 'hotelList2', 'uses' => 'HotelReservationController@showHotelList2'));

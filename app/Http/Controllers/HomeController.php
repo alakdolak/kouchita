@@ -9,6 +9,7 @@ use App\models\AirLine;
 use App\models\Amaken;
 use App\models\Cities;
 use App\models\ConfigModel;
+use App\models\DefaultPic;
 use App\models\GoyeshCity;
 use App\models\Hotel;
 use App\models\HotelApi;
@@ -16,6 +17,7 @@ use App\models\LogModel;
 use App\models\Majara;
 use App\models\Message;
 use App\models\OpOnActivity;
+use App\models\Place;
 use App\models\Post;
 use App\models\PostComment;
 use App\models\Report;
@@ -44,7 +46,6 @@ class HomeController extends Controller
     public function cityPage($city) {
 
         $today = getToday()["date"];
-
         $city = Cities::whereName($city)->first();
         if($city == null || $city->description == null) {
             return Redirect::route('home');
@@ -62,7 +63,25 @@ class HomeController extends Controller
                 $cityPost = array_merge($cityPost, $cityPost2);
         }
 
-        $lastMonth = Carbon::now()->subMonth();
+//        $lastMonth = Carbon::now()->subMonth();
+        $t0 = str_split($today, 4)[0];
+        $t1 = str_split($today, 4)[1];
+        $t2 = str_split($t1, 2)[1];
+        $t1 = str_split($t1, 2)[0];
+        $year = (int)$t0;
+        $month = (int)$t1;
+        $day = (int)$t2;
+        $month--;
+        if($month == 0) {
+            $month = 12;
+            $year--;
+        }
+        if($month < 10)
+            $month = '0' . $month;
+        if($day < 10)
+            $day = '0' . $day;
+        $lastMonth = $year . $month . $day;
+
         $mostSeenPosts = Post::where('date', '<=', $today)->where('date', '>=', $lastMonth)->orderBy('seen', 'ASCD')->take(5)->get();
 
         foreach ($cityPost as $post) {
@@ -92,7 +111,99 @@ class HomeController extends Controller
         $allHotels = Hotel::where('cityId', $city->id)->select(['id', 'name', 'C', 'D'])->get();
         $allRestaurant = Restaurant::where('cityId', $city->id)->select(['id', 'name', 'C', 'D', 'kind_id'])->get();
 
+
         return view('cityPage', compact(['city', 'cityPost', 'mostSeenPosts', 'allAmaken', 'allHotels', 'allRestaurant', 'allMajara']));
+    }
+
+    public function getCityOpinion()
+    {
+        $city = Cities::find($_POST['cityId']);
+        $opinion = array();
+        $placeId = Place::where('name', 'اماکن')->orwhere('name', 'رستوران')->orwhere('name', 'هتل')->get();
+        $opinionKindId = Activity::where('name', 'نظر')->first();
+        $rateActivityId = Activity::whereName('امتیاز')->first()->id;
+
+        foreach ($placeId as $item){
+            $table = '';
+
+            if($item->name == 'اماکن')
+                $table = 'amaken';
+            elseif($item->name == 'هتل')
+                $table = 'hotels';
+            elseif($item->name == 'رستوران')
+                $table = 'restaurant';
+
+            $places = DB::select('SELECT * FROM `log` INNER JOIN `' . $table . '` ON ' . $table . '.id = placeId AND ' . $table . '.cityId = ' . $city->id . ' WHERE kindPlaceId = ' . $item->id . ' and confirm = 1 and activityId = ' . $opinionKindId->id);
+            $opinion = array_merge($opinion, $places);
+        }
+        for ($i = 0; $i < count($opinion); $i++){
+            for($j = $i+1; $j < count($opinion); $j++){
+                if($opinion[$i]->date < $opinion[$j]->date){
+                    $d  = $opinion[$i];
+                    $opinion[$i] = $opinion[$j];
+                    $opinion[$j] = $d;
+                }
+            }
+        }
+
+        $opinion = array_slice($opinion,0 ,4);
+        foreach ($opinion as $log) {
+            $log->id = LogModel::where('subject', $log->subject)->where('date', $log->date)->first()->id;
+
+            $condition = ["activityId" => $opinionKindId, 'visitorId' => $log->visitorId];
+            $log->comments = LogModel::where($condition)->count();
+
+            $condition = ["activityId" => $rateActivityId, 'visitorId' => $log->visitorId,
+                'placeId' => $log->placeId, 'kindPlaceId' => $log->kindPlaceId];
+            $logId = LogModel::where($condition)->first()->id;
+            $log->rate = ceil(DB::select('Select AVG(rate) as avgRate from userOpinions WHERE logId = ' . $logId)[0]->avgRate);
+            $user = User::whereId($log->visitorId);
+            $log->visitorId = $user->username;
+
+            $userPic = $user->picture;
+
+            if (count(explode('.', $userPic)) == 2) {
+                $log->visitorPic = URL::asset('userPhoto/' . $userPic);
+            } else {
+                $defaultPic = DefaultPic::whereId($userPic);
+                if ($defaultPic == null)
+                    $defaultPic = DefaultPic::first();
+                $log->visitorPic = URL::asset('defaultPic/' . $defaultPic->name);
+            }
+
+            $condition = ["logId" => $log->id, "like_" => 1];
+//            if($log->id == 8)
+//                dd($log);
+            $log->likes = OpOnActivity::where($condition)->count();
+            $condition = ["logId" => $log->id, "dislike" => 1];
+            $log->dislikes = OpOnActivity::where($condition)->count();
+
+            if (!empty($log->pic))
+                $log->pic = URL::asset('userPhoto/comments/' . $log->kindPlaceId . '/' . $log->pic);
+            else
+                $log->pic = -1;
+
+            $log->date = convertDate($log->date);
+            $log->kindPlaceName = Place::find($log->kindPlaceId)->name;
+
+            if($log->kindPlaceName == 'اماکن'){
+                $fileName = 'amaken';
+                $urlKind = 'amakenDetails';
+            }
+            elseif($log->kindPlaceName == 'هتل'){
+                $fileName = 'hotels';
+                $urlKind = 'hotelDetails';
+            }
+            elseif($log->kindPlaceName == 'رستوران'){
+                $fileName = 'restaurant';
+                $urlKind = 'restaurantDetails';
+            }
+
+            $log->url = route($urlKind, ['placeId' => $log->placeId, 'placeName' => $log->name]);
+        }
+
+        echo json_encode($opinion);
+
     }
 
     public function abbas()
