@@ -334,6 +334,63 @@
 
 @include('layouts.placeFooter')
 
+<span id="statePane1" class="statePane ui_overlay ui_modal editTags hidden pop-up-Panes">
+
+            <div class="header_text">استان مورد نظر</div>
+            <div class="subheader_text">
+           استان مورد نظر خود را از بین استان های موجود انتخاب کنید
+            </div>
+            <div class="body_text">
+
+                <select  id="states"></select>
+
+                <div class="submitOptions">
+                    <button onclick="document.location.href = $('#states').val()" class="btn btn-success">تایید</button>
+                    <input type="submit" onclick="$('.dark').hide(); $('#statePane').addClass('hidden')" value="خیر" class="btn btn-default">
+                </div>
+            </div>
+            <div onclick="$('#statePane').addClass('hidden'); $('.dark').hide()" class="ui_close_x"></div>
+        </span>
+
+<span id="statePane2" class="statePane ui_overlay ui_modal editTags hidden pop-up-Panes">
+
+            <div class="header_text">شهر مورد نظر</div>
+            <div class="subheader_text">
+           شهر مورد نظر خود را از بین شهر های موجود انتخاب کنید
+            </div>
+            <div class="body_text">
+
+                <select  onchange="getCities()" id="states2"></select>
+
+                <select  id="cities"></select>
+
+                <div class="submitOptions">
+                    <button onclick="document.location.href = $('#cities').val()" class="btn btn-success">تایید</button>
+                    <input type="submit" onclick="$('.dark').hide(); $('#statePane2').addClass('hidden')" value="خیر" class="btn btn-default">
+                </div>
+            </div>
+            <div onclick="$('#statePane2').addClass('hidden'); $('.dark').hide()" class="ui_close_x"></div>
+        </span>
+
+<span id="goyeshPane" class="ui_overlay ui_modal editTags hidden pop-up-Panes">
+            <div class="header_text">گویش مورد نظر</div>
+            <div class="subheader_text">
+           گویش مورد نظر خود را از بین گویش های موجود انتخاب کنید
+            </div>
+            <div class="body_text">
+
+                <select id="goyesh"></select>
+
+                <div class="submitOptions">
+                    <button onclick="document.location.href = $('#goyesh').val()" class="btn btn-success">تایید</button>
+                    <input type="submit" onclick="$('.dark').hide(); $('#goyeshPane').addClass('hidden')" value="خیر" class="btn btn-default">
+                </div>
+            </div>
+            <div onclick="$('#goyeshPane').addClass('hidden'); $('.dark').hide()" class="ui_close_x"></div>
+        </span>
+
+<div class="ui_backdrop dark" id="darkModeMainPage"></div>
+
 @if(!Auth::check())
     @include('layouts.loginPopUp')
 @endif
@@ -600,7 +657,7 @@
 <script>
     var imageBasePath = '{{URL::asset('images')}}';
     var getLastRecentlyMainPath = '{{route('getLastRecentlyMain')}}';
-    var getAdviceMainPath = '{{route('getAdviceMain')}}';
+    var getAdviceMainPath = '{{route('getAdviceCity')}}';
     var getHotelsMainPath = '{{route('getRandomHotel')}}';
     var getAmakensMainPath = '{{route('getRandomAmaken')}}';
     var getRestaurantsMainPath = '{{route('getRestaurantsMain')}}';
@@ -625,63 +682,6 @@
 <script async src="{{URL::asset('js/middleBanner.js')}}"></script>
 
 <script async src="{{URL::asset('js/slideBar.js')}}"></script>
-
-<span id="statePane1" class="statePane ui_overlay ui_modal editTags hidden pop-up-Panes">
-
-            <div class="header_text">استان مورد نظر</div>
-            <div class="subheader_text">
-           استان مورد نظر خود را از بین استان های موجود انتخاب کنید
-            </div>
-            <div class="body_text">
-
-                <select  id="states"></select>
-
-                <div class="submitOptions">
-                    <button onclick="document.location.href = $('#states').val()" class="btn btn-success">تایید</button>
-                    <input type="submit" onclick="$('.dark').hide(); $('#statePane').addClass('hidden')" value="خیر" class="btn btn-default">
-                </div>
-            </div>
-            <div onclick="$('#statePane').addClass('hidden'); $('.dark').hide()" class="ui_close_x"></div>
-        </span>
-
-<span id="statePane2" class="statePane ui_overlay ui_modal editTags hidden pop-up-Panes">
-
-            <div class="header_text">شهر مورد نظر</div>
-            <div class="subheader_text">
-           شهر مورد نظر خود را از بین شهر های موجود انتخاب کنید
-            </div>
-            <div class="body_text">
-
-                <select  onchange="getCities()" id="states2"></select>
-
-                <select  id="cities"></select>
-
-                <div class="submitOptions">
-                    <button onclick="document.location.href = $('#cities').val()" class="btn btn-success">تایید</button>
-                    <input type="submit" onclick="$('.dark').hide(); $('#statePane2').addClass('hidden')" value="خیر" class="btn btn-default">
-                </div>
-            </div>
-            <div onclick="$('#statePane2').addClass('hidden'); $('.dark').hide()" class="ui_close_x"></div>
-        </span>
-
-<span id="goyeshPane" class="ui_overlay ui_modal editTags hidden pop-up-Panes">
-            <div class="header_text">گویش مورد نظر</div>
-            <div class="subheader_text">
-           گویش مورد نظر خود را از بین گویش های موجود انتخاب کنید
-            </div>
-            <div class="body_text">
-
-                <select id="goyesh"></select>
-
-                <div class="submitOptions">
-                    <button onclick="document.location.href = $('#goyesh').val()" class="btn btn-success">تایید</button>
-                    <input type="submit" onclick="$('.dark').hide(); $('#goyeshPane').addClass('hidden')" value="خیر" class="btn btn-default">
-                </div>
-            </div>
-            <div onclick="$('#goyeshPane').addClass('hidden'); $('.dark').hide()" class="ui_close_x"></div>
-        </span>
-
-<div class="ui_backdrop dark" id="darkModeMainPage"></div>
 
 <script src="{{URL::asset('js/adv.js')}}"></script>
 
