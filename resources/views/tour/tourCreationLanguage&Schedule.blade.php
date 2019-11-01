@@ -75,50 +75,44 @@ $kindPlaceId = 10; ?>
                     <div class="inboxHelpSubtitle">
                         کدام یک از موارد زیر در مورد تور شما صادق است؟
                     </div>
-                    <div class="tourBasicKindTourCreation">
-                        <span class="tourBasicKindsCheckboxLabel pd-lt-3">
+
+                    <input ng-model="sort" type="radio" id="c51" name="tourKind" value=""/>
+                    <label for="c51" class="tourBasicKindsCheckbox pd-40-30">
+                        <p>
                             تور ما فقط برای یکبار برگزار می‌گردد.
-                        </span>
-                        <input ng-model="sort" type="checkbox" id="c51" value="rate"/>
-                        <label for="c51" class="tourBasicKindsCheckbox">
-                            <span></span>
-                        </label>
-                    </div>
-                    <div class="tourBasicKindTourCreation tourBasicKindTourCreationBiggerOne">
-                        <span class="tourBasicKindsCheckboxLabel pd-tp-5">
+                        </p>
+                        <span class="tourBasicKindsCheckboxSpan"></span>
+                    </label>
+
+
+                    <input ng-model="sort" type="radio" id="c52" name="tourKind" value=""/>
+                    <label for="c52" class="tourBasicKindsCheckbox">
+                        <p>
                             تور ما با برنامه زمانی یکسان و منظم بیش از یکبار برگزار می‌گردد.
-                        </span>
-                        <input ng-model="sort" type="checkbox" id="c52" value="rate"/>
-                        <label for="c52" class="tourBasicKindsCheckbox">
-                            <span></span>
-                        </label>
-                    </div>
-                    <div class="tourBasicKindTourCreation tourBasicKindTourCreationBiggerOne">
-                        <span class="tourBasicKindsCheckboxLabel pd-tp-5">
+                        </p>
+                        <span class="tourBasicKindsCheckboxSpan mg-tp-5imp" ></span>
+                    </label>
+
+
+                    <input ng-model="sort" type="radio" id="c53" name="tourKind" value=""/>
+                    <label for="c53" class="tourBasicKindsCheckbox">
+                        <p>
                             تور ما با برنامه‌ی زمانی نامنظم بیش از یک‌بار برگزار می‌گردد.
-                        </span>
-                        <input ng-model="sort" type="checkbox" id="c53" value="rate"/>
-                        <label for="c53" class="tourBasicKindsCheckbox">
-                            <span></span>
-                        </label>
-                    </div>
+                        </p>
+                        <span class="tourBasicKindsCheckboxSpan mg-tp-5imp" ></span>
+                    </label>
+
                     <div class="inboxHelpSubtitleBlue mg-tp-20">
                         نیاز به راهنمایی دارید؟
                     </div>
                 </div>
                 <script>
                     $(document).ready(function () {
-                        $('.tourBasicKindTourCreation').mouseenter(function () {
+                        $('.tourBasicKindsCheckbox').mouseenter(function () {
                             $(this).addClass('green-border')
                         });
-                        $('.tourBasicKindTourCreation').mouseleave(function () {
+                        $('.tourBasicKindsCheckbox').mouseleave(function () {
                             $(this).removeClass('green-border')
-                        });
-                        $('.tourBasicKindTourCreation').click(function () {
-                            $(this).toggleClass('green-border-onclick')
-                        });
-                        $('.tourBasicKindsCheckbox').click(function () {
-                            $(this).parent().toggleClass('green-border-onclick')
                         });
                     })
                 </script>
@@ -131,7 +125,7 @@ $kindPlaceId = 10; ?>
                     <div class="inboxHelpSubtitle">
                         تاریخ شروع و پایان تور خود را وارد نمایید. توجه کنید که ما این امکان را برای شما فراهم آوردیم تا با تعریف یکباره‌ی تور بتوانید بارهم از آن کپی گرفته و سریعتر تور خود را تعریف نمایید.
                     </div>
-                    <div class="inputBox col-xs-3 float-right">
+                    <div class="inputBox col-xs-3 relative-position float-right">
                         <div class="inputBoxText">
                             <div>
                                 تاریخ شروع
@@ -143,7 +137,7 @@ $kindPlaceId = 10; ?>
                         </div>
                         <input class="inputBoxInput" type="text">
                     </div>
-                    <div class="inputBox col-xs-3 mg-rt-10 float-right">
+                    <div class="inputBox col-xs-3 mg-rt-10 relative-position float-right">
                         <div class="inputBoxText">
                             <div>
                                 تاریخ پایان

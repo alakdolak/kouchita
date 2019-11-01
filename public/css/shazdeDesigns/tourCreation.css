@@ -1048,16 +1048,34 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     padding-left: 10px;
 }
 
-.tourBasicKindTourCreation {
+.tourBasicKindsCheckbox {
     float: right;
     /*text-align: right;*/
     padding: 31px 30px;
     box-shadow: 0 4px 16px 0
     rgba(0, 0, 0, 0.2);
     margin: 15px 0 0 20px;
-    width: 30%;
     border-radius: 5px;
+    display: inline-block;
+    width: 30%;
+}
 
+.tourBasicKindsCheckbox > p {
+    width: 80%;
+    display: inline-block;
+    color: black;
+    font-size: 13px;
+    padding-left: 10px;
+    margin-bottom: 0;
+    float: right;
+}
+
+input[type="checkbox"]:checked + label.tourBasicKindsCheckbox , input[type="radio"]:checked + label.tourBasicKindsCheckbox{
+    border: 2px solid #4DC7BC;
+}
+
+.tourBasicKindsCheckboxSpan {
+    float: left;
 }
 
 .tourBasicKindTourCreationBiggerOne {
@@ -1307,10 +1325,6 @@ textarea {
     text-align: right;
 }
 
-.float-right {
-    float: right;
-}
-
 .float-left {
     float: left;
 }
@@ -1345,6 +1359,14 @@ textarea {
 
 .pd-tp-5 {
     padding-top: 5px;
+}
+
+.pd-40-30 {
+    padding: 40px 30px;
+}
+
+.mg-tp-5imp {
+    margin-top: 5px !important;
 }
 
 .mg-5-0 {
