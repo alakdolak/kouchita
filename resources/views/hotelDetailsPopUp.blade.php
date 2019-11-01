@@ -54,7 +54,7 @@
 
 <div class="ui_backdrop dark" id="hotelDetailsPopUpDarkMode"></div>
 
-<span id="reportPane" class="ui_overlay ui_modal editTags hidden">
+<span id="reportPane" class="ui_overlay ui_modal editTags hidden" style="z-index: 99999999">
     <div class="header_text">گزارش</div>
     <div class="subheader_text">
    گزارش خود را از بین موضوعات موجود انتخاب نمایید

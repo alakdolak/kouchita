@@ -2817,7 +2817,7 @@ class PlaceController extends Controller {
 //        }
 
         $activityId = Activity::whereName('نظر')->first()->id;
-        $places = SpecialAdvice::all();
+        $places = SpecialAdvice::where('cityId', 0)->get();
 
         for ($i = 0; $i < count($places); $i++) {
             $kindPlaceIdTmp = $places[$i]->kindPlaceId;
@@ -2891,6 +2891,79 @@ class PlaceController extends Controller {
         Cache::add('suggestedPlaces', $places, 60 * 24 * 30);
 
         echo json_encode($places);
+    }
+
+    public function getAdviceCity()
+    {
+        $city = Cities::find($_POST['cityId']);
+        $special = SpecialAdvice::where('cityId', $city->id)->get();
+        $place1 = array();
+
+        foreach ($special as $item) {
+
+            $kindPlaceId = $item->kindPlaceId;
+            $kindPlace = Place::find($kindPlaceId);
+
+            if($kindPlace->name == 'اماکن'){
+                $fileName = 'amaken';
+                $urlKind = 'amakenDetails';
+                $place = Amaken::select(['name', 'id', 'cityId', 'file', 'pic_1'])->find($item->placeId);
+            }
+            elseif($kindPlace->name == 'هتل'){
+                $fileName = 'hotels';
+                $urlKind = 'hotelDetails';
+                $place = Hotel::select(['name', 'id', 'cityId', 'file', 'pic_1'])->find($item->placeId);
+            }
+            elseif($kindPlace->name == 'رستوران'){
+                $fileName = 'restaurant';
+                $urlKind = 'restaurantDetails';
+                $place = Restaurant::select(['name', 'id', 'cityId', 'file', 'pic_1'])->find($item->placeId);
+            }
+            $activityId = Activity::whereName('نظر')->first()->id;
+
+            $condition = ['activityId' => $activityId, 'placeId' => $place->id, 'kindPlaceId' => $kindPlaceId];
+            $match = LogModel::where($condition)->count();
+
+            if (file_exists((__DIR__ . '/../../../../assets/_images/' . $fileName . '/' . $place->file . '/f-1.jpg')))
+                $place->pic = URL::asset('_images/' . $fileName . '/' . $place->file . '/f-1.jpg');
+            else
+                $place->pic = URL::asset('_images/nopic/blank.jpg');
+
+            $place->reviews = $match;
+            $place->rate = getRate($place->id, $kindPlaceId)[1];
+            $place->url = route($urlKind, ['placeId' => $place->id, 'placeName' => $place->name]);
+            $place->kindPlaceId = $kindPlaceId;
+
+            if ($place == null) {
+                $place = null;
+                continue;
+            }
+
+            $place->present = true;
+
+            if ($place->kindPlaceId != 8) {
+                $city = Cities::whereId($place->cityId);
+                if ($city == null) {
+                    $place->present = false;
+                    continue;
+
+                }
+
+                $place->city = $city->name;
+                $place->state = State::whereId($city->stateId)->name;
+            } else {
+                $city = State::whereId($place->stateId);
+                if ($city == null) {
+                    $itr = null;
+                    continue;
+                }
+                $place->state = $place->city = $city->name;
+            }
+
+            array_push($place1, $place);
+        }
+
+        echo json_encode($place1);
     }
 
     public function getFoodsMain()

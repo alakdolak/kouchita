@@ -174,6 +174,8 @@ Route::group(array('middleware' => ['throttle:30']), function () {
 
     Route::get('cityPage/{city}', 'HomeController@cityPage');
 
+    Route::post('/cityPage/getCityOpinion', 'HomeController@getCityOpinion')->name('cityPage.getCityOpinion');
+
     Route::get('abbas', 'HomeController@abbas');
 
     Route::any('hotelList2/{city}/{mode}', array('as' => 'hotelList2', 'uses' => 'HotelReservationController@showHotelList2'));
@@ -262,12 +264,16 @@ Route::group(array('middleware' => ['throttle:30', 'nothing']), function () {
 
     Route::post('getAdviceMain', array('as' => 'getAdviceMain', 'uses' => 'PlaceController@getAdviceMain'));
 
+    Route::post('getAdviceCity', array('as' => 'getAdviceCity', 'uses' => 'PlaceController@getAdviceCity'));
+
     Route::post('getHotelsMain', array('as' => 'getHotelsMain', 'uses' => 'HotelController@getHotelsMain'));
 
     Route::post('getAmakensMain', array('as' => 'getAmakensMain', 'uses' => 'AmakenController@getAmakensMain'));
 
     Route::post('getRandomAmaken', array('as' => 'getRandomAmaken', 'uses' => 'AmakenController@getRandomAmaken'));
+
     Route::post('getRandomHotel', array('as' => 'getRandomHotel', 'uses' => 'HotelController@getRandomHotel'));
+
     Route::post('getRandomFood', array('as' => 'getRandomFood', 'uses' => 'PlaceController@getRandomFood'));
 
     Route::post('getFoodsMain', array('as' => 'getFoodsMain', 'uses' => 'PlaceController@getFoodsMain'));
