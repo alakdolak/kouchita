@@ -168,7 +168,7 @@ DIV.ppr_rup.ppr_priv_hr_atf_north_star_nostalgic .atf_meta_and_photos_wrapper::b
     float: right;
 }
 
-#termsAndConditionText > span {
+#termsAndConditionText > span , #supportingInfos > div > span {
     width: 100%;
     display: inline-block;
     text-align: justify;
@@ -181,12 +181,27 @@ DIV.ppr_rup.ppr_priv_hr_atf_north_star_nostalgic .atf_meta_and_photos_wrapper::b
     font-size: 18px;
 }
 
+#supportingInfos > div > span:nth-child(1) {
+    margin-bottom: 50px;
+}
+
 #termsAndConditionText > span:not(:nth-child(1)) {
     color: darkred;
     font-size: 13px;
 }
 
-#termsAndConditionBtn {
+#supportingInfos > div > span:nth-child(2) {
+    margin-bottom: 10px;
+    color: darkblue;
+    font-weight: 700;
+}
+
+#supportingInfos > div > span:last-child{
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+#termsAndConditionBtn , #goToProfile{
     display: inline-block;
     background-color: #4dc7bc;
     width: 150px;
@@ -1294,6 +1309,10 @@ textarea {
 
 .float-right {
     float: right;
+}
+
+.float-left {
+    float: left;
 }
 
 .full-width {
