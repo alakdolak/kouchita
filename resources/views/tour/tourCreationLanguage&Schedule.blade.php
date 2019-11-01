@@ -46,7 +46,7 @@ $kindPlaceId = 10; ?>
         <div class="atf_meta_and_photos_wrapper">
             <div class="atf_meta_and_photos ui_container is-mobile easyClear">
                 <div class="prw_rup darkGreyBox tourDetailsMainFormHeading">
-                    <b class="formName">اطلاعات مالی</b>
+                    <b class="formName">اطلاعات زمانی و زبانی</b>
                     <div class="tourCreationStepInfo">
                         <span>
                             گام
@@ -76,29 +76,29 @@ $kindPlaceId = 10; ?>
                         کدام یک از موارد زیر در مورد تور شما صادق است؟
                     </div>
                     <div class="tourBasicKindTourCreation">
-                        <span class="tourBasicKindsCheckbox pd-lt-3">
+                        <span class="tourBasicKindsCheckboxLabel pd-lt-3">
                             تور ما فقط برای یکبار برگزار می‌گردد.
                         </span>
                         <input ng-model="sort" type="checkbox" id="c51" value="rate"/>
-                        <label for="c51">
+                        <label for="c51" class="tourBasicKindsCheckbox">
                             <span></span>
                         </label>
                     </div>
                     <div class="tourBasicKindTourCreation tourBasicKindTourCreationBiggerOne">
-                        <span class="tourBasicKindsCheckbox pd-tp-5">
+                        <span class="tourBasicKindsCheckboxLabel pd-tp-5">
                             تور ما با برنامه زمانی یکسان و منظم بیش از یکبار برگزار می‌گردد.
                         </span>
                         <input ng-model="sort" type="checkbox" id="c52" value="rate"/>
-                        <label for="c52">
+                        <label for="c52" class="tourBasicKindsCheckbox">
                             <span></span>
                         </label>
                     </div>
                     <div class="tourBasicKindTourCreation tourBasicKindTourCreationBiggerOne">
-                        <span class="tourBasicKindsCheckbox pd-tp-5">
+                        <span class="tourBasicKindsCheckboxLabel pd-tp-5">
                             تور ما با برنامه‌ی زمانی نامنظم بیش از یک‌بار برگزار می‌گردد.
                         </span>
                         <input ng-model="sort" type="checkbox" id="c53" value="rate"/>
-                        <label for="c53">
+                        <label for="c53" class="tourBasicKindsCheckbox">
                             <span></span>
                         </label>
                     </div>
@@ -106,6 +106,22 @@ $kindPlaceId = 10; ?>
                         نیاز به راهنمایی دارید؟
                     </div>
                 </div>
+                <script>
+                    $(document).ready(function () {
+                        $('.tourBasicKindTourCreation').mouseenter(function () {
+                            $(this).addClass('green-border')
+                        });
+                        $('.tourBasicKindTourCreation').mouseleave(function () {
+                            $(this).removeClass('green-border')
+                        });
+                        $('.tourBasicKindTourCreation').click(function () {
+                            $(this).toggleClass('green-border-onclick')
+                        });
+                        $('.tourBasicKindsCheckbox').click(function () {
+                            $(this).parent().toggleClass('green-border-onclick')
+                        });
+                    })
+                </script>
             </div>
             <div class="ui_container">
                 <div class="menu ui_container whiteBox">
