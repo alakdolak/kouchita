@@ -14,7 +14,7 @@
     @else
         <title>لیست غذاهای محلی</title>
     @endif
-    <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/specific designs/adabList.css?v=2')}}'/>
+    <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/shazdeDesigns/adab.css')}}'/>
 </head>
 <body id="BODY_BLOCK_JQUERY_REFLOW" class=" r_map_position_ul_fake ltr domn_en_US lang_en long_prices globalNav2011_reset rebrand_2017 css_commerce_buttons flat_buttons sitewide xo_pin_user_review_to_top track_back">
 

@@ -5,6 +5,8 @@
     <link rel="stylesheet" href="{{URL::asset('css/theme2/long_lived_global_legacy_2.css?v=1')}}">
     <link rel="stylesheet" href="{{URL::asset('css/theme2/userreviewedit.css?v=1')}}">
     <link rel="stylesheet" href="{{URL::asset('css/theme2/help.css?v=1')}}">
+    <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/abbreviations.css')}}">
+    <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/review.css')}}">
 
     @include('layouts.topHeader')
 
@@ -12,44 +14,47 @@
 
 </head>
 
-<body id="BODY_BLOCK_JQUERY_REFLOW" class="ltr domn_en_US lang_en long_prices globalNav2011_reset rebrand_2017 war_usability war_usability_2 war_client_side_validation war_please_dont_go war_friendly_text war_green_button css_commerce_buttons flat_buttons sitewide xo_pin_user_review_to_top track_back" data-scroll='OVERVIEW' data-navArea-metaType="QC_Meta_Mini" data-navArea-placement="Unknown" style="position: relative;">
+<body id="BODY_BLOCK_JQUERY_REFLOW"
+      class="ltr domn_en_US lang_en long_prices globalNav2011_reset rebrand_2017 war_usability war_usability_2
+      war_client_side_validation war_please_dont_go war_friendly_text war_green_button css_commerce_buttons flat_buttons
+      sitewide xo_pin_user_review_to_top track_back" data-scroll='OVERVIEW' data-navArea-metaType="QC_Meta_Mini" data-navArea-placement="Unknown">
 
-<div id="PAGE" class="user_review non_hotels_like desktop scopedSearch" style="">
+<div id="PAGE" class="user_review non_hotels_like desktop scopedSearch">
     @include('layouts.placeHeader')
-    <div id="MAINWRAP" style="">
-        <div id="MAIN" style="position: relative;">
-            <div id="BODYCON" class="col easyClear poolB adjust_padding new_meta_chevron_v2" style="position: relative;">
-                <div class="wrpHeader" style="position: relative;"></div>
-                <div id="MAIN_COL" class="balance" style="position: relative;">
-                    <div class="war_balance" style="position: relative;">
+    <div id="MAINWRAP">
+        <div id="MAIN">
+            <div id="BODYCON" class="col easyClear poolB adjust_padding new_meta_chevron_v2">
+                <div class="wrpHeader"></div>
+                <div id="MAIN_COL" class="balance">
+                    <div class="war_balance">
                         <div class="bigPhotoContainer no_blurry_photo">
                             <div class="writeAReviewHeader">
                                 <div class="reviewHeader Left">
                                     <div class="locationInfo wrap">
                                         <div class="thumbnail">
-                                            <div class="sizedThumb" style="width: 100%;height: auto;">
+                                            <div class="sizedThumb width-100per height-auto">
                                                 @if($placeMode == "hotel")
-                                                    <img src="{{$placePic}}" onclick="document.location.href = '{{route('hotelDetails', ['placeId' => $placeId, 'placeName' => $placeName])}}'" class="photo_image" style="cursor: pointer; width: 100%;border-radius: 4px;" alt=""/>
+                                                    <img src="{{$placePic}}" onclick="document.location.href = '{{route('hotelDetails', ['placeId' => $placeId, 'placeName' => $placeName])}}'" class="photo_image userPhotoWritingReview" alt=""/>
                                                 @elseif($placeMode == "amaken")
-                                                    <img src="{{$placePic}}" onclick="document.location.href = '{{route('amakenDetails', ['placeId' => $placeId, 'placeName' => $placeName])}}'" class="photo_image" style="cursor: pointer; width: 100%;border-radius: 4px;" alt=""/>
+                                                    <img src="{{$placePic}}" onclick="document.location.href = '{{route('amakenDetails', ['placeId' => $placeId, 'placeName' => $placeName])}}'" class="photo_image userPhotoWritingReview" alt=""/>
                                                 @elseif($placeMode == "restaurant")
-                                                    <img src="{{$placePic}}" onclick="document.location.href = '{{route('restaurantDetails', ['placeId' => $placeId, 'placeName' => $placeName])}}'" class="photo_image" style="cursor: pointer; width: 100%;border-radius: 4px;" alt=""/>
+                                                    <img src="{{$placePic}}" onclick="document.location.href = '{{route('restaurantDetails', ['placeId' => $placeId, 'placeName' => $placeName])}}'" class="photo_image userPhotoWritingReview" alt=""/>
                                                 @elseif($placeMode == "adab")
-                                                    <img src="{{$placePic}}" onclick="document.location.href = '{{route('adabDetails', ['placeId' => $placeId, 'placeName' => $placeName])}}'" class="photo_image" style="cursor: pointer; width: 100%;border-radius: 4px;" alt=""/>
+                                                    <img src="{{$placePic}}" onclick="document.location.href = '{{route('adabDetails', ['placeId' => $placeId, 'placeName' => $placeName])}}'" class="photo_image userPhotoWritingReview" alt=""/>
                                                 @endif
                                             </div>
                                         </div>
                                         <div class="nameAndAddress">
-                                            <h4 class="propertyaddress" style="font-size: 2em;">
+                                            <h4 class="propertyaddress">
                                                 <span class="format_address">
                                                     @if($placeMode == "hotel")
-                                                        <span style="cursor: pointer" onclick="document.location.href = '{{route('hotelDetails', ['placeId' => $placeId, 'placeName' => $placeName])}}'" class="street-address">{{$placeName}}</span>,
+                                                        <span onclick="document.location.href = '{{route('hotelDetails', ['placeId' => $placeId, 'placeName' => $placeName])}}'" class="street-address cursor-pointer">{{$placeName}}</span>,
                                                     @elseif($placeMode == "amaken")
-                                                        <span style="cursor: pointer" onclick="document.location.href = '{{route('amakenDetails', ['placeId' => $placeId, 'placeName' => $placeName])}}'" class="street-address">{{$placeName}}</span>,
+                                                        <span onclick="document.location.href = '{{route('amakenDetails', ['placeId' => $placeId, 'placeName' => $placeName])}}'" class="street-address cursor-pointer">{{$placeName}}</span>,
                                                     @elseif($placeMode == "restaurant")
-                                                        <span style="cursor: pointer" onclick="document.location.href = '{{route('restaurantDetails', ['placeId' => $placeId, 'placeName' => $placeName])}}'" class="street-address">{{$placeName}}</span>,
+                                                        <span onclick="document.location.href = '{{route('restaurantDetails', ['placeId' => $placeId, 'placeName' => $placeName])}}'" class="street-address cursor-pointer">{{$placeName}}</span>,
                                                     @elseif($placeMode == "adab")
-                                                        <span style="cursor: pointer" onclick="document.location.href = '{{route('adabDetails', ['placeId' => $placeId, 'placeName' => $placeName])}}'" class="street-address">{{$placeName}}</span>,
+                                                        <span onclick="document.location.href = '{{route('adabDetails', ['placeId' => $placeId, 'placeName' => $placeName])}}'" class="street-address cursor-pointer">{{$placeName}}</span>,
                                                     @endif
                                                     <span class="locality">{{$city}}, </span>
                                                     @if($placeMode != "adab")
@@ -62,19 +67,19 @@
                                 </div>
                             </div>
                         </div>
-                        <fieldset style="position: relative; display: block;">
+                        <fieldset class="position-relative display-block">
                             <div id="list-errors" class="almost hidden">
                                 <b>لطفا همه فیلد هارا پر کنید</b>
                                 <ul>
                                 </ul>
                             </div>
-                            <h2 class="pageTitle" style="color: #4DC7BC;">از اینکه تجربه خود را با ما و دوستانتان در میان می گذارید سپاس گزاریم ! </h2>
-                            <div class="warRequiredOuter" style="position: relative;">
-                                <div class="warRequiredSectionContainer  notLoggedIn " style="position: relative;">
-                                    <div class="questionBlock requiredQuestions" style="position: relative;">
-                                        <div class="writeAReviewHeader" style="position: relative;">
-                                            <div class="question rating bigRating labelAndInput required " data-error="RATE_OVERALL" style="position: relative;">
-                                                <div id="DQ_RATINGS" class="question subRatingsList striped spaced" style="position: relative;">
+                            <h2 class="pageTitle color-#4DC7BCImp">از اینکه تجربه خود را با ما و دوستانتان در میان می گذارید سپاس گزاریم ! </h2>
+                            <div class="warRequiredOuter position-relative">
+                                <div class="warRequiredSectionContainer  notLoggedIn  position-relative">
+                                    <div class="questionBlock requiredQuestions position-relative">
+                                        <div class="writeAReviewHeader position-relative">
+                                            <div class="question rating bigRating labelAndInput required position-relative" data-error="RATE_OVERALL">
+                                                <div id="DQ_RATINGS" class="question subRatingsList striped spaced position-relative">
                                                     <div id="targetHelp_5" class="targets" >
                                                         <div class="labelHeader">امتیاز شما به این مکان چیست</div>
                                                         <div id="helpSpan_5" class="helpSpans hidden row">
@@ -90,13 +95,13 @@
                                                             <div class="dq_allTravelers questionRow">
                                                                 <div class="detailsQuestion question">{{$opinion->name}}</div>
                                                                 <div class="answersBlock">
-                                                                <div style="float: right;" class="detailsRatings">
+                                                                <div class="float-right detailsRatings">
                                                                     <label class="visuallyHidden">
                                                                         {{$opinion->name}}
                                                                     </label>
                                                                     <span class="answersBubbles ui_bubble_rating rate bubble_00 qid12" id="opinion_{{$opinion->id}}" onmouseleave="mouseLeaveRate('{{$opinion->id}}')" onmousemove="mouseMoveRate(event, '{{$opinion->id}}')" onclick="clickRate(event, '{{$opinion->id}}')"></span>
                                                                 </div>
-                                                                <div style="color: #4DC7BC; float: right;margin-right: 40px;" class="ratingText short" id="ratingText_{{$opinion->id}}"></div>
+                                                                <div class="ratingText short ratingTextWritingReview" id="ratingText_{{$opinion->id}}"></div>
                                                             </div>
                                                             </div>
                                                         @endforeach
@@ -106,7 +111,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div id="REVIEW_TITLE" class="question labelAndInput required " data-error="REVIEW_TITLE_ERROR" style="position: relative;">
+                                        <div id="REVIEW_TITLE" class="question labelAndInput required position-relative" data-error="REVIEW_TITLE_ERROR">
                                             <div id="targetHelp_6" class="targets">
                                                 <label for="ReviewTitle">عنوان </label>
                                                 <div id="helpSpan_6" class="helpSpans hidden row">
@@ -117,11 +122,11 @@
                                                     <button class="btn btn-danger exitBtnHelp">خروج</button>
                                                 </div>
                                             </div>
-                                            <input type="text" name="ReviewTitle" id="ReviewTitle" style="width: 100% !important;" class="text" maxlength="120" value="{{(isset($log)) ? $log->subject : ''}}" placeholder="نکات اصلی و یا کلیدی را به طور خلاصه بنویسید">
+                                            <input type="text" name="ReviewTitle" id="ReviewTitle" class="text" maxlength="120" value="{{(isset($log)) ? $log->subject : ''}}" placeholder="نکات اصلی و یا کلیدی را به طور خلاصه بنویسید">
                                         </div>
-                                        <div id="REVIEW_TEXT" class="question labelAndInput required " data-error="REVIEW_TEXT_ERROR" style="position: relative;">
+                                        <div id="REVIEW_TEXT" class="question labelAndInput required position-relative" data-error="REVIEW_TEXT_ERROR">
                                             <div id="targetHelp_7" class="targets">
-                                                <label style="float: none !important;" for="ReviewText">نقد شما</label>
+                                                <label for="ReviewText">نقد شما</label>
                                                 <div id="helpSpan_7" class="helpSpans hidden row">
                                                     <span class="introjs-arrow"></span>
                                                     <p>نقد شما در این قسمت وارد می شود. نقد شما می بایست حداقل متشکل از 50 کلمه باشد تا منتشر گردد.</p>
@@ -130,10 +135,10 @@
                                                     <button class="btn btn-danger exitBtnHelp">خروج</button>
                                                 </div>
                                             </div>
-                                            <textarea name="ReviewText" id="ReviewText" style="width: 100% !important;" class="text" placeholder="تجربیات خود را با دیگران به اشتراک بگذارید">{{(isset($log)) ? $log->text : ''}}</textarea><br>
-                                            <span style="line-height: 3em;" id="CHAR_MIN" class="characterCounter">(حداقل 150 کاراکتر)</span>
+                                            <textarea name="ReviewText" id="ReviewText" class="text" placeholder="تجربیات خود را با دیگران به اشتراک بگذارید">{{(isset($log)) ? $log->text : ''}}</textarea><br>
+                                            <span id="CHAR_MIN" class="characterCounter">(حداقل 150 کاراکتر)</span>
                                         </div>
-                                        <div id="TRIP_TYPE" style="direction: rtl;" class="question required " data-error="TRIP_TYPE" style="position: relative;">
+                                        <div id="TRIP_TYPE" class="question required position-relative" data-error="TRIP_TYPE">
                                             <div id="targetHelp_8" class="targets">
                                                 <div class="labelHeader">چگونه این مکان را بازدید نمودید</div>
                                                 <div id="helpSpan_8" class="helpSpans hidden row">
@@ -154,7 +159,7 @@
                                                 @endforeach
                                             </div>
                                         </div>
-                                        <div class="optionalHeader" style="position: relative;">
+                                        <div class="optionalHeader position-relative">
                                             <div id="targetHelp_9" class="targets">
                                                 <div class="optionalHeaderCont optionalHeaderLabel">مبدا سفر خود را وارد کنید</div>
                                                 <div id="helpSpan_9" class="helpSpans hidden row">
@@ -165,13 +170,13 @@
                                                     <button class="btn btn-danger exitBtnHelp">خروج</button>
                                                 </div>
                                             </div>
-                                            <div class="col-xs-12" style="margin-top: 20px;">
-                                                <input style="padding: 5px;border-radius: 4px;width: 40%;" type="text" name="ReviewTitle" id="src" onkeyup="searchForCity()" class="text" value="{{(isset($comment)) ? $comment->src : ''}}" placeholder="لطفا نام محل را به طور کامل و صحیح وارد نمایید"  >
-                                                <div id="result" class="data_holder" style="max-height: 160px; overflow: auto; margin-top: 10px;"></div>
+                                            <div class="col-xs-12 mg-tp-20 pd-0Imp">
+                                                <input type="text" name="ReviewTitle" id="src" onkeyup="searchForCity()" class="text" value="{{(isset($comment)) ? $comment->src : ''}}" placeholder="لطفا نام محل را به طور کامل و صحیح وارد نمایید"  >
+                                                <div id="result" class="data_holder"></div>
                                             </div>
-                                            <span style="line-height: 3em;" class="characterCounter">در صورتی که نام شما در منو ظاهر شد لطفا از آن استفاده کنید</span>
+                                            <span class="characterCounter line-height-3em">در صورتی که نام شما در منو ظاهر شد لطفا از آن استفاده کنید</span>
                                         </div>
-                                        <div id="DATE_OF_VISIT" class="question labelAndInput required  prodp13nTagQuestions" data-error="DATE_OF_VISIT" style="position: relative;">
+                                        <div id="DATE_OF_VISIT" class="question labelAndInput required  prodp13nTagQuestions position-relative" data-error="DATE_OF_VISIT">
                                             <div id="targetHelp_10" class="targets">
                                                 <div class="labelHeader">زمان سفر خوب را مشخص نمایید.</div>
                                                 <div id="helpSpan_10" class="helpSpans hidden row">
@@ -210,8 +215,8 @@
                                 </div>
                             </div>
 
-                            <div class="questionBlock optionalQuestions" style="position: relative;">
-                                <div class="optionalHeader" style="position: relative;">
+                            <div class="questionBlock optionalQuestions position-relative">
+                                <div class="optionalHeader position-relative">
                                     <div id="targetHelp_11" class="targets">
                                         <div class="optionalHeaderCont optionalHeaderLabel">موارد اختیاری</div>
                                         <div id="helpSpan_11" class="helpSpans hidden row">
@@ -242,7 +247,7 @@
                                 </div>
                             </div>
 
-                            <div class="questionBlock fraudCheck required" style="position: relative;">
+                            <div class="questionBlock fraudCheck required position-relative">
                                 <div id="targetHelp_12" class="targets">
                                     <div class="labelHeader">ارسال نقد</div>
                                     <div id="helpSpan_12" class="helpSpans hidden row">
@@ -257,9 +262,10 @@
                                     <div class="willing ">
 
                                         <div id="FRAUD_LABEL_FLY" class="checkboxLabel">
-                                            <label style="text-align: justify;">
+                                            <label>
                                                 با ارسال نقد تایید می نمایم که نقد بر پایه تجربیات من بوده و به هیچ عنوان به دلیل منفعت مالی و خصومت شخصی به ابراز عقیده نپرداخته ام.<br>
-                                                دوستان شما به نقد شما اعتماد کرده وبر پایه آن تصمیم می گیرند و ما همواره از این اعتماد حمایت کرده و نقد های غیر صادقانه را حذف می کنیم.</label>
+                                                دوستان شما به نقد شما اعتماد کرده وبر پایه آن تصمیم می گیرند و ما همواره از این اعتماد حمایت کرده و نقد های غیر صادقانه را حذف می کنیم.
+                                            </label>
                                         </div>
 
                                     </div>
@@ -267,24 +273,24 @@
                             </div>
                             <fieldset class="submit">
                                 <div id="SBMT_WRP">
-                                    <div class="ui_button primary large" style="padding: 5px 22px 7px;">
+                                    <div class="ui_button primary large">
                                         <span onclick="sendComment(1)">ارسال نقد</span>
                                     </div>
                                     <div class="btn btn-default">
                                         <span onclick="sendComment(2)">ذخیره برای تکمیل</span>
                                     </div>
-                                    <div class="ui_button secondary large" style="padding: 5px 22px 7px;border-color:#963019; ">
-                                        <a style="color: #963019;" href="{{route('hotelDetails', ['placeId' => $placeId, 'placeName' => $placeName])}}"><span>انصراف</span></a>
+                                    <div class="ui_button secondary large">
+                                        <a href="{{route('hotelDetails', ['placeId' => $placeId, 'placeName' => $placeName])}}"><span>انصراف</span></a>
                                     </div>
-                                    <div class="ui_button secondary large" style="padding: 5px 22px 7px;border-color:#963019; ">
-                                        <span style="color: #963019;" onclick="removeReview()">حذف</span>
+                                    <div class="ui_button secondary large">
+                                        <span onclick="removeReview()">حذف</span>
                                     </div>
                                 </div>
-                                <h4 id="errMsg" style="color: #963019"></h4>
+                                <h4 id="errMsg"></h4>
                             </fieldset>
 
-                            <div class="questionBlock question warUploader" style="position: relative;">
-                                <div class="optionalHeader" style="position: relative;">
+                            <div class="questionBlock question warUploader position-relative">
+                                <div class="optionalHeader position-relative">
                                     <div id="targetHelp_13" class="targets">
                                         <div class="labelHeader">در صورت داشتن عکس از سفر خود دریغ نکنید<span class="optionalNote">(اختیاری)</span></div>
                                         <div id="helpSpan_13" class="helpSpans hidden row">
@@ -299,23 +305,23 @@
 
                                 <form method="post" action="{{route('addPhotoToComment', ['placeId' => $placeId, 'kindPlaceId' => $kindPlaceId])}}" enctype="multipart/form-data">
                                     {{csrf_field()}}
-                                    <input id="photo" onchange="writeFileName(this.value)" type="file" name="photo" style="display: none">
-                                    <label style="float: right;" for="photo">
+                                    <input id="photo" onchange="writeFileName(this.value)" type="file" name="photo" >
+                                    <label class="float-right" for="photo">
                                         <div class="ui_button primary">
                                             انتخاب فایل
                                         </div>
                                     </label>
 
-                                    <div id="submitPhotoDiv" style="visibility: hidden;">
-                                        <input id="submit" type="submit" name="submitPhoto" style="display: none">
+                                    <div id="submitPhotoDiv">
+                                        <input id="submit" type="submit" name="submitPhoto">
                                         <label for="submit">
-                                            <div style="margin-right: 15px;" class="ui_button primary">
+                                            <div class="ui_button primary mg-rt-15">
                                                 اضافه کردن عکس
                                             </div>
                                         </label>
                                     </div>
                                     <br>
-                                    <div id="fileName" style="color: #963019">
+                                    <div id="fileName">
                                         @if($err == "success")
                                             تصویر شما به درستی به نقد اضافه گردید
                                         @else
@@ -324,14 +330,14 @@
                                     </div>
                                 </form>
                                 <br>
-                                <div style="position: relative;">
+                                <div class="position-relative">
                                     @if(isset($log) && !empty($log->pic))
-                                        <img style="margin-right: 13px;width: 150px;" id="userPhoto" src="{{URL::asset('userPhoto/comments/' . $log->kindPlaceId . '/' . $log->pic)}}">
+                                        <img id="userPhoto" src="{{URL::asset('userPhoto/comments/' . $log->kindPlaceId . '/' . $log->pic)}}">
                                         <div id="close_btn">
-                                            <div onclick='deleteUserPicFromComment()' style='cursor: pointer; color: #963019 !important;position: absolute;top: -18px;right: 0; background: url("{{URL::asset('images') . 'estelah.png'}}");background-position: -2px -49px;background-size: 44px; width: 35px;display: block;height: 35px;'></div>
+                                            <div onclick='deleteUserPicFromComment()'></div>
                                         </div>
                                     @else
-                                        <img style="margin-right: 13px;width: 150px;" id="userPhoto" src="" hidden>
+                                        <img id="userPhoto" src="" hidden>
                                         <div id="close_btn"></div>
                                     @endif
                                 </div>
@@ -341,16 +347,16 @@
                 </div>
                 <div id="RECENT_REVIEWS_COL" class="sidebar">
                     {{--@if($sumTmp == 0)--}}
-                    <a style="cursor: pointer; float: left;" class="link" onclick="initHelp(14, [1, 2, 3, 4], 'MAINWRAP', 80, 400)">
-                        <div style="background-size: 28px;background-position:  0 -29px;width: 28px;height:  28px;background-image: url('{{URL::asset('images') . '/help_share.png'}}');background-repeat:  no-repeat;"></div>
+                    <a class="link" onclick="initHelp(14, [1, 2, 3, 4], 'MAINWRAP', 80, 400)">
+                        <div></div>
                     </a>
                     {{--@else--}}
                     {{--<a style="cursor: pointer" class="link" onclick="initHelp(16, [], 'MAIN', 100, 400)">--}}
                             {{--<div style="background-size: 28px;background-position:  0 -29px;width: 28px;height:  28px;background-image: url('{{URL::asset('images') . 'help_share.png'}}');background-repeat:  no-repeat;"></div>--}}
                         {{--</a>--}}
                     {{--@endif--}}
-                    <div class="war_sidebar" style="padding-top: 80px;">
-                        <img src="{{URL::asset('images/adv1.gif')}}" style="width: 70%;"/>
+                    <div class="war_sidebar pd-tp-80">
+                        <img src="{{URL::asset('images/adv1.gif')}}" class="width-70per"/>
                     </div>
                 </div>
                 {{--<div id="loadingRecentDraft" style="display:none;">--}}
@@ -381,11 +387,11 @@
     @include('layouts.placeFooter')
 </div>
 
-<span id="add-photo" class="ui_overlay ui_modal photoUploadOverlay" style="padding: 0px; width: 860px; height: 90%; top: 5%; position: fixed; left: 50%; margin-left: -430px;display: none;">
+<span id="add-photo" class="ui_overlay ui_modal photoUploadOverlay">
     <div class="body_text">
         <div class="photoUploader">
         <div class="headerBar">
-            <h3 id="photoUploadHeader" class="photoUploadHeader" style="top: -20px">
+            <h3 id="photoUploadHeader" class="photoUploadHeader">
                افزودن عکس
             </h3>
 
@@ -393,7 +399,7 @@
                 {{csrf_field()}}
                 <fieldset id="memberTags">
                     <div id="photoFilters"></div>
-                    <input id="photo" type="file" name="photo" style="display: none">
+                    <input id="photo" type="file" name="photo">
                     <label for="photo">
                         <div class="ui_button primary addPhotoBtn">انتخاب عکس از فایل </div>
                     </label>
@@ -406,10 +412,10 @@
         </div>
     </div>
     </div>
-    <div id="close-but" style="left: 0 !important;" class="ui_close_x"></div>
+    <div id="close-but" class="ui_close_x"></div>
 </span>
 
-<div class="ui_backdrop dark" style="display: none;"></div>
+<div class="ui_backdrop dark display-none"></div>
 
 <script>
 
@@ -639,7 +645,7 @@
                     response = JSON.parse(response);
                     newElement = "";
                     for(i = 0; i < response.length; i++) {
-                        newElement += "<p style='cursor: pointer' onclick='setCityName(\"" + response[i].cityName + "\")'>" + response[i].cityName + " در " + response[i].stateName + "</p>";
+                        newElement += "<p class='cursor-pointer' onclick='setCityName(\"" + response[i].cityName + "\")'>" + response[i].cityName + " در " + response[i].stateName + "</p>";
                     }
 
                     $("#result").append(newElement);
@@ -684,7 +690,7 @@
                 $("#placeStyle_" + selectedPlaceStyle).addClass('selected');
 
                 if(response.reviewPic != -1) {
-                    $("#close_btn").append("<div onclick='deleteUserPicFromComment()' style='cursor: pointer; color: #963019 !important;position: absolute;top: -18px;right: 0; background: url(\"{{URL::asset('images') . 'estelah.png'}}\");background-position: -2px -49px;background-size: 44px; width: 35px;display: block;height: 35px;'></div>");
+                    $("#close_btn").append("<div onclick='deleteUserPicFromComment()' id='styleDeleteUserPicFromComment'></div>");
                     $("#userPhoto").attr('src', response.reviewPic).show();
                 }
                 else {
@@ -966,14 +972,14 @@
             return "";
 
         t = total - filters.length;
-        newElement = "<div class='col-xs-12' style='position: relative'><div class='col-xs-12 bubbles' style='padding: 0; margin-right: 0; margin-left: " + ((400 - (t * 18)) / 2) + "px'>";
+        newElement = "<div class='col-xs-12 position-relative pd-0 mg-rt-0'><div class='col-xs-12 bubbles' style='margin-left: " + ((400 - (t * 18)) / 2) + "px'>";
 
         for (i = 1; i < total; i++) {
             if(!isInFilters(i)) {
                 if(i == curr)
-                    newElement += "<div style='border: 1px solid #ccc; background-color: #ccc; border-radius: 50%; margin-right: 2px; width: 12px; height: 12px; float: left'></div>";
+                    newElement += "<div id='isNotInFilterCurrReview'></div>";
                 else
-                    newElement += "<div onclick='show(\"" + i + "\", 1)' class='helpBubble' style='border: 1px solid #333; background-color: black; border-radius: 50%; margin-right: 2px; width: 12px; height: 12px; float: left'></div>";
+                    newElement += "<div onclick='show(\"" + i + "\", 1)' id='isNotInFilterReview' class='helpBubble'></div>";
             }
         }
 
