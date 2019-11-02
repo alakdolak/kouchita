@@ -90,7 +90,7 @@
                 </div>
                 <div class="col-xs-4" style="padding:0 !important;">
                     <div class="col-xs-12">
-                        <a class="col-xs-4 cpLittleMenu" href="{{route('main')}}">
+                        <a class="col-xs-4 cpLittleMenu" href="{{url('hotelList/' . $city->name . '/city')}}">
                             <div class="cityPageIcon hotel"></div>
                             <div class="textCityPageIcon">هتل</div>
                         </a>
@@ -105,7 +105,7 @@
                     </div>
                     <div style="clear: both"></div>
                     <div class="col-xs-12">
-                        <a class="col-xs-4 cpLittleMenu" href="{{route('mainMode', ['mode' => 'restaurant'])}}">
+                        <a class="col-xs-4 cpLittleMenu" href="{{url('restaurantList/' . $city->name . '/city')}}">
                             <div class="cityPageIcon restaurant"></div>
                             <div class="textCityPageIcon">رستوران</div>
                         </a>
@@ -756,7 +756,7 @@
 
 <script>
     var _token = '{!! csrf_token() !!}';
-    var hasLogin = {{Auth::check()}};
+    var hasLogin = {{Auth::check() ? 1 : 0}};
     var getReportsDir = '{{route('getReports')}}';
     var sendReportDir = '{{route('sendReport2')}}';
     var opOnComment = '{{route('opOnComment')}}';
@@ -853,7 +853,7 @@
     getCityOpinion();
 
     function showReportPrompt(logId) {
-        if (!{{Auth::check()}}) {
+        if (!{{Auth::check() ? 1 : 0}}) {
             url = homeURL + "/seeAllAns/" + questionId + "/report/" + logId;
             showLoginPrompt(url);
             return;
