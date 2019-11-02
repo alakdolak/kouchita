@@ -195,23 +195,23 @@
                     <div id="map-small" class="prv_map clickable" style="width: 100%; height: 100%;"></div>
                 </div>
                 <div class="map_list" id="show">
-                    <img class="map_category" id="hotelImg" src="http://localhost/kouchita/public/images/mhotel.png"
+                    <img class="map_category" id="hotelImg" src="{{URL::asset('images/mhotel.png')}}"
                          onclick="toggleIconInMap('hotelImg')">
-                    <img class="map_category" id="restImg" src="http://localhost/kouchita/public/images/mrest.png"
+                    <img class="map_category" id="restImg" src="{{URL::asset('images/mrest.png')}}"
                          onclick="toggleIconInMap('restImg')">
-                    <img class="map_category" id="fastImg" src="http://localhost/kouchita/public/images/mfast.png"
+                    <img class="map_category" id="fastImg" src="{{URL::asset('images/mfast.png')}}"
                          onclick="toggleIconInMap('fastImg')">
-                    <img class="map_category" id="musImg" src="http://localhost/kouchita/public/images/matr_mus.png"
+                    <img class="map_category" id="musImg" src="{{URL::asset('images/matr_mus.png')}}"
                          onclick="toggleIconInMap('musImg')">
-                    <img class="map_category" id="plaImg" src="http://localhost/kouchita/public/images/matr_pla.png"
+                    <img class="map_category" id="plaImg" src="{{URL::asset('images/matr_pla.png')}}"
                          onclick="toggleIconInMap('plaImg')">
-                    <img class="map_category" id="shcImg" src="http://localhost/kouchita/public/images/matr_shc.png"
+                    <img class="map_category" id="shcImg" src="{{URL::asset('images/matr_shc.png')}}"
                          onclick="toggleIconInMap('shcImg')">
-                    <img class="map_category" id="funImg" src="http://localhost/kouchita/public/images/matr_fun.png"
+                    <img class="map_category" id="funImg" src="{{URL::asset('images/matr_fun.png')}}"
                          onclick="toggleIconInMap('funImg')">
-                    <img class="map_category" id="advImg" src="http://localhost/kouchita/public/images/matr_adv.png"
+                    <img class="map_category" id="advImg" src="{{URL::asset('matr_adv.png')}}"
                          onclick="toggleIconInMap('advImg')">
-                    <img class="map_category" id="natImg" src="http://localhost/kouchita/public/images/matr_nat.png"
+                    <img class="map_category" id="natImg" src="{{URL::asset('images/matr_nat.png')}}"
                          onclick="toggleIconInMap('natImg')">
                 </div>
             </div>
