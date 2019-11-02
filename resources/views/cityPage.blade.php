@@ -209,7 +209,7 @@
                          onclick="toggleIconInMap('shcImg')">
                     <img class="map_category" id="funImg" src="{{URL::asset('images/matr_fun.png')}}"
                          onclick="toggleIconInMap('funImg')">
-                    <img class="map_category" id="advImg" src="{{URL::asset('matr_adv.png')}}"
+                    <img class="map_category" id="advImg" src="{{URL::asset('images/matr_adv.png')}}"
                          onclick="toggleIconInMap('advImg')">
                     <img class="map_category" id="natImg" src="{{URL::asset('images/matr_nat.png')}}"
                          onclick="toggleIconInMap('natImg')">
