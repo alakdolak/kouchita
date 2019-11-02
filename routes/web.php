@@ -30,6 +30,15 @@ Route::get('tourCreationLanguage&Schedule', function(){
     return view('tour/tourCreationLanguage&Schedule');
 });
 
+Route::get('tourCreationExplanatoryInfo', function(){
+    return view('tour/tourCreationExplanatoryInfo');
+});
+
+Route::get('tourCreationFinalStep', function(){
+    return view('tour/tourCreationFinalStep');
+});
+
+
 Route::get('gardeshname2/{page?}', 'PostController@gardeshname')->name('gardeshname');
 
 Route::get('gardeshnameInner/{postId}', ['as' => 'gardeshnameInner', 'uses' => 'PostController@gardeshnameInner']);
