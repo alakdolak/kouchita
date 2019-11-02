@@ -42,7 +42,6 @@ use PHPMailer\PHPMailer\PHPMailer;
 
 class HomeController extends Controller
 {
-
     public function cityPage($city) {
 
         $today = getToday()["date"];
@@ -111,6 +110,10 @@ class HomeController extends Controller
         $allHotels = Hotel::where('cityId', $city->id)->select(['id', 'name', 'C', 'D'])->get();
         $allRestaurant = Restaurant::where('cityId', $city->id)->select(['id', 'name', 'C', 'D', 'kind_id'])->get();
 
+//        soghat count
+        $city->soghat_count = Adab::where('stateId', $city->stateId)->where('category', 1)->count();
+        $city->ghazamahali_count = Adab::where('stateId', $city->stateId)->where('category', 3)->count();
+        $city->sanaye_count = Adab::where('stateId', $city->stateId)->where('category', 6)->count();
 
         return view('cityPage', compact(['city', 'cityPost', 'mostSeenPosts', 'allAmaken', 'allHotels', 'allRestaurant', 'allMajara']));
     }
@@ -202,8 +205,11 @@ class HomeController extends Controller
             $log->url = route($urlKind, ['placeId' => $log->placeId, 'placeName' => $log->name]);
         }
 
-        echo json_encode($opinion);
+        $picKindId = Activity::where('name', 'عکس')->first();
 
+        $people_pic = [1];
+
+        echo json_encode([$opinion, $people_pic]);
     }
 
     public function abbas()

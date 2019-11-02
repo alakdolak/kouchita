@@ -63,6 +63,7 @@
 
         .map_category {
             width: 50px;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -90,44 +91,51 @@
                 </div>
                 <div class="col-xs-4" style="padding:0 !important;">
                     <div class="col-xs-12">
-                        <a class="col-xs-4 cpLittleMenu" href="{{route('main')}}">
+                        <a class="col-xs-4 cpLittleMenu" href="{{url('hotelList/' . $city->name . '/city')}}">
                             <div class="cityPageIcon hotel"></div>
                             <div class="textCityPageIcon">هتل</div>
+                            <div class="textCityPageIcon">{{count($allHotels)}}</div>
                         </a>
                         <a class="col-xs-4 cpLittleMenu" href="{{route('tickets')}}">
                             <div class="cityPageIcon ticket"></div>
                             <div class="textCityPageIcon">بلیط</div>
                         </a>
-                        <a class="col-xs-4 cpLittleMenu" href="{{route('mainMode', ['mode' => 'amaken'])}}">
+                        <a class="col-xs-4 cpLittleMenu" href="{{url('amakenList/' . $city->name . '/city')}}">
                             <div class="cityPageIcon atraction"></div>
                             <div class="textCityPageIcon">جاذبه ها</div>
+                            <div class="textCityPageIcon">{{count($allAmaken)}}</div>
                         </a>
                     </div>
                     <div style="clear: both"></div>
                     <div class="col-xs-12">
-                        <a class="col-xs-4 cpLittleMenu" href="{{route('mainMode', ['mode' => 'restaurant'])}}">
+                        <a class="col-xs-4 cpLittleMenu" href="{{url('restaurantList/' . $city->name . '/city')}}">
                             <div class="cityPageIcon restaurant"></div>
                             <div class="textCityPageIcon">رستوران</div>
+                            <div class="textCityPageIcon">{{count($allRestaurant)}}</div>
                         </a>
-                        <div class="col-xs-4 cpLittleMenu">
+                        <a class="col-xs-4 cpLittleMenu" href="{{url('/adab-list/' . $city->state . '/soghat')}}">
                             <div class="cityPageIcon soghat"></div>
                             <div class="textCityPageIcon">سوغات</div>
-                        </div>
-                        <div class="col-xs-4 cpLittleMenu">
+                            <div class="textCityPageIcon">{{$city->soghat_count}}</div>
+                        </a>
+                        <a class="col-xs-4 cpLittleMenu" href="{{url('/adab-list/' . $city->state . '/ghazamahali')}}">
                             <div class="cityPageIcon ghazamahali"></div>
                             <div class="textCityPageIcon">غذای محلی</div>
-                        </div>
+                            <div class="textCityPageIcon">{{$city->ghazamahali_count}}</div>
+                        </a>
                     </div>
                     <div style="clear: both"></div>
                     <div class="col-xs-12">
-                        <div class="col-xs-4 cpLittleMenu">
+                        <a class="col-xs-4 cpLittleMenu" href="{{url('/majaraList/' . $city->name . '/city')}}">
                             <div class="cityPageIcon majara"></div>
                             <div class="textCityPageIcon">ماجراجویی</div>
-                        </div>
-                        <div class="col-xs-4 cpLittleMenu">
+                            <div class="textCityPageIcon">{{count($allMajara)}}</div>
+                        </a>
+                        <a class="col-xs-4 cpLittleMenu" href="{{url('/adab-list/' . $city->state . '/sanaye')}}">
                             <div class="cityPageIcon sanaye"></div>
                             <div class="textCityPageIcon">صنایع دستی</div>
-                        </div>
+                            <div class="textCityPageIcon">{{$city->sanaye_count}}</div>
+                        </a>
                         <div class="col-xs-4 cpLittleMenu">
                             <div class="cityPageIcon lebas"></div>
                             <div class="textCityPageIcon">لباس محلی</div>
@@ -153,9 +161,9 @@
             <div ng-app="mainApp" class="cpBorderBottom">
                 @include('layouts.mainSuggestions')
             </div>
-            <div class="cpBorderBottom">
+            <div id="outher_people" class="cpBorderBottom">
                 <div class="cpTitle">دوستان شما چه می گویند</div>
-                <div style="width: 100%;">
+                <div id="people_pic_div" style="width: 100%; display: none;">
                     <div class="cpFriendsBoxPic">
                         <div class="cpFriendsEachPic"
                              style="background: url('{{URL::asset('images') . '1.jpg'}}');"></div>
@@ -166,10 +174,10 @@
                         <div class="cpFriendsEachPic"
                              style="background: url('{{URL::asset('images') . '4.jpg'}}');"></div>
                     </div>
-                    <div class="cpFriendsOthersPic">
+                    <div id="more_people_pic_button" class="cpFriendsOthersPic">
                         به اضافه
                         <br>
-                        452
+                        <span id="more_people_pic_count"></span>
                         <br>
                         عکس دیگر
                     </div>
@@ -187,23 +195,23 @@
                     <div id="map-small" class="prv_map clickable" style="width: 100%; height: 100%;"></div>
                 </div>
                 <div class="map_list" id="show">
-                    <img class="map_category" id="hotelImg" src="http://localhost/kouchita/public/images/mhotel.png"
+                    <img class="map_category" id="hotelImg" src="{{URL::asset('images/mhotel.png')}}"
                          onclick="toggleIconInMap('hotelImg')">
-                    <img class="map_category" id="restImg" src="http://localhost/kouchita/public/images/mrest.png"
+                    <img class="map_category" id="restImg" src="{{URL::asset('images/mrest.png')}}"
                          onclick="toggleIconInMap('restImg')">
-                    <img class="map_category" id="fastImg" src="http://localhost/kouchita/public/images/mfast.png"
+                    <img class="map_category" id="fastImg" src="{{URL::asset('images/mfast.png')}}"
                          onclick="toggleIconInMap('fastImg')">
-                    <img class="map_category" id="musImg" src="http://localhost/kouchita/public/images/matr_mus.png"
+                    <img class="map_category" id="musImg" src="{{URL::asset('images/matr_mus.png')}}"
                          onclick="toggleIconInMap('musImg')">
-                    <img class="map_category" id="plaImg" src="http://localhost/kouchita/public/images/matr_pla.png"
+                    <img class="map_category" id="plaImg" src="{{URL::asset('images/matr_pla.png')}}"
                          onclick="toggleIconInMap('plaImg')">
-                    <img class="map_category" id="shcImg" src="http://localhost/kouchita/public/images/matr_shc.png"
+                    <img class="map_category" id="shcImg" src="{{URL::asset('images/matr_shc.png')}}"
                          onclick="toggleIconInMap('shcImg')">
-                    <img class="map_category" id="funImg" src="http://localhost/kouchita/public/images/matr_fun.png"
+                    <img class="map_category" id="funImg" src="{{URL::asset('images/matr_fun.png')}}"
                          onclick="toggleIconInMap('funImg')">
-                    <img class="map_category" id="advImg" src="http://localhost/kouchita/public/images/matr_adv.png"
+                    <img class="map_category" id="advImg" src="{{URL::asset('images/matr_adv.png')}}"
                          onclick="toggleIconInMap('advImg')">
-                    <img class="map_category" id="natImg" src="http://localhost/kouchita/public/images/matr_nat.png"
+                    <img class="map_category" id="natImg" src="{{URL::asset('images/matr_nat.png')}}"
                          onclick="toggleIconInMap('natImg')">
                 </div>
             </div>
@@ -756,7 +764,7 @@
 
 <script>
     var _token = '{!! csrf_token() !!}';
-    var hasLogin = {{Auth::check()}};
+    var hasLogin = {{Auth::check() ? 1 : 0}};
     var getReportsDir = '{{route('getReports')}}';
     var sendReportDir = '{{route('sendReport2')}}';
     var opOnComment = '{{route('opOnComment')}}';
@@ -772,10 +780,28 @@
             },
             success: function (response){
                 response = JSON.parse(response);
-                fillOpinion(response)
+
+                if((response[0] == null || response[0].length == 0 ) && (response[1] == null || response[1].length == 0 )){
+                    document.getElementById('outher_people').style.display = 'none';
+                }
+                else {
+                    fillOpinion(response[0]);
+                    fillPeoplePic(response[1]);
+                }
             }
         })
     }
+
+    function fillPeoplePic(_pics){
+        if(_pics.length != 0){
+            document.getElementById('people_pic_div').style.display = 'block';
+            if(_pics.length > 4) {
+                document.getElementById('more_people_pic_button').style.display = 'block';
+                document.getElementById('more_people_pic_count').innerText = _pics.length - 4;
+            }
+        }
+    }
+
     function fillOpinion(opinion){
         var newElement = '';
 
@@ -853,7 +879,7 @@
     getCityOpinion();
 
     function showReportPrompt(logId) {
-        if (!{{Auth::check()}}) {
+        if (!{{Auth::check() ? 1 : 0}}) {
             url = homeURL + "/seeAllAns/" + questionId + "/report/" + logId;
             showLoginPrompt(url);
             return;
