@@ -18,6 +18,7 @@ $kindPlaceId = 10; ?>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/icons.css?v=1')}}'/>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/passStyle.css?v=1')}}'/>
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/shazdeDesigns/tourCreation.css')}}"/>
+    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/shazdeDesigns/abbreviations.css')}}"/>
 
     <script src= {{URL::asset("js/calendar.js") }}></script>
     <script src= {{URL::asset("js/jalali.js") }}></script>
@@ -580,30 +581,30 @@ $kindPlaceId = 10; ?>
         </form>
     </div>
 
-    <div id="modalAddNewDestinationBoxTourCreation" class="modalback" style="display: none">
-        <div id="addNewDestinationBoxTourCreation" >
-            <div id="addNewDestinationTitleTourCreation">
-                اضافه کردن مکان جدید
-            </div>
-            <div class="inputBoxGeneralInfo inputBox InlineTourInputBoxes" id="tourNewOriginInputBox">
-                <div class="inputBoxTextGeneralInfo inputBoxText">
-                    <div>
-                        نام
-                        <span>*</span>
-                    </div>
+    <div id="addNewDestinationBoxTourCreation" class="hidden-div">
+        <div id="addNewDestinationTitleTourCreation">
+            اضافه کردن مکان جدید
+        </div>
+        <div class="inputBoxGeneralInfo inputBox InlineTourInputBoxes" id="tourNewOriginInputBox">
+            <div class="inputBoxTextGeneralInfo inputBoxText">
+                <div>
+                    نام
+                    <span>*</span>
                 </div>
-                <input class="inputBoxInput" type="text" placeholder="فارسی">
             </div>
-            <div class="inputBoxGeneralInfo inputBox InlineTourInputBoxes" id="tourOriginStateInputBox">
-                <div class="inputBoxTextGeneralInfo inputBoxText">
-                    <div>
-                        استان
-                        <span>*</span>
-                    </div>
+            <input class="inputBoxInput" type="text" placeholder="فارسی">
+        </div>
+        <div class="inputBoxGeneralInfo inputBox InlineTourInputBoxes" id="tourOriginStateInputBox">
+            <div class="inputBoxTextGeneralInfo inputBoxText">
+                <div>
+                    استان
+                    <span>*</span>
                 </div>
-                <input class="inputBoxInput" type="text" placeholder="انتخاب از بین گزینه ها">
             </div>
-            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <input class="inputBoxInput" type="text" placeholder="انتخاب از بین گزینه ها">
+        </div>
+        <div>
+            <div class="btn-group btn-group-toggle display-inline-block" data-toggle="buttons">
                 <label class="btn btn-secondary">
                     <input type="radio" name="options" id="option1" autocomplete="off">جاذبه
                 </label>
@@ -611,16 +612,33 @@ $kindPlaceId = 10; ?>
                     <input type="radio" name="options" id="option2" autocomplete="off" checked>شهر
                 </label>
             </div>
-            <div class="ui_container addNewDestinationBtn">
-                <button id="verifyNewDestinationTourCreation">
-                    <img src="{{URL::asset('images/tourCreation/approve.png')}}">
-                </button>
+            <div class="popUpButtons display-inline-block">
+                <div class="ui_container addNewDestinationBtn">
+                    <button id="verifyNewDestinationTourCreation">
+                        <img src="{{URL::asset('images/tourCreation/approve.png')}}">
+                    </button>
+                </div>
+                <div class="ui_container addNewDestinationBtn">
+                    <button id="closeNewDestinationTourCreation">
+                        <img src="{{URL::asset('images/tourCreation/close.png')}}">
+                    </button>
+                </div>
             </div>
-            <div class="ui_container addNewDestinationBtn">
-                <button id="closeNewDestinationTourCreation" onclick="$('#modalAddNewDestinationBoxTourCreation').toggle()">
-                    <img src="{{URL::asset('images/tourCreation/close.png')}}">
-                </button>
+        </div>
+    </div>
+
+    <div class="popUpsSpecificInfoTourCreation">
+        <div class="fullwidthDiv pd-bt-15 border-bt-1-lightgrey">
+            <div class="addPlaceGeneralInfoTitleTourCreation">
+                انواع تور
             </div>
+            <span class="closePopUpBtn glyphicon glyphicon-remove"></span>
+        </div>
+        <div class="fullwidthDiv color-darkred">
+            شهرگردی
+        </div>
+        <div class="fullwidthDiv pd-bt-15 border-bt-1-lightgrey">
+
         </div>
     </div>
 

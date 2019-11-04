@@ -402,10 +402,6 @@ $kindPlaceId = 10; ?>
         </form>
     </div>
 
-    <div class="popUpsSpecificInfoTourCreation">
-
-    </div>
-
     @include('layouts.placeFooter')
 </div>
 

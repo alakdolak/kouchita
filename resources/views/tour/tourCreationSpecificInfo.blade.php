@@ -18,6 +18,7 @@ $kindPlaceId = 10; ?>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/icons.css?v=1')}}'/>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/passStyle.css?v=1')}}'/>
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/shazdeDesigns/tourCreation.css')}}"/>
+    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/shazdeDesigns/abbreviations.css')}}"/>
 
     <script src= {{URL::asset("js/calendar.js") }}></script>
     <script src= {{URL::asset("js/jalali.js") }}></script>
@@ -464,12 +465,203 @@ $kindPlaceId = 10; ?>
             <div class="ui_container">
                 <button id="goToForthStep" class="btn nextStepBtnTourCreation">گام بعدی</button>
             </div>
+
+            <div class="popUpsSpecificInfoTourCreation hidden-div">
+                <div class="fullwidthDiv">
+                    <div class="addPlaceGeneralInfoTitleTourCreation">
+                        اضافه مورد نظر خود را اضافه کنید
+                    </div>
+                    <span class="closePopUpBtn glyphicon glyphicon-remove">
+                    </span>
+                </div>
+                <div class="inputBox col-xs-12 relative-position" id="mainClassificationOfPlaceInputDiv">
+                    <div class="inputBoxText">
+                        <div>
+                            دسته‌بندی اصلی
+                            <span>*</span>
+                        </div>
+                    </div>
+                    <div class="select-side">
+                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                    </div>
+                    <select class="inputBoxInput styled-select text-align-right" type="text" placeholder="انتخاب کنید">
+                        <option>انتخاب کنید</option>
+                        <option></option>
+                        <option></option>
+                    </select>
+                    <div class="transportationKindChosenMainDiv">
+                        <div class="transportationKindChosenOnes col-xs-2">
+                            غذای محلی
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="inboxHelpSubtitle">
+                    انتخاب دسته‌بندی مناسب نتایج را محدودتر می‌کند
+                </div>
+                <div class="inputBox col-xs-12 relative-position" id="placeNameAddingPlaceInputDiv">
+                    <div class="inputBoxText">
+                        <div>
+                            نام مکان
+                            <span>*</span>
+                        </div>
+                    </div>
+                    <input class="inputBoxInput text-align-right" type="text" placeholder="انتخاب کنید">
+                </div>
+                <div class="inboxHelpSubtitle">
+                    اگر نام مورد نظر در داخل لیست موجود نبود، لطفاً آن را اضافه نمایید
+                </div>
+                <div class="inputBoxGeneralInfo inputBox InlineTourInputBoxes position-relative">
+                    <div class="inputBoxTextGeneralInfo inputBoxText width-30per">
+                        <div>
+                            نام مکان
+                            <span>*</span>
+                        </div>
+                    </div>
+                    <input class="inputBoxInput text-align-right width-70per pd-rt-10" type="text" placeholder="فارسی">
+                    <img class="removeSelectedCity" src="{{"images/tourCreation/close.png"}}">
+                </div>
+                <div class="inputBoxGeneralInfo inputBox InlineTourInputBoxes position-relative">
+                    <div class="inputBoxTextGeneralInfo inputBoxText width-30per">
+                        <div>
+                            نام مکان
+                            <span>*</span>
+                        </div>
+                    </div>
+                    <input class="inputBoxInput text-align-right width-70per pd-rt-10" type="text" placeholder="فارسی">
+                    <img class="removeSelectedCity" src="{{"images/tourCreation/close.png"}}">
+                </div>
+                <div class="clear-both"></div>
+                <div class="inputBoxGeneralInfo inputBox InlineTourInputBoxes">
+                    <div class="inputBoxTextGeneralInfo inputBoxText width-30per">
+                        <div>
+                            نام مکان
+                            <span>*</span>
+                        </div>
+                    </div>
+                    <input class="inputBoxInput text-align-right width-70per pd-rt-10" type="text" placeholder="فارسی">
+                </div>
+                <div class="inputBoxGeneralInfo inputBox InlineTourInputBoxes position-relative">
+                    <div class="inputBoxTextGeneralInfo inputBoxText width-30per">
+                        <div>
+                            دسته
+                            <span>*</span>
+                        </div>
+                    </div>
+                    <div class="select-side">
+                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                    </div>
+                    <select class="inputBoxInput styled-select text-align-right width-70per pd-rt-10" type="text" placeholder="فارسی">
+                        <option>انتخاب کنید</option>
+                    </select>
+                </div>
+                <div class="popUpButtons display-inline-block">
+                    <div class="display-inline-block">
+                        <button id="verifyNewDestinationTourCreation">
+                            <img src="{{URL::asset('images/tourCreation/approve.png')}}">
+                        </button>
+                    </div>
+                    <div class="display-inline-block">
+                        <button id="closeNewDestinationTourCreation">
+                            <img src="{{URL::asset('images/tourCreation/close.png')}}">
+                        </button>
+                    </div>
+                </div>
+                <div class="mg-tp-20">
+                    <button id="goToForthStep" class="btn nextStepBtnTourCreation">تأیید</button>
+                </div>
+            </div>
+
+            <div class="popUpsSpecificInfoTourCreation hidden-div">
+                <div class="fullwidthDiv">
+                    <div class="addPlaceGeneralInfoTitleTourCreation">
+                        اضافه مورد نظر خود را اضافه کنید
+                    </div>
+                    <span class="closePopUpBtn glyphicon glyphicon-remove">
+                    </span>
+                </div>
+                <div class="inputBoxGeneralInfo inputBox">
+                    <div class="inputBoxTextGeneralInfo inputBoxText width-30per">
+                        <div>
+                            نام شهر
+                            <span>*</span>
+                        </div>
+                    </div>
+                    <input class="inputBoxInput text-align-right width-70per pd-rt-10" type="text" placeholder="فارسی">
+                </div>
+                <div class="inboxHelpSubtitle">
+                    اگر نام مورد نظر در داخل لیست موجود نبود، لطفاً آن را اضافه نمایید
+                </div>
+                <div class="inputBoxGeneralInfo inputBox position-relative">
+                    <div class="inputBoxTextGeneralInfo inputBoxText width-30per">
+                        <div>
+                            نام شهر
+                            <span>*</span>
+                        </div>
+                    </div>
+                    <input class="inputBoxInput text-align-right width-70per pd-rt-10" type="text" placeholder="فارسی">
+                    <img class="removeSelectedCity" src="{{"images/tourCreation/close.png"}}">
+                </div>
+                <div class="inputBoxGeneralInfo inputBox position-relative">
+                    <div class="inputBoxTextGeneralInfo inputBoxText width-30per">
+                        <div>
+                            نام شهر
+                            <span>*</span>
+                        </div>
+                    </div>
+                    <input class="inputBoxInput text-align-right width-70per pd-rt-10" type="text" placeholder="فارسی">
+
+                    <img class="removeSelectedCity" src="{{"images/tourCreation/close.png"}}">
+
+                </div>
+                <div class="clear-both"></div>
+                <div class="inputBoxGeneralInfo inputBox">
+                    <div class="inputBoxTextGeneralInfo inputBoxText width-30per">
+                        <div>
+                            نام شهر
+                            <span>*</span>
+                        </div>
+                    </div>
+                    <input class="inputBoxInput text-align-right width-70per pd-rt-10" type="text" placeholder="فارسی">
+                </div>
+                <div class="inputBoxGeneralInfo inputBox InlineTourInputBoxes position-relative">
+                    <div class="inputBoxTextGeneralInfo inputBoxText width-30per">
+                        <div>
+                            استان
+                            <span>*</span>
+                        </div>
+                    </div>
+                    <div class="select-side">
+                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                    </div>
+                    <select class="inputBoxInput styled-select text-align-right width-70per pd-rt-10" type="text" placeholder="فارسی">
+                        <option disabled selected>انتخاب کنید</option>
+                        <option>انتخاب کنید</option>
+                        <option>انتخاب کنید</option>
+                    </select>
+                </div>
+                <div class="popUpButtons display-inline-block">
+                    <div class="display-inline-block">
+                        <button id="verifyNewDestinationTourCreation">
+                            <img src="{{URL::asset('images/tourCreation/approve.png')}}">
+                        </button>
+                    </div>
+                    <div class="display-inline-block">
+                        <button id="closeNewDestinationTourCreation">
+                            <img src="{{URL::asset('images/tourCreation/close.png')}}">
+                        </button>
+                    </div>
+                </div>
+                <div class="mg-tp-20">
+                    <button id="goToForthStep" class="btn nextStepBtnTourCreation">تأیید</button>
+                </div>
+            </div>
+
+            <div class="popUpsSpecificInfoTourCreation hidden-div"></div>
         </form>
     </div>
 
-    <div class="popUpsSpecificInfoTourCreation">
 
-    </div>
 
     @include('layouts.placeFooter')
 </div>
