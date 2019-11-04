@@ -5,7 +5,5 @@ namespace App\models;
 use Illuminate\Database\Eloquent\Model;
 
 class Tour extends Model {
-
-    protected $table = 'tour';
-    public $timestamps = false;
+    protected $table = 'Tour';
 }

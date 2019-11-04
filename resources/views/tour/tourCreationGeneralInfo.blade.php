@@ -21,6 +21,44 @@ $kindPlaceId = 10; ?>
 
     <script src= {{URL::asset("js/calendar.js") }}></script>
     <script src= {{URL::asset("js/jalali.js") }}></script>
+
+    <style>
+        .chooseTourKind{
+            background: rgb(77, 199, 188) !important;
+            color: white !important;
+        }
+        @for($i = 0; $i < count($tourKind); $i++)
+            #tourKind{{$i}}:before{
+                content: '\{{$tourKind[$i]->icon}}';
+                font-family: shazdemosafer-tour;
+            }
+        @endfor
+
+        .tourLevelIcons::before{
+            WIDTH: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+        .tourLevelIcons{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            cursor: pointer;
+        }
+        .tourKindIcons:hover{
+            background: #4dc7bc;
+        }
+        @for($i = 0; $i < count($tourDifficult); $i++)
+            #tourDifficult{{$i}}:before{
+                content: '\{{$tourDifficult[$i]->icon}}';
+                font-family: shazdemosafer-tour;
+            }
+        @endfor
+    </style>
 </head>
 
 <body id="BODY_BLOCK_JQUERY_REFLOW"
@@ -50,7 +88,7 @@ $kindPlaceId = 10; ?>
                     <div class="tourCreationStepInfo">
                         <span>
                             گام
-                            <span>--</span>
+                            <span>1</span>
                             از
                             <span>--</span>
                         </span>
@@ -66,7 +104,9 @@ $kindPlaceId = 10; ?>
     </div>
 
     <div id="tourDetailsMainForm1stStepMainDiv" class="Hotel_Review prodp13n_jfy_overflow_visible lightGreyBox">
-        <form method="" action="">
+        <form method="post" action="{{route('tour.create.stage.one')}}">
+            {!! csrf_field() !!}
+            <input type="hidden" name="kind" id="kind">
             <div class="ui_container">
                 <div class="menu ui_container whiteBox" id="">
                     <div id="tourNameInputBoxMainDiv">
@@ -77,7 +117,7 @@ $kindPlaceId = 10; ?>
                                     <span>*</span>
                                 </div>
                             </div>
-                            <input class="inputBoxInput" type="text" placeholder="فارسی">
+                            <input class="inputBoxInput" type="text" name="name" placeholder="فارسی">
                         </div>
                     </div>
                     <span class="inboxHelpSubtitle">
@@ -91,7 +131,7 @@ $kindPlaceId = 10; ?>
                                     <span>*</span>
                                 </div>
                             </div>
-                            <input class="inputBoxInput" type="text" placeholder="فارسی">
+                            <input class="inputBoxInput" type="text" name="src" placeholder="فارسی">
                         </div>
                     </div>
                     <div class="InlineTourInputBoxesMainDiv">
@@ -102,7 +142,7 @@ $kindPlaceId = 10; ?>
                                     <span>*</span>
                                 </div>
                             </div>
-                            <input class="inputBoxInput" type="text" placeholder="فارسی">
+                            <input class="inputBoxInput" type="text" name="dest" placeholder="فارسی">
                             <div id="destinationListTourCreation" class="hidden-div">
                                 <div id="addNewDestinationTourCreation">
                                     اضافه کردن فارسی
@@ -122,7 +162,7 @@ $kindPlaceId = 10; ?>
                                     $('#destinationListTourCreation').toggle()
                                 });
                                 $('#addNewDestinationTourCreation').click(function () {
-                                    $('#addNewDestinationBoxTourCreation').toggle()
+                                    $('#modalAddNewDestinationBoxTourCreation').toggle()
                                 });
                             })
                         </script>
@@ -137,8 +177,8 @@ $kindPlaceId = 10; ?>
                         </span>
                     </div>
                 </div>
-
             </div>
+
             <div class="ui_container">
                 <div class="menu ui_container whiteBox">
                     <div id="tourKindChoseTitleTourCreation">
@@ -146,71 +186,14 @@ $kindPlaceId = 10; ?>
                         <span>آیا نیازمند راهنمایی هستید؟</span>
                     </div>
                     <center class="tourKindIconsTourCreation">
-                        <input ng-model="sort" type="radio" id="c11" value="rate"/>
-                        <label for="c11">
-                            <p id="cityKindTour" class="tourKindIcons"></p>
-                            <p id="cityKindTourName" class="tourKindNames">شهرگردی</p>
-                        </label>
 
-                        <input ng-model="sort" type="radio" id="c12" value="rate"/>
-                        <label for="c12">
-                            <p id="hikingKindTour" class="tourKindIcons"></p>
-                            <p id="hikingKindTourName" class="tourKindNames">طبیعت گردی</p>
-                        </label>
-
-                        <input ng-model="sort" type="radio" id="c13" value="rate"/>
-                        <label for="c13">
-                            <p id="villageKindTour" class="tourKindIcons"></p>
-                            <p id="villageKindTourName" class="tourKindNames">روستا گردی</p>
-                        </label>
-
-                        <input ng-model="sort" type="radio" id="c14" value="rate"/>
-                        <label for="c14">
-                            <p id="adventureKindTour" class="tourKindIcons"></p>
-                            <p id="adventureKindTourName" class="tourKindNames">ماجراجویی</p>
-                        </label>
-
-                        <input ng-model="sort" type="radio" id="c15" value="rate"/>
-                        <label for="c15">
-                            <p id="healthKindTour" class="tourKindIcons"></p>
-                            <p id="healthKindTourName" class="tourKindNames">سلامت</p>
-                        </label>
-
-                        <input ng-model="sort" type="radio" id="c16" value="rate"/>
-                        <label for="c16">
-                            <p id="recreationalKindTour" class="tourKindIcons"></p>
-                            <p id="recreationalKindTourName" class="tourKindNames">تفریحی</p>
-                        </label>
-
-                        <input ng-model="sort" type="radio" id="c17" value="rate"/>
-                        <label for="c17">
-                            <p id="artisticKindTour" class="tourKindIcons"></p>
-                            <p id="artisticKindTourName" class="tourKindNames">هنری</p>
-                        </label>
-
-                        <input ng-model="sort" type="radio" id="c18" value="rate"/>
-                        <label for="c18">
-                            <p id="sportsKindTour" class="tourKindIcons"></p>
-                            <p id="sportsKindTourName" class="tourKindNames">ورزشی</p>
-                        </label>
-
-                        <input ng-model="sort" type="radio" id="c19" value="rate"/>
-                        <label for="c19">
-                            <p id="scientificKindTour" class="tourKindIcons"></p>
-                            <p id="scientificKindTourName" class="tourKindNames">علمی</p>
-                        </label>
-
-                        <input ng-model="sort" type="radio" id="c20" value="rate"/>
-                        <label for="c20">
-                            <p id="culturalKindTour" class="tourKindIcons"></p>
-                            <p id="culturalKindTourName" class="tourKindNames">فرهنگی</p>
-                        </label>
-
-                        <input ng-model="sort" type="radio" id="c21" value="rate"/>
-                        <label for="c21">
-                            <p id="ProfessionalKindTour" class="tourKindIcons"></p>
-                            <p id="ProfessionalKindTourName" class="tourKindNames">تخصصی</p>
-                        </label>
+                        @for($i = 0; $i < count($tourKind); $i++)
+                            <input ng-model="sort" type="checkbox" id="c1{{$i}}" value="{{$tourKind[$i]->id}}" onclick="chooseTourKind({{$i}}, this.value)"/>
+                            <label for="c1{{$i}}" style="cursor: pointer;" onmouseover="changeKindColorToHover({{$i}})" onmouseleave="changeColorToLeave({{$i}})">
+                                <p id="tourKind{{$i}}" class="tourKindIcons"></p>
+                                <p id="cityKindTourName" class="tourKindNames">{{$tourKind[$i]->name}}</p>
+                            </label>
+                        @endfor
 
                     </center>
                     <div class="inboxHelpSubtitle">انتخاب بیش از یک گزینه مجاز می‌باشد</div>
@@ -223,54 +206,61 @@ $kindPlaceId = 10; ?>
                         <span>آیا نیازمند راهنمایی هستید؟</span>
                     </div>
                     <center class="tourLevelIconsTourCreation">
+                        @for($i = 0; $i < count($tourDifficult); $i++)
+                            <input ng-model="sort" type="{{$tourDifficult[$i]->alone == 0 ? 'checkbox' : 'radio'}}" name="difficult[]" id="c3{{$i}}" value="{{$tourDifficult[$i]->id}}" onclick="chooseDifficult({{$i}}, this.value, {{$tourDifficult[$i]->alone}})"/>
+                            <label for="c3{{$i}}">
+                                <p id="tourDifficult{{$i}}" class="tourLevelIcons"></p>
+                                <sub>{{$tourDifficult[$i]->name}}</sub>
+                            </label>
+                        @endfor
 
-                        <input ng-model="sort" type="radio" id="c31" value="rate"/>
-                        <label for="c31">
-                            <p id="easyLevelTour" class="tourLevelIcons"></p>
-                            <sub>آسان</sub>
-                        </label>
+                        {{--<input ng-model="sort" type="radio" id="c31" value="rate"/>--}}
+                        {{--<label for="c31">--}}
+                            {{--<p id="easyLevelTour" class="tourLevelIcons"></p>--}}
+                            {{--<sub>آسان</sub>--}}
+                        {{--</label>--}}
 
-                        <input ng-model="sort" type="radio" id="c32" value="rate"/>
-                        <label for="c32">
-                            <p id="lightLevelTour" class="tourLevelIcons"></p>
-                            <sub>سبک</sub>
-                        </label>
+                        {{--<input ng-model="sort" type="radio" id="c32" value="rate"/>--}}
+                        {{--<label for="c32">--}}
+                            {{--<p id="lightLevelTour" class="tourLevelIcons"></p>--}}
+                            {{--<sub>سبک</sub>--}}
+                        {{--</label>--}}
 
-                        <input ng-model="sort" type="radio" id="c33" value="rate"/>
-                        <label for="c34">
-                            <p id="activeLevelTour" class="tourLevelIcons"></p>
-                            <sub>پرتحرک</sub>
-                        </label>
+                        {{--<input ng-model="sort" type="radio" id="c33" value="rate"/>--}}
+                        {{--<label for="c34">--}}
+                            {{--<p id="activeLevelTour" class="tourLevelIcons"></p>--}}
+                            {{--<sub>پرتحرک</sub>--}}
+                        {{--</label>--}}
 
-                        <input ng-model="sort" type="radio" id="c35" value="rate"/>
-                        <label for="c35">
-                            <p id="hardLevelTour" class="tourLevelIcons"></p>
-                            <sub>سخت</sub>
-                        </label>
+                        {{--<input ng-model="sort" type="radio" id="c35" value="rate"/>--}}
+                        {{--<label for="c35">--}}
+                            {{--<p id="hardLevelTour" class="tourLevelIcons"></p>--}}
+                            {{--<sub>سخت</sub>--}}
+                        {{--</label>--}}
 
-                        <input ng-model="sort" type="radio" id="c36" value="rate"/>
-                        <label for="c36">
-                            <p id="professionalLevelTour" class="tourLevelIcons"></p>
-                            <sub>تخصصی</sub>
-                        </label>
+                        {{--<input ng-model="sort" type="radio" id="c36" value="rate"/>--}}
+                        {{--<label for="c36">--}}
+                            {{--<p id="professionalLevelTour" class="tourLevelIcons"></p>--}}
+                            {{--<sub>تخصصی</sub>--}}
+                        {{--</label>--}}
 
-                        <input ng-model="sort" type="radio" id="c37" value="rate"/>
-                        <label for="c37">
-                            <p id="blindLevelTour" class="tourLevelIcons"></p>
-                            <sub>نابینایان</sub>
-                        </label>
+                        {{--<input ng-model="sort" type="radio" id="c37" value="rate"/>--}}
+                        {{--<label for="c37">--}}
+                            {{--<p id="blindLevelTour" class="tourLevelIcons"></p>--}}
+                            {{--<sub>نابینایان</sub>--}}
+                        {{--</label>--}}
 
-                        <input ng-model="sort" type="radio" id="c38" value="rate"/>
-                        <label for="c38">
-                            <p id="disabledLevelTour" class="tourLevelIcons"></p>
-                            <sub>معلولان</sub>
-                        </label>
+                        {{--<input ng-model="sort" type="radio" id="c38" value="rate"/>--}}
+                        {{--<label for="c38">--}}
+                            {{--<p id="disabledLevelTour" class="tourLevelIcons"></p>--}}
+                            {{--<sub>معلولان</sub>--}}
+                        {{--</label>--}}
 
-                        <input ng-model="sort" type="radio" id="c39" value="rate"/>
-                        <label for="c39">
-                            <p id="studentLevelTour" class="tourLevelIcons"></p>
-                            <sub>دانش‌آموزان</sub>
-                        </label>
+                        {{--<input ng-model="sort" type="radio" id="c39" value="rate"/>--}}
+                        {{--<label for="c39">--}}
+                            {{--<p id="studentLevelTour" class="tourLevelIcons"></p>--}}
+                            {{--<sub>دانش‌آموزان</sub>--}}
+                        {{--</label>--}}
 
                         <script>
                             $(document).ready(function () {
@@ -285,7 +275,13 @@ $kindPlaceId = 10; ?>
                             });
                         </script>
                     </center>
-                    <div class="inboxHelpSubtitle">انتخاب گزینه‌های نابینایان، و دانش‌آموزان با گزینه‌های دیگر مجاز
+                    <div class="inboxHelpSubtitle">انتخاب گزینه‌های
+                        @foreach($tourDifficult as $item)
+                            @if($item->alone == 0)
+                                {{$item->name}} ,
+                            @endif
+                        @endforeach
+                        با گزینه‌های دیگر مجاز
                         می‌باشد.
                     </div>
                 </div>
@@ -296,96 +292,107 @@ $kindPlaceId = 10; ?>
                         <span>تمرکز خود را مشخص کنید.</span>
                     </div>
                     <div class="concentrationChoseTourCreation">
-                        <div class="col-xs-2">
-                            <input ng-model="sort" type="checkbox" id="c40" value="rate"/>
-                            <label for="c40">
-                                <span></span>
-                            </label>
-                            <span class="concentrationKindTourCreation">
-                                فرهنگی
+                        @for($i = 0; $i < count($tourFocus); $i++)
+                            <div class="col-xs-2">
+                                <input ng-model="sort" type="checkbox" id="c4{{$i}}" name="focus[]" value="{{$tourFocus[$i]->id}}"/>
+                                <label for="c4{{$i}}">
+                                    <span></span>
+                                </label>
+                                <span class="concentrationKindTourCreation">
+                                {{$tourFocus[$i]->name}}
                             </span>
-                        </div>
-                        <div class="col-xs-2">
-                            <input ng-model="sort" type="checkbox" id="c41" value="rate"/>
-                            <label for="c41">
-                                <span></span>
-                            </label>
-                            <span class="concentrationKindTourCreation">
-                                تاریخی
-                            </span>
-                        </div>
-                        <div class="col-xs-2">
-                            <input ng-model="sort" type="checkbox" id="c42" value="rate"/>
-                            <label for="c42">
-                                <span></span>
-                            </label>
-                            <span class="concentrationKindTourCreation">
-                                خرید
-                            </span>
-                        </div>
-                        <div class="col-xs-2">
-                            <input ng-model="sort" type="checkbox" id="c43" value="rate"/>
-                            <label for="c43">
-                                <span></span>
-                            </label>
-                            <span class="concentrationKindTourCreation">
-                                غذا
-                            </span>
-                        </div>
-                        <div class="col-xs-2">
-                            <input ng-model="sort" type="checkbox" id="c44" value="rate"/>
-                            <label for="c44">
-                                <span></span>
-                            </label>
-                            <span class="concentrationKindTourCreation">
-                                پیاده‌روی
-                            </span>
-                        </div>
-                        <div class="col-xs-2">
-                            <input ng-model="sort" type="checkbox" id="c45" value="rate"/>
-                            <label for="c45">
-                                <span></span>
-                            </label>
-                            <span class="concentrationKindTourCreation">
-                                مردم‌شناسی
-                            </span>
-                        </div>
-                        <div class="col-xs-2">
-                            <input ng-model="sort" type="checkbox" id="c46" value="rate"/>
-                            <label for="c46">
-                                <span></span>
-                            </label>
-                            <span class="concentrationKindTourCreation">
-                                موزه
-                            </span>
-                        </div>
-                        <div class="col-xs-2">
-                            <input ng-model="sort" type="checkbox" id="c47" value="rate"/>
-                            <label for="c47">
-                                <span></span>
-                            </label>
-                            <span class="concentrationKindTourCreation">
-                                فیلم
-                            </span>
-                        </div>
-                        <div class="col-xs-2">
-                            <input ng-model="sort" type="checkbox" id="c48" value="rate"/>
-                            <label for="c48">
-                                <span></span>
-                            </label>
-                            <span class="concentrationKindTourCreation">
-                                شبانه
-                            </span>
-                        </div>
-                        <div class="col-xs-2">
-                            <input ng-model="sort" type="checkbox" id="c49" value="rate"/>
-                            <label for="c49">
-                                <span></span>
-                            </label>
-                            <span class="concentrationKindTourCreation">
-                                جشنواره
-                            </span>
-                        </div>
+                            </div>
+                        @endfor
+                        {{--<div class="col-xs-2">--}}
+                            {{--<input ng-model="sort" type="checkbox" id="c40" value="rate"/>--}}
+                            {{--<label for="c40">--}}
+                                {{--<span></span>--}}
+                            {{--</label>--}}
+                            {{--<span class="concentrationKindTourCreation">--}}
+                                {{--فرهنگی--}}
+                            {{--</span>--}}
+                        {{--</div>--}}
+                        {{--<div class="col-xs-2">--}}
+                            {{--<input ng-model="sort" type="checkbox" id="c41" value="rate"/>--}}
+                            {{--<label for="c41">--}}
+                                {{--<span></span>--}}
+                            {{--</label>--}}
+                            {{--<span class="concentrationKindTourCreation">--}}
+                                {{--تاریخی--}}
+                            {{--</span>--}}
+                        {{--</div>--}}
+                        {{--<div class="col-xs-2">--}}
+                            {{--<input ng-model="sort" type="checkbox" id="c42" value="rate"/>--}}
+                            {{--<label for="c42">--}}
+                                {{--<span></span>--}}
+                            {{--</label>--}}
+                            {{--<span class="concentrationKindTourCreation">--}}
+                                {{--خرید--}}
+                            {{--</span>--}}
+                        {{--</div>--}}
+                        {{--<div class="col-xs-2">--}}
+                            {{--<input ng-model="sort" type="checkbox" id="c43" value="rate"/>--}}
+                            {{--<label for="c43">--}}
+                                {{--<span></span>--}}
+                            {{--</label>--}}
+                            {{--<span class="concentrationKindTourCreation">--}}
+                                {{--غذا--}}
+                            {{--</span>--}}
+                        {{--</div>--}}
+                        {{--<div class="col-xs-2">--}}
+                            {{--<input ng-model="sort" type="checkbox" id="c44" value="rate"/>--}}
+                            {{--<label for="c44">--}}
+                                {{--<span></span>--}}
+                            {{--</label>--}}
+                            {{--<span class="concentrationKindTourCreation">--}}
+                                {{--پیاده‌روی--}}
+                            {{--</span>--}}
+                        {{--</div>--}}
+                        {{--<div class="col-xs-2">--}}
+                            {{--<input ng-model="sort" type="checkbox" id="c45" value="rate"/>--}}
+                            {{--<label for="c45">--}}
+                                {{--<span></span>--}}
+                            {{--</label>--}}
+                            {{--<span class="concentrationKindTourCreation">--}}
+                                {{--مردم‌شناسی--}}
+                            {{--</span>--}}
+                        {{--</div>--}}
+                        {{--<div class="col-xs-2">--}}
+                            {{--<input ng-model="sort" type="checkbox" id="c46" value="rate"/>--}}
+                            {{--<label for="c46">--}}
+                                {{--<span></span>--}}
+                            {{--</label>--}}
+                            {{--<span class="concentrationKindTourCreation">--}}
+                                {{--موزه--}}
+                            {{--</span>--}}
+                        {{--</div>--}}
+                        {{--<div class="col-xs-2">--}}
+                            {{--<input ng-model="sort" type="checkbox" id="c47" value="rate"/>--}}
+                            {{--<label for="c47">--}}
+                                {{--<span></span>--}}
+                            {{--</label>--}}
+                            {{--<span class="concentrationKindTourCreation">--}}
+                                {{--فیلم--}}
+                            {{--</span>--}}
+                        {{--</div>--}}
+                        {{--<div class="col-xs-2">--}}
+                            {{--<input ng-model="sort" type="checkbox" id="c48" value="rate"/>--}}
+                            {{--<label for="c48">--}}
+                                {{--<span></span>--}}
+                            {{--</label>--}}
+                            {{--<span class="concentrationKindTourCreation">--}}
+                                {{--شبانه--}}
+                            {{--</span>--}}
+                        {{--</div>--}}
+                        {{--<div class="col-xs-2">--}}
+                            {{--<input ng-model="sort" type="checkbox" id="c49" value="rate"/>--}}
+                            {{--<label for="c49">--}}
+                                {{--<span></span>--}}
+                            {{--</label>--}}
+                            {{--<span class="concentrationKindTourCreation">--}}
+                                {{--جشنواره--}}
+                            {{--</span>--}}
+                        {{--</div>--}}
                     </div>
                     <div class="inboxHelpSubtitle">از بین گزینه‌های فوقمواردی را که بهتر تمرکز تور شما را بیان می‌کند،
                         انتخاب نمایید.
@@ -398,96 +405,109 @@ $kindPlaceId = 10; ?>
                         <span>تیپ خود را مشخص کنید.</span>
                     </div>
                     <div class="tourTypeChoseChoseTourCreation">
-                        <div class="col-xs-2">
-                            <input ng-model="sort" type="checkbox" id="c50" value="rate"/>
-                            <label for="c50">
-                                <span></span>
-                            </label>
-                            <span class="tourTypeChoseTourCreation">
-                                جوانانه
-                            </span>
-                        </div>
-                        <div class="col-xs-2">
-                            <input ng-model="sort" type="checkbox" id="c51" value="rate"/>
-                            <label for="c51">
-                                <span></span>
-                            </label>
-                            <span class="tourTypeChoseTourCreation">
-                                گروهی
-                            </span>
-                        </div>
-                        <div class="col-xs-2">
-                            <input ng-model="sort" type="checkbox" id="c52" value="rate"/>
-                            <label for="c52">
-                                <span></span>
-                            </label>
-                            <span class="tourTypeChoseTourCreation">
-                                دو نفره
-                            </span>
-                        </div>
-                        <div class="col-xs-2">
-                            <input ng-model="sort" type="checkbox" id="c53" value="rate"/>
-                            <label for="c53">
-                                <span></span>
-                            </label>
-                            <span class="tourTypeChoseTourCreation">
-                                بازی
-                            </span>
-                        </div>
-                        <div class="col-xs-2">
-                            <input ng-model="sort" type="checkbox" id="c54" value="rate"/>
-                            <label for="c54">
-                                <span></span>
-                            </label>
-                            <span class="tourTypeChoseTourCreation">
-                                خانوادگی
-                            </span>
-                        </div>
-                        <div class="col-xs-2">
-                            <input ng-model="sort" type="checkbox" id="c55" value="rate"/>
-                            <label for="c55">
-                                <span></span>
-                            </label>
-                            <span class="tourTypeChoseTourCreation">
-                                با بچه
-                            </span>
-                        </div>
-                        <div class="col-xs-2">
-                            <input ng-model="sort" type="checkbox" id="c56" value="rate"/>
-                            <label for="c56">
-                                <span></span>
-                            </label>
-                            <span class="tourTypeChoseTourCreation">
-                                اقتصادی
-                            </span>
-                        </div>
-                        <div class="col-xs-2" id="specialWeatherTourCreation">
-                            <input ng-model="sort" type="checkbox" id="c57" value="rate"/>
-                            <label for="c57">
-                                <span></span>
-                            </label>
-                            <span class="tourTypeChoseTourCreation" >
-                                آب و هوای خاص
-                            </span>
-                        </div>
-                        <div class="col-xs-2">
-                            <input ng-model="sort" type="checkbox" id="c58" value="rate"/>
-                            <label for="c58">
-                                <span></span>
-                            </label>
-                            <span class="tourTypeChoseTourCreation">
-                                ماجراجوی
-                            </span>
-                        </div>
-                        <div class="col-xs-2">
-                            <input ng-model="sort" type="checkbox" id="c59" value="rate"/>
-                            <label for="c59">
-                                <span></span>
-                            </label>
-                            <span class="tourTypeChoseTourCreation">
-                                ماه عسل
-                            </span>
-                        </div>
+
+                        @for($i = 0; $i < count($tourStyle); $i++)
+                            <div class="col-xs-2">
+                                <input ng-model="sort" type="checkbox" id="c5{{$i}}" name="style[]" value="{{$tourStyle[$i]->id}}"/>
+                                <label for="c5{{$i}}">
+                                    <span></span>
+                                </label>
+                                <span class="tourTypeChoseTourCreation">
+                                    {{$tourStyle[$i]->name}}
+                                </span>
+                            </div>
+                        @endfor
+
+                        {{--<div class="col-xs-2">--}}
+                            {{--<input ng-model="sort" type="checkbox" id="c50" value="rate"/>--}}
+                            {{--<label for="c50">--}}
+                                {{--<span></span>--}}
+                            {{--</label>--}}
+                            {{--<span class="tourTypeChoseTourCreation">--}}
+                                {{--جوانانه--}}
+                            {{--</span>--}}
+                        {{--</div>--}}
+                        {{--<div class="col-xs-2">--}}
+                            {{--<input ng-model="sort" type="checkbox" id="c51" value="rate"/>--}}
+                            {{--<label for="c51">--}}
+                                {{--<span></span>--}}
+                            {{--</label>--}}
+                            {{--<span class="tourTypeChoseTourCreation">--}}
+                                {{--گروهی--}}
+                            {{--</span>--}}
+                        {{--</div>--}}
+                        {{--<div class="col-xs-2">--}}
+                            {{--<input ng-model="sort" type="checkbox" id="c52" value="rate"/>--}}
+                            {{--<label for="c52">--}}
+                                {{--<span></span>--}}
+                            {{--</label>--}}
+                            {{--<span class="tourTypeChoseTourCreation">--}}
+                                {{--دو نفره--}}
+                            {{--</span>--}}
+                        {{--</div>--}}
+                        {{--<div class="col-xs-2">--}}
+                            {{--<input ng-model="sort" type="checkbox" id="c53" value="rate"/>--}}
+                            {{--<label for="c53">--}}
+                                {{--<span></span>--}}
+                            {{--</label>--}}
+                            {{--<span class="tourTypeChoseTourCreation">--}}
+                                {{--بازی--}}
+                            {{--</span>--}}
+                        {{--</div>--}}
+                        {{--<div class="col-xs-2">--}}
+                            {{--<input ng-model="sort" type="checkbox" id="c54" value="rate"/>--}}
+                            {{--<label for="c54">--}}
+                                {{--<span></span>--}}
+                            {{--</label>--}}
+                            {{--<span class="tourTypeChoseTourCreation">--}}
+                                {{--خانوادگی--}}
+                            {{--</span>--}}
+                        {{--</div>--}}
+                        {{--<div class="col-xs-2">--}}
+                            {{--<input ng-model="sort" type="checkbox" id="c55" value="rate"/>--}}
+                            {{--<label for="c55">--}}
+                                {{--<span></span>--}}
+                            {{--</label>--}}
+                            {{--<span class="tourTypeChoseTourCreation">--}}
+                                {{--با بچه--}}
+                            {{--</span>--}}
+                        {{--</div>--}}
+                        {{--<div class="col-xs-2">--}}
+                            {{--<input ng-model="sort" type="checkbox" id="c56" value="rate"/>--}}
+                            {{--<label for="c56">--}}
+                                {{--<span></span>--}}
+                            {{--</label>--}}
+                            {{--<span class="tourTypeChoseTourCreation">--}}
+                                {{--اقتصادی--}}
+                            {{--</span>--}}
+                        {{--</div>--}}
+                        {{--<div class="col-xs-2" id="specialWeatherTourCreation">--}}
+                            {{--<input ng-model="sort" type="checkbox" id="c57" value="rate"/>--}}
+                            {{--<label for="c57">--}}
+                                {{--<span></span>--}}
+                            {{--</label>--}}
+                            {{--<span class="tourTypeChoseTourCreation" >--}}
+                                {{--آب و هوای خاص--}}
+                            {{--</span>--}}
+                        {{--</div>--}}
+                        {{--<div class="col-xs-2">--}}
+                            {{--<input ng-model="sort" type="checkbox" id="c58" value="rate"/>--}}
+                            {{--<label for="c58">--}}
+                                {{--<span></span>--}}
+                            {{--</label>--}}
+                            {{--<span class="tourTypeChoseTourCreation">--}}
+                                {{--ماجراجوی--}}
+                            {{--</span>--}}
+                        {{--</div>--}}
+                        {{--<div class="col-xs-2">--}}
+                            {{--<input ng-model="sort" type="checkbox" id="c59" value="rate"/>--}}
+                            {{--<label for="c59">--}}
+                                {{--<span></span>--}}
+                            {{--</label>--}}
+                            {{--<span class="tourTypeChoseTourCreation">--}}
+                                {{--ماه عسل--}}
+                            {{--</span>--}}
+                        {{--</div>--}}
                     </div>
                     <div class="inboxHelpSubtitle">تیپ گردشگران خود را با انتخاب یک یا چند گزینه‌ی فوق، انتخاب نمایید.
                     </div>
@@ -499,10 +519,10 @@ $kindPlaceId = 10; ?>
                         <span>آیا تور شما به صورت خصوصی برگزار می‌شود؟</span>
                         <div class="btn-group btn-group-toggle" data-toggle="buttons">
                             <label class="btn btn-secondary">
-                                <input type="radio" name="options" id="option1" autocomplete="off">خیر
+                                <input type="radio" name="private" value="0" id="option1" autocomplete="off">خیر
                             </label>
                             <label class="btn btn-secondary active">
-                                <input type="radio" name="options" id="option2" autocomplete="off" checked>بلی
+                                <input type="radio" name="private" value="1" id="option2" autocomplete="off" checked>بلی
                             </label>
                         </div>
                     </div>
@@ -515,8 +535,8 @@ $kindPlaceId = 10; ?>
                         </div>
                         <div id="tourBestSeasonChoseTourCreation" class="halfWidthDiv">
                             <div class="col-xs-3">
-                                <input ng-model="sort" type="checkbox" id="c56" value="rate"/>
-                                <label for="c56">
+                                <input ng-model="sort" type="checkbox" name="season[]" id="c66" value="بهار"/>
+                                <label for="c66">
                                     <span></span>
                                 </label>
                                 <span class="tourTypeChoseTourCreation">
@@ -524,8 +544,8 @@ $kindPlaceId = 10; ?>
                                 </span>
                             </div>
                             <div class="col-xs-3">
-                                <input ng-model="sort" type="checkbox" id="c57" value="rate"/>
-                                <label for="c57">
+                                <input ng-model="sort" type="checkbox" id="c67" value="تابستان" name="season[]"/>
+                                <label for="c67">
                                     <span></span>
                                 </label>
                                 <span class="tourTypeChoseTourCreation">
@@ -533,8 +553,8 @@ $kindPlaceId = 10; ?>
                                 </span>
                             </div>
                             <div class="col-xs-3">
-                                <input ng-model="sort" type="checkbox" id="c58" value="rate"/>
-                                <label for="c58">
+                                <input ng-model="sort" type="checkbox" id="c68" value="پاییز" name="season[]"/>
+                                <label for="c68">
                                     <span></span>
                                 </label>
                                 <span class="tourTypeChoseTourCreation">
@@ -542,8 +562,8 @@ $kindPlaceId = 10; ?>
                                 </span>
                             </div>
                             <div class="col-xs-3">
-                                <input ng-model="sort" type="checkbox" id="c59" value="rate"/>
-                                <label for="c59">
+                                <input ng-model="sort" type="checkbox" id="c69" value="زمستان" name="season[]"/>
+                                <label for="c69">
                                     <span></span>
                                 </label>
                                 <span class="tourTypeChoseTourCreation">
@@ -555,55 +575,61 @@ $kindPlaceId = 10; ?>
                 </div>
             </div>
             <div class="ui_container">
-                <button id="goToSecondStep" class="btn nextStepBtnTourCreation">گام بعدی</button>
+                <button id="goToSecondStep" class="btn nextStepBtnTourCreation" type="submit">گام بعدی</button>
             </div>
         </form>
     </div>
 
-    <div id="addNewDestinationBoxTourCreation" class="hidden-div">
-        <div id="addNewDestinationTitleTourCreation">
-            اضافه کردن مکان جدید
-        </div>
-        <div class="inputBoxGeneralInfo inputBox InlineTourInputBoxes" id="tourNewOriginInputBox">
-            <div class="inputBoxTextGeneralInfo inputBoxText">
-                <div>
-                    نام
-                    <span>*</span>
-                </div>
+    <div id="modalAddNewDestinationBoxTourCreation" class="modalback" style="display: none">
+        <div id="addNewDestinationBoxTourCreation" >
+            <div id="addNewDestinationTitleTourCreation">
+                اضافه کردن مکان جدید
             </div>
-            <input class="inputBoxInput" type="text" placeholder="فارسی">
-        </div>
-        <div class="inputBoxGeneralInfo inputBox InlineTourInputBoxes" id="tourOriginStateInputBox">
-            <div class="inputBoxTextGeneralInfo inputBoxText">
-                <div>
-                    استان
-                    <span>*</span>
+            <div class="inputBoxGeneralInfo inputBox InlineTourInputBoxes" id="tourNewOriginInputBox">
+                <div class="inputBoxTextGeneralInfo inputBoxText">
+                    <div>
+                        نام
+                        <span>*</span>
+                    </div>
                 </div>
+                <input class="inputBoxInput" type="text" placeholder="فارسی">
             </div>
-            <input class="inputBoxInput" type="text" placeholder="انتخاب از بین گزینه ها">
-        </div>
-        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-            <label class="btn btn-secondary">
-                <input type="radio" name="options" id="option1" autocomplete="off">جاذبه
-            </label>
-            <label class="btn btn-secondary active">
-                <input type="radio" name="options" id="option2" autocomplete="off" checked>شهر
-            </label>
-        </div>
-        <div class="ui_container addNewDestinationBtn">
-            <button id="verifyNewDestinationTourCreation">
-                <img src="{{URL::asset('images/tourCreation/approve.png')}}">
-            </button>
-        </div>
-        <div class="ui_container addNewDestinationBtn">
-            <button id="closeNewDestinationTourCreation">
-                <img src="{{URL::asset('images/tourCreation/close.png')}}">
-            </button>
+            <div class="inputBoxGeneralInfo inputBox InlineTourInputBoxes" id="tourOriginStateInputBox">
+                <div class="inputBoxTextGeneralInfo inputBoxText">
+                    <div>
+                        استان
+                        <span>*</span>
+                    </div>
+                </div>
+                <input class="inputBoxInput" type="text" placeholder="انتخاب از بین گزینه ها">
+            </div>
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                <label class="btn btn-secondary">
+                    <input type="radio" name="options" id="option1" autocomplete="off">جاذبه
+                </label>
+                <label class="btn btn-secondary active">
+                    <input type="radio" name="options" id="option2" autocomplete="off" checked>شهر
+                </label>
+            </div>
+            <div class="ui_container addNewDestinationBtn">
+                <button id="verifyNewDestinationTourCreation">
+                    <img src="{{URL::asset('images/tourCreation/approve.png')}}">
+                </button>
+            </div>
+            <div class="ui_container addNewDestinationBtn">
+                <button id="closeNewDestinationTourCreation" onclick="$('#modalAddNewDestinationBoxTourCreation').toggle()">
+                    <img src="{{URL::asset('images/tourCreation/close.png')}}">
+                </button>
+            </div>
         </div>
     </div>
 
+
     @include('layouts.placeFooter')
 </div>
+
+<script src="{{URL::asset('js/tour/create/stageOne.js')}}"></script>
+
 
 </body>
 </html>

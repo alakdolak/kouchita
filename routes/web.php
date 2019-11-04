@@ -14,10 +14,6 @@ Route::get('tourCreationFirstPage', function(){
     return view('tour/tourCreationFirstPage');
 });
 
-Route::get('tourCreationGeneralInfo', function(){
-    return view('tour/tourCreationGeneralInfo');
-});
-
 Route::get('tourCreationSpecificInfo', function(){
     return view('tour/tourCreationSpecificInfo');
 });
@@ -667,3 +663,10 @@ Route::get('/tour/lists', function (){
 });
 
 Route::post('checkLogin', array('as' => 'checkLogin', 'uses' => 'HomeController@checkLogin'));
+
+
+Route::group(array('middleware' => 'nothing'), function () {
+
+    Route::any('/tour/create/stageOne', 'TourController@stageOneTour')->name('tour.create.stage.one');
+
+});

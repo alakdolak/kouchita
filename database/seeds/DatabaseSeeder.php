@@ -11,9 +11,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(ConfigTableSeeder::class);
+//        $this->call(ConfigTableSeeder::class);
 //        $this->call(HotelTableSeeder::class);
-        $this->call(UserTableSeeder::class);
+//        $this->call(UserTableSeeder::class);
+
+        $this->call(TourTablesSeeder::class);
 //        RENAME TABLE aboutme TO aboutMe;
 //RENAME TABLE activationcode TO activationCode;
 //RENAME TABLE airline TO airLine;
