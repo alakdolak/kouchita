@@ -11,7 +11,7 @@
   height: 48px; /* Matches top of .uploaderDlg */
   width: 100%;
   line-height: 48px;
-  background: #E9E8E3;
+  background: #4DC7BC;
 }
 .photoUploader .headerBar h3 {
   float: right;
@@ -63,22 +63,21 @@
   top: 48px; /* Matches height of .headerBar */
   bottom: 0;
   box-sizing: border-box;
-  background: #F4F3F0;
 }
 
 
 .photoUploader .footer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 72px; /* Matches bottom property of .uploadList */
-  padding-left: 18px;
-  box-sizing: border-box;
-  overflow: hidden;
-  border: 0;
-  background: #FFF;
-  box-shadow: 0 0 10px 0 rgba(0,0,0,0.25);
+  /*position: absolute;*/
+  /*bottom: 0;*/
+  /*left: 0;*/
+  /*width: 100%;*/
+  /*padding: 7px;*/
+  /*box-sizing: border-box;*/
+  /*overflow: hidden;*/
+  /*border: 0;*/
+  margin: 15px 0;
+  padding: 15px 15px 0;
+  border-top: 1px solid #cccccc;
 }
 .uploaderDlg a {
   color: #069;
@@ -91,10 +90,10 @@
   margin-top: 18px;
 }
 .uploaderDlg .footer .upload {
-  display: table-cell;
-  float: right;
-  vertical-align: middle;
-  margin: 18px 18px 0 6px;
+  /*display: table-cell;*/
+  float: left;
+  /*vertical-align: middle;*/
+  /*margin: 18px 18px 0 6px;*/
 }
 .uploaderDlg .footer .uploadForm {
   display: table-cell;
