@@ -4029,7 +4029,7 @@ if ($total == 0)
                 showLoginPrompt(hotelDetailsInAddPhotoMode);
                 return;
             }
-            $('.dark').show();
+            // $('.dark').show();
             showElement('photoEditor');
             getPhotoFilters();
         }

@@ -193,26 +193,26 @@
             </div>
             <div class="cpBorderBottom">
                 <div class="cpMap">
-                    <div id="map-small" class="prv_map clickable full-width full-height"></div>
+                    <div id="cpMap" class="prv_map clickable full-width full-height"></div>
                 </div>
-                <div class="map_list" id="show">
-                    <img class="map_category" id="hotelImg" src="{{URL::asset('images/mhotel.png')}}"
+                <div class="cpMapList" id="show">
+                    <img class="cpMapCategory" id="hotelImg" src="{{URL::asset('images/mhotel.png')}}"
                          onclick="toggleIconInMap('hotelImg')">
-                    <img class="map_category" id="restImg" src="{{URL::asset('images/mrest.png')}}"
+                    <img class="cpMapCategory" id="restImg" src="{{URL::asset('images/mrest.png')}}"
                          onclick="toggleIconInMap('restImg')">
-                    <img class="map_category" id="fastImg" src="{{URL::asset('images/mfast.png')}}"
+                    <img class="cpMapCategory" id="fastImg" src="{{URL::asset('images/mfast.png')}}"
                          onclick="toggleIconInMap('fastImg')">
-                    <img class="map_category" id="musImg" src="{{URL::asset('images/matr_mus.png')}}"
+                    <img class="cpMapCategory" id="musImg" src="{{URL::asset('images/matr_mus.png')}}"
                          onclick="toggleIconInMap('musImg')">
-                    <img class="map_category" id="plaImg" src="{{URL::asset('images/matr_pla.png')}}"
+                    <img class="cpMapCategory" id="plaImg" src="{{URL::asset('images/matr_pla.png')}}"
                          onclick="toggleIconInMap('plaImg')">
-                    <img class="map_category" id="shcImg" src="{{URL::asset('images/matr_shc.png')}}"
+                    <img class="cpMapCategory" id="shcImg" src="{{URL::asset('images/matr_shc.png')}}"
                          onclick="toggleIconInMap('shcImg')">
-                    <img class="map_category" id="funImg" src="{{URL::asset('images/matr_fun.png')}}"
+                    <img class="cpMapCategory" id="funImg" src="{{URL::asset('images/matr_fun.png')}}"
                          onclick="toggleIconInMap('funImg')">
-                    <img class="map_category" id="advImg" src="{{URL::asset('images/matr_adv.png')}}"
+                    <img class="cpMapCategory" id="advImg" src="{{URL::asset('matr_adv.png')}}"
                          onclick="toggleIconInMap('advImg')">
-                    <img class="map_category" id="natImg" src="{{URL::asset('images/matr_nat.png')}}"
+                    <img class="cpMapCategory" id="natImg" src="{{URL::asset('images/matr_nat.png')}}"
                          onclick="toggleIconInMap('natImg')">
                 </div>
             </div>
