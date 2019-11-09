@@ -48,6 +48,14 @@
     z-index: 100;
 }
 
+.opacity-1 {
+    opacity: 1;
+}
+
+.opacity-1Imp {
+    opacity: 1 !important;
+}
+
 /*position*/
 
 .position-relative {
@@ -194,6 +202,14 @@
     padding: 10px;
 }
 
+.pd-20 {
+    padding: 20px;
+}
+
+.pd-20Imp {
+    padding: 20px !important;
+}
+
 .pd-40-30 {
     padding: 40px 30px;
 }
@@ -286,6 +302,10 @@
 
 .mg-0 {
     margin: 0;
+}
+
+.mg-0Imp {
+    margin: 0 !important;
 }
 
 .mg-5-0 {
