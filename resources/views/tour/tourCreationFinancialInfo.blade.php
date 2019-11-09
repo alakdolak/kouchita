@@ -18,6 +18,7 @@ $kindPlaceId = 10; ?>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/icons.css?v=1')}}'/>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/passStyle.css?v=1')}}'/>
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/shazdeDesigns/tourCreation.css')}}"/>
+    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/shazdeDesigns/abbreviations.css')}}"/>
 
     <script src= {{URL::asset("js/calendar.js") }}></script>
     <script src= {{URL::asset("js/jalali.js") }}></script>
@@ -334,7 +335,7 @@ $kindPlaceId = 10; ?>
                                     <span>*</span>
                                 </div>
                             </div>
-                            <input class="inputBoxInput no-border-imp" type="text" placeholder="عدد">
+                            <input class="inputBoxInput border-noneImp" type="text" placeholder="عدد">
                         </div>
                         <div class="inline-block mg-tp-12 mg-rt-10">
                             <button class="wholesaleDiscountLimitationBtn verifyBtnTourCreation">

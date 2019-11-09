@@ -584,7 +584,7 @@ $kindPlaceId = 10; ?>
             <input class="inputBoxInput" type="text" placeholder="انتخاب از بین گزینه ها">
         </div>
         <div>
-            <div class="btn-group btn-group-toggle display-inline-block" data-toggle="buttons">
+            <div class="btn-group btn-group-toggle inline-block" data-toggle="buttons">
                 <label class="btn btn-secondary">
                     <input type="radio" name="options" id="option1" autocomplete="off">جاذبه
                 </label>
@@ -592,7 +592,7 @@ $kindPlaceId = 10; ?>
                     <input type="radio" name="options" id="option2" autocomplete="off" checked>شهر
                 </label>
             </div>
-            <div class="popUpButtons display-inline-block">
+            <div class="popUpButtons inline-block">
                 <div class="ui_container addNewDestinationBtn">
                     <button id="verifyNewDestinationTourCreation">
                         <img src="{{URL::asset('images/tourCreation/approve.png')}}">

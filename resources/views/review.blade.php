@@ -32,7 +32,7 @@
                                 <div class="reviewHeader Left">
                                     <div class="locationInfo wrap">
                                         <div class="thumbnail">
-                                            <div class="sizedThumb width-100per height-auto">
+                                            <div class="sizedThumb full-width height-auto">
                                                 @if($placeMode == "hotel")
                                                     <img src="{{$placePic}}" onclick="document.location.href = '{{route('hotelDetails', ['placeId' => $placeId, 'placeName' => $placeName])}}'" class="photo_image userPhotoWritingReview" alt=""/>
                                                 @elseif($placeMode == "amaken")

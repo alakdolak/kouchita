@@ -555,13 +555,13 @@ $kindPlaceId = 10; ?>
                         <option>انتخاب کنید</option>
                     </select>
                 </div>
-                <div class="popUpButtons display-inline-block">
-                    <div class="display-inline-block">
+                <div class="popUpButtons inline-block">
+                    <div class="inline-block">
                         <button id="verifyNewDestinationTourCreation">
                             <img src="{{URL::asset('images/tourCreation/approve.png')}}">
                         </button>
                     </div>
-                    <div class="display-inline-block">
+                    <div class="inline-block">
                         <button id="closeNewDestinationTourCreation">
                             <img src="{{URL::asset('images/tourCreation/close.png')}}">
                         </button>
@@ -640,13 +640,13 @@ $kindPlaceId = 10; ?>
                         <option>انتخاب کنید</option>
                     </select>
                 </div>
-                <div class="popUpButtons display-inline-block">
-                    <div class="display-inline-block">
+                <div class="popUpButtons inline-block">
+                    <div class="inline-block">
                         <button id="verifyNewDestinationTourCreation">
                             <img src="{{URL::asset('images/tourCreation/approve.png')}}">
                         </button>
                     </div>
-                    <div class="display-inline-block">
+                    <div class="inline-block">
                         <button id="closeNewDestinationTourCreation">
                             <img src="{{URL::asset('images/tourCreation/close.png')}}">
                         </button>
