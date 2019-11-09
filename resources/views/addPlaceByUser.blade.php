@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{URL::asset('css/theme2/help.css?v=1')}}">
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/icons.css?v=2')}}' />
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/addPlaceByUser.css?v=1')}}' />
+    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/abbreviations.css')}}' />
 @stop
 
 @section('main')
@@ -62,34 +63,36 @@
                 </div>
             </div>
             <div class="step7 bodyOfBox hidden">
-                <div class="stepTitle">تمام اطلاعات به طور کامل دریافت شد. این اطلاعات پس از بررسی اعمال خواهد شد و امتیاز شما در پروفایل افزایش خواهد یافت. به ویرایش و اضافه کردن مقصد های جدید ادامه دهید تا علاوه بر افزایش امتیاز، نشان های افتخار متفاوتی برنده شوید.</div>
+                <div class="stepTitle">
+                    تمام اطلاعات به طور کامل دریافت شد. این اطلاعات پس از بررسی اعمال خواهد شد و امتیاز شما در پروفایل افزایش خواهد یافت. به ویرایش و اضافه کردن مقصد های جدید ادامه دهید تا علاوه بر افزایش امتیاز، نشان های افتخار متفاوتی برنده شوید.
+                </div>
             </div>
             <div class="footerOfBox">
-                <div style="position: relative; width: 25%; top: 15%; margin: 0px 60% 0 0;">
+                <div class="stepsMilestoneMainDiv">
 
-                    <div data-val="1" class="steps bigCircle hidden" style="right: 0%"></div>
-                    <div data-val="1" class="steps middleCircle hidden" style="right: 0%"></div>
-                    <div data-val="1" class="steps littleCircle hidden" style="right: 0%"></div>
+                    <div data-val="1" class="steps bigCircle hidden right-0"></div>
+                    <div data-val="1" class="steps middleCircle hidden right-0"></div>
+                    <div data-val="1" class="steps littleCircle hidden right-0"></div>
 
-                    <div data-val="2" class="steps bigCircle hidden" style="right: 20%"></div>
-                    <div data-val="2" class="steps middleCircle hidden" style="right: 20%"></div>
-                    <div data-val="2" class="steps littleCircle hidden" style="right: 20%"></div>
+                    <div data-val="2" class="steps bigCircle hidden right-20per"></div>
+                    <div data-val="2" class="steps middleCircle hidden right-20per"></div>
+                    <div data-val="2" class="steps littleCircle hidden right-20per"></div>
 
-                    <div data-val="3" class="steps bigCircle hidden" style="right: 40%"></div>
-                    <div data-val="3" class="steps middleCircle hidden" style="right: 40%"></div>
-                    <div data-val="3" class="steps littleCircle hidden" style="right: 40%"></div>
+                    <div data-val="3" class="steps bigCircle hidden right-40per"></div>
+                    <div data-val="3" class="steps middleCircle hidden right-40per"></div>
+                    <div data-val="3" class="steps littleCircle hidden right-40per"></div>
 
-                    <div data-val="4" class="steps bigCircle hidden" style="right: 60%"></div>
-                    <div data-val="4" class="steps middleCircle hidden" style="right: 60%"></div>
-                    <div data-val="4" class="steps littleCircle hidden" style="right: 60%"></div>
+                    <div data-val="4" class="steps bigCircle hidden right-60per"></div>
+                    <div data-val="4" class="steps middleCircle hidden right-60per"></div>
+                    <div data-val="4" class="steps littleCircle hidden right-60per"></div>
 
-                    <div data-val="5" class="steps bigCircle hidden" style="right: 80%"></div>
-                    <div data-val="5" class="steps middleCircle hidden" style="right: 80%"></div>
-                    <div data-val="5" class="steps littleCircle hidden" style="right: 80%"></div>
+                    <div data-val="5" class="steps bigCircle hidden right-80per"></div>
+                    <div data-val="5" class="steps middleCircle hidden right-80per"></div>
+                    <div data-val="5" class="steps littleCircle hidden right-80per"></div>
 
-                    <div data-val="6" class="steps bigCircle hidden" style="right: 100%"></div>
-                    <div data-val="6" class="steps middleCircle hidden" style="right: 100%"></div>
-                    <div data-val="6" class="steps littleCircle hidden" style="right: 100%"></div>
+                    <div data-val="6" class="steps bigCircle hidden right-100per"></div>
+                    <div data-val="6" class="steps middleCircle hidden right-100per"></div>
+                    <div data-val="6" class="steps littleCircle hidden right-100per"></div>
 
                 </div>
                 <button class="btn boxNextBtn" type="button" id="nextStep" onclick="changeSteps(1)">شروع</button>
@@ -97,7 +100,7 @@
                 <button class="btn boxPreviousBtn" type="button" id="previousStep" onclick="changeSteps(-1)">بازگشت</button>
             </div>
             <div class="step1 bodyOfSteps hidden">
-                <div style="text-align: center">
+                <div class="text-align-center">
                     <div class="categories" onclick="selectCategoriesColor(this);">
                         <div class="icons iconsOfCategories hotel"></div>
                         <div>مراکز اقامتی</div>
@@ -129,14 +132,14 @@
                 </div>
             </div>
             <div class="step2 bodyOfSteps hidden">
-                <div class="stepInputBox" style="width: 100% !important;">
+                <div class="stepInputBox width-100perImp">
                     <div class="stepInputBoxText">
                         <div class="stepInputBoxRequired"><div class="icons stepInputIconRequired redStar"></div>دسته بندی اصلی</div>
                     </div>
                     <input class="stepInputBoxInput">
                 </div>
                 <div class="stepNotice">نزدیک ترین دسته را نسبت به مقصد خود انتخاب کنید. توجه نمایید انتخاب بیش از یک دسته موردی ندارد و در برخی موارد راهنمای بهتری برای سایرین خواهد بود</div>
-                <div class="stepInputBox" style="display: block">
+                <div class="stepInputBox display-block">
                     <div class="stepInputBoxText">
                         <div class="stepInputBoxRequired"><div class="icons stepInputIconRequired redStar"></div>نام</div>
                     </div>
@@ -148,21 +151,21 @@
                     </div>
                     <input class="stepInputBoxInput">
                 </div>
-                <div class="stepInputBox" style="float: left">
+                <div class="stepInputBox float-left">
                     <div class="stepInputBoxText">
                         <div class="stepInputBoxRequired"><div class="icons stepInputIconRequired redStar"></div>شهر</div>
                     </div>
                     <input class="stepInputBoxInput">
                 </div>
                 <div class="stepNotice">ممکن است مقصد شما دقیق داخل شهر یا روستا نباشد.حتما نزدیک ترین شهر و یا روستای موجود در لیست ما را انتخاب کنید</div>
-                <div style="margin-top: 5px;">
-                    <div style="display: inline-block">
+                <div class="mg-tp-5">
+                    <div class="display-inline-block">
                         <input onclick="filter()" id="21" type="checkbox">
                         <label for="21">
                             <span></span>
                         </label>
                     </div>
-                    <div style="display: inline-block">با وجود توضیحات بالا مقصد من یا به شهر خاصی تعلق نمی گیرد و یا شهر آن در لیست بالا موجود نیست</div>
+                    <div class="display-inline-block">با وجود توضیحات بالا مقصد من یا به شهر خاصی تعلق نمی گیرد و یا شهر آن در لیست بالا موجود نیست</div>
                 </div>
                 <div class="stepInputBox">
                     <div class="stepInputBoxText">
@@ -177,7 +180,7 @@
                     </div>
                     <input class="stepInputBoxInput" type="email">
                 </div>
-                <div class="stepInputBox" style="float: left">
+                <div class="stepInputBox float-left">
                     <div class="stepInputBoxText">
                         <div class="stepInputBoxRequired">سایت</div>
                     </div>
@@ -194,24 +197,24 @@
                     </div>
                     <input class="stepInputBoxInput" type="number">
                 </div>
-                <div class="stepInputBox" style="float: left">
+                <div class="stepInputBox float-left">
                     <div class="stepInputBoxText">
                         <div class="stepInputBoxRequired">Y</div>
                     </div>
                     <input class="stepInputBoxInput" type="number">
                 </div>
                 <div id="map" class="mapTile prv_map clickable">
-                    <div style="height: 100%; width: 100%;"></div>
+                    <div class="full-height full-width"></div>
                 </div>
-                <div style="margin-top: 5px">موقعیت موردنظر را بر روی نقشه پیدا نموده و پین را بر روی آن قرار دهید. (کلیک در کامپیوتر و لمس نقشه در گوشی)</div>
+                <div class="mg-tp-5">موقعیت موردنظر را بر روی نقشه پیدا نموده و پین را بر روی آن قرار دهید. (کلیک در کامپیوتر و لمس نقشه در گوشی)</div>
             </div>
             <div class="step5 bodyOfSteps hidden">
-                <div style="font-weight: 400">
+                <div class="font-weight-400">
                     <div class="listItem">
                         <div class="step5Title">درجه هتل</div>
                         <div class="subListItem">
                             <div class="detailListItem">
-                                <select style="border: 1px solid #4DC7BC">
+                                <select class="green-border-1">
                                     <option value="rate1">یک ستاره</option>
                                     <option value="rate2">دو ستاره</option>
                                     <option value="rate3">سه ستاره</option>
@@ -225,40 +228,40 @@
                         <div class="step5Title">محدوده ی قرار گیری</div>
                         <div class="subListItem">
                             <div class="detailListItem">
-                                <div style="display: inline-block">
+                                <div class="display-inline-block">
                                     <input onclick="filter()" id="1" type="checkbox">
                                     <label for="1">
                                         <span></span>
                                     </label>
                                 </div>
-                                <div style="display: inline-block">تاریخی</div>
+                                <div class="display-inline-block">تاریخی</div>
                             </div>
                             <div class="detailListItem">
-                                <div style="display: inline-block">
+                                <div class="display-inline-block">
                                     <input onclick="filter()" id="2" type="checkbox">
                                     <label for="2">
                                         <span></span>
                                     </label>
                                 </div>
-                                <div style="display: inline-block">مرکز شهر</div>
+                                <div class="display-inline-block">مرکز شهر</div>
                             </div>
                             <div class="detailListItem">
-                                <div style="display: inline-block">
+                                <div class="display-inline-block">
                                     <input onclick="filter()" id="3" type="checkbox">
                                     <label for="3">
                                         <span></span>
                                     </label>
                                 </div>
-                                <div style="display: inline-block">شلوغ</div>
+                                <div class="display-inline-block">شلوغ</div>
                             </div>
                             <div class="detailListItem">
-                                <div style="display: inline-block">
+                                <div class="display-inline-block">
                                     <input onclick="filter()" id="4" type="checkbox">
                                     <label for="4">
                                         <span></span>
                                     </label>
                                 </div>
-                                <div style="display: inline-block">طبیعت</div>
+                                <div class="display-inline-block">طبیعت</div>
                             </div>
                         </div>
                     </div>
@@ -266,22 +269,22 @@
                         <div class="step5Title">نوع معماری</div>
                         <div class="subListItem">
                             <div class="detailListItem">
-                                <div style="display: inline-block">
+                                <div class="display-inline-block">
                                     <input onclick="filter()" id="5" type="checkbox">
                                     <label for="5">
                                         <span></span>
                                     </label>
                                 </div>
-                                <div style="display: inline-block">سنتی</div>
+                                <div class="display-inline-block">سنتی</div>
                             </div>
                             <div class="detailListItem">
-                                <div style="display: inline-block">
+                                <div class="display-inline-block">
                                     <input onclick="filter()" id="6" type="checkbox">
                                     <label for="6">
                                         <span></span>
                                     </label>
                                 </div>
-                                <div style="display: inline-block">اصالتا قدیمی</div>
+                                <div class="display-inline-block">اصالتا قدیمی</div>
                             </div>
                         </div>
                     </div>
@@ -289,49 +292,49 @@
                         <div class="step5Title">امکانات رفاهی</div>
                         <div class="subListItem">
                             <div class="detailListItem">
-                                <div style="display: inline-block">
+                                <div class="display-inline-block">
                                     <input onclick="filter()" id="7" type="checkbox">
                                     <label for="7">
                                         <span></span>
                                     </label>
                                 </div>
-                                <div style="display: inline-block">رستوران فرنگی</div>
+                                <div class="display-inline-block">رستوران فرنگی</div>
                             </div>
                             <div class="detailListItem">
-                                <div style="display: inline-block">
+                                <div class="display-inline-block">
                                     <input onclick="filter()" id="8" type="checkbox">
                                     <label for="8">
                                         <span></span>
                                     </label>
                                 </div>
-                                <div style="display: inline-block">رستوران ایرانی</div>
+                                <div class="display-inline-block">رستوران ایرانی</div>
                             </div>
                             <div class="detailListItem">
-                                <div style="display: inline-block">
+                                <div class="display-inline-block">
                                     <input onclick="filter()" id="9" type="checkbox">
                                     <label for="9">
                                         <span></span>
                                     </label>
                                 </div>
-                                <div style="display: inline-block">صبحانه ی مجانی</div>
+                                <div class="display-inline-block">صبحانه ی مجانی</div>
                             </div>
                             <div class="detailListItem">
-                                <div style="display: inline-block">
+                                <div class="display-inline-block">
                                     <input onclick="filter()" id="10" type="checkbox">
                                     <label for="10">
                                         <span></span>
                                     </label>
                                 </div>
-                                <div style="display: inline-block">رستوران محلی</div>
+                                <div class="display-inline-block">رستوران محلی</div>
                             </div>
                             <div class="detailListItem">
-                                <div style="display: inline-block">
+                                <div class="display-inline-block">
                                     <input onclick="filter()" id="11" type="checkbox">
                                     <label for="11">
                                         <span></span>
                                     </label>
                                 </div>
-                                <div style="display: inline-block">کافی شاپ</div>
+                                <div class="display-inline-block">کافی شاپ</div>
                             </div>
                         </div>
                     </div>
@@ -339,85 +342,85 @@
                         <div class="step5Title">امکانات جانبی</div>
                         <div class="subListItem">
                             <div class="detailListItem">
-                                <div style="display: inline-block">
+                                <div class="display-inline-block">
                                     <input onclick="filter()" id="12" type="checkbox">
                                     <label for="12">
                                         <span></span>
                                     </label>
                                 </div>
-                                <div style="display: inline-block">باشگاه ورزشی</div>
+                                <div class="display-inline-block">باشگاه ورزشی</div>
                             </div>
                             <div class="detailListItem">
-                                <div style="display: inline-block">
+                                <div class="display-inline-block">
                                     <input onclick="filter()" id="13" type="checkbox">
                                     <label for="13">
                                         <span></span>
                                     </label>
                                 </div>
-                                <div style="display: inline-block">پارکینگ مجانی</div>
+                                <div class="display-inline-block">پارکینگ مجانی</div>
                             </div>
                             <div class="detailListItem">
-                                <div style="display: inline-block">
+                                <div class="display-inline-block">
                                     <input onclick="filter()" id="14" type="checkbox">
                                     <label for="14">
                                         <span></span>
                                     </label>
                                 </div>
-                                <div style="display: inline-block">امکانات معلولان</div>
+                                <div class="display-inline-block">امکانات معلولان</div>
                             </div>
                             <div class="detailListItem">
-                                <div style="display: inline-block">
+                                <div class="display-inline-block">
                                     <input onclick="filter()" id="15" type="checkbox">
                                     <label for="15">
                                         <span></span>
                                     </label>
                                 </div>
-                                <div style="display: inline-block">استخر</div>
+                                <div class="display-inline-block">استخر</div>
                             </div>
                             <div class="detailListItem">
-                                <div style="display: inline-block">
+                                <div class="display-inline-block">
                                     <input onclick="filter()" id="16" type="checkbox">
                                     <label for="16">
                                         <span></span>
                                     </label>
                                 </div>
-                                <div style="display: inline-block">تهویه مطبوع</div>
+                                <div class="display-inline-block">تهویه مطبوع</div>
                             </div>
                             <div class="detailListItem">
-                                <div style="display: inline-block">
+                                <div class="display-inline-block">
                                     <input onclick="filter()" id="17" type="checkbox">
                                     <label for="17">
                                         <span></span>
                                     </label>
                                 </div>
-                                <div style="display: inline-block">WiFi</div>
+                                <div class="display-inline-block">WiFi</div>
                             </div>
                             <div class="detailListItem">
-                                <div style="display: inline-block">
+                                <div class="display-inline-block">
                                     <input onclick="filter()" id="18" type="checkbox">
                                     <label for="18">
                                         <span></span>
                                     </label>
                                 </div>
-                                <div style="display: inline-block">آنتن دهی اینترنت</div>
+                                <div class="display-inline-block">آنتن دهی اینترنت</div>
                             </div>
                             <div class="detailListItem">
-                                <div style="display: inline-block">
+                                <div class="display-inline-block">
                                     <input onclick="filter()" id="19" type="checkbox">
                                     <label for="19">
                                         <span></span>
                                     </label>
                                 </div>
-                                <div style="display: inline-block">سوئیت دربست</div>
+                                <div class="display-inline-block">سوئیت دربست</div>
                             </div>
                             <div class="detailListItem">
-                                <div style="display: inline-block">
+                                <div class="display-inline-block">
                                     <input onclick="filter()" id="20" type="checkbox">
                                     <label for="20">
                                         <span></span>
                                     </label>
                                 </div>
-                                <div style="display: inline-block">رستوران</div>
+                                <div class="display-inline-block">رستوران</div>
                             </div>
                         </div>
                     </div>

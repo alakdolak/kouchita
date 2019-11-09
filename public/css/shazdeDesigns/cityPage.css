@@ -7,15 +7,18 @@
 .cpHeader {
     padding: 5px 0;
 }
+
 .cpHeaderRouteOfCityName {
     font-size: 0.8em;
     font-weight: 500;
 }
+
 .cpHeaderCityName {
     margin-top: 20px;
     font-size: 1.5em;
     font-weight: 800
 }
+
 /*end of css of header*/
 
 /*css of main box*/
@@ -24,6 +27,7 @@
     margin: 15px 0 !important;
     padding: 15px 15px 15px 0 !important;
 }
+
 .cpPic {
     width: 100%;
     height: 340px
@@ -38,14 +42,17 @@
     padding: 1px !important;
     height: 85px;
 }
+
 .cpLittleMenu:hover {
-    border:2px solid #30b4a6;
+    border: 2px solid #30b4a6;
 }
+
 .textCityPageIcon {
     color: black;
     font-size: 11px;
     font-weight: 600;
 }
+
 /*end of css of little menu*/
 /*end of css of main box*/
 
@@ -54,6 +61,7 @@
     font-weight: 700;
     padding: 7px 0;
 }
+
 .cpDescription {
     padding: 25px;
     text-align: justify;
@@ -65,12 +73,14 @@
     width: 88%;
     display: inline-block;
 }
+
 .cpFriendsEachPic {
     width: 24.3%;
     height: 120px;
     display: inline-block;
     cursor: pointer;
 }
+
 .cpFriendsOthersPic {
     width: 12%;
     float: left;
@@ -82,11 +92,13 @@
     color: white;
     cursor: pointer;
 }
+
 .cpFriendsFooter {
     text-align: center;
     margin: 10px 0;
     font-weight: 500;
 }
+
 /*end of css of firends box*/
 
 .cpMap {
@@ -112,14 +124,24 @@
     border-top: 2px solid #f3f3f3;
     margin: 2px 0;
 }
+
 .cpBorderRight {
     border-right: 2px solid #f3f3f3;
 }
+
 .cpBorderLeft {
     border-left: 2px solid #f3f3f3;
 }
+
 .cpBorderBottom {
     border-bottom: 2px solid #f3f3f3;
     margin: 2px 0;
 }
+
 /*end of css of borders*/
+
+.cpBorderBottom .btn-success , .seeAllArticlesBtn{
+    background-color: #30b4a6;
+    border-radius: 10px;
+    font-size: 20px;
+}
