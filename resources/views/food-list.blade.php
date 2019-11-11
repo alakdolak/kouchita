@@ -5,21 +5,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/eatery_overview.css?v=2')}}'/>
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/long_lived_global_legacy_2.css?v=1')}}"/>
+    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/shazdeDesigns/food-list.css')}}"/>
+    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/shazdeDesigns/abbreviation.css')}}"/>
     <title>لیست صنایع دستی</title>
-<style>
-    .moreItems{
-        display: block;
-        text-align: center;
-        margin-top: 5px;
-        cursor: pointer;
-    }
-    .lessItems{
-        display: block;
-        text-align: center;
-        margin-top: 5px;
-        cursor: pointer;
-    }
-</style>
+
 </head>
 <body id="BODY_BLOCK_JQUERY_REFLOW" class=" r_map_position_ul_fake ltr domn_en_US lang_en long_prices globalNav2011_reset rebrand_2017 css_commerce_buttons flat_buttons sitewide xo_pin_user_review_to_top track_back">
 
@@ -75,7 +64,7 @@
                 @endif
                     <div class="eateryOverviewContent">
                         <div class="ui_columns is-partitioned is-mobile">
-                            <div class="ui_column is-9" style="direction: rtl;">
+                            <div class="ui_column is-9 direction-rtl">
                                 <div class="coverpage" id="COVERPAGE_BOX">
                                     <DIV ID="taplc_restaurants_coverpage_content_0" class="ppr_rup ppr_priv_restaurants_coverpage_content">
                                         <div>
@@ -100,9 +89,9 @@
                                                                                     <a href="{{route('amakenDetails', ['placeId' => $hotel->id, 'placeName' => $hotel->name])}}" class="thumbnail">
                                                                                 @endif
                                                                                     <DIV class="prw_rup prw_common_centered_thumbnail" >
-                                                                                        <div class="sizing_wrapper" style="width:200px;height:120px;">
-                                                                                            <div class="centering_wrapper" style="margin-top:-66px;">
-                                                                                                <img src='{{$hotel->pic}}' width="100%" height="100%" class='photo_image' alt='{{$hotel->name}}' style='' >
+                                                                                        <div class="sizing_wrapper width-200 height-120">
+                                                                                            <div class="centering_wrapper mg-tp--66">
+                                                                                                <img src='{{$hotel->pic}}' width="100%" height="100%" class='photo_image' alt='{{$hotel->name}}' >
                                                                                             </div>
                                                                                         </div>
                                                                                     </DIV>
@@ -137,7 +126,9 @@
                                                                                                 @endif
                                                                                             </DIV>
                                                                                         </div>
-                                                                                        <a target="_blank" class="review_count" href="">{{$hotel->reviews}} <span style="color: #16174F;">نقد</span> </a>
+                                                                                        <a target="_blank" class="review_count" href="">{{$hotel->reviews}}
+                                                                                            <span class="dark-blue">نقد</span>
+                                                                                        </a>
                                                                                     </div>
                                                                                     <div class="item">استان: {{$hotel->state}}</div>
                                                                                     <div class="item">شهر: {{$hotel->city}}</div>
@@ -164,7 +155,7 @@
                                     <div id="EATERY_OVERVIEW" class="deckA eatery_overview">
 
                                         <div class="geobroaden_state hidden"> </div>
-                                        <div id="EATERY_LIST_CONTENTS" style="text-align: center;">
+                                        <div id="EATERY_LIST_CONTENTS">
                                             <div id="HAC_FRIEND_SUMMARY_BUBBLE_PLACEHOLDER" class="hidden"></div>
                                             <div id="EATERY_SEARCH_RESULTS">
                                             </div>
@@ -176,16 +167,16 @@
                                                     ?>
 
                                                     @if($limit == 0)
-                                                        <h3 style="color: #963019">موردی یافت نشده</h3>
+                                                        <h3 class="dark-red">موردی یافت نشده</h3>
                                                     @endif
 
                                                     @if($currPage != $limit && $limit != 0)
-                                                        <button value="{{$currPage + 1}}" name="pageNum" class="nav next rndBtn ui_button primary taLnk" style="float: right !important; background-color: #4DC7BC !important; border-color: #4DC7BC !important;">
+                                                        <button value="{{$currPage + 1}}" name="pageNum" class="nav next rndBtn ui_button primary taLnk float-rightImp">
         بعدی
                                                         </button>
                                                     @endif
                                                     @if($currPage != 1 && $limit != 0)
-                                                        <button value="{{$currPage - 1}}" name="pageNum" class="nav next rndBtn ui_button primary taLnk prePage" style="float: left !important;">
+                                                        <button value="{{$currPage - 1}}" name="pageNum" class="nav next rndBtn ui_button primary taLnk prePage float-lefImp">
                                                             قبلی
                                                         </button>
                                                     @endif
@@ -194,9 +185,9 @@
                                                         @for($i = 1; $i <= $limit; $i++)
                                                             @if(abs($currPage - $i) < 4 || $i == 1 || $i == $limit)
                                                                 @if($i == $currPage)
-                                                                    <span class="pageNum current" style="background-color: #4DC7BC !important; float: left;">{{$i}}</span>
+                                                                    <span class="pageNum current float-left bg-color-greenImp">{{$i}}</span>
                                                                 @else
-                                                                    <button value="{{$i}}" name="pageNum" class="pageNum taLnk" style="float: left; background-color: transparent; border: none">{{$i}}</button>
+                                                                    <button value="{{$i}}" name="pageNum" class="pageNum taLnk">{{$i}}</button>
                                                                 @endif
                                                             @elseif($i < $currPage)
                                                                 <span class='separator'>&hellip;</span>
@@ -214,33 +205,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="LHR" class="lhr ui_column is-3 hideCount reduced_height" style="direction: rtl;">
-                                <style>
-                                    input[type="checkbox"], input[type="radio"]{
-                                        display:none !important;
-                                    }
-
-                                    input[type="checkbox"] + label, input[type="radio"] + label{
-                                        color:#666666;
-                                    }
-
-                                    input[type="checkbox"] + label span, input[type="radio"] + label span {
-                                        display:inline-block;
-                                        width:19px;
-                                        height:19px;
-                                        margin:-2px 10px 0 0;
-                                        vertical-align:middle;
-                                        background:url('{{URL::asset('images/check_radio_sheet.png')}}') left top no-repeat;
-                                        cursor:pointer;
-                                    }
-
-                                    input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label span{
-                                        background:url('{{URL::asset('images/check_radio_sheet.png')}}') -19px top no-repeat;
-
-                                    }
-
-                                </style>
-
+                            <div id="LHR" class="lhr ui_column is-3 hideCount reduced_height">
                                 <DIV ID="taplc_restaurant_filters_0" class="ppr_rup ppr_priv_restaurant_filters">
                                 <div class="verticalFilters placements">
                                     <div id="EATERY_FILTERS_CONT" class="eatery_filters" >
@@ -248,8 +213,8 @@
                                             <div id="jfy_filter_bar_selectedFilters" class="lhrFilterBlock jfy_filter_bar_selectedFilters selectedFilters" >
                                                 @if($placeMode == "amaken")
                                                     <div class="filterGroupTitle">
-                                                        <img src="{{URL::asset('images/adv.jpg')}}" style="width: 100%;"/>
-                                                        <img src="{{URL::asset('images/bom.jpg')}}" style="margin-top: 18px;width: 100%;"/>
+                                                        <img src="{{URL::asset('images/adv.jpg')}}"/>
+                                                        <img src="{{URL::asset('images/bom.jpg')}}"/>
                                                     </div>
                                                     <br>
                                                 @endif
@@ -859,6 +824,6 @@
         $(".moreItems2").removeClass('hidden');
     }
 </script>
-<div class="ui_backdrop dark" style="display: none; z-index: 10000000"></div>
+<div class="ui_backdrop dark darkModeOption"></div>
 </body>
 </html>

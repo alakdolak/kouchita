@@ -1,5 +1,5 @@
 
-<link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('placeDetailsTable.css')}}'/>
+<link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/placeDetailsTable.css')}}'/>
 
 @if($k == -1)
     <table class="mainPlaceDetailsTable">

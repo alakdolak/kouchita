@@ -202,6 +202,10 @@
     padding: 10px;
 }
 
+.pd-10Imp {
+    padding: 10px !important;
+}
+
 .pd-20 {
     padding: 20px;
 }
@@ -404,6 +408,10 @@
     height: auto;
 }
 
+.height-30 {
+    height: 30px;
+}
+
 .height-50 {
     height: 50px;
 }
@@ -468,6 +476,10 @@
     border-bottom: 1px solid #E3E3E3;
 }
 
+.border-bottom-green-3px {
+    border-bottom: #4DC7BC 3px solid;
+}
+
 .border-bt-1-lightgrey {
     border-bottom: 1px solid #e5e5e5;
 }
@@ -506,6 +518,10 @@
     color: #16174f !important;
 }
 
+.dark-red {
+    color: #963019
+}
+
 .color-#4DC7BC {
     color: #4DC7BC;
 }
@@ -542,4 +558,14 @@
 
 .right-100per {
     right: 100%;
+}
+
+/*bg-colors*/
+
+.bg-color-greenImp {
+    background-color: #4DC7BC !important
+}
+
+.bg-color-white {
+    background-color: white;
 }
