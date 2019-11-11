@@ -36,44 +36,30 @@
 
     @include('layouts.pop-up-create-trip')
 
-    <style>
-        #saves-all-trips .all-trips-header .header-sort-container .sort-options li.selected:after {
-            position: relative !important;
-            right: -65px !important;
-        }
-        .ui_tabs {
-            white-space: inherit !important;
-        }
-        .helpSpans p{
-            font-size: 14px;
-            line-height: 2em;
-            text-align: justify;
-        }
-        .nextBtnsHelp{
-            margin-left: 5px !important;
-        }
-    </style>
 
-    <div id="MAIN" class="Saves prodp13n_jfy_overflow_visible" style="position: relative">
-        <div id="BODYCON" class="col easyClear poolB adjust_padding new_meta_chevron_v2" style="position: relative">
+    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/myTrips.css')}}'/>
+    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/abbreviations.css')}}'/>
+
+    <div id="MAIN" class="Saves prodp13n_jfy_overflow_visible position-relative">
+        <div id="BODYCON" class="col easyClear poolB adjust_padding new_meta_chevron_v2 position-relative">
             <div class="wrpHeader"></div>
-            <div id="saves-body" class="styleguide" style="position: relative">
-                <div id="saves-root-view" style="position: relative">
-                    <div id="saves-all-trips" style="position: relative">
-                        <div class="saves-title title" style="position: relative">سفرهای من</div>
-                        <div id="saves-view-tabs-placeholder" style="position: relative"></div>
-                        <div id="saves-view-tabs-container" class="" style="position: relative">
-                            <div class="ui_container" style="position: relative">
-                                <div class="ui_columns" style="position: relative">
-                                    <div class="trips-header ui_column" style="position: relative;">
-                                        <div style="position: relative;">
-                                            <div class="all-trips-header" style="position: relative;">
-                                                <div class="header-sort-container" style="position: relative;">
-                                                    <ul class="sort-options" style="margin-top: 12px;">
+            <div id="saves-body" class="styleguide position-relative">
+                <div id="saves-root-view"  class="position-relative">
+                    <div id="saves-all-trips"  class="position-relative">
+                        <div class="saves-title title position-relative">سفرهای من</div>
+                        <div id="saves-view-tabs-placeholder" class="position-relative"></div>
+                        <div id="saves-view-tabs-container" class="position-relative">
+                            <div class="ui_container position-relative">
+                                <div class="ui_columns position-relative">
+                                    <div class="trips-header ui_column position-relative">
+                                        <div  class="position-relative">
+                                            <div class="all-trips-header position-relative">
+                                                <div class="header-sort-container position-relative">
+                                                    <ul class="sort-options mg-tp-12Imp">
                                                         <li id="sort-option-name" data-sort="name">نام</li>
-                                                        <li id="sort-option-recent" data-sort="recent" class="selected" style="padding-right: 20px; border-radius: 2px">بازدید اخیر</li>
+                                                        <li id="sort-option-recent" data-sort="recent" class="selected">بازدید اخیر</li>
                                                     </ul>
-                                                    <div id="targetHelp_9" class="targets" style="float: left;">
+                                                    <div id="targetHelp_9" class="targets float-left">
                                                         <span class="sort-text"> :مرتب شده بر اساس </span>
                                                         <div id="helpSpan_9" class="helpSpans hidden row">
                                                             <span class="introjs-arrow"></span>
@@ -88,8 +74,8 @@
                                         </div>
                                     </div>
 
-                                    <div id="saves-view-tabs" class="ui_column is-6 ui_tabs" style="position: relative; margin-right: 12px;">
-                                        <div id="targetHelp_6" class="targets" style="width: 30%; float: right;">
+                                    <div id="saves-view-tabs" class="ui_column is-6 ui_tabs">
+                                        <div id="targetHelp_6" class="targets">
                                             <div onclick="document.location.href = '{{route('myTrips')}}'" class="ui_tab active">سفرهای من</div>
                                             <div id="helpSpan_6" class="helpSpans hidden row">
                                                 <span class="introjs-arrow"></span>
@@ -99,7 +85,7 @@
                                                 <button class="btn btn-danger exitBtnHelp">خروج</button>
                                             </div>
                                         </div>
-                                        <div id="targetHelp_7" class="targets" style="width: 33%; float: right;">
+                                        <div id="targetHelp_7" class="targets">
                                             <a data-tab-link="recent" href="{{route('recentlyViewTotal')}}" class="ui_tab">بازدید های اخیر</a>
                                             <div id="helpSpan_7" class="helpSpans hidden row">
                                                 <span class="introjs-arrow"></span>
@@ -109,7 +95,7 @@
                                                 <button class="btn btn-danger exitBtnHelp">خروج</button>
                                             </div>
                                         </div>
-                                        <div id="targetHelp_8" class="targets" style="width: 37%; float: right;">
+                                        <div id="targetHelp_8" class="targets">
                                             <a data-tab-link="all_saves" href="{{route('bookmark')}}" class="ui_tab">نشانه گذاری شده ها</a>
                                             <div id="helpSpan_8" class="helpSpans hidden row">
                                                 <span class="introjs-arrow"></span>
@@ -120,14 +106,14 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="ui_column">
+                                    <div class="ui_column" id="myTripPageHelpBtn">
                                         {{--@if($sumTmp == 0)--}}
-                                            <a style="cursor: pointer; float: left;" class="link" onclick="initHelp(10, [1, 2, 3, 4, 5], 'MAIN', 100, 400)">
-                                                <div style="background-size: 28px;background-position:  0 -29px;width: 28px;height:  28px;background-image: url('{{URL::asset('images') . '/help_share.png'}}');background-repeat:  no-repeat;"></div>
+                                            <a class="link cursor-pointer float-left" onclick="initHelp(10, [1, 2, 3, 4, 5], 'MAIN', 100, 400)">
+                                                <div></div>
                                             </a>
                                         {{--@else--}}
-                                            {{--<a style="cursor: pointer" class="link" onclick="initHelp(16, [], 'MAIN', 100, 400)">--}}
-                                                    {{--<div style="background-size: 28px;background-position:  0 -29px;width: 28px;height:  28px;background-image: url('{{URL::asset('images') . 'help_share.png'}}');background-repeat:  no-repeat;"></div>--}}
+                                            {{--<a class="cursor-pointer link" onclick="initHelp(16, [], 'MAIN', 100, 400)">--}}
+                                                    {{--<div></div>--}}
                                                 {{--</a>--}}
                                         {{--@endif--}}
                                     </div>
@@ -166,7 +152,7 @@
                                                 <div class="trip-name">{{$trip->name}}</div>
                                                 <div class="trip-date">&nbsp;</div>
                                             </div>
-                                            <div style="cursor: pointer;" class="trip-images ui_columns is-gapless is-multiline is-mobile">
+                                            <div class="cursor-pointer trip-images ui_columns is-gapless is-multiline is-mobile">
                                                 @if($trip->placeCount > 0)
                                                     <div class="trip-image ui_column is-6" style="background: url('{{$trip->pic1}}') repeat 0 0; background-size: 100% 100%"></div>
                                                 @else
@@ -203,7 +189,7 @@
                 </div>
             </div>
             <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/saves-rest-client.css?v=1')}}' data-rup='saves-rest-client'/>
-            <div class="ui_backdrop dark" style="display: none;"></div>
+            <div class="ui_backdrop dark display-none" ></div>
         </div>
     </div>
     <script>
@@ -403,14 +389,14 @@
                 return "";
 
             t = total - filters.length;
-            newElement = "<div class='col-xs-12' style='position: relative'><div class='col-xs-12 bubbles' style='padding: 0; margin-right: 0; margin-left: " + ((400 - (t * 18)) / 2) + "px'>";
+            newElement = "<div class='col-xs-12 position-relative'><div class='col-xs-12 bubbles pd-0 mg-rt-0' style='margin-left: " + ((400 - (t * 18)) / 2) + "px'>";
 
             for (i = 1; i < total; i++) {
                 if(!isInFilters(i)) {
                     if(i == curr)
-                        newElement += "<div style='border: 1px solid #ccc; background-color: #ccc; border-radius: 50%; margin-right: 2px; width: 12px; height: 12px; float: left'></div>";
+                        newElement += "<div class='isNotInFilterCurrent'></div>";
                     else
-                        newElement += "<div onclick='show(\"" + i + "\", 1)' class='helpBubble' style='border: 1px solid #333; background-color: black; border-radius: 50%; margin-right: 2px; width: 12px; height: 12px; float: left'></div>";
+                        newElement += "<div onclick='show(\"" + i + "\", 1)' class='helpBubble isNotInFilter'></div>";
                 }
             }
 
