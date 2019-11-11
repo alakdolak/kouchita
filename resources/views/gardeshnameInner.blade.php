@@ -134,31 +134,62 @@ $kindPlaceId = 10; ?>
                             </article>
 
                             <div class="im-post-share col-md-12">
-                                <a target="_blank" title="اشتراک گذاری در فیسبوک" href="https://www.facebook.com/sharer/sharer.php?u={{Request::url()}}"><i class="fa fa-facebook"></i><span>فیسبوک</span></a>
-                                <a target="_blank" title="اشتراک گذاری در توییتر" href="https://twitter.com/home?status={{Request::url()}}"><i class="fa fa-twitter"></i><span>توییتر</span></a>
-                                <a target="_blank" title="اشتراک گذاری در گوگل پلاس" href="https://plus.google.com/share?url={{Request::url()}}"><i class="fa fa-google-plus"></i><span>گوگل +</span></a>
-                                <a target="_blank" title="اشتراک گذاری در لینکداین" href="https://www.linkedin.com/shareArticle?mini=true&url={{Request::url()}}
-&source="><i class="fa fa-linkedin"></i><span>لینکداین</span></a>
-                                <a title="اشتراک گذاری در تلگرام" target="_blank" href="https://telegram.me/share/url?url={{Request::url()}}"><i class="fa fa-paper-plane"></i><span>تلگرام</span></a>
-                                <a target="_blank" title="اشتراک گذاری در WhatsApp" href="whatsapp://send?text={{Request::url()}}/"><i class="fa fa-whatsapp"></i><span>واتس اپ</span></a>
-                                <a target="_blank" title="اشتراک گذاری در کلوب" href="http://www.cloob.com/share/link/add?url={{Request::url()}}"><i class="fa fa-contao"></i><span>کلوب</span></a>
+                                <a target="_blank" title="اشتراک گذاری در فیسبوک" href="https://www.facebook.com/sharer/sharer.php?u={{Request::url()}}">
+                                    <i class="fa fa-facebook"></i>
+                                    <span>فیسبوک</span>
+                                </a>
+                                <a target="_blank" title="اشتراک گذاری در توییتر" href="https://twitter.com/home?status={{Request::url()}}">
+                                    <i class="fa fa-twitter"></i>
+                                    <span>توییتر</span>
+                                </a>
+                                <a target="_blank" title="اشتراک گذاری در گوگل پلاس" href="https://plus.google.com/share?url={{Request::url()}}">
+                                    <i class="fa fa-google-plus"></i>
+                                    <span>گوگل +</span>
+                                </a>
+                                <a target="_blank" title="اشتراک گذاری در لینکداین" href="https://www.linkedin.com/shareArticle?mini=true&url={{Request::url()}} &source=">
+                                    <i class="fa fa-linkedin">
+                                    </i><span>لینکداین</span></a>
+                                <a title="اشتراک گذاری در تلگرام" target="_blank" href="https://telegram.me/share/url?url={{Request::url()}}">
+                                    <i class="fa fa-paper-plane"></i>
+                                    <span>تلگرام</span>
+                                </a>
+                                <a target="_blank" title="اشتراک گذاری در WhatsApp" href="whatsapp://send?text={{Request::url()}}/">
+                                    <i class="fa fa-whatsapp"></i>
+                                    <span>واتس اپ</span>
+                                </a>
+                                <a target="_blank" title="اشتراک گذاری در کلوب" href="http://www.cloob.com/share/link/add?url={{Request::url()}}">
+                                    <i class="fa fa-contao"></i>
+                                    <span>کلوب</span>
+                                </a>
                             </div>
 
                             <div class="im-post-vote col-md-12">
                                 <div class="im-post-vote-item">
-                                    <h2><i class="fa fa-heartbeat"></i>امتیاز شما به مطلب</h2>
+                                    <h2>
+                                        <i class="fa fa-heartbeat"></i>امتیاز شما به مطلب
+                                    </h2>
                                 </div>
 
                                 <div class="im-post-vote-item">
-                                    <a onclick="likePost()" class="user_likes"><i class="fa fa-thumbs-o-up"></i>دوست داشتم: <span id="likes_counter">{{$post->likes}}</span></a>
+                                    <a onclick="likePost()" class="user_likes">
+                                        <i class="fa fa-thumbs-o-up"></i>
+                                        دوست داشتم:
+                                        <span id="likes_counter">{{$post->likes}}</span>
+                                    </a>
                                 </div>
 
                                 <div class="im-post-vote-item">
-                                    <a onclick="dislikePost()" class="user_dislikes"><i class="fa fa-thumbs-o-down"></i>دوست نداشتم: <span id="dislikes_counter">{{$post->dislikes}}</span></a>
+                                    <a onclick="dislikePost()" class="user_dislikes">
+                                        <i class="fa fa-thumbs-o-down"></i>
+                                        دوست نداشتم:
+                                        <span id="dislikes_counter">{{$post->dislikes}}</span>
+                                    </a>
                                 </div>
 
                                 <div class="im-post-vote-item">
-                                    <i class="fa fa-heart-o"></i>میانگین امتیازات: <span id="vote_avg">{{$post->point}}</span>
+                                    <i class="fa fa-heart-o"></i>
+                                    میانگین امتیازات:
+                                    <span id="vote_avg">{{$post->point}}</span>
                                 </div>
                             </div>
 
@@ -194,8 +225,9 @@ $kindPlaceId = 10; ?>
                             <div id="REVIEWS" class="col-md-12 ratings_and_types concepts_and_filters block_wrap"
                                  style="position: relative">
                                 <div class="header_group block_header" style="position: relative">
-                                    <h3 class="tabs_header reviews_header block_title"> نقدها <span
-                                                class="reviews_header_count block_title"></span></h3>
+                                    <h3 class="tabs_header reviews_header block_title"> نقدها
+                                        <span class="reviews_header_count block_title"></span>
+                                    </h3>
                                 </div>
                                 <div id="reviewsContainer" class="ppr_rup ppr_priv_location_reviews_list"></div>
                                 <div class="unified pagination north_star">
@@ -242,7 +274,9 @@ $kindPlaceId = 10; ?>
         </div>
     </div>
 
-    <a href="#" id="back-to-top" title="بازگشت به ابتدای صفحه"><i class="fa fa-arrow-up"></i></a>
+    <a href="#" id="back-to-top" title="بازگشت به ابتدای صفحه">
+        <i class="fa fa-arrow-up"></i>
+    </a>
 </div>
 
 @include('layouts.placeFooter')

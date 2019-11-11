@@ -640,7 +640,7 @@ p {
     line-height: 1.428 !important;
 }
 
-#offlineReserveErr {
+.offlineReserveErr {
     width: 100%;
     height: 100%;
     position: absolute;

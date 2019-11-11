@@ -1450,3 +1450,7 @@ a.btn .btn-icon.wishlist {
 footer ul {
     padding: 0 !important;
 }
+
+.content-2col .im-entry {
+    min-height: 15px !important;
+}
