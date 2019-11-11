@@ -10,6 +10,10 @@ Route::get('gardeshname', function(){
     return view('gardeshname');
 });
 
+Route::get('message', function(){
+    return view('message');
+});
+
 Route::get('tourCreationFirstPage', function(){
     return view('tour/tourCreationFirstPage');
 });

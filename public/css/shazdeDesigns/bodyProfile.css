@@ -120,11 +120,11 @@
     position: relative;
 }
 
-#profileLinkColor1, #BadgeCollectionLinkColor1, #messageLinkColor1, #bookingLinkColor1, .settingColor1 {
+#profileLinkColor1, #BadgeCollectionLinkColor1, #messageLinkColor1, #bookingLinkColor1, #paymentOptionsLinkColor1, .settingColor1 {
     color: #963019 !important
 }
 
-#profileLinkColor2, #BadgeCollectionLinkColor2, #targetHelp_5 > a, #messageLinkColor2, #paymentOptionsLinkColor, .settingColor2 {
+#profileLinkColor2, #BadgeCollectionLinkColor2, #targetHelp_5 > a, #messageLinkColor2, #bookingLinkColor2, #paymentOptionsLinkColor2, .settingColor2 {
     color: #16174f
 }
 
