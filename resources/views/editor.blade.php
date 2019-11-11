@@ -62,7 +62,7 @@
       display: inline-block;
    }
    .epInputBoxInput {
-      width: 66%;
+      width: 70%;
       padding-left: 3%;
       text-align: center;
       border: none;
@@ -112,6 +112,27 @@
    .epPicText {
        padding: 5px 0;
    }
+
+    /*/////////////////////////////*/
+   .epHeaderBar {
+       margin-top: -12px;
+       height: 48px; /* Matches top of .uploaderDlg */
+       width: 100%;
+       line-height: 48px;
+       background: #4DC7BC;
+   }
+   .epHeaderBar h3 {
+       float: right;
+       position: relative;
+       color: #000;
+       font-size: 14px;
+       line-height: 48px;
+       padding-right:14px;
+       max-width: 65%;
+       overflow: hidden;
+       white-space: nowrap;
+       text-overflow: ellipsis;
+   }
 </style>
 
 <style>
@@ -122,10 +143,74 @@
     }
 </style>
 
+<style>
+    .docs-buttons {
+        padding: 10px 0;
+        border-top: 1px solid #cccccc;
+    }
+    .editBtnsGroup {
+        display: inline-block;
+        vertical-align: middle;
+        margin: 0 7px;
+    }
+    .editBtns {
+        width: 30px;
+        height: 30px;
+        border: 1px solid #cccccc;
+        display: inline-block;
+        margin: 0 2px;
+    }
+    .rotateRight {
+        width: 22px;
+        height: 24px;
+        margin: 2px 3px;
+        background: url('{{URL::asset('images') . 'reloadRight.png'}}');
+        background-size: contain;
+    }
+    .rotateLeft {
+        width: 22px;
+        height: 24px;
+        margin: 2px 3px;
+        background: url('{{URL::asset('images') . 'reloadLeft.png'}}');
+        background-size: contain;
+    }
+    .flipHorizontal {
+        width: 22px;
+        height: 22px;
+        margin: 3px 3px;
+        background: url('{{URL::asset('images') . 'flip.png'}}');
+        background-size: contain;
+    }
+    .flipVertical {
+        width: 22px;
+        height: 24px;
+        margin: 2px 3px;
+        background: url('{{URL::asset('images') . 'reflect.png'}}');
+        background-size: contain;
+    }
+    .cropping {
+        width: 22px;
+        height: 23px;
+        margin: 3px 3px;
+        background: url('{{URL::asset('images') . 'crop.png'}}');
+        background-size: contain;
+    }
+    .clearing {
+        width: 23px;
+        height: 23px;
+        margin: 2px 3px;
+        background: url('{{URL::asset('images') . 'settings.png'}}');
+        background-size: contain;
+    }
+    .upload {
+        float: left;
+    }
+</style>
+
 <span id="editPane" class="ui_overlay ui_modal photoUploadOverlay hidden">
    <div class="body_text" style="padding-top: 12px">
        {{--<div class="photoUploader">--}}
-           <div class="headerBar">
+           <div class="headerBar epHeaderBar">
               <h3 id="photoUploadHeader" class="photoUploadHeader"><span>افزودن تصویر به </span><span>{{$place->name}}</span></h3>
            </div>
            <div class="row">
@@ -136,65 +221,85 @@
                  </div>
               </div>
            </div>
-           <div class="row" id="actions">
+           <div class="row" id="actions" style="">
               <div class="col-md-12 docs-buttons">
 
-                <div class="btn-group">
-                   <button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="rotate" data-option="-45" title="Rotate Left">
-                      <span class="docs-tooltip" data-toggle="tooltip" title="cropper.rotate(-45)">
-                         <span class="fa fa-rotate-left"></span>
-                      </span>
-                   </button>
+                <div class="editBtnsGroup">
+                    <div class="editBtns">
+                       <div class="flipHorizontal" data-toggle="tooltip" data-placement="top" title="Flip Horizontal" onclick="cropper.scaleY(-1)"></div>
+                    </div>
+                                    {{--<button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="scaleX" data-option="-1" title="Flip Horizontal">--}}
+                                    {{--<span class="docs-tooltip" data-toggle="tooltip" title="cropper.scaleX(-1)">--}}
+                                    {{--<span class="fa fa-arrows-h"></span>--}}
+                                    {{--</span>--}}
+                                    {{--</button>--}}
 
-                   <button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="rotate" data-option="45" title="Rotate Right">
-                      <span class="docs-tooltip" data-toggle="tooltip" title="cropper.rotate(45)">
-                        <span class="fa fa-rotate-right"></span>
-                      </span>
-                   </button>
+                    <div class="editBtns">
+                       <div class="flipVertical" data-toggle="tooltip" data-placement="top" title="Flip Vertical" onclick="cropper.scaleX(-1)"></div>
+                    </div>
+                                    {{--<button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="scaleY" data-option="-1" title="Flip Vertical">--}}
+                                    {{--<span class="docs-tooltip" data-toggle="tooltip" title="cropper.scaleY(-1)">--}}
+                                    {{--<span class="fa fa-arrows-v"></span>--}}
+                                    {{--</span>--}}
+                                    {{--</button>--}}
                 </div>
 
-                <div class="btn-group">
-                   <button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="scaleX" data-option="-1" title="Flip Horizontal">
-                      <span class="docs-tooltip" data-toggle="tooltip" title="cropper.scaleX(-1)">
-                        <span class="fa fa-arrows-h"></span>
-                      </span>
-                   </button>
+                <div class="editBtnsGroup">
+                    <div class="editBtns">
+                       <div class="rotateLeft" data-toggle="tooltip" data-placement="top" title="چرخش 45 درجه ای به سمت چپ" onclick="cropper.rotate(-45)"></div>
+                    </div>
+                   {{--<button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="rotate" data-option="-45" title="Rotate Left">--}}
+                      {{--<span class="docs-tooltip" data-toggle="tooltip" title="cropper.rotate(-45)">--}}
+                         {{--<span class="fa fa-rotate-left"></span>--}}
+                      {{--</span>--}}
+                   {{--</button>--}}
 
-                   <button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="scaleY" data-option="-1" title="Flip Vertical">
-                      <span class="docs-tooltip" data-toggle="tooltip" title="cropper.scaleY(-1)">
-                        <span class="fa fa-arrows-v"></span>
-                      </span>
-                   </button>
+                    <div class="editBtns">
+                       <div class="rotateRight" data-toggle="tooltip" data-placement="top" title="چرخش 45 درجه ای به سمت راست" onclick="cropper.rotate(45)"></div>
+                    </div>
+                   {{--<button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="rotate" data-option="45" title="Rotate Right">--}}
+                      {{--<span class="docs-tooltip" data-toggle="tooltip" title="cropper.rotate(45)">--}}
+                        {{--<span class="fa fa-rotate-right"></span>--}}
+                      {{--</span>--}}
+                   {{--</button>--}}
                 </div>
 
-                <div class="btn-group">
-                   <button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="crop" title="Crop">
-                      <span class="docs-tooltip" data-toggle="tooltip" title="cropper.crop()">
-                        <span class="fa fa-check"></span>
-                      </span>
-                   </button>
+                <div class="editBtnsGroup">
+                    <div class="editBtns">
+                       <div class="cropping" data-toggle="tooltip" data-placement="top" title="برش" onclick="cropper.crop()"></div>
+                    </div>
+                   {{--<button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="crop" title="Crop">--}}
+                      {{--<span class="docs-tooltip" data-toggle="tooltip" title="cropper.crop()">--}}
+                        {{--<span class="fa fa-check"></span>--}}
+                      {{--</span>--}}
+                   {{--</button>--}}
 
-                   <button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="clear" title="Clear">
-                      <span class="docs-tooltip" data-toggle="tooltip" title="cropper.clear()">
-                        <span class="fa fa-remove"></span>
-                      </span>
-                   </button>
+                    <div class="editBtns">
+                       <div class="clearing" data-toggle="tooltip" data-placement="top" title="بازگشت به اول" onclick="cropper.clear()"></div>
+                    </div>
+                   {{--<button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="clear" title="Clear">--}}
+                      {{--<span class="docs-tooltip" data-toggle="tooltip" title="cropper.clear()">--}}
+                        {{--<span class="fa fa-remove"></span>--}}
+                      {{--</span>--}}
+                   {{--</button>--}}
                 </div>
 
-                <div class="btn-group btn-group-crop">
-
-                   <button id="saveBtn" type="button" onclick="successBtnClicked(this)" class="btn btn-success" data-method="getCroppedCanvas" data-option="{ &quot;width&quot;: 466, &quot;height&quot;: 367 }">
-                      <span class="docs-tooltip" data-toggle="tooltip" id="saveBtnSpan" title="cropper.getCroppedCanvas({ width: 466, height: 367 })">
-                        ذخیره
-                      </span>
-                   </button>
-
-                   <button id="saveBtn2" type="button" onclick="successBtnClicked(this)" class="btn btn-success hidden" data-method="getCroppedCanvas" data-option="{ &quot;width&quot;: 100, &quot;height&quot;: 100 }">
-                      <span class="docs-tooltip" data-toggle="tooltip" id="saveBtnSpan" title="cropper.getCroppedCanvas({ width: 100, height: 100 })">
-                        ذخیره
-                      </span>
-                   </button>
+                <div class="upload">
+                    <div onclick="uploadIMG()" class="uploadBtn ui_button primary">تایید</div>
                 </div>
+                {{--<div class="btn-group btn-group-crop">--}}
+                   {{--<button id="saveBtn" type="button" onclick="successBtnClicked(this)" class="btn btn-success" data-method="getCroppedCanvas" data-option="{ &quot;width&quot;: 466, &quot;height&quot;: 367 }">--}}
+                      {{--<span class="docs-tooltip" data-toggle="tooltip" id="saveBtnSpan" title="cropper.getCroppedCanvas({ width: 466, height: 367 })">--}}
+                        {{--ذخیره--}}
+                      {{--</span>--}}
+                   {{--</button>--}}
+
+                   {{--<button id="saveBtn2" type="button" onclick="successBtnClicked(this)" class="btn btn-success hidden" data-method="getCroppedCanvas" data-option="{ &quot;width&quot;: 100, &quot;height&quot;: 100 }">--}}
+                      {{--<span class="docs-tooltip" data-toggle="tooltip" id="saveBtnSpan" title="cropper.getCroppedCanvas({ width: 100, height: 100 })">--}}
+                        {{--ذخیره--}}
+                      {{--</span>--}}
+                   {{--</button>--}}
+                {{--</div>--}}
 
                 <!-- Show the cropped image in modal -->
                 <div class="modal fade docs-cropped" id="getCroppedCanvasModal" role="dialog" aria-hidden="true" aria-labelledby="getCroppedCanvasTitle" tabindex="-1">
@@ -224,8 +329,9 @@
 
              </div><!-- /.docs-buttons -->
            </div>
-           {{--</div>--}}
+       {{--</div>--}}
    </div>
+    <div class="ui_close_x" onclick="$('#editPane').addClass('hidden'); $('.dark').addClass('hidden')"></div>
 </span>
 
 <span id="photoEditor" class="ui_overlay ui_modal photoUploadOverlay hidden">
@@ -560,11 +666,11 @@
 
    }
 
-   function primaryBtnClicked(val) {
-      $('.btn-primary').css('background-color', '#007bff');
-      $('.btn-success').css('background-color', '#28a745');
-      $(val).css('background-color', '#0069d9');
-   }
+   // function primaryBtnClicked(val) {
+   //    $('.btn-primary').css('background-color', '#007bff');
+   //    $('.btn-success').css('background-color', '#28a745');
+   //    $(val).css('background-color', '#0069d9');
+   // }
 
    function successBtnClicked(val) {
       $('.btn-primary').css('background-color', '#007bff');
