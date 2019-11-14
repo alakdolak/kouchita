@@ -14,6 +14,10 @@ Route::get('message', function(){
     return view('message');
 });
 
+Route::get('business', function(){
+    return view('business');
+});
+
 Route::get('tourCreationFirstPage', function(){
     return view('tour/tourCreationFirstPage');
 });
