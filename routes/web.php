@@ -10,8 +10,8 @@ Route::get('gardeshname', function(){
     return view('gardeshname');
 });
 
-Route::get('message', function(){
-    return view('message');
+Route::get('myTripInner', function(){
+    return view('myTripInner');
 });
 
 Route::get('tourCreationFirstPage', function(){

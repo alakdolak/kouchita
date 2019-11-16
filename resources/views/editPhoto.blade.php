@@ -64,7 +64,7 @@
                                 </div>
 
                                 @if(isset($msg) && !empty($msg))
-                                    <center class="mg-tp-20px color-darkred">
+                                    <center class="mg-tp-20px dark-red">
                                         {{$msg}}
                                     </center>
                                 @endif

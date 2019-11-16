@@ -48,6 +48,10 @@
     cursor: pointer;
 }
 
+.z-index-1 {
+    z-index: 1;
+}
+
 .z-index-100 {
     z-index: 100;
 }
@@ -118,6 +122,10 @@
     text-align: right;
 }
 
+.text-decoration-none {
+    text-decoration: none;
+}
+
 /*font*/
 
 .font-size-10 {
@@ -170,6 +178,10 @@
 
 .font-size-1em {
     font-size: 1em;
+}
+
+.font-size-15em {
+    font-size: 1.5em;
 }
 
 .font-weight-400 {
@@ -246,6 +258,18 @@
     padding: 20px;
 }
 
+.pd-0-9 {
+    padding: 0 9px;
+}
+
+.pd-3-13 {
+    padding: 3px 13px;
+}
+
+.pd-5-0 {
+    padding: 5px 0;
+}
+
 .pd-12-0Imp {
     padding: 12px 0 !important;
 }
@@ -266,6 +290,10 @@
 
 .mg-tp-5Imp {
     margin-top: 5px !important;
+}
+
+.mg-tp-10 {
+    margin-top: 10px;
 }
 
 .mg-tp-12 {
@@ -362,6 +390,10 @@
 
 /*margin left*/
 
+.mg-lt-0Imp {
+    margin-left: 0 !important;
+}
+
 .mg-lt-6 {
     margin-left: 6px;
 }
@@ -382,6 +414,10 @@
 
 .mg-0Imp {
     margin: 0 !important;
+}
+
+.mg-10 {
+    margin: 10px;
 }
 
 .mg-100 {
@@ -420,6 +456,10 @@
 
 .width-auto {
     width: auto;
+}
+
+.width-autoImp {
+    width: auto !important;
 }
 
 .width-50 {
@@ -536,6 +576,10 @@
     height: auto;
 }
 
+.height-18 {
+    height: 18px;
+}
+
 .height-25 {
     height: 25px;
 }
@@ -650,15 +694,11 @@
     color: #16174f !important;
 }
 
-.dark-red {
-    color: #963019
-}
-
-.color-#4DC7BC {
+.color-green {
     color: #4DC7BC;
 }
 
-.color-#4DC7BCImp {
+.color-greenImp {
     color: #4DC7BC !important;
 }
 
@@ -674,8 +714,20 @@
     color: #92321b
 }
 
-.color-darkred {
-    color: darkred;
+.dark-red {
+    color: #963019
+}
+
+.color-red {
+    color: red;
+}
+
+.color-black {
+    color: black;
+}
+
+.color-white {
+    color:#fff;
 }
 
 /*positions*/
