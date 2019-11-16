@@ -14,6 +14,10 @@ Route::get('myTripInner', function(){
     return view('myTripInner');
 });
 
+Route::get('business', function(){
+    return view('business');
+});
+
 Route::get('tourCreationFirstPage', function(){
     return view('tour/tourCreationFirstPage');
 });
