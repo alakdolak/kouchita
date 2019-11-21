@@ -60,7 +60,7 @@
                                                         <li id="sort-option-recent" data-sort="recent" class="selected">بازدید اخیر</li>
                                                     </ul>
                                                     <div id="targetHelp_9" class="targets float-left">
-                                                        <span class="sort-text"> :مرتب شده بر اساس </span>
+                                                        <span class="sort-text"> مرتب شده بر اساس :</span>
                                                         <div id="helpSpan_9" class="helpSpans hidden row">
                                                             <span class="introjs-arrow"></span>
                                                             <p>در این قسمت می توانید اطلاعات را با فیلتر های موجود مرتب کنید.</p>

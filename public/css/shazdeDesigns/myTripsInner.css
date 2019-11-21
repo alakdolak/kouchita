@@ -1,0 +1,405 @@
+/*1st box of styles*/
+
+.calendar2 {
+    top: 113% !important;
+    left: 27% !important;
+}
+
+.icon-circle-arrow-right {
+    background-image: url('../../img/glyphicons-halflings.png') !important;
+    background-position: -240px -144px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    height: 14px;
+    line-height: 14px;
+    margin-top: 1px;
+    vertical-align: text-top;
+    width: 14px;
+}
+
+.icon-circle-arrow-left {
+    background-image: url('../../img/glyphicons-halflings.png') !important;
+    background-position: -264px -144px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    height: 14px;
+    line-height: 14px;
+    margin-top: 1px;
+    vertical-align: text-top;
+    width: 14px;
+}
+
+/*2nd box of Styles*/
+
+input[type="checkbox"] {
+    display: none;
+}
+
+input[type="checkbox"] + label {
+    color: #666666;
+}
+
+input[type="checkbox"] + label span, input[type="radio"] + label span {
+    display: inline-block;
+    width: 19px;
+    height: 19px;
+    margin: -2px 10px 0 0;
+    vertical-align: middle;
+    background: url('../../images/check_radio_sheet.png') left top no-repeat;
+    cursor: pointer;
+}
+
+input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label span {
+    background: url('../../images/check_radio_sheet.png') -19px top no-repeat;
+
+}
+
+.labelForCheckBox:before {
+    background-color: transparent !important;
+    border: none !important;
+    content: "" !important;
+}
+
+#result div:hover {
+    color: #4DC7BC;
+}
+
+.ui_tabs {
+    white-space: inherit !important;
+}
+
+.helpSpans p {
+    font-size: 14px;
+    line-height: 2em;
+    text-align: justify;
+}
+
+.nextBtnsHelp {
+    margin-left: 5px !important;
+}
+
+/*inline styles*/
+
+#trip-header-region {
+    direction: ltr;
+    position: relative;
+}
+
+#targetHelp_6 {
+    display: inline;
+}
+
+.helpBtnTimeChange {
+    background-size: 28px;
+    background-position: 0 -29px;
+    width: 28px;
+    height: 28px;
+    background-image: url('../../images/help_share.png');
+    background-repeat: no-repeat;
+}
+
+#targetHelp_11, #targetHelp_12, #targetHelp_13 {
+    float: left;
+}
+
+#targetHelp_7, #targetHelp_8, #targetHelp_9, #targetHelp_10 {
+    margin-right: 7px;
+    float: left;
+}
+
+#tripNotePElement {
+    padding-right: 26px;
+    padding-top: 7px;
+    text-align: justify;
+    padding-bottom: 7px;
+    width: 100%;
+    border-bottom: 1px solid #CCC;
+}
+
+#targetHelp_14 {
+    float: right;
+    position: relative
+}
+
+#targetHelp_15 {
+    position: relative;
+    float: right;
+    margin-right: 5px
+}
+
+#targetHelp_16 {
+    position: relative;
+    float: left
+}
+
+.removeBtnTargetHelp_16 {
+    background: url('../../images/estelah.png') no-repeat -7px -36px;
+    background-size: 30px;
+    float: left;
+    margin: 0 !important;
+}
+
+#targetHelp_17 {
+    margin: 5px auto 10px;
+    width: 54px;
+    position: relative
+}
+
+.showDetailsBtnTargetHelp_17 {
+    background: url('../../images/tripplace.png') no-repeat;
+    background-size: 60%;
+    background-position-x: center;
+    padding: 6px 12px;
+}
+
+.showDetailsBtnTargetHelp_17MainDiv {
+    margin: 5px auto 10px;
+    width: 54px;
+    position: relative
+}
+
+.placeDetailsToggleBar {
+    background: #e4e4e4;
+    border-radius: 5px;
+}
+
+#addPlacePrompt, #note, .addPlaceToTripPromptTitle {
+    position: fixed;
+    width: 39%;
+    left: 30%;
+    right: auto;
+    top: 32%;
+    bottom: auto;
+}
+
+.addPlacePromptTitle {
+    direction: rtl;
+    margin-bottom: 29px !important;
+    font-size: 24px !important;
+    font-weight: bold;
+}
+
+#placePromptError {
+    margin-top: 10px;
+    direction: rtl
+}
+
+#membersPane, #addPlaceToTripPrompt, #invitePane, #addDateToPlace {
+    position: fixed;
+    width: 39%;
+    left: 30%;
+    right: auto;
+    top: 23%;
+    bottom: auto;
+}
+
+.membersPaneTitle, .addNoteTitle, .invitePaneTitle, .addDateToPlaceTitle, .editTripPromptTitle {
+    direction: rtl;
+    margin-bottom: 29px !important;
+    font-size: 30px !important;
+    font-weight: bold;
+}
+
+#members, #notePrompt {
+    direction: rtl;
+}
+
+.editTripDateLabel {
+    direction: rtl;
+    margin-bottom: 29px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #4dc7bc;
+}
+
+.darkModeOption {
+    display: none;
+}
+
+.successBtn {
+    color: #FFF;
+    background-color: #4dc7bc;
+    border-color: #4dc7bc;
+}
+
+#errorAssignPlace {
+    margin-top: 10px
+}
+
+#friendId {
+    width: 60%;
+    border-radius: 5px;
+    border: 1px solid #CCC;
+}
+
+#nickName {
+    width: 60%;
+    border-radius: 5px;
+    border: 1px solid #CCC;
+}
+
+#errorInvite {
+    margin-top: 10px;
+    color: red
+}
+
+#date_input {
+    width: 50%;
+    border-radius: 6px;
+    border: 1px solid #CCC;
+}
+
+#errorText {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 20px;
+    color: red
+}
+
+#editDateTripPrompt, #editTripPrompt, #deleteTrip, #deleteTripPlace, #deleteMember {
+    position: fixed;
+    left: 37%;
+    right: auto;
+    top: 29%;
+    bottom: auto;
+    width: 26%;
+}
+
+.editTripPromptTitle {
+    color: #4DC7BC !important;
+}
+
+#date_btn_start_edit_label, #date_btn_end_edit_label {
+    position: relative;
+    margin: 6px;
+    width: 100%;
+    height: 30px;
+    border: 1px solid #e5e5e5;
+    border-radius: 2px;
+    box-shadow: 0 7px 12px -7px #e5e5e5 inset;
+}
+
+#date_btn_start_edit_span, #date_btn_end_edit_span {
+    color: #30b4a6 !important;
+    font-size: 20px;
+    line-height: 32px;
+    position: absolute;
+    right: 7px;
+}
+
+#date_input_start_edit_2, #date_input_end_edit_2, #date_input_start_edit, #date_input_end_edit {
+    padding: 7px;
+    position: absolute;
+    top: 1px;
+    right: 35px;
+    border: none;
+    background: transparent;
+}
+
+#error2 {
+    color: red;
+}
+
+#tripNameEdit {
+    direction: rtl
+}
+
+#date_btn_start_label, #date_btn_end_label {
+    position: relative;
+    margin: 6px;
+    width: 100%;
+    height: 30px;
+    border: 1px solid #e5e5e5;
+    border-radius: 2px;
+    box-shadow: 0 7px 12px -7px #e5e5e5 inset;
+}
+
+#date_btn_start, #date_btn_start {
+    color: #30b4a6 !important;
+    font-size: 20px;
+    line-height: 32px;
+    position: absolute;
+    right: 7px;
+}
+
+
+#mainDivKeyAndResults {
+    margin-top: 20px;
+    border: 2px solid #CCC;
+    border-radius: 7px;
+}
+
+#key {
+    border: none;
+    margin-top: 10px;
+}
+
+#result {
+    max-height: 160px;
+    overflow: auto;
+    margin-top: 10px;
+}
+
+.suggest {
+    cursor: pointer;
+    padding: 5px 20px;
+    border-bottom: 1px solid #CCC
+}
+
+#visitTimeLabel {
+    float: left;
+    padding: 5px 0;
+    color: #4DC7BC;
+}
+
+#map {
+    border: 2px solid black;
+    height: 200px
+}
+
+#sendCommentBtn {
+    color: #FFF;
+    background-color: #4dc7bc;
+    border-color: #4dc7bc;
+    border-radius: 5%;
+    width: 100%;
+    margin-top: 17px;
+}
+
+#newComment {
+    width: 100%;
+    padding: 5px;
+    float: right !important;
+    border-radius: 5px;
+    border: 1px solid #ccc
+}
+
+#tripNote {
+    border-radius: 5px;
+    border: 1px solid #CCC;
+    padding: 5px;
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    min-height: 110px;
+}
+
+.isNotInFilterCurrent {
+    border: 1px solid #ccc;
+    background-color: #ccc;
+    border-radius: 50%;
+    margin-right: 2px;
+    width: 12px;
+    height: 12px;
+    float: left
+}
+
+.isNotInFilter {
+    border: 1px solid #333;
+    background-color: black;
+    border-radius: 50%;
+    margin-right: 2px;
+    width: 12px;
+    height: 12px;
+    float: left
+}
