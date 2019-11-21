@@ -32,6 +32,17 @@
         @endif
     </script>
 
+        <style>
+            .mainBannerSlider {
+                position: absolute;
+                top: 0;
+                width: 100%;
+                height: 380px;
+                border: 1px solid black;
+                margin-bottom: 20px;
+            }
+        </style>
+
     </head>
 
     <body class="rebrand_2017 desktop HomeRebranded  js_logging">
@@ -51,7 +62,29 @@
                         <div class="placement_wrap">
                             <div class="placement_wrap_row">
                                 <div class="placement_wrap_cell">
-                                    <div id="sliderBarDIV" class="ppr_rup ppr_priv_trip_search hideOnPhone">
+                                    {{--<div id="sliderBarDIV" class="ppr_rup ppr_priv_trip_search hideOnPhone">--}}
+                                    <div class="ppr_rup ppr_priv_trip_search hideOnPhone mainBannerSlider">
+                                        <!-- Swiper -->
+                                        <div id="mainSlider" class="swiper-container">
+                                            <div class="swiper-wrapper">
+                                                <div class="swiper-slide">Slide 1</div>
+                                                <div class="swiper-slide">Slide 2</div>
+                                                <div class="swiper-slide">Slide 3</div>
+                                                <div class="swiper-slide">Slide 4</div>
+                                                <div class="swiper-slide">Slide 5</div>
+                                                <div class="swiper-slide">Slide 6</div>
+                                                <div class="swiper-slide">Slide 7</div>
+                                                <div class="swiper-slide">Slide 8</div>
+                                                <div class="swiper-slide">Slide 9</div>
+                                                <div class="swiper-slide">Slide 10</div>
+                                            </div>
+                                            <!-- Add Pagination -->
+                                            <div class="swiper-pagination"></div>
+                                            <!-- Add Arrows -->
+                                            <div class="swiper-button-next"></div>
+                                            <div class="swiper-button-prev"></div>
+                                        </div>
+
                                         @if($placeMode == "hotel")
                                             <div class="ui_columns datepicker_box trip_search metaDatePicker rounded_lockup usePickerTypeIcons preDates noDates with_children hideOnPhone mainDivSearchInputMainPage">
                                                 <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column is-4 search_typeahead wctx-tripsearch searchDivForScroll">
@@ -647,6 +680,57 @@
             })
         }
     </script>
+
+    <!-- Initialize Swiper Of mainSlider -->
+    <script>
+        var swiper = new Swiper('#mainSlider', {
+            spaceBetween: 30,
+            centeredSlides: true,
+            autoplay: {
+                delay: 2500,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+    </script>
+
+    <!-- Initialize Swiper Of 3Box -->
+    <script>
+        var swiper = new Swiper('#3box', {
+            slidesPerView: 3,
+            spaceBetween: 30,
+            slidesPerGroup: 1,
+            loop: true,
+            loopFillGroupWithBlank: true,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+    </script>
+
+    <!-- Initialize Swiper Of mainSuggestion -->
+    <script>
+        var swiper = new Swiper('.mainSuggestion', {
+            slidesPerView: 4,
+            spaceBetween: 30,
+            slidesPerGroup: 1,
+            loop: true,
+            loopFillGroupWithBlank: true,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+    </script>
+
     </body>
 </html>
 
