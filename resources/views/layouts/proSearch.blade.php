@@ -512,102 +512,113 @@
 
             <div class="row mg-tp-50" id="mainDivProSearch">
 
-                <div class="col-xs-12">
+                <div class="col-xs-12 boxOfWhereIsHere">شما در حال حاضر در شهر <div id="nameOfWhereIsHere">اصفهان</div> هستید</div>
+
+                <div class="col-xs-2"></div>
+                <div class="col-xs-8">
                     <div class="col-xs-5">
                         <div id="addToFilterCityBtn" class="inner" onclick="goTo()"><span>برو به</span><span>&nbsp;</span><span id="searchKeyCity"></span></div>
                     </div>
                     <div class="col-xs-7">
-                        <div class="where_with_highlight" id="enterCityNameProSearch">
-                            <input onkeyup="searchCity()" id="GEO_SCOPED_SEARCH_INPUT" class="text geoScopeInput" value="" placeholder="نام شهر را وارد کنید" autocomplete="off" type="text">
-                            <p id="currentCity"></p>
+                        <div class="boxOfCityNameProSearch">
+                            <div id="textOfWhere">در کجا</div>
+                            <div class="where_with_highlight" id="enterCityNameProSearch">
+                                <input onkeyup="searchCity()" id="GEO_SCOPED_SEARCH_INPUT" class="text geoScopeInput" value="" placeholder="نام شهر را وارد کنید" autocomplete="off" type="text">
+                                <p id="currentCity"></p>
+                            </div>
                         </div>
                         <div id="resultCity" class="data_holder"></div>
                     </div>
                 </div>
+                <div class="col-xs-2"></div>
 
-                <center class="col-xs-12" id="dividerBoxCenterProSearch"></center>
+                <div style="clear: both;"></div>
 
-                <center class="col-xs-12">
+                <div class="col-xs-2"></div>
+                <div class="col-xs-8" id="dividerBoxCenterProSearch"></div>
+                <div class="col-xs-2"></div>
 
-                    <div class="col-xs-2"></div>
+                <div style="clear: both;"></div>
 
-                    <div class="col-xs-8">
-                        <div class="col-xs-12">
-                            <div class="col-xs-7">
-                                <div class='ui_input_checkbox'>
+                <div class="col-xs-2"></div>
+                <div class="col-xs-8">
+                    <div class="col-xs-12">
+                        <div class="col-xs-7">
+                            <div class='ui_input_checkbox'>
 
-                                    @if($placeMode == "amaken")
-                                        <img class="lantern" data-val="on" id="amakenFilter" width="50px" height="100px" src="{{URL::asset('images/on_lamp.gif')}}">
-                                    @else
-                                        <img class="lantern" data-val="off" id="amakenFilter" width="50px" height="100px" src="{{URL::asset('images/off_lamp.png')}}">
-                                    @endif
-                                    <center>اماکن</center>
-                                </div>
-                                <div class='ui_input_checkbox'>
-                                    @if($placeMode == "hotel")
-                                        <img class="lantern" data-val="on" id="hotelFilter" width="50px" height="100px" src="{{URL::asset('images/on_lamp.gif')}}">
-                                    @else
-                                        <img class="lantern" data-val="off" id="hotelFilter" width="50px" height="100px" src="{{URL::asset('images/off_lamp.png')}}">
-                                    @endif
-                                    <center>هتل</center>
-                                </div>
-                                <div class='ui_input_checkbox'>
-                                    @if($placeMode == "restaurant")
-                                        <img class="lantern" data-val="on" id="restaurantFilter" width="50px" height="100px" src="{{URL::asset('images/on_lamp.gif')}}">
-                                    @else
-                                        <img class="lantern" data-val="off" id="restaurantFilter" width="50px" height="100px" src="{{URL::asset('images/off_lamp.png')}}">
-                                    @endif
-                                    <center>رستوران</center>
-                                </div>
-                                <div class='ui_input_checkbox'>
-                                    @if($placeMode == "majara")
-                                        <img class="lantern" data-val="on" id="majaraFilter" width="50px" height="100px" src="{{URL::asset('images/on_lamp.gif')}}">
-                                    @else
-                                        <img class="lantern" data-val="off" id="majaraFilter" width="50px" height="100px" src="{{URL::asset('images/off_lamp.png')}}">
-                                    @endif
-                                    <center>ماجراجویی</center>
-                                </div>
-                                <div class='ui_input_checkbox'>
-                                    @if($placeMode == "soghat")
-                                        <img class="lantern" data-val="on" id="soghatFilter" width="50px" height="100px" src="{{URL::asset('images/on_lamp.gif')}}">
-                                    @else
-                                        <img class="lantern" data-val="off" id="soghatFilter" width="50px" height="100px" src="{{URL::asset('images/off_lamp.png')}}">
-                                    @endif
-                                    <center>سوغات</center>
-                                </div>
-                                <div class='ui_input_checkbox'>
-                                    @if($placeMode == "ghazamahali")
-                                        <img class="lantern" data-val="on" id="ghazamahaliFilter" width="50px" height="100px" src="{{URL::asset('images/on_lamp.gif')}}">
-                                    @else
-                                        <img class="lantern" data-val="off" id="ghazamahaliFilter" width="50px" height="100px" src="{{URL::asset('images/off_lamp.png')}}">
-                                    @endif
-                                    <center>غذا محلی</center>
-                                </div>
-                                <div class='ui_input_checkbox'>
-                                    @if($placeMode == "sanaye")
-                                        <img class="lantern" data-val="on" id="sanayeFilter" width="50px" height="100px" src="{{URL::asset('images/on_lamp.gif')}}">
-                                    @else
-                                        <img class="lantern" data-val="off" id="sanayeFilter" width="50px" height="100px" src="{{URL::asset('images/off_lamp.png')}}">
-                                    @endif
-
-                                    <center>صنایع</center>
-                                </div>
+                                @if($placeMode == "amaken")
+                                    <img class="lantern" data-val="on" id="amakenFilter" width="50px" height="100px" src="{{URL::asset('images/on_lamp.gif')}}">
+                                @else
+                                    <img class="lantern" data-val="off" id="amakenFilter" width="50px" height="100px" src="{{URL::asset('images/off_lamp.png')}}">
+                                @endif
+                                <center>اماکن</center>
                             </div>
-                            <div class="col-xs-5 where_with_highlight">
-                                <div class="position-relative">
-                                    <input onkeyup="searchInPlaces()" id="GEO_SCOPED_SEARCH_INPUT2" class="text geoScopeInput" placeholder="هر کجا که می خواهید بروید را وارد کنید" autocomplete="off" type="text">
-                                </div>
+                            <div class='ui_input_checkbox'>
+                                @if($placeMode == "hotel")
+                                    <img class="lantern" data-val="on" id="hotelFilter" width="50px" height="100px" src="{{URL::asset('images/on_lamp.gif')}}">
+                                @else
+                                    <img class="lantern" data-val="off" id="hotelFilter" width="50px" height="100px" src="{{URL::asset('images/off_lamp.png')}}">
+                                @endif
+                                <center>هتل</center>
+                            </div>
+                            <div class='ui_input_checkbox'>
+                                @if($placeMode == "restaurant")
+                                    <img class="lantern" data-val="on" id="restaurantFilter" width="50px" height="100px" src="{{URL::asset('images/on_lamp.gif')}}">
+                                @else
+                                    <img class="lantern" data-val="off" id="restaurantFilter" width="50px" height="100px" src="{{URL::asset('images/off_lamp.png')}}">
+                                @endif
+                                <center>رستوران</center>
+                            </div>
+                            <div class='ui_input_checkbox'>
+                                @if($placeMode == "majara")
+                                    <img class="lantern" data-val="on" id="majaraFilter" width="50px" height="100px" src="{{URL::asset('images/on_lamp.gif')}}">
+                                @else
+                                    <img class="lantern" data-val="off" id="majaraFilter" width="50px" height="100px" src="{{URL::asset('images/off_lamp.png')}}">
+                                @endif
+                                <center>ماجراجویی</center>
+                            </div>
+                            <div class='ui_input_checkbox'>
+                                @if($placeMode == "soghat")
+                                    <img class="lantern" data-val="on" id="soghatFilter" width="50px" height="100px" src="{{URL::asset('images/on_lamp.gif')}}">
+                                @else
+                                    <img class="lantern" data-val="off" id="soghatFilter" width="50px" height="100px" src="{{URL::asset('images/off_lamp.png')}}">
+                                @endif
+                                <center>سوغات</center>
+                            </div>
+                            <div class='ui_input_checkbox'>
+                                @if($placeMode == "ghazamahali")
+                                    <img class="lantern" data-val="on" id="ghazamahaliFilter" width="50px" height="100px" src="{{URL::asset('images/on_lamp.gif')}}">
+                                @else
+                                    <img class="lantern" data-val="off" id="ghazamahaliFilter" width="50px" height="100px" src="{{URL::asset('images/off_lamp.png')}}">
+                                @endif
+                                <center>غذا محلی</center>
+                            </div>
+                            <div class='ui_input_checkbox'>
+                                @if($placeMode == "sanaye")
+                                    <img class="lantern" data-val="on" id="sanayeFilter" width="50px" height="100px" src="{{URL::asset('images/on_lamp.gif')}}">
+                                @else
+                                    <img class="lantern" data-val="off" id="sanayeFilter" width="50px" height="100px" src="{{URL::asset('images/off_lamp.png')}}">
+                                @endif
+
+                                <center>صنایع</center>
                             </div>
                         </div>
-                        <div class="col-xs-12" id="filterDiv">
-                            <div id="filters" class="position-relative"></div>
+                        <div class="col-xs-5 where_with_highlight">
+                            <div class="position-relative">
+                                <input onkeyup="searchInPlaces()" id="GEO_SCOPED_SEARCH_INPUT2" class="text geoScopeInput" placeholder="هر کجا که می خواهید بروید را وارد کنید" autocomplete="off" type="text">
+                            </div>
                         </div>
                     </div>
-
-                    <div class="col-xs-2">
+                    <div class="col-xs-12" id="filterDiv">
+                        <div id="filters" class="position-relative"></div>
+                    </div>
+                    <div class="col-xs-12">
                         <div id="resultPlace" class="data_holder"></div>
                     </div>
-                </center>
+                </div>
+                <div class="col-xs-2"></div>
+
+                <div style="clear: both;"></div>
 
                 {{--<div class="col-xs-12">--}}
                     {{--<div class="col-xs-2"></div>--}}

@@ -708,6 +708,10 @@
             spaceBetween: 30,
             slidesPerGroup: 1,
             loop: true,
+            autoplay: {
+                delay: 7500,
+                disableOnInteraction: false,
+            },
             loopFillGroupWithBlank: true,
             navigation: {
                 nextEl: '.swiper-button-next',

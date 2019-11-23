@@ -84,10 +84,23 @@
     margin-top: 50px;
 }
 
+.boxOfWhereIsHere {
+    display: flex;
+    color: #0c0593;
+    font-size: 1.4em;
+    align-items: center;
+    justify-content: center;
+    margin: 0 0 15px;
+}
+
+#nameOfWhereIsHere {
+    font-weight: 500;
+    margin: 5px;
+}
+
 #addToFilterCityBtn {
     cursor: pointer;
     text-align: center;
-    float: right;
     margin-top: 10px;
     width: 200px;
     padding: 10px;
@@ -96,9 +109,21 @@
     color: white
 }
 
+.boxOfCityNameProSearch {
+    display: flex;
+    align-items: flex-end;
+    font-size: 1.3em;
+    color: #0076a3;
+}
+
+#textOfWhere {
+    display: flex;
+    align-items: center;
+    margin: 0 0 5px 10px;
+}
+
 #enterCityNameProSearch {
-    width: 60% !important;
-    float: left
+    width: 85% !important;
 }
 
 #GEO_SCOPED_SEARCH_INPUT {
@@ -119,9 +144,7 @@
 }
 
 #dividerBoxCenterProSearch {
-    width: 70%;
-    margin-left: 15%;
-    margin-top: 15px;
+    background-color: #FFFFFF;
     height: 5px;
     box-shadow: 5px 5px 5px #888888;
 }
@@ -187,10 +210,10 @@
     margin-top: 20px
 }
 
-#mainDivProSearch > div:nth-child(4) {
-    height: 200px;
-    margin-top: 4%;
-}
+/*#mainDivProSearch > div:nth-child(4) {*/
+    /*height: 200px;*/
+    /*margin-top: 4%;*/
+/*}*/
 
 #mainDivCompareProSearch {
     width: 22%;
