@@ -15,6 +15,8 @@ class CreateTourTable extends Migration
     {
         Schema::create('tour', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('userId');
+            $table->string('name');
             $table->unsignedInteger('srcId');
             $table->unsignedInteger('destId');
             $table->tinyInteger('kindDest');
@@ -25,7 +27,7 @@ class CreateTourTable extends Migration
             $table->boolean('isMeal')->nullable();
             $table->boolean('isMealAllDay')->nullable();
             $table->boolean('isMealMoney')->nullable();
-            $table->string('meals')->nullable();
+            $table->string('meals', 100)->nullable();
             $table->integer('minCost')->nullable();
             $table->boolean('isInsurance')->nullable();
             $table->tinyInteger('ticketKind')->nullable();
@@ -49,6 +51,7 @@ class CreateTourTable extends Migration
             $table->text('opinion')->nullable();
             $table->text('tourLimit')->nullable();
             $table->boolean('cancelAble')->nullable();
+            $table->text('cancelDescription')->nullable();
             $table->timestamps();
         });
     }

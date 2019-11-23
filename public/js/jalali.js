@@ -2,6 +2,12 @@ JalaliDate = {
     g_days_in_month: [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31],
     j_days_in_month: [31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29]
 };
+var calendarIsOpen =false
+
+/** Adds the number of days array to the Date object. */
+Date._MD = new Array(31,28,31,30,31,30,31,31,30,31,30,31);
+
+Date._JMD = new Array(31,31,31,31,31,31,30,30,30,30,30,29);
 
 var my_g_days_in_month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 var my_j_days_in_month = [31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29];
@@ -104,6 +110,39 @@ function gregorianToJalali(g_y, g_m, g_d) {
 
     return [jy, jm, jd];
 }
+
+Date.prototype.getUTCMonthDays = function(month) {
+    var year = this.getUTCFullYear();
+    if (typeof month == "undefined") {
+        month = this.getUTCMonth();
+    }
+    if (((0 == (year%4)) && ( (0 != (year%100)) || (0 == (year%400)))) && month == 1) {
+        return 29;
+    } else {
+        return Date._MD[month];
+    }
+};
+
+
+Date.prototype.getLocalMonthDays = function(dateType, month) {
+    if (dateType == 'jalali') {
+        return this.getJalaliUTCMonthDays(month);
+    } else {
+        return this.getUTCMonthDays(month);
+    }
+};
+
+Date.prototype.getJalaliUTCMonthDays = function(month) {
+    var year = this.getJalaliUTCFullYear();
+    if (typeof month == "undefined") {
+        month = this.getJalaliUTCMonth();
+    }
+    if (month == 11 && checkDate(year, month+1, 30)) {
+        return 30;
+    } else {
+        return Date._JMD[month];
+    }
+};
 
 Date.prototype.setJalaliFullYear = function (y, m, d) {
     y = parseInt(y);
@@ -648,7 +687,7 @@ function selectDay(y, m, d, kind) {
             if (numOfCalendar == 2)
                 getGregorianCalendar(backCal[1], backCal[0], 'back');
             else
-                document.getElementById('container1').style.display = 'none';
+                closeCalender();
         }
         else {
             document.getElementById('goDate').value = selectDays[0][0] + '/' + (parseInt(selectDays[0][1]) + 1) + '/' + selectDays[0][2];
@@ -657,8 +696,9 @@ function selectDay(y, m, d, kind) {
             getCalendar(goCal[1], goCal[0], 'go');
             if (numOfCalendar == 2)
                 getCalendar(backCal[1], backCal[0], 'back');
-            else
-                document.getElementById('container1').style.display = 'none';
+            else {
+                closeCalender();
+            }
         }
         if (numOfCalendar == 2)
             numClick = 1;
@@ -683,7 +723,7 @@ function selectDay(y, m, d, kind) {
                 getGregorianCalendar(goCal[1], goCal[0], 'go');
                 if (numOfCalendar == 2) {
                     getGregorianCalendar(backCal[1], backCal[0], 'back');
-                    document.getElementById('container1').style.display = 'none';
+                    closeCalender();
                 }
             }
             else {
@@ -692,7 +732,7 @@ function selectDay(y, m, d, kind) {
                 getCalendar(goCal[1], goCal[0], 'go');
                 if (numOfCalendar == 2) {
                     getCalendar(backCal[1], backCal[0], 'back');
-                    document.getElementById('container1').style.display = 'none';
+                    closeCalender();
                 }
             }
             numClick = 0;
@@ -707,8 +747,8 @@ function changeDateKind(kind) {
     if (kind == 1) {
         document.getElementById('calendarJalali').style.display = 'none';
         document.getElementById('JalaliButton').style.display = 'none';
-        document.getElementById('GregorianButton').style.display = '';
-        document.getElementById('calendarGregorian').style.display = '';
+        document.getElementById('GregorianButton').style.display = 'block';
+        document.getElementById('calendarGregorian').style.display = 'block';
 
         var dd = new Date();
         var hell = dd.setJalaliFullYear(selectDays[0][0], selectDays[0][1], selectDays[0][2]);
@@ -921,6 +961,7 @@ function prevMonthGre(type) {
 }
 
 function nowCalendar() {
+    calendarIsOpen = true;
 
     if (checkOpen) {
         text = '';
@@ -985,7 +1026,8 @@ function nowCalendar() {
         else
             getCalendar(selectDays[1][0], selectDays[1][1], 'back');
 
-        document.getElementById('container1').style.display = 'block';
+        document.getElementById('calendarModal').style.display = 'flex';
+        // document.getElementById('container1').style.display = 'block';
 
         //********************************************************************************************************************************************************
         //********************************************************************************************************************************************************
@@ -1069,8 +1111,10 @@ function nowCalendar() {
             getGregorianCalendar(selectDays[1][0], selectDays[1][1], 'back');
         checkOpen = false;
     }
-    else
-        document.getElementById('container1').style.display = 'block';
+    else {
+        document.getElementById('calendarModal').style.display = 'flex';
+        // document.getElementById('container1').style.display = 'block';
+    }
 }
 
 function getNewMonth(m, type) {
@@ -1162,7 +1206,9 @@ function prevMonth(type) {
 }
 
 function closeCalender() {
-    document.getElementById('container1').style.display = 'none';
+    calendarIsOpen = false;
+    // document.getElementById('container1').style.display = 'none';
+    document.getElementById('calendarModal').style.display = 'none';
 }
 
 
@@ -1198,6 +1244,7 @@ function fillSelect(select, type, kind) {
 }
 
 function fillSelectGre(select, type, kind) {
+
     var nowM = parseInt(select[0]);
     var nowY = parseInt(select[1]);
     var text = '';
@@ -1228,3 +1275,12 @@ function fillSelectGre(select, type, kind) {
     document.getElementById('select_month_gre_' + type).innerHTML = text;
 }
 
+$(window).on('click', function (e) {
+    if(calendarIsOpen) {
+        var target = $(e.target), article;
+
+        if (target.is('#calendarModal')) {
+            closeCalender();
+        }
+    }
+});

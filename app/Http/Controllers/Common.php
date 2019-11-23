@@ -511,6 +511,42 @@ function upload($target_file, $name, $section) {
     return "";
 }
 
+function uploadCheckArray($target_file, $name, $section, $limitSize, $ext, $index) {
+    $err = "";
+    $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+
+    $check = getimagesize($_FILES[$name]["tmp_name"][$index]);
+    $uploadOk = 1;
+
+    if($check === false) {
+        $err .= "فایل ارسالی در قسمت " . $section . " معتبر نمی باشد" .  "<br />";
+        $uploadOk = 0;
+    }
+
+
+    if ($uploadOk == 1 && $_FILES[$name]["size"][$index] > $limitSize) {
+        $limitSize /= 1000000;
+        $limitSize .= "MB";
+        $err .=  "حداکثر حجم مجاز برای بارگذاری تصویر " .  " <span>" . $limitSize . " </span>" . "می باشد" . "<br />";
+    }
+
+    $imageFileType = strtolower($imageFileType);
+
+    if($ext != -1 && $imageFileType != $ext)
+        $err .= "شما تنها فایل های $ext. را می توانید در این قسمت آپلود نمایید" . "<br />";
+    return $err;
+}
+function uploadArray($target_file, $name, $section, $index) {
+
+    try {
+        move_uploaded_file($_FILES[$name]["tmp_name"][$index], $target_file);
+    }
+    catch (Exception $x) {
+        return "اشکالی در آپلود تصویر در قسمت " . $section . " به وجود آمده است" . "<br />";
+    }
+    return "";
+}
+
 function formatDate($date) {
     return $date[0] . $date[1] . $date[2] . $date[3] . '/'
     . $date[4] . $date[5] . '/' . $date[6] . $date[7];
@@ -650,4 +686,17 @@ function sendEmail($text, $subject, $to){
         echo 'nok';
         dd($e);
     }
+}
+
+function convertNumber($kind , $number){
+
+    $en = array("0","1","2","3","4","5","6","7","8","9");
+    $fa = array("۰","۱","۲","۳","۴","۵","۶","۷","۸","۹");
+
+    if($kind == 'en')
+        $number = str_replace($fa, $en, $number);
+    else
+        $number = str_replace($en, $fa, $number);
+
+    return $number;
 }

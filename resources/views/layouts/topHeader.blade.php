@@ -14,9 +14,11 @@
 <meta name="viewport" content="width=device-width"/>
 <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
 
+<script src="{{URL::asset('js/angular.js')}}"></script>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+{{--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">--}}
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/topHeaderStyles.css')}}' />
+<link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/bootstrap.min.css')}}' />
 
 <script type="text/javascript">
     $.ajaxSetup({

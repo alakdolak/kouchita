@@ -1,11 +1,12 @@
 <?php $placeMode = "ticket";
 $state = "تهران";
 $kindPlaceId = 10; ?>
-        <!DOCTYPE html>
+
+<!DOCTYPE html>
 <html>
 <head>
     @include('layouts.topHeader')
-    @include('layouts.phonePopUp')
+    {{--@include('layouts.phonePopUp')--}}
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/home_rebranded.css?v=4')}}"/>
@@ -19,8 +20,17 @@ $kindPlaceId = 10; ?>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/passStyle.css?v=1')}}'/>
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/shazdeDesigns/tourCreation.css')}}"/>
 
-    <script src= {{URL::asset("js/calendar.js") }}></script>
-    <script src= {{URL::asset("js/jalali.js") }}></script>
+    <style>
+        .uploadImgCenter{
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            flex-direction: column;
+            align-items: center;
+        }
+    </style>
+
 </head>
 
 <body id="BODY_BLOCK_JQUERY_REFLOW"
@@ -50,14 +60,18 @@ $kindPlaceId = 10; ?>
                     <div class="tourCreationStepInfo">
                         <span>
                             گام
-                            <span>--</span>
+                            <span>5</span>
                             از
-                            <span>--</span>
+                            <span>6</span>
                         </span>
                         <span>
                             آخرین ویرایش
-                            <span>تاریخ</span>
-                            <span>ساعت</span>
+                            <span>
+                                {{$tour->lastUpdate}}
+                            </span>
+                            <span>
+                                {{$tour->lastUpdateTime}}
+                            </span>
                         </span>
                     </div>
                 </div>
@@ -66,7 +80,10 @@ $kindPlaceId = 10; ?>
     </div>
 
     <div id="tourDetailsMainForm6thStepMainDiv" class="Hotel_Review prodp13n_jfy_overflow_visible lightGreyBox">
-        <form method="" action="">
+        <form method="post" action="{{route('tour.create.stage.five.store')}}" enctype="multipart/form-data">
+            {!! csrf_field() !!}
+            <input type="hidden" name="tourId" value="{{$tour->id}}">
+
             <div class="ui_container">
                 <div class="menu ui_container whiteBox whiteBoxSpecificInfo">
                     <div class="boxTitlesTourCreation">
@@ -76,7 +93,7 @@ $kindPlaceId = 10; ?>
                         در کمتر از 100 کلمه تور خود را به طور کلی توصیف کنید
                     </div>
                     <div class="inputBox fullwidthDiv height-150">
-                        <textarea class="inputBoxInput fullwidthDiv text-align-right full-height" type="text" placeholder="متن خود را وارد کنید"></textarea>
+                        <textarea class="inputBoxInput fullwidthDiv text-align-right full-height" name="mainDescription" placeholder="متن خود را وارد کنید"></textarea>
                     </div>
                 </div>
             </div>
@@ -89,16 +106,16 @@ $kindPlaceId = 10; ?>
                         حداکثر چهار نکته را به عنوان نکات کلیدی و مزیت اصلی تور خود بیان کنید.
                     </div>
                     <div class="inputBox fullwidthDiv height-50 mg-5-0">
-                        <textarea class="inputBoxInput fullwidthDiv text-align-right full-height line-height-3" type="text" placeholder="نکته‌ی اول - حداکثر 30 کلمه"></textarea>
+                        <textarea class="inputBoxInput fullwidthDiv text-align-right full-height line-height-3" name="sideDescription[]" type="text" placeholder="نکته‌ی اول - حداکثر 30 کلمه"></textarea>
                     </div>
                     <div class="inputBox fullwidthDiv height-50 mg-5-0">
-                        <textarea class="inputBoxInput fullwidthDiv text-align-right full-height line-height-3" type="text" placeholder="نکته‌ی دوم - حداکثر 30 کلمه"></textarea>
+                        <textarea class="inputBoxInput fullwidthDiv text-align-right full-height line-height-3" name="sideDescription[]" type="text" placeholder="نکته‌ی دوم - حداکثر 30 کلمه"></textarea>
                     </div>
                     <div class="inputBox fullwidthDiv height-50 mg-5-0">
-                        <textarea class="inputBoxInput fullwidthDiv text-align-right full-height line-height-3" type="text" placeholder="نکته‌ی سوم - حداکثر 30 کلمه"></textarea>
+                        <textarea class="inputBoxInput fullwidthDiv text-align-right full-height line-height-3" name="sideDescription[]" type="text" placeholder="نکته‌ی سوم - حداکثر 30 کلمه"></textarea>
                     </div>
                     <div class="inputBox fullwidthDiv height-50 mg-5-0">
-                        <textarea class="inputBoxInput fullwidthDiv text-align-right full-height line-height-3" type="text" placeholder="نکته‌ی چهارم - حداکثر 30 کلمه"></textarea>
+                        <textarea class="inputBoxInput fullwidthDiv text-align-right full-height line-height-3" name="sideDescription[]" type="text" placeholder="نکته‌ی چهارم - حداکثر 30 کلمه"></textarea>
                     </div>
                 </div>
             </div>
@@ -111,7 +128,7 @@ $kindPlaceId = 10; ?>
                         به صورت کاملاً شفاف به مشتریان‌تان بگویید از توز شما چه انتظاری داشته باشند و با چه چیزی روبرو می‌شوند - حداکثر 50 کلمه
                     </div>
                     <div class="inputBox fullwidthDiv height-150">
-                        <textarea class="inputBoxInput fullwidthDiv text-align-right full-height" type="text" placeholder="متن خود را وارد کنید"></textarea>
+                        <textarea class="inputBoxInput fullwidthDiv text-align-right full-height" name="textExpectation" placeholder="متن خود را وارد کنید"></textarea>
                     </div>
                 </div>
             </div>
@@ -124,7 +141,7 @@ $kindPlaceId = 10; ?>
                         هر نوع اطلاعاتی که مختص تور شماست و دوست دارید مشتریان‌تان آن را بدانند در حداکثر 150 کلمه وارد نمایید
                     </div>
                     <div class="inputBox fullwidthDiv height-150">
-                        <textarea class="inputBoxInput fullwidthDiv text-align-right full-height" type="text" placeholder="متن خود را وارد کنید"></textarea>
+                        <textarea class="inputBoxInput fullwidthDiv text-align-right full-height" name="specialInformation" placeholder="متن خود را وارد کنید"></textarea>
                     </div>
                 </div>
             </div>
@@ -137,7 +154,7 @@ $kindPlaceId = 10; ?>
                         هرنوع پیشنهاد، پیش‌نیاز، درخواست و یا مطلب اضافه‌ای که در صورت رعایت از سوی مشتران شما می‌تواندتضمین‌کننده‌ی تجربه‌ی بهتری باشد را وارد نمایید
                     </div>
                     <div class="inputBox fullwidthDiv height-150">
-                        <textarea class="inputBoxInput fullwidthDiv text-align-right full-height" type="text" placeholder="متن خود را وارد کنید"></textarea>
+                        <textarea class="inputBoxInput fullwidthDiv text-align-right full-height" name="opinion" placeholder="متن خود را وارد کنید"></textarea>
                     </div>
                 </div>
             </div>
@@ -150,7 +167,7 @@ $kindPlaceId = 10; ?>
                         هر نوع محدودیت که مشتریان شما در طول تور با ان مواجه می‌شوند و مجبور به رعایت آن می‌باشند را وارد نمایید
                     </div>
                     <div class="inputBox fullwidthDiv height-150">
-                        <textarea class="inputBoxInput fullwidthDiv text-align-right full-height" type="text" placeholder="متن خود را وارد کنید"></textarea>
+                        <textarea class="inputBoxInput fullwidthDiv text-align-right full-height" name="tourLimit" placeholder="متن خود را وارد کنید"></textarea>
                     </div>
                 </div>
             </div>
@@ -168,124 +185,21 @@ $kindPlaceId = 10; ?>
                     <div class="panel-group" id="accordion">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">خودرو شخصی</a>
-                                </h4>
-                                <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">غذا</a>
-                                </h4>
-                                <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">لوازم</a>
-                                </h4>
-                                <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">تجهیزات الکترونیکی</a>
-                                </h4>
-                                <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">کودک</a>
-                                </h4>
-                                <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse6">کمک های اولیه</a>
-                                </h4>
-                                <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse7">مدارک</a>
-                                </h4>
-                                <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse8">کمپ</a>
-                                </h4>
-                                <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse9">گرما</a>
-                                </h4>
-                                <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse10">سرما</a>
-                                </h4>
+                                @for($i = 0; $i < count($mainEquipment); $i++)
+                                    <h4 class="panel-title">
+                                        <a id="mainEquipment{{$mainEquipment[$i]->id}}" class="{{$i == 0 ? 'selectTag' : ''}}" onclick="changeEquipment({{$mainEquipment[$i]->id}})" style="cursor: pointer">{{$mainEquipment[$i]->name}}</a>
+                                    </h4>
+                                @endfor
                             </div>
-                            <div id="collapse1" class="panel-collapse collapse in">
-                                <div class="panel-body">
-                                    <div class="draghere">جعبه ی آچار</div>
-                                    <div class="draghere">تسمه ی دینام</div>
-                                    <div class="draghere">لاستیک زاپاس</div>
-                                    <div class="draghere">جک و آچار چرخ</div>
-                                    <div class="draghere">پمپ باد</div>
-                                    <div class="draghere">کپسول اطفای حریق</div>
+                            @for($i = 0; $i < count($mainEquipment); $i++)
+                                <div id="equipment{{$mainEquipment[$i]->id}}" class="panel-collapse collapse in" style="display: {{$i == 0 ? 'inline-block' : 'none' }}">
+                                    <div class="panel-body">
+                                        @foreach($mainEquipment[$i]->side as $item2)
+                                            <div class="draghere">{{$item2->name}}</div>
+                                        @endforeach
+                                    </div>
                                 </div>
-                            </div>
-                            <div id="collapse2" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <div class="draghere">جعبه ی آچار</div>
-                                    <div class="draghere">لاستیک زاپاس</div>
-                                    <div class="draghere">جک و آچار چرخ</div>
-                                    <div class="draghere">پمپ باد</div>
-                                    <div class="draghere">گپسول اطفای حریق</div>
-                                </div>
-                            </div>
-                            <div id="collapse3" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <div class="draghere">جعبه ی آچار</div>
-                                    <div class="draghere">تسمه ی دینام</div>
-                                    <div class="draghere">جک و آچار چرخ</div>
-                                    <div class="draghere">پمپ باد</div>
-                                    <div class="draghere">گپسول اطفای حریق</div>
-                                </div>
-                            </div>
-                            <div id="collapse4" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <div class="draghere">جعبه ی آچار</div>
-                                    <div class="draghere">تسمه ی دینام</div>
-                                    <div class="draghere">لاستیک زاپاس</div>
-                                    <div class="draghere">پمپ باد</div>
-                                    <div class="draghere">گپسول اطفای حریق</div>
-                                </div>
-                            </div>
-                            <div id="collapse5" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <div class="draghere">جعبه ی آچار</div>
-                                    <div class="draghere">تسمه ی دینام</div>
-                                    <div class="draghere">لاستیک زاپاس</div>
-                                    <div class="draghere">جک و آچار چرخ</div>
-                                    <div class="draghere">گپسول اطفای حریق</div>
-                                </div>
-                            </div>
-                            <div id="collapse6" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <div class="draghere">جعبه ی آچار</div>
-                                    <div class="draghere">تسمه ی دینام</div>
-                                    <div class="draghere">لاستیک زاپاس</div>
-                                    <div class="draghere">جک و آچار چرخ</div>
-                                    <div class="draghere">پمپ باد</div>
-                                </div>
-                            </div>
-                            <div id="collapse7" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <div>تسمه ی دینام</div>
-                                    <div>لاستیک زاپاس</div>
-                                    <div>جک و آچار چرخ</div>
-                                    <div>پمپ باد</div>
-                                    <div>گپسول اطفای حریق</div>
-                                </div>
-                            </div>
-                            <div id="collapse8" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <div>لاستیک زاپاس</div>
-                                    <div>جک و آچار چرخ</div>
-                                    <div>پمپ باد</div>
-                                    <div>گپسول اطفای حریق</div>
-                                </div>
-                            </div>
-                            <div id="collapse9" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <div>جعبه ی آچار</div>
-                                    <div>تسمه ی دینام</div>
-                                    <div>لاستیک زاپاس</div>
-                                </div>
-                            </div>
-                            <div id="collapse10" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <div>جعبه ی آچار</div>
-                                    <div>تسمه ی دینام</div>
-                                    <div>پمپ باد</div>
-                                    <div>گپسول اطفای حریق</div>
-                                </div>
-                            </div>
+                            @endfor
                         </div>
                     </div>
                     <div id="essentialItemsTourCreation" class="tourEquipmentItemsTourCreation">
@@ -317,25 +231,28 @@ $kindPlaceId = 10; ?>
                     <div class="inboxHelpSubtitle">
                         اگر از تورهای پیشین خود با همین موضوع عکسی دارید حتماً آن را با مشتریان خود به اشتراک بگذارید
                     </div>
-                    <div class="fullwidthDiv">
-                        <div class="imgUploadsTourCreation">
-                            <img src="{{"images/estelahat.jpg"}}">
-                            <button class="deleteBtnImgTourCreation">
-                                <img src="{{"images/tourCreation/delete.png"}}">
-                            </button>
+                    <div id="uploadImgDiv" class="fullwidthDiv">
+
+                        <div id="picDiv0" style="display: inline-block; width: 23%">
+                            <input class="input-file" id="pics0" name="pics[]" type="file" onchange="readURL(this, 0);" style="display: none">
+                            <label tabindex="0" for="pics0" class="input-file-trigger" style="position: relative; width: 100%;">
+                                <center class="imgUploadsTourCreation imgAddDivTourCreation uploadImgCenter" >
+                                    <div id="addPic0" style="width: 100%">
+                                        <div class="fullwidthDiv">
+                                            <img src="{{URL::asset('images/tourCreation/add.png')}}">
+                                        </div>
+                                        <b>اضافه کنید</b>
+                                    </div>
+                                    <div id="showPic0" class="imgUploadsTourCreation" style="width: 100%; display: none;">
+                                        <img id="imgPic0" src="#">
+                                        <button type="button" class="deleteBtnImgTourCreation" onclick="deletePicFunc(0)">
+                                            <img src="{{URL::asset("images/tourCreation/delete.png")}}">
+                                        </button>
+                                    </div>
+                                </center>
+                            </label>
                         </div>
-                        <div class="imgUploadsTourCreation">
-                            <img src="{{"images/estelahat.jpg"}}">
-                            <button class="deleteBtnImgTourCreation">
-                                <img src="{{"images/tourCreation/delete.png"}}">
-                            </button>
-                        </div>
-                        <center class="imgUploadsTourCreation imgAddDivTourCreation">
-                            <div class="fullwidthDiv">
-                                <img src="{{"images/tourCreation/add.png"}}">
-                            </div>
-                            <b>اضافه کنید</b>
-                        </center>
+
                     </div>
                 </div>
             </div>
@@ -351,112 +268,187 @@ $kindPlaceId = 10; ?>
                         <span>آیا تور شما دارای کنسلی می‌باشد؟</span>
                         <div class="btn-group btn-group-toggle" data-toggle="buttons">
                             <label class="btn btn-secondary">
-                                <input type="radio" name="options" id="option1" autocomplete="off">خیر
+                                <input type="radio" name="isCancelAbel" value="0" onchange="changeCancelAble(this.value)">خیر
                             </label>
                             <label class="btn btn-secondary active">
-                                <input type="radio" name="options" id="option2" autocomplete="off" checked>بلی
+                                <input type="radio" name="isCancelAbel" value="1" onchange="changeCancelAble(this.value)" checked>بلی
                             </label>
                         </div>
                     </div>
-                    <div class="inboxHelpSubtitle">
-                        در این صورت یا شرایط آن را توضیح دهید و یا از ساختار پیش‌فرض استفاده نمایید و اگر ترجیح می‌دهید از هر دو.
-                    </div>
-                    <div class="inputBox cancellingSituationTourCreation height-250">
-                        <textarea class="inputBoxInput fullwidthDiv text-align-right full-height" type="text" placeholder="متن خود را وارد کنید"></textarea>
-                    </div>
-                    <div class="cancellingSituationTourCreation optionalCancellingTourCreation">
-                        <b class="fullwidthDiv mg-bt-5">عودت تمام هزینه</b>
-                        <span class="mg-lt-6">کنسل نمودن قبل از</span>
-                        <div class="inputBox deadlineText">
-                            <input class="inputBoxInput" type="text" placeholder="عدد">
+                    <div id="cancelDiv">
+                        <div class="inboxHelpSubtitle">
+                            در این صورت یا شرایط آن را توضیح دهید و یا از ساختار پیش‌فرض استفاده نمایید و اگر ترجیح می‌دهید از هر دو.
                         </div>
-                        <div class="btn-group btn-group-toggle mg-lt-6" data-toggle="buttons">
-                            <label class="btn btn-secondary">
-                                <input type="radio" name="options" id="option1" autocomplete="off">ساعت
-                            </label>
-                            <label class="btn btn-secondary active">
-                                <input type="radio" name="options" id="option2" autocomplete="off" checked>روز
-                            </label>
+                        <div class="inputBox cancellingSituationTourCreation height-250">
+                            <textarea class="inputBoxInput fullwidthDiv text-align-right full-height" name="cancelDescription" placeholder="متن خود را وارد کنید"></textarea>
                         </div>
-                        <span>مانده به شروع تور</span>
-                    </div>
-                    <div class="cancellingSituationTourCreation optionalCancellingTourCreation relative-position">
-                        <div class="fullwidthDiv mg-bt-5">
-                            <b class="inline-block">عودت بخشی از هزینه</b>
-                            <span class="inline-block addingCancellingOption">در صورت نیاز اضافه کنید</span>
-                        </div>
-                        <span class="mg-lt-6">کنسل نمودن قبل از</span>
-                        <div class="inputBox deadlineText">
-                            <input class="inputBoxInput" type="text" placeholder="عدد">
-                        </div>
-                        <div class="btn-group btn-group-toggle mg-lt-6 mg-rt-6" data-toggle="buttons">
-                            <label class="btn btn-secondary">
-                                <input type="radio" name="options" id="option1" autocomplete="off">ساعت
-                            </label>
-                            <label class="btn btn-secondary active">
-                                <input type="radio" name="options" id="option2" autocomplete="off" checked>روز
-                            </label>
-                        </div>
-                        <span class="mg-lt-6">مانده به شروع تور</span>
-                        <div class="inputBox deadlineText width-50">
-                            <input class="inputBoxInput" type="text" placeholder="جریمه %">
-                        </div>
-                        <span class="glyphicon glyphicon-plus addOrRemoveCancellingOption"></span>
-                        <span class="glyphicon glyphicon-minus addOrRemoveCancellingOption"></span>
-                    </div>
-                    <div class="cancellingSituationTourCreation optionalCancellingTourCreation mg-tp-30">
-                        <div class="fullwidthDiv mg-bt-5">
-                            <b class="inline-block">عدم عودت پول</b>
-                            <span class="inline-block addingCancellingOption">یک یا چند گزینه</span>
-                        </div>
-                        <div class="fullwidthDiv">
-                            <input ng-model="sort" type="checkbox" id="c01" value="rate"/>
-                            <label for="c01">
-                                <span></span>
-                            </label>
-                            <span id="">
-                                پس از تهیه ی بلیط سفر
-                            </span>
-                        </div>
-                        <div class="fullwidthDiv">
-                            <input ng-model="sort" type="checkbox" id="c61" value="rate"/>
-                            <label for="c61">
-                                <span></span>
-                            </label>
-                            <span id="">
-                                پس از اخذ ویزا
-                            </span>
-                        </div>
-                        <div class="fullwidthDiv">
-                            <input ng-model="sort" type="checkbox" id="c71" value="rate"/>
-                            <label for="c71" class="float-right">
-                                <span></span>
-                            </label>
-                            <span class="mg-lt-6 float-right">کنسل نمودن قبل از</span>
-                            <div class="inputBox deadlineText float-right">
-                                <input class="inputBoxInput" type="text" placeholder="عدد">
-                            </div>
-                            <div class="btn-group btn-group-toggle mg-lt-6 mg-rt-6" data-toggle="buttons">
-                                <label class="btn btn-secondary">
-                                    <input type="radio" name="options" id="option1" autocomplete="off">ساعت
-                                </label>
-                                <label class="btn btn-secondary active">
-                                    <input type="radio" name="options" id="option2" autocomplete="off" checked>روز
-                                </label>
-                            </div>
-                            <span class="mg-lt-6">مانده به شروع تور</span>
-                        </div>
+
+                        {{--<div class="cancellingSituationTourCreation optionalCancellingTourCreation">--}}
+                            {{--<b class="fullwidthDiv mg-bt-5">عودت تمام هزینه</b>--}}
+                            {{--<span class="mg-lt-6">کنسل نمودن قبل از</span>--}}
+                            {{--<div class="inputBox deadlineText">--}}
+                                {{--<input class="inputBoxInput" type="text" placeholder="عدد">--}}
+                            {{--</div>--}}
+                            {{--<div class="btn-group btn-group-toggle mg-lt-6" data-toggle="buttons">--}}
+                                {{--<label class="btn btn-secondary">--}}
+                                    {{--<input type="radio" name="options" id="option1" autocomplete="off">ساعت--}}
+                                {{--</label>--}}
+                                {{--<label class="btn btn-secondary active">--}}
+                                    {{--<input type="radio" name="options" id="option2" autocomplete="off" checked>روز--}}
+                                {{--</label>--}}
+                            {{--</div>--}}
+                            {{--<span>مانده به شروع تور</span>--}}
+                        {{--</div>--}}
+                        {{--<div class="cancellingSituationTourCreation optionalCancellingTourCreation relative-position">--}}
+                            {{--<div class="fullwidthDiv mg-bt-5">--}}
+                                {{--<b class="inline-block">عودت بخشی از هزینه</b>--}}
+                                {{--<span class="inline-block addingCancellingOption">در صورت نیاز اضافه کنید</span>--}}
+                            {{--</div>--}}
+                            {{--<span class="mg-lt-6">کنسل نمودن قبل از</span>--}}
+                            {{--<div class="inputBox deadlineText">--}}
+                                {{--<input class="inputBoxInput" type="text" placeholder="عدد">--}}
+                            {{--</div>--}}
+                            {{--<div class="btn-group btn-group-toggle mg-lt-6 mg-rt-6" data-toggle="buttons">--}}
+                                {{--<label class="btn btn-secondary">--}}
+                                    {{--<input type="radio" name="options" id="option1" autocomplete="off">ساعت--}}
+                                {{--</label>--}}
+                                {{--<label class="btn btn-secondary active">--}}
+                                    {{--<input type="radio" name="options" id="option2" autocomplete="off" checked>روز--}}
+                                {{--</label>--}}
+                            {{--</div>--}}
+                            {{--<span class="mg-lt-6">مانده به شروع تور</span>--}}
+                            {{--<div class="inputBox deadlineText width-50">--}}
+                                {{--<input class="inputBoxInput" type="text" placeholder="جریمه %">--}}
+                            {{--</div>--}}
+                            {{--<span class="glyphicon glyphicon-plus addOrRemoveCancellingOption"></span>--}}
+                            {{--<span class="glyphicon glyphicon-minus addOrRemoveCancellingOption"></span>--}}
+                        {{--</div>--}}
+                        {{--<div class="cancellingSituationTourCreation optionalCancellingTourCreation mg-tp-30">--}}
+                            {{--<div class="fullwidthDiv mg-bt-5">--}}
+                                {{--<b class="inline-block">عدم عودت پول</b>--}}
+                                {{--<span class="inline-block addingCancellingOption">یک یا چند گزینه</span>--}}
+                            {{--</div>--}}
+                            {{--<div class="fullwidthDiv">--}}
+                                {{--<input ng-model="sort" type="checkbox" id="c01" value="rate"/>--}}
+                                {{--<label for="c01">--}}
+                                    {{--<span></span>--}}
+                                {{--</label>--}}
+                                {{--<span id="">--}}
+                                {{--پس از تهیه ی بلیط سفر--}}
+                            {{--</span>--}}
+                            {{--</div>--}}
+                            {{--<div class="fullwidthDiv">--}}
+                                {{--<input ng-model="sort" type="checkbox" id="c61" value="rate"/>--}}
+                                {{--<label for="c61">--}}
+                                    {{--<span></span>--}}
+                                {{--</label>--}}
+                                {{--<span id="">--}}
+                                {{--پس از اخذ ویزا--}}
+                            {{--</span>--}}
+                            {{--</div>--}}
+                            {{--<div class="fullwidthDiv">--}}
+                                {{--<input ng-model="sort" type="checkbox" id="c71" value="rate"/>--}}
+                                {{--<label for="c71" class="float-right">--}}
+                                    {{--<span></span>--}}
+                                {{--</label>--}}
+                                {{--<span class="mg-lt-6 float-right">کنسل نمودن قبل از</span>--}}
+                                {{--<div class="inputBox deadlineText float-right">--}}
+                                    {{--<input class="inputBoxInput" type="text" placeholder="عدد">--}}
+                                {{--</div>--}}
+                                {{--<div class="btn-group btn-group-toggle mg-lt-6 mg-rt-6" data-toggle="buttons">--}}
+                                    {{--<label class="btn btn-secondary">--}}
+                                        {{--<input type="radio" name="options" id="option1" autocomplete="off">ساعت--}}
+                                    {{--</label>--}}
+                                    {{--<label class="btn btn-secondary active">--}}
+                                        {{--<input type="radio" name="options" id="option2" autocomplete="off" checked>روز--}}
+                                    {{--</label>--}}
+                                {{--</div>--}}
+                                {{--<span class="mg-lt-6">مانده به شروع تور</span>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+
                     </div>
                 </div>
             </div>
             <div class="ui_container">
-                <button id="goToSixthStep" class="btn nextStepBtnTourCreation">گام بعدی</button>
+                <button type="submit" id="goToSixthStep" class="btn nextStepBtnTourCreation">گام بعدی</button>
             </div>
         </form>
     </div>
 
     @include('layouts.placeFooter')
 </div>
+<script>
 
+    var lastEquipment = '{{$mainEquipment[0]->id}}';
+    var deletePic = "{{URL::asset('images/tourCreation/delete.png')}}";
+    var addPic = "{{URL::asset('images/tourCreation/add.png')}}";
+    var isCancelAbel = 1;
+    var picInput = 1;
+    var picStatus = [0];
+
+    function changeEquipment(_id){
+        document.getElementById('equipment' + lastEquipment).style.display = 'none';
+        document.getElementById('equipment' + _id).style.display = 'inline-block';
+
+        document.getElementById('mainEquipment' + lastEquipment).classList.remove('selectTag');
+        document.getElementById('mainEquipment' + _id).classList.add('selectTag');
+
+        lastEquipment = _id;
+    }
+
+    function changeCancelAble(_value){
+        isCancelAbel = _value;
+
+        if(isCancelAbel == 1)
+            document.getElementById('cancelDiv').style.display = 'block';
+        else
+            document.getElementById('cancelDiv').style.display = 'none';
+    }
+
+    function readURL(input, _index) {
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            var text = '<div id="picDiv' + picInput + '" style="display: inline-block; width: 23%"><input class="input-file" id="pics' + picInput + '" name="pics[]" type="file" onchange="readURL(this, ' + picInput + ');" style="display: none">\n' +
+                '                        <label tabindex="0" for="pics' + picInput + '" class="input-file-trigger" style="position: relative; width: 100%;">\n' +
+                '                            <center class="imgUploadsTourCreation imgAddDivTourCreation uploadImgCenter" >\n' +
+                '                                <div id="addPic' + picInput + '" style="width: 100%">\n' +
+                '                                    <div class="fullwidthDiv">\n' +
+                '                                        <img src="' + addPic + '">\n' +
+                '                                    </div>\n' +
+                '                                    <b>اضافه کنید</b>\n' +
+                '                                </div>\n' +
+                '                                <div id="showPic' + picInput + '" class="imgUploadsTourCreation" style="width: 100%; display: none;">\n' +
+                '                                    <img id="imgPic' + picInput + '" src="">\n' +
+                '                                    <button type="button" class="deleteBtnImgTourCreation" onclick="deletePicFunc(' + picInput + ')">\n' +
+                '                                        <img src="' + deletePic + '">\n' +
+                '                                    </button>\n' +
+                '                                </div>\n' +
+                '                            </center>\n' +
+                '                        </label></div>';
+
+            document.getElementById('addPic' + _index).style.display = 'none';
+            document.getElementById('showPic' + _index).style.display = 'block';
+
+            reader.onload = function (e) {
+                $('#imgPic' + _index)
+                    .attr('src', e.target.result);
+                if(picStatus[_index] == 0) {
+                    $('#uploadImgDiv').append(text);
+                    picStatus[_index] = 1;
+                    picStatus[picInput] = 0;
+                    picInput++;
+                }
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    function deletePicFunc(_index){
+        $('#picDiv' + _index).remove();
+    }
+</script>
 </body>
 </html>

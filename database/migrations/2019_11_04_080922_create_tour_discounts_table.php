@@ -17,8 +17,8 @@ class CreateTourDiscountsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('tourId');
             $table->integer('discount');
-            $table->tinyInteger('minCount')->nullable();
-            $table->tinyInteger('maxCount')->nullable();
+            $table->integer('minCount')->nullable();
+            $table->integer('maxCount')->nullable();
             $table->boolean('isChildren')->nullable();
             $table->boolean('isReason')->nullable();
             $table->string('sReasonDate')->nullable();

@@ -4,8 +4,8 @@ namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class TourStyle_Tour extends Model
+class MahaliFood_Pic extends Model
 {
-    protected $table = 'tourstyle_tour';
+    protected $table = 'mahaliFoodPics';
     public $timestamps = false;
 }

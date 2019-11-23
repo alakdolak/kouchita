@@ -13,7 +13,7 @@ class CreateTourStyleToursTable extends Migration
      */
     public function up()
     {
-        Schema::create('tourstyle_id', function (Blueprint $table) {
+        Schema::create('tourstyle_tour', function (Blueprint $table) {
             $table->unsignedInteger('tourId');
             $table->unsignedInteger('styleId');
 
@@ -29,6 +29,6 @@ class CreateTourStyleToursTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tourstyle_id');
+        Schema::dropIfExists('tourstyle_tour');
     }
 }

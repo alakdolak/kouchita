@@ -1,6 +1,7 @@
 <?php $placeMode = "ticket";
 $state = "تهران";
 $kindPlaceId = 10; ?>
+
         <!DOCTYPE html>
 <html>
 <head>
@@ -19,9 +20,6 @@ $kindPlaceId = 10; ?>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/icons.css?v=1')}}'/>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/passStyle.css?v=1')}}'/>
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/shazdeDesigns/tourCreation.css')}}"/>
-
-    <script src= {{URL::asset("js/calendar.js") }}></script>
-    <script src= {{URL::asset("js/jalali.js") }}></script>
 </head>
 
 <body id="BODY_BLOCK_JQUERY_REFLOW"

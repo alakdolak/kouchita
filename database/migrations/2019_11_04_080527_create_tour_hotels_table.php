@@ -19,6 +19,7 @@ class CreateTourHotelsTable extends Migration
             $table->unsignedInteger('hotelId');
             $table->string('roomKind');
             $table->integer('cost');
+            $table->string('sameGroup', 2);
 
             $table->foreign('tourId')->references('id')->on('tour')->onUpdate('cascade')->onDelete('Cascade');
             $table->foreign('hotelId')->references('id')->on('hotels')->onUpdate('cascade')->onDelete('Cascade');

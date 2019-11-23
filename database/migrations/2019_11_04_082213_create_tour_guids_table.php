@@ -18,6 +18,7 @@ class CreateTourGuidsTable extends Migration
             $table->unsignedInteger('tourId');
             $table->string('firstName')->nullable();
             $table->string('lastName')->nullable();
+            $table->boolean('sex');
 
             $table->foreign('tourId')->references('id')->on('tour')->onUpdate('cascade')->onDelete('Cascade');
         });

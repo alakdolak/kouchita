@@ -16,6 +16,8 @@ class CreateTransportToursTable extends Migration
         Schema::create('transporttours', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('tourId');
+            $table->unsignedInteger('sTransportId');
+            $table->unsignedInteger('eTransportId');
             $table->string('sTime', 30);
             $table->string('eTime', 30);
             $table->string('sDescription');
