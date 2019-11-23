@@ -1,12 +1,12 @@
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-109915445-1"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+{{--<script async src="https://www.googletagmanager.com/gtag/js?id=UA-109915445-1"></script>--}}
+{{--<script>--}}
+{{--    window.dataLayer = window.dataLayer || [];--}}
+{{--    function gtag(){dataLayer.push(arguments);}--}}
+{{--    gtag('js', new Date());--}}
 
-    gtag('config', 'UA-109915445-1');
-</script>
+{{--    gtag('config', 'UA-109915445-1');--}}
+{{--</script>--}}
 
 <link rel="icon" href="{{URL::asset('images/fav.png')}}" type="image/png"/>
 <script src="{{URL::asset('js/jQuery.js')}}"></script>
@@ -15,8 +15,10 @@
 <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
 
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+{{--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">--}}
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/topHeaderStyles.css')}}' />
+<link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/bootstrap.min.css')}}' />
+<script src="{{URL::asset('js/angular.min.js')}}"></script>
 
 <script type="text/javascript">
     $.ajaxSetup({

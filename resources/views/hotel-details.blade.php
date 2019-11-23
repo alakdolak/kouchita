@@ -6,7 +6,7 @@ if ($total == 0)
     $total = 1;
 ?>
 @section('title')
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+{{--    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>--}}
     <link rel="stylesheet" href="{{URL::asset('css/theme2/media_uploader.css')}}">
     <script async src="{{URL::asset("js/bootstrap-datepicker.js")}}"></script>
     <link rel="stylesheet" href="{{URL::asset('css/theme2/bootstrap-datepicker.css?v=1')}}">
@@ -60,7 +60,9 @@ if ($total == 0)
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/popUp.css?v=1')}}">
     <link rel="stylesheet" href="{{URL::asset('css/theme2/help.css?v=1')}}">
     <link rel="stylesheet" href="{{URL::asset('css/theme2/cropper.css')}}">
-    <link rel="stylesheet" href="{{URL::asset('css/theme2/hotelDetail.css')}}">
+    <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/hotelDetail.css')}}">
+    <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/abbreviations.css')}}">
+
 
     {{--vr--}}
 
@@ -92,13 +94,13 @@ if ($total == 0)
         <div class="alarmHeaderText"> آیا می خواهید کمترین قیمت ها را به شما اطلاع دهیم </div>
         <div class="alarmSubHeaderText"> هنگامی که قیمت پرواز های </div>
         <div class="ui_column ui_picker alarmBoxCityName">
-            <div class="shTIcon locationIcon inline-block"></div>
+            <div class="shTIcon locationIcon display-inline-block"></div>
             <input id="fromWarning" class="alarmInputCityName" placeholder="شهر مبدأ">
             <div id="resultSrc" class="data_holder"></div>
         </div>
         <div class="alarmSubHeaderText"> به </div>
         <div class="ui_column ui_picker alarmBoxCityName">
-            <div class="shTIcon locationIcon inline-block"></div>
+            <div class="shTIcon locationIcon display-inline-block"></div>
             <input id="toWarning" class="alarmInputCityName" placeholder="شهر مقصد">
             <div id="resultDest" class="data_holder"></div>
         </div>
@@ -122,156 +124,177 @@ if ($total == 0)
              data-placement-name="global_nav_onpage_assets">
             <div class="ui_container">
                 <div class="ui_columns easyClear">
-                    <div class="ui_column rtl relative-position">
-                        @include('layouts.shareBox')
-                        <div ID="taplc_trip_planner_breadcrumbs_0" class="ppr_rup ppr_priv_trip_planner_breadcrumbs">
-                            <ul class="breadcrumbs">
-                                @if($placeMode == "hotel")
-                                    <li class="breadcrumb" itemscope>
-                                        <a class="link" {{($config->backToHotelListNoFollow) ? 'rel="nofollow"' : ''}}
-                                           href="{{route('hotelList', ['city' => $state->name, 'mode' => 'state'])}}"
-                                           itemprop="url">
-                                            <span itemprop="title">{{$state->name}}</span>
-                                        </a>&nbsp
-                                        <span class="ui_icon single-chevron-left"></span>&nbsp;
-                                    </li>
-                                    <li class="breadcrumb" itemscope>
-                                        <a class="link" {{($config->backToHotelListNoFollow) ? 'rel="nofollow"' : ''}}
-                                           href="{{route('hotelList', ['city' => $city->name, 'mode' => 'city'])}}"
-                                           itemprop="url">
-                                            <span itemprop="title">{{$city->name}}</span>
-                                        </a>&nbsp;
-                                        <span class="ui_icon single-chevron-left"></span>&nbsp;
-                                    </li>
-                                    @if(Auth::check() && Auth::user()->level != 0)
-                                        <li class="breadcrumb" itemscope>
-                                            <a class="link" target="_blank" {{($config->panelNoFollow) ? 'rel="nofollow"' : ''}}
-                                               href="http://panel.baligh.ir/changeAlt/{{$place->id}}/4"
-                                               itemprop="url">
-                                                <span itemprop="title">مدیریت alt ها و تصاویر</span>
-                                            </a>&nbsp;
-                                            <span class="ui_icon single-chevron-left"></span>&nbsp;
-                                        </li>
-                                        <li class="breadcrumb" itemscope>
-                                            <a class="link" target="_blank" {{($config->panelNoFollow) ? 'rel="nofollow"' : ''}}
-                                               href="http://panel.baligh.ir/changeContent/{{$city->id}}/4/1/{{$place->name}}"
-                                               itemprop="url">
-                                                <span itemprop="title">مدیریت محتوا</span>
-                                            </a>&nbsp;
-                                            <span class="ui_icon single-chevron-left"></span>&nbsp;
-                                        </li>
-                                        <li class="breadcrumb" itemscope>
-                                            <a class="link" target="_blank" {{($config->panelNoFollow) ? 'rel="nofollow"' : ''}}
-                                               href="http://panel.baligh.ir/changeSeo/{{$city->id}}/1/{{$place->name}}/4"
-                                               itemprop="url">
-                                                <span itemprop="title">مدیریت سئو</span>
-                                            </a>&nbsp;
-                                            <span class="ui_icon single-chevron-left"></span>&nbsp;
-                                        </li>
-                                    @endif
-                                @elseif($placeMode == "amaken")
-                                    <li class="breadcrumb" itemscope>
-                                        <a class="link" {{($config->backToHotelListNoFollow) ? 'rel="nofollow"' : ''}}
-                                           href="{{route('amakenList', ['city' => $state->name, 'mode' => 'state'])}}"
-                                           itemprop="url">
-                                            <span itemprop="title">{{$state->name}}</span>
-                                        </a>&nbsp;
-                                        <span class="ui_icon single-chevron-left"></span>&nbsp;
-                                    </li>
-                                    <li class="breadcrumb" itemscope>
-                                        <a class="link" {{($config->backToHotelListNoFollow) ? 'rel="nofollow"' : ''}}
-                                           href="{{route('amakenList', ['city' => $city->name, 'mode' => 'city'])}}"
-                                           itemprop="url">
-                                            <span itemprop="title">{{$city->name}}</span>
-                                        </a>&nbsp;
-                                        <span class="ui_icon single-chevron-left"></span>&nbsp;
-                                    </li>
-                                    @if(Auth::check() && Auth::user()->level != 0)
+                    <div class="ui_column direction-rtl position-relative">
+                        <center ID="taplc_trip_planner_breadcrumbs_0" class="ppr_rup ppr_priv_trip_planner_breadcrumbs">
+                            <div id="searchBoxTopPageMainDiv">
+                                <span>شما در</span>
+                                <div class="inputBox position-ralative">
+                                    <div class="select-side">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </div>
+                                    <select class="inputBoxInput styled-select text-align-right mg-lt-6" type="text" placeholder="">
+                                        <option>استان اصفهان</option>
+                                    </select>
+                                </div>
+                                <span>در</span>
+                                <div class="inputBox position-ralative">
+                                    <div class="select-side">
+                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                    </div>
+                                    <select class="inputBoxInput styled-select text-align-right mg-lt-6" type="text" placeholder="">
+                                        <option>شهر اصفهان</option>
+                                    </select>
+                                </div>
+                                <span class="mg-lt-15">هستید. تغییر دهید</span>
+                                <div id="searchIcon"></div>
+                            </div>
+{{--                            <ul class="breadcrumbs">--}}
+{{--                                @if($placeMode == "hotel")--}}
+{{--                                    <li class="breadcrumb" itemscope>--}}
+{{--                                        <a class="link" {{($config->backToHotelListNoFollow) ? 'rel="nofollow"' : ''}}--}}
+{{--                                           href="{{route('hotelList', ['city' => $state->name, 'mode' => 'state'])}}"--}}
+{{--                                           itemprop="url">--}}
+{{--                                            <span itemprop="title">{{$state->name}}</span>--}}
+{{--                                        </a>&nbsp--}}
+{{--                                        <span class="ui_icon single-chevron-left"></span>&nbsp;--}}
+{{--                                    </li>--}}
+{{--                                    <li class="breadcrumb" itemscope>--}}
+{{--                                        <a class="link" {{($config->backToHotelListNoFollow) ? 'rel="nofollow"' : ''}}--}}
+{{--                                           href="{{route('hotelList', ['city' => $city->name, 'mode' => 'city'])}}"--}}
+{{--                                           itemprop="url">--}}
+{{--                                            <span itemprop="title">{{$city->name}}</span>--}}
+{{--                                        </a>&nbsp;--}}
+{{--                                        <span class="ui_icon single-chevron-left"></span>&nbsp;--}}
+{{--                                    </li>--}}
+{{--                                    @if(Auth::check() && Auth::user()->level != 0)--}}
+{{--                                        <li class="breadcrumb" itemscope>--}}
+{{--                                            <a class="link" target="_blank" {{($config->panelNoFollow) ? 'rel="nofollow"' : ''}}--}}
+{{--                                               href="http://panel.baligh.ir/changeAlt/{{$place->id}}/4"--}}
+{{--                                               itemprop="url">--}}
+{{--                                                <span itemprop="title">مدیریت alt ها و تصاویر</span>--}}
+{{--                                            </a>&nbsp;--}}
+{{--                                            <span class="ui_icon single-chevron-left"></span>&nbsp;--}}
+{{--                                        </li>--}}
+{{--                                        <li class="breadcrumb" itemscope>--}}
+{{--                                            <a class="link" target="_blank" {{($config->panelNoFollow) ? 'rel="nofollow"' : ''}}--}}
+{{--                                               href="http://panel.baligh.ir/changeContent/{{$city->id}}/4/1/{{$place->name}}"--}}
+{{--                                               itemprop="url">--}}
+{{--                                                <span itemprop="title">مدیریت محتوا</span>--}}
+{{--                                            </a>&nbsp;--}}
+{{--                                            <span class="ui_icon single-chevron-left"></span>&nbsp;--}}
+{{--                                        </li>--}}
+{{--                                        <li class="breadcrumb" itemscope>--}}
+{{--                                            <a class="link" target="_blank" {{($config->panelNoFollow) ? 'rel="nofollow"' : ''}}--}}
+{{--                                               href="http://panel.baligh.ir/changeSeo/{{$city->id}}/1/{{$place->name}}/4"--}}
+{{--                                               itemprop="url">--}}
+{{--                                                <span itemprop="title">مدیریت سئو</span>--}}
+{{--                                            </a>&nbsp;--}}
+{{--                                            <span class="ui_icon single-chevron-left"></span>&nbsp;--}}
+{{--                                        </li>--}}
+{{--                                    @endif--}}
+{{--                                @elseif($placeMode == "amaken")--}}
+{{--                                    <li class="breadcrumb" itemscope>--}}
+{{--                                        <a class="link" {{($config->backToHotelListNoFollow) ? 'rel="nofollow"' : ''}}--}}
+{{--                                           href="{{route('amakenList', ['city' => $state->name, 'mode' => 'state'])}}"--}}
+{{--                                           itemprop="url">--}}
+{{--                                            <span itemprop="title">{{$state->name}}</span>--}}
+{{--                                        </a>&nbsp;--}}
+{{--                                        <span class="ui_icon single-chevron-left"></span>&nbsp;--}}
+{{--                                    </li>--}}
+{{--                                    <li class="breadcrumb" itemscope>--}}
+{{--                                        <a class="link" {{($config->backToHotelListNoFollow) ? 'rel="nofollow"' : ''}}--}}
+{{--                                           href="{{route('amakenList', ['city' => $city->name, 'mode' => 'city'])}}"--}}
+{{--                                           itemprop="url">--}}
+{{--                                            <span itemprop="title">{{$city->name}}</span>--}}
+{{--                                        </a>&nbsp;--}}
+{{--                                        <span class="ui_icon single-chevron-left"></span>&nbsp;--}}
+{{--                                    </li>--}}
+{{--                                    @if(Auth::check() && Auth::user()->level != 0)--}}
 
-                                        <li class="breadcrumb" itemscope>
-                                            <a class="link" target="_blank" {{($config->panelNoFollow) ? 'rel="nofollow"' : ''}}
-                                               href="http://panel.baligh.ir/changeAlt/{{$place->id}}/{{$kindPlaceId}}"
-                                               itemprop="url">
-                                                <span itemprop="title">مدیریت alt ها و تصاویر</span>
-                                            </a>&nbsp;
-                                            <span class="ui_icon single-chevron-left"></span>&nbsp;
-                                        </li>
-                                        <li class="breadcrumb" itemscope>
-                                            <a class="link" target="_blank" {{($config->panelNoFollow) ? 'rel="nofollow"' : ''}}
-                                               href="http://panel.baligh.ir/changeContent/{{$city->id}}/{{$kindPlaceId}}/1/{{$place->name}}"
-                                               itemprop="url">
-                                                <span itemprop="title">مدیریت محتوا</span>
-                                            </a>&nbsp;
-                                            <span class="ui_icon single-chevron-left"></span>&nbsp;
-                                        </li>
-                                        <li class="breadcrumb" itemscope>
-                                            <a class="link" target="_blank" {{($config->panelNoFollow) ? 'rel="nofollow"' : ''}}
-                                               href="http://panel.baligh.ir/changeSeo/{{$city->id}}/1/{{$place->name}}/{{$kindPlaceId}}"
-                                               itemprop="url">
-                                                <span itemprop="title">مدیریت سئو</span>
-                                            </a>&nbsp;
-                                            <span class="ui_icon single-chevron-left"></span>&nbsp;
-                                        </li>
-                                    @endif
-                                @else
-                                    <li class="breadcrumb" itemscope>
-                                        <a class="link" {{($config->backToHotelListNoFollow) ? 'rel="nofollow"' : ''}}
-                                           href="{{route('restaurantList', ['city' => $state->name, 'mode' => 'state'])}}"
-                                           itemprop="url">
-                                            <span itemprop="title">{{$state->name}}</span>
-                                        </a>&nbsp;
-                                        <span class="ui_icon single-chevron-left"></span>&nbsp;
-                                    </li>
-                                    <li class="breadcrumb" itemscope>
-                                        <a class="link" {{($config->backToHotelListNoFollow) ? 'rel="nofollow"' : ''}}
-                                           href="{{route('restaurantList', ['city' => $city->name, 'mode' => 'city'])}}"
-                                           itemprop="url">
-                                            <span itemprop="title">{{$city->name}}</span>
-                                        </a>&nbsp;
-                                        <span class="ui_icon single-chevron-left"></span>&nbsp;
-                                    </li>
+{{--                                        <li class="breadcrumb" itemscope>--}}
+{{--                                            <a class="link" target="_blank" {{($config->panelNoFollow) ? 'rel="nofollow"' : ''}}--}}
+{{--                                               href="http://panel.baligh.ir/changeAlt/{{$place->id}}/{{$kindPlaceId}}"--}}
+{{--                                               itemprop="url">--}}
+{{--                                                <span itemprop="title">مدیریت alt ها و تصاویر</span>--}}
+{{--                                            </a>&nbsp;--}}
+{{--                                            <span class="ui_icon single-chevron-left"></span>&nbsp;--}}
+{{--                                        </li>--}}
+{{--                                        <li class="breadcrumb" itemscope>--}}
+{{--                                            <a class="link" target="_blank" {{($config->panelNoFollow) ? 'rel="nofollow"' : ''}}--}}
+{{--                                               href="http://panel.baligh.ir/changeContent/{{$city->id}}/{{$kindPlaceId}}/1/{{$place->name}}"--}}
+{{--                                               itemprop="url">--}}
+{{--                                                <span itemprop="title">مدیریت محتوا</span>--}}
+{{--                                            </a>&nbsp;--}}
+{{--                                            <span class="ui_icon single-chevron-left"></span>&nbsp;--}}
+{{--                                        </li>--}}
+{{--                                        <li class="breadcrumb" itemscope>--}}
+{{--                                            <a class="link" target="_blank" {{($config->panelNoFollow) ? 'rel="nofollow"' : ''}}--}}
+{{--                                               href="http://panel.baligh.ir/changeSeo/{{$city->id}}/1/{{$place->name}}/{{$kindPlaceId}}"--}}
+{{--                                               itemprop="url">--}}
+{{--                                                <span itemprop="title">مدیریت سئو</span>--}}
+{{--                                            </a>&nbsp;--}}
+{{--                                            <span class="ui_icon single-chevron-left"></span>&nbsp;--}}
+{{--                                        </li>--}}
+{{--                                    @endif--}}
+{{--                                @else--}}
+{{--                                    <li class="breadcrumb" itemscope>--}}
+{{--                                        <a class="link" {{($config->backToHotelListNoFollow) ? 'rel="nofollow"' : ''}}--}}
+{{--                                           href="{{route('restaurantList', ['city' => $state->name, 'mode' => 'state'])}}"--}}
+{{--                                           itemprop="url">--}}
+{{--                                            <span itemprop="title">{{$state->name}}</span>--}}
+{{--                                        </a>&nbsp;--}}
+{{--                                        <span class="ui_icon single-chevron-left"></span>&nbsp;--}}
+{{--                                    </li>--}}
+{{--                                    <li class="breadcrumb" itemscope>--}}
+{{--                                        <a class="link" {{($config->backToHotelListNoFollow) ? 'rel="nofollow"' : ''}}--}}
+{{--                                           href="{{route('restaurantList', ['city' => $city->name, 'mode' => 'city'])}}"--}}
+{{--                                           itemprop="url">--}}
+{{--                                            <span itemprop="title">{{$city->name}}</span>--}}
+{{--                                        </a>&nbsp;--}}
+{{--                                        <span class="ui_icon single-chevron-left"></span>&nbsp;--}}
+{{--                                    </li>--}}
 
-                                    @if(Auth::check() && Auth::user()->level != 0)
-                                        <li class="breadcrumb" itemscope>
-                                            <a class="link" target="_blank" {{($config->panelNoFollow) ? 'rel="nofollow"' : ''}}
-                                               href="http://panel.baligh.ir/changeAlt/{{$place->id}}/3"
-                                               itemprop="url">
-                                                <span itemprop="title">مدیریت alt ها و تصاویر</span>
-                                            </a>&nbsp;
-                                            <span class="ui_icon single-chevron-left"></span>&nbsp;
-                                        </li>
-                                        <li class="breadcrumb" itemscope>
-                                            <a class="link" target="_blank" {{($config->panelNoFollow) ? 'rel="nofollow"' : ''}}
-                                               href="http://panel.baligh.ir/changeContent/{{$city->id}}/3/1/{{$place->name}}"
-                                               itemprop="url">
-                                                <span itemprop="title">مدیریت محتوا</span>
-                                            </a>&nbsp;
-                                            <span class="ui_icon single-chevron-left"></span>&nbsp;
-                                        </li>
-                                        <li class="breadcrumb" itemscope>
-                                            <a class="link" target="_blank" {{($config->panelNoFollow) ? 'rel="nofollow"' : ''}}
-                                               href="http://panel.baligh.ir/changeSeo/{{$city->id}}/1/{{$place->name}}/3"
-                                               itemprop="url">
-                                                <span itemprop="title">مدیریت سئو</span>
-                                            </a>&nbsp;
-                                            <span class="ui_icon single-chevron-left"></span>&nbsp;
-                                        </li>
-                                    @endif
-                                @endif
-                            </ul>
-                        </div>
+{{--                                    @if(Auth::check() && Auth::user()->level != 0)--}}
+{{--                                        <li class="breadcrumb" itemscope>--}}
+{{--                                            <a class="link" target="_blank" {{($config->panelNoFollow) ? 'rel="nofollow"' : ''}}--}}
+{{--                                               href="http://panel.baligh.ir/changeAlt/{{$place->id}}/3"--}}
+{{--                                               itemprop="url">--}}
+{{--                                                <span itemprop="title">مدیریت alt ها و تصاویر</span>--}}
+{{--                                            </a>&nbsp;--}}
+{{--                                            <span class="ui_icon single-chevron-left"></span>&nbsp;--}}
+{{--                                        </li>--}}
+{{--                                        <li class="breadcrumb" itemscope>--}}
+{{--                                            <a class="link" target="_blank" {{($config->panelNoFollow) ? 'rel="nofollow"' : ''}}--}}
+{{--                                               href="http://panel.baligh.ir/changeContent/{{$city->id}}/3/1/{{$place->name}}"--}}
+{{--                                               itemprop="url">--}}
+{{--                                                <span itemprop="title">مدیریت محتوا</span>--}}
+{{--                                            </a>&nbsp;--}}
+{{--                                            <span class="ui_icon single-chevron-left"></span>&nbsp;--}}
+{{--                                        </li>--}}
+{{--                                        <li class="breadcrumb" itemscope>--}}
+{{--                                            <a class="link" target="_blank" {{($config->panelNoFollow) ? 'rel="nofollow"' : ''}}--}}
+{{--                                               href="http://panel.baligh.ir/changeSeo/{{$city->id}}/1/{{$place->name}}/3"--}}
+{{--                                               itemprop="url">--}}
+{{--                                                <span itemprop="title">مدیریت سئو</span>--}}
+{{--                                            </a>&nbsp;--}}
+{{--                                            <span class="ui_icon single-chevron-left"></span>&nbsp;--}}
+{{--                                        </li>--}}
+{{--                                    @endif--}}
+{{--                                @endif--}}
+{{--                            </ul>--}}
+                        </center>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="ppr_rup ppr_priv_hr_atf_north_star_nostalgic relative-position">
+    <div class="ppr_rup ppr_priv_hr_atf_north_star_nostalgic position-relative">
 
-        <div class="atf_header_wrapper relative-position">
-            <div class="atf_header ui_container is-mobile full_width relative-position">
+        <div class="atf_header_wrapper position-relative">
+            <div class="atf_header ui_container is-mobile full_width position-relative">
 
-                <div class="ppr_rup ppr_priv_location_detail_header relative-position">
+                <div class="ppr_rup ppr_priv_location_detail_header position-relative">
                     <h1 id="HEADING" class="heading_title " property="name">{{$place->name}}</h1>
 
                     <div class="rating_and_popularity">
@@ -303,8 +326,14 @@ if ($total == 0)
                         <span class="header_popularity popIndexValidation" id="scoreSpanHeader">
                             <a> {{$total}} امتیاز</a>
                         </span>
+                        <div class="header heading" id="helpBtnMainDiv">
+                            <a class="link" onclick="startHelp()">
+                                <div class="circleBase type2 helpBtnIconMainDiv"></div>
+                                <b>راهنمای صفحات</b>
+                            </a>
+                        </div>
                     </div>
-                    <div class="relative-position">
+                    <div class="position-relative">
 
                         {{--<div style="width: 110px;height: 29px;position: absolute;left: 100px;border: 1px solid black;cursor: pointer;" onclick="changeStatetoReserved()">--}}
                         {{--<span class="ui_button" style="padding: 0">تغییر به حالت رزرو</span>--}}
@@ -313,10 +342,15 @@ if ($total == 0)
                         {{--<span class="ui_button" style="padding: 0">تغییر به حالت غیر رزرو</span>--}}
                         {{--</div>--}}
 
-                        <span class="ui_button_overlay relative-position float-left">
-                            <div id="targetHelp_7" class="targets relative-position float-right">
-                                <span onclick="saveToTrip()"
-                                      class="ui_button saves ui_icon {{($save) ? "red-heart-fill" : "red-heart"}} ">لیست سفر</span>
+                        <span class="ui_button_overlay position-relative float-left">
+                            <div id="targetHelp_7" class="targets position-relative float-right">
+                                <span onclick="saveToTrip()" id="addToFavouriteTripsMainDiv"
+                                      class="ui_button saves ui_icon {{($save) ? "red-heart-fill" : "red-heart"}} ">
+                                    <div class="circleBase type2 addToFavouriteTripsIcon"></div>
+                                    <div class="addToFavouriteTripsLabel">
+                                        افزودن به لیست سفر
+                                    </div>
+                                </span>
                                 <div id="helpSpan_7" class="helpSpans row hidden">
                                     <span class="introjs-arrow"></span>
                                     <p class="col-xs-12">
@@ -329,19 +363,6 @@ if ($total == 0)
                                     <button class="btn btn-danger exitBtnHelp">خروج</button>
                                 </div>
                             </div>
-                            @if($hasLogin)
-                                <div id="targetHelp_8" class="targets float-left">
-                                    <span onclick="bookMark()"
-                                          class="ui_button casino save-location-7306673 ui_icon {{($bookMark) ? "castle" : "red-heart"}} ">نشانه گذاری</span>
-                                    <div id="helpSpan_8" class="helpSpans hidden row">
-                                        <span class="introjs-arrow"></span>
-                                        <p>شاید بعدا بخواهید دوباره به همین مکان باز گردید. پس آن را نشان کنید تا از منوی بالا هر وقت که خواستید دوباره به آن باز گردید.</p>
-                                        <button data-val="8" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_8">بعدی</button>
-                                        <button data-val="8" class="btn btn-primary backBtnsHelp" id="backBtnHelp_8">قبلی</button>
-                                        <button class="btn btn-danger exitBtnHelp">خروج</button>
-                                    </div>
-                                </div>
-                            @endif
                             <span class="btnoverlay loading">
                                 <span class="bubbles small">
                                     <span></span>
@@ -385,8 +406,7 @@ if ($total == 0)
         <div class="atf_meta_and_photos_wrapper relative-postion">
             <div class="atf_meta_and_photos ui_container is-mobile easyClear relative-postion">
                 @if($placeMode == "hotel")
-                    <div id="bestPrice" class="meta relative-position"
-                         style="@if(session('goDate') != null && session('backDate') != null) display: none @endif ">
+                    <div id="bestPrice" class="meta position-relative" style="@if(session('goDate') != null && session('backDate') != null) display: none @endif ">
                         <div id="targetHelp_9" class="targets  float-left">
                             @if($place->reserveId == null)
                                 <div class="offlineReserveErr" >
@@ -410,7 +430,7 @@ if ($total == 0)
                                     <input type="hidden" name="name" value="{{$place->name}}">
                                     <input type="hidden" name="id" value="{{$place->id}}">
                                 </form>
-                                <div class="ppr_rup ppr_priv_hr_atf_north_star_traveler_info_nostalgic">
+                                <div class="ppr_rup ppr_priv_hr_atf_north_star_traveler_info_nostalgic display-none">
                                     <div class="title">بهترین قیمت اقامت</div>
                                     <div class="metaDatePicker easyClear">
                                         <div class="prw_rup prw_datepickers_hr_north_star_dates_nostalgic">
@@ -441,9 +461,9 @@ if ($total == 0)
                                                 {{--<span>بچه</span>&nbsp;--}}
                                             </div>
                                             <div id="passengerArrowDown" onclick="togglePassengerNoSelectPane()"
-                                                 class="shTIcon searchBottomArrowIcone arrowPassengerIcone inline-block"></div>
+                                                 class="shTIcon searchBottomArrowIcone arrowPassengerIcone display-inline-block"></div>
                                             <div id="passengerArrowUp" onclick="togglePassengerNoSelectPane()"
-                                                 class="shTIcon searchTopArrowIcone arrowPassengerIcone hidden inline-block"></div>
+                                                 class="shTIcon searchTopArrowIcone arrowPassengerIcone hidden display-inline-block"></div>
 
                                             <div class="roomPassengerPopUp hidden" id="passengerNoSelectPane"
                                                  onmouseleave="addClassHidden('passengerNoSelectPane'); passengerNoSelect = false;">
@@ -510,8 +530,31 @@ if ($total == 0)
                             <button data-val="9" class="btn btn-primary backBtnsHelp" id="backBtnHelp_9">قبلی</button>
                             <button class="btn btn-danger exitBtnHelp">خروج</button>
                         </div>
+                        <div class="clear-both"></div>
+                        @if($hasLogin)
+                            <div id="targetHelp_8" class="targets float-left col-xs-6 pd-0">
+                                    <span onclick="bookMark()"
+                                          class="ui_button casino save-location-7306673 ui_icon saveAsBookmarkMainDiv {{($bookMark) ? "castle" : "red-heart"}} ">
+                                        <div class="saveAsBookmarkIcon"></div>
+                                        <div class="saveAsBookmarkLabel">
+                                            ذخیره این صفحه
+                                        </div>
+                                    </span>
+                                <div id="helpSpan_8" class="helpSpans hidden row">
+                                    <span class="introjs-arrow"></span>
+                                    <p>شاید بعدا بخواهید دوباره به همین مکان باز گردید. پس آن را نشان کنید تا از منوی بالا هر وقت که خواستید دوباره به آن باز گردید.</p>
+                                    <button data-val="8" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_8">بعدی</button>
+                                    <button data-val="8" class="btn btn-primary backBtnsHelp" id="backBtnHelp_8">قبلی</button>
+                                    <button class="btn btn-danger exitBtnHelp">خروج</button>
+                                </div>
+                            </div>
+                        @endif
+                        @if($hasLogin)
+                            @include('layouts.shareBox')
+
+                        @endif
                     </div>
-                    <div id="bestPriceRezerved" class="meta relative-position"
+                    <div id="bestPriceRezerved" class="meta position-relative"
                          style="@if(session('goDate') == null && session('backDate') == null) display: none @endif">
                         <div id="targetHelp_9" class="targets float-left">
                             @if($place->reserveId == null)
@@ -523,7 +566,7 @@ if ($total == 0)
                             @endif
                             @if(session('goDate') != null)
                                 <div class="meta_inner" id="">
-                                    <div class="ppr_rup ppr_priv_hr_atf_north_star_traveler_info_nostalgic">
+                                    <div class="ppr_rup ppr_priv_hr_atf_north_star_traveler_info_nostalgic display-none">
                                         <div class="metaDatePicker easyClear">
                                             <div id="date_input_main_div">
                                                 <div class="shTIcon closeXicon closeXicon2" onclick="changeStatetounReserved()"></div>
@@ -579,7 +622,7 @@ if ($total == 0)
 
                                             {{--<div class="offerBox">--}}
                                             {{--<div>--}}
-                                            {{--<div style="font-size: 1.4em; display: inline-block">650.000--}}
+                                            {{--<div class="font-size-14em display-inline-block">650.000--}}
                                             {{--<div class="salePrice" style="width: 54px; margin: -14px 0 0 0">550.000</div>--}}
                                             {{--</div>--}}
                                             {{--<div class="float-left">--}}
@@ -601,7 +644,7 @@ if ($total == 0)
 
                                             {{--<div class="offerBox">--}}
                                             {{--<div>--}}
-                                            {{--<div style="font-size: 1.4em; display: inline-block; line-height: 40px;">650.000</div>--}}
+                                            {{--<div style="font-size-14em display-inline-block; line-height: 40px;">650.000</div>--}}
                                             {{--<div class="float-left">--}}
                                             {{--<div style="float:right; margin: 2px 10px;">--}}
                                             {{--<div>از علی بابا</div>--}}
@@ -636,7 +679,7 @@ if ($total == 0)
                         </div>
                     </div>
                 @endif
-                <div class="prw_rup prw_common_location_photos photos relative-postion">
+                <div class="prw_rup prw_common_location_photos photos position-relative">
                     <div id="targetHelp_10" class="targets">
                         <div class="inner">
                             <div class="primaryWrap">
@@ -644,8 +687,19 @@ if ($total == 0)
                                     <div class="carousel bignav">
                                         <div class="carousel_images carousel_images_header">
                                             <div class="see_all_count_wrap" onclick="getPhotos(-1)">
-                                                <span class="see_all_count"><span class="ui_icon camera"></span>تمام عکس ها {{$userPhotos + $sitePhotos}} </span>
+                                                <span class="see_all_count">
+                                                    <div class="circleBase type2" id="photographerIdPic"></div>
+                                                    <div class="display-inline-block mg-rt-10 mg-tp-2">
+                                                        <span class="display-block font-size-12">عکس از</span>
+                                                        <span class="display-block">سینا عادلی</span>
+                                                    </div>
+{{--                                                    <span class="ui_icon camera"></span>--}}
+{{--                                                    تمام عکس ها {{$userPhotos + $sitePhotos}}--}}
+                                                </span>
                                             </div>
+                                            <a id="photographersLink">
+                                                عکاس هستید؟ کلیک کنید
+                                            </a>
                                         </div>
                                         <div onclick="photoRoundRobin(-1)" class="left-nav left-nav-header"></div>
                                         <div onclick="photoRoundRobin(1)" class="right-nav right-nav-header"></div>
@@ -668,12 +722,12 @@ if ($total == 0)
                                             @if($sitePhotos != 0)
                                                 <div onclick="getPhotos(-2)" class="albumInfo">
                                                     <span class="ui_icon camera">&nbsp;</span>عکس های
-                                                    سایت {{$sitePhotos}}
+                                                    سایت - {{$sitePhotos}}
                                                 </div>
                                             @else
                                                 <div class="albumInfo">
                                                     <span class="ui_icon camera">&nbsp;</span>عکس های
-                                                    سایت {{$sitePhotos}}
+                                                    سایت - {{$sitePhotos}}
                                                 </div>
                                             @endif
                                         </div>
@@ -693,7 +747,7 @@ if ($total == 0)
                                             </div>
                                             <div {{($userPhotos != 0) ? "onclick=getPhotos(-3)" : "" }}  class="albumInfo">
                                                 <span class="ui_icon camera">&nbsp;</span>عکس های
-                                                کاربران {{$userPhotos}}
+                                                کاربران - {{$userPhotos}}
                                             </div>
                                         </div>
                                     </div>
@@ -708,7 +762,7 @@ if ($total == 0)
                                             </div>
                                             <div class="albumInfo">
                                                 <span class="ui_icon camera">&nbsp;</span>
-                                                محتواهای تعاملی {{(!isset($video) || $video == null) ? 0 : 1}}
+                                                ویدیو و فیلم 360 - {{(!isset($video) || $video == null) ? 0 : 1}}
                                             </div>
                                         </div>
                                     </div>
@@ -723,6 +777,45 @@ if ($total == 0)
                             <button class="btn btn-danger exitBtnHelp">خروج</button>
                         </div>
                     </div>
+                    <div id="commentsMainDiv">
+                        <div id="commentsMainDivHeader">
+                            دیدگاه شما
+                        </div>
+                        <div id="commentInputMainDiv">
+                            <div class="inputBoxGeneralInfo inputBox" id="commentInputBox">
+                                <div id="profilePicForComment" class="circleBase type2"></div>
+{{--                                <div class="inputBoxTextComment inputBoxText">--}}
+{{--                                    <div>--}}
+{{--                                        نام تور--}}
+{{--                                        <span>*</span>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+                                <textarea class="inputBoxInput inputBoxInputComment" type="text" placeholder="سینا، چه فکر یا احساسی داری.....؟"></textarea>
+                                <img id="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
+                            </div>
+                        </div>
+                        <div id="commentMoreSettingBar">
+                            <div id="" class="commentOptionsBoxes">
+                                <span id="addPhotoCommentIcon"></span>
+                                <span class="commentOptionsText">عکس اضافه کنید.</span>
+                            </div>
+                            <div id="" class="commentOptionsBoxes">
+                                <span id="addVideoCommentIcon"></span>
+                                <span class="commentOptionsText">ویدیو اضافه کنید.</span>
+                            </div>
+                            <div id="" class="commentOptionsBoxes">
+                                <span id="add360VideoCommentIcon"></span>
+                                <span class="commentOptionsText">ویدیو 360 اضافه کنید.</span>
+                            </div>
+                            <div id="" class="commentOptionsBoxes">
+                                <span id="tagFriendCommentIcon"></span>
+                                <span class="commentOptionsText">دوستانتان را tag کنید.</span>
+                            </div>
+                            <div id="moreSettingCommentManDiv" class="commentOptionsBoxes">
+                                <span id="moreSettingComment">...</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -731,44 +824,23 @@ if ($total == 0)
     <div id="MAINWRAP"
          class=" full_meta_photos_v3  full_meta_photos_v4  big_pic_mainwrap_tweaks horizontal_xsell ui_container is-mobile relative-postion">
         <div id="MAIN" class="Hotel_Review prodp13n_jfy_overflow_visible relative-postion">
-            <div id="BODYCON" ng-app="mainApp"
-                 class="col easyClear bodLHN poolB adjust_padding new_meta_chevron new_meta_chevron_v2 relative-position">
-                <div class="col-xs-12 menu">
-                    <div class="col-xs-2 changeWidth"><a href="#ansAndQeustionDiv">سوال و جواب</a></div>
-                    <div class="col-xs-2 changeWidth"><a href="#nearbyDiv">مکان های نزدیک</a></div>
-                    <div class="col-xs-2 changeWidth"><a href="#photosDiv">عکس ها</a></div>
-                    @if($placeMode == "hotel")
-                        <div class="col-xs-2 changeWidth"><a href="#similars">هتل های مشابه</a></div>
-                    @elseif($placeMode == "restaurant")
-                        <div class="col-xs-2 changeWidth"><a href="#similars">رستوران های مشابه</a></div>
-                    @elseif($placeMode == "amaken")
-                        <div class="col-xs-2 changeWidth"><a href="#similars">اماکن مشابه</a></div>
-                    @endif
-                    <div class="col-xs-2 changeWidth"><a href="#reviewsDiv">نقدها</a></div>
-                    @if(session('goDate') != null)
-                        <div class="col-xs-2 changeWidth"><a href="#roomChoice">انتخاب اتاق</a></div>
-                    @endif
-                    <div class="col-xs-2  changeWidth"><a href="#introduction">معرفی کلی</a></div>
-                </div>
-                <div></div>
+            <div id="BODYCON" ng-app="mainApp" class="col easyClear bodLHN poolB adjust_padding new_meta_chevron new_meta_chevron_v2 position-relative">
+
                 <div class="hr_btf_wrap relative-postion">
                     <div id="introduction" class="ppr_rup ppr_priv_location_detail_overview">
                         <div class="block_wrap" data-tab="TABS_OVERVIEW">
-                            <div class="block_header">
-                                <h3 class="block_title">معرفی کلی </h3>
-                            </div>
-                            <div>
-                                <div id="showMore" onclick="showMore()" class="hidden">بیشتر
-                                </div>
-                                <div class="overviewContent" id="introductionText">{{$place->description}}</div>
-                            </div>
                             <div class="overviewContent">
-                                <div class="prw_rup prw_common_static_map_no_style staticMap">
-                                    <div id="map-small" class="prv_map clickable" ></div>
-                                </div>
-                                <div class="ui_columns is-multiline is-mobile reviewsAndDetails ltrImp">
-                                    <div class="ui_column is-6 details">
-                                        <div class="rtl">
+                                <div class="ui_columns is-multiline is-mobile reviewsAndDetails direction-rtlImp">
+                                    <div class="ui_column is-4 generalDescription">
+                                        <div class="block_header">
+                                            <h3 class="block_title">معرفی کلی </h3>
+                                        </div>
+                                        <div>
+                                            <div class="overviewContent" id="introductionText">{{$place->description}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="ui_column is-4 details">
+                                        <div class="direction-rtl">
                                             <?php $k = -1; ?>
 
                                             @if($placeMode == "hotel")
@@ -780,8 +852,11 @@ if ($total == 0)
                                             @endif
                                         </div>
                                     </div>
-                                    <div class="ui_column  is-6 reviews">
+                                    <div class="ui_column  is-4 reviews" id="reviewsMainDiv">
                                         <div class="rating">
+                                            <div class="block_header">
+                                                <h3 class="block_title">نظر شما </h3>
+                                            </div>
                                             <span class="overallRating">{{$avgRate}} </span>
                                             <div class="prw_rup prw_common_bubble_rating overallBubbleRating">
                                                 @if($avgRate == 5)
@@ -811,76 +886,76 @@ if ($total == 0)
                                         <div class="prw_rup prw_common_ratings_histogram_overview overviewHistogram">
                                             <ul class="ratings_chart">
                                                 <li class="chart_row highlighted clickable">
-                                                    <span class="row_count row_cell">{{ceil($rates[4] * 100 / $total)}}
-                                                        %</span>
+                                                    <span class="row_label row_cell">عالی</span>
                                                     <span class="row_bar row_cell">
                                                         <span class="bar">
                                                             <span class="fill"
                                                                   style="width: {{ceil($rates[4] * 100 / $total)}}%;"></span>
                                                         </span>
                                                     </span>
-                                                    <span class="row_label row_cell">عالی</span>
+                                                    <span class="row_count row_cell">{{ceil($rates[4] * 100 / $total)}}
+                                                    %</span>
                                                 </li>
                                                 <li class="chart_row clickable">
-                                                    <span class="row_count row_cell">{{ceil($rates[3] * 100 / $total)}}
-                                                        %</span>
+                                                    <span class="row_label row_cell">خوب</span>
                                                     <span class="row_bar row_cell">
                                                         <span class="bar">
                                                             <span class="fill"
                                                                   style="width:{{ceil($rates[3] * 100 / $total)}}%;"></span>
                                                         </span>
                                                     </span>
-                                                    <span class="row_label row_cell">خوب</span>
+                                                    <span class="row_count row_cell">{{ceil($rates[3] * 100 / $total)}}
+                                                        %</span>
                                                 </li>
                                                 <li class="chart_row clickable">
-                                                    <span class="row_count row_cell">{{ceil($rates[2] * 100 / $total)}}
-                                                        %</span>
+                                                    <span class="row_label row_cell">معمولی</span>
                                                     <span class="row_bar row_cell">
                                                         <span class="bar">
                                                             <span class="fill"
                                                                   style="width:{{ceil($rates[2] * 100 / $total)}}%;"></span>
                                                         </span>
                                                     </span>
-                                                    <span class="row_label row_cell">معمولی</span>
+                                                    <span class="row_count row_cell">{{ceil($rates[2] * 100 / $total)}}
+                                                        %</span>
                                                 </li>
                                                 <li class="chart_row clickable">
-                                                    <span class="row_count row_cell">{{ceil($rates[1] * 100 / $total)}}
-                                                        %</span>
+                                                    <span class="row_label row_cell">ضعیف</span>
                                                     <span class="row_bar row_cell">
                                                         <span class="bar">
                                                             <span class="fill"
                                                                   style="width:{{ceil($rates[1] * 100 / $total)}}%;"></span>
                                                         </span>
                                                     </span>
-                                                    <span class="row_label row_cell">ضعیف</span>
+                                                    <span class="row_count row_cell">{{ceil($rates[1] * 100 / $total)}}
+                                                        %</span>
                                                 </li>
                                                 <li class="chart_row">
-                                                    <span class="row_count row_cell">{{ceil($rates[0] * 100 / $total)}}
-                                                        %</span>
+                                                    <span class="row_label row_cell">خیلی بد </span>
                                                     <span class="row_bar row_cell">
                                                         <span class="bar">
                                                             <span class="fill"
                                                                   style="width:{{ceil($rates[0] * 100 / $total)}}%;"></span>
                                                         </span>
                                                     </span>
-                                                    <span class="row_label row_cell">خیلی بد </span>
+                                                    <span class="row_count row_cell">{{ceil($rates[0] * 100 / $total)}}
+                                                        %</span>
                                                 </li>
                                             </ul>
                                         </div>
                                         <div class="prw_rup prw_common_atf_header_bl" id="clientConnectionsLines">
-                                            <div class="blEntry address" id="clientConnectionsAddress">
+                                            <div class="blEntry address mg-bt-10" id="clientConnectionsAddress">
                                                 <span class="ui_icon map-pin"></span>
                                                 <span class="street-address">آدرس : </span>
                                                 <span>{{$place->address}}</span>
                                             </div>
                                             @if(!empty($place->phone))
-                                                <div class="blEntry phone" id="clientConnectionsPhone">
+                                                <div class="blEntry phone mg-bt-10" id="clientConnectionsPhone">
                                                     <span class="ui_icon phone"></span>
                                                     <span>{{$place->phone}}</span>
                                                 </div>
                                             @endif
                                             @if(!empty($place->site))
-                                                <div class="blEntry website" id="clientConnectionsWebsite">
+                                                <div class="blEntry website mg-bt-10" id="clientConnectionsWebsite">
                                                     <span class="ui_icon laptop"></span>
                                                     <?php
                                                     if (strpos($place->site, 'http') === false)
@@ -893,7 +968,7 @@ if ($total == 0)
                                             @endif
                                         </div>
                                         <div id="tagsName">
-                                            <h3>برچسب ها:</h3>
+                                            <h3>برچسب‌ها:</h3>
                                             <span class="tag">{{$place->tag1}}</span>
                                             <span class="tag">{{$place->tag2}}</span>
                                             <span class="tag">{{$place->tag3}}</span>
@@ -915,911 +990,407 @@ if ($total == 0)
                             </div>
                         </div>
                     </div>
-                    @if(session('goDate') != null && $rooms != null)
-                        <div id="roomChoice" class="ppr_rup ppr_priv_location_detail_two_column display-block relative-position">
+{{--                    @if(session('goDate') != null && $rooms != null)--}}
+{{--                        <div id="roomChoice" class="ppr_rup ppr_priv_location_detail_two_column display-block position-relative">--}}
 
-                            <div class="column_wrap ui_columns is-mobile relative-position full-width rtl">
-                                <div class="content_column ui_column is-10 roomBox_IS_10">
-                                    <div class="ppr_rup ppr_priv_location_reviews_container relative-position">
-                                        <div id="rooms" class="ratings_and_types concepts_and_filters block_wrap relative-position">
-                                            <div class="header_group block_header" id="roomChoiceDiv">
-                                                <h3 class="tabs_header reviews_header block_title"> انتخاب اتاق </h3>
-                                                <div class="srchBox">
-                                                    <button class="srchBtn" onclick="editSearch()">ویرایش جستجو</button>
-                                                </div>
-                                            </div>
-                                            @for($i = 0; $i < count($rooms); $i++)
-                                                <div class="eachRooms">
-                                                    <div class="roomPic">
-                                                        <img src="{{$rooms[$i]->pic}}" width="100%" height="100%"
-                                                             alt='{{$rooms[$i]->name}}'>
-                                                    </div>
-                                                    <div class="roomDetails" id="roomDetailsMainDiv">
-                                                        <div>
-                                                            <div class="roomRow">
-                                                                <div class="roomName"
-                                                                     onclick="document.getElementById('room_info{{$i}}').style.display = 'flex'">
-                                                                    {{$rooms[$i]->name}}
-                                                                </div>
-                                                                <div class="roomPerson">
-                                                                    <div>
-                                                                        @for($j = 0; $j < ceil($rooms[$i]->capacity->adultCount/2); $j++)
-                                                                            <span class="shTIcon personIcon"></span>
-                                                                        @endfor
-                                                                    </div>
-                                                                    <div>
-                                                                        @for($j = 0; $j < floor($rooms[$i]->capacity->adultCount/2); $j++)
-                                                                            <span class="shTIcon personIcon"></span>
-                                                                        @endfor
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="roomRow float-left">
-                                                                <div class="roomNumber">
-                                                                    <div>
-                                                                        تعداد اتاق
-                                                                    </div>
-                                                                    <select name="room_Number" id="roomNumber{{$i}}"
-                                                                            onclick="changeNumRoom({{$i}}, this.value)">
-                                                                        @for($j = 0; $j < 11; $j++)
-                                                                            <option value="{{$j}}">{{$j}}</option>
-                                                                        @endfor
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div>
-                                                            <div class="roomRow">
-                                                                <div class="roomOptionTitle">امکانات اتاق</div>
-                                                            </div>
-                                                            <div class="roomRow">
-                                                                <div class="check-box__item hint-system hidden"
-                                                                     @if(!($rooms[$i]->priceExtraGuest != null && $rooms[$i]->priceExtraGuest != ''))style="display: none;" @endif>
-                                                                    <label class="labelEdit">استفاده از تخت اضافه</label>
-                                                                    <input type="checkbox" id="additional_bed{{$i}}"
-                                                                           name="additionalBed" value="1" class="inline-block"
-                                                                           onclick="changeRoomPrice({{$i}}); changeNumRoom({{$i}}, this.value)">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div>
+{{--                            <div class="column_wrap ui_columns is-mobile position-relative full-width direction-rtl">--}}
+{{--                                <div class="content_column ui_column is-10 roomBox_IS_10">--}}
+{{--                                    <div class="ppr_rup ppr_priv_location_reviews_container position-relative">--}}
+{{--                                        <div id="rooms" class="ratings_and_types concepts_and_filters block_wrap position-relative">--}}
+{{--                                            <div class="header_group block_header" id="roomChoiceDiv">--}}
+{{--                                                <h3 class="tabs_header reviews_header block_title"> انتخاب اتاق </h3>--}}
+{{--                                                <div class="srchBox">--}}
+{{--                                                    <button class="srchBtn" onclick="editSearch()">ویرایش جستجو</button>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                            @for($i = 0; $i < count($rooms); $i++)--}}
+{{--                                                <div class="eachRooms">--}}
+{{--                                                    <div class="roomPic">--}}
+{{--                                                        <img src="{{$rooms[$i]->pic}}" width="100%" height="100%"--}}
+{{--                                                             alt='{{$rooms[$i]->name}}'>--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="roomDetails" id="roomDetailsMainDiv">--}}
+{{--                                                        <div>--}}
+{{--                                                            <div class="roomRow">--}}
+{{--                                                                <div class="roomName"--}}
+{{--                                                                     onclick="document.getElementById('room_info{{$i}}').style.display = 'flex'">--}}
+{{--                                                                    {{$rooms[$i]->name}}--}}
+{{--                                                                </div>--}}
+{{--                                                                <div class="roomPerson">--}}
+{{--                                                                    <div>--}}
+{{--                                                                        @for($j = 0; $j < ceil($rooms[$i]->capacity->adultCount/2); $j++)--}}
+{{--                                                                            <span class="shTIcon personIcon"></span>--}}
+{{--                                                                        @endfor--}}
+{{--                                                                    </div>--}}
+{{--                                                                    <div>--}}
+{{--                                                                        @for($j = 0; $j < floor($rooms[$i]->capacity->adultCount/2); $j++)--}}
+{{--                                                                            <span class="shTIcon personIcon"></span>--}}
+{{--                                                                        @endfor--}}
+{{--                                                                    </div>--}}
+{{--                                                                </div>--}}
+{{--                                                            </div>--}}
+{{--                                                            <div class="roomRow float-left">--}}
+{{--                                                                <div class="roomNumber">--}}
+{{--                                                                    <div>--}}
+{{--                                                                        تعداد اتاق--}}
+{{--                                                                    </div>--}}
+{{--                                                                    <select name="room_Number" id="roomNumber{{$i}}"--}}
+{{--                                                                            onclick="changeNumRoom({{$i}}, this.value)">--}}
+{{--                                                                        @for($j = 0; $j < 11; $j++)--}}
+{{--                                                                            <option value="{{$j}}">{{$j}}</option>--}}
+{{--                                                                        @endfor--}}
+{{--                                                                    </select>--}}
+{{--                                                                </div>--}}
+{{--                                                            </div>--}}
+{{--                                                        </div>--}}
+{{--                                                        <div>--}}
+{{--                                                            <div class="roomRow">--}}
+{{--                                                                <div class="roomOptionTitle">امکانات اتاق</div>--}}
+{{--                                                            </div>--}}
+{{--                                                            <div class="roomRow">--}}
+{{--                                                                <div class="check-box__item hint-system hidden"--}}
+{{--                                                                     @if(!($rooms[$i]->priceExtraGuest != null && $rooms[$i]->priceExtraGuest != ''))style="display: none;" @endif>--}}
+{{--                                                                    <label class="labelEdit">استفاده از تخت اضافه</label>--}}
+{{--                                                                    <input type="checkbox" id="additional_bed{{$i}}"--}}
+{{--                                                                           name="additionalBed" value="1" class="display-inline-block"--}}
+{{--                                                                           onclick="changeRoomPrice({{$i}}); changeNumRoom({{$i}}, this.value)">--}}
+{{--                                                                </div>--}}
+{{--                                                            </div>--}}
+{{--                                                        </div>--}}
+{{--                                                        <div>--}}
 
-                                                            <div class="roomRow">
-                                                                <div class="roomOption">{{$rooms[$i]->roomFacility}} </div>
-                                                            </div>
-                                                            <div class="roomRow">
+{{--                                                            <div class="roomRow">--}}
+{{--                                                                <div class="roomOption">{{$rooms[$i]->roomFacility}} </div>--}}
+{{--                                                            </div>--}}
+{{--                                                            <div class="roomRow">--}}
 
-                                                                @if($rooms[$i]->priceExtraGuest != null && $rooms[$i]->priceExtraGuest != '')
-                                                                    <div class="roomAdditionalOption">تخت اضافه</div>
-                                                                @endif
-                                                                <div class="roomAdditionalOption">{{$rooms[$i]->roomService}}</div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="roomPrices" id="roomPricesMainDiv">
-                                                        <div>قیمت</div>
-                                                        <div>
-                                                            <div>{{floor($rooms[$i]->perDay[0]->price/1000)*1000}}
-                                                                @if($rooms[$i]->priceExtraGuest != null && $rooms[$i]->priceExtraGuest != '')
-                                                                    <div id="extraBedPrice{{$i}}" class="display-none extraBedPrices">
-                                                                        <div class="salePrice">
-                                                                            {{floor($rooms[$i]->priceExtraGuest/1000)*1000 + floor($rooms[$i]->perDay[0]->price/1000)*1000}}
-                                                                        </div>
-                                                                        <div>
-                                                                            <div>با احتساب {{floor($rooms[$i]->priceExtraGuest/1000)*1000}}</div>
-                                                                            <div>با تخت اضافه</div>
-                                                                        </div>
-                                                                    </div>
-                                                                @endif
-                                                            </div>
-                                                        </div>
-                                                        <div>
-                                                            <div class="inline-block">
-                                                                از {{$rooms[$i]->provider}}</div>
-                                                            <img class="float-left">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div id="room_info{{$i}}" class="roomInfos">
-                                                    <div class="container">
-                                                        <div class="row rtl">
-                                                            <div class="col-md-8">
-                                                                <div class="roomRow">
-                                                                    <div class="roomName">{{$rooms[$i]->name}}</div>
-                                                                    <div class="shTIcon closeXicon float-left"
-                                                                         onclick="document.getElementById('room_info{{$i}}').style.display = 'none'">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="roomRow">
-                                                                    <div class="roomOptionTitle">امکانات اتاق</div>
-                                                                </div>
-                                                                <div class="roomRow">
-                                                                    <div class="roomOption">{{$rooms[$i]->roomFacility}} </div>
-                                                                </div>
-                                                                <div class="roomRow">
-                                                                    <div class="roomOptionTitle">امکانات ویژه</div>
-                                                                </div>
-                                                                <div class="roomRow">
-                                                                    @if($rooms[$i]->priceExtraGuest != null && $rooms[$i]->priceExtraGuest != '')
-                                                                        <div class="roomAdditionalOption">
-                                                                            تخت اضافه
-                                                                        </div>
-                                                                    @endif
-                                                                    <div class="roomAdditionalOption">{{$rooms[$i]->roomService}}</div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <img src="{{$rooms[$i]->pic}}" width="100%" height="100%" alt='{{$rooms[$i]->name}}'>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            @endfor
-                                        </div>
+{{--                                                                @if($rooms[$i]->priceExtraGuest != null && $rooms[$i]->priceExtraGuest != '')--}}
+{{--                                                                    <div class="roomAdditionalOption">تخت اضافه</div>--}}
+{{--                                                                @endif--}}
+{{--                                                                <div class="roomAdditionalOption">{{$rooms[$i]->roomService}}</div>--}}
+{{--                                                            </div>--}}
+{{--                                                        </div>--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="roomPrices" id="roomPricesMainDiv">--}}
+{{--                                                        <div>قیمت</div>--}}
+{{--                                                        <div>--}}
+{{--                                                            <div>{{floor($rooms[$i]->perDay[0]->price/1000)*1000}}--}}
+{{--                                                                @if($rooms[$i]->priceExtraGuest != null && $rooms[$i]->priceExtraGuest != '')--}}
+{{--                                                                    <div id="extraBedPrice{{$i}}" class="display-none extraBedPrices">--}}
+{{--                                                                        <div class="salePrice">--}}
+{{--                                                                            {{floor($rooms[$i]->priceExtraGuest/1000)*1000 + floor($rooms[$i]->perDay[0]->price/1000)*1000}}--}}
+{{--                                                                        </div>--}}
+{{--                                                                        <div>--}}
+{{--                                                                            <div>با احتساب {{floor($rooms[$i]->priceExtraGuest/1000)*1000}}</div>--}}
+{{--                                                                            <div>با تخت اضافه</div>--}}
+{{--                                                                        </div>--}}
+{{--                                                                    </div>--}}
+{{--                                                                @endif--}}
+{{--                                                            </div>--}}
+{{--                                                        </div>--}}
+{{--                                                        <div>--}}
+{{--                                                            <div class="display-inline-block">--}}
+{{--                                                                از {{$rooms[$i]->provider}}</div>--}}
+{{--                                                            <img class="float-left">--}}
+{{--                                                        </div>--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                                <div id="room_info{{$i}}" class="roomInfos">--}}
+{{--                                                    <div class="container">--}}
+{{--                                                        <div class="row direction-rtl">--}}
+{{--                                                            <div class="col-md-8">--}}
+{{--                                                                <div class="roomRow">--}}
+{{--                                                                    <div class="roomName">{{$rooms[$i]->name}}</div>--}}
+{{--                                                                    <div class="shTIcon closeXicon float-left"--}}
+{{--                                                                         onclick="document.getElementById('room_info{{$i}}').style.display = 'none'">--}}
+{{--                                                                    </div>--}}
+{{--                                                                </div>--}}
+{{--                                                                <div class="roomRow">--}}
+{{--                                                                    <div class="roomOptionTitle">امکانات اتاق</div>--}}
+{{--                                                                </div>--}}
+{{--                                                                <div class="roomRow">--}}
+{{--                                                                    <div class="roomOption">{{$rooms[$i]->roomFacility}} </div>--}}
+{{--                                                                </div>--}}
+{{--                                                                <div class="roomRow">--}}
+{{--                                                                    <div class="roomOptionTitle">امکانات ویژه</div>--}}
+{{--                                                                </div>--}}
+{{--                                                                <div class="roomRow">--}}
+{{--                                                                    @if($rooms[$i]->priceExtraGuest != null && $rooms[$i]->priceExtraGuest != '')--}}
+{{--                                                                        <div class="roomAdditionalOption">--}}
+{{--                                                                            تخت اضافه--}}
+{{--                                                                        </div>--}}
+{{--                                                                    @endif--}}
+{{--                                                                    <div class="roomAdditionalOption">{{$rooms[$i]->roomService}}</div>--}}
+{{--                                                                </div>--}}
+{{--                                                            </div>--}}
+{{--                                                            <div class="col-md-4">--}}
+{{--                                                                <img src="{{$rooms[$i]->pic}}" width="100%" height="100%" alt='{{$rooms[$i]->name}}'>--}}
+{{--                                                            </div>--}}
+{{--                                                        </div>--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                            @endfor--}}
+{{--                                        </div>--}}
 
-                                    </div>
-                                </div>
+{{--                                    </div>--}}
+{{--                                </div>--}}
 
-                                <div class="is-2 roomBox_IS_2 full-width">
-                                    <div class="priceRow_IS_2">
-                                        <div>قیمت کل برای یک شب</div>
-                                        <div id="totalPriceOneDay">0</div>
-                                    </div>
-                                    <div class="priceRow_IS_2">
-                                        <div>
-                                            <span class="lable_IS_2">قیمت کل </span>
-                                            برای
-                                            <span id="numDay"></span>
-                                            شب
-                                        </div>
-                                        <div id="totalPrice">0</div>
-                                    </div>
-                                    <div class="priceRow_IS_2">
-                                        <div>
-                                            <div class="lable_IS_2">تعداد اتاق</div>
-                                            <div class="float-left" id="totalNumRoom"></div>
-                                        </div>
-                                        <div id="discriptionNumRoom">
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <button class="btn rezervedBtn" type="button" onclick="showReserve()">رزرو
-                                        </button>
-                                    </div>
-                                    <div>
-                                        {{--<div>--}}
-                                        {{--<div>حداکثر سن کودک</div>--}}
-                                        {{--<div class="color-darkred">یک سال بدون اخذ هزینه</div>--}}
-                                        {{--</div>--}}
-                                        {{--<div>--}}
-                                        {{--<div>ساعت تحویل و تخلیه اتاق</div>--}}
-                                        {{--<div class="color-darkred">14:00</div>--}}
-                                        {{--</div>--}}
-                                        {{--<div>--}}
-                                        {{--<div>قوانین کنسلی</div>--}}
-                                        {{--<div class="color-darkred">لورم ییی</div>--}}
-                                        {{--</div>--}}
-                                        {{$place->policy}}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+{{--                                <div class="is-2 roomBox_IS_2 full-width">--}}
+{{--                                    <div class="priceRow_IS_2">--}}
+{{--                                        <div>قیمت کل برای یک شب</div>--}}
+{{--                                        <div id="totalPriceOneDay">0</div>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="priceRow_IS_2">--}}
+{{--                                        <div>--}}
+{{--                                            <span class="lable_IS_2">قیمت کل </span>--}}
+{{--                                            برای--}}
+{{--                                            <span id="numDay"></span>--}}
+{{--                                            شب--}}
+{{--                                        </div>--}}
+{{--                                        <div id="totalPrice">0</div>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="priceRow_IS_2">--}}
+{{--                                        <div>--}}
+{{--                                            <div class="lable_IS_2">تعداد اتاق</div>--}}
+{{--                                            <div class="float-left" id="totalNumRoom"></div>--}}
+{{--                                        </div>--}}
+{{--                                        <div id="discriptionNumRoom">--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                    <div>--}}
+{{--                                        <button class="btn rezervedBtn" type="button" onclick="showReserve()">رزرو--}}
+{{--                                        </button>--}}
+{{--                                    </div>--}}
+{{--                                    <div>--}}
+{{--                                        --}}{{--<div>--}}
+{{--                                        --}}{{--<div>حداکثر سن کودک</div>--}}
+{{--                                        --}}{{--<div class="color-darkred">یک سال بدون اخذ هزینه</div>--}}
+{{--                                        --}}{{--</div>--}}
+{{--                                        --}}{{--<div>--}}
+{{--                                        --}}{{--<div>ساعت تحویل و تخلیه اتاق</div>--}}
+{{--                                        --}}{{--<div class="color-darkred">14:00</div>--}}
+{{--                                        --}}{{--</div>--}}
+{{--                                        --}}{{--<div>--}}
+{{--                                        --}}{{--<div>قوانین کنسلی</div>--}}
+{{--                                        --}}{{--<div class="color-darkred">لورم ییی</div>--}}
+{{--                                        --}}{{--</div>--}}
+{{--                                        {{$place->policy}}--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
 
-                        <div id="check_room">
-                            <div class="container">
-                                <div class="row">
-                                    <span>
-                                        شهر{{$city->name}}
-                                    </span>
-                                    <span>
-                                        {{session('goDate')}}-{{session('backDate')}}
-                                    </span>
-                                    <span class="shTIcon closeXicon float-left"
-                                          onclick="document.getElementById('check_room').style.display = 'none';">
-                                    </span>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <div class="is-2 roomBox_IS_2">
-                                            <div class="priceRow_IS_2">
-                                                <div>
-                                                    <span class="lable_IS_2">قیمت کل </span>
-                                                    برای
-                                                    <span id="check_num_day"></span>
-                                                    شب
-                                                </div>
-                                                <div id="check_total_price">
-                                                    0
-                                                </div>
-                                            </div>
-                                            <div class="priceRow_IS_2" >
-                                                <div>
-                                                    <div class="float-left">
-                                                        <span id="check_total_num_room"></span>
-                                                        اتاق
-                                                    </div>
-                                                    <div class="lable_IS_2">تعداد اتاق</div>
-                                                </div>
-                                                <div id="check_description">
-                                                </div>
-                                            </div>
-                                            <div>
-                                                <span class="float-left">
-                                                    {{$rooms[0]->provider}}
-                                                </span>
-                                                {{--<a href="{{url('buyHotel')}}">--}}
-                                                <button class="btn rezervedBtn" type="button" onclick="updateSession()">
-                                                    تایید و ادامه
-                                                </button>
-                                                {{--</a>--}}
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <div class="row">
-                                            <div>هتل انتخابی شما</div>
-                                            <div>
-                                                <div class="col-md-7">
-                                                    <span class="imgWrap imgWrap1stTemp">
-                                                        <img alt="{{$place->alt1}}" src="{{$thumbnail}}" class="centeredImg" width="100%"/>
-                                                    </span>
-                                                </div>
-                                                <div class="col-md-5">
-                                                    <div>{{$place->name}}</div>
-                                                    <div class="rating_and_popularity" id="hotelRatingMainDivRoomChoice">
-                                                        <span class="header_rating">
-                                                            <div class="rs rating" rel="v:rating">
-                                                                <div class="prw_rup prw_common_bubble_rating overallBubbleRating float-left">
-                                                                    @if($avgRate == 5)
-                                                                       <span class="ui_bubble_rating bubble_50 font-size-16"
-                                                                             property="ratingValue" content="5"
-                                                                             alt='5 of 5 bubbles'></span>
-                                                                   @elseif($avgRate == 4)
-                                                                       <span class="ui_bubble_rating bubble_40 font-size-16"
-                                                                             property="ratingValue" content="4"
-                                                                             alt='4 of 5 bubbles'></span>
-                                                                   @elseif($avgRate == 3)
-                                                                       <span class="ui_bubble_rating bubble_30 font-size-16"
-                                                                             property="ratingValue" content="3"
-                                                                             alt='3 of 5 bubbles'></span>
-                                                                   @elseif($avgRate == 2)
-                                                                       <span class="ui_bubble_rating bubble_20 font-size-16"
-                                                                             property="ratingValue" content="2"
-                                                                             alt='2 of 5 bubbles'></span>
-                                                                   @elseif($avgRate == 1)
-                                                                       <span class="ui_bubble_rating bubble_10 font-size-16"
-                                                                             property="ratingValue" content="1"
-                                                                             alt='1 of 5 bubbles'></span>
-                                                                   @endif
-                                                                </div>
-                                                           </div>
-                                                        </span>
-                                                        <span class="header_popularity popIndexValidation">
-                                                            <a class="more taLnk" href="#REVIEWS">
-                                                                <span property="v:count" id="commentCount"></span> نقد
-                                                            </a>
-                                                            <a> {{$total}} امتیاز</a>
-                                                        </span>
-                                                    </div>
-                                                    <div id="hotelRatesDivs">
-                                                        <div class="titleInTable">درجه هتل</div>
-                                                        <div class="highlightedAmenity detailListItem">{{$place->rate}}</div>
-                                                    </div>
-                                                    <div class="blEntry blEn address  clickable colCnt3"
-                                                         onclick="showExtendedMap()">
-                                                        <span class="ui_icon map-pin"></span>
-                                                        <span class="street-address">آدرس : </span>
-                                                        <span>{{$place->address}}</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row" id="selectedRoomMainDiv">
-                                            <div>اتاق های انتخابی شما</div>
-                                            <div id="selected_rooms"></div>
-                                            <div>
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        {{$place->policy}}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3"></div>
-                            </div>
-                        </div>
-                    @endif
-                    <div id="reviewsDiv" class="ppr_rup ppr_priv_location_detail_two_column relative-position">
-                        <div class="column_wrap ui_columns is-mobile">
-                            <div class="content_column ui_column is-8">
-                                <div class="ppr_rup ppr_priv_location_reviews_container relative-position">
-                                    <div id="REVIEWS" class="ratings_and_types concepts_and_filters block_wrap relative-position">
-                                        <div class="header_group block_header relative-position">
-                                            <div id="targetHelp_11" class="targets row">
-                                                <span
-                                                    onclick="showAddReviewPageHotel('{{route('review', ['placeId' => $place->id, 'kindPlaceId' => $kindPlaceId])}}')"
-                                                    class="button_war write_review ui_button primary col-xs-12">
-                                                    نوشتن نقد
-                                                </span>
-                                                <div id="helpSpan_11" class="helpSpans hidden">
-                                                    <span class="introjs-arrow"></span>
-                                                    <p>اگر تجربه ای از این مکان دارید به ما بگویید تا دوستانتان هم
-                                                        ببینند. در ضمن برای هر نقد امتیاز هیجان انگیزی می گیرید. </p>
-                                                    <button data-val="11" class="btn btn-success nextBtnsHelp"
-                                                            id="nextBtnHelp_11">بعدی
-                                                    </button>
-                                                    <button data-val="11" class="btn btn-primary backBtnsHelp"
-                                                            id="backBtnHelp_11">قبلی
-                                                    </button>
-                                                    <button class="btn btn-danger exitBtnHelp">خروج</button>
-                                                </div>
-                                            </div>
-                                            <h3 class="tabs_header reviews_header block_title"> نقدها <span
-                                                        class="reviews_header_count block_title"></span></h3>
-                                        </div>
-                                        <div id="targetHelp_12" class="targets">
-                                            <div id="taplc_location_review_filter_controls_hotels_0"
-                                                class="ppr_rup ppr_priv_location_review_filter_controls">
-                                                <div id="filterControls" class="with_histogram">
-                                                    <div class="main ui_columns is-mobile">
-                                                        <div id="ratingFilter" class="ui_column is-5 rating">
-                                                            <div class="colTitle">امتیاز</div>
-                                                            <ul>
-                                                                <li class="filterItem">
-                                                                    <span class="toggle">
-                                                                        <div class='ui_input_checkbox'>
-                                                                            <input onclick="filter()" id="excellent" type="checkbox"
-                                                                                   name="filterComment[]" value="rate_5" class="filterInput">
-                                                                            <label class='labelForCheckBox' for='excellent'>
-                                                                                <span></span>&nbsp;&nbsp;
-                                                                            </label>
-                                                                        </div>
-                                                                    </span>
-                                                                    <label class="filterLabel">
-                                                                        <div class="row_label">عالی</div>
-                                                                        <span class="row_bar">
-                                                                            <span class="row_fill" style="width:{{$rates[4] * 100 / $total}}%;"></span>
-                                                                        </span>
-                                                                        <span>{{$rates[4]}}</span>
-                                                                    </label>
-                                                                </li>
-
-                                                                <li class="filterItem">
-                                                                    <span class="toggle">
-                                                                        <div class='ui_input_checkbox'>
-                                                                            <input onclick="filter()" type="checkbox"
-                                                                                   id="very_good" name="filterComment[]"
-                                                                                   value="rate_4" class="filterInput">
-                                                                            <label class='labelForCheckBox' for='very_good'>
-                                                                                <span></span>&nbsp;&nbsp;
-                                                                            </label>
-                                                                        </div>
-                                                                    </span>
-
-                                                                    <label class="filterLabel">
-                                                                        <div class="row_label">خوب</div>
-                                                                        <span class="row_bar">
-                                                                            <span class="row_fill" style="width:{{$rates[3] * 100 / $total}}%;"></span>
-                                                                        </span>
-                                                                        <span>{{$rates[3]}}</span>
-                                                                    </label>
-                                                                </li>
-
-                                                                <li class="filterItem">
-                                                                    <span class="toggle">
-                                                                        <div class='ui_input_checkbox'>
-                                                                           <input onclick="filter()" type="checkbox"
-                                                                                  id="average" name="filterComment[]"
-                                                                                  value="rate_3" class="filterInput">
-
-                                                                            <label class='labelForCheckBox' for='average'>
-                                                                                <span></span>&nbsp;&nbsp;
-                                                                            </label>
-                                                                        </div>
-                                                                    </span>
-                                                                    <label class="filterLabel">
-                                                                        <div class="row_label">معمولی</div>
-                                                                        <span class="row_bar">
-                                                                            <span class="row_fill" style="width:{{$rates[2] * 100 / $total}}%;"></span>
-                                                                        </span>
-                                                                        <span>{{$rates[2]}}</span>
-                                                                    </label>
-                                                                </li>
-
-                                                                <li class="filterItem">
-                                                                    <span class="toggle">
-                                                                        <div class='ui_input_checkbox'>
-                                                                            <input onclick="filter()" type="checkbox"
-                                                                                   name="filterComment[]" value="rate_2" id="poor" class="filterInput">
-                                                                            <label class='labelForCheckBox' for='poor'>
-                                                                                <span></span>&nbsp;&nbsp;
-                                                                            </label>
-                                                                        </div>
-                                                                    </span>
-                                                                    <label class="filterLabel">
-                                                                        <div class="row_label">ضعیف</div>
-                                                                        <span class="row_bar">
-                                                                            <span class="row_fill" style="width:{{$rates[1] * 100 / $total}}%;"></span>
-                                                                        </span>
-                                                                        <span>{{$rates[1]}}</span>
-                                                                    </label>
-                                                                </li>
-
-                                                                <li class="filterItem">
-                                                                    <span class="toggle">
-                                                                        <div class='ui_input_checkbox'>
-                                                                            <input onclick="filter()" type="checkbox"
-                                                                                   name="filterComment[]" value="rate_1"
-                                                                                   id="very_poor" class="filterInput">
-                                                                            <label class='labelForCheckBox' for='very_poor'>
-                                                                                <span></span>&nbsp;&nbsp;
-                                                                            </label>
-                                                                        </div>
-                                                                    </span>
-                                                                    <label class="filterLabel">
-                                                                        <div class="row_label">خیلی بد</div>
-                                                                        <span class="row_bar">
-                                                                            <span class="row_fill" style="width:{{$rates[0] * 100 / $total}}%;"></span>
-                                                                        </span>
-                                                                        <span>{{$rates[0]}}</span>
-                                                                    </label>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="ui_column is-2 segment">
-                                                            <div class="colTitle">نوع سفر</div>
-                                                            <ul>
-                                                                @foreach($placeStyles as $placeStyle)
-                                                                    <li class="filterItem">
-                                                                        <div class='ui_input_checkbox'>
-                                                                            <input onclick="filter()" type="checkbox"
-                                                                                   id="placeStyle_{{$placeStyle->id}}"
-                                                                                   value="placeStyle_{{$placeStyle->id}}"
-                                                                                   name="filterComment[]"
-                                                                                   class="filterInput">
-                                                                            <label class='labelForCheckBox'
-                                                                                   for='placeStyle_{{$placeStyle->id}}'>
-                                                                                <span></span>&nbsp;&nbsp;{{$placeStyle->name}}
-                                                                            </label>
-                                                                        </div>
-                                                                    </li>
-                                                                @endforeach
-                                                            </ul>
-                                                        </div>
-                                                        <div class="ui_column is-2 season">
-                                                            <div class="colTitle">زمان سفر</div>
-                                                            <ul>
-                                                                <li class="filterItem">
-                                                                    <div class='ui_input_checkbox'>
-                                                                        <input onclick="filter()" value="season_1"
-                                                                               id="season_1" type="checkbox"
-                                                                               name="filterComment[]"
-                                                                               class="filterInput">
-                                                                        <label class='labelForCheckBox' for='season_1'>
-                                                                            <span></span>&nbsp;&nbsp;بهار
-                                                                        </label>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="filterItem">
-                                                                    <div class='ui_input_checkbox'>
-                                                                        <input onclick="filter()" value="season_2"
-                                                                               id="season_2" type="checkbox"
-                                                                               name="filterComment[]"
-                                                                               class="filterInput">
-                                                                        <label class='labelForCheckBox' for='season_2'>
-                                                                            <span></span>&nbsp;&nbsp;تابستان
-                                                                        </label>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="filterItem">
-                                                                    <div class='ui_input_checkbox'>
-                                                                        <input onclick="filter()" value="season_3"
-                                                                               id="season_3" type="checkbox"
-                                                                               name="filterComment[]"
-                                                                               class="filterInput">
-                                                                        <label class='labelForCheckBox' for='season_3'>
-                                                                            <span></span>&nbsp;&nbsp;پاییز
-                                                                        </label>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="filterItem">
-                                                                    <div class='ui_input_checkbox'>
-                                                                        <input onclick="filter()" value="season_4"
-                                                                               id="season_4" type="checkbox"
-                                                                               name="filterComment[]"
-                                                                               class="filterInput">
-                                                                        <label class='labelForCheckBox' for='season_4'>
-                                                                            <span></span>&nbsp;&nbsp;زمستان
-                                                                        </label>
-                                                                    </div>
-                                                                </li>
-                                                            </ul>
-                                                            <input type="hidden" name="filterSeasons" value="">
-                                                        </div>
-                                                        <div class="ui_column is-3 language">
-                                                            <div class="colTitle">مبدا سفر</div>
-                                                            <?php $limit = (count($srcCities) > 4) ? 4 : count($srcCities) ?>
-                                                            <ul>
-                                                                @for($i = 0; $i < $limit; $i++)
-                                                                    <li class="filterItem">
-                                                                        <div class='ui_input_checkbox'>
-                                                                            <input onclick="filter()"
-                                                                                   value="srcCity_{{$srcCities[$i]->src}}"
-                                                                                   id="srcCity_{{$srcCities[$i]->src}}"
-                                                                                   type="checkbox"
-                                                                                   name="filterComment[]"
-                                                                                   class="filterInput">
-                                                                            <label class='labelForCheckBox'
-                                                                                   for="srcCity_{{$srcCities[$i]->src}}">
-                                                                                <span></span>&nbsp;&nbsp;{{$srcCities[$i]->src}}
-                                                                            </label>
-                                                                        </div>
-                                                                    </li>
-                                                                @endfor
-                                                                @if(count($srcCities) > 4)
-                                                                    <li class="filterItem"><span
-                                                                                class="toggle"></span><span
-                                                                                onclick="toggleMoreCities()"
-                                                                                id="moreLessSpan" class="taLnk more">شهرهای بیشتر</span>
-                                                                    </li>
-                                                                @endif
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div id="moreCities" class="hidden">
-                                                    <div class="ppr_rup ppr_priv_location_review_filter_controls">
-                                                        <div class="title">شهر ها</div>
-                                                        <ul class="langs">
-                                                            @for($i = 4; $i < count($srcCities); $i++)
-                                                                <li class="filterItem">
-                                                                    <div class='ui_input_checkbox'>
-                                                                        <input onclick="filter()"
-                                                                               value="srcCity_{{$srcCities[$i]->src}}"
-                                                                               id="srcCity_{{$srcCities[$i]->src}}"
-                                                                               type="checkbox" name="filterComment[]"
-                                                                               class="filterInput">
-                                                                        <label class='labelForCheckBox'
-                                                                               for="srcCity_{{$srcCities[$i]->src}}">
-                                                                            <span></span>&nbsp;&nbsp;{{$srcCities[$i]->src}}
-                                                                        </label>
-                                                                    </div>
-                                                                </li>
-                                                            @endfor
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="ppr_rup ppr_priv_location_review_keyword_search relative-position">
-                                                <div id="taplc_location_review_keyword_search_hotels_0_search">
-                                                    <label class="title"
-                                                           for="taplc_location_review_keyword_search_hotels_0_q">نمایش
-                                                        جستجو در نقد ها </label>
-                                                    <div id="taplc_location_review_keyword_search_hotels_0_search_box"
-                                                         class="search_box_container">
-                                                        <div class="search">
-                                                            <div class="search-input ">
-                                                                <div class="search-submit"
-                                                                     onclick="comments($('#comment_search_text').val())">
-                                                                    <div class="submit">
-                                                                        <span class="ui_icon search search-icon"></span>
-                                                                    </div>
-                                                                </div>
-                                                                <input type="text" autocomplete="off"
-                                                                       id="comment_search_text"
-                                                                       placeholder='جستجو در نقد ها'
-                                                                       class="text_input nocloud"/>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="ui_tagcloud_group easyClear">
-                                                    <span id="taplc_location_review_keyword_search_hotels_0_all_reviews"
-                                                          class="ui_tagcloud selected fl all_reviews" data-content="-1">همه ی نقدها</span>
-
-                                                    @foreach($tags as $tag)
-                                                        <span class="ui_tagcloud fl"
-                                                              data-content="{{$tag->name}}">{{$tag->name}}</span>
-                                                    @endforeach
-                                                </div>
-                                            </div>
-                                            <div id="helpSpan_12" class="helpSpans hidden row">
-                                                <span class="introjs-arrow"></span>
-                                                <p>در سریع تر زمان نقدی که مناسب شما باشد را بیابید و با خواندن آن بهتر
-                                                    تصمیم بگیرید. اگر نقد ها کم است سعی کنید بعد از سفر نقد خود را اضافه
-                                                    کنید تا دوستان تان از آن استفاده کنند.</p>
-                                                <button data-val="12" class="btn btn-success nextBtnsHelp"
-                                                        id="nextBtnHelp_12">بعدی
-                                                </button>
-                                                <button data-val="12" class="btn btn-primary backBtnsHelp"
-                                                        id="backBtnHelp_12">قبلی
-                                                </button>
-                                                <button class="btn btn-danger exitBtnHelp">خروج</button>
-                                            </div>
-                                        </div>
-                                        <div id="reviewsContainer" class="ppr_rup ppr_priv_location_reviews_list"></div>
-                                        <div class="unified pagination north_star">
-                                            <div class="pageNumbers" id="pageNumCommentContainer"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="ppr_rup ppr_priv_new_hotel_promo"></div>
-                            </div>
-                            <div class="ad_column ui_column is-4">
-                                {{--<img width="100%" height="100%" id="ad_1">--}}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="similars" ng-controller="SimilarController as similar" class="ppr_rup ppr_priv_hr_btf_similar_hotels">
-                        <center>
-                            <div class="loader hidden"></div>
-                        </center>
-                        <div id="test" infinite-scroll="myPagingFunction()" class="outerShell block_wrap" ng-show="show">
-                            <div class="block_header">
-                                <h3 class="block_title">[[similar.title]]</h3>
-                            </div>
-                            <div class="ui_columns is-mobile recs">
-                                <div ng-repeat="place in places" {{--ng-click="redirect(place.redirect)"--}} class="cursor-pointer ui_column is-3 rec">
-                                    <a href="[[place.redirect]]">
-                                        <div class="recommendedCard">
-                                            <div class="imageContainer">
-                                                <div class="prw_rup prw_common_centered_image">
-                                                    <span class="imgWrap">
-                                                        <img ng-src="[[place.pic]]" alt="[[place.alt1]]" class="centeredImg" width="100%"/>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div class="content">
-                                                <div class="hotelName height-auto" dir="auto">[[place.name]]</div>
-                                                <div class="ratings">
-                                                <span>
-                                                    <div class="prw_rup prw_common_bubble_rating bubbleRating">
-                                                        <span class="[[place.ngClass]] font-size-16"
-                                                              property="ratingValue"
-                                                              content="5"></span>
-                                                    </div>
-                                                </span>
-                                                <a class="text-align-left reviewCount">[[place.reviews]]نقد</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="photosDiv" class="ppr_rup ppr_priv_hr_btf_north_star_photos relative-postion">
-                        <div class="block_wrap relative-postion">
-                            <div class="block_header" data-tab="TABS_PHOTOS relative-postion">
-                                <div id="targetHelp_13" class="targets float-left">
-                                    <a onclick="showAddPhotoPane()"
-                                       class="ui_button primary button_war">افزودن عکس </a>
-                                    <div id="helpSpan_13" class="helpSpans hidden row">
-                                        <span class="introjs-arrow"></span>
-                                        <p>اگر عکسی دارید حتما برای دوستان تان به اشتراک بگذارید. از این قسمت می توانید
-                                            عکس های خود را بارگذاری کنید تا به نام شما و با امتیازی هیجان انگیز نمایش
-                                            داده شود.</p>
-                                        <button data-val="13" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_13">
-                                            بعدی
-                                        </button>
-                                        <button data-val="13" class="btn btn-primary backBtnsHelp" id="backBtnHelp_13">
-                                            قبلی
-                                        </button>
-                                        <button class="btn btn-danger exitBtnHelp">خروج</button>
-                                    </div>
-                                </div>
-                                <h3 class="block_title">عکس ها</h3>
-                            </div>
-                            <div class="block_body_top" ng-controller="LogPhotoController as logC">
-                                <div class="ui_columns is-mobile ltrImp">
-                                    <div class="carousel_wrapper ui_column is-6">
-                                        <div class="prw_rup prw_common_mercury_photo_carousel carousel_outer">
-                                            <div class="carousel bignav">
-                                                <div class="carousel-images carousel_images_footer full-height">
-                                                    <div ng-click="ngGetPhotos(-3)" class="see_all_count_wrap">
-                                                        <span class="see_all_count">
-                                                            <span class="ui_icon camera"></span>
-                                                            همه عکس ها {{$userPhotos}}
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <div onclick="photoRoundRobin2(-1)" class="left-nav left-nav-footer hidden"></div>
-                                                <div onclick="photoRoundRobin2(1)" class="right-nav right-nav-footer hidden"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="thumb_wrapper ui_column ui_columns is-multiline is-mobile">
-                                        <div ng-repeat="log in logs"
-                                             class="prw_rup prw_hotels_flexible_album_thumb albumThumbnailWrap ui_column is-6">
-                                            <div class="albumThumbnail">
-                                                <div class="prw_rup prw_common_centered_image">
-                                                    <span class="imgWrap">
-                                                        <img ng-click="ngGetPhotos(log.id)" ng-src="[[log.text]]"
-                                                             class="centeredImg" width="100%"/>
-                                                    </span>
-                                                </div>
-                                                <div ng-click="ngGetPhotos(log.id)" class="albumInfo">
-                                                    <span class="ui_icon camera"></span> [[log.name]] [[log.countNum]]
-                                                </div>
-                                            </div>
-                                        </div>
+{{--                        <div id="check_room">--}}
+{{--                            <div class="container">--}}
+{{--                                <div class="row">--}}
+{{--                                    <span>--}}
+{{--                                        شهر{{$city->name}}--}}
+{{--                                    </span>--}}
+{{--                                    <span>--}}
+{{--                                        {{session('goDate')}}-{{session('backDate')}}--}}
+{{--                                    </span>--}}
+{{--                                    <span class="shTIcon closeXicon float-left"--}}
+{{--                                          onclick="document.getElementById('check_room').style.display = 'none';">--}}
+{{--                                    </span>--}}
+{{--                                </div>--}}
+{{--                                <div class="row">--}}
+{{--                                    <div class="col-md-3">--}}
+{{--                                        <div class="is-2 roomBox_IS_2">--}}
+{{--                                            <div class="priceRow_IS_2">--}}
+{{--                                                <div>--}}
+{{--                                                    <span class="lable_IS_2">قیمت کل </span>--}}
+{{--                                                    برای--}}
+{{--                                                    <span id="check_num_day"></span>--}}
+{{--                                                    شب--}}
+{{--                                                </div>--}}
+{{--                                                <div id="check_total_price">--}}
+{{--                                                    0--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                            <div class="priceRow_IS_2" >--}}
+{{--                                                <div>--}}
+{{--                                                    <div class="float-left">--}}
+{{--                                                        <span id="check_total_num_room"></span>--}}
+{{--                                                        اتاق--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="lable_IS_2">تعداد اتاق</div>--}}
+{{--                                                </div>--}}
+{{--                                                <div id="check_description">--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                            <div>--}}
+{{--                                                <span class="float-left">--}}
+{{--                                                    {{$rooms[0]->provider}}--}}
+{{--                                                </span>--}}
+{{--                                                --}}{{--<a href="{{url('buyHotel')}}">--}}
+{{--                                                <button class="btn rezervedBtn" type="button" onclick="updateSession()">--}}
+{{--                                                    تایید و ادامه--}}
+{{--                                                </button>--}}
+{{--                                                --}}{{--</a>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="col-md-9">--}}
+{{--                                        <div class="row">--}}
+{{--                                            <div>هتل انتخابی شما</div>--}}
+{{--                                            <div>--}}
+{{--                                                <div class="col-md-7">--}}
+{{--                                                    <span class="imgWrap imgWrap1stTemp">--}}
+{{--                                                        <img alt="{{$place->alt1}}" src="{{$thumbnail}}" class="centeredImg" width="100%"/>--}}
+{{--                                                    </span>--}}
+{{--                                                </div>--}}
+{{--                                                <div class="col-md-5">--}}
+{{--                                                    <div>{{$place->name}}</div>--}}
+{{--                                                    <div class="rating_and_popularity" id="hotelRatingMainDivRoomChoice">--}}
+{{--                                                        <span class="header_rating">--}}
+{{--                                                            <div class="rs rating" rel="v:rating">--}}
+{{--                                                                <div class="prw_rup prw_common_bubble_rating overallBubbleRating float-left">--}}
+{{--                                                                    @if($avgRate == 5)--}}
+{{--                                                                       <span class="ui_bubble_rating bubble_50 font-size-16"--}}
+{{--                                                                             property="ratingValue" content="5"--}}
+{{--                                                                             alt='5 of 5 bubbles'></span>--}}
+{{--                                                                   @elseif($avgRate == 4)--}}
+{{--                                                                       <span class="ui_bubble_rating bubble_40 font-size-16"--}}
+{{--                                                                             property="ratingValue" content="4"--}}
+{{--                                                                             alt='4 of 5 bubbles'></span>--}}
+{{--                                                                   @elseif($avgRate == 3)--}}
+{{--                                                                       <span class="ui_bubble_rating bubble_30 font-size-16"--}}
+{{--                                                                             property="ratingValue" content="3"--}}
+{{--                                                                             alt='3 of 5 bubbles'></span>--}}
+{{--                                                                   @elseif($avgRate == 2)--}}
+{{--                                                                       <span class="ui_bubble_rating bubble_20 font-size-16"--}}
+{{--                                                                             property="ratingValue" content="2"--}}
+{{--                                                                             alt='2 of 5 bubbles'></span>--}}
+{{--                                                                   @elseif($avgRate == 1)--}}
+{{--                                                                       <span class="ui_bubble_rating bubble_10 font-size-16"--}}
+{{--                                                                             property="ratingValue" content="1"--}}
+{{--                                                                             alt='1 of 5 bubbles'></span>--}}
+{{--                                                                   @endif--}}
+{{--                                                                </div>--}}
+{{--                                                           </div>--}}
+{{--                                                        </span>--}}
+{{--                                                        <span class="header_popularity popIndexValidation">--}}
+{{--                                                            <a class="more taLnk" href="#REVIEWS">--}}
+{{--                                                                <span property="v:count" id="commentCount"></span> نقد--}}
+{{--                                                            </a>--}}
+{{--                                                            <a> {{$total}} امتیاز</a>--}}
+{{--                                                        </span>--}}
+{{--                                                    </div>--}}
+{{--                                                    <div id="hotelRatesDivs">--}}
+{{--                                                        <div class="titleInTable">درجه هتل</div>--}}
+{{--                                                        <div class="highlightedAmenity detailListItem">{{$place->rate}}</div>--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="blEntry blEn address  clickable colCnt3"--}}
+{{--                                                         onclick="showExtendedMap()">--}}
+{{--                                                        <span class="ui_icon map-pin"></span>--}}
+{{--                                                        <span class="street-address">آدرس : </span>--}}
+{{--                                                        <span>{{$place->address}}</span>--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                        <div class="row" id="selectedRoomMainDiv">--}}
+{{--                                            <div>اتاق های انتخابی شما</div>--}}
+{{--                                            <div id="selected_rooms"></div>--}}
+{{--                                            <div>--}}
+{{--                                                <div class="row">--}}
+{{--                                                    <div class="col-md-12">--}}
+{{--                                                        {{$place->policy}}--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="col-md-3"></div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    @endif--}}
+                </div>
+                <div id="nearbyDiv" ng-controller="NearbyController as nearby" class="ppr_rup ppr_priv_location_detail_two_column">
+                    <div class="column_wrap is-mobile">
+                        <div id="nearbyMainContainer" class="content_column ui_column is-8">
+                            <div class="ppr_rup ppr_priv_location_nearby">
+                                <div class="nearbyContainer outerShell block_wrap">
+                                    <div class="ui_columns neighborhood">
+                                        <div id="map" class="ui_column is-12 mapTile prv_map clickable"></div>
+                                        <div class="clear-both"></div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="block_body_bottom">
-                                <div class="inner ui_columns is-multiline is-mobile"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="nearbyDiv" ng-controller="NearbyController as nearby" class="ppr_rup ppr_priv_location_detail_two_column">
-                        <div class="column_wrap ui_columns is-mobile">
-                            <div class="content_column ui_column is-8">
-                                <div class="ppr_rup ppr_priv_location_nearby">
-                                    <div class="nearbyContainer outerShell block_wrap">
-                                        <div class="block_header">
-                                            <h3 class="block_title">مکان های نزدیک</h3>
-                                        </div>
-                                        <div class="ui_columns neighborhood">
-                                            <div id="map" class="ui_column is-12 mapTile prv_map clickable"></div>
-                                            <div class="clear-both"></div>
-                                        </div>
-                                        <div class="prw_rup prw_common_btf_nearby_poi_grid poiGrid hotel">
-                                            <div class="sectionTitleWrap">
-                                                <span class="sectionTitle">هتل های نزدیک</span>
-                                            </div>
-                                            <div class="ui_columns is-multiline container">
-
-                                                <div ng-repeat="hotel in hotels"
-                                                     class="prw_rup prw_common_btf_nearby_poi_entry ui_column is-6 poiTile">
-                                                    <a href="[[hotel.redirect]]">
-                                                        <div class="ui_columns is-gapless is-mobile poiEntry shownOnMap">
-                                                        <div class="prw_rup prw_common_centered_image ui_column is-4 thumbnailWrap">
-                                                            <span class="imgWrap">
-                                                                <img alt="[[hotel.alt1]]" title="[[hotel.name]]"
-                                                                     ng-src="[[hotel.pic]]" class="centeredImg" width="100%"/>
-                                                            </span>
-                                                        </div>
-                                                        <div title="[[hotel.name]]" class="poiInfo ui_column is-8">
-                                                            <div class="poiName">[[hotel.name]]</div>
-                                                            <div class="prw_rup prw_common_bubble_rating rating">
-                                                                <span class="[[hotel.ngClass]]" property="ratingValue" content="5"></span>
-                                                            </div>
-                                                            <div class="reviewCount">[[hotel.reviews]] نقد</div>
-                                                            <div class="distance">[[hotel.distance]] کلیومتر فاصله</div>
-                                                        </div>
-                                                    </div>
-                                                    </a>
-                                                </div>
-
-                                                <div class="clear-both"></div>
-                                            </div>
-                                        </div>
-                                        <div class="prw_rup prw_common_btf_nearby_poi_grid poiGrid eatery">
-                                            <div class="sectionTitleWrap">
-                                                <span class="sectionTitle">رستوران های نزدیک</span>
-                                            </div>
-                                            <div class="ui_columns is-multiline container">
-
-                                                <div ng-repeat="res in restaurants"
-                                                     {{--ng-click="redirect(res.redirect)"--}}
-                                                     class="prw_rup prw_common_btf_nearby_poi_entry ui_column is-6 poiTile">
-                                                    <a href="[[res.redirect]]">
-                                                        <div class="ui_columns is-gapless is-mobile poiEntry shownOnMap">
-                                                        <div class="prw_rup prw_common_centered_image ui_column is-4 thumbnailWrap">
-                                                            <span class="imgWrap">
-                                                                <img alt="[[res.alt1]]" title="[[res.name]]"
-                                                                     ng-src="[[res.pic]]" class="centeredImg" width="100%"/>
-                                                            </span>
-                                                        </div>
-                                                        <div title="[[res.name]]" class="poiInfo ui_column is-8">
-                                                            <div class="poiName">[[res.name]]</div>
-                                                            <div class="prw_rup prw_common_bubble_rating rating font-size-16">
-                                                                <span class="[[res.ngClass]]" property="ratingValue" content="5"></span>
-                                                            </div>
-                                                            <div class="reviewCount">[[res.reviews]] نقد</div>
-                                                            <div class="distance">[[res.distance]] کلیومتر فاصله</div>
-                                                        </div>
-                                                    </div>
-                                                    </a>
-                                                </div>
-
-                                                <div class="clear-both"></div>
-                                            </div>
-                                        </div>
-                                        <div class="prw_rup prw_common_btf_nearby_poi_grid poiGrid attraction">
-                                            <div class="sectionTitleWrap">
-                                                <span class="sectionTitle">اماکن گردشگری نزدیک</span>
-                                            </div>
-                                            <div class="ui_columns is-multiline container">
-
-                                                <div ng-repeat="amaken in amakens"
-                                                     {{--ng-click="redirect(amaken.redirect)"--}}
-                                                     class="prw_rup prw_common_btf_nearby_poi_entry ui_column is-6 poiTile">
-                                                    <a href="[[amaken.redirect]]">
-                                                        <div class="ui_columns is-gapless is-mobile poiEntry shownOnMap">
-                                                            <div class="prw_rup prw_common_centered_image ui_column is-4 thumbnailWrap">
-                                                                <span class="imgWrap">
-                                                                    <img alt="[[amaken.alt1]]" title="[[amaken.name]]"
-                                                                         ng-src="[[amaken.pic]]" class="centeredImg" width="100%"/>
-                                                                </span>
-                                                            </div>
-                                                            <div title="[[amaken.name]]" class="poiInfo ui_column is-8">
-                                                                <div class="poiName">[[amaken.name]]</div>
-                                                                <div class="prw_rup prw_common_bubble_rating rating font-size-16">
-                                                                    <span class="[[amaken.ngClass]]" property="ratingValue" content="5"></span>
-                                                                </div>
-                                                                <div class="reviewCount">[[amaken.reviews]] نقد</div>
-                                                                <div class="distance">[[amaken.distance]] کلیومتر فاصله
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                </div>
-
-                                                <div class="clear-both"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="ansAndQeustionDiv" class="ppr_rup ppr_priv_location_qa relative-position">
-                        <div data-tab="TABS_ANSWERS" class="block_wrap relative-position">
-                            <div class="block_header relative-position">
-                                <div id="targetHelp_14" class="targets float-left">
-                                    <span class="ui_button primary fr float-left" onclick="showAskQuestion()">سوال بپرس</span>
-                                    <div id="helpSpan_14" class="helpSpans hidden row">
-                                        <span class="introjs-arrow"></span>
-                                        <p>اگر سوالی دارید با فشردن این دکمه از دوستانتان بپرسید تا شما را یاری
-                                            کنند.</p>
-                                        <button data-val="14" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_14">
-                                            بعدی
-                                        </button>
-                                        <button data-val="14" class="btn btn-primary backBtnsHelp" id="backBtnHelp_14">
-                                            قبلی
-                                        </button>
-                                        <button class="btn btn-danger exitBtnHelp">خروج</button>
-                                    </div>
-                                </div>
-                                <h3 class="block_title">سوال و جواب</h3>
-                            </div>
-                            <div class="askQuestionForm hidden control">
-                                <div class="askExplanation">سوال خودتو بپرس تا کسانی که می دونند کمکت کنند.</div>
-                                <div class="overlayNote">سوال شما به صورت عمومی نمایش داده خواهد شد.</div>
-                                <textarea name="topicText" id="questionTextId"
-                                          class="topicText ui_textarea"
-                                          placeholder="سلام هرچی میخواهی بپرسید. بدون خجالت"></textarea>
-                                <span onclick="$('#rules').removeClass('hidden')" class="postingGuidelines float-left">راهنما و قوانین</span>
-                                <div class="underForm">
-                                    <span class="ui_button primary formSubmit" onclick="askQuestion()">ثبت</span>
-                                    <span class="ui_button secondary formCancel"
-                                          onclick="hideAskQuestion()">انصراف</span>
-                                </div>
-                                <div class="clear-both"></div>
-                            </div>
-                            <div class="clear-both"></div>
-
-                            <div class="block_body_top relative-position">
-
-                                <div class="prw_rup prw_common_location_topic relative-position">
-                                    <div class="rtl relative-position question is-mobile ui_column is-12" id="questionsContainer"></div>
-                                </div>
-
-                                <div class="prw_rup prw_common_north_star_pagination" id="pageNumQuestionContainer"></div>
-                            </div>
-
-                            <div class="shouldUpdateOnLoad"></div>
                         </div>
                     </div>
                 </div>
                 @include('layouts.extendedMap')
+                <div class="col-xs-7 commentMainBox position-relative">
+                    <div class="commentOptionsBoxes commentActions">
+                        <span class="commentActionsIcon">...</span>
+                    </div>
+                    <div class="commentWriterDetailsShow">
+                        <div class="circleBase type2 commentWriterPicShow"></div>
+                        <div class="commentWriterExperienceDetails">
+                            <b class="userProfileName">shazdesina</b>
+                            <div class="display-inline-block">در
+                                <span class="commentWriterExperiencePlace">هتل عباسی، شهر یزد، استان یزد</span>
+                            </div>
+                            <div>با
+                                <span class="commentWriterExperienceParticipation">احتشام الدوله توفیقی</span>،
+                                <span class="commentWriterExperienceParticipation">حمیدرضا عسگرزاده </span>و
+                                <span class="commentWriterExperienceParticipation">علی اصر همتی</span>
+                            </div>
+                            <div>
+                                هم اکنون - بیش از 23 ساعت پیش
+                            </div>
+                        </div>
+                    </div>
+                    <div class="commentContentsShow">
+                        <p>
+                           بسیاری از درخواست کنندگان کسی و کارهای بومی و محلی اطلاعات مورد نیاز خود را از طریق اینترنت دریافت می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا خدمات مورد نیازشان اثرپذیری فراوانی دارد.
+                            با توجه به ابن که خدمات و کالاهای بومی و محلی دارای اصالت و فرهنگ کهن جوامع روستایی هستند، می توان گفت اینترنت می تواند در آمدزایی از سبک زندگی جوامع محلی نقش
+                        </p>
+                    </div>
+                    <div class="commentPhotosShow">
+                        <div class="commentPhotosMainDiv">
+                            <div class="photosCol secondCol col-xs-6">
+                                <div></div>
+                                <div></div>
+                            </div>
+                            <div class="photosCol firstCol col-xs-6">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+                        <div class="quantityOfLikes">
+                            <span>31</span>
+                            نفر دوست داشتند،
+                            <span>31</span>
+                            نفر دوست نداشتند و
+                            <span>31</span>
+                            نفر نظر دادند.
+                        </div>
+                    </div>
+                    <div class="commentRatingsDetailsShow">
+                        <div class="commentRatingHeader">
+                            بازدید با
+                            <span>دوستان</span>
+                            در فصل
+                            <span>بهار</span>
+                            و از مبدأ
+                            <span>تهران</span>
+                            انجام شده است
+                        </div>
+                        <div class="commentRatingsDetailsBtn">مشاهده جزئیات امتیازدهی
+                            <div class="commentRatingsDetailsBtnIcon">
+                                <i class="glyphicon glyphicon-triangle-bottom"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="commentFeedbackChoices">
+
+                    </div>
+                </div>
+                <div class="col-xs-5 float-right direction-rtl"></div>
             </div>
         </div>
     </div>
@@ -3489,7 +3060,7 @@ if ($total == 0)
                         $("#reviewsContainer").empty().append(tmp);
                     }
                     for (i = 0; i < arr.length; i++) {
-                        newElement += "<div class='border-bottom-grey inline-block full-width' class='review'>";
+                        newElement += "<div class='border-bottom-grey display-inline-block full-width' class='review'>";
                         newElement += "<div class='prw_rup prw_reviews_basic_review_hsx'>";
                         newElement += "<div class='reviewSelector'>";
                         newElement += "<div class='review hsx_review ui_columns is-multiline inlineReviewUpdate provider0'>";
@@ -3619,7 +3190,7 @@ if ($total == 0)
             var newElement;
 
             for (i = 0; i < arr.length; i++) {
-                newElement = "<div class='ui_column is-12 relative-position float-right'><div class='ui_column is-2'>";
+                newElement = "<div class='ui_column is-12 position-relative float-right'><div class='ui_column is-2'>";
                 newElement += "<div class='avatar_wrap'>";
                 newElement += "<div class='prw_rup prw_common_centered_image qa_avatar' onmouseleave='$(\".img_popUp\").addClass(\"hidden\");' onmouseenter='showBriefPopUp(this, \"" + arr[i].visitorId + "\")'>";
                 newElement += "<span class='imgWrap fixedAspect'>";
@@ -3627,7 +3198,7 @@ if ($total == 0)
                 newElement += "</span></div>";
                 newElement += "<div class='username'>" + arr[i].visitorId + "</div>";
                 newElement += "</div></div>";
-                newElement += "<div class='ui_column is-8 relative-position'><a href='" + homeURL + "/seeAllAns/" + arr[i].id + "'>" + arr[i].text + "</a>";
+                newElement += "<div class='ui_column is-8 position-relative'><a href='" + homeURL + "/seeAllAns/" + arr[i].id + "'>" + arr[i].text + "</a>";
                 newElement += "<div class='question_date'>" + arr[i].date + "<span class='iapSep'>|</span><span id='showReportReviews2' onclick='showReportPrompt(\"" + arr[i].id + "\")' class='ui_icon'>گزارش تخلف</span></div>";
                 if (i == 0) {
                     newElement += "<div id='targetHelp_15' class='targets row'><span class='col-xs-12 ui_button primary small answerButton' onclick='showAnsPane(\"" + arr[i].id + "\")'>پاسخ ";
@@ -4404,7 +3975,7 @@ if ($total == 0)
             if (total <= 1)
                 return "";
             t = total - filters.length;
-            newElement = "<div class='col-xs-12 relative-position'><div class='col-xs-12 bubbles padding-0 mg-rt-0' style='margin-left: " + ((400 - (t * 18)) / 2) + "px'>";
+            newElement = "<div class='col-xs-12 position-relative'><div class='col-xs-12 bubbles pd-0 mg-rt-0' style='margin-left: " + ((400 - (t * 18)) / 2) + "px'>";
             for (i = 1; i < total; i++) {
                 if (!isInFilters(i)) {
                     if (i == curr)
@@ -4776,21 +4347,21 @@ if ($total == 0)
                         '<span class="color-darkred">نام اتاق: </span>\n' +
                         '<span>' + rooms[i].name + '</span>\n' +
                         '</div>\n' +
-                        '<div class=".width-33percent">\n' +
+                        '<div class="width-33per">\n' +
                         '<span class="color-darkred">تاریخ ورود: </span>\n' +
                         '<span>{{session("goDate")}}</span>\n' +
                         '</div>\n' +
-                        '<div class=".width-33percent">\n' +
+                        '<div class="width-33per">\n' +
                         '<span class="color-darkred">تاریخ خروج: </span>\n' +
                         '<span>{{session("backDate")}}</span>\n' +
                         '</div>\n' +
                         '</div>\n' +
-                        '<div class="row display-flex flex-direction-row mg-2percent">\n' +
-                        '<div class=".width-33percent">\n' +
+                        '<div class="row display-flex flex-direction-row mg-2per-0">\n' +
+                        '<div class="width-33per">\n' +
                         '<span class="color-darkred">تعداد مسافر: </span>\n' +
                         '<span>' + rooms[i].capacity.adultCount + '</span>\n' +
                         '</div>\n' +
-                        '<div class=".width-33percent">\n' +
+                        '<div class="width-33per">\n' +
                         '<span class="color-darkred">سرویس تخت اضافه: </span>\n';
                     if (extraBed) {
                         text += '<span class="font-size-085em">با تخت اضافه</span>';

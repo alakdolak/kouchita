@@ -1,5 +1,6 @@
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/masthead-saves.css?v=1')}}' data-rup='long_lived_global_legacy'/>
-<link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/placeHeader.css')}}' data-rup='long_lived_global_legacy'/>
+<link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/placeHeader.css')}}' data-rup='long_lived_global_legacy'/>
+{{--<link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/abbreviations.css')}}' data-rup='long_lived_global_legacy'/>--}}
 
 <script>
     var getBookMarksPath = '{{route('getBookMarks')}}';
@@ -7,12 +8,12 @@
 
 <?php $user = Auth::user() ?>
 
-<div class="masthead relative-position">
-    <div class="ppr_rup ppr_priv_global_nav relative-position">
-        <div class="global-nav global-nav-single-line has-links relative-position">
-            <div class="global-nav-top relative-position">
+<div class="masthead position-relative">
+    <div class="ppr_rup ppr_priv_global_nav position-relative">
+        <div class="global-nav global-nav-single-line has-links position-relative">
+            <div class="global-nav-top position-relative">
                 <div class="global-nav-bar global-nav-green">
-                    <div class="ui_container global-nav-bar-container rtl relative-position">
+                    <div class="ui_container global-nav-bar-container direction-rtl position-relative">
                         <div class="global-nav-hamburger is-hidden-tablet">
                             <span class="ui_icon menu-bars"></span>
                         </div>
@@ -25,34 +26,34 @@
                                     <ul class="global-nav-links-menu">
 
                                         @if($placeMode == "hotel")
-                                            <li><a href="{{route('hotelList', ['city' => $state, 'mode' => 'state'])}}" id="global-nav-hotels" class="red-color unscoped global-nav-link ui_tab " data-tracking-label="hotels">هتل</a></li>
+                                            <li><a href="{{route('hotelList', ['city' => $state, 'mode' => 'state'])}}" id="global-nav-hotels" class="dark-redImp unscoped global-nav-link ui_tab " data-tracking-label="hotels">هتل</a></li>
                                         @elseif($placeMode != "policies")
-                                            <li><a href="{{route('hotelList', ['city' => $state, 'mode' => 'state'])}}" id="global-nav-hotels" class="unscoped global-nav-link ui_tab " data-tracking-label="hotels">هتل</a></li>
+                                            <li><a href="{{route('hotelList', ['city' => $state, 'mode' => 'state'])}}" id="global-nav-hotels" class="unscoped global-nav-link ui_tab color-whiteImp" data-tracking-label="hotels">هتل</a></li>
                                         @else
-                                            <li><a href="{{route('mainMode', ['mode' => 'hotel'])}}" id="global-nav-hotels" class="unscoped global-nav-link ui_tab " data-tracking-label="hotels">هتل</a></li>
+                                            <li><a href="{{route('mainMode', ['mode' => 'hotel'])}}" id="global-nav-hotels" class="unscoped global-nav-link ui_tab color-whiteImp" data-tracking-label="hotels">هتل</a></li>
                                         @endif
                                         @if($placeMode == "restaurant")
-                                            <li><a href="{{route('restaurantList', ['city' => $state, 'mode' => 'state'])}}"  id="global-nav-restaurants" class="red-color unscoped global-nav-link ui_tab">رستوران ها</a></li>
+                                            <li><a href="{{route('restaurantList', ['city' => $state, 'mode' => 'state'])}}"  id="global-nav-restaurants" class="dark-redImp unscoped global-nav-link ui_tab">رستوران ها</a></li>
                                         @elseif($placeMode != "policies")
-                                            <li><a href="{{route('restaurantList', ['city' => $state, 'mode' => 'state'])}}" id="global-nav-restaurants" class="unscoped global-nav-link ui_tab">رستوران ها</a></li>
+                                            <li><a href="{{route('restaurantList', ['city' => $state, 'mode' => 'state'])}}" id="global-nav-restaurants" class="unscoped global-nav-link ui_tab color-whiteImp">رستوران ها</a></li>
                                         @else
-                                            <li><a href="{{route('mainMode', ['mode' => 'restaurant'])}}" id="global-nav-hotels" class="unscoped global-nav-link ui_tab " data-tracking-label="hotels">رستوران ها</a></li>
+                                            <li><a href="{{route('mainMode', ['mode' => 'restaurant'])}}" id="global-nav-hotels" class="unscoped global-nav-link ui_tab color-whiteImp" data-tracking-label="hotels">رستوران ها</a></li>
                                         @endif
                                         @if($placeMode == "amaken")
-                                            <li><a href="{{route('amakenList', ['city' => $state, 'mode' => 'state'])}}"  id="global-nav-amaken" class="red-color unscoped global-nav-link ui_tab">جاذبه ها</a></li>
+                                            <li><a href="{{route('amakenList', ['city' => $state, 'mode' => 'state'])}}"  id="global-nav-amaken" class="dark-redImp unscoped global-nav-link ui_tab">جاذبه ها</a></li>
                                         @elseif($placeMode != "policies")
-                                            <li><a href="{{route('amakenList', ['city' => $state, 'mode' => 'state'])}}" id="global-nav-amaken" class="unscoped global-nav-link ui_tab">جاذبه ها</a></li>
+                                            <li><a href="{{route('amakenList', ['city' => $state, 'mode' => 'state'])}}" id="global-nav-amaken" class="unscoped global-nav-link ui_tab color-whiteImp">جاذبه ها</a></li>
                                         @else
-                                            <li><a href="{{route('mainMode', ['mode' => 'amaken'])}}" id="global-nav-hotels" class="unscoped global-nav-link ui_tab " data-tracking-label="hotels">جاذبه ها</a></li>
+                                            <li><a href="{{route('mainMode', ['mode' => 'amaken'])}}" id="global-nav-hotels" class="unscoped global-nav-link ui_tab color-whiteImp" data-tracking-label="hotels">جاذبه ها</a></li>
                                         @endif
                                         @if($placeMode == "ticket")
-                                            <li><a  href="{{route('tickets')}}" class="red-color unscoped global-nav-link ui_tab ">بلیط</a></li>
+                                            <li><a  href="{{route('tickets')}}" class="dark-redImp unscoped global-nav-link ui_tab ">بلیط</a></li>
                                         @else
-                                            <li><a href="{{route('tickets')}}" class="unscoped global-nav-link ui_tab ">بلیط</a></li>
+                                            <li><a href="{{route('tickets')}}" class="unscoped global-nav-link ui_tab color-whiteImp">بلیط</a></li>
                                         @endif
 
-                                        <li class="" data-element=".masthead-dropdown-Flights"><a href="{{route('soon')}}" class="unscoped global-nav-link ui_tab " data-tracking-label="Flights">جشنواره ها</a></li>
-                                        <li class="" data-element=".masthead-dropdown-Flights"><a href="" class="unscoped global-nav-link ui_tab " data-tracking-label="Flights"> آداب و رسوم</a></li>
+                                        <li class="" data-element=".masthead-dropdown-Flights"><a href="{{route('soon')}}" class="unscoped global-nav-link ui_tab color-whiteImp" data-tracking-label="Flights">جشنواره ها</a></li>
+                                        <li class="" data-element=".masthead-dropdown-Flights"><a href="" class="unscoped global-nav-link ui_tab color-whiteImp" data-tracking-label="Flights"> آداب و رسوم</a></li>
 
                                     </ul>
 
@@ -60,9 +61,9 @@
                             </div>
                         </div>
 
-                        <div class="global-nav-actions relative-position" >
+                        <div class="global-nav-actions position-relative" >
                             @if(Auth::check())
-                                <div class="ppr_rup ppr_priv_global_nav_action_trips relative-position">
+                                <div class="ppr_rup ppr_priv_global_nav_action_trips position-relative">
                                     <div id="targetHelp_1" class="targets">
                                         <div id="bookmarkicon" class="ppr_rup ppr_priv_global_nav_action_profile">
                                             <span class="ui_icon casino"></span>
@@ -78,7 +79,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="ppr_rup ppr_priv_global_nav_action_trips relative-position">
+                                <div class="ppr_rup ppr_priv_global_nav_action_trips position-relative">
                                     <div id="targetHelp_2" class="targets">
                                         <div class="masthead-saves" title="My Trips and Recently Viewed">
                                             <a class="trips-icon">
@@ -97,7 +98,7 @@
                                     </div>
                                 </div>
                             @else
-                                <div class="ppr_rup ppr_priv_global_nav_action_trips relative-position">
+                                <div class="ppr_rup ppr_priv_global_nav_action_trips position-relative">
                                     <div id="targetHelp_4" class="targets">
                                         <div id="entryBtnId" class="ppr_rup ppr_priv_global_nav_action_profile">
                                             <div class="global-nav-profile global-nav-utility">
@@ -117,7 +118,7 @@
                                 </div>
                             @endif
 
-                            <div id="taplc_global_nav_action_notif_0" class="ppr_rup ppr_priv_global_nav_action_notif relative-position">
+                            <div id="taplc_global_nav_action_notif_0" class="ppr_rup ppr_priv_global_nav_action_notif position-relative">
                                 <div id="targetHelp_3" class="targets">
                                     <div class="masthead_notification" title="Alerts">
                                         <div class="masthead_notifctr_btn">
@@ -147,8 +148,8 @@
                                 </div>
                             </div>
 
-                            <div id="taplc_global_nav_action_profile_0" class="ppr_rup ppr_priv_global_nav_action_profile relative-position">
-                                <div class="global-nav-profile global-nav-utility relative-position">
+                            <div id="taplc_global_nav_action_profile_0" class="ppr_rup ppr_priv_global_nav_action_profile position-relative">
+                                <div class="global-nav-profile global-nav-utility position-relative">
                                     @if(Auth::check())
                                         <div id="targetHelp_5" class="targets" title="Profile" class="position-relative">
                                             <div class="global-nav-utility-activator" title="Profile">
@@ -181,8 +182,8 @@
                                 </div>
                             </div>
 
-                            <div id="taplc_masthead_search_0" class="ppr_rup ppr_priv_masthead_search relative-position" data-placement-name="masthead_search">
-                                <div class="mag_glass_parent relative-position" title="Search">
+                            <div id="taplc_masthead_search_0" class="ppr_rup ppr_priv_masthead_search position-relative" data-placement-name="masthead_search">
+                                <div class="mag_glass_parent position-relative" title="Search">
                                     <div class="separator"></div>
                                     <div id="targetHelp_6" class="targets">
                                         <span class="ui_icon search" id="openSearch"></span>
@@ -220,7 +221,7 @@
                         </div>
                         <div class="sidebar-nav-profile-container">
                             @if(Auth::check())
-                                <div class="sidebar-nav-profile-linker relative-position">
+                                <div class="sidebar-nav-profile-linker position-relative">
                                     <a class="global-nav-profile-linker">
                                         <span onclick="document.location.href = '{{route('profile')}}'" class="ui_icon member"></span>
                                         <div class="profile-link">

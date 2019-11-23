@@ -20,6 +20,18 @@
     display: none;
 }
 
+.display-inline {
+    display: inline;
+}
+
+.display-flex {
+    display: flex;
+}
+
+.flex-direction-row {
+    flex-direction: row;
+}
+
 /*direction*/
 
 .direction-ltr {
@@ -156,6 +168,10 @@
     font-size: 20px;
 }
 
+.font-size-20Imp {
+    font-size: 20px !important;
+}
+
 .font-size-25 {
     font-size: 25px;
 }
@@ -176,8 +192,16 @@
     font-size: 0.8em
 }
 
+.font-size-085em {
+    font-size: 0.85em;
+}
+
 .font-size-1em {
     font-size: 1em;
+}
+
+.font-size-12em {
+    font-size: 1.2em
 }
 
 .font-size-15em {
@@ -284,6 +308,10 @@
 
 /*margin top*/
 
+.mg-tp-2 {
+    margin-top: 2px;
+}
+
 .mg-tp-5 {
     margin-top: 5px;
 }
@@ -336,6 +364,10 @@
 
 .mg-rt-0Imp {
     margin-right: 0 !important;
+}
+
+.mg-rt-5 {
+    margin-right: 5px;
 }
 
 .mg-rt-6 {
@@ -406,6 +438,10 @@
     margin-left: 10px;
 }
 
+.mg-lt-15 {
+    margin-left: 15px;
+}
+
 /*margin*/
 
 .mg-0 {
@@ -450,6 +486,10 @@
 
 .mg-0-30-155-0 {
     margin: 0 30px 155px 0;
+}
+
+.mg-2per-0 {
+    margin: 2% 0;
 }
 
 /*width*/
@@ -508,6 +548,10 @@
 
 .width-30per {
     width: 30%
+}
+
+.width-33per {
+    width: 33%;
 }
 
 .width-33perImp {
@@ -718,6 +762,10 @@
     color: #963019
 }
 
+.dark-redImp {
+    color: #963019!important;
+}
+
 .color-red {
     color: red;
 }
@@ -728,6 +776,10 @@
 
 .color-white {
     color:#fff;
+}
+
+.color-whiteImp {
+    color:#fff !important;
 }
 
 /*positions*/
@@ -772,6 +824,14 @@
 
 .bg-color-light-grey {
     background-color: #f4f4f4;
+}
+
+.bg-color-grey {
+    background-color: #cfcfcf
+}
+
+.bg-size-100-100 {
+    background-size: 100% 100%;
 }
 
 /*bg-position*/

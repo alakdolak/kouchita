@@ -601,7 +601,7 @@ p {
 #notifyOtherSuggestionDiv {
     text-align: right;
     width: 100%;
-    font: 1em;
+    font-size: 1em;
     color: #4A4A4A;
     padding-top: 0 !important;
 }
@@ -628,7 +628,7 @@ p {
 }
 
 #moreTaLnkReviewHeader {
-    margin-right: 15px;
+    margin-left: 5px;
 }
 
 #scoreSpanHeader {
@@ -660,33 +660,33 @@ p {
     direction: rtl;
 }
 
-#bestPriceInnerDiv > div > div:nth-child(1) {
-    color: #a3513d;
-}
+/*#bestPriceInnerDiv > div > div:nth-child(1) {*/
+/*    color: #a3513d;*/
+/*}*/
 
-#bestPriceInnerDiv > div > div:nth-child(2) > div:nth-child(1) {
-    border: 2px solid #e5e5e5;
-    border-radius: 10px;
-    width: 80%;
-    margin: 0 auto;
-}
+/*#bestPriceInnerDiv > div > div:nth-child(2) > div:nth-child(1) {*/
+/*    border: 2px solid #e5e5e5;*/
+/*    border-radius: 10px;*/
+/*    width: 80%;*/
+/*    margin: 0 auto;*/
+/*}*/
 
-#bestPriceInnerDiv > div > div:nth-child(2) > div:nth-child(1) > label {
-    margin-left: 0 !important;
-}
+/*#bestPriceInnerDiv > div > div:nth-child(2) > div:nth-child(1) > label {*/
+/*    margin-left: 0 !important;*/
+/*}*/
 
-#bestPriceInnerDiv > div > div:nth-child(2) > div:nth-child(1) > div {
-    width: 1100px;
-    position: absolute;
-    left: -40%;
-    top: 90%;
-}
+/*#bestPriceInnerDiv > div > div:nth-child(2) > div:nth-child(1) > div {*/
+/*    width: 1100px;*/
+/*    position: absolute;*/
+/*    left: -40%;*/
+/*    top: 90%;*/
+/*}*/
 
-#bestPriceInnerDiv > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) {
-    font-size: 25px;
-    display: inline-block;
-    cursor: pointer;
-}
+/*#bestPriceInnerDiv > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) {*/
+/*    font-size: 25px;*/
+/*    display: inline-block;*/
+/*    cursor: pointer;*/
+/*}*/
 
 #roomDetail {
     font-size: 1.1em;
@@ -742,7 +742,7 @@ p {
 }
 
 #targetHelp_10 {
-    height: 400px;
+    height: 340px;
 }
 
 #targetHelp_10 > div:nth-child(1) {
@@ -769,17 +769,11 @@ p {
 
 .imgWrap1stTemp > img {
     min-width: 152px;
+    height: 100%;
 }
 
 #imgWrap3rdLine {
     min-width: 113px;
-}
-
-#BODYCON > div:nth-child(1) {
-    padding: 15px 0;
-    height: 70px !important;
-    text-align: center;
-    box-shadow: 0px 4px 5px #888888;
 }
 
 .closeXicon2:before {
@@ -787,10 +781,10 @@ p {
     top: 10px !important;
 }
 
-#BODYCON > div:nth-child(3) {
-    height: 90px;
-    background-color: rgb(248, 248, 248);
-}
+/*#BODYCON > div:nth-child(3) {*/
+/*    height: 90px;*/
+/*    background-color: rgb(248, 248, 248);*/
+/*}*/
 
 #introduction > div > div:nth-child(1) {
     border: none !important;
@@ -815,9 +809,12 @@ p {
 
 #introductionText {
     direction: rtl;
-    font-size: 14px;
-    max-height: 21px;
+    font-size: 15px;
+    /*max-height: 21px;*/
     overflow: hidden;
+    text-align: justify;
+    line-height: 1.8;
+    color: #666666;
 }
 
 #map-small {
@@ -851,9 +848,9 @@ p {
     margin-right: -4px;
 }
 
-#clientConnectionsWebsite {
-    margin-right: -8px;
-}
+/*#clientConnectionsWebsite {*/
+/*    margin-right: -8px;*/
+/*}*/
 
 #tagsName > h3 {
     direction: rtl;
@@ -1226,10 +1223,6 @@ p {
     float: left;
 }
 
-#nearbyDiv > div > div > div > div > div:nth-child(2) {
-    padding-bottom: 22px;
-    padding-top: 22px;
-}
 
 #nearbyDiv .poiGrid {
     border-color: #CCCCCC !important;
@@ -1440,166 +1433,14 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     display: inline;
 }
 
-.height-auto {
-    height: auto;
-}
-
-.mg-2percent {
-    margin: 2% 0;
-}
-
-.mg-rt-0 {
-    margin-right: 0;
-}
-
-.padding-0 {
-    padding: 0;
-}
-
-.font-size-085em {
-    font-size: 0.85em;
-}
-
-.font-size-12 {
-    font-size: 12px;
-}
-
-.width-33percent {
-    width: 33%;
-}
-
-.display-flex {
-    display: flex;
-}
-
-.flex-direction-row {
-    flex-direction: row;
-}
-
-.bg-size-100-100 {
-    background-size: 100% 100%;
-}
-
-.bg-color-grey {
-    background-color: #cfcfcf
-}
-
-.mg-rt-22percent {
-    margin-right: 22%;
-}
-
-.font-size-1em {
-    font-size: 1em;
-}
-
-.font-size-10 {
-    font-size: 10px;
-}
-
-.text-align-center {
-    text-align: center;
-}
-
-.mg-bt-5 {
-    margin-bottom: 5px;
-}
-
-.border-radius-100 {
-    border-radius: 100%;
-}
-
-.display-inline {
-    display: inline;
-}
-
-.full-height {
-    height: 100%;
-}
-
-.full-width {
-    width: 100%;
-}
-
-.text-align-left {
-    text-align: left;
-}
-
-.cursor-pointer {
-    cursor: pointer;
-}
-
 .color-darkred {
     color: #92321b
-}
-
-.display-none {
-    display: none;
-}
-
-.display-block {
-    display: block;
-}
-
-.inline-block {
-    display: inline-block;
 }
 
 .tag {
     margin: 5px;
     float: right;
     direction: rtl;
-}
-
-.font-size-28 {
-    font-size: 28px;
-}
-
-.font-size-20 {
-    font-size: 20px;
-}
-
-.font-size-20Imp {
-    font-size: 20px !important;
-}
-
-.font-size-12em {
-    font-size: 1.2em
-}
-
-.ltrImp {
-    direction: ltr !important;
-}
-
-.ltr {
-    direction: ltr;
-}
-
-.clear-both {
-    clear: both;
-}
-
-.float-left {
-    float: left;
-}
-
-.float-right {
-    float: right;
-}
-
-.float-rightImp {
-    float: right !important;
-}
-
-.rtl {
-    direction: rtl;
-}
-
-.relative-position {
-    position: relative;
-}
-
-.font-size-16 {
-    font-size: 16px;
 }
 
 .alarmHeaderText {
@@ -1639,4 +1480,563 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     font-size: 1em;
     width: 100px;
     border-radius: 7px;
+}
+
+/*new ver styles*/
+
+#bestPrice::before , #bestPrice::after {
+    display: none;
+}
+
+#bestPriceInnerDiv {
+    background: black;
+    border: 10px solid #4DC7BC;
+    box-shadow: 0 2px 4px 0  rgba(0, 0, 0, .1);
+}
+
+#bestPrice {
+    box-shadow: none;
+}
+
+#addToFavouriteTripsMainDiv {
+    background: #0076a3;
+    color:white;
+    padding: 5px 20px;
+    border-radius: 10px;
+}
+
+.circleBase {
+    border-radius: 50%;
+    /*behavior: url(PIE.htc); !* remove if you don't care about IE8 *!*/
+}
+
+.type2 {
+    width: 20px;
+    height: 20px;
+    background: #ccc;
+    /*border: 3px solid #000;*/
+    /*position: absolute;*/
+}
+
+#addToFavouriteTripsMainDiv::before {
+    display: none;
+}
+
+#addToFavouriteTripsMainDiv > div {
+    display: inline-block;
+    float: right;
+}
+
+.addToFavouriteTripsIcon {
+    background-color: white;
+}
+
+.addToFavouriteTripsIcon::before {
+    content: '\e012';
+    color: #ff0000;
+    float: right;
+    font-family: shazdemosafer-tour !important;
+    font-size: 20px;
+    margin-top: 3px;
+}
+
+.addToFavouriteTripsLabel {
+    margin-right: 10px;
+}
+
+.saveAsBookmarkMainDiv , .sharePageMainDiv {
+    padding: 5px 20px;
+    background: #e5e5e5 !important;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+.saveAsBookmarkMainDiv > div , .sharePageMainDiv > div {
+    display: inline-block;
+    float: right;
+}
+
+.saveAsBookmarkIcon::before , .sharePageIcon::before {
+    content: "\e0dd";
+    font-family: shazdemosafer-tour !important;
+    float: right;
+}
+
+.saveAsBookmarkLabel , .sharePageLabel {
+    margin-right: 10px;
+}
+
+.ui_icon.casino::before , .ui_icon.casino::before {
+    display: none;
+}
+
+#photographersLink {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    color: white;
+    background-color: rgba(0,0,139,0.6);
+    /*opacity: 60%;*/
+    border-radius: 10px;
+    padding: 5px;
+}
+
+#helpBtnMainDiv {
+    position: absolute;
+    left: 0;
+    top: -20px;
+    border-radius: 10px;
+    background: #0076a3;
+    padding: 4px 15px;
+    color: white;
+}
+
+#helpBtnMainDiv > a.link {
+    cursor: pointer;
+    float: right;
+}
+
+#helpBtnMainDiv > a.link > div::before {
+    content: '\e054';
+    font-family: shazdemosafer-tour !important;
+    color: #0076a3;
+    font-size: 32px;
+    position: absolute;
+    top: -6px;
+    right: 12px;
+}
+
+#helpBtnMainDiv > a > b {
+    font-size: 14px;
+    display: inline-block;
+    margin: 2px 5px 0;
+    color: white;
+}
+
+.helpBtnIconMainDiv {
+    width: 25px;
+    height: 25px;
+    background-color: white;
+    display: inline-block;
+    float: right;
+}
+
+.rating_and_popularity {
+    position: relative;
+}
+
+#photographerIdPic {
+    display: inline-block;
+    width: 45px;
+    height: 45px;
+    float: right;
+}
+
+.see_all_count  {
+    padding: 5px 15px !important;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.see_all_count_wrap {
+    background: none !important;
+}
+
+#searchBoxTopPageMainDiv {
+    position: absolute;
+    top: 0;
+    left: 380px;
+    border-radius: 0 0 10px 10px;
+    border: 3px solid #f5f5f5;
+    color: #666666;
+    display: inline-block;
+    z-index: 1;
+    padding: 10px 15px;
+    border-top: none;
+}
+
+#searchBoxTopPageMainDiv > div , #searchBoxTopPageMainDiv > span {
+    display: inline-block;
+    float: right;
+    position: relative;
+    margin: 0 5px;
+}
+
+.inputBox {
+    padding: 2px 10px;
+    font-size: 0.8em;
+    display: inline-block;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    background-color: #ebebeb;
+    line-height: 1.42857143;
+    /*margin: 10px 0;*/
+    width: auto;
+}
+
+.inputBoxInput {
+    width: 100%;
+    text-align: center;
+    border: none;
+    /*float: left;*/
+    background-color: transparent;
+}
+
+.styled-select {
+    -moz-appearance:none; /* Firefox */
+    -webkit-appearance:none; /* Safari and Chrome */
+    /*height: 30px;*/
+}
+
+.select-side {
+    width: auto;
+    display: inline-block;
+    pointer-events: none;
+    position: absolute;
+    left: 4px;
+    top: 4px;
+}
+
+.select-side > i {
+    float: left;
+    color: #4DC7BC;
+    font-size: 10px;
+}
+
+.styled-select > option {
+    color: #f5f5f5;
+}
+
+#searchIcon::before {
+    content: '\E056';
+    font-family: shazdemosafer-tour !important;
+    color: #4DC7BC;
+    position: absolute;
+    top: -5px;
+    left: -15px;
+    font-size: 20px;
+}
+
+/*commentsBar*/
+
+#commentsMainDiv {
+    margin-top: 10px;
+    /*float: right;*/
+    text-align: right;
+}
+
+#commentsMainDivHeader {
+    background-color: #0076a3;
+    color: white;
+    font-weight: 700;
+    padding: 10px;
+    font-size: 15px;
+}
+
+#profilePicForComment {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    width: 50px;
+    height: 50px;
+}
+
+#commentInputBox {
+    width: 100%;
+    border-radius: 0;
+    background: white;
+    padding: 20px 75px 15px;
+    position: relative;
+    direction: rtl;
+}
+
+#commentSmileyIcon {
+    position: absolute;
+    left: 15px;
+    bottom: 10px;
+}
+
+#commentInputBox > textarea {
+    text-align: justify;
+    font-size: 15px;
+    font-weight: 600;
+    color: #8b8b8b;
+    resize: none;
+}
+
+#commentMoreSettingBar {
+    background: white;
+    display: inline-block;
+    width: 100%;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+}
+
+.commentOptionsBoxes {
+    background-color: #e5e5e5;
+    display: inline-block;
+    float: right;
+    direction: rtl;
+    margin: 5px;
+    border-radius: 10px;
+    padding: 5px 10px;
+    font-size: 13px;
+    font-weight: 600;
+    position: relative;
+}
+
+.commentOptionsBoxes > span {
+    display: inline-block;
+}
+
+.commentOptionsBoxes > span:nth-child(1) {
+    line-height: 1.7;
+    margin-right: 5px;
+}
+
+.commentOptionsText {
+    line-height: 1.7;
+    margin-right: 23px;
+}
+
+#addPhotoCommentIcon {
+    position: absolute;
+    right: -2px;
+    top: -10px;
+}
+
+#addPhotoCommentIcon::before {
+    content: '\E0B1';
+    font-family: shazdemosafer-tour !important;
+    font-size: 30px;
+    font-weight: 500;
+}
+
+#addVideoCommentIcon{
+    position: absolute;
+    right: -2px;
+    top: -10px;
+}
+
+#addVideoCommentIcon::before {
+    content: '\E0B2';
+    font-family: shazdemosafer-tour !important;
+    font-size: 30px;
+    font-weight: 500;
+}
+
+#add360VideoCommentIcon{
+    position: absolute;
+    right: -2px;
+    top: -10px;
+}
+
+#add360VideoCommentIcon::before {
+    content: '\E0AE';
+    font-family: shazdemosafer-tour !important;
+    font-size: 30px;
+    font-weight: 500;
+}
+
+#tagFriendCommentIcon{
+    position: absolute;
+    right: 2px;
+    top: -7px;
+}
+
+#tagFriendCommentIcon::before {
+    content: '\E087';
+    font-family: shazdemosafer-tour !important;
+    font-size: 25px;
+    font-weight: 500;
+}
+
+#moreSettingComment {
+    font-size: 35px;
+    position: absolute;
+    right: 2px;
+    top: -22px;
+    color: #8b8b8b;
+}
+
+#moreSettingCommentManDiv {
+    height: 32px;
+    width: 45px;
+    position: relative;
+}
+
+.generalDescription {
+    border-left: 1px solid #e5e5e5;
+}
+
+.generalDescription .block_header , .reviews .block_header {
+    padding: 10px 0;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+#reviewsMainDiv .block_title {
+    font-size: 20px !important;
+}
+
+.generalDescription .block_title , .reviews .block_title {
+    position: absolute;
+    background: white;
+    font-size: 22px !important;
+    padding: 0 0 0 10px;
+    top: 0;
+    color: #0076a3 !important;
+}
+
+#nearbyMainContainer {
+    width: 100%;
+    float: right;
+}
+
+#nearbyDiv {
+    display: inline-block;
+    width: 100%;
+    background: white;
+    margin-top: 15px;
+    padding: 15px;
+}
+
+.commentMainBox {
+    float: right;
+    direction: rtl;
+    background: white;
+    margin-top: 10px;
+    padding: 10px 20px;
+}
+
+.commentWriterDetailsShow {
+    display: inline-block;
+    width: 100%;
+}
+
+.commentWriterPicShow {
+    width: 45px;
+    height: 45px;
+    background-color: #E5E5E5;
+    display: inline-block;
+    float: right;
+    margin-left: 10px;
+}
+
+.userProfileName {
+    display: inline-block;
+    font-size: 15px;
+}
+
+.commentActions {
+    position: absolute;
+    top: 5px;
+    left: 15px;
+    height: 32px;
+    width: 45px;
+}
+
+.commentActionsIcon {
+    font-size: 35px;
+    position: absolute;
+    right: 2px;
+    top: -22px;
+    color: #8b8b8b;
+}
+
+.commentWriterExperienceDetails {
+    color: #666666;
+    margin-bottom: 10px;
+}
+
+.commentWriterExperiencePlace {
+    color: #16174f;
+}
+
+.commentWriterExperienceParticipation , .userProfileName {
+    color: #0076a3;
+
+}
+
+.commentContentsShow > p {
+    word-break: normal;
+    text-align: justify;
+}
+
+.commentPhotosShow {
+    padding-bottom: 5px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.commentPhotosMainDiv {
+    display: inline-block;
+    width: 100%;
+}
+
+.firstCol {
+    padding: 0 0 0 5px;
+}
+
+.firstCol > div {
+    height: 130px;
+}
+
+.secondCol {
+    padding: 0 5px 0 0;
+}
+
+.secondCol > div {
+    height: 200px;
+}
+
+.photosCol > div {
+    margin-top: 10px;
+    border: 2px solid black;
+}
+
+.quantityOfLikes {
+    color: #666666;
+}
+
+.quantityOfLikes > span {
+    color: #0076a3;
+}
+
+.commentRatingsDetailsShow {
+    padding-top: 10px;
+    color: #666666;
+}
+
+.commentRatingHeader {
+    display: inline-block;
+    width: 50%;
+    float: right;
+}
+
+.commentRatingHeader  > span {
+    color: #16174f;
+}
+
+.commentRatingsDetailsBtn {
+    display: inline-block;
+    width: 35%;
+    float: left;
+    text-align: left;
+    padding-left: 30px;
+    font-size: 13px;
+    position: relative;
+    cursor: pointer;
+}
+
+.commentRatingsDetailsBtnIcon {
+    width: auto;
+    display: inline-block;
+    pointer-events: none;
+    position: absolute;
+    left: 10px;
+    top: 4px;
+}
+
+.commentRatingsDetailsBtnIcon > i {
+    float: left;
+    color: #666666;
+    font-size: 10px;
 }

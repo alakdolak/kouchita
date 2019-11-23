@@ -1,14 +1,4 @@
-.rtl {
-    direction: rtl;
-}
 
-.relative-position {
-    position: relative;
-}
-
-.red-color {
-    color: #963019 !important;
-}
 
 /*1st box style*/
 
@@ -45,7 +35,7 @@
 }
 
 .global-nav-bar-container .ui_tab {
-    color: #FFF !important;
+    color: #FFF;
 }
 
 .global-nav-actions .ui_icon {
@@ -79,7 +69,7 @@
 }
 
 #taplc_global_nav_links_0 ul {
-    margin-top: 7px;
+    /*margin-top: 7px;*/
 }
 
 #bookmarkicon {
