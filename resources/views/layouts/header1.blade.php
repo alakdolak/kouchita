@@ -28,11 +28,11 @@
 
                                         @if($placeMode == "hotel")
                                             <li>
-                                                <a href="{{route('main')}}" id="global-nav-hotels" class="unscoped global-nav-link ui_tab redColor " data-tracking-label="hotels">هتل</a>
+                                                <a href="{{route('mainMode', ['mode' => 'hotel'])}}" id="global-nav-hotels" class="unscoped global-nav-link ui_tab redColor " data-tracking-label="hotels">هتل</a>
                                             </li>
                                         @else
                                             <li>
-                                                <a href="{{route('main')}}" id="global-nav-hotels" class="unscoped global-nav-link ui_tab " data-tracking-label="hotels">هتل</a>
+                                                <a href="{{route('mainMode', ['mode' => 'hotel'])}}" id="global-nav-hotels" class="unscoped global-nav-link ui_tab " data-tracking-label="hotels">هتل</a>
                                             </li>
                                         @endif
                                         @if($placeMode == "restaurant")

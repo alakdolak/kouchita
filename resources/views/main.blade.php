@@ -37,9 +37,11 @@
                 position: absolute;
                 top: 0;
                 width: 100%;
-                height: 380px;
-                border: 1px solid black;
-                margin-bottom: 20px;
+                height: 450px;
+                margin-bottom: 40px;
+            }
+            .eachPicOfSlider {
+                width: 100%;
             }
         </style>
 
@@ -67,16 +69,18 @@
                                         <!-- Swiper -->
                                         <div id="mainSlider" class="swiper-container">
                                             <div class="swiper-wrapper">
-                                                <div class="swiper-slide">Slide 1</div>
-                                                <div class="swiper-slide">Slide 2</div>
-                                                <div class="swiper-slide">Slide 3</div>
-                                                <div class="swiper-slide">Slide 4</div>
-                                                <div class="swiper-slide">Slide 5</div>
-                                                <div class="swiper-slide">Slide 6</div>
-                                                <div class="swiper-slide">Slide 7</div>
-                                                <div class="swiper-slide">Slide 8</div>
-                                                <div class="swiper-slide">Slide 9</div>
-                                                <div class="swiper-slide">Slide 10</div>
+                                                <div class="swiper-slide">
+                                                    <img class="eachPicOfSlider" src="{{URL::asset('images') . 'slide1.jpg'}}" alt="slide1">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img class="eachPicOfSlider" src="{{URL::asset('images') . 'slide2.jpg'}}" alt="slide2">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img class="eachPicOfSlider" src="{{URL::asset('images') . 'slide3.jpg'}}" alt="slide3">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img class="eachPicOfSlider" src="{{URL::asset('images') . 'slide4.jpg'}}" alt="slide4">
+                                                </div>
                                             </div>
                                             <!-- Add Pagination -->
                                             <div class="swiper-pagination"></div>
@@ -84,8 +88,46 @@
                                             <div class="swiper-button-next"></div>
                                             <div class="swiper-button-prev"></div>
                                         </div>
-
-                                        @if($placeMode == "hotel")
+                                        @if($placeMode == 'mainPage')
+                                            <div class="ui_columns datepicker_box trip_search metaDatePicker rounded_lockup usePickerTypeIcons preDates noDates with_children hideOnPhone mainDivSearchInputMainPage">
+                                                <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column is-4 search_typeahead wctx-tripsearch searchDivForScroll" style="border-radius: 10px !important;">
+                                                    <div class="ui_picker">
+                                                        <span class="typeahead_align ui_typeahead">
+                                                            <input onkeyup="search(event)" type="text" id="placeName" class="typeahead_input" placeholder="به کجا می‌روید؟"/>
+                                                            <input type="hidden" id="placeId">
+                                                        </span>
+                                                        <div id="result" class="data_holder"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="clear-both"></div>
+                                                {{--<div class="ui_column" style="width: 35%;padding: 10px !important;float: right;border-radius:  0 10px 10px 0;">--}}
+                                                {{--<div class="ui_picker" style="color: #b7b7b7 !important;">--}}
+                                                {{--<label id="calendar-container-edit-1placeDate" class="dateLabel">--}}
+                                                {{--<span class="ui_icon calendar" style="color: #30b4a6 !important; font-size: 20px; line-height: 32px; position: absolute; right: 7px;"></span>--}}
+                                                {{--<input name="date" id="date_input1" type="text" onclick="assignDate('{{convertStringToDate(getToday()["date"])}}', 'calendar-container-edit-1placeDate', 'date_input1')" class="inputDateLabel" placeholder="تاریخ رفت" required readonly>--}}
+                                                {{--</label>--}}
+                                                {{--<label id="calendar-container-edit-2placeDate" class="dateLabel" style="margin-right: 14px !important;">--}}
+                                                {{--<span class="ui_icon calendar" style="color: #30b4a6 !important; font-size: 20px; line-height: 32px; position: absolute; right: 7px;"></span>--}}
+                                                {{--<input name="date" id="date_input2" type="text" onclick="assignDate('{{convertStringToDate(getToday()["date"])}}', 'calendar-container-edit-2placeDate', 'date_input2')" class="inputDateLabel" placeholder="تاریخ برگشت" required readonly>--}}
+                                                {{--</label>--}}
+                                                {{--</div>--}}
+                                                {{--</div>--}}
+                                                {{--<div class="ui_column" style="min-width: 15%; max-width: 40%; float: right;border-radius:  10px 0 0 10px;">--}}
+                                                {{--<div class="ui_picker" style="padding: 4px 0 0 0;">--}}
+                                                {{--<span class="ui_icon friends pickerType" style="margin: 0 !important;float: right"></span>--}}
+                                                {{--<div style="float: right;">--}}
+                                                {{--<span style="float:right; margin-right: 5px">نفر</span>--}}
+                                                {{--<div style="float: left; margin-right: 35px">--}}
+                                                {{--<div onclick="changePassengersNo(1)" class="minusPlusBtn" style="background-position: -1px -6px;"></div>--}}
+                                                {{--<span id="passengerNoSelect"></span>--}}
+                                                {{--<div onclick="changePassengersNo(-1)" class="minusPlusBtn" style="background-position: -18px -6px;"></div>--}}
+                                                {{--</div>--}}
+                                                {{--</div>--}}
+                                                {{--</div>--}}
+                                                {{--</div>--}}
+                                                {{--<div class="clear-both"></div>--}}
+                                            </div>
+                                        @elseif($placeMode == "hotel")
                                             <div class="ui_columns datepicker_box trip_search metaDatePicker rounded_lockup usePickerTypeIcons preDates noDates with_children hideOnPhone mainDivSearchInputMainPage">
                                                 <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column is-4 search_typeahead wctx-tripsearch searchDivForScroll">
                                                     <div class="ui_picker">
@@ -705,7 +747,7 @@
     <script>
         var swiper = new Swiper('#3box', {
             slidesPerView: 3,
-            spaceBetween: 30,
+            spaceBetween: 3,
             slidesPerGroup: 1,
             loop: true,
             autoplay: {

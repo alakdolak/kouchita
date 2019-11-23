@@ -123,7 +123,7 @@
 }
 
 #enterCityNameProSearch {
-    width: 85% !important;
+    width: 80% !important;
 }
 
 #GEO_SCOPED_SEARCH_INPUT {
@@ -187,11 +187,13 @@
 }
 
 #GEO_SCOPED_SEARCH_INPUT2 {
-    position: absolute;
-    right: 0;
-    top: 40px;
     color: #6d6d6d;
-    border: none !important;
+    border-color: #6d6d6d !important;
+    /*position: absolute;*/
+    /*right: 0;*/
+    /*top: 40px;*/
+    /*color: #6d6d6d;*/
+    /*border: none !important;*/
 }
 
 #filterDiv {
@@ -298,12 +300,16 @@
     }
 }
 
-.ui_input_checkbox {
-    margin-right: 7px;
+.boxOfLamps {
+    display: flex;
+    justify-content: space-between;
 }
 
-.lantern {
-    height: 100px !important;
+.ui_input_checkbox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .searchElement {

@@ -7,34 +7,34 @@
             <div class="prw_rup prw_homepage_messaging_brand">
                 <div id="brand_messaging" class="ui_columns is-hidden-mobile">
                     <div class="ui_column is-12">
-                        <div id="3box" class="swiper-container">
+                        <div id="3box" class="swiper-container threeBox">
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide">
-                                    <div style="height: 210px">1</div>
+                                    <img class="eachPicOf3Box" src="{{URL::asset('images') . '1.jpg'}}" alt="1">
                                 </div>
                                 <div class="swiper-slide">
-                                    <div style="height: 210px">2</div>
+                                    <img class="eachPicOf3Box" src="{{URL::asset('images') . '2.jpg'}}" alt="2">
                                 </div>
                                 <div class="swiper-slide">
-                                    <div style="height: 210px">3</div>
+                                    <img class="eachPicOf3Box" src="{{URL::asset('images') . '3.jpg'}}" alt="3">
                                 </div>
                                 <div class="swiper-slide">
-                                    <div style="height: 210px">4</div>
+                                    <img class="eachPicOf3Box" src="{{URL::asset('images') . '4.jpg'}}" alt="4">
                                 </div>
                                 <div class="swiper-slide">
-                                    <div style="height: 210px">5</div>
+                                    <img class="eachPicOf3Box" src="{{URL::asset('images') . '5.jpg'}}" alt="5">
                                 </div>
                                 <div class="swiper-slide">
-                                    <div style="height: 210px">6</div>
+                                    <img class="eachPicOf3Box" src="{{URL::asset('images') . '6.jpg'}}" alt="6">
                                 </div>
                                 <div class="swiper-slide">
-                                    <div style="height: 210px">7</div>
+                                    <img class="eachPicOf3Box" src="{{URL::asset('images') . '7.jpg'}}" alt="7">
                                 </div>
                                 <div class="swiper-slide">
-                                    <div style="height: 210px">8</div>
+                                    <img class="eachPicOf3Box" src="{{URL::asset('images') . '8.jpg'}}" alt="8">
                                 </div>
                                 <div class="swiper-slide">
-                                    <div style="height: 210px">9</div>
+                                    <img class="eachPicOf3Box" src="{{URL::asset('images') . '9.jpg'}}" alt="9">
                                 </div>
                             </div>
                             <!-- Add Pagination -->
