@@ -2340,7 +2340,9 @@ input[type=checkbox], input[type=radio] {
 }
 
 .ui_icon.map-pin:before {
-    content: "\e019"
+    content: "\e019";
+    margin-right: -2px;
+    font-size: 22px;
 }
 
 .ui_icon.map:before {
@@ -6479,7 +6481,8 @@ body.lang_de .memberBadging.g10n .levelBadge, body.lang_el .memberBadging.g10n .
     content: '\e011'
 }
 
-.saves.ui_icon.red-heart-fill::before, .saves.ui_icon.red-heart:hover::before {
+/*.saves.ui_icon.red-heart-fill::before,*/
+.saves.ui_icon.red-heart:hover::before {
     content: '\e012';
     color: #ff0040
 }
@@ -9547,10 +9550,12 @@ DIV.ppr_rup.ppr_priv_hr_atf_north_star_nostalgic .meta_inner {
 }
 
 DIV.ppr_rup.ppr_priv_hr_atf_north_star_nostalgic .photos {
-    height: 350px;
-    margin-left: 387px;
+    /*height: 350px;*/
+    /*margin-left: 387px;*/
     border-radius: 2px;
-    overflow: hidden
+    overflow: hidden;
+    width: 753px;
+    float: right;
 }
 
 DIV.ppr_rup.ppr_priv_hr_atf_north_star_nostalgic .photos .albumInfo {
@@ -9602,7 +9607,7 @@ DIV.prw_rup.prw_common_atf_header_bl .blRow {
 }
 
 DIV.prw_rup.prw_common_atf_header_bl .blEntry {
-    margin-left: 12px
+    /*margin-left: 12px*/
 }
 
 DIV.prw_rup.prw_common_atf_header_bl .blEntry:first-child {
@@ -9610,7 +9615,7 @@ DIV.prw_rup.prw_common_atf_header_bl .blEntry:first-child {
 }
 
 DIV.prw_rup.prw_common_atf_header_bl .blEntry .ui_icon {
-    margin-right: 5px;
+    /*margin-right: 5px;*/
     font-size: 22px;
     line-height: 26px;
     color: #4dc7bc
@@ -15256,6 +15261,10 @@ DIV.ppr_rup.ppr_priv_location_detail_header .heading_title {
 
 DIV.ppr_rup.ppr_priv_location_detail_header .header_link {
     display: inline-block
+}
+
+DIV.ppr_rup.ppr_priv_location_detail_header .header_rating {
+    margin-right: 5px !important;
 }
 
 DIV.ppr_rup.ppr_priv_location_detail_header .header_detail, DIV.ppr_rup.ppr_priv_location_detail_header .header_links, DIV.ppr_rup.ppr_priv_location_detail_header .header_popularity, DIV.ppr_rup.ppr_priv_location_detail_header .header_rating, DIV.ppr_rup.ppr_priv_location_detail_header .header_tags {

@@ -15,6 +15,7 @@
           href='{{URL::asset('css/theme2/hr_north_star.css?v=2')}}'/>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/icons.css?v=2')}}'/>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/cityPage.css?v=1')}}'/>
+    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/abbreviations.css?v=1')}}'/>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/mainPageModifiedStyles.css')}}'/>
 
     <script type='text/javascript' src='{{URL::asset('js/jquery_12.js')}}'></script>
@@ -86,10 +87,10 @@
     <div class="row">
         <div class="col-lg-9 cpBorderLeft">
             <div class="row cpMainBox">
-                <div class="col-xs-8" style="padding:0 !important;">
+                <div class="col-xs-8 pd-0Imp">
                     <img class="cpPic" src="{{URL::asset('_images/city/'.$city->image)}}">
                 </div>
-                <div class="col-xs-4" style="padding:0 !important;">
+                <div class="col-xs-4 pd-0Imp">
                     <div class="col-xs-12">
                         <a class="col-xs-4 cpLittleMenu" href="{{url('hotelList/' . $city->name . '/city')}}">
                             <div class="cityPageIcon hotel"></div>
@@ -106,7 +107,7 @@
                             <div class="textCityPageIcon">{{count($allAmaken)}}</div>
                         </a>
                     </div>
-                    <div style="clear: both"></div>
+                    <div class="clear-both"></div>
                     <div class="col-xs-12">
                         <a class="col-xs-4 cpLittleMenu" href="{{url('restaurantList/' . $city->name . '/city')}}">
                             <div class="cityPageIcon restaurant"></div>
@@ -124,7 +125,7 @@
                             <div class="textCityPageIcon">{{$city->ghazamahali_count}}</div>
                         </a>
                     </div>
-                    <div style="clear: both"></div>
+                    <div class="clear-both"></div>
                     <div class="col-xs-12">
                         <a class="col-xs-4 cpLittleMenu" href="{{url('/majaraList/' . $city->name . '/city')}}">
                             <div class="cityPageIcon majara"></div>
@@ -141,7 +142,7 @@
                             <div class="textCityPageIcon">لباس محلی</div>
                         </div>
                     </div>
-                    <div style="clear: both"></div>
+                    <div class="clear-both"></div>
                     <div class="col-xs-12">
                         <div class="col-xs-4 cpLittleMenu">
                             <div class="cityPageIcon boom"></div>
@@ -163,7 +164,7 @@
             </div>
             <div id="outher_people" class="cpBorderBottom">
                 <div class="cpTitle">دوستان شما چه می گویند</div>
-                <div id="people_pic_div" style="width: 100%; display: none;">
+                <div id="people_pic_div" class="full-width display-none">
                     <div class="cpFriendsBoxPic">
                         <div class="cpFriendsEachPic"
                              style="background: url('{{URL::asset('images') . '1.jpg'}}');"></div>
@@ -192,45 +193,43 @@
             </div>
             <div class="cpBorderBottom">
                 <div class="cpMap">
-                    <div id="map-small" class="prv_map clickable" style="width: 100%; height: 100%;"></div>
+                    <div id="cpMap" class="prv_map clickable full-width full-height"></div>
                 </div>
-                <div class="map_list" id="show">
-                    <img class="map_category" id="hotelImg" src="{{URL::asset('images/mhotel.png')}}"
+                <div class="cpMapList" id="show">
+                    <img class="cpMapCategory" id="hotelImg" src="{{URL::asset('images/mhotel.png')}}"
                          onclick="toggleIconInMap('hotelImg')">
-                    <img class="map_category" id="restImg" src="{{URL::asset('images/mrest.png')}}"
+                    <img class="cpMapCategory" id="restImg" src="{{URL::asset('images/mrest.png')}}"
                          onclick="toggleIconInMap('restImg')">
-                    <img class="map_category" id="fastImg" src="{{URL::asset('images/mfast.png')}}"
+                    <img class="cpMapCategory" id="fastImg" src="{{URL::asset('images/mfast.png')}}"
                          onclick="toggleIconInMap('fastImg')">
-                    <img class="map_category" id="musImg" src="{{URL::asset('images/matr_mus.png')}}"
+                    <img class="cpMapCategory" id="musImg" src="{{URL::asset('images/matr_mus.png')}}"
                          onclick="toggleIconInMap('musImg')">
-                    <img class="map_category" id="plaImg" src="{{URL::asset('images/matr_pla.png')}}"
+                    <img class="cpMapCategory" id="plaImg" src="{{URL::asset('images/matr_pla.png')}}"
                          onclick="toggleIconInMap('plaImg')">
-                    <img class="map_category" id="shcImg" src="{{URL::asset('images/matr_shc.png')}}"
+                    <img class="cpMapCategory" id="shcImg" src="{{URL::asset('images/matr_shc.png')}}"
                          onclick="toggleIconInMap('shcImg')">
-                    <img class="map_category" id="funImg" src="{{URL::asset('images/matr_fun.png')}}"
+                    <img class="cpMapCategory" id="funImg" src="{{URL::asset('images/matr_fun.png')}}"
                          onclick="toggleIconInMap('funImg')">
-                    <img class="map_category" id="advImg" src="{{URL::asset('images/matr_adv.png')}}"
+                    <img class="cpMapCategory" id="advImg" src="{{URL::asset('matr_adv.png')}}"
                          onclick="toggleIconInMap('advImg')">
-                    <img class="map_category" id="natImg" src="{{URL::asset('images/matr_nat.png')}}"
+                    <img class="cpMapCategory" id="natImg" src="{{URL::asset('images/matr_nat.png')}}"
                          onclick="toggleIconInMap('natImg')">
                 </div>
             </div>
         </div>
-        <div class="col-lg-3" style="text-align: right;">
+        <div class="col-lg-3 text-align-right">
             {{--<div style="font-weight: 500"></div>--}}
             <div class="cpTitle">تازه های گردشنامه</div>
-            <div style="position: relative">
+            <div class="position-relative">
                 <?php $i = 0; ?>
                 @foreach($cityPost as $post)
                     @if($i == 0)
-                        <article
-                                class="im-article grid-carousel grid-2 post type-post status-publish format-standard has-post-thumbnail hentry">
+                        <article class="im-article grid-carousel grid-2 post type-post status-publish format-standard has-post-thumbnail hentry">
                             <div class="im-entry-thumb">
                                 <a class="im-entry-thumb-link"
                                    href="{{route('gardeshnameInner', ['postId' => $post->id])}}"
                                    title="{{$post->title}}">
-                                    <img class="lazy-img" src="{{$post->pic}}" alt="{{$post->alt}}"
-                                         style="opacity: 1; width: 100%">
+                                    <img class="lazy-img opacity-1Imp full-width" src="{{$post->pic}}" alt="{{$post->alt}}">
                                 </a>
                                 <div class="im-entry-header">
                                     <div class="im-entry-category">
@@ -321,16 +320,15 @@
 
                 @endforeach
 
-                <div class="row cpBorderBottom" style="margin: 0px;">
-                    <div class="col-md-12" style="text-align: center; padding: 20px;">
-                        <button class="btn btn-success"
-                                style="background-color: #30b4a6; border-radius: 10px; font-size: 20px;">مشاهده همه
-                            مقالات
+                <div class="row cpBorderBottom mg-0Imp">
+                    <div class="col-md-12 text-align-center pd-20">
+                        <button class="btn btn-success">
+                            مشاهده همه مقالات
                         </button>
                     </div>
                 </div>
 
-                <div class="row" style="margin: 0">
+                <div class="row mg-0Imp">
                     <div class="cpTitle">بیشترین بازدید</div>
                 </div>
                 <?php $i = 0; ?>
@@ -384,11 +382,10 @@
                 @endforeach
 
                 @if(count($mostSeenPosts) != 0)
-                    <div class="row" style="margin-bottom: 10px;">
-                        <div class="col-md-12" style="text-align: center; padding: 20px;">
-                            <button class="btn btn-success"
-                                    style="background-color: #30b4a6; border-radius: 10px; font-size: 20px;">مشاهده همه
-                                مقالات
+                    <div class="row mg-bt-10">
+                        <div class="col-md-12 pd-20Imp text-align-center">
+                            <button class="btn btn-success seeAllArticlesBtn" style="">
+                                مشاهده همه مقالات
                             </button>
                         </div>
                     </div>
@@ -562,13 +559,13 @@
 
                         for (i = 0; i < response.length; i++) {
                             if ("state" == response[i].mode) {
-                                newElement += "<p style='cursor: pointer' class='suggest' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "استان ' + response[i].targetName + "\")'>استان " + response[i].targetName + "</p>";
+                                newElement += "<p class='suggest cursor-pointer' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "استان ' + response[i].targetName + "\")'>استان " + response[i].targetName + "</p>";
                             }
                             else if ("city" == response[i].mode) {
-                                newElement += "<p style='cursor: pointer' class='suggest' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "شهر ' + response[i].targetName + " در " + response[i].stateName + "\")'>شهر " + response[i].targetName + " در " + response[i].stateName + " </p>";
+                                newElement += "<p class='suggest cursor-pointer' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "شهر ' + response[i].targetName + " در " + response[i].stateName + "\")'>شهر " + response[i].targetName + " در " + response[i].stateName + " </p>";
                             }
                             else
-                                newElement += "<p style='cursor: pointer' class='suggest' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")'>" + response[i].targetName + " در " + response[i].cityName + " در " + response[i].stateName + "</p>";
+                                newElement += "<p class='suggest cursor-pointer' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")'>" + response[i].targetName + " در " + response[i].cityName + " در " + response[i].stateName + "</p>";
                         }
 
                         $("#result").empty().append(newElement)
@@ -595,13 +592,13 @@
 
                     for (i = 0; i < response.length; i++) {
                         if ("state" == response[i].mode) {
-                            newElement += "<p style='cursor: pointer' class='suggest' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "استان ' + response[i].targetName + "\")'>استان " + response[i].targetName + "</p>";
+                            newElement += "<p class='suggest cursor-pointer' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "استان ' + response[i].targetName + "\")'>استان " + response[i].targetName + "</p>";
                         }
                         else if ("city" == response[i].mode) {
-                            newElement += "<p style='cursor: pointer' class='suggest' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "شهر ' + response[i].targetName + " در " + response[i].stateName + "\")'>شهر " + response[i].targetName + " در " + response[i].stateName + " </p>";
+                            newElement += "<p class='suggest cursor-pointer' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "شهر ' + response[i].targetName + " در " + response[i].stateName + "\")'>شهر " + response[i].targetName + " در " + response[i].stateName + " </p>";
                         }
                         else
-                            newElement += "<p style='cursor: pointer' class='suggest' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")'>" + response[i].targetName + " در " + response[i].cityName + " در " + response[i].stateName + "</p>";
+                            newElement += "<p class='suggest cursor-pointer' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")'>" + response[i].targetName + " در " + response[i].cityName + " در " + response[i].stateName + "</p>";
                     }
 
                     $("#result").empty().append(newElement)
@@ -826,7 +823,7 @@
             newElement += "<span class='ui_icon thumbs-down-fill'></span><span id='commentDislikes_" + opinion[i].id + "' data-val='" + opinion[i].dislikes + "' class='badgetext'>" + opinion[i].dislikes + "</span>";
             newElement += "</div>";
             newElement += "</div></div></div></div>";
-            newElement += "<div class='ui_column is-9 float-right' style='text-align: right;'>";
+            newElement += "<div class='ui_column is-9 float-right text-align-right'>";
             newElement += "<div class='innerBubble'>";
             newElement += "<div class='wrap'>";
             newElement += "<div class='rating reviewItemInline'>";

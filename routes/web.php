@@ -10,6 +10,42 @@ Route::get('gardeshname', function(){
     return view('gardeshname');
 });
 
+Route::get('myTripInner', function(){
+    return view('myTripInner');
+});
+
+Route::get('business', function(){
+    return view('business');
+});
+
+Route::get('tourCreationFirstPage', function(){
+    return view('tour/tourCreationFirstPage');
+});
+
+Route::get('tourCreationGeneralInfo', function(){
+    return view('tour/tourCreationGeneralInfo');
+});
+
+Route::get('tourCreationSpecificInfo', function(){
+    return view('tour/tourCreationSpecificInfo');
+});
+
+Route::get('tourCreationFinancialInfo', function(){
+    return view('tour/tourCreationFinancialInfo');
+});
+
+Route::get('tourCreationLanguage&Schedule', function(){
+    return view('tour/tourCreationLanguage&Schedule');
+});
+
+Route::get('tourCreationExplanatoryInfo', function(){
+    return view('tour/tourCreationExplanatoryInfo');
+});
+
+Route::get('tourCreationFinalStep', function(){
+    return view('tour/tourCreationFinalStep');
+});
+
 
 Route::get('gardeshname2/{page?}', 'PostController@gardeshname')->name('gardeshname');
 

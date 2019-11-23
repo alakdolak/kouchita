@@ -86,6 +86,28 @@
     url('../../fonts/ttf/IRANSansWeb(FaNum).ttf') format('truetype');
 }
 
+@font-face {
+    font-weight: normal;
+    font-style: normal;
+    font-family: 'shazdemosafer-tour';
+    src: url('../../fonts/shazdemosafer-tour.otf');
+    src: url('../../fonts/shazdemosafer-tour.otf') format('embedded-opentype'),
+    url('../../fonts/shazdemosafer-tour.woff2?v003.200') format('woff2'),
+    url('../../fonts/shazdemosafer-tour.woff?v003.200') format('woff'),
+    url('../../fonts/shazdemosafer/Shazdemosafer.ttf?v003.200') format('truetype');
+}
+
+@font-face {
+    font-weight: normal;
+    font-style: normal;
+    font-family: 'Glyphicons Halflings';
+    src: url('../../fonts/glyphicons-halflings-regular.eot');
+    src: url('../../fonts/glyphicons-halflings-regular.eot') format('embedded-opentype'),
+    url('../../fonts/glyphicons-halflings-regular.woff2?v003.200') format('woff2'),
+    url('../../fonts/glyphicons-halflings-regular.woff?v003.200') format('woff'),
+    url('../../fonts/glyphicons-halflings-regular.ttf?v003.200') format('truetype');
+}
+
 /*in Phone*/
 @media only screen and (max-width: 600px) {
     .hideOnPhone {

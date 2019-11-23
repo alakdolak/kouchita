@@ -16,12 +16,6 @@ a {
     text-decoration: none;
 }
 
-/*navid changes*/
-
-.offlineReserveErr {
-    width: 362px;
-}
-
 
 .masthead_notification_enabled.masthead_notification_unread #WAR_NOTIFICATION_FLAG {
     display: none;

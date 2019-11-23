@@ -10,162 +10,27 @@ for($i = 0; $i < count($rooms->num_room_code); $i++){
 }
 ?>
 
-<style>
-    .textTitle {
-        font-size: 1.3em;
-        font-weight: 900;
-        color: #92321b;
-        margin: 5px 0;
-    }
-    .class_passengerPane {
-        text-align: center !important;
-        background-color: white;
-        position: absolute;
-        padding: 10px;
-        top: 25px;
-        left: 0;
-        border-radius: 5px;
-    }
-    .class_passengerOldPane {
-        text-align: center !important;
-        position: absolute;
-        background-color: #ebebeb;
-        padding: 10px;
-        top: 45px;
-        left: 0;
-        border-radius: 5px;
-        width: 200px;
-    }
-    .labelEdit {
-        position: absolute;
-        right: 20px;
-        top: 7px;
-        font-size: 0.8em;
-        font-weight: 100;
-    }
-    .numBetweenMinusPlusBtn {
-        float: right;
-        margin-top: -2px;
-        margin-left: 5px;
-        margin-right: 5px;
-    }
-    .minusPlusBtn {
-        width: 17px;
-        height: 17px;
-        cursor: pointer;
-        display: inline-block;
-        float: right;
-        background-image: url('{{URL::asset('images') . '/icons.jpg'}}');
-        background-size: 72px;
-    }
-    @media screen and (max-width: 600px) {
-        .minusPlusBtn {
-            width: 44px;
-            height: 44px;
-            background-size: 185px;
-        }
-    }
+<link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/buyHotel2.css?v=1')}}'/>
 
-    .questions_div {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        margin: 25px 0px;
-    }
-    .questions{
-        display: flex;
-        flex-direction: row;
-        margin: 5px 0px;
-        align-items: center;
-    }
-    .question{
-        width: 40%;
-    }
-    .answer{
-        display: flex;
-        flex-direction: row;
-        cursor: pointer ;
-    }
-    .common_answer{
-        padding: 5px 20px;
-        border: 1px solid #cccccc;
-        background-color: #ebebeb;
-    }
-    .choose_answer{
-        background-color: #4dc7bc;
-        color: white;
-    }
-    .requestArea{
-        background-color: #ebebeb;
-        width: 100%;
-        border: 1px solid #cccccc;
-        border-radius: 10px;
-    }
-    .roomBox{
-        padding: 10px 8px;
-        border: 2px solid #E5E5E5;
-        display: inline-block;
-        position: absolute;
-        right: 335px;
-        border-radius: 10px;
-        text-align: right;
-        font-weight: 700;
-    }
-
-    .calendarIcon {
-        color: #30b4a6 !important;
-        font-size: 22px;
-        top: -2px;
-    }
-
-    .calenderBox{
-        width: 260px;
-        padding: 7px 8px;
-        border: 2px solid #E5E5E5;
-        display: inline-block;
-        position: absolute;
-        border-radius: 10px;
-        text-align: right;
-        font-weight: 700;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .dateLabel{
-        position: relative;
-        width: 225px;
-        height: 30px;
-        border-radius: 3px;
-        margin: 0 !important;
-        display: flex;
-    }
-    .error_input{
-        background-color: #f26C4F;
-    }
-
-</style>
-
-<div style="width: 100%">
-    <div style="float: right;"> شما در حال انتقال به سایت فروشنده بلیط هستید</div>
-    <div style="text-align: left">
-        <a href="{{session('backURL')}}" style=" color: #0c0593 !important;"> بازگشت به صفحه اطلاعات هتل >> </a>
+<div class="full-width">
+    <div class="float-right"> شما در حال انتقال به سایت فروشنده بلیط هستید</div>
+    <div class="text-align-left">
+        <a href="{{session('backURL')}}" class="color-5-12-147Imp"> بازگشت به صفحه اطلاعات هتل >> </a>
     </div>
 </div>
 
 <div class="inlineBorder"></div>
 <form id="reserve_form" method="post" action="{{route('sendReserveRequest')}}">
     {{csrf_field()}}
-    <div style="width: 100%; margin-bottom: 3%;">
+    <div class="full-width mg-bt-3per">
         <div> اطلاعاتی که در این صفحه وارد می کنید به سایت پذیرنده منتقل می شود تا خرید شما آسان تر از قبل گردد</div>
         <div class="textTitle"> اطلاعات تماس</div>
-        <div style="font-size: 0.8em"> این اطلاعات به عنوان اطلاعات تماس شما در شازده ثبت می شود</div>
-        <div style="width: 60%; height: 120px">
-            <div id="phone_error_text" style="color: #f26C4F; display: none">پر کردن این بخش اجباری است</div>
-            <div class="inputBox" style="width: 30%; float: right">
+        <div class="font-size-08em"> این اطلاعات به عنوان اطلاعات تماس شما در شازده ثبت می شود</div>
+        <div class="width-60per height-120">
+            <div id="phone_error_text">پر کردن این بخش اجباری است</div>
+            <div class="inputBox width-30per float-right">
                 <div class="inputBoxText">
-                    <div style="display: inline-block; position: relative">
+                    <div class="display-inline-block position-relative">
                         <div class="afterBuyIcon redStar"></div>
                         تلفن همراه
                     </div>
@@ -173,11 +38,11 @@ for($i = 0; $i < count($rooms->num_room_code); $i++){
                 <input class="inputBoxInput" id="phoneNumForTicket" type="tel" onkeypress="return isNumber(event)" placeholder="0912xxxxxxx" name="phone" onchange="clearError(0, 0)"
                        @if(auth()->check() && auth()->user()->phone != '' && auth()->user()->phone != null ) value="{{auth()->user()->phone}}" @endif>
             </div>
-            <div style="width: 40%; float: left">
-                <div id="email_error_text" style="color: #f26C4F; display: none;">پر کردن این بخش اجباری است</div>
-                <div class="inputBox" style="width: 85%">
+            <div class="width-40per float-left">
+                <div id="email_error_text">پر کردن این بخش اجباری است</div>
+                <div class="inputBox width-85per">
                     <div class="inputBoxText">
-                        <div style="display: inline-block; position: relative">
+                        <div class="display-inline-block position-relative">
                             <div class="afterBuyIcon redStar"></div>
                             ایمیل
                         </div>
@@ -185,15 +50,13 @@ for($i = 0; $i < count($rooms->num_room_code); $i++){
                     <input class="inputBoxInput" id="emailForTicket" type="email" placeholder="example@domain.com" name="email" onchange="clearError(0, 1)"
                            @if(auth()->check() && auth()->user()->email != '' && auth()->user()->email != null ) value="{{auth()->user()->email}}" @endif>
                 </div>
-                <div class="check-box__item" style="margin-top: 5px">
+                <div class="check-box__item mg-tp-5">
                     <label class="labelEdit"> اطلاعات مهم را با این آدرس به من اطلاع دهید </label>
-                    <input type="checkbox" id="importantInformation" name="otherOffer" value="اطلاعات مهم"
-                           style="display: inline-block; !important;">
+                    <input type="checkbox" id="importantInformation" name="otherOffer" value="اطلاعات مهم" class="display-inline-blockImp">
                 </div>
                 <div class="check-box__item">
                     <label class="labelEdit"> اخبار مربوط به علایق من را با این آدرس برای من بفرستید </label>
-                    <input type="checkbox" id="interestNews" name="otherOffer" value="اخبار مورد علاقه"
-                           style="display: inline-block; !important;">
+                    <input type="checkbox" id="interestNews" name="otherOffer" value="اخبار مورد علاقه" class="display-inline-blockImp">
                 </div>
             </div>
         </div>
@@ -204,24 +67,24 @@ for($i = 0; $i < count($rooms->num_room_code); $i++){
     <div>
         <div class="textTitle"> اطلاعات مسافرین</div>
         <div>
-            <div style="height: 50px;margin-bottom: 25px;">
+            <div class="height-50 mg-bt-25">
                 <div class="roomBox">
-                    <div id="roomDetail" style="font-size: 1.1em; display: inline-block;">
-                        <span style="float: right;" class="room">{{$num_room}}</span>&nbsp;
+                    <div id="roomDetail">
+                        <span class="float-right room">{{$num_room}}</span>&nbsp;
                         <span>اتاق</span>&nbsp;-&nbsp;
                         <span class="adult">{{session('adult')}}</span>
                         <span>بزرگسال</span>&nbsp;
                     </div>
-                    <div class="shTIcon passengerIcon" style="font-size: 25px; display: inline-block;"></div>
+                    <div class="shTIcon passengerIcon font-size-25 display-inline-block"></div>
                 </div>
                 <div class="calenderBox">
-                    <label id="calendar-container-edit-1placeDate" class="dateLabel" style="margin-left: 15px !important;">
+                    <label id="calendar-container-edit-1placeDate" class="dateLabel">
                         <span class="ui_icon calendar calendarIcon" ></span>
-                        <input type="text" class="inputDateLabel" value="{{session('goDate')}}" readonly="" style="border: none; width: 80px;">
+                        <input type="text" class="inputDateLabel border-none width-80" value="{{session('goDate')}}" readonly="">
                     </label>
-                    <span style="color: #30b4a6 !important; font-size: 20px; line-height: 32px; position: absolute;">تا</span>
-                    <label id="calendar-container-edit-2placeDate" class="dateLabel" style="margin-right: 30px !important;">
-                        <input type="text" class="inputDateLabel" value="{{session('backDate')}}" readonly="" style="border: none; width: 80px;">
+                    <span class="calendarBoxTillStyles">تا</span>
+                    <label id="calendar-container-edit-2placeDate" class="dateLabel">
+                        <input type="text" class="inputDateLabel border-none width-80" value="{{session('backDate')}}" readonly="">
                     </label>
                 </div>
             </div>
@@ -236,15 +99,15 @@ for($i = 0; $i < count($rooms->num_room_code); $i++){
             <div id="passenger_{{$k}}">
                 <div>
                     <div>
-                        <div style="display: inline-block">
+                        <div class="display-inline-block">
                             @if($k == 0 && Auth::check())
                                 <div class="textTitle">
                                     <span id="passengerInfo_{{$k}}"></span>
                                     <span>{{$rooms->room_name[$step]}}</span>
                                 </div>
-                                <div style="font-size: 1.1em; font-weight: 300; color: #050c93; display: inline-block">مسافر اصلی</div>
-                                <button onclick="getMyInfo()" class="btn afterBuyBtn" type="button" style="background-color: #4DC7BC"> من هستم</button>
-                                <div style="font-size: 0.9em; display: inline-block">
+                                <div class="mainPassengerDiv">مسافر اصلی</div>
+                                <button onclick="getMyInfo()" class="btn afterBuyBtn bg-color-green" type="button"> من هستم</button>
+                                <div class="autoFillInputs">
                                     اطلاعات موجود از پروفایل شما پر می گردد
                                 </div>
 
@@ -252,38 +115,38 @@ for($i = 0; $i < count($rooms->num_room_code); $i++){
                                 <div class="textTitle" id="passengerInfo_{{$k}}">{{$rooms->room_name[$step]}}</div>
                             @endif
                         </div>
-                        <div style="float: left; position: relative">
-                            <button onclick="deletePassenger('{{$k}}')" class="btn afterBuyBtn"
-                                    type="button" style="background-color: #92321b"> حذف مسافر
+                        <div class="float-left position-relative">
+                            <button onclick="deletePassenger('{{$k}}')" class="btn afterBuyBtn color-146-50-27" type="button">
+                                حذف مسافر
                             </button>
 
                             @if(Auth::check())
-                                <button onclick="toggleOldPassenger('{{$k}}')" class="btn afterBuyBtn" type="button"
-                                        style="background-color: #4DC7BC"> مسافرین سابق
+                                <button onclick="toggleOldPassenger('{{$k}}')" class="btn afterBuyBtn bg-color-green" type="button">
+                                    مسافرین سابق
                                 </button>
                                 <div class="class_passengerOldPane item hidden" id="oldPassengerPane_{{$k}}"
                                      onmouseleave="addClassHidden('oldPassengerPane_{{$k}}'); passengerNoSelect = false;">
                                     <div>
                                         <p>مسافرین سابق</p>
-                                        <div style="height: 3px; background-color: black; width: 100%"></div>
+                                        <div class="lastPassengersDivider"></div>
                                         <div id="passengerList_{{$k}}"></div>
                                     </div>
                                 </div>
                             @endif
                         </div>
                     </div>
-                    <div class="check-box__item" style="margin-top: 5px">
+                    <div class="check-box__item mg-tp-5">
                         <label class="labelEdit"> تبعه خارجی هستم </label>
                         <input onclick="changeForeignRow('{{$k}}')" id="foreign_{{$k}}" name="foreign[]" value="خارجی"
-                               type="checkbox" style="display: inline-block; !important;">
+                               type="checkbox" class="display-inline-blockImp">
                     </div>
 
-                        <div style="width: 100%">
+                        <div class="full-width">
                         <div>
-                            <div id="nameFa_error_text_{{$k}}" style="color: #f26C4F; display: none;">پر کردن این بخش اجباری است</div>
-                            <div class="inputBox" style="width: 21%;">
+                            <div id="nameFa_error_text_{{$k}}" class="essentialInfos">پر کردن این بخش اجباری است</div>
+                            <div class="inputBox width-21per">
                                 <div class="inputBoxText">
-                                    <div style="display: inline-block; position: relative">
+                                    <div class="display-inline-block position-relative">
                                         <div class="afterBuyIcon redStar"></div>
                                         نام
                                     </div>
@@ -291,10 +154,10 @@ for($i = 0; $i < count($rooms->num_room_code); $i++){
                                 <input class="inputBoxInput" id="nameFa_{{$k}}" name="nameFa[]" type="text"
                                        placeholder="فارسی" onchange="clearError(1,{{$k}})">
                             </div>
-                            <div id="familyFa_error_text_{{$k}}" style="color: #f26C4F; display: none">پر کردن این بخش اجباری است</div>
-                            <div class="inputBox" style="width: 25%; margin-right: 10%;">
+                            <div id="familyFa_error_text_{{$k}}" class="essentialInfos">پر کردن این بخش اجباری است</div>
+                            <div class="inputBox width-25per mg-rt-10per">
                                 <div class="inputBoxText">
-                                    <div style="display: inline-block; position: relative">
+                                    <div class="display-inline-block position-relative">
                                         <div class="afterBuyIcon redStar"></div>
                                         نام خانوادگی
                                     </div>
@@ -304,10 +167,10 @@ for($i = 0; $i < count($rooms->num_room_code); $i++){
                             </div>
                         </div>
                         <div>
-                            <div id="nameEn_error_text_{{$k}}" style="color: #f26C4F; display: none">پر کردن این بخش اجباری است</div>
-                            <div class="inputBox" style="width: 21%;">
+                            <div id="nameEn_error_text_{{$k}}" class="essentialInfos">پر کردن این بخش اجباری است</div>
+                            <div class="inputBox width-21per">
                             <div class="inputBoxText">
-                                <div style="display: inline-block; position: relative">
+                                <div class="display-inline-block position-relative">
                                     <div class="afterBuyIcon redStar"></div>
                                     نام
                                 </div>
@@ -315,10 +178,10 @@ for($i = 0; $i < count($rooms->num_room_code); $i++){
                             <input class="inputBoxInput" name="nameEn[]" id="nameEn_{{$k}}" type="text"
                                    placeholder="لاتین" onchange="clearError(3,{{$k}})">
                         </div>
-                            <div id="familyEn_error_text_{{$k}}" style="color: #f26C4F; display: none">پر کردن این بخش اجباری است</div>
-                            <div class="inputBox" style="width: 25%; margin-right: 10%;">
+                            <div id="familyEn_error_text_{{$k}}" class="essentialInfos">پر کردن این بخش اجباری است</div>
+                            <div class="inputBox width-25per mg-rt-10per">
                                 <div class="inputBoxText">
-                                    <div style="display: inline-block; position: relative">
+                                    <div class="display-inline-block position-relative">
                                         <div class="afterBuyIcon redStar"></div>
                                         نام خانوادگی
                                     </div>
@@ -328,10 +191,10 @@ for($i = 0; $i < count($rooms->num_room_code); $i++){
                             </div>
                         </div>
                         <div>
-                            <div id="birthDay_error_text_{{$k}}" style="color: #f26C4F; display: none">پر کردن این بخش اجباری است</div>
-                            <div class="inputBox" style="width: 21%;">
+                            <div id="birthDay_error_text_{{$k}}" class="essentialInfos">پر کردن این بخش اجباری است</div>
+                            <div class="inputBox width-21per">
                                 <div class="inputBoxText">
-                                    <div style="display: inline-block; position: relative">
+                                    <div class="display-inline-block position-relative">
                                         <div class="afterBuyIcon redStar"></div>
                                         تاریخ تولد
                                     </div>
@@ -364,35 +227,34 @@ for($i = 0; $i < count($rooms->num_room_code); $i++){
                                     @endfor
                                 </select>
                             </div>
-                            <div id="NID_error_text_{{$k}}" style="color: #f26C4F; display: none">پر کردن این بخش اجباری است</div>
-                            <div class="inputBox" style="width: 25%; margin-right: 10%;">
-                                <div style="width: 50%" class="inputBoxText">
-                                    <div style="display: inline-block; position: relative;">
+                            <div id="NID_error_text_{{$k}}" class="essentialInfos">پر کردن این بخش اجباری است</div>
+                            <div class="inputBox width-25per mg-rt-10per">
+                                <div class="inputBoxText width-50per">
+                                    <div class="display-inline-block position-relative">
                                         <div class="afterBuyIcon redStar"></div>
                                         <span id="nidOrPassport_{{$k}}">کد ملی</span></div>
                                 </div>
-                                <input onkeypress="return isNumber(event)" style="width: 50%" name="NID[]" id="NID_{{$k}}" class="inputBoxInput" type="text"
+                                <input onkeypress="return isNumber(event)" name="NID[]" id="NID_{{$k}}" class="inputBoxInput width-50per" type="text"
                                        placeholder="000000000" onchange="clearError(6,{{$k}})">
                             </div>
-                            <div class="inputBox" style="width: 13%; margin-right: 10%;">
-                                <div class="inputBoxText" style="width: 50%">
-                                    <div style="display: inline-block; position: relative">
+                            <div class="inputBox width-13per mg-rt-10per">
+                                <div class="inputBoxText width-50per">
+                                    <div class="display-inline-block position-relative">
                                         <div class="afterBuyIcon redStar"></div>
                                         جنسیت
                                     </div>
                                 </div>
-                                <select name="sex[]" id="sex_{{$k}}" class="inputBoxSelect"
-                                        style="width: 30%; margin: 0 9px" required>
+                                <select name="sex[]" id="sex_{{$k}}" class="inputBoxSelect width-30per mg-0-9" required>
                                     <option value="female"> زن</option>
                                     <option value="male"> مرد</option>
                                 </select>
                             </div>
                         </div>
                         <div id="foreignRow_{{$k}}" class="hidden">
-                            <div id="expire_error_text_{{$k}}" style="color: #f26C4F; display: none">پر کردن این بخش اجباری است</div>
-                            <div class="inputBox" style="width: 21%;">
+                            <div id="expire_error_text_{{$k}}" class="essentialInfos">پر کردن این بخش اجباری است</div>
+                            <div class="inputBox width-21per">
                                 <div class="inputBoxText">
-                                    <div style="display: inline-block; position: relative"> تاریخ انقضا</div>
+                                    <div class="display-inline-block position-relative"> تاریخ انقضا</div>
                                 </div>
                                 <select name="expireD[]" id="expireD_{{$k}}" class="inputBoxSelect" required>
                                     <option value=""> روز</option>
@@ -422,11 +284,10 @@ for($i = 0; $i < count($rooms->num_room_code); $i++){
                                     @endfor
                                 </select>
                             </div>
-                            <div id="countryCode_error_text_{{$k}}" style="color: #f26C4F; display: none">پر کردن این بخش اجباری است</div>
-                            <div id="searchDivForScroll_{{$k}}" class="inputBox searchDivForScroll"
-                                 style="width: 25%; margin-right: 10%;">
+                            <div id="countryCode_error_text_{{$k}}" class="essentialInfos">پر کردن این بخش اجباری است</div>
+                            <div id="searchDivForScroll_{{$k}}" class="inputBox searchDivForScroll width-25per mg-rt-10per">
                                 <div class="inputBoxText">
-                                    <div style="display: inline-block; position: relative"> محل صدور</div>
+                                    <div class="display-inline-block position-relative"> محل صدور</div>
                                 </div>
                                 <input onkeyup="searchCountryCode(event, '{{$k}}')" name="countryCode[]"
                                        id="countryCode_{{$k}}" class="inputBoxInput" type="text" placeholder="Iran">
@@ -439,10 +300,10 @@ for($i = 0; $i < count($rooms->num_room_code); $i++){
                                     ایا مسافری با تابعیت خارجی در این تاق اقامت خواهد داشت؟
                                 </div>
                                 <div class="answer" onclick="changeAnswer({{$k}}, 1)">
-                                    <div class="common_answer" id="yes_1_{{$k}}" style="border-bottom-right-radius: 5px; border-top-right-radius: 5px">
+                                    <div class="common_answer common_answer_right" id="yes_1_{{$k}}">
                                         بلی
                                     </div>
-                                    <div class="common_answer choose_answer" id="no_1_{{$k}}" style="border-bottom-left-radius: 5px; border-top-left-radius: 5px">
+                                    <div class="common_answer choose_answer common_answer_left" id="no_1_{{$k}}">
                                         خیر
                                     </div>
                                 </div>
@@ -453,10 +314,10 @@ for($i = 0; $i < count($rooms->num_room_code); $i++){
                                     ایا شما به مسافرت کاری می روید؟
                                 </div>
                                 <div class="answer" onclick="changeAnswer({{$k}}, 2)">
-                                    <div class="common_answer" id="yes_2_{{$k}}" style="border-bottom-right-radius: 5px; border-top-right-radius: 5px">
+                                    <div class="common_answer common_answer_right" id="yes_2_{{$k}}">
                                         بلی
                                     </div>
-                                    <div class="common_answer choose_answer" id="no_2_{{$k}}" style="border-bottom-left-radius: 5px; border-top-left-radius: 5px">
+                                    <div class="common_answer choose_answer common_answer_left" id="no_2_{{$k}}">
                                         خیر
                                     </div>
                                 </div>
@@ -467,10 +328,10 @@ for($i = 0; $i < count($rooms->num_room_code); $i++){
                                     ایا درخواست ترانسفر فرودگاهی دارید؟
                                 </div>
                                 <div class="answer" onclick="changeAnswer({{$k}}, 3)">
-                                    <div class="common_answer" id="yes_3_{{$k}}" style="border-bottom-right-radius: 5px; border-top-right-radius: 5px">
+                                    <div class="common_answer common_answer_right" id="yes_3_{{$k}}">
                                         بلی
                                     </div>
-                                    <div class="common_answer choose_answer" id="no_3_{{$k}}" style="border-bottom-left-radius: 5px; border-top-left-radius: 5px">
+                                    <div class="common_answer choose_answer common_answer_left" id="no_3_{{$k}}">
                                         خیر
                                     </div>
                                 </div>
@@ -481,32 +342,32 @@ for($i = 0; $i < count($rooms->num_room_code); $i++){
                                     ایا کودکان همراه شما در این اتاق اقامت دارند؟
                                 </div>
                                 <div class="answer" onclick="changeAnswer({{$k}}, 4)">
-                                    <div class="common_answer" id="yes_4_{{$k}}" style="border-bottom-right-radius: 5px; border-top-right-radius: 5px">
+                                    <div class="common_answer common_answer_right" id="yes_4_{{$k}}">
                                         بلی
                                     </div>
-                                    <div class="common_answer choose_answer" id="no_4_{{$k}}" style="border-bottom-left-radius: 5px; border-top-left-radius: 5px">
+                                    <div class="common_answer choose_answer common_answer_left" id="no_4_{{$k}}">
                                         خیر
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="questions" style="flex-direction: column; align-items: normal; margin-top: 15px;">
+                            <div class="questions helpUsText">
                                 <div>
                                     اگر درخواست یا ملاحظه ی دیگری دارید حتما بنویسید تا ما با میزبان شما درمیان بگذاریم
                                 </div>
-                                <div style="margin-top: 5px;">
+                                <div class="mg-tp-5">
                                     <textarea class="requestArea" id="textArea{{$k}}" onchange="roomRequest({{$k}})" rows="4" placeholder="درخواست خود را وارد کنید"></textarea>
                                 </div>
                             </div>
                         </div>
                     </div>
                         @if($mode == 2 || Auth::check())
-                        <div id="saveInformation_div_{{$k}}" class="check-box__item" style="margin-top: 5px">
+                        <div id="saveInformation_div_{{$k}}" class="check-box__item mg-tp-5">
                             <label class="labelEdit"> این اطلاعات در قسمت مسافر ها ذخیره شود. در صورت ذخیره اطلاعات در هنگام
                                 خرید بلیط دیگر نیاز به وارد کردن اطلاعات این مسافر نمی باشد و تنها با وارد کردن نام می توان
                                 اطلاعات را به طور کامل وارد نمود </label>
                             <input type="checkbox" id="saveInformation_{{$k}}" name="saveInformation[]"
-                                   value="ذخیره اطلاعات" style="display: inline-block; !important;">
+                                   value="ذخیره اطلاعات" class="display-inline-blockImp">
                         </div>
                     @endif
                 </div>
@@ -645,7 +506,7 @@ for($i = 0; $i < count($rooms->num_room_code); $i++){
                         currIdx = -1;
                         suggestions = response;
                         for (i = 0; i < response.length; i++)
-                            newElement += "<p style='cursor: pointer' class='suggest' id='suggest_" + i + "' onclick='setInput(\"" + response[i].code + "\", \"" + idx + "\")'>" + response[i].name + " - " + response[i].nameEn + "</p>";
+                            newElement += "<p class='suggest cursor-pointer' id='suggest_" + i + "' onclick='setInput(\"" + response[i].code + "\", \"" + idx + "\")'>" + response[i].name + " - " + response[i].nameEn + "</p>";
                         $("#result_" + idx).empty().append(newElement)
                     }
                 })
@@ -667,7 +528,7 @@ for($i = 0; $i < count($rooms->num_room_code); $i++){
                     currIdx = -1;
                     suggestions = response;
                     for (i = 0; i < response.length; i++)
-                        newElement += "<p style='cursor: pointer' class='suggest' id='suggest_" + i + "' onclick='setInput(\"" + response[i].code + "\", \"" + idx + "\")'>" + response[i].name + " - " + response[i].nameEn + "</p>";
+                        newElement += "<p class='suggest cursor-pointer' id='suggest_" + i + "' onclick='setInput(\"" + response[i].code + "\", \"" + idx + "\")'>" + response[i].name + " - " + response[i].nameEn + "</p>";
                     $("#result_" + idx).empty().append(newElement)
                 }
             })
@@ -758,9 +619,9 @@ for($i = 0; $i < count($rooms->num_room_code); $i++){
                     getMyPassengersBool = true;
                     newElement = "";
                     if (passengers.length == 0)
-                        newElement += "<p style='padding: 10px'>مسافری موجود نیست</p>";
+                        newElement += "<p class='pd-10'>مسافری موجود نیست</p>";
                     for (i = 0; i < passengers.length; i++) {
-                        newElement += "<p style='cursor: pointer; padding: 10px' onclick='fillPassengerInfo(" + i + ", " + idx + ")' style='cursor: pointer'>" + passengers[i].nameFa + " " + passengers[i].familyFa + "</p>";
+                        newElement += "<p class='cursor-pointer pd-10' onclick='fillPassengerInfo(" + i + ", " + idx + ")'>" + passengers[i].nameFa + " " + passengers[i].familyFa + "</p>";
                     }
                     $("#passengerList_" + idx).empty().append(newElement);
                 }
@@ -769,9 +630,9 @@ for($i = 0; $i < count($rooms->num_room_code); $i++){
         else {
             newElement = "";
             if (passengers.length == 0)
-                newElement += "<p style='padding: 10px'>مسافری موجود نیست</p>";
+                newElement += "<p class='pd-10'>مسافری موجود نیست</p>";
             for (i = 0; i < passengers.length; i++)
-                newElement += "<p style='cursor: pointer; padding: 10px' onclick='fillPassengerInfo(" + i + ", " + idx + ")' style='cursor: pointer'>" + passengers[i].nameFa + " " + passengers[i].familyFa + "</p>";
+                newElement += "<p class='cursor-pointer pd-10' onclick='fillPassengerInfo(" + i + ", " + idx + ")'>" + passengers[i].nameFa + " " + passengers[i].familyFa + "</p>";
             $("#passengerList_" + idx).empty().append(newElement);
         }
     }

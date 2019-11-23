@@ -32,7 +32,7 @@
                                 <div class="reviewHeader Left">
                                     <div class="locationInfo wrap">
                                         <div class="thumbnail">
-                                            <div class="sizedThumb width-100per height-auto">
+                                            <div class="sizedThumb full-width height-auto">
                                                 @if($placeMode == "hotel")
                                                     <img src="{{$placePic}}" onclick="document.location.href = '{{route('hotelDetails', ['placeId' => $placeId, 'placeName' => $placeName])}}'" class="photo_image userPhotoWritingReview" alt=""/>
                                                 @elseif($placeMode == "amaken")
@@ -73,7 +73,7 @@
                                 <ul>
                                 </ul>
                             </div>
-                            <h2 class="pageTitle color-#4DC7BCImp">از اینکه تجربه خود را با ما و دوستانتان در میان می گذارید سپاس گزاریم ! </h2>
+                            <h2 class="pageTitle color-greenImp">از اینکه تجربه خود را با ما و دوستانتان در میان می گذارید سپاس گزاریم ! </h2>
                             <div class="warRequiredOuter position-relative">
                                 <div class="warRequiredSectionContainer  notLoggedIn  position-relative">
                                     <div class="questionBlock requiredQuestions position-relative">

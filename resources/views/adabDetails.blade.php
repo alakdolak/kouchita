@@ -773,7 +773,7 @@ if ($total == 0)
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="ui_columns is-multiline container width-100per mg-0">
+                                        <div class="ui_columns is-multiline container full-width mg-0">
                                             @foreach($brands as $itr)
                                                 <div class="prw_rup prw_common_btf_nearby_poi_entry ui_column is-6 poiTile width-33perImp">
                                                     <div class="ui_columns is-gapless is-mobile poiEntry shownOnMap shopDiv">
@@ -854,7 +854,7 @@ if ($total == 0)
                                         <div class="carousel_wrapper ui_column is-6 carouselAddImgAdab">
                                             <div class="prw_rup prw_common_mercury_photo_carousel carousel_outer">
                                                 <div class="carousel bignav max-height-424">
-                                                    <div class="carousel-images carousel_images_footer height-100per">
+                                                    <div class="carousel-images carousel_images_footer full-height">
                                                         <div class="see_all_count_wrap">
                                                             <span class="see_all_count">
                                                                 <span class="ui_icon camera"></span>
@@ -902,7 +902,7 @@ if ($total == 0)
                                 <div class="askQuestionForm hidden control">
                                     <div class="askExplanation">سوال خودتو بپرس تا کسانی که می دونند کمکت کنند.</div>
                                     <div class="overlayNote">سوال شما به صورت عمومی نمایش داده خواهد شد.</div>
-                                    <textarea name="topicText" id="questionTextId" class="topicText ui_textarea width-100per"
+                                    <textarea name="topicText" id="questionTextId" class="topicText ui_textarea full-width"
                                               placeholder="سلام هرچی میخواهی بپرسید. بدون خجالت"></textarea>
                                     <span onclick="$('#rules').removeClass('hidden')" class="postingGuidelines float-right">راهنما و قوانین</span>
                                     <div class="underForm mg-rt-10">

@@ -17,7 +17,7 @@
         <link rel="stylesheet" href="{{URL::asset('css/theme2/help.css?v=1')}}">
         <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/universal_new.css?v=1')}}' data-rup='universal_new'/>
         <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/masthead-saves.css?v=1')}}' data-rup='long_lived_global_legacy'/>
-        <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/bodyProfile.css')}}' data-rup='long_lived_global_legacy'/>
+        <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/bodyProfile.css')}}' data-rup='long_lived_global_legacy'/>
 
 
 
@@ -300,10 +300,10 @@
                     </li>
                 @endif
                 <li id="Bookings" class="bookings">
-                    <a id="bookingLinkColor1" href="{{route('soon')}}">رزروها</a>
+                    <a id="bookingLinkColor2" href="{{route('soon')}}">رزروها</a>
                 </li>
                 <li id="PaymentOptions" class="paymentOptions">
-                    <a id="paymentOptionsLinkColor" href="{{route('soon')}}">پروازها</a>
+                    <a id="paymentOptionsLinkColor2" href="{{route('soon')}}">پروازها</a>
                 </li>
                 @if($mode == "setting")
                     <li id="Settings" class="settingColor1 settings">

@@ -3,6 +3,8 @@
 }
 
 .cropper-container {
+  width: 717px !important;
+  height: 490px !important;
   direction: ltr;
   font-size: 0;
   line-height: 0;

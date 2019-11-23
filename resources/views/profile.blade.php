@@ -49,7 +49,7 @@
 
     @section('main')
 
-        <link rel="stylesheet" href="{{URL::asset('css/theme2/specific designs/profile.css')}}">
+        <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/profile.css')}}">
 
         <script>
 

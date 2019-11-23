@@ -1,76 +1,43 @@
 
-<style>
-    .class_passengerPane {
-        text-align: center !important;
-        background-color: white;
-        position: absolute;
-        padding: 10px;
-        top: 25px;
-        left: 0;
-        border-radius: 5px;
-    }
-    .class_passengerOldPane {
-        text-align: center !important;
-        position: absolute;
-        background-color: #ebebeb;
-        padding: 10px;
-        top: 45px;
-        left: 0;
-        border-radius: 5px;
-        width: 200px;
-    }
-    .minusPlusBtn {
-        width: 17px;
-        height: 17px;
-        cursor: pointer;
-        display: inline-block;
-        background-image: url('{{URL::asset('images') . '/icons.jpg'}}');
-        background-size: 72px;
-    }
+<link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/buyHotel.css?v=1')}}'/>
 
-    @media screen and (max-width: 600px) {
-        .minusPlusBtn {
-            width: 44px;
-            height: 44px;
-            background-size: 185px;
-        }
-    }
-</style>
-
-<div style="width: 100%">
-    <div style="float: right;"> شما در حال انتقال به سایت فروشنده بلیط هستید </div>
-    <div style="text-align: left">
+<div class="full-width">
+    <div class="float-right"> شما در حال انتقال به سایت فروشنده بلیط هستید </div>
+    <div class="text-align-left">
         {{--<a href="{{$backURL}}" style=" color: #0c0593 !important;"> بازگشت به صفحه جستجو بلیط >> </a>--}}
     </div>
 </div>
 
 <div class="inlineBorder"></div>
 
-<div style="width: 100%">
+<div class="full-width">
     <div> اطلاعاتی که در این صفحه وارد می کنید به سایت پذیرنده منتقل می شود تا خرید شما آسان تر از قبل گردد </div>
     <div class="textTitle"> اطلاعات تماس </div>
-    <div style="font-size: 0.8em"> این اطلاعات  به عنوان اطلاعات تماس شما در شازده ثبت می شود </div>
-    <div style="width: 60%; height: 120px">
-        <div class="inputBox" style="width: 30%; float: right">
+    <div class="font-size-08em"> این اطلاعات  به عنوان اطلاعات تماس شما در شازده ثبت می شود </div>
+    <div class="width-60per height-120">
+        <div class="inputBox width-30per float-right">
             <div class="inputBoxText">
-                <div style="display: inline-block; position: relative"><div class="afterBuyIcon redStar"></div> تلفن همراه </div>
+                <div class="display-inline-block position-relative">
+                    <div class="afterBuyIcon redStar"></div>
+                    تلفن همراه
+                </div>
             </div>
             <input onkeypress="return isNumber(event)" class="inputBoxInput" id="phoneNumForTicket" type="tel" placeholder="0912xxxxxxx">
         </div>
-        <div style="width: 40%; float: left">
-            <div class="inputBox" style="width: 85%">
+        <div class="width-40per float-left">
+            <div class="inputBox width-85per">
                 <div class="inputBoxText">
-                    <div style="display: inline-block; position: relative"><div class="afterBuyIcon redStar"></div> ایمیل </div>
+                    <div class="display-inline-block position-relative"><div class="afterBuyIcon redStar"></div> ایمیل </div>
                 </div>
                 <input class="inputBoxInput" id="emailForTicket" type="email" placeholder="example@domain.com">
             </div>
-            <div class="check-box__item" style="margin-top: 5px">
+            <div class="check-box__item mg-tp-5">
                 <label class="labelEdit"> اطلاعات مهم را با این آدرس به من اطلاع دهید </label>
-                <input type="checkbox" id="importantInformation" name="otherOffer" value="اطلاعات مهم" style="display: inline-block; !important;">
+                <input type="checkbox" id="importantInformation" name="otherOffer" value="اطلاعات مهم">
             </div>
             <div class="check-box__item">
                 <label class="labelEdit"> اخبار مربوط به علایق من را با این آدرس برای من بفرستید </label>
-                <input type="checkbox" id="interestNews" name="otherOffer" value="اخبار مورد علاقه" style="display: inline-block; !important;">
+                <input type="checkbox" id="interestNews" name="otherOffer" value="اخبار مورد علاقه">
             </div>
         </div>
     </div>
@@ -81,56 +48,61 @@
 <div>
     <div class="textTitle"> اطلاعات مسافرین </div>
     <div>
-        <div style="display: inline-block; font-weight: 900; position: relative">
-            <div  style="display: inline-block"> <span id="finalAdultNo"></span> بزرگسال - <span id="finalChildNo"></span> کودک - <span id="finalInfantNo"></span> نوزاد </div>
+        <div class="passengersInfosMainDiv">
+            <div  class="display-inline-block">
+                <span id="finalAdultNo"></span> بزرگسال -
+                <span id="finalChildNo"></span> کودک -
+                <span id="finalInfantNo"></span> نوزاد
+            </div>
 
-            <div style="cursor: pointer" class="afterBuyIcon bottomArrowIcon" onclick="togglePassengerNoSelectPane()"></div>
+            <div class="cursor-pointer" class="afterBuyIcon bottomArrowIcon" onclick="togglePassengerNoSelectPane()"></div>
 
-            <div class="class_passengerPane item hidden" id="passengerNoSelectPane" onmouseleave="addClassHidden('passengerNoSelectPane'); passengerNoSelect = false;" style="text-align: right !important;">
-                <div style="height: 25px">
-                    <span style="float: right;">بزرگسال</span>
-                    <div style="float: left; margin-right: 50px">
-                        <div onclick="changePassengersNo(1, 3)"
-                             class="minusPlusBtn"
-                             style="background-position: -1px -6px;"></div>
+            <div class="class_passengerPane item hidden" id="passengerNoSelectPane"
+                 onmouseleave="addClassHidden('passengerNoSelectPane'); passengerNoSelect = false;">
+                <div class="height-25">
+                    <span class="float-right">بزرگسال</span>
+                    <div class="float-left mg-rt-50">
+                        <div onclick="changePassengersNo(1, 3)" class="minusPlusBtn bg-position--1--6"></div>
                         <span id="adultPassengerNoInSelect"></span>
-                        <div onclick="changePassengersNo(-1, 3)"
-                             class="minusPlusBtn"
-                             style="background-position: -18px -6px;"></div>
+                        <div onclick="changePassengersNo(-1, 3)" class="minusPlusBtn bg-position--18--6" ></div>
                     </div>
                 </div>
-                <div style="height: 25px">
-                    <span style="float: right;">کودک<span style="margin: 10px; font-size: 60%;color: #00AF87" id="childNoSpan"></span></span>
-                    <div style="float: left">
-                        <div onclick="changePassengersNo(1, 2)"
-                             class="minusPlusBtn"
-                             style="background-position: -1px -6px;"></div>
+                <div class="height-25">
+                    <span class="float-right">کودک
+                        <span id="childNoSpan"></span>
+                    </span>
+                    <div class="float-left">
+                        <div onclick="changePassengersNo(1, 2)" class="minusPlusBtn bg-position--1--6"></div>
                         <span id="childPassengerNoInSelect"></span>
-                        <div onclick="changePassengersNo(-1, 2)"
-                             class="minusPlusBtn"
-                             style="background-position: -18px -6px;"></div>
+                        <div onclick="changePassengersNo(-1, 2)" class="minusPlusBtn bg-position--18--6"></div>
                     </div>
                 </div>
-                <div style="height: 25px">
-                    <span style="float: right;">نوزاد<span style="margin: 10px; font-size: 60%;color: #00AF87" id="infantNoSpan"></span></span>
-                    <div style="float: left">
-                        <div onclick="changePassengersNo(1, 1)"
-                             class="minusPlusBtn"
-                             style="background-position: -1px -6px;"></div>
+                <div class="height-25">
+                    <span class="float-right">نوزاد
+                        <span id="infantNoSpan"></span>
+                    </span>
+                    <div class="float-left">
+                        <div onclick="changePassengersNo(1, 1)" class="minusPlusBtn bg-position--1--6"></div>
                         <span id="infantPassengerNoInSelect"></span>
-                        <div onclick="changePassengersNo(-1, 1)"
-                             class="minusPlusBtn"
-                             style="background-position: -18px -6px;"></div>
+                        <div onclick="changePassengersNo(-1, 1)" class="minusPlusBtn bg-position--18--6"></div>
                     </div>
                 </div>
             </div>
 
         </div>
-        <div style="display: inline-block; font-size: 0.9em;"> تغییر در تعداد مسافرین نیاز بررسی دوباره ظرفیت می باشد </div>
+        <div class="revisionOfCapacityChanges"> تغییر در تعداد مسافرین نیاز بررسی دوباره ظرفیت می باشد </div>
         {{--<button onclick="document.location.href = '{{route('home')}}' + '/buyInnerFlight/3/' + '{{$ticket->id}}/' + $('#finalAdultNo').html() + '/' + $('#finalChildNo').html() + '/' + $('#finalInfantNo').html()" class="btn afterBuyBtn" type="button" style="background-color: #4DC7BC"> بررسی مجدد </button>--}}
     </div>
-    <div id="hurryUpErr" class="hidden" style="font-size: 0.9em; color: red"><span style="font-size: 1.3em; font-weight: 900"> عجله کنید </span> متأسفانه ظرفیت موجود به تعداد مسافران نمی باشد. تنها <span id="reminderCapacity"></span> ظرفیت باقی مانده است </div>
-    {{--<div id="searchAgain" class="hidden" style="font-size: 0.9em; color: red"><span style="font-size: 1.3em; font-weight: 900"> متأسفیم </span> ظرفیت پرواز فوق به پایان رسیده است. <a href="{{$backURL}}" style="color: #050c93"> دوباره جست و جو کنید </a> تا پرواز دیگری برای شما پیدا کنیم </div>--}}
+    <div id="hurryUpErr" class="hidden">
+        <span> عجله کنید </span>
+        متأسفانه ظرفیت موجود به تعداد مسافران نمی باشد. تنها
+        <span id="reminderCapacity"></span>
+        ظرفیت باقی مانده است
+    </div>
+    {{--<div id="searchAgain" class="hidden">
+            <span class="flightCapacityNotification"> متأسفیم </span> ظرفیت پرواز فوق به پایان رسیده است.
+            <a href="{{$backURL}}" class="color-5-12-147"> دوباره جست و جو کنید </a> تا پرواز دیگری برای شما پیدا کنیم
+        </div>--}}
 </div>
 
 <div class="inlineBorder"></div>
@@ -155,7 +127,7 @@
     {{--<div id="passenger_{{$step}}">--}}
         {{--<div>--}}
             {{--<div>--}}
-                {{--<div style="display: inline-block">--}}
+                {{--<div class="display-inline-block">--}}
                     {{--@if($step == 0 && Auth::check())--}}
                         {{--<div style="font-size: 1.1em; font-weight: 300; color: #050c93; display: inline-block"> <span id="passengerInfo_{{$step}}"></span><span>&nbsp;</span><span>اول</span> </div>--}}
                         {{--<button onclick="getMyTicketInfo()" class="btn afterBuyBtn" type="button" style="background-color: #4DC7BC"> من هستم </button>--}}
@@ -184,17 +156,17 @@
                 {{--<label class="labelEdit"> تبعه خارجی هستم </label>--}}
                 {{--<input onclick="changeForeignRow('{{$step}}')" id="foreign_{{$step}}" name="foreign[]" value="خارجی" type="checkbox" style="display: inline-block; !important;">--}}
             {{--</div>--}}
-            {{--<div style="width: 100%">--}}
+            {{--<div class="full-width">--}}
                 {{--<div>--}}
                     {{--<div class="inputBox" style="width: 20%;">--}}
                         {{--<div class="inputBoxText">--}}
-                            {{--<div style="display: inline-block; position: relative"><div class="afterBuyIcon redStar"></div> نام </div>--}}
+                            {{--<div class="display-inline-block position-relative"><div class="afterBuyIcon redStar"></div> نام </div>--}}
                         {{--</div>--}}
                         {{--<input class="inputBoxInput" id="nameFa_{{$step}}" name="nameFa[]" type="text" placeholder="فارسی">--}}
                     {{--</div>--}}
                     {{--<div class="inputBox" style="width: 25%; margin-right: 10%;">--}}
                         {{--<div class="inputBoxText">--}}
-                            {{--<div style="display: inline-block; position: relative"><div class="afterBuyIcon redStar"></div> نام خانوادگی </div>--}}
+                            {{--<div class="display-inline-block position-relative"><div class="afterBuyIcon redStar"></div> نام خانوادگی </div>--}}
                         {{--</div>--}}
                         {{--<input class="inputBoxInput" type="text" name="familyFa[]" id="familyFa_{{$step}}" placeholder="فارسی">--}}
                         {{--<input type="hidden" name="ageType[]" value="{{$modes[$step]}}">--}}
@@ -203,13 +175,13 @@
                 {{--<div>--}}
                     {{--<div class="inputBox" style="width: 20%;">--}}
                         {{--<div class="inputBoxText">--}}
-                            {{--<div style="display: inline-block; position: relative"><div class="afterBuyIcon redStar"></div> نام </div>--}}
+                            {{--<div class="display-inline-block position-relative"><div class="afterBuyIcon redStar"></div> نام </div>--}}
                         {{--</div>--}}
                         {{--<input class="inputBoxInput" name="nameEn[]" id="nameEn_{{$step}}" type="text" placeholder="لاتین">--}}
                     {{--</div>--}}
                     {{--<div class="inputBox" style="width: 25%; margin-right: 10%;">--}}
                         {{--<div class="inputBoxText">--}}
-                            {{--<div style="display: inline-block; position: relative"><div class="afterBuyIcon redStar"></div> نام خانوادگی </div>--}}
+                            {{--<div class="display-inline-block position-relative"><div class="afterBuyIcon redStar"></div> نام خانوادگی </div>--}}
                         {{--</div>--}}
                         {{--<input class="inputBoxInput" type="text" placeholder="لاتین" name="familyEn[]" id="familyEn_{{$step}}">--}}
                     {{--</div>--}}
@@ -217,7 +189,7 @@
                 {{--<div>--}}
                     {{--<div class="inputBox" style="width: 20%;">--}}
                         {{--<div class="inputBoxText">--}}
-                            {{--<div style="display: inline-block; position: relative"><div class="afterBuyIcon redStar"></div> تاریخ تولد </div>--}}
+                            {{--<div class="display-inline-block position-relative"><div class="afterBuyIcon redStar"></div> تاریخ تولد </div>--}}
                         {{--</div>--}}
                         {{--<select name="birthDayD[]" id="birthDayD_{{$step}}" class="inputBoxSelect" required>--}}
                             {{--<option value="" > روز </option>--}}
@@ -255,7 +227,7 @@
                     {{--</div>--}}
                     {{--<div class="inputBox" style="width: 10%; margin-right: 10%;">--}}
                         {{--<div class="inputBoxText" style="width: 50%">--}}
-                            {{--<div style="display: inline-block; position: relative"><div class="afterBuyIcon redStar"></div> جنسیت </div>--}}
+                            {{--<div class="display-inline-block position-relative"><div class="afterBuyIcon redStar"></div> جنسیت </div>--}}
                         {{--</div>--}}
                         {{--<select name="sex[]" id="sex_{{$step}}" class="inputBoxSelect" style="width: 30%; margin: 0 9px" required>--}}
                             {{--<option value="female"> زن </option>--}}
@@ -266,7 +238,7 @@
                 {{--<div id="foreignRow_{{$step}}" class="hidden">--}}
                     {{--<div class="inputBox" style="width: 20%;">--}}
                         {{--<div class="inputBoxText">--}}
-                            {{--<div style="display: inline-block; position: relative"> تاریخ انقضا </div>--}}
+                            {{--<div class="display-inline-block position-relative"> تاریخ انقضا </div>--}}
                         {{--</div>--}}
                         {{--<select name="expireD[]" id="expireD_{{$step}}" class="inputBoxSelect" required>--}}
                             {{--<option value="" > روز </option>--}}
@@ -298,7 +270,7 @@
                     {{--</div>--}}
                     {{--<div id="searchDivForScroll_{{$step}}" class="inputBox searchDivForScroll" style="width: 25%; margin-right: 10%;">--}}
                         {{--<div class="inputBoxText">--}}
-                            {{--<div style="display: inline-block; position: relative"> محل صدور </div>--}}
+                            {{--<div class="display-inline-block position-relative"> محل صدور </div>--}}
                         {{--</div>--}}
                         {{--<input onkeyup="searchCountryCode(event, '{{$step}}')"  name="countryCode[]" id="countryCode_{{$step}}" class="inputBoxInput" type="text" placeholder="Iran">--}}
                         {{--<div id="result_{{$step}}" class="data_holder"></div>--}}
