@@ -1,6 +1,7 @@
 <?php $placeMode = "ticket";
 $state = "تهران";
 $kindPlaceId = 10; ?>
+
         <!DOCTYPE html>
 <html>
 <head>
@@ -19,10 +20,6 @@ $kindPlaceId = 10; ?>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/icons.css?v=1')}}'/>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/passStyle.css?v=1')}}'/>
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/shazdeDesigns/tourCreation.css')}}"/>
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/shazdeDesigns/abbreviations.css')}}"/>
-
-    <script src= {{URL::asset("js/calendar.js") }}></script>
-    <script src= {{URL::asset("js/jalali.js") }}></script>
 </head>
 
 <body id="BODY_BLOCK_JQUERY_REFLOW"
@@ -75,11 +72,13 @@ $kindPlaceId = 10; ?>
                     <span>نگران نباشید. شما همواره از طریق پروفایل خود امکان ادامه ایجاد تور را خواهید داشت. هر اطلاعاتی که وارد می‌کنید به صورت موقت ذخیره می‌شود مگر آن‌که هشداری مبنی بر عدم صحت آن دریافت کنید.</span>
                     <span>این فرآیند تقریباً مابین ... الی ... دقیقه زمان می‌برد.</span>
                 </div>
-                <button id="termsAndConditionBtn" class="btn nextStepBtnTourCreation">شروع کنید</button>
+                <a href="{{route('tour.create.stage.one')}}">
+                    <button id="termsAndConditionBtn" class="btn nextStepBtnTourCreation">شروع کنید</button>
+                </a>
             </div>
         </div>
     </div>
-</div>
+
 @include('layouts.placeFooter')
 
 </body>

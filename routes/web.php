@@ -273,8 +273,6 @@ Route::group(array('middleware' => [ 'nothing']), function () {
 
 Route::group(array('middleware' => ['throttle:30', 'nothing']), function () {
 
-    Route::post('getCities', array('as' => 'getCitiesDir', 'uses' => 'AjaxController@getCitiesDir'));
-
     Route::post('getAdviceMain', array('as' => 'getAdviceMain', 'uses' => 'PlaceController@getAdviceMain'));
 
     Route::post('getAdviceCity', array('as' => 'getAdviceCity', 'uses' => 'PlaceController@getAdviceCity'));
@@ -294,14 +292,6 @@ Route::group(array('middleware' => ['throttle:30', 'nothing']), function () {
     Route::post('getRestaurantsMain', array('as' => 'getRestaurantsMain', 'uses' => 'RestaurantController@getRestaurantsMain'));
 
     Route::post('getLastRecentlyMain', array('as' => 'getLastRecentlyMain', 'uses' => 'HotelController@getLastRecentlyMain'));
-
-    Route::post('getPlacePic', array('as' => 'getPlacePic', 'uses' => 'AjaxController@getPlacePic'));
-
-    Route::post('proSearch', array('as' => 'proSearch', 'uses' => 'AjaxController@proSearch'));
-
-    Route::post('searchForCity', array('as' => 'searchForCity', 'uses' => 'AjaxController@searchForCity'));
-
-    Route::post('searchForLine', array('as' => 'searchForLine', 'uses' => 'AjaxController@searchForLine'));
 
     //PDF creator
     Route::get('alaki/{tripId}', array('as' => 'alaki', 'uses' => 'HomeController@alaki'));
@@ -363,10 +353,6 @@ Route::group(array('middleware' => ['throttle:30', 'nothing', 'auth']), function
 
     Route::post('sendReceiveReport', array('as' => 'sendReceiveReport', 'uses' => 'MessageController@sendReceiveReport'));
 
-    Route::post('getReports', array('as' => 'getReportsDir', 'uses' => 'AjaxController@getReports'));
-
-    Route::post('getReports2', array('as' => 'getReports', 'uses' => 'AjaxController@getReports2'));
-
     Route::post('getMessage', array('as' => 'getMessage', 'uses' => 'MessageController@getMessage'));
 
     Route::post('getListOfMsgs', array('as' => 'getListOfMsgsDir', 'uses' => 'MessageController@getListOfMsgs'));
@@ -402,8 +388,6 @@ Route::group(array('middleware' => ['throttle:30', 'nothing', 'auth']), function
     Route::get('accountInfo/{status}', array('as' => 'accountInfo2', 'uses' => 'ProfileController@accountInfo2'));
 
     Route::post('searchInCities', array('as' => 'searchInCities', 'uses' => 'ProfileController@searchInCities'));
-
-    Route::post('searchForMyContacts', array('as' => 'searchForMyContacts', 'uses' => 'AjaxController@searchForMyContacts'));
 
     Route::get('editPhoto', array('as' => 'editPhoto', 'uses' => 'ProfileController@editPhoto'));
 
@@ -493,21 +477,9 @@ Route::group(array('middleware' => ['throttle:30', 'nothing', 'auth']), function
 
 });
 
-Route::group(array('middleware' => ['throttle:30', 'nothing', 'auth']), function () {
-
-    Route::post('getPlaceKinds', array('as' => 'getPlaceKinds', 'uses' => 'AjaxController@getPlaceKinds'));
-
-    Route::post('searchPlace', array('as' => 'searchPlace', 'uses' => 'AjaxController@searchPlace'));
-
-});
-
 Route::group(array('middleware' => ['throttle:30', 'nothing']), function () {
 
     Route::get('adab-details/{placeId}/{placeName}/{mode?}', array('as' => 'adabDetails', 'uses' => 'AdabController@showAdabDetail'));
-
-    Route::post('getStates', array('as' => 'getStates', 'uses' => 'AjaxController@getStates'));
-
-    Route::post('getGoyesh', array('as' => 'getGoyesh', 'uses' => 'AjaxController@getGoyesh'));
 
     Route::get('majara-details/{placeId}/{placeName}/{mode?}', array('as' => 'majaraDetails', 'uses' => 'MajaraController@showMajaraDetail'));
 
@@ -625,8 +597,6 @@ Route::group(array('middleware' => ['throttle:30', 'nothing']), function () {
 
     Route::get('policies', array('as' => 'policies', 'uses' => 'HomeController@showPolicies'));
 
-    Route::post('searchEstelah', array('as' => 'searchEstelah', 'uses' => 'AjaxController@searchEstelah'));
-
     Route::get('estelahat/{goyesh}', array('as' => 'estelahat', 'uses' => 'HomeController@estelahat'));
 
     Route::get('otherProfile/{username}/{mode?}', array('as' => 'otherProfile', 'uses' => 'ProfileController@showOtherProfile'));
@@ -675,3 +645,71 @@ Route::get('/tour/lists', function (){
 });
 
 Route::post('checkLogin', array('as' => 'checkLogin', 'uses' => 'HomeController@checkLogin'));
+
+
+//ajaxController
+Route::group(array('middleware' => 'nothing'), function () {
+
+    Route::post('getCities', array('as' => 'getCitiesDir', 'uses' => 'AjaxController@getCitiesDir'));
+
+    Route::post('getReports', array('as' => 'getReportsDir', 'uses' => 'AjaxController@getReports'));
+
+    Route::post('getReports2', array('as' => 'getReports', 'uses' => 'AjaxController@getReports2'));
+
+    Route::post('searchForMyContacts', array('as' => 'searchForMyContacts', 'uses' => 'AjaxController@searchForMyContacts'));
+
+    Route::post('searchEstelah', array('as' => 'searchEstelah', 'uses' => 'AjaxController@searchEstelah'));
+
+    Route::post('getStates', array('as' => 'getStates', 'uses' => 'AjaxController@getStates'));
+
+    Route::post('getGoyesh', array('as' => 'getGoyesh', 'uses' => 'AjaxController@getGoyesh'));
+
+    Route::post('getPlaceKinds', array('as' => 'getPlaceKinds', 'uses' => 'AjaxController@getPlaceKinds'));
+
+    Route::post('searchPlace', array('as' => 'searchPlace', 'uses' => 'AjaxController@searchPlace'));
+
+    Route::post('getPlacePic', array('as' => 'getPlacePic', 'uses' => 'AjaxController@getPlacePic'));
+
+    Route::post('proSearch', array('as' => 'proSearch', 'uses' => 'AjaxController@proSearch'));
+
+    Route::post('searchForCity', array('as' => 'searchForCity', 'uses' => 'AjaxController@searchForCity'));
+
+    Route::post('searchForLine', array('as' => 'searchForLine', 'uses' => 'AjaxController@searchForLine'));
+
+    Route::post('findCityWithState', 'AjaxController@findCityWithState')->name('findCityWithState');
+
+    Route::post('findRestaurantWithCity', 'AjaxController@findRestaurantWithCity')->name('search.restauran.with.city');
+
+    Route::post('findAmakenWithCity', 'AjaxController@findAmakenWithCity')->name('search.amaken.with.city');
+
+    Route::post('findHotelWithCity', 'AjaxController@findHotelWithCity')->name('search.hotel.with.city');
+
+    Route::post('findKoochitaAccount', 'AjaxController@findKoochitaAccount')->name('findKoochitaAccount');
+
+});
+
+Route::group(array('middleware' => 'auth'), function () {
+
+    Route::get('/tour/create/afterStart', 'TourController@afterStart')->name('afterStart');
+
+    Route::any('/tour/create/stageOne', 'TourController@stageOneTour')->name('tour.create.stage.one');
+
+    Route::get('/tour/create/stageTwo/{id}', 'TourController@stageTwoTour')->name('tour.create.stage.two');
+
+    Route::post('/tour/create/stageTwoTourStore', 'TourController@stageTwoTourStore')->name('tour.create.stage.two.store');
+
+    Route::get('/tour/create/stageThree/{id}', 'TourController@stageThreeTour')->name('tour.create.stage.three');
+
+    Route::post('/tour/create/stageThreeTourStore', 'TourController@stageThreeTourStore')->name('tour.create.stage.three.store');
+
+    Route::get('/tour/create/stageFour/{id}', 'TourController@stageFourTour')->name('tour.create.stage.four');
+
+    Route::post('/tour/create/stageFourTourStore', 'TourController@stageFourTourStore')->name('tour.create.stage.four.store');
+
+    Route::get('/tour/create/stageFive/{id}', 'TourController@stageFiveTour')->name('tour.create.stage.five');
+
+    Route::post('/tour/create/stageFiveTourStore', 'TourController@stageFiveTourStore')->name('tour.create.stage.five.store');
+
+    Route::get('/tour/create/complete/{id}', 'TourController@completeCreationTour')->name('tour.create.complete');
+
+});

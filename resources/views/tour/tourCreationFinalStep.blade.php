@@ -19,10 +19,6 @@ $kindPlaceId = 10; ?>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/icons.css?v=1')}}'/>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/passStyle.css?v=1')}}'/>
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/shazdeDesigns/tourCreation.css')}}"/>
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/shazdeDesigns/abbreviations.css')}}"/>
-
-    <script src= {{URL::asset("js/calendar.js") }}></script>
-    <script src= {{URL::asset("js/jalali.js") }}></script>
 </head>
 
 <body id="BODY_BLOCK_JQUERY_REFLOW"
@@ -52,14 +48,18 @@ $kindPlaceId = 10; ?>
                     <div class="tourCreationStepInfo">
                         <span>
                             گام
-                            <span>--</span>
+                            <span>6</span>
                             از
-                            <span>--</span>
+                            <span>6</span>
                         </span>
                         <span>
                             آخرین ویرایش
-                            <span>تاریخ</span>
-                            <span>ساعت</span>
+                            <span>
+                                {{$tour->lastUpdate}}
+                            </span>
+                            <span>
+                                {{$tour->lastUpdateTime}}
+                            </span>
                         </span>
                     </div>
                 </div>
@@ -75,7 +75,9 @@ $kindPlaceId = 10; ?>
                     <span>کد شناسایی تور: 100-001-1200-01</span>
                     <span>با تشکر از شما</span>
                 </div>
-                <button id="goToProfile" class="btn float-left">رفتن به پروفایل</button>
+                <a href="{{URL('profile')}}">
+                    <button id="goToProfile" class="btn float-left">رفتن به پروفایل</button>
+                </a>
             </div>
         </div>
     </div>

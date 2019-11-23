@@ -677,8 +677,7 @@ class HotelReservationController extends Controller {
         }
     }
 
-    private function getRoomDetails($input, $access_token)
-    {
+    private function getRoomDetails($input, $access_token){
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
