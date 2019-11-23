@@ -6,6 +6,13 @@
 
 <link rel="stylesheet" href="{{URL::asset('css/theme2/header1.css')}}">
 
+<!-- Link Swiper's CSS -->
+<link rel="stylesheet" href="{{URL::asset('css/theme2/swiper.css')}}">
+
+<!-- Swiper JS -->
+<script src="{{URL::asset('js/swiper/swiper.min.js')}}"></script>
+
+
 <div class="masthead">
     <div id="taplc_global_nav_0" class="ppr_rup ppr_priv_global_nav">
         <div class="global-nav global-nav-single-line has-links ">
@@ -13,7 +20,7 @@
                 <div class="global-nav-bar global-nav-green">
                     <div class="ui_container global-nav-bar-container rtl" >
                         <div class="global-nav-hamburger is-hidden-tablet"><span class="ui_icon menu-bars"></span></div>
-                        <a href="{{route('main')}}" class="global-nav-logo"><img src="{{URL::asset('images/logo.svg')}}" alt="شازده مسافر" class="global-nav-img global-nav-svg"/></a>
+                        <a href="{{route('main')}}" class="global-nav-logo"><img src="{{URL::asset('images/LOGOnew.svg')}}" alt="شازده مسافر" class="global-nav-img global-nav-svg"/></a>
                         <div class="global-nav-links ui_tabs inverted is-hidden-mobile">
                             <div id="taplc_global_nav_links_0" class="ppr_rup ppr_priv_global_nav_links" data-placement-name="global_nav_links">
                                 <div class="global-nav-links-container">
@@ -30,46 +37,46 @@
                                         @endif
                                         @if($placeMode == "restaurant")
                                             <li>
-                                                <a href="{{route('mainMode', ['mode' => 'restaurant'])}}" id="global-nav-vr" class="unscoped global-nav-link ui_tab redColor">رستوران ها</a>
+                                                <a href="{{route('mainMode', ['mode' => 'restaurant'])}}" id="global-nav-vr" class="unscoped global-nav-link ui_tab redColor">رستوران</a>
                                             </li>
                                         @else
                                             <li>
-                                                <a href="{{route('mainMode', ['mode' => 'restaurant'])}}" id="global-nav-vr" class="unscoped global-nav-link ui_tab">رستوران ها</a>
+                                                <a href="{{route('mainMode', ['mode' => 'restaurant'])}}" id="global-nav-vr" class="unscoped global-nav-link ui_tab">رستوران</a>
                                             </li>
                                         @endif
                                         @if($placeMode == "amaken")
                                             <li>
-                                                <a href="{{route('mainMode', ['mode' => 'amaken'])}}" id="global-nav-restaurants" class="unscoped global-nav-link ui_tab redColor">جاذبه ها</a>
+                                                <a href="{{route('mainMode', ['mode' => 'amaken'])}}" id="global-nav-restaurants" class="unscoped global-nav-link ui_tab redColor">جاذبه</a>
                                             </li>
                                         @else
                                             <li>
-                                                <a href="{{route('mainMode', ['mode' => 'amaken'])}}" id="global-nav-restaurants" class="unscoped global-nav-link ui_tab">جاذبه ها</a>
+                                                <a href="{{route('mainMode', ['mode' => 'amaken'])}}" id="global-nav-restaurants" class="unscoped global-nav-link ui_tab">جاذبه</a>
                                             </li>
                                         @endif
-                                        @if($placeMode == "ticket")
-                                            <li>
-                                                <a href="{{route('tickets')}}" class="unscoped global-nav-link ui_tab redColor ">بلیط</a>
-                                            </li>
-                                        @else
-                                            <li>
-                                                <a href="{{route('tickets')}}" class="unscoped global-nav-link ui_tab ">بلیط</a>
-                                            </li>
-                                        @endif
-                                        @if($placeMode == "tour")
-                                            <li>
-                                                <a href="{{route('mainMode', ['mode' => 'tour'])}}" id="global-nav-tours" class="unscoped global-nav-link ui_tab redColor " data-tracking-label="hotels">تور</a>
-                                            </li>
-                                        @else
-                                            <li>
-                                                <a href="{{route('mainMode', ['mode' => 'tour'])}}" id="global-nav-tours" class="unscoped global-nav-link ui_tab " data-tracking-label="hotels">تور</a>
-                                            </li>
-                                        @endif
+                                        {{--@if($placeMode == "ticket")--}}
+                                            {{--<li>--}}
+                                                {{--<a href="{{route('tickets')}}" class="unscoped global-nav-link ui_tab redColor ">بلیط</a>--}}
+                                            {{--</li>--}}
+                                        {{--@else--}}
+                                            {{--<li>--}}
+                                                {{--<a href="{{route('tickets')}}" class="unscoped global-nav-link ui_tab ">بلیط</a>--}}
+                                            {{--</li>--}}
+                                        {{--@endif--}}
+                                        {{--@if($placeMode == "tour")--}}
+                                            {{--<li>--}}
+                                                {{--<a href="{{route('mainMode', ['mode' => 'tour'])}}" id="global-nav-tours" class="unscoped global-nav-link ui_tab redColor " data-tracking-label="hotels">تور</a>--}}
+                                            {{--</li>--}}
+                                        {{--@else--}}
+                                            {{--<li>--}}
+                                                {{--<a href="{{route('mainMode', ['mode' => 'tour'])}}" id="global-nav-tours" class="unscoped global-nav-link ui_tab " data-tracking-label="hotels">تور</a>--}}
+                                            {{--</li>--}}
+                                        {{--@endif--}}
                                         <li class="" data-element=".masthead-dropdown-Flights">
-                                            <a href="{{route('soon')}}" class="unscoped global-nav-link ui_tab " data-tracking-label="Flights">جشنواره ها</a>
+                                            <a href="{{route('soon')}}" class="unscoped global-nav-link ui_tab " data-tracking-label="Flights">سوغات و صنایع دستی</a>
                                         </li>
 
                                         <li class="" data-element=".masthead-dropdown-Flights">
-                                            <a href="{{route('soon')}}" class="unscoped global-nav-link ui_tab " data-tracking-label="Flights"> آداب و رسوم</a>
+                                            <a href="{{route('soon')}}" class="unscoped global-nav-link ui_tab " data-tracking-label="Flights">غذای محلی</a>
                                         </li>
 
                                     </ul>

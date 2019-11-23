@@ -7,43 +7,41 @@
             <div class="prw_rup prw_homepage_messaging_brand">
                 <div id="brand_messaging" class="ui_columns is-hidden-mobile">
                     <div class="ui_column is-12">
-                        <div  class="brand_header green" id="knewIranTogetherText"><h1>ایران را باهم بشناسیم</h1></div>
-                        <div  id="shareInfoTitleText"> همین حالا با اشتراک تجربیات خود به عنوان یک گردشگر ، خود را به دوستانتان معرفی کنید.</div>
-                        @if(!Auth::check())
-                            <div class="login-button" id="createAccountMiddleBanner">
-                                <span class="ui_icon arrow-left"></span> ساخت پروفایل
-                            </div>
-                        @endif
-                        <div class="ui_column is-4 right-col tripleBoxMiddleBanner">
-                            <div class="inner">
-                                <div class="icon-mainpage">
-                                    <span class="ui_icon my-trips"></span>
+                        <div id="3box" class="swiper-container">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <div style="height: 210px">1</div>
                                 </div>
-                                <div class="text">
-                                    <h2 class="en_US large white">برنامه ریزی کنید</h2>
-                                    <div class="en_US small white">تمامی مراحل سفر خود را از خرید بلیط تا رزرو هتل با بهترین قیمت ها برنامه ریزی کنید.</div>
+                                <div class="swiper-slide">
+                                    <div style="height: 210px">2</div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="ui_column is-4 right-col tripleBoxMiddleBanner tripleBoxMiddleBannerWhite">
-                            <div class="inner" id="middle-box">
-                                <div class="icon-mainpage">
-                                    <span class="ui_icon seat-flat-bed"></span>
+                                <div class="swiper-slide">
+                                    <div style="height: 210px">3</div>
                                 </div>
-                                <div class="text">
-                                    <h2 class="en_US large white">خواندن نقد گردشگران</h2>
-                                    <div class="en_US small white">با خواندن نقد دوستان خود ، بهتر و راحت تر انتخاب کنید</div>
+                                <div class="swiper-slide">
+                                    <div style="height: 210px">4</div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="ui_column is-4 right-col tripleBoxMiddleBanner">
-                            <div class="inner">
-                                <div class="icon-mainpage"><span class="ui_icon search"></span></div>
-                                <div class="text">
-                                    <h2 class="en_US large white"> مقصد سفر </h2>
-                                    <div class="en_US small white">فقط کافیست مقصد خود را وارد کنید</div>
+                                <div class="swiper-slide">
+                                    <div style="height: 210px">5</div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div style="height: 210px">6</div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div style="height: 210px">7</div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div style="height: 210px">8</div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div style="height: 210px">9</div>
                                 </div>
                             </div>
+                            <!-- Add Pagination -->
+                            <div class="swiper-pagination"></div>
+                            <!-- Add Arrows -->
+                            <div class="swiper-button-prev"></div>
+                            <div class="swiper-button-next"></div>
                         </div>
                     </div>
                     <div class="clear-both"></div>
@@ -54,16 +52,16 @@
         <div class="homepage_shelves_widget hideOnPhone">
             <div class="prw_rup prw_shelves_shelf_widget">
                 <div class="shelf_container poi_by_tag rebrand shelf_row_2">
-                    <div class="shelf_header">
-                        <div class="shelf_title">
-                            <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
-                            <div class="shelf_title_container">
-                                <a href="" class="ui_link ui_header h2">
-                                    <h3>سایرخدمات</h3>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                    {{--<div class="shelf_header">--}}
+                        {{--<div class="shelf_title">--}}
+                            {{--<span class="shelf_header_icon ui_icon travelers-choice-badge"></span>--}}
+                            {{--<div class="shelf_title_container">--}}
+                                {{--<a href="" class="ui_link ui_header h2">--}}
+                                    {{--<h3>سایرخدمات</h3>--}}
+                                {{--</a>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
                     <div class="shelf_item_container ui_columns is-mobile is-multiline">
                         <div class="prw_rup prw_shelves_geo_shelf_item_widget ui_column is-3-tablet is-6-mobile">
                             <div class="poi">
@@ -75,7 +73,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <span class="item name rtl" title="Santa Cruz">صنایع دستی </span>
+                                    <span class="item name rtl" title="Santa Cruz">صنایع دستی</span>
                                 </div>
                             </div>
                         </div>
@@ -89,7 +87,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <span class="item name rtl" title="Santa Cruz"> سوغات</span>
+                                    <span class="item name rtl" title="Santa Cruz">سوغات</span>
                                 </div>
                             </div>
                         </div>
@@ -103,7 +101,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <span class="item name rtl" title="Santa Cruz"> غذای محلی</span>
+                                    <span class="item name rtl" title="Santa Cruz">غذای محلی</span>
                                 </div>
                             </div>
                         </div>
@@ -118,21 +116,21 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <span class="item name rtl" title="Santa Cruz"> اصطلاحات محلی</span>
+                                    <span class="item name rtl" title="Santa Cruz">اصطلاحات محلی</span>
                                 </a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="shelf_container poi_by_tag rebrand shelf_row_2" id="youMayLikeIt">
-                    <div class="shelf_header">
-                        <div class="shelf_title">
-                            <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
-                            <div class="shelf_title_container">
-                                <a class="ui_link ui_header h2"><h3>شاید خوشتان بیاید</h3></a>
-                            </div>
-                        </div>
-                    </div>
+                    {{--<div class="shelf_header">--}}
+                        {{--<div class="shelf_title">--}}
+                            {{--<span class="shelf_header_icon ui_icon travelers-choice-badge"></span>--}}
+                            {{--<div class="shelf_title_container">--}}
+                                {{--<a class="ui_link ui_header h2"><h3>شاید خوشتان بیاید</h3></a>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
                     <div class="shelf_item_container ui_columns is-mobile is-multiline">
                         <div class="prw_rup prw_shelves_geo_shelf_item_widget ui_column is-3-tablet is-6-mobile">
                             <div class="poi">
@@ -142,7 +140,7 @@
                                             <div class="image_wrapper landscape landscapeWide"><img src="{{URL::asset('images/lebas.jpg')}}" alt="" class="image"></div>
                                         </div>
                                     </div>
-                                    <span class="item name rtl" title="Santa Cruz">لباس محلی </span>
+                                    <span class="item name rtl" title="Santa Cruz">لباس محلی</span>
                                 </a>
                             </div>
                         </div>
@@ -154,7 +152,7 @@
                                             <div class="image_wrapper landscape landscapeWide"><img src="{{URL::asset('images/tarikhi.jpg')}}" alt="" class="image"></div>
                                         </div>
                                     </div>
-                                    <span class="item name rtl" title="Santa Cruz">  جاذبه ها</span>
+                                    <span class="item name rtl" title="Santa Cruz">جاذبه</span>
                                 </div>
                             </div>
                         </div>
@@ -166,7 +164,7 @@
                                             <div class="image_wrapper landscape landscapeWide"><img src="{{URL::asset('images/majarajooi.jpg')}}" alt="" class="image"></div>
                                         </div>
                                     </div>
-                                    <span class="item name rtl" title="Santa Cruz"> سفرهای ماجراجویانه </span>
+                                    <span class="item name rtl" title="Santa Cruz">سفر ماجراجویانه</span>
                                 </div>
                             </div>
                         </div>
@@ -178,7 +176,7 @@
                                             <div class="image_wrapper landscape landscapeWide"><img src="{{URL::asset('images/boom.jpg')}}" alt="" class="image"></div>
                                         </div>
                                     </div>
-                                    <span class="item name rtl" title="Santa Cruz"> بوم گردی </span>
+                                    <span class="item name rtl" title="Santa Cruz">بوم گردی</span>
                                 </a>
                             </div>
                         </div>

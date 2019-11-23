@@ -828,6 +828,7 @@ DIV.prw_rup.prw_shelves_rebrand_poi_shelf_item_widget .thumbnail {
     transition: opacity linear 100ms;
     overflow: hidden;
     cursor: pointer;
+    margin-bottom: 0;
 }
 
 DIV.prw_rup.prw_shelves_rebrand_poi_shelf_item_widget .thumbnail img.npp {
@@ -905,7 +906,7 @@ DIV.prw_rup.prw_shelves_shelf_widget .shelf_container.first {
 }
 
 DIV.prw_rup.prw_shelves_shelf_widget .shelf_container .shelf_header {
-    margin: 0 10px 10px 4px;
+    margin: 0 0 15px 0 !important;
 }
 
 DIV.prw_rup.prw_shelves_shelf_widget .shelf_container .shelf_header .shelf_title {
