@@ -1,5 +1,6 @@
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/middleBanner.css')}}'/>
 
+<div style="clear: both;اصطلاحات محلی"></div>
 <div class="ui_container">
     <div class="ppr_rup ppr_priv_homepage_shelves">
 
@@ -63,7 +64,8 @@
                         {{--</div>--}}
                     {{--</div>--}}
                     <div class="shelf_item_container ui_columns is-mobile is-multiline">
-                        <div class="prw_rup prw_shelves_geo_shelf_item_widget ui_column is-3-tablet is-6-mobile">
+                        <div class="col-lg-1"></div>
+                        <div class="prw_rup prw_shelves_geo_shelf_item_widget ui_column col-lg-3 is-6-mobile">
                             <div class="poi">
                                 <div onclick="chooseState('sanaye')" class="thumbnail otherServicesBoxes">
                                     <div class="prw_rup prw_common_thumbnail_no_style_responsive" data-prwidget-name="common_thumbnail_no_style_responsive" data-prwidget-init="">
@@ -77,7 +79,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="prw_rup prw_shelves_geo_shelf_item_widget ui_column is-3-tablet is-6-mobile">
+                        <div class="prw_rup prw_shelves_geo_shelf_item_widget ui_column col-lg-3 is-6-mobile">
                             <div class="poi">
                                 <div  onclick="chooseState('soghat')" class="thumbnail otherServicesBoxes">
                                     <div class="prw_rup prw_common_thumbnail_no_style_responsive" data-prwidget-name="common_thumbnail_no_style_responsive" data-prwidget-init="">
@@ -91,7 +93,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="prw_rup prw_shelves_geo_shelf_item_widget ui_column is-3-tablet is-6-mobile">
+                        <div class="prw_rup prw_shelves_geo_shelf_item_widget ui_column col-lg-3 is-6-mobile">
                             <div class="poi">
                                 <div class="thumbnail otherServicesBoxes" onclick="chooseState('ghazamahali')">
                                     <div class="prw_rup prw_common_thumbnail_no_style_responsive" data-prwidget-name="common_thumbnail_no_style_responsive" data-prwidget-init="">
@@ -105,21 +107,22 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="prw_rup prw_shelves_geo_shelf_item_widget ui_column is-3-tablet is-6-mobile"
-                             onclick="chooseGoyesh()">
-                            <div class="poi">
-                                <a class="thumbnail otherServicesBoxes">
-                                    <div class="prw_rup prw_common_thumbnail_no_style_responsive" data-prwidget-name="common_thumbnail_no_style_responsive" data-prwidget-init="">
-                                        <div class="prv_thumb has_image">
-                                            <div class="image_wrapper landscape landscapeWide">
-                                                <img src="{{URL::asset('images/estelahat.jpg')}}" alt="" class="image">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <span class="item name rtl" title="Santa Cruz">اصطلاحات محلی</span>
-                                </a>
-                            </div>
-                        </div>
+                        <div class="col-lg-1"></div>
+                        {{--<div class="prw_rup prw_shelves_geo_shelf_item_widget ui_column is-3-tablet is-6-mobile"--}}
+                             {{--onclick="chooseGoyesh()">--}}
+                            {{--<div class="poi">--}}
+                                {{--<a class="thumbnail otherServicesBoxes">--}}
+                                    {{--<div class="prw_rup prw_common_thumbnail_no_style_responsive" data-prwidget-name="common_thumbnail_no_style_responsive" data-prwidget-init="">--}}
+                                        {{--<div class="prv_thumb has_image">--}}
+                                            {{--<div class="image_wrapper landscape landscapeWide">--}}
+                                                {{--<img src="{{URL::asset('images/estelahat.jpg')}}" alt="" class="image">--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--<span class="item name rtl" title="Santa Cruz">اصطلاحات محلی</span>--}}
+                                {{--</a>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
                     </div>
                 </div>
                 <div class="shelf_container poi_by_tag rebrand shelf_row_2" id="youMayLikeIt">
@@ -132,19 +135,20 @@
                         {{--</div>--}}
                     {{--</div>--}}
                     <div class="shelf_item_container ui_columns is-mobile is-multiline">
-                        <div class="prw_rup prw_shelves_geo_shelf_item_widget ui_column is-3-tablet is-6-mobile">
-                            <div class="poi">
-                                <a href="{{route('soon')}}" class="thumbnail">
-                                    <div class="prw_rup prw_common_thumbnail_no_style_responsive" data-prwidget-name="common_thumbnail_no_style_responsive" data-prwidget-init="">
-                                        <div class="prv_thumb has_image">
-                                            <div class="image_wrapper landscape landscapeWide"><img src="{{URL::asset('images/lebas.jpg')}}" alt="" class="image"></div>
-                                        </div>
-                                    </div>
-                                    <span class="item name rtl" title="Santa Cruz">لباس محلی</span>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="prw_rup prw_shelves_geo_shelf_item_widget ui_column is-3-tablet is-6-mobile">
+                        {{--<div class="prw_rup prw_shelves_geo_shelf_item_widget ui_column is-3-tablet is-6-mobile">--}}
+                            {{--<div class="poi">--}}
+                                {{--<a href="{{route('soon')}}" class="thumbnail">--}}
+                                    {{--<div class="prw_rup prw_common_thumbnail_no_style_responsive" data-prwidget-name="common_thumbnail_no_style_responsive" data-prwidget-init="">--}}
+                                        {{--<div class="prv_thumb has_image">--}}
+                                            {{--<div class="image_wrapper landscape landscapeWide"><img src="{{URL::asset('images/lebas.jpg')}}" alt="" class="image"></div>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--<span class="item name rtl" title="Santa Cruz">لباس محلی</span>--}}
+                                {{--</a>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                        <div class="col-lg-1"></div>
+                        <div class="prw_rup prw_shelves_geo_shelf_item_widget ui_column col-lg-3 is-6-mobile">
                             <div class="poi">
                                 <div onclick="chooseStateAmaken()" class="thumbnail youMayLikeItBoxes">
                                     <div class="prw_rup prw_common_thumbnail_no_style_responsive" data-prwidget-name="common_thumbnail_no_style_responsive" data-prwidget-init="">
@@ -156,7 +160,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="prw_rup prw_shelves_geo_shelf_item_widget ui_column is-3-tablet is-6-mobile">
+                        <div class="prw_rup prw_shelves_geo_shelf_item_widget ui_column col-lg-3 is-6-mobile">
                             <div class="poi">
                                 <div onclick="chooseStateMajara()" class="thumbnail youMayLikeItBoxes">
                                     <div class="prw_rup prw_common_thumbnail_no_style_responsive" data-prwidget-name="common_thumbnail_no_style_responsive" data-prwidget-init="">
@@ -168,7 +172,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="prw_rup prw_shelves_geo_shelf_item_widget ui_column is-3-tablet is-6-mobile">
+                        <div class="prw_rup prw_shelves_geo_shelf_item_widget ui_column col-lg-3 is-6-mobile">
                             <div class="poi">
                                 <a href="{{route('soon')}}" class="thumbnail">
                                     <div class="prw_rup prw_common_thumbnail_no_style_responsive" data-prwidget-name="common_thumbnail_no_style_responsive" data-prwidget-init="">
@@ -180,6 +184,7 @@
                                 </a>
                             </div>
                         </div>
+                        <div class="col-lg-1"></div>
                     </div>
                 </div>
             </div>

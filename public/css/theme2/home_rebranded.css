@@ -2648,7 +2648,7 @@ DIV.ppr_rup.ppr_priv_homepage_hero .homeHero {
 
 DIV.ppr_rup.ppr_priv_homepage_hero .container {
     display: flex;
-    align-items: center;
+    /*align-items: center;*/
     min-height: inherit;
 }
 
