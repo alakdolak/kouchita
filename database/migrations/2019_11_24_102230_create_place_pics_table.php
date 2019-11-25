@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMahaliFoodPicsTable extends Migration
+class CreatePlacePicsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateMahaliFoodPicsTable extends Migration
      */
     public function up()
     {
-        Schema::create('mahaliFoodPics', function (Blueprint $table) {
+        Schema::create('placepics', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('foodId');
-            $table->string('pic');
-            $table->string('alt', 300);
+            $table->tinyInteger('picNumber');
+            $table->unsignedInteger('placeId');
+            $table->unsignedInteger('kindPlaceId');
+            $table->string('alt')->nullable();
         });
     }
 
@@ -28,6 +29,6 @@ class CreateMahaliFoodPicsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mahaliFoodPics');
+        Schema::dropIfExists('placepics');
     }
 }
