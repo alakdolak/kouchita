@@ -3017,7 +3017,7 @@ class PlaceController extends Controller {
         echo json_encode($place4);
     }
 
-    public function showMainPage($mode = "hotel") {
+    public function showMainPage($mode = "mainPage") {
         switch ($mode) {
             case "amaken":
             default:

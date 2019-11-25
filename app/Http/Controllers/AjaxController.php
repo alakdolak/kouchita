@@ -16,9 +16,12 @@ use App\models\Report;
 use App\models\ReportsType;
 use App\models\Restaurant;
 use App\models\State;
+use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Http\Request;
+
 
 class AjaxController extends Controller {
 
@@ -359,6 +362,112 @@ class AjaxController extends Controller {
 
         }
 
+    }
+
+    public function findCityWithState(Request $request)
+    {
+        if(isset($request->stateId)){
+
+            $city = Cities::where('stateId', $request->stateId)->get();
+
+            foreach ($city as $item){
+                if($item->image == null)
+                    $item->pic = URL::asset('_images/nopic/blank.jpg');
+                else
+                    $item->pic = URL::asset('_images/city/'.$item->image);
+            }
+
+            echo json_encode($city);
+            return;
+
+        }
+        echo 'nok';
+        return;
+    }
+
+    public function findRestaurantWithCity(Request $request)
+    {
+        $placeId = Place::where('name', 'رستوران')->first()->id;
+        if(isset($request->cityId)){
+
+            $resturant = Restaurant::where('cityId', $request->cityId)->select(['name', 'address', 'C', 'D', 'food_irani', 'food_mahali', 'food_farangi', 'cityId', 'id', 'file'])->get();
+            foreach ($resturant as $item){
+                $item->rate = getRate($placeId, $item->id);
+
+
+                if(file_exists(__DIR__ . '/../../../../assets/_images/restaurant/' . $item->file . '/l-1.jpg'))
+                    $item->pic = URL::asset('_images/restaurant/' . $item->file . '/l-1.jpg');
+                else
+                    $item->pic = URL::asset('_images/nopic/blank.jpg');
+
+            }
+            echo json_encode($resturant);
+            return;
+        }
+        echo 'nok';
+        return;
+    }
+
+    public function findAmakenWithCity(Request $request)
+    {
+        $placeId = Place::where('name', 'اماکن')->first()->id;
+        if(isset($request->cityId)){
+            $amaken = Amaken::where('cityId', $request->cityId)->select(['name', 'address', 'C', 'D', 'cityId', 'id', 'file', 'pic_1'])->get();
+
+            if(count($amaken) != 0){
+                foreach ($amaken as $item){
+                    $item->rate = getRate($placeId, $item->id);
+
+                    if(file_exists(__DIR__ . '/../../../../assets/_images/amaken/' . $item->file . '/l-1.jpg'))
+                        $item->pic = URL::asset('_images/amaken/' . $item->file . '/l-1.jpg');
+                    else
+                        $item->pic = URL::asset('_images/nopic/blank.jpg');
+                }
+            }
+
+            echo json_encode($amaken);
+            return;
+        }
+        echo 'nok';
+        return;
+    }
+
+    public function findHotelWithCity(Request $request)
+    {
+        $placeId = Place::where('name', 'هتل')->first()->id;
+        if(isset($request->cityId)){
+            $hotel = Hotel::where('cityId', $request->cityId)->select(['name', 'address', 'C', 'D', 'cityId', 'id', 'file', 'pic_1', 'rate'])->get();
+
+            if(count($hotel) != 0){
+                foreach ($hotel as $item){
+//                    $item->rate = getRate($placeId, $item->id);
+
+                    if(file_exists(__DIR__ . '/../../../../assets/_images/hotels/' . $item->file . '/l-1.jpg'))
+                        $item->pic = URL::asset('_images/hotels/' . $item->file . '/l-1.jpg');
+                    else
+                        $item->pic = URL::asset('_images/nopic/blank.jpg');
+                }
+            }
+
+            echo json_encode($hotel);
+            return;
+        }
+        echo 'nok';
+        return;
+    }
+
+    public function findKoochitaAccount(Request $request)
+    {
+        if(isset($request->email)){
+            $user = User::where('email', $request->email)->get();
+
+            if($user != null && count($user) != 0)
+                echo 'ok';
+            else
+                echo 'nok';
+
+            return;
+        }
     }
 
 }

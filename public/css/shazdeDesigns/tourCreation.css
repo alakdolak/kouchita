@@ -323,6 +323,7 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     z-index: 1;
     width: 190px;
     left: 5px;
+    top: 30px;
 }
 
 #destinationListTourCreation > div {
@@ -476,6 +477,7 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     font-size: 14px;
     text-align: center;
     width: 100%;
+    line-height: 100%;
 }
 
 #hikingKindTourName {
@@ -674,7 +676,7 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     color: white;
     line-height: 1.8;
     font-size: 15px;
-    margin: 0 0 50px;
+    margin: 0px;
 }
 
 /*tour creation specific infos styles*/
@@ -721,6 +723,19 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     border-radius: 4px;
     font-weight: 700;
     top: 35px;
+    text-align: center;
+}
+
+.transportationTitleBoxesLocal{
+    position: absolute;
+    right: -155px;
+    width: 250px;
+    color: white;
+    font-size: 13px;
+    transform: rotate(90deg);
+    border-radius: 4px;
+    font-weight: 700;
+    top: 120px;
     text-align: center;
 }
 
@@ -797,6 +812,8 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     width: 84%;
     top: 5px;
     left: 30px;
+    height: 100%;
+    cursor: pointer;
 }
 
 .tourFoodOfferQuestions {
@@ -871,6 +888,7 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     background: white;
     border: 2px solid #d5d3d3;
     float: right;
+    cursor: pointer;
 }
 
 .addTourPlacesBtnCreation > img {
@@ -1026,7 +1044,7 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
 
 .tourMoreFacilityDetailsBtn {
     position: absolute;
-    top: 85px;
+    bottom: 85px;
     border: 0;
     border-radius: 8px;
     padding: 3px 17px;
@@ -1103,6 +1121,7 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     border-radius: 5px;
     display: inline-block;
     width: 30%;
+    cursor: pointer;
 }
 
 .tourBasicKindsCheckbox > p {
@@ -1262,7 +1281,7 @@ textarea {
     height: 150px;
     float: right;
     width: 23%;
-    margin: 15px 9px;
+    /*margin: 15px 9px;*/
     position: relative;
 }
 
@@ -1281,7 +1300,6 @@ textarea {
 
 .imgAddDivTourCreation {
     color: #d5d3d3;
-    padding-top: 45px;
 }
 
 .cancellingSituationTourCreation {
@@ -1330,10 +1348,163 @@ textarea {
     top: 40px;
 }
 
+.line-height-3 {
+    line-height: 3;
+}
+
+.height-250 {
+    height: 250px;
+}
+
+.height-50 {
+    height: 50px;
+}
+
+.full-height {
+    height: 100%;
+}
+
+.width-130 {
+    width: 130px;
+}
+
+.width-50 {
+    width: 50px;
+}
+
+.width-45per {
+    width: 45%;
+}
+
+.width-50per {
+    width: 50%;
+}
+
+.width-84per {
+    width: 84%;
+}
+
+.text-align-right {
+    text-align: right;
+}
+
+.float-left {
+    float: left;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.font-size-14 {
+    font-size: 14px;
+}
+
+.font-size-20 {
+    font-size: 20px;
+}
+
+.pd-0 {
+    padding: 0;
+}
+
+.pd-lt-3 {
+    padding-left: 3px;
+}
+
+.pd-rt-0 {
+    padding-right: 0;
+}
+
+.pd-tp-5 {
+    padding-top: 5px;
+}
+
+.pd-40-30 {
+    padding: 40px 30px;
+}
+
+.mg-tp-5imp {
+    margin-top: 5px !important;
+}
+
+.mg-5-0 {
+    margin: 5px 0;
+}
+
+.mg-bt-10 {
+    margin-bottom: 10px;
+}
+
+.mg-bt-5 {
+    margin-bottom: 5px;
+}
+
+.mg-rt-10 {
+    margin-right: 10px;
+}
+
+.mg-rt-50 {
+    margin-right: 50px;
+}
+
+.mg-rt-6 {
+    margin-right: 6px;
+}
+
+.mg-lt-10 {
+    margin-left: 10px;
+}
+
+.mg-lt-6 {
+    margin-left: 6px;
+}
+
+.mg-tp-5 {
+    margin-top: 5px;
+}
+
+.mg-tp-12 {
+    margin-top: 12px;
+}
+
+.mg-tp-15 {
+    margin-top: 15px;
+}
+
+.mg-tp-20 {
+    margin-top: 20px;
+}
+
+.mg-tp-30 {
+    margin-top: 30px;
+}
+
+.mg-30-10 {
+    margin: 30px 10px;
+}
+
+.green-border , .green-border-onclick {
+    border: 2px solid #4DC7BC;
+}
+
+.no-border-imp {
+    border: 0 !important;
+}
+
+.no-border {
+    border: 0;
+}
+
 .styled-select {
     -moz-appearance:none; /* Firefox */
     -webkit-appearance:none; /* Safari and Chrome */
     height: 30px;
+    padding-right: 5px;
 }
 
 .select-side {
@@ -1351,9 +1522,81 @@ textarea {
     font-size: 10px;
 }
 
-.green-border , .green-border-onclick {
-    border: 2px solid #4DC7BC;
+.modalBack{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    background: #000000ad;
+    display: none;
+    z-index: 9;
 }
 
+.multiselect{
+    background: white;
+    position: absolute;
+    width: 84%;
+    top: 40px;
+    left: 30px;
+    border: solid;
+    z-index: 9;
+    border-radius: 10px;
+    padding: 10px;
+    display: none;
+}
+.optionMultiSelect{
+    cursor: pointer;
+}
+.optionMultiSelect:hover{
+    background: red;
+}
+.searchResult{
+    width: 85.1%;
+    padding-right: 9px;
+    float: left;
+    border-right: 1px solid #d8d8d8;
+    max-height: 350px;
+    overflow-y: auto;
+}
+.searchHover{
+    /*padding-right: 5px;*/
+    cursor: pointer;
+}
+.searchHover:hover{
+    background-color: white;
+    padding-right: 10px;
+    border-radius: 5px;
+}
+.errorDiv{
+    position: fixed;
+    z-index: 99999;
+    top: 50px;
+    width: 100%;
+    padding: 0 20%;
+    direction: rtl;
+    display: none;
+}
+.errorClass{
+    background-color: #ff9191;
+}
 
+.featuresRow{
+    margin-bottom: 25px;
+    display: flex; justify-content: center; align-items: center;
+}
 
+.selectTag{
+    background-color: #DDD;
+    text-decoration: none;
+    text-transform: none;
+    color: #16174f;
+    outline: none;
+}
+.draghere{
+    cursor: pointer;
+}
+.draghere:hover{
+    background-color: #4DC7BC !important;
+    color: white;
+}
