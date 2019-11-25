@@ -1231,7 +1231,7 @@ if ($total == 0)
                         var newElement = "<p id='pagination-details' class='pagination-details clear-both pd-12-0Imp'><b>" + response[0] + "</b> از <b>" + response[1] + "</b> نقد</p>";
 
                         if (response[1] == 0) {
-                            tmp = "<p class='font-size-15 color-#b7b7b7 float-right mg-8-5-8-20Imp'>اولین نفری باشید که درباره ی این مکان نقد می نویسید</p>";
+                            tmp = "<p class='font-size-15 color-light-grey float-right mg-8-5-8-20Imp'>اولین نفری باشید که درباره ی این مکان نقد می نویسید</p>";
                             tmp += "<span onclick='document.location.href = showAddReviewPage('{{route('review', ['placeId' => $place->id, 'kindPlaceId' => $kindPlaceId])}}')' class='button_war write_review ui_button primary col-xs-12 color-#FFFImp max-width-100 float-right'>نوشتن نقد</span>";
                             $("#reviewsContainer").empty().append(tmp);
                         }

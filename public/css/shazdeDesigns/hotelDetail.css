@@ -1749,7 +1749,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     direction: rtl;
 }
 
-#commentSmileyIcon {
+.commentSmileyIcon {
     position: absolute;
     left: 15px;
     bottom: 10px;
@@ -1899,7 +1899,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     padding: 15px;
 }
 
-.commentMainBox {
+.commentMainDiv , .postsFiltersMainDiv {
     float: right;
     direction: rtl;
     background: white;
@@ -1975,15 +1975,39 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     padding: 0 0 0 5px;
 }
 
-.firstCol > div {
+.quintupletPhotoDiv .firstCol > div {
     height: 130px;
+}
+
+.doublePhotoDiv .firstCol > div {
+    height: 200px;
+}
+
+.tripletPhotoDiv .firstCol > div {
+    height: 140px;
+}
+
+.quadruplePhotoDiv .firstCol > div {
+    height: 200px;
 }
 
 .secondCol {
     padding: 0 5px 0 0;
 }
 
-.secondCol > div {
+.quintupletPhotoDiv .secondCol > div {
+    height: 200px;
+}
+
+.doublePhotoDiv .secondCol > div {
+    height: 200px;
+}
+
+.tripletPhotoDiv .secondCol > div {
+    height: 290px;
+}
+
+.quadruplePhotoDiv .secondCol > div {
     height: 200px;
 }
 
@@ -2003,11 +2027,14 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 .commentRatingsDetailsShow {
     padding-top: 10px;
     color: #666666;
+    margin-bottom: 20px;
+    display: inline-block;
+    width: 100%;
 }
 
 .commentRatingHeader {
     display: inline-block;
-    width: 50%;
+    width: 60%;
     float: right;
 }
 
@@ -2040,3 +2067,294 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     color: #666666;
     font-size: 10px;
 }
+
+.commentRatingsDetailsBox {
+    background: #e5e5e5;
+    padding: 15px 9px;
+}
+
+.commentFeedbackChoices {
+    display: inline-block;
+    width: 100%;
+    border-top: 1px solid #E5E5E5;
+    padding: 10px 0;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.commentsLikeIconFeedback::before {
+    content: '\e057';
+    font-family: shazdemosafer-tour !important;
+    color: red;
+    font-size: 25px;
+    position: absolute;
+    top: -9px;
+    right: 6px;
+}
+
+.commentsDislikeIconFeedback::before {
+    content: '\e058';
+    font-family: shazdemosafer-tour !important;
+    color: darkred;
+    font-size: 25px;
+    position: absolute;
+    top: -4px;
+    right: 6px;
+}
+
+.showCommentsIconFeedback::before {
+    content: '\e06C';
+    font-family: shazdemosafer-tour !important;
+    color: #0076a3;
+    font-size: 20px;
+    position: absolute;
+    top: -2px;
+    right: 9px;
+}
+
+.commentsShareIconFeedback::before {
+    content: '\e099';
+    font-family: shazdemosafer-tour !important;
+    transform: rotateY(180deg);
+    font-size: 20px;
+    position: absolute;
+    top: -4px;
+    right: 8px;
+}
+
+.commentsMainBox {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.eachCommentMainBox {
+    display: inline-block;
+    width: 100%;
+    padding-bottom: 25px;
+    margin-bottom: 10px;
+}
+
+.commentsWriterProfilePic {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    float: right;
+    margin: 5px 0 0 5px;
+}
+
+.commentsContentMainBox {
+    display: inline-block;
+    width: 60%;
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    padding: 2px 10px 7px;
+    text-align: justify;
+    float: right;
+    position: relative;
+}
+
+.commentsActionsBtns {
+    display: inline-block;
+    float: right;
+    margin-right: 20px;
+    position: relative;
+    padding-top: 30px;
+}
+
+.replyBtn {
+    background-color: #fcc156;
+    border-radius: 5px;
+    padding: 2px;
+}
+
+.commentReplyDesc {
+    color: #666666;
+    font-size: 10px;
+    line-height: 2;
+    float: right;
+    margin-right: 5px;
+}
+
+.likeActionBtn::before {
+    content: '\e057';
+    font-family: shazdemosafer-tour !important;
+    font-size: 30px;
+    position: absolute;
+    top: -12px;
+    right: -3px;
+}
+
+.dislikeActionBtn::before {
+    content: '\e058';
+    font-family: shazdemosafer-tour !important;
+    font-size: 30px;
+    position: absolute;
+    top: -8px;
+    right: 30px;
+}
+
+.commentsStatisticsBar {
+    display: inline-block;
+    position: absolute;
+    width: 100%;
+    bottom: -25px;
+    right: 0;
+}
+
+.commentsStatisticSpan {
+    display: inline-block;
+    margin-left: 25px;
+    font-size: 14px;
+    position: relative;
+}
+
+.likeStatisticIcon::before {
+    content: '\e057';
+    font-family: shazdemosafer-tour !important;
+    font-size: 25px;
+    float: right;
+    position: absolute;
+    top: -10px;
+    right: 10px;
+}
+
+.dislikeStatisticIcon::before {
+    content: '\e058';
+    font-family: shazdemosafer-tour !important;
+    font-size: 25px;
+    float: right;
+    position: absolute;
+    top: -6px;
+    right: 10px;
+}
+
+.numberOfCommentsIcon::before {
+    content: '\e06C';
+    font-family: shazdemosafer-tour !important;
+    font-size: 20px;
+    float: right;
+    position: absolute;
+    top: -2px;
+    right: 12px;
+}
+
+.newCommentPlaceMainDiv {
+    margin: 10px 0 5px;
+    display: inline-block;
+    width: 100%;
+}
+
+.newCommentWriterProfilePic {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    float: right;
+    margin-left: 10px;
+}
+
+.newCommentPlaceMainDiv .inputBox {
+    width: 90%;
+    float: right;
+    position: relative;
+}
+
+.newCommentPlaceMainDiv .inputBoxInput {
+    text-align: right;
+    font-size: 12px;
+    border: none;
+    height: 39px;
+}
+
+.newCommentPlaceMainDiv textarea {
+    text-align: right;
+    padding-top: 15px;
+    height: 35px;
+    resize: none;
+    width: 95%;
+}
+
+.newCommentPlaceMainDiv .commentSmileyIcon {
+    top: 9px;
+    left: 7px;
+}
+
+.replyCommentTitle {
+    color: #0076a3;
+    position: absolute;
+    top: 2px;
+    right: 10px;
+    font-size: 10px;
+}
+
+.postsFiltersMainDiv .block_header {
+    padding: 10px 0;
+    border-bottom: 1px solid #e5e5e5;
+    margin-bottom: 20px;
+}
+
+.postsFiltersMainDiv .block_title {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 32px;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    background: white;
+    padding-left: 10px;
+    color: #0076a3;
+}
+
+.filterTypeDiv {
+    border-top: 1px solid #e5e5e5;
+    padding: 10px 0;
+    font-weight: 700;
+    display: inline-block;
+    width: 100%;
+    font-size: 14px;
+}
+
+.filterTypeDiv .filterChoices {
+    background-color: #e5e5e5;
+    border-radius: 10px;
+    text-align: center;
+    float: right;
+    width: 20%;
+    margin: 10px;
+    padding: 5px 0;
+    font-size: 12px;
+}
+
+.photoTypePostsFilter .filterChoices {
+    width: 44%;
+}
+
+.commentRatingsFiltersChoices {
+    display: inline-block;
+    width: 50%;
+    float: right;
+}
+
+.ratingTranslationDiv {
+    display: inline-block;
+    width: 50%;
+    line-height: 3.5;
+    font-size: 15px;
+}
+
+.commentRatingsFiltersChoices .overallBubbleRating .color-yellow::after {
+    color: #fcc156;
+}
+
+.inputBoxSearchFilter  {
+    width: 100%;
+    background: white;
+    margin-top: 10px;
+}
+
+.inputBoxSearchFilter .inputBoxInput {
+    line-height: 2;
+    text-align: right;
+    font-size: 15px;
+}
+
+/*.ui_bubble_rating::before {*/
+/*    display: none;*/
+/*}*/
