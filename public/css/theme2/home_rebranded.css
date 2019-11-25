@@ -906,7 +906,7 @@ DIV.prw_rup.prw_shelves_shelf_widget .shelf_container.first {
 }
 
 DIV.prw_rup.prw_shelves_shelf_widget .shelf_container .shelf_header {
-    margin: 0 0 15px 0 !important;
+    margin: 0 0 5px 0 !important;
 }
 
 DIV.prw_rup.prw_shelves_shelf_widget .shelf_container .shelf_header .shelf_title {
@@ -2648,7 +2648,7 @@ DIV.ppr_rup.ppr_priv_homepage_hero .homeHero {
 
 DIV.ppr_rup.ppr_priv_homepage_hero .container {
     display: flex;
-    align-items: center;
+    /*align-items: center;*/
     min-height: inherit;
 }
 

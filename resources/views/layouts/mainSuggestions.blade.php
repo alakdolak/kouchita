@@ -1,7 +1,6 @@
-
-<center>
+<div>
     <div class="loader hidden"></div>
-</center>
+</div>
 
 <div id="" class="homepage_shelves_widget ng-scope">
     <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" style="">
@@ -9,10 +8,8 @@
             <div class="shelf_header">
                 <div class="shelf_title">
                     <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
-                    <div class="shelf_title_container">
-                        <a class="ui_link ui_header h2">
-                            <h3>تازه&zwnj;های کوچیتا</h3>
-                        </a>
+                    <div class="shelf_title_container h3">
+                        <h3>تازه&zwnj;های کوچیتا</h3>
                     </div>
                 </div>
             </div>
@@ -245,10 +242,8 @@
             <div class="shelf_header">
                 <div class="shelf_title">
                     <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
-                    <div class="shelf_title_container">
-                        <a class="ui_link ui_header h2">
-                            <h3>محبوب‌ترین غذا‌ها</h3>
-                        </a>
+                    <div class="shelf_title_container h3">
+                        <h3>محبوب‌ترین غذا‌ها</h3>
                     </div>
                 </div>
             </div>
@@ -481,10 +476,8 @@
             <div class="shelf_header">
                 <div class="shelf_title">
                     <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
-                    <div class="shelf_title_container">
-                        <a class="ui_link ui_header h2">
-                            <h3>محبوب‌ترین رستوران‌ها</h3>
-                        </a>
+                    <div class="shelf_title_container h3">
+                        <h3>سفر طبیعت‌گردی</h3>
                     </div>
                 </div>
             </div>
@@ -717,10 +710,8 @@
             <div class="shelf_header">
                 <div class="shelf_title">
                     <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
-                    <div class="shelf_title_container">
-                        <a class="ui_link ui_header h2">
-                            <h3>سفر طبیعت‌گردی</h3>
-                        </a>
+                    <div class="shelf_title_container h3">
+                        <h3>محبوب‌ترین رستوران‌ها</h3>
                     </div>
                 </div>
             </div>
@@ -953,10 +944,8 @@
             <div class="shelf_header">
                 <div class="shelf_title">
                     <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
-                    <div class="shelf_title_container">
-                        <a class="ui_link ui_header h2">
-                            <h3>سفر تاریخی-فرهنگی</h3>
-                        </a>
+                    <div class="shelf_title_container h3">
+                        <h3>سفر تاریخی-فرهنگی</h3>
                     </div>
                 </div>
             </div>
@@ -1189,10 +1178,8 @@
             <div class="shelf_header">
                 <div class="shelf_title">
                     <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
-                    <div class="shelf_title_container">
-                        <a class="ui_link ui_header h2">
-                            <h3>مراکز خرید</h3>
-                        </a>
+                    <div class="shelf_title_container h3">
+                        <h3>مراکز خرید</h3>
                     </div>
                 </div>
             </div>
@@ -1425,10 +1412,8 @@
             <div class="shelf_header">
                 <div class="shelf_title">
                     <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
-                    <div class="shelf_title_container">
-                        <a class="ui_link ui_header h2">
-                            <h3>محبوب‌ترین سفرنامه‌ها</h3>
-                        </a>
+                    <div class="shelf_title_container h3">
+                        <h3>محبوب‌ترین سفرنامه‌ها</h3>
                     </div>
                 </div>
             </div>
@@ -1652,7 +1637,7 @@
                     <div class="swiper-button-prev"></div>
                 </div>
             </div>
-            <div class="shelf_item_container ui_columns is-mobile is-multiline">
+            <div class="shelf_item_container ui_columns is-mobile is-multiline" style="margin-top: 15px">
                 <div class="mainSuggestion swiper-container">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide">
@@ -1882,10 +1867,8 @@
             {{--<div class="shelf_header">--}}
                 {{--<div class="shelf_title">--}}
                     {{--<span class="shelf_header_icon ui_icon travelers-choice-badge"></span>--}}
-                    {{--<div class="shelf_title_container">--}}
-                        {{--<a class="ui_link ui_header h2">--}}
-                            {{--<h3>پیشنهاد های ویژه</h3>--}}
-                        {{--</a>--}}
+                    {{--<div class="shelf_title_container h3">--}}
+                        {{--<h3>پیشنهاد های ویژه</h3>--}}
                     {{--</div>--}}
                 {{--</div>--}}
             {{--</div>--}}
@@ -1928,10 +1911,8 @@
                 {{--<div class="shelf_header">--}}
                     {{--<div class="shelf_title">--}}
                         {{--<span class="shelf_header_icon ui_icon travelers-choice-badge"></span>--}}
-                        {{--<div class="shelf_title_container">--}}
-                            {{--<a class="ui_link ui_header h2">--}}
-                                {{--<h3>تازه‌های کوچیتا</h3>--}}
-                            {{--</a>--}}
+                        {{--<div class="shelf_title_container h3">--}}
+                            {{--<h3>تازه‌های کوچیتا</h3>--}}
                         {{--</div>--}}
                     {{--</div>--}}
                 {{--</div>--}}
@@ -1973,10 +1954,8 @@
                 {{--<div class="shelf_header">--}}
                     {{--<div class="shelf_title">--}}
                         {{--<span class="shelf_header_icon ui_icon travelers-choice-badge"></span>--}}
-                        {{--<div class="shelf_title_container">--}}
-                            {{--<a class="ui_link ui_header h2">--}}
-                                {{--<h3>محبوب‌ترین رستوران‌ها</h3>--}}
-                            {{--</a>--}}
+                        {{--<div class="shelf_title_container h3">--}}
+                            {{--<h3>محبوب‌ترین رستوران‌ها</h3>--}}
                         {{--</div>--}}
                     {{--</div>--}}
                 {{--</div>--}}
@@ -2017,10 +1996,8 @@
                 {{--<div class="shelf_header">--}}
                     {{--<div class="shelf_title">--}}
                         {{--<span class="shelf_header_icon ui_icon travelers-choice-badge"></span>--}}
-                        {{--<div class="shelf_title_container">--}}
-                            {{--<a class="ui_link ui_header h2">--}}
-                                {{--<h3>سفر تاریخی-فرهنگی</h3>--}}
-                            {{--</a>--}}
+                        {{--<div class="shelf_title_container h3">--}}
+                            {{--<h3>سفر تاریخی-فرهنگی</h3>--}}
                         {{--</div>--}}
                     {{--</div>--}}
                 {{--</div>--}}
@@ -2066,10 +2043,8 @@
                 {{--<div class="shelf_header">--}}
                     {{--<div class="shelf_title">--}}
                         {{--<span class="shelf_header_icon ui_icon travelers-choice-badge"></span>--}}
-                        {{--<div class="shelf_title_container">--}}
-                            {{--<a class="ui_link ui_header h2">--}}
-                                {{--<h3>بازدید های اخیر</h3>--}}
-                            {{--</a>--}}
+                        {{--<div class="shelf_title_container h3">--}}
+                            {{--<h3>بازدید های اخیر</h3>--}}
                         {{--</div>--}}
                     {{--</div>--}}
                 {{--</div>--}}
@@ -2114,8 +2089,8 @@
                 {{--<div class="shelf_header">--}}
                     {{--<div class="shelf_title">--}}
                         {{--<span class="shelf_header_icon ui_icon travelers-choice-badge"></span>--}}
-                        {{--<div class="shelf_title_container">--}}
-                            {{--<a class="ui_link ui_header h2"><h3>اماکن دیدنی</h3></a>--}}
+                        {{--<div class="shelf_title_container h3">--}}
+                            {{--<h3>اماکن دیدنی</h3>--}}
                         {{--</div>--}}
                     {{--</div>--}}
                 {{--</div>--}}
@@ -2156,8 +2131,8 @@
                 {{--<div class="shelf_header">--}}
                     {{--<div class="shelf_title">--}}
                         {{--<span class="shelf_header_icon ui_icon travelers-choice-badge"></span>--}}
-                        {{--<div class="shelf_title_container">--}}
-                            {{--<a class="ui_link ui_header h2"><h3>هتل های دیدنی</h3></a>--}}
+                        {{--<div class="shelf_title_container h3">--}}
+                            {{--<h3>هتل های دیدنی</h3>--}}
                         {{--</div>--}}
                     {{--</div>--}}
                 {{--</div>--}}
@@ -2199,8 +2174,8 @@
             {{--<div class="shelf_header">--}}
                 {{--<div class="shelf_title">--}}
                     {{--<span class="shelf_header_icon ui_icon travelers-choice-badge"></span>--}}
-                    {{--<div class="shelf_title_container">--}}
-                        {{--<a class="ui_link ui_header h2"><h3>غذاهای لذیذ</h3></a>--}}
+                    {{--<div class="shelf_title_container h3">--}}
+                        {{--<h3>غذاهای لذیذ</h3>--}}
                     {{--</div>--}}
                 {{--</div>--}}
             {{--</div>--}}
