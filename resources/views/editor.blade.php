@@ -1,5 +1,5 @@
 
-<link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/editor.css')}}'/>
+<link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/shazdeDesigns/editor.css')}}'/>
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/icons.css?v=2')}}' />
 
 
@@ -12,154 +12,7 @@
 </div>
 <![endif]-->
 
-
 <style>
-   .innerPic {
-      background: url(http://localhost:8080/assets/images/bck.png);
-      width: 300px;
-      height: 285px;
-      background-size: cover;
-      position: absolute;
-      left: 7%;
-      top: 15%;
-   }
-   .termsLabel {
-      display: inline-block;
-   }
-   .uploadBtn {
-      padding: 3px 15px;
-   }
-</style>
-
-<style>
-   .epTitle {
-       display: inline-block;
-       position: relative;
-       margin: 7px 0px;
-       font-weight: 500;
-   }
-   .epRedNotice {
-      font-size: 0.9em;
-      color: #963019;
-   }
-   .epBlackNotice {
-      font-size: 0.9em;
-       margin: 5px 0;
-   }
-   .epInputBox {
-      width: 80%;
-      display: inline-block;
-      padding: 2px 7px;
-      border: 1px solid #cccccc;
-      border-radius: 5px;
-      background-color: #ebebeb;
-      line-height: 30px;
-      margin: 0 0 10px;
-   }
-   .epInputBoxText {
-      padding-left: 15px;
-      border-left: 1px solid #d8d8d8;
-      display: inline-block;
-   }
-   .epInputBoxInput {
-      width: 70%;
-      padding-left: 3%;
-      text-align: center;
-      border: none;
-      float: left;
-      background-color: transparent;
-   }
-   .epInputBoxRequired {
-      display: inline-block;
-      position: relative
-   }
-   .epInputIconRequired {
-      font-size: 0.5em;
-      color: #92321b;
-      position: absolute;
-      top: -5px;
-      left: -10px;
-   }
-   .epAddresText{
-      width: 100%;
-      height: 120px;
-      resize: none;
-      border-radius: 5px;
-      background-color: #EEEEEE;
-      padding: 8px;
-   }
-   .epAddPlace {
-       background: #4DC7BC;
-       border-color: #4DC7BC;
-       color: white;
-       float: left;
-       padding: 7px;
-   }
-   .epPicBox {
-       padding: 7px;
-       border: 1px solid #cccccc;
-       border-radius: 5px;
-   }
-   .epPic {
-       background-color: #e5e5e5;
-       border: 1px solid #cccccc;
-       border-radius: 5px;
-   }
-   .epEditPicText {
-       text-align: left;
-       color: #30b4a6;
-   }
-   .epPicText {
-       padding: 5px 0;
-   }
-
-    /*/////////////////////////////*/
-   .epHeaderBar {
-       margin-top: -12px;
-       height: 48px; /* Matches top of .uploaderDlg */
-       width: 100%;
-       line-height: 48px;
-       background: #4DC7BC;
-   }
-   .epHeaderBar h3 {
-       float: right;
-       position: relative;
-       color: #000;
-       font-size: 14px;
-       line-height: 48px;
-       padding-right:14px;
-       max-width: 65%;
-       overflow: hidden;
-       white-space: nowrap;
-       text-overflow: ellipsis;
-   }
-</style>
-
-<style>
-    .img-container {
-        margin: 5px 15px;
-        padding: 5px;
-        border: 1px solid #CCCCCC;
-    }
-</style>
-
-<style>
-    .docs-buttons {
-        padding: 10px 0;
-        border-top: 1px solid #cccccc;
-    }
-    .editBtnsGroup {
-        display: inline-block;
-        vertical-align: middle;
-        margin: 0 7px;
-    }
-    .editBtns {
-        width: 30px;
-        height: 30px;
-        border: 1px solid #cccccc;
-        display: inline-block;
-        margin: 0 2px;
-    }
     .rotateRight {
         width: 22px;
         height: 24px;
@@ -201,9 +54,6 @@
         margin: 2px 3px;
         background: url('{{URL::asset('images') . 'settings.png'}}');
         background-size: contain;
-    }
-    .upload {
-        float: left;
     }
 </style>
 
@@ -334,7 +184,7 @@
     <div class="ui_close_x" onclick="$('#editPane').addClass('hidden'); $('.dark').addClass('hidden')"></div>
 </span>
 
-<span id="photoEditor" class="ui_overlay ui_modal photoUploadOverlay hidden">
+<span id="photoEditor" class="ui_overlay ui_modal photoUploadOverlay hidden" style="display: none">
      <div class="body_text">
          <div class="photoUploader">
              <div class="headerBar">

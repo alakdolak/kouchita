@@ -2,6 +2,223 @@
 
 use Illuminate\Support\Facades\Route;
 
+Route::get('databaseforall', function (){
+
+//    $pic = \App\models\PlacePic::all();
+//    foreach ($pic as $item){
+//        $item->delete();
+//    }
+//
+//    \DB::select('ALTER TABLE amaken DROP COLUMN picNumber;');
+//    \DB::select('ALTER TABLE hotels DROP COLUMN picNumber;');
+//    \DB::select('ALTER TABLE restaurant DROP COLUMN picNumber;');
+//    \DB::select('ALTER TABLE majara DROP COLUMN picNumber;');
+//    \DB::select('ALTER TABLE sogatsanaies DROP COLUMN picNumber;');
+//    \DB::select('ALTER TABLE mahalifood DROP COLUMN picNumber;');
+//    \DB::select('ALTER TABLE placepics DROP COLUMN picNumber;');
+//
+//    \DB::select("ALTER TABLE `amaken` ADD `picNumber` VARCHAR(20) NULL  AFTER `file`;");
+//    \DB::select("ALTER TABLE `hotels` ADD `picNumber` VARCHAR(20) NULL  AFTER `file`;");
+//    \DB::select("ALTER TABLE `restaurant` ADD `picNumber` VARCHAR(20) NULL  AFTER `file`;");
+//    \DB::select("ALTER TABLE `majara` ADD `picNumber` VARCHAR(20) NULL AFTER `file`;");
+//    \DB::select("ALTER TABLE `sogatsanaies` ADD `picNumber` VARCHAR(20) NULL AFTER `file`;");
+//    \DB::select("ALTER TABLE `mahalifood` ADD `picNumber` VARCHAR(20) NULL AFTER `file`;");
+//    \DB::select("ALTER TABLE `placepics` ADD `picNumber` VARCHAR(20) NULL AFTER `id`;");
+
+    dd('done');
+});
+Route::get('updateDataBase', function(){
+    $pic = \App\models\PlacePic::all()->count();
+    dd($pic);
+});
+
+Route::get('fillHotelPic', function(){
+    $Place = \App\models\Hotel::all();
+    foreach ($Place as $item){
+        if($item->file != null && $item->file != 'none'){
+            $text = 'VALUES';
+            $first = false;
+
+
+            if($item->pic_1 != null){
+                $item->picNumber = '1.jpg';
+                if($item->alt1 != null)
+                    $item->alt = $item->alt1;
+                $item->save();
+            }
+            if($item->pic_2 != null){
+                $first = true;
+                $text .= " (NULL, '2.jpg', '" . $item->id . "', '" . 4 . "', '" . $item->alt2 . "')";
+            }
+            if($item->pic_3 != null){
+                if($first)
+                    $text .= ',';
+                else
+                    $first = true;
+                $text .= " (NULL, '3.jpg', '" . $item->id . "', '" . 4 . "', '" . $item->alt4 . "')";
+            }
+            if($item->pic_4 != null){
+                if($first)
+                    $text .= ',';
+                else
+                    $first = true;
+                $text .= " (NULL, '4.jpg', '" . $item->id . "', '" . 4 . "', '" . $item->alt4 . "')";
+            }
+            if($item->pic_5 != null){
+                if($first)
+                    $text .= ',';
+                else
+                    $first = true;
+                $text .= " (NULL, '5.jpg', '" . $item->id . "', '" . 4 . "', '" . $item->alt5 . "')";
+            }
+
+            if($text != 'VALUES')
+                \DB::insert("INSERT INTO `placepics` (`id`, `picNumber`, `placeId`, `kindPlaceId`, `alt`) " . $text . ";");
+        }
+    }
+
+    dd('done');
+});
+Route::get('fillAmakenPic', function(){
+    $Place = \App\models\Amaken::all();
+    foreach ($Place as $item){
+        if($item->file != null && $item->file != 'none'){
+            $text = 'VALUES';
+            $first = false;
+
+            if($item->pic_1 != null){
+                $item->picNumber = '1.jpg';
+                if($item->alt1 != null)
+                    $item->alt = $item->alt1;
+                $item->save();
+            }
+            if($item->pic_2 != null){
+                $first = true;
+                $text .= " (NULL, '2.jpg', '" . $item->id . "', '" . 1 . "', '" . $item->alt2 . "')";
+            }
+            if($item->pic_3 != null){
+                if($first)
+                    $text .= ',';
+                else
+                    $first = true;
+                $text .= " (NULL, '3.jpg', '" . $item->id . "', '" . 1 . "', '" . $item->alt4 . "')";
+            }
+            if($item->pic_4 != null){
+                if($first)
+                    $text .= ',';
+                else
+                    $first = true;
+                $text .= " (NULL, '4.jpg', '" . $item->id . "', '" . 1 . "', '" . $item->alt4 . "')";
+            }
+            if($item->pic_5 != null){
+                if($first)
+                    $text .= ',';
+                else
+                    $first = true;
+                $text .= " (NULL, '5.jpg', '" . $item->id . "', '" . 1 . "', '" . $item->alt5 . "')";
+            }
+
+            if($text != 'VALUES')
+                \DB::insert("INSERT INTO `placepics` (`id`, `picNumber`, `placeId`, `kindPlaceId`, `alt`) " . $text . ";");
+        }
+    }
+
+    dd('done');
+});
+Route::get('fillRestPic', function(){
+    $Place = \App\models\Restaurant::all();
+    foreach ($Place as $item){
+        if($item->file != null && $item->file != 'none'){
+            $text = 'VALUES';
+            $first = false;
+
+            if($item->pic_1 != null){
+                $item->picNumber = '1.jpg';
+                if($item->alt1 != null)
+                    $item->alt = $item->alt1;
+                $item->save();
+            }
+            if($item->pic_2 != null){
+                $first = true;
+                $text .= " (NULL, '2.jpg', '" . $item->id . "', '" . 3 . "', '" . $item->alt2 . "')";
+            }
+            if($item->pic_3 != null){
+                if($first)
+                    $text .= ',';
+                else
+                    $first = true;
+                $text .= " (NULL, '3.jpg', '" . $item->id . "', '" . 3 . "', '" . $item->alt4 . "')";
+            }
+            if($item->pic_4 != null){
+                if($first)
+                    $text .= ',';
+                else
+                    $first = true;
+                $text .= " (NULL, '4.jpg', '" . $item->id . "', '" . 3 . "', '" . $item->alt4 . "')";
+            }
+            if($item->pic_5 != null){
+                if($first)
+                    $text .= ',';
+                else
+                    $first = true;
+                $text .= " (NULL, '5.jpg', '" . $item->id . "', '" . 3 . "', '" . $item->alt5 . "')";
+            }
+
+            if($text != 'VALUES')
+                \DB::insert("INSERT INTO `placepics` (`id`, `picNumber`, `placeId`, `kindPlaceId`, `alt`) " . $text . ";");
+        }
+    }
+
+    dd('done');
+});
+Route::get('fillMajaraPic', function(){
+    $Place = \App\models\Majara::all();
+    foreach ($Place as $item){
+        if($item->file != null && $item->file != 'none'){
+            $text = 'VALUES';
+            $first = false;
+
+
+            if($item->pic_1 != null){
+                $item->picNumber = '1.jpg';
+                if($item->alt1 != null)
+                    $item->alt = $item->alt1;
+                $item->save();
+            }
+            if($item->pic_2 != null){
+                $first = true;
+                $text .= " (NULL, '2.jpg', '" . $item->id . "', '" . 6 . "', '" . $item->alt2 . "')";
+            }
+            if($item->pic_3 != null){
+                if($first)
+                    $text .= ',';
+                else
+                    $first = true;
+                $text .= " (NULL, '3.jpg', '" . $item->id . "', '" . 6 . "', '" . $item->alt4 . "')";
+            }
+            if($item->pic_4 != null){
+                if($first)
+                    $text .= ',';
+                else
+                    $first = true;
+                $text .= " (NULL, '4.jpg', '" . $item->id . "', '" . 6 . "', '" . $item->alt4 . "')";
+            }
+            if($item->pic_5 != null){
+                if($first)
+                    $text .= ',';
+                else
+                    $first = true;
+                $text .= " (NULL, '5.jpg', '" . $item->id . "', '" . 6 . "', '" . $item->alt5 . "')";
+            }
+
+            if($text != 'VALUES')
+                \DB::insert("INSERT INTO `placepics` (`id`, `picNumber`, `placeId`, `kindPlaceId`, `alt`) " . $text . ";");
+        }
+    }
+
+    dd('done');
+});
+
 Route::get('specificPost/{id}', ['as' => 'specificPost', 'uses' => 'PostController@specificPost']);
 
 Route::get('updateBot', 'HomeController@updateBot');

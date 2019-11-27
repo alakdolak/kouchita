@@ -1,22 +1,5 @@
 FROM php:7.1-fpm-alpine as base
-RUN apk add -U autoconf \ 
-  freetype-dev \ 
-  g++ \ 
-  gcc \ 
-  git \
-  gmp-dev \
-  jpeg-dev \ 
-  libmcrypt-dev \ 
-  libpng-dev \ 
-  libsodium-dev \ 
-  libwebp-dev \ 
-  libxml2-dev \ 
-  libxpm-dev \ 
-  make \ 
-  nodejs \ 
-  shadow \ 
-  vim \ 
-  zlib-dev
+RUN apk add -U autoconf  freetype-dev  g++  gcc  git gmp-dev jpeg-dev  libmcrypt-dev   libpng-dev   libsodium-dev   libwebp-dev  libxml2-dev   libxpm-dev   make   nodejs   shadow   vim   zlib-dev
 
 RUN pecl install APCu libsodium ;\
  docker-php-ext-configure gd --with-freetype-dir --with-jpeg-dir --with-png-dir --with-zlib --with-webp-dir --with-xpm-dir ;\

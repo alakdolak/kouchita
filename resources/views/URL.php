@@ -39,6 +39,7 @@ class URL extends Facade
                 case "posts":
                 case "vr2":
                     return 'http://localhost/assets/' . $tmp[0] . '/' . $stub;
+//                    return 'http://dev.koochita.com/assets/' . $tmp[0] . '/' . $stub;
 //                    return 'http://assets.baligh.ir/' . $tmp[0] . '/' . $stub;
             }
         }
