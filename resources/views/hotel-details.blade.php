@@ -62,6 +62,7 @@ if ($total == 0)
     <link rel="stylesheet" href="{{URL::asset('css/theme2/cropper.css')}}">
     <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/hotelDetail.css')}}">
     <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/abbreviations.css')}}">
+    <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/editor.css')}}">
 
 
     {{--vr--}}
@@ -529,37 +530,131 @@ if ($total == 0)
                                 </div>
                             </div>
 
+{{--                            <div class="commentRatingsDetailsBox">--}}
+{{--                                <div class="display-inline-block full-width">--}}
+{{--                                    <b class="col-xs-3 font-size-15 line-height-203">اصلاً راضی نبودم</b>--}}
+{{--                                    <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">--}}
+
+{{--                                    </div>--}}
+{{--                                    <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>--}}
+{{--                                </div>--}}
+{{--                                <div class="display-inline-block full-width">--}}
+{{--                                    <b class="col-xs-3 font-size-15 line-height-203">بد نبود</b>--}}
+{{--                                    <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">--}}
+
+{{--                                    </div>--}}
+{{--                                    <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>--}}
+{{--                                </div>--}}
+{{--                                <div class="display-inline-block full-width">--}}
+{{--                                    <b class="col-xs-3 font-size-15 line-height-203">معمولی بود</b>--}}
+{{--                                    <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">--}}
+{{--                                        <div class="ui_star_rating bubble_30 font-size-25">--}}
+{{--                                            <span class="starRating"></span>--}}
+{{--                                            <span class="starRating"></span>--}}
+{{--                                            <span class="starRatingGreen"></span>--}}
+{{--                                            <span class="starRatingGreen"></span>--}}
+{{--                                            <span class="starRatingGreen"></span>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                    <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>--}}
+{{--                                </div>--}}
+{{--                                <div class="display-inline-block full-width">--}}
+{{--                                    <b class="col-xs-3 font-size-15 line-height-203">خوب بود</b>--}}
+{{--                                    <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">--}}
+{{--                                        <div class="ui_star_rating bubble_40 font-size-25">--}}
+{{--                                            <span class="starRating"></span>--}}
+{{--                                            <span class="starRatingGreen"></span>--}}
+{{--                                            <span class="starRatingGreen"></span>--}}
+{{--                                            <span class="starRatingGreen"></span>--}}
+{{--                                            <span class="starRatingGreen"></span>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                    <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>--}}
+{{--                                </div>--}}
+{{--                                <div class="display-inline-block full-width">--}}
+{{--                                    <b class="col-xs-3 font-size-15 line-height-203">عالی بود</b>--}}
+{{--                                    <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">--}}
+{{--                                        <div class="ui_star_rating bubble_50 font-size-25">--}}
+{{--                                            <span class="starRatingGreen"></span>--}}
+{{--                                            <span class="starRatingGreen"></span>--}}
+{{--                                            <span class="starRatingGreen"></span>--}}
+{{--                                            <span class="starRatingGreen"></span>--}}
+{{--                                            <span class="starRatingGreen"></span>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                    <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+
                             <div class="commentQuestionsRatingsBox">
                                 <div class="commentQuestionsRatingsBoxHeader">چقدر راضی بودید؟</div>
                                 <div class="display-inline-block full-width">
                                     <b class="col-xs-3 font-size-15 line-height-203">اصلاً راضی نبودم</b>
-                                    <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-3 text-align-left">
-                                        <span class="ui_bubble_rating bubble_10 font-size-30"
-                                              property="ratingValue" content="1" alt='1 of 5 bubbles'></span>
+                                    <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-3 text-align-left pd-rt-0">
+                                        <div class="ui_star_rating stars_10 font-size-25"
+                                             property="ratingValue" content="1" alt='1 of 5 bubbles'>
+                                            <span class="starRating"></span>
+                                            <span class="starRating"></span>
+                                            <span class="starRating"></span>
+                                            <span class="starRating"></span>
+                                            <span class="starRatingGreen"></span>
+                                        </div>
                                     </div>
                                     <b class="col-xs-6 font-size-15 line-height-203">امتیاز کلی شما به این مکان چقدر است؟</b>
                                 </div>
                                 <div class="display-inline-block full-width">
                                     <b class="col-xs-3 font-size-15 line-height-203">بد نبود</b>
-                                    <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-3 text-align-left">
-                                        <span class="ui_bubble_rating bubble_20 font-size-30"
-                                              property="ratingValue" content="2" alt='2 of 5 bubbles'></span>
+                                    <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-3 text-align-left pd-rt-0">
+                                        <div class="ui_star_rating stars_20 font-size-25"
+                                             property="ratingValue" content="2" alt='2 of 5 bubbles'>
+                                            <span class="starRating"></span>
+                                            <span class="starRating"></span>
+                                            <span class="starRating"></span>
+                                            <span class="starRatingGreen"></span>
+                                            <span class="starRatingGreen"></span>
+                                        </div>
                                     </div>
                                     <b class="col-xs-6 font-size-15 line-height-203">امتیاز کلی شما به این مکان چقدر است؟</b>
                                 </div>
                                 <div class="display-inline-block full-width">
                                     <b class="col-xs-3 font-size-15 line-height-203">معمولی بود</b>
-                                    <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-3 text-align-left">
-                                        <span class="ui_bubble_rating bubble_30 font-size-30"
-                                              property="ratingValue" content="3" alt='3 of 5 bubbles'></span>
+                                    <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-3 text-align-left pd-rt-0">
+                                        <div class="ui_star_rating stars_30 font-size-25"
+                                             property="ratingValue" content="3" alt='3 of 5 bubbles'>
+                                            <span class="starRating"></span>
+                                            <span class="starRating"></span>
+                                            <span class="starRatingGreen"></span>
+                                            <span class="starRatingGreen"></span>
+                                            <span class="starRatingGreen"></span>
+                                        </div>
                                     </div>
                                     <b class="col-xs-6 font-size-15 line-height-203">امتیاز کلی شما به این مکان چقدر است؟</b>
                                 </div>
                                 <div class="display-inline-block full-width">
                                     <b class="col-xs-3 font-size-15 line-height-203">خوب بود</b>
-                                    <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-3 text-align-left">
-                                        <span class="ui_bubble_rating bubble_40 font-size-30"
-                                              property="ratingValue" content="4" alt='4 of 5 bubbles'></span>
+                                    <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-3 text-align-left pd-rt-0">
+                                        <div class="ui_star_rating stars_40 font-size-25"
+                                             property="ratingValue" content="4" alt='4 of 5 bubbles'>
+                                            <span class="starRating"></span>
+                                            <span class="starRatingGreen"></span>
+                                            <span class="starRatingGreen"></span>
+                                            <span class="starRatingGreen"></span>
+                                            <span class="starRatingGreen"></span>
+                                        </div>
+                                    </div>
+                                    <b class="col-xs-6 font-size-15 line-height-203">امتیاز کلی شما به این مکان چقدر است؟</b>
+                                </div>
+                                <div class="display-inline-block full-width">
+                                    <b class="col-xs-3 font-size-15 line-height-203">عالی بود</b>
+                                    <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-3 text-align-left pd-rt-0">
+                                        <div class="ui_star_rating stars_50 font-size-25"
+                                             property="ratingValue" content="5" alt='5 of 5 bubbles'>
+                                            <span class="starRatingGreen"></span>
+                                            <span class="starRatingGreen"></span>
+                                            <span class="starRatingGreen"></span>
+                                            <span class="starRatingGreen"></span>
+                                            <span class="starRatingGreen"></span>
+                                        </div>
                                     </div>
                                     <b class="col-xs-6 font-size-15 line-height-203">امتیاز کلی شما به این مکان چقدر است؟</b>
                                 </div>
@@ -572,133 +667,157 @@ if ($total == 0)
                 </div>
 
                 <span id="editPane" class="ui_overlay ui_modal photoUploadOverlay hidden">
-   <div class="body_text" style="padding-top: 12px">
-       {{--<div class="photoUploader">--}}
-           <div class="headerBar epHeaderBar">
-              <h3 id="photoUploadHeader" class="photoUploadHeader"><span>افزودن تصویر به </span><span>{{$place->name}}</span></h3>
-           </div>
-           <div class="row">
-              <div class="col-md-12">
-                 <div style="margin: 5px 15px">قاب مربع</div>
-                 <div class="img-container">
-                    <img class="imgInEditor" id="edit_file_image" alt="Picture">
-                 </div>
-              </div>
-           </div>
-           <div class="row" id="actions" style="">
-              <div class="col-md-12 docs-buttons">
+                   <div class="body_text" style="padding-top: 12px">
+                       {{--<div class="photoUploader">--}}
+                           <div class="headerBar epHeaderBar">
+                              <h3 id="photoUploadHeader" class="photoUploadHeader">
+                                  <span>ویرایش عکس</span>
+{{--                                  <span>{{$place->name}}</span>--}}
+                              </h3>
+                           </div>
+                           <div class="row">
+                              <div class="col-md-9 imgContainerLeftListMainDiv">
+{{--                                 <div style="margin: 5px 15px">قاب مربع</div>--}}
+                                 <div class="img-container">
+                                    <img class="imgInEditor" id="edit_file_image" alt="Picture">
+                                 </div>
 
-                <div class="editBtnsGroup">
-                    <div class="editBtns">
-                       <div class="flipHorizontal" data-toggle="tooltip" data-placement="top" title="Flip Horizontal" onclick="cropper.scaleY(-1)"></div>
-                    </div>
-                                    {{--<button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="scaleX" data-option="-1" title="Flip Horizontal">--}}
-                    {{--<span class="docs-tooltip" data-toggle="tooltip" title="cropper.scaleX(-1)">--}}
-                    {{--<span class="fa fa-arrows-h"></span>--}}
-                    {{--</span>--}}
-                    {{--</button>--}}
+                                <div class="addParticipantName">
+                                    <span class="addParticipantSpan">با</span>
+                                    <div class="inputBoxGeneralInfo inputBox" id="addParticipantInputBoxModal">
+                                        <textarea class="inputBoxInput inputBoxInputComment" type="text" placeholder="چه کسی بودید؟ ایمیل یا نام کاربری را وارد کنید"></textarea>
+                                        <div class="participantDivMainDiv">
+                                            <div class="participantDiv">
+                                                <span class="removeParticipantBtn"></span>
+                                                shazdesina
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                              </div>
+                               <div class="col-md-3 imgContainerRightListMainDiv">
+                                   <div class="imgContainerRightList"></div>
+                                   <div class="imgContainerRightList"></div>
+                                   <div class="imgContainerRightList"></div>
+                               </div>
+                           </div>
+                           <div class="row" id="actions">
+                              <div class="col-md-12 docs-buttons">
 
-                    <div class="editBtns">
-                       <div class="flipVertical" data-toggle="tooltip" data-placement="top" title="Flip Vertical" onclick="cropper.scaleX(-1)"></div>
-                    </div>
-                                    {{--<button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="scaleY" data-option="-1" title="Flip Vertical">--}}
-                    {{--<span class="docs-tooltip" data-toggle="tooltip" title="cropper.scaleY(-1)">--}}
-                    {{--<span class="fa fa-arrows-v"></span>--}}
-                    {{--</span>--}}
-                    {{--</button>--}}
-                </div>
+                                <div class="editBtnsGroup">
+                                    <div class="editBtns">
+                                       <div class="flipHorizontal" data-toggle="tooltip" data-placement="top" title="Flip Horizontal" onclick="cropper.scaleY(-1)"></div>
+                                    </div>
+                                                    {{--<button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="scaleX" data-option="-1" title="Flip Horizontal">--}}
+                                    {{--<span class="docs-tooltip" data-toggle="tooltip" title="cropper.scaleX(-1)">--}}
+                                    {{--<span class="fa fa-arrows-h"></span>--}}
+                                    {{--</span>--}}
+                                    {{--</button>--}}
 
-                <div class="editBtnsGroup">
-                    <div class="editBtns">
-                       <div class="rotateLeft" data-toggle="tooltip" data-placement="top" title="چرخش 45 درجه ای به سمت چپ" onclick="cropper.rotate(-45)"></div>
-                    </div>
-                   {{--<button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="rotate" data-option="-45" title="Rotate Left">--}}
-                    {{--<span class="docs-tooltip" data-toggle="tooltip" title="cropper.rotate(-45)">--}}
-                    {{--<span class="fa fa-rotate-left"></span>--}}
-                    {{--</span>--}}
-                    {{--</button>--}}
+                                    <div class="editBtns">
+                                       <div class="flipVertical" data-toggle="tooltip" data-placement="top" title="Flip Vertical" onclick="cropper.scaleX(-1)"></div>
+                                    </div>
+                                                    {{--<button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="scaleY" data-option="-1" title="Flip Vertical">--}}
+                                    {{--<span class="docs-tooltip" data-toggle="tooltip" title="cropper.scaleY(-1)">--}}
+                                    {{--<span class="fa fa-arrows-v"></span>--}}
+                                    {{--</span>--}}
+                                    {{--</button>--}}
+                                </div>
 
-                    <div class="editBtns">
-                       <div class="rotateRight" data-toggle="tooltip" data-placement="top" title="چرخش 45 درجه ای به سمت راست" onclick="cropper.rotate(45)"></div>
-                    </div>
-                   {{--<button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="rotate" data-option="45" title="Rotate Right">--}}
-                    {{--<span class="docs-tooltip" data-toggle="tooltip" title="cropper.rotate(45)">--}}
-                    {{--<span class="fa fa-rotate-right"></span>--}}
-                    {{--</span>--}}
-                    {{--</button>--}}
-                </div>
+                                <div class="editBtnsGroup">
+                                    <div class="editBtns">
+                                       <div class="rotateLeft" data-toggle="tooltip" data-placement="top" title="چرخش 45 درجه ای به سمت چپ" onclick="cropper.rotate(-45)"></div>
+                                    </div>
+                                   {{--<button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="rotate" data-option="-45" title="Rotate Left">--}}
+                                    {{--<span class="docs-tooltip" data-toggle="tooltip" title="cropper.rotate(-45)">--}}
+                                    {{--<span class="fa fa-rotate-left"></span>--}}
+                                    {{--</span>--}}
+                                    {{--</button>--}}
 
-                <div class="editBtnsGroup">
-                    <div class="editBtns">
-                       <div class="cropping" data-toggle="tooltip" data-placement="top" title="برش" onclick="cropper.crop()"></div>
-                    </div>
-                   {{--<button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="crop" title="Crop">--}}
-                    {{--<span class="docs-tooltip" data-toggle="tooltip" title="cropper.crop()">--}}
-                    {{--<span class="fa fa-check"></span>--}}
-                    {{--</span>--}}
-                    {{--</button>--}}
+                                    <div class="editBtns">
+                                       <div class="rotateRight" data-toggle="tooltip" data-placement="top" title="چرخش 45 درجه ای به سمت راست" onclick="cropper.rotate(45)"></div>
+                                    </div>
+                                   {{--<button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="rotate" data-option="45" title="Rotate Right">--}}
+                                    {{--<span class="docs-tooltip" data-toggle="tooltip" title="cropper.rotate(45)">--}}
+                                    {{--<span class="fa fa-rotate-right"></span>--}}
+                                    {{--</span>--}}
+                                    {{--</button>--}}
+                                </div>
 
-                    <div class="editBtns">
-                       <div class="clearing" data-toggle="tooltip" data-placement="top" title="بازگشت به اول" onclick="cropper.clear()"></div>
-                    </div>
-                   {{--<button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="clear" title="Clear">--}}
-                    {{--<span class="docs-tooltip" data-toggle="tooltip" title="cropper.clear()">--}}
-                    {{--<span class="fa fa-remove"></span>--}}
-                    {{--</span>--}}
-                    {{--</button>--}}
-                </div>
+                                <div class="editBtnsGroup">
+                                    <div class="editBtns">
+                                       <div class="cropping" data-toggle="tooltip" data-placement="top" title="برش" onclick="cropper.crop()"></div>
+                                    </div>
+                                   {{--<button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="crop" title="Crop">--}}
+                                    {{--<span class="docs-tooltip" data-toggle="tooltip" title="cropper.crop()">--}}
+                                    {{--<span class="fa fa-check"></span>--}}
+                                    {{--</span>--}}
+                                    {{--</button>--}}
 
-                <div class="upload">
-                    <div onclick="uploadIMG()" class="uploadBtn ui_button primary">تایید</div>
-                </div>
-                {{--<div class="btn-group btn-group-crop">--}}
-              {{--<button id="saveBtn" type="button" onclick="successBtnClicked(this)" class="btn btn-success" data-method="getCroppedCanvas" data-option="{ &quot;width&quot;: 466, &quot;height&quot;: 367 }">--}}
-              {{--<span class="docs-tooltip" data-toggle="tooltip" id="saveBtnSpan" title="cropper.getCroppedCanvas({ width: 466, height: 367 })">--}}
-              {{--ذخیره--}}
-              {{--</span>--}}
-              {{--</button>--}}
+                                    <div class="editBtns">
+                                       <div class="clearing" data-toggle="tooltip" data-placement="top" title="بازگشت به اول" onclick="cropper.clear()"></div>
+                                    </div>
+                                   {{--<button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="clear" title="Clear">--}}
+                                    {{--<span class="docs-tooltip" data-toggle="tooltip" title="cropper.clear()">--}}
+                                    {{--<span class="fa fa-remove"></span>--}}
+                                    {{--</span>--}}
+                                    {{--</button>--}}
+                                </div>
 
-              {{--<button id="saveBtn2" type="button" onclick="successBtnClicked(this)" class="btn btn-success hidden" data-method="getCroppedCanvas" data-option="{ &quot;width&quot;: 100, &quot;height&quot;: 100 }">--}}
-              {{--<span class="docs-tooltip" data-toggle="tooltip" id="saveBtnSpan" title="cropper.getCroppedCanvas({ width: 100, height: 100 })">--}}
-              {{--ذخیره--}}
-              {{--</span>--}}
-              {{--</button>--}}
-              {{--</div>--}}
+                                <div class="upload">
+                                    <div onclick="uploadIMG()" class="uploadBtn ui_button primary">تایید</div>
+                                </div>
+                                <div class="abandon">
+                                    <div onclick="$('#editPane').addClass('hidden'); $('.dark').addClass('hidden')" class="abandonBtn ui_button primary">لغو</div>
+                                </div>
+                                {{--<div class="btn-group btn-group-crop">--}}
+                              {{--<button id="saveBtn" type="button" onclick="successBtnClicked(this)" class="btn btn-success" data-method="getCroppedCanvas" data-option="{ &quot;width&quot;: 466, &quot;height&quot;: 367 }">--}}
+                              {{--<span class="docs-tooltip" data-toggle="tooltip" id="saveBtnSpan" title="cropper.getCroppedCanvas({ width: 466, height: 367 })">--}}
+                              {{--ذخیره--}}
+                              {{--</span>--}}
+                              {{--</button>--}}
 
-              <!-- Show the cropped image in modal -->
-                <div class="modal fade docs-cropped" id="getCroppedCanvasModal" role="dialog" aria-hidden="true" aria-labelledby="getCroppedCanvasTitle" tabindex="-1">
-                   <div class="modal-dialog">
-                      <div class="modal-content">
-                         <div class="modal-header">
-                            <h5 class="modal-title" id="getCroppedCanvasTitle">Cropped</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                               <span aria-hidden="true">&times;</span>
-                            </button>
-                         </div>
-                         <div class="modal-body"></div>
-                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <a class="btn btn-primary" id="download" href="javascript:void(0);" download="cropped.jpg">Download</a>
-                         </div>
-                      </div>
+                              {{--<button id="saveBtn2" type="button" onclick="successBtnClicked(this)" class="btn btn-success hidden" data-method="getCroppedCanvas" data-option="{ &quot;width&quot;: 100, &quot;height&quot;: 100 }">--}}
+                              {{--<span class="docs-tooltip" data-toggle="tooltip" id="saveBtnSpan" title="cropper.getCroppedCanvas({ width: 100, height: 100 })">--}}
+                              {{--ذخیره--}}
+                              {{--</span>--}}
+                              {{--</button>--}}
+                              {{--</div>--}}
+
+                              <!-- Show the cropped image in modal -->
+                                <div class="modal fade docs-cropped" id="getCroppedCanvasModal" role="dialog" aria-hidden="true" aria-labelledby="getCroppedCanvasTitle" tabindex="-1">
+                                   <div class="modal-dialog">
+                                      <div class="modal-content">
+                                         <div class="modal-header">
+                                            <h5 class="modal-title" id="getCroppedCanvasTitle">Cropped</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                               <span aria-hidden="true">&times;</span>
+                                            </button>
+                                         </div>
+                                         <div class="modal-body"></div>
+                                         <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            <a class="btn btn-primary" id="download" href="javascript:void(0);" download="cropped.jpg">Download</a>
+                                         </div>
+                                      </div>
+                                   </div>
+                                </div><!-- /.modal -->
+
+                                <div id="scripts">
+
+                                   <script src="{{URL::asset('js/editorCommon.js')}}"></script>
+                                   <script src="{{URL::asset('js/cropper.js')}}"></script>
+                                   <script src="{{URL::asset('js/mainCrop.js')}}"></script>
+                                </div>
+
+                             </div><!-- /.docs-buttons -->
+                           </div>
+                       {{--</div>--}}
                    </div>
-                </div><!-- /.modal -->
-
-                <div id="scripts">
-
-                   <script src="{{URL::asset('js/editorCommon.js')}}"></script>
-                   <script src="{{URL::asset('js/cropper.js')}}"></script>
-                   <script src="{{URL::asset('js/mainCrop.js')}}"></script>
-                </div>
-
-             </div><!-- /.docs-buttons -->
-           </div>
-       {{--</div>--}}
-   </div>
-    <div class="ui_close_x" onclick="$('#editPane').addClass('hidden'); $('.dark').addClass('hidden')"></div>
+                <div class="ui_close_x" onclick="$('#editPane').addClass('hidden'); $('.dark').addClass('hidden')"></div>
 </span>
 
-                @include('editor')
+{{--                @include('editor')--}}
 
                 <div class="modal fade" id="showingPhotosModal" role="dialog">
                     <div class="modal-dialog">
@@ -1738,32 +1857,65 @@ if ($total == 0)
                                 <div class="display-inline-block full-width">
                                     <b class="col-xs-3 font-size-15 line-height-203">اصلاً راضی نبودم</b>
                                     <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
-                                        <span class="ui_bubble_rating bubble_10 font-size-30"
-                                              property="ratingValue" content="1" alt='1 of 5 bubbles'></span>
+                                        <div class="ui_star_rating stars_10 font-size-25">
+                                            <span class="starRating"></span>
+                                            <span class="starRating"></span>
+                                            <span class="starRating"></span>
+                                            <span class="starRating"></span>
+                                            <span class="starRatingGreen"></span>
+                                        </div>
                                     </div>
                                     <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
                                 </div>
                                 <div class="display-inline-block full-width">
                                     <b class="col-xs-3 font-size-15 line-height-203">بد نبود</b>
                                     <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
-                                        <span class="ui_bubble_rating bubble_20 font-size-30"
-                                              property="ratingValue" content="2" alt='2 of 5 bubbles'></span>
+                                        <div class="ui_star_rating stars_20 font-size-25">
+                                            <span class="starRating"></span>
+                                            <span class="starRating"></span>
+                                            <span class="starRating"></span>
+                                            <span class="starRatingGreen"></span>
+                                            <span class="starRatingGreen"></span>
+                                        </div>
                                     </div>
                                     <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
                                 </div>
                                 <div class="display-inline-block full-width">
                                     <b class="col-xs-3 font-size-15 line-height-203">معمولی بود</b>
                                     <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
-                                        <span class="ui_bubble_rating bubble_30 font-size-30"
-                                              property="ratingValue" content="3" alt='3 of 5 bubbles'></span>
+                                        <div class="ui_star_rating stars_30 font-size-25">
+                                            <span class="starRating"></span>
+                                            <span class="starRating"></span>
+                                            <span class="starRatingGreen"></span>
+                                            <span class="starRatingGreen"></span>
+                                            <span class="starRatingGreen"></span>
+                                        </div>
                                     </div>
                                     <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
                                 </div>
                                 <div class="display-inline-block full-width">
                                     <b class="col-xs-3 font-size-15 line-height-203">خوب بود</b>
                                     <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
-                                        <span class="ui_bubble_rating bubble_40 font-size-30"
-                                              property="ratingValue" content="4" alt='4 of 5 bubbles'></span>
+                                        <div class="ui_star_rating stars_40 font-size-25">
+                                            <span class="starRating"></span>
+                                            <span class="starRatingGreen"></span>
+                                            <span class="starRatingGreen"></span>
+                                            <span class="starRatingGreen"></span>
+                                            <span class="starRatingGreen"></span>
+                                        </div>
+                                    </div>
+                                    <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
+                                </div>
+                                <div class="display-inline-block full-width">
+                                    <b class="col-xs-3 font-size-15 line-height-203">عالی بود</b>
+                                    <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
+                                        <div class="ui_star_rating stars_50 font-size-25">
+                                            <span class="starRatingGreen"></span>
+                                            <span class="starRatingGreen"></span>
+                                            <span class="starRatingGreen"></span>
+                                            <span class="starRatingGreen"></span>
+                                            <span class="starRatingGreen"></span>
+                                        </div>
                                     </div>
                                     <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
                                 </div>
@@ -1908,32 +2060,65 @@ if ($total == 0)
                                 <div class="display-inline-block full-width">
                                     <b class="col-xs-3 font-size-15 line-height-203">اصلاً راضی نبودم</b>
                                     <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
-                                        <span class="ui_bubble_rating bubble_10 font-size-30"
-                                              property="ratingValue" content="1" alt='1 of 5 bubbles'></span>
+                                        <div class="ui_star_rating stars_10 font-size-25">
+                                            <span class="starRating"></span>
+                                            <span class="starRating"></span>
+                                            <span class="starRating"></span>
+                                            <span class="starRating"></span>
+                                            <span class="starRatingGreen"></span>
+                                        </div>
                                     </div>
                                     <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
                                 </div>
                                 <div class="display-inline-block full-width">
                                     <b class="col-xs-3 font-size-15 line-height-203">بد نبود</b>
                                     <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
-                                        <span class="ui_bubble_rating bubble_20 font-size-30"
-                                              property="ratingValue" content="2" alt='2 of 5 bubbles'></span>
+                                        <div class="ui_star_rating stars_20 font-size-25">
+                                            <span class="starRating"></span>
+                                            <span class="starRating"></span>
+                                            <span class="starRating"></span>
+                                            <span class="starRatingGreen"></span>
+                                            <span class="starRatingGreen"></span>
+                                        </div>
                                     </div>
                                     <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
                                 </div>
                                 <div class="display-inline-block full-width">
                                     <b class="col-xs-3 font-size-15 line-height-203">معمولی بود</b>
                                     <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
-                                        <span class="ui_bubble_rating bubble_30 font-size-30"
-                                              property="ratingValue" content="3" alt='3 of 5 bubbles'></span>
+                                        <div class="ui_star_rating stars_30 font-size-25">
+                                            <span class="starRating"></span>
+                                            <span class="starRating"></span>
+                                            <span class="starRatingGreen"></span>
+                                            <span class="starRatingGreen"></span>
+                                            <span class="starRatingGreen"></span>
+                                        </div>
                                     </div>
                                     <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
                                 </div>
                                 <div class="display-inline-block full-width">
                                     <b class="col-xs-3 font-size-15 line-height-203">خوب بود</b>
                                     <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
-                                        <span class="ui_bubble_rating bubble_40 font-size-30"
-                                              property="ratingValue" content="4" alt='4 of 5 bubbles'></span>
+                                        <div class="ui_star_rating stars_40 font-size-25">
+                                            <span class="starRating"></span>
+                                            <span class="starRatingGreen"></span>
+                                            <span class="starRatingGreen"></span>
+                                            <span class="starRatingGreen"></span>
+                                            <span class="starRatingGreen"></span>
+                                        </div>
+                                    </div>
+                                    <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
+                                </div>
+                                <div class="display-inline-block full-width">
+                                    <b class="col-xs-3 font-size-15 line-height-203">عالی بود</b>
+                                    <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
+                                        <div class="ui_star_rating stars_50 font-size-25">
+                                            <span class="starRatingGreen"></span>
+                                            <span class="starRatingGreen"></span>
+                                            <span class="starRatingGreen"></span>
+                                            <span class="starRatingGreen"></span>
+                                            <span class="starRatingGreen"></span>
+                                        </div>
                                     </div>
                                     <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
                                 </div>
@@ -2079,32 +2264,65 @@ if ($total == 0)
                                 <div class="display-inline-block full-width">
                                     <b class="col-xs-3 font-size-15 line-height-203">اصلاً راضی نبودم</b>
                                     <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
-                                        <span class="ui_bubble_rating bubble_10 font-size-30"
-                                              property="ratingValue" content="1" alt='1 of 5 bubbles'></span>
+                                        <div class="ui_star_rating stars_10 font-size-25">
+                                            <span class="starRating"></span>
+                                            <span class="starRating"></span>
+                                            <span class="starRating"></span>
+                                            <span class="starRating"></span>
+                                            <span class="starRatingGreen"></span>
+                                        </div>
                                     </div>
                                     <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
                                 </div>
                                 <div class="display-inline-block full-width">
                                     <b class="col-xs-3 font-size-15 line-height-203">بد نبود</b>
                                     <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
-                                        <span class="ui_bubble_rating bubble_20 font-size-30"
-                                              property="ratingValue" content="2" alt='2 of 5 bubbles'></span>
+                                        <div class="ui_star_rating stars_20 font-size-25">
+                                            <span class="starRating"></span>
+                                            <span class="starRating"></span>
+                                            <span class="starRating"></span>
+                                            <span class="starRatingGreen"></span>
+                                            <span class="starRatingGreen"></span>
+                                        </div>
                                     </div>
                                     <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
                                 </div>
                                 <div class="display-inline-block full-width">
                                     <b class="col-xs-3 font-size-15 line-height-203">معمولی بود</b>
                                     <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
-                                        <span class="ui_bubble_rating bubble_30 font-size-30"
-                                              property="ratingValue" content="3" alt='3 of 5 bubbles'></span>
+                                        <div class="ui_star_rating stars_30 font-size-25">
+                                            <span class="starRating"></span>
+                                            <span class="starRating"></span>
+                                            <span class="starRatingGreen"></span>
+                                            <span class="starRatingGreen"></span>
+                                            <span class="starRatingGreen"></span>
+                                        </div>
                                     </div>
                                     <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
                                 </div>
                                 <div class="display-inline-block full-width">
                                     <b class="col-xs-3 font-size-15 line-height-203">خوب بود</b>
                                     <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
-                                        <span class="ui_bubble_rating bubble_40 font-size-30"
-                                              property="ratingValue" content="4" alt='4 of 5 bubbles'></span>
+                                        <div class="ui_star_rating stars_40 font-size-25">
+                                            <span class="starRating"></span>
+                                            <span class="starRatingGreen"></span>
+                                            <span class="starRatingGreen"></span>
+                                            <span class="starRatingGreen"></span>
+                                            <span class="starRatingGreen"></span>
+                                        </div>
+                                    </div>
+                                    <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
+                                </div>
+                                <div class="display-inline-block full-width">
+                                    <b class="col-xs-3 font-size-15 line-height-203">عالی بود</b>
+                                    <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
+                                        <div class="ui_star_rating stars_50 font-size-25">
+                                            <span class="starRatingGreen"></span>
+                                            <span class="starRatingGreen"></span>
+                                            <span class="starRatingGreen"></span>
+                                            <span class="starRatingGreen"></span>
+                                            <span class="starRatingGreen"></span>
+                                        </div>
                                     </div>
                                     <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
                                 </div>
@@ -2251,32 +2469,65 @@ if ($total == 0)
                                 <div class="display-inline-block full-width">
                                     <b class="col-xs-3 font-size-15 line-height-203">اصلاً راضی نبودم</b>
                                     <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
-                                        <span class="ui_bubble_rating bubble_10 font-size-30"
-                                              property="ratingValue" content="1" alt='1 of 5 bubbles'></span>
+                                        <div class="ui_star_rating stars_10 font-size-25">
+                                            <span class="starRating"></span>
+                                            <span class="starRating"></span>
+                                            <span class="starRating"></span>
+                                            <span class="starRating"></span>
+                                            <span class="starRatingGreen"></span>
+                                        </div>
                                     </div>
                                     <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
                                 </div>
                                 <div class="display-inline-block full-width">
                                     <b class="col-xs-3 font-size-15 line-height-203">بد نبود</b>
                                     <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
-                                        <span class="ui_bubble_rating bubble_20 font-size-30"
-                                              property="ratingValue" content="2" alt='2 of 5 bubbles'></span>
+                                        <div class="ui_star_rating stars_20 font-size-25">
+                                            <span class="starRating"></span>
+                                            <span class="starRating"></span>
+                                            <span class="starRating"></span>
+                                            <span class="starRatingGreen"></span>
+                                            <span class="starRatingGreen"></span>
+                                        </div>
                                     </div>
                                     <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
                                 </div>
                                 <div class="display-inline-block full-width">
                                     <b class="col-xs-3 font-size-15 line-height-203">معمولی بود</b>
                                     <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
-                                        <span class="ui_bubble_rating bubble_30 font-size-30"
-                                              property="ratingValue" content="3" alt='3 of 5 bubbles'></span>
+                                        <div class="ui_star_rating stars_30 font-size-25">
+                                            <span class="starRating"></span>
+                                            <span class="starRating"></span>
+                                            <span class="starRatingGreen"></span>
+                                            <span class="starRatingGreen"></span>
+                                            <span class="starRatingGreen"></span>
+                                        </div>
                                     </div>
                                     <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
                                 </div>
                                 <div class="display-inline-block full-width">
                                     <b class="col-xs-3 font-size-15 line-height-203">خوب بود</b>
                                     <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
-                                        <span class="ui_bubble_rating bubble_40 font-size-30"
-                                              property="ratingValue" content="4" alt='4 of 5 bubbles'></span>
+                                        <div class="ui_star_rating stars_40 font-size-25">
+                                            <span class="starRating"></span>
+                                            <span class="starRatingGreen"></span>
+                                            <span class="starRatingGreen"></span>
+                                            <span class="starRatingGreen"></span>
+                                            <span class="starRatingGreen"></span>
+                                        </div>
+                                    </div>
+                                    <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
+                                </div>
+                                <div class="display-inline-block full-width">
+                                    <b class="col-xs-3 font-size-15 line-height-203">عالی بود</b>
+                                    <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
+                                        <div class="ui_star_rating stars_50 font-size-25">
+                                            <span class="starRatingGreen"></span>
+                                            <span class="starRatingGreen"></span>
+                                            <span class="starRatingGreen"></span>
+                                            <span class="starRatingGreen"></span>
+                                            <span class="starRatingGreen"></span>
+                                        </div>
                                     </div>
                                     <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
                                 </div>
@@ -2406,28 +2657,17 @@ if ($total == 0)
                             <div class="commentRatingsFiltersChoices">
                                 <div class="display-inline-block full-width text-align-right mg-tp-10">
                                     <div class="prw_rup prw_common_bubble_rating overallBubbleRating full-width float-right">
-                                        <span class="ui_bubble_rating bubble_10 font-size-30 color-yellow"
-                                              property="ratingValue" content="1" alt='1 of 5 bubbles'></span>
+{{--                                        <span class="ui_bubble_rating bubble_10 font-size-30 color-yellow"--}}
+{{--                                              property="ratingValue" content="1" alt='1 of 5 bubbles'></span>--}}
+                                        <div class="ui_star_rating stars_10 font-size-25">
+                                            <span class="starRatingGrey"></span>
+                                            <span class="starRatingGrey"></span>
+                                            <span class="starRatingGrey"></span>
+                                            <span class="starRatingGrey"></span>
+                                            <span class="starRatingGold"></span>
+                                        </div>
                                     </div>
                                 </div>
-{{--                                <div class="display-inline-block full-width">--}}
-{{--                                    <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">--}}
-{{--                                        <span class="ui_bubble_rating bubble_20 font-size-30 color-yellow"--}}
-{{--                                              property="ratingValue" content="2" alt='2 of 5 bubbles'></span>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                                <div class="display-inline-block full-width">--}}
-{{--                                    <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">--}}
-{{--                                        <span class="ui_bubble_rating bubble_30 font-size-30 color-yellow"--}}
-{{--                                              property="ratingValue" content="3" alt='3 of 5 bubbles'></span>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                                <div class="display-inline-block full-width">--}}
-{{--                                    <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">--}}
-{{--                                        <span class="ui_bubble_rating bubble_40 font-size-30 color-yellow"--}}
-{{--                                              property="ratingValue" content="4" alt='4 of 5 bubbles'></span>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
                             </div>
                             <div class="ratingTranslationDiv">اصلاً راضی نبودم</div>
                         </div>
@@ -2439,6 +2679,10 @@ if ($total == 0)
                             </div>
                         </div>
                     </div>
+                    <center class="col-xs-12 adsMainDiv">
+                        <div class="adsMainDivHeader">تبلیغات</div>
+                        <img src="{{"../../../public/images/Chromite.jpg"}}" alt="">
+                    </center>
                 </div>
             </div>
         </div>
@@ -2485,7 +2729,7 @@ if ($total == 0)
     @endif
 
     @include('hotelDetailsPopUp')
-    @include('editor')
+{{--    @include('editor')--}}
 
     <script>
         var hotelMap = [];

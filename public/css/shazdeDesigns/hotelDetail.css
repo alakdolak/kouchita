@@ -2386,6 +2386,27 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     font-size: 15px;
 }
 
+.adsMainDiv {
+    background-color: white;
+    margin: 23px;
+    display: inline-block;
+    width: 90%;
+    padding: 10px;
+}
+
+.adsMainDivHeader {
+    display: inline-block;
+    width: 100%;
+    color: #0076a3;
+    text-align: right;
+    font-size: 15px;
+    padding-bottom: 10px;
+}
+
+.adsMainDiv >img {
+    width: 100%;
+}
+
 #commentLink {
     text-decoration: none;
     color: inherit;
@@ -2767,4 +2788,85 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     font-size: 30px;
     color: white;
     opacity: 1;
+}
+
+/*editPane styles*/
+
+.imgContainerLeftListMainDiv {
+    margin: 10px 0;
+    padding: 10px 15px 0 30px;
+}
+
+.imgContainerLeftListMainDiv .img-container {
+    margin: 0 50px;
+    height: 325px;
+}
+
+.imgContainerLeftListMainDiv .addParticipantName {
+    margin: 10px 0;
+    width: 100%;
+}
+
+.imgContainerLeftListMainDiv .addParticipantSpan {
+    padding: 6px 7px 0 0;
+}
+
+.imgContainerRightListMainDiv {
+    border-left: 2px solid #e5e5e5;
+    margin: 10px 0;
+    padding: 10px 30px 0 15px;
+}
+
+.imgContainerRightList {
+    background-color: black;
+    height: 120px;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+#actions {
+    margin: 0 15px;
+}
+
+#editPane .abandon{
+    float: left;
+}
+
+#editPane .abandonBtn {
+    background-color: darkred !important;
+    border: none;
+    padding: 4px 20px;
+    margin-left: 10px;
+}
+
+.ui_star_rating::before {
+    display: none;
+}
+
+/*.bubble_10::after , .bubble_20::after , .bubble_30::after , .bubble_40::after , .bubble_50::after {*/
+/*    !*display: none;*!*/
+/*}*/
+
+.starRatingGreen::before {
+    content: '\E00B';
+    font-family: shazdemosafer-tour !important;
+    color: #4DC7BC;
+}
+
+.starRating::before {
+    content: '\E00B';
+    font-family: shazdemosafer-tour !important;
+    color: white;
+}
+
+.starRatingGold::before {
+    content: '\E00B';
+    font-family: shazdemosafer-tour !important;
+    color: #fcc156;
+}
+
+.starRatingGrey::before {
+    content: '\E00B';
+    font-family: shazdemosafer-tour !important;
+    color: #e5e5e5;
 }

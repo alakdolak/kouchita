@@ -1,0 +1,268 @@
+/*1st box of styles*/
+
+.innerPic {
+    background: url("http://localhost:8080/assets/images/bck.png");
+    width: 300px;
+    height: 285px;
+    background-size: cover;
+    position: absolute;
+    left: 7%;
+    top: 15%;
+}
+.termsLabel {
+    display: inline-block;
+}
+.uploadBtn {
+    padding: 3px 15px;
+}
+
+/*2nd box of styles*/
+
+.epTitle {
+    display: inline-block;
+    position: relative;
+    margin: 7px 0px;
+    font-weight: 500;
+}
+.epRedNotice {
+    font-size: 0.9em;
+    color: #963019;
+}
+.epBlackNotice {
+    font-size: 0.9em;
+    margin: 5px 0;
+}
+.epInputBox {
+    width: 80%;
+    display: inline-block;
+    padding: 2px 7px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    background-color: #ebebeb;
+    line-height: 30px;
+    margin: 0 0 10px;
+}
+.epInputBoxText {
+    padding-left: 15px;
+    border-left: 1px solid #d8d8d8;
+    display: inline-block;
+}
+.epInputBoxInput {
+    width: 70%;
+    padding-left: 3%;
+    text-align: center;
+    border: none;
+    float: left;
+    background-color: transparent;
+}
+.epInputBoxRequired {
+    display: inline-block;
+    position: relative
+}
+.epInputIconRequired {
+    font-size: 0.5em;
+    color: #92321b;
+    position: absolute;
+    top: -5px;
+    left: -10px;
+}
+.epAddresText{
+    width: 100%;
+    height: 120px;
+    resize: none;
+    border-radius: 5px;
+    background-color: #EEEEEE;
+    padding: 8px;
+}
+.epAddPlace {
+    background: #4DC7BC;
+    border-color: #4DC7BC;
+    color: white;
+    float: left;
+    padding: 7px;
+}
+.epPicBox {
+    padding: 7px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+}
+.epPic {
+    background-color: #e5e5e5;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+}
+.epEditPicText {
+    text-align: left;
+    color: #30b4a6;
+}
+.epPicText {
+    padding: 5px 0;
+}
+
+/*/////////////////////////////*/
+.epHeaderBar {
+    margin-top: -12px;
+    height: 48px; /* Matches top of .uploaderDlg */
+    width: 100%;
+    line-height: 48px;
+    background: #4DC7BC;
+}
+.epHeaderBar h3 {
+    float: right;
+    position: relative;
+    color: #000;
+    font-size: 14px;
+    line-height: 48px;
+    padding-right:14px;
+    max-width: 65%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+/*3rd box of styles*/
+
+.img-container {
+    margin: 5px 15px;
+    padding: 5px;
+    border: 1px solid #CCCCCC;
+}
+
+/*4th box of styles*/
+
+.docs-buttons {
+    padding: 10px 0;
+    border-top: 1px solid #cccccc;
+}
+
+.editBtnsGroup {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 7px;
+}
+
+.editBtns {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #cccccc;
+    display: inline-block;
+    margin: 0 2px;
+}
+
+.upload {
+    float: left;
+}
+
+#editPane {
+    padding: 0;
+    width: 50%;
+    right: auto;
+    /*height: 90%;*/
+    top: 5%;
+    position: fixed;
+    left: 25%;
+}
+
+#editPane > div:nth-child(1) > div:nth-child(1) {
+    max-height: 600px;
+    overflow: auto
+}
+
+#actions {
+    margin: 20px
+}
+
+#photoEditor {
+    padding: 0;
+    width: 860px;
+    height: 90%;
+    top: 5%;
+    position: fixed;
+    left: 50%;
+    margin-left: -430px;
+}
+
+#photoUploadHeader {
+   color: white;
+}
+
+.ui_close_x {
+    right: 94.5%;
+}
+
+.ui_close_x:before {
+    color: white;
+    left: 0;
+}
+
+#guidelinesOverlay {
+    position: fixed;
+    right: 460px;
+    left: auto;
+    top: 82px;
+    bottom: auto;
+}
+
+#uploader-dlg {
+    /*overflow: auto;*/
+    /*max-height: 100%*/
+}
+
+/*#uploader-dlg > div:nth-child(1) > div:nth-child(1) {*/
+    /*max-width: 100%*/
+/*}*/
+
+/*#uploader-dlg > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) {*/
+    /*width: 250px;*/
+    /*height: 200px*/
+/*}*/
+
+#image_file {
+    width: 213px;
+    height: 168px;
+    transform: rotate(0deg);
+}
+
+/*#uploader-dlg > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) {*/
+    /*width: 150px;*/
+    /*height: 150px;*/
+/*}*/
+
+#image_file_2 {
+    width: 100px;
+    height: 100px;
+    transform: rotate(0deg);
+}
+
+/*#uploader-dlg > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) {*/
+    /*margin-right: 30px*/
+/*}*/
+
+/*#uploader-dlg > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > form {*/
+    /*margin-left: 30px*/
+/*}*/
+
+#photoTags {
+    border: none !important;
+    float: right !important;
+}
+
+#description {
+    min-height: 100px;
+    max-height: 100px;
+    overflow: auto;
+}
+
+#pic {
+    padding: 9px 16px 8px;
+    position: absolute;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    display: none
+}
+
+/*#dropArea > div:nth-child(1) > div:nth-child(1) > label > div {*/
+    /*z-index: 1000*/
+/*}*/
