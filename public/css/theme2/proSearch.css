@@ -122,8 +122,15 @@
     margin: 0 0 5px 10px;
 }
 
+#textOfWhere2 {
+    display: flex;
+    align-items: center;
+    margin: 0 0 10px 10px;
+}
+
 #enterCityNameProSearch {
     width: 80% !important;
+    position: relative;
 }
 
 #GEO_SCOPED_SEARCH_INPUT {
@@ -143,10 +150,17 @@
     margin-top: 10px;
 }
 
-#dividerBoxCenterProSearch {
+#dividerUpBoxProSearch {
     background-color: #FFFFFF;
     height: 5px;
     box-shadow: 5px 5px 5px #888888;
+}
+#dividerCenterBoxProSearch {
+    border-bottom: 1px solid black;
+    width: 85%;
+    position: absolute;
+    bottom: 16px;
+    left: 33px;
 }
 
 #mainDivProSearch > center:nth-child(3) {
@@ -189,9 +203,9 @@
 #GEO_SCOPED_SEARCH_INPUT2 {
     color: #6d6d6d;
     border-color: #6d6d6d !important;
-    /*position: absolute;*/
+    position: absolute;
+    bottom: 16px;
     /*right: 0;*/
-    /*top: 40px;*/
     /*color: #6d6d6d;*/
     /*border: none !important;*/
 }
@@ -217,17 +231,17 @@
     /*margin-top: 4%;*/
 /*}*/
 
+.boxOfmainDivCompareProSearch {
+    display: flex;
+    justify-content: space-between;
+    margin: 70px 0 10px;
+}
+
 #mainDivCompareProSearch {
     width: 22%;
     height: 180px;
-    float: right;
-    position: relative
-}
-
-#mainDivCompareProSearch > div {
-    width: 180px;
-    margin: auto;
-    height: inherit
+    position: relative;
+    background-color: #ffe3b1;
 }
 
 #mainDivCompareProSearch > div > span {
@@ -246,18 +260,14 @@
 }
 
 #mainDivCompareProSearch > div > div:nth-child(4) {
-    padding: 10px
-}
-
-#mainDivCompareProSearch > div > div:nth-child(4) > span {
-    padding: 70px 70px;
-    border: 2px dotted #626262;
-    font-size: 15px
+    position: absolute;
+    left: 5px;
+    bottom: 4px;
 }
 
 #mainDivCompareProSearchBtn {
-    margin: 7px 0 0 47px;
-    float: left
+    display: flex;
+    justify-content: flex-end;
 }
 
 #compare {
@@ -316,4 +326,14 @@
     cursor: pointer;
     border-bottom: 2px solid gray;
     padding-bottom: 5px;
+}
+
+#searchspan .ui_close_x:before {
+    font-size: 60px;
+    line-height: 70px;
+}
+
+#close_span_search {
+    width: 70px !important;
+    height: 70px !important;
 }

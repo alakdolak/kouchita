@@ -91,13 +91,7 @@
                                         @if($placeMode == 'mainPage')
                                             <div class="ui_columns datepicker_box trip_search metaDatePicker rounded_lockup usePickerTypeIcons preDates noDates with_children hideOnPhone mainDivSearchInputMainPage">
                                                 <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column is-4 search_typeahead wctx-tripsearch searchDivForScroll" style="border-radius: 10px !important;">
-                                                    <div class="ui_picker">
-                                                        <span class="typeahead_align ui_typeahead">
-                                                            <input onkeyup="search(event)" type="text" id="placeName" class="typeahead_input" placeholder="به کجا می‌روید؟"/>
-                                                            <input type="hidden" id="placeId">
-                                                        </span>
-                                                        <div id="result" class="data_holder"></div>
-                                                    </div>
+                                                    <div onclick="$('#searchPane').removeClass('hidden');  $('#darkModeMainPage').toggle();">به کجا می‌روید؟</div>
                                                 </div>
                                                 <div class="clear-both"></div>
                                                 {{--<div class="ui_column" style="width: 35%;padding: 10px !important;float: right;border-radius:  0 10px 10px 0;">--}}
@@ -332,7 +326,7 @@
                                                 <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column" onclick="$('#phoneSearchPopUp').removeClass('hidden')">
                                                     <div class="ui_picker" >
                                                                 <span class="typeahead_align ui_typeahead">
-                                                                    <input onkeyup="search(event)" type="text" id="placeName" class="typeahead_input" placeholder="شهر یا نام مکان موردنظر"/>
+                                                                    <input onkeyup="search(event)" type="text" class="typeahead_input" placeholder="شهر یا نام مکان موردنظر"/>
                                                                     <input type="hidden" id="placeId">
                                                                 </span>
                                                         <div id="resultPhone" class="data_holder"></div>
@@ -363,6 +357,228 @@
             @include('layouts.loginPopUp')
         @endif
 
+        <span id="searchPane" class="statePane ui_overlay ui_modal editTags hidden searchPanes">
+            <div id="searchDivForScroll" class="prw_rup prw_search_typeahead spSearchDivForScroll">
+                <div class="ui_picker">
+                    <div class="typeahead_align ui_typeahead" style="display: flex; width: 100%">
+                        <div class="spGoWhere">به کجا</div>
+                        <input onkeyup="search(event, this.value)" type="text" id="placeName" class="typeahead_input searchPaneInput" placeholder="دوست دارید سفر کنید؟ (نام شهر یا استان را وارد کنید)"/>
+                        <input type="hidden" id="placeId">
+                    </div>
+                    <div class="spBorderBottom"></div>
+                    <div id="result" class="data_holder">
+                        <div>
+                            <div class="icons location spIcons"></div>
+                            <div style="cursor: pointer" class="suggest" id="" onclick="">استان اصفهان</div>
+                        </div>
+                        <div>
+                            <div class="icons location spIcons"></div>
+                            <div style="cursor: pointer" class="suggest" id="" onclick="">استان تهران</div>
+                        </div>
+                        <div>
+                            <div class="icons location spIcons"></div>
+                            <div style="cursor: pointer" class="suggest" id="" onclick="">استان یزد</div>
+                        </div>
+                        <div>
+                            <div class="icons location spIcons"></div>
+                            <div style="cursor: pointer" class="suggest" id="" onclick="">استان گیلان</div>
+                        </div>
+                    </div>
+                    <div class="visitSuggestionDiv">
+                        <div class="visitSuggestionText">بازدید های اخیر شما</div>
+                        <div class="visitSuggestion4Box">
+                            <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column spBoxOfSuggestion">
+                                <div class="poi">
+                                    <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
+                                        <div class="prw_rup prw_common_thumbnail_no_style_responsive">
+                                            <div class="prv_thumb has_image">
+                                                <div class="image_wrapper spImageWrapper landscape landscapeWide">
+                                                    <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <div class="detail rtl">
+                                        <div class="item tags ng-binding">اصفهان <span>در </span><span class="ng-binding">اصفهان</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column spBoxOfSuggestion">
+                                    <div class="poi">
+                                        <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
+                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
+                                                <div class="prv_thumb has_image">
+                                                    <div class="image_wrapper spImageWrapper landscape landscapeWide">
+                                                        <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <div class="detail rtl">
+                                            <div class="item tags ng-binding">اصفهان <span>در </span><span class="ng-binding">اصفهان</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column spBoxOfSuggestion">
+                                    <div class="poi">
+                                        <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
+                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
+                                                <div class="prv_thumb has_image">
+                                                    <div class="image_wrapper spImageWrapper landscape landscapeWide">
+                                                        <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <div class="detail rtl">
+                                            <div class="item tags ng-binding">اصفهان <span>در </span><span class="ng-binding">اصفهان</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column spBoxOfSuggestion">
+                                <div class="poi">
+                                    <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
+                                        <div class="prw_rup prw_common_thumbnail_no_style_responsive">
+                                            <div class="prv_thumb has_image">
+                                                <div class="image_wrapper spImageWrapper landscape landscapeWide">
+                                                    <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <div class="detail rtl">
+                                        <div class="item tags ng-binding">اصفهان <span>در </span><span class="ng-binding">اصفهان</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="visitSuggestion4Box">
+                            <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column spBoxOfSuggestion">
+                                <div class="poi">
+                                    <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
+                                        <div class="prw_rup prw_common_thumbnail_no_style_responsive">
+                                            <div class="prv_thumb has_image">
+                                                <div class="image_wrapper spImageWrapper landscape landscapeWide">
+                                                    <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <div class="detail rtl">
+                                        <div class="item tags ng-binding">اصفهان <span>در </span><span class="ng-binding">اصفهان</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column spBoxOfSuggestion">
+                                    <div class="poi">
+                                        <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
+                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
+                                                <div class="prv_thumb has_image">
+                                                    <div class="image_wrapper spImageWrapper landscape landscapeWide">
+                                                        <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <div class="detail rtl">
+                                            <div class="item tags ng-binding">اصفهان <span>در </span><span class="ng-binding">اصفهان</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column spBoxOfSuggestion">
+                                    <div class="poi">
+                                        <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
+                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
+                                                <div class="prv_thumb has_image">
+                                                    <div class="image_wrapper spImageWrapper landscape landscapeWide">
+                                                        <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <div class="detail rtl">
+                                            <div class="item tags ng-binding">اصفهان <span>در </span><span class="ng-binding">اصفهان</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column spBoxOfSuggestion">
+                                <div class="poi">
+                                    <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
+                                        <div class="prw_rup prw_common_thumbnail_no_style_responsive">
+                                            <div class="prv_thumb has_image">
+                                                <div class="image_wrapper spImageWrapper landscape landscapeWide">
+                                                    <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <div class="detail rtl">
+                                        <div class="item tags ng-binding">اصفهان <span>در </span><span class="ng-binding">اصفهان</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div onclick="$('#searchPane').addClass('hidden'); $('.dark').hide()" class="ui_close_x"></div>
+        </span>
+
+        <span id="statePane1" class="statesearchDivForScrollPane ui_overlay ui_modal editTags hidden pop-up-Panes">
+            <div class="header_text">استان مورد نظر</div>
+            <div class="subheader_text">
+           استان مورد نظر خود را از بین استان های موجود انتخاب کنید
+            </div>
+            <div class="body_text">
+
+                <select  id="states"></select>
+
+                <div class="submitOptions">
+                    <button onclick="document.location.href = $('#states').val()" class="btn btn-success">تایید</button>
+                    <input type="submit" onclick="$('.dark').hide(); $('#statePane1').addClass('hidden')" value="خیر" class="btn btn-default">
+                </div>
+            </div>
+            <div onclick="$('#statePane1').addClass('hidden'); $('.dark').hide()" class="ui_close_x"></div>
+        </span>
+
+        <span id="statePane2" class="statePane ui_overlay ui_modal editTags hidden pop-up-Panes">
+            <div class="header_text">شهر مورد نظر</div>
+            <div class="subheader_text">
+           شهر مورد نظر خود را از بین شهر های موجود انتخاب کنید
+            </div>
+            <div class="body_text">
+
+                <select  onchange="getCities()" id="states2"></select>
+
+                <select  id="cities"></select>
+
+                <div class="submitOptions">
+                    <button onclick="document.location.href = $('#cities').val()" class="btn btn-success">تایید</button>
+                    <input type="submit" onclick="$('.dark').hide(); $('#statePane2').addClass('hidden')" value="خیر" class="btn btn-default">
+                </div>
+            </div>
+            <div onclick="$('#statePane2').addClass('hidden'); $('.dark').hide()" class="ui_close_x"></div>
+        </span>
+
+        <span id="goyeshPane" class="ui_overlay ui_modal editTags hidden pop-up-Panes">
+            <div class="header_text">گویش مورد نظر</div>
+            <div class="subheader_text">
+           گویش مورد نظر خود را از بین گویش های موجود انتخاب کنید
+            </div>
+            <div class="body_text">
+
+                <select id="goyesh"></select>
+
+                <div class="submitOptions">
+                    <button onclick="document.location.href = $('#goyesh').val()" class="btn btn-success">تایید</button>
+                    <input type="submit" onclick="$('.dark').hide(); $('#goyeshPane').addClass('hidden')" value="خیر" class="btn btn-default">
+                </div>
+            </div>
+            <div onclick="$('#goyeshPane').addClass('hidden'); $('.dark').hide()" class="ui_close_x"></div>
+        </span>
+
+        <div class="ui_backdrop dark" id="darkModeMainPage"></div>
+
         {{--@include('layouts.phonePopUp')--}}
 
         <script defer>
@@ -372,11 +588,12 @@
                 "" != $("#placeId").val() && (document.location.href = $("#placeId").val())
             }
 
-            function search(e) {
+            function search(e, val = '') {
 
-                val = $("#placeName").val();
+                if(val == '')
+                    val = $("#placeName").val();
+
                 $(".suggest").css("background-color", "transparent").css("padding", "0").css("border-radius", "0");
-
                 if (null == val || "" == val || val.length < 2)
                     $("#result").empty();
                 else {
@@ -446,12 +663,15 @@
 
                                 for (i = 0; i < response.length; i++) {
                                     if ("state" == response[i].mode) {
+                                        newElement += "<div class='icons location' style='float: right;margin: -3px 0 0 3px;'></div>";
                                         newElement += "<p style='cursor: pointer' class='suggest' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "استان ' + response[i].targetName + "\")'>استان " + response[i].targetName + "</p>";
                                     }
                                     else if ("city" == response[i].mode) {
+                                        newElement += "<div class='icons location' style='float: right;margin: -3px 0 0 3px;'></div>";
                                         newElement += "<p style='cursor: pointer' class='suggest' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "شهر ' + response[i].targetName + " در " + response[i].stateName + "\")'>شهر " + response[i].targetName + " در " + response[i].stateName + " </p>";
                                     }
                                     else
+                                        // newElement += "<div class='icons location' style='float: right;margin: -3px 0 0 3px;'></div>";
                                         newElement += "<p style='cursor: pointer' class='suggest' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")'>" + response[i].targetName + " در " + response[i].cityName + " در " + response[i].stateName + "</p>";
                                 }
 
@@ -649,63 +869,6 @@
         <script async src="{{URL::asset('js/middleBanner.js')}}"></script>
 
         <script async src="{{URL::asset('js/slideBar.js')}}"></script>
-
-        <span id="statePane1" class="statePane ui_overlay ui_modal editTags hidden pop-up-Panes">
-
-            <div class="header_text">استان مورد نظر</div>
-            <div class="subheader_text">
-           استان مورد نظر خود را از بین استان های موجود انتخاب کنید
-            </div>
-            <div class="body_text">
-
-                <select  id="states"></select>
-
-                <div class="submitOptions">
-                    <button onclick="document.location.href = $('#states').val()" class="btn btn-success">تایید</button>
-                    <input type="submit" onclick="$('.dark').hide(); $('#statePane1').addClass('hidden')" value="خیر" class="btn btn-default">
-                </div>
-            </div>
-            <div onclick="$('#statePane1').addClass('hidden'); $('.dark').hide()" class="ui_close_x"></div>
-        </span>
-
-        <span id="statePane2" class="statePane ui_overlay ui_modal editTags hidden pop-up-Panes">
-
-            <div class="header_text">شهر مورد نظر</div>
-            <div class="subheader_text">
-           شهر مورد نظر خود را از بین شهر های موجود انتخاب کنید
-            </div>
-            <div class="body_text">
-
-                <select  onchange="getCities()" id="states2"></select>
-
-                <select  id="cities"></select>
-
-                <div class="submitOptions">
-                    <button onclick="document.location.href = $('#cities').val()" class="btn btn-success">تایید</button>
-                    <input type="submit" onclick="$('.dark').hide(); $('#statePane2').addClass('hidden')" value="خیر" class="btn btn-default">
-                </div>
-            </div>
-            <div onclick="$('#statePane2').addClass('hidden'); $('.dark').hide()" class="ui_close_x"></div>
-        </span>
-
-        <span id="goyeshPane" class="ui_overlay ui_modal editTags hidden pop-up-Panes">
-            <div class="header_text">گویش مورد نظر</div>
-            <div class="subheader_text">
-           گویش مورد نظر خود را از بین گویش های موجود انتخاب کنید
-            </div>
-            <div class="body_text">
-
-                <select id="goyesh"></select>
-
-                <div class="submitOptions">
-                    <button onclick="document.location.href = $('#goyesh').val()" class="btn btn-success">تایید</button>
-                    <input type="submit" onclick="$('.dark').hide(); $('#goyeshPane').addClass('hidden')" value="خیر" class="btn btn-default">
-                </div>
-            </div>
-            <div onclick="$('#goyeshPane').addClass('hidden'); $('.dark').hide()" class="ui_close_x"></div>
-        </span>
-
-        <div class="ui_backdrop dark" id="darkModeMainPage"></div>
 
         <script src="{{URL::asset('js/adv.js')}}"></script>
 

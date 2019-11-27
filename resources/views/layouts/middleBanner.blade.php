@@ -81,7 +81,7 @@
                         </div>
                         <div class="prw_rup prw_shelves_geo_shelf_item_widget ui_column col-lg-3 is-6-mobile">
                             <div class="poi">
-                                <div  onclick="chooseState('soghat')" class="thumbnail otherServicesBoxes">
+                                <div onclick="chooseState('soghat')" class="thumbnail otherServicesBoxes">
                                     <div class="prw_rup prw_common_thumbnail_no_style_responsive" data-prwidget-name="common_thumbnail_no_style_responsive" data-prwidget-init="">
                                         <div class="prv_thumb has_image">
                                             <div class="image_wrapper landscape landscapeWide">
