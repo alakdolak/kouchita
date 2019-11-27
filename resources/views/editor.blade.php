@@ -207,7 +207,7 @@
     }
 </style>
 
-<span id="editPane" class="ui_overlay ui_modal photoUploadOverlay hiden">
+<span id="editPane" class="ui_overlay ui_modal photoUploadOverlay hidden">
    <div class="body_text" style="padding-top: 12px">
        {{--<div class="photoUploader">--}}
            <div class="headerBar epHeaderBar">
@@ -334,7 +334,7 @@
     <div class="ui_close_x" onclick="$('#editPane').addClass('hidden'); $('.dark').addClass('hidden')"></div>
 </span>
 
-<span id="photoEditor" class="ui_overlay ui_modal photoUploadOverlay hiden">
+<span id="photoEditor" class="ui_overlay ui_modal photoUploadOverlay hidden" style="display: none">
      <div class="body_text">
          <div class="photoUploader">
              <div class="headerBar">
