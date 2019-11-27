@@ -1,3 +1,6 @@
+body {
+    position: relative;
+}
 .ui_overlay:before {
     right: 120px;
     left: auto;
@@ -800,6 +803,10 @@ p {
     margin: 15px 0 !important;
 }
 
+#introduction > .block_wrap {
+    margin-bottom: 0;
+}
+
 #showMore {
     float: left;
     cursor: pointer;
@@ -1556,14 +1563,26 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     float: right;
 }
 
+.sharePageIcon::before {
+    content: '\e099' !important;
+    transform: rotateY(180deg);
+    font-size: 20px;
+    position: absolute;
+    right: 15px;
+}
+
 .saveAsBookmarkIcon::before , .sharePageIcon::before {
     content: "\e0dd";
     font-family: shazdemosafer-tour !important;
     float: right;
 }
 
-.saveAsBookmarkLabel , .sharePageLabel {
+.saveAsBookmarkLabel {
     margin-right: 10px;
+}
+
+.sharePageLabel {
+    margin-right: 20px;
 }
 
 .ui_icon.casino::before , .ui_icon.casino::before {
@@ -1724,7 +1743,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     text-align: right;
 }
 
-#commentsMainDivHeader {
+.commentsMainDivHeader , .commentsMainDivFooter , .showingPhotosTitle {
     background-color: #0076a3;
     color: white;
     font-weight: 700;
@@ -1732,7 +1751,11 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     font-size: 15px;
 }
 
-#profilePicForComment {
+.commentsMainDivFooter {
+    text-align: center;
+}
+
+#profilePicForComment , #profilePicForCommentModal {
     position: absolute;
     top: 10px;
     right: 15px;
@@ -1740,7 +1763,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     height: 50px;
 }
 
-#commentInputBox {
+#commentInputBox , #commentInputBoxModal {
     width: 100%;
     border-radius: 0;
     background: white;
@@ -1755,7 +1778,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     bottom: 10px;
 }
 
-#commentInputBox > textarea {
+#commentInputBox > textarea , #commentInputBoxModal > textarea {
     text-align: justify;
     font-size: 15px;
     font-weight: 600;
@@ -1763,7 +1786,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     resize: none;
 }
 
-#commentMoreSettingBar {
+.commentMoreSettingBar {
     background: white;
     display: inline-block;
     width: 100%;
@@ -1798,52 +1821,52 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     margin-right: 23px;
 }
 
-#addPhotoCommentIcon {
+.addPhotoCommentIcon {
     position: absolute;
     right: -2px;
     top: -10px;
 }
 
-#addPhotoCommentIcon::before {
+.addPhotoCommentIcon::before {
     content: '\E0B1';
     font-family: shazdemosafer-tour !important;
     font-size: 30px;
     font-weight: 500;
 }
 
-#addVideoCommentIcon{
+.addVideoCommentIcon{
     position: absolute;
     right: -2px;
     top: -10px;
 }
 
-#addVideoCommentIcon::before {
+.addVideoCommentIcon::before {
     content: '\E0B2';
     font-family: shazdemosafer-tour !important;
     font-size: 30px;
     font-weight: 500;
 }
 
-#add360VideoCommentIcon{
+.add360VideoCommentIcon{
     position: absolute;
     right: -2px;
     top: -10px;
 }
 
-#add360VideoCommentIcon::before {
+.add360VideoCommentIcon::before {
     content: '\E0AE';
     font-family: shazdemosafer-tour !important;
     font-size: 30px;
     font-weight: 500;
 }
 
-#tagFriendCommentIcon{
+.tagFriendCommentIcon{
     position: absolute;
     right: 2px;
     top: -7px;
 }
 
-#tagFriendCommentIcon::before {
+.tagFriendCommentIcon::before {
     content: '\E087';
     font-family: shazdemosafer-tour !important;
     font-size: 25px;
@@ -1913,8 +1936,8 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 }
 
 .commentWriterPicShow {
-    width: 45px;
-    height: 45px;
+    width: 55px;
+    height: 55px;
     background-color: #E5E5E5;
     display: inline-block;
     float: right;
@@ -1945,6 +1968,14 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 .commentWriterExperienceDetails {
     color: #666666;
     margin-bottom: 10px;
+    direction: rtl;
+}
+
+#showingPhotosModal .commentWriterDetailsShow {
+    padding: 10px 20px;
+    margin: 0 10px;
+    width: 98%;
+    border-bottom: 2px solid #e5e5e5;
 }
 
 .commentWriterExperiencePlace {
@@ -2016,11 +2047,11 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     border: 2px solid black;
 }
 
-.quantityOfLikes {
+.quantityOfLikes .feedbackStatistic {
     color: #666666;
 }
 
-.quantityOfLikes > span {
+.quantityOfLikes > span , .feedbackStatistic > span {
     color: #0076a3;
 }
 
@@ -2355,6 +2386,385 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     font-size: 15px;
 }
 
+#commentLink {
+    text-decoration: none;
+    color: inherit;
+}
+
 /*.ui_bubble_rating::before {*/
 /*    display: none;*/
 /*}*/
+
+#commentModal {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+}
+
+#commentModalMainDiv > .modal-dialog {
+    width: 753px;
+}
+
+#commentModalMainDiv > .modal-dialog > .modal-content , #commentModalMainDiv > .modal-dialog > .modal-details-content {
+    border-radius: 0;
+    border: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+#commentModalMainDiv {
+    z-index: 10;
+    position: absolute;
+    right: 24px;
+    top: 320px;
+}
+
+.modal-content .commentsMainDivHeader , .modal-content .showingPhotosTitle {
+    text-align: right;
+}
+
+.addParticipantName {
+    background-color: #d2d2d2;
+    display: inline-block;
+    width: 97%;
+    margin: 0 10px;
+    direction: rtl;
+}
+
+.modal-content #commentInputBoxModal {
+    border: none;
+}
+
+.commentPhotosMainDiv {
+    display: inline-block;
+    width: 97%;
+    margin: 0 10px;
+    direction: rtl;
+}
+
+.addParticipantSpan {
+    display:inline-block;
+    float:right;
+    padding: 2px 10px 0 0;
+    font-size: 18px;
+}
+
+.commentPhotosDiv , .commentVideosDiv {
+    /*border: 1px solid black;*/
+    background-color: black;
+    display: inline-block;
+    float: right;
+    height: 100px;
+    width: 100px;
+    margin-left: 5px;
+    position: relative;
+}
+
+.deleteUploadPhotoComment::before {
+    content: '\E02C';
+    font-family: shazdemosafer-tour !important;
+    color: white;
+    font-size: 20px;
+}
+
+.deleteUploadPhotoComment {
+    display: inline-block;
+    height: 25px;
+    width: 20px;
+    position: absolute;
+    top: -3px;
+    left: 0;
+    z-index: 10;
+}
+
+.editUploadPhotoComment::before {
+    content: '\E00F';
+    font-family: shazdemosafer-tour !important;
+    color: white;
+    font-size: 20px;
+}
+
+.editUploadPhotoComment {
+    display: inline-block;
+    height: 25px;
+    width: 20px;
+    position: absolute;
+    bottom: 0;
+    z-index: 10;
+}
+
+.videosLengthDiv {
+    position: absolute;
+    bottom: 0;
+    left: 4px;
+    color: white;
+    font-size: 15px;
+}
+
+.addPhotosOrVideosBox {
+    background-color: #E5E5E5;
+    color: #c6c6c6;
+    display: inline-block;
+    float: right;
+    height: 100px;
+    width: 100px;
+    margin-left: 5px;
+    position: relative;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 10px;
+}
+
+.addPhotosOrVideosBox > img {
+    position: absolute;
+    top: 40px;
+    right: 30px;
+}
+
+#addParticipantInputBoxModal {
+    border-radius: 0;
+    background: white;
+    /*padding: 20px 75px 15px;*/
+    position: relative;
+    direction: rtl;
+    width: 96%;
+    float: left;
+}
+
+#addParticipantInputBoxModal > textarea {
+    resize: none;
+    text-align: right;
+    line-height: 1.5;
+    height: 25px;
+    font-size: 15px;
+    color: #c6c6c6;
+    font-weight: 700;
+}
+
+.participantDivMainDiv {
+    position: absolute;
+    top: 3px;
+    left: 0;
+    width: 100%;
+    padding: 0 5px;
+}
+
+.participantDiv {
+    border-radius: 10px;
+    background-color: #E5E5E5;
+    position: relative;
+    display: inline-block;
+    float: left;
+    font-size: 15px;
+    padding: 0 10px 0 50px;
+    width: auto;
+    margin-right: 5px;
+}
+
+.removeParticipantBtn::before {
+    content: '\E02C';
+    font-family: shazdemosafer-tour !important;
+    position: absolute;
+    background-color: #c7c7c7;
+    left: 10px;
+    font-size: 21px;
+    line-height: 1;
+}
+
+.modal-details-content {
+    background: white;
+    margin-top: 5px;
+}
+
+.modal-details-content .commentOptionsBoxes {
+    float: inherit;
+}
+
+.modal-details-content .commentMoreSettingBar {
+    margin: 0 55px;
+    width: 85%;
+    border: none;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.commentQuestionsRatingsBox {
+    background: #e5e5e5;
+    padding: 15px 9px;
+    width: 100%;
+    text-align: right;
+}
+
+.commentQuestionsForm {
+    margin: 0 55px;
+    width: 85%;
+    border-bottom: 1px solid #e5e5e5;
+    display: inline-block;
+    padding: 10px 0;
+}
+
+.commentQuestionsRatingsBoxHeader {
+    display: inline-block;
+    width: 100%;
+    text-align: right;
+    font-size: 15px;
+    font-weight: 700;
+    padding-right: 15px;
+}
+
+.visitKindCommentModal {
+    display: inline-block;
+    width: 70%;
+}
+
+.visitTimeCommentModal {
+    display: inline-block;
+    width: 65%;
+}
+
+.visitKindCommentModal .filterChoices , .visitTimeCommentModal .filterChoices{
+    background-color: #e5e5e5;
+    border-radius: 10px;
+    text-align: center;
+    float: right;
+    width: 17%;
+    margin: 0 10px;
+    padding: 5px 0;
+    font-size: 12px;
+}
+
+.visitKindCommentModalHeader , .visitTimeCommentModalHeader{
+    display: inline-block;
+    float: right;
+    font-size: 14px;
+    font-weight: 700;
+    margin-top: 4px;
+}
+
+.addOriginCity {
+    display: inline-block;
+    float: right;
+    font-size: 14px;
+    font-weight: 700;
+    margin-top: 4px;
+}
+
+#addOriginCityInputBoxModal {
+    border-radius: 0;
+    background: white;
+    direction: rtl;
+    width: 75%;
+    float: left;
+}
+
+#addOriginCityInputBoxModal > textarea {
+    resize: none;
+    text-align: right;
+    line-height: 1.5;
+    height: 25px;
+    font-size: 15px;
+    color: #c6c6c6;
+    font-weight: 700;
+}
+
+.photosFeedBackBtn {
+    float: left;
+    display: inline-block;
+    width: 24%;
+    margin-top: 15px;
+}
+
+#showingPhotosModal .commentWriterExperienceDetails {
+    display: inline-block;
+    float: right;
+}
+
+.likeBox {
+    text-align: center;
+    float: right;
+}
+
+.likeBox::after {
+    content: '\e057';
+    font-family: shazdemosafer-tour !important;
+}
+
+.dislikeBox {
+    text-align: center;
+    float: right;
+}
+
+.dislikeBox::after {
+    content: '\e058';
+    font-family: shazdemosafer-tour !important;
+}
+
+#showingPhotosModal .modal-dialog {
+    width: 1000px;
+}
+
+.feedbackStatistic {
+    text-align: center;
+    direction: rtl;
+}
+
+.rightColPhotosModalMainDiv {
+    display: inline-block;
+    margin: 5px 0;
+    padding: 0 10px;
+    border-left: 2px solid #e5e5e5;
+}
+
+.rightColPhotosShowingModal {
+    height: 130px;
+    margin-bottom: 5px;
+    display: inline-block;
+    width: 100%;
+    background-color: black;
+}
+
+.leftColPhotosModalMainDiv {
+    padding: 70px 70px 0;
+}
+
+.selectedPhotoShowingModal {
+    height: 486px;
+    width: 100%;
+    background-color: black;
+}
+
+.photosDescriptionShowingModal {
+    display: inline-block;
+    margin: 0 10px;
+    width: 98%;
+    border-top: 2px solid #e5e5e5;
+    padding: 10px 0 20px;
+    color: #666666;
+    text-align: right;
+    direction: rtl;
+}
+
+#showingPhotosModal .modal-content {
+    border-radius: 0;
+}
+
+#showingPhotosMainDivHeader > button.close:before , .commentsMainDivHeader > button.close:before {
+    display: none;
+}
+
+.commentsMainDivHeader > button.close {
+    margin: 0 0 0 5px !important;
+}
+
+#showingPhotosMainDivHeader > button.close , .commentsMainDivHeader > button.close {
+    float: left;
+    margin: 8px 0 0 15px;
+    font-size: 30px;
+    color: white;
+    opacity: 1;
+}

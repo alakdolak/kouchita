@@ -252,6 +252,10 @@
     padding-right: 10px !important;
 }
 
+.pd-rt-15 {
+    padding-right: 15px;
+}
+
 /*padding bottom*/
 
 .pd-bt-10 {
@@ -320,6 +324,10 @@
 
 .pd-40-30 {
     padding: 40px 30px;
+}
+
+.pd-2-3-0-0 {
+    padding: 2px 3px 0 0;
 }
 
 /*margin top*/
@@ -876,6 +884,14 @@
 
 .bg-color-grey {
     background-color: #cfcfcf
+}
+
+.bg-color-yellow {
+    background-color: #fcc156;
+}
+
+.bg-color-yellowImp {
+    background-color: #fcc156 !important;
 }
 
 .bg-size-100-100 {
