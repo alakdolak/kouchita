@@ -11,31 +11,31 @@
                         <div id="3box" class="swiper-container threeBox">
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide">
-                                    <img class="eachPicOf3Box" src="{{URL::asset('defaultPic/1.jpg')}}" alt="1">
+                                    <img class="eachPicOf3Box" src="{{URL::asset('_images/defaultPic/1.jpg')}}" alt="1">
                                 </div>
                                 <div class="swiper-slide">
-                                    <img class="eachPicOf3Box" src="{{URL::asset('defaultPic/2.jpg')}}" alt="2">
+                                    <img class="eachPicOf3Box" src="{{URL::asset('_images/defaultPic/2.jpg')}}" alt="2">
                                 </div>
                                 <div class="swiper-slide">
-                                    <img class="eachPicOf3Box" src="{{URL::asset('defaultPic/3.jpg')}}" alt="3">
+                                    <img class="eachPicOf3Box" src="{{URL::asset('_images/defaultPic/3.jpg')}}" alt="3">
                                 </div>
                                 <div class="swiper-slide">
-                                    <img class="eachPicOf3Box" src="{{URL::asset('defaultPic/4.jpg')}}" alt="4">
+                                    <img class="eachPicOf3Box" src="{{URL::asset('_images/defaultPic/4.jpg')}}" alt="4">
                                 </div>
                                 <div class="swiper-slide">
-                                    <img class="eachPicOf3Box" src="{{URL::asset('defaultPic/5.jpg')}}" alt="5">
+                                    <img class="eachPicOf3Box" src="{{URL::asset('_images/defaultPic/5.jpg')}}" alt="5">
                                 </div>
                                 <div class="swiper-slide">
-                                    <img class="eachPicOf3Box" src="{{URL::asset('defaultPic/6.jpg')}}" alt="6">
+                                    <img class="eachPicOf3Box" src="{{URL::asset('_images/defaultPic/6.jpg')}}" alt="6">
                                 </div>
                                 <div class="swiper-slide">
-                                    <img class="eachPicOf3Box" src="{{URL::asset('defaultPic/7.jpg')}}" alt="7">
+                                    <img class="eachPicOf3Box" src="{{URL::asset('_images/defaultPic/7.jpg')}}" alt="7">
                                 </div>
                                 <div class="swiper-slide">
-                                    <img class="eachPicOf3Box" src="{{URL::asset('defaultPic/8.jpg')}}" alt="8">
+                                    <img class="eachPicOf3Box" src="{{URL::asset('_images/defaultPic/8.jpg')}}" alt="8">
                                 </div>
                                 <div class="swiper-slide">
-                                    <img class="eachPicOf3Box" src="{{URL::asset('defaultPic/9.jpg')}}" alt="9">
+                                    <img class="eachPicOf3Box" src="{{URL::asset('_images/defaultPic/9.jpg')}}" alt="9">
                                 </div>
                             </div>
                             <!-- Add Pagination -->
@@ -81,7 +81,7 @@
                         </div>
                         <div class="prw_rup prw_shelves_geo_shelf_item_widget ui_column col-lg-3 is-6-mobile">
                             <div class="poi">
-                                <div  onclick="chooseState('soghat')" class="thumbnail otherServicesBoxes">
+                                <div onclick="chooseState('soghat')" class="thumbnail otherServicesBoxes">
                                     <div class="prw_rup prw_common_thumbnail_no_style_responsive" data-prwidget-name="common_thumbnail_no_style_responsive" data-prwidget-init="">
                                         <div class="prv_thumb has_image">
                                             <div class="image_wrapper landscape landscapeWide">

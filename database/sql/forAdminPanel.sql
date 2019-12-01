@@ -22,12 +22,3 @@
 
 
 # new
-ALTER TABLE `hotels` ADD `picNumber` TINYINT NULL AFTER `file`, ADD `alt` VARCHAR(100) NULL AFTER `picNumber`;
-ALTER TABLE `amaken` ADD `picNumber` TINYINT NULL AFTER `file`, ADD `alt` VARCHAR(100) NULL AFTER `picNumber`;
-ALTER TABLE `majara` ADD `picNumber` TINYINT NULL AFTER `file`, ADD `alt` VARCHAR(100) NULL AFTER `picNumber`;
-ALTER TABLE `restaurant` ADD `picNumber` TINYINT NULL AFTER `file`, ADD `alt` VARCHAR(100) NULL AFTER `picNumber`;
-
-ALTER TABLE `mahalifood` CHANGE `mainPic` `picNumber` TINYINT NULL;
-ALTER TABLE `mahalifood` ADD `file` VARCHAR(100) NULL AFTER `cityId`;
-ALTER TABLE `sogatsanaies` CHANGE `mainPic` `picNumber` TINYINT NULL;
-ALTER TABLE `sogatsanaies` ADD `file` VARCHAR(100) NULL AFTER `cityId`;

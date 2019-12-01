@@ -318,6 +318,56 @@
     margin-right: 5px
 }
 
+
+
+.searchPanes {
+    position: fixed;
+    left: 10%;
+    right: 10%;
+    top: 15%;
+    bottom: auto;
+    overflow: auto;
+    max-height: 500px;
+    z-index: 10000001;
+}
+
+.searchPanes > div:nth-child(3) > select, .searchPanes > div:nth-child(3) > div {
+    margin-top: 25px;
+}
+
+.searchPanes > div:nth-child(3) > div > button {
+    color: #FFF;
+    background-color: #4dc7bc;
+    border-color: #4dc7bc;
+}
+
+.spSearchDivForScroll {
+    position: relative;
+}
+
+input[type="text"].searchPaneInput::-webkit-input-placeholder {
+    font-size: 1.3em;
+    font-weight: 500;
+}
+
+.spGoWhere {
+    color: #0c0593;
+    width: 68px;
+    font-size: 1.3em;
+    font-weight: 500;
+}
+
+.spBorderBottom {
+    border-bottom: 2px solid #4DC7BC;
+    margin: 10px 0 0;
+}
+
+.spIcons {
+    float: right;
+    margin: -3px 0 0 3px;
+}
+
+
 .pop-up-Panes {
     position: fixed;
     left: 30%;
@@ -362,6 +412,49 @@
 
 #result {
     overflow-y: auto;
-    /*margin-top: 10px;*/
-    max-height: 335px;
+    max-height: 300px;
+    border: 2px solid #4DC7BC;
+    border-top: 0;
+    width: 45%;
+    padding: 10px 5px 5px;
+    display: inline-block;
+}
+
+.visitSuggestionDiv {
+    overflow-y: auto;
+    max-height: 350px;
+    border: 2px solid #4DC7BC;
+    border-top: 0;
+    width: 50%;
+    padding: 10px 5px 5px;
+    float: left;
+}
+
+.visitSuggestion4Box {
+    display: flex;
+    justify-content: space-between;
+}
+
+.visitSuggestionText {
+    text-align: center;
+    padding: 5px 0 10px;
+    color: gray;
+}
+
+.spBoxOfSuggestion {
+    padding: 1px;
+}
+
+.spImageWrapper {
+    height: 100px;
+}
+
+#searchPane .ui_close_x {
+    width: 70px;
+    height: 70px;
+}
+
+#searchPane .ui_close_x:before {
+    font-size: 50px;
+    line-height: 70px;
 }

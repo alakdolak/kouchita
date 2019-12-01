@@ -15,7 +15,7 @@ class CreatePlacePicsTable extends Migration
     {
         Schema::create('placepics', function (Blueprint $table) {
             $table->increments('id');
-            $table->tinyInteger('picNumber');
+            $table->string('picNumber');
             $table->unsignedInteger('placeId');
             $table->unsignedInteger('kindPlaceId');
             $table->string('alt')->nullable();
