@@ -1772,7 +1772,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     direction: rtl;
 }
 
-.commentSmileyIcon {
+.commentSmileyIcon , .answerSmileyIcon {
     position: absolute;
     left: 15px;
     bottom: 10px;
@@ -1794,7 +1794,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     border: 1px solid #ccc;
 }
 
-.commentOptionsBoxes {
+.commentOptionsBoxes , .answersOptionsBoxes {
     background-color: #e5e5e5;
     display: inline-block;
     float: right;
@@ -1807,13 +1807,8 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     position: relative;
 }
 
-.commentOptionsBoxes > span {
+.commentOptionsBoxes > span:not(:first-child) {
     display: inline-block;
-}
-
-.commentOptionsBoxes > span:nth-child(1) {
-    line-height: 1.7;
-    margin-right: 5px;
 }
 
 .commentOptionsText {
@@ -1881,6 +1876,16 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     color: #8b8b8b;
 }
 
+#moreSettingComment::before {
+    content: '\E091';
+    font-family: shazdemosafer-tour !important;
+    font-size: 35px;
+    position: absolute;
+    top: 12px;
+    right: 2px;
+    color: #666;
+}
+
 #moreSettingCommentManDiv {
     height: 32px;
     width: 45px;
@@ -1930,12 +1935,12 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     padding: 10px 20px;
 }
 
-.commentWriterDetailsShow {
+.commentWriterDetailsShow , .answersWriterDetailsShow {
     display: inline-block;
     width: 100%;
 }
 
-.commentWriterPicShow {
+.commentWriterPicShow , .answersWriterPicShow {
     width: 55px;
     height: 55px;
     background-color: #E5E5E5;
@@ -1944,12 +1949,17 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     margin-left: 10px;
 }
 
+.userProfileNameAnswers {
+    font-size: 19px;
+    line-height: 1.7;
+}
+
 .userProfileName {
     display: inline-block;
     font-size: 15px;
 }
 
-.commentActions {
+.commentActions , .answersActions {
     position: absolute;
     top: 5px;
     left: 15px;
@@ -1957,15 +1967,21 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     width: 45px;
 }
 
-.commentActionsIcon {
-    font-size: 35px;
-    position: absolute;
-    right: 2px;
-    top: -22px;
-    color: #8b8b8b;
+.answersActionsIcon , .commentActionsIcon {
+    position: relative;
 }
 
-.commentWriterExperienceDetails {
+.answersActionsIcon::before , .commentActionsIcon::before {
+    content: '\E091';
+    font-family: shazdemosafer-tour !important;
+    font-size: 35px;
+    position: absolute;
+    top: 0;
+    right: -5px;
+    color: #666;
+}
+
+.commentWriterExperienceDetails , .answersWriterExperienceDetails {
     color: #666666;
     margin-bottom: 10px;
     direction: rtl;
@@ -1978,11 +1994,11 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     border-bottom: 2px solid #e5e5e5;
 }
 
-.commentWriterExperiencePlace {
+.commentWriterExperiencePlace , .answersWriterExperiencePlace {
     color: #16174f;
 }
 
-.commentWriterExperienceParticipation , .userProfileName {
+.commentWriterExperienceParticipation , .userProfileName , .userProfileNameAnswers {
     color: #0076a3;
 
 }
@@ -2267,13 +2283,13 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     right: 12px;
 }
 
-.newCommentPlaceMainDiv {
+.newCommentPlaceMainDiv , .answerPlaceMainDiv , .newAnswerPlaceMainDiv {
     margin: 10px 0 5px;
     display: inline-block;
     width: 100%;
 }
 
-.newCommentWriterProfilePic {
+.newCommentWriterProfilePic , .answerWriterProfilePic , .newAnswerWriterProfilePic {
     display: inline-block;
     width: 40px;
     height: 40px;
@@ -2281,20 +2297,20 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     margin-left: 10px;
 }
 
-.newCommentPlaceMainDiv .inputBox {
+.newCommentPlaceMainDiv .inputBox , .newAnswerPlaceMainDiv .inputBox {
     width: 90%;
     float: right;
     position: relative;
 }
 
-.newCommentPlaceMainDiv .inputBoxInput {
+.newCommentPlaceMainDiv .inputBoxInput , .newAnswerPlaceMainDiv .inputBoxInput {
     text-align: right;
     font-size: 12px;
     border: none;
     height: 39px;
 }
 
-.newCommentPlaceMainDiv textarea {
+.newCommentPlaceMainDiv textarea , .newAnswerPlaceMainDiv textarea {
     text-align: right;
     padding-top: 15px;
     height: 35px;
@@ -2302,26 +2318,58 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     width: 95%;
 }
 
+.newAnswerPlaceMainDiv textarea {
+    width: 100%;
+}
+
 .newCommentPlaceMainDiv .commentSmileyIcon {
     top: 9px;
     left: 7px;
 }
 
-.replyCommentTitle {
+.replyCommentTitle , .replyWriterUsername , .replyAnswerTitle {
     color: #0076a3;
     position: absolute;
     top: 2px;
     right: 10px;
     font-size: 10px;
+    direction: rtl;
 }
 
-.postsFiltersMainDiv .block_header {
+.newAnswerPlaceMainDiv{
+    margin-top: 20px;
+    border-top: 1px solid #E5E5E5;
+    padding: 10px 0;
+}
+
+.newAnswerWriterProfilePic {
+    width: 45px;
+    height: 45px;
+}
+
+.postsMainDivFooter {
+    background-color: white;
+    padding: 10px;
+    margin-top: 10px;
+    color: #666666;
+}
+
+.showPostsNumsFilter {
+    background-color: #0076a3;
+    padding: 5px;
+    color: white;
+    text-align: center;
+}
+
+/*posts filter*/
+
+.postsFiltersMainDiv .block_header , .QAndAMainDivHeader {
     padding: 10px 0;
     border-bottom: 1px solid #e5e5e5;
     margin-bottom: 20px;
 }
 
-.postsFiltersMainDiv .block_title {
+.postsFiltersMainDiv .block_title , .QAndAMainDivHeader > h3  {
     font-size: 20px;
     font-weight: 700;
     line-height: 32px;
@@ -2603,7 +2651,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     margin-top: 5px;
 }
 
-.modal-details-content .commentOptionsBoxes {
+.modal-details-content .commentOptionsBoxes , .answerOptionsBoxes {
     float: inherit;
 }
 
@@ -2700,7 +2748,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     margin-top: 15px;
 }
 
-#showingPhotosModal .commentWriterExperienceDetails {
+#showingPhotosModal .commentWriterExperienceDetails , .answersWriterExperienceDetails {
     display: inline-block;
     float: right;
 }
@@ -2869,4 +2917,236 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     content: '\E00B';
     font-family: shazdemosafer-tour !important;
     color: #e5e5e5;
+}
+
+/*Q&A Box*/
+
+.QAndAMainDiv {
+    background-color: white;
+    margin-top: 30px;
+}
+
+.QAndAMainDiv .QAndAMainDivHeader > h3 {
+    top: 3px;
+}
+
+.newQuestionMainDiv {
+    margin-top: 30px;
+    padding-bottom: 20px;
+    display: inline-block;
+    width: 100%;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.newQuestionWriterProfilePic {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    float: right;
+    margin-left: 10px;
+}
+
+.questionInputBox {
+    float: right;
+    width: 89%;
+    position: relative;
+    border: none;
+}
+
+.questionInputBox > textarea {
+    resize: none;
+    text-align: right;
+    font-size: 15px;
+    height: 45px;
+    padding-top: 10px;
+}
+
+.sendQuestionBtn {
+    display: inline-block;
+    float: right;
+    background: #0076a3;
+    color: white;
+    padding: 13px 10px;
+    font-weight: 700;
+    font-size: 15px;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+
+.answersBoxMainDiv {
+    position: relative;
+}
+
+.showingQuestionCompletely {
+    background-color: #E5E5E5;
+    border-radius: 10px;
+    color: #7f7f7f;
+    padding: 8px 5px;
+    position: absolute;
+    top: 10px;
+    left: 75px;
+    font-weight: 500;
+}
+
+.questionContentMainBox {
+    border-bottom: 1px solid #E5E5E5;
+    padding: 0 10px 30px;
+    text-align: justify;
+    direction: rtl;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.questionSubMenuBar {
+    padding: 8px 0;
+}
+
+.numberOfAnswers {
+    float: right;
+    color: #a0a0a0;
+    font-weight: 600;
+    direction: rtl;
+    margin-left: 10px;
+}
+
+.numberOfAnswers > span {
+    color: #0076a3;
+}
+
+.showAnswersToggle {
+    float: right;
+    color: darkblue;
+    position: relative;
+    cursor: pointer;
+    /*font-weight: 600;*/
+}
+
+.showAnswersToggle::before {
+    content: '\E04A';
+    font-family: shazdemosafer-tour !important;
+    font-size: 14px;
+    position: absolute;
+    left: -15px;
+    top: -1px;
+}
+
+.questionSubMenuBar .replyBtn {
+    padding: 2px 20px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.questionsActionsMoreDetails {
+    background-color: #E5E5E5;
+    color: #7f7f7f;
+    padding: 10px;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    font-weight: 500;
+}
+
+.questionsActionsMoreDetails > span {
+    padding: 5px 0;
+    display: block;
+    text-align: right;
+}
+
+.questionsActionsMoreDetails > span:not(:last-child) {
+    border-bottom: 1px solid #999999;
+}
+
+.answerPlaceMainDiv {
+    border-top: 1px solid #e5e5e5;
+    margin-top: 0;
+    padding-top: 10px;
+}
+
+.answerBoxText {
+    background-color: #eaeaea;
+    padding: 25px 10px;
+    position: relative;
+    text-align: justify;
+    direction: rtl;
+    display: inline-block;
+    float: right;
+    width: 80%;
+    border-radius: 10px;
+}
+
+.answerPlaceMainDiv .answerWriterProfilePic {
+    width: 50px;
+    height: 50px;
+    margin-top: 7px;
+}
+
+.answerBoxText .replyWriterUsername {
+    font-size: 14px;
+    top: 5px;
+}
+
+.answerBoxText .answerSmileyIcon {
+    bottom: 20px;
+}
+
+.answerStatistics {
+    position: absolute;
+    bottom: -23px;
+    right: 10px;
+    font-size: 14px;
+}
+
+.numberOfLikeAnswer {
+    color: red;
+}
+
+.answerStatistics .numberOfLikeAnswer::before {
+    position: relative;
+    left: inherit;
+    top: inherit;
+    color: red;
+    font-size: 20px;
+}
+
+.numberOfDislikeAnswer {
+    color: darkred;
+}
+
+.answerStatistics .numberOfDislikeAnswer::before {
+    position: relative;
+    left: inherit;
+    top: 3px;
+    color: darkred;
+    font-size: 20px;
+}
+
+.actionToAnswer {
+    display: inline-block;
+    float: right;
+    font-size: 35px;
+    margin-right: 20px;
+}
+
+.likeAnswer {
+    position: relative;
+}
+
+.likeAnswer::before , .numberOfLikeAnswer::before {
+    content: '\E057';
+    font-family: shazdemosafer-tour !important;
+    position: absolute;
+    left: -80px;
+    top: 36px;
+}
+
+.dislikeAnswer {
+    position: relative;
+}
+
+.dislikeAnswer::before , .numberOfDislikeAnswer::before {
+    content: '\E058';
+    font-family: shazdemosafer-tour !important;
+    position: absolute;
+    left: -40px;
+    top: 43px;
 }

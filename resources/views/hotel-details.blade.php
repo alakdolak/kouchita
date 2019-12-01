@@ -1276,7 +1276,7 @@ if ($total == 0)
                                     <span class="commentOptionsText">دوستانتان را tag کنید.</span>
                                 </div>
                                 <div id="moreSettingCommentManDiv" class="commentOptionsBoxes">
-                                    <span id="moreSettingComment">...</span>
+                                    <span id="moreSettingComment"></span>
                                 </div>
                             </div>
                         </div>
@@ -1790,7 +1790,7 @@ if ($total == 0)
                 <div class="col-xs-7 pd-0 float-right">
                     <div class="col-xs-12 commentMainDiv position-relative">
                         <div class="commentOptionsBoxes commentActions">
-                            <span class="commentActionsIcon">...</span>
+                            <span class="commentActionsIcon"></span>
                         </div>
                         <div class="commentWriterDetailsShow">
                             <div class="circleBase type2 commentWriterPicShow"></div>
@@ -1811,7 +1811,7 @@ if ($total == 0)
                         </div>
                         <div class="commentContentsShow">
                             <p>
-                               بسیاری از درخواست کنندگان کسی و کارهای بومی و محلی اطلاعات مورد نیاز خود را از طریق اینترنت دریافت می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا خدمات مورد نیازشان اثرپذیری فراوانی دارد.
+                               بسیاری از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از طریق اینترنت دریافت می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا خدمات مورد نیازشان اثرپذیری فراوانی دارد.
                                 با توجه به ابن که خدمات و کالاهای بومی و محلی دارای اصالت و فرهنگ کهن جوامع روستایی هستند، می توان گفت اینترنت می تواند در آمدزایی از سبک زندگی جوامع محلی نقش
                             </p>
                         </div>
@@ -1996,7 +1996,7 @@ if ($total == 0)
                     </div>
                     <div class="col-xs-12 commentMainDiv position-relative">
                         <div class="commentOptionsBoxes commentActions">
-                            <span class="commentActionsIcon">...</span>
+                            <span class="commentActionsIcon"></span>
                         </div>
                         <div class="commentWriterDetailsShow">
                             <div class="circleBase type2 commentWriterPicShow"></div>
@@ -2199,7 +2199,7 @@ if ($total == 0)
                     </div>
                     <div class="col-xs-12 commentMainDiv position-relative">
                         <div class="commentOptionsBoxes commentActions">
-                            <span class="commentActionsIcon">...</span>
+                            <span class="commentActionsIcon"></span>
                         </div>
                         <div class="commentWriterDetailsShow">
                             <div class="circleBase type2 commentWriterPicShow"></div>
@@ -2403,7 +2403,7 @@ if ($total == 0)
                     </div>
                     <div class="col-xs-12 commentMainDiv position-relative">
                         <div class="commentOptionsBoxes commentActions">
-                            <span class="commentActionsIcon">...</span>
+                            <span class="commentActionsIcon"></span>
                         </div>
                         <div class="commentWriterDetailsShow">
                             <div class="circleBase type2 commentWriterPicShow"></div>
@@ -2606,6 +2606,28 @@ if ($total == 0)
                             <div></div>
                         </div>
                     </div>
+                    <div class="col-xs-12 postsMainDivFooter position-relative">
+                        <div class="col-xs-5 font-size-13 line-height-2">
+                            نمایش
+                            <span class="mg-lt-5">10</span>-
+                            <span class="mg-lt-5">20</span>-
+                            <span class="color-blue">50</span>
+                            پست در هر صفحه
+                        </div>
+                        <div class="col-xs-3">
+                            <div class="showPostsNumsFilter">نمایش تمامی پست‌ها</div>
+                        </div>
+                        <div class="col-xs-4 font-size-13 line-height-2 text-align-right">
+                            صفحه
+                            <span>1</span>
+                            <span><<<</span>
+                            <span class="mg-lt-5">2</span>-
+                            <span class="color-blue mg-lt-5">3</span>-
+                            <span>4</span>
+                            <span>>>></span>
+                            <span>10</span>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-xs-5 pd-0 pd-rt-10Imp">
                     <div class="col-xs-12 postsFiltersMainDiv">
@@ -2684,9 +2706,153 @@ if ($total == 0)
                         <img src="{{"../../../public/images/Chromite.jpg"}}" alt="">
                     </center>
                 </div>
+                <div class="clear-both"></div>
+
+                <div class="col-xs-12 QAndAMainDiv">
+                    <div class="QAndAMainDivHeader">
+                        <h3>سؤال و جواب</h3>
+                    </div>
+                    <div class="askQuestionMainDiv">
+                        <b class="direction-rtl text-align-right float-right full-width mg-bt-10">
+                            سؤلات خود را بپرسید تا با کمک دوستانتان آگاهانه‌تر سفر کنید. همچنین می‌توانید با پاسخ یه سؤالات دوستانتان علاوه بر دریافت امتیاز، اطلاعات خود را به اشتراک بگذارید.
+                        </b>
+                        <div class="display-inline-block float-right direction-rtl mg-lt-5">
+                            در حال حاضر
+                            <span class="color-blue">1340</span>
+                            سؤال
+                            <span class="color-blue">560</span>
+                            پاسخ موجود می‌باشد.
+                        </div>
+                        <div class="display-inline-block float-right direction-rtl dark-blue">مشاهده همه سؤالات و پاسخ‌ها</div>
+                        <div class="clear-both"></div>
+                        <div class="newQuestionMainDiv mg-tp-30 full-width display-inline-block">
+                            <div class="circleBase type2 newQuestionWriterProfilePic"></div>
+                            <div class="inputBox questionInputBox">
+                                <textarea class="inputBoxInput inputBoxInputComment" type="text" placeholder="شما چه سؤالی دارید؟"></textarea>
+                                <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
+                            </div>
+                            <div class="sendQuestionBtn">ارسال</div>
+                        </div>
+                        <div class="answersBoxMainDiv">
+                            <div class="answersOptionsBoxes answersActions">
+                                <span class="answersActionsIcon"></span>
+                            </div>
+                            <div class="questionsActionsMoreDetails display-none">
+                                <span>گزارش پست</span>
+                                <span>مشاهده صفحه شازده سینا</span>
+                                <span>مشاهده تمامی پست‌ها</span>
+                                <span>صفحه قوانین و مقررات</span>
+                            </div>
+                            <div class="showingQuestionCompletely">
+                                مشاهده کامل سؤال
+                            </div>
+                            <div class="answersWriterDetailsShow">
+                                <div class="circleBase type2 answersWriterPicShow"></div>
+                                <div class="answersWriterExperienceDetails">
+                                    <b class="userProfileNameAnswers">shazdesina</b>
+                                    <div class="display-inline-block">در
+                                        <span class="answersWriterExperiencePlace">هتل عباسی، شهر یزد، استان یزد</span>
+                                    </div>
+                                    <div>
+                                        هم اکنون - بیش از 23 ساعت پیش
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clear-both"></div>
+                            <div class="questionContentMainBox">
+                                بسیاری از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از طریق اینترنت دریافت می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا خدمات مورد نیازشان اثرپذیری فراوانی دارد.
+                                با توجه به ابن که خدمات و کالاهای بومی و محلی دارای اصالت و فرهنگ کهن جوامع روستایی هستند، می توان گفت اینترنت می تواند در آمدزایی از سبک زندگی جوامع محلی نقش کلیدی داشته باشد.
+                            </div>
+                            <div class="clear-both"></div>
+                            <div class="questionSubMenuBar">
+                                <div class="numberOfAnswers">
+                                    <span>31</span>
+                                    نفر پاسخ دادند
+                                </div>
+                                <div class="showAnswersToggle">مشاهده پاسخ‌ها</div>
+                                <b class="replyBtn replyAnswerBtn">پاسخ دهید</b>
+                            </div>
+                            <div class="answerPlaceMainDiv display-none">
+                                <div class="circleBase type2 answerWriterProfilePic"></div>
+                                <div class="answerBoxText">
+                                    <b class="replyWriterUsername">shazdesina</b>
+                                    من موافق این مطلب نیستم. دوست من شما باید خودتان توجه می کردید نه اینکه ما را متهم کنید.
+                                    <img class="answerSmileyIcon" src="{{"../../../public/images/smile.png"}}">
+                                    <div class="answerStatistics">
+                                        <span class="numberOfDislikeAnswer">31</span>
+                                        <span class="numberOfLikeAnswer">31</span>
+                                    </div>
+                                </div>
+                                <div class="actionToAnswer">
+                                    <span class="likeAnswer"></span>
+                                    <span class="dislikeAnswer"></span>
+                                </div>
+                            </div>
+                            <div class="display-none">
+                                <div class="newAnswerPlaceMainDiv">
+                                    <div class="circleBase type2 newAnswerWriterProfilePic"></div>
+                                    <div class="inputBox">
+                                        <b class="replyAnswerTitle">در پاسخ به نظر shazdesina</b>
+                                        <textarea class="inputBoxInput inputBoxInputAnswer" type="text" placeholder="شما چه نظری دارید؟"></textarea>
+                                        <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
+                                    </div>
+                                    <div></div>
+                                </div>
+                            </div>
+                            <div class="display-none last">
+                                <div class="newAnswerPlaceMainDiv">
+                                    <div class="circleBase type2 newAnswerWriterProfilePic"></div>
+                                    <div class="inputBox">
+                                        <b class="replyAnswerTitle">در پاسخ به نظر shazdesina</b>
+                                        <textarea class="inputBoxInput inputBoxInputAnswer" type="text" placeholder="شما چه نظری دارید؟"></textarea>
+                                        <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
+                                    </div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 postsMainDivFooter position-relative">
+                    <div class="col-xs-5 font-size-13 line-height-2">
+                        نمایش
+                        <span class="mg-lt-5">10</span>-
+                        <span class="mg-lt-5">20</span>-
+                        <span class="color-blue">50</span>
+                        پست در هر صفحه
+                    </div>
+                    <div class="col-xs-2">
+                        <div class="showPostsNumsFilter">نمایش تمامی پست‌ها</div>
+                    </div>
+                    <div class="col-xs-4 font-size-13 line-height-2 text-align-right">
+                        صفحه
+                        <span>1</span>
+                        <span><<<</span>
+                        <span class="mg-lt-5">2</span>-
+                        <span class="color-blue mg-lt-5">3</span>-
+                        <span>4</span>
+                        <span>>>></span>
+                        <span>10</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function() {
+            $('.showAnswersToggle').click(function() {
+                $(this).parent().nextAll().not('div.last').toggle()
+            })
+            $('.replyAnswerBtn').click(function() {
+                $(this).parent().siblings("div.last").toggle()
+            })
+            $('.answersOptionsBoxes').click(function() {
+                $(this).next().toggle() ,
+                    $(this).toggleClass("bg-color-darkgrey")
+            })
+        })
+    </script>
 
 
     @if(isset($video) && $video != null)
