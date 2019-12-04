@@ -688,8 +688,16 @@
     height: 50px;
 }
 
+.height-70 {
+    height: 70px;
+}
+
 .height-120 {
     height: 120px;
+}
+
+.height-210Imp {
+    height: 210px !important;
 }
 
 .height-250 {
@@ -714,6 +722,10 @@
 
 .max-height-424 {
     max-height: 424px;
+}
+
+.min-height-186Imp {
+    min-height: 186px !important;
 }
 
 /*line-height*/
@@ -936,4 +948,12 @@
 
 .top-33per {
     top: 33%;
+}
+
+.top-20Imp {
+    top: 20px !important;
+}
+
+.top--30Imp {
+    top: -30px !important;
 }

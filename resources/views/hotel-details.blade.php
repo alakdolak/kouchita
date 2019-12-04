@@ -89,14 +89,6 @@ if ($total == 0)
         }
     </style>
 
-    <script>
-        $(document).ready(function() {
-            $('#commentLink').click(function() {
-                $("#commentModal").show() ,
-                $("#commentModalMainDiv").show()
-            })
-        })
-    </script>
     {{--alarm--}}
     <span class="ui_overlay ui_modal editTags getAlarm">
         <div class="shTIcon clsIcon"></div>
@@ -413,34 +405,22 @@ if ($total == 0)
         </div>
 
         <div class="atf_meta_and_photos_wrapper position-relative">
+            <div class="greyBackground"></div>
             <div class="atf_meta_and_photos ui_container is-mobile easyClear position-relative">
 
-                <script>
-                    $(document).ready(function() {
-                        $('#closeBtnCommentModal').click(function () {
-                            $('#commentModal').hide() ,
-                                $("#commentModalMainDiv").hide()
-                        })
-                    })
-                    $(document).ready(function(){
-                        $('.editUploadPhotoComment').click(function(){
-                            $('#editPane').removeClass('hidden')
-                        })
-                    })
-                </script>
                 <!-- Modal -->
-                <div id="commentModalMainDiv" class="display-none">
+                <div class="postModalMainDiv hidden">
                     <div class="modal-dialog">
 
                         <!-- Modal content-->
                         <div class="modal-content">
-                            <div class="commentsMainDivHeader">
-                                <button type="button" class="close" id="closeBtnCommentModal" data-dismiss="modal">&times;</button>
+                            <div class="postMainDivHeader">
+                                <button type="button" class="close closeBtnPostModal" data-dismiss="modal" onclick="closeNewPostModal()">&times;</button>
                                 دیدگاه شما
                             </div>
-                            <div id="commentInputMainDivModal">
-                                <div class="inputBoxGeneralInfo inputBox" id="commentInputBoxModal">
-                                    <div id="profilePicForCommentModal" class="circleBase type2"></div>
+                            <div class="commentInputMainDivModal">
+                                <div class="inputBoxGeneralInfo inputBox postInputBoxModal">
+                                    <div class="profilePicForPostModal circleBase type2"></div>
                                     <textarea class="inputBoxInput inputBoxInputComment" type="text" placeholder="سینا، چه فکر یا احساسی داری.....؟"></textarea>
                                     <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
                                 </div>
@@ -448,12 +428,12 @@ if ($total == 0)
                                 <div class="commentPhotosMainDiv">
                                     <div class="commentPhotosDiv commentPhotosAndVideos">
                                         <div class="deleteUploadPhotoComment"></div>
-                                        <div class="editUploadPhotoComment"></div>
+                                        <div class="editUploadPhotoComment" onclick="editPhotosNewPost()"></div>
                                     </div>
                                     <div class="commentVideosDiv commentPhotosAndVideos">
                                         <div class="deleteUploadPhotoComment"></div>
                                         <div class="videosLengthDiv">20:45</div>
-                                        <div class="editUploadPhotoComment"></div>
+                                        <div class="editUploadPhotoComment" onclick="editPhotosNewPost()"></div>
                                     </div>
                                     <center class="addPhotosOrVideosBox">
                                         اضافه کنید
@@ -462,7 +442,7 @@ if ($total == 0)
                                 </div>
                                 <div class="addParticipantName">
                                     <span class="addParticipantSpan">با</span>
-                                    <div class="inputBoxGeneralInfo inputBox" id="addParticipantInputBoxModal">
+                                    <div class="inputBoxGeneralInfo inputBox addParticipantInputBoxPostModal">
                                         <textarea class="inputBoxInput inputBoxInputComment" type="text" placeholder="چه کسی بودید؟ ایمیل یا نام کاربری را وارد کنید"></textarea>
                                         <div class="participantDivMainDiv">
                                             <div class="participantDiv">
@@ -514,7 +494,7 @@ if ($total == 0)
                             </div>
                             <div class="commentQuestionsForm">
                                 <span class="addOriginCity">مبدأ سفر خود را وارد کنید</span>
-                                <div class="inputBoxGeneralInfo inputBox" id="addOriginCityInputBoxModal">
+                                <div class="inputBoxGeneralInfo inputBox addOriginCityInputBoxPostModal">
                                     <textarea class="inputBoxInput inputBoxInputComment" type="text" placeholder="شهر مبدأ را وارد کنید"></textarea>
                                 </div>
                             </div>
@@ -659,7 +639,7 @@ if ($total == 0)
                                     <b class="col-xs-6 font-size-15 line-height-203">امتیاز کلی شما به این مکان چقدر است؟</b>
                                 </div>
                             </div>
-                            <div class="commentsMainDivFooter">
+                            <div class="postMainDivFooter">
                                 ارسال دیدگاه
                             </div>
                         </div>
@@ -670,7 +650,7 @@ if ($total == 0)
                    <div class="body_text" style="padding-top: 12px">
                        {{--<div class="photoUploader">--}}
                            <div class="headerBar epHeaderBar">
-                              <h3 id="photoUploadHeader" class="photoUploadHeader">
+                              <h3 class="photoUploadHeader">
                                   <span>ویرایش عکس</span>
 {{--                                  <span>{{$place->name}}</span>--}}
                               </h3>
@@ -684,7 +664,7 @@ if ($total == 0)
 
                                 <div class="addParticipantName">
                                     <span class="addParticipantSpan">با</span>
-                                    <div class="inputBoxGeneralInfo inputBox" id="addParticipantInputBoxModal">
+                                    <div class="inputBoxGeneralInfo inputBox addParticipantInputBoxPostModal">
                                         <textarea class="inputBoxInput inputBoxInputComment" type="text" placeholder="چه کسی بودید؟ ایمیل یا نام کاربری را وارد کنید"></textarea>
                                         <div class="participantDivMainDiv">
                                             <div class="participantDiv">
@@ -819,13 +799,13 @@ if ($total == 0)
 
 {{--                @include('editor')--}}
 
-                <div class="modal fade" id="showingPhotosModal" role="dialog">
+                <div class="modal fade showingPhotosModal" role="dialog">
                     <div class="modal-dialog">
 
                         <!-- Modal content-->
                         <div class="modal-content">
 
-                            <div id="showingPhotosMainDivHeader">
+                            <div class="showingPhotosMainDivHeader">
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 <div class="showingPhotosTitle">نمایش عکس‌ها</div>
                             </div>
@@ -885,6 +865,7 @@ if ($total == 0)
 {{--                                </div>--}}
 {{--                            @endif--}}
                             <div class="meta_inner" id="bestPriceInnerDiv">
+                                <div class="returnToMainPage" onclick="allPostsGrid()">بازگشت</div>
 {{--                                <form id="form_hotel" method="post" action="{{route('makeSessionHotel')}}">--}}
 {{--                                    {{csrf_field()}}--}}
 {{--                                    <input type="hidden" name="adult" id="form_adult">--}}
@@ -1154,7 +1135,7 @@ if ($total == 0)
                             <div class="primaryWrap">
                                 <div class="prw_rup prw_common_mercury_photo_carousel">
                                     <div class="carousel bignav">
-                                        <div class="carousel_images carousel_images_header" data-toggle="modal" data-target="#showingPhotosModal">
+                                        <div class="carousel_images carousel_images_header" data-toggle="modal" data-target=".showingPhotosModal">
                                             <div class="see_all_count_wrap" onclick="getPhotos(-1)">
                                                 <span class="see_all_count">
                                                     <div class="circleBase type2" id="photographerIdPic"></div>
@@ -1246,14 +1227,14 @@ if ($total == 0)
                             <button class="btn btn-danger exitBtnHelp">خروج</button>
                         </div>
                     </div>
-                    <a id="commentLink">
-                        <div id="commentsMainDiv" href="">
-                            <div class="commentsMainDivHeader">
+                    <a class="postLink" onclick="newPostModal()">
+                        <div class="postMainDiv" href="">
+                            <div class="postMainDivHeader">
                                 دیدگاه شما
                             </div>
-                            <div id="commentInputMainDiv">
-                                <div class="inputBoxGeneralInfo inputBox" id="commentInputBox">
-                                    <div id="profilePicForComment" class="circleBase type2"></div>
+                            <div class="postTextInputMainDiv">
+                                <div class="inputBoxGeneralInfo inputBox postInputBox">
+                                    <div class="profilePicForPost circleBase type2"></div>
                                     <textarea class="inputBoxInput inputBoxInputComment" type="text" placeholder="سینا، چه فکر یا احساسی داری.....؟"></textarea>
                                     <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
                                 </div>
@@ -1275,8 +1256,8 @@ if ($total == 0)
                                     <span class="tagFriendCommentIcon"></span>
                                     <span class="commentOptionsText">دوستانتان را tag کنید.</span>
                                 </div>
-                                <div id="moreSettingCommentManDiv" class="commentOptionsBoxes">
-                                    <span id="moreSettingComment"></span>
+                                <div class="moreSettingPostManDiv commentOptionsBoxes">
+                                    <span class="moreSettingPost"></span>
                                 </div>
                             </div>
                         </div>
@@ -1286,8 +1267,8 @@ if ($total == 0)
         </div>
     </div>
 
-    <div id="MAINWRAP"
-         class=" full_meta_photos_v3  full_meta_photos_v4  big_pic_mainwrap_tweaks horizontal_xsell ui_container is-mobile position-relative">
+    <div id="MAINWRAP" class="mainWrapHotelDetails
+        full_meta_photos_v3  full_meta_photos_v4  big_pic_mainwrap_tweaks horizontal_xsell ui_container is-mobile position-relative">
         <div id="MAIN" class="Hotel_Review prodp13n_jfy_overflow_visible position-relative">
             <div id="BODYCON" ng-app="mainApp" class="col easyClear bodLHN poolB adjust_padding new_meta_chevron new_meta_chevron_v2 position-relative">
 
@@ -1788,7 +1769,7 @@ if ($total == 0)
                 </div>
                 @include('layouts.extendedMap')
                 <div class="col-xs-7 pd-0 float-right">
-                    <div class="col-xs-12 commentMainDiv position-relative">
+                    <div class="col-xs-12 postMainDivShown position-relative">
                         <div class="commentOptionsBoxes commentActions">
                             <span class="commentActionsIcon"></span>
                         </div>
@@ -1994,7 +1975,7 @@ if ($total == 0)
                             <div></div>
                         </div>
                     </div>
-                    <div class="col-xs-12 commentMainDiv position-relative">
+                    <div class="col-xs-12 postMainDivShown position-relative">
                         <div class="commentOptionsBoxes commentActions">
                             <span class="commentActionsIcon"></span>
                         </div>
@@ -2197,7 +2178,7 @@ if ($total == 0)
                             <div></div>
                         </div>
                     </div>
-                    <div class="col-xs-12 commentMainDiv position-relative">
+                    <div class="col-xs-12 postMainDivShown position-relative">
                         <div class="commentOptionsBoxes commentActions">
                             <span class="commentActionsIcon"></span>
                         </div>
@@ -2401,7 +2382,7 @@ if ($total == 0)
                             <div></div>
                         </div>
                     </div>
-                    <div class="col-xs-12 commentMainDiv position-relative">
+                    <div class="col-xs-12 postMainDivShown position-relative">
                         <div class="commentOptionsBoxes commentActions">
                             <span class="commentActionsIcon"></span>
                         </div>
@@ -2614,9 +2595,9 @@ if ($total == 0)
                             <span class="color-blue">50</span>
                             پست در هر صفحه
                         </div>
-                        <div class="col-xs-3">
-                            <div class="showPostsNumsFilter">نمایش تمامی پست‌ها</div>
-                        </div>
+                        <a class="col-xs-3 showPostsNumsFilterLink" href="#taplc_global_nav_links_0">
+                            <div class="showPostsNumsFilter" onclick="allPostsGrid()">نمایش تمامی پست‌ها</div>
+                        </a>
                         <div class="col-xs-4 font-size-13 line-height-2 text-align-right">
                             صفحه
                             <span>1</span>
@@ -2734,7 +2715,7 @@ if ($total == 0)
                             <div class="sendQuestionBtn">ارسال</div>
                         </div>
                         <div class="answersBoxMainDiv">
-                            <div class="answersOptionsBoxes answersActions">
+                            <div class="answersOptionsBoxes answersActions" onclick="showAnswersActionBox(this)">
                                 <span class="answersActionsIcon"></span>
                             </div>
                             <div class="questionsActionsMoreDetails display-none">
@@ -2769,8 +2750,8 @@ if ($total == 0)
                                     <span>31</span>
                                     نفر پاسخ دادند
                                 </div>
-                                <div class="showAnswersToggle">مشاهده پاسخ‌ها</div>
-                                <b class="replyBtn replyAnswerBtn">پاسخ دهید</b>
+                                <div class="showAnswersToggle" onclick="showAllAnswers(this)">مشاهده پاسخ‌ها</div>
+                                <b class="replyBtn replyAnswerBtn" onclick="replyToAnswers(this)">پاسخ دهید</b>
                             </div>
                             <div class="answerPlaceMainDiv display-none">
                                 <div class="circleBase type2 answerWriterProfilePic"></div>
@@ -2821,9 +2802,9 @@ if ($total == 0)
                         <span class="color-blue">50</span>
                         پست در هر صفحه
                     </div>
-                    <div class="col-xs-2">
-                        <div class="showPostsNumsFilter">نمایش تمامی پست‌ها</div>
-                    </div>
+                    <a class="col-xs-2 showQuestionsNumsFilterLink" href="#taplc_global_nav_links_0">
+                        <div class="showQuestionsNumsFilter">نمایش تمامی سؤال‌ها</div>
+                    </a>
                     <div class="col-xs-4 font-size-13 line-height-2 text-align-right">
                         صفحه
                         <span>1</span>
@@ -2839,19 +2820,49 @@ if ($total == 0)
         </div>
     </div>
 
+    @include('layouts.placePosts')
+    @include('layouts.placeQuestions')
+
     <script>
-        $(document).ready(function() {
-            $('.showAnswersToggle').click(function() {
-                $(this).parent().nextAll().not('div.last').toggle()
-            })
-            $('.replyAnswerBtn').click(function() {
-                $(this).parent().siblings("div.last").toggle()
-            })
-            $('.answersOptionsBoxes').click(function() {
-                $(this).next().toggle() ,
-                    $(this).toggleClass("bg-color-darkgrey")
-            })
-        })
+
+        function newPostModal() {
+            $("#darkModal").show() ,
+                $(".postModalMainDiv").removeClass('hidden')
+        }
+
+        function closeNewPostModal() {
+            $('#darkModal').hide() ,
+                $(".postModalMainDiv").addClass('hidden')
+        }
+
+        function editPhotosNewPost() {
+            $('#editPane').removeClass('hidden')
+        }
+
+        function showAllAnswers(element) {
+                $(element).parent().nextAll().not('div.last').toggle()
+        }
+
+        function replyToAnswers(element) {
+                $(element).parent().siblings("div.last").toggle()
+        }
+
+        function showAnswersActionBox(element) {
+                $(element).next().toggle() ,
+                $(element).toggleClass("bg-color-darkgrey")
+        }
+
+        function allPostsGrid() {
+            $('#targetHelp_10').toggle(),
+            $('.mainWrapHotelDetails').toggle(),
+            $('.mainWrapPosts').toggle() ,
+            $('#bestPriceInnerDiv').toggleClass('min-height-186Imp'),
+            $('.greyBackground').toggleClass('height-210Imp'),
+            $('.postModalMainDiv').toggleClass('top--30Imp'),
+            $('#addToFavouriteTripsMainDiv').toggle(),
+            $('#helpBtnMainDiv').toggleClass('top-20Imp'),
+            $('.returnToMainPage').toggleClass('color-white')
+        }
     </script>
 
 
