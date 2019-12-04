@@ -1272,1451 +1272,507 @@ if ($total == 0)
         <div id="MAIN" class="Hotel_Review prodp13n_jfy_overflow_visible position-relative">
             <div id="BODYCON" ng-app="mainApp" class="col easyClear bodLHN poolB adjust_padding new_meta_chevron new_meta_chevron_v2 position-relative">
 
-                <div class="hr_btf_wrap position-relative">
-                    <div id="introduction" class="ppr_rup ppr_priv_location_detail_overview">
-                        <div class="block_wrap" data-tab="TABS_OVERVIEW">
-                            <div class="overviewContent">
-                                <div class="ui_columns is-multiline is-mobile reviewsAndDetails direction-rtlImp">
-                                    <div class="ui_column is-4 generalDescription">
-                                        <div class="block_header">
-                                            <h3 class="block_title">معرفی کلی </h3>
-                                        </div>
-                                        <div>
-                                            <div class="overviewContent" id="introductionText">{{$place->description}}</div>
-                                        </div>
-                                    </div>
-                                    <div class="ui_column is-4 details">
-                                        <div class="direction-rtl">
-                                            <?php $k = -1; ?>
-
-                                            @if($placeMode == "hotel")
-                                                @include('hotel-details-table')
-                                            @elseif($placeMode == "amaken")
-                                                @include('amaken-details-table')
-                                            @elseif($placeMode == "restaurant")
-                                                @include('restaurant-details-table')
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <div class="ui_column  is-4 reviews" id="reviewsMainDiv">
-                                        <div class="rating">
+                <div class="exceptQAndADiv">
+                    <div class="hr_btf_wrap position-relative">
+                        <div id="introduction" class="ppr_rup ppr_priv_location_detail_overview">
+                            <div class="block_wrap" data-tab="TABS_OVERVIEW">
+                                <div class="overviewContent">
+                                    <div class="ui_columns is-multiline is-mobile reviewsAndDetails direction-rtlImp">
+                                        <div class="ui_column is-4 generalDescription">
                                             <div class="block_header">
-                                                <h3 class="block_title">نظر شما </h3>
+                                                <h3 class="block_title">معرفی کلی </h3>
                                             </div>
-                                            <span class="overallRating">{{$avgRate}} </span>
-                                            <div class="prw_rup prw_common_bubble_rating overallBubbleRating">
-                                                @if($avgRate == 5)
-                                                    <span class="ui_bubble_rating bubble_50 font-size-28"
-                                                          property="ratingValue" content="5"
-                                                          alt='5 of 5 bubbles'></span>
-                                                @elseif($avgRate == 4)
-                                                    <span class="ui_bubble_rating bubble_40 font-size-28"
-                                                          property="ratingValue" content="4"
-                                                          alt='4 of 5 bubbles'></span>
-                                                @elseif($avgRate == 3)
-                                                    <span class="ui_bubble_rating bubble_30 font-size-28"
-                                                          property="ratingValue" content="3"
-                                                          alt='3 of 5 bubbles'></span>
-                                                @elseif($avgRate == 2)
-                                                    <span class="ui_bubble_rating bubble_20 font-size-28"
-                                                          property="ratingValue" content="2"
-                                                          alt='2 of 5 bubbles'></span>
-                                                @elseif($avgRate == 1)
-                                                    <span class="ui_bubble_rating bubble_10 font-size-28"
-                                                          property="ratingValue" content="1"
-                                                          alt='1 of 5 bubbles'></span>
+                                            <div>
+                                                <div class="overviewContent" id="introductionText">{{$place->description}}</div>
+                                            </div>
+                                        </div>
+                                        <div class="ui_column is-4 details">
+                                            <div class="direction-rtl">
+                                                <?php $k = -1; ?>
+
+                                                @if($placeMode == "hotel")
+                                                    @include('hotel-details-table')
+                                                @elseif($placeMode == "amaken")
+                                                    @include('amaken-details-table')
+                                                @elseif($placeMode == "restaurant")
+                                                    @include('restaurant-details-table')
                                                 @endif
                                             </div>
-                                            <a class="seeAllReviews autoResize" href="#REVIEWS"></a>
                                         </div>
-                                        <div class="prw_rup prw_common_ratings_histogram_overview overviewHistogram">
-                                            <ul class="ratings_chart">
-                                                <li class="chart_row highlighted clickable">
-                                                    <span class="row_label row_cell">عالی</span>
-                                                    <span class="row_bar row_cell">
-                                                        <span class="bar">
-                                                            <span class="fill"
-                                                                  style="width: {{ceil($rates[4] * 100 / $total)}}%;"></span>
-                                                        </span>
-                                                    </span>
-                                                    <span class="row_count row_cell">{{ceil($rates[4] * 100 / $total)}}
-                                                    %</span>
-                                                </li>
-                                                <li class="chart_row clickable">
-                                                    <span class="row_label row_cell">خوب</span>
-                                                    <span class="row_bar row_cell">
-                                                        <span class="bar">
-                                                            <span class="fill"
-                                                                  style="width:{{ceil($rates[3] * 100 / $total)}}%;"></span>
-                                                        </span>
-                                                    </span>
-                                                    <span class="row_count row_cell">{{ceil($rates[3] * 100 / $total)}}
-                                                        %</span>
-                                                </li>
-                                                <li class="chart_row clickable">
-                                                    <span class="row_label row_cell">معمولی</span>
-                                                    <span class="row_bar row_cell">
-                                                        <span class="bar">
-                                                            <span class="fill"
-                                                                  style="width:{{ceil($rates[2] * 100 / $total)}}%;"></span>
-                                                        </span>
-                                                    </span>
-                                                    <span class="row_count row_cell">{{ceil($rates[2] * 100 / $total)}}
-                                                        %</span>
-                                                </li>
-                                                <li class="chart_row clickable">
-                                                    <span class="row_label row_cell">ضعیف</span>
-                                                    <span class="row_bar row_cell">
-                                                        <span class="bar">
-                                                            <span class="fill"
-                                                                  style="width:{{ceil($rates[1] * 100 / $total)}}%;"></span>
-                                                        </span>
-                                                    </span>
-                                                    <span class="row_count row_cell">{{ceil($rates[1] * 100 / $total)}}
-                                                        %</span>
-                                                </li>
-                                                <li class="chart_row">
-                                                    <span class="row_label row_cell">خیلی بد </span>
-                                                    <span class="row_bar row_cell">
-                                                        <span class="bar">
-                                                            <span class="fill"
-                                                                  style="width:{{ceil($rates[0] * 100 / $total)}}%;"></span>
-                                                        </span>
-                                                    </span>
-                                                    <span class="row_count row_cell">{{ceil($rates[0] * 100 / $total)}}
-                                                        %</span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="prw_rup prw_common_atf_header_bl" id="clientConnectionsLines">
-                                            <div class="blEntry address mg-bt-10" id="clientConnectionsAddress">
-                                                <span class="ui_icon map-pin"></span>
-                                                <span class="street-address">آدرس : </span>
-                                                <span>{{$place->address}}</span>
+                                        <div class="ui_column  is-4 reviews" id="reviewsMainDiv">
+                                            <div class="rating">
+                                                <div class="block_header">
+                                                    <h3 class="block_title">نظر شما </h3>
+                                                </div>
+                                                <span class="overallRating">{{$avgRate}} </span>
+                                                <div class="prw_rup prw_common_bubble_rating overallBubbleRating">
+                                                    @if($avgRate == 5)
+                                                        <span class="ui_bubble_rating bubble_50 font-size-28"
+                                                              property="ratingValue" content="5"
+                                                              alt='5 of 5 bubbles'></span>
+                                                    @elseif($avgRate == 4)
+                                                        <span class="ui_bubble_rating bubble_40 font-size-28"
+                                                              property="ratingValue" content="4"
+                                                              alt='4 of 5 bubbles'></span>
+                                                    @elseif($avgRate == 3)
+                                                        <span class="ui_bubble_rating bubble_30 font-size-28"
+                                                              property="ratingValue" content="3"
+                                                              alt='3 of 5 bubbles'></span>
+                                                    @elseif($avgRate == 2)
+                                                        <span class="ui_bubble_rating bubble_20 font-size-28"
+                                                              property="ratingValue" content="2"
+                                                              alt='2 of 5 bubbles'></span>
+                                                    @elseif($avgRate == 1)
+                                                        <span class="ui_bubble_rating bubble_10 font-size-28"
+                                                              property="ratingValue" content="1"
+                                                              alt='1 of 5 bubbles'></span>
+                                                    @endif
+                                                </div>
+                                                <a class="seeAllReviews autoResize" href="#REVIEWS"></a>
                                             </div>
-                                            @if(!empty($place->phone))
-                                                <div class="blEntry phone mg-bt-10" id="clientConnectionsPhone">
-                                                    <span class="ui_icon phone"></span>
-                                                    <span>{{$place->phone}}</span>
+                                            <div class="prw_rup prw_common_ratings_histogram_overview overviewHistogram">
+                                                <ul class="ratings_chart">
+                                                    <li class="chart_row highlighted clickable">
+                                                        <span class="row_label row_cell">عالی</span>
+                                                        <span class="row_bar row_cell">
+                                                            <span class="bar">
+                                                                <span class="fill"
+                                                                      style="width: {{ceil($rates[4] * 100 / $total)}}%;"></span>
+                                                            </span>
+                                                        </span>
+                                                        <span class="row_count row_cell">{{ceil($rates[4] * 100 / $total)}}
+                                                        %</span>
+                                                    </li>
+                                                    <li class="chart_row clickable">
+                                                        <span class="row_label row_cell">خوب</span>
+                                                        <span class="row_bar row_cell">
+                                                            <span class="bar">
+                                                                <span class="fill"
+                                                                      style="width:{{ceil($rates[3] * 100 / $total)}}%;"></span>
+                                                            </span>
+                                                        </span>
+                                                        <span class="row_count row_cell">{{ceil($rates[3] * 100 / $total)}}
+                                                            %</span>
+                                                    </li>
+                                                    <li class="chart_row clickable">
+                                                        <span class="row_label row_cell">معمولی</span>
+                                                        <span class="row_bar row_cell">
+                                                            <span class="bar">
+                                                                <span class="fill"
+                                                                      style="width:{{ceil($rates[2] * 100 / $total)}}%;"></span>
+                                                            </span>
+                                                        </span>
+                                                        <span class="row_count row_cell">{{ceil($rates[2] * 100 / $total)}}
+                                                            %</span>
+                                                    </li>
+                                                    <li class="chart_row clickable">
+                                                        <span class="row_label row_cell">ضعیف</span>
+                                                        <span class="row_bar row_cell">
+                                                            <span class="bar">
+                                                                <span class="fill"
+                                                                      style="width:{{ceil($rates[1] * 100 / $total)}}%;"></span>
+                                                            </span>
+                                                        </span>
+                                                        <span class="row_count row_cell">{{ceil($rates[1] * 100 / $total)}}
+                                                            %</span>
+                                                    </li>
+                                                    <li class="chart_row">
+                                                        <span class="row_label row_cell">خیلی بد </span>
+                                                        <span class="row_bar row_cell">
+                                                            <span class="bar">
+                                                                <span class="fill"
+                                                                      style="width:{{ceil($rates[0] * 100 / $total)}}%;"></span>
+                                                            </span>
+                                                        </span>
+                                                        <span class="row_count row_cell">{{ceil($rates[0] * 100 / $total)}}
+                                                            %</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="prw_rup prw_common_atf_header_bl" id="clientConnectionsLines">
+                                                <div class="blEntry address mg-bt-10" id="clientConnectionsAddress">
+                                                    <span class="ui_icon map-pin"></span>
+                                                    <span class="street-address">آدرس : </span>
+                                                    <span>{{$place->address}}</span>
                                                 </div>
-                                            @endif
-                                            @if(!empty($place->site))
-                                                <div class="blEntry website mg-bt-10" id="clientConnectionsWebsite">
-                                                    <span class="ui_icon laptop"></span>
-                                                    <?php
-                                                    if (strpos($place->site, 'http') === false)
-                                                        $place->site = 'http://' . $place->site;
-                                                    ?>
-                                                    <a target="_blank" href="{{$place->site}}" {{($config->externalSiteNoFollow) ? 'rel="nofollow"' : ''}}>
-                                                        <span class="font-size-12">{{$place->site}}</span>
-                                                    </a>
-                                                </div>
-                                            @endif
-                                        </div>
-                                        <div id="tagsName">
-                                            <h3>برچسب‌ها:</h3>
-                                            <span class="tag">{{$place->tag1}}</span>
-                                            <span class="tag">{{$place->tag2}}</span>
-                                            <span class="tag">{{$place->tag3}}</span>
-                                            <span class="tag">{{$place->tag4}}</span>
-                                            <span class="tag">{{$place->tag5}}</span>
-                                            <span class="tag">{{$place->tag6}}</span>
-                                            <span class="tag">{{$place->tag7}}</span>
-                                            <span class="tag">{{$place->tag8}}</span>
-                                            <span class="tag">{{$place->tag9}}</span>
-                                            <span class="tag">{{$place->tag10}}</span>
-                                            <span class="tag">{{$place->tag11}}</span>
-                                            <span class="tag">{{$place->tag12}}</span>
-                                            <span class="tag">{{$place->tag13}}</span>
-                                            <span class="tag">{{$place->tag14}}</span>
-                                            <span class="tag">{{$place->tag15}}</span>
+                                                @if(!empty($place->phone))
+                                                    <div class="blEntry phone mg-bt-10" id="clientConnectionsPhone">
+                                                        <span class="ui_icon phone"></span>
+                                                        <span>{{$place->phone}}</span>
+                                                    </div>
+                                                @endif
+                                                @if(!empty($place->site))
+                                                    <div class="blEntry website mg-bt-10" id="clientConnectionsWebsite">
+                                                        <span class="ui_icon laptop"></span>
+                                                        <?php
+                                                        if (strpos($place->site, 'http') === false)
+                                                            $place->site = 'http://' . $place->site;
+                                                        ?>
+                                                        <a target="_blank" href="{{$place->site}}" {{($config->externalSiteNoFollow) ? 'rel="nofollow"' : ''}}>
+                                                            <span class="font-size-12">{{$place->site}}</span>
+                                                        </a>
+                                                    </div>
+                                                @endif
+                                            </div>
+                                            <div id="tagsName">
+                                                <h3>برچسب‌ها:</h3>
+                                                <span class="tag">{{$place->tag1}}</span>
+                                                <span class="tag">{{$place->tag2}}</span>
+                                                <span class="tag">{{$place->tag3}}</span>
+                                                <span class="tag">{{$place->tag4}}</span>
+                                                <span class="tag">{{$place->tag5}}</span>
+                                                <span class="tag">{{$place->tag6}}</span>
+                                                <span class="tag">{{$place->tag7}}</span>
+                                                <span class="tag">{{$place->tag8}}</span>
+                                                <span class="tag">{{$place->tag9}}</span>
+                                                <span class="tag">{{$place->tag10}}</span>
+                                                <span class="tag">{{$place->tag11}}</span>
+                                                <span class="tag">{{$place->tag12}}</span>
+                                                <span class="tag">{{$place->tag13}}</span>
+                                                <span class="tag">{{$place->tag14}}</span>
+                                                <span class="tag">{{$place->tag15}}</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-{{--                    @if(session('goDate') != null && $rooms != null)--}}
-{{--                        <div id="roomChoice" class="ppr_rup ppr_priv_location_detail_two_column display-block position-relative">--}}
+    {{--                    @if(session('goDate') != null && $rooms != null)--}}
+    {{--                        <div id="roomChoice" class="ppr_rup ppr_priv_location_detail_two_column display-block position-relative">--}}
 
-{{--                            <div class="column_wrap ui_columns is-mobile position-relative full-width direction-rtl">--}}
-{{--                                <div class="content_column ui_column is-10 roomBox_IS_10">--}}
-{{--                                    <div class="ppr_rup ppr_priv_location_reviews_container position-relative">--}}
-{{--                                        <div id="rooms" class="ratings_and_types concepts_and_filters block_wrap position-relative">--}}
-{{--                                            <div class="header_group block_header" id="roomChoiceDiv">--}}
-{{--                                                <h3 class="tabs_header reviews_header block_title"> انتخاب اتاق </h3>--}}
-{{--                                                <div class="srchBox">--}}
-{{--                                                    <button class="srchBtn" onclick="editSearch()">ویرایش جستجو</button>--}}
-{{--                                                </div>--}}
-{{--                                            </div>--}}
-{{--                                            @for($i = 0; $i < count($rooms); $i++)--}}
-{{--                                                <div class="eachRooms">--}}
-{{--                                                    <div class="roomPic">--}}
-{{--                                                        <img src="{{$rooms[$i]->pic}}" width="100%" height="100%"--}}
-{{--                                                             alt='{{$rooms[$i]->name}}'>--}}
-{{--                                                    </div>--}}
-{{--                                                    <div class="roomDetails" id="roomDetailsMainDiv">--}}
-{{--                                                        <div>--}}
-{{--                                                            <div class="roomRow">--}}
-{{--                                                                <div class="roomName"--}}
-{{--                                                                     onclick="document.getElementById('room_info{{$i}}').style.display = 'flex'">--}}
-{{--                                                                    {{$rooms[$i]->name}}--}}
-{{--                                                                </div>--}}
-{{--                                                                <div class="roomPerson">--}}
-{{--                                                                    <div>--}}
-{{--                                                                        @for($j = 0; $j < ceil($rooms[$i]->capacity->adultCount/2); $j++)--}}
-{{--                                                                            <span class="shTIcon personIcon"></span>--}}
-{{--                                                                        @endfor--}}
-{{--                                                                    </div>--}}
-{{--                                                                    <div>--}}
-{{--                                                                        @for($j = 0; $j < floor($rooms[$i]->capacity->adultCount/2); $j++)--}}
-{{--                                                                            <span class="shTIcon personIcon"></span>--}}
-{{--                                                                        @endfor--}}
-{{--                                                                    </div>--}}
-{{--                                                                </div>--}}
-{{--                                                            </div>--}}
-{{--                                                            <div class="roomRow float-left">--}}
-{{--                                                                <div class="roomNumber">--}}
-{{--                                                                    <div>--}}
-{{--                                                                        تعداد اتاق--}}
-{{--                                                                    </div>--}}
-{{--                                                                    <select name="room_Number" id="roomNumber{{$i}}"--}}
-{{--                                                                            onclick="changeNumRoom({{$i}}, this.value)">--}}
-{{--                                                                        @for($j = 0; $j < 11; $j++)--}}
-{{--                                                                            <option value="{{$j}}">{{$j}}</option>--}}
-{{--                                                                        @endfor--}}
-{{--                                                                    </select>--}}
-{{--                                                                </div>--}}
-{{--                                                            </div>--}}
-{{--                                                        </div>--}}
-{{--                                                        <div>--}}
-{{--                                                            <div class="roomRow">--}}
-{{--                                                                <div class="roomOptionTitle">امکانات اتاق</div>--}}
-{{--                                                            </div>--}}
-{{--                                                            <div class="roomRow">--}}
-{{--                                                                <div class="check-box__item hint-system hidden"--}}
-{{--                                                                     @if(!($rooms[$i]->priceExtraGuest != null && $rooms[$i]->priceExtraGuest != ''))style="display: none;" @endif>--}}
-{{--                                                                    <label class="labelEdit">استفاده از تخت اضافه</label>--}}
-{{--                                                                    <input type="checkbox" id="additional_bed{{$i}}"--}}
-{{--                                                                           name="additionalBed" value="1" class="display-inline-block"--}}
-{{--                                                                           onclick="changeRoomPrice({{$i}}); changeNumRoom({{$i}}, this.value)">--}}
-{{--                                                                </div>--}}
-{{--                                                            </div>--}}
-{{--                                                        </div>--}}
-{{--                                                        <div>--}}
+    {{--                            <div class="column_wrap ui_columns is-mobile position-relative full-width direction-rtl">--}}
+    {{--                                <div class="content_column ui_column is-10 roomBox_IS_10">--}}
+    {{--                                    <div class="ppr_rup ppr_priv_location_reviews_container position-relative">--}}
+    {{--                                        <div id="rooms" class="ratings_and_types concepts_and_filters block_wrap position-relative">--}}
+    {{--                                            <div class="header_group block_header" id="roomChoiceDiv">--}}
+    {{--                                                <h3 class="tabs_header reviews_header block_title"> انتخاب اتاق </h3>--}}
+    {{--                                                <div class="srchBox">--}}
+    {{--                                                    <button class="srchBtn" onclick="editSearch()">ویرایش جستجو</button>--}}
+    {{--                                                </div>--}}
+    {{--                                            </div>--}}
+    {{--                                            @for($i = 0; $i < count($rooms); $i++)--}}
+    {{--                                                <div class="eachRooms">--}}
+    {{--                                                    <div class="roomPic">--}}
+    {{--                                                        <img src="{{$rooms[$i]->pic}}" width="100%" height="100%"--}}
+    {{--                                                             alt='{{$rooms[$i]->name}}'>--}}
+    {{--                                                    </div>--}}
+    {{--                                                    <div class="roomDetails" id="roomDetailsMainDiv">--}}
+    {{--                                                        <div>--}}
+    {{--                                                            <div class="roomRow">--}}
+    {{--                                                                <div class="roomName"--}}
+    {{--                                                                     onclick="document.getElementById('room_info{{$i}}').style.display = 'flex'">--}}
+    {{--                                                                    {{$rooms[$i]->name}}--}}
+    {{--                                                                </div>--}}
+    {{--                                                                <div class="roomPerson">--}}
+    {{--                                                                    <div>--}}
+    {{--                                                                        @for($j = 0; $j < ceil($rooms[$i]->capacity->adultCount/2); $j++)--}}
+    {{--                                                                            <span class="shTIcon personIcon"></span>--}}
+    {{--                                                                        @endfor--}}
+    {{--                                                                    </div>--}}
+    {{--                                                                    <div>--}}
+    {{--                                                                        @for($j = 0; $j < floor($rooms[$i]->capacity->adultCount/2); $j++)--}}
+    {{--                                                                            <span class="shTIcon personIcon"></span>--}}
+    {{--                                                                        @endfor--}}
+    {{--                                                                    </div>--}}
+    {{--                                                                </div>--}}
+    {{--                                                            </div>--}}
+    {{--                                                            <div class="roomRow float-left">--}}
+    {{--                                                                <div class="roomNumber">--}}
+    {{--                                                                    <div>--}}
+    {{--                                                                        تعداد اتاق--}}
+    {{--                                                                    </div>--}}
+    {{--                                                                    <select name="room_Number" id="roomNumber{{$i}}"--}}
+    {{--                                                                            onclick="changeNumRoom({{$i}}, this.value)">--}}
+    {{--                                                                        @for($j = 0; $j < 11; $j++)--}}
+    {{--                                                                            <option value="{{$j}}">{{$j}}</option>--}}
+    {{--                                                                        @endfor--}}
+    {{--                                                                    </select>--}}
+    {{--                                                                </div>--}}
+    {{--                                                            </div>--}}
+    {{--                                                        </div>--}}
+    {{--                                                        <div>--}}
+    {{--                                                            <div class="roomRow">--}}
+    {{--                                                                <div class="roomOptionTitle">امکانات اتاق</div>--}}
+    {{--                                                            </div>--}}
+    {{--                                                            <div class="roomRow">--}}
+    {{--                                                                <div class="check-box__item hint-system hidden"--}}
+    {{--                                                                     @if(!($rooms[$i]->priceExtraGuest != null && $rooms[$i]->priceExtraGuest != ''))style="display: none;" @endif>--}}
+    {{--                                                                    <label class="labelEdit">استفاده از تخت اضافه</label>--}}
+    {{--                                                                    <input type="checkbox" id="additional_bed{{$i}}"--}}
+    {{--                                                                           name="additionalBed" value="1" class="display-inline-block"--}}
+    {{--                                                                           onclick="changeRoomPrice({{$i}}); changeNumRoom({{$i}}, this.value)">--}}
+    {{--                                                                </div>--}}
+    {{--                                                            </div>--}}
+    {{--                                                        </div>--}}
+    {{--                                                        <div>--}}
 
-{{--                                                            <div class="roomRow">--}}
-{{--                                                                <div class="roomOption">{{$rooms[$i]->roomFacility}} </div>--}}
-{{--                                                            </div>--}}
-{{--                                                            <div class="roomRow">--}}
+    {{--                                                            <div class="roomRow">--}}
+    {{--                                                                <div class="roomOption">{{$rooms[$i]->roomFacility}} </div>--}}
+    {{--                                                            </div>--}}
+    {{--                                                            <div class="roomRow">--}}
 
-{{--                                                                @if($rooms[$i]->priceExtraGuest != null && $rooms[$i]->priceExtraGuest != '')--}}
-{{--                                                                    <div class="roomAdditionalOption">تخت اضافه</div>--}}
-{{--                                                                @endif--}}
-{{--                                                                <div class="roomAdditionalOption">{{$rooms[$i]->roomService}}</div>--}}
-{{--                                                            </div>--}}
-{{--                                                        </div>--}}
-{{--                                                    </div>--}}
-{{--                                                    <div class="roomPrices" id="roomPricesMainDiv">--}}
-{{--                                                        <div>قیمت</div>--}}
-{{--                                                        <div>--}}
-{{--                                                            <div>{{floor($rooms[$i]->perDay[0]->price/1000)*1000}}--}}
-{{--                                                                @if($rooms[$i]->priceExtraGuest != null && $rooms[$i]->priceExtraGuest != '')--}}
-{{--                                                                    <div id="extraBedPrice{{$i}}" class="display-none extraBedPrices">--}}
-{{--                                                                        <div class="salePrice">--}}
-{{--                                                                            {{floor($rooms[$i]->priceExtraGuest/1000)*1000 + floor($rooms[$i]->perDay[0]->price/1000)*1000}}--}}
-{{--                                                                        </div>--}}
-{{--                                                                        <div>--}}
-{{--                                                                            <div>با احتساب {{floor($rooms[$i]->priceExtraGuest/1000)*1000}}</div>--}}
-{{--                                                                            <div>با تخت اضافه</div>--}}
-{{--                                                                        </div>--}}
-{{--                                                                    </div>--}}
-{{--                                                                @endif--}}
-{{--                                                            </div>--}}
-{{--                                                        </div>--}}
-{{--                                                        <div>--}}
-{{--                                                            <div class="display-inline-block">--}}
-{{--                                                                از {{$rooms[$i]->provider}}</div>--}}
-{{--                                                            <img class="float-left">--}}
-{{--                                                        </div>--}}
-{{--                                                    </div>--}}
-{{--                                                </div>--}}
-{{--                                                <div id="room_info{{$i}}" class="roomInfos">--}}
-{{--                                                    <div class="container">--}}
-{{--                                                        <div class="row direction-rtl">--}}
-{{--                                                            <div class="col-md-8">--}}
-{{--                                                                <div class="roomRow">--}}
-{{--                                                                    <div class="roomName">{{$rooms[$i]->name}}</div>--}}
-{{--                                                                    <div class="shTIcon closeXicon float-left"--}}
-{{--                                                                         onclick="document.getElementById('room_info{{$i}}').style.display = 'none'">--}}
-{{--                                                                    </div>--}}
-{{--                                                                </div>--}}
-{{--                                                                <div class="roomRow">--}}
-{{--                                                                    <div class="roomOptionTitle">امکانات اتاق</div>--}}
-{{--                                                                </div>--}}
-{{--                                                                <div class="roomRow">--}}
-{{--                                                                    <div class="roomOption">{{$rooms[$i]->roomFacility}} </div>--}}
-{{--                                                                </div>--}}
-{{--                                                                <div class="roomRow">--}}
-{{--                                                                    <div class="roomOptionTitle">امکانات ویژه</div>--}}
-{{--                                                                </div>--}}
-{{--                                                                <div class="roomRow">--}}
-{{--                                                                    @if($rooms[$i]->priceExtraGuest != null && $rooms[$i]->priceExtraGuest != '')--}}
-{{--                                                                        <div class="roomAdditionalOption">--}}
-{{--                                                                            تخت اضافه--}}
-{{--                                                                        </div>--}}
-{{--                                                                    @endif--}}
-{{--                                                                    <div class="roomAdditionalOption">{{$rooms[$i]->roomService}}</div>--}}
-{{--                                                                </div>--}}
-{{--                                                            </div>--}}
-{{--                                                            <div class="col-md-4">--}}
-{{--                                                                <img src="{{$rooms[$i]->pic}}" width="100%" height="100%" alt='{{$rooms[$i]->name}}'>--}}
-{{--                                                            </div>--}}
-{{--                                                        </div>--}}
-{{--                                                    </div>--}}
-{{--                                                </div>--}}
-{{--                                            @endfor--}}
-{{--                                        </div>--}}
+    {{--                                                                @if($rooms[$i]->priceExtraGuest != null && $rooms[$i]->priceExtraGuest != '')--}}
+    {{--                                                                    <div class="roomAdditionalOption">تخت اضافه</div>--}}
+    {{--                                                                @endif--}}
+    {{--                                                                <div class="roomAdditionalOption">{{$rooms[$i]->roomService}}</div>--}}
+    {{--                                                            </div>--}}
+    {{--                                                        </div>--}}
+    {{--                                                    </div>--}}
+    {{--                                                    <div class="roomPrices" id="roomPricesMainDiv">--}}
+    {{--                                                        <div>قیمت</div>--}}
+    {{--                                                        <div>--}}
+    {{--                                                            <div>{{floor($rooms[$i]->perDay[0]->price/1000)*1000}}--}}
+    {{--                                                                @if($rooms[$i]->priceExtraGuest != null && $rooms[$i]->priceExtraGuest != '')--}}
+    {{--                                                                    <div id="extraBedPrice{{$i}}" class="display-none extraBedPrices">--}}
+    {{--                                                                        <div class="salePrice">--}}
+    {{--                                                                            {{floor($rooms[$i]->priceExtraGuest/1000)*1000 + floor($rooms[$i]->perDay[0]->price/1000)*1000}}--}}
+    {{--                                                                        </div>--}}
+    {{--                                                                        <div>--}}
+    {{--                                                                            <div>با احتساب {{floor($rooms[$i]->priceExtraGuest/1000)*1000}}</div>--}}
+    {{--                                                                            <div>با تخت اضافه</div>--}}
+    {{--                                                                        </div>--}}
+    {{--                                                                    </div>--}}
+    {{--                                                                @endif--}}
+    {{--                                                            </div>--}}
+    {{--                                                        </div>--}}
+    {{--                                                        <div>--}}
+    {{--                                                            <div class="display-inline-block">--}}
+    {{--                                                                از {{$rooms[$i]->provider}}</div>--}}
+    {{--                                                            <img class="float-left">--}}
+    {{--                                                        </div>--}}
+    {{--                                                    </div>--}}
+    {{--                                                </div>--}}
+    {{--                                                <div id="room_info{{$i}}" class="roomInfos">--}}
+    {{--                                                    <div class="container">--}}
+    {{--                                                        <div class="row direction-rtl">--}}
+    {{--                                                            <div class="col-md-8">--}}
+    {{--                                                                <div class="roomRow">--}}
+    {{--                                                                    <div class="roomName">{{$rooms[$i]->name}}</div>--}}
+    {{--                                                                    <div class="shTIcon closeXicon float-left"--}}
+    {{--                                                                         onclick="document.getElementById('room_info{{$i}}').style.display = 'none'">--}}
+    {{--                                                                    </div>--}}
+    {{--                                                                </div>--}}
+    {{--                                                                <div class="roomRow">--}}
+    {{--                                                                    <div class="roomOptionTitle">امکانات اتاق</div>--}}
+    {{--                                                                </div>--}}
+    {{--                                                                <div class="roomRow">--}}
+    {{--                                                                    <div class="roomOption">{{$rooms[$i]->roomFacility}} </div>--}}
+    {{--                                                                </div>--}}
+    {{--                                                                <div class="roomRow">--}}
+    {{--                                                                    <div class="roomOptionTitle">امکانات ویژه</div>--}}
+    {{--                                                                </div>--}}
+    {{--                                                                <div class="roomRow">--}}
+    {{--                                                                    @if($rooms[$i]->priceExtraGuest != null && $rooms[$i]->priceExtraGuest != '')--}}
+    {{--                                                                        <div class="roomAdditionalOption">--}}
+    {{--                                                                            تخت اضافه--}}
+    {{--                                                                        </div>--}}
+    {{--                                                                    @endif--}}
+    {{--                                                                    <div class="roomAdditionalOption">{{$rooms[$i]->roomService}}</div>--}}
+    {{--                                                                </div>--}}
+    {{--                                                            </div>--}}
+    {{--                                                            <div class="col-md-4">--}}
+    {{--                                                                <img src="{{$rooms[$i]->pic}}" width="100%" height="100%" alt='{{$rooms[$i]->name}}'>--}}
+    {{--                                                            </div>--}}
+    {{--                                                        </div>--}}
+    {{--                                                    </div>--}}
+    {{--                                                </div>--}}
+    {{--                                            @endfor--}}
+    {{--                                        </div>--}}
 
-{{--                                    </div>--}}
-{{--                                </div>--}}
+    {{--                                    </div>--}}
+    {{--                                </div>--}}
 
-{{--                                <div class="is-2 roomBox_IS_2 full-width">--}}
-{{--                                    <div class="priceRow_IS_2">--}}
-{{--                                        <div>قیمت کل برای یک شب</div>--}}
-{{--                                        <div id="totalPriceOneDay">0</div>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="priceRow_IS_2">--}}
-{{--                                        <div>--}}
-{{--                                            <span class="lable_IS_2">قیمت کل </span>--}}
-{{--                                            برای--}}
-{{--                                            <span id="numDay"></span>--}}
-{{--                                            شب--}}
-{{--                                        </div>--}}
-{{--                                        <div id="totalPrice">0</div>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="priceRow_IS_2">--}}
-{{--                                        <div>--}}
-{{--                                            <div class="lable_IS_2">تعداد اتاق</div>--}}
-{{--                                            <div class="float-left" id="totalNumRoom"></div>--}}
-{{--                                        </div>--}}
-{{--                                        <div id="discriptionNumRoom">--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                    <div>--}}
-{{--                                        <button class="btn rezervedBtn" type="button" onclick="showReserve()">رزرو--}}
-{{--                                        </button>--}}
-{{--                                    </div>--}}
-{{--                                    <div>--}}
-{{--                                        --}}{{--<div>--}}
-{{--                                        --}}{{--<div>حداکثر سن کودک</div>--}}
-{{--                                        --}}{{--<div class="color-darkred">یک سال بدون اخذ هزینه</div>--}}
-{{--                                        --}}{{--</div>--}}
-{{--                                        --}}{{--<div>--}}
-{{--                                        --}}{{--<div>ساعت تحویل و تخلیه اتاق</div>--}}
-{{--                                        --}}{{--<div class="color-darkred">14:00</div>--}}
-{{--                                        --}}{{--</div>--}}
-{{--                                        --}}{{--<div>--}}
-{{--                                        --}}{{--<div>قوانین کنسلی</div>--}}
-{{--                                        --}}{{--<div class="color-darkred">لورم ییی</div>--}}
-{{--                                        --}}{{--</div>--}}
-{{--                                        {{$place->policy}}--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
+    {{--                                <div class="is-2 roomBox_IS_2 full-width">--}}
+    {{--                                    <div class="priceRow_IS_2">--}}
+    {{--                                        <div>قیمت کل برای یک شب</div>--}}
+    {{--                                        <div id="totalPriceOneDay">0</div>--}}
+    {{--                                    </div>--}}
+    {{--                                    <div class="priceRow_IS_2">--}}
+    {{--                                        <div>--}}
+    {{--                                            <span class="lable_IS_2">قیمت کل </span>--}}
+    {{--                                            برای--}}
+    {{--                                            <span id="numDay"></span>--}}
+    {{--                                            شب--}}
+    {{--                                        </div>--}}
+    {{--                                        <div id="totalPrice">0</div>--}}
+    {{--                                    </div>--}}
+    {{--                                    <div class="priceRow_IS_2">--}}
+    {{--                                        <div>--}}
+    {{--                                            <div class="lable_IS_2">تعداد اتاق</div>--}}
+    {{--                                            <div class="float-left" id="totalNumRoom"></div>--}}
+    {{--                                        </div>--}}
+    {{--                                        <div id="discriptionNumRoom">--}}
+    {{--                                        </div>--}}
+    {{--                                    </div>--}}
+    {{--                                    <div>--}}
+    {{--                                        <button class="btn rezervedBtn" type="button" onclick="showReserve()">رزرو--}}
+    {{--                                        </button>--}}
+    {{--                                    </div>--}}
+    {{--                                    <div>--}}
+    {{--                                        --}}{{--<div>--}}
+    {{--                                        --}}{{--<div>حداکثر سن کودک</div>--}}
+    {{--                                        --}}{{--<div class="color-darkred">یک سال بدون اخذ هزینه</div>--}}
+    {{--                                        --}}{{--</div>--}}
+    {{--                                        --}}{{--<div>--}}
+    {{--                                        --}}{{--<div>ساعت تحویل و تخلیه اتاق</div>--}}
+    {{--                                        --}}{{--<div class="color-darkred">14:00</div>--}}
+    {{--                                        --}}{{--</div>--}}
+    {{--                                        --}}{{--<div>--}}
+    {{--                                        --}}{{--<div>قوانین کنسلی</div>--}}
+    {{--                                        --}}{{--<div class="color-darkred">لورم ییی</div>--}}
+    {{--                                        --}}{{--</div>--}}
+    {{--                                        {{$place->policy}}--}}
+    {{--                                    </div>--}}
+    {{--                                </div>--}}
+    {{--                            </div>--}}
+    {{--                        </div>--}}
 
-{{--                        <div id="check_room">--}}
-{{--                            <div class="container">--}}
-{{--                                <div class="row">--}}
-{{--                                    <span>--}}
-{{--                                        شهر{{$city->name}}--}}
-{{--                                    </span>--}}
-{{--                                    <span>--}}
-{{--                                        {{session('goDate')}}-{{session('backDate')}}--}}
-{{--                                    </span>--}}
-{{--                                    <span class="shTIcon closeXicon float-left"--}}
-{{--                                          onclick="document.getElementById('check_room').style.display = 'none';">--}}
-{{--                                    </span>--}}
-{{--                                </div>--}}
-{{--                                <div class="row">--}}
-{{--                                    <div class="col-md-3">--}}
-{{--                                        <div class="is-2 roomBox_IS_2">--}}
-{{--                                            <div class="priceRow_IS_2">--}}
-{{--                                                <div>--}}
-{{--                                                    <span class="lable_IS_2">قیمت کل </span>--}}
-{{--                                                    برای--}}
-{{--                                                    <span id="check_num_day"></span>--}}
-{{--                                                    شب--}}
-{{--                                                </div>--}}
-{{--                                                <div id="check_total_price">--}}
-{{--                                                    0--}}
-{{--                                                </div>--}}
-{{--                                            </div>--}}
-{{--                                            <div class="priceRow_IS_2" >--}}
-{{--                                                <div>--}}
-{{--                                                    <div class="float-left">--}}
-{{--                                                        <span id="check_total_num_room"></span>--}}
-{{--                                                        اتاق--}}
-{{--                                                    </div>--}}
-{{--                                                    <div class="lable_IS_2">تعداد اتاق</div>--}}
-{{--                                                </div>--}}
-{{--                                                <div id="check_description">--}}
-{{--                                                </div>--}}
-{{--                                            </div>--}}
-{{--                                            <div>--}}
-{{--                                                <span class="float-left">--}}
-{{--                                                    {{$rooms[0]->provider}}--}}
-{{--                                                </span>--}}
-{{--                                                --}}{{--<a href="{{url('buyHotel')}}">--}}
-{{--                                                <button class="btn rezervedBtn" type="button" onclick="updateSession()">--}}
-{{--                                                    تایید و ادامه--}}
-{{--                                                </button>--}}
-{{--                                                --}}{{--</a>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="col-md-9">--}}
-{{--                                        <div class="row">--}}
-{{--                                            <div>هتل انتخابی شما</div>--}}
-{{--                                            <div>--}}
-{{--                                                <div class="col-md-7">--}}
-{{--                                                    <span class="imgWrap imgWrap1stTemp">--}}
-{{--                                                        <img alt="{{$place->alt1}}" src="{{$thumbnail}}" class="centeredImg" width="100%"/>--}}
-{{--                                                    </span>--}}
-{{--                                                </div>--}}
-{{--                                                <div class="col-md-5">--}}
-{{--                                                    <div>{{$place->name}}</div>--}}
-{{--                                                    <div class="rating_and_popularity" id="hotelRatingMainDivRoomChoice">--}}
-{{--                                                        <span class="header_rating">--}}
-{{--                                                            <div class="rs rating" rel="v:rating">--}}
-{{--                                                                <div class="prw_rup prw_common_bubble_rating overallBubbleRating float-left">--}}
-{{--                                                                    @if($avgRate == 5)--}}
-{{--                                                                       <span class="ui_bubble_rating bubble_50 font-size-16"--}}
-{{--                                                                             property="ratingValue" content="5"--}}
-{{--                                                                             alt='5 of 5 bubbles'></span>--}}
-{{--                                                                   @elseif($avgRate == 4)--}}
-{{--                                                                       <span class="ui_bubble_rating bubble_40 font-size-16"--}}
-{{--                                                                             property="ratingValue" content="4"--}}
-{{--                                                                             alt='4 of 5 bubbles'></span>--}}
-{{--                                                                   @elseif($avgRate == 3)--}}
-{{--                                                                       <span class="ui_bubble_rating bubble_30 font-size-16"--}}
-{{--                                                                             property="ratingValue" content="3"--}}
-{{--                                                                             alt='3 of 5 bubbles'></span>--}}
-{{--                                                                   @elseif($avgRate == 2)--}}
-{{--                                                                       <span class="ui_bubble_rating bubble_20 font-size-16"--}}
-{{--                                                                             property="ratingValue" content="2"--}}
-{{--                                                                             alt='2 of 5 bubbles'></span>--}}
-{{--                                                                   @elseif($avgRate == 1)--}}
-{{--                                                                       <span class="ui_bubble_rating bubble_10 font-size-16"--}}
-{{--                                                                             property="ratingValue" content="1"--}}
-{{--                                                                             alt='1 of 5 bubbles'></span>--}}
-{{--                                                                   @endif--}}
-{{--                                                                </div>--}}
-{{--                                                           </div>--}}
-{{--                                                        </span>--}}
-{{--                                                        <span class="header_popularity popIndexValidation">--}}
-{{--                                                            <a class="more taLnk" href="#REVIEWS">--}}
-{{--                                                                <span property="v:count" id="commentCount"></span> نقد--}}
-{{--                                                            </a>--}}
-{{--                                                            <a> {{$total}} امتیاز</a>--}}
-{{--                                                        </span>--}}
-{{--                                                    </div>--}}
-{{--                                                    <div id="hotelRatesDivs">--}}
-{{--                                                        <div class="titleInTable">درجه هتل</div>--}}
-{{--                                                        <div class="highlightedAmenity detailListItem">{{$place->rate}}</div>--}}
-{{--                                                    </div>--}}
-{{--                                                    <div class="blEntry blEn address  clickable colCnt3"--}}
-{{--                                                         onclick="showExtendedMap()">--}}
-{{--                                                        <span class="ui_icon map-pin"></span>--}}
-{{--                                                        <span class="street-address">آدرس : </span>--}}
-{{--                                                        <span>{{$place->address}}</span>--}}
-{{--                                                    </div>--}}
-{{--                                                </div>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="row" id="selectedRoomMainDiv">--}}
-{{--                                            <div>اتاق های انتخابی شما</div>--}}
-{{--                                            <div id="selected_rooms"></div>--}}
-{{--                                            <div>--}}
-{{--                                                <div class="row">--}}
-{{--                                                    <div class="col-md-12">--}}
-{{--                                                        {{$place->policy}}--}}
-{{--                                                    </div>--}}
-{{--                                                </div>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                                <div class="col-md-3"></div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    @endif--}}
-                </div>
-                <div id="nearbyDiv" ng-controller="NearbyController as nearby" class="ppr_rup ppr_priv_location_detail_two_column">
-                    <div class="column_wrap is-mobile">
-                        <div id="nearbyMainContainer" class="content_column ui_column is-8">
-                            <div class="ppr_rup ppr_priv_location_nearby">
-                                <div class="nearbyContainer outerShell block_wrap">
-                                    <div class="ui_columns neighborhood">
-                                        <div id="map" class="ui_column is-12 mapTile prv_map clickable"></div>
-                                        <div class="clear-both"></div>
+    {{--                        <div id="check_room">--}}
+    {{--                            <div class="container">--}}
+    {{--                                <div class="row">--}}
+    {{--                                    <span>--}}
+    {{--                                        شهر{{$city->name}}--}}
+    {{--                                    </span>--}}
+    {{--                                    <span>--}}
+    {{--                                        {{session('goDate')}}-{{session('backDate')}}--}}
+    {{--                                    </span>--}}
+    {{--                                    <span class="shTIcon closeXicon float-left"--}}
+    {{--                                          onclick="document.getElementById('check_room').style.display = 'none';">--}}
+    {{--                                    </span>--}}
+    {{--                                </div>--}}
+    {{--                                <div class="row">--}}
+    {{--                                    <div class="col-md-3">--}}
+    {{--                                        <div class="is-2 roomBox_IS_2">--}}
+    {{--                                            <div class="priceRow_IS_2">--}}
+    {{--                                                <div>--}}
+    {{--                                                    <span class="lable_IS_2">قیمت کل </span>--}}
+    {{--                                                    برای--}}
+    {{--                                                    <span id="check_num_day"></span>--}}
+    {{--                                                    شب--}}
+    {{--                                                </div>--}}
+    {{--                                                <div id="check_total_price">--}}
+    {{--                                                    0--}}
+    {{--                                                </div>--}}
+    {{--                                            </div>--}}
+    {{--                                            <div class="priceRow_IS_2" >--}}
+    {{--                                                <div>--}}
+    {{--                                                    <div class="float-left">--}}
+    {{--                                                        <span id="check_total_num_room"></span>--}}
+    {{--                                                        اتاق--}}
+    {{--                                                    </div>--}}
+    {{--                                                    <div class="lable_IS_2">تعداد اتاق</div>--}}
+    {{--                                                </div>--}}
+    {{--                                                <div id="check_description">--}}
+    {{--                                                </div>--}}
+    {{--                                            </div>--}}
+    {{--                                            <div>--}}
+    {{--                                                <span class="float-left">--}}
+    {{--                                                    {{$rooms[0]->provider}}--}}
+    {{--                                                </span>--}}
+    {{--                                                --}}{{--<a href="{{url('buyHotel')}}">--}}
+    {{--                                                <button class="btn rezervedBtn" type="button" onclick="updateSession()">--}}
+    {{--                                                    تایید و ادامه--}}
+    {{--                                                </button>--}}
+    {{--                                                --}}{{--</a>--}}
+    {{--                                            </div>--}}
+    {{--                                        </div>--}}
+    {{--                                    </div>--}}
+    {{--                                    <div class="col-md-9">--}}
+    {{--                                        <div class="row">--}}
+    {{--                                            <div>هتل انتخابی شما</div>--}}
+    {{--                                            <div>--}}
+    {{--                                                <div class="col-md-7">--}}
+    {{--                                                    <span class="imgWrap imgWrap1stTemp">--}}
+    {{--                                                        <img alt="{{$place->alt1}}" src="{{$thumbnail}}" class="centeredImg" width="100%"/>--}}
+    {{--                                                    </span>--}}
+    {{--                                                </div>--}}
+    {{--                                                <div class="col-md-5">--}}
+    {{--                                                    <div>{{$place->name}}</div>--}}
+    {{--                                                    <div class="rating_and_popularity" id="hotelRatingMainDivRoomChoice">--}}
+    {{--                                                        <span class="header_rating">--}}
+    {{--                                                            <div class="rs rating" rel="v:rating">--}}
+    {{--                                                                <div class="prw_rup prw_common_bubble_rating overallBubbleRating float-left">--}}
+    {{--                                                                    @if($avgRate == 5)--}}
+    {{--                                                                       <span class="ui_bubble_rating bubble_50 font-size-16"--}}
+    {{--                                                                             property="ratingValue" content="5"--}}
+    {{--                                                                             alt='5 of 5 bubbles'></span>--}}
+    {{--                                                                   @elseif($avgRate == 4)--}}
+    {{--                                                                       <span class="ui_bubble_rating bubble_40 font-size-16"--}}
+    {{--                                                                             property="ratingValue" content="4"--}}
+    {{--                                                                             alt='4 of 5 bubbles'></span>--}}
+    {{--                                                                   @elseif($avgRate == 3)--}}
+    {{--                                                                       <span class="ui_bubble_rating bubble_30 font-size-16"--}}
+    {{--                                                                             property="ratingValue" content="3"--}}
+    {{--                                                                             alt='3 of 5 bubbles'></span>--}}
+    {{--                                                                   @elseif($avgRate == 2)--}}
+    {{--                                                                       <span class="ui_bubble_rating bubble_20 font-size-16"--}}
+    {{--                                                                             property="ratingValue" content="2"--}}
+    {{--                                                                             alt='2 of 5 bubbles'></span>--}}
+    {{--                                                                   @elseif($avgRate == 1)--}}
+    {{--                                                                       <span class="ui_bubble_rating bubble_10 font-size-16"--}}
+    {{--                                                                             property="ratingValue" content="1"--}}
+    {{--                                                                             alt='1 of 5 bubbles'></span>--}}
+    {{--                                                                   @endif--}}
+    {{--                                                                </div>--}}
+    {{--                                                           </div>--}}
+    {{--                                                        </span>--}}
+    {{--                                                        <span class="header_popularity popIndexValidation">--}}
+    {{--                                                            <a class="more taLnk" href="#REVIEWS">--}}
+    {{--                                                                <span property="v:count" id="commentCount"></span> نقد--}}
+    {{--                                                            </a>--}}
+    {{--                                                            <a> {{$total}} امتیاز</a>--}}
+    {{--                                                        </span>--}}
+    {{--                                                    </div>--}}
+    {{--                                                    <div id="hotelRatesDivs">--}}
+    {{--                                                        <div class="titleInTable">درجه هتل</div>--}}
+    {{--                                                        <div class="highlightedAmenity detailListItem">{{$place->rate}}</div>--}}
+    {{--                                                    </div>--}}
+    {{--                                                    <div class="blEntry blEn address  clickable colCnt3"--}}
+    {{--                                                         onclick="showExtendedMap()">--}}
+    {{--                                                        <span class="ui_icon map-pin"></span>--}}
+    {{--                                                        <span class="street-address">آدرس : </span>--}}
+    {{--                                                        <span>{{$place->address}}</span>--}}
+    {{--                                                    </div>--}}
+    {{--                                                </div>--}}
+    {{--                                            </div>--}}
+    {{--                                        </div>--}}
+    {{--                                        <div class="row" id="selectedRoomMainDiv">--}}
+    {{--                                            <div>اتاق های انتخابی شما</div>--}}
+    {{--                                            <div id="selected_rooms"></div>--}}
+    {{--                                            <div>--}}
+    {{--                                                <div class="row">--}}
+    {{--                                                    <div class="col-md-12">--}}
+    {{--                                                        {{$place->policy}}--}}
+    {{--                                                    </div>--}}
+    {{--                                                </div>--}}
+    {{--                                            </div>--}}
+    {{--                                        </div>--}}
+    {{--                                    </div>--}}
+    {{--                                </div>--}}
+    {{--                                <div class="col-md-3"></div>--}}
+    {{--                            </div>--}}
+    {{--                        </div>--}}
+    {{--                    @endif--}}
+                    </div>
+                    <div id="nearbyDiv" ng-controller="NearbyController as nearby" class="ppr_rup ppr_priv_location_detail_two_column">
+                        <div class="column_wrap is-mobile">
+                            <div id="nearbyMainContainer" class="content_column ui_column is-8">
+                                <div class="ppr_rup ppr_priv_location_nearby">
+                                    <div class="nearbyContainer outerShell block_wrap">
+                                        <div class="ui_columns neighborhood">
+                                            <div id="map" class="ui_column is-12 mapTile prv_map clickable"></div>
+                                            <div class="clear-both"></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                @include('layouts.extendedMap')
-                <div class="col-xs-7 pd-0 float-right">
-                    <div class="col-xs-12 postMainDivShown position-relative">
-                        <div class="commentOptionsBoxes commentActions">
-                            <span class="commentActionsIcon"></span>
-                        </div>
-                        <div class="commentWriterDetailsShow">
-                            <div class="circleBase type2 commentWriterPicShow"></div>
-                            <div class="commentWriterExperienceDetails">
-                                <b class="userProfileName">shazdesina</b>
-                                <div class="display-inline-block">در
-                                    <span class="commentWriterExperiencePlace">هتل عباسی، شهر یزد، استان یزد</span>
-                                </div>
-                                <div>با
-                                    <span class="commentWriterExperienceParticipation">احتشام الدوله توفیقی</span>،
-                                    <span class="commentWriterExperienceParticipation">حمیدرضا عسگرزاده </span>و
-                                    <span class="commentWriterExperienceParticipation">علی اصر همتی</span>
-                                </div>
-                                <div>
-                                    هم اکنون - بیش از 23 ساعت پیش
-                                </div>
-                            </div>
-                        </div>
-                        <div class="commentContentsShow">
-                            <p>
-                               بسیاری از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از طریق اینترنت دریافت می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا خدمات مورد نیازشان اثرپذیری فراوانی دارد.
-                                با توجه به ابن که خدمات و کالاهای بومی و محلی دارای اصالت و فرهنگ کهن جوامع روستایی هستند، می توان گفت اینترنت می تواند در آمدزایی از سبک زندگی جوامع محلی نقش
-                            </p>
-                        </div>
-                        <div class="commentPhotosShow">
-                            <div class="commentPhotosMainDiv quintupletPhotoDiv">
-                                <div class="photosCol secondCol col-xs-6">
-                                    <div></div>
-                                    <div></div>
-                                </div>
-                                <div class="photosCol firstCol col-xs-6">
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                </div>
-                            </div>
-                            <div class="quantityOfLikes">
-                                <span>31</span>
-                                نفر دوست داشتند،
-                                <span>31</span>
-                                نفر دوست نداشتند و
-                                <span>31</span>
-                                نفر نظر دادند.
-                            </div>
-                        </div>
-                        <div class="commentRatingsDetailsShow">
-                            <div class="mg-bt-20 display-inline-block full-width">
-                                <div class="commentRatingHeader">
-                                    بازدید با
-                                    <span>دوستان</span>
-                                    در فصل
-                                    <span>بهار</span>
-                                    و از مبدأ
-                                    <span>تهران</span>
-                                    انجام شده است
-                                </div>
-                                <div class="commentRatingsDetailsBtn">مشاهده جزئیات امتیازدهی
-                                    <div class="commentRatingsDetailsBtnIcon">
-                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="commentRatingsDetailsBox">
-                                <div class="display-inline-block full-width">
-                                    <b class="col-xs-3 font-size-15 line-height-203">اصلاً راضی نبودم</b>
-                                    <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
-                                        <div class="ui_star_rating stars_10 font-size-25">
-                                            <span class="starRating"></span>
-                                            <span class="starRating"></span>
-                                            <span class="starRating"></span>
-                                            <span class="starRating"></span>
-                                            <span class="starRatingGreen"></span>
-                                        </div>
-                                    </div>
-                                    <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
-                                </div>
-                                <div class="display-inline-block full-width">
-                                    <b class="col-xs-3 font-size-15 line-height-203">بد نبود</b>
-                                    <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
-                                        <div class="ui_star_rating stars_20 font-size-25">
-                                            <span class="starRating"></span>
-                                            <span class="starRating"></span>
-                                            <span class="starRating"></span>
-                                            <span class="starRatingGreen"></span>
-                                            <span class="starRatingGreen"></span>
-                                        </div>
-                                    </div>
-                                    <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
-                                </div>
-                                <div class="display-inline-block full-width">
-                                    <b class="col-xs-3 font-size-15 line-height-203">معمولی بود</b>
-                                    <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
-                                        <div class="ui_star_rating stars_30 font-size-25">
-                                            <span class="starRating"></span>
-                                            <span class="starRating"></span>
-                                            <span class="starRatingGreen"></span>
-                                            <span class="starRatingGreen"></span>
-                                            <span class="starRatingGreen"></span>
-                                        </div>
-                                    </div>
-                                    <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
-                                </div>
-                                <div class="display-inline-block full-width">
-                                    <b class="col-xs-3 font-size-15 line-height-203">خوب بود</b>
-                                    <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
-                                        <div class="ui_star_rating stars_40 font-size-25">
-                                            <span class="starRating"></span>
-                                            <span class="starRatingGreen"></span>
-                                            <span class="starRatingGreen"></span>
-                                            <span class="starRatingGreen"></span>
-                                            <span class="starRatingGreen"></span>
-                                        </div>
-                                    </div>
-                                    <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
-                                </div>
-                                <div class="display-inline-block full-width">
-                                    <b class="col-xs-3 font-size-15 line-height-203">عالی بود</b>
-                                    <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
-                                        <div class="ui_star_rating stars_50 font-size-25">
-                                            <span class="starRatingGreen"></span>
-                                            <span class="starRatingGreen"></span>
-                                            <span class="starRatingGreen"></span>
-                                            <span class="starRatingGreen"></span>
-                                            <span class="starRatingGreen"></span>
-                                        </div>
-                                    </div>
-                                    <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="commentFeedbackChoices">
-                            <div class="col-xs-3 color-red pd-0-9 font-size-15 float-right">
-                                <span class="commentsLikeIconFeedback"></span>
-                                <span class="mg-rt-20">دوست داشتم</span>
-                            </div>
-                            <div class="col-xs-3 dark-red pd-0-9 font-size-15 float-right">
-                                <span class="commentsDislikeIconFeedback"></span>
-                                <span class="mg-rt-20">دوست نداشتم</span>
-                            </div>
-                            <div class="col-xs-3 color-blue pd-0-9 font-size-15 float-right">
-                                <span class="showCommentsIconFeedback"></span>
-                                <span class="mg-rt-20">مشاهده نظرها</span>
-                            </div>
-                            <div class="col-xs-3 color-grey pd-0-9 font-size-15 float-right">
-                                <span class="commentsShareIconFeedback"></span>
-                                <span class="mg-rt-20">اشتراک‌گذاری</span>
-                            </div>
-                        </div>
-                        <div class="commentsMainBox">
-                            <div class="dark-blue mg-bt-10">مشاهده 17 نظر باقیمانده</div>
-                            <div class="eachCommentMainBox">
-                                <div class="circleBase type2 commentsWriterProfilePic"></div>
-                                <div class="commentsContentMainBox">
-                                    <b class="userProfileName display-inline-block">shazdesina</b>
-                                    <div>من موافق این مطلب نیستم. دوست من شما باید خودتان توجه می کردید نه اینکه مارا متهم کنید</div>
-                                    <div class="commentsStatisticsBar">
-                                        <div class="float-right display-inline-black">
-                                            <span class="likeStatisticIcon commentsStatisticSpan color-red">31</span>
-                                            <span class="dislikeStatisticIcon commentsStatisticSpan dark-red">31</span>
-                                            <span class="numberOfCommentsIcon commentsStatisticSpan color-blue">31</span>
-                                        </div>
-                                        <div class="dark-blue float-left display-inline-black">مشاهده پاسخ‌ها</div>
-                                    </div>
-                                </div>
-                                <div class="commentsActionsBtns">
-                                    <span class="likeActionBtn"></span>
-                                    <span class="dislikeActionBtn"></span>
-                                    <b class="replyBtn">پاسخ دهید</b>
-                                </div>
-                            </div>
-                            <div class="eachCommentMainBox mg-rt-45">
-                                <div class="circleBase type2 commentsWriterProfilePic"></div>
-                                <div class="commentsContentMainBox">
-                                    <b class="userProfileName float-right">shazdesina</b>
-                                    <b class="commentReplyDesc display-inline-block">در پاسخ به Shazdesina</b>
-                                    <div class="clear-both"></div>
-                                    <div>من موافق این مطلب نیستم. دوست من شما باید خودتان توجه می کردید نه اینکه مارا متهم کنید</div>
-                                    <div class="commentsStatisticsBar">
-                                        <div class="float-right display-inline-black">
-                                            <span class="likeStatisticIcon commentsStatisticSpan color-red">31</span>
-                                            <span class="dislikeStatisticIcon commentsStatisticSpan dark-red">31</span>
-                                            <span class="numberOfCommentsIcon commentsStatisticSpan color-blue">31</span>
-                                        </div>
-                                        <div class="dark-blue float-left display-inline-black">مشاهده پاسخ‌ها</div>
-                                    </div>
-                                </div>
-                                <div class="commentsActionsBtns">
-                                    <span class="likeActionBtn"></span>
-                                    <span class="dislikeActionBtn"></span>
-                                    <b class="replyBtn">پاسخ دهید</b>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="newCommentPlaceMainDiv">
-                            <div class="circleBase type2 newCommentWriterProfilePic"></div>
-                            <div class="inputBox">
-                                <b class="replyCommentTitle">در پاسخ به نظر shazdesina</b>
-                                <textarea class="inputBoxInput inputBoxInputComment" type="text" placeholder="شما چه نظری دارید؟"></textarea>
-                                <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
-                            </div>
-                            <div></div>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 postMainDivShown position-relative">
-                        <div class="commentOptionsBoxes commentActions">
-                            <span class="commentActionsIcon"></span>
-                        </div>
-                        <div class="commentWriterDetailsShow">
-                            <div class="circleBase type2 commentWriterPicShow"></div>
-                            <div class="commentWriterExperienceDetails">
-                                <b class="userProfileName">shazdesina</b>
-                                <div class="display-inline-block">در
-                                    <span class="commentWriterExperiencePlace">هتل عباسی، شهر یزد، استان یزد</span>
-                                </div>
-                                <div>با
-                                    <span class="commentWriterExperienceParticipation">احتشام الدوله توفیقی</span>،
-                                    <span class="commentWriterExperienceParticipation">حمیدرضا عسگرزاده </span>و
-                                    <span class="commentWriterExperienceParticipation">علی اصر همتی</span>
-                                </div>
-                                <div>
-                                    هم اکنون - بیش از 23 ساعت پیش
-                                </div>
-                            </div>
-                        </div>
-                        <div class="commentContentsShow">
-                            <p>
-                                بسیاری از درخواست کنندگان کسی و کارهای بومی و محلی اطلاعات مورد نیاز خود را از طریق اینترنت دریافت می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا خدمات مورد نیازشان اثرپذیری فراوانی دارد.
-                                با توجه به ابن که خدمات و کالاهای بومی و محلی دارای اصالت و فرهنگ کهن جوامع روستایی هستند، می توان گفت اینترنت می تواند در آمدزایی از سبک زندگی جوامع محلی نقش
-                            </p>
-                        </div>
-                        <div class="commentPhotosShow">
-                            <div class="commentPhotosMainDiv doublePhotoDiv">
-                                <div class="photosCol secondCol col-xs-6">
-                                    <div></div>
-                                </div>
-                                <div class="photosCol firstCol col-xs-6">
-                                    <div></div>
-                                </div>
-                            </div>
-                            <div class="quantityOfLikes">
-                                <span>31</span>
-                                نفر دوست داشتند،
-                                <span>31</span>
-                                نفر دوست نداشتند و
-                                <span>31</span>
-                                نفر نظر دادند.
-                            </div>
-                        </div>
-                        <div class="commentRatingsDetailsShow">
-                            <div class="mg-bt-20 display-inline-block full-width">
-                                <div class="commentRatingHeader">
-                                    بازدید با
-                                    <span>دوستان</span>
-                                    در فصل
-                                    <span>بهار</span>
-                                    و از مبدأ
-                                    <span>تهران</span>
-                                    انجام شده است
-                                </div>
-                                <div class="commentRatingsDetailsBtn">مشاهده جزئیات امتیازدهی
-                                    <div class="commentRatingsDetailsBtnIcon">
-                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="commentRatingsDetailsBox">
-                                <div class="display-inline-block full-width">
-                                    <b class="col-xs-3 font-size-15 line-height-203">اصلاً راضی نبودم</b>
-                                    <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
-                                        <div class="ui_star_rating stars_10 font-size-25">
-                                            <span class="starRating"></span>
-                                            <span class="starRating"></span>
-                                            <span class="starRating"></span>
-                                            <span class="starRating"></span>
-                                            <span class="starRatingGreen"></span>
-                                        </div>
-                                    </div>
-                                    <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
-                                </div>
-                                <div class="display-inline-block full-width">
-                                    <b class="col-xs-3 font-size-15 line-height-203">بد نبود</b>
-                                    <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
-                                        <div class="ui_star_rating stars_20 font-size-25">
-                                            <span class="starRating"></span>
-                                            <span class="starRating"></span>
-                                            <span class="starRating"></span>
-                                            <span class="starRatingGreen"></span>
-                                            <span class="starRatingGreen"></span>
-                                        </div>
-                                    </div>
-                                    <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
-                                </div>
-                                <div class="display-inline-block full-width">
-                                    <b class="col-xs-3 font-size-15 line-height-203">معمولی بود</b>
-                                    <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
-                                        <div class="ui_star_rating stars_30 font-size-25">
-                                            <span class="starRating"></span>
-                                            <span class="starRating"></span>
-                                            <span class="starRatingGreen"></span>
-                                            <span class="starRatingGreen"></span>
-                                            <span class="starRatingGreen"></span>
-                                        </div>
-                                    </div>
-                                    <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
-                                </div>
-                                <div class="display-inline-block full-width">
-                                    <b class="col-xs-3 font-size-15 line-height-203">خوب بود</b>
-                                    <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
-                                        <div class="ui_star_rating stars_40 font-size-25">
-                                            <span class="starRating"></span>
-                                            <span class="starRatingGreen"></span>
-                                            <span class="starRatingGreen"></span>
-                                            <span class="starRatingGreen"></span>
-                                            <span class="starRatingGreen"></span>
-                                        </div>
-                                    </div>
-                                    <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
-                                </div>
-                                <div class="display-inline-block full-width">
-                                    <b class="col-xs-3 font-size-15 line-height-203">عالی بود</b>
-                                    <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
-                                        <div class="ui_star_rating stars_50 font-size-25">
-                                            <span class="starRatingGreen"></span>
-                                            <span class="starRatingGreen"></span>
-                                            <span class="starRatingGreen"></span>
-                                            <span class="starRatingGreen"></span>
-                                            <span class="starRatingGreen"></span>
-                                        </div>
-                                    </div>
-                                    <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="commentFeedbackChoices">
-                            <div class="col-xs-3 color-red pd-0-9 font-size-15 float-right">
-                                <span class="commentsLikeIconFeedback"></span>
-                                <span class="mg-rt-20">دوست داشتم</span>
-                            </div>
-                            <div class="col-xs-3 dark-red pd-0-9 font-size-15 float-right">
-                                <span class="commentsDislikeIconFeedback"></span>
-                                <span class="mg-rt-20">دوست نداشتم</span>
-                            </div>
-                            <div class="col-xs-3 color-blue pd-0-9 font-size-15 float-right">
-                                <span class="showCommentsIconFeedback"></span>
-                                <span class="mg-rt-20">مشاهده نظرها</span>
-                            </div>
-                            <div class="col-xs-3 color-grey pd-0-9 font-size-15 float-right">
-                                <span class="commentsShareIconFeedback"></span>
-                                <span class="mg-rt-20">اشتراک‌گذاری</span>
-                            </div>
-                        </div>
-                        <div class="commentsMainBox">
-                            <div class="dark-blue mg-bt-10">مشاهده 17 نظر باقیمانده</div>
-                            <div class="eachCommentMainBox">
-                                <div class="circleBase type2 commentsWriterProfilePic"></div>
-                                <div class="commentsContentMainBox">
-                                    <b class="userProfileName display-inline-block">shazdesina</b>
-                                    <div>من موافق این مطلب نیستم. دوست من شما باید خودتان توجه می کردید نه اینکه مارا متهم کنید</div>
-                                    <div class="commentsStatisticsBar">
-                                        <div class="float-right display-inline-black">
-                                            <span class="likeStatisticIcon commentsStatisticSpan color-red">31</span>
-                                            <span class="dislikeStatisticIcon commentsStatisticSpan dark-red">31</span>
-                                            <span class="numberOfCommentsIcon commentsStatisticSpan color-blue">31</span>
-                                        </div>
-                                        <div class="dark-blue float-left display-inline-black">مشاهده پاسخ‌ها</div>
-                                    </div>
-                                </div>
-                                <div class="commentsActionsBtns">
-                                    <span class="likeActionBtn"></span>
-                                    <span class="dislikeActionBtn"></span>
-                                    <b class="replyBtn">پاسخ دهید</b>
-                                </div>
-                            </div>
-                            <div class="eachCommentMainBox mg-rt-45">
-                                <div class="circleBase type2 commentsWriterProfilePic"></div>
-                                <div class="commentsContentMainBox">
-                                    <b class="userProfileName float-right">shazdesina</b>
-                                    <b class="commentReplyDesc display-inline-block">در پاسخ به Shazdesina</b>
-                                    <div class="clear-both"></div>
-                                    <div>من موافق این مطلب نیستم. دوست من شما باید خودتان توجه می کردید نه اینکه مارا متهم کنید</div>
-                                    <div class="commentsStatisticsBar">
-                                        <div class="float-right display-inline-black">
-                                            <span class="likeStatisticIcon commentsStatisticSpan color-red">31</span>
-                                            <span class="dislikeStatisticIcon commentsStatisticSpan dark-red">31</span>
-                                            <span class="numberOfCommentsIcon commentsStatisticSpan color-blue">31</span>
-                                        </div>
-                                        <div class="dark-blue float-left display-inline-black">مشاهده پاسخ‌ها</div>
-                                    </div>
-                                </div>
-                                <div class="commentsActionsBtns">
-                                    <span class="likeActionBtn"></span>
-                                    <span class="dislikeActionBtn"></span>
-                                    <b class="replyBtn">پاسخ دهید</b>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="newCommentPlaceMainDiv">
-                            <div class="circleBase type2 newCommentWriterProfilePic"></div>
-                            <div class="inputBox">
-                                <b class="replyCommentTitle">در پاسخ به نظر shazdesina</b>
-                                <textarea class="inputBoxInput inputBoxInputComment" type="text" placeholder="شما چه نظری دارید؟"></textarea>
-                                <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
-                            </div>
-                            <div></div>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 postMainDivShown position-relative">
-                        <div class="commentOptionsBoxes commentActions">
-                            <span class="commentActionsIcon"></span>
-                        </div>
-                        <div class="commentWriterDetailsShow">
-                            <div class="circleBase type2 commentWriterPicShow"></div>
-                            <div class="commentWriterExperienceDetails">
-                                <b class="userProfileName">shazdesina</b>
-                                <div class="display-inline-block">در
-                                    <span class="commentWriterExperiencePlace">هتل عباسی، شهر یزد، استان یزد</span>
-                                </div>
-                                <div>با
-                                    <span class="commentWriterExperienceParticipation">احتشام الدوله توفیقی</span>،
-                                    <span class="commentWriterExperienceParticipation">حمیدرضا عسگرزاده </span>و
-                                    <span class="commentWriterExperienceParticipation">علی اصر همتی</span>
-                                </div>
-                                <div>
-                                    هم اکنون - بیش از 23 ساعت پیش
-                                </div>
-                            </div>
-                        </div>
-                        <div class="commentContentsShow">
-                            <p>
-                                بسیاری از درخواست کنندگان کسی و کارهای بومی و محلی اطلاعات مورد نیاز خود را از طریق اینترنت دریافت می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا خدمات مورد نیازشان اثرپذیری فراوانی دارد.
-                                با توجه به ابن که خدمات و کالاهای بومی و محلی دارای اصالت و فرهنگ کهن جوامع روستایی هستند، می توان گفت اینترنت می تواند در آمدزایی از سبک زندگی جوامع محلی نقش
-                            </p>
-                        </div>
-                        <div class="commentPhotosShow">
-                            <div class="commentPhotosMainDiv tripletPhotoDiv">
-                                <div class="photosCol secondCol col-xs-6">
-                                    <div></div>
-                                </div>
-                                <div class="photosCol firstCol col-xs-6">
-                                    <div></div>
-                                    <div></div>
-                                </div>
-                            </div>
-                            <div class="quantityOfLikes">
-                                <span>31</span>
-                                نفر دوست داشتند،
-                                <span>31</span>
-                                نفر دوست نداشتند و
-                                <span>31</span>
-                                نفر نظر دادند.
-                            </div>
-                        </div>
-                        <div class="commentRatingsDetailsShow">
-                            <div class="mg-bt-20 display-inline-block full-width">
-                                <div class="commentRatingHeader">
-                                    بازدید با
-                                    <span>دوستان</span>
-                                    در فصل
-                                    <span>بهار</span>
-                                    و از مبدأ
-                                    <span>تهران</span>
-                                    انجام شده است
-                                </div>
-                                <div class="commentRatingsDetailsBtn">مشاهده جزئیات امتیازدهی
-                                    <div class="commentRatingsDetailsBtnIcon">
-                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="commentRatingsDetailsBox">
-                                <div class="display-inline-block full-width">
-                                    <b class="col-xs-3 font-size-15 line-height-203">اصلاً راضی نبودم</b>
-                                    <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
-                                        <div class="ui_star_rating stars_10 font-size-25">
-                                            <span class="starRating"></span>
-                                            <span class="starRating"></span>
-                                            <span class="starRating"></span>
-                                            <span class="starRating"></span>
-                                            <span class="starRatingGreen"></span>
-                                        </div>
-                                    </div>
-                                    <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
-                                </div>
-                                <div class="display-inline-block full-width">
-                                    <b class="col-xs-3 font-size-15 line-height-203">بد نبود</b>
-                                    <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
-                                        <div class="ui_star_rating stars_20 font-size-25">
-                                            <span class="starRating"></span>
-                                            <span class="starRating"></span>
-                                            <span class="starRating"></span>
-                                            <span class="starRatingGreen"></span>
-                                            <span class="starRatingGreen"></span>
-                                        </div>
-                                    </div>
-                                    <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
-                                </div>
-                                <div class="display-inline-block full-width">
-                                    <b class="col-xs-3 font-size-15 line-height-203">معمولی بود</b>
-                                    <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
-                                        <div class="ui_star_rating stars_30 font-size-25">
-                                            <span class="starRating"></span>
-                                            <span class="starRating"></span>
-                                            <span class="starRatingGreen"></span>
-                                            <span class="starRatingGreen"></span>
-                                            <span class="starRatingGreen"></span>
-                                        </div>
-                                    </div>
-                                    <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
-                                </div>
-                                <div class="display-inline-block full-width">
-                                    <b class="col-xs-3 font-size-15 line-height-203">خوب بود</b>
-                                    <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
-                                        <div class="ui_star_rating stars_40 font-size-25">
-                                            <span class="starRating"></span>
-                                            <span class="starRatingGreen"></span>
-                                            <span class="starRatingGreen"></span>
-                                            <span class="starRatingGreen"></span>
-                                            <span class="starRatingGreen"></span>
-                                        </div>
-                                    </div>
-                                    <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
-                                </div>
-                                <div class="display-inline-block full-width">
-                                    <b class="col-xs-3 font-size-15 line-height-203">عالی بود</b>
-                                    <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
-                                        <div class="ui_star_rating stars_50 font-size-25">
-                                            <span class="starRatingGreen"></span>
-                                            <span class="starRatingGreen"></span>
-                                            <span class="starRatingGreen"></span>
-                                            <span class="starRatingGreen"></span>
-                                            <span class="starRatingGreen"></span>
-                                        </div>
-                                    </div>
-                                    <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="commentFeedbackChoices">
-                            <div class="col-xs-3 color-red pd-0-9 font-size-15 float-right">
-                                <span class="commentsLikeIconFeedback"></span>
-                                <span class="mg-rt-20">دوست داشتم</span>
-                            </div>
-                            <div class="col-xs-3 dark-red pd-0-9 font-size-15 float-right">
-                                <span class="commentsDislikeIconFeedback"></span>
-                                <span class="mg-rt-20">دوست نداشتم</span>
-                            </div>
-                            <div class="col-xs-3 color-blue pd-0-9 font-size-15 float-right">
-                                <span class="showCommentsIconFeedback"></span>
-                                <span class="mg-rt-20">مشاهده نظرها</span>
-                            </div>
-                            <div class="col-xs-3 color-grey pd-0-9 font-size-15 float-right">
-                                <span class="commentsShareIconFeedback"></span>
-                                <span class="mg-rt-20">اشتراک‌گذاری</span>
-                            </div>
-                        </div>
-                        <div class="commentsMainBox">
-                            <div class="dark-blue mg-bt-10">مشاهده 17 نظر باقیمانده</div>
-                            <div class="eachCommentMainBox">
-                                <div class="circleBase type2 commentsWriterProfilePic"></div>
-                                <div class="commentsContentMainBox">
-                                    <b class="userProfileName display-inline-block">shazdesina</b>
-                                    <div>من موافق این مطلب نیستم. دوست من شما باید خودتان توجه می کردید نه اینکه مارا متهم کنید</div>
-                                    <div class="commentsStatisticsBar">
-                                        <div class="float-right display-inline-black">
-                                            <span class="likeStatisticIcon commentsStatisticSpan color-red">31</span>
-                                            <span class="dislikeStatisticIcon commentsStatisticSpan dark-red">31</span>
-                                            <span class="numberOfCommentsIcon commentsStatisticSpan color-blue">31</span>
-                                        </div>
-                                        <div class="dark-blue float-left display-inline-black">مشاهده پاسخ‌ها</div>
-                                    </div>
-                                </div>
-                                <div class="commentsActionsBtns">
-                                    <span class="likeActionBtn"></span>
-                                    <span class="dislikeActionBtn"></span>
-                                    <b class="replyBtn">پاسخ دهید</b>
-                                </div>
-                            </div>
-                            <div class="eachCommentMainBox mg-rt-45">
-                                <div class="circleBase type2 commentsWriterProfilePic"></div>
-                                <div class="commentsContentMainBox">
-                                    <b class="userProfileName float-right">shazdesina</b>
-                                    <b class="commentReplyDesc display-inline-block">در پاسخ به Shazdesina</b>
-                                    <div class="clear-both"></div>
-                                    <div>من موافق این مطلب نیستم. دوست من شما باید خودتان توجه می کردید نه اینکه مارا متهم کنید</div>
-                                    <div class="commentsStatisticsBar">
-                                        <div class="float-right display-inline-black">
-                                            <span class="likeStatisticIcon commentsStatisticSpan color-red">31</span>
-                                            <span class="dislikeStatisticIcon commentsStatisticSpan dark-red">31</span>
-                                            <span class="numberOfCommentsIcon commentsStatisticSpan color-blue">31</span>
-                                        </div>
-                                        <div class="dark-blue float-left display-inline-black">مشاهده پاسخ‌ها</div>
-                                    </div>
-                                </div>
-                                <div class="commentsActionsBtns">
-                                    <span class="likeActionBtn"></span>
-                                    <span class="dislikeActionBtn"></span>
-                                    <b class="replyBtn">پاسخ دهید</b>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="newCommentPlaceMainDiv">
-                            <div class="circleBase type2 newCommentWriterProfilePic"></div>
-                            <div class="inputBox">
-                                <b class="replyCommentTitle">در پاسخ به نظر shazdesina</b>
-                                <textarea class="inputBoxInput inputBoxInputComment" type="text" placeholder="شما چه نظری دارید؟"></textarea>
-                                <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
-                            </div>
-                            <div></div>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 postMainDivShown position-relative">
-                        <div class="commentOptionsBoxes commentActions">
-                            <span class="commentActionsIcon"></span>
-                        </div>
-                        <div class="commentWriterDetailsShow">
-                            <div class="circleBase type2 commentWriterPicShow"></div>
-                            <div class="commentWriterExperienceDetails">
-                                <b class="userProfileName">shazdesina</b>
-                                <div class="display-inline-block">در
-                                    <span class="commentWriterExperiencePlace">هتل عباسی، شهر یزد، استان یزد</span>
-                                </div>
-                                <div>با
-                                    <span class="commentWriterExperienceParticipation">احتشام الدوله توفیقی</span>،
-                                    <span class="commentWriterExperienceParticipation">حمیدرضا عسگرزاده </span>و
-                                    <span class="commentWriterExperienceParticipation">علی اصر همتی</span>
-                                </div>
-                                <div>
-                                    هم اکنون - بیش از 23 ساعت پیش
-                                </div>
-                            </div>
-                        </div>
-                        <div class="commentContentsShow">
-                            <p>
-                                بسیاری از درخواست کنندگان کسی و کارهای بومی و محلی اطلاعات مورد نیاز خود را از طریق اینترنت دریافت می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا خدمات مورد نیازشان اثرپذیری فراوانی دارد.
-                                با توجه به ابن که خدمات و کالاهای بومی و محلی دارای اصالت و فرهنگ کهن جوامع روستایی هستند، می توان گفت اینترنت می تواند در آمدزایی از سبک زندگی جوامع محلی نقش
-                            </p>
-                        </div>
-                        <div class="commentPhotosShow">
-                            <div class="commentPhotosMainDiv quadruplePhotoDiv">
-                                <div class="photosCol secondCol col-xs-6">
-                                    <div></div>
-                                    <div></div>
-                                </div>
-                                <div class="photosCol firstCol col-xs-6">
-                                    <div></div>
-                                    <div></div>
-                                </div>
-                            </div>
-                            <div class="quantityOfLikes">
-                                <span>31</span>
-                                نفر دوست داشتند،
-                                <span>31</span>
-                                نفر دوست نداشتند و
-                                <span>31</span>
-                                نفر نظر دادند.
-                            </div>
-                        </div>
-                        <div class="commentRatingsDetailsShow">
-                            <div class="mg-bt-20 display-inline-block full-width">
-                                <div class="commentRatingHeader">
-                                    بازدید با
-                                    <span>دوستان</span>
-                                    در فصل
-                                    <span>بهار</span>
-                                    و از مبدأ
-                                    <span>تهران</span>
-                                    انجام شده است
-                                </div>
-                                <div class="commentRatingsDetailsBtn">مشاهده جزئیات امتیازدهی
-                                    <div class="commentRatingsDetailsBtnIcon">
-                                        <i class="glyphicon glyphicon-triangle-bottom"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="commentRatingsDetailsBox">
-                                <div class="display-inline-block full-width">
-                                    <b class="col-xs-3 font-size-15 line-height-203">اصلاً راضی نبودم</b>
-                                    <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
-                                        <div class="ui_star_rating stars_10 font-size-25">
-                                            <span class="starRating"></span>
-                                            <span class="starRating"></span>
-                                            <span class="starRating"></span>
-                                            <span class="starRating"></span>
-                                            <span class="starRatingGreen"></span>
-                                        </div>
-                                    </div>
-                                    <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
-                                </div>
-                                <div class="display-inline-block full-width">
-                                    <b class="col-xs-3 font-size-15 line-height-203">بد نبود</b>
-                                    <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
-                                        <div class="ui_star_rating stars_20 font-size-25">
-                                            <span class="starRating"></span>
-                                            <span class="starRating"></span>
-                                            <span class="starRating"></span>
-                                            <span class="starRatingGreen"></span>
-                                            <span class="starRatingGreen"></span>
-                                        </div>
-                                    </div>
-                                    <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
-                                </div>
-                                <div class="display-inline-block full-width">
-                                    <b class="col-xs-3 font-size-15 line-height-203">معمولی بود</b>
-                                    <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
-                                        <div class="ui_star_rating stars_30 font-size-25">
-                                            <span class="starRating"></span>
-                                            <span class="starRating"></span>
-                                            <span class="starRatingGreen"></span>
-                                            <span class="starRatingGreen"></span>
-                                            <span class="starRatingGreen"></span>
-                                        </div>
-                                    </div>
-                                    <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
-                                </div>
-                                <div class="display-inline-block full-width">
-                                    <b class="col-xs-3 font-size-15 line-height-203">خوب بود</b>
-                                    <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
-                                        <div class="ui_star_rating stars_40 font-size-25">
-                                            <span class="starRating"></span>
-                                            <span class="starRatingGreen"></span>
-                                            <span class="starRatingGreen"></span>
-                                            <span class="starRatingGreen"></span>
-                                            <span class="starRatingGreen"></span>
-                                        </div>
-                                    </div>
-                                    <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
-                                </div>
-                                <div class="display-inline-block full-width">
-                                    <b class="col-xs-3 font-size-15 line-height-203">عالی بود</b>
-                                    <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
-                                        <div class="ui_star_rating stars_50 font-size-25">
-                                            <span class="starRatingGreen"></span>
-                                            <span class="starRatingGreen"></span>
-                                            <span class="starRatingGreen"></span>
-                                            <span class="starRatingGreen"></span>
-                                            <span class="starRatingGreen"></span>
-                                        </div>
-                                    </div>
-                                    <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="commentFeedbackChoices">
-                            <div class="col-xs-3 color-red pd-0-9 font-size-15 float-right">
-                                <span class="commentsLikeIconFeedback"></span>
-                                <span class="mg-rt-20">دوست داشتم</span>
-                            </div>
-                            <div class="col-xs-3 dark-red pd-0-9 font-size-15 float-right">
-                                <span class="commentsDislikeIconFeedback"></span>
-                                <span class="mg-rt-20">دوست نداشتم</span>
-                            </div>
-                            <div class="col-xs-3 color-blue pd-0-9 font-size-15 float-right">
-                                <span class="showCommentsIconFeedback"></span>
-                                <span class="mg-rt-20">مشاهده نظرها</span>
-                            </div>
-                            <div class="col-xs-3 color-grey pd-0-9 font-size-15 float-right">
-                                <span class="commentsShareIconFeedback"></span>
-                                <span class="mg-rt-20">اشتراک‌گذاری</span>
-                            </div>
-                        </div>
-                        <div class="commentsMainBox">
-                            <div class="dark-blue mg-bt-10">مشاهده 17 نظر باقیمانده</div>
-                            <div class="eachCommentMainBox">
-                                <div class="circleBase type2 commentsWriterProfilePic"></div>
-                                <div class="commentsContentMainBox">
-                                    <b class="userProfileName display-inline-block">shazdesina</b>
-                                    <div>من موافق این مطلب نیستم. دوست من شما باید خودتان توجه می کردید نه اینکه مارا متهم کنید</div>
-                                    <div class="commentsStatisticsBar">
-                                        <div class="float-right display-inline-black">
-                                            <span class="likeStatisticIcon commentsStatisticSpan color-red">31</span>
-                                            <span class="dislikeStatisticIcon commentsStatisticSpan dark-red">31</span>
-                                            <span class="numberOfCommentsIcon commentsStatisticSpan color-blue">31</span>
-                                        </div>
-                                        <div class="dark-blue float-left display-inline-black">مشاهده پاسخ‌ها</div>
-                                    </div>
-                                </div>
-                                <div class="commentsActionsBtns">
-                                    <span class="likeActionBtn"></span>
-                                    <span class="dislikeActionBtn"></span>
-                                    <b class="replyBtn">پاسخ دهید</b>
-                                </div>
-                            </div>
-                            <div class="eachCommentMainBox mg-rt-45">
-                                <div class="circleBase type2 commentsWriterProfilePic"></div>
-                                <div class="commentsContentMainBox">
-                                    <b class="userProfileName float-right">shazdesina</b>
-                                    <b class="commentReplyDesc display-inline-block">در پاسخ به Shazdesina</b>
-                                    <div class="clear-both"></div>
-                                    <div>من موافق این مطلب نیستم. دوست من شما باید خودتان توجه می کردید نه اینکه مارا متهم کنید</div>
-                                    <div class="commentsStatisticsBar">
-                                        <div class="float-right display-inline-black">
-                                            <span class="likeStatisticIcon commentsStatisticSpan color-red">31</span>
-                                            <span class="dislikeStatisticIcon commentsStatisticSpan dark-red">31</span>
-                                            <span class="numberOfCommentsIcon commentsStatisticSpan color-blue">31</span>
-                                        </div>
-                                        <div class="dark-blue float-left display-inline-black">مشاهده پاسخ‌ها</div>
-                                    </div>
-                                </div>
-                                <div class="commentsActionsBtns">
-                                    <span class="likeActionBtn"></span>
-                                    <span class="dislikeActionBtn"></span>
-                                    <b class="replyBtn">پاسخ دهید</b>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="newCommentPlaceMainDiv">
-                            <div class="circleBase type2 newCommentWriterProfilePic"></div>
-                            <div class="inputBox">
-                                <b class="replyCommentTitle">در پاسخ به نظر shazdesina</b>
-                                <textarea class="inputBoxInput inputBoxInputComment" type="text" placeholder="شما چه نظری دارید؟"></textarea>
-                                <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
-                            </div>
-                            <div></div>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 postsMainDivFooter position-relative">
-                        <div class="col-xs-5 font-size-13 line-height-2">
-                            نمایش
-                            <span class="mg-lt-5">10</span>-
-                            <span class="mg-lt-5">20</span>-
-                            <span class="color-blue">50</span>
-                            پست در هر صفحه
-                        </div>
-                        <a class="col-xs-3 showPostsNumsFilterLink" href="#taplc_global_nav_links_0">
-                            <div class="showPostsNumsFilter" onclick="allPostsGrid()">نمایش تمامی پست‌ها</div>
-                        </a>
-                        <div class="col-xs-4 font-size-13 line-height-2 text-align-right">
-                            صفحه
-                            <span>1</span>
-                            <span><<<</span>
-                            <span class="mg-lt-5">2</span>-
-                            <span class="color-blue mg-lt-5">3</span>-
-                            <span>4</span>
-                            <span>>>></span>
-                            <span>10</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-5 pd-0 pd-rt-10Imp">
-                    <div class="col-xs-12 postsFiltersMainDiv">
-                        <div class="block_header">
-                            <h3 class="block_title">پست‌ها را دقیق‌تر ببینید </h3>
-                        </div>
-                        <div class="display-inline-block full-width font-size-15">
-                            تعداد 2000 پست، 3500 نظر و 270 کاربر مختلف
-                        </div>
-                        <div class="display-inline-block full-width dark-red pd-bt-10">
-                            با استفاده از گزینه‌های زیر نتایج را محدودتر کرده و راحت‌تر مطلب مورد نظر خود را پیدا کنید
-                        </div>
-                        <div class="visitKindTypeFilter filterTypeDiv">
-                            این مکان چگونه بازدید شده است؟
-                            <span class="dark-blue font-weight-500">حذف فیلتر</span>
-                            <div class="clear-both"></div>
-                            <b class="filterChoices bg-color-yellowImp">با دوستان</b>
-                            <b class="filterChoices">با خانواده</b>
-                            <b class="filterChoices">تنها</b>
-                            <b class="filterChoices">با کودک</b>
-                        </div>
-                        <div class="dateTypePostsFilter filterTypeDiv">
-                            این مکان کی بازدید شده است؟
-                            <div class="clear-both"></div>
-                            <b class="filterChoices bg-color-yellowImp">بهار</b>
-                            <b class="filterChoices">تابستان</b>
-                            <b class="filterChoices">پاییز</b>
-                            <b class="filterChoices">زمستان</b>
-                        </div>
-                        <div class="cityTypePostsFilter filterTypeDiv">
-                            این مکان از کجا بازدید شده است؟
-                            <div class="clear-both"></div>
-                            <b class="filterChoices bg-color-yellowImp">تهران</b>
-                            <b class="filterChoices">کرج</b>
-                            <b class="filterChoices">رشت</b>
-                            <b class="filterChoices">شهرکرد</b>
-                        </div>
-                        <div class="photoTypePostsFilter filterTypeDiv">
-                            نمایش پست‌های دارای عکس
-                            <div class="clear-both"></div>
-                            <b class="filterChoices bg-color-yellowImp">تنها دارای عکس</b>
-                            <b class="filterChoices">تنها دارای فیلم</b>
-                            <b class="filterChoices">تنها دارای متن بلند</b>
-                            <b class="filterChoices">تنها دارای فیلم و عکس</b>
-                        </div>
-                        <div class="commentsRatesFilter filterTypeDiv">
-                            چقدر راضی بودند؟
-                            <div class="clear-both"></div>
-                            <div class="commentRatingsFiltersChoices">
-                                <div class="display-inline-block full-width text-align-right mg-tp-10">
-                                    <div class="prw_rup prw_common_bubble_rating overallBubbleRating full-width float-right">
-{{--                                        <span class="ui_bubble_rating bubble_10 font-size-30 color-yellow"--}}
-{{--                                              property="ratingValue" content="1" alt='1 of 5 bubbles'></span>--}}
-                                        <div class="ui_star_rating stars_10 font-size-25">
-                                            <span class="starRatingGrey"></span>
-                                            <span class="starRatingGrey"></span>
-                                            <span class="starRatingGrey"></span>
-                                            <span class="starRatingGrey"></span>
-                                            <span class="starRatingGold"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="ratingTranslationDiv">اصلاً راضی نبودم</div>
-                        </div>
-                        <div class="searchFilter filterTypeDiv">
-                            جست و جو کنید
-                            <div class="clear-both"></div>
-                            <div class="inputBoxSearchFilter inputBox">
-                                <input class="inputBoxInput" type="text" placeholder="عبارت مورد نظر خود را جست و جو کنید">
-                            </div>
-                        </div>
-                    </div>
-                    <center class="col-xs-12 adsMainDiv">
-                        <div class="adsMainDivHeader">تبلیغات</div>
-                        <img src="{{"../../../public/images/Chromite.jpg"}}" alt="">
-                    </center>
-                </div>
-                <div class="clear-both"></div>
-
-                <div class="col-xs-12 QAndAMainDiv">
-                    <div class="QAndAMainDivHeader">
-                        <h3>سؤال و جواب</h3>
-                    </div>
-                    <div class="askQuestionMainDiv">
-                        <b class="direction-rtl text-align-right float-right full-width mg-bt-10">
-                            سؤلات خود را بپرسید تا با کمک دوستانتان آگاهانه‌تر سفر کنید. همچنین می‌توانید با پاسخ یه سؤالات دوستانتان علاوه بر دریافت امتیاز، اطلاعات خود را به اشتراک بگذارید.
-                        </b>
-                        <div class="display-inline-block float-right direction-rtl mg-lt-5">
-                            در حال حاضر
-                            <span class="color-blue">1340</span>
-                            سؤال
-                            <span class="color-blue">560</span>
-                            پاسخ موجود می‌باشد.
-                        </div>
-                        <div class="display-inline-block float-right direction-rtl dark-blue">مشاهده همه سؤالات و پاسخ‌ها</div>
-                        <div class="clear-both"></div>
-                        <div class="newQuestionMainDiv mg-tp-30 full-width display-inline-block">
-                            <div class="circleBase type2 newQuestionWriterProfilePic"></div>
-                            <div class="inputBox questionInputBox">
-                                <textarea class="inputBoxInput inputBoxInputComment" type="text" placeholder="شما چه سؤالی دارید؟"></textarea>
-                                <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
-                            </div>
-                            <div class="sendQuestionBtn">ارسال</div>
-                        </div>
-                        <div class="answersBoxMainDiv">
-                            <div class="answersOptionsBoxes answersActions" onclick="showAnswersActionBox(this)">
-                                <span class="answersActionsIcon"></span>
+                    @include('layouts.extendedMap')
+                    <div class="col-xs-7 pd-0 float-right">
+                        <div class="col-xs-12 postMainDivShown position-relative">
+                            <div class="commentOptionsBoxes commentActions" onclick="showAnswersActionBox(this)">
+                                <span class="commentActionsIcon"></span>
                             </div>
                             <div class="questionsActionsMoreDetails display-none">
                                 <span>گزارش پست</span>
@@ -2724,94 +1780,1103 @@ if ($total == 0)
                                 <span>مشاهده تمامی پست‌ها</span>
                                 <span>صفحه قوانین و مقررات</span>
                             </div>
-                            <div class="showingQuestionCompletely">
-                                مشاهده کامل سؤال
-                            </div>
-                            <div class="answersWriterDetailsShow">
-                                <div class="circleBase type2 answersWriterPicShow"></div>
-                                <div class="answersWriterExperienceDetails">
-                                    <b class="userProfileNameAnswers">shazdesina</b>
+                            <div class="commentWriterDetailsShow">
+                                <div class="circleBase type2 commentWriterPicShow"></div>
+                                <div class="commentWriterExperienceDetails">
+                                    <b class="userProfileName">shazdesina</b>
                                     <div class="display-inline-block">در
-                                        <span class="answersWriterExperiencePlace">هتل عباسی، شهر یزد، استان یزد</span>
+                                        <span class="commentWriterExperiencePlace">هتل عباسی، شهر یزد، استان یزد</span>
+                                    </div>
+                                    <div>با
+                                        <span class="commentWriterExperienceParticipation">احتشام الدوله توفیقی</span>،
+                                        <span class="commentWriterExperienceParticipation">حمیدرضا عسگرزاده </span>و
+                                        <span class="commentWriterExperienceParticipation">علی اصر همتی</span>
                                     </div>
                                     <div>
                                         هم اکنون - بیش از 23 ساعت پیش
                                     </div>
                                 </div>
                             </div>
-                            <div class="clear-both"></div>
-                            <div class="questionContentMainBox">
-                                بسیاری از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از طریق اینترنت دریافت می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا خدمات مورد نیازشان اثرپذیری فراوانی دارد.
-                                با توجه به ابن که خدمات و کالاهای بومی و محلی دارای اصالت و فرهنگ کهن جوامع روستایی هستند، می توان گفت اینترنت می تواند در آمدزایی از سبک زندگی جوامع محلی نقش کلیدی داشته باشد.
+                            <div class="commentContentsShow">
+                                <p>
+                                   بسیاری از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از طریق اینترنت دریافت می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا خدمات مورد نیازشان اثرپذیری فراوانی دارد.
+                                    با توجه به ابن که خدمات و کالاهای بومی و محلی دارای اصالت و فرهنگ کهن جوامع روستایی هستند، می توان گفت اینترنت می تواند در آمدزایی از سبک زندگی جوامع محلی نقش
+                                </p>
                             </div>
-                            <div class="clear-both"></div>
-                            <div class="questionSubMenuBar">
-                                <div class="numberOfAnswers">
+                            <div class="commentPhotosShow">
+                                <div class="commentPhotosMainDiv quintupletPhotoDiv">
+                                    <div class="photosCol secondCol col-xs-6">
+                                        <div></div>
+                                        <div></div>
+                                    </div>
+                                    <div class="photosCol firstCol col-xs-6">
+                                        <div></div>
+                                        <div></div>
+                                        <div class="morePhotoLinkPosts">
+                                            به علاوه
+                                            <span>14</span>
+                                            عکس و ویدیو دیگر
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="quantityOfLikes">
                                     <span>31</span>
-                                    نفر پاسخ دادند
-                                </div>
-                                <div class="showAnswersToggle" onclick="showAllAnswers(this)">مشاهده پاسخ‌ها</div>
-                                <b class="replyBtn replyAnswerBtn" onclick="replyToAnswers(this)">پاسخ دهید</b>
-                            </div>
-                            <div class="answerPlaceMainDiv display-none">
-                                <div class="circleBase type2 answerWriterProfilePic"></div>
-                                <div class="answerBoxText">
-                                    <b class="replyWriterUsername">shazdesina</b>
-                                    من موافق این مطلب نیستم. دوست من شما باید خودتان توجه می کردید نه اینکه ما را متهم کنید.
-                                    <img class="answerSmileyIcon" src="{{"../../../public/images/smile.png"}}">
-                                    <div class="answerStatistics">
-                                        <span class="numberOfDislikeAnswer">31</span>
-                                        <span class="numberOfLikeAnswer">31</span>
-                                    </div>
-                                </div>
-                                <div class="actionToAnswer">
-                                    <span class="likeAnswer"></span>
-                                    <span class="dislikeAnswer"></span>
+                                    نفر دوست داشتند،
+                                    <span>31</span>
+                                    نفر دوست نداشتند و
+                                    <span>31</span>
+                                    نفر نظر دادند.
                                 </div>
                             </div>
-                            <div class="display-none">
-                                <div class="newAnswerPlaceMainDiv">
-                                    <div class="circleBase type2 newAnswerWriterProfilePic"></div>
-                                    <div class="inputBox">
-                                        <b class="replyAnswerTitle">در پاسخ به نظر shazdesina</b>
-                                        <textarea class="inputBoxInput inputBoxInputAnswer" type="text" placeholder="شما چه نظری دارید؟"></textarea>
-                                        <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
+                            <div class="commentRatingsDetailsShow">
+                                <div class="display-inline-block full-width">
+                                    <div class="commentRatingHeader">
+                                        بازدید با
+                                        <span>دوستان</span>
+                                        در فصل
+                                        <span>بهار</span>
+                                        و از مبدأ
+                                        <span>تهران</span>
+                                        انجام شده است
                                     </div>
-                                    <div></div>
+                                    <div class="commentRatingsDetailsBtn" onclick="showRatingDetails(this)">مشاهده جزئیات امتیازدهی
+                                        <div class="commentRatingsDetailsBtnIcon">
+                                            <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="commentRatingsDetailsBox display-none">
+                                    <div class="display-inline-block full-width">
+                                        <b class="col-xs-3 font-size-15 line-height-203">اصلاً راضی نبودم</b>
+                                        <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
+                                            <div class="ui_star_rating stars_10 font-size-25">
+                                                <span class="starRating"></span>
+                                                <span class="starRating"></span>
+                                                <span class="starRating"></span>
+                                                <span class="starRating"></span>
+                                                <span class="starRatingGreen"></span>
+                                            </div>
+                                        </div>
+                                        <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
+                                    </div>
+                                    <div class="display-inline-block full-width">
+                                        <b class="col-xs-3 font-size-15 line-height-203">بد نبود</b>
+                                        <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
+                                            <div class="ui_star_rating stars_20 font-size-25">
+                                                <span class="starRating"></span>
+                                                <span class="starRating"></span>
+                                                <span class="starRating"></span>
+                                                <span class="starRatingGreen"></span>
+                                                <span class="starRatingGreen"></span>
+                                            </div>
+                                        </div>
+                                        <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
+                                    </div>
+                                    <div class="display-inline-block full-width">
+                                        <b class="col-xs-3 font-size-15 line-height-203">معمولی بود</b>
+                                        <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
+                                            <div class="ui_star_rating stars_30 font-size-25">
+                                                <span class="starRating"></span>
+                                                <span class="starRating"></span>
+                                                <span class="starRatingGreen"></span>
+                                                <span class="starRatingGreen"></span>
+                                                <span class="starRatingGreen"></span>
+                                            </div>
+                                        </div>
+                                        <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
+                                    </div>
+                                    <div class="display-inline-block full-width">
+                                        <b class="col-xs-3 font-size-15 line-height-203">خوب بود</b>
+                                        <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
+                                            <div class="ui_star_rating stars_40 font-size-25">
+                                                <span class="starRating"></span>
+                                                <span class="starRatingGreen"></span>
+                                                <span class="starRatingGreen"></span>
+                                                <span class="starRatingGreen"></span>
+                                                <span class="starRatingGreen"></span>
+                                            </div>
+                                        </div>
+                                        <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
+                                    </div>
+                                    <div class="display-inline-block full-width">
+                                        <b class="col-xs-3 font-size-15 line-height-203">عالی بود</b>
+                                        <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
+                                            <div class="ui_star_rating stars_50 font-size-25">
+                                                <span class="starRatingGreen"></span>
+                                                <span class="starRatingGreen"></span>
+                                                <span class="starRatingGreen"></span>
+                                                <span class="starRatingGreen"></span>
+                                                <span class="starRatingGreen"></span>
+                                            </div>
+                                        </div>
+                                        <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="display-none last">
-                                <div class="newAnswerPlaceMainDiv">
-                                    <div class="circleBase type2 newAnswerWriterProfilePic"></div>
-                                    <div class="inputBox">
-                                        <b class="replyAnswerTitle">در پاسخ به نظر shazdesina</b>
-                                        <textarea class="inputBoxInput inputBoxInputAnswer" type="text" placeholder="شما چه نظری دارید؟"></textarea>
-                                        <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
+                            <div class="commentFeedbackChoices">
+                                <div class="postsActionsChoices postLikeChoice col-xs-3">
+                                    <span class="commentsLikeIconFeedback"></span>
+                                    <span class="mg-rt-20 cursor-pointer">دوست داشتم</span>
+                                </div>
+                                <div class="postsActionsChoices postDislikeChoice col-xs-3">
+                                    <span class="commentsDislikeIconFeedback"></span>
+                                    <span class="mg-rt-20 cursor-pointer">دوست نداشتم</span>
+                                </div>
+                                <div class="postsActionsChoices postCommentChoice col-xs-3">
+                                    <span class="showCommentsIconFeedback" onclick="showPostsComments(this)"></span>
+                                    <span class="mg-rt-20 cursor-pointer" onclick="showPostsComments(this)">مشاهده نظرها</span>
+                                </div>
+                                <div class="postsActionsChoices postShareChoice col-xs-3">
+                                    <span class="commentsShareIconFeedback"></span>
+                                    <span class="mg-rt-20 cursor-pointer">اشتراک‌گذاری</span>
+                                </div>
+                            </div>
+                            <div class="commentsMainBox display-none">
+                                <div class="dark-blue mg-bt-10">
+                                    <span class="cursor-pointer">مشاهده 17 نظر باقیمانده</span>
+                                </div>
+                                <div class="eachCommentMainBox">
+                                    <div class="circleBase type2 commentsWriterProfilePic"></div>
+                                    <div class="commentsContentMainBox">
+                                        <b class="userProfileName display-inline-block">shazdesina</b>
+                                        <div>من موافق این مطلب نیستم. دوست من شما باید خودتان توجه می کردید نه اینکه مارا متهم کنید</div>
+                                        <div class="commentsStatisticsBar">
+                                            <div class="float-right display-inline-black">
+                                                <span class="likeStatisticIcon commentsStatisticSpan color-red">31</span>
+                                                <span class="dislikeStatisticIcon commentsStatisticSpan dark-red">31</span>
+                                                <span class="numberOfCommentsIcon commentsStatisticSpan color-blue">31</span>
+                                            </div>
+                                            <div class="dark-blue float-left display-inline-black cursor-pointer">مشاهده پاسخ‌ها</div>
+                                        </div>
                                     </div>
-                                    <div></div>
+                                    <div class="commentsActionsBtns">
+                                        <span class="likeActionBtn"></span>
+                                        <span class="dislikeActionBtn"></span>
+                                        <b class="replyBtn">پاسخ دهید</b>
+                                    </div>
+                                </div>
+                                <div class="eachCommentMainBox mg-rt-45">
+                                    <div class="circleBase type2 commentsWriterProfilePic"></div>
+                                    <div class="commentsContentMainBox">
+                                        <b class="userProfileName float-right">shazdesina</b>
+                                        <b class="commentReplyDesc display-inline-block">در پاسخ به Shazdesina</b>
+                                        <div class="clear-both"></div>
+                                        <div>من موافق این مطلب نیستم. دوست من شما باید خودتان توجه می کردید نه اینکه مارا متهم کنید</div>
+                                        <div class="commentsStatisticsBar">
+                                            <div class="float-right display-inline-black">
+                                                <span class="likeStatisticIcon commentsStatisticSpan color-red">31</span>
+                                                <span class="dislikeStatisticIcon commentsStatisticSpan dark-red">31</span>
+                                                <span class="numberOfCommentsIcon commentsStatisticSpan color-blue">31</span>
+                                            </div>
+                                            <div class="dark-blue float-left display-inline-black cursor-pointer">مشاهده پاسخ‌ها</div>
+                                        </div>
+                                    </div>
+                                    <div class="commentsActionsBtns">
+                                        <span class="likeActionBtn"></span>
+                                        <span class="dislikeActionBtn"></span>
+                                        <b class="replyBtn">پاسخ دهید</b>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="newCommentPlaceMainDiv">
+                                <div class="circleBase type2 newCommentWriterProfilePic"></div>
+                                <div class="inputBox">
+                                    <b class="replyCommentTitle">در پاسخ به نظر shazdesina</b>
+                                    <textarea class="inputBoxInput inputBoxInputComment" type="text" placeholder="شما چه نظری دارید؟"></textarea>
+                                    <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
+                                </div>
+                                <div></div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 postMainDivShown position-relative">
+                            <div class="commentOptionsBoxes commentActions"  onclick="showAnswersActionBox(this)">
+                                <span class="commentActionsIcon"></span>
+                            </div>
+                            <div class="questionsActionsMoreDetails display-none">
+                                <span>گزارش پست</span>
+                                <span>مشاهده صفحه شازده سینا</span>
+                                <span>مشاهده تمامی پست‌ها</span>
+                                <span>صفحه قوانین و مقررات</span>
+                            </div>
+                            <div class="commentWriterDetailsShow">
+                                <div class="circleBase type2 commentWriterPicShow"></div>
+                                <div class="commentWriterExperienceDetails">
+                                    <b class="userProfileName">shazdesina</b>
+                                    <div class="display-inline-block">در
+                                        <span class="commentWriterExperiencePlace">هتل عباسی، شهر یزد، استان یزد</span>
+                                    </div>
+                                    <div>با
+                                        <span class="commentWriterExperienceParticipation">احتشام الدوله توفیقی</span>،
+                                        <span class="commentWriterExperienceParticipation">حمیدرضا عسگرزاده </span>و
+                                        <span class="commentWriterExperienceParticipation">علی اصر همتی</span>
+                                    </div>
+                                    <div>
+                                        هم اکنون - بیش از 23 ساعت پیش
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="commentContentsShow">
+                                <p>
+                                    بسیاری از درخواست کنندگان کسی و کارهای بومی و محلی اطلاعات مورد نیاز خود را از طریق اینترنت دریافت می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا خدمات مورد نیازشان اثرپذیری فراوانی دارد.
+                                    با توجه به ابن که خدمات و کالاهای بومی و محلی دارای اصالت و فرهنگ کهن جوامع روستایی هستند، می توان گفت اینترنت می تواند در آمدزایی از سبک زندگی جوامع محلی نقش
+                                </p>
+                            </div>
+                            <div class="commentPhotosShow">
+                                <div class="commentPhotosMainDiv doublePhotoDiv">
+                                    <div class="photosCol secondCol col-xs-6">
+                                        <div></div>
+                                    </div>
+                                    <div class="photosCol firstCol col-xs-6">
+                                        <div></div>
+                                    </div>
+                                </div>
+                                <div class="quantityOfLikes">
+                                    <span>31</span>
+                                    نفر دوست داشتند،
+                                    <span>31</span>
+                                    نفر دوست نداشتند و
+                                    <span>31</span>
+                                    نفر نظر دادند.
+                                </div>
+                            </div>
+                            <div class="commentRatingsDetailsShow">
+                                <div class="display-inline-block full-width">
+                                    <div class="commentRatingHeader">
+                                        بازدید با
+                                        <span>دوستان</span>
+                                        در فصل
+                                        <span>بهار</span>
+                                        و از مبدأ
+                                        <span>تهران</span>
+                                        انجام شده است
+                                    </div>
+                                    <div class="commentRatingsDetailsBtn" onclick="showRatingDetails(this)">مشاهده جزئیات امتیازدهی
+                                        <div class="commentRatingsDetailsBtnIcon">
+                                            <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="commentRatingsDetailsBox display-none">
+                                    <div class="display-inline-block full-width">
+                                        <b class="col-xs-3 font-size-15 line-height-203">اصلاً راضی نبودم</b>
+                                        <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
+                                            <div class="ui_star_rating stars_10 font-size-25">
+                                                <span class="starRating"></span>
+                                                <span class="starRating"></span>
+                                                <span class="starRating"></span>
+                                                <span class="starRating"></span>
+                                                <span class="starRatingGreen"></span>
+                                            </div>
+                                        </div>
+                                        <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
+                                    </div>
+                                    <div class="display-inline-block full-width">
+                                        <b class="col-xs-3 font-size-15 line-height-203">بد نبود</b>
+                                        <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
+                                            <div class="ui_star_rating stars_20 font-size-25">
+                                                <span class="starRating"></span>
+                                                <span class="starRating"></span>
+                                                <span class="starRating"></span>
+                                                <span class="starRatingGreen"></span>
+                                                <span class="starRatingGreen"></span>
+                                            </div>
+                                        </div>
+                                        <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
+                                    </div>
+                                    <div class="display-inline-block full-width">
+                                        <b class="col-xs-3 font-size-15 line-height-203">معمولی بود</b>
+                                        <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
+                                            <div class="ui_star_rating stars_30 font-size-25">
+                                                <span class="starRating"></span>
+                                                <span class="starRating"></span>
+                                                <span class="starRatingGreen"></span>
+                                                <span class="starRatingGreen"></span>
+                                                <span class="starRatingGreen"></span>
+                                            </div>
+                                        </div>
+                                        <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
+                                    </div>
+                                    <div class="display-inline-block full-width">
+                                        <b class="col-xs-3 font-size-15 line-height-203">خوب بود</b>
+                                        <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
+                                            <div class="ui_star_rating stars_40 font-size-25">
+                                                <span class="starRating"></span>
+                                                <span class="starRatingGreen"></span>
+                                                <span class="starRatingGreen"></span>
+                                                <span class="starRatingGreen"></span>
+                                                <span class="starRatingGreen"></span>
+                                            </div>
+                                        </div>
+                                        <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
+                                    </div>
+                                    <div class="display-inline-block full-width">
+                                        <b class="col-xs-3 font-size-15 line-height-203">عالی بود</b>
+                                        <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
+                                            <div class="ui_star_rating stars_50 font-size-25">
+                                                <span class="starRatingGreen"></span>
+                                                <span class="starRatingGreen"></span>
+                                                <span class="starRatingGreen"></span>
+                                                <span class="starRatingGreen"></span>
+                                                <span class="starRatingGreen"></span>
+                                            </div>
+                                        </div>
+                                        <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="commentFeedbackChoices">
+                                <div class="postsActionsChoices postLikeChoice col-xs-3">
+                                    <span class="commentsLikeIconFeedback"></span>
+                                    <span class="mg-rt-20 cursor-pointer">دوست داشتم</span>
+                                </div>
+                                <div class="postsActionsChoices postDislikeChoice col-xs-3">
+                                    <span class="commentsDislikeIconFeedback"></span>
+                                    <span class="mg-rt-20 cursor-pointer">دوست نداشتم</span>
+                                </div>
+                                <div class="postsActionsChoices postCommentChoice col-xs-3">
+                                    <span class="showCommentsIconFeedback" onclick="showPostsComments(this)"></span>
+                                    <span class="mg-rt-20 cursor-pointer" onclick="showPostsComments(this)">مشاهده نظرها</span>
+                                </div>
+                                <div class="postsActionsChoices postShareChoice col-xs-3">
+                                    <span class="commentsShareIconFeedback"></span>
+                                    <span class="mg-rt-20 cursor-pointer">اشتراک‌گذاری</span>
+                                </div>
+                            </div>
+                            <div class="commentsMainBox display-none">
+                                <div class="dark-blue mg-bt-10">
+                                    <span class="cursor-pointer">مشاهده 17 نظر باقیمانده</span>
+                                </div>
+                                <div class="eachCommentMainBox">
+                                    <div class="circleBase type2 commentsWriterProfilePic"></div>
+                                    <div class="commentsContentMainBox">
+                                        <b class="userProfileName display-inline-block">shazdesina</b>
+                                        <div>من موافق این مطلب نیستم. دوست من شما باید خودتان توجه می کردید نه اینکه مارا متهم کنید</div>
+                                        <div class="commentsStatisticsBar">
+                                            <div class="float-right display-inline-black">
+                                                <span class="likeStatisticIcon commentsStatisticSpan color-red">31</span>
+                                                <span class="dislikeStatisticIcon commentsStatisticSpan dark-red">31</span>
+                                                <span class="numberOfCommentsIcon commentsStatisticSpan color-blue">31</span>
+                                            </div>
+                                            <div class="dark-blue float-left display-inline-black cursor-pointer">مشاهده پاسخ‌ها</div>
+                                        </div>
+                                    </div>
+                                    <div class="commentsActionsBtns">
+                                        <span class="likeActionBtn"></span>
+                                        <span class="dislikeActionBtn"></span>
+                                        <b class="replyBtn">پاسخ دهید</b>
+                                    </div>
+                                </div>
+                                <div class="eachCommentMainBox mg-rt-45">
+                                    <div class="circleBase type2 commentsWriterProfilePic"></div>
+                                    <div class="commentsContentMainBox">
+                                        <b class="userProfileName float-right">shazdesina</b>
+                                        <b class="commentReplyDesc display-inline-block">در پاسخ به Shazdesina</b>
+                                        <div class="clear-both"></div>
+                                        <div>من موافق این مطلب نیستم. دوست من شما باید خودتان توجه می کردید نه اینکه مارا متهم کنید</div>
+                                        <div class="commentsStatisticsBar">
+                                            <div class="float-right display-inline-black">
+                                                <span class="likeStatisticIcon commentsStatisticSpan color-red">31</span>
+                                                <span class="dislikeStatisticIcon commentsStatisticSpan dark-red">31</span>
+                                                <span class="numberOfCommentsIcon commentsStatisticSpan color-blue">31</span>
+                                            </div>
+                                            <div class="dark-blue float-left display-inline-black cursor-pointer">مشاهده پاسخ‌ها</div>
+                                        </div>
+                                    </div>
+                                    <div class="commentsActionsBtns">
+                                        <span class="likeActionBtn"></span>
+                                        <span class="dislikeActionBtn"></span>
+                                        <b class="replyBtn">پاسخ دهید</b>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="newCommentPlaceMainDiv">
+                                <div class="circleBase type2 newCommentWriterProfilePic"></div>
+                                <div class="inputBox">
+                                    <b class="replyCommentTitle">در پاسخ به نظر shazdesina</b>
+                                    <textarea class="inputBoxInput inputBoxInputComment" type="text" placeholder="شما چه نظری دارید؟"></textarea>
+                                    <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
+                                </div>
+                                <div></div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 postMainDivShown position-relative">
+                            <div class="commentOptionsBoxes commentActions"  onclick="showAnswersActionBox(this)">
+                                <span class="commentActionsIcon"></span>
+                            </div>
+                            <div class="questionsActionsMoreDetails display-none">
+                                <span>گزارش پست</span>
+                                <span>مشاهده صفحه شازده سینا</span>
+                                <span>مشاهده تمامی پست‌ها</span>
+                                <span>صفحه قوانین و مقررات</span>
+                            </div>
+                            <div class="commentWriterDetailsShow">
+                                <div class="circleBase type2 commentWriterPicShow"></div>
+                                <div class="commentWriterExperienceDetails">
+                                    <b class="userProfileName">shazdesina</b>
+                                    <div class="display-inline-block">در
+                                        <span class="commentWriterExperiencePlace">هتل عباسی، شهر یزد، استان یزد</span>
+                                    </div>
+                                    <div>با
+                                        <span class="commentWriterExperienceParticipation">احتشام الدوله توفیقی</span>،
+                                        <span class="commentWriterExperienceParticipation">حمیدرضا عسگرزاده </span>و
+                                        <span class="commentWriterExperienceParticipation">علی اصر همتی</span>
+                                    </div>
+                                    <div>
+                                        هم اکنون - بیش از 23 ساعت پیش
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="commentContentsShow">
+                                <p>
+                                    بسیاری از درخواست کنندگان کسی و کارهای بومی و محلی اطلاعات مورد نیاز خود را از طریق اینترنت دریافت می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا خدمات مورد نیازشان اثرپذیری فراوانی دارد.
+                                    با توجه به ابن که خدمات و کالاهای بومی و محلی دارای اصالت و فرهنگ کهن جوامع روستایی هستند، می توان گفت اینترنت می تواند در آمدزایی از سبک زندگی جوامع محلی نقش
+                                </p>
+                            </div>
+                            <div class="commentPhotosShow">
+                                <div class="commentPhotosMainDiv tripletPhotoDiv">
+                                    <div class="photosCol secondCol col-xs-6">
+                                        <div></div>
+                                    </div>
+                                    <div class="photosCol firstCol col-xs-6">
+                                        <div></div>
+                                        <div></div>
+                                    </div>
+                                </div>
+                                <div class="quantityOfLikes">
+                                    <span>31</span>
+                                    نفر دوست داشتند،
+                                    <span>31</span>
+                                    نفر دوست نداشتند و
+                                    <span>31</span>
+                                    نفر نظر دادند.
+                                </div>
+                            </div>
+                            <div class="commentRatingsDetailsShow">
+                                <div class="display-inline-block full-width">
+                                    <div class="commentRatingHeader">
+                                        بازدید با
+                                        <span>دوستان</span>
+                                        در فصل
+                                        <span>بهار</span>
+                                        و از مبدأ
+                                        <span>تهران</span>
+                                        انجام شده است
+                                    </div>
+                                    <div class="commentRatingsDetailsBtn" onclick="showRatingDetails(this)">مشاهده جزئیات امتیازدهی
+                                        <div class="commentRatingsDetailsBtnIcon">
+                                            <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="commentRatingsDetailsBox display-none">
+                                    <div class="display-inline-block full-width">
+                                        <b class="col-xs-3 font-size-15 line-height-203">اصلاً راضی نبودم</b>
+                                        <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
+                                            <div class="ui_star_rating stars_10 font-size-25">
+                                                <span class="starRating"></span>
+                                                <span class="starRating"></span>
+                                                <span class="starRating"></span>
+                                                <span class="starRating"></span>
+                                                <span class="starRatingGreen"></span>
+                                            </div>
+                                        </div>
+                                        <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
+                                    </div>
+                                    <div class="display-inline-block full-width">
+                                        <b class="col-xs-3 font-size-15 line-height-203">بد نبود</b>
+                                        <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
+                                            <div class="ui_star_rating stars_20 font-size-25">
+                                                <span class="starRating"></span>
+                                                <span class="starRating"></span>
+                                                <span class="starRating"></span>
+                                                <span class="starRatingGreen"></span>
+                                                <span class="starRatingGreen"></span>
+                                            </div>
+                                        </div>
+                                        <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
+                                    </div>
+                                    <div class="display-inline-block full-width">
+                                        <b class="col-xs-3 font-size-15 line-height-203">معمولی بود</b>
+                                        <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
+                                            <div class="ui_star_rating stars_30 font-size-25">
+                                                <span class="starRating"></span>
+                                                <span class="starRating"></span>
+                                                <span class="starRatingGreen"></span>
+                                                <span class="starRatingGreen"></span>
+                                                <span class="starRatingGreen"></span>
+                                            </div>
+                                        </div>
+                                        <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
+                                    </div>
+                                    <div class="display-inline-block full-width">
+                                        <b class="col-xs-3 font-size-15 line-height-203">خوب بود</b>
+                                        <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
+                                            <div class="ui_star_rating stars_40 font-size-25">
+                                                <span class="starRating"></span>
+                                                <span class="starRatingGreen"></span>
+                                                <span class="starRatingGreen"></span>
+                                                <span class="starRatingGreen"></span>
+                                                <span class="starRatingGreen"></span>
+                                            </div>
+                                        </div>
+                                        <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
+                                    </div>
+                                    <div class="display-inline-block full-width">
+                                        <b class="col-xs-3 font-size-15 line-height-203">عالی بود</b>
+                                        <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
+                                            <div class="ui_star_rating stars_50 font-size-25">
+                                                <span class="starRatingGreen"></span>
+                                                <span class="starRatingGreen"></span>
+                                                <span class="starRatingGreen"></span>
+                                                <span class="starRatingGreen"></span>
+                                                <span class="starRatingGreen"></span>
+                                            </div>
+                                        </div>
+                                        <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="commentFeedbackChoices">
+                                <div class="postsActionsChoices postLikeChoice col-xs-3">
+                                    <span class="commentsLikeIconFeedback"></span>
+                                    <span class="mg-rt-20 cursor-pointer">دوست داشتم</span>
+                                </div>
+                                <div class="postsActionsChoices postDislikeChoice col-xs-3">
+                                    <span class="commentsDislikeIconFeedback"></span>
+                                    <span class="mg-rt-20 cursor-pointer">دوست نداشتم</span>
+                                </div>
+                                <div class="postsActionsChoices postCommentChoice col-xs-3">
+                                    <span class="showCommentsIconFeedback" onclick="showPostsComments(this)"></span>
+                                    <span class="mg-rt-20 cursor-pointer" onclick="showPostsComments(this)">مشاهده نظرها</span>
+                                </div>
+                                <div class="postsActionsChoices postShareChoice col-xs-3">
+                                    <span class="commentsShareIconFeedback"></span>
+                                    <span class="mg-rt-20 cursor-pointer">اشتراک‌گذاری</span>
+                                </div>
+                            </div>
+                            <div class="commentsMainBox display-none">
+                                <div class="dark-blue mg-bt-10">
+                                    <span class="cursor-pointer">مشاهده 17 نظر باقیمانده</span>
+                                </div>
+                                <div class="eachCommentMainBox">
+                                    <div class="circleBase type2 commentsWriterProfilePic"></div>
+                                    <div class="commentsContentMainBox">
+                                        <b class="userProfileName display-inline-block">shazdesina</b>
+                                        <div>من موافق این مطلب نیستم. دوست من شما باید خودتان توجه می کردید نه اینکه مارا متهم کنید</div>
+                                        <div class="commentsStatisticsBar">
+                                            <div class="float-right display-inline-black">
+                                                <span class="likeStatisticIcon commentsStatisticSpan color-red">31</span>
+                                                <span class="dislikeStatisticIcon commentsStatisticSpan dark-red">31</span>
+                                                <span class="numberOfCommentsIcon commentsStatisticSpan color-blue">31</span>
+                                            </div>
+                                            <div class="dark-blue float-left display-inline-black cursor-pointer">مشاهده پاسخ‌ها</div>
+                                        </div>
+                                    </div>
+                                    <div class="commentsActionsBtns">
+                                        <span class="likeActionBtn"></span>
+                                        <span class="dislikeActionBtn"></span>
+                                        <b class="replyBtn">پاسخ دهید</b>
+                                    </div>
+                                </div>
+                                <div class="eachCommentMainBox mg-rt-45">
+                                    <div class="circleBase type2 commentsWriterProfilePic"></div>
+                                    <div class="commentsContentMainBox">
+                                        <b class="userProfileName float-right">shazdesina</b>
+                                        <b class="commentReplyDesc display-inline-block">در پاسخ به Shazdesina</b>
+                                        <div class="clear-both"></div>
+                                        <div>من موافق این مطلب نیستم. دوست من شما باید خودتان توجه می کردید نه اینکه مارا متهم کنید</div>
+                                        <div class="commentsStatisticsBar">
+                                            <div class="float-right display-inline-black">
+                                                <span class="likeStatisticIcon commentsStatisticSpan color-red">31</span>
+                                                <span class="dislikeStatisticIcon commentsStatisticSpan dark-red">31</span>
+                                                <span class="numberOfCommentsIcon commentsStatisticSpan color-blue">31</span>
+                                            </div>
+                                            <div class="dark-blue float-left display-inline-black cursor-pointer">مشاهده پاسخ‌ها</div>
+                                        </div>
+                                    </div>
+                                    <div class="commentsActionsBtns">
+                                        <span class="likeActionBtn"></span>
+                                        <span class="dislikeActionBtn"></span>
+                                        <b class="replyBtn">پاسخ دهید</b>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="newCommentPlaceMainDiv">
+                                <div class="circleBase type2 newCommentWriterProfilePic"></div>
+                                <div class="inputBox">
+                                    <b class="replyCommentTitle">در پاسخ به نظر shazdesina</b>
+                                    <textarea class="inputBoxInput inputBoxInputComment" type="text" placeholder="شما چه نظری دارید؟"></textarea>
+                                    <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
+                                </div>
+                                <div></div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 postMainDivShown position-relative">
+                            <div class="commentOptionsBoxes commentActions"  onclick="showAnswersActionBox(this)">
+                                <span class="commentActionsIcon"></span>
+                            </div>
+                            <div class="questionsActionsMoreDetails display-none">
+                                <span>گزارش پست</span>
+                                <span>مشاهده صفحه شازده سینا</span>
+                                <span>مشاهده تمامی پست‌ها</span>
+                                <span>صفحه قوانین و مقررات</span>
+                            </div>
+                            <div class="commentWriterDetailsShow">
+                                <div class="circleBase type2 commentWriterPicShow"></div>
+                                <div class="commentWriterExperienceDetails">
+                                    <b class="userProfileName">shazdesina</b>
+                                    <div class="display-inline-block">در
+                                        <span class="commentWriterExperiencePlace">هتل عباسی، شهر یزد، استان یزد</span>
+                                    </div>
+                                    <div>با
+                                        <span class="commentWriterExperienceParticipation">احتشام الدوله توفیقی</span>،
+                                        <span class="commentWriterExperienceParticipation">حمیدرضا عسگرزاده </span>و
+                                        <span class="commentWriterExperienceParticipation">علی اصر همتی</span>
+                                    </div>
+                                    <div>
+                                        هم اکنون - بیش از 23 ساعت پیش
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="commentContentsShow">
+                                <p>
+                                    بسیاری از درخواست کنندگان کسی و کارهای بومی و محلی اطلاعات مورد نیاز خود را از طریق اینترنت دریافت می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا خدمات مورد نیازشان اثرپذیری فراوانی دارد.
+                                    با توجه به ابن که خدمات و کالاهای بومی و محلی دارای اصالت و فرهنگ کهن جوامع روستایی هستند، می توان گفت اینترنت می تواند در آمدزایی از سبک زندگی جوامع محلی نقش
+                                </p>
+                            </div>
+                            <div class="commentPhotosShow">
+                                <div class="commentPhotosMainDiv quadruplePhotoDiv">
+                                    <div class="photosCol secondCol col-xs-6">
+                                        <div></div>
+                                        <div></div>
+                                    </div>
+                                    <div class="photosCol firstCol col-xs-6">
+                                        <div></div>
+                                        <div></div>
+                                    </div>
+                                </div>
+                                <div class="quantityOfLikes">
+                                    <span>31</span>
+                                    نفر دوست داشتند،
+                                    <span>31</span>
+                                    نفر دوست نداشتند و
+                                    <span>31</span>
+                                    نفر نظر دادند.
+                                </div>
+                            </div>
+                            <div class="commentRatingsDetailsShow">
+                                <div class="display-inline-block full-width">
+                                    <div class="commentRatingHeader">
+                                        بازدید با
+                                        <span>دوستان</span>
+                                        در فصل
+                                        <span>بهار</span>
+                                        و از مبدأ
+                                        <span>تهران</span>
+                                        انجام شده است
+                                    </div>
+                                    <div class="commentRatingsDetailsBtn" onclick="showRatingDetails(this)">مشاهده جزئیات امتیازدهی
+                                        <div class="commentRatingsDetailsBtnIcon">
+                                            <i class="glyphicon glyphicon-triangle-bottom"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="commentRatingsDetailsBox display-none">
+                                    <div class="display-inline-block full-width">
+                                        <b class="col-xs-3 font-size-15 line-height-203">اصلاً راضی نبودم</b>
+                                        <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
+                                            <div class="ui_star_rating stars_10 font-size-25">
+                                                <span class="starRating"></span>
+                                                <span class="starRating"></span>
+                                                <span class="starRating"></span>
+                                                <span class="starRating"></span>
+                                                <span class="starRatingGreen"></span>
+                                            </div>
+                                        </div>
+                                        <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
+                                    </div>
+                                    <div class="display-inline-block full-width">
+                                        <b class="col-xs-3 font-size-15 line-height-203">بد نبود</b>
+                                        <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
+                                            <div class="ui_star_rating stars_20 font-size-25">
+                                                <span class="starRating"></span>
+                                                <span class="starRating"></span>
+                                                <span class="starRating"></span>
+                                                <span class="starRatingGreen"></span>
+                                                <span class="starRatingGreen"></span>
+                                            </div>
+                                        </div>
+                                        <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
+                                    </div>
+                                    <div class="display-inline-block full-width">
+                                        <b class="col-xs-3 font-size-15 line-height-203">معمولی بود</b>
+                                        <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
+                                            <div class="ui_star_rating stars_30 font-size-25">
+                                                <span class="starRating"></span>
+                                                <span class="starRating"></span>
+                                                <span class="starRatingGreen"></span>
+                                                <span class="starRatingGreen"></span>
+                                                <span class="starRatingGreen"></span>
+                                            </div>
+                                        </div>
+                                        <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
+                                    </div>
+                                    <div class="display-inline-block full-width">
+                                        <b class="col-xs-3 font-size-15 line-height-203">خوب بود</b>
+                                        <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
+                                            <div class="ui_star_rating stars_40 font-size-25">
+                                                <span class="starRating"></span>
+                                                <span class="starRatingGreen"></span>
+                                                <span class="starRatingGreen"></span>
+                                                <span class="starRatingGreen"></span>
+                                                <span class="starRatingGreen"></span>
+                                            </div>
+                                        </div>
+                                        <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
+                                    </div>
+                                    <div class="display-inline-block full-width">
+                                        <b class="col-xs-3 font-size-15 line-height-203">عالی بود</b>
+                                        <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
+                                            <div class="ui_star_rating stars_50 font-size-25">
+                                                <span class="starRatingGreen"></span>
+                                                <span class="starRatingGreen"></span>
+                                                <span class="starRatingGreen"></span>
+                                                <span class="starRatingGreen"></span>
+                                                <span class="starRatingGreen"></span>
+                                            </div>
+                                        </div>
+                                        <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="commentFeedbackChoices">
+                                <div class="postsActionsChoices postLikeChoice col-xs-3">
+                                    <span class="commentsLikeIconFeedback"></span>
+                                    <span class="mg-rt-20 cursor-pointer">دوست داشتم</span>
+                                </div>
+                                <div class="postsActionsChoices postDislikeChoice col-xs-3">
+                                    <span class="commentsDislikeIconFeedback"></span>
+                                    <span class="mg-rt-20 cursor-pointer">دوست نداشتم</span>
+                                </div>
+                                <div class="postsActionsChoices postCommentChoice col-xs-3">
+                                    <span class="showCommentsIconFeedback" onclick="showPostsComments(this)"></span>
+                                    <span class="mg-rt-20 cursor-pointer" onclick="showPostsComments(this)">مشاهده نظرها</span>
+                                </div>
+                                <div class="postsActionsChoices postShareChoice col-xs-3">
+                                    <span class="commentsShareIconFeedback"></span>
+                                    <span class="mg-rt-20 cursor-pointer">اشتراک‌گذاری</span>
+                                </div>
+                            </div>
+                            <div class="commentsMainBox display-none">
+                                <div class="dark-blue mg-bt-10">
+                                    <span class="cursor-pointer">مشاهده 17 نظر باقیمانده</span>
+                                </div>
+                                <div class="eachCommentMainBox">
+                                    <div class="circleBase type2 commentsWriterProfilePic"></div>
+                                    <div class="commentsContentMainBox">
+                                        <b class="userProfileName display-inline-block">shazdesina</b>
+                                        <div>من موافق این مطلب نیستم. دوست من شما باید خودتان توجه می کردید نه اینکه مارا متهم کنید</div>
+                                        <div class="commentsStatisticsBar">
+                                            <div class="float-right display-inline-black">
+                                                <span class="likeStatisticIcon commentsStatisticSpan color-red">31</span>
+                                                <span class="dislikeStatisticIcon commentsStatisticSpan dark-red">31</span>
+                                                <span class="numberOfCommentsIcon commentsStatisticSpan color-blue">31</span>
+                                            </div>
+                                            <div class="dark-blue float-left display-inline-black cursor-pointer">مشاهده پاسخ‌ها</div>
+                                        </div>
+                                    </div>
+                                    <div class="commentsActionsBtns">
+                                        <span class="likeActionBtn"></span>
+                                        <span class="dislikeActionBtn"></span>
+                                        <b class="replyBtn">پاسخ دهید</b>
+                                    </div>
+                                </div>
+                                <div class="eachCommentMainBox mg-rt-45">
+                                    <div class="circleBase type2 commentsWriterProfilePic"></div>
+                                    <div class="commentsContentMainBox">
+                                        <b class="userProfileName float-right">shazdesina</b>
+                                        <b class="commentReplyDesc display-inline-block">در پاسخ به Shazdesina</b>
+                                        <div class="clear-both"></div>
+                                        <div>من موافق این مطلب نیستم. دوست من شما باید خودتان توجه می کردید نه اینکه مارا متهم کنید</div>
+                                        <div class="commentsStatisticsBar">
+                                            <div class="float-right display-inline-black">
+                                                <span class="likeStatisticIcon commentsStatisticSpan color-red">31</span>
+                                                <span class="dislikeStatisticIcon commentsStatisticSpan dark-red">31</span>
+                                                <span class="numberOfCommentsIcon commentsStatisticSpan color-blue">31</span>
+                                            </div>
+                                            <div class="dark-blue float-left display-inline-black cursor-pointer">مشاهده پاسخ‌ها</div>
+                                        </div>
+                                    </div>
+                                    <div class="commentsActionsBtns">
+                                        <span class="likeActionBtn"></span>
+                                        <span class="dislikeActionBtn"></span>
+                                        <b class="replyBtn">پاسخ دهید</b>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="newCommentPlaceMainDiv">
+                                <div class="circleBase type2 newCommentWriterProfilePic"></div>
+                                <div class="inputBox">
+                                    <b class="replyCommentTitle">در پاسخ به نظر shazdesina</b>
+                                    <textarea class="inputBoxInput inputBoxInputComment" type="text" placeholder="شما چه نظری دارید؟"></textarea>
+                                    <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
+                                </div>
+                                <div></div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 postsMainDivFooter position-relative">
+                            <div class="col-xs-5 font-size-13 line-height-2">
+                                نمایش
+                                <span class="mg-lt-5 cursor-pointer">10</span>-
+                                <span class="mg-lt-5 cursor-pointer">20</span>-
+                                <span class="color-blue cursor-pointer">50</span>
+                                پست در هر صفحه
+                            </div>
+                            <a class="col-xs-3 showPostsNumsFilterLink" href="#taplc_global_nav_links_0">
+                                <div class="showPostsNumsFilter" onclick="allPostsGrid()">نمایش تمامی پست‌ها</div>
+                            </a>
+                            <div class="col-xs-4 font-size-13 line-height-2 text-align-right">
+                                صفحه
+                                <span>1</span>
+                                <span><<<</span>
+                                <span class="mg-lt-5 cursor-pointer">2</span>-
+                                <span class="color-blue mg-lt-5 cursor-pointer">3</span>-
+                                <span class="cursor-pointer">4</span>
+                                <span>>>></span>
+                                <span>10</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-5 pd-0 pd-rt-10Imp">
+                        <div class="col-xs-12 postsFiltersMainDiv">
+                            <div class="block_header">
+                                <h3 class="block_title">پست‌ها را دقیق‌تر ببینید </h3>
+                            </div>
+                            <div class="display-inline-block full-width font-size-15">
+                                تعداد 2000 پست، 3500 نظر و 270 کاربر مختلف
+                            </div>
+                            <div class="display-inline-block full-width dark-red pd-bt-10">
+                                با استفاده از گزینه‌های زیر نتایج را محدودتر کرده و راحت‌تر مطلب مورد نظر خود را پیدا کنید
+                            </div>
+                            <div class="visitKindTypeFilter filterTypeDiv">
+                                این مکان چگونه بازدید شده است؟
+                                <span class="dark-blue font-weight-500">حذف فیلتر</span>
+                                <div class="clear-both"></div>
+                                <b class="filterChoices">با دوستان</b>
+                                <b class="filterChoices">با خانواده</b>
+                                <b class="filterChoices">تنها</b>
+                                <b class="filterChoices">با کودک</b>
+                            </div>
+                            <div class="dateTypePostsFilter filterTypeDiv">
+                                این مکان کی بازدید شده است؟
+                                <div class="clear-both"></div>
+                                <b class="filterChoices">بهار</b>
+                                <b class="filterChoices">تابستان</b>
+                                <b class="filterChoices">پاییز</b>
+                                <b class="filterChoices">زمستان</b>
+                            </div>
+                            <div class="cityTypePostsFilter filterTypeDiv">
+                                این مکان از کجا بازدید شده است؟
+                                <div class="clear-both"></div>
+                                <b class="filterChoices">تهران</b>
+                                <b class="filterChoices">کرج</b>
+                                <b class="filterChoices">رشت</b>
+                                <b class="filterChoices">شهرکرد</b>
+                            </div>
+                            <div class="photoTypePostsFilter filterTypeDiv">
+                                نمایش پست‌های دارای عکس
+                                <div class="clear-both"></div>
+                                <b class="filterChoices">تنها دارای عکس</b>
+                                <b class="filterChoices">تنها دارای فیلم</b>
+                                <b class="filterChoices">تنها دارای متن بلند</b>
+                                <b class="filterChoices">تنها دارای فیلم و عکس</b>
+                            </div>
+                            <div class="commentsRatesFilter filterTypeDiv">
+                                چقدر راضی بودند؟
+                                <div class="clear-both"></div>
+                                <div class="commentRatingsFiltersChoices">
+                                    <div class="display-inline-block full-width text-align-right mg-tp-10">
+                                        <div class="prw_rup prw_common_bubble_rating overallBubbleRating overallBubbleRatingGold full-width float-right">
+    {{--                                        <span class="ui_bubble_rating bubble_10 font-size-30 color-yellow"--}}
+    {{--                                              property="ratingValue" content="1" alt='1 of 5 bubbles'></span>--}}
+                                            <div class="ui_star_rating stars_10 font-size-25">
+                                                <span class="starRatingGrey"></span>
+                                                <span class="starRatingGrey"></span>
+                                                <span class="starRatingGrey"></span>
+                                                <span class="starRatingGrey"></span>
+                                                <span class="starRatingGold"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ratingTranslationDiv">اصلاً راضی نبودم</div>
+                            </div>
+                            <div class="searchFilter filterTypeDiv">
+                                جست و جو کنید
+                                <div class="clear-both"></div>
+                                <div class="inputBoxSearchFilter inputBox">
+                                    <input class="inputBoxInput" type="text" placeholder="عبارت مورد نظر خود را جست و جو کنید">
+                                </div>
+                            </div>
+                        </div>
+                        <center class="col-xs-12 adsMainDiv">
+                            <div class="adsMainDivHeader">تبلیغات</div>
+                            <img src="{{"../../../public/images/Chromite.jpg"}}" alt="">
+                        </center>
+                    </div>
+                </div>
+                <div class="clear-both"></div>
+
+                <div class="questionsFiltrationBarToggle display-none col-xs-8">
+                    <div class="questionsMainFiltrationBar">
+                        <span>نمایش بر اساس</span>
+                        <span>جدیدترین‌ها</span>
+                        <span>قدمی‌ترین‌ها</span>
+                        <span>بهترین‌ها</span>
+                        <span>داغ‌ترین‌ها</span>
+                        <span>بدترین‌ها</span>
+                        <span>بیشترین همراهان</span>
+                        <span>پست‌ها</span>
+                    </div>
+                </div>
+
+                <div class="col-xs-4 adsToggleQuestions display-none float-right">
+                    <center class="adsMainDiv">
+                        <div class="adsMainDivHeader">تبلیغات</div>
+                        <div class="returnToMainPage" onclick="allQuestionsGrid()">بازگشت</div>
+                        <img src="{{"../../../public/images/Chromite.jpg"}}" alt="">
+                    </center>
+                </div>
+
+                <div class="col-xs-12 QAndAMainDiv">
+
+                    <div class="mainDivQuestions">
+
+                        <div class="QAndAMainDivHeader">
+                            <h3>سؤال و جواب</h3>
+                        </div>
+                        <div class="askQuestionMainDiv">
+                            <b class="direction-rtl text-align-right float-right full-width mg-bt-10">
+                                سؤلات خود را بپرسید تا با کمک دوستانتان آگاهانه‌تر سفر کنید. همچنین می‌توانید با پاسخ یه سؤالات دوستانتان علاوه بر دریافت امتیاز، اطلاعات خود را به اشتراک بگذارید.
+                            </b>
+                            <div class="display-inline-block float-right direction-rtl mg-lt-5">
+                                در حال حاضر
+                                <span class="color-blue">1340</span>
+                                سؤال
+                                <span class="color-blue">560</span>
+                                پاسخ موجود می‌باشد.
+                            </div>
+                            <a class="seeAllQMainLink" href="#taplc_global_nav_links_0">
+                                <div class="seeAllQLink display-inline-block float-right direction-rtl dark-blue" onclick="allQuestionsGrid()">مشاهده همه سؤالات و پاسخ‌ها</div>
+                            </a>
+                            <div class="clear-both"></div>
+                            <div class="newQuestionMainDiv mg-tp-30 full-width display-inline-block">
+                                <div class="circleBase type2 newQuestionWriterProfilePic"></div>
+                                <div class="inputBox questionInputBox">
+                                    <textarea class="inputBoxInput inputBoxInputComment" type="text" placeholder="شما چه سؤالی دارید؟"></textarea>
+                                    <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
+                                </div>
+                                <div class="sendQuestionBtn">ارسال</div>
+                            </div>
+                            <div class="answersBoxMainDiv">
+                                <div class="answersOptionsBoxes answersActions" onclick="showAnswersActionBox(this)">
+                                    <span class="answersActionsIcon"></span>
+                                </div>
+                                <div class="questionsActionsMoreDetails display-none">
+                                    <span>گزارش پست</span>
+                                    <span>مشاهده صفحه شازده سینا</span>
+                                    <span>مشاهده تمامی پست‌ها</span>
+                                    <span>صفحه قوانین و مقررات</span>
+                                </div>
+                                <div class="showingQuestionCompletely">
+                                    مشاهده کامل سؤال
+                                </div>
+                                <div class="answersWriterDetailsShow">
+                                    <div class="circleBase type2 answersWriterPicShow"></div>
+                                    <div class="answersWriterExperienceDetails">
+                                        <b class="userProfileNameAnswers">shazdesina</b>
+                                        <div class="display-inline-block">در
+                                            <span class="answersWriterExperiencePlace">هتل عباسی، شهر یزد، استان یزد</span>
+                                        </div>
+                                        <div>
+                                            هم اکنون - بیش از 23 ساعت پیش
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clear-both"></div>
+                                <div class="questionContentMainBox">
+                                    بسیاری از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از طریق اینترنت دریافت می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا خدمات مورد نیازشان اثرپذیری فراوانی دارد.
+                                    با توجه به ابن که خدمات و کالاهای بومی و محلی دارای اصالت و فرهنگ کهن جوامع روستایی هستند، می توان گفت اینترنت می تواند در آمدزایی از سبک زندگی جوامع محلی نقش کلیدی داشته باشد.
+                                </div>
+                                <div class="clear-both"></div>
+                                <div class="questionSubMenuBar">
+                                    <div class="numberOfAnswers">
+                                        <span>31</span>
+                                        نفر پاسخ دادند
+                                    </div>
+                                    <div class="showAnswersToggle" onclick="showAllAnswers(this)">مشاهده پاسخ‌ها</div>
+                                    <b class="replyBtn replyAnswerBtn" onclick="replyToAnswers(this)">پاسخ دهید</b>
+                                </div>
+                                <div class="answerPlaceMainDiv display-none">
+                                    <div class="circleBase type2 answerWriterProfilePic"></div>
+                                    <div class="answerBoxText">
+                                        <b class="replyWriterUsername">shazdesina</b>
+                                        من موافق این مطلب نیستم. دوست من شما باید خودتان توجه می کردید نه اینکه ما را متهم کنید.
+                                        <img class="answerSmileyIcon" src="{{"../../../public/images/smile.png"}}">
+                                        <div class="answerStatistics">
+                                            <span class="numberOfDislikeAnswer">31</span>
+                                            <span class="numberOfLikeAnswer">31</span>
+                                        </div>
+                                    </div>
+                                    <div class="actionToAnswer">
+                                        <span class="likeAnswer"></span>
+                                        <span class="dislikeAnswer"></span>
+                                    </div>
+                                </div>
+                                <div class="display-none">
+                                    <div class="newAnswerPlaceMainDiv">
+                                        <div class="circleBase type2 newAnswerWriterProfilePic"></div>
+                                        <div class="inputBox">
+                                            <b class="replyAnswerTitle">در پاسخ به نظر shazdesina</b>
+                                            <textarea class="inputBoxInput inputBoxInputAnswer" type="text" placeholder="شما چه نظری دارید؟"></textarea>
+                                            <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
+                                        </div>
+                                        <div></div>
+                                    </div>
+                                </div>
+                                <div class="display-none last">
+                                    <div class="newAnswerPlaceMainDiv">
+                                        <div class="circleBase type2 newAnswerWriterProfilePic"></div>
+                                        <div class="inputBox">
+                                            <b class="replyAnswerTitle">در پاسخ به نظر shazdesina</b>
+                                            <textarea class="inputBoxInput inputBoxInputAnswer" type="text" placeholder="شما چه نظری دارید؟"></textarea>
+                                            <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
+                                        </div>
+                                        <div></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-12 postsMainDivFooter position-relative">
+                <div class="col-xs-12 questionsMainDivFooter position-relative">
                     <div class="col-xs-5 font-size-13 line-height-2">
                         نمایش
-                        <span class="mg-lt-5">10</span>-
-                        <span class="mg-lt-5">20</span>-
-                        <span class="color-blue">50</span>
+                        <span class="mg-lt-5 cursor-pointer">10</span>-
+                        <span class="mg-lt-5 cursor-pointer">20</span>-
+                        <span class="color-blue cursor-pointer">50</span>
                         پست در هر صفحه
                     </div>
                     <a class="col-xs-2 showQuestionsNumsFilterLink" href="#taplc_global_nav_links_0">
-                        <div class="showQuestionsNumsFilter">نمایش تمامی سؤال‌ها</div>
+                        <div class="showQuestionsNumsFilter" onclick="allQuestionsGrid()">نمایش تمامی سؤال‌ها</div>
                     </a>
                     <div class="col-xs-4 font-size-13 line-height-2 text-align-right">
                         صفحه
                         <span>1</span>
                         <span><<<</span>
-                        <span class="mg-lt-5">2</span>-
-                        <span class="color-blue mg-lt-5">3</span>-
-                        <span>4</span>
+                        <span class="mg-lt-5 cursor-pointer">2</span>-
+                        <span class="color-blue mg-lt-5 cursor-pointer">3</span>-
+                        <span class="cursor-pointer">4</span>
                         <span>>>></span>
                         <span>10</span>
                     </div>
@@ -2821,7 +2886,6 @@ if ($total == 0)
     </div>
 
     @include('layouts.placePosts')
-    @include('layouts.placeQuestions')
 
     <script>
 
@@ -2852,6 +2916,21 @@ if ($total == 0)
                 $(element).toggleClass("bg-color-darkgrey")
         }
 
+        function showPostsComments(element) {
+            $(element).parent().parent().next().toggle();
+        }
+
+        function showRatingDetails(element) {
+            $(element).parent().next().toggle();
+            $(element).children().children().toggleClass('glyphicon-triangle-bottom');
+            $(element).children().children().toggleClass('glyphicon-triangle-top')
+            $(element).parent().toggleClass('mg-bt-20');
+        }
+
+        function filterChoices(element) {
+            $(element).toggleClass('bg-color-yellowImp')
+        }
+
         function allPostsGrid() {
             $('#targetHelp_10').toggle(),
             $('.mainWrapHotelDetails').toggle(),
@@ -2863,6 +2942,27 @@ if ($total == 0)
             $('#helpBtnMainDiv').toggleClass('top-20Imp'),
             $('.returnToMainPage').toggleClass('color-white')
         }
+
+        function allQuestionsGrid() {
+            $('.atf_meta_and_photos_wrapper').toggle(),
+            $('.exceptQAndADiv').toggle(),
+            $('.adsToggleQuestions').toggle() ,
+            $('.questionsFiltrationBarToggle').toggle() ,
+            $('.questionsFiltrationBarToggle').toggleClass('pd-0') ,
+            $('.questionsMainDivFooter').toggle() ,
+            $('.QAndAMainDiv').toggleClass('col-xs-12'),
+            $('.QAndAMainDiv').toggleClass('float-right'),
+            $('.QAndAMainDiv').toggleClass('col-xs-8'),
+            $('.adsMainDiv').toggleClass('mg-tp-0'),
+            $('#addToFavouriteTripsMainDiv').toggle(),
+            $('#helpBtnMainDiv').toggleClass('top-20Imp'),
+            $('.questionInputBox').toggleClass('width-80per'),
+
+            $('.seeAllQLink').text($('.seeAllQLink').text() == 'مشاهده همه سؤالات و پاسخ‌ها' ? 'بازگشت به صفحه‌ی اصلی' : 'مشاهده همه سؤالات و پاسخ‌ها');
+        }
+
+
+
     </script>
 
 
