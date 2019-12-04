@@ -5,6 +5,9 @@ $kindPlaceId = 10; ?>
 <html>
 <head>
     @include('layouts.topHeader')
+    <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/hr_north_star.css?v=1')}}' data-rup='hr_north_star_v1'/>
+    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/shazdeDesigns/hotelDetail.css')}}"/>
+
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/long_lived_global_legacy_2.css?v=1')}}"/>
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/gardeshname.min.css?v=1.2')}}"/>
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/shazdeDesigns/gardeshname.css')}}"/>
@@ -79,6 +82,12 @@ $kindPlaceId = 10; ?>
         }
     </style>
 
+    <style>
+        #helpBtnMainDiv {
+            display: none;
+        }
+    </style>
+
 </head>
 
 <body class="rebrand_2017 desktop HomeRebranded  js_logging rtl home page-template-default page page-id-119 group-blog wpb-js-composer js-comp-ver-4.12 vc_responsive">
@@ -86,7 +95,9 @@ $kindPlaceId = 10; ?>
 <div class="header">
     @include('layouts.placeHeader')
 
-    @include('layouts.placeMainBodyHeader')
+    <div class="ppr_rup ppr_priv_hr_atf_north_star_nostalgic position-relative">
+        @include('layouts.placeMainBodyHeader')
+    </div>
 
     <h1 class="non-display-name"><a href="/">شازده مسافر مجله جامع دیجیتال گردشگری، سفر و ایرانشناسی</a></h1>
 

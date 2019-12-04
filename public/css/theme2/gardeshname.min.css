@@ -1351,9 +1351,9 @@ th {
     content: "î‰‘"
 }
 
-.glyphicon-triangle-bottom:before {
-    content: "î‰’"
-}
+/*.glyphicon-triangle-bottom:before {*/
+    /*content: "î‰’"*/
+/*}*/
 
 .glyphicon-triangle-top:before {
     content: "î‰“"
@@ -11248,16 +11248,16 @@ label {
     font-weight: 400!important
 }
 
-input,
-select,
-textarea {
-    background-color: #fff;
-    border: 1px solid #e1e1e1;
-    border-right-width: 3px;
-    padding: 10px;
-    -moz-transition-duration: .5s;
-    transition-duration: .5s
-}
+/*input,*/
+/*select,*/
+/*textarea {*/
+    /*background-color: #fff;*/
+    /*border: 1px solid #e1e1e1;*/
+    /*border-right-width: 3px;*/
+    /*padding: 10px;*/
+    /*-moz-transition-duration: .5s;*/
+    /*transition-duration: .5s*/
+/*}*/
 
 .btn,
 .form-control {

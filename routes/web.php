@@ -27,6 +27,7 @@ Route::get('databaseforall', function (){
 
     dd('done');
 });
+
 Route::get('updateDataBase', function(){
     $pic = \App\models\PlacePic::all()->count();
     dd($pic);

@@ -1,4 +1,3 @@
-
 <div class="global-nav-no-refresh" id="global-nav-no-refresh-2">
     <div id="taplc_global_nav_onpage_assets_0" class="ppr_rup ppr_priv_global_nav_onpage_assets"
          data-placement-name="global_nav_onpage_assets">
@@ -168,33 +167,34 @@
         </div>
     </div>
 </div>
-
 <div class="atf_header_wrapper position-relative">
     <div class="atf_header ui_container is-mobile full_width position-relative">
 
         <div class="ppr_rup ppr_priv_location_detail_header position-relative">
-            <h1 id="HEADING" class="heading_title " property="name">{{$place->name}}</h1>
+            <h1 id="HEADING" class="heading_title " property="name">
+                {{--{{$place->name}}--}}
+            </h1>
 
             <div class="rating_and_popularity">
                         <span class="header_rating">
                            <div class="rs rating" rel="v:rating">
                                <div class="prw_rup prw_common_bubble_rating overallBubbleRating float-left">
-                                    @if($avgRate == 5)
+                                    {{--@if($avgRate == 5)--}}
                                        <span class="ui_bubble_rating bubble_50 font-size-16"
                                              property="ratingValue" content="5" alt='5 of 5 bubbles'></span>
-                                   @elseif($avgRate == 4)
-                                       <span class="ui_bubble_rating bubble_40 font-size-16"
-                                             property="ratingValue" content="4" alt='4 of 5 bubbles'></span>
-                                   @elseif($avgRate == 3)
-                                       <span class="ui_bubble_rating bubble_30 font-size-16"
-                                             property="ratingValue" content="3" alt='3 of 5 bubbles'></span>
-                                   @elseif($avgRate == 2)
-                                       <span class="ui_bubble_rating bubble_20 font-size-16"
-                                             property="ratingValue" content="2" alt='2 of 5 bubbles'></span>
-                                   @elseif($avgRate == 1)
-                                       <span class="ui_bubble_rating bubble_10 font-size-16"
-                                             property="ratingValue" content="1" alt='1 of 5 bubbles'></span>
-                                   @endif
+                                   {{--@elseif($avgRate == 4)--}}
+                                       {{--<span class="ui_bubble_rating bubble_40 font-size-16"--}}
+                                             {{--property="ratingValue" content="4" alt='4 of 5 bubbles'></span>--}}
+                                   {{--@elseif($avgRate == 3)--}}
+                                       {{--<span class="ui_bubble_rating bubble_30 font-size-16"--}}
+                                             {{--property="ratingValue" content="3" alt='3 of 5 bubbles'></span>--}}
+                                   {{--@elseif($avgRate == 2)--}}
+                                       {{--<span class="ui_bubble_rating bubble_20 font-size-16"--}}
+                                             {{--property="ratingValue" content="2" alt='2 of 5 bubbles'></span>--}}
+                                   {{--@elseif($avgRate == 1)--}}
+                                       {{--<span class="ui_bubble_rating bubble_10 font-size-16"--}}
+                                             {{--property="ratingValue" content="1" alt='1 of 5 bubbles'></span>--}}
+                                   {{--@endif--}}
                                </div>
                                <a class="more taLnk" id="moreTaLnkReviewHeader" href="#REVIEWS">
                                    <span property="v:count" id="commentCount"></span> نقد
@@ -202,7 +202,7 @@
                            </div>
                         </span>
                 <span class="header_popularity popIndexValidation" id="scoreSpanHeader">
-                            <a> {{$total}} امتیاز</a>
+                            {{--<a> {{$total}} امتیاز</a>--}}
                         </span>
                 <div class="header heading" id="helpBtnMainDiv">
                     <a class="link" onclick="startHelp()">
@@ -222,13 +222,12 @@
 
                 <span class="ui_button_overlay position-relative float-left">
                             <div id="targetHelp_7" class="targets position-relative float-right">
-                                <span onclick="saveToTrip()" id="addToFavouriteTripsMainDiv"
-                                      class="ui_button saves ui_icon {{($save) ? "red-heart-fill" : "red-heart"}} ">
-                                    <div class="circleBase type2 addToFavouriteTripsIcon"></div>
-                                    <div class="addToFavouriteTripsLabel">
-                                        افزودن به لیست سفر
-                                    </div>
-                                </span>
+                                {{--<span onclick="saveToTrip()" id="addToFavouriteTripsMainDiv" class="ui_button saves ui_icon {{($save) ? "red-heart-fill" : "red-heart"}} ">--}}
+                                    {{--<div class="circleBase type2 addToFavouriteTripsIcon"></div>--}}
+                                    {{--<div class="addToFavouriteTripsLabel">--}}
+                                        {{--افزودن به لیست سفر--}}
+                                    {{--</div>--}}
+                                {{--</span>--}}
                                 <div id="helpSpan_7" class="helpSpans row hidden">
                                     <span class="introjs-arrow"></span>
                                     <p class="col-xs-12">
@@ -254,26 +253,30 @@
                         <div class="blEntry blEn address  clickable colCnt3" onclick="showExtendedMap()">
                             <span class="ui_icon map-pin"></span>
                             <span class="street-address">آدرس : </span>
-                            <span>{{$place->address}}</span>
+                            <span>
+{{--                                {{$place->address}}--}}
+                            </span>
                         </div>
-                        @if(!empty($place->phone))
+{{--                        @if(!empty($place->phone))--}}
                             <div class="blEntry blEn phone">
                                 <span class="ui_icon phone"></span>
-                                <span>{{$place->phone}}</span>
+                                <span>
+{{--                                    {{$place->phone}}--}}
+                                </span>
                             </div>
-                        @endif
-                        @if(!empty($place->site))
-                            <div class="blEntry blEn website">
-                                <span class="ui_icon laptop"></span>
-                                <?php
-                                if (strpos($place->site, 'http') === false)
-                                    $place->site = 'http://' . $place->site;
-                                ?>
-                                <a target="_blank" href="{{$place->site}}" {{($config->externalSiteNoFollow) ? 'rel="nofollow"' : ''}}>
-                                    <span>{{$place->site}}</span>
-                                </a>
-                            </div>
-                        @endif
+                        {{--@endif--}}
+                        {{--@if(!empty($place->site))--}}
+                            {{--<div class="blEntry blEn website">--}}
+                                {{--<span class="ui_icon laptop"></span>--}}
+                                {{--<?php--}}
+                                {{--if (strpos($place->site, 'http') === false)--}}
+                                    {{--$place->site = 'http://' . $place->site;--}}
+                                {{--?>--}}
+                                {{--<a target="_blank" href="{{$place->site}}" {{($config->externalSiteNoFollow) ? 'rel="nofollow"' : ''}}>--}}
+                                    {{--<span>{{$place->site}}</span>--}}
+                                {{--</a>--}}
+                            {{--</div>--}}
+                        {{--@endif--}}
                     </div>
                 </div>
             </div>
