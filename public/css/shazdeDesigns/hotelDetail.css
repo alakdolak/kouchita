@@ -2861,8 +2861,13 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 }
 
 .likeBox::after {
-    content: '\e057';
-    font-family: shazdemosafer-tour !important;
+    content: '\E1F9';
+    font-family: Shazde_Regular2 !important;
+    font-size: 20px;
+}
+
+.likeBox::after:hover {
+    color: red;
 }
 
 .dislikeBox {
@@ -2871,8 +2876,13 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 }
 
 .dislikeBox::after {
-    content: '\e058';
-    font-family: shazdemosafer-tour !important;
+    content: '\E1F8';
+    font-family: Shazde_Regular2 !important;
+    font-size: 20px;
+}
+
+.likeBox::after:hover {
+    color: darkred;
 }
 
 .showingPhotosModal .modal-dialog {
