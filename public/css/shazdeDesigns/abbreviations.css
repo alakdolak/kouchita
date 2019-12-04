@@ -336,6 +336,10 @@
 
 /*margin top*/
 
+.mg-tp-0 {
+    margin-top: 0 !important;
+}
+
 .mg-tp-2 {
     margin-top: 2px;
 }
@@ -636,6 +640,14 @@
 
 .width-75perImp {
     width: 75% !important;
+}
+
+.width-80per {
+    width: 80%;
+}
+
+.width-80perImp {
+    width: 80% !important;
 }
 
 .width-84per {
