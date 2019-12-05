@@ -228,6 +228,23 @@ Route::get('gardeshname', function(){
     return view('gardeshname');
 });
 
+//Route::get('mainArticle', function(){
+//    return view('mainArticle');
+//});
+
+Route::get('article', function(){
+    return view('article');
+});
+
+Route::get('gardeshnameEdit', function(){
+    return view('gardeshnameEdit');
+});
+
+//Route::get('searchArticle', function(){
+//    return view('searchArticle');
+//});
+//
+
 Route::get('myTripInner', function(){
     return view('myTripInner');
 });

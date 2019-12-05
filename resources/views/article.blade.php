@@ -105,6 +105,25 @@ $kindPlaceId = 10; ?>
         }
     </style>
 
+    {{--just article style--}}
+    <style>
+        .gnMainPicOfArticle {
+            position: relative;
+            padding: 15px 0;
+        }
+        .gnMainPicOfArticleText {
+            width: 96%;
+            position: absolute;
+            bottom: -35px;
+            left: 50%;
+            margin-left: -48%;
+            padding: 20px 20px 10px;
+            background: white;
+            border-bottom: 3px solid #f3f3f3;
+            opacity: 0.9;
+        }
+    </style>
+
 </head>
 
 <body class="rebrand_2017 desktop HomeRebranded  js_logging rtl home page-template-default page page-id-119 group-blog wpb-js-composer js-comp-ver-4.12 vc_responsive">
@@ -576,211 +595,150 @@ $kindPlaceId = 10; ?>
                 </div>
                 <input type="text" class="gnInput" placeholder="شهر موردنظر خود را وارد کنید">
             </div>
-            <div class="col-md-12 gnWhiteBox gnAdvertise">
-                <div class="gnAdvertiseText">تبلیغات</div>
-                <div>
-                    <img class="gnAdvertiseImage" src="{{URL::asset('images/adv2.jpg')}}" alt="">
+            <div class="col-md-12 gnWhiteBox">
+                <div class="content-2col">
+                    <div class="im-entry-thumb">
+                        <div class="im-entry-header">
+                            <div class="im-entry-category">
+                                <div class="iranomag-meta clearfix">
+                                    <div class="cat-links im-meta-item">
+                                        <a class="im-catlink-color-2079" href="/category/%d8%a7%d9%85%d8%a7%da%a9%d9%86-%da%af%d8%b1%d8%af%d8%b4%da%af%d8%b1%db%8c/%d8%b7%d8%a8%db%8c%d8%b9%d8%aa-%da%af%d8%b1%d8%af%db%8c/%d8%a2%d8%a8%d8%b4%d8%a7%d8%b1/">آبشار</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <h3 class="im-entry-title">
+                                <a href="/%d8%b1%d9%88%d8%b3%d8%aa%d8%a7%db%8c-%d8%a8%d9%86%d9%87-%da%a9%d9%85%d8%b1-%d9%81%d8%b1%db%8c%d8%af%d9%88%d9%86%d8%b4%d9%87%d8%b1/" rel="bookmark">
+                                    روستای بنه کمر در منطقه پیشکوه
+                                    شهرستان فریدونشهر واقع در استان اصفهان
+                                </a>
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="im-entry">
+                        <div class="im-entry-content">
+                            <p>
+                                روستای بنه کمر امروز به روستای بنه کمر در منطقه پیشکوه
+                                شهرستان فریدونشهر می رویم. همراه شازده مسافر باشید و از این
+                                روستای زیبا دیدن&#8230;
+                            </p>
+                        </div>
+
+                        <p class="im-entry-footer">
+                        <div class="iranomag-meta clearfix">
+                            <div class="posted-on im-meta-item">
+                                <span class="entry-date published updated">سه شنبه, ۱۲ تیر ۱۳۹۷</span>
+                            </div>
+                            <div class="comments-link im-meta-item">
+                                <a href="/%d8%b1%d9%88%d8%b3%d8%aa%d8%a7%db%8c-%d8%a8%d9%86%d9%87-%da%a9%d9%85%d8%b1-%d9%81%d8%b1%db%8c%d8%af%d9%88%d9%86%d8%b4%d9%87%d8%b1/#respond">
+                                    <i class="fa fa-comment-o"></i>۰
+                                </a>
+                            </div>
+                            <div class="author vcard im-meta-item">
+                                <a class="url fn n" href="/author/writer/">
+                                    <i class="fa fa-user"></i>
+                                    شازده مسافر
+                                </a>
+                            </div>
+                            <div class="post-views im-meta-item">
+                                <i class="fa fa-eye"></i>۱۵۱
+                            </div>
+                        </div>
+                        </p>
+                    </div>
+                </div>
+                <div class="content-2col">
+                    <div class="im-entry-thumb">
+                        <div class="im-entry-header">
+                            <div class="im-entry-category">
+                                <div class="iranomag-meta clearfix">
+                                    <div class="cat-links im-meta-item">
+                                        <a class="im-catlink-color-2068" href="/category/%d8%a7%d8%b3%d8%aa%d8%a7%d9%86-%da%af%db%8c%d9%84%d8%a7%d9%86/">
+                                            استان گیلان
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <h3 class="im-entry-title">
+                                <a href="/%d8%ba%d8%a7%d8%b1-%d8%a2%d9%88%db%8c%d8%b4%d9%88%db%8c-%d9%85%d8%a7%d8%b3%d8%a7%d9%84-%da%af%db%8c%d9%84%d8%a7%d9%86/"
+                                   rel="bookmark">
+                                    غار آویشوی در نزدیکی روستای ماسال
+                                    واقع در استان سرسبز گیلان
+                                </a>
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="im-entry">
+                        <div class="im-entry-content">
+                            <p>
+                                غار آویشوی غار آویشوی در گیلان یکی از پدیده های زیبایی است که
+                                در نوع خود بی نظیر است. غار آویشوی از بی نظیرترین غارهای&#8230;
+                            </p>
+                        </div>
+
+                        <p class="im-entry-footer">
+                        <div class="iranomag-meta clearfix">
+                            <div class="posted-on im-meta-item">
+                                <span class="entry-date published updated">یکشنبه, ۱۰ تیر ۱۳۹۷</span>
+                            </div>
+                            <div class="comments-link im-meta-item">
+                                <a href="/%d8%ba%d8%a7%d8%b1-%d8%a2%d9%88%db%8c%d8%b4%d9%88%db%8c-%d9%85%d8%a7%d8%b3%d8%a7%d9%84-%da%af%db%8c%d9%84%d8%a7%d9%86/#respond">
+                                    <i class="fa fa-comment-o"></i>۰
+                                </a>
+                            </div>
+                            <div class="author vcard im-meta-item">
+                                <a class="url fn n" href="/author/writer/">
+                                    <i class="fa fa-user"></i>
+                                    شازده مسافر
+                                </a>
+                            </div>
+                            <div class="post-views im-meta-item">
+                                <i class="fa fa-eye"></i>۲۸۱
+                            </div>
+                        </div>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-9 col-sm-12" style="padding-left: 0 !important;">
-            <div class="col-md-12 gnWhiteBox" style="padding: 15px;">
-                <div class="row im-blog">
-                    <div class="clearfix">
-                        <div class="small-12 columns">
-                            <div class="im-article content-column clearfix post-10135 post type-post status-publish format-standard has-post-thumbnail hentry category-6582 category-6583 category-7032 tag-3784 tag-7035 tag-7145 tag-1789 tag-864 tag-7036">
-                                <div class="im-entry-thumb col-md-5 col-sm-12">
-                                    <a class="im-entry-thumb-link" href="/%d8%a8%d9%84%d9%86%d8%af%d8%aa%d8%b1%db%8c%d9%86-%d9%85%d8%b9%d8%a8%d8%af-%d8%ac%d9%87%d8%a7%d9%86/" title="بلندترین معبد جهان در کشور پهناور و پرجمعیت هندوستان">
-                                        <img class="lazy-img" data-src="https://gardeshname.shazdemosafer.com/wp-content/uploads/2018/07/sri-vrindavan-chandrodaya-temple_1418965907.jpg" alt="بلندترین معبد جهان در کشور پهناور و پرجمعیت هندوستان"/>
-                                    </a>
-                                </div>
-
-                                <div class="im-entry col-md-7 col-sm-12">
-                                    <div class="im-entry-header">
-                                        <div class="im-entry-category">
-                                            <div class="iranomag-meta clearfix">
-                                                <div class="cat-links im-meta-item">
-                                                    <a class="im-catlink-color-6582" href="/category/%d8%a8%db%8c%d9%86-%d8%a7%d9%84%d9%85%d9%84%d9%84/">بین الملل</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <h3 class="im-entry-title">
-                                            <a href="/%d8%a8%d9%84%d9%86%d8%af%d8%aa%d8%b1%db%8c%d9%86-%d9%85%d8%b9%d8%a8%d8%af-%d8%ac%d9%87%d8%a7%d9%86/" rel="bookmark">بلندترین معبد جهان در کشور پهناور و پرجمعیت هندوستان</a>
-                                        </h3>
-                                    </div>
-
-                                    <div class="im-entry-content">
-                                        <p>بلندترین معبد جهان بلندترین معبد جهان ، معبد Chandrodaya در Vrindavan فقط یک معبد نیست، بلکه این مکان نقش مهمی در آینده کشور&#8220;هند&#8221; ایفا&#8230;</p>
-                                    </div>
-
-                                    <p class="im-entry-footer">
-                                        <div class="iranomag-meta clearfix">
-                                            <div class="posted-on im-meta-item">
-                                                <span class="entry-date published updated">جمعه, ۲۹ تیر ۱۳۹۷</span>
-                                            </div>
-                                            <div class="comments-link im-meta-item">
-                                                <a href="/%d8%a8%d9%84%d9%86%d8%af%d8%aa%d8%b1%db%8c%d9%86-%d9%85%d8%b9%d8%a8%d8%af-%d8%ac%d9%87%d8%a7%d9%86/#respond"><i class="fa fa-comment-o"></i>۰</a>
-                                            </div>
-                                            <div class="author vcard im-meta-item">
-                                                <a class="url fn n" href="/author/writer/"><i class="fa fa-user"></i>شازده مسافر</a>
-                                            </div>
-                                            <div class="post-views im-meta-item"><i class="fa fa-eye"></i>۱۱۹</div>
-                                        </div>
-                                    </p>
-                                </div>
+        <div class="col-md-9 col-sm-12 gnWhiteBox">
+            <div class="gnMainPicOfArticle">
+                <img class="gnAdvertiseImage" src="{{URL::asset('images/adv1.jpg')}}" alt="">
+                <div class="gnMainPicOfArticleText">
+                    <div>
+                        <div class="im-entry-category" style="margin: 0 0 0 20px;">
+                            <div class="iranomag-meta">
+                                <a class="im-catlink-color-2079" href="/category/%d8%a7%d9%85%d8%a7%da%a9%d9%86-%da%af%d8%b1%d8%af%d8%b4%da%af%d8%b1%db%8c/%d8%b7%d8%a8%db%8c%d8%b9%d8%aa-%da%af%d8%b1%d8%af%db%8c/%d8%a2%d8%a8%d8%b4%d8%a7%d8%b1/">آبشار</a>
                             </div>
                         </div>
-
-                        <div class="small-12 columns">
-                            <div class="im-article content-column clearfix post-10129 post type-post status-publish format-standard has-post-thumbnail hentry category-6582 category-6583 category-7032">
-                                <div class="im-entry-thumb col-md-5 col-sm-12">
-                                    <a class="im-entry-thumb-link" href="/%d8%aa%d8%a7%d8%ac-%d9%85%d8%ad%d9%84/" title="تاج محل ترکیبی از  معماری هند، فارسی و اسلامی تقدیم شده به عشق">
-                                        <img class="lazy-img" data-src="https://gardeshname.shazdemosafer.com/wp-content/uploads/2018/07/slider2.jpg" alt="تاج محل ترکیبی از  معماری هند، فارسی و اسلامی تقدیم شده به عشق"/>
-                                    </a>
-                                </div>
-
-                                <div class="im-entry col-md-7 col-sm-12">
-                                    <div class="im-entry-header">
-                                        <div class="im-entry-category">
-                                            <div class="iranomag-meta clearfix">
-                                                <div class="cat-links im-meta-item">
-                                                    <a class="im-catlink-color-6582" href="/category/%d8%a8%db%8c%d9%86-%d8%a7%d9%84%d9%85%d9%84%d9%84/">بین الملل</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <h3 class="im-entry-title">
-                                            <a href="/%d8%aa%d8%a7%d8%ac-%d9%85%d8%ad%d9%84/" rel="bookmark">تاج محل ترکیبی از معماری هند، فارسی و اسلامی تقدیم شده به عشق</a>
-                                        </h3>
-                                    </div>
-
-                                    <div class="im-entry-content">
-                                        <p> تاج محل محل زیبای که تاج محل در آن قرار دارد واقعا ستودنی است .نمای زیبای سنگ مرمر سفید منحصر به فرد و بی همتا&#8230;</p>
-                                    </div>
-
-                                    <p class="im-entry-footer">
-                                        <div class="iranomag-meta clearfix">
-                                            <div class="posted-on im-meta-item">
-                                                <span class="entry-date published updated">جمعه, ۲۹ تیر ۱۳۹۷</span>
-                                            </div>
-                                            <div class="comments-link im-meta-item">
-                                                <a href="/%d8%aa%d8%a7%d8%ac-%d9%85%d8%ad%d9%84/#respond"><i class="fa fa-comment-o"></i>۰</a>
-                                            </div>
-                                            <div class="author vcard im-meta-item">
-                                                <a class="url fn n" href="/author/writer/"><i class="fa fa-user"></i>شازده مسافر</a>
-                                            </div>
-                                            <div class="post-views im-meta-item"><i class="fa fa-eye"></i>۱۷۱</div>
-                                        </div>
-                                    </p>
-                                </div>
+                        <div class="iranomag-meta" style="display: inline-block">
+                            <div class="posted-on im-meta-item">
+                                <span class="entry-date published updated">سه شنبه, ۱۲ تیر ۱۳۹۷</span>
                             </div>
-                        </div>
-
-                        <div class="small-12 columns">
-                            <div class="im-article content-column clearfix post-10124 post type-post status-publish format-standard has-post-thumbnail hentry category-6582 category-6584 category-7092 category-6583 tag-7128 tag-7154 tag-7093 tag-7155">
-                                <div class="im-entry-thumb col-md-5 col-sm-12">
-                                    <a class="im-entry-thumb-link" href="/%d9%85%d8%af%d8%a7%d8%a6%d9%86-%d8%b5%d8%a7%d9%84%d8%ad/" title="مدائن صالح صخره ای  سنگی  و چندین کتیبه مهم تاریخی در عربستان صعودی">
-                                        <img class="lazy-img" data-src="https://gardeshname.shazdemosafer.com/wp-content/uploads/2018/07/3e7f67aefc805020379c5b605c413ae4.jpg" alt="مدائن صالح صخره ای  سنگی  و چندین کتیبه مهم تاریخی در عربستان صعودی"/>
-                                    </a>
-                                </div>
-
-                                <div class="im-entry col-md-7 col-sm-12">
-                                    <div class="im-entry-header">
-                                        <div class="im-entry-category">
-                                            <div class="iranomag-meta clearfix">
-                                                <div class="cat-links im-meta-item">
-                                                    <a class="im-catlink-color-6582" href="/category/%d8%a8%db%8c%d9%86-%d8%a7%d9%84%d9%85%d9%84%d9%84/">بین الملل</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <h3 class="im-entry-title">
-                                            <a href="/%d9%85%d8%af%d8%a7%d8%a6%d9%86-%d8%b5%d8%a7%d9%84%d8%ad/" rel="bookmark">مدائن صالح صخره ای سنگی و چندین کتیبه مهم تاریخی در عربستان صعودی</a>
-                                        </h3>
-                                    </div>
-
-                                    <div class="im-entry-content">
-                                        <p>مدائن صالح مدائن صالح مکانی تاریخی در عربستان سعودی است که از صخره ای سنگی و چندین کتیبه مهم تاریخی تشکیل شده است. در سفرمان&#8230;</p>
-                                    </div>
-
-                                    <p class="im-entry-footer">
-                                        <div class="iranomag-meta clearfix">
-                                            <div class="posted-on im-meta-item">
-                                                <span class="entry-date published updated">جمعه, ۲۹ تیر ۱۳۹۷</span>
-                                            </div>
-                                            <div class="comments-link im-meta-item">
-                                                <a href="/%d9%85%d8%af%d8%a7%d8%a6%d9%86-%d8%b5%d8%a7%d9%84%d8%ad/#respond"><i class="fa fa-comment-o"></i>۰</a>
-                                            </div>
-                                            <div class="author vcard im-meta-item">
-                                                <a class="url fn n" href="/author/writer/"><i class="fa fa-user"></i>شازده مسافر</a>
-                                            </div>
-                                            <div class="post-views im-meta-item"><i class="fa fa-eye"></i>۲۳۵</div>
-                                        </div>
-                                    </p>
-                                </div>
+                            <div class="comments-link im-meta-item">
+                                <a href="/%d8%b1%d9%88%d8%b3%d8%aa%d8%a7%db%8c-%d8%a8%d9%86%d9%87-%da%a9%d9%85%d8%b1-%d9%81%d8%b1%db%8c%d8%af%d9%88%d9%86%d8%b4%d9%87%d8%b1/#respond">
+                                    <i class="fa fa-comment-o"></i>۰
+                                </a>
                             </div>
-                        </div>
-
-                        <div class="small-12 columns">
-
-                            <div class="im-article content-column clearfix post-10118 post type-post status-publish format-standard has-post-thumbnail hentry category-6582 category-7087 category-6583 tag-7084 tag-7085 tag-3314">
-                                <div class="im-entry-thumb col-md-5 col-sm-12">
-                                    <a class="im-entry-thumb-link" href="/%d8%af%db%8c%d9%88%d8%a7%d8%b1-%da%86%db%8c%d9%86/" title="دیوار چین مجموعه ای باستانی از دیوارها و استحکامات با طول بیش از ۱۳،۰۰۰ مایل">
-                                        <img class="lazy-img" data-src="https://gardeshname.shazdemosafer.com/wp-content/uploads/2018/07/china_wall_01_big.jpg" alt="دیوار چین مجموعه ای باستانی از دیوارها و استحکامات با طول بیش از ۱۳،۰۰۰ مایل"/>
-                                    </a>
-                                </div>
-
-                                <div class="im-entry col-md-7 col-sm-12">
-                                    <div class="im-entry-header">
-                                        <div class="im-entry-category">
-                                            <div class="iranomag-meta clearfix">
-                                                <div class="cat-links im-meta-item">
-                                                    <a class="im-catlink-color-6582" href="/category/%d8%a8%db%8c%d9%86-%d8%a7%d9%84%d9%85%d9%84%d9%84/">بین الملل</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <h3 class="im-entry-title">
-                                            <a href="/%d8%af%db%8c%d9%88%d8%a7%d8%b1-%da%86%db%8c%d9%86/" rel="bookmark">دیوار چین مجموعه ای باستانی از دیوارها و استحکامات با طول بیش از ۱۳،۰۰۰ مایل</a>
-                                        </h3>
-                                    </div>
-
-                                    <div class="im-entry-content">
-                                        <p>دیوار چین حتما می دانید یکی از شاهکارهای معماری بشر، دیوار چین است. دیوار چین در سال ۱۹۸۷ توسط سازمان یونسکو، جزو یکی از آثار باستانی&#8230;</p>
-                                    </div>
-
-                                    <p class="im-entry-footer">
-                                        <div class="iranomag-meta clearfix">
-                                            <div class="posted-on im-meta-item">
-                                                <span class="entry-date published updated">پنجشنبه, ۲۸ تیر ۱۳۹۷</span>
-                                            </div>
-                                            <div class="comments-link im-meta-item">
-                                                <a href="/%d8%af%db%8c%d9%88%d8%a7%d8%b1-%da%86%db%8c%d9%86/#respond"><i class="fa fa-comment-o"></i>۰</a>
-                                            </div>
-                                            <div class="author vcard im-meta-item">
-                                                <a class="url fn n" href="/author/writer/"><i class="fa fa-user"></i>شازده مسافر</a>
-                                            </div>
-                                            <div class="post-views im-meta-item"><i class="fa fa-eye"></i>۱۲۶</div>
-                                        </div>
-                                    </p>
-                                </div>
+                            <div class="author vcard im-meta-item">
+                                <a class="url fn n" href="/author/writer/">
+                                    <i class="fa fa-user"></i>
+                                    شازده مسافر
+                                </a>
+                            </div>
+                            <div class="post-views im-meta-item">
+                                <i class="fa fa-eye"></i>۱۵۱
                             </div>
                         </div>
                     </div>
-                    <div class="clearfix">
-                        <nav class="navigation pagination">
-                            <div class="nav-links">
-                                <span aria-current='page' class='page-numbers current'>۱</span>
-                                <a class='page-numbers' href='/page/2/'>۲</a>
-                                <a class='page-numbers' href='/page/3/'>۳</a>
-                                <span class="page-numbers dots">&hellip;</span>
-                                <a class='page-numbers' href='/page/318/'>۳۱۸</a>
-                                <a class="next page-numbers" href="/page/2/"><span>&larr;</span></a>
-                            </div>
-                        </nav>
-                    </div>
+                    <h3 class="im-entry-title">
+                        <a style="color: black" href="/%d8%b1%d9%88%d8%b3%d8%aa%d8%a7%db%8c-%d8%a8%d9%86%d9%87-%da%a9%d9%85%d8%b1-%d9%81%d8%b1%db%8c%d8%af%d9%88%d9%86%d8%b4%d9%87%d8%b1/" rel="bookmark">روستای بنه کمر در منطقه پیشکوه شهرستان فریدونشهر واقع در استان اصفهان</a>
+                    </h3>
                 </div>
-                <div class="gap cf height-30"></div>
             </div>
+            <div class="col-md-9 col-sm-12" style="height: 800px">
         </div>
     </div>
+</div>
 
     <a href="#" id="back-to-top" title="بازگشت به ابتدای صفحه"><i class="fa fa-arrow-up"></i></a>
 

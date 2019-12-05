@@ -12478,7 +12478,7 @@ input[type=submit]:hover {
 }
 
 .content-2col .im-entry-thumb {
-    min-height: 250px;
+    min-height: 160px;
     position: relative
 }
 

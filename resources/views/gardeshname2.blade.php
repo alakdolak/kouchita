@@ -398,63 +398,63 @@ $kindPlaceId = 10; ?>
     <div class="gnTopPics">
         <div class="container">
             <div class="im_post_grid_box clearfix">
-            <div class="clearfix">
-                <?php $i = 0; ?>
-                @foreach($bannerPosts as $post)
-                    @if($i < 2)
-                        <div class="col-md-6 col-sm-12">
-                            @else
-                                <div class="col-md-4 col-sm-12">
-                                    @endif
-                                    <article class="im-article grid-carousel grid-2 row post type-post status-publish format-standard has-post-thumbnail hentry">
-                                        <div class="im-entry-thumb">
-                                            <a class="im-entry-thumb-link" href="{{route('gardeshnameInner', ['postId' => $post->id])}}" title="{{$post->title}}">
-                                                <img class="lazy-img" data-src="{{$post->pic}}" alt="{{$post->alt}}"/>
-                                            </a>
-                                            <div class="im-entry-header">
-                                                <div class="im-entry-category">
-                                                    <div class="iranomag-meta clearfix">
-                                                        <div class="cat-links im-meta-item">
-                                                            <a style="background-color: {{$post->backColor}}; color: {{$post->categoryColor}} !important;" href="" title="{{$post->category}}">{{$post->category}}</a>
+                <div class="clearfix">
+                    <?php $i = 0; ?>
+                    @foreach($bannerPosts as $post)
+                        @if($i < 2)
+                            <div class="col-md-6 col-sm-12">
+                                @else
+                                    <div class="col-md-4 col-sm-12">
+                                        @endif
+                                        <article class="im-article grid-carousel grid-2 row post type-post status-publish format-standard has-post-thumbnail hentry">
+                                            <div class="im-entry-thumb">
+                                                <a class="im-entry-thumb-link" href="{{route('gardeshnameInner', ['postId' => $post->id])}}" title="{{$post->title}}">
+                                                    <img class="lazy-img" data-src="{{$post->pic}}" alt="{{$post->alt}}"/>
+                                                </a>
+                                                <div class="im-entry-header">
+                                                    <div class="im-entry-category">
+                                                        <div class="iranomag-meta clearfix">
+                                                            <div class="cat-links im-meta-item">
+                                                                <a style="background-color: {{$post->backColor}}; color: {{$post->categoryColor}} !important;" href="" title="{{$post->category}}">{{$post->category}}</a>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <h2 class="im-entry-title">
-                                                    <a style="color: {{$post->color}}" href="" rel="bookmark">{{$post->title}}</a>
-                                                </h2>
-                                                <div class="im-entry-footer">
-                                                    <div class="iranomag-meta clearfix">
-                                                        <div class="posted-on im-meta-item">
-                                                            <span class="entry-date published updated">{{$post->date}}</span>
-                                                        </div>
-                                                        <div class="comments-link im-meta-item">
-                                                            <a href="">
-                                                                <i class="fa fa-comment-o"></i>{{$post->msgs}}
-                                                            </a>
-                                                        </div>
-                                                        <div class="author vcard im-meta-item">
-                                                            <a class="url fn n">
-                                                                <i class="fa fa-user"></i>{{$post->username}}
-                                                            </a>
-                                                        </div>
-                                                        <div class="post-views im-meta-item">
-                                                            <i class="fa fa-eye"></i>{{$post->seen}}
+                                                    <h2 class="im-entry-title">
+                                                        <a style="color: {{$post->color}}" href="" rel="bookmark">{{$post->title}}</a>
+                                                    </h2>
+                                                    <div class="im-entry-footer">
+                                                        <div class="iranomag-meta clearfix">
+                                                            <div class="posted-on im-meta-item">
+                                                                <span class="entry-date published updated">{{$post->date}}</span>
+                                                            </div>
+                                                            <div class="comments-link im-meta-item">
+                                                                <a href="">
+                                                                    <i class="fa fa-comment-o"></i>{{$post->msgs}}
+                                                                </a>
+                                                            </div>
+                                                            <div class="author vcard im-meta-item">
+                                                                <a class="url fn n">
+                                                                    <i class="fa fa-user"></i>{{$post->username}}
+                                                                </a>
+                                                            </div>
+                                                            <div class="post-views im-meta-item">
+                                                                <i class="fa fa-eye"></i>{{$post->seen}}
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </article>
-                                </div>
-                                @if($i == 1)
-                        </div>
-                        <div class="clearfix">
-                            @endif
-                            <?php $i++; ?>
-                            @endforeach
-                        </div>
+                                        </article>
+                                    </div>
+                                    @if($i == 1)
+                            </div>
+                            <div class="clearfix">
+                                @endif
+                                <?php $i++; ?>
+                                @endforeach
+                            </div>
+                </div>
             </div>
-        </div>
         </div>
     </div>
 
@@ -803,41 +803,159 @@ $kindPlaceId = 10; ?>
             </div>
         </div>
         <div class="col-md-9 col-sm-12" style="padding-left: 0 !important;">
-                    <div class="col-md-12 gnWhiteBox gnAdvertise">
-                        <div class="gnAdvertiseText">تبلیغات</div>
-                        <div>
-                            <img class="gnAdvertiseImage" src="{{URL::asset('images/adv1.jpg')}}" alt="">
-                        </div>
-                    </div>
+            <div class="col-md-12 gnWhiteBox gnAdvertise">
+                <div class="gnAdvertiseText">تبلیغات</div>
+                <div>
+                    <img class="gnAdvertiseImage" src="{{URL::asset('images/adv1.jpg')}}" alt="">
+                </div>
+            </div>
 
-                    <div class="category-element-holder style1 col-md-12 gnWhiteBox">
-                        <div class="widget-head widget-head-45">
-                            <strong class="widget-title">پر طرفدار ها</strong>
+            <div class="category-element-holder style1 col-md-12 gnWhiteBox">
+                <div class="widget-head widget-head-45">
+                    <strong class="widget-title">پر طرفدار ها</strong>
+                    <div class="widget-head-bar"></div>
+                    <div class="widget-head-line"></div>
+                </div>
+                <div class="row">
+                    <?php $i = 0; ?>
+                    @foreach($mostSeenPosts as $post)
+                        @if($i == 0)
+                            <article class="im-article content-2col col-md-6 col-sm-12 post type-post status-publish format-standard has-post-thumbnail hentry category-2068">
+                                <div class="im-entry-thumb">
+                                    <a class="im-entry-thumb-link" href="{{route('gardeshnameInner', ['postId' => $post->id])}}" title="{{$post->title}}">
+                                        <img class="lazy-img" data-src="{{$post->pic}}" alt="{{$post->alt}}"/>
+                                    </a>
+                                    <header class="im-entry-header">
+                                        <div class="im-entry-category">
+                                            <div class="iranomag-meta clearfix">
+                                                <div class="cat-links im-meta-item">
+                                                    <a style="background-color: {{$post->backColor}}; color: {{$post->categoryColor}} !important;" href="" title="{{$post->category}}">{{$post->category}}</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <h3 class="im-entry-title">
+                                            <a style="color: {{$post->color}}" href="" rel="bookmark">{{$post->title}}</a>
+                                        </h3>
+                                    </header>
+                                </div>
+                                <div class="im-entry">
+                                    <div class="iranomag-meta clearfix">
+                                        <div class="posted-on im-meta-item">
+                                            <span class="entry-date published updated">{{$post->date}}</span>
+                                        </div>
+
+                                        <div class="comments-link im-meta-item">
+                                            <a href="">
+                                                <i class="fa fa-comment-o"></i>{{$post->msgs}}
+                                            </a>
+                                        </div>
+
+                                        <div class="author vcard im-meta-item">
+                                            <a class="url fn n">
+                                                <i class="fa fa-user"></i>{{$post->username}}
+                                            </a>
+                                        </div>
+
+                                        <div class="post-views im-meta-item">
+                                            <i class="fa fa-eye"></i>{{$post->seen}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                        @else
+                            @if($i == 1)
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="widget">
+                                        <ul>
+                                            @endif
+                                            <li class="widget-10104im-widgetclearfix">
+                                                <figure class="im-widget-thumb">
+                                                    <a href="" title="{{$post->title}}">
+                                                        <img src="{{$post->pic}}" alt="{{$post->alt}}"/>
+                                                    </a>
+                                                </figure>
+                                                <div class="im-widget-entry">
+                                                    <header class="im-widget-entry-header">
+                                                        <h4 class='im-widget-entry-title'>
+                                                            <a style="color: {{$post->color}} !important;" href='' title='{{$post->title}}'>{{$post->title}}</a>
+                                                        </h4>
+                                                    </header>
+                                                    <div class="iranomag-meta clearfix">
+                                                        <div class="posted-on im-meta-item">
+                                                            <span class="entry-date published updated">{{$post->date}}</span>
+                                                        </div>
+                                                        <div class="comments-link im-meta-item">
+                                                            <a href="">
+                                                                <i class="fa fa-comment-o"></i>{{$post->msgs}}
+                                                            </a>
+                                                        </div>
+                                                        <div class="author vcard im-meta-item">
+                                                            <a class="url fn n">
+                                                                <i class="fa fa-user"></i>{{$post->username}}
+                                                            </a>
+                                                        </div>
+                                                        <div class="post-views im-meta-item">
+                                                            <i class="fa fa-eye"></i>{{$post->seen}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            @if($i == count($mostSeenPosts) - 1)
+                                        </ul>
+                                    </div>
+                                </div>
+                            @endif
+                        @endif
+
+                        <?php $i++; ?>
+
+                    @endforeach
+
+                </div>
+            </div>
+
+            <div class="col-md-12 gnWhiteBox" style="padding: 0 !important;">
+                <div class="col-md-6 col-sm-12">
+                    <div class="category-element-holder style2">
+                        <div class="widget-head widget-head-46">
+                            <strong class="widget-title">تازه ها</strong>
                             <div class="widget-head-bar"></div>
                             <div class="widget-head-line"></div>
                         </div>
                         <div class="row">
+
                             <?php $i = 0; ?>
-                            @foreach($mostSeenPosts as $post)
+                            @foreach($recentlyPosts as $post)
                                 @if($i == 0)
-                                    <article class="im-article content-2col col-md-6 col-sm-12 post type-post status-publish format-standard has-post-thumbnail hentry category-2068">
+                                    <article class="im-article content-2col content-2col-nocontent col-md-12 post type-post status-publish format-standard has-post-thumbnail hentry">
                                         <div class="im-entry-thumb">
-                                            <a class="im-entry-thumb-link" href="{{route('gardeshnameInner', ['postId' => $post->id])}}" title="{{$post->title}}">
-                                                <img class="lazy-img" data-src="{{$post->pic}}" alt="{{$post->alt}}"/>
+
+                                            <a class="im-entry-thumb-link"
+                                               href="{{route('gardeshnameInner', ['postId' => $post->id])}}"
+                                               title="{{$post->title}}">
+
+                                                <img class="lazy-img"
+                                                     data-src="{{$post->pic}}"
+                                                     alt="{{$post->alt}}"/>
                                             </a>
                                             <header class="im-entry-header">
                                                 <div class="im-entry-category">
                                                     <div class="iranomag-meta clearfix">
                                                         <div class="cat-links im-meta-item">
-                                                            <a style="background-color: {{$post->backColor}}; color: {{$post->categoryColor}} !important;" href="" title="{{$post->category}}">{{$post->category}}</a>
+                                                            <a style="background-color: {{$post->backColor}}; color: {{$post->categoryColor}} !important;"
+                                                               href=""
+                                                               title="{{$post->category}}">{{$post->category}}</a>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <h3 class="im-entry-title">
-                                                    <a style="color: {{$post->color}}" href="" rel="bookmark">{{$post->title}}</a>
+                                                    <a style="color: {{$post->color}} !important"
+                                                       href=""
+                                                       rel="bookmark">{{$post->title}}</a>
                                                 </h3>
                                             </header>
                                         </div>
+
                                         <div class="im-entry">
                                             <div class="iranomag-meta clearfix">
                                                 <div class="posted-on im-meta-item">
@@ -845,8 +963,8 @@ $kindPlaceId = 10; ?>
                                                 </div>
 
                                                 <div class="comments-link im-meta-item">
-                                                    <a href="">
-                                                        <i class="fa fa-comment-o"></i>{{$post->msgs}}
+                                                    <a href=""><i
+                                                                class="fa fa-comment-o"></i>{{$post->msgs}}
                                                     </a>
                                                 </div>
 
@@ -862,423 +980,305 @@ $kindPlaceId = 10; ?>
                                             </div>
                                         </div>
                                     </article>
-                                    @else
-                                        @if($i == 1)
-                                            <div class="col-md-6 col-sm-12">
-                                                <div class="widget">
-                                                    <ul>
-                                        @endif
-                                                        <li class="widget-10104im-widgetclearfix">
-                                                            <figure class="im-widget-thumb">
-                                                                <a href="" title="{{$post->title}}">
-                                                                    <img src="{{$post->pic}}" alt="{{$post->alt}}"/>
-                                                                </a>
-                                                            </figure>
-                                                            <div class="im-widget-entry">
-                                                                <header class="im-widget-entry-header">
-                                                                    <h4 class='im-widget-entry-title'>
-                                                                        <a style="color: {{$post->color}} !important;" href='' title='{{$post->title}}'>{{$post->title}}</a>
-                                                                    </h4>
-                                                                </header>
-                                                                <div class="iranomag-meta clearfix">
-                                                                    <div class="posted-on im-meta-item">
-                                                                        <span class="entry-date published updated">{{$post->date}}</span>
-                                                                    </div>
-                                                                    <div class="comments-link im-meta-item">
-                                                                        <a href="">
-                                                                            <i class="fa fa-comment-o"></i>{{$post->msgs}}
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="author vcard im-meta-item">
-                                                                        <a class="url fn n">
-                                                                            <i class="fa fa-user"></i>{{$post->username}}
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="post-views im-meta-item">
-                                                                        <i class="fa fa-eye"></i>{{$post->seen}}
-                                                                    </div>
+                                @else
+
+                                    @if($i == 1)
+                                        <div class="col-md-12">
+                                            <div class="widget">
+                                                <ul>
+                                                    @endif
+
+                                                    <li class="widget-10104 im-widget clearfix">
+                                                        <figure class="im-widget-thumb">
+                                                            <a href=""
+                                                               title="{{$post->title}}">
+                                                                <img src="{{$post->pic}}"
+                                                                     alt="{{$post->alt}}"/>
+                                                            </a>
+                                                        </figure>
+                                                        <div class="im-widget-entry">
+                                                            <header class="im-widget-entry-header">
+                                                                <h4 class='im-widget-entry-title'>
+                                                                    <a style="color: {{$post->color}} !important;"
+                                                                       href=''
+                                                                       title='{{$post->title}}'>{{$post->title}}</a>
+                                                                </h4>
+                                                            </header>
+                                                            <p class="im-widget-entry-footer">
+                                                            <div class="iranomag-meta clearfix">
+                                                                <div class="posted-on im-meta-item">
+                                                                    <span class="entry-date published updated">{{$post->date}}</span>
+                                                                </div>
+
+                                                                <div class="comments-link im-meta-item">
+                                                                    <a href=""><i
+                                                                                class="fa fa-comment-o"></i>{{$post->msgs}}
+                                                                    </a>
+                                                                </div>
+
+                                                                <div class="author vcard im-meta-item">
+                                                                    <a class="url fn n">
+                                                                        <i class="fa fa-user"></i>{{$post->username}}
+                                                                    </a>
+                                                                </div>
+
+                                                                <div class="post-views im-meta-item">
+                                                                    <i class="fa fa-eye"></i>{{$post->seen}}
                                                                 </div>
                                                             </div>
-                                                        </li>
-                                                @if($i == count($mostSeenPosts) - 1)
-                                                    </ul>
-                                                </div>
+                                                            </p>
+                                                        </div>
+                                                    </li>
+
+                                                    @if($i == count($recentlyPosts) - 1)
+                                                </ul>
                                             </div>
-                                            @endif
+                                        </div>
+                                    @endif
                                 @endif
 
-                            <?php $i++; ?>
+
+                                <?php $i++; ?>
 
                             @endforeach
-
                         </div>
                     </div>
-
-                    <div class="col-md-12 gnWhiteBox" style="padding: 0 !important;">
-                        <div class="col-md-6 col-sm-12">
-                            <div class="category-element-holder style2">
-                                <div class="widget-head widget-head-46">
-                                    <strong class="widget-title">تازه ها</strong>
-                                    <div class="widget-head-bar"></div>
-                                    <div class="widget-head-line"></div>
-                                </div>
-                                <div class="row">
-
-                                    <?php $i = 0; ?>
-                                    @foreach($recentlyPosts as $post)
-                                        @if($i == 0)
-                                            <article class="im-article content-2col content-2col-nocontent col-md-12 post type-post status-publish format-standard has-post-thumbnail hentry">
-                                                <div class="im-entry-thumb">
-
-                                                    <a class="im-entry-thumb-link"
-                                                       href="{{route('gardeshnameInner', ['postId' => $post->id])}}"
-                                                       title="{{$post->title}}">
-
-                                                        <img class="lazy-img"
-                                                             data-src="{{$post->pic}}"
-                                                             alt="{{$post->alt}}"/>
-                                                    </a>
-                                                    <header class="im-entry-header">
-                                                        <div class="im-entry-category">
-                                                            <div class="iranomag-meta clearfix">
-                                                                <div class="cat-links im-meta-item">
-                                                                    <a style="background-color: {{$post->backColor}}; color: {{$post->categoryColor}} !important;"
-                                                                       href=""
-                                                                       title="{{$post->category}}">{{$post->category}}</a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <h3 class="im-entry-title">
-                                                            <a style="color: {{$post->color}} !important"
-                                                               href=""
-                                                               rel="bookmark">{{$post->title}}</a>
-                                                        </h3>
-                                                    </header>
-                                                </div>
-
-                                                <div class="im-entry">
-                                                    <div class="iranomag-meta clearfix">
-                                                        <div class="posted-on im-meta-item">
-                                                            <span class="entry-date published updated">{{$post->date}}</span>
-                                                        </div>
-
-                                                        <div class="comments-link im-meta-item">
-                                                            <a href=""><i
-                                                                        class="fa fa-comment-o"></i>{{$post->msgs}}
-                                                            </a>
-                                                        </div>
-
-                                                        <div class="author vcard im-meta-item">
-                                                            <a class="url fn n">
-                                                                <i class="fa fa-user"></i>{{$post->username}}
-                                                            </a>
-                                                        </div>
-
-                                                        <div class="post-views im-meta-item">
-                                                            <i class="fa fa-eye"></i>{{$post->seen}}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </article>
-                                        @else
-
-                                            @if($i == 1)
-                                                <div class="col-md-12">
-                                                    <div class="widget">
-                                                        <ul>
-                                                            @endif
-
-                                                            <li class="widget-10104 im-widget clearfix">
-                                                                <figure class="im-widget-thumb">
-                                                                    <a href=""
-                                                                       title="{{$post->title}}">
-                                                                        <img src="{{$post->pic}}"
-                                                                             alt="{{$post->alt}}"/>
-                                                                    </a>
-                                                                </figure>
-                                                                <div class="im-widget-entry">
-                                                                    <header class="im-widget-entry-header">
-                                                                        <h4 class='im-widget-entry-title'>
-                                                                            <a style="color: {{$post->color}} !important;"
-                                                                               href=''
-                                                                               title='{{$post->title}}'>{{$post->title}}</a>
-                                                                        </h4>
-                                                                    </header>
-                                                                    <p class="im-widget-entry-footer">
-                                                                    <div class="iranomag-meta clearfix">
-                                                                        <div class="posted-on im-meta-item">
-                                                                            <span class="entry-date published updated">{{$post->date}}</span>
-                                                                        </div>
-
-                                                                        <div class="comments-link im-meta-item">
-                                                                            <a href=""><i
-                                                                                        class="fa fa-comment-o"></i>{{$post->msgs}}
-                                                                            </a>
-                                                                        </div>
-
-                                                                        <div class="author vcard im-meta-item">
-                                                                            <a class="url fn n">
-                                                                                <i class="fa fa-user"></i>{{$post->username}}
-                                                                            </a>
-                                                                        </div>
-
-                                                                        <div class="post-views im-meta-item">
-                                                                            <i class="fa fa-eye"></i>{{$post->seen}}
-                                                                        </div>
-                                                                    </div>
-                                                                    </p>
-                                                                </div>
-                                                            </li>
-
-                                                            @if($i == count($recentlyPosts) - 1)
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            @endif
-                                        @endif
-
-
-                                        <?php $i++; ?>
-
-                                    @endforeach
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-sm-12">
-                            <div class="category-element-holder style2">
-                                <div class="widget-head widget-head-46">
-                                    <strong class="widget-title">داغ ترین ها</strong>
-                                    <div class="widget-head-bar"></div>
-                                    <div class="widget-head-line"></div>
-                                </div>
-                                <div class="row">
-
-                                    <?php $i = 0; ?>
-                                    @foreach($favoritePosts as $post)
-                                        @if($i == 0)
-                                            <article
-                                                    class="im-article content-2col content-2col-nocontent col-md-12 post type-post status-publish format-standard has-post-thumbnail hentry">
-                                                <div class="im-entry-thumb">
-
-                                                    <a class="im-entry-thumb-link"
-                                                       href="{{route('gardeshnameInner', ['postId' => $post->id])}}"
-                                                       title="{{$post->title}}">
-
-                                                        <img class="lazy-img"
-                                                             data-src="{{$post->pic}}"
-                                                             alt="{{$post->alt}}"/>
-                                                    </a>
-                                                    <header class="im-entry-header">
-                                                        <div class="im-entry-category">
-                                                            <div class="iranomag-meta clearfix">
-                                                                <div class="cat-links im-meta-item">
-                                                                    <a style="background-color: {{$post->backColor}}; color: {{$post->categoryColor}} !important;"
-                                                                       href=""
-                                                                       title="{{$post->category}}">{{$post->category}}</a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <h3 class="im-entry-title">
-                                                            <a style="color: {{$post->color}} !important;"
-                                                               href=""
-                                                               rel="bookmark">{{$post->title}}</a>
-                                                        </h3>
-                                                    </header>
-                                                </div>
-
-                                                <div class="im-entry">
-                                                    <div class="iranomag-meta clearfix">
-                                                        <div class="posted-on im-meta-item">
-                                                            <span class="entry-date published updated">{{$post->date}}</span>
-                                                        </div>
-
-
-                                                        <div class="comments-link im-meta-item">
-                                                            <a href=""><i
-                                                                        class="fa fa-comment-o"></i>{{$post->msgs}}
-                                                            </a>
-                                                        </div>
-
-                                                        <div class="author vcard im-meta-item">
-                                                            <a class="url fn n">
-                                                                <i class="fa fa-user"></i>{{$post->username}}
-                                                            </a>
-                                                        </div>
-
-                                                        <div class="post-views im-meta-item">
-                                                            <i class="fa fa-eye"></i>{{$post->seen}}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </article>
-                                        @else
-
-                                            @if($i == 1)
-                                                <div class="col-md-12">
-                                                    <div class="widget">
-                                                        <ul>
-                                                            @endif
-
-                                                            <li class="widget-10104 im-widget clearfix">
-                                                                <figure class="im-widget-thumb">
-                                                                    <a href=""
-                                                                       title="{{$post->title}}">
-                                                                        <img src="{{$post->pic}}"
-                                                                             alt="{{$post->alt}}"/>
-                                                                    </a>
-                                                                </figure>
-                                                                <div class="im-widget-entry">
-                                                                    <header class="im-widget-entry-header">
-                                                                        <h4 class='im-widget-entry-title'>
-                                                                            <a style="color: {{$post->color}} !important;"
-                                                                               href=''
-                                                                               title='{{$post->title}}'>{{$post->title}}</a>
-                                                                        </h4>
-                                                                    </header>
-                                                                    <p class="im-widget-entry-footer">
-                                                                    <div class="iranomag-meta clearfix">
-                                                                        <div class="posted-on im-meta-item">
-                                                                            <span class="entry-date published updated">{{$post->date}}</span>
-                                                                        </div>
-                                                                        <div class="post-views im-meta-item">
-                                                                            <i class="fa fa-eye"></i>{{$post->seen}}
-                                                                        </div>
-                                                                    </div>
-                                                                    </p>
-                                                                </div>
-                                                            </li>
-
-                                                            @if($i == count($favoritePosts) - 1)
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            @endif
-                                        @endif
-
-
-                                        <?php $i++; ?>
-
-                                    @endforeach
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-12 gnWhiteBox">
-                        <div class="widget-head light">
-                            <strong class="widget-title">همه مطالب</strong>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="category-element-holder style2">
+                        <div class="widget-head widget-head-46">
+                            <strong class="widget-title">داغ ترین ها</strong>
                             <div class="widget-head-bar"></div>
                             <div class="widget-head-line"></div>
                         </div>
-                        <div class="row im-blog">
-                            <div class="clearfix">
+                        <div class="row">
 
-                                @foreach($allPosts as $post)
+                            <?php $i = 0; ?>
+                            @foreach($favoritePosts as $post)
+                                @if($i == 0)
+                                    <article
+                                            class="im-article content-2col content-2col-nocontent col-md-12 post type-post status-publish format-standard has-post-thumbnail hentry">
+                                        <div class="im-entry-thumb">
 
-                                    <div class="small-12 columns">
+                                            <a class="im-entry-thumb-link"
+                                               href="{{route('gardeshnameInner', ['postId' => $post->id])}}"
+                                               title="{{$post->title}}">
 
-                                        <article
-                                                class="im-article content-column clearfix post type-post status-publish format-standard has-post-thumbnail hentry">
-                                            <div class="im-entry-thumb col-md-5 col-sm-12">
-
-                                                <a style="width: 303px !important;"
-                                                   class="im-entry-thumb-link"
-                                                   href="{{route('gardeshnameInner', ['postId' => $post->id])}}"
-                                                   title="{{$post->title}}">
-
-                                                    <img style="width: 303px !important; height: 189px !important;"
-                                                         class="lazy-img"
-                                                         data-src="{{$post->pic}}"
-                                                         alt="{{$post->alt}}"/>
-                                                </a>
-                                            </div>
-
-                                            <div class="im-entry col-md-7 col-sm-12">
-                                                <header class="im-entry-header">
-                                                    <div class="im-entry-category">
-                                                        <div class="iranomag-meta clearfix">
-                                                            <div class="cat-links im-meta-item">
-                                                                <a style="background-color: {{$post->backColor}}; color: {{$post->categoryColor}} !important;"
-                                                                   href=""
-                                                                   title="{{$post->category}}">{{$post->category}}</a>
-                                                            </div>
+                                                <img class="lazy-img"
+                                                     data-src="{{$post->pic}}"
+                                                     alt="{{$post->alt}}"/>
+                                            </a>
+                                            <header class="im-entry-header">
+                                                <div class="im-entry-category">
+                                                    <div class="iranomag-meta clearfix">
+                                                        <div class="cat-links im-meta-item">
+                                                            <a style="background-color: {{$post->backColor}}; color: {{$post->categoryColor}} !important;"
+                                                               href=""
+                                                               title="{{$post->category}}">{{$post->category}}</a>
                                                         </div>
                                                     </div>
-                                                    <h3 class="im-entry-title">
-                                                        <a style="color: {{$post->color}}"
-                                                           href=""
-                                                           rel="bookmark">{{$post->title}}</a>
-                                                    </h3>
-                                                </header>
+                                                </div>
+                                                <h3 class="im-entry-title">
+                                                    <a style="color: {{$post->color}} !important;"
+                                                       href=""
+                                                       rel="bookmark">{{$post->title}}</a>
+                                                </h3>
+                                            </header>
+                                        </div>
 
-                                                <div style="max-height: 100px !important; overflow: hidden"
-                                                     class="im-entry-content">
-                                                    <p>{{$post->description}}</p>
+                                        <div class="im-entry">
+                                            <div class="iranomag-meta clearfix">
+                                                <div class="posted-on im-meta-item">
+                                                    <span class="entry-date published updated">{{$post->date}}</span>
                                                 </div>
 
-                                                <div style="margin-top: 7px"
-                                                     class="iranomag-meta clearfix">
-                                                    <div class="posted-on im-meta-item">
-                                                        <span class="entry-date published updated">{{$post->date}}</span>
-                                                    </div>
-                                                    <div class="comments-link im-meta-item">
 
-                                                        <a href="">
-                                                            <i class="fa fa-comment-o"></i>{{$post->msgs}}
-                                                        </a>
-                                                    </div>
-                                                    <div class="author vcard im-meta-item">
-                                                        <a class="url fn n">
-                                                            <i class="fa fa-user"></i>{{$post->username}}
+                                                <div class="comments-link im-meta-item">
+                                                    <a href=""><i
+                                                                class="fa fa-comment-o"></i>{{$post->msgs}}
+                                                    </a>
+                                                </div>
 
-                                                        </a>
-                                                    </div>
-                                                    <div class="post-views im-meta-item">
-                                                        <i class="fa fa-eye"></i>{{$post->seen}}
+                                                <div class="author vcard im-meta-item">
+                                                    <a class="url fn n">
+                                                        <i class="fa fa-user"></i>{{$post->username}}
+                                                    </a>
+                                                </div>
+
+                                                <div class="post-views im-meta-item">
+                                                    <i class="fa fa-eye"></i>{{$post->seen}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </article>
+                                @else
+
+                                    @if($i == 1)
+                                        <div class="col-md-12">
+                                            <div class="widget">
+                                                <ul>
+                                                    @endif
+
+                                                    <li class="widget-10104 im-widget clearfix">
+                                                        <figure class="im-widget-thumb">
+                                                            <a href=""
+                                                               title="{{$post->title}}">
+                                                                <img src="{{$post->pic}}"
+                                                                     alt="{{$post->alt}}"/>
+                                                            </a>
+                                                        </figure>
+                                                        <div class="im-widget-entry">
+                                                            <header class="im-widget-entry-header">
+                                                                <h4 class='im-widget-entry-title'>
+                                                                    <a style="color: {{$post->color}} !important;"
+                                                                       href=''
+                                                                       title='{{$post->title}}'>{{$post->title}}</a>
+                                                                </h4>
+                                                            </header>
+                                                            <p class="im-widget-entry-footer">
+                                                            <div class="iranomag-meta clearfix">
+                                                                <div class="posted-on im-meta-item">
+                                                                    <span class="entry-date published updated">{{$post->date}}</span>
+                                                                </div>
+                                                                <div class="post-views im-meta-item">
+                                                                    <i class="fa fa-eye"></i>{{$post->seen}}
+                                                                </div>
+                                                            </div>
+                                                            </p>
+                                                        </div>
+                                                    </li>
+
+                                                    @if($i == count($favoritePosts) - 1)
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    @endif
+                                @endif
+
+
+                                <?php $i++; ?>
+
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 gnWhiteBox">
+                <div class="widget-head light">
+                    <strong class="widget-title">همه مطالب</strong>
+                    <div class="widget-head-bar"></div>
+                    <div class="widget-head-line"></div>
+                </div>
+                <div class="row im-blog">
+                    <div class="clearfix">
+
+                        @foreach($allPosts as $post)
+
+                            <div class="small-12 columns">
+
+                                <article
+                                        class="im-article content-column clearfix post type-post status-publish format-standard has-post-thumbnail hentry">
+                                    <div class="im-entry-thumb col-md-5 col-sm-12">
+
+                                        <a style="width: 303px !important;"
+                                           class="im-entry-thumb-link"
+                                           href="{{route('gardeshnameInner', ['postId' => $post->id])}}"
+                                           title="{{$post->title}}">
+
+                                            <img style="width: 303px !important; height: 189px !important;"
+                                                 class="lazy-img"
+                                                 data-src="{{$post->pic}}"
+                                                 alt="{{$post->alt}}"/>
+                                        </a>
+                                    </div>
+
+                                    <div class="im-entry col-md-7 col-sm-12">
+                                        <header class="im-entry-header">
+                                            <div class="im-entry-category">
+                                                <div class="iranomag-meta clearfix">
+                                                    <div class="cat-links im-meta-item">
+                                                        <a style="background-color: {{$post->backColor}}; color: {{$post->categoryColor}} !important;"
+                                                           href=""
+                                                           title="{{$post->category}}">{{$post->category}}</a>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </article>
-                                    </div>
-                                @endforeach
+                                            <h3 class="im-entry-title">
+                                                <a style="color: {{$post->color}}"
+                                                   href=""
+                                                   rel="bookmark">{{$post->title}}</a>
+                                            </h3>
+                                        </header>
 
-                            </div>
-                            <div class="clearfix">
-                                <nav class="navigation pagination">
-                                    <div class="nav-links">
-                                        <?php $beforeMore = false; $afterMore = false; ?>
-                                        @for($i = 1; $i <= $pageLimit; $i++)
-                                            @if($page == $i)
-                                                <span aria-current='page'
-                                                      class='page-numbers current'>{{$i}}</span>
-                                            @elseif(abs($i - $page) <= 2)
-                                                <a class='page-numbers'
-                                                   href='{{route('gardeshname', ['page' => $i])}}'>{{$i}}</a>
-                                            @elseif($i == 1)
-                                                <a class='page-numbers'
-                                                   href='{{route('gardeshname', ['page' => $i])}}'>{{$i}}</a>
-                                            @elseif(!$beforeMore && $i < $page)
-                                                <?php $beforeMore = true; ?>
-                                                <span class="page-numbers dots">&hellip;</span>
+                                        <div style="max-height: 100px !important; overflow: hidden"
+                                             class="im-entry-content">
+                                            <p>{{$post->description}}</p>
+                                        </div>
 
-                                            @elseif($i == $pageLimit)
-                                                <a class='page-numbers'
-                                                   href='{{route('gardeshname', ['page' => $i])}}'>{{$i}}</a>
-                                            @elseif(!$afterMore && $i > $page)
-                                                <?php $afterMore = true; ?>
-                                                <span class="page-numbers dots">&hellip;</span>
-                                            @endif
-                                            {{--<a class='page-numbers' href='/page/3/'>۳</a>--}}
-                                            {{--<a class='page-numbers' href='/page/318/'>۳۱۸</a>--}}
-                                            {{--<a class="next page-numbers" href="/page/2/"><span>&larr;</span></a>--}}
-                                        @endfor
+                                        <div style="margin-top: 7px"
+                                             class="iranomag-meta clearfix">
+                                            <div class="posted-on im-meta-item">
+                                                <span class="entry-date published updated">{{$post->date}}</span>
+                                            </div>
+                                            <div class="comments-link im-meta-item">
+
+                                                <a href="">
+                                                    <i class="fa fa-comment-o"></i>{{$post->msgs}}
+                                                </a>
+                                            </div>
+                                            <div class="author vcard im-meta-item">
+                                                <a class="url fn n">
+                                                    <i class="fa fa-user"></i>{{$post->username}}
+
+                                                </a>
+                                            </div>
+                                            <div class="post-views im-meta-item">
+                                                <i class="fa fa-eye"></i>{{$post->seen}}
+                                            </div>
+                                        </div>
                                     </div>
-                                </nav>
+                                </article>
                             </div>
-                        </div>
-                        <div class="gap cf" style="height:30px;"></div>
+                        @endforeach
+
+                    </div>
+                    <div class="clearfix">
+                        <nav class="navigation pagination">
+                            <div class="nav-links">
+                                <?php $beforeMore = false; $afterMore = false; ?>
+                                @for($i = 1; $i <= $pageLimit; $i++)
+                                    @if($page == $i)
+                                        <span aria-current='page'
+                                              class='page-numbers current'>{{$i}}</span>
+                                    @elseif(abs($i - $page) <= 2)
+                                        <a class='page-numbers'
+                                           href='{{route('gardeshname', ['page' => $i])}}'>{{$i}}</a>
+                                    @elseif($i == 1)
+                                        <a class='page-numbers'
+                                           href='{{route('gardeshname', ['page' => $i])}}'>{{$i}}</a>
+                                    @elseif(!$beforeMore && $i < $page)
+                                        <?php $beforeMore = true; ?>
+                                        <span class="page-numbers dots">&hellip;</span>
+
+                                    @elseif($i == $pageLimit)
+                                        <a class='page-numbers'
+                                           href='{{route('gardeshname', ['page' => $i])}}'>{{$i}}</a>
+                                    @elseif(!$afterMore && $i > $page)
+                                        <?php $afterMore = true; ?>
+                                        <span class="page-numbers dots">&hellip;</span>
+                                    @endif
+                                    {{--<a class='page-numbers' href='/page/3/'>۳</a>--}}
+                                    {{--<a class='page-numbers' href='/page/318/'>۳۱۸</a>--}}
+                                    {{--<a class="next page-numbers" href="/page/2/"><span>&larr;</span></a>--}}
+                                @endfor
+                            </div>
+                        </nav>
                     </div>
                 </div>
+                <div class="gap cf" style="height:30px;"></div>
+            </div>
+        </div>
     </div>
 
     <a href="#" id="back-to-top" title="بازگشت به ابتدای صفحه"><i class="fa fa-arrow-up"></i></a>
@@ -1328,3 +1328,5 @@ $kindPlaceId = 10; ?>
 
 </body>
 </html>
+
+
