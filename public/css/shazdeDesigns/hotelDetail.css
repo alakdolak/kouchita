@@ -1890,7 +1890,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 .tagFriendCommentIcon::before {
     content: '\E1F4';
     font-family: Shazde_Regular2 !important;
-    font-size: 25px;
+    font-size: 30px;
     font-weight: 500;
 }
 
@@ -2186,6 +2186,11 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     float: right;
 }
 
+.postLikeChoice , .postDislikeChoice , .postCommentChoice , .postShareChoice {
+    display: inline-block;
+    cursor: pointer;
+}
+
 .postLikeChoice:hover {
     color: red;
 }
@@ -2213,27 +2218,56 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 .commentsLikeIconFeedback::before {
     content: '\E1F9';
     font-family: Shazde_Regular2 !important;
-    /*color: red;*/
     font-size: 25px;
     position: absolute;
     top: -9px;
     right: 30px;
+    cursor: pointer;
+}
+
+.commentsLikeClickedIconFeedback::before {
+    content: '\E057';
+    font-family: Shazde_Regular2 !important;
+    font-size: 25px;
+    position: absolute;
+    top: -9px;
+    right: 5px;
+    cursor: pointer;
 }
 
 .commentsDislikeIconFeedback::before {
     content: '\E1F8';
     font-family: Shazde_Regular2 !important;
-    /*color: darkred;*/
     font-size: 25px;
     position: absolute;
     top: -4px;
     right: 30px;
+    cursor: pointer;
+}
+
+.commentsDislikeClickedIconFeedback::before {
+    content: '\E058';
+    font-family: Shazde_Regular2 !important;
+    font-size: 25px;
+    position: absolute;
+    top: -4px;
+    right: 5px;
+    cursor: pointer;
 }
 
 .showCommentsIconFeedback::before {
     content: '\E06B';
     font-family: Shazde_Regular2 !important;
-    /*color: #0076a3;*/
+    font-size: 20px;
+    position: absolute;
+    top: -2px;
+    right: 9px;
+    cursor: pointer;
+}
+
+.showCommentsClickedIconFeedback::before {
+    content: '\E06C';
+    font-family: Shazde_Regular2 !important;
     font-size: 20px;
     position: absolute;
     top: -2px;
@@ -2244,11 +2278,21 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 .commentsShareIconFeedback::before {
     content: '\E1F5';
     font-family: Shazde_Regular2 !important;
-    /*transform: rotateY(180deg);*/
     font-size: 20px;
     position: absolute;
     top: -4px;
     right: 25px;
+    cursor: pointer;
+}
+
+.commentsShareClickedIconFeedback::before {
+    content: '\E1F6';
+    font-family: Shazde_Regular2 !important;
+    font-size: 20px;
+    position: absolute;
+    top: -4px;
+    right: 25px;
+    cursor: pointer;
 }
 
 /*.commentsShareFeedback , .commentsShareFeedback , .commentsDislikeFeedback , .commentsLikeFeedback {*/
@@ -2262,8 +2306,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 .eachCommentMainBox {
     display: inline-block;
     width: 100%;
-    padding-bottom: 25px;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
 }
 
 .commentsWriterProfilePic {
@@ -2290,8 +2333,15 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     float: right;
     margin-right: 20px;
     position: relative;
-    padding-top: 30px;
+    /*padding-top: 30px;*/
     cursor: pointer;
+}
+
+.commentsActionsBtns > div:not(:nth-child(3)) {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    margin: 8px 3px;
 }
 
 .replyBtn {
@@ -2310,21 +2360,39 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 }
 
 .likeActionBtn::before {
-    content: '\e057';
-    font-family: shazdemosafer-tour !important;
+    content: '\E1F9';
+    font-family: Shazde_Regular2 !important;
     font-size: 30px;
     position: absolute;
-    top: -12px;
-    right: -3px;
+    top: -5px;
+    right: 28px;
+}
+
+.likeActionClickedBtn::before {
+    content: '\E057';
+    font-family: Shazde_Regular2 !important;
+    font-size: 30px;
+    position: absolute;
+    top: -5px;
+    right: -2px;
 }
 
 .dislikeActionBtn::before {
-    content: '\e058';
-    font-family: shazdemosafer-tour !important;
+    content: '\E1F8';
+    font-family: Shazde_Regular2 !important;
     font-size: 30px;
     position: absolute;
-    top: -8px;
-    right: 30px;
+    top: -2px;
+    right: 59px;
+}
+
+.dislikeActionClickedBtn::before {
+    content: '\E058';
+    font-family: Shazde_Regular2 !important;
+    font-size: 30px;
+    position: absolute;
+    top: -2px;
+    right: 29px;
 }
 
 .commentsStatisticsBar {
@@ -2378,16 +2446,28 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     width: 100%;
 }
 
+.replyToCommentMainDiv {
+    display: inline-block;
+    width: 70%;
+    margin: 30px 0 15px;
+}
+
 .newCommentWriterProfilePic , .answerWriterProfilePic , .newAnswerWriterProfilePic {
     display: inline-block;
     width: 40px;
     height: 40px;
     float: right;
-    margin-left: 10px;
+    margin-left: 5px;
 }
 
 .newCommentPlaceMainDiv .inputBox , .newAnswerPlaceMainDiv .inputBox {
     width: 90%;
+    float: right;
+    position: relative;
+}
+
+.replyToCommentMainDiv .inputBox {
+    width: 85%;
     float: right;
     position: relative;
 }
@@ -2399,20 +2479,42 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     height: 39px;
 }
 
+.replyToCommentMainDiv .inputBoxInput {
+    text-align: right;
+    font-size: 12px;
+    border: none;
+    height: 39px;
+}
+
 .newCommentPlaceMainDiv textarea , .newAnswerPlaceMainDiv textarea {
     text-align: right;
-    padding-top: 15px;
+    margin-top: 15px;
     height: 35px;
     resize: none;
-    width: 95%;
+    width: 94%;
+    float: right;
+}
+
+.replyToCommentMainDiv textarea  {
+    text-align: right;
+    margin-top: 15px;
+    height: 35px;
+    resize: none;
+    width: 92%;
+    float: right;
 }
 
 .newAnswerPlaceMainDiv textarea {
-    width: 100%;
+    /*width: 100%;*/
 }
 
 .newCommentPlaceMainDiv .commentSmileyIcon {
-    top: 9px;
+    top: 20px;
+    left: 7px;
+}
+
+.replyToCommentMainDiv .commentSmileyIcon {
+    top: 20px;
     left: 7px;
 }
 
@@ -2855,33 +2957,51 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     float: right;
 }
 
-.likeBox {
+.photosModalLikeBox , .photosModalDislikeBox {
     text-align: center;
     float: right;
+    padding-right: 25px;
+    cursor: pointer;
 }
 
-.likeBox::after {
+.likeBoxIcon::after {
     content: '\E1F9';
     font-family: Shazde_Regular2 !important;
     font-size: 20px;
+    position: absolute;
+    top: -7px;
 }
 
-.likeBox::after:hover {
+.likeBoxIconClicked::after {
+    content: '\E057';
+    font-family: Shazde_Regular2 !important;
+    font-size: 20px;
+    position: absolute;
+    top: -7px;
+}
+
+.photosModalLikeBox:hover {
     color: red;
 }
 
-.dislikeBox {
-    text-align: center;
-    float: right;
-}
-
-.dislikeBox::after {
+.dislikeBoxIcon::after {
     content: '\E1F8';
     font-family: Shazde_Regular2 !important;
     font-size: 20px;
+    position: absolute;
+    top: -4px;
+    right: 27px;
 }
 
-.likeBox::after:hover {
+.dislikeBoxIconClicked::after {
+    content: '\E058';
+    font-family: Shazde_Regular2 !important;
+    font-size: 20px;
+    position: absolute;
+    top: -4px;
+}
+
+.photosModalDislikeBox:hover {
     color: darkred;
 }
 
@@ -3077,6 +3197,8 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     font-size: 15px;
     height: 45px;
     padding-top: 10px;
+    width: 92%;
+    float: right;
 }
 
 .sendQuestionBtn {
@@ -3189,7 +3311,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
 .answerBoxText {
     background-color: #eaeaea;
-    padding: 25px 10px;
+    padding: 25px 10px 25px 50px;
     position: relative;
     text-align: justify;
     direction: rtl;
@@ -3249,14 +3371,51 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     display: inline-block;
     float: right;
     font-size: 35px;
-    margin-right: 20px;
+    margin: 10px 20px 0 0;
 }
 
-.likeAnswer {
+.likeAnswer , .dislikeAnswer , .likeAnswerClicked , .dislikeAnswerClicked {
     position: relative;
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    /*margin: 20px 20px 0 0;*/
+    float: right;
 }
 
-.likeAnswer::before , .numberOfLikeAnswer::before {
+.likeAnswer::before {
+    content: '\E1F9';
+    font-family: Shazde_Regular2 !important;
+    position: absolute;
+    left: -5px;
+    top: -13px;
+}
+
+.likeAnswerClicked::before {
+    content: '\E057';
+    font-family: Shazde_Regular2 !important;
+    position: absolute;
+    left: -4.5px;
+    top: -13px;
+}
+
+.dislikeAnswer::before {
+    content: '\E1F8';
+    font-family: Shazde_Regular2 !important;
+    position: absolute;
+    left: -8px;
+    top: -9px;
+}
+
+.dislikeAnswerClicked::before {
+    content: '\E058';
+    font-family: Shazde_Regular2 !important;
+    position: absolute;
+    left: -4.5px;
+    top: -9px;
+}
+
+.numberOfLikeAnswer::before {
     content: '\E057';
     font-family: shazdemosafer-tour !important;
     position: absolute;
@@ -3264,11 +3423,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     top: 36px;
 }
 
-.dislikeAnswer {
-    position: relative;
-}
-
-.dislikeAnswer::before , .numberOfDislikeAnswer::before {
+.numberOfDislikeAnswer::before {
     content: '\E058';
     font-family: shazdemosafer-tour !important;
     position: absolute;
@@ -3278,16 +3433,8 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
 /*posts page styles*/
 
-.newPostCreationMainDiv #bestPriceInnerDiv {
+.postsMainDivInSpecificMode #bestPriceInnerDiv {
     min-height: 186px;
-}
-
-.newPostCreationMainDiv #backgroundColorDiv::before {
-    height: 210px;
-}
-
-.newPostCreationMainDiv .postModalMainDiv {
-    top: -30px;
 }
 
 .postsMainFiltrationBar , .questionsMainFiltrationBar{
@@ -3325,23 +3472,23 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     cursor: pointer;
 }
 
-.newPostCreationMainDiv  .postMainDivShown {
+.postsMainDivInSpecificMode  .postMainDivShown {
     padding: 10px;
 }
 
-.newPostCreationMainDiv .photosCol > div:nth-child(1) {
+.postsMainDivInSpecificMode .photosCol > div:nth-child(1) {
     height: 210px;
 }
 
-.newPostCreationMainDiv .commentPhotosMainDiv {
+.postsMainDivInSpecificMode .commentPhotosMainDiv {
     margin: 0;
 }
 
-.newPostCreationMainDiv , .commentPhotosShow{
+.postsMainDivInSpecificMode , .commentPhotosShow{
     border-bottom: none;
 }
 
-.newPostCreationMainDiv .quantityOfLikes {
+.postsMainDivInSpecificMode .quantityOfLikes {
     border-top: 1px solid #E5E5E5;
     display: inline-block;
     width: 100%;
@@ -3391,7 +3538,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     cursor: pointer;
 }
 
-.newPostCreationMainDiv .photosCol {
+.postsMainDivInSpecificMode .photosCol {
     border-top: 1px solid #E5E5E5;
 }
 

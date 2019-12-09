@@ -549,11 +549,15 @@ if ($total == 0)
                                     </div>
                                 </div>
                                 <div class="photosFeedBackBtn">
-                                    <div class="col-xs-6 likeBox">
-                                        <span>دوست داشتم</span>
+                                    <div class="col-xs-6 photosModalLikeBox" onclick="likePostsComment(this)">
+                                        <span >دوست داشتم</span>
+                                        <span class="likeBoxIcon firstIcon"></span>
+                                        <span class="likeBoxIconClicked display-none secondIcon"></span>
                                     </div>
-                                    <div class="col-xs-6 dislikeBox">
+                                    <div class="col-xs-6 photosModalDislikeBox" onclick="disLikePostsComment(this)">
                                         <span>دوست نداشتم</span>
+                                        <span class="dislikeBoxIcon firstIcon"></span>
+                                        <span class="dislikeBoxIconClicked display-none secondIcon"></span>
                                     </div>
                                     <div class="clear-both"></div>
                                     <div class="feedbackStatistic">
@@ -592,7 +596,7 @@ if ($total == 0)
                             {{--                                </div>--}}
                             {{--                            @endif--}}
                             <div class="meta_inner" id="bestPriceInnerDiv">
-                                <div class="returnToMainPage" onclick="allPostsGrid()">بازگشت</div>
+                                <div class="returnToMainPage display-none" onclick="allPostsGrid()">بازگشت</div>
                                 {{--                                <form id="form_hotel" method="post" action="{{route('makeSessionHotel')}}">--}}
                                 {{--                                    {{csrf_field()}}--}}
                                 {{--                                    <input type="hidden" name="adult" id="form_adult">--}}
@@ -994,7 +998,7 @@ if ($total == 0)
         </div>
     </div>
 
-    <div id="MAINWRAP" class="mainWrapHotelDetails
+    <div id="MAINWRAP" class="
         full_meta_photos_v3  full_meta_photos_v4  big_pic_mainwrap_tweaks horizontal_xsell ui_container is-mobile position-relative">
         <div id="MAIN" class="Hotel_Review prodp13n_jfy_overflow_visible position-relative">
             <div id="BODYCON" ng-app="mainApp" class="col easyClear bodLHN poolB adjust_padding new_meta_chevron new_meta_chevron_v2 position-relative">
@@ -1496,7 +1500,7 @@ if ($total == 0)
                         </div>
                     </div>
                     @include('layouts.extendedMap')
-                    <div class="col-xs-7 pd-0 float-right">
+                    <div class="col-xs-7 pd-0 float-right postsMainDivInRegularMode">
                         <div class="col-xs-12 postMainDivShown position-relative">
                             <div class="commentOptionsBoxes commentActions" onclick="showAnswersActionBox(this)">
                                 <span class="commentActionsIcon"></span>
@@ -1533,13 +1537,13 @@ if ($total == 0)
                             <div class="commentPhotosShow">
                                 <div class="commentPhotosMainDiv quintupletPhotoDiv">
                                     <div class="photosCol secondCol col-xs-6">
-                                        <div></div>
-                                        <div></div>
+                                        <div data-toggle="modal" data-target=".showingPhotosModal"></div>
+                                        <div data-toggle="modal" data-target=".showingPhotosModal"></div>
                                     </div>
                                     <div class="photosCol firstCol col-xs-6">
-                                        <div></div>
-                                        <div></div>
-                                        <div class="morePhotoLinkPosts">
+                                        <div data-toggle="modal" data-target=".showingPhotosModal"></div>
+                                        <div data-toggle="modal" data-target=".showingPhotosModal"></div>
+                                        <div class="morePhotoLinkPosts" data-target=".showingPhotosModal">
                                             به علاوه
                                             <span>14</span>
                                             عکس و ویدیو دیگر
@@ -1641,23 +1645,36 @@ if ($total == 0)
                                 </div>
                             </div>
                             <div class="commentFeedbackChoices">
-                                <div class="postsActionsChoices postLikeChoice col-xs-3">
-                                    <span class="commentsLikeIconFeedback"></span>
-                                    <span class="mg-rt-20 cursor-pointer">دوست داشتم</span>
+                                <div class="postsActionsChoices col-xs-3">
+                                    <div class="postLikeChoice display-inline-block" onclick="likePostsComment(this)">
+                                        <span class="commentsLikeIconFeedback firstIcon"></span>
+                                        <span class="commentsLikeClickedIconFeedback display-none secondIcon"></span>
+                                        <span class="mg-rt-20 cursor-pointer">دوست داشتم</span>
+                                    </div>
                                 </div>
-                                <div class="postsActionsChoices postDislikeChoice col-xs-3">
-                                    <span class="commentsDislikeIconFeedback"></span>
-                                    <span class="mg-rt-20 cursor-pointer">دوست نداشتم</span>
+                                <div class="postsActionsChoices col-xs-3">
+                                    <div class="postDislikeChoice display-inline-block" onclick="disLikePostsComment(this)">
+                                        <span class="commentsDislikeIconFeedback firstIcon"></span>
+                                        <span class="commentsDislikeClickedIconFeedback display-none secondIcon"></span>
+                                        <span class="mg-rt-20 cursor-pointer">دوست نداشتم</span>
+                                    </div>
                                 </div>
-                                <div class="postsActionsChoices postCommentChoice col-xs-3">
-                                    <span class="showCommentsIconFeedback" onclick="showPostsComments(this)"></span>
-                                    <span class="mg-rt-20 cursor-pointer" onclick="showPostsComments(this)">مشاهده نظرها</span>
+                                <div class="postsActionsChoices col-xs-3">
+                                    <div class="postCommentChoice display-inline-block" onclick="showPostsComments(this)">
+                                        <span class="showCommentsIconFeedback firstIcon"></span>
+                                        <span class="showCommentsClickedIconFeedback display-none secondIcon"></span>
+                                        <span class="mg-rt-20 cursor-pointer">مشاهده نظرها</span>
+                                    </div>
                                 </div>
-                                <div class="postsActionsChoices postShareChoice col-xs-3">
-                                    <span class="commentsShareIconFeedback"></span>
-                                    <span class="mg-rt-20 cursor-pointer">اشتراک‌گذاری</span>
+                                <div class="postsActionsChoices col-xs-3">
+                                    <div class="postShareChoice display-inline-block" onclick="SharePostsBtn(this)">
+                                        <span class="commentsShareIconFeedback firstIcon"></span>
+                                        <span class="commentsShareClickedIconFeedback display-none secondIcon"></span>
+                                        <span class="mg-rt-20 cursor-pointer">اشتراک‌گذاری</span>
+                                    </div>
                                 </div>
                             </div>
+
                             <div class="commentsMainBox display-none">
                                 <div class="dark-blue mg-bt-10">
                                     <span class="cursor-pointer">مشاهده 17 نظر باقیمانده</span>
@@ -1673,16 +1690,31 @@ if ($total == 0)
                                                 <span class="dislikeStatisticIcon commentsStatisticSpan dark-red">31</span>
                                                 <span class="numberOfCommentsIcon commentsStatisticSpan color-blue">31</span>
                                             </div>
-                                            <div class="dark-blue float-left display-inline-black cursor-pointer">مشاهده پاسخ‌ها</div>
+                                            <div class="dark-blue float-left display-inline-black cursor-pointer" onclick="showCommentsAnswers(this)">مشاهده پاسخ‌ها</div>
                                         </div>
                                     </div>
                                     <div class="commentsActionsBtns">
-                                        <span class="likeActionBtn"></span>
-                                        <span class="dislikeActionBtn"></span>
-                                        <b class="replyBtn">پاسخ دهید</b>
+                                        <div onclick="likeTheAnswers(this)">
+                                            <span class="likeActionBtn"></span>
+                                            <span class="likeActionClickedBtn display-none"></span>
+                                        </div>
+                                        <div onclick="dislikeTheAnswers(this)">
+                                            <span class="dislikeActionBtn"></span>
+                                            <span class="dislikeActionClickedBtn display-none"></span>
+                                        </div>
+                                        <div class="clear-both"></div>
+                                        <b class="replyBtn" onclick="replyToComments(this)">پاسخ دهید</b>
+                                    </div>
+                                    <div class="replyToCommentMainDiv display-none">
+                                        <div class="circleBase type2 newCommentWriterProfilePic"></div>
+                                        <div class="inputBox">
+                                            <b class="replyCommentTitle">در پاسخ به نظر shazdesina</b>
+                                            <textarea class="inputBoxInput inputBoxInputComment" type="text" placeholder="شما چه نظری دارید؟"></textarea>
+                                            <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="eachCommentMainBox mg-rt-45">
+                                <div class="eachCommentMainBox mg-rt-45 display-none">
                                     <div class="circleBase type2 commentsWriterProfilePic"></div>
                                     <div class="commentsContentMainBox">
                                         <b class="userProfileName float-right">shazdesina</b>
@@ -1695,13 +1727,28 @@ if ($total == 0)
                                                 <span class="dislikeStatisticIcon commentsStatisticSpan dark-red">31</span>
                                                 <span class="numberOfCommentsIcon commentsStatisticSpan color-blue">31</span>
                                             </div>
-                                            <div class="dark-blue float-left display-inline-black cursor-pointer">مشاهده پاسخ‌ها</div>
+                                            <div class="dark-blue float-left display-inline-black cursor-pointer" onclick="showCommentsAnswers(this)">مشاهده پاسخ‌ها</div>
                                         </div>
                                     </div>
                                     <div class="commentsActionsBtns">
-                                        <span class="likeActionBtn"></span>
-                                        <span class="dislikeActionBtn"></span>
-                                        <b class="replyBtn">پاسخ دهید</b>
+                                        <div onclick="likeTheAnswers(this)">
+                                            <span class="likeActionBtn"></span>
+                                            <span class="likeActionClickedBtn display-none"></span>
+                                        </div>
+                                        <div onclick="dislikeTheAnswers(this)">
+                                            <span class="dislikeActionBtn"></span>
+                                            <span class="dislikeActionClickedBtn display-none"></span>
+                                        </div>
+                                        <div class="clear-both"></div>
+                                        <b class="replyBtn" onclick="replyToComments(this)">پاسخ دهید</b>
+                                    </div>
+                                    <div class="replyToCommentMainDiv display-none">
+                                        <div class="circleBase type2 newCommentWriterProfilePic"></div>
+                                        <div class="inputBox">
+                                            <b class="replyCommentTitle">در پاسخ به نظر shazdesina</b>
+                                            <textarea class="inputBoxInput inputBoxInputComment" type="text" placeholder="شما چه نظری دارید؟"></textarea>
+                                            <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1709,7 +1756,7 @@ if ($total == 0)
                                 <div class="circleBase type2 newCommentWriterProfilePic"></div>
                                 <div class="inputBox">
                                     <b class="replyCommentTitle">در پاسخ به نظر shazdesina</b>
-                                    <textarea class="inputBoxInput inputBoxInputComment" type="text" placeholder="شما چه نظری دارید؟"></textarea>
+                                    <textarea class="inputBoxInput inputBoxInputComment" id="zzzz" type="text" placeholder="شما چه نظری دارید؟"></textarea>
                                     <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
                                 </div>
                                 <div></div>
@@ -1751,10 +1798,10 @@ if ($total == 0)
                             <div class="commentPhotosShow">
                                 <div class="commentPhotosMainDiv doublePhotoDiv">
                                     <div class="photosCol secondCol col-xs-6">
-                                        <div></div>
+                                        <div data-toggle="modal" data-target=".showingPhotosModal"></div>
                                     </div>
                                     <div class="photosCol firstCol col-xs-6">
-                                        <div></div>
+                                        <div data-toggle="modal" data-target=".showingPhotosModal"></div>
                                     </div>
                                 </div>
                                 <div class="quantityOfLikes">
@@ -1852,23 +1899,36 @@ if ($total == 0)
                                 </div>
                             </div>
                             <div class="commentFeedbackChoices">
-                                <div class="postsActionsChoices postLikeChoice col-xs-3">
-                                    <span class="commentsLikeIconFeedback"></span>
-                                    <span class="mg-rt-20 cursor-pointer">دوست داشتم</span>
+                                <div class="postsActionsChoices col-xs-3">
+                                    <div class="postLikeChoice display-inline-block" onclick="likePostsComment(this)">
+                                        <span class="commentsLikeIconFeedback firstIcon"></span>
+                                        <span class="commentsLikeClickedIconFeedback display-none secondIcon"></span>
+                                        <span class="mg-rt-20 cursor-pointer">دوست داشتم</span>
+                                    </div>
                                 </div>
-                                <div class="postsActionsChoices postDislikeChoice col-xs-3">
-                                    <span class="commentsDislikeIconFeedback"></span>
-                                    <span class="mg-rt-20 cursor-pointer">دوست نداشتم</span>
+                                <div class="postsActionsChoices col-xs-3">
+                                    <div class="postDislikeChoice display-inline-block" onclick="disLikePostsComment(this)">
+                                        <span class="commentsDislikeIconFeedback firstIcon"></span>
+                                        <span class="commentsDislikeClickedIconFeedback display-none secondIcon"></span>
+                                        <span class="mg-rt-20 cursor-pointer">دوست نداشتم</span>
+                                    </div>
                                 </div>
-                                <div class="postsActionsChoices postCommentChoice col-xs-3">
-                                    <span class="showCommentsIconFeedback" onclick="showPostsComments(this)"></span>
-                                    <span class="mg-rt-20 cursor-pointer" onclick="showPostsComments(this)">مشاهده نظرها</span>
+                                <div class="postsActionsChoices col-xs-3">
+                                    <div class="postCommentChoice display-inline-block" onclick="showPostsComments(this)">
+                                        <span class="showCommentsIconFeedback firstIcon"></span>
+                                        <span class="showCommentsClickedIconFeedback display-none secondIcon"></span>
+                                        <span class="mg-rt-20 cursor-pointer">مشاهده نظرها</span>
+                                    </div>
                                 </div>
-                                <div class="postsActionsChoices postShareChoice col-xs-3">
-                                    <span class="commentsShareIconFeedback"></span>
-                                    <span class="mg-rt-20 cursor-pointer">اشتراک‌گذاری</span>
+                                <div class="postsActionsChoices col-xs-3">
+                                    <div class="postShareChoice display-inline-block" onclick="SharePostsBtn(this)">
+                                        <span class="commentsShareIconFeedback firstIcon"></span>
+                                        <span class="commentsShareClickedIconFeedback display-none secondIcon"></span>
+                                        <span class="mg-rt-20 cursor-pointer">اشتراک‌گذاری</span>
+                                    </div>
                                 </div>
                             </div>
+
                             <div class="commentsMainBox display-none">
                                 <div class="dark-blue mg-bt-10">
                                     <span class="cursor-pointer">مشاهده 17 نظر باقیمانده</span>
@@ -1884,16 +1944,31 @@ if ($total == 0)
                                                 <span class="dislikeStatisticIcon commentsStatisticSpan dark-red">31</span>
                                                 <span class="numberOfCommentsIcon commentsStatisticSpan color-blue">31</span>
                                             </div>
-                                            <div class="dark-blue float-left display-inline-black cursor-pointer">مشاهده پاسخ‌ها</div>
+                                            <div class="dark-blue float-left display-inline-black cursor-pointer" onclick="showCommentsAnswers(this)">مشاهده پاسخ‌ها</div>
                                         </div>
                                     </div>
                                     <div class="commentsActionsBtns">
-                                        <span class="likeActionBtn"></span>
-                                        <span class="dislikeActionBtn"></span>
-                                        <b class="replyBtn">پاسخ دهید</b>
+                                        <div onclick="likeTheAnswers(this)">
+                                            <span class="likeActionBtn"></span>
+                                            <span class="likeActionClickedBtn display-none"></span>
+                                        </div>
+                                        <div onclick="dislikeTheAnswers(this)">
+                                            <span class="dislikeActionBtn"></span>
+                                            <span class="dislikeActionClickedBtn display-none"></span>
+                                        </div>
+                                        <div class="clear-both"></div>
+                                        <b class="replyBtn" onclick="replyToComments(this)">پاسخ دهید</b>
+                                    </div>
+                                    <div class="replyToCommentMainDiv display-none">
+                                        <div class="circleBase type2 newCommentWriterProfilePic"></div>
+                                        <div class="inputBox">
+                                            <b class="replyCommentTitle">در پاسخ به نظر shazdesina</b>
+                                            <textarea class="inputBoxInput inputBoxInputComment" type="text" placeholder="شما چه نظری دارید؟"></textarea>
+                                            <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="eachCommentMainBox mg-rt-45">
+                                <div class="eachCommentMainBox mg-rt-45 display-none">
                                     <div class="circleBase type2 commentsWriterProfilePic"></div>
                                     <div class="commentsContentMainBox">
                                         <b class="userProfileName float-right">shazdesina</b>
@@ -1906,13 +1981,28 @@ if ($total == 0)
                                                 <span class="dislikeStatisticIcon commentsStatisticSpan dark-red">31</span>
                                                 <span class="numberOfCommentsIcon commentsStatisticSpan color-blue">31</span>
                                             </div>
-                                            <div class="dark-blue float-left display-inline-black cursor-pointer">مشاهده پاسخ‌ها</div>
+                                            <div class="dark-blue float-left display-inline-black cursor-pointer" onclick="showCommentsAnswers(this)">مشاهده پاسخ‌ها</div>
                                         </div>
                                     </div>
                                     <div class="commentsActionsBtns">
-                                        <span class="likeActionBtn"></span>
-                                        <span class="dislikeActionBtn"></span>
-                                        <b class="replyBtn">پاسخ دهید</b>
+                                        <div onclick="likeTheAnswers(this)">
+                                            <span class="likeActionBtn"></span>
+                                            <span class="likeActionClickedBtn display-none"></span>
+                                        </div>
+                                        <div onclick="dislikeTheAnswers(this)">
+                                            <span class="dislikeActionBtn"></span>
+                                            <span class="dislikeActionClickedBtn display-none"></span>
+                                        </div>
+                                        <div class="clear-both"></div>
+                                        <b class="replyBtn" onclick="replyToComments(this)">پاسخ دهید</b>
+                                    </div>
+                                    <div class="replyToCommentMainDiv display-none">
+                                        <div class="circleBase type2 newCommentWriterProfilePic"></div>
+                                        <div class="inputBox">
+                                            <b class="replyCommentTitle">در پاسخ به نظر shazdesina</b>
+                                            <textarea class="inputBoxInput inputBoxInputComment" type="text" placeholder="شما چه نظری دارید؟"></textarea>
+                                            <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1920,7 +2010,7 @@ if ($total == 0)
                                 <div class="circleBase type2 newCommentWriterProfilePic"></div>
                                 <div class="inputBox">
                                     <b class="replyCommentTitle">در پاسخ به نظر shazdesina</b>
-                                    <textarea class="inputBoxInput inputBoxInputComment" type="text" placeholder="شما چه نظری دارید؟"></textarea>
+                                    <textarea class="inputBoxInput inputBoxInputComment" id="zzzz" type="text" placeholder="شما چه نظری دارید؟"></textarea>
                                     <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
                                 </div>
                                 <div></div>
@@ -1962,11 +2052,11 @@ if ($total == 0)
                             <div class="commentPhotosShow">
                                 <div class="commentPhotosMainDiv tripletPhotoDiv">
                                     <div class="photosCol secondCol col-xs-6">
-                                        <div></div>
+                                        <div data-toggle="modal" data-target=".showingPhotosModal"></div>
                                     </div>
                                     <div class="photosCol firstCol col-xs-6">
-                                        <div></div>
-                                        <div></div>
+                                        <div data-toggle="modal" data-target=".showingPhotosModal"></div>
+                                        <div data-toggle="modal" data-target=".showingPhotosModal"></div>
                                     </div>
                                 </div>
                                 <div class="quantityOfLikes">
@@ -2064,23 +2154,36 @@ if ($total == 0)
                                 </div>
                             </div>
                             <div class="commentFeedbackChoices">
-                                <div class="postsActionsChoices postLikeChoice col-xs-3">
-                                    <span class="commentsLikeIconFeedback"></span>
-                                    <span class="mg-rt-20 cursor-pointer">دوست داشتم</span>
+                                <div class="postsActionsChoices col-xs-3">
+                                    <div class="postLikeChoice display-inline-block" onclick="likePostsComment(this)">
+                                        <span class="commentsLikeIconFeedback firstIcon"></span>
+                                        <span class="commentsLikeClickedIconFeedback display-none secondIcon"></span>
+                                        <span class="mg-rt-20 cursor-pointer">دوست داشتم</span>
+                                    </div>
                                 </div>
-                                <div class="postsActionsChoices postDislikeChoice col-xs-3">
-                                    <span class="commentsDislikeIconFeedback"></span>
-                                    <span class="mg-rt-20 cursor-pointer">دوست نداشتم</span>
+                                <div class="postsActionsChoices col-xs-3">
+                                    <div class="postDislikeChoice display-inline-block" onclick="disLikePostsComment(this)">
+                                        <span class="commentsDislikeIconFeedback firstIcon"></span>
+                                        <span class="commentsDislikeClickedIconFeedback display-none secondIcon"></span>
+                                        <span class="mg-rt-20 cursor-pointer">دوست نداشتم</span>
+                                    </div>
                                 </div>
-                                <div class="postsActionsChoices postCommentChoice col-xs-3">
-                                    <span class="showCommentsIconFeedback" onclick="showPostsComments(this)"></span>
-                                    <span class="mg-rt-20 cursor-pointer" onclick="showPostsComments(this)">مشاهده نظرها</span>
+                                <div class="postsActionsChoices col-xs-3">
+                                    <div class="postCommentChoice display-inline-block" onclick="showPostsComments(this)">
+                                        <span class="showCommentsIconFeedback firstIcon"></span>
+                                        <span class="showCommentsClickedIconFeedback display-none secondIcon"></span>
+                                        <span class="mg-rt-20 cursor-pointer">مشاهده نظرها</span>
+                                    </div>
                                 </div>
-                                <div class="postsActionsChoices postShareChoice col-xs-3">
-                                    <span class="commentsShareIconFeedback"></span>
-                                    <span class="mg-rt-20 cursor-pointer">اشتراک‌گذاری</span>
+                                <div class="postsActionsChoices col-xs-3">
+                                    <div class="postShareChoice display-inline-block" onclick="SharePostsBtn(this)">
+                                        <span class="commentsShareIconFeedback firstIcon"></span>
+                                        <span class="commentsShareClickedIconFeedback display-none secondIcon"></span>
+                                        <span class="mg-rt-20 cursor-pointer">اشتراک‌گذاری</span>
+                                    </div>
                                 </div>
                             </div>
+
                             <div class="commentsMainBox display-none">
                                 <div class="dark-blue mg-bt-10">
                                     <span class="cursor-pointer">مشاهده 17 نظر باقیمانده</span>
@@ -2096,16 +2199,31 @@ if ($total == 0)
                                                 <span class="dislikeStatisticIcon commentsStatisticSpan dark-red">31</span>
                                                 <span class="numberOfCommentsIcon commentsStatisticSpan color-blue">31</span>
                                             </div>
-                                            <div class="dark-blue float-left display-inline-black cursor-pointer">مشاهده پاسخ‌ها</div>
+                                            <div class="dark-blue float-left display-inline-black cursor-pointer" onclick="showCommentsAnswers(this)">مشاهده پاسخ‌ها</div>
                                         </div>
                                     </div>
                                     <div class="commentsActionsBtns">
-                                        <span class="likeActionBtn"></span>
-                                        <span class="dislikeActionBtn"></span>
-                                        <b class="replyBtn">پاسخ دهید</b>
+                                        <div onclick="likeTheAnswers(this)">
+                                            <span class="likeActionBtn"></span>
+                                            <span class="likeActionClickedBtn display-none"></span>
+                                        </div>
+                                        <div onclick="dislikeTheAnswers(this)">
+                                            <span class="dislikeActionBtn"></span>
+                                            <span class="dislikeActionClickedBtn display-none"></span>
+                                        </div>
+                                        <div class="clear-both"></div>
+                                        <b class="replyBtn" onclick="replyToComments(this)">پاسخ دهید</b>
+                                    </div>
+                                    <div class="replyToCommentMainDiv display-none">
+                                        <div class="circleBase type2 newCommentWriterProfilePic"></div>
+                                        <div class="inputBox">
+                                            <b class="replyCommentTitle">در پاسخ به نظر shazdesina</b>
+                                            <textarea class="inputBoxInput inputBoxInputComment" type="text" placeholder="شما چه نظری دارید؟"></textarea>
+                                            <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="eachCommentMainBox mg-rt-45">
+                                <div class="eachCommentMainBox mg-rt-45 display-none">
                                     <div class="circleBase type2 commentsWriterProfilePic"></div>
                                     <div class="commentsContentMainBox">
                                         <b class="userProfileName float-right">shazdesina</b>
@@ -2118,13 +2236,28 @@ if ($total == 0)
                                                 <span class="dislikeStatisticIcon commentsStatisticSpan dark-red">31</span>
                                                 <span class="numberOfCommentsIcon commentsStatisticSpan color-blue">31</span>
                                             </div>
-                                            <div class="dark-blue float-left display-inline-black cursor-pointer">مشاهده پاسخ‌ها</div>
+                                            <div class="dark-blue float-left display-inline-black cursor-pointer" onclick="showCommentsAnswers(this)">مشاهده پاسخ‌ها</div>
                                         </div>
                                     </div>
                                     <div class="commentsActionsBtns">
-                                        <span class="likeActionBtn"></span>
-                                        <span class="dislikeActionBtn"></span>
-                                        <b class="replyBtn">پاسخ دهید</b>
+                                        <div onclick="likeTheAnswers(this)">
+                                            <span class="likeActionBtn"></span>
+                                            <span class="likeActionClickedBtn display-none"></span>
+                                        </div>
+                                        <div onclick="dislikeTheAnswers(this)">
+                                            <span class="dislikeActionBtn"></span>
+                                            <span class="dislikeActionClickedBtn display-none"></span>
+                                        </div>
+                                        <div class="clear-both"></div>
+                                        <b class="replyBtn" onclick="replyToComments(this)">پاسخ دهید</b>
+                                    </div>
+                                    <div class="replyToCommentMainDiv display-none">
+                                        <div class="circleBase type2 newCommentWriterProfilePic"></div>
+                                        <div class="inputBox">
+                                            <b class="replyCommentTitle">در پاسخ به نظر shazdesina</b>
+                                            <textarea class="inputBoxInput inputBoxInputComment" type="text" placeholder="شما چه نظری دارید؟"></textarea>
+                                            <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -2132,7 +2265,7 @@ if ($total == 0)
                                 <div class="circleBase type2 newCommentWriterProfilePic"></div>
                                 <div class="inputBox">
                                     <b class="replyCommentTitle">در پاسخ به نظر shazdesina</b>
-                                    <textarea class="inputBoxInput inputBoxInputComment" type="text" placeholder="شما چه نظری دارید؟"></textarea>
+                                    <textarea class="inputBoxInput inputBoxInputComment" id="zzzz" type="text" placeholder="شما چه نظری دارید؟"></textarea>
                                     <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
                                 </div>
                                 <div></div>
@@ -2174,12 +2307,12 @@ if ($total == 0)
                             <div class="commentPhotosShow">
                                 <div class="commentPhotosMainDiv quadruplePhotoDiv">
                                     <div class="photosCol secondCol col-xs-6">
-                                        <div></div>
-                                        <div></div>
+                                        <div data-toggle="modal" data-target=".showingPhotosModal"></div>
+                                        <div data-toggle="modal" data-target=".showingPhotosModal"></div>
                                     </div>
                                     <div class="photosCol firstCol col-xs-6">
-                                        <div></div>
-                                        <div></div>
+                                        <div data-toggle="modal" data-target=".showingPhotosModal"></div>
+                                        <div data-toggle="modal" data-target=".showingPhotosModal"></div>
                                     </div>
                                 </div>
                                 <div class="quantityOfLikes">
@@ -2277,21 +2410,33 @@ if ($total == 0)
                                 </div>
                             </div>
                             <div class="commentFeedbackChoices">
-                                <div class="postsActionsChoices postLikeChoice col-xs-3">
-                                    <span class="commentsLikeIconFeedback"></span>
-                                    <span class="mg-rt-20 cursor-pointer">دوست داشتم</span>
+                                <div class="postsActionsChoices col-xs-3">
+                                    <div class="postLikeChoice display-inline-block" onclick="likePostsComment(this)">
+                                        <span class="commentsLikeIconFeedback firstIcon"></span>
+                                        <span class="commentsLikeClickedIconFeedback display-none secondIcon"></span>
+                                        <span class="mg-rt-20 cursor-pointer">دوست داشتم</span>
+                                    </div>
                                 </div>
-                                <div class="postsActionsChoices postDislikeChoice col-xs-3">
-                                    <span class="commentsDislikeIconFeedback"></span>
-                                    <span class="mg-rt-20 cursor-pointer">دوست نداشتم</span>
+                                <div class="postsActionsChoices col-xs-3">
+                                    <div class="postDislikeChoice display-inline-block" onclick="disLikePostsComment(this)">
+                                        <span class="commentsDislikeIconFeedback firstIcon"></span>
+                                        <span class="commentsDislikeClickedIconFeedback display-none secondIcon"></span>
+                                        <span class="mg-rt-20 cursor-pointer">دوست نداشتم</span>
+                                    </div>
                                 </div>
-                                <div class="postsActionsChoices postCommentChoice col-xs-3">
-                                    <span class="showCommentsIconFeedback" onclick="showPostsComments(this)"></span>
-                                    <span class="mg-rt-20 cursor-pointer" onclick="showPostsComments(this)">مشاهده نظرها</span>
+                                <div class="postsActionsChoices col-xs-3">
+                                    <div class="postCommentChoice display-inline-block" onclick="showPostsComments(this)">
+                                        <span class="showCommentsIconFeedback firstIcon"></span>
+                                        <span class="showCommentsClickedIconFeedback display-none secondIcon"></span>
+                                        <span class="mg-rt-20 cursor-pointer">مشاهده نظرها</span>
+                                    </div>
                                 </div>
-                                <div class="postsActionsChoices postShareChoice col-xs-3">
-                                    <span class="commentsShareIconFeedback"></span>
-                                    <span class="mg-rt-20 cursor-pointer">اشتراک‌گذاری</span>
+                                <div class="postsActionsChoices col-xs-3">
+                                    <div class="postShareChoice display-inline-block" onclick="SharePostsBtn(this)">
+                                        <span class="commentsShareIconFeedback firstIcon"></span>
+                                        <span class="commentsShareClickedIconFeedback display-none secondIcon"></span>
+                                        <span class="mg-rt-20 cursor-pointer">اشتراک‌گذاری</span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="commentsMainBox display-none">
@@ -2309,16 +2454,31 @@ if ($total == 0)
                                                 <span class="dislikeStatisticIcon commentsStatisticSpan dark-red">31</span>
                                                 <span class="numberOfCommentsIcon commentsStatisticSpan color-blue">31</span>
                                             </div>
-                                            <div class="dark-blue float-left display-inline-black cursor-pointer">مشاهده پاسخ‌ها</div>
+                                            <div class="dark-blue float-left display-inline-black cursor-pointer" onclick="showCommentsAnswers(this)">مشاهده پاسخ‌ها</div>
                                         </div>
                                     </div>
                                     <div class="commentsActionsBtns">
-                                        <span class="likeActionBtn"></span>
-                                        <span class="dislikeActionBtn"></span>
-                                        <b class="replyBtn">پاسخ دهید</b>
+                                        <div onclick="likeTheAnswers(this)">
+                                            <span class="likeActionBtn"></span>
+                                            <span class="likeActionClickedBtn display-none"></span>
+                                        </div>
+                                        <div onclick="dislikeTheAnswers(this)">
+                                            <span class="dislikeActionBtn"></span>
+                                            <span class="dislikeActionClickedBtn display-none"></span>
+                                        </div>
+                                        <div class="clear-both"></div>
+                                        <b class="replyBtn" onclick="replyToComments(this)">پاسخ دهید</b>
+                                    </div>
+                                    <div class="replyToCommentMainDiv display-none">
+                                        <div class="circleBase type2 newCommentWriterProfilePic"></div>
+                                        <div class="inputBox">
+                                            <b class="replyCommentTitle">در پاسخ به نظر shazdesina</b>
+                                            <textarea class="inputBoxInput inputBoxInputComment" type="text" placeholder="شما چه نظری دارید؟"></textarea>
+                                            <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="eachCommentMainBox mg-rt-45">
+                                <div class="eachCommentMainBox mg-rt-45 display-none">
                                     <div class="circleBase type2 commentsWriterProfilePic"></div>
                                     <div class="commentsContentMainBox">
                                         <b class="userProfileName float-right">shazdesina</b>
@@ -2331,13 +2491,28 @@ if ($total == 0)
                                                 <span class="dislikeStatisticIcon commentsStatisticSpan dark-red">31</span>
                                                 <span class="numberOfCommentsIcon commentsStatisticSpan color-blue">31</span>
                                             </div>
-                                            <div class="dark-blue float-left display-inline-black cursor-pointer">مشاهده پاسخ‌ها</div>
+                                            <div class="dark-blue float-left display-inline-black cursor-pointer" onclick="showCommentsAnswers(this)">مشاهده پاسخ‌ها</div>
                                         </div>
                                     </div>
                                     <div class="commentsActionsBtns">
-                                        <span class="likeActionBtn"></span>
-                                        <span class="dislikeActionBtn"></span>
-                                        <b class="replyBtn">پاسخ دهید</b>
+                                        <div onclick="likeTheAnswers(this)">
+                                            <span class="likeActionBtn"></span>
+                                            <span class="likeActionClickedBtn display-none"></span>
+                                        </div>
+                                        <div onclick="dislikeTheAnswers(this)">
+                                            <span class="dislikeActionBtn"></span>
+                                            <span class="dislikeActionClickedBtn display-none"></span>
+                                        </div>
+                                        <div class="clear-both"></div>
+                                        <b class="replyBtn" onclick="replyToComments(this)">پاسخ دهید</b>
+                                    </div>
+                                    <div class="replyToCommentMainDiv display-none">
+                                        <div class="circleBase type2 newCommentWriterProfilePic"></div>
+                                        <div class="inputBox">
+                                            <b class="replyCommentTitle">در پاسخ به نظر shazdesina</b>
+                                            <textarea class="inputBoxInput inputBoxInputComment" type="text" placeholder="شما چه نظری دارید؟"></textarea>
+                                            <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -2345,7 +2520,7 @@ if ($total == 0)
                                 <div class="circleBase type2 newCommentWriterProfilePic"></div>
                                 <div class="inputBox">
                                     <b class="replyCommentTitle">در پاسخ به نظر shazdesina</b>
-                                    <textarea class="inputBoxInput inputBoxInputComment" type="text" placeholder="شما چه نظری دارید؟"></textarea>
+                                    <textarea class="inputBoxInput inputBoxInputComment" id="zzzz" type="text" placeholder="شما چه نظری دارید؟"></textarea>
                                     <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
                                 </div>
                                 <div></div>
@@ -2451,29 +2626,11 @@ if ($total == 0)
                             <img src="{{"../../../public/images/Chromite.jpg"}}" alt="">
                         </center>
                     </div>
+                    @include('layouts.placePosts')
                 </div>
                 <div class="clear-both"></div>
 
-                <div class="questionsFiltrationBarToggle display-none col-xs-8">
-                    <div class="questionsMainFiltrationBar">
-                        <span>نمایش بر اساس</span>
-                        <span>جدیدترین‌ها</span>
-                        <span>قدمی‌ترین‌ها</span>
-                        <span>بهترین‌ها</span>
-                        <span>داغ‌ترین‌ها</span>
-                        <span>بدترین‌ها</span>
-                        <span>بیشترین همراهان</span>
-                        <span>پست‌ها</span>
-                    </div>
-                </div>
-
-                <div class="col-xs-4 adsToggleQuestions display-none float-right">
-                    <center class="adsMainDiv">
-                        <div class="adsMainDivHeader">تبلیغات</div>
-                        <div class="returnToMainPage" onclick="allQuestionsGrid()">بازگشت</div>
-                        <img src="{{"../../../public/images/Chromite.jpg"}}" alt="">
-                    </center>
-                </div>
+                @include('layouts.placeQuestions')
 
                 <div class="col-xs-12 QAndAMainDiv">
 
@@ -2556,8 +2713,14 @@ if ($total == 0)
                                         </div>
                                     </div>
                                     <div class="actionToAnswer">
-                                        <span class="likeAnswer"></span>
-                                        <span class="dislikeAnswer"></span>
+                                        <div class="display-inline-block" onclick="dislikeTheAnswers(this)">
+                                            <span class="dislikeAnswer"></span>
+                                            <span class="dislikeAnswerClicked display-none"></span>
+                                        </div>
+                                        <div class="display-inline-block" onclick="likeTheAnswers(this)">
+                                            <span class="likeAnswer"></span>
+                                            <span class="likeAnswerClicked display-none"></span>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="display-none">
@@ -2597,7 +2760,7 @@ if ($total == 0)
                     <a class="col-xs-2 showQuestionsNumsFilterLink" href="#taplc_global_nav_links_0">
                         <div class="showQuestionsNumsFilter" onclick="allQuestionsGrid()">نمایش تمامی سؤال‌ها</div>
                     </a>
-                    <div class="col-xs-4 font-size-13 line-height-2 text-align-right">
+                    <div class="col-xs-4 font-size-13 line-height-2 text-align-right float-right">
                         صفحه
                         <span>1</span>
                         <span><<<</span>
@@ -2611,8 +2774,6 @@ if ($total == 0)
             </div>
         </div>
     </div>
-
-    @include('layouts.placePosts')
 
     <script>
 
@@ -2643,10 +2804,6 @@ if ($total == 0)
                 $(element).toggleClass("bg-color-darkgrey")
         }
 
-        function showPostsComments(element) {
-            $(element).parent().parent().next().toggle();
-        }
-
         function showRatingDetails(element) {
             $(element).parent().next().toggle();
             $(element).children().children().toggleClass('glyphicon-triangle-bottom');
@@ -2660,14 +2817,19 @@ if ($total == 0)
 
         function allPostsGrid() {
             $('#targetHelp_10').toggle(),
-            $('.mainWrapHotelDetails').toggle(),
-            $('.mainWrapPosts').toggle() ,
             $('#bestPriceInnerDiv').toggleClass('min-height-186Imp'),
             $('.greyBackground').toggleClass('height-210Imp'),
             $('.postModalMainDiv').toggleClass('top--30Imp'),
             $('#addToFavouriteTripsMainDiv').toggle(),
             $('#helpBtnMainDiv').toggleClass('top-20Imp'),
-            $('.returnToMainPage').toggleClass('color-white')
+            $('.returnToMainPage').toggleClass('color-white'),
+            $('.returnToMainPage').toggle(),
+            $('.postsMainDivInRegularMode').toggle(),
+            $('.postsMainDivInSpecificMode').toggle(),
+            $('.hr_btf_wrap').toggle(),
+            $('#nearbyDiv').toggle(),
+            $('.QAndAMainDiv').toggle(),
+            $('.questionsMainDivFooter').toggle()
         }
 
         function allQuestionsGrid() {
@@ -2684,12 +2846,60 @@ if ($total == 0)
             $('#addToFavouriteTripsMainDiv').toggle(),
             $('#helpBtnMainDiv').toggleClass('top-20Imp'),
             $('.questionInputBox').toggleClass('width-80per'),
+            $('.showingQuestionCompletely').toggle()
 
             $('.seeAllQLink').text($('.seeAllQLink').text() == 'مشاهده همه سؤالات و پاسخ‌ها' ? 'بازگشت به صفحه‌ی اصلی' : 'مشاهده همه سؤالات و پاسخ‌ها');
         }
 
+        function likePostsComment(element) {
+            $(element).toggleClass('color-red'),
+                $(element).children("span.firstIcon").toggle(),
+                $(element).children("span.secondIcon").toggle()
+        }
 
+        function disLikePostsComment(element) {
+            $(element).toggleClass('dark-red'),
+            $(element).children("span.firstIcon").toggle(),
+            $(element).children("span.secondIcon").toggle()
+        }
 
+        function showPostsComments(element) {
+            $(element).parent().parent().next().toggle();
+            $(element).toggleClass('color-blue'),
+            $(element).children("span.firstIcon").toggle(),
+            $(element).children("span.secondIcon").toggle()
+        }
+
+        function SharePostsBtn(element) {
+            $(element).children("span.firstIcon").toggle(),
+            $(element).children("span.secondIcon").toggle()
+        }
+
+        function likeTheAnswers(element) {
+            $(element).children().toggle(),
+            $(element).toggleClass('color-red')
+        }
+
+        function dislikeTheAnswers(element) {
+            $(element).children().toggle(),
+            $(element).toggleClass('dark-red')
+        }
+
+        function showCommentsAnswers(element) {
+            $(element).parent().parent().parent().siblings("div.eachCommentMainBox").toggleClass("display-inline-blockImp"),
+            $(element).text($(element).text() == 'مشاهده پاسخ‌ها' ? 'بستن پاسخ‌ها' : 'مشاهده پاسخ‌ها');
+        }
+
+        function replyToComments(element) {
+            $(element).parent().siblings("div.replyToCommentMainDiv").toggleClass("display-inline-blockImp")
+            $(element).parent().parent().toggleClass('mg-bt-0')
+        }
+
+    </script>
+    <script src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
+    <script>
+        autosize(document.getElementsByClassName("inputBoxInputComment"));
+        autosize(document.getElementsByClassName("inputBoxInputAnswer"));
     </script>
 
 

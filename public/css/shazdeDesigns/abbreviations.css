@@ -444,6 +444,10 @@
 
 /*margin bottom*/
 
+.mg-bt-0 {
+    margin-bottom: 0;
+}
+
 .mg-bt-5 {
     margin-bottom: 5px;
 }
