@@ -281,6 +281,10 @@ Route::get('tourCreationFinalStep', function(){
     return view('tour/tourCreationFinalStep');
 });
 
+Route::get('usersProfile', function(){
+    return view('usersProfile');
+});
+
 
 Route::get('gardeshname2/{page?}', 'PostController@gardeshname')->name('gardeshname');
 

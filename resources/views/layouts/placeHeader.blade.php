@@ -25,34 +25,34 @@
                                 <div class="global-nav-links-container">
                                     <ul class="global-nav-links-menu">
 
-                                        @if($placeMode == "hotel")
-                                            <li><a href="{{route('hotelList', ['city' => $state, 'mode' => 'state'])}}" id="global-nav-hotels" class="dark-redImp unscoped global-nav-link ui_tab " data-tracking-label="hotels">هتل</a></li>
-                                        @elseif($placeMode != "policies")
-                                            <li><a href="{{route('hotelList', ['city' => $state, 'mode' => 'state'])}}" id="global-nav-hotels" class="unscoped global-nav-link ui_tab color-whiteImp" data-tracking-label="hotels">هتل</a></li>
-                                        @else
+{{--                                        @if($placeMode == "hotel")--}}
+{{--                                            <li><a href="{{route('hotelList', ['city' => $state, 'mode' => 'state'])}}" id="global-nav-hotels" class="dark-redImp unscoped global-nav-link ui_tab " data-tracking-label="hotels">هتل</a></li>--}}
+{{--                                        @elseif($placeMode != "policies")--}}
+{{--                                            <li><a href="{{route('hotelList', ['city' => $state, 'mode' => 'state'])}}" id="global-nav-hotels" class="unscoped global-nav-link ui_tab color-whiteImp" data-tracking-label="hotels">هتل</a></li>--}}
+{{--                                        @else--}}
                                             <li><a href="{{route('mainMode', ['mode' => 'hotel'])}}" id="global-nav-hotels" class="unscoped global-nav-link ui_tab color-whiteImp" data-tracking-label="hotels">هتل</a></li>
-                                        @endif
-                                        @if($placeMode == "restaurant")
-                                            <li><a href="{{route('restaurantList', ['city' => $state, 'mode' => 'state'])}}"  id="global-nav-restaurants" class="dark-redImp unscoped global-nav-link ui_tab">رستوران ها</a></li>
-                                        @elseif($placeMode != "policies")
-                                            <li><a href="{{route('restaurantList', ['city' => $state, 'mode' => 'state'])}}" id="global-nav-restaurants" class="unscoped global-nav-link ui_tab color-whiteImp">رستوران ها</a></li>
-                                        @else
-                                            <li><a href="{{route('mainMode', ['mode' => 'restaurant'])}}" id="global-nav-hotels" class="unscoped global-nav-link ui_tab color-whiteImp" data-tracking-label="hotels">رستوران ها</a></li>
-                                        @endif
-                                        @if($placeMode == "amaken")
-                                            <li><a href="{{route('amakenList', ['city' => $state, 'mode' => 'state'])}}"  id="global-nav-amaken" class="dark-redImp unscoped global-nav-link ui_tab">جاذبه ها</a></li>
-                                        @elseif($placeMode != "policies")
-                                            <li><a href="{{route('amakenList', ['city' => $state, 'mode' => 'state'])}}" id="global-nav-amaken" class="unscoped global-nav-link ui_tab color-whiteImp">جاذبه ها</a></li>
-                                        @else
-                                            <li><a href="{{route('mainMode', ['mode' => 'amaken'])}}" id="global-nav-hotels" class="unscoped global-nav-link ui_tab color-whiteImp" data-tracking-label="hotels">جاذبه ها</a></li>
-                                        @endif
-                                        @if($placeMode == "ticket")
-                                            <li><a  href="{{route('tickets')}}" class="dark-redImp unscoped global-nav-link ui_tab ">بلیط</a></li>
-                                        @else
+{{--                                        @endif--}}
+{{--                                        @if($placeMode == "restaurant")--}}
+{{--                                            <li><a href="{{route('restaurantList', ['city' => $state, 'mode' => 'state'])}}"  id="global-nav-restaurants" class="dark-redImp unscoped global-nav-link ui_tab">رستوران‌ها</a></li>--}}
+{{--                                        @elseif($placeMode != "policies")--}}
+{{--                                            <li><a href="{{route('restaurantList', ['city' => $state, 'mode' => 'state'])}}" id="global-nav-restaurants" class="unscoped global-nav-link ui_tab color-whiteImp">رستوران‌ها</a></li>--}}
+{{--                                        @else--}}
+                                            <li><a href="{{route('mainMode', ['mode' => 'restaurant'])}}" id="global-nav-hotels" class="unscoped global-nav-link ui_tab color-whiteImp" data-tracking-label="hotels">رستوران‌ها</a></li>
+{{--                                        @endif--}}
+{{--                                        @if($placeMode == "amaken")--}}
+{{--                                            <li><a href="{{route('amakenList', ['city' => $state, 'mode' => 'state'])}}"  id="global-nav-amaken" class="dark-redImp unscoped global-nav-link ui_tab">جاذبه‌ها</a></li>--}}
+{{--                                        @elseif($placeMode != "policies")--}}
+{{--                                            <li><a href="{{route('amakenList', ['city' => $state, 'mode' => 'state'])}}" id="global-nav-amaken" class="unscoped global-nav-link ui_tab color-whiteImp">جاذبه‌ها</a></li>--}}
+{{--                                        @else--}}
+                                            <li><a href="{{route('mainMode', ['mode' => 'amaken'])}}" id="global-nav-hotels" class="unscoped global-nav-link ui_tab color-whiteImp" data-tracking-label="hotels">جاذبه‌ها</a></li>
+{{--                                        @endif--}}
+{{--                                        @if($placeMode == "ticket")--}}
+{{--                                            <li><a  href="{{route('tickets')}}" class="dark-redImp unscoped global-nav-link ui_tab ">بلیط</a></li>--}}
+{{--                                        @else--}}
                                             <li><a href="{{route('tickets')}}" class="unscoped global-nav-link ui_tab color-whiteImp">بلیط</a></li>
-                                        @endif
+{{--                                        @endif--}}
 
-                                        <li class="" data-element=".masthead-dropdown-Flights"><a href="{{route('soon')}}" class="unscoped global-nav-link ui_tab color-whiteImp" data-tracking-label="Flights">جشنواره ها</a></li>
+                                        <li class="" data-element=".masthead-dropdown-Flights"><a href="{{route('soon')}}" class="unscoped global-nav-link ui_tab color-whiteImp" data-tracking-label="Flights">جشنواره‌ها</a></li>
                                         <li class="" data-element=".masthead-dropdown-Flights"><a href="" class="unscoped global-nav-link ui_tab color-whiteImp" data-tracking-label="Flights"> آداب و رسوم</a></li>
 
                                     </ul>
@@ -201,7 +201,7 @@
                             </div>
 
                             <div class="global-nav-overlays-container">
-                                @include('layouts.recentlyViewAndMyTripsInDetails')
+{{--                                @include('layouts.recentlyViewAndMyTripsInDetails')--}}
                             </div>
                         </div>
 
@@ -252,7 +252,7 @@
     </div>
 </div>
 
-@include('layouts.proSearch')
+{{--@include('layouts.proSearch')--}}
 
 
 <script>
