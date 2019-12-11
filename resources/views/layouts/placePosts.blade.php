@@ -1,4 +1,4 @@
-<div class="col-xs-7 pd-0 float-right  postsMainDivInSpecificMode display-none">
+<div class="col-xs-7 pd-0 float-right  postsMainDivInSpecificMode ">
     <div class="col-xs-6 pd-0 pd-rt-10Imp">
         <div class="col-xs-12 postMainDivShown float-right position-relative">
             {{--                        <div class="commentOptionsBoxes commentActions">--}}

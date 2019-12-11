@@ -5,7 +5,9 @@
 }
 
 .mainBodyUserProfile {
-    background-color: #eaeaea;
+    background-color: #f5f5f5;
+    display: inline-block;
+    width: 100%;
 }
 
 .mainDivContainerProfilePage {
@@ -28,7 +30,7 @@
     z-index: 1;
 }
 
-.userProfileDetails {
+.userProfileInfo {
     background-color: rgba(255,255,255,0.5);
     border-radius: 15px;
     position: absolute;
@@ -37,15 +39,15 @@
     padding: 5px 95px 5px 25px;
 }
 
-.userProfileDetails > div:first-child {
+.userProfileInfo > div:first-child {
     font-weight: 700;
 }
 
-.userProfileDetails > div:not(:last-child) {
+.userProfileInfo > div:not(:last-child) {
     font-size: 20px;
 }
 
-.postsMainFiltrationBar , .questionsMainFiltrationBar{
+.postsMainFiltrationBar , .userProfilePostsFiltration {
     background-color: white;
     padding: 0;
     direction: rtl;
@@ -64,14 +66,11 @@
     border-bottom: 5px solid #0076a3;
 }
 
-.postsMainFiltrationBar > span , .questionsMainFiltrationBar > span{
+.postsMainFiltrationBar > span , .userProfilePostsFiltration > span {
     margin: 0 30px;
     font-size: 14px;
     padding: 10px 0 5px;
     border-bottom: 5px solid white;
-}
-
-.postsMainFiltrationBar > span:not(:last-child) , .postsMainFiltrationBar > span:not(:first-child){
     cursor: pointer;
     float: left;
 }
@@ -81,3 +80,395 @@
     font-family: Shazde_Regular2 !important;
     margin-right: 5px;
 }
+
+.userProfilePostsMainDiv {
+    margin-top: 20px;
+}
+
+.userProfilePostsFiltrationContainer {
+    width: 100%;
+}
+
+.userProfilePostsFiltrationContainer .userProfilePostsFiltration , .userProfilePostsSearchContainer{
+    background-color: white;
+    color: #777777;
+}
+
+.userProfilePostsFiltrationContainer .userProfilePostsFiltration > span:hover {
+    color: #0076a3;
+}
+
+.userProfilePostsFiltrationContainer .userProfilePostsFiltration > span {
+    float: right;
+    margin: 0 16px;
+    border-bottom: none;
+    padding-bottom: 10px;
+}
+
+.userProfilePostsFiltrationContainer .userProfilePostsFiltration > span:first-child {
+    font-weight: 700;
+    font-size: 16px;
+    color: #0076a3;
+    padding: 8px 0;
+}
+
+.userProfilePostsSearchContainer {
+    display: inline-block;
+    width: 100%;
+    padding: 5px 15px 5px 0;
+}
+
+.userProfilePostsSearchContainer > span {
+    margin: 0 16px;
+    font-size: 14px;
+    padding: 5px 0;
+    /*border-bottom: 5px solid white;*/
+    cursor: pointer;
+    float: left;
+}
+
+.userProfilePostsSearchContainer .inputBox {
+    float: right;
+    width: 60%;
+}
+
+.inputBox {
+    padding: 2px 10px;
+    font-size: 0.8em;
+    display: inline-block;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    background-color: #ebebeb;
+    line-height: 1.42857143;
+    /*margin: 10px 0;*/
+    width: auto;
+}
+
+.inputBoxInputSearch {
+    text-align: right;
+    margin-top: 3px;
+    height: 21px;
+    resize: none;
+    width: 100%;
+    float: right;
+    font-size: 12px;
+    border: none;
+    background-color: transparent;
+}
+
+.rightColBoxes {
+    background-color: white;
+    padding: 0 10px 15px;
+}
+
+.mainDivHeaderText {
+    padding: 10px 0;
+    border-bottom: 1px solid #e5e5e5;
+    margin: 20px 0;
+    position: relative;
+}
+
+.mainDivHeaderText > h3, .mainDivHeaderText > div {
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 32px;
+    position: absolute;
+    top: 5px;
+    right: -5px;
+    background: white;
+    padding: 0 10px;
+    color: #0076a3;
+    margin: 0;
+}
+
+.mainDivHeaderText > div {
+    right: inherit;
+    color: darkblue;
+    font-size: 13px;
+    font-weight: 500;
+    top: 4px;
+    left: -10px;
+    cursor: pointer;
+}
+
+.userProfileLevelDetails {
+    position: relative;
+    padding: 5px 25px 30px;
+}
+
+.levelIconDiv.currentLevel {
+    position: absolute;
+    right: 40px;
+    top: 5px;
+}
+
+.levelIconDiv.nextLevel {
+    position: absolute;
+    left: 11px;
+    top: 5px;
+}
+
+.upperBox {
+    background-color: #0076a3;
+    width: 40px;
+    height: 33px;
+    border-width: 3px 3px 0 3px;
+    border-style: solid;
+    border-color: black;
+    position: absolute;
+    left: -5px;
+    border-radius: 5px;
+    color: white;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.inner {
+    transform: rotate(45deg);
+    background-color: #0076a3;
+    border: 3px solid black;
+    width: 30px;
+    height: 30px;
+    top: 5px;
+    left: -15px;
+    position: relative;
+    border-radius: 5px;
+}
+
+.outer {
+    position: absolute;
+    top: 20px;
+    left: 5px;
+    width: 20px;
+    height: 40px;
+    overflow: hidden;
+    transform: rotate(90deg);
+}
+
+.levelDetailsMainDiv {
+    text-align: right;
+    padding-right: 45px;
+    font-size: 15px;
+}
+
+.levelDetailsPoints {
+    direction: rtl;
+}
+
+.w3-black {
+    border: 2px solid black;
+    float: right;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.userProfileLevelDetails .w3-blue {
+    background-color: #0076a3 !important;
+    float: right;
+    height: 8px;
+}
+
+.medalsMainBox {
+    height: 130px ;
+    overflow: hidden;
+}
+
+.picturesMainBox {
+    height: 110px ;
+    overflow: hidden;
+}
+
+.picturesDiv {
+    display: inline-block;
+    width: 31%;
+    margin: 5px 2px;
+    height: 90px;
+    border: 1px solid black;
+}
+
+.medalsDiv {
+    display: inline-block;
+    width: 30%;
+    margin: 5px 1%;
+    height: 110px;
+    border: 1px solid black;
+}
+
+.activitiesMainDiv {
+    padding: 5px 15px;
+}
+
+.activitiesLinesDiv {
+    border-bottom: 1px solid #E5E5E5;
+    padding: 10px 0;
+    position: relative;
+}
+
+.activitiesLinesDiv:first-child {
+    padding: 0 0 5px;
+}
+
+.activitiesLinesDiv:first-child > div {
+    top: -5px;
+}
+
+.activityTitle {
+    position: absolute;
+    /*font-size: 14px;*/
+    color: #888888;
+    top: 10px;
+    right: 0;
+    cursor: default;
+    padding: 0 5px;
+    background-color: white;
+}
+
+.activityNumbers {
+    position: absolute;
+    /*font-size: 14px;*/
+    color: #0076a3;
+    top: 10px;
+    left: 0;
+    cursor: pointer;
+    padding: 0 5px;
+    background-color: white;
+}
+
+/*posts page styles*/
+
+.postsMainDivInSpecificMode  .postMainDivShown {
+    padding: 10px;
+}
+
+.postsMainDivInSpecificMode .photosCol > div:nth-child(1) {
+    height: 210px;
+}
+
+.postsMainDivInSpecificMode .commentPhotosMainDiv {
+    margin: 0;
+}
+
+.postsMainDivInSpecificMode , .commentPhotosShow{
+    border-bottom: none;
+}
+
+.postsMainDivInSpecificMode .quantityOfLikes {
+    border-top: 1px solid #E5E5E5;
+    display: inline-block;
+    width: 100%;
+    margin-top: 10px;
+    font-size: 12px;
+    padding-top: 10px;
+}
+
+.numberOfPhotosMainDiv {
+    background-color: rgba(0,0,0,0.5);
+    position: absolute;
+    bottom: 0;
+    left: 15px;
+    color: white;
+    text-align: center;
+    padding: 4px 20px;
+    border: none !important;
+}
+
+.numberOfPhotos {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.postTextShown {
+    overflow: hidden;
+}
+
+.showMoreText {
+    position: relative;
+    cursor: pointer;
+}
+
+.showMoreText::before {
+    content: '\E091';
+    font-family: shazdemosafer-tour !important;
+    font-size: 35px;
+    color: #4DC7BC;
+    position: absolute;
+    bottom: -17px;
+    left: -35px;
+}
+
+.showLessText {
+    color: #4DC7BC;
+    cursor: pointer;
+}
+
+.commentWriterDetailsShow , .answersWriterDetailsShow {
+    display: inline-block;
+    width: 100%;
+}
+
+.commentWriterPicShow , .answersWriterPicShow {
+    width: 55px;
+    height: 55px;
+    background-color: #E5E5E5;
+    display: inline-block;
+    float: right;
+    margin-left: 10px;
+}
+
+.commentWriterExperienceDetails , .answersWriterExperienceDetails {
+    color: #666666;
+    margin-bottom: 10px;
+    direction: rtl;
+    text-align: right;
+}
+
+.userProfileName {
+    display: inline-block;
+    font-size: 15px;
+}
+
+.commentWriterExperiencePlace , .answersWriterExperiencePlace {
+    color: #16174f;
+    cursor: pointer;
+}
+
+.commentContentsShow > p {
+    word-break: normal;
+    text-align: justify;
+}
+
+.commentPhotosShow {
+    padding-bottom: 5px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.photosCol > div {
+    margin-top: 10px;
+    border: 2px solid black;
+}
+
+.photosCol img {
+    cursor: pointer;
+}
+
+.postsMainDivInSpecificMode .photosCol {
+    border-top: 1px solid #E5E5E5;
+}
+
+.postMainDivShown , .postsFiltersMainDiv {
+    float: right;
+    direction: rtl;
+    background: white;
+    /*margin-top: 10px;*/
+    padding: 10px 20px;
+}
+
+.commentWriterExperienceParticipation , .userProfileName , .userProfileNameAnswers {
+    color: #0076a3;
+    cursor: pointer;
+}
+
+/*photos and films*/
+
+/*answers and questions*/

@@ -281,8 +281,8 @@ Route::get('tourCreationFinalStep', function(){
     return view('tour/tourCreationFinalStep');
 });
 
-Route::get('usersProfile', function(){
-    return view('usersProfile');
+Route::get('profileUsers', function(){
+    return view('profileUsers');
 });
 
 
