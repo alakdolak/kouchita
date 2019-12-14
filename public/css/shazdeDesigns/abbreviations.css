@@ -4,6 +4,10 @@
     display: block;
 }
 
+.display-blockImp {
+    display: block !important;
+}
+
 .inline-block {
     display: inline-block;
 }
@@ -740,8 +744,8 @@
     max-height: 424px;
 }
 
-.min-height-186Imp {
-    min-height: 186px !important;
+.min-height-170Imp {
+    min-height: 170px !important;
 }
 
 /*line-height*/
@@ -790,6 +794,10 @@
 
 .border-bt-1-lightgrey {
     border-bottom: 1px solid #e5e5e5;
+}
+
+.border-bt-5-blueImp {
+    border-bottom: 5px solid #0076a3 !important;
 }
 
 .border-radius-100per {

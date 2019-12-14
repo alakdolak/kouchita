@@ -22,7 +22,6 @@
 <div class="col-xs-4 adsToggleQuestions2 display-none float-right">
     <center class="adsMainDiv">
         <div class="adsMainDivHeader">تبلیغات</div>
-        <div class="returnToMainPage" onclick="showSpecificQuestion()()">بازگشت</div>
         <img src="{{"../../../public/images/Chromite.jpg"}}" alt="">
     </center>
 </div>

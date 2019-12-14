@@ -53,7 +53,6 @@
     @parent
     <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/usersProfile.css')}}">
     <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/abbreviations.css')}}">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
     {{--vr--}}
 
@@ -67,7 +66,7 @@
 @stop
 
 @section('main')
-    <div class="userProfilePageTopHeader"></div>
+    <div class="userProfilePageCoverImg"></div>
     <center class="mainBodyUserProfile">
         <div class="mainDivContainerProfilePage">
             <div class="userPageBodyTopBar">
@@ -81,14 +80,14 @@
                 </div>
                 <div class="postsMainFiltrationBar">
                     <span class="otherFilterChoices">سایر موارد</span>
-                    <span>مقاله‌ها</span>
                     <span>امتیاز‌ها</span>
-                    <span>سؤال‌ها و پاسخ‌ها</span>
-                    <span>عکس و فیلم</span>
-                    <span>پست‌ها</span>
+                    <span class="showUsersArticlesLink" onclick="showUsersArticles()">مقاله‌ها</span>
+                    <span class="showUsersQAndAsLink" onclick="showUsersQAndAs()">سؤال‌ها و پاسخ‌ها</span>
+                    <span class="showUsersPhotosAndVideosLink" onclick="showUsersPhotosAndVideos()">عکس و فیلم</span>
+                    <span class="showUsersPostsLink border-bt-5-blueImp" onclick="showUsersPosts()">پست‌ها</span>
                 </div>
             </div>
-            <div class="userProfilePostsMainDiv col-xs-8">
+            <div class="userProfileActivitiesDetailsMainDiv col-xs-8">
                 <div class="userProfilePostsFiltrationContainer">
                     <div class="userProfilePostsFiltration">
                         <span>نمایش بر اساس</span>
@@ -219,11 +218,63 @@
         </div>
     </center>
 
+    <script src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
+
     <script>
         autosize(document.getElementsByClassName("inputBoxInputSearch"));
+        autosize(document.getElementsByClassName("inputBoxInputAnswer"));
+        autosize(document.getElementsByClassName("inputBoxInputComment"));
 
         function showAllItems(element) {
             $(element).parent().next().toggleClass('height-auto')
+        }
+
+        function showUsersPosts() {
+            $('.userProfilePostsMainDiv').addClass('display-block');
+            $('.userProfilePostsMainDiv').removeClass('display-none');
+            $('.userProfilePhotosAndVideos').addClass('display-none');
+            $('.userProfileQAndA').addClass('display-none');
+            $('.userProfileArticles').addClass('display-none');
+            $('.showUsersPostsLink').addClass('border-bt-5-blueImp');
+            $('.showUsersPhotosAndVideosLink').removeClass('border-bt-5-blueImp');
+            $('.showUsersQAndAsLink').removeClass('border-bt-5-blueImp');
+            $('.showUsersArticlesLink').removeClass('border-bt-5-blueImp');
+        }
+
+        function showUsersPhotosAndVideos() {
+            $('.userProfilePostsMainDiv').addClass('display-none');
+            $('.userProfilePhotosAndVideos').addClass('display-block');
+            $('.userProfilePhotosAndVideos').removeClass('display-none');
+            $('.userProfileQAndA').addClass('display-none');
+            $('.userProfileArticles').addClass('display-none');
+            $('.showUsersPostsLink').removeClass('border-bt-5-blueImp');
+            $('.showUsersPhotosAndVideosLink').addClass('border-bt-5-blueImp');
+            $('.showUsersQAndAsLink').removeClass('border-bt-5-blueImp');
+            $('.showUsersArticlesLink').removeClass('border-bt-5-blueImp');
+        }
+
+        function showUsersQAndAs() {
+            $('.userProfilePostsMainDiv').addClass('display-none');
+            $('.userProfilePhotosAndVideos').addClass('display-none');
+            $('.userProfileQAndA').addClass('display-block');
+            $('.userProfileQAndA').removeClass('display-none');
+            $('.userProfileArticles').addClass('display-none');
+            $('.showUsersPostsLink').removeClass('border-bt-5-blueImp');
+            $('.showUsersPhotosAndVideosLink').removeClass('border-bt-5-blueImp');
+            $('.showUsersQAndAsLink').addClass('border-bt-5-blueImp');
+            $('.showUsersArticlesLink').removeClass('border-bt-5-blueImp');
+        }
+
+        function showUsersArticles() {
+            $('.userProfilePostsMainDiv').addClass('display-none');
+            $('.userProfilePhotosAndVideos').addClass('display-none');
+            $('.userProfileQAndA').addClass('display-none');
+            $('.userProfileArticles').addClass('display-block');
+            $('.userProfileArticles').removeClass('display-none');
+            $('.showUsersPostsLink').removeClass('border-bt-5-blueImp');
+            $('.showUsersPhotosAndVideosLink').removeClass('border-bt-5-blueImp');
+            $('.showUsersQAndAsLink').removeClass('border-bt-5-blueImp');
+            $('.showUsersArticlesLink').addClass('border-bt-5-blueImp');
         }
     </script>
 @stop
