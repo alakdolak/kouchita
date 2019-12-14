@@ -9,10 +9,10 @@
         <span>نمایش همه</span>
     </div>
     <div class="photosAndVideosMainDiv">
-        <div class="sharedPhotosAndVideos"></div>
-        <div class="sharedPhotosAndVideos"></div>
-        <div class="sharedPhotosAndVideos"></div>
-        <div class="sharedPhotosAndVideos"></div>
-        <div class="sharedPhotosAndVideos"></div>
+        <div class="sharedPhotosAndVideos" data-toggle="modal" data-target=".showingPhotosModal"></div>
+        <div class="sharedPhotosAndVideos" data-toggle="modal" data-target=".showingPhotosModal"></div>
+        <div class="sharedPhotosAndVideos" data-toggle="modal" data-target=".showingPhotosModal"></div>
+        <div class="sharedPhotosAndVideos" data-toggle="modal" data-target=".showingPhotosModal"></div>
+        <div class="sharedPhotosAndVideos" data-toggle="modal" data-target=".showingPhotosModal"></div>
     </div>
 </div>

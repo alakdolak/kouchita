@@ -5,14 +5,16 @@
         </div>
     </div>
     <div class="usersArticlesMainDiv">
-        <div class="articleImgMainDiv">
+        <div class="articleImgMainDiv" data-toggle="modal" data-target=".showingPhotosModal">
             <img src="">
         </div>
         <div class="articleDetailsMainDiv">
             <div class="articleTagsMainDiv">
                 <div class="articleTags">بین‌الملل</div>
             </div>
-            <div class="articleTitleMainDiv">بلندترین معبد جهان در کشور پهناور و پرجمعیت هندوستان</div>
+            <div class="articleTitleMainDiv">
+                <a>بلندترین معبد جهان در کشور پهناور و پرجمعیت هندوستان</a>
+            </div>
             <div class="articleSummarizedContentMainDiv">
                 <span>
                     بلندترین معبد جهان، معبد chandrodaya در Vrindavan فقط یک معبد نیست، بلکه این مکان نقش مهمی در آینده کشور "هند" ایفا
@@ -36,14 +38,16 @@
         </div>
     </div>
     <div class="usersArticlesMainDiv">
-        <div class="articleImgMainDiv">
+        <div class="articleImgMainDiv" data-toggle="modal" data-target=".showingPhotosModal">
             <img src="">
         </div>
         <div class="articleDetailsMainDiv">
             <div class="articleTagsMainDiv">
                 <div class="articleTags">بین‌الملل</div>
             </div>
-            <div class="articleTitleMainDiv">تاج محل، ترکیبی از معماری هند، فارسی و اسلامی تقدیم شده به عشق</div>
+            <div class="articleTitleMainDiv">
+                <a>تاج محل، ترکیبی از معماری هند، فارسی و اسلامی تقدیم شده به عشق</a>
+            </div>
             <div class="articleSummarizedContentMainDiv">
                 <span>
                     تاج محل محل زیبایی که تاج محل در آن قرار دارد واقعاً ستودنی است. نمای زیبای سنگ مرمر سفید منحصر به فرد و بی همتا
@@ -67,14 +71,16 @@
         </div>
     </div>
     <div class="usersArticlesMainDiv">
-        <div class="articleImgMainDiv">
+        <div class="articleImgMainDiv" data-toggle="modal" data-target=".showingPhotosModal">
             <img src="">
         </div>
         <div class="articleDetailsMainDiv">
             <div class="articleTagsMainDiv">
                 <div class="articleTags">بین‌الملل</div>
             </div>
-            <div class="articleTitleMainDiv">مدائن صالح صخره‌ای سنگی و چندین کتیبه مهم تاریخی در عربستان صعودی</div>
+            <div class="articleTitleMainDiv">
+                <a>مدائن صالح صخره‌ای سنگی و چندین کتیبه مهم تاریخی در عربستان صعودی</a>
+            </div>
             <div class="articleSummarizedContentMainDiv">
                 <span>
                     مدائن صالح صخره‌ای سنگی و چندین کتیبه مهم تاریخی در عربستان سعودی است که از صخره‌ای سنگی و چندین کتیبه مهم تاریخی تشکیل شده است. در سفرمانا
@@ -98,14 +104,16 @@
         </div>
     </div>
     <div class="usersArticlesMainDiv">
-        <div class="articleImgMainDiv">
+        <div class="articleImgMainDiv" data-toggle="modal" data-target=".showingPhotosModal">
             <img src="">
         </div>
         <div class="articleDetailsMainDiv">
             <div class="articleTagsMainDiv">
                 <div class="articleTags">بین‌الملل</div>
             </div>
-            <div class="articleTitleMainDiv">دیوار چین، مجموعه‌ای باستانی از دیوارها و استحکامات با طول بیش از 13000 مایل</div>
+            <div class="articleTitleMainDiv">
+                <a>دیوار چین، مجموعه‌ای باستانی از دیوارها و استحکامات با طول بیش از 13000 مایل</a>
+            </div>
             <div class="articleSummarizedContentMainDiv">
                 <span>
                     حتماً می‌دانید دیوار چین یکی از شاهکارهای معماری بشر، دیوار چین است. دیوار چین در سال 1987 توسط سازمان یونسکو، جزو یکی از آثار باستانی

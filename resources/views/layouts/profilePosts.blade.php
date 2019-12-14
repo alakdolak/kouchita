@@ -7,6 +7,7 @@
         <span>نمایش جدولی</span>
     </div>
 
+
     <div class="col-xs-12 pd-0 float-right  postsMainDivInSpecificMode ">
         <div class="col-xs-6 pd-0 pd-rt-10Imp">
             <div class="col-xs-12 postMainDivShown float-right position-relative">

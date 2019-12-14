@@ -1,3 +1,7 @@
+body {
+    min-width: 996px;
+}
+
 .userProfilePageCoverImg {
     background-color: darkgrey;
     width: 100%;
@@ -37,6 +41,7 @@
     right: 0;
     top: -90px;
     padding: 5px 95px 5px 25px;
+    cursor: default;
 }
 
 .userProfileInfo > div:first-child {
@@ -233,6 +238,7 @@
     color: white;
     font-size: 24px;
     font-weight: 700;
+    cursor: default;
 }
 
 .inner {
@@ -297,6 +303,7 @@
     margin: 0;
     height: 90px;
     border: 1px solid black;
+    cursor: pointer;
 }
 
 .medalsDiv {
@@ -372,6 +379,11 @@
     margin-top: 10px;
     font-size: 12px;
     padding-top: 10px;
+    text-align: right;
+}
+
+.quantityOfLikes > span, .feedbackStatistic > span {
+    color: #0076a3;
 }
 
 .numberOfPhotosMainDiv {
@@ -462,6 +474,7 @@
 .photosCol > div {
     margin-top: 10px;
     border: 2px solid black;
+    cursor: pointer;
 }
 
 .photosCol img {
@@ -499,6 +512,7 @@
     height: 200px;
     margin-top: 5px;
     background-color: #888888;
+    cursor: pointer;
 }
 
 .sharedPhotosAndVideos:nth-child(even) {
@@ -976,6 +990,7 @@
     height: 180px;
     border: 1px solid black;
     margin: 5px 0;
+    cursor: pointer;
 }
 
 .articleImgMainDiv > img {
@@ -992,6 +1007,7 @@
 .articleTagsMainDiv {
     display: inline-block;
     width: 100%;
+    cursor: pointer;
 }
 
 .articleTags {
@@ -1011,6 +1027,12 @@
     padding: 10px 0;
 }
 
+.articleTitleMainDiv > a, .articleTitleMainDiv > a:hover {
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+
 .articleSummarizedContentMainDiv {
     text-align: justify;
     color: #666666;
@@ -1019,6 +1041,7 @@
     font-size: 12px;
     padding: 5px 0 10px;
     float: right;
+    cursor: default;
 }
 
 .articleSpecificationsMainDiv {
@@ -1031,6 +1054,7 @@
     float: right;
     direction: rtl;
     margin-left: 15px;
+    cursor: default;
 }
 
 .articleCommentsMainDiv {
@@ -1065,3 +1089,23 @@
     top: -3px;
     font-size: 15px;
 }
+
+/*responsive for tablets*/
+
+@media (max-width: 1188px) {
+
+    .userProfilePostsFiltrationContainer .userProfilePostsFiltration > span:first-child {
+        font-size: 14px;
+    }
+
+    .userProfilePostsFiltrationContainer .userProfilePostsFiltration > span {
+        margin: 0 10px;
+        font-size: 13px;
+    }
+
+    .userProfilePostsSearchContainer > span {
+        margin: 0 7px;
+        font-size: 13px;
+    }
+}
+

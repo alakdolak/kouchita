@@ -99,10 +99,14 @@
                         <span>بیشترین همراهان</span>
                     </div>
                 </div>
+
+                @include('layouts.modalPhotos')
+
                 @include('layouts.profilePosts')
                 @include('layouts.profilePhotosAndVideos')
                 @include('layouts.profileQuestions')
                 @include('layouts.profileArticles')
+
             </div>
             <div class="userProfileDetailsMainDiv col-xs-4">
                 <div class="userProfileLevelMainDiv rightColBoxes">
@@ -206,12 +210,12 @@
                         <div onclick="showAllItems(this)">مشاهده همه</div>
                     </div>
                     <div class="picturesMainBox">
-                        <div class="picturesDiv"></div>
-                        <div class="picturesDiv"></div>
-                        <div class="picturesDiv"></div>
-                        <div class="picturesDiv"></div>
-                        <div class="picturesDiv"></div>
-                        <div class="picturesDiv"></div>
+                        <div class="picturesDiv" data-toggle="modal" data-target=".showingPhotosModal"></div>
+                        <div class="picturesDiv" data-toggle="modal" data-target=".showingPhotosModal"></div>
+                        <div class="picturesDiv" data-toggle="modal" data-target=".showingPhotosModal"></div>
+                        <div class="picturesDiv" data-toggle="modal" data-target=".showingPhotosModal"></div>
+                        <div class="picturesDiv" data-toggle="modal" data-target=".showingPhotosModal"></div>
+                        <div class="picturesDiv" data-toggle="modal" data-target=".showingPhotosModal"></div>
                     </div>
                 </div>
             </div>
