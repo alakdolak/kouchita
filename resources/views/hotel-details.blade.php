@@ -131,7 +131,7 @@ if ($total == 0)
     <div class="ppr_rup ppr_priv_hr_atf_north_star_nostalgic position-relative">
 
 
-        @include('layouts.plMainBodyHeader')ace
+        @include('layouts.placeMainBodyHeader')
         <div class="atf_meta_and_photos_wrapper position-relative">
             <div class="greyBackground"></div>
             <div class="atf_meta_and_photos ui_container is-mobile easyClear position-relative">
