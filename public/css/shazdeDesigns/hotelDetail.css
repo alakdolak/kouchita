@@ -1621,6 +1621,10 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     display: none;
 }
 
+#photographerAlbum {
+    height: 100%;
+}
+
 #photographersLink {
     position: absolute;
     top: 5px;
@@ -1791,6 +1795,22 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     border: none;
 }
 
+.postMainDivHeader > button.close {
+    float: left;
+    margin: 8px 0 0 15px;
+    font-size: 30px;
+    color: white;
+    opacity: 1;
+}
+
+.postMainDivHeader > button.close:before {
+    display: none;
+}
+
+.postMainDivHeader > button.close {
+    margin: 0 0 0 5px !important;
+}
+
 .postMainDivFooter {
     text-align: center;
 }
@@ -1850,6 +1870,11 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     font-size: 13px;
     font-weight: 600;
     position: relative;
+    cursor: pointer;
+}
+
+.commentOptionsBoxes label {
+    margin: 0;
     cursor: pointer;
 }
 
@@ -2618,8 +2643,8 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     border-radius: 10px;
     text-align: center;
     float: right;
-    width: 20%;
-    margin: 10px;
+    width: 21%;
+    margin: 10px 2%;
     padding: 5px 0;
     font-size: 12px;
     cursor: pointer;
@@ -2714,7 +2739,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     width: 753px;
 }
 
-.postModalMainDiv > .modal-dialog > .modal-content , .postModalMainDiv > .modal-dialog > .modal-details-content {
+.postModalMainDiv > .modal-dialog .modal-content , .postModalMainDiv > .modal-dialog .modal-details-content {
     border-radius: 0;
     border: none;
     -webkit-box-shadow: none;
@@ -2936,11 +2961,18 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     font-size: 15px;
     font-weight: 700;
     padding-right: 15px;
+    margin-bottom: 10px;
 }
 
 .visitKindCommentModal {
     display: inline-block;
-    width: 70%;
+    width: 60%;
+}
+
+.visitKindCommentModal label {
+    float: right;
+    margin: 0 1%;
+    width: 15%;
 }
 
 .visitTimeCommentModal {
@@ -2952,11 +2984,10 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     background-color: #e5e5e5;
     border-radius: 10px;
     text-align: center;
-    float: right;
     width: 100%;
-    margin: 0 10px;
     padding: 5px 0;
     font-size: 12px;
+    display: inline-block;
     cursor: pointer;
 }
 .filterChoices:hover{
@@ -3579,7 +3610,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     font-size: 17px;
 }
 
-@media (min-width: 996px) {
+@media (min-width: 992px) {
     .mobile-mode, #share_pic_mobile {
         display: none;
     }
@@ -3587,7 +3618,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
 /*responsive for tablets*/
 
-@media (max-width:1188px) and (min-width: 996px) {
+@media (max-width:1188px) and (min-width: 992px) {
 
     /*bottomBarHeader*/
 
@@ -3694,7 +3725,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
 /*responsive for mobile*/
 
-@media (max-width: 996px) {
+@media (max-width: 992px) {
 
     /*bottomBarHeader*/
 

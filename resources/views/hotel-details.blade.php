@@ -153,13 +153,13 @@ if ($total == 0)
                             <input type="hidden" name="rateQuestion" id="rateQuestionInput">
 
                             <div class="modal-content">
-                                <div class="commentsMainDivHeader">
-                                    <button type="button" class="close" id="closeBtnCommentModal" data-dismiss="modal">&times;</button>
+                                <div class="postMainDivHeader">
+                                    <button type="button" class="close closeBtnPostModal" data-dismiss="modal" onclick="closeNewPostModal()">&times;</button>
                                     دیدگاه شما
                                 </div>
-                                <div id="commentInputMainDivModal">
-                                    <div class="inputBoxGeneralInfo inputBox" id="commentInputBoxModal">
-                                        <div id="profilePicForCommentModal" class="circleBase type2"></div>
+                                <div class="commentInputMainDivModal">
+                                    <div class="inputBoxGeneralInfo inputBox postInputBoxModal">
+                                        <div class="profilePicForPostModal circleBase type2"></div>
                                         @if(auth()->check())
                                             <textarea class="inputBoxInput inputBoxInputComment" name="text" type="text" placeholder="{{auth()->user()->first_name ? auth()->user()->first_name :auth()->user()->username }}، چه فکر یا احساسی داری.....؟"  onkeyup="textAreaAdjust(this)" style="overflow:hidden"></textarea>
                                         @else
@@ -192,7 +192,7 @@ if ($total == 0)
 
                                     <div class="addParticipantName">
                                         <span class="addParticipantSpan">با</span>
-                                        <div class="inputBoxGeneralInfo inputBox" id="addParticipantInputBoxModal">
+                                        <div class="inputBoxGeneralInfo inputBox addParticipantInputBoxPostModal">
                                             <textarea id="assignedSearch" class="inputBoxInput inputBoxInputComment" placeholder="چه کسی بودید؟ ایمیل یا نام کاربری را وارد کنید" onkeyup="searchUser(this.value)"></textarea>
 
                                             <div class="assignedResult" id="assignedResultReview"></div>
@@ -208,18 +208,18 @@ if ($total == 0)
                                     <div class="commentOptionsBoxes">
                                         <span class="tagFriendCommentIcon"></span>
                                         <span class="commentOptionsText">دوستانتان را tag کنید.</span>
-                                    </div>
-                                    <div class="commentOptionsBoxes">
+                                    </div><!--
+                                 --><div class="commentOptionsBoxes">
                                         <span class="add360VideoCommentIcon"></span>
                                         <span class="commentOptionsText">ویدیو 360 اضافه کنید.</span>
-                                    </div>
-                                    <div class="commentOptionsBoxes">
+                                    </div><!--
+                                 --><div class="commentOptionsBoxes">
                                         <label for="videoReviewInput">
                                             <span class="addVideoCommentIcon"></span>
                                             <span class="commentOptionsText">ویدیو اضافه کنید.</span>
                                         </label>
-                                    </div>
-                                        <input type="file" id="videoReviewInput" accept="video/*"  style="display: none" onchange="uploadReviewVideo(this, 0)">
+                                    </div><!--
+                                 --><input type="file" id="videoReviewInput" accept="video/*"  style="display: none" onchange="uploadReviewVideo(this, 0)">
                                     <div class="commentOptionsBoxes">
                                         <label for="picReviewInput0">
                                             <span class="addPhotoCommentIcon"></span>
@@ -231,8 +231,8 @@ if ($total == 0)
                                 @foreach($textQuestion as $item)
                                     <div id="questionDiv_{{$item->id}}" class="commentQuestionsForm">
                                         <span class="addOriginCity">{{$item->description}}</span>
-                                        <div class="inputBoxGeneralInfo inputBox" id="addOriginCityInputBoxModal">
-                                            <textarea id="question_{{$item->id}}" name="textAns[]" class="inputBoxInput inputBoxInputComment"></textarea>
+                                        <div class="inputBoxGeneralInfo inputBox addOriginCityInputBoxPostModal">
+                                            <textarea id="question_{{$item->id}}" name="textAns[]" class="inputBoxInput inputBoxInputComment" placeholder="شهر مبداء خود را وارد نمایید"></textarea>
                                             <input type="hidden" name="textId[]" value="{{$item->id}}">
                                         </div>
                                     </div>
@@ -277,7 +277,7 @@ if ($total == 0)
                                 </div>
 
 
-                                <button class="commentsMainDivFooter" type="submit">
+                                <button class="postMainDivFooter" type="submit">
                                     ارسال دیدگاه
                                 </button>
                             </div>
@@ -409,95 +409,7 @@ if ($total == 0)
                     </div>
                 </div>
 
-                <div class="modal fade showingPhotosModal" id="showingPhotographerPicsModal" role="dialog">
-                        <div class="modal-dialog" style="margin-bottom: 0px;">
-                            <div class="modal-content">
-                                <div id="showingPhotosMainDivHeader">
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <div class="showingPhotosTitle">نمایش عکس‌ها</div>
-                                </div>
-                                <div class="commentWriterDetailsShow">
-                                    <div class="circleBase type2 commentWriterPicShow">
-                                        <img id="photographerSlideUserPic" src="{{$photographerPics[0]['userPic']}}" class="koochitaCircleLogo">
-                                    </div>
-                                    <div class="commentWriterExperienceDetails">
-                                        <b id="photographerSlideUserName" class="userProfileName">{{$photographerPics[0]['name']}}</b>
-
-                                        <div id="photographerSlideInfos" style="display: {{$photographerPics[0]['showInfo']? 'block' : 'none'}}">
-                                            {{--<div class="display-inline-block">در--}}
-                                                {{--<span class="commentWriterExperiencePlace">هتل عباسی، شهر یزد، استان یزد</span>--}}
-                                            {{--</div>--}}
-                                            {{--<div>با--}}
-                                                {{--<span class="commentWriterExperienceParticipation">احتشام الدوله توفیقی</span>،--}}
-                                                {{--<span class="commentWriterExperienceParticipation">حمیدرضا عسگرزاده </span>و--}}
-                                                {{--<span class="commentWriterExperienceParticipation">علی اصر همتی</span>--}}
-                                            {{--</div>--}}
-                                            <div id="photographerSlideTimeInfo">
-                                                {{$photographerPics[0]['fromUpload']}}
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div id="photographerSlideFeedBackBtns" style="display: {{$photographerPics[0]['showInfo']? 'block' : 'none'}}">
-                                    </div>
-
-                                </div>
-                                <div class="clear-both"></div>
-                                <div class="col-xs-10 leftColPhotosModalMainDiv">
-                                    <div class="selectedPhotoShowingModal">
-                                        <img id="mainPhotographerSliderPic" src="{{URL::asset($photographerPics[0]['s'])}}" alt="{{$photographerPics[0]['alt']}}" style="width: 100%; height: 100%;">
-                                    </div>
-                                </div>
-                                <div class="col-xs-2 rightColPhotosModalMainDiv" >
-                                    @for($i = 0; $i < count($photographerPics); $i++)
-                                        <div class="rightColPhotosShowingModal" onclick="changePhotographerSlidePic({{$i}})">
-                                            <img src="{{$photographerPics[$i]['l']}}" alt="{{$photographerPics[$i]['alt']}}" style="width: 100%; height: 100%;">
-                                        </div>
-                                    @endfor
-                                </div>
-                                <div class="photosDescriptionShowingModal">
-                                    <div id="photographerDescription" style="display: {{$photographerPics[0]['showInfo']? 'block' : 'none'}}">
-                                        {{$photographerPics[0]['description']}}
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                <div class="modal fade showingPhotosModal" id="showingSitePicsModal" role="dialog">
-                    <div class="modal-dialog" style="margin-bottom: 0px;">
-                        <div class="modal-content">
-                            <div id="showingPhotosMainDivHeader">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <div class="showingPhotosTitle">نمایش عکس‌ها سایت</div>
-                            </div>
-                            <div class="commentWriterDetailsShow">
-                                <div class="circleBase type2 commentWriterPicShow">
-                                    <img src="{{$sitePics[0]['userPic']}}" class="koochitaCircleLogo">
-                                </div>
-                                <div class="commentWriterExperienceDetails">
-                                    <b class="userProfileName">{{$sitePics[0]['name']}}</b>
-                                </div>
-                            </div>
-                            <div class="clear-both"></div>
-                            <div class="col-xs-10 leftColPhotosModalMainDiv">
-                                <div class="selectedPhotoShowingModal">
-                                    <img id="mainSiteSliderPic" src="{{$sitePics[0]['s']}}" alt="{{$sitePics[0]['alt']}}" style="width: 100%; height: 100%;">
-                                </div>
-                            </div>
-                            <div class="col-xs-2 rightColPhotosModalMainDiv" >
-                                @for($i = 0; $i < count($sitePics); $i++)
-                                    <div class="rightColPhotosShowingModal" onclick="changeSiteSlidePic({{$i}})">
-                                        <img src="{{$sitePics[$i]['l']}}" alt="{{$sitePics[$i]['alt']}}" style="width: 100%; height: 100%;">
-                                    </div>
-                                @endfor
-                            </div>
-                            <div class="photosDescriptionShowingModal"></div>
-                        </div>
-                    </div>
-                </div>
-
+                @include('layouts.modalPhotos')
 
                 <div id="bestPrice" class="meta position-relative" style="@if(session('goDate') != null && session('backDate') != null) display: none @endif ">
                     <div id="targetHelp_9" class="targets  float-left">
@@ -789,15 +701,15 @@ if ($total == 0)
                                                                 <img class="eachPicOfSlider" src="{{$photographerPics[$i]['s']}}" alt="{{$photographerPics[$i]['alt']}}" style="width: 100%;">
 
                                                                 <div class="see_all_count_wrap" onclick="getPhotos(-1)">
-                                                                <span class="see_all_count">
-                                                                    <div class="circleBase type2" id="photographerIdPic" style="background-color: #4DC7BC;">
-                                                                        <img src="{{$photographerPics[$i]['userPic']}}" style="width: 100%; height: 100%; border-radius: 50%;">
-                                                                    </div>
-                                                                    <div class="display-inline-block mg-rt-10 mg-tp-2">
-                                                                        <span class="display-block font-size-12">عکس از</span>
-                                                                        <span class="display-block">{{$photographerPics[$i]['name']}}</span>
-                                                                    </div>
-                                                                </span>
+                                                                    <span class="see_all_count">
+                                                                        <div class="circleBase type2" id="photographerIdPic" style="background-color: #4DC7BC;">
+                                                                            <img src="{{$photographerPics[$i]['userPic']}}" style="width: 100%; height: 100%; border-radius: 50%;">
+                                                                        </div>
+                                                                        <div class="display-inline-block mg-rt-10 mg-tp-2">
+                                                                            <span class="display-block font-size-12">عکس از</span>
+                                                                            <span class="display-block">{{$photographerPics[$i]['name']}}</span>
+                                                                        </div>
+                                                                    </span>
                                                                 </div>
 
                                                             </div>
@@ -899,8 +811,8 @@ if ($total == 0)
                                 دیدگاه شما
                             </div>
                             <div id="commentInputMainDiv">
-                                <div class="inputBoxGeneralInfo inputBox" id="commentInputBox">
-                                    <div id="profilePicForComment" class="circleBase type2"></div>
+                                <div class="inputBoxGeneralInfo inputBox postInputBox" id="commentInputBox">
+                                    <div id="profilePicForComment" class="profilePicForPost circleBase type2"></div>
                                     @if(auth()->check())
                                         <textarea class="inputBoxInput inputBoxInputComment" type="text" placeholder="{{auth()->user()->first_name ? auth()->user()->first_name :auth()->user()->username }}، چه فکر یا احساسی داری.....؟" ></textarea>
                                     @else
@@ -913,20 +825,20 @@ if ($total == 0)
                                 <div class="commentOptionsBoxes">
                                     <span class="addPhotoCommentIcon"></span>
                                     <span class="commentOptionsText">عکس اضافه کنید.</span>
-                                </div>
-                                <div class="commentOptionsBoxes">
+                                </div><!--
+                             --><div class="commentOptionsBoxes">
                                     <span class="addVideoCommentIcon"></span>
                                     <span class="commentOptionsText">ویدیو اضافه کنید.</span>
-                                </div>
-                                <div class="commentOptionsBoxes">
+                                </div><!--
+                             --><div class="commentOptionsBoxes">
                                     <span class="add360VideoCommentIcon"></span>
                                     <span class="commentOptionsText">ویدیو 360 اضافه کنید.</span>
-                                </div>
-                                <div class="commentOptionsBoxes">
+                                </div><!--
+                             --><div class="commentOptionsBoxes">
                                     <span class="tagFriendCommentIcon"></span>
                                     <span class="commentOptionsText">دوستانتان را tag کنید.</span>
-                                </div>
-                                <div class="moreSettingPostManDiv commentOptionsBoxes">
+                                </div><!--
+                             --><div class="moreSettingPostManDiv commentOptionsBoxes">
                                     <span class="moreSettingPost"></span>
                                 </div>
                             </div>
