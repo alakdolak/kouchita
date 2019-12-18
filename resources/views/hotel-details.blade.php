@@ -1,4 +1,4 @@
-@extends('layouts.bodyPlace')
+@extends('layouts.commentFeedbackChoices')
 
 <?php
 $total = $rates[0] + $rates[1] + $rates[2] + $rates[3] + $rates[4];

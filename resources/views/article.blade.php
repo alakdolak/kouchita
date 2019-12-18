@@ -735,7 +735,34 @@ $kindPlaceId = 10; ?>
                     </h3>
                 </div>
             </div>
-            <div class="col-md-9 col-sm-12" style="height: 800px">
+            <div style="height: 800px">
+                <div class="quantityOfLikes">
+                    <span>31</span>
+                    نفر دوست داشتند،
+                    <span>31</span>
+                    نفر دوست نداشتند و
+                    <span>31</span>
+                    نفر نظر دادند.
+                </div>
+                <div class="commentFeedbackChoices" style="position: absolute; bottom: 0;">
+                    <div class="postsActionsChoices postLikeChoice col-xs-3">
+                        <span class="commentsLikeIconFeedback"></span>
+                        <span class="mg-rt-20 cursor-pointer">دوست داشتم</span>
+                    </div>
+                    <div class="postsActionsChoices postDislikeChoice col-xs-3">
+                        <span class="commentsDislikeIconFeedback"></span>
+                        <span class="mg-rt-20 cursor-pointer">دوست نداشتم</span>
+                    </div>
+                    <div class="postsActionsChoices postCommentChoice col-xs-3">
+                        <span class="showCommentsIconFeedback" onclick="showPostsComments(this)"></span>
+                        <span class="mg-rt-20 cursor-pointer" onclick="showPostsComments(this)">مشاهده نظرها</span>
+                    </div>
+                    <div class="postsActionsChoices postShareChoice col-xs-3">
+                        <span class="commentsShareIconFeedback"></span>
+                        <span class="mg-rt-20 cursor-pointer">اشتراک‌گذاری</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
