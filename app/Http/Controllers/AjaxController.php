@@ -15,6 +15,7 @@ use App\models\Place;
 use App\models\Report;
 use App\models\ReportsType;
 use App\models\Restaurant;
+use App\models\ReviewPic;
 use App\models\State;
 use App\User;
 use Illuminate\Support\Facades\Auth;
@@ -468,6 +469,125 @@ class AjaxController extends Controller {
 
             return;
         }
+    }
+
+    public function findUser(Request $request)
+    {
+        if(Auth::check()) {
+            if (isset($request->value)) {
+                $value = $request->value;
+                $userName = DB::select('SELECT id, username, email, first_name, last_name FROM users WHERE username LIKE "' . $value . '%"');
+                $userEmail = DB::select('SELECT id, username, email, first_name, last_name FROM users WHERE email LIKE "' . $value . '%" ');
+                if($userName == null && $userEmail == null)
+                    echo 'nok3';
+                else
+                    echo json_encode([$userEmail, $userName]);
+            }
+            else
+                echo 'nok2';
+        }
+        else
+            echo 'nok1';
+
+        return;
+    }
+
+    public function reviewUploadPic(Request $request)
+    {
+        $location = __DIR__ . '/../../../../assets/limbo/';
+
+        if(!file_exists($location))
+            mkdir($location);
+
+        if(isset($_FILES['pic']) && isset($request->code)){
+
+            $valid_ext = array('image/jpeg','image/png');
+            if(in_array($_FILES['pic']['type'], $valid_ext)){
+                $filename = time() . '_' . pathinfo($_FILES['pic']['name'], PATHINFO_FILENAME) . '.jpg';
+                $destinationMainPic = $location . '/' . $filename;
+                compressImage($_FILES['pic']['tmp_name'], $destinationMainPic, 60);
+
+                $newPicReview = new ReviewPic();
+                $newPicReview->pic = $filename;
+                $newPicReview->code = $request->code;
+                $newPicReview->save();
+
+                echo json_encode(['ok', $filename]);
+            }
+            else{
+                echo 'nok2';
+            }
+        }
+        else{
+            echo 'nok3';
+        }
+        return;
+    }
+
+    public function reviewUploadVideo(Request $request)
+    {
+        $location = __DIR__ . '/../../../../assets/limbo/';
+
+        if(!file_exists($location))
+            mkdir($location);
+
+        if(isset($_FILES['video']) && isset($request->code)){
+            $filename = time() . '_' . $_FILES['video']['name'];
+            $destinationMainPic = $location . '/' . $filename;
+            move_uploaded_file($_FILES['video']['tmp_name'], $destinationMainPic);
+
+            $newPicReview = new ReviewPic();
+            $newPicReview->pic = $filename;
+            $newPicReview->code = $request->code;
+            if(isset($request->isVideo) && $request->isVideo == 1)
+                $newPicReview->isVideo = 1;
+            if(isset($request->is360) && $request->is360 == 1)
+                $newPicReview->is360 = 1;
+            $newPicReview->save();
+
+            echo json_encode(['ok', $filename]);
+        }
+        else{
+            echo 'nok3';
+        }
+        return;
+    }
+
+    public function deleteReviewPic(Request $request){
+        $code = $request->code;
+        $name = $request->name;
+
+        $pics = ReviewPic::where('code', $code)->where('pic', $name)->first();
+
+        if($pics != null){
+            $location = __DIR__ . '/../../../../assets/limbo/' . $pics->pic;
+            if(file_exists($location))
+                unlink($location);
+            $pics->delete();
+            echo 'ok';
+        }
+        else
+            echo 'nok';
+
+        return;
+    }
+
+    public function doEditReviewPic(Request $request)
+    {
+        if(isset($request->code) && isset($request->name)){
+            $name = $request->name;
+            $code = $request->code;
+
+            $location = __DIR__ . '/../../../../assets/limbo/' . $name;
+            if(file_exists($location))
+                unlink($location);
+
+            move_uploaded_file($_FILES['pic']['tmp_name'], $location);
+
+            echo 'ok';
+        }
+
+        return;
     }
 
 }

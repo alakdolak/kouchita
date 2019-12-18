@@ -8,10 +8,13 @@ use App\models\Cities;
 use App\models\ConfigModel;
 use App\models\LogModel;
 use App\models\Place;
+use App\models\PlacePic;
 use App\models\PlaceStyle;
 use App\models\SectionPage;
 use App\models\State;
 use App\models\Tag;
+use App\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
@@ -87,22 +90,6 @@ class AmakenController extends Controller {
             $thumbnail = URL::asset('_images/nopic/blank.jpg');
         }
 
-        if (!empty($place->pic_2)) {
-            $sitePhotos++;
-        }
-
-        if (!empty($place->pic_3)) {
-            $sitePhotos++;
-        }
-
-        if (!empty($place->pic_4)) {
-            $sitePhotos++;
-        }
-
-        if (!empty($place->pic_5)) {
-            $sitePhotos++;
-        }
-
         $aksActivityId = Activity::whereName('عکس')->first()->id;
 
         $userPhotos = 0;
@@ -128,10 +115,20 @@ class AmakenController extends Controller {
             'kindPlaceId = ' . $kindPlaceId . ' and activityId = ' . Activity::whereName('نظر')->first()->id .
             ' and logId = log.id and status = 1');
 
+        $allState = State::all();
+
+        $pics = getAllPlacePicsByKind($kindPlaceId, $placeId);
+        $sitePics = $pics[0];
+        $sitePicsJSON = $pics[1];
+        $photographerPics = $pics[2];
+        $photographerPicsJSON = $pics[3];
+
         return view('hotel-details', array('place' => $place, 'save' => $save, 'city' => $city, 'thumbnail' => $thumbnail,
             'tags' => Tag::whereKindPlaceId($kindPlaceId)->get(), 'state' => $state, 'avgRate' => $rates[1],
+            'photographerPics' => $photographerPics, 'photographerPicsJSON' => $photographerPicsJSON,
+            'sitePics' => $sitePics, 'sitePicsJSON' => $sitePicsJSON, 'allState' => $allState,
             'kindPlaceId' => $kindPlaceId, 'mode' => $mode, 'rates' => $rates[0], 'config' => ConfigModel::first(),
-            'photos' => $photos, 'userPhotos' => $userPhotos, 'sitePhotos' => $sitePhotos, 'logPhoto' => $logPhoto,
+            'photos' => $photos, 'userPhotos' => $userPhotos, 'logPhoto' => $logPhoto,
             'hasLogin' => $hasLogin, 'bookMark' => $bookMark, 'err' => $err, 'srcCities' => $srcCities,
             'placeStyles' => PlaceStyle::whereKindPlaceId($kindPlaceId)->get(), 'placeMode' => 'amaken',
             'sections' => SectionPage::wherePage(getValueInfo('hotel-detail'))->get()));

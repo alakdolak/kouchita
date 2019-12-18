@@ -4,6 +4,10 @@
     display: block;
 }
 
+.display-blockImp {
+    display: block !important;
+}
+
 .inline-block {
     display: inline-block;
 }
@@ -516,6 +520,10 @@
     margin: 100px;
 }
 
+.mg-0-1per {
+    margin: 0 1%;
+}
+
 .mg-0-9 {
     margin: 0 9px;
 }
@@ -598,7 +606,11 @@
     width: 18%
 }
 
-. width-21per {
+.width-20per {
+    width: 20%;
+}
+
+.width-21per {
     width: 21%;
 }
 
@@ -740,8 +752,8 @@
     max-height: 424px;
 }
 
-.min-height-186Imp {
-    min-height: 186px !important;
+.min-height-170Imp {
+    min-height: 170px !important;
 }
 
 /*line-height*/
@@ -752,6 +764,10 @@
 
 .line-height-203 {
     line-height: 2.3;
+}
+
+.line-height-205 {
+    line-height: 2.5;
 }
 
 .line-height-3 {
@@ -790,6 +806,10 @@
 
 .border-bt-1-lightgrey {
     border-bottom: 1px solid #e5e5e5;
+}
+
+.border-bt-5-blueImp {
+    border-bottom: 5px solid #0076a3 !important;
 }
 
 .border-radius-100per {

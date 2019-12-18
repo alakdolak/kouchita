@@ -176,34 +176,37 @@
             </h1>
 
             <div class="rating_and_popularity">
-                        <span class="header_rating">
-                           <div class="rs rating" rel="v:rating">
-                               <div class="prw_rup prw_common_bubble_rating overallBubbleRating float-left">
-                                    @if($avgRate == 5)
-                                       <span class="ui_bubble_rating bubble_50 font-size-16"
-                                             property="ratingValue" content="5" alt='5 of 5 bubbles'></span>
-                                   @elseif($avgRate == 4)
-                                       <span class="ui_bubble_rating bubble_40 font-size-16"
-                                             property="ratingValue" content="4" alt='4 of 5 bubbles'></span>
-                                   @elseif($avgRate == 3)
-                                       <span class="ui_bubble_rating bubble_30 font-size-16"
-                                             property="ratingValue" content="3" alt='3 of 5 bubbles'></span>
-                                   @elseif($avgRate == 2)
-                                       <span class="ui_bubble_rating bubble_20 font-size-16"
-                                             property="ratingValue" content="2" alt='2 of 5 bubbles'></span>
-                                   @elseif($avgRate == 1)
-                                       <span class="ui_bubble_rating bubble_10 font-size-16"
-                                             property="ratingValue" content="1" alt='1 of 5 bubbles'></span>
-                                   @endif
-                               </div>
-                               <a class="more taLnk" id="moreTaLnkReviewHeader" href="#REVIEWS">
-                                   <span property="v:count" id="commentCount"></span> نقد
-                               </a>
-                           </div>
-                        </span>
+                <span class="header_rating">
+                   <div class="rs rating" rel="v:rating">
+                       <div class="prw_rup prw_common_bubble_rating overallBubbleRating float-left">
+                            @if($avgRate == 5)
+                               <span class="ui_bubble_rating bubble_50 font-size-16"
+                                     property="ratingValue" content="5" alt='5 of 5 bubbles'></span>
+                           @elseif($avgRate == 4)
+                               <span class="ui_bubble_rating bubble_40 font-size-16"
+                                     property="ratingValue" content="4" alt='4 of 5 bubbles'></span>
+                           @elseif($avgRate == 3)
+                               <span class="ui_bubble_rating bubble_30 font-size-16"
+                                     property="ratingValue" content="3" alt='3 of 5 bubbles'></span>
+                           @elseif($avgRate == 2)
+                               <span class="ui_bubble_rating bubble_20 font-size-16"
+                                     property="ratingValue" content="2" alt='2 of 5 bubbles'></span>
+                           @elseif($avgRate == 1)
+                               <span class="ui_bubble_rating bubble_10 font-size-16"
+                                     property="ratingValue" content="1" alt='1 of 5 bubbles'></span>
+                           @endif
+                       </div>
+                       <a class="more taLnk" id="moreTaLnkReviewHeader" href="#REVIEWS">
+                           <span property="v:count" id="commentCount"></span> نقد
+                       </a>
+                   </div>
+                </span>
                 <span class="header_popularity popIndexValidation" id="scoreSpanHeader">
-                            {{--<a> {{$total}} امتیاز</a>--}}
-                        </span>
+                    <a>
+{{--                                {{$total}}--}}
+                        امتیاز
+                    </a>
+                </span>
                 <div class="header heading" id="helpBtnMainDiv">
                     <a class="link" onclick="startHelp()">
                         <div class="circleBase type2 helpBtnIconMainDiv"></div>
@@ -221,33 +224,110 @@
                 {{--</div>--}}
 
                 <span class="ui_button_overlay position-relative float-left">
-                            <div id="targetHelp_7" class="targets position-relative float-right">
-                                <span onclick="saveToTrip()" id="addToFavouriteTripsMainDiv" class="ui_button saves ui_icon {{($save) ? "red-heart-fill" : "red-heart"}} ">
-                                    <div class="circleBase type2 addToFavouriteTripsIcon"></div>
-                                    <div class="addToFavouriteTripsLabel">
-                                        افزودن به لیست سفر
-                                    </div>
-                                </span>
-                                <div id="helpSpan_7" class="helpSpans row hidden">
+                    <div id="targetHelp_7" class="targets position-relative float-right">
+                        <span onclick="saveToTrip()" id="addToFavouriteTripsMainDiv" class="ui_button saves ui_icon {{($save) ? "red-heart-fill" : "red-heart"}} ">
+                            <div class="circleBase type2 addToFavouriteTripsIcon"></div>
+                            <div class="addToFavouriteTripsLabel">
+                                افزودن به لیست سفر
+                            </div>
+                        </span>
+                        <div id="helpSpan_7" class="helpSpans row hidden">
+                            <span class="introjs-arrow"></span>
+                            <p class="col-xs-12">
+                                در هر مکانی که هستید با زدن این دکمه می توانید، آن مکان را به لیست سفرهای خود اضافه کنید. به سادگی همراه با دوستان تان سفر های خود را برنامه ریزی کنید. به سادگی همین دکمه...
+                            </p>
+                            <button data-val="7" class="btn btn-success nextBtnsHelp"
+                                    id="nextBtnHelp_7">بعدی</button>
+                            <button data-val="7" class="btn btn-primary backBtnsHelp"
+                                    id="backBtnHelp_7">قبلی</button>
+                            <button class="btn btn-danger exitBtnHelp">خروج</button>
+                        </div>
+                    </div>
+{{--                            @if($hasLogin)--}}
+                        <div id="targetHelp_8" class="targets float-left col-xs-6 pd-0 mobile-mode">
+                                    <span onclick="bookMark()"
+                                          class="ui_button casino save-location-7306673 ui_icon saveAsBookmarkMainDiv {{($bookMark) ? "castle" : "red-heart"}} ">
+                                        <div class="saveAsBookmarkIcon"></div>
+                                        <div class="saveAsBookmarkLabel">
+                                            ذخیره این صفحه
+                                        </div>
+                                    </span>
+                                <div id="helpSpan_8" class="helpSpans hidden row">
                                     <span class="introjs-arrow"></span>
-                                    <p class="col-xs-12">
-                                        در هر مکانی که هستید با زدن این دکمه می توانید، آن مکان را به لیست سفرهای خود اضافه کنید. به سادگی همراه با دوستان تان سفر های خود را برنامه ریزی کنید. به سادگی همین دکمه...
-                                    </p>
-                                    <button data-val="7" class="btn btn-success nextBtnsHelp"
-                                            id="nextBtnHelp_7">بعدی</button>
-                                    <button data-val="7" class="btn btn-primary backBtnsHelp"
-                                            id="backBtnHelp_7">قبلی</button>
+                                    <p>شاید بعدا بخواهید دوباره به همین مکان باز گردید. پس آن را نشان کنید تا از منوی بالا هر وقت که خواستید دوباره به آن باز گردید.</p>
+                                    <button data-val="8" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_8">بعدی</button>
+                                    <button data-val="8" class="btn btn-primary backBtnsHelp" id="backBtnHelp_8">قبلی</button>
                                     <button class="btn btn-danger exitBtnHelp">خروج</button>
                                 </div>
                             </div>
-                            <span class="btnoverlay loading">
-                                <span class="bubbles small">
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                </span>
+{{--                            @endif--}}
+{{--                            @if($hasLogin)--}}
+
+                        <div id="share_box_mobile" class="display-none">
+
+                            <a target="_blank" class="link mg-tp-5" {{($config->facebookNoFollow) ? 'rel="nofollow"' : ''}}
+                            href="https://www.facebook.com/sharer/sharer.php?u={{Request::url()}}">
+                                <img src="{{"../../../public/images/shareBoxImg/facebook.png"}}" class="display-inline-block float-right">
+                                <div>اشتراک صفحه در فیسبوک</div>
+                            </a>
+                            <a target="_blank" class="link mg-tp-5" {{($config->twitterNoFollow) ? 'rel="nofollow"' : ''}}
+                            href="https://twitter.com/home?status={{Request::url()}}">
+                                <img src="{{"../../../public/images/shareBoxImg/twitter.png"}}" class="display-inline-block float-right">
+                                <div>اشتراک صفحه در توییتر</div>
+                            </a>
+                            <a target="_blank" class="link mg-tp-5" {{($config->whatsAppFollow) ? 'rel="nofollow"' : ''}}
+                                    {{--    href="https://whatsApp.com/share?url={{s mg-tp-5tr_replace('%20', '', Request::url())}}"--}}
+                            >
+                                <img src="{{"../../../public/images/shareBoxImg/whatsApp.png"}}" class="display-inline-block float-right">
+                                <div>اشتراک صفحه واتس اپ</div>
+                            </a>
+                            <a target="_blank" class="link mg-tp-5" {{($config->telegramNoFollow) ? 'rel="nofollow"' : ''}}
+                            href="https://telegram.me/share/url?url={{Request::url()}}">
+                                <img src="{{"../../../public/images/shareBoxImg/telegram.png"}}" class="display-inline-block float-right">
+                                <div>اشتراک صفحه تلگرام</div>
+                            </a>
+                            <a target="_blank" class="link mg-tp-5" {{($config->instagramFollow) ? 'rel="nofollow"' : ''}}
+                                    {{--    href="https://instagram.com/share?url={{ str_replace('%20', '', Request::url())}}"--}}
+                            >
+                                <img src="{{"../../../public/images/shareBoxImg/instagram.png"}}" class="display-inline-block float-right">
+                                <div>اشتراک صفحه اینستاگرام</div>
+                            </a>
+                            <a target="_blank" class="link mg-tp-5" {{($config->pinterestFollow) ? 'rel="nofollow"' : ''}}
+                                    {{--    href="https://pinterest.com/home?status={{Request::url()}}"--}}
+                            >
+                                <img src="{{"../../../public/images/shareBoxImg/pinterest.png"}}" class="display-inline-block float-right">
+                                <div>اشتراک صفحه پین ترست</div>
+                            </a>
+                            <div class="position-relative inputBoxSharePage mg-tp-5">
+                                <input class="full-width inputBoxInputSharePage" placeholder="www.koochita.com/abhoes">
+                                <img src="{{"../../../public/images/tourCreation/copy.png"}}" id="copyImgInputShareLink">
+                            </div>
+                        </div>
+                        <div id="share_pic_mobile" class="targets float-left col-xs-6 pd-0">
+                            <span class="ui_button casino save-location-7306673 ui_icon sharePageMainDiv">
+                                <div class="sharePageIcon"></div>
+                                <div class="sharePageLabel">
+                                    اشتراک‌گذاری صفحه
+                                </div>
                             </span>
+                            <div id="helpSpan_8" class="helpSpans hidden row">
+                                <span class="introjs-arrow"></span>
+                                <p>شاید بعدا بخواهید دوباره به همین مکان باز گردید. پس آن را نشان کنید تا از منوی بالا هر وقت که خواستید دوباره به آن باز گردید.</p>
+                                <button data-val="8" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_8">بعدی</button>
+                                <button data-val="8" class="btn btn-primary backBtnsHelp" id="backBtnHelp_8">قبلی</button>
+                                <button class="btn btn-danger exitBtnHelp">خروج</button>
+                            </div>
+                        </div>
+
+{{--                            @endif--}}
+                    <span class="btnoverlay loading">
+                        <span class="bubbles small">
+                            <span></span>
+                            <span></span>
+                            <span></span>
                         </span>
+                    </span>
+                </span>
                 <div class="prw_rup prw_common_atf_header_bl headerBL">
                     <div class="blRow">
                         <div class="blEntry blEn address  clickable colCnt3" onclick="showExtendedMap()">

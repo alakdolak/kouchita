@@ -14,12 +14,17 @@ use App\models\LogModel;
 use App\models\Majara;
 use App\models\Opinion;
 use App\models\OpOnActivity;
+use App\models\PhotographersLog;
+use App\models\PhotographersPic;
 use App\models\PicItem;
 use App\models\Place;
 use App\models\PlaceStyle;
 use App\models\Question;
+use App\models\QuestionUserAns;
 use App\models\Report;
 use App\models\Restaurant;
+use App\models\ReviewPic;
+use App\models\ReviewUserAssigned;
 use App\models\SectionPage;
 use App\models\SpecialAdvice;
 use App\models\State;
@@ -27,12 +32,15 @@ use App\models\Survey;
 use App\models\Tag;
 use App\models\User;
 use App\models\UserOpinion;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Http\Request;
+
 
 class PlaceController extends Controller {
 
@@ -2623,85 +2631,179 @@ class PlaceController extends Controller {
 
     }
 
-    public function addPhotoToPlace($placeId, $kindPlaceId) {
+    public function addPhotoToPlace(Request $request)
+    {
+        if( isset($_FILES["l-1"]) && $_FILES["l-1"]['error'] == 0 &&
+            isset($_FILES["t-1"]) && $_FILES["t-1"]['error'] == 0 &&
+            isset($_FILES["s-1"]) && $_FILES["s-1"]['error'] == 0 &&
+            isset($_FILES["f-1"]) && $_FILES["f-1"]['error'] == 0 &&
+            isset($_FILES["mainPic"]) && $_FILES["mainPic"]['error'] == 0 &&
+            isset($request->name) && isset($request->alt) && isset($request->kindPlaceId) && isset($request->placeId)) {
 
-        $uId = Auth::user()->id;
-        $err = "";
+            $valid_ext = array('image/jpeg','image/png');
+            if(in_array($_FILES['mainPic']['type'], $valid_ext) && in_array($_FILES['s-1']['type'], $valid_ext) &&
+                in_array($_FILES['f-1']['type'], $valid_ext) && in_array($_FILES['l-1']['type'], $valid_ext) &&
+                in_array($_FILES['t-1']['type'], $valid_ext)){
 
-        if (isset($_POST["url"]) && isset($_POST["url2"]) && isset($_POST["fileName"])
-            && isset($_POST["filter"]) && isset($_POST["desc"])) {
+                $id = $request->placeId;
+                $kindPlaceId = $request->kindPlaceId;
 
-            switch ($kindPlaceId) {
-                case 4:
-                default:
-                    $targetFile = __DIR__ . "/../../../../assets/userPhoto/hotels/";
-                    break;
-                case 1:
-                    $targetFile = __DIR__ . "/../../../../assets/userPhoto/amaken/";
-                    break;
-                case 3:
-                    $targetFile = __DIR__ . "/../../../../assets/userPhoto/restaurant/";
-                    break;
-                case 6:
-                    $targetFile = __DIR__ . "/../../../../assets/userPhoto/majara/";
-                    break;
-                case 8:
-                    $targetFile = __DIR__ . "/../../../../assets/userPhoto/adab/";
-                    break;
-            }
-
-            $fileName = makeValidInput($_POST["fileName"]);
-
-            if (file_exists($targetFile . 's-' . $fileName) || file_exists($targetFile . 'l-' . $fileName)) {
-                $count = 2;
-                while (file_exists($targetFile . 's-' . $count . $fileName) || file_exists($targetFile . 'l-' . $count . $fileName))
-                    $count++;
-                $fileName = $count . $fileName;
-            }
-
-            copy(makeValidInput($_POST["url"]), $targetFile . 'l-' . $fileName);
-            copy(makeValidInput($_POST["url2"]), $targetFile . 's-' . $fileName);
-
-            $desc = makeValidInput($_POST["desc"]);
-            if ($desc == -1)
-                $desc = "";
-
-            $log = new LogModel();
-            $log->visitorId = $uId;
-            $log->time = getToday()["time"];
-            $log->placeId = $placeId;
-            $log->kindPlaceId = $kindPlaceId;
-            $log->text = $fileName;
-            $log->subject = $desc;
-            $log->date = date('Y-m-d');
-            $log->activityId = Activity::whereName('عکس')->first()->id;
-            $log->pic = makeValidInput($_POST["filter"]);
-            try {
-                $log->save();
-                switch ($kindPlaceId) {
-                    case 4:
-                        echo \GuzzleHttp\json_encode(['status' => 'ok', 'url' => route('hotelDetails', ['placeId' => $placeId, 'placeName' => Hotel::whereId($placeId)->name, 'mode' => 'addPhotoSuccessfully'])]);
-                        break;
+                switch ($kindPlaceId){
                     case 1:
-                        echo \GuzzleHttp\json_encode(['status' => 'ok', 'url' => route('amakenDetails', ['placeId' => $placeId, 'placeName' => Amaken::whereId($placeId)->name, 'mode' => 'addPhotoSuccessfully'])]);
+                        $place = Amaken::find($id);
+                        $kindPlaceName = 'amaken';
                         break;
                     case 3:
-                        echo \GuzzleHttp\json_encode(['status' => 'ok', 'url' => route('restaurantDetails', ['placeId' => $placeId, 'placeName' => Restaurant::whereId($placeId)->name, 'mode' => 'addPhotoSuccessfully'])]);
+                        $place = Restaurant::find($id);
+                        $kindPlaceName = 'restaurant';
+                        break;
+                    case 4:
+                        $place = Hotel::find($id);
+                        $kindPlaceName = 'hotels';
                         break;
                     case 6:
-                        echo \GuzzleHttp\json_encode(['status' => 'ok', 'url' => route('majaraDetails', ['placeId' => $placeId, 'placeName' => Majara::whereId($placeId)->name, 'mode' => 'addPhotoSuccessfully'])]);
+                        $place = Majara::find($id);
+                        $kindPlaceName = 'majara';
                         break;
-                    case 8:
-                        echo \GuzzleHttp\json_encode(['status' => 'ok', 'url' => route('adabDetails', ['placeId' => $placeId, 'placeName' => Adab::whereId($placeId)->name, 'mode' => 'addPhotoSuccessfully'])]);
+                    case 10:
+                        $place = SogatSanaie::find($id);
+                        $kindPlaceName = 'sogatsanaie';
+                        break;
+                    case 11:
+                        $place = MahaliFood::find($id);
+                        $kindPlaceName = 'mahalifood';
                         break;
                 }
-                return;
-            } catch (Exception $e) {
-            };
-        }
 
-        echo \GuzzleHttp\json_encode(['status' => 'nok', 'err' => $err]);
+                if($place != null) {
+
+                    $location = __DIR__ . '/../../../../assets/userPhoto/' . $kindPlaceName . '/' . $place->file;
+
+                    if(!file_exists($location))
+                    {
+                        mkdir($location);
+                    }
+                    $filename = time() . '_' . pathinfo($_FILES['mainPic']['name'], PATHINFO_FILENAME) . '.jpg';
+
+                    $destinationT = $location . '/t-' . $filename;
+                    $destinationF = $location . '/f-' . $filename;
+                    $destinationS = $location . '/s-' . $filename;
+                    $destinationL = $location . '/l-' . $filename;
+                    $destinationMainPic = $location . '/' . $filename;
+
+                    compressImage($_FILES['f-1']['tmp_name'], $destinationF, 60);
+                    compressImage($_FILES['t-1']['tmp_name'], $destinationT, 60);
+                    compressImage($_FILES['s-1']['tmp_name'], $destinationS, 60);
+                    compressImage($_FILES['l-1']['tmp_name'], $destinationL, 60);
+                    compressImage($_FILES['mainPic']['tmp_name'], $destinationMainPic, 60);
+
+                    $photographer = new PhotographersPic();
+                    $photographer->userId = Auth::user()->id;
+                    $photographer->name = $request->name;
+                    $photographer->pic = $filename;
+                    $photographer->kindPlaceId = $request->kindPlaceId;
+                    $photographer->placeId = $request->placeId;
+                    $photographer->alt = $request->alt;
+                    $photographer->description = $request->description;
+                    $photographer->like = 0;
+                    $photographer->dislike = 0;
+                    $photographer->isSitePic = 0;
+                    $photographer->isPostPic = 0;
+                    $photographer->status = 0;
+                    $photographer->save();
+
+                    echo 'ok';
+                }
+                else
+                    echo 'nok3';
+            }
+            else
+                echo 'nok2';
+        }
+        else
+            echo 'nok1';
+        return ;
     }
+
+//    public function addPhotoToPlace($placeId, $kindPlaceId) {
+//
+//        $uId = Auth::user()->id;
+//        $err = "";
+//
+//        if (isset($_POST["url"]) && isset($_POST["url2"]) && isset($_POST["fileName"])
+//            && isset($_POST["filter"]) && isset($_POST["desc"])) {
+//
+//            switch ($kindPlaceId) {
+//                case 4:
+//                default:
+//                    $targetFile = __DIR__ . "/../../../../assets/userPhoto/hotels/";
+//                    break;
+//                case 1:
+//                    $targetFile = __DIR__ . "/../../../../assets/userPhoto/amaken/";
+//                    break;
+//                case 3:
+//                    $targetFile = __DIR__ . "/../../../../assets/userPhoto/restaurant/";
+//                    break;
+//                case 6:
+//                    $targetFile = __DIR__ . "/../../../../assets/userPhoto/majara/";
+//                    break;
+//                case 8:
+//                    $targetFile = __DIR__ . "/../../../../assets/userPhoto/adab/";
+//                    break;
+//            }
+//
+//            $fileName = makeValidInput($_POST["fileName"]);
+//
+//            if (file_exists($targetFile . 's-' . $fileName) || file_exists($targetFile . 'l-' . $fileName)) {
+//                $count = 2;
+//                while (file_exists($targetFile . 's-' . $count . $fileName) || file_exists($targetFile . 'l-' . $count . $fileName))
+//                    $count++;
+//                $fileName = $count . $fileName;
+//            }
+//
+//            copy(makeValidInput($_POST["url"]), $targetFile . 'l-' . $fileName);
+//            copy(makeValidInput($_POST["url2"]), $targetFile . 's-' . $fileName);
+//
+//            $desc = makeValidInput($_POST["desc"]);
+//            if ($desc == -1)
+//                $desc = "";
+//
+//            $log = new LogModel();
+//            $log->visitorId = $uId;
+//            $log->time = getToday()["time"];
+//            $log->placeId = $placeId;
+//            $log->kindPlaceId = $kindPlaceId;
+//            $log->text = $fileName;
+//            $log->subject = $desc;
+//            $log->date = date('Y-m-d');
+//            $log->activityId = Activity::whereName('عکس')->first()->id;
+//            $log->pic = makeValidInput($_POST["filter"]);
+//            try {
+//                $log->save();
+//                switch ($kindPlaceId) {
+//                    case 4:
+//                        echo \GuzzleHttp\json_encode(['status' => 'ok', 'url' => route('hotelDetails', ['placeId' => $placeId, 'placeName' => Hotel::whereId($placeId)->name, 'mode' => 'addPhotoSuccessfully'])]);
+//                        break;
+//                    case 1:
+//                        echo \GuzzleHttp\json_encode(['status' => 'ok', 'url' => route('amakenDetails', ['placeId' => $placeId, 'placeName' => Amaken::whereId($placeId)->name, 'mode' => 'addPhotoSuccessfully'])]);
+//                        break;
+//                    case 3:
+//                        echo \GuzzleHttp\json_encode(['status' => 'ok', 'url' => route('restaurantDetails', ['placeId' => $placeId, 'placeName' => Restaurant::whereId($placeId)->name, 'mode' => 'addPhotoSuccessfully'])]);
+//                        break;
+//                    case 6:
+//                        echo \GuzzleHttp\json_encode(['status' => 'ok', 'url' => route('majaraDetails', ['placeId' => $placeId, 'placeName' => Majara::whereId($placeId)->name, 'mode' => 'addPhotoSuccessfully'])]);
+//                        break;
+//                    case 8:
+//                        echo \GuzzleHttp\json_encode(['status' => 'ok', 'url' => route('adabDetails', ['placeId' => $placeId, 'placeName' => Adab::whereId($placeId)->name, 'mode' => 'addPhotoSuccessfully'])]);
+//                        break;
+//                }
+//                return;
+//            } catch (Exception $e) {
+//            };
+//        }
+//
+//        echo \GuzzleHttp\json_encode(['status' => 'nok', 'err' => $err]);
+//    }
 
     public function addPhotoToComment($placeId, $kindPlaceId)
     {
@@ -3273,5 +3375,173 @@ class PlaceController extends Controller {
     {
         $videoSrc = '_images/movie.mp4';
         return view('video3602', array('videoSrc' => $videoSrc));
+    }
+
+    public function storeReview(Request $request)
+    {
+
+        $activity = Activity::where('name', 'نظر')->first();
+
+        if(isset($request->placeId) && isset($request->kindPlaceId) && isset($request->code)){
+
+            $id = $request->placeId;
+            $kindPlaceId = $request->kindPlaceId;
+            switch ($kindPlaceId){
+                case 1:
+                    $place = Amaken::find($id);
+                    $kindPlaceName = 'amaken';
+                    break;
+                case 3:
+                    $place = Restaurant::find($id);
+                    $kindPlaceName = 'restaurant';
+                    break;
+                case 4:
+                    $place = Hotel::find($id);
+                    $kindPlaceName = 'hotels';
+                    break;
+                case 6:
+                    $place = Majara::find($id);
+                    $kindPlaceName = 'majara';
+                    break;
+                case 10:
+                    $place = SogatSanaie::find($id);
+                    $kindPlaceName = 'sogatsanaie';
+                    break;
+                case 11:
+                    $place = MahaliFood::find($id);
+                    $kindPlaceName = 'mahalifood';
+                    break;
+            }
+
+            $log = new LogModel();
+            $log->placeId = $request->placeId;
+            $log->kindPlaceId = $kindPlaceId;
+            $log->visitorId = \auth()->user()->id;
+            $log->date = Carbon::now()->format('Y-m-d');
+            $log->time = getToday()['time'];
+            $log->activityId = $activity->id;
+            $log->text = $request->text;
+            $log->save();
+
+            $reviewPic = ReviewPic::where('code', $request->code)->get();
+            \DB::select('UPDATE `reviewpics` SET `logId`= ' . $log->id . ' WHERE code ="' . $request->code . '";');
+
+            $location = __DIR__ . '/../../../../assets/userPhoto/' . $kindPlaceName;
+            if(!file_exists($location))
+                mkdir($location);
+            $location .= '/' . $place->file;
+            if(!file_exists($location))
+                mkdir($location);
+
+            $limboLocation = __DIR__ . '/../../../../assets/limbo/';
+            foreach ($reviewPic as $item){
+                $file = $limboLocation . $item->pic;
+                $dest = $location . '/' .  $item->pic;
+                rename( $file , $dest);
+            }
+
+            $assignedUser = json_decode($request->assignedUser);
+            foreach ($assignedUser as $item){
+                $newAssigned = new ReviewUserAssigned();
+                $newAssigned->logId = $log->id;
+
+                $user = User::where('username', $item)->orWhere('email', $item)->first();
+                if($user != null)
+                    $newAssigned->userId = $user->id;
+                else
+                    $newAssigned->email = $item;
+
+                $newAssigned->save();
+            }
+
+            $textQuestion = $request->textId;
+            $textAns = $request->textAns;
+            for($i = 0; $i < count($textAns); $i++){
+                if($textAns[$i] != null && $textAns[$i] != '' && $textQuestion[$i] != null){
+                    $newAns = new QuestionUserAns();
+                    $newAns->logId = $log->id;
+                    $newAns->questionId = $textQuestion[$i];
+                    $newAns->ans = $textAns[$i];
+                    $newAns->save();
+                }
+            }
+
+            if($request->multiQuestion != null && $request->multiAns != null) {
+                $multiQuestion = json_decode($request->multiQuestion);
+                $multiAns = json_decode($request->multiAns);
+
+                for($i = 0; $i < count($multiAns); $i++){
+                    if($multiAns[$i] != null && $multiAns[$i] != '' && $multiQuestion[$i] != null){
+                        $newAns = new QuestionUserAns();
+                        $newAns->logId = $log->id;
+                        $newAns->questionId = $multiQuestion[$i];
+                        $newAns->ans = $multiAns[$i];
+                        $newAns->save();
+                    }
+                }
+            }
+
+            if($request->rateQuestion != null && $request->rateAns != null) {
+                $rateQuestion = json_decode($request->rateQuestion);
+                $rateAns = json_decode($request->rateAns);
+
+                for($i = 0; $i < count($rateAns); $i++){
+                    if($rateAns[$i] != null && $rateAns[$i] != '' && $rateQuestion[$i] != null){
+                        $newAns = new QuestionUserAns();
+                        $newAns->logId = $log->id;
+                        $newAns->questionId = $rateQuestion[$i];
+                        $newAns->ans = $rateAns[$i];
+                        $newAns->save();
+                    }
+                }
+            }
+        }
+        return \redirect()->back();
+    }
+
+    public function likePhotographer(Request $request)
+    {
+        if(Auth::check())
+            $user = Auth::user();
+        else {
+            echo 'nok1';
+            return;
+        }
+
+        if(isset($request->id) && isset($request->like)){
+            $photo = PhotographersPic::find($request->id);
+            if($photo != null){
+                $userStatus = PhotographersLog::where('picId', $photo->id)->where('userId', $user->id)->first();
+
+                if($userStatus == null){
+                    $log = new PhotographersLog();
+
+                    if($request->like == 1) {
+                        $log->like = 1;
+                        $photo->like++;
+                    }
+                    else {
+                        $log->like = -1;
+                        $photo->dislike++;
+                    }
+
+                    $log->userId = $user->id;
+                    $log->picId = $photo->id;
+                    $log->save();
+
+                    $photo->save();
+
+                    echo 'ok';
+                }
+                else
+                    echo 'nok2';
+            }
+            else
+                echo 'nok3';
+        }
+        else
+            echo 'nok4';
+        return;
+
     }
 }
