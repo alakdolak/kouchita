@@ -27,6 +27,11 @@
     margin-left: 10px;
 }
 
+#photographerSlideUserPic {
+    width: 100%;
+    height: 100%;
+}
+
 .modal-content .postMainDivHeader , .modal-content .showingPhotosTitle {
     text-align: right;
 }
@@ -141,15 +146,13 @@
     border-radius: 0;
 }
 
-.showingPhotosMainDivHeader > button.close:before , .postMainDivHeader > button.close:before {
+#showingPhotosMainDivHeader > button.close:before,
+#showingSitePicsModal > button.close:before {
     display: none;
 }
 
-.postMainDivHeader > button.close {
-    margin: 0 0 0 5px !important;
-}
-
-.showingPhotosMainDivHeader > button.close , .postMainDivHeader > button.close {
+#showingPhotosMainDivHeader > button.close,
+#showingSitePicsModal > button.close {
     float: left;
     margin: 8px 0 0 15px;
     font-size: 30px;
