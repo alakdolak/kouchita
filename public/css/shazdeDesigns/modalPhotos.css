@@ -1,0 +1,165 @@
+.showingPhotosTitle {
+    background-color: #0076a3;
+    color: white;
+    font-weight: 700;
+    padding: 10px;
+    font-size: 15px;
+}
+
+.showingPhotosModal .commentWriterDetailsShow {
+    padding: 10px 20px;
+    margin: 0 10px;
+    width: 98%;
+    border-bottom: 2px solid #e5e5e5;
+}
+
+.commentWriterDetailsShow , .answersWriterDetailsShow {
+    display: inline-block;
+    width: 100%;
+}
+
+.commentWriterPicShow , .answersWriterPicShow {
+    width: 55px;
+    height: 55px;
+    background-color: #E5E5E5;
+    display: inline-block;
+    float: right;
+    margin-left: 10px;
+}
+
+.modal-content .postMainDivHeader , .modal-content .showingPhotosTitle {
+    text-align: right;
+}
+
+.photosFeedBackBtn {
+    float: left;
+    display: inline-block;
+    width: 24%;
+    margin-top: 15px;
+}
+
+.showingPhotosModal .commentWriterExperienceDetails , .answersWriterExperienceDetails {
+    display: inline-block;
+    float: right;
+}
+
+.photosModalLikeBox , .photosModalDislikeBox {
+    text-align: center;
+    float: right;
+    padding-right: 25px;
+    cursor: pointer;
+}
+
+.likeBoxIcon::after {
+    content: '\E1F9';
+    font-family: Shazde_Regular2 !important;
+    font-size: 20px;
+    position: absolute;
+    top: -7px;
+}
+
+.likeBoxIconClicked::after {
+    content: '\E057';
+    font-family: Shazde_Regular2 !important;
+    font-size: 20px;
+    position: absolute;
+    top: -7px;
+}
+
+.photosModalLikeBox:hover {
+    color: red;
+}
+
+.dislikeBoxIcon::after {
+    content: '\E1F8';
+    font-family: Shazde_Regular2 !important;
+    font-size: 20px;
+    position: absolute;
+    top: -4px;
+    right: 27px;
+}
+
+.dislikeBoxIconClicked::after {
+    content: '\E058';
+    font-family: Shazde_Regular2 !important;
+    font-size: 20px;
+    position: absolute;
+    top: -4px;
+    right: 7px;
+}
+
+.photosModalDislikeBox:hover {
+    color: darkred;
+}
+
+.showingPhotosModal .modal-dialog {
+    width: 1000px;
+}
+
+.feedbackStatistic {
+    text-align: center;
+    direction: rtl;
+}
+
+.rightColPhotosModalMainDiv {
+    display: inline-block;
+    margin: 5px 0;
+    padding: 0 10px;
+    border-left: 2px solid #e5e5e5;
+}
+
+.rightColPhotosShowingModal {
+    height: 130px;
+    margin-bottom: 5px;
+    display: inline-block;
+    width: 100%;
+    background-color: black;
+}
+
+.leftColPhotosModalMainDiv {
+    padding: 70px 70px 0;
+}
+
+.selectedPhotoShowingModal {
+    height: 486px;
+    width: 100%;
+    background-color: black;
+}
+
+.photosDescriptionShowingModal {
+    display: inline-block;
+    margin: 0 10px;
+    width: 98%;
+    border-top: 2px solid #e5e5e5;
+    padding: 10px 0 20px;
+    color: #666666;
+    text-align: right;
+    direction: rtl;
+}
+
+#showingPhotosModal .modal-content {
+    border-radius: 0;
+}
+
+.showingPhotosMainDivHeader > button.close:before , .postMainDivHeader > button.close:before {
+    display: none;
+}
+
+.postMainDivHeader > button.close {
+    margin: 0 0 0 5px !important;
+}
+
+.showingPhotosMainDivHeader > button.close , .postMainDivHeader > button.close {
+    float: left;
+    margin: 8px 0 0 15px;
+    font-size: 30px;
+    color: white;
+    opacity: 1;
+}
+
+@media (max-width:1188px) {
+
+    .showingPhotosModal .modal-dialog {
+        width: 970px;
+    }
+}

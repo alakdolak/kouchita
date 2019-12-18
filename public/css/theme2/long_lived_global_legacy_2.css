@@ -888,7 +888,7 @@ body.has-modal-open {
 .ui_close_x:before {
     font-size: 28px;
     line-height: 36px;
-    color: #4dc7bc;
+    color: #93321b;
     content: "\00d7";
 }
 .ui_close_x:hover {

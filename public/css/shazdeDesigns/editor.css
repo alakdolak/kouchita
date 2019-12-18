@@ -196,7 +196,7 @@
     margin-left: -430px;
 }
 
-#photoUploadHeader {
+#photoUploadHeader , .photoUploadHeader {
    color: white;
 }
 

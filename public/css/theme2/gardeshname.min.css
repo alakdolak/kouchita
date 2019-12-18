@@ -1351,9 +1351,9 @@ th {
     content: "î‰‘"
 }
 
-.glyphicon-triangle-bottom:before {
-    content: "î‰’"
-}
+/*.glyphicon-triangle-bottom:before {*/
+    /*content: "î‰’"*/
+/*}*/
 
 .glyphicon-triangle-top:before {
     content: "î‰“"
@@ -11248,16 +11248,16 @@ label {
     font-weight: 400!important
 }
 
-input,
-select,
-textarea {
-    background-color: #fff;
-    border: 1px solid #e1e1e1;
-    border-right-width: 3px;
-    padding: 10px;
-    -moz-transition-duration: .5s;
-    transition-duration: .5s
-}
+/*input,*/
+/*select,*/
+/*textarea {*/
+    /*background-color: #fff;*/
+    /*border: 1px solid #e1e1e1;*/
+    /*border-right-width: 3px;*/
+    /*padding: 10px;*/
+    /*-moz-transition-duration: .5s;*/
+    /*transition-duration: .5s*/
+/*}*/
 
 .btn,
 .form-control {
@@ -12478,7 +12478,7 @@ input[type=submit]:hover {
 }
 
 .content-2col .im-entry-thumb {
-    min-height: 250px;
+    min-height: 160px;
     position: relative
 }
 
@@ -14379,7 +14379,7 @@ input[type=submit]:hover {
 .widget-head {
     position: relative;
     height: 20px;
-    margin: 0 0 20px
+    margin: 10px 0 20px;
 }
 
 .widget-title {
@@ -14391,7 +14391,7 @@ input[type=submit]:hover {
     font-size: 15px;
     padding: 0 15px;
     position: absolute;
-    top: calc(50% - 11px);
+    top: calc(50% - 10px);
     right: 30px;
     margin: 0;
     z-index: 11
@@ -14643,8 +14643,8 @@ input[type=submit]:hover {
 .widget_impv_display_widget .im-widget-tabs {
     background-color: #fff;
     position: absolute;
-    top: 3px;
-    left: 5px;
+    top: 10px;
+    left: 25px;
     z-index: 12
 }
 

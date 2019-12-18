@@ -517,7 +517,7 @@
                 <div class="col-xs-2"></div>
                 <div class="col-xs-8">
                     <div class="col-xs-5">
-                        <div id="addToFilterCityBtn" class="inner" onclick="goTo()"><span>برو به</span><span>&nbsp;</span><span id="searchKeyCity"></span></div>
+                        <div id="addToFilterCityBtn" class="inner" onclick="goTo()"><span>مشاهده نتایج شهر اصفهان</span><span>&nbsp;</span><span id="searchKeyCity"></span></div>
                     </div>
                     <div class="col-xs-7">
                         <div class="boxOfCityNameProSearch">
@@ -535,7 +535,7 @@
                 <div style="clear: both;"></div>
 
                 <div class="col-xs-2"></div>
-                <div class="col-xs-8" id="dividerBoxCenterProSearch"></div>
+                <div class="col-xs-8" id="dividerUpBoxProSearch"></div>
                 <div class="col-xs-2"></div>
 
                 <div style="clear: both;"></div>
@@ -545,7 +545,7 @@
                     <div class="col-xs-12" style="margin-top: 40px; display: flex; align-items: flex-end">
                         <div class="col-xs-5">
                             <div class="boxOfCityNameProSearch">
-                                <div id="textOfWhere">به کجا</div>
+                                <div id="textOfWhere2">به کجا</div>
                                 <div class="where_with_highlight" id="enterCityNameProSearch">
                                     <input onkeyup="searchInPlaces()" id="GEO_SCOPED_SEARCH_INPUT2" class="text geoScopeInput" value="" placeholder="نام شهر را وارد کنید" autocomplete="off" type="text">
                                 </div>
@@ -610,13 +610,14 @@
                                 <div>صنایع</div>
                             </div>
                         </div>
+                        <div id="dividerCenterBoxProSearch"></div>
                     </div>
-                    <div class="col-xs-12" id="filterDiv">
-                        <div id="filters" class="position-relative"></div>
-                    </div>
-                    <div class="col-xs-12">
-                        <div id="resultPlace" class="data_holder"></div>
-                    </div>
+                    {{--<div class="col-xs-12" id="filterDiv">--}}
+                        {{--<div id="filters" class="position-relative"></div>--}}
+                    {{--</div>--}}
+                    {{--<div class="col-xs-12">--}}
+                        {{--<div id="resultPlace" class="data_holder"></div>--}}
+                    {{--</div>--}}
                 </div>
                 <div class="col-xs-2"></div>
 
@@ -630,29 +631,28 @@
                     {{--<div class="col-xs-2"></div>--}}
                 {{--</div>--}}
 
-                <div class="col-xs-12">
-                    <div class="col-xs-12">
+                <div class="col-xs-2"></div>
+                <div class="col-xs-8">
+                    <div class="col-xs-12 boxOfmainDivCompareProSearch">
                         @for($i = 1; $i < 5; $i++)
                             <div id="mainDivCompareProSearch">
                                 <div>
                                     <span id="removeDiv_{{$i}}" onclick="removeFromCompareList('{{$i}}')" class="hidden glyphicon glyphicon-remove"></span>
                                     <div id="compare_{{$i}}_text" class="hidden center"></div>
                                     <div id="compare_{{$i}}_pic" class="hidden center"></div>
-                                    <div id="compare_{{$i}}_plus_div">
-                                        <span class="glyphicon glyphicon-plus"></span>
-                                    </div>
+                                    <div id="compare_{{$i}}_plus_div">منتظر انتخاب</div>
                                 </div>
                             </div>
                         @endfor
-                        <div id="mainDivCompareProSearchBtn">
-                            <button id="compare" onclick="compare()" class="btn btn-primary hidden">مقایسه کن</button>
-                        </div>
+                    </div>
+                    <div class="col-xs-12" id="mainDivCompareProSearchBtn">
+                        <button id="compare" onclick="compare()" class="btn btn-primary">شروع مقایسه</button>
                     </div>
                 </div>
+                <div class="col-xs-2"></div>
             </div>
 
-            <div id="myCloseBtn" class="hidden" onclick="closeInFireFox()" draggable="true" ondragend="dropMenu(event)" ondrop="dropMenu(event)" ondrag="dragging(event)">
-            </div>
+            <div id="myCloseBtn" class="hidden" onclick="closeInFireFox()" draggable="true" ondragend="dropMenu(event)" ondrop="dropMenu(event)" ondrag="dragging(event)"></div>
 
         </div>
     </div>
