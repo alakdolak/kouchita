@@ -49,12 +49,6 @@ body {
     background: #ccc;
 }
 
-.progress-bar {
-    height: 8px;
-    background: #4caf50;
-    width: 0;
-}
-
 .is-create-trip {
     color: #00AF87 !important;
     background-blend-mode: overlay;
@@ -1538,11 +1532,27 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     background-color: white;
 }
 
-.addToFavouriteTripsIcon::before {
-    content: '\e012';
-    color: #ff0000;
+/*.addToFavouriteTripsIcon::before {*/
+    /*!*content: '\e011';*!*/
+    /*color: #ff0000;*/
+    /*float: right;*/
+    /*font-family: Shazde_Regular2 !important;*/
+    /*font-size: 20px;*/
+    /*margin-top: 3px;*/
+/*}*/
+.red-heart::before{
+    content: '\e011' !important;
+    color: #ff0000 !important;
     float: right;
-    font-family: shazdemosafer-tour !important;
+    font-family: Shazde_Regular2 !important;
+    font-size: 20px;
+    margin-top: 3px;
+}
+.red-heart-fill::before{
+    content: '\e012' !important;
+    color: #ff0000 !important;
+    float: right;
+    font-family: Shazde_Regular2 !important;
     font-size: 20px;
     margin-top: 3px;
 }
@@ -1573,7 +1583,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
 .saveAsBookmarkIcon::before , .sharePageIcon::before {
     content: "\e0dd";
-    font-family: shazdemosafer-tour !important;
+    font-family: Shazde_Regular2 !important;
     float: right;
 }
 
@@ -1593,11 +1603,13 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     position: absolute;
     top: 5px;
     left: 5px;
+    cursor: pointer;
     color: white;
     background-color: rgba(0,0,139,0.6);
     /*opacity: 60%;*/
     border-radius: 10px;
     padding: 5px;
+    z-index: 9;
 }
 
 #helpBtnMainDiv {
@@ -1617,7 +1629,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
 #helpBtnMainDiv > a.link > div::before {
     content: '\e054';
-    font-family: shazdemosafer-tour !important;
+    font-family: Shazde_Regular2 !important;
     color: #0076a3;
     font-size: 32px;
     position: absolute;
@@ -1727,7 +1739,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
 #searchIcon::before {
     content: '\E056';
-    font-family: shazdemosafer-tour !important;
+    font-family: Shazde_Regular2 !important;
     color: #4DC7BC;
     position: absolute;
     top: -5px;
@@ -1749,6 +1761,8 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     font-weight: 700;
     padding: 10px;
     font-size: 15px;
+    width: 100%;
+    border: none;
 }
 
 .commentsMainDivFooter {
@@ -1829,7 +1843,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
 .addPhotoCommentIcon::before {
     content: '\E0B1';
-    font-family: shazdemosafer-tour !important;
+    font-family: Shazde_Regular2 !important;
     font-size: 30px;
     font-weight: 500;
 }
@@ -1842,7 +1856,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
 .addVideoCommentIcon::before {
     content: '\E0B2';
-    font-family: shazdemosafer-tour !important;
+    font-family: Shazde_Regular2 !important;
     font-size: 30px;
     font-weight: 500;
 }
@@ -1855,7 +1869,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
 .add360VideoCommentIcon::before {
     content: '\E0AE';
-    font-family: shazdemosafer-tour !important;
+    font-family: Shazde_Regular2 !important;
     font-size: 30px;
     font-weight: 500;
 }
@@ -1867,8 +1881,8 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 }
 
 .tagFriendCommentIcon::before {
-    content: '\E087';
-    font-family: shazdemosafer-tour !important;
+    content: '\E0105';
+    font-family: Shazde_Regular2 !important;
     font-size: 25px;
     font-weight: 500;
 }
@@ -1971,7 +1985,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     direction: rtl;
 }
 
-#showingPhotosModal .commentWriterDetailsShow {
+.showingPhotosModal .commentWriterDetailsShow {
     padding: 10px 20px;
     margin: 0 10px;
     width: 98%;
@@ -2114,7 +2128,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
 .commentsLikeIconFeedback::before {
     content: '\e057';
-    font-family: shazdemosafer-tour !important;
+    font-family: Shazde_Regular2 !important;
     color: red;
     font-size: 25px;
     position: absolute;
@@ -2124,7 +2138,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
 .commentsDislikeIconFeedback::before {
     content: '\e058';
-    font-family: shazdemosafer-tour !important;
+    font-family: Shazde_Regular2 !important;
     color: darkred;
     font-size: 25px;
     position: absolute;
@@ -2134,7 +2148,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
 .showCommentsIconFeedback::before {
     content: '\e06C';
-    font-family: shazdemosafer-tour !important;
+    font-family: Shazde_Regular2 !important;
     color: #0076a3;
     font-size: 20px;
     position: absolute;
@@ -2144,7 +2158,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
 .commentsShareIconFeedback::before {
     content: '\e099';
-    font-family: shazdemosafer-tour !important;
+    font-family: Shazde_Regular2 !important;
     transform: rotateY(180deg);
     font-size: 20px;
     position: absolute;
@@ -2206,7 +2220,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
 .likeActionBtn::before {
     content: '\e057';
-    font-family: shazdemosafer-tour !important;
+    font-family: Shazde_Regular2 !important;
     font-size: 30px;
     position: absolute;
     top: -12px;
@@ -2215,7 +2229,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
 .dislikeActionBtn::before {
     content: '\e058';
-    font-family: shazdemosafer-tour !important;
+    font-family: Shazde_Regular2 !important;
     font-size: 30px;
     position: absolute;
     top: -8px;
@@ -2239,7 +2253,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
 .likeStatisticIcon::before {
     content: '\e057';
-    font-family: shazdemosafer-tour !important;
+    font-family: Shazde_Regular2 !important;
     font-size: 25px;
     float: right;
     position: absolute;
@@ -2249,7 +2263,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
 .dislikeStatisticIcon::before {
     content: '\e058';
-    font-family: shazdemosafer-tour !important;
+    font-family: Shazde_Regular2 !important;
     font-size: 25px;
     float: right;
     position: absolute;
@@ -2259,7 +2273,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
 .numberOfCommentsIcon::before {
     content: '\e06C';
-    font-family: shazdemosafer-tour !important;
+    font-family: Shazde_Regular2 !important;
     font-size: 20px;
     float: right;
     position: absolute;
@@ -2351,6 +2365,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     margin: 10px;
     padding: 5px 0;
     font-size: 12px;
+    cursor: pointer;
 }
 
 .photoTypePostsFilter .filterChoices {
@@ -2478,10 +2493,10 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
 .commentPhotosDiv , .commentVideosDiv {
     /*border: 1px solid black;*/
-    background-color: black;
+    /*background-color: black;*/
     display: inline-block;
     float: right;
-    height: 100px;
+    height: 120px;
     width: 100px;
     margin-left: 5px;
     position: relative;
@@ -2489,7 +2504,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
 .deleteUploadPhotoComment::before {
     content: '\E02C';
-    font-family: shazdemosafer-tour !important;
+    font-family: Shazde_Regular2 !important;
     color: white;
     font-size: 20px;
 }
@@ -2502,11 +2517,12 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     top: -3px;
     left: 0;
     z-index: 10;
+    cursor: pointer;
 }
 
 .editUploadPhotoComment::before {
     content: '\E00F';
-    font-family: shazdemosafer-tour !important;
+    font-family: Shazde_Regular2 !important;
     color: white;
     font-size: 20px;
 }
@@ -2516,8 +2532,10 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     height: 25px;
     width: 20px;
     position: absolute;
-    bottom: 0;
+    bottom: 25px;
     z-index: 10;
+    right: 0px;
+    cursor: pointer;
 }
 
 .videosLengthDiv {
@@ -2572,7 +2590,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     position: absolute;
     top: 3px;
     left: 0;
-    width: 100%;
+    /*width: 100%;*/
     padding: 0 5px;
 }
 
@@ -2587,10 +2605,19 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     width: auto;
     margin-right: 5px;
 }
+.assignedResult{
+    position: absolute;
+    width: 100%;
+    top: 35px;
+    right: 0px;
+    z-index: 9;
+    font-size: 20px;
+    background-color: #d0d0d0;
+}
 
 .removeParticipantBtn::before {
     content: '\E02C';
-    font-family: shazdemosafer-tour !important;
+    font-family: Shazde_Regular2 !important;
     position: absolute;
     background-color: #c7c7c7;
     left: 10px;
@@ -2653,10 +2680,17 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     border-radius: 10px;
     text-align: center;
     float: right;
-    width: 17%;
+    width: 100%;
     margin: 0 10px;
     padding: 5px 0;
     font-size: 12px;
+    cursor: pointer;
+}
+.filterChoices:hover{
+    background-color: #989898;
+}
+.filterChoose{
+    background-color: #7b7b7b !important;
 }
 
 .visitKindCommentModalHeader , .visitTimeCommentModalHeader{
@@ -2700,7 +2734,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     margin-top: 15px;
 }
 
-#showingPhotosModal .commentWriterExperienceDetails {
+.showingPhotosModal .commentWriterExperienceDetails {
     display: inline-block;
     float: right;
 }
@@ -2708,24 +2742,26 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 .likeBox {
     text-align: center;
     float: right;
+    cursor: pointer;
 }
 
 .likeBox::after {
     content: '\e057';
-    font-family: shazdemosafer-tour !important;
+    font-family: Shazde_Regular2 !important;
 }
 
 .dislikeBox {
     text-align: center;
     float: right;
+    cursor: pointer;
 }
 
 .dislikeBox::after {
     content: '\e058';
-    font-family: shazdemosafer-tour !important;
+    font-family: Shazde_Regular2 !important;
 }
 
-#showingPhotosModal .modal-dialog {
+.showingPhotosModal .modal-dialog {
     width: 1000px;
 }
 
@@ -2739,6 +2775,8 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     margin: 5px 0;
     padding: 0 10px;
     border-left: 2px solid #e5e5e5;
+    height: 67vh;
+    overflow-y: auto;
 }
 
 .rightColPhotosShowingModal {
@@ -2750,11 +2788,11 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 }
 
 .leftColPhotosModalMainDiv {
-    padding: 70px 70px 0;
+    padding: 20px 70px 0;
 }
 
 .selectedPhotoShowingModal {
-    height: 486px;
+    height: 62vh;
     width: 100%;
     background-color: black;
 }
@@ -2764,13 +2802,13 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     margin: 0 10px;
     width: 98%;
     border-top: 2px solid #e5e5e5;
-    padding: 10px 0 20px;
+    padding: 10px 0 10px;
     color: #666666;
     text-align: right;
     direction: rtl;
 }
 
-#showingPhotosModal .modal-content {
+.showingPhotosModal .modal-content {
     border-radius: 0;
 }
 
@@ -2839,6 +2877,30 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     margin-left: 10px;
 }
 
+.editSection .abandon{
+    float: left;
+}
+
+.editSection .abandonBtn {
+    background-color: darkred !important;
+    border: none;
+    padding: 4px 20px;
+    margin-left: 10px;
+    position: absolute;
+}
+.backDark{
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    z-index: 99999999;
+    background-color: #00000085;
+    justify-content: center;
+    align-items: center;
+}
+
 .ui_star_rating::before {
     display: none;
 }
@@ -2849,24 +2911,66 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
 .starRatingGreen::before {
     content: '\E00B';
-    font-family: shazdemosafer-tour !important;
+    cursor: pointer;
+    font-family: Shazde_Regular2 !important;
     color: #4DC7BC;
 }
 
 .starRating::before {
     content: '\E00B';
-    font-family: shazdemosafer-tour !important;
+    cursor: pointer;
+    font-family: Shazde_Regular2 !important;
     color: white;
 }
 
 .starRatingGold::before {
     content: '\E00B';
-    font-family: shazdemosafer-tour !important;
+    cursor: pointer;
+    font-family: Shazde_Regular2 !important;
     color: #fcc156;
 }
 
 .starRatingGrey::before {
     content: '\E00B';
-    font-family: shazdemosafer-tour !important;
+    cursor: pointer;
+    font-family: Shazde_Regular2 !important;
     color: #e5e5e5;
+}
+
+#photographerAlbum{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.koochitaCircleLogo{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+
+
+.progress-bar {
+    height: 20px;
+    background: #4caf50;
+    width: 0;
+}
+.projects-st-content .progress{
+    height: 5px;
+    margin-bottom: 5px;
+}
+.projects-st-content.project-rating-cl .progress-bar{
+    background-color: #f8ac59;
+}
+.projects-st-content.project-rating-cl2 .progress-bar{
+    background-color: #03a9f4;
+}
+
+.videoTimeDuration{
+    position: absolute;
+    bottom: 24px;
+    color: white;
+    left: 10px;
+    font-size: 15px;
 }

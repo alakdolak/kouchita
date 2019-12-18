@@ -6,7 +6,10 @@ use App\models\Level;
 use App\models\LogModel;
 use App\models\Medal;
 use App\models\Place;
+use App\models\PlacePic;
+use App\models\ReviewPic;
 use App\models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -134,6 +137,16 @@ function jalaliToGregorian($time){
 
     $date = explode('/', $time);
     $date = jalali_to_gregorian($date[0], $date[1], $date[2]);
+
+    return $date;
+}
+
+function gregorianToJalali($time, $splite = '-'){
+    include_once 'jdate.php';
+
+    $date = explode($splite, $time);
+    $date = gregorian_to_jalali($date[0], $date[1], $date[2]);
+
     return $date;
 }
 
@@ -699,4 +712,166 @@ function convertNumber($kind , $number){
         $number = str_replace($en, $fa, $number);
 
     return $number;
+}
+
+function compressImage($source, $destination, $quality){
+    $info = getimagesize($source);
+
+    if ($info['mime'] == 'image/jpeg')
+        $image = imagecreatefromjpeg($source);
+    elseif ($info['mime'] == 'image/png')
+        $image = imagecreatefrompng($source);
+
+    imagejpeg($image, $destination, $quality);
+}
+
+function getAllPlacePicsByKind($kindPlaceId, $placeId){
+
+    if(auth()->check())
+        $user = auth()->user();
+
+    switch ($kindPlaceId){
+        case 1:
+            $MainFile = 'amaken';
+            $place = \App\models\Amaken::find($placeId);
+            break;
+        case 3:
+            $MainFile = 'restaurant';
+            $place = \App\models\Restaurant::find($placeId);
+            break;
+        case 4:
+            $MainFile = 'hotels';
+            $place = \App\models\Hotel::find($placeId);
+            break;
+        case 6:
+            $MainFile = 'majara';
+            $place = \App\models\Majara::find($placeId);
+            break;
+        case 10:
+            $MainFile = 'sogatsanaie';
+            $place = \App\models\SogatSanaie::find($placeId);
+            break;
+        case 11:
+            $MainFile = 'mahalifood';
+            $place = \App\models\MahaliFood::find($placeId);
+            break;
+    }
+
+    $place->pics = PlacePic::where('kindPlaceId', $kindPlaceId)->where('placeId', $place->id)->get();
+    $sitePics = array();
+    $koochitaPic = URL::asset('images/logo.png');
+    $s = [  'id' => 0,
+        's' => URL::asset('_images/' . $MainFile . '/' . $place->file . '/s-' . $place->picNumber),
+        'f' => URL::asset('_images/' . $MainFile . '/' . $place->file . '/f-' . $place->picNumber),
+        'l' => URL::asset('_images/' . $MainFile . '/' . $place->file . '/l-' . $place->picNumber),
+        't' => URL::asset('_images/' . $MainFile . '/' . $place->file . '/t-' . $place->picNumber),
+        'mainPic' => URL::asset('_images/' . $MainFile . '/' . $place->file . '/' . $place->picNumber),
+        'alt' => $place->alt,
+        'name' => 'کوچیتا',
+        'userPic' => $koochitaPic,
+        'showInfo' => false,
+        'like' => 0,
+        'dislike' => 0,
+        'description' => '',
+        'fromUpload' => ''];
+    array_push($sitePics, $s);
+    foreach ($place->pics as $item){
+        $s = [ 'id' => 0,
+            's' => URL::asset('_images/' . $MainFile . '/' . $place->file . '/s-' . $item->picNumber),
+            'f' => URL::asset('_images/' . $MainFile . '/' . $place->file . '/f-' . $item->picNumber),
+            'l' => URL::asset('_images/' . $MainFile . '/' . $place->file . '/l-' . $item->picNumber),
+            't' => URL::asset('_images/' . $MainFile . '/' . $place->file . '/t-' . $item->picNumber),
+            'mainPic' => URL::asset('_images/' . $MainFile . '/' . $place->file . '/' . $item->picNumber),
+            'alt' => $place->alt,
+            'name' => 'کوچیتا',
+            'userPic' => $koochitaPic,
+            'showInfo' => false,
+            'like' => 0,
+            'dislike' => 0,
+            'description' => '',
+            'fromUpload' => ''];
+
+        array_push($sitePics, $s);
+    }
+
+    $sitePhotos = count($sitePics);
+    $sitePicsJSON = json_encode($sitePics);
+
+    $photographerPics = array();
+    if(\auth()->check())
+        $photographerPic = DB::select('SELECT * FROM photographerspics WHERE kindPlaceId = ' . $kindPlaceId . ' AND placeId  = ' . $placeId . ' AND ((userId = ' . $user->id . ') OR ( status = 1)) ORDER BY created_at');
+    else
+        $photographerPic = DB::select('SELECT * FROM photographerspics WHERE kindPlaceId = ' . $kindPlaceId . ' AND placeId  = ' . $placeId . ' AND status = 1 ORDER BY created_at');
+
+    if(count($photographerPic) < 5)
+        $photographerPics = $sitePics;
+
+    foreach ($photographerPic as $item){
+        $user = User::find($item->userId);
+        $userName = $user->first_name . ' ' . $user->last_name;
+        if($userName == ' ')
+            $userName = $user->username;
+
+        if($user != null) {
+
+            $diffTimeInMin = Carbon::now()->diffInMinutes($item->created_at);
+            if($diffTimeInMin <= 15)
+                $diffTime = 'هم اکنون';
+            else{
+                $diffTimeHour = Carbon::now()->diffInHours($item->created_at);
+                if($diffTimeHour <= 24)
+                    $diffTime = $diffTimeHour . ' ساعت پیش ';
+                else{
+                    $diffTimeDay = Carbon::now()->diffInDays($item->created_at);
+                    if($diffTimeDay < 30)
+                        $diffTime = $diffTimeDay . ' روز پیش ';
+                    else{
+                        $diffTimeMonth = Carbon::now()->diffInMonths($item->created_at);
+                        if($diffTimeMonth < 12)
+                            $diffTime = $diffTimeMonth . ' ماه پیش ';
+                        else{
+                            $diffYear = (int)($diffTimeMonth / 12);
+                            $diffMonth = $diffTimeMonth % 12;
+                            $diffTime = $diffYear . ' سال  و ' . $diffMonth . ' ماه پیش ';
+                        }
+                    }
+                }
+            }
+
+            $s = [
+                'id' => $item->id,
+                's' => URL::asset('userPhoto/' . $MainFile . '/' . $place->file . '/s-' . $item->pic),
+                'f' => URL::asset('userPhoto/' . $MainFile . '/' . $place->file . '/f-' . $item->pic),
+                'l' => URL::asset('userPhoto/' . $MainFile . '/' . $place->file . '/l-' . $item->pic),
+                't' => URL::asset('userPhoto/' . $MainFile . '/' . $place->file . '/t-' . $item->pic),
+                'mainPic' => URL::asset('userPhoto/' . $MainFile . '/' . $place->file . '/' . $item->pic),
+                'alt' => $item->alt,
+                'name' => $userName,
+                'userPic' => $koochitaPic,
+                'showInfo' => true,
+                'like' => $item->like,
+                'dislike' => $item->dislike,
+                'description' => $item->description,
+                'fromUpload' => $diffTime];
+
+            array_unshift($photographerPics, $s);
+        }
+    }
+    $photographerPicsJSON = json_encode($photographerPics);
+
+    return [$sitePics, $sitePicsJSON, $photographerPics, $photographerPicsJSON];
+}
+
+function deleteReviewPic(){
+    $pics = ReviewPic::where('logId', null)->get();
+    foreach ($pics as $item){
+        $diffTimeDay = Carbon::now()->diffInHours($item->created_at);
+        if($diffTimeDay > 24){
+            $location = __DIR__ . '/../../../../assets/limbo/' . $item->pic;
+            if(file_exists($location))
+                unlink($location);
+            $item->delete();
+        }
+    }
+
 }

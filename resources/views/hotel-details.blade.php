@@ -65,6 +65,11 @@ if ($total == 0)
     <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/editor.css')}}">
 
 
+    <link rel="stylesheet" href="{{URL::asset('css/theme2/swiper.css')}}">
+    <script src="{{URL::asset('js/swiper/swiper.min.js')}}"></script>
+
+
+
     {{--vr--}}
 
     @if(isset($video) && $video != null)
@@ -89,14 +94,6 @@ if ($total == 0)
         }
     </style>
 
-    <script>
-        $(document).ready(function() {
-            $('#commentLink').click(function() {
-                $("#commentModal").show() ,
-                $("#commentModalMainDiv").show()
-            })
-        })
-    </script>
     {{--alarm--}}
     <span class="ui_overlay ui_modal editTags getAlarm">
         <div class="shTIcon clsIcon"></div>
@@ -141,8 +138,10 @@ if ($total == 0)
                                     <div class="select-side">
                                         <i class="glyphicon glyphicon-triangle-bottom"></i>
                                     </div>
-                                    <select class="inputBoxInput styled-select text-align-right mg-lt-10" type="text" placeholder="">
-                                        <option>استان اصفهان</option>
+                                    <select class="inputBoxInput styled-select text-align-right mg-lt-10">
+                                        @foreach($allState as $item)
+                                            <option value="{{$item->id}}" {{$item->id == $city->stateId ? 'selected' : ''}}>استان {{$item->name}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <span>در</span>
@@ -151,7 +150,7 @@ if ($total == 0)
                                         <i class="glyphicon glyphicon-triangle-bottom"></i>
                                     </div>
                                     <select class="inputBoxInput styled-select text-align-right mg-lt-10" type="text" placeholder="">
-                                        <option>شهر اصفهان</option>
+                                        <option>شهر {{$city->name}}</option>
                                     </select>
                                 </div>
                                 <span class="mg-lt-15">هستید. تغییر دهید</span>
@@ -354,8 +353,8 @@ if ($total == 0)
                         <span class="ui_button_overlay position-relative float-left">
                             <div id="targetHelp_7" class="targets position-relative float-right">
                                 <span onclick="saveToTrip()" id="addToFavouriteTripsMainDiv"
-                                      class="ui_button saves ui_icon {{($save) ? "red-heart-fill" : "red-heart"}} ">
-                                    <div class="circleBase type2 addToFavouriteTripsIcon"></div>
+                                      class="ui_button saves ui_icon">
+                                    <div class="circleBase type2 addToFavouriteTripsIcon  {{$save ? "red-heart-fill" : "red-heart"}}"></div>
                                     <div class="addToFavouriteTripsLabel">
                                         افزودن به لیست سفر
                                     </div>
@@ -415,476 +414,379 @@ if ($total == 0)
         <div class="atf_meta_and_photos_wrapper position-relative">
             <div class="atf_meta_and_photos ui_container is-mobile easyClear position-relative">
 
-                <script>
-                    $(document).ready(function() {
-                        $('#closeBtnCommentModal').click(function () {
-                            $('#commentModal').hide() ,
-                                $("#commentModalMainDiv").hide()
-                        })
-                    })
-                    $(document).ready(function(){
-                        $('.editUploadPhotoComment').click(function(){
-                            $('#editPane').removeClass('hidden')
-                        })
-                    })
-                </script>
                 <!-- Modal -->
                 <div id="commentModalMainDiv" class="display-none">
                     <div class="modal-dialog">
 
                         <!-- Modal content-->
-                        <div class="modal-content">
-                            <div class="commentsMainDivHeader">
-                                <button type="button" class="close" id="closeBtnCommentModal" data-dismiss="modal">&times;</button>
-                                دیدگاه شما
-                            </div>
-                            <div id="commentInputMainDivModal">
-                                <div class="inputBoxGeneralInfo inputBox" id="commentInputBoxModal">
-                                    <div id="profilePicForCommentModal" class="circleBase type2"></div>
-                                    <textarea class="inputBoxInput inputBoxInputComment" type="text" placeholder="سینا، چه فکر یا احساسی داری.....؟"></textarea>
-                                    <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
+                        <form action="{{route('storeReview')}}" method="post">
+                            {!! csrf_field() !!}
+                            <input type="hidden" name="kindPlaceId" value="{{$kindPlaceId}}">
+                            <input type="hidden" name="placeId" value="{{$place->id}}">
+                            <input type="hidden" name="code" value="{{$userCode}}">
+                            <input type="hidden" name="assignedUser" id="assignedMemberToReview">
+                            <input type="hidden" name="multiAns" id="multiAnsInput">
+                            <input type="hidden" name="multiQuestion" id="multiQuestionInput">
+                            <input type="hidden" name="rateAns" id="rateAnsInput">
+                            <input type="hidden" name="rateQuestion" id="rateQuestionInput">
+
+                            <div class="modal-content">
+                                <div class="commentsMainDivHeader">
+                                    <button type="button" class="close" id="closeBtnCommentModal" data-dismiss="modal">&times;</button>
+                                    دیدگاه شما
                                 </div>
-                                <div class="clear-both"></div>
-                                <div class="commentPhotosMainDiv">
-                                    <div class="commentPhotosDiv commentPhotosAndVideos">
-                                        <div class="deleteUploadPhotoComment"></div>
-                                        <div class="editUploadPhotoComment"></div>
+                                <div id="commentInputMainDivModal">
+                                    <div class="inputBoxGeneralInfo inputBox" id="commentInputBoxModal">
+                                        <div id="profilePicForCommentModal" class="circleBase type2"></div>
+                                        @if(auth()->check())
+                                            <textarea class="inputBoxInput inputBoxInputComment" name="text" type="text" placeholder="{{auth()->user()->first_name ? auth()->user()->first_name :auth()->user()->username }}، چه فکر یا احساسی داری.....؟"  onkeyup="textAreaAdjust(this)" style="overflow:hidden"></textarea>
+                                        @else
+                                            <textarea class="inputBoxInput inputBoxInputComment" name="text" type="text" placeholder="سینا، چه فکر یا احساسی داری.....؟"></textarea>
+                                        @endif
+                                        <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
                                     </div>
-                                    <div class="commentVideosDiv commentPhotosAndVideos">
-                                        <div class="deleteUploadPhotoComment"></div>
-                                        <div class="videosLengthDiv">20:45</div>
-                                        <div class="editUploadPhotoComment"></div>
-                                    </div>
-                                    <center class="addPhotosOrVideosBox">
-                                        اضافه کنید
-                                        <img src="{{"../../../public/images/tourCreation/add.png"}}">
-                                    </center>
-                                </div>
-                                <div class="addParticipantName">
-                                    <span class="addParticipantSpan">با</span>
-                                    <div class="inputBoxGeneralInfo inputBox" id="addParticipantInputBoxModal">
-                                        <textarea class="inputBoxInput inputBoxInputComment" type="text" placeholder="چه کسی بودید؟ ایمیل یا نام کاربری را وارد کنید"></textarea>
-                                        <div class="participantDivMainDiv">
-                                            <div class="participantDiv">
-                                                <span class="removeParticipantBtn"></span>
-                                                shazdesina
-                                            </div>
-                                            <div class="participantDiv">
-                                                <span class="removeParticipantBtn"></span>
-                                                shazdesina
-                                            </div>
-                                            <div class="participantDiv">
-                                                <span class="removeParticipantBtn"></span>
-                                                shazdesina
-                                            </div>
+                                    <script>
+                                        function textAreaAdjust(o) {
+                                            o.style.height = "1px";
+                                            o.style.height = (25+o.scrollHeight)+"px";
+                                        }
+                                    </script>
+                                    <div class="clear-both"></div>
+                                    <div class="row">
+                                        <div class="commentPhotosMainDiv" id="reviewShowPics">
+
+                                            {{--<div class="commentVideosDiv commentPhotosAndVideos">--}}
+                                            {{--<div class="deleteUploadPhotoComment"></div>--}}
+                                            {{--<div class="videosLengthDiv">20:45</div>--}}
+                                            {{--<div class="editUploadPhotoComment"></div>--}}
+                                            {{--</div>--}}
+                                            {{----}}
+                                            {{--<center class="addPhotosOrVideosBox">--}}
+                                            {{--اضافه کنید--}}
+                                            {{--<img src="{{"../../../public/images/tourCreation/add.png"}}">--}}
+                                            {{--</center>--}}
                                         </div>
                                     </div>
+
+                                    <div class="addParticipantName">
+                                        <span class="addParticipantSpan">با</span>
+                                        <div class="inputBoxGeneralInfo inputBox" id="addParticipantInputBoxModal">
+                                            <textarea id="assignedSearch" class="inputBoxInput inputBoxInputComment" placeholder="چه کسی بودید؟ ایمیل یا نام کاربری را وارد کنید" onkeyup="searchUser(this.value)"></textarea>
+
+                                            <div class="assignedResult" id="assignedResultReview"></div>
+
+                                            <div class="participantDivMainDiv" id="participantDivMainDiv"></div>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
+                            <div class="modal-details-content">
+                                <center class="commentMoreSettingBar">
+                                    <div class="commentOptionsBoxes">
+                                        <span class="tagFriendCommentIcon"></span>
+                                        <span class="commentOptionsText">دوستانتان را tag کنید.</span>
+                                    </div>
+                                    <div class="commentOptionsBoxes">
+                                        <span class="add360VideoCommentIcon"></span>
+                                        <span class="commentOptionsText">ویدیو 360 اضافه کنید.</span>
+                                    </div>
+                                    <div class="commentOptionsBoxes">
+                                        <label for="videoReviewInput">
+                                            <span class="addVideoCommentIcon"></span>
+                                            <span class="commentOptionsText">ویدیو اضافه کنید.</span>
+                                        </label>
+                                    </div>
+                                        <input type="file" id="videoReviewInput" accept="video/*"  style="display: none" onchange="uploadReviewVideo(this, 0)">
+                                    <div class="commentOptionsBoxes">
+                                        <label for="picReviewInput0">
+                                            <span class="addPhotoCommentIcon"></span>
+                                            <span class="commentOptionsText">عکس اضافه کنید.</span>
+                                        </label>
+                                    </div>
+                                    <input type="file" id="picReviewInput0" accept="image/*"  style="display: none" onchange="uploadReviewPics(this, 0)">
+                                </center>
+                                @foreach($textQuestion as $item)
+                                    <div id="questionDiv_{{$item->id}}" class="commentQuestionsForm">
+                                        <span class="addOriginCity">{{$item->description}}</span>
+                                        <div class="inputBoxGeneralInfo inputBox" id="addOriginCityInputBoxModal">
+                                            <textarea id="question_{{$item->id}}" name="textAns[]" class="inputBoxInput inputBoxInputComment"></textarea>
+                                            <input type="hidden" name="textId[]" value="{{$item->id}}">
+                                        </div>
+                                    </div>
+                                @endforeach
+
+                                @foreach($multiQuestion as $index => $item)
+                                    <div class="commentQuestionsForm">
+                                        <div class="visitKindCommentModalHeader">
+                                            {{$item->description}}
+                                        </div>
+                                        <div class="visitKindCommentModal">
+                                            @for($i = 0; $i < count($item->ans); $i++)
+                                                <label for="radioAns_{{$item->id}}_{{$item->ans[$i]->id}}">
+                                                    <b id="radioAnsStyle_{{$item->id}}_{{$item->ans[$i]->id}}" class="filterChoices">
+                                                        {{$item->ans[$i]->ans}}
+                                                    </b>
+                                                </label>
+                                                <input id="radioAns_{{$item->id}}_{{$item->ans[$i]->id}}" value="{{$item->ans[$i]->id}}" onchange="radioChange(this.value, {{$item->id}}, {{$index}}, {{$item->ans[$i]->id}})" type="radio" style="display: none">
+                                            @endfor
+                                        </div>
+                                    </div>
+                                @endforeach
+
+                                <div class="commentQuestionsRatingsBox">
+                                    <div class="commentQuestionsRatingsBoxHeader">چقدر راضی بودید؟</div>
+
+                                    @for($i = 0; $i < count($rateQuestion); $i++)
+                                        <div class="display-inline-block full-width">
+                                            <b id="rateName_{{$i}}" class="col-xs-3 font-size-15 line-height-203">بد نبود</b>
+                                            <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-3 text-align-left pd-rt-0">
+                                                <div class="font-size-25" style="display: flex;">
+                                                    <span id="rate_5_{{$i}}" class="starRating" onmouseover="momentChangeRate({{$i}}, 5, 'in')" onmouseleave="momentChangeRate({{$i}}, 5, 'out')" onclick="chooseQuestionRate({{$i}}, 5, {{$rateQuestion[$i]->id}})"></span>
+                                                    <span id="rate_4_{{$i}}" class="starRating" onmouseover="momentChangeRate({{$i}}, 4, 'in')" onmouseleave="momentChangeRate({{$i}}, 4, 'out')" onclick="chooseQuestionRate({{$i}}, 4, {{$rateQuestion[$i]->id}})"></span>
+                                                    <span id="rate_3_{{$i}}" class="starRating" onmouseover="momentChangeRate({{$i}}, 3, 'in')" onmouseleave="momentChangeRate({{$i}}, 3, 'out')" onclick="chooseQuestionRate({{$i}}, 3, {{$rateQuestion[$i]->id}})"></span>
+                                                    <span id="rate_2_{{$i}}" class="starRatingGreen" onmouseover="momentChangeRate({{$i}}, 2, 'in')" onmouseleave="momentChangeRate({{$i}}, 2, 'out')" onclick="chooseQuestionRate({{$i}}, 2, {{$rateQuestion[$i]->id}})"></span>
+                                                    <span id="rate_1_{{$i}}" class="starRatingGreen" onmouseover="momentChangeRate({{$i}}, 1, 'in')" onmouseleave="momentChangeRate({{$i}}, 1, 'out')" onclick="chooseQuestionRate({{$i}}, 1, {{$rateQuestion[$i]->id}})"></span>
+                                                </div>
+                                            </div>
+                                            <b class="col-xs-6 font-size-15 line-height-203">{{$rateQuestion[$i]->description}}</b>
+                                        </div>
+                                    @endfor
+                                </div>
+
+
+                                <button class="commentsMainDivFooter" type="submit">
+                                    ارسال دیدگاه
+                                </button>
+                            </div>
+                        </form>
+
+
+                        <div id="editReviewPictures" class="backDark hidden">
+                            <span class="ui_overlay ui_modal photoUploadOverlay editSection">
+                                <div class="body_text" style="padding-top: 12px">
+                                   <div class="headerBar epHeaderBar">
+                                       </div>
+                                       <div class="row">
+                                          <div class="col-md-12">
+                                             <div style="margin: 5px 15px">قاب مربع</div>
+                                             <div class="img-container" style="position: relative">
+                                                <img class="imgInEditor" id="imgEditReviewPics" alt="Picture" style="width: 100%;">
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div class="row" id="actions" style="">
+                                          <div class="col-md-12 docs-buttons">
+
+                                            <div class="editBtnsGroup">
+                                                <div class="editBtns">
+                                                   <div class="flipHorizontal" data-toggle="tooltip" data-placement="top" title="Flip Horizontal" onclick="cropper.scaleY(-1)"></div>
+                                                </div>
+                                                {{--<button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="scaleX" data-option="-1" title="Flip Horizontal">--}}
+                                                {{--<span class="docs-tooltip" data-toggle="tooltip" title="cropper.scaleX(-1)">--}}
+                                                {{--<span class="fa fa-arrows-h"></span>--}}
+                                                {{--</span>--}}
+                                                {{--</button>--}}
+
+                                                <div class="editBtns">
+                                                   <div class="flipVertical" data-toggle="tooltip" data-placement="top" title="Flip Vertical" onclick="cropper.scaleX(-1)"></div>
+                                                </div>
+                                                {{--<button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="scaleY" data-option="-1" title="Flip Vertical">--}}
+                                                {{--<span class="docs-tooltip" data-toggle="tooltip" title="cropper.scaleY(-1)">--}}
+                                                {{--<span class="fa fa-arrows-v"></span>--}}
+                                                {{--</span>--}}
+                                                {{--</button>--}}
+                                            </div>
+
+                                            <div class="editBtnsGroup">
+                                                <div class="editBtns">
+                                                   <div class="rotateLeft" data-toggle="tooltip" data-placement="top" title="چرخش 45 درجه ای به سمت چپ" onclick="cropper.rotate(-45)"></div>
+                                                </div>
+                                                {{--<button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="rotate" data-option="-45" title="Rotate Left">--}}
+                                                {{--<span class="docs-tooltip" data-toggle="tooltip" title="cropper.rotate(-45)">--}}
+                                                {{--<span class="fa fa-rotate-left"></span>--}}
+                                                {{--</span>--}}
+                                                {{--</button>--}}
+
+                                                <div class="editBtns">
+                                                   <div class="rotateRight" data-toggle="tooltip" data-placement="top" title="چرخش 45 درجه ای به سمت راست" onclick="cropper.rotate(45)"></div>
+                                                </div>
+                                                {{--<button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="rotate" data-option="45" title="Rotate Right">--}}
+                                                {{--<span class="docs-tooltip" data-toggle="tooltip" title="cropper.rotate(45)">--}}
+                                                {{--<span class="fa fa-rotate-right"></span>--}}
+                                                {{--</span>--}}
+                                                {{--</button>--}}
+                                            </div>
+
+                                            <div class="editBtnsGroup">
+                                                <div class="editBtns">
+                                                   <div class="cropping" data-toggle="tooltip" data-placement="top" title="برش" onclick="cropper.crop()"></div>
+                                                </div>
+                                                {{--<button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="crop" title="Crop">--}}
+                                                {{--<span class="docs-tooltip" data-toggle="tooltip" title="cropper.crop()">--}}
+                                                {{--<span class="fa fa-check"></span>--}}
+                                                {{--</span>--}}
+                                                {{--</button>--}}
+
+                                                <div class="editBtns">
+                                                   <div class="clearing" data-toggle="tooltip" data-placement="top" title="بازگشت به اول" onclick="cropper.clear()"></div>
+                                                </div>
+                                                {{--<button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="clear" title="Clear">--}}
+                                                {{--<span class="docs-tooltip" data-toggle="tooltip" title="cropper.clear()">--}}
+                                                {{--<span class="fa fa-remove"></span>--}}
+                                                {{--</span>--}}
+                                                {{--</button>--}}
+                                            </div>
+
+                                            <div class="upload">
+                                                <div
+                                                        onclick="cropReviewImg()"
+                                                        class="uploadBtn ui_button primary">تایید</div>
+                                            </div>
+                                          {{--<div class="btn-group btn-group-crop">--}}
+                                          {{--<button id="saveBtn" type="button" onclick="successBtnClicked(this)" class="btn btn-success" data-method="getCroppedCanvas" data-option="{ &quot;width&quot;: 466, &quot;height&quot;: 367 }">--}}
+                                          {{--<span class="docs-tooltip" data-toggle="tooltip" id="saveBtnSpan" title="cropper.getCroppedCanvas({ width: 466, height: 367 })">--}}
+                                          {{--ذخیره--}}
+                                          {{--</span>--}}
+                                          {{--</button>--}}
+
+                                          {{--<button id="saveBtn2" type="button" onclick="successBtnClicked(this)" class="btn btn-success hidden" data-method="getCroppedCanvas" data-option="{ &quot;width&quot;: 100, &quot;height&quot;: 100 }">--}}
+                                          {{--<span class="docs-tooltip" data-toggle="tooltip" id="saveBtnSpan" title="cropper.getCroppedCanvas({ width: 100, height: 100 })">--}}
+                                          {{--ذخیره--}}
+                                          {{--</span>--}}
+                                          {{--</button>--}}
+                                          {{--</div>--}}
+
+                                          <!-- Show the cropped image in modal -->
+                                              <div class="modal fade docs-cropped" id="getCroppedCanvasModal" role="dialog" aria-hidden="true" aria-labelledby="getCroppedCanvasTitle" tabindex="-1">
+                                               <div class="modal-dialog modal-dialog-scrollable">
+                                                  <div class="modal-content">
+                                                     <div class="modal-header">
+                                                        <h5 class="modal-title" id="getCroppedCanvasTitle">Cropped</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                           <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                     </div>
+                                                     <div class="modal-body"></div>
+                                                     <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                        <a class="btn btn-primary" id="download" href="javascript:void(0);" download="cropped.jpg">Download</a>
+                                                     </div>
+                                                  </div>
+                                               </div>
+                                            </div><!-- /.modal -->
+
+                                         </div><!-- /.docs-buttons -->
+                                       </div>
+                                    {{--</div>--}}
+                               </div>
+                                <div class="ui_close_x" onclick="$('#editReviewPictures').addClass('hidden');"></div>
+                            </span>
                         </div>
-                        <div class="modal-details-content">
-                            <center class="commentMoreSettingBar">
-                                <div class="commentOptionsBoxes">
-                                    <span class="tagFriendCommentIcon"></span>
-                                    <span class="commentOptionsText">دوستانتان را tag کنید.</span>
-                                </div>
-                                <div class="commentOptionsBoxes">
-                                    <span class="add360VideoCommentIcon"></span>
-                                    <span class="commentOptionsText">ویدیو 360 اضافه کنید.</span>
-                                </div>
-                                <div class="commentOptionsBoxes">
-                                    <span class="addVideoCommentIcon"></span>
-                                    <span class="commentOptionsText">ویدیو اضافه کنید.</span>
-                                </div>
-                                <div class="commentOptionsBoxes">
-                                    <span class="addPhotoCommentIcon"></span>
-                                    <span class="commentOptionsText">عکس اضافه کنید.</span>
-                                </div>
-                            </center>
-                            <div class="commentQuestionsForm">
-                                <div class="visitKindCommentModalHeader">
-                                    این مکان را چگونه بازدید کردید؟
-                                </div>
-                                <div class="visitKindCommentModal">
-                                    <b class="filterChoices">با دوستان</b>
-                                    <b class="filterChoices">با خانواده</b>
-                                    <b class="filterChoices">تنها</b>
-                                    <b class="filterChoices">با کودک</b>
-                                </div>
-                            </div>
-                            <div class="commentQuestionsForm">
-                                <span class="addOriginCity">مبدأ سفر خود را وارد کنید</span>
-                                <div class="inputBoxGeneralInfo inputBox" id="addOriginCityInputBoxModal">
-                                    <textarea class="inputBoxInput inputBoxInputComment" type="text" placeholder="شهر مبدأ را وارد کنید"></textarea>
-                                </div>
-                            </div>
-                            <div class="commentQuestionsForm">
-                                <div class="visitTimeCommentModalHeader">
-                                    در چه فصلی این مکان را بازدید کردید؟
-                                </div>
-                                <div class="visitTimeCommentModal">
-                                    <b class="filterChoices">بهار</b>
-                                    <b class="filterChoices">تابستان</b>
-                                    <b class="filterChoices">پاییز</b>
-                                    <b class="filterChoices">زمستان</b>
-                                </div>
-                            </div>
 
-{{--                            <div class="commentRatingsDetailsBox">--}}
-{{--                                <div class="display-inline-block full-width">--}}
-{{--                                    <b class="col-xs-3 font-size-15 line-height-203">اصلاً راضی نبودم</b>--}}
-{{--                                    <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">--}}
-
-{{--                                    </div>--}}
-{{--                                    <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>--}}
-{{--                                </div>--}}
-{{--                                <div class="display-inline-block full-width">--}}
-{{--                                    <b class="col-xs-3 font-size-15 line-height-203">بد نبود</b>--}}
-{{--                                    <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">--}}
-
-{{--                                    </div>--}}
-{{--                                    <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>--}}
-{{--                                </div>--}}
-{{--                                <div class="display-inline-block full-width">--}}
-{{--                                    <b class="col-xs-3 font-size-15 line-height-203">معمولی بود</b>--}}
-{{--                                    <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">--}}
-{{--                                        <div class="ui_star_rating bubble_30 font-size-25">--}}
-{{--                                            <span class="starRating"></span>--}}
-{{--                                            <span class="starRating"></span>--}}
-{{--                                            <span class="starRatingGreen"></span>--}}
-{{--                                            <span class="starRatingGreen"></span>--}}
-{{--                                            <span class="starRatingGreen"></span>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                    <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>--}}
-{{--                                </div>--}}
-{{--                                <div class="display-inline-block full-width">--}}
-{{--                                    <b class="col-xs-3 font-size-15 line-height-203">خوب بود</b>--}}
-{{--                                    <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">--}}
-{{--                                        <div class="ui_star_rating bubble_40 font-size-25">--}}
-{{--                                            <span class="starRating"></span>--}}
-{{--                                            <span class="starRatingGreen"></span>--}}
-{{--                                            <span class="starRatingGreen"></span>--}}
-{{--                                            <span class="starRatingGreen"></span>--}}
-{{--                                            <span class="starRatingGreen"></span>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                    <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>--}}
-{{--                                </div>--}}
-{{--                                <div class="display-inline-block full-width">--}}
-{{--                                    <b class="col-xs-3 font-size-15 line-height-203">عالی بود</b>--}}
-{{--                                    <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">--}}
-{{--                                        <div class="ui_star_rating bubble_50 font-size-25">--}}
-{{--                                            <span class="starRatingGreen"></span>--}}
-{{--                                            <span class="starRatingGreen"></span>--}}
-{{--                                            <span class="starRatingGreen"></span>--}}
-{{--                                            <span class="starRatingGreen"></span>--}}
-{{--                                            <span class="starRatingGreen"></span>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                    <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-
-                            <div class="commentQuestionsRatingsBox">
-                                <div class="commentQuestionsRatingsBoxHeader">چقدر راضی بودید؟</div>
-                                <div class="display-inline-block full-width">
-                                    <b class="col-xs-3 font-size-15 line-height-203">اصلاً راضی نبودم</b>
-                                    <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-3 text-align-left pd-rt-0">
-                                        <div class="ui_star_rating stars_10 font-size-25"
-                                             property="ratingValue" content="1" alt='1 of 5 bubbles'>
-                                            <span class="starRating"></span>
-                                            <span class="starRating"></span>
-                                            <span class="starRating"></span>
-                                            <span class="starRating"></span>
-                                            <span class="starRatingGreen"></span>
-                                        </div>
-                                    </div>
-                                    <b class="col-xs-6 font-size-15 line-height-203">امتیاز کلی شما به این مکان چقدر است؟</b>
-                                </div>
-                                <div class="display-inline-block full-width">
-                                    <b class="col-xs-3 font-size-15 line-height-203">بد نبود</b>
-                                    <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-3 text-align-left pd-rt-0">
-                                        <div class="ui_star_rating stars_20 font-size-25"
-                                             property="ratingValue" content="2" alt='2 of 5 bubbles'>
-                                            <span class="starRating"></span>
-                                            <span class="starRating"></span>
-                                            <span class="starRating"></span>
-                                            <span class="starRatingGreen"></span>
-                                            <span class="starRatingGreen"></span>
-                                        </div>
-                                    </div>
-                                    <b class="col-xs-6 font-size-15 line-height-203">امتیاز کلی شما به این مکان چقدر است؟</b>
-                                </div>
-                                <div class="display-inline-block full-width">
-                                    <b class="col-xs-3 font-size-15 line-height-203">معمولی بود</b>
-                                    <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-3 text-align-left pd-rt-0">
-                                        <div class="ui_star_rating stars_30 font-size-25"
-                                             property="ratingValue" content="3" alt='3 of 5 bubbles'>
-                                            <span class="starRating"></span>
-                                            <span class="starRating"></span>
-                                            <span class="starRatingGreen"></span>
-                                            <span class="starRatingGreen"></span>
-                                            <span class="starRatingGreen"></span>
-                                        </div>
-                                    </div>
-                                    <b class="col-xs-6 font-size-15 line-height-203">امتیاز کلی شما به این مکان چقدر است؟</b>
-                                </div>
-                                <div class="display-inline-block full-width">
-                                    <b class="col-xs-3 font-size-15 line-height-203">خوب بود</b>
-                                    <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-3 text-align-left pd-rt-0">
-                                        <div class="ui_star_rating stars_40 font-size-25"
-                                             property="ratingValue" content="4" alt='4 of 5 bubbles'>
-                                            <span class="starRating"></span>
-                                            <span class="starRatingGreen"></span>
-                                            <span class="starRatingGreen"></span>
-                                            <span class="starRatingGreen"></span>
-                                            <span class="starRatingGreen"></span>
-                                        </div>
-                                    </div>
-                                    <b class="col-xs-6 font-size-15 line-height-203">امتیاز کلی شما به این مکان چقدر است؟</b>
-                                </div>
-                                <div class="display-inline-block full-width">
-                                    <b class="col-xs-3 font-size-15 line-height-203">عالی بود</b>
-                                    <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-3 text-align-left pd-rt-0">
-                                        <div class="ui_star_rating stars_50 font-size-25"
-                                             property="ratingValue" content="5" alt='5 of 5 bubbles'>
-                                            <span class="starRatingGreen"></span>
-                                            <span class="starRatingGreen"></span>
-                                            <span class="starRatingGreen"></span>
-                                            <span class="starRatingGreen"></span>
-                                            <span class="starRatingGreen"></span>
-                                        </div>
-                                    </div>
-                                    <b class="col-xs-6 font-size-15 line-height-203">امتیاز کلی شما به این مکان چقدر است؟</b>
-                                </div>
-                            </div>
-                            <div class="commentsMainDivFooter">
-                                ارسال دیدگاه
-                            </div>
-                        </div>
                     </div>
                 </div>
 
-                <span id="editPane" class="ui_overlay ui_modal photoUploadOverlay hidden">
-                   <div class="body_text" style="padding-top: 12px">
-                       {{--<div class="photoUploader">--}}
-                           <div class="headerBar epHeaderBar">
-                              <h3 id="photoUploadHeader" class="photoUploadHeader">
-                                  <span>ویرایش عکس</span>
-{{--                                  <span>{{$place->name}}</span>--}}
-                              </h3>
-                           </div>
-                           <div class="row">
-                              <div class="col-md-9 imgContainerLeftListMainDiv">
-{{--                                 <div style="margin: 5px 15px">قاب مربع</div>--}}
-                                 <div class="img-container">
-                                    <img class="imgInEditor" id="edit_file_image" alt="Picture">
-                                 </div>
+                <div class="modal fade showingPhotosModal" id="showingPhotographerPicsModal" role="dialog">
+                        <div class="modal-dialog" style="margin-bottom: 0px;">
+                            <div class="modal-content">
+                                <div id="showingPhotosMainDivHeader">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <div class="showingPhotosTitle">نمایش عکس‌ها</div>
+                                </div>
+                                <div class="commentWriterDetailsShow">
+                                    <div class="circleBase type2 commentWriterPicShow">
+                                        <img id="photographerSlideUserPic" src="{{$photographerPics[0]['userPic']}}" class="koochitaCircleLogo">
+                                    </div>
+                                    <div class="commentWriterExperienceDetails">
+                                        <b id="photographerSlideUserName" class="userProfileName">{{$photographerPics[0]['name']}}</b>
 
-                                <div class="addParticipantName">
-                                    <span class="addParticipantSpan">با</span>
-                                    <div class="inputBoxGeneralInfo inputBox" id="addParticipantInputBoxModal">
-                                        <textarea class="inputBoxInput inputBoxInputComment" type="text" placeholder="چه کسی بودید؟ ایمیل یا نام کاربری را وارد کنید"></textarea>
-                                        <div class="participantDivMainDiv">
-                                            <div class="participantDiv">
-                                                <span class="removeParticipantBtn"></span>
-                                                shazdesina
+                                        <div id="photographerSlideInfos" style="display: {{$photographerPics[0]['showInfo']? 'block' : 'none'}}">
+                                            {{--<div class="display-inline-block">در--}}
+                                                {{--<span class="commentWriterExperiencePlace">هتل عباسی، شهر یزد، استان یزد</span>--}}
+                                            {{--</div>--}}
+                                            {{--<div>با--}}
+                                                {{--<span class="commentWriterExperienceParticipation">احتشام الدوله توفیقی</span>،--}}
+                                                {{--<span class="commentWriterExperienceParticipation">حمیدرضا عسگرزاده </span>و--}}
+                                                {{--<span class="commentWriterExperienceParticipation">علی اصر همتی</span>--}}
+                                            {{--</div>--}}
+                                            <div id="photographerSlideTimeInfo">
+                                                {{$photographerPics[0]['fromUpload']}}
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                              </div>
-                               <div class="col-md-3 imgContainerRightListMainDiv">
-                                   <div class="imgContainerRightList"></div>
-                                   <div class="imgContainerRightList"></div>
-                                   <div class="imgContainerRightList"></div>
-                               </div>
-                           </div>
-                           <div class="row" id="actions">
-                              <div class="col-md-12 docs-buttons">
 
-                                <div class="editBtnsGroup">
-                                    <div class="editBtns">
-                                       <div class="flipHorizontal" data-toggle="tooltip" data-placement="top" title="Flip Horizontal" onclick="cropper.scaleY(-1)"></div>
+                                    <div id="photographerSlideFeedBackBtns" style="display: {{$photographerPics[0]['showInfo']? 'block' : 'none'}}">
                                     </div>
-                                                    {{--<button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="scaleX" data-option="-1" title="Flip Horizontal">--}}
-                                    {{--<span class="docs-tooltip" data-toggle="tooltip" title="cropper.scaleX(-1)">--}}
-                                    {{--<span class="fa fa-arrows-h"></span>--}}
-                                    {{--</span>--}}
-                                    {{--</button>--}}
 
-                                    <div class="editBtns">
-                                       <div class="flipVertical" data-toggle="tooltip" data-placement="top" title="Flip Vertical" onclick="cropper.scaleX(-1)"></div>
+                                </div>
+                                <div class="clear-both"></div>
+                                <div class="col-xs-10 leftColPhotosModalMainDiv">
+                                    <div class="selectedPhotoShowingModal">
+                                        <img id="mainPhotographerSliderPic" src="{{URL::asset($photographerPics[0]['s'])}}" alt="{{$photographerPics[0]['alt']}}" style="width: 100%; height: 100%;">
                                     </div>
-                                                    {{--<button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="scaleY" data-option="-1" title="Flip Vertical">--}}
-                                    {{--<span class="docs-tooltip" data-toggle="tooltip" title="cropper.scaleY(-1)">--}}
-                                    {{--<span class="fa fa-arrows-v"></span>--}}
-                                    {{--</span>--}}
-                                    {{--</button>--}}
                                 </div>
-
-                                <div class="editBtnsGroup">
-                                    <div class="editBtns">
-                                       <div class="rotateLeft" data-toggle="tooltip" data-placement="top" title="چرخش 45 درجه ای به سمت چپ" onclick="cropper.rotate(-45)"></div>
+                                <div class="col-xs-2 rightColPhotosModalMainDiv" >
+                                    @for($i = 0; $i < count($photographerPics); $i++)
+                                        <div class="rightColPhotosShowingModal" onclick="changePhotographerSlidePic({{$i}})">
+                                            <img src="{{$photographerPics[$i]['l']}}" alt="{{$photographerPics[$i]['alt']}}" style="width: 100%; height: 100%;">
+                                        </div>
+                                    @endfor
+                                </div>
+                                <div class="photosDescriptionShowingModal">
+                                    <div id="photographerDescription" style="display: {{$photographerPics[0]['showInfo']? 'block' : 'none'}}">
+                                        {{$photographerPics[0]['description']}}
                                     </div>
-                                   {{--<button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="rotate" data-option="-45" title="Rotate Left">--}}
-                                    {{--<span class="docs-tooltip" data-toggle="tooltip" title="cropper.rotate(-45)">--}}
-                                    {{--<span class="fa fa-rotate-left"></span>--}}
-                                    {{--</span>--}}
-                                    {{--</button>--}}
-
-                                    <div class="editBtns">
-                                       <div class="rotateRight" data-toggle="tooltip" data-placement="top" title="چرخش 45 درجه ای به سمت راست" onclick="cropper.rotate(45)"></div>
-                                    </div>
-                                   {{--<button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="rotate" data-option="45" title="Rotate Right">--}}
-                                    {{--<span class="docs-tooltip" data-toggle="tooltip" title="cropper.rotate(45)">--}}
-                                    {{--<span class="fa fa-rotate-right"></span>--}}
-                                    {{--</span>--}}
-                                    {{--</button>--}}
                                 </div>
+                            </div>
 
-                                <div class="editBtnsGroup">
-                                    <div class="editBtns">
-                                       <div class="cropping" data-toggle="tooltip" data-placement="top" title="برش" onclick="cropper.crop()"></div>
-                                    </div>
-                                   {{--<button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="crop" title="Crop">--}}
-                                    {{--<span class="docs-tooltip" data-toggle="tooltip" title="cropper.crop()">--}}
-                                    {{--<span class="fa fa-check"></span>--}}
-                                    {{--</span>--}}
-                                    {{--</button>--}}
+                        </div>
+                    </div>
 
-                                    <div class="editBtns">
-                                       <div class="clearing" data-toggle="tooltip" data-placement="top" title="بازگشت به اول" onclick="cropper.clear()"></div>
-                                    </div>
-                                   {{--<button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="clear" title="Clear">--}}
-                                    {{--<span class="docs-tooltip" data-toggle="tooltip" title="cropper.clear()">--}}
-                                    {{--<span class="fa fa-remove"></span>--}}
-                                    {{--</span>--}}
-                                    {{--</button>--}}
-                                </div>
-
-                                <div class="upload">
-                                    <div onclick="uploadIMG()" class="uploadBtn ui_button primary">تایید</div>
-                                </div>
-                                <div class="abandon">
-                                    <div onclick="$('#editPane').addClass('hidden'); $('.dark').addClass('hidden')" class="abandonBtn ui_button primary">لغو</div>
-                                </div>
-                                {{--<div class="btn-group btn-group-crop">--}}
-                              {{--<button id="saveBtn" type="button" onclick="successBtnClicked(this)" class="btn btn-success" data-method="getCroppedCanvas" data-option="{ &quot;width&quot;: 466, &quot;height&quot;: 367 }">--}}
-                              {{--<span class="docs-tooltip" data-toggle="tooltip" id="saveBtnSpan" title="cropper.getCroppedCanvas({ width: 466, height: 367 })">--}}
-                              {{--ذخیره--}}
-                              {{--</span>--}}
-                              {{--</button>--}}
-
-                              {{--<button id="saveBtn2" type="button" onclick="successBtnClicked(this)" class="btn btn-success hidden" data-method="getCroppedCanvas" data-option="{ &quot;width&quot;: 100, &quot;height&quot;: 100 }">--}}
-                              {{--<span class="docs-tooltip" data-toggle="tooltip" id="saveBtnSpan" title="cropper.getCroppedCanvas({ width: 100, height: 100 })">--}}
-                              {{--ذخیره--}}
-                              {{--</span>--}}
-                              {{--</button>--}}
-                              {{--</div>--}}
-
-                              <!-- Show the cropped image in modal -->
-                                <div class="modal fade docs-cropped" id="getCroppedCanvasModal" role="dialog" aria-hidden="true" aria-labelledby="getCroppedCanvasTitle" tabindex="-1">
-                                   <div class="modal-dialog">
-                                      <div class="modal-content">
-                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="getCroppedCanvasTitle">Cropped</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                               <span aria-hidden="true">&times;</span>
-                                            </button>
-                                         </div>
-                                         <div class="modal-body"></div>
-                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                            <a class="btn btn-primary" id="download" href="javascript:void(0);" download="cropped.jpg">Download</a>
-                                         </div>
-                                      </div>
-                                   </div>
-                                </div><!-- /.modal -->
-
-                                <div id="scripts">
-
-                                   <script src="{{URL::asset('js/editorCommon.js')}}"></script>
-                                   <script src="{{URL::asset('js/cropper.js')}}"></script>
-                                   <script src="{{URL::asset('js/mainCrop.js')}}"></script>
-                                </div>
-
-                             </div><!-- /.docs-buttons -->
-                           </div>
-                       {{--</div>--}}
-                   </div>
-                <div class="ui_close_x" onclick="$('#editPane').addClass('hidden'); $('.dark').addClass('hidden')"></div>
-</span>
-
-{{--                @include('editor')--}}
-
-                <div class="modal fade" id="showingPhotosModal" role="dialog">
-                    <div class="modal-dialog">
-
-                        <!-- Modal content-->
+                <div class="modal fade showingPhotosModal" id="showingSitePicsModal" role="dialog">
+                    <div class="modal-dialog" style="margin-bottom: 0px;">
                         <div class="modal-content">
-
                             <div id="showingPhotosMainDivHeader">
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <div class="showingPhotosTitle">نمایش عکس‌ها</div>
+                                <div class="showingPhotosTitle">نمایش عکس‌ها سایت</div>
                             </div>
                             <div class="commentWriterDetailsShow">
-                                <div class="circleBase type2 commentWriterPicShow"></div>
-                                <div class="commentWriterExperienceDetails">
-                                    <b class="userProfileName">shazdesina</b>
-                                    <div class="display-inline-block">در
-                                        <span class="commentWriterExperiencePlace">هتل عباسی، شهر یزد، استان یزد</span>
-                                    </div>
-                                    <div>با
-                                        <span class="commentWriterExperienceParticipation">احتشام الدوله توفیقی</span>،
-                                        <span class="commentWriterExperienceParticipation">حمیدرضا عسگرزاده </span>و
-                                        <span class="commentWriterExperienceParticipation">علی اصر همتی</span>
-                                    </div>
-                                    <div>
-                                        هم اکنون - بیش از 23 ساعت پیش
-                                    </div>
+                                <div class="circleBase type2 commentWriterPicShow">
+                                    <img src="{{$sitePics[0]['userPic']}}" class="koochitaCircleLogo">
                                 </div>
-                                <div class="photosFeedBackBtn">
-                                    <div class="col-xs-6 likeBox">دوست داشتم</div>
-                                    <div class="col-xs-6 dislikeBox">دوست نداشتم</div>
-                                    <div class="clear-both"></div>
-                                    <div class="feedbackStatistic">
-                                        <span>31</span>
-                                        نفر دوست داشتند و
-                                        <span>31</span>
-                                        نفر دوست نداشتند
-                                    </div>
+                                <div class="commentWriterExperienceDetails">
+                                    <b class="userProfileName">{{$sitePics[0]['name']}}</b>
                                 </div>
                             </div>
                             <div class="clear-both"></div>
                             <div class="col-xs-10 leftColPhotosModalMainDiv">
-                                <div class="selectedPhotoShowingModal"></div>
+                                <div class="selectedPhotoShowingModal">
+                                    <img id="mainSiteSliderPic" src="{{$sitePics[0]['s']}}" alt="{{$sitePics[0]['alt']}}" style="width: 100%; height: 100%;">
+                                </div>
                             </div>
-                            <div class="col-xs-2 rightColPhotosModalMainDiv">
-                                <div class="rightColPhotosShowingModal"></div>
-                                <div class="rightColPhotosShowingModal"></div>
-                                <div class="rightColPhotosShowingModal"></div>
-                                <div class="rightColPhotosShowingModal"></div>
+                            <div class="col-xs-2 rightColPhotosModalMainDiv" >
+                                @for($i = 0; $i < count($sitePics); $i++)
+                                    <div class="rightColPhotosShowingModal" onclick="changeSiteSlidePic({{$i}})">
+                                        <img src="{{$sitePics[$i]['l']}}" alt="{{$sitePics[$i]['alt']}}" style="width: 100%; height: 100%;">
+                                    </div>
+                                @endfor
                             </div>
-                            <div class="photosDescriptionShowingModal">
-                                توضیحات مربوط به عکس من این است که این عکس‌ها را در سفری بسیار زیبا با همه به پایان می‌گذرانیم.
-                            </div>
+                            <div class="photosDescriptionShowingModal"></div>
                         </div>
-
                     </div>
                 </div>
-                @if($placeMode == "hotel")
-                    <div id="bestPrice" class="meta position-relative" style="@if(session('goDate') != null && session('backDate') != null) display: none @endif ">
-                        <div id="targetHelp_9" class="targets  float-left">
-{{--                            @if($place->reserveId == null)--}}
-{{--                                <div class="offlineReserveErr" >--}}
-{{--                                    <div>--}}
-{{--                                        متاسفانه در حال حاضر امکان رزرو انلاین برای این مرکز موجود نمی باشد.--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            @endif--}}
-                            <div class="meta_inner" id="bestPriceInnerDiv">
+
+
+                <div id="bestPrice" class="meta position-relative" style="@if(session('goDate') != null && session('backDate') != null) display: none @endif ">
+                    <div id="targetHelp_9" class="targets  float-left">
+                            {{--@if($place->reserveId == null)--}}
+                                {{--<div class="offlineReserveErr" >--}}
+                                    {{--<div>--}}
+                                        {{--متاسفانه در حال حاضر امکان رزرو انلاین برای این مرکز موجود نمی باشد.--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                            {{--@endif--}}
+                        <div class="meta_inner" id="bestPriceInnerDiv">
 {{--                                <form id="form_hotel" method="post" action="{{route('makeSessionHotel')}}">--}}
 {{--                                    {{csrf_field()}}--}}
 {{--                                    <input type="hidden" name="adult" id="form_adult">--}}
@@ -922,12 +824,12 @@ if ($total == 0)
 {{--                                        <div class="roomBox">--}}
 {{--                                            <div class="shTIcon passengerIcon" onclick="togglePassengerNoSelectPane()"></div>--}}
 {{--                                            <div id="roomDetail" onclick="togglePassengerNoSelectPane()">--}}
-{{--                                                <span class="room" id="num_room">--}}{{--{{$room}}--}}{{--</span>&nbsp;--}}
+{{--                                                <span class="room" id="num_room">--}}{{----}}{{--{{$room}}--}}{{----}}{{--</span>&nbsp;--}}
 {{--                                                <span>اتاق</span>&nbsp;-&nbsp;--}}
-{{--                                                <span class="adult" id="num_adult">--}}{{--{{$adult}}--}}{{--</span>--}}
+{{--                                                <span class="adult" id="num_adult">--}}{{----}}{{--{{$adult}}--}}{{----}}{{--</span>--}}
 {{--                                                <span>بزرگسال</span>&nbsp;--}}
-{{--                                                --}}{{--<span class="children" id="num_child">--}}{{----}}{{--{{$children}}--}}{{----}}{{--</span>--}}
-{{--                                                --}}{{--<span>بچه</span>&nbsp;--}}
+{{--                                                --}}{{----}}{{--<span class="children" id="num_child">--}}{{----}}{{----}}{{----}}{{--{{$children}}--}}{{----}}{{----}}{{----}}{{--</span>--}}
+{{--                                                --}}{{----}}{{--<span>بچه</span>&nbsp;--}}
 {{--                                            </div>--}}
 {{--                                            <div id="passengerArrowDown" onclick="togglePassengerNoSelectPane()"--}}
 {{--                                                 class="shTIcon searchBottomArrowIcone arrowPassengerIcone display-inline-block"></div>--}}
@@ -942,7 +844,7 @@ if ($total == 0)
 {{--                                                        <div onclick="changeRoomPassengersNum(-1, 3)"--}}
 {{--                                                             class="shTIcon minusPlusIcons minus"></div>--}}
 {{--                                                        <span class='numBetweenMinusPlusBtn room'--}}
-{{--                                                              id="roomNumInSelect">--}}{{--{{$room}}--}}{{--</span>--}}
+{{--                                                              id="roomNumInSelect">--}}{{----}}{{--{{$room}}--}}{{----}}{{--</span>--}}
 {{--                                                        <div onclick="changeRoomPassengersNum(1, 3)"--}}
 {{--                                                             class="shTIcon minusPlusIcons plus"></div>--}}
 {{--                                                    </div>--}}
@@ -953,26 +855,26 @@ if ($total == 0)
 {{--                                                        <div onclick="changeRoomPassengersNum(-1, 2)"--}}
 {{--                                                             class="shTIcon minusPlusIcons minus"></div>--}}
 {{--                                                        <span class='numBetweenMinusPlusBtn adult'--}}
-{{--                                                              id="adultPassengerNumInSelect">--}}{{--{{$adult}}--}}{{--</span>--}}
+{{--                                                              id="adultPassengerNumInSelect">--}}{{----}}{{--{{$adult}}--}}{{----}}{{--</span>--}}
 {{--                                                        <div onclick="changeRoomPassengersNum(1, 2)"--}}
 {{--                                                             class="shTIcon minusPlusIcons plus"></div>--}}
 {{--                                                    </div>--}}
 {{--                                                </div>--}}
 {{--                                                <div class="rowOfPopUp">--}}
-{{--                                                    --}}{{--<span class="float-left">بچه</span>--}}
-{{--                                                    --}}{{--<div class="float-left">--}}
-{{--                                                    --}}{{--<div onclick="changeRoomPassengersNum(-1, 1)"--}}
-{{--                                                    --}}{{--class="shTIcon minusPlusIcons minus"></div>--}}
-{{--                                                    --}}{{--<span class='numBetweenMinusPlusBtn children'--}}
-{{--                                                    --}}{{--id="childrenPassengerNumInSelect">--}}{{----}}{{--{{$children}}--}}{{----}}{{--</span>--}}
-{{--                                                    --}}{{--<div onclick="changeRoomPassengersNum(1, 1)"--}}
-{{--                                                    --}}{{--class="shTIcon minusPlusIcons plus"></div>--}}
-{{--                                                    --}}{{--</div>--}}
+{{--                                                    --}}{{----}}{{--<span class="float-left">بچه</span>--}}
+{{--                                                    --}}{{----}}{{--<div class="float-left">--}}
+{{--                                                    --}}{{----}}{{--<div onclick="changeRoomPassengersNum(-1, 1)"--}}
+{{--                                                    --}}{{----}}{{--class="shTIcon minusPlusIcons minus"></div>--}}
+{{--                                                    --}}{{----}}{{--<span class='numBetweenMinusPlusBtn children'--}}
+{{--                                                    --}}{{----}}{{--id="childrenPassengerNumInSelect">--}}{{----}}{{----}}{{----}}{{--{{$children}}--}}{{----}}{{----}}{{----}}{{--</span>--}}
+{{--                                                    --}}{{----}}{{--<div onclick="changeRoomPassengersNum(1, 1)"--}}
+{{--                                                    --}}{{----}}{{--class="shTIcon minusPlusIcons plus"></div>--}}
+{{--                                                    --}}{{----}}{{--</div>--}}
 {{--                                                </div>--}}
-{{--                                                --}}{{--<div class="childrenPopUpAlert">سن بچه را در زمان ورود به هتل وارد--}}
-{{--                                                --}}{{--کنید--}}
-{{--                                                --}}{{--</div>--}}
-{{--                                                --}}{{--<div class="childBox"></div>--}}
+{{--                                                --}}{{----}}{{--<div class="childrenPopUpAlert">سن بچه را در زمان ورود به هتل وارد--}}
+{{--                                                --}}{{----}}{{--کنید--}}
+{{--                                                --}}{{----}}{{--</div>--}}
+{{--                                                --}}{{----}}{{--<div class="childBox"></div>--}}
 {{--                                            </div>--}}
 {{--                                        </div>--}}
 {{--                                        <div class="srchBox">--}}
@@ -989,40 +891,38 @@ if ($total == 0)
 {{--                                        </div>--}}
 {{--                                    </div>--}}
 {{--                                </div>--}}
-                            </div>
                         </div>
-{{--                        <div id="helpSpan_9" class="helpSpans hidden">--}}
-{{--                            <span class="introjs-arrow"></span>--}}
-{{--                            <p>در این قسمت هتل خود را به سادگی چند دکمه رزرو کنید. البته این سیستم برای ما آنچنان--}}
-{{--                                ساده نیست. این سرویس هنوز آماده استفاده نمی باشد.</p>--}}
-{{--                            <button data-val="9" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_9">بعدی</button>--}}
-{{--                            <button data-val="9" class="btn btn-primary backBtnsHelp" id="backBtnHelp_9">قبلی</button>--}}
-{{--                            <button class="btn btn-danger exitBtnHelp">خروج</button>--}}
-{{--                        </div>--}}
-                        <div class="clear-both"></div>
-                        @if($hasLogin)
-                            <div id="targetHelp_8" class="targets float-left col-xs-6 pd-0">
-                                    <span onclick="bookMark()"
-                                          class="ui_button casino save-location-7306673 ui_icon saveAsBookmarkMainDiv {{($bookMark) ? "castle" : "red-heart"}} ">
-                                        <div class="saveAsBookmarkIcon"></div>
-                                        <div class="saveAsBookmarkLabel">
-                                            ذخیره این صفحه
-                                        </div>
-                                    </span>
-                                <div id="helpSpan_8" class="helpSpans hidden row">
-                                    <span class="introjs-arrow"></span>
-                                    <p>شاید بعدا بخواهید دوباره به همین مکان باز گردید. پس آن را نشان کنید تا از منوی بالا هر وقت که خواستید دوباره به آن باز گردید.</p>
-                                    <button data-val="8" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_8">بعدی</button>
-                                    <button data-val="8" class="btn btn-primary backBtnsHelp" id="backBtnHelp_8">قبلی</button>
-                                    <button class="btn btn-danger exitBtnHelp">خروج</button>
-                                </div>
-                            </div>
-                        @endif
-                        @if($hasLogin)
-                            @include('layouts.shareBox')
-
-                        @endif
                     </div>
+                    <div id="helpSpan_9" class="helpSpans hidden">
+                        {{--<span class="introjs-arrow"></span>--}}
+                        {{--<p>در این قسمت هتل خود را به سادگی چند دکمه رزرو کنید. البته این سیستم برای ما آنچنان--}}
+                            {{--ساده نیست. این سرویس هنوز آماده استفاده نمی باشد.</p>--}}
+                        {{--<button data-val="9" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_9">بعدی</button>--}}
+                        {{--<button data-val="9" class="btn btn-primary backBtnsHelp" id="backBtnHelp_9">قبلی</button>--}}
+                        {{--<button class="btn btn-danger exitBtnHelp">خروج</button>--}}
+                    </div>
+                    <div class="clear-both"></div>
+
+                    <div id="targetHelp_8" class="targets float-left col-xs-6 pd-0">
+                                <span onclick="bookMark()"
+                                      class="ui_button casino save-location-7306673 ui_icon saveAsBookmarkMainDiv {{($bookMark) ? "castle" : "red-heart"}} ">
+                                    <div class="saveAsBookmarkIcon"></div>
+                                    <div class="saveAsBookmarkLabel">
+                                        ذخیره این صفحه
+                                    </div>
+                                </span>
+                        <div id="helpSpan_8" class="helpSpans hidden row">
+                            <span class="introjs-arrow"></span>
+                            <p>شاید بعدا بخواهید دوباره به همین مکان باز گردید. پس آن را نشان کنید تا از منوی بالا هر وقت که خواستید دوباره به آن باز گردید.</p>
+                            <button data-val="8" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_8">بعدی</button>
+                            <button data-val="8" class="btn btn-primary backBtnsHelp" id="backBtnHelp_8">قبلی</button>
+                            <button class="btn btn-danger exitBtnHelp">خروج</button>
+                        </div>
+                    </div>
+                    @include('layouts.shareBox')
+
+                </div>
+
 {{--                    <div id="bestPriceRezerved" class="meta position-relative"--}}
 {{--                         style="@if(session('goDate') == null && session('backDate') == null) display: none @endif">--}}
 {{--                        <div id="targetHelp_9" class="targets float-left">--}}
@@ -1116,7 +1016,7 @@ if ($total == 0)
 {{--                                            --}}{{--<div style="font-size-14em display-inline-block; line-height: 40px;">650.000</div>--}}
 {{--                                            --}}{{--<div class="float-left">--}}
 {{--                                            --}}{{--<div style="float:right; margin: 2px 10px;">--}}
-{{--                                            --}}{{--<div>از علی بابا</div>--}}
+                                            {{--<div>از علی بابا</div>--}}
 {{--                                            --}}{{--<img src="" alt="">--}}
 {{--                                            --}}{{--</div>--}}
 {{--                                            --}}{{--<button class="btn viewOffersBtn" type="button">انتخاب</button>--}}
@@ -1147,56 +1047,74 @@ if ($total == 0)
 {{--                            <button class="btn btn-danger exitBtnHelp">خروج</button>--}}
 {{--                        </div>--}}
 {{--                    </div>--}}
-                @endif
+
                 <div class="prw_rup prw_common_location_photos photos position-relative">
                     <div id="targetHelp_10" class="targets">
                         <div class="inner">
                             <div class="primaryWrap">
                                 <div class="prw_rup prw_common_mercury_photo_carousel">
                                     <div class="carousel bignav">
-                                        <div class="carousel_images carousel_images_header" data-toggle="modal" data-target="#showingPhotosModal">
-                                            <div class="see_all_count_wrap" onclick="getPhotos(-1)">
-                                                <span class="see_all_count">
-                                                    <div class="circleBase type2" id="photographerIdPic"></div>
-                                                    <div class="display-inline-block mg-rt-10 mg-tp-2">
-                                                        <span class="display-block font-size-12">عکس از</span>
-                                                        <span class="display-block">سینا عادلی</span>
+                                        <div class="carousel_images carousel_images_header">
+                                            <div id="photographerAlbum" data-toggle="modal" data-target="#showingPhotographerPicsModal" onclick="changePhotographerSlidePic(0)">
+
+                                                <div id="mainSlider" class="swiper-container">
+                                                    <div class="swiper-wrapper">
+
+                                                        @for($i = 0; $i < count($photographerPics); $i++)
+                                                            <div class="swiper-slide">
+                                                                <img class="eachPicOfSlider" src="{{$photographerPics[$i]['s']}}" alt="{{$photographerPics[$i]['alt']}}" style="width: 100%;">
+
+                                                                <div class="see_all_count_wrap" onclick="getPhotos(-1)">
+                                                                <span class="see_all_count">
+                                                                    <div class="circleBase type2" id="photographerIdPic" style="background-color: #4DC7BC;">
+                                                                        <img src="{{$photographerPics[$i]['userPic']}}" style="width: 100%; height: 100%; border-radius: 50%;">
+                                                                    </div>
+                                                                    <div class="display-inline-block mg-rt-10 mg-tp-2">
+                                                                        <span class="display-block font-size-12">عکس از</span>
+                                                                        <span class="display-block">{{$photographerPics[$i]['name']}}</span>
+                                                                    </div>
+                                                                </span>
+                                                                </div>
+
+                                                            </div>
+                                                        @endfor
+
                                                     </div>
-{{--                                                    <span class="ui_icon camera"></span>--}}
-{{--                                                    تمام عکس ها {{$userPhotos + $sitePhotos}}--}}
-                                                </span>
+
+                                                </div>
                                             </div>
-                                            <a id="photographersLink">
+                                            <a id="photographersLink" onclick="isPhotographer()">
                                                 عکاس هستید؟ کلیک کنید
                                             </a>
                                         </div>
-                                        <div onclick="photoRoundRobin(-1)" class="left-nav left-nav-header"></div>
-                                        <div onclick="photoRoundRobin(1)" class="right-nav right-nav-header"></div>
+                                        <div class="left-nav left-nav-header swiper-button-next" style="opacity: 0.8;"></div>
+                                        <div class="right-nav right-nav-header swiper-button-prev" style="left: auto; opacity: 0.8;"></div>
                                     </div>
                                 </div>
                             </div>
+
                             <div class="secondaryWrap">
                                 <div class="tileWrap">
                                     <div class="prw_rup prw_hotels_flexible_album_thumb tile">
                                         <div class="albumThumbnail">
                                             <div class="prw_rup prw_common_centered_image">
-                                                @if($sitePhotos != 0)
-                                                    <span onclick="getPhotos(-1)" class="imgWrap imgWrap1stTemp">
+                                                @if(count($sitePics) != 0)
+                                                    <span class="imgWrap imgWrap1stTemp" data-toggle="modal" data-target="#showingSitePicsModal">
                                                         <img alt="{{$place->alt1}}" src="{{$thumbnail}}" class="centeredImg" width="100%"/>
                                                     </span>
                                                 @else
                                                     <span class="imgWrap imgWrap1stTemp"></span>
                                                 @endif
                                             </div>
-                                            @if($sitePhotos != 0)
-                                                <div onclick="getPhotos(-2)" class="albumInfo">
+                                            @if(count($sitePics) != 0)
+                                                <div class="albumInfo" data-toggle="modal" data-target="#showingSitePicsModal">
                                                     <span class="ui_icon camera">&nbsp;</span>عکس‌های
-                                                    سایت - {{$sitePhotos}}
+                                                    سایت - {{count($sitePics)}}
                                                 </div>
                                             @else
                                                 <div class="albumInfo">
                                                     <span class="ui_icon camera">&nbsp;</span>عکس‌های
-                                                    سایت - {{$sitePhotos}}
+                                                    سایت - {{count($sitePics)}}
                                                 </div>
                                             @endif
                                         </div>
@@ -1238,6 +1156,11 @@ if ($total == 0)
                                 </div>
                             </div>
                         </div>
+
+                        @if(Auth::check())
+                            @include('editor')
+                        @endif
+
                         <div id="helpSpan_10" class="helpSpans hidden row">
                             <span class="introjs-arrow"></span>
                             <p>عکس‌های دوستانتان را از دست ندهید. گاهی وقت ها یک عکس سخن های بسیاری دارد.</p>
@@ -1254,7 +1177,11 @@ if ($total == 0)
                             <div id="commentInputMainDiv">
                                 <div class="inputBoxGeneralInfo inputBox" id="commentInputBox">
                                     <div id="profilePicForComment" class="circleBase type2"></div>
-                                    <textarea class="inputBoxInput inputBoxInputComment" type="text" placeholder="سینا، چه فکر یا احساسی داری.....؟"></textarea>
+                                    @if(auth()->check())
+                                        <textarea class="inputBoxInput inputBoxInputComment" type="text" placeholder="{{auth()->user()->first_name ? auth()->user()->first_name :auth()->user()->username }}، چه فکر یا احساسی داری.....؟" ></textarea>
+                                    @else
+                                        <textarea class="inputBoxInput inputBoxInputComment" type="text" placeholder="سینا، چه فکر یا احساسی داری.....؟"></textarea>
+                                    @endif
                                     <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
                                 </div>
                             </div>
@@ -1296,7 +1223,7 @@ if ($total == 0)
                         <div class="block_wrap" data-tab="TABS_OVERVIEW">
                             <div class="overviewContent">
                                 <div class="ui_columns is-multiline is-mobile reviewsAndDetails direction-rtlImp">
-                                    <div class="ui_column is-4 generalDescription">
+                                    <div class="ui_column is-12 generalDescription" style="border-left: none;">
                                         <div class="block_header">
                                             <h3 class="block_title">معرفی کلی </h3>
                                         </div>
@@ -1304,7 +1231,7 @@ if ($total == 0)
                                             <div class="overviewContent" id="introductionText">{{$place->description}}</div>
                                         </div>
                                     </div>
-                                    <div class="ui_column is-4 details">
+                                    <div class="ui_column is-8 details">
                                         <div class="direction-rtl">
                                             <?php $k = -1; ?>
 
@@ -1319,7 +1246,7 @@ if ($total == 0)
                                     </div>
                                     <div class="ui_column  is-4 reviews" id="reviewsMainDiv">
                                         <div class="rating">
-                                            <div class="block_header">
+                                            <div class="block_header" style="position: relative">
                                                 <h3 class="block_title">نظر شما </h3>
                                             </div>
                                             <span class="overallRating">{{$avgRate}} </span>
@@ -1434,21 +1361,38 @@ if ($total == 0)
                                         </div>
                                         <div id="tagsName">
                                             <h3>برچسب‌ها:</h3>
-                                            <span class="tag">{{$place->tag1}}</span>
-                                            <span class="tag">{{$place->tag2}}</span>
-                                            <span class="tag">{{$place->tag3}}</span>
-                                            <span class="tag">{{$place->tag4}}</span>
-                                            <span class="tag">{{$place->tag5}}</span>
-                                            <span class="tag">{{$place->tag6}}</span>
-                                            <span class="tag">{{$place->tag7}}</span>
-                                            <span class="tag">{{$place->tag8}}</span>
-                                            <span class="tag">{{$place->tag9}}</span>
-                                            <span class="tag">{{$place->tag10}}</span>
-                                            <span class="tag">{{$place->tag11}}</span>
-                                            <span class="tag">{{$place->tag12}}</span>
-                                            <span class="tag">{{$place->tag13}}</span>
-                                            <span class="tag">{{$place->tag14}}</span>
-                                            <span class="tag">{{$place->tag15}}</span>
+                                                <span class="tag" style="text-align: justify">
+                                                    {{$place->tag1}}
+                                                    -  {{$place->tag2}}
+                                                    -  {{$place->tag3}}
+                                                    -  {{$place->tag4}}
+                                                    -  {{$place->tag5}}
+                                                    -  {{$place->tag6}}
+                                                    -  {{$place->tag7}}
+                                                    -  {{$place->tag8}}
+                                                    -  {{$place->tag9}}
+                                                    -  {{$place->tag10}}
+                                                    -  {{$place->tag11}}
+                                                    -  {{$place->tag12}}
+                                                    -  {{$place->tag13}}
+                                                    -  {{$place->tag14}}
+                                                    -  {{$place->tag15}}
+                                                </span>
+
+                                                {{--<span class="tag">{{$place->tag2}}</span>--}}
+                                                {{--<span class="tag">{{$place->tag3}}</span>--}}
+                                                {{--<span class="tag">{{$place->tag4}}</span>--}}
+                                                {{--<span class="tag">{{$place->tag5}}</span>--}}
+                                                {{--<span class="tag">{{$place->tag6}}</span>--}}
+                                                {{--<span class="tag">{{$place->tag7}}</span>--}}
+                                                {{--<span class="tag">{{$place->tag8}}</span>--}}
+                                                {{--<span class="tag">{{$place->tag9}}</span>--}}
+                                                {{--<span class="tag">{{$place->tag10}}</span>--}}
+                                                {{--<span class="tag">{{$place->tag11}}</span>--}}
+                                                {{--<span class="tag">{{$place->tag12}}</span>--}}
+                                                {{--<span class="tag">{{$place->tag13}}</span>--}}
+                                                {{--<span class="tag">{{$place->tag14}}</span>--}}
+                                                {{--<span class="tag">{{$place->tag15}}</span>--}}
                                         </div>
                                     </div>
                                 </div>
@@ -1796,7 +1740,7 @@ if ($total == 0)
                             <div class="circleBase type2 commentWriterPicShow"></div>
                             <div class="commentWriterExperienceDetails">
                                 <b class="userProfileName">shazdesina</b>
-                                <div class="display-inline-block">در
+                                <div class="display-inline-block" >در
                                     <span class="commentWriterExperiencePlace">هتل عباسی، شهر یزد، استان یزد</span>
                                 </div>
                                 <div>با
@@ -2730,6 +2674,81 @@ if ($total == 0)
 
     @include('hotelDetailsPopUp')
 {{--    @include('editor')--}}
+    <script>
+        var hasLogin = '{{$hasLogin}}';
+        var userCode = '{{$userCode}}';
+        var reviewUploadPic = '{{route('reviewUploadPic')}}';
+        var doEditReviewPic = '{{route('doEditReviewPic')}}';
+        var reviewUploadVideo = '{{route('reviewUploadVideo')}}';
+        var bookMarkDir = '{{route('bookMark')}}';
+        var getPlaceTrips = '{{route('placeTrips')}}';
+        var assignPlaceToTripDir = '{{route('assignPlaceToTrip')}}';
+        var soon = '{{route('soon')}}';
+        var placeMode = '{{$placeMode}}';
+        var photographerPics = {!! $photographerPicsJSON !!};
+        var sitePics = {!! $sitePicsJSON !!};
+        var hotelDetails;
+        var hotelDetailsInBookMarkMode;
+        var hotelDetailsInAskQuestionMode;
+        var hotelDetailsInAnsMode;
+        var hotelDetailsInSaveToTripMode;
+        var getQuestions = '{{route('getQuestions')}}';
+        var placeId = '{{$place->id}}';
+        var kindPlaceId = '{{$kindPlaceId}}';
+        var getCommentsCount = '{{route('getCommentsCount')}}';
+        var totalPhotos = '{{count($sitePics) + $userPhotos}}';
+        var sitePhotosCount = {{count($sitePics)}};
+        var opOnComment = '{{route('opOnComment')}}';
+        var askQuestionDir = '{{route('askQuestion')}}';
+        var sendAnsDir = '{{route('sendAns')}}';
+        var showAllAnsDir = '{{route('showAllAns')}}';
+        var filterComments = '{{route('filterComments')}}';
+        var getReportsDir = '{{route('getReports')}}';
+        var sendReportDir = '{{route('sendReport2')}}';
+        var getPhotoFilter = '{{route('getPhotoFilter')}}';
+        var getPhotosDir = '{{route('getPhotos')}}';
+        var findUser = '{{route('findUser')}}';
+        var showUserBriefDetail = '{{route('showUserBriefDetail')}}';
+        var hotelDetailsInAddPhotoMode = '{{route('hotelDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'addPhoto'])}}';
+        var likePhotographerPicRoute = '{{route('likePhotographer')}}';
+        var deleteReviewPicUrl = '{{route('deleteReviewPic')}}';
+        var rateQuestion = {!! $rateQuestionJSON !!} ;
+        var rateQuestionAns = [];
+        for(i = 0; i < rateQuestion.length; i++)
+            rateQuestionAns[i] = 2;
+
+        if (placeMode == "hotel") {
+            hotelDetails = '{{route('hotelDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';
+            hotelDetailsInBookMarkMode = '{{route('hotelDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'bookMark'])}}';
+            hotelDetailsInAskQuestionMode = '{{route('hotelDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'question'])}}';
+            hotelDetailsInAnsMode = '{{route('hotelDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'ans'])}}';
+            hotelDetailsInSaveToTripMode = '{{route('hotelDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'saveToTrip'])}}';
+        }
+        else if (placeMode == "restaurant") {
+            hotelDetails = '{{route('restaurantDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';
+            hotelDetailsInBookMarkMode = '{{route('restaurantDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'bookMark'])}}';
+            hotelDetailsInAskQuestionMode = '{{route('restaurantDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'question'])}}';
+            hotelDetailsInAnsMode = '{{route('restaurantDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'ans'])}}';
+            hotelDetailsInSaveToTripMode = '{{route('restaurantDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'saveToTrip'])}}';
+        }
+        else if (placeMode == "amaken") {
+            hotelDetails = '{{route('amakenDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';
+            hotelDetailsInBookMarkMode = '{{route('amakenDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'bookMark'])}}';
+            hotelDetailsInAskQuestionMode = '{{route('amakenDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'question'])}}';
+            hotelDetailsInAnsMode = '{{route('amakenDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'ans'])}}';
+            hotelDetailsInSaveToTripMode = '{{route('amakenDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'saveToTrip'])}}';
+        }
+        else {
+            hotelDetails = '{{route('majaraDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';
+            hotelDetailsInBookMarkMode = '{{route('majaraDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'bookMark'])}}';
+            hotelDetailsInAskQuestionMode = '{{route('majaraDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'question'])}}';
+            hotelDetailsInAnsMode = '{{route('majaraDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'ans'])}}';
+            hotelDetailsInSaveToTripMode = '{{route('majaraDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'saveToTrip'])}}';
+        }
+    </script>
+
+    <script src="{{URL::asset('js/hotelDetails/hoteldetails_1.js')}}"></script>
+
 
     <script>
         var hotelMap = [];
@@ -3336,9 +3355,6 @@ if ($total == 0)
     </script>
     <script async src="{{URL::asset('pageJs/hoteldetails.js')}}"></script>
     <script>
-        $(document).ready(function(){
-            console.log(iconBase)
-        });
 
         var app = angular.module("mainApp", ['infinite-scroll'], function ($interpolateProvider) {
             $interpolateProvider.startSymbol('[[');
@@ -3887,1523 +3903,10 @@ if ($total == 0)
         }
     </script>
 
-    <script src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyCdVEd4L2687AfirfAnUY1yXkx-7IsCER0&callback=init"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyCdVEd4L2687AfirfAnUY1yXkx-7IsCER0&callback=initBigMap"></script>
     <script async src="{{URL::asset('js/album.js')}}"></script>
 
-    <script>
-        var hasLogin = '{{$hasLogin}}';
-        var bookMarkDir = '{{route('bookMark')}}';
-        var getPlaceTrips = '{{route('placeTrips')}}';
-        var assignPlaceToTripDir = '{{route('assignPlaceToTrip')}}';
-        var soon = '{{route('soon')}}';
-        var placeMode = '{{$placeMode}}';
-        var hotelDetails;
-        var hotelDetailsInBookMarkMode;
-        var hotelDetailsInAskQuestionMode;
-        var hotelDetailsInAnsMode;
-        var hotelDetailsInSaveToTripMode;
-        if (placeMode == "hotel") {
-            hotelDetails = '{{route('hotelDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';
-            hotelDetailsInBookMarkMode = '{{route('hotelDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'bookMark'])}}';
-            hotelDetailsInAskQuestionMode = '{{route('hotelDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'question'])}}';
-            hotelDetailsInAnsMode = '{{route('hotelDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'ans'])}}';
-            hotelDetailsInSaveToTripMode = '{{route('hotelDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'saveToTrip'])}}';
-        }
-        else if (placeMode == "restaurant") {
-            hotelDetails = '{{route('restaurantDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';
-            hotelDetailsInBookMarkMode = '{{route('restaurantDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'bookMark'])}}';
-            hotelDetailsInAskQuestionMode = '{{route('restaurantDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'question'])}}';
-            hotelDetailsInAnsMode = '{{route('restaurantDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'ans'])}}';
-            hotelDetailsInSaveToTripMode = '{{route('restaurantDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'saveToTrip'])}}';
-        }
-        else if (placeMode == "amaken") {
-            hotelDetails = '{{route('amakenDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';
-            hotelDetailsInBookMarkMode = '{{route('amakenDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'bookMark'])}}';
-            hotelDetailsInAskQuestionMode = '{{route('amakenDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'question'])}}';
-            hotelDetailsInAnsMode = '{{route('amakenDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'ans'])}}';
-            hotelDetailsInSaveToTripMode = '{{route('amakenDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'saveToTrip'])}}';
-        }
-        else {
-            hotelDetails = '{{route('majaraDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';
-            hotelDetailsInBookMarkMode = '{{route('majaraDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'bookMark'])}}';
-            hotelDetailsInAskQuestionMode = '{{route('majaraDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'question'])}}';
-            hotelDetailsInAnsMode = '{{route('majaraDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'ans'])}}';
-            hotelDetailsInSaveToTripMode = '{{route('majaraDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'saveToTrip'])}}';
-        }
-        var getQuestions = '{{route('getQuestions')}}';
-        var placeId = '{{$place->id}}';
-        var kindPlaceId = '{{$kindPlaceId}}';
-        var getCommentsCount = '{{route('getCommentsCount')}}';
-        var totalPhotos = '{{$sitePhotos + $userPhotos}}';
-        var sitePhotosCount = '{{$sitePhotos}}';
-        var opOnComment = '{{route('opOnComment')}}';
-        var askQuestionDir = '{{route('askQuestion')}}';
-        var sendAnsDir = '{{route('sendAns')}}';
-        var showAllAnsDir = '{{route('showAllAns')}}';
-        var filterComments = '{{route('filterComments')}}';
-        var getReportsDir = '{{route('getReports')}}';
-        var sendReportDir = '{{route('sendReport2')}}';
-        var getPhotoFilter = '{{route('getPhotoFilter')}}';
-        var getPhotosDir = '{{route('getPhotos')}}';
-        var showUserBriefDetail = '{{route('showUserBriefDetail')}}';
-        var hotelDetailsInAddPhotoMode = '{{route('hotelDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'addPhoto'])}}';
-    </script>
-
-    <script>
-        var selectedPlaceId = -1;
-        var selectedKindPlaceId = -1;
-        var currPage = 1;
-        var currPageQuestions = 1;
-        var selectedTag = "";
-        var roundRobinPhoto;
-        var roundRobinPhoto2;
-        var selectedTrips;
-        var currHelpNo;
-        var noAns = false;
-        var photos = [];
-        var photos2 = [];
-
-        function saveToTrip() {
-            if (!hasLogin) {
-                showLoginPrompt(hotelDetailsInSaveToTripMode);
-                return;
-            }
-            selectedPlaceId = placeId;
-            selectedKindPlaceId = kindPlaceId;
-            $.ajax({
-                type: 'post',
-                url: getPlaceTrips,
-                data: {
-                    'placeId': placeId,
-                    'kindPlaceId': kindPlaceId
-                },
-                success: function (response) {
-                    selectedTrips = [];
-                    $('.dark').show();
-                    response = JSON.parse(response);
-                    var newElement = "<div class='row'>";
-                    for (i = 0; i < response.length; i++) {
-                        newElement += "<div class='col-xs-3' class='cursor-pointer' onclick='addToSelectedTrips(\"" + response[i].id + "\")'>";
-                        if (response[i].select == "1") {
-                            newElement += "<div id='trip_" + response[i].id + "' onclick='' class='trip-images ui_columns is-gapless is-multiline is-mobile tripResponse'>";
-                            selectedTrips[selectedTrips.length] = response[i].id;
-                        }
-                        else
-                            newElement += "<div id='trip_" + response[i].id + "' onclick='' class='trip-images ui_columns is-gapless is-multiline is-mobile tripResponse'>";
-                        if (response[i].placeCount > 0) {
-                            tmp = "url('" + response[i].pic1 + "')";
-                            newElement += "<div class='trip-image ui_column is-6 bg-size-100-100' style='background: " + tmp + " repeat 0 0'></div>";
-                        }
-                        else
-                            newElement += "<div class='trip-image trip-image-empty ui_column is-6 bg-color-grey'></div>";
-                        if (response[i].placeCount > 1) {
-                            tmp = "url('" + response[i].pic2 + "')";
-                            newElement += "<div class='trip-image ui_column is-6 bg-size-100-100' style='background: " + tmp + " repeat 0 0'></div>";
-                        }
-                        else
-                            newElement += "<div class='trip-image trip-image-empty ui_column is-6 bg-color-grey'></div>";
-                        if (response[i].placeCount > 1) {
-                            tmp = "url('" + response[i].pic3 + "')";
-                            newElement += "<div class='trip-image ui_column is-6 bg-size-100-100' style='background: " + tmp + " repeat 0 0'></div>";
-                        }
-                        else
-                            newElement += "<div class='trip-image trip-image-empty ui_column is-6 bg-color-grey'></div>";
-                        if (response[i].placeCount > 1) {
-                            tmp = "url('" + response[i].pic4 + "')";
-                            newElement += "<div class='trip-image ui_column is-6 bg-size-100-100' style='background: " + tmp + " repeat 0 0'></div>";
-                        }
-                        else
-                            newElement += "<div class='trip-image trip-image-empty ui_column is-6 bg-color-grey'></div>";
-                        newElement += "</div><div class='create-trip-text font-size-12em'>" + response[i].name + "</div>";
-                        newElement += "</div>";
-                    }
-                    newElement += "<div class='col-xs-3'>";
-                    newElement += "<a onclick='showPopUp()' class='single-tile is-create-trip'>";
-                    newElement += "<div class='tile-content text-align-center font-size-20Imp'>";
-                    newElement += "<span class='ui_icon plus'></span>";
-                    newElement += "<div class='create-trip-text'>ایجاد سفر</div>";
-                    newElement += "</div></a></div>";
-                    newElement += "</div>";
-                    $("#tripsForPlace").empty().append(newElement);
-                    showElement('addPlaceToTripPrompt');
-                }
-            });
-        }
-
-        function showElement(element) {
-            $(".pop-up").addClass('hidden');
-            $("#" + element).removeClass('hidden');
-        }
-
-        function hideElement(element) {
-            $(".dark").hide();
-            $("#" + element).addClass('hidden');
-        }
-
-        function bookMark() {
-            if (!hasLogin) {
-                showLoginPrompt(hotelDetailsInBookMarkMode);
-                return;
-            }
-            $.ajax({
-                type: 'post',
-                url: bookMarkDir,
-                data: {
-                    'placeId': placeId,
-                    'kindPlaceId': kindPlaceId
-                },
-                success: function (response) {
-                    if (response == "ok")
-                        document.location.href = hotelDetails;
-                }
-            })
-        }
-
-        function addToSelectedTrips(id) {
-            allow = true;
-            for (i = 0; i < selectedTrips.length; i++) {
-                if (selectedTrips[i] == id) {
-                    allow = false;
-                    $("#trip_" + id).css('border', '2px solid #a0a0a0');
-                    selectedTrips.splice(i, 1);
-                    break;
-                }
-            }
-            if (allow) {
-                $("#trip_" + id).css('border', '2px solid #4DC7BC');
-                selectedTrips[selectedTrips.length] = id;
-            }
-        }
-
-        function assignPlaceToTrip() {
-            if (selectedPlaceId != -1) {
-                var checkedValuesTrips = selectedTrips;
-                if (checkedValuesTrips == null || checkedValuesTrips.length == 0)
-                    checkedValuesTrips = "empty";
-                $.ajax({
-                    type: 'post',
-                    url: assignPlaceToTripDir,
-                    data: {
-                        'checkedValuesTrips': checkedValuesTrips,
-                        'placeId': selectedPlaceId,
-                        'kindPlaceId': selectedKindPlaceId
-                    },
-                    success: function (response) {
-                        if (response == "ok")
-                            document.location.href = hotelDetails;
-                        else {
-                            err = "<p>به جز سفر های زیر که اجازه ی افزودن مکان به آنها را نداشتید بقیه به درستی اضافه شدند</p>";
-                            response = JSON.parse(response);
-                            for (i = 0; i < response.length; i++)
-                                err += "<p>" + response[i] + "</p>";
-                            $("#errorAssignPlace").append(err);
-                        }
-                    }
-                });
-            }
-        }
-
-        function showUpdateReserveResult() {
-            $(".update_results_button").removeClass('hidden');
-        }
-
-        function showChildBox(val, childAge) {
-            var newElement = "";
-            for (i = 0; i < val; i++) {
-                newElement += "<span class='unified-picker age-picker'><select id='child_" + (i + 1) + "'>";
-                newElement += "<option value='none'>سن</option>";
-                for (j = 1; j <= childAge; j++) {
-                    newElement += "<option value='" + j + "'>" + j + "</option>";
-                }
-                newElement += "</select></span>";
-            }
-            $("#ages-wrap").empty().append(newElement);
-        }
-
-        function changeCommentPage(element) {
-            $('.pageNumComment').removeClass('current').addClass('taLnk');
-            $(element).removeClass('taLnk');
-            $(element).addClass('current');
-            if ($(element).attr('data-page-number')) {
-                currPage = $(element).attr('data-page-number');
-                comments(selectedTag);
-                location.href = "#taplc_location_review_keyword_search_hotels_0_search";
-            }
-        }
-
-        function changePageQuestion(element) {
-            $('.pageNumComment').removeClass('current').addClass('taLnk');
-            $(element).removeClass('taLnk');
-            $(element).addClass('current');
-            if ($(element).attr('data-page-number')) {
-                currPageQuestions = $(element).attr('data-page-number');
-                questions();
-                location.href = "#taplc_location_qa_hotels_0";
-            }
-        }
-
-        function showAskQuestion() {
-            if (!hasLogin) {
-                showLoginPrompt(hotelDetailsInAskQuestionMode);
-                return;
-            }
-            $(".askQuestionForm").removeClass('hidden');
-            document.href = ".askQuestionForm";
-        }
-
-        function hideAskQuestion() {
-            $(".askQuestionForm").addClass('hidden');
-        }
-
-        function askQuestion() {
-            if (!hasLogin) {
-                showLoginPrompt(hotelDetailsInAskQuestionMode);
-                return;
-            }
-            if ($("#questionTextId").val() == "")
-                return;
-            $.ajax({
-                type: 'post',
-                url: askQuestionDir,
-                data: {
-                    'placeId': placeId,
-                    'kindPlaceId': kindPlaceId,
-                    'text': $("#questionTextId").val()
-                },
-                success: function (response) {
-                    if (response == "ok") {
-                        $(".dark").css('display', '');
-                        $("#questionSubmitted").removeClass('hidden');
-                    }
-                }
-            });
-        }
-
-        function closePublish() {
-            var url;
-            if (placeMode == "hotel")
-                url = '{{route('hotelDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';
-            else if (placeMode == "amaken")
-                url = '{{route('amakenDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';
-            else
-                url = '{{route('restaurantDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';
-            document.location.href = url;
-        }
-
-        function comments(tag) {
-            selectedTag = tag;
-            filter();
-        }
-
-        function questions() {
-            $.ajax({
-                type: 'post',
-                url: getQuestions,
-                data: {
-                    'placeId': placeId,
-                    'kindPlaceId': kindPlaceId,
-                    'page': currPageQuestions
-                },
-                success: function (response) {
-                    showQuestions(JSON.parse(response));
-                }
-            });
-        }
-
-        $(window).ready(function () {
-
-            @foreach($sections as $section)
-                fillMyDivWithAdv('{{$section->sectionId}}', '{{$state->id}}');
-            @endforeach
-
-            checkOverFlow();
-            $('.menu').addClass('original').clone().insertAfter('.menu').addClass('cloned').css('position', 'fixed').css('top', '0').css('margin-top', '0').css('z-index', '500').removeClass('original').hide();
-            scrollIntervalID = setInterval(stickIt, 10);
-            $(".close_album").click(function () {
-                $("#photo_album_span").hide();
-            });
-            var i;
-            photos[0] = '{{$photos[0]}}';
-            for (i = 1; i < totalPhotos; i++)
-                photos[i] = -1;
-            for (i = 1; i < totalPhotos - sitePhotosCount; i++)
-                photos2[i] = -1;
-            currPage = 1;
-            comments(-1);
-            questions();
-            roundRobinPhoto = -1;
-            photoRoundRobin(1);
-            if (totalPhotos - sitePhotosCount > 0) {
-                roundRobinPhoto2 = -1;
-                photoRoundRobin2(1);
-            }
-            $(".img_popUp").on({
-                mouseenter: function () {
-                    $(".img_popUp").removeClass('hidden');
-                },
-                mouseleave: function () {
-                    $(".img_popUp").addClass('hidden');
-                }
-            });
-            $('.ui_tagcloud').click(function () {
-                $(".ui_tagcloud").removeClass('selected');
-                $(this).addClass("selected");
-                if ($(this).attr("data-content")) {
-                    var data_content = $(this).attr("data-content");
-                    currPage = 1;
-                    comments(data_content);
-                }
-            });
-        });
-
-        function getSliderPhoto(mode, val, mode2) {
-            var url = (mode2 == 2) ? '{{route('getSlider2Photo')}}' : '{{route('getSlider1Photo')}}';
-            $.ajax({
-                type: 'post',
-                url: url,
-                data: {
-                    'placeId': '{{$place->id}}',
-                    'kindPlaceId': '{{$kindPlaceId}}',
-                    'val': val
-                },
-                success: function (response) {
-                    if (response != "nok") {
-                        if (mode == 1) {
-                            photos[roundRobinPhoto] = response;
-                            $(".carousel_images_header").css('background', "url(" + photos[roundRobinPhoto] + ") no-repeat")
-                                .css('background-size', "cover");
-                        }
-                        else {
-                            photos2[roundRobinPhoto2] = response;
-                            $(".carousel_images_footer").css('background', "url(" + photos2[roundRobinPhoto2] + ") no-repeat")
-                                .css('background-size', "cover");
-                        }
-                    }
-                }
-            });
-        }
-
-        function photoRoundRobin(val) {
-            if (roundRobinPhoto + val < totalPhotos && roundRobinPhoto + val >= 0)
-                roundRobinPhoto += val;
-            if (photos[roundRobinPhoto] != -1) {
-                $(".carousel_images_header").css('background', "url(" + photos[roundRobinPhoto] + ") no-repeat")
-                    .css('background-size', "cover");
-            }
-            else {
-                if (roundRobinPhoto + 1 <= sitePhotosCount)
-                    getSliderPhoto(1, roundRobinPhoto + 1, 1);
-                else
-                    getSliderPhoto(1, roundRobinPhoto + 1 - sitePhotosCount, 2);
-            }
-            if (roundRobinPhoto + 1 >= totalPhotos)
-                $('.right-nav-header').addClass('hidden');
-            else
-                $('.right-nav-header').removeClass('hidden');
-            if (roundRobinPhoto - 1 < 0)
-                $('.left-nav-header').addClass('hidden');
-            else
-                $('.left-nav-header').removeClass('hidden');
-        }
-
-        function photoRoundRobin2(val) {
-            if (roundRobinPhoto2 + val < totalPhotos - sitePhotosCount && roundRobinPhoto2 + val >= 0)
-                roundRobinPhoto2 += val;
-            if (photos2[roundRobinPhoto2] != -1) {
-                $(".carousel_images_footer").css('background', "url(" + photos2[roundRobinPhoto2] + ") no-repeat")
-                    .css('background-size', "cover");
-            }
-            else {
-                getSliderPhoto(2, roundRobinPhoto2, 2);
-            }
-            if (roundRobinPhoto2 + 1 >= totalPhotos - sitePhotosCount)
-                $('.right-nav-footer').addClass('hidden');
-            else
-                $('.right-nav-footer').removeClass('hidden');
-            if (roundRobinPhoto2 - 1 < 0)
-                $('.left-nav-footer').addClass('hidden');
-            else
-                $('.left-nav-footer').removeClass('hidden');
-        }
-
-        function showComments(arr) {
-            $("#reviewsContainer").empty();
-            var checkedValues = $("input:checkbox[name='filterComment[]']:checked").map(function () {
-                return this.value;
-            }).get();
-            if (checkedValues.length == 0)
-                checkedValues = -1;
-            $.ajax({
-                type: 'post',
-                url: getCommentsCount,
-                data: {
-                    'placeId': placeId,
-                    'kindPlaceId': kindPlaceId,
-                    'tag': selectedTag,
-                    'filters': checkedValues
-                },
-                success: function (response) {
-                    response = JSON.parse(response);
-                    $(".seeAllReviews").empty().append(response[1] + " نقد");
-                    $(".reviews_header_count").empty().append("(" + response[1] + " نقد)");
-                    var newElement = "<p id='pagination-details' class='pagination-details'><b>" + response[0] + "</b> از <b>" + response[1] + "</b> نقد</p>";
-                    if (response[1] == 0) {
-                        tmp = "<p id='beTheFirstReviewer'>اولین نفری باشید که درباره ی این مکان نقد می نویسید</p>";
-                        tmp += "<span id='writeTheFirstReviewer' onclick='document.location.href = showAddReviewPageHotel('{{route('review', ['placeId' => $place->id, 'kindPlaceId' => $kindPlaceId])}}')' class='button_war write_review ui_button primary col-xs-12'>نوشتن نقد</span>";
-                        $("#reviewsContainer").empty().append(tmp);
-                    }
-                    for (i = 0; i < arr.length; i++) {
-                        newElement += "<div class='border-bottom-grey display-inline-block full-width' class='review'>";
-                        newElement += "<div class='prw_rup prw_reviews_basic_review_hsx'>";
-                        newElement += "<div class='reviewSelector'>";
-                        newElement += "<div class='review hsx_review ui_columns is-multiline inlineReviewUpdate provider0'>";
-                        newElement += "<div class='ui_column is-2 float-right'>";
-                        newElement += "<div class='prw_rup prw_reviews_member_info_hsx'>";
-                        newElement += "<div class='member_info'>";
-                        newElement += "<div class='avatar_wrap'>";
-                        newElement += "<div class='prw_rup prw_common_centered_image qa_avatar' onmouseleave='$(\".img_popUp\").addClass(\"hidden\");' onmouseenter='showBriefPopUp(this, \"" + arr[i].visitorId + "\")'>";
-                        newElement += "<span class='imgWrap fixedAspect'>";
-                        newElement += "<img src='" + arr[i].visitorPic + "' class='centeredImg border-radius-100' height='100%'/>";
-                        newElement += "</span></div>";
-                        newElement += "<div class='username text-align-center mg-bt-5'>" + arr[i].visitorId + "</div>";
-                        newElement += "</div>";
-                        newElement += "<div class='memberOverlayLink'>";
-                        newElement += "<div class='memberBadgingNoText'><span class='ui_icon pencil-paper'></span><span class='badgetext'>" + arr[i].comments + "</span>&nbsp;&nbsp;";
-                        newElement += "<span class='ui_icon thumbs-up-fill'></span><span id='commentLikes_" + arr[i].id + "' data-val='" + arr[i].likes + "' class='badgetext'>" + arr[i].likes + "</span>&nbsp;&nbsp;";
-                        newElement += "<span class='ui_icon thumbs-down-fill'></span><span id='commentDislikes_" + arr[i].id + "' data-val='" + arr[i].dislikes + "' class='badgetext'>" + arr[i].dislikes + "</span>";
-                        newElement += "</div>";
-                        newElement += "</div></div></div></div>";
-                        newElement += "<div class='ui_column is-9 float-right'>";
-                        newElement += "<div class='innerBubble'>";
-                        newElement += "<div class='wrap'>";
-                        newElement += "<div class='rating reviewItemInline'>";
-                        switch (arr[i].rate) {
-                            case 5:
-                                newElement += "<span class='ui_bubble_rating bubble_50'></span>";
-                                break;
-                            case 4:
-                                newElement += "<span class='ui_bubble_rating bubble_40'></span>";
-                                break;
-                            case 3:
-                                newElement += "<span class='ui_bubble_rating bubble_30'></span>";
-                                break;
-                            case 2:
-                                newElement += "<span class='ui_bubble_rating bubble_20'></span>";
-                                break;
-                            default:
-                                newElement += "<span class='ui_bubble_rating bubble_10'></span>";
-                                break;
-                        }
-                        newElement += "<span class='ratingDate relativeDate float-right'>نوشته شده در تاریخ " + arr[i].date + " </span></div>";
-                        newElement += "<div class='quote isNew'><a href='" + homeURL + "/showReview/" + arr[i].id + "'><h2 class='font-size-1em noQuotes'>" + arr[i].subject + "</h2></a></div>";
-                        newElement += "<div class='prw_rup prw_reviews_text_summary_hsx'>";
-                        newElement += "<div class='entry'>";
-                        newElement += "<p class='partial_entry partial-entry-paragraph' id='partial_entry_" + arr[i].id + "'>" + arr[i].text;
-                        newElement += "</p>";
-                        newElement += "<div id='showMoreReview_" + arr[i].id + "' class='hidden showMoreReviewDiv' onclick='showMoreReview(" + arr[i].id + ")'>بیشتر</div></div></div>";
-                        if (arr[i].pic != -1)
-                            newElement += "<div><img id='reviewPic_" + arr[i].id + "' class='hidden' width='150px' height='150px' src='" + arr[i].pic + "'></div>";
-                        newElement += "<div class='prw_rup prw_reviews_vote_line_hsx'>";
-                        newElement += "<div class='tooltips wrap'><span id='reportSpanReviews' onclick='showReportPrompt(\"" + arr[i].id + "\")' class='taLnk no_cpu ui_icon '>گزارش تخلف</span></div>";
-                        newElement += "<div class='helpful redesigned hsx_helpful'>";
-                        newElement += "<span onclick='likeComment(\"" + arr[i].id + "\")' class='thankButton hsx_thank_button'>";
-                        newElement += "<span class='helpful_text'><span class='ui_icon thumbs-up-fill emphasizeWithColor'></span><span class='numHelp emphasizeWithColor'></span><span class='thankUser'>" + arr[i].visitorId + " </span></span>";
-                        newElement += "<div class='buttonShade hidden'><img src='https://static.tacdn.com/img2/generic/site/loading_anim_gry_sml.gif'/></div>";
-                        newElement += "</span>";
-                        newElement += "<span onclick='dislikeComment(\"" + arr[i].id + "\")' class='thankButton hsx_thank_button'>";
-                        newElement += "<span class='helpful_text'><span class='ui_icon thumbs-down-fill emphasizeWithColor'></span><span class='numHelp emphasizeWithColor'></span><span class='thankUser'>" + arr[i].visitorId + " </span></span>";
-                        newElement += "<div class='buttonShade hidden'><img src='https://static.tacdn.com/img2/generic/site/loading_anim_gry_sml.gif'/></div>";
-                        newElement += "</span>";
-                        newElement += "</div></div></div>";
-                        newElement += "<div class='loadingShade hidden'>";
-                        newElement += "<div class='ui_spinner'></div></div></div></div></div></div></div></div>";
-                    }
-                    $("#reviewsContainer").append(newElement);
-                    for (i = 0; i < arr.length; i++) {
-                        scrollHeight = $("#partial_entry_" + arr[i].id).prop('scrollHeight');
-                        offsetHeight = $("#partial_entry_" + arr[i].id).prop('offsetHeight');
-                        if (offsetHeight < scrollHeight) {
-                            $('#showMoreReview_' + arr[i].id).removeClass('hidden');
-                        }
-                        else {
-                            $('#showMoreReview_' + arr[i].id).addClass('hidden');
-                        }
-                    }
-                    newElement = "";
-                    limit = Math.ceil(response[0] / 6);
-                    preCurr = passCurr = false;
-                    for (k = 1; k <= limit; k++) {
-                        if (Math.abs(currPage - k) < 4 || k == 1 || k == limit) {
-                            if (k == currPage) {
-                                newElement += "<span data-page-number='" + k + "' class='pageNum current pageNumComment'>" + k + "</span>";
-                            }
-                            else {
-                                newElement += "<a onclick='changeCommentPage(this)' data-page-number='" + k + "' class='pageNum taLnk pageNumComment'>" + k + "</a>";
-                            }
-                        }
-                        else if (k < currPage && !preCurr) {
-                            preCurr = true;
-                            newElement += "<span class='separator'>&hellip;</span>";
-                        }
-                        else if (k > currPage && !passCurr) {
-                            passCurr = true;
-                            newElement += "<span class='separator'>&hellip;</span>";
-                        }
-                    }
-                    $("#pageNumCommentContainer").empty().append(newElement);
-                    if ($("#commentCount").empty())
-                        $("#commentCount").append(response[1]);
-                }
-            });
-        }
-
-        function startHelp() {
-            setGreenBackLimit(7);
-            if (hasLogin) {
-                if (noAns)
-                    initHelp2(16, [0, 4, 15], 'MAIN', 100, 400, [14, 15], [50, 100]);
-                else
-                    initHelp2(16, [0, 4], 'MAIN', 100, 400, [15], [100]);
-            }
-            else {
-                if (noAns)
-                    initHelp2(16, [0, 1, 2, 5, 8, 15], 'MAIN', 100, 400, [14, 15], [50, 100]);
-                else
-                    initHelp2(16, [0, 1, 2, 5, 8], 'MAIN', 100, 400, [15], [100]);
-            }
-        }
-
-        function showQuestions(arr) {
-            $("#questionsContainer").empty();
-            if (arr.length == 0) {
-                noAns = true;
-                $("#questionsContainer").append('<p class="no-question">با پرسیدن اولین سوال، از دوستان خود کمک بگیرید و به دیگران کمک کنید. سوال شما فقط به اندازه یک کلیک وقت می گیرد</p>');
-            }
-
-            var newElement;
-
-            for (i = 0; i < arr.length; i++) {
-                newElement = "<div class='ui_column is-12 position-relative float-right'><div class='ui_column is-2'>";
-                newElement += "<div class='avatar_wrap'>";
-                newElement += "<div class='prw_rup prw_common_centered_image qa_avatar' onmouseleave='$(\".img_popUp\").addClass(\"hidden\");' onmouseenter='showBriefPopUp(this, \"" + arr[i].visitorId + "\")'>";
-                newElement += "<span class='imgWrap fixedAspect'>";
-                newElement += "<img src='" + arr[i].visitorPic + "' class='centeredImg' height='100%'/>";
-                newElement += "</span></div>";
-                newElement += "<div class='username'>" + arr[i].visitorId + "</div>";
-                newElement += "</div></div>";
-                newElement += "<div class='ui_column is-8 position-relative'><a href='" + homeURL + "/seeAllAns/" + arr[i].id + "'>" + arr[i].text + "</a>";
-                newElement += "<div class='question_date'>" + arr[i].date + "<span class='iapSep'>|</span><span id='showReportReviews2' onclick='showReportPrompt(\"" + arr[i].id + "\")' class='ui_icon'>گزارش تخلف</span></div>";
-                if (i == 0) {
-                    newElement += "<div id='targetHelp_15' class='targets row'><span class='col-xs-12 ui_button primary small answerButton' onclick='showAnsPane(\"" + arr[i].id + "\")'>پاسخ ";
-                    newElement += "</span>";
-                    newElement += '<div id="helpSpan_15" class="helpSpans hidden">';
-                    newElement += '<span class="introjs-arrow"></span>';
-                    newElement += "<p>";
-                    newElement += "می توانید با این دکمه به سوال ها پاسخ دهید تا دوستا ن تان هم به سوالات شما پاسخ دهند.";
-                    newElement += "</p>";
-                    newElement += '<button data-val="15" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_15">بعدی</button>';
-                    newElement += '<button onclick="show(14, -1)" data-val="15" class="btn btn-primary backBtnsHelp" id="backBtnHelp_15">قبلی</button>';
-                    newElement += '<button onclick="myQuit();" class="btn btn-danger exitBtnHelp">خروج</button>';
-                    newElement += '</div>';
-                    newElement += "</div>";
-                }
-                else {
-                    newElement += "<span class='ui_button primary small answerButton float-right' onclick='showAnsPane(\"" + arr[i].id + "\")'>پاسخ ";
-                    newElement += "</span>";
-                }
-                newElement += "<span class='showAllComments ui_button secondary small' id='showAll_" + arr[i].id + "' onclick='showAllAns(\"" + arr[i].id + "\", -1)'>نمایش " + arr[i].ansNum + " جواب</span> ";
-                newElement += "<span class='ui_button secondary small hidden' id='hideAll_" + arr[i].id + "' onclick='showAllAns(\"" + arr[i].id + "\", 1)'>پنهان کردن جواب ها</span>";
-                newElement += "<div class='confirmDeleteExplanation hidden'>آیا می خواهی این سوال حذف شود ؟</div>";
-                newElement += "<span class='ui_button primary small delete hidden'>Delete</span>";
-                newElement += "<span class='ui_button primary small confirmDelete hidden'>Confirm</span>";
-                newElement += "<span class='ui_button secondary small cancelDelete hidden'>Cancel</span>";
-                newElement += "<div class='answerForm hidden' id='answerForm_" + arr[i].id + "'>";
-                newElement += "<div class='whatIsYourAnswer'>جواب شما چیست ؟</div>";
-                newElement += "<textarea class='answerText ui_textarea' id='answerText_" + arr[i].id + "' placeholder='سلام ، جواب خود را وارد کنید'></textarea>";
-                newElement += "<ul class='errors hidden'></ul>";
-                newElement += "<a target='_blank' href='" + soon + "' class='postingGuidelines float-left'>راهنما  و قوانین</a>";
-                newElement += "<div><span class='ui_button primary small formSubmit' onclick='sendAns(\"" + arr[i].id + "\")'>ارسال</span>";
-                newElement += "<span class='ui_button secondary small' onclick='hideAnsPane()'>لغو</span></div>";
-                newElement += "<div class='captcha_here'></div>";
-                newElement += "</div>";
-                newElement += "<div id='response_" + arr[i].id + "' class='answerList hidden clear-both'>";
-                newElement += "</div><p id='ans_err_" + arr[i].id + "'></p></div></div><div class='clear-both'></div> ";
-                $("#questionsContainer").append(newElement);
-            }
-            $("#pageNumQuestionContainer").empty();
-            // newElement = "";
-            // limit = Math.ceil(response[0] / 6);
-            // preCurr = passCurr = false;
-            //
-            // for(k = 1; k <= limit; k++) {
-            //     if(Math.abs(currPageQuestions - k) < 4 || k == 1 || k == limit) {
-            //         if (k == currPageQuestions) {
-            //             newElement += "<span data-page-number='" + k + "' class='pageNum current pageNumQuestion'>" + k + "</span>";
-            //         }
-            //         else {
-            //             newElement += "<a onclick='changePageQuestion(this)' data-page-number='" + k + "' class='pageNum taLnk pageNumQuestion'>" + k + "</a>";
-            //         }
-            //     }
-            //     else if(k < currPage && !preCurr) {
-            //         preCurr = true;
-            //         newElement += "<span class='separator'>&hellip;</span>";
-            //     }
-            //     else if(k > currPage && !passCurr) {
-            //         passCurr = true;
-            //         newElement += "<span class='separator'>&hellip;</span>";
-            //     }
-            // }
-            //
-            // $("#pageNumQuestionContainer").append(newElement);
-        }
-
-        function toggleMoreCities() {
-            if ($('#moreCities').hasClass('hidden')) {
-                $('#moreCities').removeClass('hidden');
-                $('#moreLessSpan').empty().append('شهر های کمتر');
-            }
-            else {
-                $('#moreCities').addClass('hidden');
-                $('#moreLessSpan').empty().append('شهر های بیشتر');
-            }
-        }
-
-        function customReport() {
-            if ($("#custom-checkBox").is(':checked')) {
-                var newElement = "<div class='col-xs-12'>";
-                newElement += "<textarea id='customDefinedReport' maxlength='1000' required placeholder='حداکثر 1000 کاراکتر'></textarea>";
-                newElement += "</label></div>";
-                $("#custom-define-report").empty().append(newElement).css("visibility", "visible");
-            }
-            else {
-                $("#custom-define-report").empty().css("visibility", "hidden");
-            }
-        }
-
-        function getReports(logId) {
-            $("#reports").empty();
-            $.ajax({
-                type: 'post',
-                url: getReportsDir,
-                data: {
-                    'logId': logId
-                },
-                success: function (response) {
-                    if (response != "")
-                        response = JSON.parse(response);
-                    var newElement = "<div id='reportContainer' class='row'>";
-                    if (response != "") {
-                        for (i = 0; i < response.length; i++) {
-                            newElement += "<div class='col-xs-12'>";
-                            newElement += "<div class='ui_input_checkbox'>";
-                            if (response[i].selected == true)
-                                newElement += "<input id='report_" + response[i].id + "' type='checkbox' name='reports' checked value='" + response[i].id + "'>";
-                            else
-                                newElement += "<input id='report_" + response[i].id + "' type='checkbox' name='reports' value='" + response[i].id + "'>";
-                            newElement += "<label class='labelForCheckBox' for='report_" + response[i].id + "'>";
-                            newElement += "<span></span>&nbsp;&nbsp;";
-                            newElement += response[i].description;
-                            newElement += "</label>";
-                            newElement += "</div></div>";
-                        }
-                    }
-                    newElement += "<div class='col-xs-12'>";
-                    newElement += "<div class='ui_input_checkbox'>";
-                    newElement += "<input id='custom-checkBox' onchange='customReport()' type='checkbox' name='reports' value='-1'>";
-                    newElement += "<label class='labelForCheckBox' for='custom-checkBox'>";
-                    newElement += "<span></span>&nbsp;&nbsp;";
-                    newElement += "سایر موارد</label>";
-                    newElement += "</div></div>";
-                    newElement += "<div id='custom-define-report'></div>";
-                    newElement += "</div>";
-                    $("#reports").append(newElement);
-                    if (response != "" && response.length > 0 && response[0].text != "") {
-                        customReport();
-                        $("#customDefinedReport").val(response[0].text);
-                    }
-                }
-            });
-        }
-
-        function sendReport() {
-            customMsg = "";
-            if ($("#customDefinedReport").val() != null)
-                customMsg = $("#customDefinedReport").val();
-            var checkedValuesReports = $("input:checkbox[name='reports']:checked").map(function () {
-                return this.value;
-            }).get();
-            if (checkedValuesReports.length <= 0)
-                return;
-            if (!hasLogin) {
-                url = homeURL + "/seeAllAns/" + questionId + "/report/" + selectedLogId;
-                showLoginPrompt(url);
-                return;
-            }
-            $.ajax({
-                type: 'post',
-                url: sendReportDir,
-                data: {
-                    "logId": selectedLogId,
-                    "reports": checkedValuesReports,
-                    "customMsg": customMsg
-                },
-                success: function (response) {
-                    if (response == "ok") {
-                        closeReportPrompt();
-                    }
-                    else {
-                        $("#errMsgReport").append('مشکلی در انجام عملیات مورد نقد رخ داده است');
-                    }
-                }
-            });
-        }
-
-        function closeReportPrompt() {
-            $("#custom-checkBox").css("visibility", 'hidden');
-            $("#custom-define-report").css("visibility", 'hidden');
-            $("#reportPane").addClass('hidden');
-            $('.dark').hide();
-        }
-
-        function showReportPrompt(logId) {
-            if (!hasLogin) {
-                url = homeURL + "/seeAllAns/" + questionId + "/report/" + logId;
-                showLoginPrompt(url);
-                return;
-            }
-            $('.dark').show();
-            selectedLogId = logId;
-            getReports(logId);
-            showElement('reportPane');
-        }
-
-        function showAnsPane(logId) {
-            $(".answerForm").addClass('hidden');
-            $("#answerForm_" + logId).removeClass('hidden');
-        }
-
-        function hideAnsPane() {
-            $(".answerForm").addClass('hidden');
-        }
-
-        function sendAns(logId) {
-            if (!hasLogin) {
-                showLoginPrompt(hotelDetailsInAnsMode);
-                return;
-            }
-            if ($("#answerText_" + logId).val() == "")
-                return;
-            $.ajax({
-                type: 'post',
-                url: sendAnsDir,
-                data: {
-                    'placeId': placeId,
-                    'kindPlaceId': kindPlaceId,
-                    'text': $("#answerText_" + logId).val(),
-                    'relatedTo': logId
-                },
-                success: function (response) {
-                    if (response == "ok") {
-                        $(".dark").css('display', '');
-                        $('#ansSubmitted').removeClass('hidden');
-                    }
-                    else {
-                        $("#ans_err_" + logId).empty().append('تنها یکبار می توانید به هر سوال پاسخ دهید');
-                    }
-                }
-            });
-        }
-
-        function showAllAns(logId, num) {
-            $.ajax({
-                type: 'post',
-                url: showAllAnsDir,
-                data: {
-                    'logId': logId,
-                    'num': num
-                },
-                success: function (response) {
-                    if (num == -1) {
-                        $("#hideAll_" + logId).removeClass('hidden');
-                        $("#showAll_" + logId).addClass('hidden');
-                        $("#response_" + logId).removeClass('hidden');
-                    }
-                    else {
-                        $("#hideAll_" + logId).addClass('hidden');
-                        $("#showAll_" + logId).removeClass('hidden');
-                        $("#response_" + logId).addClass('hidden');
-                    }
-                    response = JSON.parse(response);
-                    newElement = "";
-                    for (i = 0; i < response.length; i++) {
-                        newElement += "<div class='prw_rup prw_common_location_posting'>";
-                        newElement += "<div class='response'>";
-                        newElement += "<div class='header mg-rt-22percent'><span>پاسخ از " + response[i].visitorId + "</span> | ";
-                        newElement += "<span class='iapSep'>|</span>";
-                        newElement += "<span onclick='showReportPrompt(\"" + response[i].id + "\")' class='ui_icon cursor-pointer font-size-10'>گزارش تخلف</span>";
-                        newElement += "</div>";
-                        newElement += "<div class='content'>";
-                        newElement += "<div class='abbreviate'>" + response[i].text;
-                        newElement += "</div></div>";
-                        newElement += "<div class='confirmDeleteExplanation hidden'>آیا می خواهی این سوال حذف شود ؟</div>";
-                        newElement += "<span class='ui_button primary small delete hidden'>حذف</span> <span class='ui_button primary small confirmDelete hidden'>ثبت</span> <span class='ui_button secondary small cancelDelete hidden'>لغو</span>";
-                        newElement += "<div class='votingForm'>";
-                        newElement += "<div class='voteIcon' onclick='likeAns(" + response[i].id + ")'>";
-                        newElement += "<div class='ui_icon single-chevron-up-circle'></div>";
-                        newElement += "<div class='ui_icon single-chevron-up-circle-fill'></div>";
-                        newElement += "<div class='contents hidden'>پاسخ مفید</div>";
-                        newElement += "</div>";
-                        newElement += "<div class='voteCount'>";
-                        newElement += "<div class='score' data-val='" + response[i].rate + "' id='score_" + response[i].id + "'>" + response[i].rate + "</div>";
-                        newElement += "<div>نقد من</div>";
-                        newElement += "</div>";
-                        newElement += "<div class='voteIcon' onclick='dislikeAns(" + response[i].id + ")'>";
-                        newElement += "<div class='ui_icon single-chevron-down-circle-fill'></div>";
-                        newElement += "<div class='ui_icon single-chevron-down-circle'></div>";
-                        newElement += "<div class='contents hidden'>پاسخ غیر مفید</div>";
-                        newElement += "</div></div></div></div>";
-                    }
-                    $("#response_" + logId).empty().append(newElement);
-                }
-            });
-        }
-
-        function likeComment(logId) {
-            $.ajax({
-                type: 'post',
-                url: opOnComment,
-                data: {
-                    'logId': logId,
-                    'mode': 'like'
-                },
-                success: function (response) {
-                    if (response == "1") {
-                        $("#commentLikes_" + logId).empty()
-                            .attr('data-val', parseInt($("#commentLikes_" + logId).attr('data-val')) + 1)
-                            .append($("#commentLikes_" + logId).attr('data-val'));
-                    }
-                    else if (response == "2") {
-                        $("#commentLikes_" + logId).empty()
-                            .attr('data-val', parseInt($("#commentLikes_" + logId).attr('data-val')) + 1)
-                            .append($("#commentLikes_" + logId).attr('data-val'));
-                        $("#commentDislikes_" + logId).empty()
-                            .attr('data-val', parseInt($("#commentDislikes_" + logId).attr('data-val')) - 1)
-                            .append($("#commentDislikes_" + logId).attr('data-val'));
-                    }
-                }
-            });
-        }
-
-        function likeAns(logId) {
-            $.ajax({
-                type: 'post',
-                url: opOnComment,
-                data: {
-                    'logId': logId,
-                    'mode': 'like'
-                },
-                success: function (response) {
-                    if (response == "1") {
-                        $("#score_" + logId).empty()
-                            .attr('data-val', parseInt($("#score_" + logId).attr('data-val')) + 1)
-                            .append($("#score_" + logId).attr('data-val'));
-                    }
-                    else if (response == "2") {
-                        $("#score_" + logId).empty()
-                            .attr('data-val', parseInt($("#score_" + logId).attr('data-val')) + 2)
-                            .append($("#score_" + logId).attr('data-val'));
-                    }
-                }
-            });
-        }
-
-        function dislikeAns(logId) {
-            $.ajax({
-                type: 'post',
-                url: opOnComment,
-                data: {
-                    'logId': logId,
-                    'mode': 'dislike'
-                },
-                success: function (response) {
-                    if (response == "1") {
-                        $("#score_" + logId).empty()
-                            .attr('data-val', parseInt($("#score_" + logId).attr('data-val')) - 1)
-                            .append($("#score_" + logId).attr('data-val'));
-                    }
-                    else if (response == "2") {
-                        $("#score_" + logId).empty()
-                            .attr('data-val', parseInt($("#score_" + logId).attr('data-val')) - 2)
-                            .append($("#score_" + logId).attr('data-val'));
-                    }
-                }
-            });
-        }
-
-        function dislikeComment(logId) {
-            $.ajax({
-                type: 'post',
-                url: opOnComment,
-                data: {
-                    'logId': logId,
-                    'mode': 'dislike'
-                },
-                success: function (response) {
-                    if (response == "1") {
-                        $("#commentDislikes_" + logId).empty()
-                            .attr('data-val', parseInt($("#commentDislikes_" + logId).attr('data-val')) + 1)
-                            .append($("#commentDislikes_" + logId).attr('data-val'));
-                    }
-                    else if (response == "2") {
-                        $("#commentDislikes_" + logId).empty()
-                            .attr('data-val', parseInt($("#commentDislikes_" + logId).attr('data-val')) + 1)
-                            .append($("#commentDislikes_" + logId).attr('data-val'));
-                        $("#commentLikes_" + logId).empty()
-                            .attr('data-val', parseInt($("#commentLikes_" + logId).attr('data-val')) - 1)
-                            .append($("#commentLikes_" + logId).attr('data-val'));
-                    }
-                }
-            });
-        }
-
-        function filter() {
-            var checkedValues = $("input:checkbox[name='filterComment[]']:checked").map(function () {
-                return this.value;
-            }).get();
-            if (checkedValues.length == 0)
-                checkedValues = -1;
-            $.ajax({
-                type: 'post',
-                url: filterComments,
-                data: {
-                    'filters': checkedValues,
-                    'placeId': placeId,
-                    'kindPlaceId': kindPlaceId,
-                    'tag': selectedTag,
-                    'page': currPage
-                },
-                success: function (response) {
-                    showComments(JSON.parse(response));
-                }
-            });
-        }
-
-        function showAddPhotoPane() {
-            if (!hasLogin) {
-                showLoginPrompt(hotelDetailsInAddPhotoMode);
-                return;
-            }
-            // $('.dark').show();
-            showElement('photoEditor');
-            getPhotoFilters();
-        }
-
-        function checkSendPhotoBtnAbility() {
-            var checkedValues = $("input:radio[name='filter']:checked").map(function () {
-                return this.value;
-            }).get();
-            if (checkedValues.length == 0) {
-                $("#sendPhotoBtn").attr('disabled', 'disabled');
-            }
-            else {
-                $("#sendPhotoBtn").removeAttr('disabled');
-            }
-        }
-
-        function getPhotoFilters() {
-            $.ajax({
-                type: 'post',
-                url: getPhotoFilter,
-                data: {
-                    'kindPlaceId': kindPlaceId
-                },
-                success: function (response) {
-                    response = JSON.parse(response);
-                    newElement = "";
-                    for (i = 0; i < response.length; i++) {
-                        newElement += '<div class="ui_input_checkbox radioOption float-rightImp">';
-                        newElement += '<input type="radio" name="mask" value="' + response[i].id + '" id="cat_file_' + response[i].id + '">';
-                        newElement += '<label class="labelForCheckBox" for="cat_file_' + response[i].id + '">';
-                        newElement += '<span></span>&nbsp;&nbsp;';
-                        newElement += response[i].name + '</label>'
-                        newElement += '</div><div class="clear-both"></div>';
-                    }
-                    $("#photoTags").empty().append(newElement);
-                }
-            });
-        }
-
-        function showDetails(username) {
-            if (username == null)
-                return;
-            $.ajax({
-                type: 'post',
-                url: showUserBriefDetail,
-                data: {
-                    'username': username
-                },
-                success: function (response) {
-                    if (response.length == 0)
-                        return;
-                    response = JSON.parse(response);
-                    total = response.excellent + response.veryGood + response.average + response.bad + response.veryBad;
-                    total /= 100;
-                    var newElement = "<div class='arrow' id='arrowHotelDetails'></div>";
-                    newElement += "<div class='body_text'>";
-                    newElement += "<div class='memberOverlay simple container moRedesign'>";
-                    newElement += "<div class='innerContent'>";
-                    newElement += "<div class='memberOverlayRedesign g10n'>";
-                    newElement += "<a href='" + homeURL + "/otherProfile/" + username + "'>";
-                    newElement += "<h3 class='username reviewsEnhancements'>" + username + "</h3>";
-                    newElement += "</a>";
-                    newElement += "<div class='memberreviewbadge'>";
-                    newElement += "<div class='badgeinfo'>";
-                    newElement += "سطح <span>" + response.level + "</span>";
-                    newElement += "</div></div>";
-                    newElement += "<ul class='memberdescriptionReviewEnhancements'>";
-                    newElement += "<li>تاریخ عضویت در سایت " + response.created + "</li>";
-                    newElement += "<li>از " + response.city + " در " + response.state + " </li>";
-                    newElement += "</ul>";
-                    newElement += "<ul class='countsReviewEnhancements'>";
-                    newElement += "<li class='countsReviewEnhancementsItem'>";
-                    newElement += "<span class='ui_icon pencil-paper iconReviewEnhancements'></span>";
-                    newElement += "<span class='badgeTextReviewEnhancements'>" + response.rates + " نقد</span>";
-                    newElement += "</li>";
-                    newElement += "<li class='countsReviewEnhancementsItem'>";
-                    newElement += "<span class='ui_icon globe-world iconReviewEnhancements'></span>";
-                    newElement += "<span class='badgeTextReviewEnhancements'>" + response.seen + " مشاهده</span>";
-                    newElement += "</li>";
-                    newElement += "<li class='countsReviewEnhancementsItem'>";
-                    newElement += "<span class='ui_icon thumbs-up-fill iconReviewEnhancements'></span>";
-                    newElement += "<span class='badgeTextReviewEnhancements'>" + response.likes + " رای مثبت</span>";
-                    newElement += "</li>";
-                    newElement += "<li class='countsReviewEnhancementsItem'>";
-                    newElement += "<span class='ui_icon thumbs-down-fill iconReviewEnhancements'></span>";
-                    newElement += "<span class='badgeTextReviewEnhancements'>" + response.dislikes + " رای منفی</span>";
-                    newElement += "</li>";
-                    newElement += "</ul>";
-                    newElement += "<div class='wrap'>";
-                    newElement += "<ul class='memberTagsReviewEnhancements'>";
-                    newElement += "</ul></div>";
-                    newElement += "<div class='wrap'>";
-                    newElement += "<div class='wrap container histogramReviewEnhancements'>";
-                    newElement += "<div class='barlogoReviewEnhancements'>";
-                    newElement += "<span>پراکندگی نقدها</span>";
-                    newElement += "</div><ul>";
-                    newElement += "<div class='chartRowReviewEnhancements'>";
-                    newElement += "<span class='rowLabelReviewEnhancements rowCellReviewEnhancements'>عالی</span>";
-                    newElement += "<span class='rowBarReviewEnhancements rowCellReviewEnhancements'>";
-                    newElement += "<span class='barReviewEnhancements'>";
-                    newElement += "<span class='fillReviewEnhancements' style='width:" + response.excellent / total + "%;'></span>";
-                    newElement += "</span></span>";
-                    newElement += "<span class='rowCountReviewEnhancements rowCellReviewEnhancements'> " + response.excellent + "</span>";
-                    newElement += "</div>";
-                    newElement += "<div class='chartRowReviewEnhancements'>";
-                    newElement += "<span class='rowLabelReviewEnhancements rowCellReviewEnhancements'>خوب</span>";
-                    newElement += "<span class='rowBarReviewEnhancements rowCellReviewEnhancements'>";
-                    newElement += "<span class='barReviewEnhancements'>";
-                    newElement += "<span class='fillReviewEnhancements' style='width:" + response.veryGood / total + "%;'></span>";
-                    newElement += "</span></span>";
-                    newElement += "<span class='rowCountReviewEnhancements rowCellReviewEnhancements'> " + response.veryGood + "</span>";
-                    newElement += "</div>";
-                    newElement += "<div class='chartRowReviewEnhancements'>";
-                    newElement += "<span class='rowLabelReviewEnhancements rowCellReviewEnhancements'>معمولی</span>";
-                    newElement += "<span class='rowBarReviewEnhancements rowCellReviewEnhancements'>";
-                    newElement += "<span class='barReviewEnhancements'>";
-                    newElement += "<span class='fillReviewEnhancements' style='width:" + response.average / total + "%;'></span>";
-                    newElement += "</span></span>";
-                    newElement += "<span class='rowCountReviewEnhancements rowCellReviewEnhancements'> " + response.average + "</span>";
-                    newElement += "</div>";
-                    newElement += "<div class='chartRowReviewEnhancements'>";
-                    newElement += "<span class='rowLabelReviewEnhancements rowCellReviewEnhancements'>ضعیف</span>";
-                    newElement += "<span class='rowBarReviewEnhancements rowCellReviewEnhancements'>";
-                    newElement += "<span class='barReviewEnhancements'>";
-                    newElement += "<span class='fillReviewEnhancements' style='width:" + response.bad / total + "%;'></span>";
-                    newElement += "</span></span>";
-                    newElement += "<span class='rowCountReviewEnhancements rowCellReviewEnhancements'> " + response.bad + "</span>";
-                    newElement += "</div>";
-                    newElement += "<div class='chartRowReviewEnhancements'>";
-                    newElement += "<span class='rowLabelReviewEnhancements rowCellReviewEnhancements'>خیلی بد</span>";
-                    newElement += "<span class='rowBarReviewEnhancements rowCellReviewEnhancements'>";
-                    newElement += "<span class='barReviewEnhancements'>";
-                    newElement += "<span class='fillReviewEnhancements' style='width:" + response.veryBad / total + "%;'></span>";
-                    newElement += "</span></span>";
-                    newElement += "<span class='rowCountReviewEnhancements rowCellReviewEnhancements'> " + response.veryBad + "</span>";
-                    newElement += "</div></ul></div></div></div></div></div></div>";
-                    $(".img_popUp").empty().append(newElement).removeClass('hidden');
-                }
-            });
-        }
-
-        function showBriefPopUp(thisVar, owner) {
-            var bodyRect = document.body.getBoundingClientRect(),
-                elemRect = thisVar.getBoundingClientRect(),
-                offset = elemRect.top - bodyRect.top,
-                offset2 = elemRect.left - bodyRect.left;
-            if (offset < 0)
-                offset = Math.abs(offset);
-            $(".img_popUp").css("top", offset).css("left", offset2 - 450);
-            showDetails(owner);
-        }
-
-        // function stickIt() {
-        //     var orgElementPos = $('.original').offset();
-        //     orgElementTop = orgElementPos.top;
-        //     if ($(window).scrollTop() >= (orgElementTop)) {
-        //         // scrolled past the original position; now only show the cloned, sticky element.
-        //         // Cloned element should always have same left position and width as original element.
-        //         orgElement = $('.original');
-        //         coordsOrgElement = orgElement.offset();
-        //         leftOrgElement = coordsOrgElement.left;
-        //         widthOrgElement = orgElement.css('width');
-        //         $('.cloned').addClass('my_moblie_hidden')
-        //             .css('left', '0%').css('top', 0).css('font-size', '13px').css('right', '0%').css('width', 'auto').show()
-        //             .css('visibility', 'hidden');
-        //     } else {
-        //         // not scrolled past the menu; only show the original menu.
-        //         $('.cloned').hide();
-        //         $('.original').css('visibility', 'visible');
-        //     }
-        // }
-
-        function checkOverFlow() {
-            offsetHeight = $('#introductionText').prop('offsetHeight');
-            scrollHeight = $('#introductionText').prop('scrollHeight');
-            if (offsetHeight < scrollHeight)
-                $('#showMore').removeClass('hidden');
-            else {
-                $('#showMore').addClass('hidden');
-            }
-        }
-
-        function showMore() {
-            scrollHeight = $('#introductionText').prop('scrollHeight');
-            $('#introductionText').css('max-height', '');
-            $('#showMore').empty().append('کمتر').attr('onclick', 'showLess()').css('padding-top', (scrollHeight - 12) + 'px');
-        }
-
-        function showLess() {
-            $('#introductionText').css('max-height', '21px');
-            $('#showMore').empty().append('بیشتر').attr('onclick', 'showMore()').css('padding-top', '');
-        }
-
-        function showMoreReview(idx) {
-            $('#partial_entry_' + idx).css('max-height', '');
-            $('#showMoreReview_' + idx).empty().append('کمتر').attr('onclick', 'showLessReview("' + idx + '")');
-            $("#reviewPic_" + idx).removeClass('hidden');
-        }
-
-        function showLessReview(idx) {
-            $('#partial_entry_' + idx).css('max-height', '70px');
-            $('#showMoreReview_' + idx).empty().append('بیشتر').attr('onclick', 'showMoreReview(' + idx + ')');
-            $("#reviewPic_" + idx).addClass('hidden');
-        }
-
-        function showAddReviewPageHotel(url) {
-            if (!hasLogin) {
-                showLoginPrompt(url);
-            }
-            else {
-                document.location.href = url;
-            }
-        }
-    </script>
-
     @include('layouts.pop-up-create-trip_in_hotel_details')
-
-    <script>
-        $(document).ready(function () {
-            $('.login-button').click(function () {
-                var url;
-                if (placeMode == "hotel")
-                    url = '{{route('hotelDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';
-                else if (placeMode == "amaken")
-                    url = '{{route('amakenDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';
-                else
-                    url = '{{route('restaurantDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';
-                $(".dark").show();
-                showLoginPrompt(url);
-            });
-            $('#share_pic').click(function () {
-                if ($('#share_box').is(":hidden")) {
-                    $('#share_box').show();
-                } else {
-                    $('#share_box').hide();
-                }
-            });
-            @if($mode == "bookMark")
-            bookMark();
-            @elseif($mode == "saveToTrip")
-            saveToTrip();
-            @elseif($mode == "question")
-            showAskQuestion();
-            @elseif($mode == "addPhotoSuccessfully")
-            $(".dark").css('display', '');
-            $("#photoSubmitted").removeClass('hidden');
-            @elseif($mode == 'err')
-            showAddPhotoPane();
-            $("#errMsgAddPhoto").append('{{$err}}');
-            @elseif($mode == "addPhoto")
-            showAddPhotoPane();
-            @endif
-            // $("#date_input").datepicker({
-            //     numberOfMonths: 2,
-            //     showButtonPanel: true,
-            //     dateFormat: "yy/mm/dd"
-            // });
-            //
-            // $("#date_input_end_inHotel").datepicker({
-            //     numberOfMonths: 2,
-            //     showButtonPanel: true,
-            //     dateFormat: "yy/mm/dd"
-            // });
-        });
-    </script>
-
-    <script>
-        var total;
-        var filters = [];
-        var hasFilter = false;
-        var topContainer;
-        var marginTop;
-        var helpWidth;
-        var greenBackLimit = 5;
-        var pageHeightSize = window.innerHeight;
-        var additional = [];
-        var indexes = [];
-        $(".nextBtnsHelp").click(function () {
-            show(parseInt($(this).attr('data-val')) + 1, 1);
-        });
-        $(".backBtnsHelp").click(function () {
-            show(parseInt($(this).attr('data-val')) - 1, -1);
-        });
-        $(".exitBtnHelp").click(function () {
-            myQuit();
-        });
-
-        function myQuit() {
-            clear();
-            $(".dark").hide();
-            enableScroll();
-        }
-
-        function setGreenBackLimit(val) {
-            greenBackLimit = val;
-        }
-
-        function initHelp(t, sL, topC, mT, hW) {
-            total = t;
-            filters = sL;
-            topContainer = topC;
-            marginTop = mT;
-            helpWidth = hW;
-            if (sL.length > 0)
-                hasFilter = true;
-            $(".dark").show();
-            show(1, 1);
-        }
-
-        function initHelp2(t, sL, topC, mT, hW, i, a) {
-            total = t;
-            filters = sL;
-            topContainer = topC;
-            marginTop = mT;
-            helpWidth = hW;
-            additional = a;
-            indexes = i;
-            if (sL.length > 0)
-                hasFilter = true;
-            $(".dark").show();
-            show(1, 1);
-        }
-
-        function isInFilters(key) {
-            key = parseInt(key);
-            for (j = 0; j < filters.length; j++) {
-                if (filters[j] == key)
-                    return true;
-            }
-            return false;
-        }
-
-        function getBack(curr) {
-            for (i = curr - 1; i >= 0; i--) {
-                if (!isInFilters(i))
-                    return i;
-            }
-            return -1;
-        }
-
-        function getFixedFromLeft(elem) {
-            if (elem.prop('id') == topContainer || elem.prop('id') == 'PAGE') {
-                return parseInt(elem.css('margin-left').split('px')[0]);
-            }
-            return elem.position().left +
-                parseInt(elem.css('margin-left').split('px')[0]) +
-                getFixedFromLeft(elem.parent());
-        }
-
-        function getFixedFromTop(elem) {
-            if (elem.prop('id') == topContainer) {
-                return marginTop;
-            }
-            if (elem.prop('id') == "PAGE") {
-                return 0;
-            }
-            return elem.position().top +
-                parseInt(elem.css('margin-top').split('px')[0]) +
-                getFixedFromTop(elem.parent());
-        }
-
-        function getNext(curr) {
-            curr = parseInt(curr);
-            for (i = curr + 1; i < total; i++) {
-                if (!isInFilters(i))
-                    return i;
-            }
-            return total;
-        }
-
-        function bubbles(curr) {
-            if (total <= 1)
-                return "";
-            t = total - filters.length;
-            newElement = "<div class='col-xs-12 position-relative'><div class='col-xs-12 bubbles pd-0 mg-rt-0' style='margin-left: " + ((400 - (t * 18)) / 2) + "px'>";
-            for (i = 1; i < total; i++) {
-                if (!isInFilters(i)) {
-                    if (i == curr)
-                        newElement += "<div id='notInFiltersDiv'></div>";
-                    else
-                        newElement += "<div id='isInFilterDiv' onclick='show(\"" + i + "\", 1)' class='helpBubble'></div>";
-                }
-            }
-            newElement += "</div></div>";
-            return newElement;
-        }
-
-        function clear() {
-            $('.bubbles').remove();
-            $(".targets").css({
-                'position': '',
-                'border': '',
-                'padding': '',
-                'background-color': '',
-                'z-index': '',
-                'cursor': '',
-                'pointer-events': 'auto'
-            });
-            $(".helpSpans").addClass('hidden');
-            $(".backBtnsHelp").attr('disabled', 'disabled');
-            $(".nextBtnsHelp").attr('disabled', 'disabled');
-        }
-
-        function show(curr, inc) {
-            clear();
-            if (hasFilter) {
-                while (isInFilters(curr)) {
-                    curr += inc;
-                }
-            }
-            if (getBack(curr) <= 0) {
-                $("#backBtnHelp_" + curr).attr('disabled', 'disabled');
-            }
-            else {
-                $("#backBtnHelp_" + curr).removeAttr('disabled');
-            }
-            if (getNext(curr) > total - 1) {
-                $("#nextBtnHelp_" + curr).attr('disabled', 'disabled');
-            }
-            else {
-                $("#nextBtnHelp_" + curr).removeAttr('disabled');
-            }
-            if (curr < greenBackLimit) {
-                $("#targetHelp_" + curr).css({
-                    'position': 'relative',
-                    'border': '5px solid #333',
-                    'padding': '10px',
-                    'background-color': '#4dc7bc',
-                    'z-index': 1000001,
-                    'cursor': 'auto'
-                });
-            }
-            else {
-                $("#targetHelp_" + curr).css({
-                    'position': 'relative',
-                    'border': '5px solid #333',
-                    'padding': '10px',
-                    'background-color': 'white',
-                    'z-index': 100000001,
-                    'cursor': 'auto'
-                });
-            }
-            var targetWidth = $("#targetHelp_" + curr).css('width').split('px')[0];
-            var targetHeight = parseInt($("#targetHelp_" + curr).css('height').split('px')[0]);
-            for (j = 0; j < indexes.length; j++) {
-                if (curr == indexes[j]) {
-                    targetHeight += additional[j];
-                    break;
-                }
-            }
-            if ($("#targetHelp_" + curr).offset().top > 200) {
-                $("html, body").scrollTop($("#targetHelp_" + curr).offset().top - 100);
-                $("#helpSpan_" + curr).css({
-                    'left': $("#targetHelp_" + curr).offset().left + targetWidth / 2 - helpWidth / 2 + "px",
-                    'top': targetHeight + 120 + "px"
-                }).removeClass('hidden').append(bubbles(curr));
-            }
-            else {
-                $("#helpSpan_" + curr).css({
-                    'left': $("#targetHelp_" + curr).offset().left + targetWidth / 2 - helpWidth / 2 + "px",
-                    'top': ($("#targetHelp_" + curr).offset().top + targetHeight + 20) % pageHeightSize + "px"
-                }).removeClass('hidden').append(bubbles(curr));
-            }
-            $(".helpBubble").on({
-                mouseenter: function () {
-                    $(this).css('background-color', '#ccc');
-                },
-                mouseleave: function () {
-                    $(this).css('background-color', '#333');
-                }
-            });
-            disableScroll();
-        }
-
-        // left: 37, up: 38, right: 39, down: 40,
-        // spacebar: 32, pageup: 33, pagedown: 34, end: 35, home: 36
-        var keys = {37: 1, 38: 1, 39: 1, 40: 1};
-
-        function preventDefault(e) {
-            e = e || window.event;
-            if (e.preventDefault)
-                e.preventDefault();
-            e.returnValue = false;
-        }
-
-        function preventDefaultForScrollKeys(e) {
-            if (keys[e.keyCode]) {
-                preventDefault(e);
-                return false;
-            }
-        }
-
-        function disableScroll() {
-            if (window.addEventListener) // older FF
-                window.addEventListener('DOMMouseScroll', preventDefault, false);
-            window.onwheel = preventDefault; // modern standard
-            window.onmousewheel = document.onmousewheel = preventDefault; // older browsers, IE
-            window.ontouchmove = preventDefault; // mobile
-            document.onkeydown = preventDefaultForScrollKeys;
-        }
-
-        function enableScroll() {
-            if (window.removeEventListener)
-                window.removeEventListener('DOMMouseScroll', preventDefault, false);
-            window.onmousewheel = document.onmousewheel = null;
-            window.onwheel = null;
-            window.ontouchmove = null;
-            document.onkeydown = null;
-        }
-    </script>
 
     <script>
         var room = 0;
@@ -5520,184 +4023,120 @@ if ($total == 0)
     </script>
 
     <script>
-        function changeStatetounReserved() {
-            document.getElementById('bestPriceRezerved').style.display = 'none';
-            document.getElementById('bestPrice').style.display = 'block';
-        }
-
-        function changeRoomPrice(id) {
-            var x = document.getElementById("extraBedPrice" + id);
-            if (x.style.display === "none") {
-                x.style.display = "block";
-            } else {
-                x.style.display = "none";
-            }
-        }
-
-        function dotedNumber(number) {
-            var i = 1;
-            var num = 0;
-            while (i < number) {
-                i *= 10;
-                num++;
-            }
-            var string_number = '';
-            var mande = num % 3;
-            string_number = Math.floor(number / (Math.pow(10, num - mande))) + '.';
-            number = number % (Math.pow(10, num - mande));
-            num = num - mande;
-            var div = num;
-            for (i = 0; i < div / 3; i++) {
-                if (number != 0) {
-                    num -= 3;
-                    string_number += Math.floor(number / (Math.pow(10, num))) + '.';
-                    number = number % (Math.pow(10, num));
-                }
-                else if (i < (div / 3) - 1) {
-                    string_number += '000.';
-                }
-                else {
-                    string_number += '000';
-                }
-            }
-            return string_number;
-        }
-
-        function inputSearch() {
-            var ageOfChild = [];
-            var goDate;
-            var backDate;
-            var childSelect = document.getElementsByName('ageOfChild');
-            for (var i = 0; i < children; i++) {
-                ageOfChild[i] = childSelect[i + 1].value;
-            }
-            goDate = document.getElementById('goDate').value;
-            backDate = document.getElementById('backDate').value;
-            document.getElementById('form_room').value = room;
-            document.getElementById('form_adult').value = adult;
-            document.getElementById('form_children').value = children;
-            document.getElementById('form_goDate').value = goDate;
-            document.getElementById('form_backDate').value = backDate;
-            document.getElementById('form_ageOfChild').value = ageOfChild;
-            document.getElementById('form_hotel').submit();
-        }
-
-        function editSearch() {
-            changeStatetounReserved();
-            window.location.href = '#bestPrice';
-        }
+        var updateSession = '{{route("updateSession")}}';
 
         @if(session('backDate') != null)
-        document.getElementById('backDate').value = '{{session("backDate")}}';
-        var rooms = '{!! $jsonRoom !!}';
-        rooms = JSON.parse(rooms);
-        var totalMoney = 0;
-        var totalPerDayMoney = 0;
-        var numDay = rooms[0].perDay.length;
-        var room_code = [];
-        var adult_count = [];
-        var extra = [];
-        var num_room_code = [];
-        var room_name = [];
-        document.getElementById('numDay').innerText = numDay;
-        document.getElementById('check_num_day').innerText = numDay;
+            document.getElementById('backDate').value = '{{session("backDate")}}';
+            var rooms = '{!! $jsonRoom !!}';
+            rooms = JSON.parse(rooms);
+            var totalMoney = 0;
+            var totalPerDayMoney = 0;
+            var numDay = rooms[0].perDay.length;
+            var room_code = [];
+            var adult_count = [];
+            var extra = [];
+            var num_room_code = [];
+            var room_name = [];
+            document.getElementById('numDay').innerText = numDay;
+            document.getElementById('check_num_day').innerText = numDay;
 
-        function scrollToBed() {
-            var elmnt = document.getElementById("rooms");
-            elmnt.scrollIntoView();
-        }
-
-        function changeNumRoom(_index, value) {
-            totalMoney = 0;
-            totalPerDayMoney = 0;
-            var totalNumRoom = 0;
-            var text = '';
-            var reserve_text = '';
-            var reserve_money_text = '';
-            room_code = [];
-            adult_count = [];
-            extra = [];
-            num_room_code = [];
-            room_name = [];
-            for (i = 0; i < rooms.length; i++) {
-                numRoom = parseInt(document.getElementById('roomNumber' + i).value);
-                totalNumRoom += numRoom;
-                price = parseInt(rooms[i].perDay[0].price);
-                priceExtraBed = rooms[i].priceExtraGuest;
-                extraBed = document.getElementById('additional_bed' + i).checked;
-                totalPerDayMoney += numRoom * Math.floor(price / 1000) * 1000;
-                if (numRoom != 0) {
-                    room_code.push(rooms[i].roomNumber);
-                    adult_count.push(rooms[i].capacity['adultCount']);
-                    num_room_code.push(numRoom);
-                    room_name.push(rooms[i].name);
-                    text += '<div><span>X' + numRoom + '</span>' + rooms[i].name;
-                    reserve_money_text += '<div><span class="float-right">X' + numRoom + '</span><span class="float-right">' + rooms[i].name + '</span>';
-                    reserve_text += '<div id="changeNumRoomMainDiv" class="row">\n' +
-                        '<div class="col-md-9">\n' +
-                        '<div class="row display-flex flex-direction-row">\n' +
-                        '<div>\n' +
-                        '<span class="color-darkred">نام اتاق: </span>\n' +
-                        '<span>' + rooms[i].name + '</span>\n' +
-                        '</div>\n' +
-                        '<div class="width-33per">\n' +
-                        '<span class="color-darkred">تاریخ ورود: </span>\n' +
-                        '<span>{{session("goDate")}}</span>\n' +
-                        '</div>\n' +
-                        '<div class="width-33per">\n' +
-                        '<span class="color-darkred">تاریخ خروج: </span>\n' +
-                        '<span>{{session("backDate")}}</span>\n' +
-                        '</div>\n' +
-                        '</div>\n' +
-                        '<div class="row display-flex flex-direction-row mg-2per-0">\n' +
-                        '<div class="width-33per">\n' +
-                        '<span class="color-darkred">تعداد مسافر: </span>\n' +
-                        '<span>' + rooms[i].capacity.adultCount + '</span>\n' +
-                        '</div>\n' +
-                        '<div class="width-33per">\n' +
-                        '<span class="color-darkred">سرویس تخت اضافه: </span>\n';
-                    if (extraBed) {
-                        text += '<span class="font-size-085em">با تخت اضافه</span>';
-                        reserve_money_text += '<span class="font-size-0.85em float-right">با تخت اضافه</span><span class="float-left">' + dotedNumber((Math.floor(priceExtraBed / 1000) * 1000) + (Math.floor(price / 1000) * 1000)) + '</span>';
-                        totalPerDayMoney += numRoom * Math.floor(priceExtraBed / 1000) * 1000;
-                        reserve_text += '<span>دارد</span>\n';
-                        extra.push(true);
-                    } else {
-                        reserve_money_text += '<span class="float-left">' + dotedNumber(Math.floor(price / 1000) * 1000) + '</span>';
-                        reserve_text += '<span>ندارد</span>\n';
-                        extra.push(false);
-                    }
-                    text += '</div>';
-                    reserve_money_text += '</div>';
-                    reserve_text += '</div>\n' +
-                        '</div><div class="row display-flex flex-direction-row">\n' +
-                        '<div>\n' +
-                        '<span class="color-darkred"> صبحانه مجانی: </span>\n' +
-                        '<span>دارد</span>\n' +
-                        '</div>\n' +
-                        '</div>\n' +
-                        '</div>\n';
-                    reserve_text += '<div class="col-md-3"><img src="'+rooms[i].pic+'" class="full-width"></div></div>';
-                }
+            function scrollToBed() {
+                var elmnt = document.getElementById("rooms");
+                elmnt.scrollIntoView();
             }
-            totalMoney += totalPerDayMoney * numDay;
-            document.getElementById('totalPriceOneDay').innerText = dotedNumber(totalPerDayMoney);
-            document.getElementById('totalPrice').innerText = dotedNumber(totalMoney);
-            document.getElementById('check_total_price').innerText = dotedNumber(totalMoney);
-            document.getElementById('totalNumRoom').innerText = totalNumRoom;
-            document.getElementById('check_total_num_room').innerText = totalNumRoom;
-            document.getElementById('discriptionNumRoom').innerHTML = text;
-            document.getElementById('check_description').innerHTML = reserve_money_text;
-            document.getElementById('selected_rooms').innerHTML = reserve_text;
-        }
 
-        function showReserve() {
-            if(totalMoney > 0)
-                document.getElementById('check_room').style.display = 'flex';
-        }
-        function updateSession() {
+            function changeNumRoom(_index, value) {
+                totalMoney = 0;
+                totalPerDayMoney = 0;
+                var totalNumRoom = 0;
+                var text = '';
+                var reserve_text = '';
+                var reserve_money_text = '';
+                room_code = [];
+                adult_count = [];
+                extra = [];
+                num_room_code = [];
+                room_name = [];
+                for (i = 0; i < rooms.length; i++) {
+                    numRoom = parseInt(document.getElementById('roomNumber' + i).value);
+                    totalNumRoom += numRoom;
+                    price = parseInt(rooms[i].perDay[0].price);
+                    priceExtraBed = rooms[i].priceExtraGuest;
+                    extraBed = document.getElementById('additional_bed' + i).checked;
+                    totalPerDayMoney += numRoom * Math.floor(price / 1000) * 1000;
+                    if (numRoom != 0) {
+                        room_code.push(rooms[i].roomNumber);
+                        adult_count.push(rooms[i].capacity['adultCount']);
+                        num_room_code.push(numRoom);
+                        room_name.push(rooms[i].name);
+                        text += '<div><span>X' + numRoom + '</span>' + rooms[i].name;
+                        reserve_money_text += '<div><span class="float-right">X' + numRoom + '</span><span class="float-right">' + rooms[i].name + '</span>';
+                        reserve_text += '<div id="changeNumRoomMainDiv" class="row">\n' +
+                            '<div class="col-md-9">\n' +
+                            '<div class="row display-flex flex-direction-row">\n' +
+                            '<div>\n' +
+                            '<span class="color-darkred">نام اتاق: </span>\n' +
+                            '<span>' + rooms[i].name + '</span>\n' +
+                            '</div>\n' +
+                            '<div class="width-33per">\n' +
+                            '<span class="color-darkred">تاریخ ورود: </span>\n' +
+                            '<span>{{session("goDate")}}</span>\n' +
+                            '</div>\n' +
+                            '<div class="width-33per">\n' +
+                            '<span class="color-darkred">تاریخ خروج: </span>\n' +
+                            '<span>{{session("backDate")}}</span>\n' +
+                            '</div>\n' +
+                            '</div>\n' +
+                            '<div class="row display-flex flex-direction-row mg-2per-0">\n' +
+                            '<div class="width-33per">\n' +
+                            '<span class="color-darkred">تعداد مسافر: </span>\n' +
+                            '<span>' + rooms[i].capacity.adultCount + '</span>\n' +
+                            '</div>\n' +
+                            '<div class="width-33per">\n' +
+                            '<span class="color-darkred">سرویس تخت اضافه: </span>\n';
+                        if (extraBed) {
+                            text += '<span class="font-size-085em">با تخت اضافه</span>';
+                            reserve_money_text += '<span class="font-size-0.85em float-right">با تخت اضافه</span><span class="float-left">' + dotedNumber((Math.floor(priceExtraBed / 1000) * 1000) + (Math.floor(price / 1000) * 1000)) + '</span>';
+                            totalPerDayMoney += numRoom * Math.floor(priceExtraBed / 1000) * 1000;
+                            reserve_text += '<span>دارد</span>\n';
+                            extra.push(true);
+                        } else {
+                            reserve_money_text += '<span class="float-left">' + dotedNumber(Math.floor(price / 1000) * 1000) + '</span>';
+                            reserve_text += '<span>ندارد</span>\n';
+                            extra.push(false);
+                        }
+                        text += '</div>';
+                        reserve_money_text += '</div>';
+                        reserve_text += '</div>\n' +
+                            '</div><div class="row display-flex flex-direction-row">\n' +
+                            '<div>\n' +
+                            '<span class="color-darkred"> صبحانه مجانی: </span>\n' +
+                            '<span>دارد</span>\n' +
+                            '</div>\n' +
+                            '</div>\n' +
+                            '</div>\n';
+                        reserve_text += '<div class="col-md-3"><img src="'+rooms[i].pic+'" class="full-width"></div></div>';
+                    }
+                }
+                totalMoney += totalPerDayMoney * numDay;
+                document.getElementById('totalPriceOneDay').innerText = dotedNumber(totalPerDayMoney);
+                document.getElementById('totalPrice').innerText = dotedNumber(totalMoney);
+                document.getElementById('check_total_price').innerText = dotedNumber(totalMoney);
+                document.getElementById('totalNumRoom').innerText = totalNumRoom;
+                document.getElementById('check_total_num_room').innerText = totalNumRoom;
+                document.getElementById('discriptionNumRoom').innerHTML = text;
+                document.getElementById('check_description').innerHTML = reserve_money_text;
+                document.getElementById('selected_rooms').innerHTML = reserve_text;
+            }
+
+            function showReserve() {
+                if(totalMoney > 0)
+                    document.getElementById('check_room').style.display = 'flex';
+            }
+
+            function updateSession() {
             $.ajax({
-                url: '{{route("updateSession")}}',
+                url: updateSession,
                 type: 'post',
                 data: {
                     'room_code': room_code,
@@ -5705,7 +4144,7 @@ if ($total == 0)
                     'extra': extra,
                     'num_room_code': num_room_code,
                     'room_name': room_name,
-                    'hotel_name': '{{$place->hotel_name}}',
+                    'hotel_name': placeName,
                     'rph': '{{$place->rph}}',
                     'backURL': window.location.href
                 },
@@ -5715,6 +4154,75 @@ if ($total == 0)
             })
         }
         @endif
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('.login-button').click(function () {
+                var url;
+                if (placeMode == "hotel")
+                    url = '{{route('hotelDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';
+                else if (placeMode == "amaken")
+                    url = '{{route('amakenDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';
+                else
+                    url = '{{route('restaurantDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';
+                $(".dark").show();
+                showLoginPrompt(url);
+            });
+            $('#share_pic').click(function () {
+                if ($('#share_box').is(":hidden")) {
+                    $('#share_box').show();
+                } else {
+                    $('#share_box').hide();
+                }
+            });
+            @if($mode == "bookMark")
+            bookMark();
+            @elseif($mode == "saveToTrip")
+            saveToTrip();
+            @elseif($mode == "question")
+            showAskQuestion();
+            @elseif($mode == "addPhotoSuccessfully")
+            $(".dark").css('display', '');
+            $("#photoSubmitted").removeClass('hidden');
+            @elseif($mode == 'err')
+            showAddPhotoPane();
+            $("#errMsgAddPhoto").append('{{$err}}');
+            @elseif($mode == "addPhoto")
+            showAddPhotoPane();
+            @endif
+            // $("#date_input").datepicker({
+            //     numberOfMonths: 2,
+            //     showButtonPanel: true,
+            //     dateFormat: "yy/mm/dd"
+            // });
+            //
+            // $("#date_input_end_inHotel").datepicker({
+            //     numberOfMonths: 2,
+            //     showButtonPanel: true,
+            //     dateFormat: "yy/mm/dd"
+            // });
+
+            $('#commentLink').click(function() {
+                if (!hasLogin) {
+                    showLoginPrompt(hotelDetailsInSaveToTripMode);
+                    return;
+                }
+
+                $("#commentModal").show();
+                $("#commentModalMainDiv").show()
+            });
+
+            $('#closeBtnCommentModal').click(function () {
+                $('#commentModal').hide() ,
+                    $("#commentModalMainDiv").hide()
+            });
+
+            $('.editUploadPhotoComment').click(function(){
+                // $('#editPane').removeClass('hidden')
+            });
+
+        });
     </script>
 
     <script src="{{URL::asset('js/adv.js')}}"></script>
