@@ -401,20 +401,6 @@ class RestaurantController extends Controller {
             $thumbnail = URL::asset('_images/nopic/blank.jpg');
         }
 
-        if (!empty($place->pic_2)) {
-            $sitePhotos++;
-        }
-
-        if (!empty($place->pic_3)) {
-            $sitePhotos++;
-        }
-        if (!empty($place->pic_4)) {
-            $sitePhotos++;
-        }
-        if (!empty($place->pic_5)) {
-            $sitePhotos++;
-        }
-
         $aksActivityId = Activity::whereName('عکس')->first()->id;
 
         $userPhotos = 0;
@@ -441,10 +427,20 @@ class RestaurantController extends Controller {
             'kindPlaceId = ' . $kindPlaceId . ' and activityId = ' . Activity::whereName('نظر')->first()->id .
             ' and logId = log.id and status = 1');
 
+        $allState = State::all();
+
+        $pics = getAllPlacePicsByKind($kindPlaceId, $placeId);
+        $sitePics = $pics[0];
+        $sitePicsJSON = $pics[1];
+        $photographerPics = $pics[2];
+        $photographerPicsJSON = $pics[3];
+
         return view('hotel-details', array('place' => $place, 'save' => $save, 'city' => $city, 'thumbnail' => $thumbnail,
             'tags' => Tag::whereKindPlaceId($kindPlaceId)->get(), 'state' => $state, 'avgRate' => $rates[1],
+            'photographerPics' => $photographerPics, 'photographerPicsJSON' => $photographerPicsJSON,
+            'sitePics' => $sitePics, 'sitePicsJSON' => $sitePicsJSON, 'allState' => $allState,
             'kindPlaceId' => Place::whereName('رستوران')->first()->id, 'mode' => $mode, 'rates' => $rates[0],
-            'photos' => $photos, 'userPhotos' => $userPhotos, 'sitePhotos' => $sitePhotos, 'logPhoto' => $logPhoto,
+            'photos' => $photos, 'userPhotos' => $userPhotos, 'logPhoto' => $logPhoto,
             'hasLogin' => $hasLogin, 'bookMark' => $bookMark, 'err' => $err, 'srcCities' => $srcCities, 'config' => ConfigModel::first(),
             'placeStyles' => PlaceStyle::whereKindPlaceId($kindPlaceId)->get(), 'placeMode' => 'restaurant',
             'sections' => SectionPage::wherePage(getValueInfo('hotel-detail'))->get()));

@@ -1757,7 +1757,8 @@ class HomeController extends Controller
     {
         Auth::logout();
         Session::flush();
-        return Redirect::route('main');
+//        return Redirect::route('main');
+        return \redirect()->back();
     }
 
     public function alaki($tripId)

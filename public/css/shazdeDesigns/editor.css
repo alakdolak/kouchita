@@ -153,6 +153,20 @@
     float: left;
 }
 
+.editSection{
+    padding: 0;
+    width: 50%;
+    right: auto;
+    /*height: 90%;*/
+    top: 5%;
+    position: fixed;
+    left: 25%;
+}
+.editSection > div:nth-child(1) > div:nth-child(1) {
+    max-height: 600px;
+    overflow: auto
+}
+
 #editPane {
     padding: 0;
     width: 50%;
@@ -217,7 +231,7 @@
     /*height: 200px*/
 /*}*/
 
-#image_file {
+#rectanglePicPhotographer {
     width: 213px;
     height: 168px;
     transform: rotate(0deg);
@@ -228,7 +242,7 @@
     /*height: 150px;*/
 /*}*/
 
-#image_file_2 {
+#squarePicPhotographer {
     width: 100px;
     height: 100px;
     transform: rotate(0deg);

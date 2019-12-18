@@ -39,7 +39,7 @@ function startCropper(ratio) {
     Cropper = window.Cropper;
     URL = window.URL || window.webkitURL;
 
-    container = document.querySelector('.img-container');
+    container = document.querySelector('.img-container-photogrpher');
     download = document.getElementById('download');
     actions = document.getElementById('actions');
     dataX = document.getElementById('dataX');
@@ -55,6 +55,7 @@ function startCropper(ratio) {
     inputImage.value = null;
   }
   image = container.getElementsByTagName('img').item(0);
+  // image = document.getElementById('editPhotographerPics');
 
   options = {
     aspectRatio: ratio,
@@ -205,9 +206,9 @@ function startCropper(ratio) {
 //             http.send(params);
 
             if(mode == 1)
-              $('#image_file').attr('src', result.toDataURL(uploadedImageType));
+              $('#rectanglePicPhotographer').attr('src', result.toDataURL(uploadedImageType));
             else
-              $('#image_file_2').attr('src', result.toDataURL(uploadedImageType));
+              $('#squarePicPhotographer').attr('src', result.toDataURL(uploadedImageType));
 
             $("#editPane").addClass('hidden');
             $("#photoEditor").removeClass('hidden');
@@ -268,7 +269,7 @@ function startCropper(ratio) {
 
 
   // Import image
-  inputImage = document.getElementById('edit_file_image');
+  inputImage = document.getElementById('editPhotographerPics');
 
   if (URL) {
     inputImage.onchange = function () {
@@ -299,6 +300,8 @@ function startCropper(ratio) {
     inputImage.disabled = true;
     inputImage.parentNode.className += ' disabled';
   }
+
+    console.log('inn4');
 }
 
 function setMode(m) {
