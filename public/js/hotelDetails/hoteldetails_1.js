@@ -9,6 +9,8 @@ var reviewRateAnsId = [];
 
 var imgCropNumber;
 
+var loadShowReview = false;
+
 function isPhotographer(){
     if (!hasLogin) {
         showLoginPrompt(hotelDetailsInSaveToTripMode);
@@ -29,16 +31,22 @@ function changeSiteSlidePic(_index){
 function changePhotographerSlidePic(_index){
     var photo = photographerPics[_index];
     var likeDislike = '                                        <div class="photosFeedBackBtn">\n' +
-        '                                            <div class="col-xs-6 likeBox" onclick="likePhotographerPic(1, ' + photo["id"] + ')">دوست داشتم</div>\n' +
-        '                                            <div class="col-xs-6 dislikeBox" onclick="likePhotographerPic(0, ' + photo["id"] + ')">دوست نداشتم</div>\n' +
-        '                                            <div class="clear-both"></div>\n' +
-        '                                            <div class="feedbackStatistic">\n' +
-        '                                                <span>' + photo["like"] + '</span>\n' +
-        '                                                نفر دوست داشتند و\n' +
-        '                                                <span>' + photo["dislike"] + '</span>\n' +
-        '                                                نفر دوست نداشتند\n' +
-        '                                            </div>\n' +
-        '                                        </div>\n';
+                        '                                            <div class="col-xs-6 likeBox" onclick="likePhotographerPic(this, 1, ' + photo["id"] + ')">دوست داشتم' +
+                        '                                               <span class="likeBoxIcon firstIcon"></span>' +
+                        '                                               <span class="likeBoxIconClicked display-none secondIcon"></span>' +
+                        '                                            </div>\n' +
+                        '                                            <div class="col-xs-6 dislikeBox" onclick="likePhotographerPic(this, 0, ' + photo["id"] + ')">دوست نداشتم' +
+                        '                                               <span class="dislikeBoxIcon firstIcon"></span>' +
+                        '                                               <span class="dislikeBoxIconClicked display-none secondIcon"></span>' +
+                        '                                            </div>\n' +
+                        '                                            <div class="clear-both"></div>\n' +
+                        '                                            <div class="feedbackStatistic">\n' +
+                        '                                                <span>' + photo["like"] + '</span>\n' +
+                        '                                                نفر دوست داشتند و\n' +
+                        '                                                <span>' + photo["dislike"] + '</span>\n' +
+                        '                                                نفر دوست نداشتند\n' +
+                        '                                            </div>\n' +
+                        '                                        </div>\n';
 
     document.getElementById('photographerSlideUserPic').src = photo['userPic'];
     document.getElementById('photographerSlideUserName').innerText = photo['name'];
@@ -60,7 +68,7 @@ function changePhotographerSlidePic(_index){
     document.getElementById('mainPhotographerSliderPic').src = photo['s'];
 }
 
-function likePhotographerPic(_like, _id){
+function likePhotographerPic(element,_like, _id){
     if (!hasLogin) {
         showLoginPrompt(hotelDetailsInSaveToTripMode);
         return;
@@ -84,6 +92,30 @@ function likePhotographerPic(_like, _id){
                 alert('مشکلی پیش امده لطفا دوباره تلاش کنید');
         }
     })
+
+
+
+
+
+    if(_like==1) {
+        $(element).toggleClass('color-red');
+        $(element).children("span.firstIcon").toggle();
+        $(element).children("span.secondIcon").toggle();
+
+        $(element).next().removeClass('color-darkred');
+        $(element).next().children("span.secondIcon").hide();
+        $(element).next().children("span.firstIcon").show();
+    }
+    else if(_like==0) {
+        $(element).toggleClass('color-darkred');
+        $(element).children("span.firstIcon").toggle();
+        $(element).children("span.secondIcon").toggle();
+
+        $(element).prev().removeClass('color-red');
+        $(element).prev().children("span.secondIcon").hide();
+        $(element).prev().children("span.firstIcon").show();
+    }
+
 }
 
 function bookMark() {
@@ -273,6 +305,7 @@ function uploadReviewPics(input){
 
         data.append('pic', input.files[0]);
         data.append('code', userCode);
+
 
         var $progressBar = $('#progressBarReviewPic' + reviewPicNumber);
 
@@ -763,6 +796,28 @@ function cropReviewImg(){
     });
 }
 
+function loadReviews(){
+    $.ajax({
+        type: 'post',
+        url: getReviewsUrl,
+        data:{
+            'placeId' : placeId,
+            'kindPlaceId' : kindPlaceId,
+            'count' : 5,
+        },
+        success: function(response){
+            if(response == 'nok1')
+                console.log('نقدی ثبت نشده است');
+            else{
+                response = JSON.parse(response);
+                console.log(reponse)
+            }
+        }
+    })
+}
+loadReviews();
+
+
 
 var swiper = new Swiper('#mainSlider', {
     spaceBetween: 30,
@@ -778,4 +833,18 @@ var swiper = new Swiper('#mainSlider', {
     },
 });
 
-//editReviewPictures
+
+window.addEventListener('scroll', function() {
+
+    var doc = document.documentElement;
+    var top = (window.pageYOffset || doc.scrollTop)  - (doc.clientTop || 0);
+    var showReviewElement = document.getElementById('mainDivPlacePost');
+
+    if(!loadShowReview) {
+        if (top > showReviewElement.offsetTop - 20) {
+            loadShowReview = true;
+            // loadReviews();
+        }
+    }
+});
+

@@ -3379,7 +3379,6 @@ class PlaceController extends Controller {
 
     public function storeReview(Request $request)
     {
-
         $activity = Activity::where('name', 'نظر')->first();
 
         if(isset($request->placeId) && isset($request->kindPlaceId) && isset($request->code)){
@@ -3437,21 +3436,24 @@ class PlaceController extends Controller {
             foreach ($reviewPic as $item){
                 $file = $limboLocation . $item->pic;
                 $dest = $location . '/' .  $item->pic;
-                rename( $file , $dest);
+                if(file_exists($file))
+                    rename( $file , $dest);
             }
 
             $assignedUser = json_decode($request->assignedUser);
-            foreach ($assignedUser as $item){
-                $newAssigned = new ReviewUserAssigned();
-                $newAssigned->logId = $log->id;
+            if($assignedUser != null) {
+                foreach ($assignedUser as $item) {
+                    $newAssigned = new ReviewUserAssigned();
+                    $newAssigned->logId = $log->id;
 
-                $user = User::where('username', $item)->orWhere('email', $item)->first();
-                if($user != null)
-                    $newAssigned->userId = $user->id;
-                else
-                    $newAssigned->email = $item;
+                    $user = User::where('username', $item)->orWhere('email', $item)->first();
+                    if ($user != null)
+                        $newAssigned->userId = $user->id;
+                    else
+                        $newAssigned->email = $item;
 
-                $newAssigned->save();
+                    $newAssigned->save();
+                }
             }
 
             $textQuestion = $request->textId;
