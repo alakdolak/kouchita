@@ -1,6 +1,6 @@
 body {
     position: relative;
-    min-width: 996px;
+    min-width: 0;
 }
 
 .greyBackground {
@@ -11,6 +11,10 @@ body {
     top: -12px;
     height: 362px;
     background: #e5e5e5;
+}
+
+.inputBox textarea {
+    outline: none;
 }
 
 DIV.ppr_rup.ppr_priv_hr_atf_north_star_nostalgic .atf_meta_and_photos_wrapper::before {
@@ -1269,6 +1273,7 @@ p {
     float: right;
     height: 224px;
     border: 1px solid #000;
+    width: 100%;
 }
 
 #ansAndQeustionDiv > div > div:nth-child(2) {
@@ -1923,7 +1928,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     border-left: 1px solid #e5e5e5;
 }
 
-.generalDescription .block_header , .reviews .block_header {
+.generalDescription .block_header , .rating .block_header {
     padding: 10px 0;
     border-bottom: 1px solid #e5e5e5;
 }
@@ -1932,13 +1937,51 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     font-size: 20px !important;
 }
 
-.generalDescription .block_title , .reviews .block_title {
+.generalDescription .block_title , .rating .block_title {
     position: absolute;
     background: white;
     font-size: 22px !important;
     padding: 0 0 0 10px;
     top: 0;
     color: #0076a3 !important;
+}
+
+/*mobile version reviewsAndDetails*/
+
+.tabLinkMainDiv {
+    background-color: #999999;
+}
+
+.tabLink {
+    width: 33%;
+    background: #e5e5e5;
+    color: #666;
+    border: none;
+    font-size: 23px;
+    font-weight: 700;
+    padding: 30px 0;
+    border-bottom: 5px solid #666666;
+}
+
+.tabLink:nth-child(2) {
+    margin: 0 0.5%;
+}
+
+.tabContent:nth-child(3) {
+    padding: 0 12px;
+}
+
+.mobileIntroductionMainDiv .generalDescription {
+    border: none;
+}
+
+.mobileIntroductionMainDiv .generalDescription .block_title,
+.mobileIntroductionMainDiv .rating .block_title {
+    top: 100px;
+}
+
+.mobileIntroductionMainDiv #reviewsMainDiv {
+    padding: 0 12px;
 }
 
 #nearbyMainContainer {
@@ -2154,8 +2197,8 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     src: url('../../fonts/shazdemosafer/Shazdemosafer.otf?v003.200#iefix') format('opentype'),
     url('../../fonts/shazdemosafer/Shazdemosafer.woff2?v003.200') format('woff2'),
     url('../../fonts/shazdemosafer/Shazdemosafer.woff?v003.200') format('woff'),
-    url('../../fonts/shazdemosafer/Shazdemosafer.ttf?v003.200') format('truetype'),
-    url('') format('svg');
+    url('../../fonts/shazdemosafer/Shazdemosafer.ttf?v003.200') format('truetype');
+    /*url('') format('svg');*/
 }
 
 .commentsLikeIconFeedback::before {
@@ -2513,6 +2556,14 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     color: #0076a3;
 }
 
+.filterHelpText {
+    display:inline-block;
+    width: 100%;
+    color: darkred;
+    padding-bottom: 10px;
+    position: relative;
+}
+
 .otherQAndAMainDiv {
     float: right;
     display: none;
@@ -2577,7 +2628,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 .ratingTranslationDiv {
     display: inline-block;
     width: 50%;
-    line-height: 3.5;
+    line-height: 2.5;
     font-size: 15px;
 }
 
@@ -2779,14 +2830,16 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     font-size: 15px;
     color: #c6c6c6;
     font-weight: 700;
+    width: 40%;
 }
 
 .participantDivMainDiv {
-    position: absolute;
+    /*position: absolute;*/
     top: 3px;
     left: 0;
-    width: 100%;
+    width: 60%;
     padding: 0 5px;
+    float: left;
 }
 
 .participantDiv {
@@ -2798,7 +2851,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     font-size: 15px;
     padding: 0 10px 0 50px;
     width: auto;
-    margin-right: 5px;
+    margin: 2px;
 }
 
 .removeParticipantBtn::before {
@@ -2832,6 +2885,14 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     padding: 15px 9px;
     width: 100%;
     text-align: right;
+}
+
+.commentQuestionsRatingsBox > div > b.col-xs-5 {
+    float: right;
+}
+
+.commentQuestionsRatingsBox span::before {
+    font-size: 25px;
 }
 
 .commentQuestionsForm {
@@ -2955,10 +3016,18 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     margin-left: 10px;
 }
 
+#editPane .inputBoxInputComment {
+    width: 30%;
+}
+
+#editPane .participantDivMainDiv {
+    width: 70%;
+}
+
 @media (max-width: 1300px) {
     #editPane {
-        width: 70%;
-        left: 15%;
+        width: 70% !important;
+        left: 15% !important;
     }
 }
 
@@ -2974,24 +3043,28 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     content: '\E00B';
     font-family: shazdemosafer-tour !important;
     color: #4DC7BC;
+    font-size: 25px;
 }
 
 .starRating::before {
     content: '\E00B';
     font-family: shazdemosafer-tour !important;
     color: white;
+    font-size: 25px;
 }
 
 .starRatingGold::before {
     content: '\E00B';
     font-family: shazdemosafer-tour !important;
     color: #fcc156;
+    font-size: 25px;
 }
 
 .starRatingGrey::before {
     content: '\E00B';
     font-family: shazdemosafer-tour !important;
     color: #e5e5e5;
+    font-size: 25px;
 }
 
 .starRatingGrey , .starRatingGold , .starRatingGreen , .starRating {
@@ -3027,7 +3100,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
 .questionInputBox {
     float: right;
-    width: 89%;
+    width: 85%;
     position: relative;
     border: none;
 }
@@ -3452,9 +3525,34 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     margin: 0 13px;
 }
 
+/*mobile version posts and ...*/
+
+.tabLinkMainWrapMainDiv {
+    width: 100%;
+    display: inline-block;
+    color: black;
+    padding: 15px 0;
+    background-color: white;
+}
+
+.tabLinkMainWrap {
+    background-color: white;
+    border: none;
+    padding: 5px 1%;
+    font-size: 17px;
+}
+
+@media (min-width: 996px) {
+    .mobile-mode, #share_pic_mobile {
+        display: none;
+    }
+}
+
 /*responsive for tablets*/
 
 @media (max-width:1188px) and (min-width: 996px) {
+
+    /*bottomBarHeader*/
 
     #searchBoxTopPageMainDiv {
         left: 280px;
@@ -3471,6 +3569,8 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     DIV.prw_rup.prw_hotels_flexible_album_thumb .albumInfo {
         font-size: 12px;
     }
+
+    /*new post*/
 
     .moreSettingPost {
         display: none;
@@ -3553,4 +3653,467 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     .dislikeAnswerClicked::before {
         left: 0.5px;
     }
+}
+
+/*responsive for mobile*/
+
+@media (max-width: 996px) {
+
+    /*bottomBarHeader*/
+
+    .global-nav-bar-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    DIV.ppr_rup.ppr_priv_global_nav .global-nav-single-line.has-links .global-nav-links,
+    DIV.ppr_rup.ppr_priv_global_nav .global-nav-bar-container .global-nav-actions,
+    #searchBoxTopPageMainDiv {
+        display: none;
+    }
+
+    DIV.prw_rup.prw_common_atf_header_bl .blRow {
+        display: inline-block;
+        width: 100%;
+    }
+
+    .blEntry.blEn.address.clickable.colCnt3 {
+        width: 100%;
+        display: inline-block;
+        max-width: inherit !important;
+    }
+
+    DIV.prw_rup.prw_common_atf_header_bl .blEn:not(:first-child)::before {
+        display: none;
+    }
+
+    DIV.prw_rup.prw_common_atf_header_bl .blEntry.website, .blEntry.blEn.phone {
+        display: inline-block;
+        /*margin-left: 10px;*/
+    }
+
+    .blEntry.blEn.phone {
+        margin-left: 10px;
+    }
+
+    DIV.prw_rup.prw_common_atf_header_bl {
+        width: 65%;
+    }
+
+    #targetHelp_7 {
+        position: absolute;
+        left: -35px;
+        top: -52px;
+        width: 188px;
+    }
+
+    #targetHelp_8 {
+        position: absolute;
+        left: -35px;
+        top: -20px;
+        width: 167px;
+    }
+
+    #targetHelp_8.wideScreen, #share_pic.wideScreen {
+        display: none;
+    }
+
+    .saveAsBookmarkIcon {
+        font-size: 18px;
+    }
+
+    #helpBtnMainDiv {
+        top: -120px;
+        left: -15px;
+        background-color: #4DC7BC;
+    }
+
+    .helpBtnIconMainDiv::before {
+        color: #4DC7BC !important;
+    }
+
+    #share_pic_mobile {
+        position: absolute;
+        left: -35px;
+        top: 20px;
+        width: 175px;
+    }
+
+    .saveAsBookmarkMainDiv {
+        background-color: #fcc156 !important;
+        color: black;
+    }
+
+    /*photoBar*/
+
+    #bestPrice {
+        display: none;
+    }
+
+    .atf_meta_and_photos  .prw_rup.prw_common_location_photos.photos {
+        width: 100%;
+    }
+
+    .prw_rup #targetHelp_10 > .inner {
+        max-width: inherit;
+    }
+
+    .imgWrap.imgWrap1stTemp {
+        float: right;
+    }
+
+    /*new posts*/
+
+    .postModalMainDiv > .modal-dialog {
+        width: 100%;
+    }
+
+    .postModalMainDiv {
+        right: 24px;
+        left: 24px;
+    }
+
+    .moreSettingPostManDiv {
+        display: none;
+    }
+
+    /*introduction bar*/
+
+    .overviewContent .reviewsAndDetails {
+        display: none;
+    }
+
+    .overviewContent .mobileIntroductionMainDiv {
+        display: block;
+    }
+
+    body.nostalgic .hr_btf_wrap {
+        padding: 0;
+    }
+
+    #introduction > div > div:nth-child(1) {
+        padding: 0 !important;
+    }
+
+    /*maiWrap*/
+
+    .adsMainDiv {
+        display: none;
+    }
+
+    .filterTypeDiv > div.clear-both {
+        display: none;
+    }
+
+    .filterTypeDiv .filterChoices {
+        width: 10%;
+        margin: 0 10px;
+    }
+
+    .photoTypePostsFilter .filterChoices {
+        width: 17%;
+        margin: 0 5px;
+    }
+
+    #MAINWRAP .leftColMainWrap {
+        padding: 0 !important;
+    }
+
+    .ratingTranslationDiv {
+        width: 15%;
+        line-height: 2.5;
+        float: right;
+    }
+
+    .commentRatingsFiltersChoices {
+        width: 40%;
+    }
+
+    .commentRatingsFiltersChoices > div {
+        margin-top: 0;
+    }
+
+    #reviewsMainDiv .prw_common_ratings_histogram_overview {
+        width: 50%;
+        float: right;
+    }
+
+    #reviewsMainDiv DIV.prw_rup.prw_common_atf_header_bl {
+        width: 48%;
+        margin-right: 2%;
+    }
+
+    #tagsName {
+        width: 100%;
+        display: inline-block;
+    }
+
+    .inputBoxSearchFilter {
+        width: 75%;
+        margin: 0 10px 0 0;
+    }
+
+    #clientConnectionsLines {
+        float: right;
+    }
+
+    .mobileIntroductionMainDiv #reviewsMainDiv {
+        display: inline-block;
+    }
+
+    #BODYCON .tabLinkMainWrapMainDiv {
+        display: inline-block;
+    }
+
+    #QAndAMainDivId {
+        display: none;
+    }
+}
+
+@media (max-width:768px) {
+
+    #helpBtnMainDiv {
+        top: -100px;
+    }
+
+    .atf_meta_and_photos.ui_container {
+        padding: 0;
+    }
+
+    .postModalMainDiv {
+        right: 0;
+        left: 0;
+        top: 350px;
+    }
+
+    .postModalMainDiv > .modal-dialog {
+        margin: 0;
+    }
+
+    .modal-details-content .commentMoreSettingBar, .commentQuestionsForm {
+        margin: 0 1%;
+        width: 98%;
+    }
+
+    #MAINWRAP {
+        padding: 0;
+    }
+
+    /*filter bar*/
+
+    .filterBarDivs {
+        display: none;
+        padding: 0 10%;
+    }
+
+    .leftColMainWrap .showFiltersMenus {
+        display: block;
+        position: absolute;
+        padding: 5px 10px;
+        background-color: #fcc156;
+        color: white;
+        bottom: -13px;
+        left: 0;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .showFiltersMenus > span:nth-child(2)::before {
+        content: '\E091';
+        font-family: shazdemosafer-tour !important;
+        font-size: 35px;
+        position: absolute;
+        left: 0;
+        top: 7px;
+        line-height: 0.1;
+    }
+
+    .filterHelpText {
+        border-bottom: 1px solid #E5E5E5;
+        margin-bottom: 10px;
+    }
+
+    .filterTypeDiv > div.clear-both {
+        display: block;
+    }
+
+    .filterTypeDiv .filterChoices {
+        float: inherit;
+        padding: 5px 1%;
+        margin: 0 1%;
+        display: inline-block;
+        width: 23.5%;
+    }
+
+    .photoTypePostsFilter .filterChoices {
+        width: 33%;
+        margin: 2px 1%;
+    }
+
+    .leftColMainWrap .filterTypeDiv {
+        margin-bottom: 5px;
+    }
+
+    .leftColMainWrap .filterTypeDiv:not(:nth-child(4)) .filterChoices:first-child {
+        margin-right: 0;
+    }
+
+    .leftColMainWrap .filterTypeDiv:not(:nth-child(4)) .filterChoices:last-child {
+        margin-left: 0;
+    }
+
+    .leftColMainWrap .filterTypeDiv > span {
+        margin-bottom: 5px;
+    }
+
+    .leftColMainWrap .commentRatingsFiltersChoices {
+        float: inherit;
+        width: 30%;
+    }
+
+    .leftColMainWrap .ratingTranslationDiv {
+        float: left;
+        margin-left: 10%;
+        width: 30%;
+    }
+}
+
+@media (max-width:630px) {
+
+    /*bottomBarHeader*/
+
+    #helpBtnMainDiv {
+        left: -30px;
+    }
+
+    #helpBtnMainDiv > a > b {
+        display: none;
+    }
+
+    DIV.prw_rup.prw_common_atf_header_bl {
+        width: 90%;
+    }
+
+    #targetHelp_7 {
+        left: -177px;
+    }
+
+    #targetHelp_8 {
+        left: -157px;
+    }
+
+    #share_pic_mobile {
+        width: 180px;
+        left: -168px;
+    }
+
+    .saveAsBookmarkMainDiv, #addToFavouriteTripsMainDiv {
+        padding-right: 5px;
+    }
+
+    .sharePageIcon::before {
+        right: 2px;
+    }
+
+    #share_box_mobile {
+        left: 25px !important;
+        right: -195px !important;
+        bottom: -185px !important;
+    }
+
+    #share_box_mobile::before {
+        transform: rotate(-90deg);
+        left: -5px !important;
+        top: 20px !important;
+    }
+
+    /*photoBar*/
+
+    #targetHelp_10 > div:nth-child(1) > div:nth-child(1) {
+        width: 100%;
+        margin-bottom: 12px;
+    }
+
+    #targetHelp_10 > div:nth-child(1) > div:nth-child(2) > div {
+        width: 33.33333332%;
+        float: right;
+    }
+
+    /*new post*/
+
+    .postMainDiv {
+        margin-top: 135px;
+    }
+
+    .postModalMainDiv {
+        top: 475px;
+    }
+
+    .addParticipantInputBoxPostModal {
+        width: 95%;
+    }
+
+    .postLink .commentOptionsBoxes:not(:last-child) {
+        width: 48%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .modal-details-content .commentOptionsBoxes {
+        width: 44%;
+    }
+
+    .commentQuestionsRatingsBox > div > b, .visitKindCommentModalHeader, .visitTimeCommentModalHeader, .addOriginCity {
+        font-size: 13px;
+    }
+
+    .visitKindCommentModalHeader, .addOriginCity, .visitTimeCommentModalHeader {
+        width: 100%;
+        text-align: right;
+        margin-bottom: 10px;
+        padding-right: 10px;
+    }
+
+    .visitKindCommentModal, .visitTimeCommentModal {
+        width: 100%;
+        float: right;
+    }
+
+    .addOriginCityInputBoxPostModal {
+        width: 75%;
+        float: right;
+        margin-right: 10px;
+    }
+
+    #reviewsMainDiv .prw_common_ratings_histogram_overview {
+        width: 80%;
+        float: right;
+    }
+
+    #reviewsMainDiv DIV.prw_rup.prw_common_atf_header_bl {
+        width: 100%;
+        margin-right: 2%;
+    }
+
+    #tagsName {
+        width: 100%;
+        display: inline-block;
+    }
+
+    .filterHelpText {
+        padding-bottom: 20px;
+    }
+
+    .photoTypePostsFilter .filterChoices {
+        width: 47%;
+    }
+
+    .tabLinkMainWrap {
+        font-size: 14px;
+    }
+}
+
+@media (max-width:630px) {
+
 }

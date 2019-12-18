@@ -43,7 +43,7 @@
 {{--<div class="header heading fr" id="lastDivOfShareBox">--}}
 {{--    <div id="share_pic"></div>--}}
 {{--</div>--}}
-<div id="share_pic" class="targets float-left col-xs-6 pd-0">
+<div id="share_pic" class="wideScreen targets float-left col-xs-6 pd-0">
     <span class="ui_button casino save-location-7306673 ui_icon sharePageMainDiv">
         <div class="sharePageIcon"></div>
         <div class="sharePageLabel">
@@ -58,3 +58,4 @@
         <button class="btn btn-danger exitBtnHelp">خروج</button>
     </div>
 </div>
+
