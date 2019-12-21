@@ -27,6 +27,11 @@
     margin-left: 10px;
 }
 
+.commentWriterPicShow > img {
+    width: 100%;
+    height: 100%;
+}
+
 #photographerSlideUserPic {
     width: 100%;
     height: 100%;

@@ -1,5 +1,5 @@
-<div class="col-xs-7 pd-0 float-right  postsMainDivInSpecificMode display-none">
-    <div class="col-xs-6 pd-0 pd-rt-10Imp">
+<div class="col-md-7 col-xs-12 pd-0 float-right postsMainDivInSpecificMode display-none">
+    <div class="col-sm-6 col-xs-12 pd-0">
         <div class="col-xs-12 postMainDivShown float-right position-relative">
             {{--                        <div class="commentOptionsBoxes commentActions">--}}
             {{--                            <span class="commentActionsIcon"></span>--}}
@@ -421,7 +421,7 @@
             {{--                        </div>--}}
         </div>
     </div>
-    <div class="col-xs-6 pd-0">
+    <div class="col-sm-6 col-xs-12 pd-0">
 
         <div class="col-xs-12 postMainDivShown float-right position-relative">
             {{--                        <div class="commentOptionsBoxes commentActions">--}}

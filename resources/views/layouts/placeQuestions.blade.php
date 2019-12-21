@@ -1,4 +1,4 @@
-<div class="questionsFiltrationBarToggle display-none col-xs-8">
+<div class="questionsFiltrationBarToggle display-none col-md-8 col-xs-12">
     <div class="questionsMainFiltrationBar">
         <span>نمایش بر اساس</span>
         <span>جدیدترین‌ها</span>

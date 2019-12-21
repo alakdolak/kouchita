@@ -677,6 +677,10 @@ p {
     direction: rtl;
 }
 
+.hr_btf_wrap .nearbyContainer.block_wrap {
+    margin-bottom: 0;
+}
+
 /*#bestPriceInnerDiv > div > div:nth-child(1) {*/
 /*    color: #a3513d;*/
 /*}*/
@@ -1864,7 +1868,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     display: inline-block;
     float: right;
     direction: rtl;
-    margin: 5px;
+    margin: 1%;
     border-radius: 10px;
     padding: 5px 10px;
     font-size: 13px;
@@ -2008,15 +2012,6 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
 .tabContent:nth-child(3) {
     padding: 0 12px;
-}
-
-.mobileIntroductionMainDiv .generalDescription {
-    border: none;
-}
-
-.mobileIntroductionMainDiv .generalDescription .block_title,
-.mobileIntroductionMainDiv .rating .block_title {
-    top: 100px;
 }
 
 .mobileIntroductionMainDiv #reviewsMainDiv {
@@ -3426,7 +3421,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     color: #777777;
     padding: 10px 0;
     direction: rtl;
-    display: inline-block;
+    display: flex;
     width: 100%;
 }
 
@@ -3435,17 +3430,19 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 }
 
 .postsMainFiltrationBar > span , .questionsMainFiltrationBar > span{
-    margin: 0 40px;
+    margin: 0 0.5%;
     font-size: 14px;
+    width: 11.5%;
+    text-align: center;
 }
 
 .postsMainFiltrationBar > span:last-child, .questionsMainFiltrationBar > span:last-child{
     float: left;
-    margin-left: 10px;
+    margin-left: 0.5%;
 }
 
 .postsMainFiltrationBar > span:first-child, .questionsMainFiltrationBar > span:first-child{
-    margin-right: 10px !important;
+    margin-right: 0.5% !important;
 }
 
 .postsMainFiltrationBar > span:last-child , .postsMainFiltrationBar > span:first-child ,
@@ -3529,10 +3526,18 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     cursor: pointer;
 }
 
-.commentWriterExperienceDetails , .answersWriterExperienceDetails {
+.commentWriterExperienceDetails, .answersWriterExperienceDetails {
     color: #666666;
     margin-bottom: 10px;
     direction: rtl;
+}
+
+.commentWriterExperienceDetails {
+    width: 78%;
+}
+
+.answersWriterExperienceDetails {
+    width: 52%;
 }
 
 .answersWriterExperienceDetails {
@@ -3593,6 +3598,12 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     margin: 0 13px;
 }
 
+/*similar locations*/
+
+.mainSuggestion {
+    margin-top: 10px;
+}
+
 /*mobile version posts and ...*/
 
 .tabLinkMainWrapMainDiv {
@@ -3606,12 +3617,35 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 .tabLinkMainWrap {
     background-color: white;
     border: none;
-    padding: 5px 1%;
+    padding: 0 0 10px;
     font-size: 17px;
 }
 
+.topHeaderBarPosts {
+    background-color: #f0ad4e;
+    color: white;
+    padding: 10px;
+    width: 100%;
+    margin-top: 15px;
+}
+
+.topHeaderBarPosts > span {
+    width: 50%;
+    font-size: 17px;
+    cursor: pointer;
+}
+
 @media (min-width: 992px) {
-    .mobile-mode, #share_pic_mobile {
+
+    .mobile-mode, #share_pic_mobile, #mobileIntroductionMainDivId .tabLinkMainDiv {
+        display: none;
+    }
+
+    #detailsAndFeaturesMobile, #commentsAndAddressMobile {
+        display: block !important;
+    }
+
+    .tabLinkMainWrapMainDivMobile {
         display: none;
     }
 }
@@ -3848,14 +3882,6 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
     /*introduction bar*/
 
-    .overviewContent .reviewsAndDetails {
-        display: none;
-    }
-
-    .overviewContent .mobileIntroductionMainDiv {
-        display: block;
-    }
-
     body.nostalgic .hr_btf_wrap {
         padding: 0;
     }
@@ -3864,7 +3890,25 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
         padding: 0 !important;
     }
 
-    /*maiWrap*/
+    .mobileIntroductionMainDiv .generalDescription {
+        border: none;
+    }
+
+    DIV.ppr_rup.ppr_priv_location_detail_overview .reviewsAndDetails {
+        right: inherit;
+    }
+
+    #generalDescriptionMobile, #detailsAndFeaturesMobile, #commentsAndAddressMobile {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .mobileIntroductionMainDiv #generalDescriptionMobile .block_title,
+    .mobileIntroductionMainDiv #commentsAndAddressMobile .block_title {
+        top: 10px;
+    }
+
+    /*mainWrap*/
 
     .adsMainDiv {
         display: none;
@@ -3902,12 +3946,12 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
         margin-top: 0;
     }
 
-    #reviewsMainDiv .prw_common_ratings_histogram_overview {
+    #commentsAndAddressMobile .prw_common_ratings_histogram_overview {
         width: 50%;
         float: right;
     }
 
-    #reviewsMainDiv DIV.prw_rup.prw_common_atf_header_bl {
+    #commentsAndAddressMobile DIV.prw_rup.prw_common_atf_header_bl {
         width: 48%;
         margin-right: 2%;
     }
@@ -3926,7 +3970,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
         float: right;
     }
 
-    .mobileIntroductionMainDiv #reviewsMainDiv {
+    .mobileIntroductionMainDiv #commentsAndAddressMobile {
         display: inline-block;
     }
 
@@ -3934,8 +3978,22 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
         display: inline-block;
     }
 
-    #QAndAMainDivId {
+    #QAndAMainDivId, #mainDivPlacePost {
         display: none;
+    }
+
+    #mainDivPlacePost .topHeaderBarPosts {
+        display: inline-block;
+    }
+
+    .questionInputBox {
+        width: 80%;
+    }
+}
+
+@media (min-width:768px) {
+    .postsMainDivInSpecificMode > div:nth-child(1) {
+        padding-right: 10px !important;
     }
 }
 
@@ -4154,12 +4212,12 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
         margin-right: 10px;
     }
 
-    #reviewsMainDiv .prw_common_ratings_histogram_overview {
+    #commentsAndAddressMobile .prw_common_ratings_histogram_overview {
         width: 80%;
         float: right;
     }
 
-    #reviewsMainDiv DIV.prw_rup.prw_common_atf_header_bl {
+    #commentsAndAddressMobile DIV.prw_rup.prw_common_atf_header_bl {
         width: 100%;
         margin-right: 2%;
     }
