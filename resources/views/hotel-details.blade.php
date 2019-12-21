@@ -58,6 +58,7 @@ if ($total == 0)
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/photo_albums_stacked.css?v=1')}}'/>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/media_albums_extended.css')}}'/>
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/popUp.css?v=1')}}">
+    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/home_rebranded.css?v=4')}}">
     <link rel="stylesheet" href="{{URL::asset('css/theme2/help.css?v=1')}}">
     <link rel="stylesheet" href="{{URL::asset('css/theme2/cropper.css')}}">
     <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/hotelDetail.css')}}">
@@ -856,189 +857,68 @@ if ($total == 0)
 
                 <div class="postsFiltrationBarToggle display-none col-xs-12">
                     <div class="postsMainFiltrationBar">
-                        <span>نمایش بر اساس</span>
-                        <span>جدیدترین‌ها</span>
-                        <span>قدمی‌ترین‌ها</span>
-                        <span>بهترین‌ها</span>
-                        <span>داغ‌ترین‌ها</span>
-                        <span>بدترین‌ها</span>
-                        <span>بیشترین همراهان</span>
-                        <span>پست‌ها</span>
+                        <span>نمایش بر اساس</span><!--
+                     --><span>جدیدترین‌ها</span><!--
+                     --><span>قدمی‌ترین‌ها</span><!--
+                     --><span>بهترین‌ها</span><!--
+                     --><span>داغ‌ترین‌ها</span><!--
+                     --><span>بدترین‌ها</span><!--
+                     --><span>بیشترین همراهان</span><!--
+                     --><span>پست‌ها</span>
                     </div>
                 </div>
+
+                <div class="tabLinkMainWrapMainDivMobile">
+                    <div class="tabLinkMainWrapMainDiv">
+                        <center class="display-inline-block width-25per">
+                            <button class="tabLinkMainWrap" onclick="openTab('QAndAMainDivId', this, '#4dc7bc')">سؤالات</button>
+                        </center><!--
+                     --><center class="display-inline-block width-25per">
+                            <button class="tabLinkMainWrap" onclick="openTab('', this, '#4dc7bc')">مکان‌های مشابه</button>
+                        </center><!--
+                     --><center class="display-inline-block width-25per">
+                            <button class="tabLinkMainWrap" onclick="openTab('mainDivPlacePost', this, '#4dc7bc')">پست</button>
+                        </center><!--
+                     --><center class="display-inline-block width-25per">
+                            <button class="tabLinkMainWrap" onclick="openTab('mobileIntroductionMainDivId', this, '#4dc7bc')" id="defaultOpenMainWrap">معرفی کلی</button>
+                        </center>
+                    </div>
+                </div>
+
+
+                <script>
+                    function openTab(tabName,elmnt,fontColor) {
+                        var i, tabcontent, tablinks;
+                        tabcontent = document.getElementsByClassName("tabContentMainWrap");
+                        for (i = 0; i < tabcontent.length; i++) {
+                            tabcontent[i].style.display = "none";
+                        }
+                        tablinks = document.getElementsByClassName("tabLinkMainWrap");
+                        for (i = 0; i < tablinks.length; i++) {
+                            tablinks[i].style.color = "";
+                        }
+                        document.getElementById(tabName).style.display = "block";
+                        elmnt.style.color = fontColor;
+
+                    }
+                    // Get the element with id="defaultOpen" and click on it
+                    document.getElementById("defaultOpenMainWrap").style.color = "rgb(77, 199, 188)"
+                </script>
 
                 <div class="exceptQAndADiv">
                     <div class="hr_btf_wrap position-relative">
                         <div id="introduction" class="ppr_rup ppr_priv_location_detail_overview">
                             <div class="block_wrap" data-tab="TABS_OVERVIEW">
                                 <div class="overviewContent">
-                                    <div class="ui_columns is-multiline is-mobile reviewsAndDetails direction-rtlImp">
-                                        <div class="ui_column is-4 generalDescription">
-                                            <div class="block_header">
-                                                <h3 class="block_title">معرفی کلی </h3>
-                                            </div>
-                                            <div>
-                                                <div class="overviewContent" id="introductionText">{{$place->description}}</div>
-                                            </div>
-                                        </div>
-                                        <div class="ui_column is-4 details">
-                                            <div class="direction-rtl">
-                                                <?php $k = -1; ?>
-
-                                                @if($placeMode == "hotel")
-                                                    @include('hotel-details-table')
-                                                @elseif($placeMode == "amaken")
-                                                    @include('amaken-details-table')
-                                                @elseif($placeMode == "restaurant")
-                                                    @include('restaurant-details-table')
-                                                @endif
-                                            </div>
-                                        </div>
-                                        <div class="ui_column  is-4 reviews" id="reviewsMainDiv">
-                                            <div class="rating">
-                                                <div class="block_header">
-                                                    <h3 class="block_title">نظر شما </h3>
-                                                </div>
-                                                <span class="overallRating">{{$avgRate}} </span>
-                                                <div class="prw_rup prw_common_bubble_rating overallBubbleRating">
-                                                    @if($avgRate == 5)
-                                                        <span class="ui_bubble_rating bubble_50 font-size-28"
-                                                              property="ratingValue" content="5"
-                                                              alt='5 of 5 bubbles'></span>
-                                                    @elseif($avgRate == 4)
-                                                        <span class="ui_bubble_rating bubble_40 font-size-28"
-                                                              property="ratingValue" content="4"
-                                                              alt='4 of 5 bubbles'></span>
-                                                    @elseif($avgRate == 3)
-                                                        <span class="ui_bubble_rating bubble_30 font-size-28"
-                                                              property="ratingValue" content="3"
-                                                              alt='3 of 5 bubbles'></span>
-                                                    @elseif($avgRate == 2)
-                                                        <span class="ui_bubble_rating bubble_20 font-size-28"
-                                                              property="ratingValue" content="2"
-                                                              alt='2 of 5 bubbles'></span>
-                                                    @elseif($avgRate == 1)
-                                                        <span class="ui_bubble_rating bubble_10 font-size-28"
-                                                              property="ratingValue" content="1"
-                                                              alt='1 of 5 bubbles'></span>
-                                                    @endif
-                                                </div>
-                                                <a class="seeAllReviews autoResize" href="#REVIEWS"></a>
-                                            </div>
-                                            <div class="prw_rup prw_common_ratings_histogram_overview overviewHistogram">
-                                                <ul class="ratings_chart">
-                                                    <li class="chart_row highlighted clickable">
-                                                        <span class="row_label row_cell">عالی</span>
-                                                        <span class="row_bar row_cell">
-                                                            <span class="bar">
-                                                                <span class="fill"
-                                                                      style="width: {{ceil($rates[4] * 100 / $total)}}%;"></span>
-                                                            </span>
-                                                        </span>
-                                                        <span class="row_count row_cell">{{ceil($rates[4] * 100 / $total)}}
-                                                        %</span>
-                                                    </li>
-                                                    <li class="chart_row clickable">
-                                                        <span class="row_label row_cell">خوب</span>
-                                                        <span class="row_bar row_cell">
-                                                            <span class="bar">
-                                                                <span class="fill"
-                                                                      style="width:{{ceil($rates[3] * 100 / $total)}}%;"></span>
-                                                            </span>
-                                                        </span>
-                                                        <span class="row_count row_cell">{{ceil($rates[3] * 100 / $total)}}
-                                                            %</span>
-                                                    </li>
-                                                    <li class="chart_row clickable">
-                                                        <span class="row_label row_cell">معمولی</span>
-                                                        <span class="row_bar row_cell">
-                                                            <span class="bar">
-                                                                <span class="fill"
-                                                                      style="width:{{ceil($rates[2] * 100 / $total)}}%;"></span>
-                                                            </span>
-                                                        </span>
-                                                        <span class="row_count row_cell">{{ceil($rates[2] * 100 / $total)}}
-                                                            %</span>
-                                                    </li>
-                                                    <li class="chart_row clickable">
-                                                        <span class="row_label row_cell">ضعیف</span>
-                                                        <span class="row_bar row_cell">
-                                                            <span class="bar">
-                                                                <span class="fill"
-                                                                      style="width:{{ceil($rates[1] * 100 / $total)}}%;"></span>
-                                                            </span>
-                                                        </span>
-                                                        <span class="row_count row_cell">{{ceil($rates[1] * 100 / $total)}}
-                                                            %</span>
-                                                    </li>
-                                                    <li class="chart_row">
-                                                        <span class="row_label row_cell">خیلی بد </span>
-                                                        <span class="row_bar row_cell">
-                                                            <span class="bar">
-                                                                <span class="fill"
-                                                                      style="width:{{ceil($rates[0] * 100 / $total)}}%;"></span>
-                                                            </span>
-                                                        </span>
-                                                        <span class="row_count row_cell">{{ceil($rates[0] * 100 / $total)}}
-                                                            %</span>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="prw_rup prw_common_atf_header_bl" id="clientConnectionsLines">
-                                                <div class="blEntry address mg-bt-10" id="clientConnectionsAddress">
-                                                    <span class="ui_icon map-pin"></span>
-                                                    <span class="street-address">آدرس : </span>
-                                                    <span>{{$place->address}}</span>
-                                                </div>
-                                                @if(!empty($place->phone))
-                                                    <div class="blEntry phone mg-bt-10" id="clientConnectionsPhone">
-                                                        <span class="ui_icon phone"></span>
-                                                        <span>{{$place->phone}}</span>
-                                                    </div>
-                                                @endif
-                                                @if(!empty($place->site))
-                                                    <div class="blEntry website mg-bt-10" id="clientConnectionsWebsite">
-                                                        <span class="ui_icon laptop"></span>
-                                                        <?php
-                                                        if (strpos($place->site, 'http') === false)
-                                                            $place->site = 'http://' . $place->site;
-                                                        ?>
-                                                        <a target="_blank" href="{{$place->site}}" {{($config->externalSiteNoFollow) ? 'rel="nofollow"' : ''}}>
-                                                            <span class="font-size-12">{{$place->site}}</span>
-                                                        </a>
-                                                    </div>
-                                                @endif
-                                            </div>
-                                            <div id="tagsName">
-                                                <h3>برچسب‌ها:</h3>
-                                                <span class="tag">{{$place->tag1}}</span>
-                                                <span class="tag">{{$place->tag2}}</span>
-                                                <span class="tag">{{$place->tag3}}</span>
-                                                <span class="tag">{{$place->tag4}}</span>
-                                                <span class="tag">{{$place->tag5}}</span>
-                                                <span class="tag">{{$place->tag6}}</span>
-                                                <span class="tag">{{$place->tag7}}</span>
-                                                <span class="tag">{{$place->tag8}}</span>
-                                                <span class="tag">{{$place->tag9}}</span>
-                                                <span class="tag">{{$place->tag10}}</span>
-                                                <span class="tag">{{$place->tag11}}</span>
-                                                <span class="tag">{{$place->tag12}}</span>
-                                                <span class="tag">{{$place->tag13}}</span>
-                                                <span class="tag">{{$place->tag14}}</span>
-                                                <span class="tag">{{$place->tag15}}</span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="mobileIntroductionMainDiv display-none">
+                                    <div id="mobileIntroductionMainDivId" class="mobileIntroductionMainDiv tabContentMainWrap">
                                         <div class="tabLinkMainDiv">
                                             <button class="tabLink" onclick="openCity('commentsAndAddressMobile', this, 'white', '#4dc7bc')">نظرات و آدرس</button><!--
                                          --><button class="tabLink" onclick="openCity('detailsAndFeaturesMobile', this, 'white', '#4dc7bc')">امکانات و ویژگی‌ها</button><!--
                                          --><button class="tabLink" onclick="openCity('generalDescriptionMobile', this, 'white', '#4dc7bc')" id="defaultOpen">معرفی کلی</button>
                                         </div>
 
-                                        <div id="generalDescriptionMobile" class="tabContent">
-                                            <div class="ui_column generalDescription">
+                                        <div class="ui_columns is-multiline is-mobile reviewsAndDetails direction-rtlImp">
+                                            <div id="generalDescriptionMobile" class="ui_column is-4 generalDescription tabContent">
                                                 <div class="block_header">
                                                     <h3 class="block_title">معرفی کلی </h3>
                                                 </div>
@@ -1046,24 +926,20 @@ if ($total == 0)
                                                     <div class="overviewContent" id="introductionText">{{$place->description}}</div>
                                                 </div>
                                             </div>
-                                        </div>
+                                            <div id="detailsAndFeaturesMobile" class="ui_column is-4 details tabContent">
+                                                <div class="direction-rtl">
+                                                    <?php $k = -1; ?>
 
-                                        <div id="detailsAndFeaturesMobile" class="tabContent">
-                                            <div class="direction-rtl">
-                                                <?php $k = -1; ?>
-
-                                                @if($placeMode == "hotel")
-                                                    @include('hotel-details-table')
-                                                @elseif($placeMode == "amaken")
-                                                    @include('amaken-details-table')
-                                                @elseif($placeMode == "restaurant")
-                                                    @include('restaurant-details-table')
-                                                @endif
+                                                    @if($placeMode == "hotel")
+                                                        @include('hotel-details-table')
+                                                    @elseif($placeMode == "amaken")
+                                                        @include('amaken-details-table')
+                                                    @elseif($placeMode == "restaurant")
+                                                        @include('restaurant-details-table')
+                                                    @endif
+                                                </div>
                                             </div>
-                                        </div>
-
-                                        <div id="commentsAndAddressMobile" class="tabContent">
-                                            <div id="reviewsMainDiv">
+                                            <div id="commentsAndAddressMobile" class="ui_column is-4 reviews tabContent">
                                                 <div class="rating">
                                                     <div class="block_header">
                                                         <h3 class="block_title">نظر شما </h3>
@@ -1198,10 +1074,28 @@ if ($total == 0)
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <div id="nearbyDiv" ng-controller="NearbyController as nearby" class="ppr_rup ppr_priv_location_detail_two_column">
+                                            <div class="column_wrap is-mobile">
+                                                <div id="nearbyMainContainer" class="content_column ui_column is-8">
+                                                    <div class="ppr_rup ppr_priv_location_nearby">
+                                                        <div class="nearbyContainer outerShell block_wrap">
+                                                            <div class="ui_columns neighborhood">
+                                                                <div id="map" class="ui_column is-12 mapTile prv_map clickable"></div>
+                                                                <div class="clear-both"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @include('layouts.extendedMap')
+
                                     </div>
 
                                 </div>
                             </div>
+
                         </div>
 
                         <script>
@@ -1549,59 +1443,15 @@ if ($total == 0)
     {{--                        </div>--}}
     {{--                    @endif--}}
                     </div>
-                    <div id="nearbyDiv" ng-controller="NearbyController as nearby" class="ppr_rup ppr_priv_location_detail_two_column">
-                        <div class="column_wrap is-mobile">
-                            <div id="nearbyMainContainer" class="content_column ui_column is-8">
-                                <div class="ppr_rup ppr_priv_location_nearby">
-                                    <div class="nearbyContainer outerShell block_wrap">
-                                        <div class="ui_columns neighborhood">
-                                            <div id="map" class="ui_column is-12 mapTile prv_map clickable"></div>
-                                            <div class="clear-both"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    @include('layouts.extendedMap')
 
-                    <div class="tabLinkMainWrapMainDiv display-none">
-                        <center class="display-inline-block width-20per">
-                            <button class="tabLinkMainWrap" onclick="openTab('QAndAMainDivId', this, '#4dc7bc')">سؤالات</button>
-                        </center><!--
-                     --><center class="display-inline-block width-20per">
-                            <button class="tabLinkMainWrap" onclick="openTab('', this, '#4dc7bc')">مکان‌های مشابه</button>
-                        </center><!--
-                     --><center class="display-inline-block width-20per">
-                            <button class="tabLinkMainWrap" onclick="openTab('mainDivPlacePost', this, '#4dc7bc')" id="defaultOpenMainWrap">پست</button>
-                        </center><!--
-                     --><center class="display-inline-block width-20per">
-                            <button class="tabLinkMainWrap" onclick="openTab('', this, '#4dc7bc')">معرفی کلی</button>
-                        </center><!--
-                     --><center class="display-inline-block width-20per">
-                            <button class="tabLinkMainWrap" onclick="openTab('', this, '#4dc7bc')">عکس‌ها</button>
-                        </center>
-                    </div>
 
-                    <script>
-                        function openTab(tabName,elmnt,fontColor) {
-                            var i, tabcontent, tablinks;
-                            tabcontent = document.getElementsByClassName("tabContentMainWrap");
-                            for (i = 0; i < tabcontent.length; i++) {
-                                tabcontent[i].style.display = "none";
-                            }
-                            tablinks = document.getElementsByClassName("tabLinkMainWrap");
-                            for (i = 0; i < tablinks.length; i++) {
-                                tablinks[i].style.color = "";
-                            }
-                            document.getElementById(tabName).style.display = "block";
-                            elmnt.style.color = fontColor;
 
-                        }
-                        // Get the element with id="defaultOpen" and click on it
-                        document.getElementById("defaultOpenMainWrap").style.color = "rgb(77, 199, 188)"
-                    </script>
                     <div id="mainDivPlacePost" class="tabContentMainWrap">
+                        <div class="topHeaderBarPosts display-none">
+                            <span class="float-right text-align-right">جستجوی‌ بیشتر در پست‌ها</span>
+                            <span onclick="allPostsGrid()" class="returnToMainPage display-none">back</span>
+                            <span class="float-left">مشاهده همه پست‌ها</span>
+                        </div>
                         <div class="col-md-5 col-xs-12 pd-0 pd-rt-10Imp leftColMainWrap">
                             <div class="col-xs-12 postsFiltersMainDiv">
                                 <div class="block_header">
@@ -2766,7 +2616,7 @@ if ($total == 0)
 
                 @include('layouts.placeQuestions')
                 <div id="QAndAMainDivId" class="tabContentMainWrap">
-                    <div class="col-xs-12 QAndAMainDiv">
+                    <div class="col-md-12 col-xs-12 QAndAMainDiv">
 
                         <div class="mainDivQuestions">
 
@@ -2969,7 +2819,7 @@ if ($total == 0)
                             </div>
                         </div>
                     </div>
-                    <div class="otherQAndAMainDiv col-xs-8">
+                    <div class="otherQAndAMainDiv col-md-12 col-xs-12">
                         <div class="otherQAndAMainDivHeader">
                             <h3>سایر سؤال‌ها و جواب‌ها</h3>
                         </div>
@@ -3066,7 +2916,7 @@ if ($total == 0)
                         <span class="color-blue cursor-pointer">50</span>
                         پست در هر صفحه
                     </div>
-                    <a class="col-xs-2 showQuestionsNumsFilterLink" href="#taplc_global_nav_links_0">
+                    <a class="col-md-2 col-xs-3 showQuestionsNumsFilterLink" href="#taplc_global_nav_links_0">
                         <div class="showQuestionsNumsFilter" onclick="allQuestionsGrid()">نمایش تمامی سؤال‌ها</div>
                     </a>
                     <div class="col-xs-4 font-size-13 line-height-2 text-align-right float-right">
@@ -3082,8 +2932,239 @@ if ($total == 0)
                 </div>
                 </div>
             </div>
+            <div class="mainSuggestion swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
+                            <div class="poi">
+                                <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
+                                    <div class="prw_rup prw_common_thumbnail_no_style_responsive">
+                                        <div class="prv_thumb has_image">
+                                            <div class="image_wrapper landscape landscapeWide">
+                                                <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <div class="detail rtl">
+                                    <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
+                                    <div class="item rating-widget">
+                                        <div class="prw_rup prw_common_location_rating_simple">
+                                            <span class="ui_bubble_rating bubble_50"></span>
+                                        </div>
+                                        <span class="reviewCount ng-binding">1 </span><span>نقد </span>
+                                    </div>
+                                    <div class="item tags ng-binding">اصفهان <span>در </span>
+                                        <span class="ng-binding">اصفهان</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
+                            <div class="poi">
+                                <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
+                                    <div class="prw_rup prw_common_thumbnail_no_style_responsive">
+                                        <div class="prv_thumb has_image">
+                                            <div class="image_wrapper landscape landscapeWide">
+                                                <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <div class="detail rtl">
+                                    <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
+                                    <div class="item rating-widget">
+                                        <div class="prw_rup prw_common_location_rating_simple">
+                                            <span class="ui_bubble_rating bubble_50"></span>
+                                        </div>
+                                        <span class="reviewCount ng-binding">1 </span><span>نقد </span>
+                                    </div>
+                                    <div class="item tags ng-binding">اصفهان <span>در </span>
+                                        <span class="ng-binding">اصفهان</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
+                            <div class="poi">
+                                <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
+                                    <div class="prw_rup prw_common_thumbnail_no_style_responsive">
+                                        <div class="prv_thumb has_image">
+                                            <div class="image_wrapper landscape landscapeWide">
+                                                <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <div class="detail rtl">
+                                    <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
+                                    <div class="item rating-widget">
+                                        <div class="prw_rup prw_common_location_rating_simple">
+                                            <span class="ui_bubble_rating bubble_50"></span>
+                                        </div>
+                                        <span class="reviewCount ng-binding">1 </span><span>نقد </span>
+                                    </div>
+                                    <div class="item tags ng-binding">اصفهان <span>در </span>
+                                        <span class="ng-binding">اصفهان</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
+                            <div class="poi">
+                                <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
+                                    <div class="prw_rup prw_common_thumbnail_no_style_responsive">
+                                        <div class="prv_thumb has_image">
+                                            <div class="image_wrapper landscape landscapeWide">
+                                                <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <div class="detail rtl">
+                                    <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
+                                    <div class="item rating-widget">
+                                        <div class="prw_rup prw_common_location_rating_simple">
+                                            <span class="ui_bubble_rating bubble_50"></span>
+                                        </div>
+                                        <span class="reviewCount ng-binding">1 </span><span>نقد </span>
+                                    </div>
+                                    <div class="item tags ng-binding">اصفهان <span>در </span>
+                                        <span class="ng-binding">اصفهان</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
+                            <div class="poi">
+                                <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
+                                    <div class="prw_rup prw_common_thumbnail_no_style_responsive">
+                                        <div class="prv_thumb has_image">
+                                            <div class="image_wrapper landscape landscapeWide">
+                                                <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <div class="detail rtl">
+                                    <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
+                                    <div class="item rating-widget">
+                                        <div class="prw_rup prw_common_location_rating_simple">
+                                            <span class="ui_bubble_rating bubble_50"></span>
+                                        </div>
+                                        <span class="reviewCount ng-binding">1 </span><span>نقد </span>
+                                    </div>
+                                    <div class="item tags ng-binding">اصفهان <span>در </span>
+                                        <span class="ng-binding">اصفهان</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
+                            <div class="poi">
+                                <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
+                                    <div class="prw_rup prw_common_thumbnail_no_style_responsive">
+                                        <div class="prv_thumb has_image">
+                                            <div class="image_wrapper landscape landscapeWide">
+                                                <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <div class="detail rtl">
+                                    <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
+                                    <div class="item rating-widget">
+                                        <div class="prw_rup prw_common_location_rating_simple">
+                                            <span class="ui_bubble_rating bubble_50"></span>
+                                        </div>
+                                        <span class="reviewCount ng-binding">1 </span><span>نقد </span>
+                                    </div>
+                                    <div class="item tags ng-binding">اصفهان <span>در </span>
+                                        <span class="ng-binding">اصفهان</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
+                            <div class="poi">
+                                <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
+                                    <div class="prw_rup prw_common_thumbnail_no_style_responsive">
+                                        <div class="prv_thumb has_image">
+                                            <div class="image_wrapper landscape landscapeWide">
+                                                <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <div class="detail rtl">
+                                    <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
+                                    <div class="item rating-widget">
+                                        <div class="prw_rup prw_common_location_rating_simple">
+                                            <span class="ui_bubble_rating bubble_50"></span>
+                                        </div>
+                                        <span class="reviewCount ng-binding">1 </span><span>نقد </span>
+                                    </div>
+                                    <div class="item tags ng-binding">اصفهان <span>در </span>
+                                        <span class="ng-binding">اصفهان</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
+                            <div class="poi">
+                                <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
+                                    <div class="prw_rup prw_common_thumbnail_no_style_responsive">
+                                        <div class="prv_thumb has_image">
+                                            <div class="image_wrapper landscape landscapeWide">
+                                                <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <div class="detail rtl">
+                                    <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
+                                    <div class="item rating-widget">
+                                        <div class="prw_rup prw_common_location_rating_simple">
+                                            <span class="ui_bubble_rating bubble_50"></span>
+                                        </div>
+                                        <span class="reviewCount ng-binding">1 </span><span>نقد </span>
+                                    </div>
+                                    <div class="item tags ng-binding">اصفهان <span>در </span>
+                                        <span class="ng-binding">اصفهان</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add Pagination -->
+                <div class="swiper-pagination"></div>
+                <!-- Add Arrows -->
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
         </div>
     </div>
+
+    <script>
+        var swiper = new Swiper('.mainSuggestion', {
+            slidesPerView: 4,
+            spaceBetween: 30,
+            slidesPerGroup: 1,
+            loop: true,
+            loopFillGroupWithBlank: true,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+    </script>
 
     <script>
 
@@ -3132,7 +3213,7 @@ if ($total == 0)
             $('.greyBackground').toggleClass('height-210Imp'),
             $('.postModalMainDiv').toggleClass('top--30Imp'),
             $('#addToFavouriteTripsMainDiv').toggle(),
-            $('#helpBtnMainDiv').toggleClass('top-20Imp'),
+            // $('#helpBtnMainDiv').toggleClass('top-20Imp'),
             $('.returnToMainPage').toggleClass('color-white'),
             $('.returnToMainPage').toggle(),
             $('.postsMainDivInRegularMode').toggle(),
@@ -3141,7 +3222,8 @@ if ($total == 0)
             $('#nearbyDiv').toggle(),
             $('.QAndAMainDiv').toggle(),
             $('.questionsMainDivFooter').toggle(),
-            $('.postsFiltrationBarToggle').toggle()
+            $('.postsFiltrationBarToggle').toggle();
+            $('.tabLinkMainWrapMainDiv').toggle();
         }
 
         function allQuestionsGrid() {
@@ -3151,14 +3233,15 @@ if ($total == 0)
             $('.questionsFiltrationBarToggle').toggle() ,
             $('.questionsFiltrationBarToggle').toggleClass('pd-0') ,
             $('.questionsMainDivFooter').toggle() ,
-            $('.QAndAMainDiv').toggleClass('col-xs-12'),
+            $('.QAndAMainDiv').toggleClass('col-md-12'),
             $('.QAndAMainDiv').toggleClass('float-right'),
-            $('.QAndAMainDiv').toggleClass('col-xs-8'),
+            $('.QAndAMainDiv').toggleClass('col-md-8'),
             $('.adsMainDiv').toggleClass('mg-tp-0'),
             $('#addToFavouriteTripsMainDiv').toggle(),
-            $('#helpBtnMainDiv').toggleClass('top-20Imp'),
+            // $('#helpBtnMainDiv').toggleClass('top-20Imp'),
             $('.questionInputBox').toggleClass('width-80per'),
-            $('.showingQuestionCompletely').toggle()
+            $('.showingQuestionCompletely').toggle();
+            $('.tabLinkMainWrapMainDiv').toggle();
 
             $('.seeAllQLink').text($('.seeAllQLink').text() == 'مشاهده همه سؤالات و پاسخ‌ها' ? 'بازگشت به صفحه‌ی اصلی' : 'مشاهده همه سؤالات و پاسخ‌ها');
         }
@@ -3170,9 +3253,9 @@ if ($total == 0)
             $('.adsMainDiv').toggleClass('mg-tp-0'),
             $('.questionsFiltrationBarToggle').toggle(),
             $('.questionsFiltrationBarToggle').toggleClass('pd-0'),
-            $('.QAndAMainDiv').toggleClass('col-xs-12'),
+            $('.QAndAMainDiv').toggleClass('col-md-12'),
             $('.QAndAMainDiv').toggleClass('float-right'),
-            $('.QAndAMainDiv').toggleClass('col-xs-8'),
+            $('.QAndAMainDiv').toggleClass('col-md-8'),
             $('.QAndAMainDivHeader').toggle(),
             $('.questionsMainDivFooter').toggle() ,
             // $('.newQuestionContainer').toggle(),
@@ -3180,6 +3263,7 @@ if ($total == 0)
             $('.otherQAndAMainDiv').toggle(),
             $(element).parent().siblings().toggle();
             $(element).toggle();
+            $('.tabLinkMainWrapMainDiv').toggle();
 
             $(element).text($(element).text() == 'بازگشت به صفحه‌ی اصلی' ? 'مشاهده کامل سؤال' : 'بازگشت به صفحه‌ی اصلی');
         }
