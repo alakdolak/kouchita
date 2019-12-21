@@ -9,6 +9,8 @@ var reviewRateAnsId = [];
 
 var imgCropNumber;
 
+var loadShowReview = false;
+
 function isPhotographer(){
     if (!hasLogin) {
         showLoginPrompt(hotelDetailsInSaveToTripMode);
@@ -303,6 +305,7 @@ function uploadReviewPics(input){
 
         data.append('pic', input.files[0]);
         data.append('code', userCode);
+
 
         var $progressBar = $('#progressBarReviewPic' + reviewPicNumber);
 
@@ -793,6 +796,28 @@ function cropReviewImg(){
     });
 }
 
+function loadReviews(){
+    $.ajax({
+        type: 'post',
+        url: getReviewsUrl,
+        data:{
+            'placeId' : placeId,
+            'kindPlaceId' : kindPlaceId,
+            'count' : 5,
+        },
+        success: function(response){
+            if(response == 'nok1')
+                console.log('نقدی ثبت نشده است');
+            else{
+                response = JSON.parse(response);
+                console.log(reponse)
+            }
+        }
+    })
+}
+loadReviews();
+
+
 
 var swiper = new Swiper('#mainSlider', {
     spaceBetween: 30,
@@ -808,4 +833,18 @@ var swiper = new Swiper('#mainSlider', {
     },
 });
 
-//editReviewPictures
+
+window.addEventListener('scroll', function() {
+
+    var doc = document.documentElement;
+    var top = (window.pageYOffset || doc.scrollTop)  - (doc.clientTop || 0);
+    var showReviewElement = document.getElementById('mainDivPlacePost');
+
+    if(!loadShowReview) {
+        if (top > showReviewElement.offsetTop - 20) {
+            loadShowReview = true;
+            // loadReviews();
+        }
+    }
+});
+

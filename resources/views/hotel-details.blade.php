@@ -1561,6 +1561,7 @@ if ($total == 0)
                             </center>
                         </div>
                         <div class="col-md-7 col-xs-12 pd-0 float-right postsMainDivInRegularMode">
+
                             <div class="col-xs-12 postMainDivShown position-relative">
                                 <div class="commentActions" onclick="showAnswersActionBox(this)">
                                     <span class="commentActionsIcon"></span>
@@ -1822,770 +1823,774 @@ if ($total == 0)
                                     <div></div>
                                 </div>
                             </div>
-                            <div class="col-xs-12 postMainDivShown position-relative">
-                                <div class="commentActions"  onclick="showAnswersActionBox(this)">
-                                    <span class="commentActionsIcon"></span>
-                                </div>
-                                <div class="questionsActionsMoreDetails display-none">
-                                    <span>گزارش پست</span>
-                                    <span>مشاهده صفحه شازده سینا</span>
-                                    <span>مشاهده تمامی پست‌ها</span>
-                                    <span>صفحه قوانین و مقررات</span>
-                                </div>
-                                <div class="commentWriterDetailsShow">
-                                    <div class="circleBase type2 commentWriterPicShow"></div>
-                                    <div class="commentWriterExperienceDetails">
-                                        <b class="userProfileName">shazdesina</b>
-                                        <div class="display-inline-block">در
-                                            <span class="commentWriterExperiencePlace">هتل عباسی، شهر یزد، استان یزد</span>
-                                        </div>
-                                        <div>با
-                                            <span class="commentWriterExperienceParticipation">احتشام الدوله توفیقی</span>،
-                                            <span class="commentWriterExperienceParticipation">حمیدرضا عسگرزاده </span>و
-                                            <span class="commentWriterExperienceParticipation">علی اصر همتی</span>
-                                        </div>
-                                        <div>
-                                            هم اکنون - بیش از 23 ساعت پیش
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="commentContentsShow">
-                                    <p>
-                                        بسیاری از درخواست کنندگان کسی و کارهای بومی و محلی اطلاعات مورد نیاز خود را از طریق اینترنت دریافت می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا خدمات مورد نیازشان اثرپذیری فراوانی دارد.
-                                        با توجه به ابن که خدمات و کالاهای بومی و محلی دارای اصالت و فرهنگ کهن جوامع روستایی هستند، می توان گفت اینترنت می تواند در آمدزایی از سبک زندگی جوامع محلی نقش
-                                    </p>
-                                </div>
-                                <div class="commentPhotosShow">
-                                    <div class="commentPhotosMainDiv doublePhotoDiv">
-                                        <div class="photosCol secondCol col-xs-6">
-                                            <div data-toggle="modal" data-target=".showingPhotosModal"></div>
-                                        </div>
-                                        <div class="photosCol firstCol col-xs-6">
-                                            <div data-toggle="modal" data-target=".showingPhotosModal"></div>
-                                        </div>
-                                    </div>
-                                    <div class="quantityOfLikes">
-                                        <span>31</span>
-                                        نفر دوست داشتند،
-                                        <span>31</span>
-                                        نفر دوست نداشتند و
-                                        <span>31</span>
-                                        نفر نظر دادند.
-                                    </div>
-                                </div>
-                                <div class="commentRatingsDetailsShow">
-                                    <div class="display-inline-block full-width">
-                                        <div class="commentRatingHeader">
-                                            بازدید با
-                                            <span>دوستان</span>
-                                            در فصل
-                                            <span>بهار</span>
-                                            و از مبدأ
-                                            <span>تهران</span>
-                                            انجام شده است
-                                        </div>
-                                        <div class="commentRatingsDetailsBtn" onclick="showRatingDetails(this)">مشاهده جزئیات امتیازدهی
-                                            <div class="commentRatingsDetailsBtnIcon">
-                                                <i class="glyphicon glyphicon-triangle-bottom"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="commentRatingsDetailsBox display-none">
-                                        <div class="display-inline-block full-width">
-                                            <b class="col-xs-3 font-size-15 line-height-203 pd-rt-0">اصلاً راضی نبودم</b>
-                                            <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
-                                                <div class="ui_star_rating stars_10 font-size-25">
-                                                    <span class="starRating"></span>
-                                                    <span class="starRating"></span>
-                                                    <span class="starRating"></span>
-                                                    <span class="starRating"></span>
-                                                    <span class="starRatingGreen"></span>
-                                                </div>
-                                            </div>
-                                            <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
-                                        </div>
-                                        <div class="display-inline-block full-width">
-                                            <b class="col-xs-3 font-size-15 line-height-203 pd-rt-0">بد نبود</b>
-                                            <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
-                                                <div class="ui_star_rating stars_20 font-size-25">
-                                                    <span class="starRating"></span>
-                                                    <span class="starRating"></span>
-                                                    <span class="starRating"></span>
-                                                    <span class="starRatingGreen"></span>
-                                                    <span class="starRatingGreen"></span>
-                                                </div>
-                                            </div>
-                                            <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
-                                        </div>
-                                        <div class="display-inline-block full-width">
-                                            <b class="col-xs-3 font-size-15 line-height-203 pd-rt-0">معمولی بود</b>
-                                            <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
-                                                <div class="ui_star_rating stars_30 font-size-25">
-                                                    <span class="starRating"></span>
-                                                    <span class="starRating"></span>
-                                                    <span class="starRatingGreen"></span>
-                                                    <span class="starRatingGreen"></span>
-                                                    <span class="starRatingGreen"></span>
-                                                </div>
-                                            </div>
-                                            <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
-                                        </div>
-                                        <div class="display-inline-block full-width">
-                                            <b class="col-xs-3 font-size-15 line-height-203 pd-rt-0">خوب بود</b>
-                                            <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
-                                                <div class="ui_star_rating stars_40 font-size-25">
-                                                    <span class="starRating"></span>
-                                                    <span class="starRatingGreen"></span>
-                                                    <span class="starRatingGreen"></span>
-                                                    <span class="starRatingGreen"></span>
-                                                    <span class="starRatingGreen"></span>
-                                                </div>
-                                            </div>
-                                            <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
-                                        </div>
-                                        <div class="display-inline-block full-width">
-                                            <b class="col-xs-3 font-size-15 line-height-203 pd-rt-0">عالی بود</b>
-                                            <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
-                                                <div class="ui_star_rating stars_50 font-size-25">
-                                                    <span class="starRatingGreen"></span>
-                                                    <span class="starRatingGreen"></span>
-                                                    <span class="starRatingGreen"></span>
-                                                    <span class="starRatingGreen"></span>
-                                                    <span class="starRatingGreen"></span>
-                                                </div>
-                                            </div>
-                                            <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="commentFeedbackChoices">
-                                    <div class="postsActionsChoices col-xs-3">
-                                        <div class="postLikeChoice display-inline-block" onclick="likePostsComment(this)">
-                                            <span class="commentsLikeIconFeedback firstIcon"></span>
-                                            <span class="commentsLikeClickedIconFeedback display-none secondIcon"></span>
-                                            <span class="mg-rt-20 cursor-pointer">دوست داشتم</span>
-                                        </div>
-                                    </div>
-                                    <div class="postsActionsChoices col-xs-3">
-                                        <div class="postDislikeChoice display-inline-block" onclick="disLikePostsComment(this)">
-                                            <span class="commentsDislikeIconFeedback firstIcon"></span>
-                                            <span class="commentsDislikeClickedIconFeedback display-none secondIcon"></span>
-                                            <span class="mg-rt-20 cursor-pointer">دوست نداشتم</span>
-                                        </div>
-                                    </div>
-                                    <div class="postsActionsChoices col-xs-3">
-                                        <div class="postCommentChoice display-inline-block" onclick="showPostsComments(this)">
-                                            <span class="showCommentsIconFeedback firstIcon"></span>
-                                            <span class="showCommentsClickedIconFeedback display-none secondIcon"></span>
-                                            <span class="mg-rt-20 cursor-pointer">مشاهده نظرها</span>
-                                        </div>
-                                    </div>
-                                    <div class="postsActionsChoices col-xs-3">
-                                        <div class="postShareChoice display-inline-block" onclick="SharePostsBtn(this)">
-                                            <span class="commentsShareIconFeedback firstIcon"></span>
-                                            <span class="commentsShareClickedIconFeedback display-none secondIcon"></span>
-                                            <span class="mg-rt-20 cursor-pointer">اشتراک‌گذاری</span>
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <div class="commentsMainBox display-none">
-                                    <div class="dark-blue mg-bt-10">
-                                        <span class="cursor-pointer">مشاهده 17 نظر باقیمانده</span>
-                                    </div>
-                                    <div class="eachCommentMainBox">
-                                        <div class="circleBase type2 commentsWriterProfilePic"></div>
-                                        <div class="commentsContentMainBox">
-                                            <b class="userProfileName display-inline-block">shazdesina</b>
-                                            <div>من موافق این مطلب نیستم. دوست من شما باید خودتان توجه می کردید نه اینکه مارا متهم کنید</div>
-                                            <div class="commentsStatisticsBar">
-                                                <div class="float-right display-inline-black">
-                                                    <span class="likeStatisticIcon commentsStatisticSpan color-red">31</span>
-                                                    <span class="dislikeStatisticIcon commentsStatisticSpan dark-red">31</span>
-                                                    <span class="numberOfCommentsIcon commentsStatisticSpan color-blue">31</span>
-                                                </div>
-                                                <div class="dark-blue float-left display-inline-black cursor-pointer" onclick="showCommentsAnswers(this)">مشاهده پاسخ‌ها</div>
-                                            </div>
-                                        </div>
-                                        <div class="commentsActionsBtns">
-                                            <div onclick="likeTheAnswers(this)">
-                                                <span class="likeActionBtn"></span>
-                                                <span class="likeActionClickedBtn display-none"></span>
-                                            </div>
-                                            <div onclick="dislikeTheAnswers(this)">
-                                                <span class="dislikeActionBtn"></span>
-                                                <span class="dislikeActionClickedBtn display-none"></span>
-                                            </div>
-                                            <div class="clear-both"></div>
-                                            <b class="replyBtn" onclick="replyToComments(this)">پاسخ دهید</b>
-                                        </div>
-                                        <div class="replyToCommentMainDiv display-none">
-                                            <div class="circleBase type2 newCommentWriterProfilePic"></div>
-                                            <div class="inputBox">
-                                                <b class="replyCommentTitle">در پاسخ به نظر shazdesina</b>
-                                                <textarea class="inputBoxInput inputBoxInputComment" type="text" placeholder="شما چه نظری دارید؟"></textarea>
-                                                <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="eachCommentMainBox mg-rt-45 display-none">
-                                        <div class="circleBase type2 commentsWriterProfilePic"></div>
-                                        <div class="commentsContentMainBox">
-                                            <b class="userProfileName float-right">shazdesina</b>
-                                            <b class="commentReplyDesc display-inline-block">در پاسخ به Shazdesina</b>
-                                            <div class="clear-both"></div>
-                                            <div>من موافق این مطلب نیستم. دوست من شما باید خودتان توجه می کردید نه اینکه مارا متهم کنید</div>
-                                            <div class="commentsStatisticsBar">
-                                                <div class="float-right display-inline-black">
-                                                    <span class="likeStatisticIcon commentsStatisticSpan color-red">31</span>
-                                                    <span class="dislikeStatisticIcon commentsStatisticSpan dark-red">31</span>
-                                                    <span class="numberOfCommentsIcon commentsStatisticSpan color-blue">31</span>
-                                                </div>
-                                                <div class="dark-blue float-left display-inline-black cursor-pointer" onclick="showCommentsAnswers(this)">مشاهده پاسخ‌ها</div>
-                                            </div>
-                                        </div>
-                                        <div class="commentsActionsBtns">
-                                            <div onclick="likeTheAnswers(this)">
-                                                <span class="likeActionBtn"></span>
-                                                <span class="likeActionClickedBtn display-none"></span>
-                                            </div>
-                                            <div onclick="dislikeTheAnswers(this)">
-                                                <span class="dislikeActionBtn"></span>
-                                                <span class="dislikeActionClickedBtn display-none"></span>
-                                            </div>
-                                            <div class="clear-both"></div>
-                                            <b class="replyBtn" onclick="replyToComments(this)">پاسخ دهید</b>
-                                        </div>
-                                        <div class="replyToCommentMainDiv display-none">
-                                            <div class="circleBase type2 newCommentWriterProfilePic"></div>
-                                            <div class="inputBox">
-                                                <b class="replyCommentTitle">در پاسخ به نظر shazdesina</b>
-                                                <textarea class="inputBoxInput inputBoxInputComment" type="text" placeholder="شما چه نظری دارید؟"></textarea>
-                                                <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="newCommentPlaceMainDiv">
-                                    <div class="circleBase type2 newCommentWriterProfilePic"></div>
-                                    <div class="inputBox">
-                                        <b class="replyCommentTitle">در پاسخ به نظر shazdesina</b>
-                                        <textarea class="inputBoxInput inputBoxInputComment" id="zzzz" type="text" placeholder="شما چه نظری دارید؟"></textarea>
-                                        <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
-                                    </div>
-                                    <div></div>
-                                </div>
-                            </div>
-                            <div class="col-xs-12 postMainDivShown position-relative">
-                                <div class="commentActions"  onclick="showAnswersActionBox(this)">
-                                    <span class="commentActionsIcon"></span>
-                                </div>
-                                <div class="questionsActionsMoreDetails display-none">
-                                    <span>گزارش پست</span>
-                                    <span>مشاهده صفحه شازده سینا</span>
-                                    <span>مشاهده تمامی پست‌ها</span>
-                                    <span>صفحه قوانین و مقررات</span>
-                                </div>
-                                <div class="commentWriterDetailsShow">
-                                    <div class="circleBase type2 commentWriterPicShow"></div>
-                                    <div class="commentWriterExperienceDetails">
-                                        <b class="userProfileName">shazdesina</b>
-                                        <div class="display-inline-block">در
-                                            <span class="commentWriterExperiencePlace">هتل عباسی، شهر یزد، استان یزد</span>
-                                        </div>
-                                        <div>با
-                                            <span class="commentWriterExperienceParticipation">احتشام الدوله توفیقی</span>،
-                                            <span class="commentWriterExperienceParticipation">حمیدرضا عسگرزاده </span>و
-                                            <span class="commentWriterExperienceParticipation">علی اصر همتی</span>
-                                        </div>
-                                        <div>
-                                            هم اکنون - بیش از 23 ساعت پیش
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="commentContentsShow">
-                                    <p>
-                                        بسیاری از درخواست کنندگان کسی و کارهای بومی و محلی اطلاعات مورد نیاز خود را از طریق اینترنت دریافت می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا خدمات مورد نیازشان اثرپذیری فراوانی دارد.
-                                        با توجه به ابن که خدمات و کالاهای بومی و محلی دارای اصالت و فرهنگ کهن جوامع روستایی هستند، می توان گفت اینترنت می تواند در آمدزایی از سبک زندگی جوامع محلی نقش
-                                    </p>
-                                </div>
-                                <div class="commentPhotosShow">
-                                    <div class="commentPhotosMainDiv tripletPhotoDiv">
-                                        <div class="photosCol secondCol col-xs-6">
-                                            <div data-toggle="modal" data-target=".showingPhotosModal"></div>
-                                        </div>
-                                        <div class="photosCol firstCol col-xs-6">
-                                            <div data-toggle="modal" data-target=".showingPhotosModal"></div>
-                                            <div data-toggle="modal" data-target=".showingPhotosModal"></div>
-                                        </div>
-                                    </div>
-                                    <div class="quantityOfLikes">
-                                        <span>31</span>
-                                        نفر دوست داشتند،
-                                        <span>31</span>
-                                        نفر دوست نداشتند و
-                                        <span>31</span>
-                                        نفر نظر دادند.
-                                    </div>
-                                </div>
-                                <div class="commentRatingsDetailsShow">
-                                    <div class="display-inline-block full-width">
-                                        <div class="commentRatingHeader">
-                                            بازدید با
-                                            <span>دوستان</span>
-                                            در فصل
-                                            <span>بهار</span>
-                                            و از مبدأ
-                                            <span>تهران</span>
-                                            انجام شده است
-                                        </div>
-                                        <div class="commentRatingsDetailsBtn" onclick="showRatingDetails(this)">مشاهده جزئیات امتیازدهی
-                                            <div class="commentRatingsDetailsBtnIcon">
-                                                <i class="glyphicon glyphicon-triangle-bottom"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="commentRatingsDetailsBox display-none">
-                                        <div class="display-inline-block full-width">
-                                            <b class="col-xs-3 font-size-15 line-height-203 pd-rt-0">اصلاً راضی نبودم</b>
-                                            <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
-                                                <div class="ui_star_rating stars_10 font-size-25">
-                                                    <span class="starRating"></span>
-                                                    <span class="starRating"></span>
-                                                    <span class="starRating"></span>
-                                                    <span class="starRating"></span>
-                                                    <span class="starRatingGreen"></span>
-                                                </div>
-                                            </div>
-                                            <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
-                                        </div>
-                                        <div class="display-inline-block full-width">
-                                            <b class="col-xs-3 font-size-15 line-height-203 pd-rt-0">بد نبود</b>
-                                            <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
-                                                <div class="ui_star_rating stars_20 font-size-25">
-                                                    <span class="starRating"></span>
-                                                    <span class="starRating"></span>
-                                                    <span class="starRating"></span>
-                                                    <span class="starRatingGreen"></span>
-                                                    <span class="starRatingGreen"></span>
-                                                </div>
-                                            </div>
-                                            <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
-                                        </div>
-                                        <div class="display-inline-block full-width">
-                                            <b class="col-xs-3 font-size-15 line-height-203 pd-rt-0">معمولی بود</b>
-                                            <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
-                                                <div class="ui_star_rating stars_30 font-size-25">
-                                                    <span class="starRating"></span>
-                                                    <span class="starRating"></span>
-                                                    <span class="starRatingGreen"></span>
-                                                    <span class="starRatingGreen"></span>
-                                                    <span class="starRatingGreen"></span>
-                                                </div>
-                                            </div>
-                                            <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
-                                        </div>
-                                        <div class="display-inline-block full-width">
-                                            <b class="col-xs-3 font-size-15 line-height-203 pd-rt-0">خوب بود</b>
-                                            <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
-                                                <div class="ui_star_rating stars_40 font-size-25">
-                                                    <span class="starRating"></span>
-                                                    <span class="starRatingGreen"></span>
-                                                    <span class="starRatingGreen"></span>
-                                                    <span class="starRatingGreen"></span>
-                                                    <span class="starRatingGreen"></span>
-                                                </div>
-                                            </div>
-                                            <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
-                                        </div>
-                                        <div class="display-inline-block full-width">
-                                            <b class="col-xs-3 font-size-15 line-height-203 pd-rt-0">عالی بود</b>
-                                            <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
-                                                <div class="ui_star_rating stars_50 font-size-25">
-                                                    <span class="starRatingGreen"></span>
-                                                    <span class="starRatingGreen"></span>
-                                                    <span class="starRatingGreen"></span>
-                                                    <span class="starRatingGreen"></span>
-                                                    <span class="starRatingGreen"></span>
-                                                </div>
-                                            </div>
-                                            <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="commentFeedbackChoices">
-                                    <div class="postsActionsChoices col-xs-3">
-                                        <div class="postLikeChoice display-inline-block" onclick="likePostsComment(this)">
-                                            <span class="commentsLikeIconFeedback firstIcon"></span>
-                                            <span class="commentsLikeClickedIconFeedback display-none secondIcon"></span>
-                                            <span class="mg-rt-20 cursor-pointer">دوست داشتم</span>
-                                        </div>
-                                    </div>
-                                    <div class="postsActionsChoices col-xs-3">
-                                        <div class="postDislikeChoice display-inline-block" onclick="disLikePostsComment(this)">
-                                            <span class="commentsDislikeIconFeedback firstIcon"></span>
-                                            <span class="commentsDislikeClickedIconFeedback display-none secondIcon"></span>
-                                            <span class="mg-rt-20 cursor-pointer">دوست نداشتم</span>
-                                        </div>
-                                    </div>
-                                    <div class="postsActionsChoices col-xs-3">
-                                        <div class="postCommentChoice display-inline-block" onclick="showPostsComments(this)">
-                                            <span class="showCommentsIconFeedback firstIcon"></span>
-                                            <span class="showCommentsClickedIconFeedback display-none secondIcon"></span>
-                                            <span class="mg-rt-20 cursor-pointer">مشاهده نظرها</span>
-                                        </div>
-                                    </div>
-                                    <div class="postsActionsChoices col-xs-3">
-                                        <div class="postShareChoice display-inline-block" onclick="SharePostsBtn(this)">
-                                            <span class="commentsShareIconFeedback firstIcon"></span>
-                                            <span class="commentsShareClickedIconFeedback display-none secondIcon"></span>
-                                            <span class="mg-rt-20 cursor-pointer">اشتراک‌گذاری</span>
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <div class="commentsMainBox display-none">
-                                    <div class="dark-blue mg-bt-10">
-                                        <span class="cursor-pointer">مشاهده 17 نظر باقیمانده</span>
-                                    </div>
-                                    <div class="eachCommentMainBox">
-                                        <div class="circleBase type2 commentsWriterProfilePic"></div>
-                                        <div class="commentsContentMainBox">
-                                            <b class="userProfileName display-inline-block">shazdesina</b>
-                                            <div>من موافق این مطلب نیستم. دوست من شما باید خودتان توجه می کردید نه اینکه مارا متهم کنید</div>
-                                            <div class="commentsStatisticsBar">
-                                                <div class="float-right display-inline-black">
-                                                    <span class="likeStatisticIcon commentsStatisticSpan color-red">31</span>
-                                                    <span class="dislikeStatisticIcon commentsStatisticSpan dark-red">31</span>
-                                                    <span class="numberOfCommentsIcon commentsStatisticSpan color-blue">31</span>
-                                                </div>
-                                                <div class="dark-blue float-left display-inline-black cursor-pointer" onclick="showCommentsAnswers(this)">مشاهده پاسخ‌ها</div>
-                                            </div>
-                                        </div>
-                                        <div class="commentsActionsBtns">
-                                            <div onclick="likeTheAnswers(this)">
-                                                <span class="likeActionBtn"></span>
-                                                <span class="likeActionClickedBtn display-none"></span>
-                                            </div>
-                                            <div onclick="dislikeTheAnswers(this)">
-                                                <span class="dislikeActionBtn"></span>
-                                                <span class="dislikeActionClickedBtn display-none"></span>
-                                            </div>
-                                            <div class="clear-both"></div>
-                                            <b class="replyBtn" onclick="replyToComments(this)">پاسخ دهید</b>
-                                        </div>
-                                        <div class="replyToCommentMainDiv display-none">
-                                            <div class="circleBase type2 newCommentWriterProfilePic"></div>
-                                            <div class="inputBox">
-                                                <b class="replyCommentTitle">در پاسخ به نظر shazdesina</b>
-                                                <textarea class="inputBoxInput inputBoxInputComment" type="text" placeholder="شما چه نظری دارید؟"></textarea>
-                                                <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="eachCommentMainBox mg-rt-45 display-none">
-                                        <div class="circleBase type2 commentsWriterProfilePic"></div>
-                                        <div class="commentsContentMainBox">
-                                            <b class="userProfileName float-right">shazdesina</b>
-                                            <b class="commentReplyDesc display-inline-block">در پاسخ به Shazdesina</b>
-                                            <div class="clear-both"></div>
-                                            <div>من موافق این مطلب نیستم. دوست من شما باید خودتان توجه می کردید نه اینکه مارا متهم کنید</div>
-                                            <div class="commentsStatisticsBar">
-                                                <div class="float-right display-inline-black">
-                                                    <span class="likeStatisticIcon commentsStatisticSpan color-red">31</span>
-                                                    <span class="dislikeStatisticIcon commentsStatisticSpan dark-red">31</span>
-                                                    <span class="numberOfCommentsIcon commentsStatisticSpan color-blue">31</span>
-                                                </div>
-                                                <div class="dark-blue float-left display-inline-black cursor-pointer" onclick="showCommentsAnswers(this)">مشاهده پاسخ‌ها</div>
-                                            </div>
-                                        </div>
-                                        <div class="commentsActionsBtns">
-                                            <div onclick="likeTheAnswers(this)">
-                                                <span class="likeActionBtn"></span>
-                                                <span class="likeActionClickedBtn display-none"></span>
-                                            </div>
-                                            <div onclick="dislikeTheAnswers(this)">
-                                                <span class="dislikeActionBtn"></span>
-                                                <span class="dislikeActionClickedBtn display-none"></span>
-                                            </div>
-                                            <div class="clear-both"></div>
-                                            <b class="replyBtn" onclick="replyToComments(this)">پاسخ دهید</b>
-                                        </div>
-                                        <div class="replyToCommentMainDiv display-none">
-                                            <div class="circleBase type2 newCommentWriterProfilePic"></div>
-                                            <div class="inputBox">
-                                                <b class="replyCommentTitle">در پاسخ به نظر shazdesina</b>
-                                                <textarea class="inputBoxInput inputBoxInputComment" type="text" placeholder="شما چه نظری دارید؟"></textarea>
-                                                <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="newCommentPlaceMainDiv">
-                                    <div class="circleBase type2 newCommentWriterProfilePic"></div>
-                                    <div class="inputBox">
-                                        <b class="replyCommentTitle">در پاسخ به نظر shazdesina</b>
-                                        <textarea class="inputBoxInput inputBoxInputComment" id="zzzz" type="text" placeholder="شما چه نظری دارید؟"></textarea>
-                                        <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
-                                    </div>
-                                    <div></div>
-                                </div>
-                            </div>
-                            <div class="col-xs-12 postMainDivShown position-relative">
-                                <div class="commentActions"  onclick="showAnswersActionBox(this)">
-                                    <span class="commentActionsIcon"></span>
-                                </div>
-                                <div class="questionsActionsMoreDetails display-none">
-                                    <span>گزارش پست</span>
-                                    <span>مشاهده صفحه شازده سینا</span>
-                                    <span>مشاهده تمامی پست‌ها</span>
-                                    <span>صفحه قوانین و مقررات</span>
-                                </div>
-                                <div class="commentWriterDetailsShow">
-                                    <div class="circleBase type2 commentWriterPicShow"></div>
-                                    <div class="commentWriterExperienceDetails">
-                                        <b class="userProfileName">shazdesina</b>
-                                        <div class="display-inline-block">در
-                                            <span class="commentWriterExperiencePlace">هتل عباسی، شهر یزد، استان یزد</span>
-                                        </div>
-                                        <div>با
-                                            <span class="commentWriterExperienceParticipation">احتشام الدوله توفیقی</span>،
-                                            <span class="commentWriterExperienceParticipation">حمیدرضا عسگرزاده </span>و
-                                            <span class="commentWriterExperienceParticipation">علی اصر همتی</span>
-                                        </div>
-                                        <div>
-                                            هم اکنون - بیش از 23 ساعت پیش
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="commentContentsShow">
-                                    <p>
-                                        بسیاری از درخواست کنندگان کسی و کارهای بومی و محلی اطلاعات مورد نیاز خود را از طریق اینترنت دریافت می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا خدمات مورد نیازشان اثرپذیری فراوانی دارد.
-                                        با توجه به ابن که خدمات و کالاهای بومی و محلی دارای اصالت و فرهنگ کهن جوامع روستایی هستند، می توان گفت اینترنت می تواند در آمدزایی از سبک زندگی جوامع محلی نقش
-                                    </p>
-                                </div>
-                                <div class="commentPhotosShow">
-                                    <div class="commentPhotosMainDiv quadruplePhotoDiv">
-                                        <div class="photosCol secondCol col-xs-6">
-                                            <div data-toggle="modal" data-target=".showingPhotosModal"></div>
-                                            <div data-toggle="modal" data-target=".showingPhotosModal"></div>
-                                        </div>
-                                        <div class="photosCol firstCol col-xs-6">
-                                            <div data-toggle="modal" data-target=".showingPhotosModal"></div>
-                                            <div data-toggle="modal" data-target=".showingPhotosModal"></div>
-                                        </div>
-                                    </div>
-                                    <div class="quantityOfLikes">
-                                        <span>31</span>
-                                        نفر دوست داشتند،
-                                        <span>31</span>
-                                        نفر دوست نداشتند و
-                                        <span>31</span>
-                                        نفر نظر دادند.
-                                    </div>
-                                </div>
-                                <div class="commentRatingsDetailsShow">
-                                    <div class="display-inline-block full-width">
-                                        <div class="commentRatingHeader">
-                                            بازدید با
-                                            <span>دوستان</span>
-                                            در فصل
-                                            <span>بهار</span>
-                                            و از مبدأ
-                                            <span>تهران</span>
-                                            انجام شده است
-                                        </div>
-                                        <div class="commentRatingsDetailsBtn" onclick="showRatingDetails(this)">مشاهده جزئیات امتیازدهی
-                                            <div class="commentRatingsDetailsBtnIcon">
-                                                <i class="glyphicon glyphicon-triangle-bottom"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="commentRatingsDetailsBox display-none">
-                                        <div class="display-inline-block full-width">
-                                            <b class="col-xs-3 font-size-15 line-height-203 pd-rt-0">اصلاً راضی نبودم</b>
-                                            <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
-                                                <div class="ui_star_rating stars_10 font-size-25">
-                                                    <span class="starRating"></span>
-                                                    <span class="starRating"></span>
-                                                    <span class="starRating"></span>
-                                                    <span class="starRating"></span>
-                                                    <span class="starRatingGreen"></span>
-                                                </div>
-                                            </div>
-                                            <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
-                                        </div>
-                                        <div class="display-inline-block full-width">
-                                            <b class="col-xs-3 font-size-15 line-height-203 pd-rt-0">بد نبود</b>
-                                            <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
-                                                <div class="ui_star_rating stars_20 font-size-25">
-                                                    <span class="starRating"></span>
-                                                    <span class="starRating"></span>
-                                                    <span class="starRating"></span>
-                                                    <span class="starRatingGreen"></span>
-                                                    <span class="starRatingGreen"></span>
-                                                </div>
-                                            </div>
-                                            <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
-                                        </div>
-                                        <div class="display-inline-block full-width">
-                                            <b class="col-xs-3 font-size-15 line-height-203 pd-rt-0">معمولی بود</b>
-                                            <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
-                                                <div class="ui_star_rating stars_30 font-size-25">
-                                                    <span class="starRating"></span>
-                                                    <span class="starRating"></span>
-                                                    <span class="starRatingGreen"></span>
-                                                    <span class="starRatingGreen"></span>
-                                                    <span class="starRatingGreen"></span>
-                                                </div>
-                                            </div>
-                                            <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
-                                        </div>
-                                        <div class="display-inline-block full-width">
-                                            <b class="col-xs-3 font-size-15 line-height-203 pd-rt-0">خوب بود</b>
-                                            <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
-                                                <div class="ui_star_rating stars_40 font-size-25">
-                                                    <span class="starRating"></span>
-                                                    <span class="starRatingGreen"></span>
-                                                    <span class="starRatingGreen"></span>
-                                                    <span class="starRatingGreen"></span>
-                                                    <span class="starRatingGreen"></span>
-                                                </div>
-                                            </div>
-                                            <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
-                                        </div>
-                                        <div class="display-inline-block full-width">
-                                            <b class="col-xs-3 font-size-15 line-height-203 pd-rt-0">عالی بود</b>
-                                            <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">
-                                                <div class="ui_star_rating stars_50 font-size-25">
-                                                    <span class="starRatingGreen"></span>
-                                                    <span class="starRatingGreen"></span>
-                                                    <span class="starRatingGreen"></span>
-                                                    <span class="starRatingGreen"></span>
-                                                    <span class="starRatingGreen"></span>
-                                                </div>
-                                            </div>
-                                            <b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="commentFeedbackChoices">
-                                    <div class="postsActionsChoices col-xs-3">
-                                        <div class="postLikeChoice display-inline-block" onclick="likePostsComment(this)">
-                                            <span class="commentsLikeIconFeedback firstIcon"></span>
-                                            <span class="commentsLikeClickedIconFeedback display-none secondIcon"></span>
-                                            <span class="mg-rt-20 cursor-pointer">دوست داشتم</span>
-                                        </div>
-                                    </div>
-                                    <div class="postsActionsChoices col-xs-3">
-                                        <div class="postDislikeChoice display-inline-block" onclick="disLikePostsComment(this)">
-                                            <span class="commentsDislikeIconFeedback firstIcon"></span>
-                                            <span class="commentsDislikeClickedIconFeedback display-none secondIcon"></span>
-                                            <span class="mg-rt-20 cursor-pointer">دوست نداشتم</span>
-                                        </div>
-                                    </div>
-                                    <div class="postsActionsChoices col-xs-3">
-                                        <div class="postCommentChoice display-inline-block" onclick="showPostsComments(this)">
-                                            <span class="showCommentsIconFeedback firstIcon"></span>
-                                            <span class="showCommentsClickedIconFeedback display-none secondIcon"></span>
-                                            <span class="mg-rt-20 cursor-pointer">مشاهده نظرها</span>
-                                        </div>
-                                    </div>
-                                    <div class="postsActionsChoices col-xs-3">
-                                        <div class="postShareChoice display-inline-block" onclick="SharePostsBtn(this)">
-                                            <span class="commentsShareIconFeedback firstIcon"></span>
-                                            <span class="commentsShareClickedIconFeedback display-none secondIcon"></span>
-                                            <span class="mg-rt-20 cursor-pointer">اشتراک‌گذاری</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="commentsMainBox display-none">
-                                    <div class="dark-blue mg-bt-10">
-                                        <span class="cursor-pointer">مشاهده 17 نظر باقیمانده</span>
-                                    </div>
-                                    <div class="eachCommentMainBox">
-                                        <div class="circleBase type2 commentsWriterProfilePic"></div>
-                                        <div class="commentsContentMainBox">
-                                            <b class="userProfileName display-inline-block">shazdesina</b>
-                                            <div>من موافق این مطلب نیستم. دوست من شما باید خودتان توجه می کردید نه اینکه مارا متهم کنید</div>
-                                            <div class="commentsStatisticsBar">
-                                                <div class="float-right display-inline-black">
-                                                    <span class="likeStatisticIcon commentsStatisticSpan color-red">31</span>
-                                                    <span class="dislikeStatisticIcon commentsStatisticSpan dark-red">31</span>
-                                                    <span class="numberOfCommentsIcon commentsStatisticSpan color-blue">31</span>
-                                                </div>
-                                                <div class="dark-blue float-left display-inline-black cursor-pointer" onclick="showCommentsAnswers(this)">مشاهده پاسخ‌ها</div>
-                                            </div>
-                                        </div>
-                                        <div class="commentsActionsBtns">
-                                            <div onclick="likeTheAnswers(this)">
-                                                <span class="likeActionBtn"></span>
-                                                <span class="likeActionClickedBtn display-none"></span>
-                                            </div>
-                                            <div onclick="dislikeTheAnswers(this)">
-                                                <span class="dislikeActionBtn"></span>
-                                                <span class="dislikeActionClickedBtn display-none"></span>
-                                            </div>
-                                            <div class="clear-both"></div>
-                                            <b class="replyBtn" onclick="replyToComments(this)">پاسخ دهید</b>
-                                        </div>
-                                        <div class="replyToCommentMainDiv display-none">
-                                            <div class="circleBase type2 newCommentWriterProfilePic"></div>
-                                            <div class="inputBox">
-                                                <b class="replyCommentTitle">در پاسخ به نظر shazdesina</b>
-                                                <textarea class="inputBoxInput inputBoxInputComment" type="text" placeholder="شما چه نظری دارید؟"></textarea>
-                                                <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="eachCommentMainBox mg-rt-45 display-none">
-                                        <div class="circleBase type2 commentsWriterProfilePic"></div>
-                                        <div class="commentsContentMainBox">
-                                            <b class="userProfileName float-right">shazdesina</b>
-                                            <b class="commentReplyDesc display-inline-block">در پاسخ به Shazdesina</b>
-                                            <div class="clear-both"></div>
-                                            <div>من موافق این مطلب نیستم. دوست من شما باید خودتان توجه می کردید نه اینکه مارا متهم کنید</div>
-                                            <div class="commentsStatisticsBar">
-                                                <div class="float-right display-inline-black">
-                                                    <span class="likeStatisticIcon commentsStatisticSpan color-red">31</span>
-                                                    <span class="dislikeStatisticIcon commentsStatisticSpan dark-red">31</span>
-                                                    <span class="numberOfCommentsIcon commentsStatisticSpan color-blue">31</span>
-                                                </div>
-                                                <div class="dark-blue float-left display-inline-black cursor-pointer" onclick="showCommentsAnswers(this)">مشاهده پاسخ‌ها</div>
-                                            </div>
-                                        </div>
-                                        <div class="commentsActionsBtns">
-                                            <div onclick="likeTheAnswers(this)">
-                                                <span class="likeActionBtn"></span>
-                                                <span class="likeActionClickedBtn display-none"></span>
-                                            </div>
-                                            <div onclick="dislikeTheAnswers(this)">
-                                                <span class="dislikeActionBtn"></span>
-                                                <span class="dislikeActionClickedBtn display-none"></span>
-                                            </div>
-                                            <div class="clear-both"></div>
-                                            <b class="replyBtn" onclick="replyToComments(this)">پاسخ دهید</b>
-                                        </div>
-                                        <div class="replyToCommentMainDiv display-none">
-                                            <div class="circleBase type2 newCommentWriterProfilePic"></div>
-                                            <div class="inputBox">
-                                                <b class="replyCommentTitle">در پاسخ به نظر shazdesina</b>
-                                                <textarea class="inputBoxInput inputBoxInputComment" type="text" placeholder="شما چه نظری دارید؟"></textarea>
-                                                <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="newCommentPlaceMainDiv">
-                                    <div class="circleBase type2 newCommentWriterProfilePic"></div>
-                                    <div class="inputBox">
-                                        <b class="replyCommentTitle">در پاسخ به نظر shazdesina</b>
-                                        <textarea class="inputBoxInput inputBoxInputComment" id="zzzz" type="text" placeholder="شما چه نظری دارید؟"></textarea>
-                                        <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
-                                    </div>
-                                    <div></div>
-                                </div>
-                            </div>
+                            {{--<div class="col-xs-12 postMainDivShown position-relative">--}}
+                                {{--<div class="commentActions"  onclick="showAnswersActionBox(this)">--}}
+                                    {{--<span class="commentActionsIcon"></span>--}}
+                                {{--</div>--}}
+                                {{--<div class="questionsActionsMoreDetails display-none">--}}
+                                    {{--<span>گزارش پست</span>--}}
+                                    {{--<span>مشاهده صفحه شازده سینا</span>--}}
+                                    {{--<span>مشاهده تمامی پست‌ها</span>--}}
+                                    {{--<span>صفحه قوانین و مقررات</span>--}}
+                                {{--</div>--}}
+                                {{--<div class="commentWriterDetailsShow">--}}
+                                    {{--<div class="circleBase type2 commentWriterPicShow"></div>--}}
+                                    {{--<div class="commentWriterExperienceDetails">--}}
+                                        {{--<b class="userProfileName">shazdesina</b>--}}
+                                        {{--<div class="display-inline-block">در--}}
+                                            {{--<span class="commentWriterExperiencePlace">هتل عباسی، شهر یزد، استان یزد</span>--}}
+                                        {{--</div>--}}
+                                        {{--<div>با--}}
+                                            {{--<span class="commentWriterExperienceParticipation">احتشام الدوله توفیقی</span>،--}}
+                                            {{--<span class="commentWriterExperienceParticipation">حمیدرضا عسگرزاده </span>و--}}
+                                            {{--<span class="commentWriterExperienceParticipation">علی اصر همتی</span>--}}
+                                        {{--</div>--}}
+                                        {{--<div>--}}
+                                            {{--هم اکنون - بیش از 23 ساعت پیش--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                                {{--<div class="commentContentsShow">--}}
+                                    {{--<p>--}}
+                                        {{--بسیاری از درخواست کنندگان کسی و کارهای بومی و محلی اطلاعات مورد نیاز خود را از طریق اینترنت دریافت می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا خدمات مورد نیازشان اثرپذیری فراوانی دارد.--}}
+                                        {{--با توجه به ابن که خدمات و کالاهای بومی و محلی دارای اصالت و فرهنگ کهن جوامع روستایی هستند، می توان گفت اینترنت می تواند در آمدزایی از سبک زندگی جوامع محلی نقش--}}
+                                    {{--</p>--}}
+                                {{--</div>--}}
+                                {{--<div class="commentPhotosShow">--}}
+                                    {{--<div class="commentPhotosMainDiv doublePhotoDiv">--}}
+                                        {{--<div class="photosCol secondCol col-xs-6">--}}
+                                            {{--<div data-toggle="modal" data-target=".showingPhotosModal"></div>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="photosCol firstCol col-xs-6">--}}
+                                            {{--<div data-toggle="modal" data-target=".showingPhotosModal"></div>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="quantityOfLikes">--}}
+                                        {{--<span>31</span>--}}
+                                        {{--نفر دوست داشتند،--}}
+                                        {{--<span>31</span>--}}
+                                        {{--نفر دوست نداشتند و--}}
+                                        {{--<span>31</span>--}}
+                                        {{--نفر نظر دادند.--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                                {{--<div class="commentRatingsDetailsShow">--}}
+                                    {{--<div class="display-inline-block full-width">--}}
+                                        {{--<div class="commentRatingHeader">--}}
+                                            {{--بازدید با--}}
+                                            {{--<span>دوستان</span>--}}
+                                            {{--در فصل--}}
+                                            {{--<span>بهار</span>--}}
+                                            {{--و از مبدأ--}}
+                                            {{--<span>تهران</span>--}}
+                                            {{--انجام شده است--}}
+                                        {{--</div>--}}
+                                        {{--<div class="commentRatingsDetailsBtn" onclick="showRatingDetails(this)">مشاهده جزئیات امتیازدهی--}}
+                                            {{--<div class="commentRatingsDetailsBtnIcon">--}}
+                                                {{--<i class="glyphicon glyphicon-triangle-bottom"></i>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="commentRatingsDetailsBox display-none">--}}
+                                        {{--<div class="display-inline-block full-width">--}}
+                                            {{--<b class="col-xs-3 font-size-15 line-height-203 pd-rt-0">اصلاً راضی نبودم</b>--}}
+                                            {{--<div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">--}}
+                                                {{--<div class="ui_star_rating stars_10 font-size-25">--}}
+                                                    {{--<span class="starRating"></span>--}}
+                                                    {{--<span class="starRating"></span>--}}
+                                                    {{--<span class="starRating"></span>--}}
+                                                    {{--<span class="starRating"></span>--}}
+                                                    {{--<span class="starRatingGreen"></span>--}}
+                                                {{--</div>--}}
+                                            {{--</div>--}}
+                                            {{--<b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="display-inline-block full-width">--}}
+                                            {{--<b class="col-xs-3 font-size-15 line-height-203 pd-rt-0">بد نبود</b>--}}
+                                            {{--<div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">--}}
+                                                {{--<div class="ui_star_rating stars_20 font-size-25">--}}
+                                                    {{--<span class="starRating"></span>--}}
+                                                    {{--<span class="starRating"></span>--}}
+                                                    {{--<span class="starRating"></span>--}}
+                                                    {{--<span class="starRatingGreen"></span>--}}
+                                                    {{--<span class="starRatingGreen"></span>--}}
+                                                {{--</div>--}}
+                                            {{--</div>--}}
+                                            {{--<b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="display-inline-block full-width">--}}
+                                            {{--<b class="col-xs-3 font-size-15 line-height-203 pd-rt-0">معمولی بود</b>--}}
+                                            {{--<div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">--}}
+                                                {{--<div class="ui_star_rating stars_30 font-size-25">--}}
+                                                    {{--<span class="starRating"></span>--}}
+                                                    {{--<span class="starRating"></span>--}}
+                                                    {{--<span class="starRatingGreen"></span>--}}
+                                                    {{--<span class="starRatingGreen"></span>--}}
+                                                    {{--<span class="starRatingGreen"></span>--}}
+                                                {{--</div>--}}
+                                            {{--</div>--}}
+                                            {{--<b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="display-inline-block full-width">--}}
+                                            {{--<b class="col-xs-3 font-size-15 line-height-203 pd-rt-0">خوب بود</b>--}}
+                                            {{--<div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">--}}
+                                                {{--<div class="ui_star_rating stars_40 font-size-25">--}}
+                                                    {{--<span class="starRating"></span>--}}
+                                                    {{--<span class="starRatingGreen"></span>--}}
+                                                    {{--<span class="starRatingGreen"></span>--}}
+                                                    {{--<span class="starRatingGreen"></span>--}}
+                                                    {{--<span class="starRatingGreen"></span>--}}
+                                                {{--</div>--}}
+                                            {{--</div>--}}
+                                            {{--<b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="display-inline-block full-width">--}}
+                                            {{--<b class="col-xs-3 font-size-15 line-height-203 pd-rt-0">عالی بود</b>--}}
+                                            {{--<div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">--}}
+                                                {{--<div class="ui_star_rating stars_50 font-size-25">--}}
+                                                    {{--<span class="starRatingGreen"></span>--}}
+                                                    {{--<span class="starRatingGreen"></span>--}}
+                                                    {{--<span class="starRatingGreen"></span>--}}
+                                                    {{--<span class="starRatingGreen"></span>--}}
+                                                    {{--<span class="starRatingGreen"></span>--}}
+                                                {{--</div>--}}
+                                            {{--</div>--}}
+                                            {{--<b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                                {{--<div class="commentFeedbackChoices">--}}
+                                    {{--<div class="postsActionsChoices col-xs-3">--}}
+                                        {{--<div class="postLikeChoice display-inline-block" onclick="likePostsComment(this)">--}}
+                                            {{--<span class="commentsLikeIconFeedback firstIcon"></span>--}}
+                                            {{--<span class="commentsLikeClickedIconFeedback display-none secondIcon"></span>--}}
+                                            {{--<span class="mg-rt-20 cursor-pointer">دوست داشتم</span>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="postsActionsChoices col-xs-3">--}}
+                                        {{--<div class="postDislikeChoice display-inline-block" onclick="disLikePostsComment(this)">--}}
+                                            {{--<span class="commentsDislikeIconFeedback firstIcon"></span>--}}
+                                            {{--<span class="commentsDislikeClickedIconFeedback display-none secondIcon"></span>--}}
+                                            {{--<span class="mg-rt-20 cursor-pointer">دوست نداشتم</span>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="postsActionsChoices col-xs-3">--}}
+                                        {{--<div class="postCommentChoice display-inline-block" onclick="showPostsComments(this)">--}}
+                                            {{--<span class="showCommentsIconFeedback firstIcon"></span>--}}
+                                            {{--<span class="showCommentsClickedIconFeedback display-none secondIcon"></span>--}}
+                                            {{--<span class="mg-rt-20 cursor-pointer">مشاهده نظرها</span>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="postsActionsChoices col-xs-3">--}}
+                                        {{--<div class="postShareChoice display-inline-block" onclick="SharePostsBtn(this)">--}}
+                                            {{--<span class="commentsShareIconFeedback firstIcon"></span>--}}
+                                            {{--<span class="commentsShareClickedIconFeedback display-none secondIcon"></span>--}}
+                                            {{--<span class="mg-rt-20 cursor-pointer">اشتراک‌گذاری</span>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+
+                                {{--<div class="commentsMainBox display-none">--}}
+                                    {{--<div class="dark-blue mg-bt-10">--}}
+                                        {{--<span class="cursor-pointer">مشاهده 17 نظر باقیمانده</span>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="eachCommentMainBox">--}}
+                                        {{--<div class="circleBase type2 commentsWriterProfilePic"></div>--}}
+                                        {{--<div class="commentsContentMainBox">--}}
+                                            {{--<b class="userProfileName display-inline-block">shazdesina</b>--}}
+                                            {{--<div>من موافق این مطلب نیستم. دوست من شما باید خودتان توجه می کردید نه اینکه مارا متهم کنید</div>--}}
+                                            {{--<div class="commentsStatisticsBar">--}}
+                                                {{--<div class="float-right display-inline-black">--}}
+                                                    {{--<span class="likeStatisticIcon commentsStatisticSpan color-red">31</span>--}}
+                                                    {{--<span class="dislikeStatisticIcon commentsStatisticSpan dark-red">31</span>--}}
+                                                    {{--<span class="numberOfCommentsIcon commentsStatisticSpan color-blue">31</span>--}}
+                                                {{--</div>--}}
+                                                {{--<div class="dark-blue float-left display-inline-black cursor-pointer" onclick="showCommentsAnswers(this)">مشاهده پاسخ‌ها</div>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="commentsActionsBtns">--}}
+                                            {{--<div onclick="likeTheAnswers(this)">--}}
+                                                {{--<span class="likeActionBtn"></span>--}}
+                                                {{--<span class="likeActionClickedBtn display-none"></span>--}}
+                                            {{--</div>--}}
+                                            {{--<div onclick="dislikeTheAnswers(this)">--}}
+                                                {{--<span class="dislikeActionBtn"></span>--}}
+                                                {{--<span class="dislikeActionClickedBtn display-none"></span>--}}
+                                            {{--</div>--}}
+                                            {{--<div class="clear-both"></div>--}}
+                                            {{--<b class="replyBtn" onclick="replyToComments(this)">پاسخ دهید</b>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="replyToCommentMainDiv display-none">--}}
+                                            {{--<div class="circleBase type2 newCommentWriterProfilePic"></div>--}}
+                                            {{--<div class="inputBox">--}}
+                                                {{--<b class="replyCommentTitle">در پاسخ به نظر shazdesina</b>--}}
+                                                {{--<textarea class="inputBoxInput inputBoxInputComment" type="text" placeholder="شما چه نظری دارید؟"></textarea>--}}
+                                                {{--<img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="eachCommentMainBox mg-rt-45 display-none">--}}
+                                        {{--<div class="circleBase type2 commentsWriterProfilePic"></div>--}}
+                                        {{--<div class="commentsContentMainBox">--}}
+                                            {{--<b class="userProfileName float-right">shazdesina</b>--}}
+                                            {{--<b class="commentReplyDesc display-inline-block">در پاسخ به Shazdesina</b>--}}
+                                            {{--<div class="clear-both"></div>--}}
+                                            {{--<div>من موافق این مطلب نیستم. دوست من شما باید خودتان توجه می کردید نه اینکه مارا متهم کنید</div>--}}
+                                            {{--<div class="commentsStatisticsBar">--}}
+                                                {{--<div class="float-right display-inline-black">--}}
+                                                    {{--<span class="likeStatisticIcon commentsStatisticSpan color-red">31</span>--}}
+                                                    {{--<span class="dislikeStatisticIcon commentsStatisticSpan dark-red">31</span>--}}
+                                                    {{--<span class="numberOfCommentsIcon commentsStatisticSpan color-blue">31</span>--}}
+                                                {{--</div>--}}
+                                                {{--<div class="dark-blue float-left display-inline-black cursor-pointer" onclick="showCommentsAnswers(this)">مشاهده پاسخ‌ها</div>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="commentsActionsBtns">--}}
+                                            {{--<div onclick="likeTheAnswers(this)">--}}
+                                                {{--<span class="likeActionBtn"></span>--}}
+                                                {{--<span class="likeActionClickedBtn display-none"></span>--}}
+                                            {{--</div>--}}
+                                            {{--<div onclick="dislikeTheAnswers(this)">--}}
+                                                {{--<span class="dislikeActionBtn"></span>--}}
+                                                {{--<span class="dislikeActionClickedBtn display-none"></span>--}}
+                                            {{--</div>--}}
+                                            {{--<div class="clear-both"></div>--}}
+                                            {{--<b class="replyBtn" onclick="replyToComments(this)">پاسخ دهید</b>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="replyToCommentMainDiv display-none">--}}
+                                            {{--<div class="circleBase type2 newCommentWriterProfilePic"></div>--}}
+                                            {{--<div class="inputBox">--}}
+                                                {{--<b class="replyCommentTitle">در پاسخ به نظر shazdesina</b>--}}
+                                                {{--<textarea class="inputBoxInput inputBoxInputComment" type="text" placeholder="شما چه نظری دارید؟"></textarea>--}}
+                                                {{--<img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                                {{--<div class="newCommentPlaceMainDiv">--}}
+                                    {{--<div class="circleBase type2 newCommentWriterProfilePic"></div>--}}
+                                    {{--<div class="inputBox">--}}
+                                        {{--<b class="replyCommentTitle">در پاسخ به نظر shazdesina</b>--}}
+                                        {{--<textarea class="inputBoxInput inputBoxInputComment" id="zzzz" type="text" placeholder="شما چه نظری دارید؟"></textarea>--}}
+                                        {{--<img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">--}}
+                                    {{--</div>--}}
+                                    {{--<div></div>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                            {{--<div class="col-xs-12 postMainDivShown position-relative">--}}
+                                {{--<div class="commentActions"  onclick="showAnswersActionBox(this)">--}}
+                                    {{--<span class="commentActionsIcon"></span>--}}
+                                {{--</div>--}}
+                                {{--<div class="questionsActionsMoreDetails display-none">--}}
+                                    {{--<span>گزارش پست</span>--}}
+                                    {{--<span>مشاهده صفحه شازده سینا</span>--}}
+                                    {{--<span>مشاهده تمامی پست‌ها</span>--}}
+                                    {{--<span>صفحه قوانین و مقررات</span>--}}
+                                {{--</div>--}}
+                                {{--<div class="commentWriterDetailsShow">--}}
+                                    {{--<div class="circleBase type2 commentWriterPicShow"></div>--}}
+                                    {{--<div class="commentWriterExperienceDetails">--}}
+                                        {{--<b class="userProfileName">shazdesina</b>--}}
+                                        {{--<div class="display-inline-block">در--}}
+                                            {{--<span class="commentWriterExperiencePlace">هتل عباسی، شهر یزد، استان یزد</span>--}}
+                                        {{--</div>--}}
+                                        {{--<div>با--}}
+                                            {{--<span class="commentWriterExperienceParticipation">احتشام الدوله توفیقی</span>،--}}
+                                            {{--<span class="commentWriterExperienceParticipation">حمیدرضا عسگرزاده </span>و--}}
+                                            {{--<span class="commentWriterExperienceParticipation">علی اصر همتی</span>--}}
+                                        {{--</div>--}}
+                                        {{--<div>--}}
+                                            {{--هم اکنون - بیش از 23 ساعت پیش--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                                {{--<div class="commentContentsShow">--}}
+                                    {{--<p>--}}
+                                        {{--بسیاری از درخواست کنندگان کسی و کارهای بومی و محلی اطلاعات مورد نیاز خود را از طریق اینترنت دریافت می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا خدمات مورد نیازشان اثرپذیری فراوانی دارد.--}}
+                                        {{--با توجه به ابن که خدمات و کالاهای بومی و محلی دارای اصالت و فرهنگ کهن جوامع روستایی هستند، می توان گفت اینترنت می تواند در آمدزایی از سبک زندگی جوامع محلی نقش--}}
+                                    {{--</p>--}}
+                                {{--</div>--}}
+                                {{--<div class="commentPhotosShow">--}}
+                                    {{--<div class="commentPhotosMainDiv tripletPhotoDiv">--}}
+                                        {{--<div class="photosCol secondCol col-xs-6">--}}
+                                            {{--<div data-toggle="modal" data-target=".showingPhotosModal"></div>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="photosCol firstCol col-xs-6">--}}
+                                            {{--<div data-toggle="modal" data-target=".showingPhotosModal"></div>--}}
+                                            {{--<div data-toggle="modal" data-target=".showingPhotosModal"></div>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="quantityOfLikes">--}}
+                                        {{--<span>31</span>--}}
+                                        {{--نفر دوست داشتند،--}}
+                                        {{--<span>31</span>--}}
+                                        {{--نفر دوست نداشتند و--}}
+                                        {{--<span>31</span>--}}
+                                        {{--نفر نظر دادند.--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                                {{--<div class="commentRatingsDetailsShow">--}}
+                                    {{--<div class="display-inline-block full-width">--}}
+                                        {{--<div class="commentRatingHeader">--}}
+                                            {{--بازدید با--}}
+                                            {{--<span>دوستان</span>--}}
+                                            {{--در فصل--}}
+                                            {{--<span>بهار</span>--}}
+                                            {{--و از مبدأ--}}
+                                            {{--<span>تهران</span>--}}
+                                            {{--انجام شده است--}}
+                                        {{--</div>--}}
+                                        {{--<div class="commentRatingsDetailsBtn" onclick="showRatingDetails(this)">مشاهده جزئیات امتیازدهی--}}
+                                            {{--<div class="commentRatingsDetailsBtnIcon">--}}
+                                                {{--<i class="glyphicon glyphicon-triangle-bottom"></i>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="commentRatingsDetailsBox display-none">--}}
+                                        {{--<div class="display-inline-block full-width">--}}
+                                            {{--<b class="col-xs-3 font-size-15 line-height-203 pd-rt-0">اصلاً راضی نبودم</b>--}}
+                                            {{--<div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">--}}
+                                                {{--<div class="ui_star_rating stars_10 font-size-25">--}}
+                                                    {{--<span class="starRating"></span>--}}
+                                                    {{--<span class="starRating"></span>--}}
+                                                    {{--<span class="starRating"></span>--}}
+                                                    {{--<span class="starRating"></span>--}}
+                                                    {{--<span class="starRatingGreen"></span>--}}
+                                                {{--</div>--}}
+                                            {{--</div>--}}
+                                            {{--<b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="display-inline-block full-width">--}}
+                                            {{--<b class="col-xs-3 font-size-15 line-height-203 pd-rt-0">بد نبود</b>--}}
+                                            {{--<div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">--}}
+                                                {{--<div class="ui_star_rating stars_20 font-size-25">--}}
+                                                    {{--<span class="starRating"></span>--}}
+                                                    {{--<span class="starRating"></span>--}}
+                                                    {{--<span class="starRating"></span>--}}
+                                                    {{--<span class="starRatingGreen"></span>--}}
+                                                    {{--<span class="starRatingGreen"></span>--}}
+                                                {{--</div>--}}
+                                            {{--</div>--}}
+                                            {{--<b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="display-inline-block full-width">--}}
+                                            {{--<b class="col-xs-3 font-size-15 line-height-203 pd-rt-0">معمولی بود</b>--}}
+                                            {{--<div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">--}}
+                                                {{--<div class="ui_star_rating stars_30 font-size-25">--}}
+                                                    {{--<span class="starRating"></span>--}}
+                                                    {{--<span class="starRating"></span>--}}
+                                                    {{--<span class="starRatingGreen"></span>--}}
+                                                    {{--<span class="starRatingGreen"></span>--}}
+                                                    {{--<span class="starRatingGreen"></span>--}}
+                                                {{--</div>--}}
+                                            {{--</div>--}}
+                                            {{--<b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="display-inline-block full-width">--}}
+                                            {{--<b class="col-xs-3 font-size-15 line-height-203 pd-rt-0">خوب بود</b>--}}
+                                            {{--<div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">--}}
+                                                {{--<div class="ui_star_rating stars_40 font-size-25">--}}
+                                                    {{--<span class="starRating"></span>--}}
+                                                    {{--<span class="starRatingGreen"></span>--}}
+                                                    {{--<span class="starRatingGreen"></span>--}}
+                                                    {{--<span class="starRatingGreen"></span>--}}
+                                                    {{--<span class="starRatingGreen"></span>--}}
+                                                {{--</div>--}}
+                                            {{--</div>--}}
+                                            {{--<b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="display-inline-block full-width">--}}
+                                            {{--<b class="col-xs-3 font-size-15 line-height-203 pd-rt-0">عالی بود</b>--}}
+                                            {{--<div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">--}}
+                                                {{--<div class="ui_star_rating stars_50 font-size-25">--}}
+                                                    {{--<span class="starRatingGreen"></span>--}}
+                                                    {{--<span class="starRatingGreen"></span>--}}
+                                                    {{--<span class="starRatingGreen"></span>--}}
+                                                    {{--<span class="starRatingGreen"></span>--}}
+                                                    {{--<span class="starRatingGreen"></span>--}}
+                                                {{--</div>--}}
+                                            {{--</div>--}}
+                                            {{--<b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                                {{--<div class="commentFeedbackChoices">--}}
+                                    {{--<div class="postsActionsChoices col-xs-3">--}}
+                                        {{--<div class="postLikeChoice display-inline-block" onclick="likePostsComment(this)">--}}
+                                            {{--<span class="commentsLikeIconFeedback firstIcon"></span>--}}
+                                            {{--<span class="commentsLikeClickedIconFeedback display-none secondIcon"></span>--}}
+                                            {{--<span class="mg-rt-20 cursor-pointer">دوست داشتم</span>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="postsActionsChoices col-xs-3">--}}
+                                        {{--<div class="postDislikeChoice display-inline-block" onclick="disLikePostsComment(this)">--}}
+                                            {{--<span class="commentsDislikeIconFeedback firstIcon"></span>--}}
+                                            {{--<span class="commentsDislikeClickedIconFeedback display-none secondIcon"></span>--}}
+                                            {{--<span class="mg-rt-20 cursor-pointer">دوست نداشتم</span>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="postsActionsChoices col-xs-3">--}}
+                                        {{--<div class="postCommentChoice display-inline-block" onclick="showPostsComments(this)">--}}
+                                            {{--<span class="showCommentsIconFeedback firstIcon"></span>--}}
+                                            {{--<span class="showCommentsClickedIconFeedback display-none secondIcon"></span>--}}
+                                            {{--<span class="mg-rt-20 cursor-pointer">مشاهده نظرها</span>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="postsActionsChoices col-xs-3">--}}
+                                        {{--<div class="postShareChoice display-inline-block" onclick="SharePostsBtn(this)">--}}
+                                            {{--<span class="commentsShareIconFeedback firstIcon"></span>--}}
+                                            {{--<span class="commentsShareClickedIconFeedback display-none secondIcon"></span>--}}
+                                            {{--<span class="mg-rt-20 cursor-pointer">اشتراک‌گذاری</span>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+
+                                {{--<div class="commentsMainBox display-none">--}}
+                                    {{--<div class="dark-blue mg-bt-10">--}}
+                                        {{--<span class="cursor-pointer">مشاهده 17 نظر باقیمانده</span>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="eachCommentMainBox">--}}
+                                        {{--<div class="circleBase type2 commentsWriterProfilePic"></div>--}}
+                                        {{--<div class="commentsContentMainBox">--}}
+                                            {{--<b class="userProfileName display-inline-block">shazdesina</b>--}}
+                                            {{--<div>من موافق این مطلب نیستم. دوست من شما باید خودتان توجه می کردید نه اینکه مارا متهم کنید</div>--}}
+                                            {{--<div class="commentsStatisticsBar">--}}
+                                                {{--<div class="float-right display-inline-black">--}}
+                                                    {{--<span class="likeStatisticIcon commentsStatisticSpan color-red">31</span>--}}
+                                                    {{--<span class="dislikeStatisticIcon commentsStatisticSpan dark-red">31</span>--}}
+                                                    {{--<span class="numberOfCommentsIcon commentsStatisticSpan color-blue">31</span>--}}
+                                                {{--</div>--}}
+                                                {{--<div class="dark-blue float-left display-inline-black cursor-pointer" onclick="showCommentsAnswers(this)">مشاهده پاسخ‌ها</div>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="commentsActionsBtns">--}}
+                                            {{--<div onclick="likeTheAnswers(this)">--}}
+                                                {{--<span class="likeActionBtn"></span>--}}
+                                                {{--<span class="likeActionClickedBtn display-none"></span>--}}
+                                            {{--</div>--}}
+                                            {{--<div onclick="dislikeTheAnswers(this)">--}}
+                                                {{--<span class="dislikeActionBtn"></span>--}}
+                                                {{--<span class="dislikeActionClickedBtn display-none"></span>--}}
+                                            {{--</div>--}}
+                                            {{--<div class="clear-both"></div>--}}
+                                            {{--<b class="replyBtn" onclick="replyToComments(this)">پاسخ دهید</b>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="replyToCommentMainDiv display-none">--}}
+                                            {{--<div class="circleBase type2 newCommentWriterProfilePic"></div>--}}
+                                            {{--<div class="inputBox">--}}
+                                                {{--<b class="replyCommentTitle">در پاسخ به نظر shazdesina</b>--}}
+                                                {{--<textarea class="inputBoxInput inputBoxInputComment" type="text" placeholder="شما چه نظری دارید؟"></textarea>--}}
+                                                {{--<img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="eachCommentMainBox mg-rt-45 display-none">--}}
+                                        {{--<div class="circleBase type2 commentsWriterProfilePic"></div>--}}
+                                        {{--<div class="commentsContentMainBox">--}}
+                                            {{--<b class="userProfileName float-right">shazdesina</b>--}}
+                                            {{--<b class="commentReplyDesc display-inline-block">در پاسخ به Shazdesina</b>--}}
+                                            {{--<div class="clear-both"></div>--}}
+                                            {{--<div>من موافق این مطلب نیستم. دوست من شما باید خودتان توجه می کردید نه اینکه مارا متهم کنید</div>--}}
+                                            {{--<div class="commentsStatisticsBar">--}}
+                                                {{--<div class="float-right display-inline-black">--}}
+                                                    {{--<span class="likeStatisticIcon commentsStatisticSpan color-red">31</span>--}}
+                                                    {{--<span class="dislikeStatisticIcon commentsStatisticSpan dark-red">31</span>--}}
+                                                    {{--<span class="numberOfCommentsIcon commentsStatisticSpan color-blue">31</span>--}}
+                                                {{--</div>--}}
+                                                {{--<div class="dark-blue float-left display-inline-black cursor-pointer" onclick="showCommentsAnswers(this)">مشاهده پاسخ‌ها</div>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="commentsActionsBtns">--}}
+                                            {{--<div onclick="likeTheAnswers(this)">--}}
+                                                {{--<span class="likeActionBtn"></span>--}}
+                                                {{--<span class="likeActionClickedBtn display-none"></span>--}}
+                                            {{--</div>--}}
+                                            {{--<div onclick="dislikeTheAnswers(this)">--}}
+                                                {{--<span class="dislikeActionBtn"></span>--}}
+                                                {{--<span class="dislikeActionClickedBtn display-none"></span>--}}
+                                            {{--</div>--}}
+                                            {{--<div class="clear-both"></div>--}}
+                                            {{--<b class="replyBtn" onclick="replyToComments(this)">پاسخ دهید</b>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="replyToCommentMainDiv display-none">--}}
+                                            {{--<div class="circleBase type2 newCommentWriterProfilePic"></div>--}}
+                                            {{--<div class="inputBox">--}}
+                                                {{--<b class="replyCommentTitle">در پاسخ به نظر shazdesina</b>--}}
+                                                {{--<textarea class="inputBoxInput inputBoxInputComment" type="text" placeholder="شما چه نظری دارید؟"></textarea>--}}
+                                                {{--<img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                                {{--<div class="newCommentPlaceMainDiv">--}}
+                                    {{--<div class="circleBase type2 newCommentWriterProfilePic"></div>--}}
+                                    {{--<div class="inputBox">--}}
+                                        {{--<b class="replyCommentTitle">در پاسخ به نظر shazdesina</b>--}}
+                                        {{--<textarea class="inputBoxInput inputBoxInputComment" id="zzzz" type="text" placeholder="شما چه نظری دارید؟"></textarea>--}}
+                                        {{--<img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">--}}
+                                    {{--</div>--}}
+                                    {{--<div></div>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                            {{--<div class="col-xs-12 postMainDivShown position-relative">--}}
+                                {{--<div class="commentActions"  onclick="showAnswersActionBox(this)">--}}
+                                    {{--<span class="commentActionsIcon"></span>--}}
+                                {{--</div>--}}
+                                {{--<div class="questionsActionsMoreDetails display-none">--}}
+                                    {{--<span>گزارش پست</span>--}}
+                                    {{--<span>مشاهده صفحه شازده سینا</span>--}}
+                                    {{--<span>مشاهده تمامی پست‌ها</span>--}}
+                                    {{--<span>صفحه قوانین و مقررات</span>--}}
+                                {{--</div>--}}
+                                {{--<div class="commentWriterDetailsShow">--}}
+                                    {{--<div class="circleBase type2 commentWriterPicShow"></div>--}}
+                                    {{--<div class="commentWriterExperienceDetails">--}}
+                                        {{--<b class="userProfileName">shazdesina</b>--}}
+                                        {{--<div class="display-inline-block">در--}}
+                                            {{--<span class="commentWriterExperiencePlace">هتل عباسی، شهر یزد، استان یزد</span>--}}
+                                        {{--</div>--}}
+                                        {{--<div>با--}}
+                                            {{--<span class="commentWriterExperienceParticipation">احتشام الدوله توفیقی</span>،--}}
+                                            {{--<span class="commentWriterExperienceParticipation">حمیدرضا عسگرزاده </span>و--}}
+                                            {{--<span class="commentWriterExperienceParticipation">علی اصر همتی</span>--}}
+                                        {{--</div>--}}
+                                        {{--<div>--}}
+                                            {{--هم اکنون - بیش از 23 ساعت پیش--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                                {{--<div class="commentContentsShow">--}}
+                                    {{--<p>--}}
+                                        {{--بسیاری از درخواست کنندگان کسی و کارهای بومی و محلی اطلاعات مورد نیاز خود را از طریق اینترنت دریافت می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا خدمات مورد نیازشان اثرپذیری فراوانی دارد.--}}
+                                        {{--با توجه به ابن که خدمات و کالاهای بومی و محلی دارای اصالت و فرهنگ کهن جوامع روستایی هستند، می توان گفت اینترنت می تواند در آمدزایی از سبک زندگی جوامع محلی نقش--}}
+                                    {{--</p>--}}
+                                {{--</div>--}}
+                                {{--<div class="commentPhotosShow">--}}
+                                    {{--<div class="commentPhotosMainDiv quadruplePhotoDiv">--}}
+                                        {{--<div class="photosCol secondCol col-xs-6">--}}
+                                            {{--<div data-toggle="modal" data-target=".showingPhotosModal"></div>--}}
+                                            {{--<div data-toggle="modal" data-target=".showingPhotosModal"></div>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="photosCol firstCol col-xs-6">--}}
+                                            {{--<div data-toggle="modal" data-target=".showingPhotosModal"></div>--}}
+                                            {{--<div data-toggle="modal" data-target=".showingPhotosModal"></div>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="quantityOfLikes">--}}
+                                        {{--<span>31</span>--}}
+                                        {{--نفر دوست داشتند،--}}
+                                        {{--<span>31</span>--}}
+                                        {{--نفر دوست نداشتند و--}}
+                                        {{--<span>31</span>--}}
+                                        {{--نفر نظر دادند.--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                                {{--<div class="commentRatingsDetailsShow">--}}
+                                    {{--<div class="display-inline-block full-width">--}}
+                                        {{--<div class="commentRatingHeader">--}}
+                                            {{--بازدید با--}}
+                                            {{--<span>دوستان</span>--}}
+                                            {{--در فصل--}}
+                                            {{--<span>بهار</span>--}}
+                                            {{--و از مبدأ--}}
+                                            {{--<span>تهران</span>--}}
+                                            {{--انجام شده است--}}
+                                        {{--</div>--}}
+                                        {{--<div class="commentRatingsDetailsBtn" onclick="showRatingDetails(this)">مشاهده جزئیات امتیازدهی--}}
+                                            {{--<div class="commentRatingsDetailsBtnIcon">--}}
+                                                {{--<i class="glyphicon glyphicon-triangle-bottom"></i>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="commentRatingsDetailsBox display-none">--}}
+                                        {{--<div class="display-inline-block full-width">--}}
+                                            {{--<b class="col-xs-3 font-size-15 line-height-203 pd-rt-0">اصلاً راضی نبودم</b>--}}
+                                            {{--<div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">--}}
+                                                {{--<div class="ui_star_rating stars_10 font-size-25">--}}
+                                                    {{--<span class="starRating"></span>--}}
+                                                    {{--<span class="starRating"></span>--}}
+                                                    {{--<span class="starRating"></span>--}}
+                                                    {{--<span class="starRating"></span>--}}
+                                                    {{--<span class="starRatingGreen"></span>--}}
+                                                {{--</div>--}}
+                                            {{--</div>--}}
+                                            {{--<b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="display-inline-block full-width">--}}
+                                            {{--<b class="col-xs-3 font-size-15 line-height-203 pd-rt-0">بد نبود</b>--}}
+                                            {{--<div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">--}}
+                                                {{--<div class="ui_star_rating stars_20 font-size-25">--}}
+                                                    {{--<span class="starRating"></span>--}}
+                                                    {{--<span class="starRating"></span>--}}
+                                                    {{--<span class="starRating"></span>--}}
+                                                    {{--<span class="starRatingGreen"></span>--}}
+                                                    {{--<span class="starRatingGreen"></span>--}}
+                                                {{--</div>--}}
+                                            {{--</div>--}}
+                                            {{--<b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="display-inline-block full-width">--}}
+                                            {{--<b class="col-xs-3 font-size-15 line-height-203 pd-rt-0">معمولی بود</b>--}}
+                                            {{--<div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">--}}
+                                                {{--<div class="ui_star_rating stars_30 font-size-25">--}}
+                                                    {{--<span class="starRating"></span>--}}
+                                                    {{--<span class="starRating"></span>--}}
+                                                    {{--<span class="starRatingGreen"></span>--}}
+                                                    {{--<span class="starRatingGreen"></span>--}}
+                                                    {{--<span class="starRatingGreen"></span>--}}
+                                                {{--</div>--}}
+                                            {{--</div>--}}
+                                            {{--<b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="display-inline-block full-width">--}}
+                                            {{--<b class="col-xs-3 font-size-15 line-height-203 pd-rt-0">خوب بود</b>--}}
+                                            {{--<div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">--}}
+                                                {{--<div class="ui_star_rating stars_40 font-size-25">--}}
+                                                    {{--<span class="starRating"></span>--}}
+                                                    {{--<span class="starRatingGreen"></span>--}}
+                                                    {{--<span class="starRatingGreen"></span>--}}
+                                                    {{--<span class="starRatingGreen"></span>--}}
+                                                    {{--<span class="starRatingGreen"></span>--}}
+                                                {{--</div>--}}
+                                            {{--</div>--}}
+                                            {{--<b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="display-inline-block full-width">--}}
+                                            {{--<b class="col-xs-3 font-size-15 line-height-203 pd-rt-0">عالی بود</b>--}}
+                                            {{--<div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">--}}
+                                                {{--<div class="ui_star_rating stars_50 font-size-25">--}}
+                                                    {{--<span class="starRatingGreen"></span>--}}
+                                                    {{--<span class="starRatingGreen"></span>--}}
+                                                    {{--<span class="starRatingGreen"></span>--}}
+                                                    {{--<span class="starRatingGreen"></span>--}}
+                                                    {{--<span class="starRatingGreen"></span>--}}
+                                                {{--</div>--}}
+                                            {{--</div>--}}
+                                            {{--<b class="col-xs-4 font-size-15 line-height-203">امتیاز کلی به این مکان</b>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                                {{--<div class="commentFeedbackChoices">--}}
+                                    {{--<div class="postsActionsChoices col-xs-3">--}}
+                                        {{--<div class="postLikeChoice display-inline-block" onclick="likePostsComment(this)">--}}
+                                            {{--<span class="commentsLikeIconFeedback firstIcon"></span>--}}
+                                            {{--<span class="commentsLikeClickedIconFeedback display-none secondIcon"></span>--}}
+                                            {{--<span class="mg-rt-20 cursor-pointer">دوست داشتم</span>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="postsActionsChoices col-xs-3">--}}
+                                        {{--<div class="postDislikeChoice display-inline-block" onclick="disLikePostsComment(this)">--}}
+                                            {{--<span class="commentsDislikeIconFeedback firstIcon"></span>--}}
+                                            {{--<span class="commentsDislikeClickedIconFeedback display-none secondIcon"></span>--}}
+                                            {{--<span class="mg-rt-20 cursor-pointer">دوست نداشتم</span>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="postsActionsChoices col-xs-3">--}}
+                                        {{--<div class="postCommentChoice display-inline-block" onclick="showPostsComments(this)">--}}
+                                            {{--<span class="showCommentsIconFeedback firstIcon"></span>--}}
+                                            {{--<span class="showCommentsClickedIconFeedback display-none secondIcon"></span>--}}
+                                            {{--<span class="mg-rt-20 cursor-pointer">مشاهده نظرها</span>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="postsActionsChoices col-xs-3">--}}
+                                        {{--<div class="postShareChoice display-inline-block" onclick="SharePostsBtn(this)">--}}
+                                            {{--<span class="commentsShareIconFeedback firstIcon"></span>--}}
+                                            {{--<span class="commentsShareClickedIconFeedback display-none secondIcon"></span>--}}
+                                            {{--<span class="mg-rt-20 cursor-pointer">اشتراک‌گذاری</span>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                                {{--<div class="commentsMainBox display-none">--}}
+                                    {{--<div class="dark-blue mg-bt-10">--}}
+                                        {{--<span class="cursor-pointer">مشاهده 17 نظر باقیمانده</span>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="eachCommentMainBox">--}}
+                                        {{--<div class="circleBase type2 commentsWriterProfilePic"></div>--}}
+                                        {{--<div class="commentsContentMainBox">--}}
+                                            {{--<b class="userProfileName display-inline-block">shazdesina</b>--}}
+                                            {{--<div>من موافق این مطلب نیستم. دوست من شما باید خودتان توجه می کردید نه اینکه مارا متهم کنید</div>--}}
+                                            {{--<div class="commentsStatisticsBar">--}}
+                                                {{--<div class="float-right display-inline-black">--}}
+                                                    {{--<span class="likeStatisticIcon commentsStatisticSpan color-red">31</span>--}}
+                                                    {{--<span class="dislikeStatisticIcon commentsStatisticSpan dark-red">31</span>--}}
+                                                    {{--<span class="numberOfCommentsIcon commentsStatisticSpan color-blue">31</span>--}}
+                                                {{--</div>--}}
+                                                {{--<div class="dark-blue float-left display-inline-black cursor-pointer" onclick="showCommentsAnswers(this)">مشاهده پاسخ‌ها</div>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="commentsActionsBtns">--}}
+                                            {{--<div onclick="likeTheAnswers(this)">--}}
+                                                {{--<span class="likeActionBtn"></span>--}}
+                                                {{--<span class="likeActionClickedBtn display-none"></span>--}}
+                                            {{--</div>--}}
+                                            {{--<div onclick="dislikeTheAnswers(this)">--}}
+                                                {{--<span class="dislikeActionBtn"></span>--}}
+                                                {{--<span class="dislikeActionClickedBtn display-none"></span>--}}
+                                            {{--</div>--}}
+                                            {{--<div class="clear-both"></div>--}}
+                                            {{--<b class="replyBtn" onclick="replyToComments(this)">پاسخ دهید</b>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="replyToCommentMainDiv display-none">--}}
+                                            {{--<div class="circleBase type2 newCommentWriterProfilePic"></div>--}}
+                                            {{--<div class="inputBox">--}}
+                                                {{--<b class="replyCommentTitle">در پاسخ به نظر shazdesina</b>--}}
+                                                {{--<textarea class="inputBoxInput inputBoxInputComment" type="text" placeholder="شما چه نظری دارید؟"></textarea>--}}
+                                                {{--<img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="eachCommentMainBox mg-rt-45 display-none">--}}
+                                        {{--<div class="circleBase type2 commentsWriterProfilePic"></div>--}}
+                                        {{--<div class="commentsContentMainBox">--}}
+                                            {{--<b class="userProfileName float-right">shazdesina</b>--}}
+                                            {{--<b class="commentReplyDesc display-inline-block">در پاسخ به Shazdesina</b>--}}
+                                            {{--<div class="clear-both"></div>--}}
+                                            {{--<div>من موافق این مطلب نیستم. دوست من شما باید خودتان توجه می کردید نه اینکه مارا متهم کنید</div>--}}
+                                            {{--<div class="commentsStatisticsBar">--}}
+                                                {{--<div class="float-right display-inline-black">--}}
+                                                    {{--<span class="likeStatisticIcon commentsStatisticSpan color-red">31</span>--}}
+                                                    {{--<span class="dislikeStatisticIcon commentsStatisticSpan dark-red">31</span>--}}
+                                                    {{--<span class="numberOfCommentsIcon commentsStatisticSpan color-blue">31</span>--}}
+                                                {{--</div>--}}
+                                                {{--<div class="dark-blue float-left display-inline-black cursor-pointer" onclick="showCommentsAnswers(this)">مشاهده پاسخ‌ها</div>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="commentsActionsBtns">--}}
+                                            {{--<div onclick="likeTheAnswers(this)">--}}
+                                                {{--<span class="likeActionBtn"></span>--}}
+                                                {{--<span class="likeActionClickedBtn display-none"></span>--}}
+                                            {{--</div>--}}
+                                            {{--<div onclick="dislikeTheAnswers(this)">--}}
+                                                {{--<span class="dislikeActionBtn"></span>--}}
+                                                {{--<span class="dislikeActionClickedBtn display-none"></span>--}}
+                                            {{--</div>--}}
+                                            {{--<div class="clear-both"></div>--}}
+                                            {{--<b class="replyBtn" onclick="replyToComments(this)">پاسخ دهید</b>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="replyToCommentMainDiv display-none">--}}
+                                            {{--<div class="circleBase type2 newCommentWriterProfilePic"></div>--}}
+                                            {{--<div class="inputBox">--}}
+                                                {{--<b class="replyCommentTitle">در پاسخ به نظر shazdesina</b>--}}
+                                                {{--<textarea class="inputBoxInput inputBoxInputComment" type="text" placeholder="شما چه نظری دارید؟"></textarea>--}}
+                                                {{--<img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                                {{--<div class="newCommentPlaceMainDiv">--}}
+                                    {{--<div class="circleBase type2 newCommentWriterProfilePic"></div>--}}
+                                    {{--<div class="inputBox">--}}
+                                        {{--<b class="replyCommentTitle">در پاسخ به نظر shazdesina</b>--}}
+                                        {{--<textarea class="inputBoxInput inputBoxInputComment" id="zzzz" type="text" placeholder="شما چه نظری دارید؟"></textarea>--}}
+                                        {{--<img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">--}}
+                                    {{--</div>--}}
+                                    {{--<div></div>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+
+
                             <div class="col-xs-12 postsMainDivFooter position-relative">
                                 <div class="col-xs-5 font-size-13 line-height-2">
                                     نمایش
@@ -2608,8 +2613,11 @@ if ($total == 0)
                                     <span>10</span>
                                 </div>
                             </div>
+
                         </div>
+
                         @include('layouts.placePosts')
+
                     </div>
                 </div>
                 <div class="clear-both"></div>
@@ -3371,6 +3379,8 @@ if ($total == 0)
     <script>
         var hasLogin = '{{$hasLogin}}';
         var userCode = '{{$userCode}}';
+
+        var getReviewsUrl = '{{route('getReviews')}}';
         var reviewUploadPic = '{{route('reviewUploadPic')}}';
         var doEditReviewPic = '{{route('doEditReviewPic')}}';
         var reviewUploadVideo = '{{route('reviewUploadVideo')}}';

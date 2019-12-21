@@ -12,10 +12,13 @@ use App\models\Hotel;
 use App\models\LogModel;
 use App\models\Majara;
 use App\models\Place;
+use App\models\QuestionAns;
+use App\models\QuestionUserAns;
 use App\models\Report;
 use App\models\ReportsType;
 use App\models\Restaurant;
 use App\models\ReviewPic;
+use App\models\ReviewUserAssigned;
 use App\models\State;
 use App\User;
 use Illuminate\Support\Facades\Auth;
@@ -588,6 +591,96 @@ class AjaxController extends Controller {
         }
 
         return;
+    }
+
+    function getReviews(Request $request){
+
+        if(isset($request->placeId) && isset($request->kindPlaceId)){
+
+            $count = 5;
+            if(isset($request->count) && is_int($request->count))
+                $count = $request->count;
+
+            $activity = Activity::where('name', 'نظر')->first();
+
+            $condition = ['activityId' => $activity->id, 'placeId' => $request->placeId, 'kindPlaceId' => $request->kindPlaceId];
+            $logs = LogModel::where($condition)->orderByDesc('date')->get();
+
+            if(count($logs) == 0)
+                echo 'nok1';
+            else{
+                foreach ($logs as $item){
+                    $item->user = User::select(['first_name', 'last_name', 'username'])->find($item->visitorId);
+                    $item->pics = ReviewPic::where('logId', $item->id)->get();
+                    $item->assigned = ReviewUserAssigned::where('logId', $item->id)->get();
+
+                    switch ($item->kindPlaceId){
+                        case 1:
+                            $item->mainFile = 'amaken';
+                            $item->place = Amaken::select(['id', 'name', 'cityId', 'file'])->find($item->placeId);
+                            $item->kindPlace = 'اماکن';
+                            break;
+                        case 3:
+                            $item->mainFile = 'restaurant';
+                            $item->place = Restaurant::select(['id', 'name', 'cityId', 'file'])->find($item->placeId);
+                            $item->kindPlace = 'رستوران';
+                            break;
+                        case 4:
+                            $item->mainFile = 'hotels';
+                            $item->place = Hotel::select(['id', 'name', 'cityId', 'file'])->find($item->placeId);
+                            $item->kindPlace = 'هتل';
+                            break;
+                        case 6:
+                            $item->mainFile = 'majara';
+                            $item->place = Majara::select(['id', 'name', 'cityId', 'file'])->find($item->placeId);
+                            $item->kindPlace = 'ماجرا';
+                            break;
+                        case 10:
+                            $item->mainFile = 'sogatsanaie';
+                            $item->place = SogatSanaie::select(['id', 'name', 'cityId', 'file'])->find($item->placeId);
+                            $item->kindPlace = 'سوغات/صنایع';
+                            break;
+                        case 11:
+                            $item->mainFile = 'mahalifood';
+                            $item->place = MahaliFood::select(['id', 'name', 'cityId', 'file'])->find($item->placeId);
+                            $item->kindPlace = 'غذای محلی';
+                            break;
+                    }
+
+                    $item->location = __DIR__ . '/../../../../assets/userPhoto/' . $item->mainFile . '/' . $item->place->file;
+                    $item->city = Cities::find($item->place->cityId);
+                    $item->state = State::find($item->city->stateId);
+
+                    if(count($item->assigned) != 0){
+                        foreach ($item->assigned as $item2) {
+                            if($item2->userId != null){
+                                $u = User::find($item2->userId);
+                                if($u !=  null){
+                                    if($u->first_name != null)
+                                        $item2->name = $u->first_name . ' ' . $u->last_name;
+                                    else
+                                        $item2->name = $u->username;
+                                }
+                            }
+                        }
+                    }
+
+                    $item->ans = \DB::select('SELECT us.logId, us.questionId, us.ans, qus.id, qus.description, qus.ansType FROM questionuserans AS us , questions AS qus WHERE us.logId = ' . $item->id . ' AND qus.id = us.questionId');
+                    if(count($item->ans) != 0){
+                        foreach ($item->ans as $item2){
+                            if($item2->ansType == 'multi'){
+                                $item2->ans = QuestionAns::where('questionId', $item2->id)->first()->ans;
+                            }
+                        }
+                    }
+                }
+
+                echo json_encode($logs);
+            }
+        }
+
+        return;
+
     }
 
 }

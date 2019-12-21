@@ -3,33 +3,6 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('databaseforall', function (){
-
-//    $pic = \App\models\PlacePic::all();
-//    foreach ($pic as $item){
-//        $item->delete();
-//    }
-//
-//    \DB::select('ALTER TABLE amaken DROP COLUMN picNumber;');
-//    \DB::select('ALTER TABLE hotels DROP COLUMN picNumber;');
-//    \DB::select('ALTER TABLE restaurant DROP COLUMN picNumber;');
-//    \DB::select('ALTER TABLE majara DROP COLUMN picNumber;');
-//    \DB::select('ALTER TABLE sogatsanaies DROP COLUMN picNumber;');
-//    \DB::select('ALTER TABLE mahalifood DROP COLUMN picNumber;');
-//    \DB::select('ALTER TABLE placepics DROP COLUMN picNumber;');
-//
-//    \DB::select("ALTER TABLE `amaken` ADD `picNumber` VARCHAR(20) NULL  AFTER `file`;");
-//    \DB::select("ALTER TABLE `hotels` ADD `picNumber` VARCHAR(20) NULL  AFTER `file`;");
-//    \DB::select("ALTER TABLE `restaurant` ADD `picNumber` VARCHAR(20) NULL  AFTER `file`;");
-//    \DB::select("ALTER TABLE `majara` ADD `picNumber` VARCHAR(20) NULL AFTER `file`;");
-//    \DB::select("ALTER TABLE `sogatsanaies` ADD `picNumber` VARCHAR(20) NULL AFTER `file`;");
-//    \DB::select("ALTER TABLE `mahalifood` ADD `picNumber` VARCHAR(20) NULL AFTER `file`;");
-//    \DB::select("ALTER TABLE `placepics` ADD `picNumber` VARCHAR(20) NULL AFTER `id`;");
-
-    dd('done');
-});
-Route::get('updateDataBase', function(){
-    $pic = \App\models\PlacePic::all()->count();
-    dd($pic);
 });
 
 Route::get('fillHotelPic', function(){
@@ -873,6 +846,8 @@ Route::group(array('middleware' => 'nothing'), function () {
     Route::post('reviewUploadVideo', 'AjaxController@reviewUploadVideo')->name('reviewUploadVideo');
 
     Route::post('deleteReviewPic', 'AjaxController@deleteReviewPic')->name('deleteReviewPic');
+
+    Route::post('getReviews', 'AjaxController@getReviews')->name('getReviews');
 });
 
 Route::group(array('middleware' => 'auth'), function () {
