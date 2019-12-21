@@ -868,20 +868,20 @@ if ($total == 0)
                     </div>
                 </div>
 
-                <div class="tabLinkMainWrapMainDivMobile">
+                <div class="tabLinkMainWrapMainDivMobile" data-spy="affix" data-offset-top="780">
                     <div class="tabLinkMainWrapMainDiv">
-                        <center class="display-inline-block width-25per">
+                        <a href="#BODYCON">
                             <button class="tabLinkMainWrap" onclick="openTab('QAndAMainDivId', this, '#4dc7bc')">سؤالات</button>
-                        </center><!--
-                     --><center class="display-inline-block width-25per">
-                            <button class="tabLinkMainWrap" onclick="openTab('', this, '#4dc7bc')">مکان‌های مشابه</button>
-                        </center><!--
-                     --><center class="display-inline-block width-25per">
+                        </a><!--
+                     --><a href="#BODYCON">
+                            <button class="tabLinkMainWrap" onclick="openTab('similarLocationsMainDiv', this, '#4dc7bc')">مکان‌های مشابه</button>
+                        </a><!--
+                     --><a href="#BODYCON">
                             <button class="tabLinkMainWrap" onclick="openTab('mainDivPlacePost', this, '#4dc7bc')">پست</button>
-                        </center><!--
-                     --><center class="display-inline-block width-25per">
+                        </a><!--
+                     --><a href="#BODYCON">
                             <button class="tabLinkMainWrap" onclick="openTab('mobileIntroductionMainDivId', this, '#4dc7bc')" id="defaultOpenMainWrap">معرفی کلی</button>
-                        </center>
+                        </a>
                     </div>
                 </div>
 
@@ -900,9 +900,11 @@ if ($total == 0)
                         document.getElementById(tabName).style.display = "block";
                         elmnt.style.color = fontColor;
 
+                        initSwiper();
                     }
                     // Get the element with id="defaultOpen" and click on it
-                    document.getElementById("defaultOpenMainWrap").style.color = "rgb(77, 199, 188)"
+                    document.getElementById("defaultOpenMainWrap").style.color = "rgb(77, 199, 188)";
+
                 </script>
 
                 <div class="exceptQAndADiv">
@@ -918,7 +920,7 @@ if ($total == 0)
                                         </div>
 
                                         <div class="ui_columns is-multiline is-mobile reviewsAndDetails direction-rtlImp">
-                                            <div id="generalDescriptionMobile" class="ui_column is-4 generalDescription tabContent">
+                                            <div id="generalDescriptionMobile" class="ui_column is-12 generalDescription tabContent">
                                                 <div class="block_header">
                                                     <h3 class="block_title">معرفی کلی </h3>
                                                 </div>
@@ -926,7 +928,7 @@ if ($total == 0)
                                                     <div class="overviewContent" id="introductionText">{{$place->description}}</div>
                                                 </div>
                                             </div>
-                                            <div id="detailsAndFeaturesMobile" class="ui_column is-4 details tabContent">
+                                            <div id="detailsAndFeaturesMobile" class="ui_column is-8 details tabContent">
                                                 <div class="direction-rtl">
                                                     <?php $k = -1; ?>
 
@@ -2827,7 +2829,7 @@ if ($total == 0)
                             </div>
                         </div>
                     </div>
-                    <div class="otherQAndAMainDiv col-md-12 col-xs-12">
+                    <div class="otherQAndAMainDiv col-md-8 col-xs-12">
                         <div class="otherQAndAMainDivHeader">
                             <h3>سایر سؤال‌ها و جواب‌ها</h3>
                         </div>
@@ -2924,7 +2926,7 @@ if ($total == 0)
                         <span class="color-blue cursor-pointer">50</span>
                         پست در هر صفحه
                     </div>
-                    <a class="col-md-2 col-xs-3 showQuestionsNumsFilterLink" href="#taplc_global_nav_links_0">
+                    <a class="col-xs-3 showQuestionsNumsFilterLink" href="#taplc_global_nav_links_0">
                         <div class="showQuestionsNumsFilter" onclick="allQuestionsGrid()">نمایش تمامی سؤال‌ها</div>
                     </a>
                     <div class="col-xs-4 font-size-13 line-height-2 text-align-right float-right">
@@ -2940,10 +2942,18 @@ if ($total == 0)
                 </div>
                 </div>
             </div>
-            <div class="mainSuggestion swiper-container">
+            <div id="similarLocationsMainDiv" class="mainSuggestion swiper-container tabContentMainWrap">
+                <div class="shelf_header">
+                    <div class="shelf_title">
+                        <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
+                        <div class="shelf_title_container h3">
+                            <h3>مکان‌های مشابه</h3>
+                        </div>
+                    </div>
+                </div>
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
-                        <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
+                        <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column ng-scope">
                             <div class="poi">
                                 <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
                                     <div class="prw_rup prw_common_thumbnail_no_style_responsive">
@@ -2969,7 +2979,7 @@ if ($total == 0)
                         </div>
                     </div>
                     <div class="swiper-slide">
-                        <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
+                        <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column ng-scope">
                             <div class="poi">
                                 <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
                                     <div class="prw_rup prw_common_thumbnail_no_style_responsive">
@@ -2995,7 +3005,7 @@ if ($total == 0)
                         </div>
                     </div>
                     <div class="swiper-slide">
-                        <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
+                        <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column ng-scope">
                             <div class="poi">
                                 <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
                                     <div class="prw_rup prw_common_thumbnail_no_style_responsive">
@@ -3021,7 +3031,7 @@ if ($total == 0)
                         </div>
                     </div>
                     <div class="swiper-slide">
-                        <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
+                        <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column ng-scope">
                             <div class="poi">
                                 <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
                                     <div class="prw_rup prw_common_thumbnail_no_style_responsive">
@@ -3047,7 +3057,7 @@ if ($total == 0)
                         </div>
                     </div>
                     <div class="swiper-slide">
-                        <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
+                        <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column ng-scope">
                             <div class="poi">
                                 <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
                                     <div class="prw_rup prw_common_thumbnail_no_style_responsive">
@@ -3073,59 +3083,7 @@ if ($total == 0)
                         </div>
                     </div>
                     <div class="swiper-slide">
-                        <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
-                            <div class="poi">
-                                <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
-                                    <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                        <div class="prv_thumb has_image">
-                                            <div class="image_wrapper landscape landscapeWide">
-                                                <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                                <div class="detail rtl">
-                                    <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
-                                    <div class="item rating-widget">
-                                        <div class="prw_rup prw_common_location_rating_simple">
-                                            <span class="ui_bubble_rating bubble_50"></span>
-                                        </div>
-                                        <span class="reviewCount ng-binding">1 </span><span>نقد </span>
-                                    </div>
-                                    <div class="item tags ng-binding">اصفهان <span>در </span>
-                                        <span class="ng-binding">اصفهان</span></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
-                            <div class="poi">
-                                <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
-                                    <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                        <div class="prv_thumb has_image">
-                                            <div class="image_wrapper landscape landscapeWide">
-                                                <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                                <div class="detail rtl">
-                                    <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
-                                    <div class="item rating-widget">
-                                        <div class="prw_rup prw_common_location_rating_simple">
-                                            <span class="ui_bubble_rating bubble_50"></span>
-                                        </div>
-                                        <span class="reviewCount ng-binding">1 </span><span>نقد </span>
-                                    </div>
-                                    <div class="item tags ng-binding">اصفهان <span>در </span>
-                                        <span class="ng-binding">اصفهان</span></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
+                        <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column ng-scope">
                             <div class="poi">
                                 <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
                                     <div class="prw_rup prw_common_thumbnail_no_style_responsive">
@@ -3161,17 +3119,47 @@ if ($total == 0)
     </div>
 
     <script>
-        var swiper = new Swiper('.mainSuggestion', {
-            slidesPerView: 4,
-            spaceBetween: 30,
-            slidesPerGroup: 1,
-            loop: true,
-            loopFillGroupWithBlank: true,
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-        });
+        function initSwiper() {
+            var swiper = new Swiper('.mainSuggestion', {
+
+                slidesPerGroup: 1,
+                loop: true,
+                loopFillGroupWithBlank: true,
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                breakpoints:{
+
+                    450: {
+                        slidesPerView: 1,
+                        spaceBetween: 15,
+                    },
+
+                    520: {
+                        slidesPerView: 2,
+                        spaceBetween: 15,
+                    },
+
+                    768: {
+                        slidesPerView: 2,
+                        spaceBetween: 30,
+                    },
+
+                    992: {
+                        slidesPerView: 3,
+                        spaceBetween: 30,
+                    },
+
+                    10000: {
+                        slidesPerView: 4,
+                        spaceBetween: 30,
+                    }
+                }
+            });
+        }
+
+        initSwiper();
     </script>
 
     <script>
