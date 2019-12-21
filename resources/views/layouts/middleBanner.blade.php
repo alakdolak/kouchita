@@ -217,6 +217,24 @@
                     {{--<div class="textIcon">بلیط</div>--}}
                 {{--</a>--}}
             </div>
+            <div class="phoneMenuBar row">
+                <div>
+                    <span>سایر امکانات</span>
+                    <span class="ui_icon more-horizontal"></span>
+                </div>
+                <div>
+                    <span>ثبت نام</span>
+                    <span class="ui_icon plus-circle"></span>
+                </div>
+                <div>
+                    <span>جست‌و‌جو</span>
+                    <span class="ui_icon search"></span>
+                </div>
+                <div>
+                    <span>ورود</span>
+                    <span class="ui_icon member"></span>
+                </div>
+            </div>
             <div class="clear-both"></div>
         </div>
         @include('layouts.mainSuggestions')

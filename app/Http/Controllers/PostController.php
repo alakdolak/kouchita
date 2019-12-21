@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\View;
 
 class PostController extends Controller {
 
-    public function gardeshname($page = 1) {
+    public function mainArticle($page = 1) {
 
         $today = getToday()["date"];
 
@@ -68,7 +68,7 @@ class PostController extends Controller {
             $post->msgs = PostComment::wherePostId($post->id)->whereStatus(true)->count();
         }
 
-        return view('gardeshname2', ['favoritePosts' => $posts, 'bannerPosts' => $bannerPosts, 'recentlyPosts' => $recentlyPosts,
+        return view('mainArticle', ['favoritePosts' => $posts, 'bannerPosts' => $bannerPosts, 'recentlyPosts' => $recentlyPosts,
             'mostSeenPosts' => $mostSeenPosts, 'allPosts' => $allPosts, 'page' => $page, 'pageLimit' => ceil(Post::where('date', '<=', $today)->count() / 5)]);
     }
     
@@ -78,8 +78,9 @@ class PostController extends Controller {
 
         $post = Post::whereId($postId);
 
+
         if($post == null)
-            return Redirect::route("gardeshname");
+            return Redirect::route("mainArticle");
 
         $tags = [];
         $i = 0;

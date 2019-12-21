@@ -9,8 +9,8 @@ $kindPlaceId = 10; ?>
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/shazdeDesigns/hotelDetail.css')}}"/>
 
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/long_lived_global_legacy_2.css?v=1')}}"/>
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/gardeshname.min.css?v=1.2')}}"/>
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/shazdeDesigns/gardeshname.css')}}"/>
+    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/article.min.css?v=1.2')}}"/>
+    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/shazdeDesigns/article.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/shazdeDesigns/abbreviations.css')}}"/>
 
     <meta charset="UTF-8">
@@ -132,7 +132,7 @@ $kindPlaceId = 10; ?>
     @include('layouts.placeHeader')
 
     <div class="ppr_rup ppr_priv_hr_atf_north_star_nostalgic position-relative">
-        @include('layouts.placeMainBodyHeader')
+{{--        @include('layouts.placeMainBodyHeader')--}}
     </div>
 
     <h1 class="non-display-name"><a href="/">شازده مسافر مجله جامع دیجیتال گردشگری، سفر و ایرانشناسی</a></h1>
@@ -769,7 +769,7 @@ $kindPlaceId = 10; ?>
 
     <a href="#" id="back-to-top" title="بازگشت به ابتدای صفحه"><i class="fa fa-arrow-up"></i></a>
 
-    <script type='text/javascript' src='{{URL::asset('js/gardeshname.js')}}'></script>
+    <script type='text/javascript' src='{{URL::asset('js/article.js')}}'></script>
 
 
     <script type="text/javascript">

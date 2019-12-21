@@ -196,13 +196,9 @@ Route::get('specificPost/{id}', ['as' => 'specificPost', 'uses' => 'PostControll
 
 Route::get('updateBot', 'HomeController@updateBot');
 
-Route::get('gardeshname', function(){
-    return view('gardeshname');
+Route::get('searchArticle', function(){
+    return view('searchArticle');
 });
-
-//Route::get('mainArticle', function(){
-//    return view('mainArticle');
-//});
 
 Route::get('article', function(){
     return view('article');
@@ -212,11 +208,6 @@ Route::get('gardeshnameEdit', function(){
     return view('gardeshnameEdit');
 });
 
-//Route::get('searchArticle', function(){
-//    return view('searchArticle');
-//});
-//
-
 Route::get('myTripInner', function(){
     return view('myTripInner');
 });
@@ -225,7 +216,7 @@ Route::get('business', function(){
     return view('business');
 });
 
-Route::get('gardeshname2/{page?}', 'PostController@gardeshname')->name('gardeshname');
+Route::get('mainArticle/{page?}', 'PostController@mainArticle')->name('mainArticle');
 
 Route::get('gardeshnameInner/{postId}', ['as' => 'gardeshnameInner', 'uses' => 'PostController@gardeshnameInner']);
 
