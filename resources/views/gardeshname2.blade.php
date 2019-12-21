@@ -96,7 +96,7 @@ $kindPlaceId = 10; ?>
     @include('layouts.placeHeader')
 
     <div class="ppr_rup ppr_priv_hr_atf_north_star_nostalgic position-relative">
-        @include('layouts.placeMainBodyHeader')
+        {{--@include('layouts.placeMainBodyHeader')--}}
     </div>
 
     <h1 class="non-display-name"><a href="/">شازده مسافر مجله جامع دیجیتال گردشگری، سفر و ایرانشناسی</a></h1>

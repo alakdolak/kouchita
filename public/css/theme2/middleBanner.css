@@ -54,8 +54,14 @@
     margin-top: -15px;
 }
 
+.boxOFSqureDiv {
+    display: flex;
+    justify-content: space-evenly;
+}
+
 .squareDiv {
-    height: 35vh;
+    width: 19%;
+    height: 26vh;
     color: #30b4a6 !important;
     background-color: white;
     border: 1px solid lightgray;
@@ -69,16 +75,6 @@
 
 .squareDiv > .phoneIcon::before {
     color: #30b4a6 !important;
-}
-
-.moreOptionsSquareDiv {
-    margin-top: -2px;
-    text-align: center;
-}
-
-.moreOptionsSquareDiv > span {
-    font-size: 30px;
-    font-weight: bold;
 }
 
 .threeBox {

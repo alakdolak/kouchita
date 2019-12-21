@@ -191,63 +191,33 @@
         </div>
 
         <div class="hideOnScreen row">
-            <div class="col-xs-12">
-                <a class="col-xs-4 squareDiv" href="{{route('mainMode', ['mode' => 'amaken'])}}">
-                    <div class="phoneIcon atraction"></div>
-                    <div class="textIcon">جاذبه ها</div>
-                </a>
-                <a class="col-xs-4 squareDiv" href="{{route('tickets')}}">
-                    <div class="phoneIcon ticket"></div>
-                    <div class="textIcon">بلیط</div>
-                </a>
-                <a class="col-xs-4 squareDiv" href="{{route('main')}}">
-                    <div class="phoneIcon hotel"></div>
-                    <div class="textIcon">هتل</div>
-                </a>
-                {{--<div class="col-xs-4 squareDiv" onclick="$('#phoneSearchPopUp').removeClass('hidden')">--}}
-                {{--<div class="phoneIcon atraction"></div>--}}
-                {{--<div class="textIcon">جاذبه ها</div>--}}
-                {{--</div>--}}
-                {{--<div class="col-xs-4 squareDiv">--}}
-                {{--<a href="{{route('tickets')}}">--}}
-                {{--<div class="phoneIcon ticket"></div>--}}
-                {{--<div class="textIcon">بلیط</div>--}}
-                {{--</a>--}}
-                {{--</div>--}}
-                {{--<div class="col-xs-4 squareDiv">--}}
-                {{--<a href="{{route('main')}}">--}}
-                {{--<div class="phoneIcon hotel"></div>--}}
-                {{--<div class="textIcon">هتل</div>--}}
-                {{--</a>--}}
-                {{--</div>--}}
-            </div>
-            <div class="clear-both"></div>
-            <div class="col-xs-12">
-                <div class="col-xs-4 squareDiv" onclick="$('#phoneSearchPopUp').removeClass('hidden')">
+            <div class="boxOFSqureDiv">
+                <div class="squareDiv" onclick="$('#phoneSearchPopUp').removeClass('hidden')">
                     <div class="phoneIcon ghazamahali"></div>
                     <div class="textIcon">غذای محلی</div>
                 </div>
-                <div class="col-xs-4 squareDiv" onclick="$('#phoneSearchPopUp').removeClass('hidden')">
+                <div class="squareDiv" onclick="$('#phoneSearchPopUp').removeClass('hidden')">
                     <div class="phoneIcon soghat"></div>
                     <div class="textIcon">سوغات</div>
                 </div>
-                <a class="col-xs-4 squareDiv" href="{{route('mainMode', ['mode' => 'restaurant'])}}" >
+                <a class="squareDiv" href="{{route('mainMode', ['mode' => 'amaken'])}}">
+                    <div class="phoneIcon atraction"></div>
+                    <div class="textIcon">جاذبه</div>
+                </a>
+                <a class="squareDiv" href="{{route('mainMode', ['mode' => 'restaurant'])}}" >
                     <div class="phoneIcon restaurant"></div>
                     <div class="textIcon">رستوران</div>
                 </a>
-                {{--<div class="col-xs-4 squareDiv">--}}
-                {{--<a href="{{route('mainMode', ['mode' => 'restaurant'])}}">--}}
-                {{--<div class="phoneIcon restaurant"></div>--}}
-                {{--<div class="textIcon">رستوران</div>--}}
+                <a class="squareDiv" href="{{route('main')}}">
+                    <div class="phoneIcon hotel"></div>
+                    <div class="textIcon">هتل</div>
+                </a>
+                {{--<a class="col-xs-4 squareDiv" href="{{route('tickets')}}">--}}
+                    {{--<div class="phoneIcon ticket"></div>--}}
+                    {{--<div class="textIcon">بلیط</div>--}}
                 {{--</a>--}}
-                {{--</div>--}}
             </div>
             <div class="clear-both"></div>
-            <div class="col-xs-4"></div>
-            <div class="col-xs-4 moreOptionsSquareDiv" onclick="$('#phoneMenuBarPopUp').removeClass('hidden')">
-                <span><span class="phoneIcon downArrow"></span>گزینه های بیشتر</span>
-            </div>
-            <div class="col-xs-4"></div>
         </div>
         @include('layouts.mainSuggestions')
     </div>
