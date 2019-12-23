@@ -2,6 +2,7 @@
 
 use App\models\ActivationCode;
 use App\models\Activity;
+use App\models\DefaultPic;
 use App\models\Level;
 use App\models\LogModel;
 use App\models\Medal;
@@ -814,28 +815,18 @@ function getAllPlacePicsByKind($kindPlaceId, $placeId){
 
         if($user != null) {
 
-            $diffTimeInMin = Carbon::now()->diffInMinutes($item->created_at);
-            if($diffTimeInMin <= 15)
-                $diffTime = 'هم اکنون';
+            $diffTime = getDifferenceTimeString($item->created_at);
+
+            if($user->uploadPhoto == 0){
+                $deffPic = DefaultPic::find($user->picture);
+
+                if($deffPic != null)
+                    $uPic = URL::asset('defaultPic/' . $deffPic->name);
+                else
+                    $uPic = URL::asset('_images/nopic/blank.jpg');
+            }
             else{
-                $diffTimeHour = Carbon::now()->diffInHours($item->created_at);
-                if($diffTimeHour <= 24)
-                    $diffTime = $diffTimeHour . ' ساعت پیش ';
-                else{
-                    $diffTimeDay = Carbon::now()->diffInDays($item->created_at);
-                    if($diffTimeDay < 30)
-                        $diffTime = $diffTimeDay . ' روز پیش ';
-                    else{
-                        $diffTimeMonth = Carbon::now()->diffInMonths($item->created_at);
-                        if($diffTimeMonth < 12)
-                            $diffTime = $diffTimeMonth . ' ماه پیش ';
-                        else{
-                            $diffYear = (int)($diffTimeMonth / 12);
-                            $diffMonth = $diffTimeMonth % 12;
-                            $diffTime = $diffYear . ' سال  و ' . $diffMonth . ' ماه پیش ';
-                        }
-                    }
-                }
+                $uPic = URL::asset('userProfile/' . $user->picture);
             }
 
             $s = [
@@ -847,7 +838,7 @@ function getAllPlacePicsByKind($kindPlaceId, $placeId){
                 'mainPic' => URL::asset('userPhoto/' . $MainFile . '/' . $place->file . '/' . $item->pic),
                 'alt' => $item->alt,
                 'name' => $userName,
-                'userPic' => $koochitaPic,
+                'userPic' => $uPic,
                 'showInfo' => true,
                 'like' => $item->like,
                 'dislike' => $item->dislike,
@@ -874,4 +865,112 @@ function deleteReviewPic(){
         }
     }
 
+}
+
+function getDifferenceTimeString($time){
+    $time = Carbon::make($time);
+
+    $diffTimeInMin = Carbon::now()->diffInMinutes($time);
+    if($diffTimeInMin <= 15)
+        $diffTime = 'هم اکنون';
+    else{
+        $diffTimeHour = Carbon::now()->diffInHours($time);
+        if($diffTimeHour <= 24)
+            $diffTime = $diffTimeHour . ' ساعت پیش ';
+        else{
+            $diffTimeDay = Carbon::now()->diffInDays($time);
+            if($diffTimeDay < 30)
+                $diffTime = $diffTimeDay . ' روز پیش ';
+            else{
+                $diffTimeMonth = Carbon::now()->diffInMonths($time);
+                if($diffTimeMonth < 12)
+                    $diffTime = $diffTimeMonth . ' ماه پیش ';
+                else{
+                    $diffYear = (int)($diffTimeMonth / 12);
+                    $diffMonth = $diffTimeMonth % 12;
+                    $diffTime = $diffYear . ' سال  و ' . $diffMonth . ' ماه پیش ';
+                }
+            }
+        }
+    }
+
+    return $diffTime;
+
+}
+
+function getAnsToComments($logId){
+    $a = Activity::where('name', 'پاسخ')->first();
+
+    $ansToReview = DB::select('SELECT log.visitorId, log.text, log.subject, log.id FROM log WHERE log.confirm = 1 AND log.relatedTo = ' . $logId . ' AND log.activityId = ' . $a->id);
+
+    if(count($ansToReview) > 0) {
+        $logIds = array();
+        $ansToReviewUserId = array();
+        for ($i = 0; $i < count($ansToReview); $i++) {
+            array_push($logIds, $ansToReview[$i]->id);
+            array_push($ansToReviewUserId, $ansToReview[$i]->visitorId);
+
+            $ansToReview[$i]->comment = array();
+
+            if($ansToReview[$i]->subject == 'ans')
+                $ansToReview[$i]->comment = getAnsToComments($ansToReview[$i]->id);
+        }
+
+        $likeLogIds = DB::select('SELECT COUNT(RFB.like) AS likeCount, RFB.logId FROM reviewfeedback AS RFB WHERE RFB.logId IN (' . implode(",", $logIds) . ') AND RFB.like = 1 GROUP BY RFB.logId');
+        $dislikeLogIds = DB::select('SELECT COUNT(RFB.like) AS dislikeCount, RFB.logId FROM reviewfeedback AS RFB WHERE RFB.logId IN (' . implode(",", $logIds) . ') AND RFB.like = -1 GROUP BY RFB.logId');
+        $ansToReviewUser = DB::select('SELECT * FROM users WHERE id IN (' . implode(",", $ansToReviewUserId) . ')');
+
+        for ($i = 0; $i < count($ansToReview); $i++) {
+            $l = false;
+            $dl = false;
+
+            for ($j = 0; $j < count($likeLogIds); $j++) {
+                if ($ansToReview[$i]->id == $likeLogIds[$j]->logId) {
+                    $ansToReview[$i]->like = $likeLogIds[$j]->likeCount;
+                    $l = true;
+                    break;
+                }
+            }
+            if (!$l)
+                $ansToReview[$i]->like = 0;
+
+            for ($j = 0; $j < count($dislikeLogIds); $j++) {
+                if ($ansToReview[$i]->id == $dislikeLogIds[$j]->logId) {
+                    $ansToReview[$i]->dislike = $dislikeLogIds[$j]->dislikeCount;
+                    $dl = true;
+                    break;
+                }
+            }
+            if (!$dl)
+                $ansToReview[$i]->dislike = 0;
+
+            for ($j = 0; $j < count($ansToReviewUser); $j++) {
+                if ($ansToReview[$i]->visitorId == $ansToReviewUser[$j]->id) {
+                    if ($ansToReviewUser[$j]->first_name != null)
+                        $ansToReview[$i]->username = $ansToReviewUser[$j]->first_name . ' ' . $ansToReviewUser[$j]->last_name;
+                    else
+                        $ansToReview[$i]->username = $ansToReviewUser[$j]->username;
+
+                    if($ansToReviewUser[$j]->uploadPhoto == 0){
+                        $deffPic = DefaultPic::find($ansToReviewUser[$j]->picture);
+
+                        if($deffPic != null)
+                            $ansToReview[$i]->userPic = URL::asset('defaultPic/' . $deffPic->name);
+                        else
+                            $ansToReview[$i]->userPic = URL::asset('_images/nopic/blank.jpg');
+                    }
+                    else{
+                        $ansToReview[$i]->userPic = URL::asset('userProfile/' . $ansToReviewUser[$j]->picture);
+                    }
+
+                    break;
+                }
+            }
+
+        }
+    }
+    else
+        $ansToReview = array();
+
+    return $ansToReview;
 }

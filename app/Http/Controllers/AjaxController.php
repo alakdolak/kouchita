@@ -17,10 +17,12 @@ use App\models\QuestionUserAns;
 use App\models\Report;
 use App\models\ReportsType;
 use App\models\Restaurant;
+use App\models\ReviewFeedBack;
 use App\models\ReviewPic;
 use App\models\ReviewUserAssigned;
 use App\models\State;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
@@ -593,85 +595,262 @@ class AjaxController extends Controller {
         return;
     }
 
-    function getReviews(Request $request){
+    public function storeReview(Request $request)
+    {
+        $activity = Activity::where('name', 'نظر')->first();
+
+        if(isset($request->placeId) && isset($request->kindPlaceId) && isset($request->code)){
+
+            $id = $request->placeId;
+            $kindPlaceId = $request->kindPlaceId;
+            switch ($kindPlaceId){
+                case 1:
+                    $place = Amaken::find($id);
+                    $kindPlaceName = 'amaken';
+                    break;
+                case 3:
+                    $place = Restaurant::find($id);
+                    $kindPlaceName = 'restaurant';
+                    break;
+                case 4:
+                    $place = Hotel::find($id);
+                    $kindPlaceName = 'hotels';
+                    break;
+                case 6:
+                    $place = Majara::find($id);
+                    $kindPlaceName = 'majara';
+                    break;
+                case 10:
+                    $place = SogatSanaie::find($id);
+                    $kindPlaceName = 'sogatsanaie';
+                    break;
+                case 11:
+                    $place = MahaliFood::find($id);
+                    $kindPlaceName = 'mahalifood';
+                    break;
+            }
+
+            $log = new LogModel();
+            $log->placeId = $request->placeId;
+            $log->kindPlaceId = $kindPlaceId;
+            $log->visitorId = \auth()->user()->id;
+            $log->date = Carbon::now()->format('Y-m-d');
+            $log->time = getToday()['time'];
+            $log->activityId = $activity->id;
+            $log->text = $request->text;
+            $log->save();
+
+            $reviewPic = ReviewPic::where('code', $request->code)->get();
+            \DB::select('UPDATE `reviewpics` SET `logId`= ' . $log->id . ' WHERE code ="' . $request->code . '";');
+
+            $location = __DIR__ . '/../../../../assets/userPhoto/' . $kindPlaceName;
+            if(!file_exists($location))
+                mkdir($location);
+            $location .= '/' . $place->file;
+            if(!file_exists($location))
+                mkdir($location);
+
+            $limboLocation = __DIR__ . '/../../../../assets/limbo/';
+            foreach ($reviewPic as $item){
+                $file = $limboLocation . $item->pic;
+                $dest = $location . '/' .  $item->pic;
+                if(file_exists($file))
+                    rename( $file , $dest);
+            }
+
+            $assignedUser = json_decode($request->assignedUser);
+            if($assignedUser != null) {
+                foreach ($assignedUser as $item) {
+                    $newAssigned = new ReviewUserAssigned();
+                    $newAssigned->logId = $log->id;
+
+                    $user = User::where('username', $item)->orWhere('email', $item)->first();
+                    if ($user != null)
+                        $newAssigned->userId = $user->id;
+                    else
+                        $newAssigned->email = $item;
+
+                    $newAssigned->save();
+                }
+            }
+
+            $textQuestion = $request->textId;
+            $textAns = $request->textAns;
+            for($i = 0; $i < count($textAns); $i++){
+                if($textAns[$i] != null && $textAns[$i] != '' && $textQuestion[$i] != null){
+                    $newAns = new QuestionUserAns();
+                    $newAns->logId = $log->id;
+                    $newAns->questionId = $textQuestion[$i];
+                    $newAns->ans = $textAns[$i];
+                    $newAns->save();
+                }
+            }
+
+            if($request->multiQuestion != null && $request->multiAns != null) {
+                $multiQuestion = json_decode($request->multiQuestion);
+                $multiAns = json_decode($request->multiAns);
+
+                for($i = 0; $i < count($multiAns); $i++){
+                    if($multiAns[$i] != null && $multiAns[$i] != '' && $multiQuestion[$i] != null){
+                        $newAns = new QuestionUserAns();
+                        $newAns->logId = $log->id;
+                        $newAns->questionId = $multiQuestion[$i];
+                        $newAns->ans = $multiAns[$i];
+                        $newAns->save();
+                    }
+                }
+            }
+
+            if($request->rateQuestion != null && $request->rateAns != null) {
+                $rateQuestion = json_decode($request->rateQuestion);
+                $rateAns = json_decode($request->rateAns);
+
+                for($i = 0; $i < count($rateAns); $i++){
+                    if($rateAns[$i] != null && $rateAns[$i] != '' && $rateQuestion[$i] != null){
+                        $newAns = new QuestionUserAns();
+                        $newAns->logId = $log->id;
+                        $newAns->questionId = $rateQuestion[$i];
+                        $newAns->ans = $rateAns[$i];
+                        $newAns->save();
+                    }
+                }
+            }
+        }
+        return \redirect()->back();
+    }
+
+    public function getReviews(Request $request){
 
         if(isset($request->placeId) && isset($request->kindPlaceId)){
 
             $count = 5;
-            if(isset($request->count) && is_int($request->count))
+            $num = 1;
+
+            if(isset($request->count))
                 $count = $request->count;
+            if(isset($request->num))
+                $num = $request->num;
+
 
             $activity = Activity::where('name', 'نظر')->first();
+            $a = Activity::where('name', 'پاسخ')->first();
 
-            $condition = ['activityId' => $activity->id, 'placeId' => $request->placeId, 'kindPlaceId' => $request->kindPlaceId];
-            $logs = LogModel::where($condition)->orderByDesc('date')->get();
+            $condition = ['activityId' => $activity->id, 'placeId' => $request->placeId, 'kindPlaceId' => $request->kindPlaceId, 'confirm' => 1, 'relatedTo' => 0];
+
+            if($num == 0 && $count == 0)
+                $logs = LogModel::where($condition)->orderByDesc('date')->get();
+            else
+                $logs = LogModel::where($condition)->orderByDesc('date')->limit($count * $num)->get();
 
             if(count($logs) == 0)
                 echo 'nok1';
             else{
-                foreach ($logs as $item){
-                    $item->user = User::select(['first_name', 'last_name', 'username'])->find($item->visitorId);
-                    $item->pics = ReviewPic::where('logId', $item->id)->get();
-                    $item->assigned = ReviewUserAssigned::where('logId', $item->id)->get();
+                foreach ($logs as $key => $item){
+                    if($key > (($num-1) * $count)-1) {
 
-                    switch ($item->kindPlaceId){
-                        case 1:
-                            $item->mainFile = 'amaken';
-                            $item->place = Amaken::select(['id', 'name', 'cityId', 'file'])->find($item->placeId);
-                            $item->kindPlace = 'اماکن';
-                            break;
-                        case 3:
-                            $item->mainFile = 'restaurant';
-                            $item->place = Restaurant::select(['id', 'name', 'cityId', 'file'])->find($item->placeId);
-                            $item->kindPlace = 'رستوران';
-                            break;
-                        case 4:
-                            $item->mainFile = 'hotels';
-                            $item->place = Hotel::select(['id', 'name', 'cityId', 'file'])->find($item->placeId);
-                            $item->kindPlace = 'هتل';
-                            break;
-                        case 6:
-                            $item->mainFile = 'majara';
-                            $item->place = Majara::select(['id', 'name', 'cityId', 'file'])->find($item->placeId);
-                            $item->kindPlace = 'ماجرا';
-                            break;
-                        case 10:
-                            $item->mainFile = 'sogatsanaie';
-                            $item->place = SogatSanaie::select(['id', 'name', 'cityId', 'file'])->find($item->placeId);
-                            $item->kindPlace = 'سوغات/صنایع';
-                            break;
-                        case 11:
-                            $item->mainFile = 'mahalifood';
-                            $item->place = MahaliFood::select(['id', 'name', 'cityId', 'file'])->find($item->placeId);
-                            $item->kindPlace = 'غذای محلی';
-                            break;
-                    }
+                        $ansToReview = getAnsToComments($item->id);
 
-                    $item->location = __DIR__ . '/../../../../assets/userPhoto/' . $item->mainFile . '/' . $item->place->file;
-                    $item->city = Cities::find($item->place->cityId);
-                    $item->state = State::find($item->city->stateId);
+                        if(count($ansToReview) > 0)
+                            $item->comment = $ansToReview;
+                        else
+                            $item->comment = array();
 
-                    if(count($item->assigned) != 0){
-                        foreach ($item->assigned as $item2) {
-                            if($item2->userId != null){
-                                $u = User::find($item2->userId);
-                                if($u !=  null){
-                                    if($u->first_name != null)
-                                        $item2->name = $u->first_name . ' ' . $u->last_name;
-                                    else
-                                        $item2->name = $u->username;
+                        $item->user = User::select(['first_name', 'last_name', 'username', 'picture', 'uploadPhoto'])->find($item->visitorId);
+                        if ($item->user->first_name != null)
+                            $item->usernameReviewWriter = $item->user->first_name . ' ' . $item->user->last_name;
+                        else
+                            $item->usernameReviewWriter = $item->user->username;
+
+                        if($item->user->uploadPhoto == 0){
+                            $deffPic = \App\models\DefaultPic::find($item->user->picture);
+                            if($deffPic != null)
+                                $item->userPic = URL::asset('defaultPic/' . $deffPic->name);
+                            else
+                                $item->userPic = URL::asset('_images/nopic/blank.jpg');
+                        }
+                        else{
+                            $item->userPic = URL::asset('userProfile/' . $item->user->picture);
+                        }
+
+                        $item->pics = ReviewPic::where('logId', $item->id)->get();
+                        $item->assigned = ReviewUserAssigned::where('logId', $item->id)->get();
+
+                        switch ($item->kindPlaceId) {
+                            case 1:
+                                $item->mainFile = 'amaken';
+                                $item->place = Amaken::select(['id', 'name', 'cityId', 'file'])->find($item->placeId);
+                                $item->kindPlace = 'اماکن';
+                                break;
+                            case 3:
+                                $item->mainFile = 'restaurant';
+                                $item->place = Restaurant::select(['id', 'name', 'cityId', 'file'])->find($item->placeId);
+                                $item->kindPlace = 'رستوران';
+                                break;
+                            case 4:
+                                $item->mainFile = 'hotels';
+                                $item->place = Hotel::select(['id', 'name', 'cityId', 'file'])->find($item->placeId);
+                                $item->kindPlace = 'هتل';
+                                break;
+                            case 6:
+                                $item->mainFile = 'majara';
+                                $item->place = Majara::select(['id', 'name', 'cityId', 'file'])->find($item->placeId);
+                                $item->kindPlace = 'ماجرا';
+                                break;
+                            case 10:
+                                $item->mainFile = 'sogatsanaie';
+                                $item->place = SogatSanaie::select(['id', 'name', 'cityId', 'file'])->find($item->placeId);
+                                $item->kindPlace = 'سوغات/صنایع';
+                                break;
+                            case 11:
+                                $item->mainFile = 'mahalifood';
+                                $item->place = MahaliFood::select(['id', 'name', 'cityId', 'file'])->find($item->placeId);
+                                $item->kindPlace = 'غذای محلی';
+                                break;
+                        }
+
+                        foreach ($item->pics as $item2) {
+                            $item2->url = URL::asset('userPhoto/' . $item->mainFile . '/' . $item->place->file . '/' . $item2->pic);
+                        }
+
+                        $item->city = Cities::find($item->place->cityId);
+                        $item->state = State::find($item->city->stateId);
+
+                        if (count($item->assigned) != 0) {
+                            foreach ($item->assigned as $item2) {
+                                if ($item2->userId != null) {
+                                    $u = User::find($item2->userId);
+                                    if ($u != null) {
+                                        if ($u->first_name != null)
+                                            $item2->name = $u->first_name . ' ' . $u->last_name;
+                                        else
+                                            $item2->name = $u->username;
+                                    }
                                 }
                             }
                         }
-                    }
 
-                    $item->ans = \DB::select('SELECT us.logId, us.questionId, us.ans, qus.id, qus.description, qus.ansType FROM questionuserans AS us , questions AS qus WHERE us.logId = ' . $item->id . ' AND qus.id = us.questionId');
-                    if(count($item->ans) != 0){
-                        foreach ($item->ans as $item2){
-                            if($item2->ansType == 'multi'){
-                                $item2->ans = QuestionAns::where('questionId', $item2->id)->first()->ans;
+                        $item->ans = \DB::select('SELECT us.logId, us.questionId, us.ans, qus.id, qus.description, qus.ansType FROM questionuserans AS us , questions AS qus WHERE us.logId = ' . $item->id . ' AND qus.id = us.questionId ORDER BY qus.ansType');
+                        if (count($item->ans) != 0) {
+                            foreach ($item->ans as $item2) {
+                                if ($item2->ansType == 'multi') {
+                                    $item2->ans = QuestionAns::where('questionId', $item2->id)->first()->ans;
+                                }
                             }
                         }
+
+                        $time = $item->date;
+                        $time .= ' ' . substr($item->time, 0, 2) . ':' . substr($item->time, 2, 2);
+
+                        $item->timeAgo = getDifferenceTimeString($time);
+
+                        $item->like = ReviewFeedBack::where('logId', $item->id)->where('like', 1)->count();
+                        $item->dislike = ReviewFeedBack::where('logId', $item->id)->where('like', -1)->count();
+
+                        if (\auth()->check()) {
+                            $u = \auth()->user();
+                            $item->userLike = ReviewFeedBack::where('logId', $item->id)->where('userId', $u->id)->first();
+                        } else
+                            $item->userLike = null;
                     }
                 }
 
@@ -681,6 +860,75 @@ class AjaxController extends Controller {
 
         return;
 
+    }
+
+    public function likeReview(Request $request)
+    {
+        if(\auth()->check()) {
+            if (isset($request->logId) && isset($request->like)) {
+                $u = Auth::user();
+                $condition = ['userId' => $u->id, 'logId' => $request->logId];
+                $like = ReviewFeedBack::where($condition)->first();
+
+                if($like == null){
+                    $like = new ReviewFeedBack();
+                    $like->logId = $request->logId;
+                    $like->userId = $u->id;
+                    if($request->like == 1)
+                        $like->like = 1;
+                    else
+                        $like->like = -1;
+                    $like->save();
+                }
+                else{
+                    if($request->like == 1)
+                        $like->like = 1;
+                    else
+                        $like->like = -1;
+                    $like->save();
+                }
+
+                echo 'ok';
+            }
+            else
+                echo 'nok2';
+        }
+        else
+            echo 'nok1';
+
+        return;
+    }
+
+    public function ansReview(Request $request)
+    {
+        if(\auth()->check()) {
+            if (isset($request->text) && isset($request->logId)) {
+                if (strlen($request->text) > 2) {
+                    $u = Auth::user();
+                    $a = Activity::where('name','پاسخ')->first();
+                    $mainLog = LogModel::find($request->logId);
+                    if($mainLog != null) {
+                        $newLog = New LogModel();
+                        $newLog->placeId = $mainLog->placeId;
+                        $newLog->kindPlaceId = $mainLog->kindPlaceId;
+                        $newLog->visitorId = $u->id;
+                        $newLog->date = Carbon::now()->format('Y-m-d');;
+                        $newLog->time = getToday()['time'];
+                        $newLog->activityId = $a->id;
+                        $newLog->text = $request->text;
+                        $newLog->relatedTo = $mainLog->id;
+                        $newLog->save();
+
+                        if(isset($request->ansAns) && $request->ansAns == 1){
+                            $mainLog->subject = 'ans';
+                            $mainLog->save();
+                        }
+
+                        echo 'ok';
+                    }
+                }
+            }
+        }
     }
 
 }
