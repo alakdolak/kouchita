@@ -155,7 +155,7 @@ if ($total == 0)
 
                             <div class="modal-content">
                                 <div class="postMainDivHeader">
-                                    <button type="button" class="close closeBtnPostModal" data-dismiss="modal" onclick="closeNewPostModal()">&times;</button>
+                                    <button type="button" class="close closeBtnPostModal" data-dismiss="modal" onclick="closeNewPostModal(); showMobileTabLink()">&times;</button>
                                     دیدگاه شما
                                 </div>
                                 <div class="commentInputMainDivModal">
@@ -262,8 +262,8 @@ if ($total == 0)
 
                                     @for($i = 0; $i < count($rateQuestion); $i++)
                                         <div class="display-inline-block full-width">
-                                            <b id="rateName_{{$i}}" class="col-xs-3 font-size-15 line-height-203">بد نبود</b>
-                                            <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-3 text-align-left pd-rt-0">
+                                            <b id="rateName_{{$i}}" class="col-xs-3 font-size-15 line-height-203 pd-lt-0">بد نبود</b>
+                                            <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-3 text-align-left pd-0">
                                                 <div class="font-size-25" style="display: flex;">
                                                     <span id="rate_5_{{$i}}" class="starRating" onmouseover="momentChangeRate({{$i}}, 5, 'in')" onmouseleave="momentChangeRate({{$i}}, 5, 'out')" onclick="chooseQuestionRate({{$i}}, 5, {{$rateQuestion[$i]->id}})"></span>
                                                     <span id="rate_4_{{$i}}" class="starRating" onmouseover="momentChangeRate({{$i}}, 4, 'in')" onmouseleave="momentChangeRate({{$i}}, 4, 'out')" onclick="chooseQuestionRate({{$i}}, 4, {{$rateQuestion[$i]->id}})"></span>
@@ -807,7 +807,7 @@ if ($total == 0)
                         </div>
                     </div>
                     <a class="postLink" onclick="newPostModal()">
-                        <div class="postMainDiv" href="">
+                        <div class="postMainDiv" onclick="hideMobileTabLink()">
                             <div class="postMainDivHeader">
                                 دیدگاه شما
                             </div>
@@ -835,7 +835,7 @@ if ($total == 0)
                                     <span class="add360VideoCommentIcon"></span>
                                     <span class="commentOptionsText">ویدیو 360 اضافه کنید.</span>
                                 </div><!--
-                             --><div class="commentOptionsBoxes">
+                             --><div class="commentOptionsBoxes" id="bodyLinks">
                                     <span class="tagFriendCommentIcon"></span>
                                     <span class="commentOptionsText">دوستانتان را tag کنید.</span>
                                 </div><!--
@@ -870,16 +870,16 @@ if ($total == 0)
 
                 <div class="tabLinkMainWrapMainDivMobile" data-spy="affix" data-offset-top="780">
                     <div class="tabLinkMainWrapMainDiv">
-                        <a href="#BODYCON">
+                        <a href="#bodyLinks">
                             <button class="tabLinkMainWrap" onclick="openTab('QAndAMainDivId', this, '#4dc7bc')">سؤالات</button>
                         </a><!--
-                     --><a href="#BODYCON">
+                     --><a href="#bodyLinks">
                             <button class="tabLinkMainWrap" onclick="openTab('similarLocationsMainDiv', this, '#4dc7bc')">مکان‌های مشابه</button>
                         </a><!--
-                     --><a href="#BODYCON">
+                     --><a href="#bodyLinks">
                             <button class="tabLinkMainWrap" onclick="openTab('mainDivPlacePost', this, '#4dc7bc')">پست</button>
                         </a><!--
-                     --><a href="#BODYCON">
+                     --><a href="#bodyLinks">
                             <button class="tabLinkMainWrap" onclick="openTab('mobileIntroductionMainDivId', this, '#4dc7bc')" id="defaultOpenMainWrap">معرفی کلی</button>
                         </a>
                     </div>
@@ -3163,6 +3163,14 @@ if ($total == 0)
     </script>
 
     <script>
+
+        function hideMobileTabLink() {
+            $('.tabLinkMainWrapMainDivMobile').hide()
+        }
+
+        function showMobileTabLink() {
+            $('.tabLinkMainWrapMainDivMobile').show()
+        }
 
         function newPostModal() {
             $("#darkModal").show() ,

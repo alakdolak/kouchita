@@ -2872,7 +2872,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     font-size: 15px;
     color: #c6c6c6;
     font-weight: 700;
-    width: 40%;
+    width: 41%;
 }
 
 .participantDivMainDiv {
@@ -2894,6 +2894,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     padding: 0 10px 0 50px;
     width: auto;
     margin: 2px;
+    text-align: left;
 }
 .assignedResult{
     position: absolute;
@@ -3486,6 +3487,10 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
 .postsMainDivInSpecificMode  .postMainDivShown {
     padding: 10px;
+}
+
+.postMainDivShown .questionsActionsMoreDetails {
+    top: 50px;
 }
 
 .postsMainDivInSpecificMode .photosCol > div:nth-child(1) {
@@ -4165,6 +4170,16 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     .actionToAnswer {
         margin: 10px 4px 0 0;
     }
+
+    .addParticipantInputBoxPostModal > textarea {
+        width: 43%;
+        font-size: 13px;
+        line-height: 1.7;
+    }
+
+    .participantDivMainDiv {
+        width: 57%;
+    }
 }
 
 @media (max-width:630px) {
@@ -4300,8 +4315,205 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     .tabLinkMainWrap {
         font-size: 14px;
     }
+
+    .addParticipantInputBoxPostModal > textarea {
+        width: 45%;
+        font-size: 10px;
+        line-height: 2.5;
+    }
+
+    .participantDivMainDiv {
+        width: 55%;
+    }
+
+    .tabLink {
+        font-size: 21px;
+    }
+
+    .commentMoreSettingBar {
+        padding: 5px 0;
+    }
+
+    .postsActionsChoices {
+        font-size: 12px;
+    }
+
+    .showCommentsIconFeedback::before {
+        top: -4px;
+    }
+
+    .commentsLikeIconFeedback::before {
+        top: -11px;
+    }
+
+    .commentsDislikeIconFeedback::before {
+        top: -7px;
+    }
+
+    .commentsShareIconFeedback::before {
+        font-size: 17px;
+        top: -5px;
+    }
+
+    .newCommentPlaceMainDiv .inputBox {
+        width: 88%;
+    }
 }
 
-@media (max-width:630px) {
+@media (max-width:480px) {
+    DIV.prw_rup.prw_hotels_flexible_album_thumb .albumInfo {
+        font-size: 10px;
+    }
 
+    .addParticipantInputBoxPostModal {
+        width: 94%;
+    }
+
+    .commentQuestionsRatingsBox > div > b {
+        font-size: 11px;
+        line-height: 3.6;
+    }
+
+    .commentQuestionsRatingsBox > div > b:nth-child(3), .commentQuestionsRatingsBoxHeader {
+        padding-right: 0;
+    }
+
+    .commentQuestionsRatingsBox > div > div span::before {
+        font-size: 19px;
+    }
+
+    .postInputBoxModal > textarea {
+        font-size: 13px;
+    }
+
+    .addParticipantInputBoxPostModal > textarea {
+        width: 60%;
+        font-size: 10px;
+        line-height: 2.5;
+    }
+
+    .participantDivMainDiv {
+        width: 40%;
+        padding: 0;
+    }
+
+    .participantDiv {
+        font-size: 12px;
+        padding: 0 10px 0 35px;
+        margin: 5px 2px;
+    }
+
+    .removeParticipantBtn::before {
+        font-size: 17px;
+    }
+
+    .visitKindCommentModal label {
+        width: 23%;
+    }
+
+    .tabLink {
+         font-size: 16px;
+         padding: 20px 0;
+    }
+
+    .mobileIntroductionMainDiv #generalDescriptionMobile .block_title,
+    .mobileIntroductionMainDiv #commentsAndAddressMobile .block_title {
+        top: 3px;
+    }
+
+    .commentRatingsDetailsBtn {
+        padding-left: 15px;
+        font-size: 12px;
+    }
+
+    .commentRatingsDetailsBtnIcon {
+        left: 0;
+    }
+
+    .newCommentPlaceMainDiv .inputBox {
+        width: 84%;
+    }
+
+    .filterBarDivs {
+        padding: 0;
+    }
+
+    .topHeaderBarPosts > span {
+        font-size: 13px;
+    }
+}
+
+@media (max-width:370px) {
+    DIV.prw_rup.prw_hotels_flexible_album_thumb .albumInfo {
+        font-size: 8px;
+    }
+
+    .addParticipantInputBoxPostModal {
+        width: 93%;
+    }
+
+    .commentQuestionsRatingsBox > div > b {
+        font-size: 9px;
+        line-height: 4.5;
+    }
+
+    .commentQuestionsRatingsBox > div > div span::before {
+        font-size: 15px;
+    }
+
+    .commentOptionsText {
+        font-size: 10px;
+        line-height: 2.1;
+    }
+
+    .commentQuestionsRatingsBoxHeader {
+        font-size: 11px;
+    }
+
+    .addParticipantInputBoxPostModal > textarea {
+        width: 63%;
+        font-size: 9px;
+        line-height: 2.5;
+    }
+
+    .participantDivMainDiv {
+        width: 37%;
+    }
+
+    .addOriginCityInputBoxPostModal {
+        width: 100%;
+    }
+
+    .tabLinkMainWrap {
+        font-size: 13px;
+    }
+
+    .tabLink {
+        font-size: 14px;
+    }
+
+    #introductionText {
+        font-size: 14px;
+    }
+
+    .leftColMainWrap .ratingTranslationDiv {
+        margin-left: 0;
+        width: 50%;
+    }
+
+    .inputBoxSearchFilter {
+        width: 100%;
+    }
+
+    .commentWriterExperienceDetails {
+        width: 85%;
+    }
+
+    .topHeaderBarPosts > span {
+        font-size: 13px;
+    }
+
+    .newCommentPlaceMainDiv .inputBox {
+         width: 82%;
+    }
 }
