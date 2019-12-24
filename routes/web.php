@@ -3,6 +3,15 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('databaseforall', function (){
+    Schema::create('reviewFeedBack', function (Blueprint $table) {
+        $table->increments('id');
+        $table->unsignedInteger('logId');
+        $table->unsignedInteger('userId');
+        $table->boolean('like');// 1 like , -1 dislike
+        $table->timestamps();
+
+        $table->foreign('logId')->references('id')->on('log')->onUpdate('cascade')->onDelete('cascade');
+    });
 });
 
 Route::get('fillHotelPic', function(){
