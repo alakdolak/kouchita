@@ -717,8 +717,6 @@ Route::group(array('middleware' => ['throttle:30', 'nothing', 'auth']), function
     Route::post('opOnComment', array('as' => 'opOnComment', 'uses' => 'PlaceController@opOnComment'));
 
     Route::post('deleteUserPicFromComment', array('as' => 'deleteUserPicFromComment', 'uses' => 'PlaceController@deleteUserPicFromComment'));
-
-    Route::post('review/store', 'PlaceController@storeReview')->name('storeReview');
 });
 
 Route::group(array('middleware' => ['throttle:30', 'auth', 'adminAccess']), function () {
@@ -838,7 +836,15 @@ Route::group(array('middleware' => 'nothing'), function () {
 
     Route::post('deleteReviewPic', 'AjaxController@deleteReviewPic')->name('deleteReviewPic');
 
+    Route::post('review/store', 'AjaxController@storeReview')->name('storeReview');
+
+    Route::post('review/like', 'AjaxController@likeReview')->name('likeReview');
+
+    Route::post('review/ans', 'AjaxController@ansReview')->name('ansReview');
+
     Route::post('getReviews', 'AjaxController@getReviews')->name('getReviews');
+
+
 });
 
 Route::group(array('middleware' => 'auth'), function () {

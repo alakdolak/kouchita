@@ -154,6 +154,32 @@
     </div>
 </div>
 
+<div class="modal fade showingPhotosModal" id="showingReviewPicsModal" role="dialog">
+    <div class="modal-dialog" style="margin-bottom: 0px;">
+        <div class="modal-content">
+            <div id="showingPhotosMainDivHeader">
+                <button type="button" class="close" data-dismiss="modal" onclick="document.getElementById('showingReviewPhotosMainPic').innerHTML = ''">&times;</button>
+                <div class="showingPhotosTitle">نمایش عکس‌ها سایت</div>
+            </div>
+            <div class="commentWriterDetailsShow">
+                <div class="circleBase type2 commentWriterPicShow">
+                    <img id="showingReviewPhotosUserPic" src="" class="koochitaCircleLogo">
+                </div>
+                <div class="commentWriterExperienceDetails">
+                    <b id="showingReviewPhotosUserName" class="userProfileName"></b>
+                </div>
+            </div>
+            <div class="clear-both"></div>
+            <div class="col-xs-10 leftColPhotosModalMainDiv">
+                <div id="showingReviewPhotosMainPic" class="selectedPhotoShowingModal"></div>
+            </div>
+            <div id="showingReviewPhotosRightCol" class="col-xs-2 rightColPhotosModalMainDiv" >
+            </div>
+            <div class="photosDescriptionShowingModal"></div>
+        </div>
+    </div>
+</div>
+
 <script>
     function likePostsComment(element) {
         $(element).toggleClass('color-red');

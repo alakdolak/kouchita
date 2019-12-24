@@ -284,6 +284,10 @@
 
 /*padding left*/
 
+.pd-lt-0 {
+    padding-left: 0px;
+}
+
 .pd-lt-3 {
     padding-left: 3px;
 }
