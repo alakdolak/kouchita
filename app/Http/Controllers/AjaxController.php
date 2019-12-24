@@ -541,13 +541,28 @@ class AjaxController extends Controller {
             $destinationMainPic = $location . '/' . $filename;
             move_uploaded_file($_FILES['video']['tmp_name'], $destinationMainPic);
 
+            $img = $_POST['videoPic'];
+            $img = str_replace('data:image/png;base64,', '', $img);
+            $img = str_replace(' ', '+', $img);
+            $data = base64_decode($img);
+            $videoArray = explode('.', $filename);
+            $videoName = '';
+            for($k = 0; $k < count($videoArray)-1; $k++)
+                $videoName .= $videoArray[$k] . '.';
+            $videoName .= 'png';
+
+            $file =  __DIR__ . '/../../../../assets/limbo/' . $videoName;
+            $success = file_put_contents($file, $data);
+
             $newPicReview = new ReviewPic();
             $newPicReview->pic = $filename;
             $newPicReview->code = $request->code;
             if(isset($request->isVideo) && $request->isVideo == 1)
                 $newPicReview->isVideo = 1;
-            if(isset($request->is360) && $request->is360 == 1)
+            if(isset($request->is360) && $request->is360 == 1) {
                 $newPicReview->is360 = 1;
+                $newPicReview->isVideo = 1;
+            }
             $newPicReview->save();
 
             echo json_encode(['ok', $filename]);
@@ -565,6 +580,19 @@ class AjaxController extends Controller {
         $pics = ReviewPic::where('code', $code)->where('pic', $name)->first();
 
         if($pics != null){
+            if($pics->isVideo == 1){
+                $videoArray = explode('.', $pics->pic);
+                $videoName = '';
+                for($k = 0; $k < count($videoArray)-1; $k++)
+                    $videoName .= $videoArray[$k] . '.';
+                $videoName .= 'png';
+
+                $location2 = __DIR__ . '/../../../../assets/limbo/' . $videoName;
+
+                if(file_exists($location2)) {
+                    unlink($location2);
+                }
+            }
             $location = __DIR__ . '/../../../../assets/limbo/' . $pics->pic;
             if(file_exists($location))
                 unlink($location);
@@ -638,6 +666,7 @@ class AjaxController extends Controller {
             $log->time = getToday()['time'];
             $log->activityId = $activity->id;
             $log->text = $request->text;
+            $log->confirm = 1;
             $log->save();
 
             $reviewPic = ReviewPic::where('code', $request->code)->get();
@@ -656,6 +685,19 @@ class AjaxController extends Controller {
                 $dest = $location . '/' .  $item->pic;
                 if(file_exists($file))
                     rename( $file , $dest);
+
+                if($item->isVideo == 1){
+                    $videoArray = explode('.', $item->pic);
+                    $videoName = '';
+                    for($k = 0; $k < count($videoArray)-1; $k++)
+                        $videoName .= $videoArray[$k] . '.';
+                    $videoName .= 'png';
+
+                    $file = $limboLocation . $videoName;
+                    $dest = $location . '/' .  $videoName;
+                    if(file_exists($file))
+                        rename( $file , $dest);
+                }
             }
 
             $assignedUser = json_decode($request->assignedUser);
@@ -723,8 +765,8 @@ class AjaxController extends Controller {
 
         if(isset($request->placeId) && isset($request->kindPlaceId)){
 
-            $count = 5;
-            $num = 1;
+            $count = 0;
+            $num = 0;
 
             if(isset($request->count))
                 $count = $request->count;
@@ -738,14 +780,15 @@ class AjaxController extends Controller {
             $condition = ['activityId' => $activity->id, 'placeId' => $request->placeId, 'kindPlaceId' => $request->kindPlaceId, 'confirm' => 1, 'relatedTo' => 0];
 
             if($num == 0 && $count == 0)
-                $logs = LogModel::where($condition)->orderByDesc('date')->get();
+                $logs = LogModel::where($condition)->orderByDesc('date')->orderByDesc('time')->get();
             else
-                $logs = LogModel::where($condition)->orderByDesc('date')->limit($count * $num)->get();
+                $logs = LogModel::where($condition)->orderByDesc('date')->orderByDesc('time')->limit($count * $num)->get();
 
             if(count($logs) == 0)
                 echo 'nok1';
             else{
                 foreach ($logs as $key => $item){
+
                     if($key > (($num-1) * $count)-1) {
 
                         $ansToReview = getAnsToComments($item->id);
@@ -809,7 +852,20 @@ class AjaxController extends Controller {
                         }
 
                         foreach ($item->pics as $item2) {
-                            $item2->url = URL::asset('userPhoto/' . $item->mainFile . '/' . $item->place->file . '/' . $item2->pic);
+                            if($item2->isVideo == 1){
+
+                                $videoArray = explode('.', $item2->pic);
+                                $videoName = '';
+                                for($k = 0; $k < count($videoArray)-1; $k++)
+                                    $videoName .= $videoArray[$k] . '.';
+                                $videoName .= 'png';
+
+                                $item2->url = URL::asset('userPhoto/' . $item->mainFile . '/' . $item->place->file . '/' . $videoName);
+                                $item2->videoUrl = URL::asset('userPhoto/' . $item->mainFile . '/' . $item->place->file . '/' . $item2->pic);
+                            }
+                            else{
+                                $item2->url = URL::asset('userPhoto/' . $item->mainFile . '/' . $item->place->file . '/' . $item2->pic);
+                            }
                         }
 
                         $item->city = Cities::find($item->place->cityId);
@@ -917,6 +973,7 @@ class AjaxController extends Controller {
                         $newLog->activityId = $a->id;
                         $newLog->text = $request->text;
                         $newLog->relatedTo = $mainLog->id;
+                        $newLog->confirm = 1;
                         $newLog->save();
 
                         if(isset($request->ansAns) && $request->ansAns == 1){
