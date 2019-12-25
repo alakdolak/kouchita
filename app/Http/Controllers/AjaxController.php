@@ -500,7 +500,9 @@ class AjaxController extends Controller {
     public function reviewUploadPic(Request $request)
     {
         $location = __DIR__ . '/../../../../assets/limbo';
-dd($location);
+
+dd(file_exists($location));
+
         if(!file_exists($location))
             mkdir($location);
 
