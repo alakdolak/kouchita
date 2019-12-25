@@ -7,7 +7,7 @@ $kindPlaceId = 10; ?>
     @include('layouts.topHeader')
 
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/long_lived_global_legacy_2.css?v=1')}}"/>
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/gardeshname.min.css?v=1.1')}}"/>
+    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/article.min.css?v=1.1')}}"/>
 
     <title>{{$post->title}} - شازده مسافر</title>
 

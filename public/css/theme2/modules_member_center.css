@@ -377,6 +377,7 @@
 .modules-membercenter-total-points .points {
     font-size: 48px;
     font-weight: lighter;
+    text-align: center;
     white-space: nowrap;
     color: #963019;
 }
@@ -486,7 +487,7 @@
     background-color: #963019;
 }
 .modules-membercenter-level-progress .points_to_go {
-    float: right;
+    /*float: right;*/
     font: lighter 22px helvetica, arial, sans-serif;
     color: #666;
 }
@@ -567,6 +568,7 @@
     font-family: Arial, 'Sans-Serif';
     font-weight: bold;
     font-size: 12px;
+    line-height: 30px;
     color: #16174f;
 }
 .modules-membercenter-badge-teaser .achievement {
