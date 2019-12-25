@@ -670,7 +670,7 @@ class AjaxController extends Controller {
             $log->save();
 
             $reviewPic = ReviewPic::where('code', $request->code)->get();
-            \DB::select('UPDATE `reviewpics` SET `logId`= ' . $log->id . ' WHERE code ="' . $request->code . '";');
+            \DB::select('UPDATE `reviewPics` SET `logId`= ' . $log->id . ' WHERE code ="' . $request->code . '";');
 
             $location = __DIR__ . '/../../../../assets/userPhoto/' . $kindPlaceName;
             if(!file_exists($location))
@@ -885,7 +885,7 @@ class AjaxController extends Controller {
                             }
                         }
 
-                        $item->ans = \DB::select('SELECT us.logId, us.questionId, us.ans, qus.id, qus.description, qus.ansType FROM questionuserans AS us , questions AS qus WHERE us.logId = ' . $item->id . ' AND qus.id = us.questionId ORDER BY qus.ansType');
+                        $item->ans = \DB::select('SELECT us.logId, us.questionId, us.ans, qus.id, qus.description, qus.ansType FROM questionAns AS us , questions AS qus WHERE us.logId = ' . $item->id . ' AND qus.id = us.questionId ORDER BY qus.ansType');
                         if (count($item->ans) != 0) {
                             foreach ($item->ans as $item2) {
                                 if ($item2->ansType == 'multi') {
