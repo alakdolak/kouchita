@@ -672,31 +672,35 @@ class AjaxController extends Controller {
             $reviewPic = ReviewPic::where('code', $request->code)->get();
             \DB::select('UPDATE `reviewPics` SET `logId`= ' . $log->id . ' WHERE code ="' . $request->code . '";');
 
-            $location = __DIR__ . '/../../../../assets/userPhoto/' . $kindPlaceName;
-            if(!file_exists($location))
-                mkdir($location);
-            $location .= '/' . $place->file;
-            if(!file_exists($location))
-                mkdir($location);
 
-            $limboLocation = __DIR__ . '/../../../../assets/limbo/';
-            foreach ($reviewPic as $item){
-                $file = $limboLocation . $item->pic;
-                $dest = $location . '/' .  $item->pic;
-                if(file_exists($file))
-                    rename( $file , $dest);
+            if(count($reviewPic) > 0){
+                $location = __DIR__ . '/../../../../assets/userPhoto/' . $kindPlaceName;
+                if(!file_exists($location))
+                    mkdir($location);
+                $location .= '/' . $place->file;
+                if(!file_exists($location))
+                    mkdir($location);
 
-                if($item->isVideo == 1){
-                    $videoArray = explode('.', $item->pic);
-                    $videoName = '';
-                    for($k = 0; $k < count($videoArray)-1; $k++)
-                        $videoName .= $videoArray[$k] . '.';
-                    $videoName .= 'png';
+                $limboLocation = __DIR__ . '/../../../../assets/limbo/';
 
-                    $file = $limboLocation . $videoName;
-                    $dest = $location . '/' .  $videoName;
+                foreach ($reviewPic as $item){
+                    $file = $limboLocation . $item->pic;
+                    $dest = $location . '/' .  $item->pic;
                     if(file_exists($file))
                         rename( $file , $dest);
+
+                    if($item->isVideo == 1){
+                        $videoArray = explode('.', $item->pic);
+                        $videoName = '';
+                        for($k = 0; $k < count($videoArray)-1; $k++)
+                            $videoName .= $videoArray[$k] . '.';
+                        $videoName .= 'png';
+
+                        $file = $limboLocation . $videoName;
+                        $dest = $location . '/' .  $videoName;
+                        if(file_exists($file))
+                            rename( $file , $dest);
+                    }
                 }
             }
 
