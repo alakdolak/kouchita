@@ -800,9 +800,9 @@ function getAllPlacePicsByKind($kindPlaceId, $placeId){
 
     $photographerPics = array();
     if(\auth()->check())
-        $photographerPic = DB::select('SELECT * FROM photographerspics WHERE kindPlaceId = ' . $kindPlaceId . ' AND placeId  = ' . $placeId . ' AND ((userId = ' . $user->id . ') OR ( status = 1)) ORDER BY created_at');
+        $photographerPic = DB::select('SELECT * FROM photographersPics WHERE kindPlaceId = ' . $kindPlaceId . ' AND placeId  = ' . $placeId . ' AND ((userId = ' . $user->id . ') OR ( status = 1)) ORDER BY created_at');
     else
-        $photographerPic = DB::select('SELECT * FROM photographerspics WHERE kindPlaceId = ' . $kindPlaceId . ' AND placeId  = ' . $placeId . ' AND status = 1 ORDER BY created_at');
+        $photographerPic = DB::select('SELECT * FROM photographersPics WHERE kindPlaceId = ' . $kindPlaceId . ' AND placeId  = ' . $placeId . ' AND status = 1 ORDER BY created_at');
 
     if(count($photographerPic) < 5)
         $photographerPics = $sitePics;
