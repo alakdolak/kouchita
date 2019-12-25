@@ -831,14 +831,11 @@ if ($total == 0)
                                     <div class="prw_rup prw_hotels_flexible_album_thumb tile">
                                         <div class="albumThumbnail">
                                             <div class="prw_rup prw_common_centered_image"
-                                                 data-toggle="modal" data-target="#showingUserPicsModal">
+                                                    {{(count($userPhotos) != 0) ? ' data-toggle=modal data-target=#showingUserPicsModal' : "" }}>
                                                 <span class="imgWrap imgWrap1stTemp">
-                                                    {{--@if($userPhotos != 0)--}}
-                                                    {{--<img onclick="getPhotos(-3)" src="{{$logPhoto['pic']}}"--}}
-                                                    {{--class="centeredImg" style=" min-width:152px; "--}}
-                                                    {{--width="100%"/>--}}
-                                                    {{--@endif--}}
-                                                    <img src="{{$userPhotos[0]->pic}}" class="centeredImg" width="100%"/>
+                                                    @if(count($userPhotos) != 0)
+                                                        <img src="{{$userPhotos[0]->pic}}" class="centeredImg" width="100%"/>
+                                                    @endif
                                                 </span>
                                             </div>
                                             <div {{(count($userPhotos) != 0) ? ' data-toggle=modal data-target=#showingUserPicsModal' : "" }}  class="albumInfo">
