@@ -625,8 +625,6 @@ class AjaxController extends Controller {
 
     public function storeReview(Request $request)
     {
-        dd($request->all());
-
         $activity = Activity::where('name', 'نظر')->first();
 
         if(isset($request->placeId) && isset($request->kindPlaceId) && isset($request->code)){
@@ -721,15 +719,17 @@ class AjaxController extends Controller {
                 }
             }
 
-            $textQuestion = $request->textId;
-            $textAns = $request->textAns;
-            for($i = 0; $i < count($textAns); $i++){
-                if($textAns[$i] != null && $textAns[$i] != '' && $textQuestion[$i] != null){
-                    $newAns = new QuestionUserAns();
-                    $newAns->logId = $log->id;
-                    $newAns->questionId = $textQuestion[$i];
-                    $newAns->ans = $textAns[$i];
-                    $newAns->save();
+            if($request->textId != null && $request->textAns != null){
+                $textQuestion = $request->textId;
+                $textAns = $request->textAns;
+                for($i = 0; $i < count($textAns); $i++){
+                    if($textAns[$i] != null && $textAns[$i] != '' && $textQuestion[$i] != null){
+                        $newAns = new QuestionUserAns();
+                        $newAns->logId = $log->id;
+                        $newAns->questionId = $textQuestion[$i];
+                        $newAns->ans = $textAns[$i];
+                        $newAns->save();
+                    }
                 }
             }
 
