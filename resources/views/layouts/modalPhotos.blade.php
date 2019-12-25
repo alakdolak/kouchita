@@ -154,7 +154,8 @@
     </div>
 </div>
 
-<div class="modal fade showingPhotosModal" id="showingUserPicsModal" role="dialog">
+@if(count($userPhotos) != 0)
+    <div class="modal fade showingPhotosModal" id="showingUserPicsModal" role="dialog">
     <div class="modal-dialog" style="margin-bottom: 0px;">
         <div class="modal-content">
             <div id="showingPhotosMainDivHeader">
@@ -186,7 +187,7 @@
         </div>
     </div>
 </div>
-
+@endif
 <div class="modal fade showingPhotosModal" id="showingReviewPicsModal" role="dialog">
     <div class="modal-dialog" style="margin-bottom: 0px;">
         <div class="modal-content">
