@@ -827,6 +827,8 @@ loadReviews();
 
 function showReviews(reviews){
     var text = '';
+    document.getElementById('reviewCountSearch').innerText = reviews.length;
+
     for(let i = 0; i < reviews.length; i++){
         text += '<div class="col-xs-12 postMainDivShown position-relative">\n' +
             '<div class="commentActions" onclick="showAnswersActionBox(this)">\n' +

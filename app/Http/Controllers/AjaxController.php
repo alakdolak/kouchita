@@ -499,7 +499,7 @@ class AjaxController extends Controller {
 
     public function reviewUploadPic(Request $request)
     {
-        $location = __DIR__ . '/../../../../assets/limbo/';
+        $location = __DIR__ . '/../../../../assets/limbo';
 
         if(!file_exists($location))
             mkdir($location);
@@ -531,7 +531,7 @@ class AjaxController extends Controller {
 
     public function reviewUploadVideo(Request $request)
     {
-        $location = __DIR__ . '/../../../../assets/limbo/';
+        $location = __DIR__ . '/../../../../assets/limbo';
 
         if(!file_exists($location))
             mkdir($location);
@@ -670,33 +670,36 @@ class AjaxController extends Controller {
             $log->save();
 
             $reviewPic = ReviewPic::where('code', $request->code)->get();
-            \DB::select('UPDATE `reviewpics` SET `logId`= ' . $log->id . ' WHERE code ="' . $request->code . '";');
+            \DB::select('UPDATE `reviewPics` SET `logId`= ' . $log->id . ' WHERE code ="' . $request->code . '";');
 
-            $location = __DIR__ . '/../../../../assets/userPhoto/' . $kindPlaceName;
-            if(!file_exists($location))
-                mkdir($location);
-            $location .= '/' . $place->file;
-            if(!file_exists($location))
-                mkdir($location);
+            if(count($reviewPic) > 0){
+                $location = __DIR__ . '/../../../../assets/userPhoto/' . $kindPlaceName;
+                if(!file_exists($location))
+                    mkdir($location);
+                $location .= '/' . $place->file;
+                if(!file_exists($location))
+                    mkdir($location);
 
-            $limboLocation = __DIR__ . '/../../../../assets/limbo/';
-            foreach ($reviewPic as $item){
-                $file = $limboLocation . $item->pic;
-                $dest = $location . '/' .  $item->pic;
-                if(file_exists($file))
-                    rename( $file , $dest);
+                $limboLocation = __DIR__ . '/../../../../assets/limbo/';
 
-                if($item->isVideo == 1){
-                    $videoArray = explode('.', $item->pic);
-                    $videoName = '';
-                    for($k = 0; $k < count($videoArray)-1; $k++)
-                        $videoName .= $videoArray[$k] . '.';
-                    $videoName .= 'png';
-
-                    $file = $limboLocation . $videoName;
-                    $dest = $location . '/' .  $videoName;
+                foreach ($reviewPic as $item){
+                    $file = $limboLocation . $item->pic;
+                    $dest = $location . '/' .  $item->pic;
                     if(file_exists($file))
                         rename( $file , $dest);
+
+                    if($item->isVideo == 1){
+                        $videoArray = explode('.', $item->pic);
+                        $videoName = '';
+                        for($k = 0; $k < count($videoArray)-1; $k++)
+                            $videoName .= $videoArray[$k] . '.';
+                        $videoName .= 'png';
+
+                        $file = $limboLocation . $videoName;
+                        $dest = $location . '/' .  $videoName;
+                        if(file_exists($file))
+                            rename( $file , $dest);
+                    }
                 }
             }
 
@@ -716,15 +719,17 @@ class AjaxController extends Controller {
                 }
             }
 
-            $textQuestion = $request->textId;
-            $textAns = $request->textAns;
-            for($i = 0; $i < count($textAns); $i++){
-                if($textAns[$i] != null && $textAns[$i] != '' && $textQuestion[$i] != null){
-                    $newAns = new QuestionUserAns();
-                    $newAns->logId = $log->id;
-                    $newAns->questionId = $textQuestion[$i];
-                    $newAns->ans = $textAns[$i];
-                    $newAns->save();
+            if($request->textId != null && $request->textAns != null){
+                $textQuestion = $request->textId;
+                $textAns = $request->textAns;
+                for($i = 0; $i < count($textAns); $i++){
+                    if($textAns[$i] != null && $textAns[$i] != '' && $textQuestion[$i] != null){
+                        $newAns = new QuestionUserAns();
+                        $newAns->logId = $log->id;
+                        $newAns->questionId = $textQuestion[$i];
+                        $newAns->ans = $textAns[$i];
+                        $newAns->save();
+                    }
                 }
             }
 
@@ -885,7 +890,7 @@ class AjaxController extends Controller {
                             }
                         }
 
-                        $item->ans = \DB::select('SELECT us.logId, us.questionId, us.ans, qus.id, qus.description, qus.ansType FROM questionuserans AS us , questions AS qus WHERE us.logId = ' . $item->id . ' AND qus.id = us.questionId ORDER BY qus.ansType');
+                        $item->ans = \DB::select('SELECT us.logId, us.questionId, us.ans, qus.id, qus.description, qus.ansType FROM questionUserAns AS us , questions AS qus WHERE us.logId = ' . $item->id . ' AND qus.id = us.questionId ORDER BY qus.ansType');
                         if (count($item->ans) != 0) {
                             foreach ($item->ans as $item2) {
                                 if ($item2->ansType == 'multi') {

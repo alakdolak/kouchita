@@ -800,9 +800,9 @@ function getAllPlacePicsByKind($kindPlaceId, $placeId){
 
     $photographerPics = array();
     if(\auth()->check())
-        $photographerPic = DB::select('SELECT * FROM photographerspics WHERE kindPlaceId = ' . $kindPlaceId . ' AND placeId  = ' . $placeId . ' AND ((userId = ' . $user->id . ') OR ( status = 1)) ORDER BY created_at');
+        $photographerPic = DB::select('SELECT * FROM photographersPics WHERE kindPlaceId = ' . $kindPlaceId . ' AND placeId  = ' . $placeId . ' AND ((userId = ' . $user->id . ') OR ( status = 1)) ORDER BY created_at');
     else
-        $photographerPic = DB::select('SELECT * FROM photographerspics WHERE kindPlaceId = ' . $kindPlaceId . ' AND placeId  = ' . $placeId . ' AND status = 1 ORDER BY created_at');
+        $photographerPic = DB::select('SELECT * FROM photographersPics WHERE kindPlaceId = ' . $kindPlaceId . ' AND placeId  = ' . $placeId . ' AND status = 1 ORDER BY created_at');
 
     if(count($photographerPic) < 5)
         $photographerPics = $sitePics;
@@ -916,8 +916,8 @@ function getAnsToComments($logId){
                 $ansToReview[$i]->comment = getAnsToComments($ansToReview[$i]->id);
         }
 
-        $likeLogIds = DB::select('SELECT COUNT(RFB.like) AS likeCount, RFB.logId FROM reviewfeedback AS RFB WHERE RFB.logId IN (' . implode(",", $logIds) . ') AND RFB.like = 1 GROUP BY RFB.logId');
-        $dislikeLogIds = DB::select('SELECT COUNT(RFB.like) AS dislikeCount, RFB.logId FROM reviewfeedback AS RFB WHERE RFB.logId IN (' . implode(",", $logIds) . ') AND RFB.like = -1 GROUP BY RFB.logId');
+        $likeLogIds = DB::select('SELECT COUNT(RFB.like) AS likeCount, RFB.logId FROM reviewFeedBack AS RFB WHERE RFB.logId IN (' . implode(",", $logIds) . ') AND RFB.like = 1 GROUP BY RFB.logId');
+        $dislikeLogIds = DB::select('SELECT COUNT(RFB.like) AS dislikeCount, RFB.logId FROM reviewFeedBack AS RFB WHERE RFB.logId IN (' . implode(",", $logIds) . ') AND RFB.like = -1 GROUP BY RFB.logId');
         $ansToReviewUser = DB::select('SELECT * FROM users WHERE id IN (' . implode(",", $ansToReviewUserId) . ')');
 
         for ($i = 0; $i < count($ansToReview); $i++) {

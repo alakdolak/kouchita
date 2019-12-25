@@ -265,7 +265,7 @@ if ($total == 0)
                                             @for($i = 0; $i < count($item->ans); $i++)
                                                 <label for="radioAns_{{$item->id}}_{{$item->ans[$i]->id}}">
                                                     <b id="radioAnsStyle_{{$item->id}}_{{$item->ans[$i]->id}}"
-                                                       class="filterChoices">
+                                                       class="filterChoices multiSelectAns">
                                                         {{$item->ans[$i]->ans}}
                                                     </b>
                                                 </label>
@@ -830,18 +830,17 @@ if ($total == 0)
                                 <div class="tileWrap">
                                     <div class="prw_rup prw_hotels_flexible_album_thumb tile">
                                         <div class="albumThumbnail">
-                                            <div class="prw_rup prw_common_centered_image">
+                                            <div class="prw_rup prw_common_centered_image"
+                                                    {{(count($userPhotos) != 0) ? ' data-toggle=modal data-target=#showingUserPicsModal' : "" }}>
                                                 <span class="imgWrap imgWrap1stTemp">
-                                                    {{--@if($userPhotos != 0)--}}
-                                                    {{--<img onclick="getPhotos(-3)" src="{{$logPhoto['pic']}}"--}}
-                                                    {{--class="centeredImg" style=" min-width:152px; "--}}
-                                                    {{--width="100%"/>--}}
-                                                    {{--@endif--}}
+                                                    @if(count($userPhotos) != 0)
+                                                        <img src="{{$userPhotos[0]->pic}}" class="centeredImg" width="100%"/>
+                                                    @endif
                                                 </span>
                                             </div>
-                                            <div {{($userPhotos != 0) ? "onclick=getPhotos(-3)" : "" }}  class="albumInfo">
+                                            <div {{(count($userPhotos) != 0) ? ' data-toggle=modal data-target=#showingUserPicsModal' : "" }}  class="albumInfo">
                                                 <span class="ui_icon camera">&nbsp;</span>عکس‌های
-                                                کاربران - {{$userPhotos}}
+                                                کاربران - {{count($userPhotos)}}
                                             </div>
                                         </div>
                                     </div>
@@ -1570,7 +1569,7 @@ if ($total == 0)
                                     <h3 class="block_title">پست‌ها را دقیق‌تر ببینید </h3>
                                 </div>
                                 <div class="display-inline-block full-width font-size-15">
-                                    تعداد 2000 پست، 3500 نظر و 270 کاربر مختلف
+                                    تعداد <span id="reviewCountSearch"></span> پست، <span id="reviewCommentCount"></span> نظر و <span id="reviewUserCount"></span> کاربر مختلف
                                 </div>
                                 <div class="filterHelpText">
                                     با استفاده از گزینه‌های زیر نتایج را محدودتر کرده و راحت‌تر مطلب مورد نظر خود را
@@ -1581,43 +1580,21 @@ if ($total == 0)
                                     </div>
                                 </div>
                                 <div class="filterBarDivs">
-                                    <div class="visitKindTypeFilter filterTypeDiv">
+
+                                    @foreach($multiQuestion as $key => $item)
+                                        <div class="visitKindTypeFilter filterTypeDiv">
                                         <span class="float-right line-height-2">
-                                            این مکان چگونه بازدید شده است؟
+                                            {{$item->description}}
                                         </span>
-                                        <span class="dark-blue font-weight-500 float-right line-height-2">حذف فیلتر</span>
+                                        <span class="dark-blue font-weight-500 float-right line-height-2" style="cursor: pointer">حذف فیلتر</span>
                                         <div class="clear-both"></div>
                                         <center>
-                                            <b class="filterChoices">با دوستان</b><!--
-                                        --><b class="filterChoices">با خانواده</b><!--
-                                        --><b class="filterChoices">تنها</b><!--
-                                        --><b class="filterChoices">با کودک</b>
+                                            @foreach($item->ans as $item2 )
+                                                <b class="filterChoices">{{$item2->ans}}</b>
+                                            @endforeach
                                         </center>
                                     </div>
-                                    <div class="dateTypePostsFilter filterTypeDiv">
-                                        <span class="float-right line-height-2">
-                                            این مکان کی بازدید شده است؟
-                                        </span>
-                                        <div class="clear-both"></div>
-                                        <center>
-                                            <b class="filterChoices">بهار</b><!--
-                                        --><b class="filterChoices">تابستان</b><!--
-                                        --><b class="filterChoices">پاییز</b><!--
-                                        --><b class="filterChoices">زمستان</b>
-                                        </center>
-                                    </div>
-                                    <div class="cityTypePostsFilter filterTypeDiv">
-                                        <span class="float-right line-height-2">
-                                            این مکان از کجا بازدید شده است؟
-                                        </span>
-                                        <div class="clear-both"></div>
-                                        <center>
-                                            <b class="filterChoices">تهران</b><!--
-                                        --><b class="filterChoices">کرج</b><!--
-                                        --><b class="filterChoices">رشت</b><!--
-                                        --><b class="filterChoices">شهرکرد</b>
-                                        </center>
-                                    </div>
+                                    @endforeach
                                     <div class="photoTypePostsFilter filterTypeDiv">
                                         <span class="float-right line-height-2">
                                             نمایش پست‌های دارای عکس
@@ -1631,9 +1608,11 @@ if ($total == 0)
                                         --><b class="filterChoices">تنها دارای فیلم و عکس</b>
                                         </center>
                                     </div>
-                                    <div class="commentsRatesFilter filterTypeDiv">
+
+                                    @foreach($rateQuestion as $index => $item)
+                                        <div class="commentsRatesFilter filterTypeDiv">
                                         <span class="float-right line-height-205">
-                                            چقدر راضی بودند؟
+                                            {{$item->description}}
                                         </span>
                                         <div class="clear-both"></div>
                                         <center>
@@ -1643,18 +1622,63 @@ if ($total == 0)
                                                         {{--                                        <span class="ui_bubble_rating bubble_10 font-size-30 color-yellow"--}}
                                                         {{--                                              property="ratingValue" content="1" alt='1 of 5 bubbles'></span>--}}
                                                         <div class="ui_star_rating stars_10 font-size-25">
-                                                            <span class="starRatingGrey"></span>
-                                                            <span class="starRatingGrey"></span>
-                                                            <span class="starRatingGrey"></span>
-                                                            <span class="starRatingGrey"></span>
-                                                            <span class="starRatingGold"></span>
+                                                            <span id="filterStar_1_{{$item->id}}" class="starRatingGold" onmouseenter="showStar(1, {{$item->id}})" onmouseleave="removeStar(1, {{$item->id}})" onclick="selectFilterStar(1, {{$item->id}})"></span>
+                                                            <span id="filterStar_2_{{$item->id}}" class="starRatingGrey" onmouseenter="showStar(2, {{$item->id}})" onmouseleave="removeStar(2, {{$item->id}})" onclick="selectFilterStar(2, {{$item->id}})"></span>
+                                                            <span id="filterStar_3_{{$item->id}}" class="starRatingGrey" onmouseenter="showStar(3, {{$item->id}})" onmouseleave="removeStar(3, {{$item->id}})" onclick="selectFilterStar(3, {{$item->id}})"></span>
+                                                            <span id="filterStar_4_{{$item->id}}" class="starRatingGrey" onmouseenter="showStar(4, {{$item->id}})" onmouseleave="removeStar(4, {{$item->id}})" onclick="selectFilterStar(4, {{$item->id}})"></span>
+                                                            <span id="filterStar_5_{{$item->id}}" class="starRatingGrey" onmouseenter="showStar(5, {{$item->id}})" onmouseleave="removeStar(5, {{$item->id}})" onclick="selectFilterStar(5, {{$item->id}})"></span>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="ratingTranslationDiv">اصلاً راضی نبودم</div>
+                                            <div id="filterStarText_{{$item->id}}" class="ratingTranslationDiv">اصلاً راضی نبودم</div>
                                         </center>
                                     </div>
+                                    @endforeach
+
+                                        <script>
+                                            function showStar(_star, _id){
+                                                for(i = 1; i < 6; i++){
+                                                    if(i <= _star) {
+                                                        document.getElementById('filterStar_' + i + '_' + _id).classList.remove('starRatingGrey');
+                                                        document.getElementById('filterStar_' + i + '_' + _id).classList.add('starRatingGold');
+                                                    }
+                                                    else{
+                                                        document.getElementById('filterStar_' + i + '_' + _id).classList.remove('starRatingGold');
+                                                        document.getElementById('filterStar_' + i + '_' + _id).classList.add('starRatingGrey');
+                                                    }
+                                                }
+
+                                                var starText = document.getElementById('filterStarText_' + _id);
+                                                switch (_star){
+                                                    case 1:
+                                                        starText.innerText = 'اصلا راضی نبودم';
+                                                        break;
+                                                    case 2:
+                                                        starText.innerText = 'بد نبود';
+                                                        break;
+                                                    case 3:
+                                                        starText.innerText = 'معمولی بود';
+                                                        break;
+                                                    case 4:
+                                                        starText.innerText = 'خوب بود';
+                                                        break;
+                                                    case 5:
+                                                        starText.innerText = 'عالی بود';
+                                                        break;
+
+                                                }
+                                            }
+
+                                            function removeStar(_star, _id){
+
+                                            }
+
+                                            function selectFilterStar(_star, _id){
+
+                                            }
+                                        </script>
+
                                     <div class="searchFilter filterTypeDiv">
                                     <span class="float-right line-height-205">
                                         جست و جو کنید
@@ -1667,6 +1691,7 @@ if ($total == 0)
                                             </div>
                                         </center>
                                     </div>
+
                                 </div>
                             </div>
                             <center class="col-xs-12 adsMainDiv">
@@ -2346,10 +2371,12 @@ if ($total == 0)
         }
 
         function showRatingDetails(element) {
-            $(element).parent().next().toggle();
-            $(element).children().children().toggleClass('glyphicon-triangle-bottom');
-            $(element).children().children().toggleClass('glyphicon-triangle-top')
-            $(element).parent().toggleClass('mg-bt-10');
+            if($(element).parent().next().hasClass('commentRatingsDetailsBox')) {
+                $(element).parent().next().toggle();
+                $(element).children().children().toggleClass('glyphicon-triangle-bottom');
+                $(element).children().children().toggleClass('glyphicon-triangle-top')
+                $(element).parent().toggleClass('mg-bt-10');
+            }
         }
 
         function filterChoices(element) {
@@ -2511,6 +2538,7 @@ if ($total == 0)
                 </div>
             </div>
         </div>
+
         <script>
             var player;
             (function (window, videojs) {
@@ -2540,6 +2568,7 @@ if ($total == 0)
         var hasLogin = '{{$hasLogin}}';
         var userCode = '{{$userCode}}';
         var userPic = '{{$userPic}}';
+        var userPhotos = {!! $userPhotosJson !!};
 
         var ansToReviewUrl = '{{route('ansReview')}}';
         var likeReviewUrl = '{{route('likeReview')}}';
@@ -2563,7 +2592,7 @@ if ($total == 0)
         var placeId = '{{$place->id}}';
         var kindPlaceId = '{{$kindPlaceId}}';
         var getCommentsCount = '{{route('getCommentsCount')}}';
-        var totalPhotos = '{{count($sitePics) + $userPhotos}}';
+        var totalPhotos = '{{count($sitePics) + count($userPhotos)}}';
         var sitePhotosCount = {{count($sitePics)}};
         var opOnComment = '{{route('opOnComment')}}';
         var askQuestionDir = '{{route('askQuestion')}}';

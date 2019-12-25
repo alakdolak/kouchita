@@ -154,6 +154,40 @@
     </div>
 </div>
 
+@if(count($userPhotos) != 0)
+    <div class="modal fade showingPhotosModal" id="showingUserPicsModal" role="dialog">
+    <div class="modal-dialog" style="margin-bottom: 0px;">
+        <div class="modal-content">
+            <div id="showingPhotosMainDivHeader">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <div class="showingPhotosTitle">نمایش عکس‌ها کاربران</div>
+            </div>
+            <div class="commentWriterDetailsShow">
+                <div class="circleBase type2 commentWriterPicShow">
+                    <img src="{{$userPhotos[0]->userPic}}" class="koochitaCircleLogo">
+                </div>
+                <div class="commentWriterExperienceDetails">
+                    <b class="userProfileName">{{$userPhotos[0]->username}}</b>
+                </div>
+            </div>
+            <div class="clear-both"></div>
+            <div class="col-xs-10 leftColPhotosModalMainDiv">
+                <div class="selectedPhotoShowingModal">
+                    <img id="mainUserSliderPic" src="{{$userPhotos[0]->pic}}" style="width: 100%; height: 100%;">
+                </div>
+            </div>
+            <div class="col-xs-2 rightColPhotosModalMainDiv" >
+                @for($i = 0; $i < count($userPhotos); $i++)
+                    <div class="rightColPhotosShowingModal" onclick="changeUserSlidePic({{$i}})" style="cursor: pointer;">
+                        <img src="{{$userPhotos[$i]->pic}}" style="width: 100%; height: 100%;">
+                    </div>
+                @endfor
+            </div>
+            <div class="photosDescriptionShowingModal"></div>
+        </div>
+    </div>
+</div>
+@endif
 <div class="modal fade showingPhotosModal" id="showingReviewPicsModal" role="dialog">
     <div class="modal-dialog" style="margin-bottom: 0px;">
         <div class="modal-content">
@@ -181,6 +215,10 @@
 </div>
 
 <script>
+    function changeUserSlidePic(_i){
+        document.getElementById('mainUserSliderPic').src = userPhotos[_i]['pic'];
+    }
+
     function likePostsComment(element) {
         $(element).toggleClass('color-red');
         $(element).children("span.firstIcon").toggle();
