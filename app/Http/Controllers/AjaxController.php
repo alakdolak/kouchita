@@ -499,9 +499,7 @@ class AjaxController extends Controller {
 
     public function reviewUploadPic(Request $request)
     {
-        $location = __DIR__ . '/../../../../assets';
-
-        dd(scandir(__DIR__  .'/../../../../'), scandir(__DIR__  .'/../../../'));
+        $location = __DIR__ . '/../../../../assets/limbo';
 
         if(!file_exists($location))
             mkdir($location);
@@ -887,7 +885,7 @@ class AjaxController extends Controller {
                             }
                         }
 
-                        $item->ans = \DB::select('SELECT us.logId, us.questionId, us.ans, qus.id, qus.description, qus.ansType FROM questionAns AS us , questions AS qus WHERE us.logId = ' . $item->id . ' AND qus.id = us.questionId ORDER BY qus.ansType');
+                        $item->ans = \DB::select('SELECT us.logId, us.questionId, us.ans, qus.id, qus.description, qus.ansType FROM questionUserAns AS us , questions AS qus WHERE us.logId = ' . $item->id . ' AND qus.id = us.questionId ORDER BY qus.ansType');
                         if (count($item->ans) != 0) {
                             foreach ($item->ans as $item2) {
                                 if ($item2->ansType == 'multi') {

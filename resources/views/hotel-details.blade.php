@@ -830,18 +830,20 @@ if ($total == 0)
                                 <div class="tileWrap">
                                     <div class="prw_rup prw_hotels_flexible_album_thumb tile">
                                         <div class="albumThumbnail">
-                                            <div class="prw_rup prw_common_centered_image">
+                                            <div class="prw_rup prw_common_centered_image"
+                                                 data-toggle="modal" data-target="#showingUserPicsModal">
                                                 <span class="imgWrap imgWrap1stTemp">
                                                     {{--@if($userPhotos != 0)--}}
                                                     {{--<img onclick="getPhotos(-3)" src="{{$logPhoto['pic']}}"--}}
                                                     {{--class="centeredImg" style=" min-width:152px; "--}}
                                                     {{--width="100%"/>--}}
                                                     {{--@endif--}}
+                                                    <img src="{{$userPhotos[0]->pic}}" class="centeredImg" width="100%"/>
                                                 </span>
                                             </div>
-                                            <div {{($userPhotos != 0) ? "onclick=getPhotos(-3)" : "" }}  class="albumInfo">
+                                            <div {{(count($userPhotos) != 0) ? ' data-toggle=modal data-target=#showingUserPicsModal' : "" }}  class="albumInfo">
                                                 <span class="ui_icon camera">&nbsp;</span>عکس‌های
-                                                کاربران - {{$userPhotos}}
+                                                کاربران - {{count($userPhotos)}}
                                             </div>
                                         </div>
                                     </div>
@@ -2511,6 +2513,7 @@ if ($total == 0)
                 </div>
             </div>
         </div>
+
         <script>
             var player;
             (function (window, videojs) {
@@ -2540,6 +2543,7 @@ if ($total == 0)
         var hasLogin = '{{$hasLogin}}';
         var userCode = '{{$userCode}}';
         var userPic = '{{$userPic}}';
+        var userPhotos = {!! $userPhotosJson !!};
 
         var ansToReviewUrl = '{{route('ansReview')}}';
         var likeReviewUrl = '{{route('likeReview')}}';
@@ -2563,7 +2567,7 @@ if ($total == 0)
         var placeId = '{{$place->id}}';
         var kindPlaceId = '{{$kindPlaceId}}';
         var getCommentsCount = '{{route('getCommentsCount')}}';
-        var totalPhotos = '{{count($sitePics) + $userPhotos}}';
+        var totalPhotos = '{{count($sitePics) + count($userPhotos)}}';
         var sitePhotosCount = {{count($sitePics)}};
         var opOnComment = '{{route('opOnComment')}}';
         var askQuestionDir = '{{route('askQuestion')}}';
