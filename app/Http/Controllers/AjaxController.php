@@ -501,7 +501,7 @@ class AjaxController extends Controller {
     {
         $location = __DIR__ . '/../../../../assets/limbo';
 
-dd(file_exists($location));
+dd(file_exists($location), $location);
 
         if(!file_exists($location))
             mkdir($location);
