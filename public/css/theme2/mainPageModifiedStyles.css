@@ -261,7 +261,7 @@
     right: 6%;
     top: 20%;
     width: 68%;
-    z-index: 10000000;
+    z-index: 100;
     direction: rtl;
 }
 
@@ -270,7 +270,7 @@
     top: 44%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 10000000;
+    z-index: 100;
 }
 
 .mainDivSearchInputPhonePage > div:nth-child(1) {

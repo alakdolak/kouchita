@@ -22,7 +22,6 @@ function chooseState(e) {
     })
 }
 
-
 function chooseStateAmaken() {
     $.ajax({
         type: "post",
@@ -215,3 +214,9 @@ $("body").on("click", function () {
 $(".global-nav-actions").on("click", function (e) {
     e.stopPropagation()
 });
+
+// phone functions
+
+function lp_selectMenu(e) {
+
+}

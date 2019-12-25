@@ -1,6 +1,7 @@
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/middleBanner.css')}}'/>
 
-<div style="clear: both;اصطلاحات محلی"></div>
+<div style="clear: both;"></div>
+
 <div class="ui_container">
     <div class="ppr_rup ppr_priv_homepage_shelves">
 
@@ -217,8 +218,8 @@
                     {{--<div class="textIcon">بلیط</div>--}}
                 {{--</a>--}}
             </div>
-            <div class="phoneMenuBar row">
-                <div>
+            <div class="phoneMenuBar">
+                <div data-toggle="modal" data-target="#leftPopUp">
                     <span>سایر امکانات</span>
                     <span class="ui_icon more-horizontal"></span>
                 </div>
@@ -230,7 +231,7 @@
                     <span>جست‌و‌جو</span>
                     <span class="ui_icon search"></span>
                 </div>
-                <div>
+                <div data-toggle="modal" data-target="#rightPopUp">
                     <span>ورود</span>
                     <span class="ui_icon member"></span>
                 </div>
@@ -239,5 +240,68 @@
         </div>
         @include('layouts.mainSuggestions')
     </div>
+</div>
 
+<div class="container">
+    <!-- The Modals -->
+
+    <div class="modal fade" id="leftPopUp">
+        <div class="mainPopUp leftPopUp">
+
+            <div class="lp_phoneMenuBar">
+                <div class="lp_eachMenu">
+                    <div class="ui_icon search lp_icons"></div>
+                    <div>بازدیدهای اخیر</div>
+                </div>
+                <div class="lp_eachMenu" onclick="lp_selectMenu(this)">
+                    <div class="ui_icon notification-bell lp_icons"></div>
+                    <div>اعلانات</div>
+                </div>
+                <div class="lp_eachMenu" onclick="lp_selectMenu(this)">
+                    <div class="ui_icon casino lp_icons"></div>
+                    <div>نشان‌گذاری شده‌ها</div>
+                </div>
+                <div class="lp_eachMenu" onclick="lp_selectMenu(this)">
+                    <div class="ui_icon my-trips lp_icons"></div>
+                    <div>سفرهای من</div>
+                </div>
+            </div>
+
+            <div id="lp_recentlyViews">
+                <button type="button" class="btn btn-warning lp_btns">صفحه پروفایل</button>
+                <button type="button" class="btn btn-primary lp_btns">صفحه من</button>
+                <button type="button" class="btn btn-danger lp_btns">خروج</button>
+                <a style="font-size: 1.25em">ویرایش اطلاعات</a>
+            </div>
+
+            <div class="hidden" id="lp_masseges">
+                <button type="button" class="btn btn-warning">lp_masseges</button>
+                <button type="button" class="btn btn-primary">lp_masseges</button>
+                <button type="button" class="btn btn-danger">lp_masseges</button>
+                <a>ویرایش اطلاعات</a>
+            </div>
+
+            <div class="hidden" id="lp_mark">
+                <button type="button" class="btn btn-warning">lp_mark</button>
+                <button type="button" class="btn btn-primary">lp_mark</button>
+                <button type="button" class="btn btn-danger">lp_mark</button>
+                <a>ویرایش اطلاعات</a>
+            </div>
+
+            <div class="hidden" id="lp_myTravel">
+                <button type="button" class="btn btn-warning">lp_myTravel</button>
+                <button type="button" class="btn btn-primary">lp_myTravel</button>
+                <button type="button" class="btn btn-danger">lp_myTravel</button>
+                <a>ویرایش اطلاعات</a>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modal fade" id="rightPopUp">
+        <div class="mainPopUp rightPopUp">
+        </div>
+    </div>
+
+    rightPopUp
 </div>
