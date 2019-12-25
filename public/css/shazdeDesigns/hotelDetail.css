@@ -2654,6 +2654,9 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 .filterChoices:hover {
     background-color: #fcc156;
 }
+.filterChoosed{
+    background-color: #fcc156 !important;
+}
 
 .photoTypePostsFilter .filterChoices {
     width: 44%;

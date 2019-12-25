@@ -830,7 +830,7 @@ function showReviews(reviews){
     document.getElementById('reviewCountSearch').innerText = reviews.length;
 
     for(let i = 0; i < reviews.length; i++){
-        text += '<div class="col-xs-12 postMainDivShown position-relative">\n' +
+        text += '<div id="review_' + reviews[i]["id"] + '" class="col-xs-12 postMainDivShown position-relative">\n' +
             '<div class="commentActions" onclick="showAnswersActionBox(this)">\n' +
             '<span class="commentActionsIcon"></span>\n' +
             '</div>\n' +

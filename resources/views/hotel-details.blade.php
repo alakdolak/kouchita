@@ -1586,15 +1586,16 @@ if ($total == 0)
                                         <span class="float-right line-height-2">
                                             {{$item->description}}
                                         </span>
-                                        <span class="dark-blue font-weight-500 float-right line-height-2" style="cursor: pointer">حذف فیلتر</span>
+                                        <span class="dark-blue font-weight-500 float-right line-height-2" onclick="removeFilter({{$item->id}})" style="cursor: pointer">حذف فیلتر</span>
                                         <div class="clear-both"></div>
                                         <center>
                                             @foreach($item->ans as $item2 )
-                                                <b class="filterChoices">{{$item2->ans}}</b>
+                                                <b id="ansMultiFilter_{{$item2->id}}" class="filterChoices" onclick="chooseMutliFilter({{$item->id}}, {{$item2->id}})">{{$item2->ans}}</b>
                                             @endforeach
                                         </center>
                                     </div>
                                     @endforeach
+
                                     <div class="photoTypePostsFilter filterTypeDiv">
                                         <span class="float-right line-height-2">
                                             نمایش پست‌های دارای عکس
@@ -1622,11 +1623,11 @@ if ($total == 0)
                                                         {{--                                        <span class="ui_bubble_rating bubble_10 font-size-30 color-yellow"--}}
                                                         {{--                                              property="ratingValue" content="1" alt='1 of 5 bubbles'></span>--}}
                                                         <div class="ui_star_rating stars_10 font-size-25">
-                                                            <span id="filterStar_1_{{$item->id}}" class="starRatingGold" onmouseenter="showStar(1, {{$item->id}})" onmouseleave="removeStar(1, {{$item->id}})" onclick="selectFilterStar(1, {{$item->id}})"></span>
-                                                            <span id="filterStar_2_{{$item->id}}" class="starRatingGrey" onmouseenter="showStar(2, {{$item->id}})" onmouseleave="removeStar(2, {{$item->id}})" onclick="selectFilterStar(2, {{$item->id}})"></span>
-                                                            <span id="filterStar_3_{{$item->id}}" class="starRatingGrey" onmouseenter="showStar(3, {{$item->id}})" onmouseleave="removeStar(3, {{$item->id}})" onclick="selectFilterStar(3, {{$item->id}})"></span>
-                                                            <span id="filterStar_4_{{$item->id}}" class="starRatingGrey" onmouseenter="showStar(4, {{$item->id}})" onmouseleave="removeStar(4, {{$item->id}})" onclick="selectFilterStar(4, {{$item->id}})"></span>
-                                                            <span id="filterStar_5_{{$item->id}}" class="starRatingGrey" onmouseenter="showStar(5, {{$item->id}})" onmouseleave="removeStar(5, {{$item->id}})" onclick="selectFilterStar(5, {{$item->id}})"></span>
+                                                            <span id="filterStar_1_{{$item->id}}" class="starRatingGold" onmouseenter="showStar(1, {{$item->id}})" onmouseleave="removeStar({{$item->id}}, {{$index}})" onclick="selectFilterStar(1, {{$item->id}}, {{$index}})"></span>
+                                                            <span id="filterStar_2_{{$item->id}}" class="starRatingGrey" onmouseenter="showStar(2, {{$item->id}})" onmouseleave="removeStar({{$item->id}}, {{$index}})" onclick="selectFilterStar(2, {{$item->id}}, {{$index}})"></span>
+                                                            <span id="filterStar_3_{{$item->id}}" class="starRatingGrey" onmouseenter="showStar(3, {{$item->id}})" onmouseleave="removeStar({{$item->id}}, {{$index}})" onclick="selectFilterStar(3, {{$item->id}}, {{$index}})"></span>
+                                                            <span id="filterStar_4_{{$item->id}}" class="starRatingGrey" onmouseenter="showStar(4, {{$item->id}})" onmouseleave="removeStar({{$item->id}}, {{$index}})" onclick="selectFilterStar(4, {{$item->id}}, {{$index}})"></span>
+                                                            <span id="filterStar_5_{{$item->id}}" class="starRatingGrey" onmouseenter="showStar(5, {{$item->id}})" onmouseleave="removeStar({{$item->id}}, {{$index}})" onclick="selectFilterStar(5, {{$item->id}}, {{$index}})"></span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1636,48 +1637,104 @@ if ($total == 0)
                                     </div>
                                     @endforeach
 
-                                        <script>
-                                            function showStar(_star, _id){
-                                                for(i = 1; i < 6; i++){
-                                                    if(i <= _star) {
-                                                        document.getElementById('filterStar_' + i + '_' + _id).classList.remove('starRatingGrey');
-                                                        document.getElementById('filterStar_' + i + '_' + _id).classList.add('starRatingGold');
-                                                    }
-                                                    else{
-                                                        document.getElementById('filterStar_' + i + '_' + _id).classList.remove('starRatingGold');
-                                                        document.getElementById('filterStar_' + i + '_' + _id).classList.add('starRatingGrey');
-                                                    }
+                                    <script>
+                                        var filterRateAns = [];
+                                        var filterMultiAns = [];
+
+                                        function showStar(_star, _id){
+                                            for(i = 1; i < 6; i++){
+                                                if(i <= _star) {
+                                                    document.getElementById('filterStar_' + i + '_' + _id).classList.remove('starRatingGrey');
+                                                    document.getElementById('filterStar_' + i + '_' + _id).classList.add('starRatingGold');
                                                 }
-
-                                                var starText = document.getElementById('filterStarText_' + _id);
-                                                switch (_star){
-                                                    case 1:
-                                                        starText.innerText = 'اصلا راضی نبودم';
-                                                        break;
-                                                    case 2:
-                                                        starText.innerText = 'بد نبود';
-                                                        break;
-                                                    case 3:
-                                                        starText.innerText = 'معمولی بود';
-                                                        break;
-                                                    case 4:
-                                                        starText.innerText = 'خوب بود';
-                                                        break;
-                                                    case 5:
-                                                        starText.innerText = 'عالی بود';
-                                                        break;
-
+                                                else{
+                                                    document.getElementById('filterStar_' + i + '_' + _id).classList.remove('starRatingGold');
+                                                    document.getElementById('filterStar_' + i + '_' + _id).classList.add('starRatingGrey');
                                                 }
                                             }
 
-                                            function removeStar(_star, _id){
+                                            var starText = document.getElementById('filterStarText_' + _id);
+                                            switch (_star){
+                                                case 1:
+                                                    starText.innerText = 'اصلا راضی نبودم';
+                                                    break;
+                                                case 2:
+                                                    starText.innerText = 'بد نبود';
+                                                    break;
+                                                case 3:
+                                                    starText.innerText = 'معمولی بود';
+                                                    break;
+                                                case 4:
+                                                    starText.innerText = 'خوب بود';
+                                                    break;
+                                                case 5:
+                                                    starText.innerText = 'عالی بود';
+                                                    break;
 
                                             }
+                                        }
 
-                                            function selectFilterStar(_star, _id){
+                                        function removeStar( _id){
+                                            var star = 1;
+                                            if(filterRateAns[_id] != null)
+                                                star = filterRateAns[_id];
 
+                                            for(i = 1; i < 6; i++){
+                                                if(i <= star) {
+                                                    document.getElementById('filterStar_' + i + '_' + _id).classList.remove('starRatingGrey');
+                                                    document.getElementById('filterStar_' + i + '_' + _id).classList.add('starRatingGold');
+                                                }
+                                                else{
+                                                    document.getElementById('filterStar_' + i + '_' + _id).classList.remove('starRatingGold');
+                                                    document.getElementById('filterStar_' + i + '_' + _id).classList.add('starRatingGrey');
+                                                }
                                             }
-                                        </script>
+
+                                            var starText = document.getElementById('filterStarText_' + _id);
+                                            switch (star){
+                                                case 1:
+                                                    starText.innerText = 'اصلا راضی نبودم';
+                                                    break;
+                                                case 2:
+                                                    starText.innerText = 'بد نبود';
+                                                    break;
+                                                case 3:
+                                                    starText.innerText = 'معمولی بود';
+                                                    break;
+                                                case 4:
+                                                    starText.innerText = 'خوب بود';
+                                                    break;
+                                                case 5:
+                                                    starText.innerText = 'عالی بود';
+                                                    break;
+                                            }
+                                        }
+
+                                        function selectFilterStar(_star, _id){
+                                            filterRateAns[_id] = _star;
+                                        }
+
+                                        function chooseMutliFilter(_qId, _aId){
+
+                                            if(filterMultiAns[_qId] != null)
+                                                document.getElementById('ansMultiFilter_' + filterMultiAns[_qId]).classList.remove('filterChoosed');
+
+                                            filterMultiAns[_qId] = _aId;
+                                            document.getElementById('ansMultiFilter_' + _aId).classList.add('filterChoosed');
+
+                                        }
+
+                                        function removeFilter(_id){
+                                            if(filterMultiAns[_id] != null)
+                                                document.getElementById('ansMultiFilter_' + filterMultiAns[_id]).classList.remove('filterChoosed');
+
+                                            filterMultiAns[_id] = null;
+                                        }
+
+                                        function doReviewFilter(){
+
+                                        }
+                                    </script>
 
                                     <div class="searchFilter filterTypeDiv">
                                     <span class="float-right line-height-205">
