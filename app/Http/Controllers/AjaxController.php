@@ -533,7 +533,7 @@ dd(file_exists($location), $location);
 
     public function reviewUploadVideo(Request $request)
     {
-        $location = __DIR__ . '/../../../../assets/limbo';
+        $location = __DIR__ . '/../../../../static/limbo';
 
         if(!file_exists($location))
             mkdir($location);
