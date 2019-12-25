@@ -3430,12 +3430,6 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     top: 43px;
 }
 
-.tabLinkMainWrapMainDivMobile {
-    top: 0;
-    width: 100%;
-    z-index: 9999 !important;
-}
-
 .tabLinkMainWrapMainDiv > a {
     display: inline-block;
     width: 25%;
@@ -3711,6 +3705,16 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     align-items: center;
     overflow: hidden;
     position: relative;
+}
+
+.affix {
+    top: 0;
+    width: 100%;
+    z-index: 9999 !important;
+}
+
+.affix + .exceptQAndADiv {
+    padding-top: 70px;
 }
 
 @media (min-width: 992px) {

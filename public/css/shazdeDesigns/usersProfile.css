@@ -651,6 +651,10 @@ body {
     float: right;
 }
 
+.answersWriterExperienceDetails > div:last-child {
+    text-align: right;
+}
+
 .userProfileNameAnswers {
     color: #0076a3;
     cursor: pointer;

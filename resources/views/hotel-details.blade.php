@@ -868,24 +868,6 @@ if ($total == 0)
                     </div>
                 </div>
 
-                <div class="tabLinkMainWrapMainDivMobile" data-spy="affix" data-offset-top="780">
-                    <div class="tabLinkMainWrapMainDiv">
-                        <a href="#bodyLinks">
-                            <button class="tabLinkMainWrap" onclick="openTab('QAndAMainDivId', this, '#4dc7bc')">سؤالات</button>
-                        </a><!--
-                     --><a href="#bodyLinks">
-                            <button class="tabLinkMainWrap" onclick="openTab('similarLocationsMainDiv', this, '#4dc7bc')">مکان‌های مشابه</button>
-                        </a><!--
-                     --><a href="#bodyLinks">
-                            <button class="tabLinkMainWrap" onclick="openTab('mainDivPlacePost', this, '#4dc7bc')">پست</button>
-                        </a><!--
-                     --><a href="#bodyLinks">
-                            <button class="tabLinkMainWrap" onclick="openTab('mobileIntroductionMainDivId', this, '#4dc7bc')" id="defaultOpenMainWrap">معرفی کلی</button>
-                        </a>
-                    </div>
-                </div>
-
-
                 <script>
                     function openTab(tabName,elmnt,fontColor) {
                         var i, tabcontent, tablinks;
@@ -905,7 +887,26 @@ if ($total == 0)
                     // Get the element with id="defaultOpen" and click on it
                     document.getElementById("defaultOpenMainWrap").style.color = "rgb(77, 199, 188)";
 
+
+
                 </script>
+
+                <div class="tabLinkMainWrapMainDivMobile" data-spy="affix" data-offset-top="753">
+                    <div class="tabLinkMainWrapMainDiv">
+                        <a href="#bodyLinks">
+                            <button class="tabLinkMainWrap" onclick="openTab('QAndAMainDivId', this, '#4dc7bc')">سؤالات</button>
+                        </a><!--
+                     --><a href="#bodyLinks">
+                            <button class="tabLinkMainWrap" onclick="openTab('similarLocationsMainDiv', this, '#4dc7bc')">مکان‌های مشابه</button>
+                        </a><!--
+                     --><a href="#bodyLinks">
+                            <button class="tabLinkMainWrap" onclick="openTab('mainDivPlacePost', this, '#4dc7bc')">پست</button>
+                        </a><!--
+                     --><a href="#bodyLinks">
+                            <button class="tabLinkMainWrap" onclick="openTab('mobileIntroductionMainDivId', this, '#4dc7bc')" id="defaultOpenMainWrap">معرفی کلی</button>
+                        </a>
+                    </div>
+                </div>
 
                 <div class="exceptQAndADiv">
                     <div class="hr_btf_wrap position-relative">
@@ -1859,6 +1860,13 @@ if ($total == 0)
 
                     </div>
                 </div>
+
+                <script>
+                    if($(window).width() < 630) {
+                        $('.tabLinkMainWrapMainDivMobile').affix({offset: {top: 930}});
+                    }
+                </script>
+
                 <div class="clear-both"></div>
 
                 @include('layouts.placeQuestions')

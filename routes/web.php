@@ -200,6 +200,10 @@ Route::get('gardeshname', function(){
     return view('gardeshname');
 });
 
+Route::get('profileUsers', function(){
+    return view('profileUsers');
+});
+
 //Route::get('mainArticle', function(){
 //    return view('mainArticle');
 //});
