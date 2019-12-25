@@ -531,7 +531,7 @@ class AjaxController extends Controller {
 
     public function reviewUploadVideo(Request $request)
     {
-        $location = __DIR__ . '/../../../../assets/limbo/';
+        $location = __DIR__ . '/../../../../assets/limbo';
 
         if(!file_exists($location))
             mkdir($location);
