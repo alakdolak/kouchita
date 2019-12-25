@@ -625,6 +625,8 @@ class AjaxController extends Controller {
 
     public function storeReview(Request $request)
     {
+        dd($request->all());
+
         $activity = Activity::where('name', 'نظر')->first();
 
         if(isset($request->placeId) && isset($request->kindPlaceId) && isset($request->code)){
@@ -671,7 +673,6 @@ class AjaxController extends Controller {
 
             $reviewPic = ReviewPic::where('code', $request->code)->get();
             \DB::select('UPDATE `reviewPics` SET `logId`= ' . $log->id . ' WHERE code ="' . $request->code . '";');
-
 
             if(count($reviewPic) > 0){
                 $location = __DIR__ . '/../../../../assets/userPhoto/' . $kindPlaceName;
