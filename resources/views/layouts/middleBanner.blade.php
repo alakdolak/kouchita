@@ -1,6 +1,7 @@
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/middleBanner.css')}}'/>
 
-<div style="clear: both;اصطلاحات محلی"></div>
+<div style="clear: both;"></div>
+
 <div class="ui_container">
     <div class="ppr_rup ppr_priv_homepage_shelves">
 
@@ -191,65 +192,116 @@
         </div>
 
         <div class="hideOnScreen row">
-            <div class="col-xs-12">
-                <a class="col-xs-4 squareDiv" href="{{route('mainMode', ['mode' => 'amaken'])}}">
-                    <div class="phoneIcon atraction"></div>
-                    <div class="textIcon">جاذبه ها</div>
-                </a>
-                <a class="col-xs-4 squareDiv" href="{{route('tickets')}}">
-                    <div class="phoneIcon ticket"></div>
-                    <div class="textIcon">بلیط</div>
-                </a>
-                <a class="col-xs-4 squareDiv" href="{{route('main')}}">
-                    <div class="phoneIcon hotel"></div>
-                    <div class="textIcon">هتل</div>
-                </a>
-                {{--<div class="col-xs-4 squareDiv" onclick="$('#phoneSearchPopUp').removeClass('hidden')">--}}
-                {{--<div class="phoneIcon atraction"></div>--}}
-                {{--<div class="textIcon">جاذبه ها</div>--}}
-                {{--</div>--}}
-                {{--<div class="col-xs-4 squareDiv">--}}
-                {{--<a href="{{route('tickets')}}">--}}
-                {{--<div class="phoneIcon ticket"></div>--}}
-                {{--<div class="textIcon">بلیط</div>--}}
-                {{--</a>--}}
-                {{--</div>--}}
-                {{--<div class="col-xs-4 squareDiv">--}}
-                {{--<a href="{{route('main')}}">--}}
-                {{--<div class="phoneIcon hotel"></div>--}}
-                {{--<div class="textIcon">هتل</div>--}}
-                {{--</a>--}}
-                {{--</div>--}}
-            </div>
-            <div class="clear-both"></div>
-            <div class="col-xs-12">
-                <div class="col-xs-4 squareDiv" onclick="$('#phoneSearchPopUp').removeClass('hidden')">
+            <div class="boxOFSqureDiv">
+                <div class="squareDiv" onclick="$('#phoneSearchPopUp').removeClass('hidden')">
                     <div class="phoneIcon ghazamahali"></div>
                     <div class="textIcon">غذای محلی</div>
                 </div>
-                <div class="col-xs-4 squareDiv" onclick="$('#phoneSearchPopUp').removeClass('hidden')">
+                <div class="squareDiv" onclick="$('#phoneSearchPopUp').removeClass('hidden')">
                     <div class="phoneIcon soghat"></div>
                     <div class="textIcon">سوغات</div>
                 </div>
-                <a class="col-xs-4 squareDiv" href="{{route('mainMode', ['mode' => 'restaurant'])}}" >
+                <a class="squareDiv" href="{{route('mainMode', ['mode' => 'amaken'])}}">
+                    <div class="phoneIcon atraction"></div>
+                    <div class="textIcon">جاذبه</div>
+                </a>
+                <a class="squareDiv" href="{{route('mainMode', ['mode' => 'restaurant'])}}" >
                     <div class="phoneIcon restaurant"></div>
                     <div class="textIcon">رستوران</div>
                 </a>
-                {{--<div class="col-xs-4 squareDiv">--}}
-                {{--<a href="{{route('mainMode', ['mode' => 'restaurant'])}}">--}}
-                {{--<div class="phoneIcon restaurant"></div>--}}
-                {{--<div class="textIcon">رستوران</div>--}}
+                <a class="squareDiv" href="{{route('main')}}">
+                    <div class="phoneIcon hotel"></div>
+                    <div class="textIcon">هتل</div>
+                </a>
+                {{--<a class="col-xs-4 squareDiv" href="{{route('tickets')}}">--}}
+                    {{--<div class="phoneIcon ticket"></div>--}}
+                    {{--<div class="textIcon">بلیط</div>--}}
                 {{--</a>--}}
-                {{--</div>--}}
+            </div>
+            <div class="phoneMenuBar">
+                <div data-toggle="modal" data-target="#leftPopUp">
+                    <span>سایر امکانات</span>
+                    <span class="ui_icon more-horizontal"></span>
+                </div>
+                <div>
+                    <span>ثبت نام</span>
+                    <span class="ui_icon plus-circle"></span>
+                </div>
+                <div>
+                    <span>جست‌و‌جو</span>
+                    <span class="ui_icon search"></span>
+                </div>
+                <div data-toggle="modal" data-target="#rightPopUp">
+                    <span>ورود</span>
+                    <span class="ui_icon member"></span>
+                </div>
             </div>
             <div class="clear-both"></div>
-            <div class="col-xs-4"></div>
-            <div class="col-xs-4 moreOptionsSquareDiv" onclick="$('#phoneMenuBarPopUp').removeClass('hidden')">
-                <span><span class="phoneIcon downArrow"></span>گزینه های بیشتر</span>
-            </div>
-            <div class="col-xs-4"></div>
         </div>
         @include('layouts.mainSuggestions')
     </div>
+</div>
 
+<div class="container">
+    <!-- The Modals -->
+
+    <div class="modal fade" id="leftPopUp">
+        <div class="mainPopUp leftPopUp">
+
+            <div class="lp_phoneMenuBar">
+                <div class="lp_eachMenu">
+                    <div class="ui_icon search lp_icons"></div>
+                    <div>بازدیدهای اخیر</div>
+                </div>
+                <div class="lp_eachMenu" onclick="lp_selectMenu(this)">
+                    <div class="ui_icon notification-bell lp_icons"></div>
+                    <div>اعلانات</div>
+                </div>
+                <div class="lp_eachMenu" onclick="lp_selectMenu(this)">
+                    <div class="ui_icon casino lp_icons"></div>
+                    <div>نشان‌گذاری شده‌ها</div>
+                </div>
+                <div class="lp_eachMenu" onclick="lp_selectMenu(this)">
+                    <div class="ui_icon my-trips lp_icons"></div>
+                    <div>سفرهای من</div>
+                </div>
+            </div>
+
+            <div id="lp_recentlyViews">
+                <button type="button" class="btn btn-warning lp_btns">صفحه پروفایل</button>
+                <button type="button" class="btn btn-primary lp_btns">صفحه من</button>
+                <button type="button" class="btn btn-danger lp_btns">خروج</button>
+                <a style="font-size: 1.25em">ویرایش اطلاعات</a>
+            </div>
+
+            <div class="hidden" id="lp_masseges">
+                <button type="button" class="btn btn-warning">lp_masseges</button>
+                <button type="button" class="btn btn-primary">lp_masseges</button>
+                <button type="button" class="btn btn-danger">lp_masseges</button>
+                <a>ویرایش اطلاعات</a>
+            </div>
+
+            <div class="hidden" id="lp_mark">
+                <button type="button" class="btn btn-warning">lp_mark</button>
+                <button type="button" class="btn btn-primary">lp_mark</button>
+                <button type="button" class="btn btn-danger">lp_mark</button>
+                <a>ویرایش اطلاعات</a>
+            </div>
+
+            <div class="hidden" id="lp_myTravel">
+                <button type="button" class="btn btn-warning">lp_myTravel</button>
+                <button type="button" class="btn btn-primary">lp_myTravel</button>
+                <button type="button" class="btn btn-danger">lp_myTravel</button>
+                <a>ویرایش اطلاعات</a>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modal fade" id="rightPopUp">
+        <div class="mainPopUp rightPopUp">
+        </div>
+    </div>
+
+    rightPopUp
 </div>

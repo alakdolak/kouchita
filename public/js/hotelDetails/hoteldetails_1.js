@@ -359,7 +359,14 @@ function uploadReviewPics(input){
     }
 }
 
-function uploadReviewVideo(input){
+function uploadReviewVideo(input, _is360){
+
+    var data = new FormData();
+    data.append('video', input.files[0]);
+    data.append('code', userCode);
+    data.append('isVideo', 1);
+    if(_is360 == 1)
+        data.append('is360', 1);
 
     var lastNumber = reviewPicNumber;
     var text = '<div id="reviewPic_' + reviewPicNumber + '" class="commentPhotosDiv commentPhotosAndVideos">\n' +
@@ -412,10 +419,48 @@ function uploadReviewVideo(input){
             canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
             var image = canvas.toDataURL();
             var success = image.length > 100000;
+
             if (success) {
                 var img = document.getElementById('showPic' + lastNumber);
                 img.src = image;
                 URL.revokeObjectURL(url);
+                data.append('videoPic', image);
+
+                var $progressBar = $('#progressBarReviewPic' + reviewPicNumber);
+
+                $.ajax({
+                    type: 'post',
+                    url: reviewUploadVideo,
+                    data: data,
+                    processData: false,
+                    contentType: false,
+                    xhr: function () {
+                        var xhr = new XMLHttpRequest();
+                        xhr.upload.onprogress = function (e) {
+                            var percent = '0';
+                            var percentage = '0%';
+
+                            if (e.lengthComputable) {
+                                percent = Math.round((e.loaded / e.total) * 100);
+                                percentage = percent + '%';
+                                $progressBar.width(percentage).attr('aria-valuenow', percent).text(percentage);
+                            }
+                        };
+
+                        return xhr;
+                    },
+                    success: function(response){
+                        try {
+                            response = JSON.parse(response);
+                            fileName = response[1];
+                            document.getElementById('fileName_' + lastNumber).value = fileName;
+
+                        } catch (e) {
+
+                        }
+                        reviewPicNumber++;
+                    }
+                });
             }
             return success;
         };
@@ -427,49 +472,6 @@ function uploadReviewVideo(input){
         video.play();
     };
     fileReader.readAsArrayBuffer(file);
-
-
-
-    var data = new FormData();
-    data.append('video', input.files[0]);
-    data.append('code', userCode);
-    data.append('isVideo', 1);
-
-    var $progressBar = $('#progressBarReviewPic' + reviewPicNumber);
-
-    $.ajax({
-        type: 'post',
-        url: reviewUploadVideo,
-        data: data,
-        processData: false,
-        contentType: false,
-        xhr: function () {
-            var xhr = new XMLHttpRequest();
-            xhr.upload.onprogress = function (e) {
-                var percent = '0';
-                var percentage = '0%';
-
-                if (e.lengthComputable) {
-                    percent = Math.round((e.loaded / e.total) * 100);
-                    percentage = percent + '%';
-                    $progressBar.width(percentage).attr('aria-valuenow', percent).text(percentage);
-                }
-            };
-
-            return xhr;
-        },
-        success: function(response){
-            try {
-                response = JSON.parse(response);
-                fileName = response[1];
-                document.getElementById('fileName_' + lastNumber).value = fileName;
-
-            } catch (e) {
-
-            }
-            reviewPicNumber++;
-        }
-    });
 }
 
 function radioChange(value, _questionId, _index, _ansId){
@@ -825,8 +827,10 @@ loadReviews();
 
 function showReviews(reviews){
     var text = '';
+    document.getElementById('reviewCountSearch').innerText = reviews.length;
+
     for(let i = 0; i < reviews.length; i++){
-        text += '<div class="col-xs-12 postMainDivShown position-relative">\n' +
+        text += '<div id="review_' + reviews[i]["id"] + '" class="col-xs-12 postMainDivShown position-relative">\n' +
             '<div class="commentActions" onclick="showAnswersActionBox(this)">\n' +
             '<span class="commentActionsIcon"></span>\n' +
             '</div>\n' +
@@ -859,7 +863,7 @@ function showReviews(reviews){
             '</div>\n' +
             '</div>\n' +
             '<div class="commentContentsShow">\n' +
-            '<p>' + reviews[i]["text"] + '</p>\n' +
+            '<div>' + reviews[i]["text"] + '</div>\n' +
             '</div>\n';
 
         text += '<div class="commentPhotosShow">\n';
@@ -869,21 +873,21 @@ function showReviews(reviews){
         if(reviewPicsCount > 5) {
             text += '<div class="commentPhotosMainDiv quintupletPhotoDiv">\n' +
                 '<div class="photosCol secondCol col-xs-6">\n' +
-                '<div class="topMainReviewPic">' +
+                '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
                 '<img src="' + reviews[i]["pics"][0]["url"] + '" class="mainReviewPic">\n'+
                 '</div>\n' +
-                '<div class="topMainReviewPic">' +
+                '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
                 '<img src="' + reviews[i]["pics"][1]["url"] + '" class="mainReviewPic">\n'+
                 '</div>\n' +
                 '</div>\n' +
                 '<div class="photosCol firstCol col-xs-6">\n' +
-                '<div class="topMainReviewPic">' +
+                '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
                 '<img src="' + reviews[i]["pics"][2]["url"] + '" class="mainReviewPic">\n'+
                 '</div>\n' +
-                '<div class="topMainReviewPic">' +
+                '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
                 '<img src="' + reviews[i]["pics"][3]["url"] + '" class="mainReviewPic">\n'+
                 '</div>\n' +
-                '<div class="topMainReviewPic">\n' +
+                '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">\n' +
                 '<img src="' + reviews[i]["pics"][4]["url"] + '" class="mainReviewPic">\n'+
                 '<div class="morePhotoLinkPosts">\n' +
                 'به علاوه\n' +
@@ -897,21 +901,21 @@ function showReviews(reviews){
         else if(reviewPicsCount == 5){
             text += '<div class="commentPhotosMainDiv quintupletPhotoDiv">\n' +
                 '<div class="photosCol secondCol col-xs-6">\n' +
-                '<div class="topMainReviewPic">' +
+                '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
                 '<img src="' + reviews[i]["pics"][0]["url"] + '" class="mainReviewPic">\n'+
                 '</div>\n' +
-                '<div class="topMainReviewPic">' +
+                '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
                 '<img src="' + reviews[i]["pics"][1]["url"] + '" class="mainReviewPic">\n'+
                 '</div>\n' +
                 '</div>\n' +
                 '<div class="photosCol firstCol col-xs-6">\n' +
-                '<div class="topMainReviewPic">' +
+                '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
                 '<img src="' + reviews[i]["pics"][2]["url"] + '" class="mainReviewPic">\n'+
                 '</div>\n' +
-                '<div class="topMainReviewPic">' +
+                '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
                 '<img src="' + reviews[i]["pics"][3]["url"] + '" class="mainReviewPic">\n'+
                 '</div>\n' +
-                '<div class="topMainReviewPic">' +
+                '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
                 '<img src="' + reviews[i]["pics"][4]["url"] + '" class="mainReviewPic">\n'+
                 '</div>\n' +
                 '</div>\n' +
@@ -920,18 +924,18 @@ function showReviews(reviews){
         else if(reviewPicsCount == 4){
             text += '<div class="commentPhotosMainDiv quadruplePhotoDiv">\n' +
                 '<div class="photosCol secondCol col-xs-6">\n' +
-                '<div class="topMainReviewPic">' +
+                '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
                 '<img src="' + reviews[i]["pics"][0]["url"] + '" class="mainReviewPic">\n'+
                 '</div>\n' +
-                '<div class="topMainReviewPic">' +
+                '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
                 '<img src="' + reviews[i]["pics"][1]["url"] + '" class="mainReviewPic">\n'+
                 '</div>\n' +
                 '</div>\n' +
                 '<div class="photosCol firstCol col-xs-6">\n' +
-                '<div class="topMainReviewPic">' +
+                '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
                 '<img src="' + reviews[i]["pics"][2]["url"] + '" class="mainReviewPic">\n'+
                 '</div>\n' +
-                '<div class="topMainReviewPic">' +
+                '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
                 '<img src="' + reviews[i]["pics"][3]["url"] + '" class="mainReviewPic">\n'+
                 '</div>\n' +
                 '</div>\n' +
@@ -940,15 +944,15 @@ function showReviews(reviews){
         else if(reviewPicsCount == 3){
             text += '<div class="commentPhotosMainDiv tripletPhotoDiv">\n' +
                 '<div class="photosCol secondCol col-xs-6">\n' +
-                '<div class="topMainReviewPic">' +
+                '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
                 '<img src="' + reviews[i]["pics"][0]["url"] + '" class="mainReviewPic">\n'+
                 '</div>\n' +
                 '</div>\n' +
                 '<div class="photosCol firstCol col-xs-6">\n' +
-                '<div class="topMainReviewPic">' +
+                '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
                 '<img src="' + reviews[i]["pics"][1]["url"] + '" class="mainReviewPic">\n'+
                 '</div>\n' +
-                '<div class="topMainReviewPic">' +
+                '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
                 '<img src="' + reviews[i]["pics"][2]["url"] + '" class="mainReviewPic">\n'+
                 '</div>\n' +
                 '</div>\n' +
@@ -957,12 +961,12 @@ function showReviews(reviews){
         else if(reviewPicsCount == 2){
             text += '<div class="commentPhotosMainDiv doublePhotoDiv">\n' +
                 '<div class="photosCol secondCol col-xs-6">\n' +
-                '<div class="topMainReviewPic">' +
+                '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
                 '<img src="' + reviews[i]["pics"][0]["url"] + '" class="mainReviewPic">\n'+
                 '</div>\n' +
                 '</div>\n' +
                 '<div class="photosCol firstCol col-xs-6">\n' +
-                '<div class="topMainReviewPic">' +
+                '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
                 '<img src="' + reviews[i]["pics"][1]["url"] + '" class="mainReviewPic">\n'+
                 '</div>\n' +
                 '</div>\n' +
@@ -971,7 +975,7 @@ function showReviews(reviews){
         else if(reviewPicsCount == 1){
             text += '<div class="commentPhotosMainDiv doublePhotoDiv">\n' +
                 '<div class="photosCol firstCol col-xs-12">\n' +
-                '<div class="topMainReviewPic">' +
+                '<div class="topMainReviewPic"  onclick="showReviewPics(' + i + ')">' +
                 '<img src="' + reviews[i]["pics"][0]["url"] + '" class="mainReviewPic">\n'+
                 '</div>\n' +
                 '</div>\n' +
@@ -1193,7 +1197,7 @@ function showReviews(reviews){
                 '                                        </div>\n' +
                 '                                        <div class="replyToCommentMainDiv display-none">\n' +
                 '                                            <div class="circleBase type2 newCommentWriterProfilePic">' +
-                    '                                             <img src="' + reviews[i]["comment"][j]["userPic"] + '" style="width: 100%; height: 100%; border-radius: 50%;">\n' +
+                    '                                             <img src="' + userPic + '" style="width: 100%; height: 100%; border-radius: 50%;">\n' +
                     '</div>\n' +
                 '                                            <div class="inputBox">\n' +
                 '                                                <b class="replyCommentTitle">در پاسخ به نظر ' + reviews[i]["comment"][j]["username"] + '</b>\n' +
@@ -1209,12 +1213,14 @@ function showReviews(reviews){
                     text += '</div>';
             }
 
-        text += '</div>\n';
+        text += '</div></div>\n';
 
 
         // new ans
         text +='                                <div class="newCommentPlaceMainDiv">\n' +
-            '                                    <div class="circleBase type2 newCommentWriterProfilePic"></div>\n' +
+            '                                    <div class="circleBase type2 newCommentWriterProfilePic">' +
+            '                                             <img src="' + userPic + '" style="width: 100%; height: 100%; border-radius: 50%;">\n' +
+            '</div>\n' +
             '                                    <div class="inputBox">\n' +
             '                                        <b class="replyCommentTitle">در پاسخ به نظر ' + reviews[i]["usernameReviewWriter"] + '</b>\n' +
             '                                        <textarea class="inputBoxInput inputBoxInputComment" id="ansForReviews_' + reviews[i]["id"] + '" placeholder="شما چه نظری دارید؟"></textarea>\n' +
@@ -1222,7 +1228,7 @@ function showReviews(reviews){
             '                                    </div>\n' +
             '                                    <div></div>\n' +
             '                                </div>\n' +
-            '                            </div></div></div>\n';
+            '                            </div></div>\n';
 
     }
 
@@ -1321,7 +1327,9 @@ function createAnsToComment(comment, repTo, topId){
             '                                            <b class="replyBtn" onclick="replyToComments(this)">پاسخ دهید</b>\n' +
             '                                        </div>\n' +
             '                                        <div class="replyToCommentMainDiv display-none">\n' +
-            '                                            <div class="circleBase type2 newCommentWriterProfilePic"></div>\n' +
+            '                                            <div class="circleBase type2 newCommentWriterProfilePic">' +
+            '                                                <img src="' + userPic + '" style="width: 100%; height: 100%; border-radius: 50%;">\n' +
+            '                                            </div>\n' +
             '                                            <div class="inputBox">\n' +
             '                                                <b class="replyCommentTitle">در پاسخ به نظر ' + comment[k]["username"] + '</b>\n' +
             '                                                <textarea  id="ansForReviews_' + comment[k]["id"] + '" class="inputBoxInput inputBoxInputComment" placeholder="شما چه نظری دارید؟"></textarea>\n' +
@@ -1340,44 +1348,47 @@ function createAnsToComment(comment, repTo, topId){
     return text;
 }
 
-function showReviewPics(){
-    // var photo = photographerPics[_index];
-    // var likeDislike = '                                        <div class="photosFeedBackBtn">\n' +
-    //     '                                            <div class="col-xs-6 likeBox" onclick="likePhotographerPic(this, 1, ' + photo["id"] + ')">دوست داشتم' +
-    //     '                                               <span class="likeBoxIcon firstIcon"></span>' +
-    //     '                                               <span class="likeBoxIconClicked display-none secondIcon"></span>' +
-    //     '                                            </div>\n' +
-    //     '                                            <div class="col-xs-6 dislikeBox" onclick="likePhotographerPic(this, 0, ' + photo["id"] + ')">دوست نداشتم' +
-    //     '                                               <span class="dislikeBoxIcon firstIcon"></span>' +
-    //     '                                               <span class="dislikeBoxIconClicked display-none secondIcon"></span>' +
-    //     '                                            </div>\n' +
-    //     '                                            <div class="clear-both"></div>\n' +
-    //     '                                            <div class="feedbackStatistic">\n' +
-    //     '                                                <span>' + photo["like"] + '</span>\n' +
-    //     '                                                نفر دوست داشتند و\n' +
-    //     '                                                <span>' + photo["dislike"] + '</span>\n' +
-    //     '                                                نفر دوست نداشتند\n' +
-    //     '                                            </div>\n' +
-    //     '                                        </div>\n';
-    //
-    // document.getElementById('photographerSlideUserPic').src = photo['userPic'];
-    // document.getElementById('photographerSlideUserName').innerText = photo['name'];
-    // document.getElementById('photographerDescription').innerText = photo['description'];
-    // document.getElementById('photographerSlideTimeInfo').innerText = photo['fromUpload'];
-    //
-    // if(photo['showInfo']){
-    //     document.getElementById('photographerSlideFeedBackBtns').style.display = 'block';
-    //     document.getElementById('photographerSlideFeedBackBtns').innerHTML = likeDislike;
-    //     document.getElementById('photographerDescription').style.display = 'block';
-    //     document.getElementById('photographerSlideInfos').style.display = 'block';
-    // }
-    // else{
-    //     document.getElementById('photographerSlideFeedBackBtns').style.display = 'none';
-    //     document.getElementById('photographerDescription').style.display = 'none';
-    //     document.getElementById('photographerSlideInfos').style.display = 'none';
-    // }
-    //
-    // document.getElementById('mainPhotographerSliderPic').src = photo['s'];
+function showReviewPics(_index){
+    $('#showingReviewPicsModal').modal('show');
+
+    var photo = allReviews[_index]['pics'];
+
+    document.getElementById('showingReviewPhotosUserPic').src = allReviews[_index]['userPic'];
+    document.getElementById('showingReviewPhotosUserName').innerText = allReviews[_index]['usernameReviewWriter'];
+
+
+    if(photo[0] && photo[0]['isVideo'] == 0)
+        document.getElementById('showingReviewPhotosMainPic').innerHTML = '<img src="' + photo[0]['url'] + '" style="max-width: 100%; max-height: 100%;">\n';
+    else{
+        document.getElementById('showingReviewPhotosMainPic').innerHTML = '<video controls style="width: 100%; height: 100%;">\n' +
+            '  <source src="' + photo[0]['videoUrl'] + '">\n' +
+            '  Your browser does not support the video tag.\n' +
+            '</video>';
+    }
+    var text = '';
+
+    for(var i = 0; i < photo.length; i++) {
+        text += '<div class="rightColPhotosShowingModal" onclick="changeReviewSlidePic(' + _index + ', ' + i + ')">\n' +
+                '<img src="' + photo[i]['url'] + '" style="width: 100%; height: 100%;">\n' +
+                '</div>';
+
+    }
+
+    document.getElementById('showingReviewPhotosRightCol').innerHTML = text;
+
+}
+
+function changeReviewSlidePic(_mainIndex, _picIndex){
+    var pic = allReviews[_mainIndex]['pics'][_picIndex];
+
+    if(pic['isVideo'] == 0)
+        document.getElementById('showingReviewPhotosMainPic').innerHTML = '<img src="' + pic['url'] + '" style="max-width: 100%; max-height: 100%;">\n';
+    else
+        document.getElementById('showingReviewPhotosMainPic').innerHTML = '<video controls style="width: 100%; height: 100%;">\n' +
+            '  <source src="' + pic['videoUrl'] + '">\n' +
+            '  Your browser does not support the video tag.\n' +
+            '</video>';
+
 }
 
 function showAllReviews(_id){

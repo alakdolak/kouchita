@@ -233,16 +233,38 @@
                                             </div>
                                         @endif
                                     </div>
-                                    <div class="ppr_rup ppr_priv_trip_search phoneBanner hideOnScreen mainDivSearchInputPhonePage">
+                                    <div class="ppr_rup ppr_priv_trip_search hideOnScreen">
+                                        <!-- Swiper -->
+                                        <div id="mainSlider" class="swiper-container">
+                                            <div class="swiper-wrapper">
+                                                <div class="swiper-slide">
+                                                    <img class="eachPicOfSlider" src="{{URL::asset('images') . 'slide1.jpg'}}" alt="slide1">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img class="eachPicOfSlider" src="{{URL::asset('images') . 'slide2.jpg'}}" alt="slide2">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img class="eachPicOfSlider" src="{{URL::asset('images') . 'slide3.jpg'}}" alt="slide3">
+                                                </div>
+                                                <div class="swiper-slide">
+                                                    <img class="eachPicOfSlider" src="{{URL::asset('images') . 'slide4.jpg'}}" alt="slide4">
+                                                </div>
+                                            </div>
+                                            <!-- Add Pagination -->
+                                            <div class="swiper-pagination"></div>
+                                            <!-- Add Arrows -->
+                                            <div class="swiper-button-next"></div>
+                                            <div class="swiper-button-prev"></div>
+                                        </div>
                                         @if($placeMode == "hotel")
-                                            <div class="ui_columns trip_search rounded_lockup usePickerTypeIcons mainDivSearchInputPhonePage">
+                                            <div class="trip_search rounded_lockup usePickerTypeIcons hideOnScreen mainDivSearchInputPhonePage">
                                                 <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column search_typeahead wctx-tripsearch searchDivForScroll_phone">
                                                     <div class="ui_picker">
-                                                                <span class="typeahead_align ui_typeahead">
-                                                                    <input onkeyup="search(event)" type="text" id="placeName" class="typeahead_input mainSearchInputPhonePage"  placeholder="شهر یا نام هتل"/>
-                                                                    <input type="hidden" id="placeId">
-                                                                    <span class="ui_icon map-pin-fill pickerType typeahead_icon"></span>
-                                                                </span>
+                                                        <span class="typeahead_align ui_typeahead">
+                                                            <input onkeyup="search(event)" type="text" id="placeName" class="typeahead_input mainSearchInputPhonePage"  placeholder="شهر یا نام هتل"/>
+                                                            <input type="hidden" id="placeId">
+                                                            <span class="ui_icon map-pin-fill pickerType typeahead_icon"></span>
+                                                        </span>
                                                         <div id="result" class="data_holder"></div>
                                                     </div>
                                                 </div>
@@ -284,7 +306,7 @@
                                                 </div>
                                             </div>
                                         @elseif($placeMode == "restaurant")
-                                            <div class="trip_search rounded_lockup usePickerTypeIcons hideOnScreen">
+                                            <div class="trip_search rounded_lockup usePickerTypeIcons hideOnScreen mainDivSearchInputPhonePage">
                                                 <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column" onclick="$('#phoneSearchPopUp').removeClass('hidden')">
                                                     <div class="ui_picker">
                                                                 <span class="typeahead_align ui_typeahead">
@@ -303,7 +325,7 @@
                                                 </div>
                                             </div>
                                         @elseif($placeMode == "tour")
-                                            <div class="trip_search rounded_lockup usePickerTypeIcons hideOnScreen">
+                                            <div class="trip_search rounded_lockup usePickerTypeIcons hideOnScreen mainDivSearchInputPhonePage">
                                                 <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column" onclick="$('#phoneSearchPopUp').removeClass('hidden')">
                                                     <div class="ui_picker">
                                                                 <span class="typeahead_align ui_typeahead">
@@ -322,22 +344,15 @@
                                                 </div>
                                             </div>
                                         @else
-                                            <div class="trip_search rounded_lockup usePickerTypeIcons hideOnScreen">
-                                                <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column" onclick="$('#phoneSearchPopUp').removeClass('hidden')">
+                                            <div class="trip_search rounded_lockup usePickerTypeIcons hideOnScreen mainDivSearchInputPhonePage">
+                                                <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column" onclick="$('#phoneSearchPopUp').removeClass('hidden')" style="border-radius: 10px">
                                                     <div class="ui_picker" >
-                                                                <span class="typeahead_align ui_typeahead">
-                                                                    <input onkeyup="search(event)" type="text" class="typeahead_input" placeholder="شهر یا نام مکان موردنظر"/>
-                                                                    <input type="hidden" id="placeId">
-                                                                </span>
+                                                        <span class="typeahead_align ui_typeahead">
+                                                            <input onkeyup="search(event)" type="text" class="typeahead_input" placeholder="به کجا می‌روید؟!"/>
+                                                            <input type="hidden" id="placeId">
+                                                        </span>
                                                         <div id="resultPhone" class="data_holder"></div>
                                                     </div>
-                                                </div>
-                                                <div class="prw_rup prw_common_form_submit ui_column submit_wrap" >
-                                                    <button onclick="redirect()" class="form_submit">
-                                                        <span class="ui_icon search submit_icon"></span>
-                                                        <span class="submit_text">جستجو</span>
-                                                    </button>
-                                                    <span class="ui_loader dark fill"></span>
                                                 </div>
                                             </div>
                                         @endif
@@ -922,13 +937,13 @@
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
             },
+
         });
     </script>
 
     <!-- Initialize Swiper Of mainSuggestion -->
     <script>
         var swiper = new Swiper('.mainSuggestion', {
-            slidesPerView: 4,
             spaceBetween: 30,
             slidesPerGroup: 1,
             loop: true,
@@ -937,6 +952,14 @@
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
             },
+            breakpoints:{
+                900: {
+                    slidesPerView: 2,
+                },
+                10000:{
+                    slidesPerView: 4,
+                },
+            }
         });
     </script>
 

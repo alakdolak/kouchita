@@ -19,7 +19,7 @@
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/mainPageModifiedStyles.css')}}'/>
 
     <script type='text/javascript' src='{{URL::asset('js/jquery_12.js')}}'></script>
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/gardeshname.min.css?v=1.1')}}"/>
+    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/article.min.css?v=1.1')}}"/>
 
     <script>
         var searchDir = '{{route('heyYou')}}';

@@ -6,7 +6,7 @@ if ($total == 0)
     $total = 1;
 ?>
 @section('title')
-{{--    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>--}}
+    {{--    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>--}}
     <link rel="stylesheet" href="{{URL::asset('css/theme2/media_uploader.css')}}">
     <script async src="{{URL::asset("js/bootstrap-datepicker.js")}}"></script>
     <link rel="stylesheet" href="{{URL::asset('css/theme2/bootstrap-datepicker.css?v=1')}}">
@@ -90,8 +90,9 @@ if ($total == 0)
     <style>
         .changeWidth {
             @if(session('goDate'))
-                  width: 14% !important;
-            @endif
+                   width: 14% !important;
+        @endif
+
         }
     </style>
 
@@ -155,23 +156,30 @@ if ($total == 0)
 
                             <div class="modal-content">
                                 <div class="postMainDivHeader">
-                                    <button type="button" class="close closeBtnPostModal" data-dismiss="modal" onclick="closeNewPostModal(); showMobileTabLink()">&times;</button>
+                                    <button type="button" class="close closeBtnPostModal" data-dismiss="modal"
+                                            onclick="closeNewPostModal(); showMobileTabLink()">&times;
+                                    </button>
                                     دیدگاه شما
                                 </div>
                                 <div class="commentInputMainDivModal">
                                     <div class="inputBoxGeneralInfo inputBox postInputBoxModal">
-                                        <div class="profilePicForPostModal circleBase type2"></div>
+                                        <div class="profilePicForPostModal circleBase type2">
+                                            <img src="{{ $userPic }}" style="width: 100%; height: 100%; border-radius: 50%;" >
+                                        </div>
                                         @if(auth()->check())
-                                            <textarea class="inputBoxInput inputBoxInputComment" name="text" type="text" placeholder="{{auth()->user()->first_name ? auth()->user()->first_name :auth()->user()->username }}، چه فکر یا احساسی داری.....؟"  onkeyup="textAreaAdjust(this)" style="overflow:hidden"></textarea>
+                                            <textarea class="inputBoxInput inputBoxInputComment" name="text" type="text"
+                                                      placeholder="{{auth()->user()->first_name ? auth()->user()->first_name :auth()->user()->username }}، چه فکر یا احساسی داری.....؟"
+                                                      onkeyup="textAreaAdjust(this)" style="overflow:hidden"></textarea>
                                         @else
-                                            <textarea class="inputBoxInput inputBoxInputComment" name="text" type="text" placeholder="سینا، چه فکر یا احساسی داری.....؟"></textarea>
+                                            <textarea class="inputBoxInput inputBoxInputComment" name="text" type="text"
+                                                      placeholder="سینا، چه فکر یا احساسی داری.....؟"></textarea>
                                         @endif
                                         <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
                                     </div>
                                     <script>
                                         function textAreaAdjust(o) {
                                             o.style.height = "1px";
-                                            o.style.height = (25+o.scrollHeight)+"px";
+                                            o.style.height = (25 + o.scrollHeight) + "px";
                                         }
                                     </script>
                                     <div class="clear-both"></div>
@@ -194,7 +202,9 @@ if ($total == 0)
                                     <div class="addParticipantName">
                                         <span class="addParticipantSpan">با</span>
                                         <div class="inputBoxGeneralInfo inputBox addParticipantInputBoxPostModal">
-                                            <textarea id="assignedSearch" class="inputBoxInput inputBoxInputComment" placeholder="چه کسی بودید؟ ایمیل یا نام کاربری را وارد کنید" onkeyup="searchUser(this.value)"></textarea>
+                                            <textarea id="assignedSearch" class="inputBoxInput inputBoxInputComment"
+                                                      placeholder="چه کسی بودید؟ ایمیل یا نام کاربری را وارد کنید"
+                                                      onkeyup="searchUser(this.value)"></textarea>
 
                                             <div class="assignedResult" id="assignedResultReview"></div>
 
@@ -209,31 +219,38 @@ if ($total == 0)
                                     <div class="commentOptionsBoxes">
                                         <span class="tagFriendCommentIcon"></span>
                                         <span class="commentOptionsText">دوستانتان را tag کنید.</span>
-                                    </div><!--
-                                 --><div class="commentOptionsBoxes">
-                                        <span class="add360VideoCommentIcon"></span>
-                                        <span class="commentOptionsText">ویدیو 360 اضافه کنید.</span>
-                                    </div><!--
-                                 --><div class="commentOptionsBoxes">
+                                    </div>
+                                    <div class="commentOptionsBoxes">
+                                        <label for="video360ReviewInput">
+                                            <span class="add360VideoCommentIcon"></span>
+                                            <span class="commentOptionsText">ویدیو 360 اضافه کنید.</span>
+                                        </label>
+                                    </div>
+                                    <input type="file" id="video360ReviewInput" accept="video/*"  style="display: none" onchange="uploadReviewVideo(this, 1)">
+                                    <div class="commentOptionsBoxes">
                                         <label for="videoReviewInput">
                                             <span class="addVideoCommentIcon"></span>
                                             <span class="commentOptionsText">ویدیو اضافه کنید.</span>
                                         </label>
-                                    </div><!--
-                                 --><input type="file" id="videoReviewInput" accept="video/*"  style="display: none" onchange="uploadReviewVideo(this, 0)">
+                                    </div>
+                                    <input type="file" id="videoReviewInput" accept="video/*" style="display: none"
+                                           onchange="uploadReviewVideo(this, 0)">
                                     <div class="commentOptionsBoxes">
                                         <label for="picReviewInput0">
                                             <span class="addPhotoCommentIcon"></span>
                                             <span class="commentOptionsText">عکس اضافه کنید.</span>
                                         </label>
                                     </div>
-                                    <input type="file" id="picReviewInput0" accept="image/*"  style="display: none" onchange="uploadReviewPics(this, 0)">
+                                    <input type="file" id="picReviewInput0" accept="image/*" style="display: none"
+                                           onchange="uploadReviewPics(this, 0)">
                                 </center>
                                 @foreach($textQuestion as $item)
                                     <div id="questionDiv_{{$item->id}}" class="commentQuestionsForm">
                                         <span class="addOriginCity">{{$item->description}}</span>
                                         <div class="inputBoxGeneralInfo inputBox addOriginCityInputBoxPostModal">
-                                            <textarea id="question_{{$item->id}}" name="textAns[]" class="inputBoxInput inputBoxInputComment" placeholder="شهر مبداء خود را وارد نمایید"></textarea>
+                                            <textarea id="question_{{$item->id}}" name="textAns[]"
+                                                      class="inputBoxInput inputBoxInputComment"
+                                                      placeholder="شهر مبداء خود را وارد نمایید"></textarea>
                                             <input type="hidden" name="textId[]" value="{{$item->id}}">
                                         </div>
                                     </div>
@@ -247,11 +264,15 @@ if ($total == 0)
                                         <div class="visitKindCommentModal">
                                             @for($i = 0; $i < count($item->ans); $i++)
                                                 <label for="radioAns_{{$item->id}}_{{$item->ans[$i]->id}}">
-                                                    <b id="radioAnsStyle_{{$item->id}}_{{$item->ans[$i]->id}}" class="filterChoices">
+                                                    <b id="radioAnsStyle_{{$item->id}}_{{$item->ans[$i]->id}}"
+                                                       class="filterChoices multiSelectAns">
                                                         {{$item->ans[$i]->ans}}
                                                     </b>
                                                 </label>
-                                                <input id="radioAns_{{$item->id}}_{{$item->ans[$i]->id}}" value="{{$item->ans[$i]->id}}" onchange="radioChange(this.value, {{$item->id}}, {{$index}}, {{$item->ans[$i]->id}})" type="radio" style="display: none">
+                                                <input id="radioAns_{{$item->id}}_{{$item->ans[$i]->id}}"
+                                                       value="{{$item->ans[$i]->id}}"
+                                                       onchange="radioChange(this.value, {{$item->id}}, {{$index}}, {{$item->ans[$i]->id}})"
+                                                       type="radio" style="display: none">
                                             @endfor
                                         </div>
                                     </div>
@@ -262,14 +283,30 @@ if ($total == 0)
 
                                     @for($i = 0; $i < count($rateQuestion); $i++)
                                         <div class="display-inline-block full-width">
-                                            <b id="rateName_{{$i}}" class="col-xs-3 font-size-15 line-height-203 pd-lt-0">بد نبود</b>
+                                            <b id="rateName_{{$i}}"
+                                               class="col-xs-3 font-size-15 line-height-203 pd-lt-0">بد نبود</b>
                                             <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-3 text-align-left pd-0">
                                                 <div class="font-size-25" style="display: flex;">
-                                                    <span id="rate_5_{{$i}}" class="starRating" onmouseover="momentChangeRate({{$i}}, 5, 'in')" onmouseleave="momentChangeRate({{$i}}, 5, 'out')" onclick="chooseQuestionRate({{$i}}, 5, {{$rateQuestion[$i]->id}})"></span>
-                                                    <span id="rate_4_{{$i}}" class="starRating" onmouseover="momentChangeRate({{$i}}, 4, 'in')" onmouseleave="momentChangeRate({{$i}}, 4, 'out')" onclick="chooseQuestionRate({{$i}}, 4, {{$rateQuestion[$i]->id}})"></span>
-                                                    <span id="rate_3_{{$i}}" class="starRating" onmouseover="momentChangeRate({{$i}}, 3, 'in')" onmouseleave="momentChangeRate({{$i}}, 3, 'out')" onclick="chooseQuestionRate({{$i}}, 3, {{$rateQuestion[$i]->id}})"></span>
-                                                    <span id="rate_2_{{$i}}" class="starRatingGreen" onmouseover="momentChangeRate({{$i}}, 2, 'in')" onmouseleave="momentChangeRate({{$i}}, 2, 'out')" onclick="chooseQuestionRate({{$i}}, 2, {{$rateQuestion[$i]->id}})"></span>
-                                                    <span id="rate_1_{{$i}}" class="starRatingGreen" onmouseover="momentChangeRate({{$i}}, 1, 'in')" onmouseleave="momentChangeRate({{$i}}, 1, 'out')" onclick="chooseQuestionRate({{$i}}, 1, {{$rateQuestion[$i]->id}})"></span>
+                                                    <span id="rate_5_{{$i}}" class="starRating"
+                                                          onmouseover="momentChangeRate({{$i}}, 5, 'in')"
+                                                          onmouseleave="momentChangeRate({{$i}}, 5, 'out')"
+                                                          onclick="chooseQuestionRate({{$i}}, 5, {{$rateQuestion[$i]->id}})"></span>
+                                                    <span id="rate_4_{{$i}}" class="starRating"
+                                                          onmouseover="momentChangeRate({{$i}}, 4, 'in')"
+                                                          onmouseleave="momentChangeRate({{$i}}, 4, 'out')"
+                                                          onclick="chooseQuestionRate({{$i}}, 4, {{$rateQuestion[$i]->id}})"></span>
+                                                    <span id="rate_3_{{$i}}" class="starRating"
+                                                          onmouseover="momentChangeRate({{$i}}, 3, 'in')"
+                                                          onmouseleave="momentChangeRate({{$i}}, 3, 'out')"
+                                                          onclick="chooseQuestionRate({{$i}}, 3, {{$rateQuestion[$i]->id}})"></span>
+                                                    <span id="rate_2_{{$i}}" class="starRatingGreen"
+                                                          onmouseover="momentChangeRate({{$i}}, 2, 'in')"
+                                                          onmouseleave="momentChangeRate({{$i}}, 2, 'out')"
+                                                          onclick="chooseQuestionRate({{$i}}, 2, {{$rateQuestion[$i]->id}})"></span>
+                                                    <span id="rate_1_{{$i}}" class="starRatingGreen"
+                                                          onmouseover="momentChangeRate({{$i}}, 1, 'in')"
+                                                          onmouseleave="momentChangeRate({{$i}}, 1, 'out')"
+                                                          onclick="chooseQuestionRate({{$i}}, 1, {{$rateQuestion[$i]->id}})"></span>
                                                 </div>
                                             </div>
                                             <b class="col-xs-6 font-size-15 line-height-203">{{$rateQuestion[$i]->description}}</b>
@@ -294,7 +331,8 @@ if ($total == 0)
                                           <div class="col-md-12">
                                              <div style="margin: 5px 15px">قاب مربع</div>
                                              <div class="img-container" style="position: relative">
-                                                <img class="imgInEditor" id="imgEditReviewPics" alt="Picture" style="width: 100%;">
+                                                <img class="imgInEditor" id="imgEditReviewPics" alt="Picture"
+                                                     style="width: 100%;">
                                              </div>
                                           </div>
                                        </div>
@@ -303,7 +341,9 @@ if ($total == 0)
 
                                             <div class="editBtnsGroup">
                                                 <div class="editBtns">
-                                                   <div class="flipHorizontal" data-toggle="tooltip" data-placement="top" title="Flip Horizontal" onclick="cropper.scaleY(-1)"></div>
+                                                   <div class="flipHorizontal" data-toggle="tooltip"
+                                                        data-placement="top" title="Flip Horizontal"
+                                                        onclick="cropper.scaleY(-1)"></div>
                                                 </div>
                                                 {{--<button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="scaleX" data-option="-1" title="Flip Horizontal">--}}
                                                 {{--<span class="docs-tooltip" data-toggle="tooltip" title="cropper.scaleX(-1)">--}}
@@ -312,7 +352,8 @@ if ($total == 0)
                                                 {{--</button>--}}
 
                                                 <div class="editBtns">
-                                                   <div class="flipVertical" data-toggle="tooltip" data-placement="top" title="Flip Vertical" onclick="cropper.scaleX(-1)"></div>
+                                                   <div class="flipVertical" data-toggle="tooltip" data-placement="top"
+                                                        title="Flip Vertical" onclick="cropper.scaleX(-1)"></div>
                                                 </div>
                                                 {{--<button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="scaleY" data-option="-1" title="Flip Vertical">--}}
                                                 {{--<span class="docs-tooltip" data-toggle="tooltip" title="cropper.scaleY(-1)">--}}
@@ -323,7 +364,9 @@ if ($total == 0)
 
                                             <div class="editBtnsGroup">
                                                 <div class="editBtns">
-                                                   <div class="rotateLeft" data-toggle="tooltip" data-placement="top" title="چرخش 45 درجه ای به سمت چپ" onclick="cropper.rotate(-45)"></div>
+                                                   <div class="rotateLeft" data-toggle="tooltip" data-placement="top"
+                                                        title="چرخش 45 درجه ای به سمت چپ"
+                                                        onclick="cropper.rotate(-45)"></div>
                                                 </div>
                                                 {{--<button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="rotate" data-option="-45" title="Rotate Left">--}}
                                                 {{--<span class="docs-tooltip" data-toggle="tooltip" title="cropper.rotate(-45)">--}}
@@ -332,7 +375,9 @@ if ($total == 0)
                                                 {{--</button>--}}
 
                                                 <div class="editBtns">
-                                                   <div class="rotateRight" data-toggle="tooltip" data-placement="top" title="چرخش 45 درجه ای به سمت راست" onclick="cropper.rotate(45)"></div>
+                                                   <div class="rotateRight" data-toggle="tooltip" data-placement="top"
+                                                        title="چرخش 45 درجه ای به سمت راست"
+                                                        onclick="cropper.rotate(45)"></div>
                                                 </div>
                                                 {{--<button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="rotate" data-option="45" title="Rotate Right">--}}
                                                 {{--<span class="docs-tooltip" data-toggle="tooltip" title="cropper.rotate(45)">--}}
@@ -343,7 +388,8 @@ if ($total == 0)
 
                                             <div class="editBtnsGroup">
                                                 <div class="editBtns">
-                                                   <div class="cropping" data-toggle="tooltip" data-placement="top" title="برش" onclick="cropper.crop()"></div>
+                                                   <div class="cropping" data-toggle="tooltip" data-placement="top"
+                                                        title="برش" onclick="cropper.crop()"></div>
                                                 </div>
                                                 {{--<button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="crop" title="Crop">--}}
                                                 {{--<span class="docs-tooltip" data-toggle="tooltip" title="cropper.crop()">--}}
@@ -352,7 +398,8 @@ if ($total == 0)
                                                 {{--</button>--}}
 
                                                 <div class="editBtns">
-                                                   <div class="clearing" data-toggle="tooltip" data-placement="top" title="بازگشت به اول" onclick="cropper.clear()"></div>
+                                                   <div class="clearing" data-toggle="tooltip" data-placement="top"
+                                                        title="بازگشت به اول" onclick="cropper.clear()"></div>
                                                 </div>
                                                 {{--<button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="clear" title="Clear">--}}
                                                 {{--<span class="docs-tooltip" data-toggle="tooltip" title="cropper.clear()">--}}
@@ -381,19 +428,25 @@ if ($total == 0)
                                           {{--</div>--}}
 
                                           <!-- Show the cropped image in modal -->
-                                              <div class="modal fade docs-cropped" id="getCroppedCanvasModal" role="dialog" aria-hidden="true" aria-labelledby="getCroppedCanvasTitle" tabindex="-1">
+                                              <div class="modal fade docs-cropped" id="getCroppedCanvasModal"
+                                                   role="dialog" aria-hidden="true"
+                                                   aria-labelledby="getCroppedCanvasTitle" tabindex="-1">
                                                <div class="modal-dialog modal-dialog-scrollable">
                                                   <div class="modal-content">
                                                      <div class="modal-header">
                                                         <h5 class="modal-title" id="getCroppedCanvasTitle">Cropped</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
                                                            <span aria-hidden="true">&times;</span>
                                                         </button>
                                                      </div>
                                                      <div class="modal-body"></div>
                                                      <div class="modal-footer">
-                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                        <a class="btn btn-primary" id="download" href="javascript:void(0);" download="cropped.jpg">Download</a>
+                                                        <button type="button" class="btn btn-default"
+                                                                data-dismiss="modal">Close</button>
+                                                        <a class="btn btn-primary" id="download"
+                                                           href="javascript:void(0);"
+                                                           download="cropped.jpg">Download</a>
                                                      </div>
                                                   </div>
                                                </div>
@@ -412,269 +465,123 @@ if ($total == 0)
 
                 @include('layouts.modalPhotos')
 
-                <div id="bestPrice" class="meta position-relative" style="@if(session('goDate') != null && session('backDate') != null) display: none @endif ">
+                <div id="bestPrice" class="meta position-relative"
+                     style="@if(session('goDate') != null && session('backDate') != null) display: none @endif ">
                     <div id="targetHelp_9" class="targets  float-left">
-                            {{--@if($place->reserveId == null)--}}
-                                {{--<div class="offlineReserveErr" >--}}
-                                    {{--<div>--}}
-                                        {{--متاسفانه در حال حاضر امکان رزرو انلاین برای این مرکز موجود نمی باشد.--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                            {{--@endif--}}
+                        {{--@if($place->reserveId == null)--}}
+                        {{--<div class="offlineReserveErr" >--}}
+                        {{--<div>--}}
+                        {{--متاسفانه در حال حاضر امکان رزرو انلاین برای این مرکز موجود نمی باشد.--}}
+                        {{--</div>--}}
+                        {{--</div>--}}
+                        {{--@endif--}}
                         <div class="meta_inner" id="bestPriceInnerDiv">
-{{--                                <form id="form_hotel" method="post" action="{{route('makeSessionHotel')}}">--}}
-{{--                                    {{csrf_field()}}--}}
-{{--                                    <input type="hidden" name="adult" id="form_adult">--}}
-{{--                                    <input type="hidden" name="room" id="form_room">--}}
-{{--                                    <input type="hidden" name="children" id="form_children">--}}
-{{--                                    <input type="hidden" name="goDate" id="form_goDate">--}}
-{{--                                    <input type="hidden" name="backDate" id="form_backDate">--}}
-{{--                                    <input type="hidden" name="ageOfChild" id="form_ageOfChild">--}}
-{{--                                    <input type="hidden" name="city" value="{{$city->name}}">--}}
-{{--                                    <input type="hidden" name="name" value="{{$city->name}}">--}}
-{{--                                    <input type="hidden" name="mode" value="city">--}}
-{{--                                    <input type="hidden" name="name" value="{{$place->name}}">--}}
-{{--                                    <input type="hidden" name="id" value="{{$place->id}}">--}}
-{{--                                </form>--}}
-{{--                                <div class="ppr_rup ppr_priv_hr_atf_north_star_traveler_info_nostalgic display-none">--}}
-{{--                                    <div class="title">بهترین قیمت اقامت</div>--}}
-{{--                                    <div class="metaDatePicker easyClear">--}}
-{{--                                        <div class="prw_rup prw_datepickers_hr_north_star_dates_nostalgic">--}}
-{{--                                            <label class="lableCalender">--}}
-{{--                                                    <span onclick="changeTwoCalendar(2); nowCalendar()"--}}
-{{--                                                          class="ui_icon calendar calendarIcon"></span>--}}
-{{--                                                <input name="GoDate" type="text" id="goDate" placeholder="تاریخ رفت"--}}
-{{--                                                       class="inputLableCalender" readonly value="{{session('goDate')}}">--}}
-{{--                                            </label>--}}
-{{--                                            <label class="lableCalender">--}}
-{{--                                                <span class="ui_icon calendar"></span>--}}
-{{--                                                <input value="{{session('backDate')}}" name="BackDate" type="text"--}}
-{{--                                                       id="backDate"--}}
-{{--                                                       placeholder="تاریخ برگشت" readonly class="inputLableCalender">--}}
-{{--                                            </label>--}}
-{{--                                            <div>--}}
-{{--                                                @include('layouts.calendar')--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="roomBox">--}}
-{{--                                            <div class="shTIcon passengerIcon" onclick="togglePassengerNoSelectPane()"></div>--}}
-{{--                                            <div id="roomDetail" onclick="togglePassengerNoSelectPane()">--}}
-{{--                                                <span class="room" id="num_room">--}}{{----}}{{--{{$room}}--}}{{----}}{{--</span>&nbsp;--}}
-{{--                                                <span>اتاق</span>&nbsp;-&nbsp;--}}
-{{--                                                <span class="adult" id="num_adult">--}}{{----}}{{--{{$adult}}--}}{{----}}{{--</span>--}}
-{{--                                                <span>بزرگسال</span>&nbsp;--}}
-{{--                                                --}}{{----}}{{--<span class="children" id="num_child">--}}{{----}}{{----}}{{----}}{{--{{$children}}--}}{{----}}{{----}}{{----}}{{--</span>--}}
-{{--                                                --}}{{----}}{{--<span>بچه</span>&nbsp;--}}
-{{--                                            </div>--}}
-{{--                                            <div id="passengerArrowDown" onclick="togglePassengerNoSelectPane()"--}}
-{{--                                                 class="shTIcon searchBottomArrowIcone arrowPassengerIcone display-inline-block"></div>--}}
-{{--                                            <div id="passengerArrowUp" onclick="togglePassengerNoSelectPane()"--}}
-{{--                                                 class="shTIcon searchTopArrowIcone arrowPassengerIcone hidden display-inline-block"></div>--}}
+                            {{--                                <form id="form_hotel" method="post" action="{{route('makeSessionHotel')}}">--}}
+                            {{--                                    {{csrf_field()}}--}}
+                            {{--                                    <input type="hidden" name="adult" id="form_adult">--}}
+                            {{--                                    <input type="hidden" name="room" id="form_room">--}}
+                            {{--                                    <input type="hidden" name="children" id="form_children">--}}
+                            {{--                                    <input type="hidden" name="goDate" id="form_goDate">--}}
+                            {{--                                    <input type="hidden" name="backDate" id="form_backDate">--}}
+                            {{--                                    <input type="hidden" name="ageOfChild" id="form_ageOfChild">--}}
+                            {{--                                    <input type="hidden" name="city" value="{{$city->name}}">--}}
+                            {{--                                    <input type="hidden" name="name" value="{{$city->name}}">--}}
+                            {{--                                    <input type="hidden" name="mode" value="city">--}}
+                            {{--                                    <input type="hidden" name="name" value="{{$place->name}}">--}}
+                            {{--                                    <input type="hidden" name="id" value="{{$place->id}}">--}}
+                            {{--                                </form>--}}
+                            {{--                                <div class="ppr_rup ppr_priv_hr_atf_north_star_traveler_info_nostalgic display-none">--}}
+                            {{--                                    <div class="title">بهترین قیمت اقامت</div>--}}
+                            {{--                                    <div class="metaDatePicker easyClear">--}}
+                            {{--                                        <div class="prw_rup prw_datepickers_hr_north_star_dates_nostalgic">--}}
+                            {{--                                            <label class="lableCalender">--}}
+                            {{--                                                    <span onclick="changeTwoCalendar(2); nowCalendar()"--}}
+                            {{--                                                          class="ui_icon calendar calendarIcon"></span>--}}
+                            {{--                                                <input name="GoDate" type="text" id="goDate" placeholder="تاریخ رفت"--}}
+                            {{--                                                       class="inputLableCalender" readonly value="{{session('goDate')}}">--}}
+                            {{--                                            </label>--}}
+                            {{--                                            <label class="lableCalender">--}}
+                            {{--                                                <span class="ui_icon calendar"></span>--}}
+                            {{--                                                <input value="{{session('backDate')}}" name="BackDate" type="text"--}}
+                            {{--                                                       id="backDate"--}}
+                            {{--                                                       placeholder="تاریخ برگشت" readonly class="inputLableCalender">--}}
+                            {{--                                            </label>--}}
+                            {{--                                            <div>--}}
+                            {{--                                                @include('layouts.calendar')--}}
+                            {{--                                            </div>--}}
+                            {{--                                        </div>--}}
+                            {{--                                        <div class="roomBox">--}}
+                            {{--                                            <div class="shTIcon passengerIcon" onclick="togglePassengerNoSelectPane()"></div>--}}
+                            {{--                                            <div id="roomDetail" onclick="togglePassengerNoSelectPane()">--}}
+                            {{--                                                <span class="room" id="num_room">--}}{{----}}{{--{{$room}}--}}{{----}}{{--</span>&nbsp;--}}
+                            {{--                                                <span>اتاق</span>&nbsp;-&nbsp;--}}
+                            {{--                                                <span class="adult" id="num_adult">--}}{{----}}{{--{{$adult}}--}}{{----}}{{--</span>--}}
+                            {{--                                                <span>بزرگسال</span>&nbsp;--}}
+                            {{--                                                --}}{{----}}{{--<span class="children" id="num_child">--}}{{----}}{{----}}{{----}}{{--{{$children}}--}}{{----}}{{----}}{{----}}{{--</span>--}}
+                            {{--                                                --}}{{----}}{{--<span>بچه</span>&nbsp;--}}
+                            {{--                                            </div>--}}
+                            {{--                                            <div id="passengerArrowDown" onclick="togglePassengerNoSelectPane()"--}}
+                            {{--                                                 class="shTIcon searchBottomArrowIcone arrowPassengerIcone display-inline-block"></div>--}}
+                            {{--                                            <div id="passengerArrowUp" onclick="togglePassengerNoSelectPane()"--}}
+                            {{--                                                 class="shTIcon searchTopArrowIcone arrowPassengerIcone hidden display-inline-block"></div>--}}
 
-                                {{--                                            <div class="roomPassengerPopUp hidden" id="passengerNoSelectPane"--}}
-                                {{--                                                 onmouseleave="addClassHidden('passengerNoSelectPane'); passengerNoSelect = false;">--}}
-                                {{--                                                <div class="rowOfPopUp">--}}
-                                {{--                                                    <span class="float-left">اتاق</span>--}}
-                                {{--                                                    <div>--}}
-                                {{--                                                        <div onclick="changeRoomPassengersNum(-1, 3)"--}}
-                                {{--                                                             class="shTIcon minusPlusIcons minus"></div>--}}
-                                {{--                                                        <span class='numBetweenMinusPlusBtn room'--}}
-                                {{--                                                              id="roomNumInSelect">--}}{{--{{$room}}--}}{{--</span>--}}
-                                {{--                                                        <div onclick="changeRoomPassengersNum(1, 3)"--}}
-                                {{--                                                             class="shTIcon minusPlusIcons plus"></div>--}}
-                                {{--                                                    </div>--}}
-                                {{--                                                </div>--}}
-                                {{--                                                <div class="rowOfPopUp">--}}
-                                {{--                                                    <span class="float-left">بزرگسال</span>--}}
-                                {{--                                                    <div class="float-left">--}}
-                                {{--                                                        <div onclick="changeRoomPassengersNum(-1, 2)"--}}
-                                {{--                                                             class="shTIcon minusPlusIcons minus"></div>--}}
-                                {{--                                                        <span class='numBetweenMinusPlusBtn adult'--}}
-                                {{--                                                              id="adultPassengerNumInSelect">--}}{{--{{$adult}}--}}{{--</span>--}}
-                                {{--                                                        <div onclick="changeRoomPassengersNum(1, 2)"--}}
-                                {{--                                                             class="shTIcon minusPlusIcons plus"></div>--}}
-                                {{--                                                    </div>--}}
-                                {{--                                                </div>--}}
-                                {{--                                                <div class="rowOfPopUp">--}}
-                                {{--                                                    --}}{{--<span class="float-left">بچه</span>--}}
-                                {{--                                                    --}}{{--<div class="float-left">--}}
-                                {{--                                                    --}}{{--<div onclick="changeRoomPassengersNum(-1, 1)"--}}
-                                {{--                                                    --}}{{--class="shTIcon minusPlusIcons minus"></div>--}}
-                                {{--                                                    --}}{{--<span class='numBetweenMinusPlusBtn children'--}}
-                                {{--                                                    --}}{{--id="childrenPassengerNumInSelect">--}}{{----}}{{--{{$children}}--}}{{----}}{{--</span>--}}
-                                {{--                                                    --}}{{--<div onclick="changeRoomPassengersNum(1, 1)"--}}
-                                {{--                                                    --}}{{--class="shTIcon minusPlusIcons plus"></div>--}}
-                                {{--                                                    --}}{{--</div>--}}
-                                {{--                                                </div>--}}
-                                {{--                                                --}}{{--<div class="childrenPopUpAlert">سن بچه را در زمان ورود به هتل وارد--}}
-                                {{--                                                --}}{{--کنید--}}
-                                {{--                                                --}}{{--</div>--}}
-                                {{--                                                --}}{{--<div class="childBox"></div>--}}
-                                {{--                                            </div>--}}
-                                {{--                                        </div>--}}
-                                {{--                                        <div class="srchBox">--}}
-                                {{--                                            <button class="srchBtn" onclick="inputSearch(0)">جستجو و رزرو</button>--}}
-                                {{--                                        </div>--}}
-                                {{--                                        <div class="explainSrch">--}}
-                                {{--                                            با جستجو در بین سایر ارایه دهندگان خدمات، بهترین قیمت را از بین تمامی قیمت--}}
-                                {{--                                            های موجود در بازار به شما پیشنهاد می دهیم.--}}
-                                {{--                                        </div>--}}
-                                {{--                                        <div class="explainRoom">--}}
-                                {{--                                            ** قیمت های ارایه شده بر اساس قیمت ارزان ترین اتاق و برای یک شب اقامت ارایه--}}
-                                {{--                                            می گردد. ممکن است با توجه به نوع اتاق انتخابی و تعداد نفرات این قیمت متغیر--}}
-                                {{--                                            باشد.--}}
-                                {{--                                        </div>--}}
-                                {{--                                    </div>--}}
-                                {{--                                </div>--}}
-                            </div>
+                            {{--                                            <div class="roomPassengerPopUp hidden" id="passengerNoSelectPane"--}}
+                            {{--                                                 onmouseleave="addClassHidden('passengerNoSelectPane'); passengerNoSelect = false;">--}}
+                            {{--                                                <div class="rowOfPopUp">--}}
+                            {{--                                                    <span class="float-left">اتاق</span>--}}
+                            {{--                                                    <div>--}}
+                            {{--                                                        <div onclick="changeRoomPassengersNum(-1, 3)"--}}
+                            {{--                                                             class="shTIcon minusPlusIcons minus"></div>--}}
+                            {{--                                                        <span class='numBetweenMinusPlusBtn room'--}}
+                            {{--                                                              id="roomNumInSelect">--}}{{--{{$room}}--}}{{--</span>--}}
+                            {{--                                                        <div onclick="changeRoomPassengersNum(1, 3)"--}}
+                            {{--                                                             class="shTIcon minusPlusIcons plus"></div>--}}
+                            {{--                                                    </div>--}}
+                            {{--                                                </div>--}}
+                            {{--                                                <div class="rowOfPopUp">--}}
+                            {{--                                                    <span class="float-left">بزرگسال</span>--}}
+                            {{--                                                    <div class="float-left">--}}
+                            {{--                                                        <div onclick="changeRoomPassengersNum(-1, 2)"--}}
+                            {{--                                                             class="shTIcon minusPlusIcons minus"></div>--}}
+                            {{--                                                        <span class='numBetweenMinusPlusBtn adult'--}}
+                            {{--                                                              id="adultPassengerNumInSelect">--}}{{--{{$adult}}--}}{{--</span>--}}
+                            {{--                                                        <div onclick="changeRoomPassengersNum(1, 2)"--}}
+                            {{--                                                             class="shTIcon minusPlusIcons plus"></div>--}}
+                            {{--                                                    </div>--}}
+                            {{--                                                </div>--}}
+                            {{--                                                <div class="rowOfPopUp">--}}
+                            {{--                                                    --}}{{--<span class="float-left">بچه</span>--}}
+                            {{--                                                    --}}{{--<div class="float-left">--}}
+                            {{--                                                    --}}{{--<div onclick="changeRoomPassengersNum(-1, 1)"--}}
+                            {{--                                                    --}}{{--class="shTIcon minusPlusIcons minus"></div>--}}
+                            {{--                                                    --}}{{--<span class='numBetweenMinusPlusBtn children'--}}
+                            {{--                                                    --}}{{--id="childrenPassengerNumInSelect">--}}{{----}}{{--{{$children}}--}}{{----}}{{--</span>--}}
+                            {{--                                                    --}}{{--<div onclick="changeRoomPassengersNum(1, 1)"--}}
+                            {{--                                                    --}}{{--class="shTIcon minusPlusIcons plus"></div>--}}
+                            {{--                                                    --}}{{--</div>--}}
+                            {{--                                                </div>--}}
+                            {{--                                                --}}{{--<div class="childrenPopUpAlert">سن بچه را در زمان ورود به هتل وارد--}}
+                            {{--                                                --}}{{--کنید--}}
+                            {{--                                                --}}{{--</div>--}}
+                            {{--                                                --}}{{--<div class="childBox"></div>--}}
+                            {{--                                            </div>--}}
+                            {{--                                        </div>--}}
+                            {{--                                        <div class="srchBox">--}}
+                            {{--                                            <button class="srchBtn" onclick="inputSearch(0)">جستجو و رزرو</button>--}}
+                            {{--                                        </div>--}}
+                            {{--                                        <div class="explainSrch">--}}
+                            {{--                                            با جستجو در بین سایر ارایه دهندگان خدمات، بهترین قیمت را از بین تمامی قیمت--}}
+                            {{--                                            های موجود در بازار به شما پیشنهاد می دهیم.--}}
+                            {{--                                        </div>--}}
+                            {{--                                        <div class="explainRoom">--}}
+                            {{--                                            ** قیمت های ارایه شده بر اساس قیمت ارزان ترین اتاق و برای یک شب اقامت ارایه--}}
+                            {{--                                            می گردد. ممکن است با توجه به نوع اتاق انتخابی و تعداد نفرات این قیمت متغیر--}}
+                            {{--                                            باشد.--}}
+                            {{--                                        </div>--}}
+                            {{--                                    </div>--}}
+                            {{--                                </div>--}}
                         </div>
-                        {{--                        <div id="helpSpan_9" class="helpSpans hidden">--}}
-                        {{--                            <span class="introjs-arrow"></span>--}}
-                        {{--                            <p>در این قسمت هتل خود را به سادگی چند دکمه رزرو کنید. البته این سیستم برای ما آنچنان--}}
-                        {{--                                ساده نیست. این سرویس هنوز آماده استفاده نمی باشد.</p>--}}
-                        {{--                            <button data-val="9" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_9">بعدی</button>--}}
-                        {{--                            <button data-val="9" class="btn btn-primary backBtnsHelp" id="backBtnHelp_9">قبلی</button>--}}
-                        {{--                            <button class="btn btn-danger exitBtnHelp">خروج</button>--}}
-                        {{--                        </div>--}}
-                        <div class="clear-both"></div>
-                        @if($hasLogin)
-                            <div id="targetHelp_8" class="wideScreen targets float-left col-xs-6 pd-0">
-                                    <span onclick="bookMark()"
-                                          class="ui_button casino save-location-7306673 ui_icon saveAsBookmarkMainDiv {{($bookMark) ? "castle" : "red-heart"}} ">
-                                        <div class="saveAsBookmarkIcon"></div>
-                                        <div class="saveAsBookmarkLabel">
-                                            ذخیره این صفحه
-                                        </div>
-                                    </span>
-                                <div id="helpSpan_8" class="helpSpans hidden row">
-                                    <span class="introjs-arrow"></span>
-                                    <p>شاید بعدا بخواهید دوباره به همین مکان باز گردید. پس آن را نشان کنید تا از منوی بالا هر وقت که خواستید دوباره به آن باز گردید.</p>
-                                    <button data-val="8" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_8">بعدی</button>
-                                    <button data-val="8" class="btn btn-primary backBtnsHelp" id="backBtnHelp_8">قبلی</button>
-                                    <button class="btn btn-danger exitBtnHelp">خروج</button>
-                                </div>
-                            </div>
-                        @endif
-                        @if($hasLogin)
-                            @include('layouts.shareBox')
-
-                        @endif
                     </div>
-                    {{--                    <div id="bestPriceRezerved" class="meta position-relative"--}}
-                    {{--                         style="@if(session('goDate') == null && session('backDate') == null) display: none @endif">--}}
-                    {{--                        <div id="targetHelp_9" class="targets float-left">--}}
-                    {{--                            @if($place->reserveId == null)--}}
-                    {{--                                <div class="offlineReserveErr">--}}
-                    {{--                                    <div>--}}
-                    {{--                                        متاسفانه در حال حاضر امکان رزرو انلاین برای این مرکز موجود نمی باشد.--}}
-                    {{--                                    </div>--}}
-                    {{--                                </div>--}}
-                    {{--                            @endif--}}
-                    {{--                            @if(session('goDate') != null)--}}
-                    {{--                                <div class="meta_inner" id="">--}}
-                    {{--                                    <div class="ppr_rup ppr_priv_hr_atf_north_star_traveler_info_nostalgic display-none">--}}
-                    {{--                                        <div class="metaDatePicker easyClear">--}}
-                    {{--                                            <div id="date_input_main_div">--}}
-                    {{--                                                <div class="shTIcon closeXicon closeXicon2" onclick="changeStatetounReserved()"></div>--}}
-                    {{--                                                <div class="prw_rup prw_datepickers_hr_north_star_dates_nostalgic">--}}
-                    {{--                                                    <label class="lableCalender" id="date_input_label">--}}
-                    {{--                                                        <span class="ui_icon calendar"></span>--}}
-                    {{--                                                        <input type="text" id="date_input" placeholder="{{session('goDate')}}" class="inputLableCalender">--}}
-                    {{--                                                    </label>--}}
-                    {{--                                                    <label class="lableCalender">--}}
-                    {{--                                                        <span class="ui_icon calendar"></span>--}}
-                    {{--                                                        <input type="text" id="date_input_end_inHotel"--}}
-                    {{--                                                               placeholder="{{session('backDate')}}"--}}
-                    {{--                                                               class="inputLableCalender">--}}
-                    {{--                                                    </label>--}}
-                    {{--                                                </div>--}}
-                    {{--                                            </div>--}}
-                    {{--                                            <div class="offerBox">--}}
-                    {{--                                                @if($rooms != null)--}}
-                    {{--                                                    <div id="bestPriceTitleWithRoom">بهترین قیمت</div>--}}
-                    {{--                                                    <div>کمترین قیمت برای هرشب اقامت</div>--}}
-                    {{--                                                    <div>--}}
-                    {{--                                                        <div id="minimumPrice">{{$place->minPrice}}--}}
-                    {{--                                                            --}}{{--<div class="salePrice">550.000</div>--}}
-                    {{--                                                        </div>--}}
-                    {{--                                                        <div class="float-left">--}}
-                    {{--                                                            <div id="fromAliBabaLink">--}}
-                    {{--                                                                <div>از علی بابا</div>--}}
-                    {{--                                                                <img src="" alt="">--}}
-                    {{--                                                            </div>--}}
-                    {{--                                                            <button class="btn viewOffersBtn" type="button"--}}
-                    {{--                                                                    onclick="scrollToBed()">انتخاب--}}
-                    {{--                                                            </button>--}}
-                    {{--                                                        </div>--}}
-                    {{--                                                    </div>--}}
-                    {{--                                                    <div id="savePercentage">--}}
-                    {{--                                                        --}}{{--<div class="display-inline-block">ده درصد تخفیف ویژه نوروز</div>--}}
-                    {{--                                                        <div class="float-left">{{$place->savePercent}} درصد ذخیره--}}
-                    {{--                                                        </div>--}}
-                    {{--                                                    </div>--}}
-                    {{--                                                    <div id="bestPriceBtn">--}}
-                    {{--                                                        --}}{{--<button class="btn specOfferBtn" type="button">پیشنهاد ویژه</button>--}}
-                    {{--                                                        <button class="btn specOfferBtn"--}}
-                    {{--                                                                type="button">{{$place->service}}</button>--}}
-                    {{--                                                        --}}{{--<button class="btn reservBtn float-left" type="button">رزرو آنی</button>--}}
-                    {{--                                                    </div>--}}
-                    {{--                                                @else--}}
-                    {{--                                                    <div>--}}
-                    {{--                                                        متاسفانه در بازه زمانی و یا تعداد نفرات برای این هتل اتاقی یافت--}}
-                    {{--                                                        نشد.--}}
-                    {{--                                                    </div>--}}
-                    {{--                                                @endif--}}
-                    {{--                                            </div>--}}
-
-                    {{--                                            --}}{{--<div class="offerBox">--}}
-                    {{--                                            --}}{{--<div>--}}
-                    {{--                                            --}}{{--<div class="font-size-14em display-inline-block">650.000--}}
-                    {{--                                            --}}{{--<div class="salePrice" style="width: 54px; margin: -14px 0 0 0">550.000</div>--}}
-                    {{--                                            --}}{{--</div>--}}
-                    {{--                                            --}}{{--<div class="float-left">--}}
-                    {{--                                            --}}{{--<div style="float:right; margin: 2px 10px;">--}}
-                    {{--                                            --}}{{--<div>از علی بابا</div>--}}
-                    {{--                                            --}}{{--<img src="" alt="">--}}
-                    {{--                                            --}}{{--</div>--}}
-                    {{--                                            --}}{{--<button class="btn viewOffersBtn" type="button">انتخاب</button>--}}
-                    {{--                                            --}}{{--</div>--}}
-                    {{--                                            --}}{{--</div>--}}
-                    {{--                                            --}}{{--<div style="font-size: 0.9em; color: red; margin: 2px 0;">--}}
-                    {{--                                            --}}{{--<div class="display-inline-block">ده درصد تخفیف ویژه نوروز</div>--}}
-                    {{--                                            --}}{{--</div>--}}
-                    {{--                                            --}}{{--<div style="margin: 1% 0;">--}}
-                    {{--                                            --}}{{--<button class="btn specOfferBtn" type="button">پیشنهاد ویژه</button>--}}
-                    {{--                                            --}}{{--<button class="btn reservBtn float-left" type="button">رزرو آنی</button>--}}
-                    {{--                                            --}}{{--</div>--}}
-                    {{--                                            --}}{{--</div>--}}
-
-                    {{--                                            --}}{{--<div class="offerBox">--}}
-                    {{--                                            --}}{{--<div>--}}
-                    {{--                                            --}}{{--<div style="font-size-14em display-inline-block; line-height: 40px;">650.000</div>--}}
-                    {{--                                            --}}{{--<div class="float-left">--}}
-                    {{--                                            --}}{{--<div style="float:right; margin: 2px 10px;">--}}
-                    {{--                                            --}}{{--<div>از علی بابا</div>--}}
-                    {{--                                            --}}{{--<img src="" alt="">--}}
-                    {{--                                            --}}{{--</div>--}}
-                    {{--                                            --}}{{--<button class="btn viewOffersBtn" type="button">انتخاب</button>--}}
-                    {{--                                            --}}{{--</div>--}}
-                    {{--                                            --}}{{--</div>--}}
-                    {{--                                            --}}{{--</div>--}}
-
-                    {{--                                            <div class="hidden other10_Offer">به همراه {{$place->otherRoom}} پیشنهاد دیگر</div>--}}
-
-                    {{--                                            <div class="explainRoom">--}}
-                    {{--                                                ** قیمت های ارایه شده بر اساس قیمت ارزان ترین اتاق و برای یک شب اقامت--}}
-                    {{--                                                ارایه--}}
-                    {{--                                                می گردد. ممکن است با توجه به نوع اتاق انتخابی و تعداد نفرات این قیمت--}}
-                    {{--                                                متغیر--}}
-                    {{--                                                باشد.--}}
-                    {{--                                            </div>--}}
-                    {{--                                        </div>--}}
-                    {{--                                    </div>--}}
-                    {{--                                </div>--}}
-                    {{--                            @endif--}}
-                    {{--                        </div>--}}
                     {{--                        <div id="helpSpan_9" class="helpSpans hidden">--}}
                     {{--                            <span class="introjs-arrow"></span>--}}
                     {{--                            <p>در این قسمت هتل خود را به سادگی چند دکمه رزرو کنید. البته این سیستم برای ما آنچنان--}}
@@ -683,8 +590,158 @@ if ($total == 0)
                     {{--                            <button data-val="9" class="btn btn-primary backBtnsHelp" id="backBtnHelp_9">قبلی</button>--}}
                     {{--                            <button class="btn btn-danger exitBtnHelp">خروج</button>--}}
                     {{--                        </div>--}}
-                    {{--                    </div>--}}
-{{--                @endif--}}
+                    <div class="clear-both"></div>
+                    @if($hasLogin)
+                        <div id="targetHelp_8" class="wideScreen targets float-left col-xs-6 pd-0">
+                                    <span onclick="bookMark()"
+                                          class="ui_button casino save-location-7306673 ui_icon saveAsBookmarkMainDiv {{($bookMark) ? "castle" : "red-heart"}} ">
+                                        <div class="saveAsBookmarkIcon"></div>
+                                        <div class="saveAsBookmarkLabel">
+                                            ذخیره این صفحه
+                                        </div>
+                                    </span>
+                            <div id="helpSpan_8" class="helpSpans hidden row">
+                                <span class="introjs-arrow"></span>
+                                <p>شاید بعدا بخواهید دوباره به همین مکان باز گردید. پس آن را نشان کنید تا از منوی بالا
+                                    هر وقت که خواستید دوباره به آن باز گردید.</p>
+                                <button data-val="8" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_8">بعدی
+                                </button>
+                                <button data-val="8" class="btn btn-primary backBtnsHelp" id="backBtnHelp_8">قبلی
+                                </button>
+                                <button class="btn btn-danger exitBtnHelp">خروج</button>
+                            </div>
+                        </div>
+                    @endif
+                    @if($hasLogin)
+                        @include('layouts.shareBox')
+
+                    @endif
+                </div>
+                {{--                    <div id="bestPriceRezerved" class="meta position-relative"--}}
+                {{--                         style="@if(session('goDate') == null && session('backDate') == null) display: none @endif">--}}
+                {{--                        <div id="targetHelp_9" class="targets float-left">--}}
+                {{--                            @if($place->reserveId == null)--}}
+                {{--                                <div class="offlineReserveErr">--}}
+                {{--                                    <div>--}}
+                {{--                                        متاسفانه در حال حاضر امکان رزرو انلاین برای این مرکز موجود نمی باشد.--}}
+                {{--                                    </div>--}}
+                {{--                                </div>--}}
+                {{--                            @endif--}}
+                {{--                            @if(session('goDate') != null)--}}
+                {{--                                <div class="meta_inner" id="">--}}
+                {{--                                    <div class="ppr_rup ppr_priv_hr_atf_north_star_traveler_info_nostalgic display-none">--}}
+                {{--                                        <div class="metaDatePicker easyClear">--}}
+                {{--                                            <div id="date_input_main_div">--}}
+                {{--                                                <div class="shTIcon closeXicon closeXicon2" onclick="changeStatetounReserved()"></div>--}}
+                {{--                                                <div class="prw_rup prw_datepickers_hr_north_star_dates_nostalgic">--}}
+                {{--                                                    <label class="lableCalender" id="date_input_label">--}}
+                {{--                                                        <span class="ui_icon calendar"></span>--}}
+                {{--                                                        <input type="text" id="date_input" placeholder="{{session('goDate')}}" class="inputLableCalender">--}}
+                {{--                                                    </label>--}}
+                {{--                                                    <label class="lableCalender">--}}
+                {{--                                                        <span class="ui_icon calendar"></span>--}}
+                {{--                                                        <input type="text" id="date_input_end_inHotel"--}}
+                {{--                                                               placeholder="{{session('backDate')}}"--}}
+                {{--                                                               class="inputLableCalender">--}}
+                {{--                                                    </label>--}}
+                {{--                                                </div>--}}
+                {{--                                            </div>--}}
+                {{--                                            <div class="offerBox">--}}
+                {{--                                                @if($rooms != null)--}}
+                {{--                                                    <div id="bestPriceTitleWithRoom">بهترین قیمت</div>--}}
+                {{--                                                    <div>کمترین قیمت برای هرشب اقامت</div>--}}
+                {{--                                                    <div>--}}
+                {{--                                                        <div id="minimumPrice">{{$place->minPrice}}--}}
+                {{--                                                            --}}{{--<div class="salePrice">550.000</div>--}}
+                {{--                                                        </div>--}}
+                {{--                                                        <div class="float-left">--}}
+                {{--                                                            <div id="fromAliBabaLink">--}}
+                {{--                                                                <div>از علی بابا</div>--}}
+                {{--                                                                <img src="" alt="">--}}
+                {{--                                                            </div>--}}
+                {{--                                                            <button class="btn viewOffersBtn" type="button"--}}
+                {{--                                                                    onclick="scrollToBed()">انتخاب--}}
+                {{--                                                            </button>--}}
+                {{--                                                        </div>--}}
+                {{--                                                    </div>--}}
+                {{--                                                    <div id="savePercentage">--}}
+                {{--                                                        --}}{{--<div class="display-inline-block">ده درصد تخفیف ویژه نوروز</div>--}}
+                {{--                                                        <div class="float-left">{{$place->savePercent}} درصد ذخیره--}}
+                {{--                                                        </div>--}}
+                {{--                                                    </div>--}}
+                {{--                                                    <div id="bestPriceBtn">--}}
+                {{--                                                        --}}{{--<button class="btn specOfferBtn" type="button">پیشنهاد ویژه</button>--}}
+                {{--                                                        <button class="btn specOfferBtn"--}}
+                {{--                                                                type="button">{{$place->service}}</button>--}}
+                {{--                                                        --}}{{--<button class="btn reservBtn float-left" type="button">رزرو آنی</button>--}}
+                {{--                                                    </div>--}}
+                {{--                                                @else--}}
+                {{--                                                    <div>--}}
+                {{--                                                        متاسفانه در بازه زمانی و یا تعداد نفرات برای این هتل اتاقی یافت--}}
+                {{--                                                        نشد.--}}
+                {{--                                                    </div>--}}
+                {{--                                                @endif--}}
+                {{--                                            </div>--}}
+
+                {{--                                            --}}{{--<div class="offerBox">--}}
+                {{--                                            --}}{{--<div>--}}
+                {{--                                            --}}{{--<div class="font-size-14em display-inline-block">650.000--}}
+                {{--                                            --}}{{--<div class="salePrice" style="width: 54px; margin: -14px 0 0 0">550.000</div>--}}
+                {{--                                            --}}{{--</div>--}}
+                {{--                                            --}}{{--<div class="float-left">--}}
+                {{--                                            --}}{{--<div style="float:right; margin: 2px 10px;">--}}
+                {{--                                            --}}{{--<div>از علی بابا</div>--}}
+                {{--                                            --}}{{--<img src="" alt="">--}}
+                {{--                                            --}}{{--</div>--}}
+                {{--                                            --}}{{--<button class="btn viewOffersBtn" type="button">انتخاب</button>--}}
+                {{--                                            --}}{{--</div>--}}
+                {{--                                            --}}{{--</div>--}}
+                {{--                                            --}}{{--<div style="font-size: 0.9em; color: red; margin: 2px 0;">--}}
+                {{--                                            --}}{{--<div class="display-inline-block">ده درصد تخفیف ویژه نوروز</div>--}}
+                {{--                                            --}}{{--</div>--}}
+                {{--                                            --}}{{--<div style="margin: 1% 0;">--}}
+                {{--                                            --}}{{--<button class="btn specOfferBtn" type="button">پیشنهاد ویژه</button>--}}
+                {{--                                            --}}{{--<button class="btn reservBtn float-left" type="button">رزرو آنی</button>--}}
+                {{--                                            --}}{{--</div>--}}
+                {{--                                            --}}{{--</div>--}}
+
+                {{--                                            --}}{{--<div class="offerBox">--}}
+                {{--                                            --}}{{--<div>--}}
+                {{--                                            --}}{{--<div style="font-size-14em display-inline-block; line-height: 40px;">650.000</div>--}}
+                {{--                                            --}}{{--<div class="float-left">--}}
+                {{--                                            --}}{{--<div style="float:right; margin: 2px 10px;">--}}
+                {{--                                            --}}{{--<div>از علی بابا</div>--}}
+                {{--                                            --}}{{--<img src="" alt="">--}}
+                {{--                                            --}}{{--</div>--}}
+                {{--                                            --}}{{--<button class="btn viewOffersBtn" type="button">انتخاب</button>--}}
+                {{--                                            --}}{{--</div>--}}
+                {{--                                            --}}{{--</div>--}}
+                {{--                                            --}}{{--</div>--}}
+
+                {{--                                            <div class="hidden other10_Offer">به همراه {{$place->otherRoom}} پیشنهاد دیگر</div>--}}
+
+                {{--                                            <div class="explainRoom">--}}
+                {{--                                                ** قیمت های ارایه شده بر اساس قیمت ارزان ترین اتاق و برای یک شب اقامت--}}
+                {{--                                                ارایه--}}
+                {{--                                                می گردد. ممکن است با توجه به نوع اتاق انتخابی و تعداد نفرات این قیمت--}}
+                {{--                                                متغیر--}}
+                {{--                                                باشد.--}}
+                {{--                                            </div>--}}
+                {{--                                        </div>--}}
+                {{--                                    </div>--}}
+                {{--                                </div>--}}
+                {{--                            @endif--}}
+                {{--                        </div>--}}
+                {{--                        <div id="helpSpan_9" class="helpSpans hidden">--}}
+                {{--                            <span class="introjs-arrow"></span>--}}
+                {{--                            <p>در این قسمت هتل خود را به سادگی چند دکمه رزرو کنید. البته این سیستم برای ما آنچنان--}}
+                {{--                                ساده نیست. این سرویس هنوز آماده استفاده نمی باشد.</p>--}}
+                {{--                            <button data-val="9" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_9">بعدی</button>--}}
+                {{--                            <button data-val="9" class="btn btn-primary backBtnsHelp" id="backBtnHelp_9">قبلی</button>--}}
+                {{--                            <button class="btn btn-danger exitBtnHelp">خروج</button>--}}
+                {{--                        </div>--}}
+                {{--                    </div>--}}
+                {{--                @endif--}}
                 <div class="prw_rup prw_common_location_photos photos position-relative">
                     <div id="targetHelp_10" class="targets">
                         <div class="inner">
@@ -692,19 +749,27 @@ if ($total == 0)
                                 <div class="prw_rup prw_common_mercury_photo_carousel">
                                     <div class="carousel bignav">
                                         <div class="carousel_images carousel_images_header">
-                                            <div id="photographerAlbum" data-toggle="modal" data-target="#showingPhotographerPicsModal" onclick="changePhotographerSlidePic(0)">
+                                            <div id="photographerAlbum" data-toggle="modal"
+                                                 data-target="#showingPhotographerPicsModal"
+                                                 onclick="changePhotographerSlidePic(0)">
 
                                                 <div id="mainSlider" class="swiper-container">
                                                     <div class="swiper-wrapper">
 
                                                         @for($i = 0; $i < count($photographerPics); $i++)
                                                             <div class="swiper-slide">
-                                                                <img class="eachPicOfSlider" src="{{$photographerPics[$i]['s']}}" alt="{{$photographerPics[$i]['alt']}}" style="width: 100%;">
+                                                                <img class="eachPicOfSlider"
+                                                                     src="{{$photographerPics[$i]['s']}}"
+                                                                     alt="{{$photographerPics[$i]['alt']}}"
+                                                                     style="width: 100%;">
 
                                                                 <div class="see_all_count_wrap" onclick="getPhotos(-1)">
                                                                     <span class="see_all_count">
-                                                                        <div class="circleBase type2" id="photographerIdPic" style="background-color: #4DC7BC;">
-                                                                            <img src="{{$photographerPics[$i]['userPic']}}" style="width: 100%; height: 100%; border-radius: 50%;">
+                                                                        <div class="circleBase type2"
+                                                                             id="photographerIdPic"
+                                                                             style="background-color: #4DC7BC;">
+                                                                            <img src="{{$photographerPics[$i]['userPic']}}"
+                                                                                 style="width: 100%; height: 100%; border-radius: 50%;">
                                                                         </div>
                                                                         <div class="display-inline-block mg-rt-10 mg-tp-2">
                                                                             <span class="display-block font-size-12">عکس از</span>
@@ -724,8 +789,10 @@ if ($total == 0)
                                                 عکاس هستید؟ کلیک کنید
                                             </a>
                                         </div>
-                                        <div class="left-nav left-nav-header swiper-button-next" style="opacity: 0.8;"></div>
-                                        <div class="right-nav right-nav-header swiper-button-prev" style="left: auto; opacity: 0.8;"></div>
+                                        <div class="left-nav left-nav-header swiper-button-next"
+                                             style="opacity: 0.8;"></div>
+                                        <div class="right-nav right-nav-header swiper-button-prev"
+                                             style="left: auto; opacity: 0.8;"></div>
                                     </div>
                                 </div>
                             </div>
@@ -736,15 +803,18 @@ if ($total == 0)
                                         <div class="albumThumbnail">
                                             <div class="prw_rup prw_common_centered_image">
                                                 @if(count($sitePics) != 0)
-                                                    <span class="imgWrap imgWrap1stTemp" data-toggle="modal" data-target="#showingSitePicsModal">
-                                                        <img alt="{{$place->alt1}}" src="{{$thumbnail}}" class="centeredImg" width="100%"/>
+                                                    <span class="imgWrap imgWrap1stTemp" data-toggle="modal"
+                                                          data-target="#showingSitePicsModal">
+                                                        <img alt="{{$place->alt1}}" src="{{$thumbnail}}"
+                                                             class="centeredImg" width="100%"/>
                                                     </span>
                                                 @else
                                                     <span class="imgWrap imgWrap1stTemp"></span>
                                                 @endif
                                             </div>
                                             @if(count($sitePics) != 0)
-                                                <div class="albumInfo" data-toggle="modal" data-target="#showingSitePicsModal">
+                                                <div class="albumInfo" data-toggle="modal"
+                                                     data-target="#showingSitePicsModal">
                                                     <span class="ui_icon camera">&nbsp;</span>عکس‌های
                                                     سایت - {{count($sitePics)}}
                                                 </div>
@@ -757,31 +827,31 @@ if ($total == 0)
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tileWrap" >
+                                <div class="tileWrap">
                                     <div class="prw_rup prw_hotels_flexible_album_thumb tile">
                                         <div class="albumThumbnail">
-                                            <div class="prw_rup prw_common_centered_image">
+                                            <div class="prw_rup prw_common_centered_image"
+                                                    {{(count($userPhotos) != 0) ? ' data-toggle=modal data-target=#showingUserPicsModal' : "" }}>
                                                 <span class="imgWrap imgWrap1stTemp">
-                                                    {{--@if($userPhotos != 0)--}}
-                                                    {{--<img onclick="getPhotos(-3)" src="{{$logPhoto['pic']}}"--}}
-                                                    {{--class="centeredImg" style=" min-width:152px; "--}}
-                                                    {{--width="100%"/>--}}
-                                                    {{--@endif--}}
+                                                    @if(count($userPhotos) != 0)
+                                                        <img src="{{$userPhotos[0]->pic}}" class="centeredImg" width="100%"/>
+                                                    @endif
                                                 </span>
                                             </div>
-                                            <div {{($userPhotos != 0) ? "onclick=getPhotos(-3)" : "" }}  class="albumInfo">
+                                            <div {{(count($userPhotos) != 0) ? ' data-toggle=modal data-target=#showingUserPicsModal' : "" }}  class="albumInfo">
                                                 <span class="ui_icon camera">&nbsp;</span>عکس‌های
-                                                کاربران - {{$userPhotos}}
+                                                کاربران - {{count($userPhotos)}}
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tileWrap"  onclick="showModal()">
+                                <div class="tileWrap" onclick="showModal()">
                                     <div class="prw_rup prw_hotels_flexible_album_thumb tile">
                                         <div class="albumThumbnail">
                                             <div class="prw_rup prw_common_centered_image">
                                                 <span class="imgWrap imgWrap1stTemp">
-                                                    <img src="https://static.tacdn.com/img2/x.gif" id="imgWrap3rdLine" class="centeredImg" width="100%"/>
+                                                    <img src="https://static.tacdn.com/img2/x.gif" id="imgWrap3rdLine"
+                                                         class="centeredImg" width="100%"/>
                                                 </span>
                                             </div>
                                             <div class="albumInfo">
@@ -813,11 +883,15 @@ if ($total == 0)
                             </div>
                             <div id="commentInputMainDiv">
                                 <div class="inputBoxGeneralInfo inputBox postInputBox" id="commentInputBox">
-                                    <div id="profilePicForComment" class="profilePicForPost circleBase type2"></div>
+                                    <div id="profilePicForComment" class="profilePicForPost circleBase type2">
+                                        <img src="{{ $userPic }}" style="width: 100%; height: 100%; border-radius: 50%;">
+                                    </div>
                                     @if(auth()->check())
-                                        <textarea class="inputBoxInput inputBoxInputComment" type="text" placeholder="{{auth()->user()->first_name ? auth()->user()->first_name :auth()->user()->username }}، چه فکر یا احساسی داری.....؟" ></textarea>
+                                        <textarea class="inputBoxInput inputBoxInputComment" type="text"
+                                                  placeholder="{{auth()->user()->first_name ? auth()->user()->first_name :auth()->user()->username }}، چه فکر یا احساسی داری.....؟"></textarea>
                                     @else
-                                        <textarea class="inputBoxInput inputBoxInputComment" type="text" placeholder="سینا، چه فکر یا احساسی داری.....؟"></textarea>
+                                        <textarea class="inputBoxInput inputBoxInputComment" type="text"
+                                                  placeholder="سینا، چه فکر یا احساسی داری.....؟"></textarea>
                                     @endif
                                     <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
                                 </div>
@@ -827,19 +901,23 @@ if ($total == 0)
                                     <span class="addPhotoCommentIcon"></span>
                                     <span class="commentOptionsText">عکس اضافه کنید.</span>
                                 </div><!--
-                             --><div class="commentOptionsBoxes">
+                             -->
+                                <div class="commentOptionsBoxes">
                                     <span class="addVideoCommentIcon"></span>
                                     <span class="commentOptionsText">ویدیو اضافه کنید.</span>
                                 </div><!--
-                             --><div class="commentOptionsBoxes">
+                             -->
+                                <div class="commentOptionsBoxes">
                                     <span class="add360VideoCommentIcon"></span>
                                     <span class="commentOptionsText">ویدیو 360 اضافه کنید.</span>
                                 </div><!--
-                             --><div class="commentOptionsBoxes" id="bodyLinks">
+                             -->
+                                <div class="commentOptionsBoxes" id="bodyLinks">
                                     <span class="tagFriendCommentIcon"></span>
                                     <span class="commentOptionsText">دوستانتان را tag کنید.</span>
                                 </div><!--
-                             --><div class="moreSettingPostManDiv commentOptionsBoxes">
+                             -->
+                                <div class="moreSettingPostManDiv commentOptionsBoxes">
                                     <span class="moreSettingPost"></span>
                                 </div>
                             </div>
@@ -853,7 +931,8 @@ if ($total == 0)
     <div id="MAINWRAP" class="
         full_meta_photos_v3  full_meta_photos_v4  big_pic_mainwrap_tweaks horizontal_xsell ui_container is-mobile position-relative">
         <div id="MAIN" class="Hotel_Review prodp13n_jfy_overflow_visible position-relative">
-            <div id="BODYCON" ng-app="mainApp" class="col easyClear bodLHN poolB adjust_padding new_meta_chevron new_meta_chevron_v2 position-relative">
+            <div id="BODYCON" ng-app="mainApp"
+                 class="col easyClear bodLHN poolB adjust_padding new_meta_chevron new_meta_chevron_v2 position-relative">
 
                 <div class="postsFiltrationBarToggle display-none col-xs-12">
                     <div class="postsMainFiltrationBar">
@@ -869,7 +948,7 @@ if ($total == 0)
                 </div>
 
                 <script>
-                    function openTab(tabName,elmnt,fontColor) {
+                    function openTab(tabName, elmnt, fontColor) {
                         var i, tabcontent, tablinks;
                         tabcontent = document.getElementsByClassName("tabContentMainWrap");
                         for (i = 0; i < tabcontent.length; i++) {
@@ -884,6 +963,7 @@ if ($total == 0)
 
                         initSwiper();
                     }
+
                     // Get the element with id="defaultOpen" and click on it
                     document.getElementById("defaultOpenMainWrap").style.color = "rgb(77, 199, 188)";
 
@@ -913,23 +993,38 @@ if ($total == 0)
                         <div id="introduction" class="ppr_rup ppr_priv_location_detail_overview">
                             <div class="block_wrap" data-tab="TABS_OVERVIEW">
                                 <div class="overviewContent">
-                                    <div id="mobileIntroductionMainDivId" class="mobileIntroductionMainDiv tabContentMainWrap">
+                                    <div id="mobileIntroductionMainDivId"
+                                         class="mobileIntroductionMainDiv tabContentMainWrap">
                                         <div class="tabLinkMainDiv">
-                                            <button class="tabLink" onclick="openCity('commentsAndAddressMobile', this, 'white', '#4dc7bc')">نظرات و آدرس</button><!--
-                                         --><button class="tabLink" onclick="openCity('detailsAndFeaturesMobile', this, 'white', '#4dc7bc')">امکانات و ویژگی‌ها</button><!--
-                                         --><button class="tabLink" onclick="openCity('generalDescriptionMobile', this, 'white', '#4dc7bc')" id="defaultOpen">معرفی کلی</button>
+                                            <button class="tabLink"
+                                                    onclick="openCity('commentsAndAddressMobile', this, 'white', '#4dc7bc')">
+                                                نظرات و آدرس
+                                            </button><!--
+                                         -->
+                                            <button class="tabLink"
+                                                    onclick="openCity('detailsAndFeaturesMobile', this, 'white', '#4dc7bc')">
+                                                امکانات و ویژگی‌ها
+                                            </button><!--
+                                         -->
+                                            <button class="tabLink"
+                                                    onclick="openCity('generalDescriptionMobile', this, 'white', '#4dc7bc')"
+                                                    id="defaultOpen">معرفی کلی
+                                            </button>
                                         </div>
 
                                         <div class="ui_columns is-multiline is-mobile reviewsAndDetails direction-rtlImp">
-                                            <div id="generalDescriptionMobile" class="ui_column is-12 generalDescription tabContent">
+                                            <div id="generalDescriptionMobile"
+                                                 class="ui_column is-12 generalDescription tabContent">
                                                 <div class="block_header">
                                                     <h3 class="block_title">معرفی کلی </h3>
                                                 </div>
                                                 <div>
-                                                    <div class="overviewContent" id="introductionText">{{$place->description}}</div>
+                                                    <div class="overviewContent"
+                                                         id="introductionText">{{$place->description}}</div>
                                                 </div>
                                             </div>
-                                            <div id="detailsAndFeaturesMobile" class="ui_column is-8 details tabContent">
+                                            <div id="detailsAndFeaturesMobile"
+                                                 class="ui_column is-8 details tabContent">
                                                 <div class="direction-rtl">
                                                     <?php $k = -1; ?>
 
@@ -942,7 +1037,8 @@ if ($total == 0)
                                                     @endif
                                                 </div>
                                             </div>
-                                            <div id="commentsAndAddressMobile" class="ui_column is-4 reviews tabContent">
+                                            <div id="commentsAndAddressMobile"
+                                                 class="ui_column is-4 reviews tabContent">
                                                 <div class="rating">
                                                     <div class="block_header">
                                                         <h3 class="block_title">نظر شما </h3>
@@ -984,7 +1080,7 @@ if ($total == 0)
                                                                 </span>
                                                             </span>
                                                             <span class="row_count row_cell">{{ceil($rates[4] * 100 / $total)}}
-                                                            %</span>
+                                                                %</span>
                                                         </li>
                                                         <li class="chart_row clickable">
                                                             <span class="row_label row_cell">خوب</span>
@@ -1032,7 +1128,8 @@ if ($total == 0)
                                                         </li>
                                                     </ul>
                                                 </div>
-                                                <div class="prw_rup prw_common_atf_header_bl" id="clientConnectionsLines">
+                                                <div class="prw_rup prw_common_atf_header_bl"
+                                                     id="clientConnectionsLines">
                                                     <div class="blEntry address mg-bt-10" id="clientConnectionsAddress">
                                                         <span class="ui_icon map-pin"></span>
                                                         <span class="street-address">آدرس : </span>
@@ -1045,13 +1142,15 @@ if ($total == 0)
                                                         </div>
                                                     @endif
                                                     @if(!empty($place->site))
-                                                        <div class="blEntry website mg-bt-10" id="clientConnectionsWebsite">
+                                                        <div class="blEntry website mg-bt-10"
+                                                             id="clientConnectionsWebsite">
                                                             <span class="ui_icon laptop"></span>
                                                             <?php
                                                             if (strpos($place->site, 'http') === false)
                                                                 $place->site = 'http://' . $place->site;
                                                             ?>
-                                                            <a target="_blank" href="{{$place->site}}" {{($config->externalSiteNoFollow) ? 'rel="nofollow"' : ''}}>
+                                                            <a target="_blank"
+                                                               href="{{$place->site}}" {{($config->externalSiteNoFollow) ? 'rel="nofollow"' : ''}}>
                                                                 <span class="font-size-12">{{$place->site}}</span>
                                                             </a>
                                                         </div>
@@ -1078,13 +1177,15 @@ if ($total == 0)
                                             </div>
                                         </div>
 
-                                        <div id="nearbyDiv" ng-controller="NearbyController as nearby" class="ppr_rup ppr_priv_location_detail_two_column">
+                                        <div id="nearbyDiv" ng-controller="NearbyController as nearby"
+                                             class="ppr_rup ppr_priv_location_detail_two_column">
                                             <div class="column_wrap is-mobile">
                                                 <div id="nearbyMainContainer" class="content_column ui_column is-8">
                                                     <div class="ppr_rup ppr_priv_location_nearby">
                                                         <div class="nearbyContainer outerShell block_wrap">
                                                             <div class="ui_columns neighborhood">
-                                                                <div id="map" class="ui_column is-12 mapTile prv_map clickable"></div>
+                                                                <div id="map"
+                                                                     class="ui_column is-12 mapTile prv_map clickable"></div>
                                                                 <div class="clear-both"></div>
                                                             </div>
                                                         </div>
@@ -1102,7 +1203,7 @@ if ($total == 0)
                         </div>
 
                         <script>
-                            function openCity(cityName,elmnt,color,fontColor) {
+                            function openCity(cityName, elmnt, color, fontColor) {
                                 var i, tabcontent, tablinks;
                                 tabcontent = document.getElementsByClassName("tabContent");
                                 for (i = 0; i < tabcontent.length; i++) {
@@ -1126,327 +1227,327 @@ if ($total == 0)
                                 elmnt.style.borderColor = fontColor;
 
                             }
+
                             // Get the element with id="defaultOpen" and click on it
                             document.getElementById("defaultOpen").click();
                         </script>
-    {{--                    @if(session('goDate') != null && $rooms != null)--}}
-    {{--                        <div id="roomChoice" class="ppr_rup ppr_priv_location_detail_two_column display-block position-relative">--}}
+                        {{--                    @if(session('goDate') != null && $rooms != null)--}}
+                        {{--                        <div id="roomChoice" class="ppr_rup ppr_priv_location_detail_two_column display-block position-relative">--}}
 
-    {{--                            <div class="column_wrap ui_columns is-mobile position-relative full-width direction-rtl">--}}
-    {{--                                <div class="content_column ui_column is-10 roomBox_IS_10">--}}
-    {{--                                    <div class="ppr_rup ppr_priv_location_reviews_container position-relative">--}}
-    {{--                                        <div id="rooms" class="ratings_and_types concepts_and_filters block_wrap position-relative">--}}
-    {{--                                            <div class="header_group block_header" id="roomChoiceDiv">--}}
-    {{--                                                <h3 class="tabs_header reviews_header block_title"> انتخاب اتاق </h3>--}}
-    {{--                                                <div class="srchBox">--}}
-    {{--                                                    <button class="srchBtn" onclick="editSearch()">ویرایش جستجو</button>--}}
-    {{--                                                </div>--}}
-    {{--                                            </div>--}}
-    {{--                                            @for($i = 0; $i < count($rooms); $i++)--}}
-    {{--                                                <div class="eachRooms">--}}
-    {{--                                                    <div class="roomPic">--}}
-    {{--                                                        <img src="{{$rooms[$i]->pic}}" width="100%" height="100%"--}}
-    {{--                                                             alt='{{$rooms[$i]->name}}'>--}}
-    {{--                                                    </div>--}}
-    {{--                                                    <div class="roomDetails" id="roomDetailsMainDiv">--}}
-    {{--                                                        <div>--}}
-    {{--                                                            <div class="roomRow">--}}
-    {{--                                                                <div class="roomName"--}}
-    {{--                                                                     onclick="document.getElementById('room_info{{$i}}').style.display = 'flex'">--}}
-    {{--                                                                    {{$rooms[$i]->name}}--}}
-    {{--                                                                </div>--}}
-    {{--                                                                <div class="roomPerson">--}}
-    {{--                                                                    <div>--}}
-    {{--                                                                        @for($j = 0; $j < ceil($rooms[$i]->capacity->adultCount/2); $j++)--}}
-    {{--                                                                            <span class="shTIcon personIcon"></span>--}}
-    {{--                                                                        @endfor--}}
-    {{--                                                                    </div>--}}
-    {{--                                                                    <div>--}}
-    {{--                                                                        @for($j = 0; $j < floor($rooms[$i]->capacity->adultCount/2); $j++)--}}
-    {{--                                                                            <span class="shTIcon personIcon"></span>--}}
-    {{--                                                                        @endfor--}}
-    {{--                                                                    </div>--}}
-    {{--                                                                </div>--}}
-    {{--                                                            </div>--}}
-    {{--                                                            <div class="roomRow float-left">--}}
-    {{--                                                                <div class="roomNumber">--}}
-    {{--                                                                    <div>--}}
-    {{--                                                                        تعداد اتاق--}}
-    {{--                                                                    </div>--}}
-    {{--                                                                    <select name="room_Number" id="roomNumber{{$i}}"--}}
-    {{--                                                                            onclick="changeNumRoom({{$i}}, this.value)">--}}
-    {{--                                                                        @for($j = 0; $j < 11; $j++)--}}
-    {{--                                                                            <option value="{{$j}}">{{$j}}</option>--}}
-    {{--                                                                        @endfor--}}
-    {{--                                                                    </select>--}}
-    {{--                                                                </div>--}}
-    {{--                                                            </div>--}}
-    {{--                                                        </div>--}}
-    {{--                                                        <div>--}}
-    {{--                                                            <div class="roomRow">--}}
-    {{--                                                                <div class="roomOptionTitle">امکانات اتاق</div>--}}
-    {{--                                                            </div>--}}
-    {{--                                                            <div class="roomRow">--}}
-    {{--                                                                <div class="check-box__item hint-system hidden"--}}
-    {{--                                                                     @if(!($rooms[$i]->priceExtraGuest != null && $rooms[$i]->priceExtraGuest != ''))style="display: none;" @endif>--}}
-    {{--                                                                    <label class="labelEdit">استفاده از تخت اضافه</label>--}}
-    {{--                                                                    <input type="checkbox" id="additional_bed{{$i}}"--}}
-    {{--                                                                           name="additionalBed" value="1" class="display-inline-block"--}}
-    {{--                                                                           onclick="changeRoomPrice({{$i}}); changeNumRoom({{$i}}, this.value)">--}}
-    {{--                                                                </div>--}}
-    {{--                                                            </div>--}}
-    {{--                                                        </div>--}}
-    {{--                                                        <div>--}}
+                        {{--                            <div class="column_wrap ui_columns is-mobile position-relative full-width direction-rtl">--}}
+                        {{--                                <div class="content_column ui_column is-10 roomBox_IS_10">--}}
+                        {{--                                    <div class="ppr_rup ppr_priv_location_reviews_container position-relative">--}}
+                        {{--                                        <div id="rooms" class="ratings_and_types concepts_and_filters block_wrap position-relative">--}}
+                        {{--                                            <div class="header_group block_header" id="roomChoiceDiv">--}}
+                        {{--                                                <h3 class="tabs_header reviews_header block_title"> انتخاب اتاق </h3>--}}
+                        {{--                                                <div class="srchBox">--}}
+                        {{--                                                    <button class="srchBtn" onclick="editSearch()">ویرایش جستجو</button>--}}
+                        {{--                                                </div>--}}
+                        {{--                                            </div>--}}
+                        {{--                                            @for($i = 0; $i < count($rooms); $i++)--}}
+                        {{--                                                <div class="eachRooms">--}}
+                        {{--                                                    <div class="roomPic">--}}
+                        {{--                                                        <img src="{{$rooms[$i]->pic}}" width="100%" height="100%"--}}
+                        {{--                                                             alt='{{$rooms[$i]->name}}'>--}}
+                        {{--                                                    </div>--}}
+                        {{--                                                    <div class="roomDetails" id="roomDetailsMainDiv">--}}
+                        {{--                                                        <div>--}}
+                        {{--                                                            <div class="roomRow">--}}
+                        {{--                                                                <div class="roomName"--}}
+                        {{--                                                                     onclick="document.getElementById('room_info{{$i}}').style.display = 'flex'">--}}
+                        {{--                                                                    {{$rooms[$i]->name}}--}}
+                        {{--                                                                </div>--}}
+                        {{--                                                                <div class="roomPerson">--}}
+                        {{--                                                                    <div>--}}
+                        {{--                                                                        @for($j = 0; $j < ceil($rooms[$i]->capacity->adultCount/2); $j++)--}}
+                        {{--                                                                            <span class="shTIcon personIcon"></span>--}}
+                        {{--                                                                        @endfor--}}
+                        {{--                                                                    </div>--}}
+                        {{--                                                                    <div>--}}
+                        {{--                                                                        @for($j = 0; $j < floor($rooms[$i]->capacity->adultCount/2); $j++)--}}
+                        {{--                                                                            <span class="shTIcon personIcon"></span>--}}
+                        {{--                                                                        @endfor--}}
+                        {{--                                                                    </div>--}}
+                        {{--                                                                </div>--}}
+                        {{--                                                            </div>--}}
+                        {{--                                                            <div class="roomRow float-left">--}}
+                        {{--                                                                <div class="roomNumber">--}}
+                        {{--                                                                    <div>--}}
+                        {{--                                                                        تعداد اتاق--}}
+                        {{--                                                                    </div>--}}
+                        {{--                                                                    <select name="room_Number" id="roomNumber{{$i}}"--}}
+                        {{--                                                                            onclick="changeNumRoom({{$i}}, this.value)">--}}
+                        {{--                                                                        @for($j = 0; $j < 11; $j++)--}}
+                        {{--                                                                            <option value="{{$j}}">{{$j}}</option>--}}
+                        {{--                                                                        @endfor--}}
+                        {{--                                                                    </select>--}}
+                        {{--                                                                </div>--}}
+                        {{--                                                            </div>--}}
+                        {{--                                                        </div>--}}
+                        {{--                                                        <div>--}}
+                        {{--                                                            <div class="roomRow">--}}
+                        {{--                                                                <div class="roomOptionTitle">امکانات اتاق</div>--}}
+                        {{--                                                            </div>--}}
+                        {{--                                                            <div class="roomRow">--}}
+                        {{--                                                                <div class="check-box__item hint-system hidden"--}}
+                        {{--                                                                     @if(!($rooms[$i]->priceExtraGuest != null && $rooms[$i]->priceExtraGuest != ''))style="display: none;" @endif>--}}
+                        {{--                                                                    <label class="labelEdit">استفاده از تخت اضافه</label>--}}
+                        {{--                                                                    <input type="checkbox" id="additional_bed{{$i}}"--}}
+                        {{--                                                                           name="additionalBed" value="1" class="display-inline-block"--}}
+                        {{--                                                                           onclick="changeRoomPrice({{$i}}); changeNumRoom({{$i}}, this.value)">--}}
+                        {{--                                                                </div>--}}
+                        {{--                                                            </div>--}}
+                        {{--                                                        </div>--}}
+                        {{--                                                        <div>--}}
 
-    {{--                                                            <div class="roomRow">--}}
-    {{--                                                                <div class="roomOption">{{$rooms[$i]->roomFacility}} </div>--}}
-    {{--                                                            </div>--}}
-    {{--                                                            <div class="roomRow">--}}
+                        {{--                                                            <div class="roomRow">--}}
+                        {{--                                                                <div class="roomOption">{{$rooms[$i]->roomFacility}} </div>--}}
+                        {{--                                                            </div>--}}
+                        {{--                                                            <div class="roomRow">--}}
 
-    {{--                                                                @if($rooms[$i]->priceExtraGuest != null && $rooms[$i]->priceExtraGuest != '')--}}
-    {{--                                                                    <div class="roomAdditionalOption">تخت اضافه</div>--}}
-    {{--                                                                @endif--}}
-    {{--                                                                <div class="roomAdditionalOption">{{$rooms[$i]->roomService}}</div>--}}
-    {{--                                                            </div>--}}
-    {{--                                                        </div>--}}
-    {{--                                                    </div>--}}
-    {{--                                                    <div class="roomPrices" id="roomPricesMainDiv">--}}
-    {{--                                                        <div>قیمت</div>--}}
-    {{--                                                        <div>--}}
-    {{--                                                            <div>{{floor($rooms[$i]->perDay[0]->price/1000)*1000}}--}}
-    {{--                                                                @if($rooms[$i]->priceExtraGuest != null && $rooms[$i]->priceExtraGuest != '')--}}
-    {{--                                                                    <div id="extraBedPrice{{$i}}" class="display-none extraBedPrices">--}}
-    {{--                                                                        <div class="salePrice">--}}
-    {{--                                                                            {{floor($rooms[$i]->priceExtraGuest/1000)*1000 + floor($rooms[$i]->perDay[0]->price/1000)*1000}}--}}
-    {{--                                                                        </div>--}}
-    {{--                                                                        <div>--}}
-    {{--                                                                            <div>با احتساب {{floor($rooms[$i]->priceExtraGuest/1000)*1000}}</div>--}}
-    {{--                                                                            <div>با تخت اضافه</div>--}}
-    {{--                                                                        </div>--}}
-    {{--                                                                    </div>--}}
-    {{--                                                                @endif--}}
-    {{--                                                            </div>--}}
-    {{--                                                        </div>--}}
-    {{--                                                        <div>--}}
-    {{--                                                            <div class="display-inline-block">--}}
-    {{--                                                                از {{$rooms[$i]->provider}}</div>--}}
-    {{--                                                            <img class="float-left">--}}
-    {{--                                                        </div>--}}
-    {{--                                                    </div>--}}
-    {{--                                                </div>--}}
-    {{--                                                <div id="room_info{{$i}}" class="roomInfos">--}}
-    {{--                                                    <div class="container">--}}
-    {{--                                                        <div class="row direction-rtl">--}}
-    {{--                                                            <div class="col-md-8">--}}
-    {{--                                                                <div class="roomRow">--}}
-    {{--                                                                    <div class="roomName">{{$rooms[$i]->name}}</div>--}}
-    {{--                                                                    <div class="shTIcon closeXicon float-left"--}}
-    {{--                                                                         onclick="document.getElementById('room_info{{$i}}').style.display = 'none'">--}}
-    {{--                                                                    </div>--}}
-    {{--                                                                </div>--}}
-    {{--                                                                <div class="roomRow">--}}
-    {{--                                                                    <div class="roomOptionTitle">امکانات اتاق</div>--}}
-    {{--                                                                </div>--}}
-    {{--                                                                <div class="roomRow">--}}
-    {{--                                                                    <div class="roomOption">{{$rooms[$i]->roomFacility}} </div>--}}
-    {{--                                                                </div>--}}
-    {{--                                                                <div class="roomRow">--}}
-    {{--                                                                    <div class="roomOptionTitle">امکانات ویژه</div>--}}
-    {{--                                                                </div>--}}
-    {{--                                                                <div class="roomRow">--}}
-    {{--                                                                    @if($rooms[$i]->priceExtraGuest != null && $rooms[$i]->priceExtraGuest != '')--}}
-    {{--                                                                        <div class="roomAdditionalOption">--}}
-    {{--                                                                            تخت اضافه--}}
-    {{--                                                                        </div>--}}
-    {{--                                                                    @endif--}}
-    {{--                                                                    <div class="roomAdditionalOption">{{$rooms[$i]->roomService}}</div>--}}
-    {{--                                                                </div>--}}
-    {{--                                                            </div>--}}
-    {{--                                                            <div class="col-md-4">--}}
-    {{--                                                                <img src="{{$rooms[$i]->pic}}" width="100%" height="100%" alt='{{$rooms[$i]->name}}'>--}}
-    {{--                                                            </div>--}}
-    {{--                                                        </div>--}}
-    {{--                                                    </div>--}}
-    {{--                                                </div>--}}
-    {{--                                            @endfor--}}
-    {{--                                        </div>--}}
+                        {{--                                                                @if($rooms[$i]->priceExtraGuest != null && $rooms[$i]->priceExtraGuest != '')--}}
+                        {{--                                                                    <div class="roomAdditionalOption">تخت اضافه</div>--}}
+                        {{--                                                                @endif--}}
+                        {{--                                                                <div class="roomAdditionalOption">{{$rooms[$i]->roomService}}</div>--}}
+                        {{--                                                            </div>--}}
+                        {{--                                                        </div>--}}
+                        {{--                                                    </div>--}}
+                        {{--                                                    <div class="roomPrices" id="roomPricesMainDiv">--}}
+                        {{--                                                        <div>قیمت</div>--}}
+                        {{--                                                        <div>--}}
+                        {{--                                                            <div>{{floor($rooms[$i]->perDay[0]->price/1000)*1000}}--}}
+                        {{--                                                                @if($rooms[$i]->priceExtraGuest != null && $rooms[$i]->priceExtraGuest != '')--}}
+                        {{--                                                                    <div id="extraBedPrice{{$i}}" class="display-none extraBedPrices">--}}
+                        {{--                                                                        <div class="salePrice">--}}
+                        {{--                                                                            {{floor($rooms[$i]->priceExtraGuest/1000)*1000 + floor($rooms[$i]->perDay[0]->price/1000)*1000}}--}}
+                        {{--                                                                        </div>--}}
+                        {{--                                                                        <div>--}}
+                        {{--                                                                            <div>با احتساب {{floor($rooms[$i]->priceExtraGuest/1000)*1000}}</div>--}}
+                        {{--                                                                            <div>با تخت اضافه</div>--}}
+                        {{--                                                                        </div>--}}
+                        {{--                                                                    </div>--}}
+                        {{--                                                                @endif--}}
+                        {{--                                                            </div>--}}
+                        {{--                                                        </div>--}}
+                        {{--                                                        <div>--}}
+                        {{--                                                            <div class="display-inline-block">--}}
+                        {{--                                                                از {{$rooms[$i]->provider}}</div>--}}
+                        {{--                                                            <img class="float-left">--}}
+                        {{--                                                        </div>--}}
+                        {{--                                                    </div>--}}
+                        {{--                                                </div>--}}
+                        {{--                                                <div id="room_info{{$i}}" class="roomInfos">--}}
+                        {{--                                                    <div class="container">--}}
+                        {{--                                                        <div class="row direction-rtl">--}}
+                        {{--                                                            <div class="col-md-8">--}}
+                        {{--                                                                <div class="roomRow">--}}
+                        {{--                                                                    <div class="roomName">{{$rooms[$i]->name}}</div>--}}
+                        {{--                                                                    <div class="shTIcon closeXicon float-left"--}}
+                        {{--                                                                         onclick="document.getElementById('room_info{{$i}}').style.display = 'none'">--}}
+                        {{--                                                                    </div>--}}
+                        {{--                                                                </div>--}}
+                        {{--                                                                <div class="roomRow">--}}
+                        {{--                                                                    <div class="roomOptionTitle">امکانات اتاق</div>--}}
+                        {{--                                                                </div>--}}
+                        {{--                                                                <div class="roomRow">--}}
+                        {{--                                                                    <div class="roomOption">{{$rooms[$i]->roomFacility}} </div>--}}
+                        {{--                                                                </div>--}}
+                        {{--                                                                <div class="roomRow">--}}
+                        {{--                                                                    <div class="roomOptionTitle">امکانات ویژه</div>--}}
+                        {{--                                                                </div>--}}
+                        {{--                                                                <div class="roomRow">--}}
+                        {{--                                                                    @if($rooms[$i]->priceExtraGuest != null && $rooms[$i]->priceExtraGuest != '')--}}
+                        {{--                                                                        <div class="roomAdditionalOption">--}}
+                        {{--                                                                            تخت اضافه--}}
+                        {{--                                                                        </div>--}}
+                        {{--                                                                    @endif--}}
+                        {{--                                                                    <div class="roomAdditionalOption">{{$rooms[$i]->roomService}}</div>--}}
+                        {{--                                                                </div>--}}
+                        {{--                                                            </div>--}}
+                        {{--                                                            <div class="col-md-4">--}}
+                        {{--                                                                <img src="{{$rooms[$i]->pic}}" width="100%" height="100%" alt='{{$rooms[$i]->name}}'>--}}
+                        {{--                                                            </div>--}}
+                        {{--                                                        </div>--}}
+                        {{--                                                    </div>--}}
+                        {{--                                                </div>--}}
+                        {{--                                            @endfor--}}
+                        {{--                                        </div>--}}
 
-    {{--                                    </div>--}}
-    {{--                                </div>--}}
+                        {{--                                    </div>--}}
+                        {{--                                </div>--}}
 
-    {{--                                <div class="is-2 roomBox_IS_2 full-width">--}}
-    {{--                                    <div class="priceRow_IS_2">--}}
-    {{--                                        <div>قیمت کل برای یک شب</div>--}}
-    {{--                                        <div id="totalPriceOneDay">0</div>--}}
-    {{--                                    </div>--}}
-    {{--                                    <div class="priceRow_IS_2">--}}
-    {{--                                        <div>--}}
-    {{--                                            <span class="lable_IS_2">قیمت کل </span>--}}
-    {{--                                            برای--}}
-    {{--                                            <span id="numDay"></span>--}}
-    {{--                                            شب--}}
-    {{--                                        </div>--}}
-    {{--                                        <div id="totalPrice">0</div>--}}
-    {{--                                    </div>--}}
-    {{--                                    <div class="priceRow_IS_2">--}}
-    {{--                                        <div>--}}
-    {{--                                            <div class="lable_IS_2">تعداد اتاق</div>--}}
-    {{--                                            <div class="float-left" id="totalNumRoom"></div>--}}
-    {{--                                        </div>--}}
-    {{--                                        <div id="discriptionNumRoom">--}}
-    {{--                                        </div>--}}
-    {{--                                    </div>--}}
-    {{--                                    <div>--}}
-    {{--                                        <button class="btn rezervedBtn" type="button" onclick="showReserve()">رزرو--}}
-    {{--                                        </button>--}}
-    {{--                                    </div>--}}
-    {{--                                    <div>--}}
-    {{--                                        --}}{{--<div>--}}
-    {{--                                        --}}{{--<div>حداکثر سن کودک</div>--}}
-    {{--                                        --}}{{--<div class="color-darkred">یک سال بدون اخذ هزینه</div>--}}
-    {{--                                        --}}{{--</div>--}}
-    {{--                                        --}}{{--<div>--}}
-    {{--                                        --}}{{--<div>ساعت تحویل و تخلیه اتاق</div>--}}
-    {{--                                        --}}{{--<div class="color-darkred">14:00</div>--}}
-    {{--                                        --}}{{--</div>--}}
-    {{--                                        --}}{{--<div>--}}
-    {{--                                        --}}{{--<div>قوانین کنسلی</div>--}}
-    {{--                                        --}}{{--<div class="color-darkred">لورم ییی</div>--}}
-    {{--                                        --}}{{--</div>--}}
-    {{--                                        {{$place->policy}}--}}
-    {{--                                    </div>--}}
-    {{--                                </div>--}}
-    {{--                            </div>--}}
-    {{--                        </div>--}}
+                        {{--                                <div class="is-2 roomBox_IS_2 full-width">--}}
+                        {{--                                    <div class="priceRow_IS_2">--}}
+                        {{--                                        <div>قیمت کل برای یک شب</div>--}}
+                        {{--                                        <div id="totalPriceOneDay">0</div>--}}
+                        {{--                                    </div>--}}
+                        {{--                                    <div class="priceRow_IS_2">--}}
+                        {{--                                        <div>--}}
+                        {{--                                            <span class="lable_IS_2">قیمت کل </span>--}}
+                        {{--                                            برای--}}
+                        {{--                                            <span id="numDay"></span>--}}
+                        {{--                                            شب--}}
+                        {{--                                        </div>--}}
+                        {{--                                        <div id="totalPrice">0</div>--}}
+                        {{--                                    </div>--}}
+                        {{--                                    <div class="priceRow_IS_2">--}}
+                        {{--                                        <div>--}}
+                        {{--                                            <div class="lable_IS_2">تعداد اتاق</div>--}}
+                        {{--                                            <div class="float-left" id="totalNumRoom"></div>--}}
+                        {{--                                        </div>--}}
+                        {{--                                        <div id="discriptionNumRoom">--}}
+                        {{--                                        </div>--}}
+                        {{--                                    </div>--}}
+                        {{--                                    <div>--}}
+                        {{--                                        <button class="btn rezervedBtn" type="button" onclick="showReserve()">رزرو--}}
+                        {{--                                        </button>--}}
+                        {{--                                    </div>--}}
+                        {{--                                    <div>--}}
+                        {{--                                        --}}{{--<div>--}}
+                        {{--                                        --}}{{--<div>حداکثر سن کودک</div>--}}
+                        {{--                                        --}}{{--<div class="color-darkred">یک سال بدون اخذ هزینه</div>--}}
+                        {{--                                        --}}{{--</div>--}}
+                        {{--                                        --}}{{--<div>--}}
+                        {{--                                        --}}{{--<div>ساعت تحویل و تخلیه اتاق</div>--}}
+                        {{--                                        --}}{{--<div class="color-darkred">14:00</div>--}}
+                        {{--                                        --}}{{--</div>--}}
+                        {{--                                        --}}{{--<div>--}}
+                        {{--                                        --}}{{--<div>قوانین کنسلی</div>--}}
+                        {{--                                        --}}{{--<div class="color-darkred">لورم ییی</div>--}}
+                        {{--                                        --}}{{--</div>--}}
+                        {{--                                        {{$place->policy}}--}}
+                        {{--                                    </div>--}}
+                        {{--                                </div>--}}
+                        {{--                            </div>--}}
+                        {{--                        </div>--}}
 
-    {{--                        <div id="check_room">--}}
-    {{--                            <div class="container">--}}
-    {{--                                <div class="row">--}}
-    {{--                                    <span>--}}
-    {{--                                        شهر{{$city->name}}--}}
-    {{--                                    </span>--}}
-    {{--                                    <span>--}}
-    {{--                                        {{session('goDate')}}-{{session('backDate')}}--}}
-    {{--                                    </span>--}}
-    {{--                                    <span class="shTIcon closeXicon float-left"--}}
-    {{--                                          onclick="document.getElementById('check_room').style.display = 'none';">--}}
-    {{--                                    </span>--}}
-    {{--                                </div>--}}
-    {{--                                <div class="row">--}}
-    {{--                                    <div class="col-md-3">--}}
-    {{--                                        <div class="is-2 roomBox_IS_2">--}}
-    {{--                                            <div class="priceRow_IS_2">--}}
-    {{--                                                <div>--}}
-    {{--                                                    <span class="lable_IS_2">قیمت کل </span>--}}
-    {{--                                                    برای--}}
-    {{--                                                    <span id="check_num_day"></span>--}}
-    {{--                                                    شب--}}
-    {{--                                                </div>--}}
-    {{--                                                <div id="check_total_price">--}}
-    {{--                                                    0--}}
-    {{--                                                </div>--}}
-    {{--                                            </div>--}}
-    {{--                                            <div class="priceRow_IS_2" >--}}
-    {{--                                                <div>--}}
-    {{--                                                    <div class="float-left">--}}
-    {{--                                                        <span id="check_total_num_room"></span>--}}
-    {{--                                                        اتاق--}}
-    {{--                                                    </div>--}}
-    {{--                                                    <div class="lable_IS_2">تعداد اتاق</div>--}}
-    {{--                                                </div>--}}
-    {{--                                                <div id="check_description">--}}
-    {{--                                                </div>--}}
-    {{--                                            </div>--}}
-    {{--                                            <div>--}}
-    {{--                                                <span class="float-left">--}}
-    {{--                                                    {{$rooms[0]->provider}}--}}
-    {{--                                                </span>--}}
-    {{--                                                --}}{{--<a href="{{url('buyHotel')}}">--}}
-    {{--                                                <button class="btn rezervedBtn" type="button" onclick="updateSession()">--}}
-    {{--                                                    تایید و ادامه--}}
-    {{--                                                </button>--}}
-    {{--                                                --}}{{--</a>--}}
-    {{--                                            </div>--}}
-    {{--                                        </div>--}}
-    {{--                                    </div>--}}
-    {{--                                    <div class="col-md-9">--}}
-    {{--                                        <div class="row">--}}
-    {{--                                            <div>هتل انتخابی شما</div>--}}
-    {{--                                            <div>--}}
-    {{--                                                <div class="col-md-7">--}}
-    {{--                                                    <span class="imgWrap imgWrap1stTemp">--}}
-    {{--                                                        <img alt="{{$place->alt1}}" src="{{$thumbnail}}" class="centeredImg" width="100%"/>--}}
-    {{--                                                    </span>--}}
-    {{--                                                </div>--}}
-    {{--                                                <div class="col-md-5">--}}
-    {{--                                                    <div>{{$place->name}}</div>--}}
-    {{--                                                    <div class="rating_and_popularity" id="hotelRatingMainDivRoomChoice">--}}
-    {{--                                                        <span class="header_rating">--}}
-    {{--                                                            <div class="rs rating" rel="v:rating">--}}
-    {{--                                                                <div class="prw_rup prw_common_bubble_rating overallBubbleRating float-left">--}}
-    {{--                                                                    @if($avgRate == 5)--}}
-    {{--                                                                       <span class="ui_bubble_rating bubble_50 font-size-16"--}}
-    {{--                                                                             property="ratingValue" content="5"--}}
-    {{--                                                                             alt='5 of 5 bubbles'></span>--}}
-    {{--                                                                   @elseif($avgRate == 4)--}}
-    {{--                                                                       <span class="ui_bubble_rating bubble_40 font-size-16"--}}
-    {{--                                                                             property="ratingValue" content="4"--}}
-    {{--                                                                             alt='4 of 5 bubbles'></span>--}}
-    {{--                                                                   @elseif($avgRate == 3)--}}
-    {{--                                                                       <span class="ui_bubble_rating bubble_30 font-size-16"--}}
-    {{--                                                                             property="ratingValue" content="3"--}}
-    {{--                                                                             alt='3 of 5 bubbles'></span>--}}
-    {{--                                                                   @elseif($avgRate == 2)--}}
-    {{--                                                                       <span class="ui_bubble_rating bubble_20 font-size-16"--}}
-    {{--                                                                             property="ratingValue" content="2"--}}
-    {{--                                                                             alt='2 of 5 bubbles'></span>--}}
-    {{--                                                                   @elseif($avgRate == 1)--}}
-    {{--                                                                       <span class="ui_bubble_rating bubble_10 font-size-16"--}}
-    {{--                                                                             property="ratingValue" content="1"--}}
-    {{--                                                                             alt='1 of 5 bubbles'></span>--}}
-    {{--                                                                   @endif--}}
-    {{--                                                                </div>--}}
-    {{--                                                           </div>--}}
-    {{--                                                        </span>--}}
-    {{--                                                        <span class="header_popularity popIndexValidation">--}}
-    {{--                                                            <a class="more taLnk" href="#REVIEWS">--}}
-    {{--                                                                <span property="v:count" id="commentCount"></span> نقد--}}
-    {{--                                                            </a>--}}
-    {{--                                                            <a> {{$total}} امتیاز</a>--}}
-    {{--                                                        </span>--}}
-    {{--                                                    </div>--}}
-    {{--                                                    <div id="hotelRatesDivs">--}}
-    {{--                                                        <div class="titleInTable">درجه هتل</div>--}}
-    {{--                                                        <div class="highlightedAmenity detailListItem">{{$place->rate}}</div>--}}
-    {{--                                                    </div>--}}
-    {{--                                                    <div class="blEntry blEn address  clickable colCnt3"--}}
-    {{--                                                         onclick="showExtendedMap()">--}}
-    {{--                                                        <span class="ui_icon map-pin"></span>--}}
-    {{--                                                        <span class="street-address">آدرس : </span>--}}
-    {{--                                                        <span>{{$place->address}}</span>--}}
-    {{--                                                    </div>--}}
-    {{--                                                </div>--}}
-    {{--                                            </div>--}}
-    {{--                                        </div>--}}
-    {{--                                        <div class="row" id="selectedRoomMainDiv">--}}
-    {{--                                            <div>اتاق های انتخابی شما</div>--}}
-    {{--                                            <div id="selected_rooms"></div>--}}
-    {{--                                            <div>--}}
-    {{--                                                <div class="row">--}}
-    {{--                                                    <div class="col-md-12">--}}
-    {{--                                                        {{$place->policy}}--}}
-    {{--                                                    </div>--}}
-    {{--                                                </div>--}}
-    {{--                                            </div>--}}
-    {{--                                        </div>--}}
-    {{--                                    </div>--}}
-    {{--                                </div>--}}
-    {{--                                <div class="col-md-3"></div>--}}
-    {{--                            </div>--}}
-    {{--                        </div>--}}
-    {{--                    @endif--}}
+                        {{--                        <div id="check_room">--}}
+                        {{--                            <div class="container">--}}
+                        {{--                                <div class="row">--}}
+                        {{--                                    <span>--}}
+                        {{--                                        شهر{{$city->name}}--}}
+                        {{--                                    </span>--}}
+                        {{--                                    <span>--}}
+                        {{--                                        {{session('goDate')}}-{{session('backDate')}}--}}
+                        {{--                                    </span>--}}
+                        {{--                                    <span class="shTIcon closeXicon float-left"--}}
+                        {{--                                          onclick="document.getElementById('check_room').style.display = 'none';">--}}
+                        {{--                                    </span>--}}
+                        {{--                                </div>--}}
+                        {{--                                <div class="row">--}}
+                        {{--                                    <div class="col-md-3">--}}
+                        {{--                                        <div class="is-2 roomBox_IS_2">--}}
+                        {{--                                            <div class="priceRow_IS_2">--}}
+                        {{--                                                <div>--}}
+                        {{--                                                    <span class="lable_IS_2">قیمت کل </span>--}}
+                        {{--                                                    برای--}}
+                        {{--                                                    <span id="check_num_day"></span>--}}
+                        {{--                                                    شب--}}
+                        {{--                                                </div>--}}
+                        {{--                                                <div id="check_total_price">--}}
+                        {{--                                                    0--}}
+                        {{--                                                </div>--}}
+                        {{--                                            </div>--}}
+                        {{--                                            <div class="priceRow_IS_2" >--}}
+                        {{--                                                <div>--}}
+                        {{--                                                    <div class="float-left">--}}
+                        {{--                                                        <span id="check_total_num_room"></span>--}}
+                        {{--                                                        اتاق--}}
+                        {{--                                                    </div>--}}
+                        {{--                                                    <div class="lable_IS_2">تعداد اتاق</div>--}}
+                        {{--                                                </div>--}}
+                        {{--                                                <div id="check_description">--}}
+                        {{--                                                </div>--}}
+                        {{--                                            </div>--}}
+                        {{--                                            <div>--}}
+                        {{--                                                <span class="float-left">--}}
+                        {{--                                                    {{$rooms[0]->provider}}--}}
+                        {{--                                                </span>--}}
+                        {{--                                                --}}{{--<a href="{{url('buyHotel')}}">--}}
+                        {{--                                                <button class="btn rezervedBtn" type="button" onclick="updateSession()">--}}
+                        {{--                                                    تایید و ادامه--}}
+                        {{--                                                </button>--}}
+                        {{--                                                --}}{{--</a>--}}
+                        {{--                                            </div>--}}
+                        {{--                                        </div>--}}
+                        {{--                                    </div>--}}
+                        {{--                                    <div class="col-md-9">--}}
+                        {{--                                        <div class="row">--}}
+                        {{--                                            <div>هتل انتخابی شما</div>--}}
+                        {{--                                            <div>--}}
+                        {{--                                                <div class="col-md-7">--}}
+                        {{--                                                    <span class="imgWrap imgWrap1stTemp">--}}
+                        {{--                                                        <img alt="{{$place->alt1}}" src="{{$thumbnail}}" class="centeredImg" width="100%"/>--}}
+                        {{--                                                    </span>--}}
+                        {{--                                                </div>--}}
+                        {{--                                                <div class="col-md-5">--}}
+                        {{--                                                    <div>{{$place->name}}</div>--}}
+                        {{--                                                    <div class="rating_and_popularity" id="hotelRatingMainDivRoomChoice">--}}
+                        {{--                                                        <span class="header_rating">--}}
+                        {{--                                                            <div class="rs rating" rel="v:rating">--}}
+                        {{--                                                                <div class="prw_rup prw_common_bubble_rating overallBubbleRating float-left">--}}
+                        {{--                                                                    @if($avgRate == 5)--}}
+                        {{--                                                                       <span class="ui_bubble_rating bubble_50 font-size-16"--}}
+                        {{--                                                                             property="ratingValue" content="5"--}}
+                        {{--                                                                             alt='5 of 5 bubbles'></span>--}}
+                        {{--                                                                   @elseif($avgRate == 4)--}}
+                        {{--                                                                       <span class="ui_bubble_rating bubble_40 font-size-16"--}}
+                        {{--                                                                             property="ratingValue" content="4"--}}
+                        {{--                                                                             alt='4 of 5 bubbles'></span>--}}
+                        {{--                                                                   @elseif($avgRate == 3)--}}
+                        {{--                                                                       <span class="ui_bubble_rating bubble_30 font-size-16"--}}
+                        {{--                                                                             property="ratingValue" content="3"--}}
+                        {{--                                                                             alt='3 of 5 bubbles'></span>--}}
+                        {{--                                                                   @elseif($avgRate == 2)--}}
+                        {{--                                                                       <span class="ui_bubble_rating bubble_20 font-size-16"--}}
+                        {{--                                                                             property="ratingValue" content="2"--}}
+                        {{--                                                                             alt='2 of 5 bubbles'></span>--}}
+                        {{--                                                                   @elseif($avgRate == 1)--}}
+                        {{--                                                                       <span class="ui_bubble_rating bubble_10 font-size-16"--}}
+                        {{--                                                                             property="ratingValue" content="1"--}}
+                        {{--                                                                             alt='1 of 5 bubbles'></span>--}}
+                        {{--                                                                   @endif--}}
+                        {{--                                                                </div>--}}
+                        {{--                                                           </div>--}}
+                        {{--                                                        </span>--}}
+                        {{--                                                        <span class="header_popularity popIndexValidation">--}}
+                        {{--                                                            <a class="more taLnk" href="#REVIEWS">--}}
+                        {{--                                                                <span property="v:count" id="commentCount"></span> نقد--}}
+                        {{--                                                            </a>--}}
+                        {{--                                                            <a> {{$total}} امتیاز</a>--}}
+                        {{--                                                        </span>--}}
+                        {{--                                                    </div>--}}
+                        {{--                                                    <div id="hotelRatesDivs">--}}
+                        {{--                                                        <div class="titleInTable">درجه هتل</div>--}}
+                        {{--                                                        <div class="highlightedAmenity detailListItem">{{$place->rate}}</div>--}}
+                        {{--                                                    </div>--}}
+                        {{--                                                    <div class="blEntry blEn address  clickable colCnt3"--}}
+                        {{--                                                         onclick="showExtendedMap()">--}}
+                        {{--                                                        <span class="ui_icon map-pin"></span>--}}
+                        {{--                                                        <span class="street-address">آدرس : </span>--}}
+                        {{--                                                        <span>{{$place->address}}</span>--}}
+                        {{--                                                    </div>--}}
+                        {{--                                                </div>--}}
+                        {{--                                            </div>--}}
+                        {{--                                        </div>--}}
+                        {{--                                        <div class="row" id="selectedRoomMainDiv">--}}
+                        {{--                                            <div>اتاق های انتخابی شما</div>--}}
+                        {{--                                            <div id="selected_rooms"></div>--}}
+                        {{--                                            <div>--}}
+                        {{--                                                <div class="row">--}}
+                        {{--                                                    <div class="col-md-12">--}}
+                        {{--                                                        {{$place->policy}}--}}
+                        {{--                                                    </div>--}}
+                        {{--                                                </div>--}}
+                        {{--                                            </div>--}}
+                        {{--                                        </div>--}}
+                        {{--                                    </div>--}}
+                        {{--                                </div>--}}
+                        {{--                                <div class="col-md-3"></div>--}}
+                        {{--                            </div>--}}
+                        {{--                        </div>--}}
+                        {{--                    @endif--}}
                     </div>
-
 
 
                     <div id="mainDivPlacePost" class="tabContentMainWrap">
@@ -1461,53 +1562,33 @@ if ($total == 0)
                                     <h3 class="block_title">پست‌ها را دقیق‌تر ببینید </h3>
                                 </div>
                                 <div class="display-inline-block full-width font-size-15">
-                                    تعداد 2000 پست، 3500 نظر و 270 کاربر مختلف
+                                    تعداد <span id="reviewCountSearch"></span> پست، <span id="reviewCommentCount"></span> نظر و <span id="reviewUserCount"></span> کاربر مختلف
                                 </div>
                                 <div class="filterHelpText">
-                                    با استفاده از گزینه‌های زیر نتایج را محدودتر کرده و راحت‌تر مطلب مورد نظر خود را پیدا کنید
+                                    با استفاده از گزینه‌های زیر نتایج را محدودتر کرده و راحت‌تر مطلب مورد نظر خود را
+                                    پیدا کنید
                                     <div class="showFiltersMenus display-none" onclick="showPostsFilterBar()">
                                         <span class="float-right">بستن منو</span>
                                         <span class="float-left position-relative width-50"></span>
                                     </div>
                                 </div>
                                 <div class="filterBarDivs">
-                                    <div class="visitKindTypeFilter filterTypeDiv">
+
+                                    @foreach($multiQuestion as $key => $item)
+                                        <div class="visitKindTypeFilter filterTypeDiv">
                                         <span class="float-right line-height-2">
-                                            این مکان چگونه بازدید شده است؟
+                                            {{$item->description}}
                                         </span>
-                                        <span class="dark-blue font-weight-500 float-right line-height-2">حذف فیلتر</span>
+                                        <span class="dark-blue font-weight-500 float-right line-height-2" onclick="removeFilter({{$item->id}})" style="cursor: pointer">حذف فیلتر</span>
                                         <div class="clear-both"></div>
                                         <center>
-                                           <b class="filterChoices">با دوستان</b><!--
-                                        --><b class="filterChoices">با خانواده</b><!--
-                                        --><b class="filterChoices">تنها</b><!--
-                                        --><b class="filterChoices">با کودک</b>
+                                            @foreach($item->ans as $item2 )
+                                                <b id="ansMultiFilter_{{$item2->id}}" class="filterChoices" onclick="chooseMutliFilter({{$item->id}}, {{$item2->id}})">{{$item2->ans}}</b>
+                                            @endforeach
                                         </center>
                                     </div>
-                                    <div class="dateTypePostsFilter filterTypeDiv">
-                                        <span class="float-right line-height-2">
-                                            این مکان کی بازدید شده است؟
-                                        </span>
-                                        <div class="clear-both"></div>
-                                        <center>
-                                           <b class="filterChoices">بهار</b><!--
-                                        --><b class="filterChoices">تابستان</b><!--
-                                        --><b class="filterChoices">پاییز</b><!--
-                                        --><b class="filterChoices">زمستان</b>
-                                        </center>
-                                    </div>
-                                    <div class="cityTypePostsFilter filterTypeDiv">
-                                        <span class="float-right line-height-2">
-                                            این مکان از کجا بازدید شده است؟
-                                        </span>
-                                        <div class="clear-both"></div>
-                                        <center>
-                                           <b class="filterChoices">تهران</b><!--
-                                        --><b class="filterChoices">کرج</b><!--
-                                        --><b class="filterChoices">رشت</b><!--
-                                        --><b class="filterChoices">شهرکرد</b>
-                                        </center>
-                                    </div>
+                                    @endforeach
+
                                     <div class="photoTypePostsFilter filterTypeDiv">
                                         <span class="float-right line-height-2">
                                             نمایش پست‌های دارای عکس
@@ -1515,15 +1596,17 @@ if ($total == 0)
                                         <div class="clear-both"></div>
 
                                         <center>
-                                           <b class="filterChoices">تنها دارای عکس</b><!--
+                                            <b class="filterChoices">تنها دارای عکس</b><!--
                                         --><b class="filterChoices">تنها دارای فیلم</b><!--
                                         --><b class="filterChoices">تنها دارای متن بلند</b><!--
                                         --><b class="filterChoices">تنها دارای فیلم و عکس</b>
                                         </center>
                                     </div>
-                                    <div class="commentsRatesFilter filterTypeDiv">
+
+                                    @foreach($rateQuestion as $index => $item)
+                                        <div class="commentsRatesFilter filterTypeDiv">
                                         <span class="float-right line-height-205">
-                                            چقدر راضی بودند؟
+                                            {{$item->description}}
                                         </span>
                                         <div class="clear-both"></div>
                                         <center>
@@ -1533,29 +1616,132 @@ if ($total == 0)
                                                         {{--                                        <span class="ui_bubble_rating bubble_10 font-size-30 color-yellow"--}}
                                                         {{--                                              property="ratingValue" content="1" alt='1 of 5 bubbles'></span>--}}
                                                         <div class="ui_star_rating stars_10 font-size-25">
-                                                            <span class="starRatingGrey"></span>
-                                                            <span class="starRatingGrey"></span>
-                                                            <span class="starRatingGrey"></span>
-                                                            <span class="starRatingGrey"></span>
-                                                            <span class="starRatingGold"></span>
+                                                            <span id="filterStar_1_{{$item->id}}" class="starRatingGold" onmouseenter="showStar(1, {{$item->id}})" onmouseleave="removeStar({{$item->id}}, {{$index}})" onclick="selectFilterStar(1, {{$item->id}}, {{$index}})"></span>
+                                                            <span id="filterStar_2_{{$item->id}}" class="starRatingGrey" onmouseenter="showStar(2, {{$item->id}})" onmouseleave="removeStar({{$item->id}}, {{$index}})" onclick="selectFilterStar(2, {{$item->id}}, {{$index}})"></span>
+                                                            <span id="filterStar_3_{{$item->id}}" class="starRatingGrey" onmouseenter="showStar(3, {{$item->id}})" onmouseleave="removeStar({{$item->id}}, {{$index}})" onclick="selectFilterStar(3, {{$item->id}}, {{$index}})"></span>
+                                                            <span id="filterStar_4_{{$item->id}}" class="starRatingGrey" onmouseenter="showStar(4, {{$item->id}})" onmouseleave="removeStar({{$item->id}}, {{$index}})" onclick="selectFilterStar(4, {{$item->id}}, {{$index}})"></span>
+                                                            <span id="filterStar_5_{{$item->id}}" class="starRatingGrey" onmouseenter="showStar(5, {{$item->id}})" onmouseleave="removeStar({{$item->id}}, {{$index}})" onclick="selectFilterStar(5, {{$item->id}}, {{$index}})"></span>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="ratingTranslationDiv">اصلاً راضی نبودم</div>
+                                            <div id="filterStarText_{{$item->id}}" class="ratingTranslationDiv">اصلاً راضی نبودم</div>
                                         </center>
                                     </div>
+                                    @endforeach
+
+                                    <script>
+                                        var filterRateAns = [];
+                                        var filterMultiAns = [];
+
+                                        function showStar(_star, _id){
+                                            for(i = 1; i < 6; i++){
+                                                if(i <= _star) {
+                                                    document.getElementById('filterStar_' + i + '_' + _id).classList.remove('starRatingGrey');
+                                                    document.getElementById('filterStar_' + i + '_' + _id).classList.add('starRatingGold');
+                                                }
+                                                else{
+                                                    document.getElementById('filterStar_' + i + '_' + _id).classList.remove('starRatingGold');
+                                                    document.getElementById('filterStar_' + i + '_' + _id).classList.add('starRatingGrey');
+                                                }
+                                            }
+
+                                            var starText = document.getElementById('filterStarText_' + _id);
+                                            switch (_star){
+                                                case 1:
+                                                    starText.innerText = 'اصلا راضی نبودم';
+                                                    break;
+                                                case 2:
+                                                    starText.innerText = 'بد نبود';
+                                                    break;
+                                                case 3:
+                                                    starText.innerText = 'معمولی بود';
+                                                    break;
+                                                case 4:
+                                                    starText.innerText = 'خوب بود';
+                                                    break;
+                                                case 5:
+                                                    starText.innerText = 'عالی بود';
+                                                    break;
+
+                                            }
+                                        }
+
+                                        function removeStar( _id){
+                                            var star = 1;
+                                            if(filterRateAns[_id] != null)
+                                                star = filterRateAns[_id];
+
+                                            for(i = 1; i < 6; i++){
+                                                if(i <= star) {
+                                                    document.getElementById('filterStar_' + i + '_' + _id).classList.remove('starRatingGrey');
+                                                    document.getElementById('filterStar_' + i + '_' + _id).classList.add('starRatingGold');
+                                                }
+                                                else{
+                                                    document.getElementById('filterStar_' + i + '_' + _id).classList.remove('starRatingGold');
+                                                    document.getElementById('filterStar_' + i + '_' + _id).classList.add('starRatingGrey');
+                                                }
+                                            }
+
+                                            var starText = document.getElementById('filterStarText_' + _id);
+                                            switch (star){
+                                                case 1:
+                                                    starText.innerText = 'اصلا راضی نبودم';
+                                                    break;
+                                                case 2:
+                                                    starText.innerText = 'بد نبود';
+                                                    break;
+                                                case 3:
+                                                    starText.innerText = 'معمولی بود';
+                                                    break;
+                                                case 4:
+                                                    starText.innerText = 'خوب بود';
+                                                    break;
+                                                case 5:
+                                                    starText.innerText = 'عالی بود';
+                                                    break;
+                                            }
+                                        }
+
+                                        function selectFilterStar(_star, _id){
+                                            filterRateAns[_id] = _star;
+                                        }
+
+                                        function chooseMutliFilter(_qId, _aId){
+
+                                            if(filterMultiAns[_qId] != null)
+                                                document.getElementById('ansMultiFilter_' + filterMultiAns[_qId]).classList.remove('filterChoosed');
+
+                                            filterMultiAns[_qId] = _aId;
+                                            document.getElementById('ansMultiFilter_' + _aId).classList.add('filterChoosed');
+
+                                        }
+
+                                        function removeFilter(_id){
+                                            if(filterMultiAns[_id] != null)
+                                                document.getElementById('ansMultiFilter_' + filterMultiAns[_id]).classList.remove('filterChoosed');
+
+                                            filterMultiAns[_id] = null;
+                                        }
+
+                                        function doReviewFilter(){
+
+                                        }
+                                    </script>
+
                                     <div class="searchFilter filterTypeDiv">
                                     <span class="float-right line-height-205">
                                         جست و جو کنید
                                     </span>
-                                    <div class="clear-both"></div>
-                                    <center>
-                                        <div class="inputBoxSearchFilter inputBox">
-                                            <input class="inputBoxInput" type="text" placeholder="عبارت مورد نظر خود را جست و جو کنید">
-                                        </div>
-                                    </center>
-                                </div>
+                                        <div class="clear-both"></div>
+                                        <center>
+                                            <div class="inputBoxSearchFilter inputBox">
+                                                <input class="inputBoxInput" type="text"
+                                                       placeholder="عبارت مورد نظر خود را جست و جو کنید">
+                                            </div>
+                                        </center>
+                                    </div>
+
                                 </div>
                             </div>
                             <center class="col-xs-12 adsMainDiv">
@@ -1881,7 +2067,9 @@ if ($total == 0)
                             <div class="askQuestionMainDiv">
                                 <div class="newQuestionContainer">
                                     <b class="direction-rtl text-align-right float-right full-width mg-bt-10">
-                                        سؤلات خود را بپرسید تا با کمک دوستانتان آگاهانه‌تر سفر کنید. همچنین می‌توانید با پاسخ یه سؤالات دوستانتان علاوه بر دریافت امتیاز، اطلاعات خود را به اشتراک بگذارید.
+                                        سؤلات خود را بپرسید تا با کمک دوستانتان آگاهانه‌تر سفر کنید. همچنین می‌توانید با
+                                        پاسخ یه سؤالات دوستانتان علاوه بر دریافت امتیاز، اطلاعات خود را به اشتراک
+                                        بگذارید.
                                     </b>
                                     <div class="display-inline-block float-right direction-rtl mg-lt-5">
                                         در حال حاضر
@@ -1891,7 +2079,9 @@ if ($total == 0)
                                         پاسخ موجود می‌باشد.
                                     </div>
                                     <a class="seeAllQMainLink" href="#taplc_global_nav_links_0">
-                                        <div class="seeAllQLink display-inline-block float-right direction-rtl dark-blue" onclick="allQuestionsGrid()">مشاهده همه سؤالات و پاسخ‌ها</div>
+                                        <div class="seeAllQLink display-inline-block float-right direction-rtl dark-blue"
+                                             onclick="allQuestionsGrid()">مشاهده همه سؤالات و پاسخ‌ها
+                                        </div>
                                     </a>
                                     <div class="clear-both"></div>
                                     <div class="newQuestionMainDiv mg-tp-30 full-width display-inline-block">
@@ -1932,8 +2122,12 @@ if ($total == 0)
                                     </div>
                                     <div class="clear-both"></div>
                                     <div class="questionContentMainBox">
-                                        بسیاری از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از طریق اینترنت دریافت می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا خدمات مورد نیازشان اثرپذیری فراوانی دارد.
-                                        با توجه به ابن که خدمات و کالاهای بومی و محلی دارای اصالت و فرهنگ کهن جوامع روستایی هستند، می توان گفت اینترنت می تواند در آمدزایی از سبک زندگی جوامع محلی نقش کلیدی داشته باشد.
+                                        بسیاری از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از
+                                        طریق اینترنت دریافت می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها
+                                        برای انتخاب کالا یا خدمات مورد نیازشان اثرپذیری فراوانی دارد.
+                                        با توجه به ابن که خدمات و کالاهای بومی و محلی دارای اصالت و فرهنگ کهن جوامع
+                                        روستایی هستند، می توان گفت اینترنت می تواند در آمدزایی از سبک زندگی جوامع محلی
+                                        نقش کلیدی داشته باشد.
                                     </div>
                                     <div class="clear-both"></div>
                                     <div class="questionSubMenuBar">
@@ -1970,8 +2164,10 @@ if ($total == 0)
                                             <div class="circleBase type2 newAnswerWriterProfilePic"></div>
                                             <div class="inputBox">
                                                 <b class="replyAnswerTitle">در پاسخ به نظر shazdesina</b>
-                                                <textarea class="inputBoxInput inputBoxInputAnswer" type="text" placeholder="شما چه نظری دارید؟"></textarea>
-                                                <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
+                                                <textarea class="inputBoxInput inputBoxInputAnswer" type="text"
+                                                          placeholder="شما چه نظری دارید؟"></textarea>
+                                                <img class="commentSmileyIcon"
+                                                     src="{{"../../../public/images/smile.png"}}">
                                             </div>
                                             <div></div>
                                         </div>
@@ -1981,8 +2177,10 @@ if ($total == 0)
                                             <div class="circleBase type2 newAnswerWriterProfilePic"></div>
                                             <div class="inputBox">
                                                 <b class="replyAnswerTitle">در پاسخ به نظر shazdesina</b>
-                                                <textarea class="inputBoxInput inputBoxInputAnswer" type="text" placeholder="شما چه نظری دارید؟"></textarea>
-                                                <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
+                                                <textarea class="inputBoxInput inputBoxInputAnswer" type="text"
+                                                          placeholder="شما چه نظری دارید؟"></textarea>
+                                                <img class="commentSmileyIcon"
+                                                     src="{{"../../../public/images/smile.png"}}">
                                             </div>
                                             <div></div>
                                         </div>
@@ -2015,8 +2213,12 @@ if ($total == 0)
                                     </div>
                                     <div class="clear-both"></div>
                                     <div class="questionContentMainBox">
-                                        بسیار از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از طریق اینترنت دریافت می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا خدمات مورد نیازشان اثرپذیری فراوانی دارد.
-                                        با توجه به ابن که خدمات و کالاهای بومی و محلی دارای اصالت و فرهنگ کهن جوامع روستایی هستند، می توان گفت اینترنت می تواند در آمدزایی از سبک زندگی جوامع محلی نقش کلیدی داشته باشد.
+                                        بسیار از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از
+                                        طریق اینترنت دریافت می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها
+                                        برای انتخاب کالا یا خدمات مورد نیازشان اثرپذیری فراوانی دارد.
+                                        با توجه به ابن که خدمات و کالاهای بومی و محلی دارای اصالت و فرهنگ کهن جوامع
+                                        روستایی هستند، می توان گفت اینترنت می تواند در آمدزایی از سبک زندگی جوامع محلی
+                                        نقش کلیدی داشته باشد.
                                     </div>
                                     <div class="clear-both"></div>
                                     <div class="questionSubMenuBar">
@@ -2053,8 +2255,10 @@ if ($total == 0)
                                             <div class="circleBase type2 newAnswerWriterProfilePic"></div>
                                             <div class="inputBox">
                                                 <b class="replyAnswerTitle">در پاسخ به نظر shazdesina</b>
-                                                <textarea class="inputBoxInput inputBoxInputAnswer" type="text" placeholder="شما چه نظری دارید؟"></textarea>
-                                                <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
+                                                <textarea class="inputBoxInput inputBoxInputAnswer" type="text"
+                                                          placeholder="شما چه نظری دارید؟"></textarea>
+                                                <img class="commentSmileyIcon"
+                                                     src="{{"../../../public/images/smile.png"}}">
                                             </div>
                                             <div></div>
                                         </div>
@@ -2064,8 +2268,10 @@ if ($total == 0)
                                             <div class="circleBase type2 newAnswerWriterProfilePic"></div>
                                             <div class="inputBox">
                                                 <b class="replyAnswerTitle">در پاسخ به نظر shazdesina</b>
-                                                <textarea class="inputBoxInput inputBoxInputAnswer" type="text" placeholder="شما چه نظری دارید؟"></textarea>
-                                                <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
+                                                <textarea class="inputBoxInput inputBoxInputAnswer" type="text"
+                                                          placeholder="شما چه نظری دارید؟"></textarea>
+                                                <img class="commentSmileyIcon"
+                                                     src="{{"../../../public/images/smile.png"}}">
                                             </div>
                                             <div></div>
                                         </div>
@@ -2105,8 +2311,12 @@ if ($total == 0)
                             </div>
                             <div class="clear-both"></div>
                             <div class="questionContentMainBox">
-                                بسیاری از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از طریق اینترنت دریافت می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا خدمات مورد نیازشان اثرپذیری فراوانی دارد.
-                                با توجه به ابن که خدمات و کالاهای بومی و محلی دارای اصالت و فرهنگ کهن جوامع روستایی هستند، می توان گفت اینترنت می تواند در آمدزایی از سبک زندگی جوامع محلی نقش کلیدی داشته باشد.
+                                بسیاری از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از طریق
+                                اینترنت دریافت می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب
+                                کالا یا خدمات مورد نیازشان اثرپذیری فراوانی دارد.
+                                با توجه به ابن که خدمات و کالاهای بومی و محلی دارای اصالت و فرهنگ کهن جوامع روستایی
+                                هستند، می توان گفت اینترنت می تواند در آمدزایی از سبک زندگی جوامع محلی نقش کلیدی داشته
+                                باشد.
                             </div>
                             <div class="clear-both"></div>
                             <div class="questionSubMenuBar">
@@ -2143,7 +2353,8 @@ if ($total == 0)
                                     <div class="circleBase type2 newAnswerWriterProfilePic"></div>
                                     <div class="inputBox">
                                         <b class="replyAnswerTitle">در پاسخ به نظر shazdesina</b>
-                                        <textarea class="inputBoxInput inputBoxInputAnswer" type="text" placeholder="شما چه نظری دارید؟"></textarea>
+                                        <textarea class="inputBoxInput inputBoxInputAnswer" type="text"
+                                                  placeholder="شما چه نظری دارید؟"></textarea>
                                         <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
                                     </div>
                                     <div></div>
@@ -2154,7 +2365,8 @@ if ($total == 0)
                                     <div class="circleBase type2 newAnswerWriterProfilePic"></div>
                                     <div class="inputBox">
                                         <b class="replyAnswerTitle">در پاسخ به نظر shazdesina</b>
-                                        <textarea class="inputBoxInput inputBoxInputAnswer" type="text" placeholder="شما چه نظری دارید؟"></textarea>
+                                        <textarea class="inputBoxInput inputBoxInputAnswer" type="text"
+                                                  placeholder="شما چه نظری دارید؟"></textarea>
                                         <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
                                     </div>
                                     <div></div>
@@ -2163,27 +2375,27 @@ if ($total == 0)
                         </div>
                     </div>
                     <div class="col-xs-12 questionsMainDivFooter position-relative">
-                    <div class="col-xs-5 font-size-13 line-height-2">
-                        نمایش
-                        <span class="mg-lt-5 cursor-pointer">10</span>-
-                        <span class="mg-lt-5 cursor-pointer">20</span>-
-                        <span class="color-blue cursor-pointer">50</span>
-                        پست در هر صفحه
+                        <div class="col-xs-5 font-size-13 line-height-2">
+                            نمایش
+                            <span class="mg-lt-5 cursor-pointer">10</span>-
+                            <span class="mg-lt-5 cursor-pointer">20</span>-
+                            <span class="color-blue cursor-pointer">50</span>
+                            پست در هر صفحه
+                        </div>
+                        <a class="col-xs-3 showQuestionsNumsFilterLink" href="#taplc_global_nav_links_0">
+                            <div class="showQuestionsNumsFilter" onclick="allQuestionsGrid()">نمایش تمامی سؤال‌ها</div>
+                        </a>
+                        <div class="col-xs-4 font-size-13 line-height-2 text-align-right float-right">
+                            صفحه
+                            <span>1</span>
+                            <span><<<</span>
+                            <span class="mg-lt-5 cursor-pointer">2</span>-
+                            <span class="color-blue mg-lt-5 cursor-pointer">3</span>-
+                            <span class="cursor-pointer">4</span>
+                            <span>>>></span>
+                            <span>10</span>
+                        </div>
                     </div>
-                    <a class="col-xs-3 showQuestionsNumsFilterLink" href="#taplc_global_nav_links_0">
-                        <div class="showQuestionsNumsFilter" onclick="allQuestionsGrid()">نمایش تمامی سؤال‌ها</div>
-                    </a>
-                    <div class="col-xs-4 font-size-13 line-height-2 text-align-right float-right">
-                        صفحه
-                        <span>1</span>
-                        <span><<<</span>
-                        <span class="mg-lt-5 cursor-pointer">2</span>-
-                        <span class="color-blue mg-lt-5 cursor-pointer">3</span>-
-                        <span class="cursor-pointer">4</span>
-                        <span>>>></span>
-                        <span>10</span>
-                    </div>
-                </div>
                 </div>
             </div>
             <div id="similarLocationsMainDiv" class="mainSuggestion swiper-container tabContentMainWrap">
@@ -2199,17 +2411,21 @@ if ($total == 0)
                     <div class="swiper-slide">
                         <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column ng-scope">
                             <div class="poi">
-                                <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
+                                <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C"
+                                   class="thumbnail">
                                     <div class="prw_rup prw_common_thumbnail_no_style_responsive">
                                         <div class="prv_thumb has_image">
                                             <div class="image_wrapper landscape landscapeWide">
-                                                <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
+                                                <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}"
+                                                     alt="هتل عباسی" class="image"
+                                                     src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
                                             </div>
                                         </div>
                                     </div>
                                 </a>
                                 <div class="detail rtl">
-                                    <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
+                                    <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C"
+                                       class="item poi_name ui_link ng-binding">هتل عباسی</a>
                                     <div class="item rating-widget">
                                         <div class="prw_rup prw_common_location_rating_simple">
                                             <span class="ui_bubble_rating bubble_50"></span>
@@ -2225,17 +2441,21 @@ if ($total == 0)
                     <div class="swiper-slide">
                         <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column ng-scope">
                             <div class="poi">
-                                <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
+                                <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C"
+                                   class="thumbnail">
                                     <div class="prw_rup prw_common_thumbnail_no_style_responsive">
                                         <div class="prv_thumb has_image">
                                             <div class="image_wrapper landscape landscapeWide">
-                                                <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
+                                                <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}"
+                                                     alt="هتل عباسی" class="image"
+                                                     src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
                                             </div>
                                         </div>
                                     </div>
                                 </a>
                                 <div class="detail rtl">
-                                    <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
+                                    <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C"
+                                       class="item poi_name ui_link ng-binding">هتل عباسی</a>
                                     <div class="item rating-widget">
                                         <div class="prw_rup prw_common_location_rating_simple">
                                             <span class="ui_bubble_rating bubble_50"></span>
@@ -2251,17 +2471,21 @@ if ($total == 0)
                     <div class="swiper-slide">
                         <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column ng-scope">
                             <div class="poi">
-                                <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
+                                <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C"
+                                   class="thumbnail">
                                     <div class="prw_rup prw_common_thumbnail_no_style_responsive">
                                         <div class="prv_thumb has_image">
                                             <div class="image_wrapper landscape landscapeWide">
-                                                <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
+                                                <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}"
+                                                     alt="هتل عباسی" class="image"
+                                                     src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
                                             </div>
                                         </div>
                                     </div>
                                 </a>
                                 <div class="detail rtl">
-                                    <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
+                                    <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C"
+                                       class="item poi_name ui_link ng-binding">هتل عباسی</a>
                                     <div class="item rating-widget">
                                         <div class="prw_rup prw_common_location_rating_simple">
                                             <span class="ui_bubble_rating bubble_50"></span>
@@ -2277,17 +2501,21 @@ if ($total == 0)
                     <div class="swiper-slide">
                         <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column ng-scope">
                             <div class="poi">
-                                <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
+                                <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C"
+                                   class="thumbnail">
                                     <div class="prw_rup prw_common_thumbnail_no_style_responsive">
                                         <div class="prv_thumb has_image">
                                             <div class="image_wrapper landscape landscapeWide">
-                                                <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
+                                                <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}"
+                                                     alt="هتل عباسی" class="image"
+                                                     src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
                                             </div>
                                         </div>
                                     </div>
                                 </a>
                                 <div class="detail rtl">
-                                    <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
+                                    <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C"
+                                       class="item poi_name ui_link ng-binding">هتل عباسی</a>
                                     <div class="item rating-widget">
                                         <div class="prw_rup prw_common_location_rating_simple">
                                             <span class="ui_bubble_rating bubble_50"></span>
@@ -2303,17 +2531,21 @@ if ($total == 0)
                     <div class="swiper-slide">
                         <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column ng-scope">
                             <div class="poi">
-                                <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
+                                <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C"
+                                   class="thumbnail">
                                     <div class="prw_rup prw_common_thumbnail_no_style_responsive">
                                         <div class="prv_thumb has_image">
                                             <div class="image_wrapper landscape landscapeWide">
-                                                <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
+                                                <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}"
+                                                     alt="هتل عباسی" class="image"
+                                                     src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
                                             </div>
                                         </div>
                                     </div>
                                 </a>
                                 <div class="detail rtl">
-                                    <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
+                                    <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C"
+                                       class="item poi_name ui_link ng-binding">هتل عباسی</a>
                                     <div class="item rating-widget">
                                         <div class="prw_rup prw_common_location_rating_simple">
                                             <span class="ui_bubble_rating bubble_50"></span>
@@ -2329,17 +2561,21 @@ if ($total == 0)
                     <div class="swiper-slide">
                         <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column ng-scope">
                             <div class="poi">
-                                <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
+                                <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C"
+                                   class="thumbnail">
                                     <div class="prw_rup prw_common_thumbnail_no_style_responsive">
                                         <div class="prv_thumb has_image">
                                             <div class="image_wrapper landscape landscapeWide">
-                                                <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
+                                                <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}"
+                                                     alt="هتل عباسی" class="image"
+                                                     src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
                                             </div>
                                         </div>
                                     </div>
                                 </a>
                                 <div class="detail rtl">
-                                    <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
+                                    <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C"
+                                       class="item poi_name ui_link ng-binding">هتل عباسی</a>
                                     <div class="item rating-widget">
                                         <div class="prw_rup prw_common_location_rating_simple">
                                             <span class="ui_bubble_rating bubble_50"></span>
@@ -2373,7 +2609,7 @@ if ($total == 0)
                     nextEl: '.swiper-button-next',
                     prevEl: '.swiper-button-prev',
                 },
-                breakpoints:{
+                breakpoints: {
 
                     450: {
                         slidesPerView: 1,
@@ -2436,7 +2672,7 @@ if ($total == 0)
         }
 
         function showAllAnswers(element) {
-                $(element).parent().nextAll().not('div.last').toggle()
+            $(element).parent().nextAll().not('div.last').toggle()
         }
 
         function replyToAnswers(element) {
@@ -2445,15 +2681,17 @@ if ($total == 0)
         }
 
         function showAnswersActionBox(element) {
-                $(element).next().toggle() ,
+            $(element).next().toggle() ,
                 $(element).toggleClass("bg-color-darkgrey")
         }
 
         function showRatingDetails(element) {
-            $(element).parent().next().toggle();
-            $(element).children().children().toggleClass('glyphicon-triangle-bottom');
-            $(element).children().children().toggleClass('glyphicon-triangle-top')
-            $(element).parent().toggleClass('mg-bt-10');
+            if($(element).parent().next().hasClass('commentRatingsDetailsBox')) {
+                $(element).parent().next().toggle();
+                $(element).children().children().toggleClass('glyphicon-triangle-bottom');
+                $(element).children().children().toggleClass('glyphicon-triangle-top')
+                $(element).parent().toggleClass('mg-bt-10');
+            }
         }
 
         function filterChoices(element) {
@@ -2532,34 +2770,34 @@ if ($total == 0)
 
         function disLikePostsComment(element) {
             $(element).toggleClass('dark-red'),
-            $(element).children("span.firstIcon").toggle(),
-            $(element).children("span.secondIcon").toggle()
+                $(element).children("span.firstIcon").toggle(),
+                $(element).children("span.secondIcon").toggle()
         }
 
         function showPostsComments(element) {
             $(element).parent().parent().next().toggle();
             $(element).toggleClass('color-blue'),
-            $(element).children("span.firstIcon").toggle(),
-            $(element).children("span.secondIcon").toggle()
+                $(element).children("span.firstIcon").toggle(),
+                $(element).children("span.secondIcon").toggle()
         }
 
         function SharePostsBtn(element) {
             $(element).children("span.firstIcon").toggle(),
-            $(element).children("span.secondIcon").toggle()
+                $(element).children("span.secondIcon").toggle()
         }
 
         function likeTheAnswers(element) {
             $(element).children().toggle(),
-            $(element).toggleClass('color-red')
+                $(element).toggleClass('color-red')
         }
 
         function dislikeTheAnswers(element) {
             $(element).children().toggle(),
-            $(element).toggleClass('dark-red')
+                $(element).toggleClass('dark-red')
         }
 
         function likeTheAnswers2(element) {
-            if($(element).next().children().css('display') == 'none') {
+            if ($(element).next().children().css('display') == 'none') {
                 element2 = $(element).next();
                 dislikeTheAnswers2(element2);
             }
@@ -2568,7 +2806,7 @@ if ($total == 0)
         }
 
         function dislikeTheAnswers2(element) {
-            if($(element).prev().children().css('display') == 'none') {
+            if ($(element).prev().children().css('display') == 'none') {
                 element2 = $(element).prev();
                 likeTheAnswers2(element2);
             }
@@ -2619,14 +2857,15 @@ if ($total == 0)
                         <video id="my-video" class="video-js vjs-default-skin" controls style=" max-height: 80vh;">
                             <source src="{{URL::asset('vr2/contents/' . $video)}}" type="video/mp4">
                         </video>
-{{--                            ویدیویی برای نمایش موجود--}}
+                        {{--                            ویدیویی برای نمایش موجود--}}
                     </div>
                 </div>
             </div>
         </div>
+
         <script>
             var player;
-            (function(window, videojs) {
+            (function (window, videojs) {
                 player = window.player = videojs('my-video');
                 player.mediainfo = player.mediainfo || {};
                 player.mediainfo.projection = '360';
@@ -2634,24 +2873,26 @@ if ($total == 0)
                 // AUTO is the default and looks at mediainfo
                 var vr = window.vr = player.vr({projection: '360', debug: false, forceCardboard: false});
             }(window, window.videojs));
-        //
-        $('#myModal').on('hidden.bs.modal', function () {
-            player.pause();
-        });
+            //
+            $('#myModal').on('hidden.bs.modal', function () {
+                player.pause();
+            });
 
-        function showModal(){
-            $('#myModal').modal('toggle');
-            player.play();
-        }
+            function showModal() {
+                $('#myModal').modal('toggle');
+                player.play();
+            }
 
-    </script>
+        </script>
     @endif
 
     @include('hotelDetailsPopUp')
-{{--    @include('editor')--}}
+    {{--    @include('editor')--}}
     <script>
         var hasLogin = '{{$hasLogin}}';
         var userCode = '{{$userCode}}';
+        var userPic = '{{$userPic}}';
+        var userPhotos = {!! $userPhotosJson !!};
 
         var ansToReviewUrl = '{{route('ansReview')}}';
         var likeReviewUrl = '{{route('likeReview')}}';
@@ -2675,7 +2916,7 @@ if ($total == 0)
         var placeId = '{{$place->id}}';
         var kindPlaceId = '{{$kindPlaceId}}';
         var getCommentsCount = '{{route('getCommentsCount')}}';
-        var totalPhotos = '{{count($sitePics) + $userPhotos}}';
+        var totalPhotos = '{{count($sitePics) + count($userPhotos)}}';
         var sitePhotosCount = {{count($sitePics)}};
         var opOnComment = '{{route('opOnComment')}}';
         var askQuestionDir = '{{route('askQuestion')}}';
@@ -2694,7 +2935,7 @@ if ($total == 0)
         var rateQuestion = {!! $rateQuestionJSON !!} ;
         var rateQuestionAns = [];
         var allReviews;
-        for(i = 0; i < rateQuestion.length; i++)
+        for (i = 0; i < rateQuestion.length; i++)
             rateQuestionAns[i] = 2;
 
         if (placeMode == "hotel") {
@@ -4249,7 +4490,7 @@ if ($total == 0)
                     if (room + inc >= 0)
                         room += inc;
 
-                    if(room > 0 && adult == 0) {
+                    if (room > 0 && adult == 0) {
                         adult = 1;
                         $("#adultPassengerNumInSelect").empty().append(adult);
                         $("#adultPassengerNumInSelect1").empty().append(adult);
@@ -4294,7 +4535,7 @@ if ($total == 0)
                 '                                                <span id="infantPassengerNo">' + children + '</span>\n' +
                 '                                                <span>بچه</span>&nbsp;';
             // document.getElementById('roomDetailRoom').innerHTML = text;
-            while((4*room) < adult){
+            while ((4 * room) < adult) {
                 room++;
                 $("#roomNumInSelect").empty().append(room);
             }
@@ -4307,115 +4548,115 @@ if ($total == 0)
         var updateSession = '{{route("updateSession")}}';
 
         @if(session('backDate') != null)
-            document.getElementById('backDate').value = '{{session("backDate")}}';
-            var rooms = '{!! $jsonRoom !!}';
-            rooms = JSON.parse(rooms);
-            var totalMoney = 0;
-            var totalPerDayMoney = 0;
-            var numDay = rooms[0].perDay.length;
-            var room_code = [];
-            var adult_count = [];
-            var extra = [];
-            var num_room_code = [];
-            var room_name = [];
-            document.getElementById('numDay').innerText = numDay;
-            document.getElementById('check_num_day').innerText = numDay;
+        document.getElementById('backDate').value = '{{session("backDate")}}';
+        var rooms = '{!! $jsonRoom !!}';
+        rooms = JSON.parse(rooms);
+        var totalMoney = 0;
+        var totalPerDayMoney = 0;
+        var numDay = rooms[0].perDay.length;
+        var room_code = [];
+        var adult_count = [];
+        var extra = [];
+        var num_room_code = [];
+        var room_name = [];
+        document.getElementById('numDay').innerText = numDay;
+        document.getElementById('check_num_day').innerText = numDay;
 
-            function scrollToBed() {
-                var elmnt = document.getElementById("rooms");
-                elmnt.scrollIntoView();
-            }
+        function scrollToBed() {
+            var elmnt = document.getElementById("rooms");
+            elmnt.scrollIntoView();
+        }
 
-            function changeNumRoom(_index, value) {
-                totalMoney = 0;
-                totalPerDayMoney = 0;
-                var totalNumRoom = 0;
-                var text = '';
-                var reserve_text = '';
-                var reserve_money_text = '';
-                room_code = [];
-                adult_count = [];
-                extra = [];
-                num_room_code = [];
-                room_name = [];
-                for (i = 0; i < rooms.length; i++) {
-                    numRoom = parseInt(document.getElementById('roomNumber' + i).value);
-                    totalNumRoom += numRoom;
-                    price = parseInt(rooms[i].perDay[0].price);
-                    priceExtraBed = rooms[i].priceExtraGuest;
-                    extraBed = document.getElementById('additional_bed' + i).checked;
-                    totalPerDayMoney += numRoom * Math.floor(price / 1000) * 1000;
-                    if (numRoom != 0) {
-                        room_code.push(rooms[i].roomNumber);
-                        adult_count.push(rooms[i].capacity['adultCount']);
-                        num_room_code.push(numRoom);
-                        room_name.push(rooms[i].name);
-                        text += '<div><span>X' + numRoom + '</span>' + rooms[i].name;
-                        reserve_money_text += '<div><span class="float-right">X' + numRoom + '</span><span class="float-right">' + rooms[i].name + '</span>';
-                        reserve_text += '<div id="changeNumRoomMainDiv" class="row">\n' +
-                            '<div class="col-md-9">\n' +
-                            '<div class="row display-flex flex-direction-row">\n' +
-                            '<div>\n' +
-                            '<span class="color-darkred">نام اتاق: </span>\n' +
-                            '<span>' + rooms[i].name + '</span>\n' +
-                            '</div>\n' +
-                            '<div class="width-33per">\n' +
-                            '<span class="color-darkred">تاریخ ورود: </span>\n' +
-                            '<span>{{session("goDate")}}</span>\n' +
-                            '</div>\n' +
-                            '<div class="width-33per">\n' +
-                            '<span class="color-darkred">تاریخ خروج: </span>\n' +
-                            '<span>{{session("backDate")}}</span>\n' +
-                            '</div>\n' +
-                            '</div>\n' +
-                            '<div class="row display-flex flex-direction-row mg-2per-0">\n' +
-                            '<div class="width-33per">\n' +
-                            '<span class="color-darkred">تعداد مسافر: </span>\n' +
-                            '<span>' + rooms[i].capacity.adultCount + '</span>\n' +
-                            '</div>\n' +
-                            '<div class="width-33per">\n' +
-                            '<span class="color-darkred">سرویس تخت اضافه: </span>\n';
-                        if (extraBed) {
-                            text += '<span class="font-size-085em">با تخت اضافه</span>';
-                            reserve_money_text += '<span class="font-size-0.85em float-right">با تخت اضافه</span><span class="float-left">' + dotedNumber((Math.floor(priceExtraBed / 1000) * 1000) + (Math.floor(price / 1000) * 1000)) + '</span>';
-                            totalPerDayMoney += numRoom * Math.floor(priceExtraBed / 1000) * 1000;
-                            reserve_text += '<span>دارد</span>\n';
-                            extra.push(true);
-                        } else {
-                            reserve_money_text += '<span class="float-left">' + dotedNumber(Math.floor(price / 1000) * 1000) + '</span>';
-                            reserve_text += '<span>ندارد</span>\n';
-                            extra.push(false);
-                        }
-                        text += '</div>';
-                        reserve_money_text += '</div>';
-                        reserve_text += '</div>\n' +
-                            '</div><div class="row display-flex flex-direction-row">\n' +
-                            '<div>\n' +
-                            '<span class="color-darkred"> صبحانه مجانی: </span>\n' +
-                            '<span>دارد</span>\n' +
-                            '</div>\n' +
-                            '</div>\n' +
-                            '</div>\n';
-                        reserve_text += '<div class="col-md-3"><img src="'+rooms[i].pic+'" class="full-width"></div></div>';
+        function changeNumRoom(_index, value) {
+            totalMoney = 0;
+            totalPerDayMoney = 0;
+            var totalNumRoom = 0;
+            var text = '';
+            var reserve_text = '';
+            var reserve_money_text = '';
+            room_code = [];
+            adult_count = [];
+            extra = [];
+            num_room_code = [];
+            room_name = [];
+            for (i = 0; i < rooms.length; i++) {
+                numRoom = parseInt(document.getElementById('roomNumber' + i).value);
+                totalNumRoom += numRoom;
+                price = parseInt(rooms[i].perDay[0].price);
+                priceExtraBed = rooms[i].priceExtraGuest;
+                extraBed = document.getElementById('additional_bed' + i).checked;
+                totalPerDayMoney += numRoom * Math.floor(price / 1000) * 1000;
+                if (numRoom != 0) {
+                    room_code.push(rooms[i].roomNumber);
+                    adult_count.push(rooms[i].capacity['adultCount']);
+                    num_room_code.push(numRoom);
+                    room_name.push(rooms[i].name);
+                    text += '<div><span>X' + numRoom + '</span>' + rooms[i].name;
+                    reserve_money_text += '<div><span class="float-right">X' + numRoom + '</span><span class="float-right">' + rooms[i].name + '</span>';
+                    reserve_text += '<div id="changeNumRoomMainDiv" class="row">\n' +
+                        '<div class="col-md-9">\n' +
+                        '<div class="row display-flex flex-direction-row">\n' +
+                        '<div>\n' +
+                        '<span class="color-darkred">نام اتاق: </span>\n' +
+                        '<span>' + rooms[i].name + '</span>\n' +
+                        '</div>\n' +
+                        '<div class="width-33per">\n' +
+                        '<span class="color-darkred">تاریخ ورود: </span>\n' +
+                        '<span>{{session("goDate")}}</span>\n' +
+                        '</div>\n' +
+                        '<div class="width-33per">\n' +
+                        '<span class="color-darkred">تاریخ خروج: </span>\n' +
+                        '<span>{{session("backDate")}}</span>\n' +
+                        '</div>\n' +
+                        '</div>\n' +
+                        '<div class="row display-flex flex-direction-row mg-2per-0">\n' +
+                        '<div class="width-33per">\n' +
+                        '<span class="color-darkred">تعداد مسافر: </span>\n' +
+                        '<span>' + rooms[i].capacity.adultCount + '</span>\n' +
+                        '</div>\n' +
+                        '<div class="width-33per">\n' +
+                        '<span class="color-darkred">سرویس تخت اضافه: </span>\n';
+                    if (extraBed) {
+                        text += '<span class="font-size-085em">با تخت اضافه</span>';
+                        reserve_money_text += '<span class="font-size-0.85em float-right">با تخت اضافه</span><span class="float-left">' + dotedNumber((Math.floor(priceExtraBed / 1000) * 1000) + (Math.floor(price / 1000) * 1000)) + '</span>';
+                        totalPerDayMoney += numRoom * Math.floor(priceExtraBed / 1000) * 1000;
+                        reserve_text += '<span>دارد</span>\n';
+                        extra.push(true);
+                    } else {
+                        reserve_money_text += '<span class="float-left">' + dotedNumber(Math.floor(price / 1000) * 1000) + '</span>';
+                        reserve_text += '<span>ندارد</span>\n';
+                        extra.push(false);
                     }
+                    text += '</div>';
+                    reserve_money_text += '</div>';
+                    reserve_text += '</div>\n' +
+                        '</div><div class="row display-flex flex-direction-row">\n' +
+                        '<div>\n' +
+                        '<span class="color-darkred"> صبحانه مجانی: </span>\n' +
+                        '<span>دارد</span>\n' +
+                        '</div>\n' +
+                        '</div>\n' +
+                        '</div>\n';
+                    reserve_text += '<div class="col-md-3"><img src="' + rooms[i].pic + '" class="full-width"></div></div>';
                 }
-                totalMoney += totalPerDayMoney * numDay;
-                document.getElementById('totalPriceOneDay').innerText = dotedNumber(totalPerDayMoney);
-                document.getElementById('totalPrice').innerText = dotedNumber(totalMoney);
-                document.getElementById('check_total_price').innerText = dotedNumber(totalMoney);
-                document.getElementById('totalNumRoom').innerText = totalNumRoom;
-                document.getElementById('check_total_num_room').innerText = totalNumRoom;
-                document.getElementById('discriptionNumRoom').innerHTML = text;
-                document.getElementById('check_description').innerHTML = reserve_money_text;
-                document.getElementById('selected_rooms').innerHTML = reserve_text;
             }
+            totalMoney += totalPerDayMoney * numDay;
+            document.getElementById('totalPriceOneDay').innerText = dotedNumber(totalPerDayMoney);
+            document.getElementById('totalPrice').innerText = dotedNumber(totalMoney);
+            document.getElementById('check_total_price').innerText = dotedNumber(totalMoney);
+            document.getElementById('totalNumRoom').innerText = totalNumRoom;
+            document.getElementById('check_total_num_room').innerText = totalNumRoom;
+            document.getElementById('discriptionNumRoom').innerHTML = text;
+            document.getElementById('check_description').innerHTML = reserve_money_text;
+            document.getElementById('selected_rooms').innerHTML = reserve_text;
+        }
 
-            function showReserve() {
-                if(totalMoney > 0)
-                    document.getElementById('check_room').style.display = 'flex';
-            }
+        function showReserve() {
+            if (totalMoney > 0)
+                document.getElementById('check_room').style.display = 'flex';
+        }
 
-            function updateSession() {
+        function updateSession() {
             $.ajax({
                 url: updateSession,
                 type: 'post',
@@ -4484,7 +4725,7 @@ if ($total == 0)
             //     dateFormat: "yy/mm/dd"
             // });
 
-            $('#commentLink').click(function() {
+            $('#commentLink').click(function () {
                 if (!hasLogin) {
                     showLoginPrompt(hotelDetailsInSaveToTripMode);
                     return;
@@ -4499,7 +4740,7 @@ if ($total == 0)
                     $("#commentModalMainDiv").hide()
             });
 
-            $('.editUploadPhotoComment').click(function(){
+            $('.editUploadPhotoComment').click(function () {
                 // $('#editPane').removeClass('hidden')
             });
 

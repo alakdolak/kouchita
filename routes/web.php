@@ -3,6 +3,15 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('databaseforall', function (){
+    Schema::create('reviewFeedBack', function (Blueprint $table) {
+        $table->increments('id');
+        $table->unsignedInteger('logId');
+        $table->unsignedInteger('userId');
+        $table->boolean('like');// 1 like , -1 dislike
+        $table->timestamps();
+
+        $table->foreign('logId')->references('id')->on('log')->onUpdate('cascade')->onDelete('cascade');
+    });
 });
 
 Route::get('fillHotelPic', function(){
@@ -196,8 +205,8 @@ Route::get('specificPost/{id}', ['as' => 'specificPost', 'uses' => 'PostControll
 
 Route::get('updateBot', 'HomeController@updateBot');
 
-Route::get('gardeshname', function(){
-    return view('gardeshname');
+Route::get('searchArticle', function(){
+    return view('searchArticle');
 });
 
 Route::get('profileUsers', function(){
@@ -216,11 +225,6 @@ Route::get('gardeshnameEdit', function(){
     return view('gardeshnameEdit');
 });
 
-//Route::get('searchArticle', function(){
-//    return view('searchArticle');
-//});
-//
-
 Route::get('myTripInner', function(){
     return view('myTripInner');
 });
@@ -229,7 +233,7 @@ Route::get('business', function(){
     return view('business');
 });
 
-Route::get('gardeshname2/{page?}', 'PostController@gardeshname')->name('gardeshname');
+Route::get('mainArticle/{page?}', 'PostController@mainArticle')->name('mainArticle');
 
 Route::get('gardeshnameInner/{postId}', ['as' => 'gardeshnameInner', 'uses' => 'PostController@gardeshnameInner']);
 

@@ -2658,6 +2658,9 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 .filterChoices:hover {
     background-color: #fcc156;
 }
+.filterChoosed{
+    background-color: #fcc156 !important;
+}
 
 .photoTypePostsFilter .filterChoices {
     width: 44%;
@@ -3000,11 +3003,14 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     display: inline-block;
     cursor: pointer;
 }
-.filterChoices:hover{
-    background-color: #989898;
-}
+/*.filterChoices:hover{*/
+    /*background-color: #989898;*/
+/*}*/
 .filterChoose{
     background-color: #7b7b7b !important;
+}
+.multiSelectAns:hover{
+    background-color: #989898;
 }
 
 .visitKindCommentModalHeader , .visitTimeCommentModalHeader{
