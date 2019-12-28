@@ -176,12 +176,12 @@ if ($total == 0)
                                         @endif
                                         <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
                                     </div>
-                                    <script>
-                                        function textAreaAdjust(o) {
-                                            o.style.height = "1px";
-                                            o.style.height = (25 + o.scrollHeight) + "px";
-                                        }
-                                    </script>
+{{--                                    <script>--}}
+{{--                                        function textAreaAdjust(o) {--}}
+{{--                                            o.style.height = "1px";--}}
+{{--                                            o.style.height = (25 + o.scrollHeight) + "px";--}}
+{{--                                        }--}}
+{{--                                    </script>--}}
                                     <div class="clear-both"></div>
                                     <div class="row">
                                         <div class="commentPhotosMainDiv" id="reviewShowPics">
@@ -934,19 +934,6 @@ if ($total == 0)
             <div id="BODYCON" ng-app="mainApp"
                  class="col easyClear bodLHN poolB adjust_padding new_meta_chevron new_meta_chevron_v2 position-relative">
 
-                <div class="postsFiltrationBarToggle display-none col-xs-12">
-                    <div class="postsMainFiltrationBar">
-                        <span>نمایش بر اساس</span><!--
-                     --><span>جدیدترین‌ها</span><!--
-                     --><span>قدمی‌ترین‌ها</span><!--
-                     --><span>بهترین‌ها</span><!--
-                     --><span>داغ‌ترین‌ها</span><!--
-                     --><span>بدترین‌ها</span><!--
-                     --><span>بیشترین همراهان</span><!--
-                     --><span>پست‌ها</span>
-                    </div>
-                </div>
-
                 <script>
                     function openTab(tabName, elmnt, fontColor) {
                         var i, tabcontent, tablinks;
@@ -971,7 +958,7 @@ if ($total == 0)
 
                 </script>
 
-                <div class="tabLinkMainWrapMainDivMobile" data-spy="affix" data-offset-top="753">
+                <div class="tabLinkMainWrapMainDivMobile" data-spy="affix" data-offset-top="790">
                     <div class="tabLinkMainWrapMainDiv">
                         <a href="#bodyLinks">
                             <button class="tabLinkMainWrap" onclick="openTab('QAndAMainDivId', this, '#4dc7bc')">سؤالات</button>
@@ -1553,7 +1540,7 @@ if ($total == 0)
                     <div id="mainDivPlacePost" class="tabContentMainWrap">
                         <div class="topHeaderBarPosts display-none">
                             <span class="float-right text-align-right">جستجوی‌ بیشتر در پست‌ها</span>
-                            <span onclick="allPostsGrid()" class="returnToMainPage display-none">back</span>
+{{--                            <span onclick="allPostsGrid()" class="returnToMainPage display-none">back</span>--}}
                             <span class="float-left">مشاهده همه پست‌ها</span>
                         </div>
                         <div class="col-md-5 col-xs-12 pd-0 pd-rt-10Imp leftColMainWrap">
@@ -1579,7 +1566,7 @@ if ($total == 0)
                                         <span class="float-right line-height-2">
                                             {{$item->description}}
                                         </span>
-                                        <span class="dark-blue font-weight-500 float-right line-height-2" onclick="removeFilter({{$item->id}}, 'multi')" style="cursor: pointer">حذف فیلتر</span>
+                                        <span class="dark-blue font-weight-500 float-right line-height-2 mg-rt-5" onclick="removeFilter({{$item->id}}, 'multi')" style="cursor: pointer">حذف فیلتر</span>
                                         <div class="clear-both"></div>
                                         <center>
                                             @foreach($item->ans as $item2 )
@@ -1597,18 +1584,18 @@ if ($total == 0)
 
                                         <center>
                                             <b class="filterChoices">تنها دارای عکس</b><!--
-                                        --><b class="filterChoices">تنها دارای فیلم</b><!--
-                                        --><b class="filterChoices">تنها دارای متن بلند</b><!--
-                                        --><b class="filterChoices">تنها دارای فیلم و عکس</b>
+                                         --><b class="filterChoices">تنها دارای فیلم</b><!--
+                                         --><b class="filterChoices">تنها دارای متن بلند</b><!--
+                                         --><b class="filterChoices">تنها دارای فیلم و عکس</b>
                                         </center>
                                     </div>
 
                                     @foreach($rateQuestion as $index => $item)
                                         <div class="commentsRatesFilter filterTypeDiv">
-                                        <span class="float-right line-height-205">
-                                            {{$item->description}}
-                                        </span>
-                                            <span class="dark-blue font-weight-500 float-right line-height-2" onclick="removeFilter({{$item->id}}, 'rate')" style="cursor: pointer">حذف فیلتر</span>
+                                            <span class="float-right line-height-2">
+                                                {{$item->description}}
+                                            </span>
+                                            <span class="dark-blue font-weight-500 float-right line-height-2 mg-rt-5" onclick="removeFilter({{$item->id}}, 'rate')" style="cursor: pointer">حذف فیلتر</span>
                                             <div class="clear-both"></div>
                                         <center>
                                             <div class="commentRatingsFiltersChoices">
@@ -2139,7 +2126,7 @@ if ($total == 0)
                                     پست در هر صفحه
                                 </div>
                                 <a class="col-xs-3 showPostsNumsFilterLink" href="#taplc_global_nav_links_0">
-                                    <div class="showPostsNumsFilter" onclick="allPostsGrid()">نمایش تمامی پست‌ها</div>
+                                    <div class="showPostsNumsFilter">نمایش تمامی پست‌ها</div>
                                 </a>
                                 <div class="col-xs-4 font-size-13 line-height-2 text-align-right">
                                     صفحه
@@ -2155,7 +2142,7 @@ if ($total == 0)
 
                         </div>
 
-                        @include('layouts.placePosts')
+
 
                     </div>
                 </div>
@@ -2192,8 +2179,7 @@ if ($total == 0)
                                         پاسخ موجود می‌باشد.
                                     </div>
                                     <a class="seeAllQMainLink" href="#taplc_global_nav_links_0">
-                                        <div class="seeAllQLink display-inline-block float-right direction-rtl dark-blue"
-                                             onclick="allQuestionsGrid()">مشاهده همه سؤالات و پاسخ‌ها
+                                        <div class="seeAllQLink display-inline-block float-right direction-rtl dark-blue">بازگشت به صفحه‌ی اصلی
                                         </div>
                                     </a>
                                     <div class="clear-both"></div>
@@ -2496,7 +2482,7 @@ if ($total == 0)
                             پست در هر صفحه
                         </div>
                         <a class="col-xs-3 showQuestionsNumsFilterLink" href="#taplc_global_nav_links_0">
-                            <div class="showQuestionsNumsFilter" onclick="allQuestionsGrid()">نمایش تمامی سؤال‌ها</div>
+                            <div class="showQuestionsNumsFilter">نمایش تمامی سؤال‌ها</div>
                         </a>
                         <div class="col-xs-4 font-size-13 line-height-2 text-align-right float-right">
                             صفحه
@@ -2810,47 +2796,6 @@ if ($total == 0)
         function filterChoices(element) {
             $(element).toggleClass('bg-color-yellowImp')
         }
-        //
-        // function allPostsGrid() {
-        //     $('#targetHelp_10').toggle(),
-        //     $('#bestPriceInnerDiv').toggleClass('min-height-170Imp'),
-        //     $('.greyBackground').toggleClass('height-210Imp'),
-        //     $('.postModalMainDiv').toggleClass('top--30Imp'),
-        //     $('#addToFavouriteTripsMainDiv').toggle(),
-        //     // $('#helpBtnMainDiv').toggleClass('top-20Imp'),
-        //     $('.returnToMainPage').toggleClass('color-white'),
-        //     $('.returnToMainPage').toggle(),
-        //     $('.postsMainDivInRegularMode').toggle(),
-        //     $('.postsMainDivInSpecificMode').toggle(),
-        //     $('.hr_btf_wrap').toggle(),
-        //     $('#nearbyDiv').toggle(),
-        //     $('.QAndAMainDiv').toggle(),
-        //     $('.questionsMainDivFooter').toggle(),
-        //     $('.postsFiltrationBarToggle').toggle();
-        //     $('.tabLinkMainWrapMainDiv').toggle();
-        //     $('#similarLocationsMainDiv').toggle();
-        // }
-        //
-        // function allQuestionsGrid() {
-        //     $('.atf_meta_and_photos_wrapper').toggle(),
-        //     $('.exceptQAndADiv').toggle(),
-        //     $('.adsToggleQuestions1').toggle() ,
-        //     $('.questionsFiltrationBarToggle').toggle() ,
-        //     $('.questionsFiltrationBarToggle').toggleClass('pd-0') ,
-        //     $('.questionsMainDivFooter').toggle() ,
-        //     $('.QAndAMainDiv').toggleClass('col-md-12'),
-        //     $('.QAndAMainDiv').toggleClass('float-right'),
-        //     $('.QAndAMainDiv').toggleClass('col-md-8'),
-        //     $('.adsMainDiv').toggleClass('mg-tp-0'),
-        //     $('#addToFavouriteTripsMainDiv').toggle(),
-        //     // $('#helpBtnMainDiv').toggleClass('top-20Imp'),
-        //     $('.questionInputBox').toggleClass('width-80per'),
-        //     $('.showingQuestionCompletely').toggle();
-        //     $('.tabLinkMainWrapMainDiv').toggle();
-        //     $('#similarLocationsMainDiv').toggle();
-        //
-        //     $('.seeAllQLink').text($('.seeAllQLink').text() == 'مشاهده همه سؤالات و پاسخ‌ها' ? 'بازگشت به صفحه‌ی اصلی' : 'مشاهده همه سؤالات و پاسخ‌ها');
-        // }
 
         // function showSpecificQuestion(element) {
         //     $('.atf_meta_and_photos_wrapper').toggle(),
@@ -4255,20 +4200,6 @@ if ($total == 0)
                 $(".dark").show();
                 showLoginPrompt(url);
             });
-            $('#share_pic').click(function () {
-                if ($('#share_box').is(":hidden")) {
-                    $('#share_box').show();
-                } else {
-                    $('#share_box').hide();
-                }
-            });
-            $('#share_pic_mobile').click(function () {
-                if ($('#share_box_mobile').is(":hidden")) {
-                    $('#share_box_mobile').show();
-                } else {
-                    $('#share_box_mobile').hide();
-                }
-            });
             @if($mode == "bookMark")
             bookMark();
             @elseif($mode == "saveToTrip")
@@ -4803,13 +4734,6 @@ if ($total == 0)
                     url = '{{route('restaurantDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';
                 $(".dark").show();
                 showLoginPrompt(url);
-            });
-            $('#share_pic').click(function () {
-                if ($('#share_box').is(":hidden")) {
-                    $('#share_box').show();
-                } else {
-                    $('#share_box').hide();
-                }
             });
             @if($mode == "bookMark")
             bookMark();

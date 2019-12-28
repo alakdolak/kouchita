@@ -1857,10 +1857,12 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
 .commentMoreSettingBar {
     background: white;
-    display: inline-block;
+    display: flex;
     width: 100%;
     margin-top: 5px;
     border: 1px solid #ccc;
+    justify-content: right;
+    flex-wrap: wrap;
 }
 
 .commentOptionsBoxes {
@@ -1994,6 +1996,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
 .tabLinkMainDiv {
     background-color: #999999;
+    display: flex;
 }
 
 .tabLink {
@@ -2041,14 +2044,16 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     top: 15px !important;
 }
 
-.commentActions , .answersActions {
+.commentActions, .answersActions {
     position: absolute;
     top: 5px;
     left: 15px;
     height: 32px;
     width: 45px;
     background-color: #e5e5e5;
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     float: right;
     direction: rtl;
     border-radius: 10px;
@@ -2067,9 +2072,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     content: '\E091';
     font-family: shazdemosafer-tour !important;
     font-size: 35px;
-    position: absolute;
-    top: 0;
-    right: -5px;
+    display: flex;
     color: #666;
 }
 
@@ -2658,6 +2661,13 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 .filterChoices:hover {
     background-color: #fcc156;
 }
+
+.filterTypeDiv > center {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
 .filterChoosed{
     background-color: #fcc156 !important;
 }
@@ -3467,34 +3477,6 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     padding: 0;
 }
 
-.postsMainFiltrationBar > span , .questionsMainFiltrationBar > span{
-    margin: 0 0.5%;
-    font-size: 14px;
-    width: 11.5%;
-    text-align: center;
-}
-
-.postsMainFiltrationBar > span:last-child, .questionsMainFiltrationBar > span:last-child{
-    float: left;
-    margin-left: 0.5%;
-}
-
-.postsMainFiltrationBar > span:first-child, .questionsMainFiltrationBar > span:first-child{
-    margin-right: 0.5% !important;
-}
-
-.postsMainFiltrationBar > span:last-child , .postsMainFiltrationBar > span:first-child ,
-.questionsMainFiltrationBar > span:last-child , .questionsMainFiltrationBar > span:first-child{
-    color: #0076a3;
-    font-weight: 700;
-    cursor: default !important;
-}
-
-.postsMainFiltrationBar > span:not(:last-child) , .questionsMainFiltrationBar > span:not(:last-child),
-.postsMainFiltrationBar > span:not(:first-child) , .questionsMainFiltrationBar > span:not(:first-child) {
-    cursor: pointer;
-}
-
 .postsMainDivInSpecificMode  .postMainDivShown {
     padding: 10px;
 }
@@ -3629,12 +3611,6 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 .commentWriterExperienceParticipation , .userProfileName , .userProfileNameAnswers {
     color: #0076a3;
     cursor: pointer;
-}
-
-/*Questions page styles*/
-
-.questionsFiltrationBarToggle .questionsMainFiltrationBar > span {
-    margin: 0 13px;
 }
 
 /*similar locations*/
@@ -4007,12 +3983,12 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     }
 
     .filterTypeDiv .filterChoices {
-        width: 10%;
+        width: 12%;
         margin: 0 10px;
     }
 
     .photoTypePostsFilter .filterChoices {
-        width: 17%;
+        width: 22%;
         margin: 0 5px;
     }
 
@@ -4021,7 +3997,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     }
 
     .ratingTranslationDiv {
-        width: 15%;
+        width: 30%;
         line-height: 2.5;
         float: right;
     }
@@ -4082,6 +4058,10 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 @media (min-width:768px) {
     .postsMainDivInSpecificMode > div:nth-child(1) {
         padding-right: 10px !important;
+    }
+
+    .affix {
+        padding-right: 47px;
     }
 }
 
@@ -4169,11 +4149,11 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
         margin-bottom: 5px;
     }
 
-    .leftColMainWrap .filterTypeDiv:not(:nth-child(4)) .filterChoices:first-child {
+    .leftColMainWrap .filterTypeDiv:not(:nth-child(3)) .filterChoices:first-child {
         margin-right: 0;
     }
 
-    .leftColMainWrap .filterTypeDiv:not(:nth-child(4)) .filterChoices:last-child {
+    .leftColMainWrap .filterTypeDiv:not(:nth-child(3)) .filterChoices:last-child {
         margin-left: 0;
     }
 
@@ -4188,8 +4168,8 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
     .leftColMainWrap .ratingTranslationDiv {
         float: left;
-        margin-left: 10%;
-        width: 30%;
+        /*margin-left: 10%;*/
+        width: 40%;
     }
 
     .showPostsNumsFilterLink, .showQuestionsNumsFilterLink {
@@ -4339,6 +4319,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
     .photoTypePostsFilter .filterChoices {
         width: 47%;
+        margin: 2px 1%;
     }
 
     .tabLinkMainWrap {
@@ -4678,6 +4659,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     .leftColMainWrap .ratingTranslationDiv {
         margin-left: 0;
         width: 50%;
+        text-align: left;
     }
 
     .inputBoxSearchFilter {

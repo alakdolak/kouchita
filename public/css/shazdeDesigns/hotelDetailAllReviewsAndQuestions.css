@@ -1,0 +1,236 @@
+.postsMainFiltrationBar , .questionsMainFiltrationBar{
+    background-color: #eaeaea;
+    color: #777777;
+    padding: 10px 0;
+    direction: rtl;
+    display: flex;
+    width: 100%;
+}
+
+.postsFiltrationBarToggle {
+    padding: 0;
+}
+
+.postsMainFiltrationBar > span, .questionsMainFiltrationBar > span {
+    margin: 0 0 !important;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    text-align: center;
+    width: 12.5%;
+}
+
+.postsMainFiltrationBar > span:last-child, .postsMainFiltrationBar > span:first-child ,
+.questionsMainFiltrationBar > span:last-child, .questionsMainFiltrationBar > span:first-child{
+    color: #0076a3;
+    font-weight: 700;
+    cursor: default !important;
+}
+
+.postsMainDivInSpecificMode .postMainDivShown {
+    padding: 10px;
+}
+
+.postMainDivShown .questionsActionsMoreDetails {
+    top: 50px;
+}
+
+.postsMainDivInSpecificMode .photosCol > div:nth-child(1) {
+    height: 210px;
+}
+
+.postsMainDivInSpecificMode .commentPhotosMainDiv {
+    margin: 0;
+}
+
+.postsMainDivInSpecificMode , .commentPhotosShow{
+    border-bottom: none;
+}
+
+.postsMainDivInSpecificMode .quantityOfLikes {
+    border-top: 1px solid #E5E5E5;
+    display: inline-block;
+    width: 100%;
+    margin-top: 10px;
+    font-size: 12px;
+    padding-top: 10px;
+}
+
+.numberOfPhotosMainDiv {
+    background-color: rgba(0,0,0,0.5);
+    position: absolute;
+    bottom: 0;
+    left: 15px;
+    color: white;
+    text-align: center;
+    padding: 4px 20px;
+    border: none !important;
+}
+
+.numberOfPhotos {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.postTextShown {
+    overflow: hidden;
+}
+
+.showMoreText {
+    position: relative;
+    cursor: pointer;
+    width: 30px;
+    height: 10px;
+    display: inline-block;
+}
+
+.showMoreText::before {
+    content: '\E091';
+    font-family: shazdemosafer-tour !important;
+    font-size: 35px;
+    color: #4DC7BC;
+    position: absolute;
+    bottom: -23px;
+    left: 0;
+}
+
+.showLessText {
+    color: #4DC7BC;
+    cursor: pointer;
+}
+
+.commentWriterExperienceDetails, .answersWriterExperienceDetails {
+    color: #666666;
+    margin-bottom: 10px;
+    direction: rtl;
+}
+
+.commentWriterExperienceDetails {
+    width: 78%;
+}
+
+.answersWriterExperienceDetails {
+    display: inline-block;
+    float: right;
+    width: 57%;
+}
+
+.userProfileName {
+    display: inline-block;
+    font-size: 15px;
+}
+
+.commentWriterExperiencePlace , .answersWriterExperiencePlace {
+    color: #16174f;
+    cursor: pointer;
+}
+
+.commentContentsShow > p {
+    word-break: normal;
+    text-align: justify;
+}
+
+.commentPhotosShow {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.photosCol > div {
+    margin-top: 10px;
+    border: 2px solid black;
+    cursor: pointer;
+}
+
+.photosCol img {
+    cursor: pointer;
+}
+
+.postsMainDivInSpecificMode .photosCol {
+    border-top: 1px solid #E5E5E5;
+}
+
+.postMainDivShown , .postsFiltersMainDiv {
+    float: right;
+    direction: rtl;
+    background: white;
+    margin-top: 10px;
+    padding: 10px 20px;
+}
+
+.commentWriterExperienceParticipation , .userProfileName , .userProfileNameAnswers {
+    color: #0076a3;
+    cursor: pointer;
+}
+
+.answersWriterPicShow {
+    width: 55px;
+    height: 55px;
+    background-color: #E5E5E5;
+    display: inline-block;
+    float: right;
+    margin-left: 10px;
+}
+
+.allPostsGridMainDiv #addToFavouriteTripsMainDiv {
+    display: none;
+}
+
+.allPostsGridMainDiv #bestPriceInnerDiv {
+    min-height: 170px !important;
+}
+
+.allPostsGridMainDiv .greyBackground {
+    display: none;
+}
+
+.allPostsGridMainDiv .postModalMainDiv {
+    top: -30px !important;
+}
+
+@media (min-width: 992px) {
+    .allPostsGridMainDiv #helpBtnMainDiv {
+        top: 20px !important;
+    }
+}
+
+.allPostsGridMainDiv .returnToMainPage {
+    color: white;
+}
+
+@media (max-width: 992px) {
+    .allPostsGridMainDiv #MAINWRAP {
+        padding: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .postsMainFiltrationBar > span, .questionsMainFiltrationBar > span {
+        font-size: 13px;
+        width: 12.5%;
+    }
+
+}
+
+@media (max-width: 630px) {
+    .allPostsGridMainDiv .postMainDiv {
+        margin-top: 0;
+    }
+
+    .allPostsGridMainDiv .postModalMainDiv {
+        top: 0 !important;
+    }
+
+    .postsMainFiltrationBar, .questionsMainFiltrationBar {
+        overflow-x: scroll;
+        float: right;
+        white-space: nowrap;
+    }
+
+    .postsMainFiltrationBar > span, .questionsMainFiltrationBar > span {
+        width: auto;
+        padding: 0 10px;
+    }
+}

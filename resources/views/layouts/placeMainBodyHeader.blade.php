@@ -363,3 +363,15 @@
         </div>
     </div>
 </div>
+
+
+<script>
+
+    $('#share_pic_mobile').click(function () {
+        if ($('#share_box_mobile').is(":hidden")) {
+            $('#share_box_mobile').show();
+        } else {
+            $('#share_box_mobile').hide();
+        }
+    });
+</script>

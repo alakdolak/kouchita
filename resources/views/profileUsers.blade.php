@@ -100,7 +100,7 @@
                     </div>
                 </div>
 
-                @include('layouts.modalPhotos')
+{{--                @include('layouts.modalPhotos')--}}
 
                 @include('layouts.profilePosts')
                 @include('layouts.profilePhotosAndVideos')
