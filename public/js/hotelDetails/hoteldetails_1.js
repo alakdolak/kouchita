@@ -1023,8 +1023,8 @@ function showReviews(reviews){
             for(j = 0; j < reviews[i]["ans"].length; j++){
                 if(reviews[i]["ans"][j]['ansType'] == 'text'){
                     text += '<div class="display-inline-block full-width">\n';
-                    text +='<b class="col-xs-6 font-size-15 line-height-203 pd-rt-0">' + reviews[i]["ans"][j]["ans"] + '</b>\n';
-                    text +='<b class="col-xs-6 font-size-15 line-height-203" style="float: right">' + reviews[i]["ans"][j]["description"] + '</b>\n';
+                    text +='<b class="col-xs-6 font-size-15 line-height-203 float-right pd-lt-0">' + reviews[i]["ans"][j]["ans"] + '</b>\n';
+                    text +='<b class="col-xs-6 font-size-15 line-height-203 float-right" style="float: right">' + reviews[i]["ans"][j]["description"] + '</b>\n';
                     text += '</div>\n';
                 }
             }
@@ -1033,8 +1033,8 @@ function showReviews(reviews){
             for(j = 0; j < reviews[i]["ans"].length; j++){
                 if(reviews[i]["ans"][j]['ansType'] == 'multi'){
                     text += '<div class="display-inline-block full-width">\n';
-                    text +='<b class="col-xs-6 font-size-15 line-height-203 pd-rt-0">' + reviews[i]["ans"][j]["ans"] + '</b>\n';
-                    text +='<b class="col-xs-6 font-size-15 line-height-203" style="float: right">' + reviews[i]["ans"][j]["description"] + '</b>\n';
+                    text +='<b class="col-xs-6 font-size-15 line-height-203 float-right pd-lt-0">' + reviews[i]["ans"][j]["ans"] + '</b>\n';
+                    text +='<b class="col-xs-6 font-size-15 line-height-203 float-right" style="float: right">' + reviews[i]["ans"][j]["description"] + '</b>\n';
                     text += '</div>\n';
                 }
 
@@ -1046,8 +1046,8 @@ function showReviews(reviews){
                     text += '<div class="display-inline-block full-width">\n';
 
                     if(reviews[i]["ans"][j]['ans'] == 5){
-                        text +='                                         <b class="col-xs-3 font-size-15 line-height-203 pd-rt-0">عالی بود</b>\n' +
-                            '                                            <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">\n' +
+                        text +='                                         <b class="col-xs-3 font-size-15 line-height-203 float-right pd-lt-0">عالی بود</b>\n' +
+                            '                                            <div class="prw_rup prw_common_bubble_rating overallBubbleRating float-right col-xs-5 text-align-left">\n' +
                             '                                                <div class="ui_star_rating stars_10 font-size-25">\n' +
                             '                                                    <span class="starRatingGreen"></span>\n' +
                             '                                                    <span class="starRatingGreen"></span>\n' +
@@ -1058,8 +1058,8 @@ function showReviews(reviews){
                             '                                            </div>\n';
                     }
                     else if(reviews[i]["ans"][j]['ans'] == 4){
-                        text +='                                         <b class="col-xs-3 font-size-15 line-height-203 pd-rt-0">خوب بود</b>\n' +
-                            '                                            <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">\n' +
+                        text +='                                         <b class="col-xs-3 font-size-15 line-height-203 float-right pd-lt-0">خوب بود</b>\n' +
+                            '                                            <div class="prw_rup prw_common_bubble_rating overallBubbleRating float-right col-xs-5 text-align-left">\n' +
                             '                                                <div class="ui_star_rating stars_10 font-size-25">\n' +
                             '                                                    <span class="starRatingGreen"></span>\n' +
                             '                                                    <span class="starRatingGreen"></span>\n' +
@@ -1070,8 +1070,8 @@ function showReviews(reviews){
                             '                                            </div>\n';
                     }
                     else if(reviews[i]["ans"][j]['ans'] == 3){
-                        text +='                                         <b class="col-xs-3 font-size-15 line-height-203 pd-rt-0">معمولی بود</b>\n' +
-                            '                                            <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">\n' +
+                        text +='                                         <b class="col-xs-3 font-size-15 line-height-203 float-right pd-lt-0">معمولی بود</b>\n' +
+                            '                                            <div class="prw_rup prw_common_bubble_rating overallBubbleRating float-right col-xs-5 text-align-left">\n' +
                             '                                                <div class="ui_star_rating stars_10 font-size-25">\n' +
                             '                                                    <span class="starRatingGreen"></span>\n' +
                             '                                                    <span class="starRatingGreen"></span>\n' +
@@ -1082,8 +1082,8 @@ function showReviews(reviews){
                             '                                            </div>\n';
                     }
                     else if(reviews[i]["ans"][j]['ans'] == 2){
-                        text +='                                         <b class="col-xs-3 font-size-15 line-height-203 pd-rt-0">بد نبود</b>\n' +
-                            '                                            <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">\n' +
+                        text +='                                         <b class="col-xs-3 font-size-15 line-height-203 float-right pd-lt-0">بد نبود</b>\n' +
+                            '                                            <div class="prw_rup prw_common_bubble_rating overallBubbleRating float-right col-xs-5 text-align-left">\n' +
                             '                                                <div class="ui_star_rating stars_10 font-size-25">\n' +
                             '                                                    <span class="starRatingGreen"></span>\n' +
                             '                                                    <span class="starRatingGreen"></span>\n' +
@@ -1094,8 +1094,8 @@ function showReviews(reviews){
                             '                                            </div>\n';
                     }
                     else if(reviews[i]["ans"][j]['ans'] == 1){
-                        text +='                                         <b class="col-xs-3 font-size-15 line-height-203 pd-rt-0">اصلا راضی نبودم</b>\n' +
-                            '                                            <div class="prw_rup prw_common_bubble_rating overallBubbleRating col-xs-5 text-align-left">\n' +
+                        text +='                                         <b class="col-xs-3 font-size-15 line-height-203 float-right pd-lt-0">اصلا راضی نبودم</b>\n' +
+                            '                                            <div class="prw_rup prw_common_bubble_rating overallBubbleRating float-right col-xs-5 text-align-left">\n' +
                             '                                                <div class="ui_star_rating stars_10 font-size-25">\n' +
                             '                                                    <span class="starRatingGreen"></span>\n' +
                             '                                                    <span class="starRating"></span>\n' +
@@ -1181,7 +1181,7 @@ function showReviews(reviews){
                 '                                                    <span class="numberOfCommentsIcon commentsStatisticSpan color-blue">' + reviews[i]["comment"][j]["comment"].length + '</span>\n' +
                 '                                                </div>\n';
                 if(reviews[i]["comment"][j]["comment"].length > 0)
-                    text += '<div class="dark-blue float-left display-inline-black cursor-pointer" onclick="showCommentsAnswers2(' + reviews[i]["comment"][j]["id"] + ', this)">مشاهده پاسخ‌ها</div>\n';
+                    text += '<div class="dark-blue float-left display-inline-black cursor-pointer" onclick="showCommentsAnswers2(' + reviews[i]["comment"][j]["id"] + ', this)">دیدن پاسخ‌ها</div>\n';
 
                 text += '                                    </div>\n' +
                 '                                        </div>\n' +
@@ -1286,7 +1286,7 @@ function sendAnsOfReviews(_logId, _ans){
 
 function showCommentsAnswers2(_id, element){
     $('.ansComment_' + _id).toggleClass("display-inline-blockImp");
-    $(element).text($(element).text() == 'مشاهده پاسخ‌ها' ? 'بستن پاسخ‌ها' : 'مشاهده پاسخ‌ها');
+    $(element).text($(element).text() == 'دیدن پاسخ‌ها' ? 'بستن پاسخ‌ها' : 'دیدن پاسخ‌ها');
 }
 
 function createAnsToComment(comment, repTo, topId){
@@ -1312,7 +1312,7 @@ function createAnsToComment(comment, repTo, topId){
             '                                                </div>\n';
 
             if(comment[k]["comment"].length > 0)
-                text += '<div class="dark-blue float-left display-inline-black cursor-pointer" onclick="showCommentsAnswers2(' + comment[k]["id"] + ', this)">مشاهده پاسخ‌ها</div>\n';
+                text += '<div class="dark-blue float-left display-inline-black cursor-pointer" onclick="showCommentsAnswers2(' + comment[k]["id"] + ', this)">دیدن پاسخ‌ها</div>\n';
 
             text +='                                            </div>\n' +
             '                                        </div>\n' +

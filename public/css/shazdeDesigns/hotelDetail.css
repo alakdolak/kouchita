@@ -2197,6 +2197,10 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     padding: 15px 9px;
 }
 
+.commentRatingsDetailsBox .starRating, .commentRatingsDetailsBox .starRatingGreen {
+    cursor: default;
+}
+
 .commentFeedbackChoices {
     display: inline-block;
     width: 100%;
@@ -3311,7 +3315,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
 .answerBoxText {
     background-color: #eaeaea;
-    padding: 25px 10px 25px 50px;
+    padding: 25px 10px 25px 10px;
     position: relative;
     text-align: justify;
     direction: rtl;
@@ -3381,6 +3385,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     height: 25px;
     /*margin: 20px 20px 0 0;*/
     float: right;
+    margin: 0 3px;
 }
 
 .likeAnswer::before {
@@ -3429,12 +3434,6 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     position: absolute;
     left: -40px;
     top: 43px;
-}
-
-.tabLinkMainWrapMainDivMobile {
-    top: 0;
-    width: 100%;
-    z-index: 9999 !important;
 }
 
 .tabLinkMainWrapMainDiv > a {
@@ -3580,12 +3579,9 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 }
 
 .answersWriterExperienceDetails {
-    width: 52%;
-}
-
-.answersWriterExperienceDetails {
     display: inline-block;
     float: right;
+    width: 57%;
 }
 
 .userProfileName {
@@ -3715,6 +3711,16 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     align-items: center;
     overflow: hidden;
     position: relative;
+}
+
+.affix {
+    top: 0;
+    width: 100%;
+    z-index: 9999 !important;
+}
+
+.affix + .exceptQAndADiv {
+    padding-top: 70px;
 }
 
 @media (min-width: 992px) {
@@ -4361,25 +4367,60 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
         font-size: 12px;
     }
 
-    .showCommentsIconFeedback::before {
+    .showCommentsIconFeedback::before, .showCommentsClickedIconFeedback::before {
         top: -4px;
     }
 
-    .commentsLikeIconFeedback::before {
+    .commentsLikeIconFeedback::before, .commentsLikeClickedIconFeedback::before {
         top: -11px;
     }
 
-    .commentsDislikeIconFeedback::before {
+    .commentsDislikeIconFeedback::before, .commentsDislikeClickedIconFeedback::before {
         top: -7px;
     }
 
-    .commentsShareIconFeedback::before {
+    .commentsShareIconFeedback::before, .commentsShareIconFeedback::before {
         font-size: 17px;
         top: -5px;
     }
 
     .newCommentPlaceMainDiv .inputBox {
         width: 88%;
+    }
+
+    .commentRatingsDetailsBox > div > b {
+        font-size: 13px;
+        line-height: 2.5;
+    }
+
+    .commentRatingsDetailsBox > div > b:nth-child(1) {
+        padding-right: 0;
+    }
+
+    .postsMainDivFooter > div:nth-child(1) {
+        padding-left: 0;
+        font-size: 11px;
+    }
+
+    .postsMainDivFooter > div:nth-child(3) {
+        padding-right: 0;
+        font-size: 11px;
+    }
+
+    .postsMainDivFooter > a {
+        font-size: 11px;
+    }
+
+    .questionInputBox {
+        width: 73%;
+    }
+
+    .newAnswerPlaceMainDiv .inputBox {
+        width: 82%;
+    }
+
+    .answerBoxText {
+        width: 73%;
     }
 }
 
@@ -4464,6 +4505,121 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     .topHeaderBarPosts > span {
         font-size: 13px;
     }
+
+    .postsActionsChoices {
+        font-size: 14px;
+        width: 50%;
+        /*text-align: center;*/
+    }
+
+    .postsActionsChoices:nth-child(1), .postsActionsChoices:nth-child(2) {
+        margin-bottom: 10px;
+    }
+
+    .showCommentsIconFeedback::before, .showCommentsClickedIconFeedback::before {
+        /*right: 57px;*/
+        top: -3px;
+    }
+
+    .commentsLikeIconFeedback::before, .commentsLikeClickedIconFeedback::before {
+        top: -10px;
+        /*right: 79px;*/
+    }
+
+    .commentsDislikeIconFeedback::before, .commentsDislikeClickedIconFeedback::before {
+        top: -6px;
+        /*right: 79px;*/
+    }
+
+    .commentsShareIconFeedback::before, .commentsShareIconFeedback::before {
+        top: -4px;
+        /*right: 74px;*/
+    }
+
+    .commentRatingsDetailsBox > div > b:nth-child(1) {
+        float: right;
+        padding-right: 0;
+        line-height: 3;
+        width: 100%;
+    }
+
+    .commentRatingsDetailsBox > div > b:nth-child(3) {
+        padding-left: 0;
+        line-height: 3;
+        width: 40%;
+    }
+
+    .commentRatingsDetailsBox > div > div {
+        width: 60%;
+        padding-right: 0;
+    }
+
+    .commentRatingsDetailsBox > div > div span::before {
+        font-size: 20px;
+    }
+
+    .userProfileName {
+        font-size: 13px;
+    }
+
+    .commentReplyDesc {
+        font-size: 9px;
+    }
+
+    .commentsStatisticsBar > div:last-child {
+        font-size: 11px;
+        line-height: 2;
+    }
+
+    .newQuestionMainDiv .newQuestionWriterProfilePic,
+    .answersWriterDetailsShow .answersWriterPicShow {
+        margin-left: 5px;
+    }
+
+    .answersActions {
+        left: 5px;
+        top: 5px !important;
+    }
+
+    .showingQuestionCompletely {
+        top: 10px;
+        left: 60px;
+    }
+
+    .questionInputBoxMainDiv {
+        float: right;
+        width: 280px;
+    }
+
+    .questionInputBox {
+        width: 79%;
+        float: right;
+    }
+
+    .questionInputBox > textarea {
+        font-size: 13px;
+    }
+
+    .actionToAnswer > div {
+        display: block;
+        float: initial;
+    }
+
+    .actionToAnswer span {
+        margin: inherit;
+    }
+
+    .actionToAnswer {
+        margin: 0 10px 0 0;
+    }
+
+    .dislikeAnswer::before, .dislikeAnswerClicked::before {
+        top: -5px;
+    }
+
+    .actionToAnswer {
+        margin: 15px 10px 0 0;
+    }
 }
 
 @media (max-width:370px) {
@@ -4538,5 +4694,74 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
     .newCommentPlaceMainDiv .inputBox {
          width: 82%;
+    }
+
+    .commentsActionsBtns {
+        margin: 0;
+        padding-top: 22px;
+        float: left;
+    }
+
+    .commentsActionsBtns .replyBtn {
+        font-size: 10px;
+    }
+
+    .commentsActionsBtns > div:nth-child(2) {
+        margin-bottom: 22px;
+    }
+
+    .commentsActionsBtns > div:nth-child(2) {
+        margin-top: 12px;
+    }
+
+    .likeActionBtn::before {
+        top: 0;
+        right: 40px;
+    }
+
+    .dislikeActionBtn::before {
+        top: 35px;
+        right: 40px;
+    }
+
+    .commentsStatisticsBar > div:last-child {
+        position: absolute;
+        left: 0;
+        font-size: 10px;
+    }
+
+    .questionInputBoxMainDiv {
+        float: right;
+        width: 235px;
+        position: relative;
+        margin-bottom: 25px;
+    }
+
+    .questionInputBox {
+        width: 100%;
+        float: right;
+    }
+
+    .sendQuestionBtn {
+        position: absolute;
+        top: 55px;
+        padding: 5px 10px;
+    }
+
+    .showingQuestionCompletely {
+        width: 48px;
+        text-align: center;
+        font-size: 10px;
+        top: 45px;
+        left: 9px;
+    }
+
+    .answersWriterExperienceDetails {
+        width: 60%;
+        margin-bottom: 13px;
+    }
+
+    .answerBoxText {
+        width: 68%;
     }
 }

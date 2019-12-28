@@ -209,6 +209,14 @@ Route::get('searchArticle', function(){
     return view('searchArticle');
 });
 
+Route::get('profileUsers', function(){
+    return view('profileUsers');
+});
+
+//Route::get('mainArticle', function(){
+//    return view('mainArticle');
+//});
+
 Route::get('article', function(){
     return view('article');
 });
