@@ -1586,7 +1586,7 @@ if ($total == 0)
                                         <span class="float-right line-height-2">
                                             {{$item->description}}
                                         </span>
-                                        <span class="dark-blue font-weight-500 float-right line-height-2" onclick="removeFilter({{$item->id}})" style="cursor: pointer">حذف فیلتر</span>
+                                        <span class="dark-blue font-weight-500 float-right line-height-2" onclick="removeFilter({{$item->id}}, 'multi')" style="cursor: pointer">حذف فیلتر</span>
                                         <div class="clear-both"></div>
                                         <center>
                                             @foreach($item->ans as $item2 )
@@ -1615,7 +1615,8 @@ if ($total == 0)
                                         <span class="float-right line-height-205">
                                             {{$item->description}}
                                         </span>
-                                        <div class="clear-both"></div>
+                                            <span class="dark-blue font-weight-500 float-right line-height-2" onclick="removeFilter({{$item->id}}, 'rate')" style="cursor: pointer">حذف فیلتر</span>
+                                            <div class="clear-both"></div>
                                         <center>
                                             <div class="commentRatingsFiltersChoices">
                                                 <div class="display-inline-block full-width text-align-right mg-tp-10">
@@ -1640,6 +1641,7 @@ if ($total == 0)
                                     <script>
                                         var filterRateAns = [];
                                         var filterMultiAns = [];
+                                        var filters = [];
 
                                         function showStar(_star, _id){
                                             for(i = 1; i < 6; i++){
@@ -1712,6 +1714,24 @@ if ($total == 0)
 
                                         function selectFilterStar(_star, _id){
                                             filterRateAns[_id] = _star;
+
+                                            var is = true;
+                                            for(i = 0; i < filters.length; i++){
+                                                if(filters[i] != null && filters[i]['kind'] == 'rate' && filters[i]['id'] == _id){
+                                                    is = false;
+                                                    filters[i]['value'] = _star;
+                                                    break;
+                                                }
+                                            }
+                                            if(is) {
+                                                filters[filters.length] = {
+                                                    'kind': 'rate',
+                                                    'id': _id,
+                                                    'value': _star
+                                                };
+                                            }
+
+                                            doReviewFilter();
                                         }
 
                                         function chooseMutliFilter(_qId, _aId){
@@ -1722,18 +1742,111 @@ if ($total == 0)
                                             filterMultiAns[_qId] = _aId;
                                             document.getElementById('ansMultiFilter_' + _aId).classList.add('filterChoosed');
 
+                                            var is = true;
+                                            for(i = 0; i < filters.length; i++){
+                                                if(filters[i] != null && filters[i]['kind'] == 'multi' && filters[i]['id'] == _qId){
+                                                    is = false;
+                                                    filters[i]['value'] = _aId;
+                                                    break;
+                                                }
+                                            }
+                                            if(is){
+                                                filters[filters.length] = {
+                                                    'kind' : 'multi',
+                                                    'id' : _qId,
+                                                    'value' : _aId
+                                                }
+                                            }
+
+                                            doReviewFilter();
                                         }
 
-                                        function removeFilter(_id){
-                                            if(filterMultiAns[_id] != null)
-                                                document.getElementById('ansMultiFilter_' + filterMultiAns[_id]).classList.remove('filterChoosed');
+                                        function removeFilter(_id, _kind){
+                                            if(_kind == 'rate'){
+                                                filterRateAns[_id] = null;
+                                            }
+                                            else{
+                                                if(filterMultiAns[_id] != null)
+                                                    document.getElementById('ansMultiFilter_' + filterMultiAns[_id]).classList.remove('filterChoosed');
 
-                                            filterMultiAns[_id] = null;
+                                                filterMultiAns[_id] = null;
+                                            }
+
+                                            for(i = 0; i < filters.length; i++){
+                                                if(filters[i] != null && filters[i]['kind'] == _kind && filters[i]['id'] == _id){
+                                                    filters[i] = null;
+                                                    break;
+                                                }
+                                            }
+
+                                            doReviewFilter();
                                         }
 
                                         function doReviewFilter(){
+                                            var isFilter = false;
 
+                                            for(i = 0 ; i < filters.length; i++){
+                                                if(filters[i] != null){
+                                                    isFilter = true;
+                                                    break;
+                                                }
+                                            }
+
+                                            if(isFilter) {
+                                                for (i = 0; i < allReviews.length; i++) {
+                                                    var show = true;
+
+                                                    if(allReviews[i]['ans'].length == 0)
+                                                        show = false;
+
+                                                    if(show){
+                                                        for(j = 0 ; j < filters.length; j++){
+                                                            if(filters[j] != null){
+                                                                var is = false;
+                                                                for(k = 0; k < allReviews[i]['ans'].length; k++){
+                                                                    if(filters[j]['kind'] == 'rate'){
+                                                                        if(allReviews[i]['ans'][k]['questionId'] == filters[j]['id'] && allReviews[i]['ans'][k]['ans'] == filters[j]['value']){
+                                                                            is = true;
+                                                                            break;
+                                                                        }
+                                                                        else if(allReviews[i]['ans'][k]['questionId'] == filters[j]['id']){
+                                                                            is = false;
+                                                                            break;
+                                                                        }
+                                                                    }
+                                                                    else{
+                                                                        if(allReviews[i]['ans'][k]['questionId'] == filters[j]['id'] && allReviews[i]['ans'][k]['ansId'] == filters[j]['value']){
+                                                                            is = true;
+                                                                            break;
+                                                                        }
+                                                                        else if(allReviews[i]['ans'][k]['questionId'] == filters[j]['id']){
+                                                                            is = false;
+                                                                            break;
+                                                                        }
+                                                                    }
+                                                                }
+
+                                                                if(!is){
+                                                                    show = false;
+                                                                    break;
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+
+                                                    if(show)
+                                                        document.getElementById('review_' + allReviews[i]['id']).style.display = 'block';
+                                                    else
+                                                        document.getElementById('review_' + allReviews[i]['id']).style.display = 'none';
+
+                                                }
+                                            }
+                                            else{
+                                                for (i = 0; i < allReviews.length; i++)
+                                                    document.getElementById('review_' + allReviews[i]['id']).style.display = 'block';
+                                            }
                                         }
+
                                     </script>
 
                                     <div class="searchFilter filterTypeDiv">
@@ -4481,4 +4594,18 @@ if ($total == 0)
     </script>
 
     <script src="{{URL::asset('js/adv.js')}}"></script>
+
+    <script>
+        $.ajax({
+           type: 'post',
+           url: '{{route("filterReview")}}',
+           data: {
+               'kindPlaceId': kindPlaceId,
+               'placeId' : placeId
+           },
+           success: function (response){
+
+           }
+        });
+    </script>
 @stop

@@ -853,7 +853,7 @@ Route::group(array('middleware' => 'nothing'), function () {
 
     Route::post('getReviews', 'AjaxController@getReviews')->name('getReviews');
 
-
+    Route::post('filterReview', 'AjaxController@filterReview')->name('filterReview');
 });
 
 Route::group(array('middleware' => 'auth'), function () {

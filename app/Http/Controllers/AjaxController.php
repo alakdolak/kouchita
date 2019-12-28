@@ -894,7 +894,9 @@ class AjaxController extends Controller {
                         if (count($item->ans) != 0) {
                             foreach ($item->ans as $item2) {
                                 if ($item2->ansType == 'multi') {
-                                    $item2->ans = QuestionAns::where('questionId', $item2->id)->first()->ans;
+                                    $anss = QuestionAns::where('questionId', $item2->id)->first();
+                                    $item2->ans = $anss->ans;
+                                    $item2->ansId = $anss->id;
                                 }
                             }
                         }
@@ -991,6 +993,43 @@ class AjaxController extends Controller {
                 }
             }
         }
+    }
+
+    public function filterReview(Request $request)
+    {
+        $activity = Activity::where('name', 'نظر')->first();
+        $a = Activity::where('name', 'پاسخ')->first();
+
+        $condition = ['activityId' => $activity->id, 'placeId' => $request->placeId, 'kindPlaceId' => $request->kindPlaceId, 'confirm' => 1, 'relatedTo' => 0];
+
+        $logs = LogModel::where($condition)->orderByDesc('date')->orderByDesc('time')->get();
+
+        $logId = array();
+        for($i = 0; $i < count($logs); $i++)
+            array_push($logId, $logs[$i]->id);
+
+        $ques = [11];
+        $ans = [22];
+
+        $lo = array();
+        for($i = 0; $i < count($ques); $i++){
+            $lo = array();
+            if(count($lo) != 0)
+                $n = DB::select('SELECT logId FROM questionUserAns WHERE questionId = ' . $ques[$i] . ' AND ans = ' . $ans[$i] . ' AND logId IN (' . implode(",", $logId) . ') AND logId IN (' . implode(",", $lo) . ')');
+            else
+                $n = DB::select('SELECT logId FROM questionUserAns WHERE questionId = ' . $ques[$i] . ' AND ans = ' . $ans[$i] . ' AND logId IN (' . implode(",", $logId) . ')');
+
+            if (count($n) == 0)
+                break;
+
+            foreach ($n as $l)
+                array_push($lo, $l->logId);
+        }
+
+        dd($lo);
+//        $questions = DB::select('SELECT logId, GROUP_CONCAT(questionId) AS questionId,  GROUP_CONCAT(ans) AS ans FROM questionUserAns WHERE logId IN (' . implode(",", $logId) . ') GROUP BY logId');
+
+//dd($questions);
     }
 
 }
