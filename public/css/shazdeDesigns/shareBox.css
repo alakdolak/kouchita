@@ -5,7 +5,7 @@
     background: #FFF;
     position: absolute;
     right: 0;
-    bottom: -180px;
+    bottom: -195px;
     z-index: 10;
     box-shadow: rgb(136, 136, 136) 1px 4px 8px;
     padding: 2px;
@@ -13,7 +13,7 @@
 }
 
 #share_box_mobile {
-    left: -30px;
+    left: -24px;
     right: -145px;
     bottom: -240px;
 }
@@ -42,6 +42,10 @@
     display: inline-block;
     width: 100%;
     padding: 0 5px;
+}
+
+#share_box > a > div {
+    color: #16174f;
 }
 
 #share_box_mobile > a > div {

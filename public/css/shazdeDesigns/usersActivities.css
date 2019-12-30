@@ -71,7 +71,10 @@ body {
     border-bottom: 5px solid #0076a3;
 }
 
-.showUsersPostsLink {
+.userPosts .showUsersPostsLink,
+.userArticles .showUsersArticlesLink,
+.userQuestions .showUsersQAndAsLink,
+.userPhotosAndVideos .showUsersPhotosAndVideosLink {
     border-bottom: 5px solid #0076a3;
 }
 
@@ -82,10 +85,6 @@ body {
     border-bottom: 5px solid white;
     cursor: pointer;
     float: left;
-}
-
-.showUsersPostsLink {
-    border-bottom: 5px solid #0076a3;
 }
 
 .otherFilterChoices::after {

@@ -209,8 +209,20 @@ Route::get('searchArticle', function(){
     return view('searchArticle');
 });
 
-Route::get('profileUsers', function(){
-    return view('profileUsers');
+Route::get('userArticles', function(){
+    return view('userActivities.userArticles');
+});
+
+Route::get('userQuestions', function(){
+    return view('userActivities.userQuestions');
+});
+
+Route::get('userPosts', function(){
+    return view('userActivities.userPosts');
+});
+
+Route::get('userPhotosAndVideos', function(){
+    return view('userActivities.userPhotosAndVideos');
 });
 
 //Route::get('mainArticle', function(){

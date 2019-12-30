@@ -59,3 +59,14 @@
     </div>
 </div>
 
+<script>
+
+    $('#share_pic').click(function () {
+        if ($('#share_box').is(":hidden")) {
+            $('#share_box').show();
+        } else {
+            $('#share_box').hide();
+        }
+    });
+</script>
+
