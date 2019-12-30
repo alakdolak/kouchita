@@ -97,7 +97,7 @@
                         <span>داغ‌ترین‌ها</span>
                         <span>بدترین‌ها</span>
                         <span>بیشترین همراهان</span>
-                </div>
+                    </div>
                 </div>
 
                 <div class="userProfilePostsMainDiv">
