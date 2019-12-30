@@ -551,276 +551,6 @@ class PlaceController extends Controller {
         echo $out;
     }
 
-    function getQuestions()
-    {
-
-        if (isset($_POST["placeId"]) && isset($_POST["kindPlaceId"]) && isset($_POST["page"])) {
-
-            $placeId = makeValidInput($_POST["placeId"]);
-            $kindPlaceId = makeValidInput($_POST["kindPlaceId"]);
-            $page = makeValidInput($_POST["page"]);
-            $activityId = Activity::whereName('سوال')->first()->id;
-            $ansActivityId = Activity::whereName('پاسخ')->first()->id;
-
-            $condition = ['placeId' => $placeId, 'kindPlaceId' => $kindPlaceId,
-                'activityId' => $activityId, 'confirm' => 1];
-            $logs = LogModel::where($condition)->skip(($page - 1) * 6)->take(6)->get();
-
-            foreach ($logs as $log) {
-                $condition = ["activityId" => $activityId, 'visitorId' => $log->visitorId];
-                $log->comments = LogModel::where($condition)->count();
-                $user = User::whereId($log->visitorId);
-                $log->visitorId = $user->username;
-                $log->visitorPic = $user->picture;
-                if (count(explode('.', $log->visitorPic)) == 1) {
-                    if (!empty(DefaultPic::whereId($log->visitorPic)))
-                        $log->visitorPic = URL::asset('defaultPic/' . DefaultPic::whereId($log->visitorPic)->name);
-                    else
-                        $log->visitorPic = URL::asset('defaultPic/' . DefaultPic::first()->name);
-                } else {
-                    $log->visitorPic = URL::asset('userPhoto/' . $log->visitorPic);
-                }
-                $condition = ['relatedTo' => $log->id, 'activityId' => $ansActivityId, 'confirm' => 1];
-                $log->ansNum = LogModel::where($condition)->count();
-                $log->date = convertDate($log->date);
-            }
-
-            echo json_encode($logs);
-
-        }
-
-    }
-
-    function askQuestion()
-    {
-
-        if (isset($_POST["placeId"]) && isset($_POST["kindPlaceId"]) && isset($_POST["text"])) {
-
-            $text = makeValidInput($_POST["text"]);
-            $placeId = makeValidInput($_POST["placeId"]);
-            $kindPlaceId = makeValidInput($_POST["kindPlaceId"]);
-            $activityId = Activity::whereName('سوال')->first()->id;
-            $uId = Auth::user()->id;
-
-            $log = new LogModel();
-            $log->visitorId = $uId;
-            $log->time = getToday()["time"];
-            $log->activityId = $activityId;
-            $log->placeId = $placeId;
-            $log->kindPlaceId = $kindPlaceId;
-            $log->text = $text;
-            $log->date = date("Y-m-d");
-            $log->save();
-
-            echo "ok";
-        }
-
-    }
-
-    function sendAns()
-    {
-
-        if (isset($_POST["placeId"]) && isset($_POST["kindPlaceId"]) &&
-            isset($_POST["text"]) && isset($_POST["relatedTo"])) {
-
-            $text = makeValidInput($_POST["text"]);
-            $placeId = makeValidInput($_POST["placeId"]);
-            $kindPlaceId = makeValidInput($_POST["kindPlaceId"]);
-            $relatedTo = makeValidInput($_POST["relatedTo"]);
-            $activityId = Activity::whereName('پاسخ')->first()->id;
-            $uId = Auth::user()->id;
-
-            $tmp = LogModel::whereId($relatedTo);
-            if ($tmp == null || $tmp->confirm != 1)
-                return;
-
-            $condition = ['placeId' => $placeId, 'kindPlaceId' => $kindPlaceId,
-                'relatedTo' => $relatedTo, 'activityId' => $activityId, 'visitorId' => $uId];
-            if (LogModel::where($condition)->count() > 0) {
-                echo "nok";
-                return;
-            }
-
-            $log = new LogModel();
-            $log->visitorId = $uId;
-            $log->time = getToday()["time"];
-            $log->activityId = $activityId;
-            $log->placeId = $placeId;
-            $log->kindPlaceId = $kindPlaceId;
-            $log->text = $text;
-            $log->relatedTo = $relatedTo;
-            $log->date = date("Y-m-d");
-            $log->save();
-
-            echo "ok";
-        }
-    }
-
-    function sendAns2()
-    {
-
-        if (isset($_POST["text"]) && isset($_POST["relatedTo"])) {
-            $text = makeValidInput($_POST["text"]);
-            $relatedTo = makeValidInput($_POST["relatedTo"]);
-
-            $logTmp = LogModel::whereId($relatedTo);
-            if ($logTmp == null || $logTmp->confirm != 1)
-                return;
-
-            $activityId = Activity::whereName('پاسخ')->first()->id;
-            $uId = Auth::user()->id;
-
-            $condition = ['visitorId' => $uId, 'relatedTo' => $relatedTo, 'activityId' => $activityId];
-            if (LogModel::where($condition)->count() == 0) {
-
-                $log = new LogModel();
-                $log->visitorId = $uId;
-                $log->time = getToday()["time"];
-                $log->activityId = $activityId;
-                $log->placeId = $logTmp->placeId;
-                $log->kindPlaceId = $logTmp->kindPlaceId;
-                $log->text = $text;
-                $log->relatedTo = $relatedTo;
-                $log->date = date("Y-m-d");
-                $log->save();
-
-                echo "ok";
-            } else {
-                echo "nok";
-            }
-        }
-    }
-
-    function showAllAns()
-    {
-
-        if (isset($_POST["logId"]) && isset($_POST["num"])) {
-
-            $num = makeValidInput($_POST["num"]);
-            $logId = makeValidInput($_POST["logId"]);
-            $ansActivityId = Activity::whereName('پاسخ')->first()->id;
-            $condition = ["relatedTo" => $logId, 'activityId' => $ansActivityId, 'confirm' => 1];
-
-            if ($num == -1)
-                $logs = LogModel::where($condition)->get();
-            else
-                $logs = LogModel::where($condition)->take($num)->get();
-
-            foreach ($logs as $log) {
-                $log->visitorId = User::whereId($log->visitorId)->username;
-                $condition = ['logId' => $log->id, 'like_' => 1];
-                $log->rate = OpOnActivity::where($condition)->count();
-                $condition = ['logId' => $log->id, 'dislike' => 1];
-                $log->rate -= OpOnActivity::where($condition)->count();
-            }
-
-            echo json_encode($logs);
-        }
-
-    }
-
-    function writeReview($placeId, $kindPlaceId, $err = "")
-    {
-
-        switch ($kindPlaceId) {
-            case 1:
-            default:
-                $place = Amaken::whereId($placeId);
-                if (file_exists((__DIR__ . '/../../../../assets/_images/amaken/' . $place->file . '/' . $place->pic_1)))
-                    $placePic = URL::asset('_images/amaken/' . $place->file . '/' . $place->pic_1);
-                else
-                    $placePic = URL::asset('_images/nopic/blank.jpg');
-                $placeMode = "amaken";
-                $state = State::whereId(Cities::whereId($place->cityId)->stateId)->name;
-                break;
-            case 3:
-                $place = Restaurant::whereId($placeId);
-                if (file_exists((__DIR__ . '/../../../../assets/_images/restaurant/' . $place->file . '/' . $place->pic_1)))
-                    $placePic = URL::asset('_images/restaurant/' . $place->file . '/' . $place->pic_1);
-                else
-                    $placePic = URL::asset('_images/nopic/blank.jpg');
-                $placeMode = "restaurant";
-                $state = State::whereId(Cities::whereId($place->cityId)->stateId)->name;
-                break;
-            case 4:
-                $place = Hotel::whereId($placeId);
-                if (file_exists((__DIR__ . '/../../../../assets/_images/hotels/' . $place->file . '/' . $place->pic_1)))
-                    $placePic = URL::asset('_images/hotels/' . $place->file . '/' . $place->pic_1);
-                else
-                    $placePic = URL::asset('_images/nopic/blank.jpg');
-                $placeMode = "hotel";
-                $state = State::whereId(Cities::whereId($place->cityId)->stateId)->name;
-                break;
-            case 6:
-                $place = Majara::whereId($placeId);
-                if (file_exists((__DIR__ . '/../../../../assets/_images/majara/' . $place->file . '/' . $place->pic_1)))
-                    $placePic = URL::asset('_images/majara/' . $place->file . '/' . $place->pic_1);
-                else
-                    $placePic = URL::asset('_images/nopic/blank.jpg');
-                $state = State::whereId($place->cityId)->name;
-                $placeMode = "majara";
-                break;
-            case 8:
-                $place = Adab::whereId($placeId);
-                if ($place->category == 3) {
-                    if (file_exists((__DIR__ . '/../../../../assets/_images/adab/ghazamahali/' . $place->file . '/' . $place->pic_1)))
-                        $placePic = URL::asset('_images/adab/ghazamahali/' . $place->file . '/' . $place->pic_1);
-                    else
-                        $placePic = URL::asset('_images/nopic/blank.jpg');
-                } else {
-                    if (file_exists((__DIR__ . '/../../../../assets/_images/adab/soghat/' . $place->file . '/' . $place->pic_1)))
-                        $placePic = URL::asset('_images/adab/soghat/' . $place->file . '/' . $place->pic_1);
-                    else
-                        $placePic = URL::asset('_images/nopic/blank.jpg');
-                }
-                $placeMode = "adab";
-                $state = State::whereId($place->stateId)->name;
-                break;
-        }
-
-        $condition = ['placeId' => $placeId, 'kindPlaceId' => $kindPlaceId, 'visitorId' => Auth::user()->id,
-            'activityId' => Activity::whereName('نظر')->first()->id];
-
-        if ($kindPlaceId != 8) {
-            $city = Cities::whereId($place->cityId);
-
-            $log = LogModel::where($condition)->first();
-
-            if ($log != null) {
-                $comment = Comment::whereLogId($log->id)->first();
-                return view('review', array('placePic' => $placePic, 'city' => $city->name,
-                    'state' => State::whereId($city->stateId)->name, 'placeId' => $placeId, 'placeName' => $place->name,
-                    'kindPlaceId' => $kindPlaceId, 'opinions' => Opinion::whereKindPlaceId($kindPlaceId)->get(),
-                    'questions' => Question::whereKindPlaceId($kindPlaceId)->get(), 'err' => $err, 'log' => $log, 'comment' => $comment,
-                    'placeStyles' => PlaceStyle::whereKindPlaceId($kindPlaceId)->get(), 'placeMode' => $placeMode));
-            }
-
-            return view('review', array('placePic' => $placePic, 'city' => $city->name,
-                'state' => State::whereId($city->stateId)->name, 'placeId' => $placeId, 'placeName' => $place->name,
-                'kindPlaceId' => $kindPlaceId, 'opinions' => Opinion::whereKindPlaceId($kindPlaceId)->get(),
-                'questions' => Question::whereKindPlaceId($kindPlaceId)->get(), 'err' => $err,
-                'placeStyles' => PlaceStyle::whereKindPlaceId($kindPlaceId)->get(), 'placeMode' => $placeMode));
-        }
-        $city = State::whereId($place->stateId);
-
-        $log = LogModel::where($condition)->first();
-
-        if ($log != null) {
-            $comment = Comment::whereLogId($log->id)->first();
-            return view('review', array('placePic' => $placePic, 'city' => $city->name,
-                'placeId' => $placeId, 'placeName' => $place->name, 'state' => $state,
-                'kindPlaceId' => $kindPlaceId, 'opinions' => Opinion::whereKindPlaceId($kindPlaceId)->get(),
-                'questions' => Question::whereKindPlaceId($kindPlaceId)->get(), 'err' => $err, 'log' => $log, 'comment' => $comment,
-                'placeStyles' => PlaceStyle::whereKindPlaceId($kindPlaceId)->get(), 'placeMode' => $placeMode));
-        } else {
-            return view('review', array('placePic' => $placePic, 'city' => $city->name,
-                'placeId' => $placeId, 'placeName' => $place->name, 'state' => $state,
-                'kindPlaceId' => $kindPlaceId, 'opinions' => Opinion::whereKindPlaceId($kindPlaceId)->get(),
-                'questions' => Question::whereKindPlaceId($kindPlaceId)->get(), 'err' => $err,
-                'placeStyles' => PlaceStyle::whereKindPlaceId($kindPlaceId)->get(), 'placeMode' => $placeMode));
-        }
-    }
-
     function getOpinionRate()
     {
 
@@ -2680,9 +2410,8 @@ class PlaceController extends Controller {
                     $location = __DIR__ . '/../../../../assets/userPhoto/' . $kindPlaceName . '/' . $place->file;
 
                     if(!file_exists($location))
-                    {
                         mkdir($location);
-                    }
+
                     $filename = time() . '_' . pathinfo($_FILES['mainPic']['name'], PATHINFO_FILENAME) . '.jpg';
 
                     $destinationT = $location . '/t-' . $filename;
@@ -3420,6 +3149,178 @@ class PlaceController extends Controller {
         else
             echo 'nok4';
         return;
+
+    }
+
+    public function askQuestion(Request $request)
+    {
+
+        if (isset($_POST["placeId"]) && isset($_POST["kindPlaceId"]) && isset($_POST["text"])) {
+
+            $text = makeValidInput($_POST["text"]);
+            $placeId = makeValidInput($_POST["placeId"]);
+            $kindPlaceId = makeValidInput($_POST["kindPlaceId"]);
+            $activityId = Activity::whereName('سوال')->first()->id;
+            $uId = Auth::user()->id;
+
+            $log = new LogModel();
+            $log->visitorId = $uId;
+            $log->time = getToday()["time"];
+            $log->activityId = $activityId;
+            $log->placeId = $placeId;
+            $log->kindPlaceId = $kindPlaceId;
+            $log->text = $text;
+            $log->date = date("Y-m-d");
+            $log->relatedTo = 0;
+            $log->confirm = 1;
+            $log->save();
+
+            echo "ok";
+        }
+        else
+            echo 'nok1';
+
+        return;
+    }
+    public function getQuestions()
+    {
+        if (isset($_POST["placeId"]) && isset($_POST["kindPlaceId"]) && isset($_POST["page"]) && isset($_POST["count"])) {
+
+            $placeId = makeValidInput($_POST["placeId"]);
+            $kindPlaceId = makeValidInput($_POST["kindPlaceId"]);
+            $page = makeValidInput($_POST["page"]);
+            $count = makeValidInput($_POST["count"]);
+            $activityId = Activity::whereName('سوال')->first()->id;
+            $ansActivityId = Activity::whereName('پاسخ')->first()->id;
+
+            $condition = ['placeId' => $placeId, 'kindPlaceId' => $kindPlaceId, 'activityId' => $activityId, 'confirm' => 1, 'relatedTo' => 0];
+            $logs = LogModel::where($condition)->skip(($page - 1) * $count)->take($count)->get();
+
+            foreach ($logs as $log) {
+                
+                $user = User::whereId($log->visitorId);
+                if ($user->first_name != null)
+                    $log->username = $user->first_name . ' ' . $user->last_name;
+                else
+                    $log->username = $user->username;
+                
+                if($user->uploadPhoto == 0){
+                    $deffPic = DefaultPic::find($user->picture);
+                    if($deffPic != null)
+                        $log->userPic = URL::asset('defaultPic/' . $deffPic->name);
+                    else
+                        $log->userPic = URL::asset('_images/nopic/blank.jpg');
+                }
+                else{
+                    $log->userPic = URL::asset('userProfile/' . $user->picture);
+                }
+
+                $condition = ['relatedTo' => $log->id, 'activityId' => $ansActivityId, 'confirm' => 1];
+                $log->ansNum = LogModel::where($condition)->count();
+                $log->date = convertDate($log->date);
+            }
+
+            echo json_encode($logs);
+        }
+
+    }
+    public function sendAns()
+    {
+
+        if (isset($_POST["placeId"]) && isset($_POST["kindPlaceId"]) &&
+            isset($_POST["text"]) && isset($_POST["relatedTo"])) {
+
+            $text = makeValidInput($_POST["text"]);
+            $placeId = makeValidInput($_POST["placeId"]);
+            $kindPlaceId = makeValidInput($_POST["kindPlaceId"]);
+            $relatedTo = makeValidInput($_POST["relatedTo"]);
+            $activityId = Activity::whereName('پاسخ')->first()->id;
+            $uId = Auth::user()->id;
+
+            $tmp = LogModel::whereId($relatedTo);
+            if ($tmp == null || $tmp->confirm != 1)
+                return;
+
+            $condition = ['placeId' => $placeId, 'kindPlaceId' => $kindPlaceId,
+                'relatedTo' => $relatedTo, 'activityId' => $activityId, 'visitorId' => $uId];
+            if (LogModel::where($condition)->count() > 0) {
+                echo "nok";
+                return;
+            }
+
+            $log = new LogModel();
+            $log->visitorId = $uId;
+            $log->time = getToday()["time"];
+            $log->activityId = $activityId;
+            $log->placeId = $placeId;
+            $log->kindPlaceId = $kindPlaceId;
+            $log->text = $text;
+            $log->relatedTo = $relatedTo;
+            $log->date = date("Y-m-d");
+            $log->save();
+
+            echo "ok";
+        }
+    }
+    public function sendAns2()
+    {
+
+        if (isset($_POST["text"]) && isset($_POST["relatedTo"])) {
+            $text = makeValidInput($_POST["text"]);
+            $relatedTo = makeValidInput($_POST["relatedTo"]);
+
+            $logTmp = LogModel::whereId($relatedTo);
+            if ($logTmp == null || $logTmp->confirm != 1)
+                return;
+
+            $activityId = Activity::whereName('پاسخ')->first()->id;
+            $uId = Auth::user()->id;
+
+            $condition = ['visitorId' => $uId, 'relatedTo' => $relatedTo, 'activityId' => $activityId];
+            if (LogModel::where($condition)->count() == 0) {
+
+                $log = new LogModel();
+                $log->visitorId = $uId;
+                $log->time = getToday()["time"];
+                $log->activityId = $activityId;
+                $log->placeId = $logTmp->placeId;
+                $log->kindPlaceId = $logTmp->kindPlaceId;
+                $log->text = $text;
+                $log->relatedTo = $relatedTo;
+                $log->date = date("Y-m-d");
+                $log->save();
+
+                echo "ok";
+            } else {
+                echo "nok";
+            }
+        }
+    }
+    public function showAllAns()
+    {
+
+        if (isset($_POST["logId"]) && isset($_POST["num"])) {
+
+            $num = makeValidInput($_POST["num"]);
+            $logId = makeValidInput($_POST["logId"]);
+            $ansActivityId = Activity::whereName('پاسخ')->first()->id;
+            $condition = ["relatedTo" => $logId, 'activityId' => $ansActivityId, 'confirm' => 1];
+
+            if ($num == -1)
+                $logs = LogModel::where($condition)->get();
+            else
+                $logs = LogModel::where($condition)->take($num)->get();
+
+            foreach ($logs as $log) {
+                $log->visitorId = User::whereId($log->visitorId)->username;
+                $condition = ['logId' => $log->id, 'like_' => 1];
+                $log->rate = OpOnActivity::where($condition)->count();
+                $condition = ['logId' => $log->id, 'dislike' => 1];
+                $log->rate -= OpOnActivity::where($condition)->count();
+            }
+
+            echo json_encode($logs);
+        }
 
     }
 }

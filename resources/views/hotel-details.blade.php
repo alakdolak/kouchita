@@ -169,7 +169,8 @@ if ($total == 0)
                                         @if(auth()->check())
                                             <textarea class="inputBoxInput inputBoxInputComment" name="text" type="text"
                                                       placeholder="{{auth()->user()->first_name ? auth()->user()->first_name :auth()->user()->username }}، چه فکر یا احساسی داری.....؟"
-                                                      onkeyup="textAreaAdjust(this)" style="overflow:hidden"></textarea>
+                                                       style="overflow:hidden"></textarea>
+                                            {{--onkeyup="textAreaAdjust(this)"--}}
                                         @else
                                             <textarea class="inputBoxInput inputBoxInputComment" name="text" type="text"
                                                       placeholder="سینا، چه فکر یا احساسی داری.....؟"></textarea>
@@ -928,8 +929,7 @@ if ($total == 0)
         </div>
     </div>
 
-    <div id="MAINWRAP" class="
-        full_meta_photos_v3  full_meta_photos_v4  big_pic_mainwrap_tweaks horizontal_xsell ui_container is-mobile position-relative">
+    <div id="MAINWRAP" class="full_meta_photos_v3  full_meta_photos_v4  big_pic_mainwrap_tweaks horizontal_xsell ui_container is-mobile position-relative">
         <div id="MAIN" class="Hotel_Review prodp13n_jfy_overflow_visible position-relative">
             <div id="BODYCON" ng-app="mainApp"
                  class="col easyClear bodLHN poolB adjust_padding new_meta_chevron new_meta_chevron_v2 position-relative">
@@ -953,8 +953,6 @@ if ($total == 0)
 
                     // Get the element with id="defaultOpen" and click on it
                     document.getElementById("defaultOpenMainWrap").style.color = "rgb(77, 199, 188)";
-
-
 
                 </script>
 
@@ -1549,7 +1547,7 @@ if ($total == 0)
                                     <h3 class="block_title">پست‌ها را دقیق‌تر ببینید </h3>
                                 </div>
                                 <div class="display-inline-block full-width font-size-15">
-                                    تعداد <span id="reviewCountSearch"></span> پست، <span id="reviewCommentCount"></span> نظر و <span id="reviewUserCount"></span> کاربر مختلف
+                                    تعداد <span id="reviewCountSearch">{{$reviewCount}}</span> پست، <span id="reviewCommentCount">{{$ansReviewCount}}</span> نظر و <span id="reviewUserCount">{{$userReviewCount}}</span> کاربر مختلف
                                 </div>
                                 <div class="filterHelpText">
                                     با استفاده از گزینه‌های زیر نتایج را محدودتر کرده و راحت‌تر مطلب مورد نظر خود را
@@ -1580,13 +1578,14 @@ if ($total == 0)
                                         <span class="float-right line-height-2">
                                             نمایش پست‌های دارای عکس
                                         </span>
+                                        <span class="dark-blue font-weight-500 float-right line-height-2" onclick="removeFilter(0, 'onlyPic')" style="cursor: pointer">حذف فیلتر</span>
                                         <div class="clear-both"></div>
 
                                         <center>
-                                            <b class="filterChoices">تنها دارای عکس</b><!--
-                                         --><b class="filterChoices">تنها دارای فیلم</b><!--
-                                         --><b class="filterChoices">تنها دارای متن بلند</b><!--
-                                         --><b class="filterChoices">تنها دارای فیلم و عکس</b>
+                                            <b id="onlyPic1" class="filterChoices" onclick="onlyPicVideo(1)">تنها دارای عکس</b>
+                                            <b id="onlyPic2" class="filterChoices" onclick="onlyPicVideo(2)">تنها دارای فیلم</b>
+                                            <b id="onlyPic3" class="filterChoices" onclick="onlyPicVideo(3)">تنها دارای متن بلند</b>
+                                            <b id="onlyPic4" class="filterChoices" onclick="onlyPicVideo(4)">تنها دارای فیلم یا عکس</b>
                                         </center>
                                     </div>
 
@@ -1621,7 +1620,7 @@ if ($total == 0)
                                     <script>
                                         var filterRateAns = [];
                                         var filterMultiAns = [];
-                                        var filters = [];
+                                        var reviewFilters = [];
 
                                         function showStar(_star, _id){
                                             for(i = 1; i < 6; i++){
@@ -1696,15 +1695,15 @@ if ($total == 0)
                                             filterRateAns[_id] = _star;
 
                                             var is = true;
-                                            for(i = 0; i < filters.length; i++){
-                                                if(filters[i] != null && filters[i]['kind'] == 'rate' && filters[i]['id'] == _id){
+                                            for(i = 0; i < reviewFilters.length; i++){
+                                                if(reviewFilters[i] != null && reviewFilters[i]['kind'] == 'rate' && reviewFilters[i]['id'] == _id){
                                                     is = false;
-                                                    filters[i]['value'] = _star;
+                                                    reviewFilters[i]['value'] = _star;
                                                     break;
                                                 }
                                             }
                                             if(is) {
-                                                filters[filters.length] = {
+                                                reviewFilters[reviewFilters.length] = {
                                                     'kind': 'rate',
                                                     'id': _id,
                                                     'value': _star
@@ -1723,15 +1722,15 @@ if ($total == 0)
                                             document.getElementById('ansMultiFilter_' + _aId).classList.add('filterChoosed');
 
                                             var is = true;
-                                            for(i = 0; i < filters.length; i++){
-                                                if(filters[i] != null && filters[i]['kind'] == 'multi' && filters[i]['id'] == _qId){
+                                            for(i = 0; i < reviewFilters.length; i++){
+                                                if(reviewFilters[i] != null && reviewFilters[i]['kind'] == 'multi' && reviewFilters[i]['id'] == _qId){
                                                     is = false;
-                                                    filters[i]['value'] = _aId;
+                                                    reviewFilters[i]['value'] = _aId;
                                                     break;
                                                 }
                                             }
                                             if(is){
-                                                filters[filters.length] = {
+                                                reviewFilters[reviewFilters.length] = {
                                                     'kind' : 'multi',
                                                     'id' : _qId,
                                                     'value' : _aId
@@ -1745,16 +1744,21 @@ if ($total == 0)
                                             if(_kind == 'rate'){
                                                 filterRateAns[_id] = null;
                                             }
-                                            else{
+                                            else if(_kind == 'multi'){
                                                 if(filterMultiAns[_id] != null)
                                                     document.getElementById('ansMultiFilter_' + filterMultiAns[_id]).classList.remove('filterChoosed');
 
                                                 filterMultiAns[_id] = null;
                                             }
+                                            else if(_kind == 'onlyPic'){
+                                                for(i = 1; i < 5; i++)
+                                                    document.getElementById('onlyPic' + i).classList.remove('filterChoosed')
+                                            }
 
-                                            for(i = 0; i < filters.length; i++){
-                                                if(filters[i] != null && filters[i]['kind'] == _kind && filters[i]['id'] == _id){
-                                                    filters[i] = null;
+
+                                            for(i = 0; i < reviewFilters.length; i++){
+                                                if(reviewFilters[i] != null && reviewFilters[i]['kind'] == _kind && reviewFilters[i]['id'] == _id){
+                                                    reviewFilters[i] = null;
                                                     break;
                                                 }
                                             }
@@ -1763,68 +1767,50 @@ if ($total == 0)
                                         }
 
                                         function doReviewFilter(){
-                                            var isFilter = false;
+                                            loadReviews();
+                                        }
 
-                                            for(i = 0 ; i < filters.length; i++){
-                                                if(filters[i] != null){
-                                                    isFilter = true;
+                                        function onlyPicVideo(_ans){
+                                            for(i = 1; i < 5; i++)
+                                                document.getElementById('onlyPic' + i).classList.remove('filterChoosed')
+
+                                            document.getElementById('onlyPic' + _ans).classList.add('filterChoosed');
+                                            var is = false;
+                                            for(i = 0; i < reviewFilters.length; i++){
+                                                if(reviewFilters[i] != null && reviewFilters[i]['kind'] == 'onlyPic' && reviewFilters[i]['id'] == 0){
+                                                    is = true;
+                                                    reviewFilters[i]['value'] = _ans;
                                                     break;
                                                 }
                                             }
-
-                                            if(isFilter) {
-                                                for (i = 0; i < allReviews.length; i++) {
-                                                    var show = true;
-
-                                                    if(allReviews[i]['ans'].length == 0)
-                                                        show = false;
-
-                                                    if(show){
-                                                        for(j = 0 ; j < filters.length; j++){
-                                                            if(filters[j] != null){
-                                                                var is = false;
-                                                                for(k = 0; k < allReviews[i]['ans'].length; k++){
-                                                                    if(filters[j]['kind'] == 'rate'){
-                                                                        if(allReviews[i]['ans'][k]['questionId'] == filters[j]['id'] && allReviews[i]['ans'][k]['ans'] == filters[j]['value']){
-                                                                            is = true;
-                                                                            break;
-                                                                        }
-                                                                        else if(allReviews[i]['ans'][k]['questionId'] == filters[j]['id']){
-                                                                            is = false;
-                                                                            break;
-                                                                        }
-                                                                    }
-                                                                    else{
-                                                                        if(allReviews[i]['ans'][k]['questionId'] == filters[j]['id'] && allReviews[i]['ans'][k]['ansId'] == filters[j]['value']){
-                                                                            is = true;
-                                                                            break;
-                                                                        }
-                                                                        else if(allReviews[i]['ans'][k]['questionId'] == filters[j]['id']){
-                                                                            is = false;
-                                                                            break;
-                                                                        }
-                                                                    }
-                                                                }
-
-                                                                if(!is){
-                                                                    show = false;
-                                                                    break;
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-
-                                                    if(show)
-                                                        document.getElementById('review_' + allReviews[i]['id']).style.display = 'block';
-                                                    else
-                                                        document.getElementById('review_' + allReviews[i]['id']).style.display = 'none';
-
+                                            if(!is){
+                                                reviewFilters[reviewFilters.length] = {
+                                                    'kind' : 'onlyPic',
+                                                    'id' : 0,
+                                                    'value' : _ans
                                                 }
                                             }
-                                            else{
-                                                for (i = 0; i < allReviews.length; i++)
-                                                    document.getElementById('review_' + allReviews[i]['id']).style.display = 'block';
+                                            doReviewFilter();
+                                        }
+
+                                        function textSearch(_value){
+
+                                            var is = false;
+                                            for(i = 0; i < reviewFilters.length; i++){
+                                                if(reviewFilters[i] != null && reviewFilters[i]['kind'] == 'textSearch' && reviewFilters[i]['id'] == 0){
+                                                    is = true;
+                                                    reviewFilters[i]['value'] = _value;
+                                                    break;
+                                                }
                                             }
+                                            if(!is){
+                                                reviewFilters[reviewFilters.length] = {
+                                                    'kind' : 'textSearch',
+                                                    'id' : 0,
+                                                    'value' : _value
+                                                }
+                                            }
+                                            doReviewFilter();
                                         }
 
                                     </script>
@@ -1837,7 +1823,7 @@ if ($total == 0)
                                         <center>
                                             <div class="inputBoxSearchFilter inputBox">
                                                 <input class="inputBoxInput" type="text"
-                                                       placeholder="عبارت مورد نظر خود را جست و جو کنید">
+                                                       placeholder="عبارت مورد نظر خود را جست و جو کنید" onchange="textSearch(this.value)">
                                             </div>
                                         </center>
                                     </div>
@@ -1851,292 +1837,32 @@ if ($total == 0)
                         </div>
                         <div class="col-md-7 col-xs-12 pd-0 float-right postsMainDivInRegularMode">
 
-                            <div id="showReviewsMain">
+                            <div id="showReviewsMain"></div>
 
-                            </div>
-
-                            <div class="col-xs-12 postMainDivShown position-relative">
-                                <div class="commentActions" onclick="showAnswersActionBox(this)">
-                                    <span class="commentActionsIcon"></span>
-                                </div>
-                                <div class="questionsActionsMoreDetails display-none">
-                                    <span>گزارش پست</span>
-                                    <span>مشاهده صفحه شازده سینا</span>
-                                    <span>مشاهده تمامی پست‌ها</span>
-                                    <span>صفحه قوانین و مقررات</span>
-                                </div>
-                                <div class="commentWriterDetailsShow">
-                                    <div class="circleBase type2 commentWriterPicShow"></div>
-                                    <div class="commentWriterExperienceDetails">
-                                        <b class="userProfileName">shazdesina</b>
-                                        <div class="display-inline-block">در
-                                            <span class="commentWriterExperiencePlace">هتل عباسی، شهر یزد، استان یزد</span>
-                                        </div>
-                                        <div>با
-                                            <span class="commentWriterExperienceParticipation">احتشام الدوله توفیقی</span>،
-                                            <span class="commentWriterExperienceParticipation">حمیدرضا عسگرزاده </span>و
-                                            <span class="commentWriterExperienceParticipation">علی اصر همتی</span>
-                                        </div>
-                                        <div>
-                                            هم اکنون - بیش از 23 ساعت پیش
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="commentContentsShow">
-                                    <p>
-                                        بسیاری از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از طریق اینترنت دریافت می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا خدمات مورد نیازشان اثرپذیری فراوانی دارد.
-                                        با توجه به ابن که خدمات و کالاهای بومی و محلی دارای اصالت و فرهنگ کهن جوامع روستایی هستند، می توان گفت اینترنت می تواند در آمدزایی از سبک زندگی جوامع محلی نقش
-                                    </p>
-                                </div>
-                                <div class="commentPhotosShow">
-                                    <div class="commentPhotosMainDiv quintupletPhotoDiv">
-                                        <div class="photosCol secondCol col-xs-6">
-                                            <div data-toggle="modal" data-target=".showingPhotosModal"></div>
-                                            <div data-toggle="modal" data-target=".showingPhotosModal"></div>
-                                        </div>
-                                        <div class="photosCol firstCol col-xs-6">
-                                            <div data-toggle="modal" data-target=".showingPhotosModal"></div>
-                                            <div data-toggle="modal" data-target=".showingPhotosModal"></div>
-                                            <div class="morePhotoLinkPosts" data-toggle="modal" data-target=".showingPhotosModal">
-                                                به علاوه
-                                                <span>14</span>
-                                                عکس و ویدیو دیگر
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="quantityOfLikes">
-                                        <span>31</span>
-                                        نفر دوست داشتند،
-                                        <span>31</span>
-                                        نفر دوست نداشتند و
-                                        <span>31</span>
-                                        نفر نظر دادند.
-                                    </div>
-                                </div>
-                                <div class="commentRatingsDetailsShow">
-                                    <div class="display-inline-block full-width">
-                                        <div class="commentRatingHeader">
-                                            بازدید با
-                                            <span>دوستان</span>
-                                            در فصل
-                                            <span>بهار</span>
-                                            و از مبدأ
-                                            <span>تهران</span>
-                                            انجام شده است
-                                        </div>
-                                        <div class="commentRatingsDetailsBtn" onclick="showRatingDetails(this)">مشاهده جزئیات امتیازدهی
-                                            <div class="commentRatingsDetailsBtnIcon">
-                                                <i class="glyphicon glyphicon-triangle-bottom"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="commentRatingsDetailsBox display-none">
-                                        <div class="display-inline-block full-width">
-                                            <b class="col-xs-4 font-size-15 line-height-108 float-right">امتیاز کلی به این مکان</b>
-                                            <div class="prw_rup prw_common_bubble_rating overallBubbleRating float-right col-xs-5 text-align-left">
-                                                <div class="ui_star_rating stars_10 font-size-25">
-                                                    <span class="starRating"></span>
-                                                    <span class="starRating"></span>
-                                                    <span class="starRating"></span>
-                                                    <span class="starRating"></span>
-                                                    <span class="starRatingGreen"></span>
-                                                </div>
-                                            </div>
-                                            <b class="col-xs-3 font-size-15 line-height-203 float-right pd-lt-0">اصلاً راضی نبودم</b>
-                                        </div>
-                                        <div class="display-inline-block full-width">
-                                            <b class="col-xs-4 font-size-15 line-height-203 float-right">امتیاز کلی به این مکان</b>
-                                            <div class="prw_rup prw_common_bubble_rating overallBubbleRating float-right col-xs-5 text-align-left">
-                                                <div class="ui_star_rating stars_20 font-size-25">
-                                                    <span class="starRating"></span>
-                                                    <span class="starRating"></span>
-                                                    <span class="starRating"></span>
-                                                    <span class="starRatingGreen"></span>
-                                                    <span class="starRatingGreen"></span>
-                                                </div>
-                                            </div>
-                                            <b class="col-xs-3 font-size-15 line-height-203 float-right pd-lt-0">بد نبود</b>
-                                        </div>
-                                        <div class="display-inline-block full-width">
-                                            <b class="col-xs-4 font-size-15 line-height-203 float-right">امتیاز کلی به این مکان</b>
-                                            <div class="prw_rup prw_common_bubble_rating overallBubbleRating float-right col-xs-5 text-align-left">
-                                                <div class="ui_star_rating stars_30 font-size-25">
-                                                    <span class="starRating"></span>
-                                                    <span class="starRating"></span>
-                                                    <span class="starRatingGreen"></span>
-                                                    <span class="starRatingGreen"></span>
-                                                    <span class="starRatingGreen"></span>
-                                                </div>
-                                            </div>
-                                            <b class="col-xs-3 font-size-15 line-height-203 float-right pd-lt-0">معمولی بود</b>
-                                        </div>
-                                        <div class="display-inline-block full-width">
-                                            <b class="col-xs-4 font-size-15 line-height-203 float-right">امتیاز کلی به این مکان</b>
-                                            <div class="prw_rup prw_common_bubble_rating overallBubbleRating float-right col-xs-5 text-align-left">
-                                                <div class="ui_star_rating stars_40 font-size-25">
-                                                    <span class="starRating"></span>
-                                                    <span class="starRatingGreen"></span>
-                                                    <span class="starRatingGreen"></span>
-                                                    <span class="starRatingGreen"></span>
-                                                    <span class="starRatingGreen"></span>
-                                                </div>
-                                            </div>
-                                            <b class="col-xs-3 font-size-15 line-height-203 float-right pd-lt-0">خوب بود</b>
-                                        </div>
-                                        <div class="display-inline-block full-width">
-                                            <b class="col-xs-4 font-size-15 line-height-203 float-right float-right">امتیاز کلی به این مکان</b>
-                                            <div class="prw_rup prw_common_bubble_rating overallBubbleRating float-right col-xs-5 text-align-left">
-                                                <div class="ui_star_rating stars_50 font-size-25">
-                                                    <span class="starRatingGreen"></span>
-                                                    <span class="starRatingGreen"></span>
-                                                    <span class="starRatingGreen"></span>
-                                                    <span class="starRatingGreen"></span>
-                                                    <span class="starRatingGreen"></span>
-                                                </div>
-                                            </div>
-                                            <b class="col-xs-3 font-size-15 line-height-203 float-right pd-lt-0 float-right">عالی بود</b>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="commentFeedbackChoices">
-                                    <div class="postsActionsChoices col-xs-3">
-                                        <div class="postLikeChoice display-inline-block" onclick="likePostsComment(this)">
-                                            <span class="commentsLikeIconFeedback firstIcon"></span>
-                                            <span class="commentsLikeClickedIconFeedback display-none secondIcon"></span>
-                                            <span class="mg-rt-20 cursor-pointer">دوست داشتم</span>
-                                        </div>
-                                    </div>
-                                    <div class="postsActionsChoices col-xs-3">
-                                        <div class="postDislikeChoice display-inline-block" onclick="disLikePostsComment(this)">
-                                            <span class="commentsDislikeIconFeedback firstIcon"></span>
-                                            <span class="commentsDislikeClickedIconFeedback display-none secondIcon"></span>
-                                            <span class="mg-rt-20 cursor-pointer">دوست نداشتم</span>
-                                        </div>
-                                    </div>
-                                    <div class="postsActionsChoices col-xs-3">
-                                        <div class="postCommentChoice display-inline-block" onclick="showPostsComments(this)">
-                                            <span class="showCommentsIconFeedback firstIcon"></span>
-                                            <span class="showCommentsClickedIconFeedback display-none secondIcon"></span>
-                                            <span class="mg-rt-20 cursor-pointer">مشاهده نظرها</span>
-                                        </div>
-                                    </div>
-                                    <div class="postsActionsChoices col-xs-3">
-                                        <div class="postShareChoice display-inline-block" onclick="SharePostsBtn(this)">
-                                            <span class="commentsShareIconFeedback firstIcon"></span>
-                                            <span class="commentsShareClickedIconFeedback display-none secondIcon"></span>
-                                            <span class="mg-rt-20 cursor-pointer">اشتراک‌گذاری</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="commentsMainBox display-none">
-                                    <div class="dark-blue mg-bt-10">
-                                        <span class="cursor-pointer">مشاهده 17 نظر باقیمانده</span>
-                                    </div>
-                                    <div class="eachCommentMainBox">
-                                        <div class="circleBase type2 commentsWriterProfilePic"></div>
-                                        <div class="commentsContentMainBox">
-                                            <b class="userProfileName display-inline-block">shazdesina</b>
-                                            <div>من موافق این مطلب نیستم. دوست من شما باید خودتان توجه می کردید نه اینکه مارا متهم کنید</div>
-                                            <div class="commentsStatisticsBar">
-                                                <div class="float-right display-inline-black">
-                                                    <span class="likeStatisticIcon commentsStatisticSpan color-red">31</span>
-                                                    <span class="dislikeStatisticIcon commentsStatisticSpan dark-red">31</span>
-                                                    <span class="numberOfCommentsIcon commentsStatisticSpan color-blue">31</span>
-                                                </div>
-                                                <div class="dark-blue float-left display-inline-black cursor-pointer" onclick="showCommentsAnswers(this)">دیدن پاسخ‌ها</div>
-                                            </div>
-                                        </div>
-                                        <div class="commentsActionsBtns">
-                                            <div onclick="likeTheAnswers(this)">
-                                                <span class="likeActionBtn"></span>
-                                                <span class="likeActionClickedBtn display-none"></span>
-                                            </div>
-                                            <div onclick="dislikeTheAnswers(this)">
-                                                <span class="dislikeActionBtn"></span>
-                                                <span class="dislikeActionClickedBtn display-none"></span>
-                                            </div>
-                                            <div class="clear-both"></div>
-                                            <b class="replyBtn" onclick="replyToComments(this)">پاسخ دهید</b>
-                                        </div>
-                                        <div class="replyToCommentMainDiv display-none">
-                                            <div class="circleBase type2 newCommentWriterProfilePic"></div>
-                                            <div class="inputBox">
-                                                <b class="replyCommentTitle">در پاسخ به نظر shazdesina</b>
-                                                <textarea class="inputBoxInput inputBoxInputComment" type="text" placeholder="شما چه نظری دارید؟"></textarea>
-                                                <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="eachCommentMainBox mg-rt-45 display-none">
-                                        <div class="circleBase type2 commentsWriterProfilePic"></div>
-                                        <div class="commentsContentMainBox">
-                                            <b class="userProfileName float-right">shazdesina</b>
-                                            <b class="commentReplyDesc display-inline-block">در پاسخ به Shazdesina</b>
-                                            <div class="clear-both"></div>
-                                            <div>من موافق این مطلب نیستم. دوست من شما باید خودتان توجه می کردید نه اینکه مارا متهم کنید</div>
-                                            <div class="commentsStatisticsBar">
-                                                <div class="float-right display-inline-black">
-                                                    <span class="likeStatisticIcon commentsStatisticSpan color-red">31</span>
-                                                    <span class="dislikeStatisticIcon commentsStatisticSpan dark-red">31</span>
-                                                    <span class="numberOfCommentsIcon commentsStatisticSpan color-blue">31</span>
-                                                </div>
-                                                <div class="dark-blue float-left display-inline-black cursor-pointer" onclick="showCommentsAnswers(this)">دیدن پاسخ‌ها</div>
-                                            </div>
-                                        </div>
-                                        <div class="commentsActionsBtns">
-                                            <div onclick="likeTheAnswers(this)">
-                                                <span class="likeActionBtn"></span>
-                                                <span class="likeActionClickedBtn display-none"></span>
-                                            </div>
-                                            <div onclick="dislikeTheAnswers(this)">
-                                                <span class="dislikeActionBtn"></span>
-                                                <span class="dislikeActionClickedBtn display-none"></span>
-                                            </div>
-                                            <div class="clear-both"></div>
-                                            <b class="replyBtn" onclick="replyToComments(this)">پاسخ دهید</b>
-                                        </div>
-                                        <div class="replyToCommentMainDiv display-none">
-                                            <div class="circleBase type2 newCommentWriterProfilePic"></div>
-                                            <div class="inputBox">
-                                                <b class="replyCommentTitle">در پاسخ به نظر shazdesina</b>
-                                                <textarea class="inputBoxInput inputBoxInputComment" type="text" placeholder="شما چه نظری دارید؟"></textarea>
-                                                <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="newCommentPlaceMainDiv">
-                                    <div class="circleBase type2 newCommentWriterProfilePic"></div>
-                                    <div class="inputBox">
-                                        <b class="replyCommentTitle">در پاسخ به نظر shazdesina</b>
-                                        <textarea class="inputBoxInput inputBoxInputComment" id="zzzz" type="text" placeholder="شما چه نظری دارید؟"></textarea>
-                                        <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
-                                    </div>
-                                    <div></div>
-                                </div>
-                            </div>
+                            <div id="reviewsPagination" class="col-xs-12 postsMainDivFooter position-relative" style="display: none">
 
                             <div class="col-xs-12 postsMainDivFooter position-relative">
                                 <div class="col-xs-5 font-size-13 line-height-2">
                                     نمایش
-                                    <span class="mg-lt-5 cursor-pointer">10</span>-
-                                    <span class="mg-lt-5 cursor-pointer">20</span>-
-                                    <span class="color-blue cursor-pointer">50</span>
+                                    <span id="perView3" class="mg-lt-5 cursor-pointer color-blue" onclick="changePerPage(3)">3</span>-
+                                    <span id="perView6" class="mg-lt-5 cursor-pointer" onclick="changePerPage(6)">6</span>-
+                                    <span id="perView10" class="cursor-pointer" onclick="changePerPage(10)">10</span>
                                     پست در هر صفحه
                                 </div>
                                 <a class="col-xs-3 showPostsNumsFilterLink" href="#taplc_global_nav_links_0">
                                     <div class="showPostsNumsFilter">نمایش تمامی پست‌ها</div>
                                 </a>
-                                <div class="col-xs-4 font-size-13 line-height-2 text-align-right">
+                                <div class="col-xs-4 font-size-13 line-height-2 text-align-right" style="display: flex; direction: rtl;">
                                     صفحه
-                                    <span>1</span>
-                                    <span><<<</span>
-                                    <span class="mg-lt-5 cursor-pointer">2</span>-
-                                    <span class="color-blue mg-lt-5 cursor-pointer">3</span>-
-                                    <span class="cursor-pointer">4</span>
-                                    <span>>>></span>
-                                    <span>10</span>
+                                    <div id="reviewPagination" style="margin-right: 10px;">
+                                        <span id="reviewPagePagination1" class="cursor-pointer" onclick="changeReviewPage(1)">1</span>
+                                        <span id="reviewPagePagination2" class="cursor-pointer"></span>
+                                        <span id="reviewPagePagination3" class="mg-lt-5 cursor-pointer">2</span>-
+                                        <span id="reviewPagePagination4" class="color-blue mg-lt-5 cursor-pointer">3</span>-
+                                        <span id="reviewPagePagination5" class="cursor-pointer">4</span>
+                                        <span id="reviewPagePagination6" class="cursor-pointer"></span>
+                                        <span id="reviewPagePagination7" class="cursor-pointer">10</span>
+                                    </div>
                                 </div>
                             </div>
 
@@ -2155,448 +1881,11 @@ if ($total == 0)
 
                 <div class="clear-both"></div>
 
-                <div id="QAndAMainDivId" class="tabContentMainWrap">
-                    <div class="col-md-12 col-xs-12 QAndAMainDiv">
+                @include('hotel-details.questionSection')
 
-                        <div class="mainDivQuestions">
-
-                            <div class="QAndAMainDivHeader">
-                                <h3>سؤال و جواب</h3>
-                            </div>
-                            <div class="askQuestionMainDiv">
-                                <div class="newQuestionContainer">
-                                    <b>
-                                        سؤلات خود را بپرسید تا با کمک دوستانتان آگاهانه‌تر سفر کنید. همچنین می‌توانید با
-                                        پاسخ یه سؤالات دوستانتان علاوه بر دریافت امتیاز، اطلاعات خود را به اشتراک
-                                        بگذارید.
-                                    </b>
-                                    <div>
-                                        در حال حاضر
-                                        <span class="color-blue">1340</span>
-                                        سؤال
-                                        <span class="color-blue">560</span>
-                                        پاسخ موجود می‌باشد.
-                                    </div>
-                                    <a class="seeAllQMainLink" href="#taplc_global_nav_links_0">
-                                        <div class="seeAllQLink display-inline-block float-right direction-rtl dark-blue">بازگشت به صفحه‌ی اصلی
-                                        </div>
-                                    </a>
-                                    <div class="clear-both"></div>
-                                    <div class="newQuestionMainDiv mg-tp-30 full-width display-inline-block">
-                                        <div class="circleBase type2 newQuestionWriterProfilePic"></div>
-                                        <div class="questionInputBoxMainDiv">
-                                            <div class="inputBox questionInputBox">
-                                                <textarea class="inputBoxInput inputBoxInputComment" type="text" placeholder="شما چه سؤالی دارید؟"></textarea>
-                                                <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
-                                            </div>
-                                            <div class="sendQuestionBtn">ارسال</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="answersBoxMainDiv">
-                                    <div class="answersActions" onclick="showAnswersActionBox(this)">
-                                        <span class="answersActionsIcon"></span>
-                                    </div>
-                                    <div class="questionsActionsMoreDetails display-none">
-                                        <span>گزارش پست</span>
-                                        <span>مشاهده صفحه شازده سینا</span>
-                                        <span>مشاهده تمامی پست‌ها</span>
-                                        <span>صفحه قوانین و مقررات</span>
-                                    </div>
-                                    <div class="showingQuestionCompletely" onclick="showSpecificQuestion(this)">
-                                        مشاهده سؤال
-                                    </div>
-                                    <div class="answersWriterDetailsShow">
-                                        <div class="circleBase type2 answersWriterPicShow"></div>
-                                        <div class="answersWriterExperienceDetails">
-                                            <b class="userProfileNameAnswers">shazdesina</b>
-                                            <div class="display-inline-block">در
-                                                <span class="answersWriterExperiencePlace">هتل عباسی، شهر یزد، استان یزد</span>
-                                            </div>
-                                            <div>
-                                                هم اکنون - بیش از 23 ساعت پیش
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="clear-both"></div>
-                                    <div class="questionContentMainBox">
-                                        بسیاری از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از
-                                        طریق اینترنت دریافت می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها
-                                        برای انتخاب کالا یا خدمات مورد نیازشان اثرپذیری فراوانی دارد.
-                                        با توجه به ابن که خدمات و کالاهای بومی و محلی دارای اصالت و فرهنگ کهن جوامع
-                                        روستایی هستند، می توان گفت اینترنت می تواند در آمدزایی از سبک زندگی جوامع محلی
-                                        نقش کلیدی داشته باشد.
-                                    </div>
-                                    <div class="clear-both"></div>
-                                    <div class="questionSubMenuBar">
-                                        <div class="numberOfAnswers">
-                                            <span>31</span>
-                                            نفر پاسخ دادند
-                                        </div>
-                                        <div class="showAnswersToggle" onclick="showAllAnswers(this)">دیدن پاسخ‌ها</div>
-                                        <b class="replyBtn replyAnswerBtn" onclick="replyToAnswers(this)">پاسخ دهید</b>
-                                    </div>
-                                    <div class="answerPlaceMainDiv display-none">
-                                        <div class="circleBase type2 answerWriterProfilePic"></div>
-                                        <div class="answerBoxText">
-                                            <b class="replyWriterUsername">shazdesina</b>
-                                            من موافق این مطلب نیستم. دوست من شما باید خودتان توجه می کردید نه اینکه ما را متهم کنید.
-                                            <div class="answerStatistics">
-                                                <span class="numberOfDislikeAnswer">31</span>
-                                                <span class="numberOfLikeAnswer">31</span>
-                                            </div>
-                                        </div>
-                                        <div class="actionToAnswer">
-                                            <div class="display-inline-block float-right" onclick="likeTheAnswers(this)">
-                                                <span class="likeAnswer"></span>
-                                                <span class="likeAnswerClicked display-none"></span>
-                                            </div>
-                                            <div class="display-inline-block float-right" onclick="dislikeTheAnswers(this)">
-                                                <span class="dislikeAnswer"></span>
-                                                <span class="dislikeAnswerClicked display-none"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="display-none">
-                                        <div class="newAnswerPlaceMainDiv">
-                                            <div class="circleBase type2 newAnswerWriterProfilePic"></div>
-                                            <div class="inputBox">
-                                                <b class="replyAnswerTitle">در پاسخ به نظر shazdesina</b>
-                                                <textarea class="inputBoxInput inputBoxInputAnswer" type="text"
-                                                          placeholder="شما چه نظری دارید؟"></textarea>
-                                                <img class="commentSmileyIcon"
-                                                     src="{{"../../../public/images/smile.png"}}">
-                                            </div>
-                                            <div></div>
-                                        </div>
-                                    </div>
-                                    <div class="display-none last">
-                                        <div class="newAnswerPlaceMainDiv">
-                                            <div class="circleBase type2 newAnswerWriterProfilePic"></div>
-                                            <div class="inputBox">
-                                                <b class="replyAnswerTitle">در پاسخ به نظر shazdesina</b>
-                                                <textarea class="inputBoxInput inputBoxInputAnswer" type="text"
-                                                          placeholder="شما چه نظری دارید؟"></textarea>
-                                                <img class="commentSmileyIcon"
-                                                     src="{{"../../../public/images/smile.png"}}">
-                                            </div>
-                                            <div></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="answersBoxMainDiv">
-                                    <div class="answersActions" onclick="showAnswersActionBox(this)">
-                                        <span class="answersActionsIcon"></span>
-                                    </div>
-                                    <div class="questionsActionsMoreDetails display-none">
-                                        <span>گزارش پست</span>
-                                        <span>مشاهده صفحه شازده سینا</span>
-                                        <span>مشاهده تمامی پست‌ها</span>
-                                        <span>صفحه قوانین و مقررات</span>
-                                    </div>
-                                    <div class="showingQuestionCompletely" onclick="showSpecificQuestion(this)">
-                                        مشاهده سؤال
-                                    </div>
-                                    <div class="answersWriterDetailsShow">
-                                        <div class="circleBase type2 answersWriterPicShow"></div>
-                                        <div class="answersWriterExperienceDetails">
-                                            <b class="userProfileNameAnswers">shazdesina</b>
-                                            <div class="display-inline-block">در
-                                                <span class="answersWriterExperiencePlace">هتل عباسی، شهر یزد، استان یزد</span>
-                                            </div>
-                                            <div>
-                                                هم اکنون - بیش از 23 ساعت پیش
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="clear-both"></div>
-                                    <div class="questionContentMainBox">
-                                        بسیار از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از
-                                        طریق اینترنت دریافت می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها
-                                        برای انتخاب کالا یا خدمات مورد نیازشان اثرپذیری فراوانی دارد.
-                                        با توجه به ابن که خدمات و کالاهای بومی و محلی دارای اصالت و فرهنگ کهن جوامع
-                                        روستایی هستند، می توان گفت اینترنت می تواند در آمدزایی از سبک زندگی جوامع محلی
-                                        نقش کلیدی داشته باشد.
-                                    </div>
-                                    <div class="clear-both"></div>
-                                    <div class="questionSubMenuBar">
-                                        <div class="numberOfAnswers">
-                                            <span>31</span>
-                                            نفر پاسخ دادند
-                                        </div>
-                                        <div class="showAnswersToggle" onclick="showAllAnswers(this)">دیدن پاسخ‌ها</div>
-                                        <b class="replyBtn replyAnswerBtn" onclick="replyToAnswers(this)">پاسخ دهید</b>
-                                    </div>
-                                    <div class="answerPlaceMainDiv display-none">
-                                        <div class="circleBase type2 answerWriterProfilePic"></div>
-                                        <div class="answerBoxText">
-                                            <b class="replyWriterUsername">shazdesina</b>
-                                            من موافق این مطلب نیستم. دوست من شما باید خودتان توجه می کردید نه اینکه ما را متهم کنید.
-                                            <div class="answerStatistics">
-                                                <span class="numberOfDislikeAnswer">31</span>
-                                                <span class="numberOfLikeAnswer">31</span>
-                                            </div>
-                                        </div>
-                                        <div class="actionToAnswer">
-                                            <div class="display-inline-block float-right" onclick="likeTheAnswers(this)">
-                                                <span class="likeAnswer"></span>
-                                                <span class="likeAnswerClicked display-none"></span>
-                                            </div>
-                                            <div class="display-inline-block float-right" onclick="dislikeTheAnswers(this)">
-                                                <span class="dislikeAnswer"></span>
-                                                <span class="dislikeAnswerClicked display-none"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="display-none">
-                                        <div class="newAnswerPlaceMainDiv">
-                                            <div class="circleBase type2 newAnswerWriterProfilePic"></div>
-                                            <div class="inputBox">
-                                                <b class="replyAnswerTitle">در پاسخ به نظر shazdesina</b>
-                                                <textarea class="inputBoxInput inputBoxInputAnswer" type="text"
-                                                          placeholder="شما چه نظری دارید؟"></textarea>
-                                                <img class="commentSmileyIcon"
-                                                     src="{{"../../../public/images/smile.png"}}">
-                                            </div>
-                                            <div></div>
-                                        </div>
-                                    </div>
-                                    <div class="display-none last">
-                                        <div class="newAnswerPlaceMainDiv">
-                                            <div class="circleBase type2 newAnswerWriterProfilePic"></div>
-                                            <div class="inputBox">
-                                                <b class="replyAnswerTitle">در پاسخ به نظر shazdesina</b>
-                                                <textarea class="inputBoxInput inputBoxInputAnswer" type="text"
-                                                          placeholder="شما چه نظری دارید؟"></textarea>
-                                                <img class="commentSmileyIcon"
-                                                     src="{{"../../../public/images/smile.png"}}">
-                                            </div>
-                                            <div></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 questionsMainDivFooter position-relative">
-                        <div class="col-xs-5 font-size-13 line-height-2">
-                            نمایش
-                            <span class="mg-lt-5 cursor-pointer">10</span>-
-                            <span class="mg-lt-5 cursor-pointer">20</span>-
-                            <span class="color-blue cursor-pointer">50</span>
-                            پست در هر صفحه
-                        </div>
-                        <a class="col-xs-3 showQuestionsNumsFilterLink" href="#taplc_global_nav_links_0">
-                            <div class="showQuestionsNumsFilter">نمایش تمامی سؤال‌ها</div>
-                        </a>
-                        <div class="col-xs-4 font-size-13 line-height-2 text-align-right float-right">
-                            صفحه
-                            <span>1</span>
-                            <span><<<</span>
-                            <span class="mg-lt-5 cursor-pointer">2</span>-
-                            <span class="color-blue mg-lt-5 cursor-pointer">3</span>-
-                            <span class="cursor-pointer">4</span>
-                            <span>>>></span>
-                            <span>10</span>
-                        </div>
-                    </div>
-                </div>
             </div>
-            <div id="similarLocationsMainDiv" class="mainSuggestion swiper-container tabContentMainWrap">
-                <div class="shelf_header">
-                    <div class="shelf_title">
-                        <div class="shelf_title_container h3">
-                            <h3>مکان‌های مشابه</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column ng-scope">
-                            <div class="poi">
-                                <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C"
-                                   class="thumbnail">
-                                    <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                        <div class="prv_thumb has_image">
-                                            <div class="image_wrapper landscape landscapeWide">
-                                                <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}"
-                                                     alt="هتل عباسی" class="image"
-                                                     src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                                <div class="detail rtl">
-                                    <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C"
-                                       class="item poi_name ui_link ng-binding">هتل عباسی</a>
-                                    <div class="item rating-widget">
-                                        <div class="prw_rup prw_common_location_rating_simple">
-                                            <span class="ui_bubble_rating bubble_50"></span>
-                                        </div>
-                                        <span class="reviewCount ng-binding">1 </span><span>نقد </span>
-                                    </div>
-                                    <div class="item tags ng-binding">اصفهان <span>در </span>
-                                        <span class="ng-binding">اصفهان</span></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column ng-scope">
-                            <div class="poi">
-                                <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C"
-                                   class="thumbnail">
-                                    <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                        <div class="prv_thumb has_image">
-                                            <div class="image_wrapper landscape landscapeWide">
-                                                <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}"
-                                                     alt="هتل عباسی" class="image"
-                                                     src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                                <div class="detail rtl">
-                                    <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C"
-                                       class="item poi_name ui_link ng-binding">هتل عباسی</a>
-                                    <div class="item rating-widget">
-                                        <div class="prw_rup prw_common_location_rating_simple">
-                                            <span class="ui_bubble_rating bubble_50"></span>
-                                        </div>
-                                        <span class="reviewCount ng-binding">1 </span><span>نقد </span>
-                                    </div>
-                                    <div class="item tags ng-binding">اصفهان <span>در </span>
-                                        <span class="ng-binding">اصفهان</span></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column ng-scope">
-                            <div class="poi">
-                                <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C"
-                                   class="thumbnail">
-                                    <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                        <div class="prv_thumb has_image">
-                                            <div class="image_wrapper landscape landscapeWide">
-                                                <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}"
-                                                     alt="هتل عباسی" class="image"
-                                                     src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                                <div class="detail rtl">
-                                    <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C"
-                                       class="item poi_name ui_link ng-binding">هتل عباسی</a>
-                                    <div class="item rating-widget">
-                                        <div class="prw_rup prw_common_location_rating_simple">
-                                            <span class="ui_bubble_rating bubble_50"></span>
-                                        </div>
-                                        <span class="reviewCount ng-binding">1 </span><span>نقد </span>
-                                    </div>
-                                    <div class="item tags ng-binding">اصفهان <span>در </span>
-                                        <span class="ng-binding">اصفهان</span></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column ng-scope">
-                            <div class="poi">
-                                <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C"
-                                   class="thumbnail">
-                                    <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                        <div class="prv_thumb has_image">
-                                            <div class="image_wrapper landscape landscapeWide">
-                                                <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}"
-                                                     alt="هتل عباسی" class="image"
-                                                     src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                                <div class="detail rtl">
-                                    <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C"
-                                       class="item poi_name ui_link ng-binding">هتل عباسی</a>
-                                    <div class="item rating-widget">
-                                        <div class="prw_rup prw_common_location_rating_simple">
-                                            <span class="ui_bubble_rating bubble_50"></span>
-                                        </div>
-                                        <span class="reviewCount ng-binding">1 </span><span>نقد </span>
-                                    </div>
-                                    <div class="item tags ng-binding">اصفهان <span>در </span>
-                                        <span class="ng-binding">اصفهان</span></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column ng-scope">
-                            <div class="poi">
-                                <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C"
-                                   class="thumbnail">
-                                    <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                        <div class="prv_thumb has_image">
-                                            <div class="image_wrapper landscape landscapeWide">
-                                                <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}"
-                                                     alt="هتل عباسی" class="image"
-                                                     src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                                <div class="detail rtl">
-                                    <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C"
-                                       class="item poi_name ui_link ng-binding">هتل عباسی</a>
-                                    <div class="item rating-widget">
-                                        <div class="prw_rup prw_common_location_rating_simple">
-                                            <span class="ui_bubble_rating bubble_50"></span>
-                                        </div>
-                                        <span class="reviewCount ng-binding">1 </span><span>نقد </span>
-                                    </div>
-                                    <div class="item tags ng-binding">اصفهان <span>در </span>
-                                        <span class="ng-binding">اصفهان</span></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column ng-scope">
-                            <div class="poi">
-                                <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C"
-                                   class="thumbnail">
-                                    <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                        <div class="prv_thumb has_image">
-                                            <div class="image_wrapper landscape landscapeWide">
-                                                <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}"
-                                                     alt="هتل عباسی" class="image"
-                                                     src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                                <div class="detail rtl">
-                                    <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C"
-                                       class="item poi_name ui_link ng-binding">هتل عباسی</a>
-                                    <div class="item rating-widget">
-                                        <div class="prw_rup prw_common_location_rating_simple">
-                                            <span class="ui_bubble_rating bubble_50"></span>
-                                        </div>
-                                        <span class="reviewCount ng-binding">1 </span><span>نقد </span>
-                                    </div>
-                                    <div class="item tags ng-binding">اصفهان <span>در </span>
-                                        <span class="ng-binding">اصفهان</span></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Add Pagination -->
-                <div class="swiper-pagination"></div>
-                <!-- Add Arrows -->
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
+
+            @include('hotel-details.similarLocation')
             </div>
         </div>
     </div>
@@ -2781,7 +2070,6 @@ if ($total == 0)
 
 
     @if(isset($video) && $video != null)
-        <!-- The Modal -->
         {{--vr--}}
         <div class="modal" id="myModal">
             <div class="modal-dialog modal-lg">
@@ -2866,9 +2154,12 @@ if ($total == 0)
         var hotelDetailsInAddPhotoMode = '{{route('hotelDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'addPhoto'])}}';
         var likePhotographerPicRoute = '{{route('likePhotographer')}}';
         var deleteReviewPicUrl = '{{route('deleteReviewPic')}}';
+
         var rateQuestion = {!! $rateQuestionJSON !!} ;
         var rateQuestionAns = [];
         var allReviews;
+        var reviewsCount;
+
         for (i = 0; i < rateQuestion.length; i++)
             rateQuestionAns[i] = 2;
 
@@ -2903,7 +2194,6 @@ if ($total == 0)
     </script>
 
     <script src="{{URL::asset('js/hotelDetails/hoteldetails_1.js')}}"></script>
-
 
     <script>
         var hotelMap = [];
@@ -4107,6 +3397,10 @@ if ($total == 0)
 
     <script>
         var total;
+        var filterRateAns = [];
+        var filterMultiAns = [];
+        var reviewFilters = [];
+
         var filters = [];
         var hasFilter = false;
         var topContainer;
@@ -4661,18 +3955,4 @@ if ($total == 0)
     </script>
 
     <script src="{{URL::asset('js/adv.js')}}"></script>
-
-    <script>
-        $.ajax({
-           type: 'post',
-           url: '{{route("filterReview")}}',
-           data: {
-               'kindPlaceId': kindPlaceId,
-               'placeId' : placeId
-           },
-           success: function (response){
-
-           }
-        });
-    </script>
 @stop

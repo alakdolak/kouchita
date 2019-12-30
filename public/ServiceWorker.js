@@ -36,20 +36,16 @@ self.addEventListener('fetch', event => {
         event.respondWith(
             caches.match(event.request)
                 .then(response => {
-
-                    if (response) {
-                        console.log('Found ', event.request.url, ' in cache');
-                        return response;
-                    }
-
+                    // if (response) {
+                    //     console.log('Found ', event.request.url, ' in cache');
+                    //     return response;
+                    // }
                     return fetch(event.request)
                 }).catch(error => {
-
                     console.log(error)
                     if(event.request.mode == 'navigate') {
                         return caches.match('./offlineMode/offline.html');
                     }
-
             })
         );
 
