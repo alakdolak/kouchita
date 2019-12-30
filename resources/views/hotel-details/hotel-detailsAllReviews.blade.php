@@ -3544,6 +3544,7 @@ if ($total == 0)
                     $('#share_box').hide();
                 }
             });
+
             $('#share_pic_mobile').click(function () {
                 if ($('#share_box_mobile').is(":hidden")) {
                     $('#share_box_mobile').show();
@@ -4085,13 +4086,6 @@ if ($total == 0)
                     url = '{{route('restaurantDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';
                 $(".dark").show();
                 showLoginPrompt(url);
-            });
-            $('#share_pic').click(function () {
-                if ($('#share_box').is(":hidden")) {
-                    $('#share_box').show();
-                } else {
-                    $('#share_box').hide();
-                }
             });
             @if($mode == "bookMark")
             bookMark();

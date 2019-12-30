@@ -11,6 +11,10 @@
     padding: 0;
 }
 
+.postsMainFiltrationBar > span:hover, .questionsMainFiltrationBar > span:hover {
+    color: #0076a3;
+}
+
 .postsMainFiltrationBar > span, .questionsMainFiltrationBar > span {
     margin: 0 0 !important;
     font-size: 14px;
@@ -190,14 +194,18 @@
     top: -30px !important;
 }
 
+.allPostsGridMainDiv .returnToMainPage {
+    color: white;
+}
+
+.allQuestionsGrid .answersWriterExperienceDetails {
+    width: 71%;
+}
+
 @media (min-width: 992px) {
     .allPostsGridMainDiv #helpBtnMainDiv {
         top: 20px !important;
     }
-}
-
-.allPostsGridMainDiv .returnToMainPage {
-    color: white;
 }
 
 @media (max-width: 992px) {
@@ -224,13 +232,35 @@
     }
 
     .postsMainFiltrationBar, .questionsMainFiltrationBar {
-        overflow-x: scroll;
+        overflow-x: auto;
         float: right;
         white-space: nowrap;
+        padding-bottom: 20px;
+        scrollbar-width: none;
     }
 
     .postsMainFiltrationBar > span, .questionsMainFiltrationBar > span {
         width: auto;
         padding: 0 10px;
+    }
+
+    .allQuestionsGrid #seeAllQLink {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px)  and (min-width: 370px) {
+    .allQuestionsGrid .answersWriterExperienceDetails {
+        width: 69%;
+    }
+}
+
+@media (max-width: 370px) {
+    .allQuestionsGrid .answersWriterExperienceDetails .clear-both {
+        display: block;
+    }
+
+    .allQuestionsGrid .answersWriterExperienceDetails {
+        width: 79%;
     }
 }

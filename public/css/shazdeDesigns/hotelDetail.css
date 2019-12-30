@@ -1861,8 +1861,8 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     width: 100%;
     margin-top: 5px;
     border: 1px solid #ccc;
-    justify-content: right;
     flex-wrap: wrap;
+    direction: rtl;
 }
 
 .commentOptionsBoxes {
@@ -2585,13 +2585,23 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
 /*posts filter*/
 
-.postsFiltersMainDiv .block_header , .QAndAMainDivHeader {
+.postsFiltersMainDiv .block_header, .QAndAMainDivHeader,
+#similarLocationsMainDiv .shelf_title_container {
     padding: 10px 0;
     border-bottom: 1px solid #e5e5e5;
     margin-bottom: 20px;
 }
 
-.postsFiltersMainDiv .block_title , .QAndAMainDivHeader > h3  {
+#similarLocationsMainDiv .shelf_title_container {
+    margin: 5px 15px 20px;
+}
+
+#similarLocationsMainDiv .shelf_title_container h3 {
+    top: 7px !important;
+}
+
+.postsFiltersMainDiv .block_title , .QAndAMainDivHeader > h3,
+#similarLocationsMainDiv .shelf_title_container h3 {
     font-size: 20px;
     font-weight: 700;
     line-height: 32px;
@@ -2609,32 +2619,6 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     color: darkred;
     padding-bottom: 10px;
     position: relative;
-}
-
-.otherQAndAMainDiv {
-    float: right;
-    display: none;
-    background-color: white;
-    margin-top: 30px;
-}
-
-.otherQAndAMainDivHeader {
-    padding: 10px 0;
-    border-bottom: 1px solid #e5e5e5;
-    margin: 0 0 20px 0;
-    position: relative;
-}
-
-.otherQAndAMainDivHeader > h3 {
-    font-size: 20px;
-    font-weight: 700;
-    line-height: 32px;
-    position: absolute;
-    top: 5px;
-    right: -5px;
-    background: white;
-    padding: 0 10px;
-    color: #0076a3;
 }
 
 .filterTypeDiv {
@@ -2961,8 +2945,16 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     text-align: right;
 }
 
+.commentQuestionsRatingsBox > div:not(:first-child) {
+    margin-bottom: 5px;
+}
+
 .commentQuestionsRatingsBox > div > b.col-xs-5 {
     float: right;
+}
+
+.postModalMainDiv .starRatingGreen, .starRating {
+    line-height: 1.2;
 }
 
 .commentQuestionsRatingsBox span::before {
@@ -3199,7 +3191,20 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     border: none;
 }
 
+.newQuestionContainer > b:nth-child(1) {
+    width: 100%;
+    margin-bottom: 10px;
+    text-align: right;
+    float: right;
+    direction: rtl;
+    text-align: justify;
+}
 
+.newQuestionContainer > div:nth-child(2) {
+    direction: rtl;
+    float: right;
+    margin-left: 5px;
+}
 
 .questionInputBox > textarea {
     resize: none;
@@ -3296,7 +3301,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     color: #7f7f7f;
     padding: 10px;
     position: absolute;
-    top: 60px;
+    top: 45px;
     left: 5px;
     font-weight: 500;
     z-index: 1;
@@ -3446,6 +3451,34 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     top: 43px;
 }
 
+.otherQAndAMainDiv {
+    float: right;
+    display: none;
+    background-color: white;
+    margin-top: 30px;
+}
+
+.otherQAndAMainDivHeader {
+    padding: 10px 0;
+    border-bottom: 1px solid #e5e5e5;
+    margin: 0 0 20px 0;
+    position: relative;
+}
+
+.otherQAndAMainDivHeader > h3 {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 32px;
+    position: absolute;
+    top: 5px;
+    right: -5px;
+    background: white;
+    padding: 0 10px;
+    color: #0076a3;
+}
+
+/*tabLinkStyles*/
+
 .tabLinkMainWrapMainDiv > a {
     display: inline-block;
     width: 25%;
@@ -3462,9 +3495,14 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     text-align: center;
 }
 
+#similarLocationsMainDiv {
+    background: white;
+    margin-top: 40px !important;
+}
+
     /*posts page styles*/
 
-.postsMainFiltrationBar , .questionsMainFiltrationBar{
+.postsMainFiltrationBar, .questionsMainFiltrationBar{
     background-color: #eaeaea;
     color: #777777;
     padding: 10px 0;
@@ -3650,7 +3688,10 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
 .tabLinkMainWrapMainDiv {
     width: 100%;
-    display: inline-block;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
     color: black;
     padding: 15px 0;
     background-color: white;
@@ -3756,7 +3797,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     }
 
     .postModalMainDiv > .modal-dialog {
-        width: 600px;
+        width: 604px;
     }
 
     .modal-details-content .commentMoreSettingBar {
@@ -3864,7 +3905,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     }
 
     DIV.prw_rup.prw_common_atf_header_bl {
-        width: 65%;
+        width: 75%;
     }
 
     #targetHelp_7 {
@@ -3969,7 +4010,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
     .mobileIntroductionMainDiv #generalDescriptionMobile .block_title,
     .mobileIntroductionMainDiv #commentsAndAddressMobile .block_title {
-        top: 10px;
+        top: 3px;
     }
 
     /*mainWrap*/
@@ -4039,7 +4080,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     }
 
     #BODYCON .tabLinkMainWrapMainDiv {
-        display: inline-block;
+        display: flex;
     }
 
     #QAndAMainDivId, #mainDivPlacePost, #similarLocationsMainDiv {
@@ -4204,7 +4245,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     }
 
     DIV.prw_rup.prw_common_atf_header_bl {
-        width: 90%;
+        width: 95%;
     }
 
     #targetHelp_7 {
@@ -4403,6 +4444,10 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     .answerBoxText {
         width: 73%;
     }
+
+    .commentMoreSettingBar {
+        justify-content: center;
+    }
 }
 
 @media (max-width:480px) {
@@ -4416,11 +4461,14 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
     .commentQuestionsRatingsBox > div > b {
         font-size: 11px;
-        line-height: 3.6;
     }
 
     .commentQuestionsRatingsBox > div > b:nth-child(3), .commentQuestionsRatingsBoxHeader {
         padding-right: 0;
+    }
+
+    .postModalMainDiv .starRatingGreen, .starRating {
+        line-height: 0.6;
     }
 
     .commentQuestionsRatingsBox > div > div span::before {
@@ -4614,7 +4662,10 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
     .commentQuestionsRatingsBox > div > b {
         font-size: 9px;
-        line-height: 4.5;
+    }
+
+    .postModalMainDiv .starRatingGreen, .starRating {
+        line-height: 0.4;
     }
 
     .commentQuestionsRatingsBox > div > div span::before {
@@ -4641,7 +4692,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     }
 
     .addOriginCityInputBoxPostModal {
-        width: 100%;
+        width: 95%;
     }
 
     .tabLinkMainWrap {

@@ -128,51 +128,49 @@ if ($total == 0)
         </div>
     </span>
 
+    <div class="allQuestionsGrid">
+
+        <div class="ppr_rup ppr_priv_hr_atf_north_star_nostalgic position-relative">
 
 
+            @include('layouts.placeMainBodyHeader')
+        </div>
 
-    <div class="ppr_rup ppr_priv_hr_atf_north_star_nostalgic position-relative">
+        <div id="MAINWRAP" class="
+            full_meta_photos_v3  full_meta_photos_v4  big_pic_mainwrap_tweaks horizontal_xsell ui_container is-mobile position-relative">
+            <div id="MAIN" class="Hotel_Review prodp13n_jfy_overflow_visible position-relative">
+                <div id="BODYCON" ng-app="mainApp"
+                     class="col easyClear bodLHN poolB adjust_padding new_meta_chevron new_meta_chevron_v2 position-relative">
 
+                    <script>
+                        if($(window).width() < 630) {
+                            $('.tabLinkMainWrapMainDivMobile').affix({offset: {top: 930}});
+                        }
+                    </script>
 
-        @include('layouts.placeMainBodyHeader')
-    </div>
+                    <div class="clear-both"></div>
 
-    <div id="MAINWRAP" class="
-        full_meta_photos_v3  full_meta_photos_v4  big_pic_mainwrap_tweaks horizontal_xsell ui_container is-mobile position-relative">
-        <div id="MAIN" class="Hotel_Review prodp13n_jfy_overflow_visible position-relative">
-            <div id="BODYCON" ng-app="mainApp"
-                 class="col easyClear bodLHN poolB adjust_padding new_meta_chevron new_meta_chevron_v2 position-relative">
-
-                <script>
-                    if($(window).width() < 630) {
-                        $('.tabLinkMainWrapMainDivMobile').affix({offset: {top: 930}});
-                    }
-                </script>
-
-                <div class="clear-both"></div>
-
-                <div class="questionsFiltrationBarToggle col-md-8 col-xs-12 pd-0">
-                    <div class="questionsMainFiltrationBar">
-                        <span>نمایش بر اساس</span>
-                        <span>جدیدترین‌ها</span>
-                        <span>قدمی‌ترین‌ها</span>
-                        <span>بهترین‌ها</span>
-                        <span>داغ‌ترین‌ها</span>
-                        <span>بدترین‌ها</span>
-                        <span>بیشترین همراهان</span>
-                        <span>پست‌ها</span>
+                    <div class="questionsFiltrationBarToggle col-md-8 col-xs-12 pd-0">
+                        <div class="questionsMainFiltrationBar">
+                            <span>نمایش بر اساس</span>
+                            <span>جدیدترین‌ها</span>
+                            <span>قدمی‌ترین‌ها</span>
+                            <span>بهترین‌ها</span>
+                            <span>داغ‌ترین‌ها</span>
+                            <span>بدترین‌ها</span>
+                            <span>بیشترین همراهان</span>
+                            <span>پست‌ها</span>
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-xs-4 adsToggleQuestions1 float-right">
-                    <center class="adsMainDiv mg-tp-0">
-                        <div class="adsMainDivHeader">تبلیغات</div>
-                        <img src="{{"../../../public/images/Chromite.jpg"}}" alt="">
-                    </center>
-                </div>
-                
-                <div id="QAndAMainDivId" class="tabContentMainWrap">
-                    <div class="col-md-8 col-xs-12 float-right QAndAMainDiv">
+                    <div class="adsToggleQuestions1 col-xs-4 float-right">
+                        <center class="adsMainDiv mg-tp-0">
+                            <div class="adsMainDivHeader">تبلیغات</div>
+                            <img src="{{"../../../public/images/Chromite.jpg"}}" alt="">
+                        </center>
+                    </div>
+
+                    <div class="QAndAMainDiv col-md-8 col-xs-12 float-right">
 
                         <div class="mainDivQuestions">
 
@@ -181,12 +179,12 @@ if ($total == 0)
                             </div>
                             <div class="askQuestionMainDiv">
                                 <div class="newQuestionContainer">
-                                    <b class="direction-rtl text-align-right float-right full-width mg-bt-10">
+                                    <b>
                                         سؤلات خود را بپرسید تا با کمک دوستانتان آگاهانه‌تر سفر کنید. همچنین می‌توانید با
                                         پاسخ یه سؤالات دوستانتان علاوه بر دریافت امتیاز، اطلاعات خود را به اشتراک
                                         بگذارید.
                                     </b>
-                                    <div class="display-inline-block float-right direction-rtl mg-lt-5">
+                                    <div>
                                         در حال حاضر
                                         <span class="color-blue">1340</span>
                                         سؤال
@@ -194,15 +192,15 @@ if ($total == 0)
                                         پاسخ موجود می‌باشد.
                                     </div>
                                     <a class="seeAllQMainLink" href="#taplc_global_nav_links_0">
-                                        <div class="seeAllQLink display-inline-block float-right direction-rtl dark-blue"
-                                             onclick="allQuestionsGrid()">مشاهده همه سؤالات و پاسخ‌ها
+                                        <div class="seeAllQLink display-inline-block float-right direction-rtl dark-blue">
+                                            بازگشت به صفحه اصلی
                                         </div>
                                     </a>
                                     <div class="clear-both"></div>
                                     <div class="newQuestionMainDiv mg-tp-30 full-width display-inline-block">
                                         <div class="circleBase type2 newQuestionWriterProfilePic"></div>
                                         <div class="questionInputBoxMainDiv">
-                                            <div class="inputBox questionInputBox width-80per">
+                                            <div class="inputBox questionInputBox">
                                                 <textarea class="inputBoxInput inputBoxInputComment" type="text" placeholder="شما چه سؤالی دارید؟"></textarea>
                                                 <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
                                             </div>
@@ -224,6 +222,7 @@ if ($total == 0)
                                         <div class="circleBase type2 answersWriterPicShow"></div>
                                         <div class="answersWriterExperienceDetails">
                                             <b class="userProfileNameAnswers">shazdesina</b>
+                                            <div class="clear-both display-none"></div>
                                             <div class="display-inline-block">در
                                                 <span class="answersWriterExperiencePlace">هتل عباسی، شهر یزد، استان یزد</span>
                                             </div>
@@ -389,100 +388,103 @@ if ($total == 0)
                             </div>
                         </div>
                     </div>
+
                     <div class="otherQAndAMainDiv col-md-8 col-xs-12">
-                        <div class="otherQAndAMainDivHeader">
-                            <h3>سایر سؤال‌ها و جواب‌ها</h3>
+                            <div class="otherQAndAMainDivHeader">
+                                <h3>سایر سؤال‌ها و جواب‌ها</h3>
+                            </div>
+                            <div class="answersBoxMainDiv">
+                                <div class="answersActions" onclick="showAnswersActionBox(this)">
+                                    <span class="answersActionsIcon"></span>
+                                </div>
+                                <div class="questionsActionsMoreDetails display-none">
+                                    <span>گزارش پست</span>
+                                    <span>مشاهده صفحه شازده سینا</span>
+                                    <span>مشاهده تمامی پست‌ها</span>
+                                    <span>صفحه قوانین و مقررات</span>
+                                </div>
+                                <div class="answersWriterDetailsShow">
+                                    <div class="circleBase type2 answersWriterPicShow"></div>
+                                    <div class="answersWriterExperienceDetails">
+                                        <b class="userProfileNameAnswers">shazdesina</b>
+                                        <div class="display-inline-block">در
+                                            <span class="answersWriterExperiencePlace">هتل عباسی، شهر یزد، استان یزد</span>
+                                        </div>
+                                        <div>
+                                            هم اکنون - بیش از 23 ساعت پیش
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clear-both"></div>
+                                <div class="questionContentMainBox">
+                                    بسیاری از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از طریق
+                                    اینترنت دریافت می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب
+                                    کالا یا خدمات مورد نیازشان اثرپذیری فراوانی دارد.
+                                    با توجه به ابن که خدمات و کالاهای بومی و محلی دارای اصالت و فرهنگ کهن جوامع روستایی
+                                    هستند، می توان گفت اینترنت می تواند در آمدزایی از سبک زندگی جوامع محلی نقش کلیدی داشته
+                                    باشد.
+                                </div>
+                                <div class="clear-both"></div>
+                                <div class="questionSubMenuBar">
+                                    <div class="numberOfAnswers">
+                                        <span>31</span>
+                                        نفر پاسخ دادند
+                                    </div>
+                                    <div class="showAnswersToggle" onclick="showAllAnswers(this)">دیدن پاسخ‌ها</div>
+                                    <b class="replyBtn replyAnswerBtn" onclick="replyToAnswers(this)">پاسخ دهید</b>
+                                </div>
+                                <div class="answerPlaceMainDiv display-none">
+                                    <div class="circleBase type2 answerWriterProfilePic"></div>
+                                    <div class="answerBoxText">
+                                        <b class="replyWriterUsername">shazdesina</b>
+                                        من موافق این مطلب نیستم. دوست من شما باید خودتان توجه می کردید نه اینکه ما را متهم کنید.
+                                        <div class="answerStatistics">
+                                            <span class="numberOfDislikeAnswer">31</span>
+                                            <span class="numberOfLikeAnswer">31</span>
+                                        </div>
+                                    </div>
+                                    <div class="actionToAnswer">
+                                        <div class="display-inline-block float-right" onclick="likeTheAnswers(this)">
+                                            <span class="likeAnswer"></span>
+                                            <span class="likeAnswerClicked display-none"></span>
+                                        </div>
+                                        <div class="display-inline-block float-right" onclick="dislikeTheAnswers(this)">
+                                            <span class="dislikeAnswer"></span>
+                                            <span class="dislikeAnswerClicked display-none"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="display-none">
+                                    <div class="newAnswerPlaceMainDiv">
+                                        <div class="circleBase type2 newAnswerWriterProfilePic"></div>
+                                        <div class="inputBox">
+                                            <b class="replyAnswerTitle">در پاسخ به نظر shazdesina</b>
+                                            <textarea class="inputBoxInput inputBoxInputAnswer" type="text"
+                                                      placeholder="شما چه نظری دارید؟"></textarea>
+                                            <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
+                                        </div>
+                                        <div></div>
+                                    </div>
+                                </div>
+                                <div class="display-none last">
+                                    <div class="newAnswerPlaceMainDiv">
+                                        <div class="circleBase type2 newAnswerWriterProfilePic"></div>
+                                        <div class="inputBox">
+                                            <b class="replyAnswerTitle">در پاسخ به نظر shazdesina</b>
+                                            <textarea class="inputBoxInput inputBoxInputAnswer" type="text"
+                                                      placeholder="شما چه نظری دارید؟"></textarea>
+                                            <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
+                                        </div>
+                                        <div></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="answersBoxMainDiv">
-                            <div class="answersActions" onclick="showAnswersActionBox(this)">
-                                <span class="answersActionsIcon"></span>
-                            </div>
-                            <div class="questionsActionsMoreDetails display-none">
-                                <span>گزارش پست</span>
-                                <span>مشاهده صفحه شازده سینا</span>
-                                <span>مشاهده تمامی پست‌ها</span>
-                                <span>صفحه قوانین و مقررات</span>
-                            </div>
-                            <div class="answersWriterDetailsShow">
-                                <div class="circleBase type2 answersWriterPicShow"></div>
-                                <div class="answersWriterExperienceDetails">
-                                    <b class="userProfileNameAnswers">shazdesina</b>
-                                    <div class="display-inline-block">در
-                                        <span class="answersWriterExperiencePlace">هتل عباسی، شهر یزد، استان یزد</span>
-                                    </div>
-                                    <div>
-                                        هم اکنون - بیش از 23 ساعت پیش
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="clear-both"></div>
-                            <div class="questionContentMainBox">
-                                بسیاری از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از طریق
-                                اینترنت دریافت می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب
-                                کالا یا خدمات مورد نیازشان اثرپذیری فراوانی دارد.
-                                با توجه به ابن که خدمات و کالاهای بومی و محلی دارای اصالت و فرهنگ کهن جوامع روستایی
-                                هستند، می توان گفت اینترنت می تواند در آمدزایی از سبک زندگی جوامع محلی نقش کلیدی داشته
-                                باشد.
-                            </div>
-                            <div class="clear-both"></div>
-                            <div class="questionSubMenuBar">
-                                <div class="numberOfAnswers">
-                                    <span>31</span>
-                                    نفر پاسخ دادند
-                                </div>
-                                <div class="showAnswersToggle" onclick="showAllAnswers(this)">دیدن پاسخ‌ها</div>
-                                <b class="replyBtn replyAnswerBtn" onclick="replyToAnswers(this)">پاسخ دهید</b>
-                            </div>
-                            <div class="answerPlaceMainDiv display-none">
-                                <div class="circleBase type2 answerWriterProfilePic"></div>
-                                <div class="answerBoxText">
-                                    <b class="replyWriterUsername">shazdesina</b>
-                                    من موافق این مطلب نیستم. دوست من شما باید خودتان توجه می کردید نه اینکه ما را متهم کنید.
-                                    <div class="answerStatistics">
-                                        <span class="numberOfDislikeAnswer">31</span>
-                                        <span class="numberOfLikeAnswer">31</span>
-                                    </div>
-                                </div>
-                                <div class="actionToAnswer">
-                                    <div class="display-inline-block float-right" onclick="likeTheAnswers(this)">
-                                        <span class="likeAnswer"></span>
-                                        <span class="likeAnswerClicked display-none"></span>
-                                    </div>
-                                    <div class="display-inline-block float-right" onclick="dislikeTheAnswers(this)">
-                                        <span class="dislikeAnswer"></span>
-                                        <span class="dislikeAnswerClicked display-none"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="display-none">
-                                <div class="newAnswerPlaceMainDiv">
-                                    <div class="circleBase type2 newAnswerWriterProfilePic"></div>
-                                    <div class="inputBox">
-                                        <b class="replyAnswerTitle">در پاسخ به نظر shazdesina</b>
-                                        <textarea class="inputBoxInput inputBoxInputAnswer" type="text"
-                                                  placeholder="شما چه نظری دارید؟"></textarea>
-                                        <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
-                                    </div>
-                                    <div></div>
-                                </div>
-                            </div>
-                            <div class="display-none last">
-                                <div class="newAnswerPlaceMainDiv">
-                                    <div class="circleBase type2 newAnswerWriterProfilePic"></div>
-                                    <div class="inputBox">
-                                        <b class="replyAnswerTitle">در پاسخ به نظر shazdesina</b>
-                                        <textarea class="inputBoxInput inputBoxInputAnswer" type="text"
-                                                  placeholder="شما چه نظری دارید؟"></textarea>
-                                        <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
-                                    </div>
-                                    <div></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>
+
     </div>
 
     <script>
@@ -500,29 +502,6 @@ if ($total == 0)
             $(element).next().toggle() ,
                 $(element).toggleClass("bg-color-darkgrey")
         }
-
-        // function showSpecificQuestion(element) {
-        //     $('.atf_meta_and_photos_wrapper').toggle(),
-        //     $('.exceptQAndADiv').toggle(),
-        //     $('.adsToggleQuestions2').toggle(),
-        //     $('.adsMainDiv').toggleClass('mg-tp-0'),
-        //     $('.questionsFiltrationBarToggle').toggle(),
-        //     $('.questionsFiltrationBarToggle').toggleClass('pd-0'),
-        //     $('.QAndAMainDiv').toggleClass('col-md-12'),
-        //     $('.QAndAMainDiv').toggleClass('float-right'),
-        //     $('.QAndAMainDiv').toggleClass('col-md-8'),
-        //     $('.QAndAMainDivHeader').toggle(),
-        //     $('.questionsMainDivFooter').toggle() ,
-        //     // $('.newQuestionContainer').toggle(),
-        //     $('.showingQuestionCompletely').toggle(),
-        //     $('.otherQAndAMainDiv').toggle(),
-        //     $(element).parent().siblings().toggle();
-        //     $(element).toggle();
-        //     $('.tabLinkMainWrapMainDiv').toggle();
-        //     $('#similarLocationsMainDiv').toggle();
-        //
-        //     $(element).text($(element).text() == 'بازگشت به صفحه‌ی اصلی' ? 'مشاهده سؤال' : 'بازگشت به صفحه‌ی اصلی');
-        // }
 
         function likeTheAnswers(element) {
             $(element).children().toggle(),
@@ -1859,13 +1838,7 @@ if ($total == 0)
                 $(".dark").show();
                 showLoginPrompt(url);
             });
-            $('#share_pic').click(function () {
-                if ($('#share_box').is(":hidden")) {
-                    $('#share_box').show();
-                } else {
-                    $('#share_box').hide();
-                }
-            });
+
             $('#share_pic_mobile').click(function () {
                 if ($('#share_box_mobile').is(":hidden")) {
                     $('#share_box_mobile').show();
