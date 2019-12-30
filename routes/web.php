@@ -723,8 +723,6 @@ Route::group(array('middleware' => ['throttle:30', 'nothing', 'auth']), function
 
     Route::post('addPhotoToComment/{placeId}/{kindPlaceId}', array('as' => 'addPhotoToComment', 'uses' => 'PlaceController@addPhotoToComment'));
 
-    Route::get('review/{placeId}/{kindPlaceId}/{mode?}', array('as' => 'review', 'uses' => 'PlaceController@writeReview'));
-
     Route::post('sendComment', array('as' => 'sendComment', 'uses' => 'PlaceController@sendComment'));
 
     Route::post('setPlaceRate', array('as' => 'setPlaceRate', 'uses' => 'PlaceController@setPlaceRate'));
@@ -849,23 +847,21 @@ Route::group(array('middleware' => 'nothing'), function () {
 
     Route::post('findUser', 'AjaxController@findUser')->name('findUser');
 
-    Route::post('reviewUploadPic', 'AjaxController@reviewUploadPic')->name('reviewUploadPic');
+    Route::post('reviewUploadPic', 'ReviewsController@reviewUploadPic')->name('reviewUploadPic');
 
-    Route::post('doEditReviewPic', 'AjaxController@doEditReviewPic')->name('doEditReviewPic');
+    Route::post('doEditReviewPic', 'ReviewsController@doEditReviewPic')->name('doEditReviewPic');
 
-    Route::post('reviewUploadVideo', 'AjaxController@reviewUploadVideo')->name('reviewUploadVideo');
+    Route::post('reviewUploadVideo', 'ReviewsController@reviewUploadVideo')->name('reviewUploadVideo');
 
-    Route::post('deleteReviewPic', 'AjaxController@deleteReviewPic')->name('deleteReviewPic');
+    Route::post('deleteReviewPic', 'ReviewsController@deleteReviewPic')->name('deleteReviewPic');
 
-    Route::post('review/store', 'AjaxController@storeReview')->name('storeReview');
+    Route::post('review/store', 'ReviewsController@storeReview')->name('storeReview');
 
-    Route::post('review/like', 'AjaxController@likeReview')->name('likeReview');
+    Route::post('review/like', 'ReviewsController@likeReview')->name('likeReview');
 
-    Route::post('review/ans', 'AjaxController@ansReview')->name('ansReview');
+    Route::post('review/ans', 'ReviewsController@ansReview')->name('ansReview');
 
-    Route::post('getReviews', 'AjaxController@getReviews')->name('getReviews');
-
-    Route::post('filterReview', 'AjaxController@filterReview')->name('filterReview');
+    Route::post('getReviews', 'ReviewsController@getReviews')->name('getReviews');
 });
 
 Route::group(array('middleware' => 'auth'), function () {

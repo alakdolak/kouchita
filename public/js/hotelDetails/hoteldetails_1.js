@@ -4,6 +4,8 @@ var reviewMultiAns = [];
 var reviewMultiAnsQuestionId = [];
 var reviewMultiAnsId = [];
 
+var firstTimeFilterShow = true;
+
 var reviewRateAnsQuestionId = [];
 var reviewRateAnsId = [];
 
@@ -11,11 +13,22 @@ var imgCropNumber;
 
 var loadShowReview = false;
 
-function isPhotographer(){
+var reviewPerPage = 3;
+var reviewPage = 1;
+
+function checkLogin(){
     if (!hasLogin) {
         showLoginPrompt(hotelDetailsInSaveToTripMode);
-        return;
+        return false;
     }
+    else
+        return true;
+}
+
+function isPhotographer(){
+
+    if(!checkLogin())
+        return;
 
     $('.dark').show();
     $('.dark').removeClass('hidden');
@@ -69,10 +82,9 @@ function changePhotographerSlidePic(_index){
 }
 
 function likePhotographerPic(element,_like, _id){
-    if (!hasLogin) {
-        showLoginPrompt(hotelDetailsInSaveToTripMode);
+
+    if(!checkLogin())
         return;
-    }
 
     $.ajax({
         type: 'post',
@@ -92,10 +104,6 @@ function likePhotographerPic(element,_like, _id){
                 alert('مشکلی پیش امده لطفا دوباره تلاش کنید');
         }
     })
-
-
-
-
 
     if(_like==1) {
         $(element).toggleClass('color-red');
@@ -805,20 +813,27 @@ function loadReviews(){
         data:{
             'placeId' : placeId,
             'kindPlaceId' : kindPlaceId,
-            'count' : 5,
-            'num' : 1
+            'count' : reviewPerPage,
+            'num' : reviewPage,
+            'filters' : reviewFilters
         },
         success: function(response){
-            if(response == 'nok1')
+            if(response == 'nok1') {
+                document.getElementById('showReviewsMain').innerHTML = ' ';
                 console.log('نقدی ثبت نشده است');
+            }
             else{
                 response = JSON.parse(response);
-                allReviews = response;
+                allReviews = response[0];
+                reviewsCount = response[1];
 
-                // if(allReviews.length < 5)
-                //     document.getElementById('postFilters').style.display = 'none';
+                if(reviewsCount < 3 && firstTimeFilterShow) {
+                    document.getElementById('postFilters').style.display = 'none';
+                }
+                firstTimeFilterShow = false;
 
-                showReviews(response);
+                createReviewPagination(reviewsCount);
+                showReviews(allReviews);
             }
         }
     })
@@ -827,9 +842,6 @@ loadReviews();
 
 function showReviews(reviews){
     var text = '';
-    document.getElementById('reviewCountSearch').innerText = reviews.length;
-
-    console.log(reviews);
 
     for(let i = 0; i < reviews.length; i++){
         text += '<div id="review_' + reviews[i]["id"] + '" class="col-xs-12 postMainDivShown position-relative">\n' +
@@ -865,7 +877,7 @@ function showReviews(reviews){
             '</div>\n' +
             '</div>\n' +
             '<div class="commentContentsShow">\n' +
-            '<div>' + reviews[i]["text"] + '</div>\n' +
+            '<div style="font-size: 18px; margin: 25px">' + reviews[i]["text"] + '</div>\n' +
             '</div>\n';
 
         text += '<div class="commentPhotosShow">\n';
@@ -1008,8 +1020,8 @@ function showReviews(reviews){
             'و از مبدأ\n' +
             '<span>تهران</span>\n' +
             'انجام شده است\n' +
-            '</div>\n' +
-            '<div class="commentRatingsDetailsBtn" onclick="showRatingDetails(this)">مشاهده جزئیات امتیازدهی\n' +
+            '</div>\n';
+        text +='<div class="commentRatingsDetailsBtn" onclick="showRatingDetails(this)">مشاهده جزئیات امتیازدهی\n' +
             '<div class="commentRatingsDetailsBtnIcon">\n' +
             '<i class="glyphicon glyphicon-triangle-bottom"></i>\n' +
             '</div>\n' +
@@ -1023,8 +1035,8 @@ function showReviews(reviews){
             for(j = 0; j < reviews[i]["ans"].length; j++){
                 if(reviews[i]["ans"][j]['ansType'] == 'text'){
                     text += '<div class="display-inline-block full-width">\n';
-                    text +='<b class="col-xs-6 font-size-15 line-height-203 float-right pd-lt-0">' + reviews[i]["ans"][j]["ans"] + '</b>\n';
                     text +='<b class="col-xs-6 font-size-15 line-height-203 float-right" style="float: right">' + reviews[i]["ans"][j]["description"] + '</b>\n';
+                    text +='<b class="col-xs-6 font-size-15 line-height-203 float-right pd-lt-0">' + reviews[i]["ans"][j]["ans"] + '</b>\n';
                     text += '</div>\n';
                 }
             }
@@ -1033,8 +1045,8 @@ function showReviews(reviews){
             for(j = 0; j < reviews[i]["ans"].length; j++){
                 if(reviews[i]["ans"][j]['ansType'] == 'multi'){
                     text += '<div class="display-inline-block full-width">\n';
-                    text +='<b class="col-xs-6 font-size-15 line-height-203 float-right pd-lt-0">' + reviews[i]["ans"][j]["ans"] + '</b>\n';
                     text +='<b class="col-xs-6 font-size-15 line-height-203 float-right" style="float: right">' + reviews[i]["ans"][j]["description"] + '</b>\n';
+                    text +='<b class="col-xs-6 font-size-15 line-height-203 float-right pd-lt-0">' + reviews[i]["ans"][j]["ans"] + '</b>\n';
                     text += '</div>\n';
                 }
 
@@ -1044,22 +1056,22 @@ function showReviews(reviews){
             for(j = 0; j < reviews[i]["ans"].length; j++){
                 if(reviews[i]["ans"][j]['ansType'] == 'rate'){
                     text += '<div class="display-inline-block full-width">\n';
+                    text +='<b class="col-xs-4 font-size-15 line-height-203" style="float: right">' + reviews[i]["ans"][j]["description"] + '</b>\n';
 
                     if(reviews[i]["ans"][j]['ans'] == 5){
-                        text +='                                         <b class="col-xs-3 font-size-15 line-height-203 float-right pd-lt-0">عالی بود</b>\n' +
-                            '                                            <div class="prw_rup prw_common_bubble_rating overallBubbleRating float-right col-xs-5 text-align-left">\n' +
-                            '                                                <div class="ui_star_rating stars_10 font-size-25">\n' +
-                            '                                                    <span class="starRatingGreen"></span>\n' +
-                            '                                                    <span class="starRatingGreen"></span>\n' +
-                            '                                                    <span class="starRatingGreen"></span>\n' +
-                            '                                                    <span class="starRatingGreen"></span>\n' +
-                            '                                                    <span class="starRatingGreen"></span>\n' +
-                            '                                                </div>\n' +
-                            '                                            </div>\n';
+                        text +='                                            <div class="prw_rup prw_common_bubble_rating overallBubbleRating float-right col-xs-5 text-align-left">\n';
+                        text +='                                                <div class="ui_star_rating stars_10 font-size-25">\n' +
+                            '                                                       <span class="starRatingGreen"></span>\n' +
+                            '                                                       <span class="starRatingGreen"></span>\n' +
+                            '                                                       <span class="starRatingGreen"></span>\n' +
+                            '                                                       <span class="starRatingGreen"></span>\n' +
+                            '                                                       <span class="starRatingGreen"></span>\n' +
+                            '                                                   </div>\n' +
+                            '                                               </div>\n';
+                        text +='                                         <b class="col-xs-3 font-size-15 line-height-203 float-right pd-lt-0">عالی بود</b>\n';
                     }
                     else if(reviews[i]["ans"][j]['ans'] == 4){
-                        text +='                                         <b class="col-xs-3 font-size-15 line-height-203 float-right pd-lt-0">خوب بود</b>\n' +
-                            '                                            <div class="prw_rup prw_common_bubble_rating overallBubbleRating float-right col-xs-5 text-align-left">\n' +
+                        text +='                                            <div class="prw_rup prw_common_bubble_rating overallBubbleRating float-right col-xs-5 text-align-left">\n' +
                             '                                                <div class="ui_star_rating stars_10 font-size-25">\n' +
                             '                                                    <span class="starRatingGreen"></span>\n' +
                             '                                                    <span class="starRatingGreen"></span>\n' +
@@ -1068,10 +1080,10 @@ function showReviews(reviews){
                             '                                                    <span class="starRating"></span>\n' +
                             '                                                </div>\n' +
                             '                                            </div>\n';
+                        text +='<b class="col-xs-3 font-size-15 line-height-203 float-right pd-lt-0">خوب بود</b>\n';
                     }
                     else if(reviews[i]["ans"][j]['ans'] == 3){
-                        text +='                                         <b class="col-xs-3 font-size-15 line-height-203 float-right pd-lt-0">معمولی بود</b>\n' +
-                            '                                            <div class="prw_rup prw_common_bubble_rating overallBubbleRating float-right col-xs-5 text-align-left">\n' +
+                        text +='                                            <div class="prw_rup prw_common_bubble_rating overallBubbleRating float-right col-xs-5 text-align-left">\n' +
                             '                                                <div class="ui_star_rating stars_10 font-size-25">\n' +
                             '                                                    <span class="starRatingGreen"></span>\n' +
                             '                                                    <span class="starRatingGreen"></span>\n' +
@@ -1080,10 +1092,10 @@ function showReviews(reviews){
                             '                                                    <span class="starRating"></span>\n' +
                             '                                                </div>\n' +
                             '                                            </div>\n';
+                        text +='                                         <b class="col-xs-3 font-size-15 line-height-203 float-right pd-lt-0">معمولی بود</b>\n';
                     }
                     else if(reviews[i]["ans"][j]['ans'] == 2){
-                        text +='                                         <b class="col-xs-3 font-size-15 line-height-203 float-right pd-lt-0">بد نبود</b>\n' +
-                            '                                            <div class="prw_rup prw_common_bubble_rating overallBubbleRating float-right col-xs-5 text-align-left">\n' +
+                        text +='                                            <div class="prw_rup prw_common_bubble_rating overallBubbleRating float-right col-xs-5 text-align-left">\n' +
                             '                                                <div class="ui_star_rating stars_10 font-size-25">\n' +
                             '                                                    <span class="starRatingGreen"></span>\n' +
                             '                                                    <span class="starRatingGreen"></span>\n' +
@@ -1092,10 +1104,10 @@ function showReviews(reviews){
                             '                                                    <span class="starRating"></span>\n' +
                             '                                                </div>\n' +
                             '                                            </div>\n';
+                        text +='<b class="col-xs-3 font-size-15 line-height-203 float-right pd-lt-0">بد نبود</b>\n';
                     }
                     else if(reviews[i]["ans"][j]['ans'] == 1){
-                        text +='                                         <b class="col-xs-3 font-size-15 line-height-203 float-right pd-lt-0">اصلا راضی نبودم</b>\n' +
-                            '                                            <div class="prw_rup prw_common_bubble_rating overallBubbleRating float-right col-xs-5 text-align-left">\n' +
+                        text +='                                            <div class="prw_rup prw_common_bubble_rating overallBubbleRating float-right col-xs-5 text-align-left">\n' +
                             '                                                <div class="ui_star_rating stars_10 font-size-25">\n' +
                             '                                                    <span class="starRatingGreen"></span>\n' +
                             '                                                    <span class="starRating"></span>\n' +
@@ -1104,9 +1116,9 @@ function showReviews(reviews){
                             '                                                    <span class="starRating"></span>\n' +
                             '                                                </div>\n' +
                             '                                            </div>\n';
+                        text +='<b class="col-xs-3 font-size-15 line-height-203 float-right pd-lt-0">اصلا راضی نبودم</b>\n';
                     }
 
-                    text +='<b class="col-xs-4 font-size-15 line-height-203" style="float: right">' + reviews[i]["ans"][j]["description"] + '</b>\n';
                     text += '</div>\n';
                 }
             }
@@ -1203,7 +1215,7 @@ function showReviews(reviews){
                     '</div>\n' +
                 '                                            <div class="inputBox">\n' +
                 '                                                <b class="replyCommentTitle">در پاسخ به نظر ' + reviews[i]["comment"][j]["username"] + '</b>\n' +
-                '                                                <textarea id="ansForReviews_' + reviews[i]["comment"][j]["id"] + '" class="inputBoxInput inputBoxInputComment" placeholder="شما چه نظری دارید؟" ></textarea>\n' +
+                '                                                <textarea id="ansForReviews_' + reviews[i]["comment"][j]["id"] + '" class="inputBoxInput inputBoxInputComment" placeholder="شما چه نظری دارید؟" onclick="checkLogin()"></textarea>\n' +
                 '                                                <button class="btn btn-primary" onclick="sendAnsOfReviews(' + reviews[i]["comment"][j]["id"] + ',1)"> ارسال</button>\n' +
                 '                                            </div>\n' +
                 '                                        </div>\n' +
@@ -1217,7 +1229,6 @@ function showReviews(reviews){
 
         text += '</div></div>\n';
 
-
         // new ans
         text +='                                <div class="newCommentPlaceMainDiv">\n' +
             '                                    <div class="circleBase type2 newCommentWriterProfilePic">' +
@@ -1225,7 +1236,7 @@ function showReviews(reviews){
             '</div>\n' +
             '                                    <div class="inputBox">\n' +
             '                                        <b class="replyCommentTitle">در پاسخ به نظر ' + reviews[i]["usernameReviewWriter"] + '</b>\n' +
-            '                                        <textarea class="inputBoxInput inputBoxInputComment" id="ansForReviews_' + reviews[i]["id"] + '" placeholder="شما چه نظری دارید؟"></textarea>\n' +
+            '                                        <textarea class="inputBoxInput inputBoxInputComment" id="ansForReviews_' + reviews[i]["id"] + '" placeholder="شما چه نظری دارید؟" onclick="checkLogin()"></textarea>\n' +
             '                                        <button class="btn btn-primary" onclick="sendAnsOfReviews(' + reviews[i]["id"] + ', 0)"> ارسال</button>\n' +
             '                                    </div>\n' +
             '                                    <div></div>\n' +
@@ -1240,10 +1251,8 @@ function showReviews(reviews){
 
 function likeReview(_logId, _like){
 
-    if (!hasLogin) {
-        showLoginPrompt(hotelDetailsInSaveToTripMode);
+    if(!checkLogin())
         return;
-    }
 
     $.ajax({
         type: 'post',
@@ -1260,10 +1269,9 @@ function likeReview(_logId, _like){
 }
 
 function sendAnsOfReviews(_logId, _ans){
-    if (!hasLogin) {
-        showLoginPrompt(hotelDetailsInSaveToTripMode);
+
+    if(!checkLogin())
         return;
-    }
 
     var text = document.getElementById('ansForReviews_' + _logId).value;
     if(text != null && text != ''){
@@ -1334,7 +1342,7 @@ function createAnsToComment(comment, repTo, topId){
             '                                            </div>\n' +
             '                                            <div class="inputBox">\n' +
             '                                                <b class="replyCommentTitle">در پاسخ به نظر ' + comment[k]["username"] + '</b>\n' +
-            '                                                <textarea  id="ansForReviews_' + comment[k]["id"] + '" class="inputBoxInput inputBoxInputComment" placeholder="شما چه نظری دارید؟"></textarea>\n' +
+            '                                                <textarea  id="ansForReviews_' + comment[k]["id"] + '" class="inputBoxInput inputBoxInputComment" placeholder="شما چه نظری دارید؟" onclick="checkLogin()"></textarea>\n' +
             '                                                <button class="btn btn-primary" onclick="sendAnsOfReviews(' + comment[k]["id"] + ', 1)"> ارسال</button>\n' +
             '                                            </div>\n' +
             '                                        </div>\n' +
@@ -1396,6 +1404,94 @@ function changeReviewSlidePic(_mainIndex, _picIndex){
 function showAllReviews(_id){
     $('#allReviews_' + _id).toggle();
 }
+
+function changePerPage(_count){
+
+    document.getElementById('perView' + reviewPerPage).classList.remove('color-blue');
+    document.getElementById('perView' + _count).classList.add('color-blue');
+    reviewPerPage = _count;
+    loadReviews();
+}
+
+function changeReviewPage(_page){
+    reviewPage = _page;
+    loadReviews();
+}
+
+function createReviewPagination(reviewsCount){
+    var text = '';
+    var page = Math.round(reviewsCount/reviewPerPage);
+
+    if(page > 0)
+        document.getElementById('reviewsPagination').style.display = 'block';
+    else
+        document.getElementById('reviewsPagination').style.display = 'none';
+
+
+    if(page >= 5){
+        if(reviewPage == 1){
+            text += '<span class="cursor-pointer color-blue mg-lt-5" onclick="changeReviewPage(1)" style="float: right">1</span>';
+            text += '<span class="cursor-pointer mg-lt-5" onclick="changeReviewPage(2)" style="float: right">2</span>';
+            text += '<span class="cursor-pointer mg-lt-5" onclick="changeReviewPage(3)" style="float: right">3</span>';
+            text += '<span style="float: right"> >>> </span>';
+            text += '<span class="cursor-pointer mg-lt-5" onclick="changeReviewPage(' + page + ')" style="float: right">' + page + '</span>';
+        }
+        else if(reviewPage == 2){
+            text += '<span class="cursor-pointer mg-lt-5" onclick="changeReviewPage(1)" style="float: right">1</span>';
+            text += '<span class="cursor-pointer color-blue mg-lt-5" onclick="changeReviewPage(2)" style="float: right">2</span>';
+            text += '<span class="cursor-pointer mg-lt-5" onclick="changeReviewPage(3)" style="float: right">3</span>';
+            text += '<span style="float: right"> >>> </span>';
+            text += '<span class="cursor-pointer mg-lt-5" onclick="changeReviewPage(' + page + ')" style="float: right">' + page + '</span>';
+        }
+        else if(reviewPage == 3){
+            text += '<span class="cursor-pointer mg-lt-5" onclick="changeReviewPage(1)" style="float: right">1</span>';
+            text += '<span class="cursor-pointer mg-lt-5" onclick="changeReviewPage(2)" style="float: right">2</span>';
+            text += '<span class="cursor-pointer color-blue mg-lt-5" onclick="changeReviewPage(3)" style="float: right">3</span>';
+            text += '<span class="cursor-pointer mg-lt-5" onclick="changeReviewPage(4)" style="float: right">4</span>';
+            if(page == 5)
+                text += '<span class="cursor-pointer mg-lt-5" onclick="changeReviewPage(5)" style="float: right">5</span>';
+            else {
+                text += '<span style="float: right"> >>> </span>';
+                text += '<span class="cursor-pointer mg-lt-5" onclick="changeReviewPage(' + page + ')" style="float: right">' + page + '</span>';
+            }
+        }
+        else{
+            text += '<span class="cursor-pointer mg-lt-5" onclick="changeReviewPage(1)" style="float: right">1</span>';
+            text += '<span style="float: right"> <<< </span>';
+
+            if(reviewPage == page){
+                text += '<span class="cursor-pointer mg-lt-5" onclick="changeReviewPage(' + (reviewPage-2) + ')" style="float: right">' + (reviewPage-2) + '</span>';
+                text += '<span class="cursor-pointer mg-lt-5" onclick="changeReviewPage(' + (reviewPage-1) + ')" style="float: right">' + (reviewPage-1) + '</span>';
+                text += '<span class="cursor-pointer color-blue mg-lt-5" onclick="changeReviewPage(' + (reviewPage) + ')" style="float: right">' + (reviewPage) + '</span>';
+            }
+            else{
+                text += '<span class="cursor-pointer mg-lt-5" onclick="changeReviewPage(' + (reviewPage-1) + ')" style="float: right">' + (reviewPage-1) + '</span>';
+                text += '<span class="cursor-pointer color-blue mg-lt-5" onclick="changeReviewPage(' + (reviewPage) + ')" style="float: right">' + (reviewPage) + '</span>';
+                text += '<span class="cursor-pointer mg-lt-5" onclick="changeReviewPage(' + (reviewPage+1) + ')" style="float: right">' + (reviewPage+1) + '</span>';
+                if((page - reviewPage) == 2)
+                    text += '<span class="cursor-pointer mg-lt-5" onclick="changeReviewPage(' + (reviewPage+2) + ')" style="float: right">' + (reviewPage+2) + '</span>';
+            }
+
+            if((page - reviewPage) >= 3){
+                text += '<span style="float: right"> >>> </span>';
+                text += '<span class="cursor-pointer mg-lt-5" onclick="changeReviewPage(' + page + ')" style="float: right">' + page + '</span>';
+            }
+
+
+        }
+    }
+    else{
+        for (var i = 1; i <= page; i++){
+            if(i == reviewPage)
+                text += '<span class="cursor-pointer color-blue mg-lt-5" onclick="changeReviewPage(' + i + ')" style="float: right">' + i + '</span>';
+            else
+                text += '<span class="cursor-pointer mg-lt-5" onclick="changeReviewPage(' + i + ')" style="float: right">' + i + '</span>';
+        }
+    }
+
+    document.getElementById('reviewPagination').innerHTML = text;
+}
+
 
 var swiper = new Swiper('#mainSlider', {
     spaceBetween: 30,

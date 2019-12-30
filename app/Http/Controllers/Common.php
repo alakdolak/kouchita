@@ -8,6 +8,7 @@ use App\models\LogModel;
 use App\models\Medal;
 use App\models\Place;
 use App\models\PlacePic;
+use App\models\QuestionAns;
 use App\models\ReviewPic;
 use App\models\User;
 use Carbon\Carbon;
@@ -728,6 +729,11 @@ function compressImage($source, $destination, $quality){
 
 function getAllPlacePicsByKind($kindPlaceId, $placeId){
 
+    $sitePics = array();
+    $sitePicsJSON = array();
+    $photographerPicsJSON = array();
+    $photographerPics = array();
+
     if(auth()->check())
         $user = auth()->user();
 
@@ -759,7 +765,7 @@ function getAllPlacePicsByKind($kindPlaceId, $placeId){
     }
 
     $place->pics = PlacePic::where('kindPlaceId', $kindPlaceId)->where('placeId', $place->id)->get();
-    $sitePics = array();
+
     $koochitaPic = URL::asset('images/logo.png');
     $s = [  'id' => 0,
         's' => URL::asset('_images/' . $MainFile . '/' . $place->file . '/s-' . $place->picNumber),
@@ -973,4 +979,66 @@ function getAnsToComments($logId){
         $ansToReview = array();
 
     return $ansToReview;
+}
+
+function commonInPlaceDetails($kindPlaceId, $placeId, $city, $state, $place){
+
+    $section = \DB::select('SELECT questionId FROM questionSections WHERE (kindPlaceId = 0 OR kindPlaceId = ' . $kindPlaceId . ') AND (stateId = 0 OR stateId = ' . $state->id . ') AND (cityId = 0 OR cityId = ' . $city->id . ') GROUP BY questionId');
+
+    $questionId = array();
+    foreach ($section as $item)
+        array_push($questionId, $item->questionId);
+
+    $questions = \DB::select('SELECT * FROM questions WHERE id IN (' . implode(",", $questionId) . ')');
+    $questionsAns = \DB::select('SELECT * FROM questionAns WHERE questionId IN (' . implode(",", $questionId) . ')');
+
+    $multiQuestion = array();
+    $textQuestion = array();
+    $rateQuestion = array();
+
+    foreach ($questions as $item) {
+        if ($item->ansType == 'multi') {
+            $item->ans = QuestionAns::where('questionId', $item->id)->get();
+            array_push($multiQuestion, $item);
+        }
+        else if($item->ansType == 'text')
+            array_push($textQuestion, $item);
+        else if($item->ansType == 'rate')
+            array_push($rateQuestion, $item);
+    }
+
+    $userPhotos = DB::select('SELECT pic.* , users.* FROM reviewPics AS pic, log, users WHERE pic.isVideo = 0 AND pic.logId = log.id AND log.kindPlaceId = ' . $kindPlaceId . ' AND log.placeId = ' . $placeId . ' AND log.confirm = 1 AND log.visitorId = users.id');
+    foreach ($userPhotos as $item){
+
+        $item->pic = URL::asset('userPhoto/hotels/' . $place->file . '/' . $item->pic);
+
+        if ($item->first_name != null)
+            $item->username = $item->first_name . ' ' . $item->last_name;
+
+        if($item->uploadPhoto == 0){
+            $deffPic = DefaultPic::find($item->picture);
+
+            if($deffPic != null)
+                $item->userPic = URL::asset('defaultPic/' . $deffPic->name);
+            else
+                $item->userPic = URL::asset('_images/nopic/blank.jpg');
+        }
+        else{
+            $item->userPic = URL::asset('userProfile/' . $item->picture);
+        }
+    }
+
+    $a2 = Activity::where('name', 'نظر')->first();
+    $a3 = Activity::where('name', 'پاسخ')->first();
+
+    $condition = ['activityId' => $a2->id, 'placeId' => $placeId, 'kindPlaceId' => $kindPlaceId, 'confirm' => 1, 'relatedTo' => 0];
+    $reviewCount = LogModel::where($condition)->count();
+
+    $ansReviewCount = DB::select('SELECT COUNT(*) AS logCount FROM log log1, log log2 WHERE log1.placeId = ' . $placeId . ' AND log1.kindPlaceId = '. $kindPlaceId . ' AND log1.confirm = 1 AND log1.activityId = ' . $a3->id . ' AND log1.relatedTo = log2.id AND log2.activityId = ' . $a2->id);
+    $ansReviewCount = $ansReviewCount[0]->logCount;
+
+    $userReviweCount = DB::select('SELECT visitorId FROM log WHERE placeId = ' . $placeId . ' AND kindPlaceId = '. $kindPlaceId . ' AND confirm = 1 AND activityId = ' . $a2->id . ' GROUP BY visitorId');
+    $userReviweCount = count($userReviweCount);
+
+    return [$reviewCount, $ansReviewCount, $userReviweCount, $userPhotos, $multiQuestion, $textQuestion, $rateQuestion];
 }
