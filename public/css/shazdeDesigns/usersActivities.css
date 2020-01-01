@@ -92,6 +92,10 @@ body {
     width: 9%;
 }
 
+.userProfilePostsFiltration > span:nth-child(5) {
+    width: 10%;
+}
+
 .userProfilePostsFiltration > span:first-child {
     width: 16%;
 }
@@ -388,6 +392,19 @@ body {
 
 /*posts page styles*/
 
+.postsMainDivInSpecificMode {
+    padding: 0;
+    float: right;
+}
+
+.postsLeftDivInSpecificMode {
+    padding: 0 5px 0 0;
+}
+
+.postsRightDivInSpecificMode {
+    padding: 0 0 0 5px;
+}
+
 .postsMainDivInSpecificMode  .postMainDivShown {
     padding: 10px;
 }
@@ -481,6 +498,7 @@ body {
     margin-bottom: 10px;
     direction: rtl;
     text-align: right;
+    padding-right: 65px;
 }
 
 .userProfileName {
@@ -1213,7 +1231,7 @@ body {
     }
 
     .mainDivContainerProfilePage {
-        padding: 0 20px;
+        padding: 0 10px;
     }
 }
 
@@ -1224,7 +1242,7 @@ body {
 
     /*top bar*/
     .userPageBodyTopBar {
-        padding: 0 85px 0 0;
+        padding: 0 85px 0 5px;
     }
 
     .profilePicUserProfile {
@@ -1247,6 +1265,24 @@ body {
 
     .userProfileInfo > div:not(:last-child) {
         font-size: 17px;
+    }
+
+    .userProfileDetailsMainDiv {
+        padding: 0 5px;
+    }
+
+    /*main bar*/
+
+    .userProfileActivitiesDetailsMainDiv {
+        padding: 0 5px;
+    }
+
+    .postsLeftDivInSpecificMode {
+        padding: 0 2.5px 0 0;
+    }
+
+    .postsRightDivInSpecificMode {
+        padding: 0 0 0 2.5px;
     }
 }
 
@@ -1275,6 +1311,7 @@ body {
     }
 
     .postsMainFiltrationBar {
+        margin: 0 5px;
         padding-right: 0;
     }
 
@@ -1296,6 +1333,30 @@ body {
     .postsMainFiltrationBar > span {
         float: initial;
         width: auto;
+    }
+
+    .postsLeftDivInSpecificMode, .postsRightDivInSpecificMode {
+        width: 100%;
+        padding: 0;
+    }
+
+    .userProfilePostsFiltrationContainer .userProfilePostsFiltration {
+        overflow-x: auto;
+        white-space: nowrap;
+        scrollbar-width: none;
+        justify-content: right;
+    }
+
+    .userProfilePostsFiltrationContainer .userProfilePostsFiltration > span {
+        width: auto;
+    }
+
+    .userProfilePostsSearchContainer {
+        padding: 5px 5px 5px 0;
+    }
+
+    .userProfilePostsSearchContainer > span {
+        font-size: 12px;
     }
 }
 

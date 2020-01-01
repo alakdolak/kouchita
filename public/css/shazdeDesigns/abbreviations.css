@@ -252,6 +252,10 @@
     padding-right: 5px;
 }
 
+.pd-rt-5Imp {
+    padding-right: 5px !important;
+}
+
 .pd-rt-10 {
     padding-right: 10px;
 }
@@ -290,6 +294,10 @@
 
 .pd-lt-3 {
     padding-left: 3px;
+}
+
+.pd-lt-5Imp {
+    padding-left: 5px !important;
 }
 
 /*padding*/
