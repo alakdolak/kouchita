@@ -51,7 +51,7 @@
 
 @section('header')
     @parent
-    <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/usersProfile.css')}}">
+    <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/usersActivities.css')}}">
     <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/abbreviations.css')}}">
 
     {{--vr--}}
@@ -100,12 +100,12 @@
                     </div>
                 </div>
 
-                @include('layouts.modalPhotos')
+{{--                @include('layouts.modalPhotos')--}}
 
-                @include('layouts.profilePosts')
-                @include('layouts.profilePhotosAndVideos')
-                @include('layouts.profileQuestions')
-                @include('layouts.profileArticles')
+                @include('userPosts.blade.php')
+                @include('userPhotosAndVideos.blade.php')
+                @include('userQuestions.blade.php')
+                @include('userArticles.blade.php')
 
             </div>
             <div class="userProfileDetailsMainDiv col-xs-4">
