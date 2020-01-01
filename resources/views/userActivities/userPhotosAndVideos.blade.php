@@ -66,8 +66,9 @@
 @stop
 
 @section('main')
-    <div class="userProfilePageCoverImg"></div>
-    <center class="mainBodyUserProfile userPhotosAndVideos">
+    <div class="userPhotosAndVideosPage">
+        <div class="userProfilePageCoverImg"></div>
+        <center class="mainBodyUserProfile userPhotosAndVideos">
         <div class="mainDivContainerProfilePage">
             <div class="userPageBodyTopBar">
                 <div class="circleBase profilePicUserProfile"></div>
@@ -79,49 +80,15 @@
                     </div>
                 </div>
                 <div class="postsMainFiltrationBar">
-                    <span class="otherFilterChoices">سایر موارد</span>
-                    <span>امتیاز‌ها</span>
-                    <span class="showUsersArticlesLink">مقاله‌ها</span>
-                    <span class="showUsersQAndAsLink">سؤال‌ها و پاسخ‌ها</span>
-                    <span class="showUsersPhotosAndVideosLink">عکس و فیلم</span>
                     <span class="showUsersPostsLink">پست‌ها</span>
+                    <span class="showUsersPhotosAndVideosLink">عکس و فیلم</span>
+                    <span class="showUsersQAndAsLink">سؤال‌ها و پاسخ‌ها</span>
+                    <span class="showUsersArticlesLink">مقاله‌ها</span>
+                    <span class="showUsersScores">امتیاز‌ها</span>
+                    <span class="otherFilterChoices">سایر موارد</span>
                 </div>
             </div>
-            <div class="userProfileActivitiesDetailsMainDiv col-xs-8">
-                <div class="userProfilePostsFiltrationContainer">
-                    <div class="userProfilePostsFiltration">
-                        <span>نمایش بر اساس</span>
-                        <span>جدیدترین‌ها</span>
-                        <span>قدمی‌ترین‌ها</span>
-                        <span>بهترین‌ها</span>
-                        <span>داغ‌ترین‌ها</span>
-                        <span>بدترین‌ها</span>
-                        <span>بیشترین همراهان</span>
-                    </div>
-                </div>
-
-                <div class="userProfilePhotosAndVideos">
-                    <div class="userProfilePostsSearchContainer">
-                        <div class="inputBox">
-                            <textarea class="inputBoxInput inputBoxInputSearch" type="text"
-                                      placeholder="جستجو کنید"></textarea>
-                        </div>
-                        <span>نمایش فقط عکس</span>
-                        <span>نمایش فقط فیلم</span>
-                        <span>نمایش فقط فیلم 360</span>
-                        <span>نمایش همه</span>
-                    </div>
-                    <div class="photosAndVideosMainDiv">
-                        <div class="sharedPhotosAndVideos" data-toggle="modal" data-target=".showingPhotosModal"></div>
-                        <div class="sharedPhotosAndVideos" data-toggle="modal" data-target=".showingPhotosModal"></div>
-                        <div class="sharedPhotosAndVideos" data-toggle="modal" data-target=".showingPhotosModal"></div>
-                        <div class="sharedPhotosAndVideos" data-toggle="modal" data-target=".showingPhotosModal"></div>
-                        <div class="sharedPhotosAndVideos" data-toggle="modal" data-target=".showingPhotosModal"></div>
-                    </div>
-                </div>
-
-            </div>
-            <div class="userProfileDetailsMainDiv col-xs-4">
+            <div class="userProfileDetailsMainDiv col-sm-4 col-xs-12 float-right">
                 <div class="userProfileLevelMainDiv rightColBoxes">
                     <div class="mainDivHeaderText">
                         <h3>سطح کاربر</h3>
@@ -232,8 +199,48 @@
                     </div>
                 </div>
             </div>
+            <div class="userProfileActivitiesDetailsMainDiv col-sm-8 col-xs-12">
+                <div class="userProfilePostsFiltrationContainer">
+                    <div class="userProfilePostsFiltration">
+                        <span>نمایش بر اساس</span>
+                        <span>جدیدترین‌ها</span>
+                        <span>قدمی‌ترین‌ها</span>
+                        <span>بهترین‌ها</span>
+                        <span>داغ‌ترین‌ها</span>
+                        <span>بدترین‌ها</span>
+                        <span>بیشترین همراهان</span>
+                    </div>
+                </div>
+
+                <div class="userProfilePhotosAndVideos">
+                    <div class="userProfilePostsSearchContainer">
+                        <div>
+                            <div class="inputBox">
+                                <textarea class="inputBoxInput inputBoxInputSearch" type="text"
+                                          placeholder="جستجو کنید"></textarea>
+                            </div>
+                        </div>
+                        <div>
+                            <span>نمایش فقط عکس</span>
+                            <span>نمایش فقط فیلم</span>
+                            <div class="clear-both display-none"></div>
+                            <span>نمایش فقط فیلم 360</span>
+                            <span>نمایش همه</span>
+                        </div>
+                    </div>
+                    <div class="photosAndVideosMainDiv">
+                        <div class="sharedPhotosAndVideos" data-toggle="modal" data-target=".showingPhotosModal"></div>
+                        <div class="sharedPhotosAndVideos" data-toggle="modal" data-target=".showingPhotosModal"></div>
+                        <div class="sharedPhotosAndVideos" data-toggle="modal" data-target=".showingPhotosModal"></div>
+                        <div class="sharedPhotosAndVideos" data-toggle="modal" data-target=".showingPhotosModal"></div>
+                        <div class="sharedPhotosAndVideos" data-toggle="modal" data-target=".showingPhotosModal"></div>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </center>
+    </div>
 
     <script src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
 

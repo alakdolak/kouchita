@@ -152,7 +152,7 @@ body {
 
 .userProfilePostsFiltrationContainer .userProfilePostsFiltration > span:first-child {
     font-weight: 700;
-    font-size: 16px;
+    font-size: 14px;
     color: #0076a3;
     padding: 8px 0;
 }
@@ -161,9 +161,14 @@ body {
     display: inline-block;
     width: 100%;
     padding: 5px 15px 5px 0;
+    margin-bottom: 5px;
 }
 
-.userProfilePostsSearchContainer > span {
+.userProfilePostsSearchContainer > div:nth-child(1) {
+    float: right;
+}
+
+.userProfilePostsSearchContainer > div:nth-child(2) > span {
     margin: 0 15px;
     font-size: 14px;
     padding: 5px 0;
@@ -551,7 +556,7 @@ body {
 /*photos and videos*/
 
 .userProfilePhotosAndVideos  .userProfilePostsSearchContainer .inputBox {
-    width: 30%;
+    width: 100%;
 }
 
 .sharedPhotosAndVideos {
@@ -1157,7 +1162,7 @@ body {
         font-size: 13px;
     }
 
-    .userProfilePostsSearchContainer > span {
+    .userProfilePostsSearchContainer > div:nth-child(2) > span {
         margin: 0 7px;
         font-size: 13px;
     }
@@ -1227,12 +1232,47 @@ body {
 
     .userProfilePostsFiltrationContainer .userProfilePostsFiltration > span {
         margin: 0 1%;
-        font-size: 12px !important;
+        font-size: 12px;
     }
 
     .mainDivContainerProfilePage {
         padding: 0 10px;
     }
+
+    .userPhotosAndVideosPage .userProfilePostsSearchContainer {
+        padding: 5px 5px 5px 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        direction: rtl;
+    }
+
+    .userPhotosAndVideosPage .userProfilePostsSearchContainer > div:nth-child(2) {
+        width: 70%;
+    }
+
+    .userPhotosAndVideosPage .userProfilePostsSearchContainer > div:nth-child(2) > span {
+        font-size: 11px;
+        margin: 0 1.7%;
+        word-spacing: -1px;
+    }
+
+    .userPhotosAndVideosPage .userProfilePostsSearchContainer > span:nth-child(2) {
+        width: 17.5%;
+    }
+
+    .userPhotosAndVideosPage .userProfilePostsSearchContainer > span:nth-child(3) {
+        width: 16%;
+    }
+
+    .userPhotosAndVideosPage .userProfilePostsSearchContainer > span:nth-child(5) {
+        width: 20%;
+    }
+
+    .userPhotosAndVideosPage .userProfilePostsSearchContainer > span:nth-child(6) {
+        width: 11.5%;
+    }
+
 }
 
 @media (max-width: 768px) {
@@ -1315,6 +1355,9 @@ body {
         padding-right: 0;
     }
 
+    .userPhotosAndVideosPage .userPhotosAndVideosPage .userProfilePostsSearchContainer > div:nth-child(2) > span {
+        margin: 0 0.8%;
+    }
 }
 
 @media (max-width: 480px) {
@@ -1351,12 +1394,26 @@ body {
         width: auto;
     }
 
-    .userProfilePostsSearchContainer {
+    .userPhotosAndVideosPage .userProfilePostsSearchContainer {
         padding: 5px 5px 5px 0;
     }
 
-    .userProfilePostsSearchContainer > span {
-        font-size: 12px;
+    .sharedPhotosAndVideos {
+        width: 100%;
+        margin: 5px 0  0 !important;
+    }
+
+    .userPhotosAndVideosPage .userProfilePostsSearchContainer > div:first-child {
+        width: 43%;
+    }
+
+    .userPhotosAndVideosPage .userProfilePostsSearchContainer > div:nth-child(4) {
+        display: block;
+    }
+
+    .userPhotosAndVideosPage .userProfilePostsSearchContainer > div:nth-child(2) > span {
+        margin: 0 10px;
+        width: auto !important;
     }
 }
 

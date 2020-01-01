@@ -66,8 +66,9 @@
 @stop
 
 @section('main')
-    <div class="userProfilePageCoverImg"></div>
-    <center class="mainBodyUserProfile userPosts">
+    <div class="userPostsPage">
+        <div class="userProfilePageCoverImg"></div>
+        <center class="mainBodyUserProfile userPosts">
         <div class="mainDivContainerProfilePage">
             <div class="userPageBodyTopBar">
                 <div class="circleBase profilePicUserProfile"></div>
@@ -484,6 +485,7 @@
             </div>
         </div>
     </center>
+    </div>
 
     <script src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
 
