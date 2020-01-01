@@ -877,8 +877,11 @@ function getDifferenceTimeString($time){
     $time = Carbon::make($time);
 
     $diffTimeInMin = Carbon::now()->diffInMinutes($time);
+
     if($diffTimeInMin <= 15)
         $diffTime = 'هم اکنون';
+    else if($diffTimeInMin <= 60)
+        $diffTime = 'دقایقی پیش';
     else{
         $diffTimeHour = Carbon::now()->diffInHours($time);
         if($diffTimeHour <= 24)
@@ -905,21 +908,32 @@ function getDifferenceTimeString($time){
 }
 
 function getAnsToComments($logId){
+
     $a = Activity::where('name', 'پاسخ')->first();
 
     $ansToReview = DB::select('SELECT log.visitorId, log.text, log.subject, log.id FROM log WHERE log.confirm = 1 AND log.relatedTo = ' . $logId . ' AND log.activityId = ' . $a->id);
 
+    $countAns = 0;
     if(count($ansToReview) > 0) {
         $logIds = array();
         $ansToReviewUserId = array();
+        $countAns += count($ansToReview);
         for ($i = 0; $i < count($ansToReview); $i++) {
+
             array_push($logIds, $ansToReview[$i]->id);
             array_push($ansToReviewUserId, $ansToReview[$i]->visitorId);
 
             $ansToReview[$i]->comment = array();
 
-            if($ansToReview[$i]->subject == 'ans')
-                $ansToReview[$i]->comment = getAnsToComments($ansToReview[$i]->id);
+            if($ansToReview[$i]->subject == 'ans') {
+                $anss = getAnsToComments($ansToReview[$i]->id);
+                $ansToReview[$i]->comment = $anss[0];
+                $ansToReview[$i]->ansNum = $anss[1];
+                $countAns += $ansToReview[$i]->ansNum;
+            }
+            else
+                $ansToReview[$i]->ansNum = 0;
+
         }
 
         $likeLogIds = DB::select('SELECT COUNT(RFB.like) AS likeCount, RFB.logId FROM reviewFeedBack AS RFB WHERE RFB.logId IN (' . implode(",", $logIds) . ') AND RFB.like = 1 GROUP BY RFB.logId');
@@ -978,7 +992,7 @@ function getAnsToComments($logId){
     else
         $ansToReview = array();
 
-    return $ansToReview;
+    return [$ansToReview, $countAns];
 }
 
 function commonInPlaceDetails($kindPlaceId, $placeId, $city, $state, $place){

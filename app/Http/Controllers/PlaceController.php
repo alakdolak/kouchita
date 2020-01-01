@@ -3152,9 +3152,8 @@ class PlaceController extends Controller {
 
     }
 
-    public function askQuestion(Request $request)
+    public function askQuestion()
     {
-
         if (isset($_POST["placeId"]) && isset($_POST["kindPlaceId"]) && isset($_POST["text"])) {
 
             $text = makeValidInput($_POST["text"]);
@@ -3172,7 +3171,6 @@ class PlaceController extends Controller {
             $log->text = $text;
             $log->date = date("Y-m-d");
             $log->relatedTo = 0;
-            $log->confirm = 1;
             $log->save();
 
             echo "ok";
@@ -3211,22 +3209,65 @@ class PlaceController extends Controller {
                     else
                         $log->userPic = URL::asset('_images/nopic/blank.jpg');
                 }
-                else{
+                else
                     $log->userPic = URL::asset('userProfile/' . $user->picture);
-                }
 
-                $condition = ['relatedTo' => $log->id, 'activityId' => $ansActivityId, 'confirm' => 1];
-                $log->ansNum = LogModel::where($condition)->count();
+                $anss = getAnsToComments($log->id);
+
+                $log->comment = $anss[0];
+                $log->ansNum = $anss[1];
+
+                switch ($log->kindPlaceId) {
+                    case 1:
+                        $log->mainFile = 'amaken';
+                        $log->place = Amaken::select(['id', 'name', 'cityId', 'file'])->find($log->placeId);
+                        $log->kindPlace = 'اماکن';
+                        break;
+                    case 3:
+                        $log->mainFile = 'restaurant';
+                        $log->place = Restaurant::select(['id', 'name', 'cityId', 'file'])->find($log->placeId);
+                        $log->kindPlace = 'رستوران';
+                        break;
+                    case 4:
+                        $log->mainFile = 'hotels';
+                        $log->place = Hotel::select(['id', 'name', 'cityId', 'file'])->find($log->placeId);
+                        $log->kindPlace = 'هتل';
+                        break;
+                    case 6:
+                        $log->mainFile = 'majara';
+                        $log->place = Majara::select(['id', 'name', 'cityId', 'file'])->find($log->placeId);
+                        $log->kindPlace = 'ماجرا';
+                        break;
+                    case 10:
+                        $log->mainFile = 'sogatsanaie';
+                        $log->place = SogatSanaie::select(['id', 'name', 'cityId', 'file'])->find($log->placeId);
+                        $log->kindPlace = 'سوغات/صنایع';
+                        break;
+                    case 11:
+                        $log->mainFile = 'mahalifood';
+                        $log->place = MahaliFood::select(['id', 'name', 'cityId', 'file'])->find($log->placeId);
+                        $log->kindPlace = 'غذای محلی';
+                        break;
+                }
+                $log->city = Cities::find($log->place->cityId);
+                $log->state = State::find($log->city->stateId);
+
+                $time = $log->date;
+                $time .= ' ' . substr($log->time, 0, 2) . ':' . substr($log->time, 2, 2);
+                $log->timeAgo = getDifferenceTimeString($time);
+
                 $log->date = convertDate($log->date);
             }
 
             echo json_encode($logs);
         }
+        else
+            echo 'nok1';
 
+        return;
     }
     public function sendAns()
     {
-
         if (isset($_POST["placeId"]) && isset($_POST["kindPlaceId"]) &&
             isset($_POST["text"]) && isset($_POST["relatedTo"])) {
 
@@ -3241,13 +3282,6 @@ class PlaceController extends Controller {
             if ($tmp == null || $tmp->confirm != 1)
                 return;
 
-            $condition = ['placeId' => $placeId, 'kindPlaceId' => $kindPlaceId,
-                'relatedTo' => $relatedTo, 'activityId' => $activityId, 'visitorId' => $uId];
-            if (LogModel::where($condition)->count() > 0) {
-                echo "nok";
-                return;
-            }
-
             $log = new LogModel();
             $log->visitorId = $uId;
             $log->time = getToday()["time"];
@@ -3259,8 +3293,15 @@ class PlaceController extends Controller {
             $log->date = date("Y-m-d");
             $log->save();
 
+            if($relatedTo != 0){
+                $tmp->subject = 'ans';
+                $tmp->save();
+            }
+
             echo "ok";
         }
+
+        return;
     }
     public function sendAns2()
     {
