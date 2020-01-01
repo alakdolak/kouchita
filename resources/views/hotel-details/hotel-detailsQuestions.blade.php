@@ -197,7 +197,7 @@ if ($total == 0)
                                         </div>
                                     </a>
                                     <div class="clear-both"></div>
-                                    <div class="newQuestionMainDiv mg-tp-30 full-width display-inline-block">
+                                    <div class="newQuestionMainDiv">
                                         <div class="circleBase type2 newQuestionWriterProfilePic"></div>
                                         <div class="questionInputBoxMainDiv">
                                             <div class="inputBox questionInputBox">

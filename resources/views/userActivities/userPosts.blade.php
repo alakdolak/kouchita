@@ -79,15 +79,15 @@
                     </div>
                 </div>
                 <div class="postsMainFiltrationBar">
-                    <span class="otherFilterChoices">سایر موارد</span>
-                    <span>امتیاز‌ها</span>
-                    <span class="showUsersArticlesLink">مقاله‌ها</span>
-                    <span class="showUsersQAndAsLink">سؤال‌ها و پاسخ‌ها</span>
-                    <span class="showUsersPhotosAndVideosLink">عکس و فیلم</span>
                     <span class="showUsersPostsLink">پست‌ها</span>
+                    <span class="showUsersPhotosAndVideosLink">عکس و فیلم</span>
+                    <span class="showUsersQAndAsLink">سؤال‌ها و پاسخ‌ها</span>
+                    <span class="showUsersArticlesLink">مقاله‌ها</span>
+                    <span class="showUsersScores">امتیاز‌ها</span>
+                    <span class="otherFilterChoices">سایر موارد</span>
                 </div>
             </div>
-            <div class="userProfileActivitiesDetailsMainDiv col-xs-8">
+            <div class="userProfileActivitiesDetailsMainDiv col-sm-8 col-xs-12">
                 <div class="userProfilePostsFiltrationContainer">
                     <div class="userProfilePostsFiltration">
                         <span>نمایش بر اساس</span>
@@ -97,7 +97,7 @@
                         <span>داغ‌ترین‌ها</span>
                         <span>بدترین‌ها</span>
                         <span>بیشترین همراهان</span>
-                </div>
+                    </div>
                 </div>
 
                 <div class="userProfilePostsMainDiv">
@@ -112,7 +112,7 @@
 
 
                     <div class="col-xs-12 pd-0 float-right  postsMainDivInSpecificMode ">
-                        <div class="col-xs-6 pd-0 pd-rt-10Imp">
+                        <div class="col-xs-6 pd-0 pd-rt-5Imp">
                             <div class="col-xs-12 postMainDivShown float-right position-relative">
                                 <div class="commentWriterDetailsShow">
                                     <div class="circleBase type2 commentWriterPicShow"></div>
@@ -214,7 +214,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xs-6 pd-0">
+                        <div class="col-xs-6 pd-0 pd-lt-5Imp">
 
                             <div class="col-xs-12 postMainDivShown float-right position-relative">
                                 <div class="commentWriterDetailsShow">
@@ -372,7 +372,7 @@
                     </div>
                 </div>
             </div>
-            <div class="userProfileDetailsMainDiv col-xs-4">
+            <div class="userProfileDetailsMainDiv col-sm-4 col-xs-12">
                 <div class="userProfileLevelMainDiv rightColBoxes">
                     <div class="mainDivHeaderText">
                         <h3>سطح کاربر</h3>

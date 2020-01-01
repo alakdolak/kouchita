@@ -1,5 +1,5 @@
 body {
-    min-width: 996px;
+    min-width: 0;
 }
 
 .userProfilePageCoverImg {
@@ -60,6 +60,17 @@ body {
     width: 100%;
 }
 
+.userProfilePostsFiltration {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.postsMainFiltrationBar {
+    padding-right: 70px;
+}
+
 .userPageBodyTopBar {
     padding: 0;
     float: inherit;
@@ -69,6 +80,24 @@ body {
 
 .postsMainFiltrationBar > span:hover {
     border-bottom: 5px solid #0076a3;
+}
+
+.userProfilePostsFiltration > span:nth-child(2),
+.userProfilePostsFiltration > span:nth-child(3) {
+    width: 12%;
+}
+
+.userProfilePostsFiltration > span:nth-child(4),
+.userProfilePostsFiltration > span:nth-child(6) {
+    width: 9%;
+}
+
+.userProfilePostsFiltration > span:first-child {
+    width: 16%;
+}
+
+.userProfilePostsFiltration > span:last-child {
+    width: 18%;
 }
 
 .userPosts .showUsersPostsLink,
@@ -84,7 +113,7 @@ body {
     padding: 10px 0 5px;
     border-bottom: 5px solid white;
     cursor: pointer;
-    float: left;
+    float: right;
 }
 
 .otherFilterChoices::after {
@@ -1102,7 +1131,7 @@ body {
 @media (max-width: 1188px) {
 
     .userProfilePostsFiltrationContainer .userProfilePostsFiltration > span:first-child {
-        font-size: 14px;
+        font-size: 12px;
     }
 
     .userProfilePostsFiltrationContainer .userProfilePostsFiltration > span {
@@ -1115,4 +1144,159 @@ body {
         font-size: 13px;
     }
 }
+
+@media (max-width: 992px) {
+    /*top bar*/
+
+    .userPageBodyTopBar {
+        width: 100%;
+        padding: 0 85px 0 0;
+    }
+
+    .profilePicUserProfile {
+        right: 0;
+    }
+
+    .userProfileInfo {
+        right: 100px;
+    }
+
+    .postsMainFiltrationBar {
+        direction: rtl;
+        padding-right: 13%;
+    }
+
+    .postsMainFiltrationBar > span {
+        display: flex;
+        justify-content: center;
+        margin: 0 2.6%;
+        float: right;
+    }
+
+    .showUsersPostsLink {
+        width: 8%;
+    }
+
+    .showUsersPhotosAndVideosLink {
+        width: 13%;
+    }
+
+    .showUsersQAndAsLink {
+        width: 18.1%;
+    }
+
+    .showUsersArticlesLink {
+        width: 7.1%;
+    }
+
+    .showUsersScores {
+        width: 8%;
+    }
+
+    .otherFilterChoices {
+        width: 13.8%;
+    }
+
+    /*main bar*/
+
+    .userProfileActivitiesDetailsMainDiv {
+        padding: 0;
+    }
+
+    .userProfileDetailsMainDiv {
+        padding: 0 0 0 10px;
+    }
+
+    .userProfilePostsFiltrationContainer .userProfilePostsFiltration > span {
+        margin: 0 1%;
+        font-size: 12px !important;
+    }
+
+    .mainDivContainerProfilePage {
+        padding: 0 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .mainDivContainerProfilePage {
+        padding: 0;
+    }
+
+    /*top bar*/
+    .userPageBodyTopBar {
+        padding: 0 85px 0 0;
+    }
+
+    .profilePicUserProfile {
+        right: 10px;
+    }
+
+    .postsMainFiltrationBar > span {
+        font-size: 12px;
+    }
+
+    .profilePicUserProfile {
+        width: 160px;
+        height: 160px;
+    }
+
+    .userProfileInfo {
+        top: -80px;
+        right: 90px;
+    }
+
+    .userProfileInfo > div:not(:last-child) {
+        font-size: 17px;
+    }
+}
+
+@media (max-width: 630px) {
+    /*top bar*/
+    .userPageBodyTopBar {
+        display: flex;
+        justify-content: center;
+    }
+
+    .profilePicUserProfile {
+        right: inherit;
+        bottom: 150px;
+        width: 150px;
+        height: 150px;
+    }
+
+    .userProfileInfo {
+        right: inherit;
+        top: -95px;
+        padding: 5px 25px;
+    }
+
+    .userPageBodyTopBar {
+        padding: 0;
+    }
+
+    .postsMainFiltrationBar {
+        padding-right: 0;
+    }
+
+}
+
+@media (max-width: 480px) {
+
+    /*topBar*/
+
+    .postsMainFiltrationBar {
+        overflow-x: scroll;
+        float: right;
+        white-space: nowrap;
+        direction: rtl;
+        display: flex;
+        scrollbar-width: none;
+    }
+
+    .postsMainFiltrationBar > span {
+        float: initial;
+        width: auto;
+    }
+}
+
 
