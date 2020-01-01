@@ -4139,16 +4139,16 @@ if ($total == 0)
     <script src="{{URL::asset('js/adv.js')}}"></script>
 
     <script>
-        $.ajax({
-            type: 'post',
-            url: '{{route("filterReview")}}',
-            data: {
-                'kindPlaceId': kindPlaceId,
-                'placeId' : placeId
-            },
-            success: function (response){
+        {{--$.ajax({--}}
+        {{--    type: 'post',--}}
+        {{--    url: '{{route("filterReview")}}',--}}
+        {{--    data: {--}}
+        {{--        'kindPlaceId': kindPlaceId,--}}
+        {{--        'placeId' : placeId--}}
+        {{--    },--}}
+        {{--    success: function (response){--}}
 
-            }
-        });
+        {{--    }--}}
+        {{--});--}}
     </script>
 @stop

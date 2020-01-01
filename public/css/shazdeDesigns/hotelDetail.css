@@ -2568,11 +2568,15 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     height: 45px;
 }
 
-.postsMainDivFooter , .questionsMainDivFooter {
+.postsMainDivFooter, .questionsMainDivFooter {
     background-color: white;
     padding: 10px;
     margin-top: 10px;
     color: #666666;
+}
+
+.questionsMainDivFooter {
+    margin-bottom: 10px;
 }
 
 .showPostsNumsFilter , .showQuestionsNumsFilter {
@@ -3173,7 +3177,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     padding-bottom: 20px;
     display: inline-block;
     width: 100%;
-    border-bottom: 1px solid #e5e5e5;
+    /*border-bottom: 1px solid #e5e5e5;*/
 }
 
 .newQuestionWriterProfilePic {

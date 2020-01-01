@@ -1,8 +1,6 @@
-
 <div id="similarLocationsMainDiv" class="mainSuggestion swiper-container tabContentMainWrap">
     <div class="shelf_header">
         <div class="shelf_title">
-            <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
             <div class="shelf_title_container h3">
                 <h3>مکان‌های مشابه</h3>
             </div>
@@ -31,10 +29,13 @@
                             <div class="prw_rup prw_common_location_rating_simple">
                                 <span class="ui_bubble_rating bubble_50"></span>
                             </div>
-                            <span class="reviewCount ng-binding">1 </span><span>نقد </span>
+                            <span class="reviewCount ng-binding">1 </span>
+                            <span>نقد </span>
                         </div>
-                        <div class="item tags ng-binding">اصفهان <span>در </span>
-                            <span class="ng-binding">اصفهان</span></div>
+                        <div class="item tags ng-binding">اصفهان
+                            <span>در </span>
+                            <span class="ng-binding">اصفهان</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -61,10 +62,13 @@
                             <div class="prw_rup prw_common_location_rating_simple">
                                 <span class="ui_bubble_rating bubble_50"></span>
                             </div>
-                            <span class="reviewCount ng-binding">1 </span><span>نقد </span>
+                            <span class="reviewCount ng-binding">1 </span>
+                            <span>نقد </span>
                         </div>
-                        <div class="item tags ng-binding">اصفهان <span>در </span>
-                            <span class="ng-binding">اصفهان</span></div>
+                        <div class="item tags ng-binding">اصفهان
+                            <span>در </span>
+                            <span class="ng-binding">اصفهان</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -91,10 +95,13 @@
                             <div class="prw_rup prw_common_location_rating_simple">
                                 <span class="ui_bubble_rating bubble_50"></span>
                             </div>
-                            <span class="reviewCount ng-binding">1 </span><span>نقد </span>
+                            <span class="reviewCount ng-binding">1 </span>
+                            <span>نقد </span>
                         </div>
-                        <div class="item tags ng-binding">اصفهان <span>در </span>
-                            <span class="ng-binding">اصفهان</span></div>
+                        <div class="item tags ng-binding">اصفهان
+                            <span>در </span>
+                            <span class="ng-binding">اصفهان</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -121,10 +128,13 @@
                             <div class="prw_rup prw_common_location_rating_simple">
                                 <span class="ui_bubble_rating bubble_50"></span>
                             </div>
-                            <span class="reviewCount ng-binding">1 </span><span>نقد </span>
+                            <span class="reviewCount ng-binding">1 </span>
+                            <span>نقد </span>
                         </div>
-                        <div class="item tags ng-binding">اصفهان <span>در </span>
-                            <span class="ng-binding">اصفهان</span></div>
+                        <div class="item tags ng-binding">اصفهان
+                            <span>در </span>
+                            <span class="ng-binding">اصفهان</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -151,10 +161,13 @@
                             <div class="prw_rup prw_common_location_rating_simple">
                                 <span class="ui_bubble_rating bubble_50"></span>
                             </div>
-                            <span class="reviewCount ng-binding">1 </span><span>نقد </span>
+                            <span class="reviewCount ng-binding">1 </span>
+                            <span>نقد </span>
                         </div>
-                        <div class="item tags ng-binding">اصفهان <span>در </span>
-                            <span class="ng-binding">اصفهان</span></div>
+                        <div class="item tags ng-binding">اصفهان
+                            <span>در </span>
+                            <span class="ng-binding">اصفهان</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -181,10 +194,13 @@
                             <div class="prw_rup prw_common_location_rating_simple">
                                 <span class="ui_bubble_rating bubble_50"></span>
                             </div>
-                            <span class="reviewCount ng-binding">1 </span><span>نقد </span>
+                            <span class="reviewCount ng-binding">1 </span>
+                            <span>نقد </span>
                         </div>
-                        <div class="item tags ng-binding">اصفهان <span>در </span>
-                            <span class="ng-binding">اصفهان</span></div>
+                        <div class="item tags ng-binding">اصفهان
+                            <span>در </span>
+                            <span class="ng-binding">اصفهان</span>
+                        </div>
                     </div>
                 </div>
             </div>
