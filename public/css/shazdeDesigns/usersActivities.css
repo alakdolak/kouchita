@@ -92,6 +92,10 @@ body {
     width: 9%;
 }
 
+.userProfilePostsFiltration > span:nth-child(5) {
+    width: 10%;
+}
+
 .userProfilePostsFiltration > span:first-child {
     width: 16%;
 }
@@ -148,7 +152,7 @@ body {
 
 .userProfilePostsFiltrationContainer .userProfilePostsFiltration > span:first-child {
     font-weight: 700;
-    font-size: 16px;
+    font-size: 14px;
     color: #0076a3;
     padding: 8px 0;
 }
@@ -157,9 +161,14 @@ body {
     display: inline-block;
     width: 100%;
     padding: 5px 15px 5px 0;
+    margin-bottom: 5px;
 }
 
-.userProfilePostsSearchContainer > span {
+.userProfilePostsSearchContainer > div:nth-child(1) {
+    float: right;
+}
+
+.userProfilePostsSearchContainer > div:nth-child(2) > span {
     margin: 0 15px;
     font-size: 14px;
     padding: 5px 0;
@@ -388,6 +397,19 @@ body {
 
 /*posts page styles*/
 
+.postsMainDivInSpecificMode {
+    padding: 0;
+    float: right;
+}
+
+.postsLeftDivInSpecificMode {
+    padding: 0 5px 0 0;
+}
+
+.postsRightDivInSpecificMode {
+    padding: 0 0 0 5px;
+}
+
 .postsMainDivInSpecificMode  .postMainDivShown {
     padding: 10px;
 }
@@ -481,6 +503,7 @@ body {
     margin-bottom: 10px;
     direction: rtl;
     text-align: right;
+    padding-right: 65px;
 }
 
 .userProfileName {
@@ -533,7 +556,7 @@ body {
 /*photos and videos*/
 
 .userProfilePhotosAndVideos  .userProfilePostsSearchContainer .inputBox {
-    width: 30%;
+    width: 100%;
 }
 
 .sharedPhotosAndVideos {
@@ -1139,7 +1162,7 @@ body {
         font-size: 13px;
     }
 
-    .userProfilePostsSearchContainer > span {
+    .userProfilePostsSearchContainer > div:nth-child(2) > span {
         margin: 0 7px;
         font-size: 13px;
     }
@@ -1209,12 +1232,47 @@ body {
 
     .userProfilePostsFiltrationContainer .userProfilePostsFiltration > span {
         margin: 0 1%;
-        font-size: 12px !important;
+        font-size: 12px;
     }
 
     .mainDivContainerProfilePage {
-        padding: 0 20px;
+        padding: 0 10px;
     }
+
+    .userPhotosAndVideosPage .userProfilePostsSearchContainer {
+        padding: 5px 5px 5px 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        direction: rtl;
+    }
+
+    .userPhotosAndVideosPage .userProfilePostsSearchContainer > div:nth-child(2) {
+        width: 70%;
+    }
+
+    .userPhotosAndVideosPage .userProfilePostsSearchContainer > div:nth-child(2) > span {
+        font-size: 11px;
+        margin: 0 1.7%;
+        word-spacing: -1px;
+    }
+
+    .userPhotosAndVideosPage .userProfilePostsSearchContainer > span:nth-child(2) {
+        width: 17.5%;
+    }
+
+    .userPhotosAndVideosPage .userProfilePostsSearchContainer > span:nth-child(3) {
+        width: 16%;
+    }
+
+    .userPhotosAndVideosPage .userProfilePostsSearchContainer > span:nth-child(5) {
+        width: 20%;
+    }
+
+    .userPhotosAndVideosPage .userProfilePostsSearchContainer > span:nth-child(6) {
+        width: 11.5%;
+    }
+
 }
 
 @media (max-width: 768px) {
@@ -1224,7 +1282,7 @@ body {
 
     /*top bar*/
     .userPageBodyTopBar {
-        padding: 0 85px 0 0;
+        padding: 0 85px 0 5px;
     }
 
     .profilePicUserProfile {
@@ -1247,6 +1305,24 @@ body {
 
     .userProfileInfo > div:not(:last-child) {
         font-size: 17px;
+    }
+
+    .userProfileDetailsMainDiv {
+        padding: 0 5px;
+    }
+
+    /*main bar*/
+
+    .userProfileActivitiesDetailsMainDiv {
+        padding: 0 5px;
+    }
+
+    .postsLeftDivInSpecificMode {
+        padding: 0 2.5px 0 0;
+    }
+
+    .postsRightDivInSpecificMode {
+        padding: 0 0 0 2.5px;
     }
 }
 
@@ -1275,9 +1351,13 @@ body {
     }
 
     .postsMainFiltrationBar {
+        margin: 0 5px;
         padding-right: 0;
     }
 
+    .userPhotosAndVideosPage .userPhotosAndVideosPage .userProfilePostsSearchContainer > div:nth-child(2) > span {
+        margin: 0 0.8%;
+    }
 }
 
 @media (max-width: 480px) {
@@ -1296,6 +1376,44 @@ body {
     .postsMainFiltrationBar > span {
         float: initial;
         width: auto;
+    }
+
+    .postsLeftDivInSpecificMode, .postsRightDivInSpecificMode {
+        width: 100%;
+        padding: 0;
+    }
+
+    .userProfilePostsFiltrationContainer .userProfilePostsFiltration {
+        overflow-x: auto;
+        white-space: nowrap;
+        scrollbar-width: none;
+        justify-content: right;
+    }
+
+    .userProfilePostsFiltrationContainer .userProfilePostsFiltration > span {
+        width: auto;
+    }
+
+    .userPhotosAndVideosPage .userProfilePostsSearchContainer {
+        padding: 5px 5px 5px 0;
+    }
+
+    .sharedPhotosAndVideos {
+        width: 100%;
+        margin: 5px 0  0 !important;
+    }
+
+    .userPhotosAndVideosPage .userProfilePostsSearchContainer > div:first-child {
+        width: 43%;
+    }
+
+    .userPhotosAndVideosPage .userProfilePostsSearchContainer > div:nth-child(4) {
+        display: block;
+    }
+
+    .userPhotosAndVideosPage .userProfilePostsSearchContainer > div:nth-child(2) > span {
+        margin: 0 10px;
+        width: auto !important;
     }
 }
 
