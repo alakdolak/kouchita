@@ -1854,15 +1854,7 @@ if ($total == 0)
                                 </a>
                                 <div class="col-xs-4 font-size-13 line-height-2 text-align-right" style="display: flex; direction: rtl;">
                                     صفحه
-                                    <div id="reviewPagination" style="margin-right: 10px;">
-                                        <span id="reviewPagePagination1" class="cursor-pointer" onclick="changeReviewPage(1)">1</span>
-                                        <span id="reviewPagePagination2" class="cursor-pointer"></span>
-                                        <span id="reviewPagePagination3" class="mg-lt-5 cursor-pointer">2</span>-
-                                        <span id="reviewPagePagination4" class="color-blue mg-lt-5 cursor-pointer">3</span>-
-                                        <span id="reviewPagePagination5" class="cursor-pointer">4</span>
-                                        <span id="reviewPagePagination6" class="cursor-pointer"></span>
-                                        <span id="reviewPagePagination7" class="cursor-pointer">10</span>
-                                    </div>
+                                    <div id="reviewPagination" style="margin-right: 10px;"></div>
                                 </div>
                             </div>
 

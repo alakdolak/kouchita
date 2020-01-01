@@ -3193,6 +3193,7 @@ class PlaceController extends Controller {
 
             $condition = ['placeId' => $placeId, 'kindPlaceId' => $kindPlaceId, 'activityId' => $activityId, 'confirm' => 1, 'relatedTo' => 0];
             $logs = LogModel::where($condition)->skip(($page - 1) * $count)->take($count)->get();
+            $allCount = LogModel::where($condition)->count();
 
             foreach ($logs as $log) {
                 
@@ -3259,7 +3260,7 @@ class PlaceController extends Controller {
                 $log->date = convertDate($log->date);
             }
 
-            echo json_encode($logs);
+            echo json_encode([$logs, $allCount]);
         }
         else
             echo 'nok1';
