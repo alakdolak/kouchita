@@ -267,7 +267,7 @@
                 </div>
             </div>
 
-            <div id="lp_recentlyViews">
+            <div class="hidden" id="lp_recentlyViews">
                 <button type="button" class="btn btn-warning lp_btns">صفحه پروفایل</button>
                 <button type="button" class="btn btn-primary lp_btns">صفحه من</button>
                 <button type="button" class="btn btn-danger lp_btns">خروج</button>
@@ -281,11 +281,36 @@
                 <a>ویرایش اطلاعات</a>
             </div>
 
-            <div class="hidden" id="lp_mark">
-                <button type="button" class="btn btn-warning">lp_mark</button>
-                <button type="button" class="btn btn-primary">lp_mark</button>
-                <button type="button" class="btn btn-danger">lp_mark</button>
-                <a>ویرایش اطلاعات</a>
+            <div  id="lp_mark">
+                {{--<div id="bookmarkmenu" class="ui_overlay ui_flyout global-nav-flyout global-nav-utility trips-flyout-container" style="display: block;">--}}
+                    {{--<div>--}}
+                        {{--<div class="styleguide" id="masthead-saves-container">--}}
+
+                            <div id="masthead-recent" class="">
+                                <div class="recent-header-container">
+                                    <a class="recent-header" href="http://localhost:8080/shazde/public/recentlyView" target="_self"> نشانه گذاری شده ها </a>
+                                </div>
+                                <div class="masthead-recent-cards-container" id="bookMarksDiv">
+                                    <div>
+                                        <a class="masthead-recent-card" target="_self" href="http://localhost:8080/shazde/public/hotel-details/2/%D9%87%D8%AA%D9%84%20%DA%A9%D9%88%D8%AB%D8%B1">
+                                            <div class="media-left">
+                                                <div class="thumbnail" style="background-image: url(http://localhost:8080/assets/_images/hotels/hotel_kowsar/f-1.jpg);"></div>
+                                            </div>
+                                            <div class="content-right"><div class="poi-title">هتل کوثر</div>
+                                                <div class="rating">
+                                                    <div class="ui_bubble_rating bubble_45"></div>
+                                                    <br>3 مشاهده
+                                                </div>
+                                                <div class="geo">اصفهان</div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        {{--</div>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
             </div>
 
             <div class="hidden" id="lp_myTravel">
@@ -300,8 +325,13 @@
 
     <div class="modal fade" id="rightPopUp">
         <div class="mainPopUp rightPopUp">
+            <div id="lp_recentlyViews">
+                <button type="button" class="btn btn-warning lp_btns">صفحه پروفایل</button>
+                <button type="button" class="btn btn-primary lp_btns">صفحه من</button>
+                <button type="button" class="btn btn-danger lp_btns">خروج</button>
+                <a style="font-size: 1.25em">ویرایش اطلاعات</a>
+            </div>
         </div>
     </div>
 
-    rightPopUp
 </div>
