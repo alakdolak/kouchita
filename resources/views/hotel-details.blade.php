@@ -1880,11 +1880,8 @@ if ($total == 0)
                 </script>
 
                 <div class="clear-both"></div>
-
                 @include('hotel-details.questionSection')
-
             </div>
-
             @include('hotel-details.similarLocation')
             </div>
         </div>
@@ -1961,15 +1958,6 @@ if ($total == 0)
 
         function editPhotosNewPost() {
             $('#editPane').removeClass('hidden')
-        }
-
-        function showAllAnswers(element) {
-            $(element).parent().nextAll().not('div.last').toggle()
-        }
-
-        function replyToAnswers(element) {
-            $(element).parent().siblings("div.last").toggle();
-            $(element).parent().siblings('div.last').children().toggleClass('mg-tp-0')
         }
 
         function showAnswersActionBox(element) {
@@ -2134,7 +2122,6 @@ if ($total == 0)
         var hotelDetailsInAskQuestionMode;
         var hotelDetailsInAnsMode;
         var hotelDetailsInSaveToTripMode;
-        var getQuestions = '{{route('getQuestions')}}';
         var placeId = '{{$place->id}}';
         var kindPlaceId = '{{$kindPlaceId}}';
         var getCommentsCount = '{{route('getCommentsCount')}}';

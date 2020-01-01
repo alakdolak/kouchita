@@ -201,7 +201,6 @@ class ReviewsController extends Controller
             $log->time = getToday()['time'];
             $log->activityId = $activity->id;
             $log->text = $request->text;
-            $log->confirm = 1;
             $log->save();
 
             $reviewPic = ReviewPic::where('code', $request->code)->get();
@@ -452,7 +451,9 @@ class ReviewsController extends Controller
             else{
                 foreach ($logs as $key => $item){
 
-                    $ansToReview = getAnsToComments($item->id);
+                    $anss = getAnsToComments($item->id);
+                    $ansToReview = $anss[0];
+                    $item->ansNum = $anss[1];
 
                     if(count($ansToReview) > 0)
                         $item->comment = $ansToReview;
@@ -557,7 +558,6 @@ class ReviewsController extends Controller
                         }
                     }
 
-
                     $time = $item->date;
                     $time .= ' ' . substr($item->time, 0, 2) . ':' . substr($item->time, 2, 2);
 
@@ -637,7 +637,6 @@ class ReviewsController extends Controller
                         $newLog->activityId = $a->id;
                         $newLog->text = $request->text;
                         $newLog->relatedTo = $mainLog->id;
-                        $newLog->confirm = 1;
                         $newLog->save();
 
                         if(isset($request->ansAns) && $request->ansAns == 1){

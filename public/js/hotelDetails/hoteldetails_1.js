@@ -1190,9 +1190,9 @@ function showReviews(reviews){
                 '                                                <div class="float-right display-inline-black">\n' +
                 '                                                    <span class="likeStatisticIcon commentsStatisticSpan color-red">' + reviews[i]["comment"][j]["like"] + '</span>\n' +
                 '                                                    <span class="dislikeStatisticIcon commentsStatisticSpan dark-red">' + reviews[i]["comment"][j]["dislike"] + '</span>\n' +
-                '                                                    <span class="numberOfCommentsIcon commentsStatisticSpan color-blue">' + reviews[i]["comment"][j]["comment"].length + '</span>\n' +
+                '                                                    <span class="numberOfCommentsIcon commentsStatisticSpan color-blue">' + reviews[i]["comment"][j]["ansNum"] + '</span>\n' +
                 '                                                </div>\n';
-                if(reviews[i]["comment"][j]["comment"].length > 0)
+                if(reviews[i]["comment"][j]["ansNum"] > 0)
                     text += '<div class="dark-blue float-left display-inline-black cursor-pointer" onclick="showCommentsAnswers2(' + reviews[i]["comment"][j]["id"] + ', this)">دیدن پاسخ‌ها</div>\n';
 
                 text += '                                    </div>\n' +
@@ -1316,10 +1316,10 @@ function createAnsToComment(comment, repTo, topId){
             '                                                <div class="float-right display-inline-black">\n' +
             '                                                    <span class="likeStatisticIcon commentsStatisticSpan color-red">' + comment[k]["like"] + '</span>\n' +
             '                                                    <span class="dislikeStatisticIcon commentsStatisticSpan dark-red">' + comment[k]["dislike"] + '</span>\n' +
-            '                                                    <span class="numberOfCommentsIcon commentsStatisticSpan color-blue">' + comment[k]["comment"].length + '</span>\n' +
+            '                                                    <span class="numberOfCommentsIcon commentsStatisticSpan color-blue">' + comment[k]["ansNum"] + '</span>\n' +
             '                                                </div>\n';
 
-            if(comment[k]["comment"].length > 0)
+            if(comment[k]["ansNum"] > 0)
                 text += '<div class="dark-blue float-left display-inline-black cursor-pointer" onclick="showCommentsAnswers2(' + comment[k]["id"] + ', this)">دیدن پاسخ‌ها</div>\n';
 
             text +='                                            </div>\n' +
@@ -1348,7 +1348,7 @@ function createAnsToComment(comment, repTo, topId){
             '                                        </div>\n' +
             '                                    </div>\n';
 
-            if(comment[k]["comment"].length > 0) {
+            if(comment[k]["ansNum"] > 0) {
                 text += createAnsToComment(comment[k]["comment"], comment[k]["username"], comment[k]["id"]);
             }
 
