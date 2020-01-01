@@ -1,6 +1,6 @@
 
 <div id="QAndAMainDivId" class="tabContentMainWrap">
-    <div class="col-md-12 col-xs-12 QAndAMainDiv">
+    <div class="col-md-12 col-xs-12 QAndAMainDiv" style="margin-bottom: 10px;">
         <div class="mainDivQuestions">
             <div class="QAndAMainDivHeader">
                 <h3>سؤال و جواب</h3>
@@ -14,14 +14,13 @@
                     </b>
                     <div class="display-inline-block float-right direction-rtl mg-lt-5">
                         در حال حاضر
-                        <span class="color-blue">1340</span>
+                        <span class="color-blue" id="questionCount"></span>
                         سؤال
-                        <span class="color-blue">560</span>
+                        <span class="color-blue" id="answerCount"></span>
                         پاسخ موجود می‌باشد.
                     </div>
-                    <a class="seeAllQMainLink" href="#taplc_global_nav_links_0">
-                        <div class="seeAllQLink display-inline-block float-right direction-rtl dark-blue"
-                             onclick="allQuestionsGrid()">مشاهده همه سؤالات و پاسخ‌ها
+                    <a class="seeAllQMainLink" href="{{url('hotel-details-questions/' . $place->id . '/' . $place->name)}}">
+                        <div class="seeAllQLink display-inline-block float-right direction-rtl dark-blue">مشاهده همه سؤالات و پاسخ‌ها
                         </div>
                     </a>
                     <div class="clear-both"></div>
@@ -43,20 +42,18 @@
         </div>
     </div>
 
-    <div id="questionPaginationDiv" class="col-xs-12 questionsMainDivFooter position-relative">
+    <div id="questionPaginationDiv" class="col-xs-12 questionsMainDivFooter position-relative" style="margin-top: 0px;">
         <div class="col-xs-5 font-size-13 line-height-2">
             نمایش
-            <span id="questionPerView3" class="mg-lt-5 cursor-pointer color-blue" onclick="changeQuestionPerPage(3)">3</span>-
-            <span id="questionPerView5" class="mg-lt-5 cursor-pointer" onclick="changeQuestionPerPage(5)">5</span>-
-            <span id="questionPerView10" class="cursor-pointer" onclick="changeQuestionPerPage(10)">10</span>
+            <span id="showQuestionPerPage"></span>
             پست در هر صفحه
         </div>
-        <a class="col-xs-3 showQuestionsNumsFilterLink" href="#taplc_global_nav_links_0">
-            <div class="showQuestionsNumsFilter" onclick="allQuestionsGrid()">نمایش تمامی سؤال‌ها</div>
+        <a class="col-xs-3 showQuestionsNumsFilterLink" href="{{url('hotel-details-questions/' . $place->id . '/' . $place->name)}}">
+            <div class="showQuestionsNumsFilter">نمایش تمامی سؤال‌ها</div>
         </a>
         <div class="col-xs-4 font-size-13 line-height-2 text-align-right float-right">
-            صفحه
-            <div id="questionPagination" style="margin-right: 10px;"></div>
+            <span style="float: right; margin-left: 10px">صفحه</span>
+            <span id="questionPagination" style="margin-right: 10px;"></span>
         </div>
     </div>
 
@@ -65,10 +62,11 @@
 <script>
     var questions;
     var questionCount;
-    var questionPerPage = 3;
+    var questionPerPage = 0;
+    var questionPerPageNum = [3, 5, 10];
     var questionPage = 1;
-    var placeId = '{{$place->id}}';
-    var kindPlaceId = '{{$kindPlaceId}}';
+    var answerCount;
+    var isQuestionCount = true;
 
     function sendQuestion(){
 
@@ -105,16 +103,30 @@
             data:{
                 'placeId': placeId,
                 'kindPlaceId' : kindPlaceId,
-                'count' : questionPerPage,
-                'page' : questionPage
+                'count' : questionPerPageNum[questionPerPage],
+                'page' : questionPage,
+                'isQuestionCount' : isQuestionCount
             },
             success: function(response){
                 response = JSON.parse(response);
                 questions = response[0];
-                questionCount = response[1];
 
-                createQuestionPagination(questionCount);
-                createQuestionSection(questions);
+                if(isQuestionCount) {
+                    questionCount = response[1];
+                    answerCount = response[2];
+                    document.getElementById('questionCount').innerText = questionCount;
+                    document.getElementById('answerCount').innerText = answerCount;
+                    isQuestionCount = false;
+
+                }
+
+                if(questionCount == 0)
+                    document.getElementById('questionPaginationDiv').style.display = 'none';
+                else{
+                    createQuestionPagination(questionCount);
+                    createQuestionSection(questions);
+                }
+
             }
         })
     }
@@ -223,7 +235,7 @@
 
         $.ajax({
             type: 'post',
-            url: likeReviewUrl,
+            url: likeLog,
             data:{
                 'logId' : _logId,
                 'like' : _like
@@ -316,19 +328,17 @@
         questionPerPage = _count;
         getQuestion();
     }
+
     function changeQuestionPage(_page){
         questionPage = _page;
         getQuestion();
     }
+
     function createQuestionPagination(questionCount){
         var text = '';
-        var page = Math.round(questionCount/questionPerPage);
+        var page = Math.round(questionCount/questionPerPageNum[questionPerPage]);
 
-        // if(page > 0)
-        //     document.getElementById('questionPaginationDiv').style.display = 'block';
-        // else
-        //     document.getElementById('questionPaginationDiv').style.display = 'none';
-
+        createQuestionPerPage();
 
         if(page >= 5){
             if(questionPage == 1){
@@ -392,6 +402,23 @@
         }
 
         document.getElementById('questionPagination').innerHTML = text;
+    }
+
+    function createQuestionPerPage(){
+
+        var text = '';
+
+        for(var i = 0; i < questionPerPageNum.length; i++){
+            if(i == questionPerPage)
+                text += '<span id="questionPerView' + i + '" class="mg-lt-5 cursor-pointer color-blue" onclick="changeQuestionPerPage(' + i + ')">' + questionPerPageNum[i] + '</span>';
+            else
+                text += '<span id="questionPerView' + i + '" class="mg-lt-5 cursor-pointer" onclick="changeQuestionPerPage(' + i + ')">' + questionPerPageNum[i] + '</span>';
+
+            if(i != (questionPerPageNum.length - 1))
+                text += '-';
+        }
+
+        document.getElementById('showQuestionPerPage').innerHTML = text;
     }
 
 </script>

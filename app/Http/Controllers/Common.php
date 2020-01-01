@@ -2,14 +2,22 @@
 
 use App\models\ActivationCode;
 use App\models\Activity;
+use App\models\Amaken;
+use App\models\Cities;
 use App\models\DefaultPic;
+use App\models\Hotel;
 use App\models\Level;
 use App\models\LogModel;
+use App\models\MahaliFood;
+use App\models\Majara;
 use App\models\Medal;
 use App\models\Place;
 use App\models\PlacePic;
 use App\models\QuestionAns;
+use App\models\Restaurant;
 use App\models\ReviewPic;
+use App\models\SogatSanaie;
+use App\models\State;
 use App\models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -450,8 +458,45 @@ function getNearestMedals($uId) {
 
 function getRate($placeId, $kindPlaceId) {
 
+    switch ($kindPlaceId) {
+        case 1:
+            $place = Amaken::select(['id', 'name', 'cityId', 'file'])->find($placeId);
+            break;
+        case 3:
+            $place = Restaurant::select(['id', 'name', 'cityId', 'file'])->find($placeId);
+            break;
+        case 4:
+            $place = Hotel::select(['id', 'name', 'cityId', 'file'])->find($placeId);
+            break;
+        case 6:
+            $place = Majara::select(['id', 'name', 'cityId', 'file'])->find($placeId);
+            break;
+        case 10:
+            $place = SogatSanaie::select(['id', 'name', 'cityId', 'file'])->find($placeId);
+            break;
+        case 11:
+            $place = MahaliFood::select(['id', 'name', 'cityId', 'file'])->find($placeId);
+            break;
+    }
+    $city = Cities::find($place->cityId);
+    $state = State::find($city->stateId);
+
+    $section = \DB::select('SELECT questionId FROM questionSections WHERE (kindPlaceId = 0 OR kindPlaceId = ' . $kindPlaceId . ') AND (stateId = 0 OR stateId = ' . $state->id . ') AND (cityId = 0 OR cityId = ' . $city->id . ') GROUP BY questionId');
+
+    $questionId = array();
+    foreach ($section as $item)
+        array_push($questionId, $item->questionId);
+
+    $questions = \DB::select('SELECT * FROM questions WHERE id IN (' . implode(",", $questionId) . ') AND ansType = "rate"');
+    $questionId = array();
+    foreach ($questions as $item)
+        array_push($questionId, $item->id);
+
     $avgRate = 0;
-    $rates = DB::select('select avg(rate) as avgRate from log, userOpinions WHERE log.id = logId and placeId = ' . $placeId . " and kindPlaceId = " . $kindPlaceId . " and activityId = " . Activity::whereName('امتیاز')->first()->id . " group by(visitorId)");
+
+//    $rates = DB::select('select avg(rate) as avgRate from log, questionUserAns WHERE log.id = logId and placeId = ' . $placeId . " and kindPlaceId = " . $kindPlaceId . " and activityId = " . Activity::whereName('امتیاز')->first()->id . " group by(visitorId)");
+    $rates = DB::select('select avg(ans) as avgRate from log, questionUserAns As qua WHERE log.id = qua.logId and log.placeId = ' . $placeId . " and log.kindPlaceId = " . $kindPlaceId . " and qua.questionId IN (" . implode(',', $questionId) . ") group by(log.visitorId)");
+
     $separatedRates = [0, 0, 0, 0, 0];
     foreach ($rates as $rate) {
 
@@ -936,8 +981,8 @@ function getAnsToComments($logId){
 
         }
 
-        $likeLogIds = DB::select('SELECT COUNT(RFB.like) AS likeCount, RFB.logId FROM reviewFeedBack AS RFB WHERE RFB.logId IN (' . implode(",", $logIds) . ') AND RFB.like = 1 GROUP BY RFB.logId');
-        $dislikeLogIds = DB::select('SELECT COUNT(RFB.like) AS dislikeCount, RFB.logId FROM reviewFeedBack AS RFB WHERE RFB.logId IN (' . implode(",", $logIds) . ') AND RFB.like = -1 GROUP BY RFB.logId');
+        $likeLogIds = DB::select('SELECT COUNT(RFB.like) AS likeCount, RFB.logId FROM logFeedBack AS RFB WHERE RFB.logId IN (' . implode(",", $logIds) . ') AND RFB.like = 1 GROUP BY RFB.logId');
+        $dislikeLogIds = DB::select('SELECT COUNT(RFB.like) AS dislikeCount, RFB.logId FROM logFeedBack AS RFB WHERE RFB.logId IN (' . implode(",", $logIds) . ') AND RFB.like = -1 GROUP BY RFB.logId');
         $ansToReviewUser = DB::select('SELECT * FROM users WHERE id IN (' . implode(",", $ansToReviewUserId) . ')');
 
         for ($i = 0; $i < count($ansToReview); $i++) {
@@ -1046,13 +1091,34 @@ function commonInPlaceDetails($kindPlaceId, $placeId, $city, $state, $place){
     $a3 = Activity::where('name', 'پاسخ')->first();
 
     $condition = ['activityId' => $a2->id, 'placeId' => $placeId, 'kindPlaceId' => $kindPlaceId, 'confirm' => 1, 'relatedTo' => 0];
-    $reviewCount = LogModel::where($condition)->count();
+    $reviews = LogModel::where($condition)->whereRaw('CHARACTER_LENGTH(text) > 2')->get();
+    $reviewCount = count($reviews);
 
-    $ansReviewCount = DB::select('SELECT COUNT(*) AS logCount FROM log log1, log log2 WHERE log1.placeId = ' . $placeId . ' AND log1.kindPlaceId = '. $kindPlaceId . ' AND log1.confirm = 1 AND log1.activityId = ' . $a3->id . ' AND log1.relatedTo = log2.id AND log2.activityId = ' . $a2->id);
-    $ansReviewCount = $ansReviewCount[0]->logCount;
+    $ansReviewCount = 0;
+    foreach ($reviews as $item){
+        $ansReviewCount += findAnswerCount($item->id);
+    }
 
-    $userReviweCount = DB::select('SELECT visitorId FROM log WHERE placeId = ' . $placeId . ' AND kindPlaceId = '. $kindPlaceId . ' AND confirm = 1 AND activityId = ' . $a2->id . ' GROUP BY visitorId');
+    $userReviweCount = DB::select('SELECT visitorId FROM log WHERE placeId = ' . $placeId . ' AND kindPlaceId = '. $kindPlaceId . ' AND confirm = 1 AND activityId = ' . $a2->id . ' AND CHARACTER_LENGTH(text) > 2 GROUP BY visitorId');
     $userReviweCount = count($userReviweCount);
 
     return [$reviewCount, $ansReviewCount, $userReviweCount, $userPhotos, $multiQuestion, $textQuestion, $rateQuestion];
 }
+
+function findAnswerCount($logId){
+    $a = Activity::where('name', 'پاسخ')->first();
+    $ansToReview = DB::select('SELECT log.visitorId, log.text, log.subject, log.id FROM log WHERE log.confirm = 1 AND log.relatedTo = ' . $logId . ' AND log.activityId = ' . $a->id);
+    $countAns = 0;
+    if(count($ansToReview) > 0) {
+        $countAns += count($ansToReview);
+        for ($i = 0; $i < count($ansToReview); $i++) {
+            if($ansToReview[$i]->subject == 'ans') {
+                $num = findAnswerCount($ansToReview[$i]->id);
+                $countAns += $num;
+            }
+        }
+    }
+
+    return $countAns;
+}
+

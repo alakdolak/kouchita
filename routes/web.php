@@ -3,15 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('databaseforall', function (){
-    Schema::create('reviewFeedBack', function (Blueprint $table) {
-        $table->increments('id');
-        $table->unsignedInteger('logId');
-        $table->unsignedInteger('userId');
-        $table->boolean('like');// 1 like , -1 dislike
-        $table->timestamps();
-
-        $table->foreign('logId')->references('id')->on('log')->onUpdate('cascade')->onDelete('cascade');
-    });
+    \Illuminate\Support\Facades\Schema::drop('reviewFeedBack');
 });
 
 Route::get('fillHotelPic', function(){
@@ -491,7 +483,6 @@ Route::group(array('middleware' => ['throttle:30', 'nothing']), function () {
 
     Route::get('hotel-details-allReviews/{placeId}/{placeName}/{mode?}', 'HotelController@showHotelDetailAllReview');
     Route::get('hotel-details-questions/{placeId}/{placeName}/{mode?}', 'HotelController@showHotelDetailAllQuestions');
-
     Route::get('hotel-details/{placeId}/{placeName}/{mode?}', array('as' => 'hotelDetails', 'uses' => 'HotelController@showHotelDetail'));
 
 
@@ -857,6 +848,8 @@ Route::group(array('middleware' => 'nothing'), function () {
 
     Route::post('findKoochitaAccount', 'AjaxController@findKoochitaAccount')->name('findKoochitaAccount');
 
+    Route::post('log/like', 'AjaxController@likeLog')->name('likeLog');
+
     Route::post('findUser', 'AjaxController@findUser')->name('findUser');
 
     Route::post('reviewUploadPic', 'ReviewsController@reviewUploadPic')->name('reviewUploadPic');
@@ -868,8 +861,6 @@ Route::group(array('middleware' => 'nothing'), function () {
     Route::post('deleteReviewPic', 'ReviewsController@deleteReviewPic')->name('deleteReviewPic');
 
     Route::post('review/store', 'ReviewsController@storeReview')->name('storeReview');
-
-    Route::post('review/like', 'ReviewsController@likeReview')->name('likeReview');
 
     Route::post('review/ans', 'ReviewsController@ansReview')->name('ansReview');
 

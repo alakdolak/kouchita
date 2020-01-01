@@ -421,7 +421,7 @@
      <div class="ui_close_x" onclick="$('#photoEditor').addClass('hidden'); $('.dark').addClass('hidden')"></div>
 </span>
 
-<script src="{{URL::asset('js/editorCommon.js')}}"></script>
+{{--<script src="{{URL::asset('js/editorCommon.js')}}"></script>--}}
 <script src="{{URL::asset('js/cropper.js')}}"></script>
 <script src="{{URL::asset('js/mainCrop.js')}}"></script>
 

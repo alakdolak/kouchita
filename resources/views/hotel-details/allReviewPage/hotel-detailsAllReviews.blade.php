@@ -2290,7 +2290,7 @@ if ($total == 0)
         var userPhotos = {!! $userPhotosJson !!};
 
         var ansToReviewUrl = '{{route('ansReview')}}';
-        var likeReviewUrl = '{{route('likeReview')}}';
+        var likeReviewUrl = '{{route('likeLog')}}';
         var getReviewsUrl = '{{route('getReviews')}}';
         var reviewUploadPic = '{{route('reviewUploadPic')}}';
         var doEditReviewPic = '{{route('doEditReviewPic')}}';
