@@ -220,6 +220,7 @@
                         </div>
                         <span>نمایش پاسخ‌ها</span>
                         <span>نمایش سؤال‌ها</span>
+                        <div class="clear-both display-none"></div>
                         <span>نمایش همه</span>
                     </div>
 

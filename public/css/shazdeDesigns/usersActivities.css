@@ -164,11 +164,14 @@ body {
     margin-bottom: 5px;
 }
 
-.userProfilePostsSearchContainer > div:nth-child(1) {
+.userPhotosAndVideosPage .userProfilePostsSearchContainer > div:nth-child(1) {
     float: right;
 }
 
-.userProfilePostsSearchContainer > div:nth-child(2) > span {
+.userPostsPage .userProfilePostsSearchContainer > span,
+.userPhotosAndVideosPage .userProfilePostsSearchContainer > div:nth-child(2) > span,
+.userArticlesPage .userProfilePostsSearchContainer > span,
+.userQuestionsPage .userProfilePostsSearchContainer > span {
     margin: 0 15px;
     font-size: 14px;
     padding: 5px 0;
@@ -612,6 +615,9 @@ body {
     left: 15px;
     height: 32px;
     width: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .answersActionsIcon {
@@ -622,23 +628,6 @@ body {
     content: '\E091';
     font-family: shazdemosafer-tour !important;
     font-size: 35px;
-    position: absolute;
-    top: -2px;
-    right: -17px;
-    color: #666;
-}
-
-.answersActionsIcon {
-    position: relative;
-}
-
-.answersActionsIcon::before {
-    content: '\E091';
-    font-family: shazdemosafer-tour !important;
-    font-size: 35px;
-    position: absolute;
-    top: -2px;
-    right: -17px;
     color: #666;
 }
 
@@ -698,8 +687,9 @@ body {
     color: #666666;
     margin-bottom: 10px;
     direction: rtl;
-    display: inline-block;
     float: right;
+    text-align: right;
+    width: 60%;
 }
 
 .answersWriterExperienceDetails > div:last-child {
@@ -1162,9 +1152,24 @@ body {
         font-size: 13px;
     }
 
-    .userProfilePostsSearchContainer > div:nth-child(2) > span {
+    .userPostsPage .userProfilePostsSearchContainer > span,
+    .userPhotosAndVideosPage .userProfilePostsSearchContainer > div:nth-child(2) > span,
+    .userArticlesPage .userProfilePostsSearchContainer > span{
         margin: 0 7px;
         font-size: 13px;
+    }
+
+    .userQuestionsPage .userProfilePostsSearchContainer > span {
+        margin: 0 6px;
+        font-size: 12px;
+    }
+
+    .answerBoxText {
+        width: 78%;
+    }
+
+    .actionToAnswer {
+        margin: 10px 10px 0 0;
     }
 }
 
@@ -1247,14 +1252,14 @@ body {
         direction: rtl;
     }
 
-    .userPhotosAndVideosPage .userProfilePostsSearchContainer > div:nth-child(2) {
-        width: 70%;
-    }
-
     .userPhotosAndVideosPage .userProfilePostsSearchContainer > div:nth-child(2) > span {
         font-size: 11px;
         margin: 0 1.7%;
         word-spacing: -1px;
+    }
+
+    .userPhotosAndVideosPage .userProfilePostsSearchContainer > div:nth-child(2) {
+        width: 70%;
     }
 
     .userPhotosAndVideosPage .userProfilePostsSearchContainer > span:nth-child(2) {
@@ -1273,6 +1278,9 @@ body {
         width: 11.5%;
     }
 
+    .answerBoxText {
+        width: 73%;
+    }
 }
 
 @media (max-width: 768px) {
@@ -1324,6 +1332,10 @@ body {
     .postsRightDivInSpecificMode {
         padding: 0 0 0 2.5px;
     }
+
+    .answerBoxText {
+        width: 78%;
+    }
 }
 
 @media (max-width: 630px) {
@@ -1355,8 +1367,20 @@ body {
         padding-right: 0;
     }
 
-    .userPhotosAndVideosPage .userPhotosAndVideosPage .userProfilePostsSearchContainer > div:nth-child(2) > span {
+    .userPhotosAndVideosPage .userProfilePostsSearchContainer > div:nth-child(2) > span {
         margin: 0 0.8%;
+    }
+
+    .userQuestionsPage .userProfilePostsSearchContainer > span {
+        font-size: 11px;
+    }
+
+    .newAnswerPlaceMainDiv .inputBox {
+        width: 88%;
+    }
+
+    .answerBoxText {
+        width: 72%;
     }
 }
 
@@ -1394,7 +1418,14 @@ body {
         width: auto;
     }
 
-    .userPhotosAndVideosPage .userProfilePostsSearchContainer {
+    .userPostsPage .userProfilePostsSearchContainer > span {
+        font-size: 12px;
+    }
+
+    .userPostsPage .userProfilePostsSearchContainer,
+    .userPhotosAndVideosPage .userProfilePostsSearchContainer,
+    .userQuestionsPage .userProfilePostsSearchContainer,
+    .userArticlesPage .userProfilePostsSearchContainer {
         padding: 5px 5px 5px 0;
     }
 
@@ -1414,6 +1445,45 @@ body {
     .userPhotosAndVideosPage .userProfilePostsSearchContainer > div:nth-child(2) > span {
         margin: 0 10px;
         width: auto !important;
+    }
+
+    .userQuestionsPage .userProfilePostsSearchContainer > span {
+        width: 23%;
+        text-align: left;
+    }
+
+    .userQuestionsPage .userProfilePostsSearchContainer div.clear-both {
+        display: block;
+    }
+
+    .userProfileQAndA .userProfilePostsSearchContainer .inputBox {
+        width: 65%;
+    }
+
+    .newAnswerPlaceMainDiv .inputBox {
+        width: 82%;
+    }
+
+    .questionSubMenuBar .replyBtn {
+        margin-left: 0;
+    }
+
+    .answerBoxText {
+        width: 81%;
+    }
+
+    .actionToAnswer {
+        display: flex;
+        float: left;
+        margin: 0 0 0 7%;
+    }
+
+    .actionToAnswer > div {
+        margin-right: 10px;
+    }
+
+    .seeNextAnswers, .seePrevAnswers {
+        left: 7%;
     }
 }
 

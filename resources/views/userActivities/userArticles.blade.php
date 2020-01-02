@@ -230,9 +230,9 @@
                                 <a>بلندترین معبد جهان در کشور پهناور و پرجمعیت هندوستان</a>
                             </div>
                             <div class="articleSummarizedContentMainDiv">
-                <span>
-                    بلندترین معبد جهان، معبد chandrodaya در Vrindavan فقط یک معبد نیست، بلکه این مکان نقش مهمی در آینده کشور "هند" ایفا
-                </span>
+                                <span>
+                                    بلندترین معبد جهان، معبد chandrodaya در Vrindavan فقط یک معبد نیست، بلکه این مکان نقش مهمی در آینده کشور "هند" ایفا
+                                </span>
                                 <span>...</span>
                             </div>
                             <div class="articleSpecificationsMainDiv">
