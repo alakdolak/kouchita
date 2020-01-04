@@ -554,7 +554,6 @@ function startReviewCropper(ratio, _number) {
     image = document.getElementById('imgEditReviewPics');
 
     options = {
-        aspectRatio: ratio,
         preview: '.img-preview',
         ready: function (e) {
             console.log(e.type);
@@ -798,19 +797,3 @@ function cropReviewImg(){
         })
     });
 }
-
-
-var swiper = new Swiper('#mainSlider', {
-    spaceBetween: 30,
-    centeredSlides: true,
-    loop: true,
-    autoplay: {
-        delay: 5000,
-        disableOnInteraction: false,
-    },
-    navigation: {
-        prevEl: '.swiper-button-next',
-        nextEl: '.swiper-button-prev',
-    },
-});
-

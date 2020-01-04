@@ -368,7 +368,7 @@
                                     <?php $place = $places[$k]; ?>
 
                                     @if($placeMode == "hotel")
-                                        @include('hotel-details-table')
+                                        @include('hotel-details.tables.hotel-details-table')
                                     @elseif($placeMode == "amaken")
                                         @include('amaken-details-table')
                                     @elseif($placeMode == "amaken")

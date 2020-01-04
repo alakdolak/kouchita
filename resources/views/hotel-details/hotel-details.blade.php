@@ -133,6 +133,7 @@ if ($total == 0)
         var likePhotographerPicRoute = '{{route('likePhotographer')}}';
         var deleteReviewPicUrl = '{{route('deleteReviewPic')}}';
     </script>
+
     <script src="{{URL::asset('js/hotelDetails/hoteldetails_1.js')}}"></script>
     <script src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
     <script async src="{{URL::asset('js/album.js')}}"></script>
@@ -517,7 +518,7 @@ if ($total == 0)
                     </div>
                 </div>
 
-                @include('layouts.modalPhotos')
+                @include('hotel-details.modalPhotos')
 
                 <div id="bestPrice" class="meta position-relative"
                      style="@if(session('goDate') != null && session('backDate') != null) display: none @endif ">
@@ -796,6 +797,7 @@ if ($total == 0)
                 {{--                        </div>--}}
                 {{--                    </div>--}}
                 {{--                @endif--}}
+
                 <div class="prw_rup prw_common_location_photos photos position-relative">
                     <div id="targetHelp_10" class="targets">
                         <div class="inner">
@@ -850,7 +852,22 @@ if ($total == 0)
                                     </div>
                                 </div>
                             </div>
+                            {{--<script>--}}
+                                {{--var mainSlideSwiper = new Swiper('#mainSlider', {--}}
+                                    {{--spaceBetween: 30,--}}
+                                    {{--centeredSlides: true,--}}
+                                    {{--loop: true,--}}
+                                    {{--autoplay: {--}}
+                                        {{--delay: 2500,--}}
+                                        {{--disableOnInteraction: false,--}}
+                                    {{--},--}}
+                                    {{--navigation: {--}}
+                                        {{--nextEl: '.swiper-button-next',--}}
+                                        {{--prevEl: '.swiper-button-prev',--}}
+                                    {{--},--}}
+                                {{--});--}}
 
+                            {{--</script>--}}
                             <div class="secondaryWrap">
                                 <div class="tileWrap">
                                     <div class="prw_rup prw_hotels_flexible_album_thumb tile">
@@ -978,6 +995,21 @@ if ($total == 0)
                         </div>
                     </a>
                 </div>
+                <script>
+                    var mainSlideSwiper = new Swiper('#mainSlider', {
+                        spaceBetween: 30,
+                        centeredSlides: true,
+                        loop: true,
+                        autoplay: {
+                            delay: 5000,
+                            disableOnInteraction: false,
+                        },
+                        navigation: {
+                            prevEl: '.swiper-button-next',
+                            nextEl: '.swiper-button-prev',
+                        },
+                    });
+                </script>
             </div>
         </div>
     </div>
@@ -1034,8 +1066,7 @@ if ($total == 0)
                                                     <h3 class="block_title">معرفی کلی </h3>
                                                 </div>
                                                 <div>
-                                                    <div class="overviewContent"
-                                                         id="introductionText">{{$place->description}}</div>
+                                                    <div class="overviewContent" id="introductionText">{{$place->description}}</div>
                                                 </div>
                                             </div>
                                             <div id="detailsAndFeaturesMobile"
@@ -1044,11 +1075,11 @@ if ($total == 0)
                                                     <?php $k = -1; ?>
 
                                                     @if($placeMode == "hotel")
-                                                        @include('hotel-details-table')
+                                                        @include('hotel-details.tables.hotel-details-table')
                                                     @elseif($placeMode == "amaken")
-                                                        @include('amaken-details-table')
+                                                        @include('hotel-details.tables.amaken-details-table')
                                                     @elseif($placeMode == "restaurant")
-                                                        @include('restaurant-details-table')
+                                                        @include('hotel-details.tables.restaurant-details-table')
                                                     @endif
                                                 </div>
                                             </div>

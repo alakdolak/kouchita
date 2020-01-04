@@ -6,6 +6,7 @@ use App\models\Activity;
 use App\models\Amaken;
 use App\models\Cities;
 use App\models\ConfigModel;
+use App\models\DefaultPic;
 use App\models\LogModel;
 use App\models\Place;
 use App\models\PlacePic;
@@ -24,6 +25,8 @@ class AmakenController extends Controller {
 
     public function showAmakenDetail($placeId, $placeName = "", $mode = "", $err = "") {
 
+        deleteReviewPic();
+
         if (Amaken::whereId($placeId) == null)
             return Redirect::route('main');
 
@@ -31,10 +34,27 @@ class AmakenController extends Controller {
         $kindPlaceId = Place::whereName('اماکن')->first()->id;
         $uId = -1;
 
-        if (Auth::check())
-            $uId = Auth::user()->id;
-        else
+        if (Auth::check()) {
+            $u = Auth::user();
+            $uId = $u->id;
+            $userCode = $uId . '_' . rand(10000,99999);
+            if($u->uploadPhoto == 0){
+                $deffPic = DefaultPic::find($u->picture);
+
+                if($deffPic != null)
+                    $uPic = URL::asset('defaultPic/' . $deffPic->name);
+                else
+                    $uPic = URL::asset('_images/nopic/blank.jpg');
+            }
+            else{
+                $uPic = URL::asset('userProfile/' . $u->picture);
+            }
+        }
+        else{
             $hasLogin = false;
+            $userCode = null;
+            $uPic = URL::asset('_images/nopic/blank.jpg');
+        }
 
         if ($hasLogin) {
 
@@ -57,6 +77,7 @@ class AmakenController extends Controller {
                 $log->save();
             }
         }
+
         $bookMark = false;
         $condition = ['visitorId' => $uId, 'activityId' => Activity::whereName("نشانه گذاری")->first()->id,
             'placeId' => $placeId, 'kindPlaceId' => $kindPlaceId];
@@ -75,45 +96,20 @@ class AmakenController extends Controller {
         $state = State::whereId($city->stateId);
 
         $photos = [];
-        $sitePhotos = 1;
 
-        if (!empty($place->pic_1)) {
-            if (file_exists((__DIR__ . '/../../../../assets/_images/amaken/' . $place->file . '/s-1.jpg'))) {
-                $photos[count($photos)] = URL::asset('_images/amaken/' . $place->file . '/s-1.jpg');
-                $thumbnail = URL::asset('_images/amaken/' . $place->file . '/f-1.jpg');
+        if (!empty($place->picNumber)) {
+            if (file_exists((__DIR__ . '/../../../../assets/_images/amaken/' . $place->file . '/s-' . $place->picNumber))) {
+                $photos[count($photos)] = URL::asset('_images') . '/amaken/' . $place->file . '/s-' . $place->picNumber;
+                $thumbnail = URL::asset('_images') . '/amaken/' . $place->file . '/f-' . $place->picNumber;
             } else {
                 $photos[count($photos)] = URL::asset('_images/nopic/blank.jpg');
                 $thumbnail = URL::asset('_images/nopic/blank.jpg');
             }
-        } else {
+        }
+        else {
             $photos[count($photos)] = URL::asset('_images/nopic/blank.jpg');
             $thumbnail = URL::asset('_images/nopic/blank.jpg');
         }
-
-        $aksActivityId = Activity::whereName('عکس')->first()->id;
-
-        $userPhotos = 0;
-        $logPhoto = '';
-
-        $tmp = DB::select("select count(*) as countNum from log WHERE confirm = 1 and activityId = " . $aksActivityId . " and placeId = " . $placeId . " and kindPlaceId = " . $kindPlaceId . " and pic <> 0");
-        if ($tmp != null && count($tmp) > 0)
-            $userPhotos = $tmp[0]->countNum;
-
-        if ($userPhotos > 0) {
-            $tmp2 = DB::select("select picItems.id, picItems.name, count(*) as countNum, text from log, picItems WHERE confirm = 1 and activityId = " . $aksActivityId . " and placeId = " . $placeId . " and log.kindPlaceId = " . $kindPlaceId . " and pic <> 0 and picItems.id = log.pic group by(picItems.id)");
-            if ($tmp2 != null && count($tmp2) > 0) {
-                if (file_exists(__DIR__ . '/../../../../assets/userPhoto/amaken/l-' . $tmp2[0]->text))
-                    $logPhoto['pic'] = URL::asset('userPhoto/amaken/l-' . $tmp2[0]->text);
-                else
-                    $logPhoto['pic'] = URL::asset('_images/nopic/blank.jpg');
-
-                $logPhoto['id'] = $tmp2[0]->id;
-            }
-        }
-
-        $srcCities = DB::select("select DISTINCT(src) from log, comment WHERE log.placeId = " . $placeId . ' and ' .
-            'kindPlaceId = ' . $kindPlaceId . ' and activityId = ' . Activity::whereName('نظر')->first()->id .
-            ' and logId = log.id and status = 1');
 
         $allState = State::all();
 
@@ -122,14 +118,31 @@ class AmakenController extends Controller {
         $sitePicsJSON = $pics[1];
         $photographerPics = $pics[2];
         $photographerPicsJSON = $pics[3];
+        $userPhotos = $pics[4];
+        $userPhotosJson = $pics[5];
 
-        return view('hotel-details', array('place' => $place, 'save' => $save, 'city' => $city, 'thumbnail' => $thumbnail,
-            'tags' => Tag::whereKindPlaceId($kindPlaceId)->get(), 'state' => $state, 'avgRate' => $rates[1],
-            'photographerPics' => $photographerPics, 'photographerPicsJSON' => $photographerPicsJSON,
-            'sitePics' => $sitePics, 'sitePicsJSON' => $sitePicsJSON, 'allState' => $allState,
+        $result = commonInPlaceDetails($kindPlaceId, $placeId, $city, $state, $place);
+        $reviewCount = $result[0];
+        $ansReviewCount = $result[1];
+        $userReviewCount = $result[2];
+        $multiQuestion = $result[3];
+        $textQuestion = $result[4];
+        $rateQuestion = $result[5];
+
+        $multiQuestionJSON = json_encode($multiQuestion);
+        $textQuestionJSON = json_encode($textQuestion);
+        $rateQuestionJSON = json_encode($rateQuestion);
+
+        return view('hotel-details.hotel-details', array('place' => $place, 'save' => $save, 'city' => $city, 'thumbnail' => $thumbnail,
+            'state' => $state, 'avgRate' => $rates[1], 'photos' => $photos,
+            'userPhotos' => $userPhotos, 'userPhotosJson' => $userPhotosJson,
+            'reviewCount' => $reviewCount, 'ansReviewCount' => $ansReviewCount, 'userReviewCount' => $userReviewCount,
+            'photographerPics' => $photographerPics, 'photographerPicsJSON' => $photographerPicsJSON, 'userPic' => $uPic,
+            'rateQuestion' => $rateQuestion, 'textQuestion' => $textQuestion, 'multiQuestion' => $multiQuestion,
+            'rateQuestionJSON' => $rateQuestionJSON, 'textQuestionJSON' => $textQuestionJSON, 'multiQuestionJSON' => $multiQuestionJSON,
+            'sitePics' => $sitePics, 'sitePicsJSON' => $sitePicsJSON, 'allState' => $allState, 'userCode' => $userCode,
             'kindPlaceId' => $kindPlaceId, 'mode' => $mode, 'rates' => $rates[0], 'config' => ConfigModel::first(),
-            'photos' => $photos, 'userPhotos' => $userPhotos, 'logPhoto' => $logPhoto,
-            'hasLogin' => $hasLogin, 'bookMark' => $bookMark, 'err' => $err, 'srcCities' => $srcCities,
+            'hasLogin' => $hasLogin, 'bookMark' => $bookMark, 'err' => $err,
             'placeStyles' => PlaceStyle::whereKindPlaceId($kindPlaceId)->get(), 'placeMode' => 'amaken',
             'sections' => SectionPage::wherePage(getValueInfo('hotel-detail'))->get()));
     }

@@ -179,32 +179,19 @@
                 <span class="header_rating">
                    <div class="rs rating" rel="v:rating">
                        <div class="prw_rup prw_common_bubble_rating overallBubbleRating float-left">
-                            @if($avgRate == 5)
-                               <span class="ui_bubble_rating bubble_50 font-size-16"
-                                     property="ratingValue" content="5" alt='5 of 5 bubbles'></span>
-                           @elseif($avgRate == 4)
-                               <span class="ui_bubble_rating bubble_40 font-size-16"
-                                     property="ratingValue" content="4" alt='4 of 5 bubbles'></span>
-                           @elseif($avgRate == 3)
-                               <span class="ui_bubble_rating bubble_30 font-size-16"
-                                     property="ratingValue" content="3" alt='3 of 5 bubbles'></span>
-                           @elseif($avgRate == 2)
-                               <span class="ui_bubble_rating bubble_20 font-size-16"
-                                     property="ratingValue" content="2" alt='2 of 5 bubbles'></span>
-                           @elseif($avgRate == 1)
-                               <span class="ui_bubble_rating bubble_10 font-size-16"
-                                     property="ratingValue" content="1" alt='1 of 5 bubbles'></span>
-                           @endif
+                               <span class="ui_bubble_rating bubble_{{$avgRate}}0 font-size-16"
+                                     property="ratingValue" content="{{$avgRate}}" alt='{{$avgRate}} of {{$avgRate}} bubbles'></span>
                        </div>
                        <a class="more taLnk" id="moreTaLnkReviewHeader" href="#REVIEWS">
-                           <span property="v:count" id="commentCount"></span> نقد
+                           <span property="v:count" id="commentCount"></span> امتیاز
                        </a>
                    </div>
                 </span>
                 <span class="header_popularity popIndexValidation" id="scoreSpanHeader">
                     <a>
+                        {{$reviewCount}}
 {{--                                {{$total}}--}}
-                        امتیاز
+                        نقد
                     </a>
                 </span>
                 <div class="header heading" id="helpBtnMainDiv">

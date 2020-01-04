@@ -811,6 +811,28 @@ function getAllPlacePicsByKind($kindPlaceId, $placeId){
 
     $place->pics = PlacePic::where('kindPlaceId', $kindPlaceId)->where('placeId', $place->id)->get();
 
+    $userPhotos = DB::select('SELECT pic.* , users.* FROM reviewPics AS pic, log, users WHERE pic.isVideo = 0 AND pic.logId = log.id AND log.kindPlaceId = ' . $kindPlaceId . ' AND log.placeId = ' . $placeId . ' AND log.confirm = 1 AND log.visitorId = users.id');
+    foreach ($userPhotos as $item){
+
+        $item->pic = URL::asset('userPhoto/' . $MainFile . '/' . $place->file . '/' . $item->pic);
+
+        if ($item->first_name != null)
+            $item->username = $item->first_name . ' ' . $item->last_name;
+
+        if($item->uploadPhoto == 0){
+            $deffPic = DefaultPic::find($item->picture);
+
+            if($deffPic != null)
+                $item->userPic = URL::asset('defaultPic/' . $deffPic->name);
+            else
+                $item->userPic = URL::asset('_images/nopic/blank.jpg');
+        }
+        else{
+            $item->userPic = URL::asset('userProfile/' . $item->picture);
+        }
+    }
+    $userPhotosJSON = json_encode($userPhotos);
+
     $koochitaPic = URL::asset('images/logo.png');
     $s = [  'id' => 0,
         's' => URL::asset('_images/' . $MainFile . '/' . $place->file . '/s-' . $place->picNumber),
@@ -846,7 +868,6 @@ function getAllPlacePicsByKind($kindPlaceId, $placeId){
         array_push($sitePics, $s);
     }
 
-    $sitePhotos = count($sitePics);
     $sitePicsJSON = json_encode($sitePics);
 
     $photographerPics = array();
@@ -901,7 +922,7 @@ function getAllPlacePicsByKind($kindPlaceId, $placeId){
     }
     $photographerPicsJSON = json_encode($photographerPics);
 
-    return [$sitePics, $sitePicsJSON, $photographerPics, $photographerPicsJSON];
+    return [$sitePics, $sitePicsJSON, $photographerPics, $photographerPicsJSON, $userPhotos, $userPhotosJSON];
 }
 
 function deleteReviewPic(){
@@ -1066,27 +1087,6 @@ function commonInPlaceDetails($kindPlaceId, $placeId, $city, $state, $place){
             array_push($rateQuestion, $item);
     }
 
-    $userPhotos = DB::select('SELECT pic.* , users.* FROM reviewPics AS pic, log, users WHERE pic.isVideo = 0 AND pic.logId = log.id AND log.kindPlaceId = ' . $kindPlaceId . ' AND log.placeId = ' . $placeId . ' AND log.confirm = 1 AND log.visitorId = users.id');
-    foreach ($userPhotos as $item){
-
-        $item->pic = URL::asset('userPhoto/hotels/' . $place->file . '/' . $item->pic);
-
-        if ($item->first_name != null)
-            $item->username = $item->first_name . ' ' . $item->last_name;
-
-        if($item->uploadPhoto == 0){
-            $deffPic = DefaultPic::find($item->picture);
-
-            if($deffPic != null)
-                $item->userPic = URL::asset('defaultPic/' . $deffPic->name);
-            else
-                $item->userPic = URL::asset('_images/nopic/blank.jpg');
-        }
-        else{
-            $item->userPic = URL::asset('userProfile/' . $item->picture);
-        }
-    }
-
     $a2 = Activity::where('name', 'نظر')->first();
     $a3 = Activity::where('name', 'پاسخ')->first();
 
@@ -1102,7 +1102,7 @@ function commonInPlaceDetails($kindPlaceId, $placeId, $city, $state, $place){
     $userReviweCount = DB::select('SELECT visitorId FROM log WHERE placeId = ' . $placeId . ' AND kindPlaceId = '. $kindPlaceId . ' AND confirm = 1 AND activityId = ' . $a2->id . ' AND CHARACTER_LENGTH(text) > 2 GROUP BY visitorId');
     $userReviweCount = count($userReviweCount);
 
-    return [$reviewCount, $ansReviewCount, $userReviweCount, $userPhotos, $multiQuestion, $textQuestion, $rateQuestion];
+    return [$reviewCount, $ansReviewCount, $userReviweCount, $multiQuestion, $textQuestion, $rateQuestion];
 }
 
 function findAnswerCount($logId){
