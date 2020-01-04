@@ -802,7 +802,7 @@ body {
 
 .answerBoxText {
     background-color: #eaeaea;
-    padding: 25px 10px 25px 50px;
+    padding: 25px 10px;
     position: relative;
     text-align: justify;
     direction: rtl;
@@ -1281,6 +1281,26 @@ body {
     .answerBoxText {
         width: 73%;
     }
+
+    .usersArticlesMainDiv {
+        padding: 20px 10px;
+    }
+
+    .articleDetailsMainDiv {
+        padding-right: 5px;
+    }
+
+    .articleSpecificationsMainDiv > div {
+        margin-left: 10px;
+    }
+
+    .articleSpecificationsMainDiv > div:last-child {
+        margin-left: 0;
+    }
+
+    .articleWatchListMainDiv {
+        padding-right: 15px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -1336,6 +1356,7 @@ body {
     .answerBoxText {
         width: 78%;
     }
+
 }
 
 @media (max-width: 630px) {
@@ -1484,6 +1505,14 @@ body {
 
     .seeNextAnswers, .seePrevAnswers {
         left: 7%;
+    }
+
+    .articleImgMainDiv, .articleDetailsMainDiv {
+        width: 100%;
+    }
+
+    .usersArticlesMainDiv {
+        border-bottom: 1px solid #e5e5e5;
     }
 }
 

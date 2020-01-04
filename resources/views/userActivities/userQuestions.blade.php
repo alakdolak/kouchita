@@ -274,7 +274,6 @@
                                         <b class="replyWriterUsername">shazdesina</b>
                                         من موافق این مطلب نیستم. دوست من شما باید خودتان توجه می کردید نه اینکه ما را
                                         متهم کنید.
-                                        <img class="answerSmileyIcon" src="{{"../public/images/smile.png"}}">
                                         <div class="answerStatistics">
                                             <span class="numberOfDislikeAnswer">31</span>
                                             <span class="numberOfLikeAnswer">31</span>
@@ -314,7 +313,6 @@
                                         <b class="replyWriterUsername">shazdesina</b>
                                         من موافق این مطلب نیستم. دوست من شما باید خودتان توجه می کردید نه اینکه ما را
                                         متهم کنید.
-                                        <img class="answerSmileyIcon" src="{{"../public/images/smile.png"}}">
                                         <div class="answerStatistics">
                                             <span class="numberOfDislikeAnswer">31</span>
                                             <span class="numberOfLikeAnswer">31</span>
@@ -354,7 +352,6 @@
                                         <b class="replyWriterUsername">shazdesina</b>
                                         من موافق این مطلب نیستم. دوست من شما باید خودتان توجه می کردید نه اینکه ما را
                                         متهم کنید.
-                                        <img class="answerSmileyIcon" src="{{"../public/images/smile.png"}}">
                                         <div class="answerStatistics">
                                             <span class="numberOfDislikeAnswer">31</span>
                                             <span class="numberOfLikeAnswer">31</span>
@@ -449,7 +446,6 @@
                                         <b class="replyWriterUsername">shazdesina</b>
                                         من موافق این مطلب نیستم. دوست من شما باید خودتان توجه می کردید نه اینکه ما را
                                         متهم کنید.
-                                        <img class="answerSmileyIcon" src="{{"../public/images/smile.png"}}">
                                         <div class="answerStatistics">
                                             <span class="numberOfDislikeAnswer">31</span>
                                             <span class="numberOfLikeAnswer">31</span>
@@ -489,7 +485,6 @@
                                         <b class="replyWriterUsername">shazdesina</b>
                                         من موافق این مطلب نیستم. دوست من شما باید خودتان توجه می کردید نه اینکه ما را
                                         متهم کنید.
-                                        <img class="answerSmileyIcon" src="{{"../public/images/smile.png"}}">
                                         <div class="answerStatistics">
                                             <span class="numberOfDislikeAnswer">31</span>
                                             <span class="numberOfLikeAnswer">31</span>
@@ -529,7 +524,6 @@
                                         <b class="replyWriterUsername">shazdesina</b>
                                         من موافق این مطلب نیستم. دوست من شما باید خودتان توجه می کردید نه اینکه ما را
                                         متهم کنید.
-                                        <img class="answerSmileyIcon" src="{{"../public/images/smile.png"}}">
                                         <div class="answerStatistics">
                                             <span class="numberOfDislikeAnswer">31</span>
                                             <span class="numberOfLikeAnswer">31</span>
