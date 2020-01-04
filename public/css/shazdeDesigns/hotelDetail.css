@@ -1269,7 +1269,7 @@ p {
 
 #map {
     float: right;
-    height: 224px;
+    height: 350px;
     border: 1px solid #000;
     width: 100%;
 }
@@ -1856,6 +1856,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 }
 
 .commentMoreSettingBar {
+    direction: ltr !important;
     background: white;
     display: flex;
     width: 100%;
@@ -2590,22 +2591,22 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 /*posts filter*/
 
 .postsFiltersMainDiv .block_header, .QAndAMainDivHeader,
-#similarLocationsMainDiv .shelf_title_container {
+.similarLocationsMainDiv .shelf_title_container {
     padding: 10px 0;
     border-bottom: 1px solid #e5e5e5;
     margin-bottom: 20px;
 }
 
-#similarLocationsMainDiv .shelf_title_container {
+.similarLocationsMainDiv .shelf_title_container {
     margin: 5px 15px 20px;
 }
 
-#similarLocationsMainDiv .shelf_title_container h3 {
+.similarLocationsMainDiv .shelf_title_container h3 {
     top: 7px !important;
 }
 
 .postsFiltersMainDiv .block_title , .QAndAMainDivHeader > h3,
-#similarLocationsMainDiv .shelf_title_container h3 {
+.similarLocationsMainDiv .shelf_title_container h3 {
     font-size: 20px;
     font-weight: 700;
     line-height: 32px;
@@ -3499,7 +3500,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     text-align: center;
 }
 
-#similarLocationsMainDiv {
+.similarLocationsMainDiv {
     background: white;
     margin-top: 40px !important;
 }
@@ -4087,7 +4088,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
         display: flex;
     }
 
-    #QAndAMainDivId, #mainDivPlacePost, #similarLocationsMainDiv {
+    #QAndAMainDivId, #mainDivPlacePost, .similarLocationsMainDiv {
         display: none;
     }
 

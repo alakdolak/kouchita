@@ -246,53 +246,112 @@
     <!-- The Modals -->
 
     <div class="modal fade" id="leftPopUp">
-        <div class="mainPopUp leftPopUp">
+        <div class="mainPopUp leftPopUp hidden">
 
             <div class="lp_phoneMenuBar">
-                <div class="lp_eachMenu">
-                    <div class="ui_icon search lp_icons"></div>
-                    <div>بازدیدهای اخیر</div>
-                </div>
-                <div class="lp_eachMenu" onclick="lp_selectMenu(this)">
-                    <div class="ui_icon notification-bell lp_icons"></div>
-                    <div>اعلانات</div>
-                </div>
-                <div class="lp_eachMenu" onclick="lp_selectMenu(this)">
-                    <div class="ui_icon casino lp_icons"></div>
-                    <div>نشان‌گذاری شده‌ها</div>
-                </div>
-                <div class="lp_eachMenu" onclick="lp_selectMenu(this)">
+                <div class="lp_eachMenu" onclick="lp_selectMenu('lp_myTravel', this)">
                     <div class="ui_icon my-trips lp_icons"></div>
                     <div>سفرهای من</div>
                 </div>
+                <div class="lp_eachMenu" onclick="lp_selectMenu('lp_mark', this)">
+                    <div class="ui_icon casino lp_icons"></div>
+                    <div>نشان‌گذاری شده‌ها</div>
+                </div>
+                <div class="lp_eachMenu" onclick="lp_selectMenu('lp_messages', this)">
+                    <div class="ui_icon notification-bell lp_icons"></div>
+                    <div>اعلانات</div>
+                </div>
+                <div class="lp_eachMenu lp_selectedMenu" onclick="lp_selectMenu('lp_recentlyViews', this)">
+                    <div class="ui_icon search lp_icons"></div>
+                    <div>بازدیدهای اخیر</div>
+                </div>
             </div>
 
-            <div id="lp_recentlyViews">
-                <button type="button" class="btn btn-warning lp_btns">صفحه پروفایل</button>
-                <button type="button" class="btn btn-primary lp_btns">صفحه من</button>
-                <button type="button" class="btn btn-danger lp_btns">خروج</button>
-                <a style="font-size: 1.25em">ویرایش اطلاعات</a>
+            {{--<div class="hidden" id="lp_recentlyViews">--}}
+                {{--<button type="button" class="btn btn-warning">lp_masseges</button>--}}
+                {{--<button type="button" class="btn btn-primary">lp_masseges</button>--}}
+                {{--<button type="button" class="btn btn-danger">lp_masseges</button>--}}
+                {{--<a>ویرایش اطلاعات</a>--}}
+            {{--</div>--}}
+
+            <div class="lp_content" id="lp_recentlyViews">
+                <div class="lp_titles"> بازدید‌های اخیر </div>
             </div>
 
-            <div class="hidden" id="lp_masseges">
-                <button type="button" class="btn btn-warning">lp_masseges</button>
-                <button type="button" class="btn btn-primary">lp_masseges</button>
-                <button type="button" class="btn btn-danger">lp_masseges</button>
-                <a>ویرایش اطلاعات</a>
+            <div class="lp_content hidden" id="lp_messages">
+                <div class="lp_titles"> اعلانات </div>
+                <div class="lp_messages_noMessages">هیچ پیامی موجود نیست</div>
             </div>
 
-            <div class="hidden" id="lp_mark">
-                <button type="button" class="btn btn-warning">lp_mark</button>
-                <button type="button" class="btn btn-primary">lp_mark</button>
-                <button type="button" class="btn btn-danger">lp_mark</button>
-                <a>ویرایش اطلاعات</a>
+            <div class="lp_content hidden" id="lp_mark">
+                <div class="lp_titles"> نشان‌گذاری شده‌ها </div>
+                <div id="masthead-recent">
+                    <a class="lp_recentView" target="_self" href="">
+                        <div class="lp_rvPicBox">
+                            <div class="lp_rvPic" style="background-image: url(http://localhost:8080/assets/_images/hotels/hotel_kowsar/f-1.jpg);"></div>
+                        </div>
+                        <div class="">
+                            <div class="">هتل کوثر</div>
+                            <div class="lp_rating">
+                                <div class="ui_bubble_rating bubble_45"></div>
+                                <br>3 مشاهده
+                            </div>
+                            <div class="">اصفهان</div>
+                        </div>
+                    </a>
+                </div>
             </div>
 
-            <div class="hidden" id="lp_myTravel">
-                <button type="button" class="btn btn-warning">lp_myTravel</button>
-                <button type="button" class="btn btn-primary">lp_myTravel</button>
-                <button type="button" class="btn btn-danger">lp_myTravel</button>
-                <a>ویرایش اطلاعات</a>
+            <div class="lp_content hidden" id="lp_myTravel">
+                <div class="lp_titles"> سفرهای من </div>
+                <div>
+                    <div class="lp_createTrip">
+                        <span class="ui_icon plus"></span>
+                        <div class="lp_createTripText">ایجاد سفر</div>
+                    </div>
+                    {{--<div onclick="document.location.href = 'http://localhost:8080/shazde/public/tripPlaces/1'" class="trip-images ui_columns is-gapless is-multiline is-mobile">--}}
+                        {{--<div class="trip-image ui_column is-6 placeCount0" style="background: url('http://localhost:8080/assets/_images/hotels/hotel_a_pedari/1')"></div>--}}
+                        {{--<div class="trip-image trip-image-empty ui_column is-6  placeCount0Else"></div>--}}
+                        {{--<div class="trip-image trip-image-empty ui_column is-6 placeCount0Else"></div>--}}
+                        {{--<div class="trip-image trip-image-empty ui_column is-6 placeCount0Else"></div>--}}
+                    {{--</div>--}}
+                    {{--<div class="lp_createTripText">یزد </div>--}}
+                    {{--<div class="lp_createTripText">--}}
+                        {{--1398/08/17--}}
+                        {{--<p>الی</p>--}}
+                        {{--1398/08/14--}}
+                    {{--</div>--}}
+                </div>
+            </div>
+
+        </div>
+        <div class="mainPopUp leftPopUp">
+
+            <div class="pSC_tilte">
+                <div>شما در حال حاضر در شهر <span class="pSC_cityTilte">اصفهان </span>هستید</div>
+                <button type="button" class="btn btn-danger">تغییر دهید</button>
+            </div>
+            <div>شما می توانید به راحتی صفحات زیر را در  <span>استان اصفهان </span>مشاهده نمایید</div>
+            <div class="pSC_boxOfDetails">
+                <div class="pSC_choiseDetailsText">به سادگی انتخاب کنید</div>
+                <div class="pSC_boxOfCityDetailsText">
+                    <span>مشاهده صفحه شهر اصفهان</span>
+                    <span class="pSC_boxOfCityDetailsText2">در استان اصفهان</span>
+                </div>
+                <div>
+                    <div class="pSC_boxOfCityDetails">
+                        <div class="pSC_cityDetails">جاذبه‌های اصفهان</div>
+                        <div class="pSC_cityDetails">هتل‌های اصفهان</div>
+                    </div>
+                    <div class="pSC_boxOfCityDetails">
+                        <div class="pSC_cityDetails">مقاله‌های اصفهان</div>
+                        <div class="pSC_cityDetails">رستوران‌های اصفهان</div>
+                    </div>
+                    <div class="pSC_boxOfCityDetails">
+                        <div class="pSC_cityDetails">صنایع دستی‌های اصفهان</div>
+                        <div class="pSC_cityDetails">غذای محلی‌های اصفهان</div>
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -300,8 +359,13 @@
 
     <div class="modal fade" id="rightPopUp">
         <div class="mainPopUp rightPopUp">
+            <div id="lp_recentlyViews">
+                <button type="button" class="btn btn-warning lp_btns">صفحه پروفایل</button>
+                <button type="button" class="btn btn-primary lp_btns">صفحه من</button>
+                <button type="button" class="btn btn-danger lp_btns">خروج</button>
+                <a style="font-size: 1.25em">ویرایش اطلاعات</a>
+            </div>
         </div>
     </div>
 
-    rightPopUp
 </div>

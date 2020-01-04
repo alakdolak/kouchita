@@ -18,10 +18,11 @@ use App\models\QuestionUserAns;
 use App\models\Report;
 use App\models\ReportsType;
 use App\models\Restaurant;
-use App\models\ReviewFeedBack;
+use App\models\LogFeedBack;
 use App\models\ReviewPic;
 use App\models\ReviewUserAssigned;
 use App\models\State;
+use App\models\UserOpinion;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -164,43 +165,47 @@ class ReviewsController extends Controller
 
         if(isset($request->placeId) && isset($request->kindPlaceId) && isset($request->code)){
 
-            $id = $request->placeId;
+            $placeId = $request->placeId;
+            $uId = Auth::user()->id;
             $kindPlaceId = $request->kindPlaceId;
             switch ($kindPlaceId){
                 case 1:
-                    $place = Amaken::find($id);
+                    $place = Amaken::find($placeId);
                     $kindPlaceName = 'amaken';
                     break;
                 case 3:
-                    $place = Restaurant::find($id);
+                    $place = Restaurant::find($placeId);
                     $kindPlaceName = 'restaurant';
                     break;
                 case 4:
-                    $place = Hotel::find($id);
+                    $place = Hotel::find($placeId);
                     $kindPlaceName = 'hotels';
                     break;
                 case 6:
-                    $place = Majara::find($id);
+                    $place = Majara::find($placeId);
                     $kindPlaceName = 'majara';
                     break;
                 case 10:
-                    $place = SogatSanaie::find($id);
+                    $place = SogatSanaie::find($placeId);
                     $kindPlaceName = 'sogatsanaie';
                     break;
                 case 11:
-                    $place = MahaliFood::find($id);
+                    $place = MahaliFood::find($placeId);
                     $kindPlaceName = 'mahalifood';
                     break;
             }
 
             $log = new LogModel();
-            $log->placeId = $request->placeId;
+            $log->placeId = $placeId;
             $log->kindPlaceId = $kindPlaceId;
-            $log->visitorId = \auth()->user()->id;
+            $log->visitorId = $uId;
             $log->date = Carbon::now()->format('Y-m-d');
             $log->time = getToday()['time'];
             $log->activityId = $activity->id;
-            $log->text = $request->text;
+            if($request->text != null)
+                $log->text = $request->text;
+            else
+                $log->text = '';
             $log->save();
 
             $reviewPic = ReviewPic::where('code', $request->code)->get();
@@ -311,7 +316,7 @@ class ReviewsController extends Controller
             $isFilter = false;
             $isPicFilter = false;
             $isTextFilter = false;
-            $sqlQuery = '';
+            $sqlQuery = ' CHARACTER_LENGTH(text) > 2';
             $textFilter = '';
             $onlyPic = 0;
 
@@ -440,7 +445,7 @@ class ReviewsController extends Controller
             if($sqlQuery == '')
                 $sqlQuery = '1';
 
-            $logCount = LogModel::where($condition)->orderByDesc('date')->whereRaw($sqlQuery)->count();
+            $logCount = LogModel::where($condition)->whereRaw($sqlQuery)->count();
             if($num == 0 && $count == 0)
                 $logs = LogModel::where($condition)->orderByDesc('date')->whereRaw($sqlQuery)->orderByDesc('time')->get();
             else
@@ -563,12 +568,12 @@ class ReviewsController extends Controller
 
                     $item->timeAgo = getDifferenceTimeString($time);
 
-                    $item->like = ReviewFeedBack::where('logId', $item->id)->where('like', 1)->count();
-                    $item->dislike = ReviewFeedBack::where('logId', $item->id)->where('like', -1)->count();
+                    $item->like = LogFeedBack::where('logId', $item->id)->where('like', 1)->count();
+                    $item->dislike = LogFeedBack::where('logId', $item->id)->where('like', -1)->count();
 
                     if (\auth()->check()) {
                         $u = \auth()->user();
-                        $item->userLike = ReviewFeedBack::where('logId', $item->id)->where('userId', $u->id)->first();
+                        $item->userLike = LogFeedBack::where('logId', $item->id)->where('userId', $u->id)->first();
                     } else
                         $item->userLike = null;
 
@@ -580,43 +585,6 @@ class ReviewsController extends Controller
 
         return;
 
-    }
-
-    public function likeReview(Request $request)
-    {
-        if(\auth()->check()) {
-            if (isset($request->logId) && isset($request->like)) {
-                $u = Auth::user();
-                $condition = ['userId' => $u->id, 'logId' => $request->logId];
-                $like = ReviewFeedBack::where($condition)->first();
-
-                if($like == null){
-                    $like = new ReviewFeedBack();
-                    $like->logId = $request->logId;
-                    $like->userId = $u->id;
-                    if($request->like == 1)
-                        $like->like = 1;
-                    else
-                        $like->like = -1;
-                    $like->save();
-                }
-                else{
-                    if($request->like == 1)
-                        $like->like = 1;
-                    else
-                        $like->like = -1;
-                    $like->save();
-                }
-
-                echo 'ok';
-            }
-            else
-                echo 'nok2';
-        }
-        else
-            echo 'nok1';
-
-        return;
     }
 
     public function ansReview(Request $request)

@@ -18,7 +18,7 @@
 {{--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">--}}
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/topHeaderStyles.css')}}' />
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/bootstrap.min.css')}}' />
-<script src="{{URL::asset('js/angular.min.js')}}"></script>
+<script src="{{URL::asset('js/angular.js')}}"></script>
 
 <script type="text/javascript">
     $.ajaxSetup({

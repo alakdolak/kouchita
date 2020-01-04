@@ -17,7 +17,7 @@ use App\models\QuestionUserAns;
 use App\models\Report;
 use App\models\ReportsType;
 use App\models\Restaurant;
-use App\models\ReviewFeedBack;
+use App\models\LogFeedBack;
 use App\models\ReviewPic;
 use App\models\ReviewUserAssigned;
 use App\models\State;
@@ -497,4 +497,40 @@ class AjaxController extends Controller {
         return;
     }
 
+    public function likeLog(Request $request)
+    {
+        if(\auth()->check()) {
+            if (isset($request->logId) && isset($request->like)) {
+                $u = Auth::user();
+                $condition = ['userId' => $u->id, 'logId' => $request->logId];
+                $like = LogFeedBack::where($condition)->first();
+
+                if($like == null){
+                    $like = new LogFeedBack();
+                    $like->logId = $request->logId;
+                    $like->userId = $u->id;
+                    if($request->like == 1)
+                        $like->like = 1;
+                    else
+                        $like->like = -1;
+                    $like->save();
+                }
+                else{
+                    if($request->like == 1)
+                        $like->like = 1;
+                    else
+                        $like->like = -1;
+                    $like->save();
+                }
+
+                echo 'ok';
+            }
+            else
+                echo 'nok2';
+        }
+        else
+            echo 'nok1';
+
+        return;
+    }
 }

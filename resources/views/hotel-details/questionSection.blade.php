@@ -1,6 +1,6 @@
 
 <div id="QAndAMainDivId" class="tabContentMainWrap">
-    <div class="col-md-12 col-xs-12 QAndAMainDiv">
+    <div class="col-md-12 col-xs-12 QAndAMainDiv" style="margin-bottom: 10px;">
         <div class="mainDivQuestions">
             <div class="QAndAMainDivHeader">
                 <h3>سؤال و جواب</h3>
@@ -14,14 +14,13 @@
                     </b>
                     <div class="display-inline-block float-right direction-rtl mg-lt-5">
                         در حال حاضر
-                        <span class="color-blue">1340</span>
+                        <span class="color-blue" id="questionCount"></span>
                         سؤال
-                        <span class="color-blue">560</span>
+                        <span class="color-blue" id="answerCount"></span>
                         پاسخ موجود می‌باشد.
                     </div>
-                    <a class="seeAllQMainLink" href="#taplc_global_nav_links_0">
-                        <div class="seeAllQLink display-inline-block float-right direction-rtl dark-blue"
-                             onclick="allQuestionsGrid()">مشاهده همه سؤالات و پاسخ‌ها
+                    <a class="seeAllQMainLink" href="{{url('hotel-details-questions/' . $place->id . '/' . $place->name)}}">
+                        <div class="seeAllQLink display-inline-block float-right direction-rtl dark-blue">مشاهده همه سؤالات و پاسخ‌ها
                         </div>
                     </a>
                     <div class="clear-both"></div>
@@ -43,35 +42,31 @@
         </div>
     </div>
 
-    <div class="col-xs-12 questionsMainDivFooter position-relative">
+    <div id="questionPaginationDiv" class="col-xs-12 questionsMainDivFooter position-relative" style="margin-top: 0px;">
         <div class="col-xs-5 font-size-13 line-height-2">
             نمایش
-            <span class="mg-lt-5 cursor-pointer">10</span>-
-            <span class="mg-lt-5 cursor-pointer">20</span>-
-            <span class="color-blue cursor-pointer">50</span>
+            <span id="showQuestionPerPage"></span>
             پست در هر صفحه
         </div>
-        <a class="col-xs-3 showQuestionsNumsFilterLink" href="#taplc_global_nav_links_0">
-            <div class="showQuestionsNumsFilter" onclick="allQuestionsGrid()">نمایش تمامی سؤال‌ها</div>
+        <a class="col-xs-3 showQuestionsNumsFilterLink" href="{{url('hotel-details-questions/' . $place->id . '/' . $place->name)}}">
+            <div class="showQuestionsNumsFilter">نمایش تمامی سؤال‌ها</div>
         </a>
         <div class="col-xs-4 font-size-13 line-height-2 text-align-right float-right">
-            صفحه
-            <span>1</span>
-            <span><<<</span>
-            <span class="mg-lt-5 cursor-pointer">2</span>-
-            <span class="color-blue mg-lt-5 cursor-pointer">3</span>-
-            <span class="cursor-pointer">4</span>
-            <span>>>></span>
-            <span>10</span>
+            <span style="float: right; margin-left: 10px">صفحه</span>
+            <span id="questionPagination" style="margin-right: 10px;"></span>
         </div>
     </div>
+
 </div>
 
 <script>
-    var questionCount = 1;
+    var questions;
+    var questionCount;
+    var questionPerPage = 0;
+    var questionPerPageNum = [3, 5, 10];
     var questionPage = 1;
-    var placeId = '{{$place->id}}';
-    var kindPlaceId = '{{$kindPlaceId}}';
+    var answerCount;
+    var isQuestionCount = true;
 
     function sendQuestion(){
 
@@ -108,12 +103,30 @@
             data:{
                 'placeId': placeId,
                 'kindPlaceId' : kindPlaceId,
-                'count' : questionCount,
-                'page' : questionPage
+                'count' : questionPerPageNum[questionPerPage],
+                'page' : questionPage,
+                'isQuestionCount' : isQuestionCount
             },
             success: function(response){
                 response = JSON.parse(response);
-                createQuestionSection(response);
+                questions = response[0];
+
+                if(isQuestionCount) {
+                    questionCount = response[1];
+                    answerCount = response[2];
+                    document.getElementById('questionCount').innerText = questionCount;
+                    document.getElementById('answerCount').innerText = answerCount;
+                    isQuestionCount = false;
+
+                }
+
+                if(questionCount == 0)
+                    document.getElementById('questionPaginationDiv').style.display = 'none';
+                else{
+                    createQuestionPagination(questionCount);
+                    createQuestionSection(questions);
+                }
+
             }
         })
     }
@@ -158,7 +171,7 @@
                 '                            </div>\n';
 
             if(ques[i]["ansNum"] > 0)
-                text += '<div class="showAnswersToggle" onclick="showAllAnswers2(' + ques[i]["id"] + ')">دیدن پاسخ‌ها</div>\n';
+                text += '<div class="showAnswersToggle" onclick="showAllAnswers(' + ques[i]["id"] + ')">دیدن پاسخ‌ها</div>\n';
 
             text += '<b class="replyBtn replyAnswerBtn" onclick="replyToAnswers(' + ques[i]["id"] + ')">پاسخ دهید</b>\n' +
                     '</div>\n';
@@ -215,14 +228,6 @@
         }
     }
 
-    function replyToAnswers(_id){
-
-        if(!checkLogin())
-            return;
-
-        $('#ansToQuestion' + _id).toggle();
-    }
-
     function likeQuestion(_logId, _like){
 
         if(!checkLogin())
@@ -230,7 +235,7 @@
 
         $.ajax({
             type: 'post',
-            url: likeReviewUrl,
+            url: likeLog,
             data:{
                 'logId' : _logId,
                 'like' : _like
@@ -263,7 +268,7 @@
                 '                                    </div>';
 
             if(_ques[j]["ansNum"] > 0)
-                text += '<div class="showAnswersToggle" style="font-size: 10px" onclick="showAllAnswers2(' + _ques[j]["id"] + ')">دیدن پاسخ‌ها</div>';
+                text += '<div class="showAnswersToggle" style="font-size: 10px" onclick="showAllAnswers(' + _ques[j]["id"] + ')">دیدن پاسخ‌ها</div>';
 
             text +='                                </div>\n' +
                 '                            </div>\n' +
@@ -304,12 +309,116 @@
         return text;
     }
 
-    function showAllAnswers(element) {
-        $(element).parent().next().toggle()
+    function showAllAnswers(_id){
+        $("#ansOfQuestion" + _id).toggle();
     }
 
-    function showAllAnswers2(_id){
-        $("#ansOfQuestion" + _id).toggle();
+    function replyToAnswers(_id){
+
+        if(!checkLogin())
+            return;
+
+        $('#ansToQuestion' + _id).toggle();
+    }
+
+    function changeQuestionPerPage(_count){
+
+        document.getElementById('questionPerView' + questionPerPage).classList.remove('color-blue');
+        document.getElementById('questionPerView' + _count).classList.add('color-blue');
+        questionPerPage = _count;
+        getQuestion();
+    }
+
+    function changeQuestionPage(_page){
+        questionPage = _page;
+        getQuestion();
+    }
+
+    function createQuestionPagination(questionCount){
+        var text = '';
+        var page = Math.round(questionCount/questionPerPageNum[questionPerPage]);
+
+        createQuestionPerPage();
+
+        if(page >= 5){
+            if(questionPage == 1){
+                text += '<span class="cursor-pointer color-blue mg-lt-5" onclick="changeQuestionPage(1)" style="float: right">1</span>';
+                text += '<span class="cursor-pointer mg-lt-5" onclick="changeQuestionPage(2)" style="float: right">2</span>';
+                text += '<span class="cursor-pointer mg-lt-5" onclick="changeQuestionPage(3)" style="float: right">3</span>';
+                text += '<span style="float: right"> >>> </span>';
+                text += '<span class="cursor-pointer mg-lt-5" onclick="changeQuestionPage(' + page + ')" style="float: right">' + page + '</span>';
+            }
+            else if(questionPage == 2){
+                text += '<span class="cursor-pointer mg-lt-5" onclick="changeQuestionPage(1)" style="float: right">1</span>';
+                text += '<span class="cursor-pointer color-blue mg-lt-5" onclick="changeQuestionPage(2)" style="float: right">2</span>';
+                text += '<span class="cursor-pointer mg-lt-5" onclick="changeQuestionPage(3)" style="float: right">3</span>';
+                text += '<span style="float: right"> >>> </span>';
+                text += '<span class="cursor-pointer mg-lt-5" onclick="changeQuestionPage(' + page + ')" style="float: right">' + page + '</span>';
+            }
+            else if(questionPage == 3){
+                text += '<span class="cursor-pointer mg-lt-5" onclick="changeQuestionPage(1)" style="float: right">1</span>';
+                text += '<span class="cursor-pointer mg-lt-5" onclick="changeQuestionPage(2)" style="float: right">2</span>';
+                text += '<span class="cursor-pointer color-blue mg-lt-5" onclick="changeQuestionPage(3)" style="float: right">3</span>';
+                text += '<span class="cursor-pointer mg-lt-5" onclick="changeQuestionPage(4)" style="float: right">4</span>';
+                if(page == 5)
+                    text += '<span class="cursor-pointer mg-lt-5" onclick="changeQuestionPage(5)" style="float: right">5</span>';
+                else {
+                    text += '<span style="float: right"> >>> </span>';
+                    text += '<span class="cursor-pointer mg-lt-5" onclick="changeQuestionPage(' + page + ')" style="float: right">' + page + '</span>';
+                }
+            }
+            else{
+                text += '<span class="cursor-pointer mg-lt-5" onclick="changeQuestionPage(1)" style="float: right">1</span>';
+                text += '<span style="float: right"> <<< </span>';
+
+                if(questionPage == page){
+                    text += '<span class="cursor-pointer mg-lt-5" onclick="changeQuestionPage(' + (questionPage-2) + ')" style="float: right">' + (questionPage-2) + '</span>';
+                    text += '<span class="cursor-pointer mg-lt-5" onclick="changeQuestionPage(' + (questionPage-1) + ')" style="float: right">' + (questionPage-1) + '</span>';
+                    text += '<span class="cursor-pointer color-blue mg-lt-5" onclick="changeQuestionPage(' + (questionPage) + ')" style="float: right">' + (questionPage) + '</span>';
+                }
+                else{
+                    text += '<span class="cursor-pointer mg-lt-5" onclick="changeQuestionPage(' + (questionPage-1) + ')" style="float: right">' + (questionPage-1) + '</span>';
+                    text += '<span class="cursor-pointer color-blue mg-lt-5" onclick="changeQuestionPage(' + (questionPage) + ')" style="float: right">' + (questionPage) + '</span>';
+                    text += '<span class="cursor-pointer mg-lt-5" onclick="changeQuestionPage(' + (questionPage+1) + ')" style="float: right">' + (questionPage+1) + '</span>';
+                    if((page - questionPage) == 2)
+                        text += '<span class="cursor-pointer mg-lt-5" onclick="changeQuestionPage(' + (questionPage+2) + ')" style="float: right">' + (questionPage+2) + '</span>';
+                }
+
+                if((page - questionPage) >= 3){
+                    text += '<span style="float: right"> >>> </span>';
+                    text += '<span class="cursor-pointer mg-lt-5" onclick="changeQuestionPage(' + page + ')" style="float: right">' + page + '</span>';
+                }
+
+
+            }
+        }
+        else{
+            for (var i = 1; i <= page; i++){
+                if(i == questionPage)
+                    text += '<span class="cursor-pointer color-blue mg-lt-5" onclick="changeQuestionPage(' + i + ')" style="float: right">' + i + '</span>';
+                else
+                    text += '<span class="cursor-pointer mg-lt-5" onclick="changeQuestionPage(' + i + ')" style="float: right">' + i + '</span>';
+            }
+        }
+
+        document.getElementById('questionPagination').innerHTML = text;
+    }
+
+    function createQuestionPerPage(){
+
+        var text = '';
+
+        for(var i = 0; i < questionPerPageNum.length; i++){
+            if(i == questionPerPage)
+                text += '<span id="questionPerView' + i + '" class="mg-lt-5 cursor-pointer color-blue" onclick="changeQuestionPerPage(' + i + ')">' + questionPerPageNum[i] + '</span>';
+            else
+                text += '<span id="questionPerView' + i + '" class="mg-lt-5 cursor-pointer" onclick="changeQuestionPerPage(' + i + ')">' + questionPerPageNum[i] + '</span>';
+
+            if(i != (questionPerPageNum.length - 1))
+                text += '-';
+        }
+
+        document.getElementById('showQuestionPerPage').innerHTML = text;
     }
 
 </script>

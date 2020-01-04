@@ -591,7 +591,7 @@ if ($total == 0)
         var userPhotos = {!! $userPhotosJson !!};
 
         var ansToReviewUrl = '{{route('ansReview')}}';
-        var likeReviewUrl = '{{route('likeReview')}}';
+        var likeReviewUrl = '{{route('likeLog')}}';
         var getReviewsUrl = '{{route('getReviews')}}';
         var reviewUploadPic = '{{route('reviewUploadPic')}}';
         var doEditReviewPic = '{{route('doEditReviewPic')}}';
@@ -2439,17 +2439,4 @@ if ($total == 0)
 
     <script src="{{URL::asset('js/adv.js')}}"></script>
 
-    <script>
-        $.ajax({
-            type: 'post',
-            url: '{{route("filterReview")}}',
-            data: {
-                'kindPlaceId': kindPlaceId,
-                'placeId' : placeId
-            },
-            success: function (response){
-
-            }
-        });
-    </script>
 @stop

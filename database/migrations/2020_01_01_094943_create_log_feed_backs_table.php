@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateReviewFeedBacksTable extends Migration
+class CreateLogFeedBacksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateReviewFeedBacksTable extends Migration
      */
     public function up()
     {
-        Schema::create('reviewFeedBack', function (Blueprint $table) {
+        Schema::create('logFeedBack', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('logId');
             $table->unsignedInteger('userId');
@@ -31,6 +31,6 @@ class CreateReviewFeedBacksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reviewFeedBack');
+        Schema::dropIfExists('logFeedBack');
     }
 }
