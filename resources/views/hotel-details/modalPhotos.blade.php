@@ -99,12 +99,12 @@
 
             </div>
             <div class="clear-both"></div>
-            <div class="col-xs-10 leftColPhotosModalMainDiv">
+            <div class="col-xs-12 col-sm-9 leftColPhotosModalMainDiv">
                 <div class="selectedPhotoShowingModal">
                     <img id="mainPhotographerSliderPic" src="{{URL::asset($photographerPics[0]['s'])}}" alt="{{$photographerPics[0]['alt']}}" style="width: 100%; height: 100%;">
                 </div>
             </div>
-            <div class="col-xs-2 rightColPhotosModalMainDiv" >
+            <div class="col-xs-12 col-sm-3 rightColPhotosModalMainDiv" >
                 @for($i = 0; $i < count($photographerPics); $i++)
                     <div class="rightColPhotosShowingModal" onclick="changePhotographerSlidePic({{$i}})">
                         <img src="{{$photographerPics[$i]['l']}}" alt="{{$photographerPics[$i]['alt']}}" style="width: 100%; height: 100%;">
@@ -137,12 +137,12 @@
                 </div>
             </div>
             <div class="clear-both"></div>
-            <div class="col-xs-10 leftColPhotosModalMainDiv">
+            <div class="col-xs-12 col-sm-9 leftColPhotosModalMainDiv">
                 <div class="selectedPhotoShowingModal">
                     <img id="mainSiteSliderPic" src="{{$sitePics[0]['s']}}" alt="{{$sitePics[0]['alt']}}" style="width: 100%; height: 100%;">
                 </div>
             </div>
-            <div class="col-xs-2 rightColPhotosModalMainDiv" >
+            <div class="col-xs-12 col-sm-3 rightColPhotosModalMainDiv" >
                 @for($i = 0; $i < count($sitePics); $i++)
                     <div class="rightColPhotosShowingModal" onclick="changeSiteSlidePic({{$i}})">
                         <img src="{{$sitePics[$i]['l']}}" alt="{{$sitePics[$i]['alt']}}" style="width: 100%; height: 100%;">
@@ -171,12 +171,12 @@
                 </div>
             </div>
             <div class="clear-both"></div>
-            <div class="col-xs-10 leftColPhotosModalMainDiv">
+            <div class="col-xs-12 col-sm-9 leftColPhotosModalMainDiv">
                 <div class="selectedPhotoShowingModal">
                     <img id="mainUserSliderPic" src="{{$userPhotos[0]->pic}}" style="width: 100%; height: 100%;">
                 </div>
             </div>
-            <div class="col-xs-2 rightColPhotosModalMainDiv" >
+            <div class="col-xs-12 col-sm-3 rightColPhotosModalMainDiv" >
                 @for($i = 0; $i < count($userPhotos); $i++)
                     <div class="rightColPhotosShowingModal" onclick="changeUserSlidePic({{$i}})" style="cursor: pointer;">
                         <img src="{{$userPhotos[$i]->pic}}" style="width: 100%; height: 100%;">
@@ -204,10 +204,10 @@
                 </div>
             </div>
             <div class="clear-both"></div>
-            <div class="col-xs-10 leftColPhotosModalMainDiv">
+            <div class="col-xs-12 col-sm-9 leftColPhotosModalMainDiv">
                 <div id="showingReviewPhotosMainPic" class="selectedPhotoShowingModal"></div>
             </div>
-            <div id="showingReviewPhotosRightCol" class="col-xs-2 rightColPhotosModalMainDiv" >
+            <div id="showingReviewPhotosRightCol" class="col-xs-12 col-sm-3 rightColPhotosModalMainDiv" >
             </div>
             <div class="photosDescriptionShowingModal"></div>
         </div>

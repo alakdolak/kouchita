@@ -37,6 +37,7 @@ function changeSiteSlidePic(_index){
 function changePhotographerSlidePic(_index){
     var photo = photographerPics[_index];
     var likeDislike = '                                        <div class="photosFeedBackBtn">\n' +
+                        '                                        <div class="feedBackBtn">\n' +
                         '                                            <div class="col-xs-6 likeBox" onclick="likePhotographerPic(this, 1, ' + photo["id"] + ')">دوست داشتم' +
                         '                                               <span class="likeBoxIcon firstIcon"></span>' +
                         '                                               <span class="likeBoxIconClicked display-none secondIcon"></span>' +
@@ -45,13 +46,12 @@ function changePhotographerSlidePic(_index){
                         '                                               <span class="dislikeBoxIcon firstIcon"></span>' +
                         '                                               <span class="dislikeBoxIconClicked display-none secondIcon"></span>' +
                         '                                            </div>\n' +
-                        '                                            <div class="clear-both"></div>\n' +
-                        '                                            <div class="feedbackStatistic">\n' +
-                        '                                                <span>' + photo["like"] + '</span>\n' +
+                        '                                        </div>\n' +
+                        '                                        <div class="feedbackStatistic">\n' +
+                        '                                            <span>' + photo["like"] + '</span>\n' +
                         '                                                نفر دوست داشتند و\n' +
-                        '                                                <span>' + photo["dislike"] + '</span>\n' +
+                        '                                            <span>' + photo["dislike"] + '</span>\n' +
                         '                                                نفر دوست نداشتند\n' +
-                        '                                            </div>\n' +
                         '                                        </div>\n';
 
     document.getElementById('photographerSlideUserPic').src = photo['userPic'];
