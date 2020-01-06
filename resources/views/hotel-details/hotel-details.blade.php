@@ -66,6 +66,7 @@ if ($total == 0)
     <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/editor.css')}}">
 
 
+
     <link rel="stylesheet" href="{{URL::asset('css/theme2/swiper.css')}}">
     <script src="{{URL::asset('js/swiper/swiper.min.js')}}"></script>
 
@@ -1018,13 +1019,43 @@ if ($total == 0)
         <div id="MAIN" class="Hotel_Review prodp13n_jfy_overflow_visible position-relative">
             <div id="BODYCON" class="col easyClear bodLHN poolB adjust_padding new_meta_chevron new_meta_chevron_v2 position-relative">
 
+{{--                <div class="tabLinkMainWrapMainDivPC navbar navbar-inverse" data-spy="affix" data-offset-top="720">--}}
+{{--                    <div class="tabLinkMainWrapMainDiv navbar-collapse" id="myNavbar">--}}
+{{--                        <a href="#QAndAMainDivId">--}}
+{{--                            <button class="tabLinkMainWrap">سؤالات</button>--}}
+{{--                        </a><!----}}
+{{--                     --><a href="#similarLocationsMainDiv">--}}
+{{--                            <button class="tabLinkMainWrap">مکان‌های مشابه</button>--}}
+{{--                        </a><!----}}
+{{--                     --><a href="#mainDivPlacePost">--}}
+{{--                            <button class="tabLinkMainWrap">پست</button>--}}
+{{--                        </a><!----}}
+{{--                     --><a href="#generalDescriptionMobile">--}}
+{{--                            <button class="tabLinkMainWrap">معرفی کلی</button>--}}
+{{--                        </a>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+
+                <nav class="tabLinkMainWrapMainDivPC navbar navbar-inverse" data-spy="affix" data-offset-top="700">
+                    <div class="container-fluid tabLinkMainWrapMainDiv">
+                        <div class="collapse navbar-collapse" id="myNavbar">
+                            <ul class="nav navbar-nav">
+                                <li><a class="tabLinkMainWrap similarLocationsBtnTopBar" href="#similarLocationsMainDiv">مکان‌های مشابه</a></li>
+                                <li><a class="tabLinkMainWrap QAndAsBtnTopBar" href="#QAndAMainDivId">سؤالات</a></li>
+                                <li><a class="tabLinkMainWrap postsBtnTopBar" href="#mainDivPlacePost">پست</a></li>
+                                <li><a class="tabLinkMainWrap generalDescBtnTopBar" href="#generalDescLinkRel">معرفی کلی</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+
                 <div class="tabLinkMainWrapMainDivMobile" data-spy="affix" data-offset-top="790">
                     <div class="tabLinkMainWrapMainDiv">
                         <a href="#bodyLinks">
-                            <button class="tabLinkMainWrap" onclick="openTab('QAndAMainDivId', this, '#4dc7bc')">سؤالات</button>
+                            <button class="tabLinkMainWrap" onclick="openTab('similarLocationsMainDiv', this, '#4dc7bc')">مکان‌های مشابه</button>
                         </a><!--
                      --><a href="#bodyLinks">
-                            <button class="tabLinkMainWrap" onclick="openTab('similarLocationsMainDiv', this, '#4dc7bc')">مکان‌های مشابه</button>
+                            <button class="tabLinkMainWrap" onclick="openTab('QAndAMainDivId', this, '#4dc7bc')">سؤالات</button>
                         </a><!--
                      --><a href="#bodyLinks">
                             <button class="tabLinkMainWrap" onclick="openTab('mainDivPlacePost', this, '#4dc7bc')">پست</button>
@@ -1035,7 +1066,8 @@ if ($total == 0)
                     </div>
                 </div>
 
-                <div class="exceptQAndADiv">
+                <div class="exceptQAndADiv" id="generalDescLinkRel">
+                    <div class="topBarContainerGeneralDesc display-none"></div>
                     <div class="hr_btf_wrap position-relative">
                         <div id="introduction" class="ppr_rup ppr_priv_location_detail_overview">
                             <div class="block_wrap" data-tab="TABS_OVERVIEW">
@@ -1559,6 +1591,8 @@ if ($total == 0)
                             <span class="float-left">مشاهده همه پست‌ها</span>
                         </div>
 
+                        <div class="topBarContainerPosts display-none"></div>
+
                         <div class="col-md-5 col-xs-12 pd-0 pd-rt-10Imp leftColMainWrap">
 
                             @include('hotel-details.filterSection')
@@ -1596,6 +1630,12 @@ if ($total == 0)
                 </div>
             </div>
         </div>
+
+        <script>
+            if($(window).width() < 630) {
+                $('.tabLinkMainWrapMainDivMobile').affix({offset: {top: 930}});
+            };
+        </script>
 
         <script>
             var player;
@@ -1655,12 +1695,14 @@ if ($total == 0)
         // Get the element with id="defaultOpen" and click on it
         document.getElementById("defaultOpen").click();
 
-        function hideMobileTabLink() {
-            $('.tabLinkMainWrapMainDivMobile').hide()
-        }
+        if($(window).width() < 992) {
+            function hideMobileTabLink() {
+                $('.tabLinkMainWrapMainDivMobile').hide()
+            }
 
-        function showMobileTabLink() {
-            $('.tabLinkMainWrapMainDivMobile').show()
+            function showMobileTabLink() {
+                $('.tabLinkMainWrapMainDivMobile').show()
+            }
         }
 
         function newPostModal() {
@@ -1767,6 +1809,78 @@ if ($total == 0)
             if (window.matchMedia('(max-width: 373px)').matches) {
                 $('.eachCommentMainBox').removeClass('mg-rt-45')
             }
+        });
+
+        $(window).scroll(function() {
+            if(!$('.tabLinkMainWrapMainDivPC').hasClass('affix')){
+                $('.topBarContainerGeneralDesc').addClass('display-none');
+            }
+        });
+
+        $(document).ready(function() {
+            $('.generalDescBtnTopBar').click(function() {
+                $('.tabLinkMainWrapMainDivPC').addClass('affix');
+                $('.topBarContainerGeneralDesc').removeClass('display-none');
+                $('.topBarContainerPosts').addClass('display-none');
+                $('.topBarContainerQAndAs').addClass('display-none');
+                $('.topBarContainerSimilarLocations').addClass('display-none');
+
+                setTimeout(function() {
+                    $('.generalDescBtnTopBar').parent().addClass('active');
+                }, 50);
+
+                $('.postsBtnTopBar').parent().removeClass('active');
+                $('.QAndAsBtnTopBar').parent().removeClass('active');
+                $('.similarLocationsBtnTopBar').parent().removeClass('active');
+            });
+
+            $('.postsBtnTopBar').click(function() {
+                $('.tabLinkMainWrapMainDivPC').addClass('affix');
+                $('.topBarContainerGeneralDesc').addClass('display-none');
+                $('.topBarContainerPosts').removeClass('display-none');
+                $('.topBarContainerQAndAs').addClass('display-none');
+                $('.topBarContainerSimilarLocations').addClass('display-none');
+
+                setTimeout(function() {
+                    $('.generalDescBtnTopBar').parent().removeClass('active');
+                    $('.postsBtnTopBar').parent().addClass('active');
+                }, 50);
+
+                $('.QAndAsBtnTopBar').parent().removeClass('active');
+                $('.similarLocationsBtnTopBar').parent().removeClass('active');
+            });
+
+            $('.QAndAsBtnTopBar').click(function() {
+                $('.tabLinkMainWrapMainDivPC').addClass('affix');
+                $('.topBarContainerGeneralDesc').addClass('display-none');
+                $('.topBarContainerPosts').addClass('display-none');
+                $('.topBarContainerQAndAs').removeClass('display-none');
+                $('.topBarContainerSimilarLocations').addClass('display-none');
+                $('.generalDescBtnTopBar').parent().removeClass('active');
+
+                setTimeout(function() {
+                    $('.postsBtnTopBar').parent().removeClass('active');
+                    $('.QAndAsBtnTopBar').parent().addClass('active');
+                }, 50);
+
+                $('.similarLocationsBtnTopBar').parent().removeClass('active');
+            });
+
+            $('.similarLocationsBtnTopBar').click(function() {
+                $('.tabLinkMainWrapMainDivPC').addClass('affix');
+                $('.topBarContainerGeneralDesc').addClass('display-none');
+                $('.topBarContainerPosts').addClass('display-none');
+                $('.topBarContainerQAndAs').addClass('display-none');
+                $('.topBarContainerSimilarLocations').removeClass('display-none');
+                $('.generalDescBtnTopBar').parent().removeClass('active');
+                $('.postsBtnTopBar').parent().removeClass('active');
+
+                setTimeout(function() {
+                    $('.QAndAsBtnTopBar').parent().removeClass('active');
+                    $('.similarLocationsBtnTopBar').parent().addClass('active');
+                }, 50);
+
+            });
         })
 
     </script>

@@ -910,6 +910,10 @@
     color: black;
 }
 
+.color-blackImp {
+    color: black !important;
+}
+
 .color-white {
     color:#fff;
 }

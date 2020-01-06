@@ -1,6 +1,7 @@
-<div id="similarLocationsMainDiv">
+<div id="similarLocationsMainDiv" class="tabContentMainWrap">
 
-    <div class="mainSuggestion swiper-container tabContentMainWrap similarLocationsMainDiv">
+    <div class="topBarContainerSimilarLocations display-none"></div>
+    <div class="mainSuggestion swiper-container">
         <div class="shelf_header">
             <div class="shelf_title">
                 <div class="shelf_title_container h3">
@@ -16,7 +17,7 @@
         <div class="swiper-button-prev"></div>
     </div>
 
-    <div class="mainSuggestion swiper-container tabContentMainWrap similarLocationsMainDiv">
+    <div class="mainSuggestion swiper-container">
         <div class="shelf_header">
             <div class="shelf_title">
                 <div class="shelf_title_container h3">
@@ -32,7 +33,7 @@
         <div class="swiper-button-prev"></div>
     </div>
 
-    <div class="mainSuggestion swiper-container tabContentMainWrap similarLocationsMainDiv">
+    <div class="mainSuggestion swiper-container">
         <div class="shelf_header">
             <div class="shelf_title">
                 <div class="shelf_title_container h3">
@@ -50,7 +51,7 @@
         <div class="swiper-button-prev"></div>
     </div>
 
-    <div class="mainSuggestion swiper-container tabContentMainWrap similarLocationsMainDiv">
+    <div class="mainSuggestion swiper-container">
         <div class="shelf_header">
             <div class="shelf_title">
                 <div class="shelf_title_container h3">

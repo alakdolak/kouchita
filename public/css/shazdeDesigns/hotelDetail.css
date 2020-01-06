@@ -1856,7 +1856,6 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 }
 
 .commentMoreSettingBar {
-    direction: ltr !important;
     background: white;
     display: flex;
     width: 100%;
@@ -1948,9 +1947,6 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
 .moreSettingPost {
     font-size: 35px;
-    position: absolute;
-    right: 2px;
-    top: -22px;
     color: #8b8b8b;
 }
 
@@ -1958,9 +1954,6 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     content: '\E091';
     font-family: shazdemosafer-tour !important;
     font-size: 35px;
-    position: absolute;
-    top: 12px;
-    right: 2px;
     color: #666;
 }
 
@@ -1968,6 +1961,9 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     height: 32px;
     width: 45px;
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /*.generalDescription {*/
@@ -2591,22 +2587,22 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 /*posts filter*/
 
 .postsFiltersMainDiv .block_header, .QAndAMainDivHeader,
-.similarLocationsMainDiv .shelf_title_container {
+.mainSuggestion .shelf_title_container {
     padding: 10px 0;
     border-bottom: 1px solid #e5e5e5;
     margin-bottom: 20px;
 }
 
-.similarLocationsMainDiv .shelf_title_container {
+.mainSuggestion .shelf_title_container {
     margin: 5px 15px 20px;
 }
 
-.similarLocationsMainDiv .shelf_title_container h3 {
+.mainSuggestion .shelf_title_container h3 {
     top: 7px !important;
 }
 
 .postsFiltersMainDiv .block_title , .QAndAMainDivHeader > h3,
-.similarLocationsMainDiv .shelf_title_container h3 {
+.mainSuggestion .shelf_title_container h3 {
     font-size: 20px;
     font-weight: 700;
     line-height: 32px;
@@ -2941,6 +2937,8 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     width: 85%;
     border: none;
     border-bottom: 1px solid #e5e5e5;
+    display: flex;
+    justify-content: center;
 }
 
 .commentQuestionsRatingsBox {
@@ -3166,7 +3164,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
 .QAndAMainDiv {
     background-color: white;
-    margin-top: 30px;
+    margin-top: 15px;
 }
 
 .QAndAMainDiv .QAndAMainDivHeader > h3 {
@@ -3484,7 +3482,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
 /*tabLinkStyles*/
 
-.tabLinkMainWrapMainDiv > a {
+.tabLinkMainWrapMainDiv > a, #MAINWRAP .tabLinkMainWrapMainDiv li {
     display: inline-block;
     width: 25%;
     text-decoration: none;
@@ -3493,14 +3491,18 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     text-align: center;
 }
 
-.tabLinkMainWrapMainDiv > a:hover {
+#MAINWRAP .tabLinkMainWrapMainDiv a {
+    color: black;
+}
+
+#MAINWRAP .tabLinkMainWrapMainDiv a:hover {
     text-decoration: none;
     cursor: pointer;
     color: #4DC7BC;
     text-align: center;
 }
 
-.similarLocationsMainDiv {
+.mainSuggestion {
     background: white;
     margin-top: 40px !important;
 }
@@ -3739,10 +3741,46 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     top: 0;
     width: 100%;
     z-index: 9999 !important;
+    max-width: 1188px;
 }
 
 .affix + .exceptQAndADiv {
     padding-top: 70px;
+}
+
+.tabLinkMainWrapMainDivPC {
+    max-width: 1140px;
+}
+
+.tabLinkMainWrapMainDivPC .tabLinkMainWrap {
+    padding: 0;
+}
+
+#MAINWRAP .navbar-inverse .navbar-nav>.active>a,
+#MAINWRAP .navbar-inverse .navbar-nav>.active>a:focus,
+#MAINWRAP .navbar-inverse .navbar-nav>.active>a:hover {
+    color: #4dc7bc;
+    background-color: white;
+}
+
+#similarLocationsMainDiv {
+    display: inline-block;
+    max-width: 1141px;
+}
+
+.tabLinkMainWrapMainDivPC.navbar-inverse {
+    margin: 0;
+    border: none;
+}
+
+.collapse.navbar-collapse, .nav.navbar-nav {
+    width: 100%;
+}
+
+.topBarContainerPosts, .topBarContainerQAndAs,
+.topBarContainerSimilarLocations, .topBarContainerGeneralDesc {
+    width: 100%;
+    height: 50px;
 }
 
 @media (min-width: 992px) {
@@ -3864,6 +3902,10 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
     .dislikeAnswerClicked::before {
         left: 0.5px;
+    }
+
+    .tabLinkMainWrapMainDivPC {
+        max-width: 976px;
     }
 }
 
@@ -3992,6 +4034,10 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
     /*introduction bar*/
 
+    .tabLinkMainWrapMainDivPC {
+        display: none;
+    }
+
     body.nostalgic .hr_btf_wrap {
         padding: 0;
     }
@@ -4088,7 +4134,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
         display: flex;
     }
 
-    #QAndAMainDivId, #mainDivPlacePost, .similarLocationsMainDiv {
+    #QAndAMainDivId, #mainDivPlacePost, #similarLocationsMainDiv {
         display: none;
     }
 
@@ -4099,15 +4145,15 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     .questionInputBox {
         width: 80%;
     }
+
+    .QAndAMainDiv {
+        margin-top: 0;
+    }
 }
 
 @media (min-width:768px) {
     .postsMainDivInSpecificMode > div:nth-child(1) {
         padding-right: 10px !important;
-    }
-
-    .affix {
-        padding-right: 47px;
     }
 }
 
