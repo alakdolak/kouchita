@@ -1,9 +1,19 @@
 <?php
 
+use App\models\ConfigModel;
 use Illuminate\Support\Facades\Route;
 
 Route::get('databaseforall', function (){
     \Illuminate\Support\Facades\Schema::drop('reviewFeedBack');
+
+    \DB::select("ALTER TABLE `mahalifood` CHANGE `recipes` `recipes` TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL;");
+    \DB::select("ALTER TABLE `majara` ADD `berke` TINYINT NOT NULL DEFAULT '0' AFTER `dasht`, ADD `beach` TINYINT NOT NULL DEFAULT '0' AFTER `berke`, ADD `geoPark` TINYINT NOT NULL DEFAULT '0' AFTER `beach`, ADD `river` TINYINT NOT NULL DEFAULT '0' AFTER `geoPark`, ADD `cheshme` TINYINT NOT NULL DEFAULT '0' AFTER `river`, ADD `talab` TINYINT NOT NULL DEFAULT '0' AFTER `cheshme`;");
+    \DB::select("ALTER TABLE `majara` ADD `walking` TINYINT NOT NULL DEFAULT '0' AFTER `sahranavardi`, ADD `swimming` TINYINT NOT NULL DEFAULT '0' AFTER `walking`, ADD `rockClimbing` TINYINT NOT NULL DEFAULT '0' AFTER `swimming`, ADD `stoneClimbing` TINYINT NOT NULL DEFAULT '0' AFTER `rockClimbing`, ADD `valleyClimbing` TINYINT NOT NULL DEFAULT '0' AFTER `stoneClimbing`, ADD `caveClimbing` TINYINT NOT NULL DEFAULT '0' AFTER `valleyClimbing`, ADD `iceClimbing` TINYINT NOT NULL DEFAULT '0' AFTER `caveClimbing`, ADD `offRoad` TINYINT NOT NULL DEFAULT '0' AFTER `iceClimbing`, ADD `boat` TINYINT NOT NULL DEFAULT '0' AFTER `offRoad`, ADD `rafting` TINYINT NOT NULL DEFAULT '0' AFTER `boat`, ADD `surfing` TINYINT NOT NULL DEFAULT '0' AFTER `rafting`;");
+
+    \DB::select("ALTER TABLE `amaken` ADD `tejari` TINYINT NOT NULL DEFAULT '0' AFTER `baftetarikhi`, ADD `mazhabi` TINYINT NOT NULL DEFAULT '0' AFTER `tejari`, ADD `sanati` TINYINT NOT NULL DEFAULT '0' AFTER `mazhabi`;");
+    \DB::select("ALTER TABLE `amaken` ADD `jangal` TINYINT NOT NULL DEFAULT '0' AFTER `kavir`, ADD `shahri` TINYINT NOT NULL DEFAULT '0' AFTER `jangal`, ADD `village` TINYINT NOT NULL DEFAULT '0' AFTER `shahri`;");
+    \DB::select("ALTER TABLE `amaken` ADD `boomi` TINYINT NOT NULL DEFAULT '0' AFTER `tarikhibana`;");
+    \DB::select("ALTER TABLE `amaken` ADD `weather` TINYINT NOT NULL DEFAULT '0' AFTER `mamooli`;");
 });
 
 Route::get('fillHotelPic', function(){
@@ -477,19 +487,6 @@ Route::group(array('middleware' => ['throttle:30', 'nothing']), function () {
 
     Route::get('soon', array('as' => 'soon', 'uses' => 'HomeController@soon'));
 
-    Route::get('adab-details/{placeId}/{placeName}/{mode?}', array('as' => 'adabDetails', 'uses' => 'AdabController@showAdabDetail'));
-
-    Route::get('majara-details/{placeId}/{placeName}/{mode?}', array('as' => 'majaraDetails', 'uses' => 'MajaraController@showMajaraDetail'));
-
-    Route::get('hotel-details-allReviews/{placeId}/{placeName}/{mode?}', 'HotelController@showHotelDetailAllReview');
-    Route::get('hotel-details-questions/{placeId}/{placeName}/{mode?}', 'HotelController@showHotelDetailAllQuestions');
-    Route::get('hotel-details/{placeId}/{placeName}/{mode?}', array('as' => 'hotelDetails', 'uses' => 'HotelController@showHotelDetail'));
-
-
-    Route::get('restaurant-details/{placeId}/{placeName}/{mode?}', array('as' => 'restaurantDetails', 'uses' => 'RestaurantController@showRestaurantDetail'));
-
-    Route::get('amaken-details/{placeId}/{placeName}/{mode?}', array('as' => 'amakenDetails', 'uses' => 'AmakenController@showAmakenDetail'));
-
     Route::post('fillMyDivWithAdv', ['as' => 'fillMyDivWithAdv', 'uses' => 'PlaceController@fillMyDivWithAdv']);
 
     Route::post('getSimilarsHotel', array('as' => 'getSimilarsHotel', 'uses' => 'HotelController@getSimilarsHotel'));
@@ -786,28 +783,25 @@ Route::group(array('middleware' => ['throttle:30', 'nothing', 'auth', 'operatorA
     Route::get('getReports/{page}', array('as' => 'getReports2', 'uses' => 'ReportController@getReports'));
 });
 
+//place-details
+Route::group(array('middleware' => ['throttle:30', 'nothing']), function (){
+    Route::get('adab-details/{placeId}/{placeName}/{mode?}', array('as' => 'adabDetails', 'uses' => 'AdabController@showAdabDetail'));
 
+    Route::get('hotel-details/{placeId}/{placeName}/{mode?}', array('as' => 'hotelDetails', 'uses' => 'HotelController@showHotelDetail'));
 
-Route::get('emailtest', 'HomeController@emailtest');
+    Route::get('majara-details/{placeId}/{placeName}/{mode?}', array('as' => 'majaraDetails', 'uses' => 'MajaraController@showMajaraDetail'));
 
-Route::get('/tour/index', function (){
-    $placeMode = 'tour';
-    $state = 'تهران';
-    return view('tour.tour', compact(['placeMode', 'state']));
+    Route::get('restaurant-details/{placeId}/{placeName}/{mode?}', array('as' => 'restaurantDetails', 'uses' => 'RestaurantController@showRestaurantDetail'));
+
+    Route::get('amaken-details/{placeId}/{placeName}/{mode?}', array('as' => 'amakenDetails', 'uses' => 'AmakenController@showAmakenDetail'));
+
+    Route::get('sanaiesogat-details/{placeId}/{placeName}/{mode?}', array('as' => 'sanaiesogatDetails', 'uses' => 'SogatSanaieController@showSogatSanaieDetails'));
+
+    Route::get('mahaliFood-details/{placeId}/{placeName}/{mode?}', array('as' => 'mahaliFoodDetails', 'uses' => 'MahaliFoodController@showMahaliFoodDetails'));
+
+    Route::get('hotel-details-allReviews/{placeId}/{placeName}/{mode?}', 'HotelController@showHotelDetailAllReview');
+    Route::get('hotel-details-questions/{placeId}/{placeName}/{mode?}', 'HotelController@showHotelDetailAllQuestions');
 });
-Route::get('/tour/details', function (){
-    $placeMode = 'tour';
-    $state = 'تهران';
-    return view('tour.tour-details', compact(['placeMode', 'state']));
-});
-Route::get('/tour/lists', function (){
-    $placeMode = 'tour';
-    $state = 'تهران';
-    return view('tour.tour-lists', compact(['placeMode', 'state']));
-});
-
-Route::post('checkLogin', array('as' => 'checkLogin', 'uses' => 'HomeController@checkLogin'));
-
 
 //ajaxController
 Route::group(array('middleware' => 'nothing'), function () {
@@ -891,4 +885,24 @@ Route::group(array('middleware' => 'auth'), function () {
 
     Route::get('/tour/create/complete/{id}', 'TourController@completeCreationTour')->name('tour.create.complete');
 
+});
+
+Route::post('checkLogin', array('as' => 'checkLogin', 'uses' => 'HomeController@checkLogin'));
+
+Route::get('emailtest', 'HomeController@emailtest');
+
+Route::get('/tour/index', function (){
+    $placeMode = 'tour';
+    $state = 'تهران';
+    return view('tour.tour', compact(['placeMode', 'state']));
+});
+Route::get('/tour/details', function (){
+    $placeMode = 'tour';
+    $state = 'تهران';
+    return view('tour.tour-details', compact(['placeMode', 'state']));
+});
+Route::get('/tour/lists', function (){
+    $placeMode = 'tour';
+    $state = 'تهران';
+    return view('tour.tour-lists', compact(['placeMode', 'state']));
 });

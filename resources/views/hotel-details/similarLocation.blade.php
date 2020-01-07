@@ -4,11 +4,34 @@
         <div class="shelf_header">
             <div class="shelf_title">
                 <div class="shelf_title_container h3">
+                    <h3>مقالات برتر</h3>
+                </div>
+            </div>
+        </div>
+        <div id="magaleSwiperContent" class="swiper-wrapper">2</div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+        <!-- Add Arrows -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+    </div>
+
+    <div class="mainSuggestion swiper-container tabContentMainWrap similarLocationsMainDiv">
+        <div class="shelf_header">
+            <div class="shelf_title">
+                <div class="shelf_title_container h3">
                     <h3>مکان‌های نزدیک</h3>
                 </div>
             </div>
         </div>
-        <div id="amakenSwiperContent" class="swiper-wrapper"></div>
+        <div id="amakenSwiperContent" class="swiper-wrapper">
+            <div class="swiper-slide">1</div>
+            <div class="swiper-slide">2</div>
+            <div class="swiper-slide">3</div>
+            <div class="swiper-slide">4</div>
+            <div class="swiper-slide">5</div>
+            <div class="swiper-slide">6</div>
+        </div>
         <!-- Add Pagination -->
         <div class="swiper-pagination"></div>
         <!-- Add Arrows -->

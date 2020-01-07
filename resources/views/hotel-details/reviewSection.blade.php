@@ -2,7 +2,7 @@
 
     <div id="showReviewsMain"></div>
 
-    <div id="reviewsPagination" class="col-xs-12 postsMainDivFooter position-relative" style="display: none">
+    <div id="reviewsPagination" class="col-xs-12 postsMainDivFooter position-relative">
 
         <div class="col-xs-12 postsMainDivFooter position-relative">
             <div class="col-xs-5 font-size-13 line-height-2">
@@ -27,7 +27,7 @@
     var reviewPerPage = 0;
     var reviewPage = 1;
     var reviewPerPageNum = [3, 5, 10];
-    var firstTimeFilterShow = true;
+    var firstTimeFilterShow = 1;
 
     function loadReviews(){
         $.ajax({
@@ -45,6 +45,7 @@
                     document.getElementById('showReviewsMain').innerHTML = ' ';
                     document.getElementById('postFilters').style.display = 'none';
                     document.getElementById('advertiseDiv').style.display = 'none';
+                    document.getElementById('reviewsPagination').style.display = 'none';
 
                     console.log('نقدی ثبت نشده است');
                 }
@@ -53,10 +54,11 @@
                     allReviews = response[0];
                     reviewsCount = response[1];
 
-                    if(reviewsCount < 3 && firstTimeFilterShow) {
+                    if(reviewsCount < 3 && firstTimeFilterShow == 1) {
                         document.getElementById('postFilters').style.display = 'none';
                     }
-                    firstTimeFilterShow = false;
+
+                    firstTimeFilterShow = 0;
 
                     createReviewPagination(reviewsCount);
                     showReviews(allReviews);
@@ -224,11 +226,11 @@
 
 
             text +='<div class="quantityOfLikes">\n' +
-                '<span>' + reviews[i]["like"] + '</span>\n' +
+                '<span id="reviewLikeNum' + reviews[i]["id"] + '">' + reviews[i]["like"] + '</span>\n' +
                 'نفر دوست داشتند،\n' +
-                '<span>' + reviews[i]["dislike"] + '</span>\n' +
+                '<span id="reviewDisLikeNum' + reviews[i]["id"] + '">' + reviews[i]["dislike"] + '</span>\n' +
                 'نفر دوست نداشتند و\n' +
-                '<span>' + reviews[i]["comment"].length + '</span>\n' +
+                '<span>' + reviews[i]["ansNum"] + '</span>\n' +
                 'نفر نظر دادند.\n' +
                 '</div>\n' +
                 '</div>\n' +
@@ -352,27 +354,31 @@
                 text += '</div>\n';
             }
 
-            var likeColor = '#565656';
-            var dislikeColor = '#565656';
+            var likeClass = '';
+            var disLikeClass = '';
+            var likeIconClass = ' commentsLikeIconFeedback';
+            var disLikeIconClass = ' commentsDislikeIconFeedback';
 
-            if(reviews[i]['userLike'] != null && reviews[i]['userLike']['like'] == 1)
-                likeColor = 'red';
-            else if(reviews[i]['userLike'] != null && reviews[i]['userLike']['like'] == -1)
-                dislikeColor = 'darkred';
+            if(reviews[i]['userLike'] != null && reviews[i]['userLike']['like'] == 1){
+                likeClass = 'color-red';
+                likeIconClass = ' commentsLikeClickedIconFeedback';
+            }
+            else if(reviews[i]['userLike'] != null && reviews[i]['userLike']['like'] == -1){
+                disLikeClass = 'color-darkred';
+                disLikeIconClass = ' commentsDislikeClickedIconFeedback';
+            }
 
 
             text +='                                <div class="commentFeedbackChoices">\n' +
                 '                                    <div class="postsActionsChoices col-xs-3">\n' +
-                '                                        <div class="postLikeChoice display-inline-block" onclick="likeReview(' + reviews[i]["id"] + ', 1)" style="color: ' + likeColor + '">\n' +
-                '                                            <span class="commentsLikeIconFeedback firstIcon"></span>\n' +
-                '                                            <span class="commentsLikeClickedIconFeedback display-none secondIcon"></span>\n' +
+                '                                        <div class="postLikeChoice display-inline-block ' + likeClass + '" onclick="likeReview(' + reviews[i]["id"] + ', 1, this);">\n' +
+                '                                            <span id="likeIcon' + reviews[i]["id"] + '" class="' + likeIconClass + ' firstIcon"></span>\n' +
                 '                                            <span class="mg-rt-20 cursor-pointer">دوست داشتم</span>\n' +
                 '                                        </div>\n' +
                 '                                    </div>\n' +
                 '                                    <div class="postsActionsChoices col-xs-3">\n' +
-                '                                        <div class="postDislikeChoice display-inline-block" onclick="likeReview(' + reviews[i]["id"] + ', 0)" style="color: ' + dislikeColor + '">\n' +
-                '                                            <span class="commentsDislikeIconFeedback firstIcon"></span>\n' +
-                '                                            <span class="commentsDislikeClickedIconFeedback display-none secondIcon"></span>\n' +
+                '                                        <div class="postDislikeChoice display-inline-block ' + disLikeClass + '" onclick="likeReview(' + reviews[i]["id"] + ', 0, this);">\n' +
+                '                                            <span id="disLikeIcon' + reviews[i]["id"] + '" class="' + disLikeIconClass + ' firstIcon"></span>\n' +
                 '                                            <span class="mg-rt-20 cursor-pointer">دوست نداشتم</span>\n' +
                 '                                        </div>\n' +
                 '                                    </div>\n' +
@@ -414,8 +420,8 @@
                     '                                            <p>' + reviews[i]["comment"][j]["text"] + '</p>\n' +
                     '                                            <div class="commentsStatisticsBar">\n' +
                     '                                                <div class="float-right display-inline-black">\n' +
-                    '                                                    <span class="likeStatisticIcon commentsStatisticSpan color-red">' + reviews[i]["comment"][j]["like"] + '</span>\n' +
-                    '                                                    <span class="dislikeStatisticIcon commentsStatisticSpan dark-red">' + reviews[i]["comment"][j]["dislike"] + '</span>\n' +
+                    '                                                    <span id="reviewLikeNum' + reviews[i]["comment"][j]["id"] + '" class="likeStatisticIcon commentsStatisticSpan color-red">' + reviews[i]["comment"][j]["like"] + '</span>\n' +
+                    '                                                    <span id="reviewDisLikeNum' + reviews[i]["comment"][j]["id"] + '" class="dislikeStatisticIcon commentsStatisticSpan dark-red">' + reviews[i]["comment"][j]["dislike"] + '</span>\n' +
                     '                                                    <span class="numberOfCommentsIcon commentsStatisticSpan color-blue">' + reviews[i]["comment"][j]["ansNum"] + '</span>\n' +
                     '                                                </div>\n';
                 if(reviews[i]["comment"][j]["ansNum"] > 0)
@@ -475,7 +481,7 @@
 
     }
 
-    function likeReview(_logId, _like){
+    function likeReview(_logId, _like, _element){
 
         if(!checkLogin())
             return;
@@ -488,10 +494,114 @@
                 'like' : _like
             },
             success: function(response){
-                if(response == 'ok')
-                    alert('نظر شما با موفقیت ثبت شد.')
+                if(response == 'ok'){
+
+                    changeReviewLikeNumber(allReviews, _logId, _like);
+
+                    if(_like == 1) {
+                        $(_element).addClass('color-red');
+                        $(_element).children("span.firstIcon").removeClass('commentsLikeIconFeedback');
+                        $(_element).children("span.firstIcon").addClass('commentsLikeClickedIconFeedback');
+
+                        $(_element).parent().next().children().removeClass('color-darkred');
+                        $(_element).parent().next().children().children("span.firstIcon").removeClass('commentsDislikeClickedIconFeedback');
+                        $(_element).parent().next().children().children("span.firstIcon").addClass('commentsDislikeIconFeedback');
+                    }
+                    else{
+                        $(_element).addClass('color-darkred');
+                        $(_element).children("span.firstIcon").removeClass('commentsDislikeIconFeedback');
+                        $(_element).children("span.firstIcon").addClass('commentsDislikeClickedIconFeedback');
+
+                        $(_element).parent().prev().children().removeClass('color-red');
+                        $(_element).parent().prev().children().children("span.firstIcon").removeClass('commentsLikeClickedIconFeedback');
+                        $(_element).parent().prev().children().children("span.firstIcon").addClass('commentsLikeIconFeedback');
+                    }
+                }
             }
         })
+    }
+
+    function changeReviewLikeNumber(_review, _logId, _like){
+
+        for(var i = 0; i < _review.length; i++){
+            if(_review[i]["id"] == _logId){
+                if(_review[i]["userLike"] != null && _review[i]["userLike"]["like"] == 1){
+                    if(_like != 1){
+                        var num = document.getElementById('reviewLikeNum' + _logId).innerText;
+                        num--;
+                        document.getElementById('reviewLikeNum' + _logId).innerText = num;
+
+                        num = document.getElementById('reviewDisLikeNum' + _logId).innerText;
+                        num++;
+                        document.getElementById('reviewDisLikeNum' + _logId).innerText = num;
+
+                        _review[i]["userLike"]["like"] = -1;
+                    }
+                }
+                else if(_review[i]["userLike"] != null && _review[i]["userLike"]["like"] == -1){
+                    if(_like == 1){
+                        var num = document.getElementById('reviewDisLikeNum' + _logId).innerText;
+                        num--;
+                        document.getElementById('reviewDisLikeNum' + _logId).innerText = num;
+
+                        num = document.getElementById('reviewLikeNum' + _logId).innerText;
+                        num++;
+                        document.getElementById('reviewLikeNum' + _logId).innerText = num;
+
+                        _review[i]["userLike"]["like"] = 1;
+                    }
+                }
+                else{
+                    if(_like == 1){
+                        var num = document.getElementById('reviewLikeNum' + _logId).innerText;
+                        num++;
+                        document.getElementById('reviewLikeNum' + _logId).innerText = num;
+                    }
+                    else{
+                        var num = document.getElementById('reviewDisLikeNum' + _logId).innerText;
+                        num++;
+                        document.getElementById('reviewDisLikeNum' + _logId).innerText = num;
+                    }
+                    _review[i]["userLike"]["like"] = _like;
+                }
+            }
+            else if(_review[i]["comment"].length > 0){
+                changeReviewLikeNumber(_review[i]["comment"], _logId, _like);
+            }
+        }
+
+        // if(_like == 1){
+        //     var num = document.getElementById('reviewLikeNum' + _logId).innerText;
+        //     num++;
+        //     document.getElementById('reviewLikeNum' + _logId).innerText = num;
+        //
+        //     if($('#likeIcon' + _logId).hasClass('commentsLikeClickedIconFeedback')){
+        //         num--;
+        //         document.getElementById('reviewLikeNum' + _logId).innerText = num;
+        //     }
+        //     else if($('#disLikeIcon' + _logId).hasClass('commentsDislikeClickedIconFeedback')){
+        //         var num = document.getElementById('reviewDisLikeNum' + _logId).innerText;
+        //         num--;
+        //         document.getElementById('reviewDisLikeNum' + _logId).innerText = (num);
+        //     }
+        //
+        // }
+        // else{
+        //     var num = document.getElementById('reviewDisLikeNum' + _logId).innerText;
+        //     num++;
+        //     document.getElementById('reviewDisLikeNum' + _logId).innerText = (num);
+        //
+        //     if($('#disLikeIcon' + _logId).hasClass('commentsDislikeClickedIconFeedback')){
+        //         num--;
+        //         document.getElementById('reviewDisLikeNum' + _logId).innerText = num;
+        //     }
+        //     else if($('#likeIcon' + _logId).hasClass('commentsLikeClickedIconFeedback')){
+        //         var num = document.getElementById('reviewLikeNum' + _logId).innerText;
+        //         num--;
+        //         document.getElementById('reviewLikeNum' + _logId).innerText = num;
+        //     }
+        // }
+
     }
 
     function sendAnsOfReviews(_logId, _ans){
@@ -539,7 +649,7 @@
 
         for(var i = 0; i < photo.length; i++) {
             text += '<div class="rightColPhotosShowingModal" onclick="changeReviewSlidePic(' + _index + ', ' + i + ')">\n' +
-                '<img src="' + photo[i]['url'] + '" style="width: 100%; height: 100%;">\n' +
+                '<img src="' + photo[i]['url'] + '" class="mainReviewPic" >\n' +
                 '</div>';
 
         }
@@ -570,6 +680,8 @@
         document.getElementById('reviewPerView' + reviewPerPage).classList.remove('color-blue');
         document.getElementById('reviewPerView' + _count).classList.add('color-blue');
         reviewPerPage = _count;
+        reviewPage = 1;
+
         loadReviews();
     }
 
@@ -583,12 +695,6 @@
         var page = Math.round(reviewsCount/reviewPerPageNum[reviewPerPage]);
 
         createReviewPerPage();
-
-        if(page > 0)
-            document.getElementById('reviewsPagination').style.display = 'block';
-        else
-            document.getElementById('reviewsPagination').style.display = 'none';
-
 
         if(page >= 5){
             if(reviewPage == 1){
@@ -688,8 +794,8 @@
                 '                                            <p>' + comment[k]["text"] + '</p>\n' +
                 '                                            <div class="commentsStatisticsBar">\n' +
                 '                                                <div class="float-right display-inline-black">\n' +
-                '                                                    <span class="likeStatisticIcon commentsStatisticSpan color-red">' + comment[k]["like"] + '</span>\n' +
-                '                                                    <span class="dislikeStatisticIcon commentsStatisticSpan dark-red">' + comment[k]["dislike"] + '</span>\n' +
+                '                                                    <span id="reviewLikeNum' + comment[k]["id"] + '" class="likeStatisticIcon commentsStatisticSpan color-red">' + comment[k]["like"] + '</span>\n' +
+                '                                                    <span id="reviewDisLikeNum' + comment[k]["id"] + '" class="dislikeStatisticIcon commentsStatisticSpan dark-red">' + comment[k]["dislike"] + '</span>\n' +
                 '                                                    <span class="numberOfCommentsIcon commentsStatisticSpan color-blue">' + comment[k]["ansNum"] + '</span>\n' +
                 '                                                </div>\n';
 

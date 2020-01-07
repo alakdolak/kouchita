@@ -799,9 +799,6 @@
             }, {
                 "featureType": "water",
                 "stylers": [{"hue": "#00BFFF"}, {"saturation": 6}, {"lightness": 8}, {"gamma": 1}]
-            }, {
-                "featureType": "poi",
-                "stylers": [{"hue": "#679714"}, {"saturation": 33.4}, {"lightness": -25.4}, {"gamma": 1}]
             }]
         };
         // Get the HTML DOM element that will contain your map
@@ -837,7 +834,6 @@
     getNearby();
 
     function addMarkerToSmallMap(nearPlacesMap){
-        console.log(nearPlacesMap)
         var marker;
         for(var i = 0; i < nearPlacesMap.length; i++){
 
