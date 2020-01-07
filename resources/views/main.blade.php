@@ -366,7 +366,9 @@
             @include('layouts.middleBanner')
         </div>
 
-        @include('layouts.placeFooter')
+        <div class="hideOnPhone">
+            @include('layouts.placeFooter')
+        </div>
 
         @if(!Auth::check())
             @include('layouts.loginPopUp')
