@@ -311,7 +311,7 @@ class APIController extends Controller {
 
         foreach ($hotels as $hotel) {
 
-            if (file_exists((__DIR__ . '/../../../../static/_images/hotels/' . $hotel->file . '/f-1.jpg')))
+            if (file_exists((__DIR__ . '/../../../../assets/_images/hotels/' . $hotel->file . '/f-1.jpg')))
                 $hotel->pic = URL::asset('_images/hotels/' . $hotel->file . '/f-1.jpg');
             else
                 $hotel->pic = URL::asset('_images/nopic/blank.jpg');
@@ -862,7 +862,7 @@ class APIController extends Controller {
 
         if(!empty($place->pic_1)) {
             if($place->category == 3) {
-                if (file_exists((__DIR__ . '/../../../../static/_images/adab/ghazamahali/' . $place->file . '/s-1.jpg'))) {
+                if (file_exists((__DIR__ . '/../../../../assets/_images/adab/ghazamahali/' . $place->file . '/s-1.jpg'))) {
                     $photos[count($photos)] = URL::asset('_images/adab/ghazamahali/' . $place->file . '/s-1.jpg');
                     $thumbnail = URL::asset('_images/adab/ghazamahali/' . $place->file . '/f-1.jpg');
                 } else {
@@ -871,7 +871,7 @@ class APIController extends Controller {
                 }
             }
             else {
-                if (file_exists((__DIR__ . '/../../../../static/_images/adab/soghat/' . $place->file . '/s-1.jpg'))) {
+                if (file_exists((__DIR__ . '/../../../../assets/_images/adab/soghat/' . $place->file . '/s-1.jpg'))) {
                     $photos[count($photos)] = URL::asset('_images/adab/soghat/' . $place->file . '/s-1.jpg');
                     $thumbnail = URL::asset('_images/adab/soghat/' . $place->file . '/f-1.jpg');
                 } else {
@@ -1006,7 +1006,7 @@ class APIController extends Controller {
             default:
                 $place = Amaken::whereId($log->placeId);
                 $address = $place->address;
-                if(file_exists((__DIR__ . '/../../../../static/_images/amaken/' . $place->file . '/' . $place->pic_1)))
+                if(file_exists((__DIR__ . '/../../../../assets/_images/amaken/' . $place->file . '/' . $place->pic_1)))
                     $placePic = URL::asset('_images/amaken/' . $place->file . '/' . $place->pic_1);
                 else
                     $placePic = URL::asset('_images/nopic/blank.jpg');
@@ -1016,7 +1016,7 @@ class APIController extends Controller {
             case 3:
                 $place = Restaurant::whereId($log->placeId);
                 $address = $place->address;
-                if(file_exists((__DIR__ . '/../../../../static/_images/restaurant/' . $place->file . '/' . $place->pic_1)))
+                if(file_exists((__DIR__ . '/../../../../assets/_images/restaurant/' . $place->file . '/' . $place->pic_1)))
                     $placePic = URL::asset('_images/restaurant/' . $place->file . '/' . $place->pic_1);
                 else
                     $placePic = URL::asset('_images/nopic/blank.jpg');
@@ -1026,7 +1026,7 @@ class APIController extends Controller {
             case 4:
                 $place = Hotel::whereId($log->placeId);
                 $address = $place->address;
-                if(file_exists((__DIR__ . '/../../../../static/_images/hotels/' . $place->file . '/' . $place->pic_1)))
+                if(file_exists((__DIR__ . '/../../../../assets/_images/hotels/' . $place->file . '/' . $place->pic_1)))
                     $placePic = URL::asset('_images/hotels/' . $place->file . '/' . $place->pic_1);
                 else
                     $placePic = URL::asset('_images/nopic/blank.jpg');
@@ -1036,7 +1036,7 @@ class APIController extends Controller {
             case 6:
                 $place = Majara::whereId($log->placeId);
                 $address = $place->address;
-                if(file_exists((__DIR__ . '/../../../../static/_images/majara/' . $place->file . '/' . $place->pic_1)))
+                if(file_exists((__DIR__ . '/../../../../assets/_images/majara/' . $place->file . '/' . $place->pic_1)))
                     $placePic = URL::asset('_images/majara/' . $place->file . '/' . $place->pic_1);
                 else
                     $placePic = URL::asset('_images/nopic/blank.jpg');
@@ -1046,13 +1046,13 @@ class APIController extends Controller {
             case 8:
                 $place = Adab::whereId($log->placeId);
                 if($place->category == 3) {
-                    if(file_exists((__DIR__ . '/../../../../static/_images/adab/ghazamahali/' . $place->file . '/' . $place->pic_1)))
+                    if(file_exists((__DIR__ . '/../../../../assets/_images/adab/ghazamahali/' . $place->file . '/' . $place->pic_1)))
                         $placePic = URL::asset('_images/adab/ghazamahali/' . $place->file . '/' . $place->pic_1);
                     else
                         $placePic = URL::asset('_images/nopic/blank.jpg');
                 }
                 else {
-                    if(file_exists((__DIR__ . '/../../../../static/_images/adab/soghat/' . $place->file . '/' . $place->pic_1)))
+                    if(file_exists((__DIR__ . '/../../../../assets/_images/adab/soghat/' . $place->file . '/' . $place->pic_1)))
                         $placePic = URL::asset('_images/adab/soghat/' . $place->file . '/' . $place->pic_1);
                     else
                         $placePic = URL::asset('_images/nopic/blank.jpg');
@@ -1091,7 +1091,7 @@ class APIController extends Controller {
         $log->visitorId = $user->username;
         $city = Cities::whereId($user->cityId);
 
-        if(!empty($log->pic) && file_exists(__DIR__ . '/../../../../static/userPhoto/comments/' . $log->kindPlaceId . '/' . $log->pic)) {
+        if(!empty($log->pic) && file_exists(__DIR__ . '/../../../../assets/userPhoto/comments/' . $log->kindPlaceId . '/' . $log->pic)) {
             $log->userPic = URL::asset('userPhoto/comments/' . $log->kindPlaceId . '/' . $log->pic);
         }
 
@@ -1144,7 +1144,7 @@ class APIController extends Controller {
             case 1:
             default:
                 $place = Amaken::whereId($placeId);
-                if(file_exists((__DIR__ . '/../../../../static/_images/amaken/' . $place->file . '/' . $place->pic_1)))
+                if(file_exists((__DIR__ . '/../../../../assets/_images/amaken/' . $place->file . '/' . $place->pic_1)))
                     $placePic = URL::asset('_images/amaken/' . $place->file . '/' . $place->pic_1);
                 else
                     $placePic = URL::asset('_images/nopic/blank.jpg');
@@ -1153,7 +1153,7 @@ class APIController extends Controller {
                 break;
             case 3:
                 $place = Restaurant::whereId($placeId);
-                if(file_exists((__DIR__ . '/../../../../static/_images/restaurant/' . $place->file . '/' . $place->pic_1)))
+                if(file_exists((__DIR__ . '/../../../../assets/_images/restaurant/' . $place->file . '/' . $place->pic_1)))
                     $placePic = URL::asset('_images/restaurant/' . $place->file . '/' . $place->pic_1);
                 else
                     $placePic = URL::asset('_images/nopic/blank.jpg');
@@ -1162,7 +1162,7 @@ class APIController extends Controller {
                 break;
             case 4:
                 $place = Hotel::whereId($placeId);
-                if(file_exists((__DIR__ . '/../../../../static/_images/hotels/' . $place->file . '/' . $place->pic_1)))
+                if(file_exists((__DIR__ . '/../../../../assets/_images/hotels/' . $place->file . '/' . $place->pic_1)))
                     $placePic = URL::asset('_images/hotels/' . $place->file . '/' . $place->pic_1);
                 else
                     $placePic = URL::asset('_images/nopic/blank.jpg');
@@ -1171,7 +1171,7 @@ class APIController extends Controller {
                 break;
             case 6:
                 $place = Majara::whereId($placeId);
-                if(file_exists((__DIR__ . '/../../../../static/_images/majara/' . $place->file . '/' . $place->pic_1)))
+                if(file_exists((__DIR__ . '/../../../../assets/_images/majara/' . $place->file . '/' . $place->pic_1)))
                     $placePic = URL::asset('_images/majara/' . $place->file . '/' . $place->pic_1);
                 else
                     $placePic = URL::asset('_images/nopic/blank.jpg');
@@ -1181,13 +1181,13 @@ class APIController extends Controller {
             case 8:
                 $place = Adab::whereId($placeId);
                 if($place->category == 3) {
-                    if(file_exists((__DIR__ . '/../../../../static/_images/adab/ghazamahali/' . $place->file . '/' . $place->pic_1)))
+                    if(file_exists((__DIR__ . '/../../../../assets/_images/adab/ghazamahali/' . $place->file . '/' . $place->pic_1)))
                         $placePic = URL::asset('_images/adab/ghazamahali/' . $place->file . '/' . $place->pic_1);
                     else
                         $placePic = URL::asset('_images/nopic/blank.jpg');
                 }
                 else {
-                    if(file_exists((__DIR__ . '/../../../../static/_images/adab/soghat/' . $place->file . '/' . $place->pic_1)))
+                    if(file_exists((__DIR__ . '/../../../../assets/_images/adab/soghat/' . $place->file . '/' . $place->pic_1)))
                         $placePic = URL::asset('_images/adab/soghat/' . $place->file . '/' . $place->pic_1);
                     else
                         $placePic = URL::asset('_images/nopic/blank.jpg');
@@ -1271,7 +1271,7 @@ class APIController extends Controller {
                       hotels limit 0, ' . $reminder));
 
         foreach ($place1 as $itr) {
-            if(file_exists((__DIR__ . '/../../../../static/_images/hotels/' . $itr->file . '/f-1.jpg')))
+            if(file_exists((__DIR__ . '/../../../../assets/_images/hotels/' . $itr->file . '/f-1.jpg')))
                 $itr->pic = URL::asset('_images/hotels/' . $itr->file . '/f-1.jpg');
             else
                 $itr->pic = URL::asset('_images/nopic/blank.jpg');
@@ -1345,7 +1345,7 @@ class APIController extends Controller {
 
         foreach ($place1 as $itr) {
 
-            if(file_exists((__DIR__ . '/../../../../static/_images/amaken/' . $itr->file . '/f-1.jpg')))
+            if(file_exists((__DIR__ . '/../../../../assets/_images/amaken/' . $itr->file . '/f-1.jpg')))
                 $itr->pic = URL::asset('_images/amaken/' . $itr->file . '/f-1.jpg');
             else
                 $itr->pic = URL::asset('_images/nopic/blank.jpg');
@@ -1419,7 +1419,7 @@ class APIController extends Controller {
 
         foreach ($place1 as $itr) {
 
-            if(file_exists((__DIR__ . '/../../../../static/_images/restaurant/' . $itr->file . '/f-1.jpg')))
+            if(file_exists((__DIR__ . '/../../../../assets/_images/restaurant/' . $itr->file . '/f-1.jpg')))
                 $itr->pic = URL::asset('_images/restaurant/' . $itr->file . '/f-1.jpg');
             else
                 $itr->pic = URL::asset('_images/nopic/blank.jpg');
@@ -1468,7 +1468,7 @@ class APIController extends Controller {
         $place4 = Adab::whereCategory(3)->take(4)->get();
         $kindPlaceId = Place::whereName('آداب')->first()->id;
         foreach ($place4 as $itr) {
-            if(file_exists((__DIR__ . '/../../../../static/_images/adab/ghazamahali/' . $itr->file . '/f-1.jpg')))
+            if(file_exists((__DIR__ . '/../../../../assets/_images/adab/ghazamahali/' . $itr->file . '/f-1.jpg')))
                 $itr->pic = URL::asset('_images/adab/ghazamahali/' . $itr->file . '/f-1.jpg');
             else
                 $itr->pic = URL::asset('_images/nopic/blank.jpg');
@@ -1535,7 +1535,7 @@ class APIController extends Controller {
                         continue;
                     }
                     $place2[$i] = $tmp;
-                    if(file_exists((__DIR__ . '/../../../../static/_images/amaken/' . $place2[$i]->file . '/f-1.jpg')))
+                    if(file_exists((__DIR__ . '/../../../../assets/_images/amaken/' . $place2[$i]->file . '/f-1.jpg')))
                         $place2[$i]->pic = URL::asset('_images/amaken/' . $place2[$i]->file . '/f-1.jpg');
                     else
                         $place2[$i]->pic = URL::asset('_images/nopic/blank.jpg');
@@ -1549,7 +1549,7 @@ class APIController extends Controller {
                         continue;
                     }
                     $place2[$i] = $tmp;
-                    if(file_exists((__DIR__ . '/../../../../static/_images/restaurant/' . $place2[$i]->file . '/f-1.jpg')))
+                    if(file_exists((__DIR__ . '/../../../../assets/_images/restaurant/' . $place2[$i]->file . '/f-1.jpg')))
                         $place2[$i]->pic = URL::asset('_images/restaurant/' . $place2[$i]->file . '/f-1.jpg');
                     else
                         $place2[$i]->pic = URL::asset('_images/nopic/blank.jpg');
@@ -1563,7 +1563,7 @@ class APIController extends Controller {
                         continue;
                     }
                     $place2[$i] = $tmp;
-                    if(file_exists((__DIR__ . '/../../../../static/_images/hotels/' . $place2[$i]->file . '/f-1.jpg')))
+                    if(file_exists((__DIR__ . '/../../../../assets/_images/hotels/' . $place2[$i]->file . '/f-1.jpg')))
                         $place2[$i]->pic = URL::asset('_images/hotels/' . $place2[$i]->file . '/f-1.jpg');
                     else
                         $place2[$i]->pic = URL::asset('_images/nopic/blank.jpg');
@@ -1577,7 +1577,7 @@ class APIController extends Controller {
                         continue;
                     }
                     $place2[$i] = $tmp;
-                    if(file_exists((__DIR__ . '/../../../../static/_images/majara/' . $place2[$i]->file . '/f-1.jpg')))
+                    if(file_exists((__DIR__ . '/../../../../assets/_images/majara/' . $place2[$i]->file . '/f-1.jpg')))
                         $place2[$i]->pic = URL::asset('_images/majara/' . $place2[$i]->file . '/f-1.jpg');
                     else
                         $place2[$i]->pic = URL::asset('_images/nopic/blank.jpg');
@@ -1592,13 +1592,13 @@ class APIController extends Controller {
                     }
                     $place2[$i] = $tmp;
                     if($place2[$i]->category == 3) {
-                        if(file_exists((__DIR__ . '/../../../../static/_images/adab/ghazamahali/' . $place2[$i]->file . '/f-1.jpg')))
+                        if(file_exists((__DIR__ . '/../../../../assets/_images/adab/ghazamahali/' . $place2[$i]->file . '/f-1.jpg')))
                             $place2[$i]->pic = URL::asset('_images/adab/ghazamahali/' . $place2[$i]->file . '/f-1.jpg');
                         else
                             $place2[$i]->pic = URL::asset('_images/nopic/blank.jpg');
                     }
                     else {
-                        if(file_exists((__DIR__ . '/../../../../static/_images/adab/soghat/' . $place2[$i]->file . '/f-1.jpg')))
+                        if(file_exists((__DIR__ . '/../../../../assets/_images/adab/soghat/' . $place2[$i]->file . '/f-1.jpg')))
                             $place2[$i]->pic = URL::asset('_images/adab/soghat/' . $place2[$i]->file . '/f-1.jpg');
                         else
                             $place2[$i]->pic = URL::asset('_images/nopic/blank.jpg');
@@ -1674,7 +1674,7 @@ class APIController extends Controller {
                 case 1:
                 default:
                     $tmp = Amaken::whereId($itr->placeId);
-                    if(file_exists((__DIR__ . '/../../../../static/_images/amaken/' . $tmp->file . "/f-1.jpg")))
+                    if(file_exists((__DIR__ . '/../../../../assets/_images/amaken/' . $tmp->file . "/f-1.jpg")))
                         $itr->placePic = URL::asset("_images/amaken/" . $tmp->file . "/f-1.jpg");
                     else
                         $itr->placePic = URL::asset("_images/nopic/blank.jpg");
@@ -1683,7 +1683,7 @@ class APIController extends Controller {
                     break;
                 case 3:
                     $tmp = Restaurant::whereId($itr->placeId);
-                    if(file_exists((__DIR__ . '/../../../../static/_images/restaurant/' . $tmp->file . "/f-1.jpg")))
+                    if(file_exists((__DIR__ . '/../../../../assets/_images/restaurant/' . $tmp->file . "/f-1.jpg")))
                         $itr->placePic = URL::asset('_images/restaurant/' . $tmp->file . "/" . $tmp->pic_1);
                     else
                         $itr->placePic = URL::asset('_images/nopic/blank.jg');
@@ -1692,7 +1692,7 @@ class APIController extends Controller {
                     break;
                 case 4:
                     $tmp = Hotel::whereId($itr->placeId);
-                    if(file_exists((__DIR__ . '/../../../../static/_images/hotels/' . $tmp->file . "/f-1.jpg")))
+                    if(file_exists((__DIR__ . '/../../../../assets/_images/hotels/' . $tmp->file . "/f-1.jpg")))
                         $itr->placePic = URL::asset("_images/hotels/" . $tmp->file . "/f-1.jpg");
                     else
                         $itr->placePic = URL::asset("_images/nopic/blank.jpg");
@@ -1702,7 +1702,7 @@ class APIController extends Controller {
 
                 case 6:
                     $tmp = Majara::whereId($itr->placeId);
-                    if(file_exists((__DIR__ . '/../../../../static/_images/majara/' . $tmp->file . "/f-1.jpg")))
+                    if(file_exists((__DIR__ . '/../../../../assets/_images/majara/' . $tmp->file . "/f-1.jpg")))
                         $itr->placePic = URL::asset("_images/majara/" . $tmp->file . "/f-1.jpg");
                     else
                         $itr->placePic = URL::asset("_images/nopic/blank.jpg");
@@ -1713,13 +1713,13 @@ class APIController extends Controller {
                 case 8:
                     $tmp = Adab::whereId($itr->placeId);
                     if($tmp->category == 3) {
-                        if (file_exists((__DIR__ . '/../../../../static/_images/adab/ghazamahali/' . $tmp->file . "/f-1.jpg")))
+                        if (file_exists((__DIR__ . '/../../../../assets/_images/adab/ghazamahali/' . $tmp->file . "/f-1.jpg")))
                             $itr->placePic = URL::asset("_images/adab/ghazamahali/" . $tmp->file . "/f-1.jpg");
                         else
                             $itr->placePic = URL::asset("_images/nopic/blank.jpg");
                     }
                     else {
-                        if (file_exists((__DIR__ . '/../../../../static/_images/adab/soghat/' . $tmp->file . "/f-1.jpg")))
+                        if (file_exists((__DIR__ . '/../../../../assets/_images/adab/soghat/' . $tmp->file . "/f-1.jpg")))
                             $itr->placePic = URL::asset("_images/adab/soghat/" . $tmp->file . "/f-1.jpg");
                         else
                             $itr->placePic = URL::asset("_images/nopic/blank.jpg");
@@ -1864,7 +1864,7 @@ class APIController extends Controller {
                         case 1:
                         default:
                             $tmp = Amaken::whereId($itr->placeId);
-                            if(file_exists((__DIR__ . '/../../../../static/_images/amaken/' . $tmp->file . "/f-1.jpg")))
+                            if(file_exists((__DIR__ . '/../../../../assets/_images/amaken/' . $tmp->file . "/f-1.jpg")))
                                 $itr->placePic = URL::asset("_images/amaken/" . $tmp->file . "/f-1.jpg");
                             else
                                 $itr->placePic = URL::asset("_images/nopic/blank.jpg");
@@ -1876,7 +1876,7 @@ class APIController extends Controller {
                             break;
                         case 3:
                             $tmp = Restaurant::whereId($itr->placeId);
-                            if(file_exists((__DIR__ . '/../../../../static/_images/restaurant/' . $tmp->file . "/f-1.jpg")))
+                            if(file_exists((__DIR__ . '/../../../../assets/_images/restaurant/' . $tmp->file . "/f-1.jpg")))
                                 $itr->placePic = URL::asset('_images/restaurant/' . $tmp->file . "/f-1.jpg");
                             else
                                 $itr->placePic = URL::asset('_images/nopic/blank.jpg');
@@ -1887,7 +1887,7 @@ class APIController extends Controller {
                             break;
                         case 4:
                             $tmp = Hotel::whereId($itr->placeId);
-                            if(file_exists((__DIR__ . '/../../../../static/_images/hotels/' . $tmp->file . "/f-1.jpg")))
+                            if(file_exists((__DIR__ . '/../../../../assets/_images/hotels/' . $tmp->file . "/f-1.jpg")))
                                 $itr->placePic = URL::asset("_images/hotels/" . $tmp->file . "/f-1.jpg");
                             else
                                 $itr->placePic = URL::asset("_images/nopic/blank.jpg");
@@ -1899,7 +1899,7 @@ class APIController extends Controller {
 
                         case 6:
                             $tmp = Majara::whereId($itr->placeId);
-                            if(file_exists((__DIR__ . '/../../../../static/_images/majara/' . $tmp->file . "/f-1.jpg")))
+                            if(file_exists((__DIR__ . '/../../../../assets/_images/majara/' . $tmp->file . "/f-1.jpg")))
                                 $itr->placePic = URL::asset("_images/majara/" . $tmp->file . "/f-1.jpg");
                             else
                                 $itr->placePic = URL::asset("_images/nopic/blank.jpg");
@@ -1912,13 +1912,13 @@ class APIController extends Controller {
                         case 8:
                             $tmp = Adab::whereId($itr->placeId);
                             if($tmp->category == 3) {
-                                if (file_exists((__DIR__ . '/../../../../static/_images/adab/ghazamahali/' . $tmp->file . "/f-1.jpg")))
+                                if (file_exists((__DIR__ . '/../../../../assets/_images/adab/ghazamahali/' . $tmp->file . "/f-1.jpg")))
                                     $itr->placePic = URL::asset("_images/adab/ghazamahali/" . $tmp->file . "/f-1.jpg");
                                 else
                                     $itr->placePic = URL::asset("_images/nopic/blank.jpg");
                             }
                             else {
-                                if (file_exists((__DIR__ . '/../../../../static/_images/adab/soghat/' . $tmp->file . "/f-1.jpg")))
+                                if (file_exists((__DIR__ . '/../../../../assets/_images/adab/soghat/' . $tmp->file . "/f-1.jpg")))
                                     $itr->placePic = URL::asset("_images/adab/soghat/" . $tmp->file . "/f-1.jpg");
                                 else
                                     $itr->placePic = URL::asset("_images/nopic/blank.jpg");
@@ -2009,7 +2009,7 @@ class APIController extends Controller {
                         case 1:
                         default:
                             $tmp = Amaken::whereId($itr->placeId);
-                            if(file_exists((__DIR__ . '/../../../../static/_images/amaken/' . $tmp->file . "/f-1.jpg")))
+                            if(file_exists((__DIR__ . '/../../../../assets/_images/amaken/' . $tmp->file . "/f-1.jpg")))
                                 $itr->placePic = URL::asset("_images/amaken/" . $tmp->file . "/f-1.jpg");
                             else
                                 $itr->placePic = URL::asset("_images/nopic/blank.jpg");
@@ -2021,7 +2021,7 @@ class APIController extends Controller {
                             break;
                         case 3:
                             $tmp = Restaurant::whereId($itr->placeId);
-                            if(file_exists((__DIR__ . '/../../../../static/_images/restaurant/' . $tmp->file . "/f-1.jpg")))
+                            if(file_exists((__DIR__ . '/../../../../assets/_images/restaurant/' . $tmp->file . "/f-1.jpg")))
                                 $itr->placePic = URL::asset('_images/restaurant/' . $tmp->file . "/f-1.jpg");
                             else
                                 $itr->placePic = URL::asset('_images/nopic/blank.jpg');
@@ -2032,7 +2032,7 @@ class APIController extends Controller {
                             break;
                         case 4:
                             $tmp = Hotel::whereId($itr->placeId);
-                            if(file_exists((__DIR__ . '/../../../../static/_images/hotels/' . $tmp->file . "/f-1.jpg")))
+                            if(file_exists((__DIR__ . '/../../../../assets/_images/hotels/' . $tmp->file . "/f-1.jpg")))
                                 $itr->placePic = URL::asset("_images/hotels/" . $tmp->file . "/f-1.jpg");
                             else
                                 $itr->placePic = URL::asset("_images/nopic/blank.jpg");
@@ -2044,7 +2044,7 @@ class APIController extends Controller {
 
                         case 6:
                             $tmp = Majara::whereId($itr->placeId);
-                            if(file_exists((__DIR__ . '/../../../../static/_images/majara/' . $tmp->file . "/f-1.jpg")))
+                            if(file_exists((__DIR__ . '/../../../../assets/_images/majara/' . $tmp->file . "/f-1.jpg")))
                                 $itr->placePic = URL::asset("_images/majara/" . $tmp->file . "/f-1.jpg");
                             else
                                 $itr->placePic = URL::asset("_images/nopic/blank.jpg");
@@ -2057,13 +2057,13 @@ class APIController extends Controller {
                         case 8:
                             $tmp = Adab::whereId($itr->placeId);
                             if($tmp->category == 3) {
-                                if (file_exists((__DIR__ . '/../../../../static/_images/adab/ghazamahali/' . $tmp->file . "/f-1.jpg")))
+                                if (file_exists((__DIR__ . '/../../../../assets/_images/adab/ghazamahali/' . $tmp->file . "/f-1.jpg")))
                                     $itr->placePic = URL::asset("_images/adab/ghazamahali/" . $tmp->file . "/f-1.jpg");
                                 else
                                     $itr->placePic = URL::asset("_images/nopic/blank.jpg");
                             }
                             else {
-                                if (file_exists((__DIR__ . '/../../../../static/_images/adab/soghat/' . $tmp->file . "/f-1.jpg")))
+                                if (file_exists((__DIR__ . '/../../../../assets/_images/adab/soghat/' . $tmp->file . "/f-1.jpg")))
                                     $itr->placePic = URL::asset("_images/adab/soghat/" . $tmp->file . "/f-1.jpg");
                                 else
                                     $itr->placePic = URL::asset("_images/nopic/blank.jpg");

@@ -95,7 +95,7 @@ class MahaliFoodController extends Controller
         $photos = [];
 
         if (!empty($place->picNumber)) {
-            if (file_exists((__DIR__ . '/../../../../static/_images/mahalifood/' . $place->file . '/s-' . $place->picNumber))) {
+            if (file_exists((__DIR__ . '/../../../../assets/_images/mahalifood/' . $place->file . '/s-' . $place->picNumber))) {
                 $photos[count($photos)] = URL::asset('_images') . '/mahalifood/' . $place->file . '/s-' . $place->picNumber;
                 $thumbnail = URL::asset('_images') . '/mahalifood/' . $place->file . '/f-' . $place->picNumber;
             } else {

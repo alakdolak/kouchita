@@ -107,7 +107,7 @@ class MajaraController extends Controller {
 
         foreach ($hotels as $hotel) {
 
-            if (file_exists((__DIR__ . '/../../../../static/_images/majara/' . $hotel->file . '/f-1.jpg')))
+            if (file_exists((__DIR__ . '/../../../../assets/_images/majara/' . $hotel->file . '/f-1.jpg')))
                 $hotel->pic = URL::asset('_images/majara/' . $hotel->file . '/f-1.jpg');
             else
                 $hotel->pic = URL::asset('_images/nopic/blank.jpg');
@@ -195,7 +195,7 @@ class MajaraController extends Controller {
 
         $kindPlaceId = Place::whereName('اماکن')->first()->id;
         for ($i = 0; $i < count($out); $i++) {
-            if (file_exists((__DIR__ . '/../../../../static/_images/amaken/' . $out[$i]->file . '/f-1.jpg')))
+            if (file_exists((__DIR__ . '/../../../../assets/_images/amaken/' . $out[$i]->file . '/f-1.jpg')))
                 $out[$i]->pic = URL::asset("_images/amaken/" . $out[$i]->file . '/f-1.jpg');
             else
                 $out[$i]->pic = URL::asset("_images/nopic/blank.jpg");
@@ -301,7 +301,7 @@ class MajaraController extends Controller {
         $place->address = $place->dastresi;
 
         if (!empty($place->picNumber)) {
-            if (file_exists((__DIR__ . '/../../../../static/_images/majara/' . $place->file . '/s-' . $place->picNumber))) {
+            if (file_exists((__DIR__ . '/../../../../assets/_images/majara/' . $place->file . '/s-' . $place->picNumber))) {
                 $photos[count($photos)] = URL::asset('_images') . '/majara/' . $place->file . '/s-' . $place->picNumber;
                 $thumbnail = URL::asset('_images') . '/majara/' . $place->file . '/f-' . $place->picNumber;
             } else {

@@ -931,7 +931,7 @@ function deleteReviewPic(){
     foreach ($pics as $item){
         $diffTimeDay = Carbon::now()->diffInHours($item->created_at);
         if($diffTimeDay > 24){
-            $location = __DIR__ . '/../../../../static/limbo/' . $item->pic;
+            $location = __DIR__ . '/../../../../assets/limbo/' . $item->pic;
             if(file_exists($location))
                 unlink($location);
             $item->delete();

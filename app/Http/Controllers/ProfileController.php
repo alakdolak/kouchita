@@ -512,7 +512,7 @@ class ProfileController extends Controller {
 
             if($user->uploadPhoto == 0 || $user->picture != $file["name"]) {
 
-                $targetFile = __DIR__ . "/../../../../static/userProfile/" . $file["name"];
+                $targetFile = __DIR__ . "/../../../../assets/userProfile/" . $file["name"];
 
                 if (!file_exists($targetFile)) {
                     $err = uploadCheck($targetFile, "newPic", "تغییر تصویر کاربری", 3000000, -1);
@@ -520,7 +520,7 @@ class ProfileController extends Controller {
                         $err = upload($targetFile, "newPic", "تغییر تصویر کاربری");
                         if(empty($err)) {
                             if($user->uploadPhoto == 1)
-                                unlink(__DIR__ . "/../../../../static/userProfile/" . $user->picture);
+                                unlink(__DIR__ . "/../../../../assets/userProfile/" . $user->picture);
                             $user->picture = $file["name"];
                             $user->uploadPhoto = 1;
                             $user->save();
@@ -551,8 +551,8 @@ class ProfileController extends Controller {
 
         if($mode == 0) {
 
-            if($user->uploadPhoto == 1 && file_exists(__DIR__ . "/../../../../static/userProfile/" . $user->picture))
-                unlink(__DIR__ . "/../../../../static/userProfile/" . $user->picture);
+            if($user->uploadPhoto == 1 && file_exists(__DIR__ . "/../../../../assets/userProfile/" . $user->picture))
+                unlink(__DIR__ . "/../../../../assets/userProfile/" . $user->picture);
 
             $user->uploadPhoto = 0;
             $user->picture = DefaultPic::whereName($pic[count($pic) - 1])->first()->id;

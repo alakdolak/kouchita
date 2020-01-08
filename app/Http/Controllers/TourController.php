@@ -559,7 +559,7 @@ class TourController extends Controller
                 if(isset($_FILES["pics"]["name"][$i]) && $_FILES["pics"]["name"][$i] != '' && $_FILES["pics"]["size"][$i] != 0 && $_FILES["pics"]['error'][$i] == 0) {
                     $name = time() . '_' . $_FILES["pics"]["name"][$i];
 
-                    $pic = __DIR__ . '/../../../../static/_images/tour/' . $name;
+                    $pic = __DIR__ . '/../../../../assets/_images/tour/' . $name;
 
                     $err = uploadCheckArray($pic, "pics", "افزودن عکس جدید", 3000000, -1, $i);
                     if(empty($err)) {

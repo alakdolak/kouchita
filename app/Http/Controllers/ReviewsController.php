@@ -35,7 +35,7 @@ class ReviewsController extends Controller
 {
     public function reviewUploadPic(Request $request)
     {
-        $location = __DIR__ . '/../../../../static/limbo';
+        $location = __DIR__ . '/../../../../assets/limbo';
 
         if(!file_exists($location))
             mkdir($location);
@@ -67,7 +67,7 @@ class ReviewsController extends Controller
 
     public function reviewUploadVideo(Request $request)
     {
-        $location = __DIR__ . '/../../../../static/limbo';
+        $location = __DIR__ . '/../../../../assets/limbo';
 
         if(!file_exists($location))
             mkdir($location);
@@ -87,7 +87,7 @@ class ReviewsController extends Controller
                 $videoName .= $videoArray[$k] . '.';
             $videoName .= 'png';
 
-            $file =  __DIR__ . '/../../../../static/limbo/' . $videoName;
+            $file =  __DIR__ . '/../../../../assets/limbo/' . $videoName;
             $success = file_put_contents($file, $data);
 
             $newPicReview = new ReviewPic();
@@ -123,13 +123,13 @@ class ReviewsController extends Controller
                     $videoName .= $videoArray[$k] . '.';
                 $videoName .= 'png';
 
-                $location2 = __DIR__ . '/../../../../static/limbo/' . $videoName;
+                $location2 = __DIR__ . '/../../../../assets/limbo/' . $videoName;
 
                 if(file_exists($location2)) {
                     unlink($location2);
                 }
             }
-            $location = __DIR__ . '/../../../../static/limbo/' . $pics->pic;
+            $location = __DIR__ . '/../../../../assets/limbo/' . $pics->pic;
             if(file_exists($location))
                 unlink($location);
             $pics->delete();
@@ -147,7 +147,7 @@ class ReviewsController extends Controller
             $name = $request->name;
             $code = $request->code;
 
-            $location = __DIR__ . '/../../../../static/limbo/' . $name;
+            $location = __DIR__ . '/../../../../assets/limbo/' . $name;
             if(file_exists($location))
                 unlink($location);
 
@@ -212,14 +212,14 @@ class ReviewsController extends Controller
             \DB::select('UPDATE `reviewPics` SET `logId`= ' . $log->id . ' WHERE code ="' . $request->code . '";');
 
             if(count($reviewPic) > 0){
-                $location = __DIR__ . '/../../../../static/userPhoto/' . $kindPlaceName;
+                $location = __DIR__ . '/../../../../assets/userPhoto/' . $kindPlaceName;
                 if(!file_exists($location))
                     mkdir($location);
                 $location .= '/' . $place->file;
                 if(!file_exists($location))
                     mkdir($location);
 
-                $limboLocation = __DIR__ . '/../../../../static/limbo/';
+                $limboLocation = __DIR__ . '/../../../../assets/limbo/';
 
                 foreach ($reviewPic as $item){
                     $file = $limboLocation . $item->pic;

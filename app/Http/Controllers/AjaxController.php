@@ -83,7 +83,7 @@ class AjaxController extends Controller {
                     break;
             }
 
-            if(!file_exists((__DIR__ . '/../../../../static/_images/' . $target)))
+            if(!file_exists((__DIR__ . '/../../../../assets/_images/' . $target)))
                 echo URL::asset('_images/nopic/blank.jpg');
             else
                 echo URL::asset('_images/' . $target);
@@ -401,7 +401,7 @@ class AjaxController extends Controller {
                 $item->rate = getRate($placeId, $item->id);
 
 
-                if(file_exists(__DIR__ . '/../../../../static/_images/restaurant/' . $item->file . '/l-1.jpg'))
+                if(file_exists(__DIR__ . '/../../../../assets/_images/restaurant/' . $item->file . '/l-1.jpg'))
                     $item->pic = URL::asset('_images/restaurant/' . $item->file . '/l-1.jpg');
                 else
                     $item->pic = URL::asset('_images/nopic/blank.jpg');
@@ -424,7 +424,7 @@ class AjaxController extends Controller {
                 foreach ($amaken as $item){
                     $item->rate = getRate($placeId, $item->id);
 
-                    if(file_exists(__DIR__ . '/../../../../static/_images/amaken/' . $item->file . '/l-1.jpg'))
+                    if(file_exists(__DIR__ . '/../../../../assets/_images/amaken/' . $item->file . '/l-1.jpg'))
                         $item->pic = URL::asset('_images/amaken/' . $item->file . '/l-1.jpg');
                     else
                         $item->pic = URL::asset('_images/nopic/blank.jpg');
@@ -448,7 +448,7 @@ class AjaxController extends Controller {
                 foreach ($hotel as $item){
 //                    $item->rate = getRate($placeId, $item->id);
 
-                    if(file_exists(__DIR__ . '/../../../../static/_images/hotels/' . $item->file . '/l-1.jpg'))
+                    if(file_exists(__DIR__ . '/../../../../assets/_images/hotels/' . $item->file . '/l-1.jpg'))
                         $item->pic = URL::asset('_images/hotels/' . $item->file . '/l-1.jpg');
                     else
                         $item->pic = URL::asset('_images/nopic/blank.jpg');
