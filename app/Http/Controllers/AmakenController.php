@@ -98,7 +98,7 @@ class AmakenController extends Controller {
         $photos = [];
 
         if (!empty($place->picNumber)) {
-            if (file_exists((__DIR__ . '/../../../../assets/_images/amaken/' . $place->file . '/s-' . $place->picNumber))) {
+            if (file_exists((__DIR__ . '/../../../../static/_images/amaken/' . $place->file . '/s-' . $place->picNumber))) {
                 $photos[count($photos)] = URL::asset('_images') . '/amaken/' . $place->file . '/s-' . $place->picNumber;
                 $thumbnail = URL::asset('_images') . '/amaken/' . $place->file . '/f-' . $place->picNumber;
             } else {
@@ -189,7 +189,7 @@ class AmakenController extends Controller {
 
         $kindPlaceId = Place::whereName('اماکن')->first()->id;
         for ($i = 0; $i < count($out); $i++) {
-            if (file_exists((__DIR__ . '/../../../../assets/_images/amaken/' . $out[$i]->file . '/f-1.jpg')))
+            if (file_exists((__DIR__ . '/../../../../static/_images/amaken/' . $out[$i]->file . '/f-1.jpg')))
                 $out[$i]->pic = URL::asset("_images/amaken/" . $out[$i]->file . '/f-1.jpg');
             else
                 $out[$i]->pic = URL::asset("_images/nopic/blank.jpg");
@@ -303,7 +303,7 @@ class AmakenController extends Controller {
         }
 
         foreach ($hotels as $hotel) {
-            if (file_exists((__DIR__ . '/../../../../assets/_images/amaken/' . $hotel->file . '/f-1.jpg')))
+            if (file_exists((__DIR__ . '/../../../../static/_images/amaken/' . $hotel->file . '/f-1.jpg')))
                 $hotel->pic = URL::asset('_images/amaken/' . $hotel->file . '/f-1.jpg');
             else
                 $hotel->pic = URL::asset('_images/nopic/blank.jpg');
@@ -376,7 +376,7 @@ class AmakenController extends Controller {
               amaken limit 0, ' . $reminder));
 
         foreach ($place1 as $itr) {
-            if (file_exists((__DIR__ . '/../../../../assets/_images/amaken/' . $itr->file . '/f-1.jpg')))
+            if (file_exists((__DIR__ . '/../../../../static/_images/amaken/' . $itr->file . '/f-1.jpg')))
                 $itr->pic = URL::asset('_images/amaken/' . $itr->file . '/f-1.jpg');
             else
                 $itr->pic = URL::asset('_images/nopic/blank.jpg');
@@ -433,7 +433,7 @@ class AmakenController extends Controller {
             $condition = ['activityId' => $activityId, 'placeId' => $itr->id, 'kindPlaceId' => $kindPlaceId];
             $match = LogModel::where($condition)->count();
 
-            if (file_exists((__DIR__ . '/../../../../assets/_images/amaken/' . $itr->file . '/f-1.jpg')))
+            if (file_exists((__DIR__ . '/../../../../static/_images/amaken/' . $itr->file . '/f-1.jpg')))
                 $itr->pic = URL::asset('_images/amaken/' . $itr->file . '/f-1.jpg');
             else
                 $itr->pic = URL::asset('_images/nopic/blank.jpg');

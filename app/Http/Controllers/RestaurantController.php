@@ -144,7 +144,7 @@ class RestaurantController extends Controller {
         }
 
         foreach ($hotels as $hotel) {
-            if (file_exists((__DIR__ . '/../../../../assets/_images/restaurant/' . $hotel->file . '/f-1.jpg')))
+            if (file_exists((__DIR__ . '/../../../../static/_images/restaurant/' . $hotel->file . '/f-1.jpg')))
                 $hotel->pic = URL::asset('_images/restaurant/' . $hotel->file . '/f-1.jpg');
             else
                 $hotel->pic = URL::asset('_images/nopic/blank.jpg');
@@ -221,7 +221,7 @@ class RestaurantController extends Controller {
 
         foreach ($place1 as $itr) {
 
-            if (file_exists((__DIR__ . '/../../../../assets/_images/restaurant/' . $itr->file . '/f-1.jpg')))
+            if (file_exists((__DIR__ . '/../../../../static/_images/restaurant/' . $itr->file . '/f-1.jpg')))
                 $itr->pic = URL::asset('_images/restaurant/' . $itr->file . '/f-1.jpg');
             else
                 $itr->pic = URL::asset('_images/nopic/blank.jpg');
@@ -306,7 +306,7 @@ class RestaurantController extends Controller {
 
         $kindPlaceId = Place::whereName('رستوران')->first()->id;
         for ($i = 0; $i < count($out); $i++) {
-            if (file_exists((__DIR__ . '/../../../../assets/_images/restaurant/' . $out[$i]->file . '/f-1.jpg')))
+            if (file_exists((__DIR__ . '/../../../../static/_images/restaurant/' . $out[$i]->file . '/f-1.jpg')))
                 $out[$i]->pic = URL::asset("_images/restaurant/" . $out[$i]->file . '/f-1.jpg');
             else
                 $out[$i]->pic = URL::asset("_images/nopic/blank.jpg");
@@ -407,7 +407,7 @@ class RestaurantController extends Controller {
         $photos = [];
 
         if (!empty($place->picNumber)) {
-            if (file_exists((__DIR__ . '/../../../../assets/_images/restaurant/' . $place->file . '/s-' . $place->picNumber))) {
+            if (file_exists((__DIR__ . '/../../../../static/_images/restaurant/' . $place->file . '/s-' . $place->picNumber))) {
                 $photos[count($photos)] = URL::asset('_images') . '/restaurant/' . $place->file . '/s-' . $place->picNumber;
                 $thumbnail = URL::asset('_images') . '/restaurant/' . $place->file . '/f-' . $place->picNumber;
             } else {

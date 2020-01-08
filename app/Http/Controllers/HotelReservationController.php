@@ -204,7 +204,7 @@ class HotelReservationController extends Controller {
             $this->getAccessTokenHotel(0);
 
             foreach ($hotels as $hotel) {
-                if (file_exists((__DIR__ . '/../../../../assets/_images/hotels/' . $hotel->file . '/f-1.jpg')))
+                if (file_exists((__DIR__ . '/../../../../static/_images/hotels/' . $hotel->file . '/f-1.jpg')))
                     $hotel->pic = URL::asset('_images/hotels/' . $hotel->file . '/f-1.jpg');
                 else
                     $hotel->pic = URL::asset('_images/nopic/blank.jpg');
@@ -421,7 +421,7 @@ class HotelReservationController extends Controller {
 
             foreach ($hotels as $hotel) {
 
-                if (file_exists((__DIR__ . '/../../../../assets/_images/hotels/' . $hotel->file . '/f-1.jpg')))
+                if (file_exists((__DIR__ . '/../../../../static/_images/hotels/' . $hotel->file . '/f-1.jpg')))
                     $hotel->pic = URL::asset('_images/hotels/' . $hotel->file . '/f-1.jpg');
                 else
                     $hotel->pic = URL::asset('_images/nopic/blank.jpg');

@@ -1,7 +1,7 @@
 /*1st box of styles*/
 
 .innerPic {
-    background: url("http://localhost:8080/assets/images/bck.png");
+    background: url("http://localhost:8080/static/images/bck.png");
     width: 300px;
     height: 285px;
     background-size: cover;

@@ -81,12 +81,12 @@ class AdabController extends Controller {
 
         foreach ($adabs as $adab) {
             if ($adab->category == 1 || $adab->category == 6) {
-                if (file_exists((__DIR__ . '/../../../../assets/_images/adab/soghat/' . $adab->file . '/f-1.jpg')))
+                if (file_exists((__DIR__ . '/../../../../static/_images/adab/soghat/' . $adab->file . '/f-1.jpg')))
                     $adab->pic = URL::asset('_images/adab/soghat/' . $adab->file . '/f-1.jpg');
                 else
                     $adab->pic = URL::asset('_images/nopic/blank.jpg');
             } else if ($adab->category == 3) {
-                if (file_exists((__DIR__ . '/../../../../assets/_images/adab/ghazamahali/' . $adab->file . '/f-1.jpg')))
+                if (file_exists((__DIR__ . '/../../../../static/_images/adab/ghazamahali/' . $adab->file . '/f-1.jpg')))
                     $adab->pic = URL::asset('_images/adab/ghazamahali/' . $adab->file . '/f-1.jpg');
                 else
                     $adab->pic = URL::asset('_images/nopic/blank.jpg');
@@ -162,7 +162,7 @@ class AdabController extends Controller {
 
         if (!empty($place->pic_1)) {
             if ($place->category == 3) {
-                if (file_exists((__DIR__ . '/../../../../assets/_images/adab/ghazamahali/' . $place->file . '/s-1.jpg'))) {
+                if (file_exists((__DIR__ . '/../../../../static/_images/adab/ghazamahali/' . $place->file . '/s-1.jpg'))) {
                     $photos[count($photos)] = URL::asset('_images/adab/ghazamahali/' . $place->file . '/s-1.jpg');
                     $thumbnail = URL::asset('_images/adab/ghazamahali/' . $place->file . '/f-1.jpg');
                 } else {
@@ -170,7 +170,7 @@ class AdabController extends Controller {
                     $thumbnail = URL::asset('_images/nopic/blank.jpg');
                 }
             } else {
-                if (file_exists((__DIR__ . '/../../../../assets/_images/adab/soghat/' . $place->file . '/s-1.jpg'))) {
+                if (file_exists((__DIR__ . '/../../../../static/_images/adab/soghat/' . $place->file . '/s-1.jpg'))) {
                     $photos[count($photos)] = URL::asset('_images/adab/soghat/' . $place->file . '/s-1.jpg');
                     $thumbnail = URL::asset('_images/adab/soghat/' . $place->file . '/f-1.jpg');
                 } else {
@@ -212,7 +212,7 @@ class AdabController extends Controller {
             $tmp2 = DB::select("select picItems.id, picItems.name, count(*) as countNum, text from log, picItems WHERE confirm = 1 and activityId = " . $aksActivityId . " and placeId = " . $placeId . " and log.kindPlaceId = " . $kindPlaceId . " and pic <> 0 and picItems.id = log.pic group by(picItems.id)");
             if ($tmp2 != null && count($tmp2) > 0) {
 
-                if (file_exists(__DIR__ . '/../../../../assets/userPhoto/adab/l-' . $tmp2[0]->text))
+                if (file_exists(__DIR__ . '/../../../../static/userPhoto/adab/l-' . $tmp2[0]->text))
                     $logPhoto['pic'] = URL::asset('userPhoto/adab/l-' . $tmp2[0]->text);
                 else
                     $logPhoto['pic'] = URL::asset('_images/nopic/blank.jpg');
