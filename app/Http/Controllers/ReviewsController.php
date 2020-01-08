@@ -37,6 +37,8 @@ class ReviewsController extends Controller
     {
         $location = __DIR__ . '/../../../../assets/limbo';
 
+        dd(scandir($location), scandir(__DIR__), scandir(__DIR__ . '/../../../../'));
+
         if(!file_exists($location))
             mkdir($location);
 
