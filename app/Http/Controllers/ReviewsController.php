@@ -36,7 +36,7 @@ class ReviewsController extends Controller
     public function reviewUploadPic(Request $request)
     {
         $location = __DIR__ . '/../../../../assets/limbo';
-dd(mkdir(__DIR__ . '/../../../../assets/limbo'));
+
         if(!file_exists($location))
             mkdir($location);
 
