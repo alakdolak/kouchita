@@ -633,19 +633,19 @@ $authUrl = $client->createAuthUrl();
     <div class="mainDivLoginMainLogo">
         <img class="loginMainLogo" src="{{URL::asset('images/logo.svg')}}">
     </div>
-    <div class="col-xs-12 rtl">
+    <div class="col-xs-12 rtl mainContentInfos mainContentInfos">
         <div class="loginPaneInLoginPopUp loginDividerBorder col-xs-6">
             <div class="header_text font-size-14Imp">در حال حاضر عضو شازده مسافر هستید؟!</div>
             <div>
                 <div>
                     <label class="full-width">
-                        <span class="pd-tp-8"> نام کاربری </span>
+                        <span class="pd-tp-8 inputLabelText"> نام کاربری </span>
                         <input class="loginInputTemp" type="text" id="username_main" maxlength="40" required autofocus>
                     </label>
                 </div>
                 <div>
-                    <label>
-                        <span class="pd-tp-8">رمز عبور</span>
+                    <label class="full-width">
+                        <span class="pd-tp-8 inputLabelText">رمز عبور</span>
                         <input class="loginInputTemp" type="password" id="password_main" maxlength="40" required>
                         <a class="forgetPassLink" onclick="ShowForgetPass()">رمز عبور خود را فراموش کردید؟</a>
                     </label>
@@ -683,19 +683,19 @@ $authUrl = $client->createAuthUrl();
     <div>
         <img class="loginMainLogo" src="{{URL::asset('images/logo.svg')}}">
     </div>
-    <div class="col-xs-12 rtl">
+    <div class="col-xs-12 rtl mainContentInfos">
         <div class="loginDividerBorder col-xs-6">
             <div class="header_text font-size-14Imp">در حال حاضر عضو شازده مسافر هستید؟!</div>
             <div>
                 <div>
                     <label class="full-width">
-                        <span class="pd-tp-8"> نام کاربری </span>
+                        <span class="pd-tp-8 inputLabelText"> نام کاربری </span>
                         <input class="loginInputTemp" type="text" id="username_email" maxlength="40" required autofocus>
                     </label>
                 </div>
                 <div>
                     <label class="full-width">
-                        <span class="pd-tp-8">رمز عبور</span>
+                        <span class="pd-tp-8 inputLabelText">رمز عبور</span>
                         <input class="loginInputTemp password" type="password" id="password_email" maxlength="40" required>
                         <a class="forgetPassLink" onclick="ShowForgetPass()">رمز عبور خود را فراموش کردید؟</a>
                     </label>
@@ -707,17 +707,17 @@ $authUrl = $client->createAuthUrl();
             </div>
         </div>
         <div class="col-xs-6">
-            <div class="header_text">عضو شوید:</div>
+            <div class="header_text font-size-14Imp">عضو شوید:</div>
             <div>
                 <div>
                     <label class="full-width">
-                        <span class="pd-tp-8"> آدرس ایمیل </span>
+                        <span class="pd-tp-8 inputLabelText"> آدرس ایمیل </span>
                         <input class="loginInputTemp" type="email" id="email" maxlength="40" required autofocus>
                     </label>
                 </div>
                 <div>
                     <label class="full-width">
-                        <span class="pd-tp-8">رمز عبور</span>
+                        <span class="pd-tp-8 inputLabelText">رمز عبور</span>
                         <input class="loginInputTemp" type="password" id="password_In_Email_registry" maxlength="40" required>
                     </label>
                 </div>
@@ -737,7 +737,7 @@ $authUrl = $client->createAuthUrl();
     <div>
         <img class="loginMainLogo" src="{{URL::asset('images/logo.svg')}}">
     </div>
-    <div class="col-xs-12 rtl">
+    <div class="col-xs-12 rtl mainContentInfos">
         <div class="loginDividerBorder col-xs-6">
             <div class="header_text font-size-14Imp">در حال حاضر عضو شازده مسافر هستید؟!</div>
             <div>
@@ -748,7 +748,7 @@ $authUrl = $client->createAuthUrl();
                     </label>
                 </div>
                 <div>
-                    <label>
+                    <label class="full-width">
                         <span>رمز عبور</span>
                         <input type="password" id="password_phone" class="loginInputTemp password" maxlength="40" required>
                         <a class="forgetPassLink" onclick="ShowForgetPass()">رمز عبور خود را فراموش کردید؟</a>
@@ -761,7 +761,7 @@ $authUrl = $client->createAuthUrl();
             </div>
         </div>
         <div class="col-xs-6">
-            <div class="header_text">عضو شوید:</div>
+            <div class="header_text font-size-14Imp">عضو شوید:</div>
             <div>
                 <div>
                     <label>
@@ -785,19 +785,19 @@ $authUrl = $client->createAuthUrl();
     <div>
         <img class="loginMainLogo" src="{{URL::asset('images/logo.svg')}}">
     </div>
-    <div class="col-xs-12 rtl">
+    <div class="col-xs-12 rtl mainContentInfos">
         <div class="loginDividerBorder col-xs-6">
             <div class="header_text font-size-14Imp">در حال حاضر عضو شازده مسافر هستید؟!</div>
             <div>
                 <div>
                     <label class="full-width">
-                        <span class="pd-tp-8"> نام کاربری </span>
+                        <span class="pd-tp-8 inputLabelText"> نام کاربری </span>
                         <input type="text" id="username_2" maxlength="40" required autofocus>
                     </label>
                 </div>
                 <div>
-                    <label>
-                        <span>رمز عبور</span>
+                    <label class="full-width">
+                        <span class="pd-tp-8 inputLabelText">رمز عبور</span>
                         <input id="password_2" class="password" maxlength="40" required>
                         <a class="forgetPassLink" onclick="ShowForgetPass()">رمز عبور خود را فراموش کردید؟</a>
                     </label>
@@ -839,19 +839,19 @@ $authUrl = $client->createAuthUrl();
     <div>
         <img class="loginMainLogo" src="{{URL::asset('images/logo.svg')}}">
     </div>
-    <div class="col-xs-12 rtl">
+    <div class="col-xs-12 rtl mainContentInfos">
         <div class="loginDividerBorder col-xs-6">
             <div class="header_text font-size-14Imp">در حال حاضر عضو شازده مسافر هستید؟!</div>
             <div>
                 <div>
                     <label class="full-width">
-                        <span class="pd-tp-8"> نام کاربری </span>
+                        <span class="pd-tp-8 inputLabelText"> نام کاربری </span>
                         <input class="loginInputTemp" type="text" id="username_3" maxlength="40" required autofocus>
                     </label>
                 </div>
                 <div>
                     <label class="full-width">
-                        <span class="pd-tp-8">رمز عبور</span>
+                        <span class="pd-tp-8 inputLabelText">رمز عبور</span>
                         <input type="loginInputTemp password" id="password_3" maxlength="40" required>
                         <a class="forgetPassLink" onclick="ShowForgetPass()">رمز عبور خود را فراموش کردید؟</a>
                     </label>
@@ -866,7 +866,7 @@ $authUrl = $client->createAuthUrl();
             <div class="header_text">رمز عبور خود را وارد نمایید:</div>
             <div>
                 <div>
-                    <label>
+                    <label class="full-width">
                         <span>رمز عبور</span>
                         <input type="password" id="password_In_Phone_registry" maxlength="40" required>
                     </label>
@@ -886,7 +886,7 @@ $authUrl = $client->createAuthUrl();
     <div>
         <img class="loginMainLogo" src="{{URL::asset('images/logo.svg')}}">
     </div>
-    <div class="col-xs-12 rtl">
+    <div class="col-xs-12 rtl mainContentInfos">
         <div class="loginDividerBorder col-xs-6">
             <script async src='https://www.google.com/recaptcha/api.js'></script>
 
@@ -930,7 +930,7 @@ $authUrl = $client->createAuthUrl();
     <div>
         <img class="loginMainLogo" src="{{URL::asset('images/logo.svg')}}">
     </div>
-    <div class="col-xs-12">
+    <div class="col-xs-12 mainContentInfos">
         <div class="header_text font-size-14Imp">برای بازیابی رمزعبور تان از کدام طریق اقدام میکنید:</div>
         <div>
             <label>
@@ -957,7 +957,7 @@ $authUrl = $client->createAuthUrl();
     <div>
         <img class="loginMainLogo" src="{{URL::asset('images/logo.svg')}}">
     </div>
-    <div class="col-xs-12 rtl">
+    <div class="col-xs-12 rtl mainContentInfos">
         <div>
             <label>
                 <span class="pd-tp-8"> آدرس ایمیل </span>
@@ -978,7 +978,7 @@ $authUrl = $client->createAuthUrl();
     <div>
         <img class="loginMainLogo" src="{{URL::asset('images/logo.svg')}}">
     </div>
-    <div class="col-xs-12">
+    <div class="col-xs-12 mainContentInfos">
         <div>
             <label>
                 <span class="pd-tp-8"> شماره موبایل خود را وارد نمایید </span>

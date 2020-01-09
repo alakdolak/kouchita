@@ -2210,3 +2210,43 @@
 {{--</div>--}}
 
 @include('layouts.calendar')
+
+<script>
+    var swiper = new Swiper('.mainSuggestion', {
+
+        slidesPerGroup: 1,
+        loop: true,
+        loopFillGroupWithBlank: true,
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        breakpoints: {
+
+            450: {
+                slidesPerView: 1,
+                spaceBetween: 15,
+            },
+
+            520: {
+                slidesPerView: 2,
+                spaceBetween: 15,
+            },
+
+            768: {
+                slidesPerView: 2,
+                spaceBetween: 30,
+            },
+
+            992: {
+                slidesPerView: 3,
+                spaceBetween: 30,
+            },
+
+            10000: {
+                slidesPerView: 4,
+                spaceBetween: 30,
+            }
+        }
+    });
+</script>

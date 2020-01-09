@@ -1,6 +1,6 @@
-<link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/middleBanner.css')}}'/>
+<link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/middleBanner.css')}}'/>
 
-<div style="clear: both;"></div>
+<div class="clear-both"></div>
 
 <div class="ui_container">
     <div class="ppr_rup ppr_priv_homepage_shelves">
