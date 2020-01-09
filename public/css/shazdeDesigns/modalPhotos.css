@@ -128,9 +128,13 @@
 .rightColPhotosShowingModal {
     height: 130px;
     margin-bottom: 5px;
-    display: inline-block;
     width: 100%;
-    background-color: black;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
 }
 
 .leftColPhotosModalMainDiv {

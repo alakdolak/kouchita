@@ -219,19 +219,19 @@
                 {{--</a>--}}
             </div>
             <div class="phoneMenuBar">
-                <div data-toggle="modal" data-target="#leftPopUp">
+                <div data-toggle="modal" data-target="#others">
                     <span>سایر امکانات</span>
                     <span class="ui_icon more-horizontal"></span>
                 </div>
-                <div>
+                <div data-toggle="modal" data-target="#register">
                     <span>ثبت نام</span>
                     <span class="ui_icon plus-circle"></span>
                 </div>
-                <div>
+                <div data-toggle="modal" data-target="#search">
                     <span>جست‌و‌جو</span>
                     <span class="ui_icon search"></span>
                 </div>
-                <div data-toggle="modal" data-target="#rightPopUp">
+                <div data-toggle="modal" data-target="#profile">
                     <span>ورود</span>
                     <span class="ui_icon member"></span>
                 </div>
@@ -245,54 +245,48 @@
 <div class="container">
     <!-- The Modals -->
 
-    <div class="modal fade" id="leftPopUp">
-        <div class="mainPopUp leftPopUp hidden">
+    <div class="modal fade" id="others">
+        <div class="mainPopUp leftPopUp">
 
             <div class="lp_phoneMenuBar">
-                <div class="lp_eachMenu" onclick="lp_selectMenu('lp_myTravel', this)">
+                <div class="lp_eachMenu" onclick="lp_selectMenu('lp_others_myTravel', this)">
                     <div class="ui_icon my-trips lp_icons"></div>
                     <div>سفرهای من</div>
                 </div>
-                <div class="lp_eachMenu" onclick="lp_selectMenu('lp_mark', this)">
+                <div class="lp_eachMenu" onclick="lp_selectMenu('lp_others_mark', this)">
                     <div class="ui_icon casino lp_icons"></div>
                     <div>نشان‌گذاری شده‌ها</div>
                 </div>
-                <div class="lp_eachMenu" onclick="lp_selectMenu('lp_messages', this)">
+                <div class="lp_eachMenu" onclick="lp_selectMenu('lp_others_messages', this)">
                     <div class="ui_icon notification-bell lp_icons"></div>
                     <div>اعلانات</div>
                 </div>
-                <div class="lp_eachMenu lp_selectedMenu" onclick="lp_selectMenu('lp_recentlyViews', this)">
+                <div class="lp_eachMenu lp_selectedMenu" onclick="lp_selectMenu('lp_others_recentlyViews', this)">
                     <div class="ui_icon search lp_icons"></div>
                     <div>بازدیدهای اخیر</div>
                 </div>
             </div>
 
-            {{--<div class="hidden" id="lp_recentlyViews">--}}
-                {{--<button type="button" class="btn btn-warning">lp_masseges</button>--}}
-                {{--<button type="button" class="btn btn-primary">lp_masseges</button>--}}
-                {{--<button type="button" class="btn btn-danger">lp_masseges</button>--}}
-                {{--<a>ویرایش اطلاعات</a>--}}
-            {{--</div>--}}
-
-            <div class="lp_content" id="lp_recentlyViews">
-                <div class="lp_titles"> بازدید‌های اخیر </div>
+            {{--each menu--}}
+            <div class="lp_others_content" id="lp_others_recentlyViews">
+                <div class="lp_others_titles"> بازدید‌های اخیر </div>
             </div>
 
-            <div class="lp_content hidden" id="lp_messages">
-                <div class="lp_titles"> اعلانات </div>
-                <div class="lp_messages_noMessages">هیچ پیامی موجود نیست</div>
+            <div class="lp_others_content hidden" id="lp_others_messages">
+                <div class="lp_others_titles"> اعلانات </div>
+                <div class="lp_others_noMessages">هیچ پیامی موجود نیست</div>
             </div>
 
-            <div class="lp_content hidden" id="lp_mark">
-                <div class="lp_titles"> نشان‌گذاری شده‌ها </div>
+            <div class="lp_others_content hidden" id="lp_others_mark">
+                <div class="lp_others_titles"> نشان‌گذاری شده‌ها </div>
                 <div id="masthead-recent">
-                    <a class="lp_recentView" target="_self" href="">
-                        <div class="lp_rvPicBox">
-                            <div class="lp_rvPic" style="background-image: url(http://localhost:8080/assets/_images/hotels/hotel_kowsar/f-1.jpg);"></div>
+                    <a class="lp_others_recentView" target="_self" href="">
+                        <div class="lp_others_rvPicBox">
+                            <div class="lp_others_rvPic" style="background-image: url(http://localhost:8080/assets/_images/hotels/hotel_kowsar/f-1.jpg);"></div>
                         </div>
                         <div class="">
                             <div class="">هتل کوثر</div>
-                            <div class="lp_rating">
+                            <div class="lp_others_rating">
                                 <div class="ui_bubble_rating bubble_45"></div>
                                 <br>3 مشاهده
                             </div>
@@ -302,12 +296,12 @@
                 </div>
             </div>
 
-            <div class="lp_content hidden" id="lp_myTravel">
-                <div class="lp_titles"> سفرهای من </div>
+            <div class="lp_others_content hidden" id="lp_others_myTravel">
+                <div class="lp_others_titles"> سفرهای من </div>
                 <div>
-                    <div class="lp_createTrip">
+                    <div class="lp_others_createTrip">
                         <span class="ui_icon plus"></span>
-                        <div class="lp_createTripText">ایجاد سفر</div>
+                        <div class="lp_others_createTripText">ایجاد سفر</div>
                     </div>
                     {{--<div onclick="document.location.href = 'http://localhost:8080/shazde/public/tripPlaces/1'" class="trip-images ui_columns is-gapless is-multiline is-mobile">--}}
                         {{--<div class="trip-image ui_column is-6 placeCount0" style="background: url('http://localhost:8080/assets/_images/hotels/hotel_a_pedari/1')"></div>--}}
@@ -315,8 +309,8 @@
                         {{--<div class="trip-image trip-image-empty ui_column is-6 placeCount0Else"></div>--}}
                         {{--<div class="trip-image trip-image-empty ui_column is-6 placeCount0Else"></div>--}}
                     {{--</div>--}}
-                    {{--<div class="lp_createTripText">یزد </div>--}}
-                    {{--<div class="lp_createTripText">--}}
+                    {{--<div class="lp_others_createTripText">یزد </div>--}}
+                    {{--<div class="lp_others_createTripText">--}}
                         {{--1398/08/17--}}
                         {{--<p>الی</p>--}}
                         {{--1398/08/14--}}
@@ -325,13 +319,26 @@
             </div>
 
         </div>
+    </div>
+
+    <div class="modal fade" id="register">
+        <div class="mainPopUp leftPopUp">
+            <div id="lp_register">
+                <button type="button" class="btn btn-warning pp_btns">ثبت نام</button>
+                <button type="button" class="btn btn-primary pp_btns">ورود</button>
+                <a style="font-size: 1.25em">ویرایش اطلاعات</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="search">
         <div class="mainPopUp leftPopUp">
 
             <div class="pSC_tilte">
                 <div>شما در حال حاضر در شهر <span class="pSC_cityTilte">اصفهان </span>هستید</div>
-                <button type="button" class="btn btn-danger">تغییر دهید</button>
+                <button type="button" class="btn btn-danger" style="font-size: 0.75em">تغییر دهید</button>
             </div>
-            <div>شما می توانید به راحتی صفحات زیر را در  <span>استان اصفهان </span>مشاهده نمایید</div>
+            <div class="pSC_cityDescription">شما می توانید به راحتی صفحات زیر را در  <span>استان اصفهان </span>مشاهده نمایید</div>
             <div class="pSC_boxOfDetails">
                 <div class="pSC_choiseDetailsText">به سادگی انتخاب کنید</div>
                 <div class="pSC_boxOfCityDetailsText">
@@ -354,15 +361,17 @@
                 </div>
             </div>
 
+            @include('layouts.placeFooter')
+
         </div>
     </div>
 
-    <div class="modal fade" id="rightPopUp">
+    <div class="modal fade" id="profile">
         <div class="mainPopUp rightPopUp">
-            <div id="lp_recentlyViews">
-                <button type="button" class="btn btn-warning lp_btns">صفحه پروفایل</button>
-                <button type="button" class="btn btn-primary lp_btns">صفحه من</button>
-                <button type="button" class="btn btn-danger lp_btns">خروج</button>
+            <div id="lp_register">
+                <button type="button" class="btn btn-warning pp_btns">صفحه پروفایل</button>
+                <button type="button" class="btn btn-primary pp_btns">صفحه من</button>
+                <button type="button" class="btn btn-danger pp_btns">خروج</button>
                 <a style="font-size: 1.25em">ویرایش اطلاعات</a>
             </div>
         </div>

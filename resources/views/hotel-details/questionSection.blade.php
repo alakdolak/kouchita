@@ -177,7 +177,10 @@
             text += '<b class="replyBtn replyAnswerBtn" onclick="replyToAnswers(' + ques[i]["id"] + ')">پاسخ دهید</b>\n' +
                     '</div>\n';
 
-            text += createAnsToQuestion(ques[i]["comment"], '0px', ques[i]["id"], '');
+            // text += createAnsToQuestion(ques[i]["comment"], '0px', ques[i]["id"], '');
+
+            text += createAnsToQuestionComment(ques[i]["comment"], ques[i]["username"], ques[i]["id"]);
+
 
             text +='                        <div id="ansToQuestion' + ques[i]["id"] + '" class="display-none last">\n' +
                 '                            <div class="newAnswerPlaceMainDiv">\n' +
@@ -199,7 +202,68 @@
         }
 
         document.getElementById('questionSectionDiv').innerHTML = text;
+    }
 
+    function createAnsToQuestionComment(comment, repTo, topId, newClass = ''){
+        var text = '<div id="ansOfQuestion' + topId + '" class="display-none ansOfQuestion">';
+
+        for(var k = 0; k < comment.length; k++) {
+
+            text += '<div class="ansComment_' + topId + '" style="width: 100%; direction: rtl">' +
+                '<div class="eachCommentMainBox ' + newClass + '">\n' +
+                '                                        <div class="circleBase type2 commentsWriterProfilePic">' +
+                '                                             <img src="' + comment[k]["userPic"] + '" style="width: 100%; height: 100%; border-radius: 50%;">\n' +
+                '                                        </div>\n' +
+                '                                        <div class="commentsContentMainBox">\n' +
+                '                                            <b class="userProfileName float-right">' + comment[k]["username"] + '</b>\n' +
+                '                                            <b class="commentReplyDesc display-inline-block">در پاسخ به ' + repTo + '</b>\n' +
+                '                                            <div class="clear-both"></div>\n' +
+                '                                            <p>' + comment[k]["text"] + '</p>\n' +
+                '                                            <div class="commentsStatisticsBar">\n' +
+                '                                                <div class="float-right display-inline-black">\n' +
+                '                                                    <span id="reviewLikeNum' + comment[k]["id"] + '" class="likeStatisticIcon commentsStatisticSpan color-red">' + comment[k]["like"] + '</span>\n' +
+                '                                                    <span id="reviewDisLikeNum' + comment[k]["id"] + '" class="dislikeStatisticIcon commentsStatisticSpan dark-red">' + comment[k]["dislike"] + '</span>\n' +
+                '                                                    <span class="numberOfCommentsIcon commentsStatisticSpan color-blue">' + comment[k]["ansNum"] + '</span>\n' +
+                '                                                </div>\n';
+
+            if(comment[k]["ansNum"] > 0)
+                text += '<div class="dark-blue float-left display-inline-black cursor-pointer" onclick="showAllAnswers(' + comment[k]["id"] + ')">دیدن پاسخ‌ها</div>\n';
+
+            text +='                                            </div>\n' +
+                '                                        </div>\n' +
+                '                                        <div class="commentsActionsBtns">\n' +
+                '                                            <div onclick="likeReview(' + comment[k]["id"] + ', 1); likeTheAnswers2(this)">\n' +
+                '                                                <span class="likeActionBtn"></span>\n' +
+                '                                                <span class="likeActionClickedBtn display-none"></span>\n' +
+                '                                            </div>\n' +
+                '                                            <div onclick="likeReview(' + comment[k]["id"] + ', 0); dislikeTheAnswers2(this)">\n' +
+                '                                                <span class="dislikeActionBtn"></span>\n' +
+                '                                                <span class="dislikeActionClickedBtn display-none"></span>\n' +
+                '                                            </div>\n' +
+                '                                            <div class="clear-both"></div>\n' +
+                '                                            <b class="replyBtn" onclick="replyToComments(this)">پاسخ دهید</b>\n' +
+                '                                        </div>\n' +
+                '                                        <div class="replyToCommentMainDiv display-none">\n' +
+                '                                            <div class="circleBase type2 newCommentWriterProfilePic">' +
+                '                                                <img src="' + userPic + '" style="width: 100%; height: 100%; border-radius: 50%;">\n' +
+                '                                            </div>\n' +
+                '                                            <div class="inputBox">\n' +
+                '                                                <b class="replyCommentTitle">در پاسخ به نظر ' + comment[k]["username"] + '</b>\n' +
+                '                                                <textarea  id="ansForReviews_' + comment[k]["id"] + '" class="inputBoxInput inputBoxInputComment" placeholder="شما چه نظری دارید؟" onclick="checkLogin()"></textarea>\n' +
+                '                                                <button class="btn btn-primary" onclick="sendAnsOfReviews(' + comment[k]["id"] + ', 1)"> ارسال</button>\n' +
+                '                                            </div>\n' +
+                '                                        </div>\n' +
+                '                                    </div>\n';
+
+            if(comment[k]["ansNum"] > 0) {
+                text += createAnsToQuestionComment(comment[k]["comment"], comment[k]["username"], comment[k]["id"], 'mg-rt-45');
+            }
+
+            text += '</div>';
+        }
+
+        text += '</div>';
+        return text;
     }
 
     function sendAns(_id){
@@ -286,8 +350,6 @@
                 '                            </div>\n' +
                 '                        </div>\n';
 
-            text += createAnsToQuestion(_ques[j]["comment"], '60px', _ques[j]["id"], '79%');
-
             text+='                            <div id="ansToQuestion' + _ques[j]["id"] + '" class="newAnswerPlaceMainDiv" style="border-top: none; display: none; margin-top: 0px;">\n' +
                 '                                <div class="circleBase type2 newAnswerWriterProfilePic">' +
                 '                                   <img src="{{ $userPic }}" style="width: 100%; height: 100%; border-radius: 50%;">\n'+
@@ -303,6 +365,8 @@
                 '                                <div></div>\n' +
                 '                            </div>' +
                 '                       </div>\n';
+
+            text += createAnsToQuestion(_ques[j]["comment"], '60px', _ques[j]["id"], '79%');
         }
 
         text += '</div>';

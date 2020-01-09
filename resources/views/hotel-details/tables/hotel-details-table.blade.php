@@ -77,9 +77,9 @@
             </span>
         </div>
         @if($place->shologh == 1)
-            <div class="contentSection col-xs-3">منطقه‌ی شلوغ</div>
+            <div class="contentSection col-xs-3">منطقه‌ی پرازدحام</div>
         @elseif($place->khalvat == 1)
-            <div class="contentSection col-xs-3">منطقه‌ی خلوت</div>
+            <div class="contentSection col-xs-3">منطقه‌ی کم‌ازدحام</div>
         @endif
 
         @if($place->tarikhi == 1)

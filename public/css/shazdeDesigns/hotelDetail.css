@@ -387,6 +387,13 @@ p {
     float: right;
 }
 
+.mainInfo{
+    border-width: 0 1px 0 0;
+    border-style: solid;
+    border-color: #e5e5e5;
+    padding-right: 24px;
+}
+
 /*search btn section*/
 .srchBox {
     width: 44%;
@@ -3726,8 +3733,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 }
 
 .mainReviewPic{
-    max-width: initial;
-    width: 100%;
+    height: 100%;
 }
 .topMainReviewPic{
     display: flex;
@@ -4306,6 +4312,9 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 @media only screen and (max-width:630px) {
 
     /*bottomBarHeader*/
+    .replyToCommentMainDiv{
+        width: 100%;
+    }
 
     #helpBtnMainDiv {
         left: -30px;

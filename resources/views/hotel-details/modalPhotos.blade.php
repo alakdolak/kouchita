@@ -107,7 +107,7 @@
             <div class="col-xs-12 col-sm-3 rightColPhotosModalMainDiv" >
                 @for($i = 0; $i < count($photographerPics); $i++)
                     <div class="rightColPhotosShowingModal" onclick="changePhotographerSlidePic({{$i}})">
-                        <img src="{{$photographerPics[$i]['l']}}" alt="{{$photographerPics[$i]['alt']}}" style="width: 100%; height: 100%;">
+                        <img src="{{$photographerPics[$i]['l']}}" alt="{{$photographerPics[$i]['alt']}}" class="mainReviewPic">
                     </div>
                 @endfor
             </div>
@@ -145,7 +145,7 @@
             <div class="col-xs-12 col-sm-3 rightColPhotosModalMainDiv" >
                 @for($i = 0; $i < count($sitePics); $i++)
                     <div class="rightColPhotosShowingModal" onclick="changeSiteSlidePic({{$i}})">
-                        <img src="{{$sitePics[$i]['l']}}" alt="{{$sitePics[$i]['alt']}}" style="width: 100%; height: 100%;">
+                        <img src="{{$sitePics[$i]['l']}}" alt="{{$sitePics[$i]['alt']}}" class="mainReviewPic">
                     </div>
                 @endfor
             </div>
@@ -179,7 +179,7 @@
             <div class="col-xs-12 col-sm-3 rightColPhotosModalMainDiv" >
                 @for($i = 0; $i < count($userPhotos); $i++)
                     <div class="rightColPhotosShowingModal" onclick="changeUserSlidePic({{$i}})" style="cursor: pointer;">
-                        <img src="{{$userPhotos[$i]->pic}}" style="width: 100%; height: 100%;">
+                        <img src="{{$userPhotos[$i]->pic}}" class="mainReviewPic">
                     </div>
                 @endfor
             </div>
@@ -188,6 +188,7 @@
     </div>
 </div>
 @endif
+
 <div class="modal fade showingPhotosModal" id="showingReviewPicsModal" role="dialog">
     <div class="modal-dialog" style="margin-bottom: 0px;">
         <div class="modal-content">

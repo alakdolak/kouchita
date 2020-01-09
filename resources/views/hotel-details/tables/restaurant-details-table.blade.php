@@ -9,16 +9,16 @@
             </span>
         </div>
         @if($place->food_irani == 1)
-            <div class="contentSection col-xs-3">غذای ایرانی</div>
+            <div class="contentSection col-xs-4">غذای ایرانی</div>
         @endif
         @if($place->food_mahali == 1)
-            <div class="contentSection col-xs-3">غذای محلی</div>
+            <div class="contentSection col-xs-4">غذای محلی</div>
         @endif
         @if($place->food_farangi == 1)
-            <div class="contentSection col-xs-3">غذای فرنگی</div>
+            <div class="contentSection col-xs-4">غذای فرنگی</div>
         @endif
         @if($place->coffeeshop == 1)
-            <div class="contentSection col-xs-3">کافی شاپ</div>
+            <div class="contentSection col-xs-4">کافی شاپ</div>
         @endif
 
     </div>
@@ -32,21 +32,21 @@
             </span>
         </div>
         @if($place->shologh == 1)
-            <div class="contentSection col-xs-3">منطقه‌ی شلوغ</div>
+            <div class="contentSection col-xs-4">منطقه‌ی پرازدحام</div>
         @elseif($place->khalvat == 1)
-            <div class="contentSection col-xs-3">منطقه‌ی خلوت</div>
+            <div class="contentSection col-xs-4">منطقه‌ی کم‌ازدحام</div>
         @endif
 
         @if($place->boundArea == 3)
-            <div class="contentSection col-xs-3">خارج شهر</div>
+            <div class="contentSection col-xs-4">خارج شهر</div>
         @elseif($place->boundArea == 2)
-            <div class="contentSection col-xs-3">حومه شهر</div>
+            <div class="contentSection col-xs-4">حومه شهر</div>
         @elseif($place->boundArea == 1)
-            <div class="contentSection col-xs-3">مرکز شهر</div>
+            <div class="contentSection col-xs-4">مرکز شهر</div>
         @endif
 
         @if($place->shologh == 1)
-            <div class="contentSection col-xs-3">داخل بافت تاریخی</div>
+            <div class="contentSection col-xs-4">داخل بافت تاریخی</div>
         @endif
     </div>
 @endif
@@ -60,16 +60,16 @@
         </div>
 
         @if($place->kavir == 1)
-            <div class="contentSection col-xs-3">کویر</div>
+            <div class="contentSection col-xs-4">کویر</div>
         @endif
         @if($place->darya == 1)
-            <div class="contentSection col-xs-3">دریا</div>
+            <div class="contentSection col-xs-4">دریا</div>
         @endif
         @if($place->kooh == 1)
-            <div class="contentSection col-xs-3">کوه</div>
+            <div class="contentSection col-xs-4">کوه</div>
         @endif
         @if($place->tabiat == 1)
-            <div class="contentSection col-xs-3">طبیعت</div>
+            <div class="contentSection col-xs-4">طبیعت</div>
         @endif
     </div>
 @endif
@@ -83,16 +83,16 @@
         </div>
 
         @if($place->modern == 1)
-            <div class="contentSection col-xs-3">مدرن</div>
+            <div class="contentSection col-xs-4">مدرن</div>
         @endif
         @if($place->sonnati == 1)
-            <div class="contentSection col-xs-3">سنتی</div>
+            <div class="contentSection col-xs-4">سنتی</div>
         @endif
         @if($place->mamooli == 1)
-            <div class="contentSection col-xs-3">معمولی</div>
+            <div class="contentSection col-xs-4">معمولی</div>
         @endif
         @if($place->ghadimi == 1)
-            <div class="contentSection col-xs-3">قدیمی</div>
+            <div class="contentSection col-xs-4">قدیمی</div>
         @endif
     </div>
 @endif

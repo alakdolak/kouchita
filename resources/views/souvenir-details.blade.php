@@ -2180,7 +2180,7 @@
         </div>
 
         @include('hotelDetailsPopUp')
-        @include('editor')
+        {{--@include('editor')--}}
 
         <script>
             var hotelMap = [];

@@ -7,6 +7,7 @@ use App\models\Cities;
 use App\models\DefaultPic;
 use App\models\Hotel;
 use App\models\Level;
+use App\models\LogFeedBack;
 use App\models\LogModel;
 use App\models\MahaliFood;
 use App\models\Majara;
@@ -300,8 +301,8 @@ function checkBadge($uId, $badge) {
 function makeValidInput($input) {
     $input = addslashes($input);
     $input = trim($input);
-    if(get_magic_quotes_gpc())
-        $input = stripslashes($input);
+//    if(get_magic_quotes_gpc())
+//        $input = stripslashes($input);
     $input = htmlspecialchars($input);
     return $input;
 }
@@ -1048,6 +1049,8 @@ function getAnsToComments($logId){
                     else{
                         $ansToReview[$i]->userPic = URL::asset('userProfile/' . $ansToReviewUser[$j]->picture);
                     }
+
+                    $ansToReview[$i]->userLike = LogFeedBack::where('logId', $ansToReview[$i]->id)->where('userId', $ansToReviewUser[$j]->id)->first();
 
                     break;
                 }

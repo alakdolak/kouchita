@@ -66,7 +66,6 @@ if ($total == 0)
     <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/editor.css')}}">
 
 
-
     <link rel="stylesheet" href="{{URL::asset('css/theme2/swiper.css')}}">
     <script src="{{URL::asset('js/swiper/swiper.min.js')}}"></script>
 
@@ -144,8 +143,8 @@ if ($total == 0)
         .changeWidth {
             @if(session('goDate'))
                width: 14% !important;
-            @endif
-        }
+        @endif
+}
         .rtl .ui_bubble_rating:after, .rtl .ui_bubble_rating:before{
             transform: scale(1, 1);
         }
@@ -224,7 +223,7 @@ if ($total == 0)
                                         @if(auth()->check())
                                             <textarea class="inputBoxInput inputBoxInputComment" name="text" type="text"
                                                       placeholder="{{auth()->user()->first_name ? auth()->user()->first_name :auth()->user()->username }}، چه فکر یا احساسی داری.....؟"
-                                                       style="overflow:hidden"></textarea>
+                                                      style="overflow:hidden"></textarea>
                                             {{--onkeyup="textAreaAdjust(this)"--}}
                                         @else
                                             <textarea class="inputBoxInput inputBoxInputComment" name="text" type="text"
@@ -232,12 +231,12 @@ if ($total == 0)
                                         @endif
                                         <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
                                     </div>
-{{--                                    <script>--}}
-{{--                                        function textAreaAdjust(o) {--}}
-{{--                                            o.style.height = "1px";--}}
-{{--                                            o.style.height = (25 + o.scrollHeight) + "px";--}}
-{{--                                        }--}}
-{{--                                    </script>--}}
+                                    {{--                                    <script>--}}
+                                    {{--                                        function textAreaAdjust(o) {--}}
+                                    {{--                                            o.style.height = "1px";--}}
+                                    {{--                                            o.style.height = (25 + o.scrollHeight) + "px";--}}
+                                    {{--                                        }--}}
+                                    {{--                                    </script>--}}
                                     <div class="clear-both"></div>
                                     <div class="row">
                                         <div class="commentPhotosMainDiv" id="reviewShowPics">
@@ -337,7 +336,7 @@ if ($total == 0)
                                 <div class="commentQuestionsRatingsBox">
                                     {{--<div class="commentQuestionsRatingsBoxHeader"></div>--}}
 
-                                @for($i = 0; $i < count($rateQuestion); $i++)
+                                    @for($i = 0; $i < count($rateQuestion); $i++)
                                         <div class="display-inline-block full-width">
                                             <b id="rateName_{{$i}}"
                                                class="col-xs-3 font-size-15 line-height-108 pd-lt-0">بد نبود</b>
@@ -854,19 +853,19 @@ if ($total == 0)
                                 </div>
                             </div>
                             {{--<script>--}}
-                                {{--var mainSlideSwiper = new Swiper('#mainSlider', {--}}
-                                    {{--spaceBetween: 30,--}}
-                                    {{--centeredSlides: true,--}}
-                                    {{--loop: true,--}}
-                                    {{--autoplay: {--}}
-                                        {{--delay: 2500,--}}
-                                        {{--disableOnInteraction: false,--}}
-                                    {{--},--}}
-                                    {{--navigation: {--}}
-                                        {{--nextEl: '.swiper-button-next',--}}
-                                        {{--prevEl: '.swiper-button-prev',--}}
-                                    {{--},--}}
-                                {{--});--}}
+                            {{--var mainSlideSwiper = new Swiper('#mainSlider', {--}}
+                            {{--spaceBetween: 30,--}}
+                            {{--centeredSlides: true,--}}
+                            {{--loop: true,--}}
+                            {{--autoplay: {--}}
+                            {{--delay: 2500,--}}
+                            {{--disableOnInteraction: false,--}}
+                            {{--},--}}
+                            {{--navigation: {--}}
+                            {{--nextEl: '.swiper-button-next',--}}
+                            {{--prevEl: '.swiper-button-prev',--}}
+                            {{--},--}}
+                            {{--});--}}
 
                             {{--</script>--}}
                             <div class="secondaryWrap">
@@ -1019,43 +1018,13 @@ if ($total == 0)
         <div id="MAIN" class="Hotel_Review prodp13n_jfy_overflow_visible position-relative">
             <div id="BODYCON" class="col easyClear bodLHN poolB adjust_padding new_meta_chevron new_meta_chevron_v2 position-relative">
 
-{{--                <div class="tabLinkMainWrapMainDivPC navbar navbar-inverse" data-spy="affix" data-offset-top="720">--}}
-{{--                    <div class="tabLinkMainWrapMainDiv navbar-collapse" id="myNavbar">--}}
-{{--                        <a href="#QAndAMainDivId">--}}
-{{--                            <button class="tabLinkMainWrap">سؤالات</button>--}}
-{{--                        </a><!----}}
-{{--                     --><a href="#similarLocationsMainDiv">--}}
-{{--                            <button class="tabLinkMainWrap">مکان‌های مشابه</button>--}}
-{{--                        </a><!----}}
-{{--                     --><a href="#mainDivPlacePost">--}}
-{{--                            <button class="tabLinkMainWrap">پست</button>--}}
-{{--                        </a><!----}}
-{{--                     --><a href="#generalDescriptionMobile">--}}
-{{--                            <button class="tabLinkMainWrap">معرفی کلی</button>--}}
-{{--                        </a>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-
-                <nav class="tabLinkMainWrapMainDivPC navbar navbar-inverse" data-spy="affix" data-offset-top="700">
-                    <div class="container-fluid tabLinkMainWrapMainDiv">
-                        <div class="collapse navbar-collapse" id="myNavbar">
-                            <ul class="nav navbar-nav">
-                                <li><a class="tabLinkMainWrap similarLocationsBtnTopBar" href="#similarLocationsMainDiv">مکان‌های مشابه</a></li>
-                                <li><a class="tabLinkMainWrap QAndAsBtnTopBar" href="#QAndAMainDivId">سؤالات</a></li>
-                                <li><a class="tabLinkMainWrap postsBtnTopBar" href="#mainDivPlacePost">پست</a></li>
-                                <li><a class="tabLinkMainWrap generalDescBtnTopBar" href="#generalDescLinkRel">معرفی کلی</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
-
                 <div class="tabLinkMainWrapMainDivMobile" data-spy="affix" data-offset-top="790">
                     <div class="tabLinkMainWrapMainDiv">
                         <a href="#bodyLinks">
-                            <button class="tabLinkMainWrap" onclick="openTab('similarLocationsMainDiv', this, '#4dc7bc')">مکان‌های مشابه</button>
+                            <button class="tabLinkMainWrap" onclick="openTab('QAndAMainDivId', this, '#4dc7bc')">سؤالات</button>
                         </a><!--
                      --><a href="#bodyLinks">
-                            <button class="tabLinkMainWrap" onclick="openTab('QAndAMainDivId', this, '#4dc7bc')">سؤالات</button>
+                            <button class="tabLinkMainWrap" onclick="openTab('similarLocationsMainDiv', this, '#4dc7bc')">مکان‌های مشابه</button>
                         </a><!--
                      --><a href="#bodyLinks">
                             <button class="tabLinkMainWrap" onclick="openTab('mainDivPlacePost', this, '#4dc7bc')">پست</button>
@@ -1066,8 +1035,7 @@ if ($total == 0)
                     </div>
                 </div>
 
-                <div class="exceptQAndADiv" id="generalDescLinkRel">
-                    <div class="topBarContainerGeneralDesc display-none"></div>
+                <div class="exceptQAndADiv">
                     <div class="hr_btf_wrap position-relative">
                         <div id="introduction" class="ppr_rup ppr_priv_location_detail_overview">
                             <div class="block_wrap" data-tab="TABS_OVERVIEW">
@@ -1105,327 +1073,275 @@ if ($total == 0)
                                             }
                                         ?>
 
-                                        @if($placeMode == 'mahalifood')
-                                            <div class="ui_columns is-multiline is-mobile reviewsAndDetails direction-rtlImp">
+                                        <div class="ui_columns is-multiline is-mobile reviewsAndDetails direction-rtlImp">
 
-                                                <div id="generalDescriptionMobile"
-                                                     class="ui_column is-8 generalDescription tabContent">
-                                                    <div class="block_header">
-                                                        <h3 class="block_title">مواد لازم:</h3>
-                                                    </div>
-                                                    <div>
-                                                        <div class="row">
-                                                            @foreach($place->material as $item)
-                                                                <div class="col-sm-6" style="float: right;">
-                                                                    <div class="row" style="font-size: 20px">
-                                                                        <div class="col-sm-6">{{$item[1]}}</div>
-                                                                        <div class="col-sm-6" style="color: #4dc7bc">{{$item[0]}}</div>
-                                                                    </div>
+                                            <div id="generalDescriptionMobile"
+                                                 class="ui_column is-8 generalDescription tabContent">
+                                                <div class="block_header">
+                                                    <h3 class="block_title">مواد لازم:</h3>
+                                                </div>
+                                                <div>
+                                                    <div class="row">
+                                                        @foreach($place->material as $item)
+                                                            <div class="col-sm-6">
+                                                                <div class="row" style="font-size: 20px">
+                                                                    <div class="col-sm-6">{{$item[1]}}</div>
+                                                                    <div class="col-sm-6" style="color: #4dc7bc">{{$item[0]}}</div>
                                                                 </div>
-                                                            @endforeach
-                                                        </div>
+                                                            </div>
+                                                        @endforeach
                                                     </div>
                                                 </div>
+                                            </div>
 
-                                                <div id="detailsAndFeaturesMobile"
-                                                     class="ui_column is-4 details tabContent {{$mainInfoClass}}">
-                                                    <div class="direction-rtl">
-                                                        @include('hotel-details.tables.mahalifood-details-table')
-                                                    </div>
-                                                </div>
-
-                                                <div id="commentsAndAddressMobile" class="ui_column is-8 generalDescription tabContent">
+                                            <div id="commentsAndAddressMobile"
+                                                 class="ui_column is-4 reviews tabContent">
+                                                <div class="rating">
                                                     <div class="block_header">
-                                                        <h3 class="block_title">دستور پخت:</h3>
+                                                        <h3 class="block_title">نظر شما </h3>
                                                     </div>
-                                                    <div>
-                                                        <div class="overviewContent" id="introductionText">{!! $place->recipes !!}</div>
+                                                    <span class="overallRating">{{$avgRate}} </span>
+                                                    <div class="prw_rup prw_common_bubble_rating overallBubbleRating">
+                                                        @if($avgRate == 5)
+                                                            <span class="ui_bubble_rating bubble_50 font-size-28"
+                                                                  property="ratingValue" content="5"
+                                                                  alt='5 of 5 bubbles'></span>
+                                                        @elseif($avgRate == 4)
+                                                            <span class="ui_bubble_rating bubble_40 font-size-28"
+                                                                  property="ratingValue" content="4"
+                                                                  alt='4 of 5 bubbles'></span>
+                                                        @elseif($avgRate == 3)
+                                                            <span class="ui_bubble_rating bubble_30 font-size-28"
+                                                                  property="ratingValue" content="3"
+                                                                  alt='3 of 5 bubbles'></span>
+                                                        @elseif($avgRate == 2)
+                                                            <span class="ui_bubble_rating bubble_20 font-size-28"
+                                                                  property="ratingValue" content="2"
+                                                                  alt='2 of 5 bubbles'></span>
+                                                        @elseif($avgRate == 1)
+                                                            <span class="ui_bubble_rating bubble_10 font-size-28"
+                                                                  property="ratingValue" content="1"
+                                                                  alt='1 of 5 bubbles'></span>
+                                                        @endif
                                                     </div>
+                                                    <a class="seeAllReviews autoResize" href="#REVIEWS"></a>
                                                 </div>
-
-                                                <div id="commentsAndAddressMobile"
-                                                     class="ui_column is-4 reviews tabContent">
-                                                    <div class="rating">
-                                                        <div class="block_header">
-                                                            <h3 class="block_title">نظر شما </h3>
-                                                        </div>
-                                                        <span class="overallRating">{{$avgRate}} </span>
-                                                        <div class="prw_rup prw_common_bubble_rating overallBubbleRating">
-                                                            @if($avgRate == 5)
-                                                                <span class="ui_bubble_rating bubble_50 font-size-28"
-                                                                      property="ratingValue" content="5"
-                                                                      alt='5 of 5 bubbles'></span>
-                                                            @elseif($avgRate == 4)
-                                                                <span class="ui_bubble_rating bubble_40 font-size-28"
-                                                                      property="ratingValue" content="4"
-                                                                      alt='4 of 5 bubbles'></span>
-                                                            @elseif($avgRate == 3)
-                                                                <span class="ui_bubble_rating bubble_30 font-size-28"
-                                                                      property="ratingValue" content="3"
-                                                                      alt='3 of 5 bubbles'></span>
-                                                            @elseif($avgRate == 2)
-                                                                <span class="ui_bubble_rating bubble_20 font-size-28"
-                                                                      property="ratingValue" content="2"
-                                                                      alt='2 of 5 bubbles'></span>
-                                                            @elseif($avgRate == 1)
-                                                                <span class="ui_bubble_rating bubble_10 font-size-28"
-                                                                      property="ratingValue" content="1"
-                                                                      alt='1 of 5 bubbles'></span>
-                                                            @endif
-                                                        </div>
-                                                        <a class="seeAllReviews autoResize" href="#REVIEWS"></a>
-                                                    </div>
-                                                    <div class="prw_rup prw_common_ratings_histogram_overview overviewHistogram">
-                                                        <ul class="ratings_chart">
-                                                            <li class="chart_row highlighted clickable">
-                                                                <span class="row_label row_cell">عالی</span>
-                                                                <span class="row_bar row_cell">
+                                                <div class="prw_rup prw_common_ratings_histogram_overview overviewHistogram">
+                                                    <ul class="ratings_chart">
+                                                        <li class="chart_row highlighted clickable">
+                                                            <span class="row_label row_cell">عالی</span>
+                                                            <span class="row_bar row_cell">
                                                                 <span class="bar">
                                                                     <span class="fill"
                                                                           style="width: {{ceil($rates[4] * 100 / $total)}}%;"></span>
                                                                 </span>
                                                             </span>
-                                                                <span class="row_count row_cell">{{ceil($rates[4] * 100 / $total)}}
-                                                                    %</span>
-                                                            </li>
-                                                            <li class="chart_row clickable">
-                                                                <span class="row_label row_cell">خوب</span>
-                                                                <span class="row_bar row_cell">
+                                                            <span class="row_count row_cell">{{ceil($rates[4] * 100 / $total)}}
+                                                                %</span>
+                                                        </li>
+                                                        <li class="chart_row clickable">
+                                                            <span class="row_label row_cell">خوب</span>
+                                                            <span class="row_bar row_cell">
                                                                 <span class="bar">
                                                                     <span class="fill"
                                                                           style="width:{{ceil($rates[3] * 100 / $total)}}%;"></span>
                                                                 </span>
                                                             </span>
-                                                                <span class="row_count row_cell">{{ceil($rates[3] * 100 / $total)}}
-                                                                    %</span>
-                                                            </li>
-                                                            <li class="chart_row clickable">
-                                                                <span class="row_label row_cell">معمولی</span>
-                                                                <span class="row_bar row_cell">
+                                                            <span class="row_count row_cell">{{ceil($rates[3] * 100 / $total)}}
+                                                                %</span>
+                                                        </li>
+                                                        <li class="chart_row clickable">
+                                                            <span class="row_label row_cell">معمولی</span>
+                                                            <span class="row_bar row_cell">
                                                                 <span class="bar">
                                                                     <span class="fill"
                                                                           style="width:{{ceil($rates[2] * 100 / $total)}}%;"></span>
                                                                 </span>
                                                             </span>
-                                                                <span class="row_count row_cell">{{ceil($rates[2] * 100 / $total)}}
-                                                                    %</span>
-                                                            </li>
-                                                            <li class="chart_row clickable">
-                                                                <span class="row_label row_cell">ضعیف</span>
-                                                                <span class="row_bar row_cell">
+                                                            <span class="row_count row_cell">{{ceil($rates[2] * 100 / $total)}}
+                                                                %</span>
+                                                        </li>
+                                                        <li class="chart_row clickable">
+                                                            <span class="row_label row_cell">ضعیف</span>
+                                                            <span class="row_bar row_cell">
                                                                 <span class="bar">
                                                                     <span class="fill"
                                                                           style="width:{{ceil($rates[1] * 100 / $total)}}%;"></span>
                                                                 </span>
                                                             </span>
-                                                                <span class="row_count row_cell">{{ceil($rates[1] * 100 / $total)}}
-                                                                    %</span>
-                                                            </li>
-                                                            <li class="chart_row">
-                                                                <span class="row_label row_cell">خیلی بد </span>
-                                                                <span class="row_bar row_cell">
+                                                            <span class="row_count row_cell">{{ceil($rates[1] * 100 / $total)}}
+                                                                %</span>
+                                                        </li>
+                                                        <li class="chart_row">
+                                                            <span class="row_label row_cell">خیلی بد </span>
+                                                            <span class="row_bar row_cell">
                                                                 <span class="bar">
                                                                     <span class="fill"
                                                                           style="width:{{ceil($rates[0] * 100 / $total)}}%;"></span>
                                                                 </span>
                                                             </span>
-                                                                <span class="row_count row_cell">{{ceil($rates[0] * 100 / $total)}}
-                                                                    %</span>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div id="tagsName">
-                                                        <h3>برچسب‌ها:</h3>
-                                                        <span class="tag">{{$place->tag1}}</span>
-                                                        <span class="tag">{{$place->tag2}}</span>
-                                                        <span class="tag">{{$place->tag3}}</span>
-                                                        <span class="tag">{{$place->tag4}}</span>
-                                                        <span class="tag">{{$place->tag5}}</span>
-                                                        <span class="tag">{{$place->tag6}}</span>
-                                                        <span class="tag">{{$place->tag7}}</span>
-                                                        <span class="tag">{{$place->tag8}}</span>
-                                                        <span class="tag">{{$place->tag9}}</span>
-                                                        <span class="tag">{{$place->tag10}}</span>
-                                                        <span class="tag">{{$place->tag11}}</span>
-                                                        <span class="tag">{{$place->tag12}}</span>
-                                                        <span class="tag">{{$place->tag13}}</span>
-                                                        <span class="tag">{{$place->tag14}}</span>
-                                                        <span class="tag">{{$place->tag15}}</span>
-                                                    </div>
+                                                            <span class="row_count row_cell">{{ceil($rates[0] * 100 / $total)}}
+                                                                %</span>
+                                                        </li>
+                                                    </ul>
                                                 </div>
-
+                                                <div id="tagsName">
+                                                    <h3>برچسب‌ها:</h3>
+                                                    <span class="tag">{{$place->tag1}}</span>
+                                                    <span class="tag">{{$place->tag2}}</span>
+                                                    <span class="tag">{{$place->tag3}}</span>
+                                                    <span class="tag">{{$place->tag4}}</span>
+                                                    <span class="tag">{{$place->tag5}}</span>
+                                                    <span class="tag">{{$place->tag6}}</span>
+                                                    <span class="tag">{{$place->tag7}}</span>
+                                                    <span class="tag">{{$place->tag8}}</span>
+                                                    <span class="tag">{{$place->tag9}}</span>
+                                                    <span class="tag">{{$place->tag10}}</span>
+                                                    <span class="tag">{{$place->tag11}}</span>
+                                                    <span class="tag">{{$place->tag12}}</span>
+                                                    <span class="tag">{{$place->tag13}}</span>
+                                                    <span class="tag">{{$place->tag14}}</span>
+                                                    <span class="tag">{{$place->tag15}}</span>
+                                                </div>
                                             </div>
-                                        @else
-                                            <div class="ui_columns is-multiline is-mobile reviewsAndDetails direction-rtlImp">
-                                                <div id="generalDescriptionMobile"
-                                                     class="ui_column is-{{$showInfo}} generalDescription tabContent">
-                                                    <div class="block_header">
-                                                        <h3 class="block_title">معرفی کلی </h3>
-                                                    </div>
-                                                    <div>
-                                                        <div class="overviewContent" id="introductionText">{{$place->description}}</div>
-                                                    </div>
-                                                </div>
-                                                <div id="detailsAndFeaturesMobile"
-                                                     class="ui_column is-{{$showFeatures}} details tabContent {{$mainInfoClass}}">
-                                                    <div class="direction-rtl">
-                                                        <?php $k = -1; ?>
 
-                                                        @if($placeMode == "hotel")
-                                                            @include('hotel-details.tables.hotel-details-table')
-                                                        @elseif($placeMode == "amaken")
-                                                            @include('hotel-details.tables.amaken-details-table')
-                                                        @elseif($placeMode == "restaurant")
-                                                            @include('hotel-details.tables.restaurant-details-table')
-                                                        @elseif($placeMode == "majara")
-                                                            @include('hotel-details.tables.majara-details-table')
-                                                        @elseif($placeMode == "sogatsanaie")
-                                                            @include('hotel-details.tables.sogatsanaie-details-table')
+                                            <div id="commentsAndAddressMobile" class="ui_column is-8 generalDescription tabContent">
+                                                <div class="block_header">
+                                                    <h3 class="block_title">دستور پخت:</h3>
+                                                </div>
+                                                <div>
+                                                    <div class="overviewContent" id="introductionText">{!! $place->recipes !!}</div>
+                                                </div>
+                                            </div>
+
+                                            <div id="commentsAndAddressMobile"
+                                                 class="ui_column is-4 reviews tabContent">
+                                                <div class="rating">
+                                                    <div class="block_header">
+                                                        <h3 class="block_title">نظر شما </h3>
+                                                    </div>
+                                                    <span class="overallRating">{{$avgRate}} </span>
+                                                    <div class="prw_rup prw_common_bubble_rating overallBubbleRating">
+                                                        @if($avgRate == 5)
+                                                            <span class="ui_bubble_rating bubble_50 font-size-28"
+                                                                  property="ratingValue" content="5"
+                                                                  alt='5 of 5 bubbles'></span>
+                                                        @elseif($avgRate == 4)
+                                                            <span class="ui_bubble_rating bubble_40 font-size-28"
+                                                                  property="ratingValue" content="4"
+                                                                  alt='4 of 5 bubbles'></span>
+                                                        @elseif($avgRate == 3)
+                                                            <span class="ui_bubble_rating bubble_30 font-size-28"
+                                                                  property="ratingValue" content="3"
+                                                                  alt='3 of 5 bubbles'></span>
+                                                        @elseif($avgRate == 2)
+                                                            <span class="ui_bubble_rating bubble_20 font-size-28"
+                                                                  property="ratingValue" content="2"
+                                                                  alt='2 of 5 bubbles'></span>
+                                                        @elseif($avgRate == 1)
+                                                            <span class="ui_bubble_rating bubble_10 font-size-28"
+                                                                  property="ratingValue" content="1"
+                                                                  alt='1 of 5 bubbles'></span>
                                                         @endif
                                                     </div>
+                                                    <a class="seeAllReviews autoResize" href="#REVIEWS"></a>
                                                 </div>
-                                                <div id="commentsAndAddressMobile"
-                                                     class="ui_column is-{{$showReviewRate}} reviews tabContent">
-                                                    <div class="rating">
-                                                        <div class="block_header">
-                                                            <h3 class="block_title">نظر شما </h3>
-                                                        </div>
-                                                        <span class="overallRating">{{$avgRate}} </span>
-                                                        <div class="prw_rup prw_common_bubble_rating overallBubbleRating">
-                                                            @if($avgRate == 5)
-                                                                <span class="ui_bubble_rating bubble_50 font-size-28"
-                                                                      property="ratingValue" content="5"
-                                                                      alt='5 of 5 bubbles'></span>
-                                                            @elseif($avgRate == 4)
-                                                                <span class="ui_bubble_rating bubble_40 font-size-28"
-                                                                      property="ratingValue" content="4"
-                                                                      alt='4 of 5 bubbles'></span>
-                                                            @elseif($avgRate == 3)
-                                                                <span class="ui_bubble_rating bubble_30 font-size-28"
-                                                                      property="ratingValue" content="3"
-                                                                      alt='3 of 5 bubbles'></span>
-                                                            @elseif($avgRate == 2)
-                                                                <span class="ui_bubble_rating bubble_20 font-size-28"
-                                                                      property="ratingValue" content="2"
-                                                                      alt='2 of 5 bubbles'></span>
-                                                            @elseif($avgRate == 1)
-                                                                <span class="ui_bubble_rating bubble_10 font-size-28"
-                                                                      property="ratingValue" content="1"
-                                                                      alt='1 of 5 bubbles'></span>
-                                                            @endif
-                                                        </div>
-                                                        <a class="seeAllReviews autoResize" href="#REVIEWS"></a>
-                                                    </div>
-                                                    <div class="prw_rup prw_common_ratings_histogram_overview overviewHistogram">
-                                                        <ul class="ratings_chart">
-                                                            <li class="chart_row highlighted clickable">
-                                                                <span class="row_label row_cell">عالی</span>
-                                                                <span class="row_bar row_cell">
+                                                <div class="prw_rup prw_common_ratings_histogram_overview overviewHistogram">
+                                                    <ul class="ratings_chart">
+                                                        <li class="chart_row highlighted clickable">
+                                                            <span class="row_label row_cell">عالی</span>
+                                                            <span class="row_bar row_cell">
                                                                 <span class="bar">
                                                                     <span class="fill"
                                                                           style="width: {{ceil($rates[4] * 100 / $total)}}%;"></span>
                                                                 </span>
                                                             </span>
-                                                                <span class="row_count row_cell">{{ceil($rates[4] * 100 / $total)}}
-                                                                    %</span>
-                                                            </li>
-                                                            <li class="chart_row clickable">
-                                                                <span class="row_label row_cell">خوب</span>
-                                                                <span class="row_bar row_cell">
+                                                            <span class="row_count row_cell">{{ceil($rates[4] * 100 / $total)}}
+                                                                %</span>
+                                                        </li>
+                                                        <li class="chart_row clickable">
+                                                            <span class="row_label row_cell">خوب</span>
+                                                            <span class="row_bar row_cell">
                                                                 <span class="bar">
                                                                     <span class="fill"
                                                                           style="width:{{ceil($rates[3] * 100 / $total)}}%;"></span>
                                                                 </span>
                                                             </span>
-                                                                <span class="row_count row_cell">{{ceil($rates[3] * 100 / $total)}}
-                                                                    %</span>
-                                                            </li>
-                                                            <li class="chart_row clickable">
-                                                                <span class="row_label row_cell">معمولی</span>
-                                                                <span class="row_bar row_cell">
+                                                            <span class="row_count row_cell">{{ceil($rates[3] * 100 / $total)}}
+                                                                %</span>
+                                                        </li>
+                                                        <li class="chart_row clickable">
+                                                            <span class="row_label row_cell">معمولی</span>
+                                                            <span class="row_bar row_cell">
                                                                 <span class="bar">
                                                                     <span class="fill"
                                                                           style="width:{{ceil($rates[2] * 100 / $total)}}%;"></span>
                                                                 </span>
                                                             </span>
-                                                                <span class="row_count row_cell">{{ceil($rates[2] * 100 / $total)}}
-                                                                    %</span>
-                                                            </li>
-                                                            <li class="chart_row clickable">
-                                                                <span class="row_label row_cell">ضعیف</span>
-                                                                <span class="row_bar row_cell">
+                                                            <span class="row_count row_cell">{{ceil($rates[2] * 100 / $total)}}
+                                                                %</span>
+                                                        </li>
+                                                        <li class="chart_row clickable">
+                                                            <span class="row_label row_cell">ضعیف</span>
+                                                            <span class="row_bar row_cell">
                                                                 <span class="bar">
                                                                     <span class="fill"
                                                                           style="width:{{ceil($rates[1] * 100 / $total)}}%;"></span>
                                                                 </span>
                                                             </span>
-                                                                <span class="row_count row_cell">{{ceil($rates[1] * 100 / $total)}}
-                                                                    %</span>
-                                                            </li>
-                                                            <li class="chart_row">
-                                                                <span class="row_label row_cell">خیلی بد </span>
-                                                                <span class="row_bar row_cell">
+                                                            <span class="row_count row_cell">{{ceil($rates[1] * 100 / $total)}}
+                                                                %</span>
+                                                        </li>
+                                                        <li class="chart_row">
+                                                            <span class="row_label row_cell">خیلی بد </span>
+                                                            <span class="row_bar row_cell">
                                                                 <span class="bar">
                                                                     <span class="fill"
                                                                           style="width:{{ceil($rates[0] * 100 / $total)}}%;"></span>
                                                                 </span>
                                                             </span>
-                                                                <span class="row_count row_cell">{{ceil($rates[0] * 100 / $total)}}
-                                                                    %</span>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="prw_rup prw_common_atf_header_bl"
-                                                         id="clientConnectionsLines">
-                                                        <div class="blEntry address mg-bt-10" id="clientConnectionsAddress">
-                                                            <span class="ui_icon map-pin"></span>
-                                                            <span class="street-address">آدرس : </span>
-                                                            <span>{{$place->address}}</span>
-                                                        </div>
-                                                        @if(!empty($place->phone))
-                                                            <div class="blEntry phone mg-bt-10" id="clientConnectionsPhone">
-                                                                <span class="ui_icon phone"></span>
-                                                                <span>{{$place->phone}}</span>
-                                                            </div>
-                                                        @endif
-                                                        @if(!empty($place->site))
-                                                            <div class="blEntry website mg-bt-10"
-                                                                 id="clientConnectionsWebsite">
-                                                                <span class="ui_icon laptop"></span>
-                                                                <?php
-                                                                if (strpos($place->site, 'http') === false)
-                                                                    $place->site = 'http://' . $place->site;
-                                                                ?>
-                                                                <a target="_blank"
-                                                                   href="{{$place->site}}" {{($config->externalSiteNoFollow) ? 'rel="nofollow"' : ''}}>
-                                                                    <span class="font-size-12">{{$place->site}}</span>
-                                                                </a>
-                                                            </div>
-                                                        @endif
-                                                    </div>
-                                                    <div id="tagsName">
-                                                        <h3>برچسب‌ها:</h3>
-                                                        <span class="tag">{{$place->tag1}}</span>
-                                                        <span class="tag">{{$place->tag2}}</span>
-                                                        <span class="tag">{{$place->tag3}}</span>
-                                                        <span class="tag">{{$place->tag4}}</span>
-                                                        <span class="tag">{{$place->tag5}}</span>
-                                                        <span class="tag">{{$place->tag6}}</span>
-                                                        <span class="tag">{{$place->tag7}}</span>
-                                                        <span class="tag">{{$place->tag8}}</span>
-                                                        <span class="tag">{{$place->tag9}}</span>
-                                                        <span class="tag">{{$place->tag10}}</span>
-                                                        <span class="tag">{{$place->tag11}}</span>
-                                                        <span class="tag">{{$place->tag12}}</span>
-                                                        <span class="tag">{{$place->tag13}}</span>
-                                                        <span class="tag">{{$place->tag14}}</span>
-                                                        <span class="tag">{{$place->tag15}}</span>
-                                                    </div>
+                                                            <span class="row_count row_cell">{{ceil($rates[0] * 100 / $total)}}
+                                                                %</span>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div id="tagsName">
+                                                    <h3>برچسب‌ها:</h3>
+                                                    <span class="tag">{{$place->tag1}}</span>
+                                                    <span class="tag">{{$place->tag2}}</span>
+                                                    <span class="tag">{{$place->tag3}}</span>
+                                                    <span class="tag">{{$place->tag4}}</span>
+                                                    <span class="tag">{{$place->tag5}}</span>
+                                                    <span class="tag">{{$place->tag6}}</span>
+                                                    <span class="tag">{{$place->tag7}}</span>
+                                                    <span class="tag">{{$place->tag8}}</span>
+                                                    <span class="tag">{{$place->tag9}}</span>
+                                                    <span class="tag">{{$place->tag10}}</span>
+                                                    <span class="tag">{{$place->tag11}}</span>
+                                                    <span class="tag">{{$place->tag12}}</span>
+                                                    <span class="tag">{{$place->tag13}}</span>
+                                                    <span class="tag">{{$place->tag14}}</span>
+                                                    <span class="tag">{{$place->tag15}}</span>
                                                 </div>
                                             </div>
 
-                                            @include('hotel-details.mapSection')
-                                        @endif
+                                            {{--<div id="detailsAndFeaturesMobile"--}}
+                                                 {{--class="ui_column is-4 details tabContent {{$mainInfoClass}}">--}}
+                                                {{--<div class="direction-rtl">--}}
+                                                    {{--<?php $k = -1; ?>--}}
+
+                                                    {{--@if($placeMode == "hotel")--}}
+                                                        {{--@include('hotel-details.tables.hotel-details-table')--}}
+                                                    {{--@elseif($placeMode == "amaken")--}}
+                                                        {{--@include('hotel-details.tables.amaken-details-table')--}}
+                                                    {{--@elseif($placeMode == "restaurant")--}}
+                                                        {{--@include('hotel-details.tables.restaurant-details-table')--}}
+                                                    {{--@elseif($placeMode == "majara")--}}
+                                                        {{--@include('hotel-details.tables.majara-details-table')--}}
+                                                    {{--@endif--}}
+                                                {{--</div>--}}
+                                            {{--</div>--}}
+                                        </div>
 
                                         @include('layouts.extendedMap')
 
@@ -1757,11 +1673,9 @@ if ($total == 0)
                     <div id="mainDivPlacePost" class="tabContentMainWrap">
                         <div class="topHeaderBarPosts display-none">
                             <span class="float-right text-align-right">جستجوی‌ بیشتر در پست‌ها</span>
-{{--                            <span onclick="allPostsGrid()" class="returnToMainPage display-none">back</span>--}}
+                            {{--                            <span onclick="allPostsGrid()" class="returnToMainPage display-none">back</span>--}}
                             <span class="float-left">مشاهده همه پست‌ها</span>
                         </div>
-
-                        <div class="topBarContainerPosts display-none"></div>
 
                         <div class="col-md-5 col-xs-12 pd-0 pd-rt-10Imp leftColMainWrap">
 
@@ -1775,35 +1689,15 @@ if ($total == 0)
 
                         @include('hotel-details.reviewSection')
 
+                    </div>
+
+                    <div class="clear-both"></div>
+                    @include('hotel-details.questionSection')
                 </div>
-
-                <div class="clear-both"></div>
-                @include('hotel-details.questionSection')
-            </div>
-            @include('hotel-details.similarLocation')
+                @include('hotel-details.similarLocation')
             </div>
         </div>
     </div>
-
-    <span id="reportPane" class="ui_overlay ui_modal editTags hidden" style="position: fixed; left: 24%; right: 24%; top:19%; bottom: auto;overflow: auto;max-height: 500px;">
-    <div class="header_text">گزارش</div>
-    <div class="subheader_text">
-   گزارش خود را از بین موضوعات موجود انتخاب نمایید
-    </div>
-    <div class="body_text">
-        <fieldset id="memberTags">
-            <div class="reports" id="reports">
-            </div>
-        </fieldset>
-        <br>
-        <div class="submitOptions">
-            <button onclick="sendReport()" class="btn btn-success" style="color: #FFF;background-color: #4dc7bc;border-color:#4dc7bc;">تایید</button>
-            <input type="submit" onclick="closeReportPrompt()" value="خیر" class="btn btn-default">
-        </div>
-        <div id="errMsgReport" style="color: red"></div>
-    </div>
-    <div onclick="closeReportPrompt()" class="ui_close_x"></div>
-</span>
 
     @if(isset($video) && $video != null)
         {{--vr--}}
@@ -1820,12 +1714,6 @@ if ($total == 0)
                 </div>
             </div>
         </div>
-
-        <script>
-            if($(window).width() < 630) {
-                $('.tabLinkMainWrapMainDivMobile').affix({offset: {top: 930}});
-            };
-        </script>
 
         <script>
             var player;
@@ -1885,14 +1773,12 @@ if ($total == 0)
         // Get the element with id="defaultOpen" and click on it
         document.getElementById("defaultOpen").click();
 
-        if($(window).width() < 992) {
-            function hideMobileTabLink() {
-                $('.tabLinkMainWrapMainDivMobile').hide()
-            }
+        function hideMobileTabLink() {
+            $('.tabLinkMainWrapMainDivMobile').hide()
+        }
 
-            function showMobileTabLink() {
-                $('.tabLinkMainWrapMainDivMobile').show()
-            }
+        function showMobileTabLink() {
+            $('.tabLinkMainWrapMainDivMobile').show()
         }
 
         function newPostModal() {
@@ -1999,78 +1885,6 @@ if ($total == 0)
             if (window.matchMedia('(max-width: 373px)').matches) {
                 $('.eachCommentMainBox').removeClass('mg-rt-45')
             }
-        });
-
-        $(window).scroll(function() {
-            if(!$('.tabLinkMainWrapMainDivPC').hasClass('affix')){
-                $('.topBarContainerGeneralDesc').addClass('display-none');
-            }
-        });
-
-        $(document).ready(function() {
-            $('.generalDescBtnTopBar').click(function() {
-                $('.tabLinkMainWrapMainDivPC').addClass('affix');
-                $('.topBarContainerGeneralDesc').removeClass('display-none');
-                $('.topBarContainerPosts').addClass('display-none');
-                $('.topBarContainerQAndAs').addClass('display-none');
-                $('.topBarContainerSimilarLocations').addClass('display-none');
-
-                setTimeout(function() {
-                    $('.generalDescBtnTopBar').parent().addClass('active');
-                }, 50);
-
-                $('.postsBtnTopBar').parent().removeClass('active');
-                $('.QAndAsBtnTopBar').parent().removeClass('active');
-                $('.similarLocationsBtnTopBar').parent().removeClass('active');
-            });
-
-            $('.postsBtnTopBar').click(function() {
-                $('.tabLinkMainWrapMainDivPC').addClass('affix');
-                $('.topBarContainerGeneralDesc').addClass('display-none');
-                $('.topBarContainerPosts').removeClass('display-none');
-                $('.topBarContainerQAndAs').addClass('display-none');
-                $('.topBarContainerSimilarLocations').addClass('display-none');
-
-                setTimeout(function() {
-                    $('.generalDescBtnTopBar').parent().removeClass('active');
-                    $('.postsBtnTopBar').parent().addClass('active');
-                }, 50);
-
-                $('.QAndAsBtnTopBar').parent().removeClass('active');
-                $('.similarLocationsBtnTopBar').parent().removeClass('active');
-            });
-
-            $('.QAndAsBtnTopBar').click(function() {
-                $('.tabLinkMainWrapMainDivPC').addClass('affix');
-                $('.topBarContainerGeneralDesc').addClass('display-none');
-                $('.topBarContainerPosts').addClass('display-none');
-                $('.topBarContainerQAndAs').removeClass('display-none');
-                $('.topBarContainerSimilarLocations').addClass('display-none');
-                $('.generalDescBtnTopBar').parent().removeClass('active');
-
-                setTimeout(function() {
-                    $('.postsBtnTopBar').parent().removeClass('active');
-                    $('.QAndAsBtnTopBar').parent().addClass('active');
-                }, 50);
-
-                $('.similarLocationsBtnTopBar').parent().removeClass('active');
-            });
-
-            $('.similarLocationsBtnTopBar').click(function() {
-                $('.tabLinkMainWrapMainDivPC').addClass('affix');
-                $('.topBarContainerGeneralDesc').addClass('display-none');
-                $('.topBarContainerPosts').addClass('display-none');
-                $('.topBarContainerQAndAs').addClass('display-none');
-                $('.topBarContainerSimilarLocations').removeClass('display-none');
-                $('.generalDescBtnTopBar').parent().removeClass('active');
-                $('.postsBtnTopBar').parent().removeClass('active');
-
-                setTimeout(function() {
-                    $('.QAndAsBtnTopBar').parent().removeClass('active');
-                    $('.similarLocationsBtnTopBar').parent().addClass('active');
-                }, 50);
-
-            });
         })
 
     </script>
