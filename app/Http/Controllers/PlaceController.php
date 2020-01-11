@@ -38,6 +38,7 @@ use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Redirect;
@@ -2896,6 +2897,7 @@ class PlaceController extends Controller {
                 $kindPlaceId = 8;
                 break;
         }
+
         $sliderPic = MainSliderPic::all();
 
         return view('main', array('placeMode' => $mode, 'kindPlaceId' => $kindPlaceId, 'sliderPic' => $sliderPic,

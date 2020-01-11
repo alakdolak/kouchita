@@ -44,6 +44,13 @@
             .eachPicOfSlider {
                 width: 100%;
             }
+            .textInSlide{
+                position: absolute;
+                left: 10px;
+                bottom: 10px;
+                padding: 30px;
+                font-size: 20px;
+            }
         </style>
 
     </head>
@@ -71,8 +78,13 @@
                                         <div id="mainSlider" class="swiper-container">
                                             <div class="swiper-wrapper">
                                                 @foreach($sliderPic as $item)
-                                                    <div class="swiper-slide">
+                                                    <div class="swiper-slide" style="position: relative">
                                                         <img class="eachPicOfSlider" src="{{URL::asset('_images/sliderPic/' . $item->pic)}}" alt="{{$item->alt}}">
+                                                        @if($item->text != null && $item->text != '')
+                                                            <div class="textInSlide" style="background-color: {{$item->textBackground}}; color: {{$item->textColor}};">
+                                                                {{$item->text}}
+                                                            </div>
+                                                        @endif
                                                     </div>
                                                 @endforeach
                                             </div>
@@ -235,6 +247,11 @@
                                                     <div class="swiper-slide">
                                                         <img class="eachPicOfSlider" src="{{URL::asset('_images/sliderPic/' . $item->pic)}}" alt="{{$item->alt}}">
                                                     </div>
+                                                    @if($item->text != null && $item->text != '')
+                                                        <div class="textInSlide" style="background-color: {{$item->textBackground}}; color: {{$item->textColor}};">
+                                                            {{$item->text}}
+                                                        </div>
+                                                    @endif
                                                 @endforeach
                                             </div>
                                             <!-- Add Pagination -->
@@ -601,7 +618,6 @@
             }
 
             function search(e, val = '') {
-
                 if(val == '')
                     val = $("#placeName").val();
 
@@ -609,7 +625,7 @@
                 if (null == val || "" == val || val.length < 2)
                     $("#result").empty();
                 else {
-
+                    console.log(e.keyCode)
                     var scrollVal = $("#searchDivForScroll").scrollTop();
 
                     if (13 == e.keyCode && -1 != currIdx) {
@@ -725,7 +741,6 @@
                     })
                 }
 
-                $('#result').css({"padding": "10px 5px 5px" , "border": "2px solid #4DC7BC" , "border-top": "0"})
             }
 
             function setInput(e, t) {
