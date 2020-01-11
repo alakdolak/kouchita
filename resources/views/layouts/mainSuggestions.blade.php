@@ -2225,7 +2225,7 @@
 
             450: {
                 slidesPerView: 1,
-                spaceBetween: 15,
+                spaceBetween: 0,
             },
 
             520: {

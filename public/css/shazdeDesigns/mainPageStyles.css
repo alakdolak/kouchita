@@ -390,10 +390,10 @@ input[type="text"].searchPaneInput::-webkit-input-placeholder {
 #result {
     overflow-y: auto;
     max-height: 300px;
-    border: 2px solid #4DC7BC;
-    border-top: 0;
+    /*border: 2px solid #4DC7BC;*/
+    /*border-top: 0;*/
     width: 45%;
-    padding: 10px 5px 5px;
+    /*padding: 10px 5px 5px;*/
     display: inline-block;
 }
 
@@ -435,3 +435,4 @@ input[type="text"].searchPaneInput::-webkit-input-placeholder {
     font-size: 50px;
     line-height: 70px;
 }
+

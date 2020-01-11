@@ -385,22 +385,22 @@
                     </div>
                     <div class="spBorderBottom"></div>
                     <div id="result" class="data_holder">
-                        <div>
-                            <div class="icons location spIcons"></div>
-                            <div style="cursor: pointer" class="suggest" id="" onclick="">استان اصفهان</div>
-                        </div>
-                        <div>
-                            <div class="icons location spIcons"></div>
-                            <div style="cursor: pointer" class="suggest" id="" onclick="">استان تهران</div>
-                        </div>
-                        <div>
-                            <div class="icons location spIcons"></div>
-                            <div style="cursor: pointer" class="suggest" id="" onclick="">استان یزد</div>
-                        </div>
-                        <div>
-                            <div class="icons location spIcons"></div>
-                            <div style="cursor: pointer" class="suggest" id="" onclick="">استان گیلان</div>
-                        </div>
+{{--                        <div>--}}
+{{--                            <div class="icons location spIcons"></div>--}}
+{{--                            <div class="suggest cursor-pointer" id="" onclick="">استان اصفهان</div>--}}
+{{--                        </div>--}}
+{{--                        <div>--}}
+{{--                            <div class="icons location spIcons"></div>--}}
+{{--                            <div class="suggest cursor-pointer" id="" onclick="">استان تهران</div>--}}
+{{--                        </div>--}}
+{{--                        <div>--}}
+{{--                            <div class="icons location spIcons"></div>--}}
+{{--                            <div class="suggest cursor-pointer" id="" onclick="">استان یزد</div>--}}
+{{--                        </div>--}}
+{{--                        <div>--}}
+{{--                            <div class="icons location spIcons"></div>--}}
+{{--                            <div class="suggest cursor-pointer" id="" onclick="">استان گیلان</div>--}}
+{{--                        </div>--}}
                     </div>
                     <div class="visitSuggestionDiv">
                         <div class="visitSuggestionText">بازدید های اخیر شما</div>
@@ -730,6 +730,8 @@
                         }
                     })
                 }
+
+                $('#result').css({"padding": "10px 5px 5px" , "border": "2px solid #4DC7BC" , "border-top": "0"})
             }
 
             function setInput(e, t) {

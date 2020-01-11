@@ -302,10 +302,21 @@ DIV.prw_rup.prw_shelves_shelf_widget .shelf_container.rebrand .shelf_header .she
         display: inherit;
     }
 
+    .poi_by_tag .ui_columns.is-multiline .ui_column {
+        width: 100%;
+    }
+
+    .poi_by_tag .ui_columns.is-multiline {
+        margin: 0 -8px !important;
+    }
+
 }
 
 @media (max-width: 480px) {
     DIV.prw_rup.prw_shelves_shelf_widget .shelf_container.rebrand .shelf_header .shelf_title .shelf_title_container {
         font-size: 17px;
     }
+}
+
+@media (max-width: 451px) {
 }
