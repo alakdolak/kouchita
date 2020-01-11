@@ -44,6 +44,14 @@
             .eachPicOfSlider {
                 width: 100%;
             }
+            .textInSlideMain{
+                position: absolute;
+                left: 0px;
+                bottom: 0px;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(45deg, rgba(0, 0, 0, 0.6) 0%, transparent 70%);
+            }
             .textInSlide{
                 position: absolute;
                 left: 10px;
@@ -85,8 +93,10 @@
                                                     <div class="swiper-slide" style="position: relative">
                                                         <img class="eachPicOfSlider" src="{{URL::asset('_images/sliderPic/' . $item->pic)}}" alt="{{$item->alt}}">
                                                         @if($item->text != null && $item->text != '')
-                                                            <div class="textInSlide" style="background-color: {{$item->textBackground}}; color: {{$item->textColor}};">
-                                                                {{$item->text}}
+                                                            <div class="textInSlideMain">
+                                                                <div class="textInSlide" style="background-color: {{$item->textBackground}}; color: {{$item->textColor}};">
+                                                                    {{$item->text}}
+                                                                </div>
                                                             </div>
                                                         @endif
                                                     </div>
