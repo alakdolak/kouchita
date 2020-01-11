@@ -152,12 +152,20 @@
     font-size: 12px;
 }
 
+.font-size-12Imp {
+    font-size: 12px !important;
+}
+
 .font-size-13 {
     font-size: 13px;
 }
 
 .font-size-14 {
     font-size: 14px;
+}
+
+.font-size-14Imp {
+    font-size: 14px!important;
 }
 
 .font-size-15 {
@@ -232,6 +240,10 @@
 
 .pd-tp-5 {
     padding-top: 5px;
+}
+
+.pd-tp-8 {
+    padding-top: 8px;
 }
 
 .pd-tp-10 {
@@ -908,6 +920,10 @@
 
 .color-black {
     color: black;
+}
+
+.color-blackImp {
+    color: black !important;
 }
 
 .color-white {

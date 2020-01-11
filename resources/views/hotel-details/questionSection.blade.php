@@ -1,5 +1,6 @@
 
 <div id="QAndAMainDivId" class="tabContentMainWrap">
+    <div class="topBarContainerQAndAs display-none"></div>
     <div class="col-md-12 col-xs-12 QAndAMainDiv" style="margin-bottom: 10px;">
         <div class="mainDivQuestions">
             <div class="QAndAMainDivHeader">

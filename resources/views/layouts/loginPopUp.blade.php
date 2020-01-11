@@ -618,7 +618,8 @@ $authUrl = $client->createAuthUrl();
 </script>
 
 
-<link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/loginPopUp.css')}}' />
+<link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/loginPopUp.css')}}' />
+<link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/abbreviations.css')}}' />
 
 {{--loginPopUp--}}
 <form id="second_login" method="post" action="{{route('checkLogin')}}">
@@ -629,34 +630,34 @@ $authUrl = $client->createAuthUrl();
 </form>
 
 <span id="loginPopUp" onkeyup="if(event.keyCode == 13) login($('#username_main').val(), $('#password_main').val())" class="pop-up ui_modal hidden">
-    <div>
-        <img src="{{URL::asset('images/logo.svg')}}">
+    <div class="mainDivLoginMainLogo">
+        <img class="loginMainLogo" src="{{URL::asset('images/logo.svg')}}">
     </div>
-    <div class="col-xs-12 rtl">
-        <div class="loginPaneInLoginPopUp col-xs-6">
-            <div class="header_text">در حال حاضر عضو شازده مسافر هستید؟!</div>
+    <div class="col-xs-12 rtl mainContentInfos mainContentInfos">
+        <div class="loginPaneInLoginPopUp loginDividerBorder col-xs-6">
+            <div class="header_text font-size-14Imp">در حال حاضر عضو شازده مسافر هستید؟!</div>
             <div>
                 <div>
-                    <label>
-                        <span> نام کاربری </span>
-                        <input type="text" id="username_main" maxlength="40" required autofocus>
+                    <label class="full-width">
+                        <span class="pd-tp-8 inputLabelText"> نام کاربری </span>
+                        <input class="loginInputTemp" type="text" id="username_main" maxlength="40" required autofocus>
                     </label>
                 </div>
                 <div>
-                    <label>
-                        <span>رمز عبور</span>
-                        <input type="password" id="password_main" maxlength="40" required>
-                        <a onclick="ShowForgetPass()">رمز عبور خود را فراموش کردید؟</a>
+                    <label class="full-width">
+                        <span class="pd-tp-8 inputLabelText">رمز عبور</span>
+                        <input class="loginInputTemp" type="password" id="password_main" maxlength="40" required>
+                        <a class="forgetPassLink" onclick="ShowForgetPass()">رمز عبور خود را فراموش کردید؟</a>
                     </label>
                 </div>
             </div>
-            <div>
-                <button onclick="login($('#username_main').val(), $('#password_main').val())" class="btn btn-info active">ورود</button>
+            <div class="pd-tp-8">
+                <button onclick="login($('#username_main').val(), $('#password_main').val())" class="loginSubBtn btn btn-info active">ورود</button>
                 <p id="loginErr"></p>
             </div>
         </div>
         <div class="registerPaneInLoginPopUp col-xs-6">
-            <div class="header_text">عضو نیستید !!</div>
+            <div class="header_text font-size-14Imp">عضو نیستید !!</div>
             <button class="btn" onclick="showLoginEmail()">
                 {{--<img src="{{URL::asset('images/email.png')}}">--}}
                 <div></div>
@@ -671,7 +672,7 @@ $authUrl = $client->createAuthUrl();
                 <div></div>
                 <span>گوگل</span>
             </button>
-            <div class="header_text">همین حالا به سادگی در شازده مسافر عضو شوید و از امکانات آن استفاده کنید.</div>
+            <div class="header_text font-size-14Imp">همین حالا به سادگی در شازده مسافر عضو شوید و از امکانات آن استفاده کنید.</div>
         </div>
     </div>
     <div class="ui_close_x" onclick="hideElement('loginPopUp')"></div>
@@ -680,50 +681,50 @@ $authUrl = $client->createAuthUrl();
 {{--Enter Email in login PopUp--}}
 <span id="EnterEmail-loginPopUp" onkeyup="if(event.keyCode == 13) login($('#username_email').val(), $('#password_email').val())" class="pop-up ui_modal hidden">
     <div>
-        <img src="{{URL::asset('images/logo.svg')}}">
+        <img class="loginMainLogo" src="{{URL::asset('images/logo.svg')}}">
     </div>
-    <div class="col-xs-12 rtl">
-        <div class="col-xs-6">
-            <div class="header_text">در حال حاضر عضو شازده مسافر هستید؟!</div>
+    <div class="col-xs-12 rtl mainContentInfos">
+        <div class="loginDividerBorder col-xs-6">
+            <div class="header_text font-size-14Imp">در حال حاضر عضو شازده مسافر هستید؟!</div>
             <div>
                 <div>
-                    <label>
-                        <span> نام کاربری </span>
-                        <input type="text" id="username_email" maxlength="40" required autofocus>
+                    <label class="full-width">
+                        <span class="pd-tp-8 inputLabelText"> نام کاربری </span>
+                        <input class="loginInputTemp" type="text" id="username_email" maxlength="40" required autofocus>
                     </label>
                 </div>
                 <div>
-                    <label>
-                        <span>رمز عبور</span>
-                        <input type="password" id="password_email" class="password" maxlength="40" required>
-                        <a onclick="ShowForgetPass()">رمز عبور خود را فراموش کردید؟</a>
+                    <label class="full-width">
+                        <span class="pd-tp-8 inputLabelText">رمز عبور</span>
+                        <input class="loginInputTemp password" type="password" id="password_email" maxlength="40" required>
+                        <a class="forgetPassLink" onclick="ShowForgetPass()">رمز عبور خود را فراموش کردید؟</a>
                     </label>
                 </div>
             </div>
-            <div>
-                <button onclick="login($('#username_email').val(), $('#password_email').val())" class="btn btn-info active">ورود</button>
+            <div class="pd-tp-8">
+                <button onclick="login($('#username_email').val(), $('#password_email').val())" class="loginSubBtn btn btn-info active">ورود</button>
                 <p id="loginErr"></p>
             </div>
         </div>
         <div class="col-xs-6">
-            <div class="header_text">عضو شوید:</div>
+            <div class="header_text font-size-14Imp">عضو شوید:</div>
             <div>
                 <div>
-                    <label>
-                        <span> آدرس ایمیل </span>
-                        <input type="email" id="email" maxlength="40" required autofocus>
+                    <label class="full-width">
+                        <span class="pd-tp-8 inputLabelText"> آدرس ایمیل </span>
+                        <input class="loginInputTemp" type="email" id="email" maxlength="40" required autofocus>
                     </label>
                 </div>
                 <div>
-                    <label>
-                        <span>رمز عبور</span>
-                        <input type="password" id="password_In_Email_registry" maxlength="40" required>
+                    <label class="full-width">
+                        <span class="pd-tp-8 inputLabelText">رمز عبور</span>
+                        <input class="loginInputTemp" type="password" id="password_In_Email_registry" maxlength="40" required>
                     </label>
                 </div>
             </div>
-            <div>
-                <button type="button" onclick="showLoginUsername()" class="btn btn-info active">ثبت</button>
-                <button type="button" onclick="Return()" class="btn btn-default">بازگشت</button>
+            <div class="pd-tp-8">
+                <button type="button" onclick="showLoginUsername()" class="loginSubBtn btn btn-info active">ثبت</button>
+                <button type="button" onclick="Return()" class="loginReturnBtn btn btn-default">بازگشت</button>
                 <p id="loginErrEmail"></p>
             </div>
         </div>
@@ -734,44 +735,44 @@ $authUrl = $client->createAuthUrl();
 {{--Enter Phone in login PopUp--}}
 <span id="EnterPhone-loginPopUp" onkeyup="if(event.keyCode == 13) login($('#username_phone').val(), $('#password_phone').val())" class="pop-up ui_modal hidden">
     <div>
-        <img src="{{URL::asset('images/logo.svg')}}">
+        <img class="loginMainLogo" src="{{URL::asset('images/logo.svg')}}">
     </div>
-    <div class="col-xs-12 rtl">
-        <div class="col-xs-6">
-            <div class="header_text">در حال حاضر عضو شازده مسافر هستید؟!</div>
+    <div class="col-xs-12 rtl mainContentInfos">
+        <div class="loginDividerBorder col-xs-6">
+            <div class="header_text font-size-14Imp">در حال حاضر عضو شازده مسافر هستید؟!</div>
             <div>
                 <div>
-                    <label>
-                        <span> نام کاربری </span>
-                        <input type="text" id="username_phone" maxlength="40" required autofocus>
+                    <label class="full-width">
+                        <span class="pd-tp-8"> نام کاربری </span>
+                        <input class="loginInputTemp" type="text" id="username_phone" maxlength="40" required autofocus>
                     </label>
                 </div>
                 <div>
-                    <label>
+                    <label class="full-width">
                         <span>رمز عبور</span>
-                        <input type="password" id="password_phone" class="password" maxlength="40" required>
-                        <a onclick="ShowForgetPass()">رمز عبور خود را فراموش کردید؟</a>
+                        <input type="password" id="password_phone" class="loginInputTemp password" maxlength="40" required>
+                        <a class="forgetPassLink" onclick="ShowForgetPass()">رمز عبور خود را فراموش کردید؟</a>
                     </label>
                 </div>
             </div>
-            <div>
-                <button onclick="login($('#username_phone').val(), $('#password_phone').val())" class="btn btn-info active">ورود</button>
+            <div class="pd-tp-8">
+                <button onclick="login($('#username_phone').val(), $('#password_phone').val())" class="loginSubBtn btn btn-info active">ورود</button>
                 <p id="loginErr"></p>
             </div>
         </div>
         <div class="col-xs-6">
-            <div class="header_text">عضو شوید:</div>
+            <div class="header_text font-size-14Imp">عضو شوید:</div>
             <div>
                 <div>
                     <label>
                         <span>موبایل خود را وارد کنید </span>
-                        <input placeholder="09xxxxxxxxx" type="tel" id="phoneNum" maxlength="40" required autofocus>
+                        <input class="loginInputTemp" placeholder="09xxxxxxxxx" type="tel" id="phoneNum" maxlength="40" required autofocus>
                     </label>
                 </div>
             </div>
-            <div>
-                <button type="button" onclick="showLoginCode()" class="btn btn-info active">ثبت</button>
-                <button type="button" onclick="Return()" class="btn btn-default">بازگشت</button>
+            <div class="pd-tp-8">
+                <button type="button" onclick="showLoginCode()" class="loginSubBtn btn btn-info active">ثبت</button>
+                <button type="button" onclick="Return()" class="loginReturnBtn btn btn-default">بازگشت</button>
                 <p id="loginErrPhonePass1"></p>
             </div>
         </div>
@@ -782,28 +783,28 @@ $authUrl = $client->createAuthUrl();
 {{--Send & Enter Code in login PopUp--}}
 <span id="Send_AND_EnterCode-loginPopUp" onkeyup="if(event.keyCode == 13) login($('#username_2').val(), $('#password_2').val())" class="pop-up ui_modal hidden">
     <div>
-        <img src="{{URL::asset('images/logo.svg')}}">
+        <img class="loginMainLogo" src="{{URL::asset('images/logo.svg')}}">
     </div>
-    <div class="col-xs-12 rtl">
-        <div class="col-xs-6">
-            <div class="header_text">در حال حاضر عضو شازده مسافر هستید؟!</div>
+    <div class="col-xs-12 rtl mainContentInfos">
+        <div class="loginDividerBorder col-xs-6">
+            <div class="header_text font-size-14Imp">در حال حاضر عضو شازده مسافر هستید؟!</div>
             <div>
                 <div>
-                    <label>
-                        <span> نام کاربری </span>
+                    <label class="full-width">
+                        <span class="pd-tp-8 inputLabelText"> نام کاربری </span>
                         <input type="text" id="username_2" maxlength="40" required autofocus>
                     </label>
                 </div>
                 <div>
-                    <label>
-                        <span>رمز عبور</span>
+                    <label class="full-width">
+                        <span class="pd-tp-8 inputLabelText">رمز عبور</span>
                         <input id="password_2" class="password" maxlength="40" required>
-                        <a onclick="ShowForgetPass()">رمز عبور خود را فراموش کردید؟</a>
+                        <a class="forgetPassLink" onclick="ShowForgetPass()">رمز عبور خود را فراموش کردید؟</a>
                     </label>
                 </div>
             </div>
-            <div>
-                <button onclick="login($('#username_2').val(), $('#password_2').val())" class="btn btn-info active">ورود</button>
+            <div class="pd-tp-8">
+                <button onclick="login($('#username_2').val(), $('#password_2').val())" class="loginSubBtn btn btn-info active">ورود</button>
                 <p id="loginErr"></p>
             </div>
         </div>
@@ -812,10 +813,10 @@ $authUrl = $client->createAuthUrl();
             <div>
                 <div>
                     <label>
-                        <span class="header_text">این کد به گوشی شما ارسال گردیده است.</span>
+                        <span class="header_text font-size-12Imp">این کد به گوشی شما ارسال گردیده است.</span>
 
                         <span> کد اعتبار سنجی </span>
-                        <input type="text" maxlength="40" id="activationCode" required autofocus>
+                        <input class="loginInputTemp" type="text" maxlength="40" id="activationCode" required autofocus>
                         <p id="reminderTimePane">
                             <span>  زمان باقی مانده برای ارسال مجدد کد اعتبار سنجی شما :</span>
                             <span id="reminderTime"></span>
@@ -824,8 +825,8 @@ $authUrl = $client->createAuthUrl();
                     </label>
                 </div>
             </div>
-            <div>
-                <button type="button" onclick="showLoginPassword()" class="btn btn-info active">ثبت</button>
+            <div class="pd-tp-8">
+                <button type="button" onclick="showLoginPassword()" class="loginSubBtn btn btn-info active">ثبت</button>
                 <p id="loginErrActivationCode"></p>
             </div>
         </div>
@@ -836,28 +837,28 @@ $authUrl = $client->createAuthUrl();
 {{--Enter Password in login PopUp--}}
 <span id="EnterPassword-loginPopUp" onkeyup="if(event.keyCode == 13) login($('#username_3').val(), $('#password_3').val())" class="pop-up ui_modal hidden">
     <div>
-        <img src="{{URL::asset('images/logo.svg')}}">
+        <img class="loginMainLogo" src="{{URL::asset('images/logo.svg')}}">
     </div>
-    <div class="col-xs-12 rtl">
-        <div class="col-xs-6">
-            <div class="header_text">در حال حاضر عضو شازده مسافر هستید؟!</div>
+    <div class="col-xs-12 rtl mainContentInfos">
+        <div class="loginDividerBorder col-xs-6">
+            <div class="header_text font-size-14Imp">در حال حاضر عضو شازده مسافر هستید؟!</div>
             <div>
                 <div>
-                    <label>
-                        <span> نام کاربری </span>
-                        <input type="text" id="username_3" maxlength="40" required autofocus>
+                    <label class="full-width">
+                        <span class="pd-tp-8 inputLabelText"> نام کاربری </span>
+                        <input class="loginInputTemp" type="text" id="username_3" maxlength="40" required autofocus>
                     </label>
                 </div>
                 <div>
-                    <label>
-                        <span>رمز عبور</span>
-                        <input type="password" id="password_3" class="password" maxlength="40" required>
-                        <a onclick="ShowForgetPass()">رمز عبور خود را فراموش کردید؟</a>
+                    <label class="full-width">
+                        <span class="pd-tp-8 inputLabelText">رمز عبور</span>
+                        <input type="loginInputTemp password" id="password_3" maxlength="40" required>
+                        <a class="forgetPassLink" onclick="ShowForgetPass()">رمز عبور خود را فراموش کردید؟</a>
                     </label>
                 </div>
             </div>
-            <div>
-                <button onclick="login($('#username_3').val(), $('#password_3').val())" class="btn btn-info active">ورود</button>
+            <div class="pd-tp-8">
+                <button onclick="login($('#username_3').val(), $('#password_3').val())" class="loginSubBtn btn btn-info active">ورود</button>
                 <p id="loginErr"></p>
             </div>
         </div>
@@ -865,14 +866,14 @@ $authUrl = $client->createAuthUrl();
             <div class="header_text">رمز عبور خود را وارد نمایید:</div>
             <div>
                 <div>
-                    <label>
+                    <label class="full-width">
                         <span>رمز عبور</span>
                         <input type="password" id="password_In_Phone_registry" maxlength="40" required>
                     </label>
                 </div>
             </div>
-            <div>
-                <button type="button" onclick="showLoginUsername()" class="btn btn-info active" >ثبت</button>
+            <div class="pd-tp-8">
+                <button type="button" onclick="showLoginUsername()" class="loginSubBtn btn btn-info active" >ثبت</button>
                 <p id="loginErr"></p>
             </div>
         </div>
@@ -883,10 +884,10 @@ $authUrl = $client->createAuthUrl();
 {{--Enter Username in login PopUp--}}
 <span id="EnterUsername-loginPopUp" class="pop-up ui_modal hidden">
     <div>
-        <img src="{{URL::asset('images/logo.svg')}}">
+        <img class="loginMainLogo" src="{{URL::asset('images/logo.svg')}}">
     </div>
-    <div class="col-xs-12 rtl">
-        <div class="col-xs-6">
+    <div class="col-xs-12 rtl mainContentInfos">
+        <div class="loginDividerBorder col-xs-6">
             <script async src='https://www.google.com/recaptcha/api.js'></script>
 
             <input id='checked' onchange='checkedCheckBox()' type='checkbox' value='-1'>
@@ -901,24 +902,24 @@ $authUrl = $client->createAuthUrl();
                 <div class="g-recaptcha" data-sitekey="6LfiELsUAAAAAO3Pk-c6cKm1HhvifWx9S8nUtxTb"></div>
             </div>
             <br>
-             <button id="submitAndFinishBtn" type="button" onclick="registerAndLogin()" class="btn btn-info active" disabled>ثبت</button>
+            <button id="submitAndFinishBtn" type="button" onclick="registerAndLogin()" class="loginSubBtn btn btn-info active" disabled>ثبت</button>
             <p id="loginErrUserName"></p>
         </div>
         <div class="col-xs-6">
-            <div class="header_text">قدم آخر!</div>
+            <div class="header_text font-size-14imp">قدم آخر!</div>
             <div>
                 <label>
-                    <span class="header_text">نام کاربری خود را انتخاب کنید.دوستانتان در سایت شما را با این نام خواهند شناخت.</span>
-                    <span>نام کاربری</span>
+                    <span class="header_text font-size-12Imp">نام کاربری خود را انتخاب کنید.دوستانتان در سایت شما را با این نام خواهند شناخت.</span>
+                    <span class="pd-tp-8">نام کاربری</span>
                     <input type="text" id="username_final" maxlength="40" required>
                     <br>
                     <br>
-                    <span class="header_text">در صورتی که دوستانتان شما را معرفی کرده اند، کد معرف خود را در کادر زیر وارد کنید.</span>
-                    <span>کد معرف</span>
+                    <span class="header_text font-size-12Imp">در صورتی که دوستانتان شما را معرفی کرده اند، کد معرف خود را در کادر زیر وارد کنید.</span>
+                    <span class="pd-tp-8">کد معرف</span>
                     <input type="text" id="invitationCode" maxlength="6">
                 </label>
             </div>
-            <div></div>
+            <div class="pd-tp-8"></div>
         </div>
     </div>
     <div class="ui_close_x" onclick="document.location.href = '{{route('main')}}'"></div>
@@ -927,24 +928,24 @@ $authUrl = $client->createAuthUrl();
 {{--Forget Password in login PopUp--}}
 <span id="ForgetPassword" class="pop-up ui_modal hidden">
     <div>
-        <img src="{{URL::asset('images/logo.svg')}}">
+        <img class="loginMainLogo" src="{{URL::asset('images/logo.svg')}}">
     </div>
-    <div class="col-xs-12">
-        <div class="header_text">برای بازیابی رمزعبور تان از کدام طریق اقدام میکنید:</div>
+    <div class="col-xs-12 mainContentInfos">
+        <div class="header_text font-size-14Imp">برای بازیابی رمزعبور تان از کدام طریق اقدام میکنید:</div>
         <div>
             <label>
-                <button class="btn" onclick="ShowEmail_ForgetPass()">
-                    <div></div>
-                    <span>ایمیل</span>
+                <button class="btn showDetailsBtn" onclick="ShowEmail_ForgetPass()">
+                    <div class="emailLogo"></div>
+                    <span class="float-right">ایمیل</span>
                 </button>
-                <button class="btn" onclick="ShowPhone_ForgetPass()">
-                    <div></div>
-                    <span>تلفن همراه</span>
+                <button class="btn showDetailsBtn" onclick="ShowPhone_ForgetPass()">
+                    <div class="phoneLogo"></div>
+                    <span class="float-right">تلفن همراه</span>
                 </button>
             </label>
         </div>
-        <div>
-            <button type="button" onclick="Return()" class="btn btn-default">بازگشت</button>
+        <div class="pd-tp-8">
+            <button type="button" onclick="Return()" class="returnBtnForgetPass btn btn-default">بازگشت</button>
             <p id="loginErr"></p>
         </div>
     </div>
@@ -954,18 +955,18 @@ $authUrl = $client->createAuthUrl();
 {{--Enter Email for ForgetPass in login PopUp--}}
 <span id="Email_ForgetPass" class="pop-up ui_modal hidden">
     <div>
-        <img src="{{URL::asset('images/logo.svg')}}">
+        <img class="loginMainLogo" src="{{URL::asset('images/logo.svg')}}">
     </div>
-    <div class="col-xs-12 rtl">
+    <div class="col-xs-12 rtl mainContentInfos">
         <div>
             <label>
-                <span> آدرس ایمیل </span>
-                <input type="email" id="forget_email" maxlength="40" required autofocus>
+                <span class="pd-tp-8"> آدرس ایمیل </span>
+                <input class="loginInputTemp" type="email" id="forget_email" maxlength="40" required autofocus>
             </label>
         </div>
-        <div>
-            <button type="button" onclick="retrievePasByEmail()" class="btn btn-info active" >ثبت</button>
-            <button type="button" onclick="ShowForgetPass()" class="btn btn-default" >بازگشت</button>
+        <div class="pd-tp-8">
+            <button type="button" onclick="retrievePasByEmail()" class="loginSubBtn btn btn-info active" >ثبت</button>
+            <button type="button" onclick="ShowForgetPass()" class="loginReturnBtn btn btn-default" >بازگشت</button>
             <p id="loginErrResetPasByEmail"></p>
         </div>
     </div>
@@ -975,23 +976,23 @@ $authUrl = $client->createAuthUrl();
 {{--Enter Phone for ForgetPass in login PopUp--}}
 <span id="Phone_ForgetPass" class="pop-up ui_modal hidden">
     <div>
-        <img src="{{URL::asset('images/logo.svg')}}">
+        <img class="loginMainLogo" src="{{URL::asset('images/logo.svg')}}">
     </div>
-    <div class="col-xs-12">
+    <div class="col-xs-12 mainContentInfos">
         <div>
             <label>
-                <span> شماره موبایل خود را وارد نمایید </span>
-                <input placeholder="09xxxxxxxxx" type="tel" id="forget_phone" maxlength="40" required autofocus>
-                <p id="reminderTimePaneForget" class="hidden">
+                <span class="pd-tp-8"> شماره موبایل خود را وارد نمایید </span>
+                <input class="loginInputTemp" placeholder="09xxxxxxxxx" type="tel" id="forget_phone" maxlength="40" required autofocus>
+                <p id="reminderTimePaneForget" class="hidden pd-tp-8">
                     <span> : زمان باقی مانده برای ارسال مجدد پسورد جدید </span>
                     <span id="reminderTimeForget"></span>
                 </p>
                 <button onclick="resendActivationCodeForget()" disabled id="resendActivationCodeForget" class="btn btn-success hidden"> ارسال مجدد کد فعال سازی </button>
             </label>
         </div>
-        <div>
-            <button type="button" onclick="retrievePasByPhone()" class="btn btn-info active">ثبت</button>
-            <button type="button" onclick="ShowForgetPass()" class="btn btn-default">بازگشت</button>
+        <div class="pd-tp-8">
+            <button type="button" onclick="retrievePasByPhone()" class="loginSubBtn btn btn-info active">ثبت</button>
+            <button type="button" onclick="ShowForgetPass()" class="loginReturnBtn btn btn-default">بازگشت</button>
             <p id="loginErrResetPasByPhone"></p>
         </div>
     </div>

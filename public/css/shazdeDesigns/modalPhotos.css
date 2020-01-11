@@ -8,7 +8,7 @@
 
 .showingPhotosModal .commentWriterDetailsShow {
     padding: 10px 20px;
-    margin: 0 10px;
+    margin: 0 1%;
     width: 98%;
     border-bottom: 2px solid #e5e5e5;
 }
@@ -43,9 +43,10 @@
 
 .photosFeedBackBtn {
     float: left;
-    display: inline-block;
+    display: flex;
     width: 24%;
-    margin-top: 15px;
+    margin-top: 10px;
+    flex-direction: column;
 }
 
 .showingPhotosModal .commentWriterExperienceDetails , .answersWriterExperienceDetails {
@@ -80,13 +81,17 @@
     color: red;
 }
 
+.col-xs-6.dislikeBox {
+    padding: 0 16px 0 0;
+    text-align: center;
+}
+
 .dislikeBoxIcon::after {
     content: '\E1F8';
     font-family: Shazde_Regular2 !important;
     font-size: 20px;
     position: absolute;
     top: -4px;
-    right: 27px;
 }
 
 .dislikeBoxIconClicked::after {
@@ -95,7 +100,7 @@
     font-size: 20px;
     position: absolute;
     top: -4px;
-    right: 7px;
+    right: 3px;
 }
 
 .photosModalDislikeBox:hover {
@@ -147,7 +152,7 @@
 
 .photosDescriptionShowingModal {
     display: inline-block;
-    margin: 0 10px;
+    margin: 0 1%;
     width: 98%;
     border-top: 2px solid #e5e5e5;
     padding: 10px 0 20px;
@@ -178,9 +183,92 @@
     opacity: 1;
 }
 
-@media (max-width:1188px) {
+@media (max-width:1188px) and (min-width: 992px) {
 
     .showingPhotosModal .modal-dialog {
         width: 970px;
+    }
+}
+
+@media (min-width: 768px) {
+    .showingPhotosModal .modal-dialog {
+        width: 750px;
+    }
+
+    .commentWriterExperienceDetails {
+         width: 60%;
+    }
+
+    .photosFeedBackBtn {
+        width: 30%;
+    }
+}
+
+@media (max-width:768px) {
+    .showingPhotosModal .modal-dialog {
+        width: auto;
+    }
+
+    .commentWriterExperienceDetails {
+        width: 51%;
+    }
+
+    .photosFeedBackBtn {
+        width: 207px;
+    }
+
+    .rightColPhotosModalMainDiv {
+        border-left: none;
+        border-top: 2px solid #e5e5e5;
+    }
+
+    .rightColPhotosShowingModal {
+        width: auto;
+        margin:0 0 0 10px;
+    }
+
+    .rightColPhotosModalMainDiv {
+        border-left: none;
+        border-top: 2px solid #e5e5e5;
+        overflow-x: auto;
+        white-space: nowrap;
+        padding: 10px 5px;
+        direction: rtl;
+        margin: 5px 1%;
+        width: 98%;
+    }
+
+    .leftColPhotosModalMainDiv {
+        padding: 25px 5% 0;
+    }
+
+    .selectedPhotoShowingModal {
+        height: 400px;
+    }
+}
+
+@media (max-width:630px)  {
+    #photographerSlideFeedBackBtns {
+        display: flex !important;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .commentWriterExperienceDetails {
+        width: 74%;
+    }
+
+    .dislikeBoxIconClicked::after {
+        right: 7px;
+    }
+
+    .selectedPhotoShowingModal {
+        height: 320px;
+    }
+}
+
+@media (max-width:480px)  {
+    .selectedPhotoShowingModal {
+        height: 250px;
     }
 }

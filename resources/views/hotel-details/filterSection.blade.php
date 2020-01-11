@@ -284,8 +284,4 @@
         }
         doReviewFilter();
     }
-
-    if($(window).width() < 630) {
-        $('.tabLinkMainWrapMainDivMobile').affix({offset: {top: 930}});
-    }
 </script>

@@ -80,11 +80,35 @@
 }
 .phoneIcon {
     font-family: 'Shazde_Regular2' !important;
-    font-size: 80px;
+    font-size: 50px;
     margin-top: 8%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .textIcon {
     color: black;
-    font-size: 25px;
+    font-size: 19px;
     margin-top: -1%;
+    font-weight: 700;
+}
+
+@media (max-width: 480px) {
+    .phoneIcon {
+        font-size: 40px;
+    }
+
+    .textIcon {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 400px) {
+    .phoneIcon {
+        font-size: 30px;
+    }
+
+    .textIcon {
+        font-size: 12px;
+    }
 }

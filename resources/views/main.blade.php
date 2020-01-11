@@ -12,7 +12,8 @@
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/masthead-saves.css?v=2')}}'/>
     <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/hr_north_star.css?v=2')}}'/>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/icons.css?v=1')}}' />
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/mainPageModifiedStyles.css')}}' />
+    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/mainPageStyles.css')}}' />
+        <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/abbreviations.css?v=1')}}' />
 
     <link rel="manifest"  href="{{URL::asset('offlineMode/manifest.json')}}">
 
@@ -363,31 +364,29 @@
         <span id="searchPane" class="statePane ui_overlay ui_modal editTags hidden searchPanes">
             <div id="searchDivForScroll" class="prw_rup prw_search_typeahead spSearchDivForScroll">
                 <div class="ui_picker">
-                    <div class="typeahead_align ui_typeahead" style="display: flex; width: 100%">
+                    <div class="typeahead_align ui_typeahead full-width display-flex">
                         <div class="spGoWhere">به کجا</div>
                         <input onkeyup="search(event, this.value)" type="text" id="placeName" class="typeahead_input searchPaneInput" placeholder="دوست دارید سفر کنید؟ (نام شهر یا استان را وارد کنید)"/>
                         <input type="hidden" id="placeId">
                     </div>
                     <div class="spBorderBottom"></div>
                     <div id="result" class="data_holder">
-
-                        <div>
-                            <div class="icons location spIcons"></div>
-                            <div style="cursor: pointer" class="suggest" id="" onclick="">استان اصفهان</div>
-                        </div>
-                        <div>
-                            <div class="icons location spIcons"></div>
-                            <div style="cursor: pointer" class="suggest" id="" onclick="">استان تهران</div>
-                        </div>
-                        <div>
-                            <div class="icons location spIcons"></div>
-                            <div style="cursor: pointer" class="suggest" id="" onclick="">استان یزد</div>
-                        </div>
-                        <div>
-                            <div class="icons location spIcons"></div>
-                            <div style="cursor: pointer" class="suggest" id="" onclick="">استان گیلان</div>
-                        </div>
-
+{{--                        <div>--}}
+{{--                            <div class="icons location spIcons"></div>--}}
+{{--                            <div class="suggest cursor-pointer" id="" onclick="">استان اصفهان</div>--}}
+{{--                        </div>--}}
+{{--                        <div>--}}
+{{--                            <div class="icons location spIcons"></div>--}}
+{{--                            <div class="suggest cursor-pointer" id="" onclick="">استان تهران</div>--}}
+{{--                        </div>--}}
+{{--                        <div>--}}
+{{--                            <div class="icons location spIcons"></div>--}}
+{{--                            <div class="suggest cursor-pointer" id="" onclick="">استان یزد</div>--}}
+{{--                        </div>--}}
+{{--                        <div>--}}
+{{--                            <div class="icons location spIcons"></div>--}}
+{{--                            <div class="suggest cursor-pointer" id="" onclick="">استان گیلان</div>--}}
+{{--                        </div>--}}
                     </div>
 
                     @if(Auth::check())
@@ -406,7 +405,7 @@
                                             </div>
                                         </div>
                                     </a>
-                                    <div class="detail rtl">
+                                    <div class="detail direction-rtl">
                                         <div class="item tags ng-binding">اصفهان <span>در </span><span class="ng-binding">اصفهان</span></div>
                                     </div>
                                 </div>
@@ -422,7 +421,7 @@
                                                 </div>
                                             </div>
                                         </a>
-                                        <div class="detail rtl">
+                                        <div class="detail direction-rtl">
                                             <div class="item tags ng-binding">اصفهان <span>در </span><span class="ng-binding">اصفهان</span></div>
                                         </div>
                                     </div>
@@ -438,7 +437,7 @@
                                                 </div>
                                             </div>
                                         </a>
-                                        <div class="detail rtl">
+                                        <div class="detail direction-rtl">
                                             <div class="item tags ng-binding">اصفهان <span>در </span><span class="ng-binding">اصفهان</span></div>
                                         </div>
                                     </div>
@@ -454,7 +453,7 @@
                                             </div>
                                         </div>
                                     </a>
-                                    <div class="detail rtl">
+                                    <div class="detail direction-rtl">
                                         <div class="item tags ng-binding">اصفهان <span>در </span><span class="ng-binding">اصفهان</span></div>
                                     </div>
                                 </div>
@@ -474,7 +473,7 @@
                                             </div>
                                         </div>
                                     </a>
-                                    <div class="detail rtl">
+                                    <div class="detail direction-rtl">
                                         <div class="item tags ng-binding">اصفهان <span>در </span><span class="ng-binding">اصفهان</span></div>
                                     </div>
                                 </div>
@@ -490,7 +489,7 @@
                                                 </div>
                                             </div>
                                         </a>
-                                        <div class="detail rtl">
+                                        <div class="detail direction-rtl">
                                             <div class="item tags ng-binding">اصفهان <span>در </span><span class="ng-binding">اصفهان</span></div>
                                         </div>
                                     </div>
@@ -506,7 +505,7 @@
                                                 </div>
                                             </div>
                                         </a>
-                                        <div class="detail rtl">
+                                        <div class="detail direction-rtl">
                                             <div class="item tags ng-binding">اصفهان <span>در </span><span class="ng-binding">اصفهان</span></div>
                                         </div>
                                     </div>
@@ -522,7 +521,7 @@
                                             </div>
                                         </div>
                                     </a>
-                                    <div class="detail rtl">
+                                    <div class="detail direction-rtl">
                                         <div class="item tags ng-binding">اصفهان <span>در </span><span class="ng-binding">اصفهان</span></div>
                                     </div>
                                 </div>
@@ -725,6 +724,8 @@
                         }
                     })
                 }
+
+                $('#result').css({"padding": "10px 5px 5px" , "border": "2px solid #4DC7BC" , "border-top": "0"})
             }
 
             function setInput(e, t) {
@@ -937,28 +938,6 @@
                 prevEl: '.swiper-button-prev',
             },
 
-        });
-    </script>
-
-    <!-- Initialize Swiper Of mainSuggestion -->
-    <script>
-        var swiper = new Swiper('.mainSuggestion', {
-            spaceBetween: 30,
-            slidesPerGroup: 1,
-            loop: true,
-            loopFillGroupWithBlank: true,
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-            breakpoints:{
-                900: {
-                    slidesPerView: 2,
-                },
-                10000:{
-                    slidesPerView: 4,
-                },
-            }
         });
     </script>
 

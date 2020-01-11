@@ -16,7 +16,7 @@
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/icons.css?v=2')}}'/>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/cityPage.css?v=1')}}'/>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/abbreviations.css?v=1')}}'/>
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/mainPageModifiedStyles.css')}}'/>
+    <link rel='stylesheet' type='text/css' href='{{URL::asset('mainPageStyles.css')}}'/>
 
     <script type='text/javascript' src='{{URL::asset('js/jquery_12.js')}}'></script>
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/article.min.css?v=1.1')}}"/>
