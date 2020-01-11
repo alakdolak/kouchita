@@ -372,7 +372,7 @@ Route::group(array('middleware' => ['throttle:30']), function () {
 
     Route::post('checkInnerFlightCapacity', ['as' => 'checkInnerFlightCapacity', 'uses' => 'TicketController@checkInnerFlightCapacity']);
 
-    Route::any('heyYou', array('as' => 'heyYou', 'uses' => 'HomeController@totalSearch'));
+    Route::any('totalSearch', array('as' => 'totalSearch', 'uses' => 'HomeController@totalSearch'));
 
     Route::any('searchForStates', array('as' => 'searchForStates', 'uses' => 'HomeController@searchForStates'));
 

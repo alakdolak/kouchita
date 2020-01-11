@@ -18,7 +18,7 @@
     <link rel="manifest"  href="{{URL::asset('offlineMode/manifest.json')}}">
 
     <script>
-        var searchDir = '{{route('heyYou')}}';
+        var searchDir = '{{route('totalSearch')}}';
         var kindPlaceId = '{{$kindPlaceId}}';
         var getStates = '{{route('getStates')}}';
         var getGoyesh = '{{route('getGoyesh')}}';
@@ -50,6 +50,10 @@
                 bottom: 10px;
                 padding: 30px;
                 font-size: 20px;
+            }
+            .stateName{
+                font-size: 12px;
+                padding-right: 21px;
             }
         </style>
 
@@ -388,36 +392,8 @@
                     </div>
                     <div class="spBorderBottom"></div>
                     <div class="mainContainerSearch">
-                        <div id="result" class="data_holder">
-                            <div>
-                                <div class="icons location spIcons"></div>
-                                <div class="suggest cursor-pointer font-weight-700" id="" onclick="">استان اصفهان</div>
-                            </div>
-                            <div>
-                                <div class="icons hotelIcon spIcons"></div>
-                                <div class="suggest cursor-pointer" id="" onclick="">هتل عباسی</div>
-                            </div>
-                            <div>
-                                <div class="icons restaurantIcon spIcons"></div>
-                                <div class="suggest cursor-pointer" id="" onclick="">خاله خاور</div>
-                            </div>
-                            <div>
-                                <div class="icons touristAttractions spIcons"></div>
-                                <div class="suggest cursor-pointer" id="" onclick="">عالی‌قاپو</div>
-                            </div>
-                            <div>
-                                <div class="icons souvenirIcon spIcons"></div>
-                                <div class="suggest cursor-pointer" id="" onclick="">سوهان</div>
-                            </div>
-                            <div>
-                                <div class="icons traditionalFood spIcons"></div>
-                                <div class="suggest cursor-pointer" id="" onclick="">ترشه‌تره</div>
-                            </div>
-                            <div>
-                                <div class="icons adventure spIcons"></div>
-                                <div class="suggest cursor-pointer" id="" onclick="">تور کویر مرنجاب</div>
-                            </div>
-                        </div>
+
+                        <div id="result" class="data_holder display-noneImp"></div>
 
                         @if(Auth::check())
                             <div class="visitSuggestionDiv">
@@ -642,7 +618,6 @@
                     $("#result").empty();
                 }
                 else {
-                    console.log(e.keyCode)
                     var scrollVal = $("#searchDivForScroll").scrollTop();
 
                     if (13 == e.keyCode && -1 != currIdx) {
@@ -708,16 +683,44 @@
 
                                 for (i = 0; i < response.length; i++) {
                                     if ("state" == response[i].mode) {
-                                        newElement += "<div class='icons location' style='float: right;margin: -3px 0 0 3px;'></div>";
-                                        newElement += "<p style='cursor: pointer' class='suggest' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "استان ' + response[i].targetName + "\")'>استان " + response[i].targetName + "</p>";
+                                        newElement += '<div class="icons location spIcons"></div>\n';
+                                        newElement += "<p class='suggest cursor-pointer font-weight-700' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "استان ' + response[i].targetName + "\")'>استان " + response[i].targetName + "</p>";
                                     }
                                     else if ("city" == response[i].mode) {
-                                        newElement += "<div class='icons location' style='float: right;margin: -3px 0 0 3px;'></div>";
-                                        newElement += "<p style='cursor: pointer' class='suggest' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "شهر ' + response[i].targetName + " در " + response[i].stateName + "\")'>شهر " + response[i].targetName + " در " + response[i].stateName + " </p>";
+                                        newElement += '<div class="icons location spIcons"></div>\n';
+                                        newElement += "<p class='suggest cursor-pointer font-weight-700' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "شهر ' + response[i].targetName + " در " + response[i].stateName + "\")' style='margin: 0px'>شهر " + response[i].targetName + "</p>";
+                                        newElement += "<p class='suggest cursor-pointer stateName' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")'>" + response[i].stateName + "</p>";
                                     }
-                                    else
-                                        // newElement += "<div class='icons location' style='float: right;margin: -3px 0 0 3px;'></div>";
-                                        newElement += "<p style='cursor: pointer' class='suggest' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")'>" + response[i].targetName + " در " + response[i].cityName + " در " + response[i].stateName + "</p>";
+                                    else if(response[i].mode == 'amaken') {
+                                        newElement += '<div class="icons touristAttractions spIcons"></div>\n';
+                                        newElement += "<p class='suggest cursor-pointer' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")' style='margin: 0px'>" + response[i].targetName + "</p>";
+                                        newElement += "<p class='suggest cursor-pointer stateName' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")'>" + response[i].cityName + " در " + response[i].stateName + "</p>";
+                                    }
+                                    else if(response[i].mode == 'restaurant') {
+                                        newElement += '<div class="icons restaurantIcon spIcons"></div>\n';
+                                        newElement += "<p class='suggest cursor-pointer' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")' style='margin: 0px'>" + response[i].targetName + "</p>";
+                                        newElement += "<p class='suggest cursor-pointer stateName' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")'>" + response[i].cityName + " در " + response[i].stateName + "</p>";
+                                    }
+                                    else if(response[i].mode == 'hotel') {
+                                        newElement += '<div class="icons hotelIcon spIcons"></div>\n';
+                                        newElement += "<p class='suggest cursor-pointer' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")' style='margin: 0px'>" + response[i].targetName + "</p>";
+                                        newElement += "<p class='suggest cursor-pointer stateName' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")'>" + response[i].cityName + " در " + response[i].stateName + "</p>";
+                                    }
+                                    else if(response[i].mode == 'sogatSanaies') {
+                                        newElement += '<div class="icons souvenirIcon spIcons"></div>\n';
+                                        newElement += "<p class='suggest cursor-pointer' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")' style='margin: 0px'>" + response[i].targetName + "</p>";
+                                        newElement += "<p class='suggest cursor-pointer stateName' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")'>" + response[i].cityName + " در " + response[i].stateName + "</p>";
+                                    }
+                                    else if(response[i].mode == 'mahaliFood') {
+                                        newElement += '<div class="icons traditionalFood spIcons"></div>\n';
+                                        newElement += "<p class='suggest cursor-pointer' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")' style='margin: 0px'>" + response[i].targetName + "</p>";
+                                        newElement += "<p class='suggest cursor-pointer stateName' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")'>" + response[i].cityName + " در " + response[i].stateName + "</p>";
+                                    }
+                                    else if(response[i].mode == 'majara') {
+                                        newElement += '<div class="icons adventure spIcons"></div>\n';
+                                        newElement += "<p class='suggest cursor-pointer' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")' style='margin: 0px'>" + response[i].targetName + "</p>";
+                                        newElement += "<p class='suggest cursor-pointer stateName' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")'>" + response[i].cityName + " در " + response[i].stateName + "</p>";
+                                    }
                                 }
 
                                 if(response.length != 0) {
@@ -750,14 +753,45 @@
                             suggestions = response;
 
                             for (i = 0; i < response.length; i++) {
-                                if ("state" == response[i].mode) {
-                                    newElement += "<p style='cursor: pointer' class='suggest' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "استان ' + response[i].targetName + "\")'>استان " + response[i].targetName + "</p>";
+                                if (response[i].mode == "state") {
+                                    newElement += '<div class="icons location spIcons"></div>\n';
+                                    newElement += "<p class='suggest cursor-pointer font-weight-700' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "استان ' + response[i].targetName + "\")'>استان " + response[i].targetName + "</p>";
                                 }
-                                else if ("city" == response[i].mode) {
-                                    newElement += "<p style='cursor: pointer' class='suggest' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "شهر ' + response[i].targetName + " در " + response[i].stateName + "\")'>شهر " + response[i].targetName + " در " + response[i].stateName + " </p>";
+                                else if (response[i].mode == "city") {
+                                    newElement += '<div class="icons location spIcons"></div>\n';
+                                    newElement += "<p class='suggest cursor-pointer font-weight-700' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "شهر ' + response[i].targetName + " در " + response[i].stateName + "\")' style='margin: 0px'>شهر " + response[i].targetName + "</p>";
+                                    newElement += "<p class='suggest cursor-pointer stateName' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")'>" + response[i].stateName + "</p>";
                                 }
-                                else
-                                    newElement += "<p style='cursor: pointer' class='suggest' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")'>" + response[i].targetName + " در " + response[i].cityName + " در " + response[i].stateName + "</p>";
+                                else if(response[i].mode == 'amaken') {
+                                    newElement += '<div class="icons touristAttractions spIcons"></div>\n';
+                                    newElement += "<p class='suggest cursor-pointer' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")' style='margin: 0px'>" + response[i].targetName + "</p>";
+                                    newElement += "<p class='suggest cursor-pointer stateName' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")'>" + response[i].cityName + " در " + response[i].stateName + "</p>";
+                                }
+                                else if(response[i].mode == 'restaurant') {
+                                    newElement += '<div class="icons restaurantIcon spIcons"></div>\n';
+                                    newElement += "<p class='suggest cursor-pointer' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")' style='margin: 0px'>" + response[i].targetName + "</p>";
+                                    newElement += "<p class='suggest cursor-pointer stateName' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")'>" + response[i].cityName + " در " + response[i].stateName + "</p>";
+                                }
+                                else if(response[i].mode == 'hotel') {
+                                    newElement += '<div class="icons hotelIcon spIcons"></div>\n';
+                                    newElement += "<p class='suggest cursor-pointer' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")' style='margin: 0px'>" + response[i].targetName + "</p>";
+                                    newElement += "<p class='suggest cursor-pointer stateName' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")'>" + response[i].cityName + " در " + response[i].stateName + "</p>";
+                                }
+                                else if(response[i].mode == 'sogatSanaies') {
+                                    newElement += '<div class="icons souvenirIcon spIcons"></div>\n';
+                                    newElement += "<p class='suggest cursor-pointer' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")' style='margin: 0px'>" + response[i].targetName + "</p>";
+                                    newElement += "<p class='suggest cursor-pointer stateName' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")'>" + response[i].cityName + " در " + response[i].stateName + "</p>";
+                                }
+                                else if(response[i].mode == 'mahaliFood') {
+                                    newElement += '<div class="icons traditionalFood spIcons"></div>\n';
+                                    newElement += "<p class='suggest cursor-pointer' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")' style='margin: 0px'>" + response[i].targetName + "</p>";
+                                    newElement += "<p class='suggest cursor-pointer stateName' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")'>" + response[i].cityName + " در " + response[i].stateName + "</p>";
+                                }
+                                else if(response[i].mode == 'majara') {
+                                    newElement += '<div class="icons adventure spIcons"></div>\n';
+                                    newElement += "<p class='suggest cursor-pointer' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")' style='margin: 0px'>" + response[i].targetName + "</p>";
+                                    newElement += "<p class='suggest cursor-pointer stateName' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")'>" + response[i].cityName + " در " + response[i].stateName + "</p>";
+                                }
                             }
 
                             if(response.length != 0) {

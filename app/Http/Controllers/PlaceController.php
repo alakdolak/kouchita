@@ -2881,7 +2881,6 @@ class PlaceController extends Controller {
     public function showMainPage($mode = "mainPage") {
         switch ($mode) {
             case "amaken":
-            default:
                 $kindPlaceId = 1;
                 break;
             case "restaurant":
@@ -2896,6 +2895,9 @@ class PlaceController extends Controller {
             case "adab":
                 $kindPlaceId = 8;
                 break;
+            default:
+                $kindPlaceId= 0;
+                break;
         }
 
         $sliderPic = MainSliderPic::all();
@@ -2903,9 +2905,6 @@ class PlaceController extends Controller {
         return view('main', array('placeMode' => $mode, 'kindPlaceId' => $kindPlaceId, 'sliderPic' => $sliderPic,
             'sections' => SectionPage::wherePage(getValueInfo('hotel-detail'))->get()
         ));
-
-        return view('swtest');
-
     }
 
     public function fillMyDivWithAdv() {
