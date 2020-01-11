@@ -69,18 +69,11 @@
                                         <!-- Swiper -->
                                         <div id="mainSlider" class="swiper-container">
                                             <div class="swiper-wrapper">
-                                                <div class="swiper-slide">
-                                                    <img class="eachPicOfSlider" src="{{URL::asset('images') . 'slide1.jpg'}}" alt="slide1">
-                                                </div>
-                                                <div class="swiper-slide">
-                                                    <img class="eachPicOfSlider" src="{{URL::asset('images') . 'slide2.jpg'}}" alt="slide2">
-                                                </div>
-                                                <div class="swiper-slide">
-                                                    <img class="eachPicOfSlider" src="{{URL::asset('images') . 'slide3.jpg'}}" alt="slide3">
-                                                </div>
-                                                <div class="swiper-slide">
-                                                    <img class="eachPicOfSlider" src="{{URL::asset('images') . 'slide4.jpg'}}" alt="slide4">
-                                                </div>
+                                                @foreach($sliderPic as $item)
+                                                    <div class="swiper-slide">
+                                                        <img class="eachPicOfSlider" src="{{URL::asset('_images/sliderPic/' . $item->pic)}}" alt="{{$item->alt}}">
+                                                    </div>
+                                                @endforeach
                                             </div>
                                             <!-- Add Pagination -->
                                             <div class="swiper-pagination"></div>
@@ -237,18 +230,11 @@
                                         <!-- Swiper -->
                                         <div id="mainSlider" class="swiper-container">
                                             <div class="swiper-wrapper">
-                                                <div class="swiper-slide">
-                                                    <img class="eachPicOfSlider" src="{{URL::asset('images') . 'slide1.jpg'}}" alt="slide1">
-                                                </div>
-                                                <div class="swiper-slide">
-                                                    <img class="eachPicOfSlider" src="{{URL::asset('images') . 'slide2.jpg'}}" alt="slide2">
-                                                </div>
-                                                <div class="swiper-slide">
-                                                    <img class="eachPicOfSlider" src="{{URL::asset('images') . 'slide3.jpg'}}" alt="slide3">
-                                                </div>
-                                                <div class="swiper-slide">
-                                                    <img class="eachPicOfSlider" src="{{URL::asset('images') . 'slide4.jpg'}}" alt="slide4">
-                                                </div>
+                                                @foreach($sliderPic as $item)
+                                                    <div class="swiper-slide">
+                                                        <img class="eachPicOfSlider" src="{{URL::asset('_images/sliderPic/' . $item->pic)}}" alt="{{$item->alt}}">
+                                                    </div>
+                                                @endforeach
                                             </div>
                                             <!-- Add Pagination -->
                                             <div class="swiper-pagination"></div>
@@ -384,6 +370,7 @@
                     </div>
                     <div class="spBorderBottom"></div>
                     <div id="result" class="data_holder">
+
                         <div>
                             <div class="icons location spIcons"></div>
                             <div style="cursor: pointer" class="suggest" id="" onclick="">استان اصفهان</div>
@@ -400,10 +387,14 @@
                             <div class="icons location spIcons"></div>
                             <div style="cursor: pointer" class="suggest" id="" onclick="">استان گیلان</div>
                         </div>
+
                     </div>
-                    <div class="visitSuggestionDiv">
+
+                    @if(Auth::check())
+                        <div class="visitSuggestionDiv">
                         <div class="visitSuggestionText">بازدید های اخیر شما</div>
                         <div class="visitSuggestion4Box">
+
                             <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column spBoxOfSuggestion">
                                 <div class="poi">
                                     <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
@@ -468,8 +459,10 @@
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                         <div class="visitSuggestion4Box">
+
                             <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column spBoxOfSuggestion">
                                 <div class="poi">
                                     <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
@@ -534,8 +527,11 @@
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
+                    @endif
+
                 </div>
             </div>
             <div onclick="$('#searchPane').addClass('hidden'); $('.dark').hide()" class="ui_close_x"></div>
@@ -908,8 +904,9 @@
         var swiper = new Swiper('#mainSlider', {
             spaceBetween: 30,
             centeredSlides: true,
+            loop : true,
             autoplay: {
-                delay: 2500,
+                delay: 5000,
                 disableOnInteraction: false,
             },
             pagination: {

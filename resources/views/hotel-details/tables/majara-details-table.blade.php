@@ -55,7 +55,7 @@
             <div class="contentSection col-xs-4">موج سواری</div>
         @endif
         @if($place->rafting == 1)
-            <div class="contentSection col-xs-12">قایق‌سواری در موج‌های خروشان</div>
+            <div class="contentSection col-xs-12">رفتینگ</div>
         @endif
     </div>
 @endif
@@ -74,7 +74,7 @@
         </div>
 
         @if($place->kooh == 1)
-            <div class="contentSection col-xs-4">کوه</div>
+            <div class="contentSection col-xs-4">کوهستان</div>
         @endif
         @if($place->darya == 1)
             <div class="contentSection col-xs-4">دریا</div>

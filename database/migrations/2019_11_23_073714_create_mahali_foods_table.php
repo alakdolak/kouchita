@@ -20,7 +20,9 @@ class CreateMahaliFoodsTable extends Migration
             $table->boolean('hotOrCold');
             $table->text('material')->nullable();
             $table->string('recipes', 1000)->nullable();
-            $table->boolean('veg');
+            $table->boolean('vegetarian');
+            $table->boolean('vegan');
+            $table->boolean('diabet');
             $table->tinyInteger('kind');
             $table->unsignedInteger('cityId');
             $table->string('mainPic')->nullable();

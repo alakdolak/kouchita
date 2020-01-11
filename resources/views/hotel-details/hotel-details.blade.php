@@ -1231,7 +1231,7 @@ if ($total == 0)
                                                         <h3 class="block_title">معرفی کلی </h3>
                                                     </div>
                                                     <div>
-                                                        <div class="overviewContent" id="introductionText">{{$place->description}}</div>
+                                                        <div class="overviewContent" id="introductionText">{!! $place->description !!}</div>
                                                     </div>
                                                 </div>
                                                 <div id="detailsAndFeaturesMobile"
@@ -1392,7 +1392,10 @@ if ($total == 0)
                                                 </div>
                                             </div>
 
-                                            @include('hotel-details.mapSection')
+
+                                            @if($placeMode != 'sogatsanaie')
+                                                @include('hotel-details.mapSection')
+                                            @endif
                                         @endif
 
                                         @include('layouts.extendedMap')
@@ -1746,7 +1749,10 @@ if ($total == 0)
                 <div class="clear-both"></div>
                 @include('hotel-details.questionSection')
             </div>
-            @include('hotel-details.similarLocation')
+
+                @if($placeMode != 'sogatsanaie' && $placeMode != 'mahalifood')
+                    @include('hotel-details.similarLocation')
+                @endif
             </div>
         </div>
     </div>

@@ -160,6 +160,63 @@ class SogatSanaieController extends Controller
                 break;
         }
 
+        $place->kind = '';
+        if($place->jewelry == 1)
+            $place->kind .= 'زیورآلات';
+        if($place->cloth == 1){
+            if($place->kind != '')
+                $place->kind .= ' , ';
+
+            $place->kind .= 'پارچه و پوشیدنی';
+        }
+        if($place->applied == 1){
+            if($place->kind != '')
+                $place->kind .= ' , ';
+
+            $place->kind .= 'لوازم کاربردی منزل';
+        }
+        if($place->decorative == 1){
+            if($place->kind != '')
+                $place->kind .= ' , ';
+
+            $place->kind .= 'لوازم تزئینی';
+        }
+
+        $place->taste = '';
+        if($place->torsh == 1)
+            $place->taste .= 'ترش';
+        if($place->shirin == 1){
+            if($place->taste != '')
+                $place->taste .= ' , ';
+
+            $place->taste .= 'شیرین';
+        }
+        if($place->talkh == 1){
+            if($place->taste != '')
+                $place->taste .= ' , ';
+
+            $place->taste .= 'تلخ';
+        }
+        if($place->malas == 1){
+            if($place->taste != '')
+                $place->taste .= ' , ';
+
+            $place->taste .= 'ملس';
+        }
+        if($place->shor == 1){
+            if($place->taste != '')
+                $place->taste .= ' , ';
+
+            $place->taste .= 'شور';
+        }
+        if($place->tond == 1){
+            if($place->taste != '')
+                $place->taste .= ' , ';
+
+            $place->taste .= 'تند';
+        }
+
+
         $allState = State::all();
 
         $pics = getAllPlacePicsByKind($kindPlaceId, $placeId);

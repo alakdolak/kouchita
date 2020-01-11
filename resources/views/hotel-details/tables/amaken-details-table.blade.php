@@ -15,7 +15,7 @@
             <div class="contentSection col-xs-4">مکان تفریحی</div>
         @endif
         @if($place->tabiatgardi == 1)
-            <div class="contentSection col-xs-4">طبیعت</div>
+            <div class="contentSection col-xs-4">طبیعی</div>
         @endif
         @if($place->tejari == 1)
             <div class="contentSection col-xs-4">تجاری</div>
@@ -98,6 +98,9 @@
         @endif
         @if($place->boomi == 1)
             <div class="contentSection col-xs-4">بومی</div>
+        @endif
+        @if($place->mazhabiArch == 1)
+            <div class="contentSection col-xs-4">مذهبی</div>
         @endif
     </div>
 @endif

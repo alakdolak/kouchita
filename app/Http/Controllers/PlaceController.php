@@ -11,6 +11,7 @@ use App\models\ConfigModel;
 use App\models\DefaultPic;
 use App\models\Hotel;
 use App\models\LogModel;
+use App\models\MainSliderPic;
 use App\models\Majara;
 use App\models\Opinion;
 use App\models\OpOnActivity;
@@ -2895,8 +2896,9 @@ class PlaceController extends Controller {
                 $kindPlaceId = 8;
                 break;
         }
+        $sliderPic = MainSliderPic::all();
 
-        return view('main', array('placeMode' => $mode, 'kindPlaceId' => $kindPlaceId,
+        return view('main', array('placeMode' => $mode, 'kindPlaceId' => $kindPlaceId, 'sliderPic' => $sliderPic,
             'sections' => SectionPage::wherePage(getValueInfo('hotel-detail'))->get()
         ));
 
