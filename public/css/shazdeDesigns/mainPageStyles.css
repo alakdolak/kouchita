@@ -301,10 +301,10 @@ body {
     position: fixed;
     left: 10%;
     right: 10%;
-    top: 15%;
+    top: 10%;
     bottom: auto;
     overflow: auto;
-    max-height: 500px;
+    max-height: 80%;
     z-index: 10000001;
 }
 
@@ -327,11 +327,24 @@ input[type="text"].searchPaneInput::-webkit-input-placeholder {
     font-weight: 500;
 }
 
+DIV.prw_rup.prw_search_typeahead .typeahead_align {
+    display: flex;
+    align-items: center;
+}
+
 .spGoWhere {
     color: #0c0593;
-    width: 68px;
-    font-size: 1.3em;
+    font-size: 20px;
     font-weight: 500;
+    float: right;
+    margin-left: 5px;
+}
+
+DIV.prw_rup.prw_search_typeahead .typeahead_align .typeahead_input {
+    float: right;
+    width: 90%;
+    padding: 0;
+    height: 40px;
 }
 
 .spBorderBottom {
@@ -339,11 +352,46 @@ input[type="text"].searchPaneInput::-webkit-input-placeholder {
     margin: 10px 0 0;
 }
 
+#result > div {
+    display: flex;
+    align-items: center;
+}
+
 .spIcons {
     float: right;
     margin: -3px 0 0 3px;
+    padding-top: 3px;
 }
 
+.hotelIcon::before {
+    font-family: Shazde_Regular2 !important;
+    content: '\e000';
+}
+
+.restaurantIcon::before {
+    font-family: Shazde_Regular2 !important;
+    content: '\e001';
+}
+
+.touristAttractions::before {
+    font-family: Shazde_Regular2 !important;
+    content: '\e002';
+}
+
+.souvenirIcon::before {
+    font-family: Shazde_Regular2 !important;
+    content: '\e005';
+}
+
+.traditionalFood::before {
+    font-family: Shazde_Regular2 !important;
+    content: '\e006';
+}
+
+.adventure::before {
+    font-family: Shazde_Regular2 !important;
+    content: '\e009';
+}
 
 .pop-up-Panes {
     position: fixed;
@@ -389,11 +437,10 @@ input[type="text"].searchPaneInput::-webkit-input-placeholder {
 
 #result {
     overflow-y: auto;
-    max-height: 300px;
-    /*border: 2px solid #4DC7BC;*/
-    /*border-top: 0;*/
+    border: 2px solid #4DC7BC;
+    border-top: 0;
     width: 45%;
-    /*padding: 10px 5px 5px;*/
+    padding: 10px 5px;
     display: inline-block;
 }
 
@@ -436,3 +483,27 @@ input[type="text"].searchPaneInput::-webkit-input-placeholder {
     line-height: 70px;
 }
 
+@media (max-width: 767px) {
+    DIV.prw_rup.prw_search_typeahead .typeahead_align {
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 630px) {
+    .searchPanes {
+        left: 2%;
+        right: 2%
+    }
+
+    .mainContainerSearch {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    #result {
+        display: block;
+        width: auto;
+        margin: 0 20px 40px;
+    }
+}

@@ -18,6 +18,8 @@ class CreateMainSliderPicsTable extends Migration
             $table->string('pic');
             $table->string('alt');
             $table->string('text');
+            $table->string('textColor');
+            $table->string('textBackground');
         });
     }
 
