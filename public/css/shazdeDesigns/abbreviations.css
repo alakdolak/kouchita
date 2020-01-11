@@ -24,6 +24,10 @@
     display: none;
 }
 
+.display-noneImp {
+    display: none !important;
+}
+
 .display-inline {
     display: inline;
 }
@@ -233,7 +237,11 @@
 }
 
 .font-weight-500 {
-    font-weight: 400;
+    font-weight: 500;
+}
+
+.font-weight-700 {
+    font-weight: 700;
 }
 
 /*padding top*/

@@ -178,11 +178,11 @@
                                             <div class="ui_columns datepicker_box trip_search metaDatePicker rounded_lockup usePickerTypeIcons preDates noDates with_children hideOnPhone mainDivSearchInputMainPage">
                                                 <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column is-4 search_typeahead wctx-tripsearch searchDivForScroll">
                                                     <div class="ui_picker">
-                                                                <span class="typeahead_align ui_typeahead">
-                                                                    <input onkeyup="search(event)" type="text" id="placeName" class="typeahead_input" placeholder="شهر یا نام رستوران"/>
-                                                                    <input type="hidden" id="placeId">
-                                                                    <span class="ui_icon map-pin-fill pickerType typeahead_icon"></span>
-                                                                </span>
+                                                        <span class="typeahead_align ui_typeahead">
+                                                            <input onkeyup="search(event)" type="text" id="placeName" class="typeahead_input" placeholder="شهر یا نام رستوران"/>
+                                                            <input type="hidden" id="placeId">
+                                                            <span class="ui_icon map-pin-fill pickerType typeahead_icon"></span>
+                                                        </span>
                                                         <div id="result" class="data_holder"></div>
                                                     </div>
                                                 </div>
@@ -332,10 +332,10 @@
                                             <div class="trip_search rounded_lockup usePickerTypeIcons hideOnScreen mainDivSearchInputPhonePage">
                                                 <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column" onclick="$('#phoneSearchPopUp').removeClass('hidden')">
                                                     <div class="ui_picker">
-                                                                <span class="typeahead_align ui_typeahead">
-                                                                    <input onkeyup="search(event)" type="text" id="placeName" class="typeahead_input" placeholder="شهر یا نام رستوران"/>
-                                                                    <input type="hidden" id="placeId">
-                                                                </span>
+                                                        <span class="typeahead_align ui_typeahead">
+                                                            <input onkeyup="search(event)" type="text" id="placeName" class="typeahead_input" placeholder="شهر یا نام رستوران"/>
+                                                            <input type="hidden" id="placeId">
+                                                        </span>
                                                         <div id="resultPhone" class="data_holder"></div>
                                                     </div>
                                                 </div>
@@ -383,119 +383,48 @@
                 <div class="ui_picker">
                     <div class="typeahead_align ui_typeahead full-width display-flex">
                         <div class="spGoWhere">به کجا</div>
-                        <input onkeyup="search(event, this.value)" type="text" id="placeName" class="typeahead_input searchPaneInput" placeholder="دوست دارید سفر کنید؟ (نام شهر یا استان را وارد کنید)"/>
+                        <input onkeyup="search(event, this.value)" type="text" id="placeName" class="typeahead_input searchPaneInput" placeholder="دوست دارید سفر کنید؟"/>
                         <input type="hidden" id="placeId">
                     </div>
                     <div class="spBorderBottom"></div>
-                    <div id="result" class="data_holder">
-{{--                        <div>--}}
-{{--                            <div class="icons location spIcons"></div>--}}
-{{--                            <div class="suggest cursor-pointer" id="" onclick="">استان اصفهان</div>--}}
-{{--                        </div>--}}
-{{--                        <div>--}}
-{{--                            <div class="icons location spIcons"></div>--}}
-{{--                            <div class="suggest cursor-pointer" id="" onclick="">استان تهران</div>--}}
-{{--                        </div>--}}
-{{--                        <div>--}}
-{{--                            <div class="icons location spIcons"></div>--}}
-{{--                            <div class="suggest cursor-pointer" id="" onclick="">استان یزد</div>--}}
-{{--                        </div>--}}
-{{--                        <div>--}}
-{{--                            <div class="icons location spIcons"></div>--}}
-{{--                            <div class="suggest cursor-pointer" id="" onclick="">استان گیلان</div>--}}
-{{--                        </div>--}}
-                    </div>
-
-                    @if(Auth::check())
-                        <div class="visitSuggestionDiv">
-                        <div class="visitSuggestionText">بازدید های اخیر شما</div>
-                        <div class="visitSuggestion4Box">
-
-                            <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column spBoxOfSuggestion">
-                                <div class="poi">
-                                    <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
-                                        <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                            <div class="prv_thumb has_image">
-                                                <div class="image_wrapper spImageWrapper landscape landscapeWide">
-                                                    <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <div class="detail direction-rtl">
-                                        <div class="item tags ng-binding">اصفهان <span>در </span><span class="ng-binding">اصفهان</span></div>
-                                    </div>
-                                </div>
+                    <div class="mainContainerSearch">
+                        <div id="result" class="data_holder">
+                            <div>
+                                <div class="icons location spIcons"></div>
+                                <div class="suggest cursor-pointer font-weight-700" id="" onclick="">استان اصفهان</div>
                             </div>
-                            <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column spBoxOfSuggestion">
-                                    <div class="poi">
-                                        <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
-                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                <div class="prv_thumb has_image">
-                                                    <div class="image_wrapper spImageWrapper landscape landscapeWide">
-                                                        <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="detail direction-rtl">
-                                            <div class="item tags ng-binding">اصفهان <span>در </span><span class="ng-binding">اصفهان</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column spBoxOfSuggestion">
-                                    <div class="poi">
-                                        <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
-                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                <div class="prv_thumb has_image">
-                                                    <div class="image_wrapper spImageWrapper landscape landscapeWide">
-                                                        <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="detail direction-rtl">
-                                            <div class="item tags ng-binding">اصفهان <span>در </span><span class="ng-binding">اصفهان</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column spBoxOfSuggestion">
-                                <div class="poi">
-                                    <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
-                                        <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                            <div class="prv_thumb has_image">
-                                                <div class="image_wrapper spImageWrapper landscape landscapeWide">
-                                                    <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <div class="detail direction-rtl">
-                                        <div class="item tags ng-binding">اصفهان <span>در </span><span class="ng-binding">اصفهان</span></div>
-                                    </div>
-                                </div>
+                            <div>
+                                <div class="icons hotelIcon spIcons"></div>
+                                <div class="suggest cursor-pointer" id="" onclick="">هتل عباسی</div>
                             </div>
-
+                            <div>
+                                <div class="icons restaurantIcon spIcons"></div>
+                                <div class="suggest cursor-pointer" id="" onclick="">خاله خاور</div>
+                            </div>
+                            <div>
+                                <div class="icons touristAttractions spIcons"></div>
+                                <div class="suggest cursor-pointer" id="" onclick="">عالی‌قاپو</div>
+                            </div>
+                            <div>
+                                <div class="icons souvenirIcon spIcons"></div>
+                                <div class="suggest cursor-pointer" id="" onclick="">سوهان</div>
+                            </div>
+                            <div>
+                                <div class="icons traditionalFood spIcons"></div>
+                                <div class="suggest cursor-pointer" id="" onclick="">ترشه‌تره</div>
+                            </div>
+                            <div>
+                                <div class="icons adventure spIcons"></div>
+                                <div class="suggest cursor-pointer" id="" onclick="">تور کویر مرنجاب</div>
+                            </div>
                         </div>
-                        <div class="visitSuggestion4Box">
 
-                            <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column spBoxOfSuggestion">
-                                <div class="poi">
-                                    <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
-                                        <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                            <div class="prv_thumb has_image">
-                                                <div class="image_wrapper spImageWrapper landscape landscapeWide">
-                                                    <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <div class="detail direction-rtl">
-                                        <div class="item tags ng-binding">اصفهان <span>در </span><span class="ng-binding">اصفهان</span></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column spBoxOfSuggestion">
+                        @if(Auth::check())
+                            <div class="visitSuggestionDiv">
+                            <div class="visitSuggestionText">بازدید های اخیر شما</div>
+                            <div class="visitSuggestion4Box">
+
+                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column spBoxOfSuggestion">
                                     <div class="poi">
                                         <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
                                             <div class="prw_rup prw_common_thumbnail_no_style_responsive">
@@ -511,7 +440,39 @@
                                         </div>
                                     </div>
                                 </div>
-                            <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column spBoxOfSuggestion">
+                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column spBoxOfSuggestion">
+                                        <div class="poi">
+                                            <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
+                                                <div class="prw_rup prw_common_thumbnail_no_style_responsive">
+                                                    <div class="prv_thumb has_image">
+                                                        <div class="image_wrapper spImageWrapper landscape landscapeWide">
+                                                            <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <div class="detail direction-rtl">
+                                                <div class="item tags ng-binding">اصفهان <span>در </span><span class="ng-binding">اصفهان</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column spBoxOfSuggestion">
+                                        <div class="poi">
+                                            <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
+                                                <div class="prw_rup prw_common_thumbnail_no_style_responsive">
+                                                    <div class="prv_thumb has_image">
+                                                        <div class="image_wrapper spImageWrapper landscape landscapeWide">
+                                                            <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <div class="detail direction-rtl">
+                                                <div class="item tags ng-binding">اصفهان <span>در </span><span class="ng-binding">اصفهان</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column spBoxOfSuggestion">
                                     <div class="poi">
                                         <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
                                             <div class="prw_rup prw_common_thumbnail_no_style_responsive">
@@ -527,26 +488,79 @@
                                         </div>
                                     </div>
                                 </div>
-                            <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column spBoxOfSuggestion">
-                                <div class="poi">
-                                    <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
-                                        <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                            <div class="prv_thumb has_image">
-                                                <div class="image_wrapper spImageWrapper landscape landscapeWide">
-                                                    <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
+
+                            </div>
+                            <div class="visitSuggestion4Box">
+
+                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column spBoxOfSuggestion">
+                                    <div class="poi">
+                                        <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
+                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
+                                                <div class="prv_thumb has_image">
+                                                    <div class="image_wrapper spImageWrapper landscape landscapeWide">
+                                                        <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
+                                                    </div>
                                                 </div>
                                             </div>
+                                        </a>
+                                        <div class="detail direction-rtl">
+                                            <div class="item tags ng-binding">اصفهان <span>در </span><span class="ng-binding">اصفهان</span></div>
                                         </div>
-                                    </a>
-                                    <div class="detail direction-rtl">
-                                        <div class="item tags ng-binding">اصفهان <span>در </span><span class="ng-binding">اصفهان</span></div>
                                     </div>
                                 </div>
-                            </div>
+                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column spBoxOfSuggestion">
+                                        <div class="poi">
+                                            <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
+                                                <div class="prw_rup prw_common_thumbnail_no_style_responsive">
+                                                    <div class="prv_thumb has_image">
+                                                        <div class="image_wrapper spImageWrapper landscape landscapeWide">
+                                                            <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <div class="detail direction-rtl">
+                                                <div class="item tags ng-binding">اصفهان <span>در </span><span class="ng-binding">اصفهان</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column spBoxOfSuggestion">
+                                        <div class="poi">
+                                            <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
+                                                <div class="prw_rup prw_common_thumbnail_no_style_responsive">
+                                                    <div class="prv_thumb has_image">
+                                                        <div class="image_wrapper spImageWrapper landscape landscapeWide">
+                                                            <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <div class="detail direction-rtl">
+                                                <div class="item tags ng-binding">اصفهان <span>در </span><span class="ng-binding">اصفهان</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column spBoxOfSuggestion">
+                                    <div class="poi">
+                                        <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
+                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
+                                                <div class="prv_thumb has_image">
+                                                    <div class="image_wrapper spImageWrapper landscape landscapeWide">
+                                                        <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <div class="detail direction-rtl">
+                                            <div class="item tags ng-binding">اصفهان <span>در </span><span class="ng-binding">اصفهان</span></div>
+                                        </div>
+                                    </div>
+                                </div>
 
+                            </div>
                         </div>
+                        @endif
                     </div>
-                    @endif
 
                 </div>
             </div>
@@ -618,12 +632,15 @@
             }
 
             function search(e, val = '') {
+
                 if(val == '')
                     val = $("#placeName").val();
 
                 $(".suggest").css("background-color", "transparent").css("padding", "0").css("border-radius", "0");
-                if (null == val || "" == val || val.length < 2)
+                if (null == val || "" == val || val.length < 2){
+                    $('#result').addClass('display-noneImp');
                     $("#result").empty();
+                }
                 else {
                     console.log(e.keyCode)
                     var scrollVal = $("#searchDivForScroll").scrollTop();
@@ -703,6 +720,13 @@
                                         newElement += "<p style='cursor: pointer' class='suggest' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")'>" + response[i].targetName + " در " + response[i].cityName + " در " + response[i].stateName + "</p>";
                                 }
 
+                                if(response.length != 0) {
+                                    $('#result').removeClass('display-noneImp')
+                                }
+                                else {
+                                    $('#result').addClass('display-noneImp');
+                                }
+
                                 $("#result").empty().append(newElement)
                             }
                         })
@@ -734,6 +758,13 @@
                                 }
                                 else
                                     newElement += "<p style='cursor: pointer' class='suggest' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")'>" + response[i].targetName + " در " + response[i].cityName + " در " + response[i].stateName + "</p>";
+                            }
+
+                            if(response.length != 0) {
+                                $('#result').removeClass('display-noneImp')
+                            }
+                            else {
+                                $('#result').addClass('display-noneImp');
                             }
 
                             $("#result").empty().append(newElement)
