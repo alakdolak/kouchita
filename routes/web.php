@@ -434,10 +434,6 @@ Route::group(array('middleware' => ['throttle:30', 'nothing']), function () {
 
     Route::post('getRandomHotel', array('as' => 'getRandomHotel', 'uses' => 'HotelController@getRandomHotel'));
 
-    Route::post('getRandomFood', array('as' => 'getRandomFood', 'uses' => 'PlaceController@getRandomFood'));
-
-    Route::post('getFoodsMain', array('as' => 'getFoodsMain', 'uses' => 'PlaceController@getFoodsMain'));
-
     Route::post('getRestaurantsMain', array('as' => 'getRestaurantsMain', 'uses' => 'RestaurantController@getRestaurantsMain'));
 
     Route::post('getLastRecentlyMain', array('as' => 'getLastRecentlyMain', 'uses' => 'HotelController@getLastRecentlyMain'));
@@ -836,6 +832,11 @@ Route::group(array('middleware' => 'nothing'), function () {
 
     Route::post('findUser', 'AjaxController@findUser')->name('findUser');
 
+    Route::post('getMainPageSuggestion', 'AjaxController@getMainPageSuggestion')->name('getMainPageSuggestion');
+});
+
+//review section
+Route::group(array('middleware' => 'nothing'), function () {
     Route::post('reviewUploadPic', 'ReviewsController@reviewUploadPic')->name('reviewUploadPic');
 
     Route::post('doEditReviewPic', 'ReviewsController@doEditReviewPic')->name('doEditReviewPic');
@@ -850,6 +851,7 @@ Route::group(array('middleware' => 'nothing'), function () {
 
     Route::post('getReviews', 'ReviewsController@getReviews')->name('getReviews');
 });
+
 
 Route::group(array('middleware' => 'auth'), function () {
 
@@ -896,3 +898,5 @@ Route::get('/tour/lists', function (){
     $state = 'تهران';
     return view('tour.tour-lists', compact(['placeMode', 'state']));
 });
+
+Route::get('exportToExcelTT', 'HomeController@exportExcel');

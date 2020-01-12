@@ -39,6 +39,8 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
 use PHPMailer\PHPMailer\PHPMailer;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
 
 class HomeController extends Controller
 {
@@ -343,9 +345,9 @@ class HomeController extends Controller
     {
 
         $serverName = "localhost";
-        $username = "administrator";
-        $password = 'yGrn65~6';
-        $dbName = "mashhad";
+        $username = "root";
+        $password = '';
+        $dbName = "admin_shazde";
 
         $conn = mysqli_connect($serverName, $username, $password);
 
@@ -2420,4 +2422,54 @@ class HomeController extends Controller
         $subject = 'welcome massage';
         sendEmail($text, $subject, $to);
     }
+
+
+    public function exportExcel()
+    {
+        $serverName = "localhost";
+        $username = "root";
+        $password = '';
+        $dbName = "admin_shazde";
+
+        $conn = mysqli_connect($serverName, $username, $password);
+
+        $conn->set_charset("utf8");
+        mysqli_select_db($conn, $dbName) or die("Connection failed: ");
+
+        $dbLink = $conn;
+        $start = 0;
+        $end = 50;
+
+        while($start < 12000){
+            $query = 'SELECT * FROM wp_posts WHERE id < ' . $end . ' AND id >= ' . $start;
+            $result = mysqli_query($dbLink, $query);
+
+            if($result != false){
+                $spreadsheet = new Spreadsheet();
+                $sheet = $spreadsheet->getActiveSheet();
+                $cols = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+                    'AA', 'BB', 'CC', 'DD', 'EE', 'FF', 'GG', 'HH', 'II', 'JJ', 'KK', 'LL', 'MM', 'NN', 'OO', 'PP', 'QQ', 'RR', 'SS', 'TT', 'UU', 'VV', 'WW', 'XX', 'YY', 'ZZ'
+                ];
+                $colsNum = [0, 4, 5];
+                $rowNum = 1;
+
+                while ($row = mysqli_fetch_row($result)) {
+                    for($i = 0 ; $i < 3; $i++){
+                        $cell = $cols[$i].(string)$rowNum;
+                        $sheet->setCellValue($cell, $row[$colsNum[$i]]);
+                    }
+                    $rowNum++;
+                }
+                $writer = new Xlsx($spreadsheet);
+                $writer->save('excel/export' . $start . '.xlsx');
+            }
+
+            $start += 50;
+            $end += 50;
+        }
+
+        dd('done');
+    }
 }
+
+

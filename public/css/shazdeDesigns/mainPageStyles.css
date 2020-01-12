@@ -446,7 +446,7 @@ DIV.prw_rup.prw_search_typeahead .typeahead_align .typeahead_input {
 
 .visitSuggestionDiv {
     overflow-y: auto;
-    max-height: 350px;
+    max-height: 390px;
     border: 2px solid #4DC7BC;
     border-top: 0;
     width: 50%;

@@ -479,6 +479,7 @@ function getRate($placeId, $kindPlaceId) {
             $place = MahaliFood::select(['id', 'name', 'cityId', 'file'])->find($placeId);
             break;
     }
+
     $city = Cities::find($place->cityId);
     $state = State::find($city->stateId);
 
