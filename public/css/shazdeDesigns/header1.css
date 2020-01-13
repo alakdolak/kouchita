@@ -159,3 +159,85 @@ DIV.ppr_rup.ppr_priv_global_nav_action_inbox .ui_jewel {
     top: 43px;
     box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.2);
 }
+
+DIV.ppr_rup.ppr_priv_global_nav .global-nav-logo img {
+    width: 50px;
+}
+
+DIV.ppr_rup.ppr_priv_global_nav .global-nav-bar-container {
+    height: 70px;
+    padding: 10px 24px;
+}
+
+DIV.ppr_rup.ppr_priv_global_nav .global-nav-logo:before {
+    display: none;
+}
+
+DIV.ppr_rup.ppr_priv_global_nav .global-nav-logo {
+    margin-right: 0;
+}
+
+DIV.ppr_rup.ppr_priv_global_nav .global-nav-bar-container .global-nav-actions {
+    display: flex;
+    align-items: center;
+}
+
+DIV.ppr_rup.ppr_priv_global_nav .global-nav-actions>div {
+    line-height: 1.5;
+    display: flex;
+    align-items: center;
+}
+
+DIV.ppr_rup.ppr_priv_global_nav .global-nav-green .ui_icon {
+    display: flex;
+    align-items: center;
+}
+
+DIV.ppr_rup.ppr_priv_global_nav_action_profile .global-nav-utility-activator {
+    display: flex;
+    flex-direction: row;
+}
+
+#memberTop {
+    font-size: 14px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+DIV.ppr_rup.ppr_priv_global_nav_action_profile .username::before {
+    display: inline-block;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    font-family: "Shazde_Regular" !important;
+    -ms-transform: rotate(-0.001deg);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    content: '\e04a';
+    font-size: 16px;
+}
+
+.global-nav-actions .ui_icon.member {
+    padding-top: 0;
+}
+
+@media (max-width: 992px) {
+
+    DIV.ppr_rup.ppr_priv_global_nav .global-nav-green .global-nav-link {
+        font-size: 13px;
+    }
+
+    DIV.ppr_rup.ppr_priv_global_nav .global-nav-links-container .global-nav-links-menu{
+        font-size: 0;
+    }
+
+    DIV.ppr_rup.ppr_priv_global_nav .global-nav-logo img.global-nav-svg {
+        height: 40px;
+    }
+
+    DIV.ppr_rup.ppr_priv_global_nav .global-nav-logo img {
+        width: 40px;
+    }
+}
+

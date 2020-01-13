@@ -10,7 +10,7 @@
 
 <div class="masthead position-relative">
     <div class="ppr_rup ppr_priv_global_nav position-relative">
-        <div class="global-nav global-nav-single-line has-links position-relative">
+        <div class="global-nav global-nav-single-line position-relative">
             <div class="global-nav-top position-relative">
                 <div class="global-nav-bar global-nav-green">
                     <div class="ui_container global-nav-bar-container direction-rtl position-relative">

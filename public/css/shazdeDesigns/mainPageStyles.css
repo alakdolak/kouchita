@@ -352,12 +352,6 @@ DIV.prw_rup.prw_search_typeahead .typeahead_align .typeahead_input {
     margin: 10px 0 0;
 }
 
-#result > div {
-    display: flex;
-    align-items: center;
-    margin-bottom: 4px;
-}
-
 .spIcons {
     float: right;
     margin: -3px 0 0 3px;
@@ -448,6 +442,13 @@ DIV.prw_rup.prw_search_typeahead .typeahead_align .typeahead_input {
     width: 45%;
     padding: 10px 5px 6px;
     display: inline-block;
+    max-height: 375px;
+}
+
+#result > div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 4px;
 }
 
 .visitSuggestionDiv {

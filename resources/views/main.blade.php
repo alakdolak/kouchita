@@ -96,304 +96,190 @@
 
 <body class="rebrand_2017 desktop HomeRebranded  js_logging" ng-app="mainApp">
 
-<div class="header hideOnPhone">
-    @include('layouts.header1')
-</div>
+    <div class="header hideOnPhone">
+        @include('layouts.header1')
+    </div>
 
-<div class="hideOnScreen">
-    @include('layouts.header1Phone')
-</div>
+    <div class="hideOnScreen">
+        @include('layouts.header1Phone')
+    </div>
 
 {{--        <div class="page" ng-app="mainApp">--}}
-            <div class="ppr_rup ppr_priv_homepage_hero ">
-                <div id="homeHero-id" class="homeHero default_home">
-                    <div class="ui_container container" id="mainDivContainerMainPage">
-                        <div class="placement_wrap">
-                            <div class="placement_wrap_row">
-                                <div class="placement_wrap_cell">
-                                    {{--<div id="sliderBarDIV" class="ppr_rup ppr_priv_trip_search hideOnPhone">--}}
-                                    <div class="ppr_rup ppr_priv_trip_search mainBannerSlider">
-                                        <!-- Swiper -->
-                                        <div id="mainSlider" class="swiper-container">
-                                            <div class="swiper-wrapper">
-                                                @foreach($sliderPic as $item)
-                                                    <div class="swiper-slide" style="position: relative">
-                                                        <img class="eachPicOfSlider" src="{{URL::asset('_images/sliderPic/' . $item->pic)}}" alt="{{$item->alt}}">
-                                                        @if($item->text != null && $item->text != '')
-                                                            <div class="textInSlide" style="background-color: {{$item->textBackground}}; color: {{$item->textColor}};">
-                                                                {{$item->text}}
-                                                            </div>
-                                                        @endif
+    <div class="ppr_rup ppr_priv_homepage_hero ">
+        <div id="homeHero-id" class="homeHero default_home">
+            <div class="ui_container container" id="mainDivContainerMainPage">
+                <div class="placement_wrap">
+                    <div class="placement_wrap_row">
+                        <div class="placement_wrap_cell">
+                            {{--<div id="sliderBarDIV" class="ppr_rup ppr_priv_trip_search hideOnPhone">--}}
+                            <div class="ppr_rup ppr_priv_trip_search mainBannerSlider">
+                                <!-- Swiper -->
+                                <div id="mainSlider" class="swiper-container">
+                                    <div class="swiper-wrapper">
+                                        @foreach($sliderPic as $item)
+                                            <div class="swiper-slide" style="position: relative">
+                                                <img class="eachPicOfSlider" src="{{URL::asset('_images/sliderPic/' . $item->pic)}}" alt="{{$item->alt}}">
+                                                @if($item->text != null && $item->text != '')
+                                                    <div class="textInSlide" style="background-color: {{$item->textBackground}}; color: {{$item->textColor}};">
+                                                        {{$item->text}}
                                                     </div>
-                                                @endforeach
+                                                @endif
                                             </div>
-                                            <!-- Add Pagination -->
-                                            <div class="swiper-pagination"></div>
-                                            <!-- Add Arrows -->
-                                            <div class="swiper-button-next"></div>
-                                            <div class="swiper-button-prev"></div>
-                                        </div>
-                                        <div class="ui_columns datepicker_box trip_search metaDatePicker rounded_lockup usePickerTypeIcons preDates noDates with_children mainDivSearchInputMainPage">
-                                            <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column is-4 search_typeahead wctx-tripsearch searchDivForScrollClass mainSearchDivPcSize">
-                                                <div onclick="$('#searchPane').removeClass('hidden');  $('#darkModeMainPage').toggle();">به کجا می‌روید؟</div>
-                                            </div>
-                                            <div class="clear-both"></div>
-                                        </div>
+                                        @endforeach
                                     </div>
-                                    <div class="ppr_rup ppr_priv_trip_search display-none hideOnScreen">
-                                        <!-- Swiper -->
-                                        <div id="mainSlider" class="swiper-container">
-                                            <div class="swiper-wrapper">
-                                                @foreach($sliderPic as $item)
-                                                    <div class="swiper-slide">
-                                                        <img class="eachPicOfSlider" src="{{URL::asset('_images/sliderPic/' . $item->pic)}}" alt="{{$item->alt}}">
-                                                    </div>
-                                                    @if($item->text != null && $item->text != '')
-                                                        <div class="textInSlide" style="background-color: {{$item->textBackground}}; color: {{$item->textColor}};">
-                                                            {{$item->text}}
-                                                        </div>
-                                                    @endif
-                                                @endforeach
-                                            </div>
-                                            <!-- Add Pagination -->
-                                            <div class="swiper-pagination"></div>
-                                            <!-- Add Arrows -->
-                                            <div class="swiper-button-next"></div>
-                                            <div class="swiper-button-prev"></div>
-                                        </div>
-                                        @if($placeMode == "hotel")
-                                            <div class="trip_search rounded_lockup usePickerTypeIcons hideOnScreen mainDivSearchInputPhonePage">
-                                                <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column search_typeahead wctx-tripsearch searchDivForScroll_phone">
-                                                    <div class="ui_picker">
-                                                        <span class="typeahead_align ui_typeahead">
-                                                            <input onkeyup="search(event)" type="text" id="placeName"
-                                                                   class="typeahead_input mainSearchInputPhonePage"
-                                                                   placeholder="شهر یا نام هتل"/>
-                                                            <input type="hidden" id="placeId">
-                                                            <span class="ui_icon map-pin-fill pickerType typeahead_icon"></span>
-                                                        </span>
-                                                        <div id="result" class="data_holder"></div>
-                                                    </div>
-                                                </div>
-                                                {{--<div class="ui_column" style="padding: 15px 10px !important;">--}}
-                                                    {{--<div class="ui_picker" style="color: #b7b7b7 !important;">--}}
-                                                        {{--<label id="calendar-container-edit-1placeDate_phone" class="dateLabel_phone">--}}
-                                                            {{--<span class="ui_icon calendar" style="color: #30b4a6 !important; font-size: 40px; line-height: 40px; position: absolute; right: 10px;"></span>--}}
-                                                            {{--<input name="date" id="date_input1_phone" type="text" onclick="assignDate('{{convertStringToDate(getToday()["date"])}}', 'calendar-container-edit-1placeDate_phone', 'date_input1_phone')" class="inputDateLabel_phone" placeholder="تاریخ رفت" required readonly>--}}
-                                                        {{--</label>--}}
-                                                    {{--</div>--}}
-                                                {{--</div>--}}
-                                                {{--<div class="ui_column" style="padding: 15px 10px !important;">--}}
-                                                    {{--<div class="ui_picker" style="color: #b7b7b7 !important;">--}}
-                                                        {{--<label id="calendar-container-edit-2placeDate_phone" class="dateLabel_phone">--}}
-                                                            {{--<span class="ui_icon calendar" style="color: #30b4a6 !important; font-size: 40px; line-height: 40px; position: absolute; right: 10px;"></span>--}}
-                                                            {{--<input name="date" id="date_input2_phone" type="text" onclick="assignDate('{{convertStringToDate(getToday()["date"])}}', 'calendar-container-edit-2placeDate_phone', 'date_input2_phone')" class="inputDateLabel_phone" placeholder="تاریخ برگشت" required readonly>--}}
-                                                        {{--</label>--}}
-                                                    {{--</div>--}}
-                                                {{--</div>--}}
-                                                {{--<div class="ui_column" style="width: 58%;float: right;border-radius:  0 0 10px 0;">--}}
-                                                    {{--<div class="ui_picker" style="padding: 10px 10px 5px 0;">--}}
-                                                        {{--<span class="ui_icon friends pickerType" style="margin: 0 !important;float: right;font-size: 50px"></span>--}}
-                                                        {{--<div style="float: right;">--}}
-                                                            {{--<span style="float:right; margin:7px 5px 0 0; font-size: 30px; line-height: 45px">نفر</span>--}}
-                                                            {{--<div style="float: left; margin-right: 30px">--}}
-                                                                {{--<div onclick="changePassengersNo(1)" class="minusPlusBtn" style="background-position: -1px -15px;"></div>--}}
-                                                                {{--<span id="passengerNoSelect_phone" style="font-size: 35px"></span>--}}
-                                                                {{--<div onclick="changePassengersNo(-1)" class="minusPlusBtn" style="background-position: -48px -15px;"></div>--}}
-                                                            {{--</div>--}}
-                                                        {{--</div>--}}
-                                                    {{--</div>--}}
-                                                {{--</div>--}}
-                                                <div class="prw_rup prw_common_form_submit ui_column submit_wrap searchDivForScroll-phoneButton">
-                                                    <button onclick="redirect()" class="autoResize form_submit">
-                                                        <span class="ui_icon search submit_icon"></span>
-                                                        <span onclick="window.location = '{{route('main', ['mode' => 'hotel'])}}'" class="submit_text">جستجو هتل</span>
-                                                    </button>
-                                                    <span class="ui_loader dark fill"></span>
-                                                </div>
-                                            </div>
-                                        @elseif($placeMode == "restaurant")
-                                            <div class="trip_search rounded_lockup usePickerTypeIcons hideOnScreen mainDivSearchInputPhonePage">
-                                                <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column"
-                                                     onclick="$('#searchPane').removeClass('hidden');  $('#darkModeMainPage').toggle();">
-                                                    <div class="ui_picker">
-                                                                <span class="typeahead_align ui_typeahead">
-                                                                    <input onkeyup="search(event)" type="text"
-                                                                           id="placeName" class="typeahead_input"
-                                                                           placeholder="شهر یا نام رستوران"/>
-                                                                    <input type="hidden" id="placeId">
-                                                                </span>
-                                                        <div id="resultPhone" class="data_holder"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="prw_rup prw_common_form_submit ui_column submit_wrap">
-                                                    <button onclick="redirect()" class="form_submit">
-                                                        <span class="ui_icon search submit_icon"></span>
-                                                        <span class="submit_text">جستجو</span>
-                                                    </button>
-                                                    <span class="ui_loader dark fill"></span>
-                                                </div>
-                                            </div>
-                                        @elseif($placeMode == "tour")
-                                            <div class="trip_search rounded_lockup usePickerTypeIcons hideOnScreen mainDivSearchInputPhonePage">
-                                                <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column"
-                                                     onclick="$('#searchPane').removeClass('hidden');  $('#darkModeMainPage').toggle();">
-                                                    <div class="ui_picker">
-                                                        <span class="typeahead_align ui_typeahead">
-                                                            <input onkeyup="search(event)" type="text" id="placeName"
-                                                                   class="typeahead_input"
-                                                                   placeholder="شهر یا نام رستوران"/>
-                                                            <input type="hidden" id="placeId">
-                                                        </span>
-                                                        <div id="resultPhone" class="data_holder"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="prw_rup prw_common_form_submit ui_column submit_wrap">
-                                                    <button onclick="redirect()" class="form_submit">
-                                                        <span class="ui_icon search submit_icon"></span>
-                                                        <span class="submit_text">جستجو</span>
-                                                    </button>
-                                                    <span class="ui_loader dark fill"></span>
-                                                </div>
-                                            </div>
-                                        @else
-                                            <div class="trip_search rounded_lockup usePickerTypeIcons hideOnScreen mainDivSearchInputPhonePage">
-                                                <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column"
-                                                     onclick="$('#searchPane').removeClass('hidden');  $('#darkModeMainPage').toggle();" style="border-radius: 10px">
-                                                    <div class="ui_picker" >
-                                                        <span class="typeahead_align ui_typeahead">
-                                                            <input onkeyup="search(event)" type="text"
-                                                                   class="typeahead_input"
-                                                                   placeholder="به کجا می‌روید؟!"/>
-                                                            <input type="hidden" id="placeId">
-                                                        </span>
-                                                        <div id="resultPhone" class="data_holder"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        @endif
+                                    <!-- Add Pagination -->
+                                    <div class="swiper-pagination"></div>
+                                    <!-- Add Arrows -->
+                                    <div class="swiper-button-next"></div>
+                                    <div class="swiper-button-prev"></div>
+                                </div>
+                                <div class="ui_columns datepicker_box trip_search metaDatePicker rounded_lockup usePickerTypeIcons preDates noDates with_children mainDivSearchInputMainPage">
+                                    <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column is-4 search_typeahead wctx-tripsearch searchDivForScrollClass mainSearchDivPcSize">
+                                        <div onclick="$('#searchPane').removeClass('hidden');  $('#darkModeMainPage').toggle();">به کجا می‌روید؟</div>
                                     </div>
+                                    <div class="clear-both"></div>
+                                </div>
+                            </div>
+                            <div class="ppr_rup ppr_priv_trip_search display-none hideOnScreen">
+                                <!-- Swiper -->
+                                <div id="mainSlider" class="swiper-container">
+                                    <div class="swiper-wrapper">
+                                        @foreach($sliderPic as $item)
+                                            <div class="swiper-slide">
+                                                <img class="eachPicOfSlider" src="{{URL::asset('_images/sliderPic/' . $item->pic)}}" alt="{{$item->alt}}">
+                                            </div>
+                                            @if($item->text != null && $item->text != '')
+                                                <div class="textInSlide" style="background-color: {{$item->textBackground}}; color: {{$item->textColor}};">
+                                                    {{$item->text}}
+                                                </div>
+                                            @endif
+                                        @endforeach
+                                    </div>
+                                    <!-- Add Pagination -->
+                                    <div class="swiper-pagination"></div>
+                                    <!-- Add Arrows -->
+                                    <div class="swiper-button-next"></div>
+                                    <div class="swiper-button-prev"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            @include('layouts.middleBanner')
-{{--        </div>--}}
+        </div>
+    </div>
+    @include('layouts.middleBanner')
 
-{{--        <div class="hideOnPhone">--}}
-            @include('layouts.placeFooter')
-{{--        </div>--}}
+    @include('layouts.placeFooter')
 
-@if(!Auth::check())
-    @include('layouts.loginPopUp')
-@endif
+    @if(!Auth::check())
+        @include('layouts.loginPopUp')
+    @endif
 
-<span id="searchPane" class="statePane ui_overlay ui_modal editTags hidden searchPanes">
-            <div id="searchDivForScroll" class="prw_rup prw_search_typeahead spSearchDivForScroll">
-                <div class="ui_picker">
-                    <div class="typeahead_align ui_typeahead full-width display-flex">
-                        <div class="spGoWhere">به کجا</div>
-                        <input onkeyup="search(event, this.value)" type="text" id="placeName"
-                               class="typeahead_input searchPaneInput" placeholder="دوست دارید سفر کنید؟"/>
-                        <input type="hidden" id="placeId">
-                    </div>
-                    <div class="spBorderBottom"></div>
-                    <div class="mainContainerSearch">
+    <span id="searchPane" class="statePane ui_overlay ui_modal editTags hidden searchPanes">
+        <div id="searchDivForScroll" class="prw_rup prw_search_typeahead spSearchDivForScroll">
+            <div class="ui_picker">
+                <div class="typeahead_align ui_typeahead full-width display-flex">
+                    <div class="spGoWhere">به کجا</div>
+                    <input onkeyup="search(event, this.value)" type="text" id="placeName"
+                           class="typeahead_input searchPaneInput" placeholder="دوست دارید سفر کنید؟"/>
+                    <input type="hidden" id="placeId">
+                </div>
+                <div class="spBorderBottom"></div>
+                <div class="mainContainerSearch">
 
-                        <div id="result" class="data_holder display-noneImp"></div>
+                    <div id="result" class="data_holder display-noneImp"></div>
 
-                            <div class="visitSuggestionDiv" ng-app="mainApp" ng-controller="recentlyShowController">
-                                @if(Auth::check())
-                                    <div class="visitSuggestionText">بازدید های اخیر شما</div>
-                                @else
-                                    <div class="visitSuggestionText">پر بازدیدترین های هفته</div>
-                                @endif
-                                <div id="recentlyRow1" class="visitSuggestion4Box" style="flex-wrap: wrap">
-                                    <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget spBoxOfSuggestion" ng-repeat="place in records1" style="width: 25%;">
-                                        <div class="poi">
-                                            <a href="[[place.placeRedirect]]" class="thumbnail">
-                                                <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                    <div class="prv_thumb has_image">
-                                                        <div class="image_wrapper spImageWrapper landscape landscapeWide">
-                                                            <img src="[[place.placePic]]" alt="[[place.placeName]]" class="image">
-                                                        </div>
+                        <div class="visitSuggestionDiv" ng-app="mainApp" ng-controller="recentlyShowController">
+                            @if(Auth::check())
+                                <div class="visitSuggestionText">بازدید های اخیر شما</div>
+                            @else
+                                <div class="visitSuggestionText">پر بازدیدترین های هفته</div>
+                            @endif
+                            <div id="recentlyRow1" class="visitSuggestion4Box" style="flex-wrap: wrap">
+                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget spBoxOfSuggestion" ng-repeat="place in records1" style="width: 25%;">
+                                    <div class="poi">
+                                        <a href="[[place.placeRedirect]]" class="thumbnail">
+                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
+                                                <div class="prv_thumb has_image">
+                                                    <div class="image_wrapper spImageWrapper landscape landscapeWide">
+                                                        <img src="[[place.placePic]]" alt="[[place.placeName]]" class="image">
                                                     </div>
                                                 </div>
-                                            </a>
-                                            <div class="detail direction-rtl" style="padding: 4px 0px 10px 0px;">
-                                                <div class="item tags ng-binding" style="color: black; margin: 0px">[[place.placeName]]</div>
-                                                <div class="item tags ng-binding" style="font-size: 9px; padding: 0px">[[place.placeCity]] در [[place.placeState]]</div>
                                             </div>
+                                        </a>
+                                        <div class="detail direction-rtl" style="padding: 4px 0px 10px 0px;">
+                                            <div class="item tags ng-binding" style="color: black; margin: 0px">[[place.placeName]]</div>
+                                            <div class="item tags ng-binding" style="font-size: 9px; padding: 0px">[[place.placeCity]] در [[place.placeState]]</div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                    </div>
-
+                        </div>
                 </div>
+
             </div>
-            <div onclick="$('#searchPane').addClass('hidden'); $('.dark').hide()" class="ui_close_x"></div>
-        </span>
+        </div>
+        <div onclick="$('#searchPane').addClass('hidden'); $('.dark').hide()" class="ui_close_x"></div>
+    </span>
 
-<span id="statePane1" class="statesearchDivForScrollPane ui_overlay ui_modal editTags hidden pop-up-Panes">
-            <div class="header_text">استان مورد نظر</div>
-            <div class="subheader_text">
-           استان مورد نظر خود را از بین استان های موجود انتخاب کنید
+    <span id="statePane1" class="statesearchDivForScrollPane ui_overlay ui_modal editTags hidden pop-up-Panes">
+        <div class="header_text">استان مورد نظر</div>
+        <div class="subheader_text">
+       استان مورد نظر خود را از بین استان های موجود انتخاب کنید
+        </div>
+        <div class="body_text">
+
+            <select id="states"></select>
+
+            <div class="submitOptions">
+                <button onclick="document.location.href = $('#states').val()" class="btn btn-success">تایید</button>
+                <input type="submit" onclick="$('.dark').hide(); $('#statePane1').addClass('hidden')" value="خیر"
+                       class="btn btn-default">
             </div>
-            <div class="body_text">
+        </div>
+        <div onclick="$('#statePane1').addClass('hidden'); $('.dark').hide()" class="ui_close_x"></div>
+    </span>
 
-                <select id="states"></select>
+    <span id="statePane2" class="statePane ui_overlay ui_modal editTags hidden pop-up-Panes">
+        <div class="header_text">شهر مورد نظر</div>
+        <div class="subheader_text">
+       شهر مورد نظر خود را از بین شهر های موجود انتخاب کنید
+        </div>
+        <div class="body_text">
 
-                <div class="submitOptions">
-                    <button onclick="document.location.href = $('#states').val()" class="btn btn-success">تایید</button>
-                    <input type="submit" onclick="$('.dark').hide(); $('#statePane1').addClass('hidden')" value="خیر"
-                           class="btn btn-default">
-                </div>
+            <select onchange="getCities()" id="states2"></select>
+
+            <select id="cities"></select>
+
+            <div class="submitOptions">
+                <button onclick="document.location.href = $('#cities').val()" class="btn btn-success">تایید</button>
+                <input type="submit" onclick="$('.dark').hide(); $('#statePane2').addClass('hidden')" value="خیر"
+                       class="btn btn-default">
             </div>
-            <div onclick="$('#statePane1').addClass('hidden'); $('.dark').hide()" class="ui_close_x"></div>
-        </span>
+        </div>
+        <div onclick="$('#statePane2').addClass('hidden'); $('.dark').hide()" class="ui_close_x"></div>
+    </span>
 
-<span id="statePane2" class="statePane ui_overlay ui_modal editTags hidden pop-up-Panes">
-            <div class="header_text">شهر مورد نظر</div>
-            <div class="subheader_text">
-           شهر مورد نظر خود را از بین شهر های موجود انتخاب کنید
+    <span id="goyeshPane" class="ui_overlay ui_modal editTags hidden pop-up-Panes">
+        <div class="header_text">گویش مورد نظر</div>
+        <div class="subheader_text">
+       گویش مورد نظر خود را از بین گویش های موجود انتخاب کنید
+        </div>
+        <div class="body_text">
+
+            <select id="goyesh"></select>
+
+            <div class="submitOptions">
+                <button onclick="document.location.href = $('#goyesh').val()" class="btn btn-success">تایید</button>
+                <input type="submit" onclick="$('.dark').hide(); $('#goyeshPane').addClass('hidden')" value="خیر"
+                       class="btn btn-default">
             </div>
-            <div class="body_text">
+        </div>
+        <div onclick="$('#goyeshPane').addClass('hidden'); $('.dark').hide()" class="ui_close_x"></div>
+    </span>
 
-                <select onchange="getCities()" id="states2"></select>
-
-                <select id="cities"></select>
-
-                <div class="submitOptions">
-                    <button onclick="document.location.href = $('#cities').val()" class="btn btn-success">تایید</button>
-                    <input type="submit" onclick="$('.dark').hide(); $('#statePane2').addClass('hidden')" value="خیر"
-                           class="btn btn-default">
-                </div>
-            </div>
-            <div onclick="$('#statePane2').addClass('hidden'); $('.dark').hide()" class="ui_close_x"></div>
-        </span>
-
-<span id="goyeshPane" class="ui_overlay ui_modal editTags hidden pop-up-Panes">
-            <div class="header_text">گویش مورد نظر</div>
-            <div class="subheader_text">
-           گویش مورد نظر خود را از بین گویش های موجود انتخاب کنید
-            </div>
-            <div class="body_text">
-
-                <select id="goyesh"></select>
-
-                <div class="submitOptions">
-                    <button onclick="document.location.href = $('#goyesh').val()" class="btn btn-success">تایید</button>
-                    <input type="submit" onclick="$('.dark').hide(); $('#goyeshPane').addClass('hidden')" value="خیر"
-                           class="btn btn-default">
-                </div>
-            </div>
-            <div onclick="$('#goyeshPane').addClass('hidden'); $('.dark').hide()" class="ui_close_x"></div>
-        </span>
-
-<div class="ui_backdrop dark" id="darkModeMainPage"></div>
+    <div class="ui_backdrop dark" id="darkModeMainPage"></div>
 
 {{--@include('layouts.phonePopUp')--}}
 
