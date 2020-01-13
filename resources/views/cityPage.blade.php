@@ -22,7 +22,7 @@
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/article.min.css?v=1.1')}}"/>
 
     <script>
-        var searchDir = '{{route('heyYou')}}';
+        var searchDir = '{{route('totalSearch')}}';
         var kindPlaceId = '{{$kindPlaceId}}';
         var getStates = '{{route('getStates')}}';
         var getGoyesh = '{{route('getGoyesh')}}';

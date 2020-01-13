@@ -218,7 +218,7 @@
         if(searchModePhone == 1)
             searchDir = '{{route('searchForStates')}}';
         else
-            searchDir = '{{route('heyYou')}}';
+            searchDir = '{{route('totalSearch')}}';
 
         val = $("#mobilePlaceName").val();
         $(".suggestItem").css("background-color", "transparent").css("padding", "0").css("border-radius", "0");

@@ -56,27 +56,7 @@ class AmakenController extends Controller {
             $uPic = URL::asset('_images/nopic/blank.jpg');
         }
 
-        if ($hasLogin) {
-
-            $activityId = Activity::whereName('مشاهده')->first()->id;
-
-            $condition = ['visitorId' => $uId, 'placeId' => $placeId, 'kindPlaceId' => $kindPlaceId,
-                'activityId' => $activityId];
-            $log = LogModel::where($condition)->first();
-            if ($log == null) {
-                $log = new LogModel();
-                $log->activityId = $activityId;
-                $log->time = getToday()["time"];
-                $log->placeId = $placeId;
-                $log->kindPlaceId = $kindPlaceId;
-                $log->visitorId = $uId;
-                $log->date = date('Y-m-d');
-                $log->save();
-            } else {
-                $log->date = date('Y-m-d');
-                $log->save();
-            }
-        }
+        saveViewPerPage($kindPlaceId, $placeId);
 
         $bookMark = false;
         $condition = ['visitorId' => $uId, 'activityId' => Activity::whereName("نشانه گذاری")->first()->id,

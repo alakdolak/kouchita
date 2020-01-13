@@ -8,10 +8,14 @@ use App\models\Amaken;
 use App\models\Cities;
 use App\models\Hotel;
 use App\models\LogModel;
+use App\models\MahaliFood;
+use App\models\MahaliFoodDiet;
 use App\models\Majara;
 use App\models\Restaurant;
+use App\models\SogatSanaie;
 use App\models\State;
 use App\models\User;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -145,10 +149,14 @@ class ActivityController extends Controller {
     }
 
     function getRecentlyActivities() {
-
-        $uId = Auth::user()->id;
-        $activities = DB::select("SELECT * FROM log WHERE log.activityId = 1 and log.visitorId = " . $uId . " order by date DESC limit 0, 5");
-
+        if(Auth::check()) {
+            $uId = Auth::user()->id;
+            $activities = DB::select("SELECT * FROM log WHERE log.activityId = 1 and log.visitorId = " . $uId . " order by date DESC limit 0, 8");
+        }
+        else{
+            $lastWeek = Carbon::now()->subWeek()->format('Y-m-d');
+            $activities = DB::select("SELECT kindPlaceId, placeId, COUNT(*) as num FROM log WHERE log.activityId = 1 AND `date` > '" . $lastWeek . "' GROUP BY kindPlaceId, placeId ORDER BY num DESC limit 0, 8");
+        }
         $activityId = Activity::whereName('نظر')->first()->id;
 
         foreach($activities as $itr) {
@@ -158,14 +166,13 @@ class ActivityController extends Controller {
 
             switch ($itr->kindPlaceId) {
                 case 1:
-                default:
                     $tmp = Amaken::whereId($itr->placeId);
                     if(file_exists((__DIR__ . '/../../../../assets/_images/amaken/' . $tmp->file . "/f-1.jpg")))
                         $itr->placePic = URL::asset("_images/amaken/" . $tmp->file . "/f-1.jpg");
                     else
                         $itr->placePic = URL::asset("_images/nopic/blank.jpg");
 
-                    $itr->placeRedirect = route('amakenDetails', ['placeId' => $tmp->id]);
+                    $itr->placeRedirect = route('amakenDetails', ['placeId' => $tmp->id, 'placeName' => $tmp->name]);
                     break;
                 case 3:
                     $tmp = Restaurant::whereId($itr->placeId);
@@ -174,7 +181,7 @@ class ActivityController extends Controller {
                     else
                         $itr->placePic = URL::asset('_images/nopic/blank.jg');
 
-                    $itr->placeRedirect = route('restaurantDetails', ['placeId' => $tmp->id]);
+                    $itr->placeRedirect = route('restaurantDetails', ['placeId' => $tmp->id, 'placeName' => $tmp->name]);
                     break;
                 case 4:
                     $tmp = Hotel::whereId($itr->placeId);
@@ -185,7 +192,6 @@ class ActivityController extends Controller {
 
                     $itr->placeRedirect = route('hotelDetails', ['placeId' => $tmp->id, 'placeName' => $tmp->name]);
                     break;
-
                 case 6:
                     $tmp = Majara::whereId($itr->placeId);
                     if(file_exists((__DIR__ . '/../../../../assets/_images/majara/' . $tmp->file . "/f-1.jpg")))
@@ -195,23 +201,23 @@ class ActivityController extends Controller {
 
                     $itr->placeRedirect = route('majaraDetails', ['placeId' => $tmp->id, 'placeName' => $tmp->name]);
                     break;
+                case 10:
+                    $tmp = SogatSanaie::find($itr->placeId);
+                    if(file_exists((__DIR__ . '/../../../../assets/_images/sogatsanaie/' . $tmp->file . "/f-1.jpg")))
+                        $itr->placePic = URL::asset("_images/sogatsanaie/" . $tmp->file . "/f-1.jpg");
+                    else
+                        $itr->placePic = URL::asset("_images/nopic/blank.jpg");
 
-                case 8:
-                    $tmp = Adab::whereId($itr->placeId);
-                    if($tmp->category == 3) {
-                        if (file_exists((__DIR__ . '/../../../../assets/_images/adab/ghazamahali/' . $tmp->file . "/f-1.jpg")))
-                            $itr->placePic = URL::asset("_images/adab/ghazamahali/" . $tmp->file . "/f-1.jpg");
-                        else
-                            $itr->placePic = URL::asset("_images/nopic/blank.jpg");
-                    }
-                    else {
-                        if (file_exists((__DIR__ . '/../../../../assets/_images/adab/soghat/' . $tmp->file . "/f-1.jpg")))
-                            $itr->placePic = URL::asset("_images/adab/soghat/" . $tmp->file . "/f-1.jpg");
-                        else
-                            $itr->placePic = URL::asset("_images/nopic/blank.jpg");
-                    }
+                    $itr->placeRedirect = route('sanaiesogatDetails', ['placeId' => $tmp->id, 'placeName' => $tmp->name]);
+                    break;
+                case 11:
+                    $tmp = MahaliFood::find($itr->placeId);
+                    if(file_exists((__DIR__ . '/../../../../assets/_images/mahalifood/' . $tmp->file . "/f-1.jpg")))
+                        $itr->placePic = URL::asset("_images/mahalifood/" . $tmp->file . "/f-1.jpg");
+                    else
+                        $itr->placePic = URL::asset("_images/nopic/blank.jpg");
 
-                    $itr->placeRedirect = route('adabDetails', ['placeId' => $tmp->id, 'placeName' => $tmp->name]);
+                    $itr->placeRedirect = route('mahaliFoodDetails', ['placeId' => $tmp->id, 'placeName' => $tmp->name]);
                     break;
             }
 
@@ -227,7 +233,6 @@ class ActivityController extends Controller {
         }
 
         echo json_encode($activities);
-
     }
 
     public function getBookMarks() {

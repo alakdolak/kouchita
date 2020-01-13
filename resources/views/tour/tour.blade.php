@@ -18,7 +18,7 @@
 
     <script>
         var homePath = '{{route('home')}}';
-        var searchDir = '{{route('heyYou')}}';
+        var searchDir = '{{route('totalSearch')}}';
         {{--var kindPlaceId = '{{$kindPlaceId}}';--}}
         var getStates = '{{route('getStates')}}';
         var getGoyesh = '{{route('getGoyesh')}}';

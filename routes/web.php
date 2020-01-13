@@ -372,7 +372,7 @@ Route::group(array('middleware' => ['throttle:30']), function () {
 
     Route::post('checkInnerFlightCapacity', ['as' => 'checkInnerFlightCapacity', 'uses' => 'TicketController@checkInnerFlightCapacity']);
 
-    Route::any('heyYou', array('as' => 'heyYou', 'uses' => 'HomeController@totalSearch'));
+    Route::any('totalSearch', array('as' => 'totalSearch', 'uses' => 'HomeController@totalSearch'));
 
     Route::any('searchForStates', array('as' => 'searchForStates', 'uses' => 'HomeController@searchForStates'));
 
@@ -433,10 +433,6 @@ Route::group(array('middleware' => ['throttle:30', 'nothing']), function () {
     Route::post('getRandomAmaken', array('as' => 'getRandomAmaken', 'uses' => 'AmakenController@getRandomAmaken'));
 
     Route::post('getRandomHotel', array('as' => 'getRandomHotel', 'uses' => 'HotelController@getRandomHotel'));
-
-    Route::post('getRandomFood', array('as' => 'getRandomFood', 'uses' => 'PlaceController@getRandomFood'));
-
-    Route::post('getFoodsMain', array('as' => 'getFoodsMain', 'uses' => 'PlaceController@getFoodsMain'));
 
     Route::post('getRestaurantsMain', array('as' => 'getRestaurantsMain', 'uses' => 'RestaurantController@getRestaurantsMain'));
 
@@ -836,6 +832,11 @@ Route::group(array('middleware' => 'nothing'), function () {
 
     Route::post('findUser', 'AjaxController@findUser')->name('findUser');
 
+    Route::post('getMainPageSuggestion', 'AjaxController@getMainPageSuggestion')->name('getMainPageSuggestion');
+});
+
+//review section
+Route::group(array('middleware' => 'nothing'), function () {
     Route::post('reviewUploadPic', 'ReviewsController@reviewUploadPic')->name('reviewUploadPic');
 
     Route::post('doEditReviewPic', 'ReviewsController@doEditReviewPic')->name('doEditReviewPic');
@@ -850,6 +851,7 @@ Route::group(array('middleware' => 'nothing'), function () {
 
     Route::post('getReviews', 'ReviewsController@getReviews')->name('getReviews');
 });
+
 
 Route::group(array('middleware' => 'auth'), function () {
 
@@ -896,3 +898,5 @@ Route::get('/tour/lists', function (){
     $state = 'تهران';
     return view('tour.tour-lists', compact(['placeMode', 'state']));
 });
+
+Route::get('exportToExcelTT', 'HomeController@exportExcel');

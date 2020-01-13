@@ -4,8 +4,8 @@ namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class MahaliFood extends Model
+class MainSuggestion extends Model
 {
-    protected $table = 'mahaliFood';
+    protected $table = 'mainSuggestions';
     public $timestamps = false;
 }

@@ -1,16 +1,18 @@
-<div>
+<div style="display: flex; justify-content: center; align-items: center">
     <div class="loader hidden"></div>
 </div>
 
-<div>
-    <div id="" class="homepage_shelves_widget ng-scope">
-        <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" style="">
+<div  ng-controller="getMainPageSuggestion">
+
+    <div id="newKoochita" class="homepage_shelves_widget ng-scope">
+        <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show">
             <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
+
                 <div class="shelf_header">
                     <div class="shelf_title">
                         <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
                         <div class="shelf_title_container h3">
-                            <h3>تازه&zwnj;های کوچیتا</h3>
+                            <h3>تازه‌های کوچیتا</h3>
                         </div>
                     </div>
                 </div>
@@ -18,210 +20,28 @@
                 <div class="shelf_item_container ui_columns is-mobile is-multiline">
                     <div class="mainSuggestion swiper-container">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide">
+                            <div class="swiper-slide" ng-repeat="place in records">
                                 <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
                                     <div class="poi">
-                                        <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
+                                        <a href="[[place.url]]" class="thumbnail">
                                             <div class="prw_rup prw_common_thumbnail_no_style_responsive">
                                                 <div class="prv_thumb has_image">
                                                     <div class="image_wrapper landscape landscapeWide">
-                                                        <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
+                                                        <img src="[[place.placePic]]" alt="[[place.alt]]" class="image">
                                                     </div>
                                                 </div>
                                             </div>
                                         </a>
                                         <div class="detail rtl">
-                                            <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
+                                            <a href="[[place.url]]" class="item poi_name ui_link ng-binding">[[place.name]]</a>
                                             <div class="item rating-widget">
                                                 <div class="prw_rup prw_common_location_rating_simple">
-                                                    <span class="ui_bubble_rating bubble_50"></span>
+                                                    <span class="ui_bubble_rating bubble_[[place.placeRate]]0"></span>
                                                 </div>
-                                                <span class="reviewCount ng-binding">1 </span><span>نقد </span>
+                                                <span class="reviewCount ng-binding">[[place.placeReviews]] </span><span>نقد </span>
                                             </div>
-                                            <div class="item tags ng-binding">اصفهان <span>در </span>
-                                                <span class="ng-binding">اصفهان</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
-                                    <div class="poi">
-                                        <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
-                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                <div class="prv_thumb has_image">
-                                                    <div class="image_wrapper landscape landscapeWide">
-                                                        <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="detail rtl">
-                                            <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
-                                            <div class="item rating-widget">
-                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                    <span class="ui_bubble_rating bubble_50"></span>
-                                                </div>
-                                                <span class="reviewCount ng-binding">1 </span><span>نقد </span>
-                                            </div>
-                                            <div class="item tags ng-binding">اصفهان <span>در </span>
-                                                <span class="ng-binding">اصفهان</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
-                                    <div class="poi">
-                                        <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
-                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                <div class="prv_thumb has_image">
-                                                    <div class="image_wrapper landscape landscapeWide">
-                                                        <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="detail rtl">
-                                            <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
-                                            <div class="item rating-widget">
-                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                    <span class="ui_bubble_rating bubble_50"></span>
-                                                </div>
-                                                <span class="reviewCount ng-binding">1 </span><span>نقد </span>
-                                            </div>
-                                            <div class="item tags ng-binding">اصفهان <span>در </span>
-                                                <span class="ng-binding">اصفهان</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
-                                    <div class="poi">
-                                        <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
-                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                <div class="prv_thumb has_image">
-                                                    <div class="image_wrapper landscape landscapeWide">
-                                                        <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="detail rtl">
-                                            <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
-                                            <div class="item rating-widget">
-                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                    <span class="ui_bubble_rating bubble_50"></span>
-                                                </div>
-                                                <span class="reviewCount ng-binding">1 </span><span>نقد </span>
-                                            </div>
-                                            <div class="item tags ng-binding">اصفهان <span>در </span>
-                                                <span class="ng-binding">اصفهان</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
-                                    <div class="poi">
-                                        <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
-                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                <div class="prv_thumb has_image">
-                                                    <div class="image_wrapper landscape landscapeWide">
-                                                        <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="detail rtl">
-                                            <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
-                                            <div class="item rating-widget">
-                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                    <span class="ui_bubble_rating bubble_50"></span>
-                                                </div>
-                                                <span class="reviewCount ng-binding">1 </span><span>نقد </span>
-                                            </div>
-                                            <div class="item tags ng-binding">اصفهان <span>در </span>
-                                                <span class="ng-binding">اصفهان</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
-                                    <div class="poi">
-                                        <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
-                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                <div class="prv_thumb has_image">
-                                                    <div class="image_wrapper landscape landscapeWide">
-                                                        <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="detail rtl">
-                                            <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
-                                            <div class="item rating-widget">
-                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                    <span class="ui_bubble_rating bubble_50"></span>
-                                                </div>
-                                                <span class="reviewCount ng-binding">1 </span><span>نقد </span>
-                                            </div>
-                                            <div class="item tags ng-binding">اصفهان <span>در </span>
-                                                <span class="ng-binding">اصفهان</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
-                                    <div class="poi">
-                                        <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
-                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                <div class="prv_thumb has_image">
-                                                    <div class="image_wrapper landscape landscapeWide">
-                                                        <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="detail rtl">
-                                            <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
-                                            <div class="item rating-widget">
-                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                    <span class="ui_bubble_rating bubble_50"></span>
-                                                </div>
-                                                <span class="reviewCount ng-binding">1 </span><span>نقد </span>
-                                            </div>
-                                            <div class="item tags ng-binding">اصفهان <span>در </span>
-                                                <span class="ng-binding">اصفهان</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
-                                    <div class="poi">
-                                        <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
-                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                <div class="prv_thumb has_image">
-                                                    <div class="image_wrapper landscape landscapeWide">
-                                                        <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="detail rtl">
-                                            <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
-                                            <div class="item rating-widget">
-                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                    <span class="ui_bubble_rating bubble_50"></span>
-                                                </div>
-                                                <span class="reviewCount ng-binding">1 </span><span>نقد </span>
-                                            </div>
-                                            <div class="item tags ng-binding">اصفهان <span>در </span>
-                                                <span class="ng-binding">اصفهان</span></div>
+                                            <div class="item tags ng-binding">[[place.placeCity]] <span>در </span>
+                                                <span class="ng-binding">[[place.placeState]]</span></div>
                                         </div>
                                     </div>
                                 </div>
@@ -234,11 +54,13 @@
                         <div class="swiper-button-prev"></div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
-    <div id="" class="homepage_shelves_widget ng-scope">
-        <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" style="">
+
+    <div id="foodSuggestion" class="homepage_shelves_widget ng-scope" style="display: none">
+        <div class="prw_rup prw_shelves_shelf_widget">
             <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
                 <div class="shelf_header">
                     <div class="shelf_title">
@@ -252,210 +74,28 @@
                 <div class="shelf_item_container ui_columns is-mobile is-multiline">
                     <div id="mainSuggestion" class="mainSuggestion swiper-container">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide">
+                            <div class="swiper-slide" ng-repeat="place in foodRecords">
                                 <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
                                     <div class="poi">
-                                        <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
+                                        <a href="[[place.url]]" class="thumbnail">
                                             <div class="prw_rup prw_common_thumbnail_no_style_responsive">
                                                 <div class="prv_thumb has_image">
                                                     <div class="image_wrapper landscape landscapeWide">
-                                                        <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
+                                                        <img src="[[place.placePic]]" alt="[[place.alt]]" class="image">
                                                     </div>
                                                 </div>
                                             </div>
                                         </a>
                                         <div class="detail rtl">
-                                            <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
+                                            <a href="[[place.url]]" class="item poi_name ui_link ng-binding">[[place.name]]</a>
                                             <div class="item rating-widget">
                                                 <div class="prw_rup prw_common_location_rating_simple">
-                                                    <span class="ui_bubble_rating bubble_50"></span>
+                                                    <span class="ui_bubble_rating bubble_[[place.placeRate]]0"></span>
                                                 </div>
-                                                <span class="reviewCount ng-binding">1 </span><span>نقد </span>
+                                                <span class="reviewCount ng-binding">[[place.placeReviews]] </span><span>نقد </span>
                                             </div>
-                                            <div class="item tags ng-binding">اصفهان <span>در </span>
-                                                <span class="ng-binding">اصفهان</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
-                                    <div class="poi">
-                                        <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
-                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                <div class="prv_thumb has_image">
-                                                    <div class="image_wrapper landscape landscapeWide">
-                                                        <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="detail rtl">
-                                            <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
-                                            <div class="item rating-widget">
-                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                    <span class="ui_bubble_rating bubble_50"></span>
-                                                </div>
-                                                <span class="reviewCount ng-binding">1 </span><span>نقد </span>
-                                            </div>
-                                            <div class="item tags ng-binding">اصفهان <span>در </span>
-                                                <span class="ng-binding">اصفهان</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
-                                    <div class="poi">
-                                        <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
-                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                <div class="prv_thumb has_image">
-                                                    <div class="image_wrapper landscape landscapeWide">
-                                                        <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="detail rtl">
-                                            <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
-                                            <div class="item rating-widget">
-                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                    <span class="ui_bubble_rating bubble_50"></span>
-                                                </div>
-                                                <span class="reviewCount ng-binding">1 </span><span>نقد </span>
-                                            </div>
-                                            <div class="item tags ng-binding">اصفهان <span>در </span>
-                                                <span class="ng-binding">اصفهان</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
-                                    <div class="poi">
-                                        <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
-                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                <div class="prv_thumb has_image">
-                                                    <div class="image_wrapper landscape landscapeWide">
-                                                        <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="detail rtl">
-                                            <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
-                                            <div class="item rating-widget">
-                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                    <span class="ui_bubble_rating bubble_50"></span>
-                                                </div>
-                                                <span class="reviewCount ng-binding">1 </span><span>نقد </span>
-                                            </div>
-                                            <div class="item tags ng-binding">اصفهان <span>در </span>
-                                                <span class="ng-binding">اصفهان</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
-                                    <div class="poi">
-                                        <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
-                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                <div class="prv_thumb has_image">
-                                                    <div class="image_wrapper landscape landscapeWide">
-                                                        <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="detail rtl">
-                                            <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
-                                            <div class="item rating-widget">
-                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                    <span class="ui_bubble_rating bubble_50"></span>
-                                                </div>
-                                                <span class="reviewCount ng-binding">1 </span><span>نقد </span>
-                                            </div>
-                                            <div class="item tags ng-binding">اصفهان <span>در </span>
-                                                <span class="ng-binding">اصفهان</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
-                                    <div class="poi">
-                                        <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
-                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                <div class="prv_thumb has_image">
-                                                    <div class="image_wrapper landscape landscapeWide">
-                                                        <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="detail rtl">
-                                            <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
-                                            <div class="item rating-widget">
-                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                    <span class="ui_bubble_rating bubble_50"></span>
-                                                </div>
-                                                <span class="reviewCount ng-binding">1 </span><span>نقد </span>
-                                            </div>
-                                            <div class="item tags ng-binding">اصفهان <span>در </span>
-                                                <span class="ng-binding">اصفهان</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
-                                    <div class="poi">
-                                        <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
-                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                <div class="prv_thumb has_image">
-                                                    <div class="image_wrapper landscape landscapeWide">
-                                                        <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="detail rtl">
-                                            <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
-                                            <div class="item rating-widget">
-                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                    <span class="ui_bubble_rating bubble_50"></span>
-                                                </div>
-                                                <span class="reviewCount ng-binding">1 </span><span>نقد </span>
-                                            </div>
-                                            <div class="item tags ng-binding">اصفهان <span>در </span>
-                                                <span class="ng-binding">اصفهان</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
-                                    <div class="poi">
-                                        <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
-                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                <div class="prv_thumb has_image">
-                                                    <div class="image_wrapper landscape landscapeWide">
-                                                        <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="detail rtl">
-                                            <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
-                                            <div class="item rating-widget">
-                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                    <span class="ui_bubble_rating bubble_50"></span>
-                                                </div>
-                                                <span class="reviewCount ng-binding">1 </span><span>نقد </span>
-                                            </div>
-                                            <div class="item tags ng-binding">اصفهان <span>در </span>
-                                                <span class="ng-binding">اصفهان</span></div>
+                                            <div class="item tags ng-binding">[[place.placeCity]] <span>در </span>
+                                                <span class="ng-binding">[[place.placeState]]</span></div>
                                         </div>
                                     </div>
                                 </div>
@@ -471,8 +111,9 @@
             </div>
         </div>
     </div>
-    <div id="" class="homepage_shelves_widget ng-scope">
-        <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" style="">
+
+    <div id="tabiatSuggestion" class="homepage_shelves_widget ng-scope" style="display: none">
+        <div class="prw_rup prw_shelves_shelf_widget" style="">
             <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
                 <div class="shelf_header">
                     <div class="shelf_title">
@@ -486,210 +127,28 @@
                 <div class="shelf_item_container ui_columns is-mobile is-multiline">
                     <div class="mainSuggestion swiper-container">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide">
+                            <div class="swiper-slide" ng-repeat="place in tabiatRecords">
                                 <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
                                     <div class="poi">
-                                        <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
+                                        <a href="[[place.url]]" class="thumbnail">
                                             <div class="prw_rup prw_common_thumbnail_no_style_responsive">
                                                 <div class="prv_thumb has_image">
                                                     <div class="image_wrapper landscape landscapeWide">
-                                                        <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
+                                                        <img src="[[place.placePic]]" alt="[[place.alt]]" class="image">
                                                     </div>
                                                 </div>
                                             </div>
                                         </a>
                                         <div class="detail rtl">
-                                            <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
+                                            <a href="[[place.url]]" class="item poi_name ui_link ng-binding">[[place.name]]</a>
                                             <div class="item rating-widget">
                                                 <div class="prw_rup prw_common_location_rating_simple">
-                                                    <span class="ui_bubble_rating bubble_50"></span>
+                                                    <span class="ui_bubble_rating bubble_[[place.placeRate]]0"></span>
                                                 </div>
-                                                <span class="reviewCount ng-binding">1 </span><span>نقد </span>
+                                                <span class="reviewCount ng-binding">[[place.placeReviews]] </span><span>نقد </span>
                                             </div>
-                                            <div class="item tags ng-binding">اصفهان <span>در </span>
-                                                <span class="ng-binding">اصفهان</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
-                                    <div class="poi">
-                                        <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
-                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                <div class="prv_thumb has_image">
-                                                    <div class="image_wrapper landscape landscapeWide">
-                                                        <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="detail rtl">
-                                            <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
-                                            <div class="item rating-widget">
-                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                    <span class="ui_bubble_rating bubble_50"></span>
-                                                </div>
-                                                <span class="reviewCount ng-binding">1 </span><span>نقد </span>
-                                            </div>
-                                            <div class="item tags ng-binding">اصفهان <span>در </span>
-                                                <span class="ng-binding">اصفهان</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
-                                    <div class="poi">
-                                        <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
-                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                <div class="prv_thumb has_image">
-                                                    <div class="image_wrapper landscape landscapeWide">
-                                                        <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="detail rtl">
-                                            <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
-                                            <div class="item rating-widget">
-                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                    <span class="ui_bubble_rating bubble_50"></span>
-                                                </div>
-                                                <span class="reviewCount ng-binding">1 </span><span>نقد </span>
-                                            </div>
-                                            <div class="item tags ng-binding">اصفهان <span>در </span>
-                                                <span class="ng-binding">اصفهان</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
-                                    <div class="poi">
-                                        <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
-                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                <div class="prv_thumb has_image">
-                                                    <div class="image_wrapper landscape landscapeWide">
-                                                        <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="detail rtl">
-                                            <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
-                                            <div class="item rating-widget">
-                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                    <span class="ui_bubble_rating bubble_50"></span>
-                                                </div>
-                                                <span class="reviewCount ng-binding">1 </span><span>نقد </span>
-                                            </div>
-                                            <div class="item tags ng-binding">اصفهان <span>در </span>
-                                                <span class="ng-binding">اصفهان</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
-                                    <div class="poi">
-                                        <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
-                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                <div class="prv_thumb has_image">
-                                                    <div class="image_wrapper landscape landscapeWide">
-                                                        <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="detail rtl">
-                                            <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
-                                            <div class="item rating-widget">
-                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                    <span class="ui_bubble_rating bubble_50"></span>
-                                                </div>
-                                                <span class="reviewCount ng-binding">1 </span><span>نقد </span>
-                                            </div>
-                                            <div class="item tags ng-binding">اصفهان <span>در </span>
-                                                <span class="ng-binding">اصفهان</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
-                                    <div class="poi">
-                                        <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
-                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                <div class="prv_thumb has_image">
-                                                    <div class="image_wrapper landscape landscapeWide">
-                                                        <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="detail rtl">
-                                            <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
-                                            <div class="item rating-widget">
-                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                    <span class="ui_bubble_rating bubble_50"></span>
-                                                </div>
-                                                <span class="reviewCount ng-binding">1 </span><span>نقد </span>
-                                            </div>
-                                            <div class="item tags ng-binding">اصفهان <span>در </span>
-                                                <span class="ng-binding">اصفهان</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
-                                    <div class="poi">
-                                        <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
-                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                <div class="prv_thumb has_image">
-                                                    <div class="image_wrapper landscape landscapeWide">
-                                                        <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="detail rtl">
-                                            <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
-                                            <div class="item rating-widget">
-                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                    <span class="ui_bubble_rating bubble_50"></span>
-                                                </div>
-                                                <span class="reviewCount ng-binding">1 </span><span>نقد </span>
-                                            </div>
-                                            <div class="item tags ng-binding">اصفهان <span>در </span>
-                                                <span class="ng-binding">اصفهان</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
-                                    <div class="poi">
-                                        <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
-                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                <div class="prv_thumb has_image">
-                                                    <div class="image_wrapper landscape landscapeWide">
-                                                        <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="detail rtl">
-                                            <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
-                                            <div class="item rating-widget">
-                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                    <span class="ui_bubble_rating bubble_50"></span>
-                                                </div>
-                                                <span class="reviewCount ng-binding">1 </span><span>نقد </span>
-                                            </div>
-                                            <div class="item tags ng-binding">اصفهان <span>در </span>
-                                                <span class="ng-binding">اصفهان</span></div>
+                                            <div class="item tags ng-binding">[[place.placeCity]] <span>در </span>
+                                                <span class="ng-binding">[[place.placeState]]</span></div>
                                         </div>
                                     </div>
                                 </div>
@@ -705,8 +164,9 @@
             </div>
         </div>
     </div>
-    <div id="" class="homepage_shelves_widget ng-scope">
-        <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" style="">
+
+    <div id="restaurantSuggestion" class="homepage_shelves_widget ng-scope"style="display: none;">
+        <div class="prw_rup prw_shelves_shelf_widget" style="">
             <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
                 <div class="shelf_header">
                     <div class="shelf_title">
@@ -720,210 +180,28 @@
                 <div class="shelf_item_container ui_columns is-mobile is-multiline">
                     <div class="mainSuggestion swiper-container">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide">
+                            <div class="swiper-slide" ng-repeat="place in restaurantRecords">
                                 <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
                                     <div class="poi">
-                                        <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
+                                        <a href="[[place.url]]" class="thumbnail">
                                             <div class="prw_rup prw_common_thumbnail_no_style_responsive">
                                                 <div class="prv_thumb has_image">
                                                     <div class="image_wrapper landscape landscapeWide">
-                                                        <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
+                                                        <img src="[[place.placePic]]" alt="[[place.alt]]" class="image">
                                                     </div>
                                                 </div>
                                             </div>
                                         </a>
                                         <div class="detail rtl">
-                                            <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
+                                            <a href="[[place.url]]" class="item poi_name ui_link ng-binding">[[place.name]]</a>
                                             <div class="item rating-widget">
                                                 <div class="prw_rup prw_common_location_rating_simple">
-                                                    <span class="ui_bubble_rating bubble_50"></span>
+                                                    <span class="ui_bubble_rating bubble_[[place.placeRate]]0"></span>
                                                 </div>
-                                                <span class="reviewCount ng-binding">1 </span><span>نقد </span>
+                                                <span class="reviewCount ng-binding">[[place.placeReviews]] </span><span>نقد </span>
                                             </div>
-                                            <div class="item tags ng-binding">اصفهان <span>در </span>
-                                                <span class="ng-binding">اصفهان</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
-                                    <div class="poi">
-                                        <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
-                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                <div class="prv_thumb has_image">
-                                                    <div class="image_wrapper landscape landscapeWide">
-                                                        <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="detail rtl">
-                                            <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
-                                            <div class="item rating-widget">
-                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                    <span class="ui_bubble_rating bubble_50"></span>
-                                                </div>
-                                                <span class="reviewCount ng-binding">1 </span><span>نقد </span>
-                                            </div>
-                                            <div class="item tags ng-binding">اصفهان <span>در </span>
-                                                <span class="ng-binding">اصفهان</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
-                                    <div class="poi">
-                                        <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
-                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                <div class="prv_thumb has_image">
-                                                    <div class="image_wrapper landscape landscapeWide">
-                                                        <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="detail rtl">
-                                            <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
-                                            <div class="item rating-widget">
-                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                    <span class="ui_bubble_rating bubble_50"></span>
-                                                </div>
-                                                <span class="reviewCount ng-binding">1 </span><span>نقد </span>
-                                            </div>
-                                            <div class="item tags ng-binding">اصفهان <span>در </span>
-                                                <span class="ng-binding">اصفهان</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
-                                    <div class="poi">
-                                        <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
-                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                <div class="prv_thumb has_image">
-                                                    <div class="image_wrapper landscape landscapeWide">
-                                                        <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="detail rtl">
-                                            <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
-                                            <div class="item rating-widget">
-                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                    <span class="ui_bubble_rating bubble_50"></span>
-                                                </div>
-                                                <span class="reviewCount ng-binding">1 </span><span>نقد </span>
-                                            </div>
-                                            <div class="item tags ng-binding">اصفهان <span>در </span>
-                                                <span class="ng-binding">اصفهان</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
-                                    <div class="poi">
-                                        <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
-                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                <div class="prv_thumb has_image">
-                                                    <div class="image_wrapper landscape landscapeWide">
-                                                        <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="detail rtl">
-                                            <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
-                                            <div class="item rating-widget">
-                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                    <span class="ui_bubble_rating bubble_50"></span>
-                                                </div>
-                                                <span class="reviewCount ng-binding">1 </span><span>نقد </span>
-                                            </div>
-                                            <div class="item tags ng-binding">اصفهان <span>در </span>
-                                                <span class="ng-binding">اصفهان</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
-                                    <div class="poi">
-                                        <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
-                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                <div class="prv_thumb has_image">
-                                                    <div class="image_wrapper landscape landscapeWide">
-                                                        <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="detail rtl">
-                                            <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
-                                            <div class="item rating-widget">
-                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                    <span class="ui_bubble_rating bubble_50"></span>
-                                                </div>
-                                                <span class="reviewCount ng-binding">1 </span><span>نقد </span>
-                                            </div>
-                                            <div class="item tags ng-binding">اصفهان <span>در </span>
-                                                <span class="ng-binding">اصفهان</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
-                                    <div class="poi">
-                                        <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
-                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                <div class="prv_thumb has_image">
-                                                    <div class="image_wrapper landscape landscapeWide">
-                                                        <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="detail rtl">
-                                            <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
-                                            <div class="item rating-widget">
-                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                    <span class="ui_bubble_rating bubble_50"></span>
-                                                </div>
-                                                <span class="reviewCount ng-binding">1 </span><span>نقد </span>
-                                            </div>
-                                            <div class="item tags ng-binding">اصفهان <span>در </span>
-                                                <span class="ng-binding">اصفهان</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
-                                    <div class="poi">
-                                        <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
-                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                <div class="prv_thumb has_image">
-                                                    <div class="image_wrapper landscape landscapeWide">
-                                                        <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="detail rtl">
-                                            <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
-                                            <div class="item rating-widget">
-                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                    <span class="ui_bubble_rating bubble_50"></span>
-                                                </div>
-                                                <span class="reviewCount ng-binding">1 </span><span>نقد </span>
-                                            </div>
-                                            <div class="item tags ng-binding">اصفهان <span>در </span>
-                                                <span class="ng-binding">اصفهان</span></div>
+                                            <div class="item tags ng-binding">[[place.placeCity]] <span>در </span>
+                                                <span class="ng-binding">[[place.placeState]]</span></div>
                                         </div>
                                     </div>
                                 </div>
@@ -939,8 +217,9 @@
             </div>
         </div>
     </div>
-    <div id="" class="homepage_shelves_widget ng-scope">
-        <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" style="">
+
+    <div id="tarikhiSuggestion" class="homepage_shelves_widget ng-scope" style="display: none">
+        <div class="prw_rup prw_shelves_shelf_widget" style="">
             <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
                 <div class="shelf_header">
                     <div class="shelf_title">
@@ -954,210 +233,28 @@
                 <div class="shelf_item_container ui_columns is-mobile is-multiline">
                     <div class="mainSuggestion swiper-container">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide">
+                            <div class="swiper-slide" ng-repeat="place in tarikhiRecords">
                                 <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
                                     <div class="poi">
-                                        <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
+                                        <a href="[[place.url]]" class="thumbnail">
                                             <div class="prw_rup prw_common_thumbnail_no_style_responsive">
                                                 <div class="prv_thumb has_image">
                                                     <div class="image_wrapper landscape landscapeWide">
-                                                        <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
+                                                        <img src="[[place.placePic]]" alt="[[place.alt]]" class="image">
                                                     </div>
                                                 </div>
                                             </div>
                                         </a>
                                         <div class="detail rtl">
-                                            <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
+                                            <a href="[[place.url]]" class="item poi_name ui_link ng-binding">[[place.name]]</a>
                                             <div class="item rating-widget">
                                                 <div class="prw_rup prw_common_location_rating_simple">
-                                                    <span class="ui_bubble_rating bubble_50"></span>
+                                                    <span class="ui_bubble_rating bubble_[[place.placeRate]]0"></span>
                                                 </div>
-                                                <span class="reviewCount ng-binding">1 </span><span>نقد </span>
+                                                <span class="reviewCount ng-binding">[[place.placeReviews]] </span><span>نقد </span>
                                             </div>
-                                            <div class="item tags ng-binding">اصفهان <span>در </span>
-                                                <span class="ng-binding">اصفهان</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
-                                    <div class="poi">
-                                        <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
-                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                <div class="prv_thumb has_image">
-                                                    <div class="image_wrapper landscape landscapeWide">
-                                                        <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="detail rtl">
-                                            <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
-                                            <div class="item rating-widget">
-                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                    <span class="ui_bubble_rating bubble_50"></span>
-                                                </div>
-                                                <span class="reviewCount ng-binding">1 </span><span>نقد </span>
-                                            </div>
-                                            <div class="item tags ng-binding">اصفهان <span>در </span>
-                                                <span class="ng-binding">اصفهان</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
-                                    <div class="poi">
-                                        <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
-                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                <div class="prv_thumb has_image">
-                                                    <div class="image_wrapper landscape landscapeWide">
-                                                        <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="detail rtl">
-                                            <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
-                                            <div class="item rating-widget">
-                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                    <span class="ui_bubble_rating bubble_50"></span>
-                                                </div>
-                                                <span class="reviewCount ng-binding">1 </span><span>نقد </span>
-                                            </div>
-                                            <div class="item tags ng-binding">اصفهان <span>در </span>
-                                                <span class="ng-binding">اصفهان</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
-                                    <div class="poi">
-                                        <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
-                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                <div class="prv_thumb has_image">
-                                                    <div class="image_wrapper landscape landscapeWide">
-                                                        <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="detail rtl">
-                                            <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
-                                            <div class="item rating-widget">
-                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                    <span class="ui_bubble_rating bubble_50"></span>
-                                                </div>
-                                                <span class="reviewCount ng-binding">1 </span><span>نقد </span>
-                                            </div>
-                                            <div class="item tags ng-binding">اصفهان <span>در </span>
-                                                <span class="ng-binding">اصفهان</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
-                                    <div class="poi">
-                                        <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
-                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                <div class="prv_thumb has_image">
-                                                    <div class="image_wrapper landscape landscapeWide">
-                                                        <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="detail rtl">
-                                            <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
-                                            <div class="item rating-widget">
-                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                    <span class="ui_bubble_rating bubble_50"></span>
-                                                </div>
-                                                <span class="reviewCount ng-binding">1 </span><span>نقد </span>
-                                            </div>
-                                            <div class="item tags ng-binding">اصفهان <span>در </span>
-                                                <span class="ng-binding">اصفهان</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
-                                    <div class="poi">
-                                        <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
-                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                <div class="prv_thumb has_image">
-                                                    <div class="image_wrapper landscape landscapeWide">
-                                                        <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="detail rtl">
-                                            <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
-                                            <div class="item rating-widget">
-                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                    <span class="ui_bubble_rating bubble_50"></span>
-                                                </div>
-                                                <span class="reviewCount ng-binding">1 </span><span>نقد </span>
-                                            </div>
-                                            <div class="item tags ng-binding">اصفهان <span>در </span>
-                                                <span class="ng-binding">اصفهان</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
-                                    <div class="poi">
-                                        <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
-                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                <div class="prv_thumb has_image">
-                                                    <div class="image_wrapper landscape landscapeWide">
-                                                        <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="detail rtl">
-                                            <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
-                                            <div class="item rating-widget">
-                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                    <span class="ui_bubble_rating bubble_50"></span>
-                                                </div>
-                                                <span class="reviewCount ng-binding">1 </span><span>نقد </span>
-                                            </div>
-                                            <div class="item tags ng-binding">اصفهان <span>در </span>
-                                                <span class="ng-binding">اصفهان</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
-                                    <div class="poi">
-                                        <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
-                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                <div class="prv_thumb has_image">
-                                                    <div class="image_wrapper landscape landscapeWide">
-                                                        <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="detail rtl">
-                                            <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
-                                            <div class="item rating-widget">
-                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                    <span class="ui_bubble_rating bubble_50"></span>
-                                                </div>
-                                                <span class="reviewCount ng-binding">1 </span><span>نقد </span>
-                                            </div>
-                                            <div class="item tags ng-binding">اصفهان <span>در </span>
-                                                <span class="ng-binding">اصفهان</span></div>
+                                            <div class="item tags ng-binding">[[place.placeCity]] <span>در </span>
+                                                <span class="ng-binding">[[place.placeState]]</span></div>
                                         </div>
                                     </div>
                                 </div>
@@ -1173,7 +270,8 @@
             </div>
         </div>
     </div>
-    <div id="" class="homepage_shelves_widget ng-scope">
+
+    <div id="kharidSuggestion" class="homepage_shelves_widget ng-scope" style="display: none">
         <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" style="">
             <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
                 <div class="shelf_header">
@@ -1188,215 +286,34 @@
                 <div class="shelf_item_container ui_columns is-mobile is-multiline">
                     <div class="mainSuggestion swiper-container">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide">
+                            <div class="swiper-slide" ng-repeat="place in kharidRecords">
                                 <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
                                     <div class="poi">
-                                        <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
+                                        <a href="[[place.url]]" class="thumbnail">
                                             <div class="prw_rup prw_common_thumbnail_no_style_responsive">
                                                 <div class="prv_thumb has_image">
                                                     <div class="image_wrapper landscape landscapeWide">
-                                                        <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
+                                                        <img src="[[place.placePic]]" alt="[[place.alt]]" class="image">
                                                     </div>
                                                 </div>
                                             </div>
                                         </a>
                                         <div class="detail rtl">
-                                            <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
+                                            <a href="[[place.url]]" class="item poi_name ui_link ng-binding">[[place.name]]</a>
                                             <div class="item rating-widget">
                                                 <div class="prw_rup prw_common_location_rating_simple">
-                                                    <span class="ui_bubble_rating bubble_50"></span>
+                                                    <span class="ui_bubble_rating bubble_[[place.placeRate]]0"></span>
                                                 </div>
-                                                <span class="reviewCount ng-binding">1 </span><span>نقد </span>
+                                                <span class="reviewCount ng-binding">[[place.placeReviews]] </span><span>نقد </span>
                                             </div>
-                                            <div class="item tags ng-binding">اصفهان <span>در </span>
-                                                <span class="ng-binding">اصفهان</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
-                                    <div class="poi">
-                                        <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
-                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                <div class="prv_thumb has_image">
-                                                    <div class="image_wrapper landscape landscapeWide">
-                                                        <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="detail rtl">
-                                            <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
-                                            <div class="item rating-widget">
-                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                    <span class="ui_bubble_rating bubble_50"></span>
-                                                </div>
-                                                <span class="reviewCount ng-binding">1 </span><span>نقد </span>
-                                            </div>
-                                            <div class="item tags ng-binding">اصفهان <span>در </span>
-                                                <span class="ng-binding">اصفهان</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
-                                    <div class="poi">
-                                        <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
-                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                <div class="prv_thumb has_image">
-                                                    <div class="image_wrapper landscape landscapeWide">
-                                                        <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="detail rtl">
-                                            <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
-                                            <div class="item rating-widget">
-                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                    <span class="ui_bubble_rating bubble_50"></span>
-                                                </div>
-                                                <span class="reviewCount ng-binding">1 </span><span>نقد </span>
-                                            </div>
-                                            <div class="item tags ng-binding">اصفهان <span>در </span>
-                                                <span class="ng-binding">اصفهان</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
-                                    <div class="poi">
-                                        <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
-                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                <div class="prv_thumb has_image">
-                                                    <div class="image_wrapper landscape landscapeWide">
-                                                        <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="detail rtl">
-                                            <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
-                                            <div class="item rating-widget">
-                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                    <span class="ui_bubble_rating bubble_50"></span>
-                                                </div>
-                                                <span class="reviewCount ng-binding">1 </span><span>نقد </span>
-                                            </div>
-                                            <div class="item tags ng-binding">اصفهان <span>در </span>
-                                                <span class="ng-binding">اصفهان</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
-                                    <div class="poi">
-                                        <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
-                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                <div class="prv_thumb has_image">
-                                                    <div class="image_wrapper landscape landscapeWide">
-                                                        <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="detail rtl">
-                                            <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
-                                            <div class="item rating-widget">
-                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                    <span class="ui_bubble_rating bubble_50"></span>
-                                                </div>
-                                                <span class="reviewCount ng-binding">1 </span><span>نقد </span>
-                                            </div>
-                                            <div class="item tags ng-binding">اصفهان <span>در </span>
-                                                <span class="ng-binding">اصفهان</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
-                                    <div class="poi">
-                                        <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
-                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                <div class="prv_thumb has_image">
-                                                    <div class="image_wrapper landscape landscapeWide">
-                                                        <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="detail rtl">
-                                            <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
-                                            <div class="item rating-widget">
-                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                    <span class="ui_bubble_rating bubble_50"></span>
-                                                </div>
-                                                <span class="reviewCount ng-binding">1 </span><span>نقد </span>
-                                            </div>
-                                            <div class="item tags ng-binding">اصفهان <span>در </span>
-                                                <span class="ng-binding">اصفهان</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
-                                    <div class="poi">
-                                        <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
-                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                <div class="prv_thumb has_image">
-                                                    <div class="image_wrapper landscape landscapeWide">
-                                                        <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="detail rtl">
-                                            <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
-                                            <div class="item rating-widget">
-                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                    <span class="ui_bubble_rating bubble_50"></span>
-                                                </div>
-                                                <span class="reviewCount ng-binding">1 </span><span>نقد </span>
-                                            </div>
-                                            <div class="item tags ng-binding">اصفهان <span>در </span>
-                                                <span class="ng-binding">اصفهان</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
-                                    <div class="poi">
-                                        <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
-                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                <div class="prv_thumb has_image">
-                                                    <div class="image_wrapper landscape landscapeWide">
-                                                        <img src="{{URL::asset('_images/hotels/hotel_abbasi/f-1.jpg')}}" alt="هتل عباسی" class="image" src="http://localhost:8080/assets/_images/hotels/hotel_abbasi/f-1.jpg">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="detail rtl">
-                                            <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="item poi_name ui_link ng-binding">هتل عباسی</a>
-                                            <div class="item rating-widget">
-                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                    <span class="ui_bubble_rating bubble_50"></span>
-                                                </div>
-                                                <span class="reviewCount ng-binding">1 </span><span>نقد </span>
-                                            </div>
-                                            <div class="item tags ng-binding">اصفهان <span>در </span>
-                                                <span class="ng-binding">اصفهان</span></div>
+                                            <div class="item tags ng-binding">[[place.placeCity]] <span>در </span>
+                                                <span class="ng-binding">[[place.placeState]]</span></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                         <!-- Add Pagination -->
                         <div class="swiper-pagination"></div>
                         <!-- Add Arrows -->
@@ -1407,17 +324,18 @@
             </div>
         </div>
     </div>
+
     <div id="" class="homepage_shelves_widget ng-scope">
-        <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" style="">
-            <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
-                <div class="shelf_header">
-                    <div class="shelf_title">
-                        <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
-                        <div class="shelf_title_container h3">
-                            <h3>محبوب‌ترین سفرنامه‌ها</h3>
-                        </div>
+    <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" style="">
+        <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
+            <div class="shelf_header">
+                <div class="shelf_title">
+                    <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
+                    <div class="shelf_title_container h3">
+                        <h3>محبوب‌ترین سفرنامه‌ها</h3>
                     </div>
                 </div>
+            </div>
 
                 <div class="shelf_item_container ui_columns is-mobile is-multiline">
                     <div class="mainSuggestion swiper-container">
@@ -1642,6 +560,9 @@
         </div>
     </div>
 </div>
+
+</div>
+
 
 
 {{--<div id="AdviceControllerId" class="homepage_shelves_widget" ng-controller="AdviceController">--}}
@@ -1996,7 +917,6 @@
 
 <script>
     var swiper = new Swiper('.mainSuggestion', {
-
         slidesPerGroup: 1,
         loop: true,
         loopFillGroupWithBlank: true,
@@ -2005,27 +925,22 @@
             prevEl: '.swiper-button-prev',
         },
         breakpoints: {
-
             450: {
                 slidesPerView: 1,
                 spaceBetween: 0,
             },
-
             520: {
                 slidesPerView: 2,
                 spaceBetween: 15,
             },
-
             768: {
                 slidesPerView: 2,
                 spaceBetween: 30,
             },
-
             992: {
                 slidesPerView: 3,
                 spaceBetween: 30,
             },
-
             10000: {
                 slidesPerView: 4,
                 spaceBetween: 30,

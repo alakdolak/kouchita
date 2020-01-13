@@ -39,6 +39,8 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
 use PHPMailer\PHPMailer\PHPMailer;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
 
 class HomeController extends Controller
 {
@@ -343,9 +345,9 @@ class HomeController extends Controller
     {
 
         $serverName = "localhost";
-        $username = "administrator";
-        $password = 'yGrn65~6';
-        $dbName = "mashhad";
+        $username = "root";
+        $password = '';
+        $dbName = "admin_shazde";
 
         $conn = mysqli_connect($serverName, $username, $password);
 
@@ -604,7 +606,6 @@ class HomeController extends Controller
 
             switch ($kindPlaceId) {
                 case 1:
-                default:
                     $route = "amakenList";
                     break;
                 case 3:
@@ -613,8 +614,11 @@ class HomeController extends Controller
                 case 4:
                     $route = "hotelList";
                     break;
+                case 0:
+                default:
+                    $route = 'all';
+                    break;
             }
-
             $key = makeValidInput($_POST["key"]);
             $key = str_replace(' ', '', $key);
             $key2 = (isset($_POST["key2"]) ? makeValidInput($_POST["key2"]) : '');
@@ -627,25 +631,33 @@ class HomeController extends Controller
 
             foreach ($result as $itr) {
                 $itr->mode = "state";
-                $itr->url = route($route, ['city' => $itr->targetName, 'mode' => 'state']);
+//                $itr->url = route($route, ['city' => $itr->targetName, 'mode' => 'state']);
             }
 
             if (!empty($key2))
-                $tmp = DB::select("SELECT cities.name as targetName, state.name as stateName from cities, state WHERE (replace(cities.name, ' ', '') LIKE '%$key%' or replace(cities.name, ' ', '') LIKE '%$key2%') and 
-					stateId = state.id");
+                $tmp = DB::select("SELECT cities.name as targetName, state.name as stateName, cities.id as id from cities, state WHERE (replace(cities.name, ' ', '') LIKE '%$key%' or replace(cities.name, ' ', '') LIKE '%$key2%') and stateId = state.id");
             else
-                $tmp = DB::select("SELECT cities.name as targetName, state.name as stateName from cities, state WHERE replace(cities.name, ' ', '') LIKE '%$key%' and 
-					stateId = state.id");
+                $tmp = DB::select("SELECT cities.name as targetName, state.name as stateName, cities.id as id from cities, state WHERE replace(cities.name, ' ', '') LIKE '%$key%' and  stateId = state.id");
 
             foreach ($tmp as $itr) {
+                $itr->amakenCount = Amaken::where('cityId', $itr->id)->count();
                 $itr->mode = "city";
-                $itr->url = route($route, ['city' => $itr->targetName, 'mode' => 'city']);
+                $itr->url = \url('cityPage/'.$itr->targetName);
             }
+            for($i = 0; $i < count($tmp); $i++){
+                for($j = 1; $j < count($tmp); $j++){
+                    if($tmp[$i]->amakenCount < $tmp[$j]->amakenCount){
+                        $t = $tmp[$i];
+                        $tmp[$i] = $tmp[$j];
+                        $tmp[$j] = $t;
+                    }
+                }
+            }
+
             $result = array_merge($result, $tmp);
 
             switch ($kindPlaceId) {
                 case 1:
-                default:
                     if (!empty($key2))
                         $tmp = DB::select("SELECT amaken.id, amaken.name as targetName, cities.name as cityName, state.name as stateName from amaken, cities, state WHERE cityId = cities.id and state.id = cities.stateId and (replace(amaken.name, ' ', '') LIKE '%$key%' or replace(amaken.name, ' ', '') LIKE '%$key2%')");
                     else
@@ -676,12 +688,136 @@ class HomeController extends Controller
                         $itr->url = route('hotelDetails', ['placeId' => $itr->id, 'placeName' => $itr->targetName]);
                     }
                     break;
+                case 6:
+                    if (!empty($key2))
+                        $tmp = DB::select("SELECT majara.id, majara.name as targetName, cities.name as cityName, state.name as stateName from majara, cities, state WHERE cityId = cities.id and state.id = cities.stateId and (replace(majara.name, ' ', '') LIKE '%$key%' or replace(majara.name, ' ', '') LIKE '%$key2%')");
+                    else
+                        $tmp = DB::select("SELECT majara.id, majara.name as targetName, cities.name as cityName, state.name as stateName from majara, cities, state WHERE cityId = cities.id and state.id = cities.stateId and replace(majara.name, ' ', '') LIKE '%$key%'");
+                    foreach ($tmp as $itr) {
+                        $itr->mode = "majara";
+                        $itr->url = route('majaraDetails', ['placeId' => $itr->id, 'placeName' => $itr->targetName]);
+                    }
+                    break;
+                case 10:
+                    if (!empty($key2))
+                        $tmp = DB::select("SELECT sogatSanaies.id, sogatSanaies.name as targetName, cities.name as cityName, state.name as stateName from sogatSanaies, cities, state WHERE cityId = cities.id and state.id = cities.stateId and (replace(sogatSanaies.name, ' ', '') LIKE '%$key%' or replace(sogatSanaies.name, ' ', '') LIKE '%$key2%')");
+                    else
+                        $tmp = DB::select("SELECT sogatSanaies.id, sogatSanaies.name as targetName, cities.name as cityName, state.name as stateName from sogatSanaies, cities, state WHERE cityId = cities.id and state.id = cities.stateId and replace(sogatSanaies.name, ' ', '') LIKE '%$key%'");
+                    foreach ($tmp as $itr) {
+                        $itr->mode = "sogatSanaies";
+                        $itr->url = route('sanaiesogatDetails', ['placeId' => $itr->id, 'placeName' => $itr->targetName]);
+                    }
+                    break;
+                case 11:
+                    if (!empty($key2))
+                        $tmp = DB::select("SELECT mahaliFood.id, mahaliFood.name as targetName, cities.name as cityName, state.name as stateName from mahaliFood, cities, state WHERE cityId = cities.id and state.id = cities.stateId and (replace(mahaliFood.name, ' ', '') LIKE '%$key%' or replace(mahaliFood.name, ' ', '') LIKE '%$key2%')");
+                    else
+                        $tmp = DB::select("SELECT mahaliFood.id, mahaliFood.name as targetName, cities.name as cityName, state.name as stateName from mahaliFood, cities, state WHERE cityId = cities.id and state.id = cities.stateId and replace(mahaliFood.name, ' ', '') LIKE '%$key%'");
+                    foreach ($tmp as $itr) {
+                        $itr->mode = "mahaliFood";
+                        $itr->url = route('mahaliFoodDetails', ['placeId' => $itr->id, 'placeName' => $itr->targetName]);
+                    }
+                    break;
+                case 0:
+                default:
+                    $acitivityId = Activity::where('name', 'مشاهده')->first();
+                    if (!empty($key2))
+                        $tmp = DB::select("SELECT amaken.id, amaken.name as targetName, cities.name as cityName, state.name as stateName from amaken, cities, state WHERE cityId = cities.id and state.id = cities.stateId and (replace(amaken.name, ' ', '') LIKE '%$key%' or replace(amaken.name, ' ', '') LIKE '%$key2%')");
+                    else
+                        $tmp = DB::select("SELECT amaken.id, amaken.name as targetName, cities.name as cityName, state.name as stateName from amaken, cities, state WHERE cityId = cities.id and state.id = cities.stateId and replace(amaken.name, ' ', '') LIKE '%$key%'");
+                    foreach ($tmp as $itr) {
+                        $condition = ['activityId' => $acitivityId->id, 'placeId' => $itr->id, 'kindPlaceId' => 1];
+                        $itr->see = LogModel::where($condition)->count();
+                        $itr->mode = "amaken";
+                        $itr->url = route('amakenDetails', ['placeId' => $itr->id, 'placeName' => $itr->targetName]);
+                    }
+                    $tmp = $this->sortSearchBySee($tmp);
+                    $result = array_merge($result, $tmp);
+
+                    if (!empty($key2))
+                        $tmp = DB::select("SELECT restaurant.id, restaurant.name as targetName, cities.name as cityName, state.name as stateName from restaurant, cities, state WHERE cityId = cities.id and state.id = cities.stateId and (replace(restaurant.name, ' ', '') LIKE '%$key%' or replace(restaurant.name, ' ', '') LIKE '%$key2%')");
+                    else
+                        $tmp = DB::select("SELECT restaurant.id, restaurant.name as targetName, cities.name as cityName, state.name as stateName from restaurant, cities, state WHERE cityId = cities.id and state.id = cities.stateId and replace(restaurant.name, ' ', '') LIKE '%$key%'");
+                    foreach ($tmp as $itr) {
+                        $condition = ['activityId' => $acitivityId->id, 'placeId' => $itr->id, 'kindPlaceId' => 3];
+                        $itr->see = LogModel::where($condition)->count();
+                        $itr->mode = "restaurant";
+                        $itr->url = route('restaurantDetails', ['placeId' => $itr->id, 'placeName' => $itr->targetName]);
+                    }
+                    $tmp = $this->sortSearchBySee($tmp);
+                    $result = array_merge($result, $tmp);
+
+                    if (!empty($key2))
+                        $tmp = DB::select("SELECT hotels.id, hotels.name as targetName, cities.name as cityName, state.name as stateName from hotels, cities, state WHERE cityId = cities.id and state.id = cities.stateId and (replace(hotels.name, ' ', '') LIKE '%$key%' or replace(hotels.name, ' ', '') LIKE '%$key2%')");
+                    else
+                        $tmp = DB::select("SELECT hotels.id, hotels.name as targetName, cities.name as cityName, state.name as stateName from hotels, cities, state WHERE cityId = cities.id and state.id = cities.stateId and replace(hotels.name, ' ', '') LIKE '%$key%'");
+                    foreach ($tmp as $itr) {
+                        $condition = ['activityId' => $acitivityId->id, 'placeId' => $itr->id, 'kindPlaceId' => 4];
+                        $itr->see = LogModel::where($condition)->count();
+                        $itr->mode = "hotel";
+                        $itr->url = route('hotelDetails', ['placeId' => $itr->id, 'placeName' => $itr->targetName]);
+                    }
+                    $tmp = $this->sortSearchBySee($tmp);
+                    $result = array_merge($result, $tmp);
+
+                    if (!empty($key2))
+                        $tmp = DB::select("SELECT majara.id, majara.name as targetName, cities.name as cityName, state.name as stateName from majara, cities, state WHERE cityId = cities.id and state.id = cities.stateId and (replace(majara.name, ' ', '') LIKE '%$key%' or replace(majara.name, ' ', '') LIKE '%$key2%')");
+                    else
+                        $tmp = DB::select("SELECT majara.id, majara.name as targetName, cities.name as cityName, state.name as stateName from majara, cities, state WHERE cityId = cities.id and state.id = cities.stateId and replace(majara.name, ' ', '') LIKE '%$key%'");
+                    foreach ($tmp as $itr) {
+                        $condition = ['activityId' => $acitivityId->id, 'placeId' => $itr->id, 'kindPlaceId' => 6];
+                        $itr->see = LogModel::where($condition)->count();
+                        $itr->mode = "majara";
+                        $itr->url = route('majaraDetails', ['placeId' => $itr->id, 'placeName' => $itr->targetName]);
+                    }
+                    $tmp = $this->sortSearchBySee($tmp);
+                    $result = array_merge($result, $tmp);
+
+                    if (!empty($key2))
+                        $tmp = DB::select("SELECT sogatSanaies.id, sogatSanaies.name as targetName, cities.name as cityName, state.name as stateName from sogatSanaies, cities, state WHERE cityId = cities.id and state.id = cities.stateId and (replace(sogatSanaies.name, ' ', '') LIKE '%$key%' or replace(sogatSanaies.name, ' ', '') LIKE '%$key2%')");
+                    else
+                        $tmp = DB::select("SELECT sogatSanaies.id, sogatSanaies.name as targetName, cities.name as cityName, state.name as stateName from sogatSanaies, cities, state WHERE cityId = cities.id and state.id = cities.stateId and replace(sogatSanaies.name, ' ', '') LIKE '%$key%'");
+                    foreach ($tmp as $itr) {
+                        $condition = ['activityId' => $acitivityId->id, 'placeId' => $itr->id, 'kindPlaceId' => 10];
+                        $itr->see = LogModel::where($condition)->count();
+                        $itr->mode = "sogatSanaies";
+                        $itr->url = route('sanaiesogatDetails', ['placeId' => $itr->id, 'placeName' => $itr->targetName]);
+                    }
+                    $tmp = $this->sortSearchBySee($tmp);
+                    $result = array_merge($result, $tmp);
+
+                    if (!empty($key2))
+                        $tmp = DB::select("SELECT mahaliFood.id, mahaliFood.name as targetName, cities.name as cityName, state.name as stateName from mahaliFood, cities, state WHERE cityId = cities.id and state.id = cities.stateId and (replace(mahaliFood.name, ' ', '') LIKE '%$key%' or replace(mahaliFood.name, ' ', '') LIKE '%$key2%')");
+                    else
+                        $tmp = DB::select("SELECT mahaliFood.id, mahaliFood.name as targetName, cities.name as cityName, state.name as stateName from mahaliFood, cities, state WHERE cityId = cities.id and state.id = cities.stateId and replace(mahaliFood.name, ' ', '') LIKE '%$key%'");
+                    foreach ($tmp as $itr) {
+                        $condition = ['activityId' => $acitivityId->id, 'placeId' => $itr->id, 'kindPlaceId' => 11];
+                        $itr->see = LogModel::where($condition)->count();
+                        $itr->mode = "mahaliFood";
+                        $itr->url = route('mahaliFoodDetails', ['placeId' => $itr->id, 'placeName' => $itr->targetName]);
+                    }
+                    $tmp = $this->sortSearchBySee($tmp);
+                    break;
             }
 
             $result = array_merge($result, $tmp);
 
             echo json_encode($result);
         }
+    }
+    private function sortSearchBySee($tmp){
+
+        for($i = 0; $i < count($tmp); $i++){
+            for($j = 1; $j < count($tmp); $j++){
+                if($tmp[$i]->see < $tmp[$j]->see){
+                    $t = $tmp[$i];
+                    $tmp[$i] = $tmp[$j];
+                    $tmp[$j] = $t;
+                }
+            }
+        }
+
+        return $tmp;
     }
 
     public function findPlace()
@@ -2286,4 +2422,54 @@ class HomeController extends Controller
         $subject = 'welcome massage';
         sendEmail($text, $subject, $to);
     }
+
+
+    public function exportExcel()
+    {
+        $serverName = "localhost";
+        $username = "root";
+        $password = '';
+        $dbName = "admin_shazde";
+
+        $conn = mysqli_connect($serverName, $username, $password);
+
+        $conn->set_charset("utf8");
+        mysqli_select_db($conn, $dbName) or die("Connection failed: ");
+
+        $dbLink = $conn;
+        $start = 0;
+        $end = 50;
+
+        while($start < 12000){
+            $query = 'SELECT * FROM wp_posts WHERE id < ' . $end . ' AND id >= ' . $start;
+            $result = mysqli_query($dbLink, $query);
+
+            if($result != false){
+                $spreadsheet = new Spreadsheet();
+                $sheet = $spreadsheet->getActiveSheet();
+                $cols = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+                    'AA', 'BB', 'CC', 'DD', 'EE', 'FF', 'GG', 'HH', 'II', 'JJ', 'KK', 'LL', 'MM', 'NN', 'OO', 'PP', 'QQ', 'RR', 'SS', 'TT', 'UU', 'VV', 'WW', 'XX', 'YY', 'ZZ'
+                ];
+                $colsNum = [0, 4, 5];
+                $rowNum = 1;
+
+                while ($row = mysqli_fetch_row($result)) {
+                    for($i = 0 ; $i < 3; $i++){
+                        $cell = $cols[$i].(string)$rowNum;
+                        $sheet->setCellValue($cell, $row[$colsNum[$i]]);
+                    }
+                    $rowNum++;
+                }
+                $writer = new Xlsx($spreadsheet);
+                $writer->save('excel/export' . $start . '.xlsx');
+            }
+
+            $start += 50;
+            $end += 50;
+        }
+
+        dd('done');
+    }
 }
+
+
