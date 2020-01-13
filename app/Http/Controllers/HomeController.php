@@ -2458,6 +2458,7 @@ class HomeController extends Controller
                         $cell = $cols[$i].(string)$rowNum;
                         $sheet->setCellValue($cell, $row[$colsNum[$i]]);
                     }
+//                    $sheet->setCellValue($cell, $row[$colsNum[$i]]);
                     $rowNum++;
                 }
                 $writer = new Xlsx($spreadsheet);

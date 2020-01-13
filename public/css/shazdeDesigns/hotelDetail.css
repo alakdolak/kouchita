@@ -13,6 +13,59 @@ body {
     background: #e5e5e5;
 }
 
+.mapSetting {
+    display: flex;
+    position: absolute;
+    width: 98%;
+    margin-right: 1%;
+    bottom: 40px;
+    direction: rtl;
+    right: 20px;
+}
+
+.closeShowMainMap{
+    width: 15%;
+    height: 48%;
+    float: left;
+    transform: scaleX(1);
+}
+
+.mapSetting > div:nth-child(1) {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    position: static;
+    background-color: #30b4a6;
+    width: 13%;
+    cursor: pointer;
+}
+
+.mapSetting > div:nth-child(1) h1 {
+    color: white;
+    font-size: 120%;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+.disableSettingArrow{
+    transform: scaleX(-1) !important;
+}
+
+.mapSetting > div:nth-child(2) {
+    width: 40%;
+    display: inline-block;
+    background-color: ghostwhite;
+    padding: 0.5% 0;
+    height: 50px;
+}
+.mapSetting > div:nth-child(2) img{
+    cursor: pointer;
+    width: 9%;
+    height: 100%;
+    margin-right: 1%;
+}
+
 .inputBox textarea {
     outline: none;
 }

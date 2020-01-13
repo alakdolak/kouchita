@@ -8,7 +8,6 @@ use App\models\ConfigModel;
 use App\models\DefaultPic;
 use App\models\LogModel;
 use App\models\MahaliFood;
-use App\models\MahaliFoodDiet;
 use App\models\Place;
 use App\models\PlaceStyle;
 use App\models\SectionPage;
@@ -120,11 +119,10 @@ class MahaliFoodController extends Controller
         else
             $place->hotOrCold = 'سرد';
 
-        $place->diet = MahaliFoodDiet::where('mahaliFoodId', $place->id)->first();
-        if($place->diet->gram == 1)
-            $place->diet->source = 'گرم';
+        if($place->gram == 1)
+            $place->source = 'گرم';
         else
-            $place->diet->source = 'قاشق غذاخوری';
+            $place->source = 'قاشق غذاخوری';
 
         $allState = State::all();
 
