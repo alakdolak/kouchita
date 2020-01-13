@@ -65,7 +65,7 @@
             @include('layouts.header1Phone')
         </div>
 
-        <div class="page" ng-app="mainApp">
+{{--        <div class="page" ng-app="mainApp">--}}
             <div class="ppr_rup ppr_priv_homepage_hero ">
                 <div id="homeHero-id" class="homeHero default_home">
                     <div class="ui_container container" id="mainDivContainerMainPage">
@@ -73,7 +73,7 @@
                             <div class="placement_wrap_row">
                                 <div class="placement_wrap_cell">
                                     {{--<div id="sliderBarDIV" class="ppr_rup ppr_priv_trip_search hideOnPhone">--}}
-                                    <div class="ppr_rup ppr_priv_trip_search hideOnPhone mainBannerSlider">
+                                    <div class="ppr_rup ppr_priv_trip_search mainBannerSlider">
                                         <!-- Swiper -->
                                         <div id="mainSlider" class="swiper-container">
                                             <div class="swiper-wrapper">
@@ -94,152 +94,14 @@
                                             <div class="swiper-button-next"></div>
                                             <div class="swiper-button-prev"></div>
                                         </div>
-                                        @if($placeMode == 'mainPage')
-                                            <div class="ui_columns datepicker_box trip_search metaDatePicker rounded_lockup usePickerTypeIcons preDates noDates with_children hideOnPhone mainDivSearchInputMainPage">
-                                                <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column is-4 search_typeahead wctx-tripsearch searchDivForScroll" style="border-radius: 10px !important;">
-                                                    <div onclick="$('#searchPane').removeClass('hidden');  $('#darkModeMainPage').toggle();">به کجا می‌روید؟</div>
-                                                </div>
-                                                <div class="clear-both"></div>
-                                                {{--<div class="ui_column" style="width: 35%;padding: 10px !important;float: right;border-radius:  0 10px 10px 0;">--}}
-                                                {{--<div class="ui_picker" style="color: #b7b7b7 !important;">--}}
-                                                {{--<label id="calendar-container-edit-1placeDate" class="dateLabel">--}}
-                                                {{--<span class="ui_icon calendar" style="color: #30b4a6 !important; font-size: 20px; line-height: 32px; position: absolute; right: 7px;"></span>--}}
-                                                {{--<input name="date" id="date_input1" type="text" onclick="assignDate('{{convertStringToDate(getToday()["date"])}}', 'calendar-container-edit-1placeDate', 'date_input1')" class="inputDateLabel" placeholder="تاریخ رفت" required readonly>--}}
-                                                {{--</label>--}}
-                                                {{--<label id="calendar-container-edit-2placeDate" class="dateLabel" style="margin-right: 14px !important;">--}}
-                                                {{--<span class="ui_icon calendar" style="color: #30b4a6 !important; font-size: 20px; line-height: 32px; position: absolute; right: 7px;"></span>--}}
-                                                {{--<input name="date" id="date_input2" type="text" onclick="assignDate('{{convertStringToDate(getToday()["date"])}}', 'calendar-container-edit-2placeDate', 'date_input2')" class="inputDateLabel" placeholder="تاریخ برگشت" required readonly>--}}
-                                                {{--</label>--}}
-                                                {{--</div>--}}
-                                                {{--</div>--}}
-                                                {{--<div class="ui_column" style="min-width: 15%; max-width: 40%; float: right;border-radius:  10px 0 0 10px;">--}}
-                                                {{--<div class="ui_picker" style="padding: 4px 0 0 0;">--}}
-                                                {{--<span class="ui_icon friends pickerType" style="margin: 0 !important;float: right"></span>--}}
-                                                {{--<div style="float: right;">--}}
-                                                {{--<span style="float:right; margin-right: 5px">نفر</span>--}}
-                                                {{--<div style="float: left; margin-right: 35px">--}}
-                                                {{--<div onclick="changePassengersNo(1)" class="minusPlusBtn" style="background-position: -1px -6px;"></div>--}}
-                                                {{--<span id="passengerNoSelect"></span>--}}
-                                                {{--<div onclick="changePassengersNo(-1)" class="minusPlusBtn" style="background-position: -18px -6px;"></div>--}}
-                                                {{--</div>--}}
-                                                {{--</div>--}}
-                                                {{--</div>--}}
-                                                {{--</div>--}}
-                                                {{--<div class="clear-both"></div>--}}
+                                        <div class="ui_columns datepicker_box trip_search metaDatePicker rounded_lockup usePickerTypeIcons preDates noDates with_children mainDivSearchInputMainPage">
+                                            <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column is-4 search_typeahead wctx-tripsearch searchDivForScrollClass mainSearchDivPcSize">
+                                                <div onclick="$('#searchPane').removeClass('hidden');  $('#darkModeMainPage').toggle();">به کجا می‌روید؟</div>
                                             </div>
-                                        @elseif($placeMode == "hotel")
-                                            <div class="ui_columns datepicker_box trip_search metaDatePicker rounded_lockup usePickerTypeIcons preDates noDates with_children hideOnPhone mainDivSearchInputMainPage">
-                                                <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column is-4 search_typeahead wctx-tripsearch searchDivForScroll">
-                                                    <div class="ui_picker">
-                                                        <span class="typeahead_align ui_typeahead">
-                                                            <input onkeyup="search(event)" type="text" id="placeName" class="typeahead_input" placeholder="شهر یا نام هتل"/>
-                                                            <input type="hidden" id="placeId">
-                                                            <span class="ui_icon map-pin-fill pickerType typeahead_icon"></span>
-                                                        </span>
-                                                        <div id="result" class="data_holder"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="is-2 prw_rup prw_common_form_submit ui_column submit_wrap searchDivForScroll-button" id="firstPageSearchBtn">
-                                                    <button onclick="redirect()" class="autoResize form_submit ">
-                                                        <span class="ui_icon search submit_icon"></span>
-                                                        <span onclick="window.location = '{{route('main', ['mode' => 'hotel'])}}'" class="submit_text">جستجو هتل</span>
-                                                    </button>
-                                                    <span class="ui_loader dark fill"></span>
-                                                </div>
-                                                <div class="clear-both"></div>
-                                                {{--<div class="ui_column" style="width: 35%;padding: 10px !important;float: right;border-radius:  0 10px 10px 0;">--}}
-                                                    {{--<div class="ui_picker" style="color: #b7b7b7 !important;">--}}
-                                                        {{--<label id="calendar-container-edit-1placeDate" class="dateLabel">--}}
-                                                            {{--<span class="ui_icon calendar" style="color: #30b4a6 !important; font-size: 20px; line-height: 32px; position: absolute; right: 7px;"></span>--}}
-                                                            {{--<input name="date" id="date_input1" type="text" onclick="assignDate('{{convertStringToDate(getToday()["date"])}}', 'calendar-container-edit-1placeDate', 'date_input1')" class="inputDateLabel" placeholder="تاریخ رفت" required readonly>--}}
-                                                        {{--</label>--}}
-                                                        {{--<label id="calendar-container-edit-2placeDate" class="dateLabel" style="margin-right: 14px !important;">--}}
-                                                            {{--<span class="ui_icon calendar" style="color: #30b4a6 !important; font-size: 20px; line-height: 32px; position: absolute; right: 7px;"></span>--}}
-                                                            {{--<input name="date" id="date_input2" type="text" onclick="assignDate('{{convertStringToDate(getToday()["date"])}}', 'calendar-container-edit-2placeDate', 'date_input2')" class="inputDateLabel" placeholder="تاریخ برگشت" required readonly>--}}
-                                                        {{--</label>--}}
-                                                    {{--</div>--}}
-                                                {{--</div>--}}
-                                                {{--<div class="ui_column" style="min-width: 15%; max-width: 40%; float: right;border-radius:  10px 0 0 10px;">--}}
-                                                    {{--<div class="ui_picker" style="padding: 4px 0 0 0;">--}}
-                                                        {{--<span class="ui_icon friends pickerType" style="margin: 0 !important;float: right"></span>--}}
-                                                        {{--<div style="float: right;">--}}
-                                                            {{--<span style="float:right; margin-right: 5px">نفر</span>--}}
-                                                            {{--<div style="float: left; margin-right: 35px">--}}
-                                                                {{--<div onclick="changePassengersNo(1)" class="minusPlusBtn" style="background-position: -1px -6px;"></div>--}}
-                                                                {{--<span id="passengerNoSelect"></span>--}}
-                                                                {{--<div onclick="changePassengersNo(-1)" class="minusPlusBtn" style="background-position: -18px -6px;"></div>--}}
-                                                            {{--</div>--}}
-                                                        {{--</div>--}}
-                                                    {{--</div>--}}
-                                                {{--</div>--}}
-                                                <div class="clear-both"></div>
-                                            </div>
-                                        @elseif($placeMode == "restaurant")
-                                            <div class="ui_columns datepicker_box trip_search metaDatePicker rounded_lockup usePickerTypeIcons preDates noDates with_children hideOnPhone mainDivSearchInputMainPage">
-                                                <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column is-4 search_typeahead wctx-tripsearch searchDivForScroll">
-                                                    <div class="ui_picker">
-                                                        <span class="typeahead_align ui_typeahead">
-                                                            <input onkeyup="search(event)" type="text" id="placeName" class="typeahead_input" placeholder="شهر یا نام رستوران"/>
-                                                            <input type="hidden" id="placeId">
-                                                            <span class="ui_icon map-pin-fill pickerType typeahead_icon"></span>
-                                                        </span>
-                                                        <div id="result" class="data_holder"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="is-2 prw_rup prw_common_form_submit ui_column submit_wrap searchDivForScroll-button">
-                                                    <button onclick="redirect()" class="autoResize form_submit ">
-                                                        <span class="ui_icon search submit_icon"></span>
-                                                        <span class="submit_text">جستجو رستوران</span>
-                                                    </button>
-                                                    <span class="ui_loader dark fill"></span>
-                                                </div>
-                                                <div class="clearboth"></div>
-                                            </div>
-                                        @elseif($placeMode == "tour")
-                                            <div class="ui_columns datepicker_box trip_search metaDatePicker rounded_lockup usePickerTypeIcons preDates noDates with_children hideOnPhone mainDivSearchInputMainPage">
-                                                <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column is-4 search_typeahead wctx-tripsearch searchDivForScroll">
-                                                    <div class="ui_picker">
-                                                                <span class="typeahead_align ui_typeahead">
-                                                                    <input onkeyup="search(event)" type="text" id="placeName" class="typeahead_input" placeholder="شهر یا نام رستوران"/>
-                                                                    <input type="hidden" id="placeId">
-                                                                    <span class="ui_icon map-pin-fill pickerType typeahead_icon"></span>
-                                                                </span>
-                                                        <div id="result" class="data_holder"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="is-2 prw_rup prw_common_form_submit ui_column submit_wrap searchDivForScroll-button">
-                                                    <button onclick="redirect()" class="autoResize form_submit ">
-                                                        <span class="ui_icon search submit_icon"></span>
-                                                        <span class="submit_text">جستجو رستوران</span>
-                                                    </button>
-                                                    <span class="ui_loader dark fill"></span>
-                                                </div>
-                                                <div class="clear-both"></div>
-                                            </div>
-                                        @else
-                                            <div class="ui_columns datepicker_box trip_search metaDatePicker rounded_lockup usePickerTypeIcons preDates noDates with_children hideOnPhone mainDivSearchInputMainPage">
-                                                <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column is-4 search_typeahead wctx-tripsearch searchDivForScroll">
-                                                    <div class="ui_picker">
-                                                                <span class="typeahead_align ui_typeahead">
-                                                                    <input onkeyup="search(event)" type="text" id="placeName" class="typeahead_input" placeholder="شهر یا نام مکان موردنظر"/>
-                                                                    <input type="hidden" id="placeId">
-                                                                    <span class="ui_icon map-pin-fill pickerType typeahead_icon"></span>
-                                                                </span>
-                                                        <div id="result" class="data_holder"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="is-2 prw_rup prw_common_form_submit ui_column submit_wrap searchDivForScroll-button">
-                                                    <button onclick="redirect()" class="autoResize form_submit ">
-                                                        <span class="ui_icon search submit_icon"></span>
-                                                        <span class="submit_text">جستجو اماکن</span>
-                                                    </button>
-                                                    <span class="ui_loader dark fill"></span>
-                                                </div>
-                                                <div class="clear-both"></div>
-                                            </div>
-                                        @endif
+                                            <div class="clear-both"></div>
+                                        </div>
                                     </div>
-                                    <div class="ppr_rup ppr_priv_trip_search hideOnScreen">
+                                    <div class="ppr_rup ppr_priv_trip_search display-none hideOnScreen">
                                         <!-- Swiper -->
                                         <div id="mainSlider" class="swiper-container">
                                             <div class="swiper-wrapper">
@@ -311,7 +173,8 @@
                                             </div>
                                         @elseif($placeMode == "restaurant")
                                             <div class="trip_search rounded_lockup usePickerTypeIcons hideOnScreen mainDivSearchInputPhonePage">
-                                                <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column" onclick="$('#phoneSearchPopUp').removeClass('hidden')">
+                                                <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column"
+                                                     onclick="$('#searchPane').removeClass('hidden');  $('#darkModeMainPage').toggle();">
                                                     <div class="ui_picker">
                                                                 <span class="typeahead_align ui_typeahead">
                                                                     <input onkeyup="search(event)" type="text" id="placeName" class="typeahead_input" placeholder="شهر یا نام رستوران"/>
@@ -330,7 +193,8 @@
                                             </div>
                                         @elseif($placeMode == "tour")
                                             <div class="trip_search rounded_lockup usePickerTypeIcons hideOnScreen mainDivSearchInputPhonePage">
-                                                <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column" onclick="$('#phoneSearchPopUp').removeClass('hidden')">
+                                                <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column"
+                                                     onclick="$('#searchPane').removeClass('hidden');  $('#darkModeMainPage').toggle();">
                                                     <div class="ui_picker">
                                                         <span class="typeahead_align ui_typeahead">
                                                             <input onkeyup="search(event)" type="text" id="placeName" class="typeahead_input" placeholder="شهر یا نام رستوران"/>
@@ -349,7 +213,8 @@
                                             </div>
                                         @else
                                             <div class="trip_search rounded_lockup usePickerTypeIcons hideOnScreen mainDivSearchInputPhonePage">
-                                                <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column" onclick="$('#phoneSearchPopUp').removeClass('hidden')" style="border-radius: 10px">
+                                                <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column"
+                                                     onclick="$('#searchPane').removeClass('hidden');  $('#darkModeMainPage').toggle();" style="border-radius: 10px">
                                                     <div class="ui_picker" >
                                                         <span class="typeahead_align ui_typeahead">
                                                             <input onkeyup="search(event)" type="text" class="typeahead_input" placeholder="به کجا می‌روید؟!"/>
@@ -368,11 +233,11 @@
                 </div>
             </div>
             @include('layouts.middleBanner')
-        </div>
+{{--        </div>--}}
 
-        <div class="hideOnPhone">
+{{--        <div class="hideOnPhone">--}}
             @include('layouts.placeFooter')
-        </div>
+{{--        </div>--}}
 
         @if(!Auth::check())
             @include('layouts.loginPopUp')
