@@ -10,9 +10,9 @@
 #my-trips-not {
     display: none;
     bottom: auto;
-    left: 150px;
+    left: 126px;
     position: absolute;
-    top: 35px
+    top: 40px
 }
 
 #masthead-recent {
@@ -65,18 +65,19 @@
     content: '';
     position: absolute;
     left: 24px;
-    top: -10px;
+    top: -15px;
     margin-left: -10px;
     width: 0;
     height: 0;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-bottom: 10px solid #fff;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 15px solid #f9f9f9;
     -webkit-filter: drop-shadow(0 0 0 #b7b7b7);
     filter: drop-shadow(0 0 0 #b7b7b7);
     box-shadow: 0 0 0 #b7b7b7 \9;
     -webkit-filter: drop-shadow(0 0 0 #999);
-    filter: drop-shadow(0 0 0 #999);
+    filter: drop-shadow(0 1px 0 #999);
+    z-index: 10;
 }
 
 #bookmarkmenu {

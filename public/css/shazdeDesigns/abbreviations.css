@@ -60,6 +60,10 @@
 
 /*generals*/
 
+.overflow-auto {
+    overflow: auto;
+}
+
 .overflow-hidden {
     overflow: hidden;
 }
@@ -373,6 +377,10 @@
 /*margin top*/
 
 .mg-tp-0 {
+    margin-top: 0;
+}
+
+.mg-tp-0Imp {
     margin-top: 0 !important;
 }
 

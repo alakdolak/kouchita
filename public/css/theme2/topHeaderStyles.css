@@ -109,7 +109,7 @@
 }
 
 /*in Phone*/
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 767px) {
     .hideOnPhone {
         display: none;
         width: 0;
@@ -117,7 +117,7 @@
     }
 }
 /*in Screen*/
-@media only screen and (min-width:601px) {
+@media only screen and (min-width:768px) {
     .hideOnScreen {
         display: none;
         width: 0;
