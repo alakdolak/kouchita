@@ -212,8 +212,8 @@
 
                 <span class="ui_button_overlay position-relative float-left">
                     <div id="targetHelp_7" class="targets position-relative float-right">
-                        <span onclick="saveToTrip()" id="addToFavouriteTripsMainDiv" class="ui_button saves ui_icon {{($save) ? "red-heart-fill" : "red-heart"}} ">
-                            <div class="circleBase type2 addToFavouriteTripsIcon"></div>
+                        <span onclick="saveToTrip()" id="addToFavouriteTripsMainDiv" class="ui_button saves ui_icon">
+                            <div class="circleBase type2 addToFavouriteTripsIcon {{($save) ? "red-heart-fill" : "red-heart"}}"></div>
                             <div class="addToFavouriteTripsLabel">
                                 افزودن به لیست سفر
                             </div>
@@ -232,13 +232,13 @@
                     </div>
 {{--                            @if($hasLogin)--}}
                         <div id="targetHelp_8" class="targets float-left col-xs-6 pd-0 mobile-mode">
-                                    <span onclick="bookMark()"
-                                          class="ui_button casino save-location-7306673 ui_icon saveAsBookmarkMainDiv {{($bookMark) ? "castle" : "red-heart"}} ">
-                                        <div class="saveAsBookmarkIcon"></div>
-                                        <div class="saveAsBookmarkLabel">
-                                            ذخیره این صفحه
-                                        </div>
-                                    </span>
+                                <span onclick="bookMark()"
+                                      class="ui_button save-location-7306673 saveAsBookmarkMainDiv">
+                                    <div class="saveAsBookmarkIcon {{($bookMark) ? "castle-fill" : "castle"}} "></div>
+                                    <div class="saveAsBookmarkLabel">
+                                        ذخیره این صفحه
+                                    </div>
+                                </span>
                                 <div id="helpSpan_8" class="helpSpans hidden row">
                                     <span class="introjs-arrow"></span>
                                     <p>شاید بعدا بخواهید دوباره به همین مکان باز گردید. پس آن را نشان کنید تا از منوی بالا هر وقت که خواستید دوباره به آن باز گردید.</p>
@@ -291,8 +291,8 @@
                             </div>
                         </div>
                         <div id="share_pic_mobile" class="targets float-left col-xs-6 pd-0">
-                            <span class="ui_button casino save-location-7306673 ui_icon sharePageMainDiv">
-                                <div class="sharePageIcon"></div>
+                            <span class="ui_button save-location-7306673 sharePageMainDiv" onclick="toggleShareIcon(this)">
+                                <div class="sharePageIcon first"></div>
                                 <div class="sharePageLabel">
                                     اشتراک‌گذاری صفحه
                                 </div>
@@ -355,6 +355,11 @@
 
 
 <script>
+
+    function toggleShareIcon(elmt) {
+        $(elmt).children('div.first').toggleClass('sharePageIcon');
+        $(elmt).children('div.first').toggleClass('sharePageIconFill');
+    }
 
     $('#share_pic_mobile').click(function () {
         if ($('#share_box_mobile').is(":hidden")) {

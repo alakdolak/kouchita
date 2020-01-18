@@ -3,6 +3,11 @@ body {
     min-width: 320px;
 }
 
+textarea:focus, input:focus, select:focus, button:focus, a:focus,
+textarea, input, select, button, a {
+    outline: none;
+}
+
 .greyBackground {
     content: '';
     position: absolute;
@@ -109,7 +114,15 @@ DIV.ppr_rup.ppr_priv_hr_atf_north_star_nostalgic .atf_meta_and_photos_wrapper::b
 }
 
 .castle:before {
-    color: #963019;
+    content: "\e0dd";
+    font-family: Shazde_Regular2 !important;
+    float: right;
+}
+
+.castle-fill::before {
+    content: "\E0DE";
+    font-family: Shazde_Regular2 !important;
+    float: right;
 }
 
 #PAGE {
@@ -387,7 +400,7 @@ p {
     float: right;
 }
 
-.mainInfo{
+.mainInfo {
     border-width: 0 1px 0 0;
     border-style: solid;
     border-color: #e5e5e5;
@@ -527,6 +540,17 @@ p {
     top: 7px;
     font-size: 0.8em;
     color: gray;
+}
+
+DIV.prw_rup.prw_common_mercury_photo_carousel .bignav .right-nav {
+    left: auto;
+    opacity: 0.8;
+    top: 20px;
+}
+
+DIV.prw_rup.prw_common_mercury_photo_carousel .bignav .left-nav {
+    opacity: 0.8;
+    top: 200px;
 }
 
 /*end of style of chek box*/
@@ -1518,14 +1542,14 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
 /*new ver styles*/
 
-#bestPrice::before , #bestPrice::after {
+#bestPrice::before, #bestPrice::after {
     display: none;
 }
 
 #bestPriceInnerDiv {
     background: black;
     border: 10px solid #4DC7BC;
-    box-shadow: 0 2px 4px 0  rgba(0, 0, 0, .1);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .1);
 }
 
 #bestPrice {
@@ -1534,22 +1558,19 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
 #addToFavouriteTripsMainDiv {
     background: #0076a3;
-    color:white;
+    color: white;
     padding: 5px 20px;
     border-radius: 10px;
 }
 
 .circleBase {
     border-radius: 50%;
-    /*behavior: url(PIE.htc); !* remove if you don't care about IE8 *!*/
 }
 
 .type2 {
     width: 20px;
     height: 20px;
     background: #ccc;
-    /*border: 3px solid #000;*/
-    /*position: absolute;*/
 }
 
 #addToFavouriteTripsMainDiv::before {
@@ -1566,14 +1587,14 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 }
 
 /*.addToFavouriteTripsIcon::before {*/
-    /*!*content: '\e011';*!*/
-    /*color: #ff0000;*/
-    /*float: right;*/
-    /*font-family: Shazde_Regular2 !important;*/
-    /*font-size: 20px;*/
-    /*margin-top: 3px;*/
+/*!*content: '\e011';*!*/
+/*color: #ff0000;*/
+/*float: right;*/
+/*font-family: Shazde_Regular2 !important;*/
+/*font-size: 20px;*/
+/*margin-top: 3px;*/
 /*}*/
-.red-heart::before{
+.red-heart::before {
     content: '\e011' !important;
     color: #ff0000 !important;
     float: right;
@@ -1581,7 +1602,8 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     font-size: 20px;
     margin-top: 3px;
 }
-.red-heart-fill::before{
+
+.red-heart-fill::before {
     content: '\e012' !important;
     color: #ff0000 !important;
     float: right;
@@ -1594,30 +1616,34 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     margin-right: 10px;
 }
 
-.saveAsBookmarkMainDiv , .sharePageMainDiv {
+.saveAsBookmarkMainDiv, .sharePageMainDiv {
     padding: 5px 20px;
     background: #c3c3c3 !important;
     margin-top: 10px;
     border-radius: 10px;
 }
 
-.saveAsBookmarkMainDiv > div , .sharePageMainDiv > div {
+.saveAsBookmarkMainDiv > div, .sharePageMainDiv > div {
     display: inline-block;
     float: right;
 }
 
 .sharePageIcon::before {
-    content: '\e099' !important;
-    transform: rotateY(180deg);
-    font-size: 20px;
+    content: '\e1f5' !important;
+    font-family: Shazde_Regular2 !important;
+    font-size: 18px;
     position: absolute;
-    right: 15px;
+    right: 33px;
+    top: 4px;
 }
 
-.saveAsBookmarkIcon::before , .sharePageIcon::before {
-    content: "\e0dd";
+.sharePageIconFill::before {
+    content: '\e1f6' !important;
     font-family: Shazde_Regular2 !important;
-    float: right;
+    font-size: 18px;
+    position: absolute;
+    right: 33px;
+    top: 4px;
 }
 
 .saveAsBookmarkLabel {
@@ -1628,7 +1654,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     margin-right: 20px;
 }
 
-.ui_icon.casino::before , .ui_icon.casino::before {
+.ui_icon.casino::before, .ui_icon.casino::before {
     display: none;
 }
 
@@ -1642,7 +1668,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     left: 5px;
     cursor: pointer;
     color: white;
-    background-color: rgba(0,0,139,0.6);
+    background-color: rgba(0, 0, 139, 0.6);
     /*opacity: 60%;*/
     border-radius: 10px;
     padding: 5px;
@@ -1671,7 +1697,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     font-size: 32px;
     position: absolute;
     top: -6px;
-    right: 12px;
+    right: 11px;
 }
 
 #helpBtnMainDiv > a > b {
@@ -1700,7 +1726,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     float: right;
 }
 
-.see_all_count  {
+.see_all_count {
     padding: 5px 15px !important;
     background: rgba(0, 0, 0, 0.5);
 }
@@ -1722,7 +1748,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     border-top: none;
 }
 
-#searchBoxTopPageMainDiv > div , #searchBoxTopPageMainDiv > span {
+#searchBoxTopPageMainDiv > div, #searchBoxTopPageMainDiv > span {
     display: inline-block;
     float: right;
     position: relative;
@@ -1754,8 +1780,8 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 }
 
 .styled-select {
-    -moz-appearance:none; /* Firefox */
-    -webkit-appearance:none; /* Safari and Chrome */
+    -moz-appearance: none; /* Firefox */
+    -webkit-appearance: none; /* Safari and Chrome */
     /*height: 30px;*/
 }
 
@@ -1796,7 +1822,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     text-align: right;
 }
 
-.postMainDivHeader , .postMainDivFooter {
+.postMainDivHeader, .postMainDivFooter {
     background-color: #0076a3;
     color: white;
     font-weight: 700;
@@ -1826,7 +1852,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     text-align: center;
 }
 
-.profilePicForPost , .profilePicForPostModal {
+.profilePicForPost, .profilePicForPostModal {
     position: absolute;
     top: 10px;
     right: 15px;
@@ -1834,7 +1860,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     height: 50px;
 }
 
-.postInputBox , .postInputBoxModal {
+.postInputBox, .postInputBoxModal {
     width: 100%;
     border-radius: 0;
     background: white;
@@ -1847,14 +1873,14 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     border: none;
 }
 
-.commentSmileyIcon , .answerSmileyIcon {
+.commentSmileyIcon, .answerSmileyIcon {
     position: absolute;
     left: 15px;
     bottom: 10px;
     cursor: pointer;
 }
 
-.postInputBox > textarea , .postInputBoxModal > textarea {
+.postInputBox > textarea, .postInputBoxModal > textarea {
     text-align: justify;
     font-size: 15px;
     font-weight: 600;
@@ -1913,7 +1939,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     font-weight: 500;
 }
 
-.addVideoCommentIcon{
+.addVideoCommentIcon {
     position: absolute;
     right: 2px;
     top: -5px;
@@ -1926,7 +1952,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     font-weight: 500;
 }
 
-.add360VideoCommentIcon{
+.add360VideoCommentIcon {
     position: absolute;
     right: 34px;
     top: -8px;
@@ -1939,7 +1965,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     font-weight: 500;
 }
 
-.tagFriendCommentIcon{
+.tagFriendCommentIcon {
     position: absolute;
     right: 32px;
     top: -7px;
@@ -1977,7 +2003,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 /*    border-left: 1px solid #e5e5e5;*/
 /*}*/
 
-.generalDescription .block_header , .rating .block_header {
+.generalDescription .block_header, .rating .block_header {
     padding: 10px 0;
     border-bottom: 1px solid #e5e5e5;
     position: relative;
@@ -1987,7 +2013,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     font-size: 20px !important;
 }
 
-.generalDescription .block_title , .rating .block_title {
+.generalDescription .block_title, .rating .block_title {
     position: absolute;
     background: white;
     font-size: 22px !important;
@@ -2012,6 +2038,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     font-weight: 700;
     padding: 30px 0;
     border-bottom: 5px solid #666666;
+    outline: none;
 }
 
 .tabLink:nth-child(2) {
@@ -2068,11 +2095,11 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     padding: 5px 10px;
 }
 
-.answersActionsIcon , .commentActionsIcon {
+.answersActionsIcon, .commentActionsIcon {
     position: relative;
 }
 
-.answersActionsIcon::before , .commentActionsIcon::before {
+.answersActionsIcon::before, .commentActionsIcon::before {
     content: '\E091';
     font-family: shazdemosafer-tour !important;
     font-size: 35px;
@@ -2126,7 +2153,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 }
 
 .morePhotoLinkPosts {
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0, 0, 0, 0.5);
     color: white;
     text-align: center;
     font-size: 20px;
@@ -2150,7 +2177,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     color: #666666;
 }
 
-.quantityOfLikes > span , .feedbackStatistic > span {
+.quantityOfLikes > span, .feedbackStatistic > span {
     color: #0076a3;
 }
 
@@ -2223,7 +2250,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     float: right;
 }
 
-.postLikeChoice , .postDislikeChoice , .postCommentChoice , .postShareChoice {
+.postLikeChoice, .postDislikeChoice, .postCommentChoice, .postShareChoice {
     display: inline-block;
     cursor: pointer;
 }
@@ -2442,7 +2469,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
 .commentsStatisticSpan {
     display: inline-block;
-    margin-left: 25px;
+    margin-left: 30px;
     font-size: 14px;
     position: relative;
 }
@@ -2454,7 +2481,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     float: right;
     position: absolute;
     top: -10px;
-    right: 10px;
+    right: 5px;
 }
 
 .dislikeStatisticIcon::before {
@@ -2464,7 +2491,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     float: right;
     position: absolute;
     top: -6px;
-    right: 10px;
+    right: 5px;
 }
 
 .numberOfCommentsIcon::before {
@@ -2474,13 +2501,24 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     float: right;
     position: absolute;
     top: -2px;
-    right: 12px;
+    right: 9px;
 }
 
-.newCommentPlaceMainDiv , .answerPlaceMainDiv , .newAnswerPlaceMainDiv {
+.newCommentPlaceMainDiv, .answerPlaceMainDiv, .newAnswerPlaceMainDiv {
     margin: 10px 0 5px;
     display: inline-block;
     width: 100%;
+}
+
+.newCommentPlaceMainDiv button, .replyToCommentMainDiv button {
+    float: left;
+    margin-bottom: 8px;
+}
+
+.newCommentWriterProfilePic > img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
 }
 
 .replyToCommentMainDiv {
@@ -2489,7 +2527,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     margin: 30px 0 15px;
 }
 
-.newCommentWriterProfilePic , .answerWriterProfilePic , .newAnswerWriterProfilePic {
+.newCommentWriterProfilePic, .answerWriterProfilePic, .newAnswerWriterProfilePic {
     display: inline-block;
     width: 45px;
     height: 45px;
@@ -2497,7 +2535,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     margin-left: 5px;
 }
 
-.newCommentPlaceMainDiv .inputBox , .newAnswerPlaceMainDiv .inputBox {
+.newCommentPlaceMainDiv .inputBox, .newAnswerPlaceMainDiv .inputBox {
     width: 90%;
     float: right;
     position: relative;
@@ -2509,7 +2547,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     position: relative;
 }
 
-.newCommentPlaceMainDiv .inputBoxInput , .newAnswerPlaceMainDiv .inputBoxInput {
+.newCommentPlaceMainDiv .inputBoxInput, .newAnswerPlaceMainDiv .inputBoxInput {
     text-align: right;
     font-size: 12px;
     border: none;
@@ -2523,7 +2561,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     height: 39px;
 }
 
-.newCommentPlaceMainDiv textarea , .newAnswerPlaceMainDiv textarea {
+.newCommentPlaceMainDiv textarea, .newAnswerPlaceMainDiv textarea {
     text-align: right;
     margin-top: 15px;
     height: 35px;
@@ -2532,7 +2570,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     float: right;
 }
 
-.replyToCommentMainDiv textarea  {
+.replyToCommentMainDiv textarea {
     text-align: right;
     margin-top: 15px;
     height: 35px;
@@ -2551,7 +2589,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     left: 7px;
 }
 
-.replyCommentTitle , .replyWriterUsername , .replyAnswerTitle {
+.replyCommentTitle, .replyWriterUsername, .replyAnswerTitle {
     color: #0076a3;
     position: absolute;
     top: 2px;
@@ -2561,7 +2599,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     cursor: default;
 }
 
-.newAnswerPlaceMainDiv{
+.newAnswerPlaceMainDiv {
     margin-top: 20px;
     border-top: 1px solid #E5E5E5;
     padding: 10px 0;
@@ -2583,7 +2621,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     margin-bottom: 10px;
 }
 
-.showPostsNumsFilter , .showQuestionsNumsFilter {
+.showPostsNumsFilter, .showQuestionsNumsFilter {
     background-color: #0076a3;
     padding: 5px;
     color: white;
@@ -2608,7 +2646,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     top: 7px !important;
 }
 
-.postsFiltersMainDiv .block_title , .QAndAMainDivHeader > h3,
+.postsFiltersMainDiv .block_title, .QAndAMainDivHeader > h3,
 .mainSuggestion .shelf_title_container h3 {
     font-size: 20px;
     font-weight: 700;
@@ -2622,7 +2660,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 }
 
 .filterHelpText {
-    display:inline-block;
+    display: inline-block;
     width: 100%;
     color: darkred;
     padding-bottom: 10px;
@@ -2660,7 +2698,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     justify-content: center;
 }
 
-.filterChoosed{
+.filterChoosed {
     background-color: #fcc156 !important;
 }
 
@@ -2685,12 +2723,12 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     color: #fcc156;
 }
 
-.commentRatingsFiltersChoices .overallBubbleRating > div , .commentRatingsDetailsBox .overallBubbleRating > div {
+.commentRatingsFiltersChoices .overallBubbleRating > div, .commentRatingsDetailsBox .overallBubbleRating > div {
     display: flex;
     justify-content: center;
 }
 
-.inputBoxSearchFilter  {
+.inputBoxSearchFilter {
     width: 100%;
     background: white;
     margin-top: 10px;
@@ -2719,7 +2757,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     padding-bottom: 10px;
 }
 
-.adsMainDiv >img {
+.adsMainDiv > img {
     width: 100%;
 }
 
@@ -2727,8 +2765,8 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     padding: 0;
 }
 
-.postLink , .postLink:hover , .showPostsNumsFilterLink , .showPostsNumsFilterLink:hover ,
-.showQuestionsNumsFilterLink , .showQuestionsNumsFilterLink:hover {
+.postLink, .postLink:hover, .showPostsNumsFilterLink, .showPostsNumsFilterLink:hover,
+.showQuestionsNumsFilterLink, .showQuestionsNumsFilterLink:hover {
     text-decoration: none;
     color: inherit;
 }
@@ -2743,7 +2781,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     top: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0, 0, 0, 0.5);
     z-index: 10;
     width: 100%;
     height: 100%;
@@ -2753,7 +2791,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     width: 753px;
 }
 
-.postModalMainDiv > .modal-dialog .modal-content , .postModalMainDiv > .modal-dialog .modal-details-content {
+.postModalMainDiv > .modal-dialog .modal-content, .postModalMainDiv > .modal-dialog .modal-details-content {
     border-radius: 0;
     border: none;
     -webkit-box-shadow: none;
@@ -2787,13 +2825,13 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 }
 
 .addParticipantSpan {
-    display:inline-block;
-    float:right;
+    display: inline-block;
+    float: right;
     padding: 2px 10px 0 0;
     font-size: 18px;
 }
 
-.commentPhotosDiv , .commentVideosDiv {
+.commentPhotosDiv, .commentVideosDiv {
     /*border: 1px solid black;*/
     /*background-color: black;*/
     display: inline-block;
@@ -2910,7 +2948,8 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     margin: 2px;
     text-align: left;
 }
-.assignedResult{
+
+.assignedResult {
     position: absolute;
     width: 100%;
     top: 35px;
@@ -2935,7 +2974,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     margin-top: 5px;
 }
 
-.modal-details-content .commentOptionsBoxes , .answerOptionsBoxes {
+.modal-details-content .commentOptionsBoxes, .answerOptionsBoxes {
     float: inherit;
 }
 
@@ -3005,7 +3044,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     width: 65%;
 }
 
-.visitKindCommentModal .filterChoices , .visitTimeCommentModal .filterChoices{
+.visitKindCommentModal .filterChoices, .visitTimeCommentModal .filterChoices {
     background-color: #e5e5e5;
     border-radius: 10px;
     text-align: center;
@@ -3015,17 +3054,19 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     display: inline-block;
     cursor: pointer;
 }
+
 /*.filterChoices:hover{*/
-    /*background-color: #989898;*/
+/*background-color: #989898;*/
 /*}*/
-.filterChoose{
+.filterChoose {
     background-color: #7b7b7b !important;
 }
-.multiSelectAns:hover{
+
+.multiSelectAns:hover {
     background-color: #989898;
 }
 
-.visitKindCommentModalHeader , .visitTimeCommentModalHeader{
+.visitKindCommentModalHeader, .visitTimeCommentModalHeader {
     display: inline-block;
     float: right;
     font-size: 14px;
@@ -3097,7 +3138,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     margin: 0 15px;
 }
 
-#editPane .abandon{
+#editPane .abandon {
     float: left;
 }
 
@@ -3163,7 +3204,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     font-size: 25px;
 }
 
-.starRatingGrey , .starRatingGold , .starRatingGreen , .starRating {
+.starRatingGrey, .starRatingGold, .starRatingGreen, .starRating {
     cursor: pointer;
 }
 
@@ -3241,8 +3282,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
 .answersBoxMainDiv {
     position: relative;
-    border-bottom: 1px solid
-    #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
     padding-top: 10px;
 }
 
@@ -3372,7 +3412,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     font-size: 14px;
 }
 
-.numberOfLikeAnswer , .likeAnswer:hover {
+.numberOfLikeAnswer, .likeAnswer:hover {
     color: red;
 }
 
@@ -3384,7 +3424,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     font-size: 20px;
 }
 
-.numberOfDislikeAnswer , .dislikeAnswer:hover {
+.numberOfDislikeAnswer, .dislikeAnswer:hover {
     color: darkred;
 }
 
@@ -3403,7 +3443,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     margin: 10px 20px 0 0;
 }
 
-.likeAnswer , .dislikeAnswer , .likeAnswerClicked , .dislikeAnswerClicked {
+.likeAnswer, .dislikeAnswer, .likeAnswerClicked, .dislikeAnswerClicked {
     position: relative;
     display: inline-block;
     width: 25px;
@@ -3514,9 +3554,9 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     margin-top: 40px !important;
 }
 
-    /*posts page styles*/
+/*posts page styles*/
 
-.postsMainFiltrationBar, .questionsMainFiltrationBar{
+.postsMainFiltrationBar, .questionsMainFiltrationBar {
     background-color: #eaeaea;
     color: #777777;
     padding: 10px 0;
@@ -3529,7 +3569,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     padding: 0;
 }
 
-.postsMainDivInSpecificMode  .postMainDivShown {
+.postsMainDivInSpecificMode .postMainDivShown {
     padding: 10px;
 }
 
@@ -3545,7 +3585,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     margin: 0;
 }
 
-.postsMainDivInSpecificMode , .commentPhotosShow{
+.postsMainDivInSpecificMode, .commentPhotosShow {
     border-bottom: none;
 }
 
@@ -3559,7 +3599,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 }
 
 .numberOfPhotosMainDiv {
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0, 0, 0, 0.5);
     position: absolute;
     bottom: 0;
     left: 15px;
@@ -3623,7 +3663,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     font-size: 15px;
 }
 
-.commentWriterExperiencePlace , .answersWriterExperiencePlace {
+.commentWriterExperiencePlace, .answersWriterExperiencePlace {
     color: #16174f;
     cursor: pointer;
 }
@@ -3652,7 +3692,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     border-top: 1px solid #E5E5E5;
 }
 
-.postMainDivShown , .postsFiltersMainDiv {
+.postMainDivShown, .postsFiltersMainDiv {
     float: right;
     direction: rtl;
     background: white;
@@ -3660,7 +3700,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     padding: 10px 20px;
 }
 
-.commentWriterExperienceParticipation , .userProfileName , .userProfileNameAnswers {
+.commentWriterExperienceParticipation, .userProfileName, .userProfileNameAnswers {
     color: #0076a3;
     cursor: pointer;
 }
@@ -3732,10 +3772,11 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     cursor: pointer;
 }
 
-.mainReviewPic{
+.mainReviewPic {
     height: 100%;
 }
-.topMainReviewPic{
+
+.topMainReviewPic {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -3746,7 +3787,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 .affix {
     top: 0;
     width: 100%;
-    z-index: 9999 !important;
+    z-index: 1000 !important;
     max-width: 1188px;
 }
 
@@ -3762,9 +3803,9 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     padding: 0;
 }
 
-#MAINWRAP .navbar-inverse .navbar-nav>.active>a,
-#MAINWRAP .navbar-inverse .navbar-nav>.active>a:focus,
-#MAINWRAP .navbar-inverse .navbar-nav>.active>a:hover {
+#MAINWRAP .navbar-inverse .navbar-nav > .active > a,
+#MAINWRAP .navbar-inverse .navbar-nav > .active > a:focus,
+#MAINWRAP .navbar-inverse .navbar-nav > .active > a:hover {
     color: #4dc7bc;
     background-color: white;
 }
@@ -3798,19 +3839,21 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     #detailsAndFeaturesMobile, #commentsAndAddressMobile {
         display: block !important;
     }
+
     .tabLinkMainWrapMainDivMobile {
         display: none;
     }
 }
+
 /*responsive for tablets*/
 
-@media only screen and (max-width:1187px) and (min-width: 1024px) {
+@media only screen and (max-width: 1187px) and (min-width: 1024px) {
     .tabLinkMainWrapMainDivPC {
         width: 976px;
     }
 }
 
-@media only screen and (max-width:1024px) and (min-width: 992px) {
+@media only screen and (max-width: 1024px) and (min-width: 992px) {
     .tabLinkMainWrapMainDivPC.affix {
         margin: 0 24px;
         right: 0;
@@ -3819,10 +3862,9 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     }
 }
 
-@media only screen and (max-width:1188px) and (min-width: 992px) {
+@media only screen and (max-width: 1188px) and (min-width: 992px) {
 
     /*bottomBarHeader*/
-
     #searchBoxTopPageMainDiv {
         left: 280px;
     }
@@ -3840,7 +3882,6 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     }
 
     /*new post*/
-
     .moreSettingPost {
         display: none;
     }
@@ -3933,7 +3974,6 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 @media only screen and (max-width: 991px) {
 
     /*bottomBarHeader*/
-
     .global-nav-bar-container {
         display: flex;
         justify-content: center;
@@ -3941,7 +3981,6 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     }
 
     DIV.ppr_rup.ppr_priv_global_nav .global-nav-single-line.has-links .global-nav-links,
-    DIV.ppr_rup.ppr_priv_global_nav .global-nav-bar-container .global-nav-actions,
     #searchBoxTopPageMainDiv {
         display: none;
     }
@@ -3997,7 +4036,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     }
 
     #helpBtnMainDiv {
-        top: -120px;
+        top: -112px;
         left: -15px;
         background-color: #4DC7BC;
     }
@@ -4019,12 +4058,11 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     }
 
     /*photoBar*/
-
     #bestPrice {
         display: none;
     }
 
-    .atf_meta_and_photos  .prw_rup.prw_common_location_photos.photos {
+    .atf_meta_and_photos .prw_rup.prw_common_location_photos.photos {
         width: 100%;
     }
 
@@ -4037,7 +4075,6 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     }
 
     /*new posts*/
-
     .postModalMainDiv > .modal-dialog {
         width: 100%;
     }
@@ -4052,7 +4089,6 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     }
 
     /*introduction bar*/
-
     .tabLinkMainWrapMainDivPC {
         display: none;
     }
@@ -4084,7 +4120,6 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     }
 
     /*mainWrap*/
-
     .adsMainDiv {
         display: none;
     }
@@ -4170,7 +4205,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     }
 }
 
-@media only screen and (min-width:768px) {
+@media only screen and (min-width: 768px) {
     .postsMainDivInSpecificMode > div:nth-child(1) {
         padding-right: 10px !important;
     }
@@ -4183,10 +4218,10 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     }
 }
 
-@media only screen and (max-width:768px) {
+@media only screen and (max-width: 768px) {
 
     #helpBtnMainDiv {
-        top: -100px;
+        top: -105px;
     }
 
     .atf_meta_and_photos.ui_container {
@@ -4213,7 +4248,6 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     }
 
     /*filter bar*/
-
     .filterBarDivs {
         display: none;
         padding: 0 10%;
@@ -4307,12 +4341,22 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     .participantDivMainDiv {
         width: 57%;
     }
+
+    DIV.ppr_rup.ppr_priv_global_nav .global-nav-links-container {
+        display: none;
+    }
+
+    .global-nav-bar.global-nav-green {
+        display: flex;
+        justify-content: center;
+        padding: 10px 0;
+    }
 }
 
-@media only screen and (max-width:630px) {
+@media only screen and (max-width: 630px) {
 
     /*bottomBarHeader*/
-    .replyToCommentMainDiv{
+    .replyToCommentMainDiv {
         width: 100%;
     }
 
@@ -4345,8 +4389,8 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
         padding-right: 5px;
     }
 
-    .sharePageIcon::before {
-        right: 2px;
+    .sharePageIcon::before, .sharePageIconFill::before {
+        right: 25px;
     }
 
     #share_box_mobile {
@@ -4362,7 +4406,6 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     }
 
     /*photoBar*/
-
     #targetHelp_10 > div:nth-child(1) > div:nth-child(1) {
         width: 100%;
         margin-bottom: 12px;
@@ -4374,7 +4417,6 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     }
 
     /*new post*/
-
     .postMainDiv {
         margin-top: 135px;
     }
@@ -4530,7 +4572,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     }
 }
 
-@media only screen and (max-width:480px) {
+@media only screen and (max-width: 480px) {
     DIV.prw_rup.prw_hotels_flexible_album_thumb .albumInfo {
         font-size: 10px;
     }
@@ -4585,8 +4627,8 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     }
 
     .tabLink {
-         font-size: 16px;
-         padding: 20px 0;
+        font-size: 16px;
+        padding: 20px 0;
     }
 
     .mobileIntroductionMainDiv #generalDescriptionMobile .block_title,
@@ -4731,7 +4773,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     }
 }
 
-@media only screen and (max-width:370px) {
+@media only screen and (max-width: 370px) {
     DIV.prw_rup.prw_hotels_flexible_album_thumb .albumInfo {
         font-size: 8px;
     }
@@ -4806,7 +4848,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     }
 
     .newCommentPlaceMainDiv .inputBox {
-         width: 82%;
+        width: 82%;
     }
 
     .commentsActionsBtns {
@@ -4876,5 +4918,21 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
     .answerBoxText {
         width: 68%;
+    }
+
+    .tabLinkMainWrapMainDiv > a, #MAINWRAP .tabLinkMainWrapMainDiv li:nth-child(1) {
+        width: 35%;
+    }
+
+    .tabLinkMainWrapMainDiv > a, #MAINWRAP .tabLinkMainWrapMainDiv li:nth-child(2) {
+        width: 20%;
+    }
+
+    .tabLinkMainWrapMainDiv > a, #MAINWRAP .tabLinkMainWrapMainDiv li:nth-child(3) {
+        width: 15%;
+    }
+
+    .tabLinkMainWrapMainDiv > a, #MAINWRAP .tabLinkMainWrapMainDiv li:nth-child(4) {
+        width: 30%;
     }
 }

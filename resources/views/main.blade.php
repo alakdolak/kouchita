@@ -196,8 +196,8 @@
                             @else
                                 <div class="visitSuggestionText">پر بازدیدترین های هفته</div>
                             @endif
-                            <div id="recentlyRow1" class="visitSuggestion4Box" style="flex-wrap: wrap">
-                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget spBoxOfSuggestion" ng-repeat="place in records1" style="width: 25%;">
+                            <div id="recentlyRow1" class="visitSuggestion4Box">
+                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget spBoxOfSuggestion" ng-repeat="place in records1">
                                     <div class="poi">
                                         <a href="[[place.placeRedirect]]" class="thumbnail">
                                             <div class="prw_rup prw_common_thumbnail_no_style_responsive">

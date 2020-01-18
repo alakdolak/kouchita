@@ -44,8 +44,8 @@
 {{--    <div id="share_pic"></div>--}}
 {{--</div>--}}
 <div id="share_pic" class="wideScreen targets float-left col-xs-6 pd-0">
-    <span class="ui_button casino save-location-7306673 ui_icon sharePageMainDiv">
-        <div class="sharePageIcon"></div>
+    <span class="ui_button save-location-7306673 sharePageMainDiv" onclick="toggleShareIcon(this)">
+        <div class="sharePageIcon first"></div>
         <div class="sharePageLabel">
             اشتراک‌گذاری صفحه
         </div>
@@ -60,6 +60,11 @@
 </div>
 
 <script>
+
+    function toggleShareIcon(elmt) {
+        $(elmt).children('div.first').toggleClass('sharePageIcon');
+        $(elmt).children('div.first').toggleClass('sharePageIconFill');
+    }
 
     $('#share_pic').click(function () {
         if ($('#share_box').is(":hidden")) {

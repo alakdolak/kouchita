@@ -1,3 +1,61 @@
+.grayBorder {
+    position: absolute;
+    border-bottom: 1px solid #E6E6E6;
+    left: 50%;
+}
+.grayBorder1 {
+    bottom: 14px;
+    width: 35%;
+    margin-left: -117px;
+}
+.grayBorder5 {
+    top: 13px;
+    width: 72%;
+    margin-left: -340px;
+}
+
+.medalMainBox {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.medalEachBox {
+    border: 1px solid #CCCCCC;
+    height: 150px;
+    width: 33%;
+}
+
+.infoFlyout .myLevel {
+    text-align: right;
+}
+
+.infoFlyout .myLevel span {
+    background: url('images/profile.png') no-repeat -9px -299px !important;
+    width: 40px;
+    height: 40px;
+    line-height: 42px;
+    display: inline-block;
+    margin-left: 5px;
+    text-align: center;
+    float: right;
+    font-weight: bold;
+    font-size: 18px;
+    color: #fff;
+    background-size: 56px !important;
+}
+
+.modules-membercenter-level-progress .myBadge {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background: url('http://localhost/pro_shazde/public/images/profile.png') no-repeat -13px -344px !important;
+    background-size: 56px;
+    font-weight: bold;
+    font-size: 18px;
+    color: #fff;
+}
 
 #MODULES_MEMBER_CENTER {
     padding-bottom: 20px;
@@ -337,4 +395,10 @@
 
 .border-radius-50per {
     border-radius: 50%;
+}
+
+@media (max-width: 767px) {
+    footer {
+        display: none;
+    }
 }

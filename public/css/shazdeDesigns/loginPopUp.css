@@ -1,3 +1,9 @@
+
+textarea:focus, input:focus, select:focus, button:focus, a:focus,
+textarea, input, select, button, a {
+    outline: none;
+}
+
 input[type="checkbox"] {
     display: none;
 }
@@ -299,5 +305,9 @@ input[type="checkbox"]:checked + label span {
 
     .inputLabelText, #username_main, #username_email, #username_phone, #username_2, #username_3, #username_final  {
         font-size: 14px;
+    }
+
+    .registerPaneInLoginPopUp > button > div {
+        margin-left: 5px;
     }
 }

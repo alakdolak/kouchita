@@ -6892,13 +6892,6 @@ DIV.ppr_rup.ppr_priv_masthead_search .dual_search_loader_container .dual_search_
     box-shadow: none;
 }
 
-.ui_button.secondary {
-    border-color: #e5e5e5 #b7b7b7 #b7b7b7 #e5e5e5;
-    background-color: #fff;
-    box-shadow: 1px 1px 0 0 rgba(0, 0, 0, 0.05);
-    color: #00AF87;
-}
-
 .ui_button.secondary.chevron:after {
     border-color: #00AF87;
 }

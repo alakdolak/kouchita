@@ -111,7 +111,7 @@ DIV.ppr_rup.ppr_priv_global_nav_action_inbox .ui_jewel {
 #alert {
     z-index: 100000000001 !important;
     left: -10px !important;
-    top: 40px !important;
+    top: 50px !important;
 }
 
 #alertItem {
@@ -180,6 +180,7 @@ DIV.ppr_rup.ppr_priv_global_nav .global-nav-logo {
 DIV.ppr_rup.ppr_priv_global_nav .global-nav-bar-container .global-nav-actions {
     display: flex;
     align-items: center;
+    padding: 0;
 }
 
 DIV.ppr_rup.ppr_priv_global_nav .global-nav-actions>div {
