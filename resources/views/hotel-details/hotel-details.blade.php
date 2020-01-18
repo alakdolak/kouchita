@@ -136,7 +136,7 @@ if ($total == 0)
     </script>
 
     <script src="{{URL::asset('js/hotelDetails/hoteldetails_1.js')}}"></script>
-    <script src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
+    <script src="{{URL::asset('js/autosize.min.js')}}"></script>
     <script async src="{{URL::asset('js/album.js')}}"></script>
     <script src="{{URL::asset('js/adv.js')}}"></script>
 
@@ -1861,8 +1861,8 @@ if ($total == 0)
 
     <script>
 
-        autosize(document.getElementsByClassName("inputBoxInputComment"));
-        autosize(document.getElementsByClassName("inputBoxInputAnswer"));
+        autosize($(".inputBoxInputComment"));
+        autosize($(".inputBoxInputAnswer"));
         function openCity(cityName, elmnt, color, fontColor) {
             var i, tabcontent, tablinks;
             tabcontent = document.getElementsByClassName("tabContent");

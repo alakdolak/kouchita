@@ -51,26 +51,26 @@
                 : {{$place->name}}
             </span>
             <span style="float: right">
-                {{$place->diet->energy}}
+                {{$place->energy}}
             </span>
             <span style="float: right">
                  کالری در هر
             </span>
             <span style="float: right">
-                {{$place->diet->volume}}
+                {{$place->volume}}
             </span>
             <span style="float: right">
-                {{$place->diet->source}}
+                {{$place->source}}
             </span>
         </div>
 
-        @if($place->diet->rice == 1)
+        @if($place->rice == 1)
             <div class="contentSection col-xs-12">
                  برنج: 20 کالری در 1 قاشق غذاخوری
             </div>
         @endif
 
-        @if($place->diet->bread == 1)
+        @if($place->bread == 1)
             <div class="contentSection col-xs-12">
                 نان: 40 کالری به اندازه ی هر کف دست
             </div>
