@@ -210,6 +210,8 @@
                 <span class="ui_icon member"></span>
             </div>
         @endif
+
+        @include('layouts.proSearch')
     </div>
 
     <div class="container">
@@ -683,7 +685,6 @@
 
     </div>
 
-    @include('layouts.proSearch')
 
     <script>
 

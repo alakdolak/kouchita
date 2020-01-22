@@ -500,7 +500,6 @@
 <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/shazdeDesigns/proSearch.css')}}'/>
 <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/shazdeDesigns/abbreviations.css')}}'/>
 
-
 <div id="searchspan" class="ui_modal fullwidth no_padding ppr_rup ppr_priv_masthead_search">
     <div class="body_text">
         <div class="search_overlay_content ui_container">
@@ -664,8 +663,8 @@
 
     function closeInFireFox() {
         if(navigator.userAgent.toLowerCase().indexOf('firefox') > -1){
-            // $("#searchspan").css('height', "0vh");
-            // $("#myCloseBtn").addClass('hidden');
+            $("#searchspan").css('height', "0vh");
+            $("#myCloseBtn").addClass('hidden');
         }
     }
 

@@ -4,6 +4,9 @@ use App\models\ConfigModel;
 use Illuminate\Support\Facades\Route;
 
 Route::get('databaseforall', function (){
+//    ALTER TABLE `post` DROP `cityId`, DROP `placeId`, DROP `kindPlaceId`, DROP `tag1`, DROP `tag2`, DROP `tag3`, DROP `tag4`, DROP `tag5`, DROP `tag6`, DROP `tag7`, DROP `tag8`, DROP `tag9`, DROP `tag10`, DROP `tag11`, DROP `tag12`, DROP `tag13`, DROP `tag14`, DROP `tag15`, DROP `category`, DROP `C`, DROP `D`;
+//    ALTER TABLE `post` ADD `release` VARCHAR(10) NOT NULL DEFAULT 'draft' AFTER `description`;
+//    ALTER TABLE `post` ADD `slug` VARCHAR(190) NOT NULL AFTER `title`;
 });
 
 Route::get('fillHotelPic', function(){
