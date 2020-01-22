@@ -1,4 +1,109 @@
 <?php return array (
+  'queue' => 
+  array (
+    'default' => 'sync',
+    'connections' => 
+    array (
+      'sync' => 
+      array (
+        'driver' => 'sync',
+      ),
+      'database' => 
+      array (
+        'driver' => 'database',
+        'table' => 'jobs',
+        'queue' => 'default',
+        'retry_after' => 90,
+      ),
+      'beanstalkd' => 
+      array (
+        'driver' => 'beanstalkd',
+        'host' => 'localhost',
+        'queue' => 'default',
+        'retry_after' => 90,
+      ),
+      'sqs' => 
+      array (
+        'driver' => 'sqs',
+        'key' => 'your-public-key',
+        'secret' => 'your-secret-key',
+        'prefix' => 'https://sqs.us-east-1.amazonaws.com/your-account-id',
+        'queue' => 'your-queue-name',
+        'region' => 'us-east-1',
+      ),
+      'redis' => 
+      array (
+        'driver' => 'redis',
+        'connection' => 'default',
+        'queue' => 'default',
+        'retry_after' => 90,
+      ),
+    ),
+    'failed' => 
+    array (
+      'database' => 'mysql',
+      'table' => 'failed_jobs',
+    ),
+  ),
+  'view' => 
+  array (
+    'paths' => 
+    array (
+      0 => '/var/www/kouchita/resources/views',
+    ),
+    'compiled' => '/var/www/kouchita/storage/framework/views',
+  ),
+  'session' => 
+  array (
+    'driver' => 'file',
+    'lifetime' => 120,
+    'expire_on_close' => false,
+    'encrypt' => false,
+    'files' => '/var/www/kouchita/storage/framework/sessions',
+    'connection' => NULL,
+    'table' => 'sessions',
+    'store' => NULL,
+    'lottery' => 
+    array (
+      0 => 2,
+      1 => 100,
+    ),
+    'cookie' => 'laravel_session',
+    'path' => '/',
+    'domain' => NULL,
+    'secure' => false,
+    'http_only' => true,
+  ),
+  'broadcasting' => 
+  array (
+    'default' => 'log',
+    'connections' => 
+    array (
+      'pusher' => 
+      array (
+        'driver' => 'pusher',
+        'key' => '',
+        'secret' => '',
+        'app_id' => '',
+        'options' => 
+        array (
+        ),
+      ),
+      'redis' => 
+      array (
+        'driver' => 'redis',
+        'connection' => 'default',
+      ),
+      'log' => 
+      array (
+        'driver' => 'log',
+      ),
+      'null' => 
+      array (
+        'driver' => 'null',
+      ),
+    ),
+  ),
   'app' => 
   array (
     'name' => 'Laravel',
@@ -8,7 +113,7 @@
     'timezone' => 'UTC',
     'locale' => 'en',
     'fallback_locale' => 'en',
-    'key' => 'base64:DEucJ5lu7MGRsS47IJYiuhPM6zdeUIOvW9Y4HvxCIVk=',
+    'key' => 'base64:BtWTPc+sNKulCAJcPAznU6CSRtHxLd3VmWDjFTzPIcA=',
     'cipher' => 'AES-256-CBC',
     'log' => 'single',
     'log_level' => 'debug',
@@ -83,6 +188,222 @@
       'Throttle' => 'GrahamCampbell\\Throttle\\Facades\\Throttle',
     ),
   ),
+  'cache' => 
+  array (
+    'default' => 'file',
+    'stores' => 
+    array (
+      'apc' => 
+      array (
+        'driver' => 'apc',
+      ),
+      'array' => 
+      array (
+        'driver' => 'array',
+      ),
+      'database' => 
+      array (
+        'driver' => 'database',
+        'table' => 'cache',
+        'connection' => NULL,
+      ),
+      'file' => 
+      array (
+        'driver' => 'file',
+        'path' => '/var/www/kouchita/storage/framework/cache/data',
+      ),
+      'memcached' => 
+      array (
+        'driver' => 'memcached',
+        'persistent_id' => NULL,
+        'sasl' => 
+        array (
+          0 => NULL,
+          1 => NULL,
+        ),
+        'options' => 
+        array (
+        ),
+        'servers' => 
+        array (
+          0 => 
+          array (
+            'host' => '127.0.0.1',
+            'port' => 11211,
+            'weight' => 100,
+          ),
+        ),
+      ),
+      'redis' => 
+      array (
+        'driver' => 'redis',
+        'connection' => 'default',
+      ),
+    ),
+    'prefix' => 'laravel',
+  ),
+  'database' => 
+  array (
+    'default' => 'mysql',
+    'connections' => 
+    array (
+      'sqlite' => 
+      array (
+        'driver' => 'sqlite',
+        'database' => 'dev',
+        'prefix' => '',
+      ),
+      'mysql' => 
+      array (
+        'driver' => 'mysql',
+        'host' => '127.0.0.1',
+        'port' => '3306',
+        'database' => 'dev',
+        'username' => 'koochita',
+        'password' => '!!KoOchita1982!@!',
+        'unix_socket' => '',
+        'charset' => 'utf8mb4',
+        'collation' => 'utf8mb4_unicode_ci',
+        'prefix' => '',
+        'strict' => false,
+        'engine' => NULL,
+      ),
+      'pgsql' => 
+      array (
+        'driver' => 'pgsql',
+        'host' => '127.0.0.1',
+        'port' => '3306',
+        'database' => 'dev',
+        'username' => 'koochita',
+        'password' => '!!KoOchita1982!@!',
+        'charset' => 'utf8',
+        'prefix' => '',
+        'schema' => 'public',
+        'sslmode' => 'prefer',
+      ),
+      'sqlsrv' => 
+      array (
+        'driver' => 'sqlsrv',
+        'host' => '127.0.0.1',
+        'port' => '3306',
+        'database' => 'dev',
+        'username' => 'koochita',
+        'password' => '!!KoOchita1982!@!',
+        'charset' => 'utf8',
+        'prefix' => '',
+      ),
+    ),
+    'migrations' => 'migrations',
+    'redis' => 
+    array (
+      'client' => 'predis',
+      'default' => 
+      array (
+        'host' => '127.0.0.1',
+        'password' => NULL,
+        'port' => '6379',
+        'database' => 0,
+      ),
+    ),
+  ),
+  'cors' => 
+  array (
+    'supportsCredentials' => false,
+    'allowedOrigins' => 
+    array (
+      0 => '*',
+    ),
+    'allowedOriginsPatterns' => 
+    array (
+    ),
+    'allowedHeaders' => 
+    array (
+      0 => '*',
+    ),
+    'allowedMethods' => 
+    array (
+      0 => '*',
+    ),
+    'exposedHeaders' => 
+    array (
+    ),
+    'maxAge' => 0,
+  ),
+  'services' => 
+  array (
+    'mailgun' => 
+    array (
+      'domain' => NULL,
+      'secret' => NULL,
+    ),
+    'ses' => 
+    array (
+      'key' => NULL,
+      'secret' => NULL,
+      'region' => 'us-east-1',
+    ),
+    'sparkpost' => 
+    array (
+      'secret' => NULL,
+    ),
+    'stripe' => 
+    array (
+      'model' => 'App\\User',
+      'key' => NULL,
+      'secret' => NULL,
+    ),
+  ),
+  'filesystems' => 
+  array (
+    'default' => 'local',
+    'cloud' => 's3',
+    'disks' => 
+    array (
+      'local' => 
+      array (
+        'driver' => 'local',
+        'root' => '/var/www/kouchita/storage/app',
+      ),
+      'public' => 
+      array (
+        'driver' => 'local',
+        'root' => '/var/www/kouchita/storage/app/public',
+        'url' => 'http://localhost/storage',
+        'visibility' => 'public',
+      ),
+      's3' => 
+      array (
+        'driver' => 's3',
+        'key' => NULL,
+        'secret' => NULL,
+        'region' => NULL,
+        'bucket' => NULL,
+      ),
+    ),
+  ),
+  'mail' => 
+  array (
+    'driver' => 'smtp',
+    'host' => 'https://shazdemosafer.com',
+    'port' => '465',
+    'from' => 
+    array (
+      'address' => 'info@shazdemosafer.com',
+      'name' => 'shazdemosafer',
+    ),
+    'encryption' => 'ssl',
+    'username' => 'info@shazdemosafer.com',
+    'password' => 'lFwHDXJ1FvdJMOfXyWVEnc8capw=',
+    'sendmail' => '/usr/sbin/sendmail -bs',
+    'markdown' => 
+    array (
+      'theme' => 'default',
+      'paths' => 
+      array (
+        0 => '/var/www/kouchita/config/../vendor/phpmailer',
+      ),
+    ),
+  ),
   'auth' => 
   array (
     'defaults' => 
@@ -121,343 +442,18 @@
       ),
     ),
   ),
-  'broadcasting' => 
-  array (
-    'default' => 'log',
-    'connections' => 
-    array (
-      'pusher' => 
-      array (
-        'driver' => 'pusher',
-        'key' => '',
-        'secret' => '',
-        'app_id' => '',
-        'options' => 
-        array (
-        ),
-      ),
-      'redis' => 
-      array (
-        'driver' => 'redis',
-        'connection' => 'default',
-      ),
-      'log' => 
-      array (
-        'driver' => 'log',
-      ),
-      'null' => 
-      array (
-        'driver' => 'null',
-      ),
-    ),
-  ),
-  'cache' => 
-  array (
-    'default' => 'file',
-    'stores' => 
-    array (
-      'apc' => 
-      array (
-        'driver' => 'apc',
-      ),
-      'array' => 
-      array (
-        'driver' => 'array',
-      ),
-      'database' => 
-      array (
-        'driver' => 'database',
-        'table' => 'cache',
-        'connection' => NULL,
-      ),
-      'file' => 
-      array (
-        'driver' => 'file',
-        'path' => __DIR__ . '/../../storage/framework/cache/data',
-      ),
-      'memcached' => 
-      array (
-        'driver' => 'memcached',
-        'persistent_id' => NULL,
-        'sasl' => 
-        array (
-          0 => NULL,
-          1 => NULL,
-        ),
-        'options' => 
-        array (
-        ),
-        'servers' => 
-        array (
-          0 => 
-          array (
-            'host' => '127.0.0.1',
-            'port' => 11211,
-            'weight' => 100,
-          ),
-        ),
-      ),
-      'redis' => 
-      array (
-        'driver' => 'redis',
-        'connection' => 'default',
-      ),
-    ),
-    'prefix' => 'laravel',
-  ),
-  'cors' => 
-  array (
-    'supportsCredentials' => false,
-    'allowedOrigins' => 
-    array (
-      0 => '*',
-    ),
-    'allowedOriginsPatterns' => 
-    array (
-    ),
-    'allowedHeaders' => 
-    array (
-      0 => '*',
-    ),
-    'allowedMethods' => 
-    array (
-      0 => '*',
-    ),
-    'exposedHeaders' => 
-    array (
-    ),
-    'maxAge' => 0,
-  ),
-  'database' => 
-  array (
-    'default' => 'mysql',
-    'connections' => 
-    array (
-      'sqlite' => 
-      array (
-        'driver' => 'sqlite',
-        'database' => 'admin_shazde',
-        'prefix' => '',
-      ),
-      'mysql' => 
-      array (
-//          'driver' => 'mysql',
-//          'host' => 'mysql_pro',
-//          'port' => '3306',
-//          'database' => 'pro',
-//          'username' => 'pro',
-//          'password' => 'pro',
-
-        'driver' => 'mysql',
-        'host' => '127.0.0.1',
-        'port' => '3306',
-        'database' => 'admin_shazde',
-        'username' => 'root',
-        'password' => '',
-
-        'unix_socket' => '',
-        'charset' => 'utf8mb4',
-        'collation' => 'utf8mb4_unicode_ci',
-        'prefix' => '',
-        'strict' => false,
-        'engine' => NULL,
-      ),
-      'pgsql' => 
-      array (
-        'driver' => 'pgsql',
-        'host' => '127.0.0.1',
-        'port' => '3306',
-        'database' => 'admin_shazde',
-        'username' => 'administrator_persoulio',
-        'password' => 'yGrn65~6',
-        'charset' => 'utf8',
-        'prefix' => '',
-        'schema' => 'public',
-        'sslmode' => 'prefer',
-      ),
-      'sqlsrv' => 
-      array (
-        'driver' => 'sqlsrv',
-        'host' => '127.0.0.1',
-        'port' => '3306',
-        'database' => 'admin_shazde',
-        'username' => 'administrator_persoulio',
-        'password' => 'yGrn65~6',
-        'charset' => 'utf8',
-        'prefix' => '',
-      ),
-    ),
-    'migrations' => 'migrations',
-    'redis' => 
-    array (
-      'client' => 'predis',
-      'default' => 
-      array (
-        'host' => '127.0.0.1',
-        'password' => NULL,
-        'port' => '6379',
-        'database' => 0,
-      ),
-    ),
-  ),
-  'filesystems' => 
-  array (
-    'default' => 'local',
-    'cloud' => 's3',
-    'disks' => 
-    array (
-      'local' => 
-      array (
-        'driver' => 'local',
-        'root' => __DIR__ . '/../../storage/app',
-      ),
-      'public' => 
-      array (
-        'driver' => 'local',
-        'root' => __DIR__ . '/../../storage/app/public',
-        'url' => 'http://localhost/storage',
-        'visibility' => 'public',
-      ),
-      's3' => 
-      array (
-        'driver' => 's3',
-        'key' => NULL,
-        'secret' => NULL,
-        'region' => NULL,
-        'bucket' => NULL,
-      ),
-    ),
-  ),
-  'mail' => 
-  array (
-    'driver' => 'smtp',
-    'host' => 'https://shazdemosafer.com',
-    'port' => '465',
-    'from' => 
-    array (
-      'address' => 'info@shazdemosafer.com',
-      'name' => 'shazdemosafer',
-    ),
-    'encryption' => 'ssl',
-    'username' => 'info@shazdemosafer.com',
-    'password' => 'lFwHDXJ1FvdJMOfXyWVEnc8capw=',
-    'sendmail' => '/usr/sbin/sendmail -bs',
-    'markdown' => 
-    array (
-      'theme' => 'default',
-      'paths' => 
-      array (
-        0 => __DIR__ . '/../../config/../vendor/phpmailer',
-      ),
-    ),
-  ),
-  'queue' => 
-  array (
-    'default' => 'sync',
-    'connections' => 
-    array (
-      'sync' => 
-      array (
-        'driver' => 'sync',
-      ),
-      'database' => 
-      array (
-        'driver' => 'database',
-        'table' => 'jobs',
-        'queue' => 'default',
-        'retry_after' => 90,
-      ),
-      'beanstalkd' => 
-      array (
-        'driver' => 'beanstalkd',
-        'host' => 'localhost',
-        'queue' => 'default',
-        'retry_after' => 90,
-      ),
-      'sqs' => 
-      array (
-        'driver' => 'sqs',
-        'key' => 'your-public-key',
-        'secret' => 'your-secret-key',
-        'prefix' => 'https://sqs.us-east-1.amazonaws.com/your-account-id',
-        'queue' => 'your-queue-name',
-        'region' => 'us-east-1',
-      ),
-      'redis' => 
-      array (
-        'driver' => 'redis',
-        'connection' => 'default',
-        'queue' => 'default',
-        'retry_after' => 90,
-      ),
-    ),
-    'failed' => 
-    array (
-      'database' => 'mysql',
-      'table' => 'failed_jobs',
-    ),
-  ),
-  'services' => 
-  array (
-    'mailgun' => 
-    array (
-      'domain' => NULL,
-      'secret' => NULL,
-    ),
-    'ses' => 
-    array (
-      'key' => NULL,
-      'secret' => NULL,
-      'region' => 'us-east-1',
-    ),
-    'sparkpost' => 
-    array (
-      'secret' => NULL,
-    ),
-    'stripe' => 
-    array (
-      'model' => 'App\\User',
-      'key' => NULL,
-      'secret' => NULL,
-    ),
-  ),
-  'session' => 
-  array (
-    'driver' => 'file',
-    'lifetime' => 120,
-    'expire_on_close' => false,
-    'encrypt' => false,
-    'files' => __DIR__ . '/../../storage/framework/sessions',
-    'connection' => NULL,
-    'table' => 'sessions',
-    'store' => NULL,
-    'lottery' => 
-    array (
-      0 => 2,
-      1 => 100,
-    ),
-    'cookie' => 'laravel_session',
-    'path' => '/',
-    'domain' => NULL,
-    'secure' => false,
-    'http_only' => true,
-  ),
-  'view' => 
-  array (
-    'paths' => 
-    array (
-      0 => __DIR__ . '/../../resources/views',
-    ),
-    'compiled' => __DIR__ . '/../../storage/framework/views',
-  ),
   'throttle' => 
   array (
     'driver' => NULL,
   ),
   'tinker' => 
   array (
+    'commands' => 
+    array (
+    ),
     'dont_alias' => 
     array (
+      0 => 'App\\Nova',
     ),
   ),
 );
