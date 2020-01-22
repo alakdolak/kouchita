@@ -744,7 +744,7 @@
     var getHotelsMainPath = '{{route('getRandomHotel')}}';
     var getAmakensMainPath = '{{route('getRandomAmaken')}}';
     var getRestaurantsMainPath = '{{route('getRestaurantsMain')}}';
-    var getFoodsMainPath = '{{route('getRandomFood')}}';
+    {{--var getFoodsMainPath = '{{route('getRandomFood')}}';--}}
     var getCitiesDir = "{{route('getCitiesDir')}}";
 
     var config = {

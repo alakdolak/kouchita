@@ -3,11 +3,13 @@
     border-bottom: 1px solid #E6E6E6;
     left: 50%;
 }
+
 .grayBorder1 {
     bottom: 14px;
     width: 35%;
     margin-left: -117px;
 }
+
 .grayBorder5 {
     top: 13px;
     width: 72%;
@@ -20,6 +22,7 @@
     justify-content: space-between;
     align-items: center;
 }
+
 .medalEachBox {
     border: 1px solid #CCCCCC;
     height: 150px;
@@ -61,22 +64,14 @@
     padding-bottom: 20px;
 }
 
-#arrowDown {
-    background-size: 64px;
-    background-position: -26px -223px;
-    width: 15px;
-    height: 15px;
-    background-image: url('../../images/profile.png');
-    background-repeat: no-repeat;
+.editInfosBoxTextMainDiv {
+    display: flex;
+    align-items: center;
 }
 
-#arrowUp {
-    background-size: 64px;
-    background-position: -26px -290px;
-    width: 15px;
-    height: 15px;
-    background-image: url('../../images/profile.png');
-    background-repeat: no-repeat;
+#arrowDown, #arrowUp {
+    color: #0076a3;
+    font-size: 10px;
 }
 
 .leftProfile {
@@ -85,8 +80,8 @@
 
 #infoDiv {
     position: absolute;
-    right: 80px;
-    top: 110px;
+    right: 20px;
+    top: 120px;
     min-width: 120px;
     font-size: 0.75em;
     z-index: 1001;
@@ -100,6 +95,13 @@
 #myHonorsText {
     text-align: right;
     right: 0;
+    position: absolute;
+    top: 9px;
+    background: white;
+    float: right;
+    left: inherit;
+    padding-left: 10px;
+    color: #0076ac;
 }
 
 #myHonorsText > a {
@@ -261,11 +263,14 @@
 
 #tagPrompt {
     position: fixed;
-    left: 28%;
-    right: auto;
-    top: 25%;
+    left: 10%;
+    right: 10%;
+    top: 60px;
     bottom: auto;
-    width: 46%;
+}
+
+#tagPrompt.ui_overlay::before {
+    display: none;
 }
 
 #submitBtnTripStyle {
@@ -397,8 +402,194 @@
     border-radius: 50%;
 }
 
-@media (max-width: 767px) {
-    footer {
-        display: none;
+/*new changes*/
+
+.globalNav2011_reset #MAIN {
+    width: auto !important;
+}
+
+.globalNav2011_reset #BODYCON {
+    width: auto;
+}
+
+.modules-membercenter-member-profile .aboutMeDesc {
+    float: right;
+    border: 0;
+    overflow: inherit;
+    margin: 0 15px;
+}
+
+.modules-membercenter-member-profile .aboutMeDesc .update:hover {
+    text-decoration: none;
+}
+
+.userProfileActivitiesMainDiv {
+    padding: 0 0 20px;
+}
+
+.mainDivHeaderText {
+    padding: 10px 0;
+    border-bottom: 1px solid
+    #e5e5e5;
+    margin: 20px 0;
+    position: relative;
+}
+
+.mainDivHeaderText > h3 {
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 32px;
+    position: absolute;
+    top: 5px;
+    right: -5px;
+    background: white;
+    padding: 0 10px;
+    color: #0076a3;
+    margin: 0;
+}
+
+.activitiesMainDiv {
+    padding: 5px 15px;
+}
+
+.activitiesLinesDiv:first-child {
+    padding: 0 0 10px;
+}
+
+.activitiesLinesDiv {
+    border-bottom: 1px solid
+    #E5E5E5;
+    padding: 15px 0;
+    position: relative;
+}
+
+.activitiesLinesDiv:first-child > div {
+    top: 0;
+}
+
+.activityTitle {
+    position: absolute;
+    font-size: 14px;
+    color: #888888;
+    top: 19px;
+    right: 0;
+    cursor: default;
+    padding: 0 5px;
+    background-color: white;
+}
+
+.activityNumbers {
+    position: absolute;
+    font-size: 14px;
+    color: #0076a3;
+    top: 19px;
+    left: 0;
+    cursor: pointer;
+    padding: 0 5px;
+    background-color: white;
+}
+
+.modules-membercenter-persistent-header-achievements .persistent-header {
+    width: auto;
+    padding: 0;
+}
+
+.modules-membercenter-persistent-header-achievements .persistent-header a {
+    color: #16174f !important;
+}
+
+.globalNav2011_reset #PAGE {
+    width: auto;
+}
+
+.mc_achievements .leftProfile {
+    width: 34%;
+}
+
+.modules-membercenter-progress-header {
+    margin-bottom: 40px;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.recentBadges, .futureBadges {
+    padding: 0 20px;
+}
+
+.modules-membercenter-badge-teaser .header.recentBadgesTitleMainDiv,
+.modules-membercenter-badge-teaser .header.badgeListTitleMainDiv {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    border: 0;
+    margin: 0;
+}
+
+.modules-membercenter-badge-teaser {
+    display: flex;
+    flex-direction: column;
+}
+
+.recentBadgesTitle, .futureBadgesTitle {
+    font-size: 15px;
+    margin-left: 7px;
+}
+
+.mc_achievements .rightContributions {
+    width: 62%;
+    margin: 20px 4% 0 0;
+    padding-left: 20px;
+}
+
+.modules-membercenter-member-profile .profileBlock .nameContent .name .profileLinks {
+    border-color: #0076a3;
+}
+
+.modules-membercenter-member-profile .profileBlock .nameContent {
+    float: right;
+    margin-top: 3px;
+    padding-right: 15px;
+    width: 100%;
+}
+
+.editInfosBoxText {
+    font-size: 13px;
+    color: #0076a3;
+    margin-left: 5px;
+}
+
+.trophyCaseHeaderMainDiv {
+    position: relative;
+    margin: 30px 0;
+    padding-top: 42px !important;
+    border: solid #E6E6E6;
+    border-width: 1px 0;
+}
+
+.modules-membercenter-badge-teaser .header .trophyCaseTitle {
+    position: absolute;
+    right: 0;
+    top: 28px;
+    background: white;
+    padding-left: 5px;
+}
+
+.modules-membercenter-badge-teaser .header .trophyCaseTitle > a {
+    font-size: 12px;
+    color: #92321b;
+    text-decoration: none;
+}
+
+.modules-membercenter-badge-teaser .header a.trophyCase {
+    position: absolute;
+    left: 0;
+    top: 26px;
+    background: white;
+    padding-right: 5px;
+    text-decoration: none;
+}
+
+@media (max-width: 992px) {
+    .points_to_go > span{
+        font-size: 17px;
     }
 }
