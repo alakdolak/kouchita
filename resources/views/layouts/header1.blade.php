@@ -4,7 +4,7 @@
 
 <?php $user = Auth::user() ?>
 
-<link rel="stylesheet" href="{{URL::asset('css/theme2/header1.css')}}">
+<link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/header1.css')}}">
 
 <!-- Link Swiper's CSS -->
 <link rel="stylesheet" href="{{URL::asset('css/theme2/swiper.css')}}">
@@ -15,12 +15,16 @@
 
 <div class="masthead">
     <div id="taplc_global_nav_0" class="ppr_rup ppr_priv_global_nav">
-        <div class="global-nav global-nav-single-line has-links ">
+        <div class="global-nav global-nav-single-line">
             <div class="global-nav-top">
                 <div class="global-nav-bar global-nav-green">
                     <div class="ui_container global-nav-bar-container rtl" >
-                        <div class="global-nav-hamburger is-hidden-tablet"><span class="ui_icon menu-bars"></span></div>
-                        <a href="{{route('main')}}" class="global-nav-logo"><img src="{{URL::asset('images/LOGOnew.svg')}}" alt="شازده مسافر" class="global-nav-img global-nav-svg"/></a>
+                        <div class="global-nav-hamburger is-hidden-tablet">
+                            <span class="ui_icon menu-bars"></span>
+                        </div>
+                        <a href="{{route('main')}}" class="global-nav-logo">
+                            <img src="{{URL::asset('images/logo.png')}}" alt="شازده مسافر" class="global-nav-img global-nav-svg"/>
+                        </a>
                         <div class="global-nav-links ui_tabs inverted is-hidden-mobile">
                             <div id="taplc_global_nav_links_0" class="ppr_rup ppr_priv_global_nav_links" data-placement-name="global_nav_links">
                                 <div class="global-nav-links-container">
@@ -220,7 +224,7 @@
                                     @if(Auth::check())
                                         <div class="global-nav-utility-activator" title="صفحه کاربری">
                                             <span onclick="document.location.href = '{{route('profile')}}'" class="ui_icon member"></span>
-                                            <span id="memberTop" class="name">{{$user->username}}</span>
+                                            <span id="memberTop" class="username">{{$user->username}}</span>
                                         </div>
                                     @endif
                                     <div id="profile-drop-mainDiv" class="global-nav-overlays-container">
@@ -267,7 +271,9 @@
                             <div class="sidebar-nav-close">
                                 <div class="ui_icon times"></div>
                             </div>
-                            <a href="/" class="global-nav-logo"><img src='{{URL::asset('images/logo.png')}}' alt="شازده مسافر" class="global-nav-img"/></a>
+                            <a href="/" class="global-nav-logo">
+                                <img src='{{URL::asset('images/logo.png')}}' alt="شازده مسافر" class="global-nav-img"/>
+                            </a>
                         </div>
                         <div class="sidebar-nav-profile-container">
                             @if(Auth::check())

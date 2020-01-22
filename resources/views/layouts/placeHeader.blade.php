@@ -10,7 +10,7 @@
 
 <div class="masthead position-relative">
     <div class="ppr_rup ppr_priv_global_nav position-relative">
-        <div class="global-nav global-nav-single-line has-links position-relative">
+        <div class="global-nav global-nav-single-line position-relative">
             <div class="global-nav-top position-relative">
                 <div class="global-nav-bar global-nav-green">
                     <div class="ui_container global-nav-bar-container direction-rtl position-relative">
@@ -18,7 +18,9 @@
                             <span class="ui_icon menu-bars"></span>
                         </div>
 
-                        <a href="{{route('main')}}" class="global-nav-logo"><img src="{{URL::asset('images/logo.svg')}}" alt="شازده مسافر" class="global-nav-img global-nav-svg"/></a>
+                        <a href="{{route('main')}}" class="global-nav-logo">
+                            <img src="{{URL::asset('images/logo.png')}}" alt="شازده مسافر" class="global-nav-img global-nav-svg"/>
+                        </a>
 
                         <div class="global-nav-links ui_tabs inverted">
                             <div id="taplc_global_nav_links_0" class="ppr_rup ppr_priv_global_nav_links" data-placement-name="global_nav_links">
@@ -154,7 +156,7 @@
                                         <div id="targetHelp_5" class="targets" title="Profile" class="position-relative">
                                             <div class="global-nav-utility-activator" title="Profile">
                                                 <span onclick="document.location.href = '{{route('profile')}}'" class="ui_icon member"></span>
-                                                <span id="nameTop" class="name">{{$user->username}}</span>
+                                                <span id="nameTop" class="username">{{$user->username}}</span>
                                             </div>
                                             <div id="helpSpan_5" class="helpSpans hidden row">
                                                 <span class="introjs-arrow"></span>
@@ -184,7 +186,6 @@
 
                             <div id="taplc_masthead_search_0" class="ppr_rup ppr_priv_masthead_search position-relative" data-placement-name="masthead_search">
                                 <div class="mag_glass_parent position-relative" title="Search">
-                                    <div class="separator"></div>
                                     <div id="targetHelp_6" class="targets">
                                         <span class="ui_icon search" id="openSearch"></span>
                                         <div id="helpSpan_6" class="helpSpans hidden row">

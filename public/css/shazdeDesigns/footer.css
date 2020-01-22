@@ -1,0 +1,1351 @@
+/*footer styles*/
+
+textarea:focus, input:focus, select:focus, button:focus, a:focus,
+textarea, input, select, button, a {
+    outline: none;
+}
+
+footer {
+    font-size: initial;
+}
+
+footer ul {
+    list-style: none;
+}
+
+.screenFooterStyle {
+    height: auto;
+    background-color: #fcc156;
+    color: #16174f;
+    direction: rtl;
+    padding: 20px;
+    text-align: right;
+    margin-top: 1%;
+}
+
+.footTitle {
+    font-size: 18px;
+}
+
+footer li > a {
+    color: #16174f !important;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+footer li a:visited {
+    text-decoration: none !important;
+}
+
+footer li a:active {
+    text-decoration: none !important;
+}
+
+footer li {
+    padding: 4px;
+}
+
+footer a:hover {
+    text-decoration: none !important;
+    color: #16174f;
+}
+
+footer li > img, .small-ico {
+    width: 22px;
+    float: right;
+    margin-left: 7px;
+    height: 22px;
+}
+
+.footDown {
+    float: right;
+    width: 100%;
+    padding-left: 10px;
+}
+
+.footDown a {
+    text-decoration: underline;
+}
+
+.footDown a:hover {
+    text-decoration: underline !important;
+}
+
+.footDown li {
+    margin-top: -3px;
+}
+
+.socialLink {
+    font-size: 12px;
+    color: black;
+}
+
+.footerIcon {
+    background-image: url('../../images/footer.png');
+    width: 22px;
+    height: 22px;
+    background-size: 22px;
+    background-repeat: no-repeat;
+    display: inline-block;
+}
+
+.gardeshname {
+    background-position: 0 -24px;
+    font-size: 24px;
+}
+
+.instagram {
+    background-position: 0 -69px;
+}
+
+.telegram {
+    background-position: 0 -137px;
+}
+
+.aparat {
+    background-position: 0 -182px;
+}
+
+.bogendesign {
+    background-position: 0 -205px;
+}
+
+.linkedin {
+    background-position: 0 -91px;
+}
+
+.facebook {
+    background-position: 0 -1px;
+}
+
+.pinterest {
+    background-position: 0 -114px;
+}
+
+.twitter {
+    background-position: 0 -159px;
+}
+
+.googlePlus {
+    background-position: 0 -46px;
+}
+
+.selectLanguage {
+    background: #FFF;
+    border: 2px solid;
+    font-size: 12px;
+}
+
+.footerLogo {
+    width: 30%;
+    clear: right;
+}
+
+.aboutShazde {
+    font-size: 10px;
+    text-align: justify;
+}
+
+#knowOurPartnersDiv , #ourDescriptionDiv {
+    float: right;
+    width: 30%;
+}
+
+.footerMainBoxes {
+    float: right;
+    width: 17.5%;
+}
+
+#beWithUsInSocialMedia > ul > li:not(:first-child) {
+    padding: 0 4px;
+}
+
+#beWithUsInSocialMedia > ul > li:not(:first-child) > div:nth-child(2) {
+    display: inline-block;
+    position: absolute;
+    margin-right: 4px;
+}
+
+#beWithUsInSocialMedia > ul > li:last-child > a {
+    margin-right: 4px
+}
+
+/*.footerLogo > img {*/
+/*    margin-top: 10px;*/
+/*}*/
+
+
+/*@media screen and (max-width: 900px) {*/
+/*.phoneStyle {*/
+/*width: 50% !important;*/
+/*}*/
+
+/*.footTitle {*/
+/*font-size: 36px;*/
+/*}*/
+
+/*.selectLanguage {*/
+/*border: 4px solid;*/
+/*font-size: 24px;*/
+/*}*/
+
+/*.socialLink {*/
+/*font-size: 24px;*/
+/*}*/
+
+/*.footerIcon {*/
+/*width: 44px;*/
+/*height: 44px;*/
+/*background-size: 44px;*/
+/*background-repeat: no-repeat;*/
+/*display: inline-block;*/
+/*}*/
+
+/*.gardeshname {*/
+/*background-position: 0 -47px;*/
+/*}*/
+
+/*.instagram {*/
+/*background-position: 0 -138px;*/
+/*}*/
+
+/*.telegram {*/
+/*background-position: 0 -274px;*/
+/*}*/
+
+/*.aparat {*/
+/*background-position: 0 -364px;*/
+/*}*/
+
+/*.bogendesign {*/
+/*background-position: 0 -410px;*/
+/*}*/
+
+/*.linkedin {*/
+/*background-position: 0 -183px;*/
+/*}*/
+
+/*.facebook {*/
+/*background-position: 0 -2px;*/
+/*}*/
+
+/*.pinterest {*/
+/*background-position: 0 -229px;*/
+/*}*/
+
+/*.twitter {*/
+/*background-position: 0 -319px;*/
+/*}*/
+
+/*.googlePlus {*/
+/*background-position: 0 -93px;*/
+/*}*/
+
+/*.footerLogo {*/
+/*width: 100%;*/
+/*clear: both;*/
+/*}*/
+
+/*.footDown {*/
+/*width: 100%;*/
+/*clear: both;*/
+/*}*/
+
+/*.aboutShazde {*/
+/*font-size: 40px;*/
+/*}*/
+
+/*footer li > a {*/
+/*font-size: 24px;*/
+/*}*/
+/*}*/
+
+
+/*phone style*/
+
+.phoneFooterStyle {
+    position: absolute;
+    bottom: 0;
+    background-color: #fcc156;
+    color: #16174f;
+    direction: rtl;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.phoneFooterLogo {
+    width: 80px;
+    position: absolute;
+    top: -50px;
+}
+
+.phoneDescription {
+    font-size: 1em;
+    font-weight: 500;
+    text-align: justify;
+    padding-top: 10px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 230px;
+}
+
+.phoneDescriptionText {
+    overflow: auto;
+}
+
+.footerPhoneMenuBar {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
+    box-shadow: 0 -5px 15px #cccccc;
+    border-bottom: 2px solid #30b4a6;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 15px 0;
+    font-weight: 700;
+    font-size: initial;
+}
+
+.footerPhoneMenuBar > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.footerPhoneMenuBar > div > div.profileBtnText {
+    flex-direction: column;
+    display: flex;
+    text-align: right;
+}
+
+.profileBtnText > span:nth-child(1){
+    font-size: 11px;
+}
+
+.profileBtnText > span:nth-child(2){
+    color: #0076a3;
+}
+
+.profilePic.circleBase {
+    background-color: #999999;
+}
+
+.circleBase {
+    border-radius: 50%;
+}
+
+.profilePicFooter.type2 {
+    width: 35px;
+    height: 35px;
+    background: #ccc;
+    margin-left: 10px;
+}
+
+.profilePicFooter.circleBase > img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.ui_icon.more-horizontal {
+    font-size: 30px;
+}
+
+.ui_icon.plus-circle {
+    font-size: 25px;
+    margin-left: 5px;
+}
+
+.ui_icon.search {
+    font-size: 25px;
+    margin-left: 2px;
+    padding-top: 5px;
+}
+
+.ui_icon.member {
+    font-size: 25px;
+    margin-left: 7px;
+    padding-top: 5px;
+}
+
+.ui_icon.memberPossibilities {
+    font-size: 23px;
+    margin-left: 2px;
+}
+
+.ui_icon.memberPossibilities::before {
+    content: '\E0C7';
+    font-family: Shazde_Regular2 !important;
+
+}
+/*pop up on phone( phone popUp : pp)*/
+
+.mainPopUp {
+    direction: rtl;
+    width: 80%;
+    height: 100%;
+    z-index: 200;
+    position: fixed;
+    background-color: white;
+}
+
+.leftPopUp {
+    left: 0;
+}
+
+.lp_phoneMenuBar {
+    position: fixed;
+    bottom: 0;
+    width: 80%;
+    box-shadow: 0px -5px 15px #cccccc;
+    background-color: white;
+    border-bottom: 2px solid #30b4a6;
+    /*font-size: 1.15em;*/
+    font-weight: 700;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.recentViewLeftBar > div:nth-child(1) {
+    /*overflow: auto;*/
+    height: inherit;
+}
+
+.lp_eachMenu {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 0 15px;
+    border-top: 5px solid white;
+}
+
+.lp_selectedMenu {
+    color: #4DC7BC;
+    padding: 10px 0 15px;
+    border-top: 5px solid #4DC7BC;
+}
+
+.lp_selectedMenu > div:nth-child(2) {
+    text-align: center;
+}
+
+.ui_icon.search.lp_icons {
+    font-size: 35px;
+    margin: 0;
+    padding: 0;
+}
+
+.lp_icons {
+    font-size: 35px;
+}
+
+.lp_eachMenu > div:nth-child(2) {
+    font-size: initial;
+}
+
+.ui_icon.casino:before {
+    content: "\e0dd";
+    display: inline-block;
+    font-style: normal;
+    font-weight: 400;
+    font-variant: normal;
+    font-size: inherit;
+    line-height: 1;
+    font-family: 'Shazde_Regular' !important;
+    -ms-transform: rotate(-.001deg);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    speak: none;
+}
+
+
+/*the others style*/
+
+.lp_others_content {
+    padding: 25px;
+    height: inherit;
+}
+
+.lp_others_titles {
+    font-size: 2em;
+    font-weight: 500;
+    padding: 0 0 25px;
+    margin: 0 0 20px;
+    border-bottom: 1px solid #CCCCCC;
+}
+
+.lp_others_titles .trips-header {
+    font-size: 1em;
+    font-weight: 500;
+    padding: 0 0 25px;
+    margin: 0 0 20px;
+    color: black;
+}
+
+.lp_others_noMessages {
+    font-size: 1.5em;
+}
+
+.lp_others_createTrip {
+    width: 300px;
+    height: 300px;
+    background-color: #e5e5e5;
+    color: #4DC7BC;
+    font-size: 3em;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.lp_others_createTripText {
+    font-size: 0.5em;
+    font-weight: 600;
+}
+
+.lp_others_recentView{
+    padding: 18px 24px;
+    border-bottom: 1px solid #f5f5f5;
+    display: flex;
+    justify-content: space-around;
+    font-size: 2.25em;
+}
+
+.lp_others_rvPicBox {
+    height: 160px;
+}
+
+footer .ui_bubble_rating {
+    transform: rotateY(180deg);
+}
+
+#lp_register {
+    display: flex;
+    padding: 20px;
+    flex-direction: column;
+    overflow: auto;
+    height: inherit;
+}
+
+#lp_register > div:first-child {
+    display: flex;
+}
+
+footer .modules-membercenter-member-profile {
+    width: 60%;
+}
+
+footer .modules-membercenter-member-profile .profileBlock {
+    overflow: hidden;
+    margin-bottom: 50px;
+}
+
+footer .profileInfosDetails > p {
+    font-size: 17px;
+    margin: 5px 0;
+}
+
+footer .ageSince {
+    display: flex;
+}
+
+footer .ageSince > div:nth-child(1) {
+    margin-left: 10px;
+}
+
+footer .modules-membercenter-member-profile .profileBlock .avatarUrl {
+    float: right;
+    border-radius: 100%;
+    margin-left: 50px;
+}
+
+footer .modules-membercenter-member-profile .profInfo {
+    overflow: hidden;
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+footer .editInfoBtn {
+    border: 1px solid #007ac3;
+    margin-bottom: 10px;
+    color: #007ac3;
+    font-size: 14px;
+    display: flex;
+    padding: 10px;
+    width: max-content;
+    cursor: pointer;
+}
+
+footer .aboutMeDesc .glyphicon.glyphicon-chevron-down, footer .aboutMeDesc .glyphicon.glyphicon-chevron-up {
+    line-height: 20px;
+    margin: 0 5px;
+}
+
+footer .editProfileMenu {
+    flex-direction: column;
+    width: max-content;
+    border: #dedede 1px solid;
+    box-shadow: 0 0 20px 0 rgba(50, 50, 50, 0.2);
+    position: absolute;
+    padding: 5px;
+    background-color: white;
+}
+
+footer .editProfileMenu > a {
+    padding: 5px;
+}
+
+footer .profileBtnActionMobile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+}
+
+.pp_btns {
+    width: 110px;
+    margin: 10px 0;
+    color: white !important;
+}
+
+footer .profileScoreMainDiv {
+    margin-top: 10px;
+}
+
+footer #myHonorsText .class > div {
+    background-image: url('images/help_share.png')
+}
+
+footer .modules-membercenter-progress-header {
+    width: 100%;
+    height: 25px;
+    position: relative;
+    font-family: Helvetica, Arial, 'Sans-Serif';
+    font-size: 18px;
+    font-weight: bold;
+    color: #2C2C2C;
+}
+
+footer #myHonorsText {
+    text-align: right;
+    position: relative;
+    border-bottom: 1px solid #c4c4c4;
+    padding-top: 24px;
+}
+
+footer #myHonorsText > h3 {
+    position: absolute;
+    top: 10px;
+    background: white;
+    padding-left: 5px;
+    color: #0076ac;
+    font-size: 20px;
+}
+
+footer .memberPointInfo {
+    display: flex;
+    flex-direction: column;
+    /*margin-top: 30px;*/
+}
+
+footer .memberPointInfo .modules-membercenter-total-points {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    padding: 13px 0;
+    border-bottom: 1px solid #c4c4c4;
+}
+
+footer .modules-membercenter-total-points .label {
+    /*margin-bottom: 10px;*/
+    font-size: 14px;
+    color: #656565;
+    text-align: right;
+    padding: 0 2px;
+}
+
+footer b.modules-membercenter-total-points .points {
+    font-size: 25px;
+}
+
+footer .modules-membercenter-total-points .points {
+    font-size: 40px;
+    text-align: center;
+    white-space: nowrap;
+    color: #963019;
+}
+
+footer .modules-membercenter-total-points .targets {
+    border-left: 1px solid #c4c4c4;
+    padding: 26px 0;
+    width: 89px;
+    text-align: center;
+}
+
+footer .modules-membercenter-total-points .points_to_go {
+    float: right;
+    font: lighter 22px helvetica, arial, sans-serif !important;
+    font-family: helvetica, arial, sans-serif !important;
+    color: #666 !important;
+    text-align: center;
+    width: 55%;
+}
+
+footer .mainDivTotalPoint {
+    border-left: 1px solid #c4c4c4;
+    width: 25%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+footer .mainDivTotalPoint a {
+    font-size: 0.797em;
+}
+
+footer .modules-membercenter-total-points .points_to_go > span  {
+    display: flex;
+    align-items: center;
+    padding: 0 10px 0 0;
+}
+
+footer .modules-membercenter-total-points .points_to_go b {
+    color: #963019;
+    font-weight: normal;
+    margin-left: 10px;
+    font-size: 30px;
+}
+
+footer .modules-membercenter-total-points .points_to_go > span > span {
+    text-align: right;
+    line-height: 1.2;
+    font-size: 18px;
+}
+
+footer .memberPointInfo .modules-membercenter-level-progress {
+    display: table-cell;
+    vertical-align: top;
+    width: 100%;
+}
+
+footer .modules-membercenter-level-progress .progress_info {
+    position: relative;
+}
+
+footer .modules-membercenter-level-progress .labels {
+    padding-bottom: 20px;
+    display: flex;
+}
+
+footer .modules-membercenter-level-progress .label {
+    font-size: 17px;
+    color: #666;
+    padding: 10px 0 0;
+    width: 50%;
+}
+
+footer .modules-membercenter-level-progress .label:first-child {
+    text-align: right;
+}
+
+footer .modules-membercenter-level-progress .label:last-child {
+    text-align: left;
+}
+
+footer .modules-membercenter-level-progress .progress_indicator {
+    height: 30px;
+    position: relative;
+    padding: 17px 20px;
+}
+
+footer .modules-membercenter-level-progress .myBadge {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background: url('http://localhost/pro_shazde/public/images/profile.png') no-repeat -13px -344px !important;
+    background-size: 56px;
+    font-weight: bold;
+    font-size: 18px;
+    color: #fff;
+}
+
+footer .modules-membercenter-level-progress .current_badge {
+    position: absolute;
+    top: 0;
+    left: 20px;
+}
+
+footer .modules-membercenter-level-progress .meter {
+    height: 5px;
+    background: #E1DED6;
+    -moz-border-radius: 25px;
+    -webkit-border-radius: 25px;
+    border-radius: 25px;
+    padding: 0;
+    margin: 0 45px;
+}
+
+footer .modules-membercenter-level-progress .meter > span {
+    height: 100%;
+    display: block;
+    position: relative;
+    overflow: hidden;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    border-radius: 20px;
+    background-color: #963019;
+}
+
+footer .modules-membercenter-level-progress .progress {
+    -webkit-transition: all 1s linear;
+    -moz-transition: all 1s linear;
+    -o-transition: all 1s linear;
+    -ms-transition: all 1s linear;
+    transition: all 1s linear;
+    width: 0;
+}
+
+footer .modules-membercenter-level-progress .next_badge {
+    top: 0;
+    right: 15px;
+    position: absolute;
+}
+
+.userProfileActivitiesMainDiv {
+    padding: 0 0 20px;
+}
+
+.mainDivHeaderText {
+    padding: 10px 0;
+    border-bottom: 1px solid
+    #e5e5e5;
+    margin: 20px 0;
+    position: relative;
+}
+
+.mainDivHeaderText > h3 {
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 32px;
+    position: absolute;
+    top: 5px;
+    right: -5px;
+    background: white;
+    padding: 0 10px;
+    color: #0076a3;
+    margin: 0;
+}
+
+.activitiesMainDiv {
+    padding: 5px 15px;
+}
+
+.activitiesLinesDiv:first-child {
+    padding: 0 0 10px;
+}
+
+.activitiesLinesDiv {
+    border-bottom: 1px solid
+    #E5E5E5;
+    padding: 15px 0;
+    position: relative;
+}
+
+.activitiesLinesDiv:first-child > div {
+    top: 0;
+}
+
+.activityTitle {
+    position: absolute;
+    font-size: 14px;
+    color: #888888;
+    top: 19px;
+    right: 0;
+    cursor: default;
+    padding: 0 5px;
+    background-color: white;
+}
+
+.activityNumbers {
+    position: absolute;
+    font-size: 14px;
+    color: #0076a3;
+    top: 19px;
+    left: 0;
+    cursor: pointer;
+    padding: 0 5px;
+    background-color: white;
+}
+
+/*end of the others style*/
+
+/*lp search styles*/
+/*PSC (phone search city) styles:*/
+
+.pSC_tilte {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1em;
+    padding: 30px 20px;
+    color: #0076a3;
+}
+
+.pSC_tilte .btn-danger {
+    background-color: darkred;
+    border-color: darkred;
+    border-radius: 7px;
+    padding: 5px 20px;
+    font-size: 12px
+}
+
+.pSC_cityTilte {
+    font-weight: 500;
+}
+
+.pSC_cityDescription {
+    font-size: 14px;
+    padding: 5px 20px;
+    text-align: center;
+    line-height: 1.8;
+}
+
+.pSC_boxOfDetails {
+    font-size: 1em;
+    text-align: center;
+    padding: 20px 10px;
+}
+
+.pSC_choiseDetailsText {
+    font-size: 12px;
+    border-bottom: 2px solid #a1a1a1;
+    color: #e08700;
+}
+
+.pSC_boxOfCityDetailsText {
+    padding: 15px 0;
+    font-weight: 700;
+}
+
+.pSC_boxOfCityDetailsText2 {
+    font-size: 9px;
+    font-weight: 600;
+}
+
+.pSC_boxOfCityDetails {
+    display: flex;
+    justify-content: center;
+}
+
+.pSC_cityDetails {
+    width: 50%;
+    border: solid #a1a1a1;
+    padding: 15px 0;
+    border-width: 2px 2px 2px 0;
+    border-bottom: solid white;
+}
+
+.pSC_cityDetails.pSC_cityDetails_selected {
+    border-bottom: solid #f0ad4e;
+}
+
+.pSC_cityDetails:hover {
+    border-bottom: solid #f0ad4e;
+}
+
+.pSC_cityDetails:nth-child(1) {
+    border-right: none;
+}
+
+.pSC_boxOfCityDetails:last-child  {
+    border-bottom: 2px solid #a1a1a1;
+}
+
+.rightPopUp {
+    right: 0;
+}
+
+.masthead-recent-class {
+    margin: 20px 40px;
+    background-color: #f9f9f9;
+}
+
+.lp_others_recentView > div:nth-child(2) {
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.lp_others_rating {
+    text-align: center;
+}
+
+.bottomBarContainer {
+    width: 100%;
+    height: 140px;
+}
+
+.mainContainerBookmarked {
+    overflow: auto;
+    height: inherit;
+}
+
+.masthead-trips-class {
+    z-index: 100000000 !important;
+    padding: 18px 24px 14px 24px;
+    border-right: 1px solid #e5e5e5;
+    text-align: center;
+    background-color: #f9f9f9;
+    position: relative;
+}
+
+.masthead-trips-tiles-region-class {
+    min-width: 150px;
+    min-height: 150px;
+    display: flex;
+    justify-content: center;
+}
+
+.trips-tiles-class {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+}
+
+a.single-tile.is-create-trip {
+    background-color: #fff;
+    border: 1px solid #f5f5f5;
+    justify-content: space-around;
+    -webkit-transition: background-color .2s ease, corder-color .2s ease;
+    transition: background-color .2s ease, corder-color .2s ease;
+    background-blend-mode: overlay;
+    width: 150px;
+    height: 150px;
+    cursor: pointer;
+    margin: 0 0 10px 0;
+    border-radius: 2px;
+    display: -webkit-box;
+    display: flex;
+    line-height: initial;
+}
+
+a.single-tile > .tile-content {
+    -ms-grid-row-align: center;
+    align-self: center;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+a.single-tile .ui_icon.plus {
+    color: #00AF87;
+    font-size: 28px;
+}
+
+a.single-tile .create-trip-text {
+    color: #00AF87;
+    font-size: 14px;
+}
+
+.create-trip-text {
+    margin-top: 5px;
+}
+
+.placeDetailsLeftBar > div:nth-child(1) {
+    color: black;
+}
+
+.placeDetailsLeftBar > div:not(:first-child) {
+    color: #666;
+}
+
+.phoneDescriptionSelects {
+    display: flex;
+}
+
+.phoneDescriptionSelects > div {
+    width: 48%;
+    margin: 10px 1% 0;
+    display: flex;
+    padding: 2px 7px;
+    font-size: 0.8em;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    background-color: #ebebeb;
+    line-height: 30px;
+}
+
+.phoneDescriptionSelects .inputBoxText {
+    width: 47%;
+    border-left: 1px solid #d8d8d8;
+    display: inline-block;
+}
+
+.phoneDescriptionSelects .inputBoxText > div:nth-child(1) {
+    text-align: center;
+}
+
+.phoneDescriptionSelects select.inputBoxInput {
+    width: 100%;
+    text-align: center;
+    border: none;
+    float: left;
+    background-color: transparent;
+}
+
+.overflowOptimizer {
+    display: none;
+    width: 100%;
+    height: 400px;
+}
+
+#loginPopUp .ui_close_x {
+    right: 0;
+}
+
+@media (min-width: 767px) {
+    .footerPhoneMenuBar {
+        display: none;
+    }
+}
+
+@media (max-width: 630px) {
+
+    .lp_eachMenu > div:nth-child(2) {
+        font-size: 13px;
+    }
+
+    .lp_others_titles, .lp_others_titles .trips-header {
+        font-size: 1.5em;
+        padding: 0 0 15px;
+    }
+
+    .lp_others_recentView > div:nth-child(2) {
+        font-size: 15px;
+    }
+
+    .lp_others_recentView {
+        padding: 10px;
+    }
+
+    .lp_others_rvPicBox {
+        padding: 0;
+    }
+
+    .masthead-recent-class {
+        margin: 20px;
+    }
+
+    .phoneDescriptionText, .pSC_cityDetails {
+        font-size: 14px;
+    }
+
+    footer .modules-membercenter-total-points .targets {
+        padding: 17px 0;
+    }
+
+    footer .modules-membercenter-total-points .points {
+        font-size: 30px;
+    }
+
+    footer .mainDivTotalPoint > a {
+        font-size: 11px;
+    }
+
+    footer .modules-membercenter-total-points .points_to_go b {
+        font-size: 25px;
+    }
+
+    footer .modules-membercenter-total-points .points_to_go > span > span {
+        font-size: 14px;
+    }
+
+}
+
+@media (max-width: 480px) {
+
+    .lp_icons {
+        font-size: 30px;
+    }
+
+    .ui_icon.search.lp_icons {
+        font-size: 30px;
+    }
+
+    .lp_eachMenu > div:nth-child(2) {
+        font-size: 10px;
+    }
+
+    .lp_eachMenu:nth-child(even) {
+        width: 30%;
+    }
+
+    .lp_eachMenu:nth-child(3) {
+        width: 15%;
+    }
+
+    .lp_others_recentView {
+        flex-direction: column;
+    }
+
+    .lp_others_recentView > div {
+        width: 100%;
+    }
+
+    .lp_others_recentView > div:nth-child(2) {
+        margin-top: 5px;
+    }
+
+    .phoneDescriptionSelects {
+        flex-direction: column;
+    }
+
+    .phoneDescriptionSelects > div {
+        width: 98%;
+    }
+
+    footer .mainDivTotalPoint {
+        width: 26%;
+    }
+
+    footer .mainDivTotalPoint > a {
+        font-size: 10px;
+    }
+
+    footer .modules-membercenter-total-points .points_to_go {
+        width: 46%;
+    }
+
+    footer .modules-membercenter-total-points .points_to_go > span {
+        padding: 0 5px 0 0;
+    }
+
+    footer .modules-membercenter-total-points .points_to_go b {
+        margin-left: 5px;
+    }
+
+    footer .profileInfosDetails {
+        padding: 0 10px 0 0;
+    }
+
+    footer .profileInfosDetails > p {
+        font-size: 13px;
+    }
+
+    footer .ageSince > div:nth-child(1) {
+        font-size: 10px;
+    }
+
+    footer .profileBlock > div:nth-child(2) {
+        padding: 0 0 0 5px;
+    }
+
+    footer .modules-membercenter-member-profile {
+        width: 65%;
+    }
+
+    .profileBtnActionMobile {
+        width: 35%;
+    }
+}
+
+@media (max-width: 400px) {
+
+    .masthead-recent-class {
+        margin: 20px 0;
+    }
+
+    .mainPopUp, .lp_phoneMenuBar {
+        width: 85%;
+    }
+
+    .footerPhoneMenuBar > div {
+        font-size: 12px;
+    }
+
+    .ui_icon.search, .ui_icon.plus-circle, .ui_icon.member {
+        font-size: 20px;
+    }
+
+    #lp_register {
+        padding: 20px 10px;
+    }
+
+    footer #myHonorsText > h3 {
+        font-size: 17px;
+    }
+
+    footer .modules-membercenter-total-points .targets {
+        padding: 13px 0;
+        width: 22%;
+    }
+
+    footer .modules-membercenter-total-points .label {
+        font-size: 10px;
+    }
+
+    footer .modules-membercenter-total-points .points {
+        font-size: 25px;
+    }
+
+    footer .mainDivTotalPoint a {
+        font-size: 9px;
+    }
+
+    footer .modules-membercenter-total-points .points_to_go b {
+        font-size: 20px;
+        margin-left: 5px;
+    }
+
+    footer .modules-membercenter-total-points .points_to_go > span > span {
+        font-size: 13px;
+    }
+
+    .pp_btns {
+        width: 90px;
+        padding: 6px 5px;
+    }
+
+    .ui_icon.memberPossibilities {
+        font-size: 18px;
+    }
+
+    .ui_icon.more-horizontal {
+        display: none;
+    }
+}
+
+@media (max-height: 700px) {
+
+    .overflowOptimizer {
+        display: block;
+    }
+
+    .pSC_boxOfDetails {
+        overflow: auto;
+        height: inherit;
+    }
+
+    .pSC_tilte {
+        padding: 15px 20px;
+    }
+
+    .pSC_boxOfCityDetailsText, .pSC_cityDetails {
+        padding: 10px 0;
+    }
+}

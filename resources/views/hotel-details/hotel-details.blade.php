@@ -136,7 +136,7 @@ if ($total == 0)
     </script>
 
     <script src="{{URL::asset('js/hotelDetails/hoteldetails_1.js')}}"></script>
-    <script src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
+    <script src="{{URL::asset('js/autosize.min.js')}}"></script>
     <script async src="{{URL::asset('js/album.js')}}"></script>
     <script src="{{URL::asset('js/adv.js')}}"></script>
 
@@ -649,13 +649,13 @@ if ($total == 0)
                     <div class="clear-both"></div>
                     @if($hasLogin)
                         <div id="targetHelp_8" class="wideScreen targets float-left col-xs-6 pd-0">
-                                    <span onclick="bookMark()"
-                                          class="ui_button casino save-location-7306673 ui_icon saveAsBookmarkMainDiv {{($bookMark) ? "castle" : "red-heart"}} ">
-                                        <div class="saveAsBookmarkIcon"></div>
-                                        <div class="saveAsBookmarkLabel">
-                                            ذخیره این صفحه
-                                        </div>
-                                    </span>
+                            <span onclick="bookMark()"
+                                  class="ui_button save-location-7306673 saveAsBookmarkMainDiv">
+                                <div class="saveAsBookmarkIcon {{($bookMark) ? "castle-fill" : "castle"}}"></div>
+                                <div class="saveAsBookmarkLabel">
+                                    ذخیره این صفحه
+                                </div>
+                            </span>
                             <div id="helpSpan_8" class="helpSpans hidden row">
                                 <span class="introjs-arrow"></span>
                                 <p>شاید بعدا بخواهید دوباره به همین مکان باز گردید. پس آن را نشان کنید تا از منوی بالا
@@ -846,10 +846,8 @@ if ($total == 0)
                                                 عکاس هستید؟ کلیک کنید
                                             </a>
                                         </div>
-                                        <div class="left-nav left-nav-header swiper-button-next"
-                                             style="opacity: 0.8;"></div>
-                                        <div class="right-nav right-nav-header swiper-button-prev"
-                                             style="left: auto; opacity: 0.8;"></div>
+                                        <div class="left-nav left-nav-header swiper-button-next"></div>
+                                        <div class="right-nav right-nav-header swiper-button-prev"></div>
                                     </div>
                                 </div>
                             </div>
@@ -1116,8 +1114,8 @@ if ($total == 0)
                                                     <div>
                                                         <div class="row">
                                                             @foreach($place->material as $item)
-                                                                <div class="col-sm-6" style="float: right;">
-                                                                    <div class="row" style="font-size: 20px">
+                                                                <div class="col-sm-6 float-right">
+                                                                    <div class="row font-size-20">
                                                                         <div class="col-sm-6">{{$item[1]}}</div>
                                                                         <div class="col-sm-6" style="color: #4dc7bc">{{$item[0]}}</div>
                                                                     </div>
@@ -1431,7 +1429,6 @@ if ($total == 0)
                                         @endif
 
                                         @include('layouts.extendedMap')
-
                                     </div>
                                 </div>
                             </div>
@@ -1828,9 +1825,11 @@ if ($total == 0)
         </div>
 
         <script>
-            if($(window).width() < 630) {
-                $('.tabLinkMainWrapMainDivMobile').affix({offset: {top: 930}});
-            };
+            $(document).ready(function(){
+                if($(window).width() < 630) {
+                    $('.tabLinkMainWrapMainDivMobile').affix({offset: {top: 930}});
+                };
+            })
         </script>
 
         <script>
@@ -1861,8 +1860,8 @@ if ($total == 0)
 
     <script>
 
-        autosize(document.getElementsByClassName("inputBoxInputComment"));
-        autosize(document.getElementsByClassName("inputBoxInputAnswer"));
+        autosize($(".inputBoxInputComment"));
+        autosize($(".inputBoxInputAnswer"));
         function openCity(cityName, elmnt, color, fontColor) {
             var i, tabcontent, tablinks;
             tabcontent = document.getElementsByClassName("tabContent");

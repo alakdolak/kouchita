@@ -9,7 +9,6 @@ use App\models\Cities;
 use App\models\Hotel;
 use App\models\LogModel;
 use App\models\MahaliFood;
-use App\models\MahaliFoodDiet;
 use App\models\Majara;
 use App\models\Restaurant;
 use App\models\SogatSanaie;

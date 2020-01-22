@@ -1,85 +1,10 @@
 <?php $mode = "profile"; $user = Auth::user(); ?>
 @extends('layouts.bodyProfile')
 
-@section('header')
-
-        @parent
-        <style>
-            .left {
-                float: left !important;
-            }
-        </style>
-
-        <style>
-            .infoFlyout .myLevel {
-                text-align: right;
-            }
-
-            .infoFlyout .myLevel span {
-                background: url('{{URL::asset('images') . '/profile.png'}}') no-repeat -9px -299px !important;
-                width: 40px;
-                height: 40px;
-                line-height: 42px;
-                display: inline-block;
-                margin-left: 5px;
-                text-align: center;
-                float: right;
-                font-weight: bold;
-                font-size: 18px;
-                color: #fff;
-                background-size: 56px !important;
-            }
-
-            .modules-membercenter-level-progress .myBadge {
-                width: 40px;
-                height: 40px;
-                line-height: 40px;
-                text-align: center;
-                background: url('{{URL::asset('images') . '/profile.png'}}') no-repeat -13px -344px !important;
-                background-size: 56px;
-                font-weight: bold;
-                font-size: 18px;
-                color: #fff;
-            }
-
-        </style>
-
-        <style>
-            .grayBorder {
-                position: absolute;
-                border-bottom: 1px solid #E6E6E6;
-                left: 50%;
-            }
-            .grayBorder1 {
-                bottom: 14px;
-                width: 35%;
-                margin-left: -117px;
-            }
-            .grayBorder5 {
-                top: 13px;
-                width: 72%;
-                margin-left: -340px;
-            }
-
-            .medalMainBox {
-                width: 100%;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-            }
-            .medalEachBox {
-                border: 1px solid #CCCCCC;
-                height: 150px;
-                width: 33%;
-            }
-        </style>
-    @stop
-
-
-
     @section('main')
 
         <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/profile.css')}}">
+        <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/abbreviations.css')}}">
 
         <script>
 
@@ -341,7 +266,7 @@
                                     <div onclick="showElement('levelDiv')">
                                         <div class="labels">
                                             <div class="right label">مرحله فعلی</div>
-                                            <div class="left label">مرحله بعدی</div>
+                                            <div class="float-leftImp label">مرحله بعدی</div>
                                         </div>
                                         <div class="progress_indicator">
                                             <div class="current_badge myBadge">{{$userLevels[1]->name}}</div>
