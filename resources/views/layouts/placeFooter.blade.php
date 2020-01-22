@@ -175,15 +175,22 @@
     </div>
 
     <div class="footerPhoneMenuBar hideOnScreen">
-        <div data-toggle="modal" data-target="#others">
+        <div data-toggle="modal" data-target="#otherPossibilities">
             <span>سایر امکانات</span>
             <span class="ui_icon more-horizontal"></span>
         </div>
-        <div data-toggle="modal" data-target="#register">
-            <span>ثبت نام</span>
-            <span class="ui_icon plus-circle"></span>
-        </div>
-        <div data-toggle="modal" data-target="#search">
+        @if(Auth::check())
+            <div data-toggle="modal" data-target="#profilePossibilities">
+                <span>امکانات کاربر</span>
+                <span class="ui_icon memberPossibilities"></span>
+            </div>
+        @else
+            <div class="login-button">
+                <span>ثبت نام</span>
+                <span class="ui_icon plus-circle"></span>
+            </div>
+        @endif
+        <div data-toggle="modal" data-target="#searchspan">
             <span>جست‌و‌جو</span>
             <span class="ui_icon search"></span>
         </div>
@@ -208,7 +215,7 @@
     <div class="container">
         <!-- The Modals -->
 
-        <div class="modal fade" id="others">
+        <div class="modal fade" id="profilePossibilities">
             <div class="mainPopUp leftPopUp recentViewLeftBar">
 
                 {{--each menu--}}
@@ -424,17 +431,7 @@
             </div>
         </div>
 
-        <div class="modal fade" id="register">
-            <div class="mainPopUp leftPopUp">
-                <div id="lp_register">
-                    <button type="button" class="btn btn-warning pp_btns">ثبت نام</button>
-                    <button type="button" class="btn btn-primary pp_btns">ورود</button>
-                    <a style="font-size: 1.25em">ویرایش اطلاعات</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal fade" id="search">
+        <div class="modal fade" id="otherPossibilities">
             <div class="mainPopUp leftPopUp">
 
                 <div class="pSC_tilte">
@@ -685,6 +682,8 @@
         </div>
 
     </div>
+
+    @include('layouts.proSearch')
 
     <script>
 

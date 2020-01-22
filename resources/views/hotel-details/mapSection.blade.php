@@ -1,9 +1,12 @@
+
+<link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/mapSection.css')}}' />
+
 <div id="nearbyDiv" class="ppr_rup ppr_priv_location_detail_two_column">
     <div class="column_wrap is-mobile">
         <div id="nearbyMainContainer" class="content_column ui_column is-8">
             <div class="ppr_rup ppr_priv_location_nearby">
                 <div class="nearbyContainer outerShell block_wrap">
-                    <div class="ui_columns neighborhood">
+                    <div class="ui_columns neighborhood position-relative">
                         <div id="map" class="ui_column is-12 mapTile prv_map clickable"></div>
                         <div class="clear-both"></div>
                         <div class="mapSetting">

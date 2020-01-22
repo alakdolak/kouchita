@@ -374,6 +374,17 @@ footer li > img, .small-ico {
     margin-left: 7px;
     padding-top: 5px;
 }
+
+.ui_icon.memberPossibilities {
+    font-size: 23px;
+    margin-left: 2px;
+}
+
+.ui_icon.memberPossibilities::before {
+    content: '\E0C7';
+    font-family: Shazde_Regular2 !important;
+
+}
 /*pop up on phone( phone popUp : pp)*/
 
 .mainPopUp {
@@ -1308,6 +1319,14 @@ a.single-tile .create-trip-text {
     .pp_btns {
         width: 90px;
         padding: 6px 5px;
+    }
+
+    .ui_icon.memberPossibilities {
+        font-size: 18px;
+    }
+
+    .ui_icon.more-horizontal {
+        display: none;
     }
 }
 

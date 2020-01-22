@@ -146,6 +146,10 @@
     text-align: right;
 }
 
+.text-align-justify {
+    text-align: justify;
+}
+
 .text-decoration-none {
     text-decoration: none;
 }
