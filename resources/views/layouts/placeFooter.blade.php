@@ -190,7 +190,7 @@
                 <span class="ui_icon plus-circle"></span>
             </div>
         @endif
-        <div data-toggle="modal" data-target="#searchspan">
+        <div onclick="openProSearch()">
             <span>جست‌و‌جو</span>
             <span class="ui_icon search"></span>
         </div>

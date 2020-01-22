@@ -661,6 +661,16 @@
 
 <script>
 
+    $('#close_span_search').click(function(e) {
+        $('#searchspan').animate({height: '0vh'});
+        $("#myCloseBtn").addClass('hidden');
+    });
+
+    function openProSearch() {
+            $("#myCloseBtn").removeClass('hidden');
+            $('#searchspan').animate({height: '100vh'});
+    }
+
     function closeInFireFox() {
         if(navigator.userAgent.toLowerCase().indexOf('firefox') > -1){
             $("#searchspan").css('height', "0vh");

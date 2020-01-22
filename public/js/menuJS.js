@@ -81,7 +81,7 @@ $(document).ready(function() {
         $('#searchspan').animate({height: '0vh'});
         $("#myCloseBtn").addClass('hidden');
     });
-    
+
     $('#openSearch').click(function(e) {
         $("#myCloseBtn").removeClass('hidden');
         $('#searchspan').animate({height: '100vh'});
