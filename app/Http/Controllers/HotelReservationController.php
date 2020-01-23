@@ -564,7 +564,7 @@ class HotelReservationController extends Controller {
 
     public function showHotelList2($city, $mode)
     {
-        $this->getAccessTokenHotel(0);
+//        $this->getAccessTokenHotel(0);
         if ($mode == "state") {
 
             $state = State::whereName($city)->first();

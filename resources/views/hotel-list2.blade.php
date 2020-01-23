@@ -3,8 +3,7 @@
 <head>
     @include('layouts.topHeader')
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-    <link rel='stylesheet' type='text/css' media='screen, print'
-          href='{{URL::asset('css/theme2/eatery_overview.css?v=2')}}'/>
+    <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/eatery_overview.css?v=2')}}'/>
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/long_lived_global_legacy_2.css?v=1')}}"/>
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/hotelList2.css')}}"/>
 
@@ -237,7 +236,6 @@
                                             <div class="coverpage_widget">
                                                 <div class="section">
                                                     <div class="single_filter_pois">
-
                                                         <div id="FilterTopController" class="title ui_columns" ng-controller="FilterTopController as filterCntlTop"
                                                              style="border-bottom: 1px solid lightgray;">
                                                             <div class="ordering" style="font-weight: bold">مرتب سازی بر
@@ -394,9 +392,9 @@
                                                                 {{--</div>--}}
                                                             </div>
                                                         </div>
-                                                        <center>
+                                                        <div>
                                                             <div class="loader hidden"></div>
-                                                        </center>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1293,7 +1291,6 @@
 
 <script src="https://propeller.in/components/range-slider/js/wNumb.js"></script>
 <script src="https://propeller.in/components/range-slider/js/nouislider.js"></script>
-
 
 {{--//filters--}}
 <script>
