@@ -1,4 +1,3 @@
-
 var currIdx, suggestions = [];
 
 function chooseState(e) {

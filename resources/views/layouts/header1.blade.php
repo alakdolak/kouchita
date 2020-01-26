@@ -6,13 +6,6 @@
 
 <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/header1.css')}}">
 
-<!-- Link Swiper's CSS -->
-<link rel="stylesheet" href="{{URL::asset('css/theme2/swiper.css')}}">
-
-<!-- Swiper JS -->
-<script src="{{URL::asset('js/swiper/swiper.min.js')}}"></script>
-
-
 <div class="masthead">
     <div id="taplc_global_nav_0" class="ppr_rup ppr_priv_global_nav">
         <div class="global-nav global-nav-single-line">

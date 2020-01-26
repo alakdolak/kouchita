@@ -19,8 +19,7 @@ $kindPlaceId = 10; ?>
     <link rel="profile" href="http://gmpg.org/xfn/11">
     <title>خانه - شازده مسافر</title>
 
-    <link rel='stylesheet' id='google-font-css' href='//fonts.googleapis.com/css?family=Dosis%3A200' type='text/css'
-          media='all'/>
+    <link rel='stylesheet' id='google-font-css' href='//fonts.googleapis.com/css?family=Dosis%3A200' type='text/css' media='all'/>
 
     <script type='text/javascript' src='{{URL::asset('js/jquery_12.js')}}'></script>
 

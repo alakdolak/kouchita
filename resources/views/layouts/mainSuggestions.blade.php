@@ -7,7 +7,6 @@
     <div id="newKoochita" class="homepage_shelves_widget ng-scope">
         <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show">
             <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
-
                 <div class="shelf_header">
                     <div class="shelf_title">
                         <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
@@ -16,8 +15,7 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="shelf_item_container ui_columns is-mobile is-multiline">
+                <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
                     <div class="mainSuggestion swiper-container">
                         <div class="swiper-wrapper position-relative">
                             <div class="swiper-slide position-relative" ng-repeat="place in records">
@@ -55,7 +53,6 @@
                         <div class="swiper-button-prev"></div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -75,8 +72,7 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="shelf_item_container ui_columns is-mobile is-multiline">
+                <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
                     <div id="mainSuggestion" class="mainSuggestion swiper-container">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide position-relative" ng-repeat="place in foodRecords">
@@ -129,8 +125,7 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="shelf_item_container ui_columns is-mobile is-multiline">
+                <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
                     <div class="mainSuggestion swiper-container">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide position-relative" ng-repeat="place in tabiatRecords">
@@ -183,8 +178,7 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="shelf_item_container ui_columns is-mobile is-multiline">
+                <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
                     <div class="mainSuggestion swiper-container">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide position-relative" ng-repeat="place in restaurantRecords">
@@ -237,8 +231,7 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="shelf_item_container ui_columns is-mobile is-multiline">
+                <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
                     <div class="mainSuggestion swiper-container">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide position-relative" ng-repeat="place in tarikhiRecords">
@@ -291,8 +284,7 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="shelf_item_container ui_columns is-mobile is-multiline">
+                <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
                     <div class="mainSuggestion swiper-container">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide position-relative" ng-repeat="place in kharidRecords">

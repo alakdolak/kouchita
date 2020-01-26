@@ -145,3 +145,340 @@
     border-radius: 10px;
     font-size: 20px;
 }
+
+
+
+
+
+
+
+
+.widget {
+    position: relative;
+    margin-bottom: 35px
+}
+
+.widget-head {
+    position: relative;
+    height: 20px;
+    margin: 10px 0 20px;
+}
+
+.widget-title {
+    background-color: #fff;
+    color: rgba(0, 0, 0, .75);
+    display: block;
+    height: 20px;
+    line-height: 18px;
+    font-size: 15px;
+    padding: 0 15px;
+    position: absolute;
+    top: calc(50% - 10px);
+    right: 30px;
+    margin: 0;
+    z-index: 11
+}
+
+.widget-head-bar,
+.widget-head-line {
+    display: block;
+    height: 3px;
+    position: absolute;
+    top: 50%
+}
+
+@media (max-width:768px) {
+    .widget-title {
+        font-size: 14px
+    }
+}
+
+.widget-head-bar {
+    background-color: rgba(0, 0, 0, .5);
+    width: 30px;
+    z-index: 10
+}
+
+.widget-head-line {
+    background-color: rgba(0, 0, 0, .075);
+    width: 100%;
+    z-index: 9
+}
+
+.widget-head.dark {
+    background-color: rgba(0, 0, 0, .9);
+    position: relative;
+    height: 40px;
+    line-height: 40px;
+    margin: 0 -30px
+}
+
+.widget-head.dark .widget-title {
+    background-color: transparent;
+    color: rgba(255, 255, 255, .75);
+    right: 15px
+}
+
+.widget-head.dark .widget-head-bar,
+.widget-head.dark .widget-head-line {
+    display: none
+}
+
+.widget ul {
+    margin: 0;
+    padding: 0
+}
+
+.widget ul li {
+    list-style: none;
+    margin-bottom: 20px;
+    position: relative
+}
+
+.widget ul li a {
+    color: rgba(0, 0, 0, .75);
+    display: inline-block
+}
+
+.im-widget {
+    min-height: 85px
+}
+
+.im-widget-view-all-list {
+    position: absolute!important;
+    top: 0;
+    left: 10px;
+    margin: 0!important;
+    padding: 0;
+    z-index: 12
+}
+
+.im-widget-view-all {
+    background-color: #fff;
+    color: rgba(0, 0, 0, .45);
+    position: absolute;
+    top: 3px;
+    left: 10px;
+    font-family: iran-medium, Tahoma, sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    margin: 0;
+    padding: 0 10px;
+    z-index: 12;
+    white-space: nowrap
+}
+
+.im-widget-entry-featured-title,
+.im-widget-entry-header .im-widget-entry-title {
+    font-family: iran-medium, Tahoma, sans-serif;
+    font-size: 14px;
+    font-weight: 500
+}
+
+.im-widget-featured {
+    border-bottom: none!important;
+    margin-bottom: 2px!important;
+    padding-bottom: 0!important
+}
+
+.im-widget-thumb {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 90px
+}
+
+.im-widget-thumb-featured {
+    width: 100%;
+    display: block
+}
+
+.im-widget-thumb a,
+.im-widget-thumb-featured .im-widget-thumb-featured-link {
+    display: block!important
+}
+
+.im-widget-thumb-featured .im-widget-thumb-featured-link:after {
+    background-color: rgba(0, 0, 0, .05)
+}
+
+.im-widget-thumb a:after {
+    background-color: rgba(0, 0, 0, 0)
+}
+
+.im-widget-thumb a:after,
+.im-widget-thumb-featured .im-widget-thumb-featured-link:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 2;
+    -moz-transition-duration: .5s;
+    -o-transition-duration: .5s;
+    -webkit-transition-duration: .5s;
+    transition-duration: .5s
+}
+
+.im-widget-featured:hover .im-widget-thumb-featured .im-widget-thumb-featured-link:after,
+.im-widget:hover .im-widget-thumb a:after {
+    background-color: rgba(0, 0, 0, .25);
+    -moz-transition-duration: .5s;
+    -o-transition-duration: .5s;
+    -webkit-transition-duration: .5s;
+    transition-duration: .5s
+}
+
+.im-widget-thumb-featured img {
+    width: 100%;
+    height: auto
+}
+
+.im-widget-thumb img {
+    width: 100%
+}
+
+.im-widget-entry {
+    margin-right: 110px
+}
+
+.im-widget-entry-list {
+    margin: 0
+}
+
+.im-widget-entry-featured {
+    background: linear-gradient(to top, rgba(0, 0, 0, .8), transparent);
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 5
+}
+
+.im-widget-entry-header .im-widget-entry-title {
+    line-height: 1.6;
+    margin: 0
+}
+
+.im-widget-entry-featured-title {
+    line-height: 1.8;
+    margin: 0
+}
+
+@media (max-width:992px) {
+    .im-widget-entry-featured-title {
+        font-size: 16px
+    }
+}
+
+@media (max-width:768px) {
+    .im-widget-entry-featured-title {
+        font-size: 14px
+    }
+    .im-widget-entry-header .im-widget-entry-title {
+        font-size: 13px
+    }
+}
+
+.im-widget-entry-header .im-widget-entry-title a {
+    margin-top: -2px
+}
+
+.im-widget-entry-featured-title a {
+    color: #fff!important;
+    display: block!important;
+    padding: 10px 35px 0
+}
+
+.im-widget-entry-featured-title a:hover {
+    color: #fff!important
+}
+
+.im-widget-entry-featured .iranomag-meta {
+    padding: 5px 35px 15px
+}
+
+.im-widget-entry-featured .iranomag-meta .im-meta-item,
+.im-widget-entry-featured .iranomag-meta .im-meta-item a {
+    color: rgba(255, 255, 255, .45)
+}
+
+.im-entry-category .im-meta-item a {
+    color: #fff!important
+}
+
+.im-widget-entry-featured .im-entry-category {
+    margin: 0
+}
+
+.im-widget-entry-featured .im-entry-category .iranomag-meta {
+    padding: 0 35px
+}
+
+.im-widget-entry-footer {
+    margin-top: 7px
+}
+
+.widget_impv_display_widget .im-widget-tabs {
+    background-color: #fff;
+    position: absolute;
+    top: 10px;
+    left: 25px;
+    z-index: 12
+}
+
+.widget_impv_display_widget .im-widget-tabs li {
+    display: inline-block
+}
+
+.widget_impv_display_widget .im-widget-tabs li a {
+    color: rgba(0, 0, 0, .45);
+    display: block;
+    padding: 0 7px;
+    font-family: iran-medium, Tahoma, sans-serif;
+    font-size: 12px;
+    font-weight: 500
+}
+
+.widget_impv_display_widget .widget-head-bar {
+    background-color: #f43939
+}
+
+.widget_pop_body {
+    display: block
+}
+
+.widget-title .rsswidget img {
+    vertical-align: middle;
+    margin-left: 5px
+}
+
+.widget_rss li .rsswidget {
+    line-height: 1.8;
+    font-family: iran-bold, Tahoma, sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    margin-top: -5px
+}
+
+.widget_rss li .rss-date {
+    color: rgba(0, 0, 0, .35);
+    display: block;
+    line-height: 1.5;
+    font-family: iran-medium, Tahoma, sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    margin-top: 7px
+}
+
+.widget_rss li .rssSummary {
+    color: rgba(0, 0, 0, .85);
+    line-height: 2;
+    font-family: iran, Tahoma, sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    margin-top: 7px
+}

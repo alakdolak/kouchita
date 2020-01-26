@@ -52,3 +52,9 @@
     }
 
 </script>
+
+<!-- Link Swiper's CSS -->
+<link rel="stylesheet" href="{{URL::asset('css/theme2/swiper.css')}}">
+
+<!-- Swiper JS -->
+<script src="{{URL::asset('js/swiper/swiper.min.js')}}"></script>
