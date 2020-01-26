@@ -595,12 +595,12 @@
                         </div>
 
                         <div class="postsMainFiltrationBar">
-                            <span class="showUsersPostsLink">پست‌ها</span>
-                            <span class="showUsersPhotosAndVideosLink">عکس و فیلم</span>
-                            <span class="showUsersQAndAsLink">سؤال‌ها و پاسخ‌ها</span>
-                            <span class="showUsersArticlesLink">مقاله‌ها</span>
-                            <span class="showUsersScores">امتیاز‌ها</span>
-                            <span class="otherFilterChoices">سایر موارد</span>
+                            <span class="showUsersPostsLink changeModeBtn" onclick="activitiesChangeMode(); postsChangeMode()">پست‌ها</span>
+                            <span class="showUsersPhotosAndVideosLink changeModeBtn" onclick="activitiesChangeMode(); photosChangeMode()">عکس و فیلم</span>
+                            <span class="showUsersQAndAsLink changeModeBtn" onclick="activitiesChangeMode(); questionsChangeMode()">سؤال‌ها و پاسخ‌ها</span>
+                            <span class="showUsersArticlesLink changeModeBtn" onclick="activitiesChangeMode(); articleChangeMode()">مقاله‌ها</span>
+                            <span class="showUsersScores changeModeBtn" onclick="activitiesChangeMode(); scoresChangeMode()">امتیاز‌ها</span>
+                            <span class="otherActivitiesChoices changeModeBtn" onclick="activitiesChangeMode(); othersChangeMode()">سایر موارد</span>
                         </div>
 
                         <div>
@@ -609,6 +609,45 @@
                             @include('userActivities.innerParts.userQuestionsInner')
                             @include('userActivities.innerParts.userArticlesInner')
                         </div>
+
+                        <script>
+
+                            function activitiesChangeMode() {
+                                $('.userProfileActivitiesDetailsMainDiv').css('display' , 'none');
+                                $('.changeModeBtn').css('border-color' , 'white');
+                            }
+
+                            function postsChangeMode() {
+                                $('.userActivitiesPosts').css('display' , 'block');
+                                $('.showUsersPostsLink').css('border-color' , '#0076a3');
+                            }
+
+                            function photosChangeMode() {
+                                $('.userActivitiesPhotos').css('display' , 'block');
+                                $('.showUsersPhotosAndVideosLink').css('border-color' , '#0076a3');
+                            }
+
+                            function questionsChangeMode() {
+                                $('.userActivitiesQuestions').css('display' , 'block');
+                                $('.showUsersQAndAsLink').css('border-color' , '#0076a3');
+                            }
+
+                            function articleChangeMode() {
+                                $('.userActivitiesArticles').css('display' , 'block');
+                                $('.showUsersArticlesLink').css('border-color' , '#0076a3');
+                            }
+
+                            function scoresChangeMode() {
+                                // $('.userActivitiesScores').css('display' , 'block');
+                                $('.showUsersScores').css('border-color' , '#0076a3');
+                            }
+
+                            function othersChangeMode() {
+                                // $('.userActivitiesOthers').css('display' , 'block');
+                                $('.otherActivitiesChoices').css('border-color' , '#0076a3');
+                            }
+
+                        </script>
 
     {{--                    <ul class="cs-contribution-bar">--}}
     {{--                        <?php $i = 0; $allow = true; ?>--}}

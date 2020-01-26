@@ -148,6 +148,10 @@ DIV.ppr_rup.ppr_priv_hr_atf_north_star_nostalgic .atf_meta_and_photos_wrapper::b
     }
 }
 
+DIV.ppr_rup.ppr_priv_global_nav_action_profile .login-button.ui_button {
+    top: inherit;
+}
+
 .btn {
     display: inline-block;
     padding: 6px 12px;

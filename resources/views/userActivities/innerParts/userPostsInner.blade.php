@@ -1,4 +1,4 @@
-<div class="userProfileActivitiesDetailsMainDiv col-sm-8 col-xs-12">
+<div class="userProfileActivitiesDetailsMainDiv userActivitiesPosts col-sm-8 col-xs-12">
     <div class="userProfilePostsFiltrationContainer">
         <div class="userProfilePostsFiltration">
             <span>نمایش بر اساس</span>

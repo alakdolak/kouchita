@@ -53,6 +53,12 @@ body {
     height: 100px;
 }
 
+.mainDivLoader {
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+
 /*2nd style Box*/
 
 .phoneBanner {
@@ -497,7 +503,21 @@ DIV.ppr_rup.ppr_priv_global_nav_action_profile .login-button.ui_button {
     top: 0;
 }
 
+DIV.ppr_rup.ppr_priv_homepage_hero .placement_wrap {
+    display: block;
+}
 
+DIV.ppr_rup.ppr_priv_homepage_hero .placement_wrap .placement_wrap_row {
+    display: block;
+}
+
+DIV.ppr_rup.ppr_priv_homepage_hero .placement_wrap .placement_wrap_cell {
+    display: block;
+}
+
+.placement_wrap_cell .mainBannerSlider {
+    position: inherit;
+}
 
 @media (max-width: 1100px) {
     .mainSearchDivPcSize {

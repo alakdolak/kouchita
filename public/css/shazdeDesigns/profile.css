@@ -1,4 +1,4 @@
-.grayBorder {
+.trophyCaseHeaderMainDiv.grayBorder {
     position: absolute;
     border-bottom: 1px solid #E6E6E6;
     left: 50%;
@@ -638,10 +638,10 @@
 
 .trophyCaseHeaderMainDiv {
     position: relative;
-    margin: 30px 0;
+    margin: 0 0 30px 0 !important;
     padding-top: 42px !important;
     border: solid #E6E6E6;
-    border-width: 1px 0;
+    border-width: 0 0 1px 0;
 }
 
 .modules-membercenter-badge-teaser .header .trophyCaseTitle {
@@ -669,13 +669,15 @@
 }
 
 .myActivitiesMainDiv {
-    margin: 18px;
+    margin: 18px 0;
+    padding: 0 9px;
     display: flex;
     flex-direction: column;
+    background-color: #ededed;
 }
 
 .myActivitiesHeaderMainDiv {
-    border-bottom: 1px solid #e6e6e6;
+    border-bottom: 1px solid white;
     margin-top: 13px;
     position: relative;
 }
@@ -685,7 +687,7 @@
     left: 0;
     top: -15px;
     color: #92321b;
-    background-color: white;
+    background-color: #ededed;
 }
 
 .cs-header-points span.label {
@@ -696,13 +698,47 @@
     position: absolute;
     right: 0;
     top: -15px;
-    background-color: white;
+    background-color: #ededed;
     padding-left: 5px;
     color: #0076a3;
 }
 
 #targetHelp_15 {
     margin: 0;
+}
+
+.myActivitiesMainDiv .userProfileActivitiesDetailsMainDiv {
+    width: 100%;
+    padding: 0;
+    margin-top: 5px !important;
+    display: none;
+}
+
+.myActivitiesMainDiv .showUsersPostsLink {
+    border-color: #0076a3;
+}
+
+.myActivitiesMainDiv .userActivitiesPosts {
+    display: block;
+}
+
+.myActivitiesMainDiv .postsMainFiltrationBar {
+    padding: 0 !important;
+    display: flex !important;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+.myActivitiesMainDiv .postsMainDivInSpecificMode {
+    margin-top: 5px;
+}
+
+.myActivitiesMainDiv .answersBoxMainDiv {
+    margin-top: 5px;
+}
+
+.myActivitiesMainDiv .userProfilePostsSearchContainer {
+    margin-bottom: 0;
 }
 
 @media (max-width: 992px) {

@@ -1,4 +1,4 @@
-<div style="display: flex; justify-content: center; align-items: center">
+<div class="mainDivLoader">
     <div class="loader hidden"></div>
 </div>
 
@@ -19,9 +19,10 @@
 
                 <div class="shelf_item_container ui_columns is-mobile is-multiline">
                     <div class="mainSuggestion swiper-container">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide" ng-repeat="place in records">
-                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
+                        <div class="swiper-wrapper position-relative">
+                            <div class="swiper-slide position-relative" ng-repeat="place in records">
+                                <img src="{{URL::asset('_images/pin.png')}}" class="imageGoldPin">
+                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
                                     <div class="poi">
                                         <a href="[[place.url]]" class="thumbnail">
                                             <div class="prw_rup prw_common_thumbnail_no_style_responsive">
@@ -59,6 +60,10 @@
         </div>
     </div>
 
+    <div class="middleBannerPhotoBanner">
+        <img>
+    </div>
+
     <div id="foodSuggestion" class="homepage_shelves_widget ng-scope" style="display: none">
         <div class="prw_rup prw_shelves_shelf_widget">
             <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
@@ -74,7 +79,8 @@
                 <div class="shelf_item_container ui_columns is-mobile is-multiline">
                     <div id="mainSuggestion" class="mainSuggestion swiper-container">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide" ng-repeat="place in foodRecords">
+                            <div class="swiper-slide position-relative" ng-repeat="place in foodRecords">
+                                <img src="{{URL::asset('_images/pin.png')}}" class="imageGoldPin">
                                 <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
                                     <div class="poi">
                                         <a href="[[place.url]]" class="thumbnail">
@@ -127,7 +133,8 @@
                 <div class="shelf_item_container ui_columns is-mobile is-multiline">
                     <div class="mainSuggestion swiper-container">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide" ng-repeat="place in tabiatRecords">
+                            <div class="swiper-slide position-relative" ng-repeat="place in tabiatRecords">
+                                <img src="{{URL::asset('_images/pin.png')}}" class="imageGoldPin">
                                 <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
                                     <div class="poi">
                                         <a href="[[place.url]]" class="thumbnail">
@@ -180,7 +187,8 @@
                 <div class="shelf_item_container ui_columns is-mobile is-multiline">
                     <div class="mainSuggestion swiper-container">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide" ng-repeat="place in restaurantRecords">
+                            <div class="swiper-slide position-relative" ng-repeat="place in restaurantRecords">
+                                <img src="{{URL::asset('_images/pin.png')}}" class="imageGoldPin">
                                 <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
                                     <div class="poi">
                                         <a href="[[place.url]]" class="thumbnail">
@@ -233,7 +241,8 @@
                 <div class="shelf_item_container ui_columns is-mobile is-multiline">
                     <div class="mainSuggestion swiper-container">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide" ng-repeat="place in tarikhiRecords">
+                            <div class="swiper-slide position-relative" ng-repeat="place in tarikhiRecords">
+                                <img src="{{URL::asset('_images/pin.png')}}" class="imageGoldPin">
                                 <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
                                     <div class="poi">
                                         <a href="[[place.url]]" class="thumbnail">
@@ -286,7 +295,8 @@
                 <div class="shelf_item_container ui_columns is-mobile is-multiline">
                     <div class="mainSuggestion swiper-container">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide" ng-repeat="place in kharidRecords">
+                            <div class="swiper-slide position-relative" ng-repeat="place in kharidRecords">
+                                <img src="{{URL::asset('_images/pin.png')}}" class="imageGoldPin">
                                 <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
                                     <div class="poi">
                                         <a href="[[place.url]]" class="thumbnail">
@@ -325,7 +335,7 @@
         </div>
     </div>
 
-    <div id="" class="homepage_shelves_widget ng-scope">
+    <div id="safaranameSuggestions" class="homepage_shelves_widget ng-scope">
     <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" style="">
         <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
             <div class="shelf_header">
@@ -340,7 +350,8 @@
                 <div class="shelf_item_container ui_columns is-mobile is-multiline">
                     <div class="mainSuggestion swiper-container">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide">
+                            <div class="swiper-slide position-relative">
+                                <img src="{{URL::asset('_images/pin.png')}}" class="imageGoldPin">
                                 <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
                                     <div class="poi">
                                         <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
@@ -366,7 +377,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="swiper-slide">
+                            <div class="swiper-slide position-relative">
+                                <img src="{{URL::asset('_images/pin.png')}}" class="imageGoldPin">
                                 <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
                                     <div class="poi">
                                         <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
@@ -392,7 +404,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="swiper-slide">
+                            <div class="swiper-slide position-relative">
+                                <img src="{{URL::asset('_images/pin.png')}}" class="imageGoldPin">
                                 <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
                                     <div class="poi">
                                         <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
@@ -418,7 +431,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="swiper-slide">
+                            <div class="swiper-slide position-relative">
+                                <img src="{{URL::asset('_images/pin.png')}}" class="imageGoldPin">
                                 <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
                                     <div class="poi">
                                         <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
@@ -444,7 +458,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="swiper-slide">
+                            <div class="swiper-slide position-relative">
+                                <img src="{{URL::asset('_images/pin.png')}}" class="imageGoldPin">
                                 <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
                                     <div class="poi">
                                         <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
@@ -470,7 +485,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="swiper-slide">
+                            <div class="swiper-slide position-relative">
+                                <img src="{{URL::asset('_images/pin.png')}}" class="imageGoldPin">
                                 <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
                                     <div class="poi">
                                         <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
@@ -496,7 +512,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="swiper-slide">
+                            <div class="swiper-slide position-relative">
+                                <img src="{{URL::asset('_images/pin.png')}}" class="imageGoldPin">
                                 <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
                                     <div class="poi">
                                         <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
@@ -522,7 +539,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="swiper-slide">
+                            <div class="swiper-slide position-relative">
+                                <img src="{{URL::asset('_images/pin.png')}}" class="imageGoldPin">
                                 <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
                                     <div class="poi">
                                         <a href="http://localhost:8080/shazde/public/hotel-details/1/%D9%87%D8%AA%D9%84%20%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C" class="thumbnail">
@@ -557,6 +575,81 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div class="mainPageStatistics">
+        <div class="eachPartStatistic">
+            <div class="eachPartStatisticIcons articleStatisticIcon"></div>
+            <div class="eachPartStatisticNums">
+                <span>بیش از</span>
+                <span>1350</span>
+            </div>
+            <div class="eachPartStatisticTitle">مقاله</div>
+        </div>
+        <div class="eachPartStatistic">
+            <div class="eachPartStatisticIcons friendStatisticIcon"></div>
+            <div class="eachPartStatisticNums">
+                <span>بیش از</span>
+                <span>1350</span>
+            </div>
+            <div class="eachPartStatisticTitle">دوست</div>
+        </div>
+        <div class="eachPartStatistic">
+            <div class="eachPartStatisticIcons commentStatisticIcon"></div>
+            <div class="eachPartStatisticNums">
+                <span>بیش از</span>
+                <span>1350</span>
+            </div>
+            <div class="eachPartStatisticTitle">نظر</div>
+        </div>
+        <div class="eachPartStatistic">
+            <div class="eachPartStatisticIcons traditionalFoodStatisticIcon"></div>
+            <div class="eachPartStatisticNums">
+                <span>بیش از</span>
+                <span>1350</span>
+            </div>
+            <div class="eachPartStatisticTitle">غذای محلی</div>
+        </div>
+        <div class="eachPartStatistic">
+            <div class="eachPartStatisticIcons souvenirStatisticIcon"></div>
+            <div class="eachPartStatisticNums">
+                <span>بیش از</span>
+                <span>1350</span>
+            </div>
+            <div class="eachPartStatisticTitle">سوغات</div>
+        </div>
+        <div class="eachPartStatistic">
+            <div class="eachPartStatisticIcons handcraftStatisticIcon"></div>
+            <div class="eachPartStatisticNums">
+                <span>بیش از</span>
+                <span>1350</span>
+            </div>
+            <div class="eachPartStatisticTitle">صنایع دستی</div>
+        </div>
+        <div class="eachPartStatistic">
+            <div class="eachPartStatisticIcons attractionStatisticIcon"></div>
+            <div class="eachPartStatisticNums">
+                <span>بیش از</span>
+                <span>1350</span>
+            </div>
+            <div class="eachPartStatisticTitle">جاذبه</div>
+        </div>
+        <div class="eachPartStatistic">
+            <div class="eachPartStatisticIcons restaurantStatisticIcon"></div>
+            <div class="eachPartStatisticNums">
+                <span>بیش از</span>
+                <span>1350</span>
+            </div>
+            <div class="eachPartStatisticTitle">رستوران</div>
+        </div>
+        <div class="eachPartStatistic">
+            <div class="eachPartStatisticIcons residenceStatisticIcon"></div>
+            <div class="eachPartStatisticNums">
+                <span>بیش از</span>
+                <span>1350</span>
+            </div>
+            <div class="eachPartStatisticTitle">اقامت‌گاه</div>
         </div>
     </div>
 </div>
@@ -931,19 +1024,19 @@
             },
             520: {
                 slidesPerView: 2,
-                spaceBetween: 15,
+                spaceBetween: 20,
             },
             768: {
                 slidesPerView: 2,
-                spaceBetween: 30,
+                spaceBetween: 20,
             },
             992: {
                 slidesPerView: 3,
-                spaceBetween: 30,
+                spaceBetween: 20,
             },
             10000: {
                 slidesPerView: 4,
-                spaceBetween: 30,
+                spaceBetween: 20,
             }
         }
     });
