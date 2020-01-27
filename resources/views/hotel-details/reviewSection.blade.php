@@ -464,7 +464,7 @@
             // new ans
             text +='                                <div class="newCommentPlaceMainDiv">\n' +
                 '                                    <div class="circleBase type2 newCommentWriterProfilePic">' +
-                '                                             <img src="' + userPic + '" style="width: 100%; height: 100%; border-radius: 50%;">\n' +
+                '                                             <img src="' + userPic + '" style="">\n' +
                 '</div>\n' +
                 '                                    <div class="inputBox">\n' +
                 '                                        <b class="replyCommentTitle">در پاسخ به نظر ' + reviews[i]["usernameReviewWriter"] + '</b>\n' +

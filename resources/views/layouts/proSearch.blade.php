@@ -65,7 +65,7 @@
         }
 
         $("#searchKeyCity").empty().append(val);
-        $("#currentCity").empty().append("شما در حال حاضر در شهر " + val + " هستید.");
+        $("#currentCity").empty().append("شما در حال حاضر در شهر " + val + " هستید.").css('margin' , 'margin: 10px 0 5px !important;');
         offset  = elemRect.top;
         offset2 = elemRect.left;
 
@@ -357,10 +357,10 @@
 
         activeCityFilter = false;
         $("#searchKeyCity").empty();
-        $("#currentCity").empty();
+        $("#currentCity").empty().css('margin' , '0');
 
         if($("#GEO_SCOPED_SEARCH_INPUT").val().length < 2) {
-            $("#resultCity").empty();
+            $("#resultCity").empty().css('padding', '0');
             return;
         }
 
@@ -384,7 +384,7 @@
                     newElement += "<p><span id='greenBtnProSearch' onclick='setCityName(\"" + response[i].cityName + "\", \"" + response[i].id + "\")' class='btn btn-success glyphicon glyphicon-plus'></span><span>" + response[i].cityName + " در " + response[i].stateName + "</span></p>";
                 }
 
-                $("#resultCity").append(newElement);
+                $("#resultCity").append(newElement).css('padding', '10px');;
             }
         });
     }
@@ -497,10 +497,10 @@
     
 </script>
 
-<link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/proSearch.css')}}'/>
+<link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/shazdeDesigns/proSearch.css')}}'/>
+<link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/shazdeDesigns/abbreviations.css')}}'/>
 
-
-<div id="searchspan" class="ui_overlay ui_modal fullwidth no_padding ppr_rup ppr_priv_masthead_search">
+<div id="searchspan" class="ui_modal fullwidth no_padding ppr_rup ppr_priv_masthead_search">
     <div class="body_text">
         <div class="search_overlay_content ui_container">
             <div id="DUAL_SEARCH_LOADER_CONTAINER" class="dual_search_loader_container">
@@ -514,39 +514,39 @@
 
                 <div class="col-xs-12 boxOfWhereIsHere">شما در حال حاضر در شهر <div id="nameOfWhereIsHere">اصفهان</div> هستید</div>
 
-                <div class="col-xs-2"></div>
-                <div class="col-xs-8">
-                    <div class="col-xs-5">
-                        <div id="addToFilterCityBtn" class="inner" onclick="goTo()"><span>مشاهده نتایج شهر اصفهان</span><span>&nbsp;</span><span id="searchKeyCity"></span></div>
-                    </div>
+{{--                <div class="col-xs-2"></div>--}}
+                <div class="col-xs-12 whereMainDiv">
                     <div class="col-xs-7">
                         <div class="boxOfCityNameProSearch">
                             <div id="textOfWhere">در کجا</div>
-                            <div class="where_with_highlight" id="enterCityNameProSearch">
+                            <div class="where_with_highlight enterCityNameProSearch">
                                 <input onkeyup="searchCity()" id="GEO_SCOPED_SEARCH_INPUT" class="text geoScopeInput" value="" placeholder="نام شهر را وارد کنید" autocomplete="off" type="text">
-                                <p id="currentCity"></p>
                             </div>
                         </div>
+                        <p id="currentCity"></p>
                         <div id="resultCity" class="data_holder"></div>
                     </div>
+                    <div class="col-xs-5 whereSearchBtnMainDiv">
+                        <div id="addToFilterCityBtn" class="inner" onclick="goTo()"><span>مشاهده نتایج شهر اصفهان</span><span>&nbsp;</span><span id="searchKeyCity"></span></div>
+                    </div>
                 </div>
-                <div class="col-xs-2"></div>
+{{--                <div class="col-xs-2"></div>--}}
 
-                <div style="clear: both;"></div>
+                <div class="clear-both"></div>
 
-                <div class="col-xs-2"></div>
-                <div class="col-xs-8" id="dividerUpBoxProSearch"></div>
-                <div class="col-xs-2"></div>
+{{--                <div class="col-xs-2"></div>--}}
+                <div class="col-xs-12 pd-0" id="dividerUpBoxProSearch"></div>
+{{--                <div class="col-xs-2"></div>--}}
 
-                <div style="clear: both;"></div>
+                <div class="clear-both"></div>
 
-                <div class="col-xs-2"></div>
-                <div class="col-xs-8">
-                    <div class="col-xs-12" style="margin-top: 40px; display: flex; align-items: flex-end">
-                        <div class="col-xs-5">
+{{--                <div class="col-xs-2"></div>--}}
+                <div class="col-xs-12 pd-0">
+                    <div class="col-xs-12 destinationMainDiv">
+                        <div class="col-xs-5 pd-0">
                             <div class="boxOfCityNameProSearch">
                                 <div id="textOfWhere2">به کجا</div>
-                                <div class="where_with_highlight" id="enterCityNameProSearch">
+                                <div class="where_with_highlight enterCityNameProSearch">
                                     <input onkeyup="searchInPlaces()" id="GEO_SCOPED_SEARCH_INPUT2" class="text geoScopeInput" value="" placeholder="نام شهر را وارد کنید" autocomplete="off" type="text">
                                 </div>
                             </div>
@@ -610,7 +610,7 @@
                                 <div>صنایع</div>
                             </div>
                         </div>
-                        <div id="dividerCenterBoxProSearch"></div>
+{{--                        <div id="dividerCenterBoxProSearch"></div>--}}
                     </div>
                     {{--<div class="col-xs-12" id="filterDiv">--}}
                         {{--<div id="filters" class="position-relative"></div>--}}
@@ -619,9 +619,9 @@
                         {{--<div id="resultPlace" class="data_holder"></div>--}}
                     {{--</div>--}}
                 </div>
-                <div class="col-xs-2"></div>
+{{--                <div class="col-xs-2"></div>--}}
 
-                <div style="clear: both;"></div>
+                <div class="clear-both"></div>
 
                 {{--<div class="col-xs-12">--}}
                     {{--<div class="col-xs-2"></div>--}}
@@ -631,9 +631,9 @@
                     {{--<div class="col-xs-2"></div>--}}
                 {{--</div>--}}
 
-                <div class="col-xs-2"></div>
-                <div class="col-xs-8">
-                    <div class="col-xs-12 boxOfmainDivCompareProSearch">
+{{--                <div class="col-xs-2"></div>--}}
+                <div class="col-xs-12 pd-0">
+                    <div class="col-xs-12 boxOfMainDivCompareProSearch">
                         @for($i = 1; $i < 5; $i++)
                             <div id="mainDivCompareProSearch">
                                 <div>
@@ -649,7 +649,7 @@
                         <button id="compare" onclick="compare()" class="btn btn-primary">شروع مقایسه</button>
                     </div>
                 </div>
-                <div class="col-xs-2"></div>
+{{--                <div class="col-xs-2"></div>--}}
             </div>
 
             <div id="myCloseBtn" class="hidden" onclick="closeInFireFox()" draggable="true" ondragend="dropMenu(event)" ondrop="dropMenu(event)" ondrag="dragging(event)"></div>
@@ -661,6 +661,16 @@
 
 <script>
 
+    $('#close_span_search').click(function(e) {
+        $('#searchspan').animate({height: '0vh'});
+        $("#myCloseBtn").addClass('hidden');
+    });
+
+    function openProSearch() {
+            $("#myCloseBtn").removeClass('hidden');
+            $('#searchspan').animate({height: '100vh'});
+    }
+
     function closeInFireFox() {
         if(navigator.userAgent.toLowerCase().indexOf('firefox') > -1){
             $("#searchspan").css('height', "0vh");
@@ -670,17 +680,17 @@
 
     function dropMenu(event) {
 
-        if(event.clientY < 0.7 * window.innerHeight) {
-            $("#searchspan").css('height', "0vh");
-            $("#myCloseBtn").addClass('hidden');
-        }
-        else
-            $("#searchspan").css('height', "100vh");
+        // if(event.clientY < 0.7 * window.innerHeight) {
+        //     $("#searchspan").css('height', "0vh");
+        //     $("#myCloseBtn").addClass('hidden');
+        // }
+        // else
+        //     $("#searchspan").css('height', "100vh");
     }
 
-    function dragging(event) {
-        $("#searchspan").css('height', event.clientY + "px");
-    }
+    // function dragging(event) {
+    //     $("#searchspan").css('height', event.clientY + "px");
+    // }
 
     $(".lantern").click(function () {
         if($(this).attr('data-val') == "off") {

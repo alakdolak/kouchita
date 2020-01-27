@@ -117,7 +117,7 @@
     }
 }
 /*in Screen*/
-@media only screen and (min-width:768px) {
+@media only screen and (min-width:767px) {
     .hideOnScreen {
         display: none;
         width: 0;

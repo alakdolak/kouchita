@@ -116,7 +116,7 @@
     float: left;
 }
 
-.float-lefImp {
+.float-leftImp {
     float: left !important;
 }
 
@@ -144,6 +144,10 @@
 
 .text-align-right {
     text-align: right;
+}
+
+.text-align-justify {
+    text-align: justify;
 }
 
 .text-decoration-none {
@@ -564,12 +568,20 @@
     margin: 0 1%;
 }
 
+.mg-0-2 {
+    margin: 0 2px;
+}
+
 .mg-0-9 {
     margin: 0 9px;
 }
 
 .mg-5-0 {
     margin: 5px 0;
+}
+
+.mg-0-5 {
+    margin: 0 5px;
 }
 
 .mg-10-15 {

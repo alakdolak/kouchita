@@ -6,13 +6,6 @@
 
 <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/header1.css')}}">
 
-<!-- Link Swiper's CSS -->
-<link rel="stylesheet" href="{{URL::asset('css/theme2/swiper.css')}}">
-
-<!-- Swiper JS -->
-<script src="{{URL::asset('js/swiper/swiper.min.js')}}"></script>
-
-
 <div class="masthead">
     <div id="taplc_global_nav_0" class="ppr_rup ppr_priv_global_nav">
         <div class="global-nav global-nav-single-line">
@@ -271,7 +264,9 @@
                             <div class="sidebar-nav-close">
                                 <div class="ui_icon times"></div>
                             </div>
-                            <a href="/" class="global-nav-logo"><img src='{{URL::asset('images/logo.png')}}' alt="شازده مسافر" class="global-nav-img"/></a>
+                            <a href="/" class="global-nav-logo">
+                                <img src='{{URL::asset('images/logo.png')}}' alt="شازده مسافر" class="global-nav-img"/>
+                            </a>
                         </div>
                         <div class="sidebar-nav-profile-container">
                             @if(Auth::check())

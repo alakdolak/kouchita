@@ -21,8 +21,6 @@
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/shazdeDesigns/css/theme2/article.min.css?v=1.1')}}"/>
     <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/usersActivities.css')}}">
 
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/article.min.css?v=1.2')}}"/>
-
     <script>
         var searchDir = '{{route('totalSearch')}}';
         var kindPlaceId = '{{$kindPlaceId}}';
@@ -68,7 +66,6 @@
             cursor: pointer;
         }
     </style>
-
 </head>
 
 <body class="rebrand_2017 desktop HomeRebranded  js_logging">
@@ -88,113 +85,233 @@
         <div class="cpHeaderCityName">شهر {{$city->name}}</div>
     </div>
     <div class="row">
-        <div class="col-lg-3 text-align-right" style="float: left;">
-            <div class="postsMainDivInSpecificMode col-xs-12 cpBorderBottom">
-                <div class="col-xs-12 postMainDivShown float-right position-relative">
-                    <div class="commentWriterDetailsShow">
-                        <div class="circleBase type2 commentWriterPicShow"></div>
-                        <div class="commentWriterExperienceDetails">
-                            <b class="userProfileName">shazdesina</b>
-                            <div>در
-                                <span class="commentWriterExperiencePlace">هتل عباسی، شهر یزد، استان یزد</span>
-                            </div>
-                            <div>
-                                هم اکنون - بیش از 23 ساعت پیش
-                            </div>
+        <div class="col-lg-3 text-align-right">
+            <div class="col-xs-12 postMainDivShown float-right position-relative">
+                <div class="commentWriterDetailsShow">
+                    <div class="circleBase type2 commentWriterPicShow"></div>
+                    <div class="commentWriterExperienceDetails">
+                        <b class="userProfileName">shazdesina</b>
+                        <div>در
+                            <span class="commentWriterExperiencePlace">هتل عباسی، شهر یزد، استان یزد</span>
                         </div>
-                    </div>
-                    <div class="commentContentsShow position-relative">
-                        <p class="SummarizedPostTextShown">
-                            بسیاری از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از
-                            طریق اینترنت دریافت
-                            می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا
-                            خدمات مورد نیازشان
-                            اثرپذیری فراوانی دارد.
-                            <span class="showMoreText" onclick="showMoreText(this)"></span>
-                        </p>
-                        <p class="completePostTextShown display-none">
-                            بسیاری از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از
-                            طریق اینترنت دریافت
-                            می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا
-                            خدمات مورد نیازشان
-                            اثرپذیری فراوانی دارد.
-                            با توجه به ابن که خدمات و کالاهای بومی و محلی دارای اصالت و فرهنگ کهن جوامع
-                            روستایی هستند، می توان
-                            گفت اینترنت می تواند در آمدزایی از سبک زندگی جوامع محلی نقش
-                            <span class="showLessText" onclick="showLessText(this)">کمتر</span>
-                        </p>
-                    </div>
-                    <div class="commentPhotosShow">
-                        <div class="photosCol col-xs-12">
-                            <div data-toggle="modal" data-target=".showingPhotosModal"></div>
-                            <div class="numberOfPhotosMainDiv">
-                                <div class="numberOfPhotos">31+</div>
-                                <div>عکس</div>
-                            </div>
-                        </div>
-                        <div class="quantityOfLikes">
-                            <span>31</span>
-                            نفر دوست داشتند،
-                            <span>31</span>
-                            نفر دوست نداشتند و
-                            <span>31</span>
-                            نفر نظر دادند.
+                        <div>
+                            هم اکنون - بیش از 23 ساعت پیش
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-12 postMainDivShown float-right position-relative">
-                    <div class="commentWriterDetailsShow">
-                        <div class="circleBase type2 commentWriterPicShow"></div>
-                        <div class="commentWriterExperienceDetails">
-                            <b class="userProfileName">shazdesina</b>
-                            <div>در
-                                <span class="commentWriterExperiencePlace">هتل عباسی، شهر یزد، استان یزد</span>
-                            </div>
-                            <div>
-                                هم اکنون - بیش از 23 ساعت پیش
-                            </div>
+                <div class="commentContentsShow position-relative">
+                    <p class="SummarizedPostTextShown">
+                        بسیاری از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از
+                        طریق اینترنت دریافت
+                        می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا
+                        خدمات مورد نیازشان
+                        اثرپذیری فراوانی دارد.
+                        <span class="showMoreText" onclick="showMoreText(this)"></span>
+                    </p>
+                    <p class="completePostTextShown display-none">
+                        بسیاری از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از
+                        طریق اینترنت دریافت
+                        می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا
+                        خدمات مورد نیازشان
+                        اثرپذیری فراوانی دارد.
+                        با توجه به ابن که خدمات و کالاهای بومی و محلی دارای اصالت و فرهنگ کهن جوامع
+                        روستایی هستند، می توان
+                        گفت اینترنت می تواند در آمدزایی از سبک زندگی جوامع محلی نقش
+                        <span class="showLessText" onclick="showLessText(this)">کمتر</span>
+                    </p>
+                </div>
+                <div class="commentPhotosShow">
+                    <div class="photosCol col-xs-12">
+                        <div data-toggle="modal" data-target=".showingPhotosModal"></div>
+                        <div class="numberOfPhotosMainDiv">
+                            <div class="numberOfPhotos">31+</div>
+                            <div>عکس</div>
                         </div>
                     </div>
-                    <div class="commentContentsShow position-relative">
-                        <p class="SummarizedPostTextShown">
-                            بسیاری از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از
-                            طریق اینترنت دریافت
-                            می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا
-                            خدمات مورد نیازشان
-                            اثرپذیری فراوانی دارد.
-                            <span class="showMoreText" onclick="showMoreText(this)"></span>
-                        </p>
-                        <p class="completePostTextShown display-none">
-                            بسیاری از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از
-                            طریق اینترنت دریافت
-                            می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا
-                            خدمات مورد نیازشان
-                            اثرپذیری فراوانی دارد.
-                            با توجه به ابن که خدمات و کالاهای بومی و محلی دارای اصالت و فرهنگ کهن جوامع
-                            روستایی هستند، می توان
-                            گفت اینترنت می تواند در آمدزایی از سبک زندگی جوامع محلی نقش
-                            <span class="showLessText" onclick="showLessText(this)">کمتر</span>
-                        </p>
-                    </div>
-                    <div class="commentPhotosShow">
-                        <div class="photosCol col-xs-12">
-                            <div data-toggle="modal" data-target=".showingPhotosModal"></div>
-                            <div class="numberOfPhotosMainDiv">
-                                <div class="numberOfPhotos">31+</div>
-                                <div>عکس</div>
-                            </div>
-                        </div>
-                        <div class="quantityOfLikes">
-                            <span>31</span>
-                            نفر دوست داشتند،
-                            <span>31</span>
-                            نفر دوست نداشتند و
-                            <span>31</span>
-                            نفر نظر دادند.
-                        </div>
+                    <div class="quantityOfLikes">
+                        <span>31</span>
+                        نفر دوست داشتند،
+                        <span>31</span>
+                        نفر دوست نداشتند و
+                        <span>31</span>
+                        نفر نظر دادند.
                     </div>
                 </div>
             </div>
+            {{--<div style="font-weight: 500"></div>--}}
+            {{--            <div class="cpTitle">تازه های گردشنامه</div>--}}
+            {{--            <div class="position-relative">--}}
+            {{--                <?php $i = 0; ?>--}}
+            {{--                @foreach($cityPost as $post)--}}
+            {{--                    @if($i == 0)--}}
+            {{--                        <article class="im-article grid-carousel grid-2 post type-post status-publish format-standard has-post-thumbnail hentry">--}}
+            {{--                            <div class="im-entry-thumb">--}}
+            {{--                                <a class="im-entry-thumb-link"--}}
+            {{--                                   href="{{route('gardeshnameInner', ['postId' => $post->id])}}"--}}
+            {{--                                   title="{{$post->title}}">--}}
+            {{--                                    <img class="lazy-img opacity-1Imp full-width" src="{{$post->pic}}" alt="{{$post->alt}}">--}}
+            {{--                                </a>--}}
+            {{--                                <div class="im-entry-header">--}}
+            {{--                                    <div class="im-entry-category">--}}
+            {{--                                        <div class="iranomag-meta clearfix">--}}
+            {{--                                            <div class="cat-links im-meta-item">--}}
+            {{--                                                <a style="background-color: {{$post->backColor}}; color: {{$post->categoryColor}} !important;"--}}
+            {{--                                                   href="" title="{{$post->category}}">{{$post->category}}</a>--}}
+            {{--                                            </div>--}}
+            {{--                                        </div>--}}
+            {{--                                    </div>--}}
+            {{--                                    <h2 class="im-entry-title">--}}
+            {{--                                        <a style="color: {{$post->color}}" href="" rel="bookmark">{{$post->title}}</a>--}}
+            {{--                                    </h2>--}}
+            {{--                                    <div class="im-entry-footer">--}}
+            {{--                                        <div class="iranomag-meta clearfix">--}}
+            {{--                                            <div class="posted-on im-meta-item">--}}
+            {{--                                                <span class="entry-date published updated">{{$post->date}}</span>--}}
+            {{--                                            </div>--}}
+            {{--                                            <div class="comments-link im-meta-item">--}}
+            {{--                                                <a href="">--}}
+            {{--                                                    <i class="fa fa-comment-o"></i>--}}
+            {{--                                                    {{$post->msgs}}--}}
+            {{--                                                </a>--}}
+            {{--                                            </div>--}}
+            {{--                                            <div class="author vcard im-meta-item">--}}
+            {{--                                                <a class="url fn n">--}}
+            {{--                                                    <i class="fa fa-user"></i>{{$post->username}}--}}
+            {{--                                                </a>--}}
+
+            {{--                                            </div>--}}
+            {{--                                            <div class="post-views im-meta-item">--}}
+            {{--                                                <i class="fa fa-eye"></i>{{$post->seen}}--}}
+            {{--                                            </div>--}}
+            {{--                                        </div>--}}
+            {{--                                    </div>--}}
+            {{--                                </div>--}}
+            {{--                            </div>--}}
+            {{--                        </article>--}}
+            {{--                    @else--}}
+            {{--                        @if($i == 1)--}}
+            {{--                            <div class="row">--}}
+            {{--                                <div class="col-md-12">--}}
+            {{--                                    <div class="widget">--}}
+            {{--                                        <ul>--}}
+            {{--                                            @endif--}}
+            {{--                                            <li class="widget-10104im-widgetclearfix">--}}
+            {{--                                                <figure class="im-widget-thumb">--}}
+            {{--                                                    <a href="" title="{{$post->title}}">--}}
+            {{--                                                        <img src="{{$post->pic}}" alt="{{$post->alt}}"/>--}}
+            {{--                                                    </a>--}}
+            {{--                                                </figure>--}}
+            {{--                                                <div class="im-widget-entry">--}}
+            {{--                                                    <header class="im-widget-entry-header">--}}
+            {{--                                                        <h4 class='im-widget-entry-title'>--}}
+            {{--                                                            <a style="color: {{$post->color}} !important;" href=''--}}
+            {{--                                                               title='{{$post->title}}'>{{$post->title}}</a>--}}
+            {{--                                                        </h4>--}}
+            {{--                                                    </header>--}}
+            {{--                                                    <div class="iranomag-meta clearfix">--}}
+            {{--                                                        <div class="posted-on im-meta-item">--}}
+            {{--                                                            <span class="entry-date published updated">{{$post->date}}</span>--}}
+            {{--                                                        </div>--}}
+            {{--                                                        <div class="comments-link im-meta-item">--}}
+            {{--                                                            <a href="">--}}
+            {{--                                                                <i class="fa fa-comment-o"></i>{{$post->msgs}}--}}
+            {{--                                                            </a>--}}
+            {{--                                                        </div>--}}
+            {{--                                                        <div class="author vcard im-meta-item">--}}
+            {{--                                                            <a class="url fn n">--}}
+            {{--                                                                <i class="fa fa-user"></i>{{$post->username}}--}}
+            {{--                                                            </a>--}}
+            {{--                                                        </div>--}}
+            {{--                                                        <div class="post-views im-meta-item">--}}
+            {{--                                                            <i class="fa fa-eye"></i>{{$post->seen}}--}}
+            {{--                                                        </div>--}}
+            {{--                                                    </div>--}}
+            {{--                                                </div>--}}
+            {{--                                            </li>--}}
+            {{--                                            @if($i == count($cityPost) - 1)--}}
+            {{--                                        </ul>--}}
+            {{--                                    </div>--}}
+            {{--                                </div>--}}
+            {{--                            </div>--}}
+            {{--                        @endif--}}
+            {{--                    @endif--}}
+
+            {{--                    <?php $i++; ?>--}}
+
+            {{--                @endforeach--}}
+
+            {{--                <div class="row cpBorderBottom mg-0Imp">--}}
+            {{--                    <div class="col-md-12 text-align-center pd-20">--}}
+            {{--                        <button class="btn btn-success">--}}
+            {{--                            مشاهده همه مقالات--}}
+            {{--                        </button>--}}
+            {{--                    </div>--}}
+            {{--                </div>--}}
+
+            {{--                <div class="row mg-0Imp">--}}
+            {{--                    <div class="cpTitle">بیشترین بازدید</div>--}}
+            {{--                </div>--}}
+            {{--                <?php $i = 0; ?>--}}
+            {{--                @foreach($mostSeenPosts as $post)--}}
+            {{--                    @if($i == 0)--}}
+            {{--                        <div class="col-md-12">--}}
+            {{--                            <div class="widget">--}}
+            {{--                                <ul>--}}
+            {{--                                    @endif--}}
+            {{--                                    <li class="widget-10104im-widgetclearfix">--}}
+            {{--                                        <figure class="im-widget-thumb">--}}
+            {{--                                            <a href="" title="{{$post->title}}">--}}
+            {{--                                                <img src="{{$post->pic}}" alt="{{$post->alt}}"/>--}}
+            {{--                                            </a>--}}
+            {{--                                        </figure>--}}
+            {{--                                        <div class="im-widget-entry">--}}
+            {{--                                            <header class="im-widget-entry-header">--}}
+            {{--                                                <h4 class='im-widget-entry-title'>--}}
+            {{--                                                    <a style="color: {{$post->color}} !important;" href=''--}}
+            {{--                                                       title='{{$post->title}}'>{{$post->title}}</a>--}}
+            {{--                                                </h4>--}}
+            {{--                                            </header>--}}
+            {{--                                            <div class="iranomag-meta clearfix">--}}
+            {{--                                                <div class="posted-on im-meta-item">--}}
+            {{--                                                    <span class="entry-date published updated">{{$post->date}}</span>--}}
+            {{--                                                </div>--}}
+            {{--                                                <div class="comments-link im-meta-item">--}}
+            {{--                                                    <a href="">--}}
+            {{--                                                        <i class="fa fa-comment-o"></i>{{$post->msgs}}--}}
+            {{--                                                    </a>--}}
+            {{--                                                </div>--}}
+            {{--                                                <div class="author vcard im-meta-item">--}}
+            {{--                                                    <a class="url fn n">--}}
+            {{--                                                        <i class="fa fa-user"></i>{{$post->username}}--}}
+            {{--                                                    </a>--}}
+            {{--                                                </div>--}}
+            {{--                                                <div class="post-views im-meta-item">--}}
+            {{--                                                    <i class="fa fa-eye"></i>{{$post->seen}}--}}
+            {{--                                                </div>--}}
+            {{--                                            </div>--}}
+            {{--                                        </div>--}}
+            {{--                                    </li>--}}
+            {{--                                    @if($i == count($cityPost) - 1)--}}
+            {{--                                </ul>--}}
+            {{--                            </div>--}}
+            {{--                        </div>--}}
+            {{--                    @endif--}}
+
+            {{--                    <?php $i++; ?>--}}
+
+            {{--                @endforeach--}}
+
+            {{--                @if(count($mostSeenPosts) != 0)--}}
+            {{--                    <div class="row mg-bt-10">--}}
+            {{--                        <div class="col-md-12 pd-20Imp text-align-center">--}}
+            {{--                            <button class="btn btn-success seeAllArticlesBtn" style="">--}}
+            {{--                                مشاهده همه مقالات--}}
+            {{--                            </button>--}}
+            {{--                        </div>--}}
+            {{--                    </div>--}}
+            {{--                @endif--}}
+
+            {{--            </div>--}}
         </div>
         <div class="col-lg-9 cpBorderLeft">
             <div class="row cpMainBox">
@@ -267,296 +384,64 @@
                     <img class="cpPic" src="{{URL::asset('_images/city/'.$city->image)}}">
                 </div>
             </div>
-            <div class="row">
-                <div class="cpDescription cpBorderBottom">
-                    {{$city->description}}
+            <div class="cpDescription cpBorderBottom">
+                {{$city->description}}
+            </div>
+            <div ng-app="mainApp" class="cpBorderBottom">
+                @include('layouts.mainSuggestions')
+            </div>
+            {{--            <div id="outher_people" class="cpBorderBottom">--}}
+            {{--                <div class="cpTitle">دوستان شما چه می گویند</div>--}}
+            {{--                <div id="people_pic_div" class="full-width display-none">--}}
+            {{--                    <div class="cpFriendsBoxPic">--}}
+            {{--                        <div class="cpFriendsEachPic"--}}
+            {{--                             style="background: url('{{URL::asset('images') . '1.jpg'}}');"></div>--}}
+            {{--                        <div class="cpFriendsEachPic"--}}
+            {{--                             style="background: url('{{URL::asset('images') . '2.jpg'}}');"></div>--}}
+            {{--                        <div class="cpFriendsEachPic"--}}
+            {{--                             style="background: url('{{URL::asset('images') . '3.jpg'}}');"></div>--}}
+            {{--                        <div class="cpFriendsEachPic"--}}
+            {{--                             style="background: url('{{URL::asset('images') . '4.jpg'}}');"></div>--}}
+            {{--                    </div>--}}
+            {{--                    <div id="more_people_pic_button" class="cpFriendsOthersPic">--}}
+            {{--                        به اضافه--}}
+            {{--                        <br>--}}
+            {{--                        <span id="more_people_pic_count"></span>--}}
+            {{--                        <br>--}}
+            {{--                        عکس دیگر--}}
+            {{--                    </div>--}}
+            {{--                </div>--}}
+            {{--                <div class="cpFriendsFooter">--}}
+            {{--                    <div class="container-fluid">--}}
+            {{--                        <div class="row">--}}
+            {{--                            <div id="opinion" class="col-md-10"></div>--}}
+            {{--                        </div>--}}
+            {{--                    </div>--}}
+            {{--                </div>--}}
+            {{--            </div>--}}
+            <div class="cpBorderBottom">
+                <div class="cpMap">
+                    <div id="cpMap" class="prv_map clickable full-width full-height"></div>
                 </div>
-                <div ng-app="mainApp" class="cpBorderBottom">
-                    @include('layouts.mainSuggestions')
-                </div>
-                <div class="col-xs-12">
-                    <div class="widget-head widget-head-45">
-                        <strong class="widget-title">پر طرفدار ها</strong>
-                        <div class="widget-head-bar"></div>
-                        <div class="widget-head-line"></div>
-                    </div>
-                    <div class="row">
-                        <article class="im-article content-2col col-md-4 col-sm-12">
-                            <div class="im-entry-thumb">
-                                <a class="im-entry-thumb-link" href="http://localhost/kouchita/public/gardeshnameInner/73" title="مهمانسرای آذربایجان جلفا">
-                                    <img class="lazy-img" data-src="http://localhost/assets/posts/25.jpg" alt="" src="http://localhost/assets/posts/25.jpg" style="opacity: 1;">
-                                </a>
-                                <header class="im-entry-header">
-                                    <div class="im-entry-category">
-                                        <div class="iranomag-meta clearfix">
-                                            <div class="cat-links im-meta-item">
-                                                <a style="background-color: #182501; color: #751551 !important;" href="" title="هتل">هتل</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <h3 class="im-entry-title">
-                                        <a style="color: #535939" href="" rel="bookmark">مهمانسرای آذربایجان جلفا</a>
-                                    </h3>
-                                </header>
-                            </div>
-                            <div class="im-entry">
-                                <div class="iranomag-meta clearfix">
-                                    <div class="posted-on im-meta-item">
-                                        <span class="entry-date published updated">۱۳۹۸/۴/۷</span>
-                                    </div>
-
-                                    <div class="comments-link im-meta-item">
-                                        <a href="">
-                                            <i class="fa fa-comment-o"></i>۰
-                                        </a>
-                                    </div>
-
-                                    <div class="author vcard im-meta-item">
-                                        <a class="url fn n">
-                                            <i class="fa fa-user"></i>admin
-                                        </a>
-                                    </div>
-
-                                    <div class="post-views im-meta-item">
-                                        <i class="fa fa-eye"></i>۱۹۶
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
-                        <div class="col-md-4 col-sm-12">
-                            <div class="widget">
-                                <ul>
-                                    <li class="widget-10104im-widgetclearfix">
-                                        <figure class="im-widget-thumb">
-                                            <a href="" title="پانسیون فاطمه تازیکه">
-                                                <img src="http://localhost/assets/posts/12.jpg" alt="">
-                                            </a>
-                                        </figure>
-                                        <div class="im-widget-entry">
-                                            <header class="im-widget-entry-header">
-                                                <h4 class="im-widget-entry-title">
-                                                    <a style="color: #409713 !important;" href="" title="پانسیون فاطمه تازیکه">پانسیون فاطمه تازیکه</a>
-                                                </h4>
-                                            </header>
-                                            <div class="iranomag-meta clearfix">
-                                                <div class="posted-on im-meta-item">
-                                                    <span class="entry-date published updated">۱۳۹۸/۴/۷</span>
-                                                </div>
-                                                <div class="comments-link im-meta-item">
-                                                    <a href="">
-                                                        <i class="fa fa-comment-o"></i>۰
-                                                    </a>
-                                                </div>
-                                                <div class="author vcard im-meta-item">
-                                                    <a class="url fn n">
-                                                        <i class="fa fa-user"></i>admin
-                                                    </a>
-                                                </div>
-                                                <div class="post-views im-meta-item">
-                                                    <i class="fa fa-eye"></i>۱۹۵
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-
-                                    <li class="widget-10104im-widgetclearfix">
-                                        <figure class="im-widget-thumb">
-                                            <a href="" title="هتل اطلس">
-                                                <img src="http://localhost/assets/posts/46.jpg" alt="">
-                                            </a>
-                                        </figure>
-                                        <div class="im-widget-entry">
-                                            <header class="im-widget-entry-header">
-                                                <h4 class="im-widget-entry-title">
-                                                    <a style="color: #953279 !important;" href="" title="هتل اطلس">هتل اطلس</a>
-                                                </h4>
-                                            </header>
-                                            <div class="iranomag-meta clearfix">
-                                                <div class="posted-on im-meta-item">
-                                                    <span class="entry-date published updated">۱۳۹۸/۴/۷</span>
-                                                </div>
-                                                <div class="comments-link im-meta-item">
-                                                    <a href="">
-                                                        <i class="fa fa-comment-o"></i>۰
-                                                    </a>
-                                                </div>
-                                                <div class="author vcard im-meta-item">
-                                                    <a class="url fn n">
-                                                        <i class="fa fa-user"></i>admin
-                                                    </a>
-                                                </div>
-                                                <div class="post-views im-meta-item">
-                                                    <i class="fa fa-eye"></i>۱۹۳
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-
-                                    <li class="widget-10104im-widgetclearfix">
-                                        <figure class="im-widget-thumb">
-                                            <a href="" title="هتل ستاره دریا">
-                                                <img src="http://localhost/assets/posts/8.jpg" alt="">
-                                            </a>
-                                        </figure>
-                                        <div class="im-widget-entry">
-                                            <header class="im-widget-entry-header">
-                                                <h4 class="im-widget-entry-title">
-                                                    <a style="color: #509091 !important;" href="" title="هتل ستاره دریا">هتل ستاره دریا</a>
-                                                </h4>
-                                            </header>
-                                            <div class="iranomag-meta clearfix">
-                                                <div class="posted-on im-meta-item">
-                                                    <span class="entry-date published updated">۱۳۹۸/۴/۷</span>
-                                                </div>
-                                                <div class="comments-link im-meta-item">
-                                                    <a href="">
-                                                        <i class="fa fa-comment-o"></i>۰
-                                                    </a>
-                                                </div>
-                                                <div class="author vcard im-meta-item">
-                                                    <a class="url fn n">
-                                                        <i class="fa fa-user"></i>admin
-                                                    </a>
-                                                </div>
-                                                <div class="post-views im-meta-item">
-                                                    <i class="fa fa-eye"></i>۱۸۶
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-12">
-                            <div class="widget">
-                                <ul>
-                                    <li class="widget-10104im-widgetclearfix">
-                                        <figure class="im-widget-thumb">
-                                            <a href="" title="پانسیون فاطمه تازیکه">
-                                                <img src="http://localhost/assets/posts/12.jpg" alt="">
-                                            </a>
-                                        </figure>
-                                        <div class="im-widget-entry">
-                                            <header class="im-widget-entry-header">
-                                                <h4 class="im-widget-entry-title">
-                                                    <a style="color: #409713 !important;" href="" title="پانسیون فاطمه تازیکه">پانسیون فاطمه تازیکه</a>
-                                                </h4>
-                                            </header>
-                                            <div class="iranomag-meta clearfix">
-                                                <div class="posted-on im-meta-item">
-                                                    <span class="entry-date published updated">۱۳۹۸/۴/۷</span>
-                                                </div>
-                                                <div class="comments-link im-meta-item">
-                                                    <a href="">
-                                                        <i class="fa fa-comment-o"></i>۰
-                                                    </a>
-                                                </div>
-                                                <div class="author vcard im-meta-item">
-                                                    <a class="url fn n">
-                                                        <i class="fa fa-user"></i>admin
-                                                    </a>
-                                                </div>
-                                                <div class="post-views im-meta-item">
-                                                    <i class="fa fa-eye"></i>۱۹۵
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-
-                                    <li class="widget-10104im-widgetclearfix">
-                                        <figure class="im-widget-thumb">
-                                            <a href="" title="هتل اطلس">
-                                                <img src="http://localhost/assets/posts/46.jpg" alt="">
-                                            </a>
-                                        </figure>
-                                        <div class="im-widget-entry">
-                                            <header class="im-widget-entry-header">
-                                                <h4 class="im-widget-entry-title">
-                                                    <a style="color: #953279 !important;" href="" title="هتل اطلس">هتل اطلس</a>
-                                                </h4>
-                                            </header>
-                                            <div class="iranomag-meta clearfix">
-                                                <div class="posted-on im-meta-item">
-                                                    <span class="entry-date published updated">۱۳۹۸/۴/۷</span>
-                                                </div>
-                                                <div class="comments-link im-meta-item">
-                                                    <a href="">
-                                                        <i class="fa fa-comment-o"></i>۰
-                                                    </a>
-                                                </div>
-                                                <div class="author vcard im-meta-item">
-                                                    <a class="url fn n">
-                                                        <i class="fa fa-user"></i>admin
-                                                    </a>
-                                                </div>
-                                                <div class="post-views im-meta-item">
-                                                    <i class="fa fa-eye"></i>۱۹۳
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-
-                                    <li class="widget-10104im-widgetclearfix">
-                                        <figure class="im-widget-thumb">
-                                            <a href="" title="هتل ستاره دریا">
-                                                <img src="http://localhost/assets/posts/8.jpg" alt="">
-                                            </a>
-                                        </figure>
-                                        <div class="im-widget-entry">
-                                            <header class="im-widget-entry-header">
-                                                <h4 class="im-widget-entry-title">
-                                                    <a style="color: #509091 !important;" href="" title="هتل ستاره دریا">هتل ستاره دریا</a>
-                                                </h4>
-                                            </header>
-                                            <div class="iranomag-meta clearfix">
-                                                <div class="posted-on im-meta-item">
-                                                    <span class="entry-date published updated">۱۳۹۸/۴/۷</span>
-                                                </div>
-                                                <div class="comments-link im-meta-item">
-                                                    <a href="">
-                                                        <i class="fa fa-comment-o"></i>۰
-                                                    </a>
-                                                </div>
-                                                <div class="author vcard im-meta-item">
-                                                    <a class="url fn n">
-                                                        <i class="fa fa-user"></i>admin
-                                                    </a>
-                                                </div>
-                                                <div class="post-views im-meta-item">
-                                                    <i class="fa fa-eye"></i>۱۸۶
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="cpBorderBottom">
-                    <div class="cpMap">
-                        <div id="cpMap" class="prv_map clickable full-width full-height"></div>
-                    </div>
-                    <div class="cpMapList" id="show">
-                        <img class="cpMapCategory" id="hotelImg" src="{{URL::asset('images/mhotel.png')}}"
-                             onclick="toggleIconInMap('hotelImg')">
-                        <img class="cpMapCategory" id="restImg" src="{{URL::asset('images/mrest.png')}}"
-                             onclick="toggleIconInMap('restImg')">
-                        <img class="cpMapCategory" id="fastImg" src="{{URL::asset('images/mfast.png')}}"
-                             onclick="toggleIconInMap('fastImg')">
-                        <img class="cpMapCategory" id="musImg" src="{{URL::asset('images/matr_mus.png')}}"
-                             onclick="toggleIconInMap('musImg')">
-                        <img class="cpMapCategory" id="plaImg" src="{{URL::asset('images/matr_pla.png')}}"
-                             onclick="toggleIconInMap('plaImg')">
-                        <img class="cpMapCategory" id="shcImg" src="{{URL::asset('images/matr_shc.png')}}"
-                             onclick="toggleIconInMap('shcImg')">
-                        <img class="cpMapCategory" id="funImg" src="{{URL::asset('images/matr_fun.png')}}"
-                             onclick="toggleIconInMap('funImg')">
-                        <img class="cpMapCategory" id="advImg" src="{{URL::asset('matr_adv.png')}}"
-                             onclick="toggleIconInMap('advImg')">
-                        <img class="cpMapCategory" id="natImg" src="{{URL::asset('images/matr_nat.png')}}"
-                             onclick="toggleIconInMap('natImg')">
-                    </div>
+                <div class="cpMapList" id="show">
+                    <img class="cpMapCategory" id="hotelImg" src="{{URL::asset('images/mhotel.png')}}"
+                         onclick="toggleIconInMap('hotelImg')">
+                    <img class="cpMapCategory" id="restImg" src="{{URL::asset('images/mrest.png')}}"
+                         onclick="toggleIconInMap('restImg')">
+                    <img class="cpMapCategory" id="fastImg" src="{{URL::asset('images/mfast.png')}}"
+                         onclick="toggleIconInMap('fastImg')">
+                    <img class="cpMapCategory" id="musImg" src="{{URL::asset('images/matr_mus.png')}}"
+                         onclick="toggleIconInMap('musImg')">
+                    <img class="cpMapCategory" id="plaImg" src="{{URL::asset('images/matr_pla.png')}}"
+                         onclick="toggleIconInMap('plaImg')">
+                    <img class="cpMapCategory" id="shcImg" src="{{URL::asset('images/matr_shc.png')}}"
+                         onclick="toggleIconInMap('shcImg')">
+                    <img class="cpMapCategory" id="funImg" src="{{URL::asset('images/matr_fun.png')}}"
+                         onclick="toggleIconInMap('funImg')">
+                    <img class="cpMapCategory" id="advImg" src="{{URL::asset('matr_adv.png')}}"
+                         onclick="toggleIconInMap('advImg')">
+                    <img class="cpMapCategory" id="natImg" src="{{URL::asset('images/matr_nat.png')}}"
+                         onclick="toggleIconInMap('natImg')">
                 </div>
             </div>
         </div>
@@ -909,7 +794,7 @@
     var getHotelsMainPath = '{{route('getRandomHotel')}}';
     var getAmakensMainPath = '{{route('getRandomAmaken')}}';
     var getRestaurantsMainPath = '{{route('getRestaurantsMain')}}';
-    {{--var getFoodsMainPath = '{{route('getRandomFood')}}';--}}
+            {{--var getFoodsMainPath = '{{route('getRandomFood')}}';--}}
     var getCitiesDir = "{{route('getCitiesDir')}}";
 
     var config = {

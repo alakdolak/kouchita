@@ -175,7 +175,7 @@
                             <div class="activityNumbers">سؤال 5</div>
                         </div>
                         <div class="activitiesLinesDiv">
-                            <div class="activityTitle">پاسخ به سرال دیگران</div>
+                            <div class="activityTitle">پاسخ به سؤال دیگران</div>
                             <div class="activityNumbers">پاسخ 15</div>
                         </div>
                         <div class="activitiesLinesDiv">
@@ -183,7 +183,7 @@
                             <div class="activityNumbers">مکان 14</div>
                         </div>
                         <div class="activitiesLinesDiv">
-                            <div class="activityTitle">پاسخ به سرالات اختیاری</div>
+                            <div class="activityTitle">پاسخ به سؤالات اختیاری</div>
                             <div class="activityNumbers">پاسخ 145</div>
                         </div>
                         <div class="activitiesLinesDiv">

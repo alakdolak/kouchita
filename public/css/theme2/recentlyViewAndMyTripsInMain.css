@@ -65,7 +65,7 @@
     content: '';
     position: absolute;
     left: 24px;
-    top: -15px;
+    top: -14px;
     margin-left: -10px;
     width: 0;
     height: 0;
@@ -83,9 +83,9 @@
 #bookmarkmenu {
     display: none;
     bottom: auto;
-    left: 187px;
+    left: 165px;
     position: absolute;
-    top: 35px
+    top: 40px
 }
 
 #masthead-recent {

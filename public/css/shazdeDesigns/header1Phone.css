@@ -25,7 +25,14 @@
 
 #nav-bar-phone-main-div > div > a {
     margin: auto;
-    height: 10vh !important;
+    height: initial;
+    display: flex;
+    align-items: center;
+}
+
+#nav-bar-phone-main-div > div > a > img {
+    height: 60px;
+    width: auto;
 }
 
 #nav-bar-phone-main-div > div > span {

@@ -66,7 +66,7 @@
                         <div class="ui_container global-nav-bar-container position-relative">
                             <div class="global-nav-hamburger is-hidden-tablet"><span class="ui_icon menu-bars"></span></div>
 
-                            <a href="{{route('main')}}" class="global-nav-logo  "><img src="{{URL::asset('images/logo.svg')}}" alt="شازده مسافر" class="global-nav-img global-nav-svg"/></a>
+                            <a href="{{route('main')}}" class="global-nav-logo  "><img src="{{URL::asset('images/logo.png')}}" alt="شازده مسافر" class="global-nav-img global-nav-svg"/></a>
 
                             <div class="global-nav-links ui_tabs inverted is-hidden-mobile">
                                 <div id="taplc_global_nav_links_0" class="ppr_rup ppr_priv_global_nav_links" data-placement-name="global_nav_links">
@@ -531,7 +531,8 @@
     </div>
 </div>
 
-@include('layouts.placeFooter')
+{{--@include('layouts.placeFooter')--}}
+
 <script>
     function showElement(id) {
         $(".item").addClass('hidden');

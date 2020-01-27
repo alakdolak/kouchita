@@ -173,7 +173,7 @@
       'file' => 
       array (
         'driver' => 'file',
-        'path' => __DIR__ . '/../../storage/framework/cache/data',
+        'path' => 'C:\\xampp\\htdocs\\kouchita\\storage\\framework/cache/data',
       ),
       'memcached' => 
       array (
@@ -236,25 +236,17 @@
       'sqlite' => 
       array (
         'driver' => 'sqlite',
-        'database' => 'admin_shazde',
+        'database' => 'koochita',
         'prefix' => '',
       ),
       'mysql' => 
       array (
-//          'driver' => 'mysql',
-//          'host' => 'mysql_pro',
-//          'port' => '3306',
-//          'database' => 'pro',
-//          'username' => 'pro',
-//          'password' => 'pro',
-
         'driver' => 'mysql',
         'host' => '127.0.0.1',
         'port' => '3306',
-        'database' => 'admin_shazde',
+        'database' => 'koochita',
         'username' => 'root',
         'password' => '',
-
         'unix_socket' => '',
         'charset' => 'utf8mb4',
         'collation' => 'utf8mb4_unicode_ci',
@@ -267,9 +259,9 @@
         'driver' => 'pgsql',
         'host' => '127.0.0.1',
         'port' => '3306',
-        'database' => 'admin_shazde',
-        'username' => 'administrator_persoulio',
-        'password' => 'yGrn65~6',
+        'database' => 'koochita',
+        'username' => 'root',
+        'password' => '',
         'charset' => 'utf8',
         'prefix' => '',
         'schema' => 'public',
@@ -280,9 +272,9 @@
         'driver' => 'sqlsrv',
         'host' => '127.0.0.1',
         'port' => '3306',
-        'database' => 'admin_shazde',
-        'username' => 'administrator_persoulio',
-        'password' => 'yGrn65~6',
+        'database' => 'koochita',
+        'username' => 'root',
+        'password' => '',
         'charset' => 'utf8',
         'prefix' => '',
       ),
@@ -309,12 +301,12 @@
       'local' => 
       array (
         'driver' => 'local',
-        'root' => __DIR__ . '/../../storage/app',
+        'root' => 'C:\\xampp\\htdocs\\kouchita\\storage\\app',
       ),
       'public' => 
       array (
         'driver' => 'local',
-        'root' => __DIR__ . '/../../storage/app/public',
+        'root' => 'C:\\xampp\\htdocs\\kouchita\\storage\\app/public',
         'url' => 'http://localhost/storage',
         'visibility' => 'public',
       ),
@@ -347,7 +339,7 @@
       'theme' => 'default',
       'paths' => 
       array (
-        0 => __DIR__ . '/../../config/../vendor/phpmailer',
+        0 => 'C:\\xampp\\htdocs\\kouchita\\config/../vendor/phpmailer',
       ),
     ),
   ),
@@ -427,7 +419,7 @@
     'lifetime' => 120,
     'expire_on_close' => false,
     'encrypt' => false,
-    'files' => __DIR__ . '/../../storage/framework/sessions',
+    'files' => 'C:\\xampp\\htdocs\\kouchita\\storage\\framework/sessions',
     'connection' => NULL,
     'table' => 'sessions',
     'store' => NULL,
@@ -446,9 +438,9 @@
   array (
     'paths' => 
     array (
-      0 => __DIR__ . '/../../resources/views',
+      0 => 'C:\\xampp\\htdocs\\kouchita\\resources\\views',
     ),
-    'compiled' => __DIR__ . '/../../storage/framework/views',
+    'compiled' => 'C:\\xampp\\htdocs\\kouchita\\storage\\framework\\views',
   ),
   'throttle' => 
   array (
@@ -456,8 +448,12 @@
   ),
   'tinker' => 
   array (
+    'commands' => 
+    array (
+    ),
     'dont_alias' => 
     array (
+      0 => 'App\\Nova',
     ),
   ),
 );

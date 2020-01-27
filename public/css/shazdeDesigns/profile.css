@@ -1,24 +1,77 @@
+.trophyCaseHeaderMainDiv.grayBorder {
+    position: absolute;
+    border-bottom: 1px solid #E6E6E6;
+    left: 50%;
+}
+
+.grayBorder1 {
+    bottom: 14px;
+    width: 35%;
+    margin-left: -117px;
+}
+
+.grayBorder5 {
+    top: 13px;
+    width: 72%;
+    margin-left: -340px;
+}
+
+.medalMainBox {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.medalEachBox {
+    border: 1px solid #CCCCCC;
+    height: 150px;
+    width: 33%;
+}
+
+.infoFlyout .myLevel {
+    text-align: right;
+}
+
+.infoFlyout .myLevel span {
+    background: url('images/profile.png') no-repeat -9px -299px !important;
+    width: 40px;
+    height: 40px;
+    line-height: 42px;
+    display: inline-block;
+    margin-left: 5px;
+    text-align: center;
+    float: right;
+    font-weight: bold;
+    font-size: 18px;
+    color: #fff;
+    background-size: 56px !important;
+}
+
+.modules-membercenter-level-progress .myBadge {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background: url('http://localhost/pro_shazde/public/images/profile.png') no-repeat -13px -344px !important;
+    background-size: 56px;
+    font-weight: bold;
+    font-size: 18px;
+    color: #fff;
+}
 
 #MODULES_MEMBER_CENTER {
     padding-bottom: 20px;
 }
 
-#arrowDown {
-    background-size: 64px;
-    background-position: -26px -223px;
-    width: 15px;
-    height: 15px;
-    background-image: url('../../images/profile.png');
-    background-repeat: no-repeat;
+.editInfosBoxTextMainDiv {
+    display: flex;
+    align-items: center;
 }
 
-#arrowUp {
-    background-size: 64px;
-    background-position: -26px -290px;
-    width: 15px;
-    height: 15px;
-    background-image: url('../../images/profile.png');
-    background-repeat: no-repeat;
+#arrowDown, #arrowUp {
+    color: #0076a3;
+    font-size: 10px;
 }
 
 .leftProfile {
@@ -27,8 +80,8 @@
 
 #infoDiv {
     position: absolute;
-    right: 80px;
-    top: 110px;
+    right: 20px;
+    top: 120px;
     min-width: 120px;
     font-size: 0.75em;
     z-index: 1001;
@@ -42,6 +95,13 @@
 #myHonorsText {
     text-align: right;
     right: 0;
+    position: absolute;
+    top: 9px;
+    background: white;
+    float: right;
+    left: inherit;
+    padding-left: 10px;
+    color: #0076ac;
 }
 
 #myHonorsText > a {
@@ -67,9 +127,13 @@
     padding-top: 16px !important;
 }
 
+.phoneNumMainDiv {
+    position: relative;
+    display: flex;
+}
+
 #phoneNum {
-    border-bottom: 1px solid #CCC !important;
-    padding: 7px;
+    padding: 7px 7px 0;
     width: 300px;
     background-color: transparent;
     border: none;
@@ -77,12 +141,29 @@
     margin-left: 60px;
 }
 
-#targetHelp_14 > div:nth-child(3) {
+.inputBorderBottom {
+    top: 25px;
+    position: absolute;
+    border-bottom: 1px solid #e6e6e6 !important;
+    width: 100%;
+}
+
+.sendInvitationCode {
     float: right;
-    padding: 10px;
-    width: 180px;
-    background-color: #4DC7BC;
-    border: none
+    padding: 0 20px;
+    width: max-content;
+    background-color: #0076a3;
+    border: none;
+}
+
+.sendInvitationCodeMainDiv {
+    position: absolute;
+    background-color: white;
+    display: flex;
+    left: -6px;
+    top: 15px;
+    z-index: 1;
+    padding-right: 5px;
 }
 
 #sendMsg {
@@ -203,11 +284,14 @@
 
 #tagPrompt {
     position: fixed;
-    left: 28%;
-    right: auto;
-    top: 25%;
+    left: 10%;
+    right: 10%;
+    top: 60px;
     bottom: auto;
-    width: 46%;
+}
+
+#tagPrompt.ui_overlay::before {
+    display: none;
 }
 
 #submitBtnTripStyle {
@@ -337,4 +421,328 @@
 
 .border-radius-50per {
     border-radius: 50%;
+}
+
+/*new changes*/
+
+.globalNav2011_reset #MAIN {
+    width: auto !important;
+}
+
+.globalNav2011_reset #BODYCON {
+    width: auto;
+}
+
+.modules-membercenter-member-profile .aboutMeDesc {
+    float: right;
+    border: 0;
+    overflow: inherit;
+    margin: 0 15px;
+}
+
+.modules-membercenter-member-profile .aboutMeDesc .update:hover {
+    text-decoration: none;
+}
+
+.userProfileActivitiesMainDiv {
+    padding: 0 0 20px;
+}
+
+.mainDivHeaderText {
+    padding: 10px 0;
+    border-bottom: 1px solid
+    #e5e5e5;
+    margin: 20px 0;
+    position: relative;
+}
+
+.mainDivHeaderText > h3 {
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 32px;
+    position: absolute;
+    top: 5px;
+    right: -5px;
+    background: white;
+    padding: 0 10px;
+    color: #0076a3;
+    margin: 0;
+}
+
+.activitiesMainDiv {
+    padding: 5px 15px;
+}
+
+.activitiesLinesDiv:first-child {
+    padding: 0 0 10px;
+}
+
+.activitiesLinesDiv {
+    border-bottom: 1px solid
+    #E5E5E5;
+    padding: 15px 0;
+    position: relative;
+}
+
+.activitiesLinesDiv:first-child > div {
+    top: 0;
+}
+
+.activityTitle {
+    position: absolute;
+    font-size: 14px;
+    color: #888888;
+    top: 19px;
+    right: 0;
+    cursor: default;
+    padding: 0 5px;
+    background-color: white;
+}
+
+.activityNumbers {
+    position: absolute;
+    font-size: 14px;
+    color: #0076a3;
+    top: 19px;
+    left: 0;
+    cursor: pointer;
+    padding: 0 5px;
+    background-color: white;
+}
+
+.modules-membercenter-member-tag {
+    border: none;
+}
+
+.modules-membercenter-member-tag .memberTags div.tripTasteTitle {
+    position: relative;
+    display: flex;
+    margin-bottom: 25px;
+    padding-bottom: 11px;
+    border-bottom: 1px solid #e6e6e6;
+    align-items: center;
+}
+
+.modules-membercenter-member-tag .memberTags .header {
+    position: absolute;
+    background: white;
+    padding-left: 5px;
+    font-size: 15px;
+    color: #0076ac;
+    margin-bottom: 0;
+    top: 0;
+    right: 0;
+}
+
+.modules-membercenter-member-tag .memberTags .editTags {
+    background: white;
+    padding: 0 5px 0 0;
+    font-size: 10px;
+    top: 5px;
+}
+
+#tagSuggest > span {
+    display: flex;
+    margin-bottom: 5px;
+}
+
+#tagSuggest > span:nth-child(2) {
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+
+.invitationFriendsMainDiv {
+    position: relative;
+    padding-top: 30px;
+}
+
+.invitationFriendsTitle {
+    font-size: 15px;
+    color: #0076ac;
+    padding-left: 5px;
+    position: absolute;
+    top: -12px;
+    right: 0;
+    background-color: white;
+    font-weight: 700;
+}
+
+.modules-membercenter-persistent-header-achievements .persistent-header {
+    width: auto;
+    padding: 0;
+}
+
+.modules-membercenter-persistent-header-achievements .persistent-header a {
+    color: #16174f !important;
+}
+
+.globalNav2011_reset #PAGE {
+    width: auto;
+}
+
+.mc_achievements .leftProfile {
+    width: 34%;
+}
+
+.modules-membercenter-progress-header {
+    margin-bottom: 40px;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.recentBadges, .futureBadges {
+    padding: 0 20px;
+}
+
+.modules-membercenter-badge-teaser .header.recentBadgesTitleMainDiv,
+.modules-membercenter-badge-teaser .header.badgeListTitleMainDiv {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    border: 0;
+    margin: 0;
+}
+
+.modules-membercenter-badge-teaser {
+    display: flex;
+    flex-direction: column;
+}
+
+.recentBadgesTitle, .futureBadgesTitle {
+    font-size: 15px;
+    margin-left: 7px;
+}
+
+.mc_achievements .rightContributions {
+    width: 62%;
+    margin: 20px 4% 0 0;
+    padding-left: 20px;
+}
+
+.modules-membercenter-member-profile .profileBlock .nameContent .name .profileLinks {
+    border-color: #0076a3;
+}
+
+.modules-membercenter-member-profile .profileBlock .nameContent {
+    float: right;
+    margin-top: 3px;
+    padding-right: 15px;
+    width: 100%;
+}
+
+.editInfosBoxText {
+    font-size: 13px;
+    color: #0076a3;
+    margin-left: 5px;
+}
+
+.trophyCaseHeaderMainDiv {
+    position: relative;
+    margin: 0 0 30px 0 !important;
+    padding-top: 42px !important;
+    border: solid #E6E6E6;
+    border-width: 0 0 1px 0;
+}
+
+.modules-membercenter-badge-teaser .header .trophyCaseTitle {
+    position: absolute;
+    right: 0;
+    top: 28px;
+    background: white;
+    padding-left: 5px;
+    color: #0076ac;
+}
+
+.modules-membercenter-badge-teaser .header .trophyCaseTitle > a {
+    font-size: 12px;
+    color: #92321b;
+    text-decoration: none;
+}
+
+.modules-membercenter-badge-teaser .header a.trophyCase {
+    position: absolute;
+    left: 0;
+    top: 26px;
+    background: white;
+    padding-right: 5px;
+    text-decoration: none;
+}
+
+.myActivitiesMainDiv {
+    margin: 18px 0;
+    padding: 0 9px;
+    display: flex;
+    flex-direction: column;
+    background-color: #ededed;
+}
+
+.myActivitiesHeaderMainDiv {
+    border-bottom: 1px solid white;
+    margin-top: 13px;
+    position: relative;
+}
+
+.cs-header-points {
+    position: absolute;
+    left: 0;
+    top: -15px;
+    color: #92321b;
+    background-color: #ededed;
+}
+
+.cs-header-points span.label {
+    color: #92321b;
+}
+
+.cs-header-title {
+    position: absolute;
+    right: 0;
+    top: -15px;
+    background-color: #ededed;
+    padding-left: 5px;
+    color: #0076a3;
+}
+
+#targetHelp_15 {
+    margin: 0;
+}
+
+.myActivitiesMainDiv .userProfileActivitiesDetailsMainDiv {
+    width: 100%;
+    padding: 0;
+    margin-top: 5px !important;
+    display: none;
+}
+
+.myActivitiesMainDiv .showUsersPostsLink {
+    border-color: #0076a3;
+}
+
+.myActivitiesMainDiv .userActivitiesPosts {
+    display: block;
+}
+
+.myActivitiesMainDiv .postsMainFiltrationBar {
+    padding: 0 !important;
+    display: flex !important;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+.myActivitiesMainDiv .postsMainDivInSpecificMode {
+    margin-top: 5px;
+}
+
+.myActivitiesMainDiv .answersBoxMainDiv {
+    margin-top: 5px;
+}
+
+.myActivitiesMainDiv .userProfilePostsSearchContainer {
+    margin-bottom: 0;
+}
+
+@media (max-width: 992px) {
+    .points_to_go > span{
+        font-size: 17px;
+    }
 }

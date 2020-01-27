@@ -1,4 +1,3 @@
-
 var currIdx, suggestions = [];
 
 function chooseState(e) {
@@ -214,12 +213,3 @@ $("body").on("click", function () {
 $(".global-nav-actions").on("click", function (e) {
     e.stopPropagation()
 });
-
-// phone functions
-
-function lp_selectMenu(id , element) {
-    $('.lp_eachMenu').removeClass('lp_selectedMenu');
-    $(element).addClass('lp_selectedMenu');
-    $('.lp_others_content').addClass('hidden');
-    $('#' + id).removeClass('hidden');
-}

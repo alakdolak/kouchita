@@ -633,7 +633,7 @@ $authUrl = $client->createAuthUrl();
     <div class="mainDivLoginMainLogo">
         <img class="loginMainLogo" src="{{URL::asset('images/logo.svg')}}">
     </div>
-    <div class="col-xs-12 rtl mainContentInfos mainContentInfos">
+    <div class="col-xs-12 rtl mainContentInfos">
         <div class="loginPaneInLoginPopUp loginDividerBorder col-xs-6">
             <div class="header_text font-size-14Imp">در حال حاضر عضو شازده مسافر هستید؟!</div>
             <div>
@@ -792,13 +792,13 @@ $authUrl = $client->createAuthUrl();
                 <div>
                     <label class="full-width">
                         <span class="pd-tp-8 inputLabelText"> نام کاربری </span>
-                        <input type="text" id="username_2" maxlength="40" required autofocus>
+                        <input type="text" id="username_2" class="loginInputTemp" maxlength="40" required autofocus>
                     </label>
                 </div>
                 <div>
                     <label class="full-width">
                         <span class="pd-tp-8 inputLabelText">رمز عبور</span>
-                        <input id="password_2" class="password" maxlength="40" required>
+                        <input id="password_2" class="password loginInputTemp" maxlength="40" required>
                         <a class="forgetPassLink" onclick="ShowForgetPass()">رمز عبور خود را فراموش کردید؟</a>
                     </label>
                 </div>
@@ -809,7 +809,7 @@ $authUrl = $client->createAuthUrl();
             </div>
         </div>
         <div class="col-xs-6">
-            <div class="header_text">لطفا کد اعتبار سنجی را وارد نمایید:</div>
+            <div class="header_text font-size-14Imp">لطفا کد اعتبار سنجی را وارد نمایید:</div>
             <div>
                 <div>
                     <label>
@@ -852,7 +852,7 @@ $authUrl = $client->createAuthUrl();
                 <div>
                     <label class="full-width">
                         <span class="pd-tp-8 inputLabelText">رمز عبور</span>
-                        <input type="loginInputTemp password" id="password_3" maxlength="40" required>
+                        <input type="password" id="password_3" class="loginInputTemp" maxlength="40" required>
                         <a class="forgetPassLink" onclick="ShowForgetPass()">رمز عبور خود را فراموش کردید؟</a>
                     </label>
                 </div>
@@ -868,7 +868,7 @@ $authUrl = $client->createAuthUrl();
                 <div>
                     <label class="full-width">
                         <span>رمز عبور</span>
-                        <input type="password" id="password_In_Phone_registry" maxlength="40" required>
+                        <input type="password" id="password_In_Phone_registry" class="loginInputTemp" maxlength="40" required>
                     </label>
                 </div>
             </div>
@@ -906,16 +906,16 @@ $authUrl = $client->createAuthUrl();
             <p id="loginErrUserName"></p>
         </div>
         <div class="col-xs-6">
-            <div class="header_text font-size-14imp">قدم آخر!</div>
+            <div class="header_text font-size-14Imp font-weight-700">قدم آخر!</div>
             <div>
                 <label>
-                    <span class="header_text font-size-12Imp">نام کاربری خود را انتخاب کنید.دوستانتان در سایت شما را با این نام خواهند شناخت.</span>
+                    <span class="header_text font-size-12Imp text-align-justify">نام کاربری خود را انتخاب کنید.دوستانتان در سایت شما را با این نام خواهند شناخت.</span>
                     <span class="pd-tp-8">نام کاربری</span>
                     <input type="text" id="username_final" maxlength="40" required>
                     <br>
                     <br>
                     <span class="header_text font-size-12Imp">در صورتی که دوستانتان شما را معرفی کرده اند، کد معرف خود را در کادر زیر وارد کنید.</span>
-                    <span class="pd-tp-8">کد معرف</span>
+                    <span class="registerCodeEmail pd-tp-8">کد معرف</span>
                     <input type="text" id="invitationCode" maxlength="6">
                 </label>
             </div>

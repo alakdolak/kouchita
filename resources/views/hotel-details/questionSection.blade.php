@@ -53,8 +53,8 @@
             <div class="showQuestionsNumsFilter">نمایش تمامی سؤال‌ها</div>
         </a>
         <div class="col-xs-4 font-size-13 line-height-2 text-align-right float-right">
-            <span style="float: right; margin-left: 10px">صفحه</span>
-            <span id="questionPagination" style="margin-right: 10px;"></span>
+            <span class="float-right">صفحه</span>
+            <span id="questionPagination"></span>
         </div>
     </div>
 
@@ -407,51 +407,51 @@
 
         if(page >= 5){
             if(questionPage == 1){
-                text += '<span class="cursor-pointer color-blue mg-lt-5" onclick="changeQuestionPage(1)" style="float: right">1</span>';
-                text += '<span class="cursor-pointer mg-lt-5" onclick="changeQuestionPage(2)" style="float: right">2</span>';
-                text += '<span class="cursor-pointer mg-lt-5" onclick="changeQuestionPage(3)" style="float: right">3</span>';
+                text += '<span class="cursor-pointer color-blue mg-rt-5 float-right" onclick="changeQuestionPage(1)">1</span>';
+                text += '<span class="cursor-pointer mg-rt-5 float-right" onclick="changeQuestionPage(2)">2</span>';
+                text += '<span class="cursor-pointer mg-rt-5 float-right" onclick="changeQuestionPage(3)">3</span>';
                 text += '<span style="float: right"> >>> </span>';
-                text += '<span class="cursor-pointer mg-lt-5" onclick="changeQuestionPage(' + page + ')" style="float: right">' + page + '</span>';
+                text += '<span class="cursor-pointer mg-lt-5" onclick="changeQuestionPage(' + page + ')">' + page + '</span>';
             }
             else if(questionPage == 2){
-                text += '<span class="cursor-pointer mg-lt-5" onclick="changeQuestionPage(1)" style="float: right">1</span>';
-                text += '<span class="cursor-pointer color-blue mg-lt-5" onclick="changeQuestionPage(2)" style="float: right">2</span>';
-                text += '<span class="cursor-pointer mg-lt-5" onclick="changeQuestionPage(3)" style="float: right">3</span>';
-                text += '<span style="float: right"> >>> </span>';
-                text += '<span class="cursor-pointer mg-lt-5" onclick="changeQuestionPage(' + page + ')" style="float: right">' + page + '</span>';
+                text += '<span class="cursor-pointer mg-rt-5 float-right" onclick="changeQuestionPage(1)">1</span>';
+                text += '<span class="cursor-pointer color-blue mg-rt-5 float-right" onclick="changeQuestionPage(2)">2</span>';
+                text += '<span class="cursor-pointer mg-rt-5 float-right" onclick="changeQuestionPage(3)">3</span>';
+                text += '<span class="float-right"> >>> </span>';
+                text += '<span class="cursor-pointer mg-rt-5 float-right" onclick="changeQuestionPage(' + page + ')">' + page + '</span>';
             }
             else if(questionPage == 3){
-                text += '<span class="cursor-pointer mg-lt-5" onclick="changeQuestionPage(1)" style="float: right">1</span>';
-                text += '<span class="cursor-pointer mg-lt-5" onclick="changeQuestionPage(2)" style="float: right">2</span>';
-                text += '<span class="cursor-pointer color-blue mg-lt-5" onclick="changeQuestionPage(3)" style="float: right">3</span>';
-                text += '<span class="cursor-pointer mg-lt-5" onclick="changeQuestionPage(4)" style="float: right">4</span>';
+                text += '<span class="cursor-pointer mg-rt-5 float-right" onclick="changeQuestionPage(1)">1</span>';
+                text += '<span class="cursor-pointer mg-rt-5 float-right" onclick="changeQuestionPage(2)">2</span>';
+                text += '<span class="cursor-pointer color-blue mg-rt-5 float-right" onclick="changeQuestionPage(3)">3</span>';
+                text += '<span class="cursor-pointer mg-rt-5 float-right" onclick="changeQuestionPage(4)">4</span>';
                 if(page == 5)
-                    text += '<span class="cursor-pointer mg-lt-5" onclick="changeQuestionPage(5)" style="float: right">5</span>';
+                    text += '<span class="cursor-pointer mg-rt-5 float-right" onclick="changeQuestionPage(5)">5</span>';
                 else {
-                    text += '<span style="float: right"> >>> </span>';
-                    text += '<span class="cursor-pointer mg-lt-5" onclick="changeQuestionPage(' + page + ')" style="float: right">' + page + '</span>';
+                    text += '<span class="float-right"> >>> </span>';
+                    text += '<span class="cursor-pointer mg-rt-5 float-right" onclick="changeQuestionPage(' + page + ')">' + page + '</span>';
                 }
             }
             else{
-                text += '<span class="cursor-pointer mg-lt-5" onclick="changeQuestionPage(1)" style="float: right">1</span>';
-                text += '<span style="float: right"> <<< </span>';
+                text += '<span class="cursor-pointer mg-rt-5 float-right" onclick="changeQuestionPage(1)">1</span>';
+                text += '<span class="float-right"> <<< </span>';
 
                 if(questionPage == page){
-                    text += '<span class="cursor-pointer mg-lt-5" onclick="changeQuestionPage(' + (questionPage-2) + ')" style="float: right">' + (questionPage-2) + '</span>';
-                    text += '<span class="cursor-pointer mg-lt-5" onclick="changeQuestionPage(' + (questionPage-1) + ')" style="float: right">' + (questionPage-1) + '</span>';
-                    text += '<span class="cursor-pointer color-blue mg-lt-5" onclick="changeQuestionPage(' + (questionPage) + ')" style="float: right">' + (questionPage) + '</span>';
+                    text += '<span class="cursor-pointer mg-rt-5 float-right" onclick="changeQuestionPage(' + (questionPage-2) + ')">' + (questionPage-2) + '</span>';
+                    text += '<span class="cursor-pointer mg-lt-5" onclick="changeQuestionPage(' + (questionPage-1) + ')">' + (questionPage-1) + '</span>';
+                    text += '<span class="cursor-pointer color-blue mg-lt-5" onclick="changeQuestionPage(' + (questionPage) + ')">' + (questionPage) + '</span>';
                 }
                 else{
-                    text += '<span class="cursor-pointer mg-lt-5" onclick="changeQuestionPage(' + (questionPage-1) + ')" style="float: right">' + (questionPage-1) + '</span>';
-                    text += '<span class="cursor-pointer color-blue mg-lt-5" onclick="changeQuestionPage(' + (questionPage) + ')" style="float: right">' + (questionPage) + '</span>';
-                    text += '<span class="cursor-pointer mg-lt-5" onclick="changeQuestionPage(' + (questionPage+1) + ')" style="float: right">' + (questionPage+1) + '</span>';
+                    text += '<span class="cursor-pointer mg-rt-5 float-right" onclick="changeQuestionPage(' + (questionPage-1) + ')">' + (questionPage-1) + '</span>';
+                    text += '<span class="cursor-pointer color-blue mg-rt-5 float-right" onclick="changeQuestionPage(' + (questionPage) + ')">' + (questionPage) + '</span>';
+                    text += '<span class="cursor-pointer mg-rt-5 float-right" onclick="changeQuestionPage(' + (questionPage+1) + ')">' + (questionPage+1) + '</span>';
                     if((page - questionPage) == 2)
-                        text += '<span class="cursor-pointer mg-lt-5" onclick="changeQuestionPage(' + (questionPage+2) + ')" style="float: right">' + (questionPage+2) + '</span>';
+                        text += '<span class="cursor-pointer mg-lt-5" onclick="changeQuestionPage(' + (questionPage+2) + ')">' + (questionPage+2) + '</span>';
                 }
 
                 if((page - questionPage) >= 3){
-                    text += '<span style="float: right"> >>> </span>';
-                    text += '<span class="cursor-pointer mg-lt-5" onclick="changeQuestionPage(' + page + ')" style="float: right">' + page + '</span>';
+                    text += '<span class="float-right"> >>> </span>';
+                    text += '<span class="cursor-pointer mg-rt-5 float-right" onclick="changeQuestionPage(' + page + ')">' + page + '</span>';
                 }
 
 
@@ -460,9 +460,9 @@
         else{
             for (var i = 1; i <= page; i++){
                 if(i == questionPage)
-                    text += '<span class="cursor-pointer color-blue mg-lt-5" onclick="changeQuestionPage(' + i + ')" style="float: right">' + i + '</span>';
+                    text += '<span class="cursor-pointer color-blue mg-rt-5" onclick="changeQuestionPage(' + i + ')">' + i + '</span>';
                 else
-                    text += '<span class="cursor-pointer mg-lt-5" onclick="changeQuestionPage(' + i + ')" style="float: right">' + i + '</span>';
+                    text += '<span class="cursor-pointer mg-rt-5" onclick="changeQuestionPage(' + i + ')">' + i + '</span>';
             }
         }
 
@@ -475,9 +475,9 @@
 
         for(var i = 0; i < questionPerPageNum.length; i++){
             if(i == questionPerPage)
-                text += '<span id="questionPerView' + i + '" class="mg-lt-5 cursor-pointer color-blue" onclick="changeQuestionPerPage(' + i + ')">' + questionPerPageNum[i] + '</span>';
+                text += '<span id="questionPerView' + i + '" class="mg-0-2 cursor-pointer color-blue" onclick="changeQuestionPerPage(' + i + ')">' + questionPerPageNum[i] + '</span>';
             else
-                text += '<span id="questionPerView' + i + '" class="mg-lt-5 cursor-pointer" onclick="changeQuestionPerPage(' + i + ')">' + questionPerPageNum[i] + '</span>';
+                text += '<span id="questionPerView' + i + '" class="mg-0-2 cursor-pointer" onclick="changeQuestionPerPage(' + i + ')">' + questionPerPageNum[i] + '</span>';
 
             if(i != (questionPerPageNum.length - 1))
                 text += '-';

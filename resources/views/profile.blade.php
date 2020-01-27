@@ -1,85 +1,11 @@
 <?php $mode = "profile"; $user = Auth::user(); ?>
 @extends('layouts.bodyProfile')
 
-@section('header')
-
-        @parent
-        <style>
-            .left {
-                float: left !important;
-            }
-        </style>
-
-        <style>
-            .infoFlyout .myLevel {
-                text-align: right;
-            }
-
-            .infoFlyout .myLevel span {
-                background: url('{{URL::asset('images') . '/profile.png'}}') no-repeat -9px -299px !important;
-                width: 40px;
-                height: 40px;
-                line-height: 42px;
-                display: inline-block;
-                margin-left: 5px;
-                text-align: center;
-                float: right;
-                font-weight: bold;
-                font-size: 18px;
-                color: #fff;
-                background-size: 56px !important;
-            }
-
-            .modules-membercenter-level-progress .myBadge {
-                width: 40px;
-                height: 40px;
-                line-height: 40px;
-                text-align: center;
-                background: url('{{URL::asset('images') . '/profile.png'}}') no-repeat -13px -344px !important;
-                background-size: 56px;
-                font-weight: bold;
-                font-size: 18px;
-                color: #fff;
-            }
-
-        </style>
-
-        <style>
-            .grayBorder {
-                position: absolute;
-                border-bottom: 1px solid #E6E6E6;
-                left: 50%;
-            }
-            .grayBorder1 {
-                bottom: 14px;
-                width: 35%;
-                margin-left: -117px;
-            }
-            .grayBorder5 {
-                top: 13px;
-                width: 72%;
-                margin-left: -340px;
-            }
-
-            .medalMainBox {
-                width: 100%;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-            }
-            .medalEachBox {
-                border: 1px solid #CCCCCC;
-                height: 150px;
-                width: 33%;
-            }
-        </style>
-    @stop
-
-
-
     @section('main')
 
         <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/profile.css')}}">
+        <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/usersActivities.css')}}">
+        <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/abbreviations.css')}}">
 
         <script>
 
@@ -129,7 +55,7 @@
 
                             <div class="profileBlock">
 
-                                <div id="targetHelp_6" class="targets col-xs-8">
+                                <div id="targetHelp_6" class="targets col-xs-8 pd-lt-0">
 
                                     <p class="since"><b>{{(!empty($user->first_name)) ? $user->first_name : $user->username}}</b></p>
                                     <div class="ageSince">
@@ -160,13 +86,15 @@
                                     <div class="name">
                                         <div data-direction="right" id="targetHelp_7" class="targets profileLinks">
 
-                                            <div data-val="off" onclick="if($(this).attr('data-val') == 'off') { showElement('infoDiv'); showElement2('arrowUp'); hideElement2('arrowDown'); $(this).attr('data-val', 'on'); } else  { hideElement('infoDiv'); hideElement2('arrowUp'); showElement2('arrowDown'); $(this).attr('data-val', 'off'); }">
+                                            <div data-val="off" onclick="if($(this).attr('data-val') == 'off') { showElement('infoDiv'); $('#arrowUp').removeClass('display-none');
+                                                $('#arrowDown').addClass('display-none'); $(this).attr('data-val', 'on'); } else  { hideElement('infoDiv'); $('#arrowUp').addClass('display-none');
+                                                $('#arrowDown').removeClass('display-none'); $(this).attr('data-val', 'off'); }" class="editInfosBoxTextMainDiv">
                                                 {{--<img id="arrowDown" src="{{URL::asset('images/arrow_down.png')}}" class="profLinksArrowUp" height="15" width="15"/>--}}
-                                                <div>ویرایش اطلاعات</div>
-                                                <div id="arrowDown"></div>
+                                                <div class="editInfosBoxText">ویرایش اطلاعات</div>
+                                                <div id="arrowDown" class="glyphicon glyphicon-chevron-down"></div>
 
                                                 {{--<img id="arrowUp" src="{{URL::asset('images/arrow_up.png')}}" class="profLinksArrowDown" hidden="hidden" height="15" width="15"/>--}}
-                                                <div id="arrowUp" hidden="hidden"></div>
+                                                <div id="arrowUp" class="glyphicon glyphicon-chevron-up display-none"></div>
                                                 <div class="overlayContents item">
                                                     <a name="edit-profile" class="menu-link" href="{{URL('accountInfo')}}">ویرایش اطلاعات کاربری</a>
                                                     <a name="edit-photo" class="menu-link" href="{{URL('editPhoto')}}">ویرایش عکس</a>
@@ -188,67 +116,126 @@
                                 </div>
 
 
+                                <div class="aboutMeDesc">
+                                    <a href="{{URL('accountInfo')}}" class="update">به روز رسانی اطلاعات </a>
+                                </div>
+
+
                             </div>
 
-                            <div class="profInfo">
+{{--                            <div class="profInfo">--}}
 
 
-                                <div class="hometown"></div>
+{{--                                <div class="hometown"></div>--}}
+{{--                            </div>--}}
+                        </div>
+
+
+                        <div class="userProfileActivitiesMainDiv rightColBoxes">
+                            <div class="mainDivHeaderText">
+                                <h3>شرح فعالیت‌ها</h3>
                             </div>
-                            <div class="aboutMeDesc">
-                                <a href="{{URL('accountInfo')}}" class="update">به روز رسانی اطلاعات </a>
+                            <div class="activitiesMainDiv">
+                                <div class="activitiesLinesDiv">
+                                    <div class="activityTitle">گذاشتن پست</div>
+                                    <div class="activityNumbers">پست 21</div>
+                                </div>
+                                <div class="activitiesLinesDiv">
+                                    <div class="activityTitle">آپلود عکس</div>
+                                    <div class="activityNumbers">عکس 365</div>
+                                </div>
+                                <div class="activitiesLinesDiv">
+                                    <div class="activityTitle">آپلود فیلم</div>
+                                    <div class="activityNumbers">فیلم 6</div>
+                                </div>
+                                <div class="activitiesLinesDiv">
+                                    <div class="activityTitle">آپلود فیلم 360</div>
+                                    <div class="activityNumbers">فیلم 2</div>
+                                </div>
+                                <div class="activitiesLinesDiv">
+                                    <div class="activityTitle">پرسیدن سؤال</div>
+                                    <div class="activityNumbers">سؤال 5</div>
+                                </div>
+                                <div class="activitiesLinesDiv">
+                                    <div class="activityTitle">پاسخ به سؤال دیگران</div>
+                                    <div class="activityNumbers">پاسخ 15</div>
+                                </div>
+                                <div class="activitiesLinesDiv">
+                                    <div class="activityTitle">امتیازدهی</div>
+                                    <div class="activityNumbers">مکان 14</div>
+                                </div>
+                                <div class="activitiesLinesDiv">
+                                    <div class="activityTitle">پاسخ به سؤالات اختیاری</div>
+                                    <div class="activityNumbers">پاسخ 145</div>
+                                </div>
+                                <div class="activitiesLinesDiv">
+                                    <div class="activityTitle">ویرایش مکان</div>
+                                    <div class="activityNumbers">مکان 13</div>
+                                </div>
+                                <div class="activitiesLinesDiv">
+                                    <div class="activityTitle">پیشنهاد مکان جدید</div>
+                                    <div class="activityNumbers">مکان 10</div>
+                                </div>
+                                <div class="activitiesLinesDiv">
+                                    <div class="activityTitle">نوشتن مقاله</div>
+                                    <div class="activityNumbers">مقاله 3</div>
+                                </div>
+                                <div class="activitiesLinesDiv">
+                                    <div class="activityTitle">معرفی دوستان</div>
+                                    <div class="activityNumbers">معرفی 7</div>
+                                </div>
                             </div>
                         </div>
 
-                        <?php $i = 0; $allow = true; ?>
-                        @foreach($activities as $activity)
+{{--                        <?php $i = 0; $allow = true; ?>--}}
+{{--                        @foreach($activities as $activity)--}}
 
-                            @if($counts[$i] != 0)
-                                @if($allow)
-                                    <?php $allow = false; ?>
-                                    <div id="targetHelp_12" class="targets modules-membercenter-content-summary">
+{{--                            @if($counts[$i] != 0)--}}
+{{--                                @if($allow)--}}
+{{--                                    <?php $allow = false; ?>--}}
+{{--                                    <div id="targetHelp_12" class="targets modules-membercenter-content-summary">--}}
 
-                                        <div id="helpSpan_12" class="helpSpans hidden">
-                                            <span class="introjs-arrow"></span>
-                                            <p>
-                                                تمامی فعالیت های شما به صورت خلاصه در این قسمت قابل رویت است.
-                                            </p>
-                                            <button data-val="12" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_12">بعدی</button>
-                                            <button data-val="12" class="btn btn-primary backBtnsHelp" id="backBtnHelp_12">قبلی</button>
-                                            <button class="btn btn-danger exitBtnHelp">خروج</button>
-                                        </div>
+{{--                                        <div id="helpSpan_12" class="helpSpans hidden">--}}
+{{--                                            <span class="introjs-arrow"></span>--}}
+{{--                                            <p>--}}
+{{--                                                تمامی فعالیت های شما به صورت خلاصه در این قسمت قابل رویت است.--}}
+{{--                                            </p>--}}
+{{--                                            <button data-val="12" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_12">بعدی</button>--}}
+{{--                                            <button data-val="12" class="btn btn-primary backBtnsHelp" id="backBtnHelp_12">قبلی</button>--}}
+{{--                                            <button class="btn btn-danger exitBtnHelp">خروج</button>--}}
+{{--                                        </div>--}}
 
-                                        <div class="member-points">
-                                            <ul class="counts">
-                                                <li class="content-info">
-                                                    <img src="{{URL::asset("activities") . "/" . $activity->pic}}" class="content-icon">
-                                                    <a name="ratings" class="content-link" data-filter="RATINGS_ALL" href="#myActivitiesDiv" onclick="sendAjaxRequestToGiveActivity('{{$activity->id}}', '{{$user->id}}', -1, 'myActivities', 'myActivitiesContent', 1, '{{$counts[$i]}}')">
-                                                        <span>{{$counts[$i]}} </span>
-                                                        <span>{{$activity->name}}</span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                @else
-                                    <div class="targets modules-membercenter-content-summary">
+{{--                                        <div class="member-points">--}}
+{{--                                            <ul class="counts">--}}
+{{--                                                <li class="content-info">--}}
+{{--                                                    <img src="{{URL::asset("activities") . "/" . $activity->pic}}" class="content-icon">--}}
+{{--                                                    <a name="ratings" class="content-link" data-filter="RATINGS_ALL" href="#myActivitiesDiv" onclick="sendAjaxRequestToGiveActivity('{{$activity->id}}', '{{$user->id}}', -1, 'myActivities', 'myActivitiesContent', 1, '{{$counts[$i]}}')">--}}
+{{--                                                        <span>{{$counts[$i]}} </span>--}}
+{{--                                                        <span>{{$activity->name}}</span>--}}
+{{--                                                    </a>--}}
+{{--                                                </li>--}}
+{{--                                            </ul>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                @else--}}
+{{--                                    <div class="targets modules-membercenter-content-summary">--}}
 
-                                        <div class="member-points">
-                                            <ul class="counts">
-                                                <li class="content-info">
-                                                    <img src="{{URL::asset("activities") . "/" . $activity->pic}}" class="content-icon">
-                                                    <a name="ratings" class="content-link" data-filter="RATINGS_ALL" href="#myActivitiesDiv" onclick="sendAjaxRequestToGiveActivity('{{$activity->id}}', '{{$user->id}}', -1, 'myActivities', 'myActivitiesContent', 1, '{{$counts[$i]}}')">
-                                                        <span>{{$counts[$i]}} </span>
-                                                        <span>{{$activity->name}}</span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                @endif
-                            @endif
-                            <?php $i++; ?>
-                        @endforeach
+{{--                                        <div class="member-points">--}}
+{{--                                            <ul class="counts">--}}
+{{--                                                <li class="content-info">--}}
+{{--                                                    <img src="{{URL::asset("activities") . "/" . $activity->pic}}" class="content-icon">--}}
+{{--                                                    <a name="ratings" class="content-link" data-filter="RATINGS_ALL" href="#myActivitiesDiv" onclick="sendAjaxRequestToGiveActivity('{{$activity->id}}', '{{$user->id}}', -1, 'myActivities', 'myActivitiesContent', 1, '{{$counts[$i]}}')">--}}
+{{--                                                        <span>{{$counts[$i]}} </span>--}}
+{{--                                                        <span>{{$activity->name}}</span>--}}
+{{--                                                    </a>--}}
+{{--                                                </li>--}}
+{{--                                            </ul>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                @endif--}}
+{{--                            @endif--}}
+{{--                            <?php $i++; ?>--}}
+{{--                        @endforeach--}}
 
                         <div class="modules-membercenter-member-tag">
                             <div id="targetHelp_13" class="memberTags targets">
@@ -263,21 +250,29 @@
                                     <button class="btn btn-danger exitBtnHelp">خروج</button>
                                 </div>
 
-                                <div id="tagHeader" class="header">سبک سفر </div>
+                                <div class="tripTasteTitle">
+                                    <div id="tagHeader" class="header">سبک سفر </div>
+                                    <div class="editTags" onclick="showElement('tagPrompt'); sendAjaxRequestToGiveTripStyles('{{$user->id}}', 'stylesTag')"><span class="sprite-addCities buttonIcon"></span>انواع سبک </div>
+                                </div>
+
                                 <div class="separator"></div>
                                 <div id="tagDisplay" class="tagBlock">
                                     <div id="tagSuggest" class="tagPrompt" name="add-tags">
-                                        من چه گردشگری هستم ؟<br>
-                                        برای آشنایی بیشتر مردم با شما ، عادات سفر خود را مشخص کنید.
-
+                                        <span>من چه گردشگری هستم ؟</span>
+                                        <span>برای آشنایی بیشتر مردم با شما ، عادات سفر خود را مشخص کنید.</span>
                                     </div>
                                 </div>
-                                <div class="editTags" onclick="showElement('tagPrompt'); sendAjaxRequestToGiveTripStyles('{{$user->id}}', 'stylesTag')"><span class="sprite-addCities buttonIcon"></span>انواع سبک </div>
                             </div>
-                            <div id="targetHelp_14" class="targets col-xs-12">
+                            <div id="targetHelp_14" class="targets col-xs-12 invitationFriendsMainDiv">
+                                <div class="invitationFriendsTitle">معرفی دوستان</div>
                                 <p>دوستان خود را به شازده مسافر معرفی کنید و امتیاز بگیرید</p>
-                                <input autocomplete="off" id="phoneNum" type="text" placeholder="09xxxxxxxxx">
-                                <div onclick="sendCode()" class="btn btn-primary">ارسال کد معرف به دوستان</div>
+                                <div class="phoneNumMainDiv">
+                                    <input autocomplete="off" id="phoneNum" type="text" placeholder="09xxxxxxxxx">
+                                    <div class="sendInvitationCodeMainDiv">
+                                        <div onclick="sendCode()" class="btn btn-primary sendInvitationCode">ارسال</div>
+                                    </div>
+                                    <div class="inputBorderBottom"></div>
+                                </div>
                                 <div id="msgContainer" class="col-xs-12 hidden">
                                     <center>
                                         <p id="sendMsg"></p>
@@ -341,7 +336,7 @@
                                     <div onclick="showElement('levelDiv')">
                                         <div class="labels">
                                             <div class="right label">مرحله فعلی</div>
-                                            <div class="left label">مرحله بعدی</div>
+                                            <div class="float-leftImp label">مرحله بعدی</div>
                                         </div>
                                         <div class="progress_indicator">
                                             <div class="current_badge myBadge">{{$userLevels[1]->name}}</div>
@@ -375,7 +370,8 @@
                         </div>
 
                         <div class="modules-membercenter-badge-teaser">
-                            <div id="targetHelp_10" class="targets header" style="position: relative">
+
+                            <div id="targetHelp_10" class="targets header trophyCaseHeaderMainDiv">
 
                                 <div id="helpSpan_10" class="helpSpans hidden">
                                     <span class="introjs-arrow"></span>
@@ -387,78 +383,88 @@
                                     <button class="btn btn-danger exitBtnHelp">خروج</button>
                                 </div>
 
-                                <div class="name">نشان های افتخار من <a style="font-size: 12px; color: #92321b;" class="totalBadges" href="{{URL('badges')}}">({{$medals}} عدد)</a></div>
+                                <div class="name trophyCaseTitle">نشان های افتخار من
+                                    <a class="totalBadges" href="{{URL('badges')}}">({{$medals}} عدد)</a>
+                                </div>
                                 <a class="trophyCase" href="{{route('badge')}}">مشاهده تمام نشان های موجود</a>
-                                <div class="grayBorder grayBorder1"></div>
                                 <div class="clear fix"></div>
                             </div>
 
-                            <script>
-                                function hideAllBadges() {
-                                    $(".badgeContainer").addClass('hidden');
-                                }
-                            </script>
+                            <div class="recentBadges">
+                                <div id="" class="targets header recentBadgesTitleMainDiv">
 
-
-                            {{--<div class="badgeList">--}}
-                                {{--<div class="badgeItems noCurrent">--}}
-                                    {{--<?php $i = 0; ?>--}}
-
-                                    {{--@foreach($nearestMedals as $nearestMedal)--}}
-                                        {{--<div class="badgeItem clickableBadge" onclick="hideAllBadges(); $('#badge_' + this.id).css('left', parseInt($(this).css('width').split('px')[0]) / 2 + getFixedFromLeftBODYCON($(this)) - 25 + 'px'); showElement('badge_' + this.id)" id="{{$nearestMedal["medal"]->id}}">--}}
-                                            {{--<div style="background: url('{{URL::asset('badges') . '/' . $nearestMedal["medal"]->pic_1}}'); background-size: contain;" class="sprite-badge_medium_grey_rev_01 mediumBadge"></div>--}}
-                                            {{--<div class="badgeName"> {{$nearestMedal["medal"]->activityId}} جدید</div>--}}
-                                            {{--<div class="badgeSubtext"> {{$nearestMedal["needed"]}} <span>{{$nearestMedal["medal"]->activityId}}</span></div>--}}
-                                        {{--</div>--}}
-                                        {{--<?php $i++; ?>--}}
-                                    {{--@endforeach--}}
-
-                                {{--</div>--}}
-                            {{--</div>--}}
-
-                            <div id="targetHelp_11" class="header targets">
-
-                                <div id="helpSpan_11" class="helpSpans hidden">
-                                    <span class="introjs-arrow"></span>
-                                    <p>
-                                        نشان های کسب شده جدید توسط شما دراین بخش نمایش داده می شود. در صفحه نشان ها نیز می توانید نشان های کسب شده خود را ببینید. توجه کنید نشان های کسب شده رنگی می باشند و نشان های سیاه سفید هنوز توسط شما کسب نشده اند.
-                                    </p>
-                                    <button data-val="11" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_11">بعدی</button>
-                                    <button data-val="11" class="btn btn-primary backBtnsHelp" id="backBtnHelp_11">قبلی</button>
-                                    <button class="btn btn-danger exitBtnHelp">خروج</button>
+                                    <div class="name recentBadgesTitle">
+                                        تمامی نشان‌های کسب شده اخیر
+                                    </div>
+                                    <a class="allPropertyBadges" href="">مشاهده همه</a>
                                 </div>
 
-                                <div class="name">نشان های افتخار کسب شده ی اخیر</div>
-                                <div class="clear fix"></div>
-                            </div>
+                                <script>
+                                    function hideAllBadges() {
+                                        $(".badgeContainer").addClass('hidden');
+                                    }
+                                </script>
 
-                            <div>
-                                <div class="medalMainBox">
-                                    <div class="medalEachBox"></div>
-                                    <div class="medalEachBox"></div>
-                                    <div class="medalEachBox"></div>
+                                <div class="badgeList">
+                                    <div class="badgeItems noCurrent">
+                                        <?php $i = 0; ?>
+
+                                        @foreach($nearestMedals as $nearestMedal)
+                                            <div class="badgeItem clickableBadge" onclick="hideAllBadges(); $('#badge_' + this.id).css('left', parseInt($(this).css('width').split('px')[0]) / 2 + getFixedFromLeftBODYCON($(this)) - 25 + 'px'); showElement('badge_' + this.id)" id="{{$nearestMedal["medal"]->id}}">
+                                                <div style="background: url('{{URL::asset('badges') . '/' . $nearestMedal["medal"]->pic_1}}'); background-size: contain;" class="sprite-badge_medium_grey_rev_01 mediumBadge"></div>
+                                                <div class="badgeName"> {{$nearestMedal["medal"]->activityId}} جدید</div>
+                                                <div class="badgeSubtext"> {{$nearestMedal["needed"]}} <span>{{$nearestMedal["medal"]->activityId}}</span></div>
+                                            </div>
+                                            <?php $i++; ?>
+                                        @endforeach
+
+                                    </div>
                                 </div>
                             </div>
 
-                            {{--<div class="badgeList">--}}
-                                {{--<div class="badgeItems noCurrent">--}}
-                                    {{--@if(count($recentlyBadges) > 0)--}}
-                                        {{--<?php $i = 0; ?>--}}
-                                        {{--@foreach($recentlyBadges as $recentlyBadge)--}}
-                                                {{--<div class="badgeItem clickableBadge" id="{{$recentlyBadge->id}}">--}}
-                                                {{--<div style="background: url('{{URL::asset('badges') . '/' . $recentlyBadge->pic_1}}'); background-size: contain; " class="sprite-badge_medium_grey_rev_01 mediumBadge"></div>--}}
-                                                {{--<div class="badgeName"> {{$recentlyBadge->activityId}} جدید</div>--}}
-                                                {{--<div class="badgeSubtext"> {{$recentlyBadge->floor}} <span>{{$recentlyBadge->activityId}}</span></div>--}}
-                                            {{--</div>--}}
-                                            {{--<?php $i++; ?>--}}
-                                        {{--@endforeach--}}
-                                    {{--@else--}}
-                                        {{--<div>--}}
-                                            {{--متاسفانه در حال حاضر شما نشانی کسب نکرده اید.--}}
-                                        {{--</div>--}}
-                                    {{--@endif--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
+                            <div class="futureBadges">
+                                <div id="targetHelp_11" class="header targets badgeListTitleMainDiv">
+
+                                    <div id="helpSpan_11" class="helpSpans hidden">
+                                        <span class="introjs-arrow"></span>
+                                        <p>
+                                            نشان های کسب شده جدید توسط شما دراین بخش نمایش داده می شود. در صفحه نشان ها نیز می توانید نشان های کسب شده خود را ببینید. توجه کنید نشان های کسب شده رنگی می باشند و نشان های سیاه سفید هنوز توسط شما کسب نشده اند.
+                                        </p>
+                                        <button data-val="11" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_11">بعدی</button>
+                                        <button data-val="11" class="btn btn-primary backBtnsHelp" id="backBtnHelp_11">قبلی</button>
+                                        <button class="btn btn-danger exitBtnHelp">خروج</button>
+                                    </div>
+
+                                    <div class="name futureBadgesTitle">با کمی تلاش می‌توانید کسب کنید</div>
+                                    <div class="clear fix"></div>
+                                </div>
+{{--                                <div>--}}
+{{--                                    <div class="medalMainBox">--}}
+{{--                                        <div class="medalEachBox"></div>--}}
+{{--                                        <div class="medalEachBox"></div>--}}
+{{--                                        <div class="medalEachBox"></div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+                                <div class="badgeList">
+                                    <div class="badgeItems noCurrent">
+                                        @if(count($recentlyBadges) > 0)
+                                            <?php $i = 0; ?>
+                                            @foreach($recentlyBadges as $recentlyBadge)
+                                                    <div class="badgeItem clickableBadge" id="{{$recentlyBadge->id}}">
+                                                    <div style="background: url('{{URL::asset('badges') . '/' . $recentlyBadge->pic_1}}'); background-size: contain; " class="sprite-badge_medium_grey_rev_01 mediumBadge"></div>
+                                                    <div class="badgeName"> {{$recentlyBadge->activityId}} جدید</div>
+                                                    <div class="badgeSubtext"> {{$recentlyBadge->floor}} <span>{{$recentlyBadge->activityId}}</span></div>
+                                                </div>
+                                                <?php $i++; ?>
+                                            @endforeach
+                                        @else
+                                            <div>
+                                                متاسفانه در حال حاضر شما نشانی کسب نکرده اید.
+                                            </div>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
 
                         </div>
 
@@ -566,55 +572,113 @@
                         are available on occasion across the site. Keep an eye out for opportunities to get extra points!
                     </div>
                 </div>
-                <div id="myActivitiesDiv" class="modules-membercenter-content-stream">
+                <div id="" class="modules-membercenter-content-stream myActivitiesMainDiv">
 
-                    <div id="targetHelp_15" class="targets cs-header" style="position: relative">
-                        <div class="cs-header-points">
-                            <span class="label" style="color: #92321b;">امتیاز کسب شده :</span>
-                            <span class="points">{{$totalPoint}}</span>
+                    <div class="myActivitiesMainDiv">
+
+                        <div id="targetHelp_15" class="targets cs-header">
+                            <div class="myActivitiesHeaderMainDiv">
+                                <div class="cs-header-points">
+                                    <span class="label">امتیاز کسب شده :</span>
+                                    <span class="points">{{$totalPoint}}</span>
+                                </div>
+                                <p class="cs-header-title">فعالیت های من</p>
+                            </div>
+
+                            <div id="helpSpan_15" class="helpSpans hidden">
+                                <span class="introjs-arrow"></span>
+                                <p>شما می توانید تمامم فعالیت های خود در سایت را در این قسمت مشاهده نمایید. از فیلتر های موجود نیز برای دسترسی راحت تر به فعالیت های خود استفاده کنید.</p>
+                                <button data-val="15" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_15">بعدی</button>
+                                <button data-val="15" class="btn btn-primary backBtnsHelp" id="backBtnHelp_15">قبلی</button>
+                                <button class="btn btn-danger exitBtnHelp" id="exitBtnHelp_15">خروج</button>
+                            </div>
                         </div>
-                        <p class="cs-header-title">فعالیت های من</p>
-                        <div class="grayBorder grayBorder5"></div>
 
-
-                        <div id="helpSpan_15" class="helpSpans hidden">
-                            <span class="introjs-arrow"></span>
-                            <p>شما می توانید تمامم فعالیت های خود در سایت را در این قسمت مشاهده نمایید. از فیلتر های موجود نیز برای دسترسی راحت تر به فعالیت های خود استفاده کنید.</p>
-                            <button data-val="15" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_15">بعدی</button>
-                            <button data-val="15" class="btn btn-primary backBtnsHelp" id="backBtnHelp_15">قبلی</button>
-                            <button class="btn btn-danger exitBtnHelp" id="exitBtnHelp_15">خروج</button>
+                        <div class="postsMainFiltrationBar">
+                            <span class="showUsersPostsLink changeModeBtn" onclick="activitiesChangeMode(); postsChangeMode()">پست‌ها</span>
+                            <span class="showUsersPhotosAndVideosLink changeModeBtn" onclick="activitiesChangeMode(); photosChangeMode()">عکس و فیلم</span>
+                            <span class="showUsersQAndAsLink changeModeBtn" onclick="activitiesChangeMode(); questionsChangeMode()">سؤال‌ها و پاسخ‌ها</span>
+                            <span class="showUsersArticlesLink changeModeBtn" onclick="activitiesChangeMode(); articleChangeMode()">مقاله‌ها</span>
+                            <span class="showUsersScores changeModeBtn" onclick="activitiesChangeMode(); scoresChangeMode()">امتیاز‌ها</span>
+                            <span class="otherActivitiesChoices changeModeBtn" onclick="activitiesChangeMode(); othersChangeMode()">سایر موارد</span>
                         </div>
-                    </div>
 
-                    <ul class="cs-contribution-bar">
-                        <?php $i = 0; $allow = true; ?>
-                        @foreach($activities as $activity)
-                            @if($counts[$i] > 0)
-                                <li class="cursor-pointer">
-                                    <a class="headerActivity" id='headerActivity_{{$activity->id}}' onclick="sendAjaxRequestToGiveActivity('{{$activity->id}}', '{{$user->id}}', -1, 'myActivities', 'myActivitiesContent', 1, '{{$counts[$i]}}')">
+                        <div>
+                            @include('userActivities.innerParts.userPostsInner')
+                            @include('userActivities.innerParts.userPhotosAndVideosInner')
+                            @include('userActivities.innerParts.userQuestionsInner')
+                            @include('userActivities.innerParts.userArticlesInner')
+                        </div>
 
-                                        @if($allow)
-                                            <script>
-                                                $(document).ready(function () {
-                                                    sendAjaxRequestToGiveActivity('{{$activity->id}}', '{{$user->id}}', -1, 'myActivities', 'myActivitiesContent', 1, '{{$counts[$i]}}');
-                                                });
-                                            </script>
-                                            <?php $allow = false; ?>
-                                        @endif
-                                        <span> {{$activity->name}} </span>
-                                        <span> ({{$counts[$i]}}) </span>
-                                    </a>
-                                </li>
-                            @endif
-                            <?php $i++; ?>
-                        @endforeach
-                    </ul>
+                        <script>
 
-                    <div class="cs-filter-bar" id="myActivities">
-                    </div>
+                            function activitiesChangeMode() {
+                                $('.userProfileActivitiesDetailsMainDiv').css('display' , 'none');
+                                $('.changeModeBtn').css('border-color' , 'white');
+                            }
+
+                            function postsChangeMode() {
+                                $('.userActivitiesPosts').css('display' , 'block');
+                                $('.showUsersPostsLink').css('border-color' , '#0076a3');
+                            }
+
+                            function photosChangeMode() {
+                                $('.userActivitiesPhotos').css('display' , 'block');
+                                $('.showUsersPhotosAndVideosLink').css('border-color' , '#0076a3');
+                            }
+
+                            function questionsChangeMode() {
+                                $('.userActivitiesQuestions').css('display' , 'block');
+                                $('.showUsersQAndAsLink').css('border-color' , '#0076a3');
+                            }
+
+                            function articleChangeMode() {
+                                $('.userActivitiesArticles').css('display' , 'block');
+                                $('.showUsersArticlesLink').css('border-color' , '#0076a3');
+                            }
+
+                            function scoresChangeMode() {
+                                // $('.userActivitiesScores').css('display' , 'block');
+                                $('.showUsersScores').css('border-color' , '#0076a3');
+                            }
+
+                            function othersChangeMode() {
+                                // $('.userActivitiesOthers').css('display' , 'block');
+                                $('.otherActivitiesChoices').css('border-color' , '#0076a3');
+                            }
+
+                        </script>
+
+    {{--                    <ul class="cs-contribution-bar">--}}
+    {{--                        <?php $i = 0; $allow = true; ?>--}}
+    {{--                        @foreach($activities as $activity)--}}
+    {{--                            @if($counts[$i] > 0)--}}
+    {{--                                <li class="cursor-pointer">--}}
+    {{--                                    <a class="headerActivity" id='headerActivity_{{$activity->id}}' onclick="sendAjaxRequestToGiveActivity('{{$activity->id}}', '{{$user->id}}', -1, 'myActivities', 'myActivitiesContent', 1, '{{$counts[$i]}}')">--}}
+
+    {{--                                        @if($allow)--}}
+    {{--                                            <script>--}}
+    {{--                                                $(document).ready(function () {--}}
+    {{--                                                    sendAjaxRequestToGiveActivity('{{$activity->id}}', '{{$user->id}}', -1, 'myActivities', 'myActivitiesContent', 1, '{{$counts[$i]}}');--}}
+    {{--                                                });--}}
+    {{--                                            </script>--}}
+    {{--                                            <?php $allow = false; ?>--}}
+    {{--                                        @endif--}}
+    {{--                                        <span> {{$activity->name}} </span>--}}
+    {{--                                        <span> ({{$counts[$i]}}) </span>--}}
+    {{--                                    </a>--}}
+    {{--                                </li>--}}
+    {{--                            @endif--}}
+    {{--                            <?php $i++; ?>--}}
+    {{--                        @endforeach--}}
+    {{--                    </ul>--}}
+
+    {{--                    <div class="cs-filter-bar" id="myActivities">--}}
+    {{--                    </div>--}}
 
 
-                    <div class="cs-content-container" id="myActivitiesContent">
+    {{--                    <div class="cs-content-container" id="myActivitiesContent">--}}
+    {{--                    </div>--}}
                     </div>
 
                 </div>
