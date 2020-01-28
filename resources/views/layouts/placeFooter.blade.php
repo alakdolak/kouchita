@@ -176,22 +176,22 @@
 
     <div class="footerPhoneMenuBar hideOnScreen">
         <div data-toggle="modal" data-target="#otherPossibilities">
-            <span>سایر امکانات</span>
+            <span class="footerMenuBarLinks">سایر امکانات</span>
             <span class="ui_icon more-horizontal"></span>
         </div>
         @if(Auth::check())
             <div data-toggle="modal" data-target="#profilePossibilities">
-                <span>امکانات کاربر</span>
+                <span class="footerMenuBarLinks">امکانات کاربر</span>
                 <span class="ui_icon memberPossibilities"></span>
             </div>
         @else
             <div class="login-button">
-                <span>ثبت نام</span>
+                <span class="footerMenuBarLinks">ثبت نام</span>
                 <span class="ui_icon plus-circle"></span>
             </div>
         @endif
         <div onclick="openProSearch()">
-            <span>جست‌و‌جو</span>
+            <span class="footerMenuBarLinks">جست‌و‌جو</span>
             <span class="ui_icon search"></span>
         </div>
         @if(Auth::check())
@@ -206,7 +206,7 @@
             </div>
         @else
             <div class="login-button">
-                <span>ورود</span>
+                <span class="footerMenuBarLinks">ورود</span>
                 <span class="ui_icon member"></span>
             </div>
         @endif

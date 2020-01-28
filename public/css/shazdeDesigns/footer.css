@@ -1262,6 +1262,10 @@ a.single-tile .create-trip-text {
     .profileBtnActionMobile {
         width: 35%;
     }
+
+    .footerMenuBarLinks {
+        font-size: 12px;
+    }
 }
 
 @media (max-width: 400px) {

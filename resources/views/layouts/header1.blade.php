@@ -50,6 +50,7 @@
                                                 <a href="{{route('mainMode', ['mode' => 'amaken'])}}" id="global-nav-restaurants" class="unscoped global-nav-link ui_tab">جاذبه</a>
                                             </li>
                                         @endif
+
                                         {{--@if($placeMode == "ticket")--}}
                                             {{--<li>--}}
                                                 {{--<a href="{{route('tickets')}}" class="unscoped global-nav-link ui_tab redColor ">بلیط</a>--}}
@@ -75,13 +76,16 @@
                                         <li class="" data-element=".masthead-dropdown-Flights">
                                             <a href="{{route('soon')}}" class="unscoped global-nav-link ui_tab " data-tracking-label="Flights">غذای محلی</a>
                                         </li>
+                                        <li>
+                                            <a href="{{route('soon')}}" class="unscoped global-nav-link ui_tab " data-tracking-label="Flights">بوم‌گردی</a>
+                                        </li>
 
                                     </ul>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="global-nav-actions flex" >
+                        <div class="global-nav-actions flex" style="width: 0" >
                             @if(Auth::check())
 
                                 <div class="ppr_rup ppr_priv_global_nav_action_trips">
@@ -252,6 +256,12 @@
                             </div>
                         </div>
 
+                        <div class="collapseBtnActions" onclick="headerActionsToggle()">
+{{--                            <div class="linesCollapseBtn"></div>--}}
+{{--                            <div class="linesCollapseBtn"></div>--}}
+{{--                            <div class="linesCollapseBtn"></div>--}}
+                        </div>
+
                         <div style="clear: both;"></div>
                     </div>
                 </div>
@@ -315,7 +325,23 @@
 
             $("#menu_res").addClass('off-canvas');
         });
-
-
     });
+    
+    function headerActionsToggle() {
+
+        $('.collapseBtnActions').animate({transform: 'rotate(90deg)'})
+
+
+        if($('.global-nav-actions').hasClass('display-flexImp')) {
+
+            $('.global-nav-actions').animate({width: "0"},
+                function () {
+                    $('.global-nav-actions').toggleClass('display-flexImp');
+                });
+        }
+        else {
+            $('.global-nav-actions').animate({width: "270px"});
+            $('.global-nav-actions').toggleClass('display-flexImp');
+        }
+    }
 </script>

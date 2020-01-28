@@ -2,6 +2,26 @@ body {
     min-width: 320px;
 }
 
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #bebebe;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #969696;
+}
+
 /*1st style Box*/
 
 .homepage_shelves_widget {
@@ -416,7 +436,6 @@ DIV.prw_rup.prw_search_typeahead .typeahead_align .typeahead_input {
 
 #searchDivForScroll {
     padding: 3px 4px 3px;
-    /*width: 40%;*/
 }
 
 .mainSearchDivPcSize {
@@ -519,9 +538,15 @@ DIV.ppr_rup.ppr_priv_homepage_hero .placement_wrap .placement_wrap_cell {
     position: inherit;
 }
 
-@media (max-width: 1100px) {
+@media (min-width: 1100px) {
     .mainSearchDivPcSize {
-        width: 60%;
+        width: 40% !important;
+    }
+}
+
+@media (max-width: 1100px) and (min-width: 767px){
+    .mainSearchDivPcSize {
+        width: 60% !important;
     }
 }
 
