@@ -18,7 +18,7 @@ class CreatePostPlaceRelationsTable extends Migration
             $table->unsignedInteger('postId');
             $table->unsignedInteger('kindPlaceId');
             $table->unsignedInteger('placeId');
-            });
+        });
     }
 
     /**

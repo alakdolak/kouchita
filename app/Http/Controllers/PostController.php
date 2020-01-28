@@ -247,4 +247,28 @@ class PostController extends Controller {
 
     }
 
+
+    public function postWithId($id)
+    {
+        $post = Post::find($id);
+        if($post != null) {
+            $today = getToday();
+            if($post->release == 'released' || ($post->release == 'future' && ($post->date > $today['date'] || ($post->date == $today['date'] && $post->time >= $today['time']))))
+                return \redirect(\url('/article/' . $post->slug));
+        }
+            return \redirect(\url('/'));
+    }
+
+    public function showArticle($slug)
+    {
+        $post = Post::where('slug', $slug)->first();
+        if($post != null){
+
+            $post->pic = URL::asset('_images/posts/'.$post->id.'/'.$post->pic);
+
+            return view('article', compact(['post']));
+        }
+        return \redirect(\url('/'));
+
+    }
 }

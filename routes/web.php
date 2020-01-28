@@ -4,14 +4,6 @@ use App\models\ConfigModel;
 use Illuminate\Support\Facades\Route;
 
 Route::get('databaseforall', function (){
-//    add tables: postCityRelations, postPlaceRelations, postCategoryRelations, postTagsRelations, postTags, postCategories
-
-//    ALTER TABLE `post` DROP `cityId`, DROP `placeId`, DROP `kindPlaceId`, DROP `tag1`, DROP `tag2`, DROP `tag3`, DROP `tag4`, DROP `tag5`, DROP `tag6`, DROP `tag7`, DROP `tag8`, DROP `tag9`, DROP `tag10`, DROP `tag11`, DROP `tag12`, DROP `tag13`, DROP `tag14`, DROP `tag15`, DROP `category`, DROP `C`, DROP `D`;
-//    ALTER TABLE `post` ADD `release` VARCHAR(10) NOT NULL DEFAULT 'draft' AFTER `description`;
-//    ALTER TABLE `post` ADD `slug` VARCHAR(190) NOT NULL AFTER `title`;
-//    ALTER TABLE `post` ADD `seoCheck` INT NULL DEFAULT NULL AFTER `alt`;
-//    ALTER TABLE `post` DROP `color`, DROP `backColor`, DROP `categoryColor`;
-//    ALTER TABLE `post` ADD `seoTitle` VARCHAR(255) NULL DEFAULT NULL AFTER `keyword`;
 });
 
 Route::get('fillHotelPic', function(){
@@ -205,14 +197,6 @@ Route::get('specificPost/{id}', ['as' => 'specificPost', 'uses' => 'PostControll
 
 Route::get('updateBot', 'HomeController@updateBot');
 
-Route::get('searchArticle', function(){
-    return view('searchArticle');
-});
-
-Route::get('userArticles', function(){
-    return view('userActivities.userArticles');
-});
-
 Route::get('userQuestions', function(){
     return view('userActivities.userQuestions');
 });
@@ -223,14 +207,6 @@ Route::get('userPosts', function(){
 
 Route::get('userPhotosAndVideos', function(){
     return view('userActivities.userPhotosAndVideos');
-});
-
-//Route::get('mainArticle', function(){
-//    return view('mainArticle');
-//});
-
-Route::get('article', function(){
-    return view('article');
 });
 
 Route::get('gardeshnameEdit', function(){
@@ -245,7 +221,6 @@ Route::get('business', function(){
     return view('business');
 });
 
-Route::get('mainArticle/{page?}', 'PostController@mainArticle')->name('mainArticle');
 
 Route::get('gardeshnameInner/{postId}', ['as' => 'gardeshnameInner', 'uses' => 'PostController@gardeshnameInner']);
 
@@ -855,7 +830,7 @@ Route::group(array('middleware' => 'nothing'), function () {
     Route::post('getReviews', 'ReviewsController@getReviews')->name('getReviews');
 });
 
-
+//tour
 Route::group(array('middleware' => 'auth'), function () {
 
     Route::get('/tour/create/afterStart', 'TourController@afterStart')->name('afterStart');
@@ -880,26 +855,48 @@ Route::group(array('middleware' => 'auth'), function () {
 
     Route::get('/tour/create/complete/{id}', 'TourController@completeCreationTour')->name('tour.create.complete');
 
+    Route::get('/tour/index', function (){
+        $placeMode = 'tour';
+        $state = 'تهران';
+        return view('tour.tour', compact(['placeMode', 'state']));
+    });
+    Route::get('/tour/details', function (){
+        $placeMode = 'tour';
+        $state = 'تهران';
+        return view('tour.tour-details', compact(['placeMode', 'state']));
+    });
+    Route::get('/tour/lists', function (){
+        $placeMode = 'tour';
+        $state = 'تهران';
+        return view('tour.tour-lists', compact(['placeMode', 'state']));
+    });
+});
+
+//posts
+Route::group(array('middleware' => 'nothing'), function () {
+
+    Route::get('/article/id/{id}', 'PostController@postWithId')->name('postWithId');
+
+    Route::get('/article/{slug}', 'PostController@showArticle')->name('article.show');
+
+    Route::get('searchArticle', function(){
+        return view('searchArticle');
+    });
+
+    Route::get('userArticles', function(){
+        return view('userActivities.userArticles');
+    });
+
+    //Route::get('mainArticle', function(){
+//    return view('mainArticle');
+//});
+
+    Route::get('mainArticle/{page?}', 'PostController@mainArticle')->name('mainArticle');
+
 });
 
 Route::post('checkLogin', array('as' => 'checkLogin', 'uses' => 'HomeController@checkLogin'));
 
 Route::get('emailtest', 'HomeController@emailtest');
-
-Route::get('/tour/index', function (){
-    $placeMode = 'tour';
-    $state = 'تهران';
-    return view('tour.tour', compact(['placeMode', 'state']));
-});
-Route::get('/tour/details', function (){
-    $placeMode = 'tour';
-    $state = 'تهران';
-    return view('tour.tour-details', compact(['placeMode', 'state']));
-});
-Route::get('/tour/lists', function (){
-    $placeMode = 'tour';
-    $state = 'تهران';
-    return view('tour.tour-lists', compact(['placeMode', 'state']));
-});
 
 Route::get('exportToExcelTT', 'HomeController@exportExcel');

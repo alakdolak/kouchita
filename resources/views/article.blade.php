@@ -602,14 +602,13 @@ $kindPlaceId = 10; ?>
                             <div class="im-entry-category">
                                 <div class="iranomag-meta clearfix">
                                     <div class="cat-links im-meta-item">
-                                        <a class="im-catlink-color-2079" href="/category/%d8%a7%d9%85%d8%a7%da%a9%d9%86-%da%af%d8%b1%d8%af%d8%b4%da%af%d8%b1%db%8c/%d8%b7%d8%a8%db%8c%d8%b9%d8%aa-%da%af%d8%b1%d8%af%db%8c/%d8%a2%d8%a8%d8%b4%d8%a7%d8%b1/">آبشار</a>
+                                        <a class="im-catlink-color-2079" href="#">آبشار</a>
                                     </div>
                                 </div>
                             </div>
                             <h3 class="im-entry-title">
-                                <a href="/%d8%b1%d9%88%d8%b3%d8%aa%d8%a7%db%8c-%d8%a8%d9%86%d9%87-%da%a9%d9%85%d8%b1-%d9%81%d8%b1%db%8c%d8%af%d9%88%d9%86%d8%b4%d9%87%d8%b1/" rel="bookmark">
-                                    روستای بنه کمر در منطقه پیشکوه
-                                    شهرستان فریدونشهر واقع در استان اصفهان
+                                <a href="#" rel="bookmark">
+                                    {{$post->title}}
                                 </a>
                             </h3>
                         </div>
@@ -629,7 +628,7 @@ $kindPlaceId = 10; ?>
                                 <span class="entry-date published updated">سه شنبه, ۱۲ تیر ۱۳۹۷</span>
                             </div>
                             <div class="comments-link im-meta-item">
-                                <a href="/%d8%b1%d9%88%d8%b3%d8%aa%d8%a7%db%8c-%d8%a8%d9%86%d9%87-%da%a9%d9%85%d8%b1-%d9%81%d8%b1%db%8c%d8%af%d9%88%d9%86%d8%b4%d9%87%d8%b1/#respond">
+                                <a href="">
                                     <i class="fa fa-comment-o"></i>۰
                                 </a>
                             </div>
@@ -702,12 +701,12 @@ $kindPlaceId = 10; ?>
         </div>
         <div class="col-md-9 col-sm-12 gnWhiteBox">
             <div class="gnMainPicOfArticle">
-                <img class="gnAdvertiseImage" src="{{URL::asset('images/adv1.jpg')}}" alt="">
+                <img class="gnAdvertiseImage" src="{{URL::asset($post->pic)}}" alt="{{$post->keyword}}">
                 <div class="gnMainPicOfArticleText">
                     <div>
                         <div class="im-entry-category" style="margin: 0 0 0 20px;">
                             <div class="iranomag-meta">
-                                <a class="im-catlink-color-2079" href="/category/%d8%a7%d9%85%d8%a7%da%a9%d9%86-%da%af%d8%b1%d8%af%d8%b4%da%af%d8%b1%db%8c/%d8%b7%d8%a8%db%8c%d8%b9%d8%aa-%da%af%d8%b1%d8%af%db%8c/%d8%a2%d8%a8%d8%b4%d8%a7%d8%b1/">آبشار</a>
+                                <a class="im-catlink-color-2079" href="#">آبشار</a>
                             </div>
                         </div>
                         <div class="iranomag-meta" style="display: inline-block">
@@ -715,7 +714,7 @@ $kindPlaceId = 10; ?>
                                 <span class="entry-date published updated">سه شنبه, ۱۲ تیر ۱۳۹۷</span>
                             </div>
                             <div class="comments-link im-meta-item">
-                                <a href="/%d8%b1%d9%88%d8%b3%d8%aa%d8%a7%db%8c-%d8%a8%d9%86%d9%87-%da%a9%d9%85%d8%b1-%d9%81%d8%b1%db%8c%d8%af%d9%88%d9%86%d8%b4%d9%87%d8%b1/#respond">
+                                <a href="">
                                     <i class="fa fa-comment-o"></i>۰
                                 </a>
                             </div>
@@ -731,7 +730,7 @@ $kindPlaceId = 10; ?>
                         </div>
                     </div>
                     <h3 class="im-entry-title">
-                        <a style="color: black" href="/%d8%b1%d9%88%d8%b3%d8%aa%d8%a7%db%8c-%d8%a8%d9%86%d9%87-%da%a9%d9%85%d8%b1-%d9%81%d8%b1%db%8c%d8%af%d9%88%d9%86%d8%b4%d9%87%d8%b1/" rel="bookmark">روستای بنه کمر در منطقه پیشکوه شهرستان فریدونشهر واقع در استان اصفهان</a>
+                        <a style="color: black" href="" rel="bookmark">{{$post->title}}</a>
                     </h3>
                 </div>
             </div>
@@ -761,6 +760,7 @@ $kindPlaceId = 10; ?>
                         <span class="commentsShareIconFeedback"></span>
                         <span class="mg-rt-20 cursor-pointer">اشتراک‌گذاری</span>
                     </div>
+
                 </div>
             </div>
         </div>
