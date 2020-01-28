@@ -734,7 +734,10 @@ $kindPlaceId = 10; ?>
                     </h3>
                 </div>
             </div>
-            <div style="height: 800px">
+            <div>
+                <div>
+                    {!! $post->description !!}
+                </div>
                 <div class="quantityOfLikes">
                     <span>31</span>
                     نفر دوست داشتند،
