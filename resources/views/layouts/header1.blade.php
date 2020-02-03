@@ -5,6 +5,9 @@
 <?php $user = Auth::user() ?>
 
 <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/header1.css')}}">
+<meta name="google-signin-scope" content="profile email">
+<meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
+<script src="https://apis.google.com/js/platform.js" async defer></script>
 
 <div class="masthead">
     <div id="taplc_global_nav_0" class="ppr_rup ppr_priv_global_nav">
@@ -85,7 +88,7 @@
                             </div>
                         </div>
 
-                        <div class="global-nav-actions flex" style="width: 0" >
+                        <div class="global-nav-actions flex" >
                             @if(Auth::check())
 
                                 <div class="ppr_rup ppr_priv_global_nav_action_trips">

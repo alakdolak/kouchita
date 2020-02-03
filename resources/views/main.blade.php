@@ -36,39 +36,7 @@
     </script>
 
     <style>
-        .mainBannerSlider {
-            position: absolute;
-            top: 0;
-            width: 100%;
-            height: 450px;
-            margin-bottom: 40px;
-        }
 
-        .eachPicOfSlider {
-            width: 100%;
-        }
-
-        .textInSlideMain {
-            position: absolute;
-            left: 0px;
-            bottom: 0px;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, rgba(0, 0, 0, 0.6) 0%, transparent 70%);
-        }
-
-        .textInSlide {
-            position: absolute;
-            left: 10px;
-            bottom: 10px;
-            padding: 30px;
-            font-size: 20px;
-        }
-
-        .stateName {
-            font-size: 12px;
-            padding-right: 21px;
-        }
     </style>
 
     {{--urls--}}

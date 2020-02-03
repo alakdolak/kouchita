@@ -192,7 +192,7 @@
 {{--        </div>--}}
 
         <div class="hideOnScreen row">
-            <div class="boxOFSqureDiv">
+            <div class="boxOFSquareDiv">
 
                 {{--                @if($placeMode == "hotel")--}}
                 {{--                    <div class="squareDivSelected" onclick="$('#phoneSearchPopUp').removeClass('hidden')">--}}
