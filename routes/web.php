@@ -882,13 +882,15 @@ Route::group(array('middleware' => 'nothing'), function () {
 
     Route::get('/article/id/{id}', 'PostController@postWithId')->name('postWithId');
 
-    Route::get('/article/{slug}/', 'PostController@showArticle')->name('article.show');
-
     Route::post('/paginationArticle', 'PostController@paginationArticle')->name('article.pagination');
 
     Route::get('/article/list/{type?}/{search?}', 'PostController@articleList')->name('article.list');
 
     Route::post('/paginationInArticleList', 'PostController@paginationInArticleList')->name('article.list.pagination');
+
+    Route::get('/article/{slug}', 'PostController@showArticle')->name('article.show');
+
+    Route::post('/article/like', 'PostController@LikeArticle')->name('article.like');
 
     Route::get('userArticles', function(){
         return view('userActivities.userArticles');

@@ -149,7 +149,10 @@ $kindPlaceId = 10; ?>
 {{--        @include('layouts.placeMainBodyHeader')--}}
     </div>
 
-    <h1 class="non-display-name"><a href="/">شازده مسافر مجله جامع دیجیتال گردشگری، سفر و ایرانشناسی</a></h1>
+    <div id="darkModal" class="display-none" role="dialog"></div>
+    @if(!Auth::check())
+        @include('layouts.loginPopUp')
+    @endif
 
     <div class="hidden visible-sm visible-xs">
         <div class="im-header-mobile">
@@ -447,7 +450,9 @@ $kindPlaceId = 10; ?>
 
     <div class="container" style="direction: rtl">
         <div class="col-md-3 col-sm-12" style="padding-right: 0 !important;">
-            <div class="col-md-12 gnReturnBackBtn">بازگشت به صفحه اصلی</div>
+            <a href="{{route('mainArticle')}}">
+                <div class="col-md-12 gnReturnBackBtn">بازگشت به صفحه اصلی</div>
+            </a>
             <div class="col-md-12 gnWhiteBox">
                 <div class="widget-head widget-head-44">
                     <strong class="widget-title">دسته‌بندی مطالب</strong>
@@ -471,31 +476,38 @@ $kindPlaceId = 10; ?>
                 </div>
                 <input type="text" class="gnInput" placeholder="شهر موردنظر خود را وارد کنید">
             </div>
+
             <div class="col-md-12 gnWhiteBox">
-                <div class="content-2col">
-                    <div class="im-entry-thumb">
-                        <div class="im-entry-header">
-                            <div class="im-entry-category">
-                                <div class="iranomag-meta clearfix">
-                                    <div class="cat-links im-meta-item">
-                                        <a class="im-catlink-color-2079" href="#">آبشار</a>
+                <input type="text" class="gnInput" id="pcSearchInput" placeholder="عبارت موردنظر خود را جست‌وجو کنید">
+                <span class="input-group-btn">
+                    <input type="submit" class="btn btn-default" value="بگرد" onclick="searchInArticle('pcSearchInput')"/>
+                </span>
+            </div>
+
+            <div class="col-md-12 gnWhiteBox">
+                @foreach($similarPost as $item)
+                    <div class="content-2col">
+                        <div class="im-entry-thumb" style="background-image: url('{{$item->pic}}'); background-size: 100% 100%;">
+                            <div class="im-entry-header">
+                                <div class="im-entry-category">
+                                    <div class="iranomag-meta clearfix">
+                                        <div class="cat-links im-meta-item">
+                                            <a class="im-catlink-color-2079" href="{{$item->url}}">{{$item->category}}</a>
+                                        </div>
                                     </div>
                                 </div>
+                                <h3 class="im-entry-title">
+                                    <a href="{{$item->url}}" rel="bookmark">
+                                        {{$item->title}}
+                                    </a>
+                                </h3>
                             </div>
-                            <h3 class="im-entry-title">
-                                <a href="#" rel="bookmark">
-                                    {{$post->title}}
-                                </a>
-                            </h3>
                         </div>
-                    </div>
-                    <div class="im-entry">
+                        <div class="im-entry">
                         <div class="im-entry-content">
-                            <p>
-                                روستای بنه کمر امروز به روستای بنه کمر در منطقه پیشکوه
-                                شهرستان فریدونشهر می رویم. همراه شازده مسافر باشید و از این
-                                روستای زیبا دیدن&#8230;
-                            </p>
+                            <a href="{{$item->url}}" rel="bookmark">
+                                {{$item->meta}}
+                            </a>
                         </div>
 
                         <p class="im-entry-footer">
@@ -505,74 +517,24 @@ $kindPlaceId = 10; ?>
                             </div>
                             <div class="comments-link im-meta-item">
                                 <a href="">
-                                    <i class="fa fa-comment-o"></i>۰
+                                    <i class="fa fa-comment-o"></i>{{$item->msgs}}
                                 </a>
                             </div>
                             <div class="author vcard im-meta-item">
                                 <a class="url fn n" href="/author/writer/">
                                     <i class="fa fa-user"></i>
-                                    شازده مسافر
+                                    {{$item->username}}
                                 </a>
                             </div>
                             <div class="post-views im-meta-item">
-                                <i class="fa fa-eye"></i>۱۵۱
+                                <i class="fa fa-eye"></i>{{$item->seen}}
                             </div>
                         </div>
                         </p>
                     </div>
-                </div>
-                <div class="content-2col">
-                    <div class="im-entry-thumb">
-                        <div class="im-entry-header">
-                            <div class="im-entry-category">
-                                <div class="iranomag-meta clearfix">
-                                    <div class="cat-links im-meta-item">
-                                        <a class="im-catlink-color-2068" href="/category/%d8%a7%d8%b3%d8%aa%d8%a7%d9%86-%da%af%db%8c%d9%84%d8%a7%d9%86/">
-                                            استان گیلان
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <h3 class="im-entry-title">
-                                <a href="/%d8%ba%d8%a7%d8%b1-%d8%a2%d9%88%db%8c%d8%b4%d9%88%db%8c-%d9%85%d8%a7%d8%b3%d8%a7%d9%84-%da%af%db%8c%d9%84%d8%a7%d9%86/"
-                                   rel="bookmark">
-                                    غار آویشوی در نزدیکی روستای ماسال
-                                    واقع در استان سرسبز گیلان
-                                </a>
-                            </h3>
-                        </div>
                     </div>
-                    <div class="im-entry">
-                        <div class="im-entry-content">
-                            <p>
-                                غار آویشوی غار آویشوی در گیلان یکی از پدیده های زیبایی است که
-                                در نوع خود بی نظیر است. غار آویشوی از بی نظیرترین غارهای&#8230;
-                            </p>
-                        </div>
+                @endforeach
 
-                        <p class="im-entry-footer">
-                        <div class="iranomag-meta clearfix">
-                            <div class="posted-on im-meta-item">
-                                <span class="entry-date published updated">یکشنبه, ۱۰ تیر ۱۳۹۷</span>
-                            </div>
-                            <div class="comments-link im-meta-item">
-                                <a href="/%d8%ba%d8%a7%d8%b1-%d8%a2%d9%88%db%8c%d8%b4%d9%88%db%8c-%d9%85%d8%a7%d8%b3%d8%a7%d9%84-%da%af%db%8c%d9%84%d8%a7%d9%86/#respond">
-                                    <i class="fa fa-comment-o"></i>۰
-                                </a>
-                            </div>
-                            <div class="author vcard im-meta-item">
-                                <a class="url fn n" href="/author/writer/">
-                                    <i class="fa fa-user"></i>
-                                    شازده مسافر
-                                </a>
-                            </div>
-                            <div class="post-views im-meta-item">
-                                <i class="fa fa-eye"></i>۲۸۱
-                            </div>
-                        </div>
-                        </p>
-                    </div>
-                </div>
             </div>
         </div>
         <div class="col-md-9 col-sm-12 gnWhiteBox">
@@ -591,7 +553,7 @@ $kindPlaceId = 10; ?>
                             </div>
                             <div class="comments-link im-meta-item">
                                 <a href="">
-                                    <i class="fa fa-comment-o"></i>۰
+                                    <i class="fa fa-comment-o"></i>{{count($post->comments)}}
                                 </a>
                             </div>
                             <div class="author vcard im-meta-item">
@@ -614,20 +576,12 @@ $kindPlaceId = 10; ?>
                 <div style="margin-top: 65px">
                     {!! $post->description !!}
                 </div>
-                <div class="quantityOfLikes">
-                    <span>{{$post->like}}</span>
-                    نفر دوست داشتند،
-                    <span>{{$post->disLike}}</span>
-                    نفر دوست نداشتند و
-                    <span>{{$post->comment}}</span>
-                    نفر نظر دادند.
-                </div>
                 <div class="commentFeedbackChoices">
-                    <div class="postsActionsChoices postLikeChoice col-xs-3">
+                    <div id="likeDiv" class="postsActionsChoices postLikeChoice col-xs-3" onclick="likePost(1, {{$post->id}})" style="color: {{$postLike == 1 ? 'red': ''}}">
                         <span class="commentsLikeIconFeedback"></span>
                         <span class="mg-rt-20 cursor-pointer">دوست داشتم</span>
                     </div>
-                    <div class="postsActionsChoices postDislikeChoice col-xs-3">
+                    <div id="disLikeDiv" class="postsActionsChoices postDislikeChoice col-xs-3" onclick="likePost(0, {{$post->id}})" style="color: {{$postLike == 0 ? 'darkred': ''}}">
                         <span class="commentsDislikeIconFeedback"></span>
                         <span class="mg-rt-20 cursor-pointer">دوست نداشتم</span>
                     </div>
@@ -640,6 +594,14 @@ $kindPlaceId = 10; ?>
                         <span class="mg-rt-20 cursor-pointer">اشتراک‌گذاری</span>
                     </div>
 
+                </div>
+                <div class="quantityOfLikes">
+                    <span id="countLike">{{$post->like}}</span>
+                    نفر دوست داشتند،
+                    <span id="countDisLike">{{$post->disLike}}</span>
+                    نفر دوست نداشتند و
+                    <span>{{count($post->comments)}}</span>
+                    نفر نظر دادند.
                 </div>
             </div>
         </div>
@@ -689,13 +651,17 @@ $kindPlaceId = 10; ?>
 
     var category = {!! $category !!}
     var post = {!! $post !!}
+    var getLisPostUrl = '{{route("article.list")}}';
+    var likeCount = {{$post->like}};
+    var disLikeCount = {{$post->disLike}};
+    var uLike = {{$postLike}};
 
     function createCategoryList(){
         for(var i = 0; i < category.length; i++){
             var text = '<div class="gnColOFContentsCategory">\n' +
                 '<div>\n' +
                 '<div>\n' +
-                '<span id="CategoryName_' + category[i]["id"] + '" class="gnTitleOfPlaces" onclick="goToCategoryPage(' + category[i]["id"] + ')"  style="cursor: pointer">' + category[i]["name"] + '</span>\n' +
+                '<span id="CategoryName_' + category[i]["id"] + '" class="gnTitleOfPlaces" onclick="searchInCategory(this)"  style="cursor: pointer">' + category[i]["name"] + '</span>\n' +
                 '<span class="gnNumberOfPlaces">' + category[i]["postCount"] + '</span>\n' +
                 '</div>\n';
 
@@ -705,7 +671,7 @@ $kindPlaceId = 10; ?>
             for(var j = 0; j < category[i]["subCategory"].length; j++){
                 var sub = category[i]["subCategory"][j];
                 text += '<li class="gnLi">\n' +
-                        '<span id="CategoryName_' + sub["id"] + '"  onclick="goToCategoryPage(' + sub["id"] + ')" style="cursor: pointer">' + sub["name"] + '</span>\n' +
+                        '<span id="CategoryName_' + sub["id"] + '" onclick="searchInCategory(this)" style="cursor: pointer">' + sub["name"] + '</span>\n' +
                         '<span class="gnNumberOfPlaces">' + sub["postCount"] + '</span>\n' +
                         '</li>\n';
             }
@@ -732,9 +698,76 @@ $kindPlaceId = 10; ?>
         }
     }
 
-    function goToCategoryPage(id){
-        alert(id)
+    function searchInArticle(id){
+        var text = $('#'+id).val();
+        if(text.trim().length != 0){
+            window.location.href = getLisPostUrl + '/content/' + text;
+        }
     }
+
+    function searchInCategory(element){
+        var text = $(element).text();
+        if(text.trim().length != 0)
+            window.location.href = getLisPostUrl + '/category/' + text;
+    }
+
+    function checkLogin(){
+        if (!'{{auth()->check()}}') {
+            showLoginPrompt('{{Request::url()}}');
+            return false;
+        }
+        else
+            return true;
+    }
+
+    function likePost(_like, _id){
+        if(!checkLogin())
+            return;
+
+        $.ajax({
+            type: 'post',
+            url: '{{route("article.like")}}',
+            data:{
+                _token: '{{csrf_token()}}',
+                like: _like,
+                id: _id
+            },
+            success: function(response){
+                if(response == 'ok'){
+                    document.getElementById('likeDiv').style.color = '#666666';
+                    document.getElementById('disLikeDiv').style.color = '#666666';
+
+                    if(_like == 1) {
+                        document.getElementById('likeDiv').style.color = 'red';
+                        likeCount++;
+                        $('#countLike').text(likeCount)
+                    }
+                    else {
+                        document.getElementById('disLikeDiv').style.color = 'darkred';
+                        disLikeCount++
+                        $('#countDisLike').text(disLikeCount);
+                    }
+
+                    if(uLike == 1) {
+                        likeCount--;
+                        $('#countLike').text(likeCount);
+                    }
+                    else if(uLike == 0) {
+                        disLikeCount--;
+                        $('#countDisLike').text(disLikeCount);
+                    }
+
+                    uLike = _like;
+
+                }
+            },
+            error: function (response) {
+                console.log(response)
+            }
+        })
+    }
+
+
 </script>
 
 <div class="ui_backdrop dark" style="display: none; z-index: 10000000;"></div>

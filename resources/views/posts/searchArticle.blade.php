@@ -531,6 +531,17 @@ $kindPlaceId = 10; ?>
     </div>
 
     <a href="#" id="back-to-top" title="بازگشت به ابتدای صفحه"><i class="fa fa-arrow-up"></i></a>
+    <script type='text/javascript' src='{{URL::asset('js/article/searchArticle.js')}}'></script>
+    <script>
+        var page = 1;
+        var type = '{{$type}}';
+        var search = '{{$search}}';
+        var _token = '{{csrf_token()}}';
+        var getPostUrl = '{{route("article.list.pagination")}}';
+        var getLisPostUrl = '{{route("article.list")}}';
+        var totalPage = {{$pageLimit}};
+        getPost(1);
+    </script>
 
     <script type='text/javascript' src='{{URL::asset('js/article.js')}}'></script>
 
@@ -608,17 +619,6 @@ $kindPlaceId = 10; ?>
     }
 
     createCategoryList()
-</script>
-<script type='text/javascript' src='{{URL::asset('js/article/searchArticle.js')}}'></script>
-<script>
-    var page = 1;
-    var type = '{{$type}}';
-    var search = '{{$search}}';
-    var _token = '{{csrf_token()}}';
-    var getPostUrl = '{{route("article.list.pagination")}}';
-    var getLisPostUrl = '{{route("article.list")}}';
-    var totalPage = {{$pageLimit}};
-    getPost(1);
 </script>
 
 <div class="ui_backdrop dark" style="display: none; z-index: 10000000;"></div>

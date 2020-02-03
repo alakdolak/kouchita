@@ -70,7 +70,7 @@ class PostController extends Controller {
         // end get lastMonthPost
 
         //this section get 5 most like post from lastMonthPost
-        $likePost = \DB::select('SELECT post.id, COUNT(postLike.id) as likeCount FROM post JOIN postLike ON postLike.dislike = 1 AND postLike.postId = post.id AND post.id IN (' . implode(",", $lastMonthPostId) . ')  GROUP BY post.id ORDER BY likeCount DESC');
+        $likePost = \DB::select('SELECT post.id, COUNT(postLike.id) as likeCount FROM post JOIN postLike ON postLike.like = 1 AND postLike.postId = post.id AND post.id IN (' . implode(",", $lastMonthPostId) . ')  GROUP BY post.id ORDER BY likeCount DESC');
         $mostLike = array();
         $mostLikeId = array();
         foreach ($likePost as $item){
@@ -166,11 +166,17 @@ class PostController extends Controller {
     public function paginationArticle(Request $request)
     {
         $page = $request->page;
+        $take = $request->take;
         $today = getToday()["date"];
-        $todayTime = getToday()["time"];
-        $take = 2;
+        $nowTime = getToday()["time"];
 
-        $allPosts = Post::join('users', 'users.id', 'post.creator')->where('date', '<=', $today)->select('username', 'post.id', 'title', 'meta', 'slug', 'seen', 'date', 'post.created_at', 'pic', 'keyword')->orderBy('date', 'DESC')->skip(($page-1) * $take)->take($take)->get();
+        $allPosts = Post::join('users', 'users.id', 'post.creator')
+            ->whereRaw('(post.date < ' . $today . ' OR (post.date = ' . $today . ' AND post.time <= ' . $nowTime . ' ))')
+            ->whereRaw('post.release <> "draft"')
+            ->select('username', 'post.id', 'post.title', 'post.meta', 'post.slug', 'post.seen', 'post.date', 'post.created_at', 'post.pic', 'post.keyword')
+            ->orderBy('date', 'DESC')
+            ->skip(($page-1) * $take)->take($take)->get();
+
         foreach ($allPosts as $item) {
             $item->msgs = PostComment::wherePostId($item->id)->whereStatus(true)->count();
             $item->pic = \URL::asset('_images/posts/' . $item->id . '/' . $item->pic);
@@ -201,23 +207,51 @@ class PostController extends Controller {
     {
         $post = Post::where('slug', $slug)->first();
         if($post != null){
+            $today = getToday()["date"];
+            $nowTime = getToday()["time"];
+
             $post->pic = URL::asset('_images/posts/'.$post->id.'/'.$post->pic);
             $mainCategory = PostCategoryRelation::where('postId', $post->id)->where('isMain', 1)->first();
-            $post->mainCategory = PostCategory::find($mainCategory->categoryId)->name;
+            $mainCategory = PostCategory::find($mainCategory->categoryId);
+            $post->mainCategory = $mainCategory->name;
             $post->user = User::find($post->creator);
             if($post->date == null)
                 $post->date = \verta($post->created_at)->format('Y/m/%d');
             $post->date = convertJalaliToText($post->date);
+            $postLike = -1;
+            if(\auth()->check())
+                $postLike = PostLikes::where('postId', $post->id)->where('userId', \auth()->user()->id)->firstOrFail()->like;
 
             $post->category = PostCategoryRelation::where('postId', $post->id)->get();
+            $similarPostId = PostCategoryRelation::where('categoryId', $mainCategory->id)->where('isMain', 1)->pluck('postId')->toArray();
 
-            $post->like = PostLikes::where('postId', $post->id)->where('dislike', 1)->count();
-            $post->disLike = PostLikes::where('postId', $post->id)->where('dislike', 0)->count();
+            $similarPost = Post::join('users', 'users.id', 'post.creator')
+                ->whereRaw('(post.date < ' . $today . ' OR (post.date = ' . $today . ' AND post.time <= ' . $nowTime . ' ))')
+                ->whereRaw('post.release <> "draft"')
+                ->whereIn('post.id', $similarPostId)
+                ->where('post.id', '!=', $post->id)
+                ->select('username', 'post.id', 'post.title', 'post.meta', 'post.slug', 'post.seen', 'post.date', 'post.created_at', 'post.pic', 'post.keyword')
+                ->orderBy('date', 'DESC')
+                ->take(2)->get();
+
+            foreach ($similarPost as $item){
+                $item->msgs = PostComment::wherePostId($item->id)->whereStatus(true)->count();
+                $item->pic = \URL::asset('_images/posts/' . $item->id . '/' . $item->pic);
+                if ($item->date == null)
+                    $item->date = \verta($item->created_at)->format('Ym%d');
+                $item->date = convertJalaliToText($item->date);
+                $mainCategory = PostCategoryRelation::where('postId', $item->id)->where('isMain', 1)->first();
+                $item->category = PostCategory::find($mainCategory->categoryId)->name;
+                $item->url = route('article.show', ['slug' => $item->slug]);
+            }
+
+            $post->like = PostLikes::where('postId', $post->id)->where('like', 1)->count();
+            $post->disLike = PostLikes::where('postId', $post->id)->where('like', 0)->count();
             $post->comments = PostComment::where('postId', $post->id)->where('status', 1)->get();
 
             $category = $this->getAllCategory();
 
-            return view('posts.article', compact(['post', 'category']));
+            return view('posts.article', compact(['post', 'category', 'similarPost', 'postLike']));
         }
         return \redirect(\url('/'));
 
@@ -276,7 +310,8 @@ class PostController extends Controller {
 
                     $post = Post::whereRaw('(post.title LIKE "%' . $search . '%" OR post.slug LIKE "%' . $search . '%" OR post.keyword LIKE "%' . $search . '%")')
                         ->orWhereIn('post.id', $tagRelId)
-                        ->whereRaw('post.release <> "draft"')->pluck('id')->toArray();
+                        ->whereRaw('post.release <> "draft"')
+                        ->pluck('id')->toArray();
                 }
                 $categ = PostCategory::where('name', 'LIKE', '%'.$search.'%')->pluck('id')->toArray();
                 $postCatId = PostCategoryRelation::whereIn('categoryId', $categ)->pluck('postId')->toArray();
@@ -302,6 +337,38 @@ class PostController extends Controller {
                 }
 
                 echo json_encode($post);
+            }
+            else
+                echo 'nok2';
+        }
+        else
+            echo 'nok1';
+
+        return;
+    }
+
+    public function LikeArticle(Request $request)
+    {
+        if(!\auth()->check()){
+            echo 'auth';
+            return;
+        }
+
+        if(isset($request->id) && isset($request->like)){
+            $id = $request->id;
+            $like = $request->like;
+            $post = Post::find($id);
+            if($post != null){
+                $postLike = PostLikes::where('userId', \auth()->user()->id)->where('postId', $id)->first();
+                if($postLike == null)
+                    $postLike = new PostLikes();
+
+                $postLike->postId = $id;
+                $postLike->userId = \auth()->user()->id;
+                $postLike->like = $like;
+                $postLike->save();
+
+                echo 'ok';
             }
             else
                 echo 'nok2';
@@ -343,6 +410,7 @@ class PostController extends Controller {
         }
         return $category;
     }
+
 
 
     public function gardeshnameInner($postId) {

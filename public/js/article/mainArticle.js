@@ -1,5 +1,6 @@
 
 var allPostSample = 0;
+var take = 5;
 
 function getAllPost(page){
     $.ajax({
@@ -7,6 +8,7 @@ function getAllPost(page){
         url: getAllPostUrl,
         data: {
             page: page,
+            take: take,
             _token: _token
         },
         success: function(response){
