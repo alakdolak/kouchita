@@ -375,11 +375,11 @@ DIV.ppr_rup.ppr_priv_masthead_search .body_text {
     margin: 0 10%;
 }
 
-@media (min-width: 1188px) {
-    .ui_container {
-         max-width: initial;
-    }
-}
+/*@media (min-width: 1188px) {*/
+/*    .ui_container {*/
+/*         max-width: initial;*/
+/*    }*/
+/*}*/
 
 @media (max-width: 767px) {
 

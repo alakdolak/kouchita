@@ -683,7 +683,7 @@
 
     </div>
 
-    @include('layouts.proSearch')
+{{--    @include('layouts.proSearch')--}}
 
     <script>
 

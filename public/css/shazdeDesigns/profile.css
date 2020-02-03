@@ -1,4 +1,4 @@
-.grayBorder {
+.trophyCaseHeaderMainDiv.grayBorder {
     position: absolute;
     border-bottom: 1px solid #E6E6E6;
     left: 50%;
@@ -127,9 +127,13 @@
     padding-top: 16px !important;
 }
 
+.phoneNumMainDiv {
+    position: relative;
+    display: flex;
+}
+
 #phoneNum {
-    border-bottom: 1px solid #CCC !important;
-    padding: 7px;
+    padding: 7px 7px 0;
     width: 300px;
     background-color: transparent;
     border: none;
@@ -137,12 +141,29 @@
     margin-left: 60px;
 }
 
-#targetHelp_14 > div:nth-child(3) {
+.inputBorderBottom {
+    top: 25px;
+    position: absolute;
+    border-bottom: 1px solid #e6e6e6 !important;
+    width: 100%;
+}
+
+.sendInvitationCode {
     float: right;
-    padding: 10px;
-    width: 180px;
-    background-color: #4DC7BC;
-    border: none
+    padding: 0 20px;
+    width: max-content;
+    background-color: #0076a3;
+    border: none;
+}
+
+.sendInvitationCodeMainDiv {
+    position: absolute;
+    background-color: white;
+    display: flex;
+    left: -6px;
+    top: 15px;
+    z-index: 1;
+    padding-right: 5px;
 }
 
 #sendMsg {
@@ -489,6 +510,64 @@
     background-color: white;
 }
 
+.modules-membercenter-member-tag {
+    border: none;
+}
+
+.modules-membercenter-member-tag .memberTags div.tripTasteTitle {
+    position: relative;
+    display: flex;
+    margin-bottom: 25px;
+    padding-bottom: 11px;
+    border-bottom: 1px solid #e6e6e6;
+    align-items: center;
+}
+
+.modules-membercenter-member-tag .memberTags .header {
+    position: absolute;
+    background: white;
+    padding-left: 5px;
+    font-size: 15px;
+    color: #0076ac;
+    margin-bottom: 0;
+    top: 0;
+    right: 0;
+}
+
+.modules-membercenter-member-tag .memberTags .editTags {
+    background: white;
+    padding: 0 5px 0 0;
+    font-size: 10px;
+    top: 5px;
+}
+
+#tagSuggest > span {
+    display: flex;
+    margin-bottom: 5px;
+}
+
+#tagSuggest > span:nth-child(2) {
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+
+.invitationFriendsMainDiv {
+    position: relative;
+    padding-top: 30px;
+}
+
+.invitationFriendsTitle {
+    font-size: 15px;
+    color: #0076ac;
+    padding-left: 5px;
+    position: absolute;
+    top: -12px;
+    right: 0;
+    background-color: white;
+    font-weight: 700;
+}
+
 .modules-membercenter-persistent-header-achievements .persistent-header {
     width: auto;
     padding: 0;
@@ -559,10 +638,10 @@
 
 .trophyCaseHeaderMainDiv {
     position: relative;
-    margin: 30px 0;
+    margin: 0 0 30px 0 !important;
     padding-top: 42px !important;
     border: solid #E6E6E6;
-    border-width: 1px 0;
+    border-width: 0 0 1px 0;
 }
 
 .modules-membercenter-badge-teaser .header .trophyCaseTitle {
@@ -571,6 +650,7 @@
     top: 28px;
     background: white;
     padding-left: 5px;
+    color: #0076ac;
 }
 
 .modules-membercenter-badge-teaser .header .trophyCaseTitle > a {
@@ -586,6 +666,79 @@
     background: white;
     padding-right: 5px;
     text-decoration: none;
+}
+
+.myActivitiesMainDiv {
+    margin: 18px 0;
+    padding: 0 9px;
+    display: flex;
+    flex-direction: column;
+    background-color: #ededed;
+}
+
+.myActivitiesHeaderMainDiv {
+    border-bottom: 1px solid white;
+    margin-top: 13px;
+    position: relative;
+}
+
+.cs-header-points {
+    position: absolute;
+    left: 0;
+    top: -15px;
+    color: #92321b;
+    background-color: #ededed;
+}
+
+.cs-header-points span.label {
+    color: #92321b;
+}
+
+.cs-header-title {
+    position: absolute;
+    right: 0;
+    top: -15px;
+    background-color: #ededed;
+    padding-left: 5px;
+    color: #0076a3;
+}
+
+#targetHelp_15 {
+    margin: 0;
+}
+
+.myActivitiesMainDiv .userProfileActivitiesDetailsMainDiv {
+    width: 100%;
+    padding: 0;
+    margin-top: 5px !important;
+    display: none;
+}
+
+.myActivitiesMainDiv .showUsersPostsLink {
+    border-color: #0076a3;
+}
+
+.myActivitiesMainDiv .userActivitiesPosts {
+    display: block;
+}
+
+.myActivitiesMainDiv .postsMainFiltrationBar {
+    padding: 0 !important;
+    display: flex !important;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+.myActivitiesMainDiv .postsMainDivInSpecificMode {
+    margin-top: 5px;
+}
+
+.myActivitiesMainDiv .answersBoxMainDiv {
+    margin-top: 5px;
+}
+
+.myActivitiesMainDiv .userProfilePostsSearchContainer {
+    margin-bottom: 0;
 }
 
 @media (max-width: 992px) {

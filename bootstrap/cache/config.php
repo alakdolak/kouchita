@@ -424,7 +424,7 @@
         'provider' => 'users',
       ),
     ),
-    'providers' => 
+    'providers' =>
     array (
       'users' => 
       array (

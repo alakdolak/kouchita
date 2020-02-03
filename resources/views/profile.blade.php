@@ -4,6 +4,7 @@
     @section('main')
 
         <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/profile.css')}}">
+        <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/usersActivities.css')}}">
         <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/abbreviations.css')}}">
 
         <script>
@@ -249,22 +250,29 @@
                                     <button class="btn btn-danger exitBtnHelp">خروج</button>
                                 </div>
 
-                                <div id="tagHeader" class="header">سبک سفر </div>
-                                <div class="editTags" onclick="showElement('tagPrompt'); sendAjaxRequestToGiveTripStyles('{{$user->id}}', 'stylesTag')"><span class="sprite-addCities buttonIcon"></span>انواع سبک </div>
+                                <div class="tripTasteTitle">
+                                    <div id="tagHeader" class="header">سبک سفر </div>
+                                    <div class="editTags" onclick="showElement('tagPrompt'); sendAjaxRequestToGiveTripStyles('{{$user->id}}', 'stylesTag')"><span class="sprite-addCities buttonIcon"></span>انواع سبک </div>
+                                </div>
 
                                 <div class="separator"></div>
                                 <div id="tagDisplay" class="tagBlock">
                                     <div id="tagSuggest" class="tagPrompt" name="add-tags">
-                                        من چه گردشگری هستم ؟<br>
-                                        برای آشنایی بیشتر مردم با شما ، عادات سفر خود را مشخص کنید.
-
+                                        <span>من چه گردشگری هستم ؟</span>
+                                        <span>برای آشنایی بیشتر مردم با شما ، عادات سفر خود را مشخص کنید.</span>
                                     </div>
                                 </div>
                             </div>
-                            <div id="targetHelp_14" class="targets col-xs-12">
+                            <div id="targetHelp_14" class="targets col-xs-12 invitationFriendsMainDiv">
+                                <div class="invitationFriendsTitle">معرفی دوستان</div>
                                 <p>دوستان خود را به شازده مسافر معرفی کنید و امتیاز بگیرید</p>
-                                <input autocomplete="off" id="phoneNum" type="text" placeholder="09xxxxxxxxx">
-                                <div onclick="sendCode()" class="btn btn-primary">ارسال کد معرف به دوستان</div>
+                                <div class="phoneNumMainDiv">
+                                    <input autocomplete="off" id="phoneNum" type="text" placeholder="09xxxxxxxxx">
+                                    <div class="sendInvitationCodeMainDiv">
+                                        <div onclick="sendCode()" class="btn btn-primary sendInvitationCode">ارسال</div>
+                                    </div>
+                                    <div class="inputBorderBottom"></div>
+                                </div>
                                 <div id="msgContainer" class="col-xs-12 hidden">
                                     <center>
                                         <p id="sendMsg"></p>
@@ -564,56 +572,114 @@
                         are available on occasion across the site. Keep an eye out for opportunities to get extra points!
                     </div>
                 </div>
-                <div id="myActivitiesDiv" class="modules-membercenter-content-stream">
+                <div id="" class="modules-membercenter-content-stream myActivitiesMainDiv">
 
-                    <div id="targetHelp_15" class="targets cs-header" style="position: relative">
-                        <div class="cs-header-points">
-                            <span class="label" style="color: #92321b;">امتیاز کسب شده :</span>
-                            <span class="points">{{$totalPoint}}</span>
+                    <div class="myActivitiesMainDiv">
+
+                        <div id="targetHelp_15" class="targets cs-header">
+                            <div class="myActivitiesHeaderMainDiv">
+                                <div class="cs-header-points">
+                                    <span class="label">امتیاز کسب شده :</span>
+                                    <span class="points">{{$totalPoint}}</span>
+                                </div>
+                                <p class="cs-header-title">فعالیت های من</p>
+                            </div>
+
+                            <div id="helpSpan_15" class="helpSpans hidden">
+                                <span class="introjs-arrow"></span>
+                                <p>شما می توانید تمامم فعالیت های خود در سایت را در این قسمت مشاهده نمایید. از فیلتر های موجود نیز برای دسترسی راحت تر به فعالیت های خود استفاده کنید.</p>
+                                <button data-val="15" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_15">بعدی</button>
+                                <button data-val="15" class="btn btn-primary backBtnsHelp" id="backBtnHelp_15">قبلی</button>
+                                <button class="btn btn-danger exitBtnHelp" id="exitBtnHelp_15">خروج</button>
+                            </div>
                         </div>
-                        <p class="cs-header-title">فعالیت های من</p>
-                        <div class="grayBorder grayBorder5"></div>
 
-
-                        <div id="helpSpan_15" class="helpSpans hidden">
-                            <span class="introjs-arrow"></span>
-                            <p>شما می توانید تمامم فعالیت های خود در سایت را در این قسمت مشاهده نمایید. از فیلتر های موجود نیز برای دسترسی راحت تر به فعالیت های خود استفاده کنید.</p>
-                            <button data-val="15" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_15">بعدی</button>
-                            <button data-val="15" class="btn btn-primary backBtnsHelp" id="backBtnHelp_15">قبلی</button>
-                            <button class="btn btn-danger exitBtnHelp" id="exitBtnHelp_15">خروج</button>
+                        <div class="postsMainFiltrationBar">
+                            <span class="showUsersPostsLink changeModeBtn" onclick="activitiesChangeMode(); postsChangeMode()">پست‌ها</span>
+                            <span class="showUsersPhotosAndVideosLink changeModeBtn" onclick="activitiesChangeMode(); photosChangeMode()">عکس و فیلم</span>
+                            <span class="showUsersQAndAsLink changeModeBtn" onclick="activitiesChangeMode(); questionsChangeMode()">سؤال‌ها و پاسخ‌ها</span>
+                            <span class="showUsersArticlesLink changeModeBtn" onclick="activitiesChangeMode(); articleChangeMode()">مقاله‌ها</span>
+                            <span class="showUsersScores changeModeBtn" onclick="activitiesChangeMode(); scoresChangeMode()">امتیاز‌ها</span>
+                            <span class="otherActivitiesChoices changeModeBtn" onclick="activitiesChangeMode(); othersChangeMode()">سایر موارد</span>
                         </div>
+
+                        <div>
+                            @include('userActivities.innerParts.userPostsInner')
+                            @include('userActivities.innerParts.userPhotosAndVideosInner')
+                            @include('userActivities.innerParts.userQuestionsInner')
+                            @include('userActivities.innerParts.userArticlesInner')
+                        </div>
+
+                        <script>
+
+                            function activitiesChangeMode() {
+                                $('.userProfileActivitiesDetailsMainDiv').css('display' , 'none');
+                                $('.changeModeBtn').css('border-color' , 'white');
+                            }
+
+                            function postsChangeMode() {
+                                $('.userActivitiesPosts').css('display' , 'block');
+                                $('.showUsersPostsLink').css('border-color' , '#0076a3');
+                            }
+
+                            function photosChangeMode() {
+                                $('.userActivitiesPhotos').css('display' , 'block');
+                                $('.showUsersPhotosAndVideosLink').css('border-color' , '#0076a3');
+                            }
+
+                            function questionsChangeMode() {
+                                $('.userActivitiesQuestions').css('display' , 'block');
+                                $('.showUsersQAndAsLink').css('border-color' , '#0076a3');
+                            }
+
+                            function articleChangeMode() {
+                                $('.userActivitiesArticles').css('display' , 'block');
+                                $('.showUsersArticlesLink').css('border-color' , '#0076a3');
+                            }
+
+                            function scoresChangeMode() {
+                                // $('.userActivitiesScores').css('display' , 'block');
+                                $('.showUsersScores').css('border-color' , '#0076a3');
+                            }
+
+                            function othersChangeMode() {
+                                // $('.userActivitiesOthers').css('display' , 'block');
+                                $('.otherActivitiesChoices').css('border-color' , '#0076a3');
+                            }
+
+                        </script>
+
+    {{--                    <ul class="cs-contribution-bar">--}}
+    {{--                        <?php $i = 0; $allow = true; ?>--}}
+    {{--                        @foreach($activities as $activity)--}}
+    {{--                            @if($counts[$i] > 0)--}}
+    {{--                                <li class="cursor-pointer">--}}
+    {{--                                    <a class="headerActivity" id='headerActivity_{{$activity->id}}' onclick="sendAjaxRequestToGiveActivity('{{$activity->id}}', '{{$user->id}}', -1, 'myActivities', 'myActivitiesContent', 1, '{{$counts[$i]}}')">--}}
+
+    {{--                                        @if($allow)--}}
+    {{--                                            <script>--}}
+    {{--                                                $(document).ready(function () {--}}
+    {{--                                                    sendAjaxRequestToGiveActivity('{{$activity->id}}', '{{$user->id}}', -1, 'myActivities', 'myActivitiesContent', 1, '{{$counts[$i]}}');--}}
+    {{--                                                });--}}
+    {{--                                            </script>--}}
+    {{--                                            <?php $allow = false; ?>--}}
+    {{--                                        @endif--}}
+    {{--                                        <span> {{$activity->name}} </span>--}}
+    {{--                                        <span> ({{$counts[$i]}}) </span>--}}
+    {{--                                    </a>--}}
+    {{--                                </li>--}}
+    {{--                            @endif--}}
+    {{--                            <?php $i++; ?>--}}
+    {{--                        @endforeach--}}
+    {{--                    </ul>--}}
+
+    {{--                    <div class="cs-filter-bar" id="myActivities">--}}
+    {{--                    </div>--}}
+
+
+    {{--                    <div class="cs-content-container" id="myActivitiesContent">--}}
+    {{--                    </div>--}}
                     </div>
-
-{{--                    <ul class="cs-contribution-bar">--}}
-{{--                        <?php $i = 0; $allow = true; ?>--}}
-{{--                        @foreach($activities as $activity)--}}
-{{--                            @if($counts[$i] > 0)--}}
-{{--                                <li class="cursor-pointer">--}}
-{{--                                    <a class="headerActivity" id='headerActivity_{{$activity->id}}' onclick="sendAjaxRequestToGiveActivity('{{$activity->id}}', '{{$user->id}}', -1, 'myActivities', 'myActivitiesContent', 1, '{{$counts[$i]}}')">--}}
-
-{{--                                        @if($allow)--}}
-{{--                                            <script>--}}
-{{--                                                $(document).ready(function () {--}}
-{{--                                                    sendAjaxRequestToGiveActivity('{{$activity->id}}', '{{$user->id}}', -1, 'myActivities', 'myActivitiesContent', 1, '{{$counts[$i]}}');--}}
-{{--                                                });--}}
-{{--                                            </script>--}}
-{{--                                            <?php $allow = false; ?>--}}
-{{--                                        @endif--}}
-{{--                                        <span> {{$activity->name}} </span>--}}
-{{--                                        <span> ({{$counts[$i]}}) </span>--}}
-{{--                                    </a>--}}
-{{--                                </li>--}}
-{{--                            @endif--}}
-{{--                            <?php $i++; ?>--}}
-{{--                        @endforeach--}}
-{{--                    </ul>--}}
-
-{{--                    <div class="cs-filter-bar" id="myActivities">--}}
-{{--                    </div>--}}
-
-
-{{--                    <div class="cs-content-container" id="myActivitiesContent">--}}
-{{--                    </div>--}}
 
                 </div>
 

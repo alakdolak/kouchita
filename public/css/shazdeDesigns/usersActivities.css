@@ -120,7 +120,7 @@ body {
     float: right;
 }
 
-.otherFilterChoices::after {
+.otherActivitiesChoices::after {
     content: '\E04A';
     font-family: Shazde_Regular2 !important;
     margin-right: 5px;
@@ -1221,7 +1221,7 @@ body {
         width: 8%;
     }
 
-    .otherFilterChoices {
+    .otherActivitiesChoices {
         width: 13.8%;
     }
 
