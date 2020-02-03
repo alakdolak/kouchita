@@ -181,8 +181,10 @@
             <div class="ui_picker">
                 <div class="typeahead_align ui_typeahead full-width display-flex">
                     <div class="spGoWhere">به کجا</div>
+
                     <input onkeyup="search(event, this.value)" type="text" id="placeName"
                            class="typeahead_input searchPaneInput" placeholder="دوست دارید سفر کنید؟"/>
+
                     <input type="hidden" id="placeId">
                 </div>
                 <div class="spBorderBottom"></div>

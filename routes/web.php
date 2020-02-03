@@ -863,7 +863,10 @@ Route::group(array('middleware' => 'auth'), function () {
     Route::get('/tour/details', function (){
         $placeMode = 'tour';
         $state = 'تهران';
-        return view('tour.tour-details', compact(['placeMode', 'state']));
+        $place = \App\models\Hotel::find(1);
+        $kindPlaceId = 1;
+//        dd($place);
+        return view('tour.tour-details', compact(['placeMode', 'state', 'place', 'kindPlaceId']));
     });
     Route::get('/tour/lists', function (){
         $placeMode = 'tour';
@@ -875,24 +878,21 @@ Route::group(array('middleware' => 'auth'), function () {
 //posts
 Route::group(array('middleware' => 'nothing'), function () {
 
+    Route::get('mainArticle', 'PostController@mainArticle')->name('mainArticle');
+
     Route::get('/article/id/{id}', 'PostController@postWithId')->name('postWithId');
 
-    Route::get('/article/{slug}', 'PostController@showArticle')->name('article.show');
+    Route::get('/article/{slug}/', 'PostController@showArticle')->name('article.show');
 
-    Route::get('searchArticle', function(){
-        return view('searchArticle');
-    });
+    Route::post('/paginationArticle', 'PostController@paginationArticle')->name('article.pagination');
+
+    Route::get('/article/list/{type?}/{search?}', 'PostController@articleList')->name('article.list');
+
+    Route::post('/paginationInArticleList', 'PostController@paginationInArticleList')->name('article.list.pagination');
 
     Route::get('userArticles', function(){
         return view('userActivities.userArticles');
     });
-
-    //Route::get('mainArticle', function(){
-//    return view('mainArticle');
-//});
-
-    Route::get('mainArticle/{page?}', 'PostController@mainArticle')->name('mainArticle');
-
 });
 
 Route::post('checkLogin', array('as' => 'checkLogin', 'uses' => 'HomeController@checkLogin'));

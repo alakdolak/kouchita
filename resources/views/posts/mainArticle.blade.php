@@ -1,10 +1,9 @@
-<?php $placeMode = "ticket";
-$state = 'اصفهان';
-$kindPlaceId = 10; ?>
-        <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     @include('layouts.topHeader')
+{{--    <script src="{{URL::asset('js/angular.js')}}"></script>--}}
+
     <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/hr_north_star.css?v=1')}}' data-rup='hr_north_star_v1'/>
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/shazdeDesigns/hotelDetail.css')}}"/>
 
@@ -39,7 +38,7 @@ $kindPlaceId = 10; ?>
             justify-content: space-between;
         }
         .gnColOFContentsCategory {
-            width: 47%;
+            width: 100%;
         }
         .gnUl {
             list-style: none;
@@ -117,10 +116,10 @@ $kindPlaceId = 10; ?>
                                     <form action="" name="searchform" method="get">
                                         <fieldset class="search-fieldset">
                                             <div class="input-group">
-                                                <input type="search" class="form-control" name="s"
-                                                       placeholder="عبارت جستجو را اینجا وارد کنید..." required/>
+                                                <input type="search" id="mobileSearchInput" class="form-control" name="s"
+                                                       placeholder="عبارت جستجو را اینجا وارد کنید..."/>
                                                 <span class="input-group-btn">
-                                                    <input type="submit" class="btn btn-default" value="بگرد"/>
+                                                    <input type="submit" class="btn btn-default" value="بگرد" onclick="searchInArticle('mobileSearchInput')"/>
                                                 </span>
                                             </div>
                                         </fieldset>
@@ -135,7 +134,7 @@ $kindPlaceId = 10; ?>
         <div class="container">
             <div class="im-header-mobile-ad col-md-12 text-center">
                 <p>
-                    <img class="aligncenter size-full wp-image-4151" src="{{URL::asset('images/gardeshname_banner.jpg')}}" alt="شازده مسافر" width="1600" height="365"/>
+                    <img class="aligncenter size-full wp-image-4151" src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="شازده مسافر" width="1600" height="365"/>
                 </p>
             </div>
         </div>
@@ -400,26 +399,28 @@ $kindPlaceId = 10; ?>
                 <div class="clearfix">
                     <?php $i = 0; ?>
                     @foreach($bannerPosts as $post)
-                        @if($i < 2)
+                        @if(count($bannerPosts) == 1)
+                                <div class="col-md-12">
+                        @elseif($i < 2 || count($bannerPosts) != 5)
                             <div class="col-md-6 col-sm-12">
-                                @else
-                                    <div class="col-md-4 col-sm-12">
-                                        @endif
-                                        <article class="im-article grid-carousel grid-2 row post type-post status-publish format-standard has-post-thumbnail hentry">
+                        @elseif(count($bannerPosts) == 5)
+                            <div class="col-md-4 col-sm-12">
+                        @endif
+                                <article class="im-article grid-carousel grid-2 row post type-post status-publish format-standard has-post-thumbnail hentry">
                                             <div class="im-entry-thumb">
-                                                <a class="im-entry-thumb-link" href="{{route('gardeshnameInner', ['postId' => $post->id])}}" title="{{$post->title}}">
-                                                    <img class="lazy-img" data-src="{{$post->pic}}" alt="{{$post->alt}}"/>
+                                                <a class="im-entry-thumb-link" href="{{route('article.show', ['slug' => $post->slug])}}" title="{{$post->title}}">
+                                                    <img class="lazy-img" data-src="{{$post->pic}}" alt="{{$post->keyword}}" style="height: {{(count($bannerPosts) != 5) || $i < 2 ? (count($bannerPosts) != 1 ? '310px' : '') : '250px'}}"/>
                                                 </a>
                                                 <div class="im-entry-header">
                                                     <div class="im-entry-category">
                                                         <div class="iranomag-meta clearfix">
                                                             <div class="cat-links im-meta-item">
-                                                                <a style="background-color: {{$post->backColor}}; color: {{$post->categoryColor}} !important;" href="" title="{{$post->category}}">{{$post->category}}</a>
+                                                                <a style="background-color: #666; color: #fff !important;" href="{{url('/article/list/category/'.$post->category)}}" title="{{$post->category}}">{{$post->category}}</a>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <h2 class="im-entry-title">
-                                                        <a style="color: {{$post->color}}" href="" rel="bookmark">{{$post->title}}</a>
+                                                        <a style="color: #fff" href="{{route('article.show', ['slug' => $post->slug])}}" rel="bookmark">{{$post->title}}</a>
                                                     </h2>
                                                     <div class="im-entry-footer">
                                                         <div class="iranomag-meta clearfix">
@@ -444,14 +445,14 @@ $kindPlaceId = 10; ?>
                                                 </div>
                                             </div>
                                         </article>
-                                    </div>
-                                    @if($i == 1)
+                            </div>
+                        @if($i == 1)
                             </div>
                             <div class="clearfix">
-                                @endif
-                                <?php $i++; ?>
-                                @endforeach
-                            </div>
+                        @endif
+                        <?php $i++; ?>
+                    @endforeach
+                    </div>
                 </div>
             </div>
         </div>
@@ -466,147 +467,9 @@ $kindPlaceId = 10; ?>
                     <div class="widget-head-line"></div>
                 </div>
                 <div class="gnContentsCategory">
-                    <div class="gnColOFContentsCategory">
-                        <div>
-                            <div>
-                                <span class="gnTitleOfPlaces">اماکن گردشگری</span>
-                                <span class="gnNumberOfPlaces">0</span>
-                            </div>
-                            <ul class="gnUl">
-                                <li class="gnLi">
-                                    <span>اماکن تاریخی</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                                <li class="gnLi">
-                                    <span>اماکن مذهبی</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                                <li class="gnLi">
-                                    <span>اماکن تفریحی</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                                <li class="gnLi">
-                                    <span>طبیعت گردی</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                                <li class="gnLi">
-                                    <span>مراکز خرید</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                                <li class="gnLi">
-                                    <span>موزه ها</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div>
-                            <div>
-                                <span class="gnTitleOfPlaces">هتل و رستوران</span>
-                                <span class="gnNumberOfPlaces">0</span>
-                            </div>
-                            <ul class="gnUl">
-                                <li class="gnLi">
-                                    <span>هتل</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                                <li class="gnLi">
-                                    <span>رستوران</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div>
-                            <div>
-                                <span class="gnTitleOfPlaces">حمل و نقل</span>
-                                <span class="gnNumberOfPlaces">0</span>
-                            </div>
-                            <ul class="gnUl">
-                                <li class="gnLi">
-                                    <span>هواپیما</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                                <li class="gnLi">
-                                    <span>اتوبوس</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                                <li class="gnLi">
-                                    <span>سواری</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                                <li class="gnLi">
-                                    <span>قطار</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="gnColOFContentsCategory">
-                        <div>
-                            <div>
-                                <span class="gnTitleOfPlaces">آداب و رسوم</span>
-                                <span class="gnNumberOfPlaces">0</span>
-                            </div>
-                            <ul class="gnUl">
-                                <li class="gnLi">
-                                    <span>سوغات محلی</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                                <li class="gnLi">
-                                    <span>صنایع دستی</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                                <li class="gnLi">
-                                    <span>اماکن تفریحی</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                                <li class="gnLi">
-                                    <span>غذای محلی</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                                <li class="gnLi">
-                                    <span>لباس محلی</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                                <li class="gnLi">
-                                    <span>گویش محلی</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                                <li class="gnLi">
-                                    <span>اصطلاحات محلی</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div>
-                            <div>
-                                <span class="gnTitleOfPlaces">جشنواره و آیین</span>
-                                <span class="gnNumberOfPlaces">0</span>
-                            </div>
-                            <ul class="gnUl">
-                                <li class="gnLi">
-                                    <span>رسم محلی</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                                <li class="gnLi">
-                                    <span>جشنواره</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                                <li class="gnLi">
-                                    <span>تور</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                                <li class="gnLi">
-                                    <span>کنسرت</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div>
-                            <div>
-                                <span class="gnTitleOfPlaces">راهنمای گردشگری</span>
-                                <span class="gnNumberOfPlaces">0</span>
-                            </div>
-                        </div>
+                    <div class="row" style="width: 100%; margin: 0px;">
+                        <div id="rightCategory" class="col-md-6" style="padding: 0px 5px"></div>
+                        <div id="leftCategory" class="col-md-6" style="padding: 0px 5px"></div>
                     </div>
                 </div>
             </div>
@@ -621,7 +484,10 @@ $kindPlaceId = 10; ?>
                 <input type="text" class="gnInput" placeholder="شهر موردنظر خود را وارد کنید">
             </div>
             <div class="col-md-12 gnWhiteBox">
-                <input type="text" class="gnInput" placeholder="عبارت موردنظر خود را جست‌وجو کنید">
+                <input type="text" class="gnInput" id="pcSearchInput" placeholder="عبارت موردنظر خود را جست‌وجو کنید">
+                <span class="input-group-btn">
+                    <input type="submit" class="btn btn-default" value="بگرد" onclick="searchInArticle('pcSearchInput')"/>
+                </span>
             </div>
             <div class="col-md-12 gnWhiteBox gnAdvertise">
                 <div class="gnAdvertiseText">تبلیغات</div>
@@ -631,172 +497,44 @@ $kindPlaceId = 10; ?>
             </div>
             <div class="widget widget_impv_display_widget col-md-12 gnWhiteBox">
                 <div class="widget-head"><strong class="widget-title">
-                        محبوب ترین ها
+                        پربازدیدترین ها
                     </strong>
                     <div class="widget-head-bar"></div>
                     <div class="widget-head-line"></div>
                 </div>
-                <ul class="im-widget-tabs clearfix">
-                    <li class="widget_pop_btn widget_pop_week">
-                        <a href="#impv_display_widget-4-tab2">
-                            ماه
-                        </a>
-                    </li>
-                </ul>
                 <div id="impv_display_widget-4-tab2" class="widget_pop_body">
                     <ul class='popular_by_views_list'>
-                        <li class="im-widget clearfix">
-                            <figure class="im-widget-thumb">
-                                <a href="/%d9%be%d8%af%db%8c%d8%af%d9%87-%d8%b4%d8%a7%d9%86%d8%af%db%8c%d8%b2/"
-                                   title="سفر به شاندیز و بازدید از مجتمع پدیده شاندیز پیش از حاشیه ها و کلاهبرداری ها!">
-                                    <img src="https://gardeshname.shazdemosafer.com/wp-content/uploads/2017/09/پدیده-شاندیز-90x85.jpg" alt="سفر به شاندیز و بازدید از مجتمع پدیده شاندیز پیش از حاشیه ها و کلاهبرداری ها!"/>
-                                </a>
-                            </figure>
-                            <div class="im-widget-entry">
-                                <header class="im-widget-entry-header">
-                                    <h4 class='im-widget-entry-title'>
-                                        <a href='/%d9%be%d8%af%db%8c%d8%af%d9%87-%d8%b4%d8%a7%d9%86%d8%af%db%8c%d8%b2/'
-                                           title='سفر به شاندیز و بازدید از مجتمع پدیده شاندیز پیش از حاشیه ها و کلاهبرداری ها!'>
-                                            سفر به شاندیز و بازدید از مجتمع پدیده شاندیز پیش از حاشیه ها و کلاهبرداری ها!
-                                        </a>
-                                    </h4>
-                                </header>
-                                <p class="im-widget-entry-footer">
-                                <div class="iranomag-meta clearfix">
-                                    <div class="posted-on im-meta-item">
-                                                                <span class="entry-date published updated">
-                                                                    سه شنبه, ۱۴ شهریور ۱۳۹۶
-                                                                </span>
-                                    </div>
-                                    <div class="post-views im-meta-item">
-                                        <i class="fa fa-eye"></i>۶,۴۶۰
-                                    </div>
+                        @foreach($mostSeenPost as $post)
+                            <li class="im-widget clearfix">
+                                <figure class="im-widget-thumb">
+                                    <a  href="{{route('article.show', ['slug' => $post->slug])}}" title="{{$post->title}}">
+                                        <img src="{{$post->pic}}" alt="{{$post->keyword}}"/>
+                                    </a>
+                                </figure>
+                                <div class="im-widget-entry">
+                                    <header class="im-widget-entry-header">
+                                        <h4 class='im-widget-entry-title'>
+                                            <a  href="{{route('article.show', ['slug' => $post->slug])}}" title="{{$post->title}}">
+                                                {{$post->title}}
+                                            </a>
+                                        </h4>
+                                    </header>
+                                    <p class="im-widget-entry-footer">
+                                        <div class="iranomag-meta clearfix">
+                                            <div class="posted-on im-meta-item">
+                                                <span class="entry-date published updated">
+                                                    {{$post->date}}
+                                                </span>
+                                            </div>
+                                            <div class="post-views im-meta-item">
+                                                <i class="fa fa-eye"></i>
+                                                {{$post->seen}}
+                                            </div>
+                                        </div>
+                                    </p>
                                 </div>
-                                </p>
-                            </div>
-                        </li>
-                        <li class="im-widget clearfix">
-                            <figure class="im-widget-thumb">
-                                <a href="/%d8%a7%db%8c%d8%b3%d8%aa%da%af%d8%a7%d9%87-%d9%82%db%8c%d8%b7%d8%b1%db%8c%d9%87/"
-                                   title="ایستگاه قیطریه ایستگاهی با دسترسی بالا">
-                                    <img src="https://gardeshname.shazdemosafer.com/wp-content/uploads/2017/10/شاخص-copy-90x85.jpg"
-                                         alt="ایستگاه قیطریه ایستگاهی با دسترسی بالا"/>
-                                </a>
-                            </figure>
-                            <div class="im-widget-entry">
-                                <header class="im-widget-entry-header">
-                                    <h4 class='im-widget-entry-title'>
-                                        <a href='/%d8%a7%db%8c%d8%b3%d8%aa%da%af%d8%a7%d9%87-%d9%82%db%8c%d8%b7%d8%b1%db%8c%d9%87/'
-                                           title='ایستگاه قیطریه ایستگاهی با دسترسی بالا'>
-                                            ایستگاه قیطریه ایستگاهی با دسترسی بالا
-                                        </a>
-                                    </h4>
-                                </header>
-                                <p class="im-widget-entry-footer">
-                                <div class="iranomag-meta clearfix">
-                                    <div class="posted-on im-meta-item">
-                                                                <span class="entry-date published updated">
-                                                                    سه شنبه, ۲ آبان ۱۳۹۶
-                                                                </span>
-                                    </div>
-                                    <div class="post-views im-meta-item">
-                                        <i class="fa fa-eye"></i>۵,۶۵۷
-                                    </div>
-                                </div>
-                                </p>
-                            </div>
-                        </li>
-                        <li class="im-widget clearfix">
-                            <figure class="im-widget-thumb">
-                                <a href="/%da%86%d8%a7%d8%a8%da%a9%d8%b3%d8%b1/"
-                                   title="شهری ساحلی با پارکهای زیبا">
-                                    <img src="https://gardeshname.shazdemosafer.com/wp-content/uploads/2017/09/چابکسر-90x85.jpg"
-                                         alt="شهری ساحلی با پارکهای زیبا"/>
-                                </a>
-                            </figure>
-                            <div class="im-widget-entry">
-                                <header class="im-widget-entry-header">
-                                    <h4 class='im-widget-entry-title'>
-                                        <a href='/%da%86%d8%a7%d8%a8%da%a9%d8%b3%d8%b1/' title='شهری ساحلی با پارکهای زیبا'>شهری
-                                            ساحلی با پارکهای زیبا
-                                        </a>
-                                    </h4>
-                                </header>
-                                <p class="im-widget-entry-footer">
-                                <div class="iranomag-meta clearfix">
-                                    <div class="posted-on im-meta-item">
-                                                                <span class="entry-date published updated">
-                                                                    جمعه, ۳۱ شهریور ۱۳۹۶
-                                                                </span>
-                                    </div>
-                                    <div class="post-views im-meta-item">
-                                        <i class="fa fa-eye"></i>۵,۵۵۸
-                                    </div>
-                                </div>
-                                </p>
-                            </div>
-                        </li>
-                        <li class="im-widget clearfix">
-                            <figure class="im-widget-thumb">
-                                <a href="/%d8%b3%d9%81%d8%a7%d9%84-%d9%88-%d8%b3%d8%b1%d8%a7%d9%85%db%8c%da%a9-%d9%87%d9%85%d8%af%d8%a7%d9%86/"
-                                   title="سفال و سرامیک شهر لالجین، صنایع دستی ارزشمند همدان">
-                                    <img src="https://gardeshname.shazdemosafer.com/wp-content/uploads/2017/08/سفال-و-سرامیک-همدان-90x85.jpg"
-                                         alt="سفال و سرامیک شهر لالجین، صنایع دستی ارزشمند همدان"/>
-                                </a>
-                            </figure>
-                            <div class="im-widget-entry">
-                                <header class="im-widget-entry-header">
-                                    <h4 class='im-widget-entry-title'>
-                                        <a href='/%d8%b3%d9%81%d8%a7%d9%84-%d9%88-%d8%b3%d8%b1%d8%a7%d9%85%db%8c%da%a9-%d9%87%d9%85%d8%af%d8%a7%d9%86/'
-                                           title='سفال و سرامیک شهر لالجین، صنایع دستی ارزشمند همدان'>
-                                            سفال و سرامیک شهر لالجین، صنایع دستی ارزشمند همدان
-                                        </a>
-                                    </h4>
-                                </header>
-                                <p class="im-widget-entry-footer">
-                                <div class="iranomag-meta clearfix">
-                                    <div class="posted-on im-meta-item">
-                                                                <span class="entry-date published updated">
-                                                                    دوشنبه, ۱۶ مرداد ۱۳۹۶
-                                                                </span>
-                                    </div>
-                                    <div class="post-views im-meta-item">
-                                        <i class="fa fa-eye"></i>۴,۷۸۵
-                                    </div>
-                                </div>
-                                </p>
-                            </div>
-                        </li>
-                        <li class="im-widget clearfix">
-                            <figure class="im-widget-thumb">
-                                <a href="/%d9%86%d8%a7%d9%86-%d8%ae%d8%b4%da%a9/"
-                                   title="طعمِ متفاوت یک نان">
-                                    <img src="https://gardeshname.shazdemosafer.com/wp-content/uploads/2017/09/نان-خشک-90x85.jpg"
-                                         alt="طعمِ متفاوت یک نان"/>
-                                </a>
-                            </figure>
-                            <div class="im-widget-entry">
-                                <header class="im-widget-entry-header">
-                                    <h4 class='im-widget-entry-title'>
-                                        <a href='/%d9%86%d8%a7%d9%86-%d8%ae%d8%b4%da%a9/' title='طعمِ متفاوت یک نان'>طعمِ متفاوت
-                                            یک نان
-                                        </a>
-                                    </h4>
-                                </header>
-                                <p class="im-widget-entry-footer">
-                                <div class="iranomag-meta clearfix">
-                                    <div class="posted-on im-meta-item">
-                                                                <span class="entry-date published updated">
-                                                                    یکشنبه, ۱۹ شهریور ۱۳۹۶
-                                                                </span>
-                                    </div>
-                                    <div class="post-views im-meta-item">
-                                        <i class="fa fa-eye"></i>۴,۳۱۵
-                                    </div>
-                                </div>
-                                </p>
-                            </div>
-                        </li>
+                            </li>
+                        @endforeach
                     </ul>
                 </div>
             </div>
@@ -811,29 +549,132 @@ $kindPlaceId = 10; ?>
 
             <div class="category-element-holder style1 col-md-12 gnWhiteBox">
                 <div class="widget-head widget-head-45">
-                    <strong class="widget-title">پر طرفدار ها</strong>
+                    <strong class="widget-title">مطالب مرتبط با ...</strong>
                     <div class="widget-head-bar"></div>
                     <div class="widget-head-line"></div>
                 </div>
                 <div class="row">
                     <?php $i = 0; ?>
-                    @foreach($mostSeenPosts as $post)
+                    @foreach($mostSeenPost as $post)
                         @if($i == 0)
                             <article class="im-article content-2col col-md-6 col-sm-12 post type-post status-publish format-standard has-post-thumbnail hentry category-2068">
                                 <div class="im-entry-thumb">
-                                    <a class="im-entry-thumb-link" href="{{route('gardeshnameInner', ['postId' => $post->id])}}" title="{{$post->title}}">
-                                        <img class="lazy-img" data-src="{{$post->pic}}" alt="{{$post->alt}}"/>
+                                    <a class="im-entry-thumb-link" href="{{route('article.show', ['slug' => $post->slug])}}" title="{{$post->title}}">
+                                        <img class="lazy-img" data-src="{{$post->pic}}" alt="{{$post->keyword}}"/>
                                     </a>
                                     <header class="im-entry-header">
                                         <div class="im-entry-category">
                                             <div class="iranomag-meta clearfix">
                                                 <div class="cat-links im-meta-item">
-                                                    <a style="background-color: {{$post->backColor}}; color: {{$post->categoryColor}} !important;" href="" title="{{$post->category}}">{{$post->category}}</a>
+{{--                                                    <a style="background-color: #666; color: #fff !important;" href="" title="{{$post->category}}">{{$post->category}}</a>--}}
                                                 </div>
                                             </div>
                                         </div>
                                         <h3 class="im-entry-title">
-                                            <a style="color: {{$post->color}}" href="" rel="bookmark">{{$post->title}}</a>
+                                            <a href="{{route('article.show', ['slug' => $post->slug])}}" rel="bookmark">{{$post->title}}</a>
+                                        </h3>
+                                    </header>
+                                </div>
+                                <div class="im-entry">
+                                    <div class="iranomag-meta clearfix">
+                                        <div class="posted-on im-meta-item">
+                                            <span class="entry-date published updated">{{$post->date}}</span>
+                                        </div>
+
+                                        <div class="comments-link im-meta-item">
+                                            <a href="">
+                                                <i class="fa fa-comment-o"></i>{{$post->msgs}}
+                                            </a>
+                                        </div>
+
+                                        <div class="author vcard im-meta-item">
+                                            <a class="url fn n">
+                                                <i class="fa fa-user"></i>{{$post->username}}
+                                            </a>
+                                        </div>
+
+                                        <div class="post-views im-meta-item">
+                                            <i class="fa fa-eye"></i>{{$post->seen}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                        @else
+                            @if($i == 1)
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="widget">
+                                        <ul>
+                                            @endif
+                                            <li class="widget-10104im-widgetclearfix">
+                                                <figure class="im-widget-thumb">
+                                                    <a href="{{route('article.show', ['slug' => $post->slug])}}" title="{{$post->title}}">
+                                                        <img src="{{$post->pic}}" alt="{{$post->keyword}}"/>
+                                                    </a>
+                                                </figure>
+                                                <div class="im-widget-entry">
+                                                    <header class="im-widget-entry-header">
+                                                        <h4 class='im-widget-entry-title'>
+                                                            <a style="color: #fff !important;" href="{{route('article.show', ['slug' => $post->slug])}}" title='{{$post->title}}'>{{$post->title}}</a>
+                                                        </h4>
+                                                    </header>
+                                                    <div class="iranomag-meta clearfix">
+                                                        <div class="posted-on im-meta-item">
+                                                            <span class="entry-date published updated">{{$post->date}}</span>
+                                                        </div>
+                                                        <div class="comments-link im-meta-item">
+                                                            <a href="">
+                                                                <i class="fa fa-comment-o"></i>{{$post->msgs}}
+                                                            </a>
+                                                        </div>
+                                                        <div class="author vcard im-meta-item">
+                                                            <a class="url fn n">
+                                                                <i class="fa fa-user"></i>{{$post->username}}
+                                                            </a>
+                                                        </div>
+                                                        <div class="post-views im-meta-item">
+                                                            <i class="fa fa-eye"></i>{{$post->seen}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            @if($i == count($mostSeenPost) - 1)
+                                        </ul>
+                                    </div>
+                                </div>
+                            @endif
+                        @endif
+
+                        <?php $i++; ?>
+
+                    @endforeach
+                </div>
+            </div>
+
+            <div class="category-element-holder style1 col-md-12 gnWhiteBox">
+                <div class="widget-head widget-head-45">
+                    <strong class="widget-title">پرطرفدار ها</strong>
+                    <div class="widget-head-bar"></div>
+                    <div class="widget-head-line"></div>
+                </div>
+                <div class="row">
+                    <?php $i = 0; ?>
+                    @foreach($mostLike as $post)
+                        @if($i == 0)
+                            <article class="im-article content-2col col-md-6 col-sm-12 post type-post status-publish format-standard has-post-thumbnail hentry category-2068">
+                                <div class="im-entry-thumb">
+                                    <a class="im-entry-thumb-link" href="{{route('article.show', ['slug' => $post->slug])}}" title="{{$post->title}}">
+                                        <img class="lazy-img" data-src="{{$post->pic}}" alt="{{$post->keyword}}"/>
+                                    </a>
+                                    <header class="im-entry-header">
+                                        <div class="im-entry-category">
+                                            <div class="iranomag-meta clearfix">
+                                                <div class="cat-links im-meta-item">
+{{--                                                    <a style="background-color: #666; color: #fff !important;" href="" title="{{$post->category}}">{{$post->category}}</a>--}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <h3 class="im-entry-title">
+                                            <a href="{{route('article.show', ['slug' => $post->slug])}}" rel="bookmark">{{$post->title}}</a>
                                         </h3>
                                     </header>
                                 </div>
@@ -870,13 +711,13 @@ $kindPlaceId = 10; ?>
                                             <li class="widget-10104im-widgetclearfix">
                                                 <figure class="im-widget-thumb">
                                                     <a href="" title="{{$post->title}}">
-                                                        <img src="{{$post->pic}}" alt="{{$post->alt}}"/>
+                                                        <img src="{{$post->pic}}" alt="{{$post->keyword}}"/>
                                                     </a>
                                                 </figure>
                                                 <div class="im-widget-entry">
                                                     <header class="im-widget-entry-header">
                                                         <h4 class='im-widget-entry-title'>
-                                                            <a style="color: {{$post->color}} !important;" href='' title='{{$post->title}}'>{{$post->title}}</a>
+                                                            <a href="{{route('article.show', ['slug' => $post->slug])}}" rel="bookmark">{{$post->title}}</a>
                                                         </h4>
                                                     </header>
                                                     <div class="iranomag-meta clearfix">
@@ -899,17 +740,14 @@ $kindPlaceId = 10; ?>
                                                     </div>
                                                 </div>
                                             </li>
-                                            @if($i == count($mostSeenPosts) - 1)
+                                            @if($i == count($mostLike) - 1)
                                         </ul>
                                     </div>
                                 </div>
                             @endif
                         @endif
-
                         <?php $i++; ?>
-
                     @endforeach
-
                 </div>
             </div>
 
@@ -928,28 +766,25 @@ $kindPlaceId = 10; ?>
                                 @if($i == 0)
                                     <article class="im-article content-2col content-2col-nocontent col-md-12 post type-post status-publish format-standard has-post-thumbnail hentry">
                                         <div class="im-entry-thumb">
-
                                             <a class="im-entry-thumb-link"
-                                               href="{{route('gardeshnameInner', ['postId' => $post->id])}}"
+                                               href="{{route('article.show', ['slug' => $post->slug])}}"
                                                title="{{$post->title}}">
 
                                                 <img class="lazy-img"
                                                      data-src="{{$post->pic}}"
-                                                     alt="{{$post->alt}}"/>
+                                                     alt="{{$post->keyword}}"/>
                                             </a>
                                             <header class="im-entry-header">
                                                 <div class="im-entry-category">
                                                     <div class="iranomag-meta clearfix">
                                                         <div class="cat-links im-meta-item">
-                                                            <a style="background-color: {{$post->backColor}}; color: {{$post->categoryColor}} !important;"
-                                                               href=""
-                                                               title="{{$post->category}}">{{$post->category}}</a>
+                                                            {{--<a style="background-color: #666; color: #fff !important;" href="" title="{{$post->category}}">{{$post->category}}</a>--}}
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <h3 class="im-entry-title">
-                                                    <a style="color: {{$post->color}} !important"
-                                                       href=""
+                                                    <a style="color: #fff !important"
+                                                       href="{{route('article.show', ['slug' => $post->slug])}}"
                                                        rel="bookmark">{{$post->title}}</a>
                                                 </h3>
                                             </header>
@@ -989,17 +824,17 @@ $kindPlaceId = 10; ?>
 
                                                     <li class="widget-10104 im-widget clearfix">
                                                         <figure class="im-widget-thumb">
-                                                            <a href=""
+                                                            <a href="{{route('article.show', ['slug' => $post->slug])}}"
                                                                title="{{$post->title}}">
                                                                 <img src="{{$post->pic}}"
-                                                                     alt="{{$post->alt}}"/>
+                                                                     alt="{{$post->keyword}}"/>
                                                             </a>
                                                         </figure>
                                                         <div class="im-widget-entry">
                                                             <header class="im-widget-entry-header">
                                                                 <h4 class='im-widget-entry-title'>
-                                                                    <a style="color: {{$post->color}} !important;"
-                                                                       href=''
+                                                                    <a
+                                                                       href="{{route('article.show', ['slug' => $post->slug])}}"
                                                                        title='{{$post->title}}'>{{$post->title}}</a>
                                                                 </h4>
                                                             </header>
@@ -1010,8 +845,8 @@ $kindPlaceId = 10; ?>
                                                                 </div>
 
                                                                 <div class="comments-link im-meta-item">
-                                                                    <a href=""><i
-                                                                                class="fa fa-comment-o"></i>{{$post->msgs}}
+                                                                    <a href="">
+                                                                        <i class="fa fa-comment-o"></i>{{$post->msgs}}
                                                                     </a>
                                                                 </div>
 
@@ -1053,32 +888,29 @@ $kindPlaceId = 10; ?>
                         <div class="row">
 
                             <?php $i = 0; ?>
-                            @foreach($favoritePosts as $post)
+                            @foreach($mostCommentPost as $post)
                                 @if($i == 0)
-                                    <article
-                                            class="im-article content-2col content-2col-nocontent col-md-12 post type-post status-publish format-standard has-post-thumbnail hentry">
+                                    <article class="im-article content-2col content-2col-nocontent col-md-12 post type-post status-publish format-standard has-post-thumbnail hentry">
                                         <div class="im-entry-thumb">
 
                                             <a class="im-entry-thumb-link"
-                                               href="{{route('gardeshnameInner', ['postId' => $post->id])}}"
+                                               href="{{route('article.show', ['slug' => $post->slug])}}"
                                                title="{{$post->title}}">
 
                                                 <img class="lazy-img"
                                                      data-src="{{$post->pic}}"
-                                                     alt="{{$post->alt}}"/>
+                                                     alt="{{$post->keyword}}"/>
                                             </a>
                                             <header class="im-entry-header">
                                                 <div class="im-entry-category">
                                                     <div class="iranomag-meta clearfix">
                                                         <div class="cat-links im-meta-item">
-                                                            <a style="background-color: {{$post->backColor}}; color: {{$post->categoryColor}} !important;"
-                                                               href=""
-                                                               title="{{$post->category}}">{{$post->category}}</a>
+                                                            {{--<a style="background-color: #666; color: #fff !important;" href="" title="{{$post->category}}">{{$post->category}}</a>--}}
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <h3 class="im-entry-title">
-                                                    <a style="color: {{$post->color}} !important;"
+                                                    <a style="color: #fff !important;"
                                                        href=""
                                                        rel="bookmark">{{$post->title}}</a>
                                                 </h3>
@@ -1091,10 +923,9 @@ $kindPlaceId = 10; ?>
                                                     <span class="entry-date published updated">{{$post->date}}</span>
                                                 </div>
 
-
                                                 <div class="comments-link im-meta-item">
-                                                    <a href=""><i
-                                                                class="fa fa-comment-o"></i>{{$post->msgs}}
+                                                    <a href="">
+                                                        <i class="fa fa-comment-o"></i>{{$post->msgs}}
                                                     </a>
                                                 </div>
 
@@ -1110,53 +941,55 @@ $kindPlaceId = 10; ?>
                                             </div>
                                         </div>
                                     </article>
-                                @else
+                                    @else
+                                        @if($i == 1)
+                                            <div class="col-md-12">
+                                                <div class="widget">
+                                                    <ul>
+                                                        @endif
+                                                        <li class="widget-10104 im-widget clearfix">
+                                                            <figure class="im-widget-thumb">
+                                                                <a href="{{route('article.show', ['slug' => $post->slug])}}" title="{{$post->title}}">
+                                                                    <img src="{{$post->pic}}" alt="{{$post->keyword}}"/>
+                                                                </a>
+                                                            </figure>
+                                                            <div class="im-widget-entry">
+                                                                <header class="im-widget-entry-header">
+                                                                    <h4 class='im-widget-entry-title'>
+                                                                        <a href="{{route('article.show', ['slug' => $post->slug])}}" title='{{$post->title}}'>{{$post->title}}</a>
+                                                                    </h4>
+                                                                </header>
+                                                                <div class="im-widget-entry-footer">
+                                                                    <div class="iranomag-meta clearfix">
+                                                                        <div class="posted-on im-meta-item">
+                                                                            <span class="entry-date published updated">{{$post->date}}</span>
+                                                                        </div>
+                                                                        <div class="comments-link im-meta-item">
+                                                                            <a href="">
+                                                                                <i class="fa fa-comment-o"></i>{{$post->msgs}}
+                                                                            </a>
+                                                                        </div>
 
-                                    @if($i == 1)
-                                        <div class="col-md-12">
-                                            <div class="widget">
-                                                <ul>
-                                                    @endif
+                                                                        <div class="author vcard im-meta-item">
+                                                                            <a class="url fn n">
+                                                                                <i class="fa fa-user"></i>{{$post->username}}
+                                                                            </a>
+                                                                        </div>
 
-                                                    <li class="widget-10104 im-widget clearfix">
-                                                        <figure class="im-widget-thumb">
-                                                            <a href=""
-                                                               title="{{$post->title}}">
-                                                                <img src="{{$post->pic}}"
-                                                                     alt="{{$post->alt}}"/>
-                                                            </a>
-                                                        </figure>
-                                                        <div class="im-widget-entry">
-                                                            <header class="im-widget-entry-header">
-                                                                <h4 class='im-widget-entry-title'>
-                                                                    <a style="color: {{$post->color}} !important;"
-                                                                       href=''
-                                                                       title='{{$post->title}}'>{{$post->title}}</a>
-                                                                </h4>
-                                                            </header>
-                                                            <p class="im-widget-entry-footer">
-                                                            <div class="iranomag-meta clearfix">
-                                                                <div class="posted-on im-meta-item">
-                                                                    <span class="entry-date published updated">{{$post->date}}</span>
-                                                                </div>
-                                                                <div class="post-views im-meta-item">
-                                                                    <i class="fa fa-eye"></i>{{$post->seen}}
+                                                                        <div class="post-views im-meta-item">
+                                                                            <i class="fa fa-eye"></i>{{$post->seen}}
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                            </p>
-                                                        </div>
-                                                    </li>
-
-                                                    @if($i == count($favoritePosts) - 1)
-                                                </ul>
+                                                        </li>
+                                                        @if($i == count($mostCommentPost) - 1)
+                                                    </ul>
+                                                </div>
                                             </div>
-                                        </div>
-                                    @endif
+                                        @endif
                                 @endif
-
-
                                 <?php $i++; ?>
-
                             @endforeach
                         </div>
                     </div>
@@ -1170,110 +1003,72 @@ $kindPlaceId = 10; ?>
                     <div class="widget-head-line"></div>
                 </div>
                 <div class="row im-blog">
-                    <div class="clearfix">
 
-                        @foreach($allPosts as $post)
-
-                            <div class="small-12 columns">
-
-                                <article
-                                        class="im-article content-column clearfix post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <div id="samplePost" class="clearfix">
+                        <div class="small-12 columns">
+                            <article class="im-article content-column clearfix post type-post status-publish format-standard has-post-thumbnail hentry">
                                     <div class="im-entry-thumb col-md-5 col-sm-12">
-
                                         <a style="width: 303px !important;"
                                            class="im-entry-thumb-link"
-                                           href="{{route('gardeshnameInner', ['postId' => $post->id])}}"
-                                           title="{{$post->title}}">
-
+                                           href="##url##"
+                                           title="##title##">
                                             <img style="width: 303px !important; height: 189px !important;"
-                                                 class="lazy-img"
-                                                 data-src="{{$post->pic}}"
-                                                 alt="{{$post->alt}}"/>
+                                                 data-src="##pic##"
+                                                 src="##pic##"
+                                                 alt="##keyword##"/>
                                         </a>
                                     </div>
-
                                     <div class="im-entry col-md-7 col-sm-12">
                                         <header class="im-entry-header">
                                             <div class="im-entry-category">
                                                 <div class="iranomag-meta clearfix">
                                                     <div class="cat-links im-meta-item">
-                                                        <a style="background-color: {{$post->backColor}}; color: {{$post->categoryColor}} !important;"
-                                                           href=""
-                                                           title="{{$post->category}}">{{$post->category}}</a>
+                                                        <a style="background-color: #666; color: #fff !important;" href="{{url('/article/list/category/')}}/##category##" title="##category##">##category##</a>
                                                     </div>
                                                 </div>
                                             </div>
                                             <h3 class="im-entry-title">
-                                                <a style="color: {{$post->color}}"
-                                                   href=""
-                                                   rel="bookmark">{{$post->title}}</a>
+                                                <a href="##url##"
+                                                   rel="bookmark">##title##</a>
                                             </h3>
                                         </header>
 
                                         <div style="max-height: 100px !important; overflow: hidden"
                                              class="im-entry-content">
-                                            <p>{!! $post->description !!}</p>
+                                            <p>##meta##</p>
                                         </div>
 
                                         <div style="margin-top: 7px"
                                              class="iranomag-meta clearfix">
                                             <div class="posted-on im-meta-item">
-                                                <span class="entry-date published updated">{{$post->date}}</span>
+                                                <span class="entry-date published updated">##date##</span>
                                             </div>
                                             <div class="comments-link im-meta-item">
 
                                                 <a href="">
-                                                    <i class="fa fa-comment-o"></i>{{$post->msgs}}
+                                                    <i class="fa fa-comment-o"></i>##msgs##
                                                 </a>
                                             </div>
                                             <div class="author vcard im-meta-item">
                                                 <a class="url fn n">
-                                                    <i class="fa fa-user"></i>{{$post->username}}
-
+                                                    <i class="fa fa-user"></i>##username##
                                                 </a>
                                             </div>
                                             <div class="post-views im-meta-item">
-                                                <i class="fa fa-eye"></i>{{$post->seen}}
+                                                <i class="fa fa-eye"></i>##seen##
                                             </div>
                                         </div>
                                     </div>
                                 </article>
-                            </div>
-                        @endforeach
-
+                        </div>
                     </div>
+
                     <div class="clearfix">
                         <nav class="navigation pagination">
-                            <div class="nav-links">
-                                <?php $beforeMore = false; $afterMore = false; ?>
-                                @for($i = 1; $i <= $pageLimit; $i++)
-                                    @if($page == $i)
-                                        <span aria-current='page'
-                                              class='page-numbers current'>{{$i}}</span>
-                                    @elseif(abs($i - $page) <= 2)
-                                        <a class='page-numbers'
-                                           href='{{route('mainArticle', ['page' => $i])}}'>{{$i}}</a>
-                                    @elseif($i == 1)
-                                        <a class='page-numbers'
-                                           href='{{route('mainArticle', ['page' => $i])}}'>{{$i}}</a>
-                                    @elseif(!$beforeMore && $i < $page)
-                                        <?php $beforeMore = true; ?>
-                                        <span class="page-numbers dots">&hellip;</span>
-
-                                    @elseif($i == $pageLimit)
-                                        <a class='page-numbers'
-                                           href='{{route('mainArticle', ['page' => $i])}}'>{{$i}}</a>
-                                    @elseif(!$afterMore && $i > $page)
-                                        <?php $afterMore = true; ?>
-                                        <span class="page-numbers dots">&hellip;</span>
-                                    @endif
-                                    {{--<a class='page-numbers' href='/page/3/'>۳</a>--}}
-                                    {{--<a class='page-numbers' href='/page/318/'>۳۱۸</a>--}}
-                                    {{--<a class="next page-numbers" href="/page/2/"><span>&larr;</span></a>--}}
-                                @endfor
-                            </div>
+                            <div id="allPostPagination" class="nav-links"></div>
                         </nav>
                     </div>
+
                 </div>
                 <div class="gap cf" style="height:30px;"></div>
             </div>
@@ -1300,27 +1095,73 @@ $kindPlaceId = 10; ?>
     @include('layouts.placeFooter')
 
 </div>
+</div>
 
 @if(!Auth::check())
     @include('layouts.loginPopUp')
 @endif
 
 
+    <script>
+
+        $(".login-button").click(function () {
+            $(".dark").show();
+            showLoginPrompt('{{Request::url()}}');
+        });
+
+        function hideElement(e) {
+            $(".dark").hide(), $("#" + e).addClass("hidden")
+        }
+
+        function showElement(e) {
+            $("#" + e).removeClass("hidden"), $(".dark").show()
+        }
+
+        var category = {!! $category !!}
+
+        function createCategoryList(){
+                for(var i = 0; i < category.length; i++){
+                    var text = '<div class="gnColOFContentsCategory">\n' +
+                        '<div>\n' +
+                        '<div>\n' +
+                        '<span id="CategoryName_' + category[i]["id"] + '" class="gnTitleOfPlaces" onclick="searchInCategory(this)"  style="cursor: pointer">' + category[i]["name"] + '</span>\n' +
+                        '<span class="gnNumberOfPlaces">' + category[i]["postCount"] + '</span>\n' +
+                        '</div>\n';
+
+                    if(category[i]["subCategory"].length > 0)
+                        text +='<ul class="gnUl">\n';
+
+                    for(var j = 0; j < category[i]["subCategory"].length; j++){
+                        var sub = category[i]["subCategory"][j];
+                        text += '<li class="gnLi">\n' +
+                            '<span id="CategoryName_' + sub["id"] + '"  onclick="searchInCategory(this)" style="cursor: pointer">' + sub["name"] + '</span>\n' +
+                            '<span class="gnNumberOfPlaces">' + sub["postCount"] + '</span>\n' +
+                            '</li>\n';
+                    }
+                    if(category[i]["subCategory"].length > 0)
+                        text += '</ul>\n';
+
+                    text +='</div>\n' +
+                        '</div>';
+
+                    if(i % 4 == 0 || i % 4 == 3)
+                        $("#rightCategory").append(text);
+                    else
+                        $("#leftCategory").append(text);
+                }
+            }
+        createCategoryList();
+    </script>
+
+
+<script type='text/javascript' src='{{URL::asset('js/article/mainArticle.js')}}'></script>
 <script>
-
-    $(".login-button").click(function () {
-        $(".dark").show();
-        showLoginPrompt('{{Request::url()}}');
-    });
-
-    function hideElement(e) {
-        $(".dark").hide(), $("#" + e).addClass("hidden")
-    }
-
-    function showElement(e) {
-        $("#" + e).removeClass("hidden"), $(".dark").show()
-    }
-
+    var page = 1;
+    var _token = '{{csrf_token()}}';
+    var getAllPostUrl = '{{route("article.pagination")}}';
+    var getLisPostUrl = '{{route("article.list")}}';
+    var totalPage = {{$pageLimit}};
+    getAllPost(1);
 </script>
 
 <div class="ui_backdrop dark" style="display: none; z-index: 10000000;"></div>

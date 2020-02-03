@@ -40,7 +40,7 @@ $kindPlaceId = 10; ?>
             justify-content: space-between;
         }
         .gnColOFContentsCategory {
-            width: 47%;
+            width: 100%;
         }
         .gnUl {
             list-style: none;
@@ -105,25 +105,6 @@ $kindPlaceId = 10; ?>
         }
     </style>
 
-    {{--just article style--}}
-    <style>
-        .gnMainPicOfArticle {
-            position: relative;
-            padding: 15px 0;
-        }
-        .gnMainPicOfArticleText {
-            width: 96%;
-            position: absolute;
-            bottom: -35px;
-            left: 50%;
-            margin-left: -48%;
-            padding: 20px 20px 10px;
-            background: white;
-            border-bottom: 3px solid #f3f3f3;
-            opacity: 0.9;
-        }
-    </style>
-
 </head>
 
 <body class="rebrand_2017 desktop HomeRebranded  js_logging rtl home page-template-default page page-id-119 group-blog wpb-js-composer js-comp-ver-4.12 vc_responsive">
@@ -132,7 +113,7 @@ $kindPlaceId = 10; ?>
     @include('layouts.placeHeader')
 
     <div class="ppr_rup ppr_priv_hr_atf_north_star_nostalgic position-relative">
-{{--        @include('layouts.placeMainBodyHeader')--}}
+        {{--        @include('layouts.placeMainBodyHeader')--}}
     </div>
 
     <h1 class="non-display-name"><a href="/">شازده مسافر مجله جامع دیجیتال گردشگری، سفر و ایرانشناسی</a></h1>
@@ -433,7 +414,9 @@ $kindPlaceId = 10; ?>
 
     <div class="container" style="direction: rtl">
         <div class="col-md-3 col-sm-12" style="padding-right: 0 !important;">
-            <div class="col-md-12 gnReturnBackBtn">بازگشت به صفحه اصلی</div>
+            <a href="{{route('mainArticle')}}">
+                <div class="col-md-12 gnReturnBackBtn">بازگشت به صفحه اصلی</div>
+            </a>
             <div class="col-md-12 gnWhiteBox">
                 <div class="widget-head widget-head-44">
                     <strong class="widget-title">دسته‌بندی مطالب</strong>
@@ -441,147 +424,9 @@ $kindPlaceId = 10; ?>
                     <div class="widget-head-line"></div>
                 </div>
                 <div class="gnContentsCategory">
-                    <div class="gnColOFContentsCategory">
-                        <div>
-                            <div>
-                                <span class="gnTitleOfPlaces">اماکن گردشگری</span>
-                                <span class="gnNumberOfPlaces">0</span>
-                            </div>
-                            <ul class="gnUl">
-                                <li class="gnLi">
-                                    <span>اماکن تاریخی</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                                <li class="gnLi">
-                                    <span>اماکن مذهبی</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                                <li class="gnLi">
-                                    <span>اماکن تفریحی</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                                <li class="gnLi">
-                                    <span>طبیعت گردی</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                                <li class="gnLi">
-                                    <span>مراکز خرید</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                                <li class="gnLi">
-                                    <span>موزه ها</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div>
-                            <div>
-                                <span class="gnTitleOfPlaces">هتل و رستوران</span>
-                                <span class="gnNumberOfPlaces">0</span>
-                            </div>
-                            <ul class="gnUl">
-                                <li class="gnLi">
-                                    <span>هتل</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                                <li class="gnLi">
-                                    <span>رستوران</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div>
-                            <div>
-                                <span class="gnTitleOfPlaces">حمل و نقل</span>
-                                <span class="gnNumberOfPlaces">0</span>
-                            </div>
-                            <ul class="gnUl">
-                                <li class="gnLi">
-                                    <span>هواپیما</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                                <li class="gnLi">
-                                    <span>اتوبوس</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                                <li class="gnLi">
-                                    <span>سواری</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                                <li class="gnLi">
-                                    <span>قطار</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="gnColOFContentsCategory">
-                        <div>
-                            <div>
-                                <span class="gnTitleOfPlaces">آداب و رسوم</span>
-                                <span class="gnNumberOfPlaces">0</span>
-                            </div>
-                            <ul class="gnUl">
-                                <li class="gnLi">
-                                    <span>سوغات محلی</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                                <li class="gnLi">
-                                    <span>صنایع دستی</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                                <li class="gnLi">
-                                    <span>اماکن تفریحی</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                                <li class="gnLi">
-                                    <span>غذای محلی</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                                <li class="gnLi">
-                                    <span>لباس محلی</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                                <li class="gnLi">
-                                    <span>گویش محلی</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                                <li class="gnLi">
-                                    <span>اصطلاحات محلی</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div>
-                            <div>
-                                <span class="gnTitleOfPlaces">جشنواره و آیین</span>
-                                <span class="gnNumberOfPlaces">0</span>
-                            </div>
-                            <ul class="gnUl">
-                                <li class="gnLi">
-                                    <span>رسم محلی</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                                <li class="gnLi">
-                                    <span>جشنواره</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                                <li class="gnLi">
-                                    <span>تور</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                                <li class="gnLi">
-                                    <span>کنسرت</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div>
-                            <div>
-                                <span class="gnTitleOfPlaces">راهنمای گردشگری</span>
-                                <span class="gnNumberOfPlaces">0</span>
-                            </div>
-                        </div>
+                    <div class="row" style="width: 100%; margin: 0px;">
+                        <div id="rightCategory" class="col-md-6" style="padding: 0px 5px"></div>
+                        <div id="leftCategory" class="col-md-6" style="padding: 0px 5px"></div>
                     </div>
                 </div>
             </div>
@@ -595,180 +440,95 @@ $kindPlaceId = 10; ?>
                 </div>
                 <input type="text" class="gnInput" placeholder="شهر موردنظر خود را وارد کنید">
             </div>
+
             <div class="col-md-12 gnWhiteBox">
-                <div class="content-2col">
-                    <div class="im-entry-thumb">
-                        <div class="im-entry-header">
-                            <div class="im-entry-category">
-                                <div class="iranomag-meta clearfix">
-                                    <div class="cat-links im-meta-item">
-                                        <a class="im-catlink-color-2079" href="#">آبشار</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <h3 class="im-entry-title">
-                                <a href="#" rel="bookmark">
-                                    {{$post->title}}
-                                </a>
-                            </h3>
-                        </div>
-                    </div>
-                    <div class="im-entry">
-                        <div class="im-entry-content">
-                            <p>
-                                روستای بنه کمر امروز به روستای بنه کمر در منطقه پیشکوه
-                                شهرستان فریدونشهر می رویم. همراه شازده مسافر باشید و از این
-                                روستای زیبا دیدن&#8230;
-                            </p>
-                        </div>
+                <input type="text" class="gnInput" id="pcSearchInput" placeholder="عبارت موردنظر خود را جست‌وجو کنید">
+                <span class="input-group-btn">
+                    <input type="submit" class="btn btn-default" value="بگرد" onclick="searchInArticle('pcSearchInput')"/>
+                </span>
+            </div>
 
-                        <p class="im-entry-footer">
-                        <div class="iranomag-meta clearfix">
-                            <div class="posted-on im-meta-item">
-                                <span class="entry-date published updated">سه شنبه, ۱۲ تیر ۱۳۹۷</span>
-                            </div>
-                            <div class="comments-link im-meta-item">
-                                <a href="">
-                                    <i class="fa fa-comment-o"></i>۰
-                                </a>
-                            </div>
-                            <div class="author vcard im-meta-item">
-                                <a class="url fn n" href="/author/writer/">
-                                    <i class="fa fa-user"></i>
-                                    شازده مسافر
-                                </a>
-                            </div>
-                            <div class="post-views im-meta-item">
-                                <i class="fa fa-eye"></i>۱۵۱
-                            </div>
-                        </div>
-                        </p>
-                    </div>
-                </div>
-                <div class="content-2col">
-                    <div class="im-entry-thumb">
-                        <div class="im-entry-header">
-                            <div class="im-entry-category">
-                                <div class="iranomag-meta clearfix">
-                                    <div class="cat-links im-meta-item">
-                                        <a class="im-catlink-color-2068" href="/category/%d8%a7%d8%b3%d8%aa%d8%a7%d9%86-%da%af%db%8c%d9%84%d8%a7%d9%86/">
-                                            استان گیلان
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <h3 class="im-entry-title">
-                                <a href="/%d8%ba%d8%a7%d8%b1-%d8%a2%d9%88%db%8c%d8%b4%d9%88%db%8c-%d9%85%d8%a7%d8%b3%d8%a7%d9%84-%da%af%db%8c%d9%84%d8%a7%d9%86/"
-                                   rel="bookmark">
-                                    غار آویشوی در نزدیکی روستای ماسال
-                                    واقع در استان سرسبز گیلان
-                                </a>
-                            </h3>
-                        </div>
-                    </div>
-                    <div class="im-entry">
-                        <div class="im-entry-content">
-                            <p>
-                                غار آویشوی غار آویشوی در گیلان یکی از پدیده های زیبایی است که
-                                در نوع خود بی نظیر است. غار آویشوی از بی نظیرترین غارهای&#8230;
-                            </p>
-                        </div>
-
-                        <p class="im-entry-footer">
-                        <div class="iranomag-meta clearfix">
-                            <div class="posted-on im-meta-item">
-                                <span class="entry-date published updated">یکشنبه, ۱۰ تیر ۱۳۹۷</span>
-                            </div>
-                            <div class="comments-link im-meta-item">
-                                <a href="/%d8%ba%d8%a7%d8%b1-%d8%a2%d9%88%db%8c%d8%b4%d9%88%db%8c-%d9%85%d8%a7%d8%b3%d8%a7%d9%84-%da%af%db%8c%d9%84%d8%a7%d9%86/#respond">
-                                    <i class="fa fa-comment-o"></i>۰
-                                </a>
-                            </div>
-                            <div class="author vcard im-meta-item">
-                                <a class="url fn n" href="/author/writer/">
-                                    <i class="fa fa-user"></i>
-                                    شازده مسافر
-                                </a>
-                            </div>
-                            <div class="post-views im-meta-item">
-                                <i class="fa fa-eye"></i>۲۸۱
-                            </div>
-                        </div>
-                        </p>
-                    </div>
+            <div class="col-md-12 gnWhiteBox gnAdvertise">
+                <div class="gnAdvertiseText">تبلیغات</div>
+                <div>
+                    <img class="gnAdvertiseImage" src="{{URL::asset('images/adv2.jpg')}}" alt="">
                 </div>
             </div>
         </div>
-        <div class="col-md-9 col-sm-12 gnWhiteBox">
-            <div class="gnMainPicOfArticle">
-                <img class="gnAdvertiseImage" src="{{URL::asset($post->pic)}}" alt="{{$post->keyword}}">
-                <div class="gnMainPicOfArticleText">
-                    <div>
-                        <div class="im-entry-category" style="margin: 0 0 0 20px;">
-                            <div class="iranomag-meta">
-                                <a class="im-catlink-color-2079" href="#">آبشار</a>
-                            </div>
+        <div class="col-md-9 col-sm-12" style="padding-left: 0 !important;">
+            <div class="col-md-12 gnWhiteBox" style="padding: 15px;">
+                <div class="row im-blog">
+
+                    <div id="samplePost" class="clearfix">
+                        <div class="small-12 columns">
+                            <article class="im-article content-column clearfix post type-post status-publish format-standard has-post-thumbnail hentry">
+                                <div class="im-entry-thumb col-md-5 col-sm-12">
+                                    <a style="width: 303px !important;"
+                                       class="im-entry-thumb-link"
+                                       href="##url##"
+                                       title="##title##">
+                                        <img style="width: 303px !important; height: 189px !important;"
+                                             data-src="##pic##"
+                                             src="##pic##"
+                                             alt="##keyword##"/>
+                                    </a>
+                                </div>
+                                <div class="im-entry col-md-7 col-sm-12">
+                                    <header class="im-entry-header">
+                                        <div class="im-entry-category">
+                                            <div class="iranomag-meta clearfix">
+                                                <div class="cat-links im-meta-item">
+                                                    <a style="background-color: #666; color: #fff !important;" href="{{url('/article/list/category/')}}/##category##" title="##category##">##category##</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <h3 class="im-entry-title">
+                                            <a href="##url##"
+                                               rel="bookmark">##title##</a>
+                                        </h3>
+                                    </header>
+
+                                    <div style="max-height: 100px !important; overflow: hidden"
+                                         class="im-entry-content">
+                                        <p>##meta##</p>
+                                    </div>
+
+                                    <div style="margin-top: 7px"
+                                         class="iranomag-meta clearfix">
+                                        <div class="posted-on im-meta-item">
+                                            <span class="entry-date published updated">##date##</span>
+                                        </div>
+                                        <div class="comments-link im-meta-item">
+
+                                            <a href="">
+                                                <i class="fa fa-comment-o"></i>##msgs##
+                                            </a>
+                                        </div>
+                                        <div class="author vcard im-meta-item">
+                                            <a class="url fn n">
+                                                <i class="fa fa-user"></i>##username##
+                                            </a>
+                                        </div>
+                                        <div class="post-views im-meta-item">
+                                            <i class="fa fa-eye"></i>##seen##
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
                         </div>
-                        <div class="iranomag-meta" style="display: inline-block">
-                            <div class="posted-on im-meta-item">
-                                <span class="entry-date published updated">سه شنبه, ۱۲ تیر ۱۳۹۷</span>
-                            </div>
-                            <div class="comments-link im-meta-item">
-                                <a href="">
-                                    <i class="fa fa-comment-o"></i>۰
-                                </a>
-                            </div>
-                            <div class="author vcard im-meta-item">
-                                <a class="url fn n" href="/author/writer/">
-                                    <i class="fa fa-user"></i>
-                                    شازده مسافر
-                                </a>
-                            </div>
-                            <div class="post-views im-meta-item">
-                                <i class="fa fa-eye"></i>۱۵۱
-                            </div>
-                        </div>
                     </div>
-                    <h3 class="im-entry-title">
-                        <a style="color: black" href="" rel="bookmark">{{$post->title}}</a>
-                    </h3>
-                </div>
-            </div>
-            <div>
-                <div>
-                    {!! $post->description !!}
-                </div>
-                <div class="quantityOfLikes">
-                    <span>31</span>
-                    نفر دوست داشتند،
-                    <span>31</span>
-                    نفر دوست نداشتند و
-                    <span>31</span>
-                    نفر نظر دادند.
-                </div>
-                <div class="commentFeedbackChoices" style="position: absolute; bottom: 0;">
-                    <div class="postsActionsChoices postLikeChoice col-xs-3">
-                        <span class="commentsLikeIconFeedback"></span>
-                        <span class="mg-rt-20 cursor-pointer">دوست داشتم</span>
-                    </div>
-                    <div class="postsActionsChoices postDislikeChoice col-xs-3">
-                        <span class="commentsDislikeIconFeedback"></span>
-                        <span class="mg-rt-20 cursor-pointer">دوست نداشتم</span>
-                    </div>
-                    <div class="postsActionsChoices postCommentChoice col-xs-3">
-                        <span class="showCommentsIconFeedback" onclick="showPostsComments(this)"></span>
-                        <span class="mg-rt-20 cursor-pointer" onclick="showPostsComments(this)">مشاهده نظرها</span>
-                    </div>
-                    <div class="postsActionsChoices postShareChoice col-xs-3">
-                        <span class="commentsShareIconFeedback"></span>
-                        <span class="mg-rt-20 cursor-pointer">اشتراک‌گذاری</span>
+
+                    <div class="clearfix">
+                        <nav class="navigation pagination">
+                            <div id="allPostPagination" class="nav-links"></div>
+                        </nav>
                     </div>
 
                 </div>
+                <div class="gap cf height-30"></div>
             </div>
         </div>
     </div>
-</div>
 
     <a href="#" id="back-to-top" title="بازگشت به ابتدای صفحه"><i class="fa fa-arrow-up"></i></a>
 
@@ -810,7 +570,55 @@ $kindPlaceId = 10; ?>
     function showElement(e) {
         $("#" + e).removeClass("hidden"), $(".dark").show()
     }
+</script>
 
+<script>
+    var category = {!! $category !!}
+
+    function createCategoryList(){
+        for(var i = 0; i < category.length; i++){
+            var text = '<div class="gnColOFContentsCategory">\n' +
+                '<div>\n' +
+                '<div>\n' +
+                '<span id="CategoryName_' + category[i]["id"] + '" class="gnTitleOfPlaces" onclick="searchInCategory(this)"  style="cursor: pointer">' + category[i]["name"] + '</span>\n' +
+                '<span class="gnNumberOfPlaces">' + category[i]["postCount"] + '</span>\n' +
+                '</div>\n';
+
+            if(category[i]["subCategory"].length > 0)
+                text +='<ul class="gnUl">\n';
+
+            for(var j = 0; j < category[i]["subCategory"].length; j++){
+                var sub = category[i]["subCategory"][j];
+                text += '<li class="gnLi">\n' +
+                    '<span id="CategoryName_' + sub["id"] + '"  onclick="searchInCategory(this)" style="cursor: pointer">' + sub["name"] + '</span>\n' +
+                    '<span class="gnNumberOfPlaces">' + sub["postCount"] + '</span>\n' +
+                    '</li>\n';
+            }
+            if(category[i]["subCategory"].length > 0)
+                text += '</ul>\n';
+
+            text +='</div>\n' +
+                '</div>';
+
+            if(i % 4 == 0 || i % 4 == 3)
+                $("#rightCategory").append(text);
+            else
+                $("#leftCategory").append(text);
+        }
+    }
+
+    createCategoryList()
+</script>
+<script type='text/javascript' src='{{URL::asset('js/article/searchArticle.js')}}'></script>
+<script>
+    var page = 1;
+    var type = '{{$type}}';
+    var search = '{{$search}}';
+    var _token = '{{csrf_token()}}';
+    var getPostUrl = '{{route("article.list.pagination")}}';
+    var getLisPostUrl = '{{route("article.list")}}';
+    var totalPage = {{$pageLimit}};
+    getPost(1);
 </script>
 
 <div class="ui_backdrop dark" style="display: none; z-index: 10000000;"></div>
