@@ -36,7 +36,39 @@
     </script>
 
     <style>
+        .mainBannerSlider {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 450px;
+            margin-bottom: 40px;
+        }
 
+        .eachPicOfSlider {
+            width: 100%;
+        }
+
+        .textInSlideMain {
+            position: absolute;
+            left: 0px;
+            bottom: 0px;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(0, 0, 0, 0.6) 0%, transparent 70%);
+        }
+
+        .textInSlide {
+            position: absolute;
+            left: 10px;
+            bottom: 10px;
+            padding: 30px;
+            font-size: 20px;
+        }
+
+        .stateName {
+            font-size: 12px;
+            padding-right: 21px;
+        }
     </style>
 
     {{--urls--}}
@@ -103,26 +135,7 @@
                                 </div>
                                 <div class="ui_columns datepicker_box trip_search metaDatePicker rounded_lockup usePickerTypeIcons preDates noDates with_children mainDivSearchInputMainPage">
                                     <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column is-4 search_typeahead wctx-tripsearch searchDivForScrollClass mainSearchDivPcSize">
-
-                                        @if($placeMode == 'hotel')
-                                            <div onclick="$('#searchPane').removeClass('hidden');  $('#darkModeMainPage').toggle();">هتل‌ها را جستجو کنید</div>
-
-                                        @elseif($placeMode == 'amaken')
-                                            <div onclick="$('#searchPane').removeClass('hidden');  $('#darkModeMainPage').toggle();">جاذبه‌ها را جستجو کنید</div>
-
-                                        @elseif($placeMode == 'restaurant')
-                                            <div onclick="$('#searchPane').removeClass('hidden');  $('#darkModeMainPage').toggle();">رستوران‌ها را جستجو کنید</div>
-
-                                        @elseif($placeMode == 'sogatsaie')
-                                            <div onclick="$('#searchPane').removeClass('hidden');  $('#darkModeMainPage').toggle();">صنایع دستی را جستجو کنید</div>
-
-                                        @elseif($placeMode == 'mahaliFood')
-                                            <div onclick="$('#searchPane').removeClass('hidden');  $('#darkModeMainPage').toggle();">غذاهای محلی را جستجو کنید</div>
-
-                                        @else
-                                            <div onclick="$('#searchPane').removeClass('hidden');  $('#darkModeMainPage').toggle();">به کجا می‌روید؟</div>
-
-                                        @endif
+                                        <div onclick="$('#searchPane').removeClass('hidden');  $('#darkModeMainPage').toggle();">به کجا می‌روید؟</div>
                                     </div>
                                     <div class="clear-both"></div>
                                 </div>
@@ -205,32 +218,32 @@
 
                     <div id="result" class="data_holder display-noneImp"></div>
 
-                    <div class="visitSuggestionDiv" ng-app="mainApp" ng-controller="recentlyShowController">
-                        @if(Auth::check())
-                            <div class="visitSuggestionText">بازدید های اخیر شما</div>
-                        @else
-                            <div class="visitSuggestionText">پر بازدیدترین های هفته</div>
-                        @endif
-                        <div id="recentlyRow1" class="visitSuggestion4Box">
-                            <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget spBoxOfSuggestion" ng-repeat="place in records1">
-                                <div class="poi">
-                                    <a href="[[place.placeRedirect]]" class="thumbnail">
-                                        <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                            <div class="prv_thumb has_image">
-                                                <div class="image_wrapper spImageWrapper landscape landscapeWide">
-                                                    <img src="[[place.placePic]]" alt="[[place.placeName]]" class="image">
+                        <div class="visitSuggestionDiv" ng-app="mainApp" ng-controller="recentlyShowController">
+                            @if(Auth::check())
+                                <div class="visitSuggestionText">بازدید های اخیر شما</div>
+                            @else
+                                <div class="visitSuggestionText">پر بازدیدترین های هفته</div>
+                            @endif
+                            <div id="recentlyRow1" class="visitSuggestion4Box">
+                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget spBoxOfSuggestion" ng-repeat="place in records1">
+                                    <div class="poi">
+                                        <a href="[[place.placeRedirect]]" class="thumbnail">
+                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
+                                                <div class="prv_thumb has_image">
+                                                    <div class="image_wrapper spImageWrapper landscape landscapeWide">
+                                                        <img src="[[place.placePic]]" alt="[[place.placeName]]" class="image">
+                                                    </div>
                                                 </div>
                                             </div>
+                                        </a>
+                                        <div class="detail direction-rtl" style="padding: 4px 0px 10px 0px;">
+                                            <div class="item tags ng-binding" style="color: black; margin: 0px">[[place.placeName]]</div>
+                                            <div class="item tags ng-binding" style="font-size: 9px; padding: 0px">[[place.placeCity]] در [[place.placeState]]</div>
                                         </div>
-                                    </a>
-                                    <div class="detail direction-rtl" style="padding: 4px 0px 10px 0px;">
-                                        <div class="item tags ng-binding" style="color: black; margin: 0px">[[place.placeName]]</div>
-                                        <div class="item tags ng-binding" style="font-size: 9px; padding: 0px">[[place.placeCity]] در [[place.placeState]]</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                 </div>
 
             </div>

@@ -233,7 +233,6 @@ input[type="checkbox"] + label span, input[type="radio"] + label span {
 }
 
 p {
-    word-break: break-all;
     white-space: normal;
 }
 

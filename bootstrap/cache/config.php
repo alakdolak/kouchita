@@ -173,7 +173,7 @@
       'file' => 
       array (
         'driver' => 'file',
-        'path' => 'C:\\xampp\\htdocs\\pro_shazde\\storage\\framework/cache/data',
+        'path' => 'C:\\xampp\\htdocs\\kouchita\\storage\\framework/cache/data',
       ),
       'memcached' => 
       array (
@@ -236,7 +236,7 @@
       'sqlite' => 
       array (
         'driver' => 'sqlite',
-        'database' => 'admin_shazde',
+        'database' => 'koochita',
         'prefix' => '',
       ),
       'mysql' => 
@@ -245,8 +245,8 @@
         'host' => '127.0.0.1',
         'port' => '3306',
         'database' => 'admin_shazde',
-        'username' => 'administrator_persoulio',
-        'password' => 'yGrn65~6',
+        'username' => 'root',
+        'password' => '',
         'unix_socket' => '',
         'charset' => 'utf8mb4',
         'collation' => 'utf8mb4_unicode_ci',
@@ -260,8 +260,8 @@
         'host' => '127.0.0.1',
         'port' => '3306',
         'database' => 'admin_shazde',
-        'username' => 'administrator_persoulio',
-        'password' => 'yGrn65~6',
+        'username' => 'root',
+        'password' => '',
         'charset' => 'utf8',
         'prefix' => '',
         'schema' => 'public',
@@ -273,8 +273,8 @@
         'host' => '127.0.0.1',
         'port' => '3306',
         'database' => 'admin_shazde',
-        'username' => 'administrator_persoulio',
-        'password' => 'yGrn65~6',
+        'username' => 'root',
+        'password' => '',
         'charset' => 'utf8',
         'prefix' => '',
       ),
@@ -301,12 +301,12 @@
       'local' => 
       array (
         'driver' => 'local',
-        'root' => 'C:\\xampp\\htdocs\\pro_shazde\\storage\\app',
+        'root' => 'C:\\xampp\\htdocs\\kouchita\\storage\\app',
       ),
       'public' => 
       array (
         'driver' => 'local',
-        'root' => 'C:\\xampp\\htdocs\\pro_shazde\\storage\\app/public',
+        'root' => 'C:\\xampp\\htdocs\\kouchita\\storage\\app/public',
         'url' => 'http://localhost/storage',
         'visibility' => 'public',
       ),
@@ -339,7 +339,7 @@
       'theme' => 'default',
       'paths' => 
       array (
-        0 => 'C:\\xampp\\htdocs\\pro_shazde\\config/../vendor/phpmailer',
+        0 => 'C:\\xampp\\htdocs\\kouchita\\config/../vendor/phpmailer',
       ),
     ),
   ),
@@ -419,7 +419,7 @@
     'lifetime' => 120,
     'expire_on_close' => false,
     'encrypt' => false,
-    'files' => 'C:\\xampp\\htdocs\\pro_shazde\\storage\\framework/sessions',
+    'files' => 'C:\\xampp\\htdocs\\kouchita\\storage\\framework/sessions',
     'connection' => NULL,
     'table' => 'sessions',
     'store' => NULL,
@@ -438,9 +438,9 @@
   array (
     'paths' => 
     array (
-      0 => 'C:\\xampp\\htdocs\\pro_shazde\\resources\\views',
+      0 => 'C:\\xampp\\htdocs\\kouchita\\resources\\views',
     ),
-    'compiled' => 'C:\\xampp\\htdocs\\pro_shazde\\storage\\framework\\views',
+    'compiled' => 'C:\\xampp\\htdocs\\kouchita\\storage\\framework\\views',
   ),
   'throttle' => 
   array (
@@ -448,8 +448,12 @@
   ),
   'tinker' => 
   array (
+    'commands' => 
+    array (
+    ),
     'dont_alias' => 
     array (
+      0 => 'App\\Nova',
     ),
   ),
 );

@@ -4,9 +4,6 @@ use App\models\ConfigModel;
 use Illuminate\Support\Facades\Route;
 
 Route::get('databaseforall', function (){
-//    ALTER TABLE `post` DROP `cityId`, DROP `placeId`, DROP `kindPlaceId`, DROP `tag1`, DROP `tag2`, DROP `tag3`, DROP `tag4`, DROP `tag5`, DROP `tag6`, DROP `tag7`, DROP `tag8`, DROP `tag9`, DROP `tag10`, DROP `tag11`, DROP `tag12`, DROP `tag13`, DROP `tag14`, DROP `tag15`, DROP `category`, DROP `C`, DROP `D`;
-//    ALTER TABLE `post` ADD `release` VARCHAR(10) NOT NULL DEFAULT 'draft' AFTER `description`;
-//    ALTER TABLE `post` ADD `slug` VARCHAR(190) NOT NULL AFTER `title`;
 });
 
 Route::get('fillHotelPic', function(){
@@ -200,14 +197,6 @@ Route::get('specificPost/{id}', ['as' => 'specificPost', 'uses' => 'PostControll
 
 Route::get('updateBot', 'HomeController@updateBot');
 
-Route::get('searchArticle', function(){
-    return view('searchArticle');
-});
-
-Route::get('userArticles', function(){
-    return view('userActivities.userArticles');
-});
-
 Route::get('userQuestions', function(){
     return view('userActivities.userQuestions');
 });
@@ -218,14 +207,6 @@ Route::get('userPosts', function(){
 
 Route::get('userPhotosAndVideos', function(){
     return view('userActivities.userPhotosAndVideos');
-});
-
-//Route::get('mainArticle', function(){
-//    return view('mainArticle');
-//});
-
-Route::get('article', function(){
-    return view('article');
 });
 
 Route::get('gardeshnameEdit', function(){
@@ -240,7 +221,6 @@ Route::get('business', function(){
     return view('business');
 });
 
-Route::get('mainArticle/{page?}', 'PostController@mainArticle')->name('mainArticle');
 
 Route::get('gardeshnameInner/{postId}', ['as' => 'gardeshnameInner', 'uses' => 'PostController@gardeshnameInner']);
 
@@ -307,14 +287,9 @@ Route::post('getHotelWarning', 'HotelReservationController@getHotelWarning')->na
 Route::get('AlibabaInfo', 'HotelReservationController@AlibabaInfo')->name('AlibabaInfo');
 Route::post('saveAlibabaInfo', 'HotelReservationController@saveAlibabaInfo')->name('saveAlibabaInfo');
 
-
-
 Route::post('uploadExcels', 'HomeController@uploadExcels');
-
 Route::post('doUploadExcels', 'HomeController@doUploadExcels');
-
 Route::group(array('middleware' => ['throttle:30']), function () {
-
     Route::get('fillTable', function(){
 
         $ch = curl_init();
@@ -855,7 +830,7 @@ Route::group(array('middleware' => 'nothing'), function () {
     Route::post('getReviews', 'ReviewsController@getReviews')->name('getReviews');
 });
 
-
+//tour
 Route::group(array('middleware' => 'auth'), function () {
 
     Route::get('/tour/create/afterStart', 'TourController@afterStart')->name('afterStart');
@@ -880,26 +855,50 @@ Route::group(array('middleware' => 'auth'), function () {
 
     Route::get('/tour/create/complete/{id}', 'TourController@completeCreationTour')->name('tour.create.complete');
 
+    Route::get('/tour/index', function (){
+        $placeMode = 'tour';
+        $state = 'تهران';
+        return view('tour.tour', compact(['placeMode', 'state']));
+    });
+    Route::get('/tour/details', function (){
+        $placeMode = 'tour';
+        $state = 'تهران';
+        $place = \App\models\Hotel::find(1);
+        $kindPlaceId = 1;
+//        dd($place);
+        return view('tour.tour-details', compact(['placeMode', 'state', 'place', 'kindPlaceId']));
+    });
+    Route::get('/tour/lists', function (){
+        $placeMode = 'tour';
+        $state = 'تهران';
+        return view('tour.tour-lists', compact(['placeMode', 'state']));
+    });
+});
+
+//posts
+Route::group(array('middleware' => 'nothing'), function () {
+
+    Route::get('mainArticle', 'PostController@mainArticle')->name('mainArticle');
+
+    Route::get('/article/id/{id}', 'PostController@postWithId')->name('postWithId');
+
+    Route::post('/paginationArticle', 'PostController@paginationArticle')->name('article.pagination');
+
+    Route::get('/article/list/{type?}/{search?}', 'PostController@articleList')->name('article.list');
+
+    Route::post('/paginationInArticleList', 'PostController@paginationInArticleList')->name('article.list.pagination');
+
+    Route::get('/article/{slug}', 'PostController@showArticle')->name('article.show');
+
+    Route::post('/article/like', 'PostController@LikeArticle')->name('article.like');
+
+    Route::get('userArticles', function(){
+        return view('userActivities.userArticles');
+    });
 });
 
 Route::post('checkLogin', array('as' => 'checkLogin', 'uses' => 'HomeController@checkLogin'));
 
 Route::get('emailtest', 'HomeController@emailtest');
-
-Route::get('/tour/index', function (){
-    $placeMode = 'tour';
-    $state = 'تهران';
-    return view('tour.tour', compact(['placeMode', 'state']));
-});
-Route::get('/tour/details', function (){
-    $placeMode = 'tour';
-    $state = 'تهران';
-    return view('tour.tour-details', compact(['placeMode', 'state']));
-});
-Route::get('/tour/lists', function (){
-    $placeMode = 'tour';
-    $state = 'تهران';
-    return view('tour.tour-lists', compact(['placeMode', 'state']));
-});
 
 Route::get('exportToExcelTT', 'HomeController@exportExcel');

@@ -564,7 +564,8 @@ class HotelReservationController extends Controller {
 
     public function showHotelList2($city, $mode)
     {
-        $this->getAccessTokenHotel(0);
+//        dd($city);
+//        $this->getAccessTokenHotel(0);
         if ($mode == "state") {
 
             $state = State::whereName($city)->first();
@@ -572,7 +573,8 @@ class HotelReservationController extends Controller {
                 return "نتیجه ای یافت نشد";
 
             $stateName = $state->name;
-        } else {
+        }
+        else {
             $tmp = Cities::whereName($city)->first();
             if ($tmp == null)
                 return "نتیجه ای یافت نشد";

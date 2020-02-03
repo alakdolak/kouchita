@@ -38,9 +38,23 @@ $kindPlaceId = 10; ?>
         .gnContentsCategory {
             display: flex;
             justify-content: space-between;
+            flex-wrap: wrap;
         }
         .gnColOFContentsCategory {
-            width: 47%;
+            width: 100%;
+        }
+        .categoryRow{
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+        .categoryRTL{
+            direction: rtl;
+            text-align: right;
+        }
+        .categoryLTR{
+            direction: ltr;
+            text-align: right;
         }
         .gnUl {
             list-style: none;
@@ -105,6 +119,25 @@ $kindPlaceId = 10; ?>
         }
     </style>
 
+    {{--just article style--}}
+    <style>
+        .gnMainPicOfArticle {
+            position: relative;
+            padding: 15px 0;
+        }
+        .gnMainPicOfArticleText {
+            width: 96%;
+            position: absolute;
+            bottom: -35px;
+            left: 50%;
+            margin-left: -48%;
+            padding: 20px 20px 10px;
+            background: white;
+            border-bottom: 3px solid #f3f3f3;
+            opacity: 0.9;
+        }
+    </style>
+
 </head>
 
 <body class="rebrand_2017 desktop HomeRebranded  js_logging rtl home page-template-default page page-id-119 group-blog wpb-js-composer js-comp-ver-4.12 vc_responsive">
@@ -113,10 +146,13 @@ $kindPlaceId = 10; ?>
     @include('layouts.placeHeader')
 
     <div class="ppr_rup ppr_priv_hr_atf_north_star_nostalgic position-relative">
-        {{--        @include('layouts.placeMainBodyHeader')--}}
+{{--        @include('layouts.placeMainBodyHeader')--}}
     </div>
 
-    <h1 class="non-display-name"><a href="/">شازده مسافر مجله جامع دیجیتال گردشگری، سفر و ایرانشناسی</a></h1>
+    <div id="darkModal" class="display-none" role="dialog"></div>
+    @if(!Auth::check())
+        @include('layouts.loginPopUp')
+    @endif
 
     <div class="hidden visible-sm visible-xs">
         <div class="im-header-mobile">
@@ -414,7 +450,9 @@ $kindPlaceId = 10; ?>
 
     <div class="container" style="direction: rtl">
         <div class="col-md-3 col-sm-12" style="padding-right: 0 !important;">
-            <div class="col-md-12 gnReturnBackBtn">بازگشت به صفحه اصلی</div>
+            <a href="{{route('mainArticle')}}">
+                <div class="col-md-12 gnReturnBackBtn">بازگشت به صفحه اصلی</div>
+            </a>
             <div class="col-md-12 gnWhiteBox">
                 <div class="widget-head widget-head-44">
                     <strong class="widget-title">دسته‌بندی مطالب</strong>
@@ -422,147 +460,9 @@ $kindPlaceId = 10; ?>
                     <div class="widget-head-line"></div>
                 </div>
                 <div class="gnContentsCategory">
-                    <div class="gnColOFContentsCategory">
-                        <div>
-                            <div>
-                                <span class="gnTitleOfPlaces">اماکن گردشگری</span>
-                                <span class="gnNumberOfPlaces">0</span>
-                            </div>
-                            <ul class="gnUl">
-                                <li class="gnLi">
-                                    <span>اماکن تاریخی</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                                <li class="gnLi">
-                                    <span>اماکن مذهبی</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                                <li class="gnLi">
-                                    <span>اماکن تفریحی</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                                <li class="gnLi">
-                                    <span>طبیعت گردی</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                                <li class="gnLi">
-                                    <span>مراکز خرید</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                                <li class="gnLi">
-                                    <span>موزه ها</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div>
-                            <div>
-                                <span class="gnTitleOfPlaces">هتل و رستوران</span>
-                                <span class="gnNumberOfPlaces">0</span>
-                            </div>
-                            <ul class="gnUl">
-                                <li class="gnLi">
-                                    <span>هتل</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                                <li class="gnLi">
-                                    <span>رستوران</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div>
-                            <div>
-                                <span class="gnTitleOfPlaces">حمل و نقل</span>
-                                <span class="gnNumberOfPlaces">0</span>
-                            </div>
-                            <ul class="gnUl">
-                                <li class="gnLi">
-                                    <span>هواپیما</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                                <li class="gnLi">
-                                    <span>اتوبوس</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                                <li class="gnLi">
-                                    <span>سواری</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                                <li class="gnLi">
-                                    <span>قطار</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="gnColOFContentsCategory">
-                        <div>
-                            <div>
-                                <span class="gnTitleOfPlaces">آداب و رسوم</span>
-                                <span class="gnNumberOfPlaces">0</span>
-                            </div>
-                            <ul class="gnUl">
-                                <li class="gnLi">
-                                    <span>سوغات محلی</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                                <li class="gnLi">
-                                    <span>صنایع دستی</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                                <li class="gnLi">
-                                    <span>اماکن تفریحی</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                                <li class="gnLi">
-                                    <span>غذای محلی</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                                <li class="gnLi">
-                                    <span>لباس محلی</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                                <li class="gnLi">
-                                    <span>گویش محلی</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                                <li class="gnLi">
-                                    <span>اصطلاحات محلی</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div>
-                            <div>
-                                <span class="gnTitleOfPlaces">جشنواره و آیین</span>
-                                <span class="gnNumberOfPlaces">0</span>
-                            </div>
-                            <ul class="gnUl">
-                                <li class="gnLi">
-                                    <span>رسم محلی</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                                <li class="gnLi">
-                                    <span>جشنواره</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                                <li class="gnLi">
-                                    <span>تور</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                                <li class="gnLi">
-                                    <span>کنسرت</span>
-                                    <span class="gnNumberOfPlaces">0</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div>
-                            <div>
-                                <span class="gnTitleOfPlaces">راهنمای گردشگری</span>
-                                <span class="gnNumberOfPlaces">0</span>
-                            </div>
-                        </div>
+                    <div class="row" style="width: 100%; margin: 0px;">
+                        <div id="rightCategory" class="col-md-6" style="padding: 0px 5px"></div>
+                        <div id="leftCategory" class="col-md-6" style="padding: 0px 5px"></div>
                     </div>
                 </div>
             </div>
@@ -576,211 +476,137 @@ $kindPlaceId = 10; ?>
                 </div>
                 <input type="text" class="gnInput" placeholder="شهر موردنظر خود را وارد کنید">
             </div>
-            <div class="col-md-12 gnWhiteBox gnAdvertise">
-                <div class="gnAdvertiseText">تبلیغات</div>
-                <div>
-                    <img class="gnAdvertiseImage" src="{{URL::asset('images/adv2.jpg')}}" alt="">
-                </div>
+
+            <div class="col-md-12 gnWhiteBox">
+                <input type="text" class="gnInput" id="pcSearchInput" placeholder="عبارت موردنظر خود را جست‌وجو کنید">
+                <span class="input-group-btn">
+                    <input type="submit" class="btn btn-default" value="بگرد" onclick="searchInArticle('pcSearchInput')"/>
+                </span>
+            </div>
+
+            <div class="col-md-12 gnWhiteBox">
+                @foreach($similarPost as $item)
+                    <div class="content-2col">
+                        <div class="im-entry-thumb" style="background-image: url('{{$item->pic}}'); background-size: 100% 100%;">
+                            <div class="im-entry-header">
+                                <div class="im-entry-category">
+                                    <div class="iranomag-meta clearfix">
+                                        <div class="cat-links im-meta-item">
+                                            <a class="im-catlink-color-2079" href="{{$item->url}}">{{$item->category}}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <h3 class="im-entry-title">
+                                    <a href="{{$item->url}}" rel="bookmark">
+                                        {{$item->title}}
+                                    </a>
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="im-entry">
+                        <div class="im-entry-content">
+                            <a href="{{$item->url}}" rel="bookmark">
+                                {{$item->meta}}
+                            </a>
+                        </div>
+
+                        <p class="im-entry-footer">
+                        <div class="iranomag-meta clearfix">
+                            <div class="posted-on im-meta-item">
+                                <span class="entry-date published updated">{{$post->date}}</span>
+                            </div>
+                            <div class="comments-link im-meta-item">
+                                <a href="">
+                                    <i class="fa fa-comment-o"></i>{{$item->msgs}}
+                                </a>
+                            </div>
+                            <div class="author vcard im-meta-item">
+                                <a class="url fn n" href="/author/writer/">
+                                    <i class="fa fa-user"></i>
+                                    {{$item->username}}
+                                </a>
+                            </div>
+                            <div class="post-views im-meta-item">
+                                <i class="fa fa-eye"></i>{{$item->seen}}
+                            </div>
+                        </div>
+                        </p>
+                    </div>
+                    </div>
+                @endforeach
+
             </div>
         </div>
-        <div class="col-md-9 col-sm-12" style="padding-left: 0 !important;">
-            <div class="col-md-12 gnWhiteBox" style="padding: 15px;">
-                <div class="row im-blog">
-                    <div class="clearfix">
-                        <div class="small-12 columns">
-                            <div class="im-article content-column clearfix post-10135 post type-post status-publish format-standard has-post-thumbnail hentry category-6582 category-6583 category-7032 tag-3784 tag-7035 tag-7145 tag-1789 tag-864 tag-7036">
-                                <div class="im-entry-thumb col-md-5 col-sm-12">
-                                    <a class="im-entry-thumb-link" href="/%d8%a8%d9%84%d9%86%d8%af%d8%aa%d8%b1%db%8c%d9%86-%d9%85%d8%b9%d8%a8%d8%af-%d8%ac%d9%87%d8%a7%d9%86/" title="بلندترین معبد جهان در کشور پهناور و پرجمعیت هندوستان">
-                                        <img class="lazy-img" data-src="https://gardeshname.shazdemosafer.com/wp-content/uploads/2018/07/sri-vrindavan-chandrodaya-temple_1418965907.jpg" alt="بلندترین معبد جهان در کشور پهناور و پرجمعیت هندوستان"/>
-                                    </a>
-                                </div>
-
-                                <div class="im-entry col-md-7 col-sm-12">
-                                    <div class="im-entry-header">
-                                        <div class="im-entry-category">
-                                            <div class="iranomag-meta clearfix">
-                                                <div class="cat-links im-meta-item">
-                                                    <a class="im-catlink-color-6582" href="/category/%d8%a8%db%8c%d9%86-%d8%a7%d9%84%d9%85%d9%84%d9%84/">بین الملل</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <h3 class="im-entry-title">
-                                            <a href="/%d8%a8%d9%84%d9%86%d8%af%d8%aa%d8%b1%db%8c%d9%86-%d9%85%d8%b9%d8%a8%d8%af-%d8%ac%d9%87%d8%a7%d9%86/" rel="bookmark">بلندترین معبد جهان در کشور پهناور و پرجمعیت هندوستان</a>
-                                        </h3>
-                                    </div>
-
-                                    <div class="im-entry-content">
-                                        <p>بلندترین معبد جهان بلندترین معبد جهان ، معبد Chandrodaya در Vrindavan فقط یک معبد نیست، بلکه این مکان نقش مهمی در آینده کشور&#8220;هند&#8221; ایفا&#8230;</p>
-                                    </div>
-
-                                    <p class="im-entry-footer">
-                                    <div class="iranomag-meta clearfix">
-                                        <div class="posted-on im-meta-item">
-                                            <span class="entry-date published updated">جمعه, ۲۹ تیر ۱۳۹۷</span>
-                                        </div>
-                                        <div class="comments-link im-meta-item">
-                                            <a href="/%d8%a8%d9%84%d9%86%d8%af%d8%aa%d8%b1%db%8c%d9%86-%d9%85%d8%b9%d8%a8%d8%af-%d8%ac%d9%87%d8%a7%d9%86/#respond"><i class="fa fa-comment-o"></i>۰</a>
-                                        </div>
-                                        <div class="author vcard im-meta-item">
-                                            <a class="url fn n" href="/author/writer/"><i class="fa fa-user"></i>شازده مسافر</a>
-                                        </div>
-                                        <div class="post-views im-meta-item"><i class="fa fa-eye"></i>۱۱۹</div>
-                                    </div>
-                                    </p>
-                                </div>
+        <div class="col-md-9 col-sm-12 gnWhiteBox">
+            <div class="gnMainPicOfArticle">
+                <img class="gnAdvertiseImage" src="{{URL::asset($post->pic)}}" alt="{{$post->keyword}}">
+                <div class="gnMainPicOfArticleText">
+                    <div>
+                        <div class="im-entry-category" style="margin: 0 0 0 20px;">
+                            <div class="iranomag-meta">
+                                <a class="im-catlink-color-2079" href="#">{{$post->mainCategory}}</a>
                             </div>
                         </div>
-
-                        <div class="small-12 columns">
-                            <div class="im-article content-column clearfix post-10129 post type-post status-publish format-standard has-post-thumbnail hentry category-6582 category-6583 category-7032">
-                                <div class="im-entry-thumb col-md-5 col-sm-12">
-                                    <a class="im-entry-thumb-link" href="/%d8%aa%d8%a7%d8%ac-%d9%85%d8%ad%d9%84/" title="تاج محل ترکیبی از  معماری هند، فارسی و اسلامی تقدیم شده به عشق">
-                                        <img class="lazy-img" data-src="https://gardeshname.shazdemosafer.com/wp-content/uploads/2018/07/slider2.jpg" alt="تاج محل ترکیبی از  معماری هند، فارسی و اسلامی تقدیم شده به عشق"/>
-                                    </a>
-                                </div>
-
-                                <div class="im-entry col-md-7 col-sm-12">
-                                    <div class="im-entry-header">
-                                        <div class="im-entry-category">
-                                            <div class="iranomag-meta clearfix">
-                                                <div class="cat-links im-meta-item">
-                                                    <a class="im-catlink-color-6582" href="/category/%d8%a8%db%8c%d9%86-%d8%a7%d9%84%d9%85%d9%84%d9%84/">بین الملل</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <h3 class="im-entry-title">
-                                            <a href="/%d8%aa%d8%a7%d8%ac-%d9%85%d8%ad%d9%84/" rel="bookmark">تاج محل ترکیبی از معماری هند، فارسی و اسلامی تقدیم شده به عشق</a>
-                                        </h3>
-                                    </div>
-
-                                    <div class="im-entry-content">
-                                        <p> تاج محل محل زیبای که تاج محل در آن قرار دارد واقعا ستودنی است .نمای زیبای سنگ مرمر سفید منحصر به فرد و بی همتا&#8230;</p>
-                                    </div>
-
-                                    <p class="im-entry-footer">
-                                    <div class="iranomag-meta clearfix">
-                                        <div class="posted-on im-meta-item">
-                                            <span class="entry-date published updated">جمعه, ۲۹ تیر ۱۳۹۷</span>
-                                        </div>
-                                        <div class="comments-link im-meta-item">
-                                            <a href="/%d8%aa%d8%a7%d8%ac-%d9%85%d8%ad%d9%84/#respond"><i class="fa fa-comment-o"></i>۰</a>
-                                        </div>
-                                        <div class="author vcard im-meta-item">
-                                            <a class="url fn n" href="/author/writer/"><i class="fa fa-user"></i>شازده مسافر</a>
-                                        </div>
-                                        <div class="post-views im-meta-item"><i class="fa fa-eye"></i>۱۷۱</div>
-                                    </div>
-                                    </p>
-                                </div>
+                        <div class="iranomag-meta" style="display: inline-block">
+                            <div class="posted-on im-meta-item">
+                                <span class="entry-date published updated">{{$post->date}}</span>
                             </div>
-                        </div>
-
-                        <div class="small-12 columns">
-                            <div class="im-article content-column clearfix post-10124 post type-post status-publish format-standard has-post-thumbnail hentry category-6582 category-6584 category-7092 category-6583 tag-7128 tag-7154 tag-7093 tag-7155">
-                                <div class="im-entry-thumb col-md-5 col-sm-12">
-                                    <a class="im-entry-thumb-link" href="/%d9%85%d8%af%d8%a7%d8%a6%d9%86-%d8%b5%d8%a7%d9%84%d8%ad/" title="مدائن صالح صخره ای  سنگی  و چندین کتیبه مهم تاریخی در عربستان صعودی">
-                                        <img class="lazy-img" data-src="https://gardeshname.shazdemosafer.com/wp-content/uploads/2018/07/3e7f67aefc805020379c5b605c413ae4.jpg" alt="مدائن صالح صخره ای  سنگی  و چندین کتیبه مهم تاریخی در عربستان صعودی"/>
-                                    </a>
-                                </div>
-
-                                <div class="im-entry col-md-7 col-sm-12">
-                                    <div class="im-entry-header">
-                                        <div class="im-entry-category">
-                                            <div class="iranomag-meta clearfix">
-                                                <div class="cat-links im-meta-item">
-                                                    <a class="im-catlink-color-6582" href="/category/%d8%a8%db%8c%d9%86-%d8%a7%d9%84%d9%85%d9%84%d9%84/">بین الملل</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <h3 class="im-entry-title">
-                                            <a href="/%d9%85%d8%af%d8%a7%d8%a6%d9%86-%d8%b5%d8%a7%d9%84%d8%ad/" rel="bookmark">مدائن صالح صخره ای سنگی و چندین کتیبه مهم تاریخی در عربستان صعودی</a>
-                                        </h3>
-                                    </div>
-
-                                    <div class="im-entry-content">
-                                        <p>مدائن صالح مدائن صالح مکانی تاریخی در عربستان سعودی است که از صخره ای سنگی و چندین کتیبه مهم تاریخی تشکیل شده است. در سفرمان&#8230;</p>
-                                    </div>
-
-                                    <p class="im-entry-footer">
-                                    <div class="iranomag-meta clearfix">
-                                        <div class="posted-on im-meta-item">
-                                            <span class="entry-date published updated">جمعه, ۲۹ تیر ۱۳۹۷</span>
-                                        </div>
-                                        <div class="comments-link im-meta-item">
-                                            <a href="/%d9%85%d8%af%d8%a7%d8%a6%d9%86-%d8%b5%d8%a7%d9%84%d8%ad/#respond"><i class="fa fa-comment-o"></i>۰</a>
-                                        </div>
-                                        <div class="author vcard im-meta-item">
-                                            <a class="url fn n" href="/author/writer/"><i class="fa fa-user"></i>شازده مسافر</a>
-                                        </div>
-                                        <div class="post-views im-meta-item"><i class="fa fa-eye"></i>۲۳۵</div>
-                                    </div>
-                                    </p>
-                                </div>
+                            <div class="comments-link im-meta-item">
+                                <a href="">
+                                    <i class="fa fa-comment-o"></i>{{count($post->comments)}}
+                                </a>
                             </div>
-                        </div>
-
-                        <div class="small-12 columns">
-
-                            <div class="im-article content-column clearfix post-10118 post type-post status-publish format-standard has-post-thumbnail hentry category-6582 category-7087 category-6583 tag-7084 tag-7085 tag-3314">
-                                <div class="im-entry-thumb col-md-5 col-sm-12">
-                                    <a class="im-entry-thumb-link" href="/%d8%af%db%8c%d9%88%d8%a7%d8%b1-%da%86%db%8c%d9%86/" title="دیوار چین مجموعه ای باستانی از دیوارها و استحکامات با طول بیش از ۱۳،۰۰۰ مایل">
-                                        <img class="lazy-img" data-src="https://gardeshname.shazdemosafer.com/wp-content/uploads/2018/07/china_wall_01_big.jpg" alt="دیوار چین مجموعه ای باستانی از دیوارها و استحکامات با طول بیش از ۱۳،۰۰۰ مایل"/>
-                                    </a>
-                                </div>
-
-                                <div class="im-entry col-md-7 col-sm-12">
-                                    <div class="im-entry-header">
-                                        <div class="im-entry-category">
-                                            <div class="iranomag-meta clearfix">
-                                                <div class="cat-links im-meta-item">
-                                                    <a class="im-catlink-color-6582" href="/category/%d8%a8%db%8c%d9%86-%d8%a7%d9%84%d9%85%d9%84%d9%84/">بین الملل</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <h3 class="im-entry-title">
-                                            <a href="/%d8%af%db%8c%d9%88%d8%a7%d8%b1-%da%86%db%8c%d9%86/" rel="bookmark">دیوار چین مجموعه ای باستانی از دیوارها و استحکامات با طول بیش از ۱۳،۰۰۰ مایل</a>
-                                        </h3>
-                                    </div>
-
-                                    <div class="im-entry-content">
-                                        <p>دیوار چین حتما می دانید یکی از شاهکارهای معماری بشر، دیوار چین است. دیوار چین در سال ۱۹۸۷ توسط سازمان یونسکو، جزو یکی از آثار باستانی&#8230;</p>
-                                    </div>
-
-                                    <p class="im-entry-footer">
-                                    <div class="iranomag-meta clearfix">
-                                        <div class="posted-on im-meta-item">
-                                            <span class="entry-date published updated">پنجشنبه, ۲۸ تیر ۱۳۹۷</span>
-                                        </div>
-                                        <div class="comments-link im-meta-item">
-                                            <a href="/%d8%af%db%8c%d9%88%d8%a7%d8%b1-%da%86%db%8c%d9%86/#respond"><i class="fa fa-comment-o"></i>۰</a>
-                                        </div>
-                                        <div class="author vcard im-meta-item">
-                                            <a class="url fn n" href="/author/writer/"><i class="fa fa-user"></i>شازده مسافر</a>
-                                        </div>
-                                        <div class="post-views im-meta-item"><i class="fa fa-eye"></i>۱۲۶</div>
-                                    </div>
-                                    </p>
-                                </div>
+                            <div class="author vcard im-meta-item">
+                                <a class="url fn n" href="/author/writer/">
+                                    <i class="fa fa-user"></i>
+                                    {{$post->user->username}}
+                                </a>
+                            </div>
+                            <div class="post-views im-meta-item">
+                                <i class="fa fa-eye"></i>{{$post->seen}}
                             </div>
                         </div>
                     </div>
-                    <div class="clearfix">
-                        <nav class="navigation pagination">
-                            <div class="nav-links">
-                                <span aria-current='page' class='page-numbers current'>۱</span>
-                                <a class='page-numbers' href='/page/2/'>۲</a>
-                                <a class='page-numbers' href='/page/3/'>۳</a>
-                                <span class="page-numbers dots">&hellip;</span>
-                                <a class='page-numbers' href='/page/318/'>۳۱۸</a>
-                                <a class="next page-numbers" href="/page/2/"><span>&larr;</span></a>
-                            </div>
-                        </nav>
-                    </div>
+                    <h3 class="im-entry-title">
+                        <a style="color: black" href="" rel="bookmark">{{$post->title}}</a>
+                    </h3>
                 </div>
-                <div class="gap cf height-30"></div>
+            </div>
+            <div>
+                <div style="margin-top: 65px">
+                    {!! $post->description !!}
+                </div>
+                <div class="commentFeedbackChoices">
+                    <div id="likeDiv" class="postsActionsChoices postLikeChoice col-xs-3" onclick="likePost(1, {{$post->id}})" style="color: {{$postLike == 1 ? 'red': ''}}">
+                        <span class="commentsLikeIconFeedback"></span>
+                        <span class="mg-rt-20 cursor-pointer">دوست داشتم</span>
+                    </div>
+                    <div id="disLikeDiv" class="postsActionsChoices postDislikeChoice col-xs-3" onclick="likePost(0, {{$post->id}})" style="color: {{$postLike == 0 ? 'darkred': ''}}">
+                        <span class="commentsDislikeIconFeedback"></span>
+                        <span class="mg-rt-20 cursor-pointer">دوست نداشتم</span>
+                    </div>
+                    <div class="postsActionsChoices postCommentChoice col-xs-3">
+                        <span class="showCommentsIconFeedback" onclick="showPostsComments(this)"></span>
+                        <span class="mg-rt-20 cursor-pointer" onclick="showPostsComments(this)">مشاهده نظرها</span>
+                    </div>
+                    <div class="postsActionsChoices postShareChoice col-xs-3">
+                        <span class="commentsShareIconFeedback"></span>
+                        <span class="mg-rt-20 cursor-pointer">اشتراک‌گذاری</span>
+                    </div>
+
+                </div>
+                <div class="quantityOfLikes">
+                    <span id="countLike">{{$post->like}}</span>
+                    نفر دوست داشتند،
+                    <span id="countDisLike">{{$post->disLike}}</span>
+                    نفر دوست نداشتند و
+                    <span>{{count($post->comments)}}</span>
+                    نفر نظر دادند.
+                </div>
             </div>
         </div>
     </div>
+</div>
 
     <a href="#" id="back-to-top" title="بازگشت به ابتدای صفحه"><i class="fa fa-arrow-up"></i></a>
 
@@ -822,6 +648,125 @@ $kindPlaceId = 10; ?>
     function showElement(e) {
         $("#" + e).removeClass("hidden"), $(".dark").show()
     }
+
+    var category = {!! $category !!}
+    var post = {!! $post !!}
+    var getLisPostUrl = '{{route("article.list")}}';
+    var likeCount = {{$post->like}};
+    var disLikeCount = {{$post->disLike}};
+    var uLike = {{$postLike}};
+
+    function createCategoryList(){
+        for(var i = 0; i < category.length; i++){
+            var text = '<div class="gnColOFContentsCategory">\n' +
+                '<div>\n' +
+                '<div>\n' +
+                '<span id="CategoryName_' + category[i]["id"] + '" class="gnTitleOfPlaces" onclick="searchInCategory(this)"  style="cursor: pointer">' + category[i]["name"] + '</span>\n' +
+                '<span class="gnNumberOfPlaces">' + category[i]["postCount"] + '</span>\n' +
+                '</div>\n';
+
+            if(category[i]["subCategory"].length > 0)
+                text +='<ul class="gnUl">\n';
+
+            for(var j = 0; j < category[i]["subCategory"].length; j++){
+                var sub = category[i]["subCategory"][j];
+                text += '<li class="gnLi">\n' +
+                        '<span id="CategoryName_' + sub["id"] + '" onclick="searchInCategory(this)" style="cursor: pointer">' + sub["name"] + '</span>\n' +
+                        '<span class="gnNumberOfPlaces">' + sub["postCount"] + '</span>\n' +
+                        '</li>\n';
+            }
+            if(category[i]["subCategory"].length > 0)
+                text += '</ul>\n';
+
+            text +='</div>\n' +
+                '</div>';
+
+            if(i % 4 == 0 || i % 4 == 3)
+                $("#rightCategory").append(text);
+            else
+                $("#leftCategory").append(text);
+        }
+
+        showPostCategoryInList();
+    }
+    createCategoryList();
+
+    function showPostCategoryInList(){
+        console.log(post)
+        for(var i = 0; i < post['category'].length; i++){
+            $('#CategoryName_' + post['category'][i]['categoryId']).css('color', '#4dc7bc');
+        }
+    }
+
+    function searchInArticle(id){
+        var text = $('#'+id).val();
+        if(text.trim().length != 0){
+            window.location.href = getLisPostUrl + '/content/' + text;
+        }
+    }
+
+    function searchInCategory(element){
+        var text = $(element).text();
+        if(text.trim().length != 0)
+            window.location.href = getLisPostUrl + '/category/' + text;
+    }
+
+    function checkLogin(){
+        if (!'{{auth()->check()}}') {
+            showLoginPrompt('{{Request::url()}}');
+            return false;
+        }
+        else
+            return true;
+    }
+
+    function likePost(_like, _id){
+        if(!checkLogin())
+            return;
+
+        $.ajax({
+            type: 'post',
+            url: '{{route("article.like")}}',
+            data:{
+                _token: '{{csrf_token()}}',
+                like: _like,
+                id: _id
+            },
+            success: function(response){
+                if(response == 'ok'){
+                    document.getElementById('likeDiv').style.color = '#666666';
+                    document.getElementById('disLikeDiv').style.color = '#666666';
+
+                    if(_like == 1) {
+                        document.getElementById('likeDiv').style.color = 'red';
+                        likeCount++;
+                        $('#countLike').text(likeCount)
+                    }
+                    else {
+                        document.getElementById('disLikeDiv').style.color = 'darkred';
+                        disLikeCount++
+                        $('#countDisLike').text(disLikeCount);
+                    }
+
+                    if(uLike == 1) {
+                        likeCount--;
+                        $('#countLike').text(likeCount);
+                    }
+                    else if(uLike == 0) {
+                        disLikeCount--;
+                        $('#countDisLike').text(disLikeCount);
+                    }
+
+                    uLike = _like;
+
+                }
+            },
+            error: function (response) {
+                console.log(response)
+            }
+        })
+    }
+
 
 </script>
 
