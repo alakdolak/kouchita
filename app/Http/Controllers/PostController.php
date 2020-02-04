@@ -8,6 +8,7 @@ use App\models\Post;
 use App\models\PostCategory;
 use App\models\PostCategoryRelation;
 use App\models\PostComment;
+use App\models\PostCommentLike;
 use App\models\PostLikes;
 use App\models\PostTag;
 use App\models\PostTagsRelation;
@@ -160,6 +161,7 @@ class PostController extends Controller {
         $category = $this->getAllCategory();
         $pageLimit = ceil(Post::where('date', '<=', $today)->count() / 5);
 
+
         return view('posts.mainArticle',compact(['category', 'favoritePosts', 'mostLike', 'bannerPosts', 'recentlyPosts', 'mostCommentPost', 'mostSeenPost', 'allPosts', 'page', 'pageLimit']) );
     }
 
@@ -210,6 +212,13 @@ class PostController extends Controller {
             $today = getToday()["date"];
             $nowTime = getToday()["time"];
 
+            $value = 'article:'.$post->slug;
+            if(!(\Cookie::has($value) == $value)) {
+                $post->seen = $post->seen + 1;
+                $post->save();
+                \Cookie::queue(\Cookie::make($value, $value, 5));
+            }
+
             $post->pic = URL::asset('_images/posts/'.$post->id.'/'.$post->pic);
             $mainCategory = PostCategoryRelation::where('postId', $post->id)->where('isMain', 1)->first();
             $mainCategory = PostCategory::find($mainCategory->categoryId);
@@ -218,9 +227,30 @@ class PostController extends Controller {
             if($post->date == null)
                 $post->date = \verta($post->created_at)->format('Y/m/%d');
             $post->date = convertJalaliToText($post->date);
-            $postLike = -1;
-            if(\auth()->check())
-                $postLike = PostLikes::where('postId', $post->id)->where('userId', \auth()->user()->id)->firstOrFail()->like;
+            if(\auth()->check()) {
+                $postLike = PostLikes::where('postId', $post->id)->where('userId', \auth()->user()->id)->first();
+                if($postLike != null)
+                    $postLike =  $postLike->like;
+                else
+                    $postLike = -1;
+
+                $user = \auth()->user();
+                if($user->uploadPhoto == 0){
+                    $deffPic = DefaultPic::find($user->picture);
+
+                    if($deffPic != null)
+                        $uPic = URL::asset('defaultPic/' . $deffPic->name);
+                    else
+                        $uPic = URL::asset('_images/nopic/blank.jpg');
+                }
+                else{
+                    $uPic = URL::asset('userProfile/' . $user->picture);
+                }
+            }
+            else {
+                $postLike = -1;
+                $uPic = URL::asset('_images/nopic/blank.jpg');
+            }
 
             $post->category = PostCategoryRelation::where('postId', $post->id)->get();
             $similarPostId = PostCategoryRelation::where('categoryId', $mainCategory->id)->where('isMain', 1)->pluck('postId')->toArray();
@@ -247,11 +277,14 @@ class PostController extends Controller {
 
             $post->like = PostLikes::where('postId', $post->id)->where('like', 1)->count();
             $post->disLike = PostLikes::where('postId', $post->id)->where('like', 0)->count();
-            $post->comments = PostComment::where('postId', $post->id)->where('status', 1)->get();
+            $post->msg = PostComment::where('postId', $post->id)->where('status', 1)->count();
+
+            $comments = PostComment::where('postId', $post->id)->where('status', 1)->where('ansTo', 0)->orderBy('created_at', 'DESC')->get();
+            $comments = $this->getComments($comments);
 
             $category = $this->getAllCategory();
 
-            return view('posts.article', compact(['post', 'category', 'similarPost', 'postLike']));
+            return view('posts.article', compact(['post', 'category', 'similarPost', 'postLike', 'uPic', 'comments']));
         }
         return \redirect(\url('/'));
 
@@ -379,6 +412,71 @@ class PostController extends Controller {
         return;
     }
 
+    public function StoreArticleComment(Request $request)
+    {
+        if(\auth()->check()){
+            if(isset($request->id) && isset($request->txt)){
+                $post = Post::find($request->id);
+                if($post != null){
+                    $ansTo = 0;
+                    if($request->ansTo != 0){
+                        $ans = PostComment::find($request->ansTo);
+                        if($ans != null) {
+                            $ansTo = $ans->id;
+
+                            $ans->haveAns = 1;
+                            $ans->save();
+                        }
+                    }
+
+                    $comment = new PostComment();
+                    $comment->postId = $post->id;
+                    $comment->msg = $request->txt;
+                    $comment->userId = \auth()->user()->id;
+                    $comment->ansTo = $ansTo;
+                    $comment->status = 0;
+                    $comment->save();
+
+                    echo 'ok';
+                }
+                else
+                    echo 'nok2';
+            }
+            else
+                echo 'nok1';
+        }
+        else
+            echo 'authError';
+
+        return;
+    }
+
+    public function likeArticleComment(Request $request)
+    {
+        if(\auth()->check()){
+            $comment = PostComment::find($request->id);
+            if($comment != null){
+                $commentLike = PostCommentLike::where('commentId', $request->id)->where('userId', \auth()->user()->id)->first();
+                if($commentLike == null)
+                    $commentLike = new PostCommentLike();
+
+                $commentLike->commentId = $request->id;
+                $commentLike->userId = \auth()->user()->id;
+                $commentLike->like = $request->like;
+                $commentLike->save();
+
+                $likeCount = \DB::select('SELECT SUM(CASE WHEN `like` = 1 THEN 1 ELSE 0 END) as likeCount, SUM(CASE WHEN `like` = 0 THEN 1 ELSE 0 END) as disLikeCount FROM postCommentLikes WHERE commentId = ' . $request->id);
+                echo json_encode(['ok', $likeCount]);
+            }
+            else
+                echo json_encode(['nok1']);
+        }
+        else
+            echo json_encode(['authError']);
+
+        return;
+    }
+
     private function getAllCategory(){
 
         $today = getToday()['date'];
@@ -411,6 +509,48 @@ class PostController extends Controller {
         return $category;
     }
 
+    private function getComments($comments){
+
+        foreach ($comments as $item) {
+            $us = User::find($item->userId);
+            if($us != null){
+                if($item->haveAns ==  1) {
+                    $ans = PostComment::where('ansTo', $item->id)->where('status', 1)->orderBy('created_at', 'DESC')->get();
+                    $item->ans = $this->getComments($ans);
+                }
+                else
+                    $item->ans = null;
+                $likeCount = \DB::select('SELECT SUM(CASE WHEN `like` = 1 THEN 1 ELSE 0 END) as likeCount, SUM(CASE WHEN `like` = 0 THEN 1 ELSE 0 END) as disLikeCount FROM postCommentLikes WHERE commentId = ' . $item->id);
+                $item->likeCount = $likeCount[0]->likeCount;
+                $item->disLikeCount = $likeCount[0]->disLikeCount;
+
+                if($item->likeCount == null)
+                    $item->likeCount = 0;
+                if($item->disLikeCount == null)
+                    $item->disLikeCount = 0;
+
+                $item->username = $us->username;
+                if($us->uploadPhoto == 0){
+                    $deffPic = DefaultPic::find($us->picture);
+                    if($deffPic != null)
+                        $item->userPic = URL::asset('defaultPic/' . $deffPic->name);
+                    else
+                        $item->userPic = URL::asset('_images/nopic/blank.jpg');
+                }
+                else
+                    $item->userPic = URL::asset('userProfile/' . $us->picture);
+
+                $item->userLike = -1;
+                if(\auth()->check()){
+                    $userLike = PostCommentLike::where('commentId', $item->id)->where('userId', \auth()->user()->id)->first();
+                    if($userLike != null)
+                        $item->userLike = $userLike->like;
+                }
+
+            }
+        }
+        return $comments;
+    }
 
 
     public function gardeshnameInner($postId) {

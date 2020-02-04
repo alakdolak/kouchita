@@ -2387,6 +2387,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     position: absolute;
     top: -5px;
     right: -2px;
+    color: red;
 }
 
 .dislikeActionBtn::before {
@@ -2405,6 +2406,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     position: absolute;
     top: -2px;
     right: 29px;
+    color: darkred;
 }
 
 .commentsStatisticsBar {
