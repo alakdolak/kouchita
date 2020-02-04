@@ -180,10 +180,36 @@
         <div id="searchDivForScroll" class="prw_rup prw_search_typeahead spSearchDivForScroll">
             <div class="ui_picker">
                 <div class="typeahead_align ui_typeahead full-width display-flex">
-                    <div class="spGoWhere">به کجا</div>
 
-                    <input onkeyup="search(event, this.value)" type="text" id="placeName"
-                           class="typeahead_input searchPaneInput" placeholder="دوست دارید سفر کنید؟"/>
+                    @if($placeMode == 'hotel')
+                        <div class="spGoWhere">در کدام هتل</div>
+                        <input onkeyup="search(event, this.value)" type="text" id="placeName"
+                               class="typeahead_input searchPaneInput" placeholder="دوست دارید اقامت کنید؟"/>
+                    @elseif($placeMode == 'amaken')
+                        <div class="spGoWhere">کدام جاذبه</div>
+                        <input onkeyup="search(event, this.value)" type="text" id="placeName"
+                               class="typeahead_input searchPaneInput" placeholder="را می‌خواهید تجربه کنید؟"/>
+                    @elseif($placeMode == 'restaurant')
+                        <div class="spGoWhere">در کدام رستوران</div>
+                        <input onkeyup="search(event, this.value)" type="text" id="placeName"
+                               class="typeahead_input searchPaneInput" placeholder="دوست دارید غذا بخورید؟"/>
+                    @elseif($placeMode == 'mahaliFood')
+                        <div class="spGoWhere">کدام غذای محلی</div>
+                        <input onkeyup="search(event, this.value)" type="text" id="placeName"
+                               class="typeahead_input searchPaneInput" placeholder="را می‌خواهید تجربه کنید؟"/>
+{{--                    @elseif($placeMode == 'majara')--}}
+{{--                        <div class="spGoWhere"></div>--}}
+{{--                        <input onkeyup="search(event, this.value)" type="text" id="placeName"--}}
+{{--                               class="typeahead_input searchPaneInput" placeholder="دوست دارید به کدام هتل کنید؟"/>--}}
+                    @elseif($placeMode == 'sogatsanaie')
+                        <div class="spGoWhere">کدام صنایع‌دستی</div>
+                        <input onkeyup="search(event, this.value)" type="text" id="placeName"
+                               class="typeahead_input searchPaneInput" placeholder="را دوست دارید بشناسید؟"/>
+                    @else
+                        <div class="spGoWhere">به کجا</div>
+                        <input onkeyup="search(event, this.value)" type="text" id="placeName"
+                               class="typeahead_input searchPaneInput" placeholder="دوست دارید سفر کنید؟"/>
+                    @endif
 
                     <input type="hidden" id="placeId">
                 </div>

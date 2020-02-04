@@ -167,6 +167,7 @@ DIV.ppr_rup.ppr_priv_global_nav .global-nav-logo img {
 DIV.ppr_rup.ppr_priv_global_nav .global-nav-bar-container {
     height: 70px;
     padding: 10px 24px;
+    align-items: center;
 }
 
 DIV.ppr_rup.ppr_priv_global_nav .global-nav-logo:before {
@@ -204,6 +205,7 @@ DIV.ppr_rup.ppr_priv_global_nav_action_profile .global-nav-utility-activator {
     font-weight: bold;
     display: flex;
     align-items: center;
+    z-index: 2;
 }
 
 DIV.ppr_rup.ppr_priv_global_nav_action_profile .username::before {
@@ -223,6 +225,44 @@ DIV.ppr_rup.ppr_priv_global_nav_action_profile .username::before {
     padding-top: 0;
 }
 
+.collapseBtnActions {
+    border-radius: 50%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffe3b1;
+    width: 50px;
+    height: 50px;
+    z-index: 10;
+}
+
+.collapseBtnActions::before {
+    font-family: Shazde_Regular2 !important;
+    content: '\E035';
+    font-size: 30px;
+    z-index: 10;
+    background-color: #ffe3b1;
+}
+
+.ui_jewel.marked_for_attention:before {
+    display: none;
+}
+
+/*.linesCollapseBtn {*/
+/*    border: 2px solid black;*/
+/*    width: 25px;*/
+/*    margin: 2px 0;*/
+/*}*/
+
+/*.linesCollapseBtn:first-child {*/
+/*    margin-top: 4px;*/
+/*}*/
+
+
+/*.linesCollapseBtn:last-child {*/
+/*    margin-bottom: 4px;*/
+/*}*/
+
 @media (max-width: 992px) {
 
     DIV.ppr_rup.ppr_priv_global_nav .global-nav-green .global-nav-link {
@@ -239,6 +279,28 @@ DIV.ppr_rup.ppr_priv_global_nav_action_profile .username::before {
 
     DIV.ppr_rup.ppr_priv_global_nav .global-nav-logo img {
         width: 40px;
+    }
+
+    DIV.ppr_rup.ppr_priv_global_nav .global-nav-bar-container .global-nav-actions {
+        display: none;
+        position: absolute;
+        background: #ffe3b1;
+        left: 45px;
+        padding-right: 20px;
+        border-radius: 0 25px 25px 0;
+        top: 10px;
+    }
+
+    DIV.ppr_rup.ppr_priv_global_nav_action_profile .username::before {
+        margin-left: 5px;
+    }
+
+    #memberTop {
+        font-size: 12px;
+    }
+
+    .collapseBtnActions {
+        display: flex;
     }
 }
 

@@ -236,7 +236,7 @@
       'sqlite' => 
       array (
         'driver' => 'sqlite',
-        'database' => 'admin_shazde',
+        'database' => 'koochita',
         'prefix' => '',
       ),
       'mysql' => 

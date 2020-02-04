@@ -520,7 +520,8 @@
                         <div class="boxOfCityNameProSearch">
                             <div id="textOfWhere">در کجا</div>
                             <div class="where_with_highlight enterCityNameProSearch">
-                                <input onkeyup="searchCity()" id="GEO_SCOPED_SEARCH_INPUT" class="text geoScopeInput" value="" placeholder="نام شهر را وارد کنید" autocomplete="off" type="text">
+                                <input onkeyup="searchCity()" id="GEO_SCOPED_SEARCH_INPUT" class="text geoScopeInput"
+                                       value="" placeholder="نام شهر را وارد کنید" autocomplete="off" type="text">
                             </div>
                         </div>
                         <p id="currentCity"></p>
@@ -547,7 +548,8 @@
                             <div class="boxOfCityNameProSearch">
                                 <div id="textOfWhere2">به کجا</div>
                                 <div class="where_with_highlight enterCityNameProSearch">
-                                    <input onkeyup="searchInPlaces()" id="GEO_SCOPED_SEARCH_INPUT2" class="text geoScopeInput" value="" placeholder="نام شهر را وارد کنید" autocomplete="off" type="text">
+                                    <input onkeyup="searchInPlaces()" id="GEO_SCOPED_SEARCH_INPUT2" class="text geoScopeInput"
+                                           value="" placeholder="نام مکان را وارد کنید. (به وسیله فانوس ها جستجو را محدود کنید.)" autocomplete="off" type="text">
                                 </div>
                             </div>
                         </div>
@@ -652,7 +654,7 @@
 {{--                <div class="col-xs-2"></div>--}}
             </div>
 
-            <div id="myCloseBtn" class="hidden" onclick="closeInFireFox()" draggable="true" ondragend="dropMenu(event)" ondrop="dropMenu(event)" ondrag="dragging(event)"></div>
+{{--            <div id="myCloseBtn" class="hidden" onclick="closeInFireFox()" draggable="true" ondragend="dropMenu(event)" ondrop="dropMenu(event)" ondrag="dragging(event)"></div>--}}
 
         </div>
     </div>
