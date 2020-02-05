@@ -511,8 +511,13 @@
             </div>
 
             <div class="row mg-tp-50" id="mainDivProSearch">
-
-                <div class="col-xs-12 boxOfWhereIsHere">شما در حال حاضر در شهر <div id="nameOfWhereIsHere">اصفهان</div> هستید</div>
+                @if(isset($locationName))
+                    <div class="col-xs-12 boxOfWhereIsHere">
+                        شما در حال حاضر در
+                        <div id="nameOfWhereIsHere">{{$locationName}}</div>
+                        هستید
+                    </div>
+                @endif
 
 {{--                <div class="col-xs-2"></div>--}}
                 <div class="col-xs-12 whereMainDiv">
@@ -554,57 +559,37 @@
                             </div>
                         </div>
                         <div class="col-xs-7 boxOfLamps">
-                            <div class='ui_input_checkbox'>
-                                <img data-val="off" id="amakenFilter" width="40px" height="80px" src="{{URL::asset('images/off_lamp.png')}}">
+                            <?php
+                                $onLampImg = URL::asset('images/on_lamp.gif');
+                                $offLampImg = URL::asset('images/off_lamp.png');
+                            ?>
+
+                            <div class='ui_input_checkbox' style="cursor: pointer;" onclick="changeFilter('amaken', this)">
+                                <img data-val="{{isset($kindPlaceId) && ($kindPlaceId == 1 || $kindPlaceId == 0) ? 'on' : 'off'}}" id="amakenFilter" width="40px" height="80px" src="{{isset($kindPlaceId) && ($kindPlaceId == 1 || $kindPlaceId == 0) ? $onLampImg : $offLampImg}}">
                                 <div>اماکن</div>
                             </div>
-                            <div class='ui_input_checkbox'>
-                                @if(isset($placeMode) && $placeMode == "hotel")
-                                    <img data-val="on" id="hotelFilter" width="40px" height="80px" src="{{URL::asset('images/on_lamp.gif')}}">
-                                @else
-                                    <img data-val="off" id="hotelFilter" width="40px" height="80px" src="{{URL::asset('images/off_lamp.png')}}">
-                                @endif
+                            <div class='ui_input_checkbox' style="cursor: pointer;" onclick="changeFilter('hotel', this)">
+                                <img data-val="{{isset($kindPlaceId) && ($kindPlaceId == 4 || $kindPlaceId == 0) ? 'on' : 'off'}}" id="hotelFilter" width="40px" height="80px" src="{{isset($kindPlaceId) && ($kindPlaceId == 4 || $kindPlaceId == 0) ? $onLampImg : $offLampImg}}">
                                 <div>هتل</div>
                             </div>
-                            <div class='ui_input_checkbox'>
-                                @if(isset($placeMode) && $placeMode == "restaurant")
-                                    <img data-val="on" id="restaurantFilter" width="40px" height="80px" src="{{URL::asset('images/on_lamp.gif')}}">
-                                @else
-                                    <img data-val="off" id="restaurantFilter" width="40px" height="80px" src="{{URL::asset('images/off_lamp.png')}}">
-                                @endif
+                            <div class='ui_input_checkbox' style="cursor: pointer;" onclick="changeFilter('restaurant', this)">
+                                <img data-val="{{isset($kindPlaceId) && ($kindPlaceId == 3 || $kindPlaceId == 0) ? 'on' : 'off'}}" id="restaurantFilter" width="40px" height="80px" src="{{isset($kindPlaceId) && ($kindPlaceId == 3 || $kindPlaceId == 0) ? $onLampImg : $offLampImg}}">
                                 <div>رستوران</div>
                             </div>
-                            <div class='ui_input_checkbox'>
-                                @if(isset($placeMode) && $placeMode == "majara")
-                                    <img data-val="on" id="majaraFilter" width="40px" height="80px" src="{{URL::asset('images/on_lamp.gif')}}">
-                                @else
-                                    <img data-val="off" id="majaraFilter" width="40px" height="80px" src="{{URL::asset('images/off_lamp.png')}}">
-                                @endif
+                            <div class='ui_input_checkbox' style="cursor: pointer;" onclick="changeFilter('majara', this)">
+                                <img data-val="{{isset($kindPlaceId) && ($kindPlaceId == 6 || $kindPlaceId == 0) ? 'on' : 'off'}}" id="majaraFilter" width="40px" height="80px" src="{{isset($kindPlaceId) && ($kindPlaceId == 6 || $kindPlaceId == 0) ? $onLampImg : $offLampImg}}">
                                 <div>ماجراجویی</div>
                             </div>
-                            <div class='ui_input_checkbox'>
-                                @if(isset($placeMode) && $placeMode == "soghat")
-                                    <img data-val="on" id="soghatFilter" width="40px" height="80px" src="{{URL::asset('images/on_lamp.gif')}}">
-                                @else
-                                    <img data-val="off" id="soghatFilter" width="40px" height="80px" src="{{URL::asset('images/off_lamp.png')}}">
-                                @endif
+                            <div class='ui_input_checkbox' style="cursor: pointer;" onclick="changeFilter('sogatSanaie', this)">
+                                <img data-val="{{isset($kindPlaceId) && ($kindPlaceId == 10 || $kindPlaceId == 0) ? 'on' : 'off'}}" id="soghatFilter" width="40px" height="80px" src="{{isset($kindPlaceId) && ($kindPlaceId == 10 || $kindPlaceId == 0) ? $onLampImg : $offLampImg}}">
                                 <div>سوغات</div>
                             </div>
-                            <div class='ui_input_checkbox'>
-                                @if(isset($placeMode) && $placeMode == "ghazamahali")
-                                    <img data-val="on" id="ghazamahaliFilter" width="40px" height="80px" src="{{URL::asset('images/on_lamp.gif')}}">
-                                @else
-                                    <img data-val="off" id="ghazamahaliFilter" width="40px" height="80px" src="{{URL::asset('images/off_lamp.png')}}">
-                                @endif
+                            <div class='ui_input_checkbox' style="cursor: pointer;" onclick="changeFilter('mahaliFood', this)">
+                                <img data-val="{{isset($kindPlaceId) && ($kindPlaceId == 11 || $kindPlaceId == 0) ? 'on' : 'off'}}" id="mahaliFoodFilter" width="40px" height="80px" src="{{isset($kindPlaceId) && ($kindPlaceId == 11 || $kindPlaceId == 0) ? $onLampImg : $offLampImg}}">
                                 <div>غذا محلی</div>
                             </div>
-                            <div class='ui_input_checkbox'>
-                                @if(isset($placeMode) && $placeMode == "sanaye")
-                                    <img data-val="on" id="sanayeFilter" width="40px" height="80px" src="{{URL::asset('images/on_lamp.gif')}}">
-                                @else
-                                    <img data-val="off" id="sanayeFilter" width="40px" height="80px" src="{{URL::asset('images/off_lamp.png')}}">
-                                @endif
-
+                            <div class='ui_input_checkbox' style="cursor: pointer;" onclick="changeFilter('sogatSanaie', this)">
+                                <img data-val="{{isset($kindPlaceId) && ($kindPlaceId == 10 || $kindPlaceId == 0) ? 'on' : 'off'}}" id="sanayeFilter" width="40px" height="80px" src="{{isset($kindPlaceId) && ($kindPlaceId == 10 || $kindPlaceId == 0) ? $onLampImg : $offLampImg}}">
                                 <div>صنایع</div>
                             </div>
                         </div>
@@ -658,6 +643,8 @@
 </div>
 
 <script>
+     var onImage = "{{URL::asset('images/on_lamp.gif')}}";
+     var offImage = "{{URL::asset('images/off_lamp.png')}}";
 
     $('#close_span_search').click(function(e) {
         $('#searchspan').animate({height: '0vh'});
@@ -703,4 +690,19 @@
         }
         searchInPlaces();
     });
+
+    function changeFilter(_place, _element){
+        var imageElements = $(_element).children().first();
+        var status = imageElements.attr('data-val');
+        if(status == 'off'){
+            imageElements.attr('data-val', 'on');
+            imageElements.attr('src', onImage);
+        }
+        if(status == 'on'){
+            imageElements.attr('data-val', 'on');
+            imageElements.attr('src', onImage);
+        }
+    }
+
+
 </script>
