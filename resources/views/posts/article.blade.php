@@ -19,134 +19,8 @@ $kindPlaceId = 10; ?>
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <link rel="profile" href="http://gmpg.org/xfn/11">
     <title>خانه - شازده مسافر</title>
-
-    <link rel='stylesheet' id='google-font-css' href='//fonts.googleapis.com/css?family=Dosis%3A200' type='text/css'
-          media='all'/>
-
+    <link rel='stylesheet' id='google-font-css' href='//fonts.googleapis.com/css?family=Dosis%3A200' type='text/css' media='all'/>
     <script type='text/javascript' src='{{URL::asset('js/jquery_12.js')}}'></script>
-
-    <style>
-        .gnTopPics {
-            direction: rtl;
-            background-color: #d3d2d2;
-        }
-
-        .gnWhiteBox {
-            background-color: white;
-            margin: 20px 0 0;
-        }
-
-        .gnContentsCategory {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-        }
-        .gnColOFContentsCategory {
-            width: 100%;
-        }
-        .categoryRow{
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-        }
-        .categoryRTL{
-            direction: rtl;
-            text-align: right;
-        }
-        .categoryLTR{
-            direction: ltr;
-            text-align: right;
-        }
-        .gnUl {
-            list-style: none;
-            padding: 5px;
-            margin: 5px 5px 10px 0px;
-            background-color: #f3f3f3;
-        }
-        .gnLi {
-            padding: 2px 0;
-        }
-        .gnTitleOfPlaces {
-            font-size: 1.2em;
-            font-weight: 400;
-        }
-        .gnNumberOfPlaces {
-            color: #92321b;
-            float: left;
-        }
-
-        .gnInput {
-            width: 100%;
-            padding: 2px 7px;
-            border: 1px solid #cccccc;
-            border-radius: 5px;
-            background-color: #ebebeb;
-            line-height: 30px;
-            margin: 5px 0;
-        }
-
-        .gnAdvertise {
-            padding-bottom: 12px;
-        }
-        .gnAdvertiseText {
-            color: #30b4a6;
-        }
-        .gnAdvertiseImage {
-            width: 100%;
-            height: auto;
-        }
-        textarea:focus{
-            outline: none;
-            box-shadow: none;
-        }
-        textarea:hover{
-            outline: none;
-            box-shadow: none;
-        }
-    </style>
-
-    <style>
-        #helpBtnMainDiv {
-            display: none;
-        }
-    </style>
-
-    {{--just gardeshname style--}}
-    <style>
-        .gnReturnBackBtn {
-            background-color: #fcc156;
-            color: white;
-            padding: 10px;
-            border-radius: 5px;
-            margin: 20px 0 0;
-            text-align: center;
-            font-size: 1.2em;
-            cursor: pointer;
-        }
-        .gnReturnBackBtn:hover {
-            opacity: 0.75;
-        }
-    </style>
-
-    {{--just article style--}}
-    <style>
-        .gnMainPicOfArticle {
-            position: relative;
-            padding: 15px 0;
-        }
-        .gnMainPicOfArticleText {
-            width: 96%;
-            position: absolute;
-            bottom: -35px;
-            left: 50%;
-            margin-left: -48%;
-            padding: 20px 20px 10px;
-            background: white;
-            border-bottom: 3px solid #f3f3f3;
-            opacity: 0.9;
-        }
-    </style>
-
 </head>
 
 <body class="rebrand_2017 desktop HomeRebranded  js_logging rtl home page-template-default page page-id-119 group-blog wpb-js-composer js-comp-ver-4.12 vc_responsive">
@@ -234,10 +108,10 @@ $kindPlaceId = 10; ?>
             </div>
 
             <div class="col-md-12 gnWhiteBox">
-                <input type="text" class="gnInput" id="pcSearchInput" placeholder="عبارت موردنظر خود را جست‌وجو کنید">
-                <span class="input-group-btn">
-                    <input type="submit" class="btn btn-default" value="بگرد" onclick="searchInArticle('pcSearchInput')"/>
-                </span>
+                <div class="gnInput">
+                    <input type="text" class="gnInputonInput" id="pcSearchInput" placeholder="عبارت مورد نظر خود را">
+                    <button class="gnSearchInputBtn" type="submit" onclick="searchInArticle('pcSearchInput')">جستجو کنید</button>
+                </div>
             </div>
 
             <div class="col-md-12 gnWhiteBox">
@@ -347,7 +221,6 @@ $kindPlaceId = 10; ?>
                         <span class="commentsShareIconFeedback"></span>
                         <span class="mg-rt-20 cursor-pointer">اشتراک‌گذاری</span>
                     </div>
-
                 </div>
                 <div class="quantityOfLikes">
                     <span id="countLike">{{$post->like}}</span>
@@ -358,63 +231,82 @@ $kindPlaceId = 10; ?>
                     نفر نظر دادند.
                 </div>
             </div>
-        </div>
-
-        <div class="col-md-3"></div>
-        <div class="col-md-9 col-sm-12 gnWhiteBox">
-
-            <div id="commentDiv0" style="display: none">
-                <div id="commentMainDiv##id##" class="eachCommentMainBox" style="margin-top: 20px; margin-right: ##mRight##;">
-                    <div class="circleBase type2 commentsWriterProfilePic">
-                        <img src="##userPic##" style="width: 100%; height: 100%; border-radius: 50%;">
-                    </div>
-                    <div class="commentsContentMainBox">
-                        <b class="userProfileName display-inline-block">##username##</b>
-                        <p>##msg##</p>
-                        <div class="commentsStatisticsBar">
-                            <div class="float-right display-inline-black">
-                                <span id="commentLikeCount##id##" class="likeStatisticIcon commentsStatisticSpan color-red">##likeCount##</span>
-                                <span id="commentDisLikeCount##id##" class="dislikeStatisticIcon commentsStatisticSpan dark-red">##disLikeCount##</span>
-                                <span class="numberOfCommentsIcon commentsStatisticSpan color-blue">##ans##</span>
+            <div class="row">
+                <div class="col-md-9 col-sm-12">
+                    <div class="col-md-12 col-sm-12 gnUserDescription">
+                        <div>
+                            <div class="circleBase type2 newCommentWriterProfilePic">
+                                <img src="##authPic##" style="width: 100%; height: 100%; border-radius: 50%;">
                             </div>
-                            <div class="dark-blue float-left display-inline-black cursor-pointer" onclick="showPostsComments(##id##)" style="display: ##haveAnsDisplay##;">دیدن پاسخ‌ها</div>
+                            <div class="gnLabels">shazdesina</div>
                         </div>
-                    </div>
-                    <div class="commentsActionsBtns">
-                        <div onclick="likeComment(##id##, 1, this);">
-                            <span class="likeActionBtn ##showLike##"></span>
-                        </div>
-                        <div onclick="likeComment(##id##, 0, this);">
-                            <span class="dislikeActionBtn ##showDisLike##"></span>
-                        </div>
+                        <div>
 
-                        <div class="clear-both"></div>
-                        <b class="replyBtn" onclick="replyToComments(this)">پاسخ دهید</b>
-                    </div>
-                    <div class="replyToCommentMainDiv" style="display: none">
-                        <div class="circleBase type2 newCommentWriterProfilePic">
-                            <img src="##authPic##" style="width: 100%; height: 100%; border-radius: 50%;">
-                        </div>
-                        <div class="inputBox">
-                            <b class="replyCommentTitle">در پاسخ به نظر ##username##</b>
-                            <textarea id="ansForReviews_1043" class="inputBoxInput inputBoxInputComment" placeholder="شما چه نظری دارید؟" onclick="checkLogin()"></textarea>
-                            <button class="btn btn-primary" onclick="sendComment(##postId##, ##id##, this)"> ارسال</button>
                         </div>
                     </div>
                 </div>
-                <div id="commentDiv##id##" style="display: none"></div>
-            </div>
-            <div class="newCommentPlaceMainDiv">
-                <div class="circleBase type2 newCommentWriterProfilePic">
-                    <img src="{{$uPic}}" style="">
-                </div>
-                <div class="inputBox">
-                    <b class="replyCommentTitle">نظر خود را در مورد مقاله با ما در میان بگذارید</b>
-                    <textarea class="inputBoxInput inputBoxInputComment" id="ansForReviews_1038" placeholder="شما چه نظری دارید؟" onclick="checkLogin()"></textarea>
-                    <button class="btn btn-primary" onclick="sendComment({{$post->id}}, 0, this)"> ارسال</button>
+                <div class="col-md-3 col-sm-12" style="padding-right: 0;">
+                    <div class="col-md-12 col-sm-12 gnUserDescription">
+                        <div class="gnLabels">برچسب ها</div>
+                        <div>
+
+                        </div>
+                    </div>
                 </div>
             </div>
+            <div>
+                <div id="commentDiv0" style="display: none">
+                    <div id="commentMainDiv##id##" class="eachCommentMainBox" style="margin-top: 20px; margin-right: ##mRight##;">
+                        <div class="circleBase type2 commentsWriterProfilePic">
+                            <img src="##userPic##" style="width: 100%; height: 100%; border-radius: 50%;">
+                        </div>
+                        <div class="commentsContentMainBox">
+                            <b class="userProfileName display-inline-block">##username##</b>
+                            <p>##msg##</p>
+                            <div class="commentsStatisticsBar">
+                                <div class="float-right display-inline-black">
+                                    <span id="commentLikeCount##id##" class="likeStatisticIcon commentsStatisticSpan color-red">##likeCount##</span>
+                                    <span id="commentDisLikeCount##id##" class="dislikeStatisticIcon commentsStatisticSpan dark-red">##disLikeCount##</span>
+                                    <span class="numberOfCommentsIcon commentsStatisticSpan color-blue">##ans##</span>
+                                </div>
+                                <div class="dark-blue float-left display-inline-black cursor-pointer" onclick="showPostsComments(##id##)" style="display: ##haveAnsDisplay##;">دیدن پاسخ‌ها</div>
+                            </div>
+                        </div>
+                        <div class="commentsActionsBtns">
+                            <div onclick="likeComment(##id##, 1, this);">
+                                <span class="likeActionBtn ##showLike##"></span>
+                            </div>
+                            <div onclick="likeComment(##id##, 0, this);">
+                                <span class="dislikeActionBtn ##showDisLike##"></span>
+                            </div>
 
+                            <div class="clear-both"></div>
+                            <b class="replyBtn" onclick="replyToComments(this)">پاسخ دهید</b>
+                        </div>
+                        <div class="replyToCommentMainDiv" style="display: none">
+                            <div class="circleBase type2 newCommentWriterProfilePic">
+                                <img src="##authPic##" style="width: 100%; height: 100%; border-radius: 50%;">
+                            </div>
+                            <div class="inputBox">
+                                <b class="replyCommentTitle">در پاسخ به نظر ##username##</b>
+                                <textarea id="ansForReviews_1043" class="inputBoxInput inputBoxInputComment" placeholder="شما چه نظری دارید؟" onclick="checkLogin()"></textarea>
+                                <button class="btn btn-primary" onclick="sendComment(##postId##, ##id##, this)"> ارسال</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="commentDiv##id##" style="display: none"></div>
+                </div>
+                <div class="newCommentPlaceMainDiv">
+                    <div class="circleBase type2 newCommentWriterProfilePic">
+                        <img src="{{$uPic}}" style="">
+                    </div>
+                    <div class="inputBox">
+                        <b class="replyCommentTitle">نظر خود را در مورد مقاله با ما در میان بگذارید</b>
+                        <textarea class="inputBoxInput inputBoxInputComment" id="ansForReviews_1038" placeholder="شما چه نظری دارید؟" onclick="checkLogin()"></textarea>
+                        <button class="btn btn-primary" onclick="sendComment({{$post->id}}, 0, this)"> ارسال</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -19,92 +19,8 @@ $kindPlaceId = 10; ?>
     <link rel="profile" href="http://gmpg.org/xfn/11">
     <title>خانه - شازده مسافر</title>
 
-    <link rel='stylesheet' id='google-font-css' href='//fonts.googleapis.com/css?family=Dosis%3A200' type='text/css'
-          media='all'/>
-
+    <link rel='stylesheet' id='google-font-css' href='//fonts.googleapis.com/css?family=Dosis%3A200' type='text/css' media='all'/>
     <script type='text/javascript' src='{{URL::asset('js/jquery_12.js')}}'></script>
-
-    <style>
-        .gnTopPics {
-            direction: rtl;
-            background-color: #d3d2d2;
-        }
-
-        .gnWhiteBox {
-            background-color: white;
-            margin: 20px 0 0;
-        }
-
-        .gnContentsCategory {
-            display: flex;
-            justify-content: space-between;
-        }
-        .gnColOFContentsCategory {
-            width: 100%;
-        }
-        .gnUl {
-            list-style: none;
-            padding: 5px;
-            margin: 5px 5px 10px 0px;
-            background-color: #f3f3f3;
-        }
-        .gnLi {
-            padding: 2px 0;
-        }
-        .gnTitleOfPlaces {
-            font-size: 1.2em;
-            font-weight: 400;
-        }
-        .gnNumberOfPlaces {
-            color: #92321b;
-            float: left;
-        }
-
-        .gnInput {
-            width: 100%;
-            padding: 2px 7px;
-            border: 1px solid #cccccc;
-            border-radius: 5px;
-            background-color: #ebebeb;
-            line-height: 30px;
-            margin: 5px 0;
-        }
-
-        .gnAdvertise {
-            padding-bottom: 12px;
-        }
-        .gnAdvertiseText {
-            color: #30b4a6;
-        }
-        .gnAdvertiseImage {
-            width: 100%;
-            height: auto;
-        }
-    </style>
-
-    <style>
-        #helpBtnMainDiv {
-            display: none;
-        }
-    </style>
-
-    {{--just gardeshname style--}}
-    <style>
-        .gnReturnBackBtn {
-            background-color: #fcc156;
-            color: white;
-            padding: 10px;
-            border-radius: 5px;
-            margin: 20px 0 0;
-            text-align: center;
-            font-size: 1.2em;
-            cursor: pointer;
-        }
-        .gnReturnBackBtn:hover {
-            opacity: 0.75;
-        }
-    </style>
-
 </head>
 
 <body class="rebrand_2017 desktop HomeRebranded  js_logging rtl home page-template-default page page-id-119 group-blog wpb-js-composer js-comp-ver-4.12 vc_responsive">
@@ -442,10 +358,10 @@ $kindPlaceId = 10; ?>
             </div>
 
             <div class="col-md-12 gnWhiteBox">
-                <input type="text" class="gnInput" id="pcSearchInput" placeholder="عبارت موردنظر خود را جست‌وجو کنید">
-                <span class="input-group-btn">
-                    <input type="submit" class="btn btn-default" value="بگرد" onclick="searchInArticle('pcSearchInput')"/>
-                </span>
+                <div class="gnInput">
+                    <input type="text" class="gnInputonInput" id="pcSearchInput" placeholder="عبارت مورد نظر خود را">
+                    <button class="gnSearchInputBtn" type="submit" onclick="searchInArticle('pcSearchInput')">جستجو کنید</button>
+                </div>
             </div>
 
             <div class="col-md-12 gnWhiteBox gnAdvertise">
