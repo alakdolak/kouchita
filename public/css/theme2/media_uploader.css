@@ -398,9 +398,9 @@
 .uploaderDlg .startScreen .dragDropText {
   font-size: 14px;
   font-weight: bold;
-  height: 200px;
+  height: 250px;
   border: 2px dashed #9996;
-  margin: 20px 60px 10px;
+  margin: 20px 60px 20px;
   padding-top: 20px;
 }
 

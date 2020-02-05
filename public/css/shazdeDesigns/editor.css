@@ -68,6 +68,7 @@
 
 .uploadBtn {
     padding: 3px 15px;
+    margin-right: 5px;
 }
 
 /*2nd box of styles*/
@@ -201,10 +202,13 @@
 .docs-buttons {
     padding: 10px 0;
     border-top: 1px solid #cccccc;
+    display: flex;
+    align-items: center;
 }
 
 .editBtnsGroup {
-    display: inline-block;
+    display: flex;
+    align-items: center;
     vertical-align: middle;
     margin: 0 7px;
 }
@@ -236,16 +240,6 @@
     overflow: auto
 }
 
-#editPane {
-    padding: 0;
-    width: 50%;
-    right: auto;
-    /*height: 90%;*/
-    top: 5%;
-    position: fixed;
-    left: 25%;
-}
-
 #editPane > div:nth-child(1) > div:nth-child(1) {
     max-height: 600px;
     overflow: auto
@@ -255,15 +249,21 @@
     margin: 20px
 }
 
-#photoEditor {
+#photoEditor, #editPane {
     padding: 0;
     /*width: 860px;*/
     /*height: 90%;*/
-    top: 10%;
+    top: 15%;
+    bottom: 15%;
     position: fixed;
     left: 25%;
     right: 25%;
     /*margin-left: -430px;*/
+}
+
+#editPane {
+    top: 5% !important;
+    bottom: 5% !important;
 }
 
 #photoUploadHeader, .photoUploadHeader {
@@ -288,23 +288,24 @@
 }
 
 #uploader-dlg {
-    /*overflow: auto;*/
-    /*max-height: 100%*/
-    height: 100%;
+    overflow: auto;
+    max-height: 93%;
 }
 
 .itemRow .row {
     margin: 0;
-    padding: 15px 0;
+    padding: 12px 0 0;
 }
 
 .itemRow .row .col-xs-5 {
     padding: 15px;
+    float: right;
 }
 
 .itemRow .row .col-xs-7 {
     padding: 15px;
     border-left: 1px solid #cccccc;
+    float: right;
 }
 
 .itemRow .row .col-xs-7 .epPicBox:first-child {
@@ -322,6 +323,46 @@
     text-align: justify
 }
 
+#photoEditor .secondStepFooter {
+    /*display: flex;*/
+    /*align-items: flex-start;*/
+}
+
+.secondStepFooter .termsLabel > div {
+    display: flex;
+}
+
+.secondStepPolicyCheckBox {
+    display: flex;
+    padding-top: 5px;
+}
+
+.secondStepPolicyText {
+    padding: 0 5px 0 10px;;
+    text-align: justify;
+    font-size: 12px;
+    line-height: 2;
+}
+
+.secondFooterVerification {
+    position: relative;
+}
+
+.imageVerificationBtn {
+    position: absolute;
+    top: -35px;
+    width: 71px;
+    left: 10px;
+}
+
+.imageVerificationBtn > button {
+    border: none;
+    border-radius: 4px;
+    padding: 5px 8px;
+    background: #93331f;
+    color: white;
+    font-weight: 700;
+}
 
 /*#uploader-dlg > div:nth-child(1) > div:nth-child(1) {*/
 /*max-width: 100%*/
@@ -407,42 +448,160 @@
     margin: 20px 60px 10px;
 }
 
-#photoEditor .ui_close_x {
+#photoEditor .ui_close_x, #editPane .ui_close_x {
     right: initial;
     left: 0;
 }
 
-@media (max-width: 1300px) {
-    #photoEditor {
+.bodyEditFrame {
+    overflow: auto;
+    max-height: 93%;
+}
+
+.bodyEditFrame .row {
+    margin: 0;
+}
+
+.bodyEditFrame .return {
+    float: left;
+}
+
+.returnBtnEditPhoto {
+    border-radius: 4px;
+    background-color: #93331f;
+    color: white;
+    padding: 3px 15px;
+    font-size: 14px;
+    border: 1px solid transparent;
+    line-height: 17px;
+    cursor: pointer;
+}
+
+@media (max-width: 1340px) {
+    #photoEditor, #editPane {
         left: 20%;
         right: 20%;
     }
 }
 
 @media (max-width: 1120px) {
-    #photoEditor {
+    #photoEditor, #editPane {
         left: 15%;
         right: 15%;
     }
 }
 
 @media (max-width: 960px) {
-    #photoEditor {
+    #photoEditor, #editPane {
         left: 10%;
         right: 10%;
     }
 }
 
 @media (max-width: 850px) {
-    #photoEditor {
+    #photoEditor, #editPane {
         left: 5%;
         right: 5%;
     }
 }
 
 @media (max-width: 751px) {
-    #photoEditor {
+    #photoEditor, #editPane {
         left: 1%;
         right: 1%;
+    }
+}
+
+@media (max-width: 691px) {
+    #photoEditor, #editPane {
+        left: 10%;
+        right: 10%;
+        top: 10%;
+        bottom: 20%;
+    }
+
+    .itemRow .row .col-xs-7 {
+        border-left: none;
+        border-bottom: 1px solid #cccccc;
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 0 5%;
+    }
+
+    .itemRow .row .col-xs-5 {
+        width: 90%;
+        margin: 0 5%;
+        padding: 15px 15px 35px;
+    }
+
+    .uploaderDlg .startScreen .dragDropText {
+        margin: 40px 30px 50px;
+    }
+}
+
+@media (max-width: 552px) {
+
+    .itemRow .row {
+        padding: 0;
+    }
+
+    .itemRow .row .col-xs-7 {
+        width: 96%;
+        margin: 0 2%;
+    }
+
+    .itemRow .row .col-xs-7 div:last-child {
+        margin: 10px 0 0;
+    }
+
+    #photoEditor, #editPane {
+        left: 5%;
+        right: 5%;
+    }
+
+    .bodyEditFrame .row {
+        margin: 40px 0 0;
+    }
+}
+
+@media (max-width: 456px) {
+
+    #photoEditor, #editPane {
+        left: 1%;
+        right: 1%;
+    }
+
+    .itemRow .row .col-xs-7 > div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /*.bodyEditFrame .row {*/
+    /*    margin: 55px 0 0;*/
+    /*}*/
+}
+
+@media (max-width: 440px) {
+    .uploadBtn {
+        margin: 0 5px 5px 0;
+    }
+}
+
+@media (max-width: 370px) {
+
+    .docs-buttons {
+        display: inherit;
+    }
+
+    .editBtnsGroup {
+        display: inline-block;
+    }
+
+    .btnActionEditFrame {
+        margin-top: 10px;
     }
 }

@@ -22,6 +22,26 @@ textarea, input, select, button, a {
     outline: none;
 }
 
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #bebebe;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #969696;
+}
+
 DIV.ppr_rup.ppr_priv_hr_atf_north_star_nostalgic .atf_meta_and_photos_wrapper::before {
     display: none !important;
 }
@@ -1633,6 +1653,11 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     border-radius: 10px;
     padding: 5px;
     z-index: 9;
+    text-decoration: none;
+}
+
+#photographersLink:hover {
+    text-decoration: none;
 }
 
 #helpBtnMainDiv {
@@ -3110,13 +3135,6 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     width: 70%;
 }
 
-@media (max-width: 1300px) {
-    #editPane {
-        width: 70% !important;
-        left: 15% !important;
-    }
-}
-
 .ui_star_rating::before {
     display: none;
 }
@@ -3740,7 +3758,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 .affix {
     top: 0;
     width: 100%;
-    z-index: 1000 !important;
+    z-index: 9 !important;
     max-width: 1188px;
 }
 
