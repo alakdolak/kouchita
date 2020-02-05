@@ -4,6 +4,7 @@
     font-weight: 700;
     padding: 10px;
     font-size: 15px;
+    border-radius: 5px 5px 0 0;
 }
 
 .showingPhotosModal .commentWriterDetailsShow {
@@ -35,6 +36,7 @@
 #photographerSlideUserPic {
     width: 100%;
     height: 100%;
+    border-radius: 50%;
 }
 
 .modal-content .postMainDivHeader , .modal-content .showingPhotosTitle {
@@ -47,6 +49,7 @@
     width: 24%;
     margin-top: 10px;
     flex-direction: column;
+    max-width: 210px;
 }
 
 .showingPhotosModal .commentWriterExperienceDetails , .answersWriterExperienceDetails {
@@ -121,24 +124,26 @@
     margin: 5px 0;
     padding: 0 10px;
     border-left: 2px solid #e5e5e5;
-    max-height: 70vh;
+    /*max-height: 70vh;*/
     overflow: auto;
+    height: auto;
 }
 
 .rightColPhotosShowingModal {
-    height: 130px;
+    height: 70px;
     margin-bottom: 5px;
-    width: 100%;
-    display: flex !important;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
+    width: 48%;
+    /*display: flex !important;*/
+    /*justify-content: center;*/
+    /*align-items: center;*/
+    /*overflow: hidden;*/
     position: relative;
+    display: inline-block;
     cursor: pointer;
 }
 
 .leftColPhotosModalMainDiv {
-    padding: 25px 70px 0;
+    padding: 25px 70px 25px;
 }
 
 .selectedPhotoShowingModal {
@@ -190,7 +195,7 @@
     }
 }
 
-@media (min-width: 768px) {
+@media (max-width:992px) and (min-width: 768px) {
     .showingPhotosModal .modal-dialog {
         width: 750px;
     }
@@ -217,21 +222,20 @@
         width: 207px;
     }
 
-    .rightColPhotosModalMainDiv {
-        border-left: none;
-        border-top: 2px solid #e5e5e5;
+    .modal-content .display-flex {
+        display: block;
     }
 
     .rightColPhotosShowingModal {
-        width: auto;
-        margin:0 0 0 10px;
+        width: 12%;
+        margin:0 0 10px 1.8%;
     }
 
     .rightColPhotosModalMainDiv {
         border-left: none;
         border-top: 2px solid #e5e5e5;
-        overflow-x: auto;
-        white-space: nowrap;
+        /*overflow-x: auto;*/
+        /*white-space: nowrap;*/
         padding: 10px 5px;
         direction: rtl;
         margin: 5px 1%;
@@ -239,7 +243,7 @@
     }
 
     .leftColPhotosModalMainDiv {
-        padding: 25px 5% 0;
+        padding: 25px 5% 25px;
     }
 
     .selectedPhotoShowingModal {
@@ -265,10 +269,18 @@
     .selectedPhotoShowingModal {
         height: 320px;
     }
+
+    .rightColPhotosShowingModal {
+        width: 18%;
+    }
 }
 
 @media (max-width:480px)  {
     .selectedPhotoShowingModal {
         height: 250px;
+    }
+
+    .rightColPhotosShowingModal {
+        width: 23%;
     }
 }

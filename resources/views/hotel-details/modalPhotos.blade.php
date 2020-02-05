@@ -99,17 +99,19 @@
 
             </div>
             <div class="clear-both"></div>
-            <div class="col-xs-12 col-sm-9 leftColPhotosModalMainDiv">
-                <div class="selectedPhotoShowingModal">
-                    <img id="mainPhotographerSliderPic" src="{{URL::asset($photographerPics[0]['s'])}}" alt="{{$photographerPics[0]['alt']}}" style="width: 100%; height: 100%;">
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-3 rightColPhotosModalMainDiv" >
-                @for($i = 0; $i < count($photographerPics); $i++)
-                    <div class="rightColPhotosShowingModal" onclick="changePhotographerSlidePic({{$i}})">
-                        <img src="{{$photographerPics[$i]['l']}}" alt="{{$photographerPics[$i]['alt']}}" class="mainReviewPic">
+            <div class="display-flex">
+                <div class="col-xs-12 col-sm-9 leftColPhotosModalMainDiv">
+                    <div class="selectedPhotoShowingModal">
+                        <img id="mainPhotographerSliderPic" src="{{URL::asset($photographerPics[0]['s'])}}" alt="{{$photographerPics[0]['alt']}}" style="width: 100%; height: 100%;">
                     </div>
-                @endfor
+                </div>
+                <div class="col-xs-12 col-sm-3 rightColPhotosModalMainDiv" >
+                    @for($i = 0; $i < count($photographerPics); $i++){{--
+                        --}}<div class="rightColPhotosShowingModal" onclick="changePhotographerSlidePic({{$i}})">
+                            <img src="{{$photographerPics[$i]['l']}}" alt="{{$photographerPics[$i]['alt']}}" class="mainReviewPic">
+                        </div>{{--
+                    --}}@endfor
+                </div>
             </div>
             <div class="photosDescriptionShowingModal">
                 <div id="photographerDescription" style="display: {{$photographerPics[0]['showInfo']? 'block' : 'none'}}">
