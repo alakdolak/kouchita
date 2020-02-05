@@ -63,7 +63,7 @@ if ($total == 0)
     <link rel="stylesheet" href="{{URL::asset('css/theme2/cropper.css')}}">
     <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/hotelDetail.css')}}">
     <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/abbreviations.css')}}">
-    <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/editor.css')}}">
+{{--    <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/editor.css')}}">--}}
 
 
 

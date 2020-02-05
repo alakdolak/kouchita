@@ -323,7 +323,7 @@
 
     <div class="ui_backdrop dark" id="darkModeMainPage"></div>
 
-{{--@include('layouts.phonePopUp')--}}
+{{--@include('errors.alerts')--}}
 
 <script defer>
     var passenger = 0;

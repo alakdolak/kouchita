@@ -162,7 +162,7 @@ class PostController extends Controller {
         $pageLimit = ceil(Post::where('date', '<=', $today)->count() / 5);
 
 
-        return view('posts.mainArticle',compact(['category', 'favoritePosts', 'mostLike', 'bannerPosts', 'recentlyPosts', 'mostCommentPost', 'mostSeenPost', 'allPosts', 'page', 'pageLimit']) );
+        return view('posts.mainArticle',compact(['category', 'mostLike', 'bannerPosts', 'recentlyPosts', 'mostCommentPost', 'mostSeenPost', 'page', 'pageLimit']) );
     }
 
     public function paginationArticle(Request $request)
