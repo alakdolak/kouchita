@@ -989,45 +989,25 @@ function generateRandomString($length = 20) {
 }
 
 function saveViewPerPage($kindPlaceId, $placeId){
-    if (Auth::check()) {
-        $uId = Auth::user()->id;
+    if(Auth::check())
+        $userId = auth()->user()->id;
+    else
+        $userId = 999999;
+
+    $value = 'kindPlaceId:'.$kindPlaceId.'Id:'.$placeId;
+    if(!(Cookie::has($value) == $value)) {
         $activityId = Activity::whereName('مشاهده')->first()->id;
-
-        $condition = ['visitorId' => $uId, 'placeId' => $placeId, 'kindPlaceId' => $kindPlaceId,
-            'activityId' => $activityId];
-        $log = LogModel::where($condition)->first();
-        if ($log == null) {
-            $log = new LogModel();
-            $log->activityId = $activityId;
-            $log->time = getToday()["time"];
-            $log->placeId = $placeId;
-            $log->kindPlaceId = $kindPlaceId;
-            $log->visitorId = $uId;
-            $log->date = date('Y-m-d');
-            $log->save();
-        } else {
-            $log->date = date('Y-m-d');
-            $log->save();
-        }
+        $log = new LogModel();
+        $log->time = getToday()["time"];
+        $log->activityId = $activityId;
+        $log->placeId = $placeId;
+        $log->kindPlaceId = $kindPlaceId;
+        $log->visitorId = $userId;
+        $log->date = date('Y-m-d');
+        $log->save();
+        Cookie::queue(Cookie::make($value, $value, 5));
     }
-    else{
-        $value = 'kindPlaceId:'.$kindPlaceId.'Id:'.$placeId;
-        if(!(Cookie::has($value) == $value)) {
-            $activityId = Activity::whereName('مشاهده')->first()->id;
-            $log = new LogModel();
-            $log->time = getToday()["time"];
-            $log->activityId = $activityId;
-            $log->placeId = $placeId;
-            $log->kindPlaceId = $kindPlaceId;
-            $log->visitorId = 999999;
-            $log->date = date('Y-m-d');
-            $log->save();
-            Cookie::queue(Cookie::make($value, $value, 5));
-        }
-    }
-
 }
-
 
 
 //time

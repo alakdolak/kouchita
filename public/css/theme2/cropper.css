@@ -57,8 +57,8 @@
 .cropper-view-box {
   display: block;
   height: 100%;
-  outline-color: color(var(--blue) alpha(75%));
-  outline: 1px solid var(--blue);
+  /*outline-color: color(var(--blue) alpha(75%));*/
+  outline: 4px solid white;
   overflow: hidden;
   width: 100%;
 }
@@ -172,11 +172,25 @@
   }
 }
 
+.cropper-point::before {
+  content: "\e140";
+  font-family: "Glyphicons Halflings" !important;
+  color: black;
+  font-size: 13px;
+  transform: rotate(45deg);
+}
+
 .cropper-point {
-  background-color: var(--blue);
-  height: 5px;
+  background-color: white;
+  height: 20px;
   opacity: .75;
-  width: 5px;
+  right: -10px;
+  width: 20px;
+  bottom: -10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 50%;
 
   &.point-e {
     cursor: ew-resize;

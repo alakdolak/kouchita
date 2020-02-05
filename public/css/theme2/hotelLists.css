@@ -354,8 +354,81 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
 }
 
 
-
 #darkModeMainPage {
     display: none;
     z-index: 10000000;
+}
+
+/*search input of hotel List*/
+.hl_inputBox {
+    width: 100%;
+    padding: 2px 7px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    background-color: #ebebeb;
+    line-height: 30px;
+    margin: 0 0 10px;
+}
+
+
+/*style of ordering*/
+
+.ordering {
+    display: inline-block;
+    width: 15%;
+    font-size: 14px;
+}
+
+.orders {
+    cursor: pointer;
+    padding-bottom: 12px;
+    text-align: center;
+}
+
+.selectOrder {
+    border-bottom: 2px solid #4DC7BC;
+    color: #4DC7BC;
+}
+
+/*low distance styles*/
+
+.lowDistance {
+    width: 23%;
+    position: absolute;
+    left: -8px;
+    background-color: white !important;
+    padding: 10px;
+    z-index: 10000013;
+    box-shadow: 0px 1px 8px 3px #cccccc;
+}
+
+.inputDistance {
+    padding: 5px;
+    color: #464646;
+}
+
+.errDistance {
+    color: #ff1515;
+    font-size: 0.7em;
+}
+
+.textDistance {
+    margin: 5px 0;
+    color: #92321b;
+    font-size: 0.7em;
+}
+
+/*hotel list Icon*/
+
+.shTIcon {
+    font-family: shazde_regular2 !important;
+    font-size: 20px;
+}
+
+.bottomArrowIcon:before {
+    content: '\E04A';
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    cursor: pointer;
 }

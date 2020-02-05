@@ -31,6 +31,7 @@
     27 => 'GrahamCampbell\\Throttle\\ThrottleServiceProvider',
     28 => 'Laravel\\Passport\\PassportServiceProvider',
     29 => 'Barryvdh\\Cors\\ServiceProvider',
+    30 => 'Hekmatinasser\\Verta\\VertaServiceProvider',
   ),
   'eager' => 
   array (
@@ -51,6 +52,7 @@
     14 => 'GrahamCampbell\\Throttle\\ThrottleServiceProvider',
     15 => 'Laravel\\Passport\\PassportServiceProvider',
     16 => 'Barryvdh\\Cors\\ServiceProvider',
+    17 => 'Hekmatinasser\\Verta\\VertaServiceProvider',
   ),
   'deferred' => 
   array (

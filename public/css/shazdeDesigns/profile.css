@@ -440,15 +440,15 @@
     margin: 0 15px;
 }
 
-.modules-membercenter-member-profile .aboutMeDesc .update:hover {
+#MODULES_MEMBER_CENTER .modules-membercenter-member-profile .aboutMeDesc .update:hover {
     text-decoration: none;
 }
 
-.userProfileActivitiesMainDiv {
+#MODULES_MEMBER_CENTER .userProfileActivitiesMainDiv {
     padding: 0 0 20px;
 }
 
-.mainDivHeaderText {
+#MODULES_MEMBER_CENTER .mainDivHeaderText {
     padding: 10px 0;
     border-bottom: 1px solid
     #e5e5e5;
@@ -456,7 +456,7 @@
     position: relative;
 }
 
-.mainDivHeaderText > h3 {
+#MODULES_MEMBER_CENTER .mainDivHeaderText > h3 {
     font-size: 17px;
     font-weight: 700;
     line-height: 32px;
@@ -469,26 +469,26 @@
     margin: 0;
 }
 
-.activitiesMainDiv {
-    padding: 5px 15px;
+#MODULES_MEMBER_CENTER .activitiesMainDiv {
+    padding: 0;
 }
 
-.activitiesLinesDiv:first-child {
+#MODULES_MEMBER_CENTER .activitiesLinesDiv:first-child {
     padding: 0 0 10px;
 }
 
-.activitiesLinesDiv {
+#MODULES_MEMBER_CENTER .activitiesLinesDiv {
     border-bottom: 1px solid
     #E5E5E5;
     padding: 15px 0;
     position: relative;
 }
 
-.activitiesLinesDiv:first-child > div {
+#MODULES_MEMBER_CENTER .activitiesLinesDiv:first-child > div {
     top: 0;
 }
 
-.activityTitle {
+#MODULES_MEMBER_CENTER .activityTitle {
     position: absolute;
     font-size: 14px;
     color: #888888;
@@ -499,7 +499,7 @@
     background-color: white;
 }
 
-.activityNumbers {
+#MODULES_MEMBER_CENTER .activityNumbers {
     position: absolute;
     font-size: 14px;
     color: #0076a3;

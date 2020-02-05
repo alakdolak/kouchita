@@ -573,8 +573,7 @@ class HotelReservationController extends Controller {
                 return "نتیجه ای یافت نشد";
 
             $stateName = $state->name;
-        }
-        else {
+        } else {
             $tmp = Cities::whereName($city)->first();
             if ($tmp == null)
                 return "نتیجه ای یافت نشد";

@@ -12,6 +12,7 @@ $kindPlaceId = 10; ?>
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/article.min.css?v=1.2')}}"/>
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/shazdeDesigns/article.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/shazdeDesigns/abbreviations.css')}}"/>
+    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/easyimage.css')}}"/>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -93,6 +94,14 @@ $kindPlaceId = 10; ?>
         .gnAdvertiseImage {
             width: 100%;
             height: auto;
+        }
+        textarea:focus{
+            outline: none;
+            box-shadow: none;
+        }
+        textarea:hover{
+            outline: none;
+            box-shadow: none;
         }
     </style>
 
@@ -195,259 +204,6 @@ $kindPlaceId = 10; ?>
         </div>
     </div>
 
-    <div class="hidden visible-sm visible-xs">
-        <div id="im-header-offconvas" class="im-header-offconvas">
-            <div class="im-header-offconvas-off clearfix">
-                <button id="off-canvas-off" class="off-canvas-off">
-                    <i class="fa fa-navicon"></i>
-                </button>
-            </div>
-            <nav class="clearfix">
-                <div class="mobile-menu">
-                    <ul id="mobile-menu" class="menu">
-                        <li id="menu-item-537"
-                            class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-537 menu-item-category-44">
-                            <a href="/category/%d8%a7%d9%85%d8%a7%da%a9%d9%86-%da%af%d8%b1%d8%af%d8%b4%da%af%d8%b1%db%8c/" aria-haspopup="true">اماکن گردشگری </a>
-                            <ul class="sub-menu">
-                                <li id="menu-item-538"
-                                    class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-538 menu-item-category-45">
-                                    <a href="/category/%d8%a7%d9%85%d8%a7%da%a9%d9%86-%da%af%d8%b1%d8%af%d8%b4%da%af%d8%b1%db%8c/%d8%a7%d9%85%d8%a7%da%a9%d9%86-%d8%aa%d8%a7%d8%b1%db%8c%d8%ae%db%8c/">اماکن
-                                        تاریخی</a>
-                                </li>
-                                <li id="menu-item-539"
-                                    class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-539 menu-item-category-46">
-                                    <a href="/category/%d8%a7%d9%85%d8%a7%da%a9%d9%86-%da%af%d8%b1%d8%af%d8%b4%da%af%d8%b1%db%8c/%d8%a7%d9%85%d8%a7%da%a9%d9%86-%d8%aa%d9%81%d8%b1%db%8c%d8%ad%db%8c/">اماکن
-                                        تفریحی</a>
-                                </li>
-                                <li id="menu-item-540"
-                                    class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-540 menu-item-category-47">
-                                    <a href="/category/%d8%a7%d9%85%d8%a7%da%a9%d9%86-%da%af%d8%b1%d8%af%d8%b4%da%af%d8%b1%db%8c/%d8%a7%d9%85%d8%a7%da%a9%d9%86-%d9%85%d8%b0%d9%87%d8%a8%db%8c/">اماکن
-                                        مذهبی</a>
-                                </li>
-                                <li id="menu-item-541"
-                                    class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-541 menu-item-category-50">
-                                    <a href="/category/%d8%a7%d9%85%d8%a7%da%a9%d9%86-%da%af%d8%b1%d8%af%d8%b4%da%af%d8%b1%db%8c/%d8%b7%d8%a8%db%8c%d8%b9%d8%aa-%da%af%d8%b1%d8%af%db%8c/">طبیعت
-                                        گردی</a><
-                                    /li>
-                                <li id="menu-item-542"
-                                    class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-542 menu-item-category-49">
-                                    <a href="/category/%d8%a7%d9%85%d8%a7%da%a9%d9%86-%da%af%d8%b1%d8%af%d8%b4%da%af%d8%b1%db%8c/%d9%85%d8%b1%d8%a7%da%a9%d8%b2-%d8%ae%d8%b1%db%8c%d8%af/">مراکز
-                                        خرید</a>
-                                </li>
-                                <li id="menu-item-543"
-                                    class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-543 menu-item-category-48">
-                                    <a href="/category/%d8%a7%d9%85%d8%a7%da%a9%d9%86-%da%af%d8%b1%d8%af%d8%b4%da%af%d8%b1%db%8c/%d9%85%d9%88%d8%b2%d9%87/">موزه</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li id="menu-item-7408"
-                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-7408">
-                            <a href="#" aria-haspopup="true">هتل و رستوران </a>
-                            <ul class="sub-menu">
-                                <li id="menu-item-7409"
-                                    class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7409 menu-item-category-33">
-                                    <a href="/category/%d9%87%d8%aa%d9%84-%d9%88-%d8%b1%d8%b3%d8%aa%d9%88%d8%b1%d8%a7%d9%86/%d9%87%d8%aa%d9%84/">هتل</a>
-                                </li>
-                                <li id="menu-item-7410"
-                                    class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7410 menu-item-category-40">
-                                    <a href="/category/%d9%87%d8%aa%d9%84-%d9%88-%d8%b1%d8%b3%d8%aa%d9%88%d8%b1%d8%a7%d9%86/%d8%b1%d8%b3%d8%aa%d9%88%d8%b1%d8%a7%d9%86-%d9%87%d8%a7/%d8%b1%d8%b3%d8%aa%d9%88%d8%b1%d8%a7%d9%86-%d8%b4%d9%87%d8%b1%db%8c/%d8%b1%d8%b3%d8%aa%d9%88%d8%b1%d8%a7%d9%86/">رستوران</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li id="menu-item-3016"
-                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-3016">
-                            <a href="#" aria-haspopup="true">آداب و رسوم </a>
-                            <ul class="sub-menu">
-                                <li id="menu-item-532"
-                                    class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-532 menu-item-category-65">
-                                    <a href="/category/%d8%a2%d8%af%d8%a7%d8%a8-%d9%88-%d8%b1%d8%b3%d9%88%d9%85/%d8%b3%d9%88%d8%ba%d8%a7%d8%aa-%d9%85%d8%ad%d9%84%db%8c/">سوغات
-                                        محلی</a>
-                                </li>
-                                <li id="menu-item-533"
-                                    class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-533 menu-item-category-66">
-                                    <a href="/category/%d8%a2%d8%af%d8%a7%d8%a8-%d9%88-%d8%b1%d8%b3%d9%88%d9%85/%d8%b5%d9%86%d8%a7%db%8c%d8%b9-%d8%af%d8%b3%d8%aa%db%8c/">صنایع
-                                        دستی</a>
-                                </li>
-                                <li id="menu-item-534"
-                                    class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-534 menu-item-category-62">
-                                    <a href="/category/%d8%a2%d8%af%d8%a7%d8%a8-%d9%88-%d8%b1%d8%b3%d9%88%d9%85/%d8%ba%d8%b0%d8%a7%d9%87%d8%a7%db%8c-%d9%85%d8%ad%d9%84%db%8c/">غذاهای
-                                        محلی</a>
-                                </li>
-                                <li id="menu-item-536"
-                                    class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-536 menu-item-category-67">
-                                    <a href="/category/%d8%a2%d8%af%d8%a7%d8%a8-%d9%88-%d8%b1%d8%b3%d9%88%d9%85/%d9%84%d8%a8%d8%a7%d8%b3-%d9%85%d8%ad%d9%84%db%8c/">لباس
-                                        محلی</a>
-                                </li>
-                                <li id="menu-item-535"
-                                    class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-535 menu-item-category-64">
-                                    <a href="/category/%d8%a2%d8%af%d8%a7%d8%a8-%d9%88-%d8%b1%d8%b3%d9%88%d9%85/%da%af%d9%88%db%8c%d8%b4-%d9%85%d8%ad%d9%84%db%8c/">گویش
-                                        محلی</a>
-                                </li>
-                                <li id="menu-item-531"
-                                    class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-531 menu-item-category-63">
-                                    <a href="/category/%d8%a2%d8%af%d8%a7%d8%a8-%d9%88-%d8%b1%d8%b3%d9%88%d9%85/%d8%a7%d8%b5%d8%b7%d9%84%d8%a7%d8%ad%d8%a7%d8%aa-%d9%85%d8%ad%d9%84%db%8c/">اصطلاحات
-                                        محلی</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li id="menu-item-3017"
-                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-3017">
-                            <a href="#" aria-haspopup="true">جشنواره و آیین </a>
-                            <ul class="sub-menu">
-                                <li id="menu-item-547"
-                                    class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-547 menu-item-category-60">
-                                    <a href="/category/%d8%ac%d8%b4%d9%86%d9%88%d8%a7%d8%b1%d9%87-%d9%87%d8%a7-%d9%88-%d8%a2%db%8c%db%8c%d9%86-%d9%87%d8%a7/%d8%b1%d8%b3%d9%88%d9%85-%d9%85%d8%ad%d9%84%db%8c/">رسوم
-                                        محلی</a>
-                                </li>
-                                <li id="menu-item-546"
-                                    class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-546 menu-item-category-57">
-                                    <a href="/category/%d8%ac%d8%b4%d9%86%d9%88%d8%a7%d8%b1%d9%87-%d9%87%d8%a7-%d9%88-%d8%a2%db%8c%db%8c%d9%86-%d9%87%d8%a7/%d8%ac%d8%b4%d9%86%d9%88%d8%a7%d8%b1%d9%87/">جشنواره</a>
-                                </li>
-                                <li id="menu-item-545"
-                                    class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-545 menu-item-category-58">
-                                    <a href="/category/%d8%ac%d8%b4%d9%86%d9%88%d8%a7%d8%b1%d9%87-%d9%87%d8%a7-%d9%88-%d8%a2%db%8c%db%8c%d9%86-%d9%87%d8%a7/%d8%aa%d9%88%d8%b1/">تور</a>
-                                </li>
-                                <li id="menu-item-548"
-                                    class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-548 menu-item-category-59">
-                                    <a href="/category/%d8%ac%d8%b4%d9%86%d9%88%d8%a7%d8%b1%d9%87-%d9%87%d8%a7-%d9%88-%d8%a2%db%8c%db%8c%d9%86-%d9%87%d8%a7/%da%a9%d9%86%d8%b3%d8%b1%d8%aa/">کنسرت</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li id="menu-item-549"
-                            class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-549 menu-item-category-51">
-                            <a href="/category/%d8%ad%d9%85%d9%84-%d9%88-%d9%86%d9%82%d9%84/" aria-haspopup="true">حمل و
-                                نقل </a>
-                            <ul class="sub-menu">
-                                <li id="menu-item-550"
-                                    class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-550 menu-item-category-54">
-                                    <a href="/category/%d8%ad%d9%85%d9%84-%d9%88-%d9%86%d9%82%d9%84/%d8%a7%d8%aa%d9%88%d8%a8%d9%88%d8%b3/">اتوبوس</a>
-                                </li>
-                                <li id="menu-item-551"
-                                    class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-551 menu-item-category-53">
-                                    <a href="/category/%d8%ad%d9%85%d9%84-%d9%88-%d9%86%d9%82%d9%84/%d9%82%d8%b7%d8%a7%d8%b1/">قطار</a>
-                                </li>
-                                <li id="menu-item-552"
-                                    class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-552 menu-item-category-55">
-                                    <a href="/category/%d8%ad%d9%85%d9%84-%d9%88-%d9%86%d9%82%d9%84/%d9%85%d8%a7%d8%b4%db%8c%d9%86-%d8%b3%d9%88%d8%a7%d8%b1%db%8c/">ماشین
-                                        سواری</a>
-                                </li>
-                                <li id="menu-item-553"
-                                    class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-553 menu-item-category-52">
-                                    <a href="/category/%d8%ad%d9%85%d9%84-%d9%88-%d9%86%d9%82%d9%84/%d9%87%d9%88%d8%a7%db%8c%db%8c/">هوایی</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li id="menu-item-8780"
-                            class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-8780 menu-item-category-6582">
-                            <a href="/category/%d8%a8%db%8c%d9%86-%d8%a7%d9%84%d9%85%d9%84%d9%84/" aria-haspopup="true">بین
-                                الملل </a>
-                            <ul class="sub-menu">
-                                <li id="menu-item-8781"
-                                    class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-8781 menu-item-category-6583">
-                                    <a href="/category/%d8%a8%db%8c%d9%86-%d8%a7%d9%84%d9%85%d9%84%d9%84/%d9%82%d8%a7%d8%b1%d9%87-%d8%a2%d8%b3%db%8c%d8%a7/">قاره
-                                        آسیا</a>
-                                </li>
-                                <li id="menu-item-10047"
-                                    class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-10047 menu-item-category-6998">
-                                    <a href="/category/%d8%a8%db%8c%d9%86-%d8%a7%d9%84%d9%85%d9%84%d9%84/%d9%82%d8%a7%d8%b1%d9%87-%d8%a7%d8%b1%d9%88%d9%be%d8%a7/">قاره
-                                        اروپا</a>
-                                </li>
-                                <li id="menu-item-10049"
-                                    class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-10049 menu-item-category-7121">
-                                    <a href="/category/%d8%a8%db%8c%d9%86-%d8%a7%d9%84%d9%85%d9%84%d9%84/%d9%82%d8%a7%d8%b1%d9%87-%d8%a2%d9%85%d8%b1%db%8c%da%a9%d8%a7/">قاره
-                                        آمریکا</a>
-                                </li>
-                                <li id="menu-item-10048"
-                                    class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-10048 menu-item-category-7076">
-                                    <a href="/category/%d8%a8%db%8c%d9%86-%d8%a7%d9%84%d9%85%d9%84%d9%84/%d9%82%d8%a7%d8%b1%d9%87-%d8%a7%d9%82%db%8c%d8%a7%d9%86%d9%88%d8%b3%db%8c%d9%87/">قاره
-                                        اقیانوسیه</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li id="menu-item-7398"
-                            class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-7398 menu-item-category-554">
-                            <a href="/category/%d8%b1%d8%a7%d9%87%d9%86%d9%85%d8%a7%db%8c-%da%af%d8%b1%d8%af%d8%b4%da%af%d8%b1%db%8c/%d8%a7%d8%ae%d8%a8%d8%a7%d8%b1-%da%af%d8%b1%d8%af%d8%b4%da%af%d8%b1%db%8c/"
-                               aria-haspopup="true">راهنمای گردشگری </a>
-                            <ul class="sub-menu">
-                                <li id="menu-item-7412"
-                                    class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7412 menu-item-category-1260">
-                                    <a href="/category/%d8%b1%d8%a7%d9%87%d9%86%d9%85%d8%a7%db%8c-%da%af%d8%b1%d8%af%d8%b4%da%af%d8%b1%db%8c/%d8%af%d8%a7%d9%86%d8%b4-%da%af%d8%b1%d8%af%d8%b4%da%af%d8%b1%db%8c/">دانش
-                                        گردشگری</a>
-                                </li>
-                                <li id="menu-item-7399"
-                                    class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7399 menu-item-category-1908">
-                                    <a href="/category/%d8%b1%d8%a7%d9%87%d9%86%d9%85%d8%a7%db%8c-%da%af%d8%b1%d8%af%d8%b4%da%af%d8%b1%db%8c/%d8%af%d8%a7%d9%86%d8%b4-%da%af%d8%b1%d8%af%d8%b4%da%af%d8%b1%db%8c/%d8%a7%d8%af%d8%a8%db%8c%d8%a7%d8%aa-%da%af%d8%b1%d8%af%d8%b4%da%af%d8%b1%db%8c/">ادبیات
-                                        گردشگری</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-                <hr/>
-                <div class="mobile-menu">
-                    <ul class="im-social-links-mobile clearfix">
-                        <li>
-                            <a href="https://www.facebook.com/Sahzde-Mosafer-1318952388224559/">
-                                <span class="im-facebook" title="فیسبوک">
-                                    <i class="fa fa-facebook"></i>
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span class="im-twitter" title="توییتر">
-                                    <i class="fa fa-twitter"></i>
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://plus.google.com/113786987503996741617">
-                                <span class="im-google" title="گوگل +">
-                                    <i class="fa fa-google-plus"></i>
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://www.linkedin.com/in/shazde-mosafer-652817143/">
-                                <span class="im-linkedin" title="لینکداین">
-                                    <i class="fa fa-linkedin"></i>
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://www.instagram.com/shazdehmosafer/?hl=en">
-                                <span class="im-instagram" title="اینستاگرام">
-                                    <i class="fa fa-instagram"></i>
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://t.me/shazdemosafer">
-                                <span class="im-telegram" title="تلگرام">
-                                    <i class="fa fa-paper-plane"></i>
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://www.pinterest.com/shazdemosafer/">
-                                <span class="im-aparat" title="آپارات">
-                                    <i class="fa fa-spinner"></i>
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span class="im-youtube" title="یوتیوب">
-                                    <i class="fa fa-youtube"></i>
-                                </span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
-    </div>
-
     <div class="container" style="direction: rtl">
         <div class="col-md-3 col-sm-12" style="padding-right: 0 !important;">
             <a href="{{route('mainArticle')}}">
@@ -496,11 +252,9 @@ $kindPlaceId = 10; ?>
                                         </div>
                                     </div>
                                 </div>
-                                <h3 class="im-entry-title">
-                                    <a href="{{$item->url}}" rel="bookmark">
-                                        {{$item->title}}
-                                    </a>
-                                </h3>
+                                <h1 class="im-entry-title">
+                                    {{$item->title}}
+                                </h1>
                             </div>
                         </div>
                         <div class="im-entry">
@@ -553,7 +307,7 @@ $kindPlaceId = 10; ?>
                             </div>
                             <div class="comments-link im-meta-item">
                                 <a href="">
-                                    <i class="fa fa-comment-o"></i>{{count($post->comments)}}
+                                    <i class="fa fa-comment-o"></i>{{$post->msg}}
                                 </a>
                             </div>
                             <div class="author vcard im-meta-item">
@@ -567,9 +321,9 @@ $kindPlaceId = 10; ?>
                             </div>
                         </div>
                     </div>
-                    <h3 class="im-entry-title">
-                        <a style="color: black" href="" rel="bookmark">{{$post->title}}</a>
-                    </h3>
+                    <h1 class="im-entry-title">
+                        {{$post->title}}
+                    </h1>
                 </div>
             </div>
             <div>
@@ -578,16 +332,16 @@ $kindPlaceId = 10; ?>
                 </div>
                 <div class="commentFeedbackChoices">
                     <div id="likeDiv" class="postsActionsChoices postLikeChoice col-xs-3" onclick="likePost(1, {{$post->id}})" style="color: {{$postLike == 1 ? 'red': ''}}">
-                        <span class="commentsLikeIconFeedback"></span>
+                        <span id="likeDivIcon" class="commentsLikeIconFeedback {{$postLike == 1 ? 'commentsLikeClickedIconFeedback': ''}}"></span>
                         <span class="mg-rt-20 cursor-pointer">دوست داشتم</span>
                     </div>
                     <div id="disLikeDiv" class="postsActionsChoices postDislikeChoice col-xs-3" onclick="likePost(0, {{$post->id}})" style="color: {{$postLike == 0 ? 'darkred': ''}}">
-                        <span class="commentsDislikeIconFeedback"></span>
+                        <span id="disLikeDivIcon" class="commentsDislikeIconFeedback {{$postLike == 0 ? 'commentsDislikeClickedIconFeedback': ''}}"></span>
                         <span class="mg-rt-20 cursor-pointer">دوست نداشتم</span>
                     </div>
                     <div class="postsActionsChoices postCommentChoice col-xs-3">
-                        <span class="showCommentsIconFeedback" onclick="showPostsComments(this)"></span>
-                        <span class="mg-rt-20 cursor-pointer" onclick="showPostsComments(this)">مشاهده نظرها</span>
+                        <span class="showCommentsIconFeedback" onclick="showPostsComments(0)"></span>
+                        <span class="mg-rt-20 cursor-pointer" onclick="showPostsComments(0)">مشاهده نظرها</span>
                     </div>
                     <div class="postsActionsChoices postShareChoice col-xs-3">
                         <span class="commentsShareIconFeedback"></span>
@@ -600,10 +354,67 @@ $kindPlaceId = 10; ?>
                     نفر دوست داشتند،
                     <span id="countDisLike">{{$post->disLike}}</span>
                     نفر دوست نداشتند و
-                    <span>{{count($post->comments)}}</span>
+                    <span>{{$post->msg}}</span>
                     نفر نظر دادند.
                 </div>
             </div>
+        </div>
+
+        <div class="col-md-3"></div>
+        <div class="col-md-9 col-sm-12 gnWhiteBox">
+
+            <div id="commentDiv0" style="display: none">
+                <div id="commentMainDiv##id##" class="eachCommentMainBox" style="margin-top: 20px; margin-right: ##mRight##;">
+                    <div class="circleBase type2 commentsWriterProfilePic">
+                        <img src="##userPic##" style="width: 100%; height: 100%; border-radius: 50%;">
+                    </div>
+                    <div class="commentsContentMainBox">
+                        <b class="userProfileName display-inline-block">##username##</b>
+                        <p>##msg##</p>
+                        <div class="commentsStatisticsBar">
+                            <div class="float-right display-inline-black">
+                                <span id="commentLikeCount##id##" class="likeStatisticIcon commentsStatisticSpan color-red">##likeCount##</span>
+                                <span id="commentDisLikeCount##id##" class="dislikeStatisticIcon commentsStatisticSpan dark-red">##disLikeCount##</span>
+                                <span class="numberOfCommentsIcon commentsStatisticSpan color-blue">##ans##</span>
+                            </div>
+                            <div class="dark-blue float-left display-inline-black cursor-pointer" onclick="showPostsComments(##id##)" style="display: ##haveAnsDisplay##;">دیدن پاسخ‌ها</div>
+                        </div>
+                    </div>
+                    <div class="commentsActionsBtns">
+                        <div onclick="likeComment(##id##, 1, this);">
+                            <span class="likeActionBtn ##showLike##"></span>
+                        </div>
+                        <div onclick="likeComment(##id##, 0, this);">
+                            <span class="dislikeActionBtn ##showDisLike##"></span>
+                        </div>
+
+                        <div class="clear-both"></div>
+                        <b class="replyBtn" onclick="replyToComments(this)">پاسخ دهید</b>
+                    </div>
+                    <div class="replyToCommentMainDiv" style="display: none">
+                        <div class="circleBase type2 newCommentWriterProfilePic">
+                            <img src="##authPic##" style="width: 100%; height: 100%; border-radius: 50%;">
+                        </div>
+                        <div class="inputBox">
+                            <b class="replyCommentTitle">در پاسخ به نظر ##username##</b>
+                            <textarea id="ansForReviews_1043" class="inputBoxInput inputBoxInputComment" placeholder="شما چه نظری دارید؟" onclick="checkLogin()"></textarea>
+                            <button class="btn btn-primary" onclick="sendComment(##postId##, ##id##, this)"> ارسال</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="commentDiv##id##" style="display: none"></div>
+            </div>
+            <div class="newCommentPlaceMainDiv">
+                <div class="circleBase type2 newCommentWriterProfilePic">
+                    <img src="{{$uPic}}" style="">
+                </div>
+                <div class="inputBox">
+                    <b class="replyCommentTitle">نظر خود را در مورد مقاله با ما در میان بگذارید</b>
+                    <textarea class="inputBoxInput inputBoxInputComment" id="ansForReviews_1038" placeholder="شما چه نظری دارید؟" onclick="checkLogin()"></textarea>
+                    <button class="btn btn-primary" onclick="sendComment({{$post->id}}, 0, this)"> ارسال</button>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
@@ -633,142 +444,24 @@ $kindPlaceId = 10; ?>
     @include('layouts.loginPopUp')
 @endif
 
-
 <script>
-
-    $(".login-button").click(function () {
-        $(".dark").show();
-        showLoginPrompt('{{Request::url()}}');
-    });
-
-    function hideElement(e) {
-        $(".dark").hide(), $("#" + e).addClass("hidden")
-    }
-
-    function showElement(e) {
-        $("#" + e).removeClass("hidden"), $(".dark").show()
-    }
-
     var category = {!! $category !!}
     var post = {!! $post !!}
     var getLisPostUrl = '{{route("article.list")}}';
     var likeCount = {{$post->like}};
     var disLikeCount = {{$post->disLike}};
     var uLike = {{$postLike}};
-
-    function createCategoryList(){
-        for(var i = 0; i < category.length; i++){
-            var text = '<div class="gnColOFContentsCategory">\n' +
-                '<div>\n' +
-                '<div>\n' +
-                '<span id="CategoryName_' + category[i]["id"] + '" class="gnTitleOfPlaces" onclick="searchInCategory(this)"  style="cursor: pointer">' + category[i]["name"] + '</span>\n' +
-                '<span class="gnNumberOfPlaces">' + category[i]["postCount"] + '</span>\n' +
-                '</div>\n';
-
-            if(category[i]["subCategory"].length > 0)
-                text +='<ul class="gnUl">\n';
-
-            for(var j = 0; j < category[i]["subCategory"].length; j++){
-                var sub = category[i]["subCategory"][j];
-                text += '<li class="gnLi">\n' +
-                        '<span id="CategoryName_' + sub["id"] + '" onclick="searchInCategory(this)" style="cursor: pointer">' + sub["name"] + '</span>\n' +
-                        '<span class="gnNumberOfPlaces">' + sub["postCount"] + '</span>\n' +
-                        '</li>\n';
-            }
-            if(category[i]["subCategory"].length > 0)
-                text += '</ul>\n';
-
-            text +='</div>\n' +
-                '</div>';
-
-            if(i % 4 == 0 || i % 4 == 3)
-                $("#rightCategory").append(text);
-            else
-                $("#leftCategory").append(text);
-        }
-
-        showPostCategoryInList();
-    }
-    createCategoryList();
-
-    function showPostCategoryInList(){
-        console.log(post)
-        for(var i = 0; i < post['category'].length; i++){
-            $('#CategoryName_' + post['category'][i]['categoryId']).css('color', '#4dc7bc');
-        }
-    }
-
-    function searchInArticle(id){
-        var text = $('#'+id).val();
-        if(text.trim().length != 0){
-            window.location.href = getLisPostUrl + '/content/' + text;
-        }
-    }
-
-    function searchInCategory(element){
-        var text = $(element).text();
-        if(text.trim().length != 0)
-            window.location.href = getLisPostUrl + '/category/' + text;
-    }
-
-    function checkLogin(){
-        if (!'{{auth()->check()}}') {
-            showLoginPrompt('{{Request::url()}}');
-            return false;
-        }
-        else
-            return true;
-    }
-
-    function likePost(_like, _id){
-        if(!checkLogin())
-            return;
-
-        $.ajax({
-            type: 'post',
-            url: '{{route("article.like")}}',
-            data:{
-                _token: '{{csrf_token()}}',
-                like: _like,
-                id: _id
-            },
-            success: function(response){
-                if(response == 'ok'){
-                    document.getElementById('likeDiv').style.color = '#666666';
-                    document.getElementById('disLikeDiv').style.color = '#666666';
-
-                    if(_like == 1) {
-                        document.getElementById('likeDiv').style.color = 'red';
-                        likeCount++;
-                        $('#countLike').text(likeCount)
-                    }
-                    else {
-                        document.getElementById('disLikeDiv').style.color = 'darkred';
-                        disLikeCount++
-                        $('#countDisLike').text(disLikeCount);
-                    }
-
-                    if(uLike == 1) {
-                        likeCount--;
-                        $('#countLike').text(likeCount);
-                    }
-                    else if(uLike == 0) {
-                        disLikeCount--;
-                        $('#countDisLike').text(disLikeCount);
-                    }
-
-                    uLike = _like;
-
-                }
-            },
-            error: function (response) {
-                console.log(response)
-            }
-        })
-    }
-
-
+    var _token= '{{csrf_token()}}';
+    var likeArticleUrl = '{{route("article.like")}}';
+    var hasLogin = '{{auth()->check()}}';
+    var requestUrl = '{{Request::url()}}';
+    var commentStoreUrl = '{{route("article.comment.store")}}';
+    var likeCommentUrl = '{{route("article.comment.like")}}';
+    var comments = {!! $comments !!};
+    var userPic = '{{$uPic}}';
 </script>
+
+<script src="{{URL::asset('/js/article/articlePage.js')}}"></script>
 
 <div class="ui_backdrop dark" style="display: none; z-index: 10000000;"></div>
 

@@ -135,7 +135,21 @@
                                 </div>
                                 <div class="ui_columns datepicker_box trip_search metaDatePicker rounded_lockup usePickerTypeIcons preDates noDates with_children mainDivSearchInputMainPage">
                                     <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column is-4 search_typeahead wctx-tripsearch searchDivForScrollClass mainSearchDivPcSize">
-                                        <div onclick="$('#searchPane').removeClass('hidden');  $('#darkModeMainPage').toggle();">به کجا می‌روید؟</div>
+                                        @if($kindPlaceId == 0)
+                                            <div onclick="$('#searchPane').removeClass('hidden');  $('#darkModeMainPage').toggle();">به کجا می‌روید؟</div>
+                                        @elseif($kindPlaceId == 1)
+                                            <div onclick="$('#searchPane').removeClass('hidden');  $('#darkModeMainPage').toggle();">کدام جاذبه را می‌خواهید تجربه کنید؟</div>
+                                        @elseif($kindPlaceId == 3)
+                                            <div onclick="$('#searchPane').removeClass('hidden');  $('#darkModeMainPage').toggle();">در کدام رستوران دوست دارید غذا بخورید؟</div>
+                                        @elseif($kindPlaceId == 4)
+                                            <div onclick="$('#searchPane').removeClass('hidden');  $('#darkModeMainPage').toggle();">در کدام هتل دوست دارید اقامت کنید؟</div>
+                                        @elseif($kindPlaceId == 6)
+                                            <div onclick="$('#searchPane').removeClass('hidden');  $('#darkModeMainPage').toggle();">کدام ماجرا را می‌خواهید تجربه کنید؟</div>
+                                        @elseif($kindPlaceId == 10)
+                                            <div onclick="$('#searchPane').removeClass('hidden');  $('#darkModeMainPage').toggle();">کدام صنایع دستی را دوست دارید بشناسید؟</div>
+                                        @elseif($kindPlaceId == 11)
+                                            <div onclick="$('#searchPane').removeClass('hidden');  $('#darkModeMainPage').toggle();">کدام غذای محلی را می‌خواهید تجربه کنید؟</div>
+                                        @endif
                                     </div>
                                     <div class="clear-both"></div>
                                 </div>
@@ -180,10 +194,36 @@
         <div id="searchDivForScroll" class="prw_rup prw_search_typeahead spSearchDivForScroll">
             <div class="ui_picker">
                 <div class="typeahead_align ui_typeahead full-width display-flex">
-                    <div class="spGoWhere">به کجا</div>
 
-                    <input onkeyup="search(event, this.value)" type="text" id="placeName"
-                           class="typeahead_input searchPaneInput" placeholder="دوست دارید سفر کنید؟"/>
+                    @if($placeMode == 'hotel')
+                        <div class="spGoWhere">در کدام هتل</div>
+                        <input onkeyup="search(event, this.value)" type="text" id="placeName"
+                               class="typeahead_input searchPaneInput" placeholder="دوست دارید اقامت کنید؟"/>
+                    @elseif($placeMode == 'amaken')
+                        <div class="spGoWhere">کدام جاذبه</div>
+                        <input onkeyup="search(event, this.value)" type="text" id="placeName"
+                               class="typeahead_input searchPaneInput" placeholder="را می‌خواهید تجربه کنید؟"/>
+                    @elseif($placeMode == 'restaurant')
+                        <div class="spGoWhere">در کدام رستوران</div>
+                        <input onkeyup="search(event, this.value)" type="text" id="placeName"
+                               class="typeahead_input searchPaneInput" placeholder="دوست دارید غذا بخورید؟"/>
+                    @elseif($placeMode == 'mahaliFood')
+                        <div class="spGoWhere">کدام غذای محلی</div>
+                        <input onkeyup="search(event, this.value)" type="text" id="placeName"
+                               class="typeahead_input searchPaneInput" placeholder="را می‌خواهید تجربه کنید؟"/>
+{{--                    @elseif($placeMode == 'majara')--}}
+{{--                        <div class="spGoWhere"></div>--}}
+{{--                        <input onkeyup="search(event, this.value)" type="text" id="placeName"--}}
+{{--                               class="typeahead_input searchPaneInput" placeholder="دوست دارید به کدام هتل کنید؟"/>--}}
+                    @elseif($placeMode == 'sogatsanaie')
+                        <div class="spGoWhere">کدام صنایع‌دستی</div>
+                        <input onkeyup="search(event, this.value)" type="text" id="placeName"
+                               class="typeahead_input searchPaneInput" placeholder="را دوست دارید بشناسید؟"/>
+                    @else
+                        <div class="spGoWhere">به کجا</div>
+                        <input onkeyup="search(event, this.value)" type="text" id="placeName"
+                               class="typeahead_input searchPaneInput" placeholder="دوست دارید سفر کنید؟"/>
+                    @endif
 
                     <input type="hidden" id="placeId">
                 </div>
@@ -283,7 +323,7 @@
 
     <div class="ui_backdrop dark" id="darkModeMainPage"></div>
 
-{{--@include('layouts.phonePopUp')--}}
+{{--@include('errors.alerts')--}}
 
 <script defer>
     var passenger = 0;

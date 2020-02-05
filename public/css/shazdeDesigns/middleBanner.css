@@ -54,9 +54,10 @@
     margin-top: -15px;
 }
 
-.boxOFSqureDiv {
+.boxOFSquareDiv {
     display: flex;
     justify-content: center;
+    margin-bottom: 40px;
 }
 
 .squareDiv {
@@ -115,10 +116,6 @@ DIV.prw_rup.prw_shelves_shelf_widget .shelf_container.rebrand .shelf_header .she
     color: #fadba0;
 }
 
-DIV.prw_rup.prw_shelves_rebrand_poi_shelf_item_widget {
-    box-shadow: inset 0 0 17px 0;
-}
-
 DIV.prw_rup.prw_shelves_rebrand_poi_shelf_item_widget .thumbnail {
     padding: 0;
 }
@@ -144,8 +141,8 @@ DIV.prw_rup.prw_shelves_shelf_widget .shelf_container.rebrand .shelf_header .she
 }
 
 #newKoochita, #foodSuggestion, #tabiatSuggestion, #safaranameSuggestions,
-#restaurantSuggestion, #tarikhiSuggestion, #kharidSuggestion {
-    margin: 20px 0;
+#restaurantSuggestion, #tarikhiSuggestion, #kharidSuggestion, #articleSuggestion {
+    margin: 40px 0;
     padding: 20px 20px;
     background: #4a4a4a;
 }
@@ -198,30 +195,48 @@ DIV.ppr_rup.ppr_priv_homepage_shelves .homepage_shelves_widget .prw_shelves_shel
 .middleBannerPhotoBanner {
     width: 96%;
     height: 220px;
-    margin: 30px 2% 10px;
+    margin: 0 2%;
     background-color: #0076a3;
 }
 
+.middleBannerDoublePhotoBanner .middleBannerPhotoBanner {
+    width: 46%;
+    height: 220px;
+    margin: 0 2%;
+    background-color: #0076a3;
+    display: inline-block;
+}
+
 .mainPageStatistics {
-    display: flex;
+    /*display: flex;*/
     align-items: center;
-    margin: 10px 1%;
+    margin: 0 1%;
     padding: 20px 0;
     justify-content: center;
     background-color: white;
     direction: rtl;
+    overflow-x: auto;
+    white-space: nowrap;
 }
 
 .eachPartStatistic {
-    width: 11%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: inline-block;
+    width: 9%;
+    margin: 0 0.85%;
+}
+
+.eachPartStatistic:first-child {
+    margin-right: 2%;
+}
+
+.eachPartStatistic:last-child {
+    margin-right: 2%;
 }
 
 .eachPartStatistic > div:first-child,
 .eachPartStatistic > div:last-child {
     color: #0076a3;
+    text-align: center;
 }
 
 .eachPartStatisticNums {
@@ -304,6 +319,107 @@ DIV.ppr_rup.ppr_priv_homepage_shelves .homepage_shelves_widget .prw_shelves_shel
     cursor: default;
 }
 
+.stripedBannerMainDiv {
+    overflow-x: auto;
+    white-space: nowrap;
+    overflow-y: hidden;
+    direction: rtl;
+}
+
+.stripedBackgroundDiv {
+    background-image: linear-gradient(
+            45deg,
+            #ffffff 12.50%,
+            #0076a3 12.50%,
+            #0076a3 25%,
+            #ffffff 25%,
+            #ffffff 37.50%,
+            #93331f 37.50%,
+            #93331f 50%,
+            #ffffff 50%,
+            #ffffff 62.50%,
+            #0076a3 62.50%,
+            #0076a3 75%,
+            #ffffff 75%,
+            #ffffff 87.50%,
+            #93331f 87.50%,
+            #93331f 100%
+    );
+    background-size: 100px 100px;
+    height: 200px;
+    padding: 15px;
+    width: 483px;
+    display: inline-block;
+}
+
+.innerStripedBackGround {
+    background: white;
+    height: 100%;
+    width: 100%;
+    box-shadow: inset 0 0 8px 0;
+}
+
+.footerBarSpacer {
+    width: 100%;
+    height: 70px;
+    display: none;
+}
+
+.mainSuggestionMainDiv #tabiatSuggestion {
+    margin-bottom: 25px;
+}
+
+.siteArticlesMainDiv {
+    margin: 0 10px;
+    overflow-x: auto;
+    white-space: nowrap;
+    direction: rtl;
+    padding: 15px 8px 5px;
+}
+
+.mainSuggestionMainDiv #restaurantSuggestion {
+    margin-top: 35px;
+}
+
+.articleBoxes {
+    background-color: #ffe8e8;
+    border-radius: 10px;
+    display: inline-block;
+    width: 215px;
+    height: 200px;
+    position: relative;
+    box-shadow: 0 0 13px 0;
+    margin: 0 9px;
+    cursor: pointer;
+}
+
+.articleTitle {
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 0;
+    border-radius: 10px 10px 0 0;
+    width: 100%;
+    padding: 5px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.articleLink {
+    text-decoration: none;
+    background-color: rgba(240, 173, 78, 0.3);
+    position: absolute;
+    border-bottom: 0;
+    left: 0;
+    bottom: 0;
+    border-radius: 0 0 0 10px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.articleLink:hover {
+    text-decoration: none;
+}
+
 @media (max-width: 1188px) {
     .middleBannerPhotoDiv .clear-both {
         display: none;
@@ -311,6 +427,36 @@ DIV.ppr_rup.ppr_priv_homepage_shelves .homepage_shelves_widget .prw_shelves_shel
 
     .middleBannerPhotoDiv .smallOne:last-child {
         margin-right: 10px;
+    }
+}
+
+@media (max-width: 1024px) {
+
+    .middleBannerDoublePhotoBanner {
+        overflow-x: auto;
+        white-space: nowrap;
+        direction: rtl;
+    }
+
+    .middleBannerDoublePhotoBanner .middleBannerPhotoBanner {
+        width: 450px;
+    }
+}
+
+@media (max-width: 992px) {
+
+    .eachPartStatistic {
+        width: 50px;
+        display: inline-block;
+        margin: 0 24px;
+    }
+
+    .eachPartStatistic:first-child {
+        margin-right: 40px;
+    }
+
+    .eachPartStatistic:last-child {
+        margin-left: 40px;
     }
 }
 
@@ -328,6 +474,9 @@ DIV.ppr_rup.ppr_priv_homepage_shelves .homepage_shelves_widget .prw_shelves_shel
         margin: 0 -8px !important;
     }
 
+    .footerBarSpacer {
+        display: block;
+    }
 }
 
 @media (max-width: 480px) {

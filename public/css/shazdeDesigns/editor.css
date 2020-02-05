@@ -1,5 +1,57 @@
 /*1st box of styles*/
 
+.errorField {
+    background-color: #f26C4F;
+}
+
+.rotateRight {
+    width: 22px;
+    height: 24px;
+    margin: 2px 3px;
+    background: url('../../images/reloadRight.png');
+    background-size: contain;
+}
+
+.rotateLeft {
+    width: 22px;
+    height: 24px;
+    margin: 2px 3px;
+    background: url('../../images/reloadLeft.png');
+    background-size: contain;
+}
+
+.flipHorizontal {
+    width: 22px;
+    height: 22px;
+    margin: 3px 3px;
+    background: url('../../images/flip.png');
+    background-size: contain;
+}
+
+.flipVertical {
+    width: 22px;
+    height: 24px;
+    margin: 2px 3px;
+    background: url('../../images/reflect.png');
+    background-size: contain;
+}
+
+.cropping {
+    width: 22px;
+    height: 23px;
+    margin: 3px 3px;
+    background: url('../../images/crop.png');
+    background-size: contain;
+}
+
+.clearing {
+    width: 23px;
+    height: 23px;
+    margin: 2px 3px;
+    background: url('../../images/settings.png');
+    background-size: contain;
+}
+
 .innerPic {
     background: url("http://localhost:8080/static/images/bck.png");
     width: 300px;
@@ -9,11 +61,14 @@
     left: 7%;
     top: 15%;
 }
+
 .termsLabel {
     display: inline-block;
 }
+
 .uploadBtn {
     padding: 3px 15px;
+    margin-right: 5px;
 }
 
 /*2nd box of styles*/
@@ -24,16 +79,19 @@
     margin: 7px 0px;
     font-weight: 500;
 }
+
 .epRedNotice {
     font-size: 0.9em;
     color: #963019;
 }
+
 .epBlackNotice {
     font-size: 0.9em;
     margin: 5px 0;
 }
+
 .epInputBox {
-    width: 80%;
+    width: 85%;
     display: inline-block;
     padding: 2px 7px;
     border: 1px solid #cccccc;
@@ -42,23 +100,27 @@
     line-height: 30px;
     margin: 0 0 10px;
 }
+
 .epInputBoxText {
     padding-left: 15px;
     border-left: 1px solid #d8d8d8;
     display: inline-block;
 }
+
 .epInputBoxInput {
-    width: 70%;
+    width: 60%;
     padding-left: 3%;
     text-align: center;
     border: none;
     float: left;
     background-color: transparent;
 }
+
 .epInputBoxRequired {
     display: inline-block;
     position: relative
 }
+
 .epInputIconRequired {
     font-size: 0.5em;
     color: #92321b;
@@ -66,7 +128,8 @@
     top: -5px;
     left: -10px;
 }
-.epAddresText{
+
+.epAddresText {
     width: 100%;
     height: 120px;
     resize: none;
@@ -74,6 +137,7 @@
     background-color: #EEEEEE;
     padding: 8px;
 }
+
 .epAddPlace {
     background: #4DC7BC;
     border-color: #4DC7BC;
@@ -81,20 +145,24 @@
     float: left;
     padding: 7px;
 }
+
 .epPicBox {
     padding: 7px;
     border: 1px solid #cccccc;
     border-radius: 5px;
 }
+
 .epPic {
     background-color: #e5e5e5;
     border: 1px solid #cccccc;
     border-radius: 5px;
 }
+
 .epEditPicText {
     text-align: left;
     color: #30b4a6;
 }
+
 .epPicText {
     padding: 5px 0;
 }
@@ -107,13 +175,14 @@
     line-height: 48px;
     background: #4DC7BC;
 }
+
 .epHeaderBar h3 {
     float: right;
     position: relative;
     color: #000;
     font-size: 14px;
     line-height: 48px;
-    padding-right:14px;
+    padding-right: 14px;
     max-width: 65%;
     overflow: hidden;
     white-space: nowrap;
@@ -133,10 +202,13 @@
 .docs-buttons {
     padding: 10px 0;
     border-top: 1px solid #cccccc;
+    display: flex;
+    align-items: center;
 }
 
 .editBtnsGroup {
-    display: inline-block;
+    display: flex;
+    align-items: center;
     vertical-align: middle;
     margin: 0 7px;
 }
@@ -153,7 +225,7 @@
     float: left;
 }
 
-.editSection{
+.editSection {
     padding: 0;
     width: 50%;
     right: auto;
@@ -162,19 +234,10 @@
     position: fixed;
     left: 25%;
 }
+
 .editSection > div:nth-child(1) > div:nth-child(1) {
     max-height: 600px;
     overflow: auto
-}
-
-#editPane {
-    padding: 0;
-    width: 50%;
-    right: auto;
-    /*height: 90%;*/
-    top: 5%;
-    position: fixed;
-    left: 25%;
 }
 
 #editPane > div:nth-child(1) > div:nth-child(1) {
@@ -186,18 +249,25 @@
     margin: 20px
 }
 
-#photoEditor {
+#photoEditor, #editPane {
     padding: 0;
-    width: 860px;
-    height: 90%;
-    top: 5%;
+    /*width: 860px;*/
+    /*height: 90%;*/
+    top: 15%;
+    bottom: 15%;
     position: fixed;
-    left: 50%;
-    margin-left: -430px;
+    left: 25%;
+    right: 25%;
+    /*margin-left: -430px;*/
 }
 
-#photoUploadHeader , .photoUploadHeader {
-   color: white;
+#editPane {
+    top: 5% !important;
+    bottom: 5% !important;
+}
+
+#photoUploadHeader, .photoUploadHeader {
+    color: white;
 }
 
 .ui_close_x {
@@ -218,17 +288,89 @@
 }
 
 #uploader-dlg {
-    /*overflow: auto;*/
-    /*max-height: 100%*/
+    overflow: auto;
+    max-height: 93%;
+}
+
+.itemRow .row {
+    margin: 0;
+    padding: 12px 0 0;
+}
+
+.itemRow .row .col-xs-5 {
+    padding: 15px;
+    float: right;
+}
+
+.itemRow .row .col-xs-7 {
+    padding: 15px;
+    border-left: 1px solid #cccccc;
+    float: right;
+}
+
+.itemRow .row .col-xs-7 .epPicBox:first-child {
+    width: 232px;
+    display: inline-block;
+}
+
+.itemRow .row .col-xs-7 .epPicBox:nth-child(2) {
+    width: 119px;
+    display: inline-block;
+}
+
+.itemRow .row .col-xs-7 div:last-child {
+    margin: 10px 0;
+    text-align: justify
+}
+
+#photoEditor .secondStepFooter {
+    /*display: flex;*/
+    /*align-items: flex-start;*/
+}
+
+.secondStepFooter .termsLabel > div {
+    display: flex;
+}
+
+.secondStepPolicyCheckBox {
+    display: flex;
+    padding-top: 5px;
+}
+
+.secondStepPolicyText {
+    padding: 0 5px 0 10px;;
+    text-align: justify;
+    font-size: 12px;
+    line-height: 2;
+}
+
+.secondFooterVerification {
+    position: relative;
+}
+
+.imageVerificationBtn {
+    position: absolute;
+    top: -35px;
+    width: 71px;
+    left: 10px;
+}
+
+.imageVerificationBtn > button {
+    border: none;
+    border-radius: 4px;
+    padding: 5px 8px;
+    background: #93331f;
+    color: white;
+    font-weight: 700;
 }
 
 /*#uploader-dlg > div:nth-child(1) > div:nth-child(1) {*/
-    /*max-width: 100%*/
+/*max-width: 100%*/
 /*}*/
 
 /*#uploader-dlg > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) {*/
-    /*width: 250px;*/
-    /*height: 200px*/
+/*width: 250px;*/
+/*height: 200px*/
 /*}*/
 
 #rectanglePicPhotographer {
@@ -238,8 +380,8 @@
 }
 
 /*#uploader-dlg > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) {*/
-    /*width: 150px;*/
-    /*height: 150px;*/
+/*width: 150px;*/
+/*height: 150px;*/
 /*}*/
 
 #squarePicPhotographer {
@@ -249,11 +391,11 @@
 }
 
 /*#uploader-dlg > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) {*/
-    /*margin-right: 30px*/
+/*margin-right: 30px*/
 /*}*/
 
 /*#uploader-dlg > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > form {*/
-    /*margin-left: 30px*/
+/*margin-left: 30px*/
 /*}*/
 
 #photoTags {
@@ -278,5 +420,188 @@
 }
 
 /*#dropArea > div:nth-child(1) > div:nth-child(1) > label > div {*/
-    /*z-index: 1000*/
+/*z-index: 1000*/
 /*}*/
+
+#dropArea > .footer > div > div {
+    margin: 5px 0;
+}
+
+#dropArea > .footer > div > div > div {
+    display: inline-block;
+    padding: 0px 5px;
+    text-align: justify;
+}
+
+#dropArea > .footer > div > div > div > div {
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+#photoUploadTipsLink > span:first-child {
+    color: #16174f;
+}
+
+.dragPhotosMainDiv {
+    height: 200px;
+    border: 2px dashed #9996;
+    margin: 20px 60px 10px;
+}
+
+#photoEditor .ui_close_x, #editPane .ui_close_x {
+    right: initial;
+    left: 0;
+}
+
+.bodyEditFrame {
+    overflow: auto;
+    max-height: 93%;
+}
+
+.bodyEditFrame .row {
+    margin: 0;
+}
+
+.bodyEditFrame .return {
+    float: left;
+}
+
+.returnBtnEditPhoto {
+    border-radius: 4px;
+    background-color: #93331f;
+    color: white;
+    padding: 3px 15px;
+    font-size: 14px;
+    border: 1px solid transparent;
+    line-height: 17px;
+    cursor: pointer;
+}
+
+@media (max-width: 1340px) {
+    #photoEditor, #editPane {
+        left: 20%;
+        right: 20%;
+    }
+}
+
+@media (max-width: 1120px) {
+    #photoEditor, #editPane {
+        left: 15%;
+        right: 15%;
+    }
+}
+
+@media (max-width: 960px) {
+    #photoEditor, #editPane {
+        left: 10%;
+        right: 10%;
+    }
+}
+
+@media (max-width: 850px) {
+    #photoEditor, #editPane {
+        left: 5%;
+        right: 5%;
+    }
+}
+
+@media (max-width: 751px) {
+    #photoEditor, #editPane {
+        left: 1%;
+        right: 1%;
+    }
+}
+
+@media (max-width: 691px) {
+    #photoEditor, #editPane {
+        left: 10%;
+        right: 10%;
+        top: 10%;
+        bottom: 20%;
+    }
+
+    .itemRow .row .col-xs-7 {
+        border-left: none;
+        border-bottom: 1px solid #cccccc;
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 0 5%;
+    }
+
+    .itemRow .row .col-xs-5 {
+        width: 90%;
+        margin: 0 5%;
+        padding: 15px 15px 35px;
+    }
+
+    .uploaderDlg .startScreen .dragDropText {
+        margin: 40px 30px 50px;
+    }
+}
+
+@media (max-width: 552px) {
+
+    .itemRow .row {
+        padding: 0;
+    }
+
+    .itemRow .row .col-xs-7 {
+        width: 96%;
+        margin: 0 2%;
+    }
+
+    .itemRow .row .col-xs-7 div:last-child {
+        margin: 10px 0 0;
+    }
+
+    #photoEditor, #editPane {
+        left: 5%;
+        right: 5%;
+    }
+
+    .bodyEditFrame .row {
+        margin: 40px 0 0;
+    }
+}
+
+@media (max-width: 456px) {
+
+    #photoEditor, #editPane {
+        left: 1%;
+        right: 1%;
+    }
+
+    .itemRow .row .col-xs-7 > div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /*.bodyEditFrame .row {*/
+    /*    margin: 55px 0 0;*/
+    /*}*/
+}
+
+@media (max-width: 440px) {
+    .uploadBtn {
+        margin: 0 5px 5px 0;
+    }
+}
+
+@media (max-width: 370px) {
+
+    .docs-buttons {
+        display: inherit;
+    }
+
+    .editBtnsGroup {
+        display: inline-block;
+    }
+
+    .btnActionEditFrame {
+        margin-top: 10px;
+    }
+}

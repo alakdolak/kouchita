@@ -4,6 +4,9 @@ use App\models\ConfigModel;
 use Illuminate\Support\Facades\Route;
 
 Route::get('databaseforall', function (){
+//    ALTER TABLE `postComment` CHANGE `supervisorId` `ansTo` INT(11) NULL DEFAULT NULL;
+//    postCommentLike table
+//    ALTER TABLE `postcomment` ADD `haveAns` TINYINT(1) NOT NULL DEFAULT '0' AFTER `ansTo`;
 });
 
 Route::get('fillHotelPic', function(){
@@ -891,6 +894,10 @@ Route::group(array('middleware' => 'nothing'), function () {
     Route::get('/article/{slug}', 'PostController@showArticle')->name('article.show');
 
     Route::post('/article/like', 'PostController@LikeArticle')->name('article.like');
+
+    Route::post('/article/comment/store', 'PostController@StoreArticleComment')->name('article.comment.store');
+
+    Route::post('/article/comment/like', 'PostController@likeArticleComment')->name('article.comment.like');
 
     Route::get('userArticles', function(){
         return view('userActivities.userArticles');

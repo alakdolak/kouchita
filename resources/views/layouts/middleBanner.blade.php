@@ -190,56 +190,33 @@
 {{--                </div>--}}
 {{--            </div>--}}
 {{--        </div>--}}
-        <div class="middleBannerPhotoDiv">
-            <div>
-                <div class="smallOne">
-                    <img src="">
-                </div>{{--
-            --}}<div class="middleOne">
-                    <img src="">
-                </div>{{--
-            --}}<div class="largeOne">
-                    <img src="">
-                </div>{{--
-            --}}<div class="clear-both"></div>{{--
-            --}}<div class="largeOne">
-                    <img src="">
-                </div>{{--
-            --}}<div class="middleOne">
-                    <img src="">
-                </div>{{--
-            --}}<div class="smallOne">
-                    <img src="">
-                </div>
-            </div>
-        </div>
 
         <div class="hideOnScreen row">
-            <div class="boxOFSqureDiv">
+            <div class="boxOFSquareDiv">
 
-{{--                @if($placeMode == "hotel")--}}
-{{--                    <div class="squareDivSelected" onclick="$('#phoneSearchPopUp').removeClass('hidden')">--}}
-{{--                        <div class="phoneIcon ghazamahali"></div>--}}
-{{--                        <div class="textIcon">غذای محلی</div>--}}
-{{--                    </div>--}}
-{{--                @else--}}
-                    <div class="squareDiv" onclick="$('#phoneSearchPopUp').removeClass('hidden')">
-                        <div class="phoneIcon ghazamahali"></div>
-                        <div class="textIcon">غذای محلی</div>
-                    </div>
-{{--                @endif--}}
+                {{--                @if($placeMode == "hotel")--}}
+                {{--                    <div class="squareDivSelected" onclick="$('#phoneSearchPopUp').removeClass('hidden')">--}}
+                {{--                        <div class="phoneIcon ghazamahali"></div>--}}
+                {{--                        <div class="textIcon">غذای محلی</div>--}}
+                {{--                    </div>--}}
+                {{--                @else--}}
+                <div class="squareDiv" onclick="$('#phoneSearchPopUp').removeClass('hidden')">
+                    <div class="phoneIcon ghazamahali"></div>
+                    <div class="textIcon">غذای محلی</div>
+                </div>
+                {{--                @endif--}}
 
-{{--                @if($placeMode == "hotel")--}}
-{{--                    <div class="squareDivSelected" onclick="$('#phoneSearchPopUp').removeClass('hidden')">--}}
-{{--                        <div class="phoneIcon soghat"></div>--}}
-{{--                        <div class="textIcon">سوغات</div>--}}
-{{--                    </div>--}}
-{{--                @else--}}
-                    <div class="squareDiv" onclick="$('#phoneSearchPopUp').removeClass('hidden')">
-                        <div class="phoneIcon soghat"></div>
-                        <div class="textIcon">سوغات</div>
-                    </div>
-{{--                @endif--}}
+                {{--                @if($placeMode == "hotel")--}}
+                {{--                    <div class="squareDivSelected" onclick="$('#phoneSearchPopUp').removeClass('hidden')">--}}
+                {{--                        <div class="phoneIcon soghat"></div>--}}
+                {{--                        <div class="textIcon">سوغات</div>--}}
+                {{--                    </div>--}}
+                {{--                @else--}}
+                <div class="squareDiv" onclick="$('#phoneSearchPopUp').removeClass('hidden')">
+                    <div class="phoneIcon soghat"></div>
+                    <div class="textIcon">سوغات</div>
+                </div>
+                {{--                @endif--}}
 
                 @if($placeMode == "amaken")
                     <a class="squareDivSelected" href="{{route('mainMode', ['mode' => 'amaken'])}}">
@@ -277,13 +254,40 @@
                     </a>
                 @endif
                 {{--<a class="col-xs-4 squareDiv" href="{{route('tickets')}}">--}}
-                    {{--<div class="phoneIcon ticket"></div>--}}
-                    {{--<div class="textIcon">بلیط</div>--}}
+                {{--<div class="phoneIcon ticket"></div>--}}
+                {{--<div class="textIcon">بلیط</div>--}}
                 {{--</a>--}}
             </div>
 
             <div class="clear-both"></div>
         </div>
+
+        <div class="middleBannerPhotoDiv">
+            <div>
+                <div class="smallOne">
+                    <img src="">
+                </div>{{--
+            --}}<div class="middleOne">
+                    <img src="">
+                </div>{{--
+            --}}<div class="largeOne">
+                    <img src="">
+                </div>{{--
+            --}}<div class="clear-both"></div>{{--
+            --}}<div class="largeOne">
+                    <img src="">
+                </div>{{--
+            --}}<div class="middleOne">
+                    <img src="">
+                </div>{{--
+            --}}<div class="smallOne">
+                    <img src="">
+                </div>
+            </div>
+        </div>
+
         @include('layouts.mainSuggestions')
+
+        <div class="footerBarSpacer"></div>
     </div>
 </div>

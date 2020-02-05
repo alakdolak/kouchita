@@ -63,7 +63,7 @@ if ($total == 0)
     <link rel="stylesheet" href="{{URL::asset('css/theme2/cropper.css')}}">
     <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/hotelDetail.css')}}">
     <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/abbreviations.css')}}">
-    <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/editor.css')}}">
+{{--    <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/editor.css')}}">--}}
 
 
 
@@ -258,7 +258,7 @@ if ($total == 0)
                                     <div class="addParticipantName">
                                         <span class="addParticipantSpan">با</span>
                                         <div class="inputBoxGeneralInfo inputBox addParticipantInputBoxPostModal">
-                                            <textarea id="assignedSearch" class="inputBoxInput inputBoxInputComment"
+                                            <textarea id="assignedSearch" class="inputBoxInput"
                                                       placeholder="چه کسی بودید؟ ایمیل یا نام کاربری را وارد کنید"
                                                       onkeyup="searchUser(this.value)"></textarea>
 
@@ -273,16 +273,13 @@ if ($total == 0)
                             <div class="modal-details-content">
                                 <center class="commentMoreSettingBar">
                                     <div class="commentOptionsBoxes">
-                                        <span class="tagFriendCommentIcon"></span>
-                                        <span class="commentOptionsText">دوستانتان را tag کنید.</span>
-                                    </div>
-                                    <div class="commentOptionsBoxes">
-                                        <label for="video360ReviewInput">
-                                            <span class="add360VideoCommentIcon"></span>
-                                            <span class="commentOptionsText">ویدیو 360 اضافه کنید.</span>
+                                        <label for="picReviewInput0">
+                                            <span class="addPhotoCommentIcon"></span>
+                                            <span class="commentOptionsText">عکس اضافه کنید.</span>
                                         </label>
                                     </div>
-                                    <input type="file" id="video360ReviewInput" accept="video/*"  style="display: none" onchange="uploadReviewVideo(this, 1)">
+                                    <input type="file" id="picReviewInput0" accept="image/*" style="display: none"
+                                           onchange="uploadReviewPics(this, 0)">
                                     <div class="commentOptionsBoxes">
                                         <label for="videoReviewInput">
                                             <span class="addVideoCommentIcon"></span>
@@ -292,13 +289,16 @@ if ($total == 0)
                                     <input type="file" id="videoReviewInput" accept="video/*" style="display: none"
                                            onchange="uploadReviewVideo(this, 0)">
                                     <div class="commentOptionsBoxes">
-                                        <label for="picReviewInput0">
-                                            <span class="addPhotoCommentIcon"></span>
-                                            <span class="commentOptionsText">عکس اضافه کنید.</span>
+                                        <label for="video360ReviewInput">
+                                            <span class="add360VideoCommentIcon"></span>
+                                            <span class="commentOptionsText">ویدیو 360 اضافه کنید.</span>
                                         </label>
                                     </div>
-                                    <input type="file" id="picReviewInput0" accept="image/*" style="display: none"
-                                           onchange="uploadReviewPics(this, 0)">
+                                    <input type="file" id="video360ReviewInput" accept="video/*"  style="display: none" onchange="uploadReviewVideo(this, 1)">
+                                    <div class="commentOptionsBoxes">
+                                        <span class="tagFriendCommentIcon"></span>
+                                        <span class="commentOptionsText">دوستانتان را TAG کنید.</span>
+                                    </div>
                                 </center>
                                 @foreach($textQuestion as $item)
                                     <div id="questionDiv_{{$item->id}}" class="commentQuestionsForm">
@@ -934,9 +934,7 @@ if ($total == 0)
                             </div>
                         </div>
 
-                        @if(Auth::check())
-                            @include('editor')
-                        @endif
+
 
                         <div id="helpSpan_10" class="helpSpans hidden row">
                             <span class="introjs-arrow"></span>
@@ -1012,6 +1010,10 @@ if ($total == 0)
             </div>
         </div>
     </div>
+
+    @if(Auth::check())
+        @include('editor')
+    @endif
 
     <div id="MAINWRAP" class="full_meta_photos_v3  full_meta_photos_v4  big_pic_mainwrap_tweaks horizontal_xsell ui_container is-mobile position-relative">
         <div id="MAIN" class="Hotel_Review prodp13n_jfy_overflow_visible position-relative">
