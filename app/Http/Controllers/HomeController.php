@@ -616,6 +616,15 @@ class HomeController extends Controller
                 case 4:
                     $route = "hotelList";
                     break;
+                case 6:
+                    $route = "majaraList";
+                    break;
+                case 10:
+                    $route = "sogatSanaieList";
+                    break;
+                case 11:
+                    $route = "mahaliFood";
+                    break;
                 case 0:
                 default:
                     $route = 'all';
@@ -668,6 +677,7 @@ class HomeController extends Controller
                         $itr->mode = "amaken";
                         $itr->url = route('amakenDetails', ['placeId' => $itr->id, 'placeName' => $itr->targetName]);
                     }
+                    $result = array();
                     break;
                 case 3:
                     if (!empty($key2))
@@ -678,6 +688,7 @@ class HomeController extends Controller
                         $itr->mode = "restaurant";
                         $itr->url = route('restaurantDetails', ['placeId' => $itr->id, 'placeName' => $itr->targetName]);
                     }
+                    $result = array();
                     break;
                 case 4:
                     if (!empty($key2))
@@ -689,6 +700,7 @@ class HomeController extends Controller
                         $itr->mode = "hotel";
                         $itr->url = route('hotelDetails', ['placeId' => $itr->id, 'placeName' => $itr->targetName]);
                     }
+                    $result = array();
                     break;
                 case 6:
                     if (!empty($key2))
@@ -699,6 +711,7 @@ class HomeController extends Controller
                         $itr->mode = "majara";
                         $itr->url = route('majaraDetails', ['placeId' => $itr->id, 'placeName' => $itr->targetName]);
                     }
+                    $result = array();
                     break;
                 case 10:
                     if (!empty($key2))
@@ -709,6 +722,7 @@ class HomeController extends Controller
                         $itr->mode = "sogatSanaies";
                         $itr->url = route('sanaiesogatDetails', ['placeId' => $itr->id, 'placeName' => $itr->targetName]);
                     }
+                    $result = array();
                     break;
                 case 11:
                     if (!empty($key2))
@@ -719,6 +733,7 @@ class HomeController extends Controller
                         $itr->mode = "mahaliFood";
                         $itr->url = route('mahaliFoodDetails', ['placeId' => $itr->id, 'placeName' => $itr->targetName]);
                     }
+                    $result = array();
                     break;
                 case 0:
                 default:

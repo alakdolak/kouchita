@@ -135,7 +135,21 @@
                                 </div>
                                 <div class="ui_columns datepicker_box trip_search metaDatePicker rounded_lockup usePickerTypeIcons preDates noDates with_children mainDivSearchInputMainPage">
                                     <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column is-4 search_typeahead wctx-tripsearch searchDivForScrollClass mainSearchDivPcSize">
-                                        <div onclick="$('#searchPane').removeClass('hidden');  $('#darkModeMainPage').toggle();">به کجا می‌روید؟</div>
+                                        @if($kindPlaceId == 0)
+                                            <div onclick="$('#searchPane').removeClass('hidden');  $('#darkModeMainPage').toggle();">به کجا می‌روید؟</div>
+                                        @elseif($kindPlaceId == 1)
+                                            <div onclick="$('#searchPane').removeClass('hidden');  $('#darkModeMainPage').toggle();">کدام جاذبه را می‌خواهید تجربه کنید؟</div>
+                                        @elseif($kindPlaceId == 3)
+                                            <div onclick="$('#searchPane').removeClass('hidden');  $('#darkModeMainPage').toggle();">در کدام رستوران دوست دارید غذا بخورید؟</div>
+                                        @elseif($kindPlaceId == 4)
+                                            <div onclick="$('#searchPane').removeClass('hidden');  $('#darkModeMainPage').toggle();">در کدام هتل دوست دارید اقامت کنید؟</div>
+                                        @elseif($kindPlaceId == 6)
+                                            <div onclick="$('#searchPane').removeClass('hidden');  $('#darkModeMainPage').toggle();">کدام ماجرا را می‌خواهید تجربه کنید؟</div>
+                                        @elseif($kindPlaceId == 10)
+                                            <div onclick="$('#searchPane').removeClass('hidden');  $('#darkModeMainPage').toggle();">کدام صنایع دستی را دوست دارید بشناسید؟</div>
+                                        @elseif($kindPlaceId == 11)
+                                            <div onclick="$('#searchPane').removeClass('hidden');  $('#darkModeMainPage').toggle();">کدام غذای محلی را می‌خواهید تجربه کنید؟</div>
+                                        @endif
                                     </div>
                                     <div class="clear-both"></div>
                                 </div>

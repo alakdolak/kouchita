@@ -25,64 +25,24 @@
                             <div id="taplc_global_nav_links_0" class="ppr_rup ppr_priv_global_nav_links" data-placement-name="global_nav_links">
                                 <div class="global-nav-links-container">
                                     <ul class="global-nav-links-menu headerMainList">
-
-                                        @if($placeMode == "hotel")
-                                            <li>
-                                                <a href="{{route('mainMode', ['mode' => 'hotel'])}}" id="global-nav-hotels" class="unscoped global-nav-link ui_tab redColor " data-tracking-label="hotels">هتل</a>
-                                            </li>
-                                        @else
-                                            <li>
-                                                <a href="{{route('mainMode', ['mode' => 'hotel'])}}" id="global-nav-hotels" class="unscoped global-nav-link ui_tab " data-tracking-label="hotels">هتل</a>
-                                            </li>
-                                        @endif
-                                        @if($placeMode == "restaurant")
-                                            <li>
-                                                <a href="{{route('mainMode', ['mode' => 'restaurant'])}}" id="global-nav-vr" class="unscoped global-nav-link ui_tab redColor">رستوران</a>
-                                            </li>
-                                        @else
-                                            <li>
-                                                <a href="{{route('mainMode', ['mode' => 'restaurant'])}}" id="global-nav-vr" class="unscoped global-nav-link ui_tab">رستوران</a>
-                                            </li>
-                                        @endif
-                                        @if($placeMode == "amaken")
-                                            <li>
-                                                <a href="{{route('mainMode', ['mode' => 'amaken'])}}" id="global-nav-restaurants" class="unscoped global-nav-link ui_tab redColor">جاذبه</a>
-                                            </li>
-                                        @else
-                                            <li>
-                                                <a href="{{route('mainMode', ['mode' => 'amaken'])}}" id="global-nav-restaurants" class="unscoped global-nav-link ui_tab">جاذبه</a>
-                                            </li>
-                                        @endif
-
-                                        {{--@if($placeMode == "ticket")--}}
-                                            {{--<li>--}}
-                                                {{--<a href="{{route('tickets')}}" class="unscoped global-nav-link ui_tab redColor ">بلیط</a>--}}
-                                            {{--</li>--}}
-                                        {{--@else--}}
-                                            {{--<li>--}}
-                                                {{--<a href="{{route('tickets')}}" class="unscoped global-nav-link ui_tab ">بلیط</a>--}}
-                                            {{--</li>--}}
-                                        {{--@endif--}}
-                                        {{--@if($placeMode == "tour")--}}
-                                            {{--<li>--}}
-                                                {{--<a href="{{route('mainMode', ['mode' => 'tour'])}}" id="global-nav-tours" class="unscoped global-nav-link ui_tab redColor " data-tracking-label="hotels">تور</a>--}}
-                                            {{--</li>--}}
-                                        {{--@else--}}
-                                            {{--<li>--}}
-                                                {{--<a href="{{route('mainMode', ['mode' => 'tour'])}}" id="global-nav-tours" class="unscoped global-nav-link ui_tab " data-tracking-label="hotels">تور</a>--}}
-                                            {{--</li>--}}
-                                        {{--@endif--}}
-                                        <li class="" data-element=".masthead-dropdown-Flights">
-                                            <a href="{{route('soon')}}" class="unscoped global-nav-link ui_tab " data-tracking-label="Flights">سوغات و صنایع دستی</a>
+                                        <li>
+                                            <a href="{{route('mainMode', ['mode' => 'hotel'])}}" id="global-nav-hotels" class="unscoped global-nav-link ui_tab {{$kindPlaceId == 4 ? 'redColor' : ''}}" data-tracking-label="hotels">هتل</a>
                                         </li>
-
+                                        <li>
+                                            <a href="{{route('mainMode', ['mode' => 'restaurant'])}}" id="global-nav-vr" class="unscoped global-nav-link ui_tab {{$kindPlaceId == 3 ? 'redColor' : ''}}">رستوران</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{route('mainMode', ['mode' => 'amaken'])}}" id="global-nav-restaurants" class="unscoped global-nav-link ui_tab {{$kindPlaceId == 6 ? 'redColor' : ''}}">جاذبه</a>
+                                        </li>
                                         <li class="" data-element=".masthead-dropdown-Flights">
-                                            <a href="{{route('soon')}}" class="unscoped global-nav-link ui_tab " data-tracking-label="Flights">غذای محلی</a>
+                                            <a href="{{route('mainMode', ['mode' => 'sogatsanaie'])}}" class="unscoped global-nav-link ui_tab {{$kindPlaceId == 10 ? 'redColor' : ''}}" data-tracking-label="Flights">سوغات و صنایع دستی</a>
+                                        </li>
+                                        <li class="" data-element=".masthead-dropdown-Flights">
+                                            <a href="{{route('mainMode', ['mode' => 'mahaliFood'])}}" class="unscoped global-nav-link ui_tab  {{$kindPlaceId == 11 ? 'redColor' : ''}}" data-tracking-label="Flights">غذای محلی</a>
                                         </li>
                                         <li>
                                             <a href="{{route('soon')}}" class="unscoped global-nav-link ui_tab " data-tracking-label="Flights">بوم‌گردی</a>
                                         </li>
-
                                     </ul>
                                 </div>
                             </div>
