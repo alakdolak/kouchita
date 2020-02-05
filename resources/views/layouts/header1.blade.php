@@ -286,6 +286,8 @@
 
 @include('layouts.pop-up-create-trip')
 
+@include('general.searchInput')
+
 <script>
     $(document).ready(function(){
 

@@ -297,10 +297,10 @@ class AjaxController extends Controller {
         return;
     }
 
-    public function proSearch() {
-
+    public function proSearch(Request $request) {
+dd($request->all());
         if(isset($_POST["hotelFilter"]) && isset($_POST["amakenFilter"]) && isset($_POST["restaurantFilter"])
-            && isset($_POST["majaraFilter"]) && isset($_POST["soghatFilter"]) && isset($_POST["ghazamahaliFilter"])
+            && isset($_POST["majaraFilter"]) && isset($_POST["soghatFilter"]) && isset($_POST["mahaliFoodFilter"])
             && isset($_POST["key"]) && isset($_POST["selectedCities"]) && isset($_POST["sanayeFilter"])) {
 
             $cities = $_POST["selectedCities"];
