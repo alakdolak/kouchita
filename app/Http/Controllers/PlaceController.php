@@ -11,6 +11,7 @@ use App\models\ConfigModel;
 use App\models\DefaultPic;
 use App\models\Hotel;
 use App\models\LogModel;
+use App\models\MahaliFood;
 use App\models\MainSliderPic;
 use App\models\Majara;
 use App\models\Opinion;
@@ -20,6 +21,8 @@ use App\models\PhotographersPic;
 use App\models\PicItem;
 use App\models\Place;
 use App\models\PlaceStyle;
+use App\models\Post;
+use App\models\PostComment;
 use App\models\Question;
 use App\models\QuestionUserAns;
 use App\models\Report;
@@ -2828,6 +2831,7 @@ class PlaceController extends Controller {
     }
 
     public function showMainPage($mode = "mainPage") {
+
         switch ($mode) {
             case "amaken":
                 $kindPlaceId = 1;
@@ -2841,8 +2845,11 @@ class PlaceController extends Controller {
             case "majara":
                 $kindPlaceId = 6;
                 break;
-            case "adab":
-                $kindPlaceId = 8;
+            case "sogatsanaie":
+                $kindPlaceId = 10;
+                break;
+            case "mahaliFood":
+                $kindPlaceId = 11;
                 break;
             default:
                 $kindPlaceId= 0;
@@ -2851,7 +2858,31 @@ class PlaceController extends Controller {
 
         $sliderPic = MainSliderPic::all();
 
-        return view('main', array('placeMode' => $mode, 'kindPlaceId' => $kindPlaceId, 'sliderPic' => $sliderPic,
+        $today = getToday()['date'];
+        $hotelCount = Hotel::all()->count();
+        $retCount = Restaurant::all()->count();
+        $amakenCount = Amaken::all()->count();
+        $sogatSanaie = SogatSanaie::all()->count();
+        $mahaliFoodCount = MahaliFood::all()->count();
+        $postCount = Post::where('date', '<=', $today)->where('release', '!=', 'draft')->count();
+
+        $activityId1 = Activity::where('name', 'نظر')->first()->id;
+        $activityId2 = Activity::where('name', 'پاسخ')->first()->id;
+
+        $commentCount = 0;
+        $commentCount += LogModel::where('activityId', $activityId1)->where('confirm', 1)->count();
+        $commentCount += LogModel::where('activityId', $activityId2)->where('confirm', 1)->count();
+        $commentCount += PostComment::where('status', 1)->count();
+
+        $counts = [ 'hotel' => $hotelCount,
+                    'restaurant' => $retCount,
+                    'amaken' => $amakenCount,
+                    'sogatSanaie' => $sogatSanaie,
+                    'mahaliFood' => $mahaliFoodCount,
+                    'article' => $postCount,
+                    'comment' => $commentCount];
+
+        return view('main', array('placeMode' => $mode, 'kindPlaceId' => $kindPlaceId, 'sliderPic' => $sliderPic, 'count' => $counts,
             'sections' => SectionPage::wherePage(getValueInfo('hotel-detail'))->get()
         ));
     }

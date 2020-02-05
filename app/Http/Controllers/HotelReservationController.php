@@ -564,6 +564,7 @@ class HotelReservationController extends Controller {
 
     public function showHotelList2($city, $mode)
     {
+//        dd($city);
 //        $this->getAccessTokenHotel(0);
         if ($mode == "state") {
 

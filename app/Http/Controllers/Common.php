@@ -21,61 +21,10 @@ use App\models\SogatSanaie;
 use App\models\State;
 use App\models\User;
 use Carbon\Carbon;
+use Hekmatinasser\Verta\Facades\Verta;
 use Illuminate\Support\Facades\DB;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-
-function getPostTranslated($key) {
-
-    switch ($key) {
-        case 1:
-            return 'اماکن تاریخی';
-        case 2:
-            return 'اماکن مذهبی';
-        case 3:
-            return 'اماکن تفریحی';
-        case 4:
-            return 'طبیعت گردی';
-        case 5:
-            return 'مراکز خرید';
-        case 6:
-            return 'موزه ها';
-        case 7:
-            return 'هتل';
-        case 8:
-            return 'رستوران';
-        case 9:
-            return 'هواپیما';
-        case 10:
-            return 'اتوبوس';
-        case 11:
-            return 'سواری';
-        case 12:
-            return 'قطار';
-        case 13:
-            return 'سوغات محلی';
-        case 14:
-            return 'صنایع دستی';
-        case 15:
-            return 'اماکن تفریحی';
-        case 16:
-            return 'غذای محلی';
-        case 17:
-            return 'لباس محلی';
-        case 18:
-            return 'گویش محلی';
-        case 19:
-            return 'اصطلاحات محلی';
-        case 20:
-            return 'رسوم محلی';
-        case 21:
-            return 'جشنواره';
-        case 22:
-            return 'تور';
-        case 23:
-            return 'کنسرت';
-    }
-}
 
 function getPostCategories() {
 
@@ -141,24 +90,6 @@ function getValueInfo($key) {
 
     return $values[$key];
 
-}
-
-function jalaliToGregorian($time){
-    include_once 'jdate.php';
-
-    $date = explode('/', $time);
-    $date = jalali_to_gregorian($date[0], $date[1], $date[2]);
-
-    return $date;
-}
-
-function gregorianToJalali($time, $splite = '-'){
-    include_once 'jdate.php';
-
-    $date = explode($splite, $time);
-    $date = gregorian_to_jalali($date[0], $date[1], $date[2]);
-
-    return $date;
 }
 
 function dotNumber($number){
@@ -607,85 +538,6 @@ function uploadArray($target_file, $name, $section, $index) {
         return "اشکالی در آپلود تصویر در قسمت " . $section . " به وجود آمده است" . "<br />";
     }
     return "";
-}
-
-function formatDate($date) {
-    return $date[0] . $date[1] . $date[2] . $date[3] . '/'
-    . $date[4] . $date[5] . '/' . $date[6] . $date[7];
-}
-
-function convertDate($created) {
-
-    include_once 'jdate.php';
-
-    if(count(explode(' ', $created)) == 2)
-        $created = explode('-', explode(' ', $created)[0]);
-    else
-        $created = explode('-', $created);
-
-    $created = gregorian_to_jalali($created[0], $created[1], $created[2]);
-    return $created[0] . '/' . $created[1] . '/' . $created[2];
-}
-
-function getToday() {
-
-    include_once 'jdate.php';
-
-    $jalali_date = jdate("c");
-
-    $date_time = explode('-', $jalali_date);
-
-    $subStr = explode('/', $date_time[0]);
-
-    $day = $subStr[0] . $subStr[1] . $subStr[2];
-
-    $time = explode(':', $date_time[1]);
-
-    $time = $time[0] . $time[1];
-
-    return ["date" => $day, "time" => $time];
-}
-
-function getCurrentYear() {
-
-    include_once 'jdate.php';
-
-    $jalali_date = jdate("c");
-
-    $date_time = explode('-', $jalali_date);
-
-    $subStr = explode('/', $date_time[0]);
-
-    return $subStr[0];
-}
-
-function convertDateToString($date) {
-    $subStrD = explode('/', $date);
-    if(count($subStrD) == 1)
-        $subStrD = explode(',', $date);
-
-    if(strlen($subStrD[1]) == 1)
-        $subStrD[1] = "0" . $subStrD[1];
-
-    if(strlen($subStrD[2]) == 1)
-        $subStrD[2] = "0" . $subStrD[2];
-
-    return $subStrD[0] . $subStrD[1] . $subStrD[2];
-}
-
-function convertTimeToString($time) {
-    $subStrT = explode(':', $time);
-    return $subStrT[0] . $subStrT[1];
-}
-
-function convertStringToTime($time) {
-    return $time[0] . $time[1] . ":" . $time[2] . $time[3];
-}
-
-function convertStringToDate($date, $spliter = '/') {
-    if($date == "")
-        return $date;
-    return $date[0] . $date[1] . $date[2] . $date[3] . $spliter . $date[4] . $date[5] . $spliter . $date[6] . $date[7];
 }
 
 function sendSMS($destNum, $text, $template, $token2 = "") {
@@ -1137,42 +989,137 @@ function generateRandomString($length = 20) {
 }
 
 function saveViewPerPage($kindPlaceId, $placeId){
-    if (Auth::check()) {
-        $uId = Auth::user()->id;
+    if(Auth::check())
+        $userId = auth()->user()->id;
+    else
+        $userId = 999999;
+
+    $value = 'kindPlaceId:'.$kindPlaceId.'Id:'.$placeId;
+    if(!(Cookie::has($value) == $value)) {
         $activityId = Activity::whereName('مشاهده')->first()->id;
-
-        $condition = ['visitorId' => $uId, 'placeId' => $placeId, 'kindPlaceId' => $kindPlaceId,
-            'activityId' => $activityId];
-        $log = LogModel::where($condition)->first();
-        if ($log == null) {
-            $log = new LogModel();
-            $log->activityId = $activityId;
-            $log->time = getToday()["time"];
-            $log->placeId = $placeId;
-            $log->kindPlaceId = $kindPlaceId;
-            $log->visitorId = $uId;
-            $log->date = date('Y-m-d');
-            $log->save();
-        } else {
-            $log->date = date('Y-m-d');
-            $log->save();
-        }
+        $log = new LogModel();
+        $log->time = getToday()["time"];
+        $log->activityId = $activityId;
+        $log->placeId = $placeId;
+        $log->kindPlaceId = $kindPlaceId;
+        $log->visitorId = $userId;
+        $log->date = date('Y-m-d');
+        $log->save();
+        Cookie::queue(Cookie::make($value, $value, 5));
     }
-    else{
-        $value = 'kindPlaceId:'.$kindPlaceId.'Id:'.$placeId;
-        if(!(Cookie::has($value) == $value)) {
-            $activityId = Activity::whereName('مشاهده')->first()->id;
-            $log = new LogModel();
-            $log->time = getToday()["time"];
-            $log->activityId = $activityId;
-            $log->placeId = $placeId;
-            $log->kindPlaceId = $kindPlaceId;
-            $log->visitorId = 999999;
-            $log->date = date('Y-m-d');
-            $log->save();
-            Cookie::queue(Cookie::make($value, $value, 5));
-        }
-    }
-
 }
 
+
+//time
+function jalaliToGregorian($time){
+    include_once 'jdate.php';
+
+    $date = explode('/', $time);
+    $date = jalali_to_gregorian($date[0], $date[1], $date[2]);
+
+    return $date;
+}
+
+function gregorianToJalali($time, $splite = '-'){
+    include_once 'jdate.php';
+
+    $date = explode($splite, $time);
+    $date = gregorian_to_jalali($date[0], $date[1], $date[2]);
+
+    return $date;
+}
+
+function formatDate($date) {
+    return $date[0] . $date[1] . $date[2] . $date[3] . '/'
+        . $date[4] . $date[5] . '/' . $date[6] . $date[7];
+}
+
+function convertDate($created) {
+
+    include_once 'jdate.php';
+
+    if(count(explode(' ', $created)) == 2)
+        $created = explode('-', explode(' ', $created)[0]);
+    else
+        $created = explode('-', $created);
+
+    $created = gregorian_to_jalali($created[0], $created[1], $created[2]);
+    return $created[0] . '/' . $created[1] . '/' . $created[2];
+}
+
+function getToday() {
+
+    include_once 'jdate.php';
+
+    $jalali_date = jdate("c");
+
+    $date_time = explode('-', $jalali_date);
+
+    $subStr = explode('/', $date_time[0]);
+
+    $day = $subStr[0] . $subStr[1] . $subStr[2];
+
+    $time = explode(':', $date_time[1]);
+
+    $time = $time[0] . $time[1];
+
+    return ["date" => $day, "time" => $time];
+}
+
+function getCurrentYear() {
+
+    include_once 'jdate.php';
+
+    $jalali_date = jdate("c");
+
+    $date_time = explode('-', $jalali_date);
+
+    $subStr = explode('/', $date_time[0]);
+
+    return $subStr[0];
+}
+
+function convertDateToString($date) {
+    $subStrD = explode('/', $date);
+    if(count($subStrD) == 1)
+        $subStrD = explode(',', $date);
+
+    if(strlen($subStrD[1]) == 1)
+        $subStrD[1] = "0" . $subStrD[1];
+
+    if(strlen($subStrD[2]) == 1)
+        $subStrD[2] = "0" . $subStrD[2];
+
+    return $subStrD[0] . $subStrD[1] . $subStrD[2];
+}
+
+function convertTimeToString($time) {
+    $subStrT = explode(':', $time);
+    return $subStrT[0] . $subStrT[1];
+}
+
+function convertStringToTime($time) {
+    return $time[0] . $time[1] . ":" . $time[2] . $time[3];
+}
+
+function convertStringToDate($date, $spliter = '/') {
+    if($date == "")
+        return $date;
+    return $date[0] . $date[1] . $date[2] . $date[3] . $spliter . $date[4] . $date[5] . $spliter . $date[6] . $date[7];
+}
+
+function convertJalaliToText($date){
+    $monthName = ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور', 'مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند'];
+    $dayName = ['شنبه', 'یکشنبه', 'دوشنبه', 'سه‌شنبه', 'چهارشنبه', 'پنج‌شنبه', 'جمعه'];
+
+    $date = convertStringToDate($date);
+//    $date = convertDateToString($date);
+    $year = $date[0].$date[1].$date[2].$date[3];
+    $month = $date[5].$date[6];
+    $day = $date[8].$date[9];
+
+    $v = Verta();
+    $date = $v->createJalali($year,$month,$day)->format('%A %d %B %Y');
+    return $date;
+
+}

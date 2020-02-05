@@ -6288,7 +6288,6 @@ body.lang_de .memberBadging.g10n .levelBadge, body.lang_el .memberBadging.g10n .
 }
 
 .ui_bubble_rating:before {
-    color: #fff;
     display: block;
     content: "\e00a\e00a\e00a\e00a\e00a"
 }

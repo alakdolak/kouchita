@@ -54,15 +54,16 @@ class HomeController extends Controller
 
         $city->state = State::whereId($city->stateId)->name;
 
-        $cityPost = Post::where('cityId', $city->id)->where('date', '<=', $today)->orderBy('date','ASCD')->take(5)->get();
-        if(count($cityPost) < 5){
-            $num = 5 - count($cityPost);
-            $cityPost2 = Post::where('date', '<=', $today)->orderBy('date','ASCD')->take($num)->get();
-            if(count($cityPost) == 0)
-                $cityPost = $cityPost2;
-            else
-                $cityPost = array_merge($cityPost, $cityPost2);
-        }
+        $cityPost = array();
+//        $cityPost = Post::where('cityId', $city->id)->where('date', '<=', $today)->orderBy('date','ASCD')->take(5)->get();
+//        if(count($cityPost) < 5){
+//            $num = 5 - count($cityPost);
+//            $cityPost2 = Post::where('date', '<=', $today)->orderBy('date','ASCD')->take($num)->get();
+//            if(count($cityPost) == 0)
+//                $cityPost = $cityPost2;
+//            else
+//                $cityPost = array_merge($cityPost, $cityPost2);
+//        }
 
 //        $lastMonth = Carbon::now()->subMonth();
         $t0 = str_split($today, 4)[0];
@@ -83,29 +84,30 @@ class HomeController extends Controller
             $day = '0' . $day;
         $lastMonth = $year . $month . $day;
 
-        $mostSeenPosts = Post::where('date', '<=', $today)->where('date', '>=', $lastMonth)->orderBy('seen', 'ASCD')->take(5)->get();
-
-        foreach ($cityPost as $post) {
-            $post->pic = URL::asset('posts/' . $post->pic);
-            $date0 =substr($post->date,0,4);
-            $date1 = substr($post->date,4,2);
-            $date2 = substr($post->date,6,2);
-
-            $post->date = $date0 . '/' . $date1 . '/' . $date2;
-            $post->category = getPostTranslated($post->category);
-            $post->msgs = PostComment::wherePostId($post->id)->whereStatus(true)->count();
-        }
-        foreach ($mostSeenPosts as $post) {
-            $post->pic = URL::asset('posts/' . $post->pic);
-
-            $date0 =substr($post->date,0,4);
-            $date1 = substr($post->date,4,2);
-            $date2 = substr($post->date,6,2);
-
-            $post->date = $date0 . '/' . $date1 . '/' . $date2;
-            $post->category = getPostTranslated($post->category);
-            $post->msgs = PostComment::wherePostId($post->id)->whereStatus(true)->count();
-        }
+        $mostSeenPosts = array();
+//        $mostSeenPosts = Post::where('date', '<=', $today)->where('date', '>=', $lastMonth)->orderBy('seen', 'ASCD')->take(5)->get();
+//
+//        foreach ($cityPost as $post) {
+//            $post->pic = URL::asset('posts/' . $post->pic);
+//            $date0 =substr($post->date,0,4);
+//            $date1 = substr($post->date,4,2);
+//            $date2 = substr($post->date,6,2);
+//
+//            $post->date = $date0 . '/' . $date1 . '/' . $date2;
+//            $post->category = getPostTranslated($post->category);
+//            $post->msgs = PostComment::wherePostId($post->id)->whereStatus(true)->count();
+//        }
+//        foreach ($mostSeenPosts as $post) {
+//            $post->pic = URL::asset('posts/' . $post->pic);
+//
+//            $date0 =substr($post->date,0,4);
+//            $date1 = substr($post->date,4,2);
+//            $date2 = substr($post->date,6,2);
+//
+//            $post->date = $date0 . '/' . $date1 . '/' . $date2;
+//            $post->category = getPostTranslated($post->category);
+//            $post->msgs = PostComment::wherePostId($post->id)->whereStatus(true)->count();
+//        }
 
         $allAmaken = Amaken::where('cityId', $city->id)->select(['id', 'name', 'C', 'D', 'mooze', 'tarikhi', 'tabiatgardi', 'tafrihi', 'markazkharid'])->get();
         $allMajara = Majara::where('cityId', $city->id)->select(['id', 'name', 'C', 'D'])->get();
@@ -614,6 +616,15 @@ class HomeController extends Controller
                 case 4:
                     $route = "hotelList";
                     break;
+                case 6:
+                    $route = "majaraList";
+                    break;
+                case 10:
+                    $route = "sogatSanaieList";
+                    break;
+                case 11:
+                    $route = "mahaliFood";
+                    break;
                 case 0:
                 default:
                     $route = 'all';
@@ -666,6 +677,7 @@ class HomeController extends Controller
                         $itr->mode = "amaken";
                         $itr->url = route('amakenDetails', ['placeId' => $itr->id, 'placeName' => $itr->targetName]);
                     }
+                    $result = array();
                     break;
                 case 3:
                     if (!empty($key2))
@@ -676,6 +688,7 @@ class HomeController extends Controller
                         $itr->mode = "restaurant";
                         $itr->url = route('restaurantDetails', ['placeId' => $itr->id, 'placeName' => $itr->targetName]);
                     }
+                    $result = array();
                     break;
                 case 4:
                     if (!empty($key2))
@@ -687,6 +700,7 @@ class HomeController extends Controller
                         $itr->mode = "hotel";
                         $itr->url = route('hotelDetails', ['placeId' => $itr->id, 'placeName' => $itr->targetName]);
                     }
+                    $result = array();
                     break;
                 case 6:
                     if (!empty($key2))
@@ -697,6 +711,7 @@ class HomeController extends Controller
                         $itr->mode = "majara";
                         $itr->url = route('majaraDetails', ['placeId' => $itr->id, 'placeName' => $itr->targetName]);
                     }
+                    $result = array();
                     break;
                 case 10:
                     if (!empty($key2))
@@ -707,6 +722,7 @@ class HomeController extends Controller
                         $itr->mode = "sogatSanaies";
                         $itr->url = route('sanaiesogatDetails', ['placeId' => $itr->id, 'placeName' => $itr->targetName]);
                     }
+                    $result = array();
                     break;
                 case 11:
                     if (!empty($key2))
@@ -717,6 +733,7 @@ class HomeController extends Controller
                         $itr->mode = "mahaliFood";
                         $itr->url = route('mahaliFoodDetails', ['placeId' => $itr->id, 'placeName' => $itr->targetName]);
                     }
+                    $result = array();
                     break;
                 case 0:
                 default:
@@ -805,6 +822,7 @@ class HomeController extends Controller
             echo json_encode($result);
         }
     }
+
     private function sortSearchBySee($tmp){
 
         for($i = 0; $i < count($tmp); $i++){

@@ -652,7 +652,12 @@ $authUrl = $client->createAuthUrl();
                 </div>
             </div>
             <div class="pd-tp-8">
-                <button onclick="login($('#username_main').val(), $('#password_main').val())" class="loginSubBtn btn btn-info active">ورود</button>
+                <div class="loginButtonsMainDiv">
+                    <div class="signInBtnMainDiv">
+                        <button onclick="login($('#username_main').val(), $('#password_main').val())" class="loginSubBtn btn btn-info active">ورود</button>
+                    </div>
+                    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                </div>
                 <p id="loginErr"></p>
             </div>
         </div>

@@ -12,6 +12,7 @@
         "barryvdh/laravel-ide-helper": "^2.1",
         "google/apiclient": "^2.2",
         "graham-campbell/throttle": "^5.3",
+        "hekmatinasser/verta": "~1.10",
         "kavenegar/php": "1.2.*",
         "laravel/framework": "5.4.*",
         "laravel/passport": "^4.0",

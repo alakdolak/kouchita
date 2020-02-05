@@ -520,7 +520,8 @@
                         <div class="boxOfCityNameProSearch">
                             <div id="textOfWhere">در کجا</div>
                             <div class="where_with_highlight enterCityNameProSearch">
-                                <input onkeyup="searchCity()" id="GEO_SCOPED_SEARCH_INPUT" class="text geoScopeInput" value="" placeholder="نام شهر را وارد کنید" autocomplete="off" type="text">
+                                <input onkeyup="searchCity()" id="GEO_SCOPED_SEARCH_INPUT" class="text geoScopeInput"
+                                       value="" placeholder="نام شهر را وارد کنید" autocomplete="off" type="text">
                             </div>
                         </div>
                         <p id="currentCity"></p>
@@ -547,21 +548,18 @@
                             <div class="boxOfCityNameProSearch">
                                 <div id="textOfWhere2">به کجا</div>
                                 <div class="where_with_highlight enterCityNameProSearch">
-                                    <input onkeyup="searchInPlaces()" id="GEO_SCOPED_SEARCH_INPUT2" class="text geoScopeInput" value="" placeholder="نام شهر را وارد کنید" autocomplete="off" type="text">
+                                    <input onkeyup="searchInPlaces()" id="GEO_SCOPED_SEARCH_INPUT2" class="text geoScopeInput"
+                                           value="" placeholder="نام مکان را وارد کنید. (به وسیله فانوس ها جستجو را محدود کنید.)" autocomplete="off" type="text">
                                 </div>
                             </div>
                         </div>
                         <div class="col-xs-7 boxOfLamps">
                             <div class='ui_input_checkbox'>
-                                @if($placeMode == "amaken")
-                                    <img data-val="on" id="amakenFilter" width="40px" height="80px" src="{{URL::asset('images/on_lamp.gif')}}">
-                                @else
-                                    <img data-val="off" id="amakenFilter" width="40px" height="80px" src="{{URL::asset('images/off_lamp.png')}}">
-                                @endif
+                                <img data-val="off" id="amakenFilter" width="40px" height="80px" src="{{URL::asset('images/off_lamp.png')}}">
                                 <div>اماکن</div>
                             </div>
                             <div class='ui_input_checkbox'>
-                                @if($placeMode == "hotel")
+                                @if(isset($placeMode) && $placeMode == "hotel")
                                     <img data-val="on" id="hotelFilter" width="40px" height="80px" src="{{URL::asset('images/on_lamp.gif')}}">
                                 @else
                                     <img data-val="off" id="hotelFilter" width="40px" height="80px" src="{{URL::asset('images/off_lamp.png')}}">
@@ -569,7 +567,7 @@
                                 <div>هتل</div>
                             </div>
                             <div class='ui_input_checkbox'>
-                                @if($placeMode == "restaurant")
+                                @if(isset($placeMode) && $placeMode == "restaurant")
                                     <img data-val="on" id="restaurantFilter" width="40px" height="80px" src="{{URL::asset('images/on_lamp.gif')}}">
                                 @else
                                     <img data-val="off" id="restaurantFilter" width="40px" height="80px" src="{{URL::asset('images/off_lamp.png')}}">
@@ -577,7 +575,7 @@
                                 <div>رستوران</div>
                             </div>
                             <div class='ui_input_checkbox'>
-                                @if($placeMode == "majara")
+                                @if(isset($placeMode) && $placeMode == "majara")
                                     <img data-val="on" id="majaraFilter" width="40px" height="80px" src="{{URL::asset('images/on_lamp.gif')}}">
                                 @else
                                     <img data-val="off" id="majaraFilter" width="40px" height="80px" src="{{URL::asset('images/off_lamp.png')}}">
@@ -585,7 +583,7 @@
                                 <div>ماجراجویی</div>
                             </div>
                             <div class='ui_input_checkbox'>
-                                @if($placeMode == "soghat")
+                                @if(isset($placeMode) && $placeMode == "soghat")
                                     <img data-val="on" id="soghatFilter" width="40px" height="80px" src="{{URL::asset('images/on_lamp.gif')}}">
                                 @else
                                     <img data-val="off" id="soghatFilter" width="40px" height="80px" src="{{URL::asset('images/off_lamp.png')}}">
@@ -593,7 +591,7 @@
                                 <div>سوغات</div>
                             </div>
                             <div class='ui_input_checkbox'>
-                                @if($placeMode == "ghazamahali")
+                                @if(isset($placeMode) && $placeMode == "ghazamahali")
                                     <img data-val="on" id="ghazamahaliFilter" width="40px" height="80px" src="{{URL::asset('images/on_lamp.gif')}}">
                                 @else
                                     <img data-val="off" id="ghazamahaliFilter" width="40px" height="80px" src="{{URL::asset('images/off_lamp.png')}}">
@@ -601,7 +599,7 @@
                                 <div>غذا محلی</div>
                             </div>
                             <div class='ui_input_checkbox'>
-                                @if($placeMode == "sanaye")
+                                @if(isset($placeMode) && $placeMode == "sanaye")
                                     <img data-val="on" id="sanayeFilter" width="40px" height="80px" src="{{URL::asset('images/on_lamp.gif')}}">
                                 @else
                                     <img data-val="off" id="sanayeFilter" width="40px" height="80px" src="{{URL::asset('images/off_lamp.png')}}">
@@ -652,7 +650,7 @@
 {{--                <div class="col-xs-2"></div>--}}
             </div>
 
-            <div id="myCloseBtn" class="hidden" onclick="closeInFireFox()" draggable="true" ondragend="dropMenu(event)" ondrop="dropMenu(event)" ondrag="dragging(event)"></div>
+{{--            <div id="myCloseBtn" class="hidden" onclick="closeInFireFox()" draggable="true" ondragend="dropMenu(event)" ondrop="dropMenu(event)" ondrag="dragging(event)"></div>--}}
 
         </div>
     </div>

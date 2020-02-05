@@ -36,6 +36,10 @@
     display: flex;
 }
 
+.display-flexImp {
+    display: flex !important;
+}
+
 .flex-direction-row {
     flex-direction: row;
 }
@@ -90,6 +94,10 @@
 
 .vt-align-top {
     vertical-align: top;
+}
+
+.transform-piDeg {
+    transform: rotate(90deg);
 }
 
 /*position*/

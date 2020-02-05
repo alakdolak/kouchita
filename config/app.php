@@ -182,6 +182,7 @@ return [
         Laravel\Passport\PassportServiceProvider::class,
         Barryvdh\Cors\ServiceProvider::class,
 
+        Hekmatinasser\Verta\VertaServiceProvider::class,
     ],
 
     /*
@@ -231,6 +232,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Throttle' => GrahamCampbell\Throttle\Facades\Throttle::class,
+        'Verta' => Hekmatinasser\Verta\Verta::class,
     ],
 
 ];

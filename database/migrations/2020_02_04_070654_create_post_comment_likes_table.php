@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePostPlaceRelationsTable extends Migration
+class CreatePostCommentLikesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreatePostPlaceRelationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('postPlaceRelations', function (Blueprint $table) {
+        Schema::create('postCommentLikes', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('postId');
-            $table->unsignedInteger('kindPlaceId');
-            $table->unsignedInteger('placeId');
+            $table->unsignedInteger('commentId');
+            $table->unsignedInteger('userId');
+            $table->tinyInteger('like');
         });
     }
 
@@ -28,6 +28,6 @@ class CreatePostPlaceRelationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('postPlaceRelations');
+        Schema::dropIfExists('postCommentLikes');
     }
 }

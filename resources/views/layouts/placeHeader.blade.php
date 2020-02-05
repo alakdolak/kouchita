@@ -255,7 +255,6 @@
 
 {{--@include('layouts.proSearch')--}}
 
-
 <script>
         $(document).ready(function(){
 

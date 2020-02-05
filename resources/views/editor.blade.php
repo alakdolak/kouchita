@@ -11,54 +11,6 @@
 </div>
 <![endif]-->
 
-<style>
-    .errorField{
-        background-color: #f26C4F;
-    }
-    .rotateRight {
-        width: 22px;
-        height: 24px;
-        margin: 2px 3px;
-        background: url('{{URL::asset('images') . 'reloadRight.png'}}');
-        background-size: contain;
-    }
-    .rotateLeft {
-        width: 22px;
-        height: 24px;
-        margin: 2px 3px;
-        background: url('{{URL::asset('images') . 'reloadLeft.png'}}');
-        background-size: contain;
-    }
-    .flipHorizontal {
-        width: 22px;
-        height: 22px;
-        margin: 3px 3px;
-        background: url('{{URL::asset('images') . 'flip.png'}}');
-        background-size: contain;
-    }
-    .flipVertical {
-        width: 22px;
-        height: 24px;
-        margin: 2px 3px;
-        background: url('{{URL::asset('images') . 'reflect.png'}}');
-        background-size: contain;
-    }
-    .cropping {
-        width: 22px;
-        height: 23px;
-        margin: 3px 3px;
-        background: url('{{URL::asset('images') . 'crop.png'}}');
-        background-size: contain;
-    }
-    .clearing {
-        width: 23px;
-        height: 23px;
-        margin: 2px 3px;
-        background: url('{{URL::asset('images') . 'settings.png'}}');
-        background-size: contain;
-    }
-</style>
-
 <span id="editPane" class="ui_overlay ui_modal photoUploadOverlay hidden">
    <div class="body_text" style="padding-top: 12px">
        {{--<div class="photoUploader">--}}
@@ -217,9 +169,9 @@
                      </div>
                      <div class="footer">
                          <div class="termsLabel">
-                             <div style="margin: 5px 0;">
-                                 <div style="display: inline-block; padding: 0px 5px; text-align: justify; font-size: 0.875em;">
-                                     <div style="display: inline-block;">توجه نمایید که عکس ما می بایست در فرمت های رایج تصویر و با حداکثر سایز 500 مگابایت باشد. تصاویر پیش از انتشار توسط ما بازبینی می گردد. لطفا از بارگزاری تصاویری که با قوانین سایت مغایرت دارند اجتناب کنید.</div>
+                             <div>
+                                 <div>
+                                     <div>توجه نمایید که عکس‌ما می‌بایست در فرمتهای رایج تصویر و با حداکثر سایز 500 مگابایت باشد. تصاویر پیش از انتشار توسط ما بازبینی می‌گردد. لطفاً از بارگزاری تصاویری که با قوانین سایت مغایرت دارند اجتناب کنید.</div>
                                      <div id="photoUploadTipsLink" class="headerLink tipsLink">
                                          <span onclick="$('#guidelinesOverlay').removeClass('hidden')">صفحه مقررات</span>
                                          <span id="guidelinesOverlay" class="hidden ui_overlay ui_popover arrow_top guidelinesOverlayParent ui_tooltip">
@@ -250,8 +202,8 @@
                      </div>
                  </div>
                  <div class="template itemRow loading">
-                     <div class="row" style="margin: 0; padding: 15px;">
-                         <div class="col-xs-6" style="padding: 15px 30px 15px 15px;">
+                     <div class="row">
+                         <div class="col-xs-5">
                             <div id="photographerPicNameDiv" class="epInputBox">
                                 <div class="epInputBoxText">
                                     <div class="epInputBoxRequired"><div class="icons epInputIconRequired redStar"></div>نام عکس</div>
@@ -290,8 +242,8 @@
                              {{--</div>--}}
                              {{--</form>--}}
                          </div>
-                         <div class="col-xs-6" style="padding: 15px 15px 15px 30px; border-left: 1px solid #cccccc;">
-                             <div class="epPicBox" style="width: 232px">
+                         <div class="col-xs-7">
+                             <div class="epPicBox">
                                  <div class="epPic">
                                      <div class="imgContainer">
                                          <img id="rectanglePicPhotographer">
@@ -300,8 +252,7 @@
                                  <div class="step6picText">قاب مستطیل</div>
                                  <div class="epEditPicText" onclick="doEdit(213 / 168, 'rectanglePicPhotographer')" style="cursor: pointer;">ویرایش</div>
                              </div>
-                             <div style="margin: 10px 0; text-align: justify">عکس های ما در دو نوع قاب مختلف نمایش داده می شودمی توانید خود نسبت به برش نمایش مناسب عکس در داخل قاب اقدام نمایید در غیر اینصورت تصویر به صورت اتوماتیک برش می خورد</div>
-                             <div class="epPicBox" style="width: 119px;">
+                             <div class="epPicBox">
                                  <div class="epPic">
                                      <div class="imgContainer">
                                          <img id="squarePicPhotographer">
@@ -310,6 +261,7 @@
                                  <div class="epPicText">قاب مربع</div>
                                  <div class="epEditPicText" onclick="doEdit(1, 'squarePicPhotographer')" style="cursor: pointer;">ویرایش</div>
                              </div>
+                             <div style="">عکس های ما در دو نوع قاب مختلف نمایش داده می شودمی توانید خود نسبت به برش نمایش مناسب عکس در داخل قاب اقدام نمایید در غیر اینصورت تصویر به صورت اتوماتیک برش می خورد</div>
                          </div>
                          <div class="col-xs-12 footer">
                              <div class="termsLabel" style="width: 92%; display: inline-block;">
