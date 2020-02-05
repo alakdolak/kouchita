@@ -14,6 +14,8 @@ use App\models\MahaliFood;
 use App\models\MainSuggestion;
 use App\models\Majara;
 use App\models\Place;
+use App\models\Post;
+use App\models\PostComment;
 use App\models\QuestionAns;
 use App\models\QuestionUserAns;
 use App\models\Report;
@@ -295,10 +297,10 @@ class AjaxController extends Controller {
         return;
     }
 
-    public function proSearch() {
-
+    public function proSearch(Request $request) {
+dd($request->all());
         if(isset($_POST["hotelFilter"]) && isset($_POST["amakenFilter"]) && isset($_POST["restaurantFilter"])
-            && isset($_POST["majaraFilter"]) && isset($_POST["soghatFilter"]) && isset($_POST["ghazamahaliFilter"])
+            && isset($_POST["majaraFilter"]) && isset($_POST["soghatFilter"]) && isset($_POST["mahaliFoodFilter"])
             && isset($_POST["key"]) && isset($_POST["selectedCities"]) && isset($_POST["sanayeFilter"])) {
 
             $cities = $_POST["selectedCities"];
@@ -648,6 +650,16 @@ class AjaxController extends Controller {
                 ' and kindPlaceId = ' . $kindPlaceId . ' and activityId = ' . $activityId)[0]->countNum;
 
             array_push($suggestions, $place);
+        }
+
+        $today = getToday()['date'];
+        $post = Post::where('date', '<=', $today)->where('release', '!=', 'draft')->select(['id', 'title', 'slug', 'meta', 'pic', 'date', 'creator', 'keyword', 'seen'])->orderBy('date', 'DESC')->get();
+        foreach ($post as $item){
+            $item->url = route('article.show', ['slug' => $item->slug]);
+            $item->placePic = URL::asset('_images/posts/' . $item->id . '/' . $item->pic);
+            $item->msg = PostComment::where('status', 1)->where('postId', $item->id)->count();
+            $item->section = 'مقالات';
+            array_push($suggestions, $item);
         }
 
         echo json_encode([$result, $suggestions]);

@@ -141,7 +141,7 @@ DIV.prw_rup.prw_shelves_shelf_widget .shelf_container.rebrand .shelf_header .she
 }
 
 #newKoochita, #foodSuggestion, #tabiatSuggestion, #safaranameSuggestions,
-#restaurantSuggestion, #tarikhiSuggestion, #kharidSuggestion {
+#restaurantSuggestion, #tarikhiSuggestion, #kharidSuggestion, #articleSuggestion {
     margin: 40px 0;
     padding: 20px 20px;
     background: #4a4a4a;
