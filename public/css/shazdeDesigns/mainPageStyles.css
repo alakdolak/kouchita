@@ -572,6 +572,10 @@ DIV.ppr_rup.ppr_priv_homepage_hero .placement_wrap .placement_wrap_cell {
     position: inherit;
 }
 
+DIV.prw_rup.prw_shelves_rebrand_poi_shelf_item_widget .detail .item {
+    white-space: unset;
+}
+
 @media (min-width: 1100px) {
     .mainSearchDivPcSize {
         width: 40% !important;
