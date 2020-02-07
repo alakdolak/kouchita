@@ -35,7 +35,7 @@
                 background-color: #000000c7;
             }
             .loader_200 {
-                background-image: url("{{URL::asset('_images/loading.svg')}}");
+                background-image: url("{{URL::asset('images/loading.svg')}}");
                 width: 200px !important;
                 height: 200px !important;
                 background-size: 200px 200px;
