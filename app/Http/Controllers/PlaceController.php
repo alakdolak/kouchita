@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\models\Activity;
 use App\models\Adab;
 use App\models\Amaken;
+use App\models\BannerPics;
 use App\models\Cities;
 use App\models\Comment;
 use App\models\ConfigModel;
@@ -2396,176 +2397,99 @@ class PlaceController extends Controller {
 
     public function addPhotoToPlace(Request $request)
     {
-        if( isset($_FILES["l-1"]) && $_FILES["l-1"]['error'] == 0 &&
-            isset($_FILES["t-1"]) && $_FILES["t-1"]['error'] == 0 &&
-            isset($_FILES["s-1"]) && $_FILES["s-1"]['error'] == 0 &&
-            isset($_FILES["f-1"]) && $_FILES["f-1"]['error'] == 0 &&
-            isset($_FILES["mainPic"]) && $_FILES["mainPic"]['error'] == 0 &&
-            isset($request->name) && isset($request->alt) && isset($request->kindPlaceId) && isset($request->placeId)) {
+        if( isset($_FILES['pic']) && $_FILES['pic']['error'] == 0 &&
+            isset($request->name) && isset($request->alt) && isset($request->kindPlaceId) && isset($request->placeId)){
 
             $valid_ext = array('image/jpeg','image/png');
-            if(in_array($_FILES['mainPic']['type'], $valid_ext) && in_array($_FILES['s-1']['type'], $valid_ext) &&
-                in_array($_FILES['f-1']['type'], $valid_ext) && in_array($_FILES['l-1']['type'], $valid_ext) &&
-                in_array($_FILES['t-1']['type'], $valid_ext)){
+            if(in_array($_FILES['pic']['type'], $valid_ext)){
+                if($_FILES['pic']['size'] < 2000000){
+                    $id = $request->placeId;
+                    $kindPlaceId = $request->kindPlaceId;
 
-                $id = $request->placeId;
-                $kindPlaceId = $request->kindPlaceId;
+                    switch ($kindPlaceId){
+                        case 1:
+                            $place = Amaken::find($id);
+                            $kindPlaceName = 'amaken';
+                            break;
+                        case 3:
+                            $place = Restaurant::find($id);
+                            $kindPlaceName = 'restaurant';
+                            break;
+                        case 4:
+                            $place = Hotel::find($id);
+                            $kindPlaceName = 'hotels';
+                            break;
+                        case 6:
+                            $place = Majara::find($id);
+                            $kindPlaceName = 'majara';
+                            break;
+                        case 10:
+                            $place = SogatSanaie::find($id);
+                            $kindPlaceName = 'sogatsanaie';
+                            break;
+                        case 11:
+                            $place = MahaliFood::find($id);
+                            $kindPlaceName = 'mahalifood';
+                            break;
+                    }
 
-                switch ($kindPlaceId){
-                    case 1:
-                        $place = Amaken::find($id);
-                        $kindPlaceName = 'amaken';
-                        break;
-                    case 3:
-                        $place = Restaurant::find($id);
-                        $kindPlaceName = 'restaurant';
-                        break;
-                    case 4:
-                        $place = Hotel::find($id);
-                        $kindPlaceName = 'hotels';
-                        break;
-                    case 6:
-                        $place = Majara::find($id);
-                        $kindPlaceName = 'majara';
-                        break;
-                    case 10:
-                        $place = SogatSanaie::find($id);
-                        $kindPlaceName = 'sogatsanaie';
-                        break;
-                    case 11:
-                        $place = MahaliFood::find($id);
-                        $kindPlaceName = 'mahalifood';
-                        break;
-                }
+                    if($place != null) {
 
-                if($place != null) {
+                        $location = __DIR__ . '/../../../../assets/userPhoto/' . $kindPlaceName . '/' . $place->file;
 
-                    $location = __DIR__ . '/../../../../assets/userPhoto/' . $kindPlaceName . '/' . $place->file;
+                        if(!file_exists($location))
+                            mkdir($location);
 
-                    if(!file_exists($location))
-                        mkdir($location);
+                        if($request->fileKind == 'mainFile'){
+                            $filename = time() . '_' . str_random(3) . '.jpg';
+                            $destination = $location . '/' . $filename;
+                            $result = compressImage($_FILES['pic']['tmp_name'], $destination, 80);
 
-                    $filename = time() . '_' . pathinfo($_FILES['mainPic']['name'], PATHINFO_FILENAME) . '.jpg';
+                            if($result) {
+                                $photographer = new PhotographersPic();
+                                $photographer->userId = Auth::user()->id;
+                                $photographer->name = $request->name;
+                                $photographer->pic = $filename;
+                                $photographer->kindPlaceId = $request->kindPlaceId;
+                                $photographer->placeId = $request->placeId;
+                                $photographer->alt = $request->alt;
+                                $photographer->description = $request->description;
+                                $photographer->like = 0;
+                                $photographer->dislike = 0;
+                                $photographer->isSitePic = 0;
+                                $photographer->isPostPic = 0;
+                                $photographer->status = 0;
+                                $photographer->save();
 
-                    $destinationT = $location . '/t-' . $filename;
-                    $destinationF = $location . '/f-' . $filename;
-                    $destinationS = $location . '/s-' . $filename;
-                    $destinationL = $location . '/l-' . $filename;
-                    $destinationMainPic = $location . '/' . $filename;
-
-                    compressImage($_FILES['f-1']['tmp_name'], $destinationF, 60);
-                    compressImage($_FILES['t-1']['tmp_name'], $destinationT, 60);
-                    compressImage($_FILES['s-1']['tmp_name'], $destinationS, 60);
-                    compressImage($_FILES['l-1']['tmp_name'], $destinationL, 60);
-                    compressImage($_FILES['mainPic']['tmp_name'], $destinationMainPic, 60);
-
-                    $photographer = new PhotographersPic();
-                    $photographer->userId = Auth::user()->id;
-                    $photographer->name = $request->name;
-                    $photographer->pic = $filename;
-                    $photographer->kindPlaceId = $request->kindPlaceId;
-                    $photographer->placeId = $request->placeId;
-                    $photographer->alt = $request->alt;
-                    $photographer->description = $request->description;
-                    $photographer->like = 0;
-                    $photographer->dislike = 0;
-                    $photographer->isSitePic = 0;
-                    $photographer->isPostPic = 0;
-                    $photographer->status = 0;
-                    $photographer->save();
-
-                    echo 'ok';
+                                echo json_encode(['ok', $filename]);
+                            }
+                            else
+                                echo json_encode(['nok4']);
+                        }
+                        else{
+                            $filename = $request->fileName;
+                            $destination = $location . '/' . $request->fileKind . '-' . $filename;
+                            $result = compressImage($_FILES['pic']['tmp_name'], $destination, 60);
+                            if($result)
+                                echo json_encode(['ok', $filename]);
+                            else
+                                echo json_encode(['nok5']);
+                        }
+                    }
+                    else
+                        echo json_encode(['nok3']);
                 }
                 else
-                    echo 'nok3';
+                    echo json_encode(['sizeError']);
             }
             else
-                echo 'nok2';
+                echo json_encode(['nok2']);
         }
         else
-            echo 'nok1';
-        return ;
-    }
+            echo json_encode(['nok1']);
 
-//    public function addPhotoToPlace($placeId, $kindPlaceId) {
-//
-//        $uId = Auth::user()->id;
-//        $err = "";
-//
-//        if (isset($_POST["url"]) && isset($_POST["url2"]) && isset($_POST["fileName"])
-//            && isset($_POST["filter"]) && isset($_POST["desc"])) {
-//
-//            switch ($kindPlaceId) {
-//                case 4:
-//                default:
-//                    $targetFile = __DIR__ . "/../../../../assets/userPhoto/hotels/";
-//                    break;
-//                case 1:
-//                    $targetFile = __DIR__ . "/../../../../assets/userPhoto/amaken/";
-//                    break;
-//                case 3:
-//                    $targetFile = __DIR__ . "/../../../../assets/userPhoto/restaurant/";
-//                    break;
-//                case 6:
-//                    $targetFile = __DIR__ . "/../../../../assets/userPhoto/majara/";
-//                    break;
-//                case 8:
-//                    $targetFile = __DIR__ . "/../../../../assets/userPhoto/adab/";
-//                    break;
-//            }
-//
-//            $fileName = makeValidInput($_POST["fileName"]);
-//
-//            if (file_exists($targetFile . 's-' . $fileName) || file_exists($targetFile . 'l-' . $fileName)) {
-//                $count = 2;
-//                while (file_exists($targetFile . 's-' . $count . $fileName) || file_exists($targetFile . 'l-' . $count . $fileName))
-//                    $count++;
-//                $fileName = $count . $fileName;
-//            }
-//
-//            copy(makeValidInput($_POST["url"]), $targetFile . 'l-' . $fileName);
-//            copy(makeValidInput($_POST["url2"]), $targetFile . 's-' . $fileName);
-//
-//            $desc = makeValidInput($_POST["desc"]);
-//            if ($desc == -1)
-//                $desc = "";
-//
-//            $log = new LogModel();
-//            $log->visitorId = $uId;
-//            $log->time = getToday()["time"];
-//            $log->placeId = $placeId;
-//            $log->kindPlaceId = $kindPlaceId;
-//            $log->text = $fileName;
-//            $log->subject = $desc;
-//            $log->date = date('Y-m-d');
-//            $log->activityId = Activity::whereName('عکس')->first()->id;
-//            $log->pic = makeValidInput($_POST["filter"]);
-//            try {
-//                $log->save();
-//                switch ($kindPlaceId) {
-//                    case 4:
-//                        echo \GuzzleHttp\json_encode(['status' => 'ok', 'url' => route('hotelDetails', ['placeId' => $placeId, 'placeName' => Hotel::whereId($placeId)->name, 'mode' => 'addPhotoSuccessfully'])]);
-//                        break;
-//                    case 1:
-//                        echo \GuzzleHttp\json_encode(['status' => 'ok', 'url' => route('amakenDetails', ['placeId' => $placeId, 'placeName' => Amaken::whereId($placeId)->name, 'mode' => 'addPhotoSuccessfully'])]);
-//                        break;
-//                    case 3:
-//                        echo \GuzzleHttp\json_encode(['status' => 'ok', 'url' => route('restaurantDetails', ['placeId' => $placeId, 'placeName' => Restaurant::whereId($placeId)->name, 'mode' => 'addPhotoSuccessfully'])]);
-//                        break;
-//                    case 6:
-//                        echo \GuzzleHttp\json_encode(['status' => 'ok', 'url' => route('majaraDetails', ['placeId' => $placeId, 'placeName' => Majara::whereId($placeId)->name, 'mode' => 'addPhotoSuccessfully'])]);
-//                        break;
-//                    case 8:
-//                        echo \GuzzleHttp\json_encode(['status' => 'ok', 'url' => route('adabDetails', ['placeId' => $placeId, 'placeName' => Adab::whereId($placeId)->name, 'mode' => 'addPhotoSuccessfully'])]);
-//                        break;
-//                }
-//                return;
-//            } catch (Exception $e) {
-//            };
-//        }
-//
-//        echo \GuzzleHttp\json_encode(['status' => 'nok', 'err' => $err]);
-//    }
+        return;
+    }
 
     public function addPhotoToComment($placeId, $kindPlaceId)
     {
@@ -2873,6 +2797,7 @@ class PlaceController extends Controller {
         $commentCount += LogModel::where('activityId', $activityId1)->where('confirm', 1)->count();
         $commentCount += LogModel::where('activityId', $activityId2)->where('confirm', 1)->count();
         $commentCount += PostComment::where('status', 1)->count();
+        $userCount = User::all()->count();
 
         $counts = [ 'hotel' => $hotelCount,
                     'restaurant' => $retCount,
@@ -2880,10 +2805,20 @@ class PlaceController extends Controller {
                     'sogatSanaie' => $sogatSanaie,
                     'mahaliFood' => $mahaliFoodCount,
                     'article' => $postCount,
-                    'comment' => $commentCount];
+                    'comment' => $commentCount,
+                    'userCount' => $userCount];
+
+        $bPs = BannerPics::where('page', 'mainPage')->get();
+        $middleBannerPic = array();
+        $middleBannerLink = array();
+        foreach ($bPs as $item){
+            $key = $item->section.$item->number;
+            $middleBannerPic[$key] = URL::asset('_images/bannerPic/' . $item->page . '/' . $item->pic);
+            $middleBannerLink[$key] = $item->link;
+        }
 
         return view('main', array('placeMode' => $mode, 'kindPlaceId' => $kindPlaceId, 'sliderPic' => $sliderPic, 'count' => $counts,
-            'sections' => SectionPage::wherePage(getValueInfo('hotel-detail'))->get()
+            'sections' => SectionPage::wherePage(getValueInfo('hotel-detail'))->get(), 'middleBannerPic' => $middleBannerPic, 'middleBannerLink' => $middleBannerLink
         ));
     }
 

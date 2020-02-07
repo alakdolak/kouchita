@@ -599,6 +599,7 @@ dd($request->all());
         foreach ($suggest as $item){
             switch ($item->kindPlaceId){
                 case 1:
+                default:
                     $file = 'amaken';
                     $kindPlaceId = 1;
                     $url = 'amakenDetails';
@@ -636,20 +637,22 @@ dd($request->all());
                     break;
             }
 
-            if(file_exists((__DIR__ . '/../../../../assets/_images/' . $file . '/' . $place->file . '/f-' . $place->picNumber)))
-                $place->placePic = URL::asset('_images/' . $file . '/' . $place->file . '/f-' . $place->picNumber);
-            else
-                $place->placePic = URL::asset("_images/nopic/blank.jpg");
-            $place->url = route($url, ['placeId' => $place->id, 'placeName' => $place->name]);
-            $city = Cities::whereId($place->cityId);
-            $place->placeCity = $city->name;
-            $place->placeState = State::whereId($city->stateId)->name;
-            $place->placeRate = getRate($place->id, $kindPlaceId)[1];
-            $place->section = $item->section;
-            $place->placeReviews = DB::select('select count(*) as countNum from log, comment WHERE logId = log.id and status = 1 and placeId = ' . $place->id .
-                ' and kindPlaceId = ' . $kindPlaceId . ' and activityId = ' . $activityId)[0]->countNum;
+            if($place != null && $file != null) {
+                if (file_exists((__DIR__ . '/../../../../assets/_images/' . $file . '/' . $place->file . '/f-' . $place->picNumber)))
+                    $place->placePic = URL::asset('_images/' . $file . '/' . $place->file . '/f-' . $place->picNumber);
+                else
+                    $place->placePic = URL::asset("_images/nopic/blank.jpg");
+                $place->url = route($url, ['placeId' => $place->id, 'placeName' => $place->name]);
+                $city = Cities::whereId($place->cityId);
+                $place->placeCity = $city->name;
+                $place->placeState = State::whereId($city->stateId)->name;
+                $place->placeRate = getRate($place->id, $kindPlaceId)[1];
+                $place->section = $item->section;
+                $place->placeReviews = DB::select('select count(*) as countNum from log, comment WHERE logId = log.id and status = 1 and placeId = ' . $place->id .
+                    ' and kindPlaceId = ' . $kindPlaceId . ' and activityId = ' . $activityId)[0]->countNum;
 
-            array_push($suggestions, $place);
+                array_push($suggestions, $place);
+            }
         }
 
         $today = getToday()['date'];

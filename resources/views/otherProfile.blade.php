@@ -292,7 +292,7 @@
                                 <?php $i = 0; ?>
                                 @foreach($recentlyBadges as $badge)
                                     <div class="badgeItem clickableBadge" onclick="hideAllBadges(); showElement('badge_' + this.id)" id="{{$badge->id}}">
-                                        <div style="background: url('{{URL::asset('badges') . '/' . $badge->pic_1}}')" class="sprite-badge_medium_grey_rev_01 mediumBadge"></div>
+                                        <div style="background: url('{{URL::asset('_images/badges' . '/' . $badge->pic_1)}}')" class="sprite-badge_medium_grey_rev_01 mediumBadge"></div>
                                         <div class="badgeName"> {{$badge->activityId}} جدید</div>
                                     </div>
                                     <?php $i++; ?>

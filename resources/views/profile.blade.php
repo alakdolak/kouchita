@@ -411,7 +411,7 @@
 
                                         @foreach($nearestMedals as $nearestMedal)
                                             <div class="badgeItem clickableBadge" onclick="hideAllBadges(); $('#badge_' + this.id).css('left', parseInt($(this).css('width').split('px')[0]) / 2 + getFixedFromLeftBODYCON($(this)) - 25 + 'px'); showElement('badge_' + this.id)" id="{{$nearestMedal["medal"]->id}}">
-                                                <div style="background: url('{{URL::asset('badges') . '/' . $nearestMedal["medal"]->pic_1}}'); background-size: contain;" class="sprite-badge_medium_grey_rev_01 mediumBadge"></div>
+                                                <div style="background-image: url('{{URL::asset('_images/badges' . '/' . $nearestMedal["medal"]->pic_1)}}'); background-size: 100% 100%; width: 100px; height: 100px" class="sprite-badge_medium_grey_rev_01 mediumBadge"></div>
                                                 <div class="badgeName"> {{$nearestMedal["medal"]->activityId}} جدید</div>
                                                 <div class="badgeSubtext"> {{$nearestMedal["needed"]}} <span>{{$nearestMedal["medal"]->activityId}}</span></div>
                                             </div>
@@ -451,7 +451,7 @@
                                             <?php $i = 0; ?>
                                             @foreach($recentlyBadges as $recentlyBadge)
                                                     <div class="badgeItem clickableBadge" id="{{$recentlyBadge->id}}">
-                                                    <div style="background: url('{{URL::asset('badges') . '/' . $recentlyBadge->pic_1}}'); background-size: contain; " class="sprite-badge_medium_grey_rev_01 mediumBadge"></div>
+                                                    <div style="background: url('{{URL::asset('_images/badges' . '/' . $recentlyBadge->pic_1)}}'); background-size: 100% 100%; width: 100px; height: 100px; " class="sprite-badge_medium_grey_rev_01 mediumBadge"></div>
                                                     <div class="badgeName"> {{$recentlyBadge->activityId}} جدید</div>
                                                     <div class="badgeSubtext"> {{$recentlyBadge->floor}} <span>{{$recentlyBadge->activityId}}</span></div>
                                                 </div>
