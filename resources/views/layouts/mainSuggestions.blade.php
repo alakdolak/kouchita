@@ -591,7 +591,7 @@
                             <img src="#" id="showMiddleBannerInput" style="width: 100%;">
                         </div>
                         <div class="col-md-6">
-                            <input type="file" id="uploadImgBanner" onchange="changeInputImg(this)">
+                            <input type="file" id="uploadImgBanner" accept="image/*" onchange="changeInputImg(this)">
                         </div>
                     </div>
 

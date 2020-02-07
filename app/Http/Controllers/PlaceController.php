@@ -2397,6 +2397,99 @@ class PlaceController extends Controller {
 
     public function addPhotoToPlace(Request $request)
     {
+        if( isset($_FILES['pic']) && $_FILES['pic']['error'] == 0 &&
+            isset($request->name) && isset($request->alt) && isset($request->kindPlaceId) && isset($request->placeId)){
+
+            $valid_ext = array('image/jpeg','image/png');
+            if(in_array($_FILES['pic']['type'], $valid_ext)){
+                if($_FILES['pic']['size'] < 2000000){
+                    $id = $request->placeId;
+                    $kindPlaceId = $request->kindPlaceId;
+
+                    switch ($kindPlaceId){
+                        case 1:
+                            $place = Amaken::find($id);
+                            $kindPlaceName = 'amaken';
+                            break;
+                        case 3:
+                            $place = Restaurant::find($id);
+                            $kindPlaceName = 'restaurant';
+                            break;
+                        case 4:
+                            $place = Hotel::find($id);
+                            $kindPlaceName = 'hotels';
+                            break;
+                        case 6:
+                            $place = Majara::find($id);
+                            $kindPlaceName = 'majara';
+                            break;
+                        case 10:
+                            $place = SogatSanaie::find($id);
+                            $kindPlaceName = 'sogatsanaie';
+                            break;
+                        case 11:
+                            $place = MahaliFood::find($id);
+                            $kindPlaceName = 'mahalifood';
+                            break;
+                    }
+
+                    if($place != null) {
+
+                        $location = __DIR__ . '/../../../../assets/userPhoto/' . $kindPlaceName . '/' . $place->file;
+
+                        if(!file_exists($location))
+                            mkdir($location);
+
+                        if($request->fileKind == 'mainFile'){
+                            $filename = time() . '_' . str_random(3) . '.jpg';
+                            $destination = $location . '/' . $filename;
+                            $result = compressImage($_FILES['pic']['tmp_name'], $destination, 100);
+
+                            if($result) {
+                                $photographer = new PhotographersPic();
+                                $photographer->userId = Auth::user()->id;
+                                $photographer->name = $request->name;
+                                $photographer->pic = $filename;
+                                $photographer->kindPlaceId = $request->kindPlaceId;
+                                $photographer->placeId = $request->placeId;
+                                $photographer->alt = $request->alt;
+                                $photographer->description = $request->description;
+                                $photographer->like = 0;
+                                $photographer->dislike = 0;
+                                $photographer->isSitePic = 0;
+                                $photographer->isPostPic = 0;
+                                $photographer->status = 0;
+                                $photographer->save();
+
+                                echo json_encode(['ok', $filename]);
+                            }
+                            else
+                                echo json_encode(['nok4']);
+                        }
+                        else{
+                            $filename = $request->fileName;
+                            $destination = $location . '/' . $request->fileKind . '-' . $filename;
+                            $result = compressImage($_FILES['pic']['tmp_name'], $destination, 60);
+                            if($result)
+                                echo json_encode(['ok', $filename]);
+                            else
+                                echo json_encode(['nok5']);
+                        }
+                    }
+                    else
+                        echo json_encode(['nok3']);
+                }
+                else
+                    echo json_encode(['sizeError']);
+            }
+            else
+                echo json_encode(['nok2']);
+        }
+        else
+            echo json_encode(['nok1']);
+
+        return;
+
         if( isset($_FILES["l-1"]) && $_FILES["l-1"]['error'] == 0 &&
             isset($_FILES["t-1"]) && $_FILES["t-1"]['error'] == 0 &&
             isset($_FILES["s-1"]) && $_FILES["s-1"]['error'] == 0 &&
