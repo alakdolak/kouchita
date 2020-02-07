@@ -86,6 +86,19 @@ class HomeController extends Controller
 
                 echo 'ok';
             }
+            else if(isset($request->link)){
+                $condition = ['page' => $request->page, 'number' => $request->number, 'section' => $request->section];
+                $pic = BannerPics::where($condition)->first();
+                if($pic != null){
+                    $link = $request->link;
+                    if(strpos($link, 'http') === false)
+                        $link = 'https://' . $link;
+                    $pic->link = $link;
+                    $pic->save();
+                }
+                else
+                    echo 'nok2';
+            }
             else
                 echo 'nok2';
         }
