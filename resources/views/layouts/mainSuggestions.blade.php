@@ -226,8 +226,8 @@
         <div class="articleBoxes">
             <div class="articleTitle">مقاله‌های ما</div>
             <div class="articleImg" style="position: relative">
-                <a href="{{isset($middleBannerLink['32']) ? $middleBannerLink['32'] : '#'}}" target="{{isset($middleBannerLink['32']) ? '_blank' : ''}}" >
-                    <img class="middleImg32" src="{{isset($middleBannerPic['32']) ? $middleBannerPic['32'] : ''}}" style="width: 100%; height: 100%;">
+                <a href="{{isset($middleBannerLink['41']) ? $middleBannerLink['41'] : '#'}}" target="{{isset($middleBannerLink['41']) ? '_blank' : ''}}" >
+                    <img class="middleImg41" src="{{isset($middleBannerPic['41']) ? $middleBannerPic['41'] : ''}}" style="width: 100%; height: 100%;">
                 </a>
             </div>
             <a class="articleLink">هم اکنون ببینید</a>
@@ -235,8 +235,8 @@
     --}}<div class="articleBoxes">
             <div class="articleTitle">مقاله‌های ما</div>
             <div class="articleImg" style="position: relative">
-                <a href="{{isset($middleBannerLink['32']) ? $middleBannerLink['32'] : '#'}}" target="{{isset($middleBannerLink['32']) ? '_blank' : ''}}" >
-                    <img class="middleImg32" src="{{isset($middleBannerPic['32']) ? $middleBannerPic['32'] : ''}}" style="width: 100%; height: 100%;">
+                <a href="{{isset($middleBannerLink['42']) ? $middleBannerLink['42'] : '#'}}" target="{{isset($middleBannerLink['42']) ? '_blank' : ''}}" >
+                    <img class="middleImg42" src="{{isset($middleBannerPic['42']) ? $middleBannerPic['42'] : ''}}" style="width: 100%; height: 100%;">
                 </a>
             </div>
             <a class="articleLink">هم اکنون ببینید</a>
@@ -244,8 +244,8 @@
     --}}<div class="articleBoxes">
             <div class="articleTitle">مقاله‌های ما</div>
             <div class="articleImg" style="position: relative">
-                <a href="{{isset($middleBannerLink['33']) ? $middleBannerLink['33'] : '#'}}" target="{{isset($middleBannerLink['33']) ? '_blank' : ''}}" >
-                    <img class="middleImg33" src="{{isset($middleBannerPic['33']) ? $middleBannerPic['33'] : ''}}" style="width: 100%; height: 100%;">
+                <a href="{{isset($middleBannerLink['43']) ? $middleBannerLink['43'] : '#'}}" target="{{isset($middleBannerLink['43']) ? '_blank' : ''}}" >
+                    <img class="middleImg43" src="{{isset($middleBannerPic['43']) ? $middleBannerPic['43'] : ''}}" style="width: 100%; height: 100%;">
                 </a>
             </div>
             <a class="articleLink">هم اکنون ببینید</a>
@@ -253,8 +253,8 @@
     --}}<div class="articleBoxes">
             <div class="articleTitle">مقاله‌های ما</div>
             <div class="articleImg" style="position: relative">
-                <a href="{{isset($middleBannerLink['34']) ? $middleBannerLink['34'] : '#'}}" target="{{isset($middleBannerLink['34']) ? '_blank' : ''}}" >
-                    <img class="middleImg34" src="{{isset($middleBannerPic['34']) ? $middleBannerPic['34'] : ''}}" style="width: 100%; height: 100%;">
+                <a href="{{isset($middleBannerLink['44']) ? $middleBannerLink['44'] : '#'}}" target="{{isset($middleBannerLink['44']) ? '_blank' : ''}}" >
+                    <img class="middleImg44" src="{{isset($middleBannerPic['44']) ? $middleBannerPic['44'] : ''}}" style="width: 100%; height: 100%;">
                 </a>
             </div>
             <a class="articleLink">هم اکنون ببینید</a>
@@ -316,13 +316,13 @@
 
     <div class="middleBannerDoublePhotoBanner">
         <div class="middleBannerPhotoBanner">
-            <a href="{{isset($middleBannerLink['41']) ? $middleBannerLink['41'] : '#'}}" target="{{isset($middleBannerLink['41']) ? '_blank' : ''}}" >
-                <img class="middleImg41" src="{{isset($middleBannerPic['41']) ? $middleBannerPic['41'] : ''}}" style="width: 100%; height: 100%;">
+            <a href="{{isset($middleBannerLink['51']) ? $middleBannerLink['51'] : '#'}}" target="{{isset($middleBannerLink['51']) ? '_blank' : ''}}" >
+                <img class="middleImg51" src="{{isset($middleBannerPic['51']) ? $middleBannerPic['51'] : ''}}" style="width: 100%; height: 100%;">
             </a>
         </div>{{--
     --}}<div class="middleBannerPhotoBanner">
-            <a href="{{isset($middleBannerLink['42']) ? $middleBannerLink['42'] : '#'}}" target="{{isset($middleBannerLink['42']) ? '_blank' : ''}}" >
-                <img class="middleImg42" src="{{isset($middleBannerPic['42']) ? $middleBannerPic['42'] : ''}}" style="width: 100%; height: 100%;">
+            <a href="{{isset($middleBannerLink['52']) ? $middleBannerLink['52'] : '#'}}" target="{{isset($middleBannerLink['52']) ? '_blank' : ''}}" >
+                <img class="middleImg52" src="{{isset($middleBannerPic['52']) ? $middleBannerPic['52'] : ''}}" style="width: 100%; height: 100%;">
             </a>
         </div>
     </div>
@@ -510,8 +510,8 @@
     </div>
 
     <div class="middleBannerPhotoBanner">
-        <a href="{{isset($middleBannerLink['51']) ? $middleBannerLink['51'] : '#'}}" target="{{isset($middleBannerLink['51']) ? '_blank' : ''}}" >
-            <img class="middleImg51" src="{{isset($middleBannerPic['51']) ? $middleBannerPic['51'] : ''}}" style="width: 100%; height: 100%;">
+        <a href="{{isset($middleBannerLink['61']) ? $middleBannerLink['61'] : '#'}}" target="{{isset($middleBannerLink['61']) ? '_blank' : ''}}" >
+            <img class="middleImg61" src="{{isset($middleBannerPic['61']) ? $middleBannerPic['61'] : ''}}" style="width: 100%; height: 100%;">
         </a>
     </div>
 
@@ -645,6 +645,10 @@
             data.append('section', middleBannerSectionId);
             data.append('number', middleBannerNum);
 
+            $('#uploadImgBanner').val('');
+            $('#linkForBanner').val('');
+            $('#showMiddleBannerInput').attr('src', '');
+
             $('#middleBannerModal').modal('show');
         }
 
@@ -664,6 +668,9 @@
             var link = $('#linkForBanner').val();
 
             if (middleBannerNum != 0 && middleBannerSectionId != 0) {
+
+                if(link.trim().length == 0)
+                    link = "#";
 
                 data.append('link', link);
                 data.append('page', 'mainPage');

@@ -63,25 +63,29 @@ class HomeController extends Controller
             if(isset($_FILES['pic']) && $_FILES['pic']['error'] == 0) {
                 $condition = ['page' => $request->page, 'number' => $request->number, 'section' => $request->section];
                 $pic = BannerPics::where($condition)->first();
-                if($pic != null)
-                    unlink($location.'/'.$pic->pic);
-                else{
+                if($pic != null) {
+                    if (file_exists($location . '/' . $pic->pic))
+                        unlink($location . '/' . $pic->pic);
+                }
+                else {
                     $pic = new BannerPics();
                     $pic->page = $request->page;
                     $pic->section = $request->section;
                     $pic->number = $request->number;
                 }
-                $destinationPic = $location . '/' . $_FILES['pic']['name'];
-                compressImage($_FILES['pic']['tmp_name'], $destinationPic, 80);
 
+                $destinationPic = $location . '/' . $_FILES['pic']['name'];
+
+                $link = 'https://';
                 $link = $request->link;
                 if(strpos($link, 'http') === false)
                     $link = 'https://' . $link;
 
                 $pic->link = $link;
-                $pic->pic = $_FILES['pic']['name'];
                 $pic->userId = \auth()->user()->id;
 
+                compressImage($_FILES['pic']['tmp_name'], $destinationPic, 80);
+                $pic->pic = $_FILES['pic']['name'];
                 $pic->save();
 
                 echo 'ok';
