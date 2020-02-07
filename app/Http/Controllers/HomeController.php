@@ -7,6 +7,7 @@ use App\models\Activity;
 use App\models\Adab;
 use App\models\AirLine;
 use App\models\Amaken;
+use App\models\BannerPics;
 use App\models\Cities;
 use App\models\ConfigModel;
 use App\models\DefaultPic;
@@ -41,9 +42,60 @@ use Illuminate\Support\Facades\URL;
 use PHPMailer\PHPMailer\PHPMailer;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use Illuminate\Http\Request;
+
 
 class HomeController extends Controller
 {
+    public function middleBannerImages(Request $request)
+    {
+        if(\auth()->check() && \auth()->user()->role == 0){
+            $location = __DIR__ . '/../../../../assets/_images/bannerPic';
+
+            if(!file_exists($location))
+                mkdir($location);
+
+            $location .= '/' . $request->page;
+
+            if(!file_exists($location))
+                mkdir($location);
+
+            if(isset($_FILES['pic']) && $_FILES['pic']['error'] == 0) {
+                $condition = ['page' => $request->page, 'number' => $request->number, 'section' => $request->section];
+                $pic = BannerPics::where($condition)->first();
+                if($pic != null)
+                    unlink($location.'/'.$pic->pic);
+                else{
+                    $pic = new BannerPics();
+                    $pic->page = $request->page;
+                    $pic->section = $request->section;
+                    $pic->number = $request->number;
+                }
+                $destinationPic = $location . '/' . $_FILES['pic']['name'];
+                compressImage($_FILES['pic']['tmp_name'], $destinationPic, 100);
+
+                $link = $request->link;
+                if(strpos($link, 'http') === false)
+                    $link = 'https://' . $link;
+
+                $pic->link = $link;
+                $pic->pic = $_FILES['pic']['name'];
+                $pic->userId = \auth()->user()->id;
+
+                $pic->save();
+
+                echo 'ok';
+            }
+            else
+                echo 'nok2';
+        }
+        else
+            echo 'nok1';
+
+        return;
+    }
+
+
     public function cityPage($city) {
 
         $today = getToday()["date"];

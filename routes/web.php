@@ -711,6 +711,8 @@ Route::group(array('middleware' => ['throttle:30', 'nothing', 'auth']), function
 
 Route::group(array('middleware' => ['throttle:30', 'auth', 'adminAccess']), function () {
 
+    Route::post('middleBannerImage', 'HomeController@middleBannerImages')->name('middleBanner.image.store');
+
     Route::get('fillState', 'HomeController@fillState');
 
     Route::get('fillCity', 'HomeController@fillCity');

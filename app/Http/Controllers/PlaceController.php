@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\models\Activity;
 use App\models\Adab;
 use App\models\Amaken;
+use App\models\BannerPics;
 use App\models\Cities;
 use App\models\Comment;
 use App\models\ConfigModel;
@@ -2873,6 +2874,7 @@ class PlaceController extends Controller {
         $commentCount += LogModel::where('activityId', $activityId1)->where('confirm', 1)->count();
         $commentCount += LogModel::where('activityId', $activityId2)->where('confirm', 1)->count();
         $commentCount += PostComment::where('status', 1)->count();
+        $userCount = User::all()->count();
 
         $counts = [ 'hotel' => $hotelCount,
                     'restaurant' => $retCount,
@@ -2880,10 +2882,20 @@ class PlaceController extends Controller {
                     'sogatSanaie' => $sogatSanaie,
                     'mahaliFood' => $mahaliFoodCount,
                     'article' => $postCount,
-                    'comment' => $commentCount];
+                    'comment' => $commentCount,
+                    'userCount' => $userCount];
+
+        $bPs = BannerPics::where('page', 'mainPage')->get();
+        $middleBannerPic = array();
+        $middleBannerLink = array();
+        foreach ($bPs as $item){
+            $key = $item->section.$item->number;
+            $middleBannerPic[$key] = URL::asset('_images/bannerPic/' . $item->page . '/' . $item->pic);
+            $middleBannerLink[$key] = $item->link;
+        }
 
         return view('main', array('placeMode' => $mode, 'kindPlaceId' => $kindPlaceId, 'sliderPic' => $sliderPic, 'count' => $counts,
-            'sections' => SectionPage::wherePage(getValueInfo('hotel-detail'))->get()
+            'sections' => SectionPage::wherePage(getValueInfo('hotel-detail'))->get(), 'middleBannerPic' => $middleBannerPic, 'middleBannerLink' => $middleBannerLink
         ));
     }
 

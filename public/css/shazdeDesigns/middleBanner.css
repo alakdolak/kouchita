@@ -158,6 +158,7 @@ DIV.ppr_rup.ppr_priv_homepage_shelves .homepage_shelves_widget .prw_shelves_shel
 .middleBannerPhotoDiv {
     /*display: flex;*/
     /*flex-direction: column;*/
+    position: relative;
     background-color: #ef9a9a;
     padding: 10px 10px 0 0;
     overflow: auto;
@@ -168,6 +169,7 @@ DIV.ppr_rup.ppr_priv_homepage_shelves .homepage_shelves_widget .prw_shelves_shel
 .middleBannerPhotoDiv .smallOne {
     width: 240px;
     height: 240px;
+    position: relative;
     background-color: #ffe8e8;
     margin: 0 0 10px 10px;
     box-shadow: 0 0 10px 0;
@@ -176,6 +178,7 @@ DIV.ppr_rup.ppr_priv_homepage_shelves .homepage_shelves_widget .prw_shelves_shel
 
 .middleBannerPhotoDiv .middleOne {
     width: 280px;
+    position: relative;
     height: 240px;
     background-color: #ffe8e8;
     margin: 0 0 10px 10px;
@@ -184,6 +187,7 @@ DIV.ppr_rup.ppr_priv_homepage_shelves .homepage_shelves_widget .prw_shelves_shel
 }
 
 .middleBannerPhotoDiv .largeOne {
+    position: relative;
     width: 580px;
     height: 240px;
     background-color: #ffe8e8;
@@ -194,6 +198,7 @@ DIV.ppr_rup.ppr_priv_homepage_shelves .homepage_shelves_widget .prw_shelves_shel
 
 .middleBannerPhotoBanner {
     width: 96%;
+    position: relative;
     height: 220px;
     margin: 0 2%;
     background-color: #0076a3;
@@ -353,6 +358,7 @@ DIV.ppr_rup.ppr_priv_homepage_shelves .homepage_shelves_widget .prw_shelves_shel
 }
 
 .innerStripedBackGround {
+    position: relative;
     background: white;
     height: 100%;
     width: 100%;
@@ -395,7 +401,7 @@ DIV.ppr_rup.ppr_priv_homepage_shelves .homepage_shelves_widget .prw_shelves_shel
 
 .articleTitle {
     background-color: rgba(0, 0, 0, 0.5);
-    position: absolute;
+    /*position: absolute;*/
     top: 0;
     border-radius: 10px 10px 0 0;
     width: 100%;

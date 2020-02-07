@@ -262,32 +262,10 @@
             <div class="clear-both"></div>
         </div>
 
-        <div class="middleBannerPhotoDiv">
-            <div>
-                <div class="smallOne">
-                    <img src="">
-                </div>{{--
-            --}}<div class="middleOne">
-                    <img src="">
-                </div>{{--
-            --}}<div class="largeOne">
-                    <img src="">
-                </div>{{--
-            --}}<div class="clear-both"></div>{{--
-            --}}<div class="largeOne">
-                    <img src="">
-                </div>{{--
-            --}}<div class="middleOne">
-                    <img src="">
-                </div>{{--
-            --}}<div class="smallOne">
-                    <img src="">
-                </div>
-            </div>
-        </div>
 
         @include('layouts.mainSuggestions')
 
         <div class="footerBarSpacer"></div>
     </div>
 </div>
+
