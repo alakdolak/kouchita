@@ -44,7 +44,7 @@ function createPagination(page){
     var afterMore = false;
     var text = '';
     $('#allPostPagination').html('');
-
+alert(totalPage)
     for(var i = 1; i <= totalPage; i++){
         text = '';
         if(page == i)
