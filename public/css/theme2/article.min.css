@@ -10567,7 +10567,7 @@ button.close {
 }
 
 body:after {
-    content: url(../img/close.png) url(../img/loading.gif) url(../img/prev.png) url(../img/next.png);
+    /*content: url(../img/close.png) url(../img/loading.gif) url(../img/prev.png) url(../img/next.png);*/
     display: none
 }
 
@@ -10641,7 +10641,7 @@ body.lb-disable-scrolling {
     width: 32px;
     height: 32px;
     margin: 0 auto;
-    background: url(../img/loading.gif) no-repeat
+    /*background: url(../img/loading.gif) no-repeat*/
 }
 
 .lb-nav {
@@ -10671,7 +10671,7 @@ body.lb-disable-scrolling {
     width: 34%;
     left: 0;
     float: left;
-    background: url(../img/prev.png) left 48% no-repeat;
+    /*background: url(../img/prev.png) left 48% no-repeat;*/
     filter: alpha(Opacity=0);
     opacity: 0;
     -webkit-transition: opacity .6s;
@@ -10689,7 +10689,7 @@ body.lb-disable-scrolling {
     width: 64%;
     right: 0;
     float: right;
-    background: url(../img/next.png) right 48% no-repeat;
+    /*background: url(../img/next.png) right 48% no-repeat;*/
     filter: alpha(Opacity=0);
     opacity: 0;
     -webkit-transition: opacity .6s;
@@ -10754,7 +10754,7 @@ body.lb-disable-scrolling {
     float: right;
     width: 30px;
     height: 30px;
-    background: url(../img/close.png) top right no-repeat;
+    /*background: url(../img/close.png) top right no-repeat;*/
     text-align: right;
     outline: 0;
     filter: alpha(Opacity=70);
@@ -10936,7 +10936,7 @@ body.lb-disable-scrolling {
     display: block;
     top: 50%;
     height: 32px;
-    background-image: url(../img/controls.png);
+    /*background-image: url(../img/controls.png);*/
     cursor: pointer;
     position: absolute;
     z-index: 99;
@@ -14856,7 +14856,7 @@ input[type=submit]:hover {
 .widget_categories li a,
 .widget_nav_menu li a,
 .widget_pages li a {
-    background: url(../img/arrow.png) right center no-repeat;
+    /*background: url(../img/arrow.png) right center no-repeat;*/
     padding: 0 15px 0 0;
     font-size: 14px;
     font-weight: 500
@@ -14865,7 +14865,7 @@ input[type=submit]:hover {
 .widget_categories li a:hover,
 .widget_nav_menu li a:hover,
 .widget_pages li a:hover {
-    background: url(../img/arrow-hover.png) right center no-repeat;
+    /*background: url(../img/arrow-hover.png) right center no-repeat;*/
     padding: 0 15px 0 0
 }
 
@@ -15301,13 +15301,13 @@ input[type=submit]:hover {
 .im-top-footer.dark .widget_categories li a,
 .im-top-footer.dark .widget_nav_menu li a,
 .im-top-footer.dark .widget_pages li a {
-    background: url(../img/arrow-dark.png) right center no-repeat
+    /*background: url(../img/arrow-dark.png) right center no-repeat*/
 }
 
 .im-top-footer.dark .widget_categories li a:hover,
 .im-top-footer.dark .widget_nav_menu li a:hover,
 .im-top-footer.dark .widget_pages li a:hover {
-    background: url(../img/arrow-dark-hover.png) right center no-repeat
+    /*background: url(../img/arrow-dark-hover.png) right center no-repeat*/
 }
 
 #back-to-top {
@@ -15665,7 +15665,7 @@ input[type=submit]:hover {
 }
 
 .iranoweb a {
-    background: url(../img/iranoweb.png) top right no-repeat;
+    /*background: url(../img/iranoweb.png) top right no-repeat;*/
     width: 100px;
     margin: 20px auto 0;
     opacity: .5
@@ -16905,27 +16905,27 @@ input[type=submit]:hover {
 }
 
 .vc_pixel_icon-alert {
-    background-image: url(../vc/alert.png)
+    /*background-image: url(../vc/alert.png)*/
 }
 
 .vc_pixel_icon-info {
-    background-image: url(../vc/info.png)
+    /*background-image: url(../vc/info.png)*/
 }
 
 .vc_pixel_icon-tick {
-    background-image: url(../vc/tick.png)
+    /*background-image: url(../vc/tick.png)*/
 }
 
 .vc_pixel_icon-explanation {
-    background-image: url(../vc/exclamation.png)
+    /*background-image: url(../vc/exclamation.png)*/
 }
 
 .vc_pixel_icon-address_book {
-    background-image: url(../images/icons/address-book.png)
+    /*background-image: url(../images/icons/address-book.png)*/
 }
 
 .vc_pixel_icon-alarm_clock {
-    background-image: url(../images/icons/alarm-clock.png)
+    /*background-image: url(../images/icons/alarm-clock.png)*/
 }
 
 .vc_pixel_icon-anchor {
@@ -28000,7 +28000,7 @@ a.wpb_button_a {
 }
 
 .wpb_accordion .wpb_accordion_wrapper .ui-state-active .ui-icon {
-    background-image: url(../images/toggle_close.png)
+    /*background-image: url(../images/toggle_close.png)*/
 }
 
 @media (max-width:480px) {

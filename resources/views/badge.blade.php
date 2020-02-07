@@ -37,9 +37,9 @@
                             <li id="{{$badge->id}}" onclick="hideAllBadges(); showElementw('badge_' + this.id)" class="memberBadges border">
                                 <div class="badgeInfo">
                                     @if(!$badge->status)
-                                        <div class="badgeIcon sprite-badge_large_grey_rev_01" style="width: 100%; background: url('{{URL::asset('badges') . '/' . $badge->pic_1}}'); background-size: contain;  background-repeat: no-repeat"></div>
+                                        <div class="badgeIcon sprite-badge_large_grey_rev_01" style="background: url('{{URL::asset('_images/badges' . '/' . $badge->pic_1)}}'); background-size:100%; width: 100px; height: 100px;"></div>
                                     @else
-                                        <div class="badgeIcon sprite-badge_large_grey_rev_01" style="width: 100%; background: url('{{URL::asset('badges') . '/' . $badge->pic_2}}'); background-size: contain; background-repeat: no-repeat">
+                                        <div class="badgeIcon sprite-badge_large_grey_rev_01" style="background: url('{{URL::asset('_images/badges' . '/' . $badge->pic_2)}}'); background-size:100%; width: 100px; height: 100px;">
                                         </div>
                                     @endif
                                     <div class="badgeText">{{$badge->name}}</div>

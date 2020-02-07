@@ -440,10 +440,6 @@ $kindPlaceId = 10; ?>
 
 </div>
 
-@if(!Auth::check())
-    @include('layouts.loginPopUp')
-@endif
-
 <script>
     var category = {!! $category !!}
     var post = {!! $post !!}
