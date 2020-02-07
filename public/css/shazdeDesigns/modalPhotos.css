@@ -188,6 +188,10 @@
     opacity: 1;
 }
 
+.modal-open .modal {
+    backdrop-filter: blur(2px);
+}
+
 @media (max-width:1188px) and (min-width: 992px) {
 
     .showingPhotosModal .modal-dialog {

@@ -477,6 +477,11 @@
     cursor: pointer;
 }
 
+.darkModalEditor {
+    background-color: rgba(0,0,0,0.5);
+    backdrop-filter: blur(2px);
+}
+
 @media (max-width: 1340px) {
     #photoEditor, #editPane {
         left: 20%;
