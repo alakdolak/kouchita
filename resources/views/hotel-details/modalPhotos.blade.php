@@ -76,7 +76,7 @@
                 <div class="circleBase type2 commentWriterPicShow">
                     <img id="photographerSlideUserPic" src="{{$photographerPics[0]['userPic']}}" class="koochitaCircleLogo">
                 </div>
-                <div class="commentWriterExperienceDetails">
+                <div class="commentWriterExperienceDetails" style="width: auto">
                     <b id="photographerSlideUserName" class="userProfileName">{{$photographerPics[0]['name']}}</b>
 
                     <div id="photographerSlideInfos" style="display: {{$photographerPics[0]['showInfo']? 'block' : 'none'}}">

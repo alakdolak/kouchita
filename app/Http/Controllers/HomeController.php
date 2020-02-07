@@ -72,7 +72,7 @@ class HomeController extends Controller
                     $pic->number = $request->number;
                 }
                 $destinationPic = $location . '/' . $_FILES['pic']['name'];
-                compressImage($_FILES['pic']['tmp_name'], $destinationPic, 100);
+                compressImage($_FILES['pic']['tmp_name'], $destinationPic, 80);
 
                 $link = $request->link;
                 if(strpos($link, 'http') === false)
