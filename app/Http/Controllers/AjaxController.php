@@ -603,4 +603,70 @@ dd($request->all());
                     $file = 'amaken';
                     $kindPlaceId = 1;
                     $url = 'amakenDetails';
-                    $place = Amaken::select(['name', 'id', 'file', 'picNumber', 'alt', 'cityId'])->find($item->
+                    $place = Amaken::select(['name', 'id', 'file', 'picNumber', 'alt', 'cityId'])->find($item->placeId);
+                    break;
+                case 3:
+                    $file = 'restaurant';
+                    $kindPlaceId = 3;
+                    $url = 'restaurantDetails';
+                    $place = Restaurant::select(['name', 'id', 'file', 'picNumber', 'alt', 'cityId'])->find($item->placeId);
+                    break;
+                case 4:
+                    $file = 'hotels';
+                    $url = 'hotelDetails';
+                    $kindPlaceId = 4;
+                    $place = Hotel::select(['name', 'id', 'file', 'picNumber', 'alt', 'cityId'])->find($item->placeId);
+                    break;
+                case 6:
+                    $file = 'majara';
+                    $url = 'majaraDetails';
+                    $kindPlaceId = 6;
+                    $place = Majara::select(['name', 'id', 'file', 'picNumber', 'alt', 'cityId'])->find($item->placeId);
+                    break;
+                case 10:
+                    $file = 'sogatsanaie';
+                    $url = 'sanaiesogatDetails';
+                    $kindPlaceId = 10;
+                    $place = SogatSanaie::select(['name', 'id', 'file', 'picNumber', 'alt', 'cityId'])->find($item->placeId);
+                    break;
+                case 11:
+                    $file = 'mahalifood';
+                    $url = 'mahaliFoodDetails';
+                    $kindPlaceId = 11;
+                    $place = MahaliFood::select(['name', 'id', 'file', 'picNumber', 'alt', 'cityId'])->find($item->placeId);
+                    break;
+            }
+
+            if($place != null && $file != null) {
+                if (file_exists((__DIR__ . '/../../../../assets/_images/' . $file . '/' . $place->file . '/f-' . $place->picNumber)))
+                    $place->placePic = URL::asset('_images/' . $file . '/' . $place->file . '/f-' . $place->picNumber);
+                else
+                    $place->placePic = URL::asset("_images/nopic/blank.jpg");
+                $place->url = route($url, ['placeId' => $place->id, 'placeName' => $place->name]);
+                $city = Cities::whereId($place->cityId);
+                $place->placeCity = $city->name;
+                $place->placeState = State::whereId($city->stateId)->name;
+                $place->placeRate = getRate($place->id, $kindPlaceId)[1];
+                $place->section = $item->section;
+                $place->placeReviews = DB::select('select count(*) as countNum from log, comment WHERE logId = log.id and status = 1 and placeId = ' . $place->id .
+                    ' and kindPlaceId = ' . $kindPlaceId . ' and activityId = ' . $activityId)[0]->countNum;
+
+                array_push($suggestions, $place);
+            }
+        }
+
+        $today = getToday()['date'];
+        $post = Post::where('date', '<=', $today)->where('release', '!=', 'draft')->select(['id', 'title', 'slug', 'meta', 'pic', 'date', 'creator', 'keyword', 'seen'])->orderBy('date', 'DESC')->get();
+        foreach ($post as $item){
+            $item->url = route('article.show', ['slug' => $item->slug]);
+            $item->placePic = URL::asset('_images/posts/' . $item->id . '/' . $item->pic);
+            $item->msg = PostComment::where('status', 1)->where('postId', $item->id)->count();
+            $item->section = 'مقالات';
+            array_push($suggestions, $item);
+        }
+
+        echo json_encode([$result, $suggestions]);
+
+        return;
+    }
+}
