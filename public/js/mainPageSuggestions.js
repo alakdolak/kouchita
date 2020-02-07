@@ -13,7 +13,7 @@ var data = $.param({});
     }]);
 
     app.controller("recentlyShowController", function ($scope, $http) {
-        $http.post(recentlyUrl, {}).then(function(response) {
+        $http.post(recentlyUrl, data, config).then(function(response) {
             $scope.records1 = response.data;
         });
     });
