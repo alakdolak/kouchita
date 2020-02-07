@@ -528,6 +528,7 @@
     }
 
     function resizeImg(){
+        $("#fullPageLoader").css('display', 'flex');
         var name = document.getElementById('photographerPicName').value;
         var alt = document.getElementById('photographerPicAlt').value;
         var description = document.getElementById('photographerPicDescription').value;
@@ -633,6 +634,7 @@
         }
     }
 
+    var repeatTime = 3;
     function submitUpload(type){
         var im;
         switch (type){
@@ -682,9 +684,26 @@
                             break;
                         case 't':
                             window.location.reload();
-                            // alert('finish');
                             break;
                     }
+                }
+                else if(response[0] == 'nok1'){
+                    if(repeatTime != 0){
+                        $("#fullPageLoader").css('display', 'none');
+                        alert('در بارگزاری عکس مشکلی پیش امده لطفا دوباره تلاش کنید.')
+                    }
+                    else{
+                        repeatTime--;
+                        resizeImg();
+                    }
+                }
+                else if(response[0] == 'nok2'){
+                    $("#fullPageLoader").css('display', 'none');
+                    alert('فرمت عکس باید jpg و یا png باشد')
+                }
+                else if(response[0] == 'sizeError'){
+                    $("#fullPageLoader").css('display', 'none');
+                    alert('حجم عکس باید از 2 مگابایت کمتر باشد.')
                 }
                 else
                     console.log(response)
