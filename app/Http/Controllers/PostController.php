@@ -100,7 +100,7 @@ class PostController extends Controller {
 
         //this section get 5 newest post from lastMonthPost
         $recentlyPosts = array();
-        for($i = 0; $i < 5; $i++)
+        for($i = 0; $i < 5 && $i < count($lastMonthPost); $i++)
             array_push($recentlyPosts, $lastMonthPost[$i]);
         foreach ($recentlyPosts as $item){
             $item->msgs = PostComment::wherePostId($item->id)->whereStatus(true)->count();
@@ -121,7 +121,7 @@ class PostController extends Controller {
                 }
             }
         }
-        for($i = 0; $i < 5; $i++) {
+        for($i = 0; $i < 5 && $i < count($lastMonthPost); $i++) {
             array_push($mostSeenPost, $lastMonthPost[$i]);
         }
         foreach ($mostSeenPost as $item) {
