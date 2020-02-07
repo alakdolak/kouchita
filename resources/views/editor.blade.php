@@ -401,6 +401,13 @@
     var userId = '{{auth()->user()->id}}';
     var kindPlaceId = '{{$kindPlaceId}}';
     var placeId = '{{$place->id}}';
+    var lImage;
+    var tImage;
+    var sImage;
+    var fImage;
+    var mainImage;
+    var mainFileName = null;
+
 
     dropzone.on('dragover', function() {
         dropzone.addClass('hover');
@@ -553,10 +560,11 @@
                     });
 
                     canvasl.toBlob(function (blob) {
-                        photographerPicFormData.append('l-1', blob, 'l-1.jpg');
-
+                        // photographerPicFormData.append('l-1', blob, 'l-1.jpg');
+                        lImage = blob;
                         canvast.toBlob(function (blob) {
-                            photographerPicFormData.append('t-1', blob, 't-1.jpg');
+                            tImage = blob;
+                            // photographerPicFormData.append('t-1', blob, 't-1.jpg');
                             cropperSqu.destroy();
                             cropperSqu = null;
 
@@ -575,18 +583,24 @@
                                     });
 
                                     canvasf.toBlob(function (blob) {
-                                        photographerPicFormData.append('f-1', blob, 'f-1.jpg');
+                                        fImage = blob;
+                                        // photographerPicFormData.append('f-1', blob, 'f-1.jpg');
 
                                         canvass.toBlob(function (blob) {
-                                            photographerPicFormData.append('s-1', blob, 's-1.jpg');
+                                            sImage = blob;
+                                            // photographerPicFormData.append('s-1', blob, 's-1.jpg');
 
                                             var input = document.getElementById('photographerInputPic');
-                                            photographerPicFormData.append('mainPic', input.files[0]);
+                                            mainImage = input.files[0];
+                                            // photographerPicFormData.append('mainPic', input.files[0]);
 
                                             cropperReq.destroy();
                                             cropperReq = null;
 
-                                            submitUpload();
+                                            photographerPicFormData.append('pic', '');
+                                            photographerPicFormData.append('fileName', '');
+                                            photographerPicFormData.append('fileKind', '');
+                                            submitUpload('mainFile');
                                         });
                                     });
                                 }
@@ -619,7 +633,30 @@
         }
     }
 
-    function submitUpload(){
+    function submitUpload(type){
+        var im;
+        switch (type){
+            case 'mainFile':
+                im = mainImage;
+                break;
+            case 'l':
+                im = lImage;
+                break;
+            case 's':
+                im = sImage;
+                break;
+            case 't':
+                im = tImage;
+                break;
+            case 'f':
+                im = fImage;
+                break;
+        }
+
+        photographerPicFormData.set('pic', im);
+        photographerPicFormData.set('fileName', mainFileName);
+        photographerPicFormData.set('fileKind', type);
+
         $.ajax({
             type : 'post',
             url : '{{route('addPhotoToPlace')}}',
@@ -627,13 +664,39 @@
             processData: false,
             contentType: false,
             success: function (response) {
-                if(response == 'ok')
-                    window.location.reload();
+                response = JSON.parse(response);
+                if(response[0] == 'ok'){
+                    mainFileName = response[1];
+                    switch (type){
+                        case 'mainFile':
+                            submitUpload('l');
+                            break;
+                        case 'l':
+                            submitUpload('s');
+                            break;
+                        case 's':
+                            submitUpload('f');
+                            break;
+                        case 'f':
+                            submitUpload('t');
+                            break;
+                        case 't':
+                            window.location.reload();
+                            // alert('finish');
+                            break;
+                    }
+                }
+                else
+                    console.log(response)
+            },
+            error: function(err){
+                console.log(err)
             }
         })
     }
 
     function newPhotographerPic(){
+        $('#photographerInputPic').val('');
         $(".itemRow").css('display', 'none');
         $(".startScreen").removeClass('hidden');
         $(".action").css('display', 'none');
