@@ -1,21 +1,22 @@
 <div id="similarLocationsMainDiv" class="tabContentMainWrap">
 
     <div class="topBarContainerSimilarLocations display-none"></div>
-    <div class="mainSuggestion swiper-container">
-        <div class="shelf_header">
-            <div class="shelf_title">
-                <div class="shelf_title_container h3">
-                    <h3>مقالات برتر</h3>
-                </div>
-            </div>
-        </div>
-        <div id="magaleSwiperContent" class="swiper-wrapper">2</div>
-        <!-- Add Pagination -->
-        <div class="swiper-pagination"></div>
-        <!-- Add Arrows -->
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
-    </div>
+
+    {{--<div class="mainSuggestion swiper-container">--}}
+        {{--<div class="shelf_header">--}}
+            {{--<div class="shelf_title">--}}
+                {{--<div class="shelf_title_container h3">--}}
+                    {{--<h3>مقالات برتر</h3>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+        {{--</div>--}}
+        {{--<div id="magaleSwiperContent" class="swiper-wrapper">2</div>--}}
+        {{--<!-- Add Pagination -->--}}
+        {{--<div class="swiper-pagination"></div>--}}
+        {{--<!-- Add Arrows -->--}}
+        {{--<div class="swiper-button-next"></div>--}}
+        {{--<div class="swiper-button-prev"></div>--}}
+    {{--</div>--}}
 
     <div class="mainSuggestion swiper-container tabContentMainWrap similarLocationsMainDiv">
         <div class="shelf_header">

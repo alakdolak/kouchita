@@ -235,11 +235,23 @@ class AjaxController extends Controller {
         }
     }
 
-    public function searchForCity() {
+    public function searchForCity(Request $request) {
+        $key = $_POST["key"];
+        $result = array();
+        if(isset($request->state) && $request->state == 1)
+            $result = DB::select("SELECT state.id, state.name as stateName FROM state WHERE state.name LIKE '%$key%' ");
 
-        $key = makeValidInput($_POST["key"]);
+        foreach ($result as $item)
+            $item->kind = 'state';
+
         $cities = DB::select("SELECT cities.id, cities.name as cityName, state.name as stateName FROM cities, state WHERE cities.stateId = state.id and  cities.name LIKE '%$key%' ");
-        echo json_encode($cities);
+
+        foreach ($cities as $item) {
+            $item->kind = 'city';
+            array_push($result, $item);
+        }
+
+        echo json_encode($result);
     }
 
     public function searchForLine() {
@@ -298,17 +310,16 @@ class AjaxController extends Controller {
     }
 
     public function proSearch(Request $request) {
-dd($request->all());
+
         if(isset($_POST["hotelFilter"]) && isset($_POST["amakenFilter"]) && isset($_POST["restaurantFilter"])
-            && isset($_POST["majaraFilter"]) && isset($_POST["soghatFilter"]) && isset($_POST["mahaliFoodFilter"])
-            && isset($_POST["key"]) && isset($_POST["selectedCities"]) && isset($_POST["sanayeFilter"])) {
+            && isset($_POST["majaraFilter"]) && isset($_POST["mahaliFoodFilter"])
+            && isset($_POST["key"]) && isset($_POST["selectedCities"]) && isset($_POST["sogatSanaieFilter"])) {
 
             $cities = $_POST["selectedCities"];
 
             $cityConstraint = "";
             $allow = true;
-            $key = makeValidInput($_POST["key"]);
-
+            $key = $_POST["key"];
 
             if($cities != -1) {
                 foreach ($cities as $city) {
@@ -327,52 +338,70 @@ dd($request->all());
             }
 
             $target = [];
-            if(makeValidInput($_POST["hotelFilter"]) == 1) {
+            if($_POST["hotelFilter"] == 1) {
                 if($allow)
-                    $target = DB::select("select hotels.name, hotels.id, cities.name as cityName, place.id as kindPlaceId, place.name as kindPlace from hotels, cities, place WHERE place.name = 'هتل' and cities.id = cityId and hotels.name LIKE '%$key%'");
+                    $target = DB::select("select hotels.name, hotels.id, cities.name as cityName, state.name as stateName, place.id as kindPlaceId, place.name as kindPlace from hotels, cities, place, state WHERE place.name = 'هتل' and cities.id = cityId AND cities.stateId = state.id and hotels.name LIKE '%$key%'");
                 else
-                    $target = DB::select("select hotels.name, hotels.id, cities.name as cityName, place.id as kindPlaceId, place.name as kindPlace from hotels, cities, place WHERE place.name = 'هتل' and cities.id = cityId and hotels.name LIKE '%$key%' and cityId IN (" . $cityConstraint . ")");
+                    $target = DB::select("select hotels.name, hotels.id, cities.name as cityName, state.name as stateName, place.id as kindPlaceId, place.name as kindPlace from hotels, cities, place, state WHERE place.name = 'هتل' and cities.id = cityId  AND cities.stateId = state.id and hotels.name LIKE '%$key%' and cityId IN (" . $cityConstraint . ")");
             }
-            if(makeValidInput($_POST["amakenFilter"]) == 1) {
+            if($_POST["amakenFilter"] == 1) {
                 if($allow)
-                    $target = array_merge($target, DB::select("select amaken.name, amaken.id, cities.name as cityName, place.id as kindPlaceId, place.name as kindPlace from amaken, cities, place WHERE place.name = 'اماکن' and cities.id = cityId and amaken.name LIKE '%$key%'"));
+                    $target = array_merge($target, DB::select("select amaken.name, amaken.id, cities.name as cityName, state.name as stateName, place.id as kindPlaceId, place.name as kindPlace from amaken, cities, place, state WHERE place.name = 'اماکن' and cities.id = cityId AND cities.stateId = state.id and amaken.name LIKE '%$key%'"));
                 else
-                    $target = array_merge($target, DB::select("select amaken.name, amaken.id, cities.name as cityName, place.id as kindPlaceId, place.name as kindPlace from amaken, cities, place WHERE place.name = 'اماکن' and cities.id = cityId and amaken.name LIKE '%$key%' and cityId IN (" . $cityConstraint . ")"));
+                    $target = array_merge($target, DB::select("select amaken.name, amaken.id, cities.name as cityName, state.name as stateName, place.id as kindPlaceId, place.name as kindPlace from amaken, cities, place, state WHERE place.name = 'اماکن' and cities.id = cityId AND cities.stateId = state.id and amaken.name LIKE '%$key%' and cityId IN (" . $cityConstraint . ")"));
             }
-            if(makeValidInput($_POST["restaurantFilter"]) == 1) {
+            if($_POST["restaurantFilter"] == 1) {
                 if($allow)
-                    $target = array_merge($target, DB::select("select restaurant.name, restaurant.id, cities.name as cityName, place.id as kindPlaceId, place.name as kindPlace from restaurant, cities, place WHERE place.name = 'رستوران' and cities.id = cityId and restaurant.name LIKE '%$key%'"));
+                    $target = array_merge($target, DB::select("select restaurant.name, restaurant.id, cities.name as cityName, state.name as stateName, place.id as kindPlaceId, place.name as kindPlace from restaurant, cities, place, state WHERE place.name = 'رستوران' and cities.id = cityId AND cities.stateId = state.id and restaurant.name LIKE '%$key%'"));
                 else
-                    $target = array_merge($target, DB::select("select restaurant.name, restaurant.id, cities.name as cityName, place.id as kindPlaceId, place.name as kindPlace from restaurant, cities, place WHERE place.name = 'رستوران' and cities.id = cityId and restaurant.name LIKE '%$key%' and cityId IN (" . $cityConstraint . ")"));
+                    $target = array_merge($target, DB::select("select restaurant.name, restaurant.id, cities.name as cityName, state.name as stateName, place.id as kindPlaceId, place.name as kindPlace from restaurant, cities, place, state WHERE place.name = 'رستوران' and cities.id = cityId AND cities.stateId = state.id and restaurant.name LIKE '%$key%' and cityId IN (" . $cityConstraint . ")"));
             }
-            if(makeValidInput($_POST["majaraFilter"]) == 1) {
+            if($_POST["majaraFilter"] == 1) {
                 if($allow)
-                    $target = array_merge($target, DB::select("select majara.name, majara.id, cities.name as cityName, place.id as kindPlaceId, place.name as kindPlace from majara, cities, place WHERE place.name = 'ماجرا' and cities.id = cityId and majara.name LIKE '%$key%'"));
+                    $target = array_merge($target, DB::select("select majara.name, majara.id, cities.name as cityName, state.name as stateName, place.id as kindPlaceId, place.name as kindPlace from majara, cities, place, state WHERE place.name = 'ماجرا' and cities.id = cityId AND cities.stateId = state.id and majara.name LIKE '%$key%'"));
                 else
-                    $target = array_merge($target, DB::select("select majara.name, majara.id, cities.name as cityName, place.id as kindPlaceId, place.name as kindPlace from majara, cities, place WHERE place.name = 'ماجرا' and cities.id = cityId and majara.name LIKE '%$key%' and cityId IN (" . $cityConstraint . ")"));
+                    $target = array_merge($target, DB::select("select majara.name, majara.id, cities.name as cityName, state.name as stateName, place.id as kindPlaceId, place.name as kindPlace from majara, cities, place, state WHERE place.name = 'ماجرا' and cities.id = cityId AND cities.stateId = state.id and majara.name LIKE '%$key%' and cityId IN (" . $cityConstraint . ")"));
             }
-            if(makeValidInput($_POST["soghatFilter"]) == 1) {
+            if($_POST["sogatSanaieFilter"] == 1) {
                 if($allow)
-                    $target = array_merge($target, DB::select("select adab.name, adab.id, state.name as cityName, place.id as kindPlaceId, place.name as kindPlace from adab, state, place WHERE category = 1 and place.name = 'آداب' and state.id = stateId and adab.name LIKE '%$key%'"));
+                    $target = array_merge($target, DB::select("select sogatSanaies.name, sogatSanaies.id, cities.name as cityName, state.name as stateName, place.id as kindPlaceId, place.name as kindPlace from sogatSanaies, cities, place, state WHERE place.name = 'صنایع سوغات' and cities.id = cityId AND cities.stateId = state.id and sogatSanaies.name LIKE '%$key%'"));
                 else
-                    $target = array_merge($target, DB::select("select adab.name, adab.id, state.name as cityName, place.id as kindPlaceId, place.name as kindPlace from adab, state, place WHERE category = 1 and place.name = 'آداب' and state.id = stateId and adab.name LIKE '%$key%' and stateId IN (" . $cityConstraint . ")"));
+                    $target = array_merge($target, DB::select("select sogatSanaies.name, sogatSanaies.id, cities.name as cityName, state.name as stateName, place.id as kindPlaceId, place.name as kindPlace from sogatSanaies, cities, place, state WHERE place.name = 'صنایع سوغات' and cities.id = cityId AND cities.stateId = state.id and  sogatSanaies.name LIKE '%$key%' and cityId IN (" . $cityConstraint . ")"));
             }
-            if(makeValidInput($_POST["ghazamahaliFilter"]) == 1) {
+            if($_POST["mahaliFoodFilter"] == 1) {
                 if($allow)
-                    $target = array_merge($target, DB::select("select adab.name, adab.id, state.name as cityName, place.id as kindPlaceId, place.name as kindPlace from adab, state, place WHERE category = 3 and place.name = 'آداب' and state.id = stateId and adab.name LIKE '%$key%'"));
+                    $target = array_merge($target, DB::select("select mahaliFood.name, mahaliFood.id, cities.name as cityName, state.name as stateName, place.id as kindPlaceId, place.name as kindPlace from mahaliFood, cities, place, state WHERE place.name = 'غذای محلی' and cities.id = cityId AND cities.stateId = state.id and mahaliFood.name LIKE '%$key%'"));
                 else
-                    $target = array_merge($target, DB::select("select adab.name, adab.id, state.name as cityName, place.id as kindPlaceId, place.name as kindPlace from adab, state, place WHERE category = 3 and place.name = 'آداب' and state.id = stateId and adab.name LIKE '%$key%' and stateId IN (" . $cityConstraint . ")"));
+                    $target = array_merge($target, DB::select("select mahaliFood.name, mahaliFood.id, cities.name as cityName, state.name as stateName, place.id as kindPlaceId, place.name as kindPlace from mahaliFood, cities, place, state WHERE place.name = 'غذای محلی' and cities.id = cityId AND cities.stateId = state.id and mahaliFood.name LIKE '%$key%' and cityId IN (" . $cityConstraint . ")"));
             }
-            if(makeValidInput($_POST["sanayeFilter"]) == 1) {
-                if($allow)
-                    $target = array_merge($target, DB::select("select adab.name, adab.id, state.name as cityName, place.id as kindPlaceId, place.name as kindPlace from adab, state, place WHERE category = 6 and place.name = 'آداب' and state.id = stateId and adab.name LIKE '%$key%'"));
-                else
-                    $target = array_merge($target, DB::select("select adab.name, adab.id, state.name as cityName, place.id as kindPlaceId, place.name as kindPlace from adab, state, place WHERE category = 6 and place.name = 'آداب' and state.id = stateId and adab.name LIKE '%$key%' and stateId IN (" . $cityConstraint . ")"));
+
+
+            foreach ($target as $item){
+                switch ($item->kindPlaceId){
+                    case 1:
+                        $item->url = route('amakenDetails', ['placeId' => $item->id, 'placeName' => $item->name]);
+                        break;
+                    case 3:
+                        $item->url = route('restaurantDetails', ['placeId' => $item->id, 'placeName' => $item->name]);
+                        break;
+                    case 4:
+                        $item->url = route('hotelDetails', ['placeId' => $item->id, 'placeName' => $item->name]);
+                        break;
+                    case 6:
+                        $item->url = route('majaraDetails', ['placeId' => $item->id, 'placeName' => $item->name]);
+                        break;
+                    case 10:
+                        $item->url = route('sanaiesogatDetails', ['placeId' => $item->id, 'placeName' => $item->name]);
+                        break;
+                    case 11:
+                        $item->url = route('mahaliFoodDetails', ['placeId' => $item->id, 'placeName' => $item->name]);
+                        break;
+                }
             }
+//            dd($target);
+
             echo json_encode($target);
-
         }
-
     }
 
     public function findCityWithState(Request $request)

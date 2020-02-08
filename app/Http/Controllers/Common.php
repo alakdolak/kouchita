@@ -420,7 +420,11 @@ function getRate($placeId, $kindPlaceId) {
     foreach ($section as $item)
         array_push($questionId, $item->questionId);
 
-    $questions = \DB::select('SELECT * FROM questions WHERE id IN (' . implode(",", $questionId) . ') AND ansType = "rate"');
+    if($questionId != null && count($questionId) != 0)
+        $questions = \DB::select('SELECT * FROM questions WHERE id IN (' . implode(",", $questionId) . ') AND ansType = "rate"');
+    else
+        $questions = array();
+
     $questionId = array();
     foreach ($questions as $item)
         array_push($questionId, $item->id);
@@ -428,11 +432,13 @@ function getRate($placeId, $kindPlaceId) {
     $avgRate = 0;
 
 //    $rates = DB::select('select avg(rate) as avgRate from log, questionUserAns WHERE log.id = logId and placeId = ' . $placeId . " and kindPlaceId = " . $kindPlaceId . " and activityId = " . Activity::whereName('امتیاز')->first()->id . " group by(visitorId)");
-    $rates = DB::select('select avg(ans) as avgRate from log, questionUserAns As qua WHERE log.id = qua.logId and log.placeId = ' . $placeId . " and log.kindPlaceId = " . $kindPlaceId . " and qua.questionId IN (" . implode(',', $questionId) . ") group by(log.visitorId)");
+    if($questionId != null && count($questionId) != 0)
+        $rates = DB::select('select avg(ans) as avgRate from log, questionUserAns As qua WHERE log.id = qua.logId and log.placeId = ' . $placeId . " and log.kindPlaceId = " . $kindPlaceId . " and qua.questionId IN (" . implode(',', $questionId) . ") group by(log.visitorId)");
+    else
+        $rates = array();
 
     $separatedRates = [0, 0, 0, 0, 0];
     foreach ($rates as $rate) {
-
         $avgRate += $rate->avgRate;
 
         if($rate->avgRate > 4)
@@ -925,8 +931,14 @@ function commonInPlaceDetails($kindPlaceId, $placeId, $city, $state, $place){
     foreach ($section as $item)
         array_push($questionId, $item->questionId);
 
-    $questions = \DB::select('SELECT * FROM questions WHERE id IN (' . implode(",", $questionId) . ')');
-    $questionsAns = \DB::select('SELECT * FROM questionAns WHERE questionId IN (' . implode(",", $questionId) . ')');
+    if($questionId != null && count($questionId) != 0) {
+        $questions = \DB::select('SELECT * FROM questions WHERE id IN (' . implode(",", $questionId) . ')');
+        $questionsAns = \DB::select('SELECT * FROM questionAns WHERE questionId IN (' . implode(",", $questionId) . ')');
+    }
+    else{
+        $questions = array();
+        $questionsAns = array();
+    }
 
     $multiQuestion = array();
     $textQuestion = array();

@@ -272,7 +272,7 @@
                     {{$city->description}}
                 </div>
                 <div ng-app="mainApp" class="cpBorderBottom">
-                    @include('layouts.mainSuggestions')
+{{--                    @include('layouts.mainSuggestions')--}}
                 </div>
                 <div class="col-xs-12">
                     <div class="widget-head widget-head-45">

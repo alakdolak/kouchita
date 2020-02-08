@@ -3179,6 +3179,7 @@ class PlaceController extends Controller {
             $log->text = $text;
             $log->date = date("Y-m-d");
             $log->relatedTo = 0;
+            $log->confirm = 1;
             $log->save();
 
             echo "ok";
@@ -3308,6 +3309,7 @@ class PlaceController extends Controller {
             $log->text = $text;
             $log->relatedTo = $relatedTo;
             $log->date = date("Y-m-d");
+            $log->confirm = 1;
             $log->save();
 
             if($relatedTo != 0){

@@ -84,7 +84,7 @@
                     'placeId': placeId,
                     'kindPlaceId' : kindPlaceId,
                     'text' : text,
-                    'id' : _id
+                    // 'id' : _id
                 },
                 success: function(response){
                     if(response == 'ok') {
@@ -402,6 +402,11 @@
     function createQuestionPagination(questionCount){
         var text = '';
         var page = Math.round(questionCount/questionPerPageNum[questionPerPage]);
+
+        if(page < 2)
+            document.getElementById('questionPaginationDiv').style.display = 'none';
+        else
+            document.getElementById('questionPaginationDiv').style.display = 'block';
 
         createQuestionPerPage();
 

@@ -15,6 +15,7 @@ use App\models\GoyeshCity;
 use App\models\Hotel;
 use App\models\HotelApi;
 use App\models\LogModel;
+use App\models\MahaliFood;
 use App\models\Majara;
 use App\models\Message;
 use App\models\OpOnActivity;
@@ -25,6 +26,7 @@ use App\models\Report;
 use App\models\ReportsType;
 use App\models\Restaurant;
 use App\models\RetrievePas;
+use App\models\SogatSanaie;
 use App\models\State;
 use App\models\Train;
 use App\models\User;
@@ -188,7 +190,33 @@ class HomeController extends Controller
         $city->ghazamahali_count = Adab::where('stateId', $city->stateId)->where('category', 3)->count();
         $city->sanaye_count = Adab::where('stateId', $city->stateId)->where('category', 6)->count();
 
-        return view('cityPage', compact(['city', 'cityPost', 'mostSeenPosts', 'allAmaken', 'allHotels', 'allRestaurant', 'allMajara']));
+        $today = getToday()['date'];
+        $hotelCount = Hotel::all()->count();
+        $retCount = Restaurant::all()->count();
+        $amakenCount = Amaken::all()->count();
+        $sogatSanaie = SogatSanaie::all()->count();
+        $mahaliFoodCount = MahaliFood::all()->count();
+        $postCount = Post::where('date', '<=', $today)->where('release', '!=', 'draft')->count();
+
+        $activityId1 = Activity::where('name', 'نظر')->first()->id;
+        $activityId2 = Activity::where('name', 'پاسخ')->first()->id;
+
+        $commentCount = 0;
+        $commentCount += LogModel::where('activityId', $activityId1)->where('confirm', 1)->count();
+        $commentCount += LogModel::where('activityId', $activityId2)->where('confirm', 1)->count();
+        $commentCount += PostComment::where('status', 1)->count();
+        $userCount = User::all()->count();
+
+        $counts = [ 'hotel' => $hotelCount,
+            'restaurant' => $retCount,
+            'amaken' => $amakenCount,
+            'sogatSanaie' => $sogatSanaie,
+            'mahaliFood' => $mahaliFoodCount,
+            'article' => $postCount,
+            'comment' => $commentCount,
+            'userCount' => $userCount];
+
+        return view('cityPage', compact(['city', 'cityPost', 'mostSeenPosts', 'allAmaken', 'allHotels', 'allRestaurant', 'allMajara', 'counts']));
     }
 
     public function getCityOpinion()

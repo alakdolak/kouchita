@@ -3,15 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\models\AboutMe;
+use App\models\Cities;
 use App\models\DefaultPic;
 use App\models\Post;
 use App\models\PostCategory;
 use App\models\PostCategoryRelation;
+use App\models\PostCityRelation;
 use App\models\PostComment;
 use App\models\PostCommentLike;
 use App\models\PostLikes;
 use App\models\PostTag;
 use App\models\PostTagsRelation;
+use App\models\State;
 use App\models\User;
 use Carbon\Carbon;
 use Hekmatinasser\Verta\Verta;
@@ -173,7 +176,7 @@ class PostController extends Controller {
         $nowTime = getToday()["time"];
 
         $allPosts = Post::join('users', 'users.id', 'post.creator')
-            ->whereRaw('(post.date < ' . $today . ' OR (post.date = ' . $today . ' AND post.time <= ' . $nowTime . ' ))')
+            ->whereRaw('(post.date <= ' . $today . ' OR (post.date = ' . $today . ' AND post.time <= ' . $nowTime . '))')
             ->whereRaw('post.release <> "draft"')
             ->select('username', 'post.id', 'post.title', 'post.meta', 'post.slug', 'post.seen', 'post.date', 'post.created_at', 'post.pic', 'post.keyword')
             ->orderBy('date', 'DESC')
@@ -190,6 +193,7 @@ class PostController extends Controller {
             $item->url = route('article.show', ['slug' => $item->slug]);
         }
 
+
         echo json_encode($allPosts);
         return;
     }
@@ -199,7 +203,7 @@ class PostController extends Controller {
         $post = Post::find($id);
         if($post != null) {
             $today = getToday();
-            if($post->release == 'released' || ($post->release == 'future' && ($post->date > $today['date'] || ($post->date == $today['date'] && $post->time >= $today['time']))))
+            if($post->release == 'released' || ($post->release == 'future' && ($post->date > $today['date'] || ($post->date == $today['date'] && ($post->time >= $today['time'] || $post->time == null)))))
                 return \redirect(\route('article.show',['slug' => $post->slug]));
         }
             return \redirect(\url('/'));
@@ -298,24 +302,48 @@ class PostController extends Controller {
         if($search != ''){
             $post = array();
 
-            if($type == 'content'){
-                $tags = PostTag::where('tag', 'LIKE', '%'. $search .'%')->pluck('id')->toArray();
-                $tagRelId = PostTagsRelation::whereIn('tagId', $tags)->groupBy('postId')->pluck('postId')->toArray();
+            if($type == 'content' || $type == 'category') {
+                if ($type == 'content') {
+                    $tags = PostTag::where('tag', 'LIKE', '%' . $search . '%')->pluck('id')->toArray();
+                    $tagRelId = PostTagsRelation::whereIn('tagId', $tags)->groupBy('postId')->pluck('postId')->toArray();
 
-                $post = Post::whereRaw('(post.date < ' . $today . ' OR (post.date = ' . $today . ' AND post.time <= ' . $nowTime . ' ))')
-                    ->whereRaw('(post.title LIKE "%' . $search . '%" OR post.slug LIKE "%' . $search . '%" OR post.keyword LIKE "%' . $search . '%")')
-                    ->orWhereIn('post.id', $tagRelId)
-                    ->whereRaw('post.release <> "draft"')->pluck('id')->toArray();
+                    $post = Post::whereRaw('(post.date < ' . $today . ' OR (post.date = ' . $today . ' AND  (post.time <= ' . $nowTime . ' OR post.time IS NULL)))')
+                        ->whereRaw('(post.title LIKE "%' . $search . '%" OR post.slug LIKE "%' . $search . '%" OR post.keyword LIKE "%' . $search . '%")')
+                        ->orWhereIn('post.id', $tagRelId)
+                        ->whereRaw('post.release <> "draft"')->pluck('id')->toArray();
+                }
+                $categ = PostCategory::where('name', 'LIKE', $search)->pluck('id')->toArray();
+                $postCatId = PostCategoryRelation::whereIn('categoryId', $categ)->pluck('postId')->toArray();
+
+                $post = Post::join('users', 'users.id', 'post.creator')
+                    ->whereIn('post.id', $postCatId)
+                    ->orWhereIn('post.id', $post)
+                    ->whereRaw('(post.date < ' . $today . ' OR (post.date = ' . $today . ' AND  (post.time <= ' . $nowTime . ' OR post.time IS NULL)))')
+                    ->whereRaw('post.release <> "draft"')
+                    ->count();
             }
+            else{
+                if($type == 'state') {
+                    $place = State::whereName($search)->first();
+                    $col = 'stateId';
+                }
+                else{
+                    $place = Cities::whereName($search)->first();
+                    $col = 'cityId';
+                }
 
-            $categ = PostCategory::where('name', 'LIKE', $search)->pluck('id')->toArray();
-            $postCatId = PostCategoryRelation::whereIn('categoryId', $categ)->pluck('postId')->toArray();
+                if($place == null)
+                    return \redirect(route('mainArticle'));
 
-            $post = Post::join('users', 'users.id', 'post.creator')
-                ->whereIn('post.id', $postCatId)
-                ->orWhereIn('post.id', $post)
-                ->whereRaw('post.release <> "draft"')
-                ->count();
+                $postCity = PostCityRelation::where($col, $place->id)->pluck('postId')->toArray();
+                $post = Post::join('users', 'users.id', 'post.creator')
+                    ->whereIn('post.id', $postCity)
+                    ->whereRaw('post.release <> "draft"')
+                    ->whereRaw('(post.date < ' . $today . ' OR (post.date = ' . $today . ' AND  (post.time <= ' . $nowTime . ' OR post.time IS NULL)))')
+                    ->count();
+
+                $search = $place->id;
+            }
 
             $category = $this->getAllCategory();
             $pageLimit = ceil($post / 5);
@@ -326,6 +354,7 @@ class PostController extends Controller {
     }
 
     public function paginationInArticleList(Request $request){
+
         if(isset($request->type) && isset($request->search) && isset($request->take) && isset($request->page) && $request->search != ''){
             $type = $request->type;
             $search = $request->search;
@@ -337,26 +366,54 @@ class PostController extends Controller {
             $post = array();
 
             if($search != ''){
-                if($type == 'content'){
-                    $tags = PostTag::where('tag', 'LIKE', '%'. $search .'%')->pluck('id')->toArray();
-                    $tagRelId = PostTagsRelation::whereIn('tagId', $tags)->groupBy('postId')->pluck('postId')->toArray();
 
-                    $post = Post::whereRaw('(post.title LIKE "%' . $search . '%" OR post.slug LIKE "%' . $search . '%" OR post.keyword LIKE "%' . $search . '%")')
-                        ->orWhereIn('post.id', $tagRelId)
+                if($type == 'content' || $type == 'category'){
+                    if($type == 'content'){
+                        $tags = PostTag::where('tag', 'LIKE', '%'. $search .'%')->pluck('id')->toArray();
+                        $tagRelId = PostTagsRelation::whereIn('tagId', $tags)->groupBy('postId')->pluck('postId')->toArray();
+
+                        $post = Post::whereRaw('(post.title LIKE "%' . $search . '%" OR post.slug LIKE "%' . $search . '%" OR post.keyword LIKE "%' . $search . '%")')
+                            ->orWhereIn('post.id', $tagRelId)
+                            ->whereRaw('post.release <> "draft"')
+                            ->pluck('id')->toArray();
+                    }
+                    $categ = PostCategory::where('name', 'LIKE', '%'.$search.'%')->pluck('id')->toArray();
+                    $postCatId = PostCategoryRelation::whereIn('categoryId', $categ)->pluck('postId')->toArray();
+
+                    $post = Post::join('users', 'users.id', 'post.creator')
+                        ->whereIn('post.id', $postCatId)
+                        ->orWhereIn('post.id', $post)
+                        ->whereRaw('(post.date < ' . $today . ' OR (post.date = ' . $today . ' AND  (post.time <= ' . $nowTime . ' OR post.time IS NULL) ))')
                         ->whereRaw('post.release <> "draft"')
-                        ->pluck('id')->toArray();
+                        ->select('username', 'post.id', 'title', 'meta', 'slug', 'seen', 'date', 'post.created_at', 'pic', 'keyword')
+                        ->orderBy('date', 'DESC')
+                        ->skip(($page-1) * $take)->take($take)->get();
                 }
-                $categ = PostCategory::where('name', 'LIKE', '%'.$search.'%')->pluck('id')->toArray();
-                $postCatId = PostCategoryRelation::whereIn('categoryId', $categ)->pluck('postId')->toArray();
+                else{
+                    if($type == 'city'){
+                        $place = Cities::find($search);
+                        $col = 'cityId';
+                    }
+                    else{
+                        $place = State::find($search);
+                        $col = 'stateId';
+                    }
 
-                $post = Post::join('users', 'users.id', 'post.creator')
-                    ->whereIn('post.id', $postCatId)
-                    ->orWhereIn('post.id', $post)
-                    ->whereRaw('(post.date < ' . $today . ' OR (post.date = ' . $today . ' AND post.time <= ' . $nowTime . ' ))')
-                    ->whereRaw('post.release <> "draft"')
-                    ->select('username', 'post.id', 'title', 'meta', 'slug', 'seen', 'date', 'post.created_at', 'pic', 'keyword')
-                    ->orderBy('date', 'DESC')
-                    ->skip(($page-1) * $take)->take($take)->get();
+                    if($place ==  null)
+                        $post = array();
+                    else{
+                        $postCity = PostCityRelation::where($col, $place->id)->pluck('postId')->toArray();
+//                        dd($postCity);
+                        $post = Post::join('users', 'users.id', 'post.creator')
+                            ->whereIn('post.id', $postCity)
+                            ->whereRaw('(post.date < ' . $today . ' OR (post.date = ' . $today . ' AND (post.time <= ' . $nowTime . ' OR post.time IS NULL) ))')
+                            ->whereRaw('post.release <> "draft"')
+                            ->select('username', 'post.id', 'title', 'meta', 'slug', 'seen', 'date', 'post.created_at', 'pic', 'keyword')
+                            ->orderBy('date', 'DESC')
+                            ->skip(($page-1) * $take)->take($take)->get();
+//                        dd($post);
+                    }
+                }
 
                 foreach ($post as $item){
                     $item->pic = \URL::asset('_images/posts/' . $item->id . '/' . $item->pic);
