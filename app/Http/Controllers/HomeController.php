@@ -15,6 +15,7 @@ use App\models\GoyeshCity;
 use App\models\Hotel;
 use App\models\HotelApi;
 use App\models\LogModel;
+use App\models\MahaliFood;
 use App\models\Majara;
 use App\models\Message;
 use App\models\OpOnActivity;
@@ -25,6 +26,7 @@ use App\models\Report;
 use App\models\ReportsType;
 use App\models\Restaurant;
 use App\models\RetrievePas;
+use App\models\SogatSanaie;
 use App\models\State;
 use App\models\Train;
 use App\models\User;
@@ -63,25 +65,29 @@ class HomeController extends Controller
             if(isset($_FILES['pic']) && $_FILES['pic']['error'] == 0) {
                 $condition = ['page' => $request->page, 'number' => $request->number, 'section' => $request->section];
                 $pic = BannerPics::where($condition)->first();
-                if($pic != null)
-                    unlink($location.'/'.$pic->pic);
-                else{
+                if($pic != null) {
+                    if (file_exists($location . '/' . $pic->pic))
+                        unlink($location . '/' . $pic->pic);
+                }
+                else {
                     $pic = new BannerPics();
                     $pic->page = $request->page;
                     $pic->section = $request->section;
                     $pic->number = $request->number;
                 }
-                $destinationPic = $location . '/' . $_FILES['pic']['name'];
-                compressImage($_FILES['pic']['tmp_name'], $destinationPic, 80);
 
+                $destinationPic = $location . '/' . $_FILES['pic']['name'];
+
+                $link = 'https://';
                 $link = $request->link;
                 if(strpos($link, 'http') === false)
                     $link = 'https://' . $link;
 
                 $pic->link = $link;
-                $pic->pic = $_FILES['pic']['name'];
                 $pic->userId = \auth()->user()->id;
 
+                compressImage($_FILES['pic']['tmp_name'], $destinationPic, 80);
+                $pic->pic = $_FILES['pic']['name'];
                 $pic->save();
 
                 echo 'ok';
@@ -184,7 +190,33 @@ class HomeController extends Controller
         $city->ghazamahali_count = Adab::where('stateId', $city->stateId)->where('category', 3)->count();
         $city->sanaye_count = Adab::where('stateId', $city->stateId)->where('category', 6)->count();
 
-        return view('cityPage', compact(['city', 'cityPost', 'mostSeenPosts', 'allAmaken', 'allHotels', 'allRestaurant', 'allMajara']));
+        $today = getToday()['date'];
+        $hotelCount = Hotel::all()->count();
+        $retCount = Restaurant::all()->count();
+        $amakenCount = Amaken::all()->count();
+        $sogatSanaie = SogatSanaie::all()->count();
+        $mahaliFoodCount = MahaliFood::all()->count();
+        $postCount = Post::where('date', '<=', $today)->where('release', '!=', 'draft')->count();
+
+        $activityId1 = Activity::where('name', 'نظر')->first()->id;
+        $activityId2 = Activity::where('name', 'پاسخ')->first()->id;
+
+        $commentCount = 0;
+        $commentCount += LogModel::where('activityId', $activityId1)->where('confirm', 1)->count();
+        $commentCount += LogModel::where('activityId', $activityId2)->where('confirm', 1)->count();
+        $commentCount += PostComment::where('status', 1)->count();
+        $userCount = User::all()->count();
+
+        $counts = [ 'hotel' => $hotelCount,
+            'restaurant' => $retCount,
+            'amaken' => $amakenCount,
+            'sogatSanaie' => $sogatSanaie,
+            'mahaliFood' => $mahaliFoodCount,
+            'article' => $postCount,
+            'comment' => $commentCount,
+            'userCount' => $userCount];
+
+        return view('cityPage', compact(['city', 'cityPost', 'mostSeenPosts', 'allAmaken', 'allHotels', 'allRestaurant', 'allMajara', 'counts']));
     }
 
     public function getCityOpinion()

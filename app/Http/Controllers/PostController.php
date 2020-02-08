@@ -173,7 +173,7 @@ class PostController extends Controller {
         $nowTime = getToday()["time"];
 
         $allPosts = Post::join('users', 'users.id', 'post.creator')
-            ->whereRaw('(post.date < ' . $today . ' OR (post.date = ' . $today . ' AND post.time <= ' . $nowTime . ' ))')
+            ->whereRaw('(post.date <= ' . $today . ' OR (post.date = ' . $today . ' AND post.time <= ' . $nowTime . '))')
             ->whereRaw('post.release <> "draft"')
             ->select('username', 'post.id', 'post.title', 'post.meta', 'post.slug', 'post.seen', 'post.date', 'post.created_at', 'post.pic', 'post.keyword')
             ->orderBy('date', 'DESC')
@@ -189,6 +189,7 @@ class PostController extends Controller {
             $item->category = PostCategory::find($mainCategory->categoryId)->name;
             $item->url = route('article.show', ['slug' => $item->slug]);
         }
+
 
         echo json_encode($allPosts);
         return;

@@ -18,7 +18,7 @@ $kindPlaceId = 10; ?>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <link rel="profile" href="http://gmpg.org/xfn/11">
-    <title>خانه - شازده مسافر</title>
+    <title>مقاله</title>
 
     <link rel='stylesheet' id='google-font-css' href='//fonts.googleapis.com/css?family=Dosis%3A200' type='text/css'
           media='all'/>
@@ -144,6 +144,15 @@ $kindPlaceId = 10; ?>
             background: white;
             border-bottom: 3px solid #f3f3f3;
             opacity: 0.9;
+        }
+    </style>
+
+    <style>
+        .easyimage-side{
+            float: left !important;
+            margin-right: 1.5em !important;
+            text-align: center !important;
+            margin-left: 0px !important;
         }
     </style>
 

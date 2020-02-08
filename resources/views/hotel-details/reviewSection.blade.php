@@ -694,6 +694,12 @@
         var text = '';
         var page = Math.round(reviewsCount/reviewPerPageNum[reviewPerPage]);
 
+        if(page < 2)
+            document.getElementById('reviewsPagination').style.display = 'none';
+        else
+            document.getElementById('reviewsPagination').style.display = 'block';
+
+
         createReviewPerPage();
 
         if(page >= 5){
