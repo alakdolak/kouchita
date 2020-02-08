@@ -58,6 +58,8 @@
             @include('layouts.loginPopUp')
         @endif
 
+        @include('general.globalInput')
+
         <div id="PAGE" class=" non_hotels_like desktop scopedSearch bg_f8">
             @include('layouts.placeHeader')
             @yield('main')

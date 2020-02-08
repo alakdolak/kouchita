@@ -79,9 +79,12 @@
         newElement = "<div class='hidden cityFiltersProSearch' id='cityFilterDest_" + cityId + "' style='left: " + (destX - 115) + "px;'><div><span class='glyphicon glyphicon-remove' onclick='removeFilter(\"cityFilterDest_" + cityId + "\")'></span><span'>" + val + "</span></span></div></div>";
         $("#filters").append(newElement);
 
+        console.log('in')
+
         selectedElement = document.getElementById("elevator");
         selectedVal = "cityFilterDest_" + cityId;
         filters[filters.length] = selectedVal;
+
 
         movement();
     }
@@ -141,68 +144,87 @@
 
     }
 
-    function searchInPlaces() {
+    function searchInPlaces(_element) {
 
-        if($("#GEO_SCOPED_SEARCH_INPUT2").val().length < 3) {
-            $("#resultPlace").empty();
-            return;
-        }
+        var value = _element.value;
 
-        cities = [];
-        for(i = 0; i < filters.length; i++) {
-            cities[i] = filters[i].split('_')[1];
-        }
-
-        if(cities.length == 0)
-            cities = -1;
-
-        hotelFilter = ($("#hotelFilter").attr('data-val') == 'off') ? 0 : 1;
-        amakenFilter = ($("#amakenFilter").attr('data-val') == 'off') ? 0 : 1;
-        restuarantFilter = ($("#restaurantFilter").attr('data-val') == 'off') ? 0 : 1;
-        majaraFilter = ($("#majaraFilter").attr('data-val') == 'off') ? 0 : 1;
-        sogatSanaieFilter = ($("#sogatSanaieFilter").attr('data-val') == 'off') ? 0 : 1;
-        mahaliFoodFilter = ($("#mahaliFoodFilter").attr('data-val') == 'off') ? 0 : 1;
-
-        $.ajax({
-            type: 'post',
-            url: searchInPlacesDir,
-            data: {
-                'key':  $("#GEO_SCOPED_SEARCH_INPUT2").val(),
-                'hotelFilter': hotelFilter,
-                'amakenFilter': amakenFilter,
-                'restaurantFilter': restuarantFilter,
-                'majaraFilter': majaraFilter,
-                'sogatSanaieFilter': sogatSanaieFilter,
-                'mahaliFoodFilter': mahaliFoodFilter,
-                'selectedCities': cities
-            },
-            success: function (response) {
-
-                $("#resultPlace").empty();
-
-                if(response.length == 0)
-                    return;
-
-                response = JSON.parse(response);
-
-                newElement = "";
-                for(i = 0; i < response.length; i++) {
-                    if(response[i].kindPlace == 'هتل')
-                        newElement += "<p class='searchElement'><span onclick='addToCompareList(\"" + response[i].kindPlaceId + "\", \"" + response[i].id + "\", \"" + response[i].name + "\")' data-toggle='tooltip' title='افزودن به مقایسه ها' class='float-right glyphicon glyphicon-plus'></span><span class='mg-rt-7' onclick='document.location.href = \"{{route('home')}}/hotel-details/" + response[i].id + "/" + response[i].name + "\"'>" + response[i].name + " در " + response[i].cityName + "</span></p>";
-                    else if(response[i].kindPlace == 'رستوران')
-                        newElement += "<p class='searchElement'><span onclick='addToCompareList(\"" + response[i].kindPlaceId + "\", \"" + response[i].id + "\", \"" + response[i].name + "\")' data-toggle='tooltip' title='افزودن به مقایسه ها' class='float-right glyphicon glyphicon-plus'></span><span class='mg-rt-7' onclick='document.location.href = \"{{route('home')}}/restaurant-details/" + response[i].id + "/" + response[i].name + "\"'>" + response[i].name + " در " + response[i].cityName + "</span></p>";
-                    else if(response[i].kindPlace == 'اماکن')
-                            newElement += "<p class='searchElement'><span onclick='addToCompareList(\"" + response[i].kindPlaceId + "\", \"" + response[i].id + "\", \"" + response[i].name + "\")' data-toggle='tooltip' title='افزودن به مقایسه ها' class='float-right glyphicon glyphicon-plus'></span><span class='mg-rt-7' onclick='document.location.href = \"{{route('home')}}/amaken-details/" + response[i].id + "/" + response[i].name + "\"'>" + response[i].name + " در " + response[i].cityName + "</span></p>";
-                    else if(response[i].kindPlace == 'آداب')
-                        newElement += "<p class='searchElement'><span onclick='addToCompareList(\"" + response[i].kindPlaceId + "\", \"" + response[i].id + "\", \"" + response[i].name + "\")' data-toggle='tooltip' title='افزودن به مقایسه ها' class='float-right glyphicon glyphicon-plus'></span><span class='mg-rt-7' onclick='document.location.href = \"{{route('home')}}/adab-details/" + response[i].id + "/" + response[i].name + "\"'>" + response[i].name + " در " + response[i].cityName + "</span></p>";
-                    else
-                        newElement += "<p class='searchElement'><span onclick='addToCompareList(\"" + response[i].kindPlaceId + "\", \"" + response[i].id + "\", \"" + response[i].name + "\")' data-toggle='tooltip' title='افزودن به مقایسه ها' class='float-right glyphicon glyphicon-plus'></span><span class='mg-rt-7' onclick='document.location.href = \"{{route('home')}}/majara-details/" + response[i].id + "/" + response[i].name + "\"'>" + response[i].name + " در " + response[i].cityName + "</span></p>";
-                }
-
-                $("#resultPlace").append(newElement)
+        if(value.trim().length > 1){
+            cities = [];
+            for(i = 0; i < filters.length; i++) {
+                cities[i] = filters[i].split('_')[1];
             }
-        });
 
+            if(cities.length == 0)
+                cities = -1;
+
+
+            hotelFilter = ($("#hotelFilter").attr('data-val') == 'off') ? 0 : 1;
+            amakenFilter = ($("#amakenFilter").attr('data-val') == 'off') ? 0 : 1;
+            restuarantFilter = ($("#restaurantFilter").attr('data-val') == 'off') ? 0 : 1;
+            majaraFilter = ($("#majaraFilter").attr('data-val') == 'off') ? 0 : 1;
+            sogatSanaieFilter = ($("#sogatSanaieFilter").attr('data-val') == 'off') ? 0 : 1;
+            mahaliFoodFilter = ($("#mahaliFoodFilter").attr('data-val') == 'off') ? 0 : 1;
+
+
+            $.ajax({
+                type: 'post',
+                url: searchInPlacesDir,
+                data: {
+                    'key':  value,
+                    'hotelFilter': hotelFilter,
+                    'amakenFilter': amakenFilter,
+                    'restaurantFilter': restuarantFilter,
+                    'majaraFilter': majaraFilter,
+                    'sogatSanaieFilter': sogatSanaieFilter,
+                    'mahaliFoodFilter': mahaliFoodFilter,
+                    'selectedCities': cities
+                },
+                success: function (response) {
+                    $("#resultPlace").empty();
+
+                    if(response.length == 0)
+                        return;
+
+                    response = JSON.parse(response);
+
+                    newElement = "";
+                    for(i = 0; i < response.length; i++) {
+
+                        if(response[i].kindPlace == 'هتل')
+                            icon = '<div class="icons hotelIcon spIcons"></div>';
+                        else if(response[i].kindPlace == 'رستوران')
+                            icon = '<div class="icons restaurantIcon spIcons"></div>';
+                        else if(response[i].kindPlace == 'اماکن')
+                            icon = '<div class="icons touristAttractions spIcons"></div>';
+                        else if(response[i].kindPlace == 'ماجرا')
+                            icon = '<div class="icons adventure spIcons"></div>';
+                        else if(response[i].kindPlace == 'غذای محلی')
+                            icon = '<div class="icons traditionalFood spIcons"></div>';
+                        else if(response[i].kindPlace == 'صنایع سوغات')
+                            icon = '<div class="icons souvenirIcon spIcons"></div>';
+                        else
+                            icon = '<div class="icons touristAttractions spIcons"></div>';
+
+                        newElement += '<div style="padding: 5px 20px; display: flex">' +
+                                        '   <a href="' + response[i]['url'] + '" style="width: 80%; color: black;">' +
+                                        '       <div>' +
+                                                    icon +
+                                            '       <p class="suggest cursor-pointer font-weight-700" id="suggest_1" style="margin: 0px; display: inline-block;">' + response[i].name + '</p>' +
+                                            '       <p class="suggest cursor-pointer stateName" id="suggest_1">' + response[i].stateName + ' در ' + response[i].cityName + '</p>' +
+                                        '       </div>\n' +
+                                        '   </a>' +
+                                        '   <div style="display: flex; align-items: center">' +
+                                        '       <button class="btn btn-success" style="float: left; padding: 2px 15px; border-radius: 8px;"  onclick="addToCompareList(\'' + response[i].kindPlaceId + '\', \'' + response[i].id + '\', \'' + response[i].name + '\')"> مقایسه </button>' +
+                                        '   </div>' +
+                                        '</div>';
+                    }
+
+                    setResultToGlobalSearch(newElement);
+                }
+            });
+        }
+        else
+            clearGlobalResult();
     }
 
     function removeFromCompareList(idx) {
@@ -226,6 +248,8 @@
     }
 
     function addToCompareList(kindPlaceId, id, name) {
+
+        closeSearchInput();
 
         for(i = 0; i < compareList.length; i++) {
             if(compareList[i].id == id)
@@ -353,46 +377,45 @@
         setTimeout('destroyBalloon()', 1);
     }
     
-    function searchCity() {
+    function searchCity(_element) {
 
         activeCityFilter = false;
-        $("#searchKeyCity").empty();
-        $('#addToFilterCityBtn').css('display', 'none');
-        $("#currentCity").empty().css('margin' , '0');
+        var value = _element.value;
 
-        if($("#GEO_SCOPED_SEARCH_INPUT").val().length < 2) {
-            $("#resultCity").empty().css('padding', '0');
-            return;
-        }
+        if(value.trim().length > 1){
+            $.ajax({
+                type: 'post',
+                url: searchInCity,
+                data: {
+                    'key':  value
+                },
+                success: function (response) {
 
-        $.ajax({
-            type: 'post',
-            url: searchInCity,
-            data: {
-                'key':  $("#GEO_SCOPED_SEARCH_INPUT").val()
-            },
-            success: function (response) {
+                    $("#resultCity").empty();
 
-                $("#resultCity").empty();
+                    if(response.length == 0)
+                        return;
 
-                if(response.length == 0)
-                    return;
+                    response = JSON.parse(response);
 
-                response = JSON.parse(response);
+                    var newElement = "";
 
-                newElement = "";
-                for(i = 0; i < response.length; i++) {
-                    newElement += "<p class='proSearchFindCityList' onclick='setCityName(\"" + response[i].cityName + "\", \"" + response[i].id + "\")'><span>" + response[i].cityName + " در " + response[i].stateName + "</span></p>";
+                    for(i = 0; i < response.length; i++) {
+                        newElement += '<div onclick="setCityName(\'' + response[i].cityName + '\', \'' + response[i].id + '\')"><div class="icons location spIcons"></div>' +
+                                     '<p class="suggest cursor-pointer font-weight-700" id="suggest_1" style="margin: 0px">شهر ' + response[i].cityName + '</p>' +
+                                     '<p class="suggest cursor-pointer stateName" id="suggest_1">' + response[i].stateName + '</p></div>';
+                    }
+                    setResultToGlobalSearch(newElement);
                 }
-
-                $("#resultCity").append(newElement).css('padding', '10px');;
-            }
-        });
+            });
+        }
+        else
+            clearGlobalResult();
     }
 
     function setCityName(val, id) {
+        closeSearchInput();
         activeCityFilter = true;
-        $("#resultCity").empty();
         $("#GEO_SCOPED_SEARCH_INPUT2").val('');
         $("#GEO_SCOPED_SEARCH_INPUT").val(val);
         addToFilter(id);
@@ -531,8 +554,8 @@
                         <div class="boxOfCityNameProSearch">
                             <div id="textOfWhere">در کجا</div>
                             <div class="where_with_highlight enterCityNameProSearch">
-                                <input onkeyup="searchCity()" id="GEO_SCOPED_SEARCH_INPUT" class="text geoScopeInput"
-                                       value="" placeholder="نام شهر را وارد کنید" autocomplete="off" type="text">
+                                <input id="GEO_SCOPED_SEARCH_INPUT" class="text geoScopeInput" onclick="openSearchFindCity()"
+                                       value="" placeholder="نام شهر را وارد کنید" autocomplete="off" type="text" readonly>
                             </div>
                         </div>
                         <p id="currentCity"></p>
@@ -561,8 +584,8 @@
                             <div class="boxOfCityNameProSearch">
                                 <div id="textOfWhere2">به کجا</div>
                                 <div class="where_with_highlight enterCityNameProSearch">
-                                    <input onkeyup="searchInPlaces()" id="GEO_SCOPED_SEARCH_INPUT2" class="text geoScopeInput"
-                                           value="" placeholder="نام مکان را وارد کنید. (به وسیله فانوس ها جستجو را محدود کنید.)" autocomplete="off" type="text">
+                                    <input id="GEO_SCOPED_SEARCH_INPUT2" class="text geoScopeInput" onclick="openSearchFindPlace()"
+                                           value="" placeholder="نام مکان را وارد کنید. (به وسیله فانوس ها جستجو را محدود کنید.)" type="text" readonly>
                                 </div>
                             </div>
                         </div>
@@ -599,26 +622,13 @@
                         </div>
 {{--                        <div id="dividerCenterBoxProSearch"></div>--}}
                     </div>
-                    {{--<div class="col-xs-12" id="filterDiv">--}}
-                        {{--<div id="filters" class="position-relative"></div>--}}
-                    {{--</div>--}}
-                    {{--<div class="col-xs-12">--}}
-                        {{--<div id="resultPlace" class="data_holder"></div>--}}
-                    {{--</div>--}}
+                    <div class="col-xs-12" id="filterDiv">
+                        <div id="filters" class="position-relative"></div>
+                    </div>
                 </div>
-{{--                <div class="col-xs-2"></div>--}}
 
                 <div class="clear-both"></div>
 
-                {{--<div class="col-xs-12">--}}
-                    {{--<div class="col-xs-2"></div>--}}
-                    {{--<div class="col-xs-8" id="filterDivCM">--}}
-                        {{--<div id="filters"></div>--}}
-                    {{--</div>--}}
-                    {{--<div class="col-xs-2"></div>--}}
-                {{--</div>--}}
-
-{{--                <div class="col-xs-2"></div>--}}
                 <div class="col-xs-12 pd-0">
                     <div class="col-xs-12 boxOfMainDivCompareProSearch">
                         @for($i = 1; $i < 5; $i++)
@@ -706,5 +716,13 @@
     //         imageElements.attr('data-val', 'on');
     //         imageElements.attr('src', onImage);
     //     }
+    }
+
+    function openSearchFindCity(){
+        createSearchInput('searchCity', 'نام شهر را وارد کنید.');
+    }
+
+    function openSearchFindPlace(){
+        createSearchInput('searchInPlaces', 'نام مکان مورد نظر را وارد کنید.');
     }
 </script>

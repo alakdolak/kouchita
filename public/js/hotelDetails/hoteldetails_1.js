@@ -23,8 +23,8 @@ function isPhotographer(){
     if(!checkLogin())
         return;
 
-    $('.dark').show();
-    $('.dark').removeClass('hidden');
+    // $('.dark').show();
+    // $('.dark').removeClass('hidden');
     $("#photoEditor").removeClass('hidden');
 }
 

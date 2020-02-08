@@ -1,18 +1,8 @@
-<?php $placeMode = "ticket";
-$state = 'اصفهان';
-$kindPlaceId = 10; ?>
-        <!DOCTYPE html>
-<html>
-<head>
-    @include('layouts.topHeader')
-    <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/hr_north_star.css?v=1')}}' data-rup='hr_north_star_v1'/>
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/shazdeDesigns/hotelDetail.css')}}"/>
+@extends('posts.articleLayout')
 
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/long_lived_global_legacy_2.css?v=1')}}"/>
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/article.min.css?v=1.2')}}"/>
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/shazdeDesigns/article.css')}}"/>
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/shazdeDesigns/abbreviations.css')}}"/>
+@section('head')
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/easyimage.css')}}"/>
+<<<<<<< HEAD
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -128,6 +118,8 @@ $kindPlaceId = 10; ?>
         }
     </style>
 
+=======
+>>>>>>> 89c253bb4610e0ad4b33c1fa9d1a9d1b47f28688
     {{--just article style--}}
     <style>
         .gnMainPicOfArticle {
@@ -155,6 +147,7 @@ $kindPlaceId = 10; ?>
             margin-left: 0px !important;
         }
     </style>
+<<<<<<< HEAD
 
 </head>
 
@@ -212,7 +205,11 @@ $kindPlaceId = 10; ?>
             </div>
         </div>
     </div>
+=======
+@endsection
+>>>>>>> 89c253bb4610e0ad4b33c1fa9d1a9d1b47f28688
 
+@section('body')
     <div class="container" style="direction: rtl">
         <div class="col-md-3 col-sm-12" style="padding-right: 0 !important;">
             <a href="{{route('mainArticle')}}">
@@ -239,7 +236,7 @@ $kindPlaceId = 10; ?>
                 <div>
                     <a href="">نمایش محتوای شهر اصفهان</a>
                 </div>
-                <input type="text" class="gnInput" placeholder="شهر موردنظر خود را وارد کنید">
+                <input type="text" id="searchCityInArticleInput" class="gnInput" placeholder="شهر موردنظر خود را وارد کنید" readonly>
             </div>
 
             <div class="col-md-12 gnWhiteBox">
@@ -267,34 +264,34 @@ $kindPlaceId = 10; ?>
                             </div>
                         </div>
                         <div class="im-entry">
-                        <div class="im-entry-content">
-                            <a href="{{$item->url}}" rel="bookmark">
-                                {{$item->meta}}
-                            </a>
-                        </div>
+                            <div class="im-entry-content">
+                                <a href="{{$item->url}}" rel="bookmark">
+                                    {{$item->meta}}
+                                </a>
+                            </div>
 
-                        <p class="im-entry-footer">
-                        <div class="iranomag-meta clearfix">
-                            <div class="posted-on im-meta-item">
-                                <span class="entry-date published updated">{{$post->date}}</span>
+                            <p class="im-entry-footer">
+                            <div class="iranomag-meta clearfix">
+                                <div class="posted-on im-meta-item">
+                                    <span class="entry-date published updated">{{$post->date}}</span>
+                                </div>
+                                <div class="comments-link im-meta-item">
+                                    <a href="">
+                                        <i class="fa fa-comment-o"></i>{{$item->msgs}}
+                                    </a>
+                                </div>
+                                <div class="author vcard im-meta-item">
+                                    <a class="url fn n" href="/author/writer/">
+                                        <i class="fa fa-user"></i>
+                                        {{$item->username}}
+                                    </a>
+                                </div>
+                                <div class="post-views im-meta-item">
+                                    <i class="fa fa-eye"></i>{{$item->seen}}
+                                </div>
                             </div>
-                            <div class="comments-link im-meta-item">
-                                <a href="">
-                                    <i class="fa fa-comment-o"></i>{{$item->msgs}}
-                                </a>
-                            </div>
-                            <div class="author vcard im-meta-item">
-                                <a class="url fn n" href="/author/writer/">
-                                    <i class="fa fa-user"></i>
-                                    {{$item->username}}
-                                </a>
-                            </div>
-                            <div class="post-views im-meta-item">
-                                <i class="fa fa-eye"></i>{{$item->seen}}
-                            </div>
+                            </p>
                         </div>
-                        </p>
-                    </div>
                     </div>
                 @endforeach
 
@@ -426,51 +423,22 @@ $kindPlaceId = 10; ?>
 
         </div>
     </div>
-</div>
-
-    <a href="#" id="back-to-top" title="بازگشت به ابتدای صفحه"><i class="fa fa-arrow-up"></i></a>
-
-    <script type='text/javascript' src='{{URL::asset('js/article.js')}}'></script>
-
-
-    <script type="text/javascript">
-        jQuery('.lazy-img').unveil(300, function () {
-            "use strict";
-            jQuery(this).load(function () {
-                this.style.opacity = 1;
-            });
-        });
+    <script src="{{URL::asset('/js/article/articlePage.js')}}"></script>
+    <script>
+        var category = {!! $category !!}
+        var post = {!! $post !!}
+        var getLisPostUrl = '{{route("article.list")}}';
+        var likeCount = {{$post->like}};
+        var disLikeCount = {{$post->disLike}};
+        var uLike = {{$postLike}};
+        var _token= '{{csrf_token()}}';
+        var likeArticleUrl = '{{route("article.like")}}';
+        var hasLogin = '{{auth()->check()}}';
+        var requestUrl = '{{Request::url()}}';
+        var commentStoreUrl = '{{route("article.comment.store")}}';
+        var likeCommentUrl = '{{route("article.comment.like")}}';
+        var comments = {!! $comments !!};
+        var userPic = '{{$uPic}}';
     </script>
-    <script type="text/javascript">
-        jQuery(".sticky-sidebar").stick_in_parent({offset_top: fixed_header_height});
-    </script>
-
-    @include('layouts.placeFooter')
-
-</div>
-
-<script>
-    var category = {!! $category !!}
-    var post = {!! $post !!}
-    var getLisPostUrl = '{{route("article.list")}}';
-    var likeCount = {{$post->like}};
-    var disLikeCount = {{$post->disLike}};
-    var uLike = {{$postLike}};
-    var _token= '{{csrf_token()}}';
-    var likeArticleUrl = '{{route("article.like")}}';
-    var hasLogin = '{{auth()->check()}}';
-    var requestUrl = '{{Request::url()}}';
-    var commentStoreUrl = '{{route("article.comment.store")}}';
-    var likeCommentUrl = '{{route("article.comment.like")}}';
-    var comments = {!! $comments !!};
-    var userPic = '{{$uPic}}';
-</script>
-
-<script src="{{URL::asset('/js/article/articlePage.js')}}"></script>
-
-<div class="ui_backdrop dark" style="display: none; z-index: 10000000;"></div>
-
-</body>
-</html>
-
+@endsection
 

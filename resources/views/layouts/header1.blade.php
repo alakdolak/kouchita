@@ -160,13 +160,13 @@
                             @endif
 
 
-                            {{--<div id="taplc_masthead_search_0" class="ppr_rup ppr_priv_masthead_search position-relative" data-placement-name="masthead_search">--}}
-                                {{--<div class="mag_glass_parent position-relative" title="Search">--}}
-                                    {{--<div id="targetHelp_6" class="targets">--}}
-                                        {{--<span class="ui_icon search" id="openSearch"></span>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
+                            <div id="taplc_masthead_search_0" class="ppr_rup ppr_priv_masthead_search position-relative" data-placement-name="masthead_search">
+                                <div class="mag_glass_parent position-relative" title="Search">
+                                    <div id="targetHelp_6" class="targets">
+                                        <span class="ui_icon search" id="openSearch"></span>
+                                    </div>
+                                </div>
+                            </div>
 
                             <div id="alertBtn" onclick="getAlertItems()" class="ppr_rup ppr_priv_global_nav_action_notif">
                                 <div class="masthead_notification" title="اعلانات">
@@ -286,7 +286,7 @@
 
 @include('layouts.pop-up-create-trip')
 
-@include('general.searchInput')
+@include('general.globalInput')
 
 <script>
     $(document).ready(function(){
