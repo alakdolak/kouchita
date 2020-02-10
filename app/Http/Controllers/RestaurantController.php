@@ -424,6 +424,9 @@ class RestaurantController extends Controller {
         $textQuestionJSON = json_encode($textQuestion);
         $rateQuestionJSON = json_encode($rateQuestion);
 
+        $inPage = 'place_' . $kindPlaceId . '_' . $placeId;
+        session(['inPage' => $inPage]);
+
         return view('hotel-details.hotel-details', array('place' => $place, 'save' => $save, 'city' => $city, 'thumbnail' => $thumbnail,
             'state' => $state, 'avgRate' => $rates[1], 'photos' => $photos,
             'userPhotos' => $userPhotos, 'userPhotosJson' => $userPhotosJson,

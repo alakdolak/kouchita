@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\setSession;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -63,6 +64,7 @@ class Kernel extends HttpKernel
         'nothing' => \App\Http\Middleware\Nothing::class,
         'controllerAccess' => \App\Http\Middleware\ControllerAccess::class,
         'cors' => \App\Http\Middleware\Cors::class,
-        'operatorAccess' => \App\Http\Middleware\OperatorAccess::class
+        'operatorAccess' => \App\Http\Middleware\OperatorAccess::class,
+        'setSession' => \App\Http\Middleware\setSession::class
     ];
 }

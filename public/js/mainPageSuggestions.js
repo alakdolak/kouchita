@@ -22,21 +22,21 @@ var data = $.param({});
         $scope.show = !1;
         $scope.disable = !1;
 
-        $scope.myPagingFunction = function () {
+        // $scope.myPagingFunction = function () {
+        angular.element(document).ready(function () {
             if ($scope.disable)
                 return;
 
-            var top = $("#newKoochita").position().top;
-            var scroll = $(window).scrollTop() + window.innerHeight;
-
-            if (scroll < top || (scroll - top) / window.innerHeight < 0.6)
-                return;
+            // var top = $("#newKoochita").position().top;
+            // var scroll = $(window).scrollTop() + window.innerHeight;
+            //
+            // if (scroll < top || (scroll - top) / window.innerHeight < 0.6)
+            //     return;
 
             $('.loader').removeClass('hidden');
 
             $scope.disable = !0;
             $http.post(getMainPageSuggestion, data, config).then(function (response) {
-                // console.log(response.data)
                 if (response.data[0] != null && response.data[0].length > 0)
                     $scope.show = !0;
 
@@ -65,9 +65,6 @@ var data = $.param({});
                     else if(section2[i]['section'] == 'مقالات')
                         article[article.length] = section2[i];
                 }
-
-                console.log(article)
-                console.log(kharid)
 
                 if(food.length != 0) {
                     document.getElementById('foodSuggestion').style.display = 'block';
@@ -132,7 +129,9 @@ var data = $.param({});
             }).catch(function (err) {
                 console.log(err)
             })
-        }
+        })
+
+        // }
     });
 
 

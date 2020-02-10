@@ -23,6 +23,9 @@ use App\models\PicItem;
 use App\models\Place;
 use App\models\PlaceStyle;
 use App\models\Post;
+use App\models\PostCategory;
+use App\models\PostCategoryRelation;
+use App\models\PostCityRelation;
 use App\models\PostComment;
 use App\models\Question;
 use App\models\QuestionUserAns;
@@ -164,7 +167,59 @@ class PlaceController extends Controller {
             }
 
             if ($place != null) {
-                echo \GuzzleHttp\json_encode($this->getNearbies($place->C, $place->D, $count));
+                $today = getToday()["date"];
+                $nowTime = getToday()["time"];
+
+                $cityId = $place->cityId;
+                $postsId = PostCityRelation::where('cityId', $cityId)->pluck('postId')->toArray();
+                if(count($postsId) < 5){
+                    $state = Cities::find($cityId);
+                    if($state != null){
+                        $psId = PostCityRelation::where('stateId', $state->id)->where('cityId', 0)->pluck('postId')->toArray();
+                        $postsId = array_merge($postsId, $psId);
+                    }
+                }
+
+                $allPosts = array();
+
+                if(count($postsId) != 0) {
+                    $allPosts = Post::join('users', 'users.id', 'post.creator')
+                        ->whereRaw('(post.date <= ' . $today . ' OR (post.date = ' . $today . ' AND (post.time < ' . $nowTime . ' || post.time IS NULL)))')
+                        ->whereRaw('post.release <> "draft"')
+                        ->whereIn('post.id', $postsId)
+                        ->select('username', 'post.id', 'post.title', 'post.meta', 'post.slug', 'post.seen', 'post.date', 'post.created_at', 'post.pic', 'post.keyword')
+                        ->orderBy('post.date', 'DESC')->get();
+                }
+
+                if(count($allPosts) < 5){
+                    $alP = Post::join('users', 'users.id', 'post.creator')
+                        ->whereRaw('(post.date <= ' . $today . ' OR (post.date = ' . $today . ' AND (post.time < ' . $nowTime . ' || post.time IS NULL)))')
+                        ->whereRaw('post.release <> "draft"')
+                        ->whereNotIn('post.id', $postsId)
+                        ->select('username', 'post.id', 'post.title', 'post.meta', 'post.slug', 'post.seen', 'post.date', 'post.created_at', 'post.pic', 'post.keyword')
+                        ->orderBy('post.date', 'DESC')->get();
+
+                    if(count($allPosts) == 0)
+                        $allPosts = $alP;
+                    else
+                        $allPosts = array_merge($allPosts, $alP);
+
+                    foreach ($allPosts as $item) {
+                        $item->msgs = PostComment::wherePostId($item->id)->whereStatus(true)->count();
+                        $item->pic = \URL::asset('_images/posts/' . $item->id . '/' . $item->pic);
+                        if ($item->date == null)
+                            $item->date = \verta($item->created_at)->format('Ym%d');
+                        $item->date = convertJalaliToText($item->date);
+                        $mainCategory = PostCategoryRelation::where('postId', $item->id)->where('isMain', 1)->first();
+                        $item->category = PostCategory::find($mainCategory->categoryId)->name;
+                        $item->url = route('article.show', ['slug' => $item->slug]);
+                    }
+
+                }
+
+                $places = $this->getNearbies($place->C, $place->D, $count);
+
+                echo json_encode([$places, $allPosts]);
                 return;
             }
         }

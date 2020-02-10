@@ -51,13 +51,33 @@
                 </div>
             </div>
             <div class="col-md-12 gnWhiteBox">
-                <div>شما در استان اصفهان - شهر مورچه خورد - هتل عباسی هستید</div>
-                <div>
-                    <a href="">نمایش محتوای استان اصفهان</a>
-                </div>
-                <div>
-                    <a href="">نمایش محتوای شهر اصفهان</a>
-                </div>
+
+                @if($stateCome != null)
+                    <div>
+                        شما در استان {{$stateCome->name}}
+                        @if($cityCome != null)
+                            - شهر {{$cityCome->name}}
+                            @if($placeCome != null)
+                                - {{$placeCome->name}}
+                            @endif
+                        @endif
+                        هستید
+                    </div>
+                    <div>
+                        <a href="{{route('article.list', ['type' => 'state', 'search' => $stateCome->name])}}">نمایش محتوای استان {{$stateCome->name}}</a>
+                    </div>
+                    @if($cityCome != null)
+                        <div>
+                            <a href="{{route('article.list', ['type' => 'city', 'search' => $cityCome->name])}}">نمایش محتوای شهر {{$cityCome->name}}</a>
+                        </div>
+                    @endif
+                    @if($placeCome != null)
+                        <div>
+                            <a href="{{route('article.list', ['type' => 'place', 'search' => $placeCome->kindPlaceId.'_'.$placeCome->id])}}">نمایش محتوای  {{$placeCome->name}}</a>
+                        </div>
+                    @endif
+                @endif
+
                 <input type="text" id="searchCityInArticleInput" class="gnInput" placeholder="شهر موردنظر خود را وارد کنید" readonly>
             </div>
 
@@ -80,9 +100,11 @@
                                         </div>
                                     </div>
                                 </div>
-                                <h1 class="im-entry-title">
-                                    {{$item->title}}
-                                </h1>
+                                <a href="{{$item->url}}" rel="bookmark">
+                                    <h1 class="im-entry-title" style="color: white;">
+                                        {{$item->title}}
+                                    </h1>
+                                </a>
                             </div>
                         </div>
                         <div class="im-entry">

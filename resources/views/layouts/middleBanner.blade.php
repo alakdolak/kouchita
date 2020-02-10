@@ -1,4 +1,4 @@
-<link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/middleBanner.css')}}'/>
+<link rel='stylesheet' type='text/css' href='{{URL::asset('css/common/middleBanner.css')}}'/>
 
 <div class="clear-both"></div>
 

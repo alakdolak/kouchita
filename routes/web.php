@@ -361,10 +361,6 @@ Route::group(array('middleware' => ['throttle:30']), function () {
 
     Route::any('searchForStates', array('as' => 'searchForStates', 'uses' => 'HomeController@searchForStates'));
 
-    Route::get('cityPage/{city}', 'HomeController@cityPage');
-
-    Route::post('/cityPage/getCityOpinion', 'HomeController@getCityOpinion')->name('cityPage.getCityOpinion');
-
     Route::get('abbas', 'HomeController@abbas');
 
     Route::any('hotelList2/{city}/{mode}', array('as' => 'hotelList2', 'uses' => 'HotelReservationController@showHotelList2'));
@@ -757,8 +753,10 @@ Route::group(array('middleware' => ['throttle:30', 'nothing', 'auth', 'operatorA
 });
 
 //place-details
-Route::group(array('middleware' => ['throttle:30', 'nothing']), function (){
-    Route::get('adab-details/{placeId}/{placeName}/{mode?}', array('as' => 'adabDetails', 'uses' => 'AdabController@showAdabDetail'));
+Route::group(array('middleware' => ['throttle:30', 'nothing', 'setSession']), function (){
+    Route::get('cityPage/{kind}/{city}', 'HomeController@cityPage');
+
+    Route::post('/city/Page/getCityOpinion', 'HomeController@getCityOpinion')->name('cityPage.getCityOpinion');
 
     Route::get('hotel-details/{placeId}/{placeName}/{mode?}', array('as' => 'hotelDetails', 'uses' => 'HotelController@showHotelDetail'));
 
