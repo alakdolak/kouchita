@@ -221,7 +221,7 @@ class HomeController extends Controller
             $item->comments = findAnswerCount($item->id);
 //            $item->pic
         }
-        dd($lastReview);
+        //dd($lastReview);
 
         $cityPost = array();
 
