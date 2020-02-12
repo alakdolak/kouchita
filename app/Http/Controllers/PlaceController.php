@@ -21,6 +21,7 @@ use App\models\PhotographersLog;
 use App\models\PhotographersPic;
 use App\models\PicItem;
 use App\models\Place;
+use App\models\PlaceFeatures;
 use App\models\PlaceStyle;
 use App\models\Post;
 use App\models\PostCategory;
@@ -361,44 +362,44 @@ class PlaceController extends Controller {
     public function getSlider2Photo()
     {
 
-        if (isset($_POST["placeId"]) && isset($_POST["kindPlaceId"]) && isset($_POST["val"])) {
+        if (isset($_POST["placeId"]) && isset($_POST["kindPlaceId"]) && isset($_POST["val"])) {}
 
-            $placeId = makeValidInput($_POST["placeId"]);
-            $kindPlaceId = makeValidInput($_POST["kindPlaceId"]);
-            $val = makeValidInput($_POST["val"]);
+        $placeId = makeValidInput($_POST["placeId"]);
+        $kindPlaceId = makeValidInput($_POST["kindPlaceId"]);
+        $val = makeValidInput($_POST["val"]);
 
-            $aksActivityId = Activity::whereName('عکس')->first()->id;
+        $aksActivityId = Activity::whereName('عکس')->first()->id;
 
-            $tmp = DB::select("select text from log WHERE confirm = 1 and activityId = " . $aksActivityId . " and placeId = " . $placeId . " and kindPlaceId = " . $kindPlaceId . " and pic <> 0 limit " . $val . ', 1');
-            if ($tmp != null && count($tmp) > 0) {
-                switch ($kindPlaceId) {
-                    case 1:
-                    default:
-                        $subDir = "/amaken/";
-                        break;
-                    case 3:
-                        $subDir = "/restaurant/";
-                        break;
-                    case 4:
-                        $subDir = "/hotel/";
-                        break;
-                    case 6:
-                        $subDir = "/majara/";
-                        break;
-                    case 8:
-                        $subDir = '/adab/';
-                        break;
-                }
-                if (file_exists(__DIR__ . '/../../../../assets/userPhoto' . $subDir . 'l-' . $tmp[0]->text))
-                    echo URL::asset('userPhoto' . $subDir . 'l-' . $tmp[0]->text);
-                else
-                    echo URL::asset('_images/nopic/blank.jpg');
-                return;
+        $tmp = DB::select("select text from log WHERE confirm = 1 and activityId = " . $aksActivityId . " and placeId = " . $placeId . " and kindPlaceId = " . $kindPlaceId . " and pic <> 0 limit " . $val . ', 1');
+        if ($tmp != null && count($tmp) > 0) {
+            switch ($kindPlaceId) {
+                case 1:
+                default:
+                    $subDir = "/amaken/";
+                    break;
+                case 3:
+                    $subDir = "/restaurant/";
+                    break;
+                case 4:
+                    $subDir = "/hotel/";
+                    break;
+                case 6:
+                    $subDir = "/majara/";
+                    break;
+                case 8:
+                    $subDir = '/adab/';
+                    break;
             }
-
-            echo URL::asset('_images/nopic/blank.jpg');
+            if (file_exists(__DIR__ . '/../../../../assets/userPhoto' . $subDir . 'l-' . $tmp[0]->text))
+                echo URL::asset('userPhoto' . $subDir . 'l-' . $tmp[0]->text);
+            else
+                echo URL::asset('_images/nopic/blank.jpg');
             return;
         }
+
+        echo URL::asset('_images/nopic/blank.jpg');
+        return;
+
 
         echo "nok";
     }
@@ -3437,6 +3438,100 @@ class PlaceController extends Controller {
             echo json_encode($logs);
         }
 
+    }
+
+    public function showPlaceList($kindPlaceId, $city, $mode)
+    {
+
+        $sections = SectionPage::wherePage(getValueInfo('hotel-detail'))->get();
+        $kindPlace = Place::find($kindPlaceId);
+        if($kindPlace != null){
+
+            if ($mode == "state") {
+
+                $state = State::whereName($city)->first();
+                $city = $state;
+                if ($state == null)
+                    return "نتیجه ای یافت نشد";
+
+            }
+            else {
+                $city = Cities::whereName($city)->first();
+                if ($city == null)
+                    return "نتیجه ای یافت نشد";
+
+                $state = State::whereId($city->stateId);
+                if ($state == null)
+                    return "نتیجه ای یافت نشد";
+            }
+
+            switch ($kindPlaceId){
+                case 4:
+                    $placeMode = 'hotel';
+                    break;
+            }
+
+
+            $features = PlaceFeatures::where('kindPlaceId', $kindPlaceId)->where('parent', 0)->get();
+            foreach ($features as $feature)
+                $feature->subFeat = PlaceFeatures::where('parent', $feature->id)->where('type', 'YN')->get();
+
+            return view('places.list.list', compact(['features', 'kindPlace', 'mode', 'city', 'sections', 'placeMode', 'state']));
+        }
+        else
+            return \redirect(\url('/'));
+    }
+
+    public function getPlaceListElems(Request $request)
+    {
+        $page = $request->page;
+        $take = $request->take;
+
+        $activityId = Activity::whereName('نظر')->first()->id;
+        $rateActivityId = Activity::whereName('امتیاز')->first()->id;
+        switch ($request->kindPlaceId){
+            case 1:
+                $table = 'amaken';
+                $file = 'amaken';
+                break;
+            case 3:
+                $table = 'restaurant';
+                break;
+            case 4:
+                $table = 'hotels';
+                $file = 'hotels';
+                break;
+            case 6:
+                $table = 'majara';
+                break;
+        }
+
+        if($request->mode == 'state'){
+            $cities = Cities::where('stateId', $request->city)->pluck('id')->toArray();
+            $places = \DB::select('SELECT * FROM ' . $table . ' WHERE cityId IN (' . implode(",", $cities) . ') ORDER BY `name` ');
+        }
+        else{
+            $places = \DB::select('SELECT * FROM ' . $table . ' WHERE cityId = ' . $request->city . ' ORDER BY `name` ');
+        }
+
+        foreach ($places as $place) {
+            if (file_exists((__DIR__ . '/../../../../assets/_images/' . $file . '/' . $place->file . '/f-1.jpg')))
+                $place->pic = URL::asset('_images/' . $file . '/' . $place->file . '/f-1.jpg');
+            else
+                $place->pic = URL::asset('_images/nopic/blank.jpg');
+
+            $condition = ['placeId' => $place->id, 'kindPlaceId' => $request->kindPlaceId,
+                'activityId' => $activityId];
+            $place->reviews = LogModel::where($condition)->count();
+            $cityObj = Cities::whereId($place->cityId);
+            $place->city = $cityObj->name;
+            $place->state = State::whereId($cityObj->stateId)->name;
+            $place->avgRate = getRate($place->id, $request->kindPlaceId)[1];
+        }
+
+
+        echo json_encode(['places' => $places]);
+        return;
     }
 
 }

@@ -36,10 +36,6 @@ $(".exitBtnHelp").click(function () {
 });
 $(window).ready(function () {
 
-@foreach($sections as $section)
-    fillMyDivWithAdv('{{$section->sectionId}}', '{{$state->id}}');
-@endforeach
-
     checkOverFlow();
     $('.menu').addClass('original').clone().insertAfter('.menu').addClass('cloned').css('position', 'fixed').css('top', '0').css('margin-top', '0').css('z-index', '500').removeClass('original').hide();
     scrollIntervalID = setInterval(stickIt, 10);
@@ -47,7 +43,7 @@ $(window).ready(function () {
         $("#photo_album_span").hide();
     });
     var i;
-    photos[0] = '{{$photos[0]}}';
+    // photos[0] = '{{$photos[0]}}';
     for (i = 1; i < totalPhotos; i++)
         photos[i] = -1;
     for (i = 1; i < totalPhotos - sitePhotosCount; i++)
@@ -79,7 +75,6 @@ $(window).ready(function () {
         }
     });
 });
-
 
 function changeStatetounReserved() {
     document.getElementById('bestPriceRezerved').style.display = 'none';
@@ -582,17 +577,6 @@ function askQuestion() {
     });
 }
 
-function closePublish() {
-    var url;
-    if (placeMode == "hotel")
-        url = '{{route('hotelDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';
-else if (placeMode == "amaken")
-        url = '{{route('amakenDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';
-else
-    url = '{{route('restaurantDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';
-    document.location.href = url;
-}
-
 function comments(tag) {
     selectedTag = tag;
     filter();
@@ -613,32 +597,6 @@ function questions() {
     });
 }
 
-function getSliderPhoto(mode, val, mode2) {
-    var url = (mode2 == 2) ? '{{route('getSlider2Photo')}}' : '{{route('getSlider1Photo')}}';
-    $.ajax({
-        type: 'post',
-        url: url,
-        data: {
-            'placeId': '{{$place->id}}',
-            'kindPlaceId': '{{$kindPlaceId}}',
-            'val': val
-        },
-        success: function (response) {
-            if (response != "nok") {
-                if (mode == 1) {
-                    photos[roundRobinPhoto] = response;
-                    $(".carousel_images_header").css('background', "url(" + photos[roundRobinPhoto] + ") no-repeat")
-                        .css('background-size', "cover");
-                }
-                else {
-                    photos2[roundRobinPhoto2] = response;
-                    $(".carousel_images_footer").css('background', "url(" + photos2[roundRobinPhoto2] + ") no-repeat")
-                        .css('background-size', "cover");
-                }
-            }
-        }
-    });
-}
 
 function photoRoundRobin(val) {
     if (roundRobinPhoto + val < totalPhotos && roundRobinPhoto + val >= 0)
@@ -681,137 +639,6 @@ function photoRoundRobin2(val) {
         $('.left-nav-footer').addClass('hidden');
     else
         $('.left-nav-footer').removeClass('hidden');
-}
-
-function showComments(arr) {
-    $("#reviewsContainer").empty();
-    var checkedValues = $("input:checkbox[name='filterComment[]']:checked").map(function () {
-        return this.value;
-    }).get();
-    if (checkedValues.length == 0)
-        checkedValues = -1;
-    $.ajax({
-        type: 'post',
-        url: getCommentsCount,
-        data: {
-            'placeId': placeId,
-            'kindPlaceId': kindPlaceId,
-            'tag': selectedTag,
-            'filters': checkedValues
-        },
-        success: function (response) {
-            response = JSON.parse(response);
-            $(".seeAllReviews").empty().append(response[1] + " نقد");
-            $(".reviews_header_count").empty().append("(" + response[1] + " نقد)");
-            var newElement = "<p id='pagination-details' class='pagination-details'><b>" + response[0] + "</b> از <b>" + response[1] + "</b> نقد</p>";
-            if (response[1] == 0) {
-                tmp = "<p id='beTheFirstReviewer'>اولین نفری باشید که درباره ی این مکان نقد می نویسید</p>";
-                tmp += "<span id='writeTheFirstReviewer' onclick='document.location.href = showAddReviewPageHotel('{{route('review', ['placeId' => $place->id, 'kindPlaceId' => $kindPlaceId])}}')' class='button_war write_review ui_button primary col-xs-12'>نوشتن نقد</span>";
-                $("#reviewsContainer").empty().append(tmp);
-            }
-            for (i = 0; i < arr.length; i++) {
-                newElement += "<div class='border-bottom-grey display-inline-block full-width' class='review'>";
-                newElement += "<div class='prw_rup prw_reviews_basic_review_hsx'>";
-                newElement += "<div class='reviewSelector'>";
-                newElement += "<div class='review hsx_review ui_columns is-multiline inlineReviewUpdate provider0'>";
-                newElement += "<div class='ui_column is-2 float-right'>";
-                newElement += "<div class='prw_rup prw_reviews_member_info_hsx'>";
-                newElement += "<div class='member_info'>";
-                newElement += "<div class='avatar_wrap'>";
-                newElement += "<div class='prw_rup prw_common_centered_image qa_avatar' onmouseleave='$(\".img_popUp\").addClass(\"hidden\");' onmouseenter='showBriefPopUp(this, \"" + arr[i].visitorId + "\")'>";
-                newElement += "<span class='imgWrap fixedAspect'>";
-                newElement += "<img src='" + arr[i].visitorPic + "' class='centeredImg border-radius-100' height='100%'/>";
-                newElement += "</span></div>";
-                newElement += "<div class='username text-align-center mg-bt-5'>" + arr[i].visitorId + "</div>";
-                newElement += "</div>";
-                newElement += "<div class='memberOverlayLink'>";
-                newElement += "<div class='memberBadgingNoText'><span class='ui_icon pencil-paper'></span><span class='badgetext'>" + arr[i].comments + "</span>&nbsp;&nbsp;";
-                newElement += "<span class='ui_icon thumbs-up-fill'></span><span id='commentLikes_" + arr[i].id + "' data-val='" + arr[i].likes + "' class='badgetext'>" + arr[i].likes + "</span>&nbsp;&nbsp;";
-                newElement += "<span class='ui_icon thumbs-down-fill'></span><span id='commentDislikes_" + arr[i].id + "' data-val='" + arr[i].dislikes + "' class='badgetext'>" + arr[i].dislikes + "</span>";
-                newElement += "</div>";
-                newElement += "</div></div></div></div>";
-                newElement += "<div class='ui_column is-9 float-right'>";
-                newElement += "<div class='innerBubble'>";
-                newElement += "<div class='wrap'>";
-                newElement += "<div class='rating reviewItemInline'>";
-                switch (arr[i].rate) {
-                    case 5:
-                        newElement += "<span class='ui_bubble_rating bubble_50'></span>";
-                        break;
-                    case 4:
-                        newElement += "<span class='ui_bubble_rating bubble_40'></span>";
-                        break;
-                    case 3:
-                        newElement += "<span class='ui_bubble_rating bubble_30'></span>";
-                        break;
-                    case 2:
-                        newElement += "<span class='ui_bubble_rating bubble_20'></span>";
-                        break;
-                    default:
-                        newElement += "<span class='ui_bubble_rating bubble_10'></span>";
-                        break;
-                }
-                newElement += "<span class='ratingDate relativeDate float-right'>نوشته شده در تاریخ " + arr[i].date + " </span></div>";
-                newElement += "<div class='quote isNew'><a href='" + homeURL + "/showReview/" + arr[i].id + "'><h2 class='font-size-1em noQuotes'>" + arr[i].subject + "</h2></a></div>";
-                newElement += "<div class='prw_rup prw_reviews_text_summary_hsx'>";
-                newElement += "<div class='entry'>";
-                newElement += "<p class='partial_entry partial-entry-paragraph' id='partial_entry_" + arr[i].id + "'>" + arr[i].text;
-                newElement += "</p>";
-                newElement += "<div id='showMoreReview_" + arr[i].id + "' class='hidden showMoreReviewDiv' onclick='showMoreReview(" + arr[i].id + ")'>بیشتر</div></div></div>";
-                if (arr[i].pic != -1)
-                    newElement += "<div><img id='reviewPic_" + arr[i].id + "' class='hidden' width='150px' height='150px' src='" + arr[i].pic + "'></div>";
-                newElement += "<div class='prw_rup prw_reviews_vote_line_hsx'>";
-                newElement += "<div class='tooltips wrap'><span id='reportSpanReviews' onclick='showReportPrompt(\"" + arr[i].id + "\")' class='taLnk no_cpu ui_icon '>گزارش تخلف</span></div>";
-                newElement += "<div class='helpful redesigned hsx_helpful'>";
-                newElement += "<span onclick='likeComment(\"" + arr[i].id + "\")' class='thankButton hsx_thank_button'>";
-                newElement += "<span class='helpful_text'><span class='ui_icon thumbs-up-fill emphasizeWithColor'></span><span class='numHelp emphasizeWithColor'></span><span class='thankUser'>" + arr[i].visitorId + " </span></span>";
-                newElement += "<div class='buttonShade hidden'><img src='https://static.tacdn.com/img2/generic/site/loading_anim_gry_sml.gif'/></div>";
-                newElement += "</span>";
-                newElement += "<span onclick='dislikeComment(\"" + arr[i].id + "\")' class='thankButton hsx_thank_button'>";
-                newElement += "<span class='helpful_text'><span class='ui_icon thumbs-down-fill emphasizeWithColor'></span><span class='numHelp emphasizeWithColor'></span><span class='thankUser'>" + arr[i].visitorId + " </span></span>";
-                newElement += "<div class='buttonShade hidden'><img src='https://static.tacdn.com/img2/generic/site/loading_anim_gry_sml.gif'/></div>";
-                newElement += "</span>";
-                newElement += "</div></div></div>";
-                newElement += "<div class='loadingShade hidden'>";
-                newElement += "<div class='ui_spinner'></div></div></div></div></div></div></div></div>";
-            }
-            $("#reviewsContainer").append(newElement);
-            for (i = 0; i < arr.length; i++) {
-                scrollHeight = $("#partial_entry_" + arr[i].id).prop('scrollHeight');
-                offsetHeight = $("#partial_entry_" + arr[i].id).prop('offsetHeight');
-                if (offsetHeight < scrollHeight) {
-                    $('#showMoreReview_' + arr[i].id).removeClass('hidden');
-                }
-                else {
-                    $('#showMoreReview_' + arr[i].id).addClass('hidden');
-                }
-            }
-            newElement = "";
-            limit = Math.ceil(response[0] / 6);
-            preCurr = passCurr = false;
-            for (k = 1; k <= limit; k++) {
-                if (Math.abs(currPage - k) < 4 || k == 1 || k == limit) {
-                    if (k == currPage) {
-                        newElement += "<span data-page-number='" + k + "' class='pageNum current pageNumComment'>" + k + "</span>";
-                    }
-                    else {
-                        newElement += "<a onclick='changeCommentPage(this)' data-page-number='" + k + "' class='pageNum taLnk pageNumComment'>" + k + "</a>";
-                    }
-                }
-                else if (k < currPage && !preCurr) {
-                    preCurr = true;
-                    newElement += "<span class='separator'>&hellip;</span>";
-                }
-                else if (k > currPage && !passCurr) {
-                    passCurr = true;
-                    newElement += "<span class='separator'>&hellip;</span>";
-                }
-            }
-            $("#pageNumCommentContainer").empty().append(newElement);
-            if ($("#commentCount").empty())
-                $("#commentCount").append(response[1]);
-        }
-    });
 }
 
 function startHelp() {

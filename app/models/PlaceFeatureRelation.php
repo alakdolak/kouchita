@@ -4,8 +4,8 @@ namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PlaceFeatures extends Model
+class PlaceFeatureRelation extends Model
 {
-    protected $table = 'placeFeatures';
+    protected $table = 'placeFeatureRelations';
     public $timestamps = false;
 }

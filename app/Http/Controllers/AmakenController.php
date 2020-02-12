@@ -9,6 +9,8 @@ use App\models\ConfigModel;
 use App\models\DefaultPic;
 use App\models\LogModel;
 use App\models\Place;
+use App\models\PlaceFeatureRelation;
+use App\models\PlaceFeatures;
 use App\models\PlacePic;
 use App\models\PlaceStyle;
 use App\models\SectionPage;
@@ -113,7 +115,16 @@ class AmakenController extends Controller {
         $textQuestionJSON = json_encode($textQuestion);
         $rateQuestionJSON = json_encode($rateQuestion);
 
-        return view('hotel-details.hotel-details', array('place' => $place, 'save' => $save, 'city' => $city, 'thumbnail' => $thumbnail,
+        $features = PlaceFeatures::where('kindPlaceId', 1)->where('parent', 0)->get();
+        $featId = array();
+        foreach ($features as $item) {
+            $item->subFeat = PlaceFeatures::where('parent', $item->id)->get();
+            $fId = PlaceFeatures::where('parent', $item->id)->pluck('id')->toArray();
+            $featId = array_merge($featId, $fId);
+        }
+        $place->features = PlaceFeatureRelation::where('placeId', $place->id)->whereIn('featureId', $featId)->pluck('featureId')->toArray();
+
+        return view('hotel-details.hotel-details', array('place' => $place, 'features' => $features, 'save' => $save, 'city' => $city, 'thumbnail' => $thumbnail,
             'state' => $state, 'avgRate' => $rates[1], 'photos' => $photos,
             'userPhotos' => $userPhotos, 'userPhotosJson' => $userPhotosJson,
             'reviewCount' => $reviewCount, 'ansReviewCount' => $ansReviewCount, 'userReviewCount' => $userReviewCount,

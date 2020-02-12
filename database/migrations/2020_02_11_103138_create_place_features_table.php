@@ -16,8 +16,9 @@ class CreatePlaceFeaturesTable extends Migration
         Schema::create('placeFeatures', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('kindPlaceId');
-            $table->string('name');
-            $table->string('type')->default('');
+            $table->string('name', 50);
+            $table->string('type', 10)->nullable();
+            $table->unsignedInteger('parent')->defualt(0);
         });
     }
 
