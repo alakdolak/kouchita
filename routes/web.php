@@ -229,6 +229,10 @@ Route::get('business', function(){
 });
 
 
+Route::get('userActivitiesProfile', function(){
+    return view('profile.userActivitiesProfile');
+});
+
 Route::get('gardeshnameInner/{postId}', ['as' => 'gardeshnameInner', 'uses' => 'PostController@gardeshnameInner']);
 
 Route::post('likePost', ['as' => 'likePost', 'uses' => 'PostController@likePost']);

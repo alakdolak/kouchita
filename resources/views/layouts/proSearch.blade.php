@@ -613,7 +613,11 @@
                             </div>
                             <div class='ui_input_checkbox' style="cursor: pointer;">
                                 <img data-val="{{isset($kindPlaceId) && ($kindPlaceId == 10 || $kindPlaceId == 0) ? 'on' : 'off'}}" class="lantern" id="sogatSanaieFilter" width="40px" height="80px" src="{{isset($kindPlaceId) && ($kindPlaceId == 10 || $kindPlaceId == 0) ? $onLampImg : $offLampImg}}">
-                                <div>سوغات و صنایع دستی</div>
+                                <div>صنایع دستی</div>
+                            </div>
+                            <div class='ui_input_checkbox' style="cursor: pointer;">
+                                <img data-val="{{isset($kindPlaceId) && ($kindPlaceId == 10 || $kindPlaceId == 0) ? 'on' : 'off'}}" class="lantern" id="sogatSanaieFilter" width="40px" height="80px" src="{{isset($kindPlaceId) && ($kindPlaceId == 10 || $kindPlaceId == 0) ? $onLampImg : $offLampImg}}">
+                                <div>سوغات</div>
                             </div>
                             <div class='ui_input_checkbox' style="cursor: pointer;">
                                 <img data-val="{{isset($kindPlaceId) && ($kindPlaceId == 11 || $kindPlaceId == 0) ? 'on' : 'off'}}" class="lantern" id="mahaliFoodFilter" width="40px" height="80px" src="{{isset($kindPlaceId) && ($kindPlaceId == 11 || $kindPlaceId == 0) ? $onLampImg : $offLampImg}}">
@@ -629,7 +633,7 @@
 
                 <div class="clear-both"></div>
 
-                <div class="col-xs-12 pd-0">
+                <div class="col-xs-12 pd-0 compareDivsMainDiv">
                     <div class="col-xs-12 boxOfMainDivCompareProSearch">
                         @for($i = 1; $i < 5; $i++)
                             <div id="mainDivCompareProSearch">

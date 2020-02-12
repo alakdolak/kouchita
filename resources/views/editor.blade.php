@@ -11,9 +11,9 @@
 </div>
 <![endif]-->
 
-<div class="darkModalEditor">
+{{--<div class="darkModalEditor">--}}
     <span id="editPane" class="ui_overlay ui_modal photoUploadOverlay hidden">
-       <div class="body_text" style="padding-top: 12px">
+       <div class="body_text">
            {{--<div class="photoUploader">--}}
            <div class="headerBar epHeaderBar">
                   <h3 id="photoUploadHeader" class="photoUploadHeader">
@@ -386,7 +386,7 @@
 
      <div class="ui_close_x" onclick="$('#photoEditor').addClass('hidden'); $('.dark').addClass('hidden')"></div>
 </span>
-</div>
+{{--</div>--}}
 
 {{--<script src="{{URL::asset('js/editorCommon.js')}}"></script>--}}
 <script src="{{URL::asset('js/cropper.js')}}"></script>

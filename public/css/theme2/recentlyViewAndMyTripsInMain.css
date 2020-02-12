@@ -10,7 +10,7 @@
 #my-trips-not {
     display: none;
     bottom: auto;
-    left: 126px;
+    left: 180px;
     position: absolute;
     top: 40px
 }
@@ -83,7 +83,7 @@
 #bookmarkmenu {
     display: none;
     bottom: auto;
-    left: 165px;
+    left: 218px;
     position: absolute;
     top: 40px
 }

@@ -194,7 +194,7 @@ if ($total == 0)
             <div class="atf_meta_and_photos ui_container is-mobile easyClear position-relative">
 
                 <!-- Modal -->
-                <div class="postModalMainDiv hidden">
+                <div class="postModalMainDiv hidden" id="reviewMainDivDetails">
                     <div class="modal-dialog">
 
                         <!-- Modal content-->
@@ -944,7 +944,7 @@ if ($total == 0)
                             <button class="btn btn-danger exitBtnHelp">خروج</button>
                         </div>
                     </div>
-                    <a class="postLink" onclick="newPostModal()">
+                    <a class="postLink" href="#reviewMainDivDetails" onclick="newPostModal()">
                         <div class="postMainDiv" onclick="hideMobileTabLink()">
                             <div class="postMainDivHeader">
                                 دیدگاه شما

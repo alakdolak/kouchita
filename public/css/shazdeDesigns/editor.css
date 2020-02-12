@@ -8,7 +8,7 @@
     width: 22px;
     height: 24px;
     margin: 2px 3px;
-    background: url('../../images/reloadRight.png');
+    background: url('../../images/cropImagesIcons/rotateRight.png');
     background-size: contain;
 }
 
@@ -16,7 +16,7 @@
     width: 22px;
     height: 24px;
     margin: 2px 3px;
-    background: url('../../images/reloadLeft.png');
+    background: url('../../images/cropImagesIcons/rotateLeft.png');
     background-size: contain;
 }
 
@@ -24,7 +24,7 @@
     width: 22px;
     height: 22px;
     margin: 3px 3px;
-    background: url('../../images/flip.png');
+    background: url('../../images/cropImagesIcons/flip.png');
     background-size: contain;
 }
 
@@ -32,7 +32,7 @@
     width: 22px;
     height: 24px;
     margin: 2px 3px;
-    background: url('../../images/reflect.png');
+    background: url('../../images/cropImagesIcons/reflect.png');
     background-size: contain;
 }
 
@@ -40,7 +40,7 @@
     width: 22px;
     height: 23px;
     margin: 3px 3px;
-    background: url('../../images/crop.png');
+    background: url('../../images/cropImagesIcons/cropping.png');
     background-size: contain;
 }
 
@@ -48,7 +48,7 @@
     width: 23px;
     height: 23px;
     margin: 2px 3px;
-    background: url('../../images/settings.png');
+    background: url('../../images/cropImagesIcons/clearing.png');
     background-size: contain;
 }
 
@@ -246,7 +246,7 @@
 }
 
 #actions {
-    margin: 20px
+    margin: 20px 20px 0;
 }
 
 #photoEditor, #editPane {
@@ -448,9 +448,15 @@
     margin: 20px 60px 10px;
 }
 
-#photoEditor .ui_close_x, #editPane .ui_close_x {
+#photoEditor .ui_close_x {
     right: initial;
     left: 0;
+}
+
+#editPane .ui_close_x {
+    right: initial;
+    left: 0;
+    top: -12px;
 }
 
 .bodyEditFrame {

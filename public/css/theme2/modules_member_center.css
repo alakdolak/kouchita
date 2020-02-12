@@ -545,24 +545,30 @@
 .modules-membercenter-progress-header .link .icon {
     background: url("../../images/help.png") no-repeat 0 0;
 }
+
 .modules-membercenter-badge-teaser .clear {
     clear: both;
 }
+
 .modules-membercenter-badge-teaser .header {
     margin-top: 30px;
     padding-top: 30px;
     border-top: 1px solid #E6E6E6;
 }
+
 .modules-membercenter-badge-teaser .header .name {
     float: right;
     font-family: Helvetica, Arial, 'Sans-Serif';
     font-weight: bold;
     font-size: 18px;
     color: #000;
+    cursor: default;
 }
+
 .modules-membercenter-badge-teaser .header .name a {
     color: #16174f;
 }
+
 .modules-membercenter-badge-teaser .header .trophyCase {
     float: left;
     font-family: Arial, 'Sans-Serif';
@@ -571,6 +577,7 @@
     line-height: 30px;
     color: #16174f;
 }
+
 .modules-membercenter-badge-teaser .achievement {
     display: inline-block;
     vertical-align: top;
@@ -780,37 +787,43 @@
     right: 300px;
     border-width: 15px 20px 15px 0;
 }
+
 .rtl .infoFlyout.tripcollectiveLevels .arrow_right:before {
     right: -320px!important;
     border-width: 15px 0 15px 20px;
 }
+
 .rtl .infoFlyout.tripcollectiveLevels .arrow_right:after {
     right: -320px!important;
     border-width: 15px 0 15px 20px;
 }
+
 .infoFlyout {
     -webkit-box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     -moz-box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     box-shadow: 0 4px 20px 6px rgba(0, 0, 0, 0.3);
 }
-.infoFlyout.tripcollectivePoints {
-    width: 400px;
-}
+
 .infoFlyout.tripcollectivePoints .arrow_right:before {
     right: -420px!important;
 }
+
 .infoFlyout.tripcollectivePoints .arrow_right:after {
     right: -420px!important;
 }
+
 .infoFlyout.tripcollectiveLevels {
     width: 300px;
 }
+
 .infoFlyout.tripcollectiveLevels .arrow_right:before {
     right: -320px!important;
 }
+
 .infoFlyout.tripcollectiveLevels .arrow_right:after {
     right: -320px!important;
 }
+
 .infoFlyout .arrow_left:before,
 .infoFlyout .arrow_right:before {
     content: "";
@@ -883,6 +896,7 @@
     text-overflow: ellipsis;
     font-weight: bold;
     text-align: left;
+    font-size: 13px;
 }
 .infoFlyout .score-legend .right-col,
 .infoFlyout .level-legend .right-col {
