@@ -337,19 +337,21 @@ class AjaxController extends Controller {
             }
             else {
                 if ($cities != -1) {
-                    foreach ($cities as $city) {
+                    if(is_array($cities)) {
+                        foreach ($cities as $city) {
+                            $city = Cities::whereName($city)->first();
 
-                        $city = makeValidInput($city);
-                        $city = Cities::whereName($city)->first();
-
-                        if ($city != null) {
-                            if ($allow) {
-                                $allow = false;
-                                $cityConstraint .= $city->id;
-                            } else
-                                $cityConstraint .= "," . $city->id;
+                            if ($city != null) {
+                                if ($allow) {
+                                    $allow = false;
+                                    $cityConstraint .= $city->id;
+                                } else
+                                    $cityConstraint .= "," . $city->id;
+                            }
                         }
                     }
+                    else
+                        $cityConstraint .= $cities;
                 }
             }
 

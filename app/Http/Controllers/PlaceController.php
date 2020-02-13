@@ -41,6 +41,7 @@ use App\models\SpecialAdvice;
 use App\models\State;
 use App\models\Survey;
 use App\models\Tag;
+use App\models\TripPlace;
 use App\models\User;
 use App\models\UserOpinion;
 use Carbon\Carbon;
@@ -3443,7 +3444,6 @@ class PlaceController extends Controller {
 
     public function showPlaceList($kindPlaceId, $city, $mode)
     {
-
         $sections = SectionPage::wherePage(getValueInfo('hotel-detail'))->get();
         $kindPlace = Place::find($kindPlaceId);
         if($kindPlace != null){
@@ -3478,6 +3478,12 @@ class PlaceController extends Controller {
                     break;
                 case 6:
                     $placeMode = 'majara';
+                    break;
+                case 10:
+                    $placeMode = 'sogatSanaies';
+                    break;
+                case 11:
+                    $placeMode = 'mahaliFood';
                     break;
             }
 
@@ -3669,6 +3675,13 @@ class PlaceController extends Controller {
             $place->city = $cityObj->name;
             $place->state = State::whereId($cityObj->stateId)->name;
             $place->avgRate = getRate($place->id, $request->kindPlaceId)[1];
+            $place->inTrip = 0;
+            if(\auth()->check()){
+                $u = \auth()->user();
+                $trips = DB::select('SELECT trip.id FROM tripPlace, trip WHERE trip.uId = ' . $u->id . ' AND trip.id = tripPlace.tripId AND tripPlace.placeId = ' . $place->id . ' AND tripPlace.kindPlaceId = ' . $request->kindPlaceId);
+                if(count($trips) != 0)
+                    $place->inTrip = 1;
+            }
         }
 
 
