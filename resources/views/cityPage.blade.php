@@ -25,7 +25,7 @@ $state = 2; ?>
     <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/usersActivities.css')}}">
 
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/article.min.css')}}"/>
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/middleBanner.css')}}'/>
+    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/common/middleBanner.css')}}'/>
 
     <script>
         var searchDir = '{{route('totalSearch')}}';
@@ -1069,12 +1069,12 @@ $state = 2; ?>
                         <a class="col-xs-4 cpLittleMenu" href="{{url('/adab-list/' . $place->state . '/soghat')}}">
                             <div class="cityPageIcon soghat"></div>
                             <div class="textCityPageIcon">سوغات</div>
-                            <div class="textCityPageIcon">{{$allSogatSanaie}}</div>
+                            <div class="textCityPageIcon">{{count($allSogatSanaie)}}</div>
                         </a>
                         <a class="col-xs-4 cpLittleMenu" href="{{url('/adab-list/' . $place->state . '/ghazamahali')}}">
                             <div class="cityPageIcon ghazamahali"></div>
                             <div class="textCityPageIcon">غذای محلی</div>
-                            <div class="textCityPageIcon">{{$allMahaliFood}}</div>
+                            <div class="textCityPageIcon">{{count($allMahaliFood)}}</div>
                         </a>
                     </div>
                     <div class="clear-both"></div>
@@ -1087,7 +1087,7 @@ $state = 2; ?>
                         <a class="col-xs-4 cpLittleMenu" href="{{url('/adab-list/' . $place->state . '/sanaye')}}">
                             <div class="cityPageIcon sanaye"></div>
                             <div class="textCityPageIcon">صنایع دستی</div>
-                            <div class="textCityPageIcon">{{$allSogatSanaie}}</div>
+                            <div class="textCityPageIcon">{{count($allSogatSanaie)}}</div>
                         </a>
                         <div class="col-xs-4 cpLittleMenu">
                             <div class="cityPageIcon lebas"></div>
@@ -3449,10 +3449,10 @@ $state = 2; ?>
 <script>
     var x = '{{$place->x}}';
     var y = '{{$place->y}}';
-    var all_amaken = {!! $allAmaken !!};
-    var all_majara = {!! $allMajara !!};
-    var all_hotels = {!! $allHotels !!};
-    var all_restaurant = {!! $allRestaurant !!};
+    {{--var all_amaken = {!! $allAmaken !!};--}}
+    {{--var all_majara = {!! $allMajara !!};--}}
+    {{--var all_hotels = {!! $allHotels !!};--}}
+{{--    var all_restaurant = {!! $allRestaurant !!};--}}
     var iconBase = '{{URL::asset('images/mapIcon') . '/'}}';
     var icons = {
         hotel: {

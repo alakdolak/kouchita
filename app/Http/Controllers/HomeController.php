@@ -227,7 +227,7 @@ class HomeController extends Controller
 
 
         $mostSeenPosts = array();
-
+//        dd('in');
         return view('cityPage', compact(['place', 'cityPost', 'mostSeenPosts', 'allAmaken', 'allHotels', 'allRestaurant', 'allMajara', 'allMahaliFood', 'allSogatSanaie']));
     }
 
