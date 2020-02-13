@@ -20,6 +20,14 @@
     </title>
 
     <style>
+        .red-heart-fill::before {
+            content: '\e012' !important;
+            color: #ff0000 !important;
+            float: right;
+            font-family: Shazde_Regular2 !important;
+            font-size: 22px;
+            margin-top: 3px;
+        }
         .elements{
             width: 200px;
             height: 200px;
@@ -243,7 +251,8 @@
                                                                         @if(auth()->check())
                                                                             <div class="prw_rup prw_meta_saves_badge">
                                                                                 <div class="savesButton">
-                                                                                    <span class="saves-widget-button saves secondary save-location-5247712 ui_icon heart saves-icon-locator" onclick="saveToTripList(this)" value="[[place.id]]"></span>
+                                                                                    {{--red-heart-fill--}}
+                                                                                    <span class="saves-widget-button saves secondary save-location-5247712 ui_icon heart saves-icon-locator [[place.inTrip]]" onclick="saveToTripList(this)" value="[[place.id]]"></span>
                                                                                 </div>
                                                                             </div>
                                                                         @endif
@@ -650,6 +659,10 @@
                 for (j = 0; j < $scope.packets[page - 1].places.length; j++) {
                     $scope.packets[page - 1].places[j].ngClass = 'ui_bubble_rating bubble_' + $scope.packets[page - 1].places[j].avgRate + '0';
                     $scope.packets[page - 1].places[j].redirect = '{{route('home')}}/' + placeMode + '-details/' + $scope.packets[page - 1].places[j].id + '/' + $scope.packets[page - 1].places[j].name;
+                    if($scope.packets[page - 1].places[j].inTrip == 1)
+                        $scope.packets[page - 1].places[j].inTrip = 'red-heart-fill';
+                    else
+                        $scope.packets[page - 1].places[j].inTrip = '';
                 }
 
                 if (response.data.places.length != 4) {
@@ -684,6 +697,10 @@
                     for (j = 0; j < $scope.packets[page - 1].places.length; j++) {
                         $scope.packets[page - 1].places[j].ngClass = 'ui_bubble_rating bubble_' + $scope.packets[page - 1].places[j].avgRate + '0';
                         $scope.packets[page - 1].places[j].redirect = '{{route('home')}}/' + placeMode + '-details/' + $scope.packets[page - 1].places[j].id + '/' + $scope.packets[page - 1].places[j].name;
+                        if($scope.packets[page - 1].places[j].inTrip == 1)
+                            $scope.packets[page - 1].places[j].inTrip = 'red-heart-fill';
+                        else
+                            $scope.packets[page - 1].places[j].inTrip = '';
                     }
 
                     if (response.data.places.length != 4) {
@@ -716,8 +733,11 @@
                         $scope.packets[page - 1].places = response.data.places;
                         for (j = 0; j < $scope.packets[page - 1].places.length; j++) {
                             $scope.packets[page - 1].places[j].ngClass = 'ui_bubble_rating bubble_' + $scope.packets[page - 1].places[j].avgRate + '0';
-
                             $scope.packets[page - 1].places[j].redirect = '{{route('home')}}/' + placeMode + '-details/' + $scope.packets[page - 1].places[j].id + '/' + $scope.packets[page - 1].places[j].name;
+                            if($scope.packets[page - 1].places[j].inTrip == 1)
+                                $scope.packets[page - 1].places[j].inTrip = 'red-heart-fill';
+                            else
+                                $scope.packets[page - 1].places[j].inTrip = '';
                         }
 
                         $scope.$broadcast('finalizeReceive');

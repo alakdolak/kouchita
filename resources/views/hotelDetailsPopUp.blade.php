@@ -123,6 +123,8 @@
                 selectedTrips = [];
                 $('.dark').show();
                 response = JSON.parse(response);
+                console.log(response)
+
                 var newElement = "<div class='row'>";
                 for (i = 0; i < response.length; i++) {
                     newElement += "<div class='col-xs-3' class='cursor-pointer' onclick='addToSelectedTrips(\"" + response[i].id + "\")'>";
@@ -133,26 +135,26 @@
                     else
                         newElement += "<div id='trip_" + response[i].id + "' onclick='' class='trip-images ui_columns is-gapless is-multiline is-mobile tripResponse'>";
                     if (response[i].placeCount > 0) {
-                        tmp = "url('" + response[i].pic1 + "')";
-                        newElement += "<div class='trip-image ui_column is-6 bg-size-100-100' style='background: " + tmp + " repeat 0 0'></div>";
+                        tmp = 'url("' + response[i].pic1 + '")';
+                        newElement += "<div class='trip-image ui_column is-6 bg-size-100-100' style='background: " + tmp + " repeat 0 0; background-size: 100% 100%'></div>";
                     }
                     else
                         newElement += "<div class='trip-image trip-image-empty ui_column is-6 bg-color-grey'></div>";
                     if (response[i].placeCount > 1) {
-                        tmp = "url('" + response[i].pic2 + "')";
-                        newElement += "<div class='trip-image ui_column is-6 bg-size-100-100' style='background: " + tmp + " repeat 0 0'></div>";
+                        tmp = 'url("' + response[i].pic2 + '")';
+                        newElement += "<div class='trip-image ui_column is-6 bg-size-100-100' style='background: " + tmp + " repeat 0 0; background-size: 100% 100%'></div>";
                     }
                     else
                         newElement += "<div class='trip-image trip-image-empty ui_column is-6 bg-color-grey'></div>";
                     if (response[i].placeCount > 1) {
-                        tmp = "url('" + response[i].pic3 + "')";
-                        newElement += "<div class='trip-image ui_column is-6 bg-size-100-100' style='background: " + tmp + " repeat 0 0'></div>";
+                        tmp = 'url("' + response[i].pic3 + '")';
+                        newElement += "<div class='trip-image ui_column is-6 bg-size-100-100' style='background: " + tmp + " repeat 0 0; background-size: 100% 100%'></div>";
                     }
                     else
                         newElement += "<div class='trip-image trip-image-empty ui_column is-6 bg-color-grey'></div>";
                     if (response[i].placeCount > 1) {
-                        tmp = "url('" + response[i].pic4 + "')";
-                        newElement += "<div class='trip-image ui_column is-6 bg-size-100-100' style='background: " + tmp + " repeat 0 0'></div>";
+                        tmp = 'url("' + response[i].pic4 + '")';
+                        newElement += "<div class='trip-image ui_column is-6 bg-size-100-100' style='background: " + tmp + " repeat 0 0; background-size: 100% 100%'></div>";
                     }
                     else
                         newElement += "<div class='trip-image trip-image-empty ui_column is-6 bg-color-grey'></div>";

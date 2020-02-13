@@ -10,6 +10,7 @@ use App\models\Hotel;
 use App\models\LogModel;
 use App\models\Majara;
 use App\models\Message;
+use App\models\Place;
 use App\models\Restaurant;
 use App\models\State;
 use App\models\Trip;
@@ -46,139 +47,56 @@ class MyTripsController extends Controller {
                 $trip->placeCount = TripPlace::whereTripId($trip->id)->count();
                 $limit = ($trip->placeCount > 4) ? 4 : $trip->placeCount;
                 $tripPlaces = TripPlace::whereTripId($trip->id)->take($limit)->get();
+
                 if($trip->placeCount > 0) {
                     $kindPlaceId = $tripPlaces[0]->kindPlaceId;
-                    switch ($kindPlaceId) {
-                        case 1:
-                            $amaken = Amaken::whereId($tripPlaces[0]->placeId);
-                            if(file_exists((__DIR__ . '/../../../../assets/_images/amaken/' .  $amaken->file . '/' . $amaken->pic_1)))
-                                $trip->pic1 = URL::asset('_images/amaken/' . $amaken->file . '/' . $amaken->pic_1);
-                            else
-                                $trip->pic1 = URL::asset('_images/nopic/blank.jpg');
-                            break;
-                        case 3:
-                            $restaurant = Restaurant::whereId($tripPlaces[0]->placeId);
-                            if(file_exists((__DIR__ . '/../../../../assets/_images/restaurant/' .  $restaurant->file . '/' . $restaurant->pic_1)))
-                                $trip->pic1 = URL::asset('_images/restaurant/' . $restaurant->file . '/' . $restaurant->pic_1);
-                            else
-                                $trip->pic1 = URL::asset('_images/nopic/blank.jpg');
-                            break;
-                        case 4:
-                            $hotel = Hotel::whereId($tripPlaces[0]->placeId);
-                            if(file_exists((__DIR__ . '/../../../../assets/_images/hotels/' .  $hotel->file . '/' . $hotel->pic_1)))
-                                $trip->pic1 = URL::asset('_images/hotels/' . $hotel->file . '/' . $hotel->pic_1);
-                            else
-                                $trip->pic1 = URL::asset('_images/nopic/blank.jpg');
-                            break;
-                        case 6:
-                            $majara = Majara::whereId($tripPlaces[0]->placeId);
-                            if(file_exists((__DIR__ . '/../../../../assets/_images/majara/' .  $majara->file . '/' . $majara->pic_1)))
-                                $trip->pic1 = URL::asset('_images/majara/' . $majara->file . '/' . $majara->pic_1);
-                            else
-                                $trip->pic1 = URL::asset('_images/nopic/blank.jpg');
-                            break;
-                    }
+
+                    $kindPlace = Place::find($kindPlaceId);
+                    $file = $kindPlace->fileName;
+                    $table = $kindPlace->tableName;
+                    $place = DB::table($table)->find($tripPlaces[0]->placeId);
+                    if(file_exists((__DIR__ . '/../../../../assets/_images/' . $file . '/' .  $place->file . '/f-' . $place->picNumber)))
+                        $trip->pic1 = URL::asset('_images/' . $file . '/' . $place->file . '/f-' . $place->picNumber);
+                    else
+                        $trip->pic1 = URL::asset('_images/nopic/blank.jpg');
                 }
                 if($trip->placeCount > 1) {
                     $kindPlaceId = $tripPlaces[1]->kindPlaceId;
 
-                    switch ($kindPlaceId) {
-                        case 1:
-                            $amaken = Amaken::whereId($tripPlaces[1]->placeId);
-                            if(file_exists((__DIR__ . '/../../../../assets/_images/amaken/' .  $amaken->file . '/' . $amaken->pic_1)))
-                                $trip->pic2 = URL::asset('_images/amaken/' . $amaken->file . '/' . $amaken->pic_1);
-                            else
-                                $trip->pic2 = URL::asset('_images/nopic/blank.jpg');
-                            break;
-                        case 3:
-                            $restaurant = Restaurant::whereId($tripPlaces[1]->placeId);
-                            if(file_exists((__DIR__ . '/../../../../assets/_images/restaurant/' .  $restaurant->file . '/' . $restaurant->pic_1)))
-                                $trip->pic2 = URL::asset('_images/restaurant/' . $restaurant->file . '/' . $restaurant->pic_1);
-                            else
-                                $trip->pic2 = URL::asset('_images/nopic/blank.jpg');
-                            break;
-                        case 4:
-                            $hotel = Hotel::whereId($tripPlaces[1]->placeId);
-                            if(file_exists((__DIR__ . '/../../../../assets/_images/hotels/' .  $hotel->file . '/' . $hotel->pic_1)))
-                                $trip->pic2 = URL::asset('_images/hotels/' . $hotel->file . '/' . $hotel->pic_1);
-                            else
-                                $trip->pic2 = URL::asset('_images/nopic/blank.jpg');
-                            break;
-                        case 6:
-                            $majara = Majara::whereId($tripPlaces[1]->placeId);
-                            if(file_exists((__DIR__ . '/../../../../assets/_images/majara/' .  $majara->file . '/' . $majara->pic_1)))
-                                $trip->pic2 = URL::asset('_images/majara/' . $majara->file . '/' . $majara->pic_1);
-                            else
-                                $trip->pic2 = URL::asset('_images/nopic/blank.jpg');
-                            break;
-                    }
+                    $kindPlace = Place::find($kindPlaceId);
+                    $file = $kindPlace->fileName;
+                    $table = $kindPlace->tableName;
+                    $place = DB::table($table)->find($tripPlaces[1]->placeId);
+                    if(file_exists((__DIR__ . '/../../../../assets/_images/' . $file . '/' .  $place->file . '/f-' . $place->picNumber)))
+                        $trip->pic1 = URL::asset('_images/' . $file . '/' . $place->file . '/f-' . $place->picNumber);
+                    else
+                        $trip->pic1 = URL::asset('_images/nopic/blank.jpg');
                 }
                 if($trip->placeCount > 2) {
                     $kindPlaceId = $tripPlaces[2]->kindPlaceId;
-                    switch ($kindPlaceId) {
-                        case 1:
-                            $amaken = Amaken::whereId($tripPlaces[2]->placeId);
-                            if(file_exists((__DIR__ . '/../../../../assets/_images/amaken/' .  $amaken->file . '/' . $amaken->pic_1)))
-                                $trip->pic3 = URL::asset('_images/amaken/' . $amaken->file . '/' . $amaken->pic_1);
-                            else
-                                $trip->pic3 = URL::asset('_images/nopic/blank.jpg');
-                            break;
-                        case 3:
-                            $restaurant = Restaurant::whereId($tripPlaces[2]->placeId);
-                            if(file_exists((__DIR__ . '/../../../../assets/_images/restaurant/' .  $restaurant->file . '/' . $restaurant->pic_1)))
-                                $trip->pic3 = URL::asset('_images/restaurant/' . $restaurant->file . '/' . $restaurant->pic_1);
-                            else
-                                $trip->pic3 = URL::asset('_images/nopic/blank.jpg');
-                            break;
-                        case 4:
-                            $hotel = Hotel::whereId($tripPlaces[2]->placeId);
-                            if(file_exists((__DIR__ . '/../../../../assets/_images/hotels/' .  $hotel->file . '/' . $hotel->pic_1)))
-                                $trip->pic3 = URL::asset('_images/hotels/' . $hotel->file . '/' . $hotel->pic_1);
-                            else
-                                $trip->pic3 = URL::asset('_images/nopic/blank.jpg');
-                            break;
-                        case 6:
-                            $majara = Majara::whereId($tripPlaces[2]->placeId);
-                            if(file_exists((__DIR__ . '/../../../../assets/_images/majara/' .  $majara->file . '/' . $majara->pic_1)))
-                                $trip->pic3 = URL::asset('_images/majara/' . $majara->file . '/' . $majara->pic_1);
-                            else
-                                $trip->pic3 = URL::asset('_images/nopic/blank.jpg');
-                            break;
-                    }
+
+                    $kindPlace = Place::find($kindPlaceId);
+                    $file = $kindPlace->fileName;
+                    $table = $kindPlace->tableName;
+                    $place = DB::table($table)->find($tripPlaces[2]->placeId);
+                    if(file_exists((__DIR__ . '/../../../../assets/_images/' . $file . '/' .  $place->file . '/f-' . $place->picNumber)))
+                        $trip->pic1 = URL::asset('_images/' . $file . '/' . $place->file . '/f-' . $place->picNumber);
+                    else
+                        $trip->pic1 = URL::asset('_images/nopic/blank.jpg');
                 }
                 if($trip->placeCount > 3) {
                     $kindPlaceId = $tripPlaces[3]->kindPlaceId;
-                    switch ($kindPlaceId) {
-                        case 1:
-                            $amaken = Amaken::whereId($tripPlaces[3]->placeId);
-                            if(file_exists((__DIR__ . '/../../../../assets/_images/amaken/' .  $amaken->file . '/' . $amaken->pic_1)))
-                                $trip->pic4 = URL::asset('_images/amaken/' . $amaken->file . '/' . $amaken->pic_1);
-                            else
-                                $trip->pic4 = URL::asset('_images/nopic/blank.jpg');
-                            break;
-                        case 3:
-                            $restaurant = Restaurant::whereId($tripPlaces[3]->placeId);
-                            if(file_exists((__DIR__ . '/../../../../assets/_images/restaurant/' .  $restaurant->file . '/' . $restaurant->pic_1)))
-                                $trip->pic4 = URL::asset('_images/restaurant/' . $restaurant->file . '/' . $restaurant->pic_1);
-                            else
-                                $trip->pic4 = URL::asset('_images/nopic/blank.jpg');
-                            break;
-                        case 4:
-                            $hotel = Hotel::whereId($tripPlaces[3]->placeId);
-                            if(file_exists((__DIR__ . '/../../../../assets/_images/hotels/' .  $hotel->file . '/' . $hotel->pic_1)))
-                                $trip->pic4 = URL::asset('_images/hotels/' . $hotel->file . '/' . $hotel->pic_1);
-                            else
-                                $trip->pic4 = URL::asset('_images/nopic/blank.jpg');
-                            break;
-                        case 6:
-                            $majara = Majara::whereId($tripPlaces[3]->placeId);
-                            if(file_exists((__DIR__ . '/../../../../assets/_images/majara/' .  $majara->file . '/' . $majara->pic_1)))
-                                $trip->pic4 = URL::asset('_images/majara/' . $majara->file . '/' . $majara->pic_1);
-                            else
-                                $trip->pic4 = URL::asset('_images/nopic/blank.jpg');
-                            break;
-                    }
+
+                    $kindPlace = Place::find($kindPlaceId);
+                    $file = $kindPlace->fileName;
+                    $table = $kindPlace->tableName;
+                    $place = DB::table($table)->find($tripPlaces[3]->placeId);
+                    if(file_exists((__DIR__ . '/../../../../assets/_images/' . $file . '/' .  $place->file . '/f-' . $place->picNumber)))
+                        $trip->pic1 = URL::asset('_images/' . $file . '/' . $place->file . '/f-' . $place->picNumber);
+                    else
+                        $trip->pic1 = URL::asset('_images/nopic/blank.jpg');
                 }
+
             }
         }
 
@@ -433,141 +351,55 @@ class MyTripsController extends Controller {
                 $trip->placeCount = TripPlace::whereTripId($trip->id)->count();
                 $limit = ($trip->placeCount > 4) ? 4 : $trip->placeCount;
                 $tripPlaces = TripPlace::whereTripId($trip->id)->take($limit)->get();
+
                 if($trip->placeCount > 0) {
                     $kindPlaceId = $tripPlaces[0]->kindPlaceId;
-                    switch ($kindPlaceId) {
-                        case 1:
-                            $amaken = Amaken::whereId($tripPlaces[0]->placeId);
-                            if(file_exists((__DIR__ . '/../../../../assets/_images/amaken/' . $amaken->file . '/' . $amaken->pic_1)))
-                                $trip->pic1 = URL::asset('_images/amaken/' . $amaken->file . '/' . $amaken->pic_1);
-                            else
-                                $trip->pic1 = URL::asset('_images/nopic/blank.jpg');
-                            break;
-                        case 3:
-                            $restaurant = Restaurant::whereId($tripPlaces[0]->placeId);
-                            if(file_exists((__DIR__ . '/../../../../assets/_images/restaurant/' . $restaurant->file . '/' . $restaurant->pic_1)))
-                                $trip->pic1 = URL::asset('_images/restaurant/' . $restaurant->file . '/' . $restaurant->pic_1);
-                            else
-                                $trip->pic1 = URL::asset('_images/nopic/blank.jpg');
-                            break;
-                        case 4:
-                            $hotel = Hotel::whereId($tripPlaces[0]->placeId);
-                            if(file_exists((__DIR__ . '/../../../../assets/_images/hotels/' . $hotel->file . '/' . $hotel->pic_1)))
-                                $trip->pic1 = URL::asset('_images/hotels/' . $hotel->file . '/' . $hotel->pic_1);
-                            else
-                                $trip->pic1 = URL::asset('_images/nopic/blank.jpg');
-                            break;
-                        case 6:
-                            $majara = Majara::whereId($tripPlaces[0]->placeId);
 
-                            if(file_exists((__DIR__ . '/../../../../assets/_images/majara/' . $majara->file . '/' . $majara->pic_1)))
-                                $trip->pic1 = URL::asset('_images/majara/' . $majara->file . '/' . $majara->pic_1);
-                            else
-                                $trip->pic1 = URL::asset('_images/nopic/blank.jpg');
-                            break;
-                    }
+                    $kindPlace = Place::find($kindPlaceId);
+                    $file = $kindPlace->fileName;
+                    $table = $kindPlace->tableName;
+
+                    $place = DB::table($table)->find($tripPlaces[0]->placeId);
+
+                    if(file_exists((__DIR__ . '/../../../../assets/_images/' . $file . '/' .  $place->file . '/f-' . $place->picNumber)))
+                        $trip->pic1 = URL::asset('_images/' . $file . '/' . $place->file . '/f-' . $place->picNumber);
+                    else
+                        $trip->pic1 = URL::asset('_images/nopic/blank.jpg');
                 }
                 if($trip->placeCount > 1) {
                     $kindPlaceId = $tripPlaces[1]->kindPlaceId;
-                    switch ($kindPlaceId) {
-                        case 1:
-                            $amaken = Amaken::whereId($tripPlaces[1]->placeId);
-                            if(file_exists((__DIR__ . '/../../../../assets/_images/amaken/' . $amaken->file . '/' . $amaken->pic_1)))
-                                $trip->pic2 = URL::asset('_images/amaken/' . $amaken->file . '/' . $amaken->pic_1);
-                            else
-                                $trip->pic2 = URL::asset('_images/nopic/blank.jpg');
-                            break;
-                        case 3:
-                            $restaurant = Restaurant::whereId($tripPlaces[1]->placeId);
-                            if(file_exists((__DIR__ . '/../../../../assets/_images/restaurant/' . $restaurant->file . '/' . $restaurant->pic_1)))
-                                $trip->pic2 = URL::asset('_images/restaurant/' . $restaurant->file . '/' . $restaurant->pic_1);
-                            else
-                                $trip->pic2 = URL::asset('_images/nopic/blank.jpg');
-                            break;
-                        case 4:
-                            $hotel = Hotel::whereId($tripPlaces[1]->placeId);
-                            if(file_exists((__DIR__ . '/../../../../assets/_images/hotels/' . $hotel->file . '/' . $hotel->pic_1)))
-                                $trip->pic2 = URL::asset('_images/hotels/' . $hotel->file . '/' . $hotel->pic_1);
-                            else
-                                $trip->pic2 = URL::asset('_images/nopic/blank.jpg');
-                            break;
-                        case 6:
-                            $majara = Majara::whereId($tripPlaces[1]->placeId);
 
-                            if(file_exists((__DIR__ . '/../../../../assets/_images/majara/' . $majara->file . '/' . $majara->pic_1)))
-                                $trip->pic2 = URL::asset('_images/majara/' . $majara->file . '/' . $majara->pic_1);
-                            else
-                                $trip->pic2 = URL::asset('_images/nopic/blank.jpg');
-                            break;
-                    }
+                    $kindPlace = Place::find($kindPlaceId);
+                    $file = $kindPlace->fileName;
+                    $table = $kindPlace->tableName;
+                    $place = DB::table($table)->find($tripPlaces[1]->placeId);
+                    if(file_exists((__DIR__ . '/../../../../assets/_images/' . $file . '/' .  $place->file . '/f-' . $place->picNumber)))
+                        $trip->pic2 = URL::asset('_images/' . $file . '/' . $place->file . '/f-' . $place->picNumber);
+                    else
+                        $trip->pic2 = URL::asset('_images/nopic/blank.jpg');
                 }
                 if($trip->placeCount > 2) {
                     $kindPlaceId = $tripPlaces[2]->kindPlaceId;
-                    switch ($kindPlaceId) {
-                        case 1:
-                            $amaken = Amaken::whereId($tripPlaces[2]->placeId);
-                            if(file_exists((__DIR__ . '/../../../../assets/_images/amaken/' . $amaken->file . '/' . $amaken->pic_1)))
-                                $trip->pic3 = URL::asset('_images/amaken/' . $amaken->file . '/' . $amaken->pic_1);
-                            else
-                                $trip->pic3 = URL::asset('_images/nopic/blank.jpg');
-                            break;
-                        case 3:
-                            $restaurant = Restaurant::whereId($tripPlaces[2]->placeId);
-                            if(file_exists((__DIR__ . '/../../../../assets/_images/restaurant/' . $restaurant->file . '/' . $restaurant->pic_1)))
-                                $trip->pic3 = URL::asset('_images/restaurant/' . $restaurant->file . '/' . $restaurant->pic_1);
-                            else
-                                $trip->pic3 = URL::asset('_images/nopic/blank.jpg');
-                            break;
-                        case 4:
-                            $hotel = Hotel::whereId($tripPlaces[2]->placeId);
-                            if(file_exists((__DIR__ . '/../../../../assets/_images/hotels/' . $hotel->file . '/' . $hotel->pic_1)))
-                                $trip->pic3 = URL::asset('_images/hotels/' . $hotel->file . '/' . $hotel->pic_1);
-                            else
-                                $trip->pic3 = URL::asset('_images/nopic/blank.jpg');
-                            break;
-                        case 6:
-                            $majara = Majara::whereId($tripPlaces[2]->placeId);
 
-                            if(file_exists((__DIR__ . '/../../../../assets/_images/majara/' . $majara->file . '/' . $majara->pic_1)))
-                                $trip->pic3 = URL::asset('_images/majara/' . $majara->file . '/' . $majara->pic_1);
-                            else
-                                $trip->pic3 = URL::asset('_images/nopic/blank.jpg');
-                            break;
-                    }
+                    $kindPlace = Place::find($kindPlaceId);
+                    $file = $kindPlace->fileName;
+                    $table = $kindPlace->tableName;
+                    $place = DB::table($table)->find($tripPlaces[2]->placeId);
+                    if(file_exists((__DIR__ . '/../../../../assets/_images/' . $file . '/' .  $place->file . '/f-' . $place->picNumber)))
+                        $trip->pic3 = URL::asset('_images/' . $file . '/' . $place->file . '/f-' . $place->picNumber);
+                    else
+                        $trip->pic3 = URL::asset('_images/nopic/blank.jpg');
                 }
                 if($trip->placeCount > 3) {
                     $kindPlaceId = $tripPlaces[3]->kindPlaceId;
-                    switch ($kindPlaceId) {
-                        case 1:
-                            $amaken = Amaken::whereId($tripPlaces[3]->placeId);
-                            if(file_exists((__DIR__ . '/../../../../assets/_images/amaken/' . $amaken->file . '/' . $amaken->pic_1)))
-                                $trip->pic4 = URL::asset('_images/amaken/' . $amaken->file . '/' . $amaken->pic_1);
-                            else
-                                $trip->pic4 = URL::asset('_images/nopic/blank.jpg');
-                            break;
-                        case 3:
-                            $restaurant = Restaurant::whereId($tripPlaces[3]->placeId);
-                            if(file_exists((__DIR__ . '/../../../../assets/_images/restaurant/' . $restaurant->file . '/' . $restaurant->pic_1)))
-                                $trip->pic4 = URL::asset('_images/restaurant/' . $restaurant->file . '/' . $restaurant->pic_1);
-                            else
-                                $trip->pic4 = URL::asset('_images/nopic/blank.jpg');
-                            break;
-                        case 4:
-                            $hotel = Hotel::whereId($tripPlaces[3]->placeId);
-                            if(file_exists((__DIR__ . '/../../../../assets/_images/hotels/' . $hotel->file . '/' . $hotel->pic_1)))
-                                $trip->pic4 = URL::asset('_images/hotels/' . $hotel->file . '/' . $hotel->pic_1);
-                            else
-                                $trip->pic4 = URL::asset('_images/nopic/blank.jpg');
-                            break;
-                        case 6:
-                            $majara = Majara::whereId($tripPlaces[3]->placeId);
-
-                            if(file_exists((__DIR__ . '/../../../../assets/_images/majara/' . $majara->file . '/' . $majara->pic_1)))
-                                $trip->pic4 = URL::asset('_images/majara/' . $majara->file . '/' . $majara->pic_1);
-                            else
-                                $trip->pic4 = URL::asset('_images/nopic/blank.jpg');
-                            break;
-                    }
+                    $kindPlace = Place::find($kindPlaceId);
+                    $file = $kindPlace->fileName;
+                    $table = $kindPlace->tableName;
+                    $place = DB::table($table)->find($tripPlaces[3]->placeId);
+                    if(file_exists((__DIR__ . '/../../../../assets/_images/' . $file . '/' .  $place->file . '/f-' . $place->picNumber)))
+                        $trip->pic4 = URL::asset('_images/' . $file . '/' . $place->file . '/f-' . $place->picNumber);
+                    else
+                        $trip->pic4 = URL::asset('_images/nopic/blank.jpg');
                 }
             }
 
