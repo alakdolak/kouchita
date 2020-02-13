@@ -13,7 +13,7 @@ var data = $.param({});
     }]);
 
     app.controller("recentlyShowController", function ($scope, $http) {
-        $http.post(recentlyUrl, {}).then(function(response) {
+        $http.post(recentlyUrl, data, config).then(function(response) {
             $scope.records1 = response.data;
         });
     });
@@ -48,6 +48,7 @@ var data = $.param({});
                 var tabiat = [];
                 var restaurant = [];
                 var kharid = [];
+                var article = [];
 
                 for(var i = 0; i < section2.length; i++){
 
@@ -61,7 +62,12 @@ var data = $.param({});
                         tarikhi[tarikhi.length] = section2[i];
                     else if(section2[i]['section'] == 'مراکز خرید')
                         kharid[kharid.length] = section2[i];
+                    else if(section2[i]['section'] == 'مقالات')
+                        article[article.length] = section2[i];
                 }
+
+                console.log(article)
+                console.log(kharid)
 
                 if(food.length != 0) {
                     document.getElementById('foodSuggestion').style.display = 'block';
@@ -82,6 +88,10 @@ var data = $.param({});
                 if(restaurant.length != 0) {
                     document.getElementById('restaurantSuggestion').style.display = 'block';
                     $scope.restaurantRecords = restaurant;
+                }
+                if(article.length != 0) {
+                    document.getElementById('articleSuggestion').style.display = 'block';
+                    $scope.articleRecords = article;
                 }
 
                 $('.loader').addClass('hidden');

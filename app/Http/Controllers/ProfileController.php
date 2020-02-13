@@ -122,11 +122,14 @@ class ProfileController extends Controller {
             else
                 $user->picture = $photo->name;
         }
-        
-        return view('profile', array('activities' => $activities,
+
+        $medals = getMedals($user->id);
+        $nearestMedals = getNearestMedals($user->id);
+//        dd($nearestMedals);
+        return view('profile.profile', array('activities' => $activities,
             'counts' => $counts, 'totalPoint' => getUserPoints($user->id), 'levels' => Level::orderBy('floor', 'ASC')->get(),
-            'userLevels' => nearestLevel($user->id), 'medals' => getMedals($user->id),
-            'nearestMedals' => getNearestMedals($user->id), 'recentlyBadges' => $outMedals));
+            'userLevels' => nearestLevel($user->id), 'medals' => $medals,
+            'nearestMedals' => $nearestMedals, 'recentlyBadges' => $outMedals));
 
     }
 

@@ -738,6 +738,7 @@ footer .memberPointInfo .modules-membercenter-level-progress {
     display: table-cell;
     vertical-align: top;
     width: 100%;
+    border-left: none;
 }
 
 footer .modules-membercenter-level-progress .progress_info {

@@ -34,7 +34,7 @@
 }
 
 .infoFlyout .myLevel span {
-    background: url('images/profile.png') no-repeat -9px -299px !important;
+    background: url('../../images/profile.png') no-repeat -9px -299px !important;
     width: 40px;
     height: 40px;
     line-height: 42px;
@@ -53,7 +53,7 @@
     height: 40px;
     line-height: 40px;
     text-align: center;
-    background: url('http://localhost/pro_shazde/public/images/profile.png') no-repeat -13px -344px !important;
+    background: url('../../images/profile.png') no-repeat -13px -344px !important;
     background-size: 56px;
     font-weight: bold;
     font-size: 18px;
@@ -76,6 +76,7 @@
 
 .leftProfile {
     position: relative;
+    float: right;
 }
 
 #infoDiv {
@@ -121,10 +122,10 @@
 }
 
 #targetHelp_14 {
-    padding: 7px;
+    padding: 0;
     width: 100%;
-    border-top: 1px solid #E6E6E6;
-    padding-top: 16px !important;
+    /*border-top: 1px solid #E6E6E6;*/
+    /*padding-top: 16px !important;*/
 }
 
 .phoneNumMainDiv {
@@ -172,7 +173,7 @@
 }
 
 .badgeStyles {
-    min-width: 280px !important;
+    min-width: 240px !important;
     padding: 10px !important;
     position: absolute;
     right: auto;
@@ -192,16 +193,36 @@
 
 #activityDiv {
     position: absolute;
-    left: 62%;
+    left: 64%;
     top: 0;
     font-size: 0.75em;
-    z-index: 1001;
+    z-index: 1000;
 }
 
 #earnPointDesc {
     font-size: 11px;
     text-align: justify;
     margin: 20px 0 !important;
+}
+
+.tripCollectiveInfo {
+    cursor: pointer;
+}
+
+.tripCollectiveInfo a {
+    font-size: 0.797em;
+    text-decoration: none;
+}
+
+.tripCollectiveInfo a:hover, .rightContributions a:hover,
+.badgeItem.clickableBadge > div:hover, .badgeItem.clickableBadge:hover {
+    text-decoration: none !important;
+}
+
+.sprite-badge_medium_grey_rev_01.mediumBadge {
+    background-size: 100% 100%;
+    width: 100px;
+    height: 100px;
 }
 
 .scoreLegendFirstBox {
@@ -226,22 +247,16 @@
     cursor: pointer;
     color: rgb(77, 199, 188) !important;
     width: 15px;
-    top: 1%;
-    right: 2%;
-}
-
-#overlayInnerDiv > div:last-child, #levelDiv > div:last-child {
-    position: absolute;
-    top: 20%;
-    left: 0;
+    position: relative;
+    float: right;
 }
 
 #levelDiv {
     position: absolute;
-    left: 49%;
-    top: -10px;
+    right: -360px;
+    top: -180px;
     font-size: 0.75em;
-    z-index: 1001;
+    z-index: 1000;
 }
 
 #levelUpDesc {
@@ -257,14 +272,6 @@
 .lastBoxLevelTable > span {
     color: #963019;
     font-size: 18px
-}
-
-#overlayInnerDiv > img {
-    cursor: pointer;
-    color: rgb(77, 199, 188) !important;
-    width: 15px;
-    top: 1%;
-    right: 2%;
 }
 
 #nextBtnHelp_15 {
@@ -320,55 +327,7 @@
     float: left
 }
 
-.display-none {
-    display: none;
-}
-
-.cursor-pointer {
-    cursor: pointer;
-}
-
-.position-relative {
-    position: relative;
-}
-
-.font-size-12 {
-    font-size: 12px;
-}
-
-.dark-blue {
-    color: #16174f;
-}
-
-.mg-tp-10 {
-    margin-top: 10px;
-}
-
-.mg-tp-20imp {
-    margin-top: 20px !important;
-}
-
-.mg-tp-25imp {
-    margin-top: 25px !important;
-}
-
-.pd-tp-0Imp {
-    padding-top: 0 !important;
-}
-
-.padding-0 {
-    padding: 0;
-}
-
-.mg-rt-0 {
-    margin-right: 0;
-}
-
 /*add Meta*/
-
-.width-auto {
-    width: auto;
-}
 
 #mainTextArea {
     width: 60%;
@@ -427,6 +386,7 @@
 
 .globalNav2011_reset #MAIN {
     width: auto !important;
+    max-width: 1188px;
 }
 
 .globalNav2011_reset #BODYCON {
@@ -450,8 +410,7 @@
 
 #MODULES_MEMBER_CENTER .mainDivHeaderText {
     padding: 10px 0;
-    border-bottom: 1px solid
-    #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
     margin: 20px 0;
     position: relative;
 }
@@ -478,8 +437,7 @@
 }
 
 #MODULES_MEMBER_CENTER .activitiesLinesDiv {
-    border-bottom: 1px solid
-    #E5E5E5;
+    border-bottom: 1px solid #E5E5E5;
     padding: 15px 0;
     position: relative;
 }
@@ -514,7 +472,8 @@
     border: none;
 }
 
-.modules-membercenter-member-tag .memberTags div.tripTasteTitle {
+.modules-membercenter-member-tag .memberTags div.tripTasteTitle,
+.modules-membercenter-member-tag .invitationFriendsMainDiv div.friendsInvitationTitle {
     position: relative;
     display: flex;
     margin-bottom: 25px;
@@ -558,13 +517,14 @@
 }
 
 .invitationFriendsTitle {
+    position: absolute;
+    background: white;
+    padding-left: 5px;
     font-size: 15px;
     color: #0076ac;
-    padding-left: 5px;
-    position: absolute;
-    top: -12px;
+    margin-bottom: 0;
+    top: 0;
     right: 0;
-    background-color: white;
     font-weight: 700;
 }
 
@@ -586,8 +546,14 @@
 }
 
 .modules-membercenter-progress-header {
-    margin-bottom: 40px;
+    margin-bottom: 30px;
     border-bottom: 1px solid #e6e6e6;
+}
+
+.mc_achievements .rightContributions .memberPointInfo {
+    margin: 0 0 30px;
+    display: flex;
+    align-items: center;
 }
 
 .recentBadges, .futureBadges {
@@ -741,8 +707,156 @@
     margin-bottom: 0;
 }
 
+.mc_achievements .rightContributions .memberPointInfo .modules-membercenter-level-progress {
+    border-left: none;
+    position: relative;
+    height: auto;
+}
+
+.myActivitiesMainDiv .userProfilePostsFiltrationContainer .userProfilePostsFiltration > span:first-child {
+    text-align: center;
+}
+
+.infoFlyout .arrow_left:after,
+.infoFlyout .arrow_left:before {
+    top: 125px;
+}
+
+.infoFlyout .title {
+    margin-top: 20px;
+}
+
+.modules-membercenter-badge-teaser .badgeList .noCurrent .badgeItem {
+    position: relative;
+}
+
+.badgeDesc.badgeContainer {
+    top: 30px;
+    left: -55px;
+
+}
+
+.badgeList .ui_overlay::before {
+    left: 122px;
+}
+
 @media (max-width: 992px) {
-    .points_to_go > span{
+    .points_to_go > span {
         font-size: 17px;
+    }
+}
+
+@media (max-width: 767px) {
+
+    .leftProfile .userProfileActivitiesMainDiv, .leftProfile .modules-membercenter-member-profile {
+        display: none;
+    }
+
+    .mc_achievements .rightContributions {
+        width: 100%;
+        padding: 0 20px;
+        margin: 20px 0 0;
+    }
+
+    #MODULES_MEMBER_CENTER {
+        padding-bottom: 60px;
+    }
+
+    .mc_achievements .leftProfile {
+        width: 100%;
+    }
+
+    #levelDiv {
+        right: -50px;
+        top: 50px;
+    }
+}
+
+@media (max-width: 767px) and (min-width: 480px) {
+
+    .modules-membercenter-member-tag .memberTags {
+        width: 48%;
+        display: inline-block;
+        border-left: 1px solid #e5e5e5;
+        padding-left: 2%;
+    }
+
+    #targetHelp_14 {
+        width: 50%;
+    }
+
+    #activityDiv {
+        top: 245px;
+        left: 40%;
+    }
+
+    .infoFlyout .arrow_left:after, .infoFlyout .arrow_left:before {
+        top: -25px;
+        transform: rotate(90deg);
+        left: inherit;
+        right: 60px;
+    }
+
+    #levelDiv.infoFlyout .arrow_left:after, #levelDiv.infoFlyout .arrow_left:before {
+        right: 145px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .mc_achievements .rightContributions .memberPointInfo {
+        flex-direction: column;
+    }
+
+    .mc_achievements .rightContributions .memberPointInfo .modules-membercenter-total-points {
+        padding: 0 0 10px;
+    }
+
+    .mc_achievements .rightContributions .memberPointInfo .modules-membercenter-level-progress {
+        border: none;
+        padding: 10px 0 0;
+    }
+
+    #activityDiv {
+        left: 0;
+    }
+
+    .infoFlyout .arrow_left:after, .infoFlyout .arrow_left:before {
+        display: none;
+    }
+
+    #levelDiv {
+        top: -320px;
+    }
+}
+
+@media (max-width: 420px) {
+
+    .modules-membercenter-badge-teaser .header .trophyCaseTitle {
+        top: 31px;
+        font-size: 13px;
+    }
+
+    .modules-membercenter-badge-teaser .header .trophyCase {
+        font-size: 8px;
+    }
+
+    .modules-membercenter-badge-teaser .header .name {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 390px) {
+
+    .recentBadges, .futureBadges {
+        padding: 0;
+    }
+
+    .modules-membercenter-badge-teaser .badgeList .noCurrent .badgeItem {
+        width: 50%;
+    }
+
+    .badgeList .badgeItem:last-child {
+        display: none;
     }
 }

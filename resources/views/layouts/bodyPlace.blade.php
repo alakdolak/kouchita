@@ -21,6 +21,25 @@
             .glyphicon {
                 font-family: 'Glyphicons Halflings' !important;
             }
+
+            .loaderDiv{
+                position: fixed;
+                width: 100%;
+                height: 100%;
+                z-index: 99999;
+                left: 0px;
+                top: 0px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: #000000c7;
+            }
+            .loader_200 {
+                background-image: url("{{URL::asset('images/loading.svg')}}");
+                width: 200px !important;
+                height: 200px !important;
+                background-size: 200px 200px;
+            }
         </style>
     @show
 </head>
@@ -30,15 +49,22 @@
         rebrand_2017 hr_tabs_placement_test tabs_below_meta hr_tabs north_star nostalgic flat_buttons sitewide
             xo_pin_user_review_to_top track_back" data-spy="scroll" data-target=".navbar" data-offset="50">
 
+        <div class="loaderDiv" id="fullPageLoader" style="display: none">
+            <div class="loader_200"></div>
+        </div>
+
         <div id="darkModal" class="display-none" role="dialog"></div>
         @if(!Auth::check())
             @include('layouts.loginPopUp')
         @endif
+
+        @include('general.globalInput')
 
         <div id="PAGE" class=" non_hotels_like desktop scopedSearch bg_f8">
             @include('layouts.placeHeader')
             @yield('main')
             @include('layouts.placeFooter')
         </div>
+
     </body>
 </html>

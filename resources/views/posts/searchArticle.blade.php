@@ -1,18 +1,6 @@
-<?php $placeMode = "ticket";
-$state = 'اصفهان';
-$kindPlaceId = 10; ?>
-        <!DOCTYPE html>
-<html>
-<head>
-    @include('layouts.topHeader')
-    <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/hr_north_star.css?v=1')}}' data-rup='hr_north_star_v1'/>
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/shazdeDesigns/hotelDetail.css')}}"/>
+@extends('posts.articleLayout')
 
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/long_lived_global_legacy_2.css?v=1')}}"/>
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/article.min.css?v=1.2')}}"/>
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/shazdeDesigns/article.css')}}"/>
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/shazdeDesigns/abbreviations.css')}}"/>
-
+@section('body')
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -361,7 +349,7 @@ $kindPlaceId = 10; ?>
                 <div>
                     <a href="">نمایش محتوای شهر اصفهان</a>
                 </div>
-                <input type="text" class="gnInput" placeholder="شهر موردنظر خود را وارد کنید">
+                <input type="text" id="searchCityInArticleInput" class="gnInput" placeholder="شهر موردنظر خود را وارد کنید" readonly>
             </div>
 
             <div class="col-md-12 gnWhiteBox">
@@ -378,6 +366,7 @@ $kindPlaceId = 10; ?>
                 </div>
             </div>
         </div>
+
         <div class="col-md-9 col-sm-12" style="padding-left: 0 !important;">
             <div class="col-md-12 gnWhiteBox" style="padding: 15px;">
                 <div class="row im-blog">
@@ -451,9 +440,11 @@ $kindPlaceId = 10; ?>
                 <div class="gap cf height-30"></div>
             </div>
         </div>
+
     </div>
 
     <a href="#" id="back-to-top" title="بازگشت به ابتدای صفحه"><i class="fa fa-arrow-up"></i></a>
+
     <script type='text/javascript' src='{{URL::asset('js/article/searchArticle.js')}}'></script>
     <script>
         var page = 1;
@@ -465,88 +456,4 @@ $kindPlaceId = 10; ?>
         var totalPage = {{$pageLimit}};
         getPost(1);
     </script>
-
-    <script type='text/javascript' src='{{URL::asset('js/article.js')}}'></script>
-
-
-    <script type="text/javascript">
-        jQuery('.lazy-img').unveil(300, function () {
-            "use strict";
-            jQuery(this).load(function () {
-                this.style.opacity = 1;
-            });
-        });
-    </script>
-    <script type="text/javascript">
-        jQuery(".sticky-sidebar").stick_in_parent({offset_top: fixed_header_height});
-    </script>
-
-    @include('layouts.placeFooter')
-
-</div>
-
-@if(!Auth::check())
-    @include('layouts.loginPopUp')
-@endif
-
-
-<script>
-
-    $(".login-button").click(function () {
-        $(".dark").show();
-        showLoginPrompt('{{Request::url()}}');
-    });
-
-    function hideElement(e) {
-        $(".dark").hide(), $("#" + e).addClass("hidden")
-    }
-
-    function showElement(e) {
-        $("#" + e).removeClass("hidden"), $(".dark").show()
-    }
-</script>
-
-<script>
-    var category = {!! $category !!}
-
-    function createCategoryList(){
-        for(var i = 0; i < category.length; i++){
-            var text = '<div class="gnColOFContentsCategory">\n' +
-                '<div>\n' +
-                '<div>\n' +
-                '<span id="CategoryName_' + category[i]["id"] + '" class="gnTitleOfPlaces" onclick="searchInCategory(this)"  style="cursor: pointer">' + category[i]["name"] + '</span>\n' +
-                '<span class="gnNumberOfPlaces">' + category[i]["postCount"] + '</span>\n' +
-                '</div>\n';
-
-            if(category[i]["subCategory"].length > 0)
-                text +='<ul class="gnUl">\n';
-
-            for(var j = 0; j < category[i]["subCategory"].length; j++){
-                var sub = category[i]["subCategory"][j];
-                text += '<li class="gnLi">\n' +
-                    '<span id="CategoryName_' + sub["id"] + '"  onclick="searchInCategory(this)" style="cursor: pointer">' + sub["name"] + '</span>\n' +
-                    '<span class="gnNumberOfPlaces">' + sub["postCount"] + '</span>\n' +
-                    '</li>\n';
-            }
-            if(category[i]["subCategory"].length > 0)
-                text += '</ul>\n';
-
-            text +='</div>\n' +
-                '</div>';
-
-            if(i % 4 == 0 || i % 4 == 3)
-                $("#rightCategory").append(text);
-            else
-                $("#leftCategory").append(text);
-        }
-    }
-
-    createCategoryList()
-</script>
-
-<div class="ui_backdrop dark" style="display: none; z-index: 10000000;"></div>
-
-</body>
-</html>
-
-
+@endsection

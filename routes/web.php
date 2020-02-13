@@ -1,12 +1,16 @@
 <?php
 
 use App\models\ConfigModel;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Route;
 
 Route::get('databaseforall', function (){
-//    ALTER TABLE `postComment` CHANGE `supervisorId` `ansTo` INT(11) NULL DEFAULT NULL;
-//    postCommentLike table
-//    ALTER TABLE `postcomment` ADD `haveAns` TINYINT(1) NOT NULL DEFAULT '0' AFTER `ansTo`;
+    Schema::create('postCommentLikes', function (Blueprint $table) {
+        $table->increments('id');
+        $table->unsignedInteger('commentId');
+        $table->unsignedInteger('userId');
+        $table->tinyInteger('like');
+    });
 });
 
 Route::get('fillHotelPic', function(){
@@ -224,6 +228,10 @@ Route::get('business', function(){
     return view('business');
 });
 
+
+Route::get('userActivitiesProfile', function(){
+    return view('profile.userActivitiesProfile');
+});
 
 Route::get('gardeshnameInner/{postId}', ['as' => 'gardeshnameInner', 'uses' => 'PostController@gardeshnameInner']);
 
@@ -706,6 +714,8 @@ Route::group(array('middleware' => ['throttle:30', 'nothing', 'auth']), function
 });
 
 Route::group(array('middleware' => ['throttle:30', 'auth', 'adminAccess']), function () {
+
+    Route::post('middleBannerImage', 'HomeController@middleBannerImages')->name('middleBanner.image.store');
 
     Route::get('fillState', 'HomeController@fillState');
 

@@ -16,15 +16,15 @@
                             </div>
                             <div>
                                 <center>
-                                    <img id="mainMapHotelImg" src="{{URL::asset('_images/mapIcon/mhotel.png')}}" onclick="toggleHotelsInMainMap(1)">
-                                    <img id="mainMapRestImg" src="{{URL::asset('_images/mapIcon/mrest.png')}}" onclick="toggleRestaurantsInMainMap(1)">
-                                    <img id="mainMapFastImg" src="{{URL::asset('_images/mapIcon/mfast.png')}}" onclick="toggleFastFoodsInMainMap(1)">
-                                    <img id="mainMapMusImg" src="{{URL::asset('_images/mapIcon/matr_mus.png')}}" onclick="toggleMuseumsInMainMap(1)">
-                                    <img id="mainMapPlaImg" src="{{URL::asset('_images/mapIcon/matr_pla.png')}}" onclick="toggleHistoricalInMainMap(1)">
-                                    <img id="mainMapShcImg" src="{{URL::asset('_images/mapIcon/matr_shc.png')}}" onclick="toggleShopCenterInMainMap(1)">
-                                    <img id="mainMapFunImg" src="{{URL::asset('_images/mapIcon/matr_fun.png')}}" onclick="toggleFunCenterInMainMap(1)">
-                                    <img id="mainMapAdvImg" src="{{URL::asset('_images/mapIcon/matr_adv.png')}}" onclick="toggleMajaraCenterInMainMap(1)">
-                                    <img id="mainMapNatImg" src="{{URL::asset('_images/mapIcon/matr_nat.png')}}" onclick="toggleNaturalsInMainMap(1)">
+                                    <img id="mainMapHotelImg" src="{{URL::asset('images/mapIcon/mhotel.png')}}" onclick="toggleHotelsInMainMap(1)">
+                                    <img id="mainMapRestImg" src="{{URL::asset('images/mapIcon/mrest.png')}}" onclick="toggleRestaurantsInMainMap(1)">
+                                    <img id="mainMapFastImg" src="{{URL::asset('images/mapIcon/mfast.png')}}" onclick="toggleFastFoodsInMainMap(1)">
+                                    <img id="mainMapMusImg" src="{{URL::asset('images/mapIcon/matr_mus.png')}}" onclick="toggleMuseumsInMainMap(1)">
+                                    <img id="mainMapPlaImg" src="{{URL::asset('images/mapIcon/matr_pla.png')}}" onclick="toggleHistoricalInMainMap(1)">
+                                    <img id="mainMapShcImg" src="{{URL::asset('images/mapIcon/matr_shc.png')}}" onclick="toggleShopCenterInMainMap(1)">
+                                    <img id="mainMapFunImg" src="{{URL::asset('images/mapIcon/matr_fun.png')}}" onclick="toggleFunCenterInMainMap(1)">
+                                    <img id="mainMapAdvImg" src="{{URL::asset('images/mapIcon/matr_adv.png')}}" onclick="toggleMajaraCenterInMainMap(1)">
+                                    <img id="mainMapNatImg" src="{{URL::asset('images/mapIcon/matr_nat.png')}}" onclick="toggleNaturalsInMainMap(1)">
                                 </center>
                             </div>
                         </div>
@@ -47,7 +47,7 @@
 <script>
     var x = '{{$place->C}}';
     var y = '{{$place->D}}';
-    var iconBase = '{{URL::asset('_images/mapIcon/')}}';
+    var iconBase = '{{URL::asset('images/mapIcon/')}}';
     var icons = {
         hotel: iconBase + '/mhotel.png',
         pla: iconBase + '/matr_pla.png',
@@ -226,12 +226,12 @@
 
     function toggleHotelsInMainMap(value) {
         if (isHotelOn == value) {
-            document.getElementById('mainMapHotelImg').src = "{{URL::asset('_images/mapIcon/mhoteloff.png')}}";
+            document.getElementById('mainMapHotelImg').src = "{{URL::asset('images/mapIcon/mhoteloff.png')}}";
             isHotelOn = 0;
             mySetMap(isHotelOn, markersHotel);
         }
         else {
-            document.getElementById('mainMapHotelImg').src = "{{URL::asset('_images/mapIcon/mhotel.png')}}";
+            document.getElementById('mainMapHotelImg').src = "{{URL::asset('images/mapIcon/mhotel.png')}}";
             isHotelOn = 1;
             mySetMap(isHotelOn, markersHotel);
         }
@@ -239,12 +239,12 @@
 
     function toggleRestaurantsInMainMap(value) {
         if (isRestaurantOn[0] == value) {
-            document.getElementById('mainMapRestImg').src = "{{URL::asset('_images/mapIcon/mrestoff.png')}}";
+            document.getElementById('mainMapRestImg').src = "{{URL::asset('images/mapIcon/mrestoff.png')}}";
             isRestaurantOn[0] = 0;
             mySetMap(isRestaurantOn[0], markersRest);
         }
         else {
-            document.getElementById('mainMapRestImg').src = "{{URL::asset('_images/mapIcon/mrest.png')}}";
+            document.getElementById('mainMapRestImg').src = "{{URL::asset('images/mapIcon/mrest.png')}}";
             isRestaurantOn[0] = 1;
             mySetMap(isRestaurantOn[0], markersRest);
         }
@@ -252,12 +252,12 @@
 
     function toggleFastFoodsInMainMap(value) {
         if (isRestaurantOn[1] == value) {
-            document.getElementById('mainMapFastImg').src = "{{URL::asset('_images/mapIcon/mfastoff.png')}}";
+            document.getElementById('mainMapFastImg').src = "{{URL::asset('images/mapIcon/mfastoff.png')}}";
             isRestaurantOn[1] = 0;
             mySetMap(isRestaurantOn[1], markersFast);
         }
         else {
-            document.getElementById('mainMapFastImg').src = "{{URL::asset('_images/mapIcon/mfast.png')}}";
+            document.getElementById('mainMapFastImg').src = "{{URL::asset('images/mapIcon/mfast.png')}}";
             isRestaurantOn[1] = 1;
             mySetMap(isRestaurantOn[1], markersFast);
         }
@@ -265,12 +265,12 @@
 
     function toggleMuseumsInMainMap(value) {
         if (isAmakenOn[0] == value) {
-            document.getElementById('mainMapMusImg').src = "{{URL::asset('_images/mapIcon/matr_musoff.png')}}";
+            document.getElementById('mainMapMusImg').src = "{{URL::asset('images/mapIcon/matr_musoff.png')}}";
             isAmakenOn[0] = 0;
             mySetMap(isAmakenOn[0], markersMus);
         }
         else {
-            document.getElementById('mainMapMusImg').src = "{{URL::asset('_images/mapIcon/matr_mus.png')}}";
+            document.getElementById('mainMapMusImg').src = "{{URL::asset('images/mapIcon/matr_mus.png')}}";
             isAmakenOn[0] = 1;
             mySetMap(isAmakenOn[0], markersMus);
         }
@@ -278,12 +278,12 @@
 
     function toggleHistoricalInMainMap(value) {
         if (isAmakenOn[1] == value) {
-            document.getElementById('mainMapPlaImg').src = "{{URL::asset('_images/mapIcon/matr_plaoff.png')}}";
+            document.getElementById('mainMapPlaImg').src = "{{URL::asset('images/mapIcon/matr_plaoff.png')}}";
             isAmakenOn[1] = 0;
             mySetMap(isAmakenOn[1], markersPla);
         }
         else {
-            document.getElementById('mainMapPlaImg').src = "{{URL::asset('_images/mapIcon/matr_pla.png')}}";
+            document.getElementById('mainMapPlaImg').src = "{{URL::asset('images/mapIcon/matr_pla.png')}}";
             isAmakenOn[1] = 1;
             mySetMap(isAmakenOn[1], markersPla);
         }
@@ -291,12 +291,12 @@
 
     function toggleShopCenterInMainMap(value) {
         if (isAmakenOn[2] == value) {
-            document.getElementById('mainMapShcImg').src = "{{URL::asset('_images/mapIcon/matr_shcoff.png')}}";
+            document.getElementById('mainMapShcImg').src = "{{URL::asset('images/mapIcon/matr_shcoff.png')}}";
             isAmakenOn[2] = 0;
             mySetMap(isAmakenOn[2], markersShc);
         }
         else {
-            document.getElementById('mainMapShcImg').src = "{{URL::asset('_images/mapIcon/matr_shc.png')}}";
+            document.getElementById('mainMapShcImg').src = "{{URL::asset('images/mapIcon/matr_shc.png')}}";
             isAmakenOn[2] = 1;
             mySetMap(isAmakenOn[2], markersShc);
         }
@@ -304,12 +304,12 @@
 
     function toggleFunCenterInMainMap(value) {
         if (isAmakenOn[3] == value) {
-            document.getElementById('mainMapFunImg').src = "{{URL::asset('_images/mapIcon/matr_funoff.png')}}";
+            document.getElementById('mainMapFunImg').src = "{{URL::asset('images/mapIcon/matr_funoff.png')}}";
             isAmakenOn[3] = 0;
             mySetMap(isAmakenOn[3], markersFun);
         }
         else {
-            document.getElementById('mainMapFunImg').src = "{{URL::asset('_images/mapIcon/matr_fun.png')}}";
+            document.getElementById('mainMapFunImg').src = "{{URL::asset('images/mapIcon/matr_fun.png')}}";
             isAmakenOn[3] = 1;
             mySetMap(isAmakenOn[3], markersFun);
         }
@@ -317,12 +317,12 @@
 
     function toggleMajaraCenterInMainMap(value) {
         if (isAmakenOn[5] == value) {
-            document.getElementById('mainMapAdvImg').src = "{{URL::asset('_images/mapIcon/matr_advoff.png')}}";
+            document.getElementById('mainMapAdvImg').src = "{{URL::asset('images/mapIcon/matr_advoff.png')}}";
             isAmakenOn[5] = 0;
             mySetMap(isAmakenOn[5], markersAdv);
         }
         else {
-            document.getElementById('mainMapAdvImg').src = "{{URL::asset('_images/mapIcon/matr_adv.png')}}";
+            document.getElementById('mainMapAdvImg').src = "{{URL::asset('images/mapIcon/matr_adv.png')}}";
             isAmakenOn[5] = 1;
             mySetMap(isAmakenOn[5], markersAdv);
         }
@@ -330,12 +330,12 @@
 
     function toggleNaturalsInMainMap(value) {
         if (isAmakenOn[4] == value) {
-            document.getElementById('mainMapNatImg').src = "{{URL::asset('_images/mapIcon/matr_natoff.png')}}";
+            document.getElementById('mainMapNatImg').src = "{{URL::asset('images/mapIcon/matr_natoff.png')}}";
             isAmakenOn[4] = 0;
             mySetMap(isAmakenOn[4], markersNat);
         }
         else {
-            document.getElementById('mainMapNatImg').src = "{{URL::asset('_images/mapIcon/matr_nat.png')}}";
+            document.getElementById('mainMapNatImg').src = "{{URL::asset('images/mapIcon/matr_nat.png')}}";
             isAmakenOn[4] = 1;
             mySetMap(isAmakenOn[4], markersNat);
         }

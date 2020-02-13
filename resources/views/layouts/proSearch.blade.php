@@ -64,11 +64,13 @@
                 return;
         }
 
-        $("#searchKeyCity").empty().append(val);
         $("#currentCity").empty().append("شما در حال حاضر در شهر " + val + " هستید.").css('margin' , 'margin: 10px 0 5px !important;');
+        val = ' مشاهده نتایج ' + val;
+        $("#searchKeyCity").empty().append(val);
+        $('#addToFilterCityBtn').css('display', 'block');
+
         offset  = elemRect.top;
         offset2 = elemRect.left;
-
         newFilter = "<div id='elevator' style=' top: " + offset + "px; left: " + offset2 + "px'><div>" + val + "</div></div>";
         $("#searchspan").append(newFilter);
 
@@ -77,9 +79,12 @@
         newElement = "<div class='hidden cityFiltersProSearch' id='cityFilterDest_" + cityId + "' style='left: " + (destX - 115) + "px;'><div><span class='glyphicon glyphicon-remove' onclick='removeFilter(\"cityFilterDest_" + cityId + "\")'></span><span'>" + val + "</span></span></div></div>";
         $("#filters").append(newElement);
 
+        console.log('in')
+
         selectedElement = document.getElementById("elevator");
         selectedVal = "cityFilterDest_" + cityId;
         filters[filters.length] = selectedVal;
+
 
         movement();
     }
@@ -139,70 +144,87 @@
 
     }
 
-    function searchInPlaces() {
+    function searchInPlaces(_element) {
 
-        if($("#GEO_SCOPED_SEARCH_INPUT2").val().length < 3) {
-            $("#resultPlace").empty();
-            return;
-        }
+        var value = _element.value;
 
-        cities = [];
-        for(i = 0; i < filters.length; i++) {
-            cities[i] = filters[i].split('_')[1];
-        }
-
-        if(cities.length == 0)
-            cities = -1;
-
-        hotelFilter = ($("#hotelFilter").attr('data-val') == 'off') ? 0 : 1;
-        amakenFilter = ($("#amakenFilter").attr('data-val') == 'off') ? 0 : 1;
-        restuarantFilter = ($("#restaurantFilter").attr('data-val') == 'off') ? 0 : 1;
-        majaraFilter = ($("#majaraFilter").attr('data-val') == 'off') ? 0 : 1;
-        soghatFilter = ($("#soghatFilter").attr('data-val') == 'off') ? 0 : 1;
-        ghazamahaliFilter = ($("#ghazamahaliFilter").attr('data-val') == 'off') ? 0 : 1;
-        sanayeFilter = ($("#sanayeFilter").attr('data-val') == 'off') ? 0 : 1;
-
-        $.ajax({
-            type: 'post',
-            url: searchInPlacesDir,
-            data: {
-                'key':  $("#GEO_SCOPED_SEARCH_INPUT2").val(),
-                'hotelFilter': hotelFilter,
-                'amakenFilter': amakenFilter,
-                'restaurantFilter': restuarantFilter,
-                'majaraFilter': majaraFilter,
-                'soghatFilter': soghatFilter,
-                'ghazamahaliFilter': ghazamahaliFilter,
-                'sanayeFilter': sanayeFilter,
-                'selectedCities': cities
-            },
-            success: function (response) {
-
-                $("#resultPlace").empty();
-
-                if(response.length == 0)
-                    return;
-
-                response = JSON.parse(response);
-
-                newElement = "";
-                for(i = 0; i < response.length; i++) {
-                    if(response[i].kindPlace == 'هتل')
-                        newElement += "<p class='searchElement'><span onclick='addToCompareList(\"" + response[i].kindPlaceId + "\", \"" + response[i].id + "\", \"" + response[i].name + "\")' data-toggle='tooltip' title='افزودن به مقایسه ها' class='float-right glyphicon glyphicon-plus'></span><span class='mg-rt-7' onclick='document.location.href = \"{{route('home')}}/hotel-details/" + response[i].id + "/" + response[i].name + "\"'>" + response[i].name + " در " + response[i].cityName + "</span></p>";
-                    else if(response[i].kindPlace == 'رستوران')
-                        newElement += "<p class='searchElement'><span onclick='addToCompareList(\"" + response[i].kindPlaceId + "\", \"" + response[i].id + "\", \"" + response[i].name + "\")' data-toggle='tooltip' title='افزودن به مقایسه ها' class='float-right glyphicon glyphicon-plus'></span><span class='mg-rt-7' onclick='document.location.href = \"{{route('home')}}/restaurant-details/" + response[i].id + "/" + response[i].name + "\"'>" + response[i].name + " در " + response[i].cityName + "</span></p>";
-                    else if(response[i].kindPlace == 'اماکن')
-                            newElement += "<p class='searchElement'><span onclick='addToCompareList(\"" + response[i].kindPlaceId + "\", \"" + response[i].id + "\", \"" + response[i].name + "\")' data-toggle='tooltip' title='افزودن به مقایسه ها' class='float-right glyphicon glyphicon-plus'></span><span class='mg-rt-7' onclick='document.location.href = \"{{route('home')}}/amaken-details/" + response[i].id + "/" + response[i].name + "\"'>" + response[i].name + " در " + response[i].cityName + "</span></p>";
-                    else if(response[i].kindPlace == 'آداب')
-                        newElement += "<p class='searchElement'><span onclick='addToCompareList(\"" + response[i].kindPlaceId + "\", \"" + response[i].id + "\", \"" + response[i].name + "\")' data-toggle='tooltip' title='افزودن به مقایسه ها' class='float-right glyphicon glyphicon-plus'></span><span class='mg-rt-7' onclick='document.location.href = \"{{route('home')}}/adab-details/" + response[i].id + "/" + response[i].name + "\"'>" + response[i].name + " در " + response[i].cityName + "</span></p>";
-                    else
-                        newElement += "<p class='searchElement'><span onclick='addToCompareList(\"" + response[i].kindPlaceId + "\", \"" + response[i].id + "\", \"" + response[i].name + "\")' data-toggle='tooltip' title='افزودن به مقایسه ها' class='float-right glyphicon glyphicon-plus'></span><span class='mg-rt-7' onclick='document.location.href = \"{{route('home')}}/majara-details/" + response[i].id + "/" + response[i].name + "\"'>" + response[i].name + " در " + response[i].cityName + "</span></p>";
-                }
-
-                $("#resultPlace").append(newElement)
+        if(value.trim().length > 1){
+            cities = [];
+            for(i = 0; i < filters.length; i++) {
+                cities[i] = filters[i].split('_')[1];
             }
-        });
 
+            if(cities.length == 0)
+                cities = -1;
+
+
+            hotelFilter = ($("#hotelFilter").attr('data-val') == 'off') ? 0 : 1;
+            amakenFilter = ($("#amakenFilter").attr('data-val') == 'off') ? 0 : 1;
+            restuarantFilter = ($("#restaurantFilter").attr('data-val') == 'off') ? 0 : 1;
+            majaraFilter = ($("#majaraFilter").attr('data-val') == 'off') ? 0 : 1;
+            sogatSanaieFilter = ($("#sogatSanaieFilter").attr('data-val') == 'off') ? 0 : 1;
+            mahaliFoodFilter = ($("#mahaliFoodFilter").attr('data-val') == 'off') ? 0 : 1;
+
+
+            $.ajax({
+                type: 'post',
+                url: searchInPlacesDir,
+                data: {
+                    'key':  value,
+                    'hotelFilter': hotelFilter,
+                    'amakenFilter': amakenFilter,
+                    'restaurantFilter': restuarantFilter,
+                    'majaraFilter': majaraFilter,
+                    'sogatSanaieFilter': sogatSanaieFilter,
+                    'mahaliFoodFilter': mahaliFoodFilter,
+                    'selectedCities': cities
+                },
+                success: function (response) {
+                    $("#resultPlace").empty();
+
+                    if(response.length == 0)
+                        return;
+
+                    response = JSON.parse(response);
+
+                    newElement = "";
+                    for(i = 0; i < response.length; i++) {
+
+                        if(response[i].kindPlace == 'هتل')
+                            icon = '<div class="icons hotelIcon spIcons"></div>';
+                        else if(response[i].kindPlace == 'رستوران')
+                            icon = '<div class="icons restaurantIcon spIcons"></div>';
+                        else if(response[i].kindPlace == 'اماکن')
+                            icon = '<div class="icons touristAttractions spIcons"></div>';
+                        else if(response[i].kindPlace == 'ماجرا')
+                            icon = '<div class="icons adventure spIcons"></div>';
+                        else if(response[i].kindPlace == 'غذای محلی')
+                            icon = '<div class="icons traditionalFood spIcons"></div>';
+                        else if(response[i].kindPlace == 'صنایع سوغات')
+                            icon = '<div class="icons souvenirIcon spIcons"></div>';
+                        else
+                            icon = '<div class="icons touristAttractions spIcons"></div>';
+
+                        newElement += '<div style="padding: 5px 20px; display: flex">' +
+                                        '   <a href="' + response[i]['url'] + '" style="width: 80%; color: black;">' +
+                                        '       <div>' +
+                                                    icon +
+                                            '       <p class="suggest cursor-pointer font-weight-700" id="suggest_1" style="margin: 0px; display: inline-block;">' + response[i].name + '</p>' +
+                                            '       <p class="suggest cursor-pointer stateName" id="suggest_1">' + response[i].stateName + ' در ' + response[i].cityName + '</p>' +
+                                        '       </div>\n' +
+                                        '   </a>' +
+                                        '   <div style="display: flex; align-items: center">' +
+                                        '       <button class="btn btn-success" style="float: left; padding: 2px 15px; border-radius: 8px;"  onclick="addToCompareList(\'' + response[i].kindPlaceId + '\', \'' + response[i].id + '\', \'' + response[i].name + '\')"> مقایسه </button>' +
+                                        '   </div>' +
+                                        '</div>';
+                    }
+
+                    setResultToGlobalSearch(newElement);
+                }
+            });
+        }
+        else
+            clearGlobalResult();
     }
 
     function removeFromCompareList(idx) {
@@ -226,6 +248,8 @@
     }
 
     function addToCompareList(kindPlaceId, id, name) {
+
+        closeSearchInput();
 
         for(i = 0; i < compareList.length; i++) {
             if(compareList[i].id == id)
@@ -353,45 +377,46 @@
         setTimeout('destroyBalloon()', 1);
     }
     
-    function searchCity() {
+    function searchCity(_element) {
 
         activeCityFilter = false;
-        $("#searchKeyCity").empty();
-        $("#currentCity").empty().css('margin' , '0');
+        var value = _element.value;
 
-        if($("#GEO_SCOPED_SEARCH_INPUT").val().length < 2) {
-            $("#resultCity").empty().css('padding', '0');
-            return;
-        }
+        if(value.trim().length > 1){
+            $.ajax({
+                type: 'post',
+                url: searchInCity,
+                data: {
+                    'key':  value
+                },
+                success: function (response) {
 
-        $.ajax({
-            type: 'post',
-            url: searchInCity,
-            data: {
-                'key':  $("#GEO_SCOPED_SEARCH_INPUT").val()
-            },
-            success: function (response) {
+                    $("#resultCity").empty();
 
-                $("#resultCity").empty();
+                    if(response.length == 0)
+                        return;
 
-                if(response.length == 0)
-                    return;
+                    response = JSON.parse(response);
 
-                response = JSON.parse(response);
+                    var newElement = "";
 
-                newElement = "";
-                for(i = 0; i < response.length; i++) {
-                    newElement += "<p><span id='greenBtnProSearch' onclick='setCityName(\"" + response[i].cityName + "\", \"" + response[i].id + "\")' class='btn btn-success glyphicon glyphicon-plus'></span><span>" + response[i].cityName + " در " + response[i].stateName + "</span></p>";
+                    for(i = 0; i < response.length; i++) {
+                        newElement += '<div onclick="setCityName(\'' + response[i].cityName + '\', \'' + response[i].id + '\')"><div class="icons location spIcons"></div>' +
+                                     '<p class="suggest cursor-pointer font-weight-700" id="suggest_1" style="margin: 0px">شهر ' + response[i].cityName + '</p>' +
+                                     '<p class="suggest cursor-pointer stateName" id="suggest_1">' + response[i].stateName + '</p></div>';
+                    }
+                    setResultToGlobalSearch(newElement);
                 }
-
-                $("#resultCity").append(newElement).css('padding', '10px');;
-            }
-        });
+            });
+        }
+        else
+            clearGlobalResult();
     }
 
     function setCityName(val, id) {
+        closeSearchInput();
         activeCityFilter = true;
-        $("#resultCity").empty();
+        $("#GEO_SCOPED_SEARCH_INPUT2").val('');
         $("#GEO_SCOPED_SEARCH_INPUT").val(val);
         addToFilter(id);
     }
@@ -401,7 +426,7 @@
         if(!activeCityFilter || $("#GEO_SCOPED_SEARCH_INPUT").val() == "")
             return;
 
-        hotel = restaurant = amaken = majara = soghat = ghazamahali = sanaye = false;
+        hotel = restaurant = amaken = majara = soghat = mahaliFood = sanaye = false;
         counter = 0;
 
         if($("#amakenFilter").attr("data-val") == "on") {
@@ -424,18 +449,13 @@
             counter++;
         }
 
-        if($("#soghatFilter").attr("data-val") == "on") {
+        if($("#sogatSanaieFilter").attr("data-val") == "on") {
             soghat = true;
             counter++;
         }
 
-        if($("#ghazamahaliFilter").attr("data-val") == "on") {
-            ghazamahali = true;
-            counter++;
-        }
-
-        if($("#sanayeFilter").attr("data-val") == "on") {
-            sanaye = true;
+        if($("#mahaliFoodFilter").attr("data-val") == "on") {
+            mahaliFood = true;
             counter++;
         }
 
@@ -464,8 +484,8 @@
         else if(soghat) {
             document.location.href = "{{route('home')}}" + '/adab-list/' + $("#GEO_SCOPED_SEARCH_INPUT").val() + '/soghat';
         }
-        else if(ghazamahali) {
-            document.location.href = "{{route('home')}}" + '/adab-list/' + $("#GEO_SCOPED_SEARCH_INPUT").val() + '/ghazamahali';
+        else if(mahaliFood) {
+            document.location.href = "{{route('home')}}" + '/adab-list/' + $("#GEO_SCOPED_SEARCH_INPUT").val() + '/mahaliFood';
         }
         else if(sanaye) {
             document.location.href = "{{route('home')}}" + '/adab-list/' + $("#GEO_SCOPED_SEARCH_INPUT").val() + '/sanaye';
@@ -500,6 +520,15 @@
 <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/shazdeDesigns/proSearch.css')}}'/>
 <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/shazdeDesigns/abbreviations.css')}}'/>
 
+<style>
+    .proSearchFindCityList{
+        cursor: pointer;
+    }
+    .proSearchFindCityList:hover{
+        background-color: lightgrey;
+    }
+</style>
+
 <div id="searchspan" class="ui_modal fullwidth no_padding ppr_rup ppr_priv_masthead_search">
     <div class="body_text">
         <div class="search_overlay_content ui_container">
@@ -511,8 +540,13 @@
             </div>
 
             <div class="row mg-tp-50" id="mainDivProSearch">
-
-                <div class="col-xs-12 boxOfWhereIsHere">شما در حال حاضر در شهر <div id="nameOfWhereIsHere">اصفهان</div> هستید</div>
+                @if(isset($locationName))
+                    <div class="col-xs-12 boxOfWhereIsHere">
+                        شما در حال حاضر در
+                        <div id="nameOfWhereIsHere">{{$locationName}}</div>
+                        هستید
+                    </div>
+                @endif
 
 {{--                <div class="col-xs-2"></div>--}}
                 <div class="col-xs-12 whereMainDiv">
@@ -520,15 +554,17 @@
                         <div class="boxOfCityNameProSearch">
                             <div id="textOfWhere">در کجا</div>
                             <div class="where_with_highlight enterCityNameProSearch">
-                                <input onkeyup="searchCity()" id="GEO_SCOPED_SEARCH_INPUT" class="text geoScopeInput"
-                                       value="" placeholder="نام شهر را وارد کنید" autocomplete="off" type="text">
+                                <input id="GEO_SCOPED_SEARCH_INPUT" class="text geoScopeInput" onclick="openSearchFindCity()"
+                                       value="" placeholder="نام شهر را وارد کنید" autocomplete="off" type="text" readonly>
                             </div>
                         </div>
                         <p id="currentCity"></p>
                         <div id="resultCity" class="data_holder"></div>
                     </div>
                     <div class="col-xs-5 whereSearchBtnMainDiv">
-                        <div id="addToFilterCityBtn" class="inner" onclick="goTo()"><span>مشاهده نتایج شهر اصفهان</span><span>&nbsp;</span><span id="searchKeyCity"></span></div>
+                        <div id="addToFilterCityBtn" class="inner" onclick="goTo()" style="display: none;">
+                            <span id="searchKeyCity"></span>
+                        </div>
                     </div>
                 </div>
 {{--                <div class="col-xs-2"></div>--}}
@@ -548,89 +584,56 @@
                             <div class="boxOfCityNameProSearch">
                                 <div id="textOfWhere2">به کجا</div>
                                 <div class="where_with_highlight enterCityNameProSearch">
-                                    <input onkeyup="searchInPlaces()" id="GEO_SCOPED_SEARCH_INPUT2" class="text geoScopeInput"
-                                           value="" placeholder="نام مکان را وارد کنید. (به وسیله فانوس ها جستجو را محدود کنید.)" autocomplete="off" type="text">
+                                    <input id="GEO_SCOPED_SEARCH_INPUT2" class="text geoScopeInput" onclick="openSearchFindPlace()"
+                                           value="" placeholder="نام مکان را وارد کنید. (به وسیله فانوس ها جستجو را محدود کنید.)" type="text" readonly>
                                 </div>
                             </div>
                         </div>
                         <div class="col-xs-7 boxOfLamps">
-                            <div class='ui_input_checkbox'>
-                                <img data-val="off" id="amakenFilter" width="40px" height="80px" src="{{URL::asset('images/off_lamp.png')}}">
+                            <?php
+                                $onLampImg = URL::asset('images/on_lamp.gif');
+                                $offLampImg = URL::asset('images/off_lamp.png');
+                            ?>
+
+                            <div class='ui_input_checkbox' style="cursor: pointer;">
+                                <img data-val="{{isset($kindPlaceId) && ($kindPlaceId == 1 || $kindPlaceId == 0) ? 'on' : 'off'}}" class="lantern" id="amakenFilter" width="40px" height="80px" src="{{isset($kindPlaceId) && ($kindPlaceId == 1 || $kindPlaceId == 0) ? $onLampImg : $offLampImg}}">
                                 <div>اماکن</div>
                             </div>
-                            <div class='ui_input_checkbox'>
-                                @if(isset($placeMode) && $placeMode == "hotel")
-                                    <img data-val="on" id="hotelFilter" width="40px" height="80px" src="{{URL::asset('images/on_lamp.gif')}}">
-                                @else
-                                    <img data-val="off" id="hotelFilter" width="40px" height="80px" src="{{URL::asset('images/off_lamp.png')}}">
-                                @endif
+                            <div class='ui_input_checkbox' style="cursor: pointer;">
+                                <img data-val="{{isset($kindPlaceId) && ($kindPlaceId == 4 || $kindPlaceId == 0) ? 'on' : 'off'}}" class="lantern" id="hotelFilter" width="40px" height="80px" src="{{isset($kindPlaceId) && ($kindPlaceId == 4 || $kindPlaceId == 0) ? $onLampImg : $offLampImg}}">
                                 <div>هتل</div>
                             </div>
-                            <div class='ui_input_checkbox'>
-                                @if(isset($placeMode) && $placeMode == "restaurant")
-                                    <img data-val="on" id="restaurantFilter" width="40px" height="80px" src="{{URL::asset('images/on_lamp.gif')}}">
-                                @else
-                                    <img data-val="off" id="restaurantFilter" width="40px" height="80px" src="{{URL::asset('images/off_lamp.png')}}">
-                                @endif
+                            <div class='ui_input_checkbox' style="cursor: pointer;">
+                                <img data-val="{{isset($kindPlaceId) && ($kindPlaceId == 3 || $kindPlaceId == 0) ? 'on' : 'off'}}" class="lantern" id="restaurantFilter" width="40px" height="80px" src="{{isset($kindPlaceId) && ($kindPlaceId == 3 || $kindPlaceId == 0) ? $onLampImg : $offLampImg}}">
                                 <div>رستوران</div>
                             </div>
-                            <div class='ui_input_checkbox'>
-                                @if(isset($placeMode) && $placeMode == "majara")
-                                    <img data-val="on" id="majaraFilter" width="40px" height="80px" src="{{URL::asset('images/on_lamp.gif')}}">
-                                @else
-                                    <img data-val="off" id="majaraFilter" width="40px" height="80px" src="{{URL::asset('images/off_lamp.png')}}">
-                                @endif
+                            <div class='ui_input_checkbox' style="cursor: pointer;">
+                                <img data-val="{{isset($kindPlaceId) && ($kindPlaceId == 6 || $kindPlaceId == 0) ? 'on' : 'off'}}" class="lantern" id="majaraFilter" width="40px" height="80px" src="{{isset($kindPlaceId) && ($kindPlaceId == 6 || $kindPlaceId == 0) ? $onLampImg : $offLampImg}}">
                                 <div>ماجراجویی</div>
                             </div>
-                            <div class='ui_input_checkbox'>
-                                @if(isset($placeMode) && $placeMode == "soghat")
-                                    <img data-val="on" id="soghatFilter" width="40px" height="80px" src="{{URL::asset('images/on_lamp.gif')}}">
-                                @else
-                                    <img data-val="off" id="soghatFilter" width="40px" height="80px" src="{{URL::asset('images/off_lamp.png')}}">
-                                @endif
+                            <div class='ui_input_checkbox' style="cursor: pointer;">
+                                <img data-val="{{isset($kindPlaceId) && ($kindPlaceId == 10 || $kindPlaceId == 0) ? 'on' : 'off'}}" class="lantern" id="sogatSanaieFilter" width="40px" height="80px" src="{{isset($kindPlaceId) && ($kindPlaceId == 10 || $kindPlaceId == 0) ? $onLampImg : $offLampImg}}">
+                                <div>صنایع دستی</div>
+                            </div>
+                            <div class='ui_input_checkbox' style="cursor: pointer;">
+                                <img data-val="{{isset($kindPlaceId) && ($kindPlaceId == 10 || $kindPlaceId == 0) ? 'on' : 'off'}}" class="lantern" id="sogatSanaieFilter" width="40px" height="80px" src="{{isset($kindPlaceId) && ($kindPlaceId == 10 || $kindPlaceId == 0) ? $onLampImg : $offLampImg}}">
                                 <div>سوغات</div>
                             </div>
-                            <div class='ui_input_checkbox'>
-                                @if(isset($placeMode) && $placeMode == "ghazamahali")
-                                    <img data-val="on" id="ghazamahaliFilter" width="40px" height="80px" src="{{URL::asset('images/on_lamp.gif')}}">
-                                @else
-                                    <img data-val="off" id="ghazamahaliFilter" width="40px" height="80px" src="{{URL::asset('images/off_lamp.png')}}">
-                                @endif
+                            <div class='ui_input_checkbox' style="cursor: pointer;">
+                                <img data-val="{{isset($kindPlaceId) && ($kindPlaceId == 11 || $kindPlaceId == 0) ? 'on' : 'off'}}" class="lantern" id="mahaliFoodFilter" width="40px" height="80px" src="{{isset($kindPlaceId) && ($kindPlaceId == 11 || $kindPlaceId == 0) ? $onLampImg : $offLampImg}}">
                                 <div>غذا محلی</div>
-                            </div>
-                            <div class='ui_input_checkbox'>
-                                @if(isset($placeMode) && $placeMode == "sanaye")
-                                    <img data-val="on" id="sanayeFilter" width="40px" height="80px" src="{{URL::asset('images/on_lamp.gif')}}">
-                                @else
-                                    <img data-val="off" id="sanayeFilter" width="40px" height="80px" src="{{URL::asset('images/off_lamp.png')}}">
-                                @endif
-
-                                <div>صنایع</div>
                             </div>
                         </div>
 {{--                        <div id="dividerCenterBoxProSearch"></div>--}}
                     </div>
-                    {{--<div class="col-xs-12" id="filterDiv">--}}
-                        {{--<div id="filters" class="position-relative"></div>--}}
-                    {{--</div>--}}
-                    {{--<div class="col-xs-12">--}}
-                        {{--<div id="resultPlace" class="data_holder"></div>--}}
-                    {{--</div>--}}
+                    <div class="col-xs-12" id="filterDiv">
+                        <div id="filters" class="position-relative"></div>
+                    </div>
                 </div>
-{{--                <div class="col-xs-2"></div>--}}
 
                 <div class="clear-both"></div>
 
-                {{--<div class="col-xs-12">--}}
-                    {{--<div class="col-xs-2"></div>--}}
-                    {{--<div class="col-xs-8" id="filterDivCM">--}}
-                        {{--<div id="filters"></div>--}}
-                    {{--</div>--}}
-                    {{--<div class="col-xs-2"></div>--}}
-                {{--</div>--}}
-
-{{--                <div class="col-xs-2"></div>--}}
-                <div class="col-xs-12 pd-0">
+                <div class="col-xs-12 pd-0 compareDivsMainDiv">
                     <div class="col-xs-12 boxOfMainDivCompareProSearch">
                         @for($i = 1; $i < 5; $i++)
                             <div id="mainDivCompareProSearch">
@@ -658,6 +661,8 @@
 </div>
 
 <script>
+     var onImage = "{{URL::asset('images/on_lamp.gif')}}";
+     var offImage = "{{URL::asset('images/off_lamp.png')}}";
 
     $('#close_span_search').click(function(e) {
         $('#searchspan').animate({height: '0vh'});
@@ -703,4 +708,25 @@
         }
         searchInPlaces();
     });
+
+    function changeFilter(_place, _element){
+    //     var imageElements = $(_element).children().first();
+    //     var status = imageElements.attr('data-val');
+    //     if(status == 'off'){
+    //         imageElements.attr('data-val', 'on');
+    //         imageElements.attr('src', onImage);
+    //     }
+    //     if(status == 'on'){
+    //         imageElements.attr('data-val', 'on');
+    //         imageElements.attr('src', onImage);
+    //     }
+    }
+
+    function openSearchFindCity(){
+        createSearchInput('searchCity', 'نام شهر را وارد کنید.');
+    }
+
+    function openSearchFindPlace(){
+        createSearchInput('searchInPlaces', 'نام مکان مورد نظر را وارد کنید.');
+    }
 </script>

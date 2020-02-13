@@ -11,127 +11,139 @@
 </div>
 <![endif]-->
 
-<span id="editPane" class="ui_overlay ui_modal photoUploadOverlay hidden">
-   <div class="body_text" style="padding-top: 12px">
-       {{--<div class="photoUploader">--}}
-       <div class="headerBar epHeaderBar">
-              <h3 id="photoUploadHeader" class="photoUploadHeader"><span>افزودن تصویر به </span><span>{{$place->name}}</span></h3>
+{{--<div class="darkModalEditor">--}}
+    <span id="editPane" class="ui_overlay ui_modal photoUploadOverlay hidden">
+       <div class="body_text">
+           {{--<div class="photoUploader">--}}
+           <div class="headerBar epHeaderBar">
+                  <h3 id="photoUploadHeader" class="photoUploadHeader">
+                      <span>افزودن تصویر به </span>
+                      <span>{{$place->name}}</span>
+                      <span id="frameEditorHeader"></span>
+                  </h3>
            </div>
-           <div class="row">
-              <div class="col-md-12">
-                 <div style="margin: 5px 15px">قاب مربع</div>
-                 <div class="img-container img-container-photogrpher" style="position: relative">
-                    <img class="imgInEditor" id="editPhotographerPics" alt="Picture" style="width: 100%;">
-                 </div>
-              </div>
-           </div>
-           <div class="row" id="actions" style="">
-              <div class="col-md-12 docs-buttons">
-
-                <div class="editBtnsGroup">
-                    <div class="editBtns">
-                       <div class="flipHorizontal" data-toggle="tooltip" data-placement="top" title="Flip Horizontal" onclick="cropper.scaleY(-1)"></div>
-                    </div>
-                    {{--<button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="scaleX" data-option="-1" title="Flip Horizontal">--}}
-                    {{--<span class="docs-tooltip" data-toggle="tooltip" title="cropper.scaleX(-1)">--}}
-                    {{--<span class="fa fa-arrows-h"></span>--}}
-                    {{--</span>--}}
-                    {{--</button>--}}
-
-                    <div class="editBtns">
-                       <div class="flipVertical" data-toggle="tooltip" data-placement="top" title="Flip Vertical" onclick="cropper.scaleX(-1)"></div>
-                    </div>
-                    {{--<button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="scaleY" data-option="-1" title="Flip Vertical">--}}
-                    {{--<span class="docs-tooltip" data-toggle="tooltip" title="cropper.scaleY(-1)">--}}
-                    {{--<span class="fa fa-arrows-v"></span>--}}
-                    {{--</span>--}}
-                    {{--</button>--}}
-                </div>
-
-                <div class="editBtnsGroup">
-                    <div class="editBtns">
-                       <div class="rotateLeft" data-toggle="tooltip" data-placement="top" title="چرخش 45 درجه ای به سمت چپ" onclick="cropper.rotate(-45)"></div>
-                    </div>
-                    {{--<button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="rotate" data-option="-45" title="Rotate Left">--}}
-                    {{--<span class="docs-tooltip" data-toggle="tooltip" title="cropper.rotate(-45)">--}}
-                    {{--<span class="fa fa-rotate-left"></span>--}}
-                    {{--</span>--}}
-                    {{--</button>--}}
-
-                    <div class="editBtns">
-                       <div class="rotateRight" data-toggle="tooltip" data-placement="top" title="چرخش 45 درجه ای به سمت راست" onclick="cropper.rotate(45)"></div>
-                    </div>
-                    {{--<button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="rotate" data-option="45" title="Rotate Right">--}}
-                    {{--<span class="docs-tooltip" data-toggle="tooltip" title="cropper.rotate(45)">--}}
-                    {{--<span class="fa fa-rotate-right"></span>--}}
-                    {{--</span>--}}
-                    {{--</button>--}}
-                </div>
-
-                <div class="editBtnsGroup">
-                    <div class="editBtns">
-                       <div class="cropping" data-toggle="tooltip" data-placement="top" title="برش" onclick="cropper.crop()"></div>
-                    </div>
-                    {{--<button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="crop" title="Crop">--}}
-                    {{--<span class="docs-tooltip" data-toggle="tooltip" title="cropper.crop()">--}}
-                    {{--<span class="fa fa-check"></span>--}}
-                    {{--</span>--}}
-                    {{--</button>--}}
-
-                    <div class="editBtns">
-                       <div class="clearing" data-toggle="tooltip" data-placement="top" title="بازگشت به اول" onclick="cropper.clear()"></div>
-                    </div>
-                    {{--<button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="clear" title="Clear">--}}
-                    {{--<span class="docs-tooltip" data-toggle="tooltip" title="cropper.clear()">--}}
-                    {{--<span class="fa fa-remove"></span>--}}
-                    {{--</span>--}}
-                    {{--</button>--}}
-                </div>
-
-                <div class="upload">
-                    <div onclick="cropImg()" class="uploadBtn ui_button primary">تایید</div>
-                </div>
-              {{--<div class="btn-group btn-group-crop">--}}
-              {{--<button id="saveBtn" type="button" onclick="successBtnClicked(this)" class="btn btn-success" data-method="getCroppedCanvas" data-option="{ &quot;width&quot;: 466, &quot;height&quot;: 367 }">--}}
-              {{--<span class="docs-tooltip" data-toggle="tooltip" id="saveBtnSpan" title="cropper.getCroppedCanvas({ width: 466, height: 367 })">--}}
-              {{--ذخیره--}}
-              {{--</span>--}}
-              {{--</button>--}}
-
-              {{--<button id="saveBtn2" type="button" onclick="successBtnClicked(this)" class="btn btn-success hidden" data-method="getCroppedCanvas" data-option="{ &quot;width&quot;: 100, &quot;height&quot;: 100 }">--}}
-              {{--<span class="docs-tooltip" data-toggle="tooltip" id="saveBtnSpan" title="cropper.getCroppedCanvas({ width: 100, height: 100 })">--}}
-              {{--ذخیره--}}
-              {{--</span>--}}
-              {{--</button>--}}
-              {{--</div>--}}
-
-              <!-- Show the cropped image in modal -->
-                  <div class="modal fade docs-cropped" id="getCroppedCanvasModal" role="dialog" aria-hidden="true" aria-labelledby="getCroppedCanvasTitle" tabindex="-1">
-                   <div class="modal-dialog modal-dialog-scrollable">
-                      <div class="modal-content">
-                         <div class="modal-header">
-                            <h5 class="modal-title" id="getCroppedCanvasTitle">Cropped</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                               <span aria-hidden="true">&times;</span>
-                            </button>
-                         </div>
-                         <div class="modal-body"></div>
-                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <a class="btn btn-primary" id="download" href="javascript:void(0);" download="cropped.jpg">Download</a>
+           <div class="bodyEditFrame">
+                   <div class="row">
+                      <div class="col-md-12">
+                         <div class="img-container img-container-photogrpher" style="position: relative">
+                            <img class="imgInEditor" id="editPhotographerPics" alt="Picture" style="width: 100%;">
                          </div>
                       </div>
                    </div>
-                </div><!-- /.modal -->
+                   <div class="row" id="actions" style="">
+                        <div class="col-md-12 docs-buttons">
 
-             </div><!-- /.docs-buttons -->
+                            <div class="editBtnsGroup">
+                            <div class="editBtns">
+                               <div class="flipHorizontal" data-toggle="tooltip" data-placement="top" title="Flip Horizontal" onclick="cropper.scaleY(-1)"></div>
+                            </div>
+                            {{--<button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="scaleX" data-option="-1" title="Flip Horizontal">--}}
+                            {{--<span class="docs-tooltip" data-toggle="tooltip" title="cropper.scaleX(-1)">--}}
+                            {{--<span class="fa fa-arrows-h"></span>--}}
+                            {{--</span>--}}
+                            {{--</button>--}}
+
+                            <div class="editBtns">
+                               <div class="flipVertical" data-toggle="tooltip" data-placement="top" title="Flip Vertical" onclick="cropper.scaleX(-1)"></div>
+                            </div>
+                            {{--<button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="scaleY" data-option="-1" title="Flip Vertical">--}}
+                            {{--<span class="docs-tooltip" data-toggle="tooltip" title="cropper.scaleY(-1)">--}}
+                            {{--<span class="fa fa-arrows-v"></span>--}}
+                            {{--</span>--}}
+                            {{--</button>--}}
+                            </div>
+
+                            <div class="editBtnsGroup">
+                            <div class="editBtns">
+                               <div class="rotateLeft" data-toggle="tooltip" data-placement="top" title="چرخش 45 درجه ای به سمت چپ" onclick="cropper.rotate(-45)"></div>
+                            </div>
+                            {{--<button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="rotate" data-option="-45" title="Rotate Left">--}}
+                            {{--<span class="docs-tooltip" data-toggle="tooltip" title="cropper.rotate(-45)">--}}
+                            {{--<span class="fa fa-rotate-left"></span>--}}
+                            {{--</span>--}}
+                            {{--</button>--}}
+
+                            <div class="editBtns">
+                               <div class="rotateRight" data-toggle="tooltip" data-placement="top" title="چرخش 45 درجه ای به سمت راست" onclick="cropper.rotate(45)"></div>
+                            </div>
+                            {{--<button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="rotate" data-option="45" title="Rotate Right">--}}
+                            {{--<span class="docs-tooltip" data-toggle="tooltip" title="cropper.rotate(45)">--}}
+                            {{--<span class="fa fa-rotate-right"></span>--}}
+                            {{--</span>--}}
+                            {{--</button>--}}
+                            </div>
+
+                            <div class="editBtnsGroup">
+                            <div class="editBtns">
+                               <div class="cropping" data-toggle="tooltip" data-placement="top" title="برش" onclick="cropper.crop()"></div>
+                            </div>
+                            {{--<button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="crop" title="Crop">--}}
+                            {{--<span class="docs-tooltip" data-toggle="tooltip" title="cropper.crop()">--}}
+                            {{--<span class="fa fa-check"></span>--}}
+                            {{--</span>--}}
+                            {{--</button>--}}
+
+                            <div class="editBtns">
+                               <div class="clearing" data-toggle="tooltip" data-placement="top" title="بازگشت به اول" onclick="cropper.clear()"></div>
+                            </div>
+                            {{--<button type="button" onclick="primaryBtnClicked(this)" class="btn btn-primary" data-method="clear" title="Clear">--}}
+                            {{--<span class="docs-tooltip" data-toggle="tooltip" title="cropper.clear()">--}}
+                            {{--<span class="fa fa-remove"></span>--}}
+                            {{--</span>--}}
+                            {{--</button>--}}
+                            </div>
+
+                            <div class="btnActionEditFrame">
+                                <div class="upload">
+                                    <div onclick="cropImg()" class="uploadBtn ui_button primary">تایید</div>
+                                </div>
+
+                                <div class="return">
+                                    <div class="returnBtnEditPhoto">بازگشت</div>
+                                </div>
+                            </div>
+                      {{--<div class="btn-group btn-group-crop">--}}
+                      {{--<button id="saveBtn" type="button" onclick="successBtnClicked(this)" class="btn btn-success" data-method="getCroppedCanvas" data-option="{ &quot;width&quot;: 466, &quot;height&quot;: 367 }">--}}
+                      {{--<span class="docs-tooltip" data-toggle="tooltip" id="saveBtnSpan" title="cropper.getCroppedCanvas({ width: 466, height: 367 })">--}}
+                      {{--ذخیره--}}
+                      {{--</span>--}}
+                      {{--</button>--}}
+
+                      {{--<button id="saveBtn2" type="button" onclick="successBtnClicked(this)" class="btn btn-success hidden" data-method="getCroppedCanvas" data-option="{ &quot;width&quot;: 100, &quot;height&quot;: 100 }">--}}
+                      {{--<span class="docs-tooltip" data-toggle="tooltip" id="saveBtnSpan" title="cropper.getCroppedCanvas({ width: 100, height: 100 })">--}}
+                      {{--ذخیره--}}
+                      {{--</span>--}}
+                      {{--</button>--}}
+                      {{--</div>--}}
+
+                      <!-- Show the cropped image in modal -->
+                          <div class="modal fade docs-cropped" id="getCroppedCanvasModal" role="dialog" aria-hidden="true" aria-labelledby="getCroppedCanvasTitle" tabindex="-1">
+                           <div class="modal-dialog modal-dialog-scrollable">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h5 class="modal-title" id="getCroppedCanvasTitle">Cropped</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                       <span aria-hidden="true">&times;</span>
+                                    </button>
+                                 </div>
+                                 <div class="modal-body"></div>
+                                 <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <a class="btn btn-primary" id="download" href="javascript:void(0);" download="cropped.jpg">Download</a>
+                                 </div>
+                              </div>
+                           </div>
+                        </div><!-- /.modal -->
+
+                     </div><!-- /.docs-buttons -->
+                   </div>
            </div>
-       {{--</div>--}}
-   </div>
-    <div class="ui_close_x" onclick="$('#editPane').addClass('hidden'); $('.dark').addClass('hidden')"></div>
-</span>
+           {{--</div>--}}
+       </div>
+        <div class="ui_close_x" onclick="$('#editPane').addClass('hidden'); $('.dark').addClass('hidden')"></div>
+    </span>
 
-<span id="photoEditor" class="ui_overlay ui_modal photoUploadOverlay hidden">
+    <span id="photoEditor" class="ui_overlay ui_modal photoUploadOverlay hidden">
      <div class="body_text">
          <div class="photoUploader">
              <div class="headerBar">
@@ -167,42 +179,65 @@
                          </div>
 
                      </div>
-                     <div class="footer">
-                         <div class="termsLabel">
-                             <div>
-                                 <div>
-                                     <div>توجه نمایید که عکس‌ما می‌بایست در فرمتهای رایج تصویر و با حداکثر سایز 500 مگابایت باشد. تصاویر پیش از انتشار توسط ما بازبینی می‌گردد. لطفاً از بارگزاری تصاویری که با قوانین سایت مغایرت دارند اجتناب کنید.</div>
-                                     <div id="photoUploadTipsLink" class="headerLink tipsLink">
-                                         <span onclick="$('#guidelinesOverlay').removeClass('hidden')">صفحه مقررات</span>
-                                         <span id="guidelinesOverlay" class="hidden ui_overlay ui_popover arrow_top guidelinesOverlayParent ui_tooltip">
-                                             <div class="header_text"></div>
-                                             <div class="body_text">
-                                                 <div class="guidelinesOverlay">
-                                                     <div class="listHdr">All photos must be...</div>
-                                                     <ul class="listBody">
-                                                         <li>Family-friendly</li>
-                                                         <li>Original, non-copyrighted images</li>
-                                                         <li>Non-commercial</li>
-                                                         <li>Virus-free</li>
-                                                         <li>In
-                                                            <b>.gif</b>,
-                                                            <b>.jpg</b>, or
-                                                            <b>.png</b> format</li>
-                                                         <li>No more than 50 photos per upload</li>
-                                                     </ul>
-                                                     <div class="listFtr">Read our complete <a href="https://www.tripadvisorsupport.com/hc/en-us/articles/200615067-Photo-Guidelines" target="_blank" class="js_popFraud">photo submission guidelines</a>.</div>
-                                                 </div>
-                                             </div>
-                                             <div class="ui_close_x" onclick="$('#guidelinesOverlay').addClass('hidden')"></div>
-                                         </span>
-                                     </div>
-                                 </div>
-                             </div>
-                         </div>
-                     </div>
+{{--                     <div class="footer">--}}
+{{--                         <div class="termsLabel">--}}
+{{--                             <div>--}}
+{{--                                 <div>--}}
+{{--                                     <div>توجه نمایید که عکس‌ما می‌بایست در فرمتهای رایج تصویر و با حداکثر سایز 500 مگابایت باشد. تصاویر پیش از انتشار توسط ما بازبینی می‌گردد. لطفاً از بارگزاری تصاویری که با قوانین سایت مغایرت دارند اجتناب کنید.</div>--}}
+{{--                                     <div id="photoUploadTipsLink" class="headerLink tipsLink">--}}
+{{--                                         <span onclick="$('#guidelinesOverlay').removeClass('hidden')">صفحه مقررات</span>--}}
+{{--                                         <span id="guidelinesOverlay" class="hidden ui_overlay ui_popover arrow_top guidelinesOverlayParent ui_tooltip">--}}
+{{--                                             <div class="header_text"></div>--}}
+{{--                                             <div class="body_text">--}}
+{{--                                                 <div class="guidelinesOverlay">--}}
+{{--                                                     <div class="listHdr">All photos must be...</div>--}}
+{{--                                                     <ul class="listBody">--}}
+{{--                                                         <li>Family-friendly</li>--}}
+{{--                                                         <li>Original, non-copyrighted images</li>--}}
+{{--                                                         <li>Non-commercial</li>--}}
+{{--                                                         <li>Virus-free</li>--}}
+{{--                                                         <li>In--}}
+{{--                                                            <b>.gif</b>,--}}
+{{--                                                            <b>.jpg</b>, or--}}
+{{--                                                            <b>.png</b> format</li>--}}
+{{--                                                         <li>No more than 50 photos per upload</li>--}}
+{{--                                                     </ul>--}}
+{{--                                                     <div class="listFtr">Read our complete <a href="https://www.tripadvisorsupport.com/hc/en-us/articles/200615067-Photo-Guidelines" target="_blank" class="js_popFraud">photo submission guidelines</a>.</div>--}}
+{{--                                                 </div>--}}
+{{--                                             </div>--}}
+{{--                                             <div class="ui_close_x" onclick="$('#guidelinesOverlay').addClass('hidden')"></div>--}}
+{{--                                         </span>--}}
+{{--                                     </div>--}}
+{{--                                 </div>--}}
+{{--                             </div>--}}
+{{--                         </div>--}}
+{{--                     </div>--}}
                  </div>
                  <div class="template itemRow loading">
                      <div class="row">
+                         <div class="col-xs-7">
+                             <div>
+                                 <div class="epPicBox">
+                                     <div class="epPic">
+                                         <div class="imgContainer">
+                                             <img id="rectanglePicPhotographer">
+                                         </div>
+                                     </div>
+                                     <div class="step6picText">قاب مستطیل</div>
+                                     <div class="epEditPicText" onclick="doEdit(213 / 168, 'rectanglePicPhotographer');" style="cursor: pointer;">ویرایش</div>
+                                 </div>
+                                 <div class="epPicBox">
+                                     <div class="epPic">
+                                         <div class="imgContainer">
+                                             <img id="squarePicPhotographer">
+                                         </div>
+                                     </div>
+                                     <div class="epPicText">قاب مربع</div>
+                                     <div class="epEditPicText" onclick="doEdit(1, 'squarePicPhotographer');" style="cursor: pointer;">ویرایش</div>
+                                 </div>
+                             </div>
+                             <div style="">عکس های ما در دو نوع قاب مختلف نمایش داده می شودمی توانید خود نسبت به برش نمایش مناسب عکس در داخل قاب اقدام نمایید در غیر اینصورت تصویر به صورت اتوماتیک برش می خورد</div>
+                         </div>
                          <div class="col-xs-5">
                             <div id="photographerPicNameDiv" class="epInputBox">
                                 <div class="epInputBoxText">
@@ -223,13 +258,8 @@
                                <textarea class="epAddresText" placeholder="توضیحات همراه با عکس برای دوستانتان نمایش داده می شود.           حداقل 100 کاراکتر" maxlength="100" id="photographerPicDescription"></textarea>
                             </div>
 
-                             <div>
-                                 <button onclick="newPhotographerPic()">
-                                     تغییر عکس
-                                 </button>
-                             </div>
-
                              <div id="photographerErrors" style="color: red;"></div>
+
 
                              {{--<form class="photoForm roomType">--}}
                              {{--<div class="field category">--}}
@@ -242,37 +272,21 @@
                              {{--</div>--}}
                              {{--</form>--}}
                          </div>
-                         <div class="col-xs-7">
-                             <div class="epPicBox">
-                                 <div class="epPic">
-                                     <div class="imgContainer">
-                                         <img id="rectanglePicPhotographer">
-                                     </div>
-                                 </div>
-                                 <div class="step6picText">قاب مستطیل</div>
-                                 <div class="epEditPicText" onclick="doEdit(213 / 168, 'rectanglePicPhotographer')" style="cursor: pointer;">ویرایش</div>
-                             </div>
-                             <div class="epPicBox">
-                                 <div class="epPic">
-                                     <div class="imgContainer">
-                                         <img id="squarePicPhotographer">
-                                     </div>
-                                 </div>
-                                 <div class="epPicText">قاب مربع</div>
-                                 <div class="epEditPicText" onclick="doEdit(1, 'squarePicPhotographer')" style="cursor: pointer;">ویرایش</div>
-                             </div>
-                             <div style="">عکس های ما در دو نوع قاب مختلف نمایش داده می شودمی توانید خود نسبت به برش نمایش مناسب عکس در داخل قاب اقدام نمایید در غیر اینصورت تصویر به صورت اتوماتیک برش می خورد</div>
-                         </div>
-                         <div class="col-xs-12 footer">
-                             <div class="termsLabel" style="width: 92%; display: inline-block;">
+                         <div class="col-xs-12 footer secondStepFooter">
+                             <div class="imageVerificationBtn">
+                                     <button onclick="newPhotographerPic()">
+                                         تغییر عکس
+                                     </button>
+                            </div>
+                             <div class="termsLabel">
                                  <div>
-                                     <div style="float: right">
+                                     <div class="secondStepPolicyCheckBox">
                                          <input id="photographerRole" type="checkbox">
                                          <label for="photographerRole">
                                              <span></span>
                                          </label>
                                      </div>
-                                     <div style="width: 97%; display: inline-block; padding: 0px 5px; text-align: justify; font-size: 0.875em;">
+                                     <div class="secondStepPolicyText">
                                          تایید میکنم تمامی حقوق مرتبط با انتشار این تصویر متعلق به من می باشد. تایید می نمایم در صورت حضور چهره دیگران در تصویر، آن ها نیز از انتشار این عکس راضی می باشند.
                                          <div id="photoUploadTipsLink" class="headerLink tipsLink" style="display: inline-block">
                                              <span onclick="$('#guidelinesOverlay').removeClass('hidden')">صفحه مقررات</span>
@@ -301,7 +315,7 @@
                                      </div>
                                  </div>
                              </div>
-                             <div class="upload">
+                             <div class="upload secondFooterVerification">
                                  {{--<div onclick="uploadIMG()" class="uploadBtn ui_button primary">تایید</div>--}}
                                  <div onclick="resizeImg()" class="uploadBtn ui_button primary">تایید</div>
                              </div>
@@ -372,6 +386,7 @@
 
      <div class="ui_close_x" onclick="$('#photoEditor').addClass('hidden'); $('.dark').addClass('hidden')"></div>
 </span>
+{{--</div>--}}
 
 {{--<script src="{{URL::asset('js/editorCommon.js')}}"></script>--}}
 <script src="{{URL::asset('js/cropper.js')}}"></script>
@@ -388,6 +403,13 @@
     var userId = '{{auth()->user()->id}}';
     var kindPlaceId = '{{$kindPlaceId}}';
     var placeId = '{{$place->id}}';
+    var lImage;
+    var tImage;
+    var sImage;
+    var fImage;
+    var mainImage;
+    var mainFileName = null;
+
 
     dropzone.on('dragover', function() {
         dropzone.addClass('hover');
@@ -456,7 +478,8 @@
             crop1Clicked = true;
             $("#saveBtn").removeClass('hidden');
             $("#saveBtn2").addClass('hidden');
-            console.log('inn1')
+            console.log('inn1');
+            $('#frameEditorHeader').text('(قاب مستطیل)')
         }
         else {
             $('#editPhotographerPics').attr('src', mainPic);
@@ -464,7 +487,8 @@
             crop2Clicked = true;
             $("#saveBtn").addClass('hidden');
             $("#saveBtn2").removeClass('hidden');
-            console.log('inn2')
+            console.log('inn2');
+            $('#frameEditorHeader').text('(قاب مربع)')
         }
         startCropper(ratio);
         $('#photoEditor').addClass('hidden');
@@ -506,6 +530,7 @@
     }
 
     function resizeImg(){
+        $("#fullPageLoader").css('display', 'flex');
         var name = document.getElementById('photographerPicName').value;
         var alt = document.getElementById('photographerPicAlt').value;
         var description = document.getElementById('photographerPicDescription').value;
@@ -538,10 +563,11 @@
                     });
 
                     canvasl.toBlob(function (blob) {
-                        photographerPicFormData.append('l-1', blob, 'l-1.jpg');
-
+                        // photographerPicFormData.append('l-1', blob, 'l-1.jpg');
+                        lImage = blob;
                         canvast.toBlob(function (blob) {
-                            photographerPicFormData.append('t-1', blob, 't-1.jpg');
+                            tImage = blob;
+                            // photographerPicFormData.append('t-1', blob, 't-1.jpg');
                             cropperSqu.destroy();
                             cropperSqu = null;
 
@@ -560,18 +586,24 @@
                                     });
 
                                     canvasf.toBlob(function (blob) {
-                                        photographerPicFormData.append('f-1', blob, 'f-1.jpg');
+                                        fImage = blob;
+                                        // photographerPicFormData.append('f-1', blob, 'f-1.jpg');
 
                                         canvass.toBlob(function (blob) {
-                                            photographerPicFormData.append('s-1', blob, 's-1.jpg');
+                                            sImage = blob;
+                                            // photographerPicFormData.append('s-1', blob, 's-1.jpg');
 
                                             var input = document.getElementById('photographerInputPic');
-                                            photographerPicFormData.append('mainPic', input.files[0]);
+                                            mainImage = input.files[0];
+                                            // photographerPicFormData.append('mainPic', input.files[0]);
 
                                             cropperReq.destroy();
                                             cropperReq = null;
 
-                                            submitUpload();
+                                            photographerPicFormData.append('pic', '');
+                                            photographerPicFormData.append('fileName', '');
+                                            photographerPicFormData.append('fileKind', '');
+                                            submitUpload('mainFile');
                                         });
                                     });
                                 }
@@ -604,7 +636,31 @@
         }
     }
 
-    function submitUpload(){
+    var repeatTime = 3;
+    function submitUpload(type){
+        var im;
+        switch (type){
+            case 'mainFile':
+                im = mainImage;
+                break;
+            case 'l':
+                im = lImage;
+                break;
+            case 's':
+                im = sImage;
+                break;
+            case 't':
+                im = tImage;
+                break;
+            case 'f':
+                im = fImage;
+                break;
+        }
+
+        photographerPicFormData.set('pic', im);
+        photographerPicFormData.set('fileName', mainFileName);
+        photographerPicFormData.set('fileKind', type);
+
         $.ajax({
             type : 'post',
             url : '{{route('addPhotoToPlace')}}',
@@ -612,13 +668,56 @@
             processData: false,
             contentType: false,
             success: function (response) {
-                if(response == 'ok')
-                    window.location.reload();
+                response = JSON.parse(response);
+                if(response[0] == 'ok'){
+                    mainFileName = response[1];
+                    switch (type){
+                        case 'mainFile':
+                            submitUpload('l');
+                            break;
+                        case 'l':
+                            submitUpload('s');
+                            break;
+                        case 's':
+                            submitUpload('f');
+                            break;
+                        case 'f':
+                            submitUpload('t');
+                            break;
+                        case 't':
+                            window.location.reload();
+                            break;
+                    }
+                }
+                else if(response[0] == 'nok1'){
+                    if(repeatTime != 0){
+                        $("#fullPageLoader").css('display', 'none');
+                        alert('در بارگزاری عکس مشکلی پیش امده لطفا دوباره تلاش کنید.')
+                    }
+                    else{
+                        repeatTime--;
+                        resizeImg();
+                    }
+                }
+                else if(response[0] == 'nok2'){
+                    $("#fullPageLoader").css('display', 'none');
+                    alert('فرمت عکس باید jpg و یا png باشد')
+                }
+                else if(response[0] == 'sizeError'){
+                    $("#fullPageLoader").css('display', 'none');
+                    alert('حجم عکس باید از 2 مگابایت کمتر باشد.')
+                }
+                else
+                    console.log(response)
+            },
+            error: function(err){
+                console.log(err)
             }
         })
     }
 
     function newPhotographerPic(){
+        $('#photographerInputPic').val('');
         $(".itemRow").css('display', 'none');
         $(".startScreen").removeClass('hidden');
         $(".action").css('display', 'none');
