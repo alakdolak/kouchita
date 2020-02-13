@@ -314,15 +314,19 @@
                                                  class="lhrFilterBlock jfy_filter_bar_establishmentTypeFilters collapsible">
                                                 <div id="filterBox" style="flex-direction: column;">
                                                     <div style="font-size: 15px; margin: 10px 0px;">
-                                                        <span>
-                                                            فیلترهای اعمال شده
+                                                        <span>فیلترهای اعمال شده</span>
+                                                        <span style="float: left">
+                                                            <span>----</span><span style="margin: 0 5px">مورد از</span><span>----</span>
                                                         </span>
                                                     </div>
                                                     <div style="cursor: pointer; font-size: 12px; color: #050c93;" onclick="closeFilters()">
                                                         پاک کردن فیلتر ها
                                                     </div>
                                                     <div id="filterShow" style="display: flex; flex-direction: row; flex-wrap: wrap;">
-                                                        <div id="closeMoneyFilter" class="closeXicon" style="padding: 2%; margin: 2%; background-color: #4dc7bc; color: white; flex-direction: row; justify-content: center; align-items: center;width: 40px" onclick="cancelMoneyFilter()"> قیمت</div>
+                                                        <div>
+                                                            <div id="closeMoneyFilter" class="closeXicon filtersExist">غذای فرنگی</div>
+                                                            <div onclick="cancelFeatureFilter(3)" class="ui_close_x"></div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -781,7 +785,10 @@
         var text = '';
         $('#filterShow').html('');
         if(rateFilter != 0)
-            text += '<div id="closeMoneyFilter" class="closeXicon filtersExist" onclick="cancelRateFilter()"> امتیاز کاربر</div>\n';
+            text += '<div>\n' +
+                    '<div id="closeMoneyFilter" class="closeXicon filtersExist">امتیاز کاربر</div>\n' +
+                    '<div onclick="cancelRateFilter()" class="icons s"></div>\n' +
+                    '</div>';
 
         if(nameFilter.trim().length > 2)
             text += '<div id="closeMoneyFilter" class="closeXicon filtersExist" onclick="cancelNameFilter()"> نام</div>\n';

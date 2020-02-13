@@ -215,10 +215,11 @@
     <div class="container">
 
         <!-- The Modals -->
-{{--        isset($isArticle) && $isArticle == 1--}}
+{{--        --}}
 
         <div class="modal fade" id="profilePossibilities">
-            @if(true)
+{{--            @if(true)--}}
+            @if(isset($isArticle) && $isArticle == 1)
                 <div class="mainPopUp leftPopUp" style="padding: 7px">
                     <div class="lp_ar_searchTitle">جستجو خود را محدودتر کنید</div>
 
