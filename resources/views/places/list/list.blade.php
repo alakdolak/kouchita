@@ -6,7 +6,7 @@
     <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/eatery_overview.css?v=2')}}'/>
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/long_lived_global_legacy_2.css?v=2')}}"/>
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/hotelLists.css')}}"/>
-
+    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/mainPageStyles.css')}}'/>
 
     <title>
         {{$kindPlace->name}}
@@ -197,9 +197,10 @@
                                                                     حروف الفبا
                                                                 </div>
                                                             </div>
-                                                            <div class="ordering" onclick="showLowDistancePopUp()" >
-                                                                <div class="orders" style="width: 140% !important;"
-                                                                     onclick="selectingOrder($(this),'leastDist')">کمترین فاصله تا
+                                                            {{--onclick="showLowDistancePopUp()"--}}
+                                                            <div class="ordering"  >
+                                                                <div id="distanceNav" class="orders" style="width: 140% !important;"
+                                                                     onclick="openGlobalSearch()">کمترین فاصله تا
                                                                     <span id="selectDistance">__ __ __</span></div>
                                                                 <div class="shTIcon bottomArrowIcon"></div>
                                                                 <div id="lowDistance" class="lowDistance hidden"
@@ -207,7 +208,7 @@
                                                                     <input id="inputDistancePlace" class="inputDistance"
                                                                            type="text"
                                                                            placeholder="مکان مورد نظر را وارد کنید"
-                                                                           oninput="openGlobalSearch()" readonly>
+                                                                           onclick="openGlobalSearch()" readonly>
                                                                     <div class="textDistance"> توجه کنید این مکان می
                                                                         بایست در محدوده مقصد باشد.
                                                                     </div>
@@ -223,19 +224,61 @@
                                                         </script>
                                                         <div  class="option">
                                                             <div class="row" ng-repeat="packet in packets" style="display: flex; flex-wrap: wrap">
-                                                                <div class="elements" ng-repeat="place in packet.places">
-                                                                    <a href="[[place.redirect]]">
-                                                                        <div>
-                                                                            <img src="[[place.pic]]" alt="[[place.keyword]]" style="width: 100%;">
+                                                                <div ng-repeat="place in packet.places" class="ui_column is-3 is-mobile">
+
+                                                                    <div class="poi listBoxesMainDivs">
+                                                                        <a href="[[place.redirect]]" class="thumbnail">
+                                                                            <div class="prw_rup prw_common_centered_thumbnail">
+                                                                                <div class="sizing_wrapper">
+                                                                                    <div class="centering_wrapper">
+                                                                                        <img ng-src='[[place.pic]]'
+                                                                                             width="100%" height="100%"
+                                                                                             class='photo_image'
+                                                                                             alt='[[place.name]]'>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </a>
+
+                                                                        @if(auth()->check())
+                                                                            <div class="prw_rup prw_meta_saves_badge">
+                                                                                <div class="savesButton">
+                                                                                    <span class="saves-widget-button saves secondary save-location-5247712 ui_icon heart saves-icon-locator" onclick="saveToTripList(this)" value="[[place.id]]"></span>
+                                                                                </div>
+                                                                            </div>
+                                                                        @endif
+
+                                                                        <div class="detail">
+
+                                                                        <div class="item name "
+                                                                             title="[[place.name]]">
+                                                                            <a class="poiTitle" target="_blank"
+                                                                               href="[[place.redirect]]">
+                                                                                [[place.name]]
+                                                                            </a>
                                                                         </div>
-                                                                        <div>
-                                                                            [[place.name]]
+
+                                                                        <div class="item rating-count">
+                                                                            <div class="rating-widget">
+                                                                                <div class="prw_rup prw_common_location_rating_simple">
+                                                                                    <span class="[[place.ngClass]]"></span>
+                                                                                </div>
+                                                                            </div>
+                                                                            <a target="_blank" class="review_count" href="">
+                                                                                [[place.avgRate]]
+                                                                                <span>نقد</span>
+                                                                            </a>
                                                                         </div>
-                                                                        <div>
-                                                                            <span class="[[place.ngClass]]"></span>
-                                                                            [[place.avgRate]]
+                                                                        <div class="item">استان:
+                                                                            <span>[[place.state]]</span>
                                                                         </div>
-                                                                    </a>
+                                                                        <div class="item">شهر:
+                                                                            <span>[[place.city]]</span>
+                                                                        </div>
+                                                                        <div class="booking"></div>
+                                                                    </div>
+                                                                    </div>
+
                                                                 </div>
                                                             </div>
 
@@ -428,6 +471,10 @@
         <input type="hidden" name="mode" value="{{$mode}}">
     </form>
 
+    @include('hotelDetailsPopUp')
+
+    @include('general.globalInput')
+
     @include('layouts.placeFooter')
 </div>
 
@@ -456,6 +503,10 @@
     var take = 4;
     var inSearch = false;
     var isFinish = false;
+    var nearPlaceIdFilter = 0;
+    var nearKindPlaceIdFilter = 0;
+    var kindPlaceId = '{{$kindPlace->id}}';
+    var hasLogin = '{{auth()->check() ? 1 : 0}}';
 
     if(placeMode == 'hotel'){
         specialFilters = [1];
@@ -463,6 +514,7 @@
 
     function selectingOrder(elem, type) {
         $(".orders").removeClass('selectOrder');
+        $("#distanceNav").text('selectOrder');
         elem.addClass('selectOrder');
 
         sort = type;
@@ -548,6 +600,8 @@
 
         $scope.myPagingFunction = function () {
 
+            var errorNum = 3;
+
             if(isFinish || inSearch)
                 return;
 
@@ -569,6 +623,8 @@
                 nameFilter: nameFilter,
                 sort: sort,
                 featureFilter: featureFilter,
+                nearPlaceIdFilter: nearPlaceIdFilter,
+                nearKindPlaceIdFilter: nearKindPlaceIdFilter,
                 city: '{{$city->id}}',
                 mode: '{{$mode}}',
                 kindPlaceId: '{{$kindPlace->id}}'
@@ -611,6 +667,8 @@
                     nameFilter: nameFilter,
                     sort: sort,
                     featureFilter: featureFilter,
+                    nearPlaceIdFilter: nearPlaceIdFilter,
+                    nearKindPlaceIdFilter: nearKindPlaceIdFilter,
                     city: '{{$city->id}}',
                     mode: '{{$mode}}',
                     kindPlaceId: '{{$kindPlace->id}}'
@@ -642,6 +700,8 @@
                         nameFilter: nameFilter,
                         sort: sort,
                         featureFilter: featureFilter,
+                        nearPlaceIdFilter: nearPlaceIdFilter,
+                        nearKindPlaceIdFilter: nearKindPlaceIdFilter,
                         city: '{{$city->id}}',
                         mode: '{{$mode}}',
                         kindPlaceId: '{{$kindPlace->id}}'
@@ -664,20 +724,40 @@
                         inSearch = false;
 
                     }).catch(function (err) {
-                        console.log(err);
+                        if(errorNum != 0){
+                            errorNum--;
+                            $scope.myPagingFunction();
+                        }
+                        else{
+                            document.getElementById('fullPageLoader').style.display = 'none';
+                            console.log(err);
+                        }
                     });
 
                 }).catch(function (err) {
-                    console.log(err);
+                    if(errorNum != 0){
+                        errorNum--;
+                        $scope.myPagingFunction();
+                    }
+                    else{
+                        document.getElementById('fullPageLoader').style.display = 'none';
+                        console.log(err);
+                    }
                 });
 
             }).catch(function (err) {
-                console.log(err);
+                if(errorNum != 0){
+                    errorNum--;
+                    $scope.myPagingFunction();
+                }
+                else{
+                    document.getElementById('fullPageLoader').style.display = 'none';
+                    console.log(err);
+                }
             });
         };
 
         $scope.$on('finalizeReceive', function (event) {
-
             page++;
             document.getElementById('fullPageLoader').style.display = 'none';
             floor = page;
@@ -694,13 +774,7 @@
         else
             nameFilter = '';
 
-        page = 1;
-        floor = 1;
-        init = true;
-        isFinish = false;
-        inSearch = false;
-
-        angular.element(document.getElementById('PlaceController')).scope().myPagingFunction();
+        newSearch();
     }
 
     function createFilter(){
@@ -727,15 +801,8 @@
             document.getElementById('c' + i).checked = false;
 
         rateFilter = 0;
-        if(kind == 'refresh') {
-            page = 1;
-            floor = 1;
-            init = true;
-            isFinish = false;
-            inSearch = false;
-
-            angular.element(document.getElementById('PlaceController')).scope().myPagingFunction();
-        }
+        if(kind == 'refresh')
+            newSearch();
     }
 
     function cancelFeatureFilter(id, kind = 'refresh'){
@@ -753,15 +820,8 @@
             }
         }
 
-        if(kind == 'refresh') {
-            page = 1;
-            floor = 1;
-            init = true;
-            isFinish = false;
-            inSearch = false;
-
-            angular.element(document.getElementById('PlaceController')).scope().myPagingFunction();
-        }
+        if(kind == 'refresh')
+            newSearch();
     }
 
     function cancelNameFilter(){
@@ -776,11 +836,99 @@
     }
 
     function openGlobalSearch(){
-
+        createSearchInput('searchInPlaces', 'مکان مورد نظر را وارد کنید.');
     }
-</script>
 
-<script>
+    function searchInPlaces(element){
+        var value = element.value;
+        if(value.trim().length > 1){
+            $.ajax({
+                type: 'post',
+                url: "{{route('proSearch')}}",
+                data: {
+                    'key':  value,
+                    'hotelFilter': 1,
+                    'amakenFilter': 1,
+                    'restaurantFilter': 1,
+                    'majaraFilter': 1,
+                    'sogatSanaieFilter': 1,
+                    'mahaliFoodFilter': 1,
+                    'selectedCities': '{{$city->id}}',
+                    'mode': '{{$mode}}'
+                },
+                success: function (response) {
+                    $("#resultPlace").empty();
+
+                    if(response.length == 0)
+                        return;
+
+                    response = JSON.parse(response);
+
+                    newElement = "";
+                    for(i = 0; i < response.length; i++) {
+
+                        if(response[i].kindPlace == 'هتل')
+                            icon = '<div class="icons hotelIcon spIcons"></div>';
+                        else if(response[i].kindPlace == 'رستوران')
+                            icon = '<div class="icons restaurantIcon spIcons"></div>';
+                        else if(response[i].kindPlace == 'اماکن')
+                            icon = '<div class="icons touristAttractions spIcons"></div>';
+                        else if(response[i].kindPlace == 'ماجرا')
+                            icon = '<div class="icons adventure spIcons"></div>';
+                        else if(response[i].kindPlace == 'غذای محلی')
+                            icon = '<div class="icons traditionalFood spIcons"></div>';
+                        else if(response[i].kindPlace == 'صنایع سوغات')
+                            icon = '<div class="icons souvenirIcon spIcons"></div>';
+                        else
+                            icon = '<div class="icons touristAttractions spIcons"></div>';
+
+                        newElement += '<div style="padding: 5px 20px; display: flex" onclick="selectSearchInPlace(\'' + response[i]['name'] + '\', ' + response[i]["id"] + ', ' + response[i]["kindPlaceId"] + ')">' +
+                            '       <div>' +
+                            icon +
+                            '       <p class="suggest cursor-pointer font-weight-700" id="suggest_1" style="margin: 0px; display: inline-block;">' + response[i].name + '</p>' +
+                            '       <p class="suggest cursor-pointer stateName" id="suggest_1">' + response[i].cityName + ' در ' + response[i].stateName + '</p>' +
+                            '       </div>\n' +
+                            '</div>';
+                    }
+
+                    setResultToGlobalSearch(newElement);
+                }
+            });
+        }
+    }
+
+    function selectSearchInPlace(name, id, kindPlaceId){
+        nearPlaceIdFilter = id;
+        nearKindPlaceIdFilter = kindPlaceId;
+        $('#selectDistance').text(name);
+
+        closeSearchInput();
+        $(".orders").removeClass('selectOrder');
+        $("#distanceNav").addClass('selectOrder');
+        sort = 'distance';
+        newSearch();
+    }
+
+    function newSearch(){
+        page = 1;
+        floor = 1;
+        init = true;
+        isFinish = false;
+        inSearch = false;
+
+        angular.element(document.getElementById('PlaceController')).scope().myPagingFunction();
+    }
+
+    function showElement(element) {
+        $(".pop-up").addClass('hidden');
+        $("#" + element).removeClass('hidden');
+    }
+
+    function saveToTripList(element){
+        var placeId = $(element).attr('value');
+        saveToTripPopUp(placeId, kindPlaceId)
+    }
+
     function showLowDistancePopUp() {
         $('#lowDistance').removeClass('hidden');
     }
@@ -984,7 +1132,7 @@
 </script>
 
 {{--<script src="{{URL::asset('js/adv.js')}}"></script>--}}
-<div class="ui_backdrop dark" id="darkModeMainPage" ></div>
+{{--<div class="ui_backdrop dark" id="darkModeMainPage" ></div>--}}
 
 </body>
 </html>

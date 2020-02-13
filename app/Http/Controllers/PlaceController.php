@@ -3470,8 +3470,14 @@ class PlaceController extends Controller {
                 case 1:
                     $placeMode = 'amaken';
                     break;
+                case 3:
+                    $placeMode = 'restaurant';
+                    break;
                 case 4:
                     $placeMode = 'hotel';
+                    break;
+                case 6:
+                    $placeMode = 'majara';
                     break;
             }
 
@@ -3496,6 +3502,8 @@ class PlaceController extends Controller {
         $rateFilter = $request->rateFilter;
         $specialFilters = $request->specialFilters;
         $nameFilter = $request->nameFilter;
+        $nearPlaceIdFilter = $request->nearPlaceIdFilter;
+        $nearKindPlaceIdFilter = $request->nearKindPlaceIdFilter;
         $featureFilters = array();
         $placeIds = array();
         $places = array();
@@ -3583,7 +3591,18 @@ class PlaceController extends Controller {
 
         // and sort results by kind
         if($sort == 'alphabet')
-            $places = DB::table($table)->whereIn('id', $placeIds)->orderBy('name')->skip(($page - 1) * $take)->take($take)->get();
+            $places = DB::table($table)->whereIn('id', $placeIds)->select(['id', 'C', 'D', 'name', 'file'])->orderBy('name')->skip(($page - 1) * $take)->take($take)->get();
+        else if($sort == 'distance' && $nearPlaceIdFilter != 0 && $nearKindPlaceIdFilter != 0){
+            $nearKind = Place::find($nearKindPlaceIdFilter);
+            $nearPlace = DB::table($nearKind->tableName)->find($nearPlaceIdFilter);
+            $C1 = (float)$nearPlace->C;
+            $D1 = (float)$nearPlace->D;
+
+            $D = $D1 * 3.14 / 180;
+            $C = $C1 * 3.14 / 180;
+
+            $places = \DB::select('SELECT *, acos(' . sin($D) . ' * sin(D / 180 * 3.14) + ' . cos($D) . ' * cos(D / 180 * 3.14) * cos(C / 180 * 3.14 - ' . ($C) . ')) * 6371 as distance FROM ' . $table . ' WHERE id IN (' . implode(",", $placeIds) . ') ORDER BY distance LIMIT ' . $take . ' OFFSET ' . ($page-1) * $take);
+        }
         else{
             if($sort == 'review')
                 $p = DB::select('SELECT log.placeId as placeId, COUNT(log.id) as `count` FROM log WHERE log.kindPlaceId = ' . $kindPlace->id . ' AND log.placeId IN (' . implode(",", $placeIds) . ') AND (log.activityId = '. $activityId . ' OR log.activityId = ' . $ansActivityId . ' OR log.activityId = ' . $quesActivityId . ') GROUP BY log.placeId ORDER BY `count` DESC');

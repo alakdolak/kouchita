@@ -320,19 +320,35 @@ class AjaxController extends Controller {
             $cityConstraint = "";
             $allow = true;
             $key = $_POST["key"];
+            if(isset($request->mode) && $request->mode == 'state'){
+                $state = State::find($request->selectedCities);
+                if($state != null){
+                    $cities = Cities::where('stateId', $state->id)->get();
+                    foreach ($cities as $city){
+                        if ($city != null) {
+                            if ($allow) {
+                                $allow = false;
+                                $cityConstraint .= $city->id;
+                            } else
+                                $cityConstraint .= "," . $city->id;
+                        }
+                    }
+                }
+            }
+            else {
+                if ($cities != -1) {
+                    foreach ($cities as $city) {
 
-            if($cities != -1) {
-                foreach ($cities as $city) {
+                        $city = makeValidInput($city);
+                        $city = Cities::whereName($city)->first();
 
-                    $city = makeValidInput($city);
-                    $city = Cities::whereName($city)->first();
-
-                    if ($city != null) {
-                        if ($allow) {
-                            $allow = false;
-                            $cityConstraint .= $city->id;
-                        } else
-                            $cityConstraint .= "," . $city->id;
+                        if ($city != null) {
+                            if ($allow) {
+                                $allow = false;
+                                $cityConstraint .= $city->id;
+                            } else
+                                $cityConstraint .= "," . $city->id;
+                        }
                     }
                 }
             }
