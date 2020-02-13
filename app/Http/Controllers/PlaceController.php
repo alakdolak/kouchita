@@ -3479,6 +3479,12 @@ class PlaceController extends Controller {
                 case 6:
                     $placeMode = 'majara';
                     break;
+                case 10:
+                    $placeMode = 'sogatSanaies';
+                    break;
+                case 11:
+                    $placeMode = 'mahaliFood';
+                    break;
             }
 
 

@@ -206,7 +206,8 @@
                                                                 </div>
                                                             </div>
                                                             {{--onclick="showLowDistancePopUp()"--}}
-                                                            <div class="ordering"  >
+                                                            @if($kindPlace->id != 10 && $kindPlace->id != 11)
+                                                                <div class="ordering"  >
                                                                 <div id="distanceNav" class="orders" style="width: 140% !important;"
                                                                      onclick="openGlobalSearch()">کمترین فاصله تا
                                                                     <span id="selectDistance">__ __ __</span></div>
@@ -226,6 +227,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                            @endif
                                                         </div>
                                                         <script>
                                                             var check_num = 0;
