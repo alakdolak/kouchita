@@ -55,6 +55,8 @@
       class=" r_map_position_ul_fake ltr domn_en_US lang_en long_prices globalNav2011_reset
       rebrand_2017 css_commerce_buttons flat_buttons sitewide xo_pin_user_review_to_top track_back">
 
+@include('general.globalInput')
+
 <div id="PAGE" class="filterSearch redesign_2015 non_hotels_like desktop scopedSearch">
     @include('layouts.placeHeader')
     <div class=" hotels_lf_redesign ui_container is-mobile responsive_body">
@@ -487,8 +489,6 @@
     </form>
 
     @include('hotelDetailsPopUp')
-
-    @include('general.globalInput')
 
     @include('layouts.placeFooter')
 </div>

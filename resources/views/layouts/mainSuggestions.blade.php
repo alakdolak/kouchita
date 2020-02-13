@@ -623,12 +623,8 @@
 
         for(var i = 11; i < 100; i++) {
             var img = $('.middleImg' + i);
-            console.log(img.length != 0)
-            console.log(img)
-            console.log(img.length)
             if(img.length != 0) {
                 var section = Math.floor(i/10);
-                console.log(section);
                 var number = i % 10;
                 var text = '<div style="position: absolute; width: 20px; height: 20px; background: white; text-align: center; cursor: pointer; right: 0px" onclick="editMiddleBannerPic(' + section + ', ' + number + ')">\n' +
                     '<img src="' + editIcon + '" style="width: 100%; height: 100%;">\n' +
@@ -689,7 +685,6 @@
                             $('#showMiddleBannerInput').attr('src', '');
                             $('#uploadImgBanner').val('');
                             $('#linkForBanner').val('');
-                            console.log('#middleImg' + middleBannerSectionId + '' + middleBannerNum);
                             $('.middleImg' + middleBannerSectionId + '' + middleBannerNum).attr('src', newImageReplace);
                             middleBannerSectionId = 0;
                             middleBannerNum = 0;

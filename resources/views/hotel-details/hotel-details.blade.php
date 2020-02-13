@@ -35,6 +35,7 @@ if ($total == 0)
     <meta name="twitter:description" content="{{$place->meta}}"/>
     <meta name="twitter:title" content="{{$place->name}} | {{$city->name}} | شازده مسافر"/>
     <meta property="og:url" content="{{Request::url()}}"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     @if(count($photos) > 0)
         <meta property="og:image" content="{{$photos[0]}}"/>
         <meta property="og:image:secure_url" content="{{$photos[0]}}"/>
@@ -223,37 +224,15 @@ if ($total == 0)
                                             <img src="{{ $userPic }}" style="width: 100%; height: 100%; border-radius: 50%;" >
                                         </div>
                                         @if(auth()->check())
-                                            <textarea class="inputBoxInput inputBoxInputComment" name="text" type="text"
+                                            <textarea  id="postTextArea" class="inputBoxInput inputBoxInputComment" name="text" type="text"
                                                       placeholder="{{auth()->user()->first_name ? auth()->user()->first_name :auth()->user()->username }}، چه فکر یا احساسی داری.....؟"
                                                        style="overflow:hidden"></textarea>
-                                            {{--onkeyup="textAreaAdjust(this)"--}}
-                                        @else
-                                            <textarea class="inputBoxInput inputBoxInputComment" name="text" type="text"
-                                                      placeholder="سینا، چه فکر یا احساسی داری.....؟"></textarea>
                                         @endif
                                         <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
                                     </div>
-{{--                                    <script>--}}
-{{--                                        function textAreaAdjust(o) {--}}
-{{--                                            o.style.height = "1px";--}}
-{{--                                            o.style.height = (25 + o.scrollHeight) + "px";--}}
-{{--                                        }--}}
-{{--                                    </script>--}}
                                     <div class="clear-both"></div>
                                     <div class="row">
-                                        <div class="commentPhotosMainDiv" id="reviewShowPics">
-
-                                            {{--<div class="commentVideosDiv commentPhotosAndVideos">--}}
-                                            {{--<div class="deleteUploadPhotoComment"></div>--}}
-                                            {{--<div class="videosLengthDiv">20:45</div>--}}
-                                            {{--<div class="editUploadPhotoComment"></div>--}}
-                                            {{--</div>--}}
-                                            {{----}}
-                                            {{--<center class="addPhotosOrVideosBox">--}}
-                                            {{--اضافه کنید--}}
-                                            {{--<img src="{{"../../../public/images/tourCreation/add.png"}}">--}}
-                                            {{--</center>--}}
-                                        </div>
+                                        <div class="commentPhotosMainDiv" id="reviewShowPics"></div>
                                     </div>
 
                                     <div class="addParticipantName">
@@ -306,8 +285,7 @@ if ($total == 0)
                                         <span class="addOriginCity">{{$item->description}}</span>
                                         <div class="inputBoxGeneralInfo inputBox addOriginCityInputBoxPostModal">
                                             <textarea id="question_{{$item->id}}" name="textAns[]"
-                                                      class="inputBoxInput inputBoxInputComment"
-                                                      placeholder="شهر مبداء خود را وارد نمایید"></textarea>
+                                                      class="inputBoxInput inputBoxInputComment"></textarea>
                                             <input type="hidden" name="textId[]" value="{{$item->id}}">
                                         </div>
                                     </div>
@@ -945,7 +923,7 @@ if ($total == 0)
                             <button class="btn btn-danger exitBtnHelp">خروج</button>
                         </div>
                     </div>
-                    <a class="postLink" href="#reviewMainDivDetails" onclick="newPostModal()">
+                    <a class="postLink" href="#reviewMainDivDetails">
                         <div class="postMainDiv" onclick="hideMobileTabLink()">
                             <div class="postMainDivHeader">
                                 دیدگاه شما
@@ -957,31 +935,37 @@ if ($total == 0)
                                     </div>
                                     @if(auth()->check())
                                         <textarea class="inputBoxInput inputBoxInputComment" type="text"
-                                                  placeholder="{{auth()->user()->first_name ? auth()->user()->first_name :auth()->user()->username }}، چه فکر یا احساسی داری.....؟"></textarea>
+                                                  placeholder="{{auth()->user()->first_name ? auth()->user()->first_name :auth()->user()->username }}، چه فکر یا احساسی داری.....؟"  onclick="newPostModal('textarea')" readonly></textarea>
                                     @else
                                         <textarea class="inputBoxInput inputBoxInputComment" type="text"
-                                                  placeholder="سینا، چه فکر یا احساسی داری.....؟"></textarea>
+                                                  placeholder=" چه فکر یا احساسی داری.....؟" onclick="newPostModal('textarea')" readonly></textarea>
                                     @endif
                                     <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
                                 </div>
                             </div>
                             <div class="commentMoreSettingBar">
                                 <div class="commentOptionsBoxes">
-                                    <span class="addPhotoCommentIcon"></span>
-                                    <span class="commentOptionsText">عکس اضافه کنید.</span>
+                                    <label {{auth()->check() ? 'for=picReviewInput0 onclick=newPostModal()' : 'onclick=newPostModal()'}}>
+                                        <span class="addPhotoCommentIcon"></span>
+                                        <span class="commentOptionsText">عکس اضافه کنید.</span>
+                                    </label>
                                 </div><!--
                              -->
                                 <div class="commentOptionsBoxes">
-                                    <span class="addVideoCommentIcon"></span>
-                                    <span class="commentOptionsText">ویدیو اضافه کنید.</span>
+                                    <label {{auth()->check() ? 'for=videoReviewInput onclick=newPostModal()' : 'onclick=newPostModal()'}}>
+                                        <span class="addVideoCommentIcon"></span>
+                                        <span class="commentOptionsText">ویدیو اضافه کنید.</span>
+                                    </label>
                                 </div><!--
                              -->
                                 <div class="commentOptionsBoxes">
-                                    <span class="add360VideoCommentIcon"></span>
-                                    <span class="commentOptionsText">ویدیو 360 اضافه کنید.</span>
+                                    <label {{auth()->check() ? 'for=video360ReviewInput onclick=newPostModal()' : 'onclick=newPostModal()'}}>
+                                        <span class="add360VideoCommentIcon"></span>
+                                        <span class="commentOptionsText">ویدیو 360 اضافه کنید.</span>
+                                    </label>
                                 </div><!--
                              -->
-                                <div class="commentOptionsBoxes" id="bodyLinks">
+                                <div class="commentOptionsBoxes" id="bodyLinks"  onclick="newPostModal('tag')">
                                     <span class="tagFriendCommentIcon"></span>
                                     <span class="commentOptionsText">دوستانتان را tag کنید.</span>
                                 </div><!--
@@ -1892,25 +1876,38 @@ if ($total == 0)
 
         // Get the element with id="defaultOpen" and click on it
         document.getElementById("defaultOpen").click();
-
-        if($(window).width() < 992) {
-            function hideMobileTabLink() {
-                $('.tabLinkMainWrapMainDivMobile').hide()
+        function hideMobileTabLink() {
+            if($(window).width() < 992) {
+                $('.tabLinkMainWrapMainDivMobile').hide();
             }
-
-            function showMobileTabLink() {
+        }
+        function showMobileTabLink() {
+            if($(window).width() < 992) {
                 $('.tabLinkMainWrapMainDivMobile').show()
             }
         }
 
-        function newPostModal() {
+
+        function newPostModal(kind = '') {
             if (!hasLogin) {
                 showLoginPrompt(hotelDetailsInSaveToTripMode);
                 return;
             }
 
-            $("#darkModal").show() ,
-                $(".postModalMainDiv").removeClass('hidden')
+            $("#darkModal").show();
+            $(".postModalMainDiv").removeClass('hidden');
+
+
+            setTimeout(function(){
+                if(kind == 'textarea')
+                    document.getElementById("postTextArea").focus();
+                else if(kind == 'tag')
+                    $('#assignedSearch').focus();
+
+                if(kind != 'textarea')
+                    $('html').scrollTop($('#reviewMainDivDetails').position()['top'])
+
+            }, 500);
         }
 
         function closeNewPostModal() {

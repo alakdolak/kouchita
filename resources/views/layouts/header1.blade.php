@@ -286,7 +286,6 @@
 
 @include('layouts.pop-up-create-trip')
 
-@include('general.globalInput')
 
 <script>
     $(document).ready(function(){

@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="{{URL::asset('css/globalSearch.css')}}">
 
 <div id="globalSearch" class="globalSearchBlackBackGround">
-    <div class="row">
+    <div class="row" style="width: 100%; display: flex; align-items: center; flex-direction: column">
         <div class="globalSearchWithBox">
             <div class="row">
                 <div class="close" onclick="closeSearchInput()">close</div>
