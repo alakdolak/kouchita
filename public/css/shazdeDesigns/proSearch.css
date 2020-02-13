@@ -226,10 +226,6 @@
     position: absolute
 }
 
-.position-relative {
-    position: relative;
-}
-
 #GEO_SCOPED_SEARCH_INPUT2 {
     color: #6d6d6d;
     border-color: #6d6d6d !important;
@@ -348,6 +344,22 @@
     left: 0;
 }
 
+.boxOfLamps > div {
+    width: 14%;
+    position: relative;
+}
+
+.boxOfLamps img {
+    position: absolute;
+    bottom: 17px;
+}
+
+.boxOfLamps > div > div {
+    position: absolute;
+    top: -17px;
+    text-align: center;
+}
+
 .ui_input_checkbox {
     display: flex;
     align-items: center;
@@ -364,15 +376,30 @@
 #searchspan .ui_close_x:before {
     font-size: 60px;
     line-height: 70px;
+    color: #4DC7BC;
 }
 
 #close_span_search {
     width: 70px !important;
     height: 70px !important;
+    color: #4DC7BC;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 
 DIV.ppr_rup.ppr_priv_masthead_search .body_text {
     margin: 0 10%;
+    overflow: auto;
+    height: inherit;
+}
+
+.compareDivsMainDiv {
+    height: 305px;
+    overflow: auto;
 }
 
 /*@media (min-width: 1188px) {*/
@@ -429,6 +456,7 @@ DIV.ppr_rup.ppr_priv_masthead_search .body_text {
     .destinationMainDiv {
         flex-direction: column;
         margin-top: 40px;
+        border-bottom: none;
     }
 
     .destinationMainDiv .col-xs-5 {
@@ -439,8 +467,18 @@ DIV.ppr_rup.ppr_priv_masthead_search .body_text {
         padding: 0;
         width: 100%;
         justify-content: center;
-        bottom: -20px;
         position: inherit;
+        top: 90px;
+        border-bottom: 3px solid;
+    }
+
+    .boxOfLamps img {
+        bottom: -2px;
+    }
+
+    .boxOfLamps > div > div {
+        top: 3px;
+        text-align: center;
     }
 
     .whereSearchBtnMainDiv {
@@ -459,5 +497,9 @@ DIV.ppr_rup.ppr_priv_masthead_search .body_text {
 @media (max-width: 370px) {
     DIV.ppr_rup.ppr_priv_masthead_search .body_text {
         margin: 0 3%;
+    }
+
+    .boxOfLamps > div > div {
+        font-size: 10px;
     }
 }

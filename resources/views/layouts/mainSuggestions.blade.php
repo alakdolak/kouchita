@@ -95,7 +95,7 @@
 
     <div class="middleBannerPhotoBanner">
         <a href="{{isset($middleBannerLink['21']) ? $middleBannerLink['21'] : '#'}}" target="{{isset($middleBannerLink['21']) ? '_blank' : ''}}" >
-            <img class="middleImg21" src="{{isset($middleBannerPic['21']) ? $middleBannerPic['21'] : ''}}" style="width: 100%; height: 100%;">
+            <img class="middleImg21" src="{{isset($middleBannerPic['21']) ? $middleBannerPic['21'] : ''}}">
         </a>
     </div>
 
@@ -225,43 +225,43 @@
     <center class="siteArticlesMainDiv">
         <div class="articleBoxes">
             <div class="articleTitle">مقاله‌های ما</div>
-            <div class="articleImg" style="position: relative">
-                <a href="{{isset($middleBannerLink['41']) ? $middleBannerLink['41'] : '#'}}" target="{{isset($middleBannerLink['41']) ? '_blank' : ''}}" >
-                    <img class="middleImg41" src="{{isset($middleBannerPic['41']) ? $middleBannerPic['41'] : ''}}" style="width: 100%; height: 100%;">
+            <div class="articleImgMainDiv">
+                <a class="articleImgLink" href="{{isset($middleBannerLink['41']) ? $middleBannerLink['41'] : '#'}}" target="{{isset($middleBannerLink['41']) ? '_blank' : ''}}" >
+                    <img class="middleImg41" src="{{isset($middleBannerPic['41']) ? $middleBannerPic['41'] : ''}}">
                 </a>
             </div>
             <a class="articleLink">هم اکنون ببینید</a>
         </div>{{--
     --}}<div class="articleBoxes">
             <div class="articleTitle">مقاله‌های ما</div>
-            <div class="articleImg" style="position: relative">
-                <a href="{{isset($middleBannerLink['42']) ? $middleBannerLink['42'] : '#'}}" target="{{isset($middleBannerLink['42']) ? '_blank' : ''}}" >
-                    <img class="middleImg42" src="{{isset($middleBannerPic['42']) ? $middleBannerPic['42'] : ''}}" style="width: 100%; height: 100%;">
+            <div class="articleImgMainDiv">
+                <a class="articleImgLink" href="{{isset($middleBannerLink['42']) ? $middleBannerLink['42'] : '#'}}" target="{{isset($middleBannerLink['42']) ? '_blank' : ''}}" >
+                    <img class="middleImg42" src="{{isset($middleBannerPic['42']) ? $middleBannerPic['42'] : ''}}">
                 </a>
             </div>
             <a class="articleLink">هم اکنون ببینید</a>
         </div>{{--
     --}}<div class="articleBoxes">
             <div class="articleTitle">مقاله‌های ما</div>
-            <div class="articleImg" style="position: relative">
-                <a href="{{isset($middleBannerLink['43']) ? $middleBannerLink['43'] : '#'}}" target="{{isset($middleBannerLink['43']) ? '_blank' : ''}}" >
-                    <img class="middleImg43" src="{{isset($middleBannerPic['43']) ? $middleBannerPic['43'] : ''}}" style="width: 100%; height: 100%;">
+            <div class="articleImgMainDiv">
+                <a class="articleImgLink" href="{{isset($middleBannerLink['43']) ? $middleBannerLink['43'] : '#'}}" target="{{isset($middleBannerLink['43']) ? '_blank' : ''}}" >
+                    <img class="middleImg43" src="{{isset($middleBannerPic['43']) ? $middleBannerPic['43'] : ''}}">
                 </a>
             </div>
             <a class="articleLink">هم اکنون ببینید</a>
         </div>{{--
     --}}<div class="articleBoxes">
             <div class="articleTitle">مقاله‌های ما</div>
-            <div class="articleImg" style="position: relative">
-                <a href="{{isset($middleBannerLink['44']) ? $middleBannerLink['44'] : '#'}}" target="{{isset($middleBannerLink['44']) ? '_blank' : ''}}" >
-                    <img class="middleImg44" src="{{isset($middleBannerPic['44']) ? $middleBannerPic['44'] : ''}}" style="width: 100%; height: 100%;">
+            <div class="articleImgMainDiv">
+                <a class="articleImgLink" href="{{isset($middleBannerLink['44']) ? $middleBannerLink['44'] : '#'}}" target="{{isset($middleBannerLink['44']) ? '_blank' : ''}}" >
+                    <img class="middleImg44" src="{{isset($middleBannerPic['44']) ? $middleBannerPic['44'] : ''}}">
                 </a>
             </div>
             <a class="articleLink">هم اکنون ببینید</a>
         </div>
     </center>
 
-    <div id="restaurantSuggestion" class="homepage_shelves_widget ng-scope"style="display: none">
+    <div id="restaurantSuggestion" class="homepage_shelves_widget ng-scope" style="display: none">
         <div class="prw_rup prw_shelves_shelf_widget" style="">
             <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
                 <div class="shelf_header">
@@ -516,62 +516,63 @@
     </div>
 
     <div id="articleSuggestion" class="homepage_shelves_widget ng-scope">
-    <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" style="">
-        <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
-            <div class="shelf_header">
-                <div class="shelf_title">
-                    <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
-                    <div class="shelf_title_container h3">
-                        <h3>محبوب‌ترین سفرنامه‌ها</h3>
+        <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" style="">
+            <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
+                <div class="shelf_header">
+                    <div class="shelf_title">
+                        <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
+                        <div class="shelf_title_container h3">
+                            <h3>محبوب‌ترین سفرنامه‌ها</h3>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-                <div class="shelf_item_container ui_columns is-mobile is-multiline">
-                    <div class="mainSuggestion swiper-container">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide position-relative" ng-repeat="place in articleRecords">
-                                <img src="{{URL::asset('images/pin.png')}}" class="imageGoldPin">
-                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope" style="width: 100%;">
-                                    <div class="poi">
-                                        <a href="[[place.url]]" class="thumbnail">
-                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                <div class="prv_thumb has_image">
-                                                    <div class="image_wrapper landscape landscapeWide">
-                                                        <img src="[[place.placePic]]" alt="[[place.keyword]]" class="image">
+                    <div class="shelf_item_container ui_columns is-mobile is-multiline">
+                        <div class="mainSuggestion swiper-container">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide position-relative" ng-repeat="place in articleRecords">
+                                    <img src="{{URL::asset('images/pin.png')}}" class="imageGoldPin">
+                                    <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
+                                        <div class="poi">
+                                            <a href="[[place.url]]" class="thumbnail">
+                                                <div class="prw_rup prw_common_thumbnail_no_style_responsive">
+                                                    <div class="prv_thumb has_image">
+                                                        <div class="image_wrapper landscape landscapeWide">
+                                                            <img src="[[place.placePic]]" alt="[[place.keyword]]" class="image">
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </a>
-                                        <div class="detail rtl">
-                                            <a href="[[place.url]]" class="item poi_name ui_link ng-binding">[[place.title]]</a>
-                                            <div class="item rating-widget">
-                                                {{--<div class="prw_rup prw_common_location_rating_simple">--}}
-                                                    {{--<span class="ui_bubble_rating bubble_[[place.placeRate]]0"></span>--}}
-                                                {{--</div>--}}
-                                                <span class="reviewCount ng-binding">[[place.msg]] </span><span>نقد </span>
-                                            </div>
-                                            <div class="item tags ng-binding">
-                                                    {{--[[place.placeCity]] --}}
-                                                    {{--<span>در </span>--}}
-                                                    {{--<span class="ng-binding">[[place.placeState]]</span>--}}
+                                            </a>
+                                            <div class="detail rtl">
+                                                <a href="[[place.url]]" class="item poi_name ui_link ng-binding">[[place.title]]</a>
+                                                <div class="item rating-widget">
+                                                    {{--<div class="prw_rup prw_common_location_rating_simple">--}}
+                                                        {{--<span class="ui_bubble_rating bubble_[[place.placeRate]]0"></span>--}}
+                                                    {{--</div>--}}
+                                                    <span class="reviewCount ng-binding">[[place.msg]] </span><span>نقد </span>
+                                                </div>
+                                                <div class="item tags ng-binding">
+                                                        {{--[[place.placeCity]] --}}
+                                                        {{--<span>در </span>--}}
+                                                        {{--<span class="ng-binding">[[place.placeState]]</span>--}}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <!-- Add Pagination -->
+                            <div class="swiper-pagination"></div>
+                            <!-- Add Arrows -->
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
                         </div>
-                        <!-- Add Pagination -->
-                        <div class="swiper-pagination"></div>
-                        <!-- Add Arrows -->
-                        <div class="swiper-button-next"></div>
-                        <div class="swiper-button-prev"></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div></div>
+</div>
 
 @if(auth()->check() && auth()->user()->role == 0)
     <div class="modal" id="middleBannerModal" style="direction: rtl">
