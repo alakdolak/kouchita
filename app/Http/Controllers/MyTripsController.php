@@ -581,8 +581,8 @@ class MyTripsController extends Controller {
 
         if(isset($_POST["checkedValuesTrips"]) && isset($_POST["placeId"]) && isset($_POST["kindPlaceId"])) {
 
-            $placeId = makeValidInput($_POST["placeId"]);
-            $kindPlaceId = makeValidInput($_POST["kindPlaceId"]);
+            $placeId = $_POST["placeId"];
+            $kindPlaceId = $_POST["kindPlaceId"];
             $uId = Auth::user()->id;
 
             $selectedTrips = $_POST["checkedValuesTrips"];

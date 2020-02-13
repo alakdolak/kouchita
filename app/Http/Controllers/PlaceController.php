@@ -21,8 +21,13 @@ use App\models\PhotographersLog;
 use App\models\PhotographersPic;
 use App\models\PicItem;
 use App\models\Place;
+use App\models\PlaceFeatureRelation;
+use App\models\PlaceFeatures;
 use App\models\PlaceStyle;
 use App\models\Post;
+use App\models\PostCategory;
+use App\models\PostCategoryRelation;
+use App\models\PostCityRelation;
 use App\models\PostComment;
 use App\models\Question;
 use App\models\QuestionUserAns;
@@ -164,7 +169,59 @@ class PlaceController extends Controller {
             }
 
             if ($place != null) {
-                echo \GuzzleHttp\json_encode($this->getNearbies($place->C, $place->D, $count));
+                $today = getToday()["date"];
+                $nowTime = getToday()["time"];
+
+                $cityId = $place->cityId;
+                $postsId = PostCityRelation::where('cityId', $cityId)->pluck('postId')->toArray();
+                if(count($postsId) < 5){
+                    $state = Cities::find($cityId);
+                    if($state != null){
+                        $psId = PostCityRelation::where('stateId', $state->id)->where('cityId', 0)->pluck('postId')->toArray();
+                        $postsId = array_merge($postsId, $psId);
+                    }
+                }
+
+                $allPosts = array();
+
+                if(count($postsId) != 0) {
+                    $allPosts = Post::join('users', 'users.id', 'post.creator')
+                        ->whereRaw('(post.date <= ' . $today . ' OR (post.date = ' . $today . ' AND (post.time < ' . $nowTime . ' || post.time IS NULL)))')
+                        ->whereRaw('post.release <> "draft"')
+                        ->whereIn('post.id', $postsId)
+                        ->select('username', 'post.id', 'post.title', 'post.meta', 'post.slug', 'post.seen', 'post.date', 'post.created_at', 'post.pic', 'post.keyword')
+                        ->orderBy('post.date', 'DESC')->get();
+                }
+
+                if(count($allPosts) < 5){
+                    $alP = Post::join('users', 'users.id', 'post.creator')
+                        ->whereRaw('(post.date <= ' . $today . ' OR (post.date = ' . $today . ' AND (post.time < ' . $nowTime . ' || post.time IS NULL)))')
+                        ->whereRaw('post.release <> "draft"')
+                        ->whereNotIn('post.id', $postsId)
+                        ->select('username', 'post.id', 'post.title', 'post.meta', 'post.slug', 'post.seen', 'post.date', 'post.created_at', 'post.pic', 'post.keyword')
+                        ->orderBy('post.date', 'DESC')->get();
+
+                    if(count($allPosts) == 0)
+                        $allPosts = $alP;
+                    else
+                        $allPosts = array_merge($allPosts, $alP);
+
+                    foreach ($allPosts as $item) {
+                        $item->msgs = PostComment::wherePostId($item->id)->whereStatus(true)->count();
+                        $item->pic = \URL::asset('_images/posts/' . $item->id . '/' . $item->pic);
+                        if ($item->date == null)
+                            $item->date = \verta($item->created_at)->format('Ym%d');
+                        $item->date = convertJalaliToText($item->date);
+                        $mainCategory = PostCategoryRelation::where('postId', $item->id)->where('isMain', 1)->first();
+                        $item->category = PostCategory::find($mainCategory->categoryId)->name;
+                        $item->url = route('article.show', ['slug' => $item->slug]);
+                    }
+
+                }
+
+                $places = $this->getNearbies($place->C, $place->D, $count);
+
+                echo json_encode([$places, $allPosts]);
                 return;
             }
         }
@@ -306,44 +363,44 @@ class PlaceController extends Controller {
     public function getSlider2Photo()
     {
 
-        if (isset($_POST["placeId"]) && isset($_POST["kindPlaceId"]) && isset($_POST["val"])) {
+        if (isset($_POST["placeId"]) && isset($_POST["kindPlaceId"]) && isset($_POST["val"])) {}
 
-            $placeId = makeValidInput($_POST["placeId"]);
-            $kindPlaceId = makeValidInput($_POST["kindPlaceId"]);
-            $val = makeValidInput($_POST["val"]);
+        $placeId = makeValidInput($_POST["placeId"]);
+        $kindPlaceId = makeValidInput($_POST["kindPlaceId"]);
+        $val = makeValidInput($_POST["val"]);
 
-            $aksActivityId = Activity::whereName('عکس')->first()->id;
+        $aksActivityId = Activity::whereName('عکس')->first()->id;
 
-            $tmp = DB::select("select text from log WHERE confirm = 1 and activityId = " . $aksActivityId . " and placeId = " . $placeId . " and kindPlaceId = " . $kindPlaceId . " and pic <> 0 limit " . $val . ', 1');
-            if ($tmp != null && count($tmp) > 0) {
-                switch ($kindPlaceId) {
-                    case 1:
-                    default:
-                        $subDir = "/amaken/";
-                        break;
-                    case 3:
-                        $subDir = "/restaurant/";
-                        break;
-                    case 4:
-                        $subDir = "/hotel/";
-                        break;
-                    case 6:
-                        $subDir = "/majara/";
-                        break;
-                    case 8:
-                        $subDir = '/adab/';
-                        break;
-                }
-                if (file_exists(__DIR__ . '/../../../../assets/userPhoto' . $subDir . 'l-' . $tmp[0]->text))
-                    echo URL::asset('userPhoto' . $subDir . 'l-' . $tmp[0]->text);
-                else
-                    echo URL::asset('_images/nopic/blank.jpg');
-                return;
+        $tmp = DB::select("select text from log WHERE confirm = 1 and activityId = " . $aksActivityId . " and placeId = " . $placeId . " and kindPlaceId = " . $kindPlaceId . " and pic <> 0 limit " . $val . ', 1');
+        if ($tmp != null && count($tmp) > 0) {
+            switch ($kindPlaceId) {
+                case 1:
+                default:
+                    $subDir = "/amaken/";
+                    break;
+                case 3:
+                    $subDir = "/restaurant/";
+                    break;
+                case 4:
+                    $subDir = "/hotel/";
+                    break;
+                case 6:
+                    $subDir = "/majara/";
+                    break;
+                case 8:
+                    $subDir = '/adab/';
+                    break;
             }
-
-            echo URL::asset('_images/nopic/blank.jpg');
+            if (file_exists(__DIR__ . '/../../../../assets/userPhoto' . $subDir . 'l-' . $tmp[0]->text))
+                echo URL::asset('userPhoto' . $subDir . 'l-' . $tmp[0]->text);
+            else
+                echo URL::asset('_images/nopic/blank.jpg');
             return;
         }
+
+        echo URL::asset('_images/nopic/blank.jpg');
+        return;
+
 
         echo "nok";
     }
@@ -3382,6 +3439,253 @@ class PlaceController extends Controller {
             echo json_encode($logs);
         }
 
+    }
+
+    public function showPlaceList($kindPlaceId, $city, $mode)
+    {
+
+        $sections = SectionPage::wherePage(getValueInfo('hotel-detail'))->get();
+        $kindPlace = Place::find($kindPlaceId);
+        if($kindPlace != null){
+
+            if ($mode == "state") {
+
+                $state = State::whereName($city)->first();
+                $city = $state;
+                if ($state == null)
+                    return "نتیجه ای یافت نشد";
+
+            }
+            else {
+                $city = Cities::whereName($city)->first();
+                if ($city == null)
+                    return "نتیجه ای یافت نشد";
+
+                $state = State::whereId($city->stateId);
+                if ($state == null)
+                    return "نتیجه ای یافت نشد";
+            }
+
+            switch ($kindPlaceId){
+                case 1:
+                    $placeMode = 'amaken';
+                    break;
+                case 3:
+                    $placeMode = 'restaurant';
+                    break;
+                case 4:
+                    $placeMode = 'hotel';
+                    break;
+                case 6:
+                    $placeMode = 'majara';
+                    break;
+            }
+
+
+            $features = PlaceFeatures::where('kindPlaceId', $kindPlaceId)->where('parent', 0)->get();
+            foreach ($features as $feature)
+                $feature->subFeat = PlaceFeatures::where('parent', $feature->id)->where('type', 'YN')->get();
+
+            return view('places.list.list', compact(['features', 'kindPlace', 'mode', 'city', 'sections', 'placeMode', 'state']));
+        }
+        else
+            return \redirect(\url('/'));
+    }
+
+    public function getPlaceListElems(Request $request)
+    {
+
+        $page = (int)$request->pageNum;
+        $take = (int)$request->take;
+        $reqFilter = $request->featureFilter;
+        $sort = $request->sort;
+        $rateFilter = $request->rateFilter;
+        $specialFilters = $request->specialFilters;
+        $nameFilter = $request->nameFilter;
+        $nearPlaceIdFilter = $request->nearPlaceIdFilter;
+        $nearKindPlaceIdFilter = $request->nearKindPlaceIdFilter;
+        $featureFilters = array();
+        $placeIds = array();
+        $places = array();
+
+        $kindPlace = Place::find($request->kindPlaceId);
+        $file = $kindPlace->fileName;
+        $table = $kindPlace->tableName;
+
+        $activityId = Activity::whereName('نظر')->first()->id;
+        $ansActivityId = Activity::whereName('پاسخ')->first()->id;
+        $quesActivityId = Activity::whereName('سوال')->first()->id;
+        $seenActivityId = Activity::whereName('مشاهده')->first()->id;
+        $rateActivityId = Activity::whereName('امتیاز')->first()->id;
+
+        //first get all places in state or city
+        if($request->mode == 'state'){
+            $cities = Cities::where('stateId', $request->city)->pluck('id')->toArray();
+            $placeIds = DB::table($table)->whereIn('cityId', $cities)->where('name', 'LIKE', '%'.$nameFilter.'%')->pluck('id')->toArray();
+        }
+        else
+            $placeIds = DB::table($table)->where('cityId', $request->city)->where('name', 'LIKE', '%'.$nameFilter.'%')->pluck('id')->toArray();
+
+        if(count($placeIds) == 0){
+            echo json_encode(['places' => array()]);
+            return;
+        }
+
+        //special filters for each kind place
+        switch ($kindPlace->id){
+            case 4:
+                $placeIds = $this->hotelFilter($specialFilters, $placeIds);
+                break;
+        }
+        if(count($placeIds) == 0){
+            echo json_encode(['places' => array()]);
+            return;
+        }
+
+        // second get places have selected features
+        if($reqFilter != null && count($reqFilter) > 0){
+            foreach ($reqFilter as $item){
+                if($item != 0)
+                    array_push($featureFilters, $item);
+            }
+
+            if(count($featureFilters) != 0) {
+                $pIds = DB::select('SELECT placeId, COUNT(id) AS count FROM placeFeatureRelations WHERE featureId IN (' . implode(",", $featureFilters) . ') AND placeId IN (' . implode(",", $placeIds) . ') GROUP BY placeId');
+                $placeIds = array();
+                foreach ($pIds as $p){
+                    if($p->count == count($featureFilters))
+                        array_push($placeIds, $p->placeId);
+                }
+            }
+        }
+        if(count($placeIds) == 0){
+            echo json_encode(['places' => array()]);
+            return;
+        }
+
+        // if have rate filter
+        if($rateFilter != 0){
+            $questionRate = Question::where('ansType', 'rate')->pluck('id')->toArray();
+            $p = DB::select('SELECT log.placeId as placeId, AVG(qua.ans) as rate FROM log INNER JOIN questionUserAns AS qua ON log.kindPlaceId = ' . $kindPlace->id . ' AND log.placeId IN (' . implode(",", $placeIds) . ') AND qua.questionId IN (' . implode(",", $questionRate) . ') AND qua.logId = log.id GROUP BY log.placeId ORDER BY rate DESC');
+
+            $rateFP = array();
+            foreach ($placeIds as $item){
+                array_push($rateFP, ['id' => $item, 'rate' => 2]);
+                foreach ($p as $item2){
+                    if($item2->placeId == $item){
+                        $rateFP[count($rateFP)-1]['rate'] = $item2->rate;
+                    }
+                }
+            }
+
+            $placeIds = array();
+            foreach ($rateFP as $item){
+                if($item['rate'] > ($rateFilter-1))
+                    array_push($placeIds, $item['id']);
+            }
+        }
+        if(count($placeIds) == 0){
+            echo json_encode(['places' => array()]);
+            return;
+        }
+
+        // and sort results by kind
+        if($sort == 'alphabet')
+            $places = DB::table($table)->whereIn('id', $placeIds)->select(['id', 'C', 'D', 'name', 'file'])->orderBy('name')->skip(($page - 1) * $take)->take($take)->get();
+        else if($sort == 'distance' && $nearPlaceIdFilter != 0 && $nearKindPlaceIdFilter != 0){
+            $nearKind = Place::find($nearKindPlaceIdFilter);
+            $nearPlace = DB::table($nearKind->tableName)->find($nearPlaceIdFilter);
+            $C1 = (float)$nearPlace->C;
+            $D1 = (float)$nearPlace->D;
+
+            $D = $D1 * 3.14 / 180;
+            $C = $C1 * 3.14 / 180;
+
+            $places = \DB::select('SELECT *, acos(' . sin($D) . ' * sin(D / 180 * 3.14) + ' . cos($D) . ' * cos(D / 180 * 3.14) * cos(C / 180 * 3.14 - ' . ($C) . ')) * 6371 as distance FROM ' . $table . ' WHERE id IN (' . implode(",", $placeIds) . ') ORDER BY distance LIMIT ' . $take . ' OFFSET ' . ($page-1) * $take);
+        }
+        else{
+            if($sort == 'review')
+                $p = DB::select('SELECT log.placeId as placeId, COUNT(log.id) as `count` FROM log WHERE log.kindPlaceId = ' . $kindPlace->id . ' AND log.placeId IN (' . implode(",", $placeIds) . ') AND (log.activityId = '. $activityId . ' OR log.activityId = ' . $ansActivityId . ' OR log.activityId = ' . $quesActivityId . ') GROUP BY log.placeId ORDER BY `count` DESC');
+            else if($sort == 'seen')
+                $p = DB::select('SELECT log.placeId as placeId, COUNT(log.id) as `count` FROM log WHERE log.kindPlaceId = ' . $kindPlace->id . ' AND log.placeId IN (' . implode(",", $placeIds) . ') AND log.activityId = '. $seenActivityId . ' GROUP BY log.placeId ORDER BY `count` DESC');
+            else{
+                $questionRate = Question::where('ansType', 'rate')->pluck('id')->toArray();
+                $p = DB::select('SELECT log.placeId as placeId, AVG(qua.ans) as rate FROM log INNER JOIN questionUserAns AS qua ON log.kindPlaceId = ' . $kindPlace->id . ' AND log.placeId IN (' . implode(",", $placeIds) . ') AND qua.questionId IN (' . implode(",", $questionRate) . ') AND qua.logId = log.id GROUP BY log.placeId ORDER BY rate DESC');
+            }
+
+            $qpId = array();
+            foreach ($p as $item)
+                array_push($qpId, $item->placeId);
+
+            if(($page * $take) >= count($qpId)){
+                $less = ($page * $take) - count($qpId);
+                if($less/$take < 1){
+                    $skip = 0;
+                    $nTake = $less;
+                }
+                else{
+                    $skip = $less - $take;
+                    $nTake = $take;
+                }
+
+                $npId = DB::table($table)->whereIn('id', $placeIds)->whereNotIn('id', $qpId)->skip($skip)->take($nTake)->pluck('id')->toArray();
+
+                $placeIds = array();
+                if(count($npId) < $take){
+                    for($i = (($page-1)*$take); $i < ($page*$take) && $i < count($qpId); $i++)
+                        array_push($placeIds, $qpId[$i]);
+
+                    if(count($placeIds) < 4) {
+                        for($i = 0; $i < count($npId); $i++)
+                            array_push($placeIds, $npId[$i]);
+                    }
+                }
+                else
+                    $placeIds = $npId;
+            }
+            else{
+                $placeIds = array();
+                for ($i = (($page - 1) * $take); $i < ($page * $take); $i++)
+                    array_push($placeIds, $qpId[$i]);
+            }
+
+            $places = array();
+            foreach ($placeIds as $item){
+                $place = DB::table($table)->find($item);
+                array_push($places, $place);
+            }
+        }
+
+        foreach ($places as $place) {
+            if (file_exists((__DIR__ . '/../../../../assets/_images/' . $file . '/' . $place->file . '/f-1.jpg')))
+                $place->pic = URL::asset('_images/' . $file . '/' . $place->file . '/f-1.jpg');
+            else
+                $place->pic = URL::asset('_images/nopic/blank.jpg');
+
+            $condition = ['placeId' => $place->id, 'kindPlaceId' => $request->kindPlaceId,
+                'activityId' => $activityId];
+            $place->reviews = LogModel::where($condition)->count();
+            $cityObj = Cities::whereId($place->cityId);
+            $place->city = $cityObj->name;
+            $place->state = State::whereId($cityObj->stateId)->name;
+            $place->avgRate = getRate($place->id, $request->kindPlaceId)[1];
+        }
+
+
+        echo json_encode(['places' => $places]);
+        return;
+    }
+
+    private function hotelFilter($specFilter, $placeIds){
+        $kindId = array();
+        foreach ($specFilter as $item){
+            if($item != 0)
+                array_push($kindId, $item);
+        }
+        if(count($kindId) != 0)
+            $placeIds = DB::table('hotels')->whereIn('id', $placeIds)->whereIn('kind_id', $kindId)->pluck('id')->toArray();
+
+        return $placeIds;
     }
 
 }

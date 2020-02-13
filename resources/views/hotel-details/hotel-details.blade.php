@@ -136,6 +136,7 @@ if ($total == 0)
     </script>
 
     <script src="{{URL::asset('js/hotelDetails/hoteldetails_1.js')}}"></script>
+    <script src="{{URL::asset('js/hotelDetails/hoteldetails_2.js')}}"></script>
     <script src="{{URL::asset('js/autosize.min.js')}}"></script>
     <script async src="{{URL::asset('js/album.js')}}"></script>
     <script src="{{URL::asset('js/adv.js')}}"></script>
@@ -651,7 +652,7 @@ if ($total == 0)
                         <div id="targetHelp_8" class="wideScreen targets float-left col-xs-6 pd-0">
                             <span onclick="bookMark()"
                                   class="ui_button save-location-7306673 saveAsBookmarkMainDiv">
-                                <div class="saveAsBookmarkIcon {{($bookMark) ? "castle-fill" : "castle"}}"></div>
+                                <div id="bookMarkIcon" class="saveAsBookmarkIcon {{($bookMark) ? "castle-fill" : "castle"}}"></div>
                                 <div class="saveAsBookmarkLabel">
                                     ذخیره این صفحه
                                 </div>
@@ -2682,6 +2683,24 @@ if ($total == 0)
             })
         }
         @endif
+
+        $(window).ready(function(){
+            @foreach($sections as $section)
+                fillMyDivWithAdv('{{$section->sectionId}}', '{{$state->id}}');
+            @endforeach
+        });
+
+        function closePublish() {
+            var url;
+            if (placeMode == "hotel")
+                url = '{{route('hotelDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';
+            else if (placeMode == "amaken")
+                url = '{{route('amakenDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';
+            else
+                url = '{{route('restaurantDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';
+            document.location.href = url;
+        }
+
     </script>
 
 @stop

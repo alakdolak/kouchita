@@ -14,6 +14,7 @@ use App\models\DefaultPic;
 use App\models\GoyeshCity;
 use App\models\Hotel;
 use App\models\HotelApi;
+use App\models\LogFeedBack;
 use App\models\LogModel;
 use App\models\MahaliFood;
 use App\models\Majara;
@@ -115,108 +116,119 @@ class HomeController extends Controller
     }
 
 
-    public function cityPage($city) {
+    public function cityPage($kind, $city) {
 
         $today = getToday()["date"];
-        $city = Cities::whereName($city)->first();
-        if($city == null || $city->description == null) {
+        if($kind == 'state')
+            $place = State::whereName($city)->first();
+        else
+            $place = Cities::whereName($city)->first();
+
+        if($place == null)
             return Redirect::route('home');
+
+
+        if($kind == 'city') {
+            $place->state = State::whereId($place->stateId)->name;
+            $place->name = 'شهر ' . $place->name;
+
+            $allAmaken = Amaken::where('cityId', $place->id)->pluck('id')->toArray();
+            $allMajara = Majara::where('cityId', $place->id)->pluck('id')->toArray();
+            $allHotels = Hotel::where('cityId', $place->id)->pluck('id')->toArray();
+            $allRestaurant = Restaurant::where('cityId', $place->id)->pluck('id')->toArray();
+            $allMahaliFood = MahaliFood::where('cityId', $place->id)->pluck('id')->toArray();
+            $allSogatSanaie = SogatSanaie::where('cityId', $place->id)->pluck('id')->toArray();
+
+            if($place->image == null){
+                $seenActivity = Activity::whereName('مشاهده')->first();
+                $ala = Amaken::where('cityId', $place->id)->pluck('id')->toArray();
+                $mostSeen = DB::select('SELECT placeId, COUNT(id) as seen FROM log WHERE activityId = ' .$seenActivity->id. ' AND kindPlaceId = 1 AND placeId IN (' . implode(",", $ala) . ') GROUP BY placeId ORDER BY seen DESC');
+
+                if(count($mostSeen) != 0){
+                    $p = Amaken::find($mostSeen[0]->placeId);
+                    $place->image = URL::asset('_images/amaken/' . $p->file . '/s-' . $p->picNumber);
+                }
+                else
+                    $place->image = URL::asset('_images/noPic/blank.jpg');
+            }
+            else
+                $place->image = URL::asset('_images/city/'.$place->image);
+        }
+        else {
+            $place->name = 'استان ' . $place->name;
+            $allCities = Cities::where('stateId', $place->id)->pluck('id')->toArray();
+
+            $allAmaken = Amaken::whereIn('cityId', $allCities)->pluck('id')->toArray();
+            $allMajara = Majara::whereIn('cityId', $allCities)->pluck('id')->toArray();
+            $allHotels = Hotel::whereIn('cityId', $allCities)->pluck('id')->toArray();
+            $allRestaurant = Restaurant::whereIn('cityId', $allCities)->pluck('id')->toArray();
+            $allMahaliFood = MahaliFood::whereIn('cityId', $allCities)->pluck('id')->toArray();
+            $allSogatSanaie = SogatSanaie::whereIn('cityId', $allCities)->pluck('id')->toArray();
+
+            if($place->image == null){
+                $seenActivity = Activity::whereName('مشاهده')->first();
+                $mostSeen = DB::select('SELECT placeId, COUNT(id) as seen FROM log WHERE activityId = ' .$seenActivity->id. ' AND kindPlaceId = 1 AND placeId IN (' . implode(",", $allAmaken) . ') GROUP BY placeId ORDER BY seen DESC');
+
+                if(count($mostSeen) != 0){
+                    $p = Amaken::find($mostSeen[0]->placeId);
+                    $place->image = URL::asset('_images/amaken/' . $p->file . '/s-' . $p->picNumber);
+                }
+                else
+                    $place->image = URL::asset('_images/noPic/blank.jpg');
+            }
+            else
+                $place->image = URL::asset('_images/city/'.$place->image);
         }
 
-        $city->state = State::whereId($city->stateId)->name;
+        $sqlQuery = '';
+        if(count($allAmaken) != 0)
+            $sqlQuery .= '( kindPlaceId = 1 AND placeId IN (' . implode(",", $allAmaken) . ') )';
+        if(count($allRestaurant) != 0){
+            if($sqlQuery != '')
+                $sqlQuery .= ' OR ';
+            $sqlQuery .= '( kindPlaceId = 3 AND placeId IN (' . implode(",", $allRestaurant) . ') )';
+        }
+        if(count($allHotels) != 0){
+            if($sqlQuery != '')
+                $sqlQuery .= ' OR ';
+            $sqlQuery .= '( kindPlaceId = 4 AND placeId IN (' . implode(",", $allHotels) . ') )';
+        }
+        if(count($allMajara) != 0){
+            if($sqlQuery != '')
+                $sqlQuery .= ' OR ';
+            $sqlQuery .= '( kindPlaceId = 6 AND placeId IN (' . implode(",", $allMajara) . ') )';
+        }
+        if(count($allSogatSanaie) != 0){
+            if($sqlQuery != '')
+                $sqlQuery .= ' OR ';
+            $sqlQuery .= '( kindPlaceId = 10 AND placeId IN (' . implode(",", $allSogatSanaie) . ') )';
+        }
+        if(count($allMahaliFood) != 0){
+            if($sqlQuery != '')
+                $sqlQuery .= ' OR ';
+            $sqlQuery .= '( kindPlaceId = 11 AND placeId IN (' . implode(",", $allMahaliFood) . ') )';
+        }
+
+
+        $reviewActivity = Activity::whereName('نظر')->first();
+        $lastReview = DB::select('SELECT * FROM log WHERE activityId = ' . $reviewActivity->id . ' AND confirm = 1 AND (' . $sqlQuery . ') ORDER BY `date` DESC');
+        if(count($lastReview) > 2)
+            $lastReview = [$lastReview[0], $lastReview[1]];
+
+        foreach ($lastReview as $item) {
+            $item->like = LogFeedBack::where('logId', $item->id)->where('like', 1)->count();
+            $item->disLike = LogFeedBack::where('logId', $item->id)->where('like', -1)->count();
+            $item->comments = findAnswerCount($item->id);
+//            $item->pic
+        }
+        //dd($lastReview);
 
         $cityPost = array();
-//        $cityPost = Post::where('cityId', $city->id)->where('date', '<=', $today)->orderBy('date','ASCD')->take(5)->get();
-//        if(count($cityPost) < 5){
-//            $num = 5 - count($cityPost);
-//            $cityPost2 = Post::where('date', '<=', $today)->orderBy('date','ASCD')->take($num)->get();
-//            if(count($cityPost) == 0)
-//                $cityPost = $cityPost2;
-//            else
-//                $cityPost = array_merge($cityPost, $cityPost2);
-//        }
 
-//        $lastMonth = Carbon::now()->subMonth();
-        $t0 = str_split($today, 4)[0];
-        $t1 = str_split($today, 4)[1];
-        $t2 = str_split($t1, 2)[1];
-        $t1 = str_split($t1, 2)[0];
-        $year = (int)$t0;
-        $month = (int)$t1;
-        $day = (int)$t2;
-        $month--;
-        if($month == 0) {
-            $month = 12;
-            $year--;
-        }
-        if($month < 10)
-            $month = '0' . $month;
-        if($day < 10)
-            $day = '0' . $day;
-        $lastMonth = $year . $month . $day;
 
         $mostSeenPosts = array();
-//        $mostSeenPosts = Post::where('date', '<=', $today)->where('date', '>=', $lastMonth)->orderBy('seen', 'ASCD')->take(5)->get();
-//
-//        foreach ($cityPost as $post) {
-//            $post->pic = URL::asset('posts/' . $post->pic);
-//            $date0 =substr($post->date,0,4);
-//            $date1 = substr($post->date,4,2);
-//            $date2 = substr($post->date,6,2);
-//
-//            $post->date = $date0 . '/' . $date1 . '/' . $date2;
-//            $post->category = getPostTranslated($post->category);
-//            $post->msgs = PostComment::wherePostId($post->id)->whereStatus(true)->count();
-//        }
-//        foreach ($mostSeenPosts as $post) {
-//            $post->pic = URL::asset('posts/' . $post->pic);
-//
-//            $date0 =substr($post->date,0,4);
-//            $date1 = substr($post->date,4,2);
-//            $date2 = substr($post->date,6,2);
-//
-//            $post->date = $date0 . '/' . $date1 . '/' . $date2;
-//            $post->category = getPostTranslated($post->category);
-//            $post->msgs = PostComment::wherePostId($post->id)->whereStatus(true)->count();
-//        }
 
-        $allAmaken = Amaken::where('cityId', $city->id)->select(['id', 'name', 'C', 'D', 'mooze', 'tarikhi', 'tabiatgardi', 'tafrihi', 'markazkharid'])->get();
-        $allMajara = Majara::where('cityId', $city->id)->select(['id', 'name', 'C', 'D'])->get();
-        $allHotels = Hotel::where('cityId', $city->id)->select(['id', 'name', 'C', 'D'])->get();
-        $allRestaurant = Restaurant::where('cityId', $city->id)->select(['id', 'name', 'C', 'D', 'kind_id'])->get();
-
-//        soghat count
-        $city->soghat_count = Adab::where('stateId', $city->stateId)->where('category', 1)->count();
-        $city->ghazamahali_count = Adab::where('stateId', $city->stateId)->where('category', 3)->count();
-        $city->sanaye_count = Adab::where('stateId', $city->stateId)->where('category', 6)->count();
-
-        $today = getToday()['date'];
-        $hotelCount = Hotel::all()->count();
-        $retCount = Restaurant::all()->count();
-        $amakenCount = Amaken::all()->count();
-        $sogatSanaie = SogatSanaie::all()->count();
-        $mahaliFoodCount = MahaliFood::all()->count();
-        $postCount = Post::where('date', '<=', $today)->where('release', '!=', 'draft')->count();
-
-        $activityId1 = Activity::where('name', 'نظر')->first()->id;
-        $activityId2 = Activity::where('name', 'پاسخ')->first()->id;
-
-        $commentCount = 0;
-        $commentCount += LogModel::where('activityId', $activityId1)->where('confirm', 1)->count();
-        $commentCount += LogModel::where('activityId', $activityId2)->where('confirm', 1)->count();
-        $commentCount += PostComment::where('status', 1)->count();
-        $userCount = User::all()->count();
-
-        $counts = [ 'hotel' => $hotelCount,
-            'restaurant' => $retCount,
-            'amaken' => $amakenCount,
-            'sogatSanaie' => $sogatSanaie,
-            'mahaliFood' => $mahaliFoodCount,
-            'article' => $postCount,
-            'comment' => $commentCount,
-            'userCount' => $userCount];
-
-        return view('cityPage', compact(['city', 'cityPost', 'mostSeenPosts', 'allAmaken', 'allHotels', 'allRestaurant', 'allMajara', 'counts']));
+        return view('cityPage', compact(['place', 'cityPost', 'mostSeenPosts', 'allAmaken', 'allHotels', 'allRestaurant', 'allMajara', 'allMahaliFood', 'allSogatSanaie']));
     }
 
     public function getCityOpinion()
@@ -739,7 +751,7 @@ class HomeController extends Controller
 
             foreach ($result as $itr) {
                 $itr->mode = "state";
-//                $itr->url = route($route, ['city' => $itr->targetName, 'mode' => 'state']);
+                $itr->url = url('cityPage/state/' . $itr->targetName);
             }
 
             if (!empty($key2))
@@ -750,7 +762,7 @@ class HomeController extends Controller
             foreach ($tmp as $itr) {
                 $itr->amakenCount = Amaken::where('cityId', $itr->id)->count();
                 $itr->mode = "city";
-                $itr->url = \url('cityPage/'.$itr->targetName);
+                $itr->url = url('cityPage/city/' . $itr->targetName);
             }
             for($i = 0; $i < count($tmp); $i++){
                 for($j = 1; $j < count($tmp); $j++){

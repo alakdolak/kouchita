@@ -41,7 +41,7 @@
 <div  ng-controller="getMainPageSuggestion" class="mainSuggestionMainDiv">
 
     <div id="newKoochita" class="homepage_shelves_widget ng-scope">
-        <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show">
+        <div class="prw_rup prw_shelves_shelf_widget" ng-show="show">
             <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
                 <div class="shelf_header">
                     <div class="shelf_title">

@@ -88,12 +88,16 @@ $state = 2; ?>
 <div class="ui_container cpBody">
     <div class="cpBorderBottom cpHeader">
         <div class="cpHeaderRouteOfCityName">
-            <span>استان {{$city->state}}</span>
+            @if(isset($place->state))
+            <span>استان {{$place->state}}</span>
             <span> > </span>
-            <span>شهر {{$city->name}}</span>
+            <span>{{$place->name}}</span>
+            @else
+                <span>{{$place->name}}</span>
+            @endif
             {{--<div class="ui_close_x" style="left: 30px !important; top: 15px !important;"></div>--}}
         </div>
-        <div class="cpHeaderCityName">شهر {{$city->name}}</div>
+        <div class="cpHeaderCityName">{{$place->name}}</div>
     </div>
     <div class="row">
         <div class="col-lg-3 text-align-right" style="float: left; padding: 0 !important;">
@@ -1040,7 +1044,7 @@ $state = 2; ?>
             <div class="row cpMainBox">
                 <div class="col-xs-4 pd-0Imp">
                     <div class="col-xs-12">
-                        <a class="col-xs-4 cpLittleMenu" href="{{url('hotelList/' . $city->name . '/city')}}">
+                        <a class="col-xs-4 cpLittleMenu" href="{{url('hotelList/' . $place->name . '/city')}}">
                             <div class="cityPageIcon hotel"></div>
                             <div class="textCityPageIcon">هتل</div>
                             <div class="textCityPageIcon">{{count($allHotels)}}</div>
@@ -1049,7 +1053,7 @@ $state = 2; ?>
                             <div class="cityPageIcon ticket"></div>
                             <div class="textCityPageIcon">بلیط</div>
                         </a>
-                        <a class="col-xs-4 cpLittleMenu" href="{{url('amakenList/' . $city->name . '/city')}}">
+                        <a class="col-xs-4 cpLittleMenu" href="{{url('amakenList/' . $place->name . '/city')}}">
                             <div class="cityPageIcon atraction"></div>
                             <div class="textCityPageIcon">جاذبه ها</div>
                             <div class="textCityPageIcon">{{count($allAmaken)}}</div>
@@ -1057,33 +1061,33 @@ $state = 2; ?>
                     </div>
                     <div class="clear-both"></div>
                     <div class="col-xs-12">
-                        <a class="col-xs-4 cpLittleMenu" href="{{url('restaurantList/' . $city->name . '/city')}}">
+                        <a class="col-xs-4 cpLittleMenu" href="{{url('restaurantList/' . $place->name . '/city')}}">
                             <div class="cityPageIcon restaurant"></div>
                             <div class="textCityPageIcon">رستوران</div>
                             <div class="textCityPageIcon">{{count($allRestaurant)}}</div>
                         </a>
-                        <a class="col-xs-4 cpLittleMenu" href="{{url('/adab-list/' . $city->state . '/soghat')}}">
+                        <a class="col-xs-4 cpLittleMenu" href="{{url('/adab-list/' . $place->state . '/soghat')}}">
                             <div class="cityPageIcon soghat"></div>
                             <div class="textCityPageIcon">سوغات</div>
-                            <div class="textCityPageIcon">{{$city->soghat_count}}</div>
+                            <div class="textCityPageIcon">{{$allSogatSanaie}}</div>
                         </a>
-                        <a class="col-xs-4 cpLittleMenu" href="{{url('/adab-list/' . $city->state . '/ghazamahali')}}">
+                        <a class="col-xs-4 cpLittleMenu" href="{{url('/adab-list/' . $place->state . '/ghazamahali')}}">
                             <div class="cityPageIcon ghazamahali"></div>
                             <div class="textCityPageIcon">غذای محلی</div>
-                            <div class="textCityPageIcon">{{$city->ghazamahali_count}}</div>
+                            <div class="textCityPageIcon">{{$allMahaliFood}}</div>
                         </a>
                     </div>
                     <div class="clear-both"></div>
                     <div class="col-xs-12">
-                        <a class="col-xs-4 cpLittleMenu" href="{{url('/majaraList/' . $city->name . '/city')}}">
+                        <a class="col-xs-4 cpLittleMenu" href="{{url('/majaraList/' . $place->name . '/city')}}">
                             <div class="cityPageIcon majara"></div>
                             <div class="textCityPageIcon">ماجراجویی</div>
                             <div class="textCityPageIcon">{{count($allMajara)}}</div>
                         </a>
-                        <a class="col-xs-4 cpLittleMenu" href="{{url('/adab-list/' . $city->state . '/sanaye')}}">
+                        <a class="col-xs-4 cpLittleMenu" href="{{url('/adab-list/' . $place->state . '/sanaye')}}">
                             <div class="cityPageIcon sanaye"></div>
                             <div class="textCityPageIcon">صنایع دستی</div>
-                            <div class="textCityPageIcon">{{$city->sanaye_count}}</div>
+                            <div class="textCityPageIcon">{{$allSogatSanaie}}</div>
                         </a>
                         <div class="col-xs-4 cpLittleMenu">
                             <div class="cityPageIcon lebas"></div>
@@ -1104,12 +1108,12 @@ $state = 2; ?>
                     </div>
                 </div>
                 <div class="col-xs-8 pd-0Imp">
-                    <img class="cpPic" src="{{URL::asset('_images/city/'.$city->image)}}">
+                    <img class="cpPic" src="{{$place->image}}">
                 </div>
             </div>
             <div class="row">
                 <div class="cpDescription cpBorderBottom">
-                    {{$city->description}}
+                    {{$place->description}}
                 </div>
                 <div ng-controller="getMainPageSuggestion" class="mainSuggestionMainDiv cpBorderBottom ng-scope">
                     <div id="newKoochita" class="homepage_shelves_widget ng-scope">
@@ -3118,7 +3122,7 @@ $state = 2; ?>
     };
 
     var data = $.param({
-        cityId: '{{$city->id}}',
+        cityId: '{{$place->id}}',
     });
 </script>
 
@@ -3134,9 +3138,9 @@ $state = 2; ?>
         $.ajax({
             type: 'post',
             url: '{{route("cityPage.getCityOpinion")}}',
-            data: {
-                '_token': _token,
-                'cityId': '{{$city->id}}'
+            data:{
+                '_token' : _token,
+                'cityId' : '{{$place->id}}'
             },
             success: function (response) {
                 response = JSON.parse(response);
@@ -3443,8 +3447,8 @@ $state = 2; ?>
 
 {{--map--}}
 <script>
-    var x = '{{$city->x}}';
-    var y = '{{$city->y}}';
+    var x = '{{$place->x}}';
+    var y = '{{$place->y}}';
     var all_amaken = {!! $allAmaken !!};
     var all_majara = {!! $allMajara !!};
     var all_hotels = {!! $allHotels !!};
@@ -3494,9 +3498,9 @@ $state = 2; ?>
 
 
     function init() {
-        var x = '{{$city->x}}';
-        var y = '{{$city->y}}';
-        var place_name = '{{ $city->name }}';
+        var x = '{{$place->x}}';
+        var y = '{{$place->y}}';
+        var place_name = '{{ $place->name }}';
         var mapOptions = {
             zoom: 10,
             center: new google.maps.LatLng(x, y),

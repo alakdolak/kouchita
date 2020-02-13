@@ -26,6 +26,8 @@
         $('#globalSearchResult').html('');
 
         $('#globalSearch').css('display', 'flex');
+
+        $('#globalSearchInput').focus();
     }
 
     function setResultToGlobalSearch(_txt){

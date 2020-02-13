@@ -148,7 +148,7 @@
                 '                            <span>صفحه قوانین و مقررات</span>\n' +
                 '                        </div>\n' +
                 '                        <div class="showingQuestionCompletely" onclick="showSpecificQuestion(this)">\n' +
-                '                            مشاهده شؤال\n' +
+                '                            مشاهده سوال\n' +
                 '                        </div>\n' +
                 '                        <div class="answersWriterDetailsShow">\n' +
                 '                            <div class="circleBase type2 answersWriterPicShow">' +

@@ -194,13 +194,14 @@
                         نقد
                     </a>
                 </span>
-                <div class="header heading" id="helpBtnMainDiv">
-                    <a class="link" onclick="startHelp()">
-                        <div class="circleBase type2 helpBtnIconMainDiv"></div>
-                        <b>راهنمای صفحات</b>
-                    </a>
-                </div>
+                {{--<div class="header heading" id="helpBtnMainDiv">--}}
+                    {{--<a class="link" onclick="startHelp()">--}}
+                        {{--<div class="circleBase type2 helpBtnIconMainDiv"></div>--}}
+                        {{--<b>راهنمای صفحات</b>--}}
+                    {{--</a>--}}
+                {{--</div>--}}
             </div>
+
             <div class="position-relative">
 
                 {{--<div style="width: 110px;height: 29px;position: absolute;left: 100px;border: 1px solid black;cursor: pointer;" onclick="changeStatetoReserved()">--}}
