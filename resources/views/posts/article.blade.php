@@ -1,58 +1,10 @@
 @extends('posts.articleLayout')
 
 @section('head')
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/easyimage.css')}}"/>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <link rel="profile" href="http://gmpg.org/xfn/11">
-    <title>خانه - شازده مسافر</title>
-    <link rel='stylesheet' id='google-font-css' href='//fonts.googleapis.com/css?family=Dosis%3A200' type='text/css' media='all'/>
-    <script type='text/javascript' src='{{URL::asset('js/jquery_12.js')}}'></script>
-</head>
-
-<body class="rebrand_2017 desktop HomeRebranded  js_logging rtl home page-template-default page page-id-119 group-blog wpb-js-composer js-comp-ver-4.12 vc_responsive">
-    {{--just article style--}}
-    <style>
-        .gnMainPicOfArticle {
-            position: relative;
-            padding: 15px 0;
-        }
-        .gnMainPicOfArticleText {
-            width: 96%;
-            position: absolute;
-            bottom: -35px;
-            left: 50%;
-            margin-left: -48%;
-            padding: 20px 20px 10px;
-            background: white;
-            border-bottom: 3px solid #f3f3f3;
-            opacity: 0.9;
-        }
-    </style>
-
-    <style>
-        .easyimage-side{
-            float: left !important;
-            margin-right: 1.5em !important;
-            text-align: center !important;
-            margin-left: 0px !important;
-        }
-    </style>
 @endsection
 
-<div class="header">
-
-
-    <div class="ppr_rup ppr_priv_hr_atf_north_star_nostalgic position-relative">
-{{--        @include('layouts.placeMainBodyHeader')--}}
-    </div>
-
     <div id="darkModal" class="display-none" role="dialog"></div>
-    @if(!Auth::check())
-        @include('layouts.loginPopUp')
-    @endif
 
     <div class="hidden visible-sm visible-xs">
         <div class="im-header-mobile">
@@ -101,6 +53,7 @@
             <a href="{{route('mainArticle')}}">
                 <div class="col-md-12 gnReturnBackBtn">بازگشت به صفحه اصلی</div>
             </a>
+
             <div class="col-md-12 gnWhiteBox">
                 <div class="widget-head widget-head-44">
                     <strong class="widget-title">دسته‌بندی مطالب</strong>
@@ -114,6 +67,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-md-12 gnWhiteBox">
 
                 @if($stateCome != null)
@@ -349,7 +303,9 @@
             </div>
         </div>
     </div>
+
     <script src="{{URL::asset('/js/article/articlePage.js')}}"></script>
+
     <script>
         var category = {!! $category !!}
         var post = {!! $post !!}

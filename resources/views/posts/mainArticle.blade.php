@@ -1,29 +1,6 @@
 @extends('posts.articleLayout')
 
 @section('body')
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/long_lived_global_legacy_2.css?v=1')}}"/>
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/article.min.css?v=1.2')}}"/>
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/shazdeDesigns/article.css')}}"/>
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/shazdeDesigns/abbreviations.css')}}"/>
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <link rel="profile" href="http://gmpg.org/xfn/11">
-    <title>خانه - شازده مسافر</title>
-
-    <link rel='stylesheet' id='google-font-css' href='//fonts.googleapis.com/css?family=Dosis%3A200' type='text/css' media='all'/>
-    <script type='text/javascript' src='{{URL::asset('js/jquery_12.js')}}'></script>
-</head>
-
-<body class="rebrand_2017 desktop HomeRebranded  js_logging rtl home page-template-default page page-id-119 group-blog wpb-js-composer js-comp-ver-4.12 vc_responsive">
-
-<div class="header">
-
-
-    <div class="ppr_rup ppr_priv_hr_atf_north_star_nostalgic position-relative">
-        {{--@include('layouts.placeMainBodyHeader')--}}
-    </div>
 
     <h1 class="non-display-name"><a href="/">شازده مسافر مجله جامع دیجیتال گردشگری، سفر و ایرانشناسی</a></h1>
 
@@ -1027,6 +1004,7 @@
     </div>
 
     <script type='text/javascript' src='{{URL::asset('js/article/mainArticle.js')}}'></script>
+
     <script>
         var page = 1;
         var _token = '{{csrf_token()}}';

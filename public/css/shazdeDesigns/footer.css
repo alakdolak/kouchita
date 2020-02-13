@@ -1372,3 +1372,30 @@ footer .tripsBoxesMainDiv {
         padding: 10px 0;
     }
 }
+
+/*the style of article footer & menu in phone*/
+.lp_ar_searchTitle {
+    color: #761c19;
+    text-align: center;
+    font-weight: 600;
+}
+
+.lp_ar_filters {
+    border-bottom: 3px solid rgba(0, 0, 0, .075);
+    display: flex;
+    margin: 5px 0;
+}
+
+.lp_ar_eachFilters {
+    width: 50%;
+    text-align: center;
+    line-height: 30px;
+}
+
+.lp_ar_selectedMenu {
+    border-bottom: 5px solid #761c19;
+}
+
+.lp_ar_rightFilters {
+    border-left: 2px solid rgba(0, 0, 0, .075);
+}
