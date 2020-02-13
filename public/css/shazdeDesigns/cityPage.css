@@ -146,6 +146,12 @@
     font-size: 20px;
 }
 
+/*css of comment box*/
+.cpCommentBox {
+    max-height: 4250px;
+    overflow: auto;
+}
+/*end of css of comment box*/
 
 
 

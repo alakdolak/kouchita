@@ -76,7 +76,8 @@
                                                 <span class="reviewCount ng-binding">[[place.placeReviews]] </span><span>نقد </span>
                                             </div>
                                             <div class="item tags ng-binding">[[place.placeCity]] <span>در </span>
-                                                <span class="ng-binding">[[place.placeState]]</span></div>
+                                                <span class="ng-binding">[[place.placeState]]</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -152,7 +153,7 @@
         </div>
     </div>
 
-    <center class="stripedBannerMainDiv">
+    <div class="stripedBannerMainDiv">
         <div class="stripedBackgroundDiv mg-lt-5">
             <div class="innerStripedBackGround">
                 <a href="{{isset($middleBannerLink['31']) ? $middleBannerLink['31'] : '#'}}" target="{{isset($middleBannerLink['31']) ? '_blank' : ''}}" >
@@ -167,7 +168,7 @@
                 </a>
             </div>
         </div>
-    </center>
+    </div>
 
     <div id="tabiatSuggestion" class="homepage_shelves_widget ng-scope" style="display: none">
         <div class="prw_rup prw_shelves_shelf_widget" style="">
@@ -222,7 +223,7 @@
         </div>
     </div>
 
-    <center class="siteArticlesMainDiv">
+    <div class="siteArticlesMainDiv">
         <div class="articleBoxes">
             <div class="articleTitle">مقاله‌های ما</div>
             <div class="articleImgMainDiv">
@@ -259,7 +260,7 @@
             </div>
             <a class="articleLink">هم اکنون ببینید</a>
         </div>
-    </center>
+    </div>
 
     <div id="restaurantSuggestion" class="homepage_shelves_widget ng-scope" style="display: none">
         <div class="prw_rup prw_shelves_shelf_widget" style="">

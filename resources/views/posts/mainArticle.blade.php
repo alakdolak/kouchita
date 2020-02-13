@@ -20,13 +20,6 @@
 
 <div class="header">
 
-    <div class="hideOnPhone">
-        @include('layouts.placeHeader')
-    </div>
-
-    <div class="hideOnScreen">
-        @include('layouts.header1Phone')
-    </div>
 
     <div class="ppr_rup ppr_priv_hr_atf_north_star_nostalgic position-relative">
         {{--@include('layouts.placeMainBodyHeader')--}}

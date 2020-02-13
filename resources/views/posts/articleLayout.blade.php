@@ -117,7 +117,13 @@
 
     <div class="header">
 
-        @include('layouts.placeHeader')
+        <div class="hideOnPhone">
+            @include('layouts.placeHeader')
+        </div>
+
+        <div class="hideOnScreen">
+            @include('layouts.header1Phone')
+        </div>
 
         @yield('body')
 
