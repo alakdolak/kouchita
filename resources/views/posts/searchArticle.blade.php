@@ -4,7 +4,7 @@
 
     <h1 class="non-display-name"><a href="/">شازده مسافر مجله جامع دیجیتال گردشگری، سفر و ایرانشناسی</a></h1>
 
-    <div class="hidden visible-sm visible-xs">
+    <div class="hidden visible-sm visible-xs hideOnPhone">
         <div class="im-header-mobile">
             <div class="im-main-header clearfix light">
                 <div class='container'>
@@ -45,7 +45,7 @@
         </div>
     </div>
 
-    <div class="hidden visible-sm visible-xs">
+    <div class="hidden visible-sm visible-xs hideOnPhone">
         <div id="im-header-offconvas" class="im-header-offconvas">
             <div class="im-header-offconvas-off clearfix">
                 <button id="off-canvas-off" class="off-canvas-off">
@@ -299,7 +299,7 @@
     </div>
 
     <div class="container" style="direction: rtl">
-        <div class="col-md-3 col-sm-12" style="padding-right: 0 !important;">
+        <div class="col-md-3 col-sm-12 hideOnPhone" style="padding-right: 0 !important;">
             <a href="{{route('mainArticle')}}">
                 <div class="col-md-12 gnReturnBackBtn">بازگشت به صفحه اصلی</div>
             </a>

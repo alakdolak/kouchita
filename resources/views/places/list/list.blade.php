@@ -7,6 +7,8 @@
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/long_lived_global_legacy_2.css?v=2')}}"/>
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/hotelLists.css')}}"/>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/mainPageStyles.css')}}'/>
+    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/icons.css?v=2')}}' />
+    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/hotelDetail.css?v=2')}}' />
 
     <title>
         {{$kindPlace->name}}
@@ -20,6 +22,9 @@
     </title>
 
     <style>
+        .rebrand_2017 .masthead {
+            margin-bottom: 0px !important;
+        }
         .red-heart-fill::before {
             content: '\e012' !important;
             color: #ff0000 !important;
@@ -34,15 +39,32 @@
             margin: 20px 5px;
             border: solid gray 3px;
         }
-        .filtersExist{
+        .filtersExist {
             padding: 2%;
             margin: 2%;
             background-color: #4dc7bc;
             color: white;
+            display: flex;
             flex-direction: row;
             justify-content: center;
             align-items: center;
-            width: 40px
+        }
+        .filterCloseIcon {
+            font-size: 1.5em;
+            margin-right: 5px;
+            cursor: pointer;
+        }
+        .hl_compareBtn {
+            background-color: #fcc156;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 5px 0 10px;
+            text-align: center;
+            font-size: 1.2em;
+            cursor: pointer;
+        }
+        .hl_compareBtn:hover {
+            opacity: 0.75;
         }
     </style>
 
@@ -58,113 +80,164 @@
 <div id="PAGE" class="filterSearch redesign_2015 non_hotels_like desktop scopedSearch">
     @include('layouts.placeHeader')
     <div class=" hotels_lf_redesign ui_container is-mobile responsive_body">
-        <div class="restaurants_list">
-            <div ID="taplc_hotels_redesign_header_0" class="ppr_rup ppr_priv_hotels_redesign_header">
-                <div id="hotels_lf_header" class="restaurants_list">
-                    <div id="p13n_tag_header_wrap" class="tag_header p13n_no_see_through ontop hotels_lf_header_wrap">
-                        <div id="p13n_tag_header" class="restaurants_list no_bottom_padding">
-                            <div id="p13n_welcome_message" class="easyClear">
-                                <h1 id="HEADING" class="p13n_geo_hotels ">
-                                    {{$kindPlace->name}}
-
-                                @if($mode == "state")
-                                        استان
-                                    @else
-                                        شهر
-                                    @endif
-                                    {{$city->name}}
-                                </h1>
-
-                                @if($placeMode == "hotel")
-                                    <div>
-                                        <div class="srchBox">
-                                            <button class="srchBtn" onclick="inputSearch(0)">جستجو</button>
-                                        </div>
-                                        <div class="roomBox">
-                                            <div id="roomDetail" onclick="togglePassengerNoSelectPane()">
-                                                <span id="room_number" class="room"></span>&nbsp;
-                                                <span>اتاق</span>&nbsp;-&nbsp;
-                                                <span id="adult_number" class="adult"></span>
-                                                <span>بزرگسال</span>&nbsp;
-                                                {{---&nbsp;--}}
-                                                {{--<span class="children">--}}
-                                                {{--{{$children}}--}}
-                                                {{--</span>--}}
-                                                {{--<span>بچه</span>&nbsp;--}}
-                                            </div>
-                                            <div id="roomCapacityBoxIcon" onclick="togglePassengerNoSelectPane()"
-                                                 class="shTIcon passengerIcon"></div>
-                                            <div id="passengerArrowDown" onclick="togglePassengerNoSelectPane()"
-                                                 class="shTIcon searchBottomArrowIcone arrowPassengerIcone"></div>
-                                            <div id="passengerArrowUp" onclick="togglePassengerNoSelectPane()"
-                                                 class="shTIcon searchTopArrowIcone arrowPassengerIcone hidden"></div>
-
-
-                                            <div class="roomPassengerPopUp hidden " id="passengerNoSelectPane"
-                                                 onmouseleave="addClassHidden('passengerNoSelectPane'); passengerNoSelect = false;">
-                                                <div class="rowOfPopUp">
-                                                    <span class="float-right">اتاق</span>
-                                                    <div class="float-left">
-                                                        <div onclick="changeRoomPassengersNum(-1, 3)"
-                                                             class="shTIcon minusPlusIcons minus"></div>
-                                                        <span class='numBetweenMinusPlusBtn room' id="roomNumInSelect">
-    {{--                                                        {{$room}}--}}
-                                                        </span>
-                                                        <div onclick="changeRoomPassengersNum(1, 3)"
-                                                             class="shTIcon minusPlusIcons plus"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="rowOfPopUp">
-                                                    <span class="float-right">بزرگسال</span>
-                                                    <div class="float-left">
-                                                        <div onclick="changeRoomPassengersNum(-1, 2)"
-                                                             class="shTIcon minusPlusIcons minus"></div>
-                                                        <span class='numBetweenMinusPlusBtn adult'
-                                                              id="adultPassengerNumInSelect">
-    {{--                                                        {{$adult}}--}}
-                                                        </span>
-                                                        <div onclick="changeRoomPassengersNum(1, 2)"
-                                                             class="shTIcon minusPlusIcons plus"></div>
-                                                    </div>
-                                                </div>
-                                                {{--<div class="rowOfPopUp">--}}
-                                                {{--<span class="float-right">بچه</span>--}}
-                                                {{--<div class="float-left">--}}
-                                                {{--<div onclick="changeRoomPassengersNum(-1, 1)"--}}
-                                                {{--class="shTIcon minusPlusIcons minus"></div>--}}
-                                                {{--<span class='numBetweenMinusPlusBtn children'--}}
-                                                {{--id="childrenPassengerNumInSelect">--}}
-                                                {{--{{$children}}--}}
-                                                {{--</span>--}}
-                                                {{--<div onclick="changeRoomPassengersNum(1, 1)"--}}
-                                                {{--class="shTIcon minusPlusIcons plus"></div>--}}
-                                                {{--</div>--}}
-                                                {{--</div>--}}
-                                                {{--<div class="childrenPopUpAlert">--}}
-                                                {{--سن بچه را در زمان ورود به هتل وارد کنید--}}
-                                                {{--</div>--}}
-                                                {{--<div class="childBox"></div>--}}
-                                            </div>
-                                        </div>
-                                        <div class="calenderBox">
-                                            <label id="calendar-container-edit-1placeDate" class="dateLabel">
-                                                <span onclick="changeTwoCalendar(2); nowCalendar()" class="ui_icon calendar calendarIcon"></span>
-                                                <input onclick="assignDate('{{convertStringToDate(getToday()["date"])}}', 'calendar-container-edit-1placeDate_phone', 'backDate_phone')" name="date" id="goDate" type="text" class="inputDateLabel" placeholder="تاریخ رفت" required readonly>
-                                            </label>
-                                            <label id="calendar-container-edit-2placeDate" class="dateLabel">
-                                                <span>تا</span>
-                                                <input name="date" id="backDate" type="text" class="inputDateLabel" placeholder="تاریخ برگشت" required readonly>
-                                            </label>
-                                        </div>
-                                    </div>
-                                    @include('layouts.calendar')
-                                @endif
+        <div style="height: 100px;">
+            <div id="searchBoxTopPageMainDiv">
+                <span>شما در</span>
+                <div class="inputBox position-ralative">
+                    <div class="select-side">
+                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                    </div>
+                    <select class="inputBoxInput styled-select text-align-right mg-lt-10" type="text" placeholder="">
+                        <option>استان اصفهان</option>
+                    </select>
+                </div>
+                <span>در</span>
+                <div class="inputBox position-ralative">
+                    <div class="select-side">
+                        <i class="glyphicon glyphicon-triangle-bottom"></i>
+                    </div>
+                    <select class="inputBoxInput styled-select text-align-right mg-lt-10" type="text" placeholder="">
+                        <option>شهر اصفهان</option>
+                    </select>
+                </div>
+                <span class="mg-lt-15">هستید. تغییر دهید</span>
+                <div id="searchIcon"></div>
+            </div>
+            <div style="margin-top: 65px; position: relative;">
+                <div style="text-align: center;font-size: 2.5em;font-weight: 600;">مراکز اقامتی شهر تهران</div>
+                <div style="position: relative; top: -25px">
+                    <div>
+                        <div id="helpBtnMainDiv" style="top: 0">
+                            <a class="link">
+                                <div class="circleBase type2 helpBtnIconMainDiv"></div>
+                                <b>راهنمای صفحات</b>
+                            </a>
+                        </div>
+                        <div class="ui_button sharePageMainDiv" onclick="toggleShareIcon(this)" style="margin-top: 40px">
+                            <div class="sharePageIcon first"></div>
+                            <div class="sharePageLabel">
+                                اشتراک&zwnj;گذاری صفحه
                             </div>
                         </div>
                     </div>
+                    <div style="position: absolute; bottom: 0; right: 0;">
+                        <span>نمایش مراکز اقامتی استان تهران</span>
+                        <span>></span>
+                        <span>نمایش مراکز اقامتی استان البرز</span>
+                        <span>></span>
+                        <span>نمایش مراکز اقامتی شهریار</span>
+                    </div>
                 </div>
+
             </div>
         </div>
+{{--        <div class="restaurants_list">--}}
+{{--            <div ID="taplc_hotels_redesign_header_0" class="ppr_rup ppr_priv_hotels_redesign_header">--}}
+{{--                <div id="hotels_lf_header" class="restaurants_list">--}}
+{{--                    <div id="p13n_tag_header_wrap" class="tag_header p13n_no_see_through ontop hotels_lf_header_wrap">--}}
+{{--                        <div id="p13n_tag_header" class="restaurants_list no_bottom_padding">--}}
+{{--                            <div id="p13n_welcome_message" class="easyClear">--}}
+{{--                                <h1 id="HEADING" class="p13n_geo_hotels ">--}}
+{{--                                    {{$kindPlace->name}}--}}
+
+{{--                                @if($mode == "state")--}}
+{{--                                        استان--}}
+{{--                                    @else--}}
+{{--                                        شهر--}}
+{{--                                    @endif--}}
+{{--                                    {{$city->name}}--}}
+{{--                                </h1>--}}
+
+{{--                                @if($placeMode == "hotel")--}}
+{{--                                    <div>--}}
+{{--                                        <div class="srchBox">--}}
+{{--                                            <button class="srchBtn" onclick="inputSearch(0)">جستجو</button>--}}
+{{--                                        </div>--}}
+{{--                                        <div class="roomBox">--}}
+{{--                                            <div id="roomDetail" onclick="togglePassengerNoSelectPane()">--}}
+{{--                                                <span id="room_number" class="room"></span>&nbsp;--}}
+{{--                                                <span>اتاق</span>&nbsp;-&nbsp;--}}
+{{--                                                <span id="adult_number" class="adult"></span>--}}
+{{--                                                <span>بزرگسال</span>&nbsp;--}}
+{{--                                                --}}{{----}}{{---&nbsp;--}}
+{{--                                                --}}{{----}}{{--<span class="children">--}}
+{{--                                                --}}{{----}}{{--{{$children}}--}}
+{{--                                                --}}{{----}}{{--</span>--}}
+{{--                                                --}}{{----}}{{--<span>بچه</span>&nbsp;--}}
+{{--                                            </div>--}}
+{{--                                            <div id="roomCapacityBoxIcon" onclick="togglePassengerNoSelectPane()"--}}
+{{--                                                 class="shTIcon passengerIcon"></div>--}}
+{{--                                            <div id="passengerArrowDown" onclick="togglePassengerNoSelectPane()"--}}
+{{--                                                 class="shTIcon searchBottomArrowIcone arrowPassengerIcone"></div>--}}
+{{--                                            <div id="passengerArrowUp" onclick="togglePassengerNoSelectPane()"--}}
+{{--                                                 class="shTIcon searchTopArrowIcone arrowPassengerIcone hidden"></div>--}}
+
+
+{{--                                            <div class="roomPassengerPopUp hidden " id="passengerNoSelectPane"--}}
+{{--                                                 onmouseleave="addClassHidden('passengerNoSelectPane'); passengerNoSelect = false;">--}}
+{{--                                                <div class="rowOfPopUp">--}}
+{{--                                                    <span class="float-right">اتاق</span>--}}
+{{--                                                    <div class="float-left">--}}
+{{--                                                        <div onclick="changeRoomPassengersNum(-1, 3)"--}}
+{{--                                                             class="shTIcon minusPlusIcons minus"></div>--}}
+{{--                                                        <span class='numBetweenMinusPlusBtn room' id="roomNumInSelect">--}}
+{{--    --}}{{----}}{{--                                                        {{$room}}--}}
+{{--                                                        </span>--}}
+{{--                                                        <div onclick="changeRoomPassengersNum(1, 3)"--}}
+{{--                                                             class="shTIcon minusPlusIcons plus"></div>--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                                <div class="rowOfPopUp">--}}
+{{--                                                    <span class="float-right">بزرگسال</span>--}}
+{{--                                                    <div class="float-left">--}}
+{{--                                                        <div onclick="changeRoomPassengersNum(-1, 2)"--}}
+{{--                                                             class="shTIcon minusPlusIcons minus"></div>--}}
+{{--                                                        <span class='numBetweenMinusPlusBtn adult'--}}
+{{--                                                              id="adultPassengerNumInSelect">--}}
+{{--    --}}{{----}}{{--                                                        {{$adult}}--}}
+{{--                                                        </span>--}}
+{{--                                                        <div onclick="changeRoomPassengersNum(1, 2)"--}}
+{{--                                                             class="shTIcon minusPlusIcons plus"></div>--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                                --}}{{----}}{{--<div class="rowOfPopUp">--}}
+{{--                                                --}}{{----}}{{--<span class="float-right">بچه</span>--}}
+{{--                                                --}}{{----}}{{--<div class="float-left">--}}
+{{--                                                --}}{{----}}{{--<div onclick="changeRoomPassengersNum(-1, 1)"--}}
+{{--                                                --}}{{----}}{{--class="shTIcon minusPlusIcons minus"></div>--}}
+{{--                                                --}}{{----}}{{--<span class='numBetweenMinusPlusBtn children'--}}
+{{--                                                --}}{{----}}{{--id="childrenPassengerNumInSelect">--}}
+{{--                                                --}}{{----}}{{--{{$children}}--}}
+{{--                                                --}}{{----}}{{--</span>--}}
+{{--                                                --}}{{----}}{{--<div onclick="changeRoomPassengersNum(1, 1)"--}}
+{{--                                                --}}{{----}}{{--class="shTIcon minusPlusIcons plus"></div>--}}
+{{--                                                --}}{{----}}{{--</div>--}}
+{{--                                                --}}{{----}}{{--</div>--}}
+{{--                                                --}}{{----}}{{--<div class="childrenPopUpAlert">--}}
+{{--                                                --}}{{----}}{{--سن بچه را در زمان ورود به هتل وارد کنید--}}
+{{--                                                --}}{{----}}{{--</div>--}}
+{{--                                                --}}{{----}}{{--<div class="childBox"></div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                        <div class="calenderBox">--}}
+{{--                                            <label id="calendar-container-edit-1placeDate" class="dateLabel">--}}
+{{--                                                <span onclick="changeTwoCalendar(2); nowCalendar()" class="ui_icon calendar calendarIcon"></span>--}}
+{{--                                                <input onclick="assignDate('{{convertStringToDate(getToday()["date"])}}', 'calendar-container-edit-1placeDate_phone', 'backDate_phone')" name="date" id="goDate" type="text" class="inputDateLabel" placeholder="تاریخ رفت" required readonly>--}}
+{{--                                            </label>--}}
+{{--                                            <label id="calendar-container-edit-2placeDate" class="dateLabel">--}}
+{{--                                                <span>تا</span>--}}
+{{--                                                <input name="date" id="backDate" type="text" class="inputDateLabel" placeholder="تاریخ برگشت" required readonly>--}}
+{{--                                            </label>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                    @include('layouts.calendar')--}}
+{{--                                @endif--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
 
         <div class="Restaurants prodp13n_jfy_overflow_visible">
 
@@ -173,7 +246,7 @@
             <div id="BODYCON" class="col easyClear poolX adjust_padding new_meta_chevron_v2" ng-app="mainApp">
                 <div class="eateryOverviewContent">
                     <div class="ui_columns is-partitioned is-mobile">
-                        <div id="PlaceController" class="ui_column is-9" ng-controller="PlaceController as cntr" style="direction: rtl;">
+                        <div id="PlaceController" class="ui_column is-9" ng-controller="PlaceController as cntr" style="direction: rtl; padding: 9px 24px;">
                             <div  infinite-scroll="myPagingFunction()" class="coverpage">
                                 <div class="ppr_rup ppr_priv_restaurants_coverpage_content">
                                     <div>
@@ -308,7 +381,7 @@
                             <div id="bottomMainList" style="width: 100%; height: 5px;"></div>
                         </div>
 
-                        <div class="lhr ui_column is-3 hideCount reduced_height" id="FilterController" ng-controller="FilterController" style="direction: rtl;">
+                        <div class="lhr ui_column is-3 hideCount reduced_height" id="FilterController" ng-controller="FilterController" style="direction: rtl; padding: 10px;">
                             <div class="ppr_rup ppr_priv_restaurant_filters">
                                 <div class="verticalFilters placements">
                                     <div id="EATERY_FILTERS_CONT" class="eatery_filters">
@@ -320,9 +393,17 @@
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <div class="prw_rup prw_restaurants_restaurant_filters">
+                                            <div id="jfy_filter_bar_establishmentTypeFilters" class="lhrFilterBlock jfy_filter_bar_establishmentTypeFilters collapsible" style="display: flex;justify-content: center;margin: 10px;">
+                                                <img src="http://localhost/assets/_images/majara/kohmare/f-1.jpg" alt="آبشار کوهمره سرخی" class="image">
+                                            </div>
+                                        </div>
+
                                         <div class="prw_rup prw_restaurants_restaurant_filters">
                                             <div id="jfy_filter_bar_establishmentTypeFilters"
                                                  class="lhrFilterBlock jfy_filter_bar_establishmentTypeFilters collapsible">
+                                                <div class="col-md-12 hl_compareBtn">هم‌اکنون مقایسه کنید</div>
                                                 <div id="filterBox" style="flex-direction: column;">
                                                     <div style="font-size: 15px; margin: 10px 0px;">
                                                         <span>فیلترهای اعمال شده</span>
@@ -330,15 +411,10 @@
                                                             <span>----</span><span style="margin: 0 5px">مورد از</span><span>----</span>
                                                         </span>
                                                     </div>
-                                                    <div style="cursor: pointer; font-size: 12px; color: #050c93;" onclick="closeFilters()">
+                                                    <div style="cursor: pointer; font-size: 12px; color: #050c93; margin-bottom: 7px;" onclick="closeFilters()">
                                                         پاک کردن فیلتر ها
                                                     </div>
-                                                    <div id="filterShow" style="display: flex; flex-direction: row; flex-wrap: wrap;">
-                                                        <div>
-                                                            <div id="closeMoneyFilter" class="closeXicon filtersExist">غذای فرنگی</div>
-                                                            <div onclick="cancelFeatureFilter(3)" class="ui_close_x"></div>
-                                                        </div>
-                                                    </div>
+                                                    <div id="filterShow" style="display: flex; flex-direction: row; flex-wrap: wrap;"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -807,18 +883,25 @@
         var text = '';
         $('#filterShow').html('');
         if(rateFilter != 0)
-            text += '<div>\n' +
-                    '<div id="closeMoneyFilter" class="closeXicon filtersExist">امتیاز کاربر</div>\n' +
-                    '<div onclick="cancelRateFilter()" class="icons s"></div>\n' +
+            text += '<div class="filtersExist">\n' +
+                    '<div>امتیاز کاربر</div>\n' +
+                    '<div onclick="cancelRateFilter()" class="icons iconClose filterCloseIcon"></div>\n' +
                     '</div>';
 
         if(nameFilter.trim().length > 2)
-            text += '<div id="closeMoneyFilter" class="closeXicon filtersExist" onclick="cancelNameFilter()"> نام</div>\n';
+            text += '<div class="filtersExist">\n' +
+                    '<div>نام</div>\n' +
+                    '<div onclick="cancelNameFilter()" class="icons iconClose filterCloseIcon"></div>\n' +
+                    '</div>';
 
         for(i = 0; i < featureFilter.length; i++){
             if(featureFilter[i] != 0) {
                 var name = document.getElementById('feat' + featureFilter[i]).value;
-                text += '<div id="closeMoneyFilter" class="closeXicon filtersExist" onclick="cancelFeatureFilter(' + featureFilter[i] + ')">' + name + '</div>\n';
+                // text += '<div id="closeMoneyFilter" class="closeXicon filtersExist" onclick="cancelFeatureFilter(' + featureFilter[i] + ')">' + name + '</div>\n';
+                text += '<div class="filtersExist">\n' +
+                        '<div>' + name + '</div>\n' +
+                        '<div onclick="cancelFeatureFilter(' + featureFilter[i] + ')" class="icons iconClose filterCloseIcon"></div>\n' +
+                        '</div>';
             }
         }
 
