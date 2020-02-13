@@ -11,6 +11,13 @@ Route::get('databaseforall', function (){
 
 //    ALTER TABLE `amaken` DROP `emkanat`, DROP `tarikhi`, DROP `mooze`, DROP `tafrihi`, DROP `tabiatgardi`, DROP `markazkharid`, DROP `baftetarikhi`, DROP `tejari`, DROP `mazhabi`, DROP `sanati`, DROP `markaz`, DROP `boundArea`, DROP `hoome`, DROP `shologh`, DROP `khalvat`, DROP `tabiat`, DROP `kooh`, DROP `darya`, DROP `kavir`, DROP `jangal`, DROP `shahri`, DROP `village`, DROP `class`, DROP `modern`, DROP `tarikhibana`, DROP `boomi`, DROP `mamooli`, DROP `mazhabiArch`, DROP `weather`, DROP `farhangi`, DROP `ghadimi`;
 
+//    ALTER TABLE `place` ADD `tableName` VARCHAR(50) NULL DEFAULT NULL AFTER `visibility`, ADD `fileName` VARCHAR(50) NULL DEFAULT NULL AFTER `tableName`;
+//    UPDATE `place` SET `tableName` = 'amaken', `fileName` = 'amaken' WHERE `place`.`id` = 1;
+//    UPDATE `place` SET `tableName` = 'restaurant', `fileName` = 'restaurant' WHERE `place`.`id` = 3;
+//    UPDATE `place` SET `tableName` = 'hotels', `fileName` = 'hotels' WHERE `place`.`id` = 4;
+//    UPDATE `place` SET `tableName` = 'majara', `fileName` = 'majara' WHERE `place`.`id` = 6;
+//    UPDATE `place` SET `tableName` = 'sogatSanaies', `fileName` = 'sogatsanaie' WHERE `place`.`id` = 10;
+//    UPDATE `place` SET `tableName` = 'mahaliFood', `fileName` = 'mahalifood' WHERE `place`.`id` = 11;
 });
 
 Route::get('fillHotelPic', function(){

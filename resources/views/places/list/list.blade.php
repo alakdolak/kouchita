@@ -26,6 +26,16 @@
             margin: 20px 5px;
             border: solid gray 3px;
         }
+        .filtersExist{
+            padding: 2%;
+            margin: 2%;
+            background-color: #4dc7bc;
+            color: white;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            width: 40px
+        }
     </style>
 
     <script src= {{URL::asset("js/calendar.js") }}></script>
@@ -168,22 +178,22 @@
                                                                 اساس:
                                                             </div>
                                                             <div class="ordering">
-                                                                <div class="orders" onclick="selectingOrder($(this),'price')" ng-click="sortFunc('price')" id="z1">
+                                                                <div class="orders" onclick="selectingOrder($(this),'review')" ng-click="sortFunc('review')" id="z1">
                                                                     بیشترین نظر
                                                                 </div>
                                                             </div>
                                                             <div class="ordering">
-                                                                <div class="orders" onclick="selectingOrder($(this), 'review')" ng-click="sortFunc('review')" id="z2">
+                                                                <div class="orders selectOrder" onclick="selectingOrder($(this), 'rate')" ng-click="sortFunc('rate')" id="z2">
                                                                     بهترین بازخورد
                                                                 </div>
                                                             </div>
                                                             <div class="ordering">
-                                                                <div class="orders" onclick="selectingOrder($(this), 'review')" ng-click="sortFunc('review')" id="z2">
+                                                                <div class="orders" onclick="selectingOrder($(this), 'seen')" ng-click="sortFunc('seen')" id="z3">
                                                                     بیشترین بازدید
                                                                 </div>
                                                             </div>
                                                             <div class="ordering">
-                                                                <div class="orders selectOrder" ng-click="sortFunc('offer')" id="z3" onclick="selectingOrder($(this), 'offer')" >
+                                                                <div class="orders" ng-click="sortFunc('alphabet')" onclick="selectingOrder($(this), 'alphabet')" id="z4" >
                                                                     حروف الفبا
                                                                 </div>
                                                             </div>
@@ -197,7 +207,7 @@
                                                                     <input id="inputDistancePlace" class="inputDistance"
                                                                            type="text"
                                                                            placeholder="مکان مورد نظر را وارد کنید"
-                                                                           oninput="searchPlace(this.value)" >
+                                                                           oninput="openGlobalSearch()" readonly>
                                                                     <div class="textDistance"> توجه کنید این مکان می
                                                                         بایست در محدوده مقصد باشد.
                                                                     </div>
@@ -259,7 +269,7 @@
                                         <div class="prw_rup prw_restaurants_restaurant_filters">
                                             <div id="jfy_filter_bar_establishmentTypeFilters"
                                                  class="lhrFilterBlock jfy_filter_bar_establishmentTypeFilters collapsible">
-                                                <div id="filterBox" style="display: none; flex-direction: column;">
+                                                <div id="filterBox" style="flex-direction: column;">
                                                     <div style="font-size: 15px; margin: 10px 0px;">
                                                         <span>
                                                             فیلترهای اعمال شده
@@ -269,44 +279,19 @@
                                                         پاک کردن فیلتر ها
                                                     </div>
                                                     <div id="filterShow" style="display: flex; flex-direction: row; flex-wrap: wrap;">
-                                                        <div id="closeMoneyFilter" class="closeXicon" style="padding: 2%; margin: 2%; background-color: #4dc7bc; color: white; flex-direction: row; justify-content: center; align-items: center; display: none;" onclick="cancelMoneyFilter()"> قیمت</div>
-                                                        <div id="closeRateFilter" class="closeXicon" style="padding: 2%; margin: 2%; background-color: #4dc7bc; color: white; flex-direction: row; justify-content: center; align-items: center; display: none;" onclick="cancelRateFilter()"> امتیاز کاربران </div>
-                                                        <div id="closeKindFilter" class="closeXicon" style="padding: 2%; margin: 2%; background-color: #4dc7bc; color: white; flex-direction: row; justify-content: center; align-items: center; display: none;" onclick="cancelKindFilter()"> نوع</div>
-                                                        <div id="closeRangeFilter" class="closeXicon" style="padding: 2%; margin: 2%; background-color: #4dc7bc; color: white; flex-direction: row; justify-content: center; align-items: center; display: none;" onclick="cancelRangeFilter()"> محدوده</div>
-                                                        <div id="closeFoodFilter" class="closeXicon" style="padding: 2%; margin: 2%; background-color: #4dc7bc; color: white; flex-direction: row; justify-content: center; align-items: center; display: none;" onclick="cancelFoodFilter()"> غذا</div>
-                                                        <div id="closeFacilitiesFilter" class="closeXicon" style="padding: 2%; margin: 2%; background-color: #4dc7bc; color: white; flex-direction: row; justify-content: center; align-items: center; display: none;" onclick="cancelFacilitiesFilter()"> امکانات</div>
+                                                        <div id="closeMoneyFilter" class="closeXicon" style="padding: 2%; margin: 2%; background-color: #4dc7bc; color: white; flex-direction: row; justify-content: center; align-items: center;width: 40px" onclick="cancelMoneyFilter()"> قیمت</div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="prw_rup prw_restaurants_restaurant_filters">
-                                            <div id="jfy_filter_bar_establishmentTypeFilters"
-                                                 class="lhrFilterBlock jfy_filter_bar_establishmentTypeFilters collapsible">
-                                                <div class="filterContent ui_label_group inline"
-                                                     style="padding-top: 23px">
-                                                    <div class="ui_input_checkbox filterItem lhrFilter filter establishmentTypeFilters establishmentTypeFilters_10591 selected 0 index_0 alwaysShowItem">
-                                                        <input ng-model="sort" type="radio" id="a1" value="rate"/>
-                                                        <label for="a1"><span></span>&nbsp;&nbsp; نمایش گزینه های رزرو
-                                                            آنی </label>
-                                                    </div>
-                                                    <div class="ui_input_checkbox filterItem lhrFilter filter establishmentTypeFilters establishmentTypeFilters_10591 selected 0 index_0 alwaysShowItem">
-                                                        <input ng-model="sort" type="radio" id="a23" value="review"/>
-                                                        <label for="a23"><span></span>&nbsp;&nbsp; نمایش موارد دارای
-                                                            تخفیف </label>
-                                                    </div>
-                                                    <div class="ui_input_checkbox filterItem lhrFilter filter establishmentTypeFilters establishmentTypeFilters_10591 selected 0 index_0 alwaysShowItem">
-                                                        <input ng-model="sort" type="radio" id="a3" value="alphabet"/>
-                                                        <label for="a3"><span></span>&nbsp;&nbsp; نمایش پیشنهادات ویژه
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+
                                         <div class="prw_rup prw_restaurants_restaurant_filters">
                                             <div id="jfy_filter_bar_establishmentTypeFilters" class="lhrFilterBlock jfy_filter_bar_establishmentTypeFilters collapsible">
                                                 <div class="filterGroupTitle">جستجو‌ی نام</div>
                                                 {{--                                                <div class="hl_inputBox">--}}
-                                                <input class="hl_inputBox" placeholder="جستجو کنید">
+                                                {{--ng-change="nameFilter(nameSearch)"--}}
+                                                {{--ng-model="nameSearch"--}}
+                                                <input id="nameSearch" class="hl_inputBox" placeholder="جستجو کنید" onchange="nameFilterFunc(this.value)">
                                                 {{--                                                </div>--}}
                                             </div>
                                         </div>
@@ -316,8 +301,8 @@
                                                 <div class="filterGroupTitle">امتیاز کاربران</div>
                                                 <div class="filterContent ui_label_group inline">
                                                     <div class="ui_input_checkbox filterItem lhrFilter filter establishmentTypeFilters establishmentTypeFilters_10591 selected 0 index_0 alwaysShowItem">
-                                                        <input onclick="RateFilter(5)" type="radio" name="AVGrate" id="c1" value="5"/>
-                                                        <label for="c1"
+                                                        <input ng-click="RateFilter(5)" type="radio" name="AVGrate" id="c5" value="5"/>
+                                                        <label for="c5"
                                                                style="display:inline-block;"><span></span></label>
                                                         <div class="rating-widget"
                                                              style="font-size: 1.2em; display: inline-block">
@@ -327,8 +312,8 @@
                                                         </div>
                                                     </div>
                                                     <div class="ui_input_checkbox filterItem lhrFilter filter establishmentTypeFilters establishmentTypeFilters_10591 selected 0 index_0 alwaysShowItem">
-                                                        <input  onclick="RateFilter(4)" type="radio" name="AVGrate" id="c2" value="4"/>
-                                                        <label for="c2"
+                                                        <input  ng-click="RateFilter(4)" type="radio" name="AVGrate" id="c4" value="4"/>
+                                                        <label for="c4"
                                                                style="display:inline-block;"><span></span></label>
                                                         <div class="rating-widget"
                                                              style="font-size: 1.2em; display: inline-block">
@@ -339,7 +324,7 @@
                                                         <span> به بالا</span>
                                                     </div>
                                                     <div class="ui_input_checkbox filterItem lhrFilter filter establishmentTypeFilters establishmentTypeFilters_10591 selected 0 index_0 alwaysShowItem">
-                                                        <input onclick="RateFilter(3)" type="radio" name="AVGrate" id="c3" value="3"/>
+                                                        <input ng-click="RateFilter(3)" type="radio" name="AVGrate" id="c3" value="3"/>
                                                         <label for="c3"
                                                                style="display:inline-block;"><span></span></label>
                                                         <div class="rating-widget"
@@ -351,8 +336,8 @@
                                                         <span> به بالا</span>
                                                     </div>
                                                     <div class="ui_input_checkbox filterItem lhrFilter filter establishmentTypeFilters establishmentTypeFilters_10591 selected 0 index_0 alwaysShowItem">
-                                                        <input onclick="RateFilter(2)" type="radio" name="AVGrate" id="c4" value="2"/>
-                                                        <label for="c4"
+                                                        <input ng-click="RateFilter(2)" type="radio" name="AVGrate" id="c2" value="2"/>
+                                                        <label for="c2"
                                                                style="display:inline-block;"><span></span></label>
                                                         <div class="rating-widget"
                                                              style="font-size: 1.2em; display: inline-block">
@@ -363,8 +348,8 @@
                                                         <span> به بالا</span>
                                                     </div>
                                                     <div class="ui_input_checkbox filterItem lhrFilter filter establishmentTypeFilters establishmentTypeFilters_10591 selected 0 index_0 alwaysShowItem">
-                                                        <input onclick="RateFilter(1)" type="radio" name="AVGrate" id="c5" value="1"/>
-                                                        <label for="c5"
+                                                        <input ng-click="RateFilter(1)" type="radio" name="AVGrate" id="c1" value="1"/>
+                                                        <label for="c1"
                                                                style="display:inline-block;"><span></span></label>
                                                         <div class="rating-widget"
                                                              style="font-size: 1.2em; display: inline-block">
@@ -390,9 +375,8 @@
 
                                                         @for($i = 0; $i < 5 && $i < count($feature->subFeat); $i++)
                                                             <div class="ui_input_checkbox filterItem lhrFilter filter establishmentTypeFilters establishmentTypeFilters_10591 selected 0 index_0 alwaysShowItem">
-                                                                <input ng-disabled="isDisable()" ng-disabled="isDisable()"
-                                                                       ng-click="doFilter(1)" type="checkbox" id="x1"/>
-                                                                <label for="x1"><span></span>&nbsp;&nbsp;{{$feature->subFeat[$i]->name}}  </label>
+                                                                <input ng-disabled="isDisable()" ng-click="doFilterFeature({{$feature->subFeat[$i]->id}})" type="checkbox" id="feat{{$feature->subFeat[$i]->id}}" value="{{$feature->subFeat[$i]->name}}"/>
+                                                                <label for="feat{{$feature->subFeat[$i]->id}}"><span></span>&nbsp;&nbsp;{{$feature->subFeat[$i]->name}}  </label>
                                                             </div>
                                                         @endfor
 
@@ -401,9 +385,8 @@
 
                                                             @for($i = 5; $i < count($feature->subFeat); $i++)
                                                                 <div class="ui_input_checkbox filterItem lhrFilter filter establishmentTypeFilters extraItem{{$feature->id}}">
-                                                                    <input ng-disabled="isDisable()" ng-disabled="isDisable()"
-                                                                           ng-click="doFilter(5)" type="checkbox" id="x5"/>
-                                                                    <label for="x5"><span></span>&nbsp;&nbsp; {{$feature->subFeat[$i]->name}} </label>
+                                                                    <input ng-disabled="isDisable()" ng-click="doFilterFeature({{$feature->subFeat[$i]->id}})" type="checkbox" id="feat{{$feature->subFeat[$i]->id}}" value="{{$feature->subFeat[$i]->name}}"/>
+                                                                    <label for="feat{{$feature->subFeat[$i]->id}}"><span></span>&nbsp;&nbsp; {{$feature->subFeat[$i]->name}} </label>
                                                                 </div>
                                                             @endfor
                                                         @endif
@@ -459,99 +442,86 @@
         $interpolateProvider.endSymbol(']]');
     });
 
-    var filters = [-1];
+    var specialFilters = [];
     var page = 1;
     var placeMode = '{{$placeMode}}';
     var floor = 1;
+    var rateFilter = 0;
     var sort = "rate";
-    var colors = [];
+    var featureFilter = [];
+    var nameFilter = '';
     var data;
     var init = true;
     var lock = false;
     var take = 4;
+    var inSearch = false;
+    var isFinish = false;
+
+    if(placeMode == 'hotel'){
+        specialFilters = [1];
+    }
 
     function selectingOrder(elem, type) {
         $(".orders").removeClass('selectOrder');
         elem.addClass('selectOrder');
 
-        if(type == 'leastDist')
-            sort = 'dist'
-        else if(type == 'offer')
-            sort = 'offer';
-        else if(type == 'price')
-            sort = 'price';
-        else if(type == 'review')
-            sort = 'review';
+        sort = type;
     }
 
+
     app.controller('FilterController', function ($scope, $rootScope) {
-
-        $scope.showPic = false;
-        $scope.placeMode = '{{$placeMode}}';
-
-        if ($scope.placeMode == "amaken")
-            $scope.showPic = true;
-
-        $scope.sort = sort;
-
-        $scope.$watch('sort', function (value) {
-
-            if (value == null || sort == value || lock) {
-                $scope.sort = sort;
-                return;
-            }
-
-            sort = value;
-            page = 1;
-            floor = 1;
-            init = true;
-            $rootScope.$broadcast('myPagingFunctionAPI');
-        });
 
         $scope.isDisable = function () {
             return lock;
         };
 
-        $scope.doFilter = function (value) {
+        $scope.doKindFilter = function (value) {
 
-            var i;
-            var duplicate = false;
-
-            for (i = 0; i < filters.length; i++) {
-                if (filters[i] == value) {
-                    filters.splice(i);
-                    duplicate = true;
-                    break;
-                }
+            if(specialFilters.includes(value))
+                specialFilters[specialFilters.indexOf(value)] = 0;
+            else{
+                if(specialFilters.includes(0))
+                    specialFilters[specialFilters.indexOf(0)] = value;
+                else
+                    specialFilters[specialFilters.length] = value;
             }
-
-            if (!duplicate)
-                filters[i] = value;
 
             page = 1;
             floor = 1;
             init = true;
+            isFinish = false;
+            inSearch = false;
 
             $rootScope.$broadcast('myPagingFunctionAPI');
         };
 
-        $scope.doFilterColor = function (value) {
+        $scope.doFilterFeature = function (value) {
 
-            var i;
-
-            for (i = 0; i < colors.length; i++) {
-                if (colors[i] == value) {
-                    colors.splice(i);
-                    break;
-                }
+            if(featureFilter.includes(value))
+                featureFilter[featureFilter.indexOf(value)] = 0;
+            else{
+                if(featureFilter.includes(0))
+                    featureFilter[featureFilter.indexOf(0)] = value;
+                else
+                    featureFilter[featureFilter.length] = value;
             }
-
-            if (i == colors.length)
-                colors[i] = value;
 
             page = 1;
             floor = 1;
             init = true;
+            isFinish = false;
+            inSearch = false;
+
+            $rootScope.$broadcast('myPagingFunctionAPI');
+        };
+
+        $scope.RateFilter = function(value) {
+            rateFilter = value;
+            page = 1;
+            floor = 1;
+            init = true;
+            isFinish = false;
+            inSearch = false;
 
             $rootScope.$broadcast('myPagingFunctionAPI');
         };
@@ -564,39 +534,47 @@
         $scope.packets = [[]];
         $scope.oldScrollVal = 600;
 
+
+        $scope.sortFunc = function(value) {
+            sort = value;
+            page = 1;
+            floor = 1;
+            init = true;
+            isFinish = false;
+            inSearch = false;
+
+            $scope.$broadcast('myPagingFunctionAPI');
+        };
+
         $scope.myPagingFunction = function () {
 
-            if (page == 1) {
-                $scope.packets = [[]];
-            }
-
-            var scroll = $(window).scrollTop();
-
-            if (scroll - $scope.oldScrollVal < 100 && !init)
+            if(isFinish || inSearch)
                 return;
 
-            if (init)
-                init = false;
-            else
-                $scope.oldScrollVal += scroll;
+            inSearch = true;
+            document.getElementById('fullPageLoader').style.display = 'flex';
 
-            $(".loader").removeClass('hidden');
+            createFilter();
+
+            if (page == 1)
+                $scope.packets = [[]];
+
+            var scroll = $(window).scrollTop();
 
             data = $.param({
                 pageNum: page,
                 take: take,
-                kind_id: filters,
+                specialFilters: specialFilters,
+                rateFilter: rateFilter,
+                nameFilter: nameFilter,
                 sort: sort,
-                color: colors,
+                featureFilter: featureFilter,
                 city: '{{$city->id}}',
                 mode: '{{$mode}}',
                 kindPlaceId: '{{$kindPlace->id}}'
             });
 
-            var requestURL = (placeMode == "hotel") ? '{{route('getPlaceListElems')}}' :
-                (placeMode == "amaken") ? '{{route('getAmakenListElems', ['city' => $city, 'mode' => $mode])}}' :
-                    '{{route('getRestaurantListElems', ['city' => $city, 'mode' => $mode])}}'
-            ;
+            var requestURL = '{{route('getPlaceListElems')}}';
 
             const config = {
                 headers: {
@@ -615,105 +593,84 @@
 
                 for (j = 0; j < $scope.packets[page - 1].places.length; j++) {
                     $scope.packets[page - 1].places[j].ngClass = 'ui_bubble_rating bubble_' + $scope.packets[page - 1].places[j].avgRate + '0';
-
-                    if (placeMode == "hotel")
-                        $scope.packets[page - 1].places[j].redirect = '{{route('home') . '/hotel-details/'}}' + $scope.packets[page - 1].places[j].id + '/' + $scope.packets[page - 1].places[j].name;
-                    else if (placeMode == "amaken")
-                        $scope.packets[page - 1].places[j].redirect = '{{route('home') . '/amaken-details/'}}' + $scope.packets[page - 1].places[j].id + '/' + $scope.packets[page - 1].places[j].name;
-                    else if (placeMode == "restaurant")
-                        $scope.packets[page - 1].places[j].redirect = '{{route('home') . '/restaurant-details/'}}' + $scope.packets[page - 1].places[j].id + '/' + $scope.packets[page - 1].places[j].name;
+                    $scope.packets[page - 1].places[j].redirect = '{{route('home')}}/' + placeMode + '-details/' + $scope.packets[page - 1].places[j].id + '/' + $scope.packets[page - 1].places[j].name;
                 }
 
                 if (response.data.places.length != 4) {
+                    isFinish = true;
                     $scope.$broadcast('finalizeReceive');
                     return;
                 }
 
-                {{--data = $.param({--}}
-                    {{--pageNum: ++page,--}}
-                    {{--kind_id: filters,--}}
-                    {{--sort: sort,--}}
-                    {{--color: colors--}}
-                {{--});--}}
 
-                {{--$http.post(requestURL, data, config).then(function (response) {--}}
+                data = $.param({
+                    pageNum: ++page,
+                    take: take,
+                    specialFilters: specialFilters,
+                    rateFilter: rateFilter,
+                    nameFilter: nameFilter,
+                    sort: sort,
+                    featureFilter: featureFilter,
+                    city: '{{$city->id}}',
+                    mode: '{{$mode}}',
+                    kindPlaceId: '{{$kindPlace->id}}'
+                });
+                $http.post(requestURL, data, config).then(function (response) {
 
-                    {{--if (response.data != null && response.data.places != null && response.data.places.length > 0)--}}
-                        {{--$scope.show = true;--}}
+                    if (response.data != null && response.data.places != null && response.data.places.length > 0)
+                        $scope.show = true;
 
-                    {{--$scope.packets[page - 1] = response.data;--}}
-                    {{--$scope.packets[page - 1].places = response.data.places;--}}
+                    $scope.packets[page - 1] = response.data;
+                    $scope.packets[page - 1].places = response.data.places;
 
-                    {{--for (j = 0; j < $scope.packets[page - 1].places.length; j++) {--}}
-                        {{--switch ($scope.packets[page - 1].places[j].avgRate) {--}}
-                            {{--case 5:--}}
-                                {{--$scope.packets[page - 1].places[j].ngClass = 'ui_bubble_rating bubble_50';--}}
-                                {{--break;--}}
-                            {{--case 4:--}}
-                                {{--$scope.packets[page - 1].places[j].ngClass = 'ui_bubble_rating bubble_40';--}}
-                                {{--break;--}}
-                            {{--case 3:--}}
-                                {{--$scope.packets[page - 1].places[j].ngClass = 'ui_bubble_rating bubble_30';--}}
-                                {{--break;--}}
-                            {{--case 2:--}}
-                                {{--$scope.packets[page - 1].places[j].ngClass = 'ui_bubble_rating bubble_20';--}}
-                                {{--break;--}}
-                            {{--default:--}}
-                                {{--$scope.packets[page - 1].places[j].ngClass = 'ui_bubble_rating bubble_10';--}}
-                        {{--}--}}
+                    for (j = 0; j < $scope.packets[page - 1].places.length; j++) {
+                        $scope.packets[page - 1].places[j].ngClass = 'ui_bubble_rating bubble_' + $scope.packets[page - 1].places[j].avgRate + '0';
+                        $scope.packets[page - 1].places[j].redirect = '{{route('home')}}/' + placeMode + '-details/' + $scope.packets[page - 1].places[j].id + '/' + $scope.packets[page - 1].places[j].name;
+                    }
 
-                        {{--if (placeMode == "hotel") {--}}
-                            {{--$scope.packets[page - 1].places[j].redirect = '{{route('home') . '/hotel-details/'}}' + $scope.packets[page - 1].places[j].id + '/' + $scope.packets[page - 1].places[j].name;--}}
-                        {{--}--}}
-                        {{--else if (placeMode == "amaken") {--}}
-                            {{--$scope.packets[page - 1].places[j].redirect = '{{route('home') . '/amaken-details/'}}' + $scope.packets[page - 1].places[j].id + '/' + $scope.packets[page - 1].places[j].name;--}}
-                        {{--}--}}
-                        {{--else if (placeMode == "restaurant") {--}}
-                            {{--$scope.packets[page - 1].places[j].redirect = '{{route('home') . '/restaurant-details/'}}' + $scope.packets[page - 1].places[j].id + '/' + $scope.packets[page - 1].places[j].name;--}}
-                        {{--}--}}
-                    {{--}--}}
-                    {{--if (response.data.places.length != 4) {--}}
-                        {{--$scope.$broadcast('finalizeReceive');--}}
-                        {{--return;--}}
-                    {{--}--}}
+                    if (response.data.places.length != 4) {
+                        isFinish = true;
+                        $scope.$broadcast('finalizeReceive');
+                        return;
+                    }
 
-                    {{--data = $.param({--}}
-                        {{--pageNum: ++page,--}}
-                        {{--kind_id: filters,--}}
-                        {{--sort: sort,--}}
-                        {{--color: colors--}}
-                    {{--});--}}
+                    data = $.param({
+                        pageNum: ++page,
+                        take: take,
+                        specialFilters: specialFilters,
+                        rateFilter: rateFilter,
+                        nameFilter: nameFilter,
+                        sort: sort,
+                        featureFilter: featureFilter,
+                        city: '{{$city->id}}',
+                        mode: '{{$mode}}',
+                        kindPlaceId: '{{$kindPlace->id}}'
+                    });
 
-                    {{--$http.post(requestURL, data, config).then(function (response) {--}}
+                    $http.post(requestURL, data, config).then(function (response) {
 
-                        {{--if (response.data != null && response.data.places != null && response.data.places.length > 0)--}}
-                            {{--$scope.show = true;--}}
+                        if (response.data != null && response.data.places != null && response.data.places.length > 0)
+                            $scope.show = true;
 
-                        {{--$scope.packets[page - 1] = response.data;--}}
-                        {{--$scope.packets[page - 1].places = response.data.places;--}}
-                        {{--for (j = 0; j < $scope.packets[page - 1].places.length; j++) {--}}
-                            {{--$scope.packets[page - 1].places[j].ngClass = 'ui_bubble_rating bubble_' + $scope.packets[page - 1].places[j].avgRate + '0';--}}
+                        $scope.packets[page - 1] = response.data;
+                        $scope.packets[page - 1].places = response.data.places;
+                        for (j = 0; j < $scope.packets[page - 1].places.length; j++) {
+                            $scope.packets[page - 1].places[j].ngClass = 'ui_bubble_rating bubble_' + $scope.packets[page - 1].places[j].avgRate + '0';
 
-                            {{--if (placeMode == "hotel") {--}}
-                                {{--$scope.packets[page - 1].places[j].redirect = '{{route('home') . '/hotel-details/'}}' + $scope.packets[page - 1].places[j].id + '/' + $scope.packets[page - 1].places[j].name;--}}
-                            {{--}--}}
-                            {{--else if (placeMode == "amaken") {--}}
-                                {{--$scope.packets[page - 1].places[j].redirect = '{{route('home') . '/amaken-details/'}}' + $scope.packets[page - 1].places[j].id + '/' + $scope.packets[page - 1].places[j].name;--}}
-                            {{--}--}}
-                            {{--else if (placeMode == "restaurant") {--}}
-                                {{--$scope.packets[page - 1].places[j].redirect = '{{route('home') . '/restaurant-details/'}}' + $scope.packets[page - 1].places[j].id + '/' + $scope.packets[page - 1].places[j].name;--}}
-                            {{--}--}}
-                        {{--}--}}
+                            $scope.packets[page - 1].places[j].redirect = '{{route('home')}}/' + placeMode + '-details/' + $scope.packets[page - 1].places[j].id + '/' + $scope.packets[page - 1].places[j].name;
+                        }
 
-                        {{--$scope.$broadcast('finalizeReceive');--}}
+                        $scope.$broadcast('finalizeReceive');
+                        inSearch = false;
 
-                    {{--}).catch(function (err) {--}}
-                        {{--console.log(err);--}}
-                    {{--});--}}
+                    }).catch(function (err) {
+                        console.log(err);
+                    });
 
-                {{--}).catch(function (err) {--}}
-                    {{--console.log(err);--}}
-                {{--});--}}
+                }).catch(function (err) {
+                    console.log(err);
+                });
+
             }).catch(function (err) {
                 console.log(err);
             });
@@ -722,15 +679,105 @@
         $scope.$on('finalizeReceive', function (event) {
 
             page++;
-            $(".loader").addClass('hidden');
+            document.getElementById('fullPageLoader').style.display = 'none';
             floor = page;
-
         });
 
         $scope.$on('myPagingFunctionAPI', function (event) {
             $scope.myPagingFunction();
         });
     });
+
+    function nameFilterFunc(value){
+        if(value.trim().length > 2)
+            nameFilter = value;
+        else
+            nameFilter = '';
+
+        page = 1;
+        floor = 1;
+        init = true;
+        isFinish = false;
+        inSearch = false;
+
+        angular.element(document.getElementById('PlaceController')).scope().myPagingFunction();
+    }
+
+    function createFilter(){
+        var text = '';
+        $('#filterShow').html('');
+        if(rateFilter != 0)
+            text += '<div id="closeMoneyFilter" class="closeXicon filtersExist" onclick="cancelRateFilter()"> امتیاز کاربر</div>\n';
+
+        if(nameFilter.trim().length > 2)
+            text += '<div id="closeMoneyFilter" class="closeXicon filtersExist" onclick="cancelNameFilter()"> نام</div>\n';
+
+        for(i = 0; i < featureFilter.length; i++){
+            if(featureFilter[i] != 0) {
+                var name = document.getElementById('feat' + featureFilter[i]).value;
+                text += '<div id="closeMoneyFilter" class="closeXicon filtersExist" onclick="cancelFeatureFilter(' + featureFilter[i] + ')">' + name + '</div>\n';
+            }
+        }
+
+        $('#filterShow').html(text);
+    }
+
+    function cancelRateFilter(kind = 'refresh'){
+        for(i = 1; i < 6; i++)
+            document.getElementById('c' + i).checked = false;
+
+        rateFilter = 0;
+        if(kind == 'refresh') {
+            page = 1;
+            floor = 1;
+            init = true;
+            isFinish = false;
+            inSearch = false;
+
+            angular.element(document.getElementById('PlaceController')).scope().myPagingFunction();
+        }
+    }
+
+    function cancelFeatureFilter(id, kind = 'refresh'){
+        if(id == 0){
+            for(i = 0; i< featureFilter.length; i++){
+                if(featureFilter[i] != 0)
+                    $('#feat' + featureFilter[i]).prop("checked", false);
+            }
+            featureFilter = [];
+        }
+        else {
+            if (featureFilter.includes(id)) {
+                featureFilter[featureFilter.indexOf(id)] = 0;
+                $('#feat' + id).prop("checked", false);
+            }
+        }
+
+        if(kind == 'refresh') {
+            page = 1;
+            floor = 1;
+            init = true;
+            isFinish = false;
+            inSearch = false;
+
+            angular.element(document.getElementById('PlaceController')).scope().myPagingFunction();
+        }
+    }
+
+    function cancelNameFilter(){
+        document.getElementById('nameSearch').value = '';
+        nameFilterFunc('');
+    }
+
+    function closeFilters(){
+        cancelRateFilter('noRef');
+        cancelFeatureFilter(0, 'noRef');
+        cancelNameFilter();
+    }
+
+    function openGlobalSearch(){
+
+    }
 </script>
 
 <script>
@@ -808,6 +855,8 @@
         $(".extraItem" + _id).addClass('hidden').removeClass('selected');
         $(".moreItems" + _id).removeClass('hidden');
     }
+
+
 
 </script>
 

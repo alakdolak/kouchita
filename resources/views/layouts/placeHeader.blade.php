@@ -6,7 +6,32 @@
     var getBookMarksPath = '{{route('getBookMarks')}}';
 </script>
 
+<style>
+    .loaderDiv{
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        z-index: 99999;
+        left: 0px;
+        top: 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #000000c7;
+    }
+    .loader_200 {
+        background-image: url("{{URL::asset('images/loading.svg')}}");
+        width: 200px !important;
+        height: 200px !important;
+        background-size: 200px 200px;
+    }
+</style>
+
 <?php $user = Auth::user() ?>
+
+<div class="loaderDiv" id="fullPageLoader" style="display: none">
+    <div class="loader_200"></div>
+</div>
 
 <div class="masthead position-relative">
     <div class="ppr_rup ppr_priv_global_nav position-relative">
