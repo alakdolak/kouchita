@@ -3469,30 +3469,37 @@ class PlaceController extends Controller {
             switch ($kindPlaceId){
                 case 1:
                     $placeMode = 'amaken';
+                    $kindPlace->title = 'جاذبه های';
                     break;
                 case 3:
                     $placeMode = 'restaurant';
+                    $kindPlace->title = 'رستوران های';
                     break;
                 case 4:
                     $placeMode = 'hotel';
+                    $kindPlace->title = 'مراکز اقامتی';
                     break;
                 case 6:
                     $placeMode = 'majara';
+                    $kindPlace->title = 'ماجراهای';
                     break;
                 case 10:
                     $placeMode = 'sogatSanaies';
+                    $kindPlace->title = 'صنایع دستی و سوغات';
                     break;
                 case 11:
                     $placeMode = 'mahaliFood';
+                    $kindPlace->title = 'غذاهای محلی';
                     break;
             }
+            $kindPlaceId = $kindPlace->id;
 
 
             $features = PlaceFeatures::where('kindPlaceId', $kindPlaceId)->where('parent', 0)->get();
             foreach ($features as $feature)
                 $feature->subFeat = PlaceFeatures::where('parent', $feature->id)->where('type', 'YN')->get();
 
-            return view('places.list.list', compact(['features', 'kindPlace', 'mode', 'city', 'sections', 'placeMode', 'state']));
+            return view('places.list.list', compact(['features', 'kindPlace', 'kindPlaceId', 'mode', 'city', 'sections', 'placeMode', 'state']));
         }
         else
             return \redirect(\url('/'));

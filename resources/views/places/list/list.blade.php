@@ -106,7 +106,15 @@
                 <div id="searchIcon"></div>
             </div>
             <div style="margin-top: 65px; position: relative;">
-                <div style="text-align: center;font-size: 2.5em;font-weight: 600;">مراکز اقامتی شهر تهران</div>
+                <div style="text-align: center;font-size: 2.5em;font-weight: 600;">
+                    {{$kindPlace->title}}
+                    @if($mode == 'state')
+                        استان
+                    @else
+                        شهر
+                    @endif
+                    {{$city->name}}
+                </div>
                 <div style="position: relative; top: -25px">
                     <div>
                         <div id="helpBtnMainDiv" style="top: 0">
@@ -123,11 +131,21 @@
                         </div>
                     </div>
                     <div style="position: absolute; bottom: 0; right: 0;">
-                        <span>نمایش مراکز اقامتی استان تهران</span>
-                        <span>></span>
-                        <span>نمایش مراکز اقامتی استان البرز</span>
-                        <span>></span>
-                        <span>نمایش مراکز اقامتی شهریار</span>
+                        <span>نمایش
+                            {{$kindPlace->title}}
+                                استان
+                            {{$state->name}}
+                        </span>
+                        @if($mode == 'city')
+                            <span>></span>
+                            <span>نمایش
+                                {{$kindPlace->title}}
+                                شهر
+                                {{$city->name}}
+                            </span>
+                        @endif
+                        {{--<span>></span>--}}
+                        {{--<span>نمایش مراکز اقامتی شهریار</span>--}}
                     </div>
                 </div>
 
@@ -405,7 +423,7 @@
                                         <div class="prw_rup prw_restaurants_restaurant_filters">
                                             <div id="jfy_filter_bar_establishmentTypeFilters"
                                                  class="lhrFilterBlock jfy_filter_bar_establishmentTypeFilters collapsible">
-                                                <div class="col-md-12 hl_compareBtn">هم‌اکنون مقایسه کنید</div>
+                                                <div class="col-md-12 hl_compareBtn" id="compareButton">هم‌اکنون مقایسه کنید</div>
                                                 <div id="filterBox" style="flex-direction: column;">
                                                     <div style="font-size: 15px; margin: 10px 0px;">
                                                         <span>فیلترهای اعمال شده</span>
@@ -574,6 +592,11 @@
 @endif
 
 <script>
+
+    $('#compareButton').click(function(e) {
+        $("#myCloseBtn").removeClass('hidden');
+        $('#searchspan').animate({height: '100vh'});
+    });
 
     var app = angular.module("mainApp", ['infinite-scroll'], function ($interpolateProvider) {
         $interpolateProvider.startSymbol('[[');
@@ -1240,6 +1263,8 @@
 
         document.getElementById('form_hotel').submit();
     }
+
+
 
 </script>
 
