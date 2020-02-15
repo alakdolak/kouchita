@@ -94,3 +94,10 @@
 .rtl {
     direction: rtl;
 }
+
+.tripResponse{
+    width: 150px;
+    height: 150px;
+    border: 2px solid rgb(160, 160, 160);
+    cursor: pointer;
+}

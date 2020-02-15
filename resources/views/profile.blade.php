@@ -314,16 +314,16 @@
                         <div class="memberPointInfo">
                             <div class="modules-membercenter-total-points">
                                 <div data-direction="left" id="targetHelp_8" class="targets">
-                                    <div class="points_info tripcollectiveinfo" onclick="showElement('activityDiv')">
+                                    <div class="points_info tripCollectiveInfo" onclick="showElement('activityDiv')">
                                         <div class="label"> امتیاز کل شما </div>
                                         <div class="points"> {{$totalPoint}} </div>
-                                        <a href="" style="font-size: 0.797em">مشاهده سیستم امتیاز دهی</a>
+                                        <a>مشاهده سیستم امتیازدهی</a>
                                     </div>
 
                                     <div id="helpSpan_8" class="helpSpans hidden">
                                         <span class="introjs-arrow"></span>
                                         <p>
-                                            این امتیازاتی است که توسط شما کسب شده است. با کسب امتیازات لازم می توانید به مرحله بعدی صعود کنید و اعتبار شما نزد ما و دوستانتان افزایش یابد. هر فعالیتی که در سایت انجام می دهید امتیاز خاصی دارد برای اطلاع از مقدار امتیاز هر فعالیت بر روی امتیاز خود کلیک کنید.
+                                            این امتیازاتی است که توسط شما کسب شده است. با کسب امتیازات لازم می‌توانید به مرحله بعدی صعود کنید و اعتبار شما نزد ما و دوستانتان افزایش یابد. هر فعالیتی که در سایت انجام می‌دهید امتیاز خاصی دارد برای اطلاع از مقدار امتیاز هر فعالیت بر روی امتیاز خود کلیک کنید.
                                         </p>
                                         <button data-val="8" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_8">بعدی</button>
                                         <button data-val="8" class="btn btn-primary backBtnsHelp" id="backBtnHelp_8">قبلی</button>
@@ -346,7 +346,7 @@
                                             <div class="next_badge myBadge"> {{$userLevels[0]->name}} </div>
                                         </div>
                                         <div style="text-align: center; margin-top: 15px">
-                                            <a>مشاهده سیستم سطح بندی</a>
+                                            <a>مشاهده سیستم سطح‌بندی</a>
                                             <div class="points_to_go mg-tp-20">
                                                 <span class="points">
                                                     <b>{{$userLevels[1]->floor - $totalPoint}} </b>امتیاز  مانده به مرحله بعدی
@@ -366,6 +366,31 @@
                                         <button class="btn btn-danger exitBtnHelp">خروج</button>
                                     </div>
                                 </div>
+                                <div id="levelDiv" class="infoFlyout tripcollectiveLevels overlay oldoly noBackdrop relative item hidden">
+
+                                    <div class="inner withClose" id="overlayInnerDiv">
+                                        <img src="{{URL::asset('images/close.svg')}}" class="closeBtn" onclick="hideElement('levelDiv')"/>
+                                        <center class="overlaycontents">
+                                            <div class="title mg-tp-25imp">برای هر مرحله امتیاز مشخصی می‌خواهید.</div>
+
+                                            <div class="description" id="levelUpDesc">هرچه بیشتر امتیاز کسب کنید، اعتبار بیشتری پیدا خواهید کرد. و معروف‌تر می‌شوید. مرحله‌ای که در آن هستید برای دیگران نمایش داده می‌شود تا بدانند شما چقدر حرفه‌ای هستید.</div>
+
+                                            <table class="level-legend">
+                                                @foreach($levels as $level)
+                                                    <tr>
+                                                        <td class="myLevel">
+                                                            <span class="number">{{$level->name}}</span>
+                                                        </td>
+                                                        <td class="right-col lastBoxLevelTable">
+                                                            <span> {{$level->floor}} امتیاز</span>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </table>
+                                        </center>
+                                    </div>
+                                    <div class="arrow_left"></div>
+                                </div>
                             </div>
                         </div>
 
@@ -376,17 +401,17 @@
                                 <div id="helpSpan_10" class="helpSpans hidden">
                                     <span class="introjs-arrow"></span>
                                     <p>
-                                        برای فعالیت های خاص نشان های خاصی در نظر گرفته شده است. این نشان ها به تناسب افتخارات شما به شما تعلق می گیرد. برای دانستن فعالیت های لازم برای کسب هر نشان افتخار به صفحه نشان ها بروید و بروی هر نشان کلیک کنید. نشان های زیر نشان هایی است که به کسب آن ها نزدیکید.
+                                        برای فعالیت‌های خاص نشان‌های خاصی در نظر گرفته شده است. این نشان‌ها به تناسب افتخارات شما به شما تعلق می‌گیرد. برای دانستن فعالیت‌های لازم برای کسب هر نشان افتخار به صفحه نشان‌ها بروید و بروی هر نشان کلیک کنید. نشان‌های زیر نشان هایی است که به کسب آن‌ها نزدیکید.
                                     </p>
                                     <button data-val="10" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_10">بعدی</button>
                                     <button data-val="10" class="btn btn-primary backBtnsHelp" id="backBtnHelp_10">قبلی</button>
                                     <button class="btn btn-danger exitBtnHelp">خروج</button>
                                 </div>
 
-                                <div class="name trophyCaseTitle">نشان های افتخار من
+                                <div class="name trophyCaseTitle">نشان‌های افتخار من
                                     <a class="totalBadges" href="{{URL('badges')}}">({{$medals}} عدد)</a>
                                 </div>
-                                <a class="trophyCase" href="{{route('badge')}}">مشاهده تمام نشان های موجود</a>
+                                <a class="trophyCase" href="{{route('badge')}}">مشاهده تمام نشان‌های موجود</a>
                                 <div class="clear fix"></div>
                             </div>
 
@@ -411,9 +436,11 @@
 
                                         @foreach($nearestMedals as $nearestMedal)
                                             <div class="badgeItem clickableBadge" onclick="hideAllBadges(); $('#badge_' + this.id).css('left', parseInt($(this).css('width').split('px')[0]) / 2 + getFixedFromLeftBODYCON($(this)) - 25 + 'px'); showElement('badge_' + this.id)" id="{{$nearestMedal["medal"]->id}}">
-                                                <div style="background-image: url('{{URL::asset('_images/badges' . '/' . $nearestMedal["medal"]->pic_1)}}'); background-size: 100% 100%; width: 100px; height: 100px" class="sprite-badge_medium_grey_rev_01 mediumBadge"></div>
+                                                <div style="background-image: url('{{URL::asset('_images/badges' . '/' . $nearestMedal["medal"]->pic_1)}}')" class="sprite-badge_medium_grey_rev_01 mediumBadge"></div>
                                                 <div class="badgeName"> {{$nearestMedal["medal"]->activityId}} جدید</div>
-                                                <div class="badgeSubtext"> {{$nearestMedal["needed"]}} <span>{{$nearestMedal["medal"]->activityId}}</span></div>
+                                                <div class="badgeSubtext"> {{$nearestMedal["needed"]}}
+                                                    <span>{{$nearestMedal["medal"]->activityId}}</span>
+                                                </div>
                                             </div>
                                             <?php $i++; ?>
                                         @endforeach
@@ -511,6 +538,7 @@
 
                         <div id="activityDiv" class="infoFlyout tripcollectivePoints overlay oldoly noBackdrop relative item hidden">
                             <div class="inner withClose" id="overlayInnerDiv">
+                                <img src="{{URL::asset('images/close.svg')}}" class="closeBtn" onclick="hideElement('activityDiv')"/>
                                 <div class="overlaycontents">
                                     <div class="title mg-tp-25imp">چگونه امتیاز جمع آوری کنم؟</div>
                                     <div class="description" id="earnPointDesc">هر اقدام شما در سایت، علاوه بر اینکه به ما و دوستانتان کمک می کند امتیاز ویژه ای نیز دارد. لیست امتیازات زیر را از دست ندهید. جمع آوری امتیاز نتایج شگفت انگیزی خواهد داشت.</div>
@@ -528,36 +556,10 @@
                                         @endforeach
                                     </table>
                                 </div>
-                                <img src="{{URL::asset('images/close.svg')}}" class="closeBtn" onclick="hideElement('activityDiv')"/>
                                 <div class="arrow_left"></div>
                             </div>
                         </div>
 
-                        <div id="levelDiv" class="infoFlyout tripcollectiveLevels overlay oldoly noBackdrop relative item hidden">
-
-                            <div class="inner withClose" id="overlayInnerDiv">
-                                <div class="overlaycontents">
-                                    <div class="title mg-tp-25imp">برای هر مرحله امتیاز مشخصی می خواهید.</div>
-
-                                    <div class="description" id="levelUpDesc">هرچه بیشتر امتیاز کسب کنید، اعتبار بیشتری پیدا خواهید کرد. و معروف تر می شوید. مرحله ای که در آن هستید برای دیگران نمایش داده می شود تا بدانند شما چقدر حرفه ای هستید.</div>
-
-                                    <table class="level-legend">
-                                        @foreach($levels as $level)
-                                            <tr>
-                                                <td class="myLevel">
-                                                    <span class="number">{{$level->name}}</span>
-                                                </td>
-                                                <td class="right-col lastBoxLevelTable">
-                                                    <span> {{$level->floor}} امتیاز</span>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </table>
-                                </div>
-                                <img src="{{URL::asset('images/close.svg')}}" class="closeBtn" onclick="hideElement('levelDiv')"/>
-                            </div>
-                            <div class="arrow_left"></div>
-                        </div>
                     </div>
 
                     <div class="clearFix"></div>

@@ -572,8 +572,12 @@ DIV.ppr_rup.ppr_priv_homepage_hero .placement_wrap .placement_wrap_cell {
     position: inherit;
 }
 
+.prw_rup.prw_shelves_rebrand_poi_shelf_item_widget.ui_column.is-6-mobile.ng-scope {
+    width: 100%;
+}
+
 DIV.prw_rup.prw_shelves_rebrand_poi_shelf_item_widget .detail .item {
-    white-space: unset;
+    /*white-space: unset;*/
 }
 
 @media (min-width: 1100px) {

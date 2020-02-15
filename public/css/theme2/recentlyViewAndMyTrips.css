@@ -28,6 +28,16 @@
     top: 20px;
 }
 
+.profilePage #bookmarkmenu {
+    top: 30px;
+    left: 176px;
+}
+
+.profilePage #my-trips-not {
+    top: 30px;
+    left: 140px;
+}
+
 .masthead-recent-class {
     background-color: #f9f9f9
 }

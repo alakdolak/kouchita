@@ -11,7 +11,8 @@
     justify-content: center;
 }
 .globalSearchWithBox{
-    width: 800px;
+    width: 100%;
+    max-width: 800px;
     background-color: white;
     display: flex;
     justify-content: center;

@@ -57,7 +57,7 @@
 
 <div id="fb-root"></div>
 
-<div id="PAGE" class=" non_hotels_like desktop scopedSearch position-relative">
+<div id="PAGE" class="profilePage non_hotels_like desktop scopedSearch position-relative">
     <div class="masthead position-relative">
         <div ID="taplc_global_nav_0" class="ppr_rup ppr_priv_global_nav position-relative">
             <div class="global-nav global-nav-single-line has-links position-relative">
@@ -251,9 +251,17 @@
         </div>
     </div>
 
+{{--    <div class="header hideOnPhone">--}}
+{{--        @include('layouts.header1')--}}
+{{--    </div>--}}
+
+{{--    <div class="hideOnScreen">--}}
+{{--        @include('layouts.header1Phone')--}}
+{{--    </div>--}}
+
     <div id="MAINWRAP" class="position-relative">
 
-        <div class="modules-membercenter-persistent-header-achievements">
+        <div class="modules-membercenter-persistent-header-achievements profileHeader">
             <ul class="persistent-header position-relative">
                 @if($mode == "profile")
                     <li id="Profile" class="profile">
@@ -264,13 +272,22 @@
                         <a id="profileLinkColor2" href="{{URL('profile')}}">صفحه کاربری</a>
                     </li>
                 @endif
+                @if($mode == "profile")
+                    <li id="Profile" class="profile">
+                        <a id="profileLinkColor1" href="{{URL('profile')}}">فعالیت‌های من</a>
+                    </li>
+                @else
+                    <li id="Profile" class="profile">
+                        <a id="profileLinkColor2" href="{{URL('profile')}}">فعالیت‌های من</a>
+                    </li>
+                @endif
                 @if($mode == "badge")
                     <li id="BadgeCollection" class="badgeCollection">
-                        <a id="BadgeCollectionLinkColor1" href="{{route('badge')}}">مدال های گردشگری</a>
+                        <a id="BadgeCollectionLinkColor1" href="{{route('badge')}}">مدال‌های گردشگری</a>
                     </li>
                 @else
                     <li id="BadgeCollection" class="badgeCollection">
-                        <a id="BadgeCollectionLinkColor2" href="{{route('badge')}}">مدال های گردشگری</a>
+                        <a id="BadgeCollectionLinkColor2" href="{{route('badge')}}">مدال‌های گردشگری</a>
                     </li>
                 @endif
 
@@ -279,7 +296,7 @@
                     <div id="helpSpan_5" class="helpSpans hidden row">
                         <span class="introjs-arrow"></span>
                         <div class="col-xs-12">
-                            <p>با استفاده از این منو می توانید به سایر بخش های پروفایل کاربری خود بروید.</p>
+                            <p>با استفاده از این منو می‌توانید به سایر بخش‌های پروفایل کاربری خود بروید.</p>
                         </div>
                         <div class="col-xs-12">
                             <button data-val="5" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_5">بعدی</button>
@@ -289,22 +306,22 @@
                     </div>
                 </li>
 
-                <li id="Saves" class="saves"></li>
+{{--                <li id="Saves" class="saves"></li>--}}
                 @if($mode == "message")
                     <li id="Messages" class="messages">
-                        <a id="messageLinkColor1" href="{{URL('messages')}}">پیام ها</a>
+                        <a id="messageLinkColor1" href="{{URL('messages')}}">پیام‌ها</a>
                     </li>
                 @else
                     <li id="Messages" class="messages">
-                        <a id="messageLinkColor2" href="{{URL('messages')}}">پیام ها</a>
+                        <a id="messageLinkColor2" href="{{URL('messages')}}">پیام‌ها</a>
                     </li>
                 @endif
-                <li id="Bookings" class="bookings">
-                    <a id="bookingLinkColor2" href="{{route('soon')}}">رزروها</a>
-                </li>
-                <li id="PaymentOptions" class="paymentOptions">
-                    <a id="paymentOptionsLinkColor2" href="{{route('soon')}}">پروازها</a>
-                </li>
+{{--                <li id="Bookings" class="bookings">--}}
+{{--                    <a id="bookingLinkColor2" href="{{route('soon')}}">رزروها</a>--}}
+{{--                </li>--}}
+{{--                <li id="PaymentOptions" class="paymentOptions">--}}
+{{--                    <a id="paymentOptionsLinkColor2" href="{{route('soon')}}">پروازها</a>--}}
+{{--                </li>--}}
                 @if($mode == "setting")
                     <li id="Settings" class="settingColor1 settings">
                 @else
@@ -531,7 +548,7 @@
     </div>
 </div>
 
-{{--@include('layouts.placeFooter')--}}
+@include('layouts.placeFooter')
 
 <script>
     function showElement(id) {

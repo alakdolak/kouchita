@@ -5,12 +5,19 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Route;
 
 Route::get('databaseforall', function (){
-    Schema::create('postCommentLikes', function (Blueprint $table) {
-        $table->increments('id');
-        $table->unsignedInteger('commentId');
-        $table->unsignedInteger('userId');
-        $table->tinyInteger('like');
-    });
+//    CreatePlaceFeaturesTabl
+//    ALTER TABLE `hotels` DROP `food_irani`, DROP `food_mahali`, DROP `fasele`, DROP `food_farangi`, DROP `coffeeshop`, DROP `tarikhi`, DROP `markaz`, DROP `boundArea`, DROP `hoome`, DROP `shologh`, DROP `khalvat`, DROP `tabiat`, DROP `kooh`, DROP `darya`, DROP `kavir`, DROP `class`, DROP `parking`, DROP `club`, DROP `pool`, DROP `tahviye`, DROP `maalool`, DROP `internet`, DROP `anten`, DROP `breakfast`, DROP `lunch`, DROP `dinner`, DROP `restaurant`, DROP `swite`, DROP `masazh`, DROP `mahali`, DROP `modern`, DROP `sonnati`, DROP `ghadimi`, DROP `mamooli`, DROP `laundry`, DROP `gasht`, DROP `safe_box`, DROP `shop`, DROP `roof_garden`, DROP `game_net`, DROP `confrenss_room`;
+//    placeFeatureRelations
+
+//    ALTER TABLE `amaken` DROP `emkanat`, DROP `tarikhi`, DROP `mooze`, DROP `tafrihi`, DROP `tabiatgardi`, DROP `markazkharid`, DROP `baftetarikhi`, DROP `tejari`, DROP `mazhabi`, DROP `sanati`, DROP `markaz`, DROP `boundArea`, DROP `hoome`, DROP `shologh`, DROP `khalvat`, DROP `tabiat`, DROP `kooh`, DROP `darya`, DROP `kavir`, DROP `jangal`, DROP `shahri`, DROP `village`, DROP `class`, DROP `modern`, DROP `tarikhibana`, DROP `boomi`, DROP `mamooli`, DROP `mazhabiArch`, DROP `weather`, DROP `farhangi`, DROP `ghadimi`;
+
+//    ALTER TABLE `place` ADD `tableName` VARCHAR(50) NULL DEFAULT NULL AFTER `visibility`, ADD `fileName` VARCHAR(50) NULL DEFAULT NULL AFTER `tableName`;
+//    UPDATE `place` SET `tableName` = 'amaken', `fileName` = 'amaken' WHERE `place`.`id` = 1;
+//    UPDATE `place` SET `tableName` = 'restaurant', `fileName` = 'restaurant' WHERE `place`.`id` = 3;
+//    UPDATE `place` SET `tableName` = 'hotels', `fileName` = 'hotels' WHERE `place`.`id` = 4;
+//    UPDATE `place` SET `tableName` = 'majara', `fileName` = 'majara' WHERE `place`.`id` = 6;
+//    UPDATE `place` SET `tableName` = 'sogatSanaies', `fileName` = 'sogatsanaie' WHERE `place`.`id` = 10;
+//    UPDATE `place` SET `tableName` = 'mahaliFood', `fileName` = 'mahalifood' WHERE `place`.`id` = 11;
 });
 
 Route::get('fillHotelPic', function(){
@@ -229,6 +236,10 @@ Route::get('business', function(){
 });
 
 
+Route::get('userActivitiesProfile', function(){
+    return view('profile.userActivitiesProfile');
+});
+
 Route::get('gardeshnameInner/{postId}', ['as' => 'gardeshnameInner', 'uses' => 'PostController@gardeshnameInner']);
 
 Route::post('likePost', ['as' => 'likePost', 'uses' => 'PostController@likePost']);
@@ -360,10 +371,6 @@ Route::group(array('middleware' => ['throttle:30']), function () {
     Route::any('totalSearch', array('as' => 'totalSearch', 'uses' => 'HomeController@totalSearch'));
 
     Route::any('searchForStates', array('as' => 'searchForStates', 'uses' => 'HomeController@searchForStates'));
-
-    Route::get('cityPage/{city}', 'HomeController@cityPage');
-
-    Route::post('/cityPage/getCityOpinion', 'HomeController@getCityOpinion')->name('cityPage.getCityOpinion');
 
     Route::get('abbas', 'HomeController@abbas');
 
@@ -501,28 +508,6 @@ Route::group(array('middleware' => ['throttle:30', 'nothing']), function () {
     Route::post('report', array('as' => 'report', 'uses' => 'PlaceController@report'));
 
     Route::get('showReview/{logId}', array('as' => 'showReview', 'uses' => 'PlaceController@showReview'));
-
-    Route::any('amakenList/{city}/{mode}', array('as' => 'amakenList', 'uses' => 'AmakenController@showAmakenList'));
-
-    Route::any('majaraList/{city}/{mode}', array('as' => 'majaraList', 'uses' => 'MajaraController@showMajaraList'));
-
-    Route::post('getMajaraListElems/{city}/{mode}', array('as' => 'getMajaraListElems', 'uses' => 'MajaraController@getMajaraListElems'));
-
-    Route::any('restaurantList/{city}/{mode}', array('as' => 'restaurantList', 'uses' => 'RestaurantController@showRestaurantList'));
-
-    Route::any('hotelList/{city}/{mode}', array('as' => 'hotelList', 'uses' => 'HotelController@showHotelList'));
-
-    Route::post('getHotelListElems/{city}/{mode}/{kind?}', array('as' => 'getHotelListElems', 'uses' => 'HotelReservationController@getHotelListElems'));
-
-    Route::post('getAmakenListElems/{city}/{mode}', array('as' => 'getAmakenListElems', 'uses' => 'AmakenController@getAmakenListElems'));
-
-    Route::post('getRestaurantListElems/{city}/{mode}', array('as' => 'getRestaurantListElems', 'uses' => 'RestaurantController@getRestaurantListElems'));
-
-    Route::post('getAdabListElems/{city}/{mode}', array('as' => 'getAdabListElems', 'uses' => 'AdabController@getAdabListElems'));
-
-    Route::any('foodList/{city}/{mode}', array('as' => 'foodList', 'uses' => 'HotelController@showFoodList'));
-
-    Route::any('adab-list/{city}/{mode?}', array('as' => 'adabList', 'uses' => 'AdabController@adabList'));
 
     Route::post('getPhotos', array('as' => 'getPhotos', 'uses' => 'PlaceController@getPhotos'));
 
@@ -757,8 +742,10 @@ Route::group(array('middleware' => ['throttle:30', 'nothing', 'auth', 'operatorA
 });
 
 //place-details
-Route::group(array('middleware' => ['throttle:30', 'nothing']), function (){
-    Route::get('adab-details/{placeId}/{placeName}/{mode?}', array('as' => 'adabDetails', 'uses' => 'AdabController@showAdabDetail'));
+Route::group(array('middleware' => ['throttle:30', 'nothing', 'setSession']), function (){
+    Route::get('cityPage/{kind}/{city}', 'HomeController@cityPage');
+
+    Route::post('/city/Page/getCityOpinion', 'HomeController@getCityOpinion')->name('cityPage.getCityOpinion');
 
     Route::get('hotel-details/{placeId}/{placeName}/{mode?}', array('as' => 'hotelDetails', 'uses' => 'HotelController@showHotelDetail'));
 
@@ -908,6 +895,36 @@ Route::group(array('middleware' => 'nothing'), function () {
     Route::get('userArticles', function(){
         return view('userActivities.userArticles');
     });
+});
+
+// Lists
+Route::group(array('middleware' => 'nothing'), function () {
+
+    Route::any('placeList/{kindPlaceId}/{city}/{mode}', 'PlaceController@showPlaceList')->name('place.list');
+
+    Route::any('amakenList/{city}/{mode}', array('as' => 'amakenList', 'uses' => 'AmakenController@showAmakenList'));
+
+    Route::any('majaraList/{city}/{mode}', array('as' => 'majaraList', 'uses' => 'MajaraController@showMajaraList'));
+
+    Route::post('getMajaraListElems/{city}/{mode}', array('as' => 'getMajaraListElems', 'uses' => 'MajaraController@getMajaraListElems'));
+
+    Route::any('restaurantList/{city}/{mode}', array('as' => 'restaurantList', 'uses' => 'RestaurantController@showRestaurantList'));
+
+    Route::any('hotelList/{city}/{mode}', array('as' => 'hotelList', 'uses' => 'HotelController@showHotelList'));
+
+    Route::post('getPlaceListElems', 'PlaceController@getPlaceListElems')->name('getPlaceListElems');
+//    Route::post('getHotelListElems/{city}/{mode}/{kind?}', array('as' => 'getHotelListElems', 'uses' => 'HotelReservationController@getHotelListElems'));
+
+    Route::post('getAmakenListElems/{city}/{mode}', array('as' => 'getAmakenListElems', 'uses' => 'AmakenController@getAmakenListElems'));
+
+    Route::post('getRestaurantListElems/{city}/{mode}', array('as' => 'getRestaurantListElems', 'uses' => 'RestaurantController@getRestaurantListElems'));
+
+    Route::post('getAdabListElems/{city}/{mode}', array('as' => 'getAdabListElems', 'uses' => 'AdabController@getAdabListElems'));
+
+    Route::any('foodList/{city}/{mode}', array('as' => 'foodList', 'uses' => 'HotelController@showFoodList'));
+
+    Route::any('adab-list/{city}/{mode?}', array('as' => 'adabList', 'uses' => 'AdabController@adabList'));
+
 });
 
 Route::post('checkLogin', array('as' => 'checkLogin', 'uses' => 'HomeController@checkLogin'));

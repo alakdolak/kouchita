@@ -120,8 +120,9 @@
             },
             success: function(response){
                 response = JSON.parse(response);
-                nearPlacesMap = response;
+                nearPlacesMap = response[0];
 
+                createSwiperContent(response[1], 'article')
                 addMarkerToSmallMap(nearPlacesMap);
             }
         })

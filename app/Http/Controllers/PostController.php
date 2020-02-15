@@ -3,8 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\models\AboutMe;
+use App\models\Amaken;
 use App\models\Cities;
 use App\models\DefaultPic;
+use App\models\Hotel;
+use App\models\MahaliFood;
+use App\models\Majara;
+use App\models\Place;
+use App\models\PlacePic;
 use App\models\Post;
 use App\models\PostCategory;
 use App\models\PostCategoryRelation;
@@ -12,8 +18,11 @@ use App\models\PostCityRelation;
 use App\models\PostComment;
 use App\models\PostCommentLike;
 use App\models\PostLikes;
+use App\models\PostPlaceRelation;
 use App\models\PostTag;
 use App\models\PostTagsRelation;
+use App\models\Restaurant;
+use App\models\SogatSanaie;
 use App\models\State;
 use App\models\User;
 use Carbon\Carbon;
@@ -161,11 +170,19 @@ class PostController extends Controller {
         }
         //end mostComment Post
 
+        $lastPage = session('inPage');
+        $res = $this->getRelatedPosts($lastPage, $today, $todayTime);
+        $relatedPost = $res[0];
+        $stateCome = $res[1];
+        $cityCome = $res[2];
+        $placeCome = $res[3];
+
+
         $category = $this->getAllCategory();
         $pageLimit = ceil(Post::where('date', '<=', $today)->where('release', '!=', 'draft')->count() / 5);
 
 
-        return view('posts.mainArticle',compact(['category', 'mostLike', 'bannerPosts', 'recentlyPosts', 'mostCommentPost', 'mostSeenPost', 'page', 'pageLimit']) );
+        return view('posts.mainArticle',compact(['stateCome', 'cityCome', 'placeCome', 'category', 'mostLike', 'bannerPosts', 'recentlyPosts', 'mostCommentPost', 'mostSeenPost', 'relatedPost', 'page', 'pageLimit']) );
     }
 
     public function paginationArticle(Request $request)
@@ -176,7 +193,7 @@ class PostController extends Controller {
         $nowTime = getToday()["time"];
 
         $allPosts = Post::join('users', 'users.id', 'post.creator')
-            ->whereRaw('(post.date <= ' . $today . ' OR (post.date = ' . $today . ' AND post.time <= ' . $nowTime . '))')
+            ->whereRaw('(post.date <= ' . $today . ' OR (post.date = ' . $today . ' AND (post.time <= ' . $nowTime . ' || post.time IS NULL)))')
             ->whereRaw('post.release <> "draft"')
             ->select('username', 'post.id', 'post.title', 'post.meta', 'post.slug', 'post.seen', 'post.date', 'post.created_at', 'post.pic', 'post.keyword')
             ->orderBy('date', 'DESC')
@@ -288,7 +305,14 @@ class PostController extends Controller {
 
             $category = $this->getAllCategory();
 
-            return view('posts.article', compact(['post', 'category', 'similarPost', 'postLike', 'uPic', 'comments']));
+            $lastPage = session('inPage');
+            $res = $this->getRelatedPosts($lastPage, $today, $nowTime);
+            $relatedPost = $res[0];
+            $stateCome = $res[1];
+            $cityCome = $res[2];
+            $placeCome = $res[3];
+
+            return view('posts.article', compact(['stateCome', 'cityCome', 'placeCome', 'post', 'category', 'similarPost', 'postLike', 'uPic', 'comments']));
         }
         return \redirect(\url('/'));
 
@@ -323,31 +347,42 @@ class PostController extends Controller {
                     ->count();
             }
             else{
-                if($type == 'state') {
+                if($type == 'place'){
+                    $s = explode('_', $search);
+                    $kindPlaceId = $s[0];
+                    $placeId = $s[1];
+                    $postId = PostPlaceRelation::where('kindPlaceId', $kindPlaceId)->where('placeId', $placeId)->pluck('postId')->toArray();
+                }
+                else if($type == 'state') {
                     $place = State::whereName($search)->first();
                     $col = 'stateId';
+                    $postId = PostCityRelation::where($col, $place->id)->pluck('postId')->toArray();
+                    $search = $place->id;
                 }
                 else{
                     $place = Cities::whereName($search)->first();
                     $col = 'cityId';
+                    $postId = PostCityRelation::where($col, $place->id)->pluck('postId')->toArray();
+                    $search = $place->id;
                 }
 
-                if($place == null)
-                    return \redirect(route('mainArticle'));
-
-                $postCity = PostCityRelation::where($col, $place->id)->pluck('postId')->toArray();
                 $post = Post::join('users', 'users.id', 'post.creator')
-                    ->whereIn('post.id', $postCity)
+                    ->whereIn('post.id', $postId)
                     ->whereRaw('post.release <> "draft"')
                     ->whereRaw('(post.date < ' . $today . ' OR (post.date = ' . $today . ' AND  (post.time <= ' . $nowTime . ' OR post.time IS NULL)))')
                     ->count();
-
-                $search = $place->id;
             }
+
+            $lastPage = session('inPage');
+            $res = $this->getRelatedPosts($lastPage, $today, $nowTime);
+            $relatedPost = $res[0];
+            $stateCome = $res[1];
+            $cityCome = $res[2];
+            $placeCome = $res[3];
 
             $category = $this->getAllCategory();
             $pageLimit = ceil($post / 5);
-            return \view('posts.searchArticle', compact(['category', 'pageLimit', 'type', 'search']));
+            return \view('posts.searchArticle', compact(['stateCome', 'cityCome', 'placeCome', 'category', 'pageLimit', 'type', 'search']));
         }
 
         return \redirect(\url('mainArticle'));
@@ -390,28 +425,32 @@ class PostController extends Controller {
                         ->skip(($page-1) * $take)->take($take)->get();
                 }
                 else{
-                    if($type == 'city'){
+                    if($type == 'place'){
+                        $s = explode('_', $search);
+                        $kindPlaceId = $s[0];
+                        $placeId = $s[1];
+                        $postId = PostPlaceRelation::where('kindPlaceId', $kindPlaceId)->where('placeId', $placeId)->pluck('postId')->toArray();
+                    }
+                    else if($type == 'city'){
                         $place = Cities::find($search);
                         $col = 'cityId';
+                        $postId = PostCityRelation::where($col, $place->id)->pluck('postId')->toArray();
                     }
                     else{
                         $place = State::find($search);
                         $col = 'stateId';
+                        $postId = PostCityRelation::where($col, $place->id)->pluck('postId')->toArray();
                     }
 
-                    if($place ==  null)
-                        $post = array();
-                    else{
-                        $postCity = PostCityRelation::where($col, $place->id)->pluck('postId')->toArray();
-//                        dd($postCity);
+                    $post = array();
+                    if(count($postId) != 0) {
                         $post = Post::join('users', 'users.id', 'post.creator')
-                            ->whereIn('post.id', $postCity)
+                            ->whereIn('post.id', $postId)
                             ->whereRaw('(post.date < ' . $today . ' OR (post.date = ' . $today . ' AND (post.time <= ' . $nowTime . ' OR post.time IS NULL) ))')
                             ->whereRaw('post.release <> "draft"')
                             ->select('username', 'post.id', 'title', 'meta', 'slug', 'seen', 'date', 'post.created_at', 'pic', 'keyword')
                             ->orderBy('date', 'DESC')
-                            ->skip(($page-1) * $take)->take($take)->get();
-//                        dd($post);
+                            ->skip(($page - 1) * $take)->take($take)->get();
                     }
                 }
 
@@ -609,6 +648,99 @@ class PostController extends Controller {
             }
         }
         return $comments;
+    }
+
+    private function getRelatedPosts($lastPage, $today, $nowTime){
+
+        $relatedPost = array();
+        $postsId = array();
+        $place = null;
+        $city = null;
+        $state = null;
+        $isPlace = false;
+
+        if($lastPage !=  null && $lastPage != '') {
+            $lastPage = explode('_', $lastPage);
+
+            if ($lastPage[0] == 'place') {
+                switch ($lastPage[1]){
+                    case 1:
+                        $place = Amaken::find($lastPage[2]);
+                        break;
+                    case 3:
+                        $place = Restaurant::find($lastPage[2]);
+                        break;
+                    case 4:
+                        $place = Hotel::find($lastPage[2]);
+                        break;
+                    case 6:
+                        $place = Majara::find($lastPage[2]);
+                        break;
+                    case 10:
+                        $place = SogatSanaie::find($lastPage[2]);
+                        break;
+                    case 11:
+                        $place = MahaliFood::find($lastPage[2]);
+                        break;
+                }
+
+                if($place == null)
+                    return [$relatedPost, $state, $city, $place];
+                else{
+                    $postsId = PostPlaceRelation::where('kindPlaceId', $lastPage[1])
+                        ->where('placeId', $place->id)
+                        ->pluck('postId')
+                        ->toArray();
+                    $place->kindPlaceId = $lastPage[1];
+                    $city = Cities::find($place->cityId);
+                    $state = State::find($city->stateId);
+                }
+                $isPlace = true;
+            }
+            else if ($lastPage[0] == 'city' || $lastPage[0] == 'state') {
+                if($lastPage[0] == 'city'){
+                    $p = Cities::find($lastPage[1]);
+                    $city = $p;
+                    $state = State::find($city->stateId);
+                    $col = 'cityId';
+                }
+                else{
+                    $p = State::find($lastPage[1]);
+                    $state = $p;
+                    $col = 'stateId';
+                }
+
+                if($p == null)
+                    return [$relatedPost, $state, $city, $place];
+                else{
+                    $postsId = PostCityRelation::where($col, $p->id)
+                        ->pluck('postId')
+                        ->toArray();
+                }
+            }
+        }
+
+        if(count($postsId) != 0){
+            $relatedPost = Post::join('users', 'users.id', 'post.creator')
+                ->whereRaw('(post.date <= ' . $today . ' OR (post.date = ' . $today . ' AND (post.time < ' . $nowTime . ' || post.time IS NULL)))')
+                ->whereRaw('post.release <> "draft"')
+                ->whereIn('post.id', $postsId)
+                ->select('username', 'post.id', 'post.title', 'post.meta', 'post.slug', 'post.seen', 'post.date', 'post.created_at', 'post.pic', 'post.keyword')
+                ->orderBy('post.date', 'DESC')->take(5)->get();
+
+            foreach ($relatedPost as $item) {
+                $item->msgs = PostComment::wherePostId($item->id)->whereStatus(true)->count();
+                $item->pic = \URL::asset('_images/posts/' . $item->id . '/' . $item->pic);
+                if ($item->date == null)
+                    $item->date = \verta($item->created_at)->format('Ym%d');
+                $item->date = convertJalaliToText($item->date);
+                $mainCategory = PostCategoryRelation::where('postId', $item->id)->where('isMain', 1)->first();
+                $item->category = PostCategory::find($mainCategory->categoryId)->name;
+                $item->url = route('article.show', ['slug' => $item->slug]);
+            }
+        }
+
+        return [$relatedPost, $state, $city, $place];
     }
 
 
