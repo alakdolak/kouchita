@@ -1399,3 +1399,8 @@ footer .tripsBoxesMainDiv {
 .lp_ar_rightFilters {
     border-left: 2px solid rgba(0, 0, 0, .075);
 }
+
+.lp_ar_borderBottom {
+    border-bottom: 10px solid #f3f3f3;
+    margin: 10px -7px;
+}

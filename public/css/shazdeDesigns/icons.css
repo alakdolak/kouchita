@@ -58,6 +58,9 @@
 .close:before {
     content: '\E02C';
 }
+.iconClose:before {
+    content: '\E02C';
+}
 .redStar:before {
     content: '\E00B';
 }

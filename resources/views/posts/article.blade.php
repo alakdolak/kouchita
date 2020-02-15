@@ -6,7 +6,7 @@
 
     <div id="darkModal" class="display-none" role="dialog"></div>
 
-    <div class="hidden visible-sm visible-xs">
+    <div class="hidden visible-sm visible-xs hideOnPhone">
         <div class="im-header-mobile">
             <div class="im-main-header clearfix light">
                 <div class='container'>
@@ -49,7 +49,7 @@
 
 @section('body')
     <div class="container" style="direction: rtl">
-        <div class="col-md-3 col-sm-12" style="padding-right: 0 !important;">
+        <div class="col-md-3 col-sm-12 hideOnPhone" style="padding-right: 0 !important;">
             <a href="{{route('mainArticle')}}">
                 <div class="col-md-12 gnReturnBackBtn">بازگشت به صفحه اصلی</div>
             </a>
