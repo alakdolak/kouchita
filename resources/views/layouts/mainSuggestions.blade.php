@@ -41,7 +41,7 @@
 <div  ng-controller="getMainPageSuggestion" class="mainSuggestionMainDiv">
 
     <div id="newKoochita" class="homepage_shelves_widget ng-scope">
-        <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show">
+        <div class="prw_rup prw_shelves_shelf_widget" ng-show="show">
             <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
                 <div class="shelf_header">
                     <div class="shelf_title">
@@ -76,7 +76,8 @@
                                                 <span class="reviewCount ng-binding">[[place.placeReviews]] </span><span>نقد </span>
                                             </div>
                                             <div class="item tags ng-binding">[[place.placeCity]] <span>در </span>
-                                                <span class="ng-binding">[[place.placeState]]</span></div>
+                                                <span class="ng-binding">[[place.placeState]]</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -152,7 +153,7 @@
         </div>
     </div>
 
-    <center class="stripedBannerMainDiv">
+    <div class="stripedBannerMainDiv">
         <div class="stripedBackgroundDiv mg-lt-5">
             <div class="innerStripedBackGround">
                 <a href="{{isset($middleBannerLink['31']) ? $middleBannerLink['31'] : '#'}}" target="{{isset($middleBannerLink['31']) ? '_blank' : ''}}" >
@@ -167,7 +168,7 @@
                 </a>
             </div>
         </div>
-    </center>
+    </div>
 
     <div id="tabiatSuggestion" class="homepage_shelves_widget ng-scope" style="display: none">
         <div class="prw_rup prw_shelves_shelf_widget" style="">
@@ -222,7 +223,7 @@
         </div>
     </div>
 
-    <center class="siteArticlesMainDiv">
+    <div class="siteArticlesMainDiv">
         <div class="articleBoxes">
             <div class="articleTitle">مقاله‌های ما</div>
             <div class="articleImgMainDiv">
@@ -259,7 +260,7 @@
             </div>
             <a class="articleLink">هم اکنون ببینید</a>
         </div>
-    </center>
+    </div>
 
     <div id="restaurantSuggestion" class="homepage_shelves_widget ng-scope" style="display: none">
         <div class="prw_rup prw_shelves_shelf_widget" style="">
@@ -622,12 +623,8 @@
 
         for(var i = 11; i < 100; i++) {
             var img = $('.middleImg' + i);
-            console.log(img.length != 0)
-            console.log(img)
-            console.log(img.length)
             if(img.length != 0) {
                 var section = Math.floor(i/10);
-                console.log(section);
                 var number = i % 10;
                 var text = '<div style="position: absolute; width: 20px; height: 20px; background: white; text-align: center; cursor: pointer; right: 0px" onclick="editMiddleBannerPic(' + section + ', ' + number + ')">\n' +
                     '<img src="' + editIcon + '" style="width: 100%; height: 100%;">\n' +
@@ -688,7 +685,6 @@
                             $('#showMiddleBannerInput').attr('src', '');
                             $('#uploadImgBanner').val('');
                             $('#linkForBanner').val('');
-                            console.log('#middleImg' + middleBannerSectionId + '' + middleBannerNum);
                             $('.middleImg' + middleBannerSectionId + '' + middleBannerNum).attr('src', newImageReplace);
                             middleBannerSectionId = 0;
                             middleBannerNum = 0;

@@ -13,7 +13,6 @@
     var activeCityFilter = false;
     var searchInPlacesDir = '{{route('proSearch')}}';
     var compareList = [];
-    {{--var searchInPlacesDir = '{{route('searchInPlaces')}}';--}}
 
     $(document).ready(function () {
         elemRect = document.getElementById('addToFilterCityBtn').getBoundingClientRect();
@@ -79,12 +78,9 @@
         newElement = "<div class='hidden cityFiltersProSearch' id='cityFilterDest_" + cityId + "' style='left: " + (destX - 115) + "px;'><div><span class='glyphicon glyphicon-remove' onclick='removeFilter(\"cityFilterDest_" + cityId + "\")'></span><span'>" + val + "</span></span></div></div>";
         $("#filters").append(newElement);
 
-        console.log('in')
-
         selectedElement = document.getElementById("elevator");
         selectedVal = "cityFilterDest_" + cityId;
         filters[filters.length] = selectedVal;
-
 
         movement();
     }
@@ -215,6 +211,9 @@
                                         '   </a>' +
                                         '   <div style="display: flex; align-items: center">' +
                                         '       <button class="btn btn-success" style="float: left; padding: 2px 15px; border-radius: 8px;"  onclick="addToCompareList(\'' + response[i].kindPlaceId + '\', \'' + response[i].id + '\', \'' + response[i].name + '\')"> مقایسه </button>' +
+                                        '       <a href="' + response[i]['url'] + '">' +
+                                        '          <button class="btn btn-danger" style="float: left; padding: 2px 15px; border-radius: 8px; margin-right: 15px"> مشاهده </button>' +
+                                        '       </a>' +
                                         '   </div>' +
                                         '</div>';
                     }
@@ -490,6 +489,7 @@
         else if(sanaye) {
             document.location.href = "{{route('home')}}" + '/adab-list/' + $("#GEO_SCOPED_SEARCH_INPUT").val() + '/sanaye';
         }
+
     }
 
     function compare() {
@@ -626,9 +626,9 @@
                         </div>
 {{--                        <div id="dividerCenterBoxProSearch"></div>--}}
                     </div>
-                    <div class="col-xs-12" id="filterDiv">
-                        <div id="filters" class="position-relative"></div>
-                    </div>
+                    {{--<div class="col-xs-12" id="filterDiv">--}}
+                        {{--<div id="filters" class="position-relative"></div>--}}
+                    {{--</div>--}}
                 </div>
 
                 <div class="clear-both"></div>
@@ -647,14 +647,11 @@
                         @endfor
                     </div>
                     <div class="col-xs-12" id="mainDivCompareProSearchBtn">
-                        <button id="compare" onclick="compare()" class="btn btn-primary">شروع مقایسه</button>
+                        <button id="compare" onclick="compare()" class="btn btn-primary hidden">شروع مقایسه</button>
                     </div>
                 </div>
-{{--                <div class="col-xs-2"></div>--}}
             </div>
-
 {{--            <div id="myCloseBtn" class="hidden" onclick="closeInFireFox()" draggable="true" ondragend="dropMenu(event)" ondrop="dropMenu(event)" ondrag="dragging(event)"></div>--}}
-
         </div>
     </div>
     <div class="ui_close_x" id="close_span_search"></div>

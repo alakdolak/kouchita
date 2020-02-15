@@ -228,12 +228,8 @@
 
 #GEO_SCOPED_SEARCH_INPUT2 {
     color: #6d6d6d;
+    border: none;
     border-color: #6d6d6d !important;
-    /*position: absolute;*/
-    /*bottom: 16px;*/
-    /*right: 0;*/
-    /*color: #6d6d6d;*/
-    /*border: none !important;*/
 }
 
 #filterDiv {
@@ -420,7 +416,9 @@ DIV.ppr_rup.ppr_priv_masthead_search .body_text {
 }
 
 @media (max-width: 630px) {
-
+    #GEO_SCOPED_SEARCH_INPUT2 {
+        border-bottom: solid 1px;
+    }
     #close_span_search {
         width: 45px !important;
         height: 45px !important;

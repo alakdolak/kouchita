@@ -1454,3 +1454,161 @@ footer ul {
 .content-2col .im-entry {
     min-height: 15px !important;
 }
+
+
+
+
+
+/*AmirAbbasMMS codes*/
+
+ .gnTopPics {
+     direction: rtl;
+     background-color: #d3d2d2;
+ }
+
+.gnWhiteBox {
+    background-color: white;
+    margin: 20px 0 0;
+}
+
+.gnContentsCategory {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.gnColOFContentsCategory {
+    width: 100%;
+}
+.categoryRow{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.categoryRTL{
+    direction: rtl;
+    text-align: right;
+}
+.categoryLTR{
+    direction: ltr;
+    text-align: right;
+}
+.gnUl {
+    list-style: none;
+    padding: 5px;
+    margin: 5px 5px 10px 0px;
+    background-color: #f3f3f3;
+}
+.gnLi {
+    padding: 2px 0;
+}
+.gnTitleOfPlaces {
+    font-size: 1.2em;
+    font-weight: 400;
+}
+.gnNumberOfPlaces {
+    color: #92321b;
+    float: left;
+}
+
+.gnInput {
+    width: 100%;
+    padding: 2px 7px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    background-color: #ebebeb;
+    line-height: 30px;
+    margin: 5px 0;
+}
+
+.gnInputonInput {
+    width: 64%;
+    padding-left: 3%;
+    border: none;
+    background-color: transparent;
+}
+
+.gnSearchInputBtn {
+    background-color: #0076ac;
+    border: 1px solid #c5c5c5;
+    color: white;
+    border-radius: 5px;
+}
+
+.gnAdvertise {
+    padding-bottom: 12px;
+}
+.gnAdvertiseText {
+    color: #30b4a6;
+}
+.gnAdvertiseImage {
+    width: 100%;
+    height: auto;
+}
+textarea:focus{
+    outline: none;
+    box-shadow: none;
+}
+textarea:hover{
+    outline: none;
+    box-shadow: none;
+}
+
+
+#helpBtnMainDiv {
+  display: none;
+}
+
+
+/*just gardeshname style*/
+
+.gnReturnBackBtn {
+    background-color: #fcc156;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 20px 0 0;
+    text-align: center;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+.gnReturnBackBtn:hover {
+    opacity: 0.75;
+}
+
+
+/*just article style*/
+
+.gnMainPicOfArticle {
+    position: relative;
+    padding: 15px 0;
+}
+.gnMainPicOfArticleText {
+    width: 96%;
+    position: absolute;
+    bottom: -35px;
+    left: 50%;
+    margin-left: -48%;
+    padding: 20px 20px 10px;
+    background: white;
+    border-bottom: 3px solid #f3f3f3;
+    opacity: 0.9;
+}
+
+/*userDescription and labels*/
+.gnUserDescription {
+    background-color: #ebebeb;
+    border: 1px solid #cccccc;
+    /*border-radius: 5px;*/
+    min-height: 175px;
+    margin: 5px 0;
+    padding: 5px 15px;
+}
+
+.gnLabels {
+    color: #0076a3;
+    font-size: 1.2em;
+    font-weight: 500;
+    line-height: 50px;
+}
+
+

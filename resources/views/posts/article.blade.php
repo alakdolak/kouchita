@@ -1,42 +1,59 @@
 @extends('posts.articleLayout')
 
 @section('head')
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/easyimage.css')}}"/>
-    {{--just article style--}}
-    <style>
-        .gnMainPicOfArticle {
-            position: relative;
-            padding: 15px 0;
-        }
-        .gnMainPicOfArticleText {
-            width: 96%;
-            position: absolute;
-            bottom: -35px;
-            left: 50%;
-            margin-left: -48%;
-            padding: 20px 20px 10px;
-            background: white;
-            border-bottom: 3px solid #f3f3f3;
-            opacity: 0.9;
-        }
-    </style>
 
-    <style>
-        .easyimage-side{
-            float: left !important;
-            margin-right: 1.5em !important;
-            text-align: center !important;
-            margin-left: 0px !important;
-        }
-    </style>
 @endsection
+
+    <div id="darkModal" class="display-none" role="dialog"></div>
+
+    <div class="hidden visible-sm visible-xs hideOnPhone">
+        <div class="im-header-mobile">
+            <div class="im-main-header clearfix light">
+                <div class='container'>
+                    <div class="row">
+                        <div class="im-off-canvas col-sm-2 col-xs-2">
+                            <button id="off-canvas-on" class="off-canvas-on"><i class="fa fa-navicon"></i></button>
+                        </div>
+                        <div class="im-mobile-logo col-sm-8 col-xs-8">
+                        </div>
+                        <div class="im-search im-slide-block col-sm-2 col-xs-2">
+                            <div class="search-btn slide-btn">
+                                <i class="fa fa-search"></i>
+                                <div class="im-search-panel im-slide-panel">
+                                    <form action="" name="searchform" method="get">
+                                        <fieldset class="search-fieldset">
+                                            <div class="input-group">
+                                                <input type="search" class="form-control" name="s"
+                                                       placeholder="عبارت جستجو را اینجا وارد کنید..." required/>
+                                                <span class="input-group-btn">
+                                                    <input type="submit" class="btn btn-default" value="بگرد"/>
+                                                </span>
+                                            </div>
+                                        </fieldset>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="im-header-mobile-ad col-md-12 text-center">
+                <p>
+                    <img class="aligncenter size-full wp-image-4151" src="{{URL::asset('images/gardeshname_banner.jpg')}}" alt="شازده مسافر" width="1600" height="365"/>
+                </p>
+            </div>
+        </div>
+    </div>
 
 @section('body')
     <div class="container" style="direction: rtl">
-        <div class="col-md-3 col-sm-12" style="padding-right: 0 !important;">
+        <div class="col-md-3 col-sm-12 hideOnPhone" style="padding-right: 0 !important;">
             <a href="{{route('mainArticle')}}">
                 <div class="col-md-12 gnReturnBackBtn">بازگشت به صفحه اصلی</div>
             </a>
+
             <div class="col-md-12 gnWhiteBox">
                 <div class="widget-head widget-head-44">
                     <strong class="widget-title">دسته‌بندی مطالب</strong>
@@ -50,22 +67,43 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-md-12 gnWhiteBox">
-                <div>شما در استان اصفهان - شهر مورچه خورد - هتل عباسی هستید</div>
-                <div>
-                    <a href="">نمایش محتوای استان اصفهان</a>
-                </div>
-                <div>
-                    <a href="">نمایش محتوای شهر اصفهان</a>
-                </div>
+
+                @if($stateCome != null)
+                    <div>
+                        شما در استان {{$stateCome->name}}
+                        @if($cityCome != null)
+                            - شهر {{$cityCome->name}}
+                            @if($placeCome != null)
+                                - {{$placeCome->name}}
+                            @endif
+                        @endif
+                        هستید
+                    </div>
+                    <div>
+                        <a href="{{route('article.list', ['type' => 'state', 'search' => $stateCome->name])}}">نمایش محتوای استان {{$stateCome->name}}</a>
+                    </div>
+                    @if($cityCome != null)
+                        <div>
+                            <a href="{{route('article.list', ['type' => 'city', 'search' => $cityCome->name])}}">نمایش محتوای شهر {{$cityCome->name}}</a>
+                        </div>
+                    @endif
+                    @if($placeCome != null)
+                        <div>
+                            <a href="{{route('article.list', ['type' => 'place', 'search' => $placeCome->kindPlaceId.'_'.$placeCome->id])}}">نمایش محتوای  {{$placeCome->name}}</a>
+                        </div>
+                    @endif
+                @endif
+
                 <input type="text" id="searchCityInArticleInput" class="gnInput" placeholder="شهر موردنظر خود را وارد کنید" readonly>
             </div>
 
             <div class="col-md-12 gnWhiteBox">
-                <input type="text" class="gnInput" id="pcSearchInput" placeholder="عبارت موردنظر خود را جست‌وجو کنید">
-                <span class="input-group-btn">
-                    <input type="submit" class="btn btn-default" value="بگرد" onclick="searchInArticle('pcSearchInput')"/>
-                </span>
+                <div class="gnInput">
+                    <input type="text" class="gnInputonInput" id="pcSearchInput" placeholder="عبارت مورد نظر خود را">
+                    <button class="gnSearchInputBtn" type="submit" onclick="searchInArticle('pcSearchInput')">جستجو کنید</button>
+                </div>
             </div>
 
             <div class="col-md-12 gnWhiteBox">
@@ -80,9 +118,11 @@
                                         </div>
                                     </div>
                                 </div>
-                                <h1 class="im-entry-title">
-                                    {{$item->title}}
-                                </h1>
+                                <a href="{{$item->url}}" rel="bookmark">
+                                    <h1 class="im-entry-title" style="color: white;">
+                                        {{$item->title}}
+                                    </h1>
+                                </a>
                             </div>
                         </div>
                         <div class="im-entry">
@@ -175,7 +215,6 @@
                         <span class="commentsShareIconFeedback"></span>
                         <span class="mg-rt-20 cursor-pointer">اشتراک‌گذاری</span>
                     </div>
-
                 </div>
                 <div class="quantityOfLikes">
                     <span id="countLike">{{$post->like}}</span>
@@ -186,66 +225,87 @@
                     نفر نظر دادند.
                 </div>
             </div>
-        </div>
-
-        <div class="col-md-3"></div>
-        <div class="col-md-9 col-sm-12 gnWhiteBox">
-
-            <div id="commentDiv0" style="display: none">
-                <div id="commentMainDiv##id##" class="eachCommentMainBox" style="margin-top: 20px; margin-right: ##mRight##;">
-                    <div class="circleBase type2 commentsWriterProfilePic">
-                        <img src="##userPic##" style="width: 100%; height: 100%; border-radius: 50%;">
-                    </div>
-                    <div class="commentsContentMainBox">
-                        <b class="userProfileName display-inline-block">##username##</b>
-                        <p>##msg##</p>
-                        <div class="commentsStatisticsBar">
-                            <div class="float-right display-inline-black">
-                                <span id="commentLikeCount##id##" class="likeStatisticIcon commentsStatisticSpan color-red">##likeCount##</span>
-                                <span id="commentDisLikeCount##id##" class="dislikeStatisticIcon commentsStatisticSpan dark-red">##disLikeCount##</span>
-                                <span class="numberOfCommentsIcon commentsStatisticSpan color-blue">##ans##</span>
+            <div class="row">
+                <div class="col-md-9 col-sm-12">
+                    <div class="col-md-12 col-sm-12 gnUserDescription">
+                        <div>
+                            <div class="circleBase type2 newCommentWriterProfilePic">
+                                <img src="##authPic##" style="width: 100%; height: 100%; border-radius: 50%;">
                             </div>
-                            <div class="dark-blue float-left display-inline-black cursor-pointer" onclick="showPostsComments(##id##)" style="display: ##haveAnsDisplay##;">دیدن پاسخ‌ها</div>
+                            <div class="gnLabels">shazdesina</div>
                         </div>
-                    </div>
-                    <div class="commentsActionsBtns">
-                        <div onclick="likeComment(##id##, 1, this);">
-                            <span class="likeActionBtn ##showLike##"></span>
-                        </div>
-                        <div onclick="likeComment(##id##, 0, this);">
-                            <span class="dislikeActionBtn ##showDisLike##"></span>
-                        </div>
+                        <div>
 
-                        <div class="clear-both"></div>
-                        <b class="replyBtn" onclick="replyToComments(this)">پاسخ دهید</b>
-                    </div>
-                    <div class="replyToCommentMainDiv" style="display: none">
-                        <div class="circleBase type2 newCommentWriterProfilePic">
-                            <img src="##authPic##" style="width: 100%; height: 100%; border-radius: 50%;">
-                        </div>
-                        <div class="inputBox">
-                            <b class="replyCommentTitle">در پاسخ به نظر ##username##</b>
-                            <textarea id="ansForReviews_1043" class="inputBoxInput inputBoxInputComment" placeholder="شما چه نظری دارید؟" onclick="checkLogin()"></textarea>
-                            <button class="btn btn-primary" onclick="sendComment(##postId##, ##id##, this)"> ارسال</button>
                         </div>
                     </div>
                 </div>
-                <div id="commentDiv##id##" style="display: none"></div>
-            </div>
-            <div class="newCommentPlaceMainDiv">
-                <div class="circleBase type2 newCommentWriterProfilePic">
-                    <img src="{{$uPic}}" style="">
-                </div>
-                <div class="inputBox">
-                    <b class="replyCommentTitle">نظر خود را در مورد مقاله با ما در میان بگذارید</b>
-                    <textarea class="inputBoxInput inputBoxInputComment" id="ansForReviews_1038" placeholder="شما چه نظری دارید؟" onclick="checkLogin()"></textarea>
-                    <button class="btn btn-primary" onclick="sendComment({{$post->id}}, 0, this)"> ارسال</button>
+                <div class="col-md-3 col-sm-12" style="padding-right: 0;">
+                    <div class="col-md-12 col-sm-12 gnUserDescription">
+                        <div class="gnLabels">برچسب ها</div>
+                        <div>
+
+                        </div>
+                    </div>
                 </div>
             </div>
+            <div>
+                <div id="commentDiv0" style="display: none">
+                    <div id="commentMainDiv##id##" class="eachCommentMainBox" style="margin-top: 20px; margin-right: ##mRight##;">
+                        <div class="circleBase type2 commentsWriterProfilePic">
+                            <img src="##userPic##" style="width: 100%; height: 100%; border-radius: 50%;">
+                        </div>
+                        <div class="commentsContentMainBox">
+                            <b class="userProfileName display-inline-block">##username##</b>
+                            <p>##msg##</p>
+                            <div class="commentsStatisticsBar">
+                                <div class="float-right display-inline-black">
+                                    <span id="commentLikeCount##id##" class="likeStatisticIcon commentsStatisticSpan color-red">##likeCount##</span>
+                                    <span id="commentDisLikeCount##id##" class="dislikeStatisticIcon commentsStatisticSpan dark-red">##disLikeCount##</span>
+                                    <span class="numberOfCommentsIcon commentsStatisticSpan color-blue">##ans##</span>
+                                </div>
+                                <div class="dark-blue float-left display-inline-black cursor-pointer" onclick="showPostsComments(##id##)" style="display: ##haveAnsDisplay##;">دیدن پاسخ‌ها</div>
+                            </div>
+                        </div>
+                        <div class="commentsActionsBtns">
+                            <div onclick="likeComment(##id##, 1, this);">
+                                <span class="likeActionBtn ##showLike##"></span>
+                            </div>
+                            <div onclick="likeComment(##id##, 0, this);">
+                                <span class="dislikeActionBtn ##showDisLike##"></span>
+                            </div>
 
+                            <div class="clear-both"></div>
+                            <b class="replyBtn" onclick="replyToComments(this)">پاسخ دهید</b>
+                        </div>
+                        <div class="replyToCommentMainDiv" style="display: none">
+                            <div class="circleBase type2 newCommentWriterProfilePic">
+                                <img src="##authPic##" style="width: 100%; height: 100%; border-radius: 50%;">
+                            </div>
+                            <div class="inputBox">
+                                <b class="replyCommentTitle">در پاسخ به نظر ##username##</b>
+                                <textarea id="ansForReviews_1043" class="inputBoxInput inputBoxInputComment" placeholder="شما چه نظری دارید؟" onclick="checkLogin()"></textarea>
+                                <button class="btn btn-primary" onclick="sendComment(##postId##, ##id##, this)"> ارسال</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="commentDiv##id##" style="display: none"></div>
+                </div>
+                <div class="newCommentPlaceMainDiv">
+                    <div class="circleBase type2 newCommentWriterProfilePic">
+                        <img src="{{$uPic}}" style="">
+                    </div>
+                    <div class="inputBox">
+                        <b class="replyCommentTitle">نظر خود را در مورد مقاله با ما در میان بگذارید</b>
+                        <textarea class="inputBoxInput inputBoxInputComment" id="ansForReviews_1038" placeholder="شما چه نظری دارید؟" onclick="checkLogin()"></textarea>
+                        <button class="btn btn-primary" onclick="sendComment({{$post->id}}, 0, this)"> ارسال</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
     <script src="{{URL::asset('/js/article/articlePage.js')}}"></script>
+
     <script>
         var category = {!! $category !!}
         var post = {!! $post !!}

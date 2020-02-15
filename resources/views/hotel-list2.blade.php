@@ -425,9 +425,7 @@
                                                  class="lhrFilterBlock jfy_filter_bar_establishmentTypeFilters collapsible">
                                                 <div id="filterBox" style="display: none; flex-direction: column;">
                                                     <div style="font-size: 15px; margin: 10px 0px;">
-                                                        <span>
-                                                            فیلترهای اعمال شده
-                                                        </span>
+                                                        <span>فیلترهای اعمال شده</span>
                                                     </div>
                                                     <div style="cursor: pointer; font-size: 12px; color: #050c93;" onclick="closeFilters()">
                                                         پاک کردن فیلتر ها
