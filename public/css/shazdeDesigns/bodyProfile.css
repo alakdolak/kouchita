@@ -1,3 +1,16 @@
+.globalNav2011_reset #PAGE {
+    width: auto;
+}
+
+.globalNav2011_reset #MAIN {
+    width: auto !important;
+    max-width: 1188px;
+}
+
+.globalNav2011_reset #BODYCON {
+    width: auto !important;
+}
+
 /*1st box of styles*/
 .glyphicon {
     font-family: 'Glyphicons Halflings' !important;
@@ -41,10 +54,6 @@
 
     width: 100px;
     height: 100px;
-}
-
-.position-relative {
-    position: relative;
 }
 
 .bg-color-greenImp {
@@ -144,8 +153,13 @@ DIV.ppr_rup.ppr_priv_global_nav .global-nav-links-container .global-nav-links-me
 }
 
 #MAINWRAP > div:nth-child(1) {
-    background-color: #fcc156 !important;
+    background-color: #fcc156;
     position: relative;
+}
+
+.modules-membercenter-persistent-header-achievements {
+    background-color: #fcc156 !important;
+    /*margin-top: 20px;*/
 }
 
 #profileLinkColor1, #BadgeCollectionLinkColor1, #messageLinkColor1, #bookingLinkColor1, #paymentOptionsLinkColor1, .settingColor1 {
@@ -166,6 +180,7 @@ DIV.ppr_rup.ppr_priv_global_nav .global-nav-links-container .global-nav-links-me
 
 #settingDropDownMainDiv {
     width: 200px !important;
+    display: none;
 }
 
 #MediaLeftBodyProfile {
@@ -223,6 +238,29 @@ DIV.ppr_rup.ppr_priv_global_nav .global-nav-links-container .global-nav-links-me
     margin-right: 40%;
 }
 
+.badgeDesc.badgeContainer.badgesPage {
+    position: absolute;
+    right: 10px;
+    left: 10px;
+    bottom: auto;
+    top: 140px;
+    padding: 30px 10px;
+    visibility: hidden;
+}
+
+.badgesPage.ui_overlay::before {
+    display: none;
+}
+
+.badgesPage .ui_popover.arrow_right .arrow, .badgesPage .ui_popover.arrow_right .arrow:before {
+    display: none;
+}
+
+.modules-membercenter-badge-collection-header .sub-header {
+    text-align: justify;
+    margin-top: 10px;
+}
+
 @media (max-width: 1023px) {
 
     DIV.ppr_rup.ppr_priv_global_nav .global-nav-single-line.has-links .global-nav-bar-container {
@@ -269,6 +307,31 @@ DIV.ppr_rup.ppr_priv_global_nav .global-nav-links-container .global-nav-links-me
     }
 }
 
-@media (max-width: 630px) {
+@media (max-width: 680px) {
+    .modules-membercenter-badge-collection ul.badgeListBadgePage {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 
+    .badgesPageMainDiv .modules-membercenter-badge-collection .memberBadges {
+        margin-right: 0;
+        width: 300px;
+    }
+
+    #MAIN.badgesPageMainDiv .heading.wrap .header {
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+    #MAIN.badgesPageMainDiv .modules-membercenter-badge-collection-header .sub-header {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 400px) {
+    .badgesPageMainDiv .modules-membercenter-badge-collection, #MAIN.badgesPageMainDiv .heading.wrap {
+        margin: 10px;
+    }
 }

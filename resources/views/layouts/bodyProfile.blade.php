@@ -261,7 +261,7 @@
 
     <div id="MAINWRAP" class="position-relative">
 
-        <div class="modules-membercenter-persistent-header-achievements profileHeader">
+        <div class="modules-membercenter-persistent-header-achievements profileHeader hideOnPhone">
             <ul class="persistent-header position-relative">
                 @if($mode == "profile")
                     <li id="Profile" class="profile">
@@ -272,15 +272,15 @@
                         <a id="profileLinkColor2" href="{{URL('profile')}}">صفحه کاربری</a>
                     </li>
                 @endif
-                @if($mode == "profile")
-                    <li id="Profile" class="profile">
-                        <a id="profileLinkColor1" href="{{URL('profile')}}">فعالیت‌های من</a>
-                    </li>
-                @else
-                    <li id="Profile" class="profile">
-                        <a id="profileLinkColor2" href="{{URL('profile')}}">فعالیت‌های من</a>
-                    </li>
-                @endif
+{{--                @if($mode == "profile")--}}
+{{--                    <li id="Profile" class="profile">--}}
+{{--                        <a id="profileLinkColor1" href="{{URL('profile')}}">فعالیت‌های من</a>--}}
+{{--                    </li>--}}
+{{--                @else--}}
+{{--                    <li id="Profile" class="profile">--}}
+{{--                        <a id="profileLinkColor2" href="{{URL('profile')}}">فعالیت‌های من</a>--}}
+{{--                    </li>--}}
+{{--                @endif--}}
                 @if($mode == "badge")
                     <li id="BadgeCollection" class="badgeCollection">
                         <a id="BadgeCollectionLinkColor1" href="{{route('badge')}}">مدال‌های گردشگری</a>
@@ -556,8 +556,9 @@
         $("#" + id).removeClass('hidden');
     }
 
-    function hideElement(id) {
+    function hideElement(id,event) {
         $("#" + id).addClass('hidden');
+        event.stopPropagation();
     }
 
     function showElement2(id) {

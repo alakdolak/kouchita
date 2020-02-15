@@ -185,42 +185,41 @@
                                         <?php $i = 0; ?>
 
                                         @foreach($nearestMedals as $nearestMedal)
-                                            <div class="badgeItem clickableBadge" onclick="hideAllBadges();
-                                                // $('#badge_' + this.id).css('left', parseInt($(this).css('width').split('px')[0]) / 2 + getFixedFromLeftBODYCON($(this)) - 25 + 'px');
-                                                showElement('badge_' + this.id)" id="{{$nearestMedal["medal"]->id}}">
+                                            <div class="badgeItem clickableBadge" onclick="hideAllBadges();showElement('badge_' + this.id)" id="{{$nearestMedal["medal"]->id}}"
+{{--                                                $('#badge_' + this.id).css('left', parseInt($(this).css('width').split('px')[0]) / 2 + getFixedFromLeftBODYCON($(this)) - 25 + 'px');--}}
+                                                >
                                                 <div style="background-image: url('{{URL::asset('_images/badges' . '/' . $nearestMedal["medal"]->pic_1)}}')" class="sprite-badge_medium_grey_rev_01 mediumBadge"></div>
-                                                <div class="badgeName"> {{$nearestMedal["medal"]->activityId}} جدید</div>
-                                                <div class="badgeSubtext"> {{$nearestMedal["needed"]}}
-                                                    <span>{{$nearestMedal["medal"]->activityId}}</span>
+{{--                                                <div class="cursor-pointer">--}}
+                                                    <div class="badgeName"> {{$nearestMedal["medal"]->activityId}} جدید</div>
+                                                    <div class="badgeSubtext"> {{$nearestMedal["needed"]}}
+                                                        <span>{{$nearestMedal["medal"]->activityId}}</span>
+{{--                                                    </div>--}}
                                                 </div>
-
 
                                                 <span id="badge_{{$nearestMedal["medal"]->id}}" class="item hidden ui_overlay ui_popover arrow_right badgeDesc badgeContainer badgeStyles">
                                                     <div class="header_text">
                                                         <div class="text">{{$nearestMedal["medal"]->activityId}}</div>
                                                     </div>
                                                     <div class="body_text ">
-                                                        <div class="body_text">
-                                                            <div class="desc badgeDesc">
-                                                                @if($nearestMedal["kindPlaceId"] == -1)
-                                                                    این مدال بعد از{{$nearestMedal["needed"]}}  {{$nearestMedal["medal"]->activityId}} بدست می آید
-                                                                @else
-                                                                    <p>
-                                                                        <span class="badgeAchievementHelpText">&nbsp;این مدال بعد از&nbsp;</span>
-                                                                        <span class="badgeAchievementHelpText">{{$nearestMedal["needed"]}}</span>
-                                                                        <span class="badgeAchievementHelpText">&nbsp;</span>
-                                                                        <span class="badgeAchievementHelpText">&nbsp;</span>
-                                                                        <span class="badgeAchievementHelpText">{{$nearestMedal["medal"]->activityId}}</span>
-                                                                        <span class="badgeAchievementHelpText">&nbsp;در&nbsp;</span>
-                                                                        <span class="badgeAchievementHelpText">{{$nearestMedal["kindPlaceId"]}}</span>
-                                                                        <span class="badgeAchievementHelpText">&nbsp;</span>
-                                                                        <span class="badgeAchievementHelpText">بدست می آید</span>
-                                                                    </p>
-                                                                @endif
-                                                            </div>
+                                                        <div class="desc badgeDesc">
+                                                            @if($nearestMedal["kindPlaceId"] == -1)
+                                                                این مدال بعد از&nbsp;{{$nearestMedal["needed"]}} {{$nearestMedal["medal"]->activityId}} بدست می‌آید
+                                                            @else
+                                                                    <span class="badgeAchievementHelpText"> این مدال بعد از {{$nearestMedal["needed"]}} {{$nearestMedal["medal"]->activityId}} در {{$nearestMedal["kindPlaceId"]}} بدست می‌آید
+
+                                                                    </span>
+{{--                                                                    <span class="badgeAchievementHelpText"></span>--}}
+{{--                                                                        <span class="badgeAchievementHelpText">&nbsp;</span>--}}
+{{--                                                                        <span class="badgeAchievementHelpText">&nbsp;</span>--}}
+{{--                                                                    <span class="badgeAchievementHelpText"></span>--}}
+{{--                                                                    <span class="badgeAchievementHelpText"></span>--}}
+{{--                                                                    <span class="badgeAchievementHelpText"></span>--}}
+{{--                                                                    <span class="badgeAchievementHelpText"></span>--}}
+{{--                                                                    <span class="badgeAchievementHelpText"></span>--}}
+                                                            @endif
                                                         </div>
                                                     </div>
-                                                    <div class="ui_close_x" onclick="hideElement('badge_{{$nearestMedal["medal"]->id}}')"></div>
+                                                    <div class="ui_close_x" onclick="hideElement('badge_{{$nearestMedal["medal"]->id}}',event)"></div>
                                                 </span>
 
                                             </div>
@@ -613,6 +612,7 @@
 {{--                </div>--}}
 
                 <span id="tagPrompt" class="ui_overlay ui_modal editTags item hidden">
+                    <div onclick="closeTripStyles('tagPrompt')" class="closeTripStylesBtn ui_close_x"></div>
                     <div class="header_text">من چه گردشگری هستم؟</div>
                     <div class="subheader_text mg-tp-10">
                        سه مورد یا بیشتر را انتخاب کنید
@@ -633,7 +633,6 @@
                             <input type="submit" onclick="closeTripStyles('tagPrompt')" id="skipBtn" value="خیر" class="btn btn-default">
                         </div>
                     </div>
-                    <div onclick="closeTripStyles('tagPrompt')" class="ui_close_x"></div>
                 </span>
 
                 <div class="ui_backdrop dark display-none"></div>
