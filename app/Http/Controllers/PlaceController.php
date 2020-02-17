@@ -3279,7 +3279,7 @@ class PlaceController extends Controller {
             foreach ($logs as $log) {
 
                 if($_POST['isQuestionCount'])
-                    $allAnswerCount += findAnswerCount($log->id);
+                    $allAnswerCount += getAnsToComments($log->id)[1];
 
                 $user = User::whereId($log->visitorId);
                 if ($user->first_name != null)
@@ -3479,7 +3479,6 @@ class PlaceController extends Controller {
                     break;
             }
             $kindPlaceId = $kindPlace->id;
-
 
             $features = PlaceFeatures::where('kindPlaceId', $kindPlaceId)->where('parent', 0)->get();
             foreach ($features as $feature)

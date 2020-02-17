@@ -730,22 +730,25 @@ Route::group(array('middleware' => ['throttle:30', 'nothing', 'auth', 'operatorA
 });
 
 //place-details
+Route::get('place-details/{kindPlaceId}/{placeId}', 'HomeController@setPlaceDetailsURL')->name('placeDetails');
+
 Route::group(array('middleware' => ['throttle:30', 'nothing', 'setSession']), function (){
+
     Route::get('cityPage/{kind}/{city}', 'HomeController@cityPage');
 
     Route::post('/city/Page/getCityOpinion', 'HomeController@getCityOpinion')->name('cityPage.getCityOpinion');
 
-    Route::get('hotel-details/{placeId}/{placeName}/{mode?}', array('as' => 'hotelDetails', 'uses' => 'HotelController@showHotelDetail'));
+    Route::get('amaken-details/{placeId}/{placeName}/{mode?}', 'AmakenController@showAmakenDetail')->name('amakenDetails');
 
-    Route::get('majara-details/{placeId}/{placeName}/{mode?}', array('as' => 'majaraDetails', 'uses' => 'MajaraController@showMajaraDetail'));
+    Route::get('restaurant-details/{placeId}/{placeName}/{mode?}', 'RestaurantController@showRestaurantDetail')->name('restaurantDetails');
 
-    Route::get('restaurant-details/{placeId}/{placeName}/{mode?}', array('as' => 'restaurantDetails', 'uses' => 'RestaurantController@showRestaurantDetail'));
+    Route::get('hotel-details/{placeId}/{placeName}/{mode?}', 'HotelController@showHotelDetail')->name('hotelDetails');
 
-    Route::get('amaken-details/{placeId}/{placeName}/{mode?}', array('as' => 'amakenDetails', 'uses' => 'AmakenController@showAmakenDetail'));
+    Route::get('majara-details/{placeId}/{placeName}/{mode?}', 'MajaraController@showMajaraDetail')->name('majaraDetails');
 
-    Route::get('sanaiesogat-details/{placeId}/{placeName}/{mode?}', array('as' => 'sanaiesogatDetails', 'uses' => 'SogatSanaieController@showSogatSanaieDetails'));
+    Route::get('sanaiesogat-details/{placeId}/{placeName}/{mode?}', 'SogatSanaieController@showSogatSanaieDetails')->name('sanaiesogatDetails');
 
-    Route::get('mahaliFood-details/{placeId}/{placeName}/{mode?}', array('as' => 'mahaliFoodDetails', 'uses' => 'MahaliFoodController@showMahaliFoodDetails'));
+    Route::get('mahaliFood-details/{placeId}/{placeName}/{mode?}', 'MahaliFoodController@showMahaliFoodDetails')->name('mahaliFoodDetails');
 
     Route::get('hotel-details-allReviews/{placeId}/{placeName}/{mode?}', 'HotelController@showHotelDetailAllReview');
     Route::get('hotel-details-questions/{placeId}/{placeName}/{mode?}', 'HotelController@showHotelDetailAllQuestions');

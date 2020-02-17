@@ -596,31 +596,31 @@
                             ?>
 
                             <div class='ui_input_checkbox' style="cursor: pointer;">
-                                <img data-val="{{isset($kindPlaceId) && ($kindPlaceId == 1 || $kindPlaceId == 0) ? 'on' : 'off'}}" class="lantern" id="amakenFilter" width="40px" height="80px" src="{{isset($kindPlaceId) && ($kindPlaceId == 1 || $kindPlaceId == 0) ? $onLampImg : $offLampImg}}">
+                                <img data-val="{{(isset($kindPlaceId) && ($kindPlaceId == 1 || $kindPlaceId == 0)) || !isset($kindPlaceId) ? 'on' : 'off'}}" class="lantern" id="amakenFilter" width="40px" height="80px" src="{{(isset($kindPlaceId) && ($kindPlaceId == 1 || $kindPlaceId == 0)) || !isset($kindPlaceId) ? $onLampImg : $offLampImg}}">
                                 <div>اماکن</div>
                             </div>
                             <div class='ui_input_checkbox' style="cursor: pointer;">
-                                <img data-val="{{isset($kindPlaceId) && ($kindPlaceId == 4 || $kindPlaceId == 0) ? 'on' : 'off'}}" class="lantern" id="hotelFilter" width="40px" height="80px" src="{{isset($kindPlaceId) && ($kindPlaceId == 4 || $kindPlaceId == 0) ? $onLampImg : $offLampImg}}">
+                                <img data-val="{{(isset($kindPlaceId) && ($kindPlaceId == 4 || $kindPlaceId == 0)) || !isset($kindPlaceId) ? 'on' : 'off'}}" class="lantern" id="hotelFilter" width="40px" height="80px" src="{{(isset($kindPlaceId) && ($kindPlaceId == 4 || $kindPlaceId == 0)) || !isset($kindPlaceId) ? $onLampImg : $offLampImg}}">
                                 <div>هتل</div>
                             </div>
                             <div class='ui_input_checkbox' style="cursor: pointer;">
-                                <img data-val="{{isset($kindPlaceId) && ($kindPlaceId == 3 || $kindPlaceId == 0) ? 'on' : 'off'}}" class="lantern" id="restaurantFilter" width="40px" height="80px" src="{{isset($kindPlaceId) && ($kindPlaceId == 3 || $kindPlaceId == 0) ? $onLampImg : $offLampImg}}">
+                                <img data-val="{{(isset($kindPlaceId) && ($kindPlaceId == 3 || $kindPlaceId == 0)) || !isset($kindPlaceId) ? 'on' : 'off'}}" class="lantern" id="restaurantFilter" width="40px" height="80px" src="{{(isset($kindPlaceId) && ($kindPlaceId == 3 || $kindPlaceId == 0)) || !isset($kindPlaceId) ? $onLampImg : $offLampImg}}">
                                 <div>رستوران</div>
                             </div>
                             <div class='ui_input_checkbox' style="cursor: pointer;">
-                                <img data-val="{{isset($kindPlaceId) && ($kindPlaceId == 6 || $kindPlaceId == 0) ? 'on' : 'off'}}" class="lantern" id="majaraFilter" width="40px" height="80px" src="{{isset($kindPlaceId) && ($kindPlaceId == 6 || $kindPlaceId == 0) ? $onLampImg : $offLampImg}}">
+                                <img data-val="{{(isset($kindPlaceId) && ($kindPlaceId == 6 || $kindPlaceId == 0)) || !isset($kindPlaceId)  ? 'on' : 'off'}}" class="lantern" id="majaraFilter" width="40px" height="80px" src="{{(isset($kindPlaceId) && ($kindPlaceId == 6 || $kindPlaceId == 0)) || !isset($kindPlaceId) ? $onLampImg : $offLampImg}}">
                                 <div>ماجراجویی</div>
                             </div>
                             <div class='ui_input_checkbox' style="cursor: pointer;">
-                                <img data-val="{{isset($kindPlaceId) && ($kindPlaceId == 10 || $kindPlaceId == 0) ? 'on' : 'off'}}" class="lantern" id="sogatSanaieFilter" width="40px" height="80px" src="{{isset($kindPlaceId) && ($kindPlaceId == 10 || $kindPlaceId == 0) ? $onLampImg : $offLampImg}}">
+                                <img data-val="{{(isset($kindPlaceId) && ($kindPlaceId == 10 || $kindPlaceId == 0)) || !isset($kindPlaceId)  ? 'on' : 'off'}}" class="lantern" id="sogatSanaieFilter" width="40px" height="80px" src="{{(isset($kindPlaceId) && ($kindPlaceId == 10 || $kindPlaceId == 0)) || !isset($kindPlaceId) ? $onLampImg : $offLampImg}}">
                                 <div>صنایع دستی</div>
                             </div>
                             <div class='ui_input_checkbox' style="cursor: pointer;">
-                                <img data-val="{{isset($kindPlaceId) && ($kindPlaceId == 10 || $kindPlaceId == 0) ? 'on' : 'off'}}" class="lantern" id="sogatSanaieFilter" width="40px" height="80px" src="{{isset($kindPlaceId) && ($kindPlaceId == 10 || $kindPlaceId == 0) ? $onLampImg : $offLampImg}}">
+                                <img data-val="{{(isset($kindPlaceId) && ($kindPlaceId == 10 || $kindPlaceId == 0)) || !isset($kindPlaceId)  ? 'on' : 'off'}}" class="lantern" id="sogatSanaieFilter" width="40px" height="80px" src="{{(isset($kindPlaceId) && ($kindPlaceId == 10 || $kindPlaceId == 0)) || !isset($kindPlaceId) ? $onLampImg : $offLampImg}}">
                                 <div>سوغات</div>
                             </div>
                             <div class='ui_input_checkbox' style="cursor: pointer;">
-                                <img data-val="{{isset($kindPlaceId) && ($kindPlaceId == 11 || $kindPlaceId == 0) ? 'on' : 'off'}}" class="lantern" id="mahaliFoodFilter" width="40px" height="80px" src="{{isset($kindPlaceId) && ($kindPlaceId == 11 || $kindPlaceId == 0) ? $onLampImg : $offLampImg}}">
+                                <img data-val="{{(isset($kindPlaceId) && ($kindPlaceId == 11 || $kindPlaceId == 0)) || !isset($kindPlaceId)  ? 'on' : 'off'}}" class="lantern" id="mahaliFoodFilter" width="40px" height="80px" src="{{(isset($kindPlaceId) && ($kindPlaceId == 11 || $kindPlaceId == 0)) || !isset($kindPlaceId) ? $onLampImg : $offLampImg}}">
                                 <div>غذا محلی</div>
                             </div>
                         </div>
