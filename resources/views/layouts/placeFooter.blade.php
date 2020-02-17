@@ -1031,58 +1031,144 @@
                             <a type="button" class="btn btn-danger pp_btns" href="{{route('logout')}}">خروج</a>
                         </div>
                     </div>
-                    <div class="profileScoreMainDiv">
-                        <div class="modules-membercenter-progress-header " data-backbone-name="modules.membercenter.ProgressHeader" data-backbone-context="Social_CompositeMember, Member">
-                            <div class="title" id="myHonorsText">
-                                <h3>امتیازات من</h3>
+                    @if(isset($profilePage) && $profilePage == 1)
+                        <div class="profileMenuResponsive">
+                            @if($mode == "profile")
+                                <div id="Profile" class="profile col-xs-6 profileMenuLinks">
+                                    <a id="profileLinkColor1" href="{{URL('profile')}}">صفحه کاربری</a>
+                                </div>
+                            @else
+                                <div id="Profile" class="profile col-xs-6 profileMenuLinks">
+                                    <a id="profileLinkColor2" href="{{URL('profile')}}">صفحه کاربری</a>
+                                </div>
+                            @endif
+                            @if($mode == "profileActivities")
+                                <div id="ProfileActivities" class="profileActivities col-xs-6 profileMenuLinks">
+                                    <a id="profileLinkColor1" href="{{URL('profile')}}">فعالیت‌های من</a>
+                                </div>
+                            @else
+                                <div id="Profile" class="profileActivities col-xs-6 profileMenuLinks">
+                                    <a id="profileLinkColor2" href="{{URL('profile')}}">فعالیت‌های من</a>
+                                </div>
+                            @endif
+                            @if($mode == "badge")
+                                <div id="BadgeCollection" class="badgeCollection col-xs-6 profileMenuLinks">
+                                    <a id="BadgeCollectionLinkColor1" href="{{route('badge')}}">مدال‌های گردشگری</a>
+                                </div>
+                            @else
+                                <div id="BadgeCollection" class="badgeCollection col-xs-6 profileMenuLinks">
+                                    <a id="BadgeCollectionLinkColor2" href="{{route('badge')}}">مدال‌های گردشگری</a>
+                                </div>
+                            @endif
+
+                            <div class="travelMap targets position-relative col-xs-6 profileMenuLinks" id="targetHelp_5">
+                                <a href="{{route('soon')}}">سفرنامه من</a>
+                                <div id="helpSpan_5" class="helpSpans hidden row">
+                                    <span class="introjs-arrow"></span>
+                                    <div class="col-xs-12">
+                                        <p>با استفاده از این منو می‌توانید به سایر بخش‌های پروفایل کاربری خود بروید.</p>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <button data-val="5" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_5">بعدی</button>
+                                        <button data-val="5" class="btn btn-primary backBtnsHelp" id="backBtnHelp_5">قبلی</button>
+                                        <button class="btn btn-danger exitBtnHelp">خروج</button>
+                                    </div>
+                                </div>
                             </div>
+
+                            {{--                <li id="Saves" class="saves"></li>--}}
+                            @if($mode == "message")
+                                <div id="Messages" class="messages col-xs-6 profileMenuLinks">
+                                    <a id="messageLinkColor1" href="{{URL('messages')}}">پیام‌ها</a>
+                                </div>
+                            @else
+                                <div id="Messages" class="messages col-xs-6 profileMenuLinks">
+                                    <a id="messageLinkColor2" href="{{URL('messages')}}">پیام‌ها</a>
+                                </div>
+                            @endif
+                            {{--                <div id="Bookings" class="bookings col-xs-6 profileMenuLinks">--}}
+                            {{--                    <a id="bookingLinkColor2" href="{{route('soon')}}">رزروها</a>--}}
+                            {{--                </div>--}}
+                            {{--                <div id="PaymentOptions" class="paymentOptions col-xs-6 profileMenuLinks">--}}
+                            {{--                    <a id="paymentOptionsLinkColor2" href="{{route('soon')}}">پروازها</a>--}}
+                            {{--                </div>--}}
+                            @if($mode == "setting")
+                                <div id="Settings" class="settingColor1 settings col-xs-6 profileMenuLinks">
+                            @else
+                                <div id="Settings" class="settingColor2 settings col-xs-6 profileMenuLinks">
+                            @endif
+                                    تنظیمات
+                                    <div class="settingsArrow"></div>
+                                    <div class="settingsDropDown" id="settingDropDownMainDiv">
+                                        <a href="{{URL('accountInfo')}}">اطلاعات کاربر</a>
+                                        <?php
+                                        $level = Auth::user()->level;
+                                        ?>
+
+                                        @if($level == 1 || $level == 3)
+                                            <a title="Control Content" href="{{route('getReports')}}">مدیریت گزارشات</a>
+                                        @endif
+
+                                        @if(Auth::user()->level == 1)
+                                            {{--<a title="ages" href="{{route('specialAdvice')}}">پیشنهاد های ویژه</a>--}}
+                                        @endif
+                                    </div>
+                                </div>
+                        </div>
+                    @else
+                        <div class="profileScoreMainDiv">
+                            <div class="modules-membercenter-progress-header " data-backbone-name="modules.membercenter.ProgressHeader" data-backbone-context="Social_CompositeMember, Member">
+                                <div class="title" id="myHonorsText">
+                                    <h3>امتیازات من</h3>
+                                </div>
 
                                 <a class="link" {{--onclick="initHelp(16, [], 'MAIN', 100, 400)"--}}>
                                     <div></div>
                                 </a>
-                        </div>
+                            </div>
 
-                        <div class="memberPointInfo">
-                            <div class="modules-membercenter-total-points">
-                                <div data-direction="left" class="targets">
-                                    <div class="points_info tripcollectiveinfo" onclick="showElement('activityDiv')">
-                                        <div class="label"> امتیاز کل شما </div>
+                            <div class="memberPointInfo">
+                                <div class="modules-membercenter-total-points">
+                                    <div data-direction="left" class="targets">
+                                        <div class="points_info tripcollectiveinfo" onclick="showElement('activityDiv')">
+                                            <div class="label"> امتیاز کل شما </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="mainDivTotalPoint">
-                                    <div class="points">255 {{--{{$totalPoint}}--}} </div>
-                                    <a href="">سیستم امتیازدهی</a>
-                                </div>
-                                <div class="points_to_go">
+                                    <div class="mainDivTotalPoint">
+                                        <div class="points">255 {{--{{$totalPoint}}--}} </div>
+                                        <a href="">سیستم امتیازدهی</a>
+                                    </div>
+                                    <div class="points_to_go">
                                     <span>
                                         <b class="points">245{{--{{$userLevels[1]->floor - $totalPoint}}--}} </b>
                                         <span>امتیاز  مانده به مرحله بعد</span>
                                     </span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="modules-membercenter-level-progress">
-                                <div data-direction="left" id="targetHelp_9" class="targets progress_info tripcollectiveinfo">
-                                    <div onclick="showElement('levelDiv')">
-                                        <div class="labels">
-                                            <div class="right label">مرحله فعلی</div>
-                                            <div class="float-leftImp label">مرحله بعدی</div>
-                                        </div>
-                                        <div class="progress_indicator">
-                                            <div class="current_badge myBadge">1 {{--{{$userLevels[1]->name}}--}}</div>
-                                            <div class="meter">
-                                                <span id="progressId" class="progress"></span>
+                                <div class="modules-membercenter-level-progress">
+                                    <div data-direction="left" id="targetHelp_9" class="targets progress_info tripcollectiveinfo">
+                                        <div onclick="showElement('levelDiv')">
+                                            <div class="labels">
+                                                <div class="right label">مرحله فعلی</div>
+                                                <div class="float-leftImp label">مرحله بعدی</div>
                                             </div>
-                                            <div class="next_badge myBadge">2 {{--{{$userLevels[0]->name}}--}} </div>
+                                            <div class="progress_indicator">
+                                                <div class="current_badge myBadge">1 {{--{{$userLevels[1]->name}}--}}</div>
+                                                <div class="meter">
+                                                    <span id="progressId" class="progress"></span>
+                                                </div>
+                                                <div class="next_badge myBadge">2 {{--{{$userLevels[0]->name}}--}} </div>
+                                            </div>
+                                            <div class="text-align-center">
+                                                <a class="cursor-pointer color-black">مشاهده سیستم سطح بندی</a>
+                                            </div>
+                                            <div class="clear fix"></div>
                                         </div>
-                                        <div class="text-align-center">
-                                            <a class="cursor-pointer color-black">مشاهده سیستم سطح بندی</a>
-                                        </div>
-                                        <div class="clear fix"></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
                     <div class="userProfileActivitiesMainDiv rightColBoxes">
                         <div class="mainDivHeaderText">
                             <h3>شرح فعالیت‌ها</h3>
