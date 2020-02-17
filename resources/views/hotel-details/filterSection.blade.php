@@ -20,7 +20,7 @@
                                             <span class="float-right line-height-2">
                                                 {{$item->description}}
                                             </span>
-                <span class="dark-blue font-weight-500 float-right line-height-2 mg-rt-5" onclick="removeFilter({{$item->id}}, 'multi')" style="cursor: pointer">حذف فیلتر</span>
+                <span class="dark-blue font-weight-500 float-right line-height-2 mg-rt-5" onclick="removeReviewFilter({{$item->id}}, 'multi')" style="cursor: pointer">حذف فیلتر</span>
                 <div class="clear-both"></div>
                 <center>
                     @foreach($item->ans as $item2 )
@@ -34,7 +34,7 @@
                                         <span class="float-right line-height-2">
                                             نمایش پست‌های دارای عکس
                                         </span>
-            <span class="dark-blue font-weight-500 float-right line-height-2" onclick="removeFilter(0, 'onlyPic')" style="cursor: pointer">حذف فیلتر</span>
+            <span class="dark-blue font-weight-500 float-right line-height-2" onclick="removeReviewFilter(0, 'onlyPic')" style="cursor: pointer">حذف فیلتر</span>
             <div class="clear-both"></div>
 
             <center>
@@ -50,7 +50,7 @@
                                             <span class="float-right line-height-2">
                                                 {{$item->description}}
                                             </span>
-                <span class="dark-blue font-weight-500 float-right line-height-2 mg-rt-5" onclick="removeFilter({{$item->id}}, 'rate')" style="cursor: pointer">حذف فیلتر</span>
+                <span class="dark-blue font-weight-500 float-right line-height-2 mg-rt-5" onclick="removeReviewFilter({{$item->id}}, 'rate')" style="cursor: pointer">حذف فیلتر</span>
                 <div class="clear-both"></div>
                 <center>
                     <div class="commentRatingsFiltersChoices">
@@ -212,7 +212,7 @@
         doReviewFilter();
     }
 
-    function removeFilter(_id, _kind){
+    function removeReviewFilter(_id, _kind){
         if(_kind == 'rate'){
             filterRateAns[_id] = null;
         }

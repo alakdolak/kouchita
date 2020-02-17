@@ -64,5 +64,7 @@
             @include('layouts.placeFooter')
         </div>
 
+    @include('general.alerts')
+
     </body>
 </html>

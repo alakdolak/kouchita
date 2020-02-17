@@ -4,40 +4,40 @@
 
     <a target="_blank" class="link mg-tp-5" {{($config->facebookNoFollow) ? 'rel="nofollow"' : ''}}
     href="https://www.facebook.com/sharer/sharer.php?u={{Request::url()}}">
-        <img src="{{"../../../public/images/shareBoxImg/facebook.png"}}" class="display-inline-block float-right">
+        <img src="{{URL::asset("images/shareBoxImg/facebook.png")}}" class="display-inline-block float-right">
         <div class="display-inline-block float-right mg-rt-5">اشتراک صفحه در فیسبوک</div>
     </a>
     <a target="_blank" class="link mg-tp-5" {{($config->twitterNoFollow) ? 'rel="nofollow"' : ''}}
     href="https://twitter.com/home?status={{Request::url()}}">
-        <img src="{{"../../../public/images/shareBoxImg/twitter.png"}}" class="display-inline-block float-right">
+        <img src="{{URL::asset("images/shareBoxImg/twitter.png")}}" class="display-inline-block float-right">
         <div class="display-inline-block float-right mg-rt-5">اشتراک صفحه در توییتر</div>
     </a>
     <a target="_blank" class="link mg-tp-5" {{($config->whatsAppFollow) ? 'rel="nofollow"' : ''}}
 {{--    href="https://whatsApp.com/share?url={{s mg-tp-5tr_replace('%20', '', Request::url())}}"--}}
     >
-        <img src="{{"../../../public/images/shareBoxImg/whatsApp.png"}}" class="display-inline-block float-right">
+        <img src="{{URL::asset("images/shareBoxImg/whatsapp.png")}}" class="display-inline-block float-right">
         <div class="display-inline-block float-right mg-rt-5">اشتراک صفحه واتس اپ</div>
     </a>
     <a target="_blank" class="link mg-tp-5" {{($config->telegramNoFollow) ? 'rel="nofollow"' : ''}}
     href="https://telegram.me/share/url?url={{Request::url()}}">
-        <img src="{{"../../../public/images/shareBoxImg/telegram.png"}}" class="display-inline-block float-right">
+        <img src="{{URL::asset("images/shareBoxImg/telegram.png")}}" class="display-inline-block float-right">
         <div class="display-inline-block float-right mg-rt-5">اشتراک صفحه تلگرام</div>
     </a>
     <a target="_blank" class="link mg-tp-5" {{($config->instagramFollow) ? 'rel="nofollow"' : ''}}
 {{--    href="https://instagram.com/share?url={{ str_replace('%20', '', Request::url())}}"--}}
     >
-        <img src="{{"../../../public/images/shareBoxImg/instagram.png"}}" class="display-inline-block float-right">
+        <img src="{{URL::asset("images/shareBoxImg/instagram.png")}}" class="display-inline-block float-right">
         <div class="display-inline-block float-right mg-rt-5">اشتراک صفحه اینستاگرام</div>
     </a>
     <a target="_blank" class="link mg-tp-5" {{($config->pinterestFollow) ? 'rel="nofollow"' : ''}}
 {{--    href="https://pinterest.com/home?status={{Request::url()}}"--}}
     >
-        <img src="{{"../../../public/images/shareBoxImg/pinterest.png"}}" class="display-inline-block float-right">
+        <img src="{{URL::asset("images/shareBoxImg/pinterest.png")}}" class="display-inline-block float-right">
         <div class="display-inline-block float-right mg-rt-5">اشتراک صفحه پین ترست</div>
     </a>
     <div class="position-relative inputBoxSharePage mg-tp-5">
         <input class="full-width inputBoxInputSharePage" placeholder="www.koochita.com/abhoes">
-        <img src="{{"../../../public/images/tourCreation/copy.png"}}" id="copyImgInputShareLink">
+        <img src="{{URL::asset("images/shareBoxImg/copy.png")}}" id="copyImgInputShareLink">
     </div>
 </div>
 {{--<div class="header heading fr" id="lastDivOfShareBox">--}}

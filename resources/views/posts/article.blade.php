@@ -1,8 +1,23 @@
 @extends('posts.articleLayout')
 
 @section('head')
+    <link rel="stylesheet" href="{{URL::asset('css/easyimage.css')}}">
+
+
+    <title> {{$post->seoTitle}} </title>
+    <meta property="og:title" content=" {{$post->seoTitle}} " />
+    <meta name="twitter:title" content=" {{$post->seoTitle}} " />
+    <meta name="description" content=" {{$post->meta}}"/>
+    <meta property="og:description" content=" {{$post->meta}}" />
+    <meta name="twitter:description" content=" {{$post->meta}}" />
+
+    @foreach($post->tag as $item)
+        <meta property="article:tag" content="{{$item->tag}}"/>
+    @endforeach
 
 @endsection
+
+@section('body')
 
     <div id="darkModal" class="display-none" role="dialog"></div>
 
@@ -47,7 +62,6 @@
         </div>
     </div>
 
-@section('body')
     <div class="container" style="direction: rtl">
         <div class="col-md-3 col-sm-12 hideOnPhone" style="padding-right: 0 !important;">
             <a href="{{route('mainArticle')}}">
@@ -230,12 +244,12 @@
                     <div class="col-md-12 col-sm-12 gnUserDescription">
                         <div>
                             <div class="circleBase type2 newCommentWriterProfilePic">
-                                <img src="##authPic##" style="width: 100%; height: 100%; border-radius: 50%;">
+                                <img src="{{$post->user->pic}}" style="width: 100%; height: 100%; border-radius: 50%;">
                             </div>
-                            <div class="gnLabels">shazdesina</div>
+                            <div class="gnLabels">{{$post->user->username}}</div>
                         </div>
                         <div>
-
+                            لورم ایپسون
                         </div>
                     </div>
                 </div>
@@ -243,7 +257,9 @@
                     <div class="col-md-12 col-sm-12 gnUserDescription">
                         <div class="gnLabels">برچسب ها</div>
                         <div>
-
+                            @foreach($post->tag as $tag)
+                                <div>{{$tag->tag}}</div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -304,7 +320,7 @@
         </div>
     </div>
 
-    <script src="{{URL::asset('/js/article/articlePage.js')}}"></script>
+    <script src="{{URL::asset('js/article/articlePage.js')}}"></script>
 
     <script>
         var category = {!! $category !!}
@@ -321,6 +337,71 @@
         var likeCommentUrl = '{{route("article.comment.like")}}';
         var comments = {!! $comments !!};
         var userPic = '{{$uPic}}';
+
+
+        function createComment(srcId, comments){
+            if(srcHtmlComments == 0)
+                srcHtmlComments = $('#commentDiv0').html();
+
+            $('#commentDiv' + srcId).html('');
+
+            for(var i = 0; i < comments.length; i++){
+                var t;
+                var re;
+                var text = srcHtmlComments;
+                var fk = Object.keys(comments[i]);
+                for (var x of fk) {
+                    t = '##' + x + '##';
+                    re = new RegExp(t, "g");
+
+                    if(x == 'ans'){
+                        if(comments[i][x] == null)
+                            text = text.replace(re, 0);
+                        else
+                            text = text.replace(re, comments[i][x].length);
+                    }
+                    text = text.replace(re, comments[i][x]);
+                }
+
+                t = '##authPic##';
+                re = new RegExp(t, "g");
+                text = text.replace(re, userPic);
+
+                if(comments[i]['userLike'] == 1){
+                    t = '##showLike##';
+                    re = new RegExp(t, "g");
+                    text = text.replace(re, 'likeActionClickedBtn');
+                }
+                else if(comments[i]['userLike'] == 0){
+                    t = '##showDisLike##';
+                    re = new RegExp(t, "g");
+                    text = text.replace(re, 'dislikeActionClickedBtn');
+                }
+
+                var marginRight = '0px';
+                if(srcId != 0)
+                    marginRight = '50px';
+                t = '##mRight##';
+                re = new RegExp(t, "g");
+                text = text.replace(re, marginRight);
+
+                if(comments[i]['ans'] != null && comments[i]['ans'].length != 0){
+                    t = '##haveAnsDisplay##';
+                    re = new RegExp(t, "g");
+                    text = text.replace(re, 'block');
+                    $('#commentDiv' + srcId).append(text);
+                    createComment(comments[i]['id'], comments[i]['ans']);
+                }
+                else{
+                    t = '##haveAnsDisplay##';
+                    re = new RegExp(t, "g");
+                    text = text.replace(re, 'none');
+                    $('#commentDiv' + srcId).append(text);
+                }
+            }
+
+        }
+        createComment(0, comments);
     </script>
 @endsection
 

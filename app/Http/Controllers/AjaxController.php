@@ -575,13 +575,16 @@ class AjaxController extends Controller {
                     $like->save();
                 }
 
-                echo 'ok';
+                $like = LogFeedBack::where('logId', $request->logId)->where('like', 1)->count();
+                $dislike = LogFeedBack::where('logId', $request->logId)->where('like', -1)->count();
+
+                echo json_encode(['ok', $like, $dislike]);
             }
             else
-                echo 'nok2';
+                echo json_encode(['nok2']);
         }
         else
-            echo 'nok1';
+            echo json_encode(['nok1']);
 
         return;
     }

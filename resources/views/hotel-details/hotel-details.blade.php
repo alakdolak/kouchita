@@ -66,15 +66,10 @@ if ($total == 0)
     <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/abbreviations.css')}}">
 {{--    <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/editor.css')}}">--}}
 
-
-
     <link rel="stylesheet" href="{{URL::asset('css/theme2/swiper.css')}}">
     <script src="{{URL::asset('js/swiper/swiper.min.js')}}"></script>
 
-
-
     {{--vr--}}
-
     @if(isset($video) && $video != null)
         <link rel="stylesheet" href="{{URL::asset('vr2/video-js.css')}}">
         <link rel="stylesheet" href="{{URL::asset('vr2/videojs-vr.css')}}">
@@ -1027,7 +1022,7 @@ if ($total == 0)
                             <ul class="nav navbar-nav">
                                 <li><a class="tabLinkMainWrap similarLocationsBtnTopBar" href="#similarLocationsMainDiv">مکان‌های مشابه</a></li>
                                 <li><a class="tabLinkMainWrap QAndAsBtnTopBar" href="#QAndAMainDivId">سؤالات</a></li>
-                                <li><a class="tabLinkMainWrap postsBtnTopBar" href="#mainDivPlacePost">پست</a></li>
+                                <li><a id="pcPostButton" class="tabLinkMainWrap postsBtnTopBar" href="#mainDivPlacePost">پست</a></li>
                                 <li><a class="tabLinkMainWrap generalDescBtnTopBar" href="#generalDescLinkRel">معرفی کلی</a></li>
                             </ul>
                         </div>
@@ -1043,7 +1038,7 @@ if ($total == 0)
                             <button class="tabLinkMainWrap" onclick="openTab('QAndAMainDivId', this, '#4dc7bc')">سؤالات</button>
                         </a><!--
                      --><a href="#bodyLinks">
-                            <button class="tabLinkMainWrap" onclick="openTab('mainDivPlacePost', this, '#4dc7bc')">پست</button>
+                            <button id="openPostPhone" class="tabLinkMainWrap" onclick="openTab('mainDivPlacePost', this, '#4dc7bc')">پست</button>
                         </a><!--
                      --><a href="#bodyLinks">
                             <button class="tabLinkMainWrap" onclick="openTab('mobileIntroductionMainDivId', this, '#4dc7bc')" id="defaultOpenMainWrap">معرفی کلی</button>
@@ -2682,9 +2677,9 @@ if ($total == 0)
         @endif
 
         $(window).ready(function(){
-            @foreach($sections as $section)
-                fillMyDivWithAdv('{{$section->sectionId}}', '{{$state->id}}');
-            @endforeach
+            {{--@foreach($sections as $section)--}}
+                {{--fillMyDivWithAdv('{{$section->sectionId}}', '{{$state->id}}');--}}
+            {{--@endforeach--}}
         });
 
         function closePublish() {

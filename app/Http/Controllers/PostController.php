@@ -312,6 +312,24 @@ class PostController extends Controller {
             $cityCome = $res[2];
             $placeCome = $res[3];
 
+            $creator = User::select(['id', 'first_name', 'last_name', 'username', 'picture'])->find($post->creator);
+            if($creator != null){
+                if($creator->uploadPhoto == 0){
+                    $deffPic = DefaultPic::find($creator->picture);
+
+                    if($deffPic != null)
+                        $creator->pic = URL::asset('defaultPic/' . $deffPic->name);
+                    else
+                        $creator->pic = URL::asset('_images/nopic/blank.jpg');
+                }
+                else{
+                    $creator->pic = URL::asset('userProfile/' . $creator->picture);
+                }
+            }
+            $post->user = $creator;
+
+            $tags = DB::select('SELECT pt.tag FROM postTags AS pt, postTagsRelations AS ptr WHERE ptr.postId = ' . $post->id . ' AND pt.id = ptr.tagId GROUP BY pt.tag');
+            $post->tag = $tags;
             return view('posts.article', compact(['stateCome', 'cityCome', 'placeCome', 'post', 'category', 'similarPost', 'postLike', 'uPic', 'comments']));
         }
         return \redirect(\url('/'));

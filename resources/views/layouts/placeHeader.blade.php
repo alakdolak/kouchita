@@ -227,7 +227,7 @@
                             </div>
 
                             <div class="global-nav-overlays-container">
-{{--                                @include('layouts.recentlyViewAndMyTripsInDetails')--}}
+                                @include('layouts.recentlyViewAndMyTripsInDetails')
                             </div>
                         </div>
 

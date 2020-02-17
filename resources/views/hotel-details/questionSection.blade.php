@@ -88,7 +88,7 @@
                 },
                 success: function(response){
                     if(response == 'ok') {
-                        alert('سئوال شما با موفقیت ثبت شد');
+                        showSuccessNotifi('سئوال شما با موفقیت ثبت شد');
                         document.getElementById('questionInput').value = '';
                     }
                 }
@@ -137,17 +137,21 @@
         var text = '';
 
         for(var i = 0; i < ques.length; i++){
-            text += '<div class="answersBoxMainDiv">\n' +
-                '                        <div class="answersActions" onclick="showAnswersActionBox(this)">\n' +
-                '                            <span class="answersActionsIcon"></span>\n' +
-                '                        </div>\n' +
-                '                        <div class="questionsActionsMoreDetails display-none">\n' +
-                '                            <span>گزارش پست</span>\n' +
-                '                            <span>مشاهده صفحه شازده سینا</span>\n' +
-                '                            <span>مشاهده تمامی پست‌ها</span>\n' +
-                '                            <span>صفحه قوانین و مقررات</span>\n' +
-                '                        </div>\n' +
-                '                        <div class="showingQuestionCompletely" onclick="showSpecificQuestion(this)">\n' +
+            text += '<div class="answersBoxMainDiv">\n';
+            if(ques[i]['confirm'] == 1){
+                text += '                        <div class="answersActions" onclick="showAnswersActionBox(this)">\n' +
+                    '                            <span class="answersActionsIcon"></span>\n' +
+                    '                        </div>\n'+
+                    '                     <div class="questionsActionsMoreDetails display-none">\n' +
+                    '                            <span>گزارش پست</span>\n' +
+                    '                            <span>مشاهده صفحه شازده سینا</span>\n' +
+                    '                            <span>مشاهده تمامی پست‌ها</span>\n' +
+                    '                            <span>صفحه قوانین و مقررات</span>\n' +
+                    '                        </div>\n';
+            }
+
+
+            text += '                        <div class="showingQuestionCompletely" onclick="showSpecificQuestion(this)">\n' +
                 '                            مشاهده سوال\n' +
                 '                        </div>\n' +
                 '                        <div class="answersWriterDetailsShow">\n' +
@@ -157,13 +161,16 @@
                 '                            <div class="answersWriterExperienceDetails">\n' +
                 '                                <b class="userProfileNameAnswers">' + ques[i]["username"] + '</b>\n' +
                 '                                <div class="display-inline-block">در\n' +
-                '                                    <span class="answersWriterExperiencePlace">' + ques[i]["place"]["name"] + '، شهر ' + ques[i]["city"]["name"] + '، استان ' + ques[i]["state"]["name"] + '</span>\n' +
-                '                                </div>\n' +
+                '                                    <span class="answersWriterExperiencePlace">' + ques[i]["place"]["name"] + '، شهر ' + ques[i]["city"]["name"] + '، استان ' + ques[i]["state"]["name"] + '</span>\n';
+            if(ques[i]['confirm'] == 0)
+                text += '<span class="label label-success">در انتظار تایید</span>';
+
+                text += '                                </div>\n' +
                 '                                <div>' + ques[i]["timeAgo"] + '</div>\n' +
                 '                            </div>\n' +
                 '                        </div>\n' +
                 '                        <div class="clear-both"></div>\n' +
-                '                        <div class="questionContentMainBox">' + ques[i]["text"] + '</div>\n' +
+                '                        <div class="questionContentMainBox" style="white-space: pre-line">' + ques[i]["text"] + '</div>\n' +
                 '                        <div class="clear-both"></div>\n' +
                 '                        <div class="questionSubMenuBar">\n' +
                 '                            <div class="numberOfAnswers">\n' +
@@ -285,8 +292,11 @@
                 },
                 success: function(response){
                     if(response == 'ok') {
-                        alert('پاسخ شما با موفقیت ثبت شد');
+                        showSuccessNotifi('پاسخ شما با موفقیت ثبت شد');
                         document.getElementById('questionAns' + _id).value = '';
+                    }
+                    else if(response == 'nok2'){
+                        alert('شما نمی توانید به سوال تایید نشده پاسخ دهید.')
                     }
                 }
             })
