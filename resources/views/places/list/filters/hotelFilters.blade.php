@@ -2,7 +2,12 @@
 
     <div class="prw_rup prw_restaurants_restaurant_filters">
         <div class="lhrFilterBlock jfy_filter_bar_establishmentTypeFilters collapsible">
-            <div class="filterGroupTitle">مرکز اقامتی</div>
+            <div style="display: flex; justify-content: space-between;">
+                <div class="filterGroupTitle">مرکز اقامتی</div>
+                <span onclick="showMoreItems(0)" class="moreItems0 moreItems">نمایش کامل فیلترها</span>
+                <span onclick="showLessItems(0)" class="lessItems hidden extraItem0">پنهان سازی فیلتر‌ها</span>
+            </div>
+
             <div class="filterContent ui_label_group inline">
 
                 <div class="ui_input_checkbox filterItem lhrFilter filter establishmentTypeFilters establishmentTypeFilters_10591 selected 0 index_0 alwaysShowItem">
@@ -25,9 +30,6 @@
                     <input ng-disabled="isDisable()" ng-click="doKindFilter(5)" type="checkbox" id="x5"/>
                     <label for="x5"><span></span>&nbsp;&nbsp; متل  </label>
                 </div>
-
-                <span onclick="showMoreItems(0)" class="moreItems0" style="cursor: pointer">نمایش همه ی موارد</span>
-
                 <div class="ui_input_checkbox filterItem lhrFilter filter establishmentTypeFilters extraItem0">
                     <input ng-disabled="isDisable()" ng-click="doKindFilter(6)" type="checkbox" id="x6"/>
                     <label for="x6"><span></span>&nbsp;&nbsp; مجتمع تفریحی </label>
@@ -42,6 +44,6 @@
                 </div>
 
             </div>
-            <span onclick="showLessItems(0)" class="lessItems hidden extraItem0">پنهان سازی همه ی موارد</span>
+
         </div>
     </div>

@@ -40,18 +40,16 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
 
 .moreItems {
     display: block;
-    text-align: center;
-    margin-top: 5px;
     cursor: pointer;
-    text-align: -webkit-right;
+    padding: 23px 0 11px;
+    line-height: 30px;
 }
 
 .lessItems {
     display: block;
-    text-align: center;
-    margin-top: 5px;
     cursor: pointer;
-    text-align: -webkit-right;
+    padding: 23px 0 11px;
+    line-height: 30px;
 }
 
 .moreItems2 {

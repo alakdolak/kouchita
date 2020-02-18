@@ -400,7 +400,7 @@ class HomeController extends Controller
             $item->catURL = route('article.list', ['type' => 'category', 'search' => $item->category]);
         }
 
-        return view('cityPage', compact(['place', 'kind', 'locationName', 'post', 'cityPost', 'map', 'allPlaces', 'mostSeenPosts', 'allAmaken', 'allHotels', 'allRestaurant', 'allMajara', 'allMahaliFood', 'allSogatSanaie', 'reviews', 'topPlaces']));
+        return view('cityPage', compact(['place', 'kind', 'locationName', 'post', 'map', 'allPlaces', 'allAmaken', 'allHotels', 'allRestaurant', 'allMajara', 'allMahaliFood', 'allSogatSanaie', 'reviews', 'topPlaces']));
     }
 
     public function getCityOpinion()
