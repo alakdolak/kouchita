@@ -569,107 +569,53 @@
                     <div class="lp_others_content" id="lp_others_recentlyViews">
                         <div class="lp_others_titles"> بازدید‌های اخیر </div>
                         <div class="mainContainerBookmarked">
-                            <div class="masthead-recent-class">
-                                <a class="lp_others_recentView" target="_self" href="">
-                                    <div class="lp_others_rvPicBox col-xs-8">
-                                        <div class="lp_others_rvPic" style="background-image: url(http://localhost:8080/assets/_images/hotels/hotel_kowsar/f-1.jpg);"></div>
-                                    </div>
-                                    <div class="col-xs-4 placeDetailsLeftBar">
-                                        <div class="">هتل کوثر</div>
-                                        <div class="lp_others_rating">
-                                            <div class="ui_bubble_rating bubble_45"></div>
-                                            <br>3 مشاهده
+                            <div id="phoneRecentlyView">
+
+                                <div class="masthead-recent-class">
+                                    <a class="lp_others_recentView" target="_self" href="##placeRedirect##">
+                                        <div class="lp_others_rvPicBox col-xs-8">
+                                            <img src="##placePic##" style="width: 100%;">
                                         </div>
-                                        <div class="">اصفهان</div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="masthead-recent-class">
-                                <a class="lp_others_recentView" target="_self" href="">
-                                    <div class="lp_others_rvPicBox col-xs-8">
-                                        <div class="lp_others_rvPic" style="background-image: url(http://localhost:8080/assets/_images/hotels/hotel_kowsar/f-1.jpg);"></div>
-                                    </div>
-                                    <div class="col-xs-4 placeDetailsLeftBar">
-                                        <div class="">هتل کوثر</div>
-                                        <div class="lp_others_rating">
-                                            <div class="ui_bubble_rating bubble_45"></div>
-                                            <br>3 مشاهده
+                                        <div class="col-xs-4 placeDetailsLeftBar">
+                                            <div class="">##placeName##</div>
+                                            <div class="lp_others_rating">
+                                                <div class="ui_bubble_rating bubble_##placeRate##0"></div>
+                                                <br>##placeReviews## نقد
+                                            </div>
+                                            <div class="">##placeCity##</div>
                                         </div>
-                                        <div class="">اصفهان</div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="masthead-recent-class">
-                                <a class="lp_others_recentView" target="_self" href="">
-                                    <div class="lp_others_rvPicBox col-xs-8">
-                                        <div class="lp_others_rvPic" style="background-image: url(http://localhost:8080/assets/_images/hotels/hotel_kowsar/f-1.jpg);"></div>
-                                    </div>
-                                    <div class="col-xs-4 placeDetailsLeftBar">
-                                        <div class="">هتل کوثر</div>
-                                        <div class="lp_others_rating">
-                                            <div class="ui_bubble_rating bubble_45"></div>
-                                            <br>3 مشاهده
-                                        </div>
-                                        <div class="">اصفهان</div>
-                                    </div>
-                                </a>
+                                    </a>
+                                </div>
+
                             </div>
                             <div class="bottomBarContainer"></div>
                         </div>
                     </div>
 
-                    <div class="lp_others_content hidden" id="lp_others_messages">
-                        <div class="lp_others_titles"> اعلانات </div>
-                        <div class="lp_others_noMessages">هیچ پیامی موجود نیست</div>
+                    <div class="lp_others_content hidden" id="lp_others_messages" style="overflow-y: scroll">
+                        <div id="phoneMessages" class="lp_others_titles"> اعلانات </div>
+                        <div id="noMessagePhone" class="lp_others_noMessages">هیچ پیام جدیدی موجود نیست</div>
                     </div>
 
                     <div class="lp_others_content hidden" id="lp_others_mark">
                         <div class="lp_others_titles"> نشان‌گذاری شده‌ها </div>
                         <div class="mainContainerBookmarked">
-                            <div class="masthead-recent-class">
-                                <a class="lp_others_recentView" target="_self" href="">
-                                    <div class="lp_others_rvPicBox col-xs-8">
-                                        <div class="lp_others_rvPic" style="background-image: url(http://localhost:8080/assets/_images/hotels/hotel_kowsar/f-1.jpg);"></div>
-                                    </div>
-                                    <div class="col-xs-4 placeDetailsLeftBar">
-                                        <div class="">هتل کوثر</div>
-                                        <div class="lp_others_rating">
-                                            <div class="ui_bubble_rating bubble_45"></div>
-                                            <br>3 مشاهده
+                            <div id="phoneBookMarks">
+                                <div class="masthead-recent-class">
+                                    <a class="lp_others_recentView" target="_self" href="##placeRedirect##">
+                                        <div class="lp_others_rvPicBox col-xs-8">
+                                            <img src="##placePic##" style="width: 100%;">
                                         </div>
-                                        <div class="">اصفهان</div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="masthead-recent-class">
-                                <a class="lp_others_recentView" target="_self" href="">
-                                    <div class="lp_others_rvPicBox col-xs-8">
-                                        <div class="lp_others_rvPic" style="background-image: url(http://localhost:8080/assets/_images/hotels/hotel_kowsar/f-1.jpg);"></div>
-                                    </div>
-                                    <div class="col-xs-4 placeDetailsLeftBar">
-                                        <div class="">هتل کوثر</div>
-                                        <div class="lp_others_rating">
-                                            <div class="ui_bubble_rating bubble_45"></div>
-                                            <br>3 مشاهده
+                                        <div class="col-xs-4 placeDetailsLeftBar">
+                                            <div class="">##placeName##</div>
+                                            <div class="lp_others_rating">
+                                                <div class="ui_bubble_rating bubble_##placeRate##0"></div>
+                                                <br>##placeReviews## نقد
+                                            </div>
+                                            <div class="">##placeCity##</div>
                                         </div>
-                                        <div class="">اصفهان</div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="masthead-recent-class">
-                                <a class="lp_others_recentView" target="_self" href="">
-                                    <div class="lp_others_rvPicBox col-xs-8">
-                                        <div class="lp_others_rvPic" style="background-image: url(http://localhost:8080/assets/_images/hotels/hotel_kowsar/f-1.jpg);"></div>
-                                    </div>
-                                    <div class="col-xs-4 placeDetailsLeftBar">
-                                        <div class="">هتل کوثر</div>
-                                        <div class="lp_others_rating">
-                                            <div class="ui_bubble_rating bubble_45"></div>
-                                            <br>3 مشاهده
-                                        </div>
-                                        <div class="">اصفهان</div>
-                                    </div>
-                                </a>
+                                    </a>
+                                </div>
                             </div>
                             <div class="bottomBarContainer"></div>
                         </div>
@@ -884,7 +830,7 @@
                         <div class="ui_icon notification-bell lp_icons"></div>
                         <div>اعلانات</div>
                     </div>
-                    <div class="lp_eachMenu lp_selectedMenu" onclick="lp_selectMenu('lp_others_recentlyViews', this)">
+                    <div class="lp_eachMenu lp_selectedMenu" onclick="lp_selectMenu('lp_others_recentlyViews', this); phoneRecentlyViews();">
                         <div class="ui_icon search lp_icons"></div>
                         <div>بازدیدهای اخیر</div>
                     </div>
@@ -896,38 +842,47 @@
 
         <div class="modal fade" id="otherPossibilities">
             <div class="mainPopUp leftPopUp">
-                <div class="pSC_tilte">
-                    <div>شما در حال حاضر در شهر <span class="pSC_cityTilte">اصفهان </span>هستید</div>
-                    <button type="button" class="btn btn-danger"
-                            onclick="$('#searchPane').removeClass('hidden');  $('#darkModeMainPage').toggle();">تغییر دهید</button>
+
+                @if(isset($locationName))
+                    <div class="pSC_tilte">
+                    <div>
+                        شما در حال حاضر در
+                        <span class="pSC_cityTilte">{{$locationName['name']}}</span>
+                        هستید
+                    </div>
+                    <button type="button" class="btn btn-danger" onclick="openProSearch()">تغییر دهید</button>
                 </div>
-                <div class="pSC_cityDescription">
+                    <div class="pSC_cityDescription">
                     شما می‌توانید به راحتی صفحات زیر را در
-                    <span>استان اصفهان </span>
+                    <span>{{$locationName['name']}}</span>
                     مشاهده نمایید
                 </div>
-                <div class="pSC_boxOfDetails">
+                    <div class="pSC_boxOfDetails">
                     <div class="pSC_choiseDetailsText">به سادگی انتخاب کنید</div>
                     <div class="pSC_boxOfCityDetailsText">
-                        <span>مشاهده صفحه شهر اصفهان</span>
-                        <span class="pSC_boxOfCityDetailsText2">در استان اصفهان</span>
+                        <span>مشاهده صفحه {{$locationName['name']}}</span>
+                        @if(isset($locationName['state']))
+                            <span class="pSC_boxOfCityDetailsText2">در استان استان {{$locationName['state']}}</span>
+                        @endif
                     </div>
                     <div>
                         <div class="pSC_boxOfCityDetails">
-                            <div class="pSC_cityDetails">جاذبه‌های اصفهان</div>
-                            <div class="pSC_cityDetails pSC_cityDetails_selected">هتل‌های اصفهان</div>
+                            <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/1/" . $locationName['urlName'] . "/" . $kind)}}'">جاذبه‌های {{$locationName['name']}}</div>
+                            <div class="pSC_cityDetails pSC_cityDetails_selected" onclick="window.location.href = '{{url("placeList/4/" . $locationName['urlName'] . "/" . $kind)}}'">هتل‌های {{$locationName['name']}}</div>
                         </div>
                         <div class="pSC_boxOfCityDetails">
-                            <div class="pSC_cityDetails">مقاله‌های اصفهان</div>
-                            <div class="pSC_cityDetails">رستوران‌های اصفهان</div>
+                            <div class="pSC_cityDetails" onclick="window.location.href = '{{$locationName['articleUrl']}}'">مقاله‌های {{$locationName['name']}}</div>
+                            <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/3/" . $locationName['urlName'] . "/" . $kind)}}'">رستوران‌های {{$locationName['name']}}</div>
                         </div>
                         <div class="pSC_boxOfCityDetails">
-                            <div class="pSC_cityDetails">صنایع دستی‌های اصفهان</div>
-                            <div class="pSC_cityDetails">غذای محلی‌های اصفهان</div>
+                            <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/10/" . $locationName['urlName'] . "/" . $kind)}}'">صنایع دستی‌های {{$locationName['name']}}</div>
+                            <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/11/" . $locationName['urlName'] . "/" . $kind)}}'">غذای محلی‌های {{$locationName['name']}}</div>
                         </div>
                     </div>
                     <div class="overflowOptimizer"></div>
                 </div>
+                @endif
+
                 <div class="hideOnScreen phoneFooterStyle">
                     <div class="phoneFooterLogo">
                         <img src="{{URL::asset('images/logo.png')}}" class="content-icon" width="100%">
@@ -939,36 +894,39 @@
                             با خبر بشید و توضیحاتش رو هم کامل بخونین، بعدش راحت دل رو به دریا بزنین و راه بیوفتین.
                         </div>
                         <div class="phoneDescriptionSelects">
-                            <div class="inputBox" id="">
-                                <div class="inputBoxText">
-                                    <div>
-                                        زبان
-                                    </div>
-                                </div>
-                                <select class="inputBoxInput styled-select" id="" name="">
-                                    <option value="">
-                                        English
-                                    </option>
-                                    <option value="">
-                                        فارسی
-                                    </option>
-                                </select>
-                            </div>
-                            <div class="inputBox" id="">
-                                <div class="inputBoxText">
-                                    <div>
-                                        واحد پول
-                                    </div>
-                                </div>
-                                <select class="inputBoxInput styled-select" id="" name="">
-                                    <option value="fast">
-                                        ریال
-                                    </option>
-                                    <option value="call">
-                                        USD
-                                    </option>
-                                </select>
-                            </div>
+                            {{--language--}}
+                            {{--<div class="inputBox" id="">--}}
+                                {{--<div class="inputBoxText">--}}
+                                    {{--<div>--}}
+                                        {{--زبان--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                                {{--<select class="inputBoxInput styled-select" id="" name="">--}}
+                                    {{--<option value="">--}}
+                                        {{--English--}}
+                                    {{--</option>--}}
+                                    {{--<option value="">--}}
+                                        {{--فارسی--}}
+                                    {{--</option>--}}
+                                {{--</select>--}}
+                            {{--</div>--}}
+
+                            {{--<div class="inputBox" id="">--}}
+                                {{--<div class="inputBoxText">--}}
+                                    {{--<div>--}}
+                                        {{--واحد پول--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                                {{--<select class="inputBoxInput styled-select" id="" name="">--}}
+                                    {{--<option value="fast">--}}
+                                        {{--ریال--}}
+                                    {{--</option>--}}
+                                    {{--<option value="call">--}}
+                                        {{--USD--}}
+                                    {{--</option>--}}
+                                {{--</select>--}}
+                            {{--</div>--}}
+
                         </div>
                     </div>
                 </div>
@@ -1031,58 +989,144 @@
                             <a type="button" class="btn btn-danger pp_btns" href="{{route('logout')}}">خروج</a>
                         </div>
                     </div>
-                    <div class="profileScoreMainDiv">
-                        <div class="modules-membercenter-progress-header " data-backbone-name="modules.membercenter.ProgressHeader" data-backbone-context="Social_CompositeMember, Member">
-                            <div class="title" id="myHonorsText">
-                                <h3>امتیازات من</h3>
+                    @if(isset($profilePage) && $profilePage == 1)
+                        <div class="profileMenuResponsive">
+                            @if($mode == "profile")
+                                <div id="Profile" class="profile col-xs-6 profileMenuLinks">
+                                    <a id="profileLinkColor1" href="{{URL('profile')}}">صفحه کاربری</a>
+                                </div>
+                            @else
+                                <div id="Profile" class="profile col-xs-6 profileMenuLinks">
+                                    <a id="profileLinkColor2" href="{{URL('profile')}}">صفحه کاربری</a>
+                                </div>
+                            @endif
+                            @if($mode == "profileActivities")
+                                <div id="ProfileActivities" class="profileActivities col-xs-6 profileMenuLinks">
+                                    <a id="profileLinkColor1" href="{{URL('profile')}}">فعالیت‌های من</a>
+                                </div>
+                            @else
+                                <div id="Profile" class="profileActivities col-xs-6 profileMenuLinks">
+                                    <a id="profileLinkColor2" href="{{URL('profile')}}">فعالیت‌های من</a>
+                                </div>
+                            @endif
+                            @if($mode == "badge")
+                                <div id="BadgeCollection" class="badgeCollection col-xs-6 profileMenuLinks">
+                                    <a id="BadgeCollectionLinkColor1" href="{{route('badge')}}">مدال‌های گردشگری</a>
+                                </div>
+                            @else
+                                <div id="BadgeCollection" class="badgeCollection col-xs-6 profileMenuLinks">
+                                    <a id="BadgeCollectionLinkColor2" href="{{route('badge')}}">مدال‌های گردشگری</a>
+                                </div>
+                            @endif
+
+                            <div class="travelMap targets position-relative col-xs-6 profileMenuLinks" id="targetHelp_5">
+                                <a href="{{route('soon')}}">سفرنامه من</a>
+                                <div id="helpSpan_5" class="helpSpans hidden row">
+                                    <span class="introjs-arrow"></span>
+                                    <div class="col-xs-12">
+                                        <p>با استفاده از این منو می‌توانید به سایر بخش‌های پروفایل کاربری خود بروید.</p>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <button data-val="5" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_5">بعدی</button>
+                                        <button data-val="5" class="btn btn-primary backBtnsHelp" id="backBtnHelp_5">قبلی</button>
+                                        <button class="btn btn-danger exitBtnHelp">خروج</button>
+                                    </div>
+                                </div>
                             </div>
+
+                            {{--                <li id="Saves" class="saves"></li>--}}
+                            @if($mode == "message")
+                                <div id="Messages" class="messages col-xs-6 profileMenuLinks">
+                                    <a id="messageLinkColor1" href="{{URL('messages')}}">پیام‌ها</a>
+                                </div>
+                            @else
+                                <div id="Messages" class="messages col-xs-6 profileMenuLinks">
+                                    <a id="messageLinkColor2" href="{{URL('messages')}}">پیام‌ها</a>
+                                </div>
+                            @endif
+                            {{--                <div id="Bookings" class="bookings col-xs-6 profileMenuLinks">--}}
+                            {{--                    <a id="bookingLinkColor2" href="{{route('soon')}}">رزروها</a>--}}
+                            {{--                </div>--}}
+                            {{--                <div id="PaymentOptions" class="paymentOptions col-xs-6 profileMenuLinks">--}}
+                            {{--                    <a id="paymentOptionsLinkColor2" href="{{route('soon')}}">پروازها</a>--}}
+                            {{--                </div>--}}
+                            @if($mode == "setting")
+                                <div id="Settings" class="settingColor1 settings col-xs-6 profileMenuLinks">
+                            @else
+                                <div id="Settings" class="settingColor2 settings col-xs-6 profileMenuLinks">
+                            @endif
+                                    تنظیمات
+                                    <div class="settingsArrow"></div>
+                                    <div class="settingsDropDown" id="settingDropDownMainDiv">
+                                        <a href="{{URL('accountInfo')}}">اطلاعات کاربر</a>
+                                        <?php
+                                        $level = Auth::user()->level;
+                                        ?>
+
+                                        @if($level == 1 || $level == 3)
+                                            <a title="Control Content" href="{{route('getReports')}}">مدیریت گزارشات</a>
+                                        @endif
+
+                                        @if(Auth::user()->level == 1)
+                                            {{--<a title="ages" href="{{route('specialAdvice')}}">پیشنهاد های ویژه</a>--}}
+                                        @endif
+                                    </div>
+                                </div>
+                        </div>
+                    @else
+                        <div class="profileScoreMainDiv">
+                            <div class="modules-membercenter-progress-header " data-backbone-name="modules.membercenter.ProgressHeader" data-backbone-context="Social_CompositeMember, Member">
+                                <div class="title" id="myHonorsText">
+                                    <h3>امتیازات من</h3>
+                                </div>
 
                                 <a class="link" {{--onclick="initHelp(16, [], 'MAIN', 100, 400)"--}}>
                                     <div></div>
                                 </a>
-                        </div>
+                            </div>
 
-                        <div class="memberPointInfo">
-                            <div class="modules-membercenter-total-points">
-                                <div data-direction="left" class="targets">
-                                    <div class="points_info tripcollectiveinfo" onclick="showElement('activityDiv')">
-                                        <div class="label"> امتیاز کل شما </div>
+                            <div class="memberPointInfo">
+                                <div class="modules-membercenter-total-points">
+                                    <div data-direction="left" class="targets">
+                                        <div class="points_info tripcollectiveinfo" onclick="showElement('activityDiv')">
+                                            <div class="label"> امتیاز کل شما </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="mainDivTotalPoint">
-                                    <div class="points">255 {{--{{$totalPoint}}--}} </div>
-                                    <a href="">سیستم امتیازدهی</a>
-                                </div>
-                                <div class="points_to_go">
+                                    <div class="mainDivTotalPoint">
+                                        <div class="points">255 {{--{{$totalPoint}}--}} </div>
+                                        <a href="">سیستم امتیازدهی</a>
+                                    </div>
+                                    <div class="points_to_go">
                                     <span>
                                         <b class="points">245{{--{{$userLevels[1]->floor - $totalPoint}}--}} </b>
                                         <span>امتیاز  مانده به مرحله بعد</span>
                                     </span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="modules-membercenter-level-progress">
-                                <div data-direction="left" id="targetHelp_9" class="targets progress_info tripcollectiveinfo">
-                                    <div onclick="showElement('levelDiv')">
-                                        <div class="labels">
-                                            <div class="right label">مرحله فعلی</div>
-                                            <div class="float-leftImp label">مرحله بعدی</div>
-                                        </div>
-                                        <div class="progress_indicator">
-                                            <div class="current_badge myBadge">1 {{--{{$userLevels[1]->name}}--}}</div>
-                                            <div class="meter">
-                                                <span id="progressId" class="progress"></span>
+                                <div class="modules-membercenter-level-progress">
+                                    <div data-direction="left" id="targetHelp_9" class="targets progress_info tripcollectiveinfo">
+                                        <div onclick="showElement('levelDiv')">
+                                            <div class="labels">
+                                                <div class="right label">مرحله فعلی</div>
+                                                <div class="float-leftImp label">مرحله بعدی</div>
                                             </div>
-                                            <div class="next_badge myBadge">2 {{--{{$userLevels[0]->name}}--}} </div>
+                                            <div class="progress_indicator">
+                                                <div class="current_badge myBadge">1 {{--{{$userLevels[1]->name}}--}}</div>
+                                                <div class="meter">
+                                                    <span id="progressId" class="progress"></span>
+                                                </div>
+                                                <div class="next_badge myBadge">2 {{--{{$userLevels[0]->name}}--}} </div>
+                                            </div>
+                                            <div class="text-align-center">
+                                                <a class="cursor-pointer color-black">مشاهده سیستم سطح بندی</a>
+                                            </div>
+                                            <div class="clear fix"></div>
                                         </div>
-                                        <div class="text-align-center">
-                                            <a class="cursor-pointer color-black">مشاهده سیستم سطح بندی</a>
-                                        </div>
-                                        <div class="clear fix"></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
                     <div class="userProfileActivitiesMainDiv rightColBoxes">
                         <div class="mainDivHeaderText">
                             <h3>شرح فعالیت‌ها</h3>
@@ -1310,13 +1354,11 @@
         </div>
 
     </div>
-
-    @include('layouts.proSearch')
+    </div>
 
     <script>
 
         // phone functions
-
         function lp_selectMenu(id , element) {
             $('.lp_eachMenu').removeClass('lp_selectedMenu');
             $(element).addClass('lp_selectedMenu');
@@ -1338,6 +1380,104 @@
             $('.lp_ar_contentOfFilters').addClass('hidden');
             $('#' + id).removeClass('hidden');
         }
+
     </script>
+
+    @if(Auth::check())
+        <script>
+            var recentlySample = 0;
+            var bookMarkSample = 0;
+
+            function phoneRecentlyViews() {
+
+                if(recentlySample == 0)
+                    recentlySample = $('#phoneRecentlyView').html();
+
+                $('#phoneRecentlyView').html('');
+
+
+                $.ajax({
+                    type: 'post',
+                    url: '{{route('recentlyViewed')}}',
+                    data: {
+                        uId: '{{auth()->user()->id}}'
+                    },
+                    success: function (response) {
+
+                        response = JSON.parse(response);
+                        for(i = 0; i < response.length; i++){
+                            var text = recentlySample;
+                            var fk = Object.keys(response[i]);
+                            for (var x of fk) {
+                                var t = '##' + x + '##';
+                                var re = new RegExp(t, "g");
+                                text = text.replace(re, response[i][x]);
+                            }
+                            $('#phoneRecentlyView').append(text);
+                        }
+                    }
+                });
+            }
+
+            function getAlertItemsPhone() {
+                $.ajax({
+                    type: 'post',
+                    url: '{{route('getAlerts')}}',
+                    success: function (response) {
+
+                        response = JSON.parse(response);
+
+                        if(response.length == 0)
+                            $('#noMessagePhone').css('display', '');
+                        else{
+                            $('#noMessagePhone').css('display', 'none');
+                            var newElement = "";
+
+                            for(i = 0; i < response.length; i++) {
+                                if (response[i].url != -1)
+                                    newElement += '<div id="notificationBox"><div class="modules-engagement-notification-dropdown"><div><img onclick="document.location.href = \'' + response[i].url + '\'" width="50px" height="50px" src="' + response[i].pic + '"></div><div class="notifdd_empty"><span>' + response[i].customText + '</span></div></div></div>';
+                                else
+                                    newElement += '<div onclick="document.location.href = \'{{route('msgs')}}\'" style="cursor: pointer; min-height: 60px"><div class="modules-engagement-notification-dropdown"><div style="float: right; margin: 10px; padding-top: 0; height: 50px; margin-top: 0; width: 50px; z-index: 10000000000001 !important;"></div><div style="margin-right: 70px" class="notifdd_empty"><span>' + response[i].customText + '</span></div></div></div>';
+                            }
+
+                            $('#phoneMessages').append(newElement);
+                        }
+                    }
+                });
+            }
+
+            function showBookMarksPhone() {
+
+                if(bookMarkSample == 0)
+                    bookMarkSample = $('#phoneBookMarks').html();
+
+                $('#phoneBookMarks').html('');
+
+                $.ajax({
+                    type: 'post',
+                    url: '{{route('getBookMarks')}}',
+                    success: function (response) {
+                        response = JSON.parse(response);
+                        console.log(response);
+
+                        for(i = 0; i < response.length; i++){
+                            var text = bookMarkSample;
+                            var fk = Object.keys(response[i]);
+                            for (var x of fk) {
+                                var t = '##' + x + '##';
+                                var re = new RegExp(t, "g");
+                                text = text.replace(re, response[i][x]);
+                            }
+                            $('#phoneBookMarks').append(text);
+                        }
+                    }
+                });
+            }
+
+            phoneRecentlyViews();
+            getAlertItemsPhone();
+            showBookMarksPhone();
+        </script>
+    @endif
 
 </footer>

@@ -1003,3 +1003,11 @@ $authUrl = $client->createAuthUrl();
     </div>
     <div class="ui_close_x" onclick="hideElement('Phone_ForgetPass')"></div>
 </span>
+
+<script>
+    $(document).ready(function () {
+        $(".login-button").click(function () {
+            $(".dark").show(), showLoginPrompt('{{Request::url()}}')
+        })
+    });
+</script>

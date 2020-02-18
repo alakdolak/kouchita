@@ -964,30 +964,13 @@ function commonInPlaceDetails($kindPlaceId, $placeId, $city, $state, $place){
 
     $ansReviewCount = 0;
     foreach ($reviews as $item){
-        $ansReviewCount += findAnswerCount($item->id);
+        $ansReviewCount += getAnsToComments($item->id)[1];
     }
 
     $userReviweCount = DB::select('SELECT visitorId FROM log WHERE placeId = ' . $placeId . ' AND kindPlaceId = '. $kindPlaceId . ' AND confirm = 1 AND activityId = ' . $a2->id . ' AND CHARACTER_LENGTH(text) > 2 GROUP BY visitorId');
     $userReviweCount = count($userReviweCount);
 
     return [$reviewCount, $ansReviewCount, $userReviweCount, $multiQuestion, $textQuestion, $rateQuestion];
-}
-
-function findAnswerCount($logId){
-    $a = Activity::where('name', 'پاسخ')->first();
-    $ansToReview = DB::select('SELECT log.visitorId, log.text, log.subject, log.id FROM log WHERE log.confirm = 1 AND log.relatedTo = ' . $logId . ' AND log.activityId = ' . $a->id);
-    $countAns = 0;
-    if(count($ansToReview) > 0) {
-        $countAns += count($ansToReview);
-        for ($i = 0; $i < count($ansToReview); $i++) {
-            if($ansToReview[$i]->subject == 'ans') {
-                $num = findAnswerCount($ansToReview[$i]->id);
-                $countAns += $num;
-            }
-        }
-    }
-
-    return $countAns;
 }
 
 function generateRandomString($length = 20) {
@@ -1019,6 +1002,27 @@ function saveViewPerPage($kindPlaceId, $placeId){
         $log->save();
         Cookie::queue(Cookie::make($value, $value, 5));
     }
+}
+
+function getReviewPicsURL($review){
+    foreach ($review->pics as $item2) {
+        if($item2->isVideo == 1){
+            $videoArray = explode('.', $item2->pic);
+            $videoName = '';
+            for($k = 0; $k < count($videoArray)-1; $k++)
+                $videoName .= $videoArray[$k] . '.';
+            $videoName .= 'png';
+
+            $item2->picUrl = URL::asset('userPhoto/' . $review->mainFile . '/' . $review->place->file . '/' . $videoName);
+            $item2->videoUrl = URL::asset('userPhoto/' . $review->mainFile . '/' . $review->place->file . '/' . $item2->pic);
+        }
+        else{
+            $item2->picUrl = URL::asset('userPhoto/' . $review->mainFile . '/' . $review->place->file . '/' . $item2->pic);
+        }
+        $item2->width = getimagesize($item2->picUrl)[0];
+        $item2->height = getimagesize($item2->picUrl)[1];
+    }
+    return $review;
 }
 
 

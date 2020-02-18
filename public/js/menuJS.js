@@ -106,10 +106,10 @@ function showBookMarks(containerId) {
                 element += "<div class='media-left'>";
                 element += "<div class='thumbnail' style='background-image: url(" + response[i].placePic + ");'></div>";
                 element += "</div>";
-                element += "<div class='content-right'>";
+                element += "<div class='content-right' style='text-align: right'>";
                 element += "<div class='poi-title'>" + response[i].placeName + "</div>";
                 element += "<div class='rating'>";
-                element += "<div class='ui_bubble_rating bubble_45'></div><br/>" + response[i].placeReviews + " مشاهده ";
+                element += "<div class='ui_bubble_rating bubble_" + response[i].placeRate + "0'></div><br/>" + response[i].placeReviews + " مشاهده ";
                 element += "</div>";
                 element += "<div class='geo'>" + response[i].placeCity + "</div>";
                 element += "</div>";
@@ -142,16 +142,7 @@ function getRecentlyViews(containerId) {
                 element += "<div class='poi-title'>" + response[i].placeName + "</div>";
                 element += "<div class='rating'>";
 
-                if (response[i].placeRate == 5)
-                    element += "<div class='ui_bubble_rating bubble_50'></div>";
-                else if (response[i].placeRate == 4)
-                    element += "<div class='ui_bubble_rating bubble_40'></div>";
-                else if (response[i].placeRate == 3)
-                    element += "<div class='ui_bubble_rating bubble_30'></div>";
-                else if (response[i].placeRate == 2)
-                    element += "<div class='ui_bubble_rating bubble_20'></div>";
-                else
-                    element += "<div class='ui_bubble_rating bubble_10'></div>";
+                element += "<div class='ui_bubble_rating bubble_" + response[i].placeRate + "0'></div>";
 
                 element += "<br/>" + response[i].placeReviews + " نقد ";
                 element += "</div>";

@@ -22,6 +22,9 @@ use App\models\Message;
 use App\models\OpOnActivity;
 use App\models\Place;
 use App\models\Post;
+use App\models\PostCategory;
+use App\models\PostCategoryRelation;
+use App\models\PostCityRelation;
 use App\models\PostComment;
 use App\models\Question;
 use App\models\Report;
@@ -155,6 +158,7 @@ class HomeController extends Controller
     public function cityPage($kind, $city) {
 
         $today = getToday()["date"];
+        $nowTime = getToday()["time"];
         if($kind == 'state')
             $place = State::whereName($city)->first();
         else
@@ -165,7 +169,10 @@ class HomeController extends Controller
 
         if($kind == 'city') {
             $place->state = State::whereId($place->stateId)->name;
+            $place->listName = $place->name;
             $place->name = 'شهر ' . $place->name;
+            $articleUrl = \url('/article/list/city/' . $place->listName);
+            $locationName = ["name" => $place->name, 'state' => $place->state, 'urlName' => $place->listName, 'articleUrl' => $articleUrl];
 
             $allAmakenId = Amaken::where('cityId', $place->id)->pluck('id')->toArray();
             $allAmaken = Amaken::where('cityId', $place->id)->get();
@@ -178,7 +185,9 @@ class HomeController extends Controller
             if($place->image == null){
                 $seenActivity = Activity::whereName('مشاهده')->first();
                 $ala = Amaken::where('cityId', $place->id)->pluck('id')->toArray();
-                $mostSeen = DB::select('SELECT placeId, COUNT(id) as seen FROM log WHERE activityId = ' .$seenActivity->id. ' AND kindPlaceId = 1 AND placeId IN (' . implode(",", $ala) . ') GROUP BY placeId ORDER BY seen DESC');
+                $mostSeen = [];
+                if(count($ala) != 0)
+                    $mostSeen = DB::select('SELECT placeId, COUNT(id) as seen FROM log WHERE activityId = ' .$seenActivity->id. ' AND kindPlaceId = 1 AND placeId IN (' . implode(",", $ala) . ') GROUP BY placeId ORDER BY seen DESC');
 
                 if(count($mostSeen) != 0){
                     $p = Amaken::find($mostSeen[0]->placeId);
@@ -198,15 +207,20 @@ class HomeController extends Controller
             $topMahaliFood = $this->getTopPlaces(11, 'city', $place->id);
         }
         else {
+            $place->listName = $place->name;
             $place->name = 'استان ' . $place->name;
+            $articleUrl = \url('/article/list/state/' . $place->listName);
+            $locationName = ["name" => $place->name, 'urlName' => $place->listName, 'articleUrl' => $articleUrl];
+
             $allCities = Cities::where('stateId', $place->id)->pluck('id')->toArray();
 
-            $allAmaken = Amaken::whereIn('cityId', $allCities)->pluck('id')->toArray();
-            $allMajara = Majara::whereIn('cityId', $allCities)->pluck('id')->toArray();
-            $allHotels = Hotel::whereIn('cityId', $allCities)->pluck('id')->toArray();
-            $allRestaurant = Restaurant::whereIn('cityId', $allCities)->pluck('id')->toArray();
-            $allMahaliFood = MahaliFood::whereIn('cityId', $allCities)->pluck('id')->toArray();
-            $allSogatSanaie = SogatSanaie::whereIn('cityId', $allCities)->pluck('id')->toArray();
+            $allAmakenId = Amaken::whereIn('cityId', $allCities)->pluck('id')->toArray();
+            $allAmaken = Amaken::whereIn('cityId', $allCities)->get();
+            $allMajara = Majara::whereIn('cityId', $allCities)->get();
+            $allHotels = Hotel::whereIn('cityId', $allCities)->get();
+            $allRestaurant = Restaurant::whereIn('cityId', $allCities)->get();
+            $allMahaliFood = MahaliFood::whereIn('cityId', $allCities)->get();
+            $allSogatSanaie = SogatSanaie::whereIn('cityId', $allCities)->get();
 
             if($place->image == null){
                 $seenActivity = Activity::whereName('مشاهده')->first();
@@ -286,6 +300,7 @@ class HomeController extends Controller
 
             $item->pics = ReviewPic::where('logId', $item->id)->get();
             $item = getReviewPicsURL($item);
+<<<<<<< HEAD
 
             $item->city = Cities::find($item->place->cityId);
             $item->state = State::find($item->city->stateId);
@@ -328,6 +343,113 @@ class HomeController extends Controller
         $map = ['C' => $C, 'D' => $D, 'maxLat' => $maxLat, 'maxLng' => $maxLng, 'minLng' => $minLng, 'minLat' => $minLat];
 
         return view('cityPage', compact(['place', 'cityPost', 'map', 'mostSeenPosts', 'allAmaken', 'allHotels', 'allRestaurant', 'allMajara', 'allMahaliFood', 'allSogatSanaie', 'reviews', 'topPlaces']));
+=======
+
+            $item->city = Cities::find($item->place->cityId);
+            $item->state = State::find($item->city->stateId);
+
+            $time = $item->date;
+            $time .= ' ' . substr($item->time, 0, 2) . ':' . substr($item->time, 2, 2);
+
+            $item->timeAgo = getDifferenceTimeString($time);
+
+            if(strlen($item->text) > 80)
+                $item->summery = mb_substr($item->text, 0, 80, 'utf-8');
+
+        }
+
+        $count = 0;
+        $C = 0;
+        $D = 0;
+        $minLat = 0;
+        $minLng = 0;
+        $maxLat = 0;
+        $maxLng = 0;
+        foreach ($allPlaces as $key => $plac){
+            switch ($key){
+                case 0:
+                    $kP = 1;
+                    break;
+                case 1:
+                    $kP = 4;
+                    break;
+                case 2:
+                    $kP = 3;
+                    break;
+                case 3:
+                    $kP = 6;
+                    break;
+
+            }
+            foreach ($plac as $item){
+                $item->url = route('placeDetails', ['kindPlaceId' => $kP, 'placeId' => $item->id]);
+
+                $C += (float)$item->C;
+                $D += (float)$item->D;
+                if($minLat == 0 || $item->C < $minLat)
+                    $minLat = (float)$item->C;
+
+                if($maxLat == 0 || $item->C > $maxLat)
+                    $maxLat = (float)$item->C;
+
+                if($minLng == 0 || $item->D < $minLng)
+                    $minLng = (float)$item->D;
+
+                if($maxLng == 0 || $item->D > $maxLng)
+                    $maxLng = (float)$item->D;
+            }
+            $count += count($plac);
+        }
+        $C /= $count;
+        $D /= $count;
+        $map = ['C' => $C, 'D' => $D, 'maxLat' => $maxLat, 'maxLng' => $maxLng, 'minLng' => $minLng, 'minLat' => $minLat];
+
+        $post = [];
+        $postId = [];
+        $postTake = 7;
+        if($kind == 'state')
+            $postId = PostCityRelation::where('stateId', $place->id)->pluck('postId')->toArray();
+        else{
+            $postId = PostCityRelation::where('cityId', $place->id)->pluck('postId')->toArray();
+            if(count($postId) < $postTake){
+                $less = $postTake - count($postId);
+                $pId = PostCityRelation::where('stateId', $place->stateId)->take($less)->pluck('postId')->toArray();
+                $postId = array_merge($postId, $pId);
+            }
+        }
+
+        if(count($postId) != 0){
+            $pt = Post::whereIn('id', $postId)->where('release', '!=', 'draft')->whereRaw('date < ' .$today. ' OR (date = ' . $today . ' AND time < ' . $nowTime . ' )')->take($postTake)->orderBy('date', 'DESC')->get();
+            foreach ($pt as $item)
+                array_push($post, $item);
+
+            if(count($pt) < $postTake){
+                $less = $postTake - count($pt);
+                $postInRel = PostCityRelation::all()->pluck('postId')->toArray();
+                $p = Post::whereNotIn('id', $postId)->whereNotIn('id', $postInRel)->where('release', '!=', 'draft')->whereRaw('date < ' .$today. ' OR (date = ' . $today . ' AND time < ' . $nowTime . ' )')->take($less)->orderBy('date', 'DESC')->get();
+                foreach ($p as $item)
+                    array_push($post, $item);
+            }
+        }
+        else
+            $post = Post::whereRaw('date < ' .$today. ' OR (date = ' . $today . ' AND time < ' . $nowTime . ' )')->where('release', '!=', 'draft')->take($postTake)->orderBy('date', 'DESC')->get();
+
+        foreach ($post as $item){
+            $item->pic = \URL::asset('_images/posts/' . $item->id . '/' . $item->pic);
+            if($item->date == null)
+                $item->date = \verta($item->created_at)->format('Y/m/%d');
+
+            $item->date = convertJalaliToText($item->date);
+            $item->msgs = PostComment::wherePostId($item->id)->whereStatus(true)->count();
+            $item->username = User::whereId($item->creator)->username;
+            $mainCategory = PostCategoryRelation::where('postId', $item->id)->where('isMain', 1)->first();
+            $item->category = PostCategory::find($mainCategory->categoryId)->name;
+            $item->url = route('article.show', ['slug' => $item->slug]);
+            $item->catURL = route('article.list', ['type' => 'category', 'search' => $item->category]);
+        }
+
+        return view('cityPage', compact(['place', 'kind', 'locationName', 'post', 'map', 'allPlaces', 'allAmaken', 'allHotels', 'allRestaurant', 'allMajara', 'allMahaliFood', 'allSogatSanaie', 'reviews', 'topPlaces']));
+>>>>>>> f995018536bd109c37b214979469dd563cc0c196
     }
 
     public function getCityOpinion()
@@ -2649,7 +2771,6 @@ class HomeController extends Controller
         sendEmail($text, $subject, $to);
     }
 
-
     public function exportExcel()
     {
 //        $serverName = "localhost";
@@ -2699,6 +2820,7 @@ class HomeController extends Controller
         }
         $writer = new Xlsx($spreadsheet);
         $writer->save('exportAmaken.xlsx');
+<<<<<<< HEAD
 
         dd('finniish');
     }
@@ -2710,6 +2832,17 @@ class HomeController extends Controller
 
         $reviewActivity = Activity::whereName('نظر')->first();
 
+=======
+
+        dd('finniish');
+    }
+
+
+    private function getCityReviews($kind, $id, $take, $notIn = []){
+
+        $reviewActivity = Activity::whereName('نظر')->first();
+
+>>>>>>> f995018536bd109c37b214979469dd563cc0c196
         if($kind == 'city') {
             $allAmaken = Amaken::where('cityId', $id)->pluck('id')->toArray();
             $allMajara = Majara::where('cityId', $id)->pluck('id')->toArray();

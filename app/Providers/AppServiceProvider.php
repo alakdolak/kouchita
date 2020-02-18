@@ -5,12 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
-{
-    /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
+{/** Bootstrap any application services. @return void */
     public function boot()
     {
         if (str_contains(\Config::get('app.url'), 'http://')) {

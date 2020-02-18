@@ -47,22 +47,17 @@
     <body class="fall_2013_refresh_hr_top css_commerce_buttons ltr domn_en_US lang_en globalNav2011_reset
         rebrand_2017 hr_tabs_placement_test tabs_below_meta hr_tabs north_star nostalgic flat_buttons sitewide
             xo_pin_user_review_to_top track_back" data-spy="scroll" data-target=".navbar" data-offset="50">
-    @include('general.globalInput')
 
-        <div class="loaderDiv" id="fullPageLoader" style="display: none">
-            <div class="loader_200"></div>
-        </div>
-
-        <div id="darkModal" class="display-none" role="dialog"></div>
-        @if(!Auth::check())
-            @include('layouts.loginPopUp')
-        @endif
+        @include('general.forAllPages')
 
         <div id="PAGE" class=" non_hotels_like desktop scopedSearch bg_f8">
-            @include('layouts.placeHeader')
-            @yield('main')
-            @include('layouts.placeFooter')
-        </div>
 
+            @include('layouts.placeHeader')
+
+            @yield('main')
+
+            @include('layouts.placeFooter')
+
+        </div>
     </body>
 </html>

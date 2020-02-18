@@ -2,8 +2,31 @@
 
 @section('head')
     <link rel="stylesheet" href="{{URL::asset('css/easyimage.css')}}">
+<<<<<<< HEAD
+=======
+
+
+    <title> {{$post->seoTitle}} </title>
+    <meta property="og:title" content=" {{$post->seoTitle}} " />
+    <meta name="twitter:title" content=" {{$post->seoTitle}} " />
+    <meta name="description" content=" {{$post->meta}}"/>
+    <meta property="og:description" content=" {{$post->meta}}" />
+    <meta name="twitter:description" content=" {{$post->meta}}" />
+
+    @foreach($post->tag as $item)
+        <meta property="article:tag" content="{{$item->tag}}"/>
+    @endforeach
+
+    <style>
+        p{
+            font-size: 20px;
+        }
+    </style>
+>>>>>>> f995018536bd109c37b214979469dd563cc0c196
 
 @endsection
+
+@section('body')
 
     <div id="darkModal" class="display-none" role="dialog"></div>
 
@@ -48,7 +71,6 @@
         </div>
     </div>
 
-@section('body')
     <div class="container" style="direction: rtl">
         <div class="col-md-3 col-sm-12 hideOnPhone" style="padding-right: 0 !important;">
             <a href="{{route('mainArticle')}}">
@@ -115,7 +137,7 @@
                                 <div class="im-entry-category">
                                     <div class="iranomag-meta clearfix">
                                         <div class="cat-links im-meta-item">
-                                            <a class="im-catlink-color-2079" href="{{$item->url}}">{{$item->category}}</a>
+                                            <a class="im-catlink-color-2079" href="{{route('article.list', ['type' => 'category', 'search' => $item->category])}}">{{$item->category}}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -139,15 +161,11 @@
                                     <span class="entry-date published updated">{{$post->date}}</span>
                                 </div>
                                 <div class="comments-link im-meta-item">
-                                    <a href="">
-                                        <i class="fa fa-comment-o"></i>{{$item->msgs}}
-                                    </a>
+                                    <i class="fa fa-comment-o"></i>{{$item->msgs}}
                                 </div>
                                 <div class="author vcard im-meta-item">
-                                    <a class="url fn n" href="/author/writer/">
-                                        <i class="fa fa-user"></i>
-                                        {{$item->username}}
-                                    </a>
+                                    <i class="fa fa-user"></i>
+                                    {{$item->username}}
                                 </div>
                                 <div class="post-views im-meta-item">
                                     <i class="fa fa-eye"></i>{{$item->seen}}
@@ -167,7 +185,7 @@
                     <div>
                         <div class="im-entry-category" style="margin: 0 0 0 20px;">
                             <div class="iranomag-meta">
-                                <a class="im-catlink-color-2079" href="#">{{$post->mainCategory}}</a>
+                                <a class="im-catlink-color-2079" href="{{route('article.list', ['type' => 'category', 'search' => $post->mainCategory])}}">{{$post->mainCategory}}</a>
                             </div>
                         </div>
                         <div class="iranomag-meta" style="display: inline-block">
@@ -175,15 +193,11 @@
                                 <span class="entry-date published updated">{{$post->date}}</span>
                             </div>
                             <div class="comments-link im-meta-item">
-                                <a href="">
                                     <i class="fa fa-comment-o"></i>{{$post->msg}}
-                                </a>
                             </div>
                             <div class="author vcard im-meta-item">
-                                <a class="url fn n" href="/author/writer/">
-                                    <i class="fa fa-user"></i>
-                                    {{$post->user->username}}
-                                </a>
+                                <i class="fa fa-user"></i>
+                                {{$post->user->username}}
                             </div>
                             <div class="post-views im-meta-item">
                                 <i class="fa fa-eye"></i>{{$post->seen}}
@@ -259,7 +273,7 @@
                         </div>
                         <div class="commentsContentMainBox">
                             <b class="userProfileName display-inline-block">##username##</b>
-                            <p>##msg##</p>
+                            <p style="white-space: pre-line">##msg##</p>
                             <div class="commentsStatisticsBar">
                                 <div class="float-right display-inline-black">
                                     <span id="commentLikeCount##id##" class="likeStatisticIcon commentsStatisticSpan color-red">##likeCount##</span>
@@ -325,7 +339,10 @@
         var comments = {!! $comments !!};
         var userPic = '{{$uPic}}';
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> f995018536bd109c37b214979469dd563cc0c196
         function createComment(srcId, comments){
             if(srcHtmlComments == 0)
                 srcHtmlComments = $('#commentDiv0').html();
@@ -389,6 +406,14 @@
 
         }
         createComment(0, comments);
+<<<<<<< HEAD
+=======
+
+        $(window).ready(function(){
+            for(var i = 0; i < post['category'].length; i++)
+                $('#CategoryName_' + post['category'][i]['categoryId']).css('color', '#4DC7BC');
+        });
+>>>>>>> f995018536bd109c37b214979469dd563cc0c196
     </script>
 @endsection
 

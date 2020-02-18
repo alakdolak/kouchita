@@ -3237,7 +3237,7 @@ class PlaceController extends Controller {
             $log->text = $text;
             $log->date = date("Y-m-d");
             $log->relatedTo = 0;
-            $log->confirm = 1;
+            $log->confirm = 0;
             $log->save();
 
             echo "ok";
@@ -3258,19 +3258,28 @@ class PlaceController extends Controller {
             $activityId = Activity::whereName('سوال')->first()->id;
             $ansActivityId = Activity::whereName('پاسخ')->first()->id;
 
-            $condition = ['placeId' => $placeId, 'kindPlaceId' => $kindPlaceId, 'activityId' => $activityId, 'confirm' => 1, 'relatedTo' => 0];
-            $logs = LogModel::where($condition)->skip(($page - 1) * $count)->take($count)->get();
+            if(\auth()->check())
+                $uId = \auth()->user()->id;
+            else
+                $uId = 0;
+
+            $sqlQuery = ' placeId = ' . $placeId . ' AND kindPlaceId = ' . $kindPlaceId . ' AND activityId = ' . $activityId . ' AND relatedTo = 0 AND (( visitorId = ' . $uId . ' AND confirm = 0) OR (confirm = 1))';
+            $logs = LogModel::whereRaw($sqlQuery)->skip(($page - 1) * $count)->take($count)->get();
+
+//            $condition = ['placeId' => $placeId, 'kindPlaceId' => $kindPlaceId, 'activityId' => $activityId, 'confirm' => 1, 'relatedTo' => 0];
+//            $logs = LogModel::where($condition)->skip(($page - 1) * $count)->take($count)->get();
 
             $allCount = 0;
             $allAnswerCount = 0;
 
             if($_POST['isQuestionCount'])
-                $allCount = LogModel::where($condition)->count();
+                $allCount = LogModel::whereRaw($sqlQuery)->count();
+//                $allCount = LogModel::where($condition)->count();
 
             foreach ($logs as $log) {
 
                 if($_POST['isQuestionCount'])
-                    $allAnswerCount += findAnswerCount($log->id);
+                    $allAnswerCount += getAnsToComments($log->id)[1];
 
                 $user = User::whereId($log->visitorId);
                 if ($user->first_name != null)
@@ -3293,38 +3302,11 @@ class PlaceController extends Controller {
                 $log->comment = $anss[0];
                 $log->ansNum = $anss[1];
 
-                switch ($log->kindPlaceId) {
-                    case 1:
-                        $log->mainFile = 'amaken';
-                        $log->place = Amaken::select(['id', 'name', 'cityId', 'file'])->find($log->placeId);
-                        $log->kindPlace = 'اماکن';
-                        break;
-                    case 3:
-                        $log->mainFile = 'restaurant';
-                        $log->place = Restaurant::select(['id', 'name', 'cityId', 'file'])->find($log->placeId);
-                        $log->kindPlace = 'رستوران';
-                        break;
-                    case 4:
-                        $log->mainFile = 'hotels';
-                        $log->place = Hotel::select(['id', 'name', 'cityId', 'file'])->find($log->placeId);
-                        $log->kindPlace = 'هتل';
-                        break;
-                    case 6:
-                        $log->mainFile = 'majara';
-                        $log->place = Majara::select(['id', 'name', 'cityId', 'file'])->find($log->placeId);
-                        $log->kindPlace = 'ماجرا';
-                        break;
-                    case 10:
-                        $log->mainFile = 'sogatsanaie';
-                        $log->place = SogatSanaie::select(['id', 'name', 'cityId', 'file'])->find($log->placeId);
-                        $log->kindPlace = 'سوغات/صنایع';
-                        break;
-                    case 11:
-                        $log->mainFile = 'mahalifood';
-                        $log->place = MahaliFood::select(['id', 'name', 'cityId', 'file'])->find($log->placeId);
-                        $log->kindPlace = 'غذای محلی';
-                        break;
-                }
+                $kindPlace = Place::find($log->kindPlaceId);
+                $log->mainFile = $kindPlace->fileName;
+                $log->place = DB::table($kindPlace->tableName)->select(['id', 'name', 'cityId', 'file'])->find($log->placeId);
+                $log->kindPlace = $kindPlace->name;
+
                 $log->city = Cities::find($log->place->cityId);
                 $log->state = State::find($log->city->stateId);
 
@@ -3355,8 +3337,10 @@ class PlaceController extends Controller {
             $uId = Auth::user()->id;
 
             $tmp = LogModel::whereId($relatedTo);
-            if ($tmp == null || $tmp->confirm != 1)
+            if ($tmp == null || $tmp->confirm != 1) {
+                echo 'nok2';
                 return;
+            }
 
             $log = new LogModel();
             $log->visitorId = $uId;
@@ -3367,7 +3351,7 @@ class PlaceController extends Controller {
             $log->text = $text;
             $log->relatedTo = $relatedTo;
             $log->date = date("Y-m-d");
-            $log->confirm = 1;
+            $log->confirm = 0;
             $log->save();
 
             if($relatedTo != 0){
@@ -3377,6 +3361,8 @@ class PlaceController extends Controller {
 
             echo "ok";
         }
+        else
+            echo 'nok1';
 
         return;
     }
@@ -3449,12 +3435,14 @@ class PlaceController extends Controller {
         if($kindPlace != null){
 
             if ($mode == "state") {
-
                 $state = State::whereName($city)->first();
                 $city = $state;
                 if ($state == null)
                     return "نتیجه ای یافت نشد";
 
+
+                $articleUrl = \url('/article/list/city/' . $state->name);
+                $locationName = ["name" => $state->name, 'urlName' => $state->name, 'articleUrl' => $articleUrl];
             }
             else {
                 $city = Cities::whereName($city)->first();
@@ -3464,6 +3452,9 @@ class PlaceController extends Controller {
                 $state = State::whereId($city->stateId);
                 if ($state == null)
                     return "نتیجه ای یافت نشد";
+
+                $articleUrl = \url('/article/list/city/' . $city->name);
+                $locationName = ["name" => $city->name, 'state' => $state->name, 'urlName' => $city->name, 'articleUrl' => $articleUrl];
             }
 
             switch ($kindPlaceId){
@@ -3494,12 +3485,11 @@ class PlaceController extends Controller {
             }
             $kindPlaceId = $kindPlace->id;
 
-
             $features = PlaceFeatures::where('kindPlaceId', $kindPlaceId)->where('parent', 0)->get();
             foreach ($features as $feature)
                 $feature->subFeat = PlaceFeatures::where('parent', $feature->id)->where('type', 'YN')->get();
-
-            return view('places.list.list', compact(['features', 'kindPlace', 'kindPlaceId', 'mode', 'city', 'sections', 'placeMode', 'state']));
+            $kind = $mode;
+            return view('places.list.list', compact(['features', 'locationName', 'kindPlace', 'kind','kindPlaceId', 'mode', 'city', 'sections', 'placeMode', 'state']));
         }
         else
             return \redirect(\url('/'));

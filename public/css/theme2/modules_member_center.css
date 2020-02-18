@@ -584,33 +584,41 @@
     font: lighter 14px Helvetica, Arial, 'Sans-Serif';
     color: #666;
 }
+
 .modules-membercenter-badge-teaser .mediumBadge {
     display: inline-block;
 }
-.modules-membercenter-badge-teaser .clickableBadge {
-    cursor: pointer;
-}
+
+/*.modules-membercenter-badge-teaser .clickableBadge {*/
+/*    cursor: pointer;*/
+/*}*/
+
 .modules-membercenter-badge-teaser .clickableBadge:hover .badgeName {
     text-decoration: underline;
 }
+
 .modules-membercenter-badge-teaser .badgeList {
     padding: 0 0 45px;
 }
+
 .modules-membercenter-badge-teaser .badgeList .badgeName {
     padding-top: 10px;
     font: bold 14px Helvetica, Arial, 'Sans-Serif';
     color: #000;
     word-break: keep-all;
 }
+
 .modules-membercenter-badge-teaser .badgeList .badgeContainer {
     display: inline-block;
     border-left: 1px solid #E6E6E6;
 }
+
 .modules-membercenter-badge-teaser .badgeList .badgeItems {
     width: 320px;
     overflow: hidden;
     padding-left: 50px;
 }
+
 .modules-membercenter-badge-teaser .badgeList .badgeItem {
     width: 48%;
     display: inline-block;
@@ -620,35 +628,43 @@
     vertical-align: top;
     white-space: normal;
 }
+
 .modules-membercenter-badge-teaser .badgeList .badgeSubtext {
     padding-top: 5px;
     font-size: 12px;
     color: #4dc7bc;
 }
+
 .modules-membercenter-badge-teaser .badgeList .noCurrent {
     padding: 30px 0;
     width: auto;
     overflow: hidden;
     white-space: nowrap;
 }
+
 .modules-membercenter-badge-teaser .badgeList .noCurrent .badgeItem {
     width: 31%;
     margin: 0;
 }
+
 #MAIN .heading {
     border-bottom: 1px solid #CCC;
     margin: 13px 28px 15px;
 }
+
 #MAIN .heading span {
     color: #963019;
 }
+
 #MAIN .heading span b {
     font-weight: normal;
 }
+
 .modules-membercenter-badge-collection {
     margin: 30px;
     overflow: hidden;
 }
+
 .modules-membercenter-badge-collection .memberBadges {
     width: 291px;
     height: 305px;
@@ -660,6 +676,7 @@
     position: relative;
     float: right;
 }
+
 .modules-membercenter-badge-collection .memberBadges:hover {
     width: 289px;
     padding: 44px 0;
@@ -668,6 +685,7 @@
     -moz-box-shadow: 0 7px 5px rgba(50, 50, 50, 0.2);
     box-shadow: 0 7px 5px -5px rgba(50, 50, 50, 0.2);
 }
+
 .modules-membercenter-badge-collection .memberBadges:hover:before {
     content: "";
     width: 0;
@@ -678,6 +696,7 @@
     left: -2px;
     position: absolute;
 }
+
 .modules-membercenter-badge-collection .memberBadges:hover:after{
     content: "";
     width: 0;
@@ -688,13 +707,16 @@
     left: -1px;
     position: absolute;
 }
+
 .modules-membercenter-badge-collection .memberBadges .badgeInfo {
     margin: 0 auto;
     display: inline-block;
 }
+
 .modules-membercenter-badge-collection .memberBadges .badgeIcon {
     margin: auto;
 }
+
 .modules-membercenter-badge-collection .memberBadges .badgeText {
     display: block;
     padding: 0 15px 5px;
@@ -703,6 +725,7 @@
     margin-bottom: 5px;
     margin-top: 20px;
 }
+
 .modules-membercenter-badge-collection .memberBadges .subText {
     min-width: 150px;
     display: inline-block;
@@ -711,9 +734,11 @@
     font-size: 20px;
     padding: 10px 10px 0;
 }
+
 .modules-membercenter-badge-collection-header {
     margin-bottom: 8px;
 }
+
 .modules-membercenter-badge-collection-header .sub-header {
     font-size: 16px;
     color: #666;
@@ -722,16 +747,19 @@
     color: #000!important;
     font-weight: bold;
 }
+
 .ui_popover.badgeDesc {
     min-width: 250px;
     max-width: 350px;
     text-align: center;
 }
+
 .ui_popover.badgeDesc .desc {
     font: italic 14px Georgia;
     margin-top: 15px;
     text-align: initial;
 }
+
 .ui_popover.badgeDesc .desc span {
     display: inline-block;
     margin-top: 20px;
@@ -740,22 +768,26 @@
     border-top: 1px solid #DEDEDE;
     text-align: initial;
 }
+
 .ui_popover.badgeDesc .descLineTwo {
     margin-top: 10px;
     color: #4dc7bc;
     font: 13px Arial, 'Sans-Serif';
     text-align: initial;
 }
+
 .ui_popover.badgeDesc .listLoc {
     max-height: 200px;
     overflow-y: scroll;
     padding-right: 30px;
     margin-top: 10px;
 }
+
 .ui_popover.badgeDesc .listLoc .loc {
     min-width: 200px;
     line-height: 15px;
 }
+
 .ui_popover.badgeDesc .action {
     margin-top: 20px;
     display: block;
@@ -763,26 +795,32 @@
     font-size: 14px;
     color: #16174f;
 }
+
 .rtl .infoFlyout.tripcollectivePoints .arrow_left:before {
     right: 400px;
     border-width: 15px 0 15px 20px;
 }
+
 .rtl .infoFlyout.tripcollectivePoints .arrow_left:after {
     right: 400px;
     border-width: 15px 0 15px 20px;
 }
+
 .rtl .infoFlyout.tripcollectivePoints .arrow_right:before {
     left: 400px!important;
     border-width: 15px 0 15px 20px;
 }
+
 .rtl .infoFlyout.tripcollectivePoints .arrow_right:after {
     left: 400px!important;
     border-width: 15px 0 15px 20px;
 }
+
 .rtl .infoFlyout.tripcollectiveLevels .arrow_left:before {
     right: 300px;
     border-width: 15px 20px 15px 0;
 }
+
 .rtl .infoFlyout.tripcollectiveLevels .arrow_left:after {
     right: 300px;
     border-width: 15px 20px 15px 0;

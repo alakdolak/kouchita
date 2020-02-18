@@ -53,6 +53,8 @@
 
 <body class="ltr domn_en_US lang_en long_prices globalNav2011_reset rebrand_2017 css_commerce_buttons flat_buttons sitewide xo_pin_user_review_to_top track_back position-relative">
 
+@include('general.forAllPages')
+
 @include('layouts.pop-up-create-trip')
 
 <div id="fb-root"></div>
@@ -198,10 +200,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="global-nav-overlays-container">
-                                    @include('layouts.recentlyViewAndMyTrips')
-                                </div>
                             </div>
 
                             <div class="clear-both"></div>
@@ -261,7 +259,7 @@
 
     <div id="MAINWRAP" class="position-relative">
 
-        <div class="modules-membercenter-persistent-header-achievements profileHeader">
+        <div class="modules-membercenter-persistent-header-achievements profileHeader hideOnPhone">
             <ul class="persistent-header position-relative">
                 @if($mode == "profile")
                     <li id="Profile" class="profile">
@@ -272,15 +270,15 @@
                         <a id="profileLinkColor2" href="{{URL('profile')}}">صفحه کاربری</a>
                     </li>
                 @endif
-                @if($mode == "profile")
-                    <li id="Profile" class="profile">
-                        <a id="profileLinkColor1" href="{{URL('profile')}}">فعالیت‌های من</a>
-                    </li>
-                @else
-                    <li id="Profile" class="profile">
-                        <a id="profileLinkColor2" href="{{URL('profile')}}">فعالیت‌های من</a>
-                    </li>
-                @endif
+{{--                @if($mode == "profile")--}}
+{{--                    <li id="Profile" class="profile">--}}
+{{--                        <a id="profileLinkColor1" href="{{URL('profile')}}">فعالیت‌های من</a>--}}
+{{--                    </li>--}}
+{{--                @else--}}
+{{--                    <li id="Profile" class="profile">--}}
+{{--                        <a id="profileLinkColor2" href="{{URL('profile')}}">فعالیت‌های من</a>--}}
+{{--                    </li>--}}
+{{--                @endif--}}
                 @if($mode == "badge")
                     <li id="BadgeCollection" class="badgeCollection">
                         <a id="BadgeCollectionLinkColor1" href="{{route('badge')}}">مدال‌های گردشگری</a>
@@ -437,99 +435,6 @@
                 });
 
             });
-
-            function showBookMarks(containerId) {
-
-                $("#" + containerId).empty();
-
-                $.ajax({
-                    type: 'post',
-                    url: getBookMarksPath,
-                    success: function (response) {
-
-                        response = JSON.parse(response);
-
-                        for(i = 0; i < response.length; i++) {
-                            element = "<div>";
-                            element += "<a class='masthead-recent-card' target='_self' href='" + response[i].placeRedirect + "'>";
-                            element += "<div class='media-left'>";
-                            element += "<div class='thumbnail' style='background-image: url(" + response[i].placePic + ");'></div>";
-                            element += "</div>";
-                            element += "<div class='content-right'>";
-                            element += "<div class='poi-title'>" + response[i].placeName + "</div>";
-                            element += "<div class='rating'>";
-                            element += "<div class='ui_bubble_rating bubble_45'></div><br/>" + response[i].placeReviews + " مشاهده ";
-                            element += "</div>";
-                            element += "<div class='geo'>" + response[i].placeCity + "</div>";
-                            element += "</div>";
-                            element += "</a></div>";
-
-                            $("#" + containerId).append(element);
-                        }
-
-                    }
-                });
-            }
-
-            function getRecentlyViews(containerId) {
-                $("#" + containerId).empty();
-
-                $.ajax({
-                    type: 'post',
-                    url: getRecentlyPath,
-                    success: function (response) {
-
-                        response = JSON.parse(response);
-
-                        for(i = 0; i < response.length; i++) {
-                            element = "<div>";
-                            element += "<a class='masthead-recent-card text-align-rightImp' target='_self' href='" + response[i].placeRedirect + "'>";
-                            element += "<div class='media-left' id='MediaLeftBodyProfile'>";
-                            element += "<div class='thumbnail' style='background-image: url(" + response[i].placePic + ");'></div>";
-                            element += "</div>";
-                            element += "<div class='content-right'>";
-                            element += "<div class='poi-title'>" + response[i].placeName + "</div>";
-                            element += "<div class='rating'>";
-
-                            if (response[i].placeRate == 5)
-                                element += "<div class='ui_bubble_rating bubble_50'></div>";
-                            else if (response[i].placeRate == 4)
-                                element += "<div class='ui_bubble_rating bubble_40'></div>";
-                            else if (response[i].placeRate == 3)
-                                element += "<div class='ui_bubble_rating bubble_30'></div>";
-                            else if (response[i].placeRate == 2)
-                                element += "<div class='ui_bubble_rating bubble_20'></div>";
-                            else
-                                element += "<div class='ui_bubble_rating bubble_10'></div>";
-
-                            element += "<br/>" + response[i].placeReviews + " نقد ";
-                            element += "</div>";
-                            element += "<div class='geo'>" + response[i].placeCity + "/ " + response[i].placeState + "</div>";
-                            element += "</div>";
-                            element += "</a></div>";
-
-                            $("#" + containerId).append(element);
-                        }
-
-                    }
-                });
-            }
-
-            function showRecentlyViews(element) {
-                if( $("#my-trips-not").is(":hidden")){
-                    $("#alert").hide();
-                    $("#my-trips-not").show();
-                    $("#profile-drop").hide();
-                    $("#bookmarkmenu").hide();
-                    getRecentlyViews(element);
-                }else{
-                    $("#alert").hide();
-                    $("#my-trips-not").hide();
-                    $("#profile-drop").hide();
-                    $("#bookmarkmenu").hide();
-                }
-            }
-
             /*****************************************************/
 
             $('body').on("click", function () {
@@ -556,8 +461,9 @@
         $("#" + id).removeClass('hidden');
     }
 
-    function hideElement(id) {
+    function hideElement(id,event) {
         $("#" + id).addClass('hidden');
+        event.stopPropagation();
     }
 
     function showElement2(id) {
