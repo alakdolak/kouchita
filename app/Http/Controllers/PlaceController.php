@@ -3435,15 +3435,18 @@ class PlaceController extends Controller {
         if($kindPlace != null){
 
             if ($mode == "state") {
-
                 $state = State::whereName($city)->first();
                 $city = $state;
+                $place = $city;
+                $place->name = ' استان' . $place->name;
                 if ($state == null)
                     return "نتیجه ای یافت نشد";
-
             }
             else {
                 $city = Cities::whereName($city)->first();
+                $place = $city;
+                $place->name = ' شهر' . $place->name;
+
                 if ($city == null)
                     return "نتیجه ای یافت نشد";
 
@@ -3484,7 +3487,7 @@ class PlaceController extends Controller {
             foreach ($features as $feature)
                 $feature->subFeat = PlaceFeatures::where('parent', $feature->id)->where('type', 'YN')->get();
 
-            return view('places.list.list', compact(['features', 'kindPlace', 'kindPlaceId', 'mode', 'city', 'sections', 'placeMode', 'state']));
+            return view('places.list.list', compact(['features', 'place', 'kindPlace', 'kindPlaceId', 'mode', 'city', 'sections', 'placeMode', 'state']));
         }
         else
             return \redirect(\url('/'));

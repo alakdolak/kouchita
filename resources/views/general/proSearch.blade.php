@@ -412,15 +412,23 @@
             clearGlobalResult();
     }
 
+    var cityChoose = 0;
     function setCityName(val, id) {
         closeSearchInput();
+        cityChoose = val;
         activeCityFilter = true;
         $("#GEO_SCOPED_SEARCH_INPUT2").val('');
         $("#GEO_SCOPED_SEARCH_INPUT").val(val);
         addToFilter(id);
+
     }
 
-    function goTo() {
+    function goTo(kind = '') {
+
+        if(kind == 'cityPage' && cityChoose != 0){
+            window.location.href = '{{url("cityPage/city")}}/' + cityChoose;
+            return ;
+        }
 
         if(!activeCityFilter || $("#GEO_SCOPED_SEARCH_INPUT").val() == "")
             return;
@@ -543,7 +551,7 @@
                 @if(isset($locationName))
                     <div class="col-xs-12 boxOfWhereIsHere">
                         شما در حال حاضر در
-                        <div id="nameOfWhereIsHere">{{$locationName}}</div>
+                        <div id="nameOfWhereIsHere">{{$locationName['name']}}</div>
                         هستید
                     </div>
                 @endif
@@ -562,7 +570,7 @@
                         <div id="resultCity" class="data_holder"></div>
                     </div>
                     <div class="col-xs-5 whereSearchBtnMainDiv">
-                        <div id="addToFilterCityBtn" class="inner" onclick="goTo()" style="display: none;">
+                        <div id="addToFilterCityBtn" class="inner" onclick="goTo('cityPage')" style="display: none;">
                             <span id="searchKeyCity"></span>
                         </div>
                     </div>

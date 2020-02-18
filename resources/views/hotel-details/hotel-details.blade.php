@@ -6,11 +6,10 @@ if ($total == 0)
     $total = 1;
 ?>
 @section('title')
-    {{--    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>--}}
     <link rel="stylesheet" href="{{URL::asset('css/theme2/media_uploader.css')}}">
     <script async src="{{URL::asset("js/bootstrap-datepicker.js")}}"></script>
     <link rel="stylesheet" href="{{URL::asset('css/theme2/bootstrap-datepicker.css?v=1')}}">
-    <title>{{$place->name}} | {{$city->name}} | شازده مسافر</title>
+    <title>{{$place->keyword}} | {{$city->name}} </title>
 @stop
 
 @section('meta')
@@ -33,7 +32,7 @@ if ($total == 0)
     <meta property="article:tag" content="{{$place->tag15}}"/>
     <meta name="twitter:card" content="summary_large_image"/>
     <meta name="twitter:description" content="{{$place->meta}}"/>
-    <meta name="twitter:title" content="{{$place->name}} | {{$city->name}} | شازده مسافر"/>
+    <meta name="twitter:title" content="{{$place->keyword}} | {{$city->name}}"/>
     <meta property="og:url" content="{{Request::url()}}"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     @if(count($photos) > 0)
@@ -45,9 +44,6 @@ if ($total == 0)
     @endif
     <meta content="article" property="og:type"/>
     <meta property="og:title" content="{{$place->name}} | {{$city->name}} | شازده مسافر"/>
-
-
-
 @stop
 
 @section('header')
@@ -184,8 +180,8 @@ if ($total == 0)
 
     <div class="ppr_rup ppr_priv_hr_atf_north_star_nostalgic position-relative">
 
-
         @include('layouts.placeMainBodyHeader')
+
         <div class="atf_meta_and_photos_wrapper position-relative">
             <div class="greyBackground"></div>
             <div class="atf_meta_and_photos ui_container is-mobile easyClear position-relative">
@@ -989,6 +985,7 @@ if ($total == 0)
                 </script>
             </div>
         </div>
+
     </div>
 
     @if(Auth::check())
@@ -1838,7 +1835,6 @@ if ($total == 0)
     @endif
 
     @include('hotelDetailsPopUp')
-    {{--    @include('editor')--}}
 
     <script>
 

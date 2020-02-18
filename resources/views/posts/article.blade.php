@@ -15,6 +15,12 @@
         <meta property="article:tag" content="{{$item->tag}}"/>
     @endforeach
 
+    <style>
+        p{
+            font-size: 20px;
+        }
+    </style>
+
 @endsection
 
 @section('body')

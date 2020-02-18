@@ -171,6 +171,8 @@ class HomeController extends Controller
             $place->state = State::whereId($place->stateId)->name;
             $place->listName = $place->name;
             $place->name = 'شهر ' . $place->name;
+            $articleUrl = \url('/article/list/city/' . $place->listName);
+            $locationName = ["name" => $place->name, 'state' => $place->state, 'urlName' => $place->listName, 'articleUrl' => $articleUrl];
 
             $allAmakenId = Amaken::where('cityId', $place->id)->pluck('id')->toArray();
             $allAmaken = Amaken::where('cityId', $place->id)->get();
@@ -205,6 +207,9 @@ class HomeController extends Controller
         else {
             $place->listName = $place->name;
             $place->name = 'استان ' . $place->name;
+            $articleUrl = \url('/article/list/state/' . $place->listName);
+            $locationName = ["name" => $place->name, 'urlName' => $place->listName, 'articleUrl' => $articleUrl];
+
             $allCities = Cities::where('stateId', $place->id)->pluck('id')->toArray();
 
             $allAmakenId = Amaken::whereIn('cityId', $allCities)->pluck('id')->toArray();
@@ -394,7 +399,8 @@ class HomeController extends Controller
             $item->url = route('article.show', ['slug' => $item->slug]);
             $item->catURL = route('article.list', ['type' => 'category', 'search' => $item->category]);
         }
-        return view('cityPage', compact(['place', 'kind', 'post', 'cityPost', 'map', 'allPlaces', 'mostSeenPosts', 'allAmaken', 'allHotels', 'allRestaurant', 'allMajara', 'allMahaliFood', 'allSogatSanaie', 'reviews', 'topPlaces']));
+
+        return view('cityPage', compact(['place', 'kind', 'locationName', 'post', 'cityPost', 'map', 'allPlaces', 'mostSeenPosts', 'allAmaken', 'allHotels', 'allRestaurant', 'allMajara', 'allMahaliFood', 'allSogatSanaie', 'reviews', 'topPlaces']));
     }
 
     public function getCityOpinion()

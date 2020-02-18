@@ -3,8 +3,6 @@
 
 <head>
     @include('layouts.topHeader')
-    {{--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>--}}
-    <script src="{{URL::asset('js/angular.js')}}"></script>
 
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/home_rebranded.css?v=4')}}"/>
     <title>صفحه اصلی</title>
@@ -16,24 +14,6 @@
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/icons.css?v=1')}}'/>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/mainPageStyles.css')}}'/>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/abbreviations.css?v=1')}}'/>
-
-{{--    <link rel="manifest" href="{{URL::asset('offlineMode/manifest.json')}}">--}}
-
-    <script>
-        var searchDir = '{{route('totalSearch')}}';
-        var kindPlaceId = '{{$kindPlaceId}}';
-        var getStates = '{{route('getStates')}}';
-        var getGoyesh = '{{route('getGoyesh')}}';
-        var url;
-
-        @if($placeMode == "hotel")
-            url = '{{route('main')}}';
-        @elseif($placeMode == "restaurant")
-            url = '{{route('mainMode', ['mode' => 'restaurant'])}}';
-        @else
-            url = '{{route('mainMode', ['mode' => 'amaken'])}}';
-        @endif
-    </script>
 
     <style>
         .mainBannerSlider {
@@ -73,16 +53,13 @@
 
     {{--urls--}}
     <script>
+        var searchDir = '{{route('totalSearch')}}';
+        var kindPlaceId = '{{$kindPlaceId}}';
         var recentlyUrl =  '{{route("recentlyViewed")}}';
         var getMainPageSuggestion =  '{{route("getMainPageSuggestion")}}';
         var imageBasePath = '{{URL::asset('images')}}';
-        var getLastRecentlyMainPath = '{{route('getLastRecentlyMain')}}';
-        var getAdviceMainPath = '{{route('getAdviceMain')}}';
-        var getHotelsMainPath = '{{route('getHotelsMain')}}';
-        var getAmakensMainPath = '{{route('getAmakensMain')}}';
-        var getRestaurantsMainPath = '{{route('getRestaurantsMain')}}';
-        {{--var getFoodsMainPath = '{{route('getFoodsMain')}}';--}}
         var getCitiesDir = "{{route('getCitiesDir')}}";
+        var url;
 
         var config = {
             headers: {
@@ -96,7 +73,7 @@
 
 <body class="rebrand_2017 desktop HomeRebranded  js_logging" ng-app="mainApp">
 
-    @include('general.globalInput')
+    @include('general.forAllPages')
 
     <div class="header hideOnPhone">
         @include('layouts.header1')
@@ -184,13 +161,10 @@
             </div>
         </div>
     </div>
+
     @include('layouts.middleBanner')
 
     @include('layouts.placeFooter')
-
-    @if(!Auth::check())
-        @include('layouts.loginPopUp')
-    @endif
 
     <span id="searchPane" class="statePane ui_overlay ui_modal editTags hidden searchPanes">
         <div id="searchDivForScroll" class="prw_rup prw_search_typeahead spSearchDivForScroll">
@@ -324,8 +298,6 @@
     </span>
 
     <div class="ui_backdrop dark" id="darkModeMainPage"></div>
-
-{{--@include('errors.alerts')--}}
 
 <script defer>
     var passenger = 0;
@@ -548,71 +520,6 @@
         $("#placeName").val(t), $("#placeId").val(e), $("#result").empty(), redirect()
     }
 
-    {{--function chooseState(e) {--}}
-    {{--    $.ajax({--}}
-    {{--        type: "post", url: getStates, success: function (t) {--}}
-    {{--            for (t = JSON.parse(t), newElement = "", i = 0; i < t.length; i++) newElement += "<option value='{{route('home') . '/adab-list/'}}" + t[i].name + "/" + e + "'>" + t[i].name + "</option>";--}}
-    {{--            $("#states").empty().append(newElement), $("#statePane").removeClass("hidden"), $(".dark").show()--}}
-    {{--        }--}}
-    {{--    })--}}
-    {{--}--}}
-
-    {{--function chooseStateAmaken() {--}}
-    {{--    $.ajax({--}}
-    {{--        type: "post", url: getStates, success: function (e) {--}}
-    {{--            for (e = JSON.parse(e), newElement = "", i = 0; i < e.length; i++) newElement += "<option value='{{route('home') . '/amakenList/'}}" + e[i].name + "/state'>" + e[i].name + "</option>";--}}
-    {{--            $("#states").empty().append(newElement), $("#statePane").removeClass("hidden"), $(".dark").show()--}}
-    {{--        }--}}
-    {{--    })--}}
-    {{--}--}}
-
-    {{--function getCities() {--}}
-    {{--    var e = $("#states2").val(), t = $("#states2 option:selected").attr("data-val");--}}
-    {{--    $.ajax({--}}
-    {{--        type: "post", url: "{{route('getCitiesDir')}}", data: {stateId: e}, success: function (e) {--}}
-    {{--            for (e = JSON.parse(e), newElement = "<option value='{{route('home') . '/majaraList/'}}" + t + "/state'> استان " + t + "</option>", i = 0; i < e.length; i++) newElement += "<option value='{{route('home') . '/majaraList/'}}" + e[i].name + "/city'>شهر " + e[i].name + "</option>";--}}
-    {{--            $("#cities").empty().append(newElement)--}}
-    {{--        }--}}
-    {{--    })--}}
-    {{--}--}}
-
-    {{--function chooseStateMajara() {--}}
-    {{--    $.ajax({--}}
-    {{--        type: "post", url: getStates, success: function (e) {--}}
-    {{--            for (e = JSON.parse(e), newElement = "", i = 0; i < e.length; i++) newElement += "<option data-val='" + e[i].name + "' value='" + e[i].id + "'>" + e[i].name + "</option>";--}}
-    {{--            $(".dark").show(), $("#states2").empty().append(newElement), e.length > 0 && getCities(), $("#statePane2").removeClass("hidden")--}}
-    {{--        }--}}
-    {{--    })--}}
-    {{--}--}}
-
-    {{--function chooseGoyesh() {--}}
-    {{--    $.ajax({--}}
-    {{--        type: "post", url: getGoyesh, success: function (e) {--}}
-    {{--            for (e = JSON.parse(e), newElement = "", i = 0; i < e.length; i++) newElement += "<option value='{{route('home') . '/estelahat/'}}" + e[i].name + "'>" + e[i].name + "</option>";--}}
-    {{--            $(".dark").show(), $("#goyesh").empty().append(newElement), $("#goyeshPane").removeClass("hidden")--}}
-    {{--        }--}}
-    {{--    })--}}
-    {{--}--}}
-
-    {{--function showBookMarks(e) {--}}
-    {{--    $("#" + e).empty(), $.ajax({--}}
-    {{--        type: "post", url: getBookMarksPath, success: function (t) {--}}
-    {{--            for (t = JSON.parse(t), i = 0; i < t.length; i++) element = "<div>", element += "<a class='masthead-recent-card' target='_self' href='" + t[i].placeRedirect + "'>", element += "<div class='media-left'>", element += "<div class='thumbnail' style='background-image: url(" + t[i].placePic + ");'></div>", element += "</div>", element += "<div class='content-right'>", element += "<div class='poi-title'>" + t[i].placeName + "</div>", element += "<div class='rating'>", element += "<div class='ui_bubble_rating bubble_45'></div><br/>" + t[i].placeReviews + " مشاهده ", element += "</div>", element += "<div class='geo'>" + t[i].placeCity + "</div>", element += "</div>", element += "</a></div>", $("#" + e).append(element)--}}
-    {{--        }--}}
-    {{--    })--}}
-    {{--}--}}
-
-    {{--function getRecentlyViews(e) {--}}
-    {{--    $("#" + e).empty(), $.ajax({--}}
-    {{--        type: "post", url: getRecentlyPath, success: function (t) {--}}
-    {{--            for (t = JSON.parse(t), i = 0; i < t.length; i++) element = "<div>", element += "<a class='masthead-recent-card' style='text-align: right !important;' target='_self' href='" + t[i].placeRedirect + "'>", element += "<div class='media-left' style='padding: 0 12px !important; margin: 0 !important;'>", element += "<div class='thumbnail' style='background-image: url(" + t[i].placePic + ");'></div>", element += "</div>", element += "<div class='content-right'>", element += "<div class='poi-title'>" + t[i].placeName + "</div>", element += "<div class='rating'>", 5 == t[i].placeRate ? element += "<div class='ui_bubble_rating bubble_50'></div>" : 4 == t[i].placeRate ? element += "<div class='ui_bubble_rating bubble_40'></div>" : 3 == t[i].placeRate ? element += "<div class='ui_bubble_rating bubble_30'></div>" : 2 == t[i].placeRate ? element += "<div class='ui_bubble_rating bubble_20'></div>" : element += "<div class='ui_bubble_rating bubble_10'></div>", element += "<br/>" + t[i].placeReviews + " نقد ", element += "</div>", element += "<div class='geo'>" + t[i].placeCity + "/ " + t[i].placeState + "</div>", element += "</div>", element += "</a></div>", $("#" + e).append(element)--}}
-    {{--        }--}}
-    {{--    })--}}
-    {{--}--}}
-
-    // function showRecentlyViews(e) {
-    //     $("#my-trips-not").is(":hidden") ? ($("#alert").hide(), $("#my-trips-not").show(), $("#profile-drop").hide(), $("#bookmarkmenu").hide(), getRecentlyViews(e)) : ($("#alert").hide(), $("#my-trips-not").hide(), $("#profile-drop").hide(), $("#bookmarkmenu").hide())
-    // }
     //    For Date
     function assignDate(from, id, btnId) {
         $("#" + id).css("visibility", "visible");
@@ -641,40 +548,12 @@
 
     $(document).ready(function () {
 
-        @foreach($sections as $section)
-        fillMyDivWithAdv('{{$section->sectionId}}', -1);
-        @endforeach
+        {{--@foreach($sections as $section)--}}
+            {{--fillMyDivWithAdv('{{$section->sectionId}}', -1);--}}
+        {{--@endforeach--}}
 
         changePassengersNo(0);
     });
-
-    // $(".login-button").click(function () {
-    //     $(".dark").show(), showLoginPrompt(url)
-    // }), $(document).ready(function () {
-    //     $("#Settings").on({
-    //         mouseenter: function () {
-    //             $(".settingsDropDown").show()
-    //         }, mouseleave: function () {
-    //             $(".settingsDropDown").hide()
-    //         }
-    //     }), $("#nameTop").click(function (e) {
-    //         $("#profile-drop").is(":hidden") ? ($("#profile-drop").show(), $("#my-trips-not").hide(), $("#alert").hide(), $("#bookmarkmenu").hide()) : ($("#profile-drop").hide(), $("#my-trips-not").hide(), $("#alert").hide(), $("#bookmarkmenu").hide())
-    //     }), $("#memberTop").click(function (e) {
-    //         $("#profile-drop").is(":hidden") ? ($("#profile-drop").show(), $("#my-trips-not").hide(), $("#bookmarkmenu").hide(), $("#alert").hide()) : ($("#profile-drop").hide(), $("#my-trips-not").hide(), $("#bookmarkmenu").hide(), $("#alert").hide())
-    //     }), $("#bookmarkicon").click(function (e) {
-    //         $("#bookmarkmenu").is(":hidden") ? ($("#bookmarkmenu").show(), $("#my-trips-not").hide(), $("#profile-drop").hide(), $("#alert").hide(), showBookMarks("bookMarksDiv")) : ($("#bookmarkmenu").hide(), $("#my-trips-not").hide(), $("#profile-drop").hide(), $("#alert").hide())
-    //     }), $(".notification-bell").click(function (e) {
-    //         $("#alert").is(":hidden") ? ($("#alert").show(), $("#my-trips-not").hide(), $("#profile-drop").hide(), $("#bookmarkmenu").hide()) : ($("#alert").hide(), $("#my-trips-not").hide(), $("#profile-drop").hide(), $("#bookmarkmenu").hide())
-    //     }), $("#close_span_search").click(function (e) {
-    //         $("#searchspan").animate({height: "0vh"}), $("#myCloseBtn").addClass("hidden")
-    //     }), $("#openSearch").click(function (e) {
-    //         $("#myCloseBtn").removeClass("hidden"), $("#searchspan").animate({height: "100vh"})
-    //     })
-    // }), $("body").on("click", function () {
-    //     $("#profile-drop").hide(), $("#my-trips-not").hide(), $("#alert").hide(), $("#bookmarkmenu").hide()
-    // }), $(".global-nav-actions").on("click", function (e) {
-    //     e.stopPropagation()
-    // });
 
 </script>
 
@@ -685,20 +564,6 @@
 <script src="{{URL::asset('js/adv.js')}}"></script>
 
 <script defer src="{{URL::asset('js/mainPageSuggestions.js')}}"></script>
-
-<script>
-    {{--if ('serviceWorker' in navigator) {--}}
-    {{--window.addEventListener('load', function(){--}}
-    {{--navigator.serviceWorker.register('{{URL::asset("ServiceWorker.js")}}').then(--}}
-    {{--registration => {--}}
-    {{--console.log('Service Worker is registered', registration);--}}
-    {{--}).catch(--}}
-    {{--err => {--}}
-    {{--console.error('Registration failed:', err);--}}
-    {{--});--}}
-    {{--})--}}
-    {{--}--}}
-</script>
 
 <!-- Initialize Swiper Of mainSlider -->
 <script>
@@ -718,26 +583,6 @@
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
         },
-    });
-</script>
-
-<!-- Initialize Swiper Of 3Box -->
-<script>
-    var swiper = new Swiper('#3box', {
-        slidesPerView: 3,
-        spaceBetween: 3,
-        slidesPerGroup: 1,
-        loop: true,
-        autoplay: {
-            delay: 7500,
-            disableOnInteraction: false,
-        },
-        loopFillGroupWithBlank: true,
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
-
     });
 </script>
 

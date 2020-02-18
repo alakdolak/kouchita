@@ -569,107 +569,53 @@
                     <div class="lp_others_content" id="lp_others_recentlyViews">
                         <div class="lp_others_titles"> بازدید‌های اخیر </div>
                         <div class="mainContainerBookmarked">
-                            <div class="masthead-recent-class">
-                                <a class="lp_others_recentView" target="_self" href="">
-                                    <div class="lp_others_rvPicBox col-xs-8">
-                                        <div class="lp_others_rvPic" style="background-image: url(http://localhost:8080/assets/_images/hotels/hotel_kowsar/f-1.jpg);"></div>
-                                    </div>
-                                    <div class="col-xs-4 placeDetailsLeftBar">
-                                        <div class="">هتل کوثر</div>
-                                        <div class="lp_others_rating">
-                                            <div class="ui_bubble_rating bubble_45"></div>
-                                            <br>3 مشاهده
+                            <div id="phoneRecentlyView">
+
+                                <div class="masthead-recent-class">
+                                    <a class="lp_others_recentView" target="_self" href="##placeRedirect##">
+                                        <div class="lp_others_rvPicBox col-xs-8">
+                                            <img src="##placePic##" style="width: 100%;">
                                         </div>
-                                        <div class="">اصفهان</div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="masthead-recent-class">
-                                <a class="lp_others_recentView" target="_self" href="">
-                                    <div class="lp_others_rvPicBox col-xs-8">
-                                        <div class="lp_others_rvPic" style="background-image: url(http://localhost:8080/assets/_images/hotels/hotel_kowsar/f-1.jpg);"></div>
-                                    </div>
-                                    <div class="col-xs-4 placeDetailsLeftBar">
-                                        <div class="">هتل کوثر</div>
-                                        <div class="lp_others_rating">
-                                            <div class="ui_bubble_rating bubble_45"></div>
-                                            <br>3 مشاهده
+                                        <div class="col-xs-4 placeDetailsLeftBar">
+                                            <div class="">##placeName##</div>
+                                            <div class="lp_others_rating">
+                                                <div class="ui_bubble_rating bubble_##placeRate##0"></div>
+                                                <br>##placeReviews## نقد
+                                            </div>
+                                            <div class="">##placeCity##</div>
                                         </div>
-                                        <div class="">اصفهان</div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="masthead-recent-class">
-                                <a class="lp_others_recentView" target="_self" href="">
-                                    <div class="lp_others_rvPicBox col-xs-8">
-                                        <div class="lp_others_rvPic" style="background-image: url(http://localhost:8080/assets/_images/hotels/hotel_kowsar/f-1.jpg);"></div>
-                                    </div>
-                                    <div class="col-xs-4 placeDetailsLeftBar">
-                                        <div class="">هتل کوثر</div>
-                                        <div class="lp_others_rating">
-                                            <div class="ui_bubble_rating bubble_45"></div>
-                                            <br>3 مشاهده
-                                        </div>
-                                        <div class="">اصفهان</div>
-                                    </div>
-                                </a>
+                                    </a>
+                                </div>
+
                             </div>
                             <div class="bottomBarContainer"></div>
                         </div>
                     </div>
 
-                    <div class="lp_others_content hidden" id="lp_others_messages">
-                        <div class="lp_others_titles"> اعلانات </div>
-                        <div class="lp_others_noMessages">هیچ پیامی موجود نیست</div>
+                    <div class="lp_others_content hidden" id="lp_others_messages" style="overflow-y: scroll">
+                        <div id="phoneMessages" class="lp_others_titles"> اعلانات </div>
+                        <div id="noMessagePhone" class="lp_others_noMessages">هیچ پیام جدیدی موجود نیست</div>
                     </div>
 
                     <div class="lp_others_content hidden" id="lp_others_mark">
                         <div class="lp_others_titles"> نشان‌گذاری شده‌ها </div>
                         <div class="mainContainerBookmarked">
-                            <div class="masthead-recent-class">
-                                <a class="lp_others_recentView" target="_self" href="">
-                                    <div class="lp_others_rvPicBox col-xs-8">
-                                        <div class="lp_others_rvPic" style="background-image: url(http://localhost:8080/assets/_images/hotels/hotel_kowsar/f-1.jpg);"></div>
-                                    </div>
-                                    <div class="col-xs-4 placeDetailsLeftBar">
-                                        <div class="">هتل کوثر</div>
-                                        <div class="lp_others_rating">
-                                            <div class="ui_bubble_rating bubble_45"></div>
-                                            <br>3 مشاهده
+                            <div id="phoneBookMarks">
+                                <div class="masthead-recent-class">
+                                    <a class="lp_others_recentView" target="_self" href="##placeRedirect##">
+                                        <div class="lp_others_rvPicBox col-xs-8">
+                                            <img src="##placePic##" style="width: 100%;">
                                         </div>
-                                        <div class="">اصفهان</div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="masthead-recent-class">
-                                <a class="lp_others_recentView" target="_self" href="">
-                                    <div class="lp_others_rvPicBox col-xs-8">
-                                        <div class="lp_others_rvPic" style="background-image: url(http://localhost:8080/assets/_images/hotels/hotel_kowsar/f-1.jpg);"></div>
-                                    </div>
-                                    <div class="col-xs-4 placeDetailsLeftBar">
-                                        <div class="">هتل کوثر</div>
-                                        <div class="lp_others_rating">
-                                            <div class="ui_bubble_rating bubble_45"></div>
-                                            <br>3 مشاهده
+                                        <div class="col-xs-4 placeDetailsLeftBar">
+                                            <div class="">##placeName##</div>
+                                            <div class="lp_others_rating">
+                                                <div class="ui_bubble_rating bubble_##placeRate##0"></div>
+                                                <br>##placeReviews## نقد
+                                            </div>
+                                            <div class="">##placeCity##</div>
                                         </div>
-                                        <div class="">اصفهان</div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="masthead-recent-class">
-                                <a class="lp_others_recentView" target="_self" href="">
-                                    <div class="lp_others_rvPicBox col-xs-8">
-                                        <div class="lp_others_rvPic" style="background-image: url(http://localhost:8080/assets/_images/hotels/hotel_kowsar/f-1.jpg);"></div>
-                                    </div>
-                                    <div class="col-xs-4 placeDetailsLeftBar">
-                                        <div class="">هتل کوثر</div>
-                                        <div class="lp_others_rating">
-                                            <div class="ui_bubble_rating bubble_45"></div>
-                                            <br>3 مشاهده
-                                        </div>
-                                        <div class="">اصفهان</div>
-                                    </div>
-                                </a>
+                                    </a>
+                                </div>
                             </div>
                             <div class="bottomBarContainer"></div>
                         </div>
@@ -884,7 +830,7 @@
                         <div class="ui_icon notification-bell lp_icons"></div>
                         <div>اعلانات</div>
                     </div>
-                    <div class="lp_eachMenu lp_selectedMenu" onclick="lp_selectMenu('lp_others_recentlyViews', this)">
+                    <div class="lp_eachMenu lp_selectedMenu" onclick="lp_selectMenu('lp_others_recentlyViews', this); phoneRecentlyViews();">
                         <div class="ui_icon search lp_icons"></div>
                         <div>بازدیدهای اخیر</div>
                     </div>
@@ -896,38 +842,47 @@
 
         <div class="modal fade" id="otherPossibilities">
             <div class="mainPopUp leftPopUp">
-                <div class="pSC_tilte">
-                    <div>شما در حال حاضر در شهر <span class="pSC_cityTilte">اصفهان </span>هستید</div>
-                    <button type="button" class="btn btn-danger"
-                            onclick="$('#searchPane').removeClass('hidden');  $('#darkModeMainPage').toggle();">تغییر دهید</button>
+
+                @if(isset($locationName))
+                    <div class="pSC_tilte">
+                    <div>
+                        شما در حال حاضر در
+                        <span class="pSC_cityTilte">{{$place->name}}</span>
+                        هستید
+                    </div>
+                    <button type="button" class="btn btn-danger" onclick="openProSearch()">تغییر دهید</button>
                 </div>
-                <div class="pSC_cityDescription">
+                    <div class="pSC_cityDescription">
                     شما می‌توانید به راحتی صفحات زیر را در
-                    <span>استان اصفهان </span>
+                    <span>{{$place->name}}</span>
                     مشاهده نمایید
                 </div>
-                <div class="pSC_boxOfDetails">
+                    <div class="pSC_boxOfDetails">
                     <div class="pSC_choiseDetailsText">به سادگی انتخاب کنید</div>
                     <div class="pSC_boxOfCityDetailsText">
-                        <span>مشاهده صفحه شهر اصفهان</span>
-                        <span class="pSC_boxOfCityDetailsText2">در استان اصفهان</span>
+                        <span>مشاهده صفحه {{$locationName['name']}}</span>
+                        @if(isset($locationName['state']))
+                            <span class="pSC_boxOfCityDetailsText2">در استان استان {{$locationName['state']}}</span>
+                        @endif
                     </div>
                     <div>
                         <div class="pSC_boxOfCityDetails">
-                            <div class="pSC_cityDetails">جاذبه‌های اصفهان</div>
-                            <div class="pSC_cityDetails pSC_cityDetails_selected">هتل‌های اصفهان</div>
+                            <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/1/" . $locationName['urlName'] . "/" . $kind)}}'">جاذبه‌های {{$locationName['name']}}</div>
+                            <div class="pSC_cityDetails pSC_cityDetails_selected" onclick="window.location.href = '{{url("placeList/4/" . $locationName['urlName'] . "/" . $kind)}}'">هتل‌های {{$locationName['name']}}</div>
                         </div>
                         <div class="pSC_boxOfCityDetails">
-                            <div class="pSC_cityDetails">مقاله‌های اصفهان</div>
-                            <div class="pSC_cityDetails">رستوران‌های اصفهان</div>
+                            <div class="pSC_cityDetails" onclick="window.location.href = '{{$locationName['articleUrl']}}'">مقاله‌های {{$locationName['name']}}</div>
+                            <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/3/" . $locationName['urlName'] . "/" . $kind)}}'">رستوران‌های {{$locationName['name']}}</div>
                         </div>
                         <div class="pSC_boxOfCityDetails">
-                            <div class="pSC_cityDetails">صنایع دستی‌های اصفهان</div>
-                            <div class="pSC_cityDetails">غذای محلی‌های اصفهان</div>
+                            <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/10/" . $locationName['urlName'] . "/" . $kind)}}'">صنایع دستی‌های {{$locationName['name']}}</div>
+                            <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/11/" . $locationName['urlName'] . "/" . $kind)}}'">غذای محلی‌های {{$locationName['name']}}</div>
                         </div>
                     </div>
                     <div class="overflowOptimizer"></div>
                 </div>
+                @endif
+
                 <div class="hideOnScreen phoneFooterStyle">
                     <div class="phoneFooterLogo">
                         <img src="{{URL::asset('images/logo.png')}}" class="content-icon" width="100%">
@@ -939,36 +894,39 @@
                             با خبر بشید و توضیحاتش رو هم کامل بخونین، بعدش راحت دل رو به دریا بزنین و راه بیوفتین.
                         </div>
                         <div class="phoneDescriptionSelects">
-                            <div class="inputBox" id="">
-                                <div class="inputBoxText">
-                                    <div>
-                                        زبان
-                                    </div>
-                                </div>
-                                <select class="inputBoxInput styled-select" id="" name="">
-                                    <option value="">
-                                        English
-                                    </option>
-                                    <option value="">
-                                        فارسی
-                                    </option>
-                                </select>
-                            </div>
-                            <div class="inputBox" id="">
-                                <div class="inputBoxText">
-                                    <div>
-                                        واحد پول
-                                    </div>
-                                </div>
-                                <select class="inputBoxInput styled-select" id="" name="">
-                                    <option value="fast">
-                                        ریال
-                                    </option>
-                                    <option value="call">
-                                        USD
-                                    </option>
-                                </select>
-                            </div>
+                            {{--language--}}
+                            {{--<div class="inputBox" id="">--}}
+                                {{--<div class="inputBoxText">--}}
+                                    {{--<div>--}}
+                                        {{--زبان--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                                {{--<select class="inputBoxInput styled-select" id="" name="">--}}
+                                    {{--<option value="">--}}
+                                        {{--English--}}
+                                    {{--</option>--}}
+                                    {{--<option value="">--}}
+                                        {{--فارسی--}}
+                                    {{--</option>--}}
+                                {{--</select>--}}
+                            {{--</div>--}}
+
+                            {{--<div class="inputBox" id="">--}}
+                                {{--<div class="inputBoxText">--}}
+                                    {{--<div>--}}
+                                        {{--واحد پول--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                                {{--<select class="inputBoxInput styled-select" id="" name="">--}}
+                                    {{--<option value="fast">--}}
+                                        {{--ریال--}}
+                                    {{--</option>--}}
+                                    {{--<option value="call">--}}
+                                        {{--USD--}}
+                                    {{--</option>--}}
+                                {{--</select>--}}
+                            {{--</div>--}}
+
                         </div>
                     </div>
                 </div>
@@ -1396,13 +1354,11 @@
         </div>
 
     </div>
-
-    @include('layouts.proSearch')
+    </div>
 
     <script>
 
         // phone functions
-
         function lp_selectMenu(id , element) {
             $('.lp_eachMenu').removeClass('lp_selectedMenu');
             $(element).addClass('lp_selectedMenu');
@@ -1424,6 +1380,104 @@
             $('.lp_ar_contentOfFilters').addClass('hidden');
             $('#' + id).removeClass('hidden');
         }
+
     </script>
+
+    @if(Auth::check())
+        <script>
+            var recentlySample = 0;
+            var bookMarkSample = 0;
+
+            function phoneRecentlyViews() {
+
+                if(recentlySample == 0)
+                    recentlySample = $('#phoneRecentlyView').html();
+
+                $('#phoneRecentlyView').html('');
+
+
+                $.ajax({
+                    type: 'post',
+                    url: '{{route('recentlyViewed')}}',
+                    data: {
+                        uId: '{{auth()->user()->id}}'
+                    },
+                    success: function (response) {
+
+                        response = JSON.parse(response);
+                        for(i = 0; i < response.length; i++){
+                            var text = recentlySample;
+                            var fk = Object.keys(response[i]);
+                            for (var x of fk) {
+                                var t = '##' + x + '##';
+                                var re = new RegExp(t, "g");
+                                text = text.replace(re, response[i][x]);
+                            }
+                            $('#phoneRecentlyView').append(text);
+                        }
+                    }
+                });
+            }
+
+            function getAlertItemsPhone() {
+                $.ajax({
+                    type: 'post',
+                    url: '{{route('getAlerts')}}',
+                    success: function (response) {
+
+                        response = JSON.parse(response);
+
+                        if(response.length == 0)
+                            $('#noMessagePhone').css('display', '');
+                        else{
+                            $('#noMessagePhone').css('display', 'none');
+                            var newElement = "";
+
+                            for(i = 0; i < response.length; i++) {
+                                if (response[i].url != -1)
+                                    newElement += '<div id="notificationBox"><div class="modules-engagement-notification-dropdown"><div><img onclick="document.location.href = \'' + response[i].url + '\'" width="50px" height="50px" src="' + response[i].pic + '"></div><div class="notifdd_empty"><span>' + response[i].customText + '</span></div></div></div>';
+                                else
+                                    newElement += '<div onclick="document.location.href = \'{{route('msgs')}}\'" style="cursor: pointer; min-height: 60px"><div class="modules-engagement-notification-dropdown"><div style="float: right; margin: 10px; padding-top: 0; height: 50px; margin-top: 0; width: 50px; z-index: 10000000000001 !important;"></div><div style="margin-right: 70px" class="notifdd_empty"><span>' + response[i].customText + '</span></div></div></div>';
+                            }
+
+                            $('#phoneMessages').append(newElement);
+                        }
+                    }
+                });
+            }
+
+            function showBookMarksPhone() {
+
+                if(bookMarkSample == 0)
+                    bookMarkSample = $('#phoneBookMarks').html();
+
+                $('#phoneBookMarks').html('');
+
+                $.ajax({
+                    type: 'post',
+                    url: '{{route('getBookMarks')}}',
+                    success: function (response) {
+                        response = JSON.parse(response);
+                        console.log(response);
+
+                        for(i = 0; i < response.length; i++){
+                            var text = bookMarkSample;
+                            var fk = Object.keys(response[i]);
+                            for (var x of fk) {
+                                var t = '##' + x + '##';
+                                var re = new RegExp(t, "g");
+                                text = text.replace(re, response[i][x]);
+                            }
+                            $('#phoneBookMarks').append(text);
+                        }
+                    }
+                });
+            }
+
+            phoneRecentlyViews();
+            getAlertItemsPhone();
+            showBookMarksPhone();
+        </script>
+    @endif
 
 </footer>

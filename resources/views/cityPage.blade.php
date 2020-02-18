@@ -6,7 +6,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/home_rebranded.css?v=4')}}"/>
-    <title>صفحه اصلی</title>
+    <title>صفحه {{$place->name}}</title>
 
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/long_lived_global_legacy_2.css?v=2')}}"/>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/masthead-saves.css?v=2')}}'/>
@@ -70,6 +70,11 @@
 
 <body class="rebrand_2017 desktop HomeRebranded  js_logging">
 
+@include('general.globalInput')
+{{--@if(!Auth::check())--}}
+    {{--@include('layouts.loginPopUp')--}}
+{{--@endif--}}
+
 <div class="header hideOnPhone">
     @include('layouts.placeHeader')
 </div>
@@ -78,9 +83,11 @@
     <div class="cpBorderBottom cpHeader">
         <div class="cpHeaderRouteOfCityName">
             @if(isset($place->state))
-            <span>استان {{$place->state}}</span>
-            <span> > </span>
-            <span>{{$place->name}}</span>
+                <a href="{{url('cityPage/state/'.$place->state)}}">
+                    <span>استان {{$place->state}}</span>
+                </a>
+                <span> > </span>
+                <span>{{$place->name}}</span>
             @else
                 <span>{{$place->name}}</span>
             @endif
@@ -629,15 +636,11 @@
                                 </div>
 
                                 <div class="comments-link im-meta-item">
-                                    <a href="">
-                                        <i class="fa fa-comment-o"></i>{{$post[0]->msgs}}
-                                    </a>
+                                    <i class="fa fa-comment-o"></i>{{$post[0]->msgs}}
                                 </div>
 
                                 <div class="author vcard im-meta-item">
-                                    <a class="url fn n">
-                                        <i class="fa fa-user"></i>{{$post[0]->username}}
-                                    </a>
+                                    <i class="fa fa-user"></i>{{$post[0]->username}}
                                 </div>
 
                                 <div class="post-views im-meta-item">
@@ -668,14 +671,10 @@
                                                 <span class="entry-date published updated">{{$post[$i]->date}}</span>
                                             </div>
                                             <div class="comments-link im-meta-item">
-                                                <a href="">
-                                                    <i class="fa fa-comment-o"></i>{{$post[$i]->msgs}}
-                                                </a>
+                                                <i class="fa fa-comment-o"></i>{{$post[$i]->msgs}}
                                             </div>
                                             <div class="author vcard im-meta-item">
-                                                <a class="url fn n">
-                                                    <i class="fa fa-user"></i>{{$post[$i]->username}}
-                                                </a>
+                                                <i class="fa fa-user"></i>{{$post[$i]->username}}
                                             </div>
                                             <div class="post-views im-meta-item">
                                                 <i class="fa fa-eye"></i>{{$post[$i]->seen}}
@@ -709,14 +708,10 @@
                                                     <span class="entry-date published updated">{{$post[$i]->date}}</span>
                                                 </div>
                                                 <div class="comments-link im-meta-item">
-                                                    <a href="">
-                                                        <i class="fa fa-comment-o"></i>{{$post[$i]->msgs}}
-                                                    </a>
+                                                    <i class="fa fa-comment-o"></i>{{$post[$i]->msgs}}
                                                 </div>
                                                 <div class="author vcard im-meta-item">
-                                                    <a class="url fn n">
-                                                        <i class="fa fa-user"></i>{{$post[$i]->username}}
-                                                    </a>
+                                                    <i class="fa fa-user"></i>{{$post[$i]->username}}
                                                 </div>
                                                 <div class="post-views im-meta-item">
                                                     <i class="fa fa-eye"></i>{{$post[$i]->seen}}
@@ -763,16 +758,7 @@
 
 @include('layouts.placeFooter')
 
-{{--<div class="ui_backdrop dark" id="darkModeMainPage"></div>--}}
-
 @include('hotelDetailsPopUp')
-
-
-@if(!Auth::check())
-    @include('layouts.loginPopUp')
-@endif
-
-{{--@include('layouts.phonePopUp')--}}
 
 <script defer src="{{URL::asset('js/cityPage/cityPageOffer.js')}}"></script>
 
