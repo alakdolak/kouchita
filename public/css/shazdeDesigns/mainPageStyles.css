@@ -612,8 +612,17 @@ DIV.prw_rup.prw_shelves_rebrand_poi_shelf_item_widget .detail .item {
         right: 5%;
     }
 }
-
 @media (max-width: 767px) {
+    .eachPicOfSlider {
+        width: auto !important;
+        position: absolute;
+        height: 100%;
+    }
+    .swiper-slide{
+        overflow: hidden !important;
+    }
+
+
     DIV.prw_rup.prw_search_typeahead .typeahead_align {
         margin-top: 20px;
     }

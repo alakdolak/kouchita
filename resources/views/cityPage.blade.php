@@ -70,10 +70,7 @@
 
 <body class="rebrand_2017 desktop HomeRebranded  js_logging">
 
-@include('general.globalInput')
-{{--@if(!Auth::check())--}}
-    {{--@include('layouts.loginPopUp')--}}
-{{--@endif--}}
+@include('general.forAllPages')
 
 <div class="header hideOnPhone">
     @include('layouts.placeHeader')

@@ -847,14 +847,14 @@
                     <div class="pSC_tilte">
                     <div>
                         شما در حال حاضر در
-                        <span class="pSC_cityTilte">{{$place->name}}</span>
+                        <span class="pSC_cityTilte">{{$locationName['name']}}</span>
                         هستید
                     </div>
                     <button type="button" class="btn btn-danger" onclick="openProSearch()">تغییر دهید</button>
                 </div>
                     <div class="pSC_cityDescription">
                     شما می‌توانید به راحتی صفحات زیر را در
-                    <span>{{$place->name}}</span>
+                    <span>{{$locationName['name']}}</span>
                     مشاهده نمایید
                 </div>
                     <div class="pSC_boxOfDetails">

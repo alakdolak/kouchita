@@ -77,7 +77,7 @@
       class=" r_map_position_ul_fake ltr domn_en_US lang_en long_prices globalNav2011_reset
       rebrand_2017 css_commerce_buttons flat_buttons sitewide xo_pin_user_review_to_top track_back">
 
-@include('general.globalInput')
+@include('general.forAllPages')
 
 <div id="PAGE" class="filterSearch redesign_2015 non_hotels_like desktop scopedSearch">
     @include('layouts.placeHeader')
@@ -570,10 +570,6 @@
 
     @include('layouts.placeFooter')
 </div>
-
-@if(!Auth::check())
-    @include('layouts.loginPopUp')
-@endif
 
 <script>
 
@@ -1119,8 +1115,6 @@
         $(".moreItems" + _id).removeClass('hidden');
     }
 
-
-
 </script>
 
 <script>
@@ -1244,12 +1238,8 @@
         document.getElementById('form_hotel').submit();
     }
 
-
-
 </script>
 
-{{--<script src="{{URL::asset('js/adv.js')}}"></script>--}}
-{{--<div class="ui_backdrop dark" id="darkModeMainPage" ></div>--}}
 
 </body>
 </html>

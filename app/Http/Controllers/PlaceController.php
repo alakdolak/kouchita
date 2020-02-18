@@ -3437,22 +3437,24 @@ class PlaceController extends Controller {
             if ($mode == "state") {
                 $state = State::whereName($city)->first();
                 $city = $state;
-                $place = $city;
-                $place->name = ' استان' . $place->name;
                 if ($state == null)
                     return "نتیجه ای یافت نشد";
+
+
+                $articleUrl = \url('/article/list/city/' . $state->name);
+                $locationName = ["name" => $state->name, 'urlName' => $state->name, 'articleUrl' => $articleUrl];
             }
             else {
                 $city = Cities::whereName($city)->first();
-                $place = $city;
-                $place->name = ' شهر' . $place->name;
-
                 if ($city == null)
                     return "نتیجه ای یافت نشد";
 
                 $state = State::whereId($city->stateId);
                 if ($state == null)
                     return "نتیجه ای یافت نشد";
+
+                $articleUrl = \url('/article/list/city/' . $city->name);
+                $locationName = ["name" => $city->name, 'state' => $state->name, 'urlName' => $city->name, 'articleUrl' => $articleUrl];
             }
 
             switch ($kindPlaceId){
@@ -3486,8 +3488,8 @@ class PlaceController extends Controller {
             $features = PlaceFeatures::where('kindPlaceId', $kindPlaceId)->where('parent', 0)->get();
             foreach ($features as $feature)
                 $feature->subFeat = PlaceFeatures::where('parent', $feature->id)->where('type', 'YN')->get();
-
-            return view('places.list.list', compact(['features', 'place', 'kindPlace', 'kindPlaceId', 'mode', 'city', 'sections', 'placeMode', 'state']));
+            $kind = $mode;
+            return view('places.list.list', compact(['features', 'locationName', 'kindPlace', 'kind','kindPlaceId', 'mode', 'city', 'sections', 'placeMode', 'state']));
         }
         else
             return \redirect(\url('/'));

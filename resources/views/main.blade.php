@@ -96,7 +96,7 @@
                                 <div id="mainSlider" class="swiper-container">
                                     <div class="swiper-wrapper">
                                         @foreach($sliderPic as $item)
-                                            <div class="swiper-slide" style="position: relative">
+                                            <div class="swiper-slide mobileHeight" style="position: relative">
                                                 <img class="eachPicOfSlider" src="{{URL::asset('_images/sliderPic/' . $item->pic)}}" alt="{{$item->alt}}">
                                                 @if($item->text != null && $item->text != '')
                                                     <div class="textInSlide" style="background-color: {{$item->textBackground}}; color: {{$item->textColor}};">
@@ -572,7 +572,7 @@
         centeredSlides: true,
         loop: true,
         autoplay: {
-            delay: 5000,
+            delay: 50000,
             disableOnInteraction: false,
         },
         pagination: {
