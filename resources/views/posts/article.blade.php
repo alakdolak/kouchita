@@ -1,217 +1,9 @@
 @extends('posts.articleLayout')
 
 @section('head')
-<<<<<<< HEAD
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/easyimage.css')}}"/>
-<<<<<<< HEAD
+    <link rel="stylesheet" href="{{URL::asset('css/easyimage.css')}}">
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <link rel="profile" href="http://gmpg.org/xfn/11">
-    <title>مقاله</title>
-
-    <link rel='stylesheet' id='google-font-css' href='//fonts.googleapis.com/css?family=Dosis%3A200' type='text/css'
-          media='all'/>
-
-    <script type='text/javascript' src='{{URL::asset('js/jquery_12.js')}}'></script>
-
-    <style>
-        .gnTopPics {
-            direction: rtl;
-            background-color: #d3d2d2;
-        }
-
-        .gnWhiteBox {
-            background-color: white;
-            margin: 20px 0 0;
-        }
-
-        .gnContentsCategory {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-        }
-        .gnColOFContentsCategory {
-            width: 100%;
-        }
-        .categoryRow{
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-        }
-        .categoryRTL{
-            direction: rtl;
-            text-align: right;
-        }
-        .categoryLTR{
-            direction: ltr;
-            text-align: right;
-        }
-        .gnUl {
-            list-style: none;
-            padding: 5px;
-            margin: 5px 5px 10px 0px;
-            background-color: #f3f3f3;
-        }
-        .gnLi {
-            padding: 2px 0;
-        }
-        .gnTitleOfPlaces {
-            font-size: 1.2em;
-            font-weight: 400;
-        }
-        .gnNumberOfPlaces {
-            color: #92321b;
-            float: left;
-        }
-
-        .gnInput {
-            width: 100%;
-            padding: 2px 7px;
-            border: 1px solid #cccccc;
-            border-radius: 5px;
-            background-color: #ebebeb;
-            line-height: 30px;
-            margin: 5px 0;
-        }
-
-        .gnAdvertise {
-            padding-bottom: 12px;
-        }
-        .gnAdvertiseText {
-            color: #30b4a6;
-        }
-        .gnAdvertiseImage {
-            width: 100%;
-            height: auto;
-        }
-        textarea:focus{
-            outline: none;
-            box-shadow: none;
-        }
-        textarea:hover{
-            outline: none;
-            box-shadow: none;
-        }
-    </style>
-
-    <style>
-        #helpBtnMainDiv {
-            display: none;
-        }
-    </style>
-
-    {{--just gardeshname style--}}
-    <style>
-        .gnReturnBackBtn {
-            background-color: #fcc156;
-            color: white;
-            padding: 10px;
-            border-radius: 5px;
-            margin: 20px 0 0;
-            text-align: center;
-            font-size: 1.2em;
-            cursor: pointer;
-        }
-        .gnReturnBackBtn:hover {
-            opacity: 0.75;
-        }
-    </style>
-
-=======
->>>>>>> 89c253bb4610e0ad4b33c1fa9d1a9d1b47f28688
-    {{--just article style--}}
-    <style>
-        .gnMainPicOfArticle {
-            position: relative;
-            padding: 15px 0;
-        }
-        .gnMainPicOfArticleText {
-            width: 96%;
-            position: absolute;
-            bottom: -35px;
-            left: 50%;
-            margin-left: -48%;
-            padding: 20px 20px 10px;
-            background: white;
-            border-bottom: 3px solid #f3f3f3;
-            opacity: 0.9;
-        }
-    </style>
-
-    <style>
-        .easyimage-side{
-            float: left !important;
-            margin-right: 1.5em !important;
-            text-align: center !important;
-            margin-left: 0px !important;
-        }
-    </style>
-<<<<<<< HEAD
-
-</head>
-
-<body class="rebrand_2017 desktop HomeRebranded  js_logging rtl home page-template-default page page-id-119 group-blog wpb-js-composer js-comp-ver-4.12 vc_responsive">
-
-<div class="header">
-    @include('layouts.placeHeader')
-
-    <div class="ppr_rup ppr_priv_hr_atf_north_star_nostalgic position-relative">
-{{--        @include('layouts.placeMainBodyHeader')--}}
-    </div>
-
-    <div id="darkModal" class="display-none" role="dialog"></div>
-    @if(!Auth::check())
-        @include('layouts.loginPopUp')
-    @endif
-
-    <div class="hidden visible-sm visible-xs">
-        <div class="im-header-mobile">
-            <div class="im-main-header clearfix light">
-                <div class='container'>
-                    <div class="row">
-                        <div class="im-off-canvas col-sm-2 col-xs-2">
-                            <button id="off-canvas-on" class="off-canvas-on"><i class="fa fa-navicon"></i></button>
-                        </div>
-                        <div class="im-mobile-logo col-sm-8 col-xs-8">
-                        </div>
-                        <div class="im-search im-slide-block col-sm-2 col-xs-2">
-                            <div class="search-btn slide-btn">
-                                <i class="fa fa-search"></i>
-                                <div class="im-search-panel im-slide-panel">
-                                    <form action="" name="searchform" method="get">
-                                        <fieldset class="search-fieldset">
-                                            <div class="input-group">
-                                                <input type="search" class="form-control" name="s"
-                                                       placeholder="عبارت جستجو را اینجا وارد کنید..." required/>
-                                                <span class="input-group-btn">
-                                                    <input type="submit" class="btn btn-default" value="بگرد"/>
-                                                </span>
-                                            </div>
-                                        </fieldset>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="im-header-mobile-ad col-md-12 text-center">
-                <p>
-                    <img class="aligncenter size-full wp-image-4151" src="{{URL::asset('images/gardeshname_banner.jpg')}}" alt="شازده مسافر" width="1600" height="365"/>
-                </p>
-            </div>
-        </div>
-    </div>
-=======
-=======
-
->>>>>>> 12b4b41a06a16aeb7fd648c5efa7a8febca5d331
 @endsection
->>>>>>> 89c253bb4610e0ad4b33c1fa9d1a9d1b47f28688
 
     <div id="darkModal" class="display-none" role="dialog"></div>
 
@@ -439,12 +231,12 @@
                     <div class="col-md-12 col-sm-12 gnUserDescription">
                         <div>
                             <div class="circleBase type2 newCommentWriterProfilePic">
-                                <img src="##authPic##" style="width: 100%; height: 100%; border-radius: 50%;">
+                                <img src="{{$post->user->pic}}" style="width: 100%; height: 100%; border-radius: 50%;">
                             </div>
-                            <div class="gnLabels">shazdesina</div>
+                            <div class="gnLabels">{{$post->user->username}}</div>
                         </div>
                         <div>
-
+                            لورم ایپسون
                         </div>
                     </div>
                 </div>
@@ -452,7 +244,9 @@
                     <div class="col-md-12 col-sm-12 gnUserDescription">
                         <div class="gnLabels">برچسب ها</div>
                         <div>
-
+                            @foreach($post->tag as $tag)
+                                <div>{{$tag->tag}}</div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -513,7 +307,7 @@
         </div>
     </div>
 
-    <script src="{{URL::asset('/js/article/articlePage.js')}}"></script>
+    <script src="{{URL::asset('js/article/articlePage.js')}}"></script>
 
     <script>
         var category = {!! $category !!}
@@ -530,6 +324,71 @@
         var likeCommentUrl = '{{route("article.comment.like")}}';
         var comments = {!! $comments !!};
         var userPic = '{{$uPic}}';
+
+
+        function createComment(srcId, comments){
+            if(srcHtmlComments == 0)
+                srcHtmlComments = $('#commentDiv0').html();
+
+            $('#commentDiv' + srcId).html('');
+
+            for(var i = 0; i < comments.length; i++){
+                var t;
+                var re;
+                var text = srcHtmlComments;
+                var fk = Object.keys(comments[i]);
+                for (var x of fk) {
+                    t = '##' + x + '##';
+                    re = new RegExp(t, "g");
+
+                    if(x == 'ans'){
+                        if(comments[i][x] == null)
+                            text = text.replace(re, 0);
+                        else
+                            text = text.replace(re, comments[i][x].length);
+                    }
+                    text = text.replace(re, comments[i][x]);
+                }
+
+                t = '##authPic##';
+                re = new RegExp(t, "g");
+                text = text.replace(re, userPic);
+
+                if(comments[i]['userLike'] == 1){
+                    t = '##showLike##';
+                    re = new RegExp(t, "g");
+                    text = text.replace(re, 'likeActionClickedBtn');
+                }
+                else if(comments[i]['userLike'] == 0){
+                    t = '##showDisLike##';
+                    re = new RegExp(t, "g");
+                    text = text.replace(re, 'dislikeActionClickedBtn');
+                }
+
+                var marginRight = '0px';
+                if(srcId != 0)
+                    marginRight = '50px';
+                t = '##mRight##';
+                re = new RegExp(t, "g");
+                text = text.replace(re, marginRight);
+
+                if(comments[i]['ans'] != null && comments[i]['ans'].length != 0){
+                    t = '##haveAnsDisplay##';
+                    re = new RegExp(t, "g");
+                    text = text.replace(re, 'block');
+                    $('#commentDiv' + srcId).append(text);
+                    createComment(comments[i]['id'], comments[i]['ans']);
+                }
+                else{
+                    t = '##haveAnsDisplay##';
+                    re = new RegExp(t, "g");
+                    text = text.replace(re, 'none');
+                    $('#commentDiv' + srcId).append(text);
+                }
+            }
+
+        }
+        createComment(0, comments);
     </script>
 @endsection
 

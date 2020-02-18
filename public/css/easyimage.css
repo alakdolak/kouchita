@@ -47,6 +47,10 @@ The outline is not a part of the element's dimensions. A border needs to be used
 	*/
 	min-width: 10em;
 	margin-left: 1.5em;
+
+	float: left;
+	margin-left: 0px;
+	margin-right: 1.5em;
 }
 
 /*
