@@ -267,14 +267,14 @@
                 <div class="eateryOverviewContent">
                     <div class="ui_columns is-partitioned">
                         <div id="PlaceController" class="ui_column col-md-9" ng-controller="PlaceController as cntr" style="direction: rtl; padding: 9px 24px;">
-                            <div  infinite-scroll="myPagingFunction()" class="coverpage hideOnPhone">
+                            <div  infinite-scroll="myPagingFunction()" class="coverpage">
                                 <div class="ppr_rup ppr_priv_restaurants_coverpage_content">
                                     <div>
                                         <div class="prw_rup prw_restaurants_restaurants_coverpage_content">
                                             <div class="coverpage_widget">
                                                 <div class="section">
                                                     <div class="single_filter_pois">
-                                                        <div id="FilterTopController" class="title ui_columns" style="border-bottom: 1px solid lightgray;">
+                                                        <div id="FilterTopController" class="title ui_columns hideOnPhone" style="border-bottom: 1px solid lightgray;">
                                                             <div class="ordering" style="font-weight: bold">مرتب سازی بر
                                                                 اساس:
                                                             </div>
@@ -310,9 +310,8 @@
                                                             var check_num = 0;
                                                         </script>
                                                         <div  class="option">
-                                                            <div class="row" ng-repeat="packet in packets" style="display: flex; flex-wrap: wrap">
-                                                                <div ng-repeat="place in packet.places" class="ui_column is-3 is-mobile">
-
+                                                            <div class="row" ng-repeat="packet in packets">
+                                                                <div ng-repeat="place in packet.places" class="ui_column col-lg-3 col-xs-6">
                                                                     <div class="poi listBoxesMainDivs">
                                                                         <a href="[[place.redirect]]" class="thumbnail">
                                                                             <div class="prw_rup prw_common_centered_thumbnail">
@@ -357,10 +356,10 @@
                                                                                 <span>نقد</span>
                                                                             </a>
                                                                         </div>
-                                                                        <div class="item">استان:
+                                                                        <div class="item col-md-12 col-xs-6 itemState" style="float: right;">استان:
                                                                             <span>[[place.state]]</span>
                                                                         </div>
-                                                                        <div class="item">شهر:
+                                                                        <div class="item col-md-12 col-xs-6 itemState">شهر:
                                                                             <span>[[place.city]]</span>
                                                                         </div>
                                                                         <div class="booking"></div>
@@ -369,7 +368,6 @@
 
                                                                 </div>
                                                             </div>
-
                                                         </div>
                                                         <div>
                                                             <div class="loader hidden"></div>

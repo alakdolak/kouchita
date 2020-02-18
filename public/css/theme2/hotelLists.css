@@ -430,3 +430,31 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     top: 5px;
     cursor: pointer;
 }
+
+
+@media (max-width: 768px) {
+    .listBoxesMainDivs > a:nth-child(1) > div > div {
+        width: 400px;
+        height: 325px;
+    }
+
+    .ui_icon.heart:before {
+        font-size: 5em !important;
+    }
+
+    .ui_bubble_rating:before, .ui_bubble_rating:after {
+        font-size: 2em;
+    }
+
+    div.prw_rup.prw_restaurants_restaurants_coverpage_content .detail {
+        font-size: 2.5em;
+    }
+
+    div.prw_rup.prw_restaurants_restaurants_coverpage_content .poiTitle {
+        font-size: 1em;
+    }
+
+    .itemState {
+        font-size: 0.8em;
+    }
+}
