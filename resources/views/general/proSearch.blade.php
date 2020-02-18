@@ -548,7 +548,7 @@
             </div>
 
             <div class="row mg-tp-50" id="mainDivProSearch">
-                @if(isset($locationName))
+                @if(isset($locationName['name']))
                     <div class="col-xs-12 boxOfWhereIsHere">
                         شما در حال حاضر در
                         <div id="nameOfWhereIsHere">{{$locationName['name']}}</div>

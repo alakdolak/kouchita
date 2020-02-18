@@ -29,8 +29,8 @@
 
 @include('general.alerts')
 
+@include('layouts.recentlyViewAndMyTripsInMain')
+
 @if(!Auth::check())
     @include('layouts.loginPopUp')
-@else
-    @include('layouts.recentlyViewAndMyTripsInMain')
 @endif

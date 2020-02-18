@@ -185,7 +185,9 @@ class HomeController extends Controller
             if($place->image == null){
                 $seenActivity = Activity::whereName('مشاهده')->first();
                 $ala = Amaken::where('cityId', $place->id)->pluck('id')->toArray();
-                $mostSeen = DB::select('SELECT placeId, COUNT(id) as seen FROM log WHERE activityId = ' .$seenActivity->id. ' AND kindPlaceId = 1 AND placeId IN (' . implode(",", $ala) . ') GROUP BY placeId ORDER BY seen DESC');
+                $mostSeen = [];
+                if(count($ala) != 0)
+                    $mostSeen = DB::select('SELECT placeId, COUNT(id) as seen FROM log WHERE activityId = ' .$seenActivity->id. ' AND kindPlaceId = 1 AND placeId IN (' . implode(",", $ala) . ') GROUP BY placeId ORDER BY seen DESC');
 
                 if(count($mostSeen) != 0){
                     $p = Amaken::find($mostSeen[0]->placeId);
@@ -342,12 +344,14 @@ class HomeController extends Controller
                 $D += (float)$item->D;
                 if($minLat == 0 || $item->C < $minLat)
                     $minLat = (float)$item->C;
-                else if($maxLat == 0 || $item->C > $maxLat)
+
+                if($maxLat == 0 || $item->C > $maxLat)
                     $maxLat = (float)$item->C;
 
                 if($minLng == 0 || $item->D < $minLng)
                     $minLng = (float)$item->D;
-                else if($maxLng == 0 || $item->D > $maxLng)
+
+                if($maxLng == 0 || $item->D > $maxLng)
                     $maxLng = (float)$item->D;
             }
             $count += count($plac);
@@ -400,7 +404,7 @@ class HomeController extends Controller
             $item->catURL = route('article.list', ['type' => 'category', 'search' => $item->category]);
         }
 
-        return view('cityPage', compact(['place', 'kind', 'locationName', 'post', 'cityPost', 'map', 'allPlaces', 'mostSeenPosts', 'allAmaken', 'allHotels', 'allRestaurant', 'allMajara', 'allMahaliFood', 'allSogatSanaie', 'reviews', 'topPlaces']));
+        return view('cityPage', compact(['place', 'kind', 'locationName', 'post', 'map', 'allPlaces', 'allAmaken', 'allHotels', 'allRestaurant', 'allMajara', 'allMahaliFood', 'allSogatSanaie', 'reviews', 'topPlaces']));
     }
 
     public function getCityOpinion()
