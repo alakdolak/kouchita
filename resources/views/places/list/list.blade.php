@@ -265,8 +265,8 @@
 
             <div id="BODYCON" class="col easyClear poolX adjust_padding new_meta_chevron_v2" ng-app="mainApp">
                 <div class="eateryOverviewContent">
-                    <div class="ui_columns is-partitioned is-mobile">
-                        <div id="PlaceController" class="ui_column is-9" ng-controller="PlaceController as cntr" style="direction: rtl; padding: 9px 24px;">
+                    <div class="ui_columns is-partitioned">
+                        <div id="PlaceController" class="ui_column col-md-9" ng-controller="PlaceController as cntr" style="direction: rtl; padding: 9px 24px;">
                             <div  infinite-scroll="myPagingFunction()" class="coverpage">
                                 <div class="ppr_rup ppr_priv_restaurants_coverpage_content">
                                     <div>
@@ -274,7 +274,7 @@
                                             <div class="coverpage_widget">
                                                 <div class="section">
                                                     <div class="single_filter_pois">
-                                                        <div id="FilterTopController" class="title ui_columns" style="border-bottom: 1px solid lightgray;">
+                                                        <div id="FilterTopController" class="title ui_columns hideOnPhone" style="border-bottom: 1px solid lightgray;">
                                                             <div class="ordering" style="font-weight: bold">مرتب سازی بر
                                                                 اساس:
                                                             </div>
@@ -298,26 +298,10 @@
                                                                     حروف الفبا
                                                                 </div>
                                                             </div>
-                                                            {{--onclick="showLowDistancePopUp()"--}}
                                                             @if($kindPlace->id != 10 && $kindPlace->id != 11)
                                                                 <div class="ordering"  >
-                                                                <div id="distanceNav" class="orders" style="width: 140% !important;"
-                                                                     onclick="openGlobalSearch()">کمترین فاصله تا
-                                                                    <span id="selectDistance">__ __ __</span></div>
-                                                                <div class="shTIcon bottomArrowIcon"></div>
-                                                                <div id="lowDistance" class="lowDistance hidden"
-                                                                     onmouseleave="$('#lowDistance').addClass('hidden');">
-                                                                    <input id="inputDistancePlace" class="inputDistance"
-                                                                           type="text"
-                                                                           placeholder="مکان مورد نظر را وارد کنید"
-                                                                           onclick="openGlobalSearch()" readonly>
-                                                                    <div class="textDistance"> توجه کنید این مکان می
-                                                                        بایست در محدوده مقصد باشد.
-                                                                    </div>
-                                                                    <div id="distance"></div>
-                                                                    <div id="errorDistance" class="errDistance">
-                                                                        متاسفانه مکان مورد نظر در دسترس نمی باشد.
-                                                                    </div>
+                                                                <div id="distanceNav" class="orders" style="width: 140% !important;" onclick="openGlobalSearch()">کمترین فاصله تا
+                                                                    <span id="selectDistance">__ __ __</span>
                                                                 </div>
                                                             </div>
                                                             @endif
@@ -326,9 +310,8 @@
                                                             var check_num = 0;
                                                         </script>
                                                         <div  class="option">
-                                                            <div class="row" ng-repeat="packet in packets" style="display: flex; flex-wrap: wrap">
-                                                                <div ng-repeat="place in packet.places" class="ui_column is-3 is-mobile">
-
+                                                            <div class="row" ng-repeat="packet in packets">
+                                                                <div ng-repeat="place in packet.places" class="ui_column col-lg-3 col-xs-6">
                                                                     <div class="poi listBoxesMainDivs">
                                                                         <a href="[[place.redirect]]" class="thumbnail">
                                                                             <div class="prw_rup prw_common_centered_thumbnail">
@@ -373,10 +356,10 @@
                                                                                 <span>نقد</span>
                                                                             </a>
                                                                         </div>
-                                                                        <div class="item">استان:
+                                                                        <div class="item col-md-12 col-xs-6 itemState" style="float: right;">استان:
                                                                             <span>[[place.state]]</span>
                                                                         </div>
-                                                                        <div class="item">شهر:
+                                                                        <div class="item col-md-12 col-xs-6 itemState">شهر:
                                                                             <span>[[place.city]]</span>
                                                                         </div>
                                                                         <div class="booking"></div>
@@ -385,7 +368,6 @@
 
                                                                 </div>
                                                             </div>
-
                                                         </div>
                                                         <div>
                                                             <div class="loader hidden"></div>
@@ -400,8 +382,7 @@
                             </div>
                             <div id="bottomMainList" style="width: 100%; height: 5px;"></div>
                         </div>
-
-                        <div class="lhr ui_column is-3 hideCount reduced_height" id="FilterController" ng-controller="FilterController" style="direction: rtl; padding: 10px;">
+                        <div class="lhr ui_column col-md-3 hideOnPhone" id="FilterController" ng-controller="FilterController" style="direction: rtl; padding: 10px;">
                             <div class="ppr_rup ppr_priv_restaurant_filters">
                                 <div class="verticalFilters placements">
                                     <div id="EATERY_FILTERS_CONT" class="eatery_filters">
@@ -524,9 +505,15 @@
                                         @foreach($features as $feature)
                                             <div class="prw_rup prw_restaurants_restaurant_filters">
                                                 <div class="lhrFilterBlock jfy_filter_bar_establishmentTypeFilters collapsible">
-                                                    <div class="filterGroupTitle">{{$feature->name}}</div>
-                                                    <div class="filterContent ui_label_group inline">
+                                                    <div style="display: flex; justify-content: space-between;">
+                                                        <div class="filterGroupTitle">{{$feature->name}}</div>
+                                                        @if(count($feature->subFeat) > 5)
+                                                            <span onclick="showMoreItems({{$feature->id}})" class="moreItems{{$feature->id}} moreItems">نمایش کامل فیلترها</span>
+                                                            <span onclick="showLessItems({{$feature->id}})" class="lessItems hidden extraItem{{$feature->id}} moreItems">پنهان سازی فیلتر‌ها</span>
+                                                        @endif
+                                                    </div>
 
+                                                    <div class="filterContent ui_label_group inline">
                                                         @for($i = 0; $i < 5 && $i < count($feature->subFeat); $i++)
                                                             <div class="ui_input_checkbox filterItem lhrFilter filter establishmentTypeFilters establishmentTypeFilters_10591 selected 0 index_0 alwaysShowItem">
                                                                 <input ng-disabled="isDisable()" ng-click="doFilterFeature({{$feature->subFeat[$i]->id}})" type="checkbox" id="feat{{$feature->subFeat[$i]->id}}" value="{{$feature->subFeat[$i]->name}}"/>
@@ -535,8 +522,6 @@
                                                         @endfor
 
                                                         @if(count($feature->subFeat) > 5)
-                                                            <span onclick="showMoreItems({{$feature->id}})" class="moreItems{{$feature->id}}" style="cursor: pointer">نمایش همه ی موارد</span>
-
                                                             @for($i = 5; $i < count($feature->subFeat); $i++)
                                                                 <div class="ui_input_checkbox filterItem lhrFilter filter establishmentTypeFilters extraItem{{$feature->id}}">
                                                                     <input ng-disabled="isDisable()" ng-click="doFilterFeature({{$feature->subFeat[$i]->id}})" type="checkbox" id="feat{{$feature->subFeat[$i]->id}}" value="{{$feature->subFeat[$i]->name}}"/>
@@ -544,10 +529,7 @@
                                                                 </div>
                                                             @endfor
                                                         @endif
-
                                                     </div>
-
-                                                    <span onclick="showLessItems({{$feature->id}})" class="lessItems hidden extraItem{{$feature->id}}">پنهان سازی همه ی موارد</span>
                                                 </div>
                                             </div>
                                         @endforeach
@@ -1058,10 +1040,6 @@
     function saveToTripList(element){
         var placeId = $(element).attr('value');
         saveToTripPopUp(placeId, kindPlaceId)
-    }
-
-    function showLowDistancePopUp() {
-        $('#lowDistance').removeClass('hidden');
     }
 </script>
 

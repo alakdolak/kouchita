@@ -2707,27 +2707,27 @@ input {
     top: -231px;
 }
 
-DIV.prw_rup.prw_restaurants_restaurants_coverpage_content .gptAd {
+div.prw_rup.prw_restaurants_restaurants_coverpage_content .gptAd {
     margin: 0;
 }
 
-DIV.prw_rup.prw_restaurants_restaurants_coverpage_content a {
+div.prw_rup.prw_restaurants_restaurants_coverpage_content a {
     cursor: pointer;
     color: #333333;
     font-weight: normal;
 }
 
-DIV.prw_rup.prw_restaurants_restaurants_coverpage_content .subTitle {
+div.prw_rup.prw_restaurants_restaurants_coverpage_content .subTitle {
     font-weight: normal;
     font-size: 14px;
 }
 
-DIV.prw_rup.prw_restaurants_restaurants_coverpage_content .title {
+div.prw_rup.prw_restaurants_restaurants_coverpage_content .title {
     font-size: 20px;
     position: relative;
 }
 
-DIV.prw_rup.prw_restaurants_restaurants_coverpage_content .view_all {
+div.prw_rup.prw_restaurants_restaurants_coverpage_content .view_all {
     font-size: 16px;
     text-align: left;
     position: absolute;
@@ -2738,105 +2738,106 @@ DIV.prw_rup.prw_restaurants_restaurants_coverpage_content .view_all {
     text-overflow: ellipsis;
 }
 
-DIV.prw_rup.prw_restaurants_restaurants_coverpage_content .option .ui_column {
+div.prw_rup.prw_restaurants_restaurants_coverpage_content .option .ui_column {
     overflow: hidden;
 }
 
-DIV.prw_rup.prw_restaurants_restaurants_coverpage_content .poi {
+div.prw_rup.prw_restaurants_restaurants_coverpage_content .poi {
     display: block;
     position: relative;
 }
 
-DIV.prw_rup.prw_restaurants_restaurants_coverpage_content .poi:hover .thumbnail {
+div.prw_rup.prw_restaurants_restaurants_coverpage_content .poi:hover .thumbnail {
     opacity: 0.8;
 }
 
-DIV.prw_rup.prw_restaurants_restaurants_coverpage_content .thumbnail {
+div.prw_rup.prw_restaurants_restaurants_coverpage_content .thumbnail {
     position: relative;
     display: block;
     border-bottom: 1px solid #e5e5e5;
     overflow: hidden;
 }
 
-DIV.prw_rup.prw_restaurants_restaurants_coverpage_content .detail {
+div.prw_rup.prw_restaurants_restaurants_coverpage_content .detail {
     padding: 10px 0;
     color: #666666;
     min-height: 62px;
 }
 
-DIV.prw_rup.prw_restaurants_restaurants_coverpage_content .detail .ui_button {
+div.prw_rup.prw_restaurants_restaurants_coverpage_content .detail .ui_button {
     padding: 5px 25px;
 }
 
-DIV.prw_rup.prw_restaurants_restaurants_coverpage_content .item {
+div.prw_rup.prw_restaurants_restaurants_coverpage_content .item {
     margin-bottom: 6px;
     vertical-align: middle;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     min-height: 14px;
+    padding: 0;
 }
 
-DIV.prw_rup.prw_restaurants_restaurants_coverpage_content .item.name {
+div.prw_rup.prw_restaurants_restaurants_coverpage_content .item.name {
     font-weight: bold;
     position: relative;
 }
 
-DIV.prw_rup.prw_restaurants_restaurants_coverpage_content .item.name.wrap {
+div.prw_rup.prw_restaurants_restaurants_coverpage_content .item.name.wrap {
     display: table-cell;
     height: 30px;
     padding-bottom: 6px;
 }
 
-DIV.prw_rup.prw_restaurants_restaurants_coverpage_content .poiTitle {
+div.prw_rup.prw_restaurants_restaurants_coverpage_content .poiTitle {
     font-size: 16px;
     font-weight: normal;
     color: #000000;
 }
 
-DIV.prw_rup.prw_restaurants_restaurants_coverpage_content .wrap .poiTitle {
+div.prw_rup.prw_restaurants_restaurants_coverpage_content .wrap .poiTitle {
     /* used to center DWALC titles vertically */
     display: inline-block;
     white-space: normal;
     vertical-align: middle;
 }
 
-DIV.prw_rup.prw_restaurants_restaurants_coverpage_content .review_count {
+div.prw_rup.prw_restaurants_restaurants_coverpage_content .review_count {
     color: #666666;
     padding-left: 3px;
 }
 
-DIV.prw_rup.prw_restaurants_restaurants_coverpage_content .rating-widget {
+div.prw_rup.prw_restaurants_restaurants_coverpage_content .rating-widget {
     display: inline-block;
     font-size: 14px;
 }
 
-DIV.prw_rup.prw_restaurants_restaurants_coverpage_content .section {
+div.prw_rup.prw_restaurants_restaurants_coverpage_content .section {
     margin-bottom: 30px;
 }
 
-DIV.prw_rup.prw_restaurants_restaurants_coverpage_content .sizing_wrapper {
+div.prw_rup.prw_restaurants_restaurants_coverpage_content .sizing_wrapper {
     position: relative;
     overflow: hidden;
 }
 
-DIV.prw_rup.prw_restaurants_restaurants_coverpage_content .centering_wrapper {
+div.prw_rup.prw_restaurants_restaurants_coverpage_content .centering_wrapper {
     display: inline-block;
     position: absolute;
     top: 50%;
 }
 
-DIV.prw_rup.prw_restaurants_restaurants_coverpage_content .centering_wrapper .npp {
+div.prw_rup.prw_restaurants_restaurants_coverpage_content .centering_wrapper .npp {
     top: -60px !important;
 }
 
-DIV.prw_rup.prw_restaurants_restaurants_coverpage_content .poi .attribution .text {
+div.prw_rup.prw_restaurants_restaurants_coverpage_content .poi .attribution .text {
     padding: 0 6px;
     display: inline-block;
     vertical-align: middle;
 }
 
-DIV.prw_rup.prw_restaurants_restaurants_coverpage_content .poi .attribution {
+div.prw_rup.prw_restaurants_restaurants_coverpage_content .poi .attribution {
     position: absolute;
     display: block;
     z-index: 1;
@@ -2861,20 +2862,20 @@ DIV.prw_rup.prw_restaurants_restaurants_coverpage_content .poi .attribution {
     white-space: normal;
 }
 
-DIV.prw_rup.prw_restaurants_restaurants_coverpage_content .titleLink {
+div.prw_rup.prw_restaurants_restaurants_coverpage_content .titleLink {
     vertical-align: middle;
 }
 
-DIV.prw_rup.prw_restaurants_restaurants_coverpage_content .prw_common_centered_thumbnail {
+div.prw_rup.prw_restaurants_restaurants_coverpage_content .prw_common_centered_thumbnail {
     border-radius: 2px;
     overflow: hidden;
 }
 
-DIV.ppr_rup.ppr_priv_hotels_redesign_header #hotels_lf_header {
+div.ppr_rup.ppr_priv_hotels_redesign_header #hotels_lf_header {
     position: relative;
 }
 
-DIV.ppr_rup.ppr_priv_hotels_redesign_header #p13n_tag_header_wrap {
+div.ppr_rup.ppr_priv_hotels_redesign_header #p13n_tag_header_wrap {
     margin: 0;
     padding: 0;
     border: none;
@@ -2882,37 +2883,37 @@ DIV.ppr_rup.ppr_priv_hotels_redesign_header #p13n_tag_header_wrap {
     -webkit-font-smoothing: antialiased;
 }
 
-DIV.ppr_rup.ppr_priv_hotels_redesign_header #p13n_tag_header {
+div.ppr_rup.ppr_priv_hotels_redesign_header #p13n_tag_header {
     min-width: 1024px;
     max-width: 1132px;
     margin: 0 auto;
     padding: 0 18px 0;
 }
 
-DIV.ppr_rup.ppr_priv_hotels_redesign_header .restaurants_list #p13n_tag_header {
+div.ppr_rup.ppr_priv_hotels_redesign_header .restaurants_list #p13n_tag_header {
     max-width: 100%;
     padding: 0 0 30px;
 }
 
-DIV.ppr_rup.ppr_priv_hotels_redesign_header .restaurants_list #p13n_tag_header #HEADING {
+div.ppr_rup.ppr_priv_hotels_redesign_header .restaurants_list #p13n_tag_header #HEADING {
     top: 12px;
 }
 
-DIV.ppr_rup.ppr_priv_hotels_redesign_header .restaurants_list #p13n_welcome_message {
+div.ppr_rup.ppr_priv_hotels_redesign_header .restaurants_list #p13n_welcome_message {
     max-width: 1132px;
     overflow: visible;
     margin: 0 auto;
     padding: 0 18px;
 }
 
-DIV.ppr_rup.ppr_priv_hotels_redesign_header #p13n_welcome_message {
+div.ppr_rup.ppr_priv_hotels_redesign_header #p13n_welcome_message {
     display: block;
     margin: 24px 0 0;
     padding: 0;
     overflow: hidden;
 }
 
-DIV.ppr_rup.ppr_priv_hotels_redesign_header #p13n_welcome_message #HEADING.p13n_geo_hotels {
+div.ppr_rup.ppr_priv_hotels_redesign_header #p13n_welcome_message #HEADING.p13n_geo_hotels {
     display: block;
     position: relative;
     max-width: none;
@@ -2924,31 +2925,31 @@ DIV.ppr_rup.ppr_priv_hotels_redesign_header #p13n_welcome_message #HEADING.p13n_
     text-align: left;
 }
 
-.restaurants_list DIV.ppr_rup.ppr_priv_hotels_redesign_header #p13n_welcome_message #HEADING.p13n_geo_hotels,
-DIV.ppr_rup.ppr_priv_hotels_redesign_header .p13n_see_through #p13n_welcome_message #HEADING.p13n_geo_hotels {
+.restaurants_list div.ppr_rup.ppr_priv_hotels_redesign_header #p13n_welcome_message #HEADING.p13n_geo_hotels,
+div.ppr_rup.ppr_priv_hotels_redesign_header .p13n_see_through #p13n_welcome_message #HEADING.p13n_geo_hotels {
     color: #fff;
 }
 
-DIV.ppr_rup.ppr_priv_hotels_redesign_header #p13n_big_photo_wrap {
+div.ppr_rup.ppr_priv_hotels_redesign_header #p13n_big_photo_wrap {
     z-index: 0;
     top: 0;
     bottom: 30px;
     overflow: hidden;
 }
 
-.h_map_side_by_side DIV.ppr_rup.ppr_priv_hotels_redesign_header #p13n_tag_header {
+.h_map_side_by_side div.ppr_rup.ppr_priv_hotels_redesign_header #p13n_tag_header {
     max-width: 100%;
 }
 
-.h_map_side_by_side DIV.ppr_rup.ppr_priv_hotels_redesign_header #p13n_welcome_message #HEADING.p13n_geo_hotels {
+.h_map_side_by_side div.ppr_rup.ppr_priv_hotels_redesign_header #p13n_welcome_message #HEADING.p13n_geo_hotels {
     display: block;
 }
 
-.h_map_side_by_side DIV.ppr_rup.ppr_priv_hotels_redesign_header #p13n_tag_header {
+.h_map_side_by_side div.ppr_rup.ppr_priv_hotels_redesign_header #p13n_tag_header {
     max-width: inherit;
     padding: 0 0 60px;
 }
-.r_map_position_ul_fake .restaurants_list DIV.ppr_rup.ppr_priv_hotels_redesign_header #p13n_welcome_message #HEADING.p13n_geo_hotels {
+.r_map_position_ul_fake .restaurants_list div.ppr_rup.ppr_priv_hotels_redesign_header #p13n_welcome_message #HEADING.p13n_geo_hotels {
     color: #2C2C2C;
     display: block;
     font-size: 34px;
@@ -2960,17 +2961,23 @@ DIV.ppr_rup.ppr_priv_hotels_redesign_header #p13n_big_photo_wrap {
     text-shadow: none;
 }
 
-.r_map_position_ul_fake .restaurants_list DIV.ppr_rup.ppr_priv_hotels_redesign_header #p13n_tag_header {
+.r_map_position_ul_fake .restaurants_list div.ppr_rup.ppr_priv_hotels_redesign_header #p13n_tag_header {
     padding: 10px;
 }
 
-DIV.prw_rup.prw_common_centered_thumbnail .sizing_wrapper {
+div.prw_rup.prw_common_centered_thumbnail .sizing_wrapper {
     position: relative;
     overflow: hidden;
 }
 
-DIV.prw_rup.prw_common_centered_thumbnail .centering_wrapper {
+div.prw_rup.prw_common_centered_thumbnail .centering_wrapper {
     display: inline-block;
     position: absolute;
     top: 50%;
+}
+
+@media (max-width: 768px) {
+    div.prw_rup.prw_common_centered_thumbnail .centering_wrapper {
+        top: 22%;
+    }
 }

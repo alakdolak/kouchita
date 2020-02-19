@@ -561,263 +561,443 @@
                         </div>
                     </div>
                 </div>
-            @else
-                <div class="mainPopUp leftPopUp recentViewLeftBar">
+            @elseif(true)
+                <div class="mainPopUp leftPopUp" style="padding: 7px">
+                    <div class="lp_ar_searchTitle">جستجو خود را محدودتر کنید</div>
 
-                {{--each menu--}}
-                <div>
-                    <div class="lp_others_content" id="lp_others_recentlyViews">
-                        <div class="lp_others_titles"> بازدید‌های اخیر </div>
-                        <div class="mainContainerBookmarked">
-                            <div id="phoneRecentlyView">
-
-                                <div class="masthead-recent-class">
-                                    <a class="lp_others_recentView" target="_self" href="##placeRedirect##">
-                                        <div class="lp_others_rvPicBox col-xs-8">
-                                            <img src="##placePic##" style="width: 100%;">
-                                        </div>
-                                        <div class="col-xs-4 placeDetailsLeftBar">
-                                            <div class="">##placeName##</div>
-                                            <div class="lp_others_rating">
-                                                <div class="ui_bubble_rating bubble_##placeRate##0"></div>
-                                                <br>##placeReviews## نقد
-                                            </div>
-                                            <div class="">##placeCity##</div>
-                                        </div>
-                                    </a>
-                                </div>
-
-                            </div>
-                            <div class="bottomBarContainer"></div>
-                        </div>
+                    <div class="lp_ar_filters">
+                        <div class="lp_ar_eachFilters lp_ar_rightFilters lp_ar_selectedMenu" onclick="lp_selectArticleFilter('lp_ar_rightFilters' ,this)">اعمال فیلتر</div>
+                        <div class="lp_ar_eachFilters" onclick="lp_selectArticleFilter('lp_ar_leftFilters' ,this)">نحوه نمایش</div>
                     </div>
-
-                    <div class="lp_others_content hidden" id="lp_others_messages" style="overflow-y: scroll">
-                        <div id="phoneMessages" class="lp_others_titles"> اعلانات </div>
-                        <div id="noMessagePhone" class="lp_others_noMessages">هیچ پیام جدیدی موجود نیست</div>
-                    </div>
-
-                    <div class="lp_others_content hidden" id="lp_others_mark">
-                        <div class="lp_others_titles"> نشان‌گذاری شده‌ها </div>
-                        <div class="mainContainerBookmarked">
-                            <div id="phoneBookMarks">
-                                <div class="masthead-recent-class">
-                                    <a class="lp_others_recentView" target="_self" href="##placeRedirect##">
-                                        <div class="lp_others_rvPicBox col-xs-8">
-                                            <img src="##placePic##" style="width: 100%;">
+                    {{--right menu--}}
+                    <div id="lp_ar_rightFilters" class="lp_ar_contentOfFilters">
+                        <div id="EATERY_FILTERS_CONT" class="eatery_filters">
+                            <div class="prw_rup prw_restaurants_restaurant_filters">
+                                <div id="jfy_filter_bar_establishmentTypeFilters"
+                                     class="lhrFilterBlock jfy_filter_bar_establishmentTypeFilters collapsible">
+                                    <div id="filterBox" style="flex-direction: column;">
+                                        <div style="font-size: 15px; margin: 10px 0px;">
+                                            <span>فیلترهای اعمال شده</span>
+                                            <span style="float: left">
+                                                            <span>----</span><span style="margin: 0 5px">مورد از</span><span>----</span>
+                                                        </span>
                                         </div>
-                                        <div class="col-xs-4 placeDetailsLeftBar">
-                                            <div class="">##placeName##</div>
-                                            <div class="lp_others_rating">
-                                                <div class="ui_bubble_rating bubble_##placeRate##0"></div>
-                                                <br>##placeReviews## نقد
-                                            </div>
-                                            <div class="">##placeCity##</div>
+                                        <div style="cursor: pointer; font-size: 12px; color: #050c93; margin-bottom: 7px;" onclick="closeFilters()">
+                                            پاک کردن فیلتر ها
                                         </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="bottomBarContainer"></div>
-                        </div>
-                    </div>
-
-                    <div class="lp_others_content hidden" id="lp_others_myTravel">
-                        <div class="lp_others_titles">
-                            <a class="trips-header" target="_self" href="{{URL('myTrips')}}">سفرهای من </a>
-                        </div>
-
-                        <div class="tripsBoxesMainDiv">
-
-                            <div id="masthead-trips" class="masthead-trips-class">
-                                <div id="masthead-trips-tiles-region" class="masthead-trips-tiles-region-class">
-                                    <div id="trips-tiles" class="column trips-tiles-class">
-                                        <div>
-                                            <a onclick="showPopUp()" class="single-tile is-create-trip">
-                                                <div class="tile-content">
-                                                    <span class="ui_icon plus"></span>
-                                                    <div class="create-trip-text">ایجاد سفر</div>
-                                                </div>
-                                            </a>
-
-                                            {{--                                        @foreach($trips as $trip)--}}
-                                            {{--                                        <div id="mainDivTripImageRecentViewBodyProfile"--}}
-                                            {{--                                                 onclick="document.location.href = '{{route('tripPlaces', ['tripId' => $trip->id])}}'" --}}
-                                            {{--                                             class="trip-images ui_columns is-gapless is-multiline is-mobile">--}}
-                                            {{--                                                @if($trip->placeCount > 0)--}}
-                                            {{--                                                    <div class="trip-image ui_column is-6" style="background: url('{{$trip->pic1}}') repeat 0 0; background-size: 100% 100%"></div>--}}
-                                            {{--                                                @else--}}
-                                            {{--                                            <div class="bg-color-recentlyViewBodyProfile trip-image trip-image-empty ui_column is-6"></div>--}}
-                                            {{--                                                @endif--}}
-                                            {{--                                                @if($trip->placeCount > 1)--}}
-                                            {{--                                                    <div class="trip-image ui_column is-6" style="background: url('{{$trip->pic2}}')  repeat 0 0; background-size: 100% 100%"></div>--}}
-                                            {{--                                                @else--}}
-                                            {{--                                                    <div class="bg-color-recentlyViewBodyProfile trip-image trip-image-empty ui_column is-6"></div>--}}
-                                            {{--                                                @endif--}}
-                                            {{--                                                @if($trip->placeCount > 2)--}}
-                                            {{--                                                    <div class="trip-image ui_column is-6" style="background: url('{{$trip->pic3}}') repeat 0 0; background-size: 100% 100%"></div>--}}
-                                            {{--                                                @else--}}
-                                            {{--                                                    <div class="bg-color-recentlyViewBodyProfile trip-image trip-image-empty ui_column is-6"></div>--}}
-                                            {{--                                                @endif--}}
-                                            {{--                                                @if($trip->placeCount > 3)--}}
-                                            {{--                                                    <div class="trip-image ui_column is-6" style="background: url('{{$trip->pic4}}') repeat 0 0; background-size: 100% 100%"></div>--}}
-                                            {{--                                                @else--}}
-                                            {{--                                                    <div class="bg-color-recentlyViewBodyProfile trip-image trip-image-empty ui_column is-6"></div>--}}
-                                            {{--                                                @endif--}}
-                                            {{--                                        </div>--}}
-                                            {{--                                        <div class="create-trip-text font-size-12em">--}}
-                                            {{--                                                {{$trip->name}} --}}
-                                            {{--                                            سفر به زاینده رود--}}
-                                            {{--                                        </div>--}}
-                                            {{--                                            @if($trip->to_ != "" && $trip->from_ != "")--}}
-                                            {{--                                        <div class="create-trip-text" id="createTripTextRecentlyViewBodyProfile">--}}
-                                            {{--                                                    {{convertStringToDate2($trip->to_)}}--}}
-                                            {{--                                        29/10/1398--}}
-                                            {{--                                            <p style="">الی</p>--}}
-                                            {{--                                                    {{convertStringToDate2($trip->from_)}}--}}
-                                            {{--                                        1/11/1398--}}
-                                            {{--                                        </div>--}}
-                                            {{--                                            @else--}}
-                                            {{--                                                <div class="create-trip-text" id="createTripTextRecentlyViewBodyProfileElse">بدون تاریخ</div>--}}
-                                            {{--                                            @endif--}}
-                                            {{--                                        @endforeach--}}
-                                        </div>
+                                        <div id="filterShow" style="display: flex; flex-direction: row; flex-wrap: wrap;"></div>
                                     </div>
                                 </div>
                             </div>
-                            {{--                        <div>--}}
-                            {{--                            <div class="lp_others_createTrip">--}}
-                            {{--                                <span class="ui_icon plus"></span>--}}
-                            {{--                                <div class="lp_others_createTripText">ایجاد سفر</div>--}}
-                            {{--                            </div>--}}
-                            {{--                            --}}{{--<div onclick="document.location.href = 'http://localhost:8080/shazde/public/tripPlaces/1'" class="trip-images ui_columns is-gapless is-multiline is-mobile">--}}
-                            {{--                            --}}{{--<div class="trip-image ui_column is-6 placeCount0" style="background: url('http://localhost:8080/assets/_images/hotels/hotel_a_pedari/1')"></div>--}}
-                            {{--                            --}}{{--<div class="trip-image trip-image-empty ui_column is-6  placeCount0Else"></div>--}}
-                            {{--                            --}}{{--<div class="trip-image trip-image-empty ui_column is-6 placeCount0Else"></div>--}}
-                            {{--                            --}}{{--<div class="trip-image trip-image-empty ui_column is-6 placeCount0Else"></div>--}}
-                            {{--                            --}}{{--</div>--}}
-                            {{--                            --}}{{--<div class="lp_others_createTripText">یزد </div>--}}
-                            {{--                            --}}{{--<div class="lp_others_createTripText">--}}
-                            {{--                            --}}{{--1398/08/17--}}
-                            {{--                            --}}{{--<p>الی</p>--}}
-                            {{--                            --}}{{--1398/08/14--}}
-                            {{--                            --}}{{--</div>--}}
-                            {{--                        </div>--}}
-
-                            <div id="masthead-trips" class="masthead-trips-class">
-                                <div id="masthead-trips-tiles-region" class="masthead-trips-tiles-region-class">
-                                    <div id="trips-tiles" class="column trips-tiles-class">
-                                        <div>
-                                            <a class="single-tile is-create-trip">
-                                                <div class="tile-content">
-                                                    <img>
-                                                </div>
-                                            </a>
-
-                                            {{--                                        @foreach($trips as $trip)--}}
-                                            <div id="mainDivTripImageRecentViewBodyProfile"
-                                                 {{--                                                 onclick="document.location.href = '{{route('tripPlaces', ['tripId' => $trip->id])}}'" --}}
-                                                 class="trip-images ui_columns is-gapless is-multiline is-mobile">
-                                                {{--                                                @if($trip->placeCount > 0)--}}
-                                                {{--                                                    <div class="trip-image ui_column is-6" style="background: url('{{$trip->pic1}}') repeat 0 0; background-size: 100% 100%"></div>--}}
-                                                {{--                                                @else--}}
-                                                <div class="bg-color-recentlyViewBodyProfile trip-image trip-image-empty ui_column is-6"></div>
-                                                {{--                                                @endif--}}
-                                                {{--                                                @if($trip->placeCount > 1)--}}
-                                                {{--                                                    <div class="trip-image ui_column is-6" style="background: url('{{$trip->pic2}}')  repeat 0 0; background-size: 100% 100%"></div>--}}
-                                                {{--                                                @else--}}
-                                                {{--                                                    <div class="bg-color-recentlyViewBodyProfile trip-image trip-image-empty ui_column is-6"></div>--}}
-                                                {{--                                                @endif--}}
-                                                {{--                                                @if($trip->placeCount > 2)--}}
-                                                {{--                                                    <div class="trip-image ui_column is-6" style="background: url('{{$trip->pic3}}') repeat 0 0; background-size: 100% 100%"></div>--}}
-                                                {{--                                                @else--}}
-                                                {{--                                                    <div class="bg-color-recentlyViewBodyProfile trip-image trip-image-empty ui_column is-6"></div>--}}
-                                                {{--                                                @endif--}}
-                                                {{--                                                @if($trip->placeCount > 3)--}}
-                                                {{--                                                    <div class="trip-image ui_column is-6" style="background: url('{{$trip->pic4}}') repeat 0 0; background-size: 100% 100%"></div>--}}
-                                                {{--                                                @else--}}
-                                                {{--                                                    <div class="bg-color-recentlyViewBodyProfile trip-image trip-image-empty ui_column is-6"></div>--}}
-                                                {{--                                                @endif--}}
-                                            </div>
-                                            <div class="create-trip-text font-size-12em">
-                                                {{--                                                {{$trip->name}} --}}
-                                                سفر به زاینده رود
-                                            </div>
-                                            {{--                                            @if($trip->to_ != "" && $trip->from_ != "")--}}
-                                            <div class="create-trip-text" id="createTripTextRecentlyViewBodyProfile">
-                                                {{--                                                    {{convertStringToDate2($trip->to_)}}--}}29/10/1398
-                                                <p style="">الی</p>
-                                                {{--                                                    {{convertStringToDate2($trip->from_)}}--}}1/11/1398
-                                            </div>
-                                            {{--                                            @else--}}
-                                            {{--                                                <div class="create-trip-text" id="createTripTextRecentlyViewBodyProfileElse">بدون تاریخ</div>--}}
-                                            {{--                                            @endif--}}
-                                            {{--                                        @endforeach--}}
-                                        </div>
-                                    </div>
+                            <div class="prw_rup prw_restaurants_restaurant_filters">
+                                <div id="jfy_filter_bar_establishmentTypeFilters" class="lhrFilterBlock jfy_filter_bar_establishmentTypeFilters collapsible">
+                                    <div class="filterGroupTitle">جستجو‌ی نام</div>
+                                    {{--                                                <div class="hl_inputBox">--}}
+                                    {{--ng-change="nameFilter(nameSearch)"--}}
+                                    {{--ng-model="nameSearch"--}}
+                                    <input id="nameSearch" class="hl_inputBox" placeholder="جستجو کنید" onchange="nameFilterFunc(this.value)">
+                                    {{--                                                </div>--}}
                                 </div>
                             </div>
-                            <div id="masthead-trips" class="masthead-trips-class">
-                                <div id="masthead-trips-tiles-region" class="masthead-trips-tiles-region-class">
-                                    <div id="trips-tiles" class="column trips-tiles-class">
-                                        <div>
-                                            <a class="single-tile is-create-trip">
-                                                <div class="tile-content">
-                                                    <img>
+                            <div class="prw_rup prw_restaurants_restaurant_filters">
+                                <div id="jfy_filter_bar_establishmentTypeFilters"
+                                     class="lhrFilterBlock jfy_filter_bar_establishmentTypeFilters collapsible">
+                                    <div class="filterGroupTitle">امتیاز کاربران</div>
+                                    <div class="filterContent ui_label_group inline">
+                                        <div class="ui_input_checkbox filterItem lhrFilter filter establishmentTypeFilters establishmentTypeFilters_10591 selected 0 index_0 alwaysShowItem">
+                                            <input ng-click="RateFilter(5)" type="radio" name="AVGrate" id="c5" value="5"/>
+                                            <label for="c5"
+                                                   style="display:inline-block;"><span></span></label>
+                                            <div class="rating-widget"
+                                                 style="font-size: 1.2em; display: inline-block">
+                                                <div class="prw_rup prw_common_location_rating_simple">
+                                                    <span class="ui_bubble_rating bubble_50"></span>
                                                 </div>
-                                            </a>
-
-                                            {{--                                        @foreach($trips as $trip)--}}
-                                            <div id="mainDivTripImageRecentViewBodyProfile"
-                                                 {{--                                                 onclick="document.location.href = '{{route('tripPlaces', ['tripId' => $trip->id])}}'" --}}
-                                                 class="trip-images ui_columns is-gapless is-multiline is-mobile">
-                                                {{--                                                @if($trip->placeCount > 0)--}}
-                                                {{--                                                    <div class="trip-image ui_column is-6" style="background: url('{{$trip->pic1}}') repeat 0 0; background-size: 100% 100%"></div>--}}
-                                                {{--                                                @else--}}
-                                                <div class="bg-color-recentlyViewBodyProfile trip-image trip-image-empty ui_column is-6"></div>
-                                                {{--                                                @endif--}}
-                                                {{--                                                @if($trip->placeCount > 1)--}}
-                                                {{--                                                    <div class="trip-image ui_column is-6" style="background: url('{{$trip->pic2}}')  repeat 0 0; background-size: 100% 100%"></div>--}}
-                                                {{--                                                @else--}}
-                                                {{--                                                    <div class="bg-color-recentlyViewBodyProfile trip-image trip-image-empty ui_column is-6"></div>--}}
-                                                {{--                                                @endif--}}
-                                                {{--                                                @if($trip->placeCount > 2)--}}
-                                                {{--                                                    <div class="trip-image ui_column is-6" style="background: url('{{$trip->pic3}}') repeat 0 0; background-size: 100% 100%"></div>--}}
-                                                {{--                                                @else--}}
-                                                {{--                                                    <div class="bg-color-recentlyViewBodyProfile trip-image trip-image-empty ui_column is-6"></div>--}}
-                                                {{--                                                @endif--}}
-                                                {{--                                                @if($trip->placeCount > 3)--}}
-                                                {{--                                                    <div class="trip-image ui_column is-6" style="background: url('{{$trip->pic4}}') repeat 0 0; background-size: 100% 100%"></div>--}}
-                                                {{--                                                @else--}}
-                                                {{--                                                    <div class="bg-color-recentlyViewBodyProfile trip-image trip-image-empty ui_column is-6"></div>--}}
-                                                {{--                                                @endif--}}
                                             </div>
-                                            <div class="create-trip-text font-size-12em">
-                                                {{--                                                {{$trip->name}} --}}
-                                                سفر به زاینده رود
+                                        </div>
+                                        <div class="ui_input_checkbox filterItem lhrFilter filter establishmentTypeFilters establishmentTypeFilters_10591 selected 0 index_0 alwaysShowItem">
+                                            <input  ng-click="RateFilter(4)" type="radio" name="AVGrate" id="c4" value="4"/>
+                                            <label for="c4"
+                                                   style="display:inline-block;"><span></span></label>
+                                            <div class="rating-widget"
+                                                 style="font-size: 1.2em; display: inline-block">
+                                                <div class="prw_rup prw_common_location_rating_simple">
+                                                    <span class="ui_bubble_rating bubble_40"></span>
+                                                </div>
                                             </div>
-                                            {{--                                            @if($trip->to_ != "" && $trip->from_ != "")--}}
-                                            <div class="create-trip-text" id="createTripTextRecentlyViewBodyProfile">
-                                                {{--                                                    {{convertStringToDate2($trip->to_)}}--}}29/10/1398
-                                                <p style="">الی</p>
-                                                {{--                                                    {{convertStringToDate2($trip->from_)}}--}}1/11/1398
+                                            <span> به بالا</span>
+                                        </div>
+                                        <div class="ui_input_checkbox filterItem lhrFilter filter establishmentTypeFilters establishmentTypeFilters_10591 selected 0 index_0 alwaysShowItem">
+                                            <input ng-click="RateFilter(3)" type="radio" name="AVGrate" id="c3" value="3"/>
+                                            <label for="c3"
+                                                   style="display:inline-block;"><span></span></label>
+                                            <div class="rating-widget"
+                                                 style="font-size: 1.2em; display: inline-block">
+                                                <div class="prw_rup prw_common_location_rating_simple">
+                                                    <span class="ui_bubble_rating bubble_30"></span>
+                                                </div>
                                             </div>
-                                            {{--                                            @else--}}
-                                            {{--                                                <div class="create-trip-text" id="createTripTextRecentlyViewBodyProfileElse">بدون تاریخ</div>--}}
-                                            {{--                                            @endif--}}
-                                            {{--                                        @endforeach--}}
+                                            <span> به بالا</span>
+                                        </div>
+                                        <div class="ui_input_checkbox filterItem lhrFilter filter establishmentTypeFilters establishmentTypeFilters_10591 selected 0 index_0 alwaysShowItem">
+                                            <input ng-click="RateFilter(2)" type="radio" name="AVGrate" id="c2" value="2"/>
+                                            <label for="c2"
+                                                   style="display:inline-block;"><span></span></label>
+                                            <div class="rating-widget"
+                                                 style="font-size: 1.2em; display: inline-block">
+                                                <div class="prw_rup prw_common_location_rating_simple">
+                                                    <span class="ui_bubble_rating bubble_20"></span>
+                                                </div>
+                                            </div>
+                                            <span> به بالا</span>
+                                        </div>
+                                        <div class="ui_input_checkbox filterItem lhrFilter filter establishmentTypeFilters establishmentTypeFilters_10591 selected 0 index_0 alwaysShowItem">
+                                            <input ng-click="RateFilter(1)" type="radio" name="AVGrate" id="c1" value="1"/>
+                                            <label for="c1"
+                                                   style="display:inline-block;"><span></span></label>
+                                            <div class="rating-widget"
+                                                 style="font-size: 1.2em; display: inline-block">
+                                                <div class="prw_rup prw_common_location_rating_simple">
+                                                    <span class="ui_bubble_rating bubble_10"></span>
+                                                </div>
+                                            </div>
+                                            <span> به بالا</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="bottomBarContainer"></div>
+                            @if($kindPlace->id == 4)
+                                @include('places.list.filters.hotelFilters')
+                            @endif
+
+                            @foreach($features as $feature)
+                                <div class="prw_rup prw_restaurants_restaurant_filters">
+                                    <div class="lhrFilterBlock jfy_filter_bar_establishmentTypeFilters collapsible">
+                                        <div style="display: flex; justify-content: space-between;">
+                                            <div class="filterGroupTitle">{{$feature->name}}</div>
+                                            @if(count($feature->subFeat) > 5)
+                                                <span onclick="showMoreItems({{$feature->id}})" class="moreItems{{$feature->id}} moreItems">نمایش کامل فیلترها</span>
+                                                <span onclick="showLessItems({{$feature->id}})" class="lessItems hidden extraItem{{$feature->id}} moreItems">پنهان سازی فیلتر‌ها</span>
+                                            @endif
+                                        </div>
+
+                                        <div class="filterContent ui_label_group inline">
+                                            @for($i = 0; $i < 5 && $i < count($feature->subFeat); $i++)
+                                                <div class="ui_input_checkbox filterItem lhrFilter filter establishmentTypeFilters establishmentTypeFilters_10591 selected 0 index_0 alwaysShowItem">
+                                                    <input ng-disabled="isDisable()" ng-click="doFilterFeature({{$feature->subFeat[$i]->id}})" type="checkbox" id="feat{{$feature->subFeat[$i]->id}}" value="{{$feature->subFeat[$i]->name}}"/>
+                                                    <label for="feat{{$feature->subFeat[$i]->id}}"><span></span>&nbsp;&nbsp;{{$feature->subFeat[$i]->name}}  </label>
+                                                </div>
+                                            @endfor
+
+                                            @if(count($feature->subFeat) > 5)
+                                                @for($i = 5; $i < count($feature->subFeat); $i++)
+                                                    <div class="ui_input_checkbox filterItem lhrFilter filter establishmentTypeFilters extraItem{{$feature->id}}">
+                                                        <input ng-disabled="isDisable()" ng-click="doFilterFeature({{$feature->subFeat[$i]->id}})" type="checkbox" id="feat{{$feature->subFeat[$i]->id}}" value="{{$feature->subFeat[$i]->name}}"/>
+                                                        <label for="feat{{$feature->subFeat[$i]->id}}"><span></span>&nbsp;&nbsp; {{$feature->subFeat[$i]->name}} </label>
+                                                    </div>
+                                                @endfor
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
 
                         </div>
+                    </div>
 
+                    {{--left menu--}}
+                    <div id="lp_ar_leftFilters" class="lp_ar_contentOfFilters hidden">
+                        <div id="FilterTopController" class="title ui_columns hideOnPhone" style="border-bottom: 1px solid lightgray;">
+                            <div class="ordering" style="font-weight: bold">مرتب سازی بر
+                                اساس:
+                            </div>
+                            <div class="ordering">
+                                <div class="orders" onclick="selectingOrder($(this),'review')" ng-click="sortFunc('review')" id="z1">
+                                    بیشترین نظر
+                                </div>
+                            </div>
+                            <div class="ordering">
+                                <div class="orders selectOrder" onclick="selectingOrder($(this), 'rate')" ng-click="sortFunc('rate')" id="z2">
+                                    بهترین بازخورد
+                                </div>
+                            </div>
+                            <div class="ordering">
+                                <div class="orders" onclick="selectingOrder($(this), 'seen')" ng-click="sortFunc('seen')" id="z3">
+                                    بیشترین بازدید
+                                </div>
+                            </div>
+                            <div class="ordering">
+                                <div class="orders" ng-click="sortFunc('alphabet')" onclick="selectingOrder($(this), 'alphabet')" id="z4" >
+                                    حروف الفبا
+                                </div>
+                            </div>
+                            @if($kindPlace->id != 10 && $kindPlace->id != 11)
+                                <div class="ordering"  >
+                                    <div id="distanceNav" class="orders" style="width: 140% !important;" onclick="openGlobalSearch()">کمترین فاصله تا
+                                        <span id="selectDistance">__ __ __</span>
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
                     </div>
                 </div>
+            @else
+                <div class="mainPopUp leftPopUp recentViewLeftBar">
+                    {{--each menu--}}
+                    <div>
+                        <div class="lp_others_content" id="lp_others_recentlyViews">
+                            <div class="lp_others_titles"> بازدید‌های اخیر </div>
+                            <div class="mainContainerBookmarked">
+                                <div id="phoneRecentlyView">
 
-                <div class="lp_phoneMenuBar">
+                                    <div class="masthead-recent-class">
+                                        <a class="lp_others_recentView" target="_self" href="##placeRedirect##">
+                                            <div class="lp_others_rvPicBox col-xs-8">
+                                                <img src="##placePic##" style="width: 100%;">
+                                            </div>
+                                            <div class="col-xs-4 placeDetailsLeftBar">
+                                                <div class="">##placeName##</div>
+                                                <div class="lp_others_rating">
+                                                    <div class="ui_bubble_rating bubble_##placeRate##0"></div>
+                                                    <br>##placeReviews## نقد
+                                                </div>
+                                                <div class="">##placeCity##</div>
+                                            </div>
+                                        </a>
+                                    </div>
+
+                                </div>
+                                <div class="bottomBarContainer"></div>
+                            </div>
+                        </div>
+
+                        <div class="lp_others_content hidden" id="lp_others_messages" style="overflow-y: scroll">
+                            <div id="phoneMessages" class="lp_others_titles"> اعلانات </div>
+                            <div id="noMessagePhone" class="lp_others_noMessages">هیچ پیام جدیدی موجود نیست</div>
+                        </div>
+
+                        <div class="lp_others_content hidden" id="lp_others_mark">
+                            <div class="lp_others_titles"> نشان‌گذاری شده‌ها </div>
+                            <div class="mainContainerBookmarked">
+                                <div id="phoneBookMarks">
+                                    <div class="masthead-recent-class">
+                                        <a class="lp_others_recentView" target="_self" href="##placeRedirect##">
+                                            <div class="lp_others_rvPicBox col-xs-8">
+                                                <img src="##placePic##" style="width: 100%;">
+                                            </div>
+                                            <div class="col-xs-4 placeDetailsLeftBar">
+                                                <div class="">##placeName##</div>
+                                                <div class="lp_others_rating">
+                                                    <div class="ui_bubble_rating bubble_##placeRate##0"></div>
+                                                    <br>##placeReviews## نقد
+                                                </div>
+                                                <div class="">##placeCity##</div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="bottomBarContainer"></div>
+                            </div>
+                        </div>
+
+                        <div class="lp_others_content hidden" id="lp_others_myTravel">
+                            <div class="lp_others_titles">
+                                <a class="trips-header" target="_self" href="{{URL('myTrips')}}">سفرهای من </a>
+                            </div>
+
+                            <div class="tripsBoxesMainDiv">
+
+                                <div id="masthead-trips" class="masthead-trips-class">
+                                    <div id="masthead-trips-tiles-region" class="masthead-trips-tiles-region-class">
+                                        <div id="trips-tiles" class="column trips-tiles-class">
+                                            <div>
+                                                <a onclick="showPopUp()" class="single-tile is-create-trip">
+                                                    <div class="tile-content">
+                                                        <span class="ui_icon plus"></span>
+                                                        <div class="create-trip-text">ایجاد سفر</div>
+                                                    </div>
+                                                </a>
+
+                                                {{--                                        @foreach($trips as $trip)--}}
+                                                {{--                                        <div id="mainDivTripImageRecentViewBodyProfile"--}}
+                                                {{--                                                 onclick="document.location.href = '{{route('tripPlaces', ['tripId' => $trip->id])}}'" --}}
+                                                {{--                                             class="trip-images ui_columns is-gapless is-multiline is-mobile">--}}
+                                                {{--                                                @if($trip->placeCount > 0)--}}
+                                                {{--                                                    <div class="trip-image ui_column is-6" style="background: url('{{$trip->pic1}}') repeat 0 0; background-size: 100% 100%"></div>--}}
+                                                {{--                                                @else--}}
+                                                {{--                                            <div class="bg-color-recentlyViewBodyProfile trip-image trip-image-empty ui_column is-6"></div>--}}
+                                                {{--                                                @endif--}}
+                                                {{--                                                @if($trip->placeCount > 1)--}}
+                                                {{--                                                    <div class="trip-image ui_column is-6" style="background: url('{{$trip->pic2}}')  repeat 0 0; background-size: 100% 100%"></div>--}}
+                                                {{--                                                @else--}}
+                                                {{--                                                    <div class="bg-color-recentlyViewBodyProfile trip-image trip-image-empty ui_column is-6"></div>--}}
+                                                {{--                                                @endif--}}
+                                                {{--                                                @if($trip->placeCount > 2)--}}
+                                                {{--                                                    <div class="trip-image ui_column is-6" style="background: url('{{$trip->pic3}}') repeat 0 0; background-size: 100% 100%"></div>--}}
+                                                {{--                                                @else--}}
+                                                {{--                                                    <div class="bg-color-recentlyViewBodyProfile trip-image trip-image-empty ui_column is-6"></div>--}}
+                                                {{--                                                @endif--}}
+                                                {{--                                                @if($trip->placeCount > 3)--}}
+                                                {{--                                                    <div class="trip-image ui_column is-6" style="background: url('{{$trip->pic4}}') repeat 0 0; background-size: 100% 100%"></div>--}}
+                                                {{--                                                @else--}}
+                                                {{--                                                    <div class="bg-color-recentlyViewBodyProfile trip-image trip-image-empty ui_column is-6"></div>--}}
+                                                {{--                                                @endif--}}
+                                                {{--                                        </div>--}}
+                                                {{--                                        <div class="create-trip-text font-size-12em">--}}
+                                                {{--                                                {{$trip->name}} --}}
+                                                {{--                                            سفر به زاینده رود--}}
+                                                {{--                                        </div>--}}
+                                                {{--                                            @if($trip->to_ != "" && $trip->from_ != "")--}}
+                                                {{--                                        <div class="create-trip-text" id="createTripTextRecentlyViewBodyProfile">--}}
+                                                {{--                                                    {{convertStringToDate2($trip->to_)}}--}}
+                                                {{--                                        29/10/1398--}}
+                                                {{--                                            <p style="">الی</p>--}}
+                                                {{--                                                    {{convertStringToDate2($trip->from_)}}--}}
+                                                {{--                                        1/11/1398--}}
+                                                {{--                                        </div>--}}
+                                                {{--                                            @else--}}
+                                                {{--                                                <div class="create-trip-text" id="createTripTextRecentlyViewBodyProfileElse">بدون تاریخ</div>--}}
+                                                {{--                                            @endif--}}
+                                                {{--                                        @endforeach--}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{--                        <div>--}}
+                                {{--                            <div class="lp_others_createTrip">--}}
+                                {{--                                <span class="ui_icon plus"></span>--}}
+                                {{--                                <div class="lp_others_createTripText">ایجاد سفر</div>--}}
+                                {{--                            </div>--}}
+                                {{--                            --}}{{--<div onclick="document.location.href = 'http://localhost:8080/shazde/public/tripPlaces/1'" class="trip-images ui_columns is-gapless is-multiline is-mobile">--}}
+                                {{--                            --}}{{--<div class="trip-image ui_column is-6 placeCount0" style="background: url('http://localhost:8080/assets/_images/hotels/hotel_a_pedari/1')"></div>--}}
+                                {{--                            --}}{{--<div class="trip-image trip-image-empty ui_column is-6  placeCount0Else"></div>--}}
+                                {{--                            --}}{{--<div class="trip-image trip-image-empty ui_column is-6 placeCount0Else"></div>--}}
+                                {{--                            --}}{{--<div class="trip-image trip-image-empty ui_column is-6 placeCount0Else"></div>--}}
+                                {{--                            --}}{{--</div>--}}
+                                {{--                            --}}{{--<div class="lp_others_createTripText">یزد </div>--}}
+                                {{--                            --}}{{--<div class="lp_others_createTripText">--}}
+                                {{--                            --}}{{--1398/08/17--}}
+                                {{--                            --}}{{--<p>الی</p>--}}
+                                {{--                            --}}{{--1398/08/14--}}
+                                {{--                            --}}{{--</div>--}}
+                                {{--                        </div>--}}
+
+                                <div id="masthead-trips" class="masthead-trips-class">
+                                    <div id="masthead-trips-tiles-region" class="masthead-trips-tiles-region-class">
+                                        <div id="trips-tiles" class="column trips-tiles-class">
+                                            <div>
+                                                <a class="single-tile is-create-trip">
+                                                    <div class="tile-content">
+                                                        <img>
+                                                    </div>
+                                                </a>
+
+                                                {{--                                        @foreach($trips as $trip)--}}
+                                                <div id="mainDivTripImageRecentViewBodyProfile"
+                                                     {{--                                                 onclick="document.location.href = '{{route('tripPlaces', ['tripId' => $trip->id])}}'" --}}
+                                                     class="trip-images ui_columns is-gapless is-multiline is-mobile">
+                                                    {{--                                                @if($trip->placeCount > 0)--}}
+                                                    {{--                                                    <div class="trip-image ui_column is-6" style="background: url('{{$trip->pic1}}') repeat 0 0; background-size: 100% 100%"></div>--}}
+                                                    {{--                                                @else--}}
+                                                    <div class="bg-color-recentlyViewBodyProfile trip-image trip-image-empty ui_column is-6"></div>
+                                                    {{--                                                @endif--}}
+                                                    {{--                                                @if($trip->placeCount > 1)--}}
+                                                    {{--                                                    <div class="trip-image ui_column is-6" style="background: url('{{$trip->pic2}}')  repeat 0 0; background-size: 100% 100%"></div>--}}
+                                                    {{--                                                @else--}}
+                                                    {{--                                                    <div class="bg-color-recentlyViewBodyProfile trip-image trip-image-empty ui_column is-6"></div>--}}
+                                                    {{--                                                @endif--}}
+                                                    {{--                                                @if($trip->placeCount > 2)--}}
+                                                    {{--                                                    <div class="trip-image ui_column is-6" style="background: url('{{$trip->pic3}}') repeat 0 0; background-size: 100% 100%"></div>--}}
+                                                    {{--                                                @else--}}
+                                                    {{--                                                    <div class="bg-color-recentlyViewBodyProfile trip-image trip-image-empty ui_column is-6"></div>--}}
+                                                    {{--                                                @endif--}}
+                                                    {{--                                                @if($trip->placeCount > 3)--}}
+                                                    {{--                                                    <div class="trip-image ui_column is-6" style="background: url('{{$trip->pic4}}') repeat 0 0; background-size: 100% 100%"></div>--}}
+                                                    {{--                                                @else--}}
+                                                    {{--                                                    <div class="bg-color-recentlyViewBodyProfile trip-image trip-image-empty ui_column is-6"></div>--}}
+                                                    {{--                                                @endif--}}
+                                                </div>
+                                                <div class="create-trip-text font-size-12em">
+                                                    {{--                                                {{$trip->name}} --}}
+                                                    سفر به زاینده رود
+                                                </div>
+                                                {{--                                            @if($trip->to_ != "" && $trip->from_ != "")--}}
+                                                <div class="create-trip-text" id="createTripTextRecentlyViewBodyProfile">
+                                                    {{--                                                    {{convertStringToDate2($trip->to_)}}--}}29/10/1398
+                                                    <p style="">الی</p>
+                                                    {{--                                                    {{convertStringToDate2($trip->from_)}}--}}1/11/1398
+                                                </div>
+                                                {{--                                            @else--}}
+                                                {{--                                                <div class="create-trip-text" id="createTripTextRecentlyViewBodyProfileElse">بدون تاریخ</div>--}}
+                                                {{--                                            @endif--}}
+                                                {{--                                        @endforeach--}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="masthead-trips" class="masthead-trips-class">
+                                    <div id="masthead-trips-tiles-region" class="masthead-trips-tiles-region-class">
+                                        <div id="trips-tiles" class="column trips-tiles-class">
+                                            <div>
+                                                <a class="single-tile is-create-trip">
+                                                    <div class="tile-content">
+                                                        <img>
+                                                    </div>
+                                                </a>
+
+                                                {{--                                        @foreach($trips as $trip)--}}
+                                                <div id="mainDivTripImageRecentViewBodyProfile"
+                                                     {{--                                                 onclick="document.location.href = '{{route('tripPlaces', ['tripId' => $trip->id])}}'" --}}
+                                                     class="trip-images ui_columns is-gapless is-multiline is-mobile">
+                                                    {{--                                                @if($trip->placeCount > 0)--}}
+                                                    {{--                                                    <div class="trip-image ui_column is-6" style="background: url('{{$trip->pic1}}') repeat 0 0; background-size: 100% 100%"></div>--}}
+                                                    {{--                                                @else--}}
+                                                    <div class="bg-color-recentlyViewBodyProfile trip-image trip-image-empty ui_column is-6"></div>
+                                                    {{--                                                @endif--}}
+                                                    {{--                                                @if($trip->placeCount > 1)--}}
+                                                    {{--                                                    <div class="trip-image ui_column is-6" style="background: url('{{$trip->pic2}}')  repeat 0 0; background-size: 100% 100%"></div>--}}
+                                                    {{--                                                @else--}}
+                                                    {{--                                                    <div class="bg-color-recentlyViewBodyProfile trip-image trip-image-empty ui_column is-6"></div>--}}
+                                                    {{--                                                @endif--}}
+                                                    {{--                                                @if($trip->placeCount > 2)--}}
+                                                    {{--                                                    <div class="trip-image ui_column is-6" style="background: url('{{$trip->pic3}}') repeat 0 0; background-size: 100% 100%"></div>--}}
+                                                    {{--                                                @else--}}
+                                                    {{--                                                    <div class="bg-color-recentlyViewBodyProfile trip-image trip-image-empty ui_column is-6"></div>--}}
+                                                    {{--                                                @endif--}}
+                                                    {{--                                                @if($trip->placeCount > 3)--}}
+                                                    {{--                                                    <div class="trip-image ui_column is-6" style="background: url('{{$trip->pic4}}') repeat 0 0; background-size: 100% 100%"></div>--}}
+                                                    {{--                                                @else--}}
+                                                    {{--                                                    <div class="bg-color-recentlyViewBodyProfile trip-image trip-image-empty ui_column is-6"></div>--}}
+                                                    {{--                                                @endif--}}
+                                                </div>
+                                                <div class="create-trip-text font-size-12em">
+                                                    {{--                                                {{$trip->name}} --}}
+                                                    سفر به زاینده رود
+                                                </div>
+                                                {{--                                            @if($trip->to_ != "" && $trip->from_ != "")--}}
+                                                <div class="create-trip-text" id="createTripTextRecentlyViewBodyProfile">
+                                                    {{--                                                    {{convertStringToDate2($trip->to_)}}--}}29/10/1398
+                                                    <p style="">الی</p>
+                                                    {{--                                                    {{convertStringToDate2($trip->from_)}}--}}1/11/1398
+                                                </div>
+                                                {{--                                            @else--}}
+                                                {{--                                                <div class="create-trip-text" id="createTripTextRecentlyViewBodyProfileElse">بدون تاریخ</div>--}}
+                                                {{--                                            @endif--}}
+                                                {{--                                        @endforeach--}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="bottomBarContainer"></div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="lp_phoneMenuBar">
                     <div class="lp_eachMenu" onclick="lp_selectMenu('lp_others_myTravel', this)">
                         <div class="ui_icon my-trips lp_icons"></div>
                         <div>سفرهای من</div>
@@ -835,8 +1015,7 @@
                         <div>بازدیدهای اخیر</div>
                     </div>
                 </div>
-
-            </div>
+                </div>
             @endif
         </div>
 
