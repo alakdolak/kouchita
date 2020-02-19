@@ -166,10 +166,14 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     margin: 0;
 }
 
-#result {
+.resultStyles {
     max-height: 160px;
     overflow: auto;
-    margin-top: 10px;
+    padding-top: 10px;
+    border: solid #ccc;
+    margin-top: -3px;
+    border-radius: 0 0 5px 5px;
+    border-width: 0 1px 1px;
 }
 
 .topicLabel {
@@ -207,12 +211,12 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     bottom: auto;
 }
 
-#reportPrompt .header_text {
-    font-size: 15px;
+#reportPrompt .header_text, #deleteMsg .header_text {
+    font-size: 18px;
     font-weight: 700;
 }
 
-#reportPrompt::before {
+#reportPrompt::before, #blockPrompt::before, #deleteMsg::before, .showMsgContainerStyles::before {
     display: none;
     padding-top: 15px;
     padding-bottom: 15px;
@@ -229,6 +233,19 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     border-color: #4dc7bc;
 }
 
+#reportPrompt .ui_close_x, #blockPrompt .ui_close_x, #deleteMsg .ui_close_x, .showMsgContainerStyles .ui_close_x {
+    right: initial;
+    left: 0;
+}
+
+#blocks .ui_input_checkbox {
+    float: right;
+}
+
+#memberTags {
+    padding: 0 0 5px 10px;
+}
+
 .showMsgContainerStyles {
     visibility: hidden;
     bottom: auto;
@@ -236,31 +253,47 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     position: fixed;
     right: auto;
     top: 15%;
-    width: 36%;
+}
+
+.showMsgContainerStyles .subheader_text {
+    text-align: justify;
 }
 
 #blockPrompt {
     visibility: hidden;
     position: fixed;
-    left: 34%;
-    right: auto;
+    left: 28%;
+    right: 28%;
     top: 29%;
     bottom: auto;
-    width: 30%;
+    padding: 25px 35px;
 }
 
 #blockPrompt .header_text {
     margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: 700;
 }
 
-.ui_overlay.ui_modal.editTags.deleteMessage {
+#blockPrompt p, #deleteMsg p {
+    font-size: 13px;
+    line-height: 1.8;
+    text-align: justify;
+
+}
+
+#deleteMsg p {
+    margin-bottom: -15px;
+    font-size: 15px;
+}
+
+#deleteMsg {
     visibility: hidden;
     position: fixed;
     left: 37%;
-    right: auto;
+    right: 37%;
     top: 29%;
     bottom: auto;
-    width: 26%;
 }
 
 .deleteSelectedMessagesBtn {
@@ -286,6 +319,7 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     max-height: 200px;
     height: 200px;
     overflow: auto;
+    line-height: 1.8;
 }
 
 .sendFromMainDiv {
@@ -389,6 +423,16 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
         left: 20%;
     }
 
+    #blockPrompt, .showMsgContainerStyles {
+        right: 23%;
+        left: 23%;
+    }
+
+    #deleteMsg {
+        left: 35%;
+        right: 35%;
+    }
+
 }
 
 @media (max-width: 1035px) {
@@ -396,6 +440,16 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     #reportPrompt {
         right: 15%;
         left: 15%;
+    }
+
+    #blockPrompt, .showMsgContainerStyles {
+        left: 20%;
+        right: 20%;
+    }
+
+    #deleteMsg {
+        left: 32%;
+        right: 32%;
     }
 
 }
@@ -408,30 +462,35 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
         padding: 15px 35px 15px 15px;
     }
 
-}
-
-@media (max-width: 820px) {
-    .floatLeft.affix {
-        width: 145px;
+    #blockPrompt, .showMsgContainerStyles {
+        left: 12%;
+        right: 12%;
     }
+
+    #deleteMsg {
+        left: 30%;
+        right: 30%;
+        padding: 35px;
+    }
+
 }
 
 @media (max-width: 700px) {
-
-    .floatLeft.affix {
-        width: 145px;
-    }
 
     #reportPrompt {
         right: 2%;
         left: 2%;
         padding: 35px 10px 35px 10px;
     }
-}
 
-@media (max-width: 675px) {
-    .floatLeft.affix {
-        width: 140px;
+    #blockPrompt, .showMsgContainerStyles {
+        left: 2%;
+        right: 2%;
+    }
+
+    #deleteMsg {
+        left: 24%;
+        right: 24%;
     }
 }
 
@@ -450,15 +509,9 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
         font-size: 25px;
     }
 
-    .floatLeft.affix {
-        width: 120px;
-    }
-}
-
-@media (max-width: 495px) {
-
-    .floatLeft.affix {
-        width: 110px;
+    #deleteMsg {
+        left: 20%;
+        right: 20%;
     }
 }
 
@@ -522,6 +575,11 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     #sendMsgDiv {
         margin-top: 50px;
     }
+
+    #deleteMsg {
+        left: 12%;
+        right: 12%;
+    }
 }
 
 @media (max-width: 370px) {
@@ -532,6 +590,11 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
 
     .memberProfile div.messagingButton, #MESSAGES_CONTENT div.messagingButton {
         margin: 1px 2px 5px 0;
+    }
+
+    #deleteMsg {
+        left: 6%;
+        right: 6%;
     }
 }
 

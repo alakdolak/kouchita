@@ -245,9 +245,9 @@
 
             <span id="blockPrompt" class="ui_overlay ui_modal editTags">
                     <div class="header_text">محدود سازی ارتباط</div>
-                    <p>کاربران زیر با شما در ارتباط هستند با انتخاب آن ها، ارتباطشان با خود را محدود می سازید.</p>
+                    <p>کاربران زیر با شما در ارتباط هستند با انتخاب آن‌ها، ارتباطشان با خود را محدود می‌سازید.</p>
 
-                    <p class="font-size-10">برای رفع محدودیت ، کاربر مورد نظر را از حالت انخاب خارج نمایید.</p>
+                    <p class="font-size-10">برای رفع محدودیت، کاربر مورد نظر را از حالت انخاب خارج نمایید.</p>
                     <div class="subheader_text">
                         لیست کاربران
                     </div>
@@ -267,7 +267,7 @@
             </span>
 
             <span class="ui_overlay ui_modal editTags deleteMessage" id="deleteMsg">
-                <p>آیا از پاک کردن پیام اطمینان دارید ؟</p>
+                <p>آیا از پاک کردن پیام اطمینان دارید؟</p>
                 <br><br>
                 <div class="body_text">
 
@@ -366,6 +366,7 @@
                             newElement += "<p class='cursor-pointer' onclick='setUserName(\"" + response[i].username + "\")'>" + response[i].username + "</p>";
                         }
 
+                        $("#result").empty().addClass('resultStyles');
                         $("#result").append(newElement);
                     }
 
@@ -376,7 +377,8 @@
 
         function setUserName(val) {
             $("#name").val(val);
-            $("#result").empty();
+            $("#result").empty().removeClass('resultStyles');
+
         }
 
         function customReport(element, checkBoxId) {
