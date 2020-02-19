@@ -16,57 +16,18 @@
     @endforeach
 
     <style>
-        p{
+        p {
             font-size: 20px;
         }
+        ol, ul{
+            padding: 15px;
+        }
     </style>
+    <script src="{{URL::asset('js/autosize.min.js')}}"></script>
 
 @endsection
 
 @section('body')
-
-    <div id="darkModal" class="display-none" role="dialog"></div>
-
-    <div class="hidden visible-sm visible-xs hideOnPhone">
-        <div class="im-header-mobile">
-            <div class="im-main-header clearfix light">
-                <div class='container'>
-                    <div class="row">
-                        <div class="im-off-canvas col-sm-2 col-xs-2">
-                            <button id="off-canvas-on" class="off-canvas-on"><i class="fa fa-navicon"></i></button>
-                        </div>
-                        <div class="im-mobile-logo col-sm-8 col-xs-8">
-                        </div>
-                        <div class="im-search im-slide-block col-sm-2 col-xs-2">
-                            <div class="search-btn slide-btn">
-                                <i class="fa fa-search"></i>
-                                <div class="im-search-panel im-slide-panel">
-                                    <form action="" name="searchform" method="get">
-                                        <fieldset class="search-fieldset">
-                                            <div class="input-group">
-                                                <input type="search" class="form-control" name="s"
-                                                       placeholder="عبارت جستجو را اینجا وارد کنید..." required/>
-                                                <span class="input-group-btn">
-                                                    <input type="submit" class="btn btn-default" value="بگرد"/>
-                                                </span>
-                                            </div>
-                                        </fieldset>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="im-header-mobile-ad col-md-12 text-center">
-                <p>
-                    <img class="aligncenter size-full wp-image-4151" src="{{URL::asset('images/gardeshname_banner.jpg')}}" alt="شازده مسافر" width="1600" height="365"/>
-                </p>
-            </div>
-        </div>
-    </div>
 
     <div class="container" style="direction: rtl">
         <div class="col-md-3 col-sm-12 hideOnPhone" style="padding-right: 0 !important;">
@@ -82,8 +43,8 @@
                 </div>
                 <div class="gnContentsCategory">
                     <div class="row" style="width: 100%; margin: 0px;">
-                        <div id="rightCategory" class="col-md-6" style="padding: 0px 5px"></div>
-                        <div id="leftCategory" class="col-md-6" style="padding: 0px 5px"></div>
+                        <div class="col-md-6 rightCategory" style="padding: 0px 5px"></div>
+                        <div class="col-md-6 leftCategory" style="padding: 0px 5px"></div>
                     </div>
                 </div>
             </div>
@@ -116,7 +77,7 @@
                     @endif
                 @endif
 
-                <input type="text" id="searchCityInArticleInput" class="gnInput" placeholder="شهر موردنظر خود را وارد کنید" readonly>
+                <input type="text" class="gnInput searchCityInArticleInput" placeholder="شهر موردنظر خود را وارد کنید" readonly>
             </div>
 
             <div class="col-md-12 gnWhiteBox">
@@ -270,6 +231,7 @@
                         </div>
                         <div class="commentsContentMainBox">
                             <b class="userProfileName display-inline-block">##username##</b>
+                            <span class="label label-success" style="display: ##status1##;">در انتظار تایید</span>
                             <p style="white-space: pre-line">##msg##</p>
                             <div class="commentsStatisticsBar">
                                 <div class="float-right display-inline-black">
@@ -280,7 +242,7 @@
                                 <div class="dark-blue float-left display-inline-black cursor-pointer" onclick="showPostsComments(##id##)" style="display: ##haveAnsDisplay##;">دیدن پاسخ‌ها</div>
                             </div>
                         </div>
-                        <div class="commentsActionsBtns">
+                        <div class="commentsActionsBtns" style="display: ##status2##;">
                             <div onclick="likeComment(##id##, 1, this);">
                                 <span class="likeActionBtn ##showLike##"></span>
                             </div>
@@ -364,6 +326,23 @@
                 re = new RegExp(t, "g");
                 text = text.replace(re, userPic);
 
+                if(comments[i]['status'] == 0){
+                    t = '##status1##';
+                    re = new RegExp(t, "g");
+                    text = text.replace(re, 'inline-block');
+                    t = '##status2##';
+                    re = new RegExp(t, "g");
+                    text = text.replace(re, 'none');
+                }
+                else{
+                    t = '##status1##';
+                    re = new RegExp(t, "g");
+                    text = text.replace(re, 'none');
+                    t = '##status2##';
+                    re = new RegExp(t, "g");
+                    text = text.replace(re, 'block');
+                }
+
                 if(comments[i]['userLike'] == 1){
                     t = '##showLike##';
                     re = new RegExp(t, "g");
@@ -396,13 +375,13 @@
                     $('#commentDiv' + srcId).append(text);
                 }
             }
-
         }
         createComment(0, comments);
 
         $(window).ready(function(){
-            for(var i = 0; i < post['category'].length; i++)
-                $('#CategoryName_' + post['category'][i]['categoryId']).css('color', '#4DC7BC');
+
+            autosize($(".inputBoxInputComment"));
+            autosize($(".inputBoxInputAnswer"));
         });
     </script>
 @endsection

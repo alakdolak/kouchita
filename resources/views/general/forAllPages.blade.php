@@ -34,3 +34,14 @@
 @if(!Auth::check())
     @include('layouts.loginPopUp')
 @endif
+
+<script>
+    function checkLogin(){
+        if (!hasLogin) {
+            showLoginPrompt(requestUrl);
+            return false;
+        }
+        else
+            return true;
+    }
+</script>

@@ -1,9 +1,12 @@
-<?php $config = \App\models\ConfigModel::first() ?>
+<?php
+$config = \App\models\ConfigModel::first()
+?>
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/footer.css')}}' />
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/icons.css?v=1')}}'/>
 
 {{--footer html--}}
-<div class="clear-both"></div>
+<div class="clear-both" style="height: 75px"></div>
+
 <footer>
     <div class="hideOnPhone screenFooterStyle">
         {{--top footer--}}
@@ -200,8 +203,25 @@
                     <span>سلام</span>
                     <span>{{auth()->user()->username}}</span>
                 </div>
+                <?php
+                    if(auth()->check()){
+                        $u = Auth::user();
+                        $uId = $u->id;
+                        $userCode = $uId . '_' . rand(10000,99999);
+                        if($u->uploadPhoto == 0){
+                            $deffPic = App\models\DefaultPic::find($u->picture);
+
+                            if($deffPic != null)
+                                $buPic = URL::asset('defaultPic/' . $deffPic->name);
+                            else
+                                $buPic = URL::asset('_images/nopic/blank.jpg');
+                        }
+                        else
+                            $buPic = URL::asset('userProfile/' . $u->picture);
+                    }
+                ?>
                 <div class="profilePicFooter circleBase type2">
-                    <img {{--src="{{ $userPic }}" --}}>
+                    <img src="{{isset($buPic) ? $buPic : ''}}" style="width: 100%; border-radius: 50%">
                 </div>
             </div>
         @else
@@ -217,8 +237,7 @@
         <!-- The Modals -->
 
         <div class="modal fade" id="profilePossibilities">
-{{--            @if(true)--}}
-            @if(isset($isArticle) && $isArticle == 1)
+            @if(Request::is('article/*') || Request::is('mainArticle/*'))
                 <div class="mainPopUp leftPopUp" style="padding: 7px">
                     <div class="lp_ar_searchTitle">جستجو خود را محدودتر کنید</div>
 
@@ -229,89 +248,9 @@
                     {{--right menu--}}
                     <div id="lp_ar_rightFilters" class="lp_ar_contentOfFilters">
                         <div class="gnContentsCategory">
-                            <div id="rightCategory" style="width: 50%; padding: 0px 5px">
-                                <div class="gnColOFContentsCategory">
-                                    <div>
-                                        <div>
-                                            <span id="CategoryName_1" class="gnTitleOfPlaces" onclick="searchInCategory(this)" style="cursor: pointer">تکنولوژی</span>
-                                            <span class="gnNumberOfPlaces">۲</span>
-                                        </div>
-                                        <ul class="gnUl">
-                                            <li class="gnLi">
-                                                <span id="CategoryName_2" onclick="searchInCategory(this)" style="cursor: pointer">بلاک چین</span>
-                                                <span class="gnNumberOfPlaces">۲</span>
-                                            </li>
-                                            <li class="gnLi">
-                                                <span id="CategoryName_3" onclick="searchInCategory(this)" style="cursor: pointer">VR</span>
-                                                <span class="gnNumberOfPlaces">۲</span>
-                                            </li>
-                                            <li class="gnLi">
-                                                <span id="CategoryName_14" onclick="searchInCategory(this)" style="cursor: pointer">BIGDATA</span>
-                                                <span class="gnNumberOfPlaces">۱</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="gnColOFContentsCategory">
-                                    <div>
-                                        <div>
-                                            <span id="CategoryName_7" class="gnTitleOfPlaces" onclick="searchInCategory(this)" style="cursor: pointer">سفر</span>
-                                            <span class="gnNumberOfPlaces">۳</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="gnColOFContentsCategory">
-                                    <div>
-                                        <div>
-                                            <span id="CategoryName_15" class="gnTitleOfPlaces" onclick="searchInCategory(this)" style="cursor: pointer">یزد</span>
-                                            <span class="gnNumberOfPlaces">۱</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="leftCategory" style="width: 50%; padding: 0px 5px">
-                                    <div class="gnColOFContentsCategory">
-                                        <div>
-                                            <div>
-                                                <span id="CategoryName_4" class="gnTitleOfPlaces" onclick="searchInCategory(this)" style="cursor: pointer">غذا</span>
-                                                <span class="gnNumberOfPlaces">۳</span>
-                                            </div>
-                                            <ul class="gnUl">
-                                                <li class="gnLi">
-                                                    <span id="CategoryName_5" onclick="searchInCategory(this)" style="cursor: pointer">فست فود</span>
-                                                    <span class="gnNumberOfPlaces">۳</span>
-                                                </li>
-                                                <li class="gnLi">
-                                                    <span id="CategoryName_13" onclick="searchInCategory(this)" style="cursor: pointer">سنتی</span>
-                                                    <span class="gnNumberOfPlaces">۳</span>
-                                                </li>
-                                                <li class="gnLi">
-                                                    <span id="CategoryName_17" onclick="searchInCategory(this)" style="cursor: pointer">استیک</span>
-                                                    <span class="gnNumberOfPlaces">۰</span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="gnColOFContentsCategory">
-                                        <div>
-                                            <div>
-                                                <span id="CategoryName_8" class="gnTitleOfPlaces" onclick="searchInCategory(this)" style="cursor: pointer">تفریح</span>
-                                                <span class="gnNumberOfPlaces">۳</span>
-                                            </div>
-                                            <ul class="gnUl">
-                                                <li class="gnLi">
-                                                    <span id="CategoryName_9" onclick="searchInCategory(this)" style="cursor: pointer">استخر</span>
-                                                    <span class="gnNumberOfPlaces">۱</span>
-                                                </li>
-                                                <li class="gnLi">
-                                                    <span id="CategoryName_12" onclick="searchInCategory(this)" style="cursor: pointer">شهربازی</span>
-                                                    <span class="gnNumberOfPlaces">۰</span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div></div>
+                            <div class="rightCategory" style="width: 50%; padding: 0px 5px"></div>
+                            <div class="leftCategory" style="width: 50%; padding: 0px 5px"></div>
                         </div>
-
                         <div class="lp_ar_borderBottom"></div>
 
                         <div>
@@ -340,7 +279,7 @@
                                     </div>
                                 @endif
                             @endif
-                            <input type="text" id="searchCityInArticleInput" class="gnInput" placeholder="شهر موردنظر خود را وارد کنید" readonly>
+                            <input type="text" class="gnInput searchCityInArticleInput" placeholder="شهر موردنظر خود را وارد کنید" readonly>
                         </div>
 
                         <div class="lp_ar_borderBottom"></div>
@@ -561,7 +500,7 @@
                         </div>
                     </div>
                 </div>
-            @elseif(true)
+            @elseif(Request::is('placeList/*'))
                 <div class="mainPopUp leftPopUp" style="padding: 7px">
                     <div class="lp_ar_searchTitle">جستجو خود را محدودتر کنید</div>
 
@@ -1139,7 +1078,7 @@
                                 <div class="col-xs-4">
     {{--                                @if(!$user->uploadPhoto)--}}
                                         <img class="avatarUrl"
-    {{--                                         src="{{URL::asset('defaultPic') . '/' . $user->picture}}"--}}
+                                             src="{{isset($buPic) ? $buPic : ''}}"
                                              height="60" width="60"/>
     {{--                                @else--}}
     {{--                                    <img class="avatarUrl"--}}

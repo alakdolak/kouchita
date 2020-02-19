@@ -1645,7 +1645,6 @@ a:focus {
 #PAGE {
     font-size: .75em;
     overflow: hidden;
-    min-width: 912px;
 }
 
 #MAIN {
