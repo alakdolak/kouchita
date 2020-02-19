@@ -1441,3 +1441,9 @@ footer .profileMenuLinks {
     border-bottom: 10px solid #f3f3f3;
     margin: 10px -7px;
 }
+
+.lp_ar_contentOfFilters{
+    max-height: 80vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}

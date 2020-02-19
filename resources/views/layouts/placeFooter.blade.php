@@ -237,14 +237,18 @@ $config = \App\models\ConfigModel::first()
         <!-- The Modals -->
 
         <div class="modal fade" id="profilePossibilities">
-            @if(Request::is('article/*') || Request::is('mainArticle/*'))
+            @if(Request::is('article/*') || Request::is('mainArticle'))
                 <div class="mainPopUp leftPopUp" style="padding: 7px">
                     <div class="lp_ar_searchTitle">جستجو خود را محدودتر کنید</div>
 
                     <div class="lp_ar_filters">
-                        <div class="lp_ar_eachFilters lp_ar_rightFilters lp_ar_selectedMenu" onclick="lp_selectArticleFilter('lp_ar_rightFilters' ,this)">دسته‌بندی مطالب</div>
-                        <div class="lp_ar_eachFilters" onclick="lp_selectArticleFilter('lp_ar_leftFilters' ,this)">مطالب مشابه</div>
-                    </div>
+                        @if(Request::is('article/list/*'))
+                            <div class="lp_ar_eachFilters lp_ar_rightFilters lp_ar_selectedMenu" onclick="lp_selectArticleFilter('lp_ar_rightFilters' ,this)" style="width: 100%; border-left: none">دسته‌بندی مطالب</div>
+                        @else
+                            <div class="lp_ar_eachFilters lp_ar_rightFilters lp_ar_selectedMenu" onclick="lp_selectArticleFilter('lp_ar_rightFilters' ,this)">دسته‌بندی مطالب</div>
+                            <div class="lp_ar_eachFilters" onclick="lp_selectArticleFilter('lp_ar_leftFilters' ,this)">مطالب مشابه</div>
+                        @endif
+                         </div>
                     {{--right menu--}}
                     <div id="lp_ar_rightFilters" class="lp_ar_contentOfFilters">
                         <div class="gnContentsCategory">
@@ -285,219 +289,104 @@ $config = \App\models\ConfigModel::first()
                         <div class="lp_ar_borderBottom"></div>
 
                         <div class="gnInput">
-                            <input type="text" class="gnInputonInput" id="pcSearchInput" placeholder="عبارت مورد نظر خود را">
-                            <button class="gnSearchInputBtn" type="submit" onclick="searchInArticle('pcSearchInput')">جستجو کنید</button>
+                            <input type="text" id="mobileSearchInput" class="gnInputonInput" placeholder="عبارت مورد نظر خود را">
+                            <button class="gnSearchInputBtn" type="submit" onclick="searchInArticle('mobileSearchInput')">جستجو کنید</button>
                         </div>
                     </div>
 
                     {{--left menu--}}
                     <div id="lp_ar_leftFilters" class="lp_ar_contentOfFilters hidden">
-                        <div class="content-2col hidden">
-                                <div class="im-entry-thumb" style="background-image: url('http://localhost/assets/_images/posts/117/mainPic.jpg'); background-size: 100% 100%;">
-                                    <div class="im-entry-header">
-                                        <div class="im-entry-category">
-                                            <div class="iranomag-meta clearfix">
-                                                <div class="cat-links im-meta-item">
-                                                    <a class="im-catlink-color-2079" href="http://localhost/kouchita/public/article/%DA%A9%D9%88%D9%87_%D8%B1%DB%8C%DA%AF_%DB%8C%D8%B2%D8%AF_%DA%A9%D9%88%D9%87_%D8%B1%DB%8C%DA%AF_%DB%8C%D8%B2%D8%AF_%DA%A9%D9%88%D9%87_%D8%B1%DB%8C%DA%AF_%DB%8C%D8%B2%D8%AF">غذا</a>
+                        @if(isset($similarPost))
+                            @foreach($similarPost as $item)
+                                <div class="content-2col">
+                                    <div class="im-entry-thumb" style="background-image: url('{{$item->pic}}'); background-size: 100% 100%;">
+                                        <div class="im-entry-header">
+                                            <div class="im-entry-category">
+                                                <div class="iranomag-meta clearfix">
+                                                    <div class="cat-links im-meta-item">
+                                                        <a class="im-catlink-color-2079" href="{{route('article.list', ['type' => 'category', 'search' => $item->category])}}">{{$item->category}}</a>
+                                                    </div>
                                                 </div>
                                             </div>
+                                            <a href="{{$item->url}}" rel="bookmark">
+                                                <h1 class="im-entry-title" style="color: white;">
+                                                    {{$item->title}}
+                                                </h1>
+                                            </a>
                                         </div>
-                                        <a href="http://localhost/kouchita/public/article/%DA%A9%D9%88%D9%87_%D8%B1%DB%8C%DA%AF_%DB%8C%D8%B2%D8%AF_%DA%A9%D9%88%D9%87_%D8%B1%DB%8C%DA%AF_%DB%8C%D8%B2%D8%AF_%DA%A9%D9%88%D9%87_%D8%B1%DB%8C%DA%AF_%DB%8C%D8%B2%D8%AF" rel="bookmark">
-                                            <h1 class="im-entry-title" style="color: white;">
-                                                کوه ریگ یزد
-                                            </h1>
-                                        </a>
                                     </div>
-                                </div>
-                                <div class="im-entry">
-                                    <div class="im-entry-content">
-                                        <a href="http://localhost/kouchita/public/article/%DA%A9%D9%88%D9%87_%D8%B1%DB%8C%DA%AF_%DB%8C%D8%B2%D8%AF_%DA%A9%D9%88%D9%87_%D8%B1%DB%8C%DA%AF_%DB%8C%D8%B2%D8%AF_%DA%A9%D9%88%D9%87_%D8%B1%DB%8C%DA%AF_%DB%8C%D8%B2%D8%AF" rel="bookmark">
-                                            dfdafvsdafkdj fdjhfjdhfo dsfjsd vnsv کوه ریگ یزد سسرسرسیبرسیبی باسیبمتاس یبتک سیبسیکبدسیتنبسیتکمبر کسیمبرس
-                                            sdvjsdhvsdhpsd
-                                            sdfsdjgvpiawhf [adsifvsdfshdvgsd;f
-                                        </a>
-                                    </div>
+                                    <div class="im-entry">
+                                        <div class="im-entry-content">
+                                            <a href="{{$item->url}}" rel="bookmark">
+                                                {{$item->meta}}
+                                            </a>
+                                        </div>
 
-                                    <p class="im-entry-footer">
-                                    </p><div class="iranomag-meta clearfix">
-                                        <div class="posted-on im-meta-item">
-                                            <span class="entry-date published updated">شنبه ۱۹ بهمن ۱۳۹۸</span>
-                                        </div>
-                                        <div class="comments-link im-meta-item">
-                                            <a href="">
-                                                <i class="fa fa-comment-o"></i>۳
-                                            </a>
-                                        </div>
-                                        <div class="author vcard im-meta-item">
-                                            <a class="url fn n" href="/author/writer/">
+                                        <p class="im-entry-footer">
+                                        <div class="iranomag-meta clearfix">
+                                            <div class="posted-on im-meta-item">
+                                                <span class="entry-date published updated">{{$post->date}}</span>
+                                            </div>
+                                            <div class="comments-link im-meta-item">
+                                                <i class="fa fa-comment-o"></i>{{$item->msgs}}
+                                            </div>
+                                            <div class="author vcard im-meta-item">
                                                 <i class="fa fa-user"></i>
-                                                admin
-                                            </a>
+                                                {{$item->username}}
+                                            </div>
+                                            <div class="post-views im-meta-item">
+                                                <i class="fa fa-eye"></i>{{$item->seen}}
+                                            </div>
                                         </div>
-                                        <div class="post-views im-meta-item">
-                                            <i class="fa fa-eye"></i>۴
-                                        </div>
+                                        </p>
                                     </div>
-                                    <p></p>
+                                </div>
+                            @endforeach
+                        @elseif(isset($mostSeenPost))
+                            <div class="widget widget_impv_display_widget ">
+                                <div class="widget-head"><strong class="widget-title">
+                                        پربازدیدترین ها
+                                    </strong>
+                                    <div class="widget-head-bar"></div>
+                                    <div class="widget-head-line"></div>
+                                </div>
+                                <div id="impv_display_widget-4-tab2" class="widget_pop_body">
+                                    <ul class="popular_by_views_list">
+                                        @foreach($mostSeenPost as $post)
+                                            <li class="im-widget clearfix">
+                                                <figure class="im-widget-thumb">
+                                                    <a  href="{{route('article.show', ['slug' => $post->slug])}}" title="{{$post->title}}">
+                                                        <img src="{{$post->pic}}" alt="{{$post->keyword}}"/>
+                                                    </a>
+                                                </figure>
+                                                <div class="im-widget-entry">
+                                                    <header class="im-widget-entry-header">
+                                                        <h4 class='im-widget-entry-title'>
+                                                            <a  href="{{route('article.show', ['slug' => $post->slug])}}" title="{{$post->title}}">
+                                                                {{$post->title}}
+                                                            </a>
+                                                        </h4>
+                                                    </header>
+                                                    <p class="im-widget-entry-footer">
+                                                    <div class="iranomag-meta clearfix">
+                                                        <div class="posted-on im-meta-item">
+                                                <span class="entry-date published updated">
+                                                    {{$post->date}}
+                                                </span>
+                                                        </div>
+                                                        <div class="post-views im-meta-item">
+                                                            <i class="fa fa-eye"></i>
+                                                            {{$post->seen}}
+                                                        </div>
+                                                    </div>
+                                                    </p>
+                                                </div>
+                                            </li>
+                                        @endforeach
+                                    </ul>
                                 </div>
                             </div>
-                        <div class="widget widget_impv_display_widget">
-                            <div class="widget-head"><strong class="widget-title">
-                                    پربازدیدترین ها
-                                </strong>
-                                <div class="widget-head-bar"></div>
-                                <div class="widget-head-line"></div>
-                            </div>
-                            <div id="impv_display_widget-4-tab2" class="widget_pop_body">
-                                <ul class="popular_by_views_list">
-                                    <li class="im-widget clearfix">
-                                        <figure class="im-widget-thumb">
-                                            <a href="http://localhost/kouchita/public/article/%D8%B1%D9%88%D8%B3%D8%AA%D8%A7%DB%8C_%D8%B9%D8%B5%D8%B1_%D8%A2%D8%A8%D8%A7%D8%AF_%D8%B1%D9%88%D8%B3%D8%AA%D8%A7%DB%8C_%D8%B9%D8%B5%D8%B1_%D8%A2%D8%A8%D8%A7%D8%AF_%D8%B1%D9%88%D8%B3%D8%AA%D8%A7%DB%8C_%D8%B9%D8%B5%D8%B1_%D8%A2%D8%A8%D8%A7%D8%AF" title="سفر به یه روستای خوب و از دست رفته ی با ارزش یزد &quot;روستای عصر آباد&quot;">
-                                                <img src="http://localhost/assets/_images/posts/118/mainPic.jpg" alt="روستای عصر آباد">
-                                            </a>
-                                        </figure>
-                                        <div class="im-widget-entry">
-                                            <header class="im-widget-entry-header">
-                                                <h4 class="im-widget-entry-title">
-                                                    <a href="http://localhost/kouchita/public/article/%D8%B1%D9%88%D8%B3%D8%AA%D8%A7%DB%8C_%D8%B9%D8%B5%D8%B1_%D8%A2%D8%A8%D8%A7%D8%AF_%D8%B1%D9%88%D8%B3%D8%AA%D8%A7%DB%8C_%D8%B9%D8%B5%D8%B1_%D8%A2%D8%A8%D8%A7%D8%AF_%D8%B1%D9%88%D8%B3%D8%AA%D8%A7%DB%8C_%D8%B9%D8%B5%D8%B1_%D8%A2%D8%A8%D8%A7%D8%AF" title="سفر به یه روستای خوب و از دست رفته ی با ارزش یزد &quot;روستای عصر آباد&quot;">
-                                                        سفر به یه روستای خوب و از دست رفته ی با ارزش یزد "روستای عصر آباد"
-                                                    </a>
-                                                </h4>
-                                            </header>
-                                            <p class="im-widget-entry-footer">
-                                            </p><div class="iranomag-meta clearfix">
-                                                <div class="posted-on im-meta-item">
-                                                <span class="entry-date published updated">
-                                                    سه شنبه ۰۸ بهمن ۱۳۹۸
-                                                </span>
-                                                </div>
-                                                <div class="post-views im-meta-item">
-                                                    <i class="fa fa-eye"></i>
-                                                    ۱۲
-                                                </div>
-                                            </div>
-                                            <p></p>
-                                        </div>
-                                    </li>
-                                    <li class="im-widget clearfix">
-                                        <figure class="im-widget-thumb">
-                                            <a href="http://localhost/kouchita/public/article/%D8%B3%D9%81%D8%B1_%D8%A8%D9%87_%D8%B1%D9%88%D8%B3%D8%AA%D8%A7%DB%8C_%D8%B3%D8%B1%DB%8C%D8%B2%D8%AF" title="سفر به روستای سریزد">
-                                                <img src="http://localhost/assets/_images/posts/114/mainPic.jpg" alt="روستای سریزد">
-                                            </a>
-                                        </figure>
-                                        <div class="im-widget-entry">
-                                            <header class="im-widget-entry-header">
-                                                <h4 class="im-widget-entry-title">
-                                                    <a href="http://localhost/kouchita/public/article/%D8%B3%D9%81%D8%B1_%D8%A8%D9%87_%D8%B1%D9%88%D8%B3%D8%AA%D8%A7%DB%8C_%D8%B3%D8%B1%DB%8C%D8%B2%D8%AF" title="سفر به روستای سریزد">
-                                                        سفر به روستای سریزد
-                                                    </a>
-                                                </h4>
-                                            </header>
-                                            <p class="im-widget-entry-footer">
-                                            </p><div class="iranomag-meta clearfix">
-                                                <div class="posted-on im-meta-item">
-                                                <span class="entry-date published updated">
-                                                    سه شنبه ۱۵ بهمن ۱۳۹۸
-                                                </span>
-                                                </div>
-                                                <div class="post-views im-meta-item">
-                                                    <i class="fa fa-eye"></i>
-                                                    ۱۰
-                                                </div>
-                                            </div>
-                                            <p></p>
-                                        </div>
-                                    </li>
-                                    <li class="im-widget clearfix">
-                                        <figure class="im-widget-thumb">
-                                            <a href="http://localhost/kouchita/public/article/%DA%A9%D9%88%D9%87_%D8%B1%DB%8C%DA%AF_%DB%8C%D8%B2%D8%AF_%DA%A9%D9%88%D9%87_%D8%B1%DB%8C%DA%AF_%DB%8C%D8%B2%D8%AF_%DA%A9%D9%88%D9%87_%D8%B1%DB%8C%DA%AF_%DB%8C%D8%B2%D8%AF" title="کوه ریگ یزد">
-                                                <img src="http://localhost/assets/_images/posts/117/mainPic.jpg" alt="کوه ریگ یزد">
-                                            </a>
-                                        </figure>
-                                        <div class="im-widget-entry">
-                                            <header class="im-widget-entry-header">
-                                                <h4 class="im-widget-entry-title">
-                                                    <a href="http://localhost/kouchita/public/article/%DA%A9%D9%88%D9%87_%D8%B1%DB%8C%DA%AF_%DB%8C%D8%B2%D8%AF_%DA%A9%D9%88%D9%87_%D8%B1%DB%8C%DA%AF_%DB%8C%D8%B2%D8%AF_%DA%A9%D9%88%D9%87_%D8%B1%DB%8C%DA%AF_%DB%8C%D8%B2%D8%AF" title="کوه ریگ یزد">
-                                                        کوه ریگ یزد
-                                                    </a>
-                                                </h4>
-                                            </header>
-                                            <p class="im-widget-entry-footer">
-                                            </p><div class="iranomag-meta clearfix">
-                                                <div class="posted-on im-meta-item">
-                                                <span class="entry-date published updated">
-                                                    سه شنبه ۰۸ بهمن ۱۳۹۸
-                                                </span>
-                                                </div>
-                                                <div class="post-views im-meta-item">
-                                                    <i class="fa fa-eye"></i>
-                                                    ۴
-                                                </div>
-                                            </div>
-                                            <p></p>
-                                        </div>
-                                    </li>
-                                    <li class="im-widget clearfix">
-                                        <figure class="im-widget-thumb">
-                                            <a href="http://localhost/kouchita/public/article/%D8%A2%D8%A8%D8%B4%D8%A7%D8%B1_%D8%AF%D8%B1%D9%87_%DA%AF%D8%A7%D9%87%D8%A7%D9%86%D8%A2%D8%A8%D8%B4%D8%A7%D8%B1_%D8%AF%D8%B1%D9%87_%DA%AF%D8%A7%D9%87%D8%A7%D9%86%D8%A2%D8%A8%D8%B4%D8%A7%D8%B1_%D8%AF%D8%B1%D9%87_%DA%AF%D8%A7%D9%87%D8%A7%D9%86" title="آبشار دره گاهان یه تفریح آرامش بخش با صدای دلنشین آب">
-                                                <img src="http://localhost/assets/_images/posts/119/mainPic.jpg" alt="آبشار دره گاهان">
-                                            </a>
-                                        </figure>
-                                        <div class="im-widget-entry">
-                                            <header class="im-widget-entry-header">
-                                                <h4 class="im-widget-entry-title">
-                                                    <a href="http://localhost/kouchita/public/article/%D8%A2%D8%A8%D8%B4%D8%A7%D8%B1_%D8%AF%D8%B1%D9%87_%DA%AF%D8%A7%D9%87%D8%A7%D9%86%D8%A2%D8%A8%D8%B4%D8%A7%D8%B1_%D8%AF%D8%B1%D9%87_%DA%AF%D8%A7%D9%87%D8%A7%D9%86%D8%A2%D8%A8%D8%B4%D8%A7%D8%B1_%D8%AF%D8%B1%D9%87_%DA%AF%D8%A7%D9%87%D8%A7%D9%86" title="آبشار دره گاهان یه تفریح آرامش بخش با صدای دلنشین آب">
-                                                        آبشار دره گاهان یه تفریح آرامش بخش با صدای دلنشین آب
-                                                    </a>
-                                                </h4>
-                                            </header>
-                                            <p class="im-widget-entry-footer">
-                                            </p><div class="iranomag-meta clearfix">
-                                                <div class="posted-on im-meta-item">
-                                                <span class="entry-date published updated">
-                                                    شنبه ۱۹ بهمن ۱۳۹۸
-                                                </span>
-                                                </div>
-                                                <div class="post-views im-meta-item">
-                                                    <i class="fa fa-eye"></i>
-                                                    ۴
-                                                </div>
-                                            </div>
-                                            <p></p>
-                                        </div>
-                                    </li>
-                                    <li class="im-widget clearfix">
-                                        <figure class="im-widget-thumb">
-                                            <a href="http://localhost/kouchita/public/article/%DA%A9%D8%A7%D8%AE_%DA%A9%D8%B1%D9%85%D9%84%DB%8C%D9%86_%D8%B1%D9%85%D9%84%DB%8C%D9%86_%DA%A9%D8%A7%D8%AE_%DA%A9%D8%B1%D9%85%D9%84%DB%8C%D9%86_2_%D8%B1%D9%85%D9%84%DB%8C%D9%86" title="کاخ کرملین 2 رملین بزرگ&zwnj;&zwnj;ترین کاخ در کشور&nbsp;روسیه و یکی از زیباترین کاخ&zwnj;های جهان">
-                                                <img src="http://localhost/assets/_images/posts/120/mainPic.jpg" alt="کاخ کرملین 2">
-                                            </a>
-                                        </figure>
-                                        <div class="im-widget-entry">
-                                            <header class="im-widget-entry-header">
-                                                <h4 class="im-widget-entry-title">
-                                                    <a href="http://localhost/kouchita/public/article/%DA%A9%D8%A7%D8%AE_%DA%A9%D8%B1%D9%85%D9%84%DB%8C%D9%86_%D8%B1%D9%85%D9%84%DB%8C%D9%86_%DA%A9%D8%A7%D8%AE_%DA%A9%D8%B1%D9%85%D9%84%DB%8C%D9%86_2_%D8%B1%D9%85%D9%84%DB%8C%D9%86" title="کاخ کرملین 2 رملین بزرگ&zwnj;&zwnj;ترین کاخ در کشور&nbsp;روسیه و یکی از زیباترین کاخ&zwnj;های جهان">
-                                                        کاخ کرملین ۲ رملین بزرگ&zwnj;&zwnj;ترین کاخ در کشور&nbsp;روسیه و یکی از زیباترین کاخ&zwnj;های جهان
-                                                    </a>
-                                                </h4>
-                                            </header>
-                                            <p class="im-widget-entry-footer">
-                                            </p><div class="iranomag-meta clearfix">
-                                                <div class="posted-on im-meta-item">
-                                                <span class="entry-date published updated">
-                                                    دوشنبه ۱۴ بهمن ۱۳۹۸
-                                                </span>
-                                                </div>
-                                                <div class="post-views im-meta-item">
-                                                    <i class="fa fa-eye"></i>
-                                                    ۲
-                                                </div>
-                                            </div>
-                                            <p></p>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+                        @endif
                     </div>
                 </div>
             @elseif(Request::is('placeList/*'))

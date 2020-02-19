@@ -77,7 +77,7 @@ function sendComment(_id, _ansTo, _element){
             },
             success: function(response){
                 if(response == 'ok')
-                    window.location.reload();
+                    showSuccessNotifi('نظر شما با موفقیت ثبت شد.', 'right', 'green');
             },
             error: function(err){
                 console.log(err)

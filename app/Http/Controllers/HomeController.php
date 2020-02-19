@@ -225,10 +225,17 @@ class HomeController extends Controller
             if($place->image == null){
                 $seenActivity = Activity::whereName('مشاهده')->first();
                 $mostSeen = DB::select('SELECT placeId, COUNT(id) as seen FROM log WHERE activityId = ' .$seenActivity->id. ' AND kindPlaceId = 1 AND placeId IN (' . implode(",", $allAmakenId) . ') GROUP BY placeId ORDER BY seen DESC');
-
                 if(count($mostSeen) != 0){
                     $p = Amaken::find($mostSeen[0]->placeId);
-                    $place->image = URL::asset('_images/amaken/' . $p->file . '/s-' . $p->picNumber);
+                    $location = __DIR__ . '/../../../../assets/_images/amaken/' . $p->file . '/s-' . $p->picNumber;
+                    if(file_exists($location))
+                        $place->image = URL::asset('_images/amaken/' . $p->file . '/s-' . $p->picNumber);
+                    else{
+                        $mainPic = Amaken::whereNotNull('file')->where('file' , '!=' , '')->whereIn('id', $allAmakenId)->first();
+                        $location = __DIR__ . '/../../../../assets/_images/amaken/' . $mainPic->file . '/s-' . $mainPic->picNumber;
+                        if(file_exists($location))
+                            $place->image = URL::asset('_images/amaken/' . $p->file . '/s-' . $p->picNumber);
+                    }
                 }
                 else
                     $place->image = URL::asset('_images/noPic/blank.jpg');
@@ -373,7 +380,6 @@ class HomeController extends Controller
                 $postId = array_merge($postId, $pId);
             }
         }
-
         if(count($postId) != 0){
             $pt = Post::whereIn('id', $postId)->where('release', '!=', 'draft')->whereRaw('date < ' .$today. ' OR (date = ' . $today . ' AND time < ' . $nowTime . ' )')->take($postTake)->orderBy('date', 'DESC')->get();
             foreach ($pt as $item)
@@ -388,7 +394,7 @@ class HomeController extends Controller
             }
         }
         else
-            $post = Post::whereRaw('date < ' .$today. ' OR (date = ' . $today . ' AND time < ' . $nowTime . ' )')->where('release', '!=', 'draft')->take($postTake)->orderBy('date', 'DESC')->get();
+            $post = Post::where('release', '!=', 'draft')->whereRaw('date < ' .$today. ' OR (date = ' . $today . ' AND time < ' . $nowTime . ' )')->take($postTake)->orderBy('date', 'DESC')->get();
 
         foreach ($post as $item){
             $item->pic = \URL::asset('_images/posts/' . $item->id . '/' . $item->pic);
@@ -2875,16 +2881,28 @@ class HomeController extends Controller
             $mostSeen = DB::select('SELECT log.placeId as placeId, COUNT(log.id) as `count` FROM log WHERE log.activityId = ' . $seenActivity . ' AND ' .$commonQuery. ' ORDER BY `count` DESC LIMIT 2');
             foreach ($mostSeen as $item)
                 array_push($placeId, $item->placeId);
+            if(count($placeId) == 0)
+                $placeIdQuery = '0';
+            else
+                $placeIdQuery = implode(",", $placeId);
 
             $questionRate = Question::where('ansType', 'rate')->pluck('id')->toArray();
-            $mostRate = DB::select('SELECT log.placeId as placeId, AVG(qua.ans) as rate FROM log INNER JOIN questionUserAns AS qua ON  qua.questionId IN (' . implode(",", $questionRate) . ') AND qua.logId = log.id AND log.placeId NOT IN (' . implode(",", $placeId) . ') AND ' . $commonQuery . ' ORDER BY rate DESC LIMIT 2');
-
+            $mostRate = DB::select('SELECT log.placeId as placeId, AVG(qua.ans) as rate FROM log INNER JOIN questionUserAns AS qua ON  qua.questionId IN (' . implode(",", $questionRate) . ') AND qua.logId = log.id AND log.placeId NOT IN (' . $placeIdQuery . ') AND ' . $commonQuery . ' ORDER BY rate DESC LIMIT 2');
             foreach ($mostRate as $item)
                 array_push($placeId, $item->placeId);
+            if(count($placeId) == 0)
+                $placeIdQuery = '0';
+            else
+                $placeIdQuery = implode(",", $placeId);
 
-            $mostComment = DB::select('SELECT log.placeId as placeId, COUNT(log.id) as `count` FROM log WHERE (log.activityId = '. $activityId . ' OR log.activityId = ' . $ansActivityId . ' OR log.activityId = ' . $quesActivityId . ') AND log.placeId NOT IN (' . implode(",", $placeId) . ') AND ' . $commonQuery . ' ORDER BY `count` DESC LIMIT 2');
+
+            $mostComment = DB::select('SELECT log.placeId as placeId, COUNT(log.id) as `count` FROM log WHERE (log.activityId = '. $activityId . ' OR log.activityId = ' . $ansActivityId . ' OR log.activityId = ' . $quesActivityId . ') AND log.placeId NOT IN (' . $placeIdQuery . ') AND ' . $commonQuery . ' ORDER BY `count` DESC LIMIT 2');
             foreach ($mostComment as $item)
                 array_push($placeId, $item->placeId);
+            if(count($placeId) == 0)
+                $placeIdQuery = '0';
+            else
+                $placeIdQuery = implode(",", $placeId);
 
             $less = 8 - count($placeId);
             $randomPlace = DB::table($kindPlace->tableName)->whereNotIn('id', $placeId)->whereIn('cityId', $cId)->inRandomOrder()->take($less)->pluck('id')->toArray();
