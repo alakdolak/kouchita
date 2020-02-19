@@ -81,7 +81,7 @@
 
 <div id="PAGE" class="filterSearch redesign_2015 non_hotels_like desktop scopedSearch">
     @include('layouts.placeHeader')
-    <div class=" hotels_lf_redesign ui_container is-mobile responsive_body">
+    <div class=" hotels_lf_redesign ui_container responsive_body">
         <div style="height: 100px;">
             <div id="searchBoxTopPageMainDiv">
                 <span>شما در</span>
@@ -105,8 +105,8 @@
                 <span class="mg-lt-15">هستید. تغییر دهید</span>
                 <div id="searchIcon"></div>
             </div>
-            <div style="margin-top: 65px; position: relative;">
-                <div style="text-align: center;font-size: 2.5em;font-weight: 600;">
+            <div class="placeListHeader">
+                <div class="placeListTitle">
                     {{$kindPlace->title}}
                     @if($mode == 'state')
                         استان
@@ -123,7 +123,7 @@
                                 <b>راهنمای صفحات</b>
                             </a>
                         </div>
-                        <div class="ui_button sharePageMainDiv" onclick="toggleShareIcon(this)" style="margin-top: 40px">
+                        <div class="ui_button sharePageMainDiv" onclick="toggleShareIcon(this)">
                             <div class="sharePageIcon first"></div>
                             <div class="sharePageLabel">
                                 اشتراک&zwnj;گذاری صفحه
@@ -263,7 +263,7 @@
 
             <div class="wrap"></div>
 
-            <div id="BODYCON" class="col easyClear poolX adjust_padding new_meta_chevron_v2" ng-app="mainApp">
+            <div id="BODYCON" ng-app="mainApp">
                 <div class="eateryOverviewContent">
                     <div class="ui_columns is-partitioned">
                         <div id="PlaceController" class="ui_column col-md-9" ng-controller="PlaceController as cntr" style="direction: rtl; padding: 9px 24px;">
@@ -311,9 +311,9 @@
                                                         </script>
                                                         <div  class="option">
                                                             <div class="row" ng-repeat="packet in packets">
-                                                                <div ng-repeat="place in packet.places" class="ui_column col-lg-3 col-xs-6">
+                                                                <div ng-repeat="place in packet.places" class="ui_column col-lg-3 col-xs-6 eachPlace" style="float: right">
                                                                     <div class="poi listBoxesMainDivs">
-                                                                        <a href="[[place.redirect]]" class="thumbnail">
+                                                                        <a href="[[place.redirect]]" class="thumbnail" style="margin-bottom: 5px !important;">
                                                                             <div class="prw_rup prw_common_centered_thumbnail">
                                                                                 <div class="sizing_wrapper">
                                                                                     <div class="centering_wrapper">

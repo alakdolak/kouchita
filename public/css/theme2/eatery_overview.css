@@ -2974,9 +2974,3 @@ div.prw_rup.prw_common_centered_thumbnail .centering_wrapper {
     position: absolute;
     top: 50%;
 }
-
-@media (max-width: 768px) {
-    div.prw_rup.prw_common_centered_thumbnail .centering_wrapper {
-        top: 22%;
-    }
-}
