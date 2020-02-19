@@ -1804,10 +1804,17 @@ if ($total == 0)
         </div>
 
         <script>
-            $(document).ready(function(){
+            $(document).ready(function() {
+
                 if($(window).width() < 630) {
                     $('.tabLinkMainWrapMainDivMobile').affix({offset: {top: 930}});
-                };
+                }
+
+                $( window ).resize(function() {
+                    if($(window).width() < 630) {
+                        $('.tabLinkMainWrapMainDivMobile').affix({offset: {top: 930}});
+                    }
+                })
             })
         </script>
 

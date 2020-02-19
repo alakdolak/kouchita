@@ -5,7 +5,7 @@ $config = \App\models\ConfigModel::first()
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/icons.css?v=1')}}'/>
 
 {{--footer html--}}
-<div class="clear-both" style="height: 75px"></div>
+{{--<div class="clear-both" style="height: 75px"></div>--}}
 
 <footer>
     <div class="hideOnPhone screenFooterStyle">
