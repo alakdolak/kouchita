@@ -524,10 +524,6 @@ footer li > img, .small-ico {
     height: 160px;
 }
 
-footer .ui_bubble_rating {
-    transform: rotateY(180deg);
-}
-
 #lp_register {
     display: flex;
     padding: 20px;

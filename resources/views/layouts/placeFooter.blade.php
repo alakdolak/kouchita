@@ -395,7 +395,7 @@ $config = \App\models\ConfigModel::first()
 
                     <div class="lp_ar_filters">
                         <div class="lp_ar_eachFilters lp_ar_rightFilters lp_ar_selectedMenu" onclick="lp_selectArticleFilter('lp_ar_rightFilters' ,this)">اعمال فیلتر</div>
-                        <div class="lp_ar_eachFilters" onclick="lp_selectArticleFilter('lp_ar_leftFilters' ,this)">نحوه نمایش</div>
+                        <div class="lp_ar_eachFilters" onclick="lp_selectArticleFilter('lp_ar_leftFilters' ,this)">نحوه مرتب سازی</div>
                     </div>
                     {{--right menu--}}
                     <div id="lp_ar_rightFilters" class="lp_ar_contentOfFilters">
@@ -432,9 +432,9 @@ $config = \App\models\ConfigModel::first()
                                      class="lhrFilterBlock jfy_filter_bar_establishmentTypeFilters collapsible">
                                     <div class="filterGroupTitle">امتیاز کاربران</div>
                                     <div class="filterContent ui_label_group inline">
-                                        <div class="ui_input_checkbox filterItem lhrFilter filter establishmentTypeFilters establishmentTypeFilters_10591 selected 0 index_0 alwaysShowItem">
-                                            <input ng-click="RateFilter(5)" type="radio" name="AVGrate" id="c5" value="5"/>
-                                            <label for="c5"
+                                        <div class="filterItem lhrFilter filter selected">
+                                            <input ng-click="RateFilter(5)" type="radio" name="AVGrate" id="p_c5" value="5"/>
+                                            <label for="p_c5"
                                                    style="display:inline-block;"><span></span></label>
                                             <div class="rating-widget"
                                                  style="font-size: 1.2em; display: inline-block">
@@ -443,9 +443,9 @@ $config = \App\models\ConfigModel::first()
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="ui_input_checkbox filterItem lhrFilter filter establishmentTypeFilters establishmentTypeFilters_10591 selected 0 index_0 alwaysShowItem">
-                                            <input  ng-click="RateFilter(4)" type="radio" name="AVGrate" id="c4" value="4"/>
-                                            <label for="c4"
+                                        <div class="filterItem lhrFilter filter selected">
+                                            <input  ng-click="RateFilter(4)" type="radio" name="AVGrate" id="p_c4" value="4"/>
+                                            <label for="p_c4"
                                                    style="display:inline-block;"><span></span></label>
                                             <div class="rating-widget"
                                                  style="font-size: 1.2em; display: inline-block">
@@ -455,9 +455,9 @@ $config = \App\models\ConfigModel::first()
                                             </div>
                                             <span> به بالا</span>
                                         </div>
-                                        <div class="ui_input_checkbox filterItem lhrFilter filter establishmentTypeFilters establishmentTypeFilters_10591 selected 0 index_0 alwaysShowItem">
-                                            <input ng-click="RateFilter(3)" type="radio" name="AVGrate" id="c3" value="3"/>
-                                            <label for="c3"
+                                        <div class="filterItem lhrFilter filter selected">
+                                            <input ng-click="RateFilter(3)" type="radio" name="AVGrate" id="p_c3" value="3"/>
+                                            <label for="p_c3"
                                                    style="display:inline-block;"><span></span></label>
                                             <div class="rating-widget"
                                                  style="font-size: 1.2em; display: inline-block">
@@ -467,9 +467,9 @@ $config = \App\models\ConfigModel::first()
                                             </div>
                                             <span> به بالا</span>
                                         </div>
-                                        <div class="ui_input_checkbox filterItem lhrFilter filter establishmentTypeFilters establishmentTypeFilters_10591 selected 0 index_0 alwaysShowItem">
-                                            <input ng-click="RateFilter(2)" type="radio" name="AVGrate" id="c2" value="2"/>
-                                            <label for="c2"
+                                        <div class="filterItem lhrFilter filter selected">
+                                            <input ng-click="RateFilter(2)" type="radio" name="AVGrate" id="p_c2" value="2"/>
+                                            <label for="p_c2"
                                                    style="display:inline-block;"><span></span></label>
                                             <div class="rating-widget"
                                                  style="font-size: 1.2em; display: inline-block">
@@ -479,9 +479,9 @@ $config = \App\models\ConfigModel::first()
                                             </div>
                                             <span> به بالا</span>
                                         </div>
-                                        <div class="ui_input_checkbox filterItem lhrFilter filter establishmentTypeFilters establishmentTypeFilters_10591 selected 0 index_0 alwaysShowItem">
-                                            <input ng-click="RateFilter(1)" type="radio" name="AVGrate" id="c1" value="1"/>
-                                            <label for="c1"
+                                        <div class="filterItem lhrFilter filter selected">
+                                            <input ng-click="RateFilter(1)" type="radio" name="AVGrate" id="p_c1" value="1"/>
+                                            <label for="p_c1"
                                                    style="display:inline-block;"><span></span></label>
                                             <div class="rating-widget"
                                                  style="font-size: 1.2em; display: inline-block">
@@ -512,17 +512,17 @@ $config = \App\models\ConfigModel::first()
 
                                         <div class="filterContent ui_label_group inline">
                                             @for($i = 0; $i < 5 && $i < count($feature->subFeat); $i++)
-                                                <div class="ui_input_checkbox filterItem lhrFilter filter establishmentTypeFilters establishmentTypeFilters_10591 selected 0 index_0 alwaysShowItem">
-                                                    <input ng-disabled="isDisable()" ng-click="doFilterFeature({{$feature->subFeat[$i]->id}})" type="checkbox" id="feat{{$feature->subFeat[$i]->id}}" value="{{$feature->subFeat[$i]->name}}"/>
-                                                    <label for="feat{{$feature->subFeat[$i]->id}}"><span></span>&nbsp;&nbsp;{{$feature->subFeat[$i]->name}}  </label>
+                                                <div class="filterItem lhrFilter filter selected">
+                                                    <input ng-disabled="isDisable()" ng-click="doFilterFeature({{$feature->subFeat[$i]->id}})" type="checkbox" id="p_feat{{$feature->subFeat[$i]->id}}" value="{{$feature->subFeat[$i]->name}}"/>
+                                                    <label for="p_feat{{$feature->subFeat[$i]->id}}"><span></span>&nbsp;&nbsp;{{$feature->subFeat[$i]->name}}  </label>
                                                 </div>
                                             @endfor
 
                                             @if(count($feature->subFeat) > 5)
                                                 @for($i = 5; $i < count($feature->subFeat); $i++)
-                                                    <div class="ui_input_checkbox filterItem lhrFilter filter establishmentTypeFilters extraItem{{$feature->id}}">
-                                                        <input ng-disabled="isDisable()" ng-click="doFilterFeature({{$feature->subFeat[$i]->id}})" type="checkbox" id="feat{{$feature->subFeat[$i]->id}}" value="{{$feature->subFeat[$i]->name}}"/>
-                                                        <label for="feat{{$feature->subFeat[$i]->id}}"><span></span>&nbsp;&nbsp; {{$feature->subFeat[$i]->name}} </label>
+                                                    <div class="filterItem lhrFilter filter hidden extraItem{{$feature->id}}">
+                                                        <input ng-disabled="isDisable()" ng-click="doFilterFeature({{$feature->subFeat[$i]->id}})" type="checkbox" id="p_feat{{$feature->subFeat[$i]->id}}" value="{{$feature->subFeat[$i]->name}}"/>
+                                                        <label for="p_feat{{$feature->subFeat[$i]->id}}"><span></span>&nbsp;&nbsp; {{$feature->subFeat[$i]->name}} </label>
                                                     </div>
                                                 @endfor
                                             @endif
@@ -536,10 +536,7 @@ $config = \App\models\ConfigModel::first()
 
                     {{--left menu--}}
                     <div id="lp_ar_leftFilters" class="lp_ar_contentOfFilters hidden">
-                        <div id="FilterTopController" class="title ui_columns hideOnPhone" style="border-bottom: 1px solid lightgray;">
-                            <div class="ordering" style="font-weight: bold">مرتب سازی بر
-                                اساس:
-                            </div>
+                        <div id="FilterTopController">
                             <div class="ordering">
                                 <div class="orders" onclick="selectingOrder($(this),'review')" ng-click="sortFunc('review')" id="z1">
                                     بیشترین نظر
@@ -562,7 +559,7 @@ $config = \App\models\ConfigModel::first()
                             </div>
                             @if($kindPlace->id != 10 && $kindPlace->id != 11)
                                 <div class="ordering"  >
-                                    <div id="distanceNav" class="orders" style="width: 140% !important;" onclick="openGlobalSearch()">کمترین فاصله تا
+                                    <div id="distanceNav" class="orders" onclick="openGlobalSearch()">کمترین فاصله تا
                                         <span id="selectDistance">__ __ __</span>
                                     </div>
                                 </div>
