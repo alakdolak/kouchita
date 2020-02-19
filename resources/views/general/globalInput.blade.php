@@ -4,7 +4,7 @@
     <div class="row" style="width: 100%; display: flex; align-items: center; flex-direction: column">
         <div class="globalSearchWithBox">
             <div class="row">
-                <div class="close" onclick="closeSearchInput()">close</div>
+                <div class="icons iconClose globalSearchCloseIcon" onclick="closeSearchInput()"></div>
             </div>
             <div class="row" style="width: 100%; text-align: center;">
                 <input id="globalSearchInput" type="text" class="globalSearchInputField" placeholder="" onkeyup="">

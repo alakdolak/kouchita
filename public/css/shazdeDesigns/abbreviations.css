@@ -690,6 +690,10 @@
     width: 33% !important;
 }
 
+.width-35per {
+    width: 35%;
+}
+
 .width-40per {
     width: 40%;
 }
@@ -760,6 +764,10 @@
     height: auto;
 }
 
+.height-autoImp {
+    height: auto !important;
+}
+
 .height-18 {
     height: 18px;
 }
@@ -792,6 +800,10 @@
     height: 250px;
 }
 
+.height-500 {
+    height: 500px;
+}
+
 .full-height {
     height: 100%;
 }
@@ -814,6 +826,10 @@
 
 .min-height-170Imp {
     min-height: 170px !important;
+}
+
+.min-height-300 {
+    min-height: 300px ;
 }
 
 /*line-height*/

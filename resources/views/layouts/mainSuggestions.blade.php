@@ -153,7 +153,7 @@
         </div>
     </div>
 
-    <div class="stripedBannerMainDiv">
+    <center class="stripedBannerMainDiv">
         <div class="stripedBackgroundDiv mg-lt-5">
             <div class="innerStripedBackGround">
                 <a href="{{isset($middleBannerLink['31']) ? $middleBannerLink['31'] : '#'}}" target="{{isset($middleBannerLink['31']) ? '_blank' : ''}}" >
@@ -168,7 +168,7 @@
                 </a>
             </div>
         </div>
-    </div>
+    </center>
 
     <div id="tabiatSuggestion" class="homepage_shelves_widget ng-scope" style="display: none">
         <div class="prw_rup prw_shelves_shelf_widget" style="">
@@ -223,7 +223,7 @@
         </div>
     </div>
 
-    <div class="siteArticlesMainDiv">
+    <center class="siteArticlesMainDiv">
         <div class="articleBoxes">
             <div class="articleTitle">مقاله‌های ما</div>
             <div class="articleImgMainDiv">
@@ -260,7 +260,7 @@
             </div>
             <a class="articleLink">هم اکنون ببینید</a>
         </div>
-    </div>
+    </center>
 
     <div id="restaurantSuggestion" class="homepage_shelves_widget ng-scope" style="display: none">
         <div class="prw_rup prw_shelves_shelf_widget" style="">

@@ -1,4 +1,25 @@
-.globalNav2011_reset #PAGE {
+
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #bebebe;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #969696;
+}
+
+#MAINWRAP > div:nth-child(1).globalNav2011_reset #PAGE {
     width: auto;
 }
 
@@ -261,6 +282,29 @@ DIV.ppr_rup.ppr_priv_global_nav .global-nav-links-container .global-nav-links-me
     margin-top: 10px;
 }
 
+.modules-membercenter-persistent-header-achievements .persistent-header {
+    width: auto !important;
+    padding: 0;
+    max-width: 1188px;
+}
+
+.modules-membercenter-persistent-header-achievements .persistent-header li {
+    text-align: center;
+}
+
+#BODYCON h1:not(.overrideDefaultStyle) {
+    padding: 10px 10px !important;
+}
+
+.mc-badge-collection-container .modules-membercenter-badge-collection .memberBadges {
+    float: inherit;
+    display: inline-block;
+}
+
+.saveLeftNav .menu_bar a.saveLink:hover, .saveLeftNav .menu_bar a.saveLink strong:hover {
+    text-decoration: none;
+}
+
 @media (max-width: 1023px) {
 
     DIV.ppr_rup.ppr_priv_global_nav .global-nav-single-line.has-links .global-nav-bar-container {
@@ -308,12 +352,12 @@ DIV.ppr_rup.ppr_priv_global_nav .global-nav-links-container .global-nav-links-me
 }
 
 @media (max-width: 680px) {
-    .modules-membercenter-badge-collection ul.badgeListBadgePage {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
+    /*.modules-membercenter-badge-collection ul.badgeListBadgePage {*/
+    /*    display: flex;*/
+    /*    flex-direction: column;*/
+    /*    justify-content: center;*/
+    /*    align-items: center;*/
+    /*}*/
 
     .badgesPageMainDiv .modules-membercenter-badge-collection .memberBadges {
         margin-right: 0;
