@@ -132,8 +132,8 @@
                         <div class="commentPhotosShow">
                             @if(count($item->pics) > 0)
                             <div class="photosCol col-xs-12">
-                                <div data-toggle="modal" data-target=".showingPhotosModal">
-                                    <img src="{{$item->pics[0]->picUrl}}" style="width: 100%; height: 100%;">
+                                <div data-toggle="modal" data-target=".showingPhotosModal" style="position: relative; overflow: hidden; display: flex; justify-content: center; align-items: center;">
+                                    <img src="{{$item->pics[0]->picUrl}}" style="position: absolute;">
                                 </div>
                                 @if(count($item->pics) > 1)
                                     <div class="numberOfPhotosMainDiv">
@@ -166,7 +166,7 @@
                             <div class="textCityPageIcon">هتل</div>
                             <div class="textCityPageIcon">{{count($allHotels)}}</div>
                         </a>
-                        <a class="col-xs-4 cpLittleMenu" href="{{route('tickets')}}">
+                        <a class="col-xs-4 cpLittleMenu" href="#">
                             <div class="cityPageIcon ticket"></div>
                             <div class="textCityPageIcon">بلیط</div>
                         </a>
