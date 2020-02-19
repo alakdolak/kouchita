@@ -987,7 +987,7 @@ function saveViewPerPage($kindPlaceId, $placeId){
     if(Auth::check())
         $userId = auth()->user()->id;
     else
-        $userId = 999999;
+        $userId = 0;
 
     $value = 'kindPlaceId:'.$kindPlaceId.'Id:'.$placeId;
     if(!(Cookie::has($value) == $value)) {

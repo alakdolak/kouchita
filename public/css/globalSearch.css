@@ -40,5 +40,7 @@
     text-align: right;
     border: none;
     box-shadow: 0px 5px 9px 0px grey;
+    overflow-y: scroll;
+    max-height: 50vh;
     /*padding: 15px;*/
 }

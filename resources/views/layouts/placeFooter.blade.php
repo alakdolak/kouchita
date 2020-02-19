@@ -867,9 +867,9 @@ $config = \App\models\ConfigModel::first()
                     <div class="pSC_boxOfDetails">
                     <div class="pSC_choiseDetailsText">به سادگی انتخاب کنید</div>
                     <div class="pSC_boxOfCityDetailsText">
-                        <span>مشاهده صفحه {{$locationName['name']}}</span>
+                        <span onclick="window.location.href = '{{url("cityPage/" . $kind . "/" . $locationName["urlName"])}}'">مشاهده صفحه {{$locationName['name']}}</span>
                         @if(isset($locationName['state']))
-                            <span class="pSC_boxOfCityDetailsText2">در استان استان {{$locationName['state']}}</span>
+                            <span class="pSC_boxOfCityDetailsText2">در استان {{$locationName['state']}}</span>
                         @endif
                     </div>
                     <div>

@@ -131,11 +131,13 @@
                         </div>
                     </div>
                     <div style="position: absolute; bottom: 0; right: 0;">
-                        <span>نمایش
-                            {{$kindPlace->title}}
-                                استان
-                            {{$state->name}}
-                        </span>
+                        <a href="{{route('place.list', ['kindPlaceId' => $kindPlace->id, 'city' => $state->name, 'mode' => 'state'])}}">
+                            <span>نمایش
+                                {{$kindPlace->title}}
+                                    استان
+                                {{$state->name}}
+                            </span>
+                        </a>
                         @if($mode == 'city')
                             <span>></span>
                             <span>نمایش
@@ -606,7 +608,7 @@
 
     function selectingOrder(elem, type) {
         $(".orders").removeClass('selectOrder');
-        $("#distanceNav").text('selectOrder');
+        $("#selectDistance").text('__ __ __');
         elem.addClass('selectOrder');
 
         sort = type;
@@ -955,6 +957,7 @@
     function searchInPlaces(element){
         var value = element.value;
         if(value.trim().length > 1){
+            console.log({{$city->id}})
             $.ajax({
                 type: 'post',
                 url: "{{route('proSearch')}}",
