@@ -594,9 +594,9 @@ class MyTripsController extends Controller {
                     case 1:
                         $target = Amaken::whereId($amaken->placeId);
 
-                        if($target == null) {
+                        if($target == null){
                             $amaken->delete();
-                            continue;
+                            break;
                         }
 
                         $amaken->name = $target->name;
@@ -616,7 +616,7 @@ class MyTripsController extends Controller {
 
                         if($target == null) {
                             $amaken->delete();
-                            continue;
+                            break;
                         }
 
                         $amaken->name = $target->name;
@@ -630,12 +630,13 @@ class MyTripsController extends Controller {
                         $amaken->y = $target->D;
                         $amaken->url = route('restaurantDetails', ['placeId' => $amaken->placeId, 'placeName' => $amaken->name]);
                         break;
+
                     case 4:
                         $target = Hotel::whereId($amaken->placeId);
 
                         if($target == null) {
                             $amaken->delete();
-                            continue;
+                            break;
                         }
 
                         $amaken->name = $target->name;
@@ -654,7 +655,7 @@ class MyTripsController extends Controller {
 
                         if($target == null) {
                             $amaken->delete();
-                            continue;
+                            break;
                         }
 
                         $amaken->name = $target->name;
@@ -667,33 +668,7 @@ class MyTripsController extends Controller {
                         $amaken->y = $target->D;
                         $amaken->url = route('majaraDetails', ['placeId' => $amaken->placeId, 'placeName' => $amaken->name]);
                         break;
-                    case 8:
 
-                        $target = Adab::whereId($amaken->placeId);
-
-                        if($target == null) {
-                            $amaken->delete();
-                            continue;
-                        }
-
-                        $amaken->name = $target->name;
-
-                        if($target->category == 1 || $target->category == 6) {
-                            if (file_exists((__DIR__ . '/../../../../assets/_images/adab/soghat/' . $target->file . '/f-1.jpg')))
-                                $amaken->placePic = URL::asset('_images/adab/soghat/' . $target->file . '/f-1.jpg');
-                            else
-                                $amaken->placePic = URL::asset('_images/nopic/blank.jpg');
-                        }
-                        else {
-                            if (file_exists((__DIR__ . '/../../../../assets/_images/adab/ghazamahali/' . $target->file . '/f-1.jpg')))
-                                $amaken->placePic = URL::asset('_images/adab/ghazamahali/' . $target->file . '/f-1.jpg');
-                            else
-                                $amaken->placePic = URL::asset('_images/nopic/blank.jpg');
-                        }
-                        $amaken->x = $target->C;
-                        $amaken->y = $target->D;
-                        $amaken->url = route('adabDetails', ['placeId' => $amaken->placeId, 'placeName' => $amaken->name]);
-                        break;
                 }
             }
 
@@ -729,7 +704,7 @@ class MyTripsController extends Controller {
 
                             if($target == null) {
                                 $amaken->delete();
-                                continue;
+                                break;
                             }
 
                             $amaken->name = $target->name;
@@ -749,7 +724,7 @@ class MyTripsController extends Controller {
 
                             if($target == null) {
                                 $amaken->delete();
-                                continue;
+                                break;
                             }
 
                             $amaken->name = $target->name;
@@ -768,7 +743,7 @@ class MyTripsController extends Controller {
 
                             if($target == null) {
                                 $amaken->delete();
-                                continue;
+                                break;
                             }
 
                             $amaken->name = $target->name;
@@ -787,7 +762,7 @@ class MyTripsController extends Controller {
 
                             if($target == null) {
                                 $amaken->delete();
-                                continue;
+                                break;
                             }
 
                             $amaken->name = $target->name;
@@ -796,32 +771,6 @@ class MyTripsController extends Controller {
                                 $amaken->placePic = URL::asset('_images/majara/' . $target->file . '/f-1.jpg');
                             else
                                 $amaken->placePic = URL::asset('_images/nopic/blank.jpg');
-                            $amaken->x = $target->C;
-                            $amaken->y = $target->D;
-                            break;
-                        case 8:
-
-                            $target = Adab::whereId($amaken->placeId);
-
-                            if($target == null) {
-                                $amaken->delete();
-                                continue;
-                            }
-
-                            $amaken->name = $target->name;
-
-                            if($target->category == 1 || $target->category == 6) {
-                                if (file_exists((__DIR__ . '/../../../../assets/_images/adab/soghat/' . $target->file . '/f-1.jpg')))
-                                    $amaken->placePic = URL::asset('_images/adab/soghat/' . $target->file . '/f-1.jpg');
-                                else
-                                    $amaken->placePic = URL::asset('_images/nopic/blank.jpg');
-                            }
-                            else {
-                                if (file_exists((__DIR__ . '/../../../../assets/_images/adab/ghazamahali/' . $target->file . '/f-1.jpg')))
-                                    $amaken->placePic = URL::asset('_images/adab/ghazamahali/' . $target->file . '/f-1.jpg');
-                                else
-                                    $amaken->placePic = URL::asset('_images/nopic/blank.jpg');
-                            }
                             $amaken->x = $target->C;
                             $amaken->y = $target->D;
                             break;

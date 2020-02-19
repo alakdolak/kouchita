@@ -435,7 +435,7 @@
                                                  class="lhrFilterBlock jfy_filter_bar_establishmentTypeFilters collapsible">
                                                 <div class="filterGroupTitle">امتیاز کاربران</div>
                                                 <div class="filterContent ui_label_group inline">
-                                                    <div class="ui_input_checkbox filterItem lhrFilter filter establishmentTypeFilters establishmentTypeFilters_10591 selected 0 index_0 alwaysShowItem">
+                                                    <div class="filterItem lhrFilter filter selected">
                                                         <input ng-click="RateFilter(5)" type="radio" name="AVGrate" id="c5" value="5"/>
                                                         <label for="c5"
                                                                style="display:inline-block;"><span></span></label>
@@ -446,7 +446,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="ui_input_checkbox filterItem lhrFilter filter establishmentTypeFilters establishmentTypeFilters_10591 selected 0 index_0 alwaysShowItem">
+                                                    <div class="filterItem lhrFilter filter selected">
                                                         <input  ng-click="RateFilter(4)" type="radio" name="AVGrate" id="c4" value="4"/>
                                                         <label for="c4"
                                                                style="display:inline-block;"><span></span></label>
@@ -458,7 +458,7 @@
                                                         </div>
                                                         <span> به بالا</span>
                                                     </div>
-                                                    <div class="ui_input_checkbox filterItem lhrFilter filter establishmentTypeFilters establishmentTypeFilters_10591 selected 0 index_0 alwaysShowItem">
+                                                    <div class="filterItem lhrFilter filter selected">
                                                         <input ng-click="RateFilter(3)" type="radio" name="AVGrate" id="c3" value="3"/>
                                                         <label for="c3"
                                                                style="display:inline-block;"><span></span></label>
@@ -470,7 +470,7 @@
                                                         </div>
                                                         <span> به بالا</span>
                                                     </div>
-                                                    <div class="ui_input_checkbox filterItem lhrFilter filter establishmentTypeFilters establishmentTypeFilters_10591 selected 0 index_0 alwaysShowItem">
+                                                    <div class="filterItem lhrFilter filter selected">
                                                         <input ng-click="RateFilter(2)" type="radio" name="AVGrate" id="c2" value="2"/>
                                                         <label for="c2"
                                                                style="display:inline-block;"><span></span></label>
@@ -482,7 +482,7 @@
                                                         </div>
                                                         <span> به بالا</span>
                                                     </div>
-                                                    <div class="ui_input_checkbox filterItem lhrFilter filter establishmentTypeFilters establishmentTypeFilters_10591 selected 0 index_0 alwaysShowItem">
+                                                    <div class="filterItem lhrFilter filter selected">
                                                         <input ng-click="RateFilter(1)" type="radio" name="AVGrate" id="c1" value="1"/>
                                                         <label for="c1"
                                                                style="display:inline-block;"><span></span></label>
@@ -515,7 +515,7 @@
 
                                                     <div class="filterContent ui_label_group inline">
                                                         @for($i = 0; $i < 5 && $i < count($feature->subFeat); $i++)
-                                                            <div class="ui_input_checkbox filterItem lhrFilter filter establishmentTypeFilters establishmentTypeFilters_10591 selected 0 index_0 alwaysShowItem">
+                                                            <div class="filterItem lhrFilter filter selected">
                                                                 <input ng-disabled="isDisable()" ng-click="doFilterFeature({{$feature->subFeat[$i]->id}})" type="checkbox" id="feat{{$feature->subFeat[$i]->id}}" value="{{$feature->subFeat[$i]->name}}"/>
                                                                 <label for="feat{{$feature->subFeat[$i]->id}}"><span></span>&nbsp;&nbsp;{{$feature->subFeat[$i]->name}}  </label>
                                                             </div>
@@ -523,7 +523,7 @@
 
                                                         @if(count($feature->subFeat) > 5)
                                                             @for($i = 5; $i < count($feature->subFeat); $i++)
-                                                                <div class="ui_input_checkbox filterItem lhrFilter filter establishmentTypeFilters extraItem{{$feature->id}}">
+                                                                <div class="filterItem lhrFilter filter extraItem{{$feature->id}}">
                                                                     <input ng-disabled="isDisable()" ng-click="doFilterFeature({{$feature->subFeat[$i]->id}})" type="checkbox" id="feat{{$feature->subFeat[$i]->id}}" value="{{$feature->subFeat[$i]->name}}"/>
                                                                     <label for="feat{{$feature->subFeat[$i]->id}}"><span></span>&nbsp;&nbsp; {{$feature->subFeat[$i]->name}} </label>
                                                                 </div>
