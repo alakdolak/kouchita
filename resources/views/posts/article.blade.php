@@ -1,53 +1,34 @@
 @extends('posts.articleLayout')
 
 @section('head')
+    <link rel="stylesheet" href="{{URL::asset('css/easyimage.css')}}">
+
+
+    <title> {{$post->seoTitle}} </title>
+    <meta property="og:title" content=" {{$post->seoTitle}} " />
+    <meta name="twitter:title" content=" {{$post->seoTitle}} " />
+    <meta name="description" content=" {{$post->meta}}"/>
+    <meta property="og:description" content=" {{$post->meta}}" />
+    <meta name="twitter:description" content=" {{$post->meta}}" />
+
+    @foreach($post->tag as $item)
+        <meta property="article:tag" content="{{$item->tag}}"/>
+    @endforeach
+
+    <style>
+        p {
+            font-size: 20px;
+        }
+        ol, ul{
+            padding: 15px;
+        }
+    </style>
+    <script src="{{URL::asset('js/autosize.min.js')}}"></script>
 
 @endsection
 
-    <div id="darkModal" class="display-none" role="dialog"></div>
-
-    <div class="hidden visible-sm visible-xs hideOnPhone">
-        <div class="im-header-mobile">
-            <div class="im-main-header clearfix light">
-                <div class='container'>
-                    <div class="row">
-                        <div class="im-off-canvas col-sm-2 col-xs-2">
-                            <button id="off-canvas-on" class="off-canvas-on"><i class="fa fa-navicon"></i></button>
-                        </div>
-                        <div class="im-mobile-logo col-sm-8 col-xs-8">
-                        </div>
-                        <div class="im-search im-slide-block col-sm-2 col-xs-2">
-                            <div class="search-btn slide-btn">
-                                <i class="fa fa-search"></i>
-                                <div class="im-search-panel im-slide-panel">
-                                    <form action="" name="searchform" method="get">
-                                        <fieldset class="search-fieldset">
-                                            <div class="input-group">
-                                                <input type="search" class="form-control" name="s"
-                                                       placeholder="عبارت جستجو را اینجا وارد کنید..." required/>
-                                                <span class="input-group-btn">
-                                                    <input type="submit" class="btn btn-default" value="بگرد"/>
-                                                </span>
-                                            </div>
-                                        </fieldset>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="im-header-mobile-ad col-md-12 text-center">
-                <p>
-                    <img class="aligncenter size-full wp-image-4151" src="{{URL::asset('images/gardeshname_banner.jpg')}}" alt="شازده مسافر" width="1600" height="365"/>
-                </p>
-            </div>
-        </div>
-    </div>
-
 @section('body')
+
     <div class="container" style="direction: rtl">
         <div class="col-md-3 col-sm-12 hideOnPhone" style="padding-right: 0 !important;">
             <a href="{{route('mainArticle')}}">
@@ -62,8 +43,8 @@
                 </div>
                 <div class="gnContentsCategory">
                     <div class="row" style="width: 100%; margin: 0px;">
-                        <div id="rightCategory" class="col-md-6" style="padding: 0px 5px"></div>
-                        <div id="leftCategory" class="col-md-6" style="padding: 0px 5px"></div>
+                        <div class="col-md-6 rightCategory" style="padding: 0px 5px"></div>
+                        <div class="col-md-6 leftCategory" style="padding: 0px 5px"></div>
                     </div>
                 </div>
             </div>
@@ -96,7 +77,7 @@
                     @endif
                 @endif
 
-                <input type="text" id="searchCityInArticleInput" class="gnInput" placeholder="شهر موردنظر خود را وارد کنید" readonly>
+                <input type="text" class="gnInput searchCityInArticleInput" placeholder="شهر موردنظر خود را وارد کنید" readonly>
             </div>
 
             <div class="col-md-12 gnWhiteBox">
@@ -114,7 +95,7 @@
                                 <div class="im-entry-category">
                                     <div class="iranomag-meta clearfix">
                                         <div class="cat-links im-meta-item">
-                                            <a class="im-catlink-color-2079" href="{{$item->url}}">{{$item->category}}</a>
+                                            <a class="im-catlink-color-2079" href="{{route('article.list', ['type' => 'category', 'search' => $item->category])}}">{{$item->category}}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -138,15 +119,11 @@
                                     <span class="entry-date published updated">{{$post->date}}</span>
                                 </div>
                                 <div class="comments-link im-meta-item">
-                                    <a href="">
-                                        <i class="fa fa-comment-o"></i>{{$item->msgs}}
-                                    </a>
+                                    <i class="fa fa-comment-o"></i>{{$item->msgs}}
                                 </div>
                                 <div class="author vcard im-meta-item">
-                                    <a class="url fn n" href="/author/writer/">
-                                        <i class="fa fa-user"></i>
-                                        {{$item->username}}
-                                    </a>
+                                    <i class="fa fa-user"></i>
+                                    {{$item->username}}
                                 </div>
                                 <div class="post-views im-meta-item">
                                     <i class="fa fa-eye"></i>{{$item->seen}}
@@ -156,7 +133,6 @@
                         </div>
                     </div>
                 @endforeach
-
             </div>
         </div>
         <div class="col-md-9 col-sm-12 gnWhiteBox">
@@ -166,7 +142,7 @@
                     <div>
                         <div class="im-entry-category" style="margin: 0 0 0 20px;">
                             <div class="iranomag-meta">
-                                <a class="im-catlink-color-2079" href="#">{{$post->mainCategory}}</a>
+                                <a class="im-catlink-color-2079" href="{{route('article.list', ['type' => 'category', 'search' => $post->mainCategory])}}">{{$post->mainCategory}}</a>
                             </div>
                         </div>
                         <div class="iranomag-meta" style="display: inline-block">
@@ -174,15 +150,11 @@
                                 <span class="entry-date published updated">{{$post->date}}</span>
                             </div>
                             <div class="comments-link im-meta-item">
-                                <a href="">
                                     <i class="fa fa-comment-o"></i>{{$post->msg}}
-                                </a>
                             </div>
                             <div class="author vcard im-meta-item">
-                                <a class="url fn n" href="/author/writer/">
-                                    <i class="fa fa-user"></i>
-                                    {{$post->user->username}}
-                                </a>
+                                <i class="fa fa-user"></i>
+                                {{$post->user->username}}
                             </div>
                             <div class="post-views im-meta-item">
                                 <i class="fa fa-eye"></i>{{$post->seen}}
@@ -230,12 +202,12 @@
                     <div class="col-md-12 col-sm-12 gnUserDescription">
                         <div>
                             <div class="circleBase type2 newCommentWriterProfilePic">
-                                <img src="##authPic##" style="width: 100%; height: 100%; border-radius: 50%;">
+                                <img src="{{$post->user->pic}}" style="width: 100%; height: 100%; border-radius: 50%;">
                             </div>
-                            <div class="gnLabels">shazdesina</div>
+                            <div class="gnLabels">{{$post->user->username}}</div>
                         </div>
                         <div>
-
+                            لورم ایپسون
                         </div>
                     </div>
                 </div>
@@ -243,7 +215,9 @@
                     <div class="col-md-12 col-sm-12 gnUserDescription">
                         <div class="gnLabels">برچسب ها</div>
                         <div>
-
+                            @foreach($post->tag as $tag)
+                                <div>{{$tag->tag}}</div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -256,7 +230,8 @@
                         </div>
                         <div class="commentsContentMainBox">
                             <b class="userProfileName display-inline-block">##username##</b>
-                            <p>##msg##</p>
+                            <span class="label label-success" style="display: ##status1##;">در انتظار تایید</span>
+                            <p style="white-space: pre-line">##msg##</p>
                             <div class="commentsStatisticsBar">
                                 <div class="float-right display-inline-black">
                                     <span id="commentLikeCount##id##" class="likeStatisticIcon commentsStatisticSpan color-red">##likeCount##</span>
@@ -266,7 +241,7 @@
                                 <div class="dark-blue float-left display-inline-black cursor-pointer" onclick="showPostsComments(##id##)" style="display: ##haveAnsDisplay##;">دیدن پاسخ‌ها</div>
                             </div>
                         </div>
-                        <div class="commentsActionsBtns">
+                        <div class="commentsActionsBtns" style="display: ##status2##;">
                             <div onclick="likeComment(##id##, 1, this);">
                                 <span class="likeActionBtn ##showLike##"></span>
                             </div>
@@ -304,7 +279,7 @@
         </div>
     </div>
 
-    <script src="{{URL::asset('/js/article/articlePage.js')}}"></script>
+    <script src="{{URL::asset('js/article/articlePage.js')}}"></script>
 
     <script>
         var category = {!! $category !!}
@@ -321,6 +296,92 @@
         var likeCommentUrl = '{{route("article.comment.like")}}';
         var comments = {!! $comments !!};
         var userPic = '{{$uPic}}';
+
+        function createComment(srcId, comments){
+            if(srcHtmlComments == 0)
+                srcHtmlComments = $('#commentDiv0').html();
+
+            $('#commentDiv' + srcId).html('');
+
+            for(var i = 0; i < comments.length; i++){
+                var t;
+                var re;
+                var text = srcHtmlComments;
+                var fk = Object.keys(comments[i]);
+                for (var x of fk) {
+                    t = '##' + x + '##';
+                    re = new RegExp(t, "g");
+
+                    if(x == 'ans'){
+                        if(comments[i][x] == null)
+                            text = text.replace(re, 0);
+                        else
+                            text = text.replace(re, comments[i][x].length);
+                    }
+                    text = text.replace(re, comments[i][x]);
+                }
+
+                t = '##authPic##';
+                re = new RegExp(t, "g");
+                text = text.replace(re, userPic);
+
+                if(comments[i]['status'] == 0){
+                    t = '##status1##';
+                    re = new RegExp(t, "g");
+                    text = text.replace(re, 'inline-block');
+                    t = '##status2##';
+                    re = new RegExp(t, "g");
+                    text = text.replace(re, 'none');
+                }
+                else{
+                    t = '##status1##';
+                    re = new RegExp(t, "g");
+                    text = text.replace(re, 'none');
+                    t = '##status2##';
+                    re = new RegExp(t, "g");
+                    text = text.replace(re, 'block');
+                }
+
+                if(comments[i]['userLike'] == 1){
+                    t = '##showLike##';
+                    re = new RegExp(t, "g");
+                    text = text.replace(re, 'likeActionClickedBtn');
+                }
+                else if(comments[i]['userLike'] == 0){
+                    t = '##showDisLike##';
+                    re = new RegExp(t, "g");
+                    text = text.replace(re, 'dislikeActionClickedBtn');
+                }
+
+                var marginRight = '0px';
+                if(srcId != 0)
+                    marginRight = '50px';
+                t = '##mRight##';
+                re = new RegExp(t, "g");
+                text = text.replace(re, marginRight);
+
+                if(comments[i]['ans'] != null && comments[i]['ans'].length != 0){
+                    t = '##haveAnsDisplay##';
+                    re = new RegExp(t, "g");
+                    text = text.replace(re, 'block');
+                    $('#commentDiv' + srcId).append(text);
+                    createComment(comments[i]['id'], comments[i]['ans']);
+                }
+                else{
+                    t = '##haveAnsDisplay##';
+                    re = new RegExp(t, "g");
+                    text = text.replace(re, 'none');
+                    $('#commentDiv' + srcId).append(text);
+                }
+            }
+        }
+        createComment(0, comments);
+
+        $(window).ready(function(){
+
+            autosize($(".inputBoxInputComment"));
+            autosize($(".inputBoxInputAnswer"));
+        });
     </script>
 @endsection
 

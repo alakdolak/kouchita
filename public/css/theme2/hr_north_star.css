@@ -30,10 +30,6 @@ address, caption, cite, code, dfn, var {
     font-weight: 400
 }
 
-ol, ul {
-    list-style: none
-}
-
 caption, th {
     text-align: left
 }

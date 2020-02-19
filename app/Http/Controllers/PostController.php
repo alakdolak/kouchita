@@ -248,7 +248,10 @@ class PostController extends Controller {
             if($post->date == null)
                 $post->date = \verta($post->created_at)->format('Y/m/%d');
             $post->date = convertJalaliToText($post->date);
+
+            $uId = 0;
             if(\auth()->check()) {
+                $uId = \auth()->user()->id;
                 $postLike = PostLikes::where('postId', $post->id)->where('userId', \auth()->user()->id)->first();
                 if($postLike != null)
                     $postLike =  $postLike->like;
@@ -300,7 +303,7 @@ class PostController extends Controller {
             $post->disLike = PostLikes::where('postId', $post->id)->where('like', 0)->count();
             $post->msg = PostComment::where('postId', $post->id)->where('status', 1)->count();
 
-            $comments = PostComment::where('postId', $post->id)->where('status', 1)->where('ansTo', 0)->orderBy('created_at', 'DESC')->get();
+            $comments = PostComment::where('postId', $post->id)->whereRaw('status = 1 OR ( status = 0 AND userId = ' . $uId . ')')->where('ansTo', 0)->orderBy('created_at', 'DESC')->get();
             $comments = $this->getComments($comments);
 
             $category = $this->getAllCategory();
@@ -312,6 +315,24 @@ class PostController extends Controller {
             $cityCome = $res[2];
             $placeCome = $res[3];
 
+            $creator = User::select(['id', 'first_name', 'last_name', 'username', 'picture'])->find($post->creator);
+            if($creator != null){
+                if($creator->uploadPhoto == 0){
+                    $deffPic = DefaultPic::find($creator->picture);
+
+                    if($deffPic != null)
+                        $creator->pic = URL::asset('defaultPic/' . $deffPic->name);
+                    else
+                        $creator->pic = URL::asset('_images/nopic/blank.jpg');
+                }
+                else{
+                    $creator->pic = URL::asset('userProfile/' . $creator->picture);
+                }
+            }
+            $post->user = $creator;
+
+            $tags = DB::select('SELECT pt.tag FROM postTags AS pt, postTagsRelations AS ptr WHERE ptr.postId = ' . $post->id . ' AND pt.id = ptr.tagId GROUP BY pt.tag');
+            $post->tag = $tags;
             return view('posts.article', compact(['stateCome', 'cityCome', 'placeCome', 'post', 'category', 'similarPost', 'postLike', 'uPic', 'comments']));
         }
         return \redirect(\url('/'));

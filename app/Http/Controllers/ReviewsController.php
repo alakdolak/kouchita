@@ -208,6 +208,7 @@ class ReviewsController extends Controller
                 $log->text = $request->text;
             else
                 $log->text = '';
+
             $log->save();
 
             $reviewPic = ReviewPic::where('code', $request->code)->get();
@@ -329,7 +330,12 @@ class ReviewsController extends Controller
             if(isset($request->num))
                 $num = $request->num;
 
-            $condition = ['activityId' => $activity->id, 'placeId' => $request->placeId, 'kindPlaceId' => $request->kindPlaceId, 'confirm' => 1, 'relatedTo' => 0];
+            if(\auth()->check())
+                $uId = \auth()->user()->id;
+            else
+                $uId = 0;
+
+            $sqlQuery1 = 'activityId = ' . $activity->id . ' AND placeId = ' . $request->placeId . ' AND kindPlaceId = ' . $request->kindPlaceId . ' AND relatedTo = 0 AND ((visitorId = ' . $uId . ') OR (confirm = 1))';
 
             if(isset($request->filters)) {
                 foreach ($request->filters as $item) {
@@ -364,7 +370,7 @@ class ReviewsController extends Controller
                 if (count($ques) > 0) {
                     $isFilter = true;
 
-                    $logs = LogModel::where($condition)->get();
+                    $logs = LogModel::whereRaw($sqlQuery1)->get();
 
                     $logId = array();
                     for ($i = 0; $i < count($logs); $i++)
@@ -399,7 +405,7 @@ class ReviewsController extends Controller
                     if($sqlQuery == '')
                         $sqlQuery = '1';
 
-                    $logs = LogModel::where($condition)->whereRaw($sqlQuery)->get();
+                    $logs = LogModel::whereRaw($sqlQuery1)->whereRaw($sqlQuery)->get();
 
                     $loo = array();
                     foreach ($logs as $item)
@@ -447,11 +453,11 @@ class ReviewsController extends Controller
             if($sqlQuery == '')
                 $sqlQuery = '1';
 
-            $logCount = LogModel::where($condition)->whereRaw($sqlQuery)->count();
+            $logCount = LogModel::whereRaw($sqlQuery1)->whereRaw($sqlQuery)->count();
             if($num == 0 && $count == 0)
-                $logs = LogModel::where($condition)->orderByDesc('date')->whereRaw($sqlQuery)->orderByDesc('time')->get();
+                $logs = LogModel::whereRaw($sqlQuery1)->whereRaw($sqlQuery)->orderByDesc('date')->orderByDesc('time')->get();
             else
-                $logs = LogModel::where($condition)->orderByDesc('date')->whereRaw($sqlQuery)->orderByDesc('time')->skip(($num-1)*$count)->take($count)->get();
+                $logs = LogModel::whereRaw($sqlQuery1)->whereRaw($sqlQuery)->orderByDesc('date')->orderByDesc('time')->skip(($num-1)*$count)->take($count)->get();
 
             if(count($logs) == 0)
                 echo 'nok1';
@@ -484,58 +490,15 @@ class ReviewsController extends Controller
                         $item->userPic = URL::asset('userProfile/' . $item->user->picture);
                     }
 
-                    $item->pics = ReviewPic::where('logId', $item->id)->get();
                     $item->assigned = ReviewUserAssigned::where('logId', $item->id)->get();
 
-                    switch ($item->kindPlaceId) {
-                        case 1:
-                            $item->mainFile = 'amaken';
-                            $item->place = Amaken::select(['id', 'name', 'cityId', 'file'])->find($item->placeId);
-                            $item->kindPlace = 'اماکن';
-                            break;
-                        case 3:
-                            $item->mainFile = 'restaurant';
-                            $item->place = Restaurant::select(['id', 'name', 'cityId', 'file'])->find($item->placeId);
-                            $item->kindPlace = 'رستوران';
-                            break;
-                        case 4:
-                            $item->mainFile = 'hotels';
-                            $item->place = Hotel::select(['id', 'name', 'cityId', 'file'])->find($item->placeId);
-                            $item->kindPlace = 'هتل';
-                            break;
-                        case 6:
-                            $item->mainFile = 'majara';
-                            $item->place = Majara::select(['id', 'name', 'cityId', 'file'])->find($item->placeId);
-                            $item->kindPlace = 'ماجرا';
-                            break;
-                        case 10:
-                            $item->mainFile = 'sogatsanaie';
-                            $item->place = SogatSanaie::select(['id', 'name', 'cityId', 'file'])->find($item->placeId);
-                            $item->kindPlace = 'سوغات/صنایع';
-                            break;
-                        case 11:
-                            $item->mainFile = 'mahalifood';
-                            $item->place = MahaliFood::select(['id', 'name', 'cityId', 'file'])->find($item->placeId);
-                            $item->kindPlace = 'غذای محلی';
-                            break;
-                    }
+                    $kindPlace = Place::find($item->kindPlaceId);
+                    $item->mainFile = $kindPlace->fileName;
+                    $item->place = DB::table($kindPlace->tableName)->select(['id', 'name', 'cityId', 'file'])->find($item->placeId);
+                    $item->kindPlace = $kindPlace->name;
 
-                    foreach ($item->pics as $item2) {
-                        if($item2->isVideo == 1){
-
-                            $videoArray = explode('.', $item2->pic);
-                            $videoName = '';
-                            for($k = 0; $k < count($videoArray)-1; $k++)
-                                $videoName .= $videoArray[$k] . '.';
-                            $videoName .= 'png';
-
-                            $item2->url = URL::asset('userPhoto/' . $item->mainFile . '/' . $item->place->file . '/' . $videoName);
-                            $item2->videoUrl = URL::asset('userPhoto/' . $item->mainFile . '/' . $item->place->file . '/' . $item2->pic);
-                        }
-                        else{
-                            $item2->url = URL::asset('userPhoto/' . $item->mainFile . '/' . $item->place->file . '/' . $item2->pic);
-                        }
-                    }
+                    $item->pics = ReviewPic::where('logId', $item->id)->get();
+                    $item = $this->imageStyleCreate($item);
 
                     $item->city = Cities::find($item->place->cityId);
                     $item->state = State::find($item->city->stateId);
@@ -619,5 +582,27 @@ class ReviewsController extends Controller
                 }
             }
         }
+    }
+
+    private function imageStyleCreate($item){
+        foreach ($item->pics as $item2) {
+            if($item2->isVideo == 1){
+                $videoArray = explode('.', $item2->pic);
+                $videoName = '';
+                for($k = 0; $k < count($videoArray)-1; $k++)
+                    $videoName .= $videoArray[$k] . '.';
+                $videoName .= 'png';
+
+                $item2->url = URL::asset('userPhoto/' . $item->mainFile . '/' . $item->place->file . '/' . $videoName);
+                $item2->videoUrl = URL::asset('userPhoto/' . $item->mainFile . '/' . $item->place->file . '/' . $item2->pic);
+
+            }
+            else{
+                $item2->url = URL::asset('userPhoto/' . $item->mainFile . '/' . $item->place->file . '/' . $item2->pic);
+            }
+            $item2->width = getimagesize($item2->url)[0];
+            $item2->height = getimagesize($item2->url)[1];
+        }
+        return $item;
     }
 }

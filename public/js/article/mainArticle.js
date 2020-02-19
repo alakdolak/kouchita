@@ -1,4 +1,3 @@
-
 var allPostSample = 0;
 var take = 5;
 
@@ -65,19 +64,4 @@ function createPagination(page){
         }
         $('#allPostPagination').append(text);
     }
-
-
-}
-
-function searchInArticle(id){
-    var text = $('#'+id).val();
-    if(text.trim().length != 0){
-        window.location.href = getLisPostUrl + '/content/' + text;
-    }
-}
-
-function searchInCategory(element){
-    var text = $(element).text();
-    if(text.trim().length != 0)
-        window.location.href = getLisPostUrl + '/category/' + text;
 }

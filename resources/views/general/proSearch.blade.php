@@ -412,15 +412,23 @@
             clearGlobalResult();
     }
 
+    var cityChoose = 0;
     function setCityName(val, id) {
         closeSearchInput();
+        cityChoose = val;
         activeCityFilter = true;
         $("#GEO_SCOPED_SEARCH_INPUT2").val('');
         $("#GEO_SCOPED_SEARCH_INPUT").val(val);
         addToFilter(id);
+
     }
 
-    function goTo() {
+    function goTo(kind = '') {
+
+        if(kind == 'cityPage' && cityChoose != 0){
+            window.location.href = '{{url("cityPage/city")}}/' + cityChoose;
+            return ;
+        }
 
         if(!activeCityFilter || $("#GEO_SCOPED_SEARCH_INPUT").val() == "")
             return;
@@ -540,10 +548,10 @@
             </div>
 
             <div class="row mg-tp-50" id="mainDivProSearch">
-                @if(isset($locationName))
+                @if(isset($locationName['name']))
                     <div class="col-xs-12 boxOfWhereIsHere">
                         شما در حال حاضر در
-                        <div id="nameOfWhereIsHere">{{$locationName}}</div>
+                        <div id="nameOfWhereIsHere">{{$locationName['name']}}</div>
                         هستید
                     </div>
                 @endif
@@ -562,7 +570,7 @@
                         <div id="resultCity" class="data_holder"></div>
                     </div>
                     <div class="col-xs-5 whereSearchBtnMainDiv">
-                        <div id="addToFilterCityBtn" class="inner" onclick="goTo()" style="display: none;">
+                        <div id="addToFilterCityBtn" class="inner" onclick="goTo('cityPage')" style="display: none;">
                             <span id="searchKeyCity"></span>
                         </div>
                     </div>
@@ -596,31 +604,31 @@
                             ?>
 
                             <div class='ui_input_checkbox' style="cursor: pointer;">
-                                <img data-val="{{isset($kindPlaceId) && ($kindPlaceId == 1 || $kindPlaceId == 0) ? 'on' : 'off'}}" class="lantern" id="amakenFilter" width="40px" height="80px" src="{{isset($kindPlaceId) && ($kindPlaceId == 1 || $kindPlaceId == 0) ? $onLampImg : $offLampImg}}">
+                                <img data-val="{{(isset($kindPlaceId) && ($kindPlaceId == 1 || $kindPlaceId == 0)) || !isset($kindPlaceId) ? 'on' : 'off'}}" class="lantern" id="amakenFilter" width="40px" height="80px" src="{{(isset($kindPlaceId) && ($kindPlaceId == 1 || $kindPlaceId == 0)) || !isset($kindPlaceId) ? $onLampImg : $offLampImg}}">
                                 <div>اماکن</div>
                             </div>
                             <div class='ui_input_checkbox' style="cursor: pointer;">
-                                <img data-val="{{isset($kindPlaceId) && ($kindPlaceId == 4 || $kindPlaceId == 0) ? 'on' : 'off'}}" class="lantern" id="hotelFilter" width="40px" height="80px" src="{{isset($kindPlaceId) && ($kindPlaceId == 4 || $kindPlaceId == 0) ? $onLampImg : $offLampImg}}">
+                                <img data-val="{{(isset($kindPlaceId) && ($kindPlaceId == 4 || $kindPlaceId == 0)) || !isset($kindPlaceId) ? 'on' : 'off'}}" class="lantern" id="hotelFilter" width="40px" height="80px" src="{{(isset($kindPlaceId) && ($kindPlaceId == 4 || $kindPlaceId == 0)) || !isset($kindPlaceId) ? $onLampImg : $offLampImg}}">
                                 <div>هتل</div>
                             </div>
                             <div class='ui_input_checkbox' style="cursor: pointer;">
-                                <img data-val="{{isset($kindPlaceId) && ($kindPlaceId == 3 || $kindPlaceId == 0) ? 'on' : 'off'}}" class="lantern" id="restaurantFilter" width="40px" height="80px" src="{{isset($kindPlaceId) && ($kindPlaceId == 3 || $kindPlaceId == 0) ? $onLampImg : $offLampImg}}">
+                                <img data-val="{{(isset($kindPlaceId) && ($kindPlaceId == 3 || $kindPlaceId == 0)) || !isset($kindPlaceId) ? 'on' : 'off'}}" class="lantern" id="restaurantFilter" width="40px" height="80px" src="{{(isset($kindPlaceId) && ($kindPlaceId == 3 || $kindPlaceId == 0)) || !isset($kindPlaceId) ? $onLampImg : $offLampImg}}">
                                 <div>رستوران</div>
                             </div>
                             <div class='ui_input_checkbox' style="cursor: pointer;">
-                                <img data-val="{{isset($kindPlaceId) && ($kindPlaceId == 6 || $kindPlaceId == 0) ? 'on' : 'off'}}" class="lantern" id="majaraFilter" width="40px" height="80px" src="{{isset($kindPlaceId) && ($kindPlaceId == 6 || $kindPlaceId == 0) ? $onLampImg : $offLampImg}}">
+                                <img data-val="{{(isset($kindPlaceId) && ($kindPlaceId == 6 || $kindPlaceId == 0)) || !isset($kindPlaceId)  ? 'on' : 'off'}}" class="lantern" id="majaraFilter" width="40px" height="80px" src="{{(isset($kindPlaceId) && ($kindPlaceId == 6 || $kindPlaceId == 0)) || !isset($kindPlaceId) ? $onLampImg : $offLampImg}}">
                                 <div>ماجراجویی</div>
                             </div>
                             <div class='ui_input_checkbox' style="cursor: pointer;">
-                                <img data-val="{{isset($kindPlaceId) && ($kindPlaceId == 10 || $kindPlaceId == 0) ? 'on' : 'off'}}" class="lantern" id="sogatSanaieFilter" width="40px" height="80px" src="{{isset($kindPlaceId) && ($kindPlaceId == 10 || $kindPlaceId == 0) ? $onLampImg : $offLampImg}}">
+                                <img data-val="{{(isset($kindPlaceId) && ($kindPlaceId == 10 || $kindPlaceId == 0)) || !isset($kindPlaceId)  ? 'on' : 'off'}}" class="lantern" id="sogatSanaieFilter" width="40px" height="80px" src="{{(isset($kindPlaceId) && ($kindPlaceId == 10 || $kindPlaceId == 0)) || !isset($kindPlaceId) ? $onLampImg : $offLampImg}}">
                                 <div>صنایع دستی</div>
                             </div>
                             <div class='ui_input_checkbox' style="cursor: pointer;">
-                                <img data-val="{{isset($kindPlaceId) && ($kindPlaceId == 10 || $kindPlaceId == 0) ? 'on' : 'off'}}" class="lantern" id="sogatSanaieFilter" width="40px" height="80px" src="{{isset($kindPlaceId) && ($kindPlaceId == 10 || $kindPlaceId == 0) ? $onLampImg : $offLampImg}}">
+                                <img data-val="{{(isset($kindPlaceId) && ($kindPlaceId == 10 || $kindPlaceId == 0)) || !isset($kindPlaceId)  ? 'on' : 'off'}}" class="lantern" id="sogatSanaieFilter" width="40px" height="80px" src="{{(isset($kindPlaceId) && ($kindPlaceId == 10 || $kindPlaceId == 0)) || !isset($kindPlaceId) ? $onLampImg : $offLampImg}}">
                                 <div>سوغات</div>
                             </div>
                             <div class='ui_input_checkbox' style="cursor: pointer;">
-                                <img data-val="{{isset($kindPlaceId) && ($kindPlaceId == 11 || $kindPlaceId == 0) ? 'on' : 'off'}}" class="lantern" id="mahaliFoodFilter" width="40px" height="80px" src="{{isset($kindPlaceId) && ($kindPlaceId == 11 || $kindPlaceId == 0) ? $onLampImg : $offLampImg}}">
+                                <img data-val="{{(isset($kindPlaceId) && ($kindPlaceId == 11 || $kindPlaceId == 0)) || !isset($kindPlaceId)  ? 'on' : 'off'}}" class="lantern" id="mahaliFoodFilter" width="40px" height="80px" src="{{(isset($kindPlaceId) && ($kindPlaceId == 11 || $kindPlaceId == 0)) || !isset($kindPlaceId) ? $onLampImg : $offLampImg}}">
                                 <div>غذا محلی</div>
                             </div>
                         </div>

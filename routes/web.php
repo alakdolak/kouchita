@@ -5,19 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Route;
 
 Route::get('databaseforall', function (){
-//    CreatePlaceFeaturesTabl
-//    ALTER TABLE `hotels` DROP `food_irani`, DROP `food_mahali`, DROP `fasele`, DROP `food_farangi`, DROP `coffeeshop`, DROP `tarikhi`, DROP `markaz`, DROP `boundArea`, DROP `hoome`, DROP `shologh`, DROP `khalvat`, DROP `tabiat`, DROP `kooh`, DROP `darya`, DROP `kavir`, DROP `class`, DROP `parking`, DROP `club`, DROP `pool`, DROP `tahviye`, DROP `maalool`, DROP `internet`, DROP `anten`, DROP `breakfast`, DROP `lunch`, DROP `dinner`, DROP `restaurant`, DROP `swite`, DROP `masazh`, DROP `mahali`, DROP `modern`, DROP `sonnati`, DROP `ghadimi`, DROP `mamooli`, DROP `laundry`, DROP `gasht`, DROP `safe_box`, DROP `shop`, DROP `roof_garden`, DROP `game_net`, DROP `confrenss_room`;
-//    placeFeatureRelations
 
-//    ALTER TABLE `amaken` DROP `emkanat`, DROP `tarikhi`, DROP `mooze`, DROP `tafrihi`, DROP `tabiatgardi`, DROP `markazkharid`, DROP `baftetarikhi`, DROP `tejari`, DROP `mazhabi`, DROP `sanati`, DROP `markaz`, DROP `boundArea`, DROP `hoome`, DROP `shologh`, DROP `khalvat`, DROP `tabiat`, DROP `kooh`, DROP `darya`, DROP `kavir`, DROP `jangal`, DROP `shahri`, DROP `village`, DROP `class`, DROP `modern`, DROP `tarikhibana`, DROP `boomi`, DROP `mamooli`, DROP `mazhabiArch`, DROP `weather`, DROP `farhangi`, DROP `ghadimi`;
-
-//    ALTER TABLE `place` ADD `tableName` VARCHAR(50) NULL DEFAULT NULL AFTER `visibility`, ADD `fileName` VARCHAR(50) NULL DEFAULT NULL AFTER `tableName`;
-//    UPDATE `place` SET `tableName` = 'amaken', `fileName` = 'amaken' WHERE `place`.`id` = 1;
-//    UPDATE `place` SET `tableName` = 'restaurant', `fileName` = 'restaurant' WHERE `place`.`id` = 3;
-//    UPDATE `place` SET `tableName` = 'hotels', `fileName` = 'hotels' WHERE `place`.`id` = 4;
-//    UPDATE `place` SET `tableName` = 'majara', `fileName` = 'majara' WHERE `place`.`id` = 6;
-//    UPDATE `place` SET `tableName` = 'sogatSanaies', `fileName` = 'sogatsanaie' WHERE `place`.`id` = 10;
-//    UPDATE `place` SET `tableName` = 'mahaliFood', `fileName` = 'mahalifood' WHERE `place`.`id` = 11;
 });
 
 Route::get('fillHotelPic', function(){
@@ -742,22 +730,25 @@ Route::group(array('middleware' => ['throttle:30', 'nothing', 'auth', 'operatorA
 });
 
 //place-details
+Route::get('place-details/{kindPlaceId}/{placeId}', 'HomeController@setPlaceDetailsURL')->name('placeDetails');
+
 Route::group(array('middleware' => ['throttle:30', 'nothing', 'setSession']), function (){
+
     Route::get('cityPage/{kind}/{city}', 'HomeController@cityPage');
 
     Route::post('/city/Page/getCityOpinion', 'HomeController@getCityOpinion')->name('cityPage.getCityOpinion');
 
-    Route::get('hotel-details/{placeId}/{placeName}/{mode?}', array('as' => 'hotelDetails', 'uses' => 'HotelController@showHotelDetail'));
+    Route::get('amaken-details/{placeId}/{placeName}/{mode?}', 'AmakenController@showAmakenDetail')->name('amakenDetails');
 
-    Route::get('majara-details/{placeId}/{placeName}/{mode?}', array('as' => 'majaraDetails', 'uses' => 'MajaraController@showMajaraDetail'));
+    Route::get('restaurant-details/{placeId}/{placeName}/{mode?}', 'RestaurantController@showRestaurantDetail')->name('restaurantDetails');
 
-    Route::get('restaurant-details/{placeId}/{placeName}/{mode?}', array('as' => 'restaurantDetails', 'uses' => 'RestaurantController@showRestaurantDetail'));
+    Route::get('hotel-details/{placeId}/{placeName}/{mode?}', 'HotelController@showHotelDetail')->name('hotelDetails');
 
-    Route::get('amaken-details/{placeId}/{placeName}/{mode?}', array('as' => 'amakenDetails', 'uses' => 'AmakenController@showAmakenDetail'));
+    Route::get('majara-details/{placeId}/{placeName}/{mode?}', 'MajaraController@showMajaraDetail')->name('majaraDetails');
 
-    Route::get('sanaiesogat-details/{placeId}/{placeName}/{mode?}', array('as' => 'sanaiesogatDetails', 'uses' => 'SogatSanaieController@showSogatSanaieDetails'));
+    Route::get('sanaiesogat-details/{placeId}/{placeName}/{mode?}', 'SogatSanaieController@showSogatSanaieDetails')->name('sanaiesogatDetails');
 
-    Route::get('mahaliFood-details/{placeId}/{placeName}/{mode?}', array('as' => 'mahaliFoodDetails', 'uses' => 'MahaliFoodController@showMahaliFoodDetails'));
+    Route::get('mahaliFood-details/{placeId}/{placeName}/{mode?}', 'MahaliFoodController@showMahaliFoodDetails')->name('mahaliFoodDetails');
 
     Route::get('hotel-details-allReviews/{placeId}/{placeName}/{mode?}', 'HotelController@showHotelDetailAllReview');
     Route::get('hotel-details-questions/{placeId}/{placeName}/{mode?}', 'HotelController@showHotelDetailAllQuestions');

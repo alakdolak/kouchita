@@ -6,11 +6,10 @@ if ($total == 0)
     $total = 1;
 ?>
 @section('title')
-    {{--    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>--}}
     <link rel="stylesheet" href="{{URL::asset('css/theme2/media_uploader.css')}}">
     <script async src="{{URL::asset("js/bootstrap-datepicker.js")}}"></script>
     <link rel="stylesheet" href="{{URL::asset('css/theme2/bootstrap-datepicker.css?v=1')}}">
-    <title>{{$place->name}} | {{$city->name}} | شازده مسافر</title>
+    <title>{{$place->keyword}} | {{$city->name}} </title>
 @stop
 
 @section('meta')
@@ -33,7 +32,7 @@ if ($total == 0)
     <meta property="article:tag" content="{{$place->tag15}}"/>
     <meta name="twitter:card" content="summary_large_image"/>
     <meta name="twitter:description" content="{{$place->meta}}"/>
-    <meta name="twitter:title" content="{{$place->name}} | {{$city->name}} | شازده مسافر"/>
+    <meta name="twitter:title" content="{{$place->keyword}} | {{$city->name}}"/>
     <meta property="og:url" content="{{Request::url()}}"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     @if(count($photos) > 0)
@@ -45,9 +44,6 @@ if ($total == 0)
     @endif
     <meta content="article" property="og:type"/>
     <meta property="og:title" content="{{$place->name}} | {{$city->name}} | شازده مسافر"/>
-
-
-
 @stop
 
 @section('header')
@@ -66,15 +62,10 @@ if ($total == 0)
     <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/abbreviations.css')}}">
 {{--    <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/editor.css')}}">--}}
 
-
-
     <link rel="stylesheet" href="{{URL::asset('css/theme2/swiper.css')}}">
     <script src="{{URL::asset('js/swiper/swiper.min.js')}}"></script>
 
-
-
     {{--vr--}}
-
     @if(isset($video) && $video != null)
         <link rel="stylesheet" href="{{URL::asset('vr2/video-js.css')}}">
         <link rel="stylesheet" href="{{URL::asset('vr2/videojs-vr.css')}}">
@@ -189,8 +180,8 @@ if ($total == 0)
 
     <div class="ppr_rup ppr_priv_hr_atf_north_star_nostalgic position-relative">
 
-
         @include('layouts.placeMainBodyHeader')
+
         <div class="atf_meta_and_photos_wrapper position-relative">
             <div class="greyBackground"></div>
             <div class="atf_meta_and_photos ui_container is-mobile easyClear position-relative">
@@ -994,6 +985,7 @@ if ($total == 0)
                 </script>
             </div>
         </div>
+
     </div>
 
     @if(Auth::check())
@@ -1027,7 +1019,7 @@ if ($total == 0)
                             <ul class="nav navbar-nav">
                                 <li><a class="tabLinkMainWrap similarLocationsBtnTopBar" href="#similarLocationsMainDiv">مکان‌های مشابه</a></li>
                                 <li><a class="tabLinkMainWrap QAndAsBtnTopBar" href="#QAndAMainDivId">سؤالات</a></li>
-                                <li><a class="tabLinkMainWrap postsBtnTopBar" href="#mainDivPlacePost">پست</a></li>
+                                <li><a id="pcPostButton" class="tabLinkMainWrap postsBtnTopBar" href="#mainDivPlacePost">پست</a></li>
                                 <li><a class="tabLinkMainWrap generalDescBtnTopBar" href="#generalDescLinkRel">معرفی کلی</a></li>
                             </ul>
                         </div>
@@ -1043,7 +1035,7 @@ if ($total == 0)
                             <button class="tabLinkMainWrap" onclick="openTab('QAndAMainDivId', this, '#4dc7bc')">سؤالات</button>
                         </a><!--
                      --><a href="#bodyLinks">
-                            <button class="tabLinkMainWrap" onclick="openTab('mainDivPlacePost', this, '#4dc7bc')">پست</button>
+                            <button id="openPostPhone" class="tabLinkMainWrap" onclick="openTab('mainDivPlacePost', this, '#4dc7bc')">پست</button>
                         </a><!--
                      --><a href="#bodyLinks">
                             <button class="tabLinkMainWrap" onclick="openTab('mobileIntroductionMainDivId', this, '#4dc7bc')" id="defaultOpenMainWrap">معرفی کلی</button>
@@ -1843,7 +1835,6 @@ if ($total == 0)
     @endif
 
     @include('hotelDetailsPopUp')
-    {{--    @include('editor')--}}
 
     <script>
 
@@ -2682,9 +2673,9 @@ if ($total == 0)
         @endif
 
         $(window).ready(function(){
-            @foreach($sections as $section)
-                fillMyDivWithAdv('{{$section->sectionId}}', '{{$state->id}}');
-            @endforeach
+            {{--@foreach($sections as $section)--}}
+                {{--fillMyDivWithAdv('{{$section->sectionId}}', '{{$state->id}}');--}}
+            {{--@endforeach--}}
         });
 
         function closePublish() {

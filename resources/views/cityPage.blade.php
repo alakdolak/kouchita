@@ -1,7 +1,4 @@
-<?php $kindPlaceId = 4;
-$placeMode = 4;
-$state = 2; ?>
-        <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -9,7 +6,7 @@ $state = 2; ?>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/home_rebranded.css?v=4')}}"/>
-    <title>صفحه اصلی</title>
+    <title>صفحه {{$place->name}}</title>
 
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/long_lived_global_legacy_2.css?v=2')}}"/>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/masthead-saves.css?v=2')}}'/>
@@ -29,18 +26,10 @@ $state = 2; ?>
 
     <script>
         var searchDir = '{{route('totalSearch')}}';
-        var kindPlaceId = '{{$kindPlaceId}}';
+        {{--var kindPlaceId = '{{$kindPlaceId}}';--}}
         var getStates = '{{route('getStates')}}';
         var getGoyesh = '{{route('getGoyesh')}}';
         var url;
-
-        @if($placeMode == "hotel")
-            url = '{{route('main')}}';
-        @elseif($placeMode == "restaurant")
-            url = '{{route('mainMode', ['mode' => 'restaurant'])}}';
-        @else
-            url = '{{route('mainMode', ['mode' => 'amaken'])}}';
-        @endif
     </script>
 
     <style>
@@ -81,6 +70,8 @@ $state = 2; ?>
 
 <body class="rebrand_2017 desktop HomeRebranded  js_logging">
 
+@include('general.forAllPages')
+
 <div class="header hideOnPhone">
     @include('layouts.placeHeader')
 </div>
@@ -89,9 +80,11 @@ $state = 2; ?>
     <div class="cpBorderBottom cpHeader">
         <div class="cpHeaderRouteOfCityName">
             @if(isset($place->state))
-            <span>استان {{$place->state}}</span>
-            <span> > </span>
-            <span>{{$place->name}}</span>
+                <a href="{{url('cityPage/state/'.$place->state)}}">
+                    <span>استان {{$place->state}}</span>
+                </a>
+                <span> > </span>
+                <span>{{$place->name}}</span>
             @else
                 <span>{{$place->name}}</span>
             @endif
@@ -102,958 +95,82 @@ $state = 2; ?>
     <div class="row">
         <div class="col-lg-3 text-align-right" style="float: left; padding: 0 !important;">
             <div class="postsMainDivInSpecificMode cpCommentBox cpBorderBottom">
-                <div class="postMainDivShown float-right position-relative">
-                    <div class="commentWriterDetailsShow">
-                        <div class="circleBase type2 commentWriterPicShow"></div>
-                        <div class="commentWriterExperienceDetails">
-                            <b class="userProfileName">shazdesina</b>
-                            <div>در
-                                <span class="commentWriterExperiencePlace">هتل عباسی، شهر یزد، استان یزد</span>
+                @foreach($reviews as $item)
+                    <div class="postMainDivShown float-right position-relative">
+                        <div class="commentWriterDetailsShow">
+                            <div class="circleBase type2 commentWriterPicShow">
+                                <img src="{{$item->userPic}}" alt="{{$item->user->username}}" style="width: 100%; height: 100%; border-radius: 50%;">
                             </div>
-                            <div>
-                                هم اکنون - بیش از 23 ساعت پیش
-                            </div>
-                        </div>
-                    </div>
-                    <div class="commentContentsShow position-relative">
-                        <p class="SummarizedPostTextShown">
-                            بسیاری از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از
-                            طریق اینترنت دریافت
-                            می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا
-                            خدمات مورد نیازشان
-                            اثرپذیری فراوانی دارد.
-                            <span class="showMoreText" onclick="showMoreText(this)"></span>
-                        </p>
-                        <p class="completePostTextShown display-none">
-                            بسیاری از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از
-                            طریق اینترنت دریافت
-                            می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا
-                            خدمات مورد نیازشان
-                            اثرپذیری فراوانی دارد.
-                            با توجه به ابن که خدمات و کالاهای بومی و محلی دارای اصالت و فرهنگ کهن جوامع
-                            روستایی هستند، می توان
-                            گفت اینترنت می تواند در آمدزایی از سبک زندگی جوامع محلی نقش
-                            <span class="showLessText" onclick="showLessText(this)">کمتر</span>
-                        </p>
-                    </div>
-                    <div class="commentPhotosShow">
-                        <div class="photosCol col-xs-12">
-                            <div data-toggle="modal" data-target=".showingPhotosModal"></div>
-                            <div class="numberOfPhotosMainDiv">
-                                <div class="numberOfPhotos">31+</div>
-                                <div>عکس</div>
+                            <div class="commentWriterExperienceDetails">
+                                <b class="userProfileName">{{$item->user->username}}</b>
+                                <div>در
+                                    <a href="{{$item->url}}" target="_blank">
+                                        <span class="commentWriterExperiencePlace">{{$item->place->name}}، شهر {{$item->city->name}}، استان {{$item->state->name}}</span>
+                                    </a>
+                                </div>
+                                <div>
+                                    {{$item->timeAgo}}
+                                </div>
                             </div>
                         </div>
-                        <div class="quantityOfLikes">
-                            <span>31</span>
-                            نفر دوست داشتند،
-                            <span>31</span>
-                            نفر دوست نداشتند و
-                            <span>31</span>
-                            نفر نظر دادند.
+                        <div class="commentContentsShow position-relative">
+                            @if(isset($item->summery))
+                                <p class="SummarizedPostTextShown" style="white-space: pre-line">
+                                    {{$item->summery}}
+                                    <span class="showMoreText" onclick="showMoreText(this)"></span>
+                                </p>
+                                <p class="completePostTextShown display-none" style="white-space: pre-line">
+                                    {{$item->text}}
+                                    <span class="showLessText" onclick="showLessText(this)">کمتر</span>
+                                </p>
+                            @else
+                                <p class="completePostTextShown">
+                                    {{$item->text}}
+                                </p>
+                            @endif
                         </div>
-                    </div>
-                </div>
-                <div class="postMainDivShown float-right position-relative">
-                    <div class="commentWriterDetailsShow">
-                        <div class="circleBase type2 commentWriterPicShow"></div>
-                        <div class="commentWriterExperienceDetails">
-                            <b class="userProfileName">shazdesina</b>
-                            <div>در
-                                <span class="commentWriterExperiencePlace">هتل عباسی، شهر یزد، استان یزد</span>
+                        <div class="commentPhotosShow">
+                            @if(count($item->pics) > 0)
+                            <div class="photosCol col-xs-12">
+                                <div data-toggle="modal" data-target=".showingPhotosModal" style="position: relative; overflow: hidden; display: flex; justify-content: center; align-items: center;">
+                                    <img src="{{$item->pics[0]->picUrl}}" style="position: absolute;">
+                                </div>
+                                @if(count($item->pics) > 1)
+                                    <div class="numberOfPhotosMainDiv">
+                                        <div class="numberOfPhotos">{{count($item->pics) - 1}}+</div>
+                                        <div>عکس</div>
+                                    </div>
+                                @endif
                             </div>
-                            <div>
-                                هم اکنون - بیش از 23 ساعت پیش
+                            @endif
+                            <div class="quantityOfLikes">
+                                <span>{{$item->like}}</span>
+                                نفر دوست داشتند،
+                                <span>{{$item->disLike}}</span>
+                                نفر دوست نداشتند و
+                                <span>{{$item->comments}}</span>
+                                نفر نظر دادند.
                             </div>
                         </div>
                     </div>
-                    <div class="commentContentsShow position-relative">
-                        <p class="SummarizedPostTextShown">
-                            بسیاری از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از
-                            طریق اینترنت دریافت
-                            می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا
-                            خدمات مورد نیازشان
-                            اثرپذیری فراوانی دارد.
-                            <span class="showMoreText" onclick="showMoreText(this)"></span>
-                        </p>
-                        <p class="completePostTextShown display-none">
-                            بسیاری از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از
-                            طریق اینترنت دریافت
-                            می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا
-                            خدمات مورد نیازشان
-                            اثرپذیری فراوانی دارد.
-                            با توجه به ابن که خدمات و کالاهای بومی و محلی دارای اصالت و فرهنگ کهن جوامع
-                            روستایی هستند، می توان
-                            گفت اینترنت می تواند در آمدزایی از سبک زندگی جوامع محلی نقش
-                            <span class="showLessText" onclick="showLessText(this)">کمتر</span>
-                        </p>
-                    </div>
-                    <div class="commentPhotosShow">
-                        <div class="photosCol col-xs-12">
-                            <div data-toggle="modal" data-target=".showingPhotosModal"></div>
-                            <div class="numberOfPhotosMainDiv">
-                                <div class="numberOfPhotos">31+</div>
-                                <div>عکس</div>
-                            </div>
-                        </div>
-                        <div class="quantityOfLikes">
-                            <span>31</span>
-                            نفر دوست داشتند،
-                            <span>31</span>
-                            نفر دوست نداشتند و
-                            <span>31</span>
-                            نفر نظر دادند.
-                        </div>
-                    </div>
-                </div>
-                <div class="postMainDivShown float-right position-relative">
-                    <div class="commentWriterDetailsShow">
-                        <div class="circleBase type2 commentWriterPicShow"></div>
-                        <div class="commentWriterExperienceDetails">
-                            <b class="userProfileName">shazdesina</b>
-                            <div>در
-                                <span class="commentWriterExperiencePlace">هتل عباسی، شهر یزد، استان یزد</span>
-                            </div>
-                            <div>
-                                هم اکنون - بیش از 23 ساعت پیش
-                            </div>
-                        </div>
-                    </div>
-                    <div class="commentContentsShow position-relative">
-                        <p class="SummarizedPostTextShown">
-                            بسیاری از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از
-                            طریق اینترنت دریافت
-                            می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا
-                            خدمات مورد نیازشان
-                            اثرپذیری فراوانی دارد.
-                            <span class="showMoreText" onclick="showMoreText(this)"></span>
-                        </p>
-                        <p class="completePostTextShown display-none">
-                            بسیاری از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از
-                            طریق اینترنت دریافت
-                            می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا
-                            خدمات مورد نیازشان
-                            اثرپذیری فراوانی دارد.
-                            با توجه به ابن که خدمات و کالاهای بومی و محلی دارای اصالت و فرهنگ کهن جوامع
-                            روستایی هستند، می توان
-                            گفت اینترنت می تواند در آمدزایی از سبک زندگی جوامع محلی نقش
-                            <span class="showLessText" onclick="showLessText(this)">کمتر</span>
-                        </p>
-                    </div>
-                    <div class="commentPhotosShow">
-                        <div class="photosCol col-xs-12">
-                            <div data-toggle="modal" data-target=".showingPhotosModal"></div>
-                            <div class="numberOfPhotosMainDiv">
-                                <div class="numberOfPhotos">31+</div>
-                                <div>عکس</div>
-                            </div>
-                        </div>
-                        <div class="quantityOfLikes">
-                            <span>31</span>
-                            نفر دوست داشتند،
-                            <span>31</span>
-                            نفر دوست نداشتند و
-                            <span>31</span>
-                            نفر نظر دادند.
-                        </div>
-                    </div>
-                </div>
-                <div class="postMainDivShown float-right position-relative">
-                    <div class="commentWriterDetailsShow">
-                        <div class="circleBase type2 commentWriterPicShow"></div>
-                        <div class="commentWriterExperienceDetails">
-                            <b class="userProfileName">shazdesina</b>
-                            <div>در
-                                <span class="commentWriterExperiencePlace">هتل عباسی، شهر یزد، استان یزد</span>
-                            </div>
-                            <div>
-                                هم اکنون - بیش از 23 ساعت پیش
-                            </div>
-                        </div>
-                    </div>
-                    <div class="commentContentsShow position-relative">
-                        <p class="SummarizedPostTextShown">
-                            بسیاری از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از
-                            طریق اینترنت دریافت
-                            می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا
-                            خدمات مورد نیازشان
-                            اثرپذیری فراوانی دارد.
-                            <span class="showMoreText" onclick="showMoreText(this)"></span>
-                        </p>
-                        <p class="completePostTextShown display-none">
-                            بسیاری از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از
-                            طریق اینترنت دریافت
-                            می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا
-                            خدمات مورد نیازشان
-                            اثرپذیری فراوانی دارد.
-                            با توجه به ابن که خدمات و کالاهای بومی و محلی دارای اصالت و فرهنگ کهن جوامع
-                            روستایی هستند، می توان
-                            گفت اینترنت می تواند در آمدزایی از سبک زندگی جوامع محلی نقش
-                            <span class="showLessText" onclick="showLessText(this)">کمتر</span>
-                        </p>
-                    </div>
-                    <div class="commentPhotosShow">
-                        <div class="photosCol col-xs-12">
-                            <div data-toggle="modal" data-target=".showingPhotosModal"></div>
-                            <div class="numberOfPhotosMainDiv">
-                                <div class="numberOfPhotos">31+</div>
-                                <div>عکس</div>
-                            </div>
-                        </div>
-                        <div class="quantityOfLikes">
-                            <span>31</span>
-                            نفر دوست داشتند،
-                            <span>31</span>
-                            نفر دوست نداشتند و
-                            <span>31</span>
-                            نفر نظر دادند.
-                        </div>
-                    </div>
-                </div>
-                <div class="postMainDivShown float-right position-relative">
-                    <div class="commentWriterDetailsShow">
-                        <div class="circleBase type2 commentWriterPicShow"></div>
-                        <div class="commentWriterExperienceDetails">
-                            <b class="userProfileName">shazdesina</b>
-                            <div>در
-                                <span class="commentWriterExperiencePlace">هتل عباسی، شهر یزد، استان یزد</span>
-                            </div>
-                            <div>
-                                هم اکنون - بیش از 23 ساعت پیش
-                            </div>
-                        </div>
-                    </div>
-                    <div class="commentContentsShow position-relative">
-                        <p class="SummarizedPostTextShown">
-                            بسیاری از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از
-                            طریق اینترنت دریافت
-                            می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا
-                            خدمات مورد نیازشان
-                            اثرپذیری فراوانی دارد.
-                            <span class="showMoreText" onclick="showMoreText(this)"></span>
-                        </p>
-                        <p class="completePostTextShown display-none">
-                            بسیاری از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از
-                            طریق اینترنت دریافت
-                            می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا
-                            خدمات مورد نیازشان
-                            اثرپذیری فراوانی دارد.
-                            با توجه به ابن که خدمات و کالاهای بومی و محلی دارای اصالت و فرهنگ کهن جوامع
-                            روستایی هستند، می توان
-                            گفت اینترنت می تواند در آمدزایی از سبک زندگی جوامع محلی نقش
-                            <span class="showLessText" onclick="showLessText(this)">کمتر</span>
-                        </p>
-                    </div>
-                    <div class="commentPhotosShow">
-                        <div class="photosCol col-xs-12">
-                            <div data-toggle="modal" data-target=".showingPhotosModal"></div>
-                            <div class="numberOfPhotosMainDiv">
-                                <div class="numberOfPhotos">31+</div>
-                                <div>عکس</div>
-                            </div>
-                        </div>
-                        <div class="quantityOfLikes">
-                            <span>31</span>
-                            نفر دوست داشتند،
-                            <span>31</span>
-                            نفر دوست نداشتند و
-                            <span>31</span>
-                            نفر نظر دادند.
-                        </div>
-                    </div>
-                </div>
-                <div class="postMainDivShown float-right position-relative">
-                    <div class="commentWriterDetailsShow">
-                        <div class="circleBase type2 commentWriterPicShow"></div>
-                        <div class="commentWriterExperienceDetails">
-                            <b class="userProfileName">shazdesina</b>
-                            <div>در
-                                <span class="commentWriterExperiencePlace">هتل عباسی، شهر یزد، استان یزد</span>
-                            </div>
-                            <div>
-                                هم اکنون - بیش از 23 ساعت پیش
-                            </div>
-                        </div>
-                    </div>
-                    <div class="commentContentsShow position-relative">
-                        <p class="SummarizedPostTextShown">
-                            بسیاری از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از
-                            طریق اینترنت دریافت
-                            می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا
-                            خدمات مورد نیازشان
-                            اثرپذیری فراوانی دارد.
-                            <span class="showMoreText" onclick="showMoreText(this)"></span>
-                        </p>
-                        <p class="completePostTextShown display-none">
-                            بسیاری از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از
-                            طریق اینترنت دریافت
-                            می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا
-                            خدمات مورد نیازشان
-                            اثرپذیری فراوانی دارد.
-                            با توجه به ابن که خدمات و کالاهای بومی و محلی دارای اصالت و فرهنگ کهن جوامع
-                            روستایی هستند، می توان
-                            گفت اینترنت می تواند در آمدزایی از سبک زندگی جوامع محلی نقش
-                            <span class="showLessText" onclick="showLessText(this)">کمتر</span>
-                        </p>
-                    </div>
-                    <div class="commentPhotosShow">
-                        <div class="photosCol col-xs-12">
-                            <div data-toggle="modal" data-target=".showingPhotosModal"></div>
-                            <div class="numberOfPhotosMainDiv">
-                                <div class="numberOfPhotos">31+</div>
-                                <div>عکس</div>
-                            </div>
-                        </div>
-                        <div class="quantityOfLikes">
-                            <span>31</span>
-                            نفر دوست داشتند،
-                            <span>31</span>
-                            نفر دوست نداشتند و
-                            <span>31</span>
-                            نفر نظر دادند.
-                        </div>
-                    </div>
-                </div>
-                <div class="postMainDivShown float-right position-relative">
-                    <div class="commentWriterDetailsShow">
-                        <div class="circleBase type2 commentWriterPicShow"></div>
-                        <div class="commentWriterExperienceDetails">
-                            <b class="userProfileName">shazdesina</b>
-                            <div>در
-                                <span class="commentWriterExperiencePlace">هتل عباسی، شهر یزد، استان یزد</span>
-                            </div>
-                            <div>
-                                هم اکنون - بیش از 23 ساعت پیش
-                            </div>
-                        </div>
-                    </div>
-                    <div class="commentContentsShow position-relative">
-                        <p class="SummarizedPostTextShown">
-                            بسیاری از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از
-                            طریق اینترنت دریافت
-                            می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا
-                            خدمات مورد نیازشان
-                            اثرپذیری فراوانی دارد.
-                            <span class="showMoreText" onclick="showMoreText(this)"></span>
-                        </p>
-                        <p class="completePostTextShown display-none">
-                            بسیاری از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از
-                            طریق اینترنت دریافت
-                            می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا
-                            خدمات مورد نیازشان
-                            اثرپذیری فراوانی دارد.
-                            با توجه به ابن که خدمات و کالاهای بومی و محلی دارای اصالت و فرهنگ کهن جوامع
-                            روستایی هستند، می توان
-                            گفت اینترنت می تواند در آمدزایی از سبک زندگی جوامع محلی نقش
-                            <span class="showLessText" onclick="showLessText(this)">کمتر</span>
-                        </p>
-                    </div>
-                    <div class="commentPhotosShow">
-                        <div class="photosCol col-xs-12">
-                            <div data-toggle="modal" data-target=".showingPhotosModal"></div>
-                            <div class="numberOfPhotosMainDiv">
-                                <div class="numberOfPhotos">31+</div>
-                                <div>عکس</div>
-                            </div>
-                        </div>
-                        <div class="quantityOfLikes">
-                            <span>31</span>
-                            نفر دوست داشتند،
-                            <span>31</span>
-                            نفر دوست نداشتند و
-                            <span>31</span>
-                            نفر نظر دادند.
-                        </div>
-                    </div>
-                </div>
-                <div class="postMainDivShown float-right position-relative">
-                    <div class="commentWriterDetailsShow">
-                        <div class="circleBase type2 commentWriterPicShow"></div>
-                        <div class="commentWriterExperienceDetails">
-                            <b class="userProfileName">shazdesina</b>
-                            <div>در
-                                <span class="commentWriterExperiencePlace">هتل عباسی، شهر یزد، استان یزد</span>
-                            </div>
-                            <div>
-                                هم اکنون - بیش از 23 ساعت پیش
-                            </div>
-                        </div>
-                    </div>
-                    <div class="commentContentsShow position-relative">
-                        <p class="SummarizedPostTextShown">
-                            بسیاری از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از
-                            طریق اینترنت دریافت
-                            می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا
-                            خدمات مورد نیازشان
-                            اثرپذیری فراوانی دارد.
-                            <span class="showMoreText" onclick="showMoreText(this)"></span>
-                        </p>
-                        <p class="completePostTextShown display-none">
-                            بسیاری از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از
-                            طریق اینترنت دریافت
-                            می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا
-                            خدمات مورد نیازشان
-                            اثرپذیری فراوانی دارد.
-                            با توجه به ابن که خدمات و کالاهای بومی و محلی دارای اصالت و فرهنگ کهن جوامع
-                            روستایی هستند، می توان
-                            گفت اینترنت می تواند در آمدزایی از سبک زندگی جوامع محلی نقش
-                            <span class="showLessText" onclick="showLessText(this)">کمتر</span>
-                        </p>
-                    </div>
-                    <div class="commentPhotosShow">
-                        <div class="photosCol col-xs-12">
-                            <div data-toggle="modal" data-target=".showingPhotosModal"></div>
-                            <div class="numberOfPhotosMainDiv">
-                                <div class="numberOfPhotos">31+</div>
-                                <div>عکس</div>
-                            </div>
-                        </div>
-                        <div class="quantityOfLikes">
-                            <span>31</span>
-                            نفر دوست داشتند،
-                            <span>31</span>
-                            نفر دوست نداشتند و
-                            <span>31</span>
-                            نفر نظر دادند.
-                        </div>
-                    </div>
-                </div>
-                <div class="postMainDivShown float-right position-relative">
-                    <div class="commentWriterDetailsShow">
-                        <div class="circleBase type2 commentWriterPicShow"></div>
-                        <div class="commentWriterExperienceDetails">
-                            <b class="userProfileName">shazdesina</b>
-                            <div>در
-                                <span class="commentWriterExperiencePlace">هتل عباسی، شهر یزد، استان یزد</span>
-                            </div>
-                            <div>
-                                هم اکنون - بیش از 23 ساعت پیش
-                            </div>
-                        </div>
-                    </div>
-                    <div class="commentContentsShow position-relative">
-                        <p class="SummarizedPostTextShown">
-                            بسیاری از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از
-                            طریق اینترنت دریافت
-                            می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا
-                            خدمات مورد نیازشان
-                            اثرپذیری فراوانی دارد.
-                            <span class="showMoreText" onclick="showMoreText(this)"></span>
-                        </p>
-                        <p class="completePostTextShown display-none">
-                            بسیاری از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از
-                            طریق اینترنت دریافت
-                            می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا
-                            خدمات مورد نیازشان
-                            اثرپذیری فراوانی دارد.
-                            با توجه به ابن که خدمات و کالاهای بومی و محلی دارای اصالت و فرهنگ کهن جوامع
-                            روستایی هستند، می توان
-                            گفت اینترنت می تواند در آمدزایی از سبک زندگی جوامع محلی نقش
-                            <span class="showLessText" onclick="showLessText(this)">کمتر</span>
-                        </p>
-                    </div>
-                    <div class="commentPhotosShow">
-                        <div class="photosCol col-xs-12">
-                            <div data-toggle="modal" data-target=".showingPhotosModal"></div>
-                            <div class="numberOfPhotosMainDiv">
-                                <div class="numberOfPhotos">31+</div>
-                                <div>عکس</div>
-                            </div>
-                        </div>
-                        <div class="quantityOfLikes">
-                            <span>31</span>
-                            نفر دوست داشتند،
-                            <span>31</span>
-                            نفر دوست نداشتند و
-                            <span>31</span>
-                            نفر نظر دادند.
-                        </div>
-                    </div>
-                </div>
-                <div class="postMainDivShown float-right position-relative">
-                    <div class="commentWriterDetailsShow">
-                        <div class="circleBase type2 commentWriterPicShow"></div>
-                        <div class="commentWriterExperienceDetails">
-                            <b class="userProfileName">shazdesina</b>
-                            <div>در
-                                <span class="commentWriterExperiencePlace">هتل عباسی، شهر یزد، استان یزد</span>
-                            </div>
-                            <div>
-                                هم اکنون - بیش از 23 ساعت پیش
-                            </div>
-                        </div>
-                    </div>
-                    <div class="commentContentsShow position-relative">
-                        <p class="SummarizedPostTextShown">
-                            بسیاری از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از
-                            طریق اینترنت دریافت
-                            می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا
-                            خدمات مورد نیازشان
-                            اثرپذیری فراوانی دارد.
-                            <span class="showMoreText" onclick="showMoreText(this)"></span>
-                        </p>
-                        <p class="completePostTextShown display-none">
-                            بسیاری از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از
-                            طریق اینترنت دریافت
-                            می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا
-                            خدمات مورد نیازشان
-                            اثرپذیری فراوانی دارد.
-                            با توجه به ابن که خدمات و کالاهای بومی و محلی دارای اصالت و فرهنگ کهن جوامع
-                            روستایی هستند، می توان
-                            گفت اینترنت می تواند در آمدزایی از سبک زندگی جوامع محلی نقش
-                            <span class="showLessText" onclick="showLessText(this)">کمتر</span>
-                        </p>
-                    </div>
-                    <div class="commentPhotosShow">
-                        <div class="photosCol col-xs-12">
-                            <div data-toggle="modal" data-target=".showingPhotosModal"></div>
-                            <div class="numberOfPhotosMainDiv">
-                                <div class="numberOfPhotos">31+</div>
-                                <div>عکس</div>
-                            </div>
-                        </div>
-                        <div class="quantityOfLikes">
-                            <span>31</span>
-                            نفر دوست داشتند،
-                            <span>31</span>
-                            نفر دوست نداشتند و
-                            <span>31</span>
-                            نفر نظر دادند.
-                        </div>
-                    </div>
-                </div>
-                <div class="postMainDivShown float-right position-relative">
-                    <div class="commentWriterDetailsShow">
-                        <div class="circleBase type2 commentWriterPicShow"></div>
-                        <div class="commentWriterExperienceDetails">
-                            <b class="userProfileName">shazdesina</b>
-                            <div>در
-                                <span class="commentWriterExperiencePlace">هتل عباسی، شهر یزد، استان یزد</span>
-                            </div>
-                            <div>
-                                هم اکنون - بیش از 23 ساعت پیش
-                            </div>
-                        </div>
-                    </div>
-                    <div class="commentContentsShow position-relative">
-                        <p class="SummarizedPostTextShown">
-                            بسیاری از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از
-                            طریق اینترنت دریافت
-                            می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا
-                            خدمات مورد نیازشان
-                            اثرپذیری فراوانی دارد.
-                            <span class="showMoreText" onclick="showMoreText(this)"></span>
-                        </p>
-                        <p class="completePostTextShown display-none">
-                            بسیاری از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از
-                            طریق اینترنت دریافت
-                            می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا
-                            خدمات مورد نیازشان
-                            اثرپذیری فراوانی دارد.
-                            با توجه به ابن که خدمات و کالاهای بومی و محلی دارای اصالت و فرهنگ کهن جوامع
-                            روستایی هستند، می توان
-                            گفت اینترنت می تواند در آمدزایی از سبک زندگی جوامع محلی نقش
-                            <span class="showLessText" onclick="showLessText(this)">کمتر</span>
-                        </p>
-                    </div>
-                    <div class="commentPhotosShow">
-                        <div class="photosCol col-xs-12">
-                            <div data-toggle="modal" data-target=".showingPhotosModal"></div>
-                            <div class="numberOfPhotosMainDiv">
-                                <div class="numberOfPhotos">31+</div>
-                                <div>عکس</div>
-                            </div>
-                        </div>
-                        <div class="quantityOfLikes">
-                            <span>31</span>
-                            نفر دوست داشتند،
-                            <span>31</span>
-                            نفر دوست نداشتند و
-                            <span>31</span>
-                            نفر نظر دادند.
-                        </div>
-                    </div>
-                </div>
-                <div class="postMainDivShown float-right position-relative">
-                    <div class="commentWriterDetailsShow">
-                        <div class="circleBase type2 commentWriterPicShow"></div>
-                        <div class="commentWriterExperienceDetails">
-                            <b class="userProfileName">shazdesina</b>
-                            <div>در
-                                <span class="commentWriterExperiencePlace">هتل عباسی، شهر یزد، استان یزد</span>
-                            </div>
-                            <div>
-                                هم اکنون - بیش از 23 ساعت پیش
-                            </div>
-                        </div>
-                    </div>
-                    <div class="commentContentsShow position-relative">
-                        <p class="SummarizedPostTextShown">
-                            بسیاری از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از
-                            طریق اینترنت دریافت
-                            می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا
-                            خدمات مورد نیازشان
-                            اثرپذیری فراوانی دارد.
-                            <span class="showMoreText" onclick="showMoreText(this)"></span>
-                        </p>
-                        <p class="completePostTextShown display-none">
-                            بسیاری از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از
-                            طریق اینترنت دریافت
-                            می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا
-                            خدمات مورد نیازشان
-                            اثرپذیری فراوانی دارد.
-                            با توجه به ابن که خدمات و کالاهای بومی و محلی دارای اصالت و فرهنگ کهن جوامع
-                            روستایی هستند، می توان
-                            گفت اینترنت می تواند در آمدزایی از سبک زندگی جوامع محلی نقش
-                            <span class="showLessText" onclick="showLessText(this)">کمتر</span>
-                        </p>
-                    </div>
-                    <div class="commentPhotosShow">
-                        <div class="photosCol col-xs-12">
-                            <div data-toggle="modal" data-target=".showingPhotosModal"></div>
-                            <div class="numberOfPhotosMainDiv">
-                                <div class="numberOfPhotos">31+</div>
-                                <div>عکس</div>
-                            </div>
-                        </div>
-                        <div class="quantityOfLikes">
-                            <span>31</span>
-                            نفر دوست داشتند،
-                            <span>31</span>
-                            نفر دوست نداشتند و
-                            <span>31</span>
-                            نفر نظر دادند.
-                        </div>
-                    </div>
-                </div>
-                <div class="postMainDivShown float-right position-relative">
-                    <div class="commentWriterDetailsShow">
-                        <div class="circleBase type2 commentWriterPicShow"></div>
-                        <div class="commentWriterExperienceDetails">
-                            <b class="userProfileName">shazdesina</b>
-                            <div>در
-                                <span class="commentWriterExperiencePlace">هتل عباسی، شهر یزد، استان یزد</span>
-                            </div>
-                            <div>
-                                هم اکنون - بیش از 23 ساعت پیش
-                            </div>
-                        </div>
-                    </div>
-                    <div class="commentContentsShow position-relative">
-                        <p class="SummarizedPostTextShown">
-                            بسیاری از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از
-                            طریق اینترنت دریافت
-                            می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا
-                            خدمات مورد نیازشان
-                            اثرپذیری فراوانی دارد.
-                            <span class="showMoreText" onclick="showMoreText(this)"></span>
-                        </p>
-                        <p class="completePostTextShown display-none">
-                            بسیاری از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از
-                            طریق اینترنت دریافت
-                            می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا
-                            خدمات مورد نیازشان
-                            اثرپذیری فراوانی دارد.
-                            با توجه به ابن که خدمات و کالاهای بومی و محلی دارای اصالت و فرهنگ کهن جوامع
-                            روستایی هستند، می توان
-                            گفت اینترنت می تواند در آمدزایی از سبک زندگی جوامع محلی نقش
-                            <span class="showLessText" onclick="showLessText(this)">کمتر</span>
-                        </p>
-                    </div>
-                    <div class="commentPhotosShow">
-                        <div class="photosCol col-xs-12">
-                            <div data-toggle="modal" data-target=".showingPhotosModal"></div>
-                            <div class="numberOfPhotosMainDiv">
-                                <div class="numberOfPhotos">31+</div>
-                                <div>عکس</div>
-                            </div>
-                        </div>
-                        <div class="quantityOfLikes">
-                            <span>31</span>
-                            نفر دوست داشتند،
-                            <span>31</span>
-                            نفر دوست نداشتند و
-                            <span>31</span>
-                            نفر نظر دادند.
-                        </div>
-                    </div>
-                </div>
-                <div class="postMainDivShown float-right position-relative">
-                    <div class="commentWriterDetailsShow">
-                        <div class="circleBase type2 commentWriterPicShow"></div>
-                        <div class="commentWriterExperienceDetails">
-                            <b class="userProfileName">shazdesina</b>
-                            <div>در
-                                <span class="commentWriterExperiencePlace">هتل عباسی، شهر یزد، استان یزد</span>
-                            </div>
-                            <div>
-                                هم اکنون - بیش از 23 ساعت پیش
-                            </div>
-                        </div>
-                    </div>
-                    <div class="commentContentsShow position-relative">
-                        <p class="SummarizedPostTextShown">
-                            بسیاری از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از
-                            طریق اینترنت دریافت
-                            می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا
-                            خدمات مورد نیازشان
-                            اثرپذیری فراوانی دارد.
-                            <span class="showMoreText" onclick="showMoreText(this)"></span>
-                        </p>
-                        <p class="completePostTextShown display-none">
-                            بسیاری از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از
-                            طریق اینترنت دریافت
-                            می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا
-                            خدمات مورد نیازشان
-                            اثرپذیری فراوانی دارد.
-                            با توجه به ابن که خدمات و کالاهای بومی و محلی دارای اصالت و فرهنگ کهن جوامع
-                            روستایی هستند، می توان
-                            گفت اینترنت می تواند در آمدزایی از سبک زندگی جوامع محلی نقش
-                            <span class="showLessText" onclick="showLessText(this)">کمتر</span>
-                        </p>
-                    </div>
-                    <div class="commentPhotosShow">
-                        <div class="photosCol col-xs-12">
-                            <div data-toggle="modal" data-target=".showingPhotosModal"></div>
-                            <div class="numberOfPhotosMainDiv">
-                                <div class="numberOfPhotos">31+</div>
-                                <div>عکس</div>
-                            </div>
-                        </div>
-                        <div class="quantityOfLikes">
-                            <span>31</span>
-                            نفر دوست داشتند،
-                            <span>31</span>
-                            نفر دوست نداشتند و
-                            <span>31</span>
-                            نفر نظر دادند.
-                        </div>
-                    </div>
-                </div>
-                <div class="postMainDivShown float-right position-relative">
-                    <div class="commentWriterDetailsShow">
-                        <div class="circleBase type2 commentWriterPicShow"></div>
-                        <div class="commentWriterExperienceDetails">
-                            <b class="userProfileName">shazdesina</b>
-                            <div>در
-                                <span class="commentWriterExperiencePlace">هتل عباسی، شهر یزد، استان یزد</span>
-                            </div>
-                            <div>
-                                هم اکنون - بیش از 23 ساعت پیش
-                            </div>
-                        </div>
-                    </div>
-                    <div class="commentContentsShow position-relative">
-                        <p class="SummarizedPostTextShown">
-                            بسیاری از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از
-                            طریق اینترنت دریافت
-                            می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا
-                            خدمات مورد نیازشان
-                            اثرپذیری فراوانی دارد.
-                            <span class="showMoreText" onclick="showMoreText(this)"></span>
-                        </p>
-                        <p class="completePostTextShown display-none">
-                            بسیاری از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از
-                            طریق اینترنت دریافت
-                            می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا
-                            خدمات مورد نیازشان
-                            اثرپذیری فراوانی دارد.
-                            با توجه به ابن که خدمات و کالاهای بومی و محلی دارای اصالت و فرهنگ کهن جوامع
-                            روستایی هستند، می توان
-                            گفت اینترنت می تواند در آمدزایی از سبک زندگی جوامع محلی نقش
-                            <span class="showLessText" onclick="showLessText(this)">کمتر</span>
-                        </p>
-                    </div>
-                    <div class="commentPhotosShow">
-                        <div class="photosCol col-xs-12">
-                            <div data-toggle="modal" data-target=".showingPhotosModal"></div>
-                            <div class="numberOfPhotosMainDiv">
-                                <div class="numberOfPhotos">31+</div>
-                                <div>عکس</div>
-                            </div>
-                        </div>
-                        <div class="quantityOfLikes">
-                            <span>31</span>
-                            نفر دوست داشتند،
-                            <span>31</span>
-                            نفر دوست نداشتند و
-                            <span>31</span>
-                            نفر نظر دادند.
-                        </div>
-                    </div>
-                </div>
-                <div class="postMainDivShown float-right position-relative">
-                    <div class="commentWriterDetailsShow">
-                        <div class="circleBase type2 commentWriterPicShow"></div>
-                        <div class="commentWriterExperienceDetails">
-                            <b class="userProfileName">shazdesina</b>
-                            <div>در
-                                <span class="commentWriterExperiencePlace">هتل عباسی، شهر یزد، استان یزد</span>
-                            </div>
-                            <div>
-                                هم اکنون - بیش از 23 ساعت پیش
-                            </div>
-                        </div>
-                    </div>
-                    <div class="commentContentsShow position-relative">
-                        <p class="SummarizedPostTextShown">
-                            بسیاری از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از
-                            طریق اینترنت دریافت
-                            می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا
-                            خدمات مورد نیازشان
-                            اثرپذیری فراوانی دارد.
-                            <span class="showMoreText" onclick="showMoreText(this)"></span>
-                        </p>
-                        <p class="completePostTextShown display-none">
-                            بسیاری از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از
-                            طریق اینترنت دریافت
-                            می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا
-                            خدمات مورد نیازشان
-                            اثرپذیری فراوانی دارد.
-                            با توجه به ابن که خدمات و کالاهای بومی و محلی دارای اصالت و فرهنگ کهن جوامع
-                            روستایی هستند، می توان
-                            گفت اینترنت می تواند در آمدزایی از سبک زندگی جوامع محلی نقش
-                            <span class="showLessText" onclick="showLessText(this)">کمتر</span>
-                        </p>
-                    </div>
-                    <div class="commentPhotosShow">
-                        <div class="photosCol col-xs-12">
-                            <div data-toggle="modal" data-target=".showingPhotosModal"></div>
-                            <div class="numberOfPhotosMainDiv">
-                                <div class="numberOfPhotos">31+</div>
-                                <div>عکس</div>
-                            </div>
-                        </div>
-                        <div class="quantityOfLikes">
-                            <span>31</span>
-                            نفر دوست داشتند،
-                            <span>31</span>
-                            نفر دوست نداشتند و
-                            <span>31</span>
-                            نفر نظر دادند.
-                        </div>
-                    </div>
-                </div>
-                <div class="postMainDivShown float-right position-relative">
-                    <div class="commentWriterDetailsShow">
-                        <div class="circleBase type2 commentWriterPicShow"></div>
-                        <div class="commentWriterExperienceDetails">
-                            <b class="userProfileName">shazdesina</b>
-                            <div>در
-                                <span class="commentWriterExperiencePlace">هتل عباسی، شهر یزد، استان یزد</span>
-                            </div>
-                            <div>
-                                هم اکنون - بیش از 23 ساعت پیش
-                            </div>
-                        </div>
-                    </div>
-                    <div class="commentContentsShow position-relative">
-                        <p class="SummarizedPostTextShown">
-                            بسیاری از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از
-                            طریق اینترنت دریافت
-                            می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا
-                            خدمات مورد نیازشان
-                            اثرپذیری فراوانی دارد.
-                            <span class="showMoreText" onclick="showMoreText(this)"></span>
-                        </p>
-                        <p class="completePostTextShown display-none">
-                            بسیاری از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از
-                            طریق اینترنت دریافت
-                            می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا
-                            خدمات مورد نیازشان
-                            اثرپذیری فراوانی دارد.
-                            با توجه به ابن که خدمات و کالاهای بومی و محلی دارای اصالت و فرهنگ کهن جوامع
-                            روستایی هستند، می توان
-                            گفت اینترنت می تواند در آمدزایی از سبک زندگی جوامع محلی نقش
-                            <span class="showLessText" onclick="showLessText(this)">کمتر</span>
-                        </p>
-                    </div>
-                    <div class="commentPhotosShow">
-                        <div class="photosCol col-xs-12">
-                            <div data-toggle="modal" data-target=".showingPhotosModal"></div>
-                            <div class="numberOfPhotosMainDiv">
-                                <div class="numberOfPhotos">31+</div>
-                                <div>عکس</div>
-                            </div>
-                        </div>
-                        <div class="quantityOfLikes">
-                            <span>31</span>
-                            نفر دوست داشتند،
-                            <span>31</span>
-                            نفر دوست نداشتند و
-                            <span>31</span>
-                            نفر نظر دادند.
-                        </div>
-                    </div>
-                </div>
-                <div class="postMainDivShown float-right position-relative">
-                    <div class="commentWriterDetailsShow">
-                        <div class="circleBase type2 commentWriterPicShow"></div>
-                        <div class="commentWriterExperienceDetails">
-                            <b class="userProfileName">shazdesina</b>
-                            <div>در
-                                <span class="commentWriterExperiencePlace">هتل عباسی، شهر یزد، استان یزد</span>
-                            </div>
-                            <div>
-                                هم اکنون - بیش از 23 ساعت پیش
-                            </div>
-                        </div>
-                    </div>
-                    <div class="commentContentsShow position-relative">
-                        <p class="SummarizedPostTextShown">
-                            بسیاری از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از
-                            طریق اینترنت دریافت
-                            می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا
-                            خدمات مورد نیازشان
-                            اثرپذیری فراوانی دارد.
-                            <span class="showMoreText" onclick="showMoreText(this)"></span>
-                        </p>
-                        <p class="completePostTextShown display-none">
-                            بسیاری از درخواست کنندگان کسب و کارهای بومی و محلی اطلاعات مورد نیاز خود را از
-                            طریق اینترنت دریافت
-                            می کنند به گونه ای که این اطلاعات در تصمیم گیری نهایی آنها برای انتخاب کالا یا
-                            خدمات مورد نیازشان
-                            اثرپذیری فراوانی دارد.
-                            با توجه به ابن که خدمات و کالاهای بومی و محلی دارای اصالت و فرهنگ کهن جوامع
-                            روستایی هستند، می توان
-                            گفت اینترنت می تواند در آمدزایی از سبک زندگی جوامع محلی نقش
-                            <span class="showLessText" onclick="showLessText(this)">کمتر</span>
-                        </p>
-                    </div>
-                    <div class="commentPhotosShow">
-                        <div class="photosCol col-xs-12">
-                            <div data-toggle="modal" data-target=".showingPhotosModal"></div>
-                            <div class="numberOfPhotosMainDiv">
-                                <div class="numberOfPhotos">31+</div>
-                                <div>عکس</div>
-                            </div>
-                        </div>
-                        <div class="quantityOfLikes">
-                            <span>31</span>
-                            نفر دوست داشتند،
-                            <span>31</span>
-                            نفر دوست نداشتند و
-                            <span>31</span>
-                            نفر نظر دادند.
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
-        <div class="col-lg-9 cpBorderLeft">
+        <div id="cpBorderLeft" class="col-lg-9 cpBorderLeft">
+
             <div class="row cpMainBox">
                 <div class="col-xs-4 pd-0Imp">
                     <div class="col-xs-12">
-                        <a class="col-xs-4 cpLittleMenu" href="{{url('hotelList/' . $place->name . '/city')}}">
+                        <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/4/' . $place->listName . '/' . $kind)}}">
                             <div class="cityPageIcon hotel"></div>
                             <div class="textCityPageIcon">هتل</div>
                             <div class="textCityPageIcon">{{count($allHotels)}}</div>
                         </a>
-                        <a class="col-xs-4 cpLittleMenu" href="{{route('tickets')}}">
+                        <a class="col-xs-4 cpLittleMenu" href="#">
                             <div class="cityPageIcon ticket"></div>
                             <div class="textCityPageIcon">بلیط</div>
                         </a>
-                        <a class="col-xs-4 cpLittleMenu" href="{{url('amakenList/' . $place->name . '/city')}}">
+                        <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/1/' . $place->listName . '/' . $kind)}}">
                             <div class="cityPageIcon atraction"></div>
                             <div class="textCityPageIcon">جاذبه ها</div>
                             <div class="textCityPageIcon">{{count($allAmaken)}}</div>
@@ -1061,17 +178,17 @@ $state = 2; ?>
                     </div>
                     <div class="clear-both"></div>
                     <div class="col-xs-12">
-                        <a class="col-xs-4 cpLittleMenu" href="{{url('restaurantList/' . $place->name . '/city')}}">
+                        <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/3/' . $place->listName . '/' . $kind)}}">
                             <div class="cityPageIcon restaurant"></div>
                             <div class="textCityPageIcon">رستوران</div>
                             <div class="textCityPageIcon">{{count($allRestaurant)}}</div>
                         </a>
-                        <a class="col-xs-4 cpLittleMenu" href="{{url('/adab-list/' . $place->state . '/soghat')}}">
+                        <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/10/' . $place->listName . '/' . $kind)}}">
                             <div class="cityPageIcon soghat"></div>
                             <div class="textCityPageIcon">سوغات</div>
                             <div class="textCityPageIcon">{{count($allSogatSanaie)}}</div>
                         </a>
-                        <a class="col-xs-4 cpLittleMenu" href="{{url('/adab-list/' . $place->state . '/ghazamahali')}}">
+                        <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/11/' . $place->listName . '/' . $kind)}}">
                             <div class="cityPageIcon ghazamahali"></div>
                             <div class="textCityPageIcon">غذای محلی</div>
                             <div class="textCityPageIcon">{{count($allMahaliFood)}}</div>
@@ -1079,12 +196,12 @@ $state = 2; ?>
                     </div>
                     <div class="clear-both"></div>
                     <div class="col-xs-12">
-                        <a class="col-xs-4 cpLittleMenu" href="{{url('/majaraList/' . $place->name . '/city')}}">
+                        <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/6/' . $place->listName . '/' . $kind)}}">
                             <div class="cityPageIcon majara"></div>
                             <div class="textCityPageIcon">ماجراجویی</div>
                             <div class="textCityPageIcon">{{count($allMajara)}}</div>
                         </a>
-                        <a class="col-xs-4 cpLittleMenu" href="{{url('/adab-list/' . $place->state . '/sanaye')}}">
+                        <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/10/' . $place->listName . '/' . $kind)}}">
                             <div class="cityPageIcon sanaye"></div>
                             <div class="textCityPageIcon">صنایع دستی</div>
                             <div class="textCityPageIcon">{{count($allSogatSanaie)}}</div>
@@ -1111,193 +228,61 @@ $state = 2; ?>
                     <img class="cpPic" src="{{$place->image}}">
                 </div>
             </div>
+
             <div class="row">
                 <div class="cpDescription cpBorderBottom">
                     {{$place->description}}
                 </div>
-                <div ng-controller="getMainPageSuggestion" class="mainSuggestionMainDiv cpBorderBottom ng-scope">
-                    <div id="newKoochita" class="homepage_shelves_widget ng-scope">
+
+                <div class="mainSuggestionMainDiv cpBorderBottom ng-scope">
+
+                    @if(count($topPlaces[0]) > 4)
+                        <div id="newKoochita" class="homepage_shelves_widget ng-scope">
                         <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show" style="">
                             <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
+
                                 <div class="shelf_header">
                                     <div class="shelf_title">
                                         <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
                                         <div class="shelf_title_container h3">
-                                            <h3>تازه&zwnj;های کوچیتا</h3>
+                                            <h3>محبوب‌ترین جاذبه‌ها&zwnj;</h3>
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
                                     <div class="cpMainSug swiper-container">
                                         <div class="swiper-wrapper position-relative">
-                                            <div class="swiper-slide position-relative" ng-repeat="place in records">
-                                                <img src="http://localhost/kouchita/public/images/pin.png" class="imageGoldPin">
+                                            @foreach($topPlaces[0] as $item)
+                                                <div class="swiper-slide position-relative">
+                                                <img src="{{URL::asset('images/pin.png')}}" class="imageGoldPin">
                                                 <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
                                                     <div class="poi">
-                                                        <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="thumbnail">
+                                                        <a href="{{$item->url}}" class="thumbnail">
                                                             <div class="prw_rup prw_common_thumbnail_no_style_responsive">
                                                                 <div class="prv_thumb has_image">
                                                                     <div class="image_wrapper landscape landscapeWide">
-                                                                        <img src="http://localhost/assets/_images/nopic/blank.jpg" alt="" class="image">
+                                                                        <img src="{{$item->pic}}" alt="{{$item->keyword}}" class="image">
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </a>
                                                         <div class="detail rtl">
-                                                            <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="item poi_name ui_link ng-binding">عباسیان2</a>
+                                                            <a href="{{$item->url}}" class="item poi_name ui_link ng-binding">{{$item->name}}</a>
                                                             <div class="item rating-widget">
                                                                 <div class="prw_rup prw_common_location_rating_simple">
-                                                                    <span class="ui_bubble_rating bubble_20"></span>
+                                                                    <span class="ui_bubble_rating bubble_{{$item->rate}}0"></span>
                                                                 </div>
-                                                                <span class="reviewCount ng-binding">0 </span><span>نقد </span>
+                                                                <span class="reviewCount ng-binding">{{$item->reviews}} </span><span>نقد </span>
                                                             </div>
-                                                            <div class="item tags ng-binding">تهران <span>در </span>
-                                                                <span class="ng-binding">تهران</span>
+                                                            <div class="item tags ng-binding">{{$item->city->name}} <span>در </span>
+                                                                <span class="ng-binding">{{$item->state->name}}</span>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="swiper-slide position-relative" ng-repeat="place in records">
-                                                <img src="http://localhost/kouchita/public/images/pin.png" class="imageGoldPin">
-                                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
-                                                    <div class="poi">
-                                                        <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="thumbnail">
-                                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                                <div class="prv_thumb has_image">
-                                                                    <div class="image_wrapper landscape landscapeWide">
-                                                                        <img src="http://localhost/assets/_images/nopic/blank.jpg" alt="" class="image">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="detail rtl">
-                                                            <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="item poi_name ui_link ng-binding">عباسیان2</a>
-                                                            <div class="item rating-widget">
-                                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                                    <span class="ui_bubble_rating bubble_20"></span>
-                                                                </div>
-                                                                <span class="reviewCount ng-binding">0 </span><span>نقد </span>
-                                                            </div>
-                                                            <div class="item tags ng-binding">تهران <span>در </span>
-                                                                <span class="ng-binding">تهران</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide position-relative" ng-repeat="place in records">
-                                                <img src="http://localhost/kouchita/public/images/pin.png" class="imageGoldPin">
-                                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
-                                                    <div class="poi">
-                                                        <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="thumbnail">
-                                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                                <div class="prv_thumb has_image">
-                                                                    <div class="image_wrapper landscape landscapeWide">
-                                                                        <img src="http://localhost/assets/_images/nopic/blank.jpg" alt="" class="image">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="detail rtl">
-                                                            <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="item poi_name ui_link ng-binding">عباسیان2</a>
-                                                            <div class="item rating-widget">
-                                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                                    <span class="ui_bubble_rating bubble_20"></span>
-                                                                </div>
-                                                                <span class="reviewCount ng-binding">0 </span><span>نقد </span>
-                                                            </div>
-                                                            <div class="item tags ng-binding">تهران <span>در </span>
-                                                                <span class="ng-binding">تهران</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide position-relative" ng-repeat="place in records">
-                                                <img src="http://localhost/kouchita/public/images/pin.png" class="imageGoldPin">
-                                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
-                                                    <div class="poi">
-                                                        <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="thumbnail">
-                                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                                <div class="prv_thumb has_image">
-                                                                    <div class="image_wrapper landscape landscapeWide">
-                                                                        <img src="http://localhost/assets/_images/nopic/blank.jpg" alt="" class="image">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="detail rtl">
-                                                            <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="item poi_name ui_link ng-binding">عباسیان2</a>
-                                                            <div class="item rating-widget">
-                                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                                    <span class="ui_bubble_rating bubble_20"></span>
-                                                                </div>
-                                                                <span class="reviewCount ng-binding">0 </span><span>نقد </span>
-                                                            </div>
-                                                            <div class="item tags ng-binding">تهران <span>در </span>
-                                                                <span class="ng-binding">تهران</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide position-relative" ng-repeat="place in records">
-                                                <img src="http://localhost/kouchita/public/images/pin.png" class="imageGoldPin">
-                                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
-                                                    <div class="poi">
-                                                        <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="thumbnail">
-                                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                                <div class="prv_thumb has_image">
-                                                                    <div class="image_wrapper landscape landscapeWide">
-                                                                        <img src="http://localhost/assets/_images/nopic/blank.jpg" alt="" class="image">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="detail rtl">
-                                                            <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="item poi_name ui_link ng-binding">عباسیان2</a>
-                                                            <div class="item rating-widget">
-                                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                                    <span class="ui_bubble_rating bubble_20"></span>
-                                                                </div>
-                                                                <span class="reviewCount ng-binding">0 </span><span>نقد </span>
-                                                            </div>
-                                                            <div class="item tags ng-binding">تهران <span>در </span>
-                                                                <span class="ng-binding">تهران</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide position-relative" ng-repeat="place in records">
-                                                <img src="http://localhost/kouchita/public/images/pin.png" class="imageGoldPin">
-                                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
-                                                    <div class="poi">
-                                                        <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="thumbnail">
-                                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                                <div class="prv_thumb has_image">
-                                                                    <div class="image_wrapper landscape landscapeWide">
-                                                                        <img src="http://localhost/assets/_images/nopic/blank.jpg" alt="" class="image">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="detail rtl">
-                                                            <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="item poi_name ui_link ng-binding">عباسیان2</a>
-                                                            <div class="item rating-widget">
-                                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                                    <span class="ui_bubble_rating bubble_20"></span>
-                                                                </div>
-                                                                <span class="reviewCount ng-binding">0 </span><span>نقد </span>
-                                                            </div>
-                                                            <div class="item tags ng-binding">تهران <span>در </span>
-                                                                <span class="ng-binding">تهران</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            @endforeach
                                         </div>
                                         <!-- Add Pagination -->
                                         <div class="swiper-pagination"></div>
@@ -1309,383 +294,55 @@ $state = 2; ?>
                             </div>
                         </div>
                     </div>
+                    @endif
 
-                    <div id="foodSuggestion" class="homepage_shelves_widget ng-scope" style="display: block;">
-                        <div class="prw_rup prw_shelves_shelf_widget">
+                    @if(count($topPlaces[1]) > 4)
+                        <div id="newKoochita" class="homepage_shelves_widget ng-scope">
+                        <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show" style="">
                             <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
+
                                 <div class="shelf_header">
                                     <div class="shelf_title">
                                         <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
                                         <div class="shelf_title_container h3">
-                                            <h3>محبوب&zwnj;ترین غذا&zwnj;ها</h3>
+                                            <h3>محبوب‌ترین رستوران‌ها&zwnj;</h3>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
-                                    <div class="cpMainSug swiper-container">
-                                        <div class="swiper-wrapper">
-                                            <div class="swiper-slide position-relative" ng-repeat="place in records">
-                                                <img src="http://localhost/kouchita/public/images/pin.png" class="imageGoldPin">
-                                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
-                                                    <div class="poi">
-                                                        <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="thumbnail">
-                                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                                <div class="prv_thumb has_image">
-                                                                    <div class="image_wrapper landscape landscapeWide">
-                                                                        <img src="http://localhost/assets/_images/nopic/blank.jpg" alt="" class="image">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="detail rtl">
-                                                            <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="item poi_name ui_link ng-binding">عباسیان2</a>
-                                                            <div class="item rating-widget">
-                                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                                    <span class="ui_bubble_rating bubble_20"></span>
-                                                                </div>
-                                                                <span class="reviewCount ng-binding">0 </span><span>نقد </span>
-                                                            </div>
-                                                            <div class="item tags ng-binding">تهران <span>در </span>
-                                                                <span class="ng-binding">تهران</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide position-relative" ng-repeat="place in records">
-                                                <img src="http://localhost/kouchita/public/images/pin.png" class="imageGoldPin">
-                                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
-                                                    <div class="poi">
-                                                        <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="thumbnail">
-                                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                                <div class="prv_thumb has_image">
-                                                                    <div class="image_wrapper landscape landscapeWide">
-                                                                        <img src="http://localhost/assets/_images/nopic/blank.jpg" alt="" class="image">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="detail rtl">
-                                                            <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="item poi_name ui_link ng-binding">عباسیان2</a>
-                                                            <div class="item rating-widget">
-                                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                                    <span class="ui_bubble_rating bubble_20"></span>
-                                                                </div>
-                                                                <span class="reviewCount ng-binding">0 </span><span>نقد </span>
-                                                            </div>
-                                                            <div class="item tags ng-binding">تهران <span>در </span>
-                                                                <span class="ng-binding">تهران</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide position-relative" ng-repeat="place in records">
-                                                <img src="http://localhost/kouchita/public/images/pin.png" class="imageGoldPin">
-                                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
-                                                    <div class="poi">
-                                                        <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="thumbnail">
-                                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                                <div class="prv_thumb has_image">
-                                                                    <div class="image_wrapper landscape landscapeWide">
-                                                                        <img src="http://localhost/assets/_images/nopic/blank.jpg" alt="" class="image">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="detail rtl">
-                                                            <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="item poi_name ui_link ng-binding">عباسیان2</a>
-                                                            <div class="item rating-widget">
-                                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                                    <span class="ui_bubble_rating bubble_20"></span>
-                                                                </div>
-                                                                <span class="reviewCount ng-binding">0 </span><span>نقد </span>
-                                                            </div>
-                                                            <div class="item tags ng-binding">تهران <span>در </span>
-                                                                <span class="ng-binding">تهران</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide position-relative" ng-repeat="place in records">
-                                                <img src="http://localhost/kouchita/public/images/pin.png" class="imageGoldPin">
-                                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
-                                                    <div class="poi">
-                                                        <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="thumbnail">
-                                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                                <div class="prv_thumb has_image">
-                                                                    <div class="image_wrapper landscape landscapeWide">
-                                                                        <img src="http://localhost/assets/_images/nopic/blank.jpg" alt="" class="image">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="detail rtl">
-                                                            <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="item poi_name ui_link ng-binding">عباسیان2</a>
-                                                            <div class="item rating-widget">
-                                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                                    <span class="ui_bubble_rating bubble_20"></span>
-                                                                </div>
-                                                                <span class="reviewCount ng-binding">0 </span><span>نقد </span>
-                                                            </div>
-                                                            <div class="item tags ng-binding">تهران <span>در </span>
-                                                                <span class="ng-binding">تهران</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide position-relative" ng-repeat="place in records">
-                                                <img src="http://localhost/kouchita/public/images/pin.png" class="imageGoldPin">
-                                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
-                                                    <div class="poi">
-                                                        <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="thumbnail">
-                                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                                <div class="prv_thumb has_image">
-                                                                    <div class="image_wrapper landscape landscapeWide">
-                                                                        <img src="http://localhost/assets/_images/nopic/blank.jpg" alt="" class="image">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="detail rtl">
-                                                            <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="item poi_name ui_link ng-binding">عباسیان2</a>
-                                                            <div class="item rating-widget">
-                                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                                    <span class="ui_bubble_rating bubble_20"></span>
-                                                                </div>
-                                                                <span class="reviewCount ng-binding">0 </span><span>نقد </span>
-                                                            </div>
-                                                            <div class="item tags ng-binding">تهران <span>در </span>
-                                                                <span class="ng-binding">تهران</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide position-relative" ng-repeat="place in records">
-                                                <img src="http://localhost/kouchita/public/images/pin.png" class="imageGoldPin">
-                                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
-                                                    <div class="poi">
-                                                        <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="thumbnail">
-                                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                                <div class="prv_thumb has_image">
-                                                                    <div class="image_wrapper landscape landscapeWide">
-                                                                        <img src="http://localhost/assets/_images/nopic/blank.jpg" alt="" class="image">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="detail rtl">
-                                                            <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="item poi_name ui_link ng-binding">عباسیان2</a>
-                                                            <div class="item rating-widget">
-                                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                                    <span class="ui_bubble_rating bubble_20"></span>
-                                                                </div>
-                                                                <span class="reviewCount ng-binding">0 </span><span>نقد </span>
-                                                            </div>
-                                                            <div class="item tags ng-binding">تهران <span>در </span>
-                                                                <span class="ng-binding">تهران</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- Add Pagination -->
-                                        <div class="swiper-pagination"></div>
-                                        <!-- Add Arrows -->
-                                        <div class="swiper-button-next"></div>
-                                        <div class="swiper-button-prev"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div id="tabiatSuggestion" class="homepage_shelves_widget ng-scope" style="display: block;">
-                        <div class="prw_rup prw_shelves_shelf_widget" style="">
-                            <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
-                                <div class="shelf_header">
-                                    <div class="shelf_title">
-                                        <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
-                                        <div class="shelf_title_container h3">
-                                            <h3>سفر طبیعت&zwnj;گردی</h3>
-                                        </div>
-                                    </div>
-                                </div>
                                 <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
                                     <div class="cpMainSug swiper-container">
                                         <div class="swiper-wrapper position-relative">
-                                            <div class="swiper-slide position-relative" ng-repeat="place in records">
-                                                <img src="http://localhost/kouchita/public/images/pin.png" class="imageGoldPin">
+                                            @foreach($topPlaces[1] as $item)
+                                                <div class="swiper-slide position-relative">
+                                                <img src="{{URL::asset('images/pin.png')}}" class="imageGoldPin">
                                                 <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
                                                     <div class="poi">
-                                                        <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="thumbnail">
+                                                        <a href="{{$item->url}}" class="thumbnail">
                                                             <div class="prw_rup prw_common_thumbnail_no_style_responsive">
                                                                 <div class="prv_thumb has_image">
                                                                     <div class="image_wrapper landscape landscapeWide">
-                                                                        <img src="http://localhost/assets/_images/nopic/blank.jpg" alt="" class="image">
+                                                                        <img src="{{$item->pic}}" alt="{{$item->keyword}}" class="image">
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </a>
                                                         <div class="detail rtl">
-                                                            <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="item poi_name ui_link ng-binding">عباسیان2</a>
+                                                            <a href="{{$item->url}}" class="item poi_name ui_link ng-binding">{{$item->name}}</a>
                                                             <div class="item rating-widget">
                                                                 <div class="prw_rup prw_common_location_rating_simple">
-                                                                    <span class="ui_bubble_rating bubble_20"></span>
+                                                                    <span class="ui_bubble_rating bubble_{{$item->rate}}0"></span>
                                                                 </div>
-                                                                <span class="reviewCount ng-binding">0 </span><span>نقد </span>
+                                                                <span class="reviewCount ng-binding">{{$item->reviews}} </span><span>نقد </span>
                                                             </div>
-                                                            <div class="item tags ng-binding">تهران <span>در </span>
-                                                                <span class="ng-binding">تهران</span>
+                                                            <div class="item tags ng-binding">{{$item->city->name}} <span>در </span>
+                                                                <span class="ng-binding">{{$item->state->name}}</span>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="swiper-slide position-relative" ng-repeat="place in records">
-                                                <img src="http://localhost/kouchita/public/images/pin.png" class="imageGoldPin">
-                                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
-                                                    <div class="poi">
-                                                        <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="thumbnail">
-                                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                                <div class="prv_thumb has_image">
-                                                                    <div class="image_wrapper landscape landscapeWide">
-                                                                        <img src="http://localhost/assets/_images/nopic/blank.jpg" alt="" class="image">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="detail rtl">
-                                                            <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="item poi_name ui_link ng-binding">عباسیان2</a>
-                                                            <div class="item rating-widget">
-                                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                                    <span class="ui_bubble_rating bubble_20"></span>
-                                                                </div>
-                                                                <span class="reviewCount ng-binding">0 </span><span>نقد </span>
-                                                            </div>
-                                                            <div class="item tags ng-binding">تهران <span>در </span>
-                                                                <span class="ng-binding">تهران</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide position-relative" ng-repeat="place in records">
-                                                <img src="http://localhost/kouchita/public/images/pin.png" class="imageGoldPin">
-                                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
-                                                    <div class="poi">
-                                                        <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="thumbnail">
-                                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                                <div class="prv_thumb has_image">
-                                                                    <div class="image_wrapper landscape landscapeWide">
-                                                                        <img src="http://localhost/assets/_images/nopic/blank.jpg" alt="" class="image">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="detail rtl">
-                                                            <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="item poi_name ui_link ng-binding">عباسیان2</a>
-                                                            <div class="item rating-widget">
-                                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                                    <span class="ui_bubble_rating bubble_20"></span>
-                                                                </div>
-                                                                <span class="reviewCount ng-binding">0 </span><span>نقد </span>
-                                                            </div>
-                                                            <div class="item tags ng-binding">تهران <span>در </span>
-                                                                <span class="ng-binding">تهران</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide position-relative" ng-repeat="place in records">
-                                                <img src="http://localhost/kouchita/public/images/pin.png" class="imageGoldPin">
-                                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
-                                                    <div class="poi">
-                                                        <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="thumbnail">
-                                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                                <div class="prv_thumb has_image">
-                                                                    <div class="image_wrapper landscape landscapeWide">
-                                                                        <img src="http://localhost/assets/_images/nopic/blank.jpg" alt="" class="image">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="detail rtl">
-                                                            <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="item poi_name ui_link ng-binding">عباسیان2</a>
-                                                            <div class="item rating-widget">
-                                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                                    <span class="ui_bubble_rating bubble_20"></span>
-                                                                </div>
-                                                                <span class="reviewCount ng-binding">0 </span><span>نقد </span>
-                                                            </div>
-                                                            <div class="item tags ng-binding">تهران <span>در </span>
-                                                                <span class="ng-binding">تهران</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide position-relative" ng-repeat="place in records">
-                                                <img src="http://localhost/kouchita/public/images/pin.png" class="imageGoldPin">
-                                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
-                                                    <div class="poi">
-                                                        <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="thumbnail">
-                                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                                <div class="prv_thumb has_image">
-                                                                    <div class="image_wrapper landscape landscapeWide">
-                                                                        <img src="http://localhost/assets/_images/nopic/blank.jpg" alt="" class="image">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="detail rtl">
-                                                            <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="item poi_name ui_link ng-binding">عباسیان2</a>
-                                                            <div class="item rating-widget">
-                                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                                    <span class="ui_bubble_rating bubble_20"></span>
-                                                                </div>
-                                                                <span class="reviewCount ng-binding">0 </span><span>نقد </span>
-                                                            </div>
-                                                            <div class="item tags ng-binding">تهران <span>در </span>
-                                                                <span class="ng-binding">تهران</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide position-relative" ng-repeat="place in records">
-                                                <img src="http://localhost/kouchita/public/images/pin.png" class="imageGoldPin">
-                                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
-                                                    <div class="poi">
-                                                        <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="thumbnail">
-                                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                                <div class="prv_thumb has_image">
-                                                                    <div class="image_wrapper landscape landscapeWide">
-                                                                        <img src="http://localhost/assets/_images/nopic/blank.jpg" alt="" class="image">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="detail rtl">
-                                                            <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="item poi_name ui_link ng-binding">عباسیان2</a>
-                                                            <div class="item rating-widget">
-                                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                                    <span class="ui_bubble_rating bubble_20"></span>
-                                                                </div>
-                                                                <span class="reviewCount ng-binding">0 </span><span>نقد </span>
-                                                            </div>
-                                                            <div class="item tags ng-binding">تهران <span>در </span>
-                                                                <span class="ng-binding">تهران</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            @endforeach
                                         </div>
                                         <!-- Add Pagination -->
                                         <div class="swiper-pagination"></div>
@@ -1697,189 +354,55 @@ $state = 2; ?>
                             </div>
                         </div>
                     </div>
+                    @endif
 
-                    <div id="restaurantSuggestion" class="homepage_shelves_widget ng-scope" style="display: block;">
-                        <div class="prw_rup prw_shelves_shelf_widget" style="">
+                    @if(count($topPlaces[2]) > 4)
+                        <div id="newKoochita" class="homepage_shelves_widget ng-scope">
+                        <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show" style="">
                             <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
+
                                 <div class="shelf_header">
                                     <div class="shelf_title">
                                         <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
                                         <div class="shelf_title_container h3">
-                                            <h3>محبوب&zwnj;ترین رستوران&zwnj;ها</h3>
+                                            <h3>محبوب‌ترین هتل‌ها&zwnj;</h3>
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
                                     <div class="cpMainSug swiper-container">
                                         <div class="swiper-wrapper position-relative">
-                                            <div class="swiper-slide position-relative" ng-repeat="place in records">
-                                                <img src="http://localhost/kouchita/public/images/pin.png" class="imageGoldPin">
-                                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
-                                                    <div class="poi">
-                                                        <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="thumbnail">
-                                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                                <div class="prv_thumb has_image">
-                                                                    <div class="image_wrapper landscape landscapeWide">
-                                                                        <img src="http://localhost/assets/_images/nopic/blank.jpg" alt="" class="image">
+                                            @foreach($topPlaces[2] as $item)
+                                                <div class="swiper-slide position-relative">
+                                                    <img src="{{URL::asset('images/pin.png')}}" class="imageGoldPin">
+                                                    <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
+                                                        <div class="poi">
+                                                            <a href="{{$item->url}}" class="thumbnail">
+                                                                <div class="prw_rup prw_common_thumbnail_no_style_responsive">
+                                                                    <div class="prv_thumb has_image">
+                                                                        <div class="image_wrapper landscape landscapeWide">
+                                                                            <img src="{{$item->pic}}" alt="{{$item->keyword}}" class="image">
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="detail rtl">
-                                                            <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="item poi_name ui_link ng-binding">عباسیان2</a>
-                                                            <div class="item rating-widget">
-                                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                                    <span class="ui_bubble_rating bubble_20"></span>
+                                                            </a>
+                                                            <div class="detail rtl">
+                                                                <a href="{{$item->url}}" class="item poi_name ui_link ng-binding">{{$item->name}}</a>
+                                                                <div class="item rating-widget">
+                                                                    <div class="prw_rup prw_common_location_rating_simple">
+                                                                        <span class="ui_bubble_rating bubble_{{$item->rate}}0"></span>
+                                                                    </div>
+                                                                    <span class="reviewCount ng-binding">{{$item->reviews}} </span><span>نقد </span>
                                                                 </div>
-                                                                <span class="reviewCount ng-binding">0 </span><span>نقد </span>
-                                                            </div>
-                                                            <div class="item tags ng-binding">تهران <span>در </span>
-                                                                <span class="ng-binding">تهران</span>
+                                                                <div class="item tags ng-binding">{{$item->city->name}} <span>در </span>
+                                                                    <span class="ng-binding">{{$item->state->name}}</span>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="swiper-slide position-relative" ng-repeat="place in records">
-                                                <img src="http://localhost/kouchita/public/images/pin.png" class="imageGoldPin">
-                                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
-                                                    <div class="poi">
-                                                        <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="thumbnail">
-                                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                                <div class="prv_thumb has_image">
-                                                                    <div class="image_wrapper landscape landscapeWide">
-                                                                        <img src="http://localhost/assets/_images/nopic/blank.jpg" alt="" class="image">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="detail rtl">
-                                                            <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="item poi_name ui_link ng-binding">عباسیان2</a>
-                                                            <div class="item rating-widget">
-                                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                                    <span class="ui_bubble_rating bubble_20"></span>
-                                                                </div>
-                                                                <span class="reviewCount ng-binding">0 </span><span>نقد </span>
-                                                            </div>
-                                                            <div class="item tags ng-binding">تهران <span>در </span>
-                                                                <span class="ng-binding">تهران</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide position-relative" ng-repeat="place in records">
-                                                <img src="http://localhost/kouchita/public/images/pin.png" class="imageGoldPin">
-                                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
-                                                    <div class="poi">
-                                                        <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="thumbnail">
-                                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                                <div class="prv_thumb has_image">
-                                                                    <div class="image_wrapper landscape landscapeWide">
-                                                                        <img src="http://localhost/assets/_images/nopic/blank.jpg" alt="" class="image">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="detail rtl">
-                                                            <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="item poi_name ui_link ng-binding">عباسیان2</a>
-                                                            <div class="item rating-widget">
-                                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                                    <span class="ui_bubble_rating bubble_20"></span>
-                                                                </div>
-                                                                <span class="reviewCount ng-binding">0 </span><span>نقد </span>
-                                                            </div>
-                                                            <div class="item tags ng-binding">تهران <span>در </span>
-                                                                <span class="ng-binding">تهران</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide position-relative" ng-repeat="place in records">
-                                                <img src="http://localhost/kouchita/public/images/pin.png" class="imageGoldPin">
-                                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
-                                                    <div class="poi">
-                                                        <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="thumbnail">
-                                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                                <div class="prv_thumb has_image">
-                                                                    <div class="image_wrapper landscape landscapeWide">
-                                                                        <img src="http://localhost/assets/_images/nopic/blank.jpg" alt="" class="image">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="detail rtl">
-                                                            <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="item poi_name ui_link ng-binding">عباسیان2</a>
-                                                            <div class="item rating-widget">
-                                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                                    <span class="ui_bubble_rating bubble_20"></span>
-                                                                </div>
-                                                                <span class="reviewCount ng-binding">0 </span><span>نقد </span>
-                                                            </div>
-                                                            <div class="item tags ng-binding">تهران <span>در </span>
-                                                                <span class="ng-binding">تهران</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide position-relative" ng-repeat="place in records">
-                                                <img src="http://localhost/kouchita/public/images/pin.png" class="imageGoldPin">
-                                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
-                                                    <div class="poi">
-                                                        <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="thumbnail">
-                                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                                <div class="prv_thumb has_image">
-                                                                    <div class="image_wrapper landscape landscapeWide">
-                                                                        <img src="http://localhost/assets/_images/nopic/blank.jpg" alt="" class="image">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="detail rtl">
-                                                            <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="item poi_name ui_link ng-binding">عباسیان2</a>
-                                                            <div class="item rating-widget">
-                                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                                    <span class="ui_bubble_rating bubble_20"></span>
-                                                                </div>
-                                                                <span class="reviewCount ng-binding">0 </span><span>نقد </span>
-                                                            </div>
-                                                            <div class="item tags ng-binding">تهران <span>در </span>
-                                                                <span class="ng-binding">تهران</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide position-relative" ng-repeat="place in records">
-                                                <img src="http://localhost/kouchita/public/images/pin.png" class="imageGoldPin">
-                                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
-                                                    <div class="poi">
-                                                        <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="thumbnail">
-                                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                                <div class="prv_thumb has_image">
-                                                                    <div class="image_wrapper landscape landscapeWide">
-                                                                        <img src="http://localhost/assets/_images/nopic/blank.jpg" alt="" class="image">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="detail rtl">
-                                                            <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="item poi_name ui_link ng-binding">عباسیان2</a>
-                                                            <div class="item rating-widget">
-                                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                                    <span class="ui_bubble_rating bubble_20"></span>
-                                                                </div>
-                                                                <span class="reviewCount ng-binding">0 </span><span>نقد </span>
-                                                            </div>
-                                                            <div class="item tags ng-binding">تهران <span>در </span>
-                                                                <span class="ng-binding">تهران</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            @endforeach
                                         </div>
                                         <!-- Add Pagination -->
                                         <div class="swiper-pagination"></div>
@@ -1891,189 +414,55 @@ $state = 2; ?>
                             </div>
                         </div>
                     </div>
+                    @endif
 
-                    <div id="tarikhiSuggestion" class="homepage_shelves_widget ng-scope" style="display: block;">
-                        <div class="prw_rup prw_shelves_shelf_widget" style="">
+                    @if(count($topPlaces[3]) > 4)
+                        <div id="newKoochita" class="homepage_shelves_widget ng-scope">
+                        <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show" style="">
                             <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
+
                                 <div class="shelf_header">
                                     <div class="shelf_title">
                                         <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
                                         <div class="shelf_title_container h3">
-                                            <h3>سفر تاریخی-فرهنگی</h3>
+                                            <h3>محبوب‌ترین ماجراها&zwnj;</h3>
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
                                     <div class="cpMainSug swiper-container">
                                         <div class="swiper-wrapper position-relative">
-                                            <div class="swiper-slide position-relative" ng-repeat="place in records">
-                                                <img src="http://localhost/kouchita/public/images/pin.png" class="imageGoldPin">
-                                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
-                                                    <div class="poi">
-                                                        <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="thumbnail">
-                                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                                <div class="prv_thumb has_image">
-                                                                    <div class="image_wrapper landscape landscapeWide">
-                                                                        <img src="http://localhost/assets/_images/nopic/blank.jpg" alt="" class="image">
+                                            @foreach($topPlaces[3] as $item)
+                                                <div class="swiper-slide position-relative">
+                                                    <img src="{{URL::asset('images/pin.png')}}" class="imageGoldPin">
+                                                    <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
+                                                        <div class="poi">
+                                                            <a href="{{$item->url}}" class="thumbnail">
+                                                                <div class="prw_rup prw_common_thumbnail_no_style_responsive">
+                                                                    <div class="prv_thumb has_image">
+                                                                        <div class="image_wrapper landscape landscapeWide">
+                                                                            <img src="{{$item->pic}}" alt="{{$item->keyword}}" class="image">
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="detail rtl">
-                                                            <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="item poi_name ui_link ng-binding">عباسیان2</a>
-                                                            <div class="item rating-widget">
-                                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                                    <span class="ui_bubble_rating bubble_20"></span>
+                                                            </a>
+                                                            <div class="detail rtl">
+                                                                <a href="{{$item->url}}" class="item poi_name ui_link ng-binding">{{$item->name}}</a>
+                                                                <div class="item rating-widget">
+                                                                    <div class="prw_rup prw_common_location_rating_simple">
+                                                                        <span class="ui_bubble_rating bubble_{{$item->rate}}0"></span>
+                                                                    </div>
+                                                                    <span class="reviewCount ng-binding">{{$item->reviews}} </span><span>نقد </span>
                                                                 </div>
-                                                                <span class="reviewCount ng-binding">0 </span><span>نقد </span>
-                                                            </div>
-                                                            <div class="item tags ng-binding">تهران <span>در </span>
-                                                                <span class="ng-binding">تهران</span>
+                                                                <div class="item tags ng-binding">{{$item->city->name}} <span>در </span>
+                                                                    <span class="ng-binding">{{$item->state->name}}</span>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="swiper-slide position-relative" ng-repeat="place in records">
-                                                <img src="http://localhost/kouchita/public/images/pin.png" class="imageGoldPin">
-                                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
-                                                    <div class="poi">
-                                                        <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="thumbnail">
-                                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                                <div class="prv_thumb has_image">
-                                                                    <div class="image_wrapper landscape landscapeWide">
-                                                                        <img src="http://localhost/assets/_images/nopic/blank.jpg" alt="" class="image">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="detail rtl">
-                                                            <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="item poi_name ui_link ng-binding">عباسیان2</a>
-                                                            <div class="item rating-widget">
-                                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                                    <span class="ui_bubble_rating bubble_20"></span>
-                                                                </div>
-                                                                <span class="reviewCount ng-binding">0 </span><span>نقد </span>
-                                                            </div>
-                                                            <div class="item tags ng-binding">تهران <span>در </span>
-                                                                <span class="ng-binding">تهران</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide position-relative" ng-repeat="place in records">
-                                                <img src="http://localhost/kouchita/public/images/pin.png" class="imageGoldPin">
-                                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
-                                                    <div class="poi">
-                                                        <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="thumbnail">
-                                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                                <div class="prv_thumb has_image">
-                                                                    <div class="image_wrapper landscape landscapeWide">
-                                                                        <img src="http://localhost/assets/_images/nopic/blank.jpg" alt="" class="image">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="detail rtl">
-                                                            <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="item poi_name ui_link ng-binding">عباسیان2</a>
-                                                            <div class="item rating-widget">
-                                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                                    <span class="ui_bubble_rating bubble_20"></span>
-                                                                </div>
-                                                                <span class="reviewCount ng-binding">0 </span><span>نقد </span>
-                                                            </div>
-                                                            <div class="item tags ng-binding">تهران <span>در </span>
-                                                                <span class="ng-binding">تهران</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide position-relative" ng-repeat="place in records">
-                                                <img src="http://localhost/kouchita/public/images/pin.png" class="imageGoldPin">
-                                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
-                                                    <div class="poi">
-                                                        <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="thumbnail">
-                                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                                <div class="prv_thumb has_image">
-                                                                    <div class="image_wrapper landscape landscapeWide">
-                                                                        <img src="http://localhost/assets/_images/nopic/blank.jpg" alt="" class="image">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="detail rtl">
-                                                            <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="item poi_name ui_link ng-binding">عباسیان2</a>
-                                                            <div class="item rating-widget">
-                                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                                    <span class="ui_bubble_rating bubble_20"></span>
-                                                                </div>
-                                                                <span class="reviewCount ng-binding">0 </span><span>نقد </span>
-                                                            </div>
-                                                            <div class="item tags ng-binding">تهران <span>در </span>
-                                                                <span class="ng-binding">تهران</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide position-relative" ng-repeat="place in records">
-                                                <img src="http://localhost/kouchita/public/images/pin.png" class="imageGoldPin">
-                                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
-                                                    <div class="poi">
-                                                        <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="thumbnail">
-                                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                                <div class="prv_thumb has_image">
-                                                                    <div class="image_wrapper landscape landscapeWide">
-                                                                        <img src="http://localhost/assets/_images/nopic/blank.jpg" alt="" class="image">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="detail rtl">
-                                                            <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="item poi_name ui_link ng-binding">عباسیان2</a>
-                                                            <div class="item rating-widget">
-                                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                                    <span class="ui_bubble_rating bubble_20"></span>
-                                                                </div>
-                                                                <span class="reviewCount ng-binding">0 </span><span>نقد </span>
-                                                            </div>
-                                                            <div class="item tags ng-binding">تهران <span>در </span>
-                                                                <span class="ng-binding">تهران</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide position-relative" ng-repeat="place in records">
-                                                <img src="http://localhost/kouchita/public/images/pin.png" class="imageGoldPin">
-                                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
-                                                    <div class="poi">
-                                                        <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="thumbnail">
-                                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                                <div class="prv_thumb has_image">
-                                                                    <div class="image_wrapper landscape landscapeWide">
-                                                                        <img src="http://localhost/assets/_images/nopic/blank.jpg" alt="" class="image">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="detail rtl">
-                                                            <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="item poi_name ui_link ng-binding">عباسیان2</a>
-                                                            <div class="item rating-widget">
-                                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                                    <span class="ui_bubble_rating bubble_20"></span>
-                                                                </div>
-                                                                <span class="reviewCount ng-binding">0 </span><span>نقد </span>
-                                                            </div>
-                                                            <div class="item tags ng-binding">تهران <span>در </span>
-                                                                <span class="ng-binding">تهران</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            @endforeach
                                         </div>
                                         <!-- Add Pagination -->
                                         <div class="swiper-pagination"></div>
@@ -2085,189 +474,55 @@ $state = 2; ?>
                             </div>
                         </div>
                     </div>
+                    @endif
 
-                    <div id="kharidSuggestion" class="homepage_shelves_widget ng-scope" style="display: block;">
-                        <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" style="">
+                    @if(count($topPlaces[4]) > 4)
+                        <div id="newKoochita" class="homepage_shelves_widget ng-scope">
+                        <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show" style="">
                             <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
+
                                 <div class="shelf_header">
                                     <div class="shelf_title">
                                         <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
                                         <div class="shelf_title_container h3">
-                                            <h3>مراکز خرید</h3>
+                                            <h3>محبوب‌ترین سوغات و صنایع دستی&zwnj;</h3>
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
                                     <div class="cpMainSug swiper-container">
                                         <div class="swiper-wrapper position-relative">
-                                            <div class="swiper-slide position-relative" ng-repeat="place in records">
-                                                <img src="http://localhost/kouchita/public/images/pin.png" class="imageGoldPin">
-                                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
-                                                    <div class="poi">
-                                                        <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="thumbnail">
-                                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                                <div class="prv_thumb has_image">
-                                                                    <div class="image_wrapper landscape landscapeWide">
-                                                                        <img src="http://localhost/assets/_images/nopic/blank.jpg" alt="" class="image">
+                                            @foreach($topPlaces[4] as $item)
+                                                <div class="swiper-slide position-relative">
+                                                    <img src="{{URL::asset('images/pin.png')}}" class="imageGoldPin">
+                                                    <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
+                                                        <div class="poi">
+                                                            <a href="{{$item->url}}" class="thumbnail">
+                                                                <div class="prw_rup prw_common_thumbnail_no_style_responsive">
+                                                                    <div class="prv_thumb has_image">
+                                                                        <div class="image_wrapper landscape landscapeWide">
+                                                                            <img src="{{$item->pic}}" alt="{{$item->keyword}}" class="image">
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="detail rtl">
-                                                            <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="item poi_name ui_link ng-binding">عباسیان2</a>
-                                                            <div class="item rating-widget">
-                                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                                    <span class="ui_bubble_rating bubble_20"></span>
+                                                            </a>
+                                                            <div class="detail rtl">
+                                                                <a href="{{$item->url}}" class="item poi_name ui_link ng-binding">{{$item->name}}</a>
+                                                                <div class="item rating-widget">
+                                                                    <div class="prw_rup prw_common_location_rating_simple">
+                                                                        <span class="ui_bubble_rating bubble_{{$item->rate}}0"></span>
+                                                                    </div>
+                                                                    <span class="reviewCount ng-binding">{{$item->reviews}} </span><span>نقد </span>
                                                                 </div>
-                                                                <span class="reviewCount ng-binding">0 </span><span>نقد </span>
-                                                            </div>
-                                                            <div class="item tags ng-binding">تهران <span>در </span>
-                                                                <span class="ng-binding">تهران</span>
+                                                                <div class="item tags ng-binding">{{$item->city->name}} <span>در </span>
+                                                                    <span class="ng-binding">{{$item->state->name}}</span>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="swiper-slide position-relative" ng-repeat="place in records">
-                                                <img src="http://localhost/kouchita/public/images/pin.png" class="imageGoldPin">
-                                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
-                                                    <div class="poi">
-                                                        <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="thumbnail">
-                                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                                <div class="prv_thumb has_image">
-                                                                    <div class="image_wrapper landscape landscapeWide">
-                                                                        <img src="http://localhost/assets/_images/nopic/blank.jpg" alt="" class="image">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="detail rtl">
-                                                            <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="item poi_name ui_link ng-binding">عباسیان2</a>
-                                                            <div class="item rating-widget">
-                                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                                    <span class="ui_bubble_rating bubble_20"></span>
-                                                                </div>
-                                                                <span class="reviewCount ng-binding">0 </span><span>نقد </span>
-                                                            </div>
-                                                            <div class="item tags ng-binding">تهران <span>در </span>
-                                                                <span class="ng-binding">تهران</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide position-relative" ng-repeat="place in records">
-                                                <img src="http://localhost/kouchita/public/images/pin.png" class="imageGoldPin">
-                                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
-                                                    <div class="poi">
-                                                        <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="thumbnail">
-                                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                                <div class="prv_thumb has_image">
-                                                                    <div class="image_wrapper landscape landscapeWide">
-                                                                        <img src="http://localhost/assets/_images/nopic/blank.jpg" alt="" class="image">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="detail rtl">
-                                                            <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="item poi_name ui_link ng-binding">عباسیان2</a>
-                                                            <div class="item rating-widget">
-                                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                                    <span class="ui_bubble_rating bubble_20"></span>
-                                                                </div>
-                                                                <span class="reviewCount ng-binding">0 </span><span>نقد </span>
-                                                            </div>
-                                                            <div class="item tags ng-binding">تهران <span>در </span>
-                                                                <span class="ng-binding">تهران</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide position-relative" ng-repeat="place in records">
-                                                <img src="http://localhost/kouchita/public/images/pin.png" class="imageGoldPin">
-                                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
-                                                    <div class="poi">
-                                                        <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="thumbnail">
-                                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                                <div class="prv_thumb has_image">
-                                                                    <div class="image_wrapper landscape landscapeWide">
-                                                                        <img src="http://localhost/assets/_images/nopic/blank.jpg" alt="" class="image">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="detail rtl">
-                                                            <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="item poi_name ui_link ng-binding">عباسیان2</a>
-                                                            <div class="item rating-widget">
-                                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                                    <span class="ui_bubble_rating bubble_20"></span>
-                                                                </div>
-                                                                <span class="reviewCount ng-binding">0 </span><span>نقد </span>
-                                                            </div>
-                                                            <div class="item tags ng-binding">تهران <span>در </span>
-                                                                <span class="ng-binding">تهران</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide position-relative" ng-repeat="place in records">
-                                                <img src="http://localhost/kouchita/public/images/pin.png" class="imageGoldPin">
-                                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
-                                                    <div class="poi">
-                                                        <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="thumbnail">
-                                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                                <div class="prv_thumb has_image">
-                                                                    <div class="image_wrapper landscape landscapeWide">
-                                                                        <img src="http://localhost/assets/_images/nopic/blank.jpg" alt="" class="image">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="detail rtl">
-                                                            <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="item poi_name ui_link ng-binding">عباسیان2</a>
-                                                            <div class="item rating-widget">
-                                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                                    <span class="ui_bubble_rating bubble_20"></span>
-                                                                </div>
-                                                                <span class="reviewCount ng-binding">0 </span><span>نقد </span>
-                                                            </div>
-                                                            <div class="item tags ng-binding">تهران <span>در </span>
-                                                                <span class="ng-binding">تهران</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide position-relative" ng-repeat="place in records">
-                                                <img src="http://localhost/kouchita/public/images/pin.png" class="imageGoldPin">
-                                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
-                                                    <div class="poi">
-                                                        <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="thumbnail">
-                                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                                <div class="prv_thumb has_image">
-                                                                    <div class="image_wrapper landscape landscapeWide">
-                                                                        <img src="http://localhost/assets/_images/nopic/blank.jpg" alt="" class="image">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="detail rtl">
-                                                            <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="item poi_name ui_link ng-binding">عباسیان2</a>
-                                                            <div class="item rating-widget">
-                                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                                    <span class="ui_bubble_rating bubble_20"></span>
-                                                                </div>
-                                                                <span class="reviewCount ng-binding">0 </span><span>نقد </span>
-                                                            </div>
-                                                            <div class="item tags ng-binding">تهران <span>در </span>
-                                                                <span class="ng-binding">تهران</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            @endforeach
                                         </div>
                                         <!-- Add Pagination -->
                                         <div class="swiper-pagination"></div>
@@ -2279,189 +534,55 @@ $state = 2; ?>
                             </div>
                         </div>
                     </div>
+                    @endif
 
-                    <div id="articleSuggestion" class="homepage_shelves_widget ng-scope" style="display: block;">
-                        <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" style="">
+                    @if(count($topPlaces[5]) > 4)
+                        <div id="newKoochita" class="homepage_shelves_widget ng-scope">
+                        <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show" style="">
                             <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
+
                                 <div class="shelf_header">
                                     <div class="shelf_title">
                                         <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
                                         <div class="shelf_title_container h3">
-                                            <h3>محبوب&zwnj;ترین سفرنامه&zwnj;ها</h3>
+                                            <h3>محبوب‌ترین غذاهای محلی&zwnj;</h3>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="shelf_item_container ui_columns is-mobile is-multiline">
+
+                                <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
                                     <div class="cpMainSug swiper-container">
                                         <div class="swiper-wrapper position-relative">
-                                            <div class="swiper-slide position-relative" ng-repeat="place in records">
-                                                <img src="http://localhost/kouchita/public/images/pin.png" class="imageGoldPin">
-                                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
-                                                    <div class="poi">
-                                                        <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="thumbnail">
-                                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                                <div class="prv_thumb has_image">
-                                                                    <div class="image_wrapper landscape landscapeWide">
-                                                                        <img src="http://localhost/assets/_images/nopic/blank.jpg" alt="" class="image">
+                                            @foreach($topPlaces[5] as $item)
+                                                <div class="swiper-slide position-relative">
+                                                    <img src="{{URL::asset('images/pin.png')}}" class="imageGoldPin">
+                                                    <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
+                                                        <div class="poi">
+                                                            <a href="{{$item->url}}" class="thumbnail">
+                                                                <div class="prw_rup prw_common_thumbnail_no_style_responsive">
+                                                                    <div class="prv_thumb has_image">
+                                                                        <div class="image_wrapper landscape landscapeWide">
+                                                                            <img src="{{$item->pic}}" alt="{{$item->keyword}}" class="image">
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="detail rtl">
-                                                            <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="item poi_name ui_link ng-binding">عباسیان2</a>
-                                                            <div class="item rating-widget">
-                                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                                    <span class="ui_bubble_rating bubble_20"></span>
+                                                            </a>
+                                                            <div class="detail rtl">
+                                                                <a href="{{$item->url}}" class="item poi_name ui_link ng-binding">{{$item->name}}</a>
+                                                                <div class="item rating-widget">
+                                                                    <div class="prw_rup prw_common_location_rating_simple">
+                                                                        <span class="ui_bubble_rating bubble_{{$item->rate}}0"></span>
+                                                                    </div>
+                                                                    <span class="reviewCount ng-binding">{{$item->reviews}} </span><span>نقد </span>
                                                                 </div>
-                                                                <span class="reviewCount ng-binding">0 </span><span>نقد </span>
-                                                            </div>
-                                                            <div class="item tags ng-binding">تهران <span>در </span>
-                                                                <span class="ng-binding">تهران</span>
+                                                                <div class="item tags ng-binding">{{$item->city->name}} <span>در </span>
+                                                                    <span class="ng-binding">{{$item->state->name}}</span>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="swiper-slide position-relative" ng-repeat="place in records">
-                                                <img src="http://localhost/kouchita/public/images/pin.png" class="imageGoldPin">
-                                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
-                                                    <div class="poi">
-                                                        <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="thumbnail">
-                                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                                <div class="prv_thumb has_image">
-                                                                    <div class="image_wrapper landscape landscapeWide">
-                                                                        <img src="http://localhost/assets/_images/nopic/blank.jpg" alt="" class="image">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="detail rtl">
-                                                            <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="item poi_name ui_link ng-binding">عباسیان2</a>
-                                                            <div class="item rating-widget">
-                                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                                    <span class="ui_bubble_rating bubble_20"></span>
-                                                                </div>
-                                                                <span class="reviewCount ng-binding">0 </span><span>نقد </span>
-                                                            </div>
-                                                            <div class="item tags ng-binding">تهران <span>در </span>
-                                                                <span class="ng-binding">تهران</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide position-relative" ng-repeat="place in records">
-                                                <img src="http://localhost/kouchita/public/images/pin.png" class="imageGoldPin">
-                                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
-                                                    <div class="poi">
-                                                        <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="thumbnail">
-                                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                                <div class="prv_thumb has_image">
-                                                                    <div class="image_wrapper landscape landscapeWide">
-                                                                        <img src="http://localhost/assets/_images/nopic/blank.jpg" alt="" class="image">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="detail rtl">
-                                                            <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="item poi_name ui_link ng-binding">عباسیان2</a>
-                                                            <div class="item rating-widget">
-                                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                                    <span class="ui_bubble_rating bubble_20"></span>
-                                                                </div>
-                                                                <span class="reviewCount ng-binding">0 </span><span>نقد </span>
-                                                            </div>
-                                                            <div class="item tags ng-binding">تهران <span>در </span>
-                                                                <span class="ng-binding">تهران</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide position-relative" ng-repeat="place in records">
-                                                <img src="http://localhost/kouchita/public/images/pin.png" class="imageGoldPin">
-                                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
-                                                    <div class="poi">
-                                                        <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="thumbnail">
-                                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                                <div class="prv_thumb has_image">
-                                                                    <div class="image_wrapper landscape landscapeWide">
-                                                                        <img src="http://localhost/assets/_images/nopic/blank.jpg" alt="" class="image">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="detail rtl">
-                                                            <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="item poi_name ui_link ng-binding">عباسیان2</a>
-                                                            <div class="item rating-widget">
-                                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                                    <span class="ui_bubble_rating bubble_20"></span>
-                                                                </div>
-                                                                <span class="reviewCount ng-binding">0 </span><span>نقد </span>
-                                                            </div>
-                                                            <div class="item tags ng-binding">تهران <span>در </span>
-                                                                <span class="ng-binding">تهران</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide position-relative" ng-repeat="place in records">
-                                                <img src="http://localhost/kouchita/public/images/pin.png" class="imageGoldPin">
-                                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
-                                                    <div class="poi">
-                                                        <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="thumbnail">
-                                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                                <div class="prv_thumb has_image">
-                                                                    <div class="image_wrapper landscape landscapeWide">
-                                                                        <img src="http://localhost/assets/_images/nopic/blank.jpg" alt="" class="image">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="detail rtl">
-                                                            <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="item poi_name ui_link ng-binding">عباسیان2</a>
-                                                            <div class="item rating-widget">
-                                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                                    <span class="ui_bubble_rating bubble_20"></span>
-                                                                </div>
-                                                                <span class="reviewCount ng-binding">0 </span><span>نقد </span>
-                                                            </div>
-                                                            <div class="item tags ng-binding">تهران <span>در </span>
-                                                                <span class="ng-binding">تهران</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide position-relative" ng-repeat="place in records">
-                                                <img src="http://localhost/kouchita/public/images/pin.png" class="imageGoldPin">
-                                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
-                                                    <div class="poi">
-                                                        <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="thumbnail">
-                                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                                <div class="prv_thumb has_image">
-                                                                    <div class="image_wrapper landscape landscapeWide">
-                                                                        <img src="http://localhost/assets/_images/nopic/blank.jpg" alt="" class="image">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="detail rtl">
-                                                            <a href="http://localhost/kouchita/public/hotel-details/1636/%D8%B9%D8%A8%D8%A7%D8%B3%DB%8C%D8%A7%D9%862" class="item poi_name ui_link ng-binding">عباسیان2</a>
-                                                            <div class="item rating-widget">
-                                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                                    <span class="ui_bubble_rating bubble_20"></span>
-                                                                </div>
-                                                                <span class="reviewCount ng-binding">0 </span><span>نقد </span>
-                                                            </div>
-                                                            <div class="item tags ng-binding">تهران <span>در </span>
-                                                                <span class="ng-binding">تهران</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            @endforeach
                                         </div>
                                         <!-- Add Pagination -->
                                         <div class="swiper-pagination"></div>
@@ -2473,8 +594,11 @@ $state = 2; ?>
                             </div>
                         </div>
                     </div>
+                    @endif
                 </div>
+
             </div>
+
             <div class="col-xs-12">
                 <div class="widget-head widget-head-45">
                     <strong class="widget-title">پر طرفدار ها</strong>
@@ -2484,45 +608,40 @@ $state = 2; ?>
                 <div class="row">
                     <article class="im-article content-2col col-md-4 col-sm-12">
                         <div class="im-entry-thumb">
-                            <a class="im-entry-thumb-link" href="http://localhost/kouchita/public/gardeshnameInner/73"
-                               title="مهمانسرای آذربایجان جلفا">
-                                <img class="lazy-img" data-src="http://localhost/assets/posts/25.jpg" alt=""
-                                     src="http://localhost/assets/posts/25.jpg" style="opacity: 1;">
+                            <a class="im-entry-thumb-link" href="{{$post[0]->url}}"
+                               title="{{$post[0]->slug}}">
+                                <img class="lazy-img" src="{{$post[0]->pic}}" alt="{{$post[0]->keyword}}" style="opacity: 1;">
                             </a>
                             <header class="im-entry-header">
                                 <div class="im-entry-category">
                                     <div class="iranomag-meta clearfix">
                                         <div class="cat-links im-meta-item">
-                                            <a style="background-color: #182501; color: #751551 !important;" href=""
-                                               title="هتل">هتل</a>
+                                            <a style="background-color: #666; color: #fff !important;" href="{{$post[0]->catURL}}"
+                                               title="{{$post[0]->category}}">{{$post[0]->category}}</a>
                                         </div>
                                     </div>
                                 </div>
                                 <h3 class="im-entry-title">
-                                    <a style="color: #535939" href="" rel="bookmark">مهمانسرای آذربایجان جلفا</a>
+                                    <a href="{{$post[0]->url}}" rel="bookmark">{{$post[0]->title}}</a>
                                 </h3>
                             </header>
                         </div>
                         <div class="im-entry">
                             <div class="iranomag-meta clearfix">
                                 <div class="posted-on im-meta-item">
-                                    <span class="entry-date published updated">۱۳۹۸/۴/۷</span>
+                                    <span class="entry-date published updated">{{$post[0]->date}}</span>
                                 </div>
 
                                 <div class="comments-link im-meta-item">
-                                    <a href="">
-                                        <i class="fa fa-comment-o"></i>۰
-                                    </a>
+                                    <i class="fa fa-comment-o"></i>{{$post[0]->msgs}}
                                 </div>
 
                                 <div class="author vcard im-meta-item">
-                                    <a class="url fn n">
-                                        <i class="fa fa-user"></i>admin
-                                    </a>
+                                    <i class="fa fa-user"></i>{{$post[0]->username}}
                                 </div>
 
                                 <div class="post-views im-meta-item">
-                                    <i class="fa fa-eye"></i>۱۹۶
+                                    <i class="fa fa-eye"></i>{{$post[0]->seen}}
                                 </div>
                             </div>
                         </div>
@@ -2530,219 +649,80 @@ $state = 2; ?>
                     <div class="col-md-4 col-sm-12">
                         <div class="widget">
                             <ul>
-                                <li class="widget-10104im-widgetclearfix">
+                                @for($i = 1; $i < 4 && $i < count($post); $i++)
+                                    <li class="widget-10104im-widgetclearfix">
                                     <figure class="im-widget-thumb">
-                                        <a href="" title="پانسیون فاطمه تازیکه">
-                                            <img src="http://localhost/assets/posts/12.jpg" alt="">
+                                        <a href="{{$post[$i]->url}}" title="{{$post[$i]->title}}">
+                                            <img src="{{$post[$i]->pic}}" alt="{{$post[$i]->keyword}}">
                                         </a>
                                     </figure>
                                     <div class="im-widget-entry">
                                         <header class="im-widget-entry-header">
                                             <h4 class="im-widget-entry-title">
-                                                <a style="color: #409713 !important;" href=""
-                                                   title="پانسیون فاطمه تازیکه">پانسیون فاطمه تازیکه</a>
+                                                <a href="{{$post[$i]->url}}"
+                                                   title="{{$post[$i]->title}}">{{$post[$i]->title}}</a>
                                             </h4>
                                         </header>
                                         <div class="iranomag-meta clearfix">
                                             <div class="posted-on im-meta-item">
-                                                <span class="entry-date published updated">۱۳۹۸/۴/۷</span>
+                                                <span class="entry-date published updated">{{$post[$i]->date}}</span>
                                             </div>
                                             <div class="comments-link im-meta-item">
-                                                <a href="">
-                                                    <i class="fa fa-comment-o"></i>۰
-                                                </a>
+                                                <i class="fa fa-comment-o"></i>{{$post[$i]->msgs}}
                                             </div>
                                             <div class="author vcard im-meta-item">
-                                                <a class="url fn n">
-                                                    <i class="fa fa-user"></i>admin
-                                                </a>
+                                                <i class="fa fa-user"></i>{{$post[$i]->username}}
                                             </div>
                                             <div class="post-views im-meta-item">
-                                                <i class="fa fa-eye"></i>۱۹۵
+                                                <i class="fa fa-eye"></i>{{$post[$i]->seen}}
                                             </div>
                                         </div>
                                     </div>
                                 </li>
-
-                                <li class="widget-10104im-widgetclearfix">
-                                    <figure class="im-widget-thumb">
-                                        <a href="" title="هتل اطلس">
-                                            <img src="http://localhost/assets/posts/46.jpg" alt="">
-                                        </a>
-                                    </figure>
-                                    <div class="im-widget-entry">
-                                        <header class="im-widget-entry-header">
-                                            <h4 class="im-widget-entry-title">
-                                                <a style="color: #953279 !important;" href="" title="هتل اطلس">هتل
-                                                    اطلس</a>
-                                            </h4>
-                                        </header>
-                                        <div class="iranomag-meta clearfix">
-                                            <div class="posted-on im-meta-item">
-                                                <span class="entry-date published updated">۱۳۹۸/۴/۷</span>
-                                            </div>
-                                            <div class="comments-link im-meta-item">
-                                                <a href="">
-                                                    <i class="fa fa-comment-o"></i>۰
-                                                </a>
-                                            </div>
-                                            <div class="author vcard im-meta-item">
-                                                <a class="url fn n">
-                                                    <i class="fa fa-user"></i>admin
-                                                </a>
-                                            </div>
-                                            <div class="post-views im-meta-item">
-                                                <i class="fa fa-eye"></i>۱۹۳
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li class="widget-10104im-widgetclearfix">
-                                    <figure class="im-widget-thumb">
-                                        <a href="" title="هتل ستاره دریا">
-                                            <img src="http://localhost/assets/posts/8.jpg" alt="">
-                                        </a>
-                                    </figure>
-                                    <div class="im-widget-entry">
-                                        <header class="im-widget-entry-header">
-                                            <h4 class="im-widget-entry-title">
-                                                <a style="color: #509091 !important;" href="" title="هتل ستاره دریا">هتل
-                                                    ستاره دریا</a>
-                                            </h4>
-                                        </header>
-                                        <div class="iranomag-meta clearfix">
-                                            <div class="posted-on im-meta-item">
-                                                <span class="entry-date published updated">۱۳۹۸/۴/۷</span>
-                                            </div>
-                                            <div class="comments-link im-meta-item">
-                                                <a href="">
-                                                    <i class="fa fa-comment-o"></i>۰
-                                                </a>
-                                            </div>
-                                            <div class="author vcard im-meta-item">
-                                                <a class="url fn n">
-                                                    <i class="fa fa-user"></i>admin
-                                                </a>
-                                            </div>
-                                            <div class="post-views im-meta-item">
-                                                <i class="fa fa-eye"></i>۱۸۶
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
+                                @endfor
                             </ul>
                         </div>
                     </div>
                     <div class="col-md-4 col-sm-12">
                         <div class="widget">
                             <ul>
-                                <li class="widget-10104im-widgetclearfix">
-                                    <figure class="im-widget-thumb">
-                                        <a href="" title="پانسیون فاطمه تازیکه">
-                                            <img src="http://localhost/assets/posts/12.jpg" alt="">
-                                        </a>
-                                    </figure>
-                                    <div class="im-widget-entry">
-                                        <header class="im-widget-entry-header">
-                                            <h4 class="im-widget-entry-title">
-                                                <a style="color: #409713 !important;" href=""
-                                                   title="پانسیون فاطمه تازیکه">پانسیون فاطمه تازیکه</a>
-                                            </h4>
-                                        </header>
-                                        <div class="iranomag-meta clearfix">
-                                            <div class="posted-on im-meta-item">
-                                                <span class="entry-date published updated">۱۳۹۸/۴/۷</span>
-                                            </div>
-                                            <div class="comments-link im-meta-item">
-                                                <a href="">
-                                                    <i class="fa fa-comment-o"></i>۰
-                                                </a>
-                                            </div>
-                                            <div class="author vcard im-meta-item">
-                                                <a class="url fn n">
-                                                    <i class="fa fa-user"></i>admin
-                                                </a>
-                                            </div>
-                                            <div class="post-views im-meta-item">
-                                                <i class="fa fa-eye"></i>۱۹۵
+                                @for($i = 4; $i < 7 && $i < count($post); $i++)
+                                    <li class="widget-10104im-widgetclearfix">
+                                        <figure class="im-widget-thumb">
+                                            <a href="{{$post[$i]->url}}" title="{{$post[$i]->title}}">
+                                                <img src="{{$post[$i]->pic}}" alt="{{$post[$i]->keyword}}">
+                                            </a>
+                                        </figure>
+                                        <div class="im-widget-entry">
+                                            <header class="im-widget-entry-header">
+                                                <h4 class="im-widget-entry-title">
+                                                    <a href="{{$post[$i]->url}}"
+                                                       title="{{$post[$i]->title}}">{{$post[$i]->title}}</a>
+                                                </h4>
+                                            </header>
+                                            <div class="iranomag-meta clearfix">
+                                                <div class="posted-on im-meta-item">
+                                                    <span class="entry-date published updated">{{$post[$i]->date}}</span>
+                                                </div>
+                                                <div class="comments-link im-meta-item">
+                                                    <i class="fa fa-comment-o"></i>{{$post[$i]->msgs}}
+                                                </div>
+                                                <div class="author vcard im-meta-item">
+                                                    <i class="fa fa-user"></i>{{$post[$i]->username}}
+                                                </div>
+                                                <div class="post-views im-meta-item">
+                                                    <i class="fa fa-eye"></i>{{$post[$i]->seen}}
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </li>
-
-                                <li class="widget-10104im-widgetclearfix">
-                                    <figure class="im-widget-thumb">
-                                        <a href="" title="هتل اطلس">
-                                            <img src="http://localhost/assets/posts/46.jpg" alt="">
-                                        </a>
-                                    </figure>
-                                    <div class="im-widget-entry">
-                                        <header class="im-widget-entry-header">
-                                            <h4 class="im-widget-entry-title">
-                                                <a style="color: #953279 !important;" href="" title="هتل اطلس">هتل
-                                                    اطلس</a>
-                                            </h4>
-                                        </header>
-                                        <div class="iranomag-meta clearfix">
-                                            <div class="posted-on im-meta-item">
-                                                <span class="entry-date published updated">۱۳۹۸/۴/۷</span>
-                                            </div>
-                                            <div class="comments-link im-meta-item">
-                                                <a href="">
-                                                    <i class="fa fa-comment-o"></i>۰
-                                                </a>
-                                            </div>
-                                            <div class="author vcard im-meta-item">
-                                                <a class="url fn n">
-                                                    <i class="fa fa-user"></i>admin
-                                                </a>
-                                            </div>
-                                            <div class="post-views im-meta-item">
-                                                <i class="fa fa-eye"></i>۱۹۳
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <li class="widget-10104im-widgetclearfix">
-                                    <figure class="im-widget-thumb">
-                                        <a href="" title="هتل ستاره دریا">
-                                            <img src="http://localhost/assets/posts/8.jpg" alt="">
-                                        </a>
-                                    </figure>
-                                    <div class="im-widget-entry">
-                                        <header class="im-widget-entry-header">
-                                            <h4 class="im-widget-entry-title">
-                                                <a style="color: #509091 !important;" href="" title="هتل ستاره دریا">هتل
-                                                    ستاره دریا</a>
-                                            </h4>
-                                        </header>
-                                        <div class="iranomag-meta clearfix">
-                                            <div class="posted-on im-meta-item">
-                                                <span class="entry-date published updated">۱۳۹۸/۴/۷</span>
-                                            </div>
-                                            <div class="comments-link im-meta-item">
-                                                <a href="">
-                                                    <i class="fa fa-comment-o"></i>۰
-                                                </a>
-                                            </div>
-                                            <div class="author vcard im-meta-item">
-                                                <a class="url fn n">
-                                                    <i class="fa fa-user"></i>admin
-                                                </a>
-                                            </div>
-                                            <div class="post-views im-meta-item">
-                                                <i class="fa fa-eye"></i>۱۸۶
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
+                                    </li>
+                                @endfor
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
+
             <div class="col-xs-12 cpBorderBottom">
                 <div class="cpMap" style="background-color: darkred">
                     <div id="cpMap" class="prv_map clickable full-width full-height"></div>
@@ -2768,691 +748,42 @@ $state = 2; ?>
                          onclick="toggleIconInMap('natImg')">
                 </div>
             </div>
+
         </div>
     </div>
 </div>
 
 @include('layouts.placeFooter')
 
-<span id="statePane1" class="statePane ui_overlay ui_modal editTags hidden pop-up-Panes">
-
-            <div class="header_text">استان مورد نظر</div>
-            <div class="subheader_text">
-           استان مورد نظر خود را از بین استان های موجود انتخاب کنید
-            </div>
-            <div class="body_text">
-
-                <select id="states"></select>
-
-                <div class="submitOptions">
-                    <button onclick="document.location.href = $('#states').val()" class="btn btn-success">تایید</button>
-                    <input type="submit" onclick="$('.dark').hide(); $('#statePane').addClass('hidden')" value="خیر"
-                           class="btn btn-default">
-                </div>
-            </div>
-            <div onclick="$('#statePane').addClass('hidden'); $('.dark').hide()" class="ui_close_x"></div>
-        </span>
-
-<span id="statePane2" class="statePane ui_overlay ui_modal editTags hidden pop-up-Panes">
-
-            <div class="header_text">شهر مورد نظر</div>
-            <div class="subheader_text">
-           شهر مورد نظر خود را از بین شهر های موجود انتخاب کنید
-            </div>
-            <div class="body_text">
-
-                <select onchange="getCities()" id="states2"></select>
-
-                <select id="cities"></select>
-
-                <div class="submitOptions">
-                    <button onclick="document.location.href = $('#cities').val()" class="btn btn-success">تایید</button>
-                    <input type="submit" onclick="$('.dark').hide(); $('#statePane2').addClass('hidden')" value="خیر"
-                           class="btn btn-default">
-                </div>
-            </div>
-            <div onclick="$('#statePane2').addClass('hidden'); $('.dark').hide()" class="ui_close_x"></div>
-        </span>
-
-<span id="goyeshPane" class="ui_overlay ui_modal editTags hidden pop-up-Panes">
-            <div class="header_text">گویش مورد نظر</div>
-            <div class="subheader_text">
-           گویش مورد نظر خود را از بین گویش های موجود انتخاب کنید
-            </div>
-            <div class="body_text">
-
-                <select id="goyesh"></select>
-
-                <div class="submitOptions">
-                    <button onclick="document.location.href = $('#goyesh').val()" class="btn btn-success">تایید</button>
-                    <input type="submit" onclick="$('.dark').hide(); $('#goyeshPane').addClass('hidden')" value="خیر"
-                           class="btn btn-default">
-                </div>
-            </div>
-            <div onclick="$('#goyeshPane').addClass('hidden'); $('.dark').hide()" class="ui_close_x"></div>
-        </span>
-
-{{--<div class="ui_backdrop dark" id="darkModeMainPage"></div>--}}
-
 @include('hotelDetailsPopUp')
 
-
-@if(!Auth::check())
-    @include('layouts.loginPopUp')
-@endif
-
-{{--@include('layouts.phonePopUp')--}}
-
-{{--<script defer src="{{URL::asset('js/mainPageSuggestions.js')}}"></script>--}}
 <script defer src="{{URL::asset('js/cityPage/cityPageOffer.js')}}"></script>
 
-<script async src="{{URL::asset('js/middleBanner.js')}}"></script>
-
-<script async src="{{URL::asset('js/slideBar.js')}}"></script>
-
-<script src="{{URL::asset('js/adv.js')}}"></script>
-
-<script defer>
-    var passenger = 0;
-
-    function redirect() {
-        "" != $("#placeId").val() && (document.location.href = $("#placeId").val())
-    }
-
-    function search(e) {
-
-        val = $("#placeName").val();
-        $(".suggest").css("background-color", "transparent").css("padding", "0").css("border-radius", "0");
-
-        if (null == val || "" == val || val.length < 2)
-            $("#result").empty();
-        else {
-
-            var scrollVal = $("#searchDivForScroll").scrollTop();
-
-            if (13 == e.keyCode && -1 != currIdx) {
-                $("#placeId").val(suggestions[currIdx].url);
-                return redirect();
-            }
-
-            if (13 == e.keyCode && -1 == currIdx && suggestions.length > 0) {
-                $("#placeId").val(suggestions[0].url);
-                return redirect();
-            }
-
-            if (40 == e.keyCode) {
-                if (currIdx + 1 < suggestions.length) {
-                    currIdx++;
-                    $("#searchDivForScroll").scrollTop(scrollVal + 25);
-                } else {
-                    currIdx = 0;
-                    $("#searchDivForScroll").scrollTop(0);
-                }
-
-                if (currIdx >= 0 && currIdx < suggestions.length) {
-                    $("#suggest_" + currIdx).css("background-color", "#dcdcdc").css("padding", "10px").css("border-radius", "5px");
-                }
-
-                return;
-            }
-            if (38 == e.keyCode) {
-                if (currIdx - 1 >= 0) {
-                    currIdx--;
-                    $("#searchDivForScroll").scrollTop(scrollVal - 25);
-                } else {
-                    currIdx = suggestions.length - 1;
-                    $("#searchDivForScroll").scrollTop(25 * suggestions.length);
-                }
-
-                if (currIdx >= 0 && currIdx < suggestions.length)
-                    $("#suggest_" + currIdx).css("background-color", "#dcdcdc").css("padding", "10px").css("border-radius", "5px");
-                return;
-            }
-
-            if ("ا" == val[0]) {
-                for (val2 = "آ", i = 1; i < val.length; i++) val2 += val[i];
-                $.ajax({
-                    type: "post",
-                    url: searchDir,
-                    data: {kindPlaceId: "{{$kindPlaceId}}", key: val, key2: val2},
-                    success: function (response) {
-
-                        newElement = "";
-
-                        if (response.length == 0) {
-                            newElement = "موردی یافت نشد";
-                            $("#placeId").val("");
-                            return;
-                        }
-
-                        response = JSON.parse(response);
-                        currIdx = -1;
-                        suggestions = response;
-
-                        for (i = 0; i < response.length; i++) {
-                            if ("state" == response[i].mode) {
-                                newElement += "<p class='suggest cursor-pointer' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "استان ' + response[i].targetName + "\")'>استان " + response[i].targetName + "</p>";
-                            } else if ("city" == response[i].mode) {
-                                newElement += "<p class='suggest cursor-pointer' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "شهر ' + response[i].targetName + " در " + response[i].stateName + "\")'>شهر " + response[i].targetName + " در " + response[i].stateName + " </p>";
-                            } else
-                                newElement += "<p class='suggest cursor-pointer' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")'>" + response[i].targetName + " در " + response[i].cityName + " در " + response[i].stateName + "</p>";
-                        }
-
-                        $("#result").empty().append(newElement)
-                    }
-                })
-            } else $.ajax({
-                type: "post",
-                url: searchDir,
-                data: {kindPlaceId: "{{$kindPlaceId}}", key: val},
-                success: function (response) {
-
-                    newElement = "";
-
-                    if (response.length == 0) {
-                        newElement = "موردی یافت نشد";
-                        $("#placeId").val("");
-                        return;
-                    }
-
-                    response = JSON.parse(response);
-                    currIdx = -1;
-                    suggestions = response;
-
-                    for (i = 0; i < response.length; i++) {
-                        if ("state" == response[i].mode) {
-                            newElement += "<p class='suggest cursor-pointer' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "استان ' + response[i].targetName + "\")'>استان " + response[i].targetName + "</p>";
-                        } else if ("city" == response[i].mode) {
-                            newElement += "<p class='suggest cursor-pointer' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "شهر ' + response[i].targetName + " در " + response[i].stateName + "\")'>شهر " + response[i].targetName + " در " + response[i].stateName + " </p>";
-                        } else
-                            newElement += "<p class='suggest cursor-pointer' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")'>" + response[i].targetName + " در " + response[i].cityName + " در " + response[i].stateName + "</p>";
-                    }
-
-                    $("#result").empty().append(newElement)
-                }
-            })
-        }
-    }
-
-    function setInput(e, t) {
-        $("#placeName").val(t), $("#placeId").val(e), $("#result").empty(), redirect()
-    }
-
-    {{--function chooseState(e) {--}}
-    {{--    $.ajax({--}}
-    {{--        type: "post", url: getStates, success: function (t) {--}}
-    {{--            for (t = JSON.parse(t), newElement = "", i = 0; i < t.length; i++) newElement += "<option value='{{route('home') . '/adab-list/'}}" + t[i].name + "/" + e + "'>" + t[i].name + "</option>";--}}
-    {{--            $("#states").empty().append(newElement), $("#statePane").removeClass("hidden"), $(".dark").show()--}}
-    {{--        }--}}
-    {{--    })--}}
-    {{--}--}}
-
-    {{--function chooseStateAmaken() {--}}
-    {{--    $.ajax({--}}
-    {{--        type: "post", url: getStates, success: function (e) {--}}
-    {{--            for (e = JSON.parse(e), newElement = "", i = 0; i < e.length; i++) newElement += "<option value='{{route('home') . '/amakenList/'}}" + e[i].name + "/state'>" + e[i].name + "</option>";--}}
-    {{--            $("#states").empty().append(newElement), $("#statePane").removeClass("hidden"), $(".dark").show()--}}
-    {{--        }--}}
-    {{--    })--}}
-    {{--}--}}
-
-    {{--function getCities() {--}}
-    {{--    var e = $("#states2").val(), t = $("#states2 option:selected").attr("data-val");--}}
-    {{--    $.ajax({--}}
-    {{--        type: "post", url: "{{route('getCitiesDir')}}", data: {stateId: e}, success: function (e) {--}}
-    {{--            for (e = JSON.parse(e), newElement = "<option value='{{route('home') . '/majaraList/'}}" + t + "/state'> استان " + t + "</option>", i = 0; i < e.length; i++) newElement += "<option value='{{route('home') . '/majaraList/'}}" + e[i].name + "/city'>شهر " + e[i].name + "</option>";--}}
-    {{--            $("#cities").empty().append(newElement)--}}
-    {{--        }--}}
-    {{--    })--}}
-    {{--}--}}
-
-    {{--function chooseStateMajara() {--}}
-    {{--    $.ajax({--}}
-    {{--        type: "post", url: getStates, success: function (e) {--}}
-    {{--            for (e = JSON.parse(e), newElement = "", i = 0; i < e.length; i++) newElement += "<option data-val='" + e[i].name + "' value='" + e[i].id + "'>" + e[i].name + "</option>";--}}
-    {{--            $(".dark").show(), $("#states2").empty().append(newElement), e.length > 0 && getCities(), $("#statePane2").removeClass("hidden")--}}
-    {{--        }--}}
-    {{--    })--}}
-    {{--}--}}
-
-    {{--function chooseGoyesh() {--}}
-    {{--    $.ajax({--}}
-    {{--        type: "post", url: getGoyesh, success: function (e) {--}}
-    {{--            for (e = JSON.parse(e), newElement = "", i = 0; i < e.length; i++) newElement += "<option value='{{route('home') . '/estelahat/'}}" + e[i].name + "'>" + e[i].name + "</option>";--}}
-    {{--            $(".dark").show(), $("#goyesh").empty().append(newElement), $("#goyeshPane").removeClass("hidden")--}}
-    {{--        }--}}
-    {{--    })--}}
-    {{--}--}}
-
-    {{--function showBookMarks(e) {--}}
-    {{--    $("#" + e).empty(), $.ajax({--}}
-    {{--        type: "post", url: getBookMarksPath, success: function (t) {--}}
-    {{--            for (t = JSON.parse(t), i = 0; i < t.length; i++) element = "<div>", element += "<a class='masthead-recent-card' target='_self' href='" + t[i].placeRedirect + "'>", element += "<div class='media-left'>", element += "<div class='thumbnail' style='background-image: url(" + t[i].placePic + ");'></div>", element += "</div>", element += "<div class='content-right'>", element += "<div class='poi-title'>" + t[i].placeName + "</div>", element += "<div class='rating'>", element += "<div class='ui_bubble_rating bubble_45'></div><br/>" + t[i].placeReviews + " مشاهده ", element += "</div>", element += "<div class='geo'>" + t[i].placeCity + "</div>", element += "</div>", element += "</a></div>", $("#" + e).append(element)--}}
-    {{--        }--}}
-    {{--    })--}}
-    {{--}--}}
-
-    {{--function getRecentlyViews(e) {--}}
-    {{--    $("#" + e).empty(), $.ajax({--}}
-    {{--        type: "post", url: getRecentlyPath, success: function (t) {--}}
-    {{--            for (t = JSON.parse(t), i = 0; i < t.length; i++) element = "<div>", element += "<a class='masthead-recent-card' style='text-align: right !important;' target='_self' href='" + t[i].placeRedirect + "'>", element += "<div class='media-left' style='padding: 0 12px !important; margin: 0 !important;'>", element += "<div class='thumbnail' style='background-image: url(" + t[i].placePic + ");'></div>", element += "</div>", element += "<div class='content-right'>", element += "<div class='poi-title'>" + t[i].placeName + "</div>", element += "<div class='rating'>", 5 == t[i].placeRate ? element += "<div class='ui_bubble_rating bubble_50'></div>" : 4 == t[i].placeRate ? element += "<div class='ui_bubble_rating bubble_40'></div>" : 3 == t[i].placeRate ? element += "<div class='ui_bubble_rating bubble_30'></div>" : 2 == t[i].placeRate ? element += "<div class='ui_bubble_rating bubble_20'></div>" : element += "<div class='ui_bubble_rating bubble_10'></div>", element += "<br/>" + t[i].placeReviews + " نقد ", element += "</div>", element += "<div class='geo'>" + t[i].placeCity + "/ " + t[i].placeState + "</div>", element += "</div>", element += "</a></div>", $("#" + e).append(element)--}}
-    {{--        }--}}
-    {{--    })--}}
-    {{--}--}}
-
-    // function showRecentlyViews(e) {
-    //     $("#my-trips-not").is(":hidden") ? ($("#alert").hide(), $("#my-trips-not").show(), $("#profile-drop").hide(), $("#bookmarkmenu").hide(), getRecentlyViews(e)) : ($("#alert").hide(), $("#my-trips-not").hide(), $("#profile-drop").hide(), $("#bookmarkmenu").hide())
-    // }
-    //    For Date
-    function assignDate(from, id, btnId) {
-        $("#" + id).css("visibility", "visible");
-
-        if (btnId == "date_input2" && $("#date_input1").val().length != 0)
-            from = $("#date_input1").val();
-
-        if (btnId == "date_input2_phone" && $("#date_input1_phone").val().length != 0)
-            from = $("#date_input1_phone").val();
-
-        $("#" + btnId).datepicker({
-            numberOfMonths: 2,
-            showButtonPanel: true,
-            minDate: from,
-            dateFormat: "yy/mm/dd"
-        });
-    }
-
-    //    For change passenger for room of hotel
-    function changePassengersNo(inc) {
-        if (passenger + inc >= 0)
-            passenger += inc;
-        $("#passengerNoSelect").empty().append(passenger);
-        $("#passengerNoSelect_phone").empty().append(passenger);
-    }
-
-    $(document).ready(function () {
-
-        changePassengersNo(0);
-    });
-
-    // $(".login-button").click(function () {
-    //     $(".dark").show(), showLoginPrompt(url)
-    // }), $(document).ready(function () {
-    //     $("#Settings").on({
-    //         mouseenter: function () {
-    //             $(".settingsDropDown").show()
-    //         }, mouseleave: function () {
-    //             $(".settingsDropDown").hide()
-    //         }
-    //     }), $("#nameTop").click(function (e) {
-    //         $("#profile-drop").is(":hidden") ? ($("#profile-drop").show(), $("#my-trips-not").hide(), $("#alert").hide(), $("#bookmarkmenu").hide()) : ($("#profile-drop").hide(), $("#my-trips-not").hide(), $("#alert").hide(), $("#bookmarkmenu").hide())
-    //     }), $("#memberTop").click(function (e) {
-    //         $("#profile-drop").is(":hidden") ? ($("#profile-drop").show(), $("#my-trips-not").hide(), $("#bookmarkmenu").hide(), $("#alert").hide()) : ($("#profile-drop").hide(), $("#my-trips-not").hide(), $("#bookmarkmenu").hide(), $("#alert").hide())
-    //     }), $("#bookmarkicon").click(function (e) {
-    //         $("#bookmarkmenu").is(":hidden") ? ($("#bookmarkmenu").show(), $("#my-trips-not").hide(), $("#profile-drop").hide(), $("#alert").hide(), showBookMarks("bookMarksDiv")) : ($("#bookmarkmenu").hide(), $("#my-trips-not").hide(), $("#profile-drop").hide(), $("#alert").hide())
-    //     }), $(".notification-bell").click(function (e) {
-    //         $("#alert").is(":hidden") ? ($("#alert").show(), $("#my-trips-not").hide(), $("#profile-drop").hide(), $("#bookmarkmenu").hide()) : ($("#alert").hide(), $("#my-trips-not").hide(), $("#profile-drop").hide(), $("#bookmarkmenu").hide())
-    //     }), $("#close_span_search").click(function (e) {
-    //         $("#searchspan").animate({height: "0vh"}), $("#myCloseBtn").addClass("hidden")
-    //     }), $("#openSearch").click(function (e) {
-    //         $("#myCloseBtn").removeClass("hidden"), $("#searchspan").animate({height: "100vh"})
-    //     })
-    // }), $("body").on("click", function () {
-    //     $("#profile-drop").hide(), $("#my-trips-not").hide(), $("#alert").hide(), $("#bookmarkmenu").hide()
-    // }), $(".global-nav-actions").on("click", function (e) {
-    //     e.stopPropagation()
-    // });
-
-</script>
-
 <script>
-    var imageBasePath = '{{URL::asset('images')}}';
-    var getLastRecentlyMainPath = '{{route('getLastRecentlyMain')}}';
-    var getAdviceMainPath = '{{route('getAdviceCity')}}';
-    var getHotelsMainPath = '{{route('getRandomHotel')}}';
-    var getAmakensMainPath = '{{route('getRandomAmaken')}}';
-    var getRestaurantsMainPath = '{{route('getRestaurantsMain')}}';
-            {{--var getFoodsMainPath = '{{route('getRandomFood')}}';--}}
-    var getCitiesDir = "{{route('getCitiesDir')}}";
+    function showMoreText(element){
+        $(element).parent().addClass('display-none');
+        $(element).parent().next().removeClass('display-none');
+    }
 
-    var config = {
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;',
-            'X-CSRF-TOKEN': '{{csrf_token()}}'
-        }
-    };
+    function showLessText(element){
+        $(element).parent().addClass('display-none');
+        $(element).parent().prev().removeClass('display-none');
+    }
 
-    var data = $.param({
-        cityId: '{{$place->id}}',
+    $(window).ready(function(){
+        var height = $('#cpBorderLeft').height();
+        $('.cpCommentBox').css('max-height', height);
     });
-</script>
-
-<script>
-    var _token = '{!! csrf_token() !!}';
-    var hasLogin = {{Auth::check() ? 1 : 0}};
-    var getReportsDir = '{{route('getReports')}}';
-    var sendReportDir = '{{route('sendReport2')}}';
-    var opOnComment = '{{route('opOnComment')}}';
-
-
-    function getCityOpinion() {
-        $.ajax({
-            type: 'post',
-            url: '{{route("cityPage.getCityOpinion")}}',
-            data:{
-                '_token' : _token,
-                'cityId' : '{{$place->id}}'
-            },
-            success: function (response) {
-                response = JSON.parse(response);
-
-                if ((response[0] == null || response[0].length == 0) && (response[1] == null || response[1].length == 0)) {
-                    document.getElementById('outher_people').style.display = 'none';
-                } else {
-                    fillOpinion(response[0]);
-                    fillPeoplePic(response[1]);
-                }
-            }
-        })
-    }
-
-    function fillPeoplePic(_pics) {
-        if (_pics.length != 0) {
-            document.getElementById('people_pic_div').style.display = 'block';
-            if (_pics.length > 4) {
-                document.getElementById('more_people_pic_button').style.display = 'block';
-                document.getElementById('more_people_pic_count').innerText = _pics.length - 4;
-            }
-        }
-    }
-
-    function fillOpinion(opinion) {
-        var newElement = '';
-
-        for (i = 0; i < opinion.length; i++) {
-            newElement += "<div class='border-bottom-grey inline-block full-width' class='review'>";
-            newElement += "<div class='prw_rup prw_reviews_basic_review_hsx'>";
-            newElement += "<div class='reviewSelector'>";
-            newElement += "<div class='review hsx_review ui_columns is-multiline inlineReviewUpdate provider0'>";
-            newElement += "<div class='ui_column is-2 float-right'>";
-            newElement += "<div class='prw_rup prw_reviews_member_info_hsx'>";
-            newElement += "<div class='member_info'>";
-            newElement += "<div class='avatar_wrap'>";
-            newElement += "<div class='prw_rup prw_common_centered_image qa_avatar' onmouseleave='$(\".img_popUp\").addClass(\"hidden\");' onmouseenter='showBriefPopUp(this, \"" + opinion[i].visitorId + "\")'>";
-            newElement += "<span class='imgWrap fixedAspect'>";
-            newElement += "<img src='" + opinion[i].visitorPic + "' class='centeredImg border-radius-100' height='100%'/>";
-            newElement += "</span></div>";
-            newElement += "<div class='username text-align-center mg-bt-5'>" + opinion[i].visitorId + "</div>";
-            newElement += "</div>";
-            newElement += "<div class='memberOverlayLink'>";
-            newElement += "<div class='memberBadgingNoText'><span class='ui_icon pencil-paper'></span><span class='badgetext'>" + opinion[i].comments + "</span>&nbsp;&nbsp;";
-            newElement += "<span class='ui_icon thumbs-up-fill'></span><span id='commentLikes_" + opinion[i].id + "' data-val='" + opinion[i].likes + "' class='badgetext'>" + opinion[i].likes + "</span>&nbsp;&nbsp;";
-            newElement += "<span class='ui_icon thumbs-down-fill'></span><span id='commentDislikes_" + opinion[i].id + "' data-val='" + opinion[i].dislikes + "' class='badgetext'>" + opinion[i].dislikes + "</span>";
-            newElement += "</div>";
-            newElement += "</div></div></div></div>";
-            newElement += "<div class='ui_column is-9 float-right text-align-right'>";
-            newElement += "<div class='innerBubble'>";
-            newElement += "<div class='wrap'>";
-            newElement += "<div class='rating reviewItemInline'>";
-            switch (opinion[i].rate) {
-                case 5:
-                    newElement += "<span class='ui_bubble_rating bubble_50'></span>";
-                    break;
-                case 4:
-                    newElement += "<span class='ui_bubble_rating bubble_40'></span>";
-                    break;
-                case 3:
-                    newElement += "<span class='ui_bubble_rating bubble_30'></span>";
-                    break;
-                case 2:
-                    newElement += "<span class='ui_bubble_rating bubble_20'></span>";
-                    break;
-                default:
-                    newElement += "<span class='ui_bubble_rating bubble_10'></span>";
-                    break;
-            }
-            newElement += "<span class='ratingDate relativeDate float-right'>نوشته شده در تاریخ " + opinion[i].date + " در <a href='" + opinion[i].url + "' target='_blank'>" + opinion[i].name + "</a></span></div>";
-            newElement += "<div class='quote isNew'><a href='" + homeURL + "/showReview/" + opinion[i].id + "'><h3 class='font-size-1em noQuotes'>" + opinion[i].subject + "</h3></a></div>";
-            newElement += "<div class='prw_rup prw_reviews_text_summary_hsx'>";
-            newElement += "<div class='entry'>";
-            newElement += "<p class='partial_entry partial-entry-paragraph' id='partial_entry_" + opinion[i].id + "'>" + opinion[i].text;
-            newElement += "</p>";
-            newElement += "<div id='showMoreReview_" + opinion[i].id + "' class='hidden showMoreReviewDiv' onclick='showMoreReview(" + opinion[i].id + ")'>بیشتر</div></div></div>";
-            if (opinion[i].pic != -1)
-                newElement += "<div><img id='reviewPic_" + opinion[i].id + "' class='hidden' width='150px' height='150px' src='" + opinion[i].pic + "'></div>";
-            newElement += "<div class='prw_rup prw_reviews_vote_line_hsx'>";
-            newElement += "<div class='tooltips wrap'><span id='reportSpanReviews' onclick='showReportPrompt(\"" + opinion[i].id + "\")' class='taLnk no_cpu ui_icon '>گزارش تخلف</span></div>";
-            newElement += "<div class='helpful redesigned hsx_helpful'>";
-            newElement += "<span onclick='likeComment(\"" + opinion[i].id + "\")' class='thankButton hsx_thank_button'>";
-            newElement += "<span class='helpful_text'><span class='ui_icon thumbs-up-fill emphasizeWithColor'></span><span class='numHelp emphasizeWithColor'></span><span class='thankUser'>" + opinion[i].visitorId + " </span></span>";
-            newElement += "<div class='buttonShade hidden'><img src='https://static.tacdn.com/img2/generic/site/loading_anim_gry_sml.gif'/></div>";
-            newElement += "</span>";
-            newElement += "<span onclick='dislikeComment(\"" + opinion[i].id + "\")' class='thankButton hsx_thank_button'>";
-            newElement += "<span class='helpful_text'><span class='ui_icon thumbs-down-fill emphasizeWithColor'></span><span class='numHelp emphasizeWithColor'></span><span class='thankUser'>" + opinion[i].visitorId + " </span></span>";
-            newElement += "<div class='buttonShade hidden'><img src='https://static.tacdn.com/img2/generic/site/loading_anim_gry_sml.gif'/></div>";
-            newElement += "</span>";
-            newElement += "</div></div></div>";
-            newElement += "<div class='loadingShade hidden'>";
-            newElement += "<div class='ui_spinner'></div></div></div></div></div></div></div></div>";
-            newElement += '<hr>';
-        }
-
-        document.getElementById('opinion').innerHTML = newElement;
-    }
-
-    getCityOpinion();
-
-    function showReportPrompt(logId) {
-        if (!{{Auth::check() ? 1 : 0}}) {
-            url = homeURL + "/seeAllAns/" + questionId + "/report/" + logId;
-            showLoginPrompt(url);
-            return;
-        }
-        $('.dark').show();
-        selectedLogId = logId;
-        getReports(logId);
-        showElement('reportPane');
-    }
-
-    function getReports(logId) {
-        $("#reports").empty();
-        $.ajax({
-            type: 'post',
-            url: getReportsDir,
-            data: {
-                'logId': logId
-            },
-            success: function (response) {
-                if (response != "")
-                    response = JSON.parse(response);
-                var newElement = "<div id='reportContainer' class='row'>";
-                if (response != "") {
-                    for (i = 0; i < response.length; i++) {
-                        newElement += "<div class='col-xs-12'>";
-                        newElement += "<div class='ui_input_checkbox'>";
-                        if (response[i].selected == true)
-                            newElement += "<input id='report_" + response[i].id + "' type='checkbox' name='reports' checked value='" + response[i].id + "'>";
-                        else
-                            newElement += "<input id='report_" + response[i].id + "' type='checkbox' name='reports' value='" + response[i].id + "'>";
-                        newElement += "<label class='labelForCheckBox' for='report_" + response[i].id + "'>";
-                        newElement += "<span></span>&nbsp;&nbsp;";
-                        newElement += response[i].description;
-                        newElement += "</label>";
-                        newElement += "</div></div>";
-                    }
-                }
-                newElement += "<div class='col-xs-12'>";
-                newElement += "<div class='ui_input_checkbox'>";
-                newElement += "<input id='custom-checkBox' onchange='customReport()' type='checkbox' name='reports' value='-1'>";
-                newElement += "<label class='labelForCheckBox' for='custom-checkBox'>";
-                newElement += "<span></span>&nbsp;&nbsp;";
-                newElement += "سایر موارد</label>";
-                newElement += "</div></div>";
-                newElement += "<div id='custom-define-report'></div>";
-                newElement += "</div>";
-                $("#reports").append(newElement);
-                if (response != "" && response.length > 0 && response[0].text != "") {
-                    customReport();
-                    $("#customDefinedReport").val(response[0].text);
-                }
-            }
-        });
-    }
-
-    function customReport() {
-        if ($("#custom-checkBox").is(':checked')) {
-            var newElement = "<div class='col-xs-12'>";
-            newElement += "<textarea id='customDefinedReport' maxlength='1000' required placeholder='حداکثر 1000 کاراکتر'></textarea>";
-            newElement += "</label></div>";
-            $("#custom-define-report").empty().append(newElement).css("visibility", "visible");
-        } else {
-            $("#custom-define-report").empty().css("visibility", "hidden");
-        }
-    }
-
-    function closeReportPrompt() {
-        $("#custom-checkBox").css("visibility", 'hidden');
-        $("#custom-define-report").css("visibility", 'hidden');
-        $("#reportPane").addClass('hidden');
-        $('.dark').hide();
-    }
-
-    function sendReport() {
-        customMsg = "";
-        if ($("#customDefinedReport").val() != null)
-            customMsg = $("#customDefinedReport").val();
-        var checkedValuesReports = $("input:checkbox[name='reports']:checked").map(function () {
-            return this.value;
-        }).get();
-        if (checkedValuesReports.length <= 0)
-            return;
-        if (!hasLogin) {
-            url = homeURL + "/seeAllAns/" + questionId + "/report/" + selectedLogId;
-            showLoginPrompt(url);
-            return;
-        }
-        $.ajax({
-            type: 'post',
-            url: sendReportDir,
-            data: {
-                "logId": selectedLogId,
-                "reports": checkedValuesReports,
-                "customMsg": customMsg
-            },
-            success: function (response) {
-                if (response == "ok") {
-                    alert('گزارش شما با موفقیت ثبت شد.')
-                    closeReportPrompt();
-                } else {
-                    $("#errMsgReport").append('مشکلی در انجام عملیات مورد نقد رخ داده است');
-                }
-            }
-        });
-    }
-
-    function likeComment(logId) {
-        $.ajax({
-            type: 'post',
-            url: opOnComment,
-            data: {
-                'logId': logId,
-                'mode': 'like'
-            },
-            success: function (response) {
-                if (response == "1") {
-                    $("#commentLikes_" + logId).empty()
-                        .attr('data-val', parseInt($("#commentLikes_" + logId).attr('data-val')) + 1)
-                        .append($("#commentLikes_" + logId).attr('data-val'));
-                } else if (response == "2") {
-                    $("#commentLikes_" + logId).empty()
-                        .attr('data-val', parseInt($("#commentLikes_" + logId).attr('data-val')) + 1)
-                        .append($("#commentLikes_" + logId).attr('data-val'));
-                    $("#commentDislikes_" + logId).empty()
-                        .attr('data-val', parseInt($("#commentDislikes_" + logId).attr('data-val')) - 1)
-                        .append($("#commentDislikes_" + logId).attr('data-val'));
-                }
-            }
-        });
-    }
-
-    function likeAns(logId) {
-        $.ajax({
-            type: 'post',
-            url: opOnComment,
-            data: {
-                'logId': logId,
-                'mode': 'like'
-            },
-            success: function (response) {
-                if (response == "1") {
-                    $("#score_" + logId).empty()
-                        .attr('data-val', parseInt($("#score_" + logId).attr('data-val')) + 1)
-                        .append($("#score_" + logId).attr('data-val'));
-                } else if (response == "2") {
-                    $("#score_" + logId).empty()
-                        .attr('data-val', parseInt($("#score_" + logId).attr('data-val')) + 2)
-                        .append($("#score_" + logId).attr('data-val'));
-                }
-            }
-        });
-    }
-
-    function dislikeAns(logId) {
-        $.ajax({
-            type: 'post',
-            url: opOnComment,
-            data: {
-                'logId': logId,
-                'mode': 'dislike'
-            },
-            success: function (response) {
-                if (response == "1") {
-                    $("#score_" + logId).empty()
-                        .attr('data-val', parseInt($("#score_" + logId).attr('data-val')) - 1)
-                        .append($("#score_" + logId).attr('data-val'));
-                } else if (response == "2") {
-                    $("#score_" + logId).empty()
-                        .attr('data-val', parseInt($("#score_" + logId).attr('data-val')) - 2)
-                        .append($("#score_" + logId).attr('data-val'));
-                }
-            }
-        });
-    }
-
-    function dislikeComment(logId) {
-        $.ajax({
-            type: 'post',
-            url: opOnComment,
-            data: {
-                'logId': logId,
-                'mode': 'dislike'
-            },
-            success: function (response) {
-                if (response == "1") {
-                    $("#commentDislikes_" + logId).empty()
-                        .attr('data-val', parseInt($("#commentDislikes_" + logId).attr('data-val')) + 1)
-                        .append($("#commentDislikes_" + logId).attr('data-val'));
-                } else if (response == "2") {
-                    $("#commentDislikes_" + logId).empty()
-                        .attr('data-val', parseInt($("#commentDislikes_" + logId).attr('data-val')) + 1)
-                        .append($("#commentDislikes_" + logId).attr('data-val'));
-                    $("#commentLikes_" + logId).empty()
-                        .attr('data-val', parseInt($("#commentLikes_" + logId).attr('data-val')) - 1)
-                        .append($("#commentLikes_" + logId).attr('data-val'));
-                }
-            }
-        });
-    }
-
 </script>
 
 {{--map--}}
 <script>
     var x = '{{$place->x}}';
     var y = '{{$place->y}}';
-    {{--var all_amaken = {!! $allAmaken !!};--}}
-    {{--var all_majara = {!! $allMajara !!};--}}
-    {{--var all_hotels = {!! $allHotels !!};--}}
-{{--    var all_restaurant = {!! $allRestaurant !!};--}}
+    var all_amaken = {!! $allPlaces[0] !!};
+    var all_majara = {!! $allPlaces[3] !!};
+    var all_hotels = {!! $allPlaces[1] !!};
+    var all_restaurant = {!! $allPlaces[2] !!};
     var iconBase = '{{URL::asset('images/mapIcon') . '/'}}';
     var icons = {
         hotel: {
@@ -3498,12 +829,16 @@ $state = 2; ?>
 
 
     function init() {
-        var x = '{{$place->x}}';
-        var y = '{{$place->y}}';
-        var place_name = '{{ $place->name }}';
+        var x = '{{$map["C"]}}';
+        var y = '{{$map["D"]}}';
+        var minLat = parseFloat("{{$map['minLat']}}");
+        var maxLat = parseFloat("{{$map['maxLat']}}");
+        var minLng = parseFloat("{{$map['minLng']}}");
+        var maxLng = parseFloat("{{$map['maxLng']}}");
+
         var mapOptions = {
-            zoom: 10,
             center: new google.maps.LatLng(x, y),
+            zoom: 5,
             // How you would like to style the map.
             // This is where you would paste any style found on Snazzy Maps.
             styles: [{
@@ -3526,8 +861,11 @@ $state = 2; ?>
                 "stylers": [{"hue": "#679714"}, {"saturation": 33.4}, {"lightness": -25.4}, {"gamma": 1}]
             }]
         };
-        var mapElementSmall = document.getElementById('map-small');
+        var mapElementSmall = document.getElementById('cpMap');
         map2 = new google.maps.Map(mapElementSmall, mapOptions);
+
+        var bounds = new google.maps.LatLngBounds({lat: minLat, lng: minLng}, {lat: maxLat, lng: maxLng});
+        map2.fitBounds(bounds);
 
         var marker;
 
@@ -3537,9 +875,9 @@ $state = 2; ?>
                 kindAmaken = 'amaken2';
             else if (all_amaken[i].tarikhi == 1)
                 kindAmaken = 'amaken1';
-            else if (all_amaken[i].tabiatgardi == 1) {
+            else if (all_amaken[i].tabiatgardi == 1)
                 kindAmaken = 'amaken4';
-            } else if (all_amaken[i].tafrihi == 1)
+            else if (all_amaken[i].tafrihi == 1)
                 kindAmaken = 'amaken5';
             else if (all_amaken[i].markazkharid == 1)
                 kindAmaken = 'amaken3';
@@ -3553,7 +891,11 @@ $state = 2; ?>
                     scaledSize: new google.maps.Size(35, 35)
                 },
                 map: map2,
-                title: all_amaken[i]['name']
+                title: all_amaken[i]['name'],
+                url: all_amaken[i]['url']
+            }).addListener('click', function() {
+                var win = window.open(this.url, '_blank');
+                win.focus();
             });
 
             if (all_amaken[i].mooze == 1)
@@ -3579,8 +921,13 @@ $state = 2; ?>
                     scaledSize: new google.maps.Size(35, 35)
                 },
                 map: map2,
-                title: all_hotels[i]['name']
+                title: all_hotels[i]['name'],
+                url: all_hotels[i]['url']
+            }).addListener('click', function() {
+                var win = window.open(this.url, '_blank');
+                win.focus();
             });
+
             markersHotel[i] = marker;
         }
 
@@ -3593,7 +940,11 @@ $state = 2; ?>
                     scaledSize: new google.maps.Size(35, 35)
                 },
                 map: map2,
-                title: all_majara[i]['name']
+                title: all_majara[i]['name'],
+                url: all_majara[i]['url']
+            }).addListener('click', function() {
+                var win = window.open(this.url, '_blank');
+                win.focus();
             });
             majaraMap[i] = marker;
         }
@@ -3612,7 +963,11 @@ $state = 2; ?>
                     scaledSize: new google.maps.Size(35, 35)
                 },
                 map: map2,
-                title: all_restaurant[i]['name']
+                title: all_restaurant[i]['name'],
+                url: all_restaurant[i]['url']
+            }).addListener('click', function() {
+                var win = window.open(this.url, '_blank');
+                win.focus();
             });
 
 
@@ -3660,15 +1015,16 @@ $state = 2; ?>
     }
 
     function setInMap(isSet, marker) {
+
         if (isSet == 1) {
-            for (var i = 0; i < marker.length; i++) {
-                marker[i].setMap(map2);
-            }
-        } else {
-            for (var i = 0; i < marker.length; i++) {
-                marker[i].setMap(null);
-            }
+            for (var i = 0; i < marker.length; i++)
+                marker[i]['h'].setMap(map2)
         }
+        else {
+            for (var i = 0; i < marker.length; i++)
+                marker[i]['h'].setMap(null)
+        }
+
     }
 </script>
 

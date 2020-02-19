@@ -19,7 +19,7 @@
                             <span class="ui_icon menu-bars"></span>
                         </div>
                         <a href="{{route('main')}}" class="global-nav-logo">
-                            <img src="{{URL::asset('images/logo.png')}}" alt="شازده مسافر" class="global-nav-img global-nav-svg"/>
+                            <img src="{{URL::asset('images/logo.png')}}" alt="کوچیتا" class="global-nav-img global-nav-svg"/>
                         </a>
                         <div class="global-nav-links ui_tabs inverted is-hidden-mobile">
                             <div id="taplc_global_nav_links_0" class="ppr_rup ppr_priv_global_nav_links" data-placement-name="global_nav_links">
@@ -49,6 +49,7 @@
                         </div>
 
                         <div class="global-nav-actions flex" >
+
                             @if(Auth::check())
 
                                 <div class="ppr_rup ppr_priv_global_nav_action_trips">
@@ -73,92 +74,6 @@
                                     </div>
                                 </div>
                             @endif
-
-                            @if(Auth::check())
-
-                                <script>
-                                    $(document).ready(function () {
-                                        getAlertsCount();
-                                    });
-
-                                    var locked = false;
-                                    var superAccess = false;
-
-                                    function getAlertsCount() {
-
-                                    $.ajax({
-                                        type: 'post',
-                                        url: '{{route('getAlertsNum')}}',
-                                        success: function (response) {
-                                            $('#alertPane').empty().append(response);
-
-                                            if(response == 0)
-                                                $("#showMoreItemsAlert").addClass('hidden');
-                                        }
-                                    });
-                                }
-
-                                    function scrolled(o) {
-                                    //visible height + pixel scrolled = total height
-                                    if(o.offsetHeight + o.scrollTop >= o.scrollHeight)  {
-                                        if(!locked) {
-                                            superAccess = true;
-                                            getAlertItems();
-                                        }
-                                    }
-                                    }
-
-                                    function getAlertItems() {
-
-                                    var items = $('#alertItems');
-                                    var pane = $('#alert');
-
-                                    if(!superAccess && !pane.hasClass('hidden')) {
-                                        pane.addClass('hidden');
-                                        return;
-                                    }
-
-                                    locked = true;
-                                    items.empty();
-                                    $("#alertLoader").removeClass('hidden');
-
-                                    $.ajax({
-                                        type: 'post',
-                                        url: '{{route('getAlerts')}}',
-                                        success: function (response) {
-
-                                            response = JSON.parse(response);
-                                            var newElement = "";
-
-                                            if(response.length < 5 && response.length > 0)
-                                                $("#showMoreItemsAlert").removeClass('hidden');
-                                            else
-                                                $("#showMoreItemsAlert").addClass('hidden');
-                                            for(i = 0; i < response.length; i++) {
-
-                                                if(response[i].url != -1)
-                                                    newElement += '<div id="notificationBox"><div class="modules-engagement-notification-dropdown"><div><img onclick="document.location.href = \'' + response[i].url + '\'" width="50px" height="50px" src="' + response[i].pic + '"></div><div class="notifdd_empty"><span>' + response[i].customText + '</span></div></div></div>';
-                                                else
-                                                    newElement += '<div onclick="document.location.href = \'{{route('msgs')}}\'" style="cursor: pointer; min-height: 60px"><div class="modules-engagement-notification-dropdown"><div style="float: right; margin: 10px; padding-top: 0; height: 50px; margin-top: 0; width: 50px; z-index: 10000000000001 !important;"></div><div style="margin-right: 70px" class="notifdd_empty"><span>' + response[i].customText + '</span></div></div></div>';
-                                            }
-
-                                            if(response.length == 0)
-                                                newElement += '<div><div class="modules-engagement-notification-dropdown"><div class="notifdd_empty">هیچ پیامی موجود نیست </div></div></div>';
-                                            else
-                                                getAlertsCount();
-
-                                            locked = false;
-                                            superAccess = false;
-                                            pane.removeClass('hidden');
-                                            $("#alertLoader").addClass('hidden');
-                                            items.empty().append(newElement);
-                                        }
-                                    });
-                                }
-
-                                </script>
-                            @endif
-
 
                             <div id="taplc_masthead_search_0" class="ppr_rup ppr_priv_masthead_search position-relative" data-placement-name="masthead_search">
                                 <div class="mag_glass_parent position-relative" title="Search">
@@ -223,9 +138,9 @@
                                 </div>
                             </div>
 
-                            <div class="global-nav-overlays-container">
-                                @include('layouts.recentlyViewAndMyTripsInMain')
-                            </div>
+                            {{--<div class="global-nav-overlays-container">--}}
+                                {{--@include('layouts.recentlyViewAndMyTripsInMain')--}}
+                            {{--</div>--}}
                         </div>
 
                         <div class="collapseBtnActions" onclick="headerActionsToggle()">
@@ -286,7 +201,6 @@
 
 @include('layouts.pop-up-create-trip')
 
-
 <script>
     $(document).ready(function(){
 
@@ -318,3 +232,87 @@
         }
     }
 </script>
+
+@if(Auth::check())
+    <script>
+        $(document).ready(function () {
+            getAlertsCount();
+        });
+
+        var locked = false;
+        var superAccess = false;
+
+        function getAlertsCount() {
+
+            $.ajax({
+                type: 'post',
+                url: '{{route('getAlertsNum')}}',
+                success: function (response) {
+                    $('#alertPane').empty().append(response);
+
+                    if(response == 0)
+                        $("#showMoreItemsAlert").addClass('hidden');
+                }
+            });
+        }
+
+        function scrolled(o) {
+            //visible height + pixel scrolled = total height
+            if(o.offsetHeight + o.scrollTop >= o.scrollHeight)  {
+                if(!locked) {
+                    superAccess = true;
+                    getAlertItems();
+                }
+            }
+        }
+
+        function getAlertItems() {
+
+            var items = $('#alertItems');
+            var pane = $('#alert');
+
+            if(!superAccess && !pane.hasClass('hidden')) {
+                pane.addClass('hidden');
+                return;
+            }
+
+            locked = true;
+            items.empty();
+            $("#alertLoader").removeClass('hidden');
+
+            $.ajax({
+                type: 'post',
+                url: '{{route('getAlerts')}}',
+                success: function (response) {
+
+                    response = JSON.parse(response);
+                    var newElement = "";
+
+                    if(response.length < 5 && response.length > 0)
+                        $("#showMoreItemsAlert").removeClass('hidden');
+                    else
+                        $("#showMoreItemsAlert").addClass('hidden');
+                    for(i = 0; i < response.length; i++) {
+
+                        if(response[i].url != -1)
+                            newElement += '<div id="notificationBox"><div class="modules-engagement-notification-dropdown"><div><img onclick="document.location.href = \'' + response[i].url + '\'" width="50px" height="50px" src="' + response[i].pic + '"></div><div class="notifdd_empty"><span>' + response[i].customText + '</span></div></div></div>';
+                        else
+                            newElement += '<div onclick="document.location.href = \'{{route('msgs')}}\'" style="cursor: pointer; min-height: 60px"><div class="modules-engagement-notification-dropdown"><div style="float: right; margin: 10px; padding-top: 0; height: 50px; margin-top: 0; width: 50px; z-index: 10000000000001 !important;"></div><div style="margin-right: 70px" class="notifdd_empty"><span>' + response[i].customText + '</span></div></div></div>';
+                    }
+
+                    if(response.length == 0)
+                        newElement += '<div><div class="modules-engagement-notification-dropdown"><div class="notifdd_empty">هیچ پیامی موجود نیست </div></div></div>';
+                    else
+                        getAlertsCount();
+
+                    locked = false;
+                    superAccess = false;
+                    pane.removeClass('hidden');
+                    $("#alertLoader").addClass('hidden');
+                    items.empty().append(newElement);
+                }
+            });
+        }
+
+    </script>
+@endif

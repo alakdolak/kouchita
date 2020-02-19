@@ -7,8 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <title>خانه - شازده مسافر</title>
-
     <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/hr_north_star.css?v=1')}}' data-rup='hr_north_star_v1'/>
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/shazdeDesigns/hotelDetail.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/long_lived_global_legacy_2.css?v=1')}}"/>
@@ -25,12 +23,9 @@
 
 <body class="rebrand_2017 desktop HomeRebranded  js_logging rtl home page-template-default page page-id-119 group-blog wpb-js-composer js-comp-ver-4.12 vc_responsive">
 
-    @include('general.globalInput')
+    @include('general.forAllPages')
 
     <div class="ui_backdrop dark" style="display: none; z-index: 10000000;"></div>
-    @if(!Auth::check())
-        @include('layouts.loginPopUp')
-    @endif
 
     <div class="header">
 
@@ -49,7 +44,9 @@
     </div>
 
     <script>
-        $('#searchCityInArticleInput').on('click', function(){
+        var category = {!! $category !!}
+
+        $('.searchCityInArticleInput').on('click', function(){
             createSearchInput('searchCityInArticle', 'نام شهر را وارد کنید.');
         });
 
@@ -102,48 +99,26 @@
 
             window.location.href = '{{url("/article/list/")}}/' + kind + '/' + val;
         }
-    </script>
 
-    <script type='text/javascript' src='{{URL::asset('js/article.js')}}'></script>
-
-    <script type="text/javascript">
-        jQuery('.lazy-img').unveil(300, function () {
-            "use strict";
-            jQuery(this).load(function () {
-                this.style.opacity = 1;
-            });
-        });
-    </script>
-
-    <script type="text/javascript">
-        jQuery(".sticky-sidebar").stick_in_parent({offset_top: fixed_header_height});
-    </script>
-
-    <script>
-
-        $(".login-button").click(function () {
-            $(".dark").show();
-            showLoginPrompt('{{Request::url()}}');
-        });
-
-        function hideElement(e) {
-            $(".dark").hide(), $("#" + e).addClass("hidden")
+        function searchInArticle(id){
+            var text = $('#'+id).val();
+            if(text.trim().length != 0){
+                window.location.href = getLisPostUrl + '/content/' + text;
+            }
         }
 
-        function showElement(e) {
-            $("#" + e).removeClass("hidden"), $(".dark").show()
+        function searchInCategory(element){
+            var text = $(element).text();
+            if(text.trim().length != 0)
+                window.location.href = getLisPostUrl + '/category/' + text;
         }
-    </script>
-
-    <script>
-        var category = {!! $category !!}
 
         function createCategoryList(){
             for(var i = 0; i < category.length; i++){
                 var text = '<div class="gnColOFContentsCategory">\n' +
                     '<div>\n' +
                     '<div>\n' +
-                    '<span id="CategoryName_' + category[i]["id"] + '" class="gnTitleOfPlaces" onclick="searchInCategory(this)"  style="cursor: pointer">' + category[i]["name"] + '</span>\n' +
+                    '<span class="gnTitleOfPlaces CategoryName_' + category[i]["id"] + '" onclick="searchInCategory(this)"  style="cursor: pointer">' + category[i]["name"] + '</span>\n' +
                     '<span class="gnNumberOfPlaces">' + category[i]["postCount"] + '</span>\n' +
                     '</div>\n';
 
@@ -153,7 +128,7 @@
                 for(var j = 0; j < category[i]["subCategory"].length; j++){
                     var sub = category[i]["subCategory"][j];
                     text += '<li class="gnLi">\n' +
-                        '<span id="CategoryName_' + sub["id"] + '"  onclick="searchInCategory(this)" style="cursor: pointer">' + sub["name"] + '</span>\n' +
+                        '<span class="CategoryName_' + sub["id"] + '" onclick="searchInCategory(this)" style="cursor: pointer">' + sub["name"] + '</span>\n' +
                         '<span class="gnNumberOfPlaces">' + sub["postCount"] + '</span>\n' +
                         '</li>\n';
                 }
@@ -164,16 +139,38 @@
                     '</div>';
 
                 if(i % 4 == 0 || i % 4 == 3)
-                    $("#rightCategory").append(text);
+                    $(".rightCategory").append(text);
                 else
-                    $("#leftCategory").append(text);
+                    $(".leftCategory").append(text);
             }
         }
 
-        createCategoryList()
+        $(window).ready(function () {
+            createCategoryList();
+
+            if(typeof post !== 'undefined') {
+                for (var i = 0; i < post['category'].length; i++)
+                    $('.CategoryName_' + post['category'][i]['categoryId']).css('color', '#4DC7BC');
+            }
+        });
+    </script>
+
+    <script type='text/javascript' src='{{URL::asset('js/article.js')}}'></script>
+
+    <script type="text/javascript">
+
+        jQuery('.lazy-img').unveil(300, function () {
+            "use strict";
+            jQuery(this).load(function () {
+                this.style.opacity = 1;
+            });
+        });
+
+        jQuery(".sticky-sidebar").stick_in_parent({offset_top: fixed_header_height});
     </script>
 
 </body>
+
 </html>
 
 

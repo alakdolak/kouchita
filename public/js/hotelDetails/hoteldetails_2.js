@@ -373,10 +373,12 @@ function hideElement(element) {
 }
 
 function bookMark() {
+
     if (!hasLogin) {
         showLoginPrompt(hotelDetailsInBookMarkMode);
         return;
     }
+
     $.ajax({
         type: 'post',
         url: bookMarkDir,
@@ -385,8 +387,21 @@ function bookMark() {
             'kindPlaceId': kindPlaceId
         },
         success: function (response) {
-            if (response == "ok")
-                document.location.href = hotelDetails;
+            if (response == "ok"){
+                if($('#bookMarkIcon').hasClass('castle')){
+                    $('#bookMarkIcon').removeClass('castle');
+                    $('#bookMarkIcon').addClass('castle-fill');
+                    showSuccessNotifi('این صفحه ذخیره شد', 'left', 'green')
+                }
+                else if($('#bookMarkIcon').hasClass('castle-fill')){
+                    $('#bookMarkIcon').removeClass('castle-fill');
+                    $('#bookMarkIcon').addClass('castle');
+                    showSuccessNotifi('این صفحه از حالت ذخیره خارج شد', 'left', 'red')
+
+                }
+
+            }
+            // document.location.href = hotelDetails;
         }
     })
 }
