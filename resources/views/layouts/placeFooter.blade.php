@@ -5,7 +5,7 @@ $config = \App\models\ConfigModel::first()
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/icons.css?v=1')}}'/>
 
 {{--footer html--}}
-<div class="clear-both" style="height: 75px"></div>
+{{--<div class="clear-both" style="height: 75px"></div>--}}
 
 <footer>
     <div class="hideOnPhone screenFooterStyle">
@@ -390,7 +390,7 @@ $config = \App\models\ConfigModel::first()
                     </div>
                 </div>
             @elseif(Request::is('placeList/*'))
-                <div class="mainPopUp leftPopUp" style="padding: 7px">
+                <div ng-app="mainApp" class="mainPopUp leftPopUp PlaceController" ng-controller="PlaceController as cntr" style="padding: 7px">
                     <div class="lp_ar_searchTitle">جستجو خود را محدودتر کنید</div>
 
                     <div class="lp_ar_filters">
@@ -538,22 +538,22 @@ $config = \App\models\ConfigModel::first()
                     <div id="lp_ar_leftFilters" class="lp_ar_contentOfFilters hidden">
                         <div id="FilterTopController">
                             <div class="ordering">
-                                <div class="orders" onclick="selectingOrder($(this),'review')" ng-click="sortFunc('review')" id="z1">
+                                <div class="orders" onclick="selectingOrder($(this),'review')" ng-click="sortFunc('review')" id="pz1">
                                     بیشترین نظر
                                 </div>
                             </div>
                             <div class="ordering">
-                                <div class="orders selectOrder" onclick="selectingOrder($(this), 'rate')" ng-click="sortFunc('rate')" id="z2">
+                                <div class="orders selectOrder" onclick="selectingOrder($(this), 'rate')" ng-click="sortFunc('rate')" id="pz2">
                                     بهترین بازخورد
                                 </div>
                             </div>
                             <div class="ordering">
-                                <div class="orders" onclick="selectingOrder($(this), 'seen')" ng-click="sortFunc('seen')" id="z3">
+                                <div class="orders" onclick="selectingOrder($(this), 'seen')" ng-click="sortFunc('seen')" id="pz3">
                                     بیشترین بازدید
                                 </div>
                             </div>
                             <div class="ordering">
-                                <div class="orders" ng-click="sortFunc('alphabet')" onclick="selectingOrder($(this), 'alphabet')" id="z4" >
+                                <div class="orders" ng-click="sortFunc('alphabet')" onclick="selectingOrder($(this), 'alphabet')" id="pz4" >
                                     حروف الفبا
                                 </div>
                             </div>
@@ -864,9 +864,9 @@ $config = \App\models\ConfigModel::first()
                     <div class="pSC_boxOfDetails">
                     <div class="pSC_choiseDetailsText">به سادگی انتخاب کنید</div>
                     <div class="pSC_boxOfCityDetailsText">
-                        <span>مشاهده صفحه {{$locationName['name']}}</span>
+                        <span onclick="window.location.href = '{{url("cityPage/" . $kind . "/" . $locationName["urlName"])}}'">مشاهده صفحه {{$locationName['name']}}</span>
                         @if(isset($locationName['state']))
-                            <span class="pSC_boxOfCityDetailsText2">در استان استان {{$locationName['state']}}</span>
+                            <span class="pSC_boxOfCityDetailsText2">در استان {{$locationName['state']}}</span>
                         @endif
                     </div>
                     <div>

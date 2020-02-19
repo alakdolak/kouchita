@@ -131,11 +131,13 @@
                         </div>
                     </div>
                     <div style="position: absolute; bottom: 0; right: 0;">
-                        <span>نمایش
-                            {{$kindPlace->title}}
-                                استان
-                            {{$state->name}}
-                        </span>
+                        <a href="{{route('place.list', ['kindPlaceId' => $kindPlace->id, 'city' => $state->name, 'mode' => 'state'])}}">
+                            <span>نمایش
+                                {{$kindPlace->title}}
+                                    استان
+                                {{$state->name}}
+                            </span>
+                        </a>
                         @if($mode == 'city')
                             <span>></span>
                             <span>نمایش
@@ -266,8 +268,8 @@
             <div id="BODYCON" ng-app="mainApp">
                 <div class="eateryOverviewContent">
                     <div class="ui_columns is-partitioned">
-                        <div id="PlaceController" class="ui_column col-md-9" ng-controller="PlaceController as cntr" style="direction: rtl; padding: 9px 24px;">
-                            <div  infinite-scroll="myPagingFunction()" class="coverpage">
+                        <div class="ui_column col-md-9 PlaceController" ng-controller="PlaceController as cntr" style="direction: rtl; padding: 9px 24px;">
+                            <div infinite-scroll="myPagingFunction()" class="coverpage">
                                 <div class="ppr_rup ppr_priv_restaurants_coverpage_content">
                                     <div>
                                         <div class="prw_rup prw_restaurants_restaurants_coverpage_content">
@@ -352,7 +354,7 @@
                                                                                 </div>
                                                                             </div>
                                                                             <a target="_blank" class="review_count" href="">
-                                                                                [[place.avgRate]]
+                                                                                [[place.reviews]]
                                                                                 <span>نقد</span>
                                                                             </a>
                                                                         </div>
@@ -606,9 +608,8 @@
 
     function selectingOrder(elem, type) {
         $(".orders").removeClass('selectOrder');
-        $("#distanceNav").text('selectOrder');
+        $("#selectDistance").text('__ __ __');
         elem.addClass('selectOrder');
-
         sort = type;
     }
 
@@ -680,6 +681,7 @@
 
 
         $scope.sortFunc = function(value) {
+            alert('hello')
             sort = value;
             page = 1;
             floor = 1;
@@ -955,6 +957,7 @@
     function searchInPlaces(element){
         var value = element.value;
         if(value.trim().length > 1){
+            console.log({{$city->id}})
             $.ajax({
                 type: 'post',
                 url: "{{route('proSearch')}}",
@@ -1029,7 +1032,7 @@
         isFinish = false;
         inSearch = false;
 
-        angular.element(document.getElementById('PlaceController')).scope().myPagingFunction();
+        angular.element($('.PlaceController')).scope().myPagingFunction();
     }
 
     function showElement(element) {
@@ -1084,14 +1087,9 @@
     });
 
     $(document).ready(function () {
-
-        {{--@foreach($sections as $section)--}}
-            {{--fillMyDivWithAdv('{{$section->sectionId}}', '{{$state->id}}');--}}
-        {{--@endforeach--}}
-
-        $("#global-nav-hotels").attr('href', '{{route('hotelList', ['city' => $city, 'mode' => $mode])}}');
-        $("#global-nav-restaurants").attr('href', '{{route('restaurantList', ['city' => $city, 'mode' => $mode])}}');
-        $("#global-nav-amaken").attr('href', '{{route('amakenList', ['city' => $city, 'mode' => $mode])}}');
+        {{--$("#global-nav-hotels").attr('href', '{{route('hotelList', ['city' => $city, 'mode' => $mode])}}');--}}
+        {{--$("#global-nav-restaurants").attr('href', '{{route('restaurantList', ['city' => $city, 'mode' => $mode])}}');--}}
+        {{--$("#global-nav-amaken").attr('href', '{{route('amakenList', ['city' => $city, 'mode' => $mode])}}');--}}
     });
 
     function hideElement(val) {

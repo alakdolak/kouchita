@@ -190,8 +190,16 @@ class HomeController extends Controller
                     $mostSeen = DB::select('SELECT placeId, COUNT(id) as seen FROM log WHERE activityId = ' .$seenActivity->id. ' AND kindPlaceId = 1 AND placeId IN (' . implode(",", $ala) . ') GROUP BY placeId ORDER BY seen DESC');
 
                 if(count($mostSeen) != 0){
-                    $p = Amaken::find($mostSeen[0]->placeId);
-                    $place->image = URL::asset('_images/amaken/' . $p->file . '/s-' . $p->picNumber);
+                    foreach ($mostSeen as $item){
+                        $p = Amaken::find($item->placeId);
+                        $location = __DIR__ . '/../../../../assets/_images/amaken/' . $p->file . '/s-' . $p->picNumber;
+                        if(file_exists($location)) {
+                            $place->image = URL::asset('_images/amaken/' . $p->file . '/s-' . $p->picNumber);
+                            break;
+                        }
+                    }
+                    if($place->image == null || $place->image == '')
+                        $place->image = URL::asset('_images/noPic/blank.jpg');
                 }
                 else
                     $place->image = URL::asset('_images/noPic/blank.jpg');
@@ -226,16 +234,16 @@ class HomeController extends Controller
                 $seenActivity = Activity::whereName('مشاهده')->first();
                 $mostSeen = DB::select('SELECT placeId, COUNT(id) as seen FROM log WHERE activityId = ' .$seenActivity->id. ' AND kindPlaceId = 1 AND placeId IN (' . implode(",", $allAmakenId) . ') GROUP BY placeId ORDER BY seen DESC');
                 if(count($mostSeen) != 0){
-                    $p = Amaken::find($mostSeen[0]->placeId);
-                    $location = __DIR__ . '/../../../../assets/_images/amaken/' . $p->file . '/s-' . $p->picNumber;
-                    if(file_exists($location))
-                        $place->image = URL::asset('_images/amaken/' . $p->file . '/s-' . $p->picNumber);
-                    else{
-                        $mainPic = Amaken::whereNotNull('file')->where('file' , '!=' , '')->whereIn('id', $allAmakenId)->first();
-                        $location = __DIR__ . '/../../../../assets/_images/amaken/' . $mainPic->file . '/s-' . $mainPic->picNumber;
-                        if(file_exists($location))
+                    foreach ($mostSeen as $item){
+                        $p = Amaken::find($item->placeId);
+                        $location = __DIR__ . '/../../../../assets/_images/amaken/' . $p->file . '/s-' . $p->picNumber;
+                        if(file_exists($location)) {
                             $place->image = URL::asset('_images/amaken/' . $p->file . '/s-' . $p->picNumber);
+                            break;
+                        }
                     }
+                    if($place->image == null || $place->image == '')
+                        $place->image = URL::asset('_images/noPic/blank.jpg');
                 }
                 else
                     $place->image = URL::asset('_images/noPic/blank.jpg');
@@ -409,8 +417,7 @@ class HomeController extends Controller
             $item->url = route('article.show', ['slug' => $item->slug]);
             $item->catURL = route('article.list', ['type' => 'category', 'search' => $item->category]);
         }
-
-        return view('cityPage', compact(['place', 'kind', 'locationName', 'post', 'map', 'allPlaces', 'allAmaken', 'allHotels', 'allRestaurant', 'allMajara', 'allMahaliFood', 'allSogatSanaie', 'reviews', 'topPlaces']));
+        return view('cityPage', compact(['place', 'mode', 'kind', 'locationName', 'post', 'map', 'allPlaces', 'allAmaken', 'allHotels', 'allRestaurant', 'allMajara', 'allMahaliFood', 'allSogatSanaie', 'reviews', 'topPlaces']));
     }
 
     public function getCityOpinion()

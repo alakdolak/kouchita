@@ -3440,9 +3440,9 @@ class PlaceController extends Controller {
                 if ($state == null)
                     return "نتیجه ای یافت نشد";
 
-
                 $articleUrl = \url('/article/list/city/' . $state->name);
-                $locationName = ["name" => $state->name, 'urlName' => $state->name, 'articleUrl' => $articleUrl];
+                $n = ' استان ' . $state->name;
+                $locationName = ["name" => $n, 'urlName' => $state->name, 'articleUrl' => $articleUrl];
             }
             else {
                 $city = Cities::whereName($city)->first();
@@ -3454,7 +3454,8 @@ class PlaceController extends Controller {
                     return "نتیجه ای یافت نشد";
 
                 $articleUrl = \url('/article/list/city/' . $city->name);
-                $locationName = ["name" => $city->name, 'state' => $state->name, 'urlName' => $city->name, 'articleUrl' => $articleUrl];
+                $n = ' شهر ' . $city->name;
+                $locationName = ["name" => $n, 'state' => $state->name, 'urlName' => $city->name, 'articleUrl' => $articleUrl];
             }
 
             switch ($kindPlaceId){
@@ -3594,7 +3595,7 @@ class PlaceController extends Controller {
 
         // and sort results by kind
         if($sort == 'alphabet')
-            $places = DB::table($table)->whereIn('id', $placeIds)->select(['id', 'C', 'D', 'name', 'file'])->orderBy('name')->skip(($page - 1) * $take)->take($take)->get();
+            $places = DB::table($table)->whereIn('id', $placeIds)->orderBy('name')->skip(($page - 1) * $take)->take($take)->get();
         else if($sort == 'distance' && $nearPlaceIdFilter != 0 && $nearKindPlaceIdFilter != 0){
             $nearKind = Place::find($nearKindPlaceIdFilter);
             $nearPlace = DB::table($nearKind->tableName)->find($nearPlaceIdFilter);
@@ -3666,7 +3667,7 @@ class PlaceController extends Controller {
                 $place->pic = URL::asset('_images/nopic/blank.jpg');
 
             $condition = ['placeId' => $place->id, 'kindPlaceId' => $request->kindPlaceId,
-                'activityId' => $activityId];
+                'activityId' => $activityId, 'confirm' => 1];
             $place->reviews = LogModel::where($condition)->count();
             $cityObj = Cities::whereId($place->cityId);
             $place->city = $cityObj->name;
@@ -3680,7 +3681,6 @@ class PlaceController extends Controller {
                     $place->inTrip = 1;
             }
         }
-
 
         echo json_encode(['places' => $places]);
         return;

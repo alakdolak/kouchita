@@ -320,6 +320,7 @@ class AjaxController extends Controller {
             $cityConstraint = "";
             $allow = true;
             $key = $_POST["key"];
+//            dd($request->all());
             if(isset($request->mode) && $request->mode == 'state'){
                 $state = State::find($request->selectedCities);
                 if($state != null){
@@ -335,7 +336,7 @@ class AjaxController extends Controller {
                     }
                 }
             }
-            else {
+            elseif(isset($request->mode) && $request->mode == 'city') {
                 if ($cities != -1) {
                     if(is_array($cities)) {
                         foreach ($cities as $city) {
@@ -354,6 +355,15 @@ class AjaxController extends Controller {
                         $cityConstraint .= $cities;
                 }
             }
+            else{
+                echo 'nok';
+                return;
+            }
+
+            if($cityConstraint != '')
+                $allow = false;
+            else
+                $allow = true;
 
             $target = [];
             if($_POST["hotelFilter"] == 1) {

@@ -19,6 +19,12 @@
     background: #969696;
 }
 
+textarea:focus, input:focus, textarea, input {
+    outline: none !important;
+    box-shadow: none !important;
+    transition: border-color initial;
+}
+
 #MAINWRAP > div:nth-child(1).globalNav2011_reset #PAGE {
     width: auto;
 }
