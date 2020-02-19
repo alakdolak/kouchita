@@ -32,7 +32,7 @@ input[type="checkbox"] + label span, input[type="radio"] + label span {
     display: inline-block;
     width: 19px;
     height: 19px;
-    margin: -2px 10px 0 0;
+    /*margin: -2px 10px 0 0;*/
     vertical-align: middle;
     background: url('../../images/check_radio_sheet.png') left top no-repeat;
     cursor: pointer;
@@ -74,7 +74,7 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     display: inline-block;
     margin-left: 5px;
     background-size: 14px;
-    background-position: 0 -1px;
+    background-position: 0 -2px;
     width: 13px;
     height: 13px;
     background-image: url('../../images/all_messages.png');
@@ -91,7 +91,7 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     display: inline-block;
     margin-left: 5px;
     background-size: 13px;
-    background-position: 0 -49px;
+    background-position: 0 -50px;
     width: 13px;
     height: 15px;
     background-image: url('../../images/all_messages.png');
@@ -100,9 +100,9 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
 
 .reportPromptBtn {
     display: inline-block;
-    margin-left: 5px;
+    margin-left: 3px;
     background-size: 15px;
-    background-position: 0 -38px;
+    background-position: 0 -39px;
     width: 13px;
     height: 15px;
     background-image: url('../../images/all_messages.png');
@@ -125,18 +125,41 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     background-color: white
 }
 
+#MESSAGES_CONTENT > .vt-align-top {
+    width: 185px;
+}
+
+#MESSAGES_CONTENT > #PROFILE_MESSAGING {
+    width: 100%;
+}
+
+#PROFILE_MESSAGING .alignLeft > div {
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+}
+
 #tableId {
-    margin-top: 5px
+    margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+}
+
+#tableId > tr {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
 }
 
 #sendMsgDiv {
-    visibility: hidden;
-    margin-top: -10%
+    /*visibility: hidden;*/
+    margin-top: 50px
 }
 
-.userNameLabel {
-    float: right;
-    margin-right: 190px
+#sendMsgDiv .row {
+    margin: 0;
 }
 
 #result {
@@ -156,7 +179,7 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
 }
 
 #msg {
-    width: 350px;
+    width: 320px;
     height: 130px;
 }
 
@@ -274,6 +297,160 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
 
 .showMsgDiv {
     cursor: pointer;
-    width: 55%;
+    width: 35%;
     text-align: center
 }
+
+.mc-badge-collection-container .modules-membercenter-badge-collection .memberBadges {
+    float: inherit;
+    display: inline-block;
+}
+
+.saveLeftNav .menu_bar a.saveLink:hover, .saveLeftNav .menu_bar a.saveLink strong:hover {
+    text-decoration: none;
+}
+
+#MAIN .m2m_copy {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0;
+}
+
+#MESSAGES_CONTENT .saveLeftNav .selectedFolder {
+    padding: 0;
+}
+
+#tableId td.width-15per {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#contact_form fieldset {
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+}
+
+#contact_form fieldset .form-group {
+    margin: 0 0 10px;
+}
+
+#contact_form fieldset .control-label {
+    margin: 0 0 5px;
+    float: right;
+}
+
+#contact_form fieldset .messagesInputsMainDiv {
+    width: 100%;
+}
+
+.footerOptimizer {
+    width: 100%;
+    height: 40px;
+}
+
+@media (max-width: 820px) {
+    .floatLeft.affix {
+        width: 145px;
+    }
+}
+
+@media (max-width: 700px) {
+    .floatLeft.affix {
+        width: 145px;
+    }
+}
+
+@media (max-width: 675px) {
+    .floatLeft.affix {
+        width: 140px;
+    }
+}
+
+@media (max-width: 550px) {
+
+    #MESSAGES_CONTENT a.saveLink {
+        font-size: 10px;
+    }
+
+    #MESSAGES_CONTENT > .vt-align-top {
+        width: 160px;
+    }
+
+    #MAINWRAP #BODYCON .messagesHeading {
+        margin: 10px;
+        font-size: 25px;
+    }
+
+    .floatLeft.affix {
+        width: 120px;
+    }
+}
+
+@media (max-width: 495px) {
+
+    .floatLeft.affix {
+        width: 110px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    #MESSAGES_CONTENT {
+        flex-direction: column;
+    }
+
+    #MESSAGES_CONTENT > .vt-align-top {
+        width: 100%;
+    }
+
+    #MESSAGES_CONTENT .saveLeftNav {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: solid #ccc;
+        padding: 3px 0;
+        margin: 0;
+        border-width: 1px 0;
+    }
+
+    #MESSAGES_CONTENT .saveLeftNav .menu_bar {
+        width: 33.33333%;
+        text-align: center;
+        padding: 6px 0;
+    }
+
+    #MESSAGES_CONTENT .saveLeftNav div.displayFolder {
+        border: none;
+    }
+
+    .floatLeft.affix {
+        top: 0;
+        width: 100%;
+        background: white;
+        z-index: 1;
+    }
+
+    .messagesActionsBar.affix {
+        top: 59px;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 370px) {
+
+    #tableId td.width-20per, .inboxHeaders .SortNavOn.width-20per {
+        width: 30%;
+    }
+
+    .memberProfile div.messagingButton, #MESSAGES_CONTENT div.messagingButton {
+        margin: 1px 2px 5px 0;
+    }
+}
+
+

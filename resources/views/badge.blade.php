@@ -24,7 +24,7 @@
                         <div class="sub-header">نمی‌شود از مدال‌های زیر چشم‌پوشی کرد. پس حتماً امتیازات مورد نیاز را کسب کنید تا یک گردشگر پرافتخار باشید.</div>
                     </div>
                 </h1>
-                <div class="modules-membercenter-badge-collection " data-backbone-name="modules.membercenter.BadgeCollection"
+                <center class="modules-membercenter-badge-collection " data-backbone-name="modules.membercenter.BadgeCollection"
                      data-backbone-context="Achievements_Badges, Social_CompositeMember, LoggedInMember, Achievements_BadgeFlyoutView, Member, features">
                     <ul data-list="earnedBadges">
 
@@ -90,7 +90,7 @@
                             </li>
                         @endforeach
                     </ul>
-                </div>
+                </center>
 
                 <?php $i = 0; ?>
 
