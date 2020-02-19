@@ -25,7 +25,7 @@
                 </center>
             @endif
 
-            <div class="">
+            <div class="responsiveSendMode">
 
                 <div class="main_content display-flex min-height-300" id="MESSAGES_CONTENT">
 
@@ -65,7 +65,7 @@
                     <div width="100%" border="0" cellpadding="0" cellspacing="0" class="mb_12" id="PROFILE_MESSAGING">
     {{--                    <tr>--}}
     {{--                        <td id="inbox">--}}
-                                <div class="alignLeft">
+                                <div class="alignLeft" id="inbox">
                                     <div class="mainDivTable p5 bg-color-light-grey">
 
                                         <div class="display-flex">
@@ -168,7 +168,7 @@
                     <div class="row">
                         <form method="post" action="{{route('sendMsg')}}" class="form-horizontal" id="contact_form">
                             {{csrf_field()}}
-                            <fieldset>
+                            <fieldset class="contactFormFieldset">
                                 <!-- Text input-->
                                 <div class="form-group">
                                     <label class="control-label userNameLabel">نام کاربری</label>
@@ -218,7 +218,7 @@
                     </div>
                 </center>
 
-                <div class="hideOnScreen footerOptimizer"></div>
+{{--                <div class="hideOnScreen footerOptimizer"></div>--}}
 
             </div>
 
@@ -505,10 +505,31 @@
             $("#" + showMsgContainer).css("visibility", 'hidden');
             $("#" + reportContainer).css("visibility", 'hidden');
             $("#" + blockContainer).css("visibility", 'hidden');
-            $("#" + inbox).css("visibility", 'hidden');
+            $("#" + inbox).css({"display": 'none', "visibility" : ""});
             $(".menu_bar").removeClass("selectedFolder");
             $("#" + sendFolder).addClass("selectedFolder");
             $("#" + msgContainer).css({"display": 'block',"visibility" : ""});
+            $('#MESSAGES_CONTENT').removeClass('min-height-300');
+            $('#PROFILE_MESSAGING').addClass('display-none');
+
+
+            if ($(window).width() > 480) {
+
+                $('.responsiveSendMode').addClass('display-flex');
+
+            }
+
+            $( window ).resize(function() {
+                if ($(window).width() > 480) {
+
+                    $('.responsiveSendMode').addClass('display-flex');
+
+                }
+
+                else {
+                    $('.responsiveSendMode').removeClass('display-flex');
+                }
+            });
 
             containerMode = "send";
         }
@@ -517,10 +538,14 @@
             $("#" + showMsgContainer).css({"display": 'none',"visibility" : ""});
             $("#" + reportContainer).css("visibility", 'hidden');
             $("#" + blockContainer).css("visibility", 'hidden');
-            $("#" + inbox).css("visibility", "visible");
+            $("#" + inbox).css({"display": 'block', "visibility" : ""});
             $(".menu_bar").removeClass("selectedFolder");
             $("#" + inboxFolder).addClass("selectedFolder");
             $("#" + msgContainer).css("visibility", 'hidden');
+            $('#MESSAGES_CONTENT').addClass('min-height-300');
+            $('#PROFILE_MESSAGING').removeClass('display-none');
+
+            $('.responsiveSendMode').removeClass('display-flex');
 
             containerMode = "inbox";
 
@@ -532,9 +557,13 @@
             $("#" + reportContainer).css("visibility", 'hidden');
             $("#" + blockContainer).css("visibility", 'hidden');
             $("#" + msgContainer).css({"display": 'none', "visibility" : ""});
-            $("#" + inbox).css("visibility", "visible");
+            $("#" + inbox).css({"display": 'block', "visibility" : ""});
             $(".menu_bar").removeClass("selectedFolder");
             $("#" + outboxFolder).addClass("selectedFolder");
+            $('#MESSAGES_CONTENT').addClass('min-height-300');
+            $('#PROFILE_MESSAGING').removeClass('display-none');
+
+            $('.responsiveSendMode').removeClass('display-flex');
 
             containerMode = "outbox";
 
