@@ -23,6 +23,7 @@
     color: black;
     margin-top: 100px;
     flex-direction: column;
+    position: relative;
 }
 .globalSearchInputField{
     border: none;
@@ -40,5 +41,15 @@
     text-align: right;
     border: none;
     box-shadow: 0px 5px 9px 0px grey;
+    overflow-y: scroll;
+    max-height: 50vh;
     /*padding: 15px;*/
+}
+
+.globalSearchCloseIcon {
+    color: #4dc7bc;
+    font-size: 2em;
+    position: absolute;
+    top: 0;
+    left: 5px;
 }

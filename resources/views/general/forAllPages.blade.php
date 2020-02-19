@@ -19,6 +19,8 @@
     }
 </style>
 
+<div id="darkModal" class="display-none" role="dialog"></div>
+
 <div class="loaderDiv" id="fullPageLoader" style="display: none">
     <div class="loader_200"></div>
 </div>
@@ -34,3 +36,14 @@
 @if(!Auth::check())
     @include('layouts.loginPopUp')
 @endif
+
+<script>
+    function checkLogin(){
+        if (!hasLogin) {
+            showLoginPrompt(requestUrl);
+            return false;
+        }
+        else
+            return true;
+    }
+</script>

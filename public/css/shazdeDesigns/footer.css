@@ -289,7 +289,7 @@ footer li > img, .small-ico {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    height: 230px;
+    height: 135px;
 }
 
 .phoneDescriptionText {
@@ -522,10 +522,6 @@ footer li > img, .small-ico {
 
 .lp_others_rvPicBox {
     height: 160px;
-}
-
-footer .ui_bubble_rating {
-    transform: rotateY(180deg);
 }
 
 #lp_register {
@@ -1440,4 +1436,10 @@ footer .profileMenuLinks {
 .lp_ar_borderBottom {
     border-bottom: 10px solid #f3f3f3;
     margin: 10px -7px;
+}
+
+.lp_ar_contentOfFilters{
+    max-height: 80vh;
+    overflow-y: auto;
+    overflow-x: hidden;
 }

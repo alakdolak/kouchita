@@ -40,18 +40,16 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
 
 .moreItems {
     display: block;
-    text-align: center;
-    margin-top: 5px;
     cursor: pointer;
-    text-align: -webkit-right;
+    padding: 23px 0 11px;
+    line-height: 30px;
 }
 
 .lessItems {
     display: block;
-    text-align: center;
-    margin-top: 5px;
     cursor: pointer;
-    text-align: -webkit-right;
+    padding: 23px 0 11px;
+    line-height: 30px;
 }
 
 .moreItems2 {
@@ -431,4 +429,85 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     left: 5px;
     top: 5px;
     cursor: pointer;
+}
+
+.placeListHeader {
+    margin-top: 65px;
+    position: relative;
+}
+
+.placeListTitle {
+    text-align: center;
+    font-size: 2.5em;
+    font-weight: 600;
+}
+
+.sharePageMainDiv {
+    margin-top: 40px !important;
+    padding: 7px 20px !important;
+}
+
+.ui_icon.heart:before {
+    font-size: 2em;
+}
+
+@media (max-width: 768px) {
+    #PlaceController {
+        padding: 5px 15px !important;
+        border-right: none;
+    }
+    .eachPlace {
+        margin-bottom: 10px;
+    }
+    .placeListHeader {
+        margin-top: 25px;
+    }
+    .placeListTitle {
+
+    }
+    #helpBtnMainDiv {
+        left: -24px !important;
+    }
+    .sharePageIcon::before,
+    .sharePageIconFill::before {
+        right: 33px !important;
+    }
+    .sharePageMainDiv {
+        margin-left: -157px !important;
+        padding: 7px 27px !important;
+    }
+    .eatery_filters {
+        padding: 0 5px;
+    }
+    .filterGroupTitle {
+        margin: 5px 0;
+        line-height: 30px;
+    }
+    .moreItems {
+        padding: 5px 0;
+        font-size: 0.8em;
+    }
+    .lessItems {
+        padding: 5px 0;
+        font-size: 0.8em;
+    }
+
+    /*style of ordering*/
+    .ordering {
+        display: block;
+        width: 100%;
+        font-size: 1.25em;
+    }
+    .orders {
+        padding: 5px;
+        margin: 5px 0;
+        text-align: center;
+        border: 2px solid #4DC7BC;
+        border-radius: 10px;
+        color: #4DC7BC;
+    }
+    .selectOrder {
+        background-color: #4DC7BC;
+        color: white;
+    }
 }

@@ -15,8 +15,8 @@
         <div id="BODYCON" class="col easyClear poolB adjust_padding new_meta_chevron_v2">
             <div class="wrpHeader">
             </div>
-            <h1 class="heading wrap pd-bt-10Imp">
-                پیام های من
+            <h1 class="heading wrap pd-bt-10Imp messagesHeading">
+                پیام‌های من
             </h1>
 
             @if(!empty($err))
@@ -25,197 +25,202 @@
                 </center>
             @endif
 
-            <div class="main_content" id="MESSAGES_CONTENT">
-                <table width="100%" border="0" cellpadding="0" cellspacing="0" class="mb_12" id="PROFILE_MESSAGING">
-                    <tr>
-                        <td class="vt-align-top">
+            <div class="responsiveSendMode">
 
-                            <div class="floatLeft width-150">
-                                <div class="saveLeftNav cursor-pointer">
-                                    <div id="inboxFolder" onclick="inboxMode('inboxFolder', 'inbox', 'tableId', 'outbox', 'sendMsgDiv', 'showMsgContainer', 'reportPrompt', 'blockPrompt')" class="menu_bar cursor-pointer">
-                                        <div class="displayFolder">
-                                            <a onclick="" class="saveLink">
-                                                <strong>
-                                                    <span>پیام های ورودی </span>
-                                                    <span>(</span>
-                                                    <span>{{$inMsgCount}}</span>
-                                                    <span>)</span>
-                                                </strong>
-                                            </a>
-                                        </div>
+                <div class="main_content display-flex min-height-300" id="MESSAGES_CONTENT">
+
+                    <div class="vt-align-top">
+
+                        <div class="floatLeft">
+                            <div class="saveLeftNav cursor-pointer">
+                                <div id="inboxFolder" onclick="inboxMode('inboxFolder', 'inbox', 'tableId', 'outbox', 'sendMsgDiv', 'showMsgContainer', 'reportPrompt', 'blockPrompt')" class="menu_bar cursor-pointer">
+                                    <div class="displayFolder">
+                                        <a onclick="" class="saveLink">
+                                            <strong>
+                                                <span>پیام‌های ورودی‌({{$inMsgCount}})</span>
+                                            </strong>
+                                        </a>
                                     </div>
-                                    <div id="outboxFolder" onclick="outboxMode('outboxFolder', 'inbox', 'tableId', 'sendMsgDiv', 'showMsgContainer', 'reportPrompt', 'blockPrompt')" class="menu_bar cursor-pointer">
-                                        <div class="displayFolder">
-                                            <a onclick="" class="saveLink">
-                                                <strong>
-                                                    <span>پیام های خروجی </span>
-                                                    <span>(</span>
-                                                    <span>{{$outMsgCount}}</span>
-                                                    <span>)</span>
-                                                </strong>
-                                            </a>
-                                        </div>
+                                </div>
+                                <div id="outboxFolder" onclick="outboxMode('outboxFolder', 'inbox', 'tableId', 'sendMsgDiv', 'showMsgContainer', 'reportPrompt', 'blockPrompt')" class="menu_bar cursor-pointer">
+                                    <div class="displayFolder">
+                                        <a onclick="" class="saveLink">
+                                            <strong>
+                                                <span>پیام‌های خروجی‌({{$outMsgCount}})</span>
+                                            </strong>
+                                        </a>
                                     </div>
-                                    <div id="sendFolder" onclick="sendMode('sendFolder', 'inbox', 'sendMsgDiv', 'showMsgContainer', 'reportPrompt', 'blockPrompt')" class="menu_bar cursor-pointer">
-                                        <div class="displayFolder">
-                                            <a class="saveLink">
-                                                <strong>ارسال پیام</strong>
-                                            </a>
-                                        </div>
+                                </div>
+                                <div id="sendFolder" onclick="sendMode('sendFolder', 'inbox', 'sendMsgDiv', 'showMsgContainer', 'reportPrompt', 'blockPrompt')" class="menu_bar cursor-pointer">
+                                    <div class="displayFolder">
+                                        <a class="saveLink">
+                                            <strong>ارسال پیام</strong>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
-                        </td>
+                        </div>
+                    </div>
 
-                        <td id="inbox">
-                            <div class="alignLeft">
-                                <div class="p5 bg-color-light-grey">
+                    <div width="100%" border="0" cellpadding="0" cellspacing="0" class="mb_12" id="PROFILE_MESSAGING">
+    {{--                    <tr>--}}
+    {{--                        <td id="inbox">--}}
+                                <div class="alignLeft" id="inbox">
+                                    <div class="mainDivTable p5 bg-color-light-grey">
 
-                                    <div class="messagingButton">
-                                        <a rel="nofollow" class="buttonLink" onclick="setAllChecked()">
-                                            <div class="m2m_link">
-                                                <div class="cursor-pointer">
-                                                    <div class="m2m_copy">
-                                                        {{--<img id="selectAllImg" src="{{URL::asset('images') . '/selectAll.gif'}}" border="0" align="absmiddle" class="mg-lt-8"/>--}}
-                                                        <div id="selectAllImg"></div>
-                                                        <span id="selectAll">انتخاب همه</span>
+                                        <div class="display-flex">
+
+                                            <div class="messagingButton">
+                                                <a rel="nofollow" class="buttonLink" onclick="setAllChecked()">
+                                                    <div class="m2m_link">
+                                                        <div class="cursor-pointer">
+                                                            <div class="m2m_copy">
+                                                                {{--<img id="selectAllImg" src="{{URL::asset('images') . '/selectAll.gif'}}" border="0" align="absmiddle" class="mg-lt-8"/>--}}
+                                                                <div id="selectAllImg"></div>
+                                                                <span id="selectAll">انتخاب همه</span>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-
-                                    <div class="messagingButton">
-                                        <a class="buttonLink">
-                                            <div class="m2m_link">
-                                                <div class="cursor-pointer">
-                                                    <div class="m2m_copy dark-blue" onclick="showConfirmationForDelete()">
-                                                        {{--<img src="{{URL::asset('images') . '/deleteIcon.gif'}}" border="0" alt="Delete" align="absmiddle" class="mg-lt-8"/>--}}
-                                                        <div class="confirmationForDelete"></div>
-                                                        <input name="deleteMsg" class="confirmationForDeleteInput" type="submit" value="حذف">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-
-                                    <div class="messagingButton">
-                                        <a rel="nofollow" class="buttonLink" onclick="getBlockList('blockPrompt', 'blocks', 'reportPrompt')">
-                                            <div class="m2m_link">
-                                                <div class="cursor-pointer">
-                                                    <div class="m2m_copy dark-blue">
-                                                        {{--<img src="{{URL::asset('images') . '/memberBlock.gif'}}" border="0" alt="Block" align="absmiddle" class="mg-lt-8"/>بلاک--}}
-                                                        <div class="blockListBtn"></div>
-                                                        <span>بلاک</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-
-                                    <div class="messagingButton" id="reportSpamButton">
-                                        <a id="reportSpam" rel="nofollow" class="buttonLink" onclick="showReportPrompt('reportPrompt', 'showMsgContainer', 'blockPrompt')">
-                                            <div class="m2m_link">
-                                                <div class="cursor-pointer dark-blue">
-                                                    <div class="m2m_copy">
-                                                        {{--<img src="{{URL::asset('images') . '/m2m_reportAbuse.gif'}}" border="0" alt="Report spam" align="absmiddle" class="mg-lt-8"/>گزارش--}}
-                                                        <div class="reportPromptBtn"></div>
-                                                        <span>گزارش</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-
-                                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="clear mg-tp-5">
-
-                                        <tr class="inboxHeaders">
-                                            <th class="SortNavOff width-15per">
-                                                <a href="" title="Sort by: From" class="text-align-centerImp">ارسال شده از / به
-                                                    {{--<img src="{{URL::asset('images') . '/blackNavArrowUp.gif'}}" width="7" height="4" hspace="10" border="0" align="absmiddle"/>--}}
-                                                    {{--<div class="sendFromMainDiv"></div>--}}
                                                 </a>
-                                            </th>
-                                            <th class="SortNavOff width-55per">
-                                                <a href="" title="Sort by: Subject" class="text-align-centerImp">موضوع
-                                                    {{--<img src="{{URL::asset('images') . '/blackNavArrowUp.gif'}}" width="7" height="4" hspace="10" border="0" align="absmiddle"/>--}}
-                                                    {{--<div class="topicMainDiv"></div>--}}
+                                            </div>
+
+                                            <div class="messagingButton">
+                                                <a class="buttonLink">
+                                                    <div class="m2m_link">
+                                                        <div class="cursor-pointer">
+                                                            <div class="m2m_copy dark-blue" onclick="showConfirmationForDelete()">
+                                                                {{--<img src="{{URL::asset('images') . '/deleteIcon.gif'}}" border="0" alt="Delete" align="absmiddle" class="mg-lt-8"/>--}}
+                                                                <div class="confirmationForDelete"></div>
+                                                                <input name="deleteMsg" class="confirmationForDeleteInput" type="submit" value="حذف">
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </a>
-                                            </th>
-                                            <th class="SortNavOn width-15per bg-color-white text-align-center">
-                                                <a onclick="sortByDate('tableId', 'dateIcon')" title="Sort by: Date" class="text-align-centerImp">تاریخ
-                                                    {{--<img id="dateIcon" src="{{URL::asset('images') . '/blackNavArrowUp.gif'}}" width="7" height="4" hspace="10" border="0" align="absmiddle"/>--}}
-                                                    <div id="dateIcon"></div>
+                                            </div>
+
+                                            <div class="messagingButton">
+                                                <a rel="nofollow" class="buttonLink" onclick="getBlockList('blockPrompt', 'blocks', 'reportPrompt')">
+                                                    <div class="m2m_link">
+                                                        <div class="cursor-pointer">
+                                                            <div class="m2m_copy dark-blue">
+                                                                {{--<img src="{{URL::asset('images') . '/memberBlock.gif'}}" border="0" alt="Block" align="absmiddle" class="mg-lt-8"/>بلاک--}}
+                                                                <div class="blockListBtn"></div>
+                                                                <span>بلاک</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </a>
-                                            </th>
-                                            <th class="SortNavOff" id="select-title">
-                                                <span>انتخاب</span>
-                                            </th>
-                                        </tr>
-                                    </table>
+                                            </div>
 
-                                    <table id="tableId" width="100%" border="0" cellspacing="0" cellpadding="0" class="clear">
-                                    </table>
+                                            <div class="messagingButton" id="reportSpamButton">
+                                                <a id="reportSpam" rel="nofollow" class="buttonLink" onclick="showReportPrompt('reportPrompt', 'showMsgContainer', 'blockPrompt')">
+                                                    <div class="m2m_link">
+                                                        <div class="cursor-pointer dark-blue">
+                                                            <div class="m2m_copy">
+                                                                {{--<img src="{{URL::asset('images') . '/m2m_reportAbuse.gif'}}" border="0" alt="Report spam" align="absmiddle" class="mg-lt-8"/>گزارش--}}
+                                                                <div class="reportPromptBtn"></div>
+                                                                <span>گزارش</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+
+                                        </div>
+
+                                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="clear mg-tp-5">
+
+                                            <tr class="inboxHeaders">
+                                                <th class="SortNavOff width-30per">
+                                                    <a href="" title="Sort by: From" class="text-align-centerImp">ارسال شده از / به
+                                                        {{--<img src="{{URL::asset('images') . '/blackNavArrowUp.gif'}}" width="7" height="4" hspace="10" border="0" align="absmiddle"/>--}}
+                                                        {{--<div class="sendFromMainDiv"></div>--}}
+                                                    </a>
+                                                </th>
+                                                <th class="SortNavOff width-35per">
+                                                    <a href="" title="Sort by: Subject" class="text-align-centerImp">موضوع
+                                                        {{--<img src="{{URL::asset('images') . '/blackNavArrowUp.gif'}}" width="7" height="4" hspace="10" border="0" align="absmiddle"/>--}}
+                                                        {{--<div class="topicMainDiv"></div>--}}
+                                                    </a>
+                                                </th>
+                                                <th class="SortNavOn width-20per bg-color-white text-align-center">
+                                                    <a onclick="sortByDate('tableId', 'dateIcon')" title="Sort by: Date" class="text-align-centerImp">تاریخ
+                                                        {{--<img id="dateIcon" src="{{URL::asset('images') . '/blackNavArrowUp.gif'}}" width="7" height="4" hspace="10" border="0" align="absmiddle"/>--}}
+                                                        <div id="dateIcon"></div>
+                                                    </a>
+                                                </th>
+                                                <th class="SortNavOff width-15per" id="select-title">
+                                                    <span>انتخاب</span>
+                                                </th>
+                                            </tr>
+                                        </table>
+
+                                        <table id="tableId" width="100%" border="0" cellspacing="0" cellpadding="0" class="clear">
+                                        </table>
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-
-            <center id="sendMsgDiv">
-                <div class="row">
-                    <form method="post" action="{{route('sendMsg')}}" class="form-horizontal" id="contact_form">
-                        {{csrf_field()}}
-                        <fieldset class="mg-100">
-                            <!-- Text input-->
-                            <div class="form-group">
-                                <label class="control-label userNameLabel">نام کاربری</label>
-                                <div  class="width-350">
-                                    <input id="name" onkeyup="searchForMyContacts()" name="destUser" type="text" placeholder="لطفا نام کاربری خود را وارد نمایید " class="form-control input-md" required=""  maxlength="40">
-                                    <div id="result" class="data_holder"></div>
-                                </div>
-                            </div>
-
-                            <!-- Text input-->
-                            <div class="form-group">
-                                <label class="control-label topicLabel">موضوع</label>
-                                <div class="width-350">
-                                    @if(isset($subject) && !empty($subject))
-                                        <input name="subject" value="{{$subject}}" maxlength="40" type="text" placeholder="لطفا موضوع پیام خود را وارد نمایید" class="form-control input-md" required="">
-                                    @else
-                                        <input name="subject" maxlength="40" type="text" placeholder="لطفا موضوع پیام خود را وارد نمایید" class="form-control input-md" required="">
-                                    @endif
-                                </div>
-                            </div>
-
-                            <!-- Textarea -->
-                            <div class="form-group">
-                                <label class="control-label messagesLabel">پیام</label>
-                                <div  class="width-350">
-                                    @if(isset($currMsg) && !empty($currMsg))
-                                        <textarea class="form-control" id="msg" name="msg"  placeholder="حداکثر 1000 کاراکتر"></textarea>
-                                    @else
-                                        <textarea class="form-control" id="msg" name="msg" cols="8" rows="8" placeholder="حداکثر 1000 کاراکتر"></textarea>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <!-- Button -->
-                            <div class="form-group">
-                                <label class="control-label" for="submit"></label>
-                                <div>
-                                    <button id="submit" name="sendMsg" class="btn btn-primary">ارسال پیام</button>
-                                </div>
-                                @if(isset($err) && !empty($err))
-                                    <p class="msgErr">{{$err}}</p>
-                                @endif
-                            </div>
-
-                        </fieldset>
-                    </form>
+    {{--                        </td>--}}
+    {{--                    </tr>--}}
+                    </div>
                 </div>
-            </center>
+
+                <center id="sendMsgDiv">
+                    <div class="row">
+                        <form method="post" action="{{route('sendMsg')}}" class="form-horizontal" id="contact_form">
+                            {{csrf_field()}}
+                            <fieldset class="contactFormFieldset">
+                                <!-- Text input-->
+                                <div class="form-group">
+                                    <label class="control-label userNameLabel">نام کاربری</label>
+                                    <div class="messagesInputsMainDiv">
+                                        <input id="name" onkeyup="searchForMyContacts()" name="destUser" type="text" placeholder="لطفا نام کاربری خود را وارد نمایید " class="form-control input-md" required=""  maxlength="40">
+                                        <div id="result" class="data_holder"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Text input-->
+                                <div class="form-group">
+                                    <label class="control-label topicLabel">موضوع</label>
+                                    <div class="messagesInputsMainDiv">
+                                        @if(isset($subject) && !empty($subject))
+                                            <input name="subject" value="{{$subject}}" maxlength="40" type="text" placeholder="لطفا موضوع پیام خود را وارد نمایید" class="form-control input-md" required="">
+                                        @else
+                                            <input name="subject" maxlength="40" type="text" placeholder="لطفا موضوع پیام خود را وارد نمایید" class="form-control input-md" required="">
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <!-- Textarea -->
+                                <div class="form-group">
+                                    <label class="control-label messagesLabel">پیام</label>
+                                    <div class="messagesInputsMainDiv">
+                                        @if(isset($currMsg) && !empty($currMsg))
+                                            <textarea class="form-control" id="msg" name="msg"  placeholder="حداکثر 1000 کاراکتر"></textarea>
+                                        @else
+                                            <textarea class="form-control" id="msg" name="msg" cols="8" rows="8" placeholder="حداکثر 1000 کاراکتر"></textarea>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <!-- Button -->
+                                <div class="form-group">
+                                    <label class="control-label" for="submit"></label>
+                                    <div>
+                                        <button id="submit" name="sendMsg" class="btn btn-primary">ارسال پیام</button>
+                                    </div>
+                                    @if(isset($err) && !empty($err))
+                                        <p class="msgErr">{{$err}}</p>
+                                    @endif
+                                </div>
+
+                            </fieldset>
+                        </form>
+                    </div>
+                </center>
+
+{{--                <div class="hideOnScreen footerOptimizer"></div>--}}
+
+            </div>
 
             <span id="reportPrompt" class="ui_overlay ui_modal editTags">
                     <div class="header_text mg-bt-10Imp">گزارش</div>
@@ -240,9 +245,9 @@
 
             <span id="blockPrompt" class="ui_overlay ui_modal editTags">
                     <div class="header_text">محدود سازی ارتباط</div>
-                    <p>کاربران زیر با شما در ارتباط هستند با انتخاب آن ها، ارتباطشان با خود را محدود می سازید.</p>
+                    <p>کاربران زیر با شما در ارتباط هستند با انتخاب آن‌ها، ارتباطشان با خود را محدود می‌سازید.</p>
 
-                    <p class="font-size-10">برای رفع محدودیت ، کاربر مورد نظر را از حالت انخاب خارج نمایید.</p>
+                    <p class="font-size-10">برای رفع محدودیت، کاربر مورد نظر را از حالت انخاب خارج نمایید.</p>
                     <div class="subheader_text">
                         لیست کاربران
                     </div>
@@ -262,7 +267,7 @@
             </span>
 
             <span class="ui_overlay ui_modal editTags deleteMessage" id="deleteMsg">
-                <p>آیا از پاک کردن پیام اطمینان دارید ؟</p>
+                <p>آیا از پاک کردن پیام اطمینان دارید؟</p>
                 <br><br>
                 <div class="body_text">
 
@@ -321,15 +326,15 @@
                 $("input:checkbox[name='selectedMsg[]']").each(function() {
                     this.checked = true;
                 });
-                $("#selectAll").text("غیر فعال کردن همه");
-                $("#selectAllImg").css('background-position', -16 + 'px');
+                $("#selectAll").text("غیرفعال‌کردن همه");
+                $("#selectAllImg").css('background-position', '0 -16px');
             }
             else {
                 $("input:checkbox[name='selectedMsg[]']").each(function() {
                     this.checked = false;
                 });
-                $("#selectAll").text("فعال کردن همه");
-                $("#selectAllImg").css('background-position', -16 + 'px');
+                $("#selectAll").text("فعال‌کردن همه");
+                $("#selectAllImg").css('background-position', '0 -67px');
             }
 
             mode = !mode;
@@ -361,6 +366,7 @@
                             newElement += "<p class='cursor-pointer' onclick='setUserName(\"" + response[i].username + "\")'>" + response[i].username + "</p>";
                         }
 
+                        $("#result").empty().addClass('resultStyles');
                         $("#result").append(newElement);
                     }
 
@@ -371,7 +377,8 @@
 
         function setUserName(val) {
             $("#name").val(val);
-            $("#result").empty();
+            $("#result").empty().removeClass('resultStyles');
+
         }
 
         function customReport(element, checkBoxId) {
@@ -500,22 +507,47 @@
             $("#" + showMsgContainer).css("visibility", 'hidden');
             $("#" + reportContainer).css("visibility", 'hidden');
             $("#" + blockContainer).css("visibility", 'hidden');
-            $("#" + inbox).css("visibility", 'hidden');
+            $("#" + inbox).css({"display": 'none', "visibility" : ""});
             $(".menu_bar").removeClass("selectedFolder");
             $("#" + sendFolder).addClass("selectedFolder");
-            $("#" + msgContainer).css("visibility", 'visible');
+            $("#" + msgContainer).css({"display": 'block',"visibility" : ""});
+            $('#MESSAGES_CONTENT').removeClass('min-height-300');
+            $('#PROFILE_MESSAGING').addClass('display-none');
+
+
+            if ($(window).width() > 480) {
+
+                $('.responsiveSendMode').addClass('display-flex');
+
+            }
+
+            $( window ).resize(function() {
+                if ($(window).width() > 480) {
+
+                    $('.responsiveSendMode').addClass('display-flex');
+
+                }
+
+                else {
+                    $('.responsiveSendMode').removeClass('display-flex');
+                }
+            });
 
             containerMode = "send";
         }
 
         function inboxMode(inboxFolder, inbox, table, msgContainer, showMsgContainer, reportContainer, blockContainer) {
-            $("#" + showMsgContainer).css("visibility", 'hidden');
+            $("#" + showMsgContainer).css({"display": 'none',"visibility" : ""});
             $("#" + reportContainer).css("visibility", 'hidden');
             $("#" + blockContainer).css("visibility", 'hidden');
-            $("#" + inbox).css("visibility", "visible");
+            $("#" + inbox).css({"display": 'block', "visibility" : ""});
             $(".menu_bar").removeClass("selectedFolder");
             $("#" + inboxFolder).addClass("selectedFolder");
             $("#" + msgContainer).css("visibility", 'hidden');
+            $('#MESSAGES_CONTENT').addClass('min-height-300');
+            $('#PROFILE_MESSAGING').removeClass('display-none');
+
+            $('.responsiveSendMode').removeClass('display-flex');
 
             containerMode = "inbox";
 
@@ -526,10 +558,14 @@
             $("#" + showMsgContainer).css("visibility", 'hidden');
             $("#" + reportContainer).css("visibility", 'hidden');
             $("#" + blockContainer).css("visibility", 'hidden');
-            $("#" + msgContainer).css("visibility", 'hidden');
-            $("#" + inbox).css("visibility", "visible");
+            $("#" + msgContainer).css({"display": 'none', "visibility" : ""});
+            $("#" + inbox).css({"display": 'block', "visibility" : ""});
             $(".menu_bar").removeClass("selectedFolder");
             $("#" + outboxFolder).addClass("selectedFolder");
+            $('#MESSAGES_CONTENT').addClass('min-height-300');
+            $('#PROFILE_MESSAGING').removeClass('display-none');
+
+            $('.responsiveSendMode').removeClass('display-flex');
 
             containerMode = "outbox";
 
@@ -588,20 +624,24 @@
                         newElement += "هیچ پیامی موجود نیست";
                         newElement += "</td></tr>";
                         $("#" + element).append(newElement);
+                        $('.mainDivTable').addClass('height-500');
+                        $('.mainDivTable').addClass('height-autoImp');
                     }
 
                     else {
                         for(i = 0; i < response.length; i++) {
                             newElement = '<tr class="bottomNav">';
-                            newElement += '<td class="width-15per text-align-center">' + response[i].target + '</td>';
+                            newElement += '<td class="width-30per text-align-center">' + response[i].target + '</td>';
                             newElement += "<td onclick='showMsg(" + response[i].id + ", \"showMsgContainer\", " + mode + ")' class='showMsgDiv'>" + response[i].subject + "</td>";
-                            newElement += "<td class='width-15 text-align-center'>" + response[i].date + "</td>";
-                            newElement += "<td class='text-align-center'>";
+                            newElement += "<td class='width-20per text-align-center'>" + response[i].date + "</td>";
+                            newElement += "<td class='text-align-center width-15per'>";
                             newElement += "<div class='ui_input_checkbox'>";
                             newElement += "<input id='msg_" + response[i].id + "' name='selectedMsg[]' value='" + response[i].id + "' type='checkbox'>";
-                            newElement += "<label class='labelForCheckBox' for='msg_" + response[i].id + "'><span></span>&nbsp;&nbsp;</label>";
+                            newElement += "<label class='labelForCheckBox' for='msg_" + response[i].id + "'><span></span></label>";
                             newElement += "</div></td></tr>";
                             $("#" + element).append(newElement);
+                            $('.mainDivTable').addClass('height-500');
+                            $('.mainDivTable').removeClass('height-autoImp');
                         }
                     }
                 }

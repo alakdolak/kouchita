@@ -19,8 +19,8 @@
                 </div>
                 <div class="gnContentsCategory">
                     <div class="row" style="width: 100%; margin: 0px;">
-                        <div id="rightCategory" class="col-md-6" style="padding: 0px 5px"></div>
-                        <div id="leftCategory" class="col-md-6" style="padding: 0px 5px"></div>
+                        <div class="col-md-6 rightCategory" style="padding: 0px 5px"></div>
+                        <div class="col-md-6 leftCategory" style="padding: 0px 5px"></div>
                     </div>
                 </div>
             </div>
@@ -52,7 +52,7 @@
                     @endif
                 @endif
 
-                <input type="text" id="searchCityInArticleInput" class="gnInput" placeholder="شهر موردنظر خود را وارد کنید" readonly>
+                <input type="text" class="gnInput searchCityInArticleInput" placeholder="شهر موردنظر خود را وارد کنید" readonly>
             </div>
 
             <div class="col-md-12 gnWhiteBox">

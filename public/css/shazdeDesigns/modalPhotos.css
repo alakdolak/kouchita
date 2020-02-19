@@ -130,7 +130,7 @@
 }
 
 .rightColPhotosShowingModal {
-    height: 70px;
+    /*height: 70px;*/
     margin-bottom: 5px;
     width: 48%;
     /*display: flex !important;*/
@@ -141,6 +141,7 @@
     display: inline-block;
     cursor: pointer;
     float: right;
+    margin-left: 2%;
 }
 
 .leftColPhotosModalMainDiv {

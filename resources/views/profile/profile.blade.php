@@ -344,14 +344,6 @@
                     </div>
 
                     <div class="leftProfile">
-                        <div id="infoDiv" class="profileLinksDropdown overlay oldoly noBackdrop relative relAbove item hidden">
-
-                            <div class="inner" id="overlayInnerDiv">
-                                <a name="edit-profile" class="menu-link" href="{{route('accountInfo')}}">ویرایش اطلاعات کاربری</a>
-                                <a name="edit-photo" class="menu-link" href="{{route('editPhoto')}}">ویرایش عکس</a>
-                                <a name="subscriptions" class="menu-link" href="{{route('soon')}}">اشتراک ها</a>
-                            </div>
-                        </div>
 
                         <div class="modules-membercenter-member-profile position-relative">
 
@@ -388,9 +380,7 @@
                                     <div class="name">
                                         <div data-direction="right" id="targetHelp_7" class="targets profileLinks">
 
-                                            <div data-val="off" onclick="if($(this).attr('data-val') == 'off') { showElement('infoDiv'); $('#arrowUp').removeClass('display-none');
-                                                $('#arrowDown').addClass('display-none'); $(this).attr('data-val', 'on'); } else  { hideElement('infoDiv'); $('#arrowUp').addClass('display-none');
-                                                $('#arrowDown').removeClass('display-none'); $(this).attr('data-val', 'off'); }" class="editInfosBoxTextMainDiv">
+                                            <div data-val="off" onclick="editProfileBtn(this)" class="editInfosBoxTextMainDiv">
                                                 {{--<img id="arrowDown" src="{{URL::asset('images/arrow_down.png')}}" class="profLinksArrowUp" height="15" width="15"/>--}}
                                                 <div class="editInfosBoxText">ویرایش اطلاعات</div>
                                                 <div id="arrowDown" class="glyphicon glyphicon-chevron-down"></div>
@@ -400,7 +390,17 @@
                                                 <div class="overlayContents item">
                                                     <a name="edit-profile" class="menu-link" href="{{URL('accountInfo')}}">ویرایش اطلاعات کاربری</a>
                                                     <a name="edit-photo" class="menu-link" href="{{URL('editPhoto')}}">ویرایش عکس</a>
-                                                    <a name="subscriptions" class="menu-link" href="">اشتراک ها</a>
+                                                    <a name="subscriptions" class="menu-link" href="">اشتراک‌ها</a>
+                                                </div>
+
+                                            </div>
+
+                                            <div id="infoDiv" class="profileLinksDropdown overlay oldoly noBackdrop relative relAbove item display-none">
+
+                                                <div class="inner" id="overlayInnerDiv">
+                                                    <a name="edit-profile" class="menu-link" href="{{route('accountInfo')}}">ویرایش اطلاعات کاربری</a>
+                                                    <a name="edit-photo" class="menu-link" href="{{route('editPhoto')}}">ویرایش عکس</a>
+                                                    <a name="subscriptions" class="menu-link" href="{{route('soon')}}">اشتراک‌ها</a>
                                                 </div>
                                             </div>
 
@@ -924,6 +924,27 @@
                 window.ontouchmove = null;
                 document.onkeydown = null;
             }
+
+            function editProfileBtn(elm) {
+                // if($(element).attr('data-val') == 'off') {
+                //     showElement('infoDiv');
+                //     $('#arrowUp').removeClass('display-none');
+                //     $('#arrowDown').addClass('display-none');
+                //     $(element).attr('data-val', 'on');
+                // }
+                // else  {
+                //     hideElement('infoDiv');
+                //     $('#arrowUp').addClass('display-none');
+                //     $('#arrowDown').removeClass('display-none');
+                //     $(element).attr('data-val', 'off');
+                // }
+
+                $(elm).children('div.glyphicon-chevron-down').toggleClass('display-none');
+                $(elm).children('div.glyphicon-chevron-up').toggleClass('display-none');
+                $(elm).next('div#infoDiv').toggleClass('display-none');
+                $(elm).next('div#infoDiv').toggleClass('display-flex');
+            }
+
 
         </script>
     @stop
