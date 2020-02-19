@@ -300,50 +300,6 @@ class HomeController extends Controller
 
             $item->pics = ReviewPic::where('logId', $item->id)->get();
             $item = getReviewPicsURL($item);
-<<<<<<< HEAD
-
-            $item->city = Cities::find($item->place->cityId);
-            $item->state = State::find($item->city->stateId);
-
-            $time = $item->date;
-            $time .= ' ' . substr($item->time, 0, 2) . ':' . substr($item->time, 2, 2);
-
-            $item->timeAgo = getDifferenceTimeString($time);
-
-            if(strlen($item->text) > 80)
-                $item->summery = mb_substr($item->text, 0, 80, 'utf-8');
-
-        }
-
-        $count = 0;
-        $C = 0;
-        $D = 0;
-        $minLat = 0;
-        $minLng = 0;
-        $maxLat = 0;
-        $maxLng = 0;
-        foreach ($allPlaces as $plac){
-            foreach ($plac as $item){
-                $C += (float)$item->C;
-                $D += (float)$item->D;
-                if($minLat == 0 || $item->C < $minLat)
-                    $minLat = (float)$item->C;
-                else if($maxLat == 0 || $item->C > $maxLat)
-                    $maxLat = (float)$item->C;
-
-                if($minLng == 0 || $item->D < $minLng)
-                    $minLng = (float)$item->D;
-                else if($maxLng == 0 || $item->D > $maxLng)
-                    $maxLng = (float)$item->D;
-            }
-            $count += count($plac);
-        }
-        $C /= $count;
-        $D /= $count;
-        $map = ['C' => $C, 'D' => $D, 'maxLat' => $maxLat, 'maxLng' => $maxLng, 'minLng' => $minLng, 'minLat' => $minLat];
-
-        return view('cityPage', compact(['place', 'cityPost', 'map', 'mostSeenPosts', 'allAmaken', 'allHotels', 'allRestaurant', 'allMajara', 'allMahaliFood', 'allSogatSanaie', 'reviews', 'topPlaces']));
-=======
 
             $item->city = Cities::find($item->place->cityId);
             $item->state = State::find($item->city->stateId);
@@ -449,7 +405,6 @@ class HomeController extends Controller
         }
 
         return view('cityPage', compact(['place', 'kind', 'locationName', 'post', 'map', 'allPlaces', 'allAmaken', 'allHotels', 'allRestaurant', 'allMajara', 'allMahaliFood', 'allSogatSanaie', 'reviews', 'topPlaces']));
->>>>>>> f995018536bd109c37b214979469dd563cc0c196
     }
 
     public function getCityOpinion()
@@ -2820,19 +2775,6 @@ class HomeController extends Controller
         }
         $writer = new Xlsx($spreadsheet);
         $writer->save('exportAmaken.xlsx');
-<<<<<<< HEAD
-
-        dd('finniish');
-    }
-
-
-
-
-    private function getCityReviews($kind, $id, $take, $notIn = []){
-
-        $reviewActivity = Activity::whereName('نظر')->first();
-
-=======
 
         dd('finniish');
     }
@@ -2842,7 +2784,6 @@ class HomeController extends Controller
 
         $reviewActivity = Activity::whereName('نظر')->first();
 
->>>>>>> f995018536bd109c37b214979469dd563cc0c196
         if($kind == 'city') {
             $allAmaken = Amaken::where('cityId', $id)->pluck('id')->toArray();
             $allMajara = Majara::where('cityId', $id)->pluck('id')->toArray();
