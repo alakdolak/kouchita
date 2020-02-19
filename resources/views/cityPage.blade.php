@@ -93,7 +93,7 @@
         <div class="cpHeaderCityName">{{$place->name}}</div>
     </div>
     <div class="row">
-        <div class="col-lg-3 text-align-right" style="float: left; padding: 0 !important;">
+        <div class="col-lg-3 text-align-right hideOnPhone" style="float: left; padding: 0 !important;">
             <div class="postsMainDivInSpecificMode cpCommentBox cpBorderBottom">
                 @foreach($reviews as $item)
                     <div class="postMainDivShown float-right position-relative">
@@ -159,7 +159,10 @@
         <div id="cpBorderLeft" class="col-lg-9 cpBorderLeft">
 
             <div class="row cpMainBox">
-                <div class="col-xs-4 pd-0Imp">
+                <div class="col-md-8 col-xs-12 pd-0Imp">
+                    <img class="cpPic" src="{{$place->image}}">
+                </div>
+                <div class="col-md-4 col-xs-12 pd-0Imp">
                     <div class="col-xs-12">
                         <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/4/' . $place->listName . '/' . $kind)}}">
                             <div class="cityPageIcon hotel"></div>
@@ -223,9 +226,6 @@
                         </div>
                         {{--<div class="col-xs-4 cpLittleMenu"></div>--}}
                     </div>
-                </div>
-                <div class="col-xs-8 pd-0Imp">
-                    <img class="cpPic" src="{{$place->image}}">
                 </div>
             </div>
 

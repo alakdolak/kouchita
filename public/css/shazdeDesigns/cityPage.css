@@ -30,7 +30,8 @@
 
 .cpPic {
     width: 100%;
-    height: 340px
+    height: auto;
+    max-height: 340px;
 }
 
 /*css of little menu*/
@@ -154,11 +155,6 @@
 /*end of css of comment box*/
 
 
-
-
-
-
-
 .widget {
     position: relative;
     margin-bottom: 35px
@@ -191,12 +187,6 @@
     height: 3px;
     position: absolute;
     top: 50%
-}
-
-@media (max-width:768px) {
-    .widget-title {
-        font-size: 14px
-    }
 }
 
 .widget-head-bar {
@@ -374,21 +364,6 @@
     margin: 0
 }
 
-@media (max-width:992px) {
-    .im-widget-entry-featured-title {
-        font-size: 16px
-    }
-}
-
-@media (max-width:768px) {
-    .im-widget-entry-featured-title {
-        font-size: 14px
-    }
-    .im-widget-entry-header .im-widget-entry-title {
-        font-size: 13px
-    }
-}
-
 .im-widget-entry-header .im-widget-entry-title a {
     margin-top: -2px
 }
@@ -487,4 +462,31 @@
     font-size: 13px;
     font-weight: 400;
     margin-top: 7px
+}
+
+
+@media (max-width:768px) {
+    .widget-title {
+        font-size: 14px
+    }
+    .im-widget-entry-featured-title {
+        font-size: 16px
+    }
+    .im-widget-entry-featured-title {
+        font-size: 14px
+    }
+    .im-widget-entry-header .im-widget-entry-title {
+        font-size: 13px
+    }
+
+    .cpMainBox {
+        padding: 15px !important;
+    }
+    .cpMapList {
+        justify-content: flex-start;
+        overflow: auto;
+    }
+    .cpMapCategory {
+        margin: 0px 2px;
+    }
 }

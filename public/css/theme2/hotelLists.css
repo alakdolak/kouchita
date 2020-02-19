@@ -451,6 +451,10 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     font-size: 2em;
 }
 
+.postsActionsChoices {
+    text-align: center !important;
+}
+
 @media (max-width: 768px) {
     #PlaceController {
         padding: 5px 15px !important;

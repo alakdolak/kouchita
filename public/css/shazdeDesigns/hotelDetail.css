@@ -2381,10 +2381,17 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     margin: 8px 3px;
 }
 
+.replyCommentBox {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+}
+
 .replyBtn {
     background-color: #fcc156;
     border-radius: 5px;
-    padding: 2px;
+    padding: 2px 6px;
     cursor: pointer;
 }
 
