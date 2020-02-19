@@ -19,6 +19,8 @@
     }
 </style>
 
+<div id="darkModal" class="display-none" role="dialog"></div>
+
 <div class="loaderDiv" id="fullPageLoader" style="display: none">
     <div class="loader_200"></div>
 </div>

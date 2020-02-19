@@ -390,7 +390,7 @@ $config = \App\models\ConfigModel::first()
                     </div>
                 </div>
             @elseif(Request::is('placeList/*'))
-                <div class="mainPopUp leftPopUp" style="padding: 7px">
+                <div ng-app="mainApp" class="mainPopUp leftPopUp PlaceController" ng-controller="PlaceController as cntr" style="padding: 7px">
                     <div class="lp_ar_searchTitle">جستجو خود را محدودتر کنید</div>
 
                     <div class="lp_ar_filters">
@@ -538,22 +538,22 @@ $config = \App\models\ConfigModel::first()
                     <div id="lp_ar_leftFilters" class="lp_ar_contentOfFilters hidden">
                         <div id="FilterTopController">
                             <div class="ordering">
-                                <div class="orders" onclick="selectingOrder($(this),'review')" ng-click="sortFunc('review')" id="z1">
+                                <div class="orders" onclick="selectingOrder($(this),'review')" ng-click="sortFunc('review')" id="pz1">
                                     بیشترین نظر
                                 </div>
                             </div>
                             <div class="ordering">
-                                <div class="orders selectOrder" onclick="selectingOrder($(this), 'rate')" ng-click="sortFunc('rate')" id="z2">
+                                <div class="orders selectOrder" onclick="selectingOrder($(this), 'rate')" ng-click="sortFunc('rate')" id="pz2">
                                     بهترین بازخورد
                                 </div>
                             </div>
                             <div class="ordering">
-                                <div class="orders" onclick="selectingOrder($(this), 'seen')" ng-click="sortFunc('seen')" id="z3">
+                                <div class="orders" onclick="selectingOrder($(this), 'seen')" ng-click="sortFunc('seen')" id="pz3">
                                     بیشترین بازدید
                                 </div>
                             </div>
                             <div class="ordering">
-                                <div class="orders" ng-click="sortFunc('alphabet')" onclick="selectingOrder($(this), 'alphabet')" id="z4" >
+                                <div class="orders" ng-click="sortFunc('alphabet')" onclick="selectingOrder($(this), 'alphabet')" id="pz4" >
                                     حروف الفبا
                                 </div>
                             </div>
