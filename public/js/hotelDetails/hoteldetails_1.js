@@ -456,6 +456,7 @@ function uploadReviewVideo(input, _is360){
 }
 
 function radioChange(value, _questionId, _index, _ansId){
+    console.log(value, _questionId, _index, _ansId);
     if(reviewMultiAns[_index] != null)
         document.getElementById('radioAnsStyle_' + _questionId + '_' + reviewMultiAns[_index]).classList.remove('filterChoose');
 

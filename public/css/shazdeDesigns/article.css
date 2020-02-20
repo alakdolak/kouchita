@@ -1601,4 +1601,9 @@ textarea:hover{
     line-height: 50px;
 }
 
+@media (max-width: 768px) {
+    .gnWhiteBox {
+        margin: -15px;
+    }
+}
 

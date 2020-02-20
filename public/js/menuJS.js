@@ -27,6 +27,7 @@ $(document).ready(function() {
             $("#bookmarkmenu").hide()
         }
     });
+
     $('#memberTop').click(function(e) {
 
         if( $("#profile-drop").is(":hidden")){

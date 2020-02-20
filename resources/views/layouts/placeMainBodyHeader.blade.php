@@ -5,29 +5,9 @@
             <div class="ui_columns easyClear">
                 <div class="ui_column direction-rtl position-relative">
                     <center ID="taplc_trip_planner_breadcrumbs_0" class="ppr_rup ppr_priv_trip_planner_breadcrumbs">
-                        <div id="searchBoxTopPageMainDiv">
-                            <span>شما در</span>
-                            <div class="inputBox position-ralative">
-                                <div class="select-side">
-                                    <i class="glyphicon glyphicon-triangle-bottom"></i>
-                                </div>
-                                <select class="inputBoxInput styled-select text-align-right mg-lt-10" type="text" placeholder="">
-                                    <option>استان اصفهان</option>
-                                </select>
-                            </div>
-                            <span>در</span>
-                            <div class="inputBox position-ralative">
-                                <div class="select-side">
-                                    <i class="glyphicon glyphicon-triangle-bottom"></i>
-                                </div>
-                                <select class="inputBoxInput styled-select text-align-right mg-lt-10" type="text" placeholder="">
-                                    <option>شهر اصفهان</option>
-                                </select>
-                            </div>
-                            <span class="mg-lt-15">هستید. تغییر دهید</span>
-                            <div id="searchIcon"></div>
-                        </div>
-{{--                                                    <ul class="breadcrumbs">--}}
+                        @include('general.headerSearch')
+
+                        {{--                                                    <ul class="breadcrumbs">--}}
 {{--                                                        @if($placeMode == "hotel")--}}
 {{--                                                            <li class="breadcrumb" itemscope>--}}
 {{--                                                                <a class="link" {{($config->backToHotelListNoFollow) ? 'rel="nofollow"' : ''}}--}}

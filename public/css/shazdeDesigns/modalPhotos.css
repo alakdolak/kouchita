@@ -149,7 +149,7 @@
 }
 
 .selectedPhotoShowingModal {
-    height: 486px;
+    /*height: 486px;*/
     width: 100%;
     /*background-color: black;*/
     display: flex;

@@ -32,40 +32,6 @@
         var url;
     </script>
 
-    <style>
-        {{--css of left side--}}
-        .widget ul li {
-            position: relative;
-            margin: 20px 0 40px;
-        }
-
-        /*css of {ng-app="mainApp"}*/
-        .homepage_shelves_widget {
-            min-height: 0px;
-        }
-
-        .image_wrapper {
-            height: 130px;
-        }
-
-        .map_list {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            padding: 10px;
-            background-color: #f3f3f3;
-        }
-
-        .map_category {
-            width: 50px;
-            cursor: pointer;
-        }
-
-        .cpMainSug .swiper-slide {
-            margin-top: 15px;
-        }
-    </style>
-
 </head>
 
 <body class="rebrand_2017 desktop HomeRebranded  js_logging">
@@ -93,7 +59,7 @@
         <div class="cpHeaderCityName">{{$place->name}}</div>
     </div>
     <div class="row">
-        <div class="col-lg-3 text-align-right" style="float: left; padding: 0 !important;">
+        <div class="col-lg-3 text-align-right hideOnPhone" style="float: left; padding: 0 !important;">
             <div class="postsMainDivInSpecificMode cpCommentBox cpBorderBottom">
                 @foreach($reviews as $item)
                     <div class="postMainDivShown float-right position-relative">
@@ -159,7 +125,10 @@
         <div id="cpBorderLeft" class="col-lg-9 cpBorderLeft">
 
             <div class="row cpMainBox">
-                <div class="col-xs-4 pd-0Imp">
+                <div class="col-md-8 col-xs-12 pd-0Imp">
+                    <img class="cpPic" src="{{$place->image}}">
+                </div>
+                <div class="col-md-4 col-xs-12 pd-0Imp">
                     <div class="col-xs-12">
                         <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/4/' . $place->listName . '/' . $kind)}}">
                             <div class="cityPageIcon hotel"></div>
@@ -224,9 +193,6 @@
                         {{--<div class="col-xs-4 cpLittleMenu"></div>--}}
                     </div>
                 </div>
-                <div class="col-xs-8 pd-0Imp">
-                    <img class="cpPic" src="{{$place->image}}">
-                </div>
             </div>
 
             <div class="row">
@@ -236,7 +202,7 @@
 
                 <div class="mainSuggestionMainDiv cpBorderBottom ng-scope">
 
-                    @if(count($topPlaces[0]) > 4)
+                    @if(count($topPlaces['amaken']) > 4)
                         <div id="newKoochita" class="homepage_shelves_widget ng-scope">
                         <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show" style="">
                             <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
@@ -253,7 +219,7 @@
                                 <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
                                     <div class="cpMainSug swiper-container">
                                         <div class="swiper-wrapper position-relative">
-                                            @foreach($topPlaces[0] as $item)
+                                            @foreach($topPlaces['amaken'] as $item)
                                                 <div class="swiper-slide position-relative">
                                                 <img src="{{URL::asset('images/pin.png')}}" class="imageGoldPin">
                                                 <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
@@ -296,7 +262,7 @@
                     </div>
                     @endif
 
-                    @if(count($topPlaces[1]) > 4)
+                    @if(count($topPlaces['restaurant']) > 4)
                         <div id="newKoochita" class="homepage_shelves_widget ng-scope">
                         <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show" style="">
                             <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
@@ -313,7 +279,7 @@
                                 <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
                                     <div class="cpMainSug swiper-container">
                                         <div class="swiper-wrapper position-relative">
-                                            @foreach($topPlaces[1] as $item)
+                                            @foreach($topPlaces['restaurant'] as $item)
                                                 <div class="swiper-slide position-relative">
                                                 <img src="{{URL::asset('images/pin.png')}}" class="imageGoldPin">
                                                 <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
@@ -356,7 +322,7 @@
                     </div>
                     @endif
 
-                    @if(count($topPlaces[2]) > 4)
+                    @if(count($topPlaces['hotels']) > 4)
                         <div id="newKoochita" class="homepage_shelves_widget ng-scope">
                         <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show" style="">
                             <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
@@ -373,7 +339,7 @@
                                 <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
                                     <div class="cpMainSug swiper-container">
                                         <div class="swiper-wrapper position-relative">
-                                            @foreach($topPlaces[2] as $item)
+                                            @foreach($topPlaces['hotels'] as $item)
                                                 <div class="swiper-slide position-relative">
                                                     <img src="{{URL::asset('images/pin.png')}}" class="imageGoldPin">
                                                     <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
@@ -416,7 +382,7 @@
                     </div>
                     @endif
 
-                    @if(count($topPlaces[3]) > 4)
+                    @if(count($topPlaces['majara']) > 4)
                         <div id="newKoochita" class="homepage_shelves_widget ng-scope">
                         <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show" style="">
                             <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
@@ -433,7 +399,7 @@
                                 <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
                                     <div class="cpMainSug swiper-container">
                                         <div class="swiper-wrapper position-relative">
-                                            @foreach($topPlaces[3] as $item)
+                                            @foreach($topPlaces['majara'] as $item)
                                                 <div class="swiper-slide position-relative">
                                                     <img src="{{URL::asset('images/pin.png')}}" class="imageGoldPin">
                                                     <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
@@ -476,7 +442,7 @@
                     </div>
                     @endif
 
-                    @if(count($topPlaces[4]) > 4)
+                    @if(count($topPlaces['sogatSanaie']) > 4)
                         <div id="newKoochita" class="homepage_shelves_widget ng-scope">
                         <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show" style="">
                             <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
@@ -493,7 +459,7 @@
                                 <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
                                     <div class="cpMainSug swiper-container">
                                         <div class="swiper-wrapper position-relative">
-                                            @foreach($topPlaces[4] as $item)
+                                            @foreach($topPlaces['sogatSanaie'] as $item)
                                                 <div class="swiper-slide position-relative">
                                                     <img src="{{URL::asset('images/pin.png')}}" class="imageGoldPin">
                                                     <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
@@ -536,7 +502,7 @@
                     </div>
                     @endif
 
-                    @if(count($topPlaces[5]) > 4)
+                    @if(count($topPlaces['mahaliFood']) > 4)
                         <div id="newKoochita" class="homepage_shelves_widget ng-scope">
                         <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show" style="">
                             <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
@@ -553,7 +519,7 @@
                                 <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
                                     <div class="cpMainSug swiper-container">
                                         <div class="swiper-wrapper position-relative">
-                                            @foreach($topPlaces[5] as $item)
+                                            @foreach($topPlaces['mahaliFood'] as $item)
                                                 <div class="swiper-slide position-relative">
                                                     <img src="{{URL::asset('images/pin.png')}}" class="imageGoldPin">
                                                     <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
@@ -606,7 +572,7 @@
                     <div class="widget-head-line"></div>
                 </div>
                 <div class="row">
-                    <article class="im-article content-2col col-md-4 col-sm-12">
+                    <article class="im-article content-2col col-md-6 col-sm-12">
                         <div class="im-entry-thumb">
                             <a class="im-entry-thumb-link" href="{{$post[0]->url}}"
                                title="{{$post[0]->slug}}">
@@ -646,10 +612,10 @@
                             </div>
                         </div>
                     </article>
-                    <div class="col-md-4 col-sm-12">
+                    <div class="col-md-6 col-sm-12">
                         <div class="widget">
                             <ul>
-                                @for($i = 1; $i < 4 && $i < count($post); $i++)
+                                @for($i = 1; $i <= 4 && $i < count($post); $i++)
                                     <li class="widget-10104im-widgetclearfix">
                                     <figure class="im-widget-thumb">
                                         <a href="{{$post[$i]->url}}" title="{{$post[$i]->title}}">
@@ -679,43 +645,6 @@
                                         </div>
                                     </div>
                                 </li>
-                                @endfor
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-12">
-                        <div class="widget">
-                            <ul>
-                                @for($i = 4; $i < 7 && $i < count($post); $i++)
-                                    <li class="widget-10104im-widgetclearfix">
-                                        <figure class="im-widget-thumb">
-                                            <a href="{{$post[$i]->url}}" title="{{$post[$i]->title}}">
-                                                <img src="{{$post[$i]->pic}}" alt="{{$post[$i]->keyword}}">
-                                            </a>
-                                        </figure>
-                                        <div class="im-widget-entry">
-                                            <header class="im-widget-entry-header">
-                                                <h4 class="im-widget-entry-title">
-                                                    <a href="{{$post[$i]->url}}"
-                                                       title="{{$post[$i]->title}}">{{$post[$i]->title}}</a>
-                                                </h4>
-                                            </header>
-                                            <div class="iranomag-meta clearfix">
-                                                <div class="posted-on im-meta-item">
-                                                    <span class="entry-date published updated">{{$post[$i]->date}}</span>
-                                                </div>
-                                                <div class="comments-link im-meta-item">
-                                                    <i class="fa fa-comment-o"></i>{{$post[$i]->msgs}}
-                                                </div>
-                                                <div class="author vcard im-meta-item">
-                                                    <i class="fa fa-user"></i>{{$post[$i]->username}}
-                                                </div>
-                                                <div class="post-views im-meta-item">
-                                                    <i class="fa fa-eye"></i>{{$post[$i]->seen}}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
                                 @endfor
                             </ul>
                         </div>

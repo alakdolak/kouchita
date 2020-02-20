@@ -1025,6 +1025,44 @@ function getReviewPicsURL($review){
     return $review;
 }
 
+function getUserPic(){
+    if (Auth::check()) {
+        $u = Auth::user();
+        $uId = $u->id;
+
+        if($u->uploadPhoto == 0){
+            $deffPic = DefaultPic::find($u->picture);
+
+            if($deffPic != null)
+                $uPic = URL::asset('defaultPic/' . $deffPic->name);
+            else
+                $uPic = URL::asset('_images/nopic/blank.jpg');
+        }
+        else
+            $uPic = URL::asset('userProfile/' . $u->picture);
+    }
+    else
+        $uPic = URL::asset('_images/nopic/blank.jpg');
+
+    return $uPic;
+}
+
+function createUrl($kindPlaceId, $placeId, $stateId, $cityId){
+    if($stateId != 0){
+        $state = State::find($stateId);
+        return url('cityPage/state/' . $state->name);
+    }
+    else if($cityId != 0){
+        $city = Cities::find($stateId);
+        return url('cityPage/city/' . $city->name);
+    }
+    else if($kindPlaceId != 0){
+        $kindPlace = Place::find($kindPlaceId);
+        $place = DB::table($kindPlace->tableName)->find($placeId);
+        return url('show-place-details/' . $kindPlace->fileName . '/' . $place->id);
+    }
+}
+
 
 //time
 function jalaliToGregorian($time){

@@ -83,28 +83,9 @@
     @include('layouts.placeHeader')
     <div class=" hotels_lf_redesign ui_container responsive_body">
         <div style="height: 100px;">
-            <div id="searchBoxTopPageMainDiv">
-                <span>شما در</span>
-                <div class="inputBox position-ralative">
-                    <div class="select-side">
-                        <i class="glyphicon glyphicon-triangle-bottom"></i>
-                    </div>
-                    <select class="inputBoxInput styled-select text-align-right mg-lt-10" type="text" placeholder="">
-                        <option>استان اصفهان</option>
-                    </select>
-                </div>
-                <span>در</span>
-                <div class="inputBox position-ralative">
-                    <div class="select-side">
-                        <i class="glyphicon glyphicon-triangle-bottom"></i>
-                    </div>
-                    <select class="inputBoxInput styled-select text-align-right mg-lt-10" type="text" placeholder="">
-                        <option>شهر اصفهان</option>
-                    </select>
-                </div>
-                <span class="mg-lt-15">هستید. تغییر دهید</span>
-                <div id="searchIcon"></div>
-            </div>
+
+            @include('general.headerSearch')
+
             <div class="placeListHeader">
                 <div class="placeListTitle">
                     {{$kindPlace->title}}
@@ -281,36 +262,33 @@
                                                                 اساس:
                                                             </div>
                                                             <div class="ordering">
-                                                                <div class="orders" onclick="selectingOrder($(this),'review')" ng-click="sortFunc('review')" id="z1">
+                                                                <div class="orders" onclick="selectingOrder($(this),'review')" id="z1">
                                                                     بیشترین نظر
                                                                 </div>
                                                             </div>
                                                             <div class="ordering">
-                                                                <div class="orders selectOrder" onclick="selectingOrder($(this), 'rate')" ng-click="sortFunc('rate')" id="z2">
+                                                                <div class="orders selectOrder" onclick="selectingOrder($(this), 'rate')" id="z2">
                                                                     بهترین بازخورد
                                                                 </div>
                                                             </div>
                                                             <div class="ordering">
-                                                                <div class="orders" onclick="selectingOrder($(this), 'seen')" ng-click="sortFunc('seen')" id="z3">
+                                                                <div class="orders" onclick="selectingOrder($(this), 'seen')" id="z3">
                                                                     بیشترین بازدید
                                                                 </div>
                                                             </div>
                                                             <div class="ordering">
-                                                                <div class="orders" ng-click="sortFunc('alphabet')" onclick="selectingOrder($(this), 'alphabet')" id="z4" >
+                                                                <div class="orders" onclick="selectingOrder($(this), 'alphabet')" id="z4" >
                                                                     حروف الفبا
                                                                 </div>
                                                             </div>
                                                             @if($kindPlace->id != 10 && $kindPlace->id != 11)
                                                                 <div class="ordering"  >
-                                                                <div id="distanceNav" class="orders" style="width: 140% !important;" onclick="openGlobalSearch()">کمترین فاصله تا
-                                                                    <span id="selectDistance">__ __ __</span>
+                                                                    <div id="distanceNav" class="orders" style="width: 140% !important;" onclick="openGlobalSearch(); selectingOrder($(this), 'distance')">کمترین فاصله تا
+                                                                        <span id="selectDistance">__ __ __</span>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
                                                             @endif
                                                         </div>
-                                                        <script>
-                                                            var check_num = 0;
-                                                        </script>
                                                         <div  class="option">
                                                             <div class="row" ng-repeat="packet in packets">
                                                                 <div ng-repeat="place in packet.places" class="ui_column col-lg-3 col-xs-6 eachPlace" style="float: right">
@@ -417,7 +395,7 @@
                                                     <div style="cursor: pointer; font-size: 12px; color: #050c93; margin-bottom: 7px;" onclick="closeFilters()">
                                                         پاک کردن فیلتر ها
                                                     </div>
-                                                    <div id="filterShow" style="display: flex; flex-direction: row; flex-wrap: wrap;"></div>
+                                                    <div class="filterShow" style="display: flex; flex-direction: row; flex-wrap: wrap;"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -425,11 +403,7 @@
                                         <div class="prw_rup prw_restaurants_restaurant_filters">
                                             <div id="jfy_filter_bar_establishmentTypeFilters" class="lhrFilterBlock jfy_filter_bar_establishmentTypeFilters collapsible">
                                                 <div class="filterGroupTitle">جستجو‌ی نام</div>
-                                                {{--                                                <div class="hl_inputBox">--}}
-                                                {{--ng-change="nameFilter(nameSearch)"--}}
-                                                {{--ng-model="nameSearch"--}}
                                                 <input id="nameSearch" class="hl_inputBox" placeholder="جستجو کنید" onchange="nameFilterFunc(this.value)">
-                                                {{--                                                </div>--}}
                                             </div>
                                         </div>
                                         <div class="prw_rup prw_restaurants_restaurant_filters">
@@ -438,7 +412,7 @@
                                                 <div class="filterGroupTitle">امتیاز کاربران</div>
                                                 <div class="filterContent ui_label_group inline">
                                                     <div class="filterItem lhrFilter filter selected">
-                                                        <input ng-click="RateFilter(5)" type="radio" name="AVGrate" id="c5" value="5"/>
+                                                        <input onclick="rateFilterFunc(5)" type="radio" name="AVGrate" id="c5" value="5"/>
                                                         <label for="c5"
                                                                style="display:inline-block;"><span></span></label>
                                                         <div class="rating-widget"
@@ -449,7 +423,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="filterItem lhrFilter filter selected">
-                                                        <input  ng-click="RateFilter(4)" type="radio" name="AVGrate" id="c4" value="4"/>
+                                                        <input  onclick="rateFilterFunc(4)" type="radio" name="AVGrate" id="c4" value="4"/>
                                                         <label for="c4"
                                                                style="display:inline-block;"><span></span></label>
                                                         <div class="rating-widget"
@@ -461,7 +435,7 @@
                                                         <span> به بالا</span>
                                                     </div>
                                                     <div class="filterItem lhrFilter filter selected">
-                                                        <input ng-click="RateFilter(3)" type="radio" name="AVGrate" id="c3" value="3"/>
+                                                        <input onclick="rateFilterFunc(3)" type="radio" name="AVGrate" id="c3" value="3"/>
                                                         <label for="c3"
                                                                style="display:inline-block;"><span></span></label>
                                                         <div class="rating-widget"
@@ -473,7 +447,7 @@
                                                         <span> به بالا</span>
                                                     </div>
                                                     <div class="filterItem lhrFilter filter selected">
-                                                        <input ng-click="RateFilter(2)" type="radio" name="AVGrate" id="c2" value="2"/>
+                                                        <input onclick="rateFilterFunc(2)" type="radio" name="AVGrate" id="c2" value="2"/>
                                                         <label for="c2"
                                                                style="display:inline-block;"><span></span></label>
                                                         <div class="rating-widget"
@@ -485,7 +459,7 @@
                                                         <span> به بالا</span>
                                                     </div>
                                                     <div class="filterItem lhrFilter filter selected">
-                                                        <input ng-click="RateFilter(1)" type="radio" name="AVGrate" id="c1" value="1"/>
+                                                        <input onclick="rateFilterFunc(1)" type="radio" name="AVGrate" id="c1" value="1"/>
                                                         <label for="c1"
                                                                style="display:inline-block;"><span></span></label>
                                                         <div class="rating-widget"
@@ -518,7 +492,7 @@
                                                     <div class="filterContent ui_label_group inline">
                                                         @for($i = 0; $i < 5 && $i < count($feature->subFeat); $i++)
                                                             <div class="filterItem lhrFilter filter selected">
-                                                                <input ng-disabled="isDisable()" ng-click="doFilterFeature({{$feature->subFeat[$i]->id}})" type="checkbox" id="feat{{$feature->subFeat[$i]->id}}" value="{{$feature->subFeat[$i]->name}}"/>
+                                                                <input ng-disabled="isDisable()" onclick="doFilterFeature({{$feature->subFeat[$i]->id}})" type="checkbox" id="feat{{$feature->subFeat[$i]->id}}" value="{{$feature->subFeat[$i]->name}}"/>
                                                                 <label for="feat{{$feature->subFeat[$i]->id}}"><span></span>&nbsp;&nbsp;{{$feature->subFeat[$i]->name}}  </label>
                                                             </div>
                                                         @endfor
@@ -526,7 +500,7 @@
                                                         @if(count($feature->subFeat) > 5)
                                                             @for($i = 5; $i < count($feature->subFeat); $i++)
                                                                 <div class="filterItem lhrFilter filter extraItem{{$feature->id}}">
-                                                                    <input ng-disabled="isDisable()" ng-click="doFilterFeature({{$feature->subFeat[$i]->id}})" type="checkbox" id="feat{{$feature->subFeat[$i]->id}}" value="{{$feature->subFeat[$i]->name}}"/>
+                                                                    <input ng-disabled="isDisable()" onclick="doFilterFeature({{$feature->subFeat[$i]->id}})" type="checkbox" id="feat{{$feature->subFeat[$i]->id}}" value="{{$feature->subFeat[$i]->name}}"/>
                                                                     <label for="feat{{$feature->subFeat[$i]->id}}"><span></span>&nbsp;&nbsp; {{$feature->subFeat[$i]->name}} </label>
                                                                 </div>
                                                             @endfor
@@ -609,8 +583,12 @@
     function selectingOrder(elem, type) {
         $(".orders").removeClass('selectOrder');
         $("#selectDistance").text('__ __ __');
+        $("#selectDistanceMobile").text('__ __ __');
         elem.addClass('selectOrder');
         sort = type;
+
+        if(type != 'distance')
+            newSearch();
     }
 
 
@@ -618,46 +596,6 @@
 
         $scope.isDisable = function () {
             return lock;
-        };
-
-        $scope.doKindFilter = function (value) {
-
-            if(specialFilters.includes(value))
-                specialFilters[specialFilters.indexOf(value)] = 0;
-            else{
-                if(specialFilters.includes(0))
-                    specialFilters[specialFilters.indexOf(0)] = value;
-                else
-                    specialFilters[specialFilters.length] = value;
-            }
-
-            page = 1;
-            floor = 1;
-            init = true;
-            isFinish = false;
-            inSearch = false;
-
-            $rootScope.$broadcast('myPagingFunctionAPI');
-        };
-
-        $scope.doFilterFeature = function (value) {
-
-            if(featureFilter.includes(value))
-                featureFilter[featureFilter.indexOf(value)] = 0;
-            else{
-                if(featureFilter.includes(0))
-                    featureFilter[featureFilter.indexOf(0)] = value;
-                else
-                    featureFilter[featureFilter.length] = value;
-            }
-
-            page = 1;
-            floor = 1;
-            init = true;
-            isFinish = false;
-            inSearch = false;
-
-            $rootScope.$broadcast('myPagingFunctionAPI');
         };
 
         $scope.RateFilter = function(value) {
@@ -681,7 +619,6 @@
 
 
         $scope.sortFunc = function(value) {
-            alert('hello')
             sort = value;
             page = 1;
             floor = 1;
@@ -743,7 +680,6 @@
 
                 for (j = 0; j < $scope.packets[page - 1].places.length; j++) {
                     $scope.packets[page - 1].places[j].ngClass = 'ui_bubble_rating bubble_' + $scope.packets[page - 1].places[j].avgRate + '0';
-                    $scope.packets[page - 1].places[j].redirect = '{{route('home')}}/' + placeMode + '-details/' + $scope.packets[page - 1].places[j].id + '/' + $scope.packets[page - 1].places[j].name;
                     if($scope.packets[page - 1].places[j].inTrip == 1)
                         $scope.packets[page - 1].places[j].inTrip = 'red-heart-fill';
                     else
@@ -781,7 +717,6 @@
 
                     for (j = 0; j < $scope.packets[page - 1].places.length; j++) {
                         $scope.packets[page - 1].places[j].ngClass = 'ui_bubble_rating bubble_' + $scope.packets[page - 1].places[j].avgRate + '0';
-                        $scope.packets[page - 1].places[j].redirect = '{{route('home')}}/' + placeMode + '-details/' + $scope.packets[page - 1].places[j].id + '/' + $scope.packets[page - 1].places[j].name;
                         if($scope.packets[page - 1].places[j].inTrip == 1)
                             $scope.packets[page - 1].places[j].inTrip = 'red-heart-fill';
                         else
@@ -818,7 +753,6 @@
                         $scope.packets[page - 1].places = response.data.places;
                         for (j = 0; j < $scope.packets[page - 1].places.length; j++) {
                             $scope.packets[page - 1].places[j].ngClass = 'ui_bubble_rating bubble_' + $scope.packets[page - 1].places[j].avgRate + '0';
-                            $scope.packets[page - 1].places[j].redirect = '{{route('home')}}/' + placeMode + '-details/' + $scope.packets[page - 1].places[j].id + '/' + $scope.packets[page - 1].places[j].name;
                             if($scope.packets[page - 1].places[j].inTrip == 1)
                                 $scope.packets[page - 1].places[j].inTrip = 'red-heart-fill';
                             else
@@ -882,9 +816,40 @@
         newSearch();
     }
 
+    function doKindFilter(value){
+        if(specialFilters.includes(value))
+            specialFilters[specialFilters.indexOf(value)] = 0;
+        else{
+            if(specialFilters.includes(0))
+                specialFilters[specialFilters.indexOf(0)] = value;
+            else
+                specialFilters[specialFilters.length] = value;
+        }
+
+        newSearch();
+    }
+
+    function rateFilterFunc(value){
+        rateFilter = value;
+        newSearch();
+    }
+
+    function doFilterFeature(value){
+        if(featureFilter.includes(value))
+            featureFilter[featureFilter.indexOf(value)] = 0;
+        else{
+            if(featureFilter.includes(0))
+                featureFilter[featureFilter.indexOf(0)] = value;
+            else
+                featureFilter[featureFilter.length] = value;
+        }
+
+        newSearch();
+    }
+
     function createFilter(){
         var text = '';
-        $('#filterShow').html('');
+        $('.filterShow').html('');
         if(rateFilter != 0)
             text += '<div class="filtersExist">\n' +
                     '<div>امتیاز کاربر</div>\n' +
@@ -900,7 +865,6 @@
         for(i = 0; i < featureFilter.length; i++){
             if(featureFilter[i] != 0) {
                 var name = document.getElementById('feat' + featureFilter[i]).value;
-                // text += '<div id="closeMoneyFilter" class="closeXicon filtersExist" onclick="cancelFeatureFilter(' + featureFilter[i] + ')">' + name + '</div>\n';
                 text += '<div class="filtersExist">\n' +
                         '<div>' + name + '</div>\n' +
                         '<div onclick="cancelFeatureFilter(' + featureFilter[i] + ')" class="icons iconClose filterCloseIcon"></div>\n' +
@@ -908,12 +872,46 @@
             }
         }
 
-        $('#filterShow').html(text);
+        for(i = 0; i < specialFilters.length; i++){
+            if(specialFilters[i] != 0) {
+                var name = document.getElementById('x' + specialFilters[i]).value;
+                text += '<div class="filtersExist">\n' +
+                        '<div>' + name + '</div>\n' +
+                        '<div onclick="cancelKindFilter(' + specialFilters[i] + ')" class="icons iconClose filterCloseIcon"></div>\n' +
+                        '</div>';
+            }
+        }
+
+        $('.filterShow').html(text);
+    }
+
+    function cancelKindFilter(id, kind = 'refresh'){
+        if(id == 0){
+            for(i = 0; i< specialFilters.length; i++){
+                if(specialFilters[i] != 0) {
+                    $('#x' + specialFilters[i]).prop("checked", false);
+                    $('#p_x' + specialFilters[i]).prop("checked", false);
+                }
+            }
+            specialFilters = [];
+        }
+        else {
+            if (specialFilters.includes(id)) {
+                specialFilters[specialFilters.indexOf(id)] = 0;
+                $('#x' + id).prop("checked", false);
+                $('#p_x' + id).prop("checked", false);
+            }
+        }
+
+        if(kind == 'refresh')
+            newSearch();
     }
 
     function cancelRateFilter(kind = 'refresh'){
-        for(i = 1; i < 6; i++)
+        for(i = 1; i < 6; i++) {
             document.getElementById('c' + i).checked = false;
+            document.getElementById('p_c' + i).checked = false;
+        }
 
         rateFilter = 0;
         if(kind == 'refresh')
@@ -923,8 +921,10 @@
     function cancelFeatureFilter(id, kind = 'refresh'){
         if(id == 0){
             for(i = 0; i< featureFilter.length; i++){
-                if(featureFilter[i] != 0)
+                if(featureFilter[i] != 0) {
                     $('#feat' + featureFilter[i]).prop("checked", false);
+                    $('#p_feat' + featureFilter[i]).prop("checked", false);
+                }
             }
             featureFilter = [];
         }
@@ -932,6 +932,7 @@
             if (featureFilter.includes(id)) {
                 featureFilter[featureFilter.indexOf(id)] = 0;
                 $('#feat' + id).prop("checked", false);
+                $('#p_feat' + id).prop("checked", false);
             }
         }
 
@@ -941,12 +942,14 @@
 
     function cancelNameFilter(){
         document.getElementById('nameSearch').value = '';
+        document.getElementById('p_nameSearch').value = '';
         nameFilterFunc('');
     }
 
     function closeFilters(){
         cancelRateFilter('noRef');
         cancelFeatureFilter(0, 'noRef');
+        cancelKindFilter(0, 'noRef');
         cancelNameFilter();
     }
 
@@ -957,7 +960,6 @@
     function searchInPlaces(element){
         var value = element.value;
         if(value.trim().length > 1){
-            console.log({{$city->id}})
             $.ajax({
                 type: 'post',
                 url: "{{route('proSearch')}}",
@@ -1017,10 +1019,10 @@
         nearPlaceIdFilter = id;
         nearKindPlaceIdFilter = kindPlaceId;
         $('#selectDistance').text(name);
+        $('#selectDistanceMobile').text(name);
 
         closeSearchInput();
-        $(".orders").removeClass('selectOrder');
-        $("#distanceNav").addClass('selectOrder');
+
         sort = 'distance';
         newSearch();
     }

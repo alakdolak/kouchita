@@ -861,16 +861,6 @@ class PostController extends Controller {
             'creatorPhoto' => $creatorPhoto]);
     }
 
-    public function specificPost($id) {
-
-        $post = \App\models\Post::whereId($id);
-
-        if($post == null)
-            return \Redirect::route('home');
-
-        return view('specificPost', ['post' => $post]);
-    }
-
     public function sendPostComment() {
 
         if(isset($_POST["postId"]) && isset($_POST["comment"])) {

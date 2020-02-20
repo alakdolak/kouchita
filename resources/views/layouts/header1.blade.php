@@ -235,12 +235,45 @@
 
 @if(Auth::check())
     <script>
+        var locked = false;
+        var superAccess = false;
+
         $(document).ready(function () {
             getAlertsCount();
         });
 
-        var locked = false;
-        var superAccess = false;
+        $('#bookmarkicon').click(function(e) {
+
+            if( $("#bookmarkmenu").is(":hidden")){
+                $("#bookmarkmenu").show();
+                $("#my-trips-not").hide();
+                $("#profile-drop").hide();
+                $("#alert").hide();
+                showBookMarks('bookMarksDiv');
+
+            }else{
+                $("#bookmarkmenu").hide();
+                $("#my-trips-not").hide();
+                $("#profile-drop").hide();
+                $("#alert").hide();
+            }
+        });
+
+        $('#memberTop').click(function(e) {
+
+            if( $("#profile-drop").is(":hidden")){
+                $("#profile-drop").show();
+                $("#my-trips-not").hide();
+                $("#bookmarkmenu").hide();
+                $("#alert").hide();
+
+            }else{
+                $("#profile-drop").hide();
+                $("#my-trips-not").hide();
+                $("#bookmarkmenu").hide();
+                $("#alert").hide();
+            }
+        });
 
         function getAlertsCount() {
 
@@ -313,6 +346,5 @@
                 }
             });
         }
-
     </script>
 @endif
