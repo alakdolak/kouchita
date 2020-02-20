@@ -32,40 +32,6 @@
         var url;
     </script>
 
-    <style>
-        {{--css of left side--}}
-        .widget ul li {
-            position: relative;
-            margin: 20px 0 40px;
-        }
-
-        /*css of {ng-app="mainApp"}*/
-        .homepage_shelves_widget {
-            min-height: 0px;
-        }
-
-        .image_wrapper {
-            height: 130px;
-        }
-
-        .map_list {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            padding: 10px;
-            background-color: #f3f3f3;
-        }
-
-        .map_category {
-            width: 50px;
-            cursor: pointer;
-        }
-
-        .cpMainSug .swiper-slide {
-            margin-top: 15px;
-        }
-    </style>
-
 </head>
 
 <body class="rebrand_2017 desktop HomeRebranded  js_logging">
@@ -606,7 +572,7 @@
                     <div class="widget-head-line"></div>
                 </div>
                 <div class="row">
-                    <article class="im-article content-2col col-md-4 col-sm-12">
+                    <article class="im-article content-2col col-md-6 col-sm-12">
                         <div class="im-entry-thumb">
                             <a class="im-entry-thumb-link" href="{{$post[0]->url}}"
                                title="{{$post[0]->slug}}">
@@ -646,10 +612,10 @@
                             </div>
                         </div>
                     </article>
-                    <div class="col-md-4 col-sm-12">
+                    <div class="col-md-6 col-sm-12">
                         <div class="widget">
                             <ul>
-                                @for($i = 1; $i < 4 && $i < count($post); $i++)
+                                @for($i = 1; $i <= 4 && $i < count($post); $i++)
                                     <li class="widget-10104im-widgetclearfix">
                                     <figure class="im-widget-thumb">
                                         <a href="{{$post[$i]->url}}" title="{{$post[$i]->title}}">
@@ -679,43 +645,6 @@
                                         </div>
                                     </div>
                                 </li>
-                                @endfor
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-12">
-                        <div class="widget">
-                            <ul>
-                                @for($i = 4; $i < 7 && $i < count($post); $i++)
-                                    <li class="widget-10104im-widgetclearfix">
-                                        <figure class="im-widget-thumb">
-                                            <a href="{{$post[$i]->url}}" title="{{$post[$i]->title}}">
-                                                <img src="{{$post[$i]->pic}}" alt="{{$post[$i]->keyword}}">
-                                            </a>
-                                        </figure>
-                                        <div class="im-widget-entry">
-                                            <header class="im-widget-entry-header">
-                                                <h4 class="im-widget-entry-title">
-                                                    <a href="{{$post[$i]->url}}"
-                                                       title="{{$post[$i]->title}}">{{$post[$i]->title}}</a>
-                                                </h4>
-                                            </header>
-                                            <div class="iranomag-meta clearfix">
-                                                <div class="posted-on im-meta-item">
-                                                    <span class="entry-date published updated">{{$post[$i]->date}}</span>
-                                                </div>
-                                                <div class="comments-link im-meta-item">
-                                                    <i class="fa fa-comment-o"></i>{{$post[$i]->msgs}}
-                                                </div>
-                                                <div class="author vcard im-meta-item">
-                                                    <i class="fa fa-user"></i>{{$post[$i]->username}}
-                                                </div>
-                                                <div class="post-views im-meta-item">
-                                                    <i class="fa fa-eye"></i>{{$post[$i]->seen}}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
                                 @endfor
                             </ul>
                         </div>

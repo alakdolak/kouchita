@@ -464,6 +464,19 @@
     margin-top: 7px
 }
 
+/*css of {ng-app="mainApp"}*/
+.homepage_shelves_widget {
+    min-height: 0px;
+}
+
+.image_wrapper {
+    height: 130px;
+}
+
+.cpMainSug .swiper-slide {
+    margin-top: 15px;
+}
+
 
 @media (max-width:768px) {
     .widget-title {
@@ -488,5 +501,17 @@
     }
     .cpMapCategory {
         margin: 0px 2px;
+    }
+
+    .image_wrapper {
+        height: 200px;
+    }
+
+    .image_wrapper.landscape.landscapeWide .image {
+        width: 100%;
+    }
+
+    .content-2col .im-entry {
+        min-height: 45px !important;
     }
 }
