@@ -631,7 +631,7 @@ class AjaxController extends Controller {
             $kindPlace = Place::find($item->kindPlaceId);
             $place = DB::table($kindPlace->tableName)->select(['name', 'id', 'file', 'picNumber', 'alt', 'cityId'])->find($item->placeId);
             $file = $kindPlace->fileName;
-            $url = createUrl($kindPlace->id, $place->id, 0, 0);
+            $url = createUrl($item->kindPlaceId, $item->placeId, 0, 0);
             $kindPlaceId = $kindPlace->id;
 
             if($place != null && $file != null) {
