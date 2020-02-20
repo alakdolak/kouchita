@@ -2,8 +2,6 @@
 
 @section('head')
     <link rel="stylesheet" href="{{URL::asset('css/easyimage.css')}}">
-<<<<<<< HEAD
-=======
 
 
     <title> {{$post->seoTitle}} </title>
@@ -25,11 +23,7 @@
             padding: 15px;
         }
     </style>
-<<<<<<< HEAD
->>>>>>> f995018536bd109c37b214979469dd563cc0c196
-=======
     <script src="{{URL::asset('js/autosize.min.js')}}"></script>
->>>>>>> b6996c1355937774945b7d26578eb1c7b4be4fbc
 
 @endsection
 
@@ -303,10 +297,6 @@
         var comments = {!! $comments !!};
         var userPic = '{{$uPic}}';
 
-<<<<<<< HEAD
-
-=======
->>>>>>> f995018536bd109c37b214979469dd563cc0c196
         function createComment(srcId, comments){
             if(srcHtmlComments == 0)
                 srcHtmlComments = $('#commentDiv0').html();
@@ -386,15 +376,12 @@
             }
         }
         createComment(0, comments);
-<<<<<<< HEAD
-=======
 
         $(window).ready(function(){
 
             autosize($(".inputBoxInputComment"));
             autosize($(".inputBoxInputAnswer"));
         });
->>>>>>> f995018536bd109c37b214979469dd563cc0c196
     </script>
 @endsection
 
