@@ -155,7 +155,7 @@ class PlaceController extends Controller {
         if(isset($place->video))
             $video = $place->video;
 
-        $mode = '';
+        $mode = 'city';
         $err = '';
         $rooms = '';
         $jsonRoom = '';
@@ -3612,7 +3612,7 @@ class PlaceController extends Controller {
             foreach ($features as $feature)
                 $feature->subFeat = PlaceFeatures::where('parent', $feature->id)->where('type', 'YN')->get();
             $kind = $mode;
-            return view('places.list.list', compact(['features', 'locationName', 'kindPlace', 'kind','kindPlaceId', 'mode', 'city', 'sections', 'placeMode', 'state']));
+            return view('places.list.list', compact(['features', 'locationName', 'kindPlace', 'kind', 'kindPlaceId', 'mode', 'city', 'sections', 'placeMode', 'state']));
         }
         else
             return \redirect(\url('/'));
@@ -3811,13 +3811,14 @@ class PlaceController extends Controller {
 
     private function hotelFilter($specFilter, $placeIds){
         $kindId = array();
-        foreach ($specFilter as $item){
-            if($item != 0)
-                array_push($kindId, $item);
+        if(is_array($specFilter) && count($specFilter) > 0) {
+            foreach ($specFilter as $item) {
+                if ($item != 0)
+                    array_push($kindId, $item);
+            }
+            if (count($kindId) != 0)
+                $placeIds = DB::table('hotels')->whereIn('id', $placeIds)->whereIn('kind_id', $kindId)->pluck('id')->toArray();
         }
-        if(count($kindId) != 0)
-            $placeIds = DB::table('hotels')->whereIn('id', $placeIds)->whereIn('kind_id', $kindId)->pluck('id')->toArray();
-
         return $placeIds;
     }
 

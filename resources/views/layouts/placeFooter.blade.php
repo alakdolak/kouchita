@@ -413,18 +413,14 @@ $config = \App\models\ConfigModel::first()
                                         <div style="cursor: pointer; font-size: 12px; color: #050c93; margin-bottom: 7px;" onclick="closeFilters()">
                                             پاک کردن فیلتر ها
                                         </div>
-                                        <div id="filterShow" style="display: flex; flex-direction: row; flex-wrap: wrap;"></div>
+                                        <div class="filterShow" style="display: flex; flex-direction: row; flex-wrap: wrap;"></div>
                                     </div>
                                 </div>
                             </div>
                             <div class="prw_rup prw_restaurants_restaurant_filters">
                                 <div id="jfy_filter_bar_establishmentTypeFilters" class="lhrFilterBlock jfy_filter_bar_establishmentTypeFilters collapsible">
                                     <div class="filterGroupTitle">جستجو‌ی نام</div>
-                                    {{--                                                <div class="hl_inputBox">--}}
-                                    {{--ng-change="nameFilter(nameSearch)"--}}
-                                    {{--ng-model="nameSearch"--}}
-                                    <input id="nameSearch" class="hl_inputBox" placeholder="جستجو کنید" onchange="nameFilterFunc(this.value)">
-                                    {{--                                                </div>--}}
+                                    <input id="p_nameSearch" class="hl_inputBox" placeholder="جستجو کنید" onchange="nameFilterFunc(this.value)">
                                 </div>
                             </div>
                             <div class="prw_rup prw_restaurants_restaurant_filters">
@@ -433,7 +429,7 @@ $config = \App\models\ConfigModel::first()
                                     <div class="filterGroupTitle">امتیاز کاربران</div>
                                     <div class="filterContent ui_label_group inline">
                                         <div class="filterItem lhrFilter filter selected">
-                                            <input ng-click="RateFilter(5)" type="radio" name="AVGrate" id="p_c5" value="5"/>
+                                            <input onclick="rateFilterFunc(5)" type="radio" name="AVGrate" id="p_c5" value="5"/>
                                             <label for="p_c5"
                                                    style="display:inline-block;"><span></span></label>
                                             <div class="rating-widget"
@@ -444,7 +440,7 @@ $config = \App\models\ConfigModel::first()
                                             </div>
                                         </div>
                                         <div class="filterItem lhrFilter filter selected">
-                                            <input  ng-click="RateFilter(4)" type="radio" name="AVGrate" id="p_c4" value="4"/>
+                                            <input onclick="rateFilterFunc(4)" type="radio" name="AVGrate" id="p_c4" value="4"/>
                                             <label for="p_c4"
                                                    style="display:inline-block;"><span></span></label>
                                             <div class="rating-widget"
@@ -456,7 +452,7 @@ $config = \App\models\ConfigModel::first()
                                             <span> به بالا</span>
                                         </div>
                                         <div class="filterItem lhrFilter filter selected">
-                                            <input ng-click="RateFilter(3)" type="radio" name="AVGrate" id="p_c3" value="3"/>
+                                            <input onclick="rateFilterFunc(3)" type="radio" name="AVGrate" id="p_c3" value="3"/>
                                             <label for="p_c3"
                                                    style="display:inline-block;"><span></span></label>
                                             <div class="rating-widget"
@@ -468,7 +464,7 @@ $config = \App\models\ConfigModel::first()
                                             <span> به بالا</span>
                                         </div>
                                         <div class="filterItem lhrFilter filter selected">
-                                            <input ng-click="RateFilter(2)" type="radio" name="AVGrate" id="p_c2" value="2"/>
+                                            <input onclick="rateFilterFunc(2)" type="radio" name="AVGrate" id="p_c2" value="2"/>
                                             <label for="p_c2"
                                                    style="display:inline-block;"><span></span></label>
                                             <div class="rating-widget"
@@ -480,7 +476,7 @@ $config = \App\models\ConfigModel::first()
                                             <span> به بالا</span>
                                         </div>
                                         <div class="filterItem lhrFilter filter selected">
-                                            <input ng-click="RateFilter(1)" type="radio" name="AVGrate" id="p_c1" value="1"/>
+                                            <input onclick="rateFilterFunc(1)" type="radio" name="AVGrate" id="p_c1" value="1"/>
                                             <label for="p_c1"
                                                    style="display:inline-block;"><span></span></label>
                                             <div class="rating-widget"
@@ -496,7 +492,7 @@ $config = \App\models\ConfigModel::first()
                             </div>
 
                             @if($kindPlace->id == 4)
-                                @include('places.list.filters.hotelFilters')
+                                @include('places.list.filters.hotelPhoneFilters')
                             @endif
 
                             @foreach($features as $feature)
@@ -513,7 +509,7 @@ $config = \App\models\ConfigModel::first()
                                         <div class="filterContent ui_label_group inline">
                                             @for($i = 0; $i < 5 && $i < count($feature->subFeat); $i++)
                                                 <div class="filterItem lhrFilter filter selected">
-                                                    <input ng-disabled="isDisable()" ng-click="doFilterFeature({{$feature->subFeat[$i]->id}})" type="checkbox" id="p_feat{{$feature->subFeat[$i]->id}}" value="{{$feature->subFeat[$i]->name}}"/>
+                                                    <input ng-disabled="isDisable()" onclick="doFilterFeature({{$feature->subFeat[$i]->id}})" type="checkbox" id="p_feat{{$feature->subFeat[$i]->id}}" value="{{$feature->subFeat[$i]->name}}"/>
                                                     <label for="p_feat{{$feature->subFeat[$i]->id}}"><span></span>&nbsp;&nbsp;{{$feature->subFeat[$i]->name}}  </label>
                                                 </div>
                                             @endfor
@@ -521,7 +517,7 @@ $config = \App\models\ConfigModel::first()
                                             @if(count($feature->subFeat) > 5)
                                                 @for($i = 5; $i < count($feature->subFeat); $i++)
                                                     <div class="filterItem lhrFilter filter hidden extraItem{{$feature->id}}">
-                                                        <input ng-disabled="isDisable()" ng-click="doFilterFeature({{$feature->subFeat[$i]->id}})" type="checkbox" id="p_feat{{$feature->subFeat[$i]->id}}" value="{{$feature->subFeat[$i]->name}}"/>
+                                                        <input ng-disabled="isDisable()" onclick="doFilterFeature({{$feature->subFeat[$i]->id}})" type="checkbox" id="p_feat{{$feature->subFeat[$i]->id}}" value="{{$feature->subFeat[$i]->name}}"/>
                                                         <label for="p_feat{{$feature->subFeat[$i]->id}}"><span></span>&nbsp;&nbsp; {{$feature->subFeat[$i]->name}} </label>
                                                     </div>
                                                 @endfor
@@ -1462,8 +1458,6 @@ $config = \App\models\ConfigModel::first()
                     url: '{{route('getBookMarks')}}',
                     success: function (response) {
                         response = JSON.parse(response);
-                        console.log(response);
-
                         for(i = 0; i < response.length; i++){
                             var text = bookMarkSample;
                             var fk = Object.keys(response[i]);

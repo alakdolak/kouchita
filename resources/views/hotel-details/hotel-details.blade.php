@@ -294,6 +294,7 @@ if ($total == 0)
                                                 </label>
                                                 <input id="radioAns_{{$item->id}}_{{$item->ans[$i]->id}}"
                                                        value="{{$item->ans[$i]->id}}"
+                                                       name="radioAnsName_{{$item->id}}"
                                                        onchange="radioChange(this.value, {{$item->id}}, {{$index}}, {{$item->ans[$i]->id}})"
                                                        type="radio" style="display: none">
                                             @endfor
@@ -928,7 +929,7 @@ if ($total == 0)
                                         <textarea class="inputBoxInput inputBoxInputComment" type="text"
                                                   placeholder=" چه فکر یا احساسی داری.....؟" onclick="newPostModal('textarea')" readonly></textarea>
                                     @endif
-                                    <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
+                                    <img class="commentSmileyIcon" src="{{URL::asset('images/smile.png')}}">
                                 </div>
                             </div>
                             <div class="commentMoreSettingBar">
