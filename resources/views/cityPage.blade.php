@@ -236,7 +236,7 @@
 
                 <div class="mainSuggestionMainDiv cpBorderBottom ng-scope">
 
-                    @if(count($topPlaces[0]) > 4)
+                    @if(count($topPlaces['amaken']) > 4)
                         <div id="newKoochita" class="homepage_shelves_widget ng-scope">
                         <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show" style="">
                             <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
@@ -253,7 +253,7 @@
                                 <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
                                     <div class="cpMainSug swiper-container">
                                         <div class="swiper-wrapper position-relative">
-                                            @foreach($topPlaces[0] as $item)
+                                            @foreach($topPlaces['amaken'] as $item)
                                                 <div class="swiper-slide position-relative">
                                                 <img src="{{URL::asset('images/pin.png')}}" class="imageGoldPin">
                                                 <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
@@ -296,7 +296,7 @@
                     </div>
                     @endif
 
-                    @if(count($topPlaces[1]) > 4)
+                    @if(count($topPlaces['restaurant']) > 4)
                         <div id="newKoochita" class="homepage_shelves_widget ng-scope">
                         <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show" style="">
                             <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
@@ -313,7 +313,7 @@
                                 <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
                                     <div class="cpMainSug swiper-container">
                                         <div class="swiper-wrapper position-relative">
-                                            @foreach($topPlaces[1] as $item)
+                                            @foreach($topPlaces['restaurant'] as $item)
                                                 <div class="swiper-slide position-relative">
                                                 <img src="{{URL::asset('images/pin.png')}}" class="imageGoldPin">
                                                 <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
@@ -356,7 +356,7 @@
                     </div>
                     @endif
 
-                    @if(count($topPlaces[2]) > 4)
+                    @if(count($topPlaces['hotels']) > 4)
                         <div id="newKoochita" class="homepage_shelves_widget ng-scope">
                         <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show" style="">
                             <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
@@ -373,7 +373,7 @@
                                 <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
                                     <div class="cpMainSug swiper-container">
                                         <div class="swiper-wrapper position-relative">
-                                            @foreach($topPlaces[2] as $item)
+                                            @foreach($topPlaces['hotels'] as $item)
                                                 <div class="swiper-slide position-relative">
                                                     <img src="{{URL::asset('images/pin.png')}}" class="imageGoldPin">
                                                     <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
@@ -416,7 +416,7 @@
                     </div>
                     @endif
 
-                    @if(count($topPlaces[3]) > 4)
+                    @if(count($topPlaces['majara']) > 4)
                         <div id="newKoochita" class="homepage_shelves_widget ng-scope">
                         <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show" style="">
                             <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
@@ -433,7 +433,7 @@
                                 <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
                                     <div class="cpMainSug swiper-container">
                                         <div class="swiper-wrapper position-relative">
-                                            @foreach($topPlaces[3] as $item)
+                                            @foreach($topPlaces['majara'] as $item)
                                                 <div class="swiper-slide position-relative">
                                                     <img src="{{URL::asset('images/pin.png')}}" class="imageGoldPin">
                                                     <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
@@ -476,7 +476,7 @@
                     </div>
                     @endif
 
-                    @if(count($topPlaces[4]) > 4)
+                    @if(count($topPlaces['sogatSanaie']) > 4)
                         <div id="newKoochita" class="homepage_shelves_widget ng-scope">
                         <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show" style="">
                             <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
@@ -493,7 +493,7 @@
                                 <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
                                     <div class="cpMainSug swiper-container">
                                         <div class="swiper-wrapper position-relative">
-                                            @foreach($topPlaces[4] as $item)
+                                            @foreach($topPlaces['sogatSanaie'] as $item)
                                                 <div class="swiper-slide position-relative">
                                                     <img src="{{URL::asset('images/pin.png')}}" class="imageGoldPin">
                                                     <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
@@ -536,7 +536,7 @@
                     </div>
                     @endif
 
-                    @if(count($topPlaces[5]) > 4)
+                    @if(count($topPlaces['mahaliFood']) > 4)
                         <div id="newKoochita" class="homepage_shelves_widget ng-scope">
                         <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show" style="">
                             <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
@@ -553,7 +553,7 @@
                                 <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
                                     <div class="cpMainSug swiper-container">
                                         <div class="swiper-wrapper position-relative">
-                                            @foreach($topPlaces[5] as $item)
+                                            @foreach($topPlaces['mahaliFood'] as $item)
                                                 <div class="swiper-slide position-relative">
                                                     <img src="{{URL::asset('images/pin.png')}}" class="imageGoldPin">
                                                     <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">

@@ -57,6 +57,128 @@ use Illuminate\Http\Request;
 
 class PlaceController extends Controller {
 
+    public function showPlaceDetails($kindPlaceName, $slug){
+        deleteReviewPic();
+
+        $kindPlace = Place::where('fileName', $kindPlaceName)->first();
+        if($kindPlace == null)
+            return \redirect(\url('/'));
+        $kindPlaceId = $kindPlace->id;
+
+//        $place = DB::table($kindPlace->tableName)->where('slug', $slug);
+        $place = DB::table($kindPlace->tableName)->find($slug);
+        if($place == null)
+            return \redirect(\url('/'));
+
+        $hasLogin = true;
+        $uId = -1;
+        if(auth()->check()){
+            $u = Auth::user();
+            $uId = $u->id;
+            $userCode = $uId . '_' . rand(10000,99999);
+        }
+        else{
+            $userCode = null;
+            $hasLogin = false;
+        }
+        $uPic = getUserPic(); // common.php
+
+        saveViewPerPage($kindPlaceId, $place->id);
+
+        $bookMark = false;
+        $condition = ['visitorId' => $uId, 'activityId' => Activity::whereName("نشانه گذاری")->first()->id,
+            'placeId' => $place->id, 'kindPlaceId' => $kindPlaceId];
+        if (LogModel::where($condition)->count() > 0)
+            $bookMark = true;
+
+        $rates = getRate($place->id, $kindPlaceId);
+
+        $save = false;
+        $count = DB::select("select count(*) as tripPlaceNum from trip, tripPlace WHERE tripPlace.placeId = " . $place->id . " and tripPlace.kindPlaceId = " . $kindPlaceId . " and tripPlace.tripId = trip.id and trip.uId = " . $uId);
+        if ($count[0]->tripPlaceNum > 0)
+            $save = true;
+
+        $city = Cities::whereId($place->cityId);
+        $state = State::whereId($city->stateId);
+
+        $photos = [];
+
+        if (!empty($place->picNumber)) {
+            if (file_exists((__DIR__ . '/../../../../assets/_images/' . $kindPlace->fileName . '/' . $place->file . '/s-' . $place->picNumber))) {
+                $photos[count($photos)] = URL::asset('_images') . '/' . $kindPlace->fileName . '/' . $place->file . '/s-' . $place->picNumber;
+                $thumbnail = URL::asset('_images') . '/' . $kindPlace->fileName . '/' . $place->file . '/f-' . $place->picNumber;
+            } else {
+                $photos[count($photos)] = URL::asset('_images/nopic/blank.jpg');
+                $thumbnail = URL::asset('_images/nopic/blank.jpg');
+            }
+        }
+        else {
+            $photos[count($photos)] = URL::asset('_images/nopic/blank.jpg');
+            $thumbnail = URL::asset('_images/nopic/blank.jpg');
+        }
+
+        $allState = State::all();
+
+        $pics = getAllPlacePicsByKind($kindPlaceId, $place->id);
+        $sitePics = $pics[0];
+        $sitePicsJSON = $pics[1];
+        $photographerPics = $pics[2];
+        $photographerPicsJSON = $pics[3];
+        $userPhotos = $pics[4];
+        $userPhotosJson = $pics[5];
+
+        $result = commonInPlaceDetails($kindPlaceId, $place->id, $city, $state, $place);
+        $reviewCount = $result[0];
+        $ansReviewCount = $result[1];
+        $userReviewCount = $result[2];
+        $multiQuestion = $result[3];
+        $textQuestion = $result[4];
+        $rateQuestion = $result[5];
+
+        $multiQuestionJSON = json_encode($multiQuestion);
+        $textQuestionJSON = json_encode($textQuestion);
+        $rateQuestionJSON = json_encode($rateQuestion);
+
+        $inPage = 'place_' . $kindPlaceId . '_' . $place->id;
+        session(['inPage' => $inPage]);
+
+        $features = PlaceFeatures::where('kindPlaceId', 4)->where('parent', 0)->get();
+        $featId = array();
+        foreach ($features as $item) {
+            $item->subFeat = PlaceFeatures::where('parent', $item->id)->get();
+            $fId = PlaceFeatures::where('parent', $item->id)->pluck('id')->toArray();
+            $featId = array_merge($featId, $fId);
+        }
+        $place->features = PlaceFeatureRelation::where('placeId', $place->id)->whereIn('featureId', $featId)->pluck('featureId')->toArray();
+
+        $video = '';
+        if(isset($place->video))
+            $video = $place->video;
+
+        $mode = '';
+        $err = '';
+        $rooms = '';
+        $jsonRoom = '';
+
+        $articleUrl = \url('/article/list/place/' . $kindPlaceId . '_' . $place->id);
+        $cityName = 'شهر ' . $city->name;
+        $locationName = ["name" => $place->name, 'state' => $state->name, 'cityName' => $cityName, 'cityNameUrl' => $city->name, 'articleUrl' => $articleUrl, 'kindState' => 'city'];
+
+        return view('hotel-details.hotel-details', array('place' => $place, 'features' => $features , 'save' => $save, 'city' => $city, 'thumbnail' => $thumbnail,
+            'state' => $state, 'avgRate' => $rates[1], 'locationName' => $locationName,
+            'reviewCount' => $reviewCount, 'ansReviewCount' => $ansReviewCount, 'userReviewCount' => $userReviewCount,
+            'photographerPics' => $photographerPics, 'photographerPicsJSON' => $photographerPicsJSON, 'userPic' => $uPic,
+            'rateQuestion' => $rateQuestion, 'textQuestion' => $textQuestion, 'multiQuestion' => $multiQuestion,
+            'rateQuestionJSON' => $rateQuestionJSON, 'textQuestionJSON' => $textQuestionJSON, 'multiQuestionJSON' => $multiQuestionJSON,
+            'sitePics' => $sitePics, 'sitePicsJSON' => $sitePicsJSON, 'allState' => $allState, 'userCode' => $userCode,
+            'kindPlaceId' => $kindPlaceId, 'mode' => $mode, 'rates' => $rates[0],
+            'photos' => $photos, 'userPhotos' => $userPhotos, 'userPhotosJson' => $userPhotosJson,
+            'config' => ConfigModel::first(), 'hasLogin' => $hasLogin, 'bookMark' => $bookMark, 'err' => $err,
+            'placeStyles' => PlaceStyle::whereKindPlaceId($kindPlaceId)->get(),
+            'placeMode' => $kindPlace->tableName, 'rooms' => $rooms, 'jsonRoom' => $jsonRoom, 'video' => $video,
+            'sections' => SectionPage::wherePage(getValueInfo('hotel-detail'))->get()));
+    }
+
     private function getNearbies($C, $D, $count)
     {
         $D *= 3.14 / 180;
@@ -3442,7 +3564,7 @@ class PlaceController extends Controller {
 
                 $articleUrl = \url('/article/list/city/' . $state->name);
                 $n = ' استان ' . $state->name;
-                $locationName = ["name" => $n, 'urlName' => $state->name, 'articleUrl' => $articleUrl];
+                $locationName = ["name" => $n, 'cityName' => $n, 'cityNameUrl' => $state->name, 'articleUrl' => $articleUrl, 'kindState' => 'state'];
             }
             else {
                 $city = Cities::whereName($city)->first();
@@ -3455,7 +3577,7 @@ class PlaceController extends Controller {
 
                 $articleUrl = \url('/article/list/city/' . $city->name);
                 $n = ' شهر ' . $city->name;
-                $locationName = ["name" => $n, 'state' => $state->name, 'urlName' => $city->name, 'articleUrl' => $articleUrl];
+                $locationName = ["name" => $n, 'state' => $state->name, 'cityName' => $n, 'cityNameUrl' => $city->name, 'articleUrl' => $articleUrl, 'kindState' => 'city'];
             }
 
             switch ($kindPlaceId){
@@ -3674,6 +3796,7 @@ class PlaceController extends Controller {
             $place->state = State::whereId($cityObj->stateId)->name;
             $place->avgRate = getRate($place->id, $request->kindPlaceId)[1];
             $place->inTrip = 0;
+            $place->redirect = createUrl($kindPlace->id, $place->id, 0, 0);
             if(\auth()->check()){
                 $u = \auth()->user();
                 $trips = DB::select('SELECT trip.id FROM tripPlace, trip WHERE trip.uId = ' . $u->id . ' AND trip.id = tripPlace.tripId AND tripPlace.placeId = ' . $place->id . ' AND tripPlace.kindPlaceId = ' . $request->kindPlaceId);

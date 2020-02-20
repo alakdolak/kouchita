@@ -172,7 +172,7 @@ class HomeController extends Controller
             $place->listName = $place->name;
             $place->name = 'شهر ' . $place->name;
             $articleUrl = \url('/article/list/city/' . $place->listName);
-            $locationName = ["name" => $place->name, 'state' => $place->state, 'urlName' => $place->listName, 'articleUrl' => $articleUrl];
+            $locationName = ["name" => $place->name, 'state' => $place->state, 'cityName' => $place->listName, 'cityNameUrl' => $place->name, 'articleUrl' => $articleUrl, 'kindState' => 'city'];
 
             $allAmakenId = Amaken::where('cityId', $place->id)->pluck('id')->toArray();
             $allAmaken = Amaken::where('cityId', $place->id)->get();
@@ -218,7 +218,7 @@ class HomeController extends Controller
             $place->listName = $place->name;
             $place->name = 'استان ' . $place->name;
             $articleUrl = \url('/article/list/state/' . $place->listName);
-            $locationName = ["name" => $place->name, 'urlName' => $place->listName, 'articleUrl' => $articleUrl];
+            $locationName = ["name" => $place->name, 'cityName' => $place->listName, 'cityNameUrl' => $place->name, 'articleUrl' => $articleUrl, 'kindState' => 'state'];
 
             $allCities = Cities::where('stateId', $place->id)->pluck('id')->toArray();
 
@@ -259,7 +259,7 @@ class HomeController extends Controller
             $topMahaliFood = $this->getTopPlaces(11, 'state', $place->id);
         }
 
-        $topPlaces = [$topAmaken, $topRestaurant, $topHotel, $topMajra, $topSogatSanaies, $topMahaliFood];
+        $topPlaces = ['amaken' => $topAmaken, 'restaurant' => $topRestaurant, 'hotels' => $topHotel, 'majara' => $topMajra, 'sogatSanaie' => $topSogatSanaies, 'mahaliFood' => $topMahaliFood];
         $allPlaces = [$allAmaken, $allHotels, $allRestaurant, $allMajara];
 
         $take = 15;
@@ -311,7 +311,7 @@ class HomeController extends Controller
             $item->mainFile = $kindPlace->fileName;
             $item->place = DB::table($kindPlace->tableName)->select(['id', 'name', 'cityId', 'file'])->find($item->placeId);
             $item->kindPlace = $kindPlace->name;
-            $item->url = route('placeDetails', ['kindPlaceId' => $kindPlace->id, 'placeId' => $item->placeId]);
+            $item->url = createUrl($kindPlace->id, $item->place->id, 0, 0);
 
             $item->pics = ReviewPic::where('logId', $item->id)->get();
             $item = getReviewPicsURL($item);
@@ -2919,7 +2919,7 @@ class HomeController extends Controller
             $places = DB::table($kindPlace->tableName)->whereIn('id', $placeId)->select(['id', 'cityId','name', 'file', 'picNumber', 'keyword'])->get();
             foreach ($places as $item){
                 $item->pic = URL::asset('_images/' . $kindPlace->fileName .'/' . $item->file . '/l-' . $item->picNumber);
-                $item->url = route('placeDetails', ['kindPlaceId' => $kindPlace->id, 'placeId' => $item->id]);
+                $item->url = createUrl($kindPlace->id, $item->id, 0, 0);
                 $item->rate = getRate($item->id, $kindPlace->id)[1];
                 $item->city = Cities::find($item->cityId);
                 $item->state = State::find($item->city->stateId);

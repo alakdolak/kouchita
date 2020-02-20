@@ -390,7 +390,7 @@ $config = \App\models\ConfigModel::first()
                     </div>
                 </div>
             @elseif(Request::is('placeList/*'))
-                <div ng-app="mainApp" class="mainPopUp leftPopUp PlaceController" ng-controller="PlaceController as cntr" style="padding: 7px">
+                <div ng-app="mainApp" class="mainPopUp leftPopUp PlaceController" style="padding: 7px">
                     <div class="lp_ar_searchTitle">جستجو خود را محدودتر کنید</div>
 
                     <div class="lp_ar_filters">
@@ -398,7 +398,7 @@ $config = \App\models\ConfigModel::first()
                         <div class="lp_ar_eachFilters" onclick="lp_selectArticleFilter('lp_ar_leftFilters' ,this)">نحوه مرتب سازی</div>
                     </div>
                     {{--right menu--}}
-                    <div id="lp_ar_rightFilters" class="lp_ar_contentOfFilters">
+                    <div id="lp_ar_rightFilters" class="lp_ar_contentOfFilters" ng-controller="FilterController">
                         <div id="EATERY_FILTERS_CONT" class="eatery_filters">
                             <div class="prw_rup prw_restaurants_restaurant_filters">
                                 <div id="jfy_filter_bar_establishmentTypeFilters"
@@ -538,29 +538,29 @@ $config = \App\models\ConfigModel::first()
                     <div id="lp_ar_leftFilters" class="lp_ar_contentOfFilters hidden">
                         <div id="FilterTopController">
                             <div class="ordering">
-                                <div class="orders" onclick="selectingOrder($(this),'review')" ng-click="sortFunc('review')" id="pz1">
+                                <div class="orders" onclick="selectingOrder($(this),'review')" id="pz1">
                                     بیشترین نظر
                                 </div>
                             </div>
                             <div class="ordering">
-                                <div class="orders selectOrder" onclick="selectingOrder($(this), 'rate')" ng-click="sortFunc('rate')" id="pz2">
+                                <div class="orders selectOrder" onclick="selectingOrder($(this), 'rate')" id="pz2">
                                     بهترین بازخورد
                                 </div>
                             </div>
                             <div class="ordering">
-                                <div class="orders" onclick="selectingOrder($(this), 'seen')" ng-click="sortFunc('seen')" id="pz3">
+                                <div class="orders" onclick="selectingOrder($(this), 'seen')" id="pz3">
                                     بیشترین بازدید
                                 </div>
                             </div>
                             <div class="ordering">
-                                <div class="orders" ng-click="sortFunc('alphabet')" onclick="selectingOrder($(this), 'alphabet')" id="pz4" >
+                                <div class="orders" onclick="selectingOrder($(this), 'alphabet')" id="pz4" >
                                     حروف الفبا
                                 </div>
                             </div>
                             @if($kindPlace->id != 10 && $kindPlace->id != 11)
-                                <div class="ordering"  >
-                                    <div id="distanceNav" class="orders" onclick="openGlobalSearch()">کمترین فاصله تا
-                                        <span id="selectDistance">__ __ __</span>
+                                <div class="ordering">
+                                    <div id="distanceNavMobile" class="orders" onclick="openGlobalSearch(); selectingOrder($(this), 'distance')">کمترین فاصله تا
+                                        <span id="selectDistanceMobile">__ __ __</span>
                                     </div>
                                 </div>
                             @endif
@@ -864,23 +864,23 @@ $config = \App\models\ConfigModel::first()
                     <div class="pSC_boxOfDetails">
                     <div class="pSC_choiseDetailsText">به سادگی انتخاب کنید</div>
                     <div class="pSC_boxOfCityDetailsText">
-                        <span onclick="window.location.href = '{{url("cityPage/" . $kind . "/" . $locationName["urlName"])}}'">مشاهده صفحه {{$locationName['name']}}</span>
+                        <span onclick="window.location.href = '{{url("cityPage/" . $locationName['kindState'] . "/" . $locationName["cityNameUrl"])}}'">مشاهده صفحه {{$locationName['cityName']}}</span>
                         @if(isset($locationName['state']))
                             <span class="pSC_boxOfCityDetailsText2">در استان {{$locationName['state']}}</span>
                         @endif
                     </div>
                     <div>
                         <div class="pSC_boxOfCityDetails">
-                            <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/1/" . $locationName['urlName'] . "/" . $kind)}}'">جاذبه‌های {{$locationName['name']}}</div>
-                            <div class="pSC_cityDetails pSC_cityDetails_selected" onclick="window.location.href = '{{url("placeList/4/" . $locationName['urlName'] . "/" . $kind)}}'">هتل‌های {{$locationName['name']}}</div>
+                            <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/1/" . $locationName['cityNameUrl'] . "/" . $locationName['kindState'])}}'">جاذبه‌های {{$locationName['cityName']}}</div>
+                            <div class="pSC_cityDetails pSC_cityDetails_selected" onclick="window.location.href = '{{url("placeList/4/" . $locationName['cityNameUrl'] . "/" . $locationName['kindState'])}}'">هتل‌های {{$locationName['cityName']}}</div>
                         </div>
                         <div class="pSC_boxOfCityDetails">
                             <div class="pSC_cityDetails" onclick="window.location.href = '{{$locationName['articleUrl']}}'">مقاله‌های {{$locationName['name']}}</div>
-                            <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/3/" . $locationName['urlName'] . "/" . $kind)}}'">رستوران‌های {{$locationName['name']}}</div>
+                            <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/3/" . $locationName['cityNameUrl'] . "/" . $locationName['kindState'])}}'">رستوران‌های {{$locationName['cityName']}}</div>
                         </div>
                         <div class="pSC_boxOfCityDetails">
-                            <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/10/" . $locationName['urlName'] . "/" . $kind)}}'">صنایع دستی‌های {{$locationName['name']}}</div>
-                            <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/11/" . $locationName['urlName'] . "/" . $kind)}}'">غذای محلی‌های {{$locationName['name']}}</div>
+                            <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/10/" . $locationName['cityNameUrl'] . "/" . $locationName['kindState'])}}'">صنایع دستی‌های {{$locationName['cityName']}}</div>
+                            <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/11/" . $locationName['cityNameUrl'] . "/" . $locationName['kindState'])}}'">غذاهای محلی‌ {{$locationName['cityName']}}</div>
                         </div>
                     </div>
                     <div class="overflowOptimizer"></div>

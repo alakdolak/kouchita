@@ -83,28 +83,9 @@
     @include('layouts.placeHeader')
     <div class=" hotels_lf_redesign ui_container responsive_body">
         <div style="height: 100px;">
-            <div id="searchBoxTopPageMainDiv">
-                <span>شما در</span>
-                <div class="inputBox position-ralative">
-                    <div class="select-side">
-                        <i class="glyphicon glyphicon-triangle-bottom"></i>
-                    </div>
-                    <select class="inputBoxInput styled-select text-align-right mg-lt-10" type="text" placeholder="">
-                        <option>استان اصفهان</option>
-                    </select>
-                </div>
-                <span>در</span>
-                <div class="inputBox position-ralative">
-                    <div class="select-side">
-                        <i class="glyphicon glyphicon-triangle-bottom"></i>
-                    </div>
-                    <select class="inputBoxInput styled-select text-align-right mg-lt-10" type="text" placeholder="">
-                        <option>شهر اصفهان</option>
-                    </select>
-                </div>
-                <span class="mg-lt-15">هستید. تغییر دهید</span>
-                <div id="searchIcon"></div>
-            </div>
+
+            @include('general.headerSearch')
+
             <div class="placeListHeader">
                 <div class="placeListTitle">
                     {{$kindPlace->title}}
@@ -281,36 +262,33 @@
                                                                 اساس:
                                                             </div>
                                                             <div class="ordering">
-                                                                <div class="orders" onclick="selectingOrder($(this),'review')" ng-click="sortFunc('review')" id="z1">
+                                                                <div class="orders" onclick="selectingOrder($(this),'review')" id="z1">
                                                                     بیشترین نظر
                                                                 </div>
                                                             </div>
                                                             <div class="ordering">
-                                                                <div class="orders selectOrder" onclick="selectingOrder($(this), 'rate')" ng-click="sortFunc('rate')" id="z2">
+                                                                <div class="orders selectOrder" onclick="selectingOrder($(this), 'rate')" id="z2">
                                                                     بهترین بازخورد
                                                                 </div>
                                                             </div>
                                                             <div class="ordering">
-                                                                <div class="orders" onclick="selectingOrder($(this), 'seen')" ng-click="sortFunc('seen')" id="z3">
+                                                                <div class="orders" onclick="selectingOrder($(this), 'seen')" id="z3">
                                                                     بیشترین بازدید
                                                                 </div>
                                                             </div>
                                                             <div class="ordering">
-                                                                <div class="orders" ng-click="sortFunc('alphabet')" onclick="selectingOrder($(this), 'alphabet')" id="z4" >
+                                                                <div class="orders" onclick="selectingOrder($(this), 'alphabet')" id="z4" >
                                                                     حروف الفبا
                                                                 </div>
                                                             </div>
                                                             @if($kindPlace->id != 10 && $kindPlace->id != 11)
                                                                 <div class="ordering"  >
-                                                                <div id="distanceNav" class="orders" style="width: 140% !important;" onclick="openGlobalSearch()">کمترین فاصله تا
-                                                                    <span id="selectDistance">__ __ __</span>
+                                                                    <div id="distanceNav" class="orders" style="width: 140% !important;" onclick="openGlobalSearch(); selectingOrder($(this), 'distance')">کمترین فاصله تا
+                                                                        <span id="selectDistance">__ __ __</span>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
                                                             @endif
                                                         </div>
-                                                        <script>
-                                                            var check_num = 0;
-                                                        </script>
                                                         <div  class="option">
                                                             <div class="row" ng-repeat="packet in packets">
                                                                 <div ng-repeat="place in packet.places" class="ui_column col-lg-3 col-xs-6 eachPlace" style="float: right">
@@ -609,8 +587,12 @@
     function selectingOrder(elem, type) {
         $(".orders").removeClass('selectOrder');
         $("#selectDistance").text('__ __ __');
+        $("#selectDistanceMobile").text('__ __ __');
         elem.addClass('selectOrder');
         sort = type;
+
+        if(type != 'distance')
+            newSearch();
     }
 
 
@@ -681,7 +663,6 @@
 
 
         $scope.sortFunc = function(value) {
-            alert('hello')
             sort = value;
             page = 1;
             floor = 1;
@@ -743,7 +724,6 @@
 
                 for (j = 0; j < $scope.packets[page - 1].places.length; j++) {
                     $scope.packets[page - 1].places[j].ngClass = 'ui_bubble_rating bubble_' + $scope.packets[page - 1].places[j].avgRate + '0';
-                    $scope.packets[page - 1].places[j].redirect = '{{route('home')}}/' + placeMode + '-details/' + $scope.packets[page - 1].places[j].id + '/' + $scope.packets[page - 1].places[j].name;
                     if($scope.packets[page - 1].places[j].inTrip == 1)
                         $scope.packets[page - 1].places[j].inTrip = 'red-heart-fill';
                     else
@@ -781,7 +761,6 @@
 
                     for (j = 0; j < $scope.packets[page - 1].places.length; j++) {
                         $scope.packets[page - 1].places[j].ngClass = 'ui_bubble_rating bubble_' + $scope.packets[page - 1].places[j].avgRate + '0';
-                        $scope.packets[page - 1].places[j].redirect = '{{route('home')}}/' + placeMode + '-details/' + $scope.packets[page - 1].places[j].id + '/' + $scope.packets[page - 1].places[j].name;
                         if($scope.packets[page - 1].places[j].inTrip == 1)
                             $scope.packets[page - 1].places[j].inTrip = 'red-heart-fill';
                         else
@@ -818,7 +797,6 @@
                         $scope.packets[page - 1].places = response.data.places;
                         for (j = 0; j < $scope.packets[page - 1].places.length; j++) {
                             $scope.packets[page - 1].places[j].ngClass = 'ui_bubble_rating bubble_' + $scope.packets[page - 1].places[j].avgRate + '0';
-                            $scope.packets[page - 1].places[j].redirect = '{{route('home')}}/' + placeMode + '-details/' + $scope.packets[page - 1].places[j].id + '/' + $scope.packets[page - 1].places[j].name;
                             if($scope.packets[page - 1].places[j].inTrip == 1)
                                 $scope.packets[page - 1].places[j].inTrip = 'red-heart-fill';
                             else
@@ -957,7 +935,6 @@
     function searchInPlaces(element){
         var value = element.value;
         if(value.trim().length > 1){
-            console.log({{$city->id}})
             $.ajax({
                 type: 'post',
                 url: "{{route('proSearch')}}",
@@ -1017,10 +994,10 @@
         nearPlaceIdFilter = id;
         nearKindPlaceIdFilter = kindPlaceId;
         $('#selectDistance').text(name);
+        $('#selectDistanceMobile').text(name);
 
         closeSearchInput();
-        $(".orders").removeClass('selectOrder');
-        $("#distanceNav").addClass('selectOrder');
+
         sort = 'distance';
         newSearch();
     }

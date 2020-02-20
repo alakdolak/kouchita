@@ -1,7 +1,6 @@
 <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/shazdeDesigns/shareBox.css')}}'/>
 
 <div id="share_box">
-
     <a target="_blank" class="link mg-tp-5" {{($config->facebookNoFollow) ? 'rel="nofollow"' : ''}}
     href="https://www.facebook.com/sharer/sharer.php?u={{Request::url()}}">
         <img src="{{URL::asset("images/shareBoxImg/facebook.png")}}" class="display-inline-block float-right">
