@@ -224,7 +224,7 @@
                     </div>
                 </div>
                 <div>
-                    <div id="commentDiv0" class="commentsMainBox display-none" style="display: none; margin: 0px 20px;">
+                    <div id="commentDiv0" class="commentsMainBox display-none" style="display: none;">
                         <div id="commentMainDiv##id##" class="eachCommentMainBox" style="margin-top: 20px;">
                             <div class="circleBase type2 commentsWriterProfilePic">
                                 <img src="##userPic##" style="width: 100%; height: 100%; border-radius: 50%;">

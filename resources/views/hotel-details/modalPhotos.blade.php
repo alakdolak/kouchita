@@ -66,7 +66,7 @@
 {{--</div>--}}
 
 <div class="modal fade showingPhotosModal" id="showingPhotographerPicsModal" role="dialog">
-    <div class="modal-dialog" style="margin-bottom: 0px;">
+    <div class="modal-dialog" style="margin-bottom: 0px; margin-top: 5px">
         <div class="modal-content">
             <div id="showingPhotosMainDivHeader">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -102,7 +102,7 @@
             <div class="display-flex">
                 <div class="col-xs-12 col-sm-9 leftColPhotosModalMainDiv">
                     <div class="selectedPhotoShowingModal">
-                        <img id="mainPhotographerSliderPic" src="{{URL::asset($photographerPics[0]['s'])}}" alt="{{$photographerPics[0]['alt']}}" style="width: 100%; height: 100%;">
+                        <img id="mainPhotographerSliderPic" src="{{URL::asset($photographerPics[0]['s'])}}" alt="{{$photographerPics[0]['alt']}}" style="width: 100%;">
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-3 rightColPhotosModalMainDiv" >

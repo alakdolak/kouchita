@@ -5,7 +5,7 @@ $config = \App\models\ConfigModel::first()
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/icons.css?v=1')}}'/>
 
 {{--footer html--}}
-{{--<div class="clear-both" style="height: 75px"></div>--}}
+<div class="clear-both" style="height: 75px"></div>
 
 <footer>
     <div class="hideOnPhone screenFooterStyle">
@@ -868,7 +868,7 @@ $config = \App\models\ConfigModel::first()
                     <div>
                         <div class="pSC_boxOfCityDetails">
                             <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/1/" . $locationName['cityNameUrl'] . "/" . $locationName['kindState'])}}'">جاذبه‌های {{$locationName['cityName']}}</div>
-                            <div class="pSC_cityDetails pSC_cityDetails_selected" onclick="window.location.href = '{{url("placeList/4/" . $locationName['cityNameUrl'] . "/" . $locationName['kindState'])}}'">هتل‌های {{$locationName['cityName']}}</div>
+                            <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/4/" . $locationName['cityNameUrl'] . "/" . $locationName['kindState'])}}'">هتل‌های {{$locationName['cityName']}}</div>
                         </div>
                         <div class="pSC_boxOfCityDetails">
                             <div class="pSC_cityDetails" onclick="window.location.href = '{{$locationName['articleUrl']}}'">مقاله‌های {{$locationName['name']}}</div>

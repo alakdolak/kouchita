@@ -3751,8 +3751,8 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 }
 
 .mainReviewPic {
-
     /*height: 100%;*/
+    width: 100%;
 }
 
 .topMainReviewPic {
