@@ -320,28 +320,28 @@
 {{--                <li id="PaymentOptions" class="paymentOptions">--}}
 {{--                    <a id="paymentOptionsLinkColor2" href="{{route('soon')}}">پروازها</a>--}}
 {{--                </li>--}}
-                @if($mode == "setting")
-                    <li id="Settings" class="settingColor1 settings">
-                @else
-                    <li id="Settings" class="settingColor2 settings">
-                @endif
-                    تنظیمات
-                    <div class="settingsArrow"></div>
-                    <div class="settingsDropDown" id="settingDropDownMainDiv">
-                        <a href="{{URL('accountInfo')}}">اطلاعات کاربر</a>
-                        <?php
-                            $level = Auth::user()->level;
-                        ?>
+{{--                @if($mode == "setting")--}}
+{{--                    <li id="Settings" class="settingColor1 settings">--}}
+{{--                @else--}}
+{{--                    <li id="Settings" class="settingColor2 settings">--}}
+{{--                @endif--}}
+{{--                    تنظیمات--}}
+{{--                    <div class="settingsArrow"></div>--}}
+{{--                    <div class="settingsDropDown" id="settingDropDownMainDiv">--}}
+{{--                        <a href="{{URL('accountInfo')}}">اطلاعات کاربر</a>--}}
+{{--                        <?php--}}
+{{--                            $level = Auth::user()->level;--}}
+{{--                        ?>--}}
 
-                        @if($level == 1 || $level == 3)
-                            <a title="Control Content" href="{{route('getReports')}}">مدیریت گزارشات</a>
-                        @endif
+{{--                        @if($level == 1 || $level == 3)--}}
+{{--                            <a title="Control Content" href="{{route('getReports')}}">مدیریت گزارشات</a>--}}
+{{--                        @endif--}}
 
-                        @if(Auth::user()->level == 1)
-                            {{--<a title="ages" href="{{route('specialAdvice')}}">پیشنهاد های ویژه</a>--}}
-                        @endif
-                    </div>
-                </li>
+{{--                        @if(Auth::user()->level == 1)--}}
+{{--                            --}}{{--<a title="ages" href="{{route('specialAdvice')}}">پیشنهاد های ویژه</a>--}}
+{{--                        @endif--}}
+{{--                    </div>--}}
+{{--                </li>--}}
             </ul>
         </div>
         <script>

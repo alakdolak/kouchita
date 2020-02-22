@@ -334,7 +334,7 @@ li.error {
 
 .avatarUI .creatingAvatar {
     display: none;
-    width: 585px;
+    width: auto;
     text-align: center;
 }
 
@@ -369,15 +369,23 @@ li.error {
 }
 
 .avatarUI .uploadAvatarOptions .avatarOption {
-    width: 240px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: auto;
+    height: auto;
     border: 1px solid #EDEDED;
     border-radius: 4px;
-    height: 220px;
     cursor: pointer;
     color: #4a4a4a;
-    margin: 10px 15px 0 15px;
-    padding: 178px 35px 0 35px;
+    margin: 0 15px;
+    padding: 10px 30px;
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .25);
+}
+
+.avatarUI .uploadAvatarOptions .avatarOption img {
+    margin-bottom: 15px;
+    width: 124px;
 }
 
 .avatarUI .uploadAvatarOptions .avatarOption:hover {
@@ -386,11 +394,11 @@ li.error {
 }
 
 .avatarUI .uploadAvatarOptions .avatarOption.optionList {
-    background: url('../../images/sp.png') no-repeat center 4px;
+    /*background: url('../../images/sp.png') no-repeat center 4px;*/
 }
 
 .avatarUI .uploadAvatarOptions .avatarOption.optionUpload {
-    background: url('../../images/cp.png') no-repeat center 20px;
+    /*background: url('../../images/cp.png') no-repeat center 20px;*/
 }
 
 .avatarUI .uploadAvatarOptions .avatarOption.optionWebcam {
@@ -398,11 +406,11 @@ li.error {
 }
 
 .avatarUI .currentAvatar {
-    width: 140px;
+    width: 130px;
     border-left: 1px solid #EBEBEB;
     height: 100%;
     margin: 0 16px 0 23px;
-    padding: 0 10px;
+    padding: 25px 10px 0;
 }
 
 .avatarUI .currentAvatar .description {
@@ -411,20 +419,23 @@ li.error {
 }
 
 .avatarUI .currentAvatar .circularAvWrap, .avatarUI .uploadAvatarPopup .avatarPreview .circularAvWrap {
-    margin: 20px auto;
+    margin: 0 auto;
 }
 
 .avatarUI .uploadAvatarPopup .actionsSide {
     float: left;
+    width: 70%;
 }
 
 .avatarUI .uploadAvatarPopup .avatarPreview {
     float: right;
-    width: 140px;
+    width: 25%;
     height: 100%;
     border-left: 1px solid #EBEBEB;
-    margin: 0 16px;
-    padding: 0 28px 0 58px;
+    margin: 0 0 0 5%;
+    padding: 0;
+    display: flex;
+    justify-content: center;
 }
 
 .avatarUI .uploadAvatarPopup {
@@ -1142,7 +1153,7 @@ li.error {
 
 .modules-membercenter-account-info .mc-grid .row {
     zoom: 1;
-    width: 955px;
+    width: 100%;
     margin: 0 auto;
 }
 
@@ -1153,11 +1164,17 @@ li.error {
     margin: 0 -15px;
 }
 
+.account_info_form {
+    display: flex;
+    justify-content: center;
+}
+
 .modules-membercenter-account-info .mc-grid .col {
     float: right;
     min-height: 1px;
     padding: 0;
     position: relative;
+    margin-left: 10px;
 }
 
 .modules-membercenter-account-info .mc-grid .col.four {
@@ -1251,10 +1268,6 @@ li.error {
 
 /*1st box of Style*/
 
-.account_info_form .row {
-    padding-right: 30px;
-}
-
 #result {
     max-width: 200px;
     max-height: 400px;
@@ -1301,17 +1314,16 @@ li.error {
 #introduceYourSelfTextBox {
     border-radius: 6px;
     padding: 7px;
-    height: 83px;
+    height: 90px;
     border: 1px solid #c8c8c8;
+    resize: none;
+    width: 300px;
 }
 
-#age {
-    width: 20%;
+#age, #gender {
+    width: 100%;
     border-radius: 6px;
-}
-
-#gender {
-    width: 30%;
+    padding: 10px;
 }
 
 #deleteProfile {
@@ -1360,50 +1372,84 @@ li.error {
     padding: 5px
 }
 
-
-
-/*public definitions*/
-
-.color-darkred {
-    color: #963019
+#ACCOUNT_INFO input {
+    margin-right: 0;
 }
 
-.height-550 {
-    height: 550px;
-}
-
-.mg-tp-10 {
-    margin-top: 10px;
-}
-
-.mg-tp-20 {
-    margin-top: 20px;
-}
-
-.pd-tp-35 {
-    padding-top: 35px;
-}
-
-.pd-rt-12 {
-    padding-right: 12px;
-}
-
-.pd-tp-20 {
-    margin-top: 20px;
-}
-
-.font-size-10 {
-    font-size: 10px;
-}
-
-.display-none {
-    display: none;
-}
-
-.display-block {
+.personalDescription {
     display: block;
+    margin-bottom: 4px;
+    line-height: 24px;
+    color: #7a7a7a;
+    font-weight: bold;
+    font-size: 110%;
+    margin-top: 0;
 }
 
-.cursor-pointer {
-    cursor: pointer;
+.footerOptimizer {
+    width: 100%;
+    height: 40px;
+}
+
+.mainDivAccountField {
+    width: 540px;
+}
+
+.mainDivAccountField .closeAccount {
+    text-decoration: none;
+}
+
+@media (max-width: 661px) {
+
+    #BODYCON.editPhotoMainDiv .avatarUI {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .avatarUI .currentAvatar {
+        margin-bottom: 30px;
+    }
+
+    .avatarUI .uploadAvatarOptions .avatarOption {
+        width: 48%;
+        margin: 0 1%;
+        height: 208px;
+    }
+
+    .avatarUI .uploadAvatarPopup .uploadAvatarPopupInner {
+        padding: 10px;
+    }
+}
+
+@media (max-width: 550px) {
+
+    .mainDivAccountField {
+        width: 300px;
+    }
+
+    .accountInfoMainDiv h1.heading.wrap, #mainProfileHeadingEditPhoto {
+        font-size: 25px !important;
+        font-weight: 500 !important;
+    }
+
+    .avatarUI .uploadAvatarPopup .uploadAvatarPopupInner {
+        padding: 5px;
+    }
+}
+
+@media (max-width: 420px) {
+
+    .avatarUI .uploadAvatarOptions .avatarOption {
+        height: auto;
+    }
+
+    .avatarUI .uploadAvatarOptions .avatarOption img {
+        width: 100px;
+    }
+
+    .avatarUI .circularAvWrap {
+        height: 65px;
+        width: 65px;
+    }
 }
