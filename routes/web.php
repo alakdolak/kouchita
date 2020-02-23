@@ -5,6 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Route;
 
 Route::get('databaseforall', function (){
+//    ALTER TABLE `adminlog` ADD `date` VARCHAR(20) NULL AFTER `updated_at`;
 
 });
 

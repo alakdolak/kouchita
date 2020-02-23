@@ -1,11 +1,12 @@
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-109915445-1"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-158914626-1"></script>
 <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
-    gtag('config', 'UA-109915445-1');
+    gtag('config', 'UA-158914626-1');
 </script>
 
 <link rel="icon" href="{{URL::asset('images/fav.png')}}" type="image/png"/>
