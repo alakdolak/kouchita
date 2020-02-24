@@ -58,7 +58,7 @@ use Illuminate\Http\Request;
 class PlaceController extends Controller {
 
     public function showPlaceDetails($kindPlaceName, $slug){
-        deleteReviewPic();
+        deleteReviewPic();  // common.php
 
         $kindPlace = Place::where('fileName', $kindPlaceName)->first();
         if($kindPlace == null)
@@ -83,7 +83,7 @@ class PlaceController extends Controller {
         }
         $uPic = getUserPic(); // common.php
 
-        saveViewPerPage($kindPlaceId, $place->id);
+        saveViewPerPage($kindPlaceId, $place->id); // common.php
 
         $bookMark = false;
         $condition = ['visitorId' => $uId, 'activityId' => Activity::whereName("نشانه گذاری")->first()->id,
@@ -91,7 +91,7 @@ class PlaceController extends Controller {
         if (LogModel::where($condition)->count() > 0)
             $bookMark = true;
 
-        $rates = getRate($place->id, $kindPlaceId);
+        $rates = getRate($place->id, $kindPlaceId); // common.php
 
         $save = false;
         $count = DB::select("select count(*) as tripPlaceNum from trip, tripPlace WHERE tripPlace.placeId = " . $place->id . " and tripPlace.kindPlaceId = " . $kindPlaceId . " and tripPlace.tripId = trip.id and trip.uId = " . $uId);
@@ -119,7 +119,7 @@ class PlaceController extends Controller {
 
         $allState = State::all();
 
-        $pics = getAllPlacePicsByKind($kindPlaceId, $place->id);
+        $pics = getAllPlacePicsByKind($kindPlaceId, $place->id); // common.php
         $sitePics = $pics[0];
         $sitePicsJSON = $pics[1];
         $photographerPics = $pics[2];
@@ -127,7 +127,7 @@ class PlaceController extends Controller {
         $userPhotos = $pics[4];
         $userPhotosJson = $pics[5];
 
-        $result = commonInPlaceDetails($kindPlaceId, $place->id, $city, $state, $place);
+        $result = commonInPlaceDetails($kindPlaceId, $place->id, $city, $state, $place);  // common.php
         $reviewCount = $result[0];
         $ansReviewCount = $result[1];
         $userReviewCount = $result[2];
@@ -3174,7 +3174,7 @@ class PlaceController extends Controller {
         if(Auth::check())
             $user = Auth::user();
         else {
-            echo 'nok1';
+            echo json_encode(['nok1']);
             return;
         }
 
@@ -3190,27 +3190,46 @@ class PlaceController extends Controller {
                         $log->like = 1;
                         $photo->like++;
                     }
-                    else {
+                    else if($request->like == -1){
                         $log->like = -1;
                         $photo->dislike++;
                     }
 
                     $log->userId = $user->id;
                     $log->picId = $photo->id;
-                    $log->save();
 
+                    $log->save();
                     $photo->save();
 
-                    echo 'ok';
+                    echo json_encode(['ok', $photo->like, $photo->dislike]);
                 }
-                else
-                    echo 'nok2';
+                else{
+
+                    if($userStatus->like == 1)
+                        $photo->like--;
+                    else if($userStatus->like == -1)
+                        $photo->dislike--;
+
+                    if($request->like == 1){
+                        $userStatus->like = 1;
+                        $photo->like++;
+                    }
+                    else if($request->like == -1){
+                        $userStatus->like = -1;
+                        $photo->dislike++;
+                    }
+
+                    $userStatus->save();
+                    $photo->save();
+
+                    echo json_encode(['ok', $photo->like, $photo->dislike]);
+                }
             }
             else
-                echo 'nok3';
+                echo json_encode(['nok3']);
         }
         else
-            echo 'nok4';
+            echo json_encode(['nok4']);
         return;
 
     }

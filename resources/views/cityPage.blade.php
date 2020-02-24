@@ -97,8 +97,8 @@
                         </div>
                         <div class="commentPhotosShow">
                             @if(count($item->pics) > 0)
-                            <div class="photosCol col-xs-12">
-                                <div data-toggle="modal" data-target=".showingPhotosModal" style="position: relative; overflow: hidden; display: flex; justify-content: center; align-items: center;">
+                            <div class="photosCol col-xs-12" onclick="showReviewPics({{$item->id}})">
+                                <div style="position: relative; overflow: hidden; display: flex; justify-content: center; align-items: center;">
                                     <img src="{{$item->pics[0]->picUrl}}" style="position: absolute;">
                                 </div>
                                 @if(count($item->pics) > 1)
@@ -122,6 +122,7 @@
                 @endforeach
             </div>
         </div>
+
         <div id="cpBorderLeft" class="col-lg-9 cpBorderLeft">
 
             <div class="row cpMainBox">
@@ -689,6 +690,38 @@
 <script defer src="{{URL::asset('js/cityPage/cityPageOffer.js')}}"></script>
 
 <script>
+    var reviews = {!! json_encode($reviews) !!};
+
+    function showReviewPics(_id){
+        var selectReview = 0;
+        var reviewPicForAlbum = [];
+
+        for(i = 0; i < reviews.length; i++){
+            if(reviews[i]['id'] == _id){
+                selectReview = reviews[i];
+                break;
+            }
+        }
+
+        if(selectReview != 0){
+            revPic = selectReview['pics'];
+            for(var i = 0; i < revPic.length; i++){
+                reviewPicForAlbum[i] = {
+                    'id' : revPic[i]['id'],
+                    'sidePic' : revPic[i]['picUrl'],
+                    'mainPic' : revPic[i]['picUrl'],
+                    'video' : revPic[i]['videoUrl'],
+                    'userPic' : selectReview['userPic'],
+                    'userName' : selectReview['user']['username'],
+                    'uploadTime' : selectReview['timeAgo'],
+                    'showInfo' : false,
+                }
+            }
+
+            createPhotoModal('عکس های پست', reviewPicForAlbum);
+        }
+    }
+
     function showMoreText(element){
         $(element).parent().addClass('display-none');
         $(element).parent().next().removeClass('display-none');
@@ -755,7 +788,6 @@
     var markersNat = [];
     var majaraMap = [];
     var map2;
-
 
     function init() {
         var x = '{{$map["C"]}}';
@@ -958,7 +990,6 @@
 </script>
 
 <script src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyCdVEd4L2687AfirfAnUY1yXkx-7IsCER0&callback=init"></script>
-
 <script>
     var swiper = new Swiper('.cpMainSug', {
         slidesPerGroup: 1,

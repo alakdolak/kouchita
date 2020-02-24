@@ -642,32 +642,9 @@ function getAllPlacePicsByKind($kindPlaceId, $placeId){
     if(auth()->check())
         $user = auth()->user();
 
-    switch ($kindPlaceId){
-        case 1:
-            $MainFile = 'amaken';
-            $place = \App\models\Amaken::find($placeId);
-            break;
-        case 3:
-            $MainFile = 'restaurant';
-            $place = \App\models\Restaurant::find($placeId);
-            break;
-        case 4:
-            $MainFile = 'hotels';
-            $place = \App\models\Hotel::find($placeId);
-            break;
-        case 6:
-            $MainFile = 'majara';
-            $place = \App\models\Majara::find($placeId);
-            break;
-        case 10:
-            $MainFile = 'sogatsanaie';
-            $place = \App\models\SogatSanaie::find($placeId);
-            break;
-        case 11:
-            $MainFile = 'mahalifood';
-            $place = \App\models\MahaliFood::find($placeId);
-            break;
-    }
+    $kindPlace = Place::find($kindPlaceId);
+    $MainFile = $kindPlace->fileName;
+    $place = DB::table($kindPlace->tableName)->find($placeId);
 
     $place->pics = PlacePic::where('kindPlaceId', $kindPlaceId)->where('placeId', $place->id)->get();
 
@@ -732,9 +709,14 @@ function getAllPlacePicsByKind($kindPlaceId, $placeId){
 
     $photographerPics = array();
     if(\auth()->check())
-        $photographerPic = DB::select('SELECT * FROM photographersPics WHERE kindPlaceId = ' . $kindPlaceId . ' AND placeId  = ' . $placeId . ' AND ((userId = ' . $user->id . ') OR ( status = 1)) ORDER BY created_at');
+        $photographerPic = DB::select('SELECT photo.*, photoLog.like AS userLike FROM photographersPics AS photo LEFT JOIN photographersLogs AS photoLog ON photo.kindPlaceId = ' . $kindPlaceId . ' AND photo.placeId  = ' . $placeId . ' AND ((photo.userId = ' . $user->id . ') OR ( photo.status = 1)) AND photoLog.picId = photo.id AND photoLog.userId = ' . $user->id . ' ORDER BY created_at');
     else
         $photographerPic = DB::select('SELECT * FROM photographersPics WHERE kindPlaceId = ' . $kindPlaceId . ' AND placeId  = ' . $placeId . ' AND status = 1 ORDER BY created_at');
+
+    foreach ($photographerPic as $item){
+        if(!isset($item->userLike) || $item->userLike == null)
+            $item->userLike = 0;
+    }
 
     if(count($photographerPic) < 5)
         $photographerPics = $sitePics;
@@ -775,7 +757,8 @@ function getAllPlacePicsByKind($kindPlaceId, $placeId){
                 'like' => $item->like,
                 'dislike' => $item->dislike,
                 'description' => $item->description,
-                'fromUpload' => $diffTime];
+                'fromUpload' => $diffTime,
+                'userLike' => $item->userLike];
 
             array_unshift($photographerPics, $s);
         }

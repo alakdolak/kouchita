@@ -1,3 +1,9 @@
+.mainAlbumPic{
+    width: auto;
+    height: 100%;
+    position: absolute;
+    transition: 0.2s;
+}
 .showingPhotosTitle {
     background-color: #0076a3;
     color: white;
@@ -8,10 +14,11 @@
 }
 
 .showingPhotosModal .commentWriterDetailsShow {
-    padding: 10px 20px;
-    margin: 0 1%;
-    width: 98%;
-    border-bottom: 2px solid #e5e5e5;
+    padding: 5px 20px;
+    margin: 0%;
+    width: 100%;
+    border-bottom: 2px solid #3c4043;
+    background-color: #303134;
 }
 
 .commentWriterDetailsShow , .answersWriterDetailsShow {
@@ -42,14 +49,20 @@
 .modal-content .postMainDivHeader , .modal-content .showingPhotosTitle {
     text-align: right;
 }
-
+.feedBackBtn{
+    margin-bottom: 8px;
+}
 .photosFeedBackBtn {
     float: left;
     display: flex;
     width: 24%;
     margin-top: 10px;
     flex-direction: column;
-    max-width: 210px;
+    /*max-width: 210px;*/
+}
+.chooseSidePhotoAlbum{
+    border: #0076a3 solid 3px;
+    border-radius: 0px !important;
 }
 
 .showingPhotosModal .commentWriterExperienceDetails , .answersWriterExperienceDetails {
@@ -123,25 +136,26 @@
     display: inline-block;
     margin: 5px 0;
     padding: 0 10px;
-    border-left: 2px solid #e5e5e5;
+    border-left: 2px solid #3c4043;
     /*max-height: 70vh;*/
     overflow: auto;
     height: auto;
 }
 
 .rightColPhotosShowingModal {
-    /*height: 70px;*/
+    transition: 0.25s;
     margin-bottom: 5px;
     width: 48%;
-    /*display: flex !important;*/
-    /*justify-content: center;*/
-    /*align-items: center;*/
-    /*overflow: hidden;*/
-    position: relative;
-    display: inline-block;
     cursor: pointer;
     float: right;
     margin-left: 2%;
+    position:relative;
+    height: 115px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 35px;
 }
 
 .leftColPhotosModalMainDiv {
@@ -161,7 +175,7 @@
     display: inline-block;
     margin: 0 1%;
     width: 98%;
-    border-top: 2px solid #e5e5e5;
+    border-top: 2px solid #3c4043;
     padding: 10px 0 20px;
     color: #666666;
     text-align: right;

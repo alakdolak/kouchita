@@ -66,27 +66,7 @@ class HomeController extends Controller
         if($place == null)
             return \redirect(\url('/'));
 
-
-        switch ($kindPlaceId){
-            case 1:
-                return \redirect(route('amakenDetails', ['placeId' => $place->id, 'placeName' => $place->name]));
-                break;
-            case 3:
-                return \redirect(route('restaurantDetails', ['placeId' => $place->id, 'placeName' => $place->name]));
-                break;
-            case 4:
-                return \redirect(route('hotelDetails', ['placeId' => $place->id, 'placeName' => $place->name]));
-                break;
-            case 6:
-                return \redirect(route('majaraDetails', ['placeId' => $place->id, 'placeName' => $place->name]));
-                break;
-            case 10:
-                return \redirect(route('sanaiesogatDetails', ['placeId' => $place->id, 'placeName' => $place->name]));
-                break;
-            case 11:
-                return \redirect(route('mahaliFoodDetails', ['placeId' => $place->id, 'placeName' => $place->name]));
-                break;
-        }
+        return \redirect(url('show-place-details/' . $kindPlace->fileName . '/' . $place->id));
     }
 
     public function middleBannerImages(Request $request)
@@ -153,7 +133,6 @@ class HomeController extends Controller
 
         return;
     }
-
 
     public function cityPage($kind, $city) {
 
@@ -306,7 +285,6 @@ class HomeController extends Controller
             else
                 $item->userPic = URL::asset('userProfile/' . $item->user->picture);
 
-
             $kindPlace = Place::find($item->kindPlaceId);
             $item->mainFile = $kindPlace->fileName;
             $item->place = DB::table($kindPlace->tableName)->select(['id', 'name', 'cityId', 'file'])->find($item->placeId);
@@ -328,6 +306,7 @@ class HomeController extends Controller
                 $item->summery = mb_substr($item->text, 0, 80, 'utf-8');
 
         }
+//        dd($reviews);
 
         $count = 0;
         $C = 0;

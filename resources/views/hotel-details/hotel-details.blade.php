@@ -487,8 +487,6 @@ if ($total == 0)
                     </div>
                 </div>
 
-                @include('hotel-details.modalPhotos')
-
                 <div id="bestPrice" class="meta position-relative"
                      style="@if(session('goDate') != null && session('backDate') != null) display: none @endif ">
                     <div id="targetHelp_9" class="targets  float-left">
@@ -774,10 +772,7 @@ if ($total == 0)
                                 <div class="prw_rup prw_common_mercury_photo_carousel">
                                     <div class="carousel bignav">
                                         <div class="carousel_images carousel_images_header">
-                                            <div id="photographerAlbum" data-toggle="modal"
-                                                 data-target="#showingPhotographerPicsModal"
-                                                 onclick="changePhotographerSlidePic(0)">
-
+                                            <div id="photographerAlbum" onclick="showPhotoAlbum('photographer')">
                                                 <div id="mainSlider" class="swiper-container">
                                                     <div class="swiper-wrapper">
 
@@ -788,13 +783,10 @@ if ($total == 0)
                                                                      alt="{{$photographerPics[$i]['alt']}}"
                                                                      style="width: 100%;">
 
-                                                                <div class="see_all_count_wrap" onclick="getPhotos(-1)">
+                                                                <div class="see_all_count_wrap">
                                                                     <span class="see_all_count">
-                                                                        <div class="circleBase type2"
-                                                                             id="photographerIdPic"
-                                                                             style="background-color: #4DC7BC;">
-                                                                            <img src="{{$photographerPics[$i]['userPic']}}"
-                                                                                 style="width: 100%; height: 100%; border-radius: 50%;">
+                                                                        <div class="circleBase type2" id="photographerIdPic" style="background-color: #4DC7BC;">
+                                                                            <img src="{{$photographerPics[$i]['userPic']}}" style="width: 100%; height: 100%; border-radius: 50%;">
                                                                         </div>
                                                                         <div class="display-inline-block mg-rt-10 mg-tp-2">
                                                                             <span class="display-block font-size-12">عکس از</span>
@@ -841,8 +833,7 @@ if ($total == 0)
                                         <div class="albumThumbnail">
                                             <div class="prw_rup prw_common_centered_image">
                                                 @if(count($sitePics) != 0)
-                                                    <span class="imgWrap imgWrap1stTemp" data-toggle="modal"
-                                                          data-target="#showingSitePicsModal">
+                                                    <span class="imgWrap imgWrap1stTemp" onclick="showPhotoAlbum('sitePics')">
                                                         <img alt="{{$place->alt1}}" src="{{$thumbnail}}"
                                                              class="centeredImg" width="100%"/>
                                                     </span>
@@ -869,14 +860,14 @@ if ($total == 0)
                                     <div class="prw_rup prw_hotels_flexible_album_thumb tile">
                                         <div class="albumThumbnail">
                                             <div class="prw_rup prw_common_centered_image"
-                                                    {{(count($userPhotos) != 0) ? ' data-toggle=modal data-target=#showingUserPicsModal' : "" }}>
+                                                    {{(count($userPhotos) != 0) ? 'onclick=showPhotoAlbum("userPics")' : "" }}>
                                                 <span class="imgWrap imgWrap1stTemp">
                                                     @if(count($userPhotos) != 0)
                                                         <img src="{{$userPhotos[0]->pic}}" class="centeredImg" width="100%"/>
                                                     @endif
                                                 </span>
                                             </div>
-                                            <div {{(count($userPhotos) != 0) ? ' data-toggle=modal data-target=#showingUserPicsModal' : "" }}  class="albumInfo">
+                                            <div {{(count($userPhotos) != 0) ? 'onclick=showPhotoAlbum("userPics")' : "" }}  class="albumInfo">
                                                 <span class="ui_icon camera">&nbsp;</span>عکس‌های
                                                 کاربران - {{count($userPhotos)}}
                                             </div>
@@ -2075,6 +2066,66 @@ if ($total == 0)
     </script>
 
     <script>
+        var photographerPicsForAlbum = [];
+        var sitePicsForAlbum = [];
+        var userPhotosForAlbum = [];
+
+        for(var i = 0; i < photographerPics.length; i++){
+            photographerPicsForAlbum[i] = {
+                'id' : photographerPics[i]['id'],
+                'sidePic' : photographerPics[i]['l'],
+                'mainPic' : photographerPics[i]['s'],
+                'userPic' : photographerPics[i]['userPic'],
+                'userName' : photographerPics[i]['name'],
+                'like' : photographerPics[i]['like'],
+                'dislike' : photographerPics[i]['dislike'],
+                'alt' : photographerPics[i]['alt'],
+                'description' : photographerPics[i]['description'],
+                'uploadTime' : photographerPics[i]['fromUpload'],
+                'showInfo' : photographerPics[i]['showInfo'],
+                'likeFunc' : 'likePhotographerPic',
+                'disLikeFunc' : 'likePhotographerPic',
+                'userLike' : photographerPics[i]['userLike'],
+            }
+        }
+
+        for(var i = 0; i < sitePics.length; i++){
+            sitePicsForAlbum[i] = {
+                'id' : sitePics[i]['id'],
+                'sidePic' : sitePics[i]['l'],
+                'mainPic' : sitePics[i]['s'],
+                'userPic' : sitePics[i]['userPic'],
+                'userName' : sitePics[i]['name'],
+                'like' : sitePics[i]['like'],
+                'dislike' : sitePics[i]['dislike'],
+                'alt' : sitePics[i]['alt'],
+                'description' : sitePics[i]['description'],
+                'uploadTime' : sitePics[i]['fromUpload'],
+                'showInfo' : sitePics[i]['showInfo'],
+                'userLike' : sitePics[i]['userLike'],
+            }
+        }
+
+        for(var i = 0; i < userPhotos.length; i++){
+            userPhotosForAlbum[i] = {
+                'id' : userPhotos[i]['id'],
+                'sidePic' : userPhotos[i]['pic'],
+                'mainPic' : userPhotos[i]['pic'],
+                'userPic' : userPhotos[i]['userPic'],
+                'userName' : userPhotos[i]['username'],
+                'showInfo' : false,
+            }
+        }
+
+        function showPhotoAlbum(_kind){
+            if(_kind == 'photographer')
+                createPhotoModal('عکس های عکاسان', photographerPicsForAlbum);
+            else if(_kind == 'sitePics')
+                createPhotoModal('عکس های سایت', sitePicsForAlbum);
+            else if(_kind == 'userPics')
+                createPhotoModal('عکس های کاربران', userPhotosForAlbum);
+        }
+
         function openTab(tabName, elmnt, fontColor) {
             var i, tabcontent, tablinks;
             tabcontent = document.getElementsByClassName("tabContentMainWrap");
@@ -2111,7 +2162,7 @@ if ($total == 0)
     <script>
         $(document).ready(function () {
             $('.login-button').click(function () {
-                var url = Request::url();
+                var url = '{{Request::url()}}';
                 $(".dark").show();
                 showLoginPrompt(url);
             });

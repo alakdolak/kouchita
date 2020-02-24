@@ -422,7 +422,7 @@
             for(j = 0; j < reviews[i]["comment"].length; j++){
 
                 if(j > 0 && checkAllReviews){
-                    text += '<div id="allReviews_' + reviews[i]["id"] + '" style="display: none; width: 100%;">';
+                    text += '<div id="allReviews_' + reviews[i]["id"] + '" style=" width: 100%;">';
                     checkAllReviews = false;
                 }
                 text +='                             <div class="eachCommentMainBox">\n' +
@@ -647,46 +647,22 @@
     }
 
     function showReviewPics(_index){
-        $('#showingReviewPicsModal').modal('show');
+        var reviewPicForAlbum = [];
+        revPic = allReviews[_index]['pics'];
 
-        var photo = allReviews[_index]['pics'];
-
-        document.getElementById('showingReviewPhotosUserPic').src = allReviews[_index]['userPic'];
-        document.getElementById('showingReviewPhotosUserName').innerText = allReviews[_index]['usernameReviewWriter'];
-
-
-        if(photo[0] && photo[0]['isVideo'] == 0)
-            document.getElementById('showingReviewPhotosMainPic').innerHTML = '<img src="' + photo[0]['url'] + '" style="max-width: 100%; max-height: 100%;">\n';
-        else{
-            document.getElementById('showingReviewPhotosMainPic').innerHTML = '<video controls style="width: 100%; height: 100%;">\n' +
-                '  <source src="' + photo[0]['videoUrl'] + '">\n' +
-                '  Your browser does not support the video tag.\n' +
-                '</video>';
-        }
-        var text = '';
-
-        for(var i = 0; i < photo.length; i++) {
-            text += '<div class="rightColPhotosShowingModal" onclick="changeReviewSlidePic(' + _index + ', ' + i + ')">\n' +
-                '<img src="' + photo[i]['url'] + '" class="mainReviewPic" >\n' +
-                '</div>';
-
+        for(var i = 0; i < revPic.length; i++){
+            reviewPicForAlbum[i] = {
+                'id' : revPic[i]['id'],
+                'sidePic' : revPic[i]['url'],
+                'mainPic' : revPic[i]['url'],
+                'video' : revPic[i]['videoUrl'],
+                'userPic' : allReviews[_index]['userPic'],
+                'userName' : allReviews[_index]['usernameReviewWriter'],
+                'showInfo' : false,
+            }
         }
 
-        document.getElementById('showingReviewPhotosRightCol').innerHTML = text;
-
-    }
-
-    function changeReviewSlidePic(_mainIndex, _picIndex){
-        var pic = allReviews[_mainIndex]['pics'][_picIndex];
-
-        if(pic['isVideo'] == 0)
-            document.getElementById('showingReviewPhotosMainPic').innerHTML = '<img src="' + pic['url'] + '" style="max-width: 100%; max-height: 100%;">\n';
-        else
-            document.getElementById('showingReviewPhotosMainPic').innerHTML = '<video controls style="width: 100%; height: 100%;">\n' +
-                '  <source src="' + pic['videoUrl'] + '">\n' +
-                '  Your browser does not support the video tag.\n' +
-                '</video>';
-
+        createPhotoModal('عکس های پست', reviewPicForAlbum);
     }
 
     function showAllReviews(_id){
