@@ -71,7 +71,7 @@
 
 </head>
 
-<body class="rebrand_2017 desktop HomeRebranded  js_logging" ng-app="mainApp">
+<body class="rebrand_2017 desktop HomeRebranded  js_logging" ng-app="mainApp" style="background-color: #EAFBFF;">
 
     @include('general.forAllPages')
 

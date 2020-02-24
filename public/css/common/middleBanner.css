@@ -113,7 +113,7 @@ DIV.prw_rup.prw_shelves_shelf_widget .shelf_container.rebrand .shelf_header .she
 
 DIV.prw_rup.prw_shelves_shelf_widget .shelf_container.rebrand .shelf_header .shelf_title .ui_icon.travelers-choice-badge {
     margin-top: 0;
-    color: #fadba0;
+    color: #eab836;
 }
 
 DIV.prw_rup.prw_shelves_rebrand_poi_shelf_item_widget .thumbnail {
@@ -133,7 +133,7 @@ DIV.prw_rup.prw_shelves_rebrand_poi_shelf_item_widget .thumbnail {
 
 DIV.prw_rup.prw_shelves_shelf_widget .shelf_container.rebrand .shelf_header .shelf_title .shelf_title_container {
     margin: 0 5px;
-    color: #fadba0;
+    color: #eab836;
 }
 
 .shelf_item_container.ui_columns.is-mobile.is-multiline {
@@ -144,7 +144,7 @@ DIV.prw_rup.prw_shelves_shelf_widget .shelf_container.rebrand .shelf_header .she
 #restaurantSuggestion, #tarikhiSuggestion, #kharidSuggestion, #articleSuggestion {
     margin: 40px 0;
     padding: 20px 20px;
-    background: #4a4a4a;
+    background: #053a3e;
 }
 
 .poi_by_tag .ui_columns.is-multiline {

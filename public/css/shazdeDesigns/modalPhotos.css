@@ -77,7 +77,7 @@
     cursor: pointer;
 }
 
-.likeBoxIcon::after {
+.likeBoxIcon::before {
     content: '\E1F9';
     font-family: Shazde_Regular2 !important;
     font-size: 20px;
@@ -85,7 +85,7 @@
     top: -7px;
 }
 
-.likeBoxIconClicked::after {
+.likeBoxIconClicked::before {
     content: '\E057';
     font-family: Shazde_Regular2 !important;
     font-size: 20px;
@@ -102,7 +102,7 @@
     text-align: center;
 }
 
-.dislikeBoxIcon::after {
+.dislikeBoxIcon::before {
     content: '\E1F8';
     font-family: Shazde_Regular2 !important;
     font-size: 20px;
@@ -110,7 +110,7 @@
     top: -4px;
 }
 
-.dislikeBoxIconClicked::after {
+.dislikeBoxIconClicked::before {
     content: '\E058';
     font-family: Shazde_Regular2 !important;
     font-size: 20px;
@@ -131,15 +131,26 @@
     text-align: center;
     direction: rtl;
 }
-
+.userInfoPhotoAlbum{
+    margin-bottom: 15px;
+    height: auto;
+    border-bottom: solid #3c4043;
+    width: 101%;
+    height: 75px;
+    background: #303134;
+    padding-top: 9px;
+    padding-right: 11px;
+}
 .rightColPhotosModalMainDiv {
     display: inline-block;
-    margin: 5px 0;
-    padding: 0 10px;
     border-left: 2px solid #3c4043;
-    /*max-height: 70vh;*/
     overflow: auto;
     height: auto;
+    min-height: 70vh;
+    margin: 0;
+    background-color: #141518;
+    padding: 0;
+    overflow-x: hidden;
 }
 
 .rightColPhotosShowingModal {
@@ -155,7 +166,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 35px;
+    border-radius: 15px;
 }
 
 .leftColPhotosModalMainDiv {
@@ -173,13 +184,14 @@
 
 .photosDescriptionShowingModal {
     display: inline-block;
-    margin: 0 1%;
-    width: 98%;
     border-top: 2px solid #3c4043;
-    padding: 10px 0 20px;
     color: #666666;
     text-align: right;
     direction: rtl;
+    background-color: #303134;
+    margin: 0;
+    width: 100%;
+    padding: 0px 20px;
 }
 
 #showingPhotosModal .modal-content {
@@ -205,7 +217,8 @@
 }
 
 .modal-open .modal {
-    backdrop-filter: blur(2px);
+    /*backdrop-filter: blur(2px);*/
+    background-color: #000000c7;
 }
 
 @media (max-width:1188px) and (min-width: 992px) {
