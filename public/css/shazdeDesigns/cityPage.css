@@ -116,7 +116,7 @@
 }
 
 .cpMapCategory {
-    width: 50px;
+    width: 9%;
     cursor: pointer;
 }
 
@@ -496,13 +496,12 @@
         padding: 15px !important;
     }
     .cpMapList {
-        justify-content: flex-start;
+        justify-content: space-around;
         overflow: auto;
     }
     .cpMapCategory {
-        margin: 0px 2px;
+        width: 10%;
     }
-
     .image_wrapper {
         height: 200px;
     }
@@ -513,5 +512,15 @@
 
     .content-2col .im-entry {
         min-height: 45px !important;
+    }
+}
+
+@media (max-width:540px) {
+    .cpMapCategory {
+        width: 50px;
+        margin: 0px 2px;
+    }
+    .cpMapList {
+        justify-content: flex-start;
     }
 }

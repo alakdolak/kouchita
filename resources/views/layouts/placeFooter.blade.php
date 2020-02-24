@@ -354,12 +354,12 @@ $config = \App\models\ConfigModel::first()
                                     <ul class="popular_by_views_list">
                                         @foreach($mostSeenPost as $post)
                                             <li class="im-widget clearfix">
-                                                <figure class="im-widget-thumb">
+                                                <figure class="im-widget-thumb im-widget-thumb_rightSide">
                                                     <a  href="{{route('article.show', ['slug' => $post->slug])}}" title="{{$post->title}}">
                                                         <img src="{{$post->pic}}" alt="{{$post->keyword}}"/>
                                                     </a>
                                                 </figure>
-                                                <div class="im-widget-entry">
+                                                <div class="im-widget-entry im-widget-entry_rightSide">
                                                     <header class="im-widget-entry-header">
                                                         <h4 class='im-widget-entry-title'>
                                                             <a  href="{{route('article.show', ['slug' => $post->slug])}}" title="{{$post->title}}">
