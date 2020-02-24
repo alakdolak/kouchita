@@ -22,6 +22,11 @@
         ol, ul{
             padding: 15px;
         }
+        @media (max-width: 768px){
+            .gnWhiteBox {
+                margin: 0 -15px;
+            }
+        }
     </style>
     <script src="{{URL::asset('js/autosize.min.js')}}"></script>
 
@@ -30,7 +35,7 @@
 @section('body')
 
     <div class="container" style="direction: rtl">
-        <div class="col-md-3 col-sm-12 hideOnPhone" style="padding-right: 0 !important;">
+        <div class="col-lg-3 col-sm-3 hideOnPhone" style="padding-right: 0 !important;">
             <a href="{{route('mainArticle')}}">
                 <div class="col-md-12 gnReturnBackBtn">بازگشت به صفحه اصلی</div>
             </a>
@@ -82,8 +87,8 @@
 
             <div class="col-md-12 gnWhiteBox">
                 <div class="gnInput">
-                    <input type="text" class="gnInputonInput" id="pcSearchInput" placeholder="عبارت مورد نظر خود را">
-                    <button class="gnSearchInputBtn" type="submit" onclick="searchInArticle('pcSearchInput')">جستجو کنید</button>
+                    <input type="text" class="gnInputonInput" id="pcSearchInput" placeholder="عبارت جستجو">
+                    <span class="ui_icon search gnSearchInputBtn" onclick="searchInArticle('pcSearchInput')"></span>
                 </div>
             </div>
 
@@ -91,7 +96,7 @@
                 @foreach($similarPost as $item)
                     <div class="content-2col">
                         <div class="im-entry-thumb" style="background-image: url('{{$item->pic}}'); background-size: 100% 100%;">
-                            <div class="im-entry-header">
+                            <div class="im-entry-header im-entry-header_rightSide">
                                 <div class="im-entry-category">
                                     <div class="iranomag-meta clearfix">
                                         <div class="cat-links im-meta-item">
@@ -100,7 +105,7 @@
                                     </div>
                                 </div>
                                 <a href="{{$item->url}}" rel="bookmark">
-                                    <h1 class="im-entry-title" style="color: white;">
+                                    <h1 class="im-entry-title im-entry-title_rightSide">
                                         {{$item->title}}
                                     </h1>
                                 </a>
@@ -135,7 +140,7 @@
                 @endforeach
             </div>
         </div>
-        <div class="col-md-9 col-sm-12 gnWhiteBox">
+        <div class="col-lg-9 col-sm-9 gnWhiteBox">
             <div class="gnMainPicOfArticle">
                 <img class="gnAdvertiseImage" src="{{URL::asset($post->pic)}}" alt="{{$post->keyword}}">
                 <div class="gnMainPicOfArticleText">
@@ -166,10 +171,20 @@
                     </h1>
                 </div>
             </div>
-            <div style="padding: 15px">
+            <div>
                 <div>
                     <div style="margin-top: 65px">
                         {!! $post->description !!}
+                    </div>
+                    <div>
+                        <div class="col-md-12 col-sm-12 gnUserDescription">
+                            <div class="gnLabels" style="line-height: 30px !important;">برچسب ها</div>
+                            <div>
+                                @foreach($post->tag as $tag)
+                                    <div class="gnTags">{{$tag->tag}}</div>
+                                @endforeach
+                            </div>
+                        </div>
                     </div>
                     <div class="commentFeedbackChoices">
                         <div id="likeDiv" class="postsActionsChoices postLikeChoice col-xs-6 col-md-3" onclick="likePost(1, {{$post->id}})" style="color: {{$postLike == 1 ? 'red': ''}}">
@@ -198,28 +213,16 @@
                         نفر نظر دادند.
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-9 col-sm-12">
-                        <div class="col-md-12 col-sm-12 gnUserDescription">
-                            <div>
-                                <div class="circleBase type2 newCommentWriterProfilePic">
-                                    <img src="{{$post->user->pic}}" style="width: 100%; height: 100%; border-radius: 50%;">
-                                </div>
-                                <div class="gnLabels">{{$post->user->username}}</div>
+                <div>
+                    <div class="col-md-12 col-sm-12 gnUserDescription">
+                        <div>
+                            <div class="circleBase type2 newCommentWriterProfilePic">
+                                <img src="{{$post->user->pic}}" style="width: 100%; height: 100%; border-radius: 50%;">
                             </div>
-                            <div>
-                                لورم ایپسون
-                            </div>
+                            <div class="gnLabels">{{$post->user->username}}</div>
                         </div>
-                    </div>
-                    <div class="col-md-3 col-sm-12" style="padding-right: 0;">
-                        <div class="col-md-12 col-sm-12 gnUserDescription">
-                            <div class="gnLabels">برچسب ها</div>
-                            <div>
-                                @foreach($post->tag as $tag)
-                                    <div>{{$tag->tag}}</div>
-                                @endforeach
-                            </div>
+                        <div>
+                            لورم ایپسون
                         </div>
                     </div>
                 </div>
@@ -232,7 +235,7 @@
                             <div class="commentsContentMainBox">
                                 <b class="userProfileName display-inline-block">##username##</b>
                                 <span class="label label-success" style="display: ##status1##;">در انتظار تایید</span>
-                                <p style="white-space: pre-line">##msg##</p>
+                                <div>##msg##</div>
                                 <div class="commentsStatisticsBar">
                                     <div class="float-right display-inline-black">
                                         <span id="commentLikeCount##id##" class="likeStatisticIcon commentsStatisticSpan color-red">##likeCount##</span>
@@ -240,10 +243,11 @@
                                         <span class="numberOfCommentsIcon commentsStatisticSpan color-blue">##ans##</span>
                                     </div>
                                     <div class="dark-blue float-left display-inline-black cursor-pointer" onclick="showPostsComments(##id##)" style="display: ##haveAnsDisplay##;">دیدن پاسخ‌ها</div>
+                                    <b class="replyBtn hideOnScreen" onclick="replyToComments(this)">پاسخ دهید</b>
                                     {{--                                <div class="dark-blue float-left display-inline-black cursor-pointer" onclick="showPostsComments(##id##)">دیدن پاسخ‌ها</div>--}}
                                 </div>
                             </div>
-                            <div class="commentsActionsBtns" style="display: ##status2##;">
+                            <div class="commentsActionsBtns hideOnPhone" style="display: ##status2##;">
                                 <div onclick="likeComment(##id##, 1, this);">
                                     <span class="likeActionBtn ##showLike##"></span>
                                 </div>

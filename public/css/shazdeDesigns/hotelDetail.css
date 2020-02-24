@@ -4197,7 +4197,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 767px) {
 
     #helpBtnMainDiv {
         top: -105px;
@@ -4335,6 +4335,14 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
         display: flex !important;
         width: 100%;
         height: 75px;
+    }
+
+    .commentsContentMainBox {
+        width: 85%;
+    }
+
+    .replyBtn {
+        float: left;
     }
 }
 

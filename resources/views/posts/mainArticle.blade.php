@@ -69,7 +69,7 @@
     </div>
 
     <div class="container" style="direction: rtl">
-        <div class="col-md-3 col-sm-12 hideOnPhone" style="padding-right: 0 !important;">
+        <div class="col-lg-3 col-sm-3 hideOnPhone" style="padding-right: 0 !important;">
             <div class="col-md-12 gnWhiteBox">
                 <div class="widget-head widget-head-44">
                     <strong class="widget-title">دسته‌بندی مطالب</strong>
@@ -115,8 +115,8 @@
             </div>
             <div class="col-md-12 gnWhiteBox">
                 <div class="gnInput">
-                    <input type="text" class="gnInputonInput" id="pcSearchInput" placeholder="عبارت مورد نظر خود را">
-                    <button class="gnSearchInputBtn" type="submit" onclick="searchInArticle('pcSearchInput')">جستجو کنید</button>
+                    <input type="text" class="gnInputonInput" id="pcSearchInput" placeholder="عبارت جستجو">
+                    <span class="ui_icon search gnSearchInputBtn" onclick="searchInArticle('pcSearchInput')"></span>
                 </div>
             </div>
             <div class="col-md-12 gnWhiteBox gnAdvertise">
@@ -126,7 +126,8 @@
                 </div>
             </div>
             <div class="widget widget_impv_display_widget col-md-12 gnWhiteBox">
-                <div class="widget-head"><strong class="widget-title">
+                <div class="widget-head widget-head-554">
+                    <strong class="widget-title">
                         پربازدیدترین ها
                     </strong>
                     <div class="widget-head-bar"></div>
@@ -136,12 +137,12 @@
                     <ul class='popular_by_views_list'>
                         @foreach($mostSeenPost as $post)
                             <li class="im-widget clearfix">
-                                <figure class="im-widget-thumb">
+                                <figure class="im-widget-thumb im-widget-thumb_rightSide">
                                     <a  href="{{route('article.show', ['slug' => $post->slug])}}" title="{{$post->title}}">
                                         <img src="{{$post->pic}}" alt="{{$post->keyword}}"/>
                                     </a>
                                 </figure>
-                                <div class="im-widget-entry">
+                                <div class="im-widget-entry im-widget-entry_rightSide">
                                     <header class="im-widget-entry-header">
                                         <h4 class='im-widget-entry-title'>
                                             <a  href="{{route('article.show', ['slug' => $post->slug])}}" title="{{$post->title}}">
@@ -169,8 +170,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-9 col-sm-12" style="padding-left: 0 !important;">
-            <div class="col-md-12 gnWhiteBox gnAdvertise">
+        <div class="col-lg-9 col-sm-9" style="padding-left: 0 !important;">
+            <div class="col-md-12 col-sm-12 gnWhiteBox gnAdvertise">
                 <div class="gnAdvertiseText">تبلیغات</div>
                 <div>
                     <img class="gnAdvertiseImage" src="{{URL::asset('images/adv1.jpg')}}" alt="">
@@ -178,7 +179,7 @@
             </div>
 
             @if($relatedPost)
-                <div class="category-element-holder style1 col-md-12 gnWhiteBox">
+                <div class="category-element-holder style1 col-md-12 col-sm-12 gnWhiteBox">
                     <div class="widget-head widget-head-45">
                         <strong class="widget-title">مطالب مرتبط با ...</strong>
                         <div class="widget-head-bar"></div>
@@ -274,7 +275,7 @@
                 </div>
             @endif
 
-            <div class="category-element-holder style1 col-md-12 gnWhiteBox">
+            <div class="category-element-holder style1 col-md-12 col-sm-12 gnWhiteBox">
                 <div class="widget-head widget-head-45">
                     <strong class="widget-title">پرطرفدار ها</strong>
                     <div class="widget-head-bar"></div>
@@ -367,7 +368,7 @@
                 </div>
             </div>
 
-            <div class="col-md-12 gnWhiteBox" style="padding: 0 !important;">
+            <div class="col-md-12 col-sm-12 gnWhiteBox" style="padding: 0;">
                 <div class="col-md-6 col-sm-12">
                     <div class="category-element-holder style2">
                         <div class="widget-head widget-head-46">
@@ -596,7 +597,7 @@
                 </div>
             </div>
 
-            <div class="col-md-12 gnWhiteBox">
+            <div class="col-md-12 col-sm-12 gnWhiteBox">
                 <div class="widget-head light">
                     <strong class="widget-title">همه مطالب</strong>
                     <div class="widget-head-bar"></div>
@@ -608,12 +609,10 @@
                         <div class="small-12 columns">
                             <article class="im-article content-column clearfix post type-post status-publish format-standard has-post-thumbnail hentry">
                                 <div class="im-entry-thumb col-md-5 col-sm-12">
-                                    <a style="width: 303px !important;"
-                                       class="im-entry-thumb-link"
+                                    <a class="im-entry-thumb-link"
                                        href="##url##"
                                        title="##title##">
-                                        <img style="width: 303px !important; height: 189px !important;"
-                                             data-src="##pic##"
+                                        <img data-src="##pic##"
                                              src="##pic##"
                                              alt="##keyword##"/>
                                     </a>
