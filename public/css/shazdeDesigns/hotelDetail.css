@@ -4344,6 +4344,11 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     .replyBtn {
         float: left;
     }
+
+    .replyToCommentMainDiv {
+        width: 99%;
+        margin: 40px 0 15px;
+    }
 }
 
 @media only screen and (max-width: 630px) {
