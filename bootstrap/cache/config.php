@@ -149,6 +149,7 @@
       27 => 'GrahamCampbell\\Throttle\\ThrottleServiceProvider',
       28 => 'Laravel\\Passport\\PassportServiceProvider',
       29 => 'Barryvdh\\Cors\\ServiceProvider',
+      30 => 'Hekmatinasser\\Verta\\VertaServiceProvider',
     ),
     'aliases' => 
     array (
@@ -186,6 +187,7 @@
       'Validator' => 'Illuminate\\Support\\Facades\\Validator',
       'View' => 'Illuminate\\Support\\Facades\\View',
       'Throttle' => 'GrahamCampbell\\Throttle\\Facades\\Throttle',
+      'Verta' => 'Hekmatinasser\\Verta\\Verta',
     ),
   ),
   'cache' => 
@@ -250,15 +252,15 @@
       'sqlite' => 
       array (
         'driver' => 'sqlite',
-        'database' => 'dev',
+        'database' => 'koochita',
         'prefix' => '',
       ),
       'mysql' => 
       array (
         'driver' => 'mysql',
-        'host' => '127.0.0.1',
+        'host' => 'localhost',
         'port' => '3306',
-        'database' => 'dev',
+        'database' => 'koochita',
         'username' => 'koochita',
         'password' => '!!KoOchita1982!@!',
         'unix_socket' => '',
@@ -271,9 +273,9 @@
       'pgsql' => 
       array (
         'driver' => 'pgsql',
-        'host' => '127.0.0.1',
+        'host' => 'localhost',
         'port' => '3306',
-        'database' => 'dev',
+        'database' => 'koochita',
         'username' => 'koochita',
         'password' => '!!KoOchita1982!@!',
         'charset' => 'utf8',
@@ -284,9 +286,9 @@
       'sqlsrv' => 
       array (
         'driver' => 'sqlsrv',
-        'host' => '127.0.0.1',
+        'host' => 'localhost',
         'port' => '3306',
-        'database' => 'dev',
+        'database' => 'koochita',
         'username' => 'koochita',
         'password' => '!!KoOchita1982!@!',
         'charset' => 'utf8',
@@ -424,7 +426,7 @@
         'provider' => 'users',
       ),
     ),
-    'providers' =>
+    'providers' => 
     array (
       'users' => 
       array (
