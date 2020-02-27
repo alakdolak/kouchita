@@ -25,7 +25,9 @@ if ($total == 0)
     <meta name="twitter:card" content="{{$place->meta}}" />
     <meta name="twitter:description" content="{{$place->meta}}" />
     <meta name="twitter:title" content="{{$place->name}} | {{$city->name}} | کوچیتا" />
-    <META NAME="geo.position" CONTENT="{{$place->C}}; {{$place->D}}">
+    @if(isset($place->C) && isset($place->D))
+        <META NAME="geo.position" CONTENT="{{$place->C}}; {{$place->D}}">
+    @endif
 
     <meta property="article:section" content="{{$placeMode}}" />
     {{--<meta property="article:published_time" content="2019-05-28T13:32:55+00:00" /> زمان انتشار--}}
@@ -224,7 +226,7 @@ if ($total == 0)
                                                       placeholder="{{auth()->user()->first_name ? auth()->user()->first_name :auth()->user()->username }}، چه فکر یا احساسی داری.....؟"
                                                        style="overflow:hidden"></textarea>
                                         @endif
-                                        <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
+                                        <img class="commentSmileyIcon" src="{{URL::asset("images/smile.png")}}">
                                     </div>
                                     <div class="clear-both"></div>
                                     <div class="row">
@@ -842,7 +844,7 @@ if ($total == 0)
                                             <div class="prw_rup prw_common_centered_image">
                                                 @if(count($sitePics) != 0)
                                                     <span class="imgWrap imgWrap1stTemp" onclick="showPhotoAlbum('sitePics')">
-                                                        <img alt="{{$place->alt1}}" src="{{$thumbnail}}"
+                                                        <img alt="{{$place->alt}}" src="{{$thumbnail}}"
                                                              class="centeredImg" width="100%"/>
                                                     </span>
                                                 @else
@@ -1353,8 +1355,13 @@ if ($total == 0)
                                                          id="clientConnectionsLines">
                                                         <div class="blEntry address mg-bt-10" id="clientConnectionsAddress">
                                                             <span class="ui_icon map-pin"></span>
-                                                            <span class="street-address">آدرس : </span>
-                                                            <span>{{$place->address}}</span>
+                                                            @if($placeMode != 'mahaliFood' && $placeMode != 'sogatSanaies' && $placeMode != 'majara')
+                                                                <span class="street-address">آدرس : </span>
+                                                                <span>{{$place->address}}</span>
+                                                            @elseif( $placeMode == 'majara')
+                                                                <span class="street-address">آدرس : </span>
+                                                                <span>{{$place->dastresi}}</span>
+                                                            @endif
                                                         </div>
                                                         @if(!empty($place->phone))
                                                             <div class="blEntry phone mg-bt-10" id="clientConnectionsPhone">
@@ -1742,7 +1749,7 @@ if ($total == 0)
                             @include('hotel-details.filterSection')
 
                             <center id="advertiseDiv" class="col-xs-12 adsMainDiv">
-                                @include('features.advertise3D')
+{{--                                @include('features.advertise3D')--}}
                             </center>
                         </div>
 

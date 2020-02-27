@@ -607,22 +607,24 @@ class AjaxController extends Controller {
         for($i = 0; $i < 6; $i++){
             $kindPlace = Place::find($kindPlaceId[$i]);
             $place = DB::table($kindPlace->tableName)->latest('id')->select(['name', 'id', 'file', 'picNumber', 'alt', 'cityId'])->first();
-            $file = $kindPlace->fileName;
-            $url = createUrl($kindPlace->id, $place->id, 0, 0);
+            if($place != null) {
+                $file = $kindPlace->fileName;
+                $url = createUrl($kindPlace->id, $place->id, 0, 0);
 
-            if(file_exists((__DIR__ . '/../../../../assets/_images/' . $file . '/' . $place->file . '/f-' . $place->picNumber)))
-                $place->placePic = URL::asset('_images/' . $file . '/' . $place->file . '/f-' . $place->picNumber);
-            else
-                $place->placePic = URL::asset("_images/nopic/blank.jpg");
-            $place->url = $url;
-            $city = Cities::whereId($place->cityId);
-            $place->placeCity = $city->name;
-            $place->placeState = State::whereId($city->stateId)->name;
-            $place->placeRate = getRate($place->id, $kindPlaceId[$i])[1];
-            $place->placeReviews = DB::select('select count(*) as countNum from log, comment WHERE logId = log.id and status = 1 and placeId = ' . $place->id .
-                ' and kindPlaceId = ' . $kindPlaceId[$i] . ' and activityId = ' . $activityId)[0]->countNum;
+                if (file_exists((__DIR__ . '/../../../../assets/_images/' . $file . '/' . $place->file . '/f-' . $place->picNumber)))
+                    $place->placePic = URL::asset('_images/' . $file . '/' . $place->file . '/f-' . $place->picNumber);
+                else
+                    $place->placePic = URL::asset("_images/nopic/blank.jpg");
+                $place->url = $url;
+                $city = Cities::whereId($place->cityId);
+                $place->placeCity = $city->name;
+                $place->placeState = State::whereId($city->stateId)->name;
+                $place->placeRate = getRate($place->id, $kindPlaceId[$i])[1];
+                $place->placeReviews = DB::select('select count(*) as countNum from log, comment WHERE logId = log.id and status = 1 and placeId = ' . $place->id .
+                    ' and kindPlaceId = ' . $kindPlaceId[$i] . ' and activityId = ' . $activityId)[0]->countNum;
 
-            array_push($result, $place);
+                array_push($result, $place);
+            }
         }
 
         $suggest = MainSuggestion::all();

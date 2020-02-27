@@ -65,8 +65,11 @@ class PlaceController extends Controller {
             return \redirect(\url('/'));
         $kindPlaceId = $kindPlace->id;
 
-//        $place = DB::table($kindPlace->tableName)->where('slug', $slug);
-        $place = DB::table($kindPlace->tableName)->find($slug);
+        if(is_numeric($slug))
+            $place = DB::table($kindPlace->tableName)->find((int)$slug);
+        else
+            $place = DB::table($kindPlace->tableName)->where('slug', $slug)->first();
+
         if($place == null)
             return \redirect(\url('/'));
 
@@ -142,7 +145,7 @@ class PlaceController extends Controller {
         $inPage = 'place_' . $kindPlaceId . '_' . $place->id;
         session(['inPage' => $inPage]);
 
-        $features = PlaceFeatures::where('kindPlaceId', 4)->where('parent', 0)->get();
+        $features = PlaceFeatures::where('kindPlaceId', $kindPlace->id)->where('parent', 0)->get();
         $featId = array();
         foreach ($features as $item) {
             $item->subFeat = PlaceFeatures::where('parent', $item->id)->get();
@@ -150,6 +153,9 @@ class PlaceController extends Controller {
             $featId = array_merge($featId, $fId);
         }
         $place->features = PlaceFeatureRelation::where('placeId', $place->id)->whereIn('featureId', $featId)->pluck('featureId')->toArray();
+
+        if($kindPlace->tableName == 'sogatSanaies')
+            $place = $this->sogatSanaieDet($place);
 
         $video = '';
         if(isset($place->video))
@@ -177,6 +183,118 @@ class PlaceController extends Controller {
             'placeStyles' => PlaceStyle::whereKindPlaceId($kindPlaceId)->get(),
             'placeMode' => $kindPlace->tableName, 'rooms' => $rooms, 'jsonRoom' => $jsonRoom, 'video' => $video,
             'sections' => SectionPage::wherePage(getValueInfo('hotel-detail'))->get()));
+    }
+
+    private function sogatSanaieDet($place){
+
+        switch ($place->style){
+            case 1:
+                $place->style = 'سنتی';
+                break;
+            case 2:
+                $place->style = 'مدرن';
+                break;
+            case 3:
+                $place->style = 'تلفیقی';
+                break;
+        }
+
+        if($place->fragile == 1)
+            $place->fragile = 'شکستنی';
+        else
+            $place->fragile = 'غیر شکستنی';
+
+        switch ($place->size){
+            case 1:
+                $place->size = 'کوچک';
+                break;
+            case 2:
+                $place->size = 'متوسط';
+                break;
+            case 3:
+                $place->size = 'بزرگ';
+                break;
+        }
+        switch ($place->price){
+            case 1:
+                $place->price = 'ارزان';
+                break;
+            case 2:
+                $place->price = 'متوسط';
+                break;
+            case 3:
+                $place->price = 'گران';
+                break;
+        }
+        switch ($place->weight){
+            case 1:
+                $place->weight = 'سبک';
+                break;
+            case 2:
+                $place->weight = 'متوسط';
+                break;
+            case 3:
+                $place->weight = 'متوسط';
+                break;
+        }
+
+        $place->kind = '';
+        if($place->jewelry == 1)
+            $place->kind .= 'زیورآلات';
+        if($place->cloth == 1){
+            if($place->kind != '')
+                $place->kind .= ' , ';
+
+            $place->kind .= 'پارچه و پوشیدنی';
+        }
+        if($place->applied == 1){
+            if($place->kind != '')
+                $place->kind .= ' , ';
+
+            $place->kind .= 'لوازم کاربردی منزل';
+        }
+        if($place->decorative == 1){
+            if($place->kind != '')
+                $place->kind .= ' , ';
+
+            $place->kind .= 'لوازم تزئینی';
+        }
+
+        $place->taste = '';
+        if($place->torsh == 1)
+            $place->taste .= 'ترش';
+        if($place->shirin == 1){
+            if($place->taste != '')
+                $place->taste .= ' , ';
+
+            $place->taste .= 'شیرین';
+        }
+        if($place->talkh == 1){
+            if($place->taste != '')
+                $place->taste .= ' , ';
+
+            $place->taste .= 'تلخ';
+        }
+        if($place->malas == 1){
+            if($place->taste != '')
+                $place->taste .= ' , ';
+
+            $place->taste .= 'ملس';
+        }
+        if($place->shor == 1){
+            if($place->taste != '')
+                $place->taste .= ' , ';
+
+            $place->taste .= 'شور';
+        }
+        if($place->tond == 1){
+            if($place->taste != '')
+                $place->taste .= ' , ';
+
+            $place->taste .= 'تند';
+        }
+
+        return $place;
     }
 
     private function getNearbies($C, $D, $count)
