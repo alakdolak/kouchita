@@ -3,13 +3,28 @@
 @section('head')
     <link rel="stylesheet" href="{{URL::asset('css/easyimage.css')}}">
 
-
     <title> {{$post->seoTitle}} </title>
+    <meta content="article" property="og:type"/>
+
+    <meta name="keywords" content="{{$post->keyword}}">
     <meta property="og:title" content=" {{$post->seoTitle}} " />
-    <meta name="twitter:title" content=" {{$post->seoTitle}} " />
-    <meta name="description" content=" {{$post->meta}}"/>
     <meta property="og:description" content=" {{$post->meta}}" />
+    <meta name="twitter:title" content=" {{$post->seoTitle}} " />
     <meta name="twitter:description" content=" {{$post->meta}}" />
+    <meta name="description" content=" {{$post->meta}}"/>
+    <meta property="article:author " content="{{$post->user->username}}" />
+    <meta property="article:section" content="article" />
+    {{--<meta property="article:published_time" content="2019-05-28T13:32:55+00:00" /> زمان انتشار--}}
+    {{--<meta property="article:modified_time" content="2020-01-14T10:43:11+00:00" />زمان آخریت تغییر--}}
+    {{--<meta property="og:updated_time" content="2020-01-14T10:43:11+00:00" /> زمان آخرین آپدیت--}}
+
+    @if(isset($post->pic))
+        <meta property="og:image" content="{{URL::asset($post->pic)}}"/>
+        <meta property="og:image:secure_url" content="{{URL::asset($post->pic)}}"/>
+        <meta property="og:image:width" content="550"/>
+        <meta property="og:image:height" content="367"/>
+        <meta name="twitter:image" content="{{URL::asset($post->pic)}}"/>
+    @endif
 
     @foreach($post->tag as $item)
         <meta property="article:tag" content="{{$item->tag}}"/>

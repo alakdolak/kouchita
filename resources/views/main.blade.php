@@ -5,15 +5,31 @@
     @include('layouts.topHeader')
 
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/home_rebranded.css?v=4')}}"/>
-    <title>صفحه اصلی</title>
+    {{--<meta name="description" content="متن توضیحات متا"/>--}}
+    {{--<meta name="keywords" content="کیورد 1, کیورد دو, کی ورد سه">--}}
+    <meta property="og:locale" content="fa_IR" />
+    {{--<meta property="og:locale:alternate" content="fa_IR" />--}}
+    <meta property="og:type" content="website" />
+    <title> کوچیتا، سامانه جامع گردشگری ایران </title>
+    <meta name="title" content="کوچیتا | سامانه جامع گردشگری ایران و شبکه اجتماعی گردشگران" />
+    <meta name='description' content='کوچیتا، سامانه جامع گردشگری ایران و شبکه اجتماعی گردشگران. اطلاعات اماکن و جاذبه ها، هتل ها، بوم گردی، ماجراجویی، آموزش سفر، فروشگاه صنایع دستی ، پادکست سفر' />
+    <meta name='keywords' content='کوچیتا، هتل، تور ، سفر ارزان، سفر در ایران، بلیط، تریپ، نقد و بررسی، سفرنامه، کمپینگ، ایران گردی، آموزش سفر، مجله گردشگری، مسافرت، مسافرت داخلی, ارزانترین قیمت هتل ، مقایسه قیمت ، بهترین رستوران ها ، بلیط ارزان ، تقویم تعطیلات' />
+    <meta property="og:image" content="{{URL::asset('_images/nopic/blank.jpg')}}"/>
+    <meta property="og:image:secure_url" content="{{URL::asset('_images/nopic/blank.jpg')}}"/>
+    <meta property="og:image:width" content="550"/>
+    <meta property="og:image:height" content="367"/>
+    <meta name="twitter:image" content="{{URL::asset('_images/nopic/blank.jpg')}}"/>
+
 
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/long_lived_global_legacy_2.css?v=2')}}"/>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/masthead-saves.css?v=2')}}'/>
-    <link rel='stylesheet' type='text/css' media='screen, print'
-          href='{{URL::asset('css/theme2/hr_north_star.css?v=2')}}'/>
+    <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/hr_north_star.css?v=2')}}'/>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/icons.css?v=1')}}'/>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/mainPageStyles.css')}}'/>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/abbreviations.css?v=1')}}'/>
+
+    <script src="{{URL::asset('js/main/middleBanner.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.9.7/TweenMax.min.js"></script>
 
     <style>
         .mainBannerSlider {
@@ -95,16 +111,25 @@
                                 <!-- Swiper -->
                                 <div id="mainSlider" class="swiper-container">
                                     <div class="swiper-wrapper">
-                                        @foreach($sliderPic as $item)
-                                            <div class="swiper-slide mobileHeight" style="position: relative">
-                                                <img class="eachPicOfSlider" src="{{URL::asset('_images/sliderPic/' . $item->pic)}}" alt="{{$item->alt}}">
-                                                @if($item->text != null && $item->text != '')
-                                                    <div class="textInSlide" style="background-color: {{$item->textBackground}}; color: {{$item->textColor}};">
-                                                        {{$item->text}}
-                                                    </div>
-                                                @endif
+                                        {{--@foreach($sliderPic as $item)--}}
+                                            {{--<div class="swiper-slide mobileHeight" style="position: relative">--}}
+                                                {{--<img class="eachPicOfSlider" src="{{URL::asset('_images/sliderPic/' . $item->pic)}}" alt="{{$item->alt}}">--}}
+                                                {{--@if($item->text != null && $item->text != '')--}}
+                                                    {{--<div class="textInSlide" style="background-color: {{$item->textBackground}}; color: {{$item->textColor}};">--}}
+                                                        {{--{{$item->text}}--}}
+                                                    {{--</div>--}}
+                                                {{--@endif--}}
+                                            {{--</div>--}}
+                                        {{--@endforeach--}}
+
+
+                                        <div class="swiper-slide mobileHeight" style="position: relative; background-color: #d8a7b1">
+                                            <img src="{{URL::asset('images/icons/p1.png')}}" style="height: 100%; position: absolute; left: 0px;">
+                                            <div class="textInSlide">
+                                                hello world
                                             </div>
-                                        @endforeach
+                                        </div>
+
                                     </div>
                                     <!-- Add Pagination -->
                                     <div class="swiper-pagination"></div>
@@ -130,9 +155,238 @@
                                             <div onclick="$('#searchPane').removeClass('hidden');  $('#darkModeMainPage').toggle(); $('#placeName').focus();">کدام غذای محلی را می‌خواهید تجربه کنید؟</div>
                                         @endif
                                     </div>
+
+                                    {{--<div id="container" style="width: 40%;">--}}
+                                        {{--<div id="message">--}}
+                                            {{--<a id="animate" href="#">Transmit</a>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--<script>--}}
+                                        {{--var $animate, $container, $message, $paragraph, MESSAGES, animate, initialise, scramble;--}}
+
+                                        {{--MESSAGES = [];--}}
+
+                                        {{--MESSAGES.push({--}}
+                                            {{--delay: 0,--}}
+                                            {{--text: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت"--}}
+                                        {{--});--}}
+
+                                        {{--MESSAGES.push({--}}
+                                            {{--delay: 1200,--}}
+                                            {{--text: " و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که"--}}
+                                        {{--});--}}
+
+                                        {{--MESSAGES.push({--}}
+                                            {{--delay: 2200,--}}
+                                            {{--text: " و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که"--}}
+                                        {{--});--}}
+
+                                        {{--MESSAGES.push({--}}
+                                            {{--delay: 3600,--}}
+                                            {{--text: " و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که"--}}
+                                        {{--});--}}
+
+                                        {{--MESSAGES.push({--}}
+                                            {{--delay: 5200,--}}
+                                            {{--text: " و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که"--}}
+                                        {{--});--}}
+
+                                        {{--$container = $("#container");--}}
+
+                                        {{--$message = $("#message");--}}
+
+                                        {{--$animate = $("#animate");--}}
+
+                                        {{--$paragraph = null;--}}
+
+                                        {{--scramble = function(element, text, options) {--}}
+                                            {{--var $element, addGlitch, character, defaults, ghostCharacter, ghostCharacters, ghostLength, ghostText, ghosts, glitchCharacter, glitchCharacters, glitchIndex, glitchLength, glitchProbability, glitchText, glitches, i, j, k, letter, object, order, output, parameters, ref, results, settings, shuffle, target, textCharacters, textLength, wrap;--}}
+                                            {{--defaults = {--}}
+                                                {{--probability: 0.2,--}}
+                                                {{--glitches: '-|/\\',--}}
+                                                {{--blank: '',--}}
+                                                {{--duration: text.length * 40,--}}
+                                                {{--ease: 'easeInOutQuad',--}}
+                                                {{--delay: 0.0--}}
+                                            {{--};--}}
+                                            {{--$element = $(element);--}}
+                                            {{--settings = $.extend(defaults, options);--}}
+                                            {{--shuffle = function() {--}}
+                                                {{--if (Math.random() < 0.5) {--}}
+                                                    {{--return 1;--}}
+                                                {{--} else {--}}
+                                                    {{--return -1;--}}
+                                                {{--}--}}
+                                            {{--};--}}
+                                            {{--wrap = function(text, classes) {--}}
+                                                {{--return "<span class=\"" + classes + "\">" + text + "</span>";--}}
+                                            {{--};--}}
+                                            {{--glitchText = settings.glitches;--}}
+                                            {{--glitchCharacters = glitchText.split('');--}}
+                                            {{--glitchLength = glitchCharacters.length;--}}
+                                            {{--glitchProbability = settings.probability;--}}
+                                            {{--glitches = (function() {--}}
+                                                {{--var j, len, results;--}}
+                                                {{--results = [];--}}
+                                                {{--for (j = 0, len = glitchCharacters.length; j < len; j++) {--}}
+                                                    {{--letter = glitchCharacters[j];--}}
+                                                    {{--results.push(wrap(letter, 'glitch'));--}}
+                                                {{--}--}}
+                                                {{--return results;--}}
+                                            {{--})();--}}
+                                            {{--ghostText = $element.text();--}}
+                                            {{--ghostCharacters = ghostText.split('');--}}
+                                            {{--ghostLength = ghostCharacters.length;--}}
+                                            {{--ghosts = (function() {--}}
+                                                {{--var j, len, results;--}}
+                                                {{--results = [];--}}
+                                                {{--for (j = 0, len = ghostCharacters.length; j < len; j++) {--}}
+                                                    {{--letter = ghostCharacters[j];--}}
+                                                    {{--results.push(wrap(letter, 'ghost'));--}}
+                                                {{--}--}}
+                                                {{--return results;--}}
+                                            {{--})();--}}
+                                            {{--textCharacters = text.split('');--}}
+                                            {{--textLength = textCharacters.length;--}}
+                                            {{--order = (function() {--}}
+                                                {{--results = [];--}}
+                                                {{--for (var j = 0; 0 <= textLength ? j < textLength : j > textLength; 0 <= textLength ? j++ : j--){ results.push(j); }--}}
+                                                {{--return results;--}}
+                                            {{--}).apply(this).sort(this.shuffle);--}}
+                                            {{--output = [];--}}
+                                            {{--for (i = k = 0, ref = textLength; 0 <= ref ? k < ref : k > ref; i = 0 <= ref ? ++k : --k) {--}}
+                                                {{--glitchIndex = Math.floor(Math.random() * (glitchLength - 1));--}}
+                                                {{--glitchCharacter = glitches[glitchIndex];--}}
+                                                {{--ghostCharacter = ghosts[i] || settings.blank;--}}
+                                                {{--addGlitch = Math.random() < glitchProbability;--}}
+                                                {{--character = addGlitch ? glitchCharacter : ghostCharacter;--}}
+                                                {{--output.push(character);--}}
+                                            {{--}--}}
+                                            {{--object = {--}}
+                                                {{--value: 0--}}
+                                            {{--};--}}
+                                            {{--target = {--}}
+                                                {{--value: 1--}}
+                                            {{--};--}}
+                                            {{--parameters = {--}}
+                                                {{--duration: settings.duration,--}}
+                                                {{--ease: settings.ease,--}}
+                                                {{--step: function() {--}}
+                                                    {{--var index, l, progress, ref1;--}}
+                                                    {{--progress = Math.floor(object.value * (textLength - 1));--}}
+                                                    {{--for (i = l = 0, ref1 = progress; 0 <= ref1 ? l <= ref1 : l >= ref1; i = 0 <= ref1 ? ++l : --l) {--}}
+                                                        {{--index = order[i];--}}
+                                                        {{--output[index] = textCharacters[index];--}}
+                                                    {{--}--}}
+                                                    {{--return $element.html(output.join(''));--}}
+                                                {{--},--}}
+                                                {{--complete: function() {--}}
+                                                    {{--return $element.html(text);--}}
+                                                {{--}--}}
+                                            {{--};--}}
+                                            {{--return $(object).delay(settings.delay).animate(target, parameters);--}}
+                                        {{--};--}}
+
+                                        {{--animate = function() {--}}
+                                            {{--var data, element, index, j, len, options;--}}
+                                            {{--for (index = j = 0, len = MESSAGES.length; j < len; index = ++j) {--}}
+                                                {{--data = MESSAGES[index];--}}
+                                                {{--element = $paragraph.get(index);--}}
+                                                {{--element.innerText = '';--}}
+                                                {{--options = {--}}
+                                                    {{--delay: data.delay--}}
+                                                {{--};--}}
+                                                {{--scramble(element, data.text, options);--}}
+                                            {{--}--}}
+                                        {{--};--}}
+
+                                        {{--initialise = function() {--}}
+                                            {{--var index, j, len, text;--}}
+                                            {{--$animate.click(animate);--}}
+                                            {{--for (index = j = 0, len = MESSAGES.length; j < len; index = ++j) {--}}
+                                                {{--text = MESSAGES[index];--}}
+                                                {{--$message.append("<p>");--}}
+                                            {{--}--}}
+                                            {{--$paragraph = $container.find("p");--}}
+                                            {{--animate();--}}
+                                        {{--};--}}
+
+                                        {{--initialise();--}}
+
+                                    {{--</script>--}}
+
+
+                                    <div class='console-container' style="width: 40%;">
+                                        <span id='text'></span>
+                                        <div class='console-underscore' id='console'>&#95;</div>
+                                    </div>
+                                    <script>
+                                        consoleText(['لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت            ' +
+                                        '            چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که                    ' +
+                                        '    لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می               ' +
+                                        '         باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد      ' +
+                                        '                  تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در                     ' +
+                                        '   زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و               ' +
+                                        '         شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات                    ' +
+                                        '    پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.         ' +
+                                        '           '], 'text',['tomato']);
+
+                                        function consoleText(words, id, colors) {
+                                            if (colors === undefined) colors = ['#fff'];
+                                            var visible = true;
+                                            var con = document.getElementById('console');
+                                            var letterCount = 1;
+                                            var x = 1;
+                                            var waiting = false;
+                                            var target = document.getElementById(id);
+                                            target.setAttribute('style', 'color:' + colors[0]);
+                                            window.setInterval(function() {
+
+                                                if (letterCount === 0 && waiting === false) {
+                                                    waiting = true;
+                                                    target.innerHTML = words[0].substring(0, letterCount)
+                                                    window.setTimeout(function() {
+                                                        var usedColor = colors.shift();
+                                                        colors.push(usedColor);
+                                                        var usedWord = words.shift();
+                                                        words.push(usedWord);
+                                                        x = 1;
+                                                        target.setAttribute('style', 'color:' + colors[0])
+                                                        letterCount += x;
+                                                        waiting = false;
+                                                    }, 10)
+                                                } else if (letterCount === words[0].length + 1 && waiting === false) {
+                                                    waiting = true;
+                                                    window.setTimeout(function() {
+                                                        x = -1;
+                                                        letterCount += x;
+                                                        waiting = false;
+                                                    }, 10)
+                                                } else if (waiting === false) {
+                                                    target.innerHTML = words[0].substring(0, letterCount)
+                                                    letterCount += x;
+                                                }
+                                            }, 20)
+                                            window.setInterval(function() {
+                                                if (visible === true) {
+                                                    con.className = 'console-underscore hidden'
+                                                    visible = false;
+
+                                                } else {
+                                                    con.className = 'console-underscore'
+
+                                                    visible = true;
+                                                }
+                                            }, 10)
+                                        }
+                                    </script>
+
                                     <div class="clear-both"></div>
                                 </div>
                             </div>
+
+
+
                             <div class="ppr_rup ppr_priv_trip_search display-none hideOnScreen">
                                 <!-- Swiper -->
                                 <div id="mainSlider" class="swiper-container">
@@ -572,7 +826,7 @@
         centeredSlides: true,
         loop: true,
         autoplay: {
-            delay: 5000,
+            delay: 500000,
             disableOnInteraction: false,
         },
         pagination: {

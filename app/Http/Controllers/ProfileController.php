@@ -126,6 +126,8 @@ class ProfileController extends Controller {
         $medals = getMedals($user->id);
         $nearestMedals = getNearestMedals($user->id);
 //        dd($nearestMedals);
+
+
         return view('profile.profile', array('activities' => $activities,
             'counts' => $counts, 'totalPoint' => getUserPoints($user->id), 'levels' => Level::orderBy('floor', 'ASC')->get(),
             'userLevels' => nearestLevel($user->id), 'medals' => $medals,

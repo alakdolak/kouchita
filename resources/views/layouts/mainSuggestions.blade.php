@@ -2,40 +2,83 @@
     <div class="loader hidden"></div>
 </div>
 
-<div class="middleBannerPhotoDiv">
-    <div>
-        <div class="smallOne">
-            <a href="{{isset($middleBannerLink['11']) ? $middleBannerLink['11'] : '#'}}" target="{{isset($middleBannerLink['11']) ? '_blank' : ''}}" >
-                <img class="middleImg11" src="{{isset($middleBannerPic['11']) ? $middleBannerPic['11'] : ''}}" style="width: 100%; height: 100%;">
-            </a>
-        </div>{{--
-            --}}<div class="middleOne">
-            <a href="{{isset($middleBannerLink['12']) ? $middleBannerLink['12'] : '#'}}" target="{{isset($middleBannerLink['12']) ? '_blank' : ''}}" >
-                <img class="middleImg12" src="{{isset($middleBannerPic['12']) ? $middleBannerPic['12'] : ''}}" style="width: 100%; height: 100%;">
-            </a>
-        </div>{{--
-            --}}<div class="largeOne">
-            <a href="{{isset($middleBannerLink['13']) ? $middleBannerLink['13'] : '#'}}" target="{{isset($middleBannerLink['13']) ? '_blank' : ''}}" >
-                <img class="middleImg13" src="{{isset($middleBannerPic['13']) ? $middleBannerPic['13'] : ''}}" style="width: 100%; height: 100%;">
-            </a>
-        </div>{{--
-            --}}<div class="clear-both"></div>{{--
-            --}}<div class="largeOne">
-            <a href="{{isset($middleBannerLink['14']) ? $middleBannerLink['14'] : '#'}}" target="{{isset($middleBannerLink['14']) ? '_blank' : ''}}" >
-                <img class="middleImg14" src="{{isset($middleBannerPic['14']) ? $middleBannerPic['14'] : ''}}" style="width: 100%; height: 100%;">
-            </a>
-        </div>{{--
-            --}}<div class="middleOne">
-            <a href="{{isset($middleBannerLink['15']) ? $middleBannerLink['15'] : '#'}}" target="{{isset($middleBannerLink['15']) ? '_blank' : ''}}" >
-                <img class="middleImg15" src="{{isset($middleBannerPic['15']) ? $middleBannerPic['15'] : ''}}" style="width: 100%; height: 100%;">
-            </a>
-        </div>{{--
-            --}}<div class="smallOne">
-            <a href="{{isset($middleBannerLink['16']) ? $middleBannerLink['16'] : '#'}}" target="{{isset($middleBannerLink['16']) ? '_blank' : ''}}" >
-                <img class="middleImg16" src="{{isset($middleBannerPic['16']) ? $middleBannerPic['16'] : ''}}" style="width: 100%; height: 100%;">
-            </a>
+{{--banner_1--}}
+<div class="cont ">
+    <div data-target='1' class="slide slide--1">
+        <div class="slide__text slide__text--1">quis risus</div>
+        <div class="slide__bg"></div>
+        <div class="slide__img">
+            <div class="slide__close"></div>
+            <div class="slide__img-wrapper">
+
+            </div>
         </div>
+        <div class="slide__bg-dark"></div>
+        <a href="https://www.instagram.com/koochitatravel/" target="_blank" class="icon-link icon-link--twitter">
+            <img src="{{URL::asset('images/icons/instagram.png')}}">
+        </a>
     </div>
+
+    <div data-target='2' class="slide slide--2">
+        <div class="slide__text">Lorem ipsum</div>
+        <div class="slide__bg"></div>
+        <div class="slide__img">
+            <div class="slide__close"></div>
+            <div class="slide__img-wrapper">
+
+            </div>
+        </div>
+        <div class="slide__bg-dark"></div>
+        <a href="https://www.instagram.com/koochitatravel/" target="_blank" class="icon-link icon-link--twitter">
+            <img src="{{URL::asset('images/icons/instagram.png')}}">
+        </a>
+    </div>
+
+    <div data-target='3' class="slide slide--3">
+        <div class="slide__text">Sed tincidunt</div>
+        <div class="slide__bg"></div>
+        <div class="slide__img">
+            <div class="slide__close"></div>
+            <div class="slide__img-wrapper">
+
+            </div>
+        </div>
+        <div class="slide__bg-dark"></div>
+        <a href="https://www.instagram.com/koochitatravel/" target="_blank" class="icon-link icon-link--twitter">
+            <img src="{{URL::asset('images/icons/instagram.png')}}">
+        </a>
+    </div>
+
+    <div data-target='4' class="slide slide--4">
+        <div class="slide__text">Vivamus dui</div>
+        <div class="slide__bg"></div>
+        <div class="slide__img">
+            <div class="slide__close"></div>
+            <div class="slide__img-wrapper">
+
+            </div>
+        </div>
+        <div class="slide__bg-dark"></div>
+        <a href="https://www.instagram.com/koochitatravel/" target="_blank" class="icon-link icon-link--twitter">
+            <img src="{{URL::asset('images/icons/instagram.png')}}">
+        </a>
+    </div>
+
+    <div data-target='5' class="slide slide--5">
+        <div class="slide__text">Viva</div>
+        <div class="slide__bg"></div>
+        <div class="slide__img">
+            <div class="slide__close"></div>
+            <div class="slide__img-wrapper">
+
+            </div>
+        </div>
+        <div class="slide__bg-dark"></div>
+        <a href="https://www.instagram.com/koochitatravel/" target="_blank" class="icon-link icon-link--twitter">
+            <img src="{{URL::asset('images/icons/instagram.png')}}">
+        </a>
+    </div>
+
 </div>
 
 <div  ng-controller="getMainPageSuggestion" class="mainSuggestionMainDiv">
@@ -94,10 +137,46 @@
         </div>
     </div>
 
-    <div class="middleBannerPhotoBanner">
-        <a href="{{isset($middleBannerLink['21']) ? $middleBannerLink['21'] : '#'}}" target="{{isset($middleBannerLink['21']) ? '_blank' : ''}}" >
-            <img class="middleImg21" src="{{isset($middleBannerPic['21']) ? $middleBannerPic['21'] : ''}}">
-        </a>
+    {{--banner_2--}}
+    <div class="siteArticlesMainDiv">
+        <div class="row" style="display: flex;">
+            <div class="card transition">
+                <h2 class="h2MidBanerArticle transition">Awesome Headline</h2>
+                <p class="pMidBanerArticle">
+                    Aenean lacinia bibendum nulla sed consectetur. Donec ullamcorper nulla non metus auctor fringilla.
+                    Aenean lacinia bibendum nulla sed consectetur. Donec ullamcorper nulla non metus auctor fringilla.
+                    Aenean lacinia bibendum nulla sed consectetur. Donec ullamcorper nulla non metus auctor fringilla.
+                </p>
+                <div class="cta-container transition" style="left: 0px">
+                    <a href="#" class="cta">Call to action</a>
+                </div>
+                <div class="card_circle transition"></div>
+            </div>
+            <div class="card transition">
+                <h2 class="h2MidBanerArticle transition">Awesome Headline</h2>
+                <p class="pMidBanerArticle">
+                    Aenean lacinia bibendum nulla sed consectetur. Donec ullamcorper nulla non metus auctor fringilla.
+                    Aenean lacinia bibendum nulla sed consectetur. Donec ullamcorper nulla non metus auctor fringilla.
+                    Aenean lacinia bibendum nulla sed consectetur. Donec ullamcorper nulla non metus auctor fringilla.
+                </p>
+                <div class="cta-container transition" style="left: 0px">
+                    <a href="#" class="cta">Call to action</a>
+                </div>
+                <div class="card_circle transition"></div>
+            </div>
+            <div class="card transition">
+                <h2 class="h2MidBanerArticle transition">Awesome Headline</h2>
+                <p class="pMidBanerArticle">
+                    Aenean lacinia bibendum nulla sed consectetur. Donec ullamcorper nulla non metus auctor fringilla.
+                    Aenean lacinia bibendum nulla sed consectetur. Donec ullamcorper nulla non metus auctor fringilla.
+                    Aenean lacinia bibendum nulla sed consectetur. Donec ullamcorper nulla non metus auctor fringilla.
+                </p>
+                <div class="cta-container transition" style="left: 0px">
+                    <a href="#" class="cta">Call to action</a>
+                </div>
+                <div class="card_circle transition"></div>
+            </div>
+        </div>
     </div>
 
     <div id="foodSuggestion" class="homepage_shelves_widget ng-scope" style="display: none">
@@ -153,22 +232,16 @@
         </div>
     </div>
 
-    <center class="stripedBannerMainDiv">
-        <div class="stripedBackgroundDiv mg-lt-5">
-            <div class="innerStripedBackGround">
-                <a href="{{isset($middleBannerLink['31']) ? $middleBannerLink['31'] : '#'}}" target="{{isset($middleBannerLink['31']) ? '_blank' : ''}}" >
-                    <img class="middleImg31" src="{{isset($middleBannerPic['31']) ? $middleBannerPic['31'] : ''}}" style="width: 100%; height: 100%;">
-                </a>
-            </div>
-        </div>{{--
-    --}}<div class="stripedBackgroundDiv mg-rt-5">
-            <div class="innerStripedBackGround">
-                <a href="{{isset($middleBannerLink['32']) ? $middleBannerLink['32'] : '#'}}" target="{{isset($middleBannerLink['32']) ? '_blank' : ''}}" >
-                    <img class="middleImg32" src="{{isset($middleBannerPic['32']) ? $middleBannerPic['32'] : ''}}" style="width: 100%; height: 100%;">
-                </a>
-            </div>
+    {{--banner_6--}}
+    <div class="middleBannerPhotoBanner" style="display: flex; justify-content: center; align-items: center">
+        UX works for
+        <div class="dropping-texts">
+            <div>Developers</div>
+            <div>Designers</div>
+            <div>Coders</div>
+            <div>EVERYONE!</div>
         </div>
-    </center>
+    </div>
 
     <div id="tabiatSuggestion" class="homepage_shelves_widget ng-scope" style="display: none">
         <div class="prw_rup prw_shelves_shelf_widget" style="">
@@ -223,44 +296,189 @@
         </div>
     </div>
 
-    <center class="siteArticlesMainDiv">
-        <div class="articleBoxes">
-            <div class="articleTitle">مقاله‌های ما</div>
-            <div class="articleImgMainDiv">
-                <a class="articleImgLink" href="{{isset($middleBannerLink['41']) ? $middleBannerLink['41'] : '#'}}" target="{{isset($middleBannerLink['41']) ? '_blank' : ''}}" >
-                    <img class="middleImg41" src="{{isset($middleBannerPic['41']) ? $middleBannerPic['41'] : ''}}">
-                </a>
-            </div>
-            <a class="articleLink">هم اکنون ببینید</a>
-        </div>{{--
-    --}}<div class="articleBoxes">
-            <div class="articleTitle">مقاله‌های ما</div>
-            <div class="articleImgMainDiv">
-                <a class="articleImgLink" href="{{isset($middleBannerLink['42']) ? $middleBannerLink['42'] : '#'}}" target="{{isset($middleBannerLink['42']) ? '_blank' : ''}}" >
-                    <img class="middleImg42" src="{{isset($middleBannerPic['42']) ? $middleBannerPic['42'] : ''}}">
-                </a>
-            </div>
-            <a class="articleLink">هم اکنون ببینید</a>
-        </div>{{--
-    --}}<div class="articleBoxes">
-            <div class="articleTitle">مقاله‌های ما</div>
-            <div class="articleImgMainDiv">
-                <a class="articleImgLink" href="{{isset($middleBannerLink['43']) ? $middleBannerLink['43'] : '#'}}" target="{{isset($middleBannerLink['43']) ? '_blank' : ''}}" >
-                    <img class="middleImg43" src="{{isset($middleBannerPic['43']) ? $middleBannerPic['43'] : ''}}">
-                </a>
-            </div>
-            <a class="articleLink">هم اکنون ببینید</a>
-        </div>{{--
-    --}}<div class="articleBoxes">
-            <div class="articleTitle">مقاله‌های ما</div>
-            <div class="articleImgMainDiv">
-                <a class="articleImgLink" href="{{isset($middleBannerLink['44']) ? $middleBannerLink['44'] : '#'}}" target="{{isset($middleBannerLink['44']) ? '_blank' : ''}}" >
-                    <img class="middleImg44" src="{{isset($middleBannerPic['44']) ? $middleBannerPic['44'] : ''}}">
-                </a>
-            </div>
-            <a class="articleLink">هم اکنون ببینید</a>
+    {{--banner_3--}}
+    <div class='parent'>
+        <div class='slider' style="width: 100%;">
+            <button type="button" id='banner3_right' class='right' name="button">
+
+                <svg version="1.1" id="Capa_1" width='40px' height='40px ' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                     viewBox="0 0 477.175 477.175" style="enable-background:new 0 0 477.175 477.175;" xml:space="preserve">
+       <g>
+           <path style='fill: #9d9d9d;' d="M360.731,229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1,0s-5.3,13.8,0,19.1l215.5,215.5l-215.5,215.5
+          c-5.3,5.3-5.3,13.8,0,19.1c2.6,2.6,6.1,4,9.5,4c3.4,0,6.9-1.3,9.5-4l225.1-225.1C365.931,242.875,365.931,234.275,360.731,229.075z
+          "/>
+       </g>
+
+       </svg>
+
+            </button>
+            <button type="button" id='banner3_left' class='left' name="button">
+                <svg version="1.1" id="Capa_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                     viewBox="0 0 477.175 477.175" style="enable-background:new 0 0 477.175 477.175;" xml:space="preserve">
+       <g>
+           <path style='fill: #9d9d9d;' d="M145.188,238.575l215.5-215.5c5.3-5.3,5.3-13.8,0-19.1s-13.8-5.3-19.1,0l-225.1,225.1c-5.3,5.3-5.3,13.8,0,19.1l225.1,225
+          c2.6,2.6,6.1,4,9.5,4s6.9-1.3,9.5-4c5.3-5.3,5.3-13.8,0-19.1L145.188,238.575z"/>
+       </g>
+       </svg>
+            </button>
+
+            <svg id='svg2' class='up2' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <circle id='circle1' class='circle1 steap' cx="34px" cy="49%" r="20"  />
+                <circle id='circle2' class='circle2 steap' cx="34px" cy="49%" r="100"  />
+                <circle id='circle3' class='circle3 steap' cx="34px" cy="49%" r="180"  />
+                <circle id='circle4' class='circle4 steap' cx="34px" cy="49%" r="260"  />
+                <circle id='circle5' class='circle5 steap' cx="34px" cy="49%" r="340"  />
+                <circle id='circle6' class='circle6 steap' cx="34px" cy="49%" r="420"  />
+                <circle id='circle7' class='circle7 steap' cx="34px" cy="49%" r="500"  />
+                <circle id='circle8' class='circle8 steap' cx="34px" cy="49%" r="580"  />
+                <circle id='circle9' class='circle9 steap' cx="34px" cy="49%" r="660"  />
+            </svg>
+            <svg id='svg1' class='up2' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <circle id='circle10' class='circle10 steap' cx="648px" cy="49%" r="20"  />
+                <circle id='circle11' class='circle11 steap' cx="648px" cy="49%" r="100"  />
+                <circle id='circle12' class='circle12 steap' cx="648px" cy="49%" r="180"  />
+                <circle id='circle13' class='circle13 steap' cx="648px" cy="49%" r="260"  />
+                <circle id='circle14' class='circle14 steap' cx="648px" cy="49%" r="340"  />
+                <circle id='circle15' class='circle15 steap' cx="648px" cy="49%" r="420"  />
+                <circle id='circle16' class='circle16 steap' cx="648px" cy="49%" r="500"  />
+                <circle id='circle17' class='circle17 steap' cx="648px" cy="49%" r="580"  />
+                <circle id='circle18' class='circle18 steap' cx="648px" cy="49%" r="660"  />
+            </svg>
+
+            <div id='slide1' class='slide1 up1'>MOUNTAIN</div>
+            <div id='slide2' class='slide2'>BEACH</div>
+            <div id='slide3' class='slide3'>FOREST</div>
+            <div id='slide4' class='slide4'>DESERT</div>
         </div>
-    </center>
+    </div>
+    <script>
+
+        var curpage = 1;
+        var sliding = false;
+        var click = true;
+        var left = document.getElementById("banner3_left");
+        var right = document.getElementById("banner3_right");
+        var pagePrefix = "slide";
+        var pageShift = 500;
+        var transitionPrefix = "circle";
+        var svg = true;
+
+        function leftSlide() {
+            if (click) {
+                if (curpage == 1) curpage = 5;
+                sliding = true;
+                curpage--;
+                svg = true;
+                click = false;
+                for (k = 1; k <= 4; k++) {
+                    var a1 = document.getElementById(pagePrefix + k);
+                    a1.className += " tran";
+                }
+                setTimeout(() => {
+                    move();
+                }, 200);
+                setTimeout(() => {
+                    for (k = 1; k <= 4; k++) {
+                        var a1 = document.getElementById(pagePrefix + k);
+                        a1.classList.remove("tran");
+                    }
+                }, 1400);
+            }
+        }
+
+        function rightSlide() {
+            if (click) {
+                if (curpage == 4) curpage = 0;
+                sliding = true;
+                curpage++;
+                svg = false;
+                click = false;
+                for (k = 1; k <= 4; k++) {
+                    var a1 = document.getElementById(pagePrefix + k);
+                    a1.className += " tran";
+                }
+                setTimeout(() => {
+                    move();
+                }, 200);
+                setTimeout(() => {
+                    for (k = 1; k <= 4; k++) {
+                        var a1 = document.getElementById(pagePrefix + k);
+                        a1.classList.remove("tran");
+                    }
+                }, 1400);
+            }
+        }
+
+        function move() {
+            if (sliding) {
+                sliding = false;
+                if (svg) {
+                    for (j = 1; j <= 9; j++) {
+                        var c = document.getElementById(transitionPrefix + j);
+                        c.classList.remove("steap");
+                        c.setAttribute("class", transitionPrefix + j + " streak");
+                    }
+                } else {
+                    for (j = 10; j <= 18; j++) {
+                        var c = document.getElementById(transitionPrefix + j);
+                        c.classList.remove("steap");
+                        c.setAttribute("class", transitionPrefix + j + " streak");
+                    }
+                }
+                setTimeout(() => {
+                    for (i = 1; i <= 4; i++) {
+                        if (i == curpage) {
+                            var a = document.getElementById(pagePrefix + i);
+                            a.className += " up1";
+                        } else {
+                            var b = document.getElementById(pagePrefix + i);
+                            b.classList.remove("up1");
+                        }
+                    }
+                    sliding = true;
+                }, 600);
+                setTimeout(() => {
+                    click = true;
+                }, 1700);
+
+                setTimeout(() => {
+                    if (svg) {
+                        for (j = 1; j <= 9; j++) {
+                            var c = document.getElementById(transitionPrefix + j);
+                            c.classList.remove("streak");
+                            c.setAttribute("class", transitionPrefix + j + " steap");
+                        }
+                    } else {
+                        for (j = 10; j <= 18; j++) {
+                            var c = document.getElementById(transitionPrefix + j);
+                            c.classList.remove("streak");
+                            c.setAttribute("class", transitionPrefix + j + " steap");
+                        }
+                        sliding = true;
+                    }
+                }, 850);
+                setTimeout(() => {
+                    click = true;
+                }, 1700);
+            }
+        }
+
+        left.onmousedown = () => {
+            leftSlide();
+        };
+
+        right.onmousedown = () => {
+            rightSlide();
+        };
+
+        document.onkeydown = e => {
+            if (e.keyCode == 37) {
+                leftSlide();
+            } else if (e.keyCode == 39) {
+                rightSlide();
+            }
+        };
+    </script>
 
     <div id="restaurantSuggestion" class="homepage_shelves_widget ng-scope" style="display: none">
         <div class="prw_rup prw_shelves_shelf_widget" style="">
@@ -315,17 +533,23 @@
         </div>
     </div>
 
-    <div class="middleBannerDoublePhotoBanner">
-        <div class="middleBannerPhotoBanner">
-            <a href="{{isset($middleBannerLink['51']) ? $middleBannerLink['51'] : '#'}}" target="{{isset($middleBannerLink['51']) ? '_blank' : ''}}" >
-                <img class="middleImg51" src="{{isset($middleBannerPic['51']) ? $middleBannerPic['51'] : ''}}" style="width: 100%; height: 100%;">
-            </a>
-        </div>{{--
-    --}}<div class="middleBannerPhotoBanner">
-            <a href="{{isset($middleBannerLink['52']) ? $middleBannerLink['52'] : '#'}}" target="{{isset($middleBannerLink['52']) ? '_blank' : ''}}" >
-                <img class="middleImg52" src="{{isset($middleBannerPic['52']) ? $middleBannerPic['52'] : ''}}" style="width: 100%; height: 100%;">
-            </a>
-        </div>
+    {{--banner_4--}}
+    <div class="row" style="justify-content: center; display: flex;">
+        <figure class="snip1091 red"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sq-sample6.jpg" alt="sq-sample6"/>
+            <figcaption>
+                <h2>Lizbeth  <span>Kent</span></h2>
+            </figcaption><a href="#"></a>
+        </figure>
+        <figure class="snip1091 green"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sq-sample14.jpg" alt="sq-sample14"/>
+            <figcaption>
+                <h2>Annalee   <span>Weis</span></h2>
+            </figcaption><a href="#"></a>
+        </figure>
+        <figure class="snip1091 navy"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sq-sample10.jpg" alt="sq-sample10"/>
+            <figcaption>
+                <h2>Carmen  <span>Glenn</span></h2>
+            </figcaption><a href="#"></a>
+        </figure>
     </div>
 
     <div id="tarikhiSuggestion" class="homepage_shelves_widget ng-scope" style="display: none">
@@ -572,8 +796,265 @@
                 </div>
             </div>
         </div>
+</div>
+
+{{--banner_5--}}
+<style>
+
+    .cube {
+        position: relative;
+        margin: 0em auto 0;
+        padding: 0px;
+        width: 20em; height: 3.0em;
+        list-style: none;
+        transform-style: preserve-3d;
+        /*animation: ani 8s infinite linear;*/
+    }
+    .face {
+        box-sizing: border-box;
+        position: absolute;
+        top: 180px; left: 50%;
+        /*border: 1px solid #f0f0f0;*/
+        margin: -8em;
+        padding: 1.6em;
+        width: 20em; height:2em;
+        opacity: .85;
+        background: lightblue;
+        background:url({{URL::asset('images/test.jpg')}});
+        background-repeat: no-repeat;
+        backface-visibility: hidden;
+    }
+    .face:nth-child(1) { transform: translateZ(10em); }
+    .face:nth-child(2) { transform: rotateY(180deg) translateZ(10em); }
+    .face:nth-child(3) { transform: rotateY(90deg) translateZ(10em); }
+    .face:nth-child(4) { transform: rotateY(-90deg) translateZ(10em); }
+
+    .face1 {
+        box-sizing: border-box;
+        position: absolute;
+        top: 180px; left: 50%;
+        /*border: 1px solid #f0f0f0;*/
+        margin: -8em;
+        padding: 1.6em;
+        width: 20em; height:2em;
+        opacity: .85;
+        background: lightblue;
+        background:url("https://res.cloudinary.com/dbie43oob/image/upload/v1473334800/Gp6NAyA_asqaax.png") -10px -10px;
+        background-repeat: no-repeat;
+        backface-visibility: hidden;
+    }
+    .face1:nth-child(1) { transform: translateZ(10em); }
+    .face1:nth-child(2) { transform: rotateY(180deg) translateZ(10em); }
+    .face1:nth-child(3) { transform: rotateY(90deg) translateZ(10em); }
+    .face1:nth-child(4) { transform: rotateY(-90deg) translateZ(10em); }
+</style>
+<div class="row">
+    <div class="col-md-4">
+        <div class="adv3D">
+            <ul id="level0" class='cube'>
+                <li class='face'></li>
+                <li class='face1'></li>
+                <li class='face'></li>
+                <li class='face1'></li>
+            </ul>
+            <ul id="level1" class='cube'>
+                <li class='face'></li>
+                <li class='face1'></li>
+                <li class='face'></li>
+                <li class='face1'></li>
+            </ul>
+            <ul id="level2" class='cube'>
+                <li class='face'></li>
+                <li class='face1'></li>
+                <li class='face'></li>
+                <li class='face1'></li>
+            </ul>
+            <ul id="level3" class='cube'>
+                <li class='face'></li>
+                <li class='face1'></li>
+                <li class='face'></li>
+                <li class='face1'></li>
+            </ul>
+            <ul id="level4" class='cube'>
+                <li class='face'></li>
+                <li class='face1'></li>
+                <li class='face'></li>
+                <li class='face1'></li>
+            </ul>
+            <ul id="level5" class='cube'>
+                <li class='face'></li>
+                <li class='face1'></li>
+                <li class='face'></li>
+                <li class='face1'></li>
+            </ul>
+            <ul id="level6" class='cube'>
+                <li class='face'></li>
+                <li class='face1'></li>
+                <li class='face'></li>
+                <li class='face1'></li>
+            </ul>
+            <ul id="level7" class='cube'>
+                <li class='face'></li>
+                <li class='face1'></li>
+                <li class='face'></li>
+                <li class='face1'></li>
+            </ul>
+            <ul id="level8" class='cube'>
+                <li class='face'></li>
+                <li class='face1'></li>
+                <li class='face'></li>
+                <li class='face1'></li>
+            </ul>
+            <ul id="level9" class='cube'>
+                <li class='face'></li>
+                <li class='face1'></li>
+                <li class='face'></li>
+                <li class='face1'></li>
+            </ul>
+            <ul id="level10" class='cube'>
+                <li class='face'></li>
+                <li class='face1'></li>
+                <li class='face'></li>
+                <li class='face1'></li>
+            </ul>
+            <ul id="level11" class='cube'>
+                <li class='face'></li>
+                <li class='face1'></li>
+                <li class='face'></li>
+                <li class='face1'></li>
+            </ul>
+            <ul id="level12" class='cube'>
+                <li class='face'></li>
+                <li class='face1'></li>
+                <li class='face'></li>
+                <li class='face1'></li>
+            </ul>
+        </div>
     </div>
 </div>
+<script>
+    // vars
+    var gap=0;
+    var slow=7;
+    var md = false;
+    var oldMouseX=0;
+    var mouseX=0;
+    var mouseY=0;
+    var numLevels=13;
+    var gaps=[];
+    var gapscnt=0;
+    var currentLevel=0;
+    var px=[0,0,0,0,0,0,0,0,0,0,0,0,0];
+    var vx=[0,0,0,0,0,0,0,0,0,0,0,0,0];
+    var	windowHalfX = window.innerWidth / 2;
+    var	windowHalfY = window.innerHeight / 2;
+    init();
+
+    function tickHandler() {
+        //run your logic here...
+        if(md){
+            gap=averageGaps(mouseX-oldMouseX);
+        }
+        gap*=.9;
+        vx[currentLevel]+=gap;
+        oldMouseX = mouseX;
+        var i;
+        for ( i = currentLevel; i < numLevels; i++) {
+            vx[i+1]+=((vx[i]-vx[i+1])/slow);
+        }
+        for ( i = currentLevel; i > 0; i--) {
+            vx[i-1]+=(vx[i]-vx[i-1])/slow;
+        }
+        for ( i = 0; i <numLevels; i++) {
+            px[i]+=(vx[i]-px[i]);
+            // trying tweenmax duration 0 method of setting rotationY
+            TweenMax.to($('#level'+i), 0, {rotationY:px[i]});
+        }
+    }
+    // functions
+    function init(){
+        // code for cube
+        var d=0.12;var p=3;
+        for(var i=0;i<numLevels;i++){
+            var posString="-115px "+(-48*i)+ "px";
+            TweenMax.to($('#level'+i+' li'), 1, {css:{backgroundPosition: posString}, delay:(d*i)});}
+        TweenLite.ticker.addEventListener("tick", tickHandler);
+        $('.cube').mouseover(function(){
+            TweenMax.to($('.face'),1,{opacity:1});
+        });
+        $('.cube').mouseout(function(){
+            TweenMax.to($('.face'),1,{opacity:.85});
+        });
+        $(document).on('mousedown', function(event) {
+            event.preventDefault();
+            oldMouseX = mouseX;
+            gaps.length = 0;
+            md=true;
+        }).on('mouseup', function(event) {
+            md=false;
+        }).on('mousemove', function(event) {
+            mouseX = event.clientX - windowHalfX;
+            mouseY = event.clientY - windowHalfY;
+        });
+
+
+
+        $('#level0').mousedown(function(){currentLevel=0; });
+        $('#level1').mousedown(function(){currentLevel=1; });
+        $('#level2').mousedown(function(){currentLevel=2; });
+        $('#level3').mousedown(function(){currentLevel=3; });
+        $('#level4').mousedown(function(){currentLevel=4; });
+        $('#level5').mousedown(function(){currentLevel=5; });
+        $('#level6').mousedown(function(){currentLevel=6; });
+        $('#level7').mousedown(function(){currentLevel=7; });
+        $('#level8').mousedown(function(){currentLevel=8; });
+        $('#level9').mousedown(function(){currentLevel=9; });
+        $('#level10').mousedown(function(){currentLevel=10; });
+        $('#level11').mousedown(function(){currentLevel=11; });
+        $('#level12').mousedown(function(){currentLevel=12; });
+
+
+
+
+        var touchEnabled = 'ontouchstart' in window || navigator.msMaxTouchPoints;
+        if (touchEnabled == true) {
+            console.log("touchEnabled");
+            document.addEventListener('touchmove', onTouchMove, false);
+            document.addEventListener('touchstart', onTouchStart, false);
+            document.addEventListener('touchend', onTouchEnd, false);
+        }
+
+    }
+    function onTouchMove(event) {
+        event.preventDefault();
+        var touch = event.touches[0];
+        mouseX = touch.pageX - windowHalfX;
+        mouseY = touch.pageY - windowHalfY;
+    }
+    function onTouchStart(event) {
+        event.preventDefault();
+        oldMouseX = mouseX;
+        gaps.length = 0;
+        md=true;
+    }
+    function onTouchEnd(event) {
+        event.preventDefault();
+        md = false;
+    }
+    function averageGaps(n){
+        if(isNaN(n)){	return 0;	}
+        var gl=gaps.length;
+        gaps[gapscnt]=n;
+        var ave =0;
+        for (var i = 0; i < gl; i++) {
+            ave+=gaps[i];
+        };
+        gapscnt=(gapscnt+1)%10;
+        var tmp=ave/gl;
+        if(isNaN(tmp)){tmp=0;	}
+        return tmp;
+    }
+</script>
 
 @if(auth()->check() && auth()->user()->role == 0)
     <div class="modal" id="middleBannerModal" style="direction: rtl">

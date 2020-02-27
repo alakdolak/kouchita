@@ -3,11 +3,45 @@
 
 <head>
     @include('layouts.topHeader')
+    <title>
+        کوچیتا |
+        صفحه
+        {{$place->name}}</title>
+    <meta content="article" property="og:type"/>
+    <meta name="title" content="{{$place->name}} | اطلاعات گردشگری {{$place->name}} – جاذبه های {{$place->name}} – هتل های {{$place->name}} – رستوران های {{$place->name}}- صنایع دستی و سوغات {{$place->name}} | کوچیتا " />
+    <meta name='description' content='. هر چه یک گردشگر باید بداند   اطلاعات جامع و کامل {{$place->name}}. اصلاعات عمومی و تخصصی گردشگری ' />
+    <meta name='keywords' content='جاذبه های  {{$place->name}} – اطلاعات گردشگری {{$place->name}} – نقد و بررسی {{$place->name}} ' />
+
+    {{--<meta name="keywords" content="{{$post->keyword}}">--}}
+    {{--<meta property="og:title" content=" {{$post->seoTitle}} " />--}}
+    {{--<meta property="og:description" content=" {{$post->meta}}" />--}}
+    {{--<meta name="twitter:title" content=" {{$post->seoTitle}} " />--}}
+    {{--<meta name="twitter:description" content=" {{$post->meta}}" />--}}
+    {{--<meta name="description" content=" {{$post->meta}}"/>--}}
+    {{--<meta property="article:author " content="{{$post->user->username}}" />--}}
+    {{--<meta property="article:section" content="article" />--}}
+    {{--<meta property="article:published_time" content="2019-05-28T13:32:55+00:00" /> زمان انتشار--}}
+    {{--<meta property="article:modified_time" content="2020-01-14T10:43:11+00:00" />زمان آخریت تغییر--}}
+    {{--<meta property="og:updated_time" content="2020-01-14T10:43:11+00:00" /> زمان آخرین آپدیت--}}
+
+    @if(isset($place->image))
+        <meta property="og:image" content="{{URL::asset($place->image)}}"/>
+        <meta property="og:image:secure_url" content="{{URL::asset($place->image)}}"/>
+        <meta property="og:image:width" content="550"/>
+        <meta property="og:image:height" content="367"/>
+        <meta name="twitter:image" content="{{URL::asset($place->image)}}"/>
+    @endif
+
+    <meta property="article:tag" content="{{$place->name}}"/>
+    <meta property="article:tag" content="جاذبه های {{$place->name}}"/>
+    <meta property="article:tag" content="{{$place->name}} گردی"/>
+    <meta property="article:tag" content="{{$place->name}} را بشناسیم"/>
+    <meta property="article:tag" content="اطلاعات {{$place->name}}"/>
+
+
+
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/home_rebranded.css?v=4')}}"/>
-    <title>صفحه {{$place->name}}</title>
-
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/long_lived_global_legacy_2.css?v=2')}}"/>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/masthead-saves.css?v=2')}}'/>
     <link rel='stylesheet' type='text/css' media='screen, print'

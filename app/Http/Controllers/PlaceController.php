@@ -3574,6 +3574,7 @@ class PlaceController extends Controller {
         $sections = SectionPage::wherePage(getValueInfo('hotel-detail'))->get();
         $kindPlace = Place::find($kindPlaceId);
         if($kindPlace != null){
+            $meta = [];
 
             if ($mode == "state") {
                 $state = State::whereName($city)->first();
@@ -3603,26 +3604,44 @@ class PlaceController extends Controller {
                 case 1:
                     $placeMode = 'amaken';
                     $kindPlace->title = 'جاذبه های';
+                    $meta['title'] = 'کوچیتا';
+                    $meta['keyword'] = 'کوچیتا';
+                    $meta['description'] = 'کوچیتا';
                     break;
                 case 3:
                     $placeMode = 'restaurant';
                     $kindPlace->title = 'رستوران های';
+                    $meta['title'] = 'رستوران ها | لیست رستوران های ایران - نقد و بررسی به همراه عکس از کاربران | کوچیتا';
+                    $meta['keyword'] = 'رستوران های ایران، رتبه بندی رستوران های ایران، نقد و بررسی رستوران های ایران، غذا در سفر';
+                    $meta['description'] = 'رستوران های ایران رو تو مسافرتت بشناس و برای رستورانایی که رفتی نقد بنویس و نظر بده. منوی رستورانا رو ببین و از الان رزروشون کن. ساعات کاری و قیمتاشون رو ببین. ';
                     break;
                 case 4:
                     $placeMode = 'hotel';
                     $kindPlace->title = 'مراکز اقامتی';
+                    $meta['title'] = 'هتل ها | لیست قیمت – نقد و بررسی به همراه عکس از کاربران - بوم گردی ها | کوچیتا';
+                    $meta['keyword'] = 'لیست هتل های ایران، لیست قیمت هتل های ایران، نقد و بررسی هتل های ایران ، هتل های ارزان ایران، مقایسه ی هتل ها';
+                    $meta['description'] = 'آخرین وضعبت قیمت و رزور هتل ها را ببینید، نظرات و نقد های مشتریان هتل ها را همراه عکس ببینید و هتل ها را مقایسه کنید.بهترین قیمت رزرو در کوچیتا';
                     break;
                 case 6:
                     $placeMode = 'majara';
                     $kindPlace->title = 'ماجراهای';
+                    $meta['title'] = 'ماجرا | لیست اماکن ماجرا جویی ایران– تجهیزات مورد نیاز | ماجراجویی خودتو آغاز کن';
+                    $meta['keyword'] = 'ماجراجویی در ایران، مکان های خاص ایران، گردشگری در ایران، می خوام برم سفر';
+                    $meta['description'] = 'اماکن ماجراجویی رو بشناس، سختی سفرشون رو ببین و تججهیزاتتو آماده کن. کوچیتا بهترین';
                     break;
                 case 10:
                     $placeMode = 'sogatSanaies';
                     $kindPlace->title = 'صنایع دستی و سوغات';
+                    $meta['title'] = 'کوچیتا';
+                    $meta['keyword'] = 'کوچیتا';
+                    $meta['description'] = 'کوچیتا';
                     break;
                 case 11:
                     $placeMode = 'mahaliFood';
                     $kindPlace->title = 'غذاهای محلی';
+                    $meta['title'] = 'کوچیتا';
+                    $meta['keyword'] = 'کوچیتا';
+                    $meta['description'] = 'کوچیتا';
                     break;
             }
             $kindPlaceId = $kindPlace->id;
@@ -3631,7 +3650,8 @@ class PlaceController extends Controller {
             foreach ($features as $feature)
                 $feature->subFeat = PlaceFeatures::where('parent', $feature->id)->where('type', 'YN')->get();
             $kind = $mode;
-            return view('places.list.list', compact(['features', 'locationName', 'kindPlace', 'kind', 'kindPlaceId', 'mode', 'city', 'sections', 'placeMode', 'state']));
+
+            return view('places.list.list', compact(['features', 'meta', 'locationName', 'kindPlace', 'kind', 'kindPlaceId', 'mode', 'city', 'sections', 'placeMode', 'state']));
         }
         else
             return \redirect(\url('/'));

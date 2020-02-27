@@ -2,6 +2,27 @@
 <html>
 <head>
     @include('layouts.topHeader')
+    <meta property="og:type" content="website" />
+    <title>
+        کوچیتا |
+        {{$kindPlace->title}}
+        @if($mode == 'state')
+            استان
+        @else
+            شهر
+        @endif
+        {{$city->name}}
+    </title>
+
+    <meta name="title" content="{{$meta['title']}}" />
+    <meta name='description' content='{{$meta['description']}}' />
+    <meta name='keywords' content='{{$meta['keyword']}}' />
+    <meta property="og:image" content="{{URL::asset('_images/nopic/blank.jpg')}}"/>
+    <meta property="og:image:secure_url" content="{{URL::asset('_images/nopic/blank.jpg')}}"/>
+    <meta property="og:image:width" content="550"/>
+    <meta property="og:image:height" content="367"/>
+    <meta name="twitter:image" content="{{URL::asset('_images/nopic/blank.jpg')}}"/>
+
     <script src="{{URL::asset('js/angular.js')}}"></script>
     <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/eatery_overview.css?v=2')}}'/>
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/long_lived_global_legacy_2.css?v=2')}}"/>

@@ -13,6 +13,26 @@ if ($total == 0)
 @stop
 
 @section('meta')
+    @if(count($photos) > 0)
+        <meta property="og:image" content="{{$photos[0]}}"/>
+        <meta property="og:image:secure_url" content="{{$photos[0]}}"/>
+        <meta property="og:image:width" content="550"/>
+        <meta property="og:image:height" content="367"/>
+        <meta name="twitter:image" content="{{$photos[0]}}"/>
+    @endif
+    <meta content="article" property="og:type"/>
+    <meta property="og:title" content="{{$place->name}} | {{$city->name}} | کوچیتا"/>
+    <meta name="twitter:card" content="{{$place->meta}}" />
+    <meta name="twitter:description" content="{{$place->meta}}" />
+    <meta name="twitter:title" content="{{$place->name}} | {{$city->name}} | کوچیتا" />
+    <META NAME="geo.position" CONTENT="{{$place->C}}; {{$place->D}}">
+
+    <meta property="article:section" content="{{$placeMode}}" />
+    {{--<meta property="article:published_time" content="2019-05-28T13:32:55+00:00" /> زمان انتشار--}}
+    {{--<meta property="article:modified_time" content="2020-01-14T10:43:11+00:00" />زمان آخریت تغییر--}}
+    {{--<meta property="og:updated_time" content="2020-01-14T10:43:11+00:00" /> زمان آخرین آپدیت--}}
+    <meta property=" article:author " content="کوچیتا" />
+
     <meta name="keywords" content="{{$place->keyword}}">
     <meta property="og:description" content="{{$place->meta}}"/>
     <meta property="article:tag" content="{{$place->tag1}}"/>
@@ -30,20 +50,8 @@ if ($total == 0)
     <meta property="article:tag" content="{{$place->tag13}}"/>
     <meta property="article:tag" content="{{$place->tag14}}"/>
     <meta property="article:tag" content="{{$place->tag15}}"/>
-    <meta name="twitter:card" content="summary_large_image"/>
-    <meta name="twitter:description" content="{{$place->meta}}"/>
-    <meta name="twitter:title" content="{{$place->keyword}} | {{$city->name}}"/>
     <meta property="og:url" content="{{Request::url()}}"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    @if(count($photos) > 0)
-        <meta property="og:image" content="{{$photos[0]}}"/>
-        <meta property="og:image:secure_url" content="{{$photos[0]}}"/>
-        <meta property="og:image:width" content="550"/>
-        <meta property="og:image:height" content="367"/>
-        <meta name="twitter:image" content="{{$photos[0]}}"/>
-    @endif
-    <meta content="article" property="og:type"/>
-    <meta property="og:title" content="{{$place->name}} | {{$city->name}} | شازده مسافر"/>
+
 @stop
 
 @section('header')
