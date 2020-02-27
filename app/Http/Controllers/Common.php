@@ -1042,7 +1042,10 @@ function createUrl($kindPlaceId, $placeId, $stateId, $cityId){
     else if($kindPlaceId != 0){
         $kindPlace = Place::find($kindPlaceId);
         $place = DB::table($kindPlace->tableName)->find($placeId);
-        if(isset($place->id))
+
+        if(isset($place->slug) && $place->slug != null && strlen($place->slug) > 2)
+            return url('show-place-details/' . $kindPlace->fileName . '/' . $place->slug);
+        else if(isset($place->id))
             return url('show-place-details/' . $kindPlace->fileName . '/' . $place->id);
     }
 }

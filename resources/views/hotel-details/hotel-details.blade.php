@@ -224,7 +224,7 @@ if ($total == 0)
                                                       placeholder="{{auth()->user()->first_name ? auth()->user()->first_name :auth()->user()->username }}، چه فکر یا احساسی داری.....؟"
                                                        style="overflow:hidden"></textarea>
                                         @endif
-                                        <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
+                                        <img class="commentSmileyIcon" src="{{URL::asset("images/smile.png")}}">
                                     </div>
                                     <div class="clear-both"></div>
                                     <div class="row">
@@ -1353,8 +1353,13 @@ if ($total == 0)
                                                          id="clientConnectionsLines">
                                                         <div class="blEntry address mg-bt-10" id="clientConnectionsAddress">
                                                             <span class="ui_icon map-pin"></span>
-                                                            <span class="street-address">آدرس : </span>
-                                                            <span>{{$place->address}}</span>
+                                                            @if($placeMode != 'mahalifood' && $placeMode != 'sogatsanaie' && $placeMode != 'majara')
+                                                                <span class="street-address">آدرس : </span>
+                                                                <span>{{$place->address}}</span>
+                                                            @elseif( $placeMode != 'majara')
+                                                                <span class="street-address">آدرس : </span>
+                                                                <span>{{$place->dastresi}}</span>
+                                                            @endif
                                                         </div>
                                                         @if(!empty($place->phone))
                                                             <div class="blEntry phone mg-bt-10" id="clientConnectionsPhone">
@@ -1742,7 +1747,7 @@ if ($total == 0)
                             @include('hotel-details.filterSection')
 
                             <center id="advertiseDiv" class="col-xs-12 adsMainDiv">
-                                @include('features.advertise3D')
+{{--                                @include('features.advertise3D')--}}
                             </center>
                         </div>
 

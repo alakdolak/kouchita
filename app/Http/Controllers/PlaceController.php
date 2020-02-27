@@ -65,8 +65,11 @@ class PlaceController extends Controller {
             return \redirect(\url('/'));
         $kindPlaceId = $kindPlace->id;
 
-//        $place = DB::table($kindPlace->tableName)->where('slug', $slug);
-        $place = DB::table($kindPlace->tableName)->find($slug);
+        if(is_numeric($slug))
+            $place = DB::table($kindPlace->tableName)->find((int)$slug);
+        else
+            $place = DB::table($kindPlace->tableName)->where('slug', $slug)->first();
+
         if($place == null)
             return \redirect(\url('/'));
 
@@ -142,7 +145,7 @@ class PlaceController extends Controller {
         $inPage = 'place_' . $kindPlaceId . '_' . $place->id;
         session(['inPage' => $inPage]);
 
-        $features = PlaceFeatures::where('kindPlaceId', 4)->where('parent', 0)->get();
+        $features = PlaceFeatures::where('kindPlaceId', $kindPlace->id)->where('parent', 0)->get();
         $featId = array();
         foreach ($features as $item) {
             $item->subFeat = PlaceFeatures::where('parent', $item->id)->get();
