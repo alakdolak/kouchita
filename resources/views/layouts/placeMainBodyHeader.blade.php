@@ -299,7 +299,7 @@
                 <div class="prw_rup prw_common_atf_header_bl headerBL">
                     <div class="blRow">
                         <div class="blEntry blEn address  clickable colCnt3" onclick="showExtendedMap()">
-                            @if($placeMode != 'mahalifood' && $placeMode != 'sogatsanaie')
+                            @if($placeMode != 'mahaliFood' && $placeMode != 'sogatSanaies')
                                 <span class="ui_icon map-pin"></span>
                                 <span class="street-address">آدرس : </span>
                                 @if($placeMode == 'majara')

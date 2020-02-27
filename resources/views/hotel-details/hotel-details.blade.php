@@ -25,7 +25,9 @@ if ($total == 0)
     <meta name="twitter:card" content="{{$place->meta}}" />
     <meta name="twitter:description" content="{{$place->meta}}" />
     <meta name="twitter:title" content="{{$place->name}} | {{$city->name}} | کوچیتا" />
-    <META NAME="geo.position" CONTENT="{{$place->C}}; {{$place->D}}">
+    @if(isset($place->C) && isset($place->D))
+        <META NAME="geo.position" CONTENT="{{$place->C}}; {{$place->D}}">
+    @endif
 
     <meta property="article:section" content="{{$placeMode}}" />
     {{--<meta property="article:published_time" content="2019-05-28T13:32:55+00:00" /> زمان انتشار--}}
@@ -842,7 +844,7 @@ if ($total == 0)
                                             <div class="prw_rup prw_common_centered_image">
                                                 @if(count($sitePics) != 0)
                                                     <span class="imgWrap imgWrap1stTemp" onclick="showPhotoAlbum('sitePics')">
-                                                        <img alt="{{$place->alt1}}" src="{{$thumbnail}}"
+                                                        <img alt="{{$place->alt}}" src="{{$thumbnail}}"
                                                              class="centeredImg" width="100%"/>
                                                     </span>
                                                 @else
@@ -1353,10 +1355,10 @@ if ($total == 0)
                                                          id="clientConnectionsLines">
                                                         <div class="blEntry address mg-bt-10" id="clientConnectionsAddress">
                                                             <span class="ui_icon map-pin"></span>
-                                                            @if($placeMode != 'mahalifood' && $placeMode != 'sogatsanaie' && $placeMode != 'majara')
+                                                            @if($placeMode != 'mahaliFood' && $placeMode != 'sogatSanaies' && $placeMode != 'majara')
                                                                 <span class="street-address">آدرس : </span>
                                                                 <span>{{$place->address}}</span>
-                                                            @elseif( $placeMode != 'majara')
+                                                            @elseif( $placeMode == 'majara')
                                                                 <span class="street-address">آدرس : </span>
                                                                 <span>{{$place->dastresi}}</span>
                                                             @endif
