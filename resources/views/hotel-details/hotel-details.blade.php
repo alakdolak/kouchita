@@ -1742,8 +1742,7 @@ if ($total == 0)
                             @include('hotel-details.filterSection')
 
                             <center id="advertiseDiv" class="col-xs-12 adsMainDiv">
-                                <div class="adsMainDivHeader">تبلیغات</div>
-                                <img src="{{"../../../public/images/Chromite.jpg"}}" alt="">
+                                @include('features.advertise3D')
                             </center>
                         </div>
 

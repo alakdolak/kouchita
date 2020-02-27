@@ -1385,18 +1385,20 @@ figure.snip1091.hover figcaption:after {
 .dropping-texts {
     padding-left: 10px;
     display: flex;
-    display: flex;
-    width: 180px;
-    text-align: left;
+    width: 146px;
+    padding-right: 10px;
+    text-align: right;
     height: 36px;
     vertical-align: -2px;
     align-items: center;
+    float: right;
+    justify-content: flex-end;
 }
 
 .dropping-texts > div {
     font-size: 0px;
     opacity: 0;
-    margin-left: -30px;
+    margin-right: -30px;
     position: absolute;
     font-weight: 300;
     box-shadow: 0px 60px 25px -20px rgba(0, 0, 0, 0.5);
