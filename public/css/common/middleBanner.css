@@ -739,6 +739,8 @@ DIV.ppr_rup.ppr_priv_homepage_shelves .homepage_shelves_widget .prw_shelves_shel
     white-space: nowrap;
     direction: rtl;
     padding: 15px 8px 5px;
+    display: flex;
+    justify-content: space-evenly;
     /*height: 320px;*/
 }
 
@@ -830,71 +832,6 @@ DIV.ppr_rup.ppr_priv_homepage_shelves .homepage_shelves_widget .prw_shelves_shel
     text-decoration: none;
 }
 
-@media (max-width: 1188px) {
-    .middleBannerPhotoDiv .clear-both {
-        display: none;
-    }
-
-    .middleBannerPhotoDiv .smallOne:last-child {
-        margin-right: 10px;
-    }
-}
-
-@media (max-width: 1024px) {
-
-    .middleBannerDoublePhotoBanner {
-        overflow-x: auto;
-        white-space: nowrap;
-        direction: rtl;
-    }
-
-    .middleBannerDoublePhotoBanner .middleBannerPhotoBanner {
-        width: 450px;
-    }
-}
-
-@media (max-width: 992px) {
-
-    .eachPartStatistic {
-        width: 50px;
-        display: inline-block;
-        margin: 0 24px;
-    }
-
-    .eachPartStatistic:first-child {
-        margin-right: 40px;
-    }
-
-    .eachPartStatistic:last-child {
-        margin-left: 40px;
-    }
-}
-
-@media (max-width: 767px) {
-
-    DIV.prw_rup.prw_shelves_shelf_widget .shelf_container.rebrand .shelf_header .ui_icon.travelers-choice-badge {
-        display: inherit;
-    }
-
-    .poi_by_tag .ui_columns.is-multiline .ui_column {
-        width: 100%;
-    }
-
-    .poi_by_tag .ui_columns.is-multiline {
-        margin: 0 -8px !important;
-    }
-
-    .footerBarSpacer {
-        display: block;
-    }
-}
-
-@media (max-width: 480px) {
-    DIV.prw_rup.prw_shelves_shelf_widget .shelf_container.rebrand .shelf_header .shelf_title .shelf_title_container {
-        font-size: 17px;
-    }
-}
-
 
 /*banner_2*/
 
@@ -910,7 +847,7 @@ DIV.ppr_rup.ppr_priv_homepage_shelves .homepage_shelves_widget .prw_shelves_shel
     /*-moz-box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.3);*/
     height: 300px;
     left: 0;
-    margin: auto;
+    margin: 0 5px;
     overflow: hidden;
     position: relative;
     width: 300px;
@@ -1089,25 +1026,27 @@ circle {
     transform: translate(-9px, -8px);
 }
 
-.right {
-    margin-left: 95%;
-    margin-top: 168px;
+.rightButton {
+    top: 50%;
+    transform: translateY(-50%);
+    right: 1%;
     border: 1px solid #849494;
     background-color: transparent;
     transition: .5s;
 }
-.right:hover {
+.rightButton:hover {
     background-color: #fff;
 }
 
-.left {
-    margin-left: 0.5%;
-    margin-top: 168px;
+.leftButton {
+    top: 50%;
+    transform: translateY(-50%);
+    left: 1%;
     border: 1px solid #849494;
     background-color: transparent;
     transition: .5s;
 }
-.left:hover {
+.leftButton:hover {
     background-color: #fff;
 }
 
@@ -1246,6 +1185,14 @@ circle {
 /*banner_4*/
 
 @import url(https://fonts.googleapis.com/css?family=Raleway:400,800);
+
+.banner4Style {
+    display: flex;
+    justify-content: center;
+    overflow-x: auto;
+    direction: rtl;
+}
+
 figure.snip1091 {
     font-family: 'Raleway', Arial, sans-serif;
     position: relative;
@@ -1407,15 +1354,94 @@ figure.snip1091.hover figcaption:after {
 .dropping-texts > div:nth-child(1) {
     animation: roll 5s linear infinite 0s;
 }
+
 .dropping-texts > div:nth-child(2) {
     animation: roll 5s linear infinite 1s;
 }
+
 .dropping-texts > div:nth-child(3) {
     animation: roll 5s linear infinite 2s;
 }
+
 .dropping-texts > div:nth-child(4) {
     animation: roll2 5s linear infinite 3s;
 }
+
+
+@media (max-width: 1188px) {
+    .middleBannerPhotoDiv .clear-both {
+        display: none;
+    }
+
+    .middleBannerPhotoDiv .smallOne:last-child {
+        margin-right: 10px;
+    }
+}
+«
+@media (max-width: 1024px) {
+
+    .middleBannerDoublePhotoBanner {
+        overflow-x: auto;
+        white-space: nowrap;
+        direction: rtl;
+    }
+
+    .middleBannerDoublePhotoBanner .middleBannerPhotoBanner {
+        width: 450px;
+    }
+}
+
+@media (max-width: 992px) {
+
+    .eachPartStatistic {
+        width: 50px;
+        display: inline-block;
+        margin: 0 24px;
+    }
+
+    .eachPartStatistic:first-child {
+        margin-right: 40px;
+    }
+
+    .eachPartStatistic:last-child {
+        margin-left: 40px;
+    }
+}
+
+@media (max-width: 850px) {
+    .siteArticlesMainDiv {
+        display: inherit;
+    }
+    .banner4Style {
+        justify-content: inherit;
+    }
+}
+
+@media (max-width: 767px) {
+
+    DIV.prw_rup.prw_shelves_shelf_widget .shelf_container.rebrand .shelf_header .ui_icon.travelers-choice-badge {
+        display: inherit;
+    }
+
+    .poi_by_tag .ui_columns.is-multiline .ui_column {
+        width: 100%;
+    }
+
+    .poi_by_tag .ui_columns.is-multiline {
+        margin: 0 -8px !important;
+    }
+
+    .footerBarSpacer {
+        display: block;
+    }
+}
+
+@media (max-width: 480px) {
+    DIV.prw_rup.prw_shelves_shelf_widget .shelf_container.rebrand .shelf_header .shelf_title .shelf_title_container {
+        font-size: 17px;
+    }
+}
+
 
 @keyframes roll {
     0% {

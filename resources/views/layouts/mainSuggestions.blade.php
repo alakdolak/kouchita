@@ -139,43 +139,41 @@
 
     {{--banner_2--}}
     <div class="siteArticlesMainDiv">
-        <div class="row" style="display: flex;">
-            <div class="card transition">
-                <h2 class="h2MidBanerArticle transition">Awesome Headline</h2>
-                <p class="pMidBanerArticle">
-                    Aenean lacinia bibendum nulla sed consectetur. Donec ullamcorper nulla non metus auctor fringilla.
-                    Aenean lacinia bibendum nulla sed consectetur. Donec ullamcorper nulla non metus auctor fringilla.
-                    Aenean lacinia bibendum nulla sed consectetur. Donec ullamcorper nulla non metus auctor fringilla.
-                </p>
-                <div class="cta-container transition" style="left: 0px">
-                    <a href="#" class="cta">Call to action</a>
-                </div>
-                <div class="card_circle transition"></div>
+        <div class="card transition">
+            <h2 class="h2MidBanerArticle transition">Awesome Headline</h2>
+            <p class="pMidBanerArticle">
+                Aenean lacinia bibendum nulla sed consectetur. Donec ullamcorper nulla non metus auctor fringilla.
+                Aenean lacinia bibendum nulla sed consectetur. Donec ullamcorper nulla non metus auctor fringilla.
+                Aenean lacinia bibendum nulla sed consectetur. Donec ullamcorper nulla non metus auctor fringilla.
+            </p>
+            <div class="cta-container transition" style="left: 0px">
+                <a href="#" class="cta">Call to action</a>
             </div>
-            <div class="card transition">
-                <h2 class="h2MidBanerArticle transition">Awesome Headline</h2>
-                <p class="pMidBanerArticle">
-                    Aenean lacinia bibendum nulla sed consectetur. Donec ullamcorper nulla non metus auctor fringilla.
-                    Aenean lacinia bibendum nulla sed consectetur. Donec ullamcorper nulla non metus auctor fringilla.
-                    Aenean lacinia bibendum nulla sed consectetur. Donec ullamcorper nulla non metus auctor fringilla.
-                </p>
-                <div class="cta-container transition" style="left: 0px">
-                    <a href="#" class="cta">Call to action</a>
-                </div>
-                <div class="card_circle transition"></div>
+            <div class="card_circle transition"></div>
+        </div>
+        <div class="card transition">
+            <h2 class="h2MidBanerArticle transition">Awesome Headline</h2>
+            <p class="pMidBanerArticle">
+                Aenean lacinia bibendum nulla sed consectetur. Donec ullamcorper nulla non metus auctor fringilla.
+                Aenean lacinia bibendum nulla sed consectetur. Donec ullamcorper nulla non metus auctor fringilla.
+                Aenean lacinia bibendum nulla sed consectetur. Donec ullamcorper nulla non metus auctor fringilla.
+            </p>
+            <div class="cta-container transition" style="left: 0px">
+                <a href="#" class="cta">Call to action</a>
             </div>
-            <div class="card transition">
-                <h2 class="h2MidBanerArticle transition">Awesome Headline</h2>
-                <p class="pMidBanerArticle">
-                    Aenean lacinia bibendum nulla sed consectetur. Donec ullamcorper nulla non metus auctor fringilla.
-                    Aenean lacinia bibendum nulla sed consectetur. Donec ullamcorper nulla non metus auctor fringilla.
-                    Aenean lacinia bibendum nulla sed consectetur. Donec ullamcorper nulla non metus auctor fringilla.
-                </p>
-                <div class="cta-container transition" style="left: 0px">
-                    <a href="#" class="cta">Call to action</a>
-                </div>
-                <div class="card_circle transition"></div>
+            <div class="card_circle transition"></div>
+        </div>
+        <div class="card transition">
+            <h2 class="h2MidBanerArticle transition">Awesome Headline</h2>
+            <p class="pMidBanerArticle">
+                Aenean lacinia bibendum nulla sed consectetur. Donec ullamcorper nulla non metus auctor fringilla.
+                Aenean lacinia bibendum nulla sed consectetur. Donec ullamcorper nulla non metus auctor fringilla.
+                Aenean lacinia bibendum nulla sed consectetur. Donec ullamcorper nulla non metus auctor fringilla.
+            </p>
+            <div class="cta-container transition" style="left: 0px">
+                <a href="#" class="cta">Call to action</a>
             </div>
+            <div class="card_circle transition"></div>
         </div>
     </div>
 
@@ -299,7 +297,7 @@
     {{--banner_3--}}
     <div class='parent'>
         <div class='slider' style="width: 100%;">
-            <button type="button" id='banner3_right' class='right' name="button">
+            <button type="button" id='banner3_right' class='rightButton' name="button">
 
                 <svg version="1.1" id="Capa_1" width='40px' height='40px ' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                      viewBox="0 0 477.175 477.175" style="enable-background:new 0 0 477.175 477.175;" xml:space="preserve">
@@ -311,7 +309,7 @@
        </svg>
 
             </button>
-            <button type="button" id='banner3_left' class='left' name="button">
+            <button type="button" id='banner3_left' class='leftButton' name="button">
                 <svg version="1.1" id="Capa_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                      viewBox="0 0 477.175 477.175" style="enable-background:new 0 0 477.175 477.175;" xml:space="preserve">
        <g>
@@ -535,7 +533,7 @@
     </div>
 
     {{--banner_4--}}
-    <div class="row" style="justify-content: center; display: flex;">
+    <div class="banner4Style">
         <figure class="snip1091 red"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sq-sample6.jpg" alt="sq-sample6"/>
             <figcaption>
                 <h2>Lizbeth  <span>Kent</span></h2>
