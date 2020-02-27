@@ -93,7 +93,7 @@
         <div class="cpHeaderCityName">{{$place->name}}</div>
     </div>
     <div class="row">
-        <div class="col-lg-3 text-align-right hideOnPhone" style="float: left; padding: 0 !important;">
+        <div class="col-lg-3 col-sm-3 text-align-right hideOnPhone" style="float: left; padding: 0 !important;">
             <div class="postsMainDivInSpecificMode cpCommentBox cpBorderBottom">
                 @foreach($reviews as $item)
                     <div class="postMainDivShown float-right position-relative">
@@ -103,12 +103,12 @@
                             </div>
                             <div class="commentWriterExperienceDetails">
                                 <b class="userProfileName">{{$item->user->username}}</b>
-                                <div>در
+                                <div style="font-size: 10px">در
                                     <a href="{{$item->url}}" target="_blank">
                                         <span class="commentWriterExperiencePlace">{{$item->place->name}}، شهر {{$item->city->name}}، استان {{$item->state->name}}</span>
                                     </a>
                                 </div>
-                                <div>
+                                <div style="font-size: 10px;">
                                     {{$item->timeAgo}}
                                 </div>
                             </div>
@@ -157,7 +157,7 @@
             </div>
         </div>
 
-        <div id="cpBorderLeft" class="col-lg-9 cpBorderLeft">
+        <div id="cpBorderLeft" class="col-lg-9 col-sm-9 cpBorderLeft">
 
             <div class="row cpMainBox">
                 <div class="col-md-8 col-xs-12 pd-0Imp">
