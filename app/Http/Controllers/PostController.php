@@ -84,6 +84,7 @@ class PostController extends Controller {
 
         //this section get 5 most like post from lastMonthPost
         $likePost = \DB::select('SELECT post.id, COUNT(postLike.id) as likeCount FROM post JOIN postLike ON postLike.like = 1 AND postLike.postId = post.id AND post.id IN (' . implode(",", $lastMonthPostId) . ')  GROUP BY post.id ORDER BY likeCount DESC');
+
         $mostLike = array();
         $mostLikeId = array();
         foreach ($likePost as $item){

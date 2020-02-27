@@ -311,8 +311,8 @@
                                                             @endif
                                                         </div>
                                                         <div  class="option">
-                                                            <div class="row" ng-repeat="packet in packets">
-                                                                <div ng-repeat="place in packet.places" class="ui_column col-lg-3 col-xs-6 eachPlace" style="float: right">
+                                                            <div class="row">
+                                                                <div ng-repeat="place in packets" class="ui_column col-lg-3 col-xs-6 eachPlace" style="float: right">
                                                                     <div class="poi listBoxesMainDivs">
                                                                         <a href="[[place.redirect]]" class="thumbnail" style="margin-bottom: 5px !important;">
                                                                             <div class="prw_rup prw_common_centered_thumbnail">
@@ -635,7 +635,7 @@
     app.controller('PlaceController', function ($scope, $http) {
 
         $scope.show = false;
-        $scope.packets = [[]];
+        $scope.packets = [];
         $scope.oldScrollVal = 600;
 
 
@@ -663,7 +663,7 @@
             createFilter();
 
             if (page == 1)
-                $scope.packets = [[]];
+                $scope.packets = [];
 
             var scroll = $(window).scrollTop();
 
@@ -696,15 +696,18 @@
                 if (response.data != null && response.data.places != null && response.data.places.length > 0)
                     $scope.show = true;
 
-                $scope.packets[page - 1] = response.data;
-                $scope.packets[page - 1].places = response.data.places;
+                // $scope.packets[$scope.packets.length] = response.data;
+                // $scope.packets[$scope.packets.length] = response.data.places;
 
-                for (j = 0; j < $scope.packets[page - 1].places.length; j++) {
-                    $scope.packets[page - 1].places[j].ngClass = 'ui_bubble_rating bubble_' + $scope.packets[page - 1].places[j].avgRate + '0';
-                    if($scope.packets[page - 1].places[j].inTrip == 1)
-                        $scope.packets[page - 1].places[j].inTrip = 'red-heart-fill';
+                for(j = 0; j < response.data.places.length; j++){
+                    var k = $scope.packets.length;
+                    $scope.packets[$scope.packets.length] = response.data.places[j];
+
+                    $scope.packets[k].ngClass = 'ui_bubble_rating bubble_' + $scope.packets[k].avgRate + '0';
+                    if($scope.packets[k].inTrip == 1)
+                        $scope.packets[k].inTrip = 'red-heart-fill';
                     else
-                        $scope.packets[page - 1].places[j].inTrip = '';
+                        $scope.packets[k].inTrip = '';
                 }
 
                 if (response.data.places.length != 4) {
@@ -712,7 +715,6 @@
                     $scope.$broadcast('finalizeReceive');
                     return;
                 }
-
 
                 data = $.param({
                     pageNum: ++page,
@@ -729,19 +731,18 @@
                     kindPlaceId: '{{$kindPlace->id}}'
                 });
                 $http.post(requestURL, data, config).then(function (response) {
-
                     if (response.data != null && response.data.places != null && response.data.places.length > 0)
                         $scope.show = true;
 
-                    $scope.packets[page - 1] = response.data;
-                    $scope.packets[page - 1].places = response.data.places;
+                    for(j = 0; j < response.data.places.length; j++){
+                        var k = $scope.packets.length;
+                        $scope.packets[$scope.packets.length] = response.data.places[j];
 
-                    for (j = 0; j < $scope.packets[page - 1].places.length; j++) {
-                        $scope.packets[page - 1].places[j].ngClass = 'ui_bubble_rating bubble_' + $scope.packets[page - 1].places[j].avgRate + '0';
-                        if($scope.packets[page - 1].places[j].inTrip == 1)
-                            $scope.packets[page - 1].places[j].inTrip = 'red-heart-fill';
+                        $scope.packets[k].ngClass = 'ui_bubble_rating bubble_' + $scope.packets[k].avgRate + '0';
+                        if($scope.packets[k].inTrip == 1)
+                            $scope.packets[k].inTrip = 'red-heart-fill';
                         else
-                            $scope.packets[page - 1].places[j].inTrip = '';
+                            $scope.packets[k].inTrip = '';
                     }
 
                     if (response.data.places.length != 4) {
@@ -770,14 +771,16 @@
                         if (response.data != null && response.data.places != null && response.data.places.length > 0)
                             $scope.show = true;
 
-                        $scope.packets[page - 1] = response.data;
-                        $scope.packets[page - 1].places = response.data.places;
-                        for (j = 0; j < $scope.packets[page - 1].places.length; j++) {
-                            $scope.packets[page - 1].places[j].ngClass = 'ui_bubble_rating bubble_' + $scope.packets[page - 1].places[j].avgRate + '0';
-                            if($scope.packets[page - 1].places[j].inTrip == 1)
-                                $scope.packets[page - 1].places[j].inTrip = 'red-heart-fill';
+
+                        for(j = 0; j < response.data.places.length; j++){
+                            var k = $scope.packets.length;
+                            $scope.packets[$scope.packets.length] = response.data.places[j];
+
+                            $scope.packets[k].ngClass = 'ui_bubble_rating bubble_' + $scope.packets[k].avgRate + '0';
+                            if($scope.packets[k].inTrip == 1)
+                                $scope.packets[k].inTrip = 'red-heart-fill';
                             else
-                                $scope.packets[page - 1].places[j].inTrip = '';
+                                $scope.packets[k].inTrip = '';
                         }
 
                         $scope.$broadcast('finalizeReceive');
