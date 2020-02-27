@@ -270,7 +270,7 @@
             <div id="BODYCON" ng-app="mainApp">
                 <div class="eateryOverviewContent">
                     <div class="ui_columns is-partitioned">
-                        <div class="ui_column col-md-9 PlaceController" ng-controller="PlaceController as cntr" style="direction: rtl; padding: 9px 24px;">
+                        <div class="ui_column col-md-9 col-sm-8 PlaceController" ng-controller="PlaceController as cntr" style="direction: rtl; padding: 9px 24px;">
                             <div infinite-scroll="myPagingFunction()" class="coverpage">
                                 <div class="ppr_rup ppr_priv_restaurants_coverpage_content">
                                     <div>
@@ -279,7 +279,7 @@
                                                 <div class="section">
                                                     <div class="single_filter_pois">
                                                         <div id="FilterTopController" class="title ui_columns hideOnPhone" style="border-bottom: 1px solid lightgray;">
-                                                            <div class="ordering" style="font-weight: bold">مرتب سازی بر
+                                                            <div class="ordering sorting" style="font-weight: bold">مرتب سازی بر
                                                                 اساس:
                                                             </div>
                                                             <div class="ordering">
@@ -312,7 +312,7 @@
                                                         </div>
                                                         <div  class="option">
                                                             <div class="row">
-                                                                <div ng-repeat="place in packets" class="ui_column col-lg-3 col-xs-6 eachPlace" style="float: right">
+                                                                <div ng-repeat="place in packets" class="ui_column col-lg-3 col-md-4 col-xs-6 eachPlace">
                                                                     <div class="poi listBoxesMainDivs">
                                                                         <a href="[[place.redirect]]" class="thumbnail" style="margin-bottom: 5px !important;">
                                                                             <div class="prw_rup prw_common_centered_thumbnail">
@@ -383,7 +383,7 @@
                             </div>
                             <div id="bottomMainList" style="width: 100%; height: 5px;"></div>
                         </div>
-                        <div class="lhr ui_column col-md-3 hideOnPhone" id="FilterController" ng-controller="FilterController" style="direction: rtl; padding: 10px;">
+                        <div class="lhr ui_column col-md-3 col-sm-4 hideOnPhone" id="FilterController" ng-controller="FilterController" style="direction: rtl; padding: 10px;">
                             <div class="ppr_rup ppr_priv_restaurant_filters">
                                 <div class="verticalFilters placements">
                                     <div id="EATERY_FILTERS_CONT" class="eatery_filters">
