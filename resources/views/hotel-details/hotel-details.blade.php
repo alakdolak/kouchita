@@ -1091,14 +1091,16 @@ if ($total == 0)
                                                     </div>
                                                     <div>
                                                         <div class="row">
-                                                            @foreach($place->material as $item)
-                                                                <div class="col-sm-6 float-right">
-                                                                    <div class="row font-size-20">
-                                                                        <div class="col-sm-6">{{$item[1]}}</div>
-                                                                        <div class="col-sm-6" style="color: #4dc7bc">{{$item[0]}}</div>
+                                                            @if(isset($place->material) && is_array($place->material))
+                                                                @foreach($place->material as $item)
+                                                                    <div class="col-sm-6 float-right">
+                                                                        <div class="row font-size-20">
+                                                                            <div class="col-sm-6">{{$item[1]}}</div>
+                                                                            <div class="col-sm-6" style="color: #4dc7bc">{{$item[0]}}</div>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                            @endforeach
+                                                                @endforeach
+                                                            @endif
                                                         </div>
                                                     </div>
                                                 </div>

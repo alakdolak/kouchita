@@ -156,6 +156,8 @@ class PlaceController extends Controller {
 
         if($kindPlace->tableName == 'sogatSanaies')
             $place = $this->sogatSanaieDet($place);
+        else if($kindPlace->tableName == 'mahaliFood')
+            $place = $this->mahaliFoodDet($place);
 
         $video = '';
         if(isset($place->video))
@@ -293,6 +295,50 @@ class PlaceController extends Controller {
 
             $place->taste .= 'تند';
         }
+
+        return $place;
+    }
+
+    private function mahaliFoodDet($place){
+
+        $place->material = json_decode($place->material);
+
+        switch ($place->kind){
+            case 1:
+                $place->kindName = 'چلوخورش';
+                break;
+            case 2:
+                $place->kindName = 'خوراک';
+                break;
+            case 3:
+                $place->kindName = 'سالاد و پیش غذا';
+                break;
+            case 4:
+                $place->kindName = 'ساندویچ';
+                break;
+            case 5:
+                $place->kindName = 'کباب';
+                break;
+            case 6:
+                $place->kindName = 'دسر';
+                break;
+            case 7:
+                $place->kindName = 'نوشیدنی';
+                break;
+            case 8:
+                $place->kindName = 'سوپ و آش';
+                break;
+        }
+
+        if($place->hotOrCold == 1)
+            $place->hotOrCold = 'گرم';
+        else
+            $place->hotOrCold = 'سرد';
+
+        if($place->gram == 1)
+            $place->source = 'گرم';
+        else
+            $place->source = 'قاشق غذاخوری';
 
         return $place;
     }
