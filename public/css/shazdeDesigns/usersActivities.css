@@ -517,6 +517,7 @@ body {
 .commentWriterExperiencePlace  {
     color: #16174f;
     cursor: pointer;
+    font-size: 10px;
 }
 
 .commentContentsShow > p {

@@ -3,11 +3,45 @@
 
 <head>
     @include('layouts.topHeader')
+    <title>
+        کوچیتا |
+        صفحه
+        {{$place->name}}</title>
+    <meta content="article" property="og:type"/>
+    <meta name="title" content="{{$place->name}} | اطلاعات گردشگری {{$place->name}} – جاذبه های {{$place->name}} – هتل های {{$place->name}} – رستوران های {{$place->name}}- صنایع دستی و سوغات {{$place->name}} | کوچیتا " />
+    <meta name='description' content='. هر چه یک گردشگر باید بداند   اطلاعات جامع و کامل {{$place->name}}. اصلاعات عمومی و تخصصی گردشگری ' />
+    <meta name='keywords' content='جاذبه های  {{$place->name}} – اطلاعات گردشگری {{$place->name}} – نقد و بررسی {{$place->name}} ' />
+
+    {{--<meta name="keywords" content="{{$post->keyword}}">--}}
+    {{--<meta property="og:title" content=" {{$post->seoTitle}} " />--}}
+    {{--<meta property="og:description" content=" {{$post->meta}}" />--}}
+    {{--<meta name="twitter:title" content=" {{$post->seoTitle}} " />--}}
+    {{--<meta name="twitter:description" content=" {{$post->meta}}" />--}}
+    {{--<meta name="description" content=" {{$post->meta}}"/>--}}
+    {{--<meta property="article:author " content="{{$post->user->username}}" />--}}
+    {{--<meta property="article:section" content="article" />--}}
+    {{--<meta property="article:published_time" content="2019-05-28T13:32:55+00:00" /> زمان انتشار--}}
+    {{--<meta property="article:modified_time" content="2020-01-14T10:43:11+00:00" />زمان آخریت تغییر--}}
+    {{--<meta property="og:updated_time" content="2020-01-14T10:43:11+00:00" /> زمان آخرین آپدیت--}}
+
+    @if(isset($place->image))
+        <meta property="og:image" content="{{URL::asset($place->image)}}"/>
+        <meta property="og:image:secure_url" content="{{URL::asset($place->image)}}"/>
+        <meta property="og:image:width" content="550"/>
+        <meta property="og:image:height" content="367"/>
+        <meta name="twitter:image" content="{{URL::asset($place->image)}}"/>
+    @endif
+
+    <meta property="article:tag" content="{{$place->name}}"/>
+    <meta property="article:tag" content="جاذبه های {{$place->name}}"/>
+    <meta property="article:tag" content="{{$place->name}} گردی"/>
+    <meta property="article:tag" content="{{$place->name}} را بشناسیم"/>
+    <meta property="article:tag" content="اطلاعات {{$place->name}}"/>
+
+
+
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/home_rebranded.css?v=4')}}"/>
-    <title>صفحه {{$place->name}}</title>
-
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/long_lived_global_legacy_2.css?v=2')}}"/>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/masthead-saves.css?v=2')}}'/>
     <link rel='stylesheet' type='text/css' media='screen, print'
@@ -59,7 +93,7 @@
         <div class="cpHeaderCityName">{{$place->name}}</div>
     </div>
     <div class="row">
-        <div class="col-lg-3 text-align-right hideOnPhone" style="float: left; padding: 0 !important;">
+        <div class="col-lg-3 col-sm-3 text-align-right hideOnPhone" style="float: left; padding: 0 !important;">
             <div class="postsMainDivInSpecificMode cpCommentBox cpBorderBottom">
                 @foreach($reviews as $item)
                     <div class="postMainDivShown float-right position-relative">
@@ -69,12 +103,12 @@
                             </div>
                             <div class="commentWriterExperienceDetails">
                                 <b class="userProfileName">{{$item->user->username}}</b>
-                                <div>در
+                                <div style="font-size: 10px">در
                                     <a href="{{$item->url}}" target="_blank">
                                         <span class="commentWriterExperiencePlace">{{$item->place->name}}، شهر {{$item->city->name}}، استان {{$item->state->name}}</span>
                                     </a>
                                 </div>
-                                <div>
+                                <div style="font-size: 10px;">
                                     {{$item->timeAgo}}
                                 </div>
                             </div>
@@ -97,8 +131,8 @@
                         </div>
                         <div class="commentPhotosShow">
                             @if(count($item->pics) > 0)
-                            <div class="photosCol col-xs-12">
-                                <div data-toggle="modal" data-target=".showingPhotosModal" style="position: relative; overflow: hidden; display: flex; justify-content: center; align-items: center;">
+                            <div class="photosCol col-xs-12" onclick="showReviewPics({{$item->id}})">
+                                <div style="position: relative; overflow: hidden; display: flex; justify-content: center; align-items: center;">
                                     <img src="{{$item->pics[0]->picUrl}}" style="position: absolute;">
                                 </div>
                                 @if(count($item->pics) > 1)
@@ -122,7 +156,8 @@
                 @endforeach
             </div>
         </div>
-        <div id="cpBorderLeft" class="col-lg-9 cpBorderLeft">
+
+        <div id="cpBorderLeft" class="col-lg-9 col-sm-9 cpBorderLeft">
 
             <div class="row cpMainBox">
                 <div class="col-md-8 col-xs-12 pd-0Imp">
@@ -689,6 +724,38 @@
 <script defer src="{{URL::asset('js/cityPage/cityPageOffer.js')}}"></script>
 
 <script>
+    var reviews = {!! json_encode($reviews) !!};
+
+    function showReviewPics(_id){
+        var selectReview = 0;
+        var reviewPicForAlbum = [];
+
+        for(i = 0; i < reviews.length; i++){
+            if(reviews[i]['id'] == _id){
+                selectReview = reviews[i];
+                break;
+            }
+        }
+
+        if(selectReview != 0){
+            revPic = selectReview['pics'];
+            for(var i = 0; i < revPic.length; i++){
+                reviewPicForAlbum[i] = {
+                    'id' : revPic[i]['id'],
+                    'sidePic' : revPic[i]['picUrl'],
+                    'mainPic' : revPic[i]['picUrl'],
+                    'video' : revPic[i]['videoUrl'],
+                    'userPic' : selectReview['userPic'],
+                    'userName' : selectReview['user']['username'],
+                    'uploadTime' : selectReview['timeAgo'],
+                    'showInfo' : false,
+                }
+            }
+
+            createPhotoModal('عکس های پست', reviewPicForAlbum);
+        }
+    }
+
     function showMoreText(element){
         $(element).parent().addClass('display-none');
         $(element).parent().next().removeClass('display-none');
@@ -755,7 +822,6 @@
     var markersNat = [];
     var majaraMap = [];
     var map2;
-
 
     function init() {
         var x = '{{$map["C"]}}';
@@ -958,7 +1024,6 @@
 </script>
 
 <script src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyCdVEd4L2687AfirfAnUY1yXkx-7IsCER0&callback=init"></script>
-
 <script>
     var swiper = new Swiper('.cpMainSug', {
         slidesPerGroup: 1,

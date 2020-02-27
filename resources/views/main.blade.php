@@ -5,15 +5,30 @@
     @include('layouts.topHeader')
 
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/home_rebranded.css?v=4')}}"/>
-    <title>صفحه اصلی</title>
+    {{--<meta name="description" content="متن توضیحات متا"/>--}}
+    {{--<meta name="keywords" content="کیورد 1, کیورد دو, کی ورد سه">--}}
+    <meta property="og:locale" content="fa_IR" />
+    {{--<meta property="og:locale:alternate" content="fa_IR" />--}}
+    <meta property="og:type" content="website" />
+    <title> کوچیتا، سامانه جامع گردشگری ایران </title>
+    <meta name="title" content="کوچیتا | سامانه جامع گردشگری ایران و شبکه اجتماعی گردشگران" />
+    <meta name='description' content='کوچیتا، سامانه جامع گردشگری ایران و شبکه اجتماعی گردشگران. اطلاعات اماکن و جاذبه ها، هتل ها، بوم گردی، ماجراجویی، آموزش سفر، فروشگاه صنایع دستی ، پادکست سفر' />
+    <meta name='keywords' content='کوچیتا، هتل، تور ، سفر ارزان، سفر در ایران، بلیط، تریپ، نقد و بررسی، سفرنامه، کمپینگ، ایران گردی، آموزش سفر، مجله گردشگری، مسافرت، مسافرت داخلی, ارزانترین قیمت هتل ، مقایسه قیمت ، بهترین رستوران ها ، بلیط ارزان ، تقویم تعطیلات' />
+    <meta property="og:image" content="{{URL::asset('_images/nopic/blank.jpg')}}"/>
+    <meta property="og:image:secure_url" content="{{URL::asset('_images/nopic/blank.jpg')}}"/>
+    <meta property="og:image:width" content="550"/>
+    <meta property="og:image:height" content="367"/>
+    <meta name="twitter:image" content="{{URL::asset('_images/nopic/blank.jpg')}}"/>
+
 
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/long_lived_global_legacy_2.css?v=2')}}"/>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/masthead-saves.css?v=2')}}'/>
-    <link rel='stylesheet' type='text/css' media='screen, print'
-          href='{{URL::asset('css/theme2/hr_north_star.css?v=2')}}'/>
+    <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/hr_north_star.css?v=2')}}'/>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/icons.css?v=1')}}'/>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/mainPageStyles.css')}}'/>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/abbreviations.css?v=1')}}'/>
+
+    <script src="{{URL::asset('js/main/middleBanner.js')}}"></script>
 
     <style>
         .mainBannerSlider {
@@ -71,7 +86,7 @@
 
 </head>
 
-<body class="rebrand_2017 desktop HomeRebranded  js_logging" ng-app="mainApp">
+<body class="rebrand_2017 desktop HomeRebranded  js_logging" ng-app="mainApp" style="background-color: #EAFBFF;">
 
     @include('general.forAllPages')
 
@@ -95,16 +110,22 @@
                                 <!-- Swiper -->
                                 <div id="mainSlider" class="swiper-container">
                                     <div class="swiper-wrapper">
-                                        @foreach($sliderPic as $item)
-                                            <div class="swiper-slide mobileHeight" style="position: relative">
-                                                <img class="eachPicOfSlider" src="{{URL::asset('_images/sliderPic/' . $item->pic)}}" alt="{{$item->alt}}">
-                                                @if($item->text != null && $item->text != '')
-                                                    <div class="textInSlide" style="background-color: {{$item->textBackground}}; color: {{$item->textColor}};">
-                                                        {{$item->text}}
-                                                    </div>
-                                                @endif
-                                            </div>
-                                        @endforeach
+                                        {{--@foreach($sliderPic as $item)--}}
+                                            {{--<div class="swiper-slide mobileHeight" style="position: relative">--}}
+                                                {{--<img class="eachPicOfSlider" src="{{URL::asset('_images/sliderPic/' . $item->pic)}}" alt="{{$item->alt}}">--}}
+                                                {{--@if($item->text != null && $item->text != '')--}}
+                                                    {{--<div class="textInSlide" style="background-color: {{$item->textBackground}}; color: {{$item->textColor}};">--}}
+                                                        {{--{{$item->text}}--}}
+                                                    {{--</div>--}}
+                                                {{--@endif--}}
+                                            {{--</div>--}}
+                                        {{--@endforeach--}}
+
+
+                                        <div class="swiper-slide mobileHeight" style="position: relative; background-color: #d8a7b1">
+                                            <img src="{{URL::asset('images/icons/p1.png')}}" style="height: 100%; position: absolute; left: 0px;">
+                                        </div>
+
                                     </div>
                                     <!-- Add Pagination -->
                                     <div class="swiper-pagination"></div>
@@ -130,23 +151,69 @@
                                             <div onclick="$('#searchPane').removeClass('hidden');  $('#darkModeMainPage').toggle(); $('#placeName').focus();">کدام غذای محلی را می‌خواهید تجربه کنید؟</div>
                                         @endif
                                     </div>
+
+                                    <div class='console-container' style="width: 40%;">
+                                        <span id='text'></span>
+                                    </div>
+                                    <script>
+                                        var setInterText = 0;
+
+                                        consoleText(['لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت'], 'text',['black']);
+
+                                        function consoleText(words, id, colors) {
+                                            if(setInterText != 0)
+                                                clearInterval(setInterText);
+
+                                            document.getElementById('text').innerHTML = '';
+                                            if (colors === undefined) colors = ['#fff'];
+                                            var visible = true;
+                                            var con = document.getElementById('console');
+                                            var letterCount = 1;
+                                            var x = 1;
+                                            var waiting = false;
+                                            var target = document.getElementById(id);
+                                            target.setAttribute('style', 'color:' + colors[0]);
+
+                                            setInterText = window.setInterval(function() {
+                                                if (letterCount === 0 && waiting === false) {
+                                                    waiting = true;
+                                                    target.innerHTML = words[0].substring(0, letterCount);
+                                                    window.setTimeout(function() {
+                                                        var usedColor = colors.shift();
+                                                        colors.push(usedColor);
+                                                        var usedWord = words.shift();
+                                                        words.push(usedWord);
+                                                        x = 1;
+                                                        target.setAttribute('style', 'color:' + colors[0])
+                                                        letterCount += x;
+                                                        waiting = false;
+                                                    }, 10)
+                                                }
+                                                else if (waiting === false) {
+                                                    target.innerHTML = words[0].substring(0, letterCount);
+                                                    letterCount += x;
+                                                }
+                                            }, 100);
+                                        }
+                                    </script>
+
                                     <div class="clear-both"></div>
                                 </div>
                             </div>
+
                             <div class="ppr_rup ppr_priv_trip_search display-none hideOnScreen">
                                 <!-- Swiper -->
                                 <div id="mainSlider" class="swiper-container">
                                     <div class="swiper-wrapper">
-                                        @foreach($sliderPic as $item)
-                                            <div class="swiper-slide">
-                                                <img class="eachPicOfSlider" src="{{URL::asset('_images/sliderPic/' . $item->pic)}}" alt="{{$item->alt}}">
-                                            </div>
-                                            @if($item->text != null && $item->text != '')
-                                                <div class="textInSlide" style="background-color: {{$item->textBackground}}; color: {{$item->textColor}};">
-                                                    {{$item->text}}
-                                                </div>
-                                            @endif
-                                        @endforeach
+                                        {{--@foreach($sliderPic as $item)--}}
+                                            {{--<div class="swiper-slide">--}}
+                                                {{--<img class="eachPicOfSlider" src="{{URL::asset('_images/sliderPic/' . $item->pic)}}" alt="{{$item->alt}}">--}}
+                                            {{--</div>--}}
+                                        {{--@endforeach--}}
+                                        <div class="swiper-slide mobileHeight" style="position: relative; background-color: #d8a7b1">
+                                            <img src="{{URL::asset('images/icons/p1.png')}}" style="height: 100%; position: absolute; left: 0px;">
+                                        </div>
+
                                     </div>
                                     <!-- Add Pagination -->
                                     <div class="swiper-pagination"></div>
@@ -572,7 +639,7 @@
         centeredSlides: true,
         loop: true,
         autoplay: {
-            delay: 50000,
+            delay: 500000,
             disableOnInteraction: false,
         },
         pagination: {

@@ -239,6 +239,7 @@
     }
 
     function doReviewFilter(){
+        reviewPage = 1;
         loadReviews();
     }
 

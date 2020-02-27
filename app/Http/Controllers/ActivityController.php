@@ -168,7 +168,7 @@ class ActivityController extends Controller {
                 $itr->placePic = URL::asset("_images/" . $kindPlace->fileName . "/" . $tmp->file . "/f-1.jpg");
             else
                 $itr->placePic = URL::asset("_images/nopic/blank.jpg");
-            $itr->placeRedirect = route('placeDetails', ['placeId' => $tmp->id, 'kindPlaceId' => $itr->kindPlaceId]);
+            $itr->placeRedirect = createUrl($kindPlace->id, $tmp->id, 0, 0);
 
             $city = Cities::whereId($tmp->cityId);
             $itr->placeCity = $city->name;

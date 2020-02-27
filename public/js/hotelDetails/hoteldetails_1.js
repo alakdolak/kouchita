@@ -28,53 +28,7 @@ function isPhotographer(){
     $("#photoEditor").removeClass('hidden');
 }
 
-function changeSiteSlidePic(_index){
-    var photo = sitePics[_index];
-
-    document.getElementById('mainSiteSliderPic').src = photo['s'];
-}
-
-function changePhotographerSlidePic(_index){
-    var photo = photographerPics[_index];
-    var likeDislike = '                                        <div class="photosFeedBackBtn">\n' +
-                        '                                        <div class="feedBackBtn">\n' +
-                        '                                            <div class="col-xs-6 likeBox" onclick="likePhotographerPic(this, 1, ' + photo["id"] + ')">دوست داشتم' +
-                        '                                               <span class="likeBoxIcon firstIcon"></span>' +
-                        '                                               <span class="likeBoxIconClicked display-none secondIcon"></span>' +
-                        '                                            </div>\n' +
-                        '                                            <div class="col-xs-6 dislikeBox" onclick="likePhotographerPic(this, 0, ' + photo["id"] + ')">دوست نداشتم' +
-                        '                                               <span class="dislikeBoxIcon firstIcon"></span>' +
-                        '                                               <span class="dislikeBoxIconClicked display-none secondIcon"></span>' +
-                        '                                            </div>\n' +
-                        '                                        </div>\n' +
-                        '                                        <div class="feedbackStatistic">\n' +
-                        '                                            <span>' + photo["like"] + '</span>\n' +
-                        '                                                نفر دوست داشتند و\n' +
-                        '                                            <span>' + photo["dislike"] + '</span>\n' +
-                        '                                                نفر دوست نداشتند\n' +
-                        '                                        </div>\n';
-
-    document.getElementById('photographerSlideUserPic').src = photo['userPic'];
-    document.getElementById('photographerSlideUserName').innerText = photo['name'];
-    document.getElementById('photographerDescription').innerText = photo['description'];
-    document.getElementById('photographerSlideTimeInfo').innerText = photo['fromUpload'];
-
-    if(photo['showInfo']){
-        document.getElementById('photographerSlideFeedBackBtns').style.display = 'block';
-        document.getElementById('photographerSlideFeedBackBtns').innerHTML = likeDislike;
-        document.getElementById('photographerDescription').style.display = 'block';
-        document.getElementById('photographerSlideInfos').style.display = 'block';
-    }
-    else{
-        document.getElementById('photographerSlideFeedBackBtns').style.display = 'none';
-        document.getElementById('photographerDescription').style.display = 'none';
-        document.getElementById('photographerSlideInfos').style.display = 'none';
-    }
-
-    document.getElementById('mainPhotographerSliderPic').src = photo['s'];
-}
-
-function likePhotographerPic(element,_like, _id){
+function likePhotographerPic(_id, _like){
 
     if(!checkLogin())
         return;
@@ -87,38 +41,44 @@ function likePhotographerPic(element,_like, _id){
             'like' : _like
         },
         success: function(response){
-            if(response == 'ok')
-                alert('نظر شما با موفقیت ثبت شد. تشکر از مشارکت شما');
-            else if(response == 'nok1')
-                alert('برای ثبت نظر باید ابتدا وارد شوید');
-            else if(response == 'nok2')
-                alert('شما قبلا رای داده اید');
-            else if(response == 'nok2')
-                alert('مشکلی پیش امده لطفا دوباره تلاش کنید');
+            response = JSON.parse(response);
+            if(response[0] == 'ok'){
+                setLikeNumberInPhotoAlbum(response[1], 'like');
+                setLikeNumberInPhotoAlbum(response[2], 'dislike');
+                likePhotoAlbum(_like);
+                for(i = 0; i < photographerPics.length; i++){
+                    if(photographerPics[i]['id'] == _id){
+                        photographerPics[i]['like'] = response[1];
+                        photographerPics[i]['dislike'] = response[2];
+                        photographerPics[i]['userLike'] = _like;
+                        break;
+                    }
+                }
+            }
+
         }
     })
 
-    if(_like==1) {
-        $(element).toggleClass('color-red');
-        $(element).children("span.firstIcon").toggle();
-        $(element).children("span.secondIcon").toggle();
-
-        $(element).next().removeClass('color-darkred');
-        $(element).next().children("span.secondIcon").hide();
-        $(element).next().children("span.firstIcon").show();
-    }
-    else if(_like==0) {
-        $(element).toggleClass('color-darkred');
-        $(element).children("span.firstIcon").toggle();
-        $(element).children("span.secondIcon").toggle();
-
-        $(element).prev().removeClass('color-red');
-        $(element).prev().children("span.secondIcon").hide();
-        $(element).prev().children("span.firstIcon").show();
-    }
+    // if(_like==1) {
+    //     $(element).toggleClass('color-red');
+    //     $(element).children("span.firstIcon").toggle();
+    //     $(element).children("span.secondIcon").toggle();
+    //
+    //     $(element).next().removeClass('color-darkred');
+    //     $(element).next().children("span.secondIcon").hide();
+    //     $(element).next().children("span.firstIcon").show();
+    // }
+    // else if(_like==0) {
+    //     $(element).toggleClass('color-darkred');
+    //     $(element).children("span.firstIcon").toggle();
+    //     $(element).children("span.secondIcon").toggle();
+    //
+    //     $(element).prev().removeClass('color-red');
+    //     $(element).prev().children("span.secondIcon").hide();
+    //     $(element).prev().children("span.firstIcon").show();
+    // }
 
 }
-
 
 function momentChangeRate(_index, _value, _kind){
 
