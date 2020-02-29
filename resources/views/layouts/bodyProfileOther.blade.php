@@ -9,7 +9,7 @@
         <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/short_lived_global_legacy.css?v=1')}}'/>
         <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/universal_new.css?v=1')}}' data-rup='universal_new'/>
         <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/masthead-saves.css?v=1')}}' data-rup='long_lived_global_legacy'/>
-        <title>شازده مسافر | صفحه کاربری</title>
+        <title>کوچیتا | صفحه کاربری</title>
         <link rel="stylesheet" type="text/css" media="screen, print" href="{{URL::asset('css/theme2/mbr_profile.css?v=1')}}"/>
         <!--[if IE 6]>
         <link rel="stylesheet" type="text/css" media="screen, print" href="{{URL::asset('css/theme2/winIE6.css?v=1')}}" />
@@ -76,7 +76,7 @@
                     <div class="global-nav-bar global-nav-green" style="background-color: #4dc7bc !important;">
                         <div class="ui_container global-nav-bar-container">
                             <div class="global-nav-hamburger is-hidden-tablet"><span class="ui_icon menu-bars"></span></div>
-                            <a href="{{route('main')}}" class="global-nav-logo  "><img src="{{URL::asset('images/logo.svg')}}" alt="شازده مسافر" class="global-nav-img global-nav-svg"/></a>
+                            <a href="{{route('main')}}" class="global-nav-logo  "><img src="{{URL::asset('images/logo.svg')}}" alt="کوچیتا" class="global-nav-img global-nav-svg"/></a>
                             <div class="global-nav-links ui_tabs inverted is-hidden-mobile">
                                 <div id="taplc_global_nav_links_0" class="ppr_rup ppr_priv_global_nav_links" data-placement-name="global_nav_links">
                                     <div class="global-nav-links-container">
@@ -142,7 +142,7 @@
                                 <div class="sidebar-nav-close">
                                     <div class="ui_icon times"></div>
                                 </div>
-                                <a href="/" class="global-nav-logo"><img src='{{URL::asset('images/logo.png')}}' alt="شازده مسافر" class="global-nav-img"/></a>
+                                <a href="/" class="global-nav-logo"><img src='{{URL::asset('images/logo.png')}}' alt="کوچیتا" class="global-nav-img"/></a>
                             </div>
                             @if(Auth::check())
                                 <div class="sidebar-nav-profile-container">

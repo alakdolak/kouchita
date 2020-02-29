@@ -1487,7 +1487,7 @@ class HomeController extends Controller
                 $user->password = Hash::make($newPas);
 
                 try {
-                    $text = 'رمزعبور جدید شما در سایت شازده مسافر:' . '<br/>' . $newPas .
+                    $text = 'رمزعبور جدید شما در سایت کوچیتا:' . '<br/>' . $newPas .
                         '<center>به ما سر بزنید</center><br/><center><a href="www.shazdemosafer.com">www.shazdemosafer.com</a></center>';
                     if (sendMail($text, $email, 'بازیابی رمزعبور'))
                         echo "ok";

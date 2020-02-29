@@ -263,7 +263,7 @@ $authUrl = $client->createAuthUrl();
     </div>
     <div class="col-xs-12" style="direction: rtl;">
         <div class="loginPaneInLoginPopUp col-xs-6" style="text-align: center;">
-            <div style="font-size: 14px !important;" class="header_text">در حال حاضر عضو شازده مسافر هستید؟!</div>
+            <div style="font-size: 14px !important;" class="header_text">در حال حاضر عضو کوچیتا هستید؟!</div>
             <div>
                 <div>
                     <label style="width: 100%">

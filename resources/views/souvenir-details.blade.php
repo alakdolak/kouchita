@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="{{URL::asset('css/theme2/media_uploader.css')}}">
     <script async src="{{URL::asset("js/bootstrap-datepicker.js")}}"></script>
     <link rel="stylesheet" href="{{URL::asset('css/theme2/bootstrap-datepicker.css?v=1')}}">
-    {{--<title>{{$place->name}} | {{$city->name}} | شازده مسافر</title>--}}
+    {{--<title>{{$place->name}} | {{$city->name}} | کوچیتا</title>--}}
 @stop
 
 @section('meta')
@@ -33,7 +33,7 @@
     {{--<meta property="article:tag" content="{{$place->tag15}}"/>--}}
     {{--<meta name="twitter:card" content="summary_large_image"/>--}}
     {{--<meta name="twitter:description" content="{{$place->meta}}"/>--}}
-    {{--<meta name="twitter:title" content="{{$place->name}} | {{$city->name}} | شازده مسافر"/>--}}
+    {{--<meta name="twitter:title" content="{{$place->name}} | {{$city->name}} | کوچیتا"/>--}}
     {{--<meta property="og:url" content="{{Request::url()}}"/>--}}
     {{--@if(count($photos) > 0)--}}
     {{--<meta property="og:image" content="{{$photos[0]}}"/>--}}
@@ -43,7 +43,7 @@
     {{--<meta name="twitter:image" content="{{$photos[0]}}"/>--}}
     {{--@endif--}}
     {{--<meta content="article" property="og:type"/>--}}
-    {{--<meta property="og:title" content="{{$place->name}} | {{$city->name}} | شازده مسافر"/>--}}
+    {{--<meta property="og:title" content="{{$place->name}} | {{$city->name}} | کوچیتا"/>--}}
 
 
 
@@ -2159,7 +2159,7 @@
                             <div class="ppr_rup ppr_priv_location_nearby">
                                 <div class="nearbyContainer outerShell block_wrap tourQualityFeedbackInstructions" >
                                     <div class="block_header">
-                                        <h3 class="block_title">مرامنامه کیفی شازده مسافر</h3>
+                                        <h3 class="block_title">مرامنامه کیفی کوچیتا</h3>
                                     </div>
                                     <p>مسافر عزیز تمام مطالب این صفحه به جز تورهای مشابه، توسط برگزارکننده تهیه گردیده است. پس تمام آن‌ها حق شما برای بهره‌مندیدر تور پیش‌روست.همواره نسبت به شرایط، رویدادها و خدمات تور آگاه باشید و آن‌ها را مطالبه کنید.</p>
                                     <p>همواره با استفاده از شماره‌های موجود اطلاعات خود را نسبت به شرایط تور بالا ببرید و سؤالی را نپرسیده نگذارید.</p>

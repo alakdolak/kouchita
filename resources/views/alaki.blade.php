@@ -273,7 +273,7 @@ else
 
 <footer style="width: 100%; margin-top: 10px; padding: 20px; position: relative">
     <img src="{{URL::asset('images/yellowBack.png')}}" style="position: absolute; width: 100%; height: 200px">
-    <p style="position: absolute; width: 90%; left: 5%; right: auto; text-align: center; top: 80px">شما از قابلیت سفرهای من سایت شازده مسافر استفاده کرده اید.</p>
+    <p style="position: absolute; width: 90%; left: 5%; right: auto; text-align: center; top: 80px">شما از قابلیت سفرهای من سایت کوچیتا استفاده کرده اید.</p>
     <p style="position: absolute; width: 90%; left: 5%; right: auto; text-align: center; top: 130px">در صورت نیاز به اطلاعات بیشتر به سایت <a href="{{route('home')}}">www.shazdemosafer.com</a> مراجعه نمایید.</p>
 </footer>
 </body>

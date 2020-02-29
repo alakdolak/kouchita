@@ -19,7 +19,7 @@
                         </div>
 
                         <a href="{{route('main')}}" class="global-nav-logo">
-                            <img src="{{URL::asset('images/logo.png')}}" alt="شازده مسافر" class="global-nav-img global-nav-svg"/>
+                            <img src="{{URL::asset('images/logo.png')}}" alt="کوچیتا" class="global-nav-img global-nav-svg"/>
                         </a>
 
                         <div class="global-nav-links ui_tabs inverted">
@@ -205,6 +205,7 @@
                         <div class="clear-both"></div>
                     </div>
                 </div>
+
             </div>
             <div class="sidebar-nav-wrapper hidden">
                 <div class="sidebar-nav-backdrop"></div>
@@ -214,7 +215,7 @@
                             <div class="sidebar-nav-close">
                                 <div class="ui_icon times"></div>
                             </div>
-                            <a href="/" class="global-nav-logo"><img src='{{URL::asset('images/logo.png')}}' alt="شازده مسافر" class="global-nav-img"/></a>
+                            <a href="/" class="global-nav-logo"><img src='{{URL::asset('images/logo.png')}}' alt="کوچیتا" class="global-nav-img"/></a>
                         </div>
                         <div class="sidebar-nav-profile-container">
                             @if(Auth::check())

@@ -265,7 +265,7 @@
                             </div>
                             <div id="targetHelp_14" class="targets col-xs-12 invitationFriendsMainDiv">
                                 <div class="invitationFriendsTitle">معرفی دوستان</div>
-                                <p>دوستان خود را به شازده مسافر معرفی کنید و امتیاز بگیرید</p>
+                                <p>دوستان خود را به کوچیتا معرفی کنید و امتیاز بگیرید</p>
                                 <div class="phoneNumMainDiv">
                                     <input autocomplete="off" id="phoneNum" type="text" placeholder="09xxxxxxxxx">
                                     <div class="sendInvitationCodeMainDiv">

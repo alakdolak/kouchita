@@ -22,16 +22,16 @@
 
 
     <?php if($mode == "badge"): ?>
-        <title>شازده مسافر | مدال های گردشگری</title>
+        <title>کوچیتا | مدال های گردشگری</title>
     <?php endif; ?>
         <?php if($mode == "profile"): ?>
-        <title>شازده مسافر | صفحه کاربری</title>
+        <title>کوچیتا | صفحه کاربری</title>
         <?php endif; ?>
         <?php if($mode == "message"): ?>
-        <title>شازده مسافر | پیام های من</title>
+        <title>کوچیتا | پیام های من</title>
         <?php endif; ?>
         <?php if($mode == "message"): ?>
-        <title>شازده مسافر | پیام های من</title>
+        <title>کوچیتا | پیام های من</title>
         <?php endif; ?>
         <link rel="stylesheet" type="text/css" media="screen, print" href="{{URL::asset('css/theme2/mbr_profile.css?v=1')}}"/>
         <!--[if IE 6]>
@@ -68,7 +68,7 @@
                         <div class="ui_container global-nav-bar-container position-relative">
                             <div class="global-nav-hamburger is-hidden-tablet"><span class="ui_icon menu-bars"></span></div>
 
-                            <a href="{{route('main')}}" class="global-nav-logo  "><img src="{{URL::asset('images/logo.png')}}" alt="شازده مسافر" class="global-nav-img global-nav-svg"/></a>
+                            <a href="{{route('main')}}" class="global-nav-logo  "><img src="{{URL::asset('images/logo.png')}}" alt="کوچیتا" class="global-nav-img global-nav-svg"/></a>
 
                             <div class="global-nav-links ui_tabs inverted is-hidden-mobile">
                                 <div id="taplc_global_nav_links_0" class="ppr_rup ppr_priv_global_nav_links" data-placement-name="global_nav_links">
@@ -214,7 +214,7 @@
                                 <div class="sidebar-nav-close">
                                     <div class="ui_icon times"></div>
                                 </div>
-                                <a href="/" class="global-nav-logo"><img src='{{URL::asset('images/logo.png')}}' alt="شازده مسافر" class="global-nav-img"/></a>
+                                <a href="/" class="global-nav-logo"><img src='{{URL::asset('images/logo.png')}}' alt="کوچیتا" class="global-nav-img"/></a>
                             </div>
                             @if(Auth::check())
                                 <div class="sidebar-nav-profile-container">
@@ -344,6 +344,7 @@
                 </li>
             </ul>
         </div>
+
         <script>
 
             $(document).ready(function() {
