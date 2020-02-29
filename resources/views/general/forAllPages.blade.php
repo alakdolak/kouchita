@@ -25,6 +25,8 @@
     <div class="loader_200"></div>
 </div>
 
+@include('general.adminInPage')
+
 @include('general.modalPhoto')
 
 @include('general.proSearch')

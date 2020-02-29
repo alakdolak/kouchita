@@ -690,6 +690,7 @@ Route::group(array('middleware' => ['throttle:30', 'nothing', 'auth']), function
 Route::group(array('middleware' => ['throttle:30', 'auth', 'adminAccess']), function () {
 
     Route::post('middleBannerImage', 'HomeController@middleBannerImages')->name('middleBanner.image.store');
+    Route::post('middleBannerImagesDelete', 'HomeController@middleBannerImagesDelete')->name('middleBanner.image.delete');
 
     Route::get('fillState', 'HomeController@fillState');
 

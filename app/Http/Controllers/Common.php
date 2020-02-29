@@ -1030,7 +1030,7 @@ function getUserPic(){
     return $uPic;
 }
 
-function createUrl($kindPlaceId, $placeId, $stateId, $cityId){
+function createUrl($kindPlaceId, $placeId, $stateId, $cityId, $articleId = 0){
     if($stateId != 0){
         $state = State::find($stateId);
         return url('cityPage/state/' . $state->name);
@@ -1047,6 +1047,23 @@ function createUrl($kindPlaceId, $placeId, $stateId, $cityId){
             return url('show-place-details/' . $kindPlace->fileName . '/' . $place->slug);
         else if(isset($place->id))
             return url('show-place-details/' . $kindPlace->fileName . '/' . $place->id);
+    }
+    else if($articleId != 0){
+        $post = \App\models\Post::find($articleId);
+        if($post != null)
+            return url('article/'. $post->slug);
+        else
+            return false;
+    }
+
+}
+
+function createPicUrl($articleId){
+
+    if($articleId != 0){
+        $post = \App\models\Post::find($articleId);
+        if($post != null)
+            return URL::asset('_images/posts/' . $post->id . '/' . $post->pic);
     }
 }
 

@@ -71,7 +71,7 @@ class HomeController extends Controller
 
     public function middleBannerImages(Request $request)
     {
-        if(\auth()->check() && \auth()->user()->role == 0){
+        if(\auth()->check() && \auth()->user()->level == 1){
             $location = __DIR__ . '/../../../../assets/_images/bannerPic';
 
             if(!file_exists($location))
@@ -82,48 +82,95 @@ class HomeController extends Controller
             if(!file_exists($location))
                 mkdir($location);
 
-            if(isset($_FILES['pic']) && $_FILES['pic']['error'] == 0) {
-                $condition = ['page' => $request->page, 'number' => $request->number, 'section' => $request->section];
-                $pic = BannerPics::where($condition)->first();
-                if($pic != null) {
-                    if (file_exists($location . '/' . $pic->pic))
-                        unlink($location . '/' . $pic->pic);
+            if(isset($request->id) && $request->id != 0){
+                $pic = BannerPics::find($request->id);
+                if($pic != null){
+                    $link = $request->link;
+                    if (strpos($link, 'http') === false)
+                        $link = 'https://' . $link;
+
+                    $pic->link = $link;
+                    $pic->text = $request->text;
+                    if (isset($_FILES['pic']) && $_FILES['pic']['error'] == 0){
+                        if (file_exists($location . '/' . $pic->pic))
+                            unlink($location . '/' . $pic->pic);
+
+                        $fileName =  time() . $_FILES['pic']['name'];
+                        $destinationPic = $location . '/' . $fileName;
+
+                        compressImage($_FILES['pic']['tmp_name'], $destinationPic, 80);
+                        $pic->pic = $fileName;
+                    }
+                    $pic->save();
+                    echo json_encode(['ok', $pic->id]);
                 }
-                else {
+                else
+                    echo 'nok5';
+
+                return;
+            }
+            else {
+                if (isset($_FILES['pic']) && $_FILES['pic']['error'] == 0) {
+
                     $pic = new BannerPics();
                     $pic->page = $request->page;
                     $pic->section = $request->section;
                     $pic->number = $request->number;
-                }
+                    $fileName =  time() . $_FILES['pic']['name'];
+                    $destinationPic = $location . '/' . $fileName;
 
-                $destinationPic = $location . '/' . $_FILES['pic']['name'];
+                    compressImage($_FILES['pic']['tmp_name'], $destinationPic, 80);
+                    $pic->pic = $fileName;
 
-                $link = 'https://';
-                $link = $request->link;
-                if(strpos($link, 'http') === false)
-                    $link = 'https://' . $link;
-
-                $pic->link = $link;
-                $pic->userId = \auth()->user()->id;
-
-                compressImage($_FILES['pic']['tmp_name'], $destinationPic, 80);
-                $pic->pic = $_FILES['pic']['name'];
-                $pic->save();
-
-                echo 'ok';
-            }
-            else if(isset($request->link)){
-                $condition = ['page' => $request->page, 'number' => $request->number, 'section' => $request->section];
-                $pic = BannerPics::where($condition)->first();
-                if($pic != null){
                     $link = $request->link;
-                    if(strpos($link, 'http') === false)
+                    if (strpos($link, 'http') === false)
                         $link = 'https://' . $link;
+
                     $pic->link = $link;
+                    $pic->userId = \auth()->user()->id;
+                    $pic->text = $request->text;
+
                     $pic->save();
+
+                    echo json_encode(['ok', $pic->id]);
+                }
+                else if (isset($request->link) && isset($request->id)) {
+                    $pic = BannerPics::find($request->id);
+                    if ($pic != null) {
+                        $link = $request->link;
+                        if (strpos($link, 'http') === false)
+                            $link = 'https://' . $link;
+                        $pic->link = $link;
+                        $pic->text = $request->text;
+
+                        $pic->save();
+                    } else
+                        echo json_encode(['nok2']);
+
+                    echo json_encode(['ok', $pic->id]);
                 }
                 else
-                    echo 'nok2';
+                    echo json_encode(['nok3']);
+            }
+
+        }
+        else
+            echo json_encode(['nok1']);
+
+        return;
+    }
+
+    public function middleBannerImagesDelete(Request $request)
+    {
+        if(isset($request->id) && \auth()->check() && \auth()->user()->level == 1){
+            $location = __DIR__ . '/../../../../assets/_images/bannerPic';
+            $pic = BannerPics::find($request->id);
+            if($pic != null){
+                $location .= '/' . $pic->page;
+                if (file_exists($location . '/' . $pic->pic))
+                    unlink($location . '/' . $pic->pic);
+                $pic->delete();
+                echo 'ok';
             }
             else
                 echo 'nok2';
