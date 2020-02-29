@@ -162,7 +162,7 @@
                                 <div class="ui_icon times"></div>
                             </div>
                             <a href="/" class="global-nav-logo">
-                                <img src='{{URL::asset('images/logo.png')}}' alt="شازده مسافر" class="global-nav-img"/>
+                                <img src='{{URL::asset('images/logo.png')}}' alt="کوچیتا" class="global-nav-img"/>
                             </a>
                         </div>
                         <div class="sidebar-nav-profile-container">

@@ -11,7 +11,7 @@ if ($total == 0)
     <link rel="stylesheet" href="{{URL::asset('css/theme2/media_uploader.css')}}">
     <script async src="{{URL::asset("js/bootstrap-datepicker.js")}}"></script>
     <link rel="stylesheet" href="{{URL::asset('css/theme2/bootstrap-datepicker.css?v=1')}}">
-    <title>{{$place->name}} | شازده مسافر</title>
+    <title>{{$place->name}} | کوچیتا</title>
 @stop
 
 @section('meta')
@@ -32,10 +32,10 @@ if ($total == 0)
     <meta property="article:tag" content="{{$place->tag_13}}"/>
     <meta property="article:tag" content="{{$place->tag_14}}"/>
     <meta property="article:tag" content="{{$place->tag_15}}"/>
-    <meta property="og:title" content="{{$place->name}} | {{$state->name}} | شازده مسافر"/>
+    <meta property="og:title" content="{{$place->name}} | {{$state->name}} | کوچیتا"/>
     <meta name="twitter:card" content="summary_large_image"/>
     <meta name="twitter:description" content="{{$place->meta}}"/>
-    <meta name="twitter:title" content="{{$place->name}} | {{$state->name}} | شازده مسافر"/>
+    <meta name="twitter:title" content="{{$place->name}} | {{$state->name}} | کوچیتا"/>
     <meta property="og:url" content="{{Request::url()}}"/>
     @if(count($photos) > 0)
         <meta property="og:image" content="{{$photos[0]}}"/>

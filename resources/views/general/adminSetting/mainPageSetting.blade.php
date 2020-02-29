@@ -7,6 +7,18 @@
 
             <div class="row">
                 <div style="width: 100%; height: 45px; cursor: pointer" onclick="toggleSettingSection(this)" >
+                    <h3 style="display: inline-block">تغییر اسلاید اصلی:</h3>
+                </div>
+
+                <div class="container settingSubSection" style="display: none;">
+                    <button class="btn btn-primary" style="width: auto; position: relative" onclick="addMainSliderPicSetting()">افزودن</button>
+                    <div id="sliderPicSection0"></div>
+                </div>
+            </div>
+            <hr>
+
+            <div class="row">
+                <div style="width: 100%; height: 45px; cursor: pointer" onclick="toggleSettingSection(this)" >
                     <h3 style="display: inline-block">تغییر اسلایدر1:</h3>
                 </div>
 
@@ -126,11 +138,47 @@
 
 
 <script>
+    var silde0 = 0;
     var silde4 = 0;
     var silde1 = 0;
     var middleBan = {!! json_encode($middleBan) !!};
+    var mainSliderPicSetting = {!! $sliderPic !!};
     var slide4Pics;
     var slide1Pics;
+
+    function addMainSliderPicSetting(){
+
+        var text = '                        <div id="rowSlide0' + ss + '" class="row">\n' +
+            '                            <div class="col-md-2">\n' +
+            '                                <button class="btn btn-danger" onclick="deleteMainSlide(' + ss + ', ' + kind + ')" style="position: relative; width: auto">حذف</button>\n' +
+            '                                <button class="btn btn-primary" onclick="submitMainSlide(' + ss + ', ' + kind + ')" style="position: relative; width: auto">ویرایش</button>\n' +
+            '                                <input type="hidden" id="slideId' + kind + '' + ss + '" value="' + sil[i]["id"] + '">' +
+            '                            </div>\n' +
+            '                            <div class="col-md-10">\n' +
+            '                            <div class="row">\n' +
+            '                                <div class="col-md-6">\n' +
+            '                                    <img src="' + sil[i]["pic"] + '" id="showMiddleBannerInput' + kind + '' + ss + '" style="height: 100px; ">\n' +
+            '                                </div>\n' +
+            '                                <div class="col-md-6">\n' +
+            '                                    <input type="file" id="uploadImgBanner' + kind + '' + ss + '" accept="image/*" onchange="showPicInput(this, \'showMiddleBannerInput' + kind + '' + ss + '\')">\n' +
+            '                                </div>\n' +
+            '                            </div>\n' +
+            '                            <div class="row">\n' +
+            '                                <div class="col-md-6">\n' +
+            '                                    <label for="linkForBanner' + kind + '' + ss + '">لینک:</label>\n' +
+            '                                    <input type="text" id="linkForBanner' + kind + '' + ss + '" class="form-control" value="' + sil[i]["link"] + '">\n' +
+            '                                </div>\n' +
+            '                                <div class="col-md-6">\n' +
+            '                                    <label for="textForBanner' + kind + '' + ss + '">متن:</label>\n' +
+            '                                    <input type="text" id="textForBanner' + kind + '' + ss + '" class="form-control" value="' + sil[i]["text"] + '">\n' +
+            '                                </div>\n' +
+            '                            </div>\n' +
+            '                        </div>\n' +
+            '                        </div>\n' +
+            '                        <hr>';
+        $('#sliderPicSection' + kind).append(text);
+
+    }
 
     function createRowSlid(kind) {
         if(kind == 4){

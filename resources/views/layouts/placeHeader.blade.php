@@ -19,7 +19,7 @@
                         </div>
 
                         <a href="{{route('main')}}" class="global-nav-logo">
-                            <img src="{{URL::asset('images/logo.png')}}" alt="شازده مسافر" class="global-nav-img global-nav-svg"/>
+                            <img src="{{URL::asset('images/logo.png')}}" alt="کوچیتا" class="global-nav-img global-nav-svg"/>
                         </a>
 
                         <div class="global-nav-links ui_tabs inverted">
@@ -205,6 +205,46 @@
                         <div class="clear-both"></div>
                     </div>
                 </div>
+
+                <div class="modules-membercenter-persistent-header-achievements profileHeader hideOnPhone">
+                    <ul class="persistent-header position-relative">
+                        <li id="Profile" class="profile">
+                            <a id="profileLinkColor1" href="http://localhost/kouchita/public/profile">صفحه کاربری</a>
+                        </li>
+                        <li id="BadgeCollection" class="badgeCollection">
+                            <a id="BadgeCollectionLinkColor2" href="http://localhost/kouchita/public/badge">مدال‌های گردشگری</a>
+                        </li>
+                        <li class="travelMap targets position-relative" id="targetHelp_5">
+                            <a href="http://localhost/kouchita/public/soon">سفرنامه من</a>
+                            <div id="helpSpan_5" class="helpSpans hidden row">
+                                <span class="introjs-arrow"></span>
+                                <div class="col-xs-12">
+                                    <p>با استفاده از این منو می‌توانید به سایر بخش‌های پروفایل کاربری خود بروید.</p>
+                                </div>
+                                <div class="col-xs-12">
+                                    <button data-val="5" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_5">بعدی</button>
+                                    <button data-val="5" class="btn btn-primary backBtnsHelp" id="backBtnHelp_5">قبلی</button>
+                                    <button class="btn btn-danger exitBtnHelp">خروج</button>
+                                </div>
+                            </div>
+                        </li>
+                        <li id="Messages" class="messages">
+                            <a id="messageLinkColor2" href="http://localhost/kouchita/public/messages">پیام‌ها</a>
+                        </li>
+                        <li id="Settings" class="settingColor2 settings">
+                            تنظیمات
+                            <div class="settingsArrow"></div>
+                            <div class="settingsDropDown" id="settingDropDownMainDiv">
+                                <a href="http://localhost/kouchita/public/accountInfo">اطلاعات کاربر</a>
+
+                                <a title="Control Content" href="http://localhost/kouchita/public/getReports2">مدیریت گزارشات</a>
+
+
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
             </div>
             <div class="sidebar-nav-wrapper hidden">
                 <div class="sidebar-nav-backdrop"></div>
@@ -214,7 +254,7 @@
                             <div class="sidebar-nav-close">
                                 <div class="ui_icon times"></div>
                             </div>
-                            <a href="/" class="global-nav-logo"><img src='{{URL::asset('images/logo.png')}}' alt="شازده مسافر" class="global-nav-img"/></a>
+                            <a href="/" class="global-nav-logo"><img src='{{URL::asset('images/logo.png')}}' alt="کوچیتا" class="global-nav-img"/></a>
                         </div>
                         <div class="sidebar-nav-profile-container">
                             @if(Auth::check())

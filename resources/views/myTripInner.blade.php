@@ -171,7 +171,7 @@
                                                                     <div class="ui_icon heart"></div>
                                                                     <div class="cta-header">هنوز چیزی ذخیره نشده است</div>
                                                                     <div class="cta-text"></div>
-                                                                    <a onclick="searchPlace('addPlacePrompt')" class="ui_button primary browse_ta">جستجو در شازده مسافر</a>
+                                                                    <a onclick="searchPlace('addPlacePrompt')" class="ui_button primary browse_ta">جستجو در کوچیتا</a>
                                                                 </div>
                                                             </div>
                                                         </div>

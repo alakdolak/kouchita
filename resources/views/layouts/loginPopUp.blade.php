@@ -635,7 +635,7 @@ $authUrl = $client->createAuthUrl();
     </div>
     <div class="col-xs-12 rtl mainContentInfos">
         <div class="loginPaneInLoginPopUp loginDividerBorder col-xs-6">
-            <div class="header_text font-size-14Imp">در حال حاضر عضو شازده مسافر هستید؟!</div>
+            <div class="header_text font-size-14Imp">در حال حاضر عضو کوچیتا هستید؟!</div>
             <div>
                 <div>
                     <label class="full-width">
@@ -677,7 +677,7 @@ $authUrl = $client->createAuthUrl();
                 <div></div>
                 <span>گوگل</span>
             </button>
-            <div class="header_text font-size-14Imp">همین حالا به سادگی در شازده مسافر عضو شوید و از امکانات آن استفاده کنید.</div>
+            <div class="header_text font-size-14Imp">همین حالا به سادگی در کوچیتا عضو شوید و از امکانات آن استفاده کنید.</div>
         </div>
     </div>
     <div class="ui_close_x" onclick="hideElement('loginPopUp')"></div>
@@ -690,7 +690,7 @@ $authUrl = $client->createAuthUrl();
     </div>
     <div class="col-xs-12 rtl mainContentInfos">
         <div class="loginDividerBorder col-xs-6">
-            <div class="header_text font-size-14Imp">در حال حاضر عضو شازده مسافر هستید؟!</div>
+            <div class="header_text font-size-14Imp">در حال حاضر عضو کوچیتا هستید؟!</div>
             <div>
                 <div>
                     <label class="full-width">
@@ -744,7 +744,7 @@ $authUrl = $client->createAuthUrl();
     </div>
     <div class="col-xs-12 rtl mainContentInfos">
         <div class="loginDividerBorder col-xs-6">
-            <div class="header_text font-size-14Imp">در حال حاضر عضو شازده مسافر هستید؟!</div>
+            <div class="header_text font-size-14Imp">در حال حاضر عضو کوچیتا هستید؟!</div>
             <div>
                 <div>
                     <label class="full-width">
@@ -792,7 +792,7 @@ $authUrl = $client->createAuthUrl();
     </div>
     <div class="col-xs-12 rtl mainContentInfos">
         <div class="loginDividerBorder col-xs-6">
-            <div class="header_text font-size-14Imp">در حال حاضر عضو شازده مسافر هستید؟!</div>
+            <div class="header_text font-size-14Imp">در حال حاضر عضو کوچیتا هستید؟!</div>
             <div>
                 <div>
                     <label class="full-width">
@@ -846,7 +846,7 @@ $authUrl = $client->createAuthUrl();
     </div>
     <div class="col-xs-12 rtl mainContentInfos">
         <div class="loginDividerBorder col-xs-6">
-            <div class="header_text font-size-14Imp">در حال حاضر عضو شازده مسافر هستید؟!</div>
+            <div class="header_text font-size-14Imp">در حال حاضر عضو کوچیتا هستید؟!</div>
             <div>
                 <div>
                     <label class="full-width">
