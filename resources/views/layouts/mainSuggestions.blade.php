@@ -1,81 +1,249 @@
 {{--banner_1--}}
-<div class="cont ">
-    <div data-target='1' class="slide slide--1">
-        <div class="slide__text slide__text--1">quis risus</div>
-        <div class="slide__bg"></div>
-        <div class="slide__img">
-            <div class="slide__close"></div>
-            <div class="slide__img-wrapper">
+@if(isset($middleBan['1']) && count($middleBan['1']) > 0)
+    <style>
+        .slide__text--1 {
+            left: 10%;
+        }
+        @for($i = 1; $i <= count($middleBan['1']); $i++)
+        .slide {
+            left: 100%;
+        }
+        .slide--{{$i}} {
+            z-index: {{$i}};
+        }
+        .slide--{{$i}} .slide__img-wrapper {
+            background: url({{$middleBan['1'][$i-1]['pic']}}) center center no-repeat;
+            background-size: cover;
+        }
+        .active .slide--{{$i}} {
+            -webkit-transform: translate3d(-{{100 - ((100/count($middleBan['1'])) * ($i-1) )}}%, 0, 0);
+            transform: translate3d(-{{100 - ((100/count($middleBan['1'])) * ($i-1) )}}%, 0, 0);
+            -webkit-transition: -webkit-transform 950ms {{1235 * ($i-1)}}ms;
+            transition: -webkit-transform 950ms {{1235 * ($i-1)}}ms;
+            transition: transform 950ms {{1235 * ($i-1)}}ms;
+            transition: transform 950ms {{1235 * ($i-1)}}ms, -webkit-transform 950ms {{1235 * ($i-1)}}ms;
+        }
+        .active .slide--{{$i}} .slide__bg {
+            -webkit-transform: scale(0, 1);
+            transform: scale(0, 1);
+            -webkit-transition: 1900ms {{1235 * ($i-1)}}ms;
+            transition: 1900ms {{1235 * ($i-1)}}ms;
+        }
+        .active .slide-{{$i}} .slide__img-wrapper {
+            -webkit-transform: translate3d(-150px, 0, 0);
+            transform: translate3d(-150px, 0, 0);
+            -webkit-transition: 2000ms {{1235 * ($i-1)}}ms;
+            transition: 2000ms {{1235 * ($i-1)}}ms;
+        }
+        @endfor
 
+    </style>
+    <div class="cont ">
+
+        @for($i = 1; $i <= count($middleBan['1']); $i++)
+            <div data-target='{{$i}}' class="slide slide--{{$i}}">
+                @if($middleBan['1'][$i-1]['link'] != '')
+                    <a href="{{$middleBan['1'][$i-1]['link']}}" class="slide__text slide__text--{{$i}}" target="_blank">
+                        {{$middleBan['1'][$i-1]['text']}}
+                    </a>
+                @else
+                    <div class="slide__text slide__text--{{$i}}">
+                        {{$middleBan['1'][$i-1]['text']}}
+                    </div>
+                @endif
+
+                <div class="slide__bg"></div>
+                <div class="slide__img">
+                    <div class="slide__close"></div>
+                    <div class="slide__img-wrapper"></div>
+                </div>
+                <div class="slide__bg-dark"></div>
+                <a href="https://www.instagram.com/koochitatravel/" target="_blank" class="icon-link icon-link--twitter">
+                    <img src="{{URL::asset('images/icons/instagram.png')}}">
+                </a>
             </div>
-        </div>
-        <div class="slide__bg-dark"></div>
-        <a href="https://www.instagram.com/koochitatravel/" target="_blank" class="icon-link icon-link--twitter">
-            <img src="{{URL::asset('images/icons/instagram.png')}}">
-        </a>
+        @endfor
+
     </div>
+    <script>
+        const $cont = $('.cont');
+        const $slide = $('.slide');
+        const $closeBtn = $('.slide__close')
+        const $text = $('.slide__text');
+        const $iconTwitter = $('.icon-link--twitter');
+        const numSlides = {{count($middleBan['1'])}};
+        const initialAnimDur = 7131;
+        const animDelay = 1000;
+        let initialAnim = true;
+        let clickAnim = false;
 
-    <div data-target='2' class="slide slide--2">
-        <div class="slide__text">Lorem ipsum</div>
-        <div class="slide__bg"></div>
-        <div class="slide__img">
-            <div class="slide__close"></div>
-            <div class="slide__img-wrapper">
+        $(document).on('click', '.slide__bg-dark', function() {
+            if (initialAnim || clickAnim) return;
+            let _this = $(this).parent();
+            let target = +_this.attr('data-target');
+            clickAnim = true;
 
-            </div>
-        </div>
-        <div class="slide__bg-dark"></div>
-        <a href="https://www.instagram.com/koochitatravel/" target="_blank" class="icon-link icon-link--twitter">
-            <img src="{{URL::asset('images/icons/instagram.png')}}">
-        </a>
-    </div>
+            _this.css({
+                'transform': 'translate3d(-100%, 0, 0)',
+                'transition': '750ms',
+                'cursor': 'default'
+            })
 
-    <div data-target='3' class="slide slide--3">
-        <div class="slide__text">Sed tincidunt</div>
-        <div class="slide__bg"></div>
-        <div class="slide__img">
-            <div class="slide__close"></div>
-            <div class="slide__img-wrapper">
+            _this.find('.slide__img-wrapper').css({
+                'transform': 'translate3d(0, 0, 0) scale(.95, .95)',
+                'transition': '2000ms'
+            })
 
-            </div>
-        </div>
-        <div class="slide__bg-dark"></div>
-        <a href="https://www.instagram.com/koochitatravel/" target="_blank" class="icon-link icon-link--twitter">
-            <img src="{{URL::asset('images/icons/instagram.png')}}">
-        </a>
-    </div>
+            for(let i = target, length = $slide.length; i < length; i++) {
+                $('.slide--' + (i + 1)).css({
+                    'transform': 'translate3d(0, 0, 0)',
+                    'transition': '750ms'
+                })
+            }
 
-    <div data-target='4' class="slide slide--4">
-        <div class="slide__text">Vivamus dui</div>
-        <div class="slide__bg"></div>
-        <div class="slide__img">
-            <div class="slide__close"></div>
-            <div class="slide__img-wrapper">
+            for(let i = target, length = $slide.length; i > 1; i--) {
+                $('.slide--' + (i - 1)).css({
+                    'transform': 'translate3d(-150%, 0, 0)',
+                    'transition': '750ms'
+                })
+            }
 
-            </div>
-        </div>
-        <div class="slide__bg-dark"></div>
-        <a href="https://www.instagram.com/koochitatravel/" target="_blank" class="icon-link icon-link--twitter">
-            <img src="{{URL::asset('images/icons/instagram.png')}}">
-        </a>
-    </div>
+            setTimeout(function() {
+                $slide.not(_this).find('.slide__bg-dark').css({
+                    'opacity': '0'
+                })
+            }, 750)
 
-    <div data-target='5' class="slide slide--5">
-        <div class="slide__text">Viva</div>
-        <div class="slide__bg"></div>
-        <div class="slide__img">
-            <div class="slide__close"></div>
-            <div class="slide__img-wrapper">
+            $closeBtn.addClass('show-close');
+            $iconTwitter.addClass('icon-show');
 
-            </div>
-        </div>
-        <div class="slide__bg-dark"></div>
-        <a href="https://www.instagram.com/koochitatravel/" target="_blank" class="icon-link icon-link--twitter">
-            <img src="{{URL::asset('images/icons/instagram.png')}}">
-        </a>
-    </div>
+            _this.find('.slide__text').css({
+                'transform': 'translate3d(150px, -40%, 0)',
+                'opacity': '1',
+                'transition': '2000ms',
+                '-webkit-transition': '2000ms'
+            })
+        });
 
-</div>
+        $(document).on('mousemove', '.slide', function() {
+            if(initialAnim || clickAnim) return;
+            let _this = $(this);
+            let target = +_this.attr('data-target');
+
+            _this.css({
+                'transform': 'translate3d(-' + (((100 / numSlides) * (numSlides - (target - 1))) + numSlides) + '%, 0, 0)',
+                'transition': '750ms'
+            })
+
+            _this.find('.slide__text').css({
+                'transform': 'translate3d(0, -40%, 0) rotate(0.01deg)',
+                '-moz-transform': 'translate3d(0, -40%, 0) rotate(0.01deg)',
+                'opacity': '1',
+                'transition': '750ms',
+                '-webkit-transition': '750ms'
+            })
+
+            for(let i = target, length = $slide.length; i < length; i++) {
+                $('.slide--' + (i + 1)).css({
+                    'transform': 'translate3d(-' + (((100 / numSlides) * (numSlides - ((i + 1) - 1))) - numSlides) + '%, 0, 0)',
+                    'transition': '750ms'
+                })
+            }
+
+            for(let i = target; i > 1; i--) {
+                $('.slide--' + (i - 1)).css({
+                    'transform': 'translate3d(-' + (((100 / numSlides) * (numSlides - ((i - 1) - 1))) + numSlides) + '%, 0, 0)',
+                    'transition': '750ms'
+                })
+            }
+
+            _this.find('.slide__img-wrapper').css({
+                'transform': 'translate3d(-200px, 0, 0) scale(.85, .85)',
+                'transition': '750ms'
+            })
+
+            $slide.not(_this).find('.slide__img-wrapper').css({
+                'transform': 'translate3d(-200px, 0, 0) scale(.90, .90)',
+                'transition': '1000ms'
+            })
+
+            $slide.not(_this).find('.slide__bg-dark').css({
+                'opacity': '.75'
+            })
+        });
+
+        $(document).on('mouseleave', '.slide', function() {
+            if(initialAnim || clickAnim) return;
+            let _this = $(this);
+            let target = +_this.attr('data-target');
+
+            console.log('------');
+            for(let i = 1, length = $slide.length; i <= length; i++) {
+
+                $('.slide--' + i).css({
+                    'transform': 'translate3d(-' + (100 / numSlides) * (numSlides - (i - 1)) + '%, 0, 0)',
+                    'transition': '1000ms'
+                })
+            }
+
+            $slide.find('.slide__img-wrapper').css({
+                'transform': 'translate3d(-200px, 0, 0) scale(1, 1)',
+                'transition': '750ms'
+            })
+
+            $slide.find('.slide__bg-dark').css({
+                'opacity': '0'
+            })
+
+            $text.css({
+                'transform': 'translate3d(0, -50%, 0) rotate(0.01deg)',
+                'opacity': '0',
+                'transition': '200ms',
+                '-webkit-transition': '200ms'
+            })
+        });
+
+        $(document).on('click', '.slide__close', function() {
+
+            setTimeout(function() {
+                clickAnim = false;
+            }, 1000);
+
+            $closeBtn.removeClass('show-close');
+            $iconTwitter.removeClass('icon-show');
+
+            for(let i = 1, length = $slide.length; i <= length; i++) {
+                $('.slide--' + i).css({
+                    'transform': 'translate3d(-' + (100 / numSlides) * (numSlides - (i - 1)) + '%, 0, 0)',
+                    'transition': '1000ms',
+                    'cursor': 'pointer'
+                })
+            }
+
+            $text.css({
+                'transform': 'translate3d(150px, -40%, 0)',
+                'opacity': '0',
+                'transition': '200ms',
+                '-webkit-transition': '200ms'
+            })
+
+            setTimeout(function() {
+                $text.css({
+                    'transform': 'translate3d(0, -50%, 0)'
+                })
+            }, 200)
+        })
+
+        setTimeout(function() {
+            $cont.addClass('active');
+        }, animDelay);
+
+        setTimeout(function() {
+            initialAnim = false;
+        }, initialAnimDur + animDelay);
+
+    </script>
+@endif
 
 <div class="mainDivLoader">
     <div class="loader hidden"></div>
@@ -139,42 +307,26 @@
 
     {{--banner_2--}}
     <div class="siteArticlesMainDiv">
-        <div class="card transition">
-            <h2 class="h2MidBanerArticle transition">Awesome Headline</h2>
-            <p class="pMidBanerArticle">
-                Aenean lacinia bibendum nulla sed consectetur. Donec ullamcorper nulla non metus auctor fringilla.
-                Aenean lacinia bibendum nulla sed consectetur. Donec ullamcorper nulla non metus auctor fringilla.
-                Aenean lacinia bibendum nulla sed consectetur. Donec ullamcorper nulla non metus auctor fringilla.
-            </p>
-            <div class="cta-container transition" style="left: 0px">
-                <a href="#" class="cta">Call to action</a>
+        @if(isset($articleBanner) && count($articleBanner) > 0)
+            <div class="mainSuggestion swiper-container">
+                <div class="swiper-wrapper position-relative">
+            @foreach($articleBanner as $item)
+                <div class="swiper-slide position-relative">
+                    <div class="card transition">
+                        <h2 class="h2MidBanerArticle transition">{{$item->title}}</h2>
+                        <p class="pMidBanerArticle">
+                            {{$item->meta}}
+                        </p>
+                        <div class="cta-container transition" style="left: 0px">
+                            <a href="{{$item->url}}" class="cta">مشاهده مقاله</a>
+                        </div>
+                        <div class="card_circle transition" style="background: url('{{$item->pic}}') no-repeat center bottom; background-size: cover;"></div>
+                    </div>
+                </div>
+            @endforeach
+                </div>
             </div>
-            <div class="card_circle transition"></div>
-        </div>
-        <div class="card transition">
-            <h2 class="h2MidBanerArticle transition">Awesome Headline</h2>
-            <p class="pMidBanerArticle">
-                Aenean lacinia bibendum nulla sed consectetur. Donec ullamcorper nulla non metus auctor fringilla.
-                Aenean lacinia bibendum nulla sed consectetur. Donec ullamcorper nulla non metus auctor fringilla.
-                Aenean lacinia bibendum nulla sed consectetur. Donec ullamcorper nulla non metus auctor fringilla.
-            </p>
-            <div class="cta-container transition" style="left: 0px">
-                <a href="#" class="cta">Call to action</a>
-            </div>
-            <div class="card_circle transition"></div>
-        </div>
-        <div class="card transition">
-            <h2 class="h2MidBanerArticle transition">Awesome Headline</h2>
-            <p class="pMidBanerArticle">
-                Aenean lacinia bibendum nulla sed consectetur. Donec ullamcorper nulla non metus auctor fringilla.
-                Aenean lacinia bibendum nulla sed consectetur. Donec ullamcorper nulla non metus auctor fringilla.
-                Aenean lacinia bibendum nulla sed consectetur. Donec ullamcorper nulla non metus auctor fringilla.
-            </p>
-            <div class="cta-container transition" style="left: 0px">
-                <a href="#" class="cta">Call to action</a>
-            </div>
-            <div class="card_circle transition"></div>
-        </div>
+        @endif
     </div>
 
     <div id="foodSuggestion" class="homepage_shelves_widget ng-scope" style="display: none">
@@ -295,189 +447,190 @@
     </div>
 
     {{--banner_3--}}
-    <div class='parent'>
-        <div class='slider' style="width: 100%;">
-            <button type="button" id='banner3_right' class='rightButton' name="button">
+    @if(isset($middleBan['4']) && count($middleBan['4']) > 0)
+        <div class='parent'>
+            <div class='slider' style="width: 100%;">
+                <button type="button" id='banner3_right' class='rightButton' name="button">
+                    <svg version="1.1" id="Capa_1" width='40px' height='40px ' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                         viewBox="0 0 477.175 477.175" style="enable-background:new 0 0 477.175 477.175;" xml:space="preserve">
+                   <g>
+                       <path style='fill: #9d9d9d;' d="M360.731,229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1,0s-5.3,13.8,0,19.1l215.5,215.5l-215.5,215.5c-5.3,5.3-5.3,13.8,0,19.1c2.6,2.6,6.1,4,9.5,4c3.4,0,6.9-1.3,9.5-4l225.1-225.1C365.931,242.875,365.931,234.275,360.731,229.075z
+                      "/>
+                   </g>
 
-                <svg version="1.1" id="Capa_1" width='40px' height='40px ' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                     viewBox="0 0 477.175 477.175" style="enable-background:new 0 0 477.175 477.175;" xml:space="preserve">
-       <g>
-           <path style='fill: #9d9d9d;' d="M360.731,229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1,0s-5.3,13.8,0,19.1l215.5,215.5l-215.5,215.5c-5.3,5.3-5.3,13.8,0,19.1c2.6,2.6,6.1,4,9.5,4c3.4,0,6.9-1.3,9.5-4l225.1-225.1C365.931,242.875,365.931,234.275,360.731,229.075z
-          "/>
-       </g>
+                </svg>
+                </button>
+                <button type="button" id='banner3_left' class='leftButton' name="button">
+                    <svg version="1.1" id="Capa_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                         viewBox="0 0 477.175 477.175" style="enable-background:new 0 0 477.175 477.175;" xml:space="preserve">
+                   <g>
+                       <path style='fill: #9d9d9d;' d="M145.188,238.575l215.5-215.5c5.3-5.3,5.3-13.8,0-19.1s-13.8-5.3-19.1,0l-225.1,225.1c-5.3,5.3-5.3,13.8,0,19.1l225.1,225c2.6,2.6,6.1,4,9.5,4s6.9-1.3,9.5-4c5.3-5.3,5.3-13.8,0-19.1L145.188,238.575z"/>
+                   </g>
+                </svg>
+                </button>
 
-       </svg>
+                <svg id='svg2' class='up2' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <circle id='circle1' class='circle1 steap' cx="34px" cy="49%" r="20"  />
+                    <circle id='circle2' class='circle2 steap' cx="34px" cy="49%" r="100"  />
+                    <circle id='circle3' class='circle3 steap' cx="34px" cy="49%" r="180"  />
+                    <circle id='circle4' class='circle4 steap' cx="34px" cy="49%" r="260"  />
+                    <circle id='circle5' class='circle5 steap' cx="34px" cy="49%" r="340"  />
+                    <circle id='circle6' class='circle6 steap' cx="34px" cy="49%" r="420"  />
+                    <circle id='circle7' class='circle7 steap' cx="34px" cy="49%" r="500"  />
+                    <circle id='circle8' class='circle8 steap' cx="34px" cy="49%" r="580"  />
+                    <circle id='circle9' class='circle9 steap' cx="34px" cy="49%" r="660"  />
+                </svg>
+                <svg id='svg1' class='up2' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <circle id='circle10' class='circle10 steap' cx="648px" cy="49%" r="20"  />
+                    <circle id='circle11' class='circle11 steap' cx="648px" cy="49%" r="100"  />
+                    <circle id='circle12' class='circle12 steap' cx="648px" cy="49%" r="180"  />
+                    <circle id='circle13' class='circle13 steap' cx="648px" cy="49%" r="260"  />
+                    <circle id='circle14' class='circle14 steap' cx="648px" cy="49%" r="340"  />
+                    <circle id='circle15' class='circle15 steap' cx="648px" cy="49%" r="420"  />
+                    <circle id='circle16' class='circle16 steap' cx="648px" cy="49%" r="500"  />
+                    <circle id='circle17' class='circle17 steap' cx="648px" cy="49%" r="580"  />
+                    <circle id='circle18' class='circle18 steap' cx="648px" cy="49%" r="660"  />
+                </svg>
 
-            </button>
-            <button type="button" id='banner3_left' class='leftButton' name="button">
-                <svg version="1.1" id="Capa_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                     viewBox="0 0 477.175 477.175" style="enable-background:new 0 0 477.175 477.175;" xml:space="preserve">
-       <g>
-           <path style='fill: #9d9d9d;' d="M145.188,238.575l215.5-215.5c5.3-5.3,5.3-13.8,0-19.1s-13.8-5.3-19.1,0l-225.1,225.1c-5.3,5.3-5.3,13.8,0,19.1l225.1,225c2.6,2.6,6.1,4,9.5,4s6.9-1.3,9.5-4c5.3-5.3,5.3-13.8,0-19.1L145.188,238.575z"/>
-       </g>
-       </svg>
-            </button>
-            <svg id='svg2' class='up2' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                <circle id='circle1' class='circle1 steap' cx="34px" cy="49%" r="20"  />
-                <circle id='circle2' class='circle2 steap' cx="34px" cy="49%" r="100"  />
-                <circle id='circle3' class='circle3 steap' cx="34px" cy="49%" r="180"  />
-                <circle id='circle4' class='circle4 steap' cx="34px" cy="49%" r="260"  />
-                <circle id='circle5' class='circle5 steap' cx="34px" cy="49%" r="340"  />
-                <circle id='circle6' class='circle6 steap' cx="34px" cy="49%" r="420"  />
-                <circle id='circle7' class='circle7 steap' cx="34px" cy="49%" r="500"  />
-                <circle id='circle8' class='circle8 steap' cx="34px" cy="49%" r="580"  />
-                <circle id='circle9' class='circle9 steap' cx="34px" cy="49%" r="660"  />
-            </svg>
-            <svg id='svg1' class='up2' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                <circle id='circle10' class='circle10 steap' cx="648px" cy="49%" r="20"  />
-                <circle id='circle11' class='circle11 steap' cx="648px" cy="49%" r="100"  />
-                <circle id='circle12' class='circle12 steap' cx="648px" cy="49%" r="180"  />
-                <circle id='circle13' class='circle13 steap' cx="648px" cy="49%" r="260"  />
-                <circle id='circle14' class='circle14 steap' cx="648px" cy="49%" r="340"  />
-                <circle id='circle15' class='circle15 steap' cx="648px" cy="49%" r="420"  />
-                <circle id='circle16' class='circle16 steap' cx="648px" cy="49%" r="500"  />
-                <circle id='circle17' class='circle17 steap' cx="648px" cy="49%" r="580"  />
-                <circle id='circle18' class='circle18 steap' cx="648px" cy="49%" r="660"  />
-            </svg>
-
-            <div id='slide1' class='slide1 up1'>MOUNTAIN</div>
-            <div id='slide2' class='slide2'>BEACH</div>
-            <div id='slide3' class='slide3'>FOREST</div>
-            <div id='slide4' class='slide4'>DESERT</div>
+                <div id='slide1' class='mainBlubSlider up1' style="background-image: url('{{$middleBan['4'][0]['pic']}}'); ">{{$middleBan['4'][0]['text']}}</div>
+                @for($i = 1; $i < count($middleBan['4']); $i++)
+                    <div id='slide{{$i+1}}' class='mainBlubSlider' style="background-image: url('{{$middleBan['4'][$i]['pic']}}'); ">{{$middleBan['4'][$i]['text']}}</div>
+                @endfor
+            </div>
         </div>
-    </div>
+        <script>
 
-    <script>
+            var curpage = 1;
+            var totalPageSlide = {{count($middleBan['4'])}};
+            var sliding = false;
+            var click = true;
+            var left = document.getElementById("banner3_left");
+            var right = document.getElementById("banner3_right");
+            var pagePrefix = "slide";
+            var pageShift = 500;
+            var transitionPrefix = "circle";
+            var svg = true;
 
-        var curpage = 1;
-        var sliding = false;
-        var click = true;
-        var left = document.getElementById("banner3_left");
-        var right = document.getElementById("banner3_right");
-        var pagePrefix = "slide";
-        var pageShift = 500;
-        var transitionPrefix = "circle";
-        var svg = true;
-
-        function leftSlide() {
-            if (click) {
-                if (curpage == 1) curpage = 5;
-                sliding = true;
-                curpage--;
-                svg = true;
-                click = false;
-                for (k = 1; k <= 4; k++) {
-                    var a1 = document.getElementById(pagePrefix + k);
-                    a1.className += " tran";
-                }
-                setTimeout(() => {
-                    move();
-                }, 200);
-                setTimeout(() => {
-                    for (k = 1; k <= 4; k++) {
-                        var a1 = document.getElementById(pagePrefix + k);
-                        a1.classList.remove("tran");
-                    }
-                }, 1400);
-            }
-        }
-
-        function rightSlide() {
-            if (click) {
-                if (curpage == 4) curpage = 0;
-                sliding = true;
-                curpage++;
-                svg = false;
-                click = false;
-                for (k = 1; k <= 4; k++) {
-                    var a1 = document.getElementById(pagePrefix + k);
-                    a1.className += " tran";
-                }
-                setTimeout(() => {
-                    move();
-                }, 200);
-                setTimeout(() => {
-                    for (k = 1; k <= 4; k++) {
-                        var a1 = document.getElementById(pagePrefix + k);
-                        a1.classList.remove("tran");
-                    }
-                }, 1400);
-            }
-        }
-
-        function move() {
-            if (sliding) {
-                sliding = false;
-                if (svg) {
-                    for (j = 1; j <= 9; j++) {
-                        var c = document.getElementById(transitionPrefix + j);
-                        c.classList.remove("steap");
-                        c.setAttribute("class", transitionPrefix + j + " streak");
-                    }
-                } else {
-                    for (j = 10; j <= 18; j++) {
-                        var c = document.getElementById(transitionPrefix + j);
-                        c.classList.remove("steap");
-                        c.setAttribute("class", transitionPrefix + j + " streak");
-                    }
-                }
-                setTimeout(() => {
-                    for (i = 1; i <= 4; i++) {
-                        if (i == curpage) {
-                            var a = document.getElementById(pagePrefix + i);
-                            a.className += " up1";
-                        } else {
-                            var b = document.getElementById(pagePrefix + i);
-                            b.classList.remove("up1");
-                        }
-                    }
+            function leftSlide() {
+                if (click) {
+                    if (curpage == 1) curpage = totalPageSlide+1;
                     sliding = true;
-                }, 600);
-                setTimeout(() => {
-                    click = true;
-                }, 1700);
+                    curpage--;
+                    svg = true;
+                    click = false;
+                    for (k = 1; k <= totalPageSlide; k++) {
+                        var a1 = document.getElementById(pagePrefix + k);
+                        a1.className += " tran";
+                    }
+                    setTimeout(() => {
+                        move();
+                    }, 200);
+                    setTimeout(() => {
+                        for (k = 1; k <= totalPageSlide; k++) {
+                            var a1 = document.getElementById(pagePrefix + k);
+                            a1.classList.remove("tran");
+                        }
+                    }, 1400);
+                }
+            }
 
-                setTimeout(() => {
+            function rightSlide() {
+                if (click) {
+                    if (curpage == totalPageSlide) curpage = 0;
+                    sliding = true;
+                    curpage++;
+                    svg = false;
+                    click = false;
+                    for (k = 1; k <= totalPageSlide; k++) {
+                        var a1 = document.getElementById(pagePrefix + k);
+                        a1.className += " tran";
+                    }
+                    setTimeout(() => {
+                        move();
+                    }, 200);
+                    setTimeout(() => {
+                        for (k = 1; k <= totalPageSlide; k++) {
+                            var a1 = document.getElementById(pagePrefix + k);
+                            a1.classList.remove("tran");
+                        }
+                    }, 1400);
+                }
+            }
+
+            function move() {
+                if (sliding) {
+                    sliding = false;
                     if (svg) {
                         for (j = 1; j <= 9; j++) {
                             var c = document.getElementById(transitionPrefix + j);
-                            c.classList.remove("streak");
-                            c.setAttribute("class", transitionPrefix + j + " steap");
+                            c.classList.remove("steap");
+                            c.setAttribute("class", transitionPrefix + j + " streak");
                         }
                     } else {
                         for (j = 10; j <= 18; j++) {
                             var c = document.getElementById(transitionPrefix + j);
-                            c.classList.remove("streak");
-                            c.setAttribute("class", transitionPrefix + j + " steap");
+                            c.classList.remove("steap");
+                            c.setAttribute("class", transitionPrefix + j + " streak");
+                        }
+                    }
+                    setTimeout(() => {
+                        for (i = 1; i <= totalPageSlide; i++) {
+                            if (i == curpage) {
+                                var a = document.getElementById(pagePrefix + i);
+                                a.className += " up1";
+                            } else {
+                                var b = document.getElementById(pagePrefix + i);
+                                b.classList.remove("up1");
+                            }
                         }
                         sliding = true;
-                    }
-                }, 850);
-                setTimeout(() => {
-                    click = true;
-                }, 1700);
+                    }, 600);
+                    setTimeout(() => {
+                        click = true;
+                    }, 1700);
+
+                    setTimeout(() => {
+                        if (svg) {
+                            for (j = 1; j <= 9; j++) {
+                                var c = document.getElementById(transitionPrefix + j);
+                                c.classList.remove("streak");
+                                c.setAttribute("class", transitionPrefix + j + " steap");
+                            }
+                        } else {
+                            for (j = 10; j <= 18; j++) {
+                                var c = document.getElementById(transitionPrefix + j);
+                                c.classList.remove("streak");
+                                c.setAttribute("class", transitionPrefix + j + " steap");
+                            }
+                            sliding = true;
+                        }
+                    }, 850);
+                    setTimeout(() => {
+                        click = true;
+                    }, 1700);
+                }
             }
-        }
 
-        left.onmousedown = () => {
-            leftSlide();
-        };
-
-        right.onmousedown = () => {
-            rightSlide();
-        };
-
-        document.onkeydown = e => {
-            if (e.keyCode == 37) {
+            left.onmousedown = () => {
                 leftSlide();
-            } else if (e.keyCode == 39) {
+            };
+
+            right.onmousedown = () => {
                 rightSlide();
-            }
-        };
-        setInterval(function (){
-            rightSlide();
-        }, 8000);
-    </script>
+            };
+
+            document.onkeydown = e => {
+                if (e.keyCode == 37) {
+                    leftSlide();
+                } else if (e.keyCode == 39) {
+                    rightSlide();
+                }
+            };
+            setInterval(function (){
+                rightSlide();
+            }, 8000);
+        </script>
+    @endif
 
     <div id="restaurantSuggestion" class="homepage_shelves_widget ng-scope" style="display: none">
         <div class="prw_rup prw_shelves_shelf_widget" style="">
@@ -532,24 +685,27 @@
         </div>
     </div>
 
-    {{--banner_4--}}
-    <div class="banner4Style">
-        <figure class="snip1091 red"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sq-sample6.jpg" alt="sq-sample6"/>
-            <figcaption>
-                <h2>Lizbeth  <span>Kent</span></h2>
-            </figcaption><a href="#"></a>
-        </figure>
-        <figure class="snip1091 green"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sq-sample14.jpg" alt="sq-sample14"/>
-            <figcaption>
-                <h2>Annalee   <span>Weis</span></h2>
-            </figcaption><a href="#"></a>
-        </figure>
-        <figure class="snip1091 navy"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sq-sample10.jpg" alt="sq-sample10"/>
-            <figcaption>
-                <h2>Carmen  <span>Glenn</span></h2>
-            </figcaption><a href="#"></a>
-        </figure>
-    </div>
+    {{--banner_5--}}
+    @if(isset($middleBan['5']) && count($middleBan['5']) > 0)
+        <div class="banner4Style">
+            <?php
+                $middleBanColor5 = ['red', 'green', 'navy'];
+            ?>
+            @for($i = 0; $i < count($middleBan['5']); $i++)
+                <figure class="snip1091 {{$middleBanColor5[$i]}}">
+                    <img src="{{$middleBan['5'][$i]['pic']}}" alt="sq-sample6"/>
+                    <figcaption>
+                        <h2>
+                            {{$middleBan['5'][$i]['text']}}
+                        </h2>
+                    </figcaption>
+                    @if($middleBan['5'][$i]['link'] != '')
+                        <a href="{{$middleBan['5'][$i]['link']}}"></a>
+                    @endif
+                </figure>
+            @endfor
+        </div>
+    @endif
 
     <div id="tarikhiSuggestion" class="homepage_shelves_widget ng-scope" style="display: none">
         <div class="prw_rup prw_shelves_shelf_widget" style="">
@@ -721,7 +877,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <!-- Add Pagination -->
                         <div class="swiper-pagination"></div>
                         <!-- Add Arrows -->
@@ -733,12 +888,17 @@
         </div>
     </div>
 
-    <div class="middleBannerPhotoBanner">
-        <a href="{{isset($middleBannerLink['61']) ? $middleBannerLink['61'] : '#'}}" target="{{isset($middleBannerLink['61']) ? '_blank' : ''}}" >
-            <img class="middleImg61" src="{{isset($middleBannerPic['61']) ? $middleBannerPic['61'] : ''}}" style="width: 100%; height: 100%;">
-        </a>
-    </div>
-
+    @if(isset($middleBan['6']))
+        <div class="middleBannerPhotoBanner">
+            @if($middleBan['6']['link'] != '')
+                <a href="{{$middleBan['6']['link']}}" target="_blank" >
+                    <img src="{{$middleBan['6']['pic']}}" style="width: 100%;">
+                </a>
+            @else
+                <img src="{{$middleBan['6']['pic']}}" style="width: 100%;">
+            @endif
+        </div>
+    @endif
     <div id="articleSuggestion" class="homepage_shelves_widget ng-scope">
         <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" style="">
             <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
@@ -796,135 +956,6 @@
             </div>
         </div>
 </div>
-
-@if(auth()->check() && auth()->user()->role == 0)
-    <div class="modal" id="middleBannerModal" style="direction: rtl">
-        <div class="modal-dialog">
-            <div class="modal-content">
-
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <h4 class="modal-title">تغییر عکس بنر</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-
-                <!-- Modal body -->
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <img src="#" id="showMiddleBannerInput" style="width: 100%;">
-                        </div>
-                        <div class="col-md-6">
-                            <input type="file" id="uploadImgBanner" accept="image/*" onchange="changeInputImg(this)">
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="form-group">
-                            <label for="linkForBanner">لینک:</label>
-                            <input type="text" id="linkForBanner" class="form-control">
-                        </div>
-                    </div>
-                </div>
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">بستن</button>
-                    <button type="button" class="btn btn-success" onclick="saveMiddleBannerImg()">تغییر</button>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <script>
-        var editIcon = "{{URL::asset('images/edit.png')}}";
-        var middleBannerSectionId = 0;
-        var middleBannerNum = 0;
-        var data;
-        var newImageReplace = null;
-
-        for(var i = 11; i < 100; i++) {
-            var img = $('.middleImg' + i);
-            if(img.length != 0) {
-                var section = Math.floor(i/10);
-                var number = i % 10;
-                var text = '<div style="position: absolute; width: 20px; height: 20px; background: white; text-align: center; cursor: pointer; right: 0px" onclick="editMiddleBannerPic(' + section + ', ' + number + ')">\n' +
-                    '<img src="' + editIcon + '" style="width: 100%; height: 100%;">\n' +
-                    '</div>';
-
-                var imgParent = img.parent().parent();
-                imgParent.prepend(text);
-            }
-        }
-
-        function editMiddleBannerPic(_section, _num){
-            middleBannerNum = _num;
-            middleBannerSectionId = _section;
-
-            data = new FormData();
-            data.append('section', middleBannerSectionId);
-            data.append('number', middleBannerNum);
-
-            $('#uploadImgBanner').val('');
-            $('#linkForBanner').val('');
-            $('#showMiddleBannerInput').attr('src', '');
-
-            $('#middleBannerModal').modal('show');
-        }
-
-        function changeInputImg(input){
-            if (input.files && input.files[0] && middleBannerNum != 0 && middleBannerSectionId != 0) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    newImageReplace =  e.target.result;
-                    $('#showMiddleBannerInput').attr('src', e.target.result);
-                };
-                reader.readAsDataURL(input.files[0]);
-                data.append('pic', input.files[0]);
-            }
-        }
-
-        function saveMiddleBannerImg(){
-            var link = $('#linkForBanner').val();
-
-            if (middleBannerNum != 0 && middleBannerSectionId != 0) {
-
-                if(link.trim().length == 0)
-                    link = "#";
-
-                data.append('link', link);
-                data.append('page', 'mainPage');
-
-                $.ajax({
-                    type: 'post',
-                    url: '{{route("middleBanner.image.store")}}',
-                    data: data,
-                    processData: false,
-                    contentType: false,
-                    success: function(response){
-                        if(response == 'ok'){
-                            alert('عکس با موفقیت بارگزاری شد');
-                            $('#showMiddleBannerInput').attr('src', '');
-                            $('#uploadImgBanner').val('');
-                            $('#linkForBanner').val('');
-                            $('.middleImg' + middleBannerSectionId + '' + middleBannerNum).attr('src', newImageReplace);
-                            middleBannerSectionId = 0;
-                            middleBannerNum = 0;
-                        }
-
-                        $('#middleBannerModal').modal('hide');
-                    },
-                    error: function(){
-                    }
-                });
-            }
-
-        }
-
-
-    </script>
-@endif
-
 
 @include('layouts.calendar')
 
