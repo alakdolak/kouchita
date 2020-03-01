@@ -3125,6 +3125,8 @@ class PlaceController extends Controller {
         }
 
         $sliderPic = MainSliderPic::all();
+        foreach ($sliderPic as $item)
+            $item->pic = URL::asset('_images/sliderPic/'. $item->pic);
 
         $today = getToday()['date'];
         $hotelCount = Hotel::all()->count();

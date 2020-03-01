@@ -65,7 +65,7 @@
 <link rel="icon" href="{{URL::asset('images/icons/mainIcon.svg')}}" sizes="any" type="image/svg+xml">
 <link rel="apple-touch-icon-precomposed" href="{{URL::asset('images/icons/mainIcon.svg')}}" sizes="any" type="image/svg+xml">
 <meta name="msapplication-TileColor" content="#4dc7bc">
-<meta name="msapplication-TileImage" content="{{URL::asset('images/icons/mainIcon.png')}}">
+<meta name="msapplication-TileImage" content="{{URL::asset('images/icons/   mainIcon.png')}}">
 
 <meta name="twitter:card" content="summary"/>
 
