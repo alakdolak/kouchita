@@ -10,8 +10,8 @@ require_once (__DIR__ . '/../../../app/Http/Controllers/glogin/libraries/Google/
 
 //Insert your cient ID and secret
 //You can get it from : https://console.developers.google.com/
-$client_id = '204875713143-vgh7o6lfh1m8phas09n7ia8psgmk3bbi.apps.googleusercontent.com';
-$client_secret = '0kHyl_hsKamEH6SX-_9xmkWq';
+$client_id = '774684902659-20aeg6um0856j5li2uuu9ombu2pcbqv9.apps.googleusercontent.com';
+$client_secret = 'ARyU8-RXFJZD5jl5QawhpHne';
 $redirect_uri =  route('loginWithGoogle');
 
 /************************************************
@@ -39,7 +39,6 @@ $authUrl = $client->createAuthUrl();
 ?>
 
 <script>
-
     var loginDir = '{{route('login2')}}';
     var checkLoginDir = '{{route('checkLogin')}}';
     var checkEmailDir = '{{route('checkEmail')}}';
@@ -281,6 +280,7 @@ $authUrl = $client->createAuthUrl();
             </div>
             <div style="width:70%; margin: 0 15%; text-align: right; padding-top: 8px;">
                 <button onclick="login($('#username_main').val(), $('#password_main').val())" class="btn btn-info active" style="background: #4DC7BC;border-color: #4DC7BC;padding-left: 22px;padding-right: 20px;border-radius: 10px;;box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 3px 0px;">ورود</button>
+                <div class="g-signin2" data-onsuccess="onSignIn"></div>
                 <p style="margin-top: 10px; color: #963019" id="loginErr"></p>
             </div>
         </div>

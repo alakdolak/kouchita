@@ -1687,8 +1687,8 @@ class HomeController extends Controller
 
             //Insert your cient ID and sexcret
             //You can get it from : https://console.developers.google.com/
-            $client_id = '204875713143-vgh7o6lfh1m8phas09n7ia8psgmk3bbi.apps.googleusercontent.com';
-            $client_secret = '0kHyl_hsKamEH6SX-_9xmkWq';
+            $client_id = '774684902659-20aeg6um0856j5li2uuu9ombu2pcbqv9.apps.googleusercontent.com';
+            $client_secret = 'ARyU8-RXFJZD5jl5QawhpHne';
             $redirect_uri = route('loginWithGoogle');
 
             /************************************************
@@ -1698,7 +1698,7 @@ class HomeController extends Controller
              * through a login flow. To do this we need some
              * information from our API console project.
              ************************************************/
-            $client = new Google_Client();
+            $client = new \Google_Client();
             $client->setClientId($client_id);
             $client->setClientSecret($client_secret);
             $client->setRedirectUri($redirect_uri);
@@ -1711,7 +1711,7 @@ class HomeController extends Controller
              * for the required scopes, and uses that when
              * generating the authentication URL later.
              ************************************************/
-            $service = new Google_Service_Oauth2($client);
+            $service = new \Google_Service_Oauth2($client);
 
             /************************************************
              * If we have a code back from the OAuth 2.0 flow,
@@ -1738,7 +1738,8 @@ class HomeController extends Controller
 
                 try {
                     $tmpUser->save();
-                } catch (Exception $x) {
+                }
+                catch (Exception $x) {
                 }
             }
 

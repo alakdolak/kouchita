@@ -450,7 +450,7 @@
     @if(isset($middleBan['4']) && count($middleBan['4']) > 0)
         <div class='parent'>
             <div class='slider' style="width: 100%;">
-                <button type="button" id='banner3_right' class='rightButton' name="button">
+                <button type="button" id='banner3_right' class='rightButton sliderButton' name="button">
                     <svg version="1.1" id="Capa_1" width='40px' height='40px ' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                          viewBox="0 0 477.175 477.175" style="enable-background:new 0 0 477.175 477.175;" xml:space="preserve">
                    <g>
@@ -460,7 +460,7 @@
 
                 </svg>
                 </button>
-                <button type="button" id='banner3_left' class='leftButton' name="button">
+                <button type="button" id='banner3_left' class='leftButton sliderButton' name="button">
                     <svg version="1.1" id="Capa_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                          viewBox="0 0 477.175 477.175" style="enable-background:new 0 0 477.175 477.175;" xml:space="preserve">
                    <g>
@@ -469,7 +469,7 @@
                 </svg>
                 </button>
 
-                <svg id='svg2' class='up2' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <svg id='svg2' class='up2 slidesvg' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <circle id='circle1' class='circle1 steap' cx="34px" cy="49%" r="20"  />
                     <circle id='circle2' class='circle2 steap' cx="34px" cy="49%" r="100"  />
                     <circle id='circle3' class='circle3 steap' cx="34px" cy="49%" r="180"  />
@@ -480,7 +480,7 @@
                     <circle id='circle8' class='circle8 steap' cx="34px" cy="49%" r="580"  />
                     <circle id='circle9' class='circle9 steap' cx="34px" cy="49%" r="660"  />
                 </svg>
-                <svg id='svg1' class='up2' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <svg id='svg1' class='up2 slidesvg' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <circle id='circle10' class='circle10 steap' cx="648px" cy="49%" r="20"  />
                     <circle id='circle11' class='circle11 steap' cx="648px" cy="49%" r="100"  />
                     <circle id='circle12' class='circle12 steap' cx="648px" cy="49%" r="180"  />
