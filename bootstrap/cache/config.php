@@ -49,9 +49,9 @@
   array (
     'paths' => 
     array (
-      0 => '/var/www/kouchita/resources/views',
+      0 => '/var/www/koochita/resources/views',
     ),
-    'compiled' => '/var/www/kouchita/storage/framework/views',
+    'compiled' => '/var/www/koochita/storage/framework/views',
   ),
   'session' => 
   array (
@@ -59,7 +59,7 @@
     'lifetime' => 120,
     'expire_on_close' => false,
     'encrypt' => false,
-    'files' => '/var/www/kouchita/storage/framework/sessions',
+    'files' => '/var/www/koochita/storage/framework/sessions',
     'connection' => NULL,
     'table' => 'sessions',
     'store' => NULL,
@@ -212,7 +212,7 @@
       'file' => 
       array (
         'driver' => 'file',
-        'path' => '/var/www/kouchita/storage/framework/cache/data',
+        'path' => '/var/www/koochita/storage/framework/cache/data',
       ),
       'memcached' => 
       array (
@@ -364,12 +364,12 @@
       'local' => 
       array (
         'driver' => 'local',
-        'root' => '/var/www/kouchita/storage/app',
+        'root' => '/var/www/koochita/storage/app',
       ),
       'public' => 
       array (
         'driver' => 'local',
-        'root' => '/var/www/kouchita/storage/app/public',
+        'root' => '/var/www/koochita/storage/app/public',
         'url' => 'http://localhost/storage',
         'visibility' => 'public',
       ),
@@ -402,7 +402,7 @@
       'theme' => 'default',
       'paths' => 
       array (
-        0 => '/var/www/kouchita/config/../vendor/phpmailer',
+        0 => '/var/www/koochita/config/../vendor/phpmailer',
       ),
     ),
   ),
