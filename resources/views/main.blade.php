@@ -142,7 +142,7 @@
                                     <div class="swiper-wrapper">
                                         @foreach($sliderPic as $item)
                                             <div class="swiper-slide mobileHeight" style="position: relative; background: none;">
-                                                <img src="{{$item->pic}}" style="height: 100%; position: absolute; left: 0px;">
+                                                <img src="{{$item->pic}}" style="position: absolute; left: 0px; bottom: 0px;">
                                             </div>
                                         @endforeach
                                     </div>

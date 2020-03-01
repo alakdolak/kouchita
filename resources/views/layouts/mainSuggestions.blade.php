@@ -2,7 +2,7 @@
 @if(isset($middleBan['1']) && count($middleBan['1']) > 0)
     <style>
         .slide__text--1 {
-            left: 10%;
+            /*left: 10%;*/
         }
         @for($i = 1; $i <= count($middleBan['1']); $i++)
         .slide {
