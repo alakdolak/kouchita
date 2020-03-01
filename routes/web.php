@@ -361,7 +361,7 @@ Route::group(array('middleware' => ['throttle:30']), function () {
 
     Route::post('checkInnerFlightCapacity', ['as' => 'checkInnerFlightCapacity', 'uses' => 'TicketController@checkInnerFlightCapacity']);
 
-    Route::any('totalSearch', array('as' => 'totalSearch', 'uses' => 'HomeController@totalSearch'));
+    Route::any('totalSearch', 'HomeController@totalSearch')->name('totalSearch');
 
     Route::any('searchForStates', array('as' => 'searchForStates', 'uses' => 'HomeController@searchForStates'));
 
@@ -508,9 +508,13 @@ Route::group(array('middleware' => ['throttle:30', 'nothing']), function () {
 
     Route::get('/', array('as' => 'home', 'uses' => 'PlaceController@showMainPage'));
 
-    Route::get('main', array('as' => 'main', 'uses' => 'PlaceController@showMainPage'));
+    Route::get('main', function (){
+        return redirect(url('/'));
+    })->name('main');
 
-    Route::get('main/{mode}', array('as' => 'mainMode', 'uses' => 'PlaceController@showMainPage'));
+    Route::get('main/{mode}', function(){
+        return redirect(url('/'));
+    })->name('mainMode');
 
     Route::get('showAllPlaces/{placeId1}/{kindPlaceId1}/{placeId2?}/{kindPlaceId2?}/{placeId3?}/{kindPlaceId3?}/{placeId4?}/{kindPlaceId4?}', array('as' => 'showAllPlaces4', 'uses' => 'PlaceController@showAllPlaces'));
 
@@ -689,7 +693,12 @@ Route::group(array('middleware' => ['throttle:30', 'nothing', 'auth']), function
 
 Route::group(array('middleware' => ['throttle:30', 'auth', 'adminAccess']), function () {
 
+    Route::post('mainSliderStore', 'HomeController@mainSliderStore')->name('mainSlider.image.store');
+
+    Route::post('mainSliderImagesDelete', 'HomeController@mainSliderImagesDelete')->name('mainSlider.image.delete');
+
     Route::post('middleBannerImage', 'HomeController@middleBannerImages')->name('middleBanner.image.store');
+
     Route::post('middleBannerImagesDelete', 'HomeController@middleBannerImagesDelete')->name('middleBanner.image.delete');
 
     Route::get('fillState', 'HomeController@fillState');

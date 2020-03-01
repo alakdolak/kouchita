@@ -26,19 +26,19 @@
                                 <div class="global-nav-links-container">
                                     <ul class="global-nav-links-menu headerMainList">
                                         <li>
-                                            <a href="{{route('mainMode', ['mode' => 'hotel'])}}" id="global-nav-hotels" class="unscoped global-nav-link ui_tab {{$kindPlaceId == 4 ? 'redColor' : ''}}" data-tracking-label="hotels">هتل</a>
+                                            <span id="global-nav-hotels" class="unscoped global-nav-link ui_tab" onclick="openMainSearch(4) // in main.blade.php" data-tracking-label="hotels">هتل</span>
                                         </li>
                                         <li>
-                                            <a href="{{route('mainMode', ['mode' => 'restaurant'])}}" id="global-nav-vr" class="unscoped global-nav-link ui_tab {{$kindPlaceId == 3 ? 'redColor' : ''}}">رستوران</a>
+                                            <span id="global-nav-vr" class="unscoped global-nav-link ui_tab" onclick="openMainSearch(3) // in main.blade.php">رستوران</span>
                                         </li>
                                         <li>
-                                            <a href="{{route('mainMode', ['mode' => 'amaken'])}}" id="global-nav-restaurants" class="unscoped global-nav-link ui_tab {{$kindPlaceId == 6 ? 'redColor' : ''}}">جاذبه</a>
+                                            <span id="global-nav-restaurants" class="unscoped global-nav-link ui_tab" onclick="openMainSearch(1) // in main.blade.php">جاذبه</span>
                                         </li>
                                         <li class="" data-element=".masthead-dropdown-Flights">
-                                            <a href="{{route('mainMode', ['mode' => 'sogatsanaie'])}}" class="unscoped global-nav-link ui_tab {{$kindPlaceId == 10 ? 'redColor' : ''}}" data-tracking-label="Flights">سوغات و صنایع دستی</a>
+                                            <span class="unscoped global-nav-link ui_tab " onclick="openMainSearch(10) // in main.blade.php">سوغات و صنایع دستی</span>
                                         </li>
                                         <li class="" data-element=".masthead-dropdown-Flights">
-                                            <a href="{{route('mainMode', ['mode' => 'mahaliFood'])}}" class="unscoped global-nav-link ui_tab  {{$kindPlaceId == 11 ? 'redColor' : ''}}" data-tracking-label="Flights">غذای محلی</a>
+                                            <span class="unscoped global-nav-link ui_tab" onclick="openMainSearch(11) // in main.blade.php">غذای محلی</span>
                                         </li>
                                         <li>
                                             <a href="{{route('soon')}}" class="unscoped global-nav-link ui_tab " data-tracking-label="Flights">بوم‌گردی</a>
@@ -231,6 +231,7 @@
             $('.global-nav-actions').toggleClass('display-flexImp');
         }
     }
+
 </script>
 
 @if(Auth::check())

@@ -1036,7 +1036,7 @@ function createUrl($kindPlaceId, $placeId, $stateId, $cityId, $articleId = 0){
         return url('cityPage/state/' . $state->name);
     }
     else if($cityId != 0){
-        $city = Cities::find($stateId);
+        $city = Cities::find($cityId);
         return url('cityPage/city/' . $city->name);
     }
     else if($kindPlaceId != 0){

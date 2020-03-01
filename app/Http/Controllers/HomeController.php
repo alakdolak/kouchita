@@ -17,6 +17,7 @@ use App\models\HotelApi;
 use App\models\LogFeedBack;
 use App\models\LogModel;
 use App\models\MahaliFood;
+use App\models\MainSliderPic;
 use App\models\Majara;
 use App\models\Message;
 use App\models\OpOnActivity;
@@ -67,6 +68,86 @@ class HomeController extends Controller
             return \redirect(\url('/'));
 
         return \redirect(url('show-place-details/' . $kindPlace->fileName . '/' . $place->id));
+    }
+
+    public function mainSliderStore(Request $request)
+    {
+        if(\auth()->check() && \auth()->user()->level == 1) {
+            $location = __DIR__ . '/../../../../assets/_images/sliderPic';
+
+            if(!file_exists($location))
+                mkdir($location);
+
+            if(isset($request->id) && $request->id != 0){
+                $slider = MainSliderPic::find($request->id);
+                if($slider != null){
+                    $slider->text = $request->text;
+                    $slider->textBackground = $request->color;
+                    $slider->alt = 'کوچیتا';
+
+                    if (isset($_FILES['pic']) && $_FILES['pic']['error'] == 0){
+
+                        if (file_exists($location . '/' . $slider->pic))
+                            unlink($location . '/' . $slider->pic);
+
+                        $fileName =  time() . $_FILES['pic']['name'];
+                        $destinationPic = $location . '/' . $fileName;
+                        move_uploaded_file( $_FILES['pic']['tmp_name'], $destinationPic);
+                        $slider->pic = $fileName;
+                    }
+                    $slider->save();
+                    echo json_encode(['ok', $slider->id]);
+                }
+                else
+                    echo json_encode(['nok1']);
+
+            }
+            else if(isset($request->id) && $request->id == 0){
+                if (isset($_FILES['pic']) && $_FILES['pic']['error'] == 0){
+                    $slider = new MainSliderPic();
+                    $slider->text = $request->text;
+                    $slider->textBackground = $request->color;
+                    $slider->alt = 'کوچیتا';
+
+                    $fileName =  time() . $_FILES['pic']['name'];
+                    $destinationPic = $location . '/' . $fileName;
+                    compressImage($_FILES['pic']['tmp_name'], $destinationPic, 80);
+                    $slider->pic = $fileName;
+
+                    $slider->save();
+
+                    echo json_encode(['ok', $slider->id]);
+                }
+
+            }
+            else
+                echo json_encode(['nok2']);
+        }
+        else
+            echo json_encode(['nok3']);
+
+        return;
+    }
+
+    public function mainSliderImagesDelete(Request $request){
+        if(isset($request->id) && $request->id != 0){
+            $slider = MainSliderPic::find($request->id);
+            if($slider != null){
+                $location = __DIR__ . '/../../../../assets/_images/sliderPic';
+
+                if (file_exists($location . '/' . $slider->pic))
+                    unlink($location . '/' . $slider->pic);
+
+                $slider->delete();
+                echo 'ok';
+            }
+            else
+                echo 'nok2';
+        }
+        else
+            echo 'nok1';
+
+        return;
     }
 
     public function middleBannerImages(Request $request)
@@ -930,43 +1011,19 @@ class HomeController extends Controller
 
             $kindPlaceId = makeValidInput($_POST["kindPlaceId"]);
 
-            switch ($kindPlaceId) {
-                case 1:
-                    $route = "amakenList";
-                    break;
-                case 3:
-                    $route = "restaurantList";
-                    break;
-                case 4:
-                    $route = "hotelList";
-                    break;
-                case 6:
-                    $route = "majaraList";
-                    break;
-                case 10:
-                    $route = "sogatSanaieList";
-                    break;
-                case 11:
-                    $route = "mahaliFood";
-                    break;
-                case 0:
-                default:
-                    $route = 'all';
-                    break;
-            }
             $key = makeValidInput($_POST["key"]);
             $key = str_replace(' ', '', $key);
             $key2 = (isset($_POST["key2"]) ? makeValidInput($_POST["key2"]) : '');
             $key2 = str_replace(' ', '', $key2);
 
             if (!empty($key2))
-                $result = DB::select("SELECT name as targetName from state WHERE replace(name, ' ', '') LIKE '%$key%' or replace(name, ' ', '') LIKE '%$key2%'");
+                $result = DB::select("SELECT name as targetName, id from state WHERE replace(name, ' ', '') LIKE '%$key%' or replace(name, ' ', '') LIKE '%$key2%'");
             else
-                $result = DB::select("SELECT name as targetName from state WHERE replace(name, ' ', '') LIKE '%$key%'");
+                $result = DB::select("SELECT name as targetName, id from state WHERE replace(name, ' ', '') LIKE '%$key%'");
 
             foreach ($result as $itr) {
                 $itr->mode = "state";
-                $itr->url = url('cityPage/state/' . $itr->targetName);
+                $itr->url = createUrl(0, 0, $itr->id, 0, 0);
             }
 
             if (!empty($key2))
@@ -977,7 +1034,7 @@ class HomeController extends Controller
             foreach ($tmp as $itr) {
                 $itr->amakenCount = Amaken::where('cityId', $itr->id)->count();
                 $itr->mode = "city";
-                $itr->url = url('cityPage/city/' . $itr->targetName);
+                $itr->url = createUrl(0, 0, 0,  $itr->id, 0);
             }
             for($i = 0; $i < count($tmp); $i++){
                 for($j = 1; $j < count($tmp); $j++){
@@ -999,7 +1056,7 @@ class HomeController extends Controller
                         $tmp = DB::select("SELECT amaken.id, amaken.name as targetName, cities.name as cityName, state.name as stateName from amaken, cities, state WHERE cityId = cities.id and state.id = cities.stateId and replace(amaken.name, ' ', '') LIKE '%$key%'");
                     foreach ($tmp as $itr) {
                         $itr->mode = "amaken";
-                        $itr->url = route('amakenDetails', ['placeId' => $itr->id, 'placeName' => $itr->targetName]);
+                        $itr->url = createUrl($kindPlaceId, $itr->id, 0,  0, 0);
                     }
                     $result = array();
                     break;
@@ -1010,7 +1067,7 @@ class HomeController extends Controller
                         $tmp = DB::select("SELECT restaurant.id, restaurant.name as targetName, cities.name as cityName, state.name as stateName from restaurant, cities, state WHERE cityId = cities.id and state.id = cities.stateId and replace(restaurant.name, ' ', '') LIKE '%$key%'");
                     foreach ($tmp as $itr) {
                         $itr->mode = "restaurant";
-                        $itr->url = route('restaurantDetails', ['placeId' => $itr->id, 'placeName' => $itr->targetName]);
+                        $itr->url = createUrl($kindPlaceId, $itr->id, 0,  0, 0);
                     }
                     $result = array();
                     break;
@@ -1022,7 +1079,7 @@ class HomeController extends Controller
 
                     foreach ($tmp as $itr) {
                         $itr->mode = "hotel";
-                        $itr->url = route('hotelDetails', ['placeId' => $itr->id, 'placeName' => $itr->targetName]);
+                        $itr->url = createUrl($kindPlaceId, $itr->id, 0,  0, 0);
                     }
                     $result = array();
                     break;
@@ -1033,7 +1090,7 @@ class HomeController extends Controller
                         $tmp = DB::select("SELECT majara.id, majara.name as targetName, cities.name as cityName, state.name as stateName from majara, cities, state WHERE cityId = cities.id and state.id = cities.stateId and replace(majara.name, ' ', '') LIKE '%$key%'");
                     foreach ($tmp as $itr) {
                         $itr->mode = "majara";
-                        $itr->url = route('majaraDetails', ['placeId' => $itr->id, 'placeName' => $itr->targetName]);
+                        $itr->url = createUrl($kindPlaceId, $itr->id, 0,  0, 0);
                     }
                     $result = array();
                     break;
@@ -1044,7 +1101,7 @@ class HomeController extends Controller
                         $tmp = DB::select("SELECT sogatSanaies.id, sogatSanaies.name as targetName, cities.name as cityName, state.name as stateName from sogatSanaies, cities, state WHERE cityId = cities.id and state.id = cities.stateId and replace(sogatSanaies.name, ' ', '') LIKE '%$key%'");
                     foreach ($tmp as $itr) {
                         $itr->mode = "sogatSanaies";
-                        $itr->url = route('sanaiesogatDetails', ['placeId' => $itr->id, 'placeName' => $itr->targetName]);
+                        $itr->url = createUrl($kindPlaceId, $itr->id, 0,  0, 0);
                     }
                     $result = array();
                     break;
@@ -1055,7 +1112,7 @@ class HomeController extends Controller
                         $tmp = DB::select("SELECT mahaliFood.id, mahaliFood.name as targetName, cities.name as cityName, state.name as stateName from mahaliFood, cities, state WHERE cityId = cities.id and state.id = cities.stateId and replace(mahaliFood.name, ' ', '') LIKE '%$key%'");
                     foreach ($tmp as $itr) {
                         $itr->mode = "mahaliFood";
-                        $itr->url = route('mahaliFoodDetails', ['placeId' => $itr->id, 'placeName' => $itr->targetName]);
+                        $itr->url = createUrl($kindPlaceId, $itr->id, 0,  0, 0);
                     }
                     $result = array();
                     break;
@@ -1070,7 +1127,7 @@ class HomeController extends Controller
                         $condition = ['activityId' => $acitivityId->id, 'placeId' => $itr->id, 'kindPlaceId' => 1];
                         $itr->see = LogModel::where($condition)->count();
                         $itr->mode = "amaken";
-                        $itr->url = route('amakenDetails', ['placeId' => $itr->id, 'placeName' => $itr->targetName]);
+                        $itr->url = createUrl(1, $itr->id, 0,  0, 0);
                     }
                     $tmp = $this->sortSearchBySee($tmp);
                     $result = array_merge($result, $tmp);
@@ -1083,7 +1140,7 @@ class HomeController extends Controller
                         $condition = ['activityId' => $acitivityId->id, 'placeId' => $itr->id, 'kindPlaceId' => 3];
                         $itr->see = LogModel::where($condition)->count();
                         $itr->mode = "restaurant";
-                        $itr->url = route('restaurantDetails', ['placeId' => $itr->id, 'placeName' => $itr->targetName]);
+                        $itr->url = createUrl(3, $itr->id, 0,  0, 0);
                     }
                     $tmp = $this->sortSearchBySee($tmp);
                     $result = array_merge($result, $tmp);
@@ -1096,7 +1153,7 @@ class HomeController extends Controller
                         $condition = ['activityId' => $acitivityId->id, 'placeId' => $itr->id, 'kindPlaceId' => 4];
                         $itr->see = LogModel::where($condition)->count();
                         $itr->mode = "hotel";
-                        $itr->url = route('hotelDetails', ['placeId' => $itr->id, 'placeName' => $itr->targetName]);
+                        $itr->url = createUrl(4, $itr->id, 0,  0, 0);
                     }
                     $tmp = $this->sortSearchBySee($tmp);
                     $result = array_merge($result, $tmp);
@@ -1109,7 +1166,7 @@ class HomeController extends Controller
                         $condition = ['activityId' => $acitivityId->id, 'placeId' => $itr->id, 'kindPlaceId' => 6];
                         $itr->see = LogModel::where($condition)->count();
                         $itr->mode = "majara";
-                        $itr->url = route('majaraDetails', ['placeId' => $itr->id, 'placeName' => $itr->targetName]);
+                        $itr->url = createUrl(6, $itr->id, 0,  0, 0);
                     }
                     $tmp = $this->sortSearchBySee($tmp);
                     $result = array_merge($result, $tmp);
@@ -1122,7 +1179,7 @@ class HomeController extends Controller
                         $condition = ['activityId' => $acitivityId->id, 'placeId' => $itr->id, 'kindPlaceId' => 10];
                         $itr->see = LogModel::where($condition)->count();
                         $itr->mode = "sogatSanaies";
-                        $itr->url = route('sanaiesogatDetails', ['placeId' => $itr->id, 'placeName' => $itr->targetName]);
+                        $itr->url = createUrl(10, $itr->id, 0,  0, 0);
                     }
                     $tmp = $this->sortSearchBySee($tmp);
                     $result = array_merge($result, $tmp);
@@ -1135,7 +1192,7 @@ class HomeController extends Controller
                         $condition = ['activityId' => $acitivityId->id, 'placeId' => $itr->id, 'kindPlaceId' => 11];
                         $itr->see = LogModel::where($condition)->count();
                         $itr->mode = "mahaliFood";
-                        $itr->url = route('mahaliFoodDetails', ['placeId' => $itr->id, 'placeName' => $itr->targetName]);
+                        $itr->url = createUrl(11, $itr->id, 0,  0, 0);
                     }
                     $tmp = $this->sortSearchBySee($tmp);
                     break;

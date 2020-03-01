@@ -13,7 +13,7 @@
         }
         .slide--{{$i}} .slide__img-wrapper {
             background: url({{$middleBan['1'][$i-1]['pic']}}) center center no-repeat;
-            background-size: cover;
+            background-size: 100% auto;
         }
         .active .slide--{{$i}} {
             -webkit-transform: translate3d(-{{100 - ((100/count($middleBan['1'])) * ($i-1) )}}%, 0, 0);

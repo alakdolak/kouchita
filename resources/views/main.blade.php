@@ -108,24 +108,13 @@
                             {{--<div id="sliderBarDIV" class="ppr_rup ppr_priv_trip_search hideOnPhone">--}}
                             <div class="ppr_rup ppr_priv_trip_search mainBannerSlider">
                                 <!-- Swiper -->
-                                <div id="mainSlider" class="swiper-container">
+                                <div id="mainSlider" class="swiper-container backgroundColorForSlider">
                                     <div class="swiper-wrapper">
-                                        {{--@foreach($sliderPic as $item)--}}
-                                            {{--<div class="swiper-slide mobileHeight" style="position: relative">--}}
-                                                {{--<img class="eachPicOfSlider" src="{{URL::asset('_images/sliderPic/' . $item->pic)}}" alt="{{$item->alt}}">--}}
-                                                {{--@if($item->text != null && $item->text != '')--}}
-                                                    {{--<div class="textInSlide" style="background-color: {{$item->textBackground}}; color: {{$item->textColor}};">--}}
-                                                        {{--{{$item->text}}--}}
-                                                    {{--</div>--}}
-                                                {{--@endif--}}
-                                            {{--</div>--}}
-                                        {{--@endforeach--}}
-
-
-                                        <div class="swiper-slide mobileHeight" style="position: relative; background-color: #d8a7b1">
-                                            <img src="{{URL::asset('images/icons/p1.png')}}" style="height: 100%; position: absolute; left: 0px;">
+                                    @foreach($sliderPic as $item)
+                                        <div class="swiper-slide mobileHeight" style="position: relative; background: none;">
+                                            <img src="{{$item->pic}}" style="height: 100%; position: absolute; left: 0px;">
                                         </div>
-
+                                    @endforeach
                                     </div>
                                     <!-- Add Pagination -->
                                     <div class="swiper-pagination"></div>
@@ -135,85 +124,27 @@
                                 </div>
                                 <div class="ui_columns datepicker_box trip_search metaDatePicker rounded_lockup usePickerTypeIcons preDates noDates with_children mainDivSearchInputMainPage">
                                     <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column is-4 search_typeahead wctx-tripsearch searchDivForScrollClass mainSearchDivPcSize">
-                                        @if($kindPlaceId == 0)
-                                            <div onclick="$('#searchPane').removeClass('hidden');  $('#darkModeMainPage').toggle(); $('#placeName').focus();">به کجا می‌روید؟</div>
-                                        @elseif($kindPlaceId == 1)
-                                            <div onclick="$('#searchPane').removeClass('hidden');  $('#darkModeMainPage').toggle(); $('#placeName').focus();">کدام جاذبه را می‌خواهید تجربه کنید؟</div>
-                                        @elseif($kindPlaceId == 3)
-                                            <div onclick="$('#searchPane').removeClass('hidden');  $('#darkModeMainPage').toggle(); $('#placeName').focus();">در کدام رستوران دوست دارید غذا بخورید؟</div>
-                                        @elseif($kindPlaceId == 4)
-                                            <div onclick="$('#searchPane').removeClass('hidden');  $('#darkModeMainPage').toggle(); $('#placeName').focus();">در کدام هتل دوست دارید اقامت کنید؟</div>
-                                        @elseif($kindPlaceId == 6)
-                                            <div onclick="$('#searchPane').removeClass('hidden');  $('#darkModeMainPage').toggle(); $('#placeName').focus();">کدام ماجرا را می‌خواهید تجربه کنید؟</div>
-                                        @elseif($kindPlaceId == 10)
-                                            <div onclick="$('#searchPane').removeClass('hidden');  $('#darkModeMainPage').toggle(); $('#placeName').focus();">کدام صنایع دستی را دوست دارید بشناسید؟</div>
-                                        @elseif($kindPlaceId == 11)
-                                            <div onclick="$('#searchPane').removeClass('hidden');  $('#darkModeMainPage').toggle(); $('#placeName').focus();">کدام غذای محلی را می‌خواهید تجربه کنید؟</div>
-                                        @endif
+                                        <div onclick="openMainSearch(0)">به کجا می‌روید؟</div>
                                     </div>
-
+                                    <div class="clear-both"></div>
+                                </div>
+                                <div style="position: absolute; right: 1%; top: 30%; z-index: 9; font-size: 35px">
                                     <div class="console-container">
                                         <span id='text'></span>
                                     </div>
-                                    <script>
-                                        var setInterText = 0;
-
-                                        consoleText(['لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت'], 'text',['black']);
-
-                                        function consoleText(words, id, colors) {
-                                            if(setInterText != 0)
-                                                clearInterval(setInterText);
-
-                                            document.getElementById('text').innerHTML = '';
-                                            if (colors === undefined) colors = ['#fff'];
-                                            var visible = true;
-                                            var con = document.getElementById('console');
-                                            var letterCount = 1;
-                                            var x = 1;
-                                            var waiting = false;
-                                            var target = document.getElementById(id);
-                                            target.setAttribute('style', 'color:' + colors[0]);
-
-                                            setInterText = window.setInterval(function() {
-                                                if (letterCount === 0 && waiting === false) {
-                                                    waiting = true;
-                                                    target.innerHTML = words[0].substring(0, letterCount);
-                                                    window.setTimeout(function() {
-                                                        var usedColor = colors.shift();
-                                                        colors.push(usedColor);
-                                                        var usedWord = words.shift();
-                                                        words.push(usedWord);
-                                                        x = 1;
-                                                        target.setAttribute('style', 'color:' + colors[0])
-                                                        letterCount += x;
-                                                        waiting = false;
-                                                    }, 10)
-                                                }
-                                                else if (waiting === false) {
-                                                    target.innerHTML = words[0].substring(0, letterCount);
-                                                    letterCount += x;
-                                                }
-                                            }, 100);
-                                        }
-                                    </script>
-
-                                    <div class="clear-both"></div>
                                 </div>
+
                             </div>
 
                             <div class="ppr_rup ppr_priv_trip_search display-none hideOnScreen">
                                 <!-- Swiper -->
-                                <div id="mainSlider" class="swiper-container">
+                                <div id="mainSlider" class="swiper-container backgroundColorForSlider">
                                     <div class="swiper-wrapper">
-                                        {{--@foreach($sliderPic as $item)--}}
-                                            {{--<div class="swiper-slide">--}}
-                                                {{--<img class="eachPicOfSlider" src="{{URL::asset('_images/sliderPic/' . $item->pic)}}" alt="{{$item->alt}}">--}}
-                                            {{--</div>--}}
-                                        {{--@endforeach--}}
-                                        <div class="swiper-slide mobileHeight" style="position: relative; background-color: #d8a7b1">
-                                            <img src="{{URL::asset('images/icons/p1.png')}}" style="height: 100%; position: absolute; left: 0px;">
-                                        </div>
-
+                                        @foreach($sliderPic as $item)
+                                            <div class="swiper-slide mobileHeight" style="position: relative; background: none;">
+                                                <img src="{{$item->pic}}" style="height: 100%; position: absolute; left: 0px;">
+                                            </div>
+                                        @endforeach
                                     </div>
                                     <!-- Add Pagination -->
                                     <div class="swiper-pagination"></div>
@@ -238,37 +169,11 @@
             <div class="ui_picker">
                 <div class="typeahead_align ui_typeahead full-width display-flex">
 
-                    @if($placeMode == 'hotel')
-                        <div class="spGoWhere">در کدام هتل</div>
-                        <input onkeyup="search(event, this.value)" type="text" id="placeName"
-                               class="typeahead_input searchPaneInput" placeholder="دوست دارید اقامت کنید؟"/>
-                    @elseif($placeMode == 'amaken')
-                        <div class="spGoWhere">کدام جاذبه</div>
-                        <input onkeyup="search(event, this.value)" type="text" id="placeName"
-                               class="typeahead_input searchPaneInput" placeholder="را می‌خواهید تجربه کنید؟"/>
-                    @elseif($placeMode == 'restaurant')
-                        <div class="spGoWhere">در کدام رستوران</div>
-                        <input onkeyup="search(event, this.value)" type="text" id="placeName"
-                               class="typeahead_input searchPaneInput" placeholder="دوست دارید غذا بخورید؟"/>
-                    @elseif($placeMode == 'mahaliFood')
-                        <div class="spGoWhere">کدام غذای محلی</div>
-                        <input onkeyup="search(event, this.value)" type="text" id="placeName"
-                               class="typeahead_input searchPaneInput" placeholder="را می‌خواهید تجربه کنید؟"/>
-{{--                    @elseif($placeMode == 'majara')--}}
-{{--                        <div class="spGoWhere"></div>--}}
-{{--                        <input onkeyup="search(event, this.value)" type="text" id="placeName"--}}
-{{--                               class="typeahead_input searchPaneInput" placeholder="دوست دارید به کدام هتل کنید؟"/>--}}
-                    @elseif($placeMode == 'sogatsanaie')
-                        <div class="spGoWhere">کدام صنایع‌دستی</div>
-                        <input onkeyup="search(event, this.value)" type="text" id="placeName"
-                               class="typeahead_input searchPaneInput" placeholder="را دوست دارید بشناسید؟"/>
-                    @else
-                        <div class="spGoWhere">به کجا</div>
-                        <input onkeyup="search(event, this.value)" type="text" id="placeName"
-                               class="typeahead_input searchPaneInput" placeholder="دوست دارید سفر کنید؟"/>
-                    @endif
-
+                    <div id="firstPanSearchText" class="spGoWhere">به کجا</div>
+                    <input onkeyup="search(event, this.value)" type="text" id="placeName" class="typeahead_input searchPaneInput" placeholder="دوست دارید سفر کنید؟"/>
+                    <input type="hidden" id="kindPlaceIdForMainSearch" value="0">
                     <input type="hidden" id="placeId">
+
                 </div>
                 <div class="spBorderBottom"></div>
                 <div class="mainContainerSearch">
@@ -369,14 +274,57 @@
 <script defer>
     var passenger = 0;
 
+    function openMainSearch(_kindPlaceId){
+        var fpst;
+        var pn;
+        switch (_kindPlaceId){
+            case 0:
+                fpst = 'به کجا';
+                pn = 'دوست دارید سفر کنید؟';
+                break;
+            case 1:
+                fpst = 'کدام جاذبه';
+                pn = 'را می‌خواهید تجربه کنید؟';
+                break;
+            case 3:
+                fpst = 'در کدام رستوران';
+                pn = 'دوست دارید غذا بخورید؟';
+                break;
+            case 4:
+                fpst = 'در کدام هتل';
+                pn = 'دوست دارید اقامت کنید؟';
+                break;
+            case 10:
+                fpst = 'کدام صنایع‌دستی یا سوغات ';
+                pn = 'را دوست دارید بشناسید؟';
+                break;
+            case 11:
+                fpst = 'کدام غذای محلی';
+                pn = 'را می‌خواهید تجربه کنید؟';
+                break;
+        }
+
+        $('#kindPlaceIdForMainSearch').val(_kindPlaceId);
+        $('#firstPanSearchText').text(fpst);
+        $('#placeName').attr('placeholder', pn);
+
+        $('#searchPane').removeClass('hidden');
+        $('#darkModeMainPage').toggle();
+        $('#placeName').val('');
+        $('#placeName').focus();
+
+        $("#result").empty();
+    }
+
     function redirect() {
         "" != $("#placeId").val() && (document.location.href = $("#placeId").val())
     }
 
     function search(e, val = '') {
-
         if (val == '')
             val = $("#placeName").val();
+
+        var kindPlaceId = $('#kindPlaceIdForMainSearch').val();
 
         $(".suggest").css("background-color", "transparent").css("padding", "0").css("border-radius", "0");
         if (null == val || "" == val || val.length < 2) {
@@ -433,75 +381,13 @@
                     type: "post",
                     url: searchDir,
                     data: {
-                        kindPlaceId: "{{$kindPlaceId}}",
+                        kindPlaceId: kindPlaceId,
                         key: val,
                         key2: val2,
                         _token: '{{csrf_token()}}'
                     },
                     success: function (response) {
-
-                        newElement = "";
-
-                        if (response.length == 0) {
-                            newElement = "موردی یافت نشد";
-                            $("#placeId").val("");
-                            return;
-                        }
-
-                        response = JSON.parse(response);
-                        currIdx = -1;
-                        suggestions = response;
-
-                        for (i = 0; i < response.length; i++) {
-                            if ("state" == response[i].mode) {
-                                newElement += '<div class="icons location spIcons"></div>\n';
-                                newElement += "<p class='suggest cursor-pointer font-weight-700' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "استان ' + response[i].targetName + "\")'>استان " + response[i].targetName + "</p>";
-                            }
-                            else if ("city" == response[i].mode) {
-                                newElement += '<div class="icons location spIcons"></div>\n';
-                                newElement += "<p class='suggest cursor-pointer font-weight-700' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "شهر ' + response[i].targetName + " در " + response[i].stateName + "\")' style='margin: 0px'>شهر " + response[i].targetName + "</p>";
-                                newElement += "<p class='suggest cursor-pointer stateName' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")'>" + response[i].stateName + "</p>";
-                            }
-                            else if (response[i].mode == 'amaken') {
-                                newElement += '<div class="icons touristAttractions spIcons"></div>\n';
-                                newElement += "<p class='suggest cursor-pointer' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")' style='margin: 0px'>" + response[i].targetName + "</p>";
-                                newElement += "<p class='suggest cursor-pointer stateName' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")'>" + response[i].cityName + " در " + response[i].stateName + "</p>";
-                            }
-                            else if (response[i].mode == 'restaurant') {
-                                newElement += '<div class="icons restaurantIcon spIcons"></div>\n';
-                                newElement += "<p class='suggest cursor-pointer' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")' style='margin: 0px'>" + response[i].targetName + "</p>";
-                                newElement += "<p class='suggest cursor-pointer stateName' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")'>" + response[i].cityName + " در " + response[i].stateName + "</p>";
-                            }
-                            else if (response[i].mode == 'hotel') {
-                                newElement += '<div class="icons hotelIcon spIcons"></div>\n';
-                                newElement += "<p class='suggest cursor-pointer' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")' style='margin: 0px'>" + response[i].targetName + "</p>";
-                                newElement += "<p class='suggest cursor-pointer stateName' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")'>" + response[i].cityName + " در " + response[i].stateName + "</p>";
-                            }
-                            else if (response[i].mode == 'sogatSanaies') {
-                                newElement += '<div class="icons souvenirIcon spIcons"></div>\n';
-                                newElement += "<p class='suggest cursor-pointer' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")' style='margin: 0px'>" + response[i].targetName + "</p>";
-                                newElement += "<p class='suggest cursor-pointer stateName' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")'>" + response[i].cityName + " در " + response[i].stateName + "</p>";
-                            }
-                            else if (response[i].mode == 'mahaliFood') {
-                                newElement += '<div class="icons traditionalFood spIcons"></div>\n';
-                                newElement += "<p class='suggest cursor-pointer' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")' style='margin: 0px'>" + response[i].targetName + "</p>";
-                                newElement += "<p class='suggest cursor-pointer stateName' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")'>" + response[i].cityName + " در " + response[i].stateName + "</p>";
-                            }
-                            else if (response[i].mode == 'majara') {
-                                newElement += '<div class="icons adventure spIcons"></div>\n';
-                                newElement += "<p class='suggest cursor-pointer' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")' style='margin: 0px'>" + response[i].targetName + "</p>";
-                                newElement += "<p class='suggest cursor-pointer stateName' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")'>" + response[i].cityName + " در " + response[i].stateName + "</p>";
-                            }
-                        }
-
-                        if (response.length != 0) {
-                            $('#result').removeClass('display-noneImp')
-                        }
-                        else {
-                            $('#result').addClass('display-noneImp');
-                        }
-
-                        $("#result").empty().append(newElement)
+                        createSearchResponse(response);
                     }
                 })
             }
@@ -509,82 +395,68 @@
                 type: "post",
                 url: searchDir,
                 data: {
-                    kindPlaceId: "{{$kindPlaceId}}",
+                    kindPlaceId: kindPlaceId,
                     key: val,
                     _token: '{{csrf_token()}}'
                 },
                 success: function (response) {
-
-                    newElement = "";
-
-                    if (response.length == 0) {
-                        newElement = "موردی یافت نشد";
-                        $("#placeId").val("");
-                        return;
-                    }
-
-                    response = JSON.parse(response);
-                    currIdx = -1;
-                    suggestions = response;
-
-                    for (i = 0; i < response.length; i++) {
-                        if (response[i].mode == "state") {
-                            newElement += '<div class="icons location spIcons"></div>\n';
-                            newElement += "<p class='suggest cursor-pointer font-weight-700' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "استان ' + response[i].targetName + "\")'>استان " + response[i].targetName + "</p>";
-                        }
-                        else if (response[i].mode == "city") {
-                            newElement += '<div class="icons location spIcons"></div>\n';
-                            newElement += "<p class='suggest cursor-pointer font-weight-700' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "شهر ' + response[i].targetName + " در " + response[i].stateName + "\")' style='margin: 0px'>شهر " + response[i].targetName + "</p>";
-                            newElement += "<p class='suggest cursor-pointer stateName' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")'>" + response[i].stateName + "</p>";
-                        }
-                        else if (response[i].mode == 'amaken') {
-                            newElement += '<div class="icons touristAttractions spIcons"></div>\n';
-                            newElement += "<p class='suggest cursor-pointer' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")' style='margin: 0px'>" + response[i].targetName + "</p>";
-                            newElement += "<p class='suggest cursor-pointer stateName' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")'>" + response[i].cityName + " در " + response[i].stateName + "</p>";
-                        }
-                        else if (response[i].mode == 'restaurant') {
-                            newElement += '<div class="icons restaurantIcon spIcons"></div>\n';
-                            newElement += "<p class='suggest cursor-pointer' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")' style='margin: 0px'>" + response[i].targetName + "</p>";
-                            newElement += "<p class='suggest cursor-pointer stateName' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")'>" + response[i].cityName + " در " + response[i].stateName + "</p>";
-                        }
-                        else if (response[i].mode == 'hotel') {
-                            newElement += '<div class="icons hotelIcon spIcons"></div>\n';
-                            newElement += "<p class='suggest cursor-pointer' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")' style='margin: 0px'>" + response[i].targetName + "</p>";
-                            newElement += "<p class='suggest cursor-pointer stateName' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")'>" + response[i].cityName + " در " + response[i].stateName + "</p>";
-                        }
-                        else if (response[i].mode == 'sogatSanaies') {
-                            newElement += '<div class="icons souvenirIcon spIcons"></div>\n';
-                            newElement += "<p class='suggest cursor-pointer' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")' style='margin: 0px'>" + response[i].targetName + "</p>";
-                            newElement += "<p class='suggest cursor-pointer stateName' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")'>" + response[i].cityName + " در " + response[i].stateName + "</p>";
-                        }
-                        else if (response[i].mode == 'mahaliFood') {
-                            newElement += '<div class="icons traditionalFood spIcons"></div>\n';
-                            newElement += "<p class='suggest cursor-pointer' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")' style='margin: 0px'>" + response[i].targetName + "</p>";
-                            newElement += "<p class='suggest cursor-pointer stateName' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")'>" + response[i].cityName + " در " + response[i].stateName + "</p>";
-                        }
-                        else if (response[i].mode == 'majara') {
-                            newElement += '<div class="icons adventure spIcons"></div>\n';
-                            newElement += "<p class='suggest cursor-pointer' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")' style='margin: 0px'>" + response[i].targetName + "</p>";
-                            newElement += "<p class='suggest cursor-pointer stateName' id='suggest_" + i + "' onclick='setInput(\"" + response[i].url + '", "' + response[i].targetName + "\")'>" + response[i].cityName + " در " + response[i].stateName + "</p>";
-                        }
-                    }
-
-                    if (response.length != 0) {
-                        $('#result').removeClass('display-noneImp')
-                    }
-                    else {
-                        $('#result').addClass('display-noneImp');
-                    }
-
-                    $("#result").empty().append(newElement)
+                    createSearchResponse(response);
                 }
             })
         }
 
     }
 
-    function setInput(e, t) {
-        $("#placeName").val(t), $("#placeId").val(e), $("#result").empty(), redirect()
+    function createSearchResponse(response){
+        newElement = "";
+
+        if (response.length == 0) {
+            newElement = "موردی یافت نشد";
+            $("#placeId").val("");
+            return;
+        }
+
+        response = JSON.parse(response);
+        currIdx = -1;
+        suggestions = response;
+
+        var icon;
+        for (i = 0; i < response.length; i++) {
+            if (response[i].mode == "state") {
+                newElement += '<a href="' + response[i].url + '" style="color: black;"><div class="icons location spIcons"></div>\n';
+                newElement += "<p class='suggest cursor-pointer font-weight-700' id='suggest_" + i + "'>استان " + response[i].targetName + "</p></a>";
+            }
+            else if (response[i].mode == "city") {
+                newElement += '<a href="' + response[i].url + '" style="color: black;"><div class="icons location spIcons"></div>\n';
+                newElement += "<p class='suggest cursor-pointer font-weight-700' id='suggest_" + i + "' style='margin: 0px'>شهر " + response[i].targetName + "</p>";
+                newElement += "<p class='suggest cursor-pointer stateName' id='suggest_" + i + "'>" + response[i].stateName + "</p></a>";
+            }
+            else {
+                if (response[i].mode == 'amaken')
+                    icon = 'touristAttractions';
+                else if (response[i].mode == 'restaurant')
+                    icon = 'touristAttractions';
+                else if (response[i].mode == 'hotel')
+                    icon = 'hotelIcon';
+                else if (response[i].mode == 'sogatSanaies')
+                    icon = 'souvenirIcon';
+                else if (response[i].mode == 'mahaliFood')
+                    icon = 'traditionalFood';
+                else if (response[i].mode == 'majara')
+                    icon = 'adventure';
+
+                newElement += '<a href="' + response[i].url + '" style="color: black;"><div class="icons ' + icon + ' spIcons"></div>\n';
+                newElement += "<p class='suggest cursor-pointer' id='suggest_" + i + "' style='margin: 0px'>" + response[i].targetName + "</p>";
+                newElement += "<p class='suggest cursor-pointer stateName' id='suggest_" + i + "'>" + response[i].cityName + " در " + response[i].stateName + "</p></a>";
+            }
+        }
+
+        if (response.length != 0)
+            $('#result').removeClass('display-noneImp')
+        else
+            $('#result').addClass('display-noneImp');
+
+        $("#result").empty().append(newElement);
     }
 
     //    For Date
@@ -613,15 +485,6 @@
         $("#passengerNoSelect_phone").empty().append(passenger);
     }
 
-    $(document).ready(function () {
-
-        {{--@foreach($sections as $section)--}}
-            {{--fillMyDivWithAdv('{{$section->sectionId}}', -1);--}}
-        {{--@endforeach--}}
-
-        changePassengersNo(0);
-    });
-
 </script>
 
 <script async src="{{URL::asset('js/middleBanner.js')}}"></script>
@@ -634,12 +497,14 @@
 
 <!-- Initialize Swiper Of mainSlider -->
 <script>
+    var mainSliderPics = {!! $sliderPic !!};
+
     var swiper = new Swiper('#mainSlider', {
         spaceBetween: 30,
         centeredSlides: true,
         loop: true,
         autoplay: {
-            delay: 500000,
+            delay: 5000,
             disableOnInteraction: false,
         },
         pagination: {
@@ -651,6 +516,53 @@
             prevEl: '.swiper-button-prev',
         },
     });
+
+    swiper.on('slideChange', function(){
+        $('.backgroundColorForSlider').css('background-color', mainSliderPics[swiper.realIndex]['textBackground'])
+        consoleText(mainSliderPics[swiper.realIndex]['text'], 'text', 'black');
+    });
+
+    var setInterText = 0;
+    consoleText(mainSliderPics[0]['text'], 'text', 'black');
+    $('.backgroundColorForSlider').css('background-color', mainSliderPics[0]['textBackground']);
+    function consoleText(words, id, colors) {
+        document.getElementById('text').innerHTML = '';
+
+        if(setInterText != 0)
+            clearInterval(setInterText);
+
+        document.getElementById(id).innerHTML = '';
+        if (colors === undefined) colors = ['#fff'];
+        var visible = true;
+        var con = document.getElementById('console');
+        var letterCount = 1;
+        var x = 1;
+        var waiting = false;
+        var target = document.getElementById(id);
+        target.setAttribute('style', 'color:' + colors);
+
+        setInterText = window.setInterval(function() {
+            if (letterCount === 0 && waiting === false) {
+                waiting = true;
+                target.innerHTML = words.substring(0, letterCount);
+                window.setTimeout(function() {
+                    var usedColor = colors.shift();
+                    colors.push(usedColor);
+                    var usedWord = words.shift();
+                    words.push(usedWord);
+                    x = 1;
+                    target.setAttribute('style', 'color:' + color)
+                    letterCount += x;
+                    waiting = false;
+                }, 10)
+            }
+            else if (waiting === false) {
+                target.innerHTML = words.substring(0, letterCount);
+                letterCount += x;
+            }
+        }, 100);
+    }
+
 </script>
 
 </body>
