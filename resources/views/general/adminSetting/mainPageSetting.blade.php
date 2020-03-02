@@ -31,13 +31,17 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-3">
                                         <label for="colorForSlider0##number##">رنگ پس زمینه:</label>
                                         <input type="text" id="colorForSlider0##number##" class="form-control" value="##textBackground##">
                                     </div>
+                                    <div class="col-md-3">
+                                        <label for="colorTextForSlider0##number##">رنگ متن:</label>
+                                        <input type="text" id="colorTextForSlider0##number##" class="form-control" value="##textColor##">
+                                    </div>
                                     <div class="col-md-6">
                                         <label for="textForSlider0##number##">متن:</label>
-                                        <input type="text" id="textForSlider0##number##" class="form-control" value="##text##">
+                                        <textarea id="textForSlider0##number##" class="form-control">##text##</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -237,6 +241,7 @@
             'id' : 0,
             'pic' : '',
             'textBackground' : '',
+            'textColor' : '',
             'text' : ''
         };
 
@@ -253,6 +258,7 @@
 
     function storeMainSliderSetting(_number){
         var color = $('#colorForSlider0' + _number).val();
+        var textColor = $('#colorTextForSlider0' + _number).val();
         var text = $('#textForSlider0' + _number).val();
         var inputPic = $('#uploadImgSlider0' + _number)[0];
         var id = $('#idForImgSlider0' + _number).val();
@@ -262,6 +268,7 @@
             data.append('pic', inputPic.files[0]);
         data.append('color', color);
         data.append('text', text);
+        data.append('textColor', textColor);
         data.append('id', id);
 
         $.ajax({

@@ -231,7 +231,7 @@
             </div>
 
             <div class="row">
-                <div class="cpDescription cpBorderBottom">
+                <div class="cpDescription cpBorderBottom" style="white-space: pre-line;">
                     {{$place->description}}
                 </div>
 
