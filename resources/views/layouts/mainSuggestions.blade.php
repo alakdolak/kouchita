@@ -397,11 +397,13 @@
         <div class="prw_rup prw_shelves_shelf_widget" style="">
             <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
                 <div class="shelf_header">
-                    <div class="shelf_title">
-                        <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
-                        <div class="shelf_title_container h3">
-                            <h3>سفر طبیعت‌گردی</h3>
-                        </div>
+                    <div class="shelf_title" >
+                        <a class="shelf_title" href="{{route('place.list', ['kindPlaceId' => 6, 'mode' => 'country'])}}" target="_blank">
+                            <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
+                            <div class="shelf_title_container h3">
+                                <h3>سفر طبیعت‌گردی</h3>
+                            </div>
+                        </a>
                     </div>
                 </div>
                 <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
@@ -637,10 +639,12 @@
             <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
                 <div class="shelf_header">
                     <div class="shelf_title">
-                        <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
-                        <div class="shelf_title_container h3">
-                            <h3>محبوب‌ترین رستوران‌ها</h3>
-                        </div>
+                        <a class="shelf_title" href="{{route('place.list', ['kindPlaceId' => 3, 'mode' => 'country'])}}" target="_blank">
+                            <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
+                            <div class="shelf_title_container h3">
+                                <h3>محبوب‌ترین رستوران‌ها</h3>
+                            </div>
+                        </a>
                     </div>
                 </div>
                 <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
@@ -712,10 +716,12 @@
             <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
                 <div class="shelf_header">
                     <div class="shelf_title">
-                        <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
-                        <div class="shelf_title_container h3">
-                            <h3>سفر تاریخی-فرهنگی</h3>
-                        </div>
+                        <a class="shelf_title" href="{{route('place.list', ['kindPlaceId' => 1, 'mode' => 'country'])}}" target="_blank">
+                            <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
+                            <div class="shelf_title_container h3">
+                                <h3>سفر تاریخی-فرهنگی</h3>
+                            </div>
+                        </a>
                     </div>
                 </div>
                 <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
@@ -899,15 +905,18 @@
             @endif
         </div>
     @endif
+
     <div id="articleSuggestion" class="homepage_shelves_widget ng-scope">
         <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" style="">
             <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
                 <div class="shelf_header">
                     <div class="shelf_title">
-                        <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
-                        <div class="shelf_title_container h3">
-                            <h3>محبوب‌ترین سفرنامه‌ها</h3>
-                        </div>
+                        <a class="shelf_title" href="{{route('mainArticle')}}" target="_blank">
+                            <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
+                            <div class="shelf_title_container h3">
+                                <h3>محبوب‌ترین سفرنامه‌ها</h3>
+                            </div>
+                        </a>
                     </div>
                 </div>
 

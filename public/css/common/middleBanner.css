@@ -124,7 +124,7 @@
     transition: 750ms;
     opacity: 0;
     z-index: 99;
-    text-align: right;
+    text-align: center;
 }
 @media screen and (max-width: 960px) {
     .slide__text {

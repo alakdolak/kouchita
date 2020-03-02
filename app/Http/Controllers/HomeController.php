@@ -83,6 +83,7 @@ class HomeController extends Controller
                 if($slider != null){
                     $slider->text = $request->text;
                     $slider->textBackground = $request->color;
+                    $slider->textColor = $request->textColor;
                     $slider->alt = 'کوچیتا';
 
                     if (isset($_FILES['pic']) && $_FILES['pic']['error'] == 0){
@@ -107,6 +108,7 @@ class HomeController extends Controller
                     $slider = new MainSliderPic();
                     $slider->text = $request->text;
                     $slider->textBackground = $request->color;
+                    $slider->textColor = $request->textColor;
                     $slider->alt = 'کوچیتا';
 
                     $fileName =  time() . $_FILES['pic']['name'];

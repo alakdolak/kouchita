@@ -6,12 +6,16 @@
     <title>
         کوچیتا |
         {{$kindPlace->title}}
-        @if($mode == 'state')
-            استان
+        @if($mode != 'country')
+            @if($mode == 'state')
+                استان
+            @else
+                شهر
+            @endif
+            {{$city->name}}
         @else
-            شهر
+            ایران من
         @endif
-        {{$city->name}}
     </title>
 
     <meta name="title" content="{{$meta['title']}}" />
@@ -34,12 +38,16 @@
     <title>
         {{$kindPlace->name}}
 
-        @if($mode == "state")
-            استان
+        @if($mode != 'country')
+            @if($mode == "state")
+                استان
+            @else
+                شهر
+            @endif
+            {{$city->name}}
         @else
-            شهر
+            ایران من
         @endif
-        {{$city->name}}
     </title>
 
     <style>
@@ -110,12 +118,16 @@
             <div class="placeListHeader">
                 <div class="placeListTitle">
                     {{$kindPlace->title}}
-                    @if($mode == 'state')
-                        استان
+                    @if($mode != 'country')
+                        @if($mode == 'state')
+                            استان
+                        @else
+                            شهر
+                        @endif
+                        {{$city->name}}
                     @else
-                        شهر
+                        ایران من
                     @endif
-                    {{$city->name}}
                 </div>
                 <div style="position: relative; top: -25px">
                     <div>
@@ -133,135 +145,29 @@
                         </div>
                     </div>
                     <div style="position: absolute; bottom: 0; right: 0;">
-                        <a href="{{route('place.list', ['kindPlaceId' => $kindPlace->id, 'city' => $state->name, 'mode' => 'state'])}}">
-                            <span>نمایش
-                                {{$kindPlace->title}}
-                                    استان
-                                {{$state->name}}
-                            </span>
-                        </a>
+                        @if($mode != 'country')
+                            <a href="{{route('place.list', ['kindPlaceId' => $kindPlace->id, 'city' => $state->name, 'mode' => 'state'])}}">
+                                <span>نمایش
+                                    {{$kindPlace->title}}
+                                        استان
+                                    {{$state->name}}
+                                </span>
+                            </a>
+                        @endif
                         @if($mode == 'city')
                             <span>></span>
                             <span>نمایش
                                 {{$kindPlace->title}}
+
                                 شهر
                                 {{$city->name}}
                             </span>
                         @endif
-                        {{--<span>></span>--}}
-                        {{--<span>نمایش مراکز اقامتی شهریار</span>--}}
                     </div>
                 </div>
 
             </div>
         </div>
-{{--        <div class="restaurants_list">--}}
-{{--            <div ID="taplc_hotels_redesign_header_0" class="ppr_rup ppr_priv_hotels_redesign_header">--}}
-{{--                <div id="hotels_lf_header" class="restaurants_list">--}}
-{{--                    <div id="p13n_tag_header_wrap" class="tag_header p13n_no_see_through ontop hotels_lf_header_wrap">--}}
-{{--                        <div id="p13n_tag_header" class="restaurants_list no_bottom_padding">--}}
-{{--                            <div id="p13n_welcome_message" class="easyClear">--}}
-{{--                                <h1 id="HEADING" class="p13n_geo_hotels ">--}}
-{{--                                    {{$kindPlace->name}}--}}
-
-{{--                                @if($mode == "state")--}}
-{{--                                        استان--}}
-{{--                                    @else--}}
-{{--                                        شهر--}}
-{{--                                    @endif--}}
-{{--                                    {{$city->name}}--}}
-{{--                                </h1>--}}
-
-{{--                                @if($placeMode == "hotel")--}}
-{{--                                    <div>--}}
-{{--                                        <div class="srchBox">--}}
-{{--                                            <button class="srchBtn" onclick="inputSearch(0)">جستجو</button>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="roomBox">--}}
-{{--                                            <div id="roomDetail" onclick="togglePassengerNoSelectPane()">--}}
-{{--                                                <span id="room_number" class="room"></span>&nbsp;--}}
-{{--                                                <span>اتاق</span>&nbsp;-&nbsp;--}}
-{{--                                                <span id="adult_number" class="adult"></span>--}}
-{{--                                                <span>بزرگسال</span>&nbsp;--}}
-{{--                                                --}}{{----}}{{---&nbsp;--}}
-{{--                                                --}}{{----}}{{--<span class="children">--}}
-{{--                                                --}}{{----}}{{--{{$children}}--}}
-{{--                                                --}}{{----}}{{--</span>--}}
-{{--                                                --}}{{----}}{{--<span>بچه</span>&nbsp;--}}
-{{--                                            </div>--}}
-{{--                                            <div id="roomCapacityBoxIcon" onclick="togglePassengerNoSelectPane()"--}}
-{{--                                                 class="shTIcon passengerIcon"></div>--}}
-{{--                                            <div id="passengerArrowDown" onclick="togglePassengerNoSelectPane()"--}}
-{{--                                                 class="shTIcon searchBottomArrowIcone arrowPassengerIcone"></div>--}}
-{{--                                            <div id="passengerArrowUp" onclick="togglePassengerNoSelectPane()"--}}
-{{--                                                 class="shTIcon searchTopArrowIcone arrowPassengerIcone hidden"></div>--}}
-
-
-{{--                                            <div class="roomPassengerPopUp hidden " id="passengerNoSelectPane"--}}
-{{--                                                 onmouseleave="addClassHidden('passengerNoSelectPane'); passengerNoSelect = false;">--}}
-{{--                                                <div class="rowOfPopUp">--}}
-{{--                                                    <span class="float-right">اتاق</span>--}}
-{{--                                                    <div class="float-left">--}}
-{{--                                                        <div onclick="changeRoomPassengersNum(-1, 3)"--}}
-{{--                                                             class="shTIcon minusPlusIcons minus"></div>--}}
-{{--                                                        <span class='numBetweenMinusPlusBtn room' id="roomNumInSelect">--}}
-{{--    --}}{{----}}{{--                                                        {{$room}}--}}
-{{--                                                        </span>--}}
-{{--                                                        <div onclick="changeRoomPassengersNum(1, 3)"--}}
-{{--                                                             class="shTIcon minusPlusIcons plus"></div>--}}
-{{--                                                    </div>--}}
-{{--                                                </div>--}}
-{{--                                                <div class="rowOfPopUp">--}}
-{{--                                                    <span class="float-right">بزرگسال</span>--}}
-{{--                                                    <div class="float-left">--}}
-{{--                                                        <div onclick="changeRoomPassengersNum(-1, 2)"--}}
-{{--                                                             class="shTIcon minusPlusIcons minus"></div>--}}
-{{--                                                        <span class='numBetweenMinusPlusBtn adult'--}}
-{{--                                                              id="adultPassengerNumInSelect">--}}
-{{--    --}}{{----}}{{--                                                        {{$adult}}--}}
-{{--                                                        </span>--}}
-{{--                                                        <div onclick="changeRoomPassengersNum(1, 2)"--}}
-{{--                                                             class="shTIcon minusPlusIcons plus"></div>--}}
-{{--                                                    </div>--}}
-{{--                                                </div>--}}
-{{--                                                --}}{{----}}{{--<div class="rowOfPopUp">--}}
-{{--                                                --}}{{----}}{{--<span class="float-right">بچه</span>--}}
-{{--                                                --}}{{----}}{{--<div class="float-left">--}}
-{{--                                                --}}{{----}}{{--<div onclick="changeRoomPassengersNum(-1, 1)"--}}
-{{--                                                --}}{{----}}{{--class="shTIcon minusPlusIcons minus"></div>--}}
-{{--                                                --}}{{----}}{{--<span class='numBetweenMinusPlusBtn children'--}}
-{{--                                                --}}{{----}}{{--id="childrenPassengerNumInSelect">--}}
-{{--                                                --}}{{----}}{{--{{$children}}--}}
-{{--                                                --}}{{----}}{{--</span>--}}
-{{--                                                --}}{{----}}{{--<div onclick="changeRoomPassengersNum(1, 1)"--}}
-{{--                                                --}}{{----}}{{--class="shTIcon minusPlusIcons plus"></div>--}}
-{{--                                                --}}{{----}}{{--</div>--}}
-{{--                                                --}}{{----}}{{--</div>--}}
-{{--                                                --}}{{----}}{{--<div class="childrenPopUpAlert">--}}
-{{--                                                --}}{{----}}{{--سن بچه را در زمان ورود به هتل وارد کنید--}}
-{{--                                                --}}{{----}}{{--</div>--}}
-{{--                                                --}}{{----}}{{--<div class="childBox"></div>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="calenderBox">--}}
-{{--                                            <label id="calendar-container-edit-1placeDate" class="dateLabel">--}}
-{{--                                                <span onclick="changeTwoCalendar(2); nowCalendar()" class="ui_icon calendar calendarIcon"></span>--}}
-{{--                                                <input onclick="assignDate('{{convertStringToDate(getToday()["date"])}}', 'calendar-container-edit-1placeDate_phone', 'backDate_phone')" name="date" id="goDate" type="text" class="inputDateLabel" placeholder="تاریخ رفت" required readonly>--}}
-{{--                                            </label>--}}
-{{--                                            <label id="calendar-container-edit-2placeDate" class="dateLabel">--}}
-{{--                                                <span>تا</span>--}}
-{{--                                                <input name="date" id="backDate" type="text" class="inputDateLabel" placeholder="تاریخ برگشت" required readonly>--}}
-{{--                                            </label>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                    @include('layouts.calendar')--}}
-{{--                                @endif--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
 
         <div class="Restaurants prodp13n_jfy_overflow_visible">
 
@@ -549,17 +455,6 @@
 
         </div>
     </div>
-    <form id="form_hotel" method="post" action="{{route('makeSessionHotel')}}">
-        {{csrf_field()}}
-        <input type="hidden" name="adult" id="form_adult">
-        <input type="hidden" name="room" id="form_room">
-        <input type="hidden" name="children" id="form_children">
-        <input type="hidden" name="goDate" id="form_goDate">
-        <input type="hidden" name="backDate" id="form_backDate">
-        <input type="hidden" name="ageOfChild" id="form_ageOfChild">
-        <input type="hidden" name="city" value="{{$city->name}}">
-        <input type="hidden" name="mode" value="{{$mode}}">
-    </form>
 
     @include('hotelDetailsPopUp')
 
@@ -596,6 +491,12 @@
     var nearKindPlaceIdFilter = 0;
     var kindPlaceId = '{{$kindPlace->id}}';
     var hasLogin = '{{auth()->check() ? 1 : 0}}';
+
+    @if(isset($city->id))
+        var cityId = '{{$city->id}}';
+    @else
+        var cityId = 0;
+    @endif
 
     if(placeMode == 'hotel'){
         specialFilters = [1];
@@ -677,7 +578,7 @@
                 featureFilter: featureFilter,
                 nearPlaceIdFilter: nearPlaceIdFilter,
                 nearKindPlaceIdFilter: nearKindPlaceIdFilter,
-                city: '{{$city->id}}',
+                city: cityId,
                 mode: '{{$mode}}',
                 kindPlaceId: '{{$kindPlace->id}}'
             });
@@ -726,7 +627,7 @@
                     featureFilter: featureFilter,
                     nearPlaceIdFilter: nearPlaceIdFilter,
                     nearKindPlaceIdFilter: nearKindPlaceIdFilter,
-                    city: '{{$city->id}}',
+                    city: cityId,
                     mode: '{{$mode}}',
                     kindPlaceId: '{{$kindPlace->id}}'
                 });
@@ -761,7 +662,7 @@
                         featureFilter: featureFilter,
                         nearPlaceIdFilter: nearPlaceIdFilter,
                         nearKindPlaceIdFilter: nearKindPlaceIdFilter,
-                        city: '{{$city->id}}',
+                        city: cityId,
                         mode: '{{$mode}}',
                         kindPlaceId: '{{$kindPlace->id}}'
                     });
@@ -995,7 +896,7 @@
                     'majaraFilter': 1,
                     'sogatSanaieFilter': 1,
                     'mahaliFoodFilter': 1,
-                    'selectedCities': '{{$city->id}}',
+                    'selectedCities': cityId,
                     'mode': '{{$mode}}'
                 },
                 success: function (response) {
@@ -1097,27 +998,6 @@
 
 <script>
 
-    $('.login-button').click(function () {
-
-        var url;
-        @if($placeMode == "hotel")
-            url = '{{route('hotelList', ['city' => $city, 'mode' => $mode])}}';
-        @elseif($placeMode == "amaken")
-            url = '{{route('amakenList', ['city' => $city, 'mode' => $mode])}}';
-        @else
-            url = '{{route('restaurantList', ['city' => $city, 'mode' => $mode])}}';
-        @endif
-
-        $(".dark").show();
-        showLoginPrompt(url);
-    });
-
-    $(document).ready(function () {
-        {{--$("#global-nav-hotels").attr('href', '{{route('hotelList', ['city' => $city, 'mode' => $mode])}}');--}}
-        {{--$("#global-nav-restaurants").attr('href', '{{route('restaurantList', ['city' => $city, 'mode' => $mode])}}');--}}
-        {{--$("#global-nav-amaken").attr('href', '{{route('amakenList', ['city' => $city, 'mode' => $mode])}}');--}}
-    });
-
     function hideElement(val) {
         $("#" + val).addClass('hidden');
         $(".dark").hide();
@@ -1135,129 +1015,6 @@
     function showLessItems(_id) {
         $(".extraItem" + _id).addClass('hidden').removeClass('selected');
         $(".moreItems" + _id).removeClass('hidden');
-    }
-
-</script>
-
-<script>
-    var room = parseInt('0');
-    var adult = parseInt('0');
-    var children = parseInt('0');
-    var passengerNoSelect = false;
-
-    $(".room").html(room);
-    $(".adult").html(adult);
-    $(".children").html(children);
-
-    for (var i = 0; i < children; i++) {
-        $(".childBox").append("" +
-            "<div class='childAge' data-id='" + i + "'>" +
-            "<div>سن بچه</div>" +
-            "<div><select class='selectAgeChild' name='ageOfChild' id=''>" +
-            "<option value='0'>1<</option>" +
-            "<option value='1'>1</option>" +
-            "<option value='2'>2</option>" +
-            "<option value='3'>3</option>" +
-            "<option value='4'>4</option>" +
-            "<option value='5'>5</option>" +
-            "</select></div>" +
-            "</div>");
-    }
-
-
-    function togglePassengerNoSelectPane() {
-        if (!passengerNoSelect) {
-            passengerNoSelect = true;
-            $("#passengerNoSelectPane").removeClass('hidden');
-            $("#passengerArrowUp").removeClass('hidden');
-            $("#passengerArrowDown").addClass('hidden');
-        }
-        else {
-            $("#passengerNoSelectPane").addClass('hidden');
-            $("#passengerArrowDown").removeClass('hidden');
-            $("#passengerArrowUp").addClass('hidden');
-            passengerNoSelect = false;
-        }
-    }
-
-    function addClassHidden(element) {
-        $("#" + element).addClass('hidden');
-        if (element == 'passengerNoSelectPane'){
-            $("#passengerArrowDown").removeClass('hidden');
-            $("#passengerArrowUp").addClass('hidden');
-        }
-    }
-
-    function changeRoomPassengersNum(inc, mode) {
-        switch (mode) {
-            case 3:
-            default:
-                if (room + inc >= 0)
-                    room += inc;
-                $("#roomNumInSelect").empty().append(room);
-                break;
-            case 2:
-                if (adult + inc >= 0)
-                    adult += inc;
-                $("#adultPassengerNumInSelect").empty().append(adult);
-                break;
-            case 1:
-                if (children + inc >= 0)
-                    children += inc;
-                if (inc >= 0) {
-                    $(".childBox").append("<div class='childAge' data-id='" + (children - 1) + "'>" +
-                        "<div>سن بچه</div>" +
-                        "<div><select class='selectAgeChild' name='ageOfChild' id=''>" +
-                        "<option value='0'>1<</option>" +
-                        "<option value='1'>1</option>" +
-                        "<option value='2'>2</option>" +
-                        "<option value='3'>3</option>" +
-                        "<option value='4'>4</option>" +
-                        "<option value='5'>5</option>" +
-                        "</select></div>" +
-                        "</div>");
-                } else {
-                    $(".childAge[data-id='" + (children) + "']").remove();
-                }
-                $("#childrenPassengerNumInSelect").empty().append(children);
-
-
-                break;
-        }
-        while((4*room) < adult){
-            room++;
-            $("#roomNumInSelect").empty().append(room);
-        }
-        document.getElementById('adult_number').innerText = adult;
-        document.getElementById('room_number').innerText = room;
-        // document.getElementById('roomDetail').innerHTML = '<span style="float: right;">' + room + '</span>&nbsp;\n' +
-        //     '                                                <span>اتاق</span>&nbsp;-&nbsp;\n' +
-        //     '                                                <span id="childPassengerNo">' + adult + '</span>\n' +
-        //     '                                                <span>بزرگسال</span>&nbsp;-&nbsp;\n';
-        // '                                                <span id="infantPassengerNo">' + children + '</span>\n' +
-        // '                                                <span>بچه</span>&nbsp;';
-    }
-
-    function inputSearch() {
-        var ageOfChild = [];
-        var goDate;
-        var backDate;
-        var childSelect = document.getElementsByName('ageOfChild');
-
-        for(var i = 0; i < children; i++)
-            ageOfChild[i] = childSelect[i].value;
-
-        goDate = document.getElementById('goDate').value;
-        backDate = document.getElementById('backDate').value;
-
-        document.getElementById('form_room').value = room;
-        document.getElementById('form_adult').value = adult;
-        document.getElementById('form_children').value = children;
-        document.getElementById('form_goDate').value = goDate;
-        document.getElementById('form_backDate').value = backDate;
-        document.getElementById('form_ageOfChild').value = ageOfChild;
-
-        document.getElementById('form_hotel').submit();
     }
 
 </script>

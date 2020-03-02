@@ -165,7 +165,7 @@
                 </div>
                 <div class="col-md-4 col-xs-12 pd-0Imp">
                     <div class="col-xs-12">
-                        <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/4/' . $place->listName . '/' . $kind)}}">
+                        <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/4/' . $kind . '/' . $place->listName)}}">
                             <div class="cityPageIcon hotel"></div>
                             <div class="textCityPageIcon">هتل</div>
                             <div class="textCityPageIcon">{{count($allHotels)}}</div>
@@ -174,7 +174,7 @@
                             <div class="cityPageIcon ticket"></div>
                             <div class="textCityPageIcon">بلیط</div>
                         </a>
-                        <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/1/' . $place->listName . '/' . $kind)}}">
+                        <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/1/' . $kind . '/' . $place->listName)}}">
                             <div class="cityPageIcon atraction"></div>
                             <div class="textCityPageIcon">جاذبه ها</div>
                             <div class="textCityPageIcon">{{count($allAmaken)}}</div>
@@ -182,17 +182,17 @@
                     </div>
                     <div class="clear-both"></div>
                     <div class="col-xs-12">
-                        <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/3/' . $place->listName . '/' . $kind)}}">
+                        <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/3/' . $kind. '/' . $place->listName )}}">
                             <div class="cityPageIcon restaurant"></div>
                             <div class="textCityPageIcon">رستوران</div>
                             <div class="textCityPageIcon">{{count($allRestaurant)}}</div>
                         </a>
-                        <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/10/' . $place->listName . '/' . $kind)}}">
+                        <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/10/' . $kind . '/' . $place->listName)}}">
                             <div class="cityPageIcon soghat"></div>
                             <div class="textCityPageIcon">سوغات</div>
                             <div class="textCityPageIcon">{{count($allSogatSanaie)}}</div>
                         </a>
-                        <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/11/' . $place->listName . '/' . $kind)}}">
+                        <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/11/' . $kind . '/' . $place->listName)}}">
                             <div class="cityPageIcon ghazamahali"></div>
                             <div class="textCityPageIcon">غذای محلی</div>
                             <div class="textCityPageIcon">{{count($allMahaliFood)}}</div>
@@ -200,12 +200,12 @@
                     </div>
                     <div class="clear-both"></div>
                     <div class="col-xs-12">
-                        <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/6/' . $place->listName . '/' . $kind)}}">
+                        <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/6/' . $kind . '/' . $place->listName)}}">
                             <div class="cityPageIcon majara"></div>
                             <div class="textCityPageIcon">ماجراجویی</div>
                             <div class="textCityPageIcon">{{count($allMajara)}}</div>
                         </a>
-                        <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/10/' . $place->listName . '/' . $kind)}}">
+                        <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/10/' . $kind . '/' . $place->listName)}}">
                             <div class="cityPageIcon sanaye"></div>
                             <div class="textCityPageIcon">صنایع دستی</div>
                             <div class="textCityPageIcon">{{count($allSogatSanaie)}}</div>
@@ -231,7 +231,7 @@
             </div>
 
             <div class="row">
-                <div class="cpDescription cpBorderBottom">
+                <div class="cpDescription cpBorderBottom" style="white-space: pre-line;">
                     {{$place->description}}
                 </div>
 

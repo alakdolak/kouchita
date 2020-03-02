@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa">
 
 <head>
     @include('layouts.topHeader')
@@ -64,6 +64,17 @@
             font-size: 12px;
             padding-right: 21px;
         }
+        @font-face {
+            font-family: Shin;
+            src: url('{{URL::asset("fonts/shin.ttf")}}');
+        }
+        .sliderText{
+            font-family: Shin !important;
+            white-space: pre-wrap;
+            text-align: center;
+            display: flow-root;
+            line-height: 33px;
+        }
     </style>
 
     {{--urls--}}
@@ -124,13 +135,13 @@
                                 </div>
                                 <div class="ui_columns datepicker_box trip_search metaDatePicker rounded_lockup usePickerTypeIcons preDates noDates with_children mainDivSearchInputMainPage">
                                     <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column is-4 search_typeahead wctx-tripsearch searchDivForScrollClass mainSearchDivPcSize">
-                                        <div onclick="openMainSearch(0)">به کجا می‌روید؟</div>
+                                        <div onclick="openMainSearch(0)" style="text-align: center; font-size: 25px;">به کجا می‌روید؟</div>
                                     </div>
                                     <div class="clear-both"></div>
                                 </div>
-                                <div style="position: absolute; right: 1%; top: 30%; z-index: 9; font-size: 35px">
+                                <div style="position: absolute; right: 3%; top: 30%; z-index: 9; font-size: 35px">
                                     <div class="console-container">
-                                        <span id='text'></span>
+                                        <span id='text' class="sliderText"></span>
                                     </div>
                                 </div>
 
@@ -504,7 +515,7 @@
         centeredSlides: true,
         loop: true,
         autoplay: {
-            delay: 5000,
+            delay: 50000,
             disableOnInteraction: false,
         },
         pagination: {
@@ -519,11 +530,11 @@
 
     swiper.on('slideChange', function(){
         $('.backgroundColorForSlider').css('background-color', mainSliderPics[swiper.realIndex]['textBackground'])
-        consoleText(mainSliderPics[swiper.realIndex]['text'], 'text', 'black');
+        consoleText(mainSliderPics[swiper.realIndex]['text'], 'text', mainSliderPics[swiper.realIndex]['textColor']);
     });
 
     var setInterText = 0;
-    consoleText(mainSliderPics[0]['text'], 'text', 'black');
+    consoleText(mainSliderPics[0]['text'], 'text', mainSliderPics[0]['textColor']);
     $('.backgroundColorForSlider').css('background-color', mainSliderPics[0]['textBackground']);
     function consoleText(words, id, colors) {
         document.getElementById('text').innerHTML = '';
@@ -560,7 +571,7 @@
                 target.innerHTML = words.substring(0, letterCount);
                 letterCount += x;
             }
-        }, 100);
+        }, 70);
     }
 
 </script>
