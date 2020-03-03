@@ -57,7 +57,7 @@ use Illuminate\Http\Request;
 
 class PlaceController extends Controller {
 
-    public function showPlaceDetails($kindPlaceName, $slug){
+    public function showPlaceDetails($kindPlaceName, $slug, Request $request){
         deleteReviewPic();  // common.php
 
         $kindPlace = Place::where('fileName', $kindPlaceName)->first();
@@ -172,8 +172,12 @@ class PlaceController extends Controller {
         $cityName = 'شهر ' . $city->name;
         $locationName = ["name" => $place->name, 'state' => $state->name, 'cityName' => $cityName, 'cityNameUrl' => $city->name, 'articleUrl' => $articleUrl, 'kindState' => 'city'];
 
+        $mainWebSiteUrl = \url('/');
+        $mainWebSiteUrl .= '/' . $request->path();
+        $localStorageData = ['kind' => 'place', 'name' => $place->name, 'city' => $city->name, 'state' => $state->name, 'mainPic' => $sitePics[0]['f'], 'redirect' => $mainWebSiteUrl];
+
         return view('hotel-details.hotel-details', array('place' => $place, 'features' => $features , 'save' => $save, 'city' => $city, 'thumbnail' => $thumbnail,
-            'state' => $state, 'avgRate' => $rates[1], 'locationName' => $locationName,
+            'state' => $state, 'avgRate' => $rates[1], 'locationName' => $locationName, 'localStorageData' => $localStorageData,
             'reviewCount' => $reviewCount, 'ansReviewCount' => $ansReviewCount, 'userReviewCount' => $userReviewCount,
             'photographerPics' => $photographerPics, 'photographerPicsJSON' => $photographerPicsJSON, 'userPic' => $uPic,
             'rateQuestion' => $rateQuestion, 'textQuestion' => $textQuestion, 'multiQuestion' => $multiQuestion,

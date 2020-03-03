@@ -98,3 +98,60 @@
     text-align: right;
     padding: 0 24px;
 }
+
+
+#profile-drop-mainDiv {
+    z-index: 1000000000000 !important;
+}
+
+#profile-drop {
+    display: none;
+    position: absolute;
+    bottom: auto;
+    z-index: 10000;
+    background: rgb(255, 255, 255) none repeat scroll 0% 0%;
+    padding: 0 18px;
+    left: -13px;
+    top: 43px;
+    box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+.subItemHeaderNavBar{
+    list-style-type: none;
+    margin: 10px 0px;
+}
+.subItemHeaderNavBar:hover > a{
+    color: #4dc7bc !important;
+}
+
+.global-nav-profile-menu{
+    width: 80px;
+}
+
+
+.bubble_40:after {
+    content: "\e00d\e00b\e00b\e00b\e00b" !important;
+}
+
+.bubble_30:after {
+    content: "\e00d\e00d\e00b\e00b\e00b" !important;
+}
+
+.bubble_20:after {
+    content: "\e00d\e00d\e00d\e00b\e00b" !important;
+}
+
+.bubble_10:after {
+    content: "\e00d\e00d\e00d\e00d\e00b" !important;
+}
+.photoviewerSidebarWrapper .captionArea {
+    direction: rtl !important;
+}
+
+.photoviewerSidebarWrapper .location {
+    text-align: center;
+}
+
+DIV.ppr_rup.ppr_priv_global_nav .global-nav-logo img {
+    width: 50px;
+}

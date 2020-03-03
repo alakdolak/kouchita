@@ -1,33 +1,5 @@
-
-
-/*1st box style*/
-
 #masthead-recent {
     background-color: #4dc7bc;
-}
-
-.bubble_40:after {
-    content: "\e00d\e00b\e00b\e00b\e00b" !important;
-}
-
-.bubble_30:after {
-    content: "\e00d\e00d\e00b\e00b\e00b" !important;
-}
-
-.bubble_20:after {
-    content: "\e00d\e00d\e00d\e00b\e00b" !important;
-}
-
-.bubble_10:after {
-    content: "\e00d\e00d\e00d\e00d\e00b" !important;
-}
-
-.photoviewerSidebarWrapper .captionArea {
-    direction: rtl !important;
-}
-
-.photoviewerSidebarWrapper .location {
-    text-align: center;
 }
 
 .global-nav-bar-container .ui_icon {
@@ -45,14 +17,8 @@
 #nameTop {
     color: #FFF !important;
 }
+/*1st box style*/
 
-.global-nav-profile-menu .subItem a:hover {
-    background: transparent !important;
-}
-
-DIV.ppr_rup.ppr_priv_global_nav .global-nav-logo img {
-    width: initial;
-}
 
 @media (max-width: 1023px) and (min-width: 768px) {
     .is-hidden-mobile {
@@ -83,17 +49,6 @@ DIV.ppr_rup.ppr_priv_global_nav .global-nav-logo img {
     display: none;
 }
 
-#profile-drop {
-    display: none;
-    position: absolute;
-    bottom: auto;
-    z-index: 10000;
-    background: none 0% 0% repeat scroll rgb(255, 255, 255);
-    padding: 0 18px;
-    left: 20px;
-    top: 43px;
-    box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.2);
-}
 
 /*2nd style box after targetHelp_3*/
 
@@ -175,9 +130,6 @@ DIV.ppr_rup.ppr_priv_global_nav_action_profile .username::before {
     font-size: 16px;
 }
 
-#profile-drop-mainDiv {
-    z-index: 1000000000000 !important;
-}
 
 DIV.ppr_rup.ppr_priv_global_nav .global-nav-actions > div {
     line-height: 1.5;
@@ -198,4 +150,18 @@ DIV.ppr_rup.ppr_priv_global_nav .global-nav-actions > div {
     DIV.ppr_rup.ppr_priv_global_nav .global-nav-bar-container .global-nav-actions {
         display: none;
     }
+}
+
+.mainHeaderSearch{
+    margin-right: 30px;
+    background-color: #fcc156;
+    padding: 7px 10px;
+    border-radius: 30px;
+    font-weight: 600;
+    color: #16174f;
+    cursor: pointer;
+}
+.mainHeaderSearch:hover{
+    background-color: #88070b;
+    color: white;
 }

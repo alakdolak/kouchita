@@ -351,12 +351,6 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     width: 100%;
 }
 
-
-#darkModeMainPage {
-    display: none;
-    z-index: 10000000;
-}
-
 /*search input of hotel List*/
 .hl_inputBox {
     width: 100%;

@@ -1388,36 +1388,36 @@ $config = \App\models\ConfigModel::first()
             var recentlySample = 0;
             var bookMarkSample = 0;
 
-            function phoneRecentlyViews() {
+            {{--function phoneRecentlyViews() {--}}
 
-                if(recentlySample == 0)
-                    recentlySample = $('#phoneRecentlyView').html();
+                {{--if(recentlySample == 0)--}}
+                    {{--recentlySample = $('#phoneRecentlyView').html();--}}
 
-                $('#phoneRecentlyView').html('');
+                {{--$('#phoneRecentlyView').html('');--}}
 
 
-                $.ajax({
-                    type: 'post',
-                    url: '{{route('recentlyViewed')}}',
-                    data: {
-                        uId: '{{auth()->user()->id}}'
-                    },
-                    success: function (response) {
+                {{--$.ajax({--}}
+                    {{--type: 'post',--}}
+                    {{--url: '{{route('recentlyViewed')}}',--}}
+                    {{--data: {--}}
+                        {{--uId: '{{auth()->user()->id}}'--}}
+                    {{--},--}}
+                    {{--success: function (response) {--}}
 
-                        response = JSON.parse(response);
-                        for(i = 0; i < response.length; i++){
-                            var text = recentlySample;
-                            var fk = Object.keys(response[i]);
-                            for (var x of fk) {
-                                var t = '##' + x + '##';
-                                var re = new RegExp(t, "g");
-                                text = text.replace(re, response[i][x]);
-                            }
-                            $('#phoneRecentlyView').append(text);
-                        }
-                    }
-                });
-            }
+                        {{--response = JSON.parse(response);--}}
+                        {{--for(i = 0; i < response.length; i++){--}}
+                            {{--var text = recentlySample;--}}
+                            {{--var fk = Object.keys(response[i]);--}}
+                            {{--for (var x of fk) {--}}
+                                {{--var t = '##' + x + '##';--}}
+                                {{--var re = new RegExp(t, "g");--}}
+                                {{--text = text.replace(re, response[i][x]);--}}
+                            {{--}--}}
+                            {{--$('#phoneRecentlyView').append(text);--}}
+                        {{--}--}}
+                    {{--}--}}
+                {{--});--}}
+            {{--}--}}
 
             function getAlertItemsPhone() {
                 $.ajax({
@@ -1472,7 +1472,7 @@ $config = \App\models\ConfigModel::first()
                 });
             }
 
-            phoneRecentlyViews();
+            // phoneRecentlyViews();
             getAlertItemsPhone();
             showBookMarksPhone();
         </script>

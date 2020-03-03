@@ -484,11 +484,6 @@ div.prw_rup.prw_search_typeahead .typeahead_align .typeahead_input {
     padding: 10px !important;
 }
 
-#darkModeMainPage {
-    display: none;
-    z-index: 10000000;
-    backdrop-filter: blur(2px);
-}
 
 #firstPageSearchBtn {
     background-color: inherit;

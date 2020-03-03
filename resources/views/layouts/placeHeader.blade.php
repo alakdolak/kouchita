@@ -3,7 +3,6 @@
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/abbreviations.css')}}' data-rup='long_lived_global_legacy'/>
 <link rel="stylesheet" type='text/css' href="{{URL::asset('css/common/header.css')}}">
 
-<?php $user = Auth::user() ?>
 <?php
 
 use App\models\Adab;
@@ -14,13 +13,15 @@ use App\models\Restaurant;
 use App\models\Trip;
 use App\models\TripMember;
 use App\models\TripPlace;
+$trips = [];
+$user = Auth::user();
+
 function convertStringToDate2($date) {
     if($date == "")
         return $date;
     return $date[0] . $date[1] . $date[2] . $date[3] . '/' . $date[4] . $date[5] . '/' . $date[6] . $date[7];
 }
 
-$trips = [];
 if(Auth::check()) {
 
     $uId = Auth::user()->id;
@@ -307,12 +308,6 @@ if(Auth::check()) {
 }
 ?>
 
-<style>
-    .hideNav{
-        display: none;
-    }
-</style>
-
 <div class="masthead position-relative">
     <div class="ppr_rup ppr_priv_global_nav position-relative">
         <div class="global-nav global-nav-single-line position-relative">
@@ -327,14 +322,38 @@ if(Auth::check()) {
                             <img src="{{URL::asset('images/logo.png')}}" alt="کوچیتا" class="global-nav-img global-nav-svg"/>
                         </a>
 
-                        <div class="global-nav-links ui_tabs inverted">
+                        <div class="global-nav-links ui_tabs inverted" style="display: flex; align-items: center">
                             <div id="taplc_global_nav_links_0" class="ppr_rup ppr_priv_global_nav_links" data-placement-name="global_nav_links">
                                 <div class="global-nav-links-container">
-                                    <ul class="global-nav-links-menu">
-                                        <li><a href="{{route('mainMode', ['mode' => 'hotel'])}}" id="global-nav-hotels" class="unscoped global-nav-link ui_tab color-whiteImp" data-tracking-label="hotels">هتل</a></li>
-                                        <li><a href="{{route('mainMode', ['mode' => 'restaurant'])}}" id="global-nav-hotels" class="unscoped global-nav-link ui_tab color-whiteImp" data-tracking-label="hotels">رستوران‌ها</a></li>
-                                        <li><a href="{{route('mainMode', ['mode' => 'amaken'])}}" id="global-nav-hotels" class="unscoped global-nav-link ui_tab color-whiteImp" data-tracking-label="hotels">جاذبه‌ها</a></li>
-                                    </ul>
+
+                                    @if(isset($locationName['cityNameUrl']))
+                                        <div class="mainHeaderSearch arrowAfter" onclick="openMainSearch(0)">
+                                            {{$locationName['cityName']}}
+                                        </div>
+                                    @endif
+
+                                    @if(Request::is('article/*') || Request::is('mainArticle'))
+                                        <ul class="global-nav-links-menu">
+                                            <li>
+                                                <span class="unscoped global-nav-link ui_tab color-whiteImp" onclick="openMainSearch(4)// in mainSearch.blade.php">اقامتگاه</span>
+                                            </li>
+                                            <li>
+                                                <span class="unscoped global-nav-link ui_tab color-whiteImp" onclick="openMainSearch(3)// in mainSearch.blade.php">رستوران‌ها</span>
+                                            </li>
+                                            <li>
+                                                <span class="unscoped global-nav-link ui_tab color-whiteImp" onclick="openMainSearch(1)// in mainSearch.blade.php">جاذبه‌</span>
+                                            </li>
+                                            <li>
+                                                <span class="unscoped global-nav-link ui_tab color-whiteImp" onclick="openMainSearch(10)// in mainSearch.blade.php">سوغات و صنایع دستی</span>
+                                            </li>
+                                            <li>
+                                                <span class="unscoped global-nav-link ui_tab color-whiteImp" onclick="openMainSearch(11)// in mainSearch.blade.php">غذای محلی‌</span>
+                                            </li>
+                                            <li>
+                                                <a href="{{route('soon')}}" class="unscoped global-nav-link ui_tab color-whiteImp">بوم گردی‌</a>
+                                            </li>
+                                        </ul>
+                                    @endif
 
                                 </div>
                             </div>
@@ -377,93 +396,86 @@ if(Auth::check()) {
 
                                 <div class="ppr_rup ppr_priv_global_nav_action_trips position-relative">
                                     <div id="targetHelp_2" class="targets">
-                                        <div class="masthead-saves" title="My Trips and Recently Viewed">
-                                            <a class="trips-icon">
-                                                <span onclick="showRecentlyViews('recentlyViewed')" class="ui_icon my-trips"></span>
+                                        <div class="masthead-saves" title="سفرهای من">
+                                            <a class="trips-icon"  href="{{route('myTrips')}}">
+                                                <span class="ui_icon my-trips"></span>
+                                                {{--onclick="showRecentlyViews('recentlyViewed')"--}}
                                             </a>
                                         </div>
-                                        <div id="my-trips-not" class="ui_overlay ui_flyout global-nav-flyout global-nav-utility trips-flyout-container" style="direction: rtl">
-                                            <div>
-                                                <div class="styleguide" id="masthead-saves-container">
-                                                    <div id="masthead-recent" style="background-color: white">
-                                                        <div class="recent-header-container">
-                                                            <a class="recent-header" href="{{route('recentlyViewTotal')}}" target="_self">بازدیدهای اخیر </a>
-                                                        </div>
-                                                        <div class="masthead-recent-cards-container">
-                                                            <div id="dropdown-test3-card">
-                                                                <div class="ui_close_x"></div>
-                                                                <div class="test-title">خوش آمدید</div>
-                                                                <div class="test-content">شما می توانید بازدیدهای اخیرتان را در اینجا ببینید</div>>
-                                                            </div>
-                                                            <div id="masthead-recent-cards-region">
-                                                                <div id="recentlyViewed"></div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="see-all-button-container"><a href="{{route('recentlyViewTotal')}}" target="_self" class="see-all-button">مشاهده تمامی موارد </a></div>
-                                                    </div>
-                                                    <div id="masthead-trips">
-                                                        <div class="trips-header-container"><a class="trips-header" target="_self" href="{{URL('myTrips')}}">سفر های من </a></div>
-                                                        <div id="masthead-trips-tiles-region">
-                                                            <div id="trips-tiles" class="column">
-                                                                <div>
-                                                                    <a onclick="showPopUp()" class="single-tile is-create-trip">
-                                                                        <div class="tile-content">
-                                                                            <span class="ui_icon plus"></span>
-                                                                            <div class="create-trip-text">ایجاد سفر</div>
-                                                                        </div>
-                                                                    </a>
 
-                                                                    @foreach($trips as $trip)
-                                                                        <div onclick="document.location.href = '{{route('tripPlaces', ['tripId' => $trip->id])}}'" class="trip-images ui_columns is-gapless is-multiline is-mobile">
-                                                                            @if($trip->placeCount > 0)
-                                                                                <div class="trip-image ui_column is-6 placeCount0" style="background: url('{{$trip->pic1}}')" ></div>
-                                                                            @else
-                                                                                <div class="trip-image trip-image-empty ui_column is-6 placeCount0Else"></div>
-                                                                            @endif
-                                                                            @if($trip->placeCount > 1)
-                                                                                <div class="trip-image ui_column is-6 placeCount0" style="background: url('{{$trip->pic1}}')" ></div>
-                                                                            @else
-                                                                                <div class="trip-image trip-image-empty ui_column is-6  placeCount0Else"></div>
-                                                                            @endif
-                                                                            @if($trip->placeCount > 2)
-                                                                                <div class="trip-image ui_column is-6 placeCount0" style="background: url('{{$trip->pic1}}')" ></div>
-                                                                            @else
-                                                                                <div class="trip-image trip-image-empty ui_column is-6 placeCount0Else"></div>
-                                                                            @endif
-                                                                            @if($trip->placeCount > 3)
-                                                                                <div class="trip-image ui_column is-6 placeCount0" style="background: url('{{$trip->pic1}}')" ></div>
-                                                                            @else
-                                                                                <div class="trip-image trip-image-empty ui_column is-6 placeCount0Else"></div>
-                                                                            @endif
-                                                                        </div>
-                                                                        <div class="create-trip-text">{{$trip->name}} </div>
-                                                                        @if($trip->to_ != "" && $trip->from_ != "")
-                                                                            <div class="create-trip-text">
-                                                                                {{convertStringToDate2($trip->to_)}}
-                                                                                <p>الی</p>
-                                                                                {{convertStringToDate2($trip->from_)}}
-                                                                            </div>
-                                                                        @else
-                                                                            <div class="create-trip-text">بدون تاریخ</div>
-                                                                        @endif
-                                                                    @endforeach
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        {{--<div id="my-trips-not" class="ui_overlay ui_flyout global-nav-flyout global-nav-utility trips-flyout-container" style="direction: rtl">--}}
+                                            {{--<div>--}}
+                                                {{--<div class="styleguide" id="masthead-saves-container">--}}
+                                                    {{--<div id="masthead-recent" style="background-color: white">--}}
+                                                        {{--<div class="recent-header-container">--}}
+                                                            {{--<a class="recent-header" href="{{route('recentlyViewTotal')}}" target="_self">بازدیدهای اخیر </a>--}}
+                                                        {{--</div>--}}
+                                                        {{--<div class="masthead-recent-cards-container">--}}
+                                                            {{--<div id="dropdown-test3-card">--}}
+                                                                {{--<div class="ui_close_x"></div>--}}
+                                                                {{--<div class="test-title">خوش آمدید</div>--}}
+                                                                {{--<div class="test-content">شما می توانید بازدیدهای اخیرتان را در اینجا ببینید</div>>--}}
+                                                            {{--</div>--}}
+                                                            {{--<div id="masthead-recent-cards-region">--}}
+                                                                {{--<div id="recentlyViewed"></div>--}}
+                                                            {{--</div>--}}
+                                                        {{--</div>--}}
+                                                        {{--<div class="see-all-button-container"><a href="{{route('recentlyViewTotal')}}" target="_self" class="see-all-button">مشاهده تمامی موارد </a></div>--}}
+                                                    {{--</div>--}}
+                                                    {{--<div id="masthead-trips">--}}
+                                                        {{--<div class="trips-header-container"><a class="trips-header" target="_self" href="{{URL('myTrips')}}">سفر های من </a></div>--}}
+                                                        {{--<div id="masthead-trips-tiles-region">--}}
+                                                            {{--<div id="trips-tiles" class="column">--}}
+                                                                {{--<div>--}}
+                                                                    {{--<a onclick="showPopUp()" class="single-tile is-create-trip">--}}
+                                                                        {{--<div class="tile-content">--}}
+                                                                            {{--<span class="ui_icon plus"></span>--}}
+                                                                            {{--<div class="create-trip-text">ایجاد سفر</div>--}}
+                                                                        {{--</div>--}}
+                                                                    {{--</a>--}}
 
-                                        <div id="helpSpan_2" class="helpSpans hidden row">
-                                            <span class="introjs-arrow"></span>
-                                            <p class="col-xs-12">سفر های خود و بازدید های اخیرتان را به سادگی از این چک کنید. خیلی ساده است.</p>
-                                            <div class="col-xs-12">
-                                                <button data-val="2" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_2">بعدی</button>
-                                                <button data-val="2" class="btn btn-primary backBtnsHelp" id="backBtnHelp_2">قبلی</button>
-                                                <button class="btn btn-danger exitBtnHelp">خروج</button>
-                                            </div>
-                                        </div>
+                                                                    {{--@foreach($trips as $trip)--}}
+                                                                        {{--<div onclick="document.location.href = '{{route('tripPlaces', ['tripId' => $trip->id])}}'" class="trip-images ui_columns is-gapless is-multiline is-mobile">--}}
+                                                                            {{--@if($trip->placeCount > 0)--}}
+                                                                                {{--<div class="trip-image ui_column is-6 placeCount0" style="background: url('{{$trip->pic1}}')" ></div>--}}
+                                                                            {{--@else--}}
+                                                                                {{--<div class="trip-image trip-image-empty ui_column is-6 placeCount0Else"></div>--}}
+                                                                            {{--@endif--}}
+                                                                            {{--@if($trip->placeCount > 1)--}}
+                                                                                {{--<div class="trip-image ui_column is-6 placeCount0" style="background: url('{{$trip->pic1}}')" ></div>--}}
+                                                                            {{--@else--}}
+                                                                                {{--<div class="trip-image trip-image-empty ui_column is-6  placeCount0Else"></div>--}}
+                                                                            {{--@endif--}}
+                                                                            {{--@if($trip->placeCount > 2)--}}
+                                                                                {{--<div class="trip-image ui_column is-6 placeCount0" style="background: url('{{$trip->pic1}}')" ></div>--}}
+                                                                            {{--@else--}}
+                                                                                {{--<div class="trip-image trip-image-empty ui_column is-6 placeCount0Else"></div>--}}
+                                                                            {{--@endif--}}
+                                                                            {{--@if($trip->placeCount > 3)--}}
+                                                                                {{--<div class="trip-image ui_column is-6 placeCount0" style="background: url('{{$trip->pic1}}')" ></div>--}}
+                                                                            {{--@else--}}
+                                                                                {{--<div class="trip-image trip-image-empty ui_column is-6 placeCount0Else"></div>--}}
+                                                                            {{--@endif--}}
+                                                                        {{--</div>--}}
+                                                                        {{--<div class="create-trip-text">{{$trip->name}} </div>--}}
+                                                                        {{--@if($trip->to_ != "" && $trip->from_ != "")--}}
+                                                                            {{--<div class="create-trip-text">--}}
+                                                                                {{--{{convertStringToDate2($trip->to_)}}--}}
+                                                                                {{--<p>الی</p>--}}
+                                                                                {{--{{convertStringToDate2($trip->from_)}}--}}
+                                                                            {{--</div>--}}
+                                                                        {{--@else--}}
+                                                                            {{--<div class="create-trip-text">بدون تاریخ</div>--}}
+                                                                        {{--@endif--}}
+                                                                    {{--@endforeach--}}
+                                                                {{--</div>--}}
+                                                            {{--</div>--}}
+                                                        {{--</div>--}}
+                                                    {{--</div>--}}
+                                                {{--</div>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+
                                     </div>
                                 </div>
                             @else
@@ -539,10 +551,10 @@ if(Auth::check()) {
                                     <div class="global-nav-overlays-container">
                                         <div id="profile-drop" class="ui_overlay ui_flyout global-nav-flyout global-nav-utility">
                                             <ul class="global-nav-profile-menu">
-                                                <li class="subItem"><a href="{{URL('profile')}}" class="subLink" data-tracking-label="UserProfile_viewProfile">صفحه کاربری</a></li>
-                                                <li class="subItem rule"><a href="{{URL('messages')}}" class="subLink global-nav-submenu-divided" data-tracking-label="UserProfile_messages">پیام ها</a> </li>
-                                                <li class="subItem"><a href="{{URL('accountInfo')}}" class="subLink" data-tracking-label="UserProfile_settings">اطلاعات کاربر </a></li>
-                                                <li class="subItem"><a href="{{route('logout')}}" class="subLink" data-tracking-label="UserProfile_signout">خروج</a></li>
+                                                <li class="subItemHeaderNavBar"><a href="{{URL('profile')}}" class="subLink" data-tracking-label="UserProfile_viewProfile">صفحه کاربری</a></li>
+                                                <li class="subItemHeaderNavBar rule"><a href="{{URL('messages')}}" class="subLink global-nav-submenu-divided" data-tracking-label="UserProfile_messages">پیام ها</a> </li>
+                                                <li class="subItemHeaderNavBar"><a href="{{URL('accountInfo')}}" class="subLink" data-tracking-label="UserProfile_settings">اطلاعات کاربر </a></li>
+                                                <li class="subItemHeaderNavBar"><a href="{{route('logout')}}" class="subLink" data-tracking-label="UserProfile_signout">خروج</a></li>
                                             </ul>
                                         </div>
                                     </div>
