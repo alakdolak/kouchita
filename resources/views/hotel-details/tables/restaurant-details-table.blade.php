@@ -16,3 +16,11 @@
         @endforeach
     </div>
 @endforeach
+
+<script>
+    var checkFeatures = $('.descriptionSections');
+    for(var i = 0; i < checkFeatures.length; i++){
+        if(checkFeatures[i].children.length < 2)
+            checkFeatures[i].remove();
+    }
+</script>

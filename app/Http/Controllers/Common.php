@@ -707,17 +707,32 @@ function getAllPlacePicsByKind($kindPlaceId, $placeId){
 
     $sitePicsJSON = json_encode($sitePics);
 
-    $photographerPics = array();
     if(\auth()->check())
-        $photographerPic = DB::select('SELECT photo.*, photoLog.like AS userLike FROM photographersPics AS photo LEFT JOIN photographersLogs AS photoLog ON photo.kindPlaceId = ' . $kindPlaceId . ' AND photo.placeId  = ' . $placeId . ' AND ((photo.userId = ' . $user->id . ') OR ( photo.status = 1)) AND photoLog.picId = photo.id AND photoLog.userId = ' . $user->id . ' ORDER BY created_at');
+        $photographerPic = DB::select('SELECT photo.* FROM photographersPics AS photo WHERE photo.kindPlaceId = ' . $kindPlaceId . ' AND photo.placeId  = ' . $placeId . ' AND ((photo.userId = ' . $user->id . ') OR ( photo.status = 1)) ORDER BY created_at');
     else
         $photographerPic = DB::select('SELECT * FROM photographersPics WHERE kindPlaceId = ' . $kindPlaceId . ' AND placeId  = ' . $placeId . ' AND status = 1 ORDER BY created_at');
 
-    foreach ($photographerPic as $item){
-        if(!isset($item->userLike) || $item->userLike == null)
-            $item->userLike = 0;
+    if($photographerPic != null) {
+        $pid = [];
+        foreach ($photographerPic as $item)
+            array_push($pid, $item->id);
+        $pidLike = DB::select('SELECT * FROM photographersLogs WHERE picId IN (' . implode(",", $pid) . ') AND userId = ' . $user->id);
+
+        foreach ($photographerPic as $item) {
+            if($pidLike != null) {
+                foreach ($pidLike as $item2) {
+                    if($item2->picId == $item->id){
+                        $item->userLike = $item2->like;
+                        break;
+                    }
+                }
+            }
+            else
+                $item->userLike = 0;
+        }
     }
 
+    $photographerPics = array();
     if(count($photographerPic) < 5)
         $photographerPics = $sitePics;
 
