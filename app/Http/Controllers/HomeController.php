@@ -264,7 +264,7 @@ class HomeController extends Controller
         return;
     }
 
-    public function cityPage($kind, $city) {
+    public function cityPage($kind, $city, Request $request) {
 
         $today = getToday()["date"];
         $nowTime = getToday()["time"];
@@ -436,7 +436,6 @@ class HomeController extends Controller
                 $item->summery = mb_substr($item->text, 0, 80, 'utf-8');
 
         }
-//        dd($reviews);
 
         $count = 0;
         $C = 0;
@@ -526,7 +525,15 @@ class HomeController extends Controller
             $item->url = route('article.show', ['slug' => $item->slug]);
             $item->catURL = route('article.list', ['type' => 'category', 'search' => $item->category]);
         }
-        return view('cityPage', compact(['place', 'kind', 'locationName', 'post', 'map', 'allPlaces', 'allAmaken', 'allHotels', 'allRestaurant', 'allMajara', 'allMahaliFood', 'allSogatSanaie', 'reviews', 'topPlaces']));
+
+        $mainWebSiteUrl = \url('/');
+        $mainWebSiteUrl .= '/' . $request->path();
+        if($kind == 'state')
+            $localStorageData = ['kind' => 'state', 'name' => $place->name , 'city' => '', 'state' => '', 'mainPic' => $place->image, 'redirect' => $mainWebSiteUrl];
+        else
+            $localStorageData = ['kind' => 'city', 'name' => $place->name , 'city' => '', 'state' => $place->state, 'mainPic' => $place->image, 'redirect' => $mainWebSiteUrl];
+
+        return view('cityPage', compact(['place', 'kind', 'localStorageData', 'locationName', 'post', 'map', 'allPlaces', 'allAmaken', 'allHotels', 'allRestaurant', 'allMajara', 'allMahaliFood', 'allSogatSanaie', 'reviews', 'topPlaces']));
     }
 
     public function getCityOpinion()
@@ -1010,7 +1017,7 @@ class HomeController extends Controller
     {
 
         if (isset($_POST["key"]) && isset($_POST["kindPlaceId"])) {
-
+            $time = time();
             $kindPlaceId = makeValidInput($_POST["kindPlaceId"]);
 
             $key = makeValidInput($_POST["key"]);
@@ -1202,7 +1209,7 @@ class HomeController extends Controller
 
             $result = array_merge($result, $tmp);
 
-            echo json_encode($result);
+            echo json_encode([$time, $result]);
         }
     }
 

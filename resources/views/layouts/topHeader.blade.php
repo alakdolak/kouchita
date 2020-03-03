@@ -1,4 +1,8 @@
 
+{{--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">--}}
+<link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/topHeaderStyles.css')}}' />
+<link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/bootstrap.min.css')}}' />
+
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158914626-1"></script>
 <script>
@@ -10,13 +14,35 @@
 </script>
 
 <script src="{{URL::asset('js/jQuery.js')}}"></script>
-
-{{--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">--}}
-<link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/topHeaderStyles.css')}}' />
-<link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/bootstrap.min.css')}}' />
 <script src="{{URL::asset('js/angular.js')}}"></script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+
+<meta name="google-signin-scope" content="profile email">
+<meta name="google-signin-client_id" content="774684902659-20aeg6um0856j5li2uuu9ombu2pcbqv9.apps.googleusercontent.com">
 
 <meta name="csrf-token" content="{{ csrf_token() }}"/>
+
+<!-- Link Swiper's CSS -->
+<link rel="stylesheet" href="{{URL::asset('css/theme2/swiper.css')}}">
+
+<!-- Swiper JS -->
+<script src="{{URL::asset('js/swiper/swiper.min.js')}}"></script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="theme-color" content="#4dc7bc"/>
+<link rel="icon" href="{{URL::asset('images/icons/mainIcon.svg')}}" sizes="any" type="image/svg+xml">
+<link rel="apple-touch-icon-precomposed" href="{{URL::asset('images/icons/mainIcon.svg')}}" sizes="any" type="image/svg+xml">
+<meta name="msapplication-TileColor" content="#4dc7bc">
+<meta name="msapplication-TileImage" content="{{URL::asset('images/icons/   mainIcon.png')}}">
+
+<meta name="twitter:card" content="summary"/>
+
+<meta property="og:url" content="{{Request::url()}}" />
+<meta property="og:site_name" content="سامانه جامع گردشگری کوچیتا" />
+{{--<meta name="twitter:site" content="@اکانت توییتر کوچیتا">--}}
 
 <script type="text/javascript">
     $.ajaxSetup({
@@ -51,28 +77,4 @@
     }
 
 </script>
-
-<!-- Link Swiper's CSS -->
-<link rel="stylesheet" href="{{URL::asset('css/theme2/swiper.css')}}">
-
-<!-- Swiper JS -->
-<script src="{{URL::asset('js/swiper/swiper.min.js')}}"></script>
-
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta charset="UTF-8">
-<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<meta name="theme-color" content="#4dc7bc"/>
-<link rel="icon" href="{{URL::asset('images/icons/mainIcon.svg')}}" sizes="any" type="image/svg+xml">
-<link rel="apple-touch-icon-precomposed" href="{{URL::asset('images/icons/mainIcon.svg')}}" sizes="any" type="image/svg+xml">
-<meta name="msapplication-TileColor" content="#4dc7bc">
-<meta name="msapplication-TileImage" content="{{URL::asset('images/icons/   mainIcon.png')}}">
-
-<meta name="twitter:card" content="summary"/>
-
-<meta property="og:url" content="{{Request::url()}}" />
-<meta property="og:site_name" content="سامانه جامع گردشگری کوچیتا" />
-{{--<meta name="twitter:site" content="@اکانت توییتر کوچیتا">--}}
-
-
 

@@ -49,48 +49,12 @@ function showElement(e) {
     $("#" + e).removeClass("hidden"), $(".dark").show()
 }
 
-function chooseState(e) {
-    $.ajax({
-        type: "post", url: getStates, success: function (t) {
-            for (t = JSON.parse(t), newElement = "", i = 0; i < t.length; i++) newElement += "<option value='{{route('home') . '/adab-list/'}}" + t[i].name + "/" + e + "'>" + t[i].name + "</option>";
-            $("#states").empty().append(newElement), $("#statePane").removeClass("hidden"), $(".dark").show()
-        }
-    })
-}
-
-function chooseStateAmaken() {
-    $.ajax({
-        type: "post", url: getStates, success: function (e) {
-            for (e = JSON.parse(e), newElement = "", i = 0; i < e.length; i++) newElement += "<option value='{{route('home') . '/amakenList/'}}" + e[i].name + "/state'>" + e[i].name + "</option>";
-            $("#states").empty().append(newElement), $("#statePane").removeClass("hidden"), $(".dark").show()
-        }
-    })
-}
-
 function getCities() {
     var e = $("#states2").val(), t = $("#states2 option:selected").attr("data-val");
     $.ajax({
         type: "post", url: "{{route('getCitiesDir')}}", data: {stateId: e}, success: function (e) {
             for (e = JSON.parse(e), newElement = "<option value='{{route('home') . '/majaraList/'}}" + t + "/state'> استان " + t + "</option>", i = 0; i < e.length; i++) newElement += "<option value='{{route('home') . '/majaraList/'}}" + e[i].name + "/city'>شهر " + e[i].name + "</option>";
             $("#cities").empty().append(newElement)
-        }
-    })
-}
-
-function chooseStateMajara() {
-    $.ajax({
-        type: "post", url: getStates, success: function (e) {
-            for (e = JSON.parse(e), newElement = "", i = 0; i < e.length; i++) newElement += "<option data-val='" + e[i].name + "' value='" + e[i].id + "'>" + e[i].name + "</option>";
-            $(".dark").show(), $("#states2").empty().append(newElement), e.length > 0 && getCities(), $("#statePane2").removeClass("hidden")
-        }
-    })
-}
-
-function chooseGoyesh() {
-    $.ajax({
-        type: "post", url: getGoyesh, success: function (e) {
-            for (e = JSON.parse(e), newElement = "", i = 0; i < e.length; i++) newElement += "<option value='{{route('home') . '/estelahat/'}}" + e[i].name + "'>" + e[i].name + "</option>";
-            $(".dark").show(), $("#goyesh").empty().append(newElement), $("#goyeshPane").removeClass("hidden")
         }
     })
 }
@@ -111,41 +75,20 @@ function getRecentlyViews(e) {
     })
 }
 
-function showRecentlyViews(e) {
-    $("#my-trips-not").is(":hidden") ? ($("#alert").hide(), $("#my-trips-not").show(), $("#profile-drop").hide(), $("#bookmarkmenu").hide(), getRecentlyViews(e)) : ($("#alert").hide(), $("#my-trips-not").hide(), $("#profile-drop").hide(), $("#bookmarkmenu").hide())
-}
-
 $(".login-button").click(function () {
-    $(".dark").show(), showLoginPrompt(url)
-}), $(document).ready(function () {
+    $(".dark").show();
+    showLoginPrompt(url);
+});
+$(document).ready(function () {
     $("#Settings").on({
         mouseenter: function () {
             $(".settingsDropDown").show()
         }, mouseleave: function () {
             $(".settingsDropDown").hide()
         }
-    }), $("#nameTop").click(function (e) {
-        $("#profile-drop").is(":hidden") ? ($("#profile-drop").show(), $("#my-trips-not").hide(), $("#alert").hide(), $("#bookmarkmenu").hide()) : ($("#profile-drop").hide(), $("#my-trips-not").hide(), $("#alert").hide(), $("#bookmarkmenu").hide())
-    }), $("#memberTop").click(function (e) {
-        $("#profile-drop").is(":hidden") ? ($("#profile-drop").show(), $("#my-trips-not").hide(), $("#bookmarkmenu").hide(), $("#alert").hide()) : ($("#profile-drop").hide(), $("#my-trips-not").hide(), $("#bookmarkmenu").hide(), $("#alert").hide())
-    }), $("#bookmarkicon").click(function (e) {
-        $("#bookmarkmenu").is(":hidden") ? ($("#bookmarkmenu").show(), $("#my-trips-not").hide(), $("#profile-drop").hide(), $("#alert").hide(), showBookMarks("bookMarksDiv")) : ($("#bookmarkmenu").hide(), $("#my-trips-not").hide(), $("#profile-drop").hide(), $("#alert").hide())
-    }), $(".notification-bell").click(function (e) {
-        $("#alert").is(":hidden") ? ($("#alert").show(), $("#my-trips-not").hide(), $("#profile-drop").hide(), $("#bookmarkmenu").hide()) : ($("#alert").hide(), $("#my-trips-not").hide(), $("#profile-drop").hide(), $("#bookmarkmenu").hide())
-    }),
-
-    $("#close_span_search").click(function (e) {
-        $("#searchspan").animate({height: "0vh"}),
-        $("#myCloseBtn").addClass("hidden")
-    }),
-
-    $("#openSearch").click(function (e) {
-        $("#myCloseBtn").removeClass("hidden");
-        $("#searchspan").animate({height: "100vh"})
-    })
+    });
 }),
-    $("body").on("click", function () {
-    $("#profile-drop").hide(), $("#my-trips-not").hide(), $("#alert").hide(), $("#bookmarkmenu").hide()
-}), $(".global-nav-actions").on("click", function (e) {
+
+$(".global-nav-actions").on("click", function (e) {
     e.stopPropagation()
 });

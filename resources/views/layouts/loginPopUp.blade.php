@@ -624,7 +624,6 @@ $authUrl = $client->createAuthUrl();
 
 {{--loginPopUp--}}
 <form id="second_login" method="post" action="{{route('checkLogin')}}">
-    {{--{{csrf_field()}}--}}
     {!! csrf_field() !!}
     <input id="form_userName" name="username" type="hidden">
     <input id="form_pass" name="password" type="hidden">
@@ -662,6 +661,7 @@ $authUrl = $client->createAuthUrl();
                 <p id="loginErr"></p>
             </div>
         </div>
+
         <div class="registerPaneInLoginPopUp col-xs-6">
             <div class="header_text font-size-14Imp">عضو نیستید !!</div>
             <button class="btn" onclick="showLoginEmail()">

@@ -39,6 +39,7 @@ $authUrl = $client->createAuthUrl();
 ?>
 
 <script>
+    alert('hello2');
     var loginDir = '{{route('login2')}}';
     var checkLoginDir = '{{route('checkLogin')}}';
     var checkEmailDir = '{{route('checkEmail')}}';

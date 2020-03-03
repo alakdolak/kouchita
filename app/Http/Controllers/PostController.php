@@ -227,7 +227,7 @@ class PostController extends Controller {
             return \redirect(\url('/'));
     }
 
-    public function showArticle($slug)
+    public function showArticle($slug, Request $request)
     {
         $post = Post::where('slug', $slug)->first();
         if($post != null){
@@ -334,7 +334,12 @@ class PostController extends Controller {
 
             $tags = DB::select('SELECT pt.tag FROM postTags AS pt, postTagsRelations AS ptr WHERE ptr.postId = ' . $post->id . ' AND pt.id = ptr.tagId GROUP BY pt.tag');
             $post->tag = $tags;
-            return view('posts.article', compact(['stateCome', 'cityCome', 'placeCome', 'post', 'category', 'similarPost', 'postLike', 'uPic', 'comments']));
+
+            $mainWebSiteUrl = \url('/');
+            $mainWebSiteUrl .= '/' . $request->path();
+            $localStorageData = ['kind' => 'article', 'name' => $post->title, 'city' => '', 'state' => '', 'mainPic' => $post->pic, 'redirect' => $mainWebSiteUrl];
+
+            return view('posts.article', compact(['stateCome', 'cityCome', 'placeCome', 'post', 'category', 'similarPost', 'postLike', 'uPic', 'comments', 'localStorageData']));
         }
         return \redirect(\url('/'));
 

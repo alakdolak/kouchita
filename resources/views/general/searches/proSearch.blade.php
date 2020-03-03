@@ -669,10 +669,16 @@
      var onImage = "{{URL::asset('images/on_lamp.gif')}}";
      var offImage = "{{URL::asset('images/off_lamp.png')}}";
 
-    $('#close_span_search').click(function(e) {
-        $('#searchspan').animate({height: '0vh'});
-        $("#myCloseBtn").addClass('hidden');
-    });
+
+     $('#close_span_search').click(function(e) {
+         $('#searchspan').animate({height: '0vh'});
+         $("#myCloseBtn").addClass('hidden');
+     });
+
+     $('#openSearch').click(function(e) {
+         $("#myCloseBtn").removeClass('hidden');
+         $('#searchspan').animate({height: '100vh'});
+     });
 
     function openProSearch() {
             $("#myCloseBtn").removeClass('hidden');

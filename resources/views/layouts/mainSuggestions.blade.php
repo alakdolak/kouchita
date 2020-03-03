@@ -37,6 +37,9 @@
         }
         @endfor
 
+        .slide__text:hover{
+            color: #fbe5c8 !important;
+        }
     </style>
     <div class="cont ">
 
