@@ -110,11 +110,14 @@
 
 <div id="PAGE" class="filterSearch redesign_2015 non_hotels_like desktop scopedSearch">
     @include('layouts.placeHeader')
+
+    @include('general.secondHeader')
+
     <div class=" hotels_lf_redesign ui_container responsive_body">
+        
         <div style="height: 100px;">
 
-            @include('general.headerSearch')
-
+            {{--@include('general.headerSearch')--}}
             <div class="placeListHeader">
                 <div class="placeListTitle">
                     {{$kindPlace->title}}

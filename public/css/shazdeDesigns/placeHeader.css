@@ -154,14 +154,10 @@ DIV.ppr_rup.ppr_priv_global_nav .global-nav-actions > div {
 
 .mainHeaderSearch{
     margin-right: 30px;
-    background-color: #fcc156;
+    background-color: white;
     padding: 7px 10px;
     border-radius: 30px;
     font-weight: 600;
-    color: #16174f;
+    color: #4dc7bc;
     cursor: pointer;
-}
-.mainHeaderSearch:hover{
-    background-color: #88070b;
-    color: white;
 }

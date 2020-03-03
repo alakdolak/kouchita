@@ -366,7 +366,7 @@ class PlaceController extends Controller {
             $nearbyHotel->reviews = LogModel::where($condition)->count();
             $nearbyHotel->distance = round($nearbyHotel->distance, 2);
             $nearbyHotel->rate = getRate($nearbyHotel->id, $hotelPlaceId)[1];
-            $nearbyHotel->url = \url('hotel-details/' . $nearbyHotel->id . '/' .$nearbyHotel->name);
+            $nearbyHotel->url =  createUrl(4, $nearbyHotel->id, 0, 0, 0);
             $nearbyHotel->city = Cities::find($nearbyHotel->cityId);
             $nearbyHotel->state = State::find($nearbyHotel->city->stateId);
         }
@@ -385,7 +385,7 @@ class PlaceController extends Controller {
             $nearbyRestaurant->reviews = LogModel::where($condition)->count();
             $nearbyRestaurant->distance = round($nearbyRestaurant->distance, 2);
             $nearbyRestaurant->rate = getRate($nearbyRestaurant->id, $restaurantPlaceId)[1];
-            $nearbyRestaurant->url = \url('restaurant-details/' . $nearbyRestaurant->id . '/' .$nearbyRestaurant->name);
+            $nearbyRestaurant->url = createUrl(3, $nearbyRestaurant->id, 0, 0, 0);
             $nearbyRestaurant->city = Cities::find($nearbyRestaurant->cityId);
             $nearbyRestaurant->state = State::find($nearbyRestaurant->city->stateId);
         }
@@ -404,7 +404,7 @@ class PlaceController extends Controller {
             $nearbyAmaken->reviews = LogModel::where($condition)->count();
             $nearbyAmaken->distance = round($nearbyAmaken->distance, 2);
             $nearbyAmaken->rate = getRate($nearbyAmaken->id, $amakenPlaceId)[1];
-            $nearbyAmaken->url = \url('amaken-details/' . $nearbyAmaken->id . '/' .$nearbyAmaken->name);
+            $nearbyAmaken->url = createUrl(1, $nearbyAmaken->id, 0, 0, 0);
             $nearbyAmaken->city = Cities::find($nearbyAmaken->cityId);
             $nearbyAmaken->state = State::find($nearbyAmaken->city->stateId);
         }
@@ -423,7 +423,7 @@ class PlaceController extends Controller {
             $nearbyMajara->reviews = LogModel::where($condition)->count();
             $nearbyMajara->distance = round($nearbyMajara->distance, 2);
             $nearbyMajara->rate = getRate($nearbyMajara->id, $majaraPlaceId)[1];
-            $nearbyMajara->url = \url('majara-details/' . $nearbyMajara->id . '/' .$nearbyMajara->name);
+            $nearbyMajara->url = createUrl(6, $nearbyMajara->id, 0, 0, 0);
             $nearbyMajara->city = Cities::find($nearbyMajara->cityId);
             $nearbyMajara->state = State::find($nearbyMajara->city->stateId);
         }

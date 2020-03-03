@@ -67,8 +67,10 @@
                 {{$locationName['cityName']}}
             </span>
             <div class="secHeadTabsSubList">
-                <a href="{{route('cityPage', ['kind' => 'city', 'city' => $locationName['cityNameUrl'] ])}}" target="_blank" >{{$locationName['cityName']}}</a>
-                <a href="{{route('cityPage', ['kind' => 'state', 'city' => $locationName['state'] ])}}" target="_blank" >استان {{$locationName['state']}}</a>
+                <a href="{{route('cityPage', ['kind' => $locationName['kindState'], 'city' => $locationName['cityNameUrl'] ])}}" target="_blank" >{{$locationName['cityName']}}</a>
+                @if(isset($locationName['state']))
+                    <a href="{{route('cityPage', ['kind' => 'state', 'city' => $locationName['state'] ])}}" target="_blank" >استان {{$locationName['state']}}</a>
+                @endif
                 <a href="{{url('/')}}">صفحه اصلی</a>
             </div>
         </div>
@@ -77,8 +79,10 @@
                 اقامتگاه ها
             </span>
             <div class="secHeadTabsSubList">
-                <a href="{{route('place.list', ['kindPlaceId' => 4, 'mode' => 'city', 'city' => $locationName['cityNameUrl']])}}">اقامتگاه های {{$locationName['cityName']}}</a>
-                <a href="{{route('place.list', ['kindPlaceId' => 4, 'mode' => 'state', 'city' => $locationName['state']])}}">اقامتگاه های استان {{$locationName['state']}}</a>
+                <a href="{{route('place.list', ['kindPlaceId' => 4, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">اقامتگاه های {{$locationName['cityName']}}</a>
+                @if(isset($locationName['state']))
+                    <a href="{{route('place.list', ['kindPlaceId' => 4, 'mode' => 'state', 'city' => $locationName['state']])}}">اقامتگاه های استان {{$locationName['state']}}</a>
+                @endif
             </div>
         </div>
         <div class="secHeadTabs arrowAfter">
@@ -86,8 +90,10 @@
                 رستوران ها
             </span>
             <div class="secHeadTabsSubList">
-                <a href="{{route('place.list', ['kindPlaceId' => 3, 'mode' => 'city', 'city' => $locationName['cityNameUrl']])}}">رستوران های {{$locationName['cityName']}}</a>
-                <a href="{{route('place.list', ['kindPlaceId' => 3, 'mode' => 'state', 'city' => $locationName['state']])}}">رستوران های استان {{$locationName['state']}}</a>
+                <a href="{{route('place.list', ['kindPlaceId' => 3, 'mode' =>  $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">رستوران های {{$locationName['cityName']}}</a>
+                @if(isset($locationName['state']))
+                    <a href="{{route('place.list', ['kindPlaceId' => 3, 'mode' => 'state', 'city' => $locationName['state']])}}">رستوران های استان {{$locationName['state']}}</a>
+                @endif
             </div>
         </div>
         <div class="secHeadTabs arrowAfter">
@@ -95,8 +101,10 @@
                 جاذبه ها
             </span>
             <div class="secHeadTabsSubList">
-                <a href="{{route('place.list', ['kindPlaceId' => 1, 'mode' => 'city', 'city' => $locationName['cityNameUrl']])}}">جاذبه های {{$locationName['cityName']}}</a>
-                <a href="{{route('place.list', ['kindPlaceId' => 1, 'mode' => 'state', 'city' => $locationName['state']])}}">جاذبه های استان {{$locationName['state']}}</a>
+                <a href="{{route('place.list', ['kindPlaceId' => 1, 'mode' =>  $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">جاذبه های {{$locationName['cityName']}}</a>
+                @if(isset($locationName['state']))
+                    <a href="{{route('place.list', ['kindPlaceId' => 1, 'mode' => 'state', 'city' => $locationName['state']])}}">جاذبه های استان {{$locationName['state']}}</a>
+                @endif
             </div>
         </div>
         <div class="secHeadTabs arrowAfter">
@@ -104,8 +112,10 @@
                 ماجرا ها
             </span>
             <div class="secHeadTabsSubList">
-                <a href="{{route('place.list', ['kindPlaceId' => 6, 'mode' => 'city', 'city' => $locationName['cityNameUrl']])}}">ماجرا های {{$locationName['cityName']}}</a>
-                <a href="{{route('place.list', ['kindPlaceId' => 6, 'mode' => 'state', 'city' => $locationName['state']])}}">ماجرا های استان {{$locationName['state']}}</a>
+                <a href="{{route('place.list', ['kindPlaceId' => 6, 'mode' =>  $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">ماجرا های {{$locationName['cityName']}}</a>
+                @if(isset($locationName['state']))
+                    <a href="{{route('place.list', ['kindPlaceId' => 6, 'mode' => 'state', 'city' => $locationName['state']])}}">ماجرا های استان {{$locationName['state']}}</a>
+                @endif
             </div>
         </div>
         <div class="secHeadTabs arrowAfter">
@@ -113,8 +123,10 @@
                 سوغات و صنایع دستی
             </span>
             <div class="secHeadTabsSubList">
-                <a href="{{route('place.list', ['kindPlaceId' => 10, 'mode' => 'city', 'city' => $locationName['cityNameUrl']])}}">سوغات و صنایع دستی {{$locationName['cityName']}}</a>
-                <a href="{{route('place.list', ['kindPlaceId' => 10, 'mode' => 'state', 'city' => $locationName['state']])}}">سوغات و صنایع دستی استان {{$locationName['state']}}</a>
+                <a href="{{route('place.list', ['kindPlaceId' => 10, 'mode' =>  $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">سوغات و صنایع دستی {{$locationName['cityName']}}</a>
+                @if(isset($locationName['state']))
+                    <a href="{{route('place.list', ['kindPlaceId' => 10, 'mode' => 'state', 'city' => $locationName['state']])}}">سوغات و صنایع دستی استان {{$locationName['state']}}</a>
+                @endif
             </div>
         </div>
         <div class="secHeadTabs arrowAfter">
@@ -122,8 +134,10 @@
                 غذاهای محلی
             </span>
             <div class="secHeadTabsSubList">
-                <a href="{{route('place.list', ['kindPlaceId' => 11, 'mode' => 'city', 'city' => $locationName['cityNameUrl']])}}">غذاهای محلی {{$locationName['cityName']}}</a>
-                <a href="{{route('place.list', ['kindPlaceId' => 11, 'mode' => 'state', 'state' => $locationName['state']])}}">غذاهای محلی استان {{$locationName['state']}}</a>
+                <a href="{{route('place.list', ['kindPlaceId' => 11, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">غذاهای محلی {{$locationName['cityName']}}</a>
+                @if(isset($locationName['state']))
+                    <a href="{{route('place.list', ['kindPlaceId' => 11, 'mode' => 'state', 'state' => $locationName['state']])}}">غذاهای محلی استان {{$locationName['state']}}</a>
+                @endif
             </div>
         </div>
         <div class="secHeadTabs ">
