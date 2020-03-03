@@ -750,7 +750,7 @@ Route::group(array('middleware' => ['throttle:30', 'nothing', 'setSession']), fu
 
     Route::get('show-place-details/{kindPlaceName}/{slug}', 'PlaceController@showPlaceDetails')->name('show.place.details');
 
-    Route::get('cityPage/{kind}/{city}', 'HomeController@cityPage');
+    Route::get('cityPage/{kind}/{city}', 'HomeController@cityPage')->name('cityPage');
 
     Route::post('/city/Page/getCityOpinion', 'HomeController@getCityOpinion')->name('cityPage.getCityOpinion');
 

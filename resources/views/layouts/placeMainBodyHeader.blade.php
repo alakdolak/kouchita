@@ -1,11 +1,14 @@
 <div class="global-nav-no-refresh" id="global-nav-no-refresh-2">
     <div id="taplc_global_nav_onpage_assets_0" class="ppr_rup ppr_priv_global_nav_onpage_assets"
          data-placement-name="global_nav_onpage_assets">
+
+        @include('general.secondHeader')
+
         <div class="ui_container">
             <div class="ui_columns easyClear">
                 <div class="ui_column direction-rtl position-relative">
                     <center ID="taplc_trip_planner_breadcrumbs_0" class="ppr_rup ppr_priv_trip_planner_breadcrumbs">
-                        @include('general.headerSearch')
+{{--                        @include('general.headerSearch')--}}
 
                         {{--                                                    <ul class="breadcrumbs">--}}
 {{--                                                        @if($placeMode == "hotel")--}}

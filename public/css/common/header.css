@@ -10,9 +10,10 @@
 #my-trips-not {
     display: none;
     bottom: auto;
-    left: 180px;
+    left: -20px;
     position: absolute;
-    top: 40px
+    box-shadow: 0 4px 16px 0 rgba(0, 0, 0, .2);
+    top: 45px;
 }
 
 #masthead-recent {
@@ -83,9 +84,10 @@
 #bookmarkmenu {
     display: none;
     bottom: auto;
-    left: 218px;
+    left: -20px;
     position: absolute;
-    top: 40px
+    box-shadow: 0 4px 16px 0 rgba(0, 0, 0, .2);
+    top: 45px;
 }
 
 #masthead-recent {

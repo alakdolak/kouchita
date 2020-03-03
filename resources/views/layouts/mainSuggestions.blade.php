@@ -37,6 +37,9 @@
         }
         @endfor
 
+        .slide__text:hover{
+            color: #fbe5c8 !important;
+        }
     </style>
     <div class="cont ">
 
@@ -334,10 +337,12 @@
             <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
                 <div class="shelf_header">
                     <div class="shelf_title">
-                        <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
-                        <div class="shelf_title_container h3">
-                            <h3>محبوب‌ترین غذا‌ها</h3>
-                        </div>
+                        <a class="shelf_title" href="{{route('place.list', ['kindPlaceId' => 11, 'mode' => 'country'])}}" target="_blank">
+                            <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
+                            <div class="shelf_title_container h3">
+                                <h3>محبوب‌ترین غذا‌ها</h3>
+                            </div>
+                        </a>
                     </div>
                 </div>
                 <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">

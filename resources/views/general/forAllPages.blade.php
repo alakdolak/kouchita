@@ -35,7 +35,9 @@
 
 @include('general.alerts')
 
-@include('layouts.recentlyViewAndMyTripsInMain')
+@if(!Request::is('/'))
+    @include('layouts.recentlyViewAndMyTripsInMain')
+@endif
 
 @if(!Auth::check())
     @include('layouts.loginPopUp')
