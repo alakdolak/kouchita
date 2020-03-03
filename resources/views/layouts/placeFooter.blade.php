@@ -182,17 +182,17 @@ $config = \App\models\ConfigModel::first()
             <span class="footerMenuBarLinks">سایر امکانات</span>
             <span class="ui_icon more-horizontal"></span>
         </div>
-        @if(Auth::check())
-            <div data-toggle="modal" data-target="#profilePossibilities">
-                <span class="footerMenuBarLinks">امکانات کاربر</span>
-                <span class="ui_icon memberPossibilities"></span>
-            </div>
-        @else
-            <div class="login-button">
-                <span class="footerMenuBarLinks">ثبت نام</span>
-                <span class="ui_icon plus-circle"></span>
-            </div>
-        @endif
+{{--        @if(Auth::check())--}}
+        <div data-toggle="modal" data-target="#profilePossibilities">
+            <span class="footerMenuBarLinks">امکانات کاربر</span>
+            <span class="ui_icon memberPossibilities"></span>
+        </div>
+        {{--@else--}}
+            {{--<div class="login-button">--}}
+                {{--<span class="footerMenuBarLinks">ثبت نام</span>--}}
+                {{--<span class="ui_icon plus-circle"></span>--}}
+            {{--</div>--}}
+        {{--@endif--}}
         <div onclick="openProSearch()">
             <span class="footerMenuBarLinks">جست‌و‌جو</span>
             <span class="ui_icon search"></span>
@@ -867,16 +867,16 @@ $config = \App\models\ConfigModel::first()
                     </div>
                     <div>
                         <div class="pSC_boxOfCityDetails">
-                            <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/1/" . $locationName['cityNameUrl'] . "/" . $locationName['kindState'])}}'">جاذبه‌های {{$locationName['cityName']}}</div>
-                            <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/4/" . $locationName['cityNameUrl'] . "/" . $locationName['kindState'])}}'">هتل‌های {{$locationName['cityName']}}</div>
+                            <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/1/" . $locationName['kindState'] . "/" . $locationName['cityNameUrl'])}}'">جاذبه‌های {{$locationName['cityName']}}</div>
+                            <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/4/" . $locationName['kindState'] . "/" . $locationName['cityNameUrl'])}}'">هتل‌های {{$locationName['cityName']}}</div>
                         </div>
                         <div class="pSC_boxOfCityDetails">
                             <div class="pSC_cityDetails" onclick="window.location.href = '{{$locationName['articleUrl']}}'">مقاله‌های {{$locationName['name']}}</div>
-                            <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/3/" . $locationName['cityNameUrl'] . "/" . $locationName['kindState'])}}'">رستوران‌های {{$locationName['cityName']}}</div>
+                            <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/3/" . $locationName['kindState'] . "/" . $locationName['cityNameUrl'])}}'">رستوران‌های {{$locationName['cityName']}}</div>
                         </div>
                         <div class="pSC_boxOfCityDetails">
-                            <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/10/" . $locationName['cityNameUrl'] . "/" . $locationName['kindState'])}}'">صنایع دستی‌های {{$locationName['cityName']}}</div>
-                            <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/11/" . $locationName['cityNameUrl'] . "/" . $locationName['kindState'])}}'">غذاهای محلی‌ {{$locationName['cityName']}}</div>
+                            <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/10/" . $locationName['kindState'] . "/" . $locationName['cityNameUrl'])}}'">صنایع دستی‌های {{$locationName['cityName']}}</div>
+                            <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/11/" . $locationName['kindState'] . "/" . $locationName['cityNameUrl'])}}'">غذاهای محلی‌ {{$locationName['cityName']}}</div>
                         </div>
                     </div>
                     <div class="overflowOptimizer"></div>

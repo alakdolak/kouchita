@@ -856,7 +856,7 @@ Route::group(array('middleware' => 'nothing'), function () {
 
 // Lists
 Route::group(array('middleware' => 'nothing'), function () {
-    Route::any('placeList/{kindPlaceId}/{city}/{mode}', 'PlaceController@showPlaceList')->name('place.list');
+    Route::any('placeList/{kindPlaceId}/{mode}/{city?}', 'PlaceController@showPlaceList')->name('place.list');
 
     Route::post('getPlaceListElems', 'PlaceController@getPlaceListElems')->name('getPlaceListElems');
 });

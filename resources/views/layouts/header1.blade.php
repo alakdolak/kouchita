@@ -6,7 +6,7 @@
 
 <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/header1.css')}}">
 <meta name="google-signin-scope" content="profile email">
-<meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
+<meta name="google-signin-client_id" content="774684902659-1tdvb7r1v765b3dh7k5n7bu4gpilaepe.apps.googleusercontent.com">
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 
 <div class="masthead">

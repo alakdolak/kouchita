@@ -21,7 +21,8 @@
 <script type="text/javascript">
     $.ajaxSetup({
         headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            'X-CSRF-TOKEN': '{{csrf_token()}}'
         }
     });
 

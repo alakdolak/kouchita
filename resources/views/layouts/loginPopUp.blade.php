@@ -10,8 +10,8 @@ require_once (__DIR__ . '/../../../app/Http/Controllers/glogin/libraries/Google/
 
 //Insert your cient ID and secret
 //You can get it from : https://console.developers.google.com/
-$client_id = '774684902659-20aeg6um0856j5li2uuu9ombu2pcbqv9.apps.googleusercontent.com';
-$client_secret = 'ARyU8-RXFJZD5jl5QawhpHne';
+$client_id = '774684902659-1tdvb7r1v765b3dh7k5n7bu4gpilaepe.apps.googleusercontent.com';
+$client_secret = '8NM4weptz-Pz-6gbolI5J0yi';
 $redirect_uri =  route('loginWithGoogle');
 
 /************************************************
@@ -21,7 +21,7 @@ token for the user, so we need to send them
 through a login flow. To do this we need some
 information from our API console project.
  ************************************************/
-$client = new Google_Client();
+$client = new \Google_Client();
 $client->setClientId($client_id);
 $client->setClientSecret($client_secret);
 $client->setRedirectUri($redirect_uri);
@@ -34,8 +34,9 @@ client to it. The client then queries the service
 for the required scopes, and uses that when
 generating the authentication URL later.
  ************************************************/
-$service = new Google_Service_Oauth2($client);
+$service = new \Google_Service_Oauth2($client);
 $authUrl = $client->createAuthUrl();
+
 ?>
 
 <script>

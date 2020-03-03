@@ -171,3 +171,9 @@ p {
 .hidden {
     display: none !important;
 }
+a {
+    text-decoration: none !important;
+}
+a:link {
+    text-decoration: none !important;
+}

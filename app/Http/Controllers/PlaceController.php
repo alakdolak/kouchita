@@ -3775,36 +3775,12 @@ class PlaceController extends Controller {
 
     }
 
-    public function showPlaceList($kindPlaceId, $city, $mode)
+    public function showPlaceList($kindPlaceId, $mode, $city = '')
     {
-        $sections = SectionPage::wherePage(getValueInfo('hotel-detail'))->get();
         $kindPlace = Place::find($kindPlaceId);
         if($kindPlace != null){
             $meta = [];
-
-            if ($mode == "state") {
-                $state = State::whereName($city)->first();
-                $city = $state;
-                if ($state == null)
-                    return "نتیجه ای یافت نشد";
-
-                $articleUrl = \url('/article/list/city/' . $state->name);
-                $n = ' استان ' . $state->name;
-                $locationName = ["name" => $n, 'cityName' => $n, 'cityNameUrl' => $state->name, 'articleUrl' => $articleUrl, 'kindState' => 'state'];
-            }
-            else {
-                $city = Cities::whereName($city)->first();
-                if ($city == null)
-                    return "نتیجه ای یافت نشد";
-
-                $state = State::whereId($city->stateId);
-                if ($state == null)
-                    return "نتیجه ای یافت نشد";
-
-                $articleUrl = \url('/article/list/city/' . $city->name);
-                $n = ' شهر ' . $city->name;
-                $locationName = ["name" => $n, 'state' => $state->name, 'cityName' => $n, 'cityNameUrl' => $city->name, 'articleUrl' => $articleUrl, 'kindState' => 'city'];
-            }
+            $mode = strtolower($mode);
 
             switch ($kindPlaceId){
                 case 1:
@@ -3852,12 +3828,43 @@ class PlaceController extends Controller {
             }
             $kindPlaceId = $kindPlace->id;
 
+            if($mode == 'country'){
+                $state = '';
+                $city = '';
+                $articleUrl = \url('/mainArticle');
+                $n = 'لیست ' . $kindPlace->title . ' ایران';
+                $locationName = ["name" => $n, 'cityName' => 'ایران من', 'cityNameUrl' => '', 'articleUrl' => $articleUrl, 'kindState' => 'country'];
+            }
+            else if ($mode == "state") {
+                $state = State::whereName($city)->first();
+                $city = $state;
+                if ($state == null)
+                    return "نتیجه ای یافت نشد";
+
+                $articleUrl = \url('/article/list/city/' . $state->name);
+                $n = ' استان ' . $state->name;
+                $locationName = ["name" => $n, 'cityName' => $n, 'cityNameUrl' => $state->name, 'articleUrl' => $articleUrl, 'kindState' => 'state'];
+            }
+            else if ($mode == "city") {
+                $city = Cities::whereName($city)->first();
+                if ($city == null)
+                    return "نتیجه ای یافت نشد";
+
+                $state = State::whereId($city->stateId);
+                if ($state == null)
+                    return "نتیجه ای یافت نشد";
+
+                $articleUrl = \url('/article/list/city/' . $city->name);
+                $n = ' شهر ' . $city->name;
+                $locationName = ["name" => $n, 'state' => $state->name, 'cityName' => $n, 'cityNameUrl' => $city->name, 'articleUrl' => $articleUrl, 'kindState' => 'city'];
+            }
+
             $features = PlaceFeatures::where('kindPlaceId', $kindPlaceId)->where('parent', 0)->get();
             foreach ($features as $feature)
                 $feature->subFeat = PlaceFeatures::where('parent', $feature->id)->where('type', 'YN')->get();
             $kind = $mode;
 
-            return view('places.list.list', compact(['features', 'meta', 'locationName', 'kindPlace', 'kind', 'kindPlaceId', 'mode', 'city', 'sections', 'placeMode', 'state']));
+            return view('places.list.list', compact(['features', 'meta', 'locationName', 'kindPlace', 'kind', 'kindPlaceId', 'mode', 'city', 'placeMode', 'state']));
         }
         else
             return \redirect(\url('/'));
@@ -3865,7 +3872,6 @@ class PlaceController extends Controller {
 
     public function getPlaceListElems(Request $request)
     {
-
         $page = (int)$request->pageNum;
         $take = (int)$request->take;
         $reqFilter = $request->featureFilter;
@@ -3890,7 +3896,9 @@ class PlaceController extends Controller {
         $rateActivityId = Activity::whereName('امتیاز')->first()->id;
 
         //first get all places in state or city
-        if($request->mode == 'state'){
+        if($request->mode == 'country')
+            $placeIds = DB::table($table)->where('name', 'LIKE', '%'.$nameFilter.'%')->pluck('id')->toArray();
+        else if($request->mode == 'state'){
             $cities = Cities::where('stateId', $request->city)->pluck('id')->toArray();
             $placeIds = DB::table($table)->whereIn('cityId', $cities)->where('name', 'LIKE', '%'.$nameFilter.'%')->pluck('id')->toArray();
         }

@@ -135,7 +135,7 @@
                                 </div>
                                 <div class="ui_columns datepicker_box trip_search metaDatePicker rounded_lockup usePickerTypeIcons preDates noDates with_children mainDivSearchInputMainPage">
                                     <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column is-4 search_typeahead wctx-tripsearch searchDivForScrollClass mainSearchDivPcSize">
-                                        <div onclick="openMainSearch(0)">به کجا می‌روید؟</div>
+                                        <div onclick="openMainSearch(0)" style="text-align: center; font-size: 25px;">به کجا می‌روید؟</div>
                                     </div>
                                     <div class="clear-both"></div>
                                 </div>

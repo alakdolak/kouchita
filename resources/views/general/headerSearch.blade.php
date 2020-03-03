@@ -5,7 +5,9 @@
             <i class="glyphicon glyphicon-triangle-bottom"></i>
         </div>
         <select class="inputBoxInput styled-select text-align-right mg-lt-10">
-            <option>استان {{$state->name}}</option>
+            @if(isset($state) && isset($state->name))
+                <option>استان {{$state->name}}</option>
+            @endif
         </select>
     </div>
     <span>در</span>

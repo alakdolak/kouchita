@@ -1689,8 +1689,8 @@ class HomeController extends Controller
 
             //Insert your cient ID and sexcret
             //You can get it from : https://console.developers.google.com/
-            $client_id = '774684902659-20aeg6um0856j5li2uuu9ombu2pcbqv9.apps.googleusercontent.com';
-            $client_secret = 'ARyU8-RXFJZD5jl5QawhpHne';
+            $client_id = '774684902659-1tdvb7r1v765b3dh7k5n7bu4gpilaepe.apps.googleusercontent.com';
+            $client_secret = '8NM4weptz-Pz-6gbolI5J0yi';
             $redirect_uri = route('loginWithGoogle');
 
             /************************************************
