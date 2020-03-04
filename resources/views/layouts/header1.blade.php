@@ -305,12 +305,6 @@ if(Auth::check()) {
 
 <link rel="stylesheet" href="{{URL::asset('css/common/header.css')}}">
 <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/header1.css')}}">
-<<<<<<< HEAD
-<meta name="google-signin-scope" content="profile email">
-<meta name="google-signin-client_id" content="774684902659-1tdvb7r1v765b3dh7k5n7bu4gpilaepe.apps.googleusercontent.com">
-<script src="https://apis.google.com/js/platform.js" async defer></script>
-=======
->>>>>>> 1f59ac54c45c8efc60ea8e25769a34a2bf0d4e7f
 
 <div class="masthead">
     <div id="taplc_global_nav_0" class="ppr_rup ppr_priv_global_nav">

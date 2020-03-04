@@ -283,34 +283,35 @@
 
         $('#recentlyRowMainSearch').html('');
 
-        for(i = 0; i < lastPages.length; i++){
-            var text = recentlyMainSearchSample;
-            var fk = Object.keys(lastPages[i]);
+        if(lastPages != null){
+            for(i = 0; i < lastPages.length; i++){
+                var text = recentlyMainSearchSample;
+                var fk = Object.keys(lastPages[i]);
 
-            var name = lastPages[i]['name'];
-            t = '##name##';
-            re = new RegExp(t, "g");
+                var name = lastPages[i]['name'];
+                t = '##name##';
+                re = new RegExp(t, "g");
 
-            if(lastPages[i]['kind'] == 'city')
-                name +=' در ' + lastPages[i]['state'];
-            else if(lastPages[i]['kind'] == 'place')
-                name +=' در ' + lastPages[i]['city'];
-            else if(lastPages[i]['kind'] == 'article')
-                name = 'مقاله ' + lastPages[i]['name'];
-            text = text.replace(re, name);
+                if(lastPages[i]['kind'] == 'city')
+                    name +=' در ' + lastPages[i]['state'];
+                else if(lastPages[i]['kind'] == 'place')
+                    name +=' در ' + lastPages[i]['city'];
+                else if(lastPages[i]['kind'] == 'article')
+                    name = 'مقاله ' + lastPages[i]['name'];
+                text = text.replace(re, name);
 
-            for (var x of fk) {
-                var t = '##' + x + '##';
-                var re = new RegExp(t, "g");
+                for (var x of fk) {
+                    var t = '##' + x + '##';
+                    var re = new RegExp(t, "g");
 
-                if(x == 'city' && lastPages[i]['state'] != '')
-                    text = text.replace(re, lastPages[i][x] + ' در ');
-                else
-                    text = text.replace(re, lastPages[i][x]);
+                    if(x == 'city' && lastPages[i]['state'] != '')
+                        text = text.replace(re, lastPages[i][x] + ' در ');
+                    else
+                        text = text.replace(re, lastPages[i][x]);
+                }
+
+                $('#recentlyRowMainSearch').append(text);
             }
-
-            $('#recentlyRowMainSearch').append(text);
         }
-
     }
 </script>
