@@ -3915,10 +3915,37 @@ class PlaceController extends Controller {
         }
 
         //special filters for each kind place
-        switch ($kindPlace->id){
-            case 4:
-                $placeIds = $this->hotelFilter($specialFilters, $placeIds);
-                break;
+
+        if($specialFilters != null) {
+            $kindValues = [];
+            $kindName = [];
+            if(is_array($specialFilters) && count($specialFilters) > 0) {
+                foreach ($specialFilters as $item){
+                    if($item != 0) {
+                        $index = array_search($item['kind'], $kindName);
+                        if ($index === false) {
+                            array_push($kindName, $item['kind']);
+                            array_push($kindValues, [$item['value']]);
+                        } else
+                            array_push($kindValues[$index], $item['value']);
+                    }
+                }
+
+                foreach ($kindName as $index => $value){
+                    $placeIds = DB::table($kindPlace->tableName)->whereIn($value, $kindValues[$index])->whereIn('id', $placeIds)->pluck('id')->toArray();
+                }
+            }
+//            switch ($kindPlace->id) {
+//                case 4:
+//                    $placeIds = $this->hotelFilter($specialFilters, $placeIds);
+//                    break;
+//                case 10:
+//                    $placeIds = $this->sogatSanaieFilter($specialFilters, $placeIds);
+//                    break;
+//                case 11:
+//                    $placeIds = $this->mahaliFoodFilter($specialFilters, $placeIds);
+//                    break;
+//            }
         }
         if(count($placeIds) == 0){
             echo json_encode(['places' => array()]);
@@ -4067,16 +4094,64 @@ class PlaceController extends Controller {
     }
 
     private function hotelFilter($specFilter, $placeIds){
-        $kindId = array();
+//        $kindId = array();
+//        if(is_array($specFilter) && count($specFilter) > 0) {
+//            foreach ($specFilter as $item) {
+//                if ($item != 0)
+//                    array_push($kindId, $item);
+//            }
+//            if (count($kindId) != 0)
+//                $placeIds = DB::table('hotels')->whereIn('id', $placeIds)->whereIn('kind_id', $kindId)->pluck('id')->toArray();
+//        }
+//        return $placeIds;
+        $kindValues = [];
+        $kindName = [];
         if(is_array($specFilter) && count($specFilter) > 0) {
-            foreach ($specFilter as $item) {
-                if ($item != 0)
-                    array_push($kindId, $item);
+            foreach ($specFilter as $item){
+                if($item != 0) {
+                    $index = array_search($item['kind'], $kindName);
+                    if ($index === false) {
+                        array_push($kindName, $item['kind']);
+                        array_push($kindValues, [$item['value']]);
+                    } else
+                        array_push($kindValues[$index], $item['value']);
+                }
             }
-            if (count($kindId) != 0)
-                $placeIds = DB::table('hotels')->whereIn('id', $placeIds)->whereIn('kind_id', $kindId)->pluck('id')->toArray();
+
+            foreach ($kindName as $index => $value){
+                $placeIds = Hotel::whereIn($value, $kindValues[$index])->whereIn('id', $placeIds)->pluck('id')->toArray();
+            }
         }
+
         return $placeIds;
+    }
+
+    private function sogatSanaieFilter($specFilter, $placeIds){
+
+        $kindValues = [];
+        $kindName = [];
+        if(is_array($specFilter) && count($specFilter) > 0) {
+            foreach ($specFilter as $item){
+                if($item != 0) {
+                    $index = array_search($item['kind'], $kindName);
+                    if ($index === false) {
+                        array_push($kindName, $item['kind']);
+                        array_push($kindValues, [$item['value']]);
+                    } else
+                        array_push($kindValues[$index], $item['value']);
+                }
+            }
+
+            foreach ($kindName as $index => $value){
+                $placeIds = SogatSanaie::whereIn($value, $kindValues[$index])->whereIn('id', $placeIds)->pluck('id')->toArray();
+            }
+        }
+
+        return $placeIds;
+    }
+
+    private function mahaliFoodFilter($specFilter, $placeIds){
+        dd($specFilter, $placeIds);
     }
 
 }

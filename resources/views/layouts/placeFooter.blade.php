@@ -492,7 +492,11 @@ $config = \App\models\ConfigModel::first()
                             </div>
 
                             @if($kindPlace->id == 4)
-                                @include('places.list.filters.hotelPhoneFilters')
+                                @include('places.list.filters.hotelFilters')
+                            @elseif($kindPlace->id == 10)
+                                @include('places.list.filters.sogatSanaieFilters')
+                            @elseif($kindPlace->id == 11)
+                                @include('places.list.filters.mahaliFoodFilters')
                             @endif
 
                             @foreach($features as $feature)

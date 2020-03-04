@@ -406,6 +406,10 @@
 
                                         @if($kindPlace->id == 4)
                                             @include('places.list.filters.hotelFilters')
+                                        @elseif($kindPlace->id == 10)
+                                            @include('places.list.filters.sogatSanaieFilters')
+                                        @elseif($kindPlace->id == 11)
+                                            @include('places.list.filters.mahaliFoodFilters')
                                         @endif
 
                                         @foreach($features as $feature)
@@ -502,7 +506,10 @@
     @endif
 
     if(placeMode == 'hotel'){
-        specialFilters = [1];
+        specialFilters = [{
+            'kind' : 'kind_id',
+            'value' : 1
+        }];
     }
 
     function selectingOrder(elem, type) {
@@ -555,7 +562,6 @@
         };
 
         $scope.myPagingFunction = function () {
-
             var errorNum = 3;
 
             if(isFinish || inSearch)
@@ -599,9 +605,6 @@
 
                 if (response.data != null && response.data.places != null && response.data.places.length > 0)
                     $scope.show = true;
-
-                // $scope.packets[$scope.packets.length] = response.data;
-                // $scope.packets[$scope.packets.length] = response.data.places;
 
                 for(j = 0; j < response.data.places.length; j++){
                     var k = $scope.packets.length;
@@ -744,17 +747,45 @@
         newSearch();
     }
 
-    function doKindFilter(value){
-        if(specialFilters.includes(value))
-            specialFilters[specialFilters.indexOf(value)] = 0;
-        else{
-            if(specialFilters.includes(0))
-                specialFilters[specialFilters.indexOf(0)] = value;
-            else
-                specialFilters[specialFilters.length] = value;
+    function doKindFilter(_kind, _value){
+
+        var is = false;
+
+        for(var i = 0; i < specialFilters.length; i++){
+            //this if for radioboxes
+            if((_kind == 'eatable' && specialFilters[i]['kind'] == 'eatable') || (_kind == 'fragile' && specialFilters[i]['kind'] == 'fragile') || (_kind == 'hotOrCold' && specialFilters[i]['kind'] == 'hotOrCold')){
+                specialFilters[i] = 0;
+                break;
+            }
+            else if(specialFilters[i]['kind'] == _kind && specialFilters[i]['value'] == _value){
+                specialFilters[i] = 0;
+                is = true;
+                break;
+            }
         }
 
-        newSearch();
+        if(!is){
+            var findZero = false;
+            for(i = 0; i < specialFilters.length; i++){
+                if(specialFilters[i] == 0){
+                    findZero = i+1;
+                    break;
+                }
+            }
+
+            if(!findZero)
+                findZero = specialFilters.length + 1;
+
+            specialFilters[findZero - 1] = {
+                'kind' : _kind,
+                'value' : _value
+            };
+        }
+
+        if(placeMode == 'sogatSanaies')
+            onlyForSogatSanaie(); // in sogatSanaieFilters
+        else
+            newSearch();
     }
 
     function rateFilterFunc(value){
@@ -802,10 +833,10 @@
 
         for(i = 0; i < specialFilters.length; i++){
             if(specialFilters[i] != 0) {
-                var name = document.getElementById('x' + specialFilters[i]).value;
+                var name = document.getElementById(specialFilters[i]['kind'] + specialFilters[i]['value']).value;
                 text += '<div class="filtersExist">\n' +
                         '<div>' + name + '</div>\n' +
-                        '<div onclick="cancelKindFilter(' + specialFilters[i] + ')" class="icons iconClose filterCloseIcon"></div>\n' +
+                        '<div onclick="cancelKindFilter(\'' + specialFilters[i]['kind'] + '\', \'' + specialFilters[i]['value'] + '\')" class="icons iconClose filterCloseIcon"></div>\n' +
                         '</div>';
             }
         }
@@ -813,25 +844,27 @@
         $('.filterShow').html(text);
     }
 
-    function cancelKindFilter(id, kind = 'refresh'){
-        if(id == 0){
+    function cancelKindFilter(_kind, _value, _ref = 'refresh'){
+        if(_kind == 0 && _value == 0){
             for(i = 0; i< specialFilters.length; i++){
-                if(specialFilters[i] != 0) {
-                    $('#x' + specialFilters[i]).prop("checked", false);
-                    $('#p_x' + specialFilters[i]).prop("checked", false);
-                }
+                if(specialFilters[i] != 0)
+                    $('.' + specialFilters[i]['kind'] + specialFilters[i]['value']).prop("checked", false);
             }
             specialFilters = [];
         }
         else {
-            if (specialFilters.includes(id)) {
-                specialFilters[specialFilters.indexOf(id)] = 0;
-                $('#x' + id).prop("checked", false);
-                $('#p_x' + id).prop("checked", false);
+            for(var i = 0; i < specialFilters.length; i++){
+                if(specialFilters[i]['kind'] == _kind && specialFilters[i]['value'] == _value) {
+                    $('.' + specialFilters[i]['kind'] + specialFilters[i]['value']).prop("checked", false);
+                    specialFilters[i] = 0;
+                    break;
+                }
             }
         }
 
-        if(kind == 'refresh')
+        if(placeMode == 'sogatSanaies' && _kind == 'eatable')
+            specialCancelSogataSanaiesFilters();
+        else if(_ref == 'refresh')
             newSearch();
     }
 
@@ -877,7 +910,7 @@
     function closeFilters(){
         cancelRateFilter('noRef');
         cancelFeatureFilter(0, 'noRef');
-        cancelKindFilter(0, 'noRef');
+        cancelKindFilter(0, 0, 'noRef');
         cancelNameFilter();
     }
 
