@@ -28,57 +28,6 @@
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/mainPageStyles.css')}}'/>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/abbreviations.css?v=1')}}'/>
 
-    <style>
-        .mainBannerSlider {
-            position: absolute;
-            top: 0;
-            width: 100%;
-            height: 450px;
-            margin-bottom: 40px;
-        }
-
-        .eachPicOfSlider {
-            width: 100%;
-        }
-
-        .textInSlideMain {
-            position: absolute;
-            left: 0px;
-            bottom: 0px;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, rgba(0, 0, 0, 0.6) 0%, transparent 70%);
-        }
-
-        .textInSlide {
-            position: absolute;
-            left: 10px;
-            bottom: 10px;
-            padding: 30px;
-            font-size: 20px;
-        }
-
-        .stateName {
-            font-size: 12px;
-            padding-right: 21px;
-        }
-        @font-face {
-            font-family: Shin;
-            src: url('{{URL::asset("fonts/shin.ttf")}}');
-        }
-        @font-face {
-            font-family: Afsane;
-            src: url('{{URL::asset("fonts/AFSANEH.ttf")}}');
-        }
-        .sliderText{
-            font-family: Afsane !important;
-            white-space: pre-wrap;
-            text-align: center;
-            display: flow-root;
-            line-height: 40px;
-        }
-    </style>
-
     {{--urls--}}
     <script>
         var searchDir = '{{route('totalSearch')}}';
@@ -125,8 +74,8 @@
                                 <div id="mainSlider" class="swiper-container backgroundColorForSlider">
                                     <div class="swiper-wrapper">
                                     @foreach($sliderPic as $item)
-                                        <div class="swiper-slide mobileHeight" style="position: relative; background: none;">
-                                            <img src="{{$item->pic}}" style="position: absolute; left: 0px; bottom: 0px">
+                                        <div class="swiper-slide mobileHeight imgOfSliderBox">
+                                            <img src="{{$item->pic}}" class="imgOfSlider">
                                         </div>
                                     @endforeach
                                     </div>
@@ -142,7 +91,7 @@
                                     </div>
                                     <div class="clear-both"></div>
                                 </div>
-                                <div style="position: absolute; right: 3%; top: 30%; z-index: 9; font-size: 35px">
+                                <div class="sliderTextBox">
                                     <div class="console-container">
                                         <span id='text' class="sliderText"></span>
                                     </div>
@@ -155,8 +104,8 @@
                                 <div id="mainSlider" class="swiper-container backgroundColorForSlider">
                                     <div class="swiper-wrapper">
                                         @foreach($sliderPic as $item)
-                                            <div class="swiper-slide mobileHeight" style="position: relative; background: none;">
-                                                <img src="{{$item->pic}}" style="position: absolute; left: 0px; bottom: 0px;">
+                                            <div class="swiper-slide mobileHeight imgOfSliderBox">
+                                                <img src="{{$item->pic}}" class="imgOfSlider">
                                             </div>
                                         @endforeach
                                     </div>

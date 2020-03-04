@@ -455,6 +455,16 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     justify-content: space-around;
 }
 
+div.prw_rup.prw_restaurants_restaurants_coverpage_content .item.name {
+    max-width: 200px;
+}
+
+@media (max-width: 450px) {
+    .eachPlace {
+        display: block;
+    }
+}
+
 @media (max-width: 768px) {
     #PlaceController {
         padding: 5px 15px !important;

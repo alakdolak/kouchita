@@ -367,7 +367,7 @@
 }
 .uploaderDlg .startScreen {
   /*border: 1px dashed #ccc;*/
-  margin-top: 50px;
+  margin-top: 10px;
 }
 
 .uploaderDlg .startScreen .separator {
@@ -398,9 +398,9 @@
 .uploaderDlg .startScreen .dragDropText {
   font-size: 14px;
   font-weight: bold;
-  height: 250px;
+  height: 200px;
   border: 2px dashed #9996;
-  margin: 20px 60px 20px;
+  margin: 20px 8%;
   padding-top: 20px;
 }
 
