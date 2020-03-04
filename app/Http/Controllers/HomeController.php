@@ -327,7 +327,7 @@ class HomeController extends Controller
             $place->listName = $place->name;
             $place->name = 'استان ' . $place->name;
             $articleUrl = \url('/article/list/state/' . $place->listName);
-            $locationName = ["name" => $place->name, 'cityName' => $place->listName, 'cityNameUrl' => $place->name, 'articleUrl' => $articleUrl, 'kindState' => 'state'];
+            $locationName = ["name" => $place->name, 'cityName' => $place->listName, 'cityNameUrl' => $place->name, 'articleUrl' => $articleUrl, 'kindState' => 'state', 'state' => $place->name];
 
             $allCities = Cities::where('stateId', $place->id)->pluck('id')->toArray();
 

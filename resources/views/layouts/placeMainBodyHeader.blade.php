@@ -4,150 +4,15 @@
 
         @include('general.secondHeader')
 
-        <div class="ui_container">
-            <div class="ui_columns easyClear">
-                <div class="ui_column direction-rtl position-relative">
-                    <center ID="taplc_trip_planner_breadcrumbs_0" class="ppr_rup ppr_priv_trip_planner_breadcrumbs">
-{{--                        @include('general.headerSearch')--}}
+        {{--<div class="ui_container">--}}
+            {{--<div class="ui_columns easyClear">--}}
+                {{--<div class="ui_column direction-rtl position-relative">--}}
+                    {{--<center ID="taplc_trip_planner_breadcrumbs_0" class="ppr_rup ppr_priv_trip_planner_breadcrumbs">--}}
+                    {{--</center>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+        {{--</div>--}}
 
-                        {{--                                                    <ul class="breadcrumbs">--}}
-{{--                                                        @if($placeMode == "hotel")--}}
-{{--                                                            <li class="breadcrumb" itemscope>--}}
-{{--                                                                <a class="link" {{($config->backToHotelListNoFollow) ? 'rel="nofollow"' : ''}}--}}
-{{--                                                                   href="{{route('hotelList', ['city' => $state->name, 'mode' => 'state'])}}"--}}
-{{--                                                                   itemprop="url">--}}
-{{--                                                                    <span itemprop="title">{{$state->name}}</span>--}}
-{{--                                                                </a>&nbsp--}}
-{{--                                                                <span class="ui_icon single-chevron-left"></span>&nbsp;--}}
-{{--                                                            </li>--}}
-{{--                                                            <li class="breadcrumb" itemscope>--}}
-{{--                                                                <a class="link" {{($config->backToHotelListNoFollow) ? 'rel="nofollow"' : ''}}--}}
-{{--                                                                   href="{{route('hotelList', ['city' => $city->name, 'mode' => 'city'])}}"--}}
-{{--                                                                   itemprop="url">--}}
-{{--                                                                    <span itemprop="title">{{$city->name}}</span>--}}
-{{--                                                                </a>&nbsp;--}}
-{{--                                                                <span class="ui_icon single-chevron-left"></span>&nbsp;--}}
-{{--                                                            </li>--}}
-{{--                                                            @if(Auth::check() && Auth::user()->level != 0)--}}
-{{--                                                                <li class="breadcrumb" itemscope>--}}
-{{--                                                                    <a class="link" target="_blank" {{($config->panelNoFollow) ? 'rel="nofollow"' : ''}}--}}
-{{--                                                                       href="http://panel.baligh.ir/changeAlt/{{$place->id}}/4"--}}
-{{--                                                                       itemprop="url">--}}
-{{--                                                                        <span itemprop="title">مدیریت alt ها و تصاویر</span>--}}
-{{--                                                                    </a>&nbsp;--}}
-{{--                                                                    <span class="ui_icon single-chevron-left"></span>&nbsp;--}}
-{{--                                                                </li>--}}
-{{--                                                                <li class="breadcrumb" itemscope>--}}
-{{--                                                                    <a class="link" target="_blank" {{($config->panelNoFollow) ? 'rel="nofollow"' : ''}}--}}
-{{--                                                                       href="http://panel.baligh.ir/changeContent/{{$city->id}}/4/1/{{$place->name}}"--}}
-{{--                                                                       itemprop="url">--}}
-{{--                                                                        <span itemprop="title">مدیریت محتوا</span>--}}
-{{--                                                                    </a>&nbsp;--}}
-{{--                                                                    <span class="ui_icon single-chevron-left"></span>&nbsp;--}}
-{{--                                                                </li>--}}
-{{--                                                                <li class="breadcrumb" itemscope>--}}
-{{--                                                                    <a class="link" target="_blank" {{($config->panelNoFollow) ? 'rel="nofollow"' : ''}}--}}
-{{--                                                                       href="http://panel.baligh.ir/changeSeo/{{$city->id}}/1/{{$place->name}}/4"--}}
-{{--                                                                       itemprop="url">--}}
-{{--                                                                        <span itemprop="title">مدیریت سئو</span>--}}
-{{--                                                                    </a>&nbsp;--}}
-{{--                                                                    <span class="ui_icon single-chevron-left"></span>&nbsp;--}}
-{{--                                                                </li>--}}
-{{--                                                            @endif--}}
-{{--                                                        @elseif($placeMode == "amaken")--}}
-{{--                                                            <li class="breadcrumb" itemscope>--}}
-{{--                                                                <a class="link" {{($config->backToHotelListNoFollow) ? 'rel="nofollow"' : ''}}--}}
-{{--                                                                   href="{{route('amakenList', ['city' => $state->name, 'mode' => 'state'])}}"--}}
-{{--                                                                   itemprop="url">--}}
-{{--                                                                    <span itemprop="title">{{$state->name}}</span>--}}
-{{--                                                                </a>&nbsp;--}}
-{{--                                                                <span class="ui_icon single-chevron-left"></span>&nbsp;--}}
-{{--                                                            </li>--}}
-{{--                                                            <li class="breadcrumb" itemscope>--}}
-{{--                                                                <a class="link" {{($config->backToHotelListNoFollow) ? 'rel="nofollow"' : ''}}--}}
-{{--                                                                   href="{{route('amakenList', ['city' => $city->name, 'mode' => 'city'])}}"--}}
-{{--                                                                   itemprop="url">--}}
-{{--                                                                    <span itemprop="title">{{$city->name}}</span>--}}
-{{--                                                                </a>&nbsp;--}}
-{{--                                                                <span class="ui_icon single-chevron-left"></span>&nbsp;--}}
-{{--                                                            </li>--}}
-{{--                                                            @if(Auth::check() && Auth::user()->level != 0)--}}
-
-{{--                                                                <li class="breadcrumb" itemscope>--}}
-{{--                                                                    <a class="link" target="_blank" {{($config->panelNoFollow) ? 'rel="nofollow"' : ''}}--}}
-{{--                                                                       href="http://panel.baligh.ir/changeAlt/{{$place->id}}/{{$kindPlaceId}}"--}}
-{{--                                                                       itemprop="url">--}}
-{{--                                                                        <span itemprop="title">مدیریت alt ها و تصاویر</span>--}}
-{{--                                                                    </a>&nbsp;--}}
-{{--                                                                    <span class="ui_icon single-chevron-left"></span>&nbsp;--}}
-{{--                                                                </li>--}}
-{{--                                                                <li class="breadcrumb" itemscope>--}}
-{{--                                                                    <a class="link" target="_blank" {{($config->panelNoFollow) ? 'rel="nofollow"' : ''}}--}}
-{{--                                                                       href="http://panel.baligh.ir/changeContent/{{$city->id}}/{{$kindPlaceId}}/1/{{$place->name}}"--}}
-{{--                                                                       itemprop="url">--}}
-{{--                                                                        <span itemprop="title">مدیریت محتوا</span>--}}
-{{--                                                                    </a>&nbsp;--}}
-{{--                                                                    <span class="ui_icon single-chevron-left"></span>&nbsp;--}}
-{{--                                                                </li>--}}
-{{--                                                                <li class="breadcrumb" itemscope>--}}
-{{--                                                                    <a class="link" target="_blank" {{($config->panelNoFollow) ? 'rel="nofollow"' : ''}}--}}
-{{--                                                                       href="http://panel.baligh.ir/changeSeo/{{$city->id}}/1/{{$place->name}}/{{$kindPlaceId}}"--}}
-{{--                                                                       itemprop="url">--}}
-{{--                                                                        <span itemprop="title">مدیریت سئو</span>--}}
-{{--                                                                    </a>&nbsp;--}}
-{{--                                                                    <span class="ui_icon single-chevron-left"></span>&nbsp;--}}
-{{--                                                                </li>--}}
-{{--                                                            @endif--}}
-{{--                                                        @else--}}
-{{--                                                            <li class="breadcrumb" itemscope>--}}
-{{--                                                                <a class="link" {{($config->backToHotelListNoFollow) ? 'rel="nofollow"' : ''}}--}}
-{{--                                                                   href="{{route('restaurantList', ['city' => $state->name, 'mode' => 'state'])}}"--}}
-{{--                                                                   itemprop="url">--}}
-{{--                                                                    <span itemprop="title">{{$state->name}}</span>--}}
-{{--                                                                </a>&nbsp;--}}
-{{--                                                                <span class="ui_icon single-chevron-left"></span>&nbsp;--}}
-{{--                                                            </li>--}}
-{{--                                                            <li class="breadcrumb" itemscope>--}}
-{{--                                                                <a class="link" {{($config->backToHotelListNoFollow) ? 'rel="nofollow"' : ''}}--}}
-{{--                                                                   href="{{route('restaurantList', ['city' => $city->name, 'mode' => 'city'])}}"--}}
-{{--                                                                   itemprop="url">--}}
-{{--                                                                    <span itemprop="title">{{$city->name}}</span>--}}
-{{--                                                                </a>&nbsp;--}}
-{{--                                                                <span class="ui_icon single-chevron-left"></span>&nbsp;--}}
-{{--                                                            </li>--}}
-
-{{--                                                            @if(Auth::check() && Auth::user()->level != 0)--}}
-{{--                                                                <li class="breadcrumb" itemscope>--}}
-{{--                                                                    <a class="link" target="_blank" {{($config->panelNoFollow) ? 'rel="nofollow"' : ''}}--}}
-{{--                                                                       href="http://panel.baligh.ir/changeAlt/{{$place->id}}/3"--}}
-{{--                                                                       itemprop="url">--}}
-{{--                                                                        <span itemprop="title">مدیریت alt ها و تصاویر</span>--}}
-{{--                                                                    </a>&nbsp;--}}
-{{--                                                                    <span class="ui_icon single-chevron-left"></span>&nbsp;--}}
-{{--                                                                </li>--}}
-{{--                                                                <li class="breadcrumb" itemscope>--}}
-{{--                                                                    <a class="link" target="_blank" {{($config->panelNoFollow) ? 'rel="nofollow"' : ''}}--}}
-{{--                                                                       href="http://panel.baligh.ir/changeContent/{{$city->id}}/3/1/{{$place->name}}"--}}
-{{--                                                                       itemprop="url">--}}
-{{--                                                                        <span itemprop="title">مدیریت محتوا</span>--}}
-{{--                                                                    </a>&nbsp;--}}
-{{--                                                                    <span class="ui_icon single-chevron-left"></span>&nbsp;--}}
-{{--                                                                </li>--}}
-{{--                                                                <li class="breadcrumb" itemscope>--}}
-{{--                                                                    <a class="link" target="_blank" {{($config->panelNoFollow) ? 'rel="nofollow"' : ''}}--}}
-{{--                                                                       href="http://panel.baligh.ir/changeSeo/{{$city->id}}/1/{{$place->name}}/3"--}}
-{{--                                                                       itemprop="url">--}}
-{{--                                                                        <span itemprop="title">مدیریت سئو</span>--}}
-{{--                                                                    </a>&nbsp;--}}
-{{--                                                                    <span class="ui_icon single-chevron-left"></span>&nbsp;--}}
-{{--                                                                </li>--}}
-{{--                                                            @endif--}}
-{{--                                                        @endif--}}
-{{--                                                    </ul>--}}
-                    </center>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 <div class="atf_header_wrapper position-relative">

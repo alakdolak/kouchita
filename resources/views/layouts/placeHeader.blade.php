@@ -350,7 +350,7 @@ if(Auth::check()) {
                                                 <span class="unscoped global-nav-link ui_tab color-whiteImp" onclick="openMainSearch(11)// in mainSearch.blade.php">غذای محلی‌</span>
                                             </li>
                                             <li>
-                                                <a href="{{route('soon')}}" class="unscoped global-nav-link ui_tab color-whiteImp">بوم گردی‌</a>
+                                                <a href="{{route('mainArticle')}}" class="unscoped global-nav-link ui_tab color-whiteImp">سفرنامه ها‌</a>
                                             </li>
                                         </ul>
                                     @endif

@@ -426,7 +426,7 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
 }
 
 .placeListHeader {
-    margin-top: 65px;
+    /*margin-top: 65px;*/
     position: relative;
 }
 
