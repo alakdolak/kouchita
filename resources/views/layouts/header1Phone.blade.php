@@ -8,7 +8,7 @@
                     <div class="ui_container global-nav-bar-container">
                         {{--<div class="menuIcon"></div>--}}
                         <a href="{{route('main')}}" class="global-nav-logo" >
-                            <img src="{{URL::asset('images/icons/mainIcon.png')}}" alt="کوچیتا" class="global-nav-img global-nav-svg"/>
+                            <img src="{{URL::asset('images/icons/mainLogo.png')}}" alt="کوچیتا" class="global-nav-img global-nav-svg"/>
                         </a>
                         {{--<span class="ui_icon search" onclick="$('#phoneProSearchPopUp').removeClass('hidden')"></span>--}}
                     </div>

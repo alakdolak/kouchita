@@ -889,7 +889,7 @@ $config = \App\models\ConfigModel::first()
 
                 <div class="hideOnScreen phoneFooterStyle">
                     <div class="phoneFooterLogo">
-                        <img src="{{URL::asset('images/logo.png')}}" class="content-icon" width="100%">
+                        <img src="{{URL::asset('images/icons/mainLogo.png')}}" class="content-icon" width="100%">
                     </div>
                     <div class="phoneDescription">
                         <div class="phoneDescriptionText">

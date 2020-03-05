@@ -310,49 +310,35 @@ if(Auth::check()) {
     <div id="taplc_global_nav_0" class="ppr_rup ppr_priv_global_nav">
         <div class="global-nav global-nav-single-line">
             <div class="global-nav-top">
-                <div class="global-nav-bar global-nav-green">
-                    <div class="ui_container global-nav-bar-container rtl" >
+                <div class="global-nav-bar global-nav-green" style="padding-top: 5px;">
+                    <div class="ui_container global-nav-bar-container rtl" style="padding: 0px 24px;">
                         <div class="global-nav-hamburger is-hidden-tablet">
                             <span class="ui_icon menu-bars"></span>
                         </div>
                         <a href="{{route('main')}}" class="global-nav-logo" style="display: flex; justify-content: center; align-items: center">
                             <img src="{{URL::asset('images/icons/mainLogo.png')}}" alt="کوچیتا" style="height: 70%; width: auto"/>
                         </a>
-
-                        <div class="global-nav-links ui_tabs inverted is-hidden-mobile">
-                            <div id="taplc_global_nav_links_0" class="ppr_rup ppr_priv_global_nav_links" data-placement-name="global_nav_links">
-                                <div class="global-nav-links-container">
-                                    <ul class="global-nav-links-menu headerMainList">
-                                        <li>
-                                            <span id="global-nav-hotels" class="unscoped global-nav-link ui_tab" onclick="openMainSearch(4)  // in mainSearch.blade.php" data-tracking-label="hotels">هتل</span>
-                                        </li>
-                                        <li>
-                                            <span id="global-nav-vr" class="unscoped global-nav-link ui_tab" onclick="openMainSearch(3)  // in mainSearch.blade.php">رستوران</span>
-                                        </li>
-                                        <li>
-                                            <span id="global-nav-restaurants" class="unscoped global-nav-link ui_tab" onclick="openMainSearch(1)  // in mainSearch.blade.php">جاذبه</span>
-                                        </li>
-                                        <li class="" data-element=".masthead-dropdown-Flights">
-                                            <span class="unscoped global-nav-link ui_tab " onclick="openMainSearch(10)  // in mainSearch.blade.php">سوغات و صنایع دستی</span>
-                                        </li>
-                                        <li class="" data-element=".masthead-dropdown-Flights">
-                                            <span class="unscoped global-nav-link ui_tab" onclick="openMainSearch(11)  // in mainSearch.blade.php">غذای محلی</span>
-                                        </li>
-                                        <li>
-                                            <a href="{{route('mainArticle')}}" class="unscoped global-nav-link ui_tab " data-tracking-label="Flights">سفرنامه ها</a>
-                                        </li>
-                                    </ul>
+                        <div style="width: 300px; height: 35px; background-color: lightgrey; border-radius: 4px">
+                            <div id="taplc_masthead_search_0" class="ppr_rup ppr_priv_masthead_search position-relative" data-placement-name="masthead_search">
+                                <div class="mag_glass_parent position-relative" title="Search">
+                                    <div id="targetHelp_6" class="targets">
+                                        <span class="ui_icon search" id="openSearch"></span>
+                                    </div>
                                 </div>
                             </div>
+
                         </div>
 
-                        <div class="global-nav-actions flex" >
+                        <div class="global-nav-actions flex" style="position: absolute; left: 0px;">
 
                             @if(Auth::check())
 
                                 <div class="ppr_rup ppr_priv_global_nav_action_trips">
-                                    <div id="bookmarkicon" class="ppr_rup ppr_priv_global_nav_action_profile"  title="نشانه گذاری شده ها">
-                                        <span class="ui_icon casino"></span>
+                                    <div id="bookmarkicon" class="ppr_rup ppr_priv_global_nav_action_profile"  title="نشانه گذاری شده ها" style="font-size: 10px">
+                                        <span class="ui_icon casino" style="justify-content: center"></span>
+                                        <div class="nameOfIconHeaders">
+                                            نشون کرده
+                                        </div>
                                     </div>
 
                                     <div id="bookmarkmenu" class="ui_overlay ui_flyout global-nav-flyout global-nav-utility trips-flyout-container" style="direction: rtl">
@@ -362,8 +348,7 @@ if(Auth::check()) {
                                                     <div class="recent-header-container">
                                                         <a class="recent-header" href="{{route('recentlyViewTotal')}}" target="_self"> نشانه گذاری شده ها </a>
                                                     </div>
-
-                                                    <div class="masthead-recent-cards-container" id="bookMarksDiv"></div>
+                                                    {{--<div class="masthead-recent-cards-container" id="bookMarksDiv"></div>--}}
 
                                                     {{--<div class="see-all-button-container"><a href="{{route('recentlyViewTotal')}}" target="_self" class="see-all-button">مشاهده تمامی موارد </a></div>--}}
                                                 </div>
@@ -371,14 +356,17 @@ if(Auth::check()) {
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
 
                                 <div class="ppr_rup ppr_priv_global_nav_action_trips">
                                     <div class="masthead-saves" title="سفرهای من">
-                                        <a class="trips-icon"  href="{{route('myTrips')}}">
-                                            <span class="ui_icon my-trips"></span>
+                                        <a class="trips-icon"  href="{{route('myTrips')}}" >
+                                            <span class="ui_icon my-trips" style="justify-content: center"></span>
+                                            <div class="nameOfIconHeaders">
+                                                سفرهای من
+                                            </div>
                                         </a>
+
                                     </div>
                                     {{--<div id="my-trips-not" class="ui_overlay ui_flyout global-nav-flyout global-nav-utility trips-flyout-container" style="direction: rtl">--}}
                                         {{--<div>--}}
@@ -459,25 +447,20 @@ if(Auth::check()) {
                                 <div class="ppr_rup ppr_priv_global_nav_action_trips">
                                     <div id="entryBtnId" class="ppr_rup ppr_priv_global_nav_action_profile">
                                         <div class="global-nav-profile global-nav-utility">
-                                            <a class="ui_button secondary small login-button" title="ورود / عضویت">عضویت / ورود</a>
+                                            <a class="ui_button secondary small login-button" title="ورود / ثبت نام" style="padding: 10px 20px; font-size: 20px; color: #eafbff; background-color: #0E3A46; border-radius: 10px; border: none;"> ورود / ثبت نام</a>
                                         </div>
                                     </div>
                                 </div>
                             @endif
-
-                            <div id="taplc_masthead_search_0" class="ppr_rup ppr_priv_masthead_search position-relative" data-placement-name="masthead_search">
-                                <div class="mag_glass_parent position-relative" title="Search">
-                                    <div id="targetHelp_6" class="targets">
-                                        <span class="ui_icon search" id="openSearch"></span>
-                                    </div>
-                                </div>
-                            </div>
 
                             @if(Auth::check())
                                 <div id="alertBtn" onclick="getAlertItems()" class="ppr_rup ppr_priv_global_nav_action_notif">
                                         <div class="masthead_notification" title="اعلانات">
                                             <div class="masthead_notifctr_btn">
                                                 <div class="masthead_notifctr_sprite ui_icon notification-bell"></div>
+                                                <div class="nameOfIconHeaders">
+                                                    پیام ها
+                                                </div>
                                                 <div id="alertPane" class="ui_jewel marked_for_attention">0</div>
                                                 <div id="alert" class="masthead_notifctr_dropdown hidden">
                                                     <div class="notifdd_title">پیام ها</div>
@@ -498,9 +481,12 @@ if(Auth::check()) {
                             <div class="ppr_rup ppr_priv_global_nav_action_profile">
                                 <div class="global-nav-profile global-nav-utility">
                                     @if(Auth::check())
-                                        <div class="global-nav-utility-activator" title="صفحه کاربری">
-                                            <span onclick="document.location.href = '{{route('profile')}}'" class="ui_icon member"></span>
-                                            <span id="memberTop" class="username">{{$user->username}}</span>
+                                        <div class="global-nav-utility-activator" title="صفحه کاربری" style="flex-direction: column;">
+                                            <span id="memberTop" class="ui_icon member" style="margin: 0px; justify-content: center"></span>
+                                            {{--<span id="memberTop" class="username"></span>--}}
+                                            <div class="nameOfIconHeaders">
+                                                {{$user->username}}
+                                            </div>
                                         </div>
                                     @endif
                                     <div id="profile-drop-mainDiv" class="global-nav-overlays-container">
@@ -536,6 +522,37 @@ if(Auth::check()) {
                         </div>
 
                         <div style="clear: both;"></div>
+                    </div>
+
+                    <div style="border-top: solid 1px lightgrey;">
+                        <div class="ui_container global-nav-bar-container rtl" style="height: auto">
+                            <div class="global-nav-links ui_tabs inverted is-hidden-mobile">
+                                <div id="taplc_global_nav_links_0" class="ppr_rup ppr_priv_global_nav_links" data-placement-name="global_nav_links">
+                                    <div class="global-nav-links-container">
+                                        <ul class="global-nav-links-menu headerMainList">
+                                            <li>
+                                                <span id="global-nav-hotels" class="unscoped global-nav-link ui_tab" onclick="openMainSearch(4)  // in mainSearch.blade.php" data-tracking-label="hotels">هتل</span>
+                                            </li>
+                                            <li>
+                                                <span id="global-nav-vr" class="unscoped global-nav-link ui_tab" onclick="openMainSearch(3)  // in mainSearch.blade.php">رستوران</span>
+                                            </li>
+                                            <li>
+                                                <span id="global-nav-restaurants" class="unscoped global-nav-link ui_tab" onclick="openMainSearch(1)  // in mainSearch.blade.php">جاذبه</span>
+                                            </li>
+                                            <li class="" data-element=".masthead-dropdown-Flights">
+                                                <span class="unscoped global-nav-link ui_tab " onclick="openMainSearch(10)  // in mainSearch.blade.php">سوغات و صنایع دستی</span>
+                                            </li>
+                                            <li class="" data-element=".masthead-dropdown-Flights">
+                                                <span class="unscoped global-nav-link ui_tab" onclick="openMainSearch(11)  // in mainSearch.blade.php">غذای محلی</span>
+                                            </li>
+                                            <li>
+                                                <a href="{{route('mainArticle')}}" class="unscoped global-nav-link ui_tab " data-tracking-label="Flights">سفرنامه ها</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -586,6 +603,7 @@ if(Auth::check()) {
     </div>
     <!--etk-->
 </div>
+
 
 @include('layouts.pop-up-create-trip')
 

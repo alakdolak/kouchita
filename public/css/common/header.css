@@ -119,6 +119,10 @@
 .subItemHeaderNavBar{
     list-style-type: none;
     margin: 10px 0px;
+    color: black;
+}
+.subItemHeaderNavBar > a{
+    color: black;
 }
 .subItemHeaderNavBar:hover > a{
     color: #4dc7bc !important;
