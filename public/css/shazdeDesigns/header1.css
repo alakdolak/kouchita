@@ -1,36 +1,13 @@
 
 /*header1 styles*/
 
-.bubble_40:after {
-    content: "\e00d\e00b\e00b\e00b\e00b" !important;
-}
-
-.bubble_30:after {
-    content: "\e00d\e00d\e00b\e00b\e00b" !important;
-}
-
-.bubble_20:after {
-    content: "\e00d\e00d\e00d\e00b\e00b" !important;
-}
-
-.bubble_10:after {
-    content: "\e00d\e00d\e00d\e00d\e00b" !important;
-}
-
-.photoviewerSidebarWrapper .captionArea {
-    direction: rtl !important;
-}
-
-.photoviewerSidebarWrapper .location {
-    text-align: center;
-}
 
 .glyphicon {
     font-family: 'Glyphicons Halflings' !important;
 }
 
 .headerMainList {
-    margin-bottom: 7px;
+    /*margin-bottom: 7px;*/
 }
 
 .redColor {
@@ -144,25 +121,6 @@ DIV.ppr_rup.ppr_priv_global_nav_action_inbox .ui_jewel {
     filter: drop-shadow(0 0 0 #999);
 }
 
-#profile-drop-mainDiv {
-    z-index: 1000000000000 !important;
-}
-
-#profile-drop {
-    display: none;
-    position: absolute;
-    bottom: auto;
-    z-index: 10000;
-    background: rgb(255, 255, 255) none repeat scroll 0% 0%;
-    padding: 0 18px;
-    left: -13px;
-    top: 43px;
-    box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.2);
-}
-
-DIV.ppr_rup.ppr_priv_global_nav .global-nav-logo img {
-    width: 50px;
-}
 
 DIV.ppr_rup.ppr_priv_global_nav .global-nav-bar-container {
     height: 70px;

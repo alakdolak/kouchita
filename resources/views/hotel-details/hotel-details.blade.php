@@ -13,28 +13,6 @@ if ($total == 0)
 @stop
 
 @section('meta')
-    <meta name="keywords" content="{{$place->keyword}}">
-    <meta property="og:description" content="{{$place->meta}}"/>
-    <meta property="article:tag" content="{{$place->tag1}}"/>
-    <meta property="article:tag" content="{{$place->tag2}}"/>
-    <meta property="article:tag" content="{{$place->tag3}}"/>
-    <meta property="article:tag" content="{{$place->tag4}}"/>
-    <meta property="article:tag" content="{{$place->tag5}}"/>
-    <meta property="article:tag" content="{{$place->tag6}}"/>
-    <meta property="article:tag" content="{{$place->tag7}}"/>
-    <meta property="article:tag" content="{{$place->tag8}}"/>
-    <meta property="article:tag" content="{{$place->tag9}}"/>
-    <meta property="article:tag" content="{{$place->tag10}}"/>
-    <meta property="article:tag" content="{{$place->tag11}}"/>
-    <meta property="article:tag" content="{{$place->tag12}}"/>
-    <meta property="article:tag" content="{{$place->tag13}}"/>
-    <meta property="article:tag" content="{{$place->tag14}}"/>
-    <meta property="article:tag" content="{{$place->tag15}}"/>
-    <meta name="twitter:card" content="summary_large_image"/>
-    <meta name="twitter:description" content="{{$place->meta}}"/>
-    <meta name="twitter:title" content="{{$place->keyword}} | {{$city->name}}"/>
-    <meta property="og:url" content="{{Request::url()}}"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     @if(count($photos) > 0)
         <meta property="og:image" content="{{$photos[0]}}"/>
         <meta property="og:image:secure_url" content="{{$photos[0]}}"/>
@@ -43,7 +21,27 @@ if ($total == 0)
         <meta name="twitter:image" content="{{$photos[0]}}"/>
     @endif
     <meta content="article" property="og:type"/>
-    <meta property="og:title" content="{{$place->name}} | {{$city->name}} | شازده مسافر"/>
+    <meta property="og:title" content="{{$place->name}} | {{$city->name}} | کوچیتا"/>
+    <meta name="twitter:card" content="{{$place->meta}}" />
+    <meta name="twitter:description" content="{{$place->meta}}" />
+    <meta name="twitter:title" content="{{$place->name}} | {{$city->name}} | کوچیتا" />
+    @if(isset($place->C) && isset($place->D))
+        <META NAME="geo.position" CONTENT="{{$place->C}}; {{$place->D}}">
+    @endif
+
+    <meta property="article:section" content="{{$placeMode}}" />
+    {{--<meta property="article:published_time" content="2019-05-28T13:32:55+00:00" /> زمان انتشار--}}
+    {{--<meta property="article:modified_time" content="2020-01-14T10:43:11+00:00" />زمان آخریت تغییر--}}
+    {{--<meta property="og:updated_time" content="2020-01-14T10:43:11+00:00" /> زمان آخرین آپدیت--}}
+    <meta property=" article:author " content="کوچیتا" />
+
+    <meta name="keywords" content="{{$place->keyword}}">
+    <meta property="og:description" content="{{$place->meta}}"/>
+    @foreach($place->tags as $item)
+        <meta property="article:tag" content="{{$item}}"/>
+    @endforeach
+    <meta property="og:url" content="{{Request::url()}}"/>
+
 @stop
 
 @section('header')
@@ -102,7 +100,6 @@ if ($total == 0)
         var photographerPics = {!! $photographerPicsJSON !!};
         var sitePics = {!! $sitePicsJSON !!};
         var hotelDetails;
-        var hotelDetailsInBookMarkMode;
         var hotelDetailsInAskQuestionMode;
         var hotelDetailsInAnsMode;
         var hotelDetailsInSaveToTripMode;
@@ -176,8 +173,6 @@ if ($total == 0)
     </span>
 
 
-
-
     <div class="ppr_rup ppr_priv_hr_atf_north_star_nostalgic position-relative">
 
         @include('layouts.placeMainBodyHeader')
@@ -219,7 +214,7 @@ if ($total == 0)
                                                       placeholder="{{auth()->user()->first_name ? auth()->user()->first_name :auth()->user()->username }}، چه فکر یا احساسی داری.....؟"
                                                        style="overflow:hidden"></textarea>
                                         @endif
-                                        <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
+                                        <img class="commentSmileyIcon" src="{{URL::asset("images/smile.png")}}">
                                     </div>
                                     <div class="clear-both"></div>
                                     <div class="row">
@@ -297,6 +292,7 @@ if ($total == 0)
                                                 </label>
                                                 <input id="radioAns_{{$item->id}}_{{$item->ans[$i]->id}}"
                                                        value="{{$item->ans[$i]->id}}"
+                                                       name="radioAnsName_{{$item->id}}"
                                                        onchange="radioChange(this.value, {{$item->id}}, {{$index}}, {{$item->ans[$i]->id}})"
                                                        type="radio" style="display: none">
                                             @endfor
@@ -488,8 +484,6 @@ if ($total == 0)
 
                     </div>
                 </div>
-
-                @include('hotel-details.modalPhotos')
 
                 <div id="bestPrice" class="meta position-relative"
                      style="@if(session('goDate') != null && session('backDate') != null) display: none @endif ">
@@ -776,10 +770,7 @@ if ($total == 0)
                                 <div class="prw_rup prw_common_mercury_photo_carousel">
                                     <div class="carousel bignav">
                                         <div class="carousel_images carousel_images_header">
-                                            <div id="photographerAlbum" data-toggle="modal"
-                                                 data-target="#showingPhotographerPicsModal"
-                                                 onclick="changePhotographerSlidePic(0)">
-
+                                            <div id="photographerAlbum" onclick="showPhotoAlbum('photographer')">
                                                 <div id="mainSlider" class="swiper-container">
                                                     <div class="swiper-wrapper">
 
@@ -790,13 +781,10 @@ if ($total == 0)
                                                                      alt="{{$photographerPics[$i]['alt']}}"
                                                                      style="width: 100%;">
 
-                                                                <div class="see_all_count_wrap" onclick="getPhotos(-1)">
+                                                                <div class="see_all_count_wrap">
                                                                     <span class="see_all_count">
-                                                                        <div class="circleBase type2"
-                                                                             id="photographerIdPic"
-                                                                             style="background-color: #4DC7BC;">
-                                                                            <img src="{{$photographerPics[$i]['userPic']}}"
-                                                                                 style="width: 100%; height: 100%; border-radius: 50%;">
+                                                                        <div class="circleBase type2" id="photographerIdPic" style="background-color: #4DC7BC;">
+                                                                            <img src="{{$photographerPics[$i]['userPic']}}" style="width: 100%; height: 100%; border-radius: 50%;">
                                                                         </div>
                                                                         <div class="display-inline-block mg-rt-10 mg-tp-2">
                                                                             <span class="display-block font-size-12">عکس از</span>
@@ -843,9 +831,8 @@ if ($total == 0)
                                         <div class="albumThumbnail">
                                             <div class="prw_rup prw_common_centered_image">
                                                 @if(count($sitePics) != 0)
-                                                    <span class="imgWrap imgWrap1stTemp" data-toggle="modal"
-                                                          data-target="#showingSitePicsModal">
-                                                        <img alt="{{$place->alt1}}" src="{{$thumbnail}}"
+                                                    <span class="imgWrap imgWrap1stTemp" onclick="showPhotoAlbum('sitePics')">
+                                                        <img alt="{{$place->alt}}" src="{{$thumbnail}}"
                                                              class="centeredImg" width="100%"/>
                                                     </span>
                                                 @else
@@ -871,14 +858,14 @@ if ($total == 0)
                                     <div class="prw_rup prw_hotels_flexible_album_thumb tile">
                                         <div class="albumThumbnail">
                                             <div class="prw_rup prw_common_centered_image"
-                                                    {{(count($userPhotos) != 0) ? ' data-toggle=modal data-target=#showingUserPicsModal' : "" }}>
+                                                    {{(count($userPhotos) != 0) ? 'onclick=showPhotoAlbum("userPics")' : "" }}>
                                                 <span class="imgWrap imgWrap1stTemp">
                                                     @if(count($userPhotos) != 0)
                                                         <img src="{{$userPhotos[0]->pic}}" class="centeredImg" width="100%"/>
                                                     @endif
                                                 </span>
                                             </div>
-                                            <div {{(count($userPhotos) != 0) ? ' data-toggle=modal data-target=#showingUserPicsModal' : "" }}  class="albumInfo">
+                                            <div {{(count($userPhotos) != 0) ? 'onclick=showPhotoAlbum("userPics")' : "" }}  class="albumInfo">
                                                 <span class="ui_icon camera">&nbsp;</span>عکس‌های
                                                 کاربران - {{count($userPhotos)}}
                                             </div>
@@ -931,7 +918,7 @@ if ($total == 0)
                                         <textarea class="inputBoxInput inputBoxInputComment" type="text"
                                                   placeholder=" چه فکر یا احساسی داری.....؟" onclick="newPostModal('textarea')" readonly></textarea>
                                     @endif
-                                    <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
+                                    <img class="commentSmileyIcon" src="{{URL::asset('images/smile.png')}}">
                                 </div>
                             </div>
                             <div class="commentMoreSettingBar">
@@ -1082,7 +1069,7 @@ if ($total == 0)
                                             }
                                         ?>
 
-                                        @if($placeMode == 'mahalifood')
+                                        @if($placeMode == 'mahaliFood')
                                             <div class="ui_columns is-multiline is-mobile reviewsAndDetails direction-rtlImp">
 
                                                 <div id="generalDescriptionMobile"
@@ -1092,14 +1079,16 @@ if ($total == 0)
                                                     </div>
                                                     <div>
                                                         <div class="row">
-                                                            @foreach($place->material as $item)
-                                                                <div class="col-sm-6 float-right">
-                                                                    <div class="row font-size-20">
-                                                                        <div class="col-sm-6">{{$item[1]}}</div>
-                                                                        <div class="col-sm-6" style="color: #4dc7bc">{{$item[0]}}</div>
+                                                            @if(isset($place->material) && is_array($place->material))
+                                                                @foreach($place->material as $item)
+                                                                    <div class="col-sm-6 float-right">
+                                                                        <div class="row font-size-20">
+                                                                            <div class="col-sm-6">{{$item[1]}}</div>
+                                                                            <div class="col-sm-6" style="color: #4dc7bc">{{$item[0]}}</div>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                            @endforeach
+                                                                @endforeach
+                                                            @endif
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1128,27 +1117,9 @@ if ($total == 0)
                                                         </div>
                                                         <span class="overallRating">{{$avgRate}} </span>
                                                         <div class="prw_rup prw_common_bubble_rating overallBubbleRating">
-                                                            @if($avgRate == 5)
-                                                                <span class="ui_bubble_rating bubble_50 font-size-28"
-                                                                      property="ratingValue" content="5"
-                                                                      alt='5 of 5 bubbles'></span>
-                                                            @elseif($avgRate == 4)
-                                                                <span class="ui_bubble_rating bubble_40 font-size-28"
-                                                                      property="ratingValue" content="4"
-                                                                      alt='4 of 5 bubbles'></span>
-                                                            @elseif($avgRate == 3)
-                                                                <span class="ui_bubble_rating bubble_30 font-size-28"
-                                                                      property="ratingValue" content="3"
-                                                                      alt='3 of 5 bubbles'></span>
-                                                            @elseif($avgRate == 2)
-                                                                <span class="ui_bubble_rating bubble_20 font-size-28"
-                                                                      property="ratingValue" content="2"
-                                                                      alt='2 of 5 bubbles'></span>
-                                                            @elseif($avgRate == 1)
-                                                                <span class="ui_bubble_rating bubble_10 font-size-28"
-                                                                      property="ratingValue" content="1"
-                                                                      alt='1 of 5 bubbles'></span>
-                                                            @endif
+                                                            <span class="ui_bubble_rating bubble_{{$avgRate}}0 font-size-28"
+                                                                  property="ratingValue" content="{{$avgRate}}"
+                                                                  alt='{{$avgRate}} of 5 bubbles'></span>
                                                         </div>
                                                         <a class="seeAllReviews autoResize" href="#REVIEWS"></a>
                                                     </div>
@@ -1213,21 +1184,9 @@ if ($total == 0)
                                                     </div>
                                                     <div id="tagsName">
                                                         <h3>برچسب‌ها:</h3>
-                                                        <span class="tag">{{$place->tag1}}</span>
-                                                        <span class="tag">{{$place->tag2}}</span>
-                                                        <span class="tag">{{$place->tag3}}</span>
-                                                        <span class="tag">{{$place->tag4}}</span>
-                                                        <span class="tag">{{$place->tag5}}</span>
-                                                        <span class="tag">{{$place->tag6}}</span>
-                                                        <span class="tag">{{$place->tag7}}</span>
-                                                        <span class="tag">{{$place->tag8}}</span>
-                                                        <span class="tag">{{$place->tag9}}</span>
-                                                        <span class="tag">{{$place->tag10}}</span>
-                                                        <span class="tag">{{$place->tag11}}</span>
-                                                        <span class="tag">{{$place->tag12}}</span>
-                                                        <span class="tag">{{$place->tag13}}</span>
-                                                        <span class="tag">{{$place->tag14}}</span>
-                                                        <span class="tag">{{$place->tag15}}</span>
+                                                        @foreach($place->tags as $item)
+                                                            <span class="tag">{{$item}}</span>
+                                                        @endforeach
                                                     </div>
                                                 </div>
 
@@ -1248,7 +1207,7 @@ if ($total == 0)
                                                     <div class="direction-rtl">
                                                         <?php $k = -1; ?>
 
-                                                        @if($placeMode == "hotel")
+                                                        @if($placeMode == "hotels")
                                                             @include('hotel-details.tables.hotel-details-table')
                                                         @elseif($placeMode == "amaken")
                                                             @include('hotel-details.tables.amaken-details-table')
@@ -1256,7 +1215,7 @@ if ($total == 0)
                                                             @include('hotel-details.tables.restaurant-details-table')
                                                         @elseif($placeMode == "majara")
                                                             @include('hotel-details.tables.majara-details-table')
-                                                        @elseif($placeMode == "sogatsanaie")
+                                                        @elseif($placeMode == "sogatSanaies")
                                                             @include('hotel-details.tables.sogatsanaie-details-table')
                                                         @endif
                                                     </div>
@@ -1269,27 +1228,7 @@ if ($total == 0)
                                                         </div>
                                                         <span class="overallRating">{{$avgRate}} </span>
                                                         <div class="prw_rup prw_common_bubble_rating overallBubbleRating">
-                                                            @if($avgRate == 5)
-                                                                <span class="ui_bubble_rating bubble_50 font-size-28"
-                                                                      property="ratingValue" content="5"
-                                                                      alt='5 of 5 bubbles'></span>
-                                                            @elseif($avgRate == 4)
-                                                                <span class="ui_bubble_rating bubble_40 font-size-28"
-                                                                      property="ratingValue" content="4"
-                                                                      alt='4 of 5 bubbles'></span>
-                                                            @elseif($avgRate == 3)
-                                                                <span class="ui_bubble_rating bubble_30 font-size-28"
-                                                                      property="ratingValue" content="3"
-                                                                      alt='3 of 5 bubbles'></span>
-                                                            @elseif($avgRate == 2)
-                                                                <span class="ui_bubble_rating bubble_20 font-size-28"
-                                                                      property="ratingValue" content="2"
-                                                                      alt='2 of 5 bubbles'></span>
-                                                            @elseif($avgRate == 1)
-                                                                <span class="ui_bubble_rating bubble_10 font-size-28"
-                                                                      property="ratingValue" content="1"
-                                                                      alt='1 of 5 bubbles'></span>
-                                                            @endif
+                                                            <span class="ui_bubble_rating bubble_{{$avgRate}}0 font-size-28" property="ratingValue" content="{{$avgRate}}" alt='{{$avgRate}} of 5 bubbles'></span>
                                                         </div>
                                                         <a class="seeAllReviews autoResize" href="#REVIEWS"></a>
                                                     </div>
@@ -1356,8 +1295,13 @@ if ($total == 0)
                                                          id="clientConnectionsLines">
                                                         <div class="blEntry address mg-bt-10" id="clientConnectionsAddress">
                                                             <span class="ui_icon map-pin"></span>
-                                                            <span class="street-address">آدرس : </span>
-                                                            <span>{{$place->address}}</span>
+                                                            @if($placeMode != 'mahaliFood' && $placeMode != 'sogatSanaies' && $placeMode != 'majara')
+                                                                <span class="street-address">آدرس : </span>
+                                                                <span>{{$place->address}}</span>
+                                                            @elseif( $placeMode == 'majara')
+                                                                <span class="street-address">آدرس : </span>
+                                                                <span>{{$place->dastresi}}</span>
+                                                            @endif
                                                         </div>
                                                         @if(!empty($place->phone))
                                                             <div class="blEntry phone mg-bt-10" id="clientConnectionsPhone">
@@ -1382,32 +1326,18 @@ if ($total == 0)
                                                     </div>
                                                     <div id="tagsName">
                                                         <h3>برچسب‌ها:</h3>
-                                                        <span class="tag">{{$place->tag1}}</span>
-                                                        <span class="tag">{{$place->tag2}}</span>
-                                                        <span class="tag">{{$place->tag3}}</span>
-                                                        <span class="tag">{{$place->tag4}}</span>
-                                                        <span class="tag">{{$place->tag5}}</span>
-                                                        <span class="tag">{{$place->tag6}}</span>
-                                                        <span class="tag">{{$place->tag7}}</span>
-                                                        <span class="tag">{{$place->tag8}}</span>
-                                                        <span class="tag">{{$place->tag9}}</span>
-                                                        <span class="tag">{{$place->tag10}}</span>
-                                                        <span class="tag">{{$place->tag11}}</span>
-                                                        <span class="tag">{{$place->tag12}}</span>
-                                                        <span class="tag">{{$place->tag13}}</span>
-                                                        <span class="tag">{{$place->tag14}}</span>
-                                                        <span class="tag">{{$place->tag15}}</span>
+                                                        @foreach($place->tags as $item)
+                                                            <span class="tag">{{$item}}</span>
+                                                        @endforeach
                                                     </div>
                                                 </div>
                                             </div>
-
-
-                                            @if($placeMode != 'sogatsanaie')
+                                            @if($placeMode != 'sogatSanaies')
                                                 @include('hotel-details.mapSection')
                                             @endif
                                         @endif
 
-                                        @include('layouts.extendedMap')
+                                        {{--@include('layouts.extendedMap')--}}
                                     </div>
                                 </div>
                             </div>
@@ -1747,8 +1677,7 @@ if ($total == 0)
                             @include('hotel-details.filterSection')
 
                             <center id="advertiseDiv" class="col-xs-12 adsMainDiv">
-                                <div class="adsMainDivHeader">تبلیغات</div>
-                                <img src="{{"../../../public/images/Chromite.jpg"}}" alt="">
+{{--                                @include('features.advertise3D')--}}
                             </center>
                         </div>
 
@@ -1760,7 +1689,7 @@ if ($total == 0)
                 @include('hotel-details.questionSection')
             </div>
 
-                @if($placeMode != 'sogatsanaie' && $placeMode != 'mahalifood')
+                @if($placeMode != 'sogatSanaies' && $placeMode != 'mahaliFood')
                     @include('hotel-details.similarLocation')
                 @endif
             </div>
@@ -1797,7 +1726,7 @@ if ($total == 0)
                         <video id="my-video" class="video-js vjs-default-skin" controls style=" max-height: 80vh;">
                             <source src="{{URL::asset('vr2/contents/' . $video)}}" type="video/mp4">
                         </video>
-                        {{--                            ویدیویی برای نمایش موجود--}}
+                                                    {{--ویدیویی برای نمایش موجود--}}
                     </div>
                 </div>
             </div>
@@ -2079,6 +2008,66 @@ if ($total == 0)
     </script>
 
     <script>
+        var photographerPicsForAlbum = [];
+        var sitePicsForAlbum = [];
+        var userPhotosForAlbum = [];
+
+        for(var i = 0; i < photographerPics.length; i++){
+            photographerPicsForAlbum[i] = {
+                'id' : photographerPics[i]['id'],
+                'sidePic' : photographerPics[i]['l'],
+                'mainPic' : photographerPics[i]['s'],
+                'userPic' : photographerPics[i]['userPic'],
+                'userName' : photographerPics[i]['name'],
+                'like' : photographerPics[i]['like'],
+                'dislike' : photographerPics[i]['dislike'],
+                'alt' : photographerPics[i]['alt'],
+                'description' : photographerPics[i]['description'],
+                'uploadTime' : photographerPics[i]['fromUpload'],
+                'showInfo' : photographerPics[i]['showInfo'],
+                'likeFunc' : 'likePhotographerPic',
+                'disLikeFunc' : 'likePhotographerPic',
+                'userLike' : photographerPics[i]['userLike'],
+            }
+        }
+
+        for(var i = 0; i < sitePics.length; i++){
+            sitePicsForAlbum[i] = {
+                'id' : sitePics[i]['id'],
+                'sidePic' : sitePics[i]['l'],
+                'mainPic' : sitePics[i]['s'],
+                'userPic' : sitePics[i]['userPic'],
+                'userName' : sitePics[i]['name'],
+                'like' : sitePics[i]['like'],
+                'dislike' : sitePics[i]['dislike'],
+                'alt' : sitePics[i]['alt'],
+                'description' : sitePics[i]['description'],
+                'uploadTime' : sitePics[i]['fromUpload'],
+                'showInfo' : sitePics[i]['showInfo'],
+                'userLike' : sitePics[i]['userLike'],
+            }
+        }
+
+        for(var i = 0; i < userPhotos.length; i++){
+            userPhotosForAlbum[i] = {
+                'id' : userPhotos[i]['id'],
+                'sidePic' : userPhotos[i]['pic'],
+                'mainPic' : userPhotos[i]['pic'],
+                'userPic' : userPhotos[i]['userPic'],
+                'userName' : userPhotos[i]['username'],
+                'showInfo' : false,
+            }
+        }
+
+        function showPhotoAlbum(_kind){
+            if(_kind == 'photographer')
+                createPhotoModal('عکس های عکاسان', photographerPicsForAlbum);
+            else if(_kind == 'sitePics')
+                createPhotoModal('عکس های سایت', sitePicsForAlbum);
+            else if(_kind == 'userPics')
+                createPhotoModal('عکس های کاربران', userPhotosForAlbum);
+        }
+
         function openTab(tabName, elmnt, fontColor) {
             var i, tabcontent, tablinks;
             tabcontent = document.getElementsByClassName("tabContentMainWrap");
@@ -2108,35 +2097,6 @@ if ($total == 0)
 
         for (i = 0; i < rateQuestion.length; i++)
             rateQuestionAns[i] = 2;
-
-        if (placeMode == "hotel") {
-            hotelDetails = '{{route('hotelDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';
-            hotelDetailsInBookMarkMode = '{{route('hotelDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'bookMark'])}}';
-            hotelDetailsInAskQuestionMode = '{{route('hotelDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'question'])}}';
-            hotelDetailsInAnsMode = '{{route('hotelDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'ans'])}}';
-            hotelDetailsInSaveToTripMode = '{{route('hotelDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'saveToTrip'])}}';
-        }
-        else if (placeMode == "restaurant") {
-            hotelDetails = '{{route('restaurantDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';
-            hotelDetailsInBookMarkMode = '{{route('restaurantDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'bookMark'])}}';
-            hotelDetailsInAskQuestionMode = '{{route('restaurantDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'question'])}}';
-            hotelDetailsInAnsMode = '{{route('restaurantDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'ans'])}}';
-            hotelDetailsInSaveToTripMode = '{{route('restaurantDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'saveToTrip'])}}';
-        }
-        else if (placeMode == "amaken") {
-            hotelDetails = '{{route('amakenDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';
-            hotelDetailsInBookMarkMode = '{{route('amakenDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'bookMark'])}}';
-            hotelDetailsInAskQuestionMode = '{{route('amakenDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'question'])}}';
-            hotelDetailsInAnsMode = '{{route('amakenDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'ans'])}}';
-            hotelDetailsInSaveToTripMode = '{{route('amakenDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'saveToTrip'])}}';
-        }
-        else {
-            hotelDetails = '{{route('majaraDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';
-            hotelDetailsInBookMarkMode = '{{route('majaraDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'bookMark'])}}';
-            hotelDetailsInAskQuestionMode = '{{route('majaraDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'question'])}}';
-            hotelDetailsInAnsMode = '{{route('majaraDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'ans'])}}';
-            hotelDetailsInSaveToTripMode = '{{route('majaraDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'saveToTrip'])}}';
-        }
     </script>
 
     @include('layouts.pop-up-create-trip_in_hotel_details')
@@ -2144,13 +2104,7 @@ if ($total == 0)
     <script>
         $(document).ready(function () {
             $('.login-button').click(function () {
-                var url;
-                if (placeMode == "hotel")
-                    url = '{{route('hotelDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';
-                else if (placeMode == "amaken")
-                    url = '{{route('amakenDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';
-                else
-                    url = '{{route('restaurantDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';
+                var url = '{{Request::url()}}';
                 $(".dark").show();
                 showLoginPrompt(url);
             });
@@ -2433,258 +2387,6 @@ if ($total == 0)
     </script>
 
     <script>
-        var room = 0;
-        var adult = 0;
-        var children = 0;
-        @if(session('room') != null)
-            room = parseInt('{{session('room')}}');
-        adult = parseInt('{{session('adult')}}');
-        children = parseInt('{{session('children')}}');
-                @endif
-        var passengerNoSelect = false;
-        $(".room").html(room);
-        $(".adult").html(adult);
-        $(".children").html(children);
-        for (var i = 0; i < children; i++) {
-            $(".childBox").append("" +
-                "<div class='childAge' data-id='" + i + "'>" +
-                "<div>سن بچه</div>" +
-                "<div><select class='selectAgeChild' name='ageOfChild' id='ageOfChild'>" +
-                "<option value='0'>1<</option>" +
-                "<option value='1'>1</option>" +
-                "<option value='2'>2</option>" +
-                "<option value='3'>3</option>" +
-                "<option value='4'>4</option>" +
-                "<option value='5'>5</option>" +
-                "</select></div>" +
-                "</div>");
-        }
-
-        function togglePassengerNoSelectPane() {
-            if (!passengerNoSelect) {
-                passengerNoSelect = true;
-                $("#passengerNoSelectPane").removeClass('hidden');
-                $("#passengerNoSelectPane1").removeClass('hidden');
-                $("#passengerArrowUp").removeClass('hidden');
-                $("#passengerArrowDown").addClass('hidden');
-            }
-            else {
-                $("#passengerNoSelectPane").addClass('hidden');
-                $("#passengerNoSelectPane1").addClass('hidden');
-                $("#passengerArrowDown").removeClass('hidden');
-                $("#passengerArrowUp").addClass('hidden');
-                passengerNoSelect = false;
-            }
-        }
-
-        function addClassHidden(element) {
-            $("#" + element).addClass('hidden');
-            if (element == 'passengerNoSelectPane' || element == 'passengerNoSelectPane1') {
-                $("#passengerArrowDown").removeClass('hidden');
-                $("#passengerArrowUp").addClass('hidden');
-            }
-        }
-
-        function changeRoomPassengersNum(inc, mode) {
-            switch (mode) {
-                case 3:
-                default:
-                    if (room + inc >= 0)
-                        room += inc;
-
-                    if (room > 0 && adult == 0) {
-                        adult = 1;
-                        $("#adultPassengerNumInSelect").empty().append(adult);
-                        $("#adultPassengerNumInSelect1").empty().append(adult);
-                    }
-
-                    $("#roomNumInSelect").empty().append(room);
-                    $("#roomNumInSelect1").empty().append(room);
-                    break;
-                case 2:
-                    if (adult + inc >= 0)
-                        adult += inc;
-                    $("#adultPassengerNumInSelect").empty().append(adult);
-                    $("#adultPassengerNumInSelect1").empty().append(adult);
-                    break;
-                case 1:
-                    if (children + inc >= 0)
-                        children += inc;
-                    if (inc >= 0) {
-                        $(".childBox").append("<div class='childAge' data-id='" + (children - 1) + "'>" +
-                            "<div>سن بچه</div>" +
-                            "<div><select class='selectAgeChild' name='ageOfChild' id='ageOfChild'>" +
-                            "<option value='0'>1<</option>" +
-                            "<option value='1'>1</option>" +
-                            "<option value='2'>2</option>" +
-                            "<option value='3'>3</option>" +
-                            "<option value='4'>4</option>" +
-                            "<option value='5'>5</option>" +
-                            "</select></div>" +
-                            "</div>");
-                        ;
-                    } else {
-                        $(".childAge[data-id='" + (children) + "']").remove();
-                    }
-                    $("#childrenPassengerNumInSelect").empty().append(children);
-                    $("#childrenPassengerNumInSelect1").empty().append(children);
-                    break;
-            }
-            var text = '<span class="float-right">' + room + '</span>&nbsp;\n' +
-                '                                                <span>اتاق</span>&nbsp;-&nbsp;\n' +
-                '                                                <span id="childPassengerNo">' + adult + '</span>\n' +
-                '                                                <span>بزرگسال</span>&nbsp;-&nbsp;\n' +
-                '                                                <span id="infantPassengerNo">' + children + '</span>\n' +
-                '                                                <span>بچه</span>&nbsp;';
-            // document.getElementById('roomDetailRoom').innerHTML = text;
-            while ((4 * room) < adult) {
-                room++;
-                $("#roomNumInSelect").empty().append(room);
-            }
-            document.getElementById('num_room').innerText = room;
-            document.getElementById('num_adult').innerText = adult;
-        }
-    </script>
-
-    <script>
-        var updateSession = '{{route("updateSession")}}';
-
-        @if(session('backDate') != null)
-        document.getElementById('backDate').value = '{{session("backDate")}}';
-        var rooms = '{!! $jsonRoom !!}';
-        rooms = JSON.parse(rooms);
-        var totalMoney = 0;
-        var totalPerDayMoney = 0;
-        var numDay = rooms[0].perDay.length;
-        var room_code = [];
-        var adult_count = [];
-        var extra = [];
-        var num_room_code = [];
-        var room_name = [];
-        document.getElementById('numDay').innerText = numDay;
-        document.getElementById('check_num_day').innerText = numDay;
-
-        function scrollToBed() {
-            var elmnt = document.getElementById("rooms");
-            elmnt.scrollIntoView();
-        }
-
-        function changeNumRoom(_index, value) {
-            totalMoney = 0;
-            totalPerDayMoney = 0;
-            var totalNumRoom = 0;
-            var text = '';
-            var reserve_text = '';
-            var reserve_money_text = '';
-            room_code = [];
-            adult_count = [];
-            extra = [];
-            num_room_code = [];
-            room_name = [];
-            for (i = 0; i < rooms.length; i++) {
-                numRoom = parseInt(document.getElementById('roomNumber' + i).value);
-                totalNumRoom += numRoom;
-                price = parseInt(rooms[i].perDay[0].price);
-                priceExtraBed = rooms[i].priceExtraGuest;
-                extraBed = document.getElementById('additional_bed' + i).checked;
-                totalPerDayMoney += numRoom * Math.floor(price / 1000) * 1000;
-                if (numRoom != 0) {
-                    room_code.push(rooms[i].roomNumber);
-                    adult_count.push(rooms[i].capacity['adultCount']);
-                    num_room_code.push(numRoom);
-                    room_name.push(rooms[i].name);
-                    text += '<div><span>X' + numRoom + '</span>' + rooms[i].name;
-                    reserve_money_text += '<div><span class="float-right">X' + numRoom + '</span><span class="float-right">' + rooms[i].name + '</span>';
-                    reserve_text += '<div id="changeNumRoomMainDiv" class="row">\n' +
-                        '<div class="col-md-9">\n' +
-                        '<div class="row display-flex flex-direction-row">\n' +
-                        '<div>\n' +
-                        '<span class="color-darkred">نام اتاق: </span>\n' +
-                        '<span>' + rooms[i].name + '</span>\n' +
-                        '</div>\n' +
-                        '<div class="width-33per">\n' +
-                        '<span class="color-darkred">تاریخ ورود: </span>\n' +
-                        '<span>{{session("goDate")}}</span>\n' +
-                        '</div>\n' +
-                        '<div class="width-33per">\n' +
-                        '<span class="color-darkred">تاریخ خروج: </span>\n' +
-                        '<span>{{session("backDate")}}</span>\n' +
-                        '</div>\n' +
-                        '</div>\n' +
-                        '<div class="row display-flex flex-direction-row mg-2per-0">\n' +
-                        '<div class="width-33per">\n' +
-                        '<span class="color-darkred">تعداد مسافر: </span>\n' +
-                        '<span>' + rooms[i].capacity.adultCount + '</span>\n' +
-                        '</div>\n' +
-                        '<div class="width-33per">\n' +
-                        '<span class="color-darkred">سرویس تخت اضافه: </span>\n';
-                    if (extraBed) {
-                        text += '<span class="font-size-085em">با تخت اضافه</span>';
-                        reserve_money_text += '<span class="font-size-0.85em float-right">با تخت اضافه</span><span class="float-left">' + dotedNumber((Math.floor(priceExtraBed / 1000) * 1000) + (Math.floor(price / 1000) * 1000)) + '</span>';
-                        totalPerDayMoney += numRoom * Math.floor(priceExtraBed / 1000) * 1000;
-                        reserve_text += '<span>دارد</span>\n';
-                        extra.push(true);
-                    } else {
-                        reserve_money_text += '<span class="float-left">' + dotedNumber(Math.floor(price / 1000) * 1000) + '</span>';
-                        reserve_text += '<span>ندارد</span>\n';
-                        extra.push(false);
-                    }
-                    text += '</div>';
-                    reserve_money_text += '</div>';
-                    reserve_text += '</div>\n' +
-                        '</div><div class="row display-flex flex-direction-row">\n' +
-                        '<div>\n' +
-                        '<span class="color-darkred"> صبحانه مجانی: </span>\n' +
-                        '<span>دارد</span>\n' +
-                        '</div>\n' +
-                        '</div>\n' +
-                        '</div>\n';
-                    reserve_text += '<div class="col-md-3"><img src="' + rooms[i].pic + '" class="full-width"></div></div>';
-                }
-            }
-            totalMoney += totalPerDayMoney * numDay;
-            document.getElementById('totalPriceOneDay').innerText = dotedNumber(totalPerDayMoney);
-            document.getElementById('totalPrice').innerText = dotedNumber(totalMoney);
-            document.getElementById('check_total_price').innerText = dotedNumber(totalMoney);
-            document.getElementById('totalNumRoom').innerText = totalNumRoom;
-            document.getElementById('check_total_num_room').innerText = totalNumRoom;
-            document.getElementById('discriptionNumRoom').innerHTML = text;
-            document.getElementById('check_description').innerHTML = reserve_money_text;
-            document.getElementById('selected_rooms').innerHTML = reserve_text;
-        }
-
-        function showReserve() {
-            if (totalMoney > 0)
-                document.getElementById('check_room').style.display = 'flex';
-        }
-
-        function updateSession() {
-            $.ajax({
-                url: updateSession,
-                type: 'post',
-                data: {
-                    'room_code': room_code,
-                    'adult_count': adult_count,
-                    'extra': extra,
-                    'num_room_code': num_room_code,
-                    'room_name': room_name,
-                    'hotel_name': placeName,
-                    'rph': '{{$place->rph}}',
-                    'backURL': window.location.href
-                },
-                success: function (response) {
-                    window.location.href = '{{url('buyHotel')}}';
-                }
-            })
-        }
-        @endif
-
-        $(window).ready(function(){
-            {{--@foreach($sections as $section)--}}
-                {{--fillMyDivWithAdv('{{$section->sectionId}}', '{{$state->id}}');--}}
-            {{--@endforeach--}}
-        });
-
         function closePublish() {
             var url;
             if (placeMode == "hotel")
@@ -2697,5 +2399,27 @@ if ($total == 0)
         }
 
     </script>
+
+    @if(session('room') != null || session('backDate') != null)
+        <script>
+            var room = 0;
+            var adult = 0;
+            var children = 0;
+            @if(session('room') != null)
+                room = parseInt('{{session('room')}}');
+                adult = parseInt('{{session('adult')}}');
+                children = parseInt('{{session('children')}}');
+            @endif
+        </script>
+        @if(session('backDate') != null)
+            <script src="{{URL::asset('js/hotelDetails/roomReservation.js')}}"></script>
+            <script>
+                var updateSession = '{{route("updateSession")}}';
+                document.getElementById('backDate').value = '{{session("backDate")}}';
+                var rooms = '{!! $jsonRoom !!}';
+            </script>
+        @endif
+
+    @endif
 
 @stop

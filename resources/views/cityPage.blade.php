@@ -3,11 +3,45 @@
 
 <head>
     @include('layouts.topHeader')
+    <title>
+        کوچیتا |
+        صفحه
+        {{$place->name}}</title>
+    <meta content="article" property="og:type"/>
+    <meta name="title" content="{{$place->name}} | اطلاعات گردشگری {{$place->name}} – جاذبه های {{$place->name}} – هتل های {{$place->name}} – رستوران های {{$place->name}}- صنایع دستی و سوغات {{$place->name}} | کوچیتا " />
+    <meta name='description' content='. هر چه یک گردشگر باید بداند   اطلاعات جامع و کامل {{$place->name}}. اصلاعات عمومی و تخصصی گردشگری ' />
+    <meta name='keywords' content='جاذبه های  {{$place->name}} – اطلاعات گردشگری {{$place->name}} – نقد و بررسی {{$place->name}} ' />
+
+    {{--<meta name="keywords" content="{{$post->keyword}}">--}}
+    {{--<meta property="og:title" content=" {{$post->seoTitle}} " />--}}
+    {{--<meta property="og:description" content=" {{$post->meta}}" />--}}
+    {{--<meta name="twitter:title" content=" {{$post->seoTitle}} " />--}}
+    {{--<meta name="twitter:description" content=" {{$post->meta}}" />--}}
+    {{--<meta name="description" content=" {{$post->meta}}"/>--}}
+    {{--<meta property="article:author " content="{{$post->user->username}}" />--}}
+    {{--<meta property="article:section" content="article" />--}}
+    {{--<meta property="article:published_time" content="2019-05-28T13:32:55+00:00" /> زمان انتشار--}}
+    {{--<meta property="article:modified_time" content="2020-01-14T10:43:11+00:00" />زمان آخریت تغییر--}}
+    {{--<meta property="og:updated_time" content="2020-01-14T10:43:11+00:00" /> زمان آخرین آپدیت--}}
+
+    @if(isset($place->image))
+        <meta property="og:image" content="{{URL::asset($place->image)}}"/>
+        <meta property="og:image:secure_url" content="{{URL::asset($place->image)}}"/>
+        <meta property="og:image:width" content="550"/>
+        <meta property="og:image:height" content="367"/>
+        <meta name="twitter:image" content="{{URL::asset($place->image)}}"/>
+    @endif
+
+    <meta property="article:tag" content="{{$place->name}}"/>
+    <meta property="article:tag" content="جاذبه های {{$place->name}}"/>
+    <meta property="article:tag" content="{{$place->name}} گردی"/>
+    <meta property="article:tag" content="{{$place->name}} را بشناسیم"/>
+    <meta property="article:tag" content="اطلاعات {{$place->name}}"/>
+
+
+
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/home_rebranded.css?v=4')}}"/>
-    <title>صفحه {{$place->name}}</title>
-
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/long_lived_global_legacy_2.css?v=2')}}"/>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/masthead-saves.css?v=2')}}'/>
     <link rel='stylesheet' type='text/css' media='screen, print'
@@ -32,40 +66,6 @@
         var url;
     </script>
 
-    <style>
-        {{--css of left side--}}
-        .widget ul li {
-            position: relative;
-            margin: 20px 0 40px;
-        }
-
-        /*css of {ng-app="mainApp"}*/
-        .homepage_shelves_widget {
-            min-height: 0px;
-        }
-
-        .image_wrapper {
-            height: 130px;
-        }
-
-        .map_list {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            padding: 10px;
-            background-color: #f3f3f3;
-        }
-
-        .map_category {
-            width: 50px;
-            cursor: pointer;
-        }
-
-        .cpMainSug .swiper-slide {
-            margin-top: 15px;
-        }
-    </style>
-
 </head>
 
 <body class="rebrand_2017 desktop HomeRebranded  js_logging">
@@ -78,7 +78,12 @@
 
 <div class="ui_container cpBody">
     <div class="cpBorderBottom cpHeader">
+
         <div class="cpHeaderRouteOfCityName">
+            <a href="{{url('/')}}">
+                <span>صفحه اصلی</span>
+            </a>
+            <span> > </span>
             @if(isset($place->state))
                 <a href="{{url('cityPage/state/'.$place->state)}}">
                     <span>استان {{$place->state}}</span>
@@ -90,10 +95,12 @@
             @endif
             {{--<div class="ui_close_x" style="left: 30px !important; top: 15px !important;"></div>--}}
         </div>
+
         <div class="cpHeaderCityName">{{$place->name}}</div>
     </div>
+
     <div class="row">
-        <div class="col-lg-3 text-align-right" style="float: left; padding: 0 !important;">
+        <div class="col-lg-3 col-sm-3 text-align-right hideOnPhone" style="float: left; padding: 0 !important;">
             <div class="postsMainDivInSpecificMode cpCommentBox cpBorderBottom">
                 @foreach($reviews as $item)
                     <div class="postMainDivShown float-right position-relative">
@@ -103,12 +110,12 @@
                             </div>
                             <div class="commentWriterExperienceDetails">
                                 <b class="userProfileName">{{$item->user->username}}</b>
-                                <div>در
+                                <div style="font-size: 10px">در
                                     <a href="{{$item->url}}" target="_blank">
                                         <span class="commentWriterExperiencePlace">{{$item->place->name}}، شهر {{$item->city->name}}، استان {{$item->state->name}}</span>
                                     </a>
                                 </div>
-                                <div>
+                                <div style="font-size: 10px;">
                                     {{$item->timeAgo}}
                                 </div>
                             </div>
@@ -131,8 +138,8 @@
                         </div>
                         <div class="commentPhotosShow">
                             @if(count($item->pics) > 0)
-                            <div class="photosCol col-xs-12">
-                                <div data-toggle="modal" data-target=".showingPhotosModal" style="position: relative; overflow: hidden; display: flex; justify-content: center; align-items: center;">
+                            <div class="photosCol col-xs-12" onclick="showReviewPics({{$item->id}})">
+                                <div style="position: relative; overflow: hidden; display: flex; justify-content: center; align-items: center;">
                                     <img src="{{$item->pics[0]->picUrl}}" style="position: absolute;">
                                 </div>
                                 @if(count($item->pics) > 1)
@@ -156,12 +163,16 @@
                 @endforeach
             </div>
         </div>
-        <div id="cpBorderLeft" class="col-lg-9 cpBorderLeft">
+
+        <div id="cpBorderLeft" class="col-lg-9 col-sm-9 cpBorderLeft">
 
             <div class="row cpMainBox">
-                <div class="col-xs-4 pd-0Imp">
+                <div class="col-md-8 col-xs-12 pd-0Imp">
+                    <img class="cpPic" src="{{$place->image}}">
+                </div>
+                <div class="col-md-4 col-xs-12 pd-0Imp">
                     <div class="col-xs-12">
-                        <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/4/' . $place->listName . '/' . $kind)}}">
+                        <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/4/' . $kind . '/' . $place->listName)}}">
                             <div class="cityPageIcon hotel"></div>
                             <div class="textCityPageIcon">هتل</div>
                             <div class="textCityPageIcon">{{count($allHotels)}}</div>
@@ -170,7 +181,7 @@
                             <div class="cityPageIcon ticket"></div>
                             <div class="textCityPageIcon">بلیط</div>
                         </a>
-                        <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/1/' . $place->listName . '/' . $kind)}}">
+                        <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/1/' . $kind . '/' . $place->listName)}}">
                             <div class="cityPageIcon atraction"></div>
                             <div class="textCityPageIcon">جاذبه ها</div>
                             <div class="textCityPageIcon">{{count($allAmaken)}}</div>
@@ -178,17 +189,17 @@
                     </div>
                     <div class="clear-both"></div>
                     <div class="col-xs-12">
-                        <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/3/' . $place->listName . '/' . $kind)}}">
+                        <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/3/' . $kind. '/' . $place->listName )}}">
                             <div class="cityPageIcon restaurant"></div>
                             <div class="textCityPageIcon">رستوران</div>
                             <div class="textCityPageIcon">{{count($allRestaurant)}}</div>
                         </a>
-                        <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/10/' . $place->listName . '/' . $kind)}}">
+                        <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/10/' . $kind . '/' . $place->listName)}}">
                             <div class="cityPageIcon soghat"></div>
                             <div class="textCityPageIcon">سوغات</div>
                             <div class="textCityPageIcon">{{count($allSogatSanaie)}}</div>
                         </a>
-                        <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/11/' . $place->listName . '/' . $kind)}}">
+                        <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/11/' . $kind . '/' . $place->listName)}}">
                             <div class="cityPageIcon ghazamahali"></div>
                             <div class="textCityPageIcon">غذای محلی</div>
                             <div class="textCityPageIcon">{{count($allMahaliFood)}}</div>
@@ -196,12 +207,12 @@
                     </div>
                     <div class="clear-both"></div>
                     <div class="col-xs-12">
-                        <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/6/' . $place->listName . '/' . $kind)}}">
+                        <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/6/' . $kind . '/' . $place->listName)}}">
                             <div class="cityPageIcon majara"></div>
                             <div class="textCityPageIcon">ماجراجویی</div>
                             <div class="textCityPageIcon">{{count($allMajara)}}</div>
                         </a>
-                        <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/10/' . $place->listName . '/' . $kind)}}">
+                        <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/10/' . $kind . '/' . $place->listName)}}">
                             <div class="cityPageIcon sanaye"></div>
                             <div class="textCityPageIcon">صنایع دستی</div>
                             <div class="textCityPageIcon">{{count($allSogatSanaie)}}</div>
@@ -224,19 +235,16 @@
                         {{--<div class="col-xs-4 cpLittleMenu"></div>--}}
                     </div>
                 </div>
-                <div class="col-xs-8 pd-0Imp">
-                    <img class="cpPic" src="{{$place->image}}">
-                </div>
             </div>
 
             <div class="row">
-                <div class="cpDescription cpBorderBottom">
+                <div class="cpDescription cpBorderBottom" style="white-space: pre-line;">
                     {{$place->description}}
                 </div>
 
                 <div class="mainSuggestionMainDiv cpBorderBottom ng-scope">
 
-                    @if(count($topPlaces[0]) > 4)
+                    @if(count($topPlaces['amaken']) > 4)
                         <div id="newKoochita" class="homepage_shelves_widget ng-scope">
                         <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show" style="">
                             <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
@@ -253,7 +261,7 @@
                                 <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
                                     <div class="cpMainSug swiper-container">
                                         <div class="swiper-wrapper position-relative">
-                                            @foreach($topPlaces[0] as $item)
+                                            @foreach($topPlaces['amaken'] as $item)
                                                 <div class="swiper-slide position-relative">
                                                 <img src="{{URL::asset('images/pin.png')}}" class="imageGoldPin">
                                                 <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
@@ -296,7 +304,7 @@
                     </div>
                     @endif
 
-                    @if(count($topPlaces[1]) > 4)
+                    @if(count($topPlaces['restaurant']) > 4)
                         <div id="newKoochita" class="homepage_shelves_widget ng-scope">
                         <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show" style="">
                             <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
@@ -313,7 +321,7 @@
                                 <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
                                     <div class="cpMainSug swiper-container">
                                         <div class="swiper-wrapper position-relative">
-                                            @foreach($topPlaces[1] as $item)
+                                            @foreach($topPlaces['restaurant'] as $item)
                                                 <div class="swiper-slide position-relative">
                                                 <img src="{{URL::asset('images/pin.png')}}" class="imageGoldPin">
                                                 <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
@@ -356,7 +364,7 @@
                     </div>
                     @endif
 
-                    @if(count($topPlaces[2]) > 4)
+                    @if(count($topPlaces['hotels']) > 4)
                         <div id="newKoochita" class="homepage_shelves_widget ng-scope">
                         <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show" style="">
                             <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
@@ -373,7 +381,7 @@
                                 <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
                                     <div class="cpMainSug swiper-container">
                                         <div class="swiper-wrapper position-relative">
-                                            @foreach($topPlaces[2] as $item)
+                                            @foreach($topPlaces['hotels'] as $item)
                                                 <div class="swiper-slide position-relative">
                                                     <img src="{{URL::asset('images/pin.png')}}" class="imageGoldPin">
                                                     <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
@@ -416,7 +424,7 @@
                     </div>
                     @endif
 
-                    @if(count($topPlaces[3]) > 4)
+                    @if(count($topPlaces['majara']) > 4)
                         <div id="newKoochita" class="homepage_shelves_widget ng-scope">
                         <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show" style="">
                             <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
@@ -433,7 +441,7 @@
                                 <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
                                     <div class="cpMainSug swiper-container">
                                         <div class="swiper-wrapper position-relative">
-                                            @foreach($topPlaces[3] as $item)
+                                            @foreach($topPlaces['majara'] as $item)
                                                 <div class="swiper-slide position-relative">
                                                     <img src="{{URL::asset('images/pin.png')}}" class="imageGoldPin">
                                                     <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
@@ -476,7 +484,7 @@
                     </div>
                     @endif
 
-                    @if(count($topPlaces[4]) > 4)
+                    @if(count($topPlaces['sogatSanaie']) > 4)
                         <div id="newKoochita" class="homepage_shelves_widget ng-scope">
                         <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show" style="">
                             <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
@@ -493,7 +501,7 @@
                                 <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
                                     <div class="cpMainSug swiper-container">
                                         <div class="swiper-wrapper position-relative">
-                                            @foreach($topPlaces[4] as $item)
+                                            @foreach($topPlaces['sogatSanaie'] as $item)
                                                 <div class="swiper-slide position-relative">
                                                     <img src="{{URL::asset('images/pin.png')}}" class="imageGoldPin">
                                                     <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
@@ -536,7 +544,7 @@
                     </div>
                     @endif
 
-                    @if(count($topPlaces[5]) > 4)
+                    @if(count($topPlaces['mahaliFood']) > 4)
                         <div id="newKoochita" class="homepage_shelves_widget ng-scope">
                         <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show" style="">
                             <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
@@ -553,7 +561,7 @@
                                 <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
                                     <div class="cpMainSug swiper-container">
                                         <div class="swiper-wrapper position-relative">
-                                            @foreach($topPlaces[5] as $item)
+                                            @foreach($topPlaces['mahaliFood'] as $item)
                                                 <div class="swiper-slide position-relative">
                                                     <img src="{{URL::asset('images/pin.png')}}" class="imageGoldPin">
                                                     <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
@@ -606,7 +614,7 @@
                     <div class="widget-head-line"></div>
                 </div>
                 <div class="row">
-                    <article class="im-article content-2col col-md-4 col-sm-12">
+                    <article class="im-article content-2col col-md-6 col-sm-12">
                         <div class="im-entry-thumb">
                             <a class="im-entry-thumb-link" href="{{$post[0]->url}}"
                                title="{{$post[0]->slug}}">
@@ -646,10 +654,10 @@
                             </div>
                         </div>
                     </article>
-                    <div class="col-md-4 col-sm-12">
+                    <div class="col-md-6 col-sm-12">
                         <div class="widget">
                             <ul>
-                                @for($i = 1; $i < 4 && $i < count($post); $i++)
+                                @for($i = 1; $i <= 4 && $i < count($post); $i++)
                                     <li class="widget-10104im-widgetclearfix">
                                     <figure class="im-widget-thumb">
                                         <a href="{{$post[$i]->url}}" title="{{$post[$i]->title}}">
@@ -679,43 +687,6 @@
                                         </div>
                                     </div>
                                 </li>
-                                @endfor
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-12">
-                        <div class="widget">
-                            <ul>
-                                @for($i = 4; $i < 7 && $i < count($post); $i++)
-                                    <li class="widget-10104im-widgetclearfix">
-                                        <figure class="im-widget-thumb">
-                                            <a href="{{$post[$i]->url}}" title="{{$post[$i]->title}}">
-                                                <img src="{{$post[$i]->pic}}" alt="{{$post[$i]->keyword}}">
-                                            </a>
-                                        </figure>
-                                        <div class="im-widget-entry">
-                                            <header class="im-widget-entry-header">
-                                                <h4 class="im-widget-entry-title">
-                                                    <a href="{{$post[$i]->url}}"
-                                                       title="{{$post[$i]->title}}">{{$post[$i]->title}}</a>
-                                                </h4>
-                                            </header>
-                                            <div class="iranomag-meta clearfix">
-                                                <div class="posted-on im-meta-item">
-                                                    <span class="entry-date published updated">{{$post[$i]->date}}</span>
-                                                </div>
-                                                <div class="comments-link im-meta-item">
-                                                    <i class="fa fa-comment-o"></i>{{$post[$i]->msgs}}
-                                                </div>
-                                                <div class="author vcard im-meta-item">
-                                                    <i class="fa fa-user"></i>{{$post[$i]->username}}
-                                                </div>
-                                                <div class="post-views im-meta-item">
-                                                    <i class="fa fa-eye"></i>{{$post[$i]->seen}}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
                                 @endfor
                             </ul>
                         </div>
@@ -760,6 +731,38 @@
 <script defer src="{{URL::asset('js/cityPage/cityPageOffer.js')}}"></script>
 
 <script>
+    var reviews = {!! json_encode($reviews) !!};
+
+    function showReviewPics(_id){
+        var selectReview = 0;
+        var reviewPicForAlbum = [];
+
+        for(i = 0; i < reviews.length; i++){
+            if(reviews[i]['id'] == _id){
+                selectReview = reviews[i];
+                break;
+            }
+        }
+
+        if(selectReview != 0){
+            revPic = selectReview['pics'];
+            for(var i = 0; i < revPic.length; i++){
+                reviewPicForAlbum[i] = {
+                    'id' : revPic[i]['id'],
+                    'sidePic' : revPic[i]['picUrl'],
+                    'mainPic' : revPic[i]['picUrl'],
+                    'video' : revPic[i]['videoUrl'],
+                    'userPic' : selectReview['userPic'],
+                    'userName' : selectReview['user']['username'],
+                    'uploadTime' : selectReview['timeAgo'],
+                    'showInfo' : false,
+                }
+            }
+
+            createPhotoModal('عکس های پست', reviewPicForAlbum);
+        }
+    }
+
     function showMoreText(element){
         $(element).parent().addClass('display-none');
         $(element).parent().next().removeClass('display-none');
@@ -826,7 +829,6 @@
     var markersNat = [];
     var majaraMap = [];
     var map2;
-
 
     function init() {
         var x = '{{$map["C"]}}';
@@ -1029,7 +1031,6 @@
 </script>
 
 <script src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyCdVEd4L2687AfirfAnUY1yXkx-7IsCER0&callback=init"></script>
-
 <script>
     var swiper = new Swiper('.cpMainSug', {
         slidesPerGroup: 1,

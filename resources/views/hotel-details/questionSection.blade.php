@@ -32,7 +32,7 @@
                         <div class="questionInputBoxMainDiv">
                             <div class="inputBox questionInputBox">
                                 <textarea id="questionInput" class="inputBoxInput inputBoxInputComment" type="text" placeholder="شما چه سؤالی دارید؟" onclick="checkLogin()"></textarea>
-                                <img class="commentSmileyIcon" src="{{"../../../public/images/smile.png"}}">
+                                <img class="commentSmileyIcon" src="{{URL::asset("images/smile.png")}}">
                             </div>
                             <div class="sendQuestionBtn" onclick="sendQuestion()">ارسال</div>
                         </div>
@@ -199,7 +199,7 @@
                 '                                    <textarea id="questionAns' + ques[i]["id"] + '" class="inputBoxInput inputBoxInputAnswer" type="text"\n' +
                 '                                              placeholder="شما چه نظری دارید؟"></textarea>\n' +
                 '                                    <img class="commentSmileyIcon"\n' +
-                '                                         src="{{"../../../public/images/smile.png"}}">\n' +
+                '                                         src="{{URL::asset("images/smile.png")}}">\n' +
                 '                                </div>\n' +
                 '                                <div class="sendQuestionBtn" onclick="sendAns(' + ques[i]["id"] + ')">ارسال</div>\n' +
                 '                                <div></div>\n' +
@@ -369,7 +369,7 @@
                 '                                    <textarea id="questionAns' + _ques[j]["id"]  + '" class="inputBoxInput inputBoxInputAnswer" type="text"\n' +
                 '                                              placeholder="شما چه نظری دارید؟"></textarea>\n' +
                 '                                    <img class="commentSmileyIcon"\n' +
-                '                                         src="{{"../../../public/images/smile.png"}}">\n' +
+                '                                         src="{{URL::asset("images/smile.png")}}">\n' +
                 '                                </div>\n' +
                 '                                <div class="sendQuestionBtn" onclick="sendAns(' + _ques[j]["id"]  + ')">ارسال</div>\n' +
                 '                                <div></div>\n' +

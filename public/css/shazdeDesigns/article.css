@@ -1459,6 +1459,7 @@ footer ul {
 .gnWhiteBox {
     background-color: white;
     margin: 20px 0 0;
+    padding: 15px;
 }
 
 .gnContentsCategory {
@@ -1519,9 +1520,13 @@ footer ul {
 
 .gnSearchInputBtn {
     background-color: #0076ac;
-    border: 1px solid #c5c5c5;
     color: white;
     border-radius: 5px;
+    font-size: 1.5em !important;
+    margin: 0px -5px !important;
+    padding: 0px 7px !important;
+    line-height: 31px;
+    float: left;
 }
 
 .gnAdvertise {
@@ -1588,10 +1593,9 @@ textarea:hover{
 .gnUserDescription {
     background-color: #ebebeb;
     border: 1px solid #cccccc;
-    /*border-radius: 5px;*/
-    min-height: 175px;
+    border-radius: 5px;
     margin: 5px 0;
-    padding: 5px 15px;
+    padding: 15px;
 }
 
 .gnLabels {
@@ -1601,4 +1605,77 @@ textarea:hover{
     line-height: 50px;
 }
 
+.gnTags {
+    display: inline-block;
+    margin: 0 5px;
+}
+
+
+.im-widget-thumb_rightSide {
+    position: relative !important;
+    width: 100%;
+}
+.im-widget-entry_rightSide {
+    margin: 10px 0 0 !important;
+}
+
+
+.im-entry-header_rightSide {
+    padding: 5px !important;
+}
+
+.im-entry-title_rightSide {
+    color: white !important;
+    padding: 0 !important;
+}
+
+@media (max-width: 768px) {
+    .gnTopPics {
+        background-color: white;
+    }
+    .gnWhiteBox {
+        margin: 15px -15px;
+        padding: 15px !important;
+    }
+    .gnMainPicOfArticle {
+        margin: -15px;
+    }
+}
+
+@media (max-width:1260px) {
+    .gnSearcBtn {
+        display: none;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 812px) {
+    .widget-head-554 > .widget-title {
+        font-size: 13px !important;
+    }
+
+}
+
+@media (min-width: 768px) and (max-width: 865px) {
+    .widget-head-44 > .widget-title {
+        font-size: 11px !important;
+    }
+}
+
+@media (max-width:992px) {
+    .container {
+        width: 100% !important;
+    }
+}
+
+@media (min-width: 992px) and (max-width:1189px) {
+    .container {
+        width: 1024px;
+    }
+}
+
+@media (min-width: 1189px) and (max-width:1260px) {
+    .container {
+        width: 1180px;
+    }
+}
 

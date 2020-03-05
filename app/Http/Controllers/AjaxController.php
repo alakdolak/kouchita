@@ -320,6 +320,7 @@ class AjaxController extends Controller {
             $cityConstraint = "";
             $allow = true;
             $key = $_POST["key"];
+//            dd($request->all());
             if(isset($request->mode) && $request->mode == 'state'){
                 $state = State::find($request->selectedCities);
                 if($state != null){
@@ -335,7 +336,7 @@ class AjaxController extends Controller {
                     }
                 }
             }
-            else {
+            elseif(isset($request->mode) && $request->mode == 'city') {
                 if ($cities != -1) {
                     if(is_array($cities)) {
                         foreach ($cities as $city) {
@@ -354,6 +355,15 @@ class AjaxController extends Controller {
                         $cityConstraint .= $cities;
                 }
             }
+            else{
+                echo 'nok';
+                return;
+            }
+
+            if($cityConstraint != '')
+                $allow = false;
+            else
+                $allow = true;
 
             $target = [];
             if($_POST["hotelFilter"] == 1) {
@@ -595,104 +605,43 @@ class AjaxController extends Controller {
         $kindPlaceId = [1, 3, 4, 6, 10, 11];
         $result = array();
         for($i = 0; $i < 6; $i++){
-            switch ($kindPlaceId[$i]){
-                case 1:
-                    $file = 'amaken';
-                    $url = 'amakenDetails';
-                    $place = Amaken::latest('id')->select(['name', 'id', 'file', 'picNumber', 'alt', 'cityId'])->first();
-                    break;
-                case 3:
-                    $file = 'restaurant';
-                    $url = 'restaurantDetails';
-                    $place = Restaurant::latest('id')->select(['name', 'id', 'file', 'picNumber', 'alt', 'cityId'])->first();
-                    break;
-                case 4:
-                    $file = 'hotels';
-                    $url = 'hotelDetails';
-                    $place = Hotel::latest('id')->select(['name', 'id', 'file', 'picNumber', 'alt', 'cityId'])->first();
-                    break;
-                case 6:
-                    $file = 'majara';
-                    $url = 'majaraDetails';
-                    $place = Majara::latest('id')->select(['name', 'id', 'file', 'picNumber', 'alt', 'cityId'])->first();
-                    break;
-                case 10:
-                    $file = 'sogatsanaie';
-                    $url = 'sanaiesogatDetails';
-                    $place = SogatSanaie::latest('id')->select(['name', 'id', 'file', 'picNumber', 'alt', 'cityId'])->first();
-                    break;
-                case 11:
-                    $file = 'mahalifood';
-                    $url = 'mahaliFoodDetails';
-                    $place = MahaliFood::latest('id')->select(['name', 'id', 'file', 'picNumber', 'alt', 'cityId'])->first();
-                    break;
+            $kindPlace = Place::find($kindPlaceId[$i]);
+            $place = DB::table($kindPlace->tableName)->latest('id')->select(['name', 'id', 'file', 'picNumber', 'alt', 'cityId'])->first();
+            if($place != null) {
+                $file = $kindPlace->fileName;
+                $url = createUrl($kindPlace->id, $place->id, 0, 0);
 
+                if (file_exists((__DIR__ . '/../../../../assets/_images/' . $file . '/' . $place->file . '/f-' . $place->picNumber)))
+                    $place->placePic = URL::asset('_images/' . $file . '/' . $place->file . '/f-' . $place->picNumber);
+                else
+                    $place->placePic = URL::asset("_images/nopic/blank.jpg");
+                $place->url = $url;
+                $city = Cities::whereId($place->cityId);
+                $place->placeCity = $city->name;
+                $place->placeState = State::whereId($city->stateId)->name;
+                $place->placeRate = getRate($place->id, $kindPlaceId[$i])[1];
+                $place->placeReviews = DB::select('select count(*) as countNum from log, comment WHERE logId = log.id and status = 1 and placeId = ' . $place->id .
+                    ' and kindPlaceId = ' . $kindPlaceId[$i] . ' and activityId = ' . $activityId)[0]->countNum;
+
+                array_push($result, $place);
             }
-
-            if(file_exists((__DIR__ . '/../../../../assets/_images/' . $file . '/' . $place->file . '/f-' . $place->picNumber)))
-                $place->placePic = URL::asset('_images/' . $file . '/' . $place->file . '/f-' . $place->picNumber);
-            else
-                $place->placePic = URL::asset("_images/nopic/blank.jpg");
-            $place->url = route($url, ['placeId' => $place->id, 'placeName' => $place->name]);
-            $city = Cities::whereId($place->cityId);
-            $place->placeCity = $city->name;
-            $place->placeState = State::whereId($city->stateId)->name;
-            $place->placeRate = getRate($place->id, $kindPlaceId[$i])[1];
-            $place->placeReviews = DB::select('select count(*) as countNum from log, comment WHERE logId = log.id and status = 1 and placeId = ' . $place->id .
-                ' and kindPlaceId = ' . $kindPlaceId[$i] . ' and activityId = ' . $activityId)[0]->countNum;
-
-            array_push($result, $place);
         }
 
         $suggest = MainSuggestion::all();
         $suggestions = array();
         foreach ($suggest as $item){
-            switch ($item->kindPlaceId){
-                case 1:
-                default:
-                    $file = 'amaken';
-                    $kindPlaceId = 1;
-                    $url = 'amakenDetails';
-                    $place = Amaken::select(['name', 'id', 'file', 'picNumber', 'alt', 'cityId'])->find($item->placeId);
-                    break;
-                case 3:
-                    $file = 'restaurant';
-                    $kindPlaceId = 3;
-                    $url = 'restaurantDetails';
-                    $place = Restaurant::select(['name', 'id', 'file', 'picNumber', 'alt', 'cityId'])->find($item->placeId);
-                    break;
-                case 4:
-                    $file = 'hotels';
-                    $url = 'hotelDetails';
-                    $kindPlaceId = 4;
-                    $place = Hotel::select(['name', 'id', 'file', 'picNumber', 'alt', 'cityId'])->find($item->placeId);
-                    break;
-                case 6:
-                    $file = 'majara';
-                    $url = 'majaraDetails';
-                    $kindPlaceId = 6;
-                    $place = Majara::select(['name', 'id', 'file', 'picNumber', 'alt', 'cityId'])->find($item->placeId);
-                    break;
-                case 10:
-                    $file = 'sogatsanaie';
-                    $url = 'sanaiesogatDetails';
-                    $kindPlaceId = 10;
-                    $place = SogatSanaie::select(['name', 'id', 'file', 'picNumber', 'alt', 'cityId'])->find($item->placeId);
-                    break;
-                case 11:
-                    $file = 'mahalifood';
-                    $url = 'mahaliFoodDetails';
-                    $kindPlaceId = 11;
-                    $place = MahaliFood::select(['name', 'id', 'file', 'picNumber', 'alt', 'cityId'])->find($item->placeId);
-                    break;
-            }
+            $kindPlace = Place::find($item->kindPlaceId);
+            $place = DB::table($kindPlace->tableName)->select(['name', 'id', 'file', 'picNumber', 'alt', 'cityId'])->find($item->placeId);
+            $file = $kindPlace->fileName;
+            $url = createUrl($item->kindPlaceId, $item->placeId, 0, 0);
+            $kindPlaceId = $kindPlace->id;
 
             if($place != null && $file != null) {
                 if (file_exists((__DIR__ . '/../../../../assets/_images/' . $file . '/' . $place->file . '/f-' . $place->picNumber)))
                     $place->placePic = URL::asset('_images/' . $file . '/' . $place->file . '/f-' . $place->picNumber);
                 else
                     $place->placePic = URL::asset("_images/nopic/blank.jpg");
-                $place->url = route($url, ['placeId' => $place->id, 'placeName' => $place->name]);
+                $place->url = $url;
                 $city = Cities::whereId($place->cityId);
                 $place->placeCity = $city->name;
                 $place->placeState = State::whereId($city->stateId)->name;

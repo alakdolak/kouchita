@@ -1,3 +1,9 @@
+.mainAlbumPic{
+    width: auto;
+    height: 100%;
+    position: absolute;
+    transition: 0.2s;
+}
 .showingPhotosTitle {
     background-color: #0076a3;
     color: white;
@@ -8,10 +14,11 @@
 }
 
 .showingPhotosModal .commentWriterDetailsShow {
-    padding: 10px 20px;
-    margin: 0 1%;
-    width: 98%;
-    border-bottom: 2px solid #e5e5e5;
+    padding: 5px 20px;
+    margin: 0%;
+    width: 100%;
+    border-bottom: 2px solid #3c4043;
+    background-color: #303134;
 }
 
 .commentWriterDetailsShow , .answersWriterDetailsShow {
@@ -42,14 +49,20 @@
 .modal-content .postMainDivHeader , .modal-content .showingPhotosTitle {
     text-align: right;
 }
-
+.feedBackBtn{
+    margin-bottom: 8px;
+}
 .photosFeedBackBtn {
     float: left;
     display: flex;
     width: 24%;
     margin-top: 10px;
     flex-direction: column;
-    max-width: 210px;
+    /*max-width: 210px;*/
+}
+.chooseSidePhotoAlbum{
+    border: #0076a3 solid 3px;
+    border-radius: 0px !important;
 }
 
 .showingPhotosModal .commentWriterExperienceDetails , .answersWriterExperienceDetails {
@@ -64,7 +77,7 @@
     cursor: pointer;
 }
 
-.likeBoxIcon::after {
+.likeBoxIcon::before {
     content: '\E1F9';
     font-family: Shazde_Regular2 !important;
     font-size: 20px;
@@ -72,7 +85,7 @@
     top: -7px;
 }
 
-.likeBoxIconClicked::after {
+.likeBoxIconClicked::before {
     content: '\E057';
     font-family: Shazde_Regular2 !important;
     font-size: 20px;
@@ -89,7 +102,7 @@
     text-align: center;
 }
 
-.dislikeBoxIcon::after {
+.dislikeBoxIcon::before {
     content: '\E1F8';
     font-family: Shazde_Regular2 !important;
     font-size: 20px;
@@ -97,7 +110,7 @@
     top: -4px;
 }
 
-.dislikeBoxIconClicked::after {
+.dislikeBoxIconClicked::before {
     content: '\E058';
     font-family: Shazde_Regular2 !important;
     font-size: 20px;
@@ -118,30 +131,42 @@
     text-align: center;
     direction: rtl;
 }
-
+.userInfoPhotoAlbum{
+    margin-bottom: 15px;
+    height: auto;
+    border-bottom: solid #3c4043;
+    width: 101%;
+    height: 75px;
+    background: #303134;
+    padding-top: 9px;
+    padding-right: 11px;
+}
 .rightColPhotosModalMainDiv {
     display: inline-block;
-    margin: 5px 0;
-    padding: 0 10px;
-    border-left: 2px solid #e5e5e5;
-    /*max-height: 70vh;*/
+    border-left: 2px solid #3c4043;
     overflow: auto;
     height: auto;
+    min-height: 70vh;
+    margin: 0;
+    background-color: #141518;
+    padding: 0;
+    overflow-x: hidden;
 }
 
 .rightColPhotosShowingModal {
-    /*height: 70px;*/
+    transition: 0.25s;
     margin-bottom: 5px;
     width: 48%;
-    /*display: flex !important;*/
-    /*justify-content: center;*/
-    /*align-items: center;*/
-    /*overflow: hidden;*/
-    position: relative;
-    display: inline-block;
     cursor: pointer;
     float: right;
     margin-left: 2%;
+    position:relative;
+    height: 115px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
 }
 
 .leftColPhotosModalMainDiv {
@@ -149,7 +174,7 @@
 }
 
 .selectedPhotoShowingModal {
-    height: 486px;
+    /*height: 486px;*/
     width: 100%;
     /*background-color: black;*/
     display: flex;
@@ -159,13 +184,14 @@
 
 .photosDescriptionShowingModal {
     display: inline-block;
-    margin: 0 1%;
-    width: 98%;
-    border-top: 2px solid #e5e5e5;
-    padding: 10px 0 20px;
+    border-top: 2px solid #3c4043;
     color: #666666;
     text-align: right;
     direction: rtl;
+    background-color: #303134;
+    margin: 0;
+    width: 100%;
+    padding: 0px 20px;
 }
 
 #showingPhotosModal .modal-content {
@@ -191,7 +217,8 @@
 }
 
 .modal-open .modal {
-    backdrop-filter: blur(2px);
+    /*backdrop-filter: blur(2px);*/
+    background-color: #000000c7;
 }
 
 @media (max-width:1188px) and (min-width: 992px) {

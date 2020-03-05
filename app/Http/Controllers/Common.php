@@ -642,32 +642,9 @@ function getAllPlacePicsByKind($kindPlaceId, $placeId){
     if(auth()->check())
         $user = auth()->user();
 
-    switch ($kindPlaceId){
-        case 1:
-            $MainFile = 'amaken';
-            $place = \App\models\Amaken::find($placeId);
-            break;
-        case 3:
-            $MainFile = 'restaurant';
-            $place = \App\models\Restaurant::find($placeId);
-            break;
-        case 4:
-            $MainFile = 'hotels';
-            $place = \App\models\Hotel::find($placeId);
-            break;
-        case 6:
-            $MainFile = 'majara';
-            $place = \App\models\Majara::find($placeId);
-            break;
-        case 10:
-            $MainFile = 'sogatsanaie';
-            $place = \App\models\SogatSanaie::find($placeId);
-            break;
-        case 11:
-            $MainFile = 'mahalifood';
-            $place = \App\models\MahaliFood::find($placeId);
-            break;
-    }
+    $kindPlace = Place::find($kindPlaceId);
+    $MainFile = $kindPlace->fileName;
+    $place = DB::table($kindPlace->tableName)->find($placeId);
 
     $place->pics = PlacePic::where('kindPlaceId', $kindPlaceId)->where('placeId', $place->id)->get();
 
@@ -693,7 +670,7 @@ function getAllPlacePicsByKind($kindPlaceId, $placeId){
     }
     $userPhotosJSON = json_encode($userPhotos);
 
-    $koochitaPic = URL::asset('images/logo.png');
+    $koochitaPic = URL::asset('images/icons/mainIcon.svg');
     $s = [  'id' => 0,
         's' => URL::asset('_images/' . $MainFile . '/' . $place->file . '/s-' . $place->picNumber),
         'f' => URL::asset('_images/' . $MainFile . '/' . $place->file . '/f-' . $place->picNumber),
@@ -730,12 +707,32 @@ function getAllPlacePicsByKind($kindPlaceId, $placeId){
 
     $sitePicsJSON = json_encode($sitePics);
 
-    $photographerPics = array();
     if(\auth()->check())
-        $photographerPic = DB::select('SELECT * FROM photographersPics WHERE kindPlaceId = ' . $kindPlaceId . ' AND placeId  = ' . $placeId . ' AND ((userId = ' . $user->id . ') OR ( status = 1)) ORDER BY created_at');
+        $photographerPic = DB::select('SELECT photo.* FROM photographersPics AS photo WHERE photo.kindPlaceId = ' . $kindPlaceId . ' AND photo.placeId  = ' . $placeId . ' AND ((photo.userId = ' . $user->id . ') OR ( photo.status = 1)) ORDER BY created_at');
     else
         $photographerPic = DB::select('SELECT * FROM photographersPics WHERE kindPlaceId = ' . $kindPlaceId . ' AND placeId  = ' . $placeId . ' AND status = 1 ORDER BY created_at');
 
+    if($photographerPic != null) {
+        $pid = [];
+        foreach ($photographerPic as $item)
+            array_push($pid, $item->id);
+        $pidLike = DB::select('SELECT * FROM photographersLogs WHERE picId IN (' . implode(",", $pid) . ') AND userId = ' . $user->id);
+
+        foreach ($photographerPic as $item) {
+            if($pidLike != null) {
+                foreach ($pidLike as $item2) {
+                    if($item2->picId == $item->id){
+                        $item->userLike = $item2->like;
+                        break;
+                    }
+                }
+            }
+            else
+                $item->userLike = 0;
+        }
+    }
+
+    $photographerPics = array();
     if(count($photographerPic) < 5)
         $photographerPics = $sitePics;
 
@@ -775,7 +772,8 @@ function getAllPlacePicsByKind($kindPlaceId, $placeId){
                 'like' => $item->like,
                 'dislike' => $item->dislike,
                 'description' => $item->description,
-                'fromUpload' => $diffTime];
+                'fromUpload' => $diffTime,
+                'userLike' => $item->userLike];
 
             array_unshift($photographerPics, $s);
         }
@@ -987,7 +985,7 @@ function saveViewPerPage($kindPlaceId, $placeId){
     if(Auth::check())
         $userId = auth()->user()->id;
     else
-        $userId = 999999;
+        $userId = 0;
 
     $value = 'kindPlaceId:'.$kindPlaceId.'Id:'.$placeId;
     if(!(Cookie::has($value) == $value)) {
@@ -1023,6 +1021,65 @@ function getReviewPicsURL($review){
         $item2->height = getimagesize($item2->picUrl)[1];
     }
     return $review;
+}
+
+function getUserPic(){
+    if (Auth::check()) {
+        $u = Auth::user();
+        $uId = $u->id;
+
+        if($u->uploadPhoto == 0){
+            $deffPic = DefaultPic::find($u->picture);
+
+            if($deffPic != null)
+                $uPic = URL::asset('defaultPic/' . $deffPic->name);
+            else
+                $uPic = URL::asset('_images/nopic/blank.jpg');
+        }
+        else
+            $uPic = URL::asset('userProfile/' . $u->picture);
+    }
+    else
+        $uPic = URL::asset('_images/nopic/blank.jpg');
+
+    return $uPic;
+}
+
+function createUrl($kindPlaceId, $placeId, $stateId, $cityId, $articleId = 0){
+    if($stateId != 0){
+        $state = State::find($stateId);
+        return url('cityPage/state/' . $state->name);
+    }
+    else if($cityId != 0){
+        $city = Cities::find($cityId);
+        return url('cityPage/city/' . $city->name);
+    }
+    else if($kindPlaceId != 0){
+        $kindPlace = Place::find($kindPlaceId);
+        $place = DB::table($kindPlace->tableName)->find($placeId);
+
+        if(isset($place->slug) && $place->slug != null && strlen($place->slug) > 2)
+            return url('show-place-details/' . $kindPlace->fileName . '/' . $place->slug);
+        else if(isset($place->id))
+            return url('show-place-details/' . $kindPlace->fileName . '/' . $place->id);
+    }
+    else if($articleId != 0){
+        $post = \App\models\Post::find($articleId);
+        if($post != null)
+            return url('article/'. $post->slug);
+        else
+            return false;
+    }
+
+}
+
+function createPicUrl($articleId){
+
+    if($articleId != 0){
+        $post = \App\models\Post::find($articleId);
+        if($post != null)
+            return URL::asset('_images/posts/' . $post->id . '/' . $post->pic);
+    }
 }
 
 

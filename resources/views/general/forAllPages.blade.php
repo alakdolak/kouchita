@@ -19,17 +19,26 @@
     }
 </style>
 
+<div id="darkModal" class="display-none" role="dialog"></div>
+
+{{--this dark modal with blur--}}
+<div id="darkModeMainPage" class="ui_backdrop dark" ></div>
+
 <div class="loaderDiv" id="fullPageLoader" style="display: none">
     <div class="loader_200"></div>
 </div>
 
-@include('general.proSearch')
+@include('general.adminInPage')
 
-@include('general.globalInput')
+@include('general.modalPhoto')
+
+@include('general.searches.proSearch')
+
+@include('general.searches.mainSearch')
+
+@include('general.searches.globalInput')
 
 @include('general.alerts')
-
-@include('layouts.recentlyViewAndMyTripsInMain')
 
 @if(!Auth::check())
     @include('layouts.loginPopUp')

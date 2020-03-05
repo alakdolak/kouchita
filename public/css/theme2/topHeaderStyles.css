@@ -108,6 +108,50 @@
     url('../../fonts/glyphicons-halflings-regular.ttf?v003.200') format('truetype');
 }
 
+h1 {
+    font-size: 28px !important;
+}
+h2{
+    font-size: 22px !important;
+}
+h3 {
+    font-size: 20px !important;
+}
+h4{
+    font-size: 18px !important;
+}
+h5 {
+    font-size: 15px !important;
+}
+h6{
+    font-size: 14px !important;
+}
+p {
+    line-height: 30px;
+    font-size: 14px !important;
+}
+/*in Phone size*/
+@media only screen and (max-width: 767px) {
+    h1 {
+        font-size: 20px !important;
+    }
+    h2{
+        font-size: 14px !important;
+    }
+    h3 {
+        font-size: 14px !important;
+    }
+    h4{
+        font-size: 14px !important;
+    }
+    h5 {
+        font-size: 14px !important;
+    }
+    h6{
+        font-size: 14px !important;
+    }
+}
+
 /*in Phone*/
 @media only screen and (max-width: 767px) {
     .hideOnPhone {
@@ -126,4 +170,16 @@
 }
 .hidden {
     display: none !important;
+}
+a {
+    text-decoration: none !important;
+}
+a:link {
+    text-decoration: none !important;
+}
+
+#darkModeMainPage {
+    display: none;
+    z-index: 10000000;
+    backdrop-filter: blur(2px);
 }

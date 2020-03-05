@@ -84,6 +84,7 @@ class PostController extends Controller {
 
         //this section get 5 most like post from lastMonthPost
         $likePost = \DB::select('SELECT post.id, COUNT(postLike.id) as likeCount FROM post JOIN postLike ON postLike.like = 1 AND postLike.postId = post.id AND post.id IN (' . implode(",", $lastMonthPostId) . ')  GROUP BY post.id ORDER BY likeCount DESC');
+
         $mostLike = array();
         $mostLikeId = array();
         foreach ($likePost as $item){
@@ -226,7 +227,7 @@ class PostController extends Controller {
             return \redirect(\url('/'));
     }
 
-    public function showArticle($slug)
+    public function showArticle($slug, Request $request)
     {
         $post = Post::where('slug', $slug)->first();
         if($post != null){
@@ -333,7 +334,12 @@ class PostController extends Controller {
 
             $tags = DB::select('SELECT pt.tag FROM postTags AS pt, postTagsRelations AS ptr WHERE ptr.postId = ' . $post->id . ' AND pt.id = ptr.tagId GROUP BY pt.tag');
             $post->tag = $tags;
-            return view('posts.article', compact(['stateCome', 'cityCome', 'placeCome', 'post', 'category', 'similarPost', 'postLike', 'uPic', 'comments']));
+
+            $mainWebSiteUrl = \url('/');
+            $mainWebSiteUrl .= '/' . $request->path();
+            $localStorageData = ['kind' => 'article', 'name' => $post->title, 'city' => '', 'state' => '', 'mainPic' => $post->pic, 'redirect' => $mainWebSiteUrl];
+
+            return view('posts.article', compact(['stateCome', 'cityCome', 'placeCome', 'post', 'category', 'similarPost', 'postLike', 'uPic', 'comments', 'localStorageData']));
         }
         return \redirect(\url('/'));
 
@@ -764,112 +770,6 @@ class PostController extends Controller {
         return [$relatedPost, $state, $city, $place];
     }
 
-
-    public function gardeshnameInner($postId) {
-
-        include_once __DIR__ . '/Common.php';
-
-        $post = Post::whereId($postId);
-
-
-        if($post == null)
-            return Redirect::route("mainArticle");
-
-        $tags = [];
-        $i = 0;
-        if($post->tag1 != null)
-            $tags[$i++] = $post->tag1;
-
-        if($post->tag2 != null)
-            $tags[$i++] = $post->tag2;
-
-        if($post->tag3 != null)
-            $tags[$i++] = $post->tag3;
-
-        if($post->tag4 != null)
-            $tags[$i++] = $post->tag4;
-
-        if($post->tag5 != null)
-            $tags[$i++] = $post->tag5;
-
-        if($post->tag6 != null)
-            $tags[$i++] = $post->tag6;
-
-        if($post->tag7 != null)
-            $tags[$i++] = $post->tag7;
-
-        if($post->tag8 != null)
-            $tags[$i++] = $post->tag8;
-
-        if($post->tag9 != null)
-            $tags[$i++] = $post->tag9;
-
-        if($post->tag10 != null)
-            $tags[$i++] = $post->tag10;
-
-        if($post->tag11 != null)
-            $tags[$i++] = $post->tag11;
-
-        if($post->tag12 != null)
-            $tags[$i++] = $post->tag12;
-
-        if($post->tag13 != null)
-            $tags[$i++] = $post->tag13;
-
-        if($post->tag14 != null)
-            $tags[$i++] = $post->tag14;
-
-        if($post->tag15 != null)
-            $tags[$i] = $post->tag15;
-
-        $post->seen = $post->seen + 1;
-        $post->save();
-
-        $post->date = convertDate($post->created_at);
-        $post->category = getPostTranslated($post->category);
-        $post->comments = PostComment::wherePostId($post->id)->whereStatus(true)->count();
-
-        $aboutMe = AboutMe::whereUId($post->creator)->first();
-        $creatorPhoto = null;
-
-        if($aboutMe != null) {
-            $aboutMe = $aboutMe->introduction;
-            $user = User::whereId($post->creator);
-            if($user->uploadPhoto) {
-                $creatorPhoto = URL::asset("userProfile/" . $user->picture);
-            }
-            else {
-
-                $defaultPic = DefaultPic::whereId($user->picture);
-
-                if($defaultPic == null)
-                    $defaultPic = DefaultPic::first();
-
-                $creatorPhoto = URL::asset("defaultPic/" . $defaultPic->name);
-            }
-        }
-
-        $post->likes = PostLikes::wherePostId($post->id)->whereDislike(false)->count();
-        $post->dislikes = PostLikes::wherePostId($post->id)->whereDislike(true)->count();
-
-        if($post->likes + $post->dislikes > 0)
-            $post->point = round($post->likes * 10 / ($post->likes + $post->dislikes), 1);
-        else
-            $post->point = 0;
-
-        return view('gardeshnameInner', ['post' => $post, 'tags' => $tags, 'author' => $aboutMe,
-            'creatorPhoto' => $creatorPhoto]);
-    }
-
-    public function specificPost($id) {
-
-        $post = \App\models\Post::whereId($id);
-
-        if($post == null)
-            return \Redirect::route('home');
-
-        return view('specificPost', ['post' => $post]);
-    }
 
     public function sendPostComment() {
 

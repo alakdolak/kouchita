@@ -42,7 +42,7 @@
                         0
                     </div>
                     <div class="articleWriterMainDiv">
-                        شازده مسافر
+                        کوچیتا
                     </div>
                     <div class="articleWatchListMainDiv">
                         112
@@ -75,7 +75,7 @@
                         0
                     </div>
                     <div class="articleWriterMainDiv">
-                        شازده مسافر
+                        کوچیتا
                     </div>
                     <div class="articleWatchListMainDiv">
                         162
@@ -108,7 +108,7 @@
                         0
                     </div>
                     <div class="articleWriterMainDiv">
-                        شازده مسافر
+                        کوچیتا
                     </div>
                     <div class="articleWatchListMainDiv">
                         227
@@ -141,7 +141,7 @@
                         0
                     </div>
                     <div class="articleWriterMainDiv">
-                        شازده مسافر
+                        کوچیتا
                     </div>
                     <div class="articleWatchListMainDiv">
                         112

@@ -10,30 +10,18 @@ if ($total == 0)
     <link rel="stylesheet" href="{{URL::asset('css/theme2/media_uploader.css')}}">
     <script async src="{{URL::asset("js/bootstrap-datepicker.js")}}"></script>
     <link rel="stylesheet" href="{{URL::asset('css/theme2/bootstrap-datepicker.css?v=1')}}">
-    <title>{{$place->name}} | {{$city->name}} | شازده مسافر</title>
+    <title>{{$place->name}} | {{$city->name}} | کوچیتا</title>
 @stop
 
 @section('meta')
     <meta name="keywords" content="{{$place->keyword}}">
     <meta property="og:description" content="{{$place->meta}}"/>
-    <meta property="article:tag" content="{{$place->tag1}}"/>
-    <meta property="article:tag" content="{{$place->tag2}}"/>
-    <meta property="article:tag" content="{{$place->tag3}}"/>
-    <meta property="article:tag" content="{{$place->tag4}}"/>
-    <meta property="article:tag" content="{{$place->tag5}}"/>
-    <meta property="article:tag" content="{{$place->tag6}}"/>
-    <meta property="article:tag" content="{{$place->tag7}}"/>
-    <meta property="article:tag" content="{{$place->tag8}}"/>
-    <meta property="article:tag" content="{{$place->tag9}}"/>
-    <meta property="article:tag" content="{{$place->tag10}}"/>
-    <meta property="article:tag" content="{{$place->tag11}}"/>
-    <meta property="article:tag" content="{{$place->tag12}}"/>
-    <meta property="article:tag" content="{{$place->tag13}}"/>
-    <meta property="article:tag" content="{{$place->tag14}}"/>
-    <meta property="article:tag" content="{{$place->tag15}}"/>
+    @foreach($place->tags as $item)
+        <meta property="article:tag" content="{{$item}}"/>
+    @endforeach
     <meta name="twitter:card" content="summary_large_image"/>
     <meta name="twitter:description" content="{{$place->meta}}"/>
-    <meta name="twitter:title" content="{{$place->name}} | {{$city->name}} | شازده مسافر"/>
+    <meta name="twitter:title" content="{{$place->name}} | {{$city->name}} | کوچیتا"/>
     <meta property="og:url" content="{{Request::url()}}"/>
     @if(count($photos) > 0)
         <meta property="og:image" content="{{$photos[0]}}"/>
@@ -43,10 +31,7 @@ if ($total == 0)
         <meta name="twitter:image" content="{{$photos[0]}}"/>
     @endif
     <meta content="article" property="og:type"/>
-    <meta property="og:title" content="{{$place->name}} | {{$city->name}} | شازده مسافر"/>
-
-
-
+    <meta property="og:title" content="{{$place->name}} | {{$city->name}} | کوچیتا"/>
 @stop
 
 @section('header')

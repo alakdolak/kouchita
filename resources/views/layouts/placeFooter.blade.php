@@ -5,7 +5,7 @@ $config = \App\models\ConfigModel::first()
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/icons.css?v=1')}}'/>
 
 {{--footer html--}}
-{{--<div class="clear-both" style="height: 75px"></div>--}}
+<div class="clear-both" style="height: 75px"></div>
 
 <footer>
     <div class="hideOnPhone screenFooterStyle">
@@ -17,14 +17,14 @@ $config = \App\models\ConfigModel::first()
         {{--    </div>--}}
         <div id="ourDescriptionDiv">
             <div class="footerLogo">
-                <img src="{{URL::asset('images/logo.svg')}}" class="content-icon" width="100%">
+                <img src="{{URL::asset('images/icons/mainLogo.png')}}" class="content-icon" width="100%">
             </div>
             <div class="clear-both hideOnScreen"></div>
             <div class="footDown">
                 <ul>
                     <li>
                         <p class="aboutShazde">
-                            بنده شازده مسافر هستم و همونطوری که از اسمم مشخصه عاشق سفرم و بیشتر اوقاتم رو به سفر میگذرونم.
+                            بنده کوچیتا هستم و همونطوری که از اسمم مشخصه عاشق سفرم و بیشتر اوقاتم رو به سفر میگذرونم.
                             عرضم به خدمتِ شما، اگه ریا نباشه تقریبا میتونم بگم که همه ی اماکن و جاذبه های گردشگری ایران رو از نزدیک دیدم! بخاطر همینم چند وقت پیشا تصمیم گرفتم با یه سری از دوستام بشینیم و همه جاهایی که رفتیم رو برای شما توصیف کنیم و تجربه هامون رو با شما به اشتراک بزاریم که هر وقت دلتون خواست به شهری سفر کنید، قبلش میتونید بیاید اینجا و از جاذبه های دیدنی، خوردنی، شنیدنی و خریدنی اون شهر
                             با خبر بشید و توضیحاتش رو هم کامل بخونین، بعدش راحت دل رو به دریا بزنین و راه بیوفتین.
                         </p>
@@ -37,11 +37,11 @@ $config = \App\models\ConfigModel::first()
                         را بخوانید و در صورت نیاز
                         <a href="#"> با ما تماس بگیرید. </a>
                     </li>
-                    <li class="aboutShazde">این سایت متعلق به مجموعه شازده مسافر می باشد؛
+                    <li class="aboutShazde">این سایت متعلق به مجموعه کوچیتا می باشد؛
                         <a href="#"> درباره ما </a>
                         بیشتر بدانید.
                     </li>
-                    <li class="aboutShazde">شازده مسافر محصولی از
+                    <li class="aboutShazde">کوچیتا محصولی از
                         <a href="#"> بوگن دیزاین </a>
                         می باشد؛ ما را بیشتر بشناسید.
                     </li>
@@ -182,17 +182,17 @@ $config = \App\models\ConfigModel::first()
             <span class="footerMenuBarLinks">سایر امکانات</span>
             <span class="ui_icon more-horizontal"></span>
         </div>
-        @if(Auth::check())
-            <div data-toggle="modal" data-target="#profilePossibilities">
-                <span class="footerMenuBarLinks">امکانات کاربر</span>
-                <span class="ui_icon memberPossibilities"></span>
-            </div>
-        @else
-            <div class="login-button">
-                <span class="footerMenuBarLinks">ثبت نام</span>
-                <span class="ui_icon plus-circle"></span>
-            </div>
-        @endif
+{{--        @if(Auth::check())--}}
+        <div data-toggle="modal" data-target="#profilePossibilities">
+            <span class="footerMenuBarLinks">امکانات کاربر</span>
+            <span class="ui_icon memberPossibilities"></span>
+        </div>
+        {{--@else--}}
+            {{--<div class="login-button">--}}
+                {{--<span class="footerMenuBarLinks">ثبت نام</span>--}}
+                {{--<span class="ui_icon plus-circle"></span>--}}
+            {{--</div>--}}
+        {{--@endif--}}
         <div onclick="openProSearch()">
             <span class="footerMenuBarLinks">جست‌و‌جو</span>
             <span class="ui_icon search"></span>
@@ -354,12 +354,12 @@ $config = \App\models\ConfigModel::first()
                                     <ul class="popular_by_views_list">
                                         @foreach($mostSeenPost as $post)
                                             <li class="im-widget clearfix">
-                                                <figure class="im-widget-thumb">
+                                                <figure class="im-widget-thumb im-widget-thumb_rightSide">
                                                     <a  href="{{route('article.show', ['slug' => $post->slug])}}" title="{{$post->title}}">
                                                         <img src="{{$post->pic}}" alt="{{$post->keyword}}"/>
                                                     </a>
                                                 </figure>
-                                                <div class="im-widget-entry">
+                                                <div class="im-widget-entry im-widget-entry_rightSide">
                                                     <header class="im-widget-entry-header">
                                                         <h4 class='im-widget-entry-title'>
                                                             <a  href="{{route('article.show', ['slug' => $post->slug])}}" title="{{$post->title}}">
@@ -390,7 +390,7 @@ $config = \App\models\ConfigModel::first()
                     </div>
                 </div>
             @elseif(Request::is('placeList/*'))
-                <div class="mainPopUp leftPopUp" style="padding: 7px">
+                <div ng-app="mainApp" class="mainPopUp leftPopUp PlaceController" style="padding: 7px">
                     <div class="lp_ar_searchTitle">جستجو خود را محدودتر کنید</div>
 
                     <div class="lp_ar_filters">
@@ -398,7 +398,7 @@ $config = \App\models\ConfigModel::first()
                         <div class="lp_ar_eachFilters" onclick="lp_selectArticleFilter('lp_ar_leftFilters' ,this)">نحوه مرتب‌سازی</div>
                     </div>
                     {{--right menu--}}
-                    <div id="lp_ar_rightFilters" class="lp_ar_contentOfFilters">
+                    <div id="lp_ar_rightFilters" class="lp_ar_contentOfFilters" ng-controller="FilterController">
                         <div id="EATERY_FILTERS_CONT" class="eatery_filters">
                             <div class="prw_rup prw_restaurants_restaurant_filters">
                                 <div id="jfy_filter_bar_establishmentTypeFilters"
@@ -413,18 +413,14 @@ $config = \App\models\ConfigModel::first()
                                         <div style="cursor: pointer; font-size: 12px; color: #050c93; margin-bottom: 7px;" onclick="closeFilters()">
                                             پاک کردن فیلترها
                                         </div>
-                                        <div id="filterShow" style="display: flex; flex-direction: row; flex-wrap: wrap;"></div>
+                                        <div class="filterShow" style="display: flex; flex-direction: row; flex-wrap: wrap;"></div>
                                     </div>
                                 </div>
                             </div>
                             <div class="prw_rup prw_restaurants_restaurant_filters">
                                 <div id="jfy_filter_bar_establishmentTypeFilters" class="lhrFilterBlock jfy_filter_bar_establishmentTypeFilters collapsible">
                                     <div class="filterGroupTitle">جستجو‌ی نام</div>
-                                    {{--                                                <div class="hl_inputBox">--}}
-                                    {{--ng-change="nameFilter(nameSearch)"--}}
-                                    {{--ng-model="nameSearch"--}}
-                                    <input id="nameSearch" class="hl_inputBox" placeholder="جستجو کنید" onchange="nameFilterFunc(this.value)">
-                                    {{--                                                </div>--}}
+                                    <input id="p_nameSearch" class="hl_inputBox" placeholder="جستجو کنید" onchange="nameFilterFunc(this.value)">
                                 </div>
                             </div>
                             <div class="prw_rup prw_restaurants_restaurant_filters">
@@ -433,7 +429,7 @@ $config = \App\models\ConfigModel::first()
                                     <div class="filterGroupTitle">امتیاز کاربران</div>
                                     <div class="filterContent ui_label_group inline">
                                         <div class="filterItem lhrFilter filter selected">
-                                            <input ng-click="RateFilter(5)" type="radio" name="AVGrate" id="p_c5" value="5"/>
+                                            <input onclick="rateFilterFunc(5)" type="radio" name="AVGrate" id="p_c5" value="5"/>
                                             <label for="p_c5"
                                                    style="display:inline-block;"><span></span></label>
                                             <div class="rating-widget"
@@ -444,7 +440,7 @@ $config = \App\models\ConfigModel::first()
                                             </div>
                                         </div>
                                         <div class="filterItem lhrFilter filter selected">
-                                            <input  ng-click="RateFilter(4)" type="radio" name="AVGrate" id="p_c4" value="4"/>
+                                            <input onclick="rateFilterFunc(4)" type="radio" name="AVGrate" id="p_c4" value="4"/>
                                             <label for="p_c4"
                                                    style="display:inline-block;"><span></span></label>
                                             <div class="rating-widget"
@@ -456,7 +452,7 @@ $config = \App\models\ConfigModel::first()
                                             <span> به بالا</span>
                                         </div>
                                         <div class="filterItem lhrFilter filter selected">
-                                            <input ng-click="RateFilter(3)" type="radio" name="AVGrate" id="p_c3" value="3"/>
+                                            <input onclick="rateFilterFunc(3)" type="radio" name="AVGrate" id="p_c3" value="3"/>
                                             <label for="p_c3"
                                                    style="display:inline-block;"><span></span></label>
                                             <div class="rating-widget"
@@ -468,7 +464,7 @@ $config = \App\models\ConfigModel::first()
                                             <span> به بالا</span>
                                         </div>
                                         <div class="filterItem lhrFilter filter selected">
-                                            <input ng-click="RateFilter(2)" type="radio" name="AVGrate" id="p_c2" value="2"/>
+                                            <input onclick="rateFilterFunc(2)" type="radio" name="AVGrate" id="p_c2" value="2"/>
                                             <label for="p_c2"
                                                    style="display:inline-block;"><span></span></label>
                                             <div class="rating-widget"
@@ -480,7 +476,7 @@ $config = \App\models\ConfigModel::first()
                                             <span> به بالا</span>
                                         </div>
                                         <div class="filterItem lhrFilter filter selected">
-                                            <input ng-click="RateFilter(1)" type="radio" name="AVGrate" id="p_c1" value="1"/>
+                                            <input onclick="rateFilterFunc(1)" type="radio" name="AVGrate" id="p_c1" value="1"/>
                                             <label for="p_c1"
                                                    style="display:inline-block;"><span></span></label>
                                             <div class="rating-widget"
@@ -497,6 +493,10 @@ $config = \App\models\ConfigModel::first()
 
                             @if($kindPlace->id == 4)
                                 @include('places.list.filters.hotelFilters')
+                            @elseif($kindPlace->id == 10)
+                                @include('places.list.filters.sogatSanaieFilters')
+                            @elseif($kindPlace->id == 11)
+                                @include('places.list.filters.mahaliFoodFilters')
                             @endif
 
                             @foreach($features as $feature)
@@ -513,7 +513,7 @@ $config = \App\models\ConfigModel::first()
                                         <div class="filterContent ui_label_group inline">
                                             @for($i = 0; $i < 5 && $i < count($feature->subFeat); $i++)
                                                 <div class="filterItem lhrFilter filter selected">
-                                                    <input ng-disabled="isDisable()" ng-click="doFilterFeature({{$feature->subFeat[$i]->id}})" type="checkbox" id="p_feat{{$feature->subFeat[$i]->id}}" value="{{$feature->subFeat[$i]->name}}"/>
+                                                    <input ng-disabled="isDisable()" onclick="doFilterFeature({{$feature->subFeat[$i]->id}})" type="checkbox" id="p_feat{{$feature->subFeat[$i]->id}}" value="{{$feature->subFeat[$i]->name}}"/>
                                                     <label for="p_feat{{$feature->subFeat[$i]->id}}"><span></span>&nbsp;&nbsp;{{$feature->subFeat[$i]->name}}  </label>
                                                 </div>
                                             @endfor
@@ -521,7 +521,7 @@ $config = \App\models\ConfigModel::first()
                                             @if(count($feature->subFeat) > 5)
                                                 @for($i = 5; $i < count($feature->subFeat); $i++)
                                                     <div class="filterItem lhrFilter filter hidden extraItem{{$feature->id}}">
-                                                        <input ng-disabled="isDisable()" ng-click="doFilterFeature({{$feature->subFeat[$i]->id}})" type="checkbox" id="p_feat{{$feature->subFeat[$i]->id}}" value="{{$feature->subFeat[$i]->name}}"/>
+                                                        <input ng-disabled="isDisable()" onclick="doFilterFeature({{$feature->subFeat[$i]->id}})" type="checkbox" id="p_feat{{$feature->subFeat[$i]->id}}" value="{{$feature->subFeat[$i]->name}}"/>
                                                         <label for="p_feat{{$feature->subFeat[$i]->id}}"><span></span>&nbsp;&nbsp; {{$feature->subFeat[$i]->name}} </label>
                                                     </div>
                                                 @endfor
@@ -538,29 +538,29 @@ $config = \App\models\ConfigModel::first()
                     <div id="lp_ar_leftFilters" class="lp_ar_contentOfFilters hidden">
                         <div id="FilterTopController">
                             <div class="ordering">
-                                <div class="orders" onclick="selectingOrder($(this),'review')" ng-click="sortFunc('review')" id="z1">
+                                <div class="orders" onclick="selectingOrder($(this),'review')" id="pz1">
                                     بیشترین نظر
                                 </div>
                             </div>
                             <div class="ordering">
-                                <div class="orders selectOrder" onclick="selectingOrder($(this), 'rate')" ng-click="sortFunc('rate')" id="z2">
+                                <div class="orders selectOrder" onclick="selectingOrder($(this), 'rate')" id="pz2">
                                     بهترین بازخورد
                                 </div>
                             </div>
                             <div class="ordering">
-                                <div class="orders" onclick="selectingOrder($(this), 'seen')" ng-click="sortFunc('seen')" id="z3">
+                                <div class="orders" onclick="selectingOrder($(this), 'seen')" id="pz3">
                                     بیشترین بازدید
                                 </div>
                             </div>
                             <div class="ordering">
-                                <div class="orders" ng-click="sortFunc('alphabet')" onclick="selectingOrder($(this), 'alphabet')" id="z4" >
+                                <div class="orders" onclick="selectingOrder($(this), 'alphabet')" id="pz4" >
                                     حروف الفبا
                                 </div>
                             </div>
                             @if($kindPlace->id != 10 && $kindPlace->id != 11)
-                                <div class="ordering"  >
-                                    <div id="distanceNav" class="orders" onclick="openGlobalSearch()">کمترین فاصله تا
-                                        <span id="selectDistance">__ __ __</span>
+                                <div class="ordering">
+                                    <div id="distanceNavMobile" class="orders" onclick="openGlobalSearch(); selectingOrder($(this), 'distance')">کمترین فاصله تا
+                                        <span id="selectDistanceMobile">__ __ __</span>
                                     </div>
                                 </div>
                             @endif
@@ -864,23 +864,23 @@ $config = \App\models\ConfigModel::first()
                     <div class="pSC_boxOfDetails">
                     <div class="pSC_choiseDetailsText">به سادگی انتخاب کنید</div>
                     <div class="pSC_boxOfCityDetailsText">
-                        <span>مشاهده صفحه {{$locationName['name']}}</span>
+                        <span onclick="window.location.href = '{{url("cityPage/" . $locationName['kindState'] . "/" . $locationName["cityNameUrl"])}}'">مشاهده صفحه {{$locationName['cityName']}}</span>
                         @if(isset($locationName['state']))
-                            <span class="pSC_boxOfCityDetailsText2">در استان استان {{$locationName['state']}}</span>
+                            <span class="pSC_boxOfCityDetailsText2">در استان {{$locationName['state']}}</span>
                         @endif
                     </div>
                     <div>
                         <div class="pSC_boxOfCityDetails">
-                            <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/1/" . $locationName['urlName'] . "/" . $kind)}}'">جاذبه‌های {{$locationName['name']}}</div>
-                            <div class="pSC_cityDetails pSC_cityDetails_selected" onclick="window.location.href = '{{url("placeList/4/" . $locationName['urlName'] . "/" . $kind)}}'">هتل‌های {{$locationName['name']}}</div>
+                            <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/1/" . $locationName['kindState'] . "/" . $locationName['cityNameUrl'])}}'">جاذبه‌های {{$locationName['cityName']}}</div>
+                            <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/4/" . $locationName['kindState'] . "/" . $locationName['cityNameUrl'])}}'">هتل‌های {{$locationName['cityName']}}</div>
                         </div>
                         <div class="pSC_boxOfCityDetails">
                             <div class="pSC_cityDetails" onclick="window.location.href = '{{$locationName['articleUrl']}}'">مقاله‌های {{$locationName['name']}}</div>
-                            <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/3/" . $locationName['urlName'] . "/" . $kind)}}'">رستوران‌های {{$locationName['name']}}</div>
+                            <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/3/" . $locationName['kindState'] . "/" . $locationName['cityNameUrl'])}}'">رستوران‌های {{$locationName['cityName']}}</div>
                         </div>
                         <div class="pSC_boxOfCityDetails">
-                            <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/10/" . $locationName['urlName'] . "/" . $kind)}}'">صنایع دستی‌های {{$locationName['name']}}</div>
-                            <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/11/" . $locationName['urlName'] . "/" . $kind)}}'">غذای محلی‌های {{$locationName['name']}}</div>
+                            <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/10/" . $locationName['kindState'] . "/" . $locationName['cityNameUrl'])}}'">صنایع دستی‌های {{$locationName['cityName']}}</div>
+                            <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/11/" . $locationName['kindState'] . "/" . $locationName['cityNameUrl'])}}'">غذاهای محلی‌ {{$locationName['cityName']}}</div>
                         </div>
                     </div>
                     <div class="overflowOptimizer"></div>
@@ -893,7 +893,7 @@ $config = \App\models\ConfigModel::first()
                     </div>
                     <div class="phoneDescription">
                         <div class="phoneDescriptionText">
-                            بنده شازده مسافر هستم و همونطوری که از اسمم مشخصه عاشق سفرم و بیشتر اوقاتم رو به سفر میگذرونم.
+                            بنده کوچیتا هستم و همونطوری که از اسمم مشخصه عاشق سفرم و بیشتر اوقاتم رو به سفر میگذرونم.
                             عرضم به خدمتِ شما، اگه ریا نباشه تقریبا میتونم بگم که همه ی اماکن و جاذبه های گردشگری ایران رو از نزدیک دیدم! بخاطر همینم چند وقت پیشا تصمیم گرفتم با یه سری از دوستام بشینیم و همه جاهایی که رفتیم رو برای شما توصیف کنیم و تجربه هامون رو با شما به اشتراک بزاریم که هر وقت دلتون خواست به شهری سفر کنید، قبلش میتونید بیاید اینجا و از جاذبه های دیدنی، خوردنی، شنیدنی و خریدنی اون شهر
                             با خبر بشید و توضیحاتش رو هم کامل بخونین، بعدش راحت دل رو به دریا بزنین و راه بیوفتین.
                         </div>
@@ -1392,36 +1392,36 @@ $config = \App\models\ConfigModel::first()
             var recentlySample = 0;
             var bookMarkSample = 0;
 
-            function phoneRecentlyViews() {
+            {{--function phoneRecentlyViews() {--}}
 
-                if(recentlySample == 0)
-                    recentlySample = $('#phoneRecentlyView').html();
+                {{--if(recentlySample == 0)--}}
+                    {{--recentlySample = $('#phoneRecentlyView').html();--}}
 
-                $('#phoneRecentlyView').html('');
+                {{--$('#phoneRecentlyView').html('');--}}
 
 
-                $.ajax({
-                    type: 'post',
-                    url: '{{route('recentlyViewed')}}',
-                    data: {
-                        uId: '{{auth()->user()->id}}'
-                    },
-                    success: function (response) {
+                {{--$.ajax({--}}
+                    {{--type: 'post',--}}
+                    {{--url: '{{route('recentlyViewed')}}',--}}
+                    {{--data: {--}}
+                        {{--uId: '{{auth()->user()->id}}'--}}
+                    {{--},--}}
+                    {{--success: function (response) {--}}
 
-                        response = JSON.parse(response);
-                        for(i = 0; i < response.length; i++){
-                            var text = recentlySample;
-                            var fk = Object.keys(response[i]);
-                            for (var x of fk) {
-                                var t = '##' + x + '##';
-                                var re = new RegExp(t, "g");
-                                text = text.replace(re, response[i][x]);
-                            }
-                            $('#phoneRecentlyView').append(text);
-                        }
-                    }
-                });
-            }
+                        {{--response = JSON.parse(response);--}}
+                        {{--for(i = 0; i < response.length; i++){--}}
+                            {{--var text = recentlySample;--}}
+                            {{--var fk = Object.keys(response[i]);--}}
+                            {{--for (var x of fk) {--}}
+                                {{--var t = '##' + x + '##';--}}
+                                {{--var re = new RegExp(t, "g");--}}
+                                {{--text = text.replace(re, response[i][x]);--}}
+                            {{--}--}}
+                            {{--$('#phoneRecentlyView').append(text);--}}
+                        {{--}--}}
+                    {{--}--}}
+                {{--});--}}
+            {{--}--}}
 
             function getAlertItemsPhone() {
                 $.ajax({
@@ -1462,8 +1462,6 @@ $config = \App\models\ConfigModel::first()
                     url: '{{route('getBookMarks')}}',
                     success: function (response) {
                         response = JSON.parse(response);
-                        console.log(response);
-
                         for(i = 0; i < response.length; i++){
                             var text = bookMarkSample;
                             var fk = Object.keys(response[i]);
@@ -1478,7 +1476,7 @@ $config = \App\models\ConfigModel::first()
                 });
             }
 
-            phoneRecentlyViews();
+            // phoneRecentlyViews();
             getAlertItemsPhone();
             showBookMarksPhone();
         </script>

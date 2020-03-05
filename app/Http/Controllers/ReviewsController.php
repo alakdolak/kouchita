@@ -170,32 +170,9 @@ class ReviewsController extends Controller
             $placeId = $request->placeId;
             $uId = Auth::user()->id;
             $kindPlaceId = $request->kindPlaceId;
-            switch ($kindPlaceId){
-                case 1:
-                    $place = Amaken::find($placeId);
-                    $kindPlaceName = 'amaken';
-                    break;
-                case 3:
-                    $place = Restaurant::find($placeId);
-                    $kindPlaceName = 'restaurant';
-                    break;
-                case 4:
-                    $place = Hotel::find($placeId);
-                    $kindPlaceName = 'hotels';
-                    break;
-                case 6:
-                    $place = Majara::find($placeId);
-                    $kindPlaceName = 'majara';
-                    break;
-                case 10:
-                    $place = SogatSanaie::find($placeId);
-                    $kindPlaceName = 'sogatsanaie';
-                    break;
-                case 11:
-                    $place = MahaliFood::find($placeId);
-                    $kindPlaceName = 'mahalifood';
-                    break;
-            }
+            $kindPlace = Place::find($kindPlaceId);
+            $place = DB::table($kindPlace->tableName)->find($placeId);
+            $kindPlaceName = $kindPlace->fileName;
 
             $log = new LogModel();
             $log->placeId = $placeId;
@@ -600,8 +577,8 @@ class ReviewsController extends Controller
             else{
                 $item2->url = URL::asset('userPhoto/' . $item->mainFile . '/' . $item->place->file . '/' . $item2->pic);
             }
-            $item2->width = getimagesize($item2->url)[0];
-            $item2->height = getimagesize($item2->url)[1];
+//            $item2->width = getimagesize($item2->url)[0];
+//            $item2->height = getimagesize($item2->url)[1];
         }
         return $item;
     }

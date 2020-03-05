@@ -56,21 +56,6 @@ class CreateMajaraTable extends Migration
             $table->string('alt3', 300)->nullable();
             $table->string('alt4', 300)->nullable();
             $table->string('alt5', 300)->nullable();
-            $table->string('tag1', 300)->nullable();
-            $table->string('tag2', 300)->nullable();
-            $table->string('tag3', 300)->nullable();
-            $table->string('tag4', 300)->nullable();
-            $table->string('tag5', 300)->nullable();
-            $table->string('tag6', 300)->nullable();
-            $table->string('tag7', 300)->nullable();
-            $table->string('tag8', 300)->nullable();
-            $table->string('tag9', 300)->nullable();
-            $table->string('tag10', 300)->nullable();
-            $table->string('tag11', 300)->nullable();
-            $table->string('tag12', 300)->nullable();
-            $table->string('tag13', 300)->nullable();
-            $table->string('tag14', 300)->nullable();
-            $table->string('tag15', 300)->nullable();
             $table->foreign('cityId')->references('id')->on('cities')->onUpdate('cascade')->onDelete('restrict');
         });
     }

@@ -9,7 +9,7 @@ $kindPlaceId = 10; ?>
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/long_lived_global_legacy_2.css?v=1')}}"/>
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/article.min.css?v=1.1')}}"/>
 
-    <title>{{$post->title}} - شازده مسافر</title>
+    <title>{{$post->title}} - کوچیتا</title>
 
     <meta name="description" content="{{$post->description}}"/>
     <meta property="og:locale" content="fa_IR" />
@@ -17,7 +17,7 @@ $kindPlaceId = 10; ?>
     <meta property="og:title" content="{{$post->title}}" />
     <meta property="og:description" content="{{$post->description}}" />
     <meta property="og:url" content="{{Request::url()}}" />
-    <meta property="og:site_name" content="شازده مسافر" />
+    <meta property="og:site_name" content="کوچیتا" />
 
     @for($i = 0; $i < count($tags); $i++)
         <meta property="article:tag" content="{{$tags[$i]}}" />
@@ -90,7 +90,7 @@ $kindPlaceId = 10; ?>
 
                         <div class="im-header-ad col-md-10 col-sm-12">
                             <p>
-                                <img class="aligncenter size-full wp-image-4151" src="{{URL::asset('posts/' . $post->pic)}}" alt="شازده مسافر" width="100%" />
+                                <img class="aligncenter size-full wp-image-4151" src="{{URL::asset('posts/' . $post->pic)}}" alt="کوچیتا" width="100%" />
                             </p>
 
                             <article class="im-article content-single content-layout-1 col-md-12 type-post status-publish format-standard has-post-thumbnail hentry">
@@ -116,7 +116,7 @@ $kindPlaceId = 10; ?>
                                                 </div>
                                                 <div class="author vcard im-meta-item">
                                                     <a class="url fn n" href="/author/writer/">
-                                                        <i class="fa fa-user"></i>شازده مسافر
+                                                        <i class="fa fa-user"></i>کوچیتا
                                                     </a>
                                                 </div>
                                                 <div class="post-views im-meta-item"><i class="fa fa-eye"></i>{{$post->seen}}</div>

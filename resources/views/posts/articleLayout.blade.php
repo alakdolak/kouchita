@@ -2,10 +2,11 @@
 <html>
 <head>
     @include('layouts.topHeader')
-
-    <meta charset="UTF-8">
+    {{--<meta name="description" content="متن توضیحات متا"/>--}}
+    {{--<meta name="keywords" content="کیورد 1, کیورد دو, کی ورد سه">--}}
+    <meta property="og:locale" content="fa_IR" />
+    {{--<meta property="og:locale:alternate" content="fa_IR" />--}}
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
 
     <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/hr_north_star.css?v=1')}}' data-rup='hr_north_star_v1'/>
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/shazdeDesigns/hotelDetail.css')}}"/>

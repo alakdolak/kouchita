@@ -28,7 +28,7 @@ class setSession
         $url = $request->url();
         $url = urldecode($url);
         $url = explode('/', $url);
-//        $ses = '';
+        $ses = '';
 
         $places = ['hotel-details', 'amaken-details', 'majara-details', 'restaurant-details', 'sanaiesogat-details', 'mahaliFood-details'];
         foreach ($places as $item){
@@ -59,6 +59,10 @@ class setSession
                     case 'mahaliFood-details':
                         $kindPlace = Place::whereName('غذای محلی')->first();
                         $place = MahaliFood::find($placeId);
+                        break;
+                    case 'show-place-details':
+                        dd('in');
+                        $kindPlace = Place::find(1);
                         break;
                 }
                 if($place == null || $kindPlace == null)

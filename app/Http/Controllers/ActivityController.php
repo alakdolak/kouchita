@@ -168,7 +168,7 @@ class ActivityController extends Controller {
                 $itr->placePic = URL::asset("_images/" . $kindPlace->fileName . "/" . $tmp->file . "/f-1.jpg");
             else
                 $itr->placePic = URL::asset("_images/nopic/blank.jpg");
-            $itr->placeRedirect = route('placeDetails', ['placeId' => $tmp->id, 'kindPlaceId' => $itr->kindPlaceId]);
+            $itr->placeRedirect = createUrl($kindPlace->id, $tmp->id, 0, 0);
 
             $city = Cities::whereId($tmp->cityId);
             $itr->placeCity = $city->name;
@@ -199,90 +199,25 @@ class ActivityController extends Controller {
             if($itr->placeId == -1)
                 continue;
 
-            switch ($itr->kindPlaceId) {
-                case 1:
-                default:
-                    $tmp = Amaken::whereId($itr->placeId);
-                    if(file_exists(__DIR__ . '/../../../../assets/_images/amaken/' . $tmp->file . "/f-1.jpg"))
-                        $itr->placePic = URL::asset("_images/amaken/" . $tmp->file . "/f-1.jpg");
-                    else
-                        $itr->placePic = URL::asset("_images/nopic/blank.jpg");
+            $kindPlaceItr = Place::find($itr->kindPlaceId);
+            $itrFile = $kindPlaceItr->fileName;
+            $tmp = DB::table($kindPlaceItr->tableName)->find($itr->placeId);
+            if($tmp != null){
+                if(file_exists(__DIR__ . '/../../../../assets/_images/' . $itrFile . '/' . $tmp->file . "/f-1.jpg"))
+                    $itr->placePic = URL::asset("_images/" . $itrFile . "/" . $tmp->file . "/f-1.jpg");
+                else
+                    $itr->placePic = URL::asset("_images/nopic/blank.jpg");
+                $itr->placeRedirect = createUrl($kindPlaceItr->id, $tmp->id, 0, 0, 0);
 
-                    $itr->placeRedirect = route('amakenDetails', ['placeId' => $tmp->id, 'placeName' => $tmp->name]);
-                    break;
-                case 3:
-                    $tmp = Restaurant::whereId($itr->placeId);
-                    if(file_exists(__DIR__ . '/../../../../assets/_images/restaurant/' . $tmp->file . "/f-1.jpg"))
-                        $itr->placePic = URL::asset('_images/restaurant/' . $tmp->file . "/" . $tmp->pic_1);
-                    else
-                        $itr->placePic = URL::asset('_images/nopic/blank.jg');
+                $city = Cities::whereId($tmp->cityId);
+                $itr->placeCity = $city->name;
+                $itr->placeState = State::whereId($city->stateId)->name;
+                $itr->placeName = $tmp->name;
+                $itr->placeRate = getRate($itr->placeId, $itr->kindPlaceId)[1];
 
-                    $itr->placeRedirect = route('restaurantDetails', ['placeId' => $tmp->id, 'placeName' => $tmp->name]);
-                    break;
-                case 4:
-                    $tmp = Hotel::whereId($itr->placeId);
-                    if(file_exists(__DIR__ . '/../../../../assets/_images/hotels/' . $tmp->file . "/f-1.jpg"))
-                        $itr->placePic = URL::asset("_images/hotels/" . $tmp->file . "/f-1.jpg");
-                    else
-                        $itr->placePic = URL::asset("_images/nopic/blank.jpg");
-
-                    $itr->placeRedirect = route('hotelDetails', ['placeId' => $tmp->id, 'placeName' => $tmp->name]);
-                    break;
-                case 6:
-                    $tmp = Majara::whereId($itr->placeId);
-                    if(file_exists(__DIR__ . '/../../../../assets/_images/majara/' . $tmp->file . "/f-1.jpg"))
-                        $itr->placePic = URL::asset("_images/majara/" . $tmp->file . "/f-1.jpg");
-                    else
-                        $itr->placePic = URL::asset("_images/nopic/blank.jpg");
-
-                    $itr->placeRedirect = route('majaraDetails', ['placeId' => $tmp->id, 'placeName' => $tmp->name]);
-                    break;
-                case 10:
-                    $tmp = SogatSanaie::find($itr->placeId);
-                    if(file_exists(__DIR__ . '/../../../../assets/_images/sogatsanaie/' . $tmp->file . "/f-1.jpg"))
-                        $itr->placePic = URL::asset("_images/sogatsanaie/" . $tmp->file . "/f-1.jpg");
-                    else
-                        $itr->placePic = URL::asset("_images/nopic/blank.jpg");
-
-                    $itr->placeRedirect = route('sanaiesogatDetails', ['placeId' => $tmp->id, 'placeName' => $tmp->name]);
-                    break;
-                case 11:
-                    $tmp = MahaliFood::find($itr->placeId);
-                    if(file_exists(__DIR__ . '/../../../../assets/_images/mahalifood/' . $tmp->file . "/f-1.jpg"))
-                        $itr->placePic = URL::asset("_images/mahalifood/" . $tmp->file . "/f-1.jpg");
-                    else
-                        $itr->placePic = URL::asset("_images/nopic/blank.jpg");
-
-                    $itr->placeRedirect = route('mahaliFoodDetails', ['placeId' => $tmp->id, 'placeName' => $tmp->name]);
-                    break;
-                case 8:
-                    $tmp = Adab::whereId($itr->placeId);
-                    if($tmp->category == 3) {
-                        if (file_exists((__DIR__ . '/../../../../assets/_images/adab/ghazamahali/' . $tmp->file . "/f-1.jpg")))
-                            $itr->placePic = URL::asset("_images/adab/ghazamahali/" . $tmp->file . "/f-1.jpg");
-                        else
-                            $itr->placePic = URL::asset("_images/nopic/blank.jpg");
-                    }
-                    else {
-                        if (file_exists((__DIR__ . '/../../../../assets/_images/adab/soghat/' . $tmp->file . "/f-1.jpg")))
-                            $itr->placePic = URL::asset("_images/adab/soghat/" . $tmp->file . "/f-1.jpg");
-                        else
-                            $itr->placePic = URL::asset("_images/nopic/blank.jpg");
-                    }
-
-                    $itr->placeRedirect = route('adabDetails', ['placeId' => $tmp->id, 'placeName' => $tmp->name]);
-                    break;
+                $itr->placeReviews = DB::select('select count(*) as countNum from log, comment WHERE logId = log.id and status = 1 and placeId = ' . $itr->placeId .
+                    ' and kindPlaceId = ' . $itr->kindPlaceId . ' and activityId = ' . $activityId)[0]->countNum;
             }
-
-            $city = Cities::whereId($tmp->cityId);
-            $itr->placeCity = $city->name;
-            $itr->placeState = State::whereId($city->stateId)->name;
-            $itr->placeName = $tmp->name;
-            $itr->placeRate = getRate($itr->placeId, $itr->kindPlaceId)[1];
-
-            $itr->placeReviews = DB::select('select count(*) as countNum from log, comment WHERE logId = log.id and status = 1 and placeId = ' . $itr->placeId .
-                ' and kindPlaceId = ' . $itr->kindPlaceId . ' and activityId = ' . $activityId)[0]->countNum;
-
         }
 
         echo json_encode($activities);

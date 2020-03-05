@@ -3,13 +3,28 @@
 @section('head')
     <link rel="stylesheet" href="{{URL::asset('css/easyimage.css')}}">
 
-
     <title> {{$post->seoTitle}} </title>
+    <meta content="article" property="og:type"/>
+
+    <meta name="keywords" content="{{$post->keyword}}">
     <meta property="og:title" content=" {{$post->seoTitle}} " />
-    <meta name="twitter:title" content=" {{$post->seoTitle}} " />
-    <meta name="description" content=" {{$post->meta}}"/>
     <meta property="og:description" content=" {{$post->meta}}" />
+    <meta name="twitter:title" content=" {{$post->seoTitle}} " />
     <meta name="twitter:description" content=" {{$post->meta}}" />
+    <meta name="description" content=" {{$post->meta}}"/>
+    <meta property="article:author " content="{{$post->user->username}}" />
+    <meta property="article:section" content="article" />
+    {{--<meta property="article:published_time" content="2019-05-28T13:32:55+00:00" /> زمان انتشار--}}
+    {{--<meta property="article:modified_time" content="2020-01-14T10:43:11+00:00" />زمان آخریت تغییر--}}
+    {{--<meta property="og:updated_time" content="2020-01-14T10:43:11+00:00" /> زمان آخرین آپدیت--}}
+
+    @if(isset($post->pic))
+        <meta property="og:image" content="{{URL::asset($post->pic)}}"/>
+        <meta property="og:image:secure_url" content="{{URL::asset($post->pic)}}"/>
+        <meta property="og:image:width" content="550"/>
+        <meta property="og:image:height" content="367"/>
+        <meta name="twitter:image" content="{{URL::asset($post->pic)}}"/>
+    @endif
 
     @foreach($post->tag as $item)
         <meta property="article:tag" content="{{$item->tag}}"/>
@@ -22,6 +37,11 @@
         ol, ul{
             padding: 15px;
         }
+        @media (max-width: 768px){
+            .gnWhiteBox {
+                margin: 0 -15px;
+            }
+        }
     </style>
     <script src="{{URL::asset('js/autosize.min.js')}}"></script>
 
@@ -30,7 +50,7 @@
 @section('body')
 
     <div class="container" style="direction: rtl">
-        <div class="col-md-3 col-sm-12 hideOnPhone" style="padding-right: 0 !important;">
+        <div class="col-lg-3 col-sm-3 hideOnPhone" style="padding-right: 0 !important;">
             <a href="{{route('mainArticle')}}">
                 <div class="col-md-12 gnReturnBackBtn">بازگشت به صفحه اصلی</div>
             </a>
@@ -82,8 +102,8 @@
 
             <div class="col-md-12 gnWhiteBox">
                 <div class="gnInput">
-                    <input type="text" class="gnInputonInput" id="pcSearchInput" placeholder="عبارت مورد نظر خود را">
-                    <button class="gnSearchInputBtn" type="submit" onclick="searchInArticle('pcSearchInput')">جستجو کنید</button>
+                    <input type="text" class="gnInputonInput" id="pcSearchInput" placeholder="عبارت جستجو">
+                    <span class="ui_icon search gnSearchInputBtn" onclick="searchInArticle('pcSearchInput')"></span>
                 </div>
             </div>
 
@@ -91,7 +111,7 @@
                 @foreach($similarPost as $item)
                     <div class="content-2col">
                         <div class="im-entry-thumb" style="background-image: url('{{$item->pic}}'); background-size: 100% 100%;">
-                            <div class="im-entry-header">
+                            <div class="im-entry-header im-entry-header_rightSide">
                                 <div class="im-entry-category">
                                     <div class="iranomag-meta clearfix">
                                         <div class="cat-links im-meta-item">
@@ -100,7 +120,7 @@
                                     </div>
                                 </div>
                                 <a href="{{$item->url}}" rel="bookmark">
-                                    <h1 class="im-entry-title" style="color: white;">
+                                    <h1 class="im-entry-title im-entry-title_rightSide">
                                         {{$item->title}}
                                     </h1>
                                 </a>
@@ -135,7 +155,7 @@
                 @endforeach
             </div>
         </div>
-        <div class="col-md-9 col-sm-12 gnWhiteBox">
+        <div class="col-lg-9 col-sm-9 gnWhiteBox">
             <div class="gnMainPicOfArticle">
                 <img class="gnAdvertiseImage" src="{{URL::asset($post->pic)}}" alt="{{$post->keyword}}">
                 <div class="gnMainPicOfArticleText">
@@ -167,38 +187,48 @@
                 </div>
             </div>
             <div>
-                <div style="margin-top: 65px">
-                    {!! $post->description !!}
+                <div>
+                    <div style="margin-top: 65px">
+                        {!! $post->description !!}
+                    </div>
+                    <div>
+                        <div class="col-md-12 col-sm-12 gnUserDescription">
+                            <div class="gnLabels" style="line-height: 30px !important;">برچسب ها</div>
+                            <div>
+                                @foreach($post->tag as $tag)
+                                    <div class="gnTags">{{$tag->tag}}</div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                    <div class="commentFeedbackChoices">
+                        <div id="likeDiv" class="postsActionsChoices postLikeChoice col-xs-6 col-md-3" onclick="likePost(1, {{$post->id}})" style="color: {{$postLike == 1 ? 'red': ''}}">
+                            <span id="likeDivIcon" class="commentsLikeIconFeedback {{$postLike == 1 ? 'commentsLikeClickedIconFeedback': ''}}"></span>
+                            <span class="mg-rt-32 cursor-pointer">دوست داشتم</span>
+                        </div>
+                        <div id="disLikeDiv" class="postsActionsChoices postDislikeChoice col-xs-6 col-md-3" onclick="likePost(0, {{$post->id}})" style="color: {{$postLike == 0 ? 'darkred': ''}}">
+                            <span id="disLikeDivIcon" class="commentsDislikeIconFeedback {{$postLike == 0 ? 'commentsDislikeClickedIconFeedback': ''}}"></span>
+                            <span class="mg-rt-32 cursor-pointer">دوست نداشتم</span>
+                        </div>
+                        <div class="postsActionsChoices postCommentChoice col-xs-6 col-md-3">
+                            <span class="showCommentsIconFeedback" onclick="showPostsComments(0)"></span>
+                            <span class="mg-rt-32 cursor-pointer" onclick="showPostsComments(0)">مشاهده نظرها</span>
+                        </div>
+                        <div class="postsActionsChoices postShareChoice col-xs-6 col-md-3">
+                            <span class="commentsShareIconFeedback"></span>
+                            <span class="mg-rt-32 cursor-pointer">اشتراک‌گذاری</span>
+                        </div>
+                    </div>
+                    <div class="quantityOfLikes">
+                        <span id="countLike">{{$post->like}}</span>
+                        نفر دوست داشتند،
+                        <span id="countDisLike">{{$post->disLike}}</span>
+                        نفر دوست نداشتند و
+                        <span>{{$post->msg}}</span>
+                        نفر نظر دادند.
+                    </div>
                 </div>
-                <div class="commentFeedbackChoices">
-                    <div id="likeDiv" class="postsActionsChoices postLikeChoice col-xs-3" onclick="likePost(1, {{$post->id}})" style="color: {{$postLike == 1 ? 'red': ''}}">
-                        <span id="likeDivIcon" class="commentsLikeIconFeedback {{$postLike == 1 ? 'commentsLikeClickedIconFeedback': ''}}"></span>
-                        <span class="mg-rt-20 cursor-pointer">دوست داشتم</span>
-                    </div>
-                    <div id="disLikeDiv" class="postsActionsChoices postDislikeChoice col-xs-3" onclick="likePost(0, {{$post->id}})" style="color: {{$postLike == 0 ? 'darkred': ''}}">
-                        <span id="disLikeDivIcon" class="commentsDislikeIconFeedback {{$postLike == 0 ? 'commentsDislikeClickedIconFeedback': ''}}"></span>
-                        <span class="mg-rt-20 cursor-pointer">دوست نداشتم</span>
-                    </div>
-                    <div class="postsActionsChoices postCommentChoice col-xs-3">
-                        <span class="showCommentsIconFeedback" onclick="showPostsComments(0)"></span>
-                        <span class="mg-rt-20 cursor-pointer" onclick="showPostsComments(0)">مشاهده نظرها</span>
-                    </div>
-                    <div class="postsActionsChoices postShareChoice col-xs-3">
-                        <span class="commentsShareIconFeedback"></span>
-                        <span class="mg-rt-20 cursor-pointer">اشتراک‌گذاری</span>
-                    </div>
-                </div>
-                <div class="quantityOfLikes">
-                    <span id="countLike">{{$post->like}}</span>
-                    نفر دوست داشتند،
-                    <span id="countDisLike">{{$post->disLike}}</span>
-                    نفر دوست نداشتند و
-                    <span>{{$post->msg}}</span>
-                    نفر نظر دادند.
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-9 col-sm-12">
+                <div>
                     <div class="col-md-12 col-sm-12 gnUserDescription">
                         <div>
                             <div class="circleBase type2 newCommentWriterProfilePic">
@@ -211,68 +241,61 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3 col-sm-12" style="padding-right: 0;">
-                    <div class="col-md-12 col-sm-12 gnUserDescription">
-                        <div class="gnLabels">برچسب ها</div>
-                        <div>
-                            @foreach($post->tag as $tag)
-                                <div>{{$tag->tag}}</div>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <div id="commentDiv0" style="display: none">
-                    <div id="commentMainDiv##id##" class="eachCommentMainBox" style="margin-top: 20px; margin-right: ##mRight##;">
-                        <div class="circleBase type2 commentsWriterProfilePic">
-                            <img src="##userPic##" style="width: 100%; height: 100%; border-radius: 50%;">
-                        </div>
-                        <div class="commentsContentMainBox">
-                            <b class="userProfileName display-inline-block">##username##</b>
-                            <span class="label label-success" style="display: ##status1##;">در انتظار تایید</span>
-                            <p style="white-space: pre-line">##msg##</p>
-                            <div class="commentsStatisticsBar">
-                                <div class="float-right display-inline-black">
-                                    <span id="commentLikeCount##id##" class="likeStatisticIcon commentsStatisticSpan color-red">##likeCount##</span>
-                                    <span id="commentDisLikeCount##id##" class="dislikeStatisticIcon commentsStatisticSpan dark-red">##disLikeCount##</span>
-                                    <span class="numberOfCommentsIcon commentsStatisticSpan color-blue">##ans##</span>
+                <div>
+                    <div id="commentDiv0" class="commentsMainBox display-none" style="display: none;">
+                        <div id="commentMainDiv##id##" class="eachCommentMainBox" style="margin-top: 20px;">
+                            <div class="circleBase type2 commentsWriterProfilePic">
+                                <img src="##userPic##" style="width: 100%; height: 100%; border-radius: 50%;">
+                            </div>
+                            <div class="commentsContentMainBox">
+                                <b class="userProfileName display-inline-block">##username##</b>
+                                <span class="label label-success" style="display: ##status1##;">در انتظار تایید</span>
+                                <div>##msg##</div>
+                                <div class="commentsStatisticsBar">
+                                    <div class="float-right display-inline-black">
+                                        <span id="commentLikeCount##id##" class="likeStatisticIcon commentsStatisticSpan color-red">##likeCount##</span>
+                                        <span id="commentDisLikeCount##id##" class="dislikeStatisticIcon commentsStatisticSpan dark-red">##disLikeCount##</span>
+                                        <span class="numberOfCommentsIcon commentsStatisticSpan color-blue">##ans##</span>
+                                    </div>
+                                    <div class="dark-blue float-left display-inline-black cursor-pointer" onclick="showPostsComments(##id##)" style="display: ##haveAnsDisplay##;">دیدن پاسخ‌ها</div>
+                                    <b class="replyBtn hideOnScreen" onclick="replyToComments(this)">پاسخ دهید</b>
+                                    {{--                                <div class="dark-blue float-left display-inline-black cursor-pointer" onclick="showPostsComments(##id##)">دیدن پاسخ‌ها</div>--}}
                                 </div>
-                                <div class="dark-blue float-left display-inline-black cursor-pointer" onclick="showPostsComments(##id##)" style="display: ##haveAnsDisplay##;">دیدن پاسخ‌ها</div>
                             </div>
-                        </div>
-                        <div class="commentsActionsBtns" style="display: ##status2##;">
-                            <div onclick="likeComment(##id##, 1, this);">
-                                <span class="likeActionBtn ##showLike##"></span>
-                            </div>
-                            <div onclick="likeComment(##id##, 0, this);">
-                                <span class="dislikeActionBtn ##showDisLike##"></span>
-                            </div>
+                            <div class="commentsActionsBtns hideOnPhone" style="display: ##status2##;">
+                                <div onclick="likeComment(##id##, 1, this);">
+                                    <span class="likeActionBtn ##showLike##"></span>
+                                </div>
+                                <div onclick="likeComment(##id##, 0, this);">
+                                    <span class="dislikeActionBtn ##showDisLike##"></span>
+                                </div>
 
-                            <div class="clear-both"></div>
-                            <b class="replyBtn" onclick="replyToComments(this)">پاسخ دهید</b>
-                        </div>
-                        <div class="replyToCommentMainDiv" style="display: none">
-                            <div class="circleBase type2 newCommentWriterProfilePic">
-                                <img src="##authPic##" style="width: 100%; height: 100%; border-radius: 50%;">
+                                <div class="clear-both"></div>
+                                <b class="replyBtn" onclick="replyToComments(this)">پاسخ دهید</b>
                             </div>
-                            <div class="inputBox">
-                                <b class="replyCommentTitle">در پاسخ به نظر ##username##</b>
-                                <textarea id="ansForReviews_1043" class="inputBoxInput inputBoxInputComment" placeholder="شما چه نظری دارید؟" onclick="checkLogin()"></textarea>
-                                <button class="btn btn-primary" onclick="sendComment(##postId##, ##id##, this)"> ارسال</button>
+                            <div class="replyToCommentMainDiv" style="display: none">
+                                <div class="circleBase type2 newCommentWriterProfilePic">
+                                    <img src="##authPic##" style="width: 100%; height: 100%; border-radius: 50%;">
+                                </div>
+                                <div class="inputBox">
+                                    <b class="replyCommentTitle">در پاسخ به نظر ##username##</b>
+                                    <textarea id="ansForReviews_1043" class="inputBoxInput inputBoxInputComment" placeholder="شما چه نظری دارید؟" onclick="checkLogin()"></textarea>
+                                    <button class="btn btn-primary" onclick="sendComment(##postId##, ##id##, this)"> ارسال</button>
+                                </div>
                             </div>
                         </div>
+                        <div id="commentDiv##id##" style="display: none"></div>
                     </div>
-                    <div id="commentDiv##id##" style="display: none"></div>
-                </div>
-                <div class="newCommentPlaceMainDiv">
-                    <div class="circleBase type2 newCommentWriterProfilePic">
-                        <img src="{{$uPic}}" style="">
-                    </div>
-                    <div class="inputBox">
-                        <b class="replyCommentTitle">نظر خود را در مورد مقاله با ما در میان بگذارید</b>
-                        <textarea class="inputBoxInput inputBoxInputComment" id="ansForReviews_1038" placeholder="شما چه نظری دارید؟" onclick="checkLogin()"></textarea>
-                        <button class="btn btn-primary" onclick="sendComment({{$post->id}}, 0, this)"> ارسال</button>
+
+                    <div class="newCommentPlaceMainDiv">
+                        <div class="circleBase type2 newCommentWriterProfilePic">
+                            <img src="{{$uPic}}" style="">
+                        </div>
+                        <div class="inputBox">
+                            <b class="replyCommentTitle">نظر خود را در مورد مقاله با ما در میان بگذارید</b>
+                            <textarea class="inputBoxInput inputBoxInputComment" id="ansForReviews_1038" placeholder="شما چه نظری دارید؟" onclick="checkLogin()"></textarea>
+                            <button class="btn btn-primary" onclick="sendComment({{$post->id}}, 0, this)"> ارسال</button>
+                        </div>
                     </div>
                 </div>
             </div>

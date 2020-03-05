@@ -24,6 +24,7 @@ use App\models\Place;
 use App\models\PlaceFeatureRelation;
 use App\models\PlaceFeatures;
 use App\models\PlaceStyle;
+use App\models\PlaceTag;
 use App\models\Post;
 use App\models\PostCategory;
 use App\models\PostCategoryRelation;
@@ -57,6 +58,324 @@ use Illuminate\Http\Request;
 
 class PlaceController extends Controller {
 
+    public function showPlaceDetails($kindPlaceName, $slug, Request $request){
+        deleteReviewPic();  // common.php
+
+        $kindPlace = Place::where('fileName', $kindPlaceName)->first();
+        if($kindPlace == null)
+            return \redirect(\url('/'));
+        $kindPlaceId = $kindPlace->id;
+        switch ($kindPlaceId){
+            case 1:
+                $placeMode = 'amaken';
+                $kindPlace->title = 'جاذبه های';
+                break;
+            case 3:
+                $placeMode = 'restaurant';
+                $kindPlace->title = 'رستوران های';
+                break;
+            case 4:
+                $placeMode = 'hotel';
+                $kindPlace->title = 'مراکز اقامتی';
+                break;
+            case 6:
+                $placeMode = 'majara';
+                $kindPlace->title = 'ماجراهای';
+                break;
+            case 10:
+                $placeMode = 'sogatSanaies';
+                $kindPlace->title = 'صنایع دستی و سوغات';
+                break;
+            case 11:
+                $placeMode = 'mahaliFood';
+                $kindPlace->title = 'غذاهای محلی';
+                break;
+        }
+
+        if(is_numeric($slug))
+            $place = DB::table($kindPlace->tableName)->find((int)$slug);
+        else
+            $place = DB::table($kindPlace->tableName)->where('slug', $slug)->first();
+
+        if($place == null)
+            return \redirect(\url('/'));
+
+        $place->tags = PlaceTag::getTags($kindPlace->id, $place->id);
+
+        $hasLogin = true;
+        $uId = -1;
+        if(auth()->check()){
+            $u = Auth::user();
+            $uId = $u->id;
+            $userCode = $uId . '_' . rand(10000,99999);
+        }
+        else{
+            $userCode = null;
+            $hasLogin = false;
+        }
+        $uPic = getUserPic(); // common.php
+
+        saveViewPerPage($kindPlaceId, $place->id); // common.php
+
+        $bookMark = false;
+        $condition = ['visitorId' => $uId, 'activityId' => Activity::whereName("نشانه گذاری")->first()->id,
+            'placeId' => $place->id, 'kindPlaceId' => $kindPlaceId];
+        if (LogModel::where($condition)->count() > 0)
+            $bookMark = true;
+
+        $rates = getRate($place->id, $kindPlaceId); // common.php
+
+        $save = false;
+        $count = DB::select("select count(*) as tripPlaceNum from trip, tripPlace WHERE tripPlace.placeId = " . $place->id . " and tripPlace.kindPlaceId = " . $kindPlaceId . " and tripPlace.tripId = trip.id and trip.uId = " . $uId);
+        if ($count[0]->tripPlaceNum > 0)
+            $save = true;
+
+        $city = Cities::whereId($place->cityId);
+        $state = State::whereId($city->stateId);
+
+        $photos = [];
+
+        if (!empty($place->picNumber)) {
+            if (file_exists((__DIR__ . '/../../../../assets/_images/' . $kindPlace->fileName . '/' . $place->file . '/s-' . $place->picNumber))) {
+                $photos[count($photos)] = URL::asset('_images') . '/' . $kindPlace->fileName . '/' . $place->file . '/s-' . $place->picNumber;
+                $thumbnail = URL::asset('_images') . '/' . $kindPlace->fileName . '/' . $place->file . '/f-' . $place->picNumber;
+            } else {
+                $photos[count($photos)] = URL::asset('_images/nopic/blank.jpg');
+                $thumbnail = URL::asset('_images/nopic/blank.jpg');
+            }
+        }
+        else {
+            $photos[count($photos)] = URL::asset('_images/nopic/blank.jpg');
+            $thumbnail = URL::asset('_images/nopic/blank.jpg');
+        }
+
+        $allState = State::all();
+
+        $pics = getAllPlacePicsByKind($kindPlaceId, $place->id); // common.php
+        $sitePics = $pics[0];
+        $sitePicsJSON = $pics[1];
+        $photographerPics = $pics[2];
+        $photographerPicsJSON = $pics[3];
+        $userPhotos = $pics[4];
+        $userPhotosJson = $pics[5];
+
+        $result = commonInPlaceDetails($kindPlaceId, $place->id, $city, $state, $place);  // common.php
+        $reviewCount = $result[0];
+        $ansReviewCount = $result[1];
+        $userReviewCount = $result[2];
+        $multiQuestion = $result[3];
+        $textQuestion = $result[4];
+        $rateQuestion = $result[5];
+
+        $multiQuestionJSON = json_encode($multiQuestion);
+        $textQuestionJSON = json_encode($textQuestion);
+        $rateQuestionJSON = json_encode($rateQuestion);
+
+        $inPage = 'place_' . $kindPlaceId . '_' . $place->id;
+        session(['inPage' => $inPage]);
+
+        $features = PlaceFeatures::where('kindPlaceId', $kindPlace->id)->where('parent', 0)->get();
+        $featId = array();
+        foreach ($features as $item) {
+            $item->subFeat = PlaceFeatures::where('parent', $item->id)->get();
+            $fId = PlaceFeatures::where('parent', $item->id)->pluck('id')->toArray();
+            $featId = array_merge($featId, $fId);
+        }
+        $place->features = PlaceFeatureRelation::where('placeId', $place->id)->whereIn('featureId', $featId)->pluck('featureId')->toArray();
+
+        if($kindPlace->tableName == 'sogatSanaies')
+            $place = $this->sogatSanaieDet($place);
+        else if($kindPlace->tableName == 'mahaliFood')
+            $place = $this->mahaliFoodDet($place);
+
+        $video = '';
+        if(isset($place->video))
+            $video = $place->video;
+
+        $mode = 'city';
+        $err = '';
+        $rooms = '';
+        $jsonRoom = '';
+
+        $articleUrl = \url('/article/list/place/' . $kindPlaceId . '_' . $place->id);
+        $cityName = 'شهر ' . $city->name;
+        $locationName = ["name" => $place->name, 'state' => $state->name, 'cityName' => $cityName, 'cityNameUrl' => $city->name, 'articleUrl' => $articleUrl, 'kindState' => 'city', 'kindPage' => 'place'];
+
+        $mainWebSiteUrl = \url('/');
+        $mainWebSiteUrl .= '/' . $request->path();
+        $localStorageData = ['kind' => 'place', 'name' => $place->name, 'city' => $city->name, 'state' => $state->name, 'mainPic' => $sitePics[0]['f'], 'redirect' => $mainWebSiteUrl];
+
+        return view('hotel-details.hotel-details', array('place' => $place, 'features' => $features , 'save' => $save, 'city' => $city, 'thumbnail' => $thumbnail,
+            'state' => $state, 'avgRate' => $rates[1], 'locationName' => $locationName, 'localStorageData' => $localStorageData,
+            'reviewCount' => $reviewCount, 'ansReviewCount' => $ansReviewCount, 'userReviewCount' => $userReviewCount,
+            'photographerPics' => $photographerPics, 'photographerPicsJSON' => $photographerPicsJSON, 'userPic' => $uPic,
+            'rateQuestion' => $rateQuestion, 'textQuestion' => $textQuestion, 'multiQuestion' => $multiQuestion,
+            'rateQuestionJSON' => $rateQuestionJSON, 'textQuestionJSON' => $textQuestionJSON, 'multiQuestionJSON' => $multiQuestionJSON,
+            'sitePics' => $sitePics, 'sitePicsJSON' => $sitePicsJSON, 'allState' => $allState, 'userCode' => $userCode,
+            'kindPlaceId' => $kindPlaceId, 'mode' => $mode, 'rates' => $rates[0],
+            'photos' => $photos, 'userPhotos' => $userPhotos, 'userPhotosJson' => $userPhotosJson,
+            'config' => ConfigModel::first(), 'hasLogin' => $hasLogin, 'bookMark' => $bookMark, 'err' => $err,
+            'placeStyles' => PlaceStyle::whereKindPlaceId($kindPlaceId)->get(), 'kindPlace' => $kindPlace,
+            'placeMode' => $kindPlace->tableName, 'rooms' => $rooms, 'jsonRoom' => $jsonRoom, 'video' => $video,
+            'sections' => SectionPage::wherePage(getValueInfo('hotel-detail'))->get()));
+    }
+
+    private function sogatSanaieDet($place){
+
+        switch ($place->style){
+            case 1:
+                $place->style = 'سنتی';
+                break;
+            case 2:
+                $place->style = 'مدرن';
+                break;
+            case 3:
+                $place->style = 'تلفیقی';
+                break;
+        }
+
+        if($place->fragile == 1)
+            $place->fragile = 'شکستنی';
+        else
+            $place->fragile = 'غیر شکستنی';
+
+        switch ($place->size){
+            case 1:
+                $place->size = 'کوچک';
+                break;
+            case 2:
+                $place->size = 'متوسط';
+                break;
+            case 3:
+                $place->size = 'بزرگ';
+                break;
+        }
+        switch ($place->price){
+            case 1:
+                $place->price = 'ارزان';
+                break;
+            case 2:
+                $place->price = 'متوسط';
+                break;
+            case 3:
+                $place->price = 'گران';
+                break;
+        }
+        switch ($place->weight){
+            case 1:
+                $place->weight = 'سبک';
+                break;
+            case 2:
+                $place->weight = 'متوسط';
+                break;
+            case 3:
+                $place->weight = 'متوسط';
+                break;
+        }
+
+        $place->kind = '';
+        if($place->jewelry == 1)
+            $place->kind .= 'زیورآلات';
+        if($place->cloth == 1){
+            if($place->kind != '')
+                $place->kind .= ' , ';
+
+            $place->kind .= 'پارچه و پوشیدنی';
+        }
+        if($place->applied == 1){
+            if($place->kind != '')
+                $place->kind .= ' , ';
+
+            $place->kind .= 'لوازم کاربردی منزل';
+        }
+        if($place->decorative == 1){
+            if($place->kind != '')
+                $place->kind .= ' , ';
+
+            $place->kind .= 'لوازم تزئینی';
+        }
+
+        $place->taste = '';
+        if($place->torsh == 1)
+            $place->taste .= 'ترش';
+        if($place->shirin == 1){
+            if($place->taste != '')
+                $place->taste .= ' , ';
+
+            $place->taste .= 'شیرین';
+        }
+        if($place->talkh == 1){
+            if($place->taste != '')
+                $place->taste .= ' , ';
+
+            $place->taste .= 'تلخ';
+        }
+        if($place->malas == 1){
+            if($place->taste != '')
+                $place->taste .= ' , ';
+
+            $place->taste .= 'ملس';
+        }
+        if($place->shor == 1){
+            if($place->taste != '')
+                $place->taste .= ' , ';
+
+            $place->taste .= 'شور';
+        }
+        if($place->tond == 1){
+            if($place->taste != '')
+                $place->taste .= ' , ';
+
+            $place->taste .= 'تند';
+        }
+
+        return $place;
+    }
+
+    private function mahaliFoodDet($place){
+
+        $place->material = json_decode($place->material);
+
+        switch ($place->kind){
+            case 1:
+                $place->kindName = 'چلوخورش';
+                break;
+            case 2:
+                $place->kindName = 'خوراک';
+                break;
+            case 3:
+                $place->kindName = 'سالاد و پیش غذا';
+                break;
+            case 4:
+                $place->kindName = 'ساندویچ';
+                break;
+            case 5:
+                $place->kindName = 'کباب';
+                break;
+            case 6:
+                $place->kindName = 'دسر';
+                break;
+            case 7:
+                $place->kindName = 'نوشیدنی';
+                break;
+            case 8:
+                $place->kindName = 'سوپ و آش';
+                break;
+        }
+
+        if($place->hotOrCold == 1)
+            $place->hotOrCold = 'گرم';
+        else
+            $place->hotOrCold = 'سرد';
+
+        if($place->gram == 1)
+            $place->source = 'گرم';
+        else
+            $place->source = 'قاشق غذاخوری';
+
+        return $place;
+    }
+
     private function getNearbies($C, $D, $count)
     {
         $D *= 3.14 / 180;
@@ -76,7 +395,7 @@ class PlaceController extends Controller {
             $nearbyHotel->reviews = LogModel::where($condition)->count();
             $nearbyHotel->distance = round($nearbyHotel->distance, 2);
             $nearbyHotel->rate = getRate($nearbyHotel->id, $hotelPlaceId)[1];
-            $nearbyHotel->url = \url('hotel-details/' . $nearbyHotel->id . '/' .$nearbyHotel->name);
+            $nearbyHotel->url =  createUrl(4, $nearbyHotel->id, 0, 0, 0);
             $nearbyHotel->city = Cities::find($nearbyHotel->cityId);
             $nearbyHotel->state = State::find($nearbyHotel->city->stateId);
         }
@@ -95,7 +414,7 @@ class PlaceController extends Controller {
             $nearbyRestaurant->reviews = LogModel::where($condition)->count();
             $nearbyRestaurant->distance = round($nearbyRestaurant->distance, 2);
             $nearbyRestaurant->rate = getRate($nearbyRestaurant->id, $restaurantPlaceId)[1];
-            $nearbyRestaurant->url = \url('restaurant-details/' . $nearbyRestaurant->id . '/' .$nearbyRestaurant->name);
+            $nearbyRestaurant->url = createUrl(3, $nearbyRestaurant->id, 0, 0, 0);
             $nearbyRestaurant->city = Cities::find($nearbyRestaurant->cityId);
             $nearbyRestaurant->state = State::find($nearbyRestaurant->city->stateId);
         }
@@ -114,7 +433,7 @@ class PlaceController extends Controller {
             $nearbyAmaken->reviews = LogModel::where($condition)->count();
             $nearbyAmaken->distance = round($nearbyAmaken->distance, 2);
             $nearbyAmaken->rate = getRate($nearbyAmaken->id, $amakenPlaceId)[1];
-            $nearbyAmaken->url = \url('amaken-details/' . $nearbyAmaken->id . '/' .$nearbyAmaken->name);
+            $nearbyAmaken->url = createUrl(1, $nearbyAmaken->id, 0, 0, 0);
             $nearbyAmaken->city = Cities::find($nearbyAmaken->cityId);
             $nearbyAmaken->state = State::find($nearbyAmaken->city->stateId);
         }
@@ -133,7 +452,7 @@ class PlaceController extends Controller {
             $nearbyMajara->reviews = LogModel::where($condition)->count();
             $nearbyMajara->distance = round($nearbyMajara->distance, 2);
             $nearbyMajara->rate = getRate($nearbyMajara->id, $majaraPlaceId)[1];
-            $nearbyMajara->url = \url('majara-details/' . $nearbyMajara->id . '/' .$nearbyMajara->name);
+            $nearbyMajara->url = createUrl(6, $nearbyMajara->id, 0, 0, 0);
             $nearbyMajara->city = Cities::find($nearbyMajara->cityId);
             $nearbyMajara->state = State::find($nearbyMajara->city->stateId);
         }
@@ -1816,7 +2135,7 @@ class PlaceController extends Controller {
 
             $photoFilters = DB::select("select name, id, (SELECT count(*) FROM log WHERE placeId = " . $placeId . " and log.kindPlaceId = " . $kindPlaceId . " and activityId = " . $activityId . " and pic = picItems.id) as countNum FROM picItems WHERE kindPlaceId = " . $kindPlaceId);
 
-            $userPic = URL::asset('images/logo.svg');
+            $userPic = URL::asset('images/icons/mainIcon.svg');
 
             switch ($kindPlaceId) {
                 case 1:
@@ -2839,6 +3158,8 @@ class PlaceController extends Controller {
         }
 
         $sliderPic = MainSliderPic::all();
+        foreach ($sliderPic as $item)
+            $item->pic = URL::asset('_images/sliderPic/'. $item->pic);
 
         $today = getToday()['date'];
         $hotelCount = Hotel::all()->count();
@@ -2866,17 +3187,57 @@ class PlaceController extends Controller {
                     'comment' => $commentCount,
                     'userCount' => $userCount];
 
-        $bPs = BannerPics::where('page', 'mainPage')->get();
-        $middleBannerPic = array();
-        $middleBannerLink = array();
-        foreach ($bPs as $item){
-            $key = $item->section.$item->number;
-            $middleBannerPic[$key] = URL::asset('_images/bannerPic/' . $item->page . '/' . $item->pic);
-            $middleBannerLink[$key] = $item->link;
+        $articleBannerId = DB::table('bannerPosts')->pluck('postId')->toArray();
+        $articleBanner = Post::whereIn('id', $articleBannerId)->get();
+        foreach ($articleBanner as $item){
+            $item->url = createUrl(0, 0, 0, 0, $item->id);
+            $item->pic = createPicUrl($item->id);
         }
 
+        $middleBan = [];
+
+        $middleBan1 = BannerPics::where('page', 'mainPage')->where('section', 1)->get();
+        foreach ($middleBan1 as $item){
+            $item->pic = URL::asset('_images/bannerPic/' . $item->page . '/' . $item->pic);
+            if($item->text == null)
+                $item->text = '';
+            if($item->link == 'https://')
+                $item->link = '';
+        }
+        $middleBan['1']  = $middleBan1;
+
+        $middleBan4 = BannerPics::where('page', 'mainPage')->where('section', 4)->get();
+        foreach ($middleBan4 as $item){
+            $item->pic = URL::asset('_images/bannerPic/' . $item->page . '/' . $item->pic);
+            if($item->text == null)
+                $item->text = '';
+            if($item->link == 'https://')
+                $item->link = '';
+        }
+        $middleBan['4']  = $middleBan4;
+
+        $middleBan5 = BannerPics::where('page', 'mainPage')->where('section', 5)->get();
+        foreach ($middleBan5 as $item){
+            $item->pic = URL::asset('_images/bannerPic/' . $item->page . '/' . $item->pic);
+            if($item->text == null)
+                $item->text = '';
+            if($item->link == 'https://')
+                $item->link = '';
+        }
+        $middleBan['5']  = $middleBan5;
+
+        $middleBan6 = BannerPics::where('page', 'mainPage')->where('section', 6)->first();
+        if($middleBan6 != null){
+            $middleBan6->pic = URL::asset('_images/bannerPic/' . $middleBan6->page . '/' . $middleBan6->pic);
+            if($middleBan6->text == null)
+                $middleBan6->text = '';
+            if($middleBan6->link == 'https://')
+                $middleBan6->link = '';
+        }
+        $middleBan['6']  = $middleBan6;
+
         return view('main', array('placeMode' => $mode, 'kindPlaceId' => $kindPlaceId, 'sliderPic' => $sliderPic, 'count' => $counts,
-            'sections' => SectionPage::wherePage(getValueInfo('hotel-detail'))->get(), 'middleBannerPic' => $middleBannerPic, 'middleBannerLink' => $middleBannerLink
+            'sections' => SectionPage::wherePage(getValueInfo('hotel-detail'))->get(),  'articleBanner' => $articleBanner, 'middleBan' => $middleBan
         ));
     }
 
@@ -3052,7 +3413,7 @@ class PlaceController extends Controller {
         if(Auth::check())
             $user = Auth::user();
         else {
-            echo 'nok1';
+            echo json_encode(['nok1']);
             return;
         }
 
@@ -3068,27 +3429,46 @@ class PlaceController extends Controller {
                         $log->like = 1;
                         $photo->like++;
                     }
-                    else {
+                    else if($request->like == -1){
                         $log->like = -1;
                         $photo->dislike++;
                     }
 
                     $log->userId = $user->id;
                     $log->picId = $photo->id;
-                    $log->save();
 
+                    $log->save();
                     $photo->save();
 
-                    echo 'ok';
+                    echo json_encode(['ok', $photo->like, $photo->dislike]);
                 }
-                else
-                    echo 'nok2';
+                else{
+
+                    if($userStatus->like == 1)
+                        $photo->like--;
+                    else if($userStatus->like == -1)
+                        $photo->dislike--;
+
+                    if($request->like == 1){
+                        $userStatus->like = 1;
+                        $photo->like++;
+                    }
+                    else if($request->like == -1){
+                        $userStatus->like = -1;
+                        $photo->dislike++;
+                    }
+
+                    $userStatus->save();
+                    $photo->save();
+
+                    echo json_encode(['ok', $photo->like, $photo->dislike]);
+                }
             }
             else
-                echo 'nok3';
+                echo json_encode(['nok3']);
         }
         else
-            echo 'nok4';
+            echo json_encode(['nok4']);
         return;
 
     }
@@ -3428,23 +3808,77 @@ class PlaceController extends Controller {
 
     }
 
-    public function showPlaceList($kindPlaceId, $city, $mode)
+    public function showPlaceList($kindPlaceId, $mode, $city = '')
     {
-        $sections = SectionPage::wherePage(getValueInfo('hotel-detail'))->get();
         $kindPlace = Place::find($kindPlaceId);
         if($kindPlace != null){
+            $meta = [];
+            $mode = strtolower($mode);
 
-            if ($mode == "state") {
+            switch ($kindPlaceId){
+                case 1:
+                    $placeMode = 'amaken';
+                    $kindPlace->title = 'جاذبه های';
+                    $meta['title'] = 'کوچیتا';
+                    $meta['keyword'] = 'کوچیتا';
+                    $meta['description'] = 'کوچیتا';
+                    break;
+                case 3:
+                    $placeMode = 'restaurant';
+                    $kindPlace->title = 'رستوران های';
+                    $meta['title'] = 'رستوران ها | لیست رستوران های ایران - نقد و بررسی به همراه عکس از کاربران | کوچیتا';
+                    $meta['keyword'] = 'رستوران های ایران، رتبه بندی رستوران های ایران، نقد و بررسی رستوران های ایران، غذا در سفر';
+                    $meta['description'] = 'رستوران های ایران رو تو مسافرتت بشناس و برای رستورانایی که رفتی نقد بنویس و نظر بده. منوی رستورانا رو ببین و از الان رزروشون کن. ساعات کاری و قیمتاشون رو ببین. ';
+                    break;
+                case 4:
+                    $placeMode = 'hotel';
+                    $kindPlace->title = 'مراکز اقامتی ';
+                    $meta['title'] = 'هتل ها | لیست قیمت – نقد و بررسی به همراه عکس از کاربران - بوم گردی ها | کوچیتا';
+                    $meta['keyword'] = 'لیست هتل های ایران، لیست قیمت هتل های ایران، نقد و بررسی هتل های ایران ، هتل های ارزان ایران، مقایسه ی هتل ها';
+                    $meta['description'] = 'آخرین وضعبت قیمت و رزور هتل ها را ببینید، نظرات و نقد های مشتریان هتل ها را همراه عکس ببینید و هتل ها را مقایسه کنید.بهترین قیمت رزرو در کوچیتا';
+                    break;
+                case 6:
+                    $placeMode = 'majara';
+                    $kindPlace->title = ' طبیعت گردی در';
+                    $meta['title'] = 'ماجرا | لیست اماکن ماجرا جویی ایران– تجهیزات مورد نیاز | ماجراجویی خودتو آغاز کن';
+                    $meta['keyword'] = 'ماجراجویی در ایران، مکان های خاص ایران، گردشگری در ایران، می خوام برم سفر';
+                    $meta['description'] = 'اماکن ماجراجویی رو بشناس، سختی سفرشون رو ببین و تججهیزاتتو آماده کن. کوچیتا بهترین';
+                    break;
+                case 10:
+                    $placeMode = 'sogatSanaies';
+                    $kindPlace->title = 'صنایع دستی و سوغات';
+                    $meta['title'] = 'کوچیتا';
+                    $meta['keyword'] = 'کوچیتا';
+                    $meta['description'] = 'کوچیتا';
+                    break;
+                case 11:
+                    $placeMode = 'mahaliFood';
+                    $kindPlace->title = 'غذاهای محلی';
+                    $meta['title'] = 'کوچیتا';
+                    $meta['keyword'] = 'کوچیتا';
+                    $meta['description'] = 'کوچیتا';
+                    break;
+            }
+            $kindPlaceId = $kindPlace->id;
+
+            if($mode == 'country'){
+                $state = '';
+                $city = '';
+                $articleUrl = \url('/mainArticle');
+                $n = 'لیست ' . $kindPlace->title . ' ایران';
+                $locationName = ["name" => $n, 'state' => '',  'cityName' => 'ایران من', 'cityNameUrl' => '', 'articleUrl' => $articleUrl, 'kindState' => 'country', 'kindPage' => 'list'];
+            }
+            else if ($mode == "state") {
                 $state = State::whereName($city)->first();
                 $city = $state;
                 if ($state == null)
                     return "نتیجه ای یافت نشد";
 
-
                 $articleUrl = \url('/article/list/city/' . $state->name);
-                $locationName = ["name" => $state->name, 'urlName' => $state->name, 'articleUrl' => $articleUrl];
+                $n = ' استان ' . $state->name;
+                $locationName = ["name" => $n, 'state' => $state->name, 'cityName' => $n, 'cityNameUrl' => $state->name, 'articleUrl' => $articleUrl, 'kindState' => 'state', 'kindPage' => 'list'];
             }
-            else {
+            else if ($mode == "city") {
                 $city = Cities::whereName($city)->first();
                 if ($city == null)
                     return "نتیجه ای یافت نشد";
@@ -3454,42 +3888,16 @@ class PlaceController extends Controller {
                     return "نتیجه ای یافت نشد";
 
                 $articleUrl = \url('/article/list/city/' . $city->name);
-                $locationName = ["name" => $city->name, 'state' => $state->name, 'urlName' => $city->name, 'articleUrl' => $articleUrl];
+                $n = ' شهر ' . $city->name;
+                $locationName = ["name" => $n, 'state' => $state->name, 'cityName' => $n, 'cityNameUrl' => $city->name, 'articleUrl' => $articleUrl, 'kindState' => 'city', 'kindPage' => 'list'];
             }
-
-            switch ($kindPlaceId){
-                case 1:
-                    $placeMode = 'amaken';
-                    $kindPlace->title = 'جاذبه های';
-                    break;
-                case 3:
-                    $placeMode = 'restaurant';
-                    $kindPlace->title = 'رستوران های';
-                    break;
-                case 4:
-                    $placeMode = 'hotel';
-                    $kindPlace->title = 'مراکز اقامتی';
-                    break;
-                case 6:
-                    $placeMode = 'majara';
-                    $kindPlace->title = 'ماجراهای';
-                    break;
-                case 10:
-                    $placeMode = 'sogatSanaies';
-                    $kindPlace->title = 'صنایع دستی و سوغات';
-                    break;
-                case 11:
-                    $placeMode = 'mahaliFood';
-                    $kindPlace->title = 'غذاهای محلی';
-                    break;
-            }
-            $kindPlaceId = $kindPlace->id;
 
             $features = PlaceFeatures::where('kindPlaceId', $kindPlaceId)->where('parent', 0)->get();
             foreach ($features as $feature)
                 $feature->subFeat = PlaceFeatures::where('parent', $feature->id)->where('type', 'YN')->get();
             $kind = $mode;
-            return view('places.list.list', compact(['features', 'locationName', 'kindPlace', 'kind','kindPlaceId', 'mode', 'city', 'sections', 'placeMode', 'state']));
+
+            return view('places.list.list', compact(['features', 'meta', 'locationName', 'kindPlace', 'kind', 'kindPlaceId', 'mode', 'city', 'placeMode', 'state']));
         }
         else
             return \redirect(\url('/'));
@@ -3497,7 +3905,6 @@ class PlaceController extends Controller {
 
     public function getPlaceListElems(Request $request)
     {
-
         $page = (int)$request->pageNum;
         $take = (int)$request->take;
         $reqFilter = $request->featureFilter;
@@ -3522,7 +3929,9 @@ class PlaceController extends Controller {
         $rateActivityId = Activity::whereName('امتیاز')->first()->id;
 
         //first get all places in state or city
-        if($request->mode == 'state'){
+        if($request->mode == 'country')
+            $placeIds = DB::table($table)->where('name', 'LIKE', '%'.$nameFilter.'%')->pluck('id')->toArray();
+        else if($request->mode == 'state'){
             $cities = Cities::where('stateId', $request->city)->pluck('id')->toArray();
             $placeIds = DB::table($table)->whereIn('cityId', $cities)->where('name', 'LIKE', '%'.$nameFilter.'%')->pluck('id')->toArray();
         }
@@ -3535,10 +3944,26 @@ class PlaceController extends Controller {
         }
 
         //special filters for each kind place
-        switch ($kindPlace->id){
-            case 4:
-                $placeIds = $this->hotelFilter($specialFilters, $placeIds);
-                break;
+
+        if($specialFilters != null) {
+            $kindValues = [];
+            $kindName = [];
+            if(is_array($specialFilters) && count($specialFilters) > 0) {
+                foreach ($specialFilters as $item){
+                    if($item != 0) {
+                        $index = array_search($item['kind'], $kindName);
+                        if ($index === false) {
+                            array_push($kindName, $item['kind']);
+                            array_push($kindValues, [$item['value']]);
+                        } else
+                            array_push($kindValues[$index], $item['value']);
+                    }
+                }
+
+                foreach ($kindName as $index => $value){
+                    $placeIds = DB::table($kindPlace->tableName)->whereIn($value, $kindValues[$index])->whereIn('id', $placeIds)->pluck('id')->toArray();
+                }
+            }
         }
         if(count($placeIds) == 0){
             echo json_encode(['places' => array()]);
@@ -3594,7 +4019,7 @@ class PlaceController extends Controller {
 
         // and sort results by kind
         if($sort == 'alphabet')
-            $places = DB::table($table)->whereIn('id', $placeIds)->select(['id', 'C', 'D', 'name', 'file'])->orderBy('name')->skip(($page - 1) * $take)->take($take)->get();
+            $places = DB::table($table)->whereIn('id', $placeIds)->orderBy('name')->skip(($page - 1) * $take)->take($take)->get();
         else if($sort == 'distance' && $nearPlaceIdFilter != 0 && $nearKindPlaceIdFilter != 0){
             $nearKind = Place::find($nearKindPlaceIdFilter);
             $nearPlace = DB::table($nearKind->tableName)->find($nearPlaceIdFilter);
@@ -3666,13 +4091,14 @@ class PlaceController extends Controller {
                 $place->pic = URL::asset('_images/nopic/blank.jpg');
 
             $condition = ['placeId' => $place->id, 'kindPlaceId' => $request->kindPlaceId,
-                'activityId' => $activityId];
+                'activityId' => $activityId, 'confirm' => 1];
             $place->reviews = LogModel::where($condition)->count();
             $cityObj = Cities::whereId($place->cityId);
             $place->city = $cityObj->name;
             $place->state = State::whereId($cityObj->stateId)->name;
             $place->avgRate = getRate($place->id, $request->kindPlaceId)[1];
             $place->inTrip = 0;
+            $place->redirect = createUrl($kindPlace->id, $place->id, 0, 0);
             if(\auth()->check()){
                 $u = \auth()->user();
                 $trips = DB::select('SELECT trip.id FROM tripPlace, trip WHERE trip.uId = ' . $u->id . ' AND trip.id = tripPlace.tripId AND tripPlace.placeId = ' . $place->id . ' AND tripPlace.kindPlaceId = ' . $request->kindPlaceId);
@@ -3681,21 +4107,8 @@ class PlaceController extends Controller {
             }
         }
 
-
         echo json_encode(['places' => $places]);
         return;
-    }
-
-    private function hotelFilter($specFilter, $placeIds){
-        $kindId = array();
-        foreach ($specFilter as $item){
-            if($item != 0)
-                array_push($kindId, $item);
-        }
-        if(count($kindId) != 0)
-            $placeIds = DB::table('hotels')->whereIn('id', $placeIds)->whereIn('kind_id', $kindId)->pluck('id')->toArray();
-
-        return $placeIds;
     }
 
 }

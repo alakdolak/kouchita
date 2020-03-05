@@ -10,8 +10,8 @@ require_once (__DIR__ . '/../../../app/Http/Controllers/glogin/libraries/Google/
 
 //Insert your cient ID and secret
 //You can get it from : https://console.developers.google.com/
-$client_id = '204875713143-vgh7o6lfh1m8phas09n7ia8psgmk3bbi.apps.googleusercontent.com';
-$client_secret = '0kHyl_hsKamEH6SX-_9xmkWq';
+$client_id = '774684902659-20aeg6um0856j5li2uuu9ombu2pcbqv9.apps.googleusercontent.com';
+$client_secret = 'ARyU8-RXFJZD5jl5QawhpHne';
 $redirect_uri =  route('loginWithGoogle');
 
 /************************************************
@@ -21,7 +21,7 @@ token for the user, so we need to send them
 through a login flow. To do this we need some
 information from our API console project.
  ************************************************/
-$client = new Google_Client();
+$client = new \Google_Client();
 $client->setClientId($client_id);
 $client->setClientSecret($client_secret);
 $client->setRedirectUri($redirect_uri);
@@ -34,8 +34,9 @@ client to it. The client then queries the service
 for the required scopes, and uses that when
 generating the authentication URL later.
  ************************************************/
-$service = new Google_Service_Oauth2($client);
+$service = new \Google_Service_Oauth2($client);
 $authUrl = $client->createAuthUrl();
+
 ?>
 
 <script>
@@ -623,7 +624,6 @@ $authUrl = $client->createAuthUrl();
 
 {{--loginPopUp--}}
 <form id="second_login" method="post" action="{{route('checkLogin')}}">
-    {{--{{csrf_field()}}--}}
     {!! csrf_field() !!}
     <input id="form_userName" name="username" type="hidden">
     <input id="form_pass" name="password" type="hidden">
@@ -631,11 +631,11 @@ $authUrl = $client->createAuthUrl();
 
 <span id="loginPopUp" onkeyup="if(event.keyCode == 13) login($('#username_main').val(), $('#password_main').val())" class="pop-up ui_modal hidden">
     <div class="mainDivLoginMainLogo">
-        <img class="loginMainLogo" src="{{URL::asset('images/logo.svg')}}">
+        <img class="loginMainLogo" src="{{URL::asset('images/icons/mainIcon.svg')}}">
     </div>
     <div class="col-xs-12 rtl mainContentInfos">
         <div class="loginPaneInLoginPopUp loginDividerBorder col-xs-6">
-            <div class="header_text font-size-14Imp">در حال حاضر عضو شازده مسافر هستید؟!</div>
+            <div class="header_text font-size-14Imp">در حال حاضر عضو کوچیتا هستید؟!</div>
             <div>
                 <div>
                     <label class="full-width">
@@ -661,6 +661,7 @@ $authUrl = $client->createAuthUrl();
                 <p id="loginErr"></p>
             </div>
         </div>
+
         <div class="registerPaneInLoginPopUp col-xs-6">
             <div class="header_text font-size-14Imp">عضو نیستید !!</div>
             <button class="btn" onclick="showLoginEmail()">
@@ -677,7 +678,7 @@ $authUrl = $client->createAuthUrl();
                 <div></div>
                 <span>گوگل</span>
             </button>
-            <div class="header_text font-size-14Imp">همین حالا به سادگی در شازده مسافر عضو شوید و از امکانات آن استفاده کنید.</div>
+            <div class="header_text font-size-14Imp">همین حالا به سادگی در کوچیتا عضو شوید و از امکانات آن استفاده کنید.</div>
         </div>
     </div>
     <div class="ui_close_x" onclick="hideElement('loginPopUp')"></div>
@@ -686,11 +687,11 @@ $authUrl = $client->createAuthUrl();
 {{--Enter Email in login PopUp--}}
 <span id="EnterEmail-loginPopUp" onkeyup="if(event.keyCode == 13) login($('#username_email').val(), $('#password_email').val())" class="pop-up ui_modal hidden">
     <div>
-        <img class="loginMainLogo" src="{{URL::asset('images/logo.svg')}}">
+        <img class="loginMainLogo" src="{{URL::asset('images/icons/mainIcon.svg')}}">
     </div>
     <div class="col-xs-12 rtl mainContentInfos">
         <div class="loginDividerBorder col-xs-6">
-            <div class="header_text font-size-14Imp">در حال حاضر عضو شازده مسافر هستید؟!</div>
+            <div class="header_text font-size-14Imp">در حال حاضر عضو کوچیتا هستید؟!</div>
             <div>
                 <div>
                     <label class="full-width">
@@ -740,11 +741,11 @@ $authUrl = $client->createAuthUrl();
 {{--Enter Phone in login PopUp--}}
 <span id="EnterPhone-loginPopUp" onkeyup="if(event.keyCode == 13) login($('#username_phone').val(), $('#password_phone').val())" class="pop-up ui_modal hidden">
     <div>
-        <img class="loginMainLogo" src="{{URL::asset('images/logo.svg')}}">
+        <img class="loginMainLogo" src="{{URL::asset('images/icons/mainIcon.svg')}}">
     </div>
     <div class="col-xs-12 rtl mainContentInfos">
         <div class="loginDividerBorder col-xs-6">
-            <div class="header_text font-size-14Imp">در حال حاضر عضو شازده مسافر هستید؟!</div>
+            <div class="header_text font-size-14Imp">در حال حاضر عضو کوچیتا هستید؟!</div>
             <div>
                 <div>
                     <label class="full-width">
@@ -788,11 +789,11 @@ $authUrl = $client->createAuthUrl();
 {{--Send & Enter Code in login PopUp--}}
 <span id="Send_AND_EnterCode-loginPopUp" onkeyup="if(event.keyCode == 13) login($('#username_2').val(), $('#password_2').val())" class="pop-up ui_modal hidden">
     <div>
-        <img class="loginMainLogo" src="{{URL::asset('images/logo.svg')}}">
+        <img class="loginMainLogo" src="{{URL::asset('images/icons/mainIcon.svg')}}">
     </div>
     <div class="col-xs-12 rtl mainContentInfos">
         <div class="loginDividerBorder col-xs-6">
-            <div class="header_text font-size-14Imp">در حال حاضر عضو شازده مسافر هستید؟!</div>
+            <div class="header_text font-size-14Imp">در حال حاضر عضو کوچیتا هستید؟!</div>
             <div>
                 <div>
                     <label class="full-width">
@@ -842,11 +843,11 @@ $authUrl = $client->createAuthUrl();
 {{--Enter Password in login PopUp--}}
 <span id="EnterPassword-loginPopUp" onkeyup="if(event.keyCode == 13) login($('#username_3').val(), $('#password_3').val())" class="pop-up ui_modal hidden">
     <div>
-        <img class="loginMainLogo" src="{{URL::asset('images/logo.svg')}}">
+        <img class="loginMainLogo" src="{{URL::asset('images/icons/mainIcon.svg')}}">
     </div>
     <div class="col-xs-12 rtl mainContentInfos">
         <div class="loginDividerBorder col-xs-6">
-            <div class="header_text font-size-14Imp">در حال حاضر عضو شازده مسافر هستید؟!</div>
+            <div class="header_text font-size-14Imp">در حال حاضر عضو کوچیتا هستید؟!</div>
             <div>
                 <div>
                     <label class="full-width">
@@ -889,7 +890,7 @@ $authUrl = $client->createAuthUrl();
 {{--Enter Username in login PopUp--}}
 <span id="EnterUsername-loginPopUp" class="pop-up ui_modal hidden">
     <div>
-        <img class="loginMainLogo" src="{{URL::asset('images/logo.svg')}}">
+        <img class="loginMainLogo" src="{{URL::asset('images/icons/mainIcon.svg')}}">
     </div>
     <div class="col-xs-12 rtl mainContentInfos">
         <div class="loginDividerBorder col-xs-6">
@@ -933,7 +934,7 @@ $authUrl = $client->createAuthUrl();
 {{--Forget Password in login PopUp--}}
 <span id="ForgetPassword" class="pop-up ui_modal hidden">
     <div>
-        <img class="loginMainLogo" src="{{URL::asset('images/logo.svg')}}">
+        <img class="loginMainLogo" src="{{URL::asset('images/icons/mainIcon.svg')}}">
     </div>
     <div class="col-xs-12 mainContentInfos">
         <div class="header_text font-size-14Imp">برای بازیابی رمزعبور تان از کدام طریق اقدام میکنید:</div>
@@ -960,7 +961,7 @@ $authUrl = $client->createAuthUrl();
 {{--Enter Email for ForgetPass in login PopUp--}}
 <span id="Email_ForgetPass" class="pop-up ui_modal hidden">
     <div>
-        <img class="loginMainLogo" src="{{URL::asset('images/logo.svg')}}">
+        <img class="loginMainLogo" src="{{URL::asset('images/icons/mainIcon.svg')}}">
     </div>
     <div class="col-xs-12 rtl mainContentInfos">
         <div>
@@ -981,7 +982,7 @@ $authUrl = $client->createAuthUrl();
 {{--Enter Phone for ForgetPass in login PopUp--}}
 <span id="Phone_ForgetPass" class="pop-up ui_modal hidden">
     <div>
-        <img class="loginMainLogo" src="{{URL::asset('images/logo.svg')}}">
+        <img class="loginMainLogo" src="{{URL::asset('images/icons/mainIcon.svg')}}">
     </div>
     <div class="col-xs-12 mainContentInfos">
         <div>

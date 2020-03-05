@@ -123,6 +123,7 @@ input[type="checkbox"]:checked + label span {
     font-size: 11px;
     padding-top: 8px;
     display: block;
+    color: #16174f;
 }
 
 .loginSubBtn {
