@@ -274,6 +274,14 @@
     padding-top: 10px;
 }
 
+.pd-tp-20 {
+    padding-top: 20px;
+}
+
+.pd-tp-35 {
+    padding-top: 35px;
+}
+
 .pd-tp-80 {
     padding-top: 80px;
 }
@@ -298,6 +306,10 @@
 
 .pd-rt-10Imp {
     padding-right: 10px !important;
+}
+
+.pd-rt-12 {
+    padding-right: 12px;
 }
 
 .pd-rt-15 {
@@ -560,6 +572,10 @@
 
 /*margin*/
 
+.margin-auto {
+    margin: auto;
+}
+
 .mg-0 {
     margin: 0;
 }
@@ -808,6 +824,10 @@
     height: 500px;
 }
 
+.height-550 {
+    height: 550px;
+}
+
 .full-height {
     height: 100%;
 }
@@ -968,6 +988,10 @@
 
 .color-red {
     color: red;
+}
+
+.color-darkred {
+    color: #963019
 }
 
 .color-yellow {

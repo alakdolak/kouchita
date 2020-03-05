@@ -36,6 +36,7 @@ Route::get('databaseforall', function (){
             \DB::select($query);
         }
     }
+    dd($count);
 });
 
 

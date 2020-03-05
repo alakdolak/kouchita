@@ -108,6 +108,16 @@
     url('../../fonts/glyphicons-halflings-regular.ttf?v003.200') format('truetype');
 }
 
+@font-face {
+    font-family: Shin;
+    src: url('../../fonts/shin.ttf');
+}
+
+@font-face {
+    font-family: Afsane;
+    src: url('../../fonts/AFSANEH.ttf');
+}
+
 h1 {
     font-size: 28px !important;
 }
@@ -180,6 +190,6 @@ a:link {
 
 #darkModeMainPage {
     display: none;
-    z-index: 10000000;
+    z-index: 10;
     backdrop-filter: blur(2px);
 }
