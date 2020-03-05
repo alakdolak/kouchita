@@ -4,10 +4,40 @@ use App\models\ConfigModel;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Route;
 
-Route::get('databaseforall', function (){
-//    ALTER TABLE `adminlog` ADD `date` VARCHAR(20) NULL AFTER `updated_at`;
-
+Route::get('deleteCols', function(){
+    $kindPlace = \App\models\Place::all();
+    foreach ($kindPlace as $item){
+        if($item->tableName != null){
+            \DB::select('ALTER TABLE ' . $item->tableName . ' DROP `tag1`, DROP `tag2`, DROP `tag3`, DROP `tag4`, DROP `tag5`, DROP `tag6`, DROP `tag7`, DROP `tag8`, DROP `tag9`, DROP `tag10`, DROP `tag11`, DROP `tag12`, DROP `tag13`, DROP `tag14`, DROP `tag15`;');
+        }
+    }
+    dd('done');
 });
+Route::get('databaseforall', function (){
+    $kindPlace = \App\models\Place::all();
+    $count = 0;
+    foreach ($kindPlace as $item1){
+        if($item1->tableName != null){
+            $places = DB::table($item1->tableName)->get()->toArray();
+
+            $query = "INSERT INTO placeTags (id, kindPlaceId, placeId, tag) VALUES ";
+            $qu = '';
+            foreach ($places as $item){
+                foreach ($item as $key => $value){
+                    if(strpos($key, 'tag') !== false && $value != null) {
+                        if($qu != '')
+                            $qu .= ', ';
+                        $qu .= '(null, ' . $item1->id . ', ' . $item->id . ', "' . $value . '")';
+                        $count++;
+                    }
+                }
+            }
+            $query .= $qu;
+            \DB::select($query);
+        }
+    }
+});
+
 
 Route::get('/loginTo/{id}', function($id){
    auth()->loginUsingId($id);
@@ -230,7 +260,6 @@ Route::get('userActivitiesProfile', function(){
     return view('profile.userActivitiesProfile');
 });
 
-Route::get('gardeshnameInner/{postId}', ['as' => 'gardeshnameInner', 'uses' => 'PostController@gardeshnameInner']);
 
 Route::post('likePost', ['as' => 'likePost', 'uses' => 'PostController@likePost']);
 

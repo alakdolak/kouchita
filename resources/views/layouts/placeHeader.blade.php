@@ -318,8 +318,8 @@ if(Auth::check()) {
                             <span class="ui_icon menu-bars"></span>
                         </div>
 
-                        <a href="{{route('main')}}" class="global-nav-logo">
-                            <img src="{{URL::asset('images/logo.png')}}" alt="کوچیتا" class="global-nav-img global-nav-svg"/>
+                        <a href="{{route('main')}}" class="global-nav-logo" style="display: flex; align-items: center">
+                            <img src="{{URL::asset('images/icons/mainLogo.png')}}" alt="کوچیتا" style="width: auto; height: 70%;"/>
                         </a>
 
                         <div class="global-nav-links ui_tabs inverted" style="display: flex; align-items: center">
