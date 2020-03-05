@@ -13,16 +13,16 @@
 
 {{--<div class="darkModalEditor">--}}
     <span id="editPane" class="ui_overlay ui_modal photoUploadOverlay hidden">
-       <div class="body_text">
-           {{--<div class="photoUploader">--}}
-           <div class="headerBar epHeaderBar">
+        <div class="body_text">
+            {{--<div class="photoUploader">--}}
+            <div class="headerBar epHeaderBar">
                   <h3 id="photoUploadHeader" class="photoUploadHeader">
                       <span>افزودن تصویر به </span>
                       <span>{{$place->name}}</span>
                       <span id="frameEditorHeader"></span>
                   </h3>
            </div>
-           <div class="bodyEditFrame">
+            <div class="bodyEditFrame">
                    <div class="row">
                       <div class="col-md-12">
                          <div class="img-container img-container-photogrpher" style="position: relative">
@@ -138,8 +138,8 @@
                      </div><!-- /.docs-buttons -->
                    </div>
            </div>
-           {{--</div>--}}
-       </div>
+            {{--</div>--}}
+        </div>
         <div class="ui_close_x" onclick="$('#editPane').addClass('hidden'); $('.dark').addClass('hidden')"></div>
     </span>
 
@@ -153,9 +153,9 @@
                  <div id="dropArea" class="startScreen infoScreen">
                      <div class="inner">
                          <div class="innerPic"></div>
-                         <div>
+                         <div style="height: 185px; position: relative;">
                              <input id="photographerInputPic" type="file" style="display: none;">
-                             <label for="photographerInputPic">
+                             <label for="photographerInputPic" class="choosePic">
                                  <div class="ui_button primary addPhotoBtn">
                                      <span>عکس خود را انتخاب کنید</span>
                                  </div>
@@ -179,39 +179,10 @@
                          </div>
 
                      </div>
-{{--                     <div class="footer">--}}
-{{--                         <div class="termsLabel">--}}
-{{--                             <div>--}}
-{{--                                 <div>--}}
-{{--                                     <div>توجه نمایید که عکس‌ما می‌بایست در فرمتهای رایج تصویر و با حداکثر سایز 500 مگابایت باشد. تصاویر پیش از انتشار توسط ما بازبینی می‌گردد. لطفاً از بارگزاری تصاویری که با قوانین سایت مغایرت دارند اجتناب کنید.</div>--}}
-{{--                                     <div id="photoUploadTipsLink" class="headerLink tipsLink">--}}
-{{--                                         <span onclick="$('#guidelinesOverlay').removeClass('hidden')">صفحه مقررات</span>--}}
-{{--                                         <span id="guidelinesOverlay" class="hidden ui_overlay ui_popover arrow_top guidelinesOverlayParent ui_tooltip">--}}
-{{--                                             <div class="header_text"></div>--}}
-{{--                                             <div class="body_text">--}}
-{{--                                                 <div class="guidelinesOverlay">--}}
-{{--                                                     <div class="listHdr">All photos must be...</div>--}}
-{{--                                                     <ul class="listBody">--}}
-{{--                                                         <li>Family-friendly</li>--}}
-{{--                                                         <li>Original, non-copyrighted images</li>--}}
-{{--                                                         <li>Non-commercial</li>--}}
-{{--                                                         <li>Virus-free</li>--}}
-{{--                                                         <li>In--}}
-{{--                                                            <b>.gif</b>,--}}
-{{--                                                            <b>.jpg</b>, or--}}
-{{--                                                            <b>.png</b> format</li>--}}
-{{--                                                         <li>No more than 50 photos per upload</li>--}}
-{{--                                                     </ul>--}}
-{{--                                                     <div class="listFtr">Read our complete <a href="https://www.tripadvisorsupport.com/hc/en-us/articles/200615067-Photo-Guidelines" target="_blank" class="js_popFraud">photo submission guidelines</a>.</div>--}}
-{{--                                                 </div>--}}
-{{--                                             </div>--}}
-{{--                                             <div class="ui_close_x" onclick="$('#guidelinesOverlay').addClass('hidden')"></div>--}}
-{{--                                         </span>--}}
-{{--                                     </div>--}}
-{{--                                 </div>--}}
-{{--                             </div>--}}
-{{--                         </div>--}}
-{{--                     </div>--}}
+                     <div class="footerTextBox stFooter">
+                         <span>توجه نمایید که عکس‌ما می‌بایست در فرمت های رایج تصویر و با حداکثر سایز 500 مگابایت باشد. تصاویر پیش از انتشار توسط ما بازبینی می‌گردد. لطفاً از بارگزاری تصاویری که با قوانین سایت مغایرت دارند اجتناب کنید.</span>
+                         <span class="footerPolicyLink" onclick="">صفحه مقررات</span>
+                     </div>
                  </div>
                  <div class="template itemRow loading">
                      <div class="row">
@@ -318,68 +289,26 @@
                              <div class="upload secondFooterVerification">
                                  {{--<div onclick="uploadIMG()" class="uploadBtn ui_button primary">تایید</div>--}}
                                  <div onclick="resizeImg()" class="uploadBtn ui_button primary">تایید</div>
+                                 <div onclick="goToPage3()" class="uploadBtn ui_button primary">asdff</div>
                              </div>
                          </div>
                      </div>
                      {{--<div onclick="back()" class="removeBtn action ui_close_x"></div>--}}
                  </div>
+                 <div class="successScreen hidden">
+                     <div class="successTextBox">
+                        <div class="successText">موفق شدید</div>
+                        <div class="successTextDes">عکس شما برای ما ارسال گردید و پس از بررسی بارگزاری خواهد شد</div>
+                     </div>
+                     <div class="uploadNextPicBtnBox">
+                         <div class="uploadNextPicBtn ui_button primary">بارگزاری عکس بعدی</div>
+                         <div class="uploadNextPicDeny">نه، برای بعد</div>
+                     </div>
+                     <div class="footerTextBox" style="position: absolute; bottom: 0">
+                         <div>پس از تایید عکس امتیاز شما در پروفایل افزایش خواهد یافت. به گزاشتن عکس ادامه دهید تا علاوه بر امتیاز بتوانید نشان های افتخار مخصوص عکس را برنده شوید.</div>
+                     </div>
 
-                 {{--<div class="footer hidden">--}}
-                 {{--<div class="termsLabel">--}}
-                 {{--<div class="errorText">This field is required</div>--}}
-                 {{--<input type="checkbox" class="iAgree" id="i-agree" name="photorelease">--}}
-                 {{--<div style="margin: 5px 0;">--}}
-                 {{--<div style="display: inline-block">--}}
-                 {{--<input onclick="filter()" id="21" type="checkbox">--}}
-                 {{--<label for="21">--}}
-                 {{--<span></span>--}}
-                 {{--</label>--}}
-                 {{--</div>--}}
-                 {{--<div style="display: inline-block; padding: 0px 5px; text-align: justify; font-size: 0.875em;">--}}
-                 {{--<div style="display: inline-block;">تاکید میکنم تمامی حقوق مرتبط با انتشار این تصویر متعلق به من می باشد. تایید می نمایم در صورت حضور چهره دیگران در تصویر، آن ها نیز از انتشار این عکس راضی می باشند.</div>--}}
-                 {{--<div id="photoUploadTipsLink" class="headerLink tipsLink">--}}
-                 {{--<span onclick="$('#guidelinesOverlay').removeClass('hidden')">قوانین سایت</span>--}}
-                 {{--<span id="guidelinesOverlay" class="hidden ui_overlay ui_popover arrow_top guidelinesOverlayParent ui_tooltip">--}}
-                 {{--<div class="header_text"></div>--}}
-                 {{--<div class="body_text">--}}
-                 {{--<div class="guidelinesOverlay">--}}
-                 {{--<div class="listHdr">All photos must be...</div>--}}
-                 {{--<ul class="listBody">--}}
-                 {{--<li>Family-friendly</li>--}}
-                 {{--<li>Original, non-copyrighted images</li>--}}
-                 {{--<li>Non-commercial</li>--}}
-                 {{--<li>Virus-free</li>--}}
-                 {{--<li>In--}}
-                 {{--<b>.gif</b>,--}}
-                 {{--<b>.jpg</b>, or--}}
-                 {{--<b>.png</b> format</li>--}}
-                 {{--<li>No more than 50 photos per upload</li>--}}
-                 {{--</ul>--}}
-                 {{--<div class="listFtr">Read our complete <a href="https://www.tripadvisorsupport.com/hc/en-us/articles/200615067-Photo-Guidelines" target="_blank" class="js_popFraud">photo submission guidelines</a>.</div>--}}
-                 {{--</div>--}}
-                 {{--</div>--}}
-                 {{--<div class="ui_close_x" onclick="$('#guidelinesOverlay').addClass('hidden')"></div>--}}
-                 {{--</span>--}}
-                 {{--</div>--}}
-                 {{--</div>--}}
-                 {{--</div>--}}
-                 {{--</div>--}}
-
-                 {{--<div class="upload">--}}
-                 {{--<div onclick="uploadIMG()" class="uploadBtn ui_button primary">تایید</div>--}}
-                 {{--</div>--}}
-
-                 {{--<div class="template errorMsg missingCategory">Please select a category</div>--}}
-
-                 {{--<div class="template errorMsg missingDescription">Please write a description</div>--}}
-
-                 {{--<div class="template errorMsg missingCrop1">کراپ 1 رو انجام بده</div>--}}
-
-                 {{--<div class="template errorMsg missingCrop2">کراپ 2 رو انجام بده</div>--}}
-
-                 {{--<div class="template errorMsg missingCrop3">یکی از دسته ها رو انتخاب کن</div>--}}
-
-                 {{--</div>--}}
+                 </div>
              </div>
          </div>
      </div>
@@ -390,6 +319,7 @@
 
 {{--<script src="{{URL::asset('js/editorCommon.js')}}"></script>--}}
 <script src="{{URL::asset('js/cropper.js')}}"></script>
+
 <script src="{{URL::asset('js/mainCrop.js')}}"></script>
 
 <script>
@@ -722,5 +652,12 @@
         $(".startScreen").removeClass('hidden');
         $(".action").css('display', 'none');
         $(".footer").addClass('hidden');
+    }
+</script>
+
+<script>
+    function goToPage3() {
+        $(".itemRow").css('display', 'none');
+        $(".successScreen").removeClass('hidden');
     }
 </script>

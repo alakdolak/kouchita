@@ -395,7 +395,7 @@ $config = \App\models\ConfigModel::first()
 
                     <div class="lp_ar_filters">
                         <div class="lp_ar_eachFilters lp_ar_rightFilters lp_ar_selectedMenu" onclick="lp_selectArticleFilter('lp_ar_rightFilters' ,this)">اعمال فیلتر</div>
-                        <div class="lp_ar_eachFilters" onclick="lp_selectArticleFilter('lp_ar_leftFilters' ,this)">نحوه مرتب سازی</div>
+                        <div class="lp_ar_eachFilters" onclick="lp_selectArticleFilter('lp_ar_leftFilters' ,this)">نحوه مرتب‌سازی</div>
                     </div>
                     {{--right menu--}}
                     <div id="lp_ar_rightFilters" class="lp_ar_contentOfFilters" ng-controller="FilterController">
@@ -411,7 +411,7 @@ $config = \App\models\ConfigModel::first()
                                                         </span>
                                         </div>
                                         <div style="cursor: pointer; font-size: 12px; color: #050c93; margin-bottom: 7px;" onclick="closeFilters()">
-                                            پاک کردن فیلتر ها
+                                            پاک کردن فیلترها
                                         </div>
                                         <div class="filterShow" style="display: flex; flex-direction: row; flex-wrap: wrap;"></div>
                                     </div>
@@ -1054,28 +1054,28 @@ $config = \App\models\ConfigModel::first()
                             {{--                <div id="PaymentOptions" class="paymentOptions col-xs-6 profileMenuLinks">--}}
                             {{--                    <a id="paymentOptionsLinkColor2" href="{{route('soon')}}">پروازها</a>--}}
                             {{--                </div>--}}
-                            @if($mode == "setting")
-                                <div id="Settings" class="settingColor1 settings col-xs-6 profileMenuLinks">
-                            @else
-                                <div id="Settings" class="settingColor2 settings col-xs-6 profileMenuLinks">
-                            @endif
-                                    تنظیمات
-                                    <div class="settingsArrow"></div>
-                                    <div class="settingsDropDown" id="settingDropDownMainDiv">
-                                        <a href="{{URL('accountInfo')}}">اطلاعات کاربر</a>
-                                        <?php
-                                        $level = Auth::user()->level;
-                                        ?>
+{{--                            @if($mode == "setting")--}}
+{{--                                <div id="Settings" class="settingColor1 settings col-xs-6 profileMenuLinks">--}}
+{{--                            @else--}}
+{{--                                <div id="Settings" class="settingColor2 settings col-xs-6 profileMenuLinks">--}}
+{{--                            @endif--}}
+{{--                                    تنظیمات--}}
+{{--                                    <div class="settingsArrow"></div>--}}
+{{--                                    <div class="settingsDropDown" id="settingDropDownMainDiv">--}}
+{{--                                        <a href="{{URL('accountInfo')}}">اطلاعات کاربر</a>--}}
+{{--                                        <?php--}}
+{{--                                        $level = Auth::user()->level;--}}
+{{--                                        ?>--}}
 
-                                        @if($level == 1 || $level == 3)
-                                            <a title="Control Content" href="{{route('getReports')}}">مدیریت گزارشات</a>
-                                        @endif
+{{--                                        @if($level == 1 || $level == 3)--}}
+{{--                                            <a title="Control Content" href="{{route('getReports')}}">مدیریت گزارشات</a>--}}
+{{--                                        @endif--}}
 
-                                        @if(Auth::user()->level == 1)
-                                            {{--<a title="ages" href="{{route('specialAdvice')}}">پیشنهاد های ویژه</a>--}}
-                                        @endif
-                                    </div>
-                                </div>
+{{--                                        @if(Auth::user()->level == 1)--}}
+{{--                                            --}}{{--<a title="ages" href="{{route('specialAdvice')}}">پیشنهاد های ویژه</a>--}}
+{{--                                        @endif--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
                         </div>
                     @else
                         <div class="profileScoreMainDiv">
