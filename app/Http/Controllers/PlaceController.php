@@ -64,6 +64,32 @@ class PlaceController extends Controller {
         if($kindPlace == null)
             return \redirect(\url('/'));
         $kindPlaceId = $kindPlace->id;
+        switch ($kindPlaceId){
+            case 1:
+                $placeMode = 'amaken';
+                $kindPlace->title = 'جاذبه های';
+                break;
+            case 3:
+                $placeMode = 'restaurant';
+                $kindPlace->title = 'رستوران های';
+                break;
+            case 4:
+                $placeMode = 'hotel';
+                $kindPlace->title = 'مراکز اقامتی';
+                break;
+            case 6:
+                $placeMode = 'majara';
+                $kindPlace->title = 'ماجراهای';
+                break;
+            case 10:
+                $placeMode = 'sogatSanaies';
+                $kindPlace->title = 'صنایع دستی و سوغات';
+                break;
+            case 11:
+                $placeMode = 'mahaliFood';
+                $kindPlace->title = 'غذاهای محلی';
+                break;
+        }
 
         if(is_numeric($slug))
             $place = DB::table($kindPlace->tableName)->find((int)$slug);
@@ -170,7 +196,7 @@ class PlaceController extends Controller {
 
         $articleUrl = \url('/article/list/place/' . $kindPlaceId . '_' . $place->id);
         $cityName = 'شهر ' . $city->name;
-        $locationName = ["name" => $place->name, 'state' => $state->name, 'cityName' => $cityName, 'cityNameUrl' => $city->name, 'articleUrl' => $articleUrl, 'kindState' => 'city'];
+        $locationName = ["name" => $place->name, 'state' => $state->name, 'cityName' => $cityName, 'cityNameUrl' => $city->name, 'articleUrl' => $articleUrl, 'kindState' => 'city', 'kindPage' => 'place'];
 
         $mainWebSiteUrl = \url('/');
         $mainWebSiteUrl .= '/' . $request->path();
@@ -186,7 +212,7 @@ class PlaceController extends Controller {
             'kindPlaceId' => $kindPlaceId, 'mode' => $mode, 'rates' => $rates[0],
             'photos' => $photos, 'userPhotos' => $userPhotos, 'userPhotosJson' => $userPhotosJson,
             'config' => ConfigModel::first(), 'hasLogin' => $hasLogin, 'bookMark' => $bookMark, 'err' => $err,
-            'placeStyles' => PlaceStyle::whereKindPlaceId($kindPlaceId)->get(),
+            'placeStyles' => PlaceStyle::whereKindPlaceId($kindPlaceId)->get(), 'kindPlace' => $kindPlace,
             'placeMode' => $kindPlace->tableName, 'rooms' => $rooms, 'jsonRoom' => $jsonRoom, 'video' => $video,
             'sections' => SectionPage::wherePage(getValueInfo('hotel-detail'))->get()));
     }
@@ -3803,14 +3829,14 @@ class PlaceController extends Controller {
                     break;
                 case 4:
                     $placeMode = 'hotel';
-                    $kindPlace->title = 'مراکز اقامتی';
+                    $kindPlace->title = 'مراکز اقامتی ';
                     $meta['title'] = 'هتل ها | لیست قیمت – نقد و بررسی به همراه عکس از کاربران - بوم گردی ها | کوچیتا';
                     $meta['keyword'] = 'لیست هتل های ایران، لیست قیمت هتل های ایران، نقد و بررسی هتل های ایران ، هتل های ارزان ایران، مقایسه ی هتل ها';
                     $meta['description'] = 'آخرین وضعبت قیمت و رزور هتل ها را ببینید، نظرات و نقد های مشتریان هتل ها را همراه عکس ببینید و هتل ها را مقایسه کنید.بهترین قیمت رزرو در کوچیتا';
                     break;
                 case 6:
                     $placeMode = 'majara';
-                    $kindPlace->title = 'ماجراهای';
+                    $kindPlace->title = ' طبیعت گردی در';
                     $meta['title'] = 'ماجرا | لیست اماکن ماجرا جویی ایران– تجهیزات مورد نیاز | ماجراجویی خودتو آغاز کن';
                     $meta['keyword'] = 'ماجراجویی در ایران، مکان های خاص ایران، گردشگری در ایران، می خوام برم سفر';
                     $meta['description'] = 'اماکن ماجراجویی رو بشناس، سختی سفرشون رو ببین و تججهیزاتتو آماده کن. کوچیتا بهترین';
@@ -3837,7 +3863,7 @@ class PlaceController extends Controller {
                 $city = '';
                 $articleUrl = \url('/mainArticle');
                 $n = 'لیست ' . $kindPlace->title . ' ایران';
-                $locationName = ["name" => $n, 'cityName' => 'ایران من', 'cityNameUrl' => '', 'articleUrl' => $articleUrl, 'kindState' => 'country'];
+                $locationName = ["name" => $n, 'state' => '',  'cityName' => 'ایران من', 'cityNameUrl' => '', 'articleUrl' => $articleUrl, 'kindState' => 'country', 'kindPage' => 'list'];
             }
             else if ($mode == "state") {
                 $state = State::whereName($city)->first();
@@ -3847,7 +3873,7 @@ class PlaceController extends Controller {
 
                 $articleUrl = \url('/article/list/city/' . $state->name);
                 $n = ' استان ' . $state->name;
-                $locationName = ["name" => $n, 'cityName' => $n, 'cityNameUrl' => $state->name, 'articleUrl' => $articleUrl, 'kindState' => 'state'];
+                $locationName = ["name" => $n, 'state' => $state->name, 'cityName' => $n, 'cityNameUrl' => $state->name, 'articleUrl' => $articleUrl, 'kindState' => 'state', 'kindPage' => 'list'];
             }
             else if ($mode == "city") {
                 $city = Cities::whereName($city)->first();
@@ -3860,7 +3886,7 @@ class PlaceController extends Controller {
 
                 $articleUrl = \url('/article/list/city/' . $city->name);
                 $n = ' شهر ' . $city->name;
-                $locationName = ["name" => $n, 'state' => $state->name, 'cityName' => $n, 'cityNameUrl' => $city->name, 'articleUrl' => $articleUrl, 'kindState' => 'city'];
+                $locationName = ["name" => $n, 'state' => $state->name, 'cityName' => $n, 'cityNameUrl' => $city->name, 'articleUrl' => $articleUrl, 'kindState' => 'city', 'kindPage' => 'list'];
             }
 
             $features = PlaceFeatures::where('kindPlaceId', $kindPlaceId)->where('parent', 0)->get();
@@ -3915,10 +3941,26 @@ class PlaceController extends Controller {
         }
 
         //special filters for each kind place
-        switch ($kindPlace->id){
-            case 4:
-                $placeIds = $this->hotelFilter($specialFilters, $placeIds);
-                break;
+
+        if($specialFilters != null) {
+            $kindValues = [];
+            $kindName = [];
+            if(is_array($specialFilters) && count($specialFilters) > 0) {
+                foreach ($specialFilters as $item){
+                    if($item != 0) {
+                        $index = array_search($item['kind'], $kindName);
+                        if ($index === false) {
+                            array_push($kindName, $item['kind']);
+                            array_push($kindValues, [$item['value']]);
+                        } else
+                            array_push($kindValues[$index], $item['value']);
+                    }
+                }
+
+                foreach ($kindName as $index => $value){
+                    $placeIds = DB::table($kindPlace->tableName)->whereIn($value, $kindValues[$index])->whereIn('id', $placeIds)->pluck('id')->toArray();
+                }
+            }
         }
         if(count($placeIds) == 0){
             echo json_encode(['places' => array()]);
@@ -4064,19 +4106,6 @@ class PlaceController extends Controller {
 
         echo json_encode(['places' => $places]);
         return;
-    }
-
-    private function hotelFilter($specFilter, $placeIds){
-        $kindId = array();
-        if(is_array($specFilter) && count($specFilter) > 0) {
-            foreach ($specFilter as $item) {
-                if ($item != 0)
-                    array_push($kindId, $item);
-            }
-            if (count($kindId) != 0)
-                $placeIds = DB::table('hotels')->whereIn('id', $placeIds)->whereIn('kind_id', $kindId)->pluck('id')->toArray();
-        }
-        return $placeIds;
     }
 
 }

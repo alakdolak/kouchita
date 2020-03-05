@@ -78,7 +78,12 @@
 
 <div class="ui_container cpBody">
     <div class="cpBorderBottom cpHeader">
+
         <div class="cpHeaderRouteOfCityName">
+            <a href="{{url('/')}}">
+                <span>صفحه اصلی</span>
+            </a>
+            <span> > </span>
             @if(isset($place->state))
                 <a href="{{url('cityPage/state/'.$place->state)}}">
                     <span>استان {{$place->state}}</span>
@@ -90,8 +95,10 @@
             @endif
             {{--<div class="ui_close_x" style="left: 30px !important; top: 15px !important;"></div>--}}
         </div>
+
         <div class="cpHeaderCityName">{{$place->name}}</div>
     </div>
+
     <div class="row">
         <div class="col-lg-3 col-sm-3 text-align-right hideOnPhone" style="float: left; padding: 0 !important;">
             <div class="postsMainDivInSpecificMode cpCommentBox cpBorderBottom">

@@ -59,6 +59,13 @@
         background-color: #88070B;
         color: white;
     }
+    .linkRoute{
+        color: #16174f !important;
+        font-size: 15px;
+    }
+    .spanMarginSecHead > span {
+        margin: 0px 7px;
+    }
 </style>
 <div class="container-fluid secHeadMain hideOnPhone">
     <div class="ui_container secHeadNavs">
@@ -68,7 +75,7 @@
             </span>
             <div class="secHeadTabsSubList">
                 <a href="{{route('cityPage', ['kind' => $locationName['kindState'], 'city' => $locationName['cityNameUrl'] ])}}" target="_blank" >{{$locationName['cityName']}}</a>
-                @if(isset($locationName['state']))
+                @if(isset($locationName['state']) && $locationName['kindState'] != 'country')
                     <a href="{{route('cityPage', ['kind' => 'state', 'city' => $locationName['state'] ])}}" target="_blank" >استان {{$locationName['state']}}</a>
                 @endif
                 <a href="{{url('/')}}">صفحه اصلی</a>
@@ -80,7 +87,7 @@
             </span>
             <div class="secHeadTabsSubList">
                 <a href="{{route('place.list', ['kindPlaceId' => 4, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">اقامتگاه های {{$locationName['cityName']}}</a>
-                @if(isset($locationName['state']))
+                @if(isset($locationName['state']) && $locationName['kindState'] != 'country')
                     <a href="{{route('place.list', ['kindPlaceId' => 4, 'mode' => 'state', 'city' => $locationName['state']])}}">اقامتگاه های استان {{$locationName['state']}}</a>
                 @endif
             </div>
@@ -91,7 +98,7 @@
             </span>
             <div class="secHeadTabsSubList">
                 <a href="{{route('place.list', ['kindPlaceId' => 3, 'mode' =>  $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">رستوران های {{$locationName['cityName']}}</a>
-                @if(isset($locationName['state']))
+                @if(isset($locationName['state']) && $locationName['kindState'] != 'country')
                     <a href="{{route('place.list', ['kindPlaceId' => 3, 'mode' => 'state', 'city' => $locationName['state']])}}">رستوران های استان {{$locationName['state']}}</a>
                 @endif
             </div>
@@ -102,7 +109,7 @@
             </span>
             <div class="secHeadTabsSubList">
                 <a href="{{route('place.list', ['kindPlaceId' => 1, 'mode' =>  $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">جاذبه های {{$locationName['cityName']}}</a>
-                @if(isset($locationName['state']))
+                @if(isset($locationName['state'])  && $locationName['kindState'] != 'country')
                     <a href="{{route('place.list', ['kindPlaceId' => 1, 'mode' => 'state', 'city' => $locationName['state']])}}">جاذبه های استان {{$locationName['state']}}</a>
                 @endif
             </div>
@@ -113,7 +120,7 @@
             </span>
             <div class="secHeadTabsSubList">
                 <a href="{{route('place.list', ['kindPlaceId' => 6, 'mode' =>  $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">ماجرا های {{$locationName['cityName']}}</a>
-                @if(isset($locationName['state']))
+                @if(isset($locationName['state']) && $locationName['kindState'] != 'country')
                     <a href="{{route('place.list', ['kindPlaceId' => 6, 'mode' => 'state', 'city' => $locationName['state']])}}">ماجرا های استان {{$locationName['state']}}</a>
                 @endif
             </div>
@@ -124,7 +131,7 @@
             </span>
             <div class="secHeadTabsSubList">
                 <a href="{{route('place.list', ['kindPlaceId' => 10, 'mode' =>  $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">سوغات و صنایع دستی {{$locationName['cityName']}}</a>
-                @if(isset($locationName['state']))
+                @if(isset($locationName['state'])  && $locationName['kindState'] != 'country')
                     <a href="{{route('place.list', ['kindPlaceId' => 10, 'mode' => 'state', 'city' => $locationName['state']])}}">سوغات و صنایع دستی استان {{$locationName['state']}}</a>
                 @endif
             </div>
@@ -135,16 +142,73 @@
             </span>
             <div class="secHeadTabsSubList">
                 <a href="{{route('place.list', ['kindPlaceId' => 11, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">غذاهای محلی {{$locationName['cityName']}}</a>
-                @if(isset($locationName['state']))
+                @if(isset($locationName['state']) && $locationName['kindState'] != 'country')
                     <a href="{{route('place.list', ['kindPlaceId' => 11, 'mode' => 'state', 'state' => $locationName['state']])}}">غذاهای محلی استان {{$locationName['state']}}</a>
                 @endif
             </div>
         </div>
         <div class="secHeadTabs ">
-            <span>
-                بوم گردی
-            </span>
-            <div class="secHeadTabsSubList"></div>
+            <a href="{{route('mainArticle')}}" style="color: #16174f">سفرنامه ها</a>
         </div>
     </div>
+</div>
+
+<div class="container-fluid secHeadMain hideOnPhone" style="background-color: unset; margin-top: 10px;">
+
+    <div class="ui_container secHeadNavs spanMarginSecHead" style="font-size: 20px">
+        <a class="linkRoute" href="{{url('/')}}" style="margin-right: 20px;">
+            صفحه اصلی
+        </a>
+        @if($locationName['kindState'] != 'country')
+            <span>
+            ->
+            </span>
+            <a class="linkRoute" href="{{route('cityPage', ['kind' => 'state', 'city' => $locationName['state']])}}">
+               استان {{$locationName['state']}}
+            </a>
+        @endif
+
+        @if($locationName['kindState'] == 'city')
+            <span>
+            ->
+            </span>
+            <a class="linkRoute" href="{{route('cityPage', ['kind' => 'city', 'city' => $locationName['cityNameUrl']])}}">
+                شهر {{$locationName['cityNameUrl']}}
+            </a>
+        @endif
+
+        <span>
+        ->
+        </span>
+        <a class="linkRoute" href="{{route('place.list', ['kindPlaceId' => $kindPlaceId, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl'] ])}}">
+            {{$kindPlace->title}}
+            @if($mode != 'country')
+                @if($mode == 'state')
+                    استان
+                @else
+                    شهر
+                @endif
+                {{$city->name}}
+            @else
+                ایران من
+            @endif
+        </a>
+
+        @if($locationName['kindPage'] == 'place')
+            <span>
+            ->
+            </span>
+            <a class="linkRoute" href="{{Request::url()}}">
+                {{$place->name}}
+            </a>
+        @endif
+
+    </div>
+
+    @if($locationName['kindPage'] == 'place')
+        {{--<div class="ui_container secHeadNavs" style="justify-content: center; margin-top: 30px;">--}}
+            {{--<div style="background: red; width: 728px; height: 90px;"></div>--}}
+        {{--</div>--}}
+    @endif
+
 </div>
