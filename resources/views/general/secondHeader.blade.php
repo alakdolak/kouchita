@@ -152,63 +152,63 @@
         </div>
     </div>
 </div>
+@if(isset($kindPlace))
+    <div class="container-fluid secHeadMain hideOnPhone" style="background-color: unset; margin-top: 10px;">
 
-<div class="container-fluid secHeadMain hideOnPhone" style="background-color: unset; margin-top: 10px;">
-
-    <div class="ui_container secHeadNavs spanMarginSecHead" style="font-size: 20px">
-        <a class="linkRoute" href="{{url('/')}}" style="margin-right: 20px;">
-            صفحه اصلی
-        </a>
-        @if($locationName['kindState'] != 'country')
-            <span>
-            ->
-            </span>
-            <a class="linkRoute" href="{{route('cityPage', ['kind' => 'state', 'city' => $locationName['state']])}}">
-               استان {{$locationName['state']}}
+        <div class="ui_container secHeadNavs spanMarginSecHead" style="font-size: 20px">
+            <a class="linkRoute" href="{{url('/')}}" style="margin-right: 20px;">
+                صفحه اصلی
             </a>
-        @endif
-
-        @if($locationName['kindState'] == 'city')
-            <span>
-            ->
-            </span>
-            <a class="linkRoute" href="{{route('cityPage', ['kind' => 'city', 'city' => $locationName['cityNameUrl']])}}">
-                شهر {{$locationName['cityNameUrl']}}
-            </a>
-        @endif
-
-        <span>
-        ->
-        </span>
-        <a class="linkRoute" href="{{route('place.list', ['kindPlaceId' => $kindPlaceId, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl'] ])}}">
-            {{$kindPlace->title}}
-            @if($mode != 'country')
-                @if($mode == 'state')
-                    استان
-                @else
-                    شهر
-                @endif
-                {{$city->name}}
-            @else
-                ایران من
+            @if($locationName['kindState'] != 'country')
+                <span>
+                ->
+                </span>
+                <a class="linkRoute" href="{{route('cityPage', ['kind' => 'state', 'city' => $locationName['state']])}}">
+                   استان {{$locationName['state']}}
+                </a>
             @endif
-        </a>
+
+            @if($locationName['kindState'] == 'city')
+                <span>
+                ->
+                </span>
+                <a class="linkRoute" href="{{route('cityPage', ['kind' => 'city', 'city' => $locationName['cityNameUrl']])}}">
+                    شهر {{$locationName['cityNameUrl']}}
+                </a>
+            @endif
+
+            <span>
+            ->
+            </span>
+            <a class="linkRoute" href="{{route('place.list', ['kindPlaceId' => $kindPlaceId, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl'] ])}}">
+                {{$kindPlace->title}}
+                @if($mode != 'country')
+                    @if($mode == 'state')
+                        استان
+                    @else
+                        شهر
+                    @endif
+                    {{$city->name}}
+                @else
+                    ایران من
+                @endif
+            </a>
+
+            @if($locationName['kindPage'] == 'place')
+                <span>
+                ->
+                </span>
+                <a class="linkRoute" href="{{Request::url()}}">
+                    {{$place->name}}
+                </a>
+            @endif
+
+        </div>
 
         @if($locationName['kindPage'] == 'place')
-            <span>
-            ->
-            </span>
-            <a class="linkRoute" href="{{Request::url()}}">
-                {{$place->name}}
-            </a>
+            {{--<div class="ui_container secHeadNavs" style="justify-content: center; margin-top: 30px;">--}}
+                {{--<div style="background: red; width: 728px; height: 90px;"></div>--}}
+            {{--</div>--}}
         @endif
-
-    </div>
-
-    @if($locationName['kindPage'] == 'place')
-        {{--<div class="ui_container secHeadNavs" style="justify-content: center; margin-top: 30px;">--}}
-            {{--<div style="background: red; width: 728px; height: 90px;"></div>--}}
-        {{--</div>--}}
-    @endif
-
 </div>
+@endif
