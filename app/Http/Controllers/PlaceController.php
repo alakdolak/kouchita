@@ -24,6 +24,7 @@ use App\models\Place;
 use App\models\PlaceFeatureRelation;
 use App\models\PlaceFeatures;
 use App\models\PlaceStyle;
+use App\models\PlaceTag;
 use App\models\Post;
 use App\models\PostCategory;
 use App\models\PostCategoryRelation;
@@ -98,6 +99,8 @@ class PlaceController extends Controller {
 
         if($place == null)
             return \redirect(\url('/'));
+
+        $place->tags = PlaceTag::getTags($kindPlace->id, $place->id);
 
         $hasLogin = true;
         $uId = -1;
@@ -2132,7 +2135,7 @@ class PlaceController extends Controller {
 
             $photoFilters = DB::select("select name, id, (SELECT count(*) FROM log WHERE placeId = " . $placeId . " and log.kindPlaceId = " . $kindPlaceId . " and activityId = " . $activityId . " and pic = picItems.id) as countNum FROM picItems WHERE kindPlaceId = " . $kindPlaceId);
 
-            $userPic = URL::asset('images/logo.svg');
+            $userPic = URL::asset('images/icons/mainIcon.svg');
 
             switch ($kindPlaceId) {
                 case 1:

@@ -341,7 +341,11 @@ class HomeController extends Controller
 
             if($place->image == null){
                 $seenActivity = Activity::whereName('مشاهده')->first();
-                $mostSeen = DB::select('SELECT placeId, COUNT(id) as seen FROM log WHERE activityId = ' .$seenActivity->id. ' AND kindPlaceId = 1 AND placeId IN (' . implode(",", $allAmakenId) . ') GROUP BY placeId ORDER BY seen DESC');
+                $mostSeen = [];
+                if($allAmakenId != null)
+                    $mostSeen = DB::select('SELECT placeId, COUNT(id) as seen FROM log WHERE activityId = ' .$seenActivity->id. ' AND kindPlaceId = 1 AND placeId IN (' . implode(",", $allAmakenId) . ') GROUP BY placeId ORDER BY seen DESC');
+                else
+                    $place->image = URL::asset('_images/noPic/blank.jpg');
                 if(count($mostSeen) != 0){
                     foreach ($mostSeen as $item){
                         $p = Amaken::find($item->placeId);

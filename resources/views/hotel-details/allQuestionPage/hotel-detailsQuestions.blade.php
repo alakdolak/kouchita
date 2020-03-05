@@ -16,21 +16,9 @@ if ($total == 0)
 @section('meta')
     <meta name="keywords" content="{{$place->keyword}}">
     <meta property="og:description" content="{{$place->meta}}"/>
-    <meta property="article:tag" content="{{$place->tag1}}"/>
-    <meta property="article:tag" content="{{$place->tag2}}"/>
-    <meta property="article:tag" content="{{$place->tag3}}"/>
-    <meta property="article:tag" content="{{$place->tag4}}"/>
-    <meta property="article:tag" content="{{$place->tag5}}"/>
-    <meta property="article:tag" content="{{$place->tag6}}"/>
-    <meta property="article:tag" content="{{$place->tag7}}"/>
-    <meta property="article:tag" content="{{$place->tag8}}"/>
-    <meta property="article:tag" content="{{$place->tag9}}"/>
-    <meta property="article:tag" content="{{$place->tag10}}"/>
-    <meta property="article:tag" content="{{$place->tag11}}"/>
-    <meta property="article:tag" content="{{$place->tag12}}"/>
-    <meta property="article:tag" content="{{$place->tag13}}"/>
-    <meta property="article:tag" content="{{$place->tag14}}"/>
-    <meta property="article:tag" content="{{$place->tag15}}"/>
+    @foreach($place->tags as $item)
+        <meta property="article:tag" content="{{$item}}"/>
+    @endforeach
     <meta name="twitter:card" content="summary_large_image"/>
     <meta name="twitter:description" content="{{$place->meta}}"/>
     <meta name="twitter:title" content="{{$place->name}} | {{$city->name}} | کوچیتا"/>
@@ -44,9 +32,6 @@ if ($total == 0)
     @endif
     <meta content="article" property="og:type"/>
     <meta property="og:title" content="{{$place->name}} | {{$city->name}} | کوچیتا"/>
-
-
-
 @stop
 
 @section('header')

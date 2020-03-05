@@ -315,8 +315,8 @@ if(Auth::check()) {
                         <div class="global-nav-hamburger is-hidden-tablet">
                             <span class="ui_icon menu-bars"></span>
                         </div>
-                        <a href="{{route('main')}}" class="global-nav-logo">
-                            <img src="{{URL::asset('images/logo.png')}}" alt="کوچیتا" class="global-nav-img global-nav-svg"/>
+                        <a href="{{route('main')}}" class="global-nav-logo" style="display: flex; justify-content: center; align-items: center">
+                            <img src="{{URL::asset('images/icons/mainLogo.png')}}" alt="کوچیتا" style="height: 70%; width: auto"/>
                         </a>
 
                         <div class="global-nav-links ui_tabs inverted is-hidden-mobile">
@@ -548,7 +548,7 @@ if(Auth::check()) {
                                 <div class="ui_icon times"></div>
                             </div>
                             <a href="/" class="global-nav-logo">
-                                <img src='{{URL::asset('images/logo.png')}}' alt="کوچیتا" class="global-nav-img"/>
+                                <img src='{{URL::asset('images/icons/mainLogo.png')}}' alt="کوچیتا" class="global-nav-img"/>
                             </a>
                         </div>
                         <div class="sidebar-nav-profile-container">

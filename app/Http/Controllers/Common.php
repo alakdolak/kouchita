@@ -670,7 +670,7 @@ function getAllPlacePicsByKind($kindPlaceId, $placeId){
     }
     $userPhotosJSON = json_encode($userPhotos);
 
-    $koochitaPic = URL::asset('images/logo.png');
+    $koochitaPic = URL::asset('images/icons/mainIcon.svg');
     $s = [  'id' => 0,
         's' => URL::asset('_images/' . $MainFile . '/' . $place->file . '/s-' . $place->picNumber),
         'f' => URL::asset('_images/' . $MainFile . '/' . $place->file . '/f-' . $place->picNumber),
