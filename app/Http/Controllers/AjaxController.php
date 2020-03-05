@@ -320,7 +320,7 @@ class AjaxController extends Controller {
             $cityConstraint = "";
             $allow = true;
             $key = $_POST["key"];
-//            dd($request->all());
+
             if(isset($request->mode) && $request->mode == 'state'){
                 $state = State::find($request->selectedCities);
                 if($state != null){
