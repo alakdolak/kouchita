@@ -402,7 +402,7 @@ li.error {
 }
 
 .avatarUI .uploadAvatarOptions .avatarOption.optionWebcam {
-    background: url('../../images/icon_takePhoto.png') no-repeat center 56px;
+    /*background: url('../../images/icon_takePhoto.png') no-repeat center 56px;*/
 }
 
 .avatarUI .currentAvatar {

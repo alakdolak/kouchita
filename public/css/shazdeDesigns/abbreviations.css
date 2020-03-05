@@ -568,6 +568,10 @@
 
 /*margin*/
 
+.margin-auto {
+    margin: auto;
+}
+
 .mg-0 {
     margin: 0;
 }
