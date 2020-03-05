@@ -312,7 +312,7 @@ if(Auth::check()) {
     <div class="ppr_rup ppr_priv_global_nav position-relative">
         <div class="global-nav global-nav-single-line position-relative">
             <div class="global-nav-top position-relative">
-                <div class="global-nav-bar global-nav-green">
+                <div class="global-nav-bar global-nav-green" style="padding-top: 5px;">
                     <div class="ui_container global-nav-bar-container direction-rtl position-relative">
                         <div class="global-nav-hamburger is-hidden-tablet">
                             <span class="ui_icon menu-bars"></span>
@@ -363,8 +363,11 @@ if(Auth::check()) {
                             @if(Auth::check())
                                 <div class="ppr_rup ppr_priv_global_nav_action_trips position-relative">
                                     <div id="targetHelp_1" class="targets">
-                                        <div id="bookmarkicon" class="ppr_rup ppr_priv_global_nav_action_profile">
-                                            <span class="ui_icon casino"></span>
+                                        <div id="bookmarkicon" class="ppr_rup ppr_priv_global_nav_action_profile" title="نشانه گذاری شده ها" style="font-size: 10px">
+                                            <span class="ui_icon casino" style="justify-content: center"></span>
+                                            <div class="nameOfIconHeaders" style="color: white;">
+                                                نشون کرده
+                                            </div>
                                         </div>
 
                                         <div id="bookmarkmenu" class="ui_overlay ui_flyout global-nav-flyout global-nav-utility trips-flyout-container" style="direction: rtl;">
@@ -373,6 +376,7 @@ if(Auth::check()) {
                                                     <div id="masthead-recent" style="background-color: white">
                                                         <div class="recent-header-container">
                                                             <a class="recent-header" href="{{route('recentlyViewTotal')}}" target="_self"> نشانه گذاری شده ها </a>
+
                                                         </div>
                                                         <div class="masthead-recent-cards-container" id="bookMarksDiv"></div>
                                                         {{--<div class="see-all-button-container"><a href="{{route('recentlyViewTotal')}}" target="_self" class="see-all-button">مشاهده تمامی موارد </a></div>--}}
@@ -399,6 +403,9 @@ if(Auth::check()) {
                                         <div class="masthead-saves" title="سفرهای من">
                                             <a class="trips-icon"  href="{{route('myTrips')}}">
                                                 <span class="ui_icon my-trips"></span>
+                                                <div class="nameOfIconHeaders" style="color: white;">
+                                                    سفرهای من
+                                                </div>
                                                 {{--onclick="showRecentlyViews('recentlyViewed')"--}}
                                             </a>
                                         </div>

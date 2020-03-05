@@ -270,6 +270,6 @@ DIV.ppr_rup.ppr_priv_global_nav_action_profile .username::before {
     height: 100%;
 }
 .nameOfIconHeaders{
-    font-size: 10px;
+    font-size: 10px !important;
     color: black;
 }

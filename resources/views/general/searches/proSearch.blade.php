@@ -173,7 +173,8 @@
                     'majaraFilter': majaraFilter,
                     'sogatSanaieFilter': sogatSanaieFilter,
                     'mahaliFoodFilter': mahaliFoodFilter,
-                    'selectedCities': cities
+                    'selectedCities': cities,
+                    'mode': 'city'
                 },
                 success: function (response) {
                     $("#resultPlace").empty();
