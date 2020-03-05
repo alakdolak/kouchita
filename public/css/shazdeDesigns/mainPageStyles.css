@@ -298,7 +298,8 @@ body {
     right: 0%;
     top: 50%;
     transform: translateY(-50%);
-    width: 100%;
+    width: 90%;
+    margin: 0 5%;
     z-index: 100;
     direction: rtl;
     display: flex;
@@ -694,6 +695,10 @@ div.prw_rup.prw_shelves_rebrand_poi_shelf_item_widget .detail .item {
 }
 
 @media (max-width: 767px) {
+    .mainDivSearchInputMainPage {
+        margin: 0 !important;
+    }
+
     .mainSearchDivPcSize {
         width: 100% !important;
     }

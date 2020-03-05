@@ -348,8 +348,7 @@ if(Auth::check()) {
                                                     <div class="recent-header-container">
                                                         <a class="recent-header" href="{{route('recentlyViewTotal')}}" target="_self"> نشانه گذاری شده ها </a>
                                                     </div>
-                                                    {{--<div class="masthead-recent-cards-container" id="bookMarksDiv"></div>--}}
-
+                                                    <div class="masthead-recent-cards-container" id="bookMarksDiv"></div>
                                                     {{--<div class="see-all-button-container"><a href="{{route('recentlyViewTotal')}}" target="_self" class="see-all-button">مشاهده تمامی موارد </a></div>--}}
                                                 </div>
 

@@ -29,7 +29,7 @@
                                         </div>
                                         <a href="##redirect##" class="textsOfRecently">
                                             <div class="detail direction-rtl" style="width: 100%;">
-                                                <p style="font-size: .7vw !important; text-align: center; line-height: 1.5vw; padding: 5px; white-space: normal; background-color: #000000d6; border-radius: 20px;">##name##</p>
+                                                <div class="textsOfRecently_text">##name##</div>
                                             </div>
                                         </a>
                                     </div>

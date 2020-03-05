@@ -124,7 +124,8 @@ div.prw_rup.prw_search_typeahead .typeahead_align .typeahead_input {
     margin: -3px 0 0 3px;
     padding-top: 3px;
 }
-.textsOfRecently{
+
+.textsOfRecently {
     padding: 4px 0px 10px 0px;
     position: absolute;
     top: 0px;
@@ -134,8 +135,20 @@ div.prw_rup.prw_search_typeahead .typeahead_align .typeahead_input {
     justify-content: center;
     align-items: center;
     background: #14151880;
-    color: #b7b7b7 !important;
     font-size: 17px;
+}
+
+.textsOfRecently:hover {
+    background: #14151800;
+}
+
+.textsOfRecently_text {
+    font-size: 1vw !important;
+    line-height: 1.5vw;
+    text-align: center;
+    padding: 5px;
+    white-space: normal;
+    background-color: #000000d6;
 }
 
 .hotelIcon::before {
@@ -291,10 +304,23 @@ div.prw_rup.prw_shelves_rebrand_poi_shelf_item_widget .detail {
     overflow: hidden;
 }
 
+a:hover {
+    color: #4DC7BC;
+}
+
 @media (max-width: 992px) {
     .searchPanes {
         left: 5%;
         right: 5%;
+    }
+
+    .spBoxOfSuggestion {
+        width: 33.3333%;
+    }
+
+    .textsOfRecently_text {
+        font-size: 1.5vw !important;
+        line-height: 2vw;
     }
 }
 
@@ -315,19 +341,6 @@ div.prw_rup.prw_shelves_rebrand_poi_shelf_item_widget .detail {
     .ui_modal.searchPanes {
         padding: 16px;
     }
-}
-
-@media (min-width: 630px) and (max-width: 767px) {
-    .spBoxOfSuggestion {
-        width: 33.333333%;
-    }
-}
-
-@media (max-width: 630px) {
-    .searchPanes {
-        left: 2%;
-        right: 2%
-    }
 
     .mainContainerSearch {
         display: flex;
@@ -346,6 +359,32 @@ div.prw_rup.prw_shelves_rebrand_poi_shelf_item_widget .detail {
         border-top: 2px solid #4dc7bc;
         margin-top: 40px;
     }
+
+    .textsOfRecently_text {
+        font-size: 3vw !important;
+        line-height: 3.5vw;
+    }
+}
+
+@media (max-width: 630px) {
+    .searchPanes {
+        left: 2%;
+        right: 2%
+    }
+}
+
+@media (max-width: 480px) {
+    .spGoWhere{
+        font-size: 25px;
+    }
+
+    div.prw_rup.prw_search_typeahead .typeahead_align .typeahead_input {
+        font-size: 20px;
+    }
+
+    .spBoxOfSuggestion {
+        width: 50%;
+    }
 }
 
 @media (max-width: 400px) {
@@ -357,9 +396,12 @@ div.prw_rup.prw_shelves_rebrand_poi_shelf_item_widget .detail {
     }
 }
 
-@media (max-width: 400px) {
-    .spBoxOfSuggestion {
-        width: 33.3333333%;
+@media (max-width: 375px) {
+    .spGoWhere{
+        font-size: 20px;
+    }
+    div.prw_rup.prw_search_typeahead .typeahead_align .typeahead_input {
+        font-size: 15px;
     }
 }
 

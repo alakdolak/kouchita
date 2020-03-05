@@ -2,7 +2,7 @@
 @if(isset($middleBan['1']) && count($middleBan['1']) > 0)
     <style>
         .slide__text--1 {
-            /*left: 10%;*/
+            left: 5%;
         }
         @for($i = 1; $i <= count($middleBan['1']); $i++)
         .slide {
@@ -328,6 +328,8 @@
                 </div>
             @endforeach
                 </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
             </div>
         @endif
     </div>
@@ -388,7 +390,7 @@
     </div>
 
     {{--banner_6--}}
-    <div class="middleBannerPhotoBanner" style="display: flex; justify-content: center; align-items: center">
+    <div class="middleBannerPhotoBanner">
         <div class="dropping-texts">
             <div>بشینیم</div>
             <div>برنامه ریزی کنیم</div>
@@ -694,25 +696,32 @@
         </div>
     </div>
 
+
     {{--banner_5--}}
     @if(isset($middleBan['5']) && count($middleBan['5']) > 0)
-        <div class="banner4Style">
+        <div class="threeSlider swiper-container">
+            <div class="swiper-wrapper position-relative">
             <?php
                 $middleBanColor5 = ['red', 'green', 'navy'];
             ?>
             @for($i = 0; $i < count($middleBan['5']); $i++)
-                <figure class="snip1091 {{$middleBanColor5[$i]}}">
-                    <img src="{{$middleBan['5'][$i]['pic']}}" alt="sq-sample6"/>
-                    <figcaption>
-                        <h2>
-                            {{$middleBan['5'][$i]['text']}}
-                        </h2>
-                    </figcaption>
-                    @if($middleBan['5'][$i]['link'] != '')
-                        <a href="{{$middleBan['5'][$i]['link']}}"></a>
-                    @endif
-                </figure>
+                <div class="swiper-slide position-relative">
+                    <figure class="snip1091 {{$middleBanColor5[$i]}}">
+                        <img src="{{$middleBan['5'][$i]['pic']}}" alt="sq-sample6"/>
+                        <figcaption>
+                            <h2>
+                                {{$middleBan['5'][$i]['text']}}
+                            </h2>
+                        </figcaption>
+                        @if($middleBan['5'][$i]['link'] != '')
+                            <a href="{{$middleBan['5'][$i]['link']}}"></a>
+                        @endif
+                    </figure>
+                </div>
             @endfor
+            </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
         </div>
     @endif
 
@@ -900,7 +909,7 @@
     </div>
 
     @if(isset($middleBan['6']))
-        <div class="middleBannerPhotoBanner">
+        <div class="middleBannerPhotoBanner" style="height: 100% !important;">
             @if($middleBan['6']['link'] != '')
                 <a href="{{$middleBan['6']['link']}}" target="_blank" >
                     <img src="{{$middleBan['6']['pic']}}" style="width: 100%;">
@@ -1001,6 +1010,34 @@
             },
             10000: {
                 slidesPerView: 4,
+                spaceBetween: 20,
+            }
+        }
+    });
+
+    var swiper = new Swiper('.threeSlider', {
+        slidesPerGroup: 1,
+        loop: true,
+        loopFillGroupWithBlank: true,
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        breakpoints: {
+            450: {
+                slidesPerView: 1,
+                spaceBetween: 0,
+            },
+            520: {
+                slidesPerView: 2,
+                spaceBetween: 20,
+            },
+            768: {
+                slidesPerView: 2,
+                spaceBetween: 20,
+            },
+            10000: {
+                slidesPerView: 3,
                 spaceBetween: 20,
             }
         }
