@@ -110,7 +110,7 @@
 .slide__text {
     position: absolute;
     top: 50%;
-    left: 0%;
+    left: 2%;
     width: 23%;
     text-transform: uppercase;
     word-wrap: break-word;
@@ -378,11 +378,17 @@ DIV.ppr_rup.ppr_priv_homepage_shelves .homepage_shelves_widget .prw_shelves_shel
 }
 
 .middleBannerPhotoBanner {
-    width: 96%;
-    position: relative;
+    width: 100%;
     height: 220px;
-    margin: 0 2%;
+    position: relative;
+    margin: 0px;
+    color: #fff;
     background-color: #0076a3;
+    text-align: center;
+    font-size: 36px;
+    font-weight: 100;
+    overflow: hidden;
+    animation: bg 5s linear infinite;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1141,17 +1147,6 @@ figure.snip1091.hover figcaption:after {
 /*banner_6*/
 
 @import url("https://fonts.googleapis.com/css?family=Roboto:100,300,400");
-.middleBannerPhotoBanner{
-    margin: 0px;
-    text-align: center;
-    color: #fff;
-    font-family: "Roboto";
-    font-size: 36px;
-    font-weight: 100;
-    overflow: hidden;
-    animation: bg 5s linear infinite;
-    width: 100%;
-}
 
 .dropping-texts {
     padding-left: 10px;
@@ -1258,11 +1253,26 @@ figure.snip1091.hover figcaption:after {
     .footerBarSpacer {
         display: block;
     }
+
+    .dropping-texts {
+        height: 180px;
+    }
+
+    .middleBannerPhotoBanner {
+        font-size: 32px;
+    }
 }
 
 @media (max-width: 480px) {
     DIV.prw_rup.prw_shelves_shelf_widget .shelf_container.rebrand .shelf_header .shelf_title .shelf_title_container {
         font-size: 17px;
+    }
+    .mainBlubSlider {
+        font-size: 45px;
+        padding-top: 155px;
+    }
+    .middleBannerPhotoBanner {
+        font-size: 25px !important;
     }
 }
 

@@ -1495,11 +1495,6 @@ DIV.ppr_rup.ppr_priv_trip_search[data-placement-name*="home_flights"] .lockup_he
     padding-top: 20px;
 }
 
-DIV.ppr_rup.ppr_priv_trip_search .trip_search.rounded_lockup {
-    margin: 0 auto;
-    /*border-radius:;/*/
-}
-
 DIV.ppr_rup.ppr_priv_trip_search .trip_search.rounded_lockup > .ui_column {
     background-color: #ffffff;
     /*border-width: 1px 0 1px 1px;*/
