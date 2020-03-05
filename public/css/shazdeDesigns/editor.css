@@ -263,6 +263,8 @@
     position: fixed;
     left: 25%;
     right: 25%;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 #editPane {
@@ -288,12 +290,6 @@
     left: auto;
     top: 82px;
     bottom: auto;
-}
-
-#uploader-dlg {
-    overflow-x: hidden;
-    overflow-y: auto;
-    max-height: 99%;
 }
 
 .itemRow .row {
@@ -368,39 +364,17 @@
     font-weight: 700;
 }
 
-/*#uploader-dlg > div:nth-child(1) > div:nth-child(1) {*/
-/*max-width: 100%*/
-/*}*/
-
-/*#uploader-dlg > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) {*/
-/*width: 250px;*/
-/*height: 200px*/
-/*}*/
-
 #rectanglePicPhotographer {
     width: 213px;
     height: 168px;
     transform: rotate(0deg);
 }
 
-/*#uploader-dlg > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) {*/
-/*width: 150px;*/
-/*height: 150px;*/
-/*}*/
-
 #squarePicPhotographer {
     width: 100px;
     height: 100px;
     transform: rotate(0deg);
 }
-
-/*#uploader-dlg > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) {*/
-/*margin-right: 30px*/
-/*}*/
-
-/*#uploader-dlg > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > form {*/
-/*margin-left: 30px*/
-/*}*/
 
 #photoTags {
     border: none !important;
@@ -422,10 +396,6 @@
     top: 0;
     display: none
 }
-
-/*#dropArea > div:nth-child(1) > div:nth-child(1) > label > div {*/
-/*z-index: 1000*/
-/*}*/
 
 #dropArea > .footer > div > div {
     margin: 5px 0;
@@ -528,6 +498,7 @@
 
 
 .uploadNextPicBtnBox {
+    width: 300px;
     position: absolute;
     left: 50%;
     top: 40%;
@@ -535,8 +506,9 @@
 }
 
 .uploadNextPicBtn {
+    width: 100%;
     font-size: 2em;
-    padding: 15px 50px;
+    padding: 15px 0;
     line-height: 20px;
     border-radius: 10px;
 }
@@ -549,8 +521,6 @@
     font-size: 1.1em;
     cursor: pointer;
 }
-
-
 
 
 @media (max-width: 1340px) {
@@ -579,11 +549,16 @@
         left: 5%;
         right: 5%;
     }
+
+    .uploaderDlg .startScreen .dragDropText {
+        height: 150px;
+    }
 }
 
 @media (max-width: 767px) {
     .stFooter {
-        padding: 34vh 15px 10px !important;
+        position: absolute;
+        bottom: 0;
     }
 
     .separator {
@@ -620,6 +595,19 @@
 
     .uploaderDlg .startScreen .dragDropText {
         margin: 40px 30px 50px;
+    }
+
+    .uploadNextPicBtnBox {
+        width: 240px;
+        top: 45%;
+    }
+
+    .choosePic {
+        bottom: 70%;
+    }
+
+    .uploaderDlg .startScreen {
+        height: 70vh;
     }
 }
 
