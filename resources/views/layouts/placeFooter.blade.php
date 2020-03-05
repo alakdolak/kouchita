@@ -17,7 +17,7 @@ $config = \App\models\ConfigModel::first()
         {{--    </div>--}}
         <div id="ourDescriptionDiv">
             <div class="footerLogo">
-                <img src="{{URL::asset('images/logo.svg')}}" class="content-icon" width="100%">
+                <img src="{{URL::asset('images/icons/mainLogo.png')}}" class="content-icon" width="100%">
             </div>
             <div class="clear-both hideOnScreen"></div>
             <div class="footDown">

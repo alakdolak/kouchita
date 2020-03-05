@@ -200,8 +200,8 @@ class PlaceController extends Controller {
 
         $mainWebSiteUrl = \url('/');
         $mainWebSiteUrl .= '/' . $request->path();
-        $localStorageData = ['kind' => 'place', 'name' => $place->name, 'city' => $city->name, 'state' => $state->name, 'mainPic' => $sitePics[0]['f'], 'redirect' => $mainWebSiteUrl, 'kidPage' => 'place'];
-//dd($locationName);
+        $localStorageData = ['kind' => 'place', 'name' => $place->name, 'city' => $city->name, 'state' => $state->name, 'mainPic' => $sitePics[0]['f'], 'redirect' => $mainWebSiteUrl];
+
         return view('hotel-details.hotel-details', array('place' => $place, 'features' => $features , 'save' => $save, 'city' => $city, 'thumbnail' => $thumbnail,
             'state' => $state, 'avgRate' => $rates[1], 'locationName' => $locationName, 'localStorageData' => $localStorageData,
             'reviewCount' => $reviewCount, 'ansReviewCount' => $ansReviewCount, 'userReviewCount' => $userReviewCount,
@@ -2132,7 +2132,7 @@ class PlaceController extends Controller {
 
             $photoFilters = DB::select("select name, id, (SELECT count(*) FROM log WHERE placeId = " . $placeId . " and log.kindPlaceId = " . $kindPlaceId . " and activityId = " . $activityId . " and pic = picItems.id) as countNum FROM picItems WHERE kindPlaceId = " . $kindPlaceId);
 
-            $userPic = URL::asset('images/logo.svg');
+            $userPic = URL::asset('images/icons/mainIcon.svg');
 
             switch ($kindPlaceId) {
                 case 1:

@@ -315,8 +315,8 @@ if(Auth::check()) {
                         <div class="global-nav-hamburger is-hidden-tablet">
                             <span class="ui_icon menu-bars"></span>
                         </div>
-                        <a href="{{route('main')}}" class="global-nav-logo">
-                            <img src="{{URL::asset('images/logo.png')}}" alt="کوچیتا" class="global-nav-img global-nav-svg"/>
+                        <a href="{{route('main')}}" class="global-nav-logo" style="display: flex; justify-content: center; align-items: center">
+                            <img src="{{URL::asset('images/icons/mainLogo.png')}}" alt="کوچیتا" style="height: 70%; width: auto"/>
                         </a>
 
                         <div class="global-nav-links ui_tabs inverted is-hidden-mobile">
@@ -339,7 +339,7 @@ if(Auth::check()) {
                                             <span class="unscoped global-nav-link ui_tab" onclick="openMainSearch(11)  // in mainSearch.blade.php">غذای محلی</span>
                                         </li>
                                         <li>
-                                            <a href="{{route('soon')}}" class="unscoped global-nav-link ui_tab " data-tracking-label="Flights">بوم‌گردی</a>
+                                            <a href="{{route('mainArticle')}}" class="unscoped global-nav-link ui_tab " data-tracking-label="Flights">سفرنامه ها</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -548,7 +548,7 @@ if(Auth::check()) {
                                 <div class="ui_icon times"></div>
                             </div>
                             <a href="/" class="global-nav-logo">
-                                <img src='{{URL::asset('images/logo.png')}}' alt="کوچیتا" class="global-nav-img"/>
+                                <img src='{{URL::asset('images/icons/mainLogo.png')}}' alt="کوچیتا" class="global-nav-img"/>
                             </a>
                         </div>
                         <div class="sidebar-nav-profile-container">

@@ -63,6 +63,9 @@
         color: #16174f !important;
         font-size: 15px;
     }
+    .spanMarginSecHead > span {
+        margin: 0px 7px;
+    }
 </style>
 <div class="container-fluid secHeadMain hideOnPhone">
     <div class="ui_container secHeadNavs">
@@ -145,14 +148,14 @@
             </div>
         </div>
         <div class="secHeadTabs ">
-            <a href="{{route('mainArticle')}}">سفرنامه ها</a>
+            <a href="{{route('mainArticle')}}" style="color: #16174f">سفرنامه ها</a>
         </div>
     </div>
 </div>
 
 <div class="container-fluid secHeadMain hideOnPhone" style="background-color: unset; margin-top: 10px;">
 
-    <div class="ui_container secHeadNavs" style="font-size: 20px">
+    <div class="ui_container secHeadNavs spanMarginSecHead" style="font-size: 20px">
         <a class="linkRoute" href="{{url('/')}}" style="margin-right: 20px;">
             صفحه اصلی
         </a>
@@ -170,7 +173,7 @@
             ->
             </span>
             <a class="linkRoute" href="{{route('cityPage', ['kind' => 'city', 'city' => $locationName['cityNameUrl']])}}">
-                شهر {{$locationName['state']}}
+                شهر {{$locationName['cityNameUrl']}}
             </a>
         @endif
 
@@ -203,9 +206,9 @@
     </div>
 
     @if($locationName['kindPage'] == 'place')
-        <div class="ui_container secHeadNavs" style="justify-content: center; margin-top: 30px;">
-            <div style="background: red; width: 728px; height: 90px;"></div>
-        </div>
+        {{--<div class="ui_container secHeadNavs" style="justify-content: center; margin-top: 30px;">--}}
+            {{--<div style="background: red; width: 728px; height: 90px;"></div>--}}
+        {{--</div>--}}
     @endif
 
 </div>
