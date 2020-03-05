@@ -60,7 +60,7 @@ h2 {
 }
 
 a, a:active, a:visited {
-    color: #16174f;
+    /*color: #16174f;*/
     text-decoration: none;
     outline: none
 }

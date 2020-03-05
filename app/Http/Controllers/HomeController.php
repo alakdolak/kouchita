@@ -327,7 +327,7 @@ class HomeController extends Controller
             $place->listName = $place->name;
             $place->name = 'استان ' . $place->name;
             $articleUrl = \url('/article/list/state/' . $place->listName);
-            $locationName = ["name" => $place->name, 'cityName' => $place->listName, 'cityNameUrl' => $place->name, 'articleUrl' => $articleUrl, 'kindState' => 'state'];
+            $locationName = ["name" => $place->name, 'cityName' => $place->listName, 'cityNameUrl' => $place->name, 'articleUrl' => $articleUrl, 'kindState' => 'state', 'state' => $place->name];
 
             $allCities = Cities::where('stateId', $place->id)->pluck('id')->toArray();
 
@@ -341,7 +341,11 @@ class HomeController extends Controller
 
             if($place->image == null){
                 $seenActivity = Activity::whereName('مشاهده')->first();
-                $mostSeen = DB::select('SELECT placeId, COUNT(id) as seen FROM log WHERE activityId = ' .$seenActivity->id. ' AND kindPlaceId = 1 AND placeId IN (' . implode(",", $allAmakenId) . ') GROUP BY placeId ORDER BY seen DESC');
+                $mostSeen = [];
+                if($allAmakenId != null)
+                    $mostSeen = DB::select('SELECT placeId, COUNT(id) as seen FROM log WHERE activityId = ' .$seenActivity->id. ' AND kindPlaceId = 1 AND placeId IN (' . implode(",", $allAmakenId) . ') GROUP BY placeId ORDER BY seen DESC');
+                else
+                    $place->image = URL::asset('_images/noPic/blank.jpg');
                 if(count($mostSeen) != 0){
                     foreach ($mostSeen as $item){
                         $p = Amaken::find($item->placeId);

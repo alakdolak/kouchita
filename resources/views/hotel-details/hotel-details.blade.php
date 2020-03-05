@@ -37,21 +37,9 @@ if ($total == 0)
 
     <meta name="keywords" content="{{$place->keyword}}">
     <meta property="og:description" content="{{$place->meta}}"/>
-    <meta property="article:tag" content="{{$place->tag1}}"/>
-    <meta property="article:tag" content="{{$place->tag2}}"/>
-    <meta property="article:tag" content="{{$place->tag3}}"/>
-    <meta property="article:tag" content="{{$place->tag4}}"/>
-    <meta property="article:tag" content="{{$place->tag5}}"/>
-    <meta property="article:tag" content="{{$place->tag6}}"/>
-    <meta property="article:tag" content="{{$place->tag7}}"/>
-    <meta property="article:tag" content="{{$place->tag8}}"/>
-    <meta property="article:tag" content="{{$place->tag9}}"/>
-    <meta property="article:tag" content="{{$place->tag10}}"/>
-    <meta property="article:tag" content="{{$place->tag11}}"/>
-    <meta property="article:tag" content="{{$place->tag12}}"/>
-    <meta property="article:tag" content="{{$place->tag13}}"/>
-    <meta property="article:tag" content="{{$place->tag14}}"/>
-    <meta property="article:tag" content="{{$place->tag15}}"/>
+    @foreach($place->tags as $item)
+        <meta property="article:tag" content="{{$item}}"/>
+    @endforeach
     <meta property="og:url" content="{{Request::url()}}"/>
 
 @stop
@@ -1129,27 +1117,9 @@ if ($total == 0)
                                                         </div>
                                                         <span class="overallRating">{{$avgRate}} </span>
                                                         <div class="prw_rup prw_common_bubble_rating overallBubbleRating">
-                                                            @if($avgRate == 5)
-                                                                <span class="ui_bubble_rating bubble_50 font-size-28"
-                                                                      property="ratingValue" content="5"
-                                                                      alt='5 of 5 bubbles'></span>
-                                                            @elseif($avgRate == 4)
-                                                                <span class="ui_bubble_rating bubble_40 font-size-28"
-                                                                      property="ratingValue" content="4"
-                                                                      alt='4 of 5 bubbles'></span>
-                                                            @elseif($avgRate == 3)
-                                                                <span class="ui_bubble_rating bubble_30 font-size-28"
-                                                                      property="ratingValue" content="3"
-                                                                      alt='3 of 5 bubbles'></span>
-                                                            @elseif($avgRate == 2)
-                                                                <span class="ui_bubble_rating bubble_20 font-size-28"
-                                                                      property="ratingValue" content="2"
-                                                                      alt='2 of 5 bubbles'></span>
-                                                            @elseif($avgRate == 1)
-                                                                <span class="ui_bubble_rating bubble_10 font-size-28"
-                                                                      property="ratingValue" content="1"
-                                                                      alt='1 of 5 bubbles'></span>
-                                                            @endif
+                                                            <span class="ui_bubble_rating bubble_{{$avgRate}}0 font-size-28"
+                                                                  property="ratingValue" content="{{$avgRate}}"
+                                                                  alt='{{$avgRate}} of 5 bubbles'></span>
                                                         </div>
                                                         <a class="seeAllReviews autoResize" href="#REVIEWS"></a>
                                                     </div>
@@ -1214,21 +1184,9 @@ if ($total == 0)
                                                     </div>
                                                     <div id="tagsName">
                                                         <h3>برچسب‌ها:</h3>
-                                                        <span class="tag">{{$place->tag1}}</span>
-                                                        <span class="tag">{{$place->tag2}}</span>
-                                                        <span class="tag">{{$place->tag3}}</span>
-                                                        <span class="tag">{{$place->tag4}}</span>
-                                                        <span class="tag">{{$place->tag5}}</span>
-                                                        <span class="tag">{{$place->tag6}}</span>
-                                                        <span class="tag">{{$place->tag7}}</span>
-                                                        <span class="tag">{{$place->tag8}}</span>
-                                                        <span class="tag">{{$place->tag9}}</span>
-                                                        <span class="tag">{{$place->tag10}}</span>
-                                                        <span class="tag">{{$place->tag11}}</span>
-                                                        <span class="tag">{{$place->tag12}}</span>
-                                                        <span class="tag">{{$place->tag13}}</span>
-                                                        <span class="tag">{{$place->tag14}}</span>
-                                                        <span class="tag">{{$place->tag15}}</span>
+                                                        @foreach($place->tags as $item)
+                                                            <span class="tag">{{$item}}</span>
+                                                        @endforeach
                                                     </div>
                                                 </div>
 
@@ -1368,21 +1326,9 @@ if ($total == 0)
                                                     </div>
                                                     <div id="tagsName">
                                                         <h3>برچسب‌ها:</h3>
-                                                        <span class="tag">{{$place->tag1}}</span>
-                                                        <span class="tag">{{$place->tag2}}</span>
-                                                        <span class="tag">{{$place->tag3}}</span>
-                                                        <span class="tag">{{$place->tag4}}</span>
-                                                        <span class="tag">{{$place->tag5}}</span>
-                                                        <span class="tag">{{$place->tag6}}</span>
-                                                        <span class="tag">{{$place->tag7}}</span>
-                                                        <span class="tag">{{$place->tag8}}</span>
-                                                        <span class="tag">{{$place->tag9}}</span>
-                                                        <span class="tag">{{$place->tag10}}</span>
-                                                        <span class="tag">{{$place->tag11}}</span>
-                                                        <span class="tag">{{$place->tag12}}</span>
-                                                        <span class="tag">{{$place->tag13}}</span>
-                                                        <span class="tag">{{$place->tag14}}</span>
-                                                        <span class="tag">{{$place->tag15}}</span>
+                                                        @foreach($place->tags as $item)
+                                                            <span class="tag">{{$item}}</span>
+                                                        @endforeach
                                                     </div>
                                                 </div>
                                             </div>

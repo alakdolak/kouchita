@@ -631,7 +631,7 @@ $authUrl = $client->createAuthUrl();
 
 <span id="loginPopUp" onkeyup="if(event.keyCode == 13) login($('#username_main').val(), $('#password_main').val())" class="pop-up ui_modal hidden">
     <div class="mainDivLoginMainLogo">
-        <img class="loginMainLogo" src="{{URL::asset('images/logo.svg')}}">
+        <img class="loginMainLogo" src="{{URL::asset('images/icons/mainIcon.svg')}}">
     </div>
     <div class="col-xs-12 rtl mainContentInfos">
         <div class="loginPaneInLoginPopUp loginDividerBorder col-xs-6">
@@ -687,7 +687,7 @@ $authUrl = $client->createAuthUrl();
 {{--Enter Email in login PopUp--}}
 <span id="EnterEmail-loginPopUp" onkeyup="if(event.keyCode == 13) login($('#username_email').val(), $('#password_email').val())" class="pop-up ui_modal hidden">
     <div>
-        <img class="loginMainLogo" src="{{URL::asset('images/logo.svg')}}">
+        <img class="loginMainLogo" src="{{URL::asset('images/icons/mainIcon.svg')}}">
     </div>
     <div class="col-xs-12 rtl mainContentInfos">
         <div class="loginDividerBorder col-xs-6">
@@ -741,7 +741,7 @@ $authUrl = $client->createAuthUrl();
 {{--Enter Phone in login PopUp--}}
 <span id="EnterPhone-loginPopUp" onkeyup="if(event.keyCode == 13) login($('#username_phone').val(), $('#password_phone').val())" class="pop-up ui_modal hidden">
     <div>
-        <img class="loginMainLogo" src="{{URL::asset('images/logo.svg')}}">
+        <img class="loginMainLogo" src="{{URL::asset('images/icons/mainIcon.svg')}}">
     </div>
     <div class="col-xs-12 rtl mainContentInfos">
         <div class="loginDividerBorder col-xs-6">
@@ -789,7 +789,7 @@ $authUrl = $client->createAuthUrl();
 {{--Send & Enter Code in login PopUp--}}
 <span id="Send_AND_EnterCode-loginPopUp" onkeyup="if(event.keyCode == 13) login($('#username_2').val(), $('#password_2').val())" class="pop-up ui_modal hidden">
     <div>
-        <img class="loginMainLogo" src="{{URL::asset('images/logo.svg')}}">
+        <img class="loginMainLogo" src="{{URL::asset('images/icons/mainIcon.svg')}}">
     </div>
     <div class="col-xs-12 rtl mainContentInfos">
         <div class="loginDividerBorder col-xs-6">
@@ -843,7 +843,7 @@ $authUrl = $client->createAuthUrl();
 {{--Enter Password in login PopUp--}}
 <span id="EnterPassword-loginPopUp" onkeyup="if(event.keyCode == 13) login($('#username_3').val(), $('#password_3').val())" class="pop-up ui_modal hidden">
     <div>
-        <img class="loginMainLogo" src="{{URL::asset('images/logo.svg')}}">
+        <img class="loginMainLogo" src="{{URL::asset('images/icons/mainIcon.svg')}}">
     </div>
     <div class="col-xs-12 rtl mainContentInfos">
         <div class="loginDividerBorder col-xs-6">
@@ -890,7 +890,7 @@ $authUrl = $client->createAuthUrl();
 {{--Enter Username in login PopUp--}}
 <span id="EnterUsername-loginPopUp" class="pop-up ui_modal hidden">
     <div>
-        <img class="loginMainLogo" src="{{URL::asset('images/logo.svg')}}">
+        <img class="loginMainLogo" src="{{URL::asset('images/icons/mainIcon.svg')}}">
     </div>
     <div class="col-xs-12 rtl mainContentInfos">
         <div class="loginDividerBorder col-xs-6">
@@ -934,7 +934,7 @@ $authUrl = $client->createAuthUrl();
 {{--Forget Password in login PopUp--}}
 <span id="ForgetPassword" class="pop-up ui_modal hidden">
     <div>
-        <img class="loginMainLogo" src="{{URL::asset('images/logo.svg')}}">
+        <img class="loginMainLogo" src="{{URL::asset('images/icons/mainIcon.svg')}}">
     </div>
     <div class="col-xs-12 mainContentInfos">
         <div class="header_text font-size-14Imp">برای بازیابی رمزعبور تان از کدام طریق اقدام میکنید:</div>
@@ -961,7 +961,7 @@ $authUrl = $client->createAuthUrl();
 {{--Enter Email for ForgetPass in login PopUp--}}
 <span id="Email_ForgetPass" class="pop-up ui_modal hidden">
     <div>
-        <img class="loginMainLogo" src="{{URL::asset('images/logo.svg')}}">
+        <img class="loginMainLogo" src="{{URL::asset('images/icons/mainIcon.svg')}}">
     </div>
     <div class="col-xs-12 rtl mainContentInfos">
         <div>
@@ -982,7 +982,7 @@ $authUrl = $client->createAuthUrl();
 {{--Enter Phone for ForgetPass in login PopUp--}}
 <span id="Phone_ForgetPass" class="pop-up ui_modal hidden">
     <div>
-        <img class="loginMainLogo" src="{{URL::asset('images/logo.svg')}}">
+        <img class="loginMainLogo" src="{{URL::asset('images/icons/mainIcon.svg')}}">
     </div>
     <div class="col-xs-12 mainContentInfos">
         <div>

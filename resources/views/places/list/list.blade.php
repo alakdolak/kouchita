@@ -147,26 +147,6 @@
                             </div>
                         </div>
                     </div>
-                    <div style="position: absolute; bottom: 0; right: 0;">
-                        @if($mode != 'country')
-                            <a href="{{route('place.list', ['kindPlaceId' => $kindPlace->id, 'city' => $state->name, 'mode' => 'state'])}}">
-                                <span>نمایش
-                                    {{$kindPlace->title}}
-                                        استان
-                                    {{$state->name}}
-                                </span>
-                            </a>
-                        @endif
-                        @if($mode == 'city')
-                            <span>></span>
-                            <span>نمایش
-                                {{$kindPlace->title}}
-
-                                شهر
-                                {{$city->name}}
-                            </span>
-                        @endif
-                    </div>
                 </div>
 
             </div>

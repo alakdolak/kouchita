@@ -12,6 +12,7 @@
     @include('layouts.pop-up-create-trip')
 
     <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/bookmark.css')}}">
+    <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/abbreviations.css')}}">
 
     <div id="MAIN" class="Saves prodp13n_jfy_overflow_visible">
         <div id="BODYCON" ng-app="mainApp" class="col easyClear poolB adjust_padding new_meta_chevron_v2">
@@ -28,10 +29,10 @@
                                         <div>
                                             <div class="all-trips-header">
                                                 <div class="header-sort-container">
-                                                    <ul class="sort-options mg-tp-12">
-                                                        <li id="sort-option-name" data-sort="name">نام</li>
-                                                        <li id="sort-option-recent" data-sort="recent" class="selected">بازدید اخیر</li>
-                                                    </ul>
+{{--                                                    <div class="sort-options">--}}
+{{--                                                        <li id="sort-option-name" data-sort="name">نام</li>--}}
+{{--                                                        <div id="sort-option-recent" data-sort="recent" class="selected">بازدید اخیر</div>--}}
+{{--                                                    </div>--}}
                                                     <div id="targetHelp_9" class="targets">
                                                         <span class="sort-text"> مرتب شده بر اساس: </span>
                                                         <div id="helpSpan_9" class="helpSpans hidden row">
@@ -51,34 +52,34 @@
                                             <div onclick="document.location.href = '{{route('myTrips')}}'" class="ui_tab">سفرهای من</div>
                                             <div id="helpSpan_6" class="helpSpans hidden row">
                                                 <span class="introjs-arrow"></span>
-                                                <p>از این قسمت می توانید به سفر های خود دسترسی داشته باشید و با دوستانتان سفر های خود را برنامه ریزی کنید.</p>
+                                                <p>از این قسمت می‌توانید به سفرهای خود دسترسی داشته باشید و با دوستانتان سفرهای خود را برنامه‌ریزی کنید.</p>
                                                 <button data-val="6" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_6">بعدی</button>
                                                 <button data-val="6" class="btn btn-primary backBtnsHelp" id="backBtnHelp_6">قبلی</button>
                                                 <button class="btn btn-danger exitBtnHelp">خروج</button>
                                             </div>
                                         </div>
                                         <div id="targetHelp_7" class="targets">
-                                            <a data-tab-link="recent" href="{{route('recentlyViewTotal')}}" class="ui_tab">بازدید های اخیر</a>
+                                            <a data-tab-link="recent" href="{{route('recentlyViewTotal')}}" class="ui_tab">بازدیدهای اخیر</a>
                                             <div id="helpSpan_7" class="helpSpans hidden row">
                                                 <span class="introjs-arrow"></span>
-                                                <p>در این قسمت می توانید به بازدید ای اخیر خود دسترسی داشته باشید.</p>
+                                                <p>در این قسمت می‌توانید به بازدید‌های اخیر خود دسترسی داشته باشید.</p>
                                                 <button data-val="7" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_7">بعدی</button>
                                                 <button data-val="7" class="btn btn-primary backBtnsHelp" id="backBtnHelp_7">قبلی</button>
                                                 <button class="btn btn-danger exitBtnHelp">خروج</button>
                                             </div>
                                         </div>
                                         <div id="targetHelp_8" class="targets">
-                                            <a data-tab-link="all_saves" href="{{route('bookmark')}}" class="ui_tab active">نشانه گذاری شده ها</a>
+                                            <a data-tab-link="all_saves" href="{{route('bookmark')}}" class="ui_tab active">نشانه‌گذاری شده‌ها</a>
                                             <div id="helpSpan_8" class="helpSpans hidden row">
                                                 <span class="introjs-arrow"></span>
-                                                <p>در این قسمت می توانید صفحاتی را که رجوع بعدی نشانه گذاری کرده اید مشاهده نمایید.</p>
+                                                <p>در این قسمت می‌توانید صفحاتی را که رجوع بعدی نشانه‌گذاری کرده‌اید مشاهده نمایید.</p>
                                                 <button data-val="8" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_8">بعدی</button>
                                                 <button data-val="8" class="btn btn-primary backBtnsHelp" id="backBtnHelp_8">قبلی</button>
                                                 <button class="btn btn-danger exitBtnHelp">خروج</button>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="ui_column">
+                                    <div class="ui_column helpBtnIcon">
                                         {{--@if($sumTmp == 0)--}}
                                         <a class="link float-left cursor-pointer" onclick="initHelp(12, [1, 2, 3, 4, 5], 'MAIN', 100, 400)">
                                             <div id="initHelpDiv" style="background-image: url('{{URL::asset('images') . '/help_share.png'}}')"></div>
@@ -103,7 +104,8 @@
                                                     <div class="no-saves-content content">
                                                         <div class="ui_icon heart"></div>
                                                         <div class="cta-header">
-                                                            هنوز چیزی ذخیره نشده است</div>
+                                                            هنوز چیزی ذخیره نشده است
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -120,7 +122,7 @@
                                             <div ng-repeat="place in packet.places" class="trip-tile-container ui_column is-3">
                                                 <div class="trip-tile ui_card is-fullwidth">
                                                     <div class="trip-header">
-                                                        <div>
+                                                        <div class="trip-settings-header">
                                                             <span class="float-right">[[place.name]]</span>
                                                             <div id="[[($index == 0 && packet.no == 1) ? 'targetHelp_10' : '']]" class="targets float-left">
                                                                 <button id="manageTripsBtn" ng-click="addToTrip(place.placeId, place.kindPlaceId)" class="ui_button secondary trip-add-dates">
@@ -159,7 +161,7 @@
         <div class="body_text">
             <div>
                 <div class="find_location_modal">
-                    <div class="header_text rtl">اطلاعات مکان</div>
+                    <div class="header_text direction-rtl">اطلاعات مکان</div>
                     <div class="ui_typeahead" id="placeParameters">
                     </div>
                 </div>
@@ -173,17 +175,19 @@
             <div>
                 <div class="find_location_modal">
                     <div id="managePlaceTextDiv" class="header_text">مدیریت مکان</div>
-                    <div class="ui_typeahead rtl" id="tripsForPlace">
+                    <div class="ui_typeahead direction-rtl" id="tripsForPlace">
                     </div>
                 </div>
             </div>
         </div>
-        <div class="submitOptions rtl">
+        <div class="submitOptions direction-rtl">
             <button id="manageTripVerifyBtn" onclick="assignPlaceToTrip()" class="btn btn-success">تایید</button>
             <input type="submit" onclick="hideElement('addPlaceToTripPrompt')" value="خیر" class="btn btn-default">
         </div>
         <div class="ui_close_x" onclick="hideElement('addPlaceToTripPrompt')"></div>
     </span>
+
+    <div class="hideOnScreen footerOptimizer"></div>
 
     <script>
 
@@ -377,7 +381,7 @@
 
                         response = JSON.parse(response);
 
-                        newElement = "<div class='col-xs-12 rtl'>";
+                        newElement = "<div class='col-xs-12 direction-rtl'>";
 
 
                         newElement += "<div class='col-xs-6'>";
@@ -387,9 +391,10 @@
                         newElement += "<div class='col-xs-6'>";
                         newElement += "<p id='expandableTripTitleText' onclick='document.location.href = \""+ response['url'] +"\"'>" + response["name"] + "</p>";
                         newElement += "</div>";
-                        newElement += "<div class='col-xs-4' id='map'></div>";
+                        newElement += "<div class='expandableDivSettings'>";
+                        newElement += "<div class='col-xs-6' id='map'></div>";
 
-                        newElement += '<div class="col-xs-4"><DIV class="prw_rup prw_common_bubble_rating overallBubbleRating">';
+                        newElement += '<div class="col-xs-6"><DIV class="prw_rup prw_common_bubble_rating overallBubbleRating">';
                         if(response["point"] == 5)
                             newElement += '<span class="ui_bubble_rating bubble_50 font-size-16px" property="ratingValue" content="5" alt="5 of 5 bubbles"></span>';
                         else if(response["point"] == 4)
@@ -405,10 +410,11 @@
                         newElement += "<p>" + response["city"] + "/" + response["state"] + "</p>";
                         newElement += "<p>" + response["address"] + "</p>";
                         newElement += "</div>";
-                        newElement += "<div class='col-xs-4'>";
-                        newElement += "<div><img onclick='document.location.href = \""+ response['url'] +"\"' width='200px' height='200px' class='cursor-pointer' src='" + response["pic"] +  "'></div>";
                         newElement += "</div>";
-                        newElement += "</div>";
+                        // newElement += "<div class='col-xs-4'>";
+                        // newElement += "<div><img onclick='document.location.href = \""+ response['url'] +"\"' width='200px' height='200px' class='cursor-pointer' src='" + response["pic"] +  "'></div>";
+                        // newElement += "</div>";
+                        // newElement += "</div>";
 
                         if(tripPlaceId != -1) {
 
@@ -583,7 +589,7 @@
 
                     response = JSON.parse(response);
 
-                    newElement = "<div class='row rtl'><div class='float-right col-xs-4'><select id='stateId' onchange='getCities(this.value)'>";
+                    newElement = "<div class='row direction-rtl'><div class='float-right col-xs-4'><select id='stateId' onchange='getCities(this.value)'>";
 
                     newElement += "<option selected value='-1'>استان</option>";
 
@@ -1478,7 +1484,7 @@
                 return "";
 
             t = total - filters.length;
-            newElement = "<div class='col-xs-12 position-relative'><div class='col-xs-12 bubbles padding-0 mg-rt-0' style='margin-left: " + ((400 - (t * 18)) / 2) + "px'>";
+            newElement = "<div class='col-xs-12 position-relative'><div class='col-xs-12 bubbles pd-0 mg-rt-0' style='margin-left: " + ((400 - (t * 18)) / 2) + "px'>";
 
             for (i = 1; i < total; i++) {
                 if(!isInFilters(i)) {

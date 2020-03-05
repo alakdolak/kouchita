@@ -6,13 +6,13 @@
 
     @parent
 
-    <link rel="stylesheet" type="text/css" media="screen, print" href="{{URL::asset('css/theme2/account_info.css?v=1')}}"/>
+    <link rel="stylesheet" type="text/css" media="screen, print" href="{{URL::asset('css/shazdeDesigns/account_info.css?v=1')}}"/>
 @stop
 
 @section('main')
 
     <div id="MAIN" class="Settings prodp13n_jfy_overflow_visible">
-        <div id="BODYCON" class="col easyClear poolX adjust_padding new_meta_chevron_v2">
+        <div id="BODYCON" class="col easyClear poolX adjust_padding new_meta_chevron_v2 editPhotoMainDiv">
             <div class="wrpHeader">
             </div>
             <h1 class="heading wrap" id="mainProfileHeadingEditPhoto">
@@ -27,14 +27,20 @@
                         <img id="secondaryContainer" src="{{URL::asset($photo)}}" class="circularAvatar" alt="Photo"/>
                     </div>
                     <div class="description">
-                        <span>عکس صفحه کاربری شما </span>
+                        <span>عکس صفحه کاربری شما</span>
                     </div>
                 </div>
 
                 <div class="uploadAvatarOptions" style="display: block;">
                     <div class="optionWebcam"></div>
-                    <div id="upload_but" class="avatarOption optionUpload">بارگذاری از روی کامپیوتر</div>
-                    <div id="change_but" onclick="getDefaultPics('change-picture')" class="avatarOption optionList">از عکس های ما انتخاب کنید</div>
+                    <div id="upload_but" class="avatarOption optionUpload">
+                        <img src="../public/images/cp.png">
+                        <span>بارگذاری از روی کامپیوتر</span>
+                    </div>
+                    <div id="change_but" onclick="getDefaultPics('change-picture')" class="avatarOption optionList">
+                        <img src="../public/images/sp.png">
+                        <span>از عکس‌های ما انتخاب کنید</span>
+                    </div>
                 </div>
 
                 <div class="uploadAvatarPopup">
@@ -51,7 +57,7 @@
                                         <img class="cropImg"/>
                                     </div>
                                     <div class="instructions oldBrowser">
-                                      عکس شما می بایست در فرمت های jpg یا png یا gif بوده و از 3MB بیشتر نباشید. حتما دقت کنید اندازه عکس 80*80 پیکسل باشد تا زیبا به نظر برسد. در غیر اینصورت ممکن است نتیجه نهایی باب میل شما نباشد.
+                                      عکس شما می‌بایست در فرمت‌های jpg یا png یا gif بوده و از 3MB بیشتر نباشید. حتما دقت کنید اندازه عکس 80*80 پیکسل باشد تا زیبا به نظر برسد. در غیر اینصورت ممکن است نتیجه نهایی باب میل شما نباشد.
                                     </div>
                                     <!--<div class="instructions newBrowser">
                                         Drag and resize the circle to crop your image. Click "Set as public photo" when you're satisfied. </div>-->
@@ -98,7 +104,7 @@
 
     <script>
 
-        var defaultPics = '{{route('defaultPics')}}';
+        {{--var defaultPics = '{{route('defaultPics')}}';--}}
         var submitPhotoDir = '{{route('submitPhoto')}}';
 
         $(document).ready(function() {

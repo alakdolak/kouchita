@@ -55,22 +55,30 @@ input[type="checkbox"]:checked + label span {
     margin-top: 15px;
 }
 
+#sort-option-recent::after {
+    display: none;
+}
+
 #targetHelp_9 {
     float: left;
 }
 
+#saves-all-trips #targetHelp_9 .sort-text {
+    padding-right: 0;
+}
+
 #targetHelp_6 {
-    width: 30%;
+    width: 33.33333%;
     float: right;
 }
 
 #targetHelp_7 {
-    width: 33%;
+    width: 33.333333%;
     float: right;
 }
 
 #targetHelp_8 {
-    width: 37%;
+    width: 33.333333%;
     float: right;
 }
 
@@ -102,6 +110,7 @@ input[type="checkbox"]:checked + label span {
 .tripsRowExpandableDiv {
     border: 1px solid #ccc;
     border-radius: 5px;
+    display: flex;
 }
 
 #placeInfo {
@@ -240,58 +249,96 @@ input[type="checkbox"]:checked + label span {
     margin-top: 17px;
 }
 
-.padding-0 {
-    padding: 0;
+.trip-settings-header {
+    display: inline-block;
+    width: 100%;
 }
 
-.mg-rt-0 {
-    margin-right: 0;
+.footerOptimizer {
+    width: 100%;
+    height: 80px;
 }
 
-.position-relative {
-    position: relative;
+@media (min-width: 767px) {
+
+    #saves-view-tabs {
+       width: 60%;
+    }
 }
 
-.dark-red {
-    color: #963019
+@media (max-width: 767px) {
+
+    #saves-all-trips .trips-header {
+        display: flex;
+        justify-content: center;
+    }
+
+    #saves-view-tabs {
+        margin-right: 0;
+    }
+
+    .helpBtnIcon {
+        position: absolute;
+        top: -45px;
+        left: 20px;
+    }
+
+    #saves-all-trips .trip-tile.ui_card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .trip-header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .trip-settings-header {
+        width: 230px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .trip-settings-header > span {
+        width: 50%;
+        text-align: right;
+        font-weight: 600;
+    }
+
+    .trip-settings-header > div {
+        width: 50%;
+        text-align: left;
+    }
 }
 
-.red {
-    color: red;
-}
+@media (max-width: 420px) {
 
-.font-size-16 {
-    font-size: 16px;
-}
+    #saves-body #saves-view-tabs-container #saves-view-tabs {
+        padding: 8px 0 0;
+    }
 
-.display-none {
-    display: none;
-}
+    #saves-view-tabs .ui_tab {
+        padding: 0;
+        font-size: 13px;
+    }
 
-.rtl {
-    direction: rtl
-}
+    .expandableDivSettings {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+    }
 
-.mg-tp-12 {
-    margin-top: 12px;
-}
+    .expandableDivSettings > div:first-child {
+        margin-bottom: 10px;
+    }
 
-.mg-tp-10 {
-    margin-top: 10px;
-}
-
-.cursor-pointer {
-    cursor: pointer;
-}
-
-.float-left {
-    float: left;
-}
-
-.float-right {
-    float: right;
-}
-
-.margin-auto {
-    margin: auto;
+    .expandableDivSettings > div {
+        width: 100%;
+    }
 }
