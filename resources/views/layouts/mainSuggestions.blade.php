@@ -909,7 +909,7 @@
     </div>
 
     @if(isset($middleBan['6']))
-        <div class="middleBannerPhotoBanner" style="height: 100% !important;">
+        <div class="middleBannerPhotoBanner middleBannerPB">
             @if($middleBan['6']['link'] != '')
                 <a href="{{$middleBan['6']['link']}}" target="_blank" >
                     <img src="{{$middleBan['6']['pic']}}" style="width: 100%;">
