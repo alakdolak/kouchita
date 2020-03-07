@@ -649,3 +649,9 @@
 .guidelinesOverlayParent.tabletUploader {
   top: 45px !important;
 }
+
+@media (max-width: 767px) {
+  .uploaderDlg .infoScreen{
+    height: 70vh;
+  }
+}
