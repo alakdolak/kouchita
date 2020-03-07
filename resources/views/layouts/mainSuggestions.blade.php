@@ -259,7 +259,8 @@
             <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
                 <div class="shelf_header">
                     <div class="shelf_title">
-                        <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
+                        {{--<span class="shelf_header_icon ui_icon travelers-choice-badge"></span>--}}
+                        <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا" style="width: 50px;">
                         <div class="shelf_title_container h3">
                             <h3>تازه‌های کوچیتا</h3>
                         </div>
@@ -340,7 +341,8 @@
                 <div class="shelf_header">
                     <div class="shelf_title">
                         <a class="shelf_title" href="{{route('place.list', ['kindPlaceId' => 11, 'mode' => 'country'])}}" target="_blank">
-                            <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
+                            {{--<span class="shelf_header_icon ui_icon travelers-choice-badge"></span>--}}
+                            <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا" style="width: 50px;">
                             <div class="shelf_title_container h3">
                                 <h3>محبوب‌ترین غذا‌ها</h3>
                             </div>
@@ -406,7 +408,8 @@
                 <div class="shelf_header">
                     <div class="shelf_title" >
                         <a class="shelf_title" href="{{route('place.list', ['kindPlaceId' => 6, 'mode' => 'country'])}}" target="_blank">
-                            <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
+                            {{--<span class="shelf_header_icon ui_icon travelers-choice-badge"></span>--}}
+                            <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا" style="width: 50px;">
                             <div class="shelf_title_container h3">
                                 <h3>سفر طبیعت‌گردی</h3>
                             </div>
@@ -647,7 +650,8 @@
                 <div class="shelf_header">
                     <div class="shelf_title">
                         <a class="shelf_title" href="{{route('place.list', ['kindPlaceId' => 3, 'mode' => 'country'])}}" target="_blank">
-                            <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
+                            {{--<span class="shelf_header_icon ui_icon travelers-choice-badge"></span>--}}
+                            <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا" style="width: 50px;">
                             <div class="shelf_title_container h3">
                                 <h3>محبوب‌ترین رستوران‌ها</h3>
                             </div>
@@ -731,7 +735,8 @@
                 <div class="shelf_header">
                     <div class="shelf_title">
                         <a class="shelf_title" href="{{route('place.list', ['kindPlaceId' => 1, 'mode' => 'country'])}}" target="_blank">
-                            <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
+                            {{--<span class="shelf_header_icon ui_icon travelers-choice-badge"></span>--}}
+                            <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا" style="width: 50px;">
                             <div class="shelf_title_container h3">
                                 <h3>سفر تاریخی-فرهنگی</h3>
                             </div>
@@ -860,7 +865,8 @@
             <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
                 <div class="shelf_header">
                     <div class="shelf_title">
-                        <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
+                        {{--<span class="shelf_header_icon ui_icon travelers-choice-badge"></span>--}}
+                        <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا" style="width: 50px;">
                         <div class="shelf_title_container h3">
                             <h3>مراکز خرید</h3>
                         </div>
@@ -926,7 +932,8 @@
                 <div class="shelf_header">
                     <div class="shelf_title">
                         <a class="shelf_title" href="{{route('mainArticle')}}" target="_blank">
-                            <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
+                            {{--<span class="shelf_header_icon ui_icon travelers-choice-badge"></span>--}}
+                            <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا" style="width: 50px;">
                             <div class="shelf_title_container h3">
                                 <h3>محبوب‌ترین سفرنامه‌ها</h3>
                             </div>

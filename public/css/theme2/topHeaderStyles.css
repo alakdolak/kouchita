@@ -190,6 +190,24 @@ a:link {
 
 #darkModeMainPage {
     display: none;
-    z-index: 10;
+    z-index: 998;
     backdrop-filter: blur(2px);
+}
+
+.ui_icon.addPostIcon:before{
+    content: "\e030";
+    display: inline-block;
+    font-style: normal;
+    font-weight: 400;
+    font-variant: normal;
+    font-size: inherit;
+    line-height: 1;
+    font-family: 'Shazde_Regular' !important;
+    -ms-transform: rotate(-.001deg);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    speak: none;
+}
+.ppr_priv_global_nav_action_trips{
+    cursor: pointer;
 }

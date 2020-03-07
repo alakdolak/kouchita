@@ -716,8 +716,11 @@ function getAllPlacePicsByKind($kindPlaceId, $placeId){
         $pid = [];
         foreach ($photographerPic as $item)
             array_push($pid, $item->id);
-        $pidLike = DB::select('SELECT * FROM photographersLogs WHERE picId IN (' . implode(",", $pid) . ') AND userId = ' . $user->id);
-
+        if(auth()->check())
+            $pidLike = DB::select('SELECT * FROM photographersLogs WHERE picId IN (' . implode(",", $pid) . ') AND userId = ' . $user->id);
+        else
+            $pidLike = null;
+        
         foreach ($photographerPic as $item) {
             if($pidLike != null) {
                 foreach ($pidLike as $item2) {
@@ -726,6 +729,8 @@ function getAllPlacePicsByKind($kindPlaceId, $placeId){
                         break;
                     }
                 }
+                if(!isset($item->userLike))
+                    $item->userLike = 0;
             }
             else
                 $item->userLike = 0;

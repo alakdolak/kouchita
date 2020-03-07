@@ -185,7 +185,6 @@
                 }
             })
         }
-
     }
 
     function createSearchResponse(response){

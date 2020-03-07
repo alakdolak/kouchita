@@ -40,14 +40,19 @@
 
 @include('general.alerts')
 
+
 @if(!Auth::check())
     @include('layouts.loginPopUp')
+@else
+    @include('general.uploadPhoto')
 @endif
 
 <script>
+    var hasLogin = {{auth()->check() ? 1 : 0}};
+
     function checkLogin(){
         if (!hasLogin) {
-            showLoginPrompt(requestUrl);
+            showLoginPrompt('{{Request::url()}}');
             return false;
         }
         else

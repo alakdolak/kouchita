@@ -206,7 +206,7 @@ function startCropper(ratio) {
 //             http.send(params);
 
             if(mode == 1)
-              $('#rectanglePicPhotographer').attr('src', result.toDataURL(uploadedImageType));
+              $('#rectanglePicUploadPhoto').attr('src', result.toDataURL(uploadedImageType));
             else
               $('#squarePicPhotographer').attr('src', result.toDataURL(uploadedImageType));
 
@@ -269,7 +269,7 @@ function startCropper(ratio) {
 
 
   // Import image
-  inputImage = document.getElementById('editPhotographerPics');
+  inputImage = document.getElementById('editUploadPhoto');
 
   if (URL) {
     inputImage.onchange = function () {
@@ -306,4 +306,23 @@ function startCropper(ratio) {
 
 function setMode(m) {
   mode = m;
+}
+
+var RotateX = -1;
+var RotateY = -1;
+function rotateUploadPhoto(_kind){
+    if(_kind == 'Y') {
+        cropper.scaleY(RotateY);
+        if(RotateY == 1)
+            RotateY = -1;
+        else
+            RotateY = 1;
+    }
+    else if(_kind == 'X') {
+        cropper.scaleX(RotateX);
+        if(RotateX == 1)
+            RotateX = -1;
+        else
+            RotateX = 1;
+    }
 }

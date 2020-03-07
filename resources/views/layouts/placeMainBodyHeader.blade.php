@@ -184,9 +184,9 @@
                         @if(!empty($place->phone))
                             <div class="blEntry blEn phone">
                                 <span class="ui_icon phone"></span>
-                                <span>
+                                <a href="tel:{{$place->phone}}">
                                     {{$place->phone}}
-                                </span>
+                                </a>
                             </div>
                         @endif
                         @if(!empty($place->site))

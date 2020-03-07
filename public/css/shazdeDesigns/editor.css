@@ -120,7 +120,6 @@
     padding-left: 3%;
     text-align: center;
     border: none;
-    float: left;
     background-color: transparent;
 }
 
@@ -364,13 +363,13 @@
     font-weight: 700;
 }
 
-#rectanglePicPhotographer {
+#rectanglePicUploadPhoto {
     width: 213px;
     height: 168px;
     transform: rotate(0deg);
 }
 
-#squarePicPhotographer {
+#squarePicUploadPhoto {
     width: 100px;
     height: 100px;
     transform: rotate(0deg);
@@ -498,11 +497,12 @@
 
 
 .uploadNextPicBtnBox {
-    width: 300px;
-    position: absolute;
-    left: 50%;
-    top: 40%;
-    transform: translate(-50%, -50%);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 15px;
 }
 
 .uploadNextPicBtn {
@@ -514,14 +514,33 @@
 }
 
 .uploadNextPicDeny {
-    left: 0;
-    position: absolute;
-    padding: 5px 0;
+    position: relative;
+    width: 300px;
+    float: left;
+    text-align: left;
     color: blue;
-    font-size: 1.1em;
     cursor: pointer;
 }
-
+.uploadedImgDiv{
+    width: 100%;
+    justify-content: space-around;
+    height: 35vh;
+    display: flex;
+    top: 50%;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+    flex-direction: row;
+}
+.uploadedImgShowDiv{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+.uploadedImgPic{
+    width: 100%;
+}
 
 @media (max-width: 1340px) {
     #photoEditor, #editPane {
@@ -595,11 +614,6 @@
 
     .uploaderDlg .startScreen .dragDropText {
         margin: 40px 30px 50px;
-    }
-
-    .uploadNextPicBtnBox {
-        width: 240px;
-        top: 45%;
     }
 
     .choosePic {

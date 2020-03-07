@@ -2774,41 +2774,24 @@ class PlaceController extends Controller {
 
     public function addPhotoToPlace(Request $request)
     {
+        $placeId = $request->placeId;
+        $kindPlaceId = $request->kindPlaceId;
+
         if( isset($_FILES['pic']) && $_FILES['pic']['error'] == 0 &&
-            isset($request->name) && isset($request->alt) && isset($request->kindPlaceId) && isset($request->placeId)){
+            isset($request->name) && isset($request->alt) && isset($placeId) && isset($kindPlaceId)){
 
             $valid_ext = array('image/jpeg','image/png');
             if(in_array($_FILES['pic']['type'], $valid_ext)){
                 if($_FILES['pic']['size'] < 2000000){
-                    $id = $request->placeId;
-                    $kindPlaceId = $request->kindPlaceId;
+                    $id = $placeId;
 
-                    switch ($kindPlaceId){
-                        case 1:
-                            $place = Amaken::find($id);
-                            $kindPlaceName = 'amaken';
-                            break;
-                        case 3:
-                            $place = Restaurant::find($id);
-                            $kindPlaceName = 'restaurant';
-                            break;
-                        case 4:
-                            $place = Hotel::find($id);
-                            $kindPlaceName = 'hotels';
-                            break;
-                        case 6:
-                            $place = Majara::find($id);
-                            $kindPlaceName = 'majara';
-                            break;
-                        case 10:
-                            $place = SogatSanaie::find($id);
-                            $kindPlaceName = 'sogatsanaie';
-                            break;
-                        case 11:
-                            $place = MahaliFood::find($id);
-                            $kindPlaceName = 'mahalifood';
-                            break;
+                    $kindPlace = Place::find($kindPlaceId);
+                    if($kindPlace == null){
+                        echo 'nok9';
+                        return;
                     }
+                    $kindPlaceName = $kindPlace->fileName;
+                    $place = DB::table($kindPlace->tableName)->find($id);
 
                     if($place != null) {
 
@@ -2827,8 +2810,8 @@ class PlaceController extends Controller {
                                 $photographer->userId = Auth::user()->id;
                                 $photographer->name = $request->name;
                                 $photographer->pic = $filename;
-                                $photographer->kindPlaceId = $request->kindPlaceId;
-                                $photographer->placeId = $request->placeId;
+                                $photographer->kindPlaceId = $kindPlaceId;
+                                $photographer->placeId = $placeId;
                                 $photographer->alt = $request->alt;
                                 $photographer->description = $request->description;
                                 $photographer->like = 0;

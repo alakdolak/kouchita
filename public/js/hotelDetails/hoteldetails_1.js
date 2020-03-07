@@ -9,25 +9,6 @@ var reviewRateAnsId = [];
 
 var imgCropNumber;
 
-function checkLogin(){
-    if (!hasLogin) {
-        showLoginPrompt(hotelDetailsInSaveToTripMode);
-        return false;
-    }
-    else
-        return true;
-}
-
-function isPhotographer(){
-
-    if(!checkLogin())
-        return;
-
-    $('.dark').show();
-    $('.dark').removeClass('hidden');
-    $("#photoEditor").removeClass('hidden');
-}
-
 function likePhotographerPic(_id, _like){
 
     if(!checkLogin())

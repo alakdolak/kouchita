@@ -6,7 +6,6 @@ if ($total == 0)
     $total = 1;
 ?>
 @section('title')
-    <link rel="stylesheet" href="{{URL::asset('css/theme2/media_uploader.css')}}">
     <script async src="{{URL::asset("js/bootstrap-datepicker.js")}}"></script>
     <link rel="stylesheet" href="{{URL::asset('css/theme2/bootstrap-datepicker.css?v=1')}}">
     <title>{{$place->keyword}} | {{$city->name}} </title>
@@ -82,7 +81,6 @@ if ($total == 0)
         var nearAmaken = [];
         var nearMajara = [];
 
-        var hasLogin = '{{$hasLogin}}';
         var userCode = '{{$userCode}}';
         var userPic = '{{$userPic}}';
         var userPhotos = {!! $userPhotosJson !!};
@@ -975,31 +973,13 @@ if ($total == 0)
 
     </div>
 
-    @if(Auth::check())
-        @include('editor')
-    @endif
+    {{--@if(Auth::check())--}}
+        {{--@include('general.uploadPhoto')--}}
+    {{--@endif--}}
 
     <div id="MAINWRAP" class="full_meta_photos_v3  full_meta_photos_v4  big_pic_mainwrap_tweaks horizontal_xsell ui_container is-mobile position-relative">
         <div id="MAIN" class="Hotel_Review prodp13n_jfy_overflow_visible position-relative">
             <div id="BODYCON" class="col easyClear bodLHN poolB adjust_padding new_meta_chevron new_meta_chevron_v2 position-relative">
-
-{{--                <div class="tabLinkMainWrapMainDivPC navbar navbar-inverse" data-spy="affix" data-offset-top="720">--}}
-{{--                    <div class="tabLinkMainWrapMainDiv navbar-collapse" id="myNavbar">--}}
-{{--                        <a href="#QAndAMainDivId">--}}
-{{--                            <button class="tabLinkMainWrap">سؤالات</button>--}}
-{{--                        </a><!----}}
-{{--                     --><a href="#similarLocationsMainDiv">--}}
-{{--                            <button class="tabLinkMainWrap">مکان‌های مشابه</button>--}}
-{{--                        </a><!----}}
-{{--                     --><a href="#mainDivPlacePost">--}}
-{{--                            <button class="tabLinkMainWrap">پست</button>--}}
-{{--                        </a><!----}}
-{{--                     --><a href="#generalDescriptionMobile">--}}
-{{--                            <button class="tabLinkMainWrap">معرفی کلی</button>--}}
-{{--                        </a>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-
                 <nav class="tabLinkMainWrapMainDivPC navbar navbar-inverse" data-spy="affix" data-offset-top="700">
                     <div class="container-fluid tabLinkMainWrapMainDiv">
                         <div class="collapse navbar-collapse" id="myNavbar">
@@ -1306,7 +1286,7 @@ if ($total == 0)
                                                         @if(!empty($place->phone))
                                                             <div class="blEntry phone mg-bt-10" id="clientConnectionsPhone">
                                                                 <span class="ui_icon phone"></span>
-                                                                <span>{{$place->phone}}</span>
+                                                                <a href="tel:{{$place->phone}}" >{{$place->phone}}</a>
                                                             </div>
                                                         @endif
                                                         @if(!empty($place->site))
@@ -1773,6 +1753,20 @@ if ($total == 0)
     @include('hotelDetailsPopUp')
 
     <script>
+
+        function isPhotographer(){
+            if(!checkLogin())
+                return;
+            
+            //additionalData must be json format
+            additionalData = {
+                'placeId' : '{{$place->id}}',
+                'kindPlaceId' : '{{$kindPlaceId}}'
+            };
+            var _title = '{{$place->name}}' + ' در ' + '{{$city->name}}';
+            additionalData = JSON.stringify(additionalData);
+            openUploadPhotoModal(_title, '{{route('addPhotoToPlace')}}', '{{$place->id}}', '{{$kindPlaceId}}', additionalData);
+        }
 
         autosize($(".inputBoxInputComment"));
         autosize($(".inputBoxInputAnswer"));
