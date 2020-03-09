@@ -333,6 +333,15 @@ if(Auth::check()) {
 
                             @if(Auth::check())
 
+                                <div class="ppr_rup ppr_priv_global_nav_action_trips" onclick="openUploadPost()">
+                                    <div class="ppr_rup ppr_priv_global_nav_action_profile"  title="پست" style="font-size: 10px">
+                                        <span class="ui_icon addPostIcon" style="justify-content: center"></span>
+                                        <div class="nameOfIconHeaders">
+                                            پست
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="ppr_rup ppr_priv_global_nav_action_trips">
                                     <div id="bookmarkicon" class="ppr_rup ppr_priv_global_nav_action_profile"  title="نشانه گذاری شده ها" style="font-size: 10px">
                                         <span class="ui_icon casino" style="justify-content: center"></span>
@@ -866,5 +875,9 @@ if(Auth::check()) {
                 hideAllTopNavs();
         }
 
+
+        function openUploadPost(){
+            openUploadPhotoModal('', '{{route('addPhotoToPlace')}}', 0, 0, '');
+        }
     </script>
 @endif

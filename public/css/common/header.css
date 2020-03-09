@@ -159,3 +159,8 @@
 DIV.ppr_rup.ppr_priv_global_nav .global-nav-logo img {
     width: 50px;
 }
+
+.nameOfIconHeaders{
+    font-size: 12px !important;
+    color: black;
+}

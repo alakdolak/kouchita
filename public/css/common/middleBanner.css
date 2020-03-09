@@ -1027,7 +1027,7 @@ figure.snip1091 {
     margin: 10px;
     min-width: 220px;
     max-width: 310px;
-    max-height: 310px;
+    height: 310px;
     width: 100%;
     overflow: hidden;
     text-align: center;
@@ -1260,6 +1260,10 @@ figure.snip1091.hover figcaption:after {
 
     .middleBannerPhotoBanner {
         font-size: 32px;
+    }
+
+    .middleBannerPB {
+        height: 100%;
     }
 }
 

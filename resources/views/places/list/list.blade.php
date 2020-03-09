@@ -477,7 +477,6 @@
     var nearPlaceIdFilter = 0;
     var nearKindPlaceIdFilter = 0;
     var kindPlaceId = '{{$kindPlace->id}}';
-    var hasLogin = '{{auth()->check() ? 1 : 0}}';
 
     @if(isset($city->id))
         var cityId = '{{$city->id}}';

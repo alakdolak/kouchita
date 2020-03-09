@@ -593,19 +593,6 @@ $authUrl = $client->createAuthUrl();
         }
     }
 
-    function checkLogin() {
-
-        $.ajax({
-            type: 'post',
-            url: checkLoginDir,
-            success: function (response) {
-                if(response == "ok")
-                    return true;
-                return false;
-            }
-        })
-    }
-
     function checkedCheckBox() {
 
         if($("#checked").is(":checked")) {

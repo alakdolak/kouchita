@@ -366,7 +366,6 @@
   z-index: 100;
 }
 .uploaderDlg .startScreen {
-  /*border: 1px dashed #ccc;*/
   margin-top: 10px;
 }
 
@@ -398,9 +397,9 @@
 .uploaderDlg .startScreen .dragDropText {
   font-size: 14px;
   font-weight: bold;
-  height: 200px;
+  height: 175px;
   border: 2px dashed #9996;
-  margin: 20px 8%;
+  margin: 20px 8% 10px;
   padding-top: 20px;
 }
 
@@ -649,4 +648,10 @@
 }
 .guidelinesOverlayParent.tabletUploader {
   top: 45px !important;
+}
+
+@media (max-width: 767px) {
+  .uploaderDlg .infoScreen{
+    height: 70vh;
+  }
 }

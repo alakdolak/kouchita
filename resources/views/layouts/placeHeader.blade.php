@@ -361,6 +361,15 @@ if(Auth::check()) {
 
                         <div class="global-nav-actions position-relative" >
                             @if(Auth::check())
+                                <div class="ppr_rup ppr_priv_global_nav_action_trips" onclick="openUploadPost()">
+                                    <div class="ppr_rup ppr_priv_global_nav_action_profile"  title="پست" style="font-size: 10px">
+                                        <span class="ui_icon addPostIcon" style="justify-content: center"></span>
+                                        <div class="nameOfIconHeaders" style="color: white;">
+                                            پست
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="ppr_rup ppr_priv_global_nav_action_trips position-relative">
                                     <div id="targetHelp_1" class="targets">
                                         <div id="bookmarkicon" class="ppr_rup ppr_priv_global_nav_action_profile" title="نشانه گذاری شده ها" style="font-size: 10px">
@@ -402,8 +411,8 @@ if(Auth::check()) {
                                     <div id="targetHelp_2" class="targets">
                                         <div class="masthead-saves" title="سفرهای من">
                                             <a class="trips-icon"  href="{{route('myTrips')}}">
-                                                <span class="ui_icon my-trips"></span>
-                                                <div class="nameOfIconHeaders" style="color: white;">
+                                                <span class="ui_icon my-trips" style="justify-content: center"></span>
+                                                <div class="nameOfIconHeaders" style="color: white; ">
                                                     سفرهای من
                                                 </div>
                                                 {{--onclick="showRecentlyViews('recentlyViewed')"--}}
@@ -510,10 +519,14 @@ if(Auth::check()) {
                                 <div id="targetHelp_3" class="targets">
                                     <div class="masthead_notification" title="Alerts">
                                         <div class="masthead_notifctr_btn">
-                                            <div class="masthead_notifctr_sprite ui_icon notification-bell"></div>
+                                            <div class="masthead_notifctr_sprite ui_icon notification-bell" style="justify-content: center"></div>
+                                            <div class="nameOfIconHeaders" style="color: white; ">
+                                                پیام ها
+                                            </div>
                                             <div class="masthead_notifctr_jewel hidden">0</div>
                                         </div>
-                                        <div id="alert" class="masthead_notifctr_dropdown"><div class="notifdd_title">پیام ها</div>
+                                        <div id="alert" class="masthead_notifctr_dropdown">
+                                            <div class="notifdd_title">پیام ها</div>
                                             <div class="notifdd_loading hidden">
                                                 <div class="ui_spinner"></div>
                                             </div>
@@ -536,13 +549,15 @@ if(Auth::check()) {
                                 </div>
                             </div>
 
-                            <div id="taplc_global_nav_action_profile_0" class="ppr_rup ppr_priv_global_nav_action_profile position-relative">
+                            <div id="taplc_global_nav_action_profile_0" class="ppr_rup ppr_priv_global_nav_action_profile position-relative" style="margin: 0px;">
                                 <div class="global-nav-profile global-nav-utility position-relative">
                                     @if(Auth::check())
                                         <div id="targetHelp_5" class="targets" title="Profile" class="position-relative">
-                                            <div class="global-nav-utility-activator" title="Profile">
-                                                <span onclick="document.location.href = '{{route('profile')}}'" class="ui_icon member"></span>
-                                                <span id="nameTop" class="username">{{$user->username}}</span>
+                                            <div class="global-nav-utility-activator" title="Profile" style="flex-direction: column;">
+                                                <span id="nameTop" class="ui_icon member" style="justify-content: center;"></span>
+                                                <div class="nameOfIconHeaders" style="color: white; ">
+                                                    {{$user->username}}
+                                                </div>
                                             </div>
                                             <div id="helpSpan_5" class="helpSpans hidden row">
                                                 <span class="introjs-arrow"></span>
@@ -571,7 +586,7 @@ if(Auth::check()) {
                             <div id="taplc_masthead_search_0" class="ppr_rup ppr_priv_masthead_search position-relative" data-placement-name="masthead_search">
                                 <div class="mag_glass_parent position-relative" title="Search">
                                     <div id="targetHelp_6" class="targets">
-                                        <span class="ui_icon search" id="openSearch"></span>
+                                        <span class="ui_icon search" id="openSearch" style="transform: rotate(90deg); border: none;"></span>
                                         <div id="helpSpan_6" class="helpSpans hidden row">
                                             <span class="introjs-arrow"></span>
                                             <p class="col-xs-12">اگر دنبال پیدا کردن جای دیگری هستید حتما سیستم جستجوی پیشرفته ما را امتحان کنید.</p>
@@ -903,5 +918,8 @@ if(Auth::check()) {
                 hideAllTopNavs();
         }
 
+        function openUploadPost(){
+            openUploadPhotoModal('', '{{route('addPhotoToPlace')}}', 0, 0, '');
+        }
     </script>
 @endif

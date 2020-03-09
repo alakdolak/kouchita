@@ -251,7 +251,8 @@
 
                                 <div class="shelf_header">
                                     <div class="shelf_title">
-                                        <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
+                                        {{--<span class="shelf_header_icon ui_icon travelers-choice-badge"></span>--}}
+                                        <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا" style="width: 50px;">
                                         <div class="shelf_title_container h3">
                                             <h3>محبوب‌ترین جاذبه‌ها&zwnj;</h3>
                                         </div>
@@ -311,7 +312,8 @@
 
                                 <div class="shelf_header">
                                     <div class="shelf_title">
-                                        <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
+                                        {{--<span class="shelf_header_icon ui_icon travelers-choice-badge"></span>--}}
+                                        <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا" style="width: 50px;">
                                         <div class="shelf_title_container h3">
                                             <h3>محبوب‌ترین رستوران‌ها&zwnj;</h3>
                                         </div>
@@ -371,7 +373,8 @@
 
                                 <div class="shelf_header">
                                     <div class="shelf_title">
-                                        <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
+                                        {{--<span class="shelf_header_icon ui_icon travelers-choice-badge"></span>--}}
+                                        <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا" style="width: 50px;">
                                         <div class="shelf_title_container h3">
                                             <h3>محبوب‌ترین هتل‌ها&zwnj;</h3>
                                         </div>
@@ -431,7 +434,8 @@
 
                                 <div class="shelf_header">
                                     <div class="shelf_title">
-                                        <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
+                                        {{--<span class="shelf_header_icon ui_icon travelers-choice-badge"></span>--}}
+                                        <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا" style="width: 50px;">
                                         <div class="shelf_title_container h3">
                                             <h3>محبوب‌ترین ماجراها&zwnj;</h3>
                                         </div>
@@ -491,7 +495,8 @@
 
                                 <div class="shelf_header">
                                     <div class="shelf_title">
-                                        <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
+                                        {{--<span class="shelf_header_icon ui_icon travelers-choice-badge"></span>--}}
+                                        <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا" style="width: 50px;">
                                         <div class="shelf_title_container h3">
                                             <h3>محبوب‌ترین سوغات و صنایع دستی&zwnj;</h3>
                                         </div>
@@ -551,7 +556,8 @@
 
                                 <div class="shelf_header">
                                     <div class="shelf_title">
-                                        <span class="shelf_header_icon ui_icon travelers-choice-badge"></span>
+                                        {{--<span class="shelf_header_icon ui_icon travelers-choice-badge"></span>--}}
+                                        <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا" style="width: 50px;">
                                         <div class="shelf_title_container h3">
                                             <h3>محبوب‌ترین غذاهای محلی&zwnj;</h3>
                                         </div>
