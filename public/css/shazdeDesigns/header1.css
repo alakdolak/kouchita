@@ -205,22 +205,6 @@ DIV.ppr_rup.ppr_priv_global_nav_action_profile .username::before {
 .ui_jewel.marked_for_attention:before {
     display: none;
 }
-
-/*.linesCollapseBtn {*/
-/*    border: 2px solid black;*/
-/*    width: 25px;*/
-/*    margin: 2px 0;*/
-/*}*/
-
-/*.linesCollapseBtn:first-child {*/
-/*    margin-top: 4px;*/
-/*}*/
-
-
-/*.linesCollapseBtn:last-child {*/
-/*    margin-bottom: 4px;*/
-/*}*/
-
 @media (max-width: 992px) {
 
     DIV.ppr_rup.ppr_priv_global_nav .global-nav-green .global-nav-link {
@@ -268,4 +252,15 @@ DIV.ppr_rup.ppr_priv_global_nav_action_profile .username::before {
 .mag_glass_parent{
     width: 100%;
     height: 100%;
+}
+
+
+.mainLoginButton{
+    padding: 2px 20px;
+    font-size: 20px;
+    color: #eafbff !important;
+    background-color: #0E3A46;
+    border-radius: 10px;
+    border: none;
+    font-weight: 600;
 }

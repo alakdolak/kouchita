@@ -75,10 +75,6 @@ function getRecentlyViews(e) {
     })
 }
 
-$(".login-button").click(function () {
-    $(".dark").show();
-    showLoginPrompt(url);
-});
 $(document).ready(function () {
     $("#Settings").on({
         mouseenter: function () {

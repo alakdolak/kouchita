@@ -12,7 +12,6 @@ footer {
 footer ul {
     list-style: none;
 }
-
 .screenFooterStyle {
     height: auto;
     background-color: #fcc156;
@@ -1166,6 +1165,24 @@ footer .profileMenuLinks {
 @media (min-width: 767px) {
     .footerPhoneMenuBar {
         display: none;
+    }
+}
+
+@media (max-width: 767px){
+
+    .FilterTopController{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column-reverse;
+    }
+    .ordering{
+        font-size: 20px !important;
+        width: 75%;
+    }
+    .orders{
+        padding: 20px 5px;
+        margin: 10px 0;
     }
 }
 

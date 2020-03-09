@@ -171,31 +171,31 @@
         // Create the Google Map using our element and options defined above
         var map = new google.maps.Map(mapElement, mapOptions);
         // Let's also add a marker while we're at it for big map
-        switch (kind) {
-            case 4:
-                k = 'hotel';
-                break;
-            case 1:
-                if ('{{ $place->mooze }}' == 1)
-                    k = 'amaken2';
-                else if ('{{ $place->tarikhi }}' == 1)
-                    k = 'amaken1';
-                else if ('{{ $place->tabiatgardi }}' == 1)
-                    k = 'amaken4';
-                else if ('{{ $place->tafrihi }}' == 1)
-                    k = 'amaken5';
-                else if ('{{ $place->markazkharid }}' == 1)
-                    k = 'amaken3';
-                else
-                    k = 'amaken1';
-                break;
-            case 3:
-                if ('{{$place->kind_id}}' == 1)
-                    k = 'rest';
-                else
-                    k = 'fastfood';
-                break;
-        }
+        {{--switch (kind) {--}}
+            {{--case 4:--}}
+                {{--k = 'hotel';--}}
+                {{--break;--}}
+            {{--case 1:--}}
+                {{--if ('{{ $place->mooze }}' == 1)--}}
+                    {{--k = 'amaken2';--}}
+                {{--else if ('{{ $place->tarikhi }}' == 1)--}}
+                    {{--k = 'amaken1';--}}
+                {{--else if ('{{ $place->tabiatgardi }}' == 1)--}}
+                    {{--k = 'amaken4';--}}
+                {{--else if ('{{ $place->tafrihi }}' == 1)--}}
+                    {{--k = 'amaken5';--}}
+                {{--else if ('{{ $place->markazkharid }}' == 1)--}}
+                    {{--k = 'amaken3';--}}
+                {{--else--}}
+                    {{--k = 'amaken1';--}}
+                {{--break;--}}
+            {{--case 3:--}}
+                {{--if ('{{$place->kind_id}}' == 1)--}}
+                    {{--k = 'rest';--}}
+                {{--else--}}
+                    {{--k = 'fastfood';--}}
+                {{--break;--}}
+        {{--}--}}
         locations[0] = {positions: new google.maps.LatLng(x, y), name: '{{ $place->name }}', type: k};
         for (j = 0; j < 3; j++) {
             var number = 0;
@@ -251,6 +251,13 @@
     }
 
     function showExtendedMap() {
+        var windowWidth = $(window).width();
+        if(windowWidth <= 767){
+            window.location.href = 'geo:{{$place->C}},{{$place->D}}';
+            return;
+        }
+
+
         if (!isMapAchieved) {
             $('.dark').show();
             showElement('mapState');//mapState

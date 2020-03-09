@@ -134,12 +134,12 @@
                 </div>
                 <div style="position: relative; top: -25px">
                     <div>
-                        <div id="helpBtnMainDiv" style="top: 0">
-                            <a class="link">
-                                <div class="circleBase type2 helpBtnIconMainDiv"></div>
-                                <b>راهنمای صفحات</b>
-                            </a>
-                        </div>
+                        {{--<div id="helpBtnMainDiv" style="top: 0">--}}
+                            {{--<a class="link">--}}
+                                {{--<div class="circleBase type2 helpBtnIconMainDiv"></div>--}}
+                                {{--<b>راهنمای صفحات</b>--}}
+                            {{--</a>--}}
+                        {{--</div>--}}
                         <div class="ui_button sharePageMainDiv" onclick="toggleShareIcon(this)">
                             <div class="sharePageIcon first"></div>
                             <div class="sharePageLabel">

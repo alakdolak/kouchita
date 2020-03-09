@@ -66,6 +66,13 @@
         var url;
     </script>
 
+    <style>
+
+        h3{
+            margin: 0px;
+        }
+    </style>
+
 </head>
 
 <body class="rebrand_2017 desktop HomeRebranded  js_logging">
@@ -246,63 +253,65 @@
 
                     @if(count($topPlaces['amaken']) > 4)
                         <div id="newKoochita" class="homepage_shelves_widget ng-scope">
-                        <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show" style="">
-                            <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
+                            <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show">
+                                <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
 
-                                <div class="shelf_header">
-                                    <div class="shelf_title">
-                                        {{--<span class="shelf_header_icon ui_icon travelers-choice-badge"></span>--}}
-                                        <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا" style="width: 50px;">
-                                        <div class="shelf_title_container h3">
-                                            <h3>محبوب‌ترین جاذبه‌ها&zwnj;</h3>
+                                    <div class="shelf_header">
+                                        <div class="shelf_title">
+                                            {{--<span class="shelf_header_icon ui_icon travelers-choice-badge"></span>--}}
+                                            <img src="{{URL::asset('images/icons/iconneg.svg')}}" class="nagLogo" alt="کوچیتا">
+                                            <a href="{{route('place.list', ['kindPlaceId' => 1, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">
+                                                <div class="shelf_title_container h3">
+                                                    <h3>محبوب‌ترین جاذبه‌ها&zwnj;</h3>
+                                                </div>
+                                            </a>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
-                                    <div class="cpMainSug swiper-container">
-                                        <div class="swiper-wrapper position-relative">
-                                            @foreach($topPlaces['amaken'] as $item)
-                                                <div class="swiper-slide position-relative">
-                                                <img src="{{URL::asset('images/pin.png')}}" class="imageGoldPin">
-                                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
-                                                    <div class="poi">
-                                                        <a href="{{$item->url}}" class="thumbnail">
-                                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                                <div class="prv_thumb has_image">
-                                                                    <div class="image_wrapper landscape landscapeWide">
-                                                                        <img src="{{$item->pic}}" alt="{{$item->keyword}}" class="image">
+                                    <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
+                                        <div class="cpMainSug swiper-container">
+                                            <div class="swiper-wrapper position-relative">
+                                                @foreach($topPlaces['amaken'] as $item)
+                                                    <div class="swiper-slide position-relative">
+                                                    <img src="{{URL::asset('images/pin.png')}}" class="imageGoldPin">
+                                                    <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
+                                                        <div class="poi">
+                                                            <a href="{{$item->url}}" class="thumbnail">
+                                                                <div class="prw_rup prw_common_thumbnail_no_style_responsive">
+                                                                    <div class="prv_thumb has_image">
+                                                                        <div class="image_wrapper landscape landscapeWide">
+                                                                            <img src="{{$item->pic}}" alt="{{$item->keyword}}" class="image">
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="detail rtl">
-                                                            <a href="{{$item->url}}" class="item poi_name ui_link ng-binding">{{$item->name}}</a>
-                                                            <div class="item rating-widget">
-                                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                                    <span class="ui_bubble_rating bubble_{{$item->rate}}0"></span>
+                                                            </a>
+                                                            <div class="detail rtl">
+                                                                <a href="{{$item->url}}" class="item poi_name ui_link ng-binding">{{$item->name}}</a>
+                                                                <div class="item rating-widget">
+                                                                    <div class="prw_rup prw_common_location_rating_simple">
+                                                                        <span class="ui_bubble_rating bubble_{{$item->rate}}0"></span>
+                                                                    </div>
+                                                                    <span class="reviewCount ng-binding">{{$item->reviews}} </span><span>نقد </span>
                                                                 </div>
-                                                                <span class="reviewCount ng-binding">{{$item->reviews}} </span><span>نقد </span>
-                                                            </div>
-                                                            <div class="item tags ng-binding">{{$item->city->name}} <span>در </span>
-                                                                <span class="ng-binding">{{$item->state->name}}</span>
+                                                                <div class="item tags ng-binding">{{$item->city->name}} <span>در </span>
+                                                                    <span class="ng-binding">{{$item->state->name}}</span>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                @endforeach
                                             </div>
-                                            @endforeach
+                                            <!-- Add Pagination -->
+                                            <div class="swiper-pagination"></div>
+                                            <!-- Add Arrows -->
+                                            <div class="swiper-button-next"></div>
+                                            <div class="swiper-button-prev"></div>
                                         </div>
-                                        <!-- Add Pagination -->
-                                        <div class="swiper-pagination"></div>
-                                        <!-- Add Arrows -->
-                                        <div class="swiper-button-next"></div>
-                                        <div class="swiper-button-prev"></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     @endif
 
                     @if(count($topPlaces['restaurant']) > 4)
@@ -313,10 +322,12 @@
                                 <div class="shelf_header">
                                     <div class="shelf_title">
                                         {{--<span class="shelf_header_icon ui_icon travelers-choice-badge"></span>--}}
-                                        <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا" style="width: 50px;">
-                                        <div class="shelf_title_container h3">
-                                            <h3>محبوب‌ترین رستوران‌ها&zwnj;</h3>
-                                        </div>
+                                        <img src="{{URL::asset('images/icons/iconneg.svg')}}" class="nagLogo" alt="کوچیتا">
+                                        <a href="{{route('place.list', ['kindPlaceId' => 3, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">
+                                            <div class="shelf_title_container h3">
+                                                <h3>محبوب‌ترین رستوران‌ها&zwnj;</h3>
+                                            </div>
+                                        </a>
                                     </div>
                                 </div>
 
@@ -374,10 +385,12 @@
                                 <div class="shelf_header">
                                     <div class="shelf_title">
                                         {{--<span class="shelf_header_icon ui_icon travelers-choice-badge"></span>--}}
-                                        <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا" style="width: 50px;">
-                                        <div class="shelf_title_container h3">
-                                            <h3>محبوب‌ترین هتل‌ها&zwnj;</h3>
-                                        </div>
+                                        <img src="{{URL::asset('images/icons/iconneg.svg')}}" class="nagLogo" alt="کوچیتا">
+                                        <a href="{{route('place.list', ['kindPlaceId' => 4, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">
+                                            <div class="shelf_title_container h3">
+                                                <h3>محبوب‌ترین هتل‌ها&zwnj;</h3>
+                                            </div>
+                                        </a>
                                     </div>
                                 </div>
 
@@ -435,10 +448,12 @@
                                 <div class="shelf_header">
                                     <div class="shelf_title">
                                         {{--<span class="shelf_header_icon ui_icon travelers-choice-badge"></span>--}}
-                                        <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا" style="width: 50px;">
-                                        <div class="shelf_title_container h3">
-                                            <h3>محبوب‌ترین ماجراها&zwnj;</h3>
-                                        </div>
+                                        <img src="{{URL::asset('images/icons/iconneg.svg')}}" class="nagLogo" alt="کوچیتا">
+                                        <a href="{{route('place.list', ['kindPlaceId' => 6, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">
+                                            <div class="shelf_title_container h3">
+                                                <h3>محبوب‌ترین طبیعت گردی&zwnj;</h3>
+                                            </div>
+                                        </a>
                                     </div>
                                 </div>
 
@@ -490,16 +505,18 @@
 
                     @if(count($topPlaces['sogatSanaie']) > 4)
                         <div id="newKoochita" class="homepage_shelves_widget ng-scope">
-                        <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show" style="">
+                        <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show">
                             <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
 
                                 <div class="shelf_header">
                                     <div class="shelf_title">
                                         {{--<span class="shelf_header_icon ui_icon travelers-choice-badge"></span>--}}
-                                        <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا" style="width: 50px;">
-                                        <div class="shelf_title_container h3">
-                                            <h3>محبوب‌ترین سوغات و صنایع دستی&zwnj;</h3>
-                                        </div>
+                                        <img src="{{URL::asset('images/icons/iconneg.svg')}}" class="nagLogo" alt="کوچیتا">
+                                        <a href="{{route('place.list', ['kindPlaceId' => 10, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">
+                                            <div class="shelf_title_container h3">
+                                                <h3>محبوب‌ترین سوغات و صنایع دستی&zwnj;</h3>
+                                            </div>
+                                        </a>
                                     </div>
                                 </div>
 
@@ -557,10 +574,12 @@
                                 <div class="shelf_header">
                                     <div class="shelf_title">
                                         {{--<span class="shelf_header_icon ui_icon travelers-choice-badge"></span>--}}
-                                        <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا" style="width: 50px;">
-                                        <div class="shelf_title_container h3">
-                                            <h3>محبوب‌ترین غذاهای محلی&zwnj;</h3>
-                                        </div>
+                                        <img src="{{URL::asset('images/icons/iconneg.svg')}}" class="nagLogo" alt="کوچیتا">
+                                        <a href="{{route('place.list', ['kindPlaceId' => 11, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">
+                                            <div class="shelf_title_container h3">
+                                                <h3>محبوب‌ترین غذاهای محلی&zwnj;</h3>
+                                            </div>
+                                        </a>
                                     </div>
                                 </div>
 
@@ -1023,14 +1042,13 @@
     }
 
     function setInMap(isSet, marker) {
-
         if (isSet == 1) {
             for (var i = 0; i < marker.length; i++)
-                marker[i]['h'].setMap(map2)
+                marker[i]['i'].setMap(map2)
         }
         else {
             for (var i = 0; i < marker.length; i++)
-                marker[i]['h'].setMap(null)
+                marker[i]['i'].setMap(null)
         }
 
     }

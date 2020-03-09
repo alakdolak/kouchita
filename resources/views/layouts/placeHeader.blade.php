@@ -494,60 +494,41 @@ if(Auth::check()) {
 
                                     </div>
                                 </div>
-                            @else
-                                <div class="ppr_rup ppr_priv_global_nav_action_trips position-relative">
-                                    <div id="targetHelp_4" class="targets">
-                                        <div id="entryBtnId" class="ppr_rup ppr_priv_global_nav_action_profile">
-                                            <div class="global-nav-profile global-nav-utility">
-                                                <a class="ui_button secondary small login-button" title="Join">عضویت / ورود</a>
+
+                                <div id="taplc_global_nav_action_notif_0" class="ppr_rup ppr_priv_global_nav_action_notif position-relative">
+                                    <div id="targetHelp_3" class="targets">
+                                        <div class="masthead_notification" title="Alerts">
+                                            <div class="masthead_notifctr_btn">
+                                                <div class="masthead_notifctr_sprite ui_icon notification-bell" style="justify-content: center"></div>
+                                                <div class="nameOfIconHeaders" style="color: white; ">
+                                                    پیام ها
+                                                </div>
+                                                <div class="masthead_notifctr_jewel hidden">0</div>
+                                            </div>
+                                            <div id="alert" class="masthead_notifctr_dropdown">
+                                                <div class="notifdd_title">پیام ها</div>
+                                                <div class="notifdd_loading hidden">
+                                                    <div class="ui_spinner"></div>
+                                                </div>
+                                                <div>
+                                                    <div class="modules-engagement-notification-dropdown " data-backbone-name="modules.engagement.NotificationDropdown" data-backbone-context="Engagement_MemberNotifications">
+                                                        <div class="notifdd_empty">هیچ پیامی موجود نیست </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div id="helpSpan_4" class="helpSpans hidden row">
+                                        <div id="helpSpan_3" class="helpSpans hidden row">
                                             <span class="introjs-arrow"></span>
                                             <p class="col-xs-12">پیام های خود را به سادگی از اینجا دنبال کنید.</p>
                                             <div class="col-xs-12">
-                                                <button data-val="4" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_4">بعدی</button>
-                                                <button data-val="4" class="btn btn-primary backBtnsHelp" id="backBtnHelp_4">قبلی</button>
+                                                <button data-val="3" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_3">بعدی</button>
+                                                <button data-val="3" class="btn btn-primary backBtnsHelp" id="backBtnHelp_3">قبلی</button>
                                                 <button class="btn btn-danger exitBtnHelp">خروج</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             @endif
-
-                            <div id="taplc_global_nav_action_notif_0" class="ppr_rup ppr_priv_global_nav_action_notif position-relative">
-                                <div id="targetHelp_3" class="targets">
-                                    <div class="masthead_notification" title="Alerts">
-                                        <div class="masthead_notifctr_btn">
-                                            <div class="masthead_notifctr_sprite ui_icon notification-bell" style="justify-content: center"></div>
-                                            <div class="nameOfIconHeaders" style="color: white; ">
-                                                پیام ها
-                                            </div>
-                                            <div class="masthead_notifctr_jewel hidden">0</div>
-                                        </div>
-                                        <div id="alert" class="masthead_notifctr_dropdown">
-                                            <div class="notifdd_title">پیام ها</div>
-                                            <div class="notifdd_loading hidden">
-                                                <div class="ui_spinner"></div>
-                                            </div>
-                                            <div>
-                                                <div class="modules-engagement-notification-dropdown " data-backbone-name="modules.engagement.NotificationDropdown" data-backbone-context="Engagement_MemberNotifications">
-                                                    <div class="notifdd_empty">هیچ پیامی موجود نیست </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div id="helpSpan_3" class="helpSpans hidden row">
-                                        <span class="introjs-arrow"></span>
-                                        <p class="col-xs-12">پیام های خود را به سادگی از اینجا دنبال کنید.</p>
-                                        <div class="col-xs-12">
-                                            <button data-val="3" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_3">بعدی</button>
-                                            <button data-val="3" class="btn btn-primary backBtnsHelp" id="backBtnHelp_3">قبلی</button>
-                                            <button class="btn btn-danger exitBtnHelp">خروج</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
 
                             <div id="taplc_global_nav_action_profile_0" class="ppr_rup ppr_priv_global_nav_action_profile position-relative" style="margin: 0px;">
                                 <div class="global-nav-profile global-nav-utility position-relative">
@@ -599,6 +580,27 @@ if(Auth::check()) {
                                     </div>
                                 </div>
                             </div>
+
+                            @if(!auth()->check())
+                                <div class="ppr_rup ppr_priv_global_nav_action_trips position-relative">
+                                        <div id="targetHelp_4" class="targets">
+                                            <div id="entryBtnId" class="ppr_rup ppr_priv_global_nav_action_profile">
+                                                <div class="global-nav-profile global-nav-utility">
+                                                    <a class="ui_button secondary small login-button" title="Join">ورود / ثبت نام</a>
+                                                </div>
+                                            </div>
+                                            <div id="helpSpan_4" class="helpSpans hidden row">
+                                                <span class="introjs-arrow"></span>
+                                                <p class="col-xs-12">پیام های خود را به سادگی از اینجا دنبال کنید.</p>
+                                                <div class="col-xs-12">
+                                                    <button data-val="4" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_4">بعدی</button>
+                                                    <button data-val="4" class="btn btn-primary backBtnsHelp" id="backBtnHelp_4">قبلی</button>
+                                                    <button class="btn btn-danger exitBtnHelp">خروج</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            @endif
                         </div>
 
                         <div class="clear-both"></div>

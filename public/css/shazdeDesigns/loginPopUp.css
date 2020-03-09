@@ -1,4 +1,6 @@
-
+.loginPaneInLoginPopUp{
+    float: left;
+}
 textarea:focus, input:focus, select:focus, button:focus, a:focus,
 textarea, input, select, button, a {
     outline: none;

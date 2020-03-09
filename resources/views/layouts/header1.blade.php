@@ -455,7 +455,7 @@ if(Auth::check()) {
                                 <div class="ppr_rup ppr_priv_global_nav_action_trips">
                                     <div id="entryBtnId" class="ppr_rup ppr_priv_global_nav_action_profile">
                                         <div class="global-nav-profile global-nav-utility">
-                                            <a class="ui_button secondary small login-button" title="ورود / ثبت نام" style="padding: 10px 20px; font-size: 20px; color: #eafbff; background-color: #0E3A46; border-radius: 10px; border: none;"> ورود / ثبت نام</a>
+                                            <a class="login-button mainLoginButton" title="ورود / ثبت نام"> ورود / ثبت نام</a>
                                         </div>
                                     </div>
                                 </div>
