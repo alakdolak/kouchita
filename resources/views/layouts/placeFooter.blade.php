@@ -147,17 +147,18 @@ $config = \App\models\ConfigModel::first()
             <span class="footerMenuBarLinks">سایر امکانات</span>
             <span class="ui_icon more-horizontal"></span>
         </div>
-{{--        @if(Auth::check())--}}
         <div data-toggle="modal" data-target="#profilePossibilities">
-            <span class="footerMenuBarLinks">امکانات کاربر</span>
+            <span class="footerMenuBarLinks">
+
+                @if(Request::is('placeList/*'))
+                    اعمال فیلتر
+                @else
+                    امکانات کاربر
+                @endif
+
+            </span>
             <span class="ui_icon memberPossibilities"></span>
         </div>
-        {{--@else--}}
-            {{--<div class="login-button">--}}
-                {{--<span class="footerMenuBarLinks">ثبت نام</span>--}}
-                {{--<span class="ui_icon plus-circle"></span>--}}
-            {{--</div>--}}
-        {{--@endif--}}
         <div onclick="openProSearch()">
             <span class="footerMenuBarLinks">جست‌و‌جو</span>
             <span class="ui_icon search"></span>
@@ -501,7 +502,7 @@ $config = \App\models\ConfigModel::first()
 
                     {{--left menu--}}
                     <div id="lp_ar_leftFilters" class="lp_ar_contentOfFilters hidden">
-                        <div id="FilterTopController">
+                        <div id="FilterTopController" class="FilterTopController">
                             <div class="ordering">
                                 <div class="orders" onclick="selectingOrder($(this),'review')" id="pz1">
                                     بیشترین نظر
