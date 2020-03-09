@@ -4068,8 +4068,9 @@ class PlaceController extends Controller {
         }
 
         foreach ($places as $place) {
-            if (file_exists((__DIR__ . '/../../../../assets/_images/' . $file . '/' . $place->file . '/f-1.jpg')))
-                $place->pic = URL::asset('_images/' . $file . '/' . $place->file . '/f-1.jpg');
+
+            if (file_exists((__DIR__ . '/../../../../assets/_images/' . $file . '/' . $place->file . '/f-' . $place->picNumber)))
+                $place->pic = URL::asset('_images/' . $file .'/' . $place->file . '/f-' . $place->picNumber);
             else
                 $place->pic = URL::asset('_images/nopic/blank.jpg');
 

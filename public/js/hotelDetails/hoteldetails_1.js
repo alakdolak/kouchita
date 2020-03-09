@@ -211,26 +211,37 @@ function removeAssignedUserToReview(element, _email){
 function uploadReviewPics(input){
 
     if (input.files && input.files[0]) {
+        if(input.files[0].size >= 2000000){
+            alert('حجم عکس باید زیر 2MB  باشد');
+            return;
+        }
         var lastNumber = reviewPicNumber;
         var text = '<div id="reviewPic_' + reviewPicNumber + '" class="commentPhotosDiv commentPhotosAndVideos">\n' +
+            '<div id="reviewPicLoader_' + reviewPicNumber + '" class="loaderReviewPiUpload"></div>\n' +
             '<img id="showPic' + reviewPicNumber + '" src="#" style="width: 100%; height: 100px;">\n' +
             '<input type="hidden" id="fileName_' + reviewPicNumber + '" >\n' +
             '<div class="deleteUploadPhotoComment" onclick="deleteUploadedReviewFile(' + reviewPicNumber + ')"></div>\n' +
             '<div class="editUploadPhotoComment" onclick="openEditReviewPic(' + reviewPicNumber + ')"></div>\n' +
-            '<div class="progress">\n' +
-            '<div id="progressBarReviewPic' + reviewPicNumber + '" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>\n' +
-            '</div>\n' +
+            // '<div class="progress">\n' +
+            // '<div id="progressBarReviewPic' + reviewPicNumber + '" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>\n' +
+            // '</div>\n' +
             '</div>';
         $('#reviewShowPics').append(text);
+
+
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            var mainPic = e.target.result;
+            $('#showPic' + lastNumber).attr('src', mainPic);
+        };
+        reader.readAsDataURL(input.files[0]);
 
         var data = new FormData();
 
         data.append('pic', input.files[0]);
         data.append('code', userCode);
 
-
-        var $progressBar = $('#progressBarReviewPic' + reviewPicNumber);
-
+        var uploadReviewPicLoader = $('#reviewPicLoader_' + reviewPicNumber);
         $.ajax({
             type: 'post',
             url: reviewUploadPic,
@@ -246,7 +257,16 @@ function uploadReviewPics(input){
                     if (e.lengthComputable) {
                         percent = Math.round((e.loaded / e.total) * 100);
                         percentage = percent + '%';
-                        $progressBar.width(percentage).attr('aria-valuenow', percent).text(percentage);
+                        size = 160 - (percent * 1.6);
+                        size += 'px';
+
+                        leftBottom = (percent * 1.6)/2 - 30;
+                        leftBottom += 'px';
+                        uploadReviewPicLoader.css('width', size);
+                        uploadReviewPicLoader.css('height', size);
+
+                        uploadReviewPicLoader.css('left', leftBottom);
+                        uploadReviewPicLoader.css('bottom', leftBottom);
                     }
                 };
 
@@ -261,14 +281,7 @@ function uploadReviewPics(input){
                     try {
                         response = JSON.parse(response);
                         fileName = response[1];
-                        var reader = new FileReader();
-                        reader.onload = function(e) {
-                            var mainPic = e.target.result;
-                            $('#showPic' + lastNumber).attr('src', mainPic);
-                            document.getElementById('fileName_' + lastNumber).value = fileName;
-                        };
-                        reader.readAsDataURL(input.files[0]);
-
+                        document.getElementById('fileName_' + lastNumber).value = fileName;
                     } catch (e) {
 
                     }
@@ -291,14 +304,15 @@ function uploadReviewVideo(input, _is360){
         data.append('is360', 1);
 
     var lastNumber = reviewPicNumber;
-    var text = '<div id="reviewPic_' + reviewPicNumber + '" class="commentPhotosDiv commentPhotosAndVideos">\n' +
+    var text = '<div id="reviewPic_' + reviewPicNumber + '" class="commentPhotosDiv commentPhotosAndVideos">' +
+        '<div id="reviewPicLoader_' + reviewPicNumber + '" class="loaderReviewPiUpload"></div>\n' +
         '<img id="showPic' + reviewPicNumber + '" src="#" style="width: 100%; height: 100px;">\n' +
         '<input type="hidden" id="fileName_' + reviewPicNumber + '" >\n' +
         '<div class="deleteUploadPhotoComment" onclick="deleteUploadedReviewFile(' + reviewPicNumber + ')"></div>\n' +
         '<div class="videoTimeDuration" id="videoDuration_' + reviewPicNumber + '"></div>\n' +
-        '<div class="progress">\n' +
-        '<div id="progressBarReviewPic' + reviewPicNumber + '" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>\n' +
-        '</div>\n' +
+        // '<div class="progress">\n' +
+        // '<div id="progressBarReviewPic' + reviewPicNumber + '" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>\n' +
+        // '</div>\n' +
         '</div>';
     $('#reviewShowPics').append(text);
 
@@ -348,8 +362,6 @@ function uploadReviewVideo(input, _is360){
                 URL.revokeObjectURL(url);
                 data.append('videoPic', image);
 
-                var $progressBar = $('#progressBarReviewPic' + reviewPicNumber);
-
                 $.ajax({
                     type: 'post',
                     url: reviewUploadVideo,
@@ -365,7 +377,6 @@ function uploadReviewVideo(input, _is360){
                             if (e.lengthComputable) {
                                 percent = Math.round((e.loaded / e.total) * 100);
                                 percentage = percent + '%';
-                                $progressBar.width(percentage).attr('aria-valuenow', percent).text(percentage);
                             }
                         };
 

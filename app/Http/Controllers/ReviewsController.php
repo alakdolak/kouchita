@@ -42,7 +42,7 @@ class ReviewsController extends Controller
         if(!file_exists($location))
             mkdir($location);
 
-        if(isset($_FILES['pic']) && isset($request->code)){
+        if(isset($_FILES['pic']) && isset($request->code) && $_FILES['pic']['error'] == 0){
 
             $valid_ext = array('image/jpeg','image/png');
             if(in_array($_FILES['pic']['type'], $valid_ext)){
@@ -296,7 +296,7 @@ class ReviewsController extends Controller
             $isFilter = false;
             $isPicFilter = false;
             $isTextFilter = false;
-            $sqlQuery = ' CHARACTER_LENGTH(text) > 2';
+            $sqlQuery = ' CHARACTER_LENGTH(text) >= 0';
             $textFilter = '';
             $onlyPic = 0;
 

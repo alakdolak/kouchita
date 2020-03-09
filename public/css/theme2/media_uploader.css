@@ -54,6 +54,7 @@
 .ui_modal.photoUploadOverlay .body_text,
 .ui_modal.photoUploadOverlay .body_text .photoUploadInner {
   height: 100%;
+  direction: rtl;
 }
 
 /*.uploaderDlg {*/

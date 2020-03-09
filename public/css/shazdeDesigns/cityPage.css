@@ -478,6 +478,9 @@
 }
 
 
+.nagLogo{
+    width: 50px;
+}
 @media (max-width:768px) {
     .widget-title {
         font-size: 14px

@@ -42,12 +42,12 @@
                         نقد
                     </a>
                 </span>
-                <div class="header heading" id="helpBtnMainDiv">
-                    <a class="link" onclick="startHelp()">
-                        <div class="circleBase type2 helpBtnIconMainDiv"></div>
-                        <b>راهنمای صفحات</b>
-                    </a>
-                </div>
+                {{--<div class="header heading" id="helpBtnMainDiv">--}}
+                    {{--<a class="link" onclick="startHelp()">--}}
+                        {{--<div class="circleBase type2 helpBtnIconMainDiv"></div>--}}
+                        {{--<b>راهنمای صفحات</b>--}}
+                    {{--</a>--}}
+                {{--</div>--}}
             </div>
 
             <div class="position-relative">
@@ -166,7 +166,7 @@
                 </span>
                 <div class="prw_rup prw_common_atf_header_bl headerBL">
                     <div class="blRow">
-                        <div class="blEntry blEn address  clickable colCnt3" onclick="showExtendedMap()">
+                        <div class="blEntry blEn address  clickable colCnt3" onclick="showExtendedMap()" style="min-height: 20px">
                             @if($placeMode != 'mahaliFood' && $placeMode != 'sogatSanaies')
                                 <span class="ui_icon map-pin"></span>
                                 <span class="street-address">آدرس : </span>

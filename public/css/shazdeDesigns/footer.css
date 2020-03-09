@@ -1179,6 +1179,8 @@ footer .profileMenuLinks {
     .ordering{
         font-size: 20px !important;
         width: 75%;
+    }
+    .orders{
         padding: 20px 5px;
         margin: 10px 0;
     }

@@ -2812,10 +2812,23 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     /*background-color: black;*/
     display: inline-block;
     float: right;
-    height: 120px;
+    height: 100px;
     width: 100px;
     margin-left: 5px;
     position: relative;
+    overflow: hidden;
+}
+
+.loaderReviewPiUpload{
+    position: absolute;
+    bottom: -30px;
+    left: -30px;
+    height: 160px;
+    z-index: 99;
+    width: 160px;
+    background-color: #0076a3;
+    border-radius: 50%;
+    transition: 0.5s;
 }
 
 .deleteUploadPhotoComment::before {
@@ -2848,7 +2861,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     height: 25px;
     width: 20px;
     position: absolute;
-    bottom: 25px;
+    bottom: 0px;
     z-index: 10;
     right: 0px;
     cursor: pointer;

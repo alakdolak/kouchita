@@ -54,7 +54,6 @@ if ($total == 0)
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/popUp.css?v=1')}}">
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/home_rebranded.css?v=4')}}">
     <link rel="stylesheet" href="{{URL::asset('css/theme2/help.css?v=1')}}">
-    <link rel="stylesheet" href="{{URL::asset('css/theme2/cropper.css')}}">
     <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/hotelDetail.css')}}">
     <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/abbreviations.css')}}">
 {{--    <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/editor.css')}}">--}}
@@ -1312,12 +1311,13 @@ if ($total == 0)
                                                     </div>
                                                 </div>
                                             </div>
-                                            @if($placeMode != 'sogatSanaies')
+                                            @if($placeMode != 'sogatSanaies' && $placeMode != 'mahaliFood')
                                                 @include('hotel-details.mapSection')
+
+                                                @include('layouts.extendedMap')
                                             @endif
                                         @endif
 
-                                        {{--@include('layouts.extendedMap')--}}
                                     </div>
                                 </div>
                             </div>

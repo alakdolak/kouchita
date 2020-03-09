@@ -281,7 +281,7 @@ class HomeController extends Controller
             $place->listName = $place->name;
             $place->name = 'شهر ' . $place->name;
             $articleUrl = \url('/article/list/city/' . $place->listName);
-            $locationName = ["name" => $place->name, 'state' => $place->state, 'cityName' => $place->listName, 'cityNameUrl' => $place->name, 'articleUrl' => $articleUrl, 'kindState' => 'city'];
+            $locationName = ["name" => $place->name, 'state' => $place->state, 'cityName' => $place->name, 'cityNameUrl' => $place->listName, 'articleUrl' => $articleUrl, 'kindState' => 'city'];
 
             $allAmakenId = Amaken::where('cityId', $place->id)->pluck('id')->toArray();
             $allAmaken = Amaken::where('cityId', $place->id)->get();
@@ -327,7 +327,7 @@ class HomeController extends Controller
             $place->listName = $place->name;
             $place->name = 'استان ' . $place->name;
             $articleUrl = \url('/article/list/state/' . $place->listName);
-            $locationName = ["name" => $place->name, 'cityName' => $place->listName, 'cityNameUrl' => $place->name, 'articleUrl' => $articleUrl, 'kindState' => 'state', 'state' => $place->name];
+            $locationName = ["name" => $place->name, 'cityName' => $place->name, 'cityNameUrl' => $place->listName, 'articleUrl' => $articleUrl, 'kindState' => 'state', 'state' => $place->name];
 
             $allCities = Cities::where('stateId', $place->id)->pluck('id')->toArray();
 
@@ -483,8 +483,10 @@ class HomeController extends Controller
             }
             $count += count($plac);
         }
-        $C /= $count;
-        $D /= $count;
+        if($count > 0) {
+            $C /= $count;
+            $D /= $count;
+        }
         $map = ['C' => $C, 'D' => $D, 'maxLat' => $maxLat, 'maxLng' => $maxLng, 'minLng' => $minLng, 'minLat' => $minLat];
 
         $post = [];
@@ -537,6 +539,7 @@ class HomeController extends Controller
         else
             $localStorageData = ['kind' => 'city', 'name' => $place->name , 'city' => '', 'state' => $place->state, 'mainPic' => $place->image, 'redirect' => $mainWebSiteUrl];
 
+//        dd($locationName);
         return view('cityPage', compact(['place', 'kind', 'localStorageData', 'locationName', 'post', 'map', 'allPlaces', 'allAmaken', 'allHotels', 'allRestaurant', 'allMajara', 'allMahaliFood', 'allSogatSanaie', 'reviews', 'topPlaces']));
     }
 

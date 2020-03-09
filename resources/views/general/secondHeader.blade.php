@@ -22,18 +22,6 @@
         display: flex;
     }
 
-    .arrowAfter:after{
-        display: inline-block;
-        font-style: normal;
-        font-weight: normal;
-        font-variant: normal;
-        font-family: "Shazde_Regular" !important;
-        -ms-transform: rotate(-0.001deg);
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        content: '\e04a';
-        font-size: 16px;
-    }
     .secHeadTabsSubList{
         position: absolute;
         top: 40px;
@@ -66,6 +54,15 @@
     .spanMarginSecHead > span {
         margin: 0px 7px;
     }
+
+    @media (max-width: 889px) {
+        .secHeadTabs{
+            margin-right: 13px;
+            font-size: 10px;
+            font-weight: 800;
+        }
+
+    }
 </style>
 <div class="container-fluid secHeadMain hideOnPhone">
     <div class="ui_container secHeadNavs">
@@ -75,7 +72,7 @@
             </span>
             <div class="secHeadTabsSubList">
                 <a href="{{route('cityPage', ['kind' => $locationName['kindState'], 'city' => $locationName['cityNameUrl'] ])}}" target="_blank" >{{$locationName['cityName']}}</a>
-                @if(isset($locationName['state']) && $locationName['kindState'] != 'country')
+                @if(isset($locationName['state']) && $locationName['kindState'] == 'city')
                     <a href="{{route('cityPage', ['kind' => 'state', 'city' => $locationName['state'] ])}}" target="_blank" >استان {{$locationName['state']}}</a>
                 @endif
                 <a href="{{url('/')}}">صفحه اصلی</a>
@@ -87,7 +84,7 @@
             </span>
             <div class="secHeadTabsSubList">
                 <a href="{{route('place.list', ['kindPlaceId' => 4, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">اقامتگاه های {{$locationName['cityName']}}</a>
-                @if(isset($locationName['state']) && $locationName['kindState'] != 'country')
+                @if(isset($locationName['state']) && $locationName['kindState'] == 'city')
                     <a href="{{route('place.list', ['kindPlaceId' => 4, 'mode' => 'state', 'city' => $locationName['state']])}}">اقامتگاه های استان {{$locationName['state']}}</a>
                 @endif
             </div>
@@ -98,7 +95,7 @@
             </span>
             <div class="secHeadTabsSubList">
                 <a href="{{route('place.list', ['kindPlaceId' => 3, 'mode' =>  $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">رستوران های {{$locationName['cityName']}}</a>
-                @if(isset($locationName['state']) && $locationName['kindState'] != 'country')
+                @if(isset($locationName['state']) && $locationName['kindState'] == 'city')
                     <a href="{{route('place.list', ['kindPlaceId' => 3, 'mode' => 'state', 'city' => $locationName['state']])}}">رستوران های استان {{$locationName['state']}}</a>
                 @endif
             </div>
@@ -109,19 +106,19 @@
             </span>
             <div class="secHeadTabsSubList">
                 <a href="{{route('place.list', ['kindPlaceId' => 1, 'mode' =>  $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">جاذبه های {{$locationName['cityName']}}</a>
-                @if(isset($locationName['state'])  && $locationName['kindState'] != 'country')
+                @if(isset($locationName['state'])  && $locationName['kindState'] == 'city')
                     <a href="{{route('place.list', ['kindPlaceId' => 1, 'mode' => 'state', 'city' => $locationName['state']])}}">جاذبه های استان {{$locationName['state']}}</a>
                 @endif
             </div>
         </div>
         <div class="secHeadTabs arrowAfter">
             <span>
-                ماجرا ها
+                طبیعت گردی
             </span>
             <div class="secHeadTabsSubList">
-                <a href="{{route('place.list', ['kindPlaceId' => 6, 'mode' =>  $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">ماجرا های {{$locationName['cityName']}}</a>
-                @if(isset($locationName['state']) && $locationName['kindState'] != 'country')
-                    <a href="{{route('place.list', ['kindPlaceId' => 6, 'mode' => 'state', 'city' => $locationName['state']])}}">ماجرا های استان {{$locationName['state']}}</a>
+                <a href="{{route('place.list', ['kindPlaceId' => 6, 'mode' =>  $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">طبیعت گردی های {{$locationName['cityName']}}</a>
+                @if(isset($locationName['state']) && $locationName['kindState'] == 'city')
+                    <a href="{{route('place.list', ['kindPlaceId' => 6, 'mode' => 'state', 'city' => $locationName['state']])}}">طبیعت گردی های استان {{$locationName['state']}}</a>
                 @endif
             </div>
         </div>
@@ -131,7 +128,7 @@
             </span>
             <div class="secHeadTabsSubList">
                 <a href="{{route('place.list', ['kindPlaceId' => 10, 'mode' =>  $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">سوغات و صنایع دستی {{$locationName['cityName']}}</a>
-                @if(isset($locationName['state'])  && $locationName['kindState'] != 'country')
+                @if(isset($locationName['state'])  && $locationName['kindState'] == 'city')
                     <a href="{{route('place.list', ['kindPlaceId' => 10, 'mode' => 'state', 'city' => $locationName['state']])}}">سوغات و صنایع دستی استان {{$locationName['state']}}</a>
                 @endif
             </div>
@@ -142,7 +139,7 @@
             </span>
             <div class="secHeadTabsSubList">
                 <a href="{{route('place.list', ['kindPlaceId' => 11, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">غذاهای محلی {{$locationName['cityName']}}</a>
-                @if(isset($locationName['state']) && $locationName['kindState'] != 'country')
+                @if(isset($locationName['state']) && $locationName['kindState'] == 'city')
                     <a href="{{route('place.list', ['kindPlaceId' => 11, 'mode' => 'state', 'state' => $locationName['state']])}}">غذاهای محلی استان {{$locationName['state']}}</a>
                 @endif
             </div>

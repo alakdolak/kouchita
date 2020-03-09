@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="{{URL::asset('css/theme2/cropper.css')}}">
 <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/shazdeDesigns/editor.css')}}'/>
 <link rel="stylesheet" href="{{URL::asset('css/theme2/media_uploader.css')}}">
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/icons.css?v=2')}}' />

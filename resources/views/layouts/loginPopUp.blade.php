@@ -625,13 +625,13 @@ $authUrl = $client->createAuthUrl();
             <div class="header_text font-size-14Imp">در حال حاضر عضو کوچیتا هستید؟!</div>
             <div>
                 <div>
-                    <label class="full-width">
+                    <label class="full-width" style="font-weight: 700; font-size: 16px;">
                         <span class="pd-tp-8 inputLabelText"> نام کاربری </span>
                         <input class="loginInputTemp" type="text" id="username_main" maxlength="40" required autofocus>
                     </label>
                 </div>
                 <div>
-                    <label class="full-width">
+                    <label class="full-width" style="font-weight: 700 !important; font-size: 16px;">
                         <span class="pd-tp-8 inputLabelText">رمز عبور</span>
                         <input class="loginInputTemp" type="password" id="password_main" maxlength="40" required>
                         <a class="forgetPassLink" onclick="ShowForgetPass()">رمز عبور خود را فراموش کردید؟</a>
