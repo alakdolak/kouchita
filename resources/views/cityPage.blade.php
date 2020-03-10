@@ -1010,12 +1010,18 @@
         var sec = src.split('.');
         var kind;
 
-        if (sec[0].includes('off')) {
-            sec[0] = sec[0].replace('off', '');
-            src2 = sec[0] + '.' + sec[1];
+        if (src.includes('off')) {
+            src = src.replace('off', '');
+            src2 = src;
             kind = 1;
         } else {
-            src2 = sec[0] + 'off.' + sec[1];
+            src2 = sec[0];
+            for(i = 1; i < sec.length; i++){
+                if(i == sec.length-1)
+                    src2 +=  'off.' + sec[i];
+                else
+                    src2 += '.' + sec[i];
+            }
             kind = 0;
         }
         document.getElementById(_id).src = src2;
