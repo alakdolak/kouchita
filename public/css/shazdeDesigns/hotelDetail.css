@@ -862,11 +862,32 @@ DIV.prw_rup.prw_common_mercury_photo_carousel .bignav .left-nav {
 #introductionText {
     direction: rtl;
     font-size: 15px;
-    /*max-height: 21px;*/
     overflow: hidden;
     text-align: justify;
     line-height: 1.8;
     color: #666666;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.tabContent{
+    transition: 1s;
+}
+.showMoreDescriptionInDetails{
+    position: absolute;
+    left: -2px;
+    bottom: 8px;
+    background: white;
+    width: 35px;
+    height: 24px;
+}
+.showMoreDescriptionInDetails:before{
+    content: '\E091';
+    font-family: shazdemosafer-tour !important;
+    font-size: 35px;
+    color: #4DC7BC;
+    position: absolute;
+    bottom: -14px;
 }
 
 #map-small {
@@ -3965,6 +3986,13 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
 @media only screen and (max-width: 991px) {
 
+    .featureOfPlaceMiddle{
+        min-width: 100%;
+    }
+    .rateOfPlaceMiddle{
+        min-width: 100%;
+    }
+
     /*bottomBarHeader*/
     .global-nav-bar-container {
         display: flex;
@@ -4211,7 +4239,6 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 }
 
 @media only screen and (max-width: 767px) {
-
     #helpBtnMainDiv {
         top: -105px;
     }

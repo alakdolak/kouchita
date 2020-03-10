@@ -16,15 +16,15 @@
                             </div>
                             <div>
                                 <center>
-                                    <img id="mainMapHotelImg" src="{{URL::asset('images/mapIcon/mhotel.png')}}" onclick="toggleHotelsInMainMap(1)">
-                                    <img id="mainMapRestImg" src="{{URL::asset('images/mapIcon/mrest.png')}}" onclick="toggleRestaurantsInMainMap(1)">
-                                    <img id="mainMapFastImg" src="{{URL::asset('images/mapIcon/mfast.png')}}" onclick="toggleFastFoodsInMainMap(1)">
-                                    <img id="mainMapMusImg" src="{{URL::asset('images/mapIcon/matr_mus.png')}}" onclick="toggleMuseumsInMainMap(1)">
-                                    <img id="mainMapPlaImg" src="{{URL::asset('images/mapIcon/matr_pla.png')}}" onclick="toggleHistoricalInMainMap(1)">
-                                    <img id="mainMapShcImg" src="{{URL::asset('images/mapIcon/matr_shc.png')}}" onclick="toggleShopCenterInMainMap(1)">
-                                    <img id="mainMapFunImg" src="{{URL::asset('images/mapIcon/matr_fun.png')}}" onclick="toggleFunCenterInMainMap(1)">
-                                    <img id="mainMapAdvImg" src="{{URL::asset('images/mapIcon/matr_adv.png')}}" onclick="toggleMajaraCenterInMainMap(1)">
-                                    <img id="mainMapNatImg" src="{{URL::asset('images/mapIcon/matr_nat.png')}}" onclick="toggleNaturalsInMainMap(1)">
+                                    <img id="mainMapHotelImg" src="{{URL::asset('images/mapIcon/mhotel.png')}}" title="اقامتگاه ها" onclick="toggleHotelsInMainMap(1)">
+                                    <img id="mainMapRestImg" src="{{URL::asset('images/mapIcon/mrest.png')}}" title="" onclick="toggleRestaurantsInMainMap(1)">
+                                    <img id="mainMapFastImg" src="{{URL::asset('images/mapIcon/mfast.png')}}" title="" onclick="toggleFastFoodsInMainMap(1)">
+                                    {{--<img id="mainMapMusImg" src="{{URL::asset('images/mapIcon/matr_mus.png')}}" onclick="toggleMuseumsInMainMap(1)">--}}
+                                    <img id="mainMapPlaImg" src="{{URL::asset('images/mapIcon/matr_pla.png')}}" title="" onclick="toggleAmakenInMainMap(1)">
+                                    {{--<img id="mainMapShcImg" src="{{URL::asset('images/mapIcon/matr_shc.png')}}" onclick="toggleShopCenterInMainMap(1)">--}}
+                                    {{--<img id="mainMapFunImg" src="{{URL::asset('images/mapIcon/matr_fun.png')}}" onclick="toggleFunCenterInMainMap(1)">--}}
+                                    <img id="mainMapAdvImg" src="{{URL::asset('images/mapIcon/matr_adv.png')}}" title="" onclick="toggleMajaraCenterInMainMap(1)">
+                                    {{--<img id="mainMapNatImg" src="{{URL::asset('images/mapIcon/matr_nat.png')}}" onclick="toggleNaturalsInMainMap(1)">--}}
                                 </center>
                             </div>
                         </div>
@@ -68,7 +68,17 @@
     var kind;
     var kindRest = [];
     var kindAmaken = [];
-    var smallMap;
+    var mainMap;
+    var markersFastMainMap = [];
+    var markersRestMainMap = [];
+    var markersHotelMainMap = [];
+    var markerAmakenMainMap = [];
+    var markerMajaraMainMap = [];
+
+    var isHotelOnMainMap = 1;
+    var isAmakenOnMainMap = 1;
+    var isMajaraOnMainMap = 1;
+    var isRestaurantOnMainMap = [1, 1];
 
     function init() {
         var x = '{{$place->C}}';
@@ -100,11 +110,11 @@
         // We are using a div with id="map" seen below in the <body>
         var mapElementSmall = document.getElementById('map');
         // Create the Google Map using our element and options defined above
-        smallMap = new google.maps.Map(mapElementSmall, mapOptions);
+        mainMap = new google.maps.Map(mapElementSmall, mapOptions);
         // Let's also add a marker while we're at it smal map
         var marker = new google.maps.Marker({
             position: new google.maps.LatLng(x, y),
-            map: smallMap,
+            map: mainMap,
             title: place_name
         });
     }
@@ -122,23 +132,35 @@
                 response = JSON.parse(response);
                 nearPlacesMap = response[0];
 
-                createSwiperContent(response[1], 'article')
-                addMarkerToSmallMap(nearPlacesMap);
+                createSwiperContent(response[1], 'article');
+                addMarkerToMainMap(nearPlacesMap);
             }
         })
     }
     getNearby();
 
-    function addMarkerToSmallMap(nearPlacesMap){
+    function mySetMapMinMap(isSet, marker) {
+        if (isSet == 1) {
+            for (var i = 0; i < marker.length; i++) {
+                marker[i].setMap(mainMap);
+            }
+        }
+        else
+            for (var i = 0; i < marker.length; i++) {
+                marker[i].setMap(null);
+            }
+    }
+
+    function addMarkerToMainMap(nearPlacesMap){
         var marker;
         for(var i = 0; i < nearPlacesMap.length; i++){
 
             if(i == 0) {
                 var nearHotel = nearPlacesMap[i];
                 for(j = 0; j < nearHotel.length; j++){
-                    marker = new google.maps.Marker({
+                    markersHotelMainMap[j] = new google.maps.Marker({
                         position: new google.maps.LatLng(nearHotel[j].C, nearHotel[j].D),
-                        map: smallMap,
+                        map: mainMap,
                         title: nearHotel[j].name,
                         icon: {
                             url: icons.hotel,
@@ -146,27 +168,33 @@
                         }
                     });
                 }
-
                 //this function in similarLocation.blade.php file
                 createSwiperContent(nearPlacesMap[i], 'hotel');
             }
             else if(i == 1) {
                 var nearRestuarant = nearPlacesMap[i];
                 for(j = 0; j < nearRestuarant.length; j++) {
-                    if (nearRestuarant[i].kind_id == 1)
+                    if (nearRestuarant[j].kind_id == 1)
                         kindIcon = icons.rest;
                     else
                         kindIcon = icons.fastfood;
                     marker = new google.maps.Marker({
                         position: new google.maps.LatLng(nearRestuarant[j].C, nearRestuarant[j].D),
-                        map: smallMap,
+                        map: mainMap,
                         title: nearRestuarant[j].name,
                         icon: {
                             url: kindIcon,
                             scaledSize: new google.maps.Size(35, 35)
                         }
                     });
+                    if (nearRestuarant[j].kind_id == 1)
+                        markersRestMainMap[markersRestMainMap.length] = marker;
+                    else
+                        markersFastMainMap[markersFastMainMap.length] = marker;
+
                 }
+                console.log(markersFastMainMap);
+                console.log(markersRestMainMap);
 
                 //this function in similarLocation.blade.php file
                 createSwiperContent(nearPlacesMap[i], 'restuarant');
@@ -175,21 +203,21 @@
                 var nearAmaken = nearPlacesMap[i];
                 for(j = 0; j < nearAmaken.length; j++){
 
-                    if (nearAmaken[j].mooze == 1)
-                        kindIcon = icons.mus;
-                    else if (nearAmaken[j].tarikhi == 1)
+                    // if (nearAmaken[j].mooze == 1)
+                    //     kindIcon = icons.mus;
+                    // else if (nearAmaken[j].tarikhi == 1)
+                    //     kindIcon = icons.pla;
+                    // else if (nearAmaken[j].tabiatgardi == 1)
+                    //     kindIcon = icons.nat;
+                    // else if (nearAmaken[j].tafrihi == 1)
+                    //     kindIcon = icons.fun;
+                    // else if (nearAmaken[j].markazkharid == 1)
+                    //     kindIcon = icons.shc;
+                    // else
                         kindIcon = icons.pla;
-                    else if (nearAmaken[j].tabiatgardi == 1)
-                        kindIcon = icons.nat;
-                    else if (nearAmaken[j].tafrihi == 1)
-                        kindIcon = icons.fun;
-                    else if (nearAmaken[j].markazkharid == 1)
-                        kindIcon = icons.shc;
-                    else
-                        kindIcon = icons.pla;
-                    marker = new google.maps.Marker({
+                    markerAmakenMainMap[j] = new google.maps.Marker({
                         position: new google.maps.LatLng(nearAmaken[j].C, nearAmaken[j].D),
-                        map: smallMap,
+                        map: mainMap,
                         title: nearAmaken[j].name,
                         icon: {
                             url: kindIcon,
@@ -204,9 +232,9 @@
             else if(i == 3){
                 var nearMajara = nearPlacesMap[i];
                 for(j = 0; j < nearMajara.length; j++){
-                    marker = new google.maps.Marker({
+                    markerMajaraMainMap[j] = new google.maps.Marker({
                         position: new google.maps.LatLng(nearMajara[j].C, nearMajara[j].D),
-                        map: smallMap,
+                        map: mainMap,
                         title: nearMajara[j].name,
                         icon: {
                             url: icons.adv,
@@ -226,119 +254,63 @@
     }
 
     function toggleHotelsInMainMap(value) {
-        if (isHotelOn == value) {
+        if (isHotelOnMainMap == value) {
             document.getElementById('mainMapHotelImg').src = "{{URL::asset('images/mapIcon/mhoteloff.png')}}";
-            isHotelOn = 0;
-            mySetMap(isHotelOn, markersHotel);
+            isHotelOnMainMap = 0;
+            mySetMapMinMap(isHotelOnMainMap, markersHotelMainMap);
         }
         else {
             document.getElementById('mainMapHotelImg').src = "{{URL::asset('images/mapIcon/mhotel.png')}}";
-            isHotelOn = 1;
-            mySetMap(isHotelOn, markersHotel);
+            isHotelOnMainMap = 1;
+            mySetMapMinMap(isHotelOnMainMap, markersHotelMainMap);
         }
     }
-
     function toggleRestaurantsInMainMap(value) {
-        if (isRestaurantOn[0] == value) {
+        if (isRestaurantOnMainMap[0] == value) {
             document.getElementById('mainMapRestImg').src = "{{URL::asset('images/mapIcon/mrestoff.png')}}";
-            isRestaurantOn[0] = 0;
-            mySetMap(isRestaurantOn[0], markersRest);
+            isRestaurantOnMainMap[0] = 0;
+            mySetMapMinMap(isRestaurantOnMainMap[0], markersRestMainMap);
         }
         else {
             document.getElementById('mainMapRestImg').src = "{{URL::asset('images/mapIcon/mrest.png')}}";
-            isRestaurantOn[0] = 1;
-            mySetMap(isRestaurantOn[0], markersRest);
+            isRestaurantOnMainMap[0] = 1;
+            mySetMapMinMap(isRestaurantOnMainMap[0], markersRestMainMap);
         }
     }
-
     function toggleFastFoodsInMainMap(value) {
-        if (isRestaurantOn[1] == value) {
+        if (isRestaurantOnMainMap[1] == value) {
             document.getElementById('mainMapFastImg').src = "{{URL::asset('images/mapIcon/mfastoff.png')}}";
-            isRestaurantOn[1] = 0;
-            mySetMap(isRestaurantOn[1], markersFast);
+            isRestaurantOnMainMap[1] = 0;
+            mySetMapMinMap(isRestaurantOnMainMap[1], markersFastMainMap);
         }
         else {
             document.getElementById('mainMapFastImg').src = "{{URL::asset('images/mapIcon/mfast.png')}}";
-            isRestaurantOn[1] = 1;
-            mySetMap(isRestaurantOn[1], markersFast);
+            isRestaurantOnMainMap[1] = 1;
+            mySetMapMinMap(isRestaurantOnMainMap[1], markersFastMainMap);
         }
     }
-
-    function toggleMuseumsInMainMap(value) {
-        if (isAmakenOn[0] == value) {
-            document.getElementById('mainMapMusImg').src = "{{URL::asset('images/mapIcon/matr_musoff.png')}}";
-            isAmakenOn[0] = 0;
-            mySetMap(isAmakenOn[0], markersMus);
-        }
-        else {
-            document.getElementById('mainMapMusImg').src = "{{URL::asset('images/mapIcon/matr_mus.png')}}";
-            isAmakenOn[0] = 1;
-            mySetMap(isAmakenOn[0], markersMus);
-        }
-    }
-
-    function toggleHistoricalInMainMap(value) {
-        if (isAmakenOn[1] == value) {
+    function toggleAmakenInMainMap(value){
+        if (isAmakenOnMainMap == value) {
             document.getElementById('mainMapPlaImg').src = "{{URL::asset('images/mapIcon/matr_plaoff.png')}}";
-            isAmakenOn[1] = 0;
-            mySetMap(isAmakenOn[1], markersPla);
+            isAmakenOnMainMap = 0;
+            mySetMapMinMap(isAmakenOnMainMap, markerAmakenMainMap);
         }
         else {
             document.getElementById('mainMapPlaImg').src = "{{URL::asset('images/mapIcon/matr_pla.png')}}";
-            isAmakenOn[1] = 1;
-            mySetMap(isAmakenOn[1], markersPla);
+            isAmakenOnMainMap = 1;
+            mySetMapMinMap(isAmakenOnMainMap, markerAmakenMainMap);
         }
     }
-
-    function toggleShopCenterInMainMap(value) {
-        if (isAmakenOn[2] == value) {
-            document.getElementById('mainMapShcImg').src = "{{URL::asset('images/mapIcon/matr_shcoff.png')}}";
-            isAmakenOn[2] = 0;
-            mySetMap(isAmakenOn[2], markersShc);
-        }
-        else {
-            document.getElementById('mainMapShcImg').src = "{{URL::asset('images/mapIcon/matr_shc.png')}}";
-            isAmakenOn[2] = 1;
-            mySetMap(isAmakenOn[2], markersShc);
-        }
-    }
-
-    function toggleFunCenterInMainMap(value) {
-        if (isAmakenOn[3] == value) {
-            document.getElementById('mainMapFunImg').src = "{{URL::asset('images/mapIcon/matr_funoff.png')}}";
-            isAmakenOn[3] = 0;
-            mySetMap(isAmakenOn[3], markersFun);
-        }
-        else {
-            document.getElementById('mainMapFunImg').src = "{{URL::asset('images/mapIcon/matr_fun.png')}}";
-            isAmakenOn[3] = 1;
-            mySetMap(isAmakenOn[3], markersFun);
-        }
-    }
-
     function toggleMajaraCenterInMainMap(value) {
-        if (isAmakenOn[5] == value) {
+        if (isMajaraOnMainMap == value) {
             document.getElementById('mainMapAdvImg').src = "{{URL::asset('images/mapIcon/matr_advoff.png')}}";
-            isAmakenOn[5] = 0;
-            mySetMap(isAmakenOn[5], markersAdv);
+            isMajaraOnMainMap = 0;
+            mySetMapMinMap(isMajaraOnMainMap, markerMajaraMainMap);
         }
         else {
             document.getElementById('mainMapAdvImg').src = "{{URL::asset('images/mapIcon/matr_adv.png')}}";
-            isAmakenOn[5] = 1;
-            mySetMap(isAmakenOn[5], markersAdv);
-        }
-    }
-
-    function toggleNaturalsInMainMap(value) {
-        if (isAmakenOn[4] == value) {
-            document.getElementById('mainMapNatImg').src = "{{URL::asset('images/mapIcon/matr_natoff.png')}}";
-            isAmakenOn[4] = 0;
-            mySetMap(isAmakenOn[4], markersNat);
-        }
-        else {
-            document.getElementById('mainMapNatImg').src = "{{URL::asset('images/mapIcon/matr_nat.png')}}";
-            isAmakenOn[4] = 1;
-            mySetMap(isAmakenOn[4], markersNat);
+            isMajaraOnMainMap = 1;
+            mySetMapMinMap(isMajaraOnMainMap, markerMajaraMainMap);
         }
     }
 

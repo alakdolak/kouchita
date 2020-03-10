@@ -2839,60 +2839,6 @@ class HomeController extends Controller
         sendEmail($text, $subject, $to);
     }
 
-    public function exportExcel()
-    {
-//        $serverName = "localhost";
-//        $username = "root";
-//        $password = '';
-//        $dbName = "admin_shazde";
-//
-//        $conn = mysqli_connect($serverName, $username, $password);
-//
-//        $conn->set_charset("utf8");
-//        mysqli_select_db($conn, $dbName) or die("Connection failed: ");
-//
-//        $dbLink = $conn;
-//        $start = 0;
-//        $end = 50;
-
-        $alpha = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-        $cols = [];
-        for($i = 0; $i < count($alpha); $i++){
-            if($i == 0){
-                $cols = $alpha;
-            }
-            for($j = 0; $j < count($alpha); $j++)
-                array_push($cols, $alpha[$i].''.$alpha[$j]);
-        }
-        $rowNum = 1;
-        $places = Amaken::all()->toArray();
-        $spreadsheet = new Spreadsheet();
-        $sheet = $spreadsheet->getActiveSheet();
-        for ($i = 0; $i < count($places); $i++){
-            if($i == 0){
-                $j = 0;
-                foreach ($places[$i] as $key => $value){
-                    $cell = $cols[$j].(string)$rowNum;
-                    $sheet->setCellValue($cell, $key);
-                    $j++;
-                }
-                $rowNum++;
-            }
-            $j = 0;
-            foreach ($places[$i] as $key => $value){
-                $cell = $cols[$j].(string)$rowNum;
-                $sheet->setCellValue($cell, $value);
-                $j++;
-            }
-            $rowNum++;
-        }
-        $writer = new Xlsx($spreadsheet);
-        $writer->save('exportAmaken.xlsx');
-
-        dd('finniish');
-    }
-
-
     private function getCityReviews($kind, $id, $take, $notIn = []){
 
         $reviewActivity = Activity::whereName('نظر')->first();
@@ -3031,6 +2977,60 @@ class HomeController extends Controller
 
 
         return $places;
+    }
+
+
+    public function exportExcel()
+    {
+//        $serverName = "localhost";
+//        $username = "root";
+//        $password = '';
+//        $dbName = "admin_shazde";
+//
+//        $conn = mysqli_connect($serverName, $username, $password);
+//
+//        $conn->set_charset("utf8");
+//        mysqli_select_db($conn, $dbName) or die("Connection failed: ");
+//
+//        $dbLink = $conn;
+//        $start = 0;
+//        $end = 50;
+
+        $alpha = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+        $cols = [];
+        for($i = 0; $i < count($alpha); $i++){
+            if($i == 0){
+                $cols = $alpha;
+            }
+            for($j = 0; $j < count($alpha); $j++)
+                array_push($cols, $alpha[$i].''.$alpha[$j]);
+        }
+        $rowNum = 1;
+        $places = Amaken::all()->toArray();
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        for ($i = 0; $i < count($places); $i++){
+            if($i == 0){
+                $j = 0;
+                foreach ($places[$i] as $key => $value){
+                    $cell = $cols[$j].(string)$rowNum;
+                    $sheet->setCellValue($cell, $key);
+                    $j++;
+                }
+                $rowNum++;
+            }
+            $j = 0;
+            foreach ($places[$i] as $key => $value){
+                $cell = $cols[$j].(string)$rowNum;
+                $sheet->setCellValue($cell, $value);
+                $j++;
+            }
+            $rowNum++;
+        }
+        $writer = new Xlsx($spreadsheet);
+        $writer->save('exportAmaken.xlsx');
+
+        dd('finniish');
     }
 }
 

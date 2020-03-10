@@ -21,6 +21,7 @@ if ($total == 0)
     @endif
     <meta content="article" property="og:type"/>
     <meta property="og:title" content="{{$place->name}} | {{$city->name}} | کوچیتا"/>
+    <meta property="title" content="{{$place->name}} | {{$city->name}} | کوچیتا"/>
     <meta name="twitter:card" content="{{$place->meta}}" />
     <meta name="twitter:description" content="{{$place->meta}}" />
     <meta name="twitter:title" content="{{$place->name}} | {{$city->name}} | کوچیتا" />
@@ -1074,7 +1075,7 @@ if ($total == 0)
 
                                                 <div id="detailsAndFeaturesMobile"
                                                      class="ui_column is-4 details tabContent {{$mainInfoClass}}">
-                                                    <div class="direction-rtl">
+                                                    <div class="direction-rtl featureOfPlaceMiddleContent row" style="margin: 0px">
                                                         @include('hotel-details.tables.mahalifood-details-table')
                                                     </div>
                                                 </div>
@@ -1083,107 +1084,112 @@ if ($total == 0)
                                                     <div class="block_header">
                                                         <h3 class="block_title">دستور پخت:</h3>
                                                     </div>
-                                                    <div>
-                                                        <div class="overviewContent" id="introductionText">{!! $place->recipes !!}</div>
+                                                    <div class="toggleDescription" style="position: relative">
+                                                        <div class="overviewContent descriptionOfPlaceMiddleContent" id="introductionText">
+                                                            {!! $place->recipes !!}
+                                                        </div>
+                                                        <span class="showMoreDescriptionInDetails"></span>
                                                     </div>
                                                 </div>
 
-                                                <div id="commentsAndAddressMobile"
-                                                     class="ui_column is-4 reviews tabContent">
-                                                    <div class="rating">
-                                                        <div class="block_header">
-                                                            <h3 class="block_title">نظر شما </h3>
+                                                <div id="commentsAndAddressMobile" class="ui_column is-4 reviews tabContent">
+                                                    <div class="rateOfPlaceMiddleContent">
+                                                        <div class="rating">
+                                                            <div class="block_header">
+                                                                <h3 class="block_title">نظر شما </h3>
+                                                            </div>
+                                                            <span class="overallRating">{{$avgRate}} </span>
+                                                            <div class="prw_rup prw_common_bubble_rating overallBubbleRating">
+                                                                <span class="ui_bubble_rating bubble_{{$avgRate}}0 font-size-28"
+                                                                      property="ratingValue" content="{{$avgRate}}"
+                                                                      alt='{{$avgRate}} of 5 bubbles'></span>
+                                                            </div>
+                                                            <a class="seeAllReviews autoResize" href="#REVIEWS"></a>
                                                         </div>
-                                                        <span class="overallRating">{{$avgRate}} </span>
-                                                        <div class="prw_rup prw_common_bubble_rating overallBubbleRating">
-                                                            <span class="ui_bubble_rating bubble_{{$avgRate}}0 font-size-28"
-                                                                  property="ratingValue" content="{{$avgRate}}"
-                                                                  alt='{{$avgRate}} of 5 bubbles'></span>
+                                                        <div class="prw_rup prw_common_ratings_histogram_overview overviewHistogram">
+                                                            <ul class="ratings_chart">
+                                                                <li class="chart_row highlighted clickable">
+                                                                    <span class="row_label row_cell">عالی</span>
+                                                                    <span class="row_bar row_cell">
+                                                                    <span class="bar">
+                                                                        <span class="fill"
+                                                                              style="width: {{ceil($rates[4] * 100 / $total)}}%;"></span>
+                                                                    </span>
+                                                                </span>
+                                                                    <span class="row_count row_cell">{{ceil($rates[4] * 100 / $total)}}
+                                                                        %</span>
+                                                                </li>
+                                                                <li class="chart_row clickable">
+                                                                    <span class="row_label row_cell">خوب</span>
+                                                                    <span class="row_bar row_cell">
+                                                                    <span class="bar">
+                                                                        <span class="fill"
+                                                                              style="width:{{ceil($rates[3] * 100 / $total)}}%;"></span>
+                                                                    </span>
+                                                                </span>
+                                                                    <span class="row_count row_cell">{{ceil($rates[3] * 100 / $total)}}
+                                                                        %</span>
+                                                                </li>
+                                                                <li class="chart_row clickable">
+                                                                    <span class="row_label row_cell">معمولی</span>
+                                                                    <span class="row_bar row_cell">
+                                                                    <span class="bar">
+                                                                        <span class="fill"
+                                                                              style="width:{{ceil($rates[2] * 100 / $total)}}%;"></span>
+                                                                    </span>
+                                                                </span>
+                                                                    <span class="row_count row_cell">{{ceil($rates[2] * 100 / $total)}}
+                                                                        %</span>
+                                                                </li>
+                                                                <li class="chart_row clickable">
+                                                                    <span class="row_label row_cell">ضعیف</span>
+                                                                    <span class="row_bar row_cell">
+                                                                    <span class="bar">
+                                                                        <span class="fill"
+                                                                              style="width:{{ceil($rates[1] * 100 / $total)}}%;"></span>
+                                                                    </span>
+                                                                </span>
+                                                                    <span class="row_count row_cell">{{ceil($rates[1] * 100 / $total)}}
+                                                                        %</span>
+                                                                </li>
+                                                                <li class="chart_row">
+                                                                    <span class="row_label row_cell">خیلی بد </span>
+                                                                    <span class="row_bar row_cell">
+                                                                    <span class="bar">
+                                                                        <span class="fill"
+                                                                              style="width:{{ceil($rates[0] * 100 / $total)}}%;"></span>
+                                                                    </span>
+                                                                </span>
+                                                                    <span class="row_count row_cell">{{ceil($rates[0] * 100 / $total)}}
+                                                                        %</span>
+                                                                </li>
+                                                            </ul>
                                                         </div>
-                                                        <a class="seeAllReviews autoResize" href="#REVIEWS"></a>
-                                                    </div>
-                                                    <div class="prw_rup prw_common_ratings_histogram_overview overviewHistogram">
-                                                        <ul class="ratings_chart">
-                                                            <li class="chart_row highlighted clickable">
-                                                                <span class="row_label row_cell">عالی</span>
-                                                                <span class="row_bar row_cell">
-                                                                <span class="bar">
-                                                                    <span class="fill"
-                                                                          style="width: {{ceil($rates[4] * 100 / $total)}}%;"></span>
-                                                                </span>
-                                                            </span>
-                                                                <span class="row_count row_cell">{{ceil($rates[4] * 100 / $total)}}
-                                                                    %</span>
-                                                            </li>
-                                                            <li class="chart_row clickable">
-                                                                <span class="row_label row_cell">خوب</span>
-                                                                <span class="row_bar row_cell">
-                                                                <span class="bar">
-                                                                    <span class="fill"
-                                                                          style="width:{{ceil($rates[3] * 100 / $total)}}%;"></span>
-                                                                </span>
-                                                            </span>
-                                                                <span class="row_count row_cell">{{ceil($rates[3] * 100 / $total)}}
-                                                                    %</span>
-                                                            </li>
-                                                            <li class="chart_row clickable">
-                                                                <span class="row_label row_cell">معمولی</span>
-                                                                <span class="row_bar row_cell">
-                                                                <span class="bar">
-                                                                    <span class="fill"
-                                                                          style="width:{{ceil($rates[2] * 100 / $total)}}%;"></span>
-                                                                </span>
-                                                            </span>
-                                                                <span class="row_count row_cell">{{ceil($rates[2] * 100 / $total)}}
-                                                                    %</span>
-                                                            </li>
-                                                            <li class="chart_row clickable">
-                                                                <span class="row_label row_cell">ضعیف</span>
-                                                                <span class="row_bar row_cell">
-                                                                <span class="bar">
-                                                                    <span class="fill"
-                                                                          style="width:{{ceil($rates[1] * 100 / $total)}}%;"></span>
-                                                                </span>
-                                                            </span>
-                                                                <span class="row_count row_cell">{{ceil($rates[1] * 100 / $total)}}
-                                                                    %</span>
-                                                            </li>
-                                                            <li class="chart_row">
-                                                                <span class="row_label row_cell">خیلی بد </span>
-                                                                <span class="row_bar row_cell">
-                                                                <span class="bar">
-                                                                    <span class="fill"
-                                                                          style="width:{{ceil($rates[0] * 100 / $total)}}%;"></span>
-                                                                </span>
-                                                            </span>
-                                                                <span class="row_count row_cell">{{ceil($rates[0] * 100 / $total)}}
-                                                                    %</span>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div id="tagsName">
+                                                        <div id="tagsName">
                                                         <h3>برچسب‌ها:</h3>
                                                         @foreach($place->tags as $item)
                                                             <span class="tag">{{$item}}</span>
                                                         @endforeach
+                                                    </div>
                                                     </div>
                                                 </div>
 
                                             </div>
                                         @else
                                             <div class="ui_columns is-multiline is-mobile reviewsAndDetails direction-rtlImp">
-                                                <div id="generalDescriptionMobile"
-                                                     class="ui_column is-{{$showInfo}} generalDescription tabContent">
+                                                <div id="generalDescriptionMobile" class="ui_column is-{{$showInfo}} generalDescription tabContent">
                                                     <div class="block_header">
                                                         <h3 class="block_title">معرفی کلی </h3>
                                                     </div>
-                                                    <div>
-                                                        <div class="overviewContent" id="introductionText">{!! $place->description !!}</div>
+                                                    <div class="toggleDescription" style="position: relative">
+                                                        <div class="overviewContent descriptionOfPlaceMiddleContent" id="introductionText">
+                                                            {!! $place->description !!}
+                                                        </div>
+                                                        <span class="showMoreDescriptionInDetails"></span>
                                                     </div>
                                                 </div>
-                                                <div id="detailsAndFeaturesMobile"
-                                                     class="ui_column is-{{$showFeatures}} details tabContent {{$mainInfoClass}}">
-                                                    <div class="direction-rtl">
+                                                <div id="detailsAndFeaturesMobile" class="ui_column is-{{$showFeatures}} details tabContent {{$mainInfoClass}} featureOfPlaceMiddle">
+                                                    <div class="direction-rtl featureOfPlaceMiddleContent row" style="margin: 0px">
                                                         <?php $k = -1; ?>
 
                                                         @if($placeMode == "hotels")
@@ -1199,115 +1205,116 @@ if ($total == 0)
                                                         @endif
                                                     </div>
                                                 </div>
-                                                <div id="commentsAndAddressMobile"
-                                                     class="ui_column is-{{$showReviewRate}} reviews tabContent">
-                                                    <div class="rating">
-                                                        <div class="block_header">
-                                                            <h3 class="block_title">نظر شما </h3>
+                                                <div id="commentsAndAddressMobile" class="ui_column is-{{$showReviewRate}} reviews tabContent rateOfPlaceMiddle">
+                                                    <div class="rateOfPlaceMiddleContent row" style="margin: 0px;">
+                                                        <div class="rating">
+                                                            <div class="block_header">
+                                                                <h3 class="block_title">نظر شما </h3>
+                                                            </div>
+                                                            <span class="overallRating">{{$avgRate}} </span>
+                                                            <div class="prw_rup prw_common_bubble_rating overallBubbleRating">
+                                                                <span class="ui_bubble_rating bubble_{{$avgRate}}0 font-size-28" property="ratingValue" content="{{$avgRate}}" alt='{{$avgRate}} of 5 bubbles'></span>
+                                                            </div>
+                                                            <a class="seeAllReviews autoResize" href="#REVIEWS"></a>
                                                         </div>
-                                                        <span class="overallRating">{{$avgRate}} </span>
-                                                        <div class="prw_rup prw_common_bubble_rating overallBubbleRating">
-                                                            <span class="ui_bubble_rating bubble_{{$avgRate}}0 font-size-28" property="ratingValue" content="{{$avgRate}}" alt='{{$avgRate}} of 5 bubbles'></span>
+                                                        <div class="prw_rup prw_common_ratings_histogram_overview overviewHistogram">
+                                                            <ul class="ratings_chart">
+                                                                <li class="chart_row highlighted clickable">
+                                                                    <span class="row_label row_cell">عالی</span>
+                                                                    <span class="row_bar row_cell">
+                                                                    <span class="bar">
+                                                                        <span class="fill"
+                                                                              style="width: {{ceil($rates[4] * 100 / $total)}}%;"></span>
+                                                                    </span>
+                                                                </span>
+                                                                    <span class="row_count row_cell">{{ceil($rates[4] * 100 / $total)}}
+                                                                        %</span>
+                                                                </li>
+                                                                <li class="chart_row clickable">
+                                                                    <span class="row_label row_cell">خوب</span>
+                                                                    <span class="row_bar row_cell">
+                                                                    <span class="bar">
+                                                                        <span class="fill"
+                                                                              style="width:{{ceil($rates[3] * 100 / $total)}}%;"></span>
+                                                                    </span>
+                                                                </span>
+                                                                    <span class="row_count row_cell">{{ceil($rates[3] * 100 / $total)}}
+                                                                        %</span>
+                                                                </li>
+                                                                <li class="chart_row clickable">
+                                                                    <span class="row_label row_cell">معمولی</span>
+                                                                    <span class="row_bar row_cell">
+                                                                    <span class="bar">
+                                                                        <span class="fill"
+                                                                              style="width:{{ceil($rates[2] * 100 / $total)}}%;"></span>
+                                                                    </span>
+                                                                </span>
+                                                                    <span class="row_count row_cell">{{ceil($rates[2] * 100 / $total)}}
+                                                                        %</span>
+                                                                </li>
+                                                                <li class="chart_row clickable">
+                                                                    <span class="row_label row_cell">ضعیف</span>
+                                                                    <span class="row_bar row_cell">
+                                                                    <span class="bar">
+                                                                        <span class="fill"
+                                                                              style="width:{{ceil($rates[1] * 100 / $total)}}%;"></span>
+                                                                    </span>
+                                                                </span>
+                                                                    <span class="row_count row_cell">{{ceil($rates[1] * 100 / $total)}}
+                                                                        %</span>
+                                                                </li>
+                                                                <li class="chart_row">
+                                                                    <span class="row_label row_cell">خیلی بد </span>
+                                                                    <span class="row_bar row_cell">
+                                                                    <span class="bar">
+                                                                        <span class="fill"
+                                                                              style="width:{{ceil($rates[0] * 100 / $total)}}%;"></span>
+                                                                    </span>
+                                                                </span>
+                                                                    <span class="row_count row_cell">{{ceil($rates[0] * 100 / $total)}}
+                                                                        %</span>
+                                                                </li>
+                                                            </ul>
                                                         </div>
-                                                        <a class="seeAllReviews autoResize" href="#REVIEWS"></a>
-                                                    </div>
-                                                    <div class="prw_rup prw_common_ratings_histogram_overview overviewHistogram">
-                                                        <ul class="ratings_chart">
-                                                            <li class="chart_row highlighted clickable">
-                                                                <span class="row_label row_cell">عالی</span>
-                                                                <span class="row_bar row_cell">
-                                                                <span class="bar">
-                                                                    <span class="fill"
-                                                                          style="width: {{ceil($rates[4] * 100 / $total)}}%;"></span>
-                                                                </span>
-                                                            </span>
-                                                                <span class="row_count row_cell">{{ceil($rates[4] * 100 / $total)}}
-                                                                    %</span>
-                                                            </li>
-                                                            <li class="chart_row clickable">
-                                                                <span class="row_label row_cell">خوب</span>
-                                                                <span class="row_bar row_cell">
-                                                                <span class="bar">
-                                                                    <span class="fill"
-                                                                          style="width:{{ceil($rates[3] * 100 / $total)}}%;"></span>
-                                                                </span>
-                                                            </span>
-                                                                <span class="row_count row_cell">{{ceil($rates[3] * 100 / $total)}}
-                                                                    %</span>
-                                                            </li>
-                                                            <li class="chart_row clickable">
-                                                                <span class="row_label row_cell">معمولی</span>
-                                                                <span class="row_bar row_cell">
-                                                                <span class="bar">
-                                                                    <span class="fill"
-                                                                          style="width:{{ceil($rates[2] * 100 / $total)}}%;"></span>
-                                                                </span>
-                                                            </span>
-                                                                <span class="row_count row_cell">{{ceil($rates[2] * 100 / $total)}}
-                                                                    %</span>
-                                                            </li>
-                                                            <li class="chart_row clickable">
-                                                                <span class="row_label row_cell">ضعیف</span>
-                                                                <span class="row_bar row_cell">
-                                                                <span class="bar">
-                                                                    <span class="fill"
-                                                                          style="width:{{ceil($rates[1] * 100 / $total)}}%;"></span>
-                                                                </span>
-                                                            </span>
-                                                                <span class="row_count row_cell">{{ceil($rates[1] * 100 / $total)}}
-                                                                    %</span>
-                                                            </li>
-                                                            <li class="chart_row">
-                                                                <span class="row_label row_cell">خیلی بد </span>
-                                                                <span class="row_bar row_cell">
-                                                                <span class="bar">
-                                                                    <span class="fill"
-                                                                          style="width:{{ceil($rates[0] * 100 / $total)}}%;"></span>
-                                                                </span>
-                                                            </span>
-                                                                <span class="row_count row_cell">{{ceil($rates[0] * 100 / $total)}}
-                                                                    %</span>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="prw_rup prw_common_atf_header_bl"
-                                                         id="clientConnectionsLines">
-                                                        <div class="blEntry address mg-bt-10" id="clientConnectionsAddress">
-                                                            <span class="ui_icon map-pin"></span>
-                                                            @if($placeMode != 'mahaliFood' && $placeMode != 'sogatSanaies' && $placeMode != 'majara')
-                                                                <span class="street-address">آدرس : </span>
-                                                                <span>{{$place->address}}</span>
-                                                            @elseif( $placeMode == 'majara')
-                                                                <span class="street-address">آدرس : </span>
-                                                                <span>{{$place->dastresi}}</span>
+                                                        <div class="prw_rup prw_common_atf_header_bl"
+                                                             id="clientConnectionsLines">
+                                                            <div class="blEntry address mg-bt-10" id="clientConnectionsAddress">
+                                                                <span class="ui_icon map-pin"></span>
+                                                                @if($placeMode != 'mahaliFood' && $placeMode != 'sogatSanaies' && $placeMode != 'majara')
+                                                                    <span class="street-address">آدرس : </span>
+                                                                    <span>{{$place->address}}</span>
+                                                                @elseif( $placeMode == 'majara')
+                                                                    <span class="street-address">آدرس : </span>
+                                                                    <span>{{$place->dastresi}}</span>
+                                                                @endif
+                                                            </div>
+                                                            @if(!empty($place->phone))
+                                                                <div class="blEntry phone mg-bt-10" id="clientConnectionsPhone">
+                                                                    <span class="ui_icon phone"></span>
+                                                                    <a href="tel:{{$place->phone}}" >{{$place->phone}}</a>
+                                                                </div>
+                                                            @endif
+                                                            @if(!empty($place->site))
+                                                                <div class="blEntry website mg-bt-10"
+                                                                     id="clientConnectionsWebsite">
+                                                                    <span class="ui_icon laptop"></span>
+                                                                    <?php
+                                                                    if (strpos($place->site, 'http') === false)
+                                                                        $place->site = 'http://' . $place->site;
+                                                                    ?>
+                                                                    <a target="_blank"
+                                                                       href="{{$place->site}}" {{($config->externalSiteNoFollow) ? 'rel="nofollow"' : ''}}>
+                                                                        <span class="font-size-12">{{$place->site}}</span>
+                                                                    </a>
+                                                                </div>
                                                             @endif
                                                         </div>
-                                                        @if(!empty($place->phone))
-                                                            <div class="blEntry phone mg-bt-10" id="clientConnectionsPhone">
-                                                                <span class="ui_icon phone"></span>
-                                                                <a href="tel:{{$place->phone}}" >{{$place->phone}}</a>
-                                                            </div>
-                                                        @endif
-                                                        @if(!empty($place->site))
-                                                            <div class="blEntry website mg-bt-10"
-                                                                 id="clientConnectionsWebsite">
-                                                                <span class="ui_icon laptop"></span>
-                                                                <?php
-                                                                if (strpos($place->site, 'http') === false)
-                                                                    $place->site = 'http://' . $place->site;
-                                                                ?>
-                                                                <a target="_blank"
-                                                                   href="{{$place->site}}" {{($config->externalSiteNoFollow) ? 'rel="nofollow"' : ''}}>
-                                                                    <span class="font-size-12">{{$place->site}}</span>
-                                                                </a>
-                                                            </div>
-                                                        @endif
-                                                    </div>
-                                                    <div id="tagsName">
-                                                        <h3>برچسب‌ها:</h3>
-                                                        @foreach($place->tags as $item)
-                                                            <span class="tag">{{$item}}</span>
-                                                        @endforeach
+                                                        <div id="tagsName">
+                                                            <h3>برچسب‌ها:</h3>
+                                                            @foreach($place->tags as $item)
+                                                                <span class="tag">{{$item}}</span>
+                                                            @endforeach
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1714,7 +1721,6 @@ if ($total == 0)
 
         <script>
             $(document).ready(function() {
-
                 if($(window).width() < 630) {
                     $('.tabLinkMainWrapMainDivMobile').affix({offset: {top: 930}});
                 }
@@ -1753,11 +1759,53 @@ if ($total == 0)
     @include('hotelDetailsPopUp')
 
     <script>
+        var heightOfDescription = $('.descriptionOfPlaceMiddleContent').height();
+        var heightOfFeature = $('.featureOfPlaceMiddleContent').height();
+        var heightOfContent = $('.rateOfPlaceMiddleContent').height();
+        var minHeightOfConent = [heightOfDescription, heightOfFeature, heightOfContent];
+        var sortHeightOfContent = minHeightOfConent.sort(function(a, b){return a - b});
+        var selectedHegihtForDescription = sortHeightOfContent[1] - 50;
+
+        if(heightOfDescription > selectedHegihtForDescription)
+            $('.descriptionOfPlaceMiddleContent').css('max-height', selectedHegihtForDescription + 'px');
+        else
+            $('.showMoreDescriptionInDetails').css('display', 'none');
+
+        @if($kindPlaceId == 4)
+            selectedHegihtForDescription = 305;
+        @endif
+
+        $('.descriptionOfPlaceMiddleContent').css('max-height', selectedHegihtForDescription + 'px');
+
+        var showFullDescription = false;
+        function toggleMainDescription(){
+            if(showFullDescription){
+                $('.descriptionOfPlaceMiddleContent').css('max-height', selectedHegihtForDescription + 'px');
+                @if($placeMode != 'mahaliFood')
+                    $('.generalDescription').css('width', '');
+                    $('.featureOfPlaceMiddle').css('width', '');
+                    $('.rateOfPlaceMiddle').css('width', '');
+                @endif
+                showFullDescription = false;
+            }
+            else{
+                $('.descriptionOfPlaceMiddleContent').css('max-height', '20000px');
+                @if($placeMode != 'mahaliFood')
+                    $('.generalDescription').css('width', '100%');
+                    $('.featureOfPlaceMiddle').css('width', '50%');
+                    $('.rateOfPlaceMiddle').css('width', '50%');
+                @endif
+                showFullDescription = true;
+            }
+        }
+
+        $('.showMoreDescriptionInDetails').on('click', toggleMainDescription);
+        $('.descriptionOfPlaceMiddleContent').on('click', toggleMainDescription);
 
         function isPhotographer(){
             if(!checkLogin())
                 return;
-            
+
             //additionalData must be json format
             additionalData = {
                 'placeId' : '{{$place->id}}',

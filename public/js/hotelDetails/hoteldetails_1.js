@@ -222,9 +222,6 @@ function uploadReviewPics(input){
             '<input type="hidden" id="fileName_' + reviewPicNumber + '" >\n' +
             '<div class="deleteUploadPhotoComment" onclick="deleteUploadedReviewFile(' + reviewPicNumber + ')"></div>\n' +
             '<div class="editUploadPhotoComment" onclick="openEditReviewPic(' + reviewPicNumber + ')"></div>\n' +
-            // '<div class="progress">\n' +
-            // '<div id="progressBarReviewPic' + reviewPicNumber + '" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>\n' +
-            // '</div>\n' +
             '</div>';
         $('#reviewShowPics').append(text);
 
@@ -310,9 +307,6 @@ function uploadReviewVideo(input, _is360){
         '<input type="hidden" id="fileName_' + reviewPicNumber + '" >\n' +
         '<div class="deleteUploadPhotoComment" onclick="deleteUploadedReviewFile(' + reviewPicNumber + ')"></div>\n' +
         '<div class="videoTimeDuration" id="videoDuration_' + reviewPicNumber + '"></div>\n' +
-        // '<div class="progress">\n' +
-        // '<div id="progressBarReviewPic' + reviewPicNumber + '" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>\n' +
-        // '</div>\n' +
         '</div>';
     $('#reviewShowPics').append(text);
 
@@ -355,6 +349,7 @@ function uploadReviewVideo(input, _is360){
             canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
             var image = canvas.toDataURL();
             var success = image.length > 100000;
+            var lastNumber = reviewPicNumber;
 
             if (success) {
                 var img = document.getElementById('showPic' + lastNumber);
@@ -362,6 +357,7 @@ function uploadReviewVideo(input, _is360){
                 URL.revokeObjectURL(url);
                 data.append('videoPic', image);
 
+                var uploadReviewPicLoader = $('#reviewPicLoader_' + reviewPicNumber);
                 $.ajax({
                     type: 'post',
                     url: reviewUploadVideo,
@@ -377,6 +373,16 @@ function uploadReviewVideo(input, _is360){
                             if (e.lengthComputable) {
                                 percent = Math.round((e.loaded / e.total) * 100);
                                 percentage = percent + '%';
+                                size = 160 - (percent * 1.6);
+                                size += 'px';
+
+                                leftBottom = (percent * 1.6)/2 - 30;
+                                leftBottom += 'px';
+                                uploadReviewPicLoader.css('width', size);
+                                uploadReviewPicLoader.css('height', size);
+
+                                uploadReviewPicLoader.css('left', leftBottom);
+                                uploadReviewPicLoader.css('bottom', leftBottom);
                             }
                         };
 

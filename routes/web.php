@@ -943,7 +943,6 @@ Route::get('emailtest', 'HomeController@emailtest');
 
 Route::get('exportToExcelTT', 'HomeController@exportExcel');
 
-
 // not use
 Route::group(array('middleware' => 'nothing'), function () {
     Route::any('majaraList/{city}/{mode}', array('as' => 'majaraList', 'uses' => 'NotUseController@showMajaraList'));
