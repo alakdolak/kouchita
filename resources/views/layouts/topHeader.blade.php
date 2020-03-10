@@ -15,8 +15,8 @@
 
 <script src="{{URL::asset('js/jQuery.js')}}"></script>
 <script src="{{URL::asset('js/angular.js')}}"></script>
-<script src="https://apis.google.com/js/platform.js" async defer></script>
 
+<script src="https://apis.google.com/js/platform.js" async defer></script>
 <meta name="google-signin-scope" content="profile email">
 <meta name="google-signin-client_id" content="774684902659-20aeg6um0856j5li2uuu9ombu2pcbqv9.apps.googleusercontent.com">
 

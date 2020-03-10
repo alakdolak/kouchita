@@ -428,7 +428,7 @@ $authUrl = $client->createAuthUrl();
                         },
                         success: function (response) {
                             if (response == "ok") {
-                                document.location.href = '{{route('main')}}';
+                                document.location.reload();
                             }
                         }
                     });
@@ -677,48 +677,50 @@ $authUrl = $client->createAuthUrl();
         <img class="loginMainLogo" src="{{URL::asset('images/icons/mainIcon.svg')}}">
     </div>
     <div class="col-xs-12 rtl mainContentInfos">
-        <div class="loginDividerBorder col-xs-6">
-            <div class="header_text font-size-14Imp">در حال حاضر عضو کوچیتا هستید؟!</div>
-            <div>
-                <div>
-                    <label class="full-width">
-                        <span class="pd-tp-8 inputLabelText"> نام کاربری </span>
-                        <input class="loginInputTemp" type="text" id="username_email" maxlength="40" required autofocus>
-                    </label>
-                </div>
-                <div>
-                    <label class="full-width">
-                        <span class="pd-tp-8 inputLabelText">رمز عبور</span>
-                        <input class="loginInputTemp password" type="password" id="password_email" maxlength="40" required>
-                        <a class="forgetPassLink" onclick="ShowForgetPass()">رمز عبور خود را فراموش کردید؟</a>
-                    </label>
-                </div>
-            </div>
-            <div class="pd-tp-8">
-                <button onclick="login($('#username_email').val(), $('#password_email').val())" class="loginSubBtn btn btn-info active">ورود</button>
-                <p id="loginErr"></p>
-            </div>
-        </div>
-        <div class="col-xs-6">
+        {{--<div class="loginDividerBorder col-xs-6">--}}
+            {{--<div class="header_text font-size-14Imp">در حال حاضر عضو کوچیتا هستید؟!</div>--}}
+            {{--<div>--}}
+                {{--<div>--}}
+                    {{--<label class="full-width">--}}
+                        {{--<span class="pd-tp-8 inputLabelText"> نام کاربری </span>--}}
+                        {{--<input class="loginInputTemp" type="text" id="username_email" maxlength="40" required autofocus>--}}
+                    {{--</label>--}}
+                {{--</div>--}}
+                {{--<div>--}}
+                    {{--<label class="full-width">--}}
+                        {{--<span class="pd-tp-8 inputLabelText">رمز عبور</span>--}}
+                        {{--<input class="loginInputTemp password" type="password" id="password_email" maxlength="40" required>--}}
+                        {{--<a class="forgetPassLink" onclick="ShowForgetPass()">رمز عبور خود را فراموش کردید؟</a>--}}
+                    {{--</label>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+            {{--<div class="pd-tp-8">--}}
+                {{--<button onclick="login($('#username_email').val(), $('#password_email').val())" class="loginSubBtn btn btn-info active">ورود</button>--}}
+                {{--<p id="loginErr"></p>--}}
+            {{--</div>--}}
+        {{--</div>--}}
+        <div class="col-xs-12">
             <div class="header_text font-size-14Imp">عضو شوید:</div>
             <div>
                 <div>
-                    <label class="full-width">
-                        <span class="pd-tp-8 inputLabelText"> آدرس ایمیل </span>
+                    <label class="full-width" style="display: flex; align-items: center;">
+                        <span class="pd-tp-8 inputLabelText" style="width: 15%"> آدرس ایمیل </span>
                         <input class="loginInputTemp" type="email" id="email" maxlength="40" required autofocus>
                     </label>
                 </div>
                 <div>
-                    <label class="full-width">
-                        <span class="pd-tp-8 inputLabelText">رمز عبور</span>
+                    <label class="full-width" style="display: flex; align-items: center;">
+                        <span class="pd-tp-8 inputLabelText" style="width: 15%">رمز عبور</span>
                         <input class="loginInputTemp" type="password" id="password_In_Email_registry" maxlength="40" required>
                     </label>
                 </div>
             </div>
             <div class="pd-tp-8">
-                <button type="button" onclick="showLoginUsername()" class="loginSubBtn btn btn-info active">ثبت</button>
-                <button type="button" onclick="Return()" class="loginReturnBtn btn btn-default">بازگشت</button>
-                <p id="loginErrEmail"></p>
+                <p id="loginErrEmail" style="text-align: center"></p>
+                <div style="display: flex; justify-content: center">
+                    <button type="button" onclick="showLoginUsername()" class="loginSubBtn btn btn-info active" style="margin-left: 10px">ثبت</button>
+                    <button type="button" onclick="Return()" class="loginReturnBtn btn btn-default">بازگشت</button>
+                </div>
             </div>
         </div>
     </div>
@@ -731,29 +733,29 @@ $authUrl = $client->createAuthUrl();
         <img class="loginMainLogo" src="{{URL::asset('images/icons/mainIcon.svg')}}">
     </div>
     <div class="col-xs-12 rtl mainContentInfos">
-        <div class="loginDividerBorder col-xs-6">
-            <div class="header_text font-size-14Imp">در حال حاضر عضو کوچیتا هستید؟!</div>
-            <div>
-                <div>
-                    <label class="full-width">
-                        <span class="pd-tp-8"> نام کاربری </span>
-                        <input class="loginInputTemp" type="text" id="username_phone" maxlength="40" required autofocus>
-                    </label>
-                </div>
-                <div>
-                    <label class="full-width">
-                        <span>رمز عبور</span>
-                        <input type="password" id="password_phone" class="loginInputTemp password" maxlength="40" required>
-                        <a class="forgetPassLink" onclick="ShowForgetPass()">رمز عبور خود را فراموش کردید؟</a>
-                    </label>
-                </div>
-            </div>
-            <div class="pd-tp-8">
-                <button onclick="login($('#username_phone').val(), $('#password_phone').val())" class="loginSubBtn btn btn-info active">ورود</button>
-                <p id="loginErr"></p>
-            </div>
-        </div>
-        <div class="col-xs-6">
+        {{--<div class="loginDividerBorder col-xs-6">--}}
+            {{--<div class="header_text font-size-14Imp">در حال حاضر عضو کوچیتا هستید؟!</div>--}}
+            {{--<div>--}}
+                {{--<div>--}}
+                    {{--<label class="full-width">--}}
+                        {{--<span class="pd-tp-8"> نام کاربری </span>--}}
+                        {{--<input class="loginInputTemp" type="text" id="username_phone" maxlength="40" required autofocus>--}}
+                    {{--</label>--}}
+                {{--</div>--}}
+                {{--<div>--}}
+                    {{--<label class="full-width">--}}
+                        {{--<span>رمز عبور</span>--}}
+                        {{--<input type="password" id="password_phone" class="loginInputTemp password" maxlength="40" required>--}}
+                        {{--<a class="forgetPassLink" onclick="ShowForgetPass()">رمز عبور خود را فراموش کردید؟</a>--}}
+                    {{--</label>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+            {{--<div class="pd-tp-8">--}}
+                {{--<button onclick="login($('#username_phone').val(), $('#password_phone').val())" class="loginSubBtn btn btn-info active">ورود</button>--}}
+                {{--<p id="loginErr"></p>--}}
+            {{--</div>--}}
+        {{--</div>--}}
+        <div class="col-xs-12">
             <div class="header_text font-size-14Imp">عضو شوید:</div>
             <div>
                 <div>
@@ -764,9 +766,11 @@ $authUrl = $client->createAuthUrl();
                 </div>
             </div>
             <div class="pd-tp-8">
-                <button type="button" onclick="showLoginCode()" class="loginSubBtn btn btn-info active">ثبت</button>
-                <button type="button" onclick="Return()" class="loginReturnBtn btn btn-default">بازگشت</button>
-                <p id="loginErrPhonePass1"></p>
+                <p id="loginErrPhonePass1" style="color: #963019; text-align: center"></p>
+                <div style="display: flex; justify-content: center;">
+                    <button type="button" onclick="showLoginCode()" class="loginSubBtn btn btn-info active" style="margin-left: 10px;">ثبت</button>
+                    <button type="button" onclick="Return()" class="loginReturnBtn btn btn-default">بازگشت</button>
+                </div>
             </div>
         </div>
     </div>
@@ -779,29 +783,29 @@ $authUrl = $client->createAuthUrl();
         <img class="loginMainLogo" src="{{URL::asset('images/icons/mainIcon.svg')}}">
     </div>
     <div class="col-xs-12 rtl mainContentInfos">
-        <div class="loginDividerBorder col-xs-6">
-            <div class="header_text font-size-14Imp">در حال حاضر عضو کوچیتا هستید؟!</div>
-            <div>
-                <div>
-                    <label class="full-width">
-                        <span class="pd-tp-8 inputLabelText"> نام کاربری </span>
-                        <input type="text" id="username_2" class="loginInputTemp" maxlength="40" required autofocus>
-                    </label>
-                </div>
-                <div>
-                    <label class="full-width">
-                        <span class="pd-tp-8 inputLabelText">رمز عبور</span>
-                        <input id="password_2" class="password loginInputTemp" maxlength="40" required>
-                        <a class="forgetPassLink" onclick="ShowForgetPass()">رمز عبور خود را فراموش کردید؟</a>
-                    </label>
-                </div>
-            </div>
-            <div class="pd-tp-8">
-                <button onclick="login($('#username_2').val(), $('#password_2').val())" class="loginSubBtn btn btn-info active">ورود</button>
-                <p id="loginErr"></p>
-            </div>
-        </div>
-        <div class="col-xs-6">
+        {{--<div class="loginDividerBorder col-xs-6">--}}
+            {{--<div class="header_text font-size-14Imp">در حال حاضر عضو کوچیتا هستید؟!</div>--}}
+            {{--<div>--}}
+                {{--<div>--}}
+                    {{--<label class="full-width">--}}
+                        {{--<span class="pd-tp-8 inputLabelText"> نام کاربری </span>--}}
+                        {{--<input type="text" id="username_2" class="loginInputTemp" maxlength="40" required autofocus>--}}
+                    {{--</label>--}}
+                {{--</div>--}}
+                {{--<div>--}}
+                    {{--<label class="full-width">--}}
+                        {{--<span class="pd-tp-8 inputLabelText">رمز عبور</span>--}}
+                        {{--<input id="password_2" class="password loginInputTemp" maxlength="40" required>--}}
+                        {{--<a class="forgetPassLink" onclick="ShowForgetPass()">رمز عبور خود را فراموش کردید؟</a>--}}
+                    {{--</label>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+            {{--<div class="pd-tp-8">--}}
+                {{--<button onclick="login($('#username_2').val(), $('#password_2').val())" class="loginSubBtn btn btn-info active">ورود</button>--}}
+                {{--<p id="loginErr"></p>--}}
+            {{--</div>--}}
+        {{--</div>--}}
+        <div class="col-xs-12">
             <div class="header_text font-size-14Imp">لطفا کد اعتبار سنجی را وارد نمایید:</div>
             <div>
                 <div>
@@ -833,29 +837,29 @@ $authUrl = $client->createAuthUrl();
         <img class="loginMainLogo" src="{{URL::asset('images/icons/mainIcon.svg')}}">
     </div>
     <div class="col-xs-12 rtl mainContentInfos">
-        <div class="loginDividerBorder col-xs-6">
-            <div class="header_text font-size-14Imp">در حال حاضر عضو کوچیتا هستید؟!</div>
-            <div>
-                <div>
-                    <label class="full-width">
-                        <span class="pd-tp-8 inputLabelText"> نام کاربری </span>
-                        <input class="loginInputTemp" type="text" id="username_3" maxlength="40" required autofocus>
-                    </label>
-                </div>
-                <div>
-                    <label class="full-width">
-                        <span class="pd-tp-8 inputLabelText">رمز عبور</span>
-                        <input type="password" id="password_3" class="loginInputTemp" maxlength="40" required>
-                        <a class="forgetPassLink" onclick="ShowForgetPass()">رمز عبور خود را فراموش کردید؟</a>
-                    </label>
-                </div>
-            </div>
-            <div class="pd-tp-8">
-                <button onclick="login($('#username_3').val(), $('#password_3').val())" class="loginSubBtn btn btn-info active">ورود</button>
-                <p id="loginErr"></p>
-            </div>
-        </div>
-        <div class="col-xs-6">
+        {{--<div class="loginDividerBorder col-xs-6">--}}
+            {{--<div class="header_text font-size-14Imp">در حال حاضر عضو کوچیتا هستید؟!</div>--}}
+            {{--<div>--}}
+                {{--<div>--}}
+                    {{--<label class="full-width">--}}
+                        {{--<span class="pd-tp-8 inputLabelText"> نام کاربری </span>--}}
+                        {{--<input class="loginInputTemp" type="text" id="username_3" maxlength="40" required autofocus>--}}
+                    {{--</label>--}}
+                {{--</div>--}}
+                {{--<div>--}}
+                    {{--<label class="full-width">--}}
+                        {{--<span class="pd-tp-8 inputLabelText">رمز عبور</span>--}}
+                        {{--<input type="password" id="password_3" class="loginInputTemp" maxlength="40" required>--}}
+                        {{--<a class="forgetPassLink" onclick="ShowForgetPass()">رمز عبور خود را فراموش کردید؟</a>--}}
+                    {{--</label>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+            {{--<div class="pd-tp-8">--}}
+                {{--<button onclick="login($('#username_3').val(), $('#password_3').val())" class="loginSubBtn btn btn-info active">ورود</button>--}}
+                {{--<p id="loginErr"></p>--}}
+            {{--</div>--}}
+        {{--</div>--}}
+        <div class="col-xs-12">
             <div class="header_text">رمز عبور خود را وارد نمایید:</div>
             <div>
                 <div>
@@ -880,25 +884,7 @@ $authUrl = $client->createAuthUrl();
         <img class="loginMainLogo" src="{{URL::asset('images/icons/mainIcon.svg')}}">
     </div>
     <div class="col-xs-12 rtl mainContentInfos">
-        <div class="loginDividerBorder col-xs-6">
-            <script async src='https://www.google.com/recaptcha/api.js'></script>
-
-            <input id='checked' onchange='checkedCheckBox()' type='checkbox' value='-1'>
-            <label class='labelForCheckBox' for='checked'>
-                <span></span>&nbsp;
-            </label>
-            <span> شرایط استفاده و
-                <a target="_blank" href="{{route('policies')}}">قوانین سایت</a>
-                را مطالعه کرده و با آن موافقم.
-            </span>
-            <div>
-                <div class="g-recaptcha" data-sitekey="6LfiELsUAAAAAO3Pk-c6cKm1HhvifWx9S8nUtxTb"></div>
-            </div>
-            <br>
-            <button id="submitAndFinishBtn" type="button" onclick="registerAndLogin()" class="loginSubBtn btn btn-info active" disabled>ثبت</button>
-            <p id="loginErrUserName"></p>
-        </div>
-        <div class="col-xs-6">
+        <div class="col-xs-12">
             <div class="header_text font-size-14Imp font-weight-700">قدم آخر!</div>
             <div>
                 <label>
@@ -913,6 +899,24 @@ $authUrl = $client->createAuthUrl();
                 </label>
             </div>
             <div class="pd-tp-8"></div>
+</div>
+        <div class="col-xs-12">
+            <script async src='https://www.google.com/recaptcha/api.js'></script>
+
+            <input id='checked' onchange='checkedCheckBox()' type='checkbox' value='-1'>
+            <label class='labelForCheckBox' for='checked'>
+                <span></span>&nbsp;
+            </label>
+            <span> شرایط استفاده و
+                <a target="_blank" href="{{route('policies')}}" style="color: blue;">قوانین سایت</a>
+                را مطالعه کرده و با آن موافقم.
+            </span>
+            <div>
+                <div class="g-recaptcha" data-sitekey="6LfiELsUAAAAAO3Pk-c6cKm1HhvifWx9S8nUtxTb"></div>
+            </div>
+            <br>
+            <button id="submitAndFinishBtn" type="button" onclick="registerAndLogin()" class="loginSubBtn btn btn-info active" disabled>ثبت</button>
+            <p id="loginErrUserName"></p>
         </div>
     </div>
     <div class="ui_close_x" onclick="document.location.href = '{{route('main')}}'"></div>
