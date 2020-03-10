@@ -20,6 +20,22 @@
     <script type='text/javascript' src='{{URL::asset('js/jquery_12.js')}}'></script>
 
     @yield('head')
+
+    <style>
+        /*only this pages*/
+        #openSearch{
+            transform: rotate(0deg) !important;
+        }
+        .global-nav-green{
+            padding: 10px 0px !important;
+        }
+        .global-nav-links-menu{
+            margin: 0px !important;
+        }
+        .global-nav-bar-container{
+            padding: 0px !important;
+        }
+    </style>
 </head>
 
 <body class="rebrand_2017 desktop HomeRebranded  js_logging rtl home page-template-default page page-id-119 group-blog wpb-js-composer js-comp-ver-4.12 vc_responsive">
@@ -159,7 +175,6 @@
     <script type='text/javascript' src='{{URL::asset('js/article.js')}}'></script>
 
     <script type="text/javascript">
-
         jQuery('.lazy-img').unveil(300, function () {
             "use strict";
             jQuery(this).load(function () {

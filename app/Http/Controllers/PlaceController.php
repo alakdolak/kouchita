@@ -137,8 +137,8 @@ class PlaceController extends Controller {
 
         if (!empty($place->picNumber)) {
             if (file_exists((__DIR__ . '/../../../../assets/_images/' . $kindPlace->fileName . '/' . $place->file . '/s-' . $place->picNumber))) {
-                $photos[count($photos)] = URL::asset('_images') . '/' . $kindPlace->fileName . '/' . $place->file . '/s-' . $place->picNumber;
-                $thumbnail = URL::asset('_images') . '/' . $kindPlace->fileName . '/' . $place->file . '/f-' . $place->picNumber;
+                $photos[count($photos)] = URL::asset('_images/'. $kindPlace->fileName . '/' . $place->file . '/s-' . $place->picNumber) ;
+                $thumbnail = URL::asset('_images/' . $kindPlace->fileName . '/' . $place->file . '/f-' . $place->picNumber);
             } else {
                 $photos[count($photos)] = URL::asset('_images/nopic/blank.jpg');
                 $thumbnail = URL::asset('_images/nopic/blank.jpg');
@@ -381,80 +381,43 @@ class PlaceController extends Controller {
         $D *= 3.14 / 180;
         $C *= 3.14 / 180;
 
-        $nearbyHotels = DB::select("SELECT id, name, cityId, C, D, file, pic_1, alt1, acos(" . sin($D) . " * sin(D / 180 * 3.14) + " . cos($D) . " * cos(D / 180 * 3.14) * cos(C / 180 * 3.14 - " . $C . ")) * 6371 as distance FROM hotels HAVING distance between 0.001 and " . ConfigModel::first()->radius . " order by distance ASC limit 0, " . $count);
-        $hotelPlaceId = Place::whereName('هتل')->first()->id;
-        foreach ($nearbyHotels as $nearbyHotel) {
+        $tableNames = ['hotels', 'restaurant', 'amaken', 'majara'];
+        foreach ($tableNames as $tableName){
+            $kindPlace = Place::where('tableName', $tableName)->first();
+            if($kindPlace != null) {
+                $nearbys = DB::select("SELECT *, acos(" . sin($D) . " * sin(D / 180 * 3.14) + " . cos($D) . " * cos(D / 180 * 3.14) * cos(C / 180 * 3.14 - " . $C . ")) * 6371 as distance FROM " . $tableName . " HAVING distance between 0.001 and " . ConfigModel::first()->radius . " order by distance ASC limit 0, " . $count);
+                foreach ($nearbys as $nearby) {
 
-            if (file_exists((__DIR__ . '/../../../../assets/_images/hotels/' . $nearbyHotel->file . '/l-1.jpg')))
-                $nearbyHotel->pic = URL::asset("_images/hotels/" . $nearbyHotel->file . '/l-1.jpg');
-            else
-                $nearbyHotel->pic = URL::asset("_images/nopic/blank.jpg");
+                    if (file_exists((__DIR__ . '/../../../../assets/_images/' . $kindPlace->fileName . '/' . $nearby->file . '/f-' . $nearby->picNumber)))
+                        $nearby->pic = URL::asset("_images/" . $kindPlace->fileName . "/" . $nearby->file . '/f-' . $nearby->picNumber);
+                    else
+                        $nearby->pic = URL::asset("_images/nopic/blank.jpg");
 
-            $condition = ['placeId' => $nearbyHotel->id, 'kindPlaceId' => $hotelPlaceId, 'confirm' => 1,
-                'activityId' => Activity::whereName('نظر')->first()->id];
-            $nearbyHotel->reviews = LogModel::where($condition)->count();
-            $nearbyHotel->distance = round($nearbyHotel->distance, 2);
-            $nearbyHotel->rate = getRate($nearbyHotel->id, $hotelPlaceId)[1];
-            $nearbyHotel->url =  createUrl(4, $nearbyHotel->id, 0, 0, 0);
-            $nearbyHotel->city = Cities::find($nearbyHotel->cityId);
-            $nearbyHotel->state = State::find($nearbyHotel->city->stateId);
-        }
+                    $condition = ['placeId' => $nearby->id, 'kindPlaceId' => $kindPlace->id, 'confirm' => 1,
+                        'activityId' => Activity::whereName('نظر')->first()->id];
+                    $nearby->reviews = LogModel::where($condition)->count();
+                    $nearby->distance = round($nearby->distance, 2);
+                    $nearby->rate = getRate($nearby->id, $kindPlace->id)[1];
+                    $nearby->url =  createUrl($kindPlace->id, $nearby->id, 0, 0, 0);
+                    $nearby->city = Cities::find($nearby->cityId);
+                    $nearby->state = State::find($nearby->city->stateId);
+                }
 
-        $nearbyRestaurants = DB::select("SELECT id, name, cityId, C, D, kind_id, file, pic_1, alt1, acos(" . sin($D) . " * sin(D / 180 * 3.14) + " . cos($D) . " * cos(D / 180 * 3.14) * cos(C / 180 * 3.14 - " . ($C) . ")) * 6371 as distance FROM restaurant HAVING distance between 0.001 and " . ConfigModel::first()->radius . " order by distance ASC limit 0, " . $count);
-        $restaurantPlaceId = Place::whereName('رستوران')->first()->id;
-        foreach ($nearbyRestaurants as $nearbyRestaurant) {
-
-            if (file_exists((__DIR__ . '/../../../../assets/_images/restaurant/' . $nearbyRestaurant->file . '/l-1.jpg')))
-                $nearbyRestaurant->pic = URL::asset("_images/restaurant/" . $nearbyRestaurant->file . '/l-1.jpg');
-            else
-                $nearbyRestaurant->pic = URL::asset("_images/nopic/blank.jpg");
-
-            $condition = ['placeId' => $nearbyRestaurant->id, 'kindPlaceId' => $restaurantPlaceId, 'confirm' => 1,
-                'activityId' => Activity::whereName('نظر')->first()->id];
-            $nearbyRestaurant->reviews = LogModel::where($condition)->count();
-            $nearbyRestaurant->distance = round($nearbyRestaurant->distance, 2);
-            $nearbyRestaurant->rate = getRate($nearbyRestaurant->id, $restaurantPlaceId)[1];
-            $nearbyRestaurant->url = createUrl(3, $nearbyRestaurant->id, 0, 0, 0);
-            $nearbyRestaurant->city = Cities::find($nearbyRestaurant->cityId);
-            $nearbyRestaurant->state = State::find($nearbyRestaurant->city->stateId);
-        }
-
-        $nearbyAmakens = DB::select("SELECT id, name, cityId, mooze, tarikhi, tafrihi, tabiatgardi, markazkharid,  C, D, file, pic_1, alt1, acos(" . sin($D) . " * sin(D / 180 * 3.14) + " . cos($D) . " * cos(D / 180 * 3.14) * cos(C / 180 * 3.14 - " . ($C) . ")) * 6371 as distance FROM amaken HAVING distance between 0.001 and " . ConfigModel::first()->radius . " order by distance ASC limit 0," . $count);
-        $amakenPlaceId = Place::whereName('اماکن')->first()->id;
-        foreach ($nearbyAmakens as $nearbyAmaken) {
-
-            if (file_exists((__DIR__ . '/../../../../assets/_images/amaken/' . $nearbyAmaken->file . '/l-1.jpg')))
-                $nearbyAmaken->pic = URL::asset("_images/amaken/" . $nearbyAmaken->file . '/l-1.jpg');
-            else
-                $nearbyAmaken->pic = URL::asset("_images/nopic/blank.jpg");
-
-            $condition = ['placeId' => $nearbyAmaken->id, 'kindPlaceId' => $amakenPlaceId, 'confirm' => 1,
-                'activityId' => Activity::whereName('نظر')->first()->id];
-            $nearbyAmaken->reviews = LogModel::where($condition)->count();
-            $nearbyAmaken->distance = round($nearbyAmaken->distance, 2);
-            $nearbyAmaken->rate = getRate($nearbyAmaken->id, $amakenPlaceId)[1];
-            $nearbyAmaken->url = createUrl(1, $nearbyAmaken->id, 0, 0, 0);
-            $nearbyAmaken->city = Cities::find($nearbyAmaken->cityId);
-            $nearbyAmaken->state = State::find($nearbyAmaken->city->stateId);
-        }
-
-        $nearbyMajaras = DB::select("SELECT id, name, cityId, C, D, file, pic_1, alt1, acos(" . sin($D) . " * sin(D / 180 * 3.14) + " . cos($D) . " * cos(D / 180 * 3.14) * cos(C / 180 * 3.14 - " . ($C) . ")) * 6371 as distance FROM majara HAVING distance between 0.001 and " . ConfigModel::first()->radius . " order by distance ASC limit 0, " . $count);
-        $majaraPlaceId = Place::whereName('ماجرا')->first()->id;
-        foreach ($nearbyMajaras as $nearbyMajara) {
-
-            if (file_exists((__DIR__ . '/../../../../assets/_images/majara/' . $nearbyMajara->file . '/l-1.jpg')))
-                $nearbyMajara->pic = URL::asset("_images/majara/" . $nearbyMajara->file . '/l-1.jpg');
-            else
-                $nearbyMajara->pic = URL::asset("_images/nopic/blank.jpg");
-
-            $condition = ['placeId' => $nearbyMajara->id, 'kindPlaceId' => $majaraPlaceId, 'confirm' => 1,
-                'activityId' => Activity::whereName('نظر')->first()->id];
-            $nearbyMajara->reviews = LogModel::where($condition)->count();
-            $nearbyMajara->distance = round($nearbyMajara->distance, 2);
-            $nearbyMajara->rate = getRate($nearbyMajara->id, $majaraPlaceId)[1];
-            $nearbyMajara->url = createUrl(6, $nearbyMajara->id, 0, 0, 0);
-            $nearbyMajara->city = Cities::find($nearbyMajara->cityId);
-            $nearbyMajara->state = State::find($nearbyMajara->city->stateId);
+                switch ($kindPlace->id){
+                    case 1:
+                        $nearbyAmakens = $nearbys;
+                        break;
+                    case 3:
+                        $nearbyRestaurants = $nearbys;
+                        break;
+                    case 4:
+                        $nearbyHotels = $nearbys;
+                        break;
+                    case 6:
+                        $nearbyMajaras = $nearbys;
+                        break;
+                }
+            }
         }
 
         return [$nearbyHotels, $nearbyRestaurants, $nearbyAmakens, $nearbyMajaras];
@@ -505,15 +468,19 @@ class PlaceController extends Controller {
                 $allPosts = array();
 
                 if(count($postsId) != 0) {
-                    $allPosts = Post::join('users', 'users.id', 'post.creator')
+                    $allPost = Post::join('users', 'users.id', 'post.creator')
                         ->whereRaw('(post.date <= ' . $today . ' OR (post.date = ' . $today . ' AND (post.time < ' . $nowTime . ' || post.time IS NULL)))')
                         ->whereRaw('post.release <> "draft"')
                         ->whereIn('post.id', $postsId)
                         ->select('username', 'post.id', 'post.title', 'post.meta', 'post.slug', 'post.seen', 'post.date', 'post.created_at', 'post.pic', 'post.keyword')
                         ->orderBy('post.date', 'DESC')->get();
+
+                    foreach ($allPost as $i)
+                        array_push($allPosts, $i);
                 }
 
                 if(count($allPosts) < 5){
+                    $alP = [];
                     $alP = Post::join('users', 'users.id', 'post.creator')
                         ->whereRaw('(post.date <= ' . $today . ' OR (post.date = ' . $today . ' AND (post.time < ' . $nowTime . ' || post.time IS NULL)))')
                         ->whereRaw('post.release <> "draft"')
@@ -523,20 +490,21 @@ class PlaceController extends Controller {
 
                     if(count($allPosts) == 0)
                         $allPosts = $alP;
-                    else
-                        $allPosts = array_merge($allPosts, $alP);
-
-                    foreach ($allPosts as $item) {
-                        $item->msgs = PostComment::wherePostId($item->id)->whereStatus(true)->count();
-                        $item->pic = \URL::asset('_images/posts/' . $item->id . '/' . $item->pic);
-                        if ($item->date == null)
-                            $item->date = \verta($item->created_at)->format('Ym%d');
-                        $item->date = convertJalaliToText($item->date);
-                        $mainCategory = PostCategoryRelation::where('postId', $item->id)->where('isMain', 1)->first();
-                        $item->category = PostCategory::find($mainCategory->categoryId)->name;
-                        $item->url = route('article.show', ['slug' => $item->slug]);
+                    else{
+                        foreach ($alP as $i)
+                            array_push($allPosts, $i);
                     }
+                }
 
+                foreach ($allPosts as $item) {
+                    $item->msgs = PostComment::wherePostId($item->id)->whereStatus(true)->count();
+                    $item->pic = \URL::asset('_images/posts/' . $item->id . '/' . $item->pic);
+                    if ($item->date == null)
+                        $item->date = \verta($item->created_at)->format('Ym%d');
+                    $item->date = convertJalaliToText($item->date);
+                    $mainCategory = PostCategoryRelation::where('postId', $item->id)->where('isMain', 1)->first();
+                    $item->category = PostCategory::find($mainCategory->categoryId)->name;
+                    $item->url = route('article.show', ['slug' => $item->slug]);
                 }
 
                 $places = $this->getNearbies($place->C, $place->D, $count);

@@ -95,13 +95,15 @@
 
     function initSwiper() {
         var swiper = new Swiper('.mainSuggestion', {
-
             slidesPerGroup: 1,
             loop: true,
             loopFillGroupWithBlank: true,
             navigation: {
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
+            },
+            autoplay: {
+                delay: 4000,
             },
             breakpoints: {
 
@@ -136,7 +138,7 @@
     function createSwiperContent(_places, _kind){
 
         var text = '';
-        if(_kind == 'article'){
+        if(_kind == 'article') {
             for(var i = 0; i < _places.length; i++){
                 text += '<div class="swiper-slide">\n' +
                     '                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column ng-scope">\n' +
@@ -211,20 +213,3 @@
         }
     }
 </script>
-
-{{--if (placeMode == "hotel") {--}}
-{{--this.title = "هتل های مشابه";--}}
-{{--requestURL = '{{route('getSimilarsHotel')}}';--}}
-{{--}--}}
-{{--if (placeMode == "amaken") {--}}
-{{--this.title = "اماکن مشابه";--}}
-{{--requestURL = '{{route('getSimilarsAmaken')}}';--}}
-{{--}--}}
-{{--if (placeMode == "restaurant") {--}}
-{{--this.title = "رستوران های مشابه";--}}
-{{--requestURL = '{{route('getSimilarsRestaurant')}}';--}}
-{{--}--}}
-{{--if (placeMode == "majara") {--}}
-{{--this.title = "ماجراجویی های مشابه";--}}
-{{--requestURL = '{{route('getSimilarsMajara')}}';--}}
-{{--}--}}

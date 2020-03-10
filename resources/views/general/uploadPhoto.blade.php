@@ -384,7 +384,6 @@
             crop1Clicked = true;
             $("#saveBtn").removeClass('hidden');
             $("#saveBtn2").addClass('hidden');
-            console.log('inn1');
             $('#frameEditorHeader').text('(قاب مستطیل)')
         }
         else {
@@ -393,7 +392,6 @@
             crop2Clicked = true;
             $("#saveBtn").addClass('hidden');
             $("#saveBtn2").removeClass('hidden');
-            console.log('inn2');
             $('#frameEditorHeader').text('(قاب مربع)')
         }
         startCropper(ratio);
@@ -593,8 +591,6 @@
                     $("#fullPageLoader").css('display', 'none');
                     alert('حجم عکس باید از 2 مگابایت کمتر باشد.')
                 }
-                else
-                    console.log(response)
             },
             error: function(err){
                 $("#fullPageLoader").css('display', 'none');
@@ -748,7 +744,6 @@
                     response = JSON.parse(response);
 
                     newElement = "";
-                    console.log(response);
                     for(i = 0; i < response.length; i++) {
 
                         if(response[i].kindPlace == 'هتل')

@@ -19,6 +19,7 @@
     </title>
 
     <meta name="title" content="{{$meta['title']}}" />
+    <meta name="og:title" content="{{$meta['title']}}" />
     <meta name='description' content='{{$meta['description']}}' />
     <meta name='keywords' content='{{$meta['keyword']}}' />
     <meta property="og:image" content="{{URL::asset('_images/nopic/blank.jpg')}}"/>

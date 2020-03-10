@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="{{URL::asset('css/common/alertPage.css')}}">
-
+{{--
 <div class="alertDarkBack">
     <div class="alertBox">
         <div class="alertTitle warningTitle">
@@ -31,6 +31,7 @@
         </div>
     </div>
 </div>
+--}}
 
 <div id="successNotifiAlert" class="notifAlert">
     پست شما با موفقیت ثبت شد
