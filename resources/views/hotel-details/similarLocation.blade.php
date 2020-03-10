@@ -138,7 +138,7 @@
     function createSwiperContent(_places, _kind){
 
         var text = '';
-        if(_kind == 'article'){
+        if(_kind == 'article') {
             for(var i = 0; i < _places.length; i++){
                 text += '<div class="swiper-slide">\n' +
                     '                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column ng-scope">\n' +

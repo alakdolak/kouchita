@@ -388,8 +388,8 @@ class PlaceController extends Controller {
                 $nearbys = DB::select("SELECT *, acos(" . sin($D) . " * sin(D / 180 * 3.14) + " . cos($D) . " * cos(D / 180 * 3.14) * cos(C / 180 * 3.14 - " . $C . ")) * 6371 as distance FROM " . $tableName . " HAVING distance between 0.001 and " . ConfigModel::first()->radius . " order by distance ASC limit 0, " . $count);
                 foreach ($nearbys as $nearby) {
 
-                    if (file_exists((__DIR__ . '/../../../../assets/_images/hotels/' . $nearby->file . '/f-' . $nearby->picNumber)))
-                        $nearby->pic = URL::asset("_images/hotels/" . $nearby->file . '/f-' . $nearby->picNumber);
+                    if (file_exists((__DIR__ . '/../../../../assets/_images/' . $kindPlace->fileName . '/' . $nearby->file . '/f-' . $nearby->picNumber)))
+                        $nearby->pic = URL::asset("_images/" . $kindPlace->fileName . "/" . $nearby->file . '/f-' . $nearby->picNumber);
                     else
                         $nearby->pic = URL::asset("_images/nopic/blank.jpg");
 
@@ -494,18 +494,17 @@ class PlaceController extends Controller {
                         foreach ($alP as $i)
                             array_push($allPosts, $i);
                     }
+                }
 
-                    foreach ($allPosts as $item) {
-                        $item->msgs = PostComment::wherePostId($item->id)->whereStatus(true)->count();
-                        $item->pic = \URL::asset('_images/posts/' . $item->id . '/' . $item->pic);
-                        if ($item->date == null)
-                            $item->date = \verta($item->created_at)->format('Ym%d');
-                        $item->date = convertJalaliToText($item->date);
-                        $mainCategory = PostCategoryRelation::where('postId', $item->id)->where('isMain', 1)->first();
-                        $item->category = PostCategory::find($mainCategory->categoryId)->name;
-                        $item->url = route('article.show', ['slug' => $item->slug]);
-                    }
-
+                foreach ($allPosts as $item) {
+                    $item->msgs = PostComment::wherePostId($item->id)->whereStatus(true)->count();
+                    $item->pic = \URL::asset('_images/posts/' . $item->id . '/' . $item->pic);
+                    if ($item->date == null)
+                        $item->date = \verta($item->created_at)->format('Ym%d');
+                    $item->date = convertJalaliToText($item->date);
+                    $mainCategory = PostCategoryRelation::where('postId', $item->id)->where('isMain', 1)->first();
+                    $item->category = PostCategory::find($mainCategory->categoryId)->name;
+                    $item->url = route('article.show', ['slug' => $item->slug]);
                 }
 
                 $places = $this->getNearbies($place->C, $place->D, $count);

@@ -1289,6 +1289,8 @@ class HomeController extends Controller
 
     public function checkReCaptcha()
     {
+        echo 'ok';
+        return;
 
         if (isset($_POST["captcha"])) {
             $response = $_POST["captcha"];
@@ -1621,8 +1623,7 @@ class HomeController extends Controller
 
     public function registerAndLogin2()
     {
-
-        if (isset($_POST["username"]) && isset($_POST["password"]) && isset($_POST["email"]) && isset($_POST["invitationCode"])) {
+        if (isset($_POST["username"]) && isset($_POST["password"])) {
 
             $invitationCode = createCode();
             while (User::whereInvitationCode($invitationCode)->count() > 0)
@@ -1683,6 +1684,7 @@ class HomeController extends Controller
                 echo "ok";
                 return;
             } catch (Exception $x) {
+                dd($x);
                 echo "nok";
                 return;
             }

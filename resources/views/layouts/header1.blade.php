@@ -751,43 +751,44 @@ if(Auth::check()) {
             });
         }
 
-
         $('#memberTop').click(function(e) {
             if( $("#profile-drop").is(":hidden")) {
                 hideAllTopNavs();
                 $("#profile-drop").show();
             }
-            else
+            else {
                 hideAllTopNavs();
+            }
         });
 
         $('#bookmarkicon').click(function(e) {
             if( $("#bookmarkmenu").is(":hidden")){
                 hideAllTopNavs();
-                $("#bookmarkmenu").show();
+                $("#bookmarkmenu").css('display', 'block');
                 showBookMarks('bookMarksDiv');
             }
-            else
+            else {
                 hideAllTopNavs();
+            }
         });
 
         $('.notification-bell').click(function(e) {
             if( $("#alert").is(":hidden")) {
                 hideAllTopNavs();
-                $("#alert").show();
+                $("#alert").css('display', 'block');
             }
-            else
+            else {
                 hideAllTopNavs();
+            }
         });
 
         $("#Settings").on({
             mouseenter: function () {
-                $(".settingsDropDown").show()
+                $(".settingsDropDown").css('display', 'block')
             }, mouseleave: function () {
                 $(".settingsDropDown").hide()
             }
         });
-
         function showBookMarks(containerId) {
 
             $("#" + containerId).empty();
@@ -820,7 +821,6 @@ if(Auth::check()) {
                 }
             });
         }
-
         function getRecentlyViews(containerId) {
             $("#" + containerId).empty();
 
@@ -864,17 +864,15 @@ if(Auth::check()) {
                 }
             });
         }
-
         function showRecentlyViews(element) {
             if( $("#my-trips-not").is(":hidden")){
                 hideAllTopNavs();
-                $("#my-trips-not").show();
+                $("#my-trips-not").css('display', 'block');
                 getRecentlyViews(element);
             }
             else
                 hideAllTopNavs();
         }
-
 
         function openUploadPost(){
             openUploadPhotoModal('', '{{route('addPhotoToPlace')}}', 0, 0, '');

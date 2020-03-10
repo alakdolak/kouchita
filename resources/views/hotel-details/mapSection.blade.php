@@ -193,9 +193,6 @@
                         markersFastMainMap[markersFastMainMap.length] = marker;
 
                 }
-                console.log(markersFastMainMap);
-                console.log(markersRestMainMap);
-
                 //this function in similarLocation.blade.php file
                 createSwiperContent(nearPlacesMap[i], 'restuarant');
             }
