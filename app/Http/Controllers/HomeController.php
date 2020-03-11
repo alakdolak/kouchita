@@ -1468,7 +1468,6 @@ class HomeController extends Controller
             $user->password = Hash::make(makeValidInput($_POST["password"]));
             $user->email = makeValidInput($_POST["email"]);
             $user->level = 0;
-            $user->cityId = Cities::first()->id;
             $user->created_at = date('Y-m-d h:m:s');
             $user->updated_at = date('Y-m-d h:m:s');
             $user->invitationCode = $invitationCode;

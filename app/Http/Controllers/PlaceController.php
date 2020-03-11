@@ -3772,7 +3772,7 @@ class PlaceController extends Controller {
                     $kindPlace->title = 'جاذبه های';
                     $meta['title'] = 'کوچیتا';
                     $meta['keyword'] = 'کوچیتا';
-                    $meta['description'] = 'کوچیتا';
+                    $meta['description'] = 'کوچیتا، سامانه جامع گردشگری ایران و شبکه اجتماعی گردشگران. اطلاعات اماکن و جاذبه ها، هتل ها، بوم گردی، ماجراجویی، آموزش سفر، فروشگاه صنایع دستی ، پادکست سفر';
                     break;
                 case 3:
                     $placeMode = 'restaurant';
@@ -3800,14 +3800,14 @@ class PlaceController extends Controller {
                     $kindPlace->title = 'صنایع دستی و سوغات';
                     $meta['title'] = 'کوچیتا';
                     $meta['keyword'] = 'کوچیتا';
-                    $meta['description'] = 'کوچیتا';
+                    $meta['description'] = 'کوچیتا، سامانه جامع گردشگری ایران و شبکه اجتماعی گردشگران. اطلاعات اماکن و جاذبه ها، هتل ها، بوم گردی، ماجراجویی، آموزش سفر، فروشگاه صنایع دستی ، پادکست سفر';
                     break;
                 case 11:
                     $placeMode = 'mahaliFood';
                     $kindPlace->title = 'غذاهای محلی';
                     $meta['title'] = 'کوچیتا';
                     $meta['keyword'] = 'کوچیتا';
-                    $meta['description'] = 'کوچیتا';
+                    $meta['description'] = 'کوچیتا، سامانه جامع گردشگری ایران و شبکه اجتماعی گردشگران. اطلاعات اماکن و جاذبه ها، هتل ها، بوم گردی، ماجراجویی، آموزش سفر، فروشگاه صنایع دستی ، پادکست سفر';
                     break;
             }
             $kindPlaceId = $kindPlace->id;
