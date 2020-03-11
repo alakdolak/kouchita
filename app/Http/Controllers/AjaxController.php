@@ -655,7 +655,7 @@ class AjaxController extends Controller {
         }
 
         $today = getToday()['date'];
-        $post = Post::where('date', '<=', $today)->where('release', '!=', 'draft')->select(['id', 'title', 'slug', 'meta', 'pic', 'date', 'creator', 'keyword', 'seen'])->orderBy('date', 'DESC')->get();
+        $post = Post::where('date', '<=', $today)->where('release', '!=', 'draft')->select(['id', 'title', 'slug', 'meta', 'pic', 'date', 'creator', 'keyword', 'seen'])->orderBy('date', 'DESC')->take('5')->get();
         foreach ($post as $item){
             $item->url = route('article.show', ['slug' => $item->slug]);
             $item->placePic = URL::asset('_images/posts/' . $item->id . '/' . $item->pic);

@@ -52,6 +52,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use Illuminate\Http\Request;
+use function Sodium\crypto_box_publickey_from_secretkey;
 
 
 class HomeController extends Controller
@@ -1468,7 +1469,6 @@ class HomeController extends Controller
             $user->password = Hash::make(makeValidInput($_POST["password"]));
             $user->email = makeValidInput($_POST["email"]);
             $user->level = 0;
-            $user->cityId = Cities::first()->id;
             $user->created_at = date('Y-m-d h:m:s');
             $user->updated_at = date('Y-m-d h:m:s');
             $user->invitationCode = $invitationCode;
@@ -3034,6 +3034,43 @@ class HomeController extends Controller
 
         dd('finniish');
     }
+
+    public function resizePostImages(Request $request)
+    {
+        $location = __DIR__ . '../../../../../assets/_images/' . $request->file;
+        if(is_dir($location)) {
+            $this->goToFolder($location);
+        }
+
+        echo 'ok';
+        return;
+    }
+    private function goToFolder($location){
+        if(is_dir($location)) {
+            $dir = scandir($location);
+
+            foreach ($dir as $item) {
+
+                if ($item != '' && $item != '.' && $item != '..' && $item != 'sliderPic') {
+                    $nLocatino = $location . '/' . $item;
+                    if(is_dir($nLocatino))
+                        $this->goToFolder($nLocatino);
+                    else{
+                        $image = ['png', 'jpg', 'jpeg'];
+                        $file = pathinfo($nLocatino, PATHINFO_EXTENSION);
+                        if(in_array($file, $image)){
+                            compressImage($nLocatino, $nLocatino, 80);
+                        }
+                    }
+                }
+
+            }
+        }
+
+        return;
+    }
+
 }
+
 
 
