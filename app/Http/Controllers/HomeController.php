@@ -52,6 +52,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use Illuminate\Http\Request;
+use function Sodium\crypto_box_publickey_from_secretkey;
 
 
 class HomeController extends Controller
@@ -2901,10 +2902,14 @@ class HomeController extends Controller
             $sqlQuery .= '( kindPlaceId = 11 AND placeId IN (' . implode(",", $allMahaliFood) . ') )';
         }
 
-        if(count($notIn) == 0)
-            $lastReview = DB::select('SELECT * FROM log WHERE activityId = ' . $reviewActivity->id . ' AND confirm = 1 AND (' . $sqlQuery . ') ORDER BY `date` DESC LIMIT ' . $take);
-        else
-            $lastReview = DB::select('SELECT * FROM log WHERE activityId = ' . $reviewActivity->id . ' AND confirm = 1 AND (' . $sqlQuery . ') AND id NOT IN (' . implode(",", $notIn) . ') ORDER BY `date` DESC LIMIT ' . $take);
+        $lastReview = [];
+
+        if($sqlQuery != '') {
+            if (count($notIn) == 0)
+                $lastReview = DB::select('SELECT * FROM log WHERE activityId = ' . $reviewActivity->id . ' AND confirm = 1 AND (' . $sqlQuery . ') ORDER BY `date` DESC LIMIT ' . $take);
+            else
+                $lastReview = DB::select('SELECT * FROM log WHERE activityId = ' . $reviewActivity->id . ' AND confirm = 1 AND (' . $sqlQuery . ') AND id NOT IN (' . implode(",", $notIn) . ') ORDER BY `date` DESC LIMIT ' . $take);
+        }
 
         return $lastReview;
     }
@@ -3033,6 +3038,43 @@ class HomeController extends Controller
 
         dd('finniish');
     }
+
+    public function resizePostImages(Request $request)
+    {
+        $location = __DIR__ . '../../../../../assets/_images/' . $request->file;
+        if(is_dir($location)) {
+            $this->goToFolder($location);
+        }
+
+        echo 'ok';
+        return;
+    }
+    private function goToFolder($location){
+        if(is_dir($location)) {
+            $dir = scandir($location);
+
+            foreach ($dir as $item) {
+
+                if ($item != '' && $item != '.' && $item != '..' && $item != 'sliderPic') {
+                    $nLocatino = $location . '/' . $item;
+                    if(is_dir($nLocatino))
+                        $this->goToFolder($nLocatino);
+                    else{
+                        $image = ['png', 'jpg', 'jpeg'];
+                        $file = pathinfo($nLocatino, PATHINFO_EXTENSION);
+                        if(in_array($file, $image)){
+                            compressImage($nLocatino, $nLocatino, 80);
+                        }
+                    }
+                }
+
+            }
+        }
+
+        return;
+    }
+
 }
+
 
 

@@ -41,7 +41,7 @@
             color: #fbe5c8 !important;
         }
     </style>
-    <div class="cont ">
+    <div class="cont hideOnPhone">
 
         @for($i = 1; $i <= count($middleBan['1']); $i++)
             <div data-target='{{$i}}' class="slide slide--{{$i}}">
@@ -986,8 +986,6 @@
             </div>
         </div>
 </div>
-
-@include('layouts.calendar')
 
 <script>
     var swiper = new Swiper('.mainSuggestion', {
