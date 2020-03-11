@@ -41,6 +41,11 @@ Route::get('userActivitiesProfile', function(){
     return view('profile.userActivitiesProfile');
 });
 
+Route::get('/sitemap.xml', 'SitemapController@index');
+Route::get('/sitemap.xml/places', 'SitemapController@places');
+Route::get('/sitemap.xml/lists', 'SitemapController@lists');
+Route::get('/sitemap.xml/posts', 'SitemapController@posts');
+Route::get('/sitemap.xml/city', 'SitemapController@city');
 
 Route::post('likePost', ['as' => 'likePost', 'uses' => 'PostController@likePost']);
 

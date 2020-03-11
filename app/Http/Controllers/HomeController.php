@@ -2902,10 +2902,14 @@ class HomeController extends Controller
             $sqlQuery .= '( kindPlaceId = 11 AND placeId IN (' . implode(",", $allMahaliFood) . ') )';
         }
 
-        if(count($notIn) == 0)
-            $lastReview = DB::select('SELECT * FROM log WHERE activityId = ' . $reviewActivity->id . ' AND confirm = 1 AND (' . $sqlQuery . ') ORDER BY `date` DESC LIMIT ' . $take);
-        else
-            $lastReview = DB::select('SELECT * FROM log WHERE activityId = ' . $reviewActivity->id . ' AND confirm = 1 AND (' . $sqlQuery . ') AND id NOT IN (' . implode(",", $notIn) . ') ORDER BY `date` DESC LIMIT ' . $take);
+        $lastReview = [];
+
+        if($sqlQuery != '') {
+            if (count($notIn) == 0)
+                $lastReview = DB::select('SELECT * FROM log WHERE activityId = ' . $reviewActivity->id . ' AND confirm = 1 AND (' . $sqlQuery . ') ORDER BY `date` DESC LIMIT ' . $take);
+            else
+                $lastReview = DB::select('SELECT * FROM log WHERE activityId = ' . $reviewActivity->id . ' AND confirm = 1 AND (' . $sqlQuery . ') AND id NOT IN (' . implode(",", $notIn) . ') ORDER BY `date` DESC LIMIT ' . $take);
+        }
 
         return $lastReview;
     }
