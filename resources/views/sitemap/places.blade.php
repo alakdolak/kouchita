@@ -3,7 +3,7 @@
     @foreach ($places as $item)
         <url>
             <loc>{{$item->url}}</loc>
-            <lastmod>2020-03-11 11:06:02.129147</lastmod>
+            <lastmod>2020-03-11 11:06:02</lastmod>
             <changefreq>weekly</changefreq>
             <priority>0.9</priority>
         </url>

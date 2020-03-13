@@ -8,10 +8,6 @@ Route::get('resizePostImagesPage', function(){
 });
 Route::post('resizePostImages', 'HomeController@resizePostImages');
 
-Route::get('databaseforall', function (){
-
-});
-
 Route::get('userQuestions', function(){
     return view('userActivities.userQuestions');
 });
