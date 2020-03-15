@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\models\AboutMe;
 use App\models\ActivationCode;
 use App\models\Activity;
 use App\models\Age;
@@ -12,7 +11,9 @@ use App\models\InvitationCode;
 use App\models\Level;
 use App\models\LogModel;
 use App\models\Medal;
+use App\models\PhotographersPic;
 use App\models\User;
+use App\models\UserTripStyles;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -124,9 +125,12 @@ class ProfileController extends Controller {
 
         $medals = getMedals($user->id);
         $nearestMedals = getNearestMedals($user->id);
-//        dd($nearestMedals);
 
-        return view('profile.profile', array('activities' => $activities,
+        $user->tripStyle = UserTripStyles::join('tripStyle', 'tripStyle.id', 'userTripStyles.tripStyleId')->where('userTripStyles.uId', $user->id)->get();
+
+        $userCount = $user->getUserActivityCount();
+
+        return view('profile.profile', array('activities' => $activities, 'userCount' => $userCount,
             'counts' => $counts, 'totalPoint' => getUserPoints($user->id), 'levels' => Level::orderBy('floor', 'ASC')->get(),
             'userLevels' => nearestLevel($user->id), 'medals' => $medals,
             'nearestMedals' => $nearestMedals, 'recentlyBadges' => $outMedals));
@@ -216,7 +220,7 @@ class ProfileController extends Controller {
             $phoneNum = makeValidInput($_POST["phoneNum"]);
             $code = makeValidInput($_POST["code"]);
 
-            $condition = ['phoneNum' => $phoneNum, 'code' => $code];
+            $condition = ['phoneNum' => $phoneNum, 'code' => $code, 'userId' => \auth()->user()->id];
             $activation = ActivationCode::where($condition)->first();
             if($activation != null) {
 
@@ -239,7 +243,7 @@ class ProfileController extends Controller {
 
             $phoneNum = makeValidInput($_POST["phoneNum"]);
 
-            $condition = ['phoneNum' => $phoneNum];
+            $condition = ['phoneNum' => $phoneNum, 'userId' =>  \auth()->user()->id];
             $activation = ActivationCode::where($condition)->first();
             if($activation != null) {
 
@@ -261,127 +265,96 @@ class ProfileController extends Controller {
     }
 
     public function accountInfo($msg = "", $mode = 1, $reminder = "", $phoneNum = "") {
+        if(session('msg')) {
+            $msg = session('msg');
+            $mode = 0;
+        }
+        session()->forget('msg');
 
         $user = Auth::user();
 
-        $aboutMe = AboutMe::whereUId($user->id)->first();
-
         $tmp = Cities::whereId($user->cityId);
-        if($tmp != null)
-            $user->cityId = $tmp->name;
-        else
-            $user->cityId = "";
+        if($tmp != null) {
+            $user->cityName = $tmp->name;
+            $user->cityId = $tmp->id;
+        }
+        else{
+            $user->cityName = "";
+            $user->cityId = 0;
+        }
+
+        $isAcitveCode = false;
+        $activeCode = ActivationCode::where('userId', $user->id)->get();
+        if($activeCode != null){
+            foreach ($activeCode as $item){
+                if(time() - $item->sendTime < 90){
+                    $user->phone = $item->phoneNum;
+                    $isAcitveCode = true;
+                    break;
+                }
+            }
+        }
 
         return view('accountInfo', array('msg' => $msg, 'mode2' => $mode, 'reminder' => $reminder,
-            'ages' => Age::all(), 'aboutMe' => $aboutMe, 'phoneNum' => $phoneNum));
-    }
-
-    public function accountInfo2($status) {
-
-        $uId = Auth::user()->id;
-
-        $user = User::whereId($uId);
-
-        $activities = Activity::all();
-
-        $counts = array();
-        $counter = 0;
-
-        foreach ($activities as $activity) {
-            $condition = ["visitorId" => $user->id, "activityId" => $activity->id];
-            $counts[$counter++] = LogModel::where($condition)->count();
-        }
-
-        if(!$user->uploadPhoto) {
-
-            $defaultPic = DefaultPic::whereId($user->picture);
-            if($defaultPic == null)
-                $defaultPic = DefaultPic::first();
-
-            $user->picture = $defaultPic->name;
-        }
-
-        $aboutMe = AboutMe::whereUId($uId)->first();
-
-        if($aboutMe == null) {
-            $aboutMe = array();
-        }
-
-        $user->cityId = Cities::whereId($user->cityId)->name;
-
-        $msg = "";
-        if($status == "successPasChanged")
-            $msg = "رمزعبور شما به درستی تغییر کرد";
-
-        return view('accountInfo', array('user' => $user, 'msg' => $msg, 'mode2' => 0, 'reminder' => '',
-            'ages' => Age::all(), 'cities' => Cities::all(), 'aboutMe' => $aboutMe, 'phoneNum' => ''));
+            'ages' => Age::all(), 'phoneNum' => $phoneNum, 'isAcitveCode' => $isAcitveCode));
     }
 
     public function updateProfile1() {
 
-        $uId = Auth::user()->id;
-
-        if(isset($_POST["firstName"]) && isset($_POST["lastName"]) && isset($_POST["username"]) &&
-            isset($_POST["email"]) && isset($_POST["cityName"])) {
-
-            if(empty($cityName)) {
-                $msg = "لطفا شهر مورد نظر خود را وارد نمایید";
-            }
-
-            else {
-                $username = makeValidInput($_POST["username"]);
-
-                if (User::whereId($uId)->username != $username && User::whereUserName($username)->count() > 0) {
-                    $msg = "نام کاربری وارد شده در سامانه موجود است";
-                } else {
-
-                    $user = User::whereId($uId);
-
-                    $user->first_name = makeValidInput($_POST["firstName"]);
-                    $user->last_name = makeValidInput($_POST["lastName"]);
-                    $user->email = makeValidInput($_POST["email"]);
-                    $user->cityId = Cities::whereName(makeValidInput($_POST["cityName"]))->first()->id;
-                    $user->username = $username;
-
-                    $user->save();
-
-                    if (isset($_POST["phone"]) && makeValidInput($_POST["phone"]) != $user->phone) {
-
-                        $phoneNum = makeValidInput($_POST["phone"]);
-                        $activation = ActivationCode::wherePhoneNum($phoneNum)->first();
-
-                        if ($activation == null) {
-                            $activation = new ActivationCode();
-                            $activation->phoneNum = $phoneNum;
-                            $activation->code = createCode();
-                            $activation->sendTime = time();
-                            $activation->save();
-                            sendSMS($phoneNum, $activation->code, 'sms');
-                            return $this->accountInfo("sendActivation", 1, 90, $phoneNum);
-
-                        }
-
-                        if (time() - $activation->sendTime > 90) {
-                            $activation->phoneNum = $phoneNum;
-                            $activation->code = createCode();
-                            $activation->sendTime = time();
-                            $activation->save();
-                            sendSMS($phoneNum, $activation->code, 'sms');
-                            return $this->accountInfo("sendActivation", 1, 90, $phoneNum);
-                        }
-
-                        return $this->accountInfo("sendActivation", 1, 90 - time() + $activation->sendTime, $phoneNum);
-                    }
-
-                    return Redirect::to('accountInfo');
-                }
-            }
-        }
-        else {
-            $msg = "اشکالی در برقراری ارتباط با سرور به وجود آمده است";
+        if(!isset($_POST['userName']) || strlen($_POST['userName']) < 4){
+            echo json_encode(['status' => 'nok']);
+            return;
         }
 
-        return $this->accountInfo($msg);
+        $user = Auth::user();
+
+        if(User::whereUserName($_POST['userName'])->where('id', '!=', $user->id)->count() == 0)
+            $user->username = makeValidInput($_POST["userName"]);
+        if(isset($_POST['firstName']))
+            $user->first_name = $_POST['firstName'];
+        if(isset($_POST['lastName']))
+            $user->last_name = $_POST['lastName'];
+        if(isset($_POST['email']) && strlen($_POST['email']) != 0 && User::whereUserName($_POST['email'])->where('id', '!=', $user->id)->count() == 0)
+            $user->email = makeValidInput($_POST["email"]);
+        if(isset($_POST['cityId']) && $_POST['cityId'] != 0)
+            $user->cityId = makeValidInput($_POST['cityId']);
+        $user->save();
+
+        if (isset($_POST["phone"]) && makeValidInput($_POST["phone"]) != $user->phone && User::wherePhone($_POST['phone'])->count() == 0) {
+
+            $phoneNum = makeValidInput($_POST["phone"]);
+            $activation = ActivationCode::where('userId', $user->id)->first();
+
+            if ($activation == null) {
+                $activation = new ActivationCode();
+                $activation->phoneNum = $phoneNum;
+                $activation->code = createCode();
+                $activation->sendTime = time();
+                $activation->userId = $user->id;
+                $activation->save();
+                sendSMS($phoneNum, $activation->code, 'sms');
+
+                echo json_encode(['status' => 'ok', 'time' => 90 , 'phoneNum' => $phoneNum]);
+                return;
+            }
+
+            if (time() - $activation->sendTime > 90) {
+                $activation->phoneNum = $phoneNum;
+                $activation->code = createCode();
+                $activation->sendTime = time();
+                $activation->userId = $user->id;
+                $activation->save();
+                sendSMS($phoneNum, $activation->code, 'sms');
+                echo json_encode(['status' => 'ok', 'time' => 90 , 'phoneNum' => $phoneNum]);
+                return;
+            }
+
+            echo json_encode(['status' => 'ok', 'time' => 90 - time() + $activation->sendTime, 'phoneNum' => $phoneNum]);
+            return;
+        }
+
+        echo json_encode(['status' => 'ok']);
+        return;
     }
 
     public function searchInCities() {
@@ -394,35 +367,23 @@ class ProfileController extends Controller {
     }
 
     public function updateProfile2() {
-
-        $uId = Auth::user()->id;
-
+        $user = Auth::user();
         if(isset($_POST["introduction"]) && isset($_POST["sex"]) && isset($_POST["ageId"])) {
 
-            if(AboutMe::whereUId($uId)->count() > 0)
-                $aboutMe = AboutMe::whereUId($uId)->first();
-            else {
-                $aboutMe = new AboutMe();
-                $aboutMe->uId = $uId;
-            }
 
-            $aboutMe->introduction = makeValidInput($_POST["introduction"]);
-            $aboutMe->sex = (makeValidInput($_POST["sex"]) == "f") ? 0 :
+            $user->introduction = makeValidInput($_POST["introduction"]);
+            $user->sex = (makeValidInput($_POST["sex"]) == "f") ? 0 :
                 (makeValidInput($_POST["sex"]) == "m") ? 1 : 2;
 
-            $aboutMe->ageId = makeValidInput($_POST["ageId"]);
+            $user->ageId = makeValidInput($_POST["ageId"]);
 
-            $aboutMe->save();
+            $user->save();
 
-            return Redirect::to('accountInfo');
+            echo 'ok';
         }
-
         else
-            $msg = "اشکالی در برقراری ارتباط با سرور به وجود آمده است";
-
-
-        return $this->accountInfo($msg, 2);
-
+            echo 'nok';
+        return;
     }
 
     public function updateProfile3() {
@@ -438,8 +399,10 @@ class ProfileController extends Controller {
                     $user = User::whereId($uId);
                     $user->password = Hash::make(makeValidInput($_POST["newPassword"]));
                     $user->save();
+                    Auth::login($user);
+                    session(['msg' => 'رمز عبور با موفقیت تغییر یافت']);
 
-                    return Redirect::to(route('accountInfo2', ['status' => 'successPasChanged']));
+                    return Redirect::to(route('accountInfo'));
                 } else {
                     $msg = "پسورد جدید و تکرار آن یکی نیستند";
                 }
@@ -452,7 +415,6 @@ class ProfileController extends Controller {
         }
 
         return $this->accountInfo($msg, 3);
-
     }
 
     public function editPhoto($msg = "") {
@@ -484,7 +446,6 @@ class ProfileController extends Controller {
     public function deleteAccount() {
 
         $uId = Auth::user()->id;
-
         if(!Auth::check()) {
             echo 'nok';
             return;

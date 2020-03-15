@@ -213,7 +213,6 @@
         var tripStyles = [];
 
         function toggleTripStyles(id) {
-
             for(i = 0; i < tripStyles.length; i++) {
 
                 if(tripStyles[i] == id) {

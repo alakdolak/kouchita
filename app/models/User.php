@@ -57,7 +57,6 @@ class User extends Authenticatable{
 
     public function getRememberToken()
     {
-//        dd('dfjdkfjkd');
         return $this->remember_token;
     }
 
@@ -80,5 +79,59 @@ class User extends Authenticatable{
 
     public static function whereId($value) {
         return User::find($value);
+    }
+
+    public function getUserActivityCount(){
+        $user = \Auth::user();
+
+        $postCount = 0;
+        $picCount = 0;
+        $videoCount = 0;
+        $video360Count = 0;
+        $questionCount = 0;
+        $ansCount = 0;
+        $scoreCount = 0;
+        $postActivity = Activity::whereName('نظر')->first();
+        $questionActivity = Activity::whereName('سوال')->first();
+        $ansActivity = Activity::whereName('پاسخ')->first();
+        $postCount += LogModel::whereActivityId($postActivity->id)->where('visitorId', $user->id)->count();
+        $picCount += PhotographersPic::where('userId', $user->id)->count();
+        $picCount += \DB::select('SELECT COUNT(reviewPics.id) AS count FROM reviewPics RIGHT JOIN log ON log.visitorId = ' . $user->id . ' AND reviewpics.isVideo = 0 AND reviewPics.is360 = 0 AND reviewPics.logId = log.id ')[0]->count;
+        $videoCount += \DB::select('SELECT COUNT(reviewPics.id) AS count FROM reviewPics RIGHT JOIN log ON log.visitorId = ' . $user->id . ' AND reviewpics.isVideo = 1 AND reviewPics.is360 = 0 AND reviewPics.logId = log.id ')[0]->count;
+        $video360Count += \DB::select('SELECT COUNT(reviewPics.id) AS count FROM reviewPics RIGHT JOIN log ON log.visitorId = ' . $user->id . ' AND reviewpics.isVideo = 1 AND reviewPics.is360 = 1 AND reviewPics.logId = log.id ')[0]->count;
+        $questionCount += LogModel::whereActivityId($questionActivity->id)->where('visitorId', $user->id)->count();
+        $ansCount += LogModel::whereActivityId($ansActivity->id)->where('visitorId', $user->id)->count();
+        $scoreCount += count(\DB::select('SELECT questionUserAns.logId as PlaceCount FROM questionUserAns INNER JOIN log ON log.visitorId = ' . $user->id . ' AND questionUserAns.logId = log.id GROUP BY PlaceCount'));
+        $userCount = [
+            'postCount' => $postCount,
+            'picCount' => $picCount,
+            'videoCount' => $videoCount,
+            'video360Count' => $video360Count,
+            'questionCount' => $questionCount,
+            'ansCount' => $ansCount,
+            'scoreCount' => $scoreCount,
+        ];
+
+        return $userCount;
+    }
+
+    public function getUserTotalPoint()
+    {
+        return getUserPoints(auth()->user()->id);
+    }
+
+    public function getUserNearestLevel()
+    {
+        return nearestLevel(auth()->user()->id);
+    }
+
+    public function deleteUser(){
+//        $uId = \Auth::user()->id;
+//        ActivationCode::where('userId', $uId)->delete();
+//        BannerPics::where('userId', $uId)->update(['userId' => 0]);
+//        $logs = LogModel::where('visitorId', $uId)->get();
+//        foreach ($logs as $item){
+//
+//        }
     }
 }

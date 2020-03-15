@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\models\AboutMe;
 use App\models\Amaken;
 use App\models\Cities;
 use App\models\DefaultPic;

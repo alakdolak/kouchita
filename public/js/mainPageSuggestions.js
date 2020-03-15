@@ -19,25 +19,27 @@ var data = $.param({});
     });
 
     app.controller('getMainPageSuggestion', function ($scope, $http) {
+        console.log('in4')
         angular.element(window).ready(function () {
                 $scope.show = !1;
                 $scope.disable = !1;
-
-                // $scope.myPagingFunction = function () {
-                angular.element(document).ready(function () {
+                console.log('in3')
+                $scope.myPagingFunction = function () {
                     if ($scope.disable)
                         return;
+                    console.log('in2')
 
-                    // var top = $("#newKoochita").position().top;
-                    // var scroll = $(window).scrollTop() + window.innerHeight;
-                    //
-                    // if (scroll < top || (scroll - top) / window.innerHeight < 0.6)
-                    //     return;
+                    var top = $("#newKoochita").position().top;
+                    var scroll = $(window).scrollTop() + window.innerHeight;
+
+                    if (scroll < top || (scroll - top) / window.innerHeight < 0.6)
+                        return;
 
                     $('.loader').removeClass('hidden');
 
                     $scope.disable = !0;
                     $http.post(getMainPageSuggestion, data, config).then(function (response) {
+                        console.log('in1')
                         if (response.data[0] != null && response.data[0].length > 0)
                             $scope.show = !0;
 
@@ -130,9 +132,7 @@ var data = $.param({});
                     }).catch(function (err) {
                         console.log(err)
                     })
-                })
-
-                // }
-            });
+                }
+        });
     });
 })();

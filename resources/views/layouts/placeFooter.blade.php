@@ -1,5 +1,9 @@
 <?php
-$config = \App\models\ConfigModel::first()
+$config = \App\models\ConfigModel::first();
+$userLevelFooter = auth()->user()->getUserNearestLevel();
+$userTotalPointFooter = auth()->user()->getUserTotalPoint();
+
+$nextLevelFooter = $userLevelFooter[1]->floor - $userTotalPointFooter;
 ?>
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/footer.css')}}' />
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/icons.css?v=1')}}'/>
@@ -967,7 +971,7 @@ $config = \App\models\ConfigModel::first()
                             </div>
                         </div>
                         <div class="profileBtnActionMobile">
-                            <a type="button" class="btn btn-warning pp_btns">صفحه پروفایل</a>
+                            <a type="button" class="btn btn-warning pp_btns" href="{{route('profile')}}">صفحه پروفایل</a>
                             <a type="button" class="btn btn-primary pp_btns">صفحه من</a>
                             <a type="button" class="btn btn-danger pp_btns" href="{{route('logout')}}">خروج</a>
                         </div>
@@ -1076,12 +1080,12 @@ $config = \App\models\ConfigModel::first()
                                         </div>
                                     </div>
                                     <div class="mainDivTotalPoint">
-                                        <div class="points">255 {{--{{$totalPoint}}--}} </div>
+                                        <div class="points">{{$userTotalPointFooter}}</div>
                                         <a href="">سیستم امتیازدهی</a>
                                     </div>
                                     <div class="points_to_go">
                                     <span>
-                                        <b class="points">245{{--{{$userLevels[1]->floor - $totalPoint}}--}} </b>
+                                        <b class="points"> {{$nextLevelFooter}} </b>
                                         <span>امتیاز  مانده به مرحله بعد</span>
                                     </span>
                                     </div>
@@ -1094,11 +1098,12 @@ $config = \App\models\ConfigModel::first()
                                                 <div class="float-leftImp label">مرحله بعدی</div>
                                             </div>
                                             <div class="progress_indicator">
-                                                <div class="current_badge myBadge">1 {{--{{$userLevels[1]->name}}--}}</div>
+
+                                                <div class="next_badge myBadge">{{$userLevelFooter[0]->name}} </div>
                                                 <div class="meter">
-                                                    <span id="progressId" class="progress"></span>
+                                                    <span id="progressIdPhone" class="progress"></span>
                                                 </div>
-                                                <div class="next_badge myBadge">2 {{--{{$userLevels[0]->name}}--}} </div>
+                                                <div class="current_badge myBadge">{{$userLevelFooter[1]->name}} </div>
                                             </div>
                                             <div class="text-align-center">
                                                 <a class="cursor-pointer color-black">مشاهده سیستم سطح بندی</a>
@@ -1114,50 +1119,53 @@ $config = \App\models\ConfigModel::first()
                         <div class="mainDivHeaderText">
                             <h3>شرح فعالیت‌ها</h3>
                         </div>
+                        <?php
+                            $userInfo = auth()->user()->getUserActivityCount();
+                        ?>
                         <div class="activitiesMainDiv">
                             <div class="activitiesLinesDiv">
                                 <div class="activityTitle">گذاشتن پست</div>
-                                <div class="activityNumbers">پست 21</div>
+                                <div class="activityNumbers">پست {{$userInfo['postCount']}}</div>
                             </div>
                             <div class="activitiesLinesDiv">
                                 <div class="activityTitle">آپلود عکس</div>
-                                <div class="activityNumbers">عکس 365</div>
+                                <div class="activityNumbers">عکس  {{$userInfo['picCount']}}</div>
                             </div>
                             <div class="activitiesLinesDiv">
                                 <div class="activityTitle">آپلود فیلم</div>
-                                <div class="activityNumbers">فیلم 6</div>
+                                <div class="activityNumbers">فیلم  {{$userInfo['videoCount']}}</div>
                             </div>
                             <div class="activitiesLinesDiv">
                                 <div class="activityTitle">آپلود فیلم 360</div>
-                                <div class="activityNumbers">فیلم 2</div>
+                                <div class="activityNumbers">فیلم  {{$userInfo['video360Count']}}</div>
                             </div>
                             <div class="activitiesLinesDiv">
                                 <div class="activityTitle">پرسیدن سؤال</div>
-                                <div class="activityNumbers">سؤال 5</div>
+                                <div class="activityNumbers">سؤال  {{$userInfo['questionCount']}}</div>
                             </div>
                             <div class="activitiesLinesDiv">
                                 <div class="activityTitle">پاسخ به سؤال دیگران</div>
-                                <div class="activityNumbers">پاسخ 15</div>
+                                <div class="activityNumbers">پاسخ  {{$userInfo['ansCount']}}</div>
                             </div>
                             <div class="activitiesLinesDiv">
                                 <div class="activityTitle">امتیازدهی</div>
-                                <div class="activityNumbers">مکان 14</div>
+                                <div class="activityNumbers">مکان  {{$userInfo['scoreCount']}}</div>
                             </div>
                             <div class="activitiesLinesDiv">
                                 <div class="activityTitle">پاسخ به سؤالات اختیاری</div>
-                                <div class="activityNumbers">پاسخ 145</div>
+                                <div class="activityNumbers">پاسخ 0</div>
                             </div>
                             <div class="activitiesLinesDiv">
                                 <div class="activityTitle">ویرایش مکان</div>
-                                <div class="activityNumbers">مکان 13</div>
+                                <div class="activityNumbers">مکان 0</div>
                             </div>
                             <div class="activitiesLinesDiv">
                                 <div class="activityTitle">پیشنهاد مکان جدید</div>
-                                <div class="activityNumbers">مکان 10</div>
+                                <div class="activityNumbers">مکان 0</div>
                             </div>
                             <div class="activitiesLinesDiv">
                                 <div class="activityTitle">نوشتن مقاله</div>
-                                <div class="activityNumbers">مقاله 3</div>
+                                <div class="activityNumbers">مقاله 0</div>
                             </div>
                             <div class="activitiesLinesDiv">
                                 <div class="activityTitle">معرفی دوستان</div>
@@ -1168,174 +1176,6 @@ $config = \App\models\ConfigModel::first()
                 </div>
             </div>
         </div>
-
-        <div class="modal fade" id="profile">
-            <div class="mainPopUp rightPopUp">
-                <div id="lp_register">
-                    <div>
-                        <div class="modules-membercenter-member-profile position-relative">
-
-                            <div class="profileBlock">
-
-                                <div id="" class="targets profileInfosDetails col-xs-8">
-
-                                    <p class="since">
-                                        <b>
-                                            {{--                                        {{(!empty($user->first_name)) ? $user->first_name : $user->username}}--}}سینا عادلی
-                                        </b>
-                                    </p>
-                                    <div class="ageSince">
-                                        <div class="since">عضو شده از</div>
-                                        <div class="since">
-                                            {{--                                        {{$user->created}}--}}
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="col-xs-4">
-                                    {{--                                @if(!$user->uploadPhoto)--}}
-                                    <img class="avatarUrl"
-                                         {{--                                         src="{{URL::asset('defaultPic') . '/' . $user->picture}}"--}}
-                                         height="60" width="60"/>
-                                    {{--                                @else--}}
-                                    {{--                                    <img class="avatarUrl"--}}
-                                    {{--                                         src="{{URL::asset('userProfile') . "/" . $user->picture}}"--}}
-                                    {{--                                         height="60" width="60"/>--}}
-                                    {{--                                @endif--}}
-                                </div>
-                            </div>
-
-                            <div class="aboutMeDesc">
-                                <div class="editInfoBtn" onclick="toggleEditInfoMenu(this)">
-                                    ویرایش اطلاعات
-                                    <div class="glyphicon glyphicon-chevron-down"></div>
-                                    <div class="glyphicon glyphicon-chevron-up display-none"></div>
-                                </div>
-                                <div class="editProfileMenu item display-none">
-                                    <a name="edit-profile" class="menu-link" href="{{URL('accountInfo')}}">ویرایش اطلاعات کاربری</a>
-                                    <a name="edit-photo" class="menu-link" href="{{URL('editPhoto')}}">ویرایش عکس</a>
-                                    <a name="subscriptions" class="menu-link" href="">اشتراک ها</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="profileBtnActionMobile">
-                            <a type="button" class="btn btn-warning pp_btns">صفحه پروفایل</a>
-                            <a type="button" class="btn btn-primary pp_btns">صفحه من</a>
-                            <a type="button" class="btn btn-danger pp_btns" href="{{route('logout')}}">خروج</a>
-                        </div>
-                    </div>
-                    <div class="profileScoreMainDiv">
-                        <div class="modules-membercenter-progress-header " data-backbone-name="modules.membercenter.ProgressHeader" data-backbone-context="Social_CompositeMember, Member">
-                            <div class="title" id="myHonorsText">
-                                <h3>امتیازات من</h3>
-                            </div>
-
-                            <a class="link" {{--onclick="initHelp(16, [], 'MAIN', 100, 400)"--}}>
-                                <div></div>
-                            </a>
-                        </div>
-
-                        <div class="memberPointInfo">
-                            <div class="modules-membercenter-total-points">
-                                <div data-direction="left" class="targets">
-                                    <div class="points_info tripcollectiveinfo" onclick="showElement('activityDiv')">
-                                        <div class="label"> امتیاز کل شما </div>
-                                    </div>
-                                </div>
-                                <div class="mainDivTotalPoint">
-                                    <div class="points">255 {{--{{$totalPoint}}--}} </div>
-                                    <a href="">سیستم امتیازدهی</a>
-                                </div>
-                                <div class="points_to_go">
-                                    <span>
-                                        <b class="points">245{{--{{$userLevels[1]->floor - $totalPoint}}--}} </b>
-                                        <span>امتیاز  مانده به مرحله بعد</span>
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="modules-membercenter-level-progress">
-                                <div data-direction="left" id="targetHelp_9" class="targets progress_info tripcollectiveinfo">
-                                    <div onclick="showElement('levelDiv')">
-                                        <div class="labels">
-                                            <div class="right label">مرحله فعلی</div>
-                                            <div class="float-leftImp label">مرحله بعدی</div>
-                                        </div>
-                                        <div class="progress_indicator">
-                                            <div class="current_badge myBadge">1 {{--{{$userLevels[1]->name}}--}}</div>
-                                            <div class="meter">
-                                                <span id="progressId" class="progress"></span>
-                                            </div>
-                                            <div class="next_badge myBadge">2 {{--{{$userLevels[0]->name}}--}} </div>
-                                        </div>
-                                        <div class="text-align-center">
-                                            <a class="cursor-pointer color-black">مشاهده سیستم سطح بندی</a>
-                                        </div>
-                                        <div class="clear fix"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="userProfileActivitiesMainDiv rightColBoxes">
-                        <div class="mainDivHeaderText">
-                            <h3>شرح فعالیت‌ها</h3>
-                        </div>
-                        <div class="activitiesMainDiv">
-                            <div class="activitiesLinesDiv">
-                                <div class="activityTitle">گذاشتن پست</div>
-                                <div class="activityNumbers">پست 21</div>
-                            </div>
-                            <div class="activitiesLinesDiv">
-                                <div class="activityTitle">آپلود عکس</div>
-                                <div class="activityNumbers">عکس 365</div>
-                            </div>
-                            <div class="activitiesLinesDiv">
-                                <div class="activityTitle">آپلود فیلم</div>
-                                <div class="activityNumbers">فیلم 6</div>
-                            </div>
-                            <div class="activitiesLinesDiv">
-                                <div class="activityTitle">آپلود فیلم 360</div>
-                                <div class="activityNumbers">فیلم 2</div>
-                            </div>
-                            <div class="activitiesLinesDiv">
-                                <div class="activityTitle">پرسیدن سؤال</div>
-                                <div class="activityNumbers">سؤال 5</div>
-                            </div>
-                            <div class="activitiesLinesDiv">
-                                <div class="activityTitle">پاسخ به سؤال دیگران</div>
-                                <div class="activityNumbers">پاسخ 15</div>
-                            </div>
-                            <div class="activitiesLinesDiv">
-                                <div class="activityTitle">امتیازدهی</div>
-                                <div class="activityNumbers">مکان 14</div>
-                            </div>
-                            <div class="activitiesLinesDiv">
-                                <div class="activityTitle">پاسخ به سؤالات اختیاری</div>
-                                <div class="activityNumbers">پاسخ 145</div>
-                            </div>
-                            <div class="activitiesLinesDiv">
-                                <div class="activityTitle">ویرایش مکان</div>
-                                <div class="activityNumbers">مکان 13</div>
-                            </div>
-                            <div class="activitiesLinesDiv">
-                                <div class="activityTitle">پیشنهاد مکان جدید</div>
-                                <div class="activityNumbers">مکان 10</div>
-                            </div>
-                            <div class="activitiesLinesDiv">
-                                <div class="activityTitle">نوشتن مقاله</div>
-                                <div class="activityNumbers">مقاله 3</div>
-                            </div>
-                            <div class="activitiesLinesDiv">
-                                <div class="activityTitle">معرفی دوستان</div>
-                                <div class="activityNumbers">معرفی 7</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </div>
     </div>
 
@@ -1370,37 +1210,6 @@ $config = \App\models\ConfigModel::first()
         <script>
             var recentlySample = 0;
             var bookMarkSample = 0;
-
-            {{--function phoneRecentlyViews() {--}}
-
-                {{--if(recentlySample == 0)--}}
-                    {{--recentlySample = $('#phoneRecentlyView').html();--}}
-
-                {{--$('#phoneRecentlyView').html('');--}}
-
-
-                {{--$.ajax({--}}
-                    {{--type: 'post',--}}
-                    {{--url: '{{route('recentlyViewed')}}',--}}
-                    {{--data: {--}}
-                        {{--uId: '{{auth()->user()->id}}'--}}
-                    {{--},--}}
-                    {{--success: function (response) {--}}
-
-                        {{--response = JSON.parse(response);--}}
-                        {{--for(i = 0; i < response.length; i++){--}}
-                            {{--var text = recentlySample;--}}
-                            {{--var fk = Object.keys(response[i]);--}}
-                            {{--for (var x of fk) {--}}
-                                {{--var t = '##' + x + '##';--}}
-                                {{--var re = new RegExp(t, "g");--}}
-                                {{--text = text.replace(re, response[i][x]);--}}
-                            {{--}--}}
-                            {{--$('#phoneRecentlyView').append(text);--}}
-                        {{--}--}}
-                    {{--}--}}
-                {{--});--}}
-            {{--}--}}
 
             function getAlertItemsPhone() {
                 $.ajax({
@@ -1455,9 +1264,14 @@ $config = \App\models\ConfigModel::first()
                 });
             }
 
-            // phoneRecentlyViews();
             getAlertItemsPhone();
             showBookMarksPhone();
+
+            function initialProgressFooter() {
+                var b = "{{$userTotalPointFooter / $userLevelFooter[1]->floor}}" * 100;
+                $("#progressIdPhone").css("width", b + "%");
+            }
+            initialProgressFooter();
         </script>
     @endif
 

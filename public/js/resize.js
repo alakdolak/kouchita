@@ -507,12 +507,25 @@ function showSimilars(idxArr, idxPane) {
     for(i = 0; i < similars[idxArr].length; i++) {
         
         newElement += '<div style="cursor: pointer;" onclick="document.location.href = ';
+        // if(placeModes[idxPane] == 'hotel')
+        //     newElement += homeURL + "/hotel-details/" + similars[idxArr][i].id + "/" + similars[idxArr][i].name;
+        // else if(placeModes[idxPane] == 'amaken')
+        //     newElement += homeURL + "/amaken-details/" + similars[idxArr][i].id + "/" + similars[idxArr][i].name;
+        // else if(placeModes[idxPane] == 'restaurant')
+        //     newElement += homeURL + "/restaurant-details/" + similars[idxArr][i].id + "/" + similars[idxArr][i].name;
+
         if(placeModes[idxPane] == 'hotel')
-            newElement += homeURL + "/hotel-details/" + similars[idxArr][i].id + "/" + similars[idxArr][i].name;
+            var urlKind = 'hotels';
         else if(placeModes[idxPane] == 'amaken')
-            newElement += homeURL + "/amaken-details/" + similars[idxArr][i].id + "/" + similars[idxArr][i].name;
+            var urlKind = 'amaken';
         else if(placeModes[idxPane] == 'restaurant')
-            newElement += homeURL + "/restaurant-details/" + similars[idxArr][i].id + "/" + similars[idxArr][i].name;
+            var urlKind = 'restaurant';
+
+        newElement += homeURL + "/show-place-details/" + urlKind + "/" + similars[idxArr][i].slug;
+
+
+
+
 
         newElement += '" class="ui_column is-3 rec">';
         newElement += '<div class="recommendedCard">';
@@ -583,7 +596,7 @@ function showNearbyHotels(idxArr, idxPane) {
     for(i = 0; i < nearbyHotels[idxArr].length; i++) {
 
         newElement += '<div style="cursor: pointer;" onclick="document.location.href = ';
-        newElement += homeURL + "/hotel-details/" + nearbyHotels[idxArr][i].id + "/" + nearbyHotels[idxArr][i].name;
+        newElement += homeURL + "/show-place-details/hotels/" + nearbyHotels[idxArr][i].slug;
 
         newElement += '" class="prw_rup prw_common_btf_nearby_poi_entry ui_column is-6 poiTile">';
         newElement += '<div class="ui_columns is-gapless is-mobile poiEntry shownOnMap">';

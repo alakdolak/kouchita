@@ -1259,11 +1259,17 @@ class HomeController extends Controller
 
     public function checkEmail()
     {
-        if (isset($_POST["email"])) {
-            echo (User::whereEmail(makeValidInput($_POST["email"]))->count() > 0) ? 'nok' : 'ok';
+
+        if (isset($_POST["email"]) && $_POST['email'] != '') {
+
+            if(\auth()->check())
+                echo (User::whereEmail(makeValidInput($_POST["email"]))->where('id', '!=', \auth()->user()->id)->count() > 0) ? 'nok' : 'ok';
+            else
+                echo (User::whereEmail(makeValidInput($_POST["email"]))->count() > 0) ? 'nok' : 'ok';
             return;
         }
-        echo "nok";
+        echo "nok1";
+        return;
     }
 
     public function checkUserName()
@@ -1273,15 +1279,23 @@ class HomeController extends Controller
 
             $invitationCode = "";
 
-            if (isset($_POST["invitationCode"]))
-                $invitationCode = makeValidInput($_POST["invitationCode"]);
+            if(\auth()->check()){
+                if(User::whereUserName(makeValidInput($_POST['username']))->where('id', '!=', \auth()->user()->id)->count() > 0)
+                    echo 'nok1';
+                else
+                    echo 'ok';
+            }
+            else {
+                if (isset($_POST["invitationCode"]))
+                    $invitationCode = makeValidInput($_POST["invitationCode"]);
 
-            if (User::whereUserName(makeValidInput($_POST["username"]))->count() > 0)
-                echo "nok1";
-            else if (!empty($invitationCode) && User::whereInvitationCode($invitationCode)->count() == 0)
-                echo 'nok';
-            else
-                echo 'ok';
+                if (User::whereUserName(makeValidInput($_POST["username"]))->count() > 0)
+                    echo "nok1";
+                else if (!empty($invitationCode) && User::whereInvitationCode($invitationCode)->count() == 0)
+                    echo 'nok';
+                else
+                    echo 'ok';
+            }
 
             return;
         }
@@ -1417,37 +1431,45 @@ class HomeController extends Controller
 
             $phoneNum = makeValidInput($_POST["phoneNum"]);
 
-            if (User::wherePhone($phoneNum)->count() > 0)
-                echo json_encode(['status' => 'nok']);
+            if(\auth()->check()){
+                if (User::wherePhone($phoneNum)->where('id', '!=', \auth()->user()->id)->count() > 0)
+                    echo 'nok';
+                else
+                    echo 'ok';
+            }
             else {
+                if (User::wherePhone($phoneNum)->count() > 0)
+                    echo json_encode(['status' => 'nok']);
+                else {
 
-                $activation = ActivationCode::wherePhoneNum($phoneNum)->first();
-                if ($activation != null) {
-                    echo json_encode(['status' => 'ok', 'reminder' => (90 - time() + $activation->sendTime)]);
-                    return;
-                }
+                    $activation = ActivationCode::wherePhoneNum($phoneNum)->first();
+                    if ($activation != null) {
+                        echo json_encode(['status' => 'ok', 'reminder' => (90 - time() + $activation->sendTime)]);
+                        return;
+                    }
 
-                $code = createCode();
-                while (ActivationCode::whereCode($code)->count() > 0)
                     $code = createCode();
+                    while (ActivationCode::whereCode($code)->count() > 0)
+                        $code = createCode();
 
-                if ($activation == null) {
-                    $activation = new ActivationCode();
-                    $activation->phoneNum = $phoneNum;
-                }
+                    if ($activation == null) {
+                        $activation = new ActivationCode();
+                        $activation->phoneNum = $phoneNum;
+                    }
 
-                $msgId = sendSMS($phoneNum, $code, 'sms');
-                if ($msgId == -1) {
-                    echo json_encode(['status' => 'nok3']);
-                    return;
-                }
+                    $msgId = sendSMS($phoneNum, $code, 'sms');
+                    if ($msgId == -1) {
+                        echo json_encode(['status' => 'nok3']);
+                        return;
+                    }
 
-                $activation->sendTime = time();
-                $activation->code = $code;
-                try {
-                    $activation->save();
-                    echo json_encode(['status' => 'ok', 'reminder' => 90]);
-                } catch (Exception $x) {
+                    $activation->sendTime = time();
+                    $activation->code = $code;
+                    try {
+                        $activation->save();
+                        echo json_encode(['status' => 'ok', 'reminder' => 90]);
+                    } catch (Exception $x) {
+                    }
                 }
             }
             return;
