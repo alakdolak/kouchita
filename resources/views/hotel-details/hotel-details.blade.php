@@ -126,7 +126,6 @@ if ($total == 0)
         var getPhotosDir = '{{route('getPhotos')}}';
         var findUser = '{{route('findUser')}}';
         var showUserBriefDetail = '{{route('showUserBriefDetail')}}';
-        var hotelDetailsInAddPhotoMode = '{{route('hotelDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'addPhoto'])}}';
         var likePhotographerPicRoute = '{{route('likePhotographer')}}';
         var deleteReviewPicUrl = '{{route('deleteReviewPic')}}';
     </script>
@@ -2439,20 +2438,6 @@ if ($total == 0)
             window.ontouchmove = null;
             document.onkeydown = null;
         }
-    </script>
-
-    <script>
-        function closePublish() {
-            var url;
-            if (placeMode == "hotel")
-                url = '{{route('hotelDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';
-            else if (placeMode == "amaken")
-                url = '{{route('amakenDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';
-            else
-                url = '{{route('restaurantDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';
-            document.location.href = url;
-        }
-
     </script>
 
     @if(session('room') != null || session('backDate') != null)

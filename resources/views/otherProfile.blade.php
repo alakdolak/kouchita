@@ -57,40 +57,6 @@
             $("#" + id).hide();
         }
 
-        var tripStyles = [];
-
-        function toggleTripStyles(id) {
-
-            for(i = 0; i < tripStyles.length; i++) {
-
-                if(tripStyles[i] == id) {
-                    $("#tripStyle_" + id).css("background-color", 'white').css("color", 'black');
-                    $("#tripStylePic_" + id).css("visibility", 'hidden');
-                    tripStyles.splice(i, 1);
-                    if(tripStyles.length < 3) {
-                        $("#submitBtnTripStyle").attr("disabled", true);
-                    }
-                    return;
-                }
-
-            }
-
-            tripStyles[tripStyles.length] = id;
-            $("#tripStyle_" + id).css("background-color", '#4dc7bc').css("color", 'white');
-            $("#tripStylePic_" + id).css("visibility", 'visible');
-            if(tripStyles.length >= 3) {
-                $("#submitBtnTripStyle").attr("disabled", false);
-            }
-        }
-
-        function closeTripStyles(element) {
-
-            for(i = 0; i < tripStyles.length; i++) {
-                $("#tripStylePic_" + tripStyles[i]).css("visibility", "hidden");
-            }
-            $('.dark').hide();
-            hideElement(element);
-        }
 
         function sendAjaxRequestToGiveTripStyles(uId, containerId) {
 

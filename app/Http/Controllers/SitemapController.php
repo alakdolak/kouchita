@@ -36,7 +36,7 @@ class SitemapController extends Controller
             }
         }
 
-        return response()->view('sitemap.places', ['places' => $pl])->header('Content-Type', 'text/xml');
+        return response()->view('sitemap.places', ['places' => $pl])->header('Content-Type', 'application/xml');
     }
 
     public function lists()
@@ -74,7 +74,7 @@ class SitemapController extends Controller
             }
         }
 
-        return response()->view('sitemap.lists', ['lists' => $lists])->header('Content-Type', 'text/xml');
+        return response()->view('sitemap.lists', ['lists' => $lists])->header('Content-Type', 'application/xml');
     }
 
     public function posts()
@@ -92,7 +92,7 @@ class SitemapController extends Controller
             }
         }
 
-        return response()->view('sitemap.posts', ['lists' => $lists])->header('Content-Type', 'text/xml');
+        return response()->view('sitemap.posts', ['lists' => $lists])->header('Content-Type', 'application/xml');
     }
 
     public function city()
@@ -114,6 +114,6 @@ class SitemapController extends Controller
             }
         }
 
-        return response()->view('sitemap.city', ['lists' => $lists])->header('Content-Type', 'text/xml');
+        return response()->view('sitemap.city', ['lists' => $lists])->header('Content-Type', 'application/xml');
     }
 }

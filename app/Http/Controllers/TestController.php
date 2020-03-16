@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-
-use App\models\AboutMe;
 use App\models\AbstractLog;
 use App\models\ActivationCode;
 use App\models\Activity;
@@ -124,8 +122,8 @@ class TestController extends Controller {
             $inLastWeek = $inLastWeek[0]->countNum;
 
         $date = getPast('-7 days')['date'];
-        $boys = AboutMe::where('sex', '=', 1)->count();
-        $girls = AboutMe::where('sex', '=', 0)->count();
+//        $boys = AboutMe::where('sex', '=', 1)->count();
+//        $girls = AboutMe::where('sex', '=', 0)->count();
 
         $totalSeen = AbstractLog::all()->sum('counter');
         $lastWeekSeen = AbstractLog::where('date', '>', $date)->sum('counter');

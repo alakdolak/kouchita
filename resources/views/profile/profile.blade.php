@@ -2,6 +2,7 @@
 @extends('layouts.bodyProfile')
 
     @section('main')
+        <script src="{{URL::asset('js/jsNeededForProfile.js')}}"></script>
 
         <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/profile.css')}}">
         <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/usersActivities.css')}}">
@@ -65,7 +66,7 @@
                                 <div data-direction="left" id="targetHelp_8" class="targets">
                                     <div class="points_info tripCollectiveInfo" onclick="showElement('activityDiv')">
                                         <div class="label"> امتیاز کل شما </div>
-                                        <div class="points"> {{$totalPoint}} </div>
+                                        <div class="points"> {{auth()->user()->getUserTotalPoint()}} </div>
                                         <a>مشاهده سیستم امتیازدهی</a>
                                     </div>
 
@@ -440,104 +441,54 @@
                             <div class="activitiesMainDiv">
                                 <div class="activitiesLinesDiv">
                                     <div class="activityTitle">گذاشتن پست</div>
-                                    <div class="activityNumbers">پست 21</div>
+                                    <div class="activityNumbers">پست {{$userCount['postCount']}}</div>
                                 </div>
                                 <div class="activitiesLinesDiv">
                                     <div class="activityTitle">آپلود عکس</div>
-                                    <div class="activityNumbers">عکس 365</div>
+                                    <div class="activityNumbers">عکس {{$userCount['picCount']}}</div>
                                 </div>
                                 <div class="activitiesLinesDiv">
                                     <div class="activityTitle">آپلود فیلم</div>
-                                    <div class="activityNumbers">فیلم 6</div>
+                                    <div class="activityNumbers">فیلم {{$userCount['videoCount']}}</div>
                                 </div>
                                 <div class="activitiesLinesDiv">
                                     <div class="activityTitle">آپلود فیلم 360</div>
-                                    <div class="activityNumbers">فیلم 2</div>
+                                    <div class="activityNumbers">فیلم {{$userCount['video360Count']}}</div>
                                 </div>
                                 <div class="activitiesLinesDiv">
                                     <div class="activityTitle">پرسیدن سؤال</div>
-                                    <div class="activityNumbers">سؤال 5</div>
+                                    <div class="activityNumbers">سؤال {{$userCount['questionCount']}}</div>
                                 </div>
                                 <div class="activitiesLinesDiv">
                                     <div class="activityTitle">پاسخ به سؤال دیگران</div>
-                                    <div class="activityNumbers">پاسخ 15</div>
+                                    <div class="activityNumbers">پاسخ {{$userCount['ansCount']}}</div>
                                 </div>
                                 <div class="activitiesLinesDiv">
                                     <div class="activityTitle">امتیازدهی</div>
-                                    <div class="activityNumbers">مکان 14</div>
+                                    <div class="activityNumbers">مکان {{$userCount['scoreCount']}}</div>
                                 </div>
                                 <div class="activitiesLinesDiv">
                                     <div class="activityTitle">پاسخ به سؤالات اختیاری</div>
-                                    <div class="activityNumbers">پاسخ 145</div>
+                                    <div class="activityNumbers">پاسخ 0</div>
                                 </div>
                                 <div class="activitiesLinesDiv">
                                     <div class="activityTitle">ویرایش مکان</div>
-                                    <div class="activityNumbers">مکان 13</div>
+                                    <div class="activityNumbers">مکان 0</div>
                                 </div>
                                 <div class="activitiesLinesDiv">
                                     <div class="activityTitle">پیشنهاد مکان جدید</div>
-                                    <div class="activityNumbers">مکان 10</div>
+                                    <div class="activityNumbers">مکان 0</div>
                                 </div>
                                 <div class="activitiesLinesDiv">
                                     <div class="activityTitle">نوشتن مقاله</div>
-                                    <div class="activityNumbers">مقاله 3</div>
+                                    <div class="activityNumbers">مقاله 0</div>
                                 </div>
                                 <div class="activitiesLinesDiv">
                                     <div class="activityTitle">معرفی دوستان</div>
-                                    <div class="activityNumbers">معرفی 7</div>
+                                    <div class="activityNumbers">معرفی 0</div>
                                 </div>
                             </div>
                         </div>
-
-{{--                        <?php $i = 0; $allow = true; ?>--}}
-{{--                        @foreach($activities as $activity)--}}
-
-{{--                            @if($counts[$i] != 0)--}}
-{{--                                @if($allow)--}}
-{{--                                    <?php $allow = false; ?>--}}
-{{--                                    <div id="targetHelp_12" class="targets modules-membercenter-content-summary">--}}
-
-{{--                                        <div id="helpSpan_12" class="helpSpans hidden">--}}
-{{--                                            <span class="introjs-arrow"></span>--}}
-{{--                                            <p>--}}
-{{--                                                تمامی فعالیت های شما به صورت خلاصه در این قسمت قابل رویت است.--}}
-{{--                                            </p>--}}
-{{--                                            <button data-val="12" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_12">بعدی</button>--}}
-{{--                                            <button data-val="12" class="btn btn-primary backBtnsHelp" id="backBtnHelp_12">قبلی</button>--}}
-{{--                                            <button class="btn btn-danger exitBtnHelp">خروج</button>--}}
-{{--                                        </div>--}}
-
-{{--                                        <div class="member-points">--}}
-{{--                                            <ul class="counts">--}}
-{{--                                                <li class="content-info">--}}
-{{--                                                    <img src="{{URL::asset("activities") . "/" . $activity->pic}}" class="content-icon">--}}
-{{--                                                    <a name="ratings" class="content-link" data-filter="RATINGS_ALL" href="#myActivitiesDiv" onclick="sendAjaxRequestToGiveActivity('{{$activity->id}}', '{{$user->id}}', -1, 'myActivities', 'myActivitiesContent', 1, '{{$counts[$i]}}')">--}}
-{{--                                                        <span>{{$counts[$i]}} </span>--}}
-{{--                                                        <span>{{$activity->name}}</span>--}}
-{{--                                                    </a>--}}
-{{--                                                </li>--}}
-{{--                                            </ul>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                @else--}}
-{{--                                    <div class="targets modules-membercenter-content-summary">--}}
-
-{{--                                        <div class="member-points">--}}
-{{--                                            <ul class="counts">--}}
-{{--                                                <li class="content-info">--}}
-{{--                                                    <img src="{{URL::asset("activities") . "/" . $activity->pic}}" class="content-icon">--}}
-{{--                                                    <a name="ratings" class="content-link" data-filter="RATINGS_ALL" href="#myActivitiesDiv" onclick="sendAjaxRequestToGiveActivity('{{$activity->id}}', '{{$user->id}}', -1, 'myActivities', 'myActivitiesContent', 1, '{{$counts[$i]}}')">--}}
-{{--                                                        <span>{{$counts[$i]}} </span>--}}
-{{--                                                        <span>{{$activity->name}}</span>--}}
-{{--                                                    </a>--}}
-{{--                                                </li>--}}
-{{--                                            </ul>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                @endif--}}
-{{--                            @endif--}}
-{{--                            <?php $i++; ?>--}}
-{{--                        @endforeach--}}
 
                         <div class="modules-membercenter-member-tag">
                             <div id="targetHelp_13" class="memberTags targets">
@@ -558,10 +509,22 @@
                                 </div>
 
                                 <div class="separator"></div>
-                                <div id="tagDisplay" class="tagBlock">
+                                <div id="tagDisplay" class="tagBlock" style="max-width: 10000px">
                                     <div id="tagSuggest" class="tagPrompt" name="add-tags">
                                         <span>من چه گردشگری هستم ؟</span>
-                                        <span>برای آشنایی بیشتر مردم با شما ، عادات سفر خود را مشخص کنید.</span>
+                                        @if(count($user->tripStyle) == 0)
+                                            <span>برای آشنایی بیشتر مردم با شما ، عادات سفر خود را مشخص کنید.</span>
+                                        @else
+                                            <div id="myTripStyles">
+                                            @foreach($user->tripStyle as $item)
+                                                <div class="tagContainer">
+                                                    <label id="tripStyle_12" class="tripStyleBodyProfile tag tagBubble">
+                                                        <div class="tagText tagTextBodyPlace" style="color: white">{{$item->name}}</div>
+                                                    </label>
+                                                </div>
+                                            @endforeach
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

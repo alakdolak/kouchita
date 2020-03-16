@@ -653,7 +653,7 @@
                 }
             });
             var hotelDetail = {
-                url: '{{route('home') . '/hotel-details/'}}',
+{{--                url: '{{route('home') . '/hotel-details/'}}',--}}
                 name: hotelMap[i].name
             };
             hotelDetail.url = hotelDetail.url + hotelMap[i].id + '/' + hotelMap[i].name;
@@ -681,7 +681,7 @@
                 }
             });
             var restDetail = {
-                url: '{{route('home') . '/restaurant-details/'}}',
+{{--                url: '{{route('home') . '/restaurant-details/'}}',--}}
                 name: restMap[i].name
             };
             restDetail.url = restDetail.url + restMap[i].id + '/' + restMap[i].name;
@@ -722,7 +722,7 @@
                 }
             });
             var amakenDetail = {
-                url: '{{route('home') . '/amaken-details/'}}',
+{{--                url: '{{route('home') . '/amaken-details/'}}',--}}
                 name: amakenMap[i].name
             };
             amakenDetail.url = amakenDetail.url + amakenMap[i].id + '/' + amakenMap[i].name;
@@ -757,7 +757,7 @@
                 }
             });
             var majaraDetail = {
-                url: '{{route('home') . '/hotel-details/'}}',
+{{--                url: '{{route('home') . '/hotel-details/'}}',--}}
                 name: majaraMap[i].name
             };
             majaraDetail.url = majaraDetail.url + majaraMap[i].id + '/' + majaraMap[i].name;

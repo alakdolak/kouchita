@@ -216,7 +216,7 @@
                     <div class="col-xs-12">
                         <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/6/' . $kind . '/' . $place->listName)}}">
                             <div class="cityPageIcon majara"></div>
-                            <div class="textCityPageIcon">ماجراجویی</div>
+                            <div class="textCityPageIcon">طبیعت گردی</div>
                             <div class="textCityPageIcon">{{count($allMajara)}}</div>
                         </a>
                         <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/10/' . $kind . '/' . $place->listName)}}">
