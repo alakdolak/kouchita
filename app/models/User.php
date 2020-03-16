@@ -96,9 +96,9 @@ class User extends Authenticatable{
         $ansActivity = Activity::whereName('پاسخ')->first();
         $postCount += LogModel::whereActivityId($postActivity->id)->where('visitorId', $user->id)->count();
         $picCount += PhotographersPic::where('userId', $user->id)->count();
-        $picCount += \DB::select('SELECT COUNT(reviewPics.id) AS count FROM reviewPics RIGHT JOIN log ON log.visitorId = ' . $user->id . ' AND reviewpics.isVideo = 0 AND reviewPics.is360 = 0 AND reviewPics.logId = log.id ')[0]->count;
-        $videoCount += \DB::select('SELECT COUNT(reviewPics.id) AS count FROM reviewPics RIGHT JOIN log ON log.visitorId = ' . $user->id . ' AND reviewpics.isVideo = 1 AND reviewPics.is360 = 0 AND reviewPics.logId = log.id ')[0]->count;
-        $video360Count += \DB::select('SELECT COUNT(reviewPics.id) AS count FROM reviewPics RIGHT JOIN log ON log.visitorId = ' . $user->id . ' AND reviewpics.isVideo = 1 AND reviewPics.is360 = 1 AND reviewPics.logId = log.id ')[0]->count;
+        $picCount += \DB::select('SELECT COUNT(reviewPics.id) AS count FROM reviewPics RIGHT JOIN log ON log.visitorId = ' . $user->id . ' AND reviewPics.isVideo = 0 AND reviewPics.is360 = 0 AND reviewPics.logId = log.id ')[0]->count;
+        $videoCount += \DB::select('SELECT COUNT(reviewPics.id) AS count FROM reviewPics RIGHT JOIN log ON log.visitorId = ' . $user->id . ' AND reviewPics.isVideo = 1 AND reviewPics.is360 = 0 AND reviewPics.logId = log.id ')[0]->count;
+        $video360Count += \DB::select('SELECT COUNT(reviewPics.id) AS count FROM reviewPics RIGHT JOIN log ON log.visitorId = ' . $user->id . ' AND reviewPics.isVideo = 1 AND reviewPics.is360 = 1 AND reviewPics.logId = log.id ')[0]->count;
         $questionCount += LogModel::whereActivityId($questionActivity->id)->where('visitorId', $user->id)->count();
         $ansCount += LogModel::whereActivityId($ansActivity->id)->where('visitorId', $user->id)->count();
         $scoreCount += count(\DB::select('SELECT questionUserAns.logId as PlaceCount FROM questionUserAns INNER JOIN log ON log.visitorId = ' . $user->id . ' AND questionUserAns.logId = log.id GROUP BY PlaceCount'));
