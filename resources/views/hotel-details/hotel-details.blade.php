@@ -992,10 +992,18 @@ if ($total == 0)
                     <div class="container-fluid tabLinkMainWrapMainDiv">
                         <div class="collapse navbar-collapse" id="myNavbar">
                             <ul class="nav navbar-nav">
-                                <li><a class="tabLinkMainWrap similarLocationsBtnTopBar" href="#similarLocationsMainDiv">مکان‌های مشابه</a></li>
-                                <li><a class="tabLinkMainWrap QAndAsBtnTopBar" href="#QAndAMainDivId">سؤالات</a></li>
-                                <li><a id="pcPostButton" class="tabLinkMainWrap postsBtnTopBar" href="#mainDivPlacePost">پست</a></li>
-                                <li><a class="tabLinkMainWrap generalDescBtnTopBar" href="#generalDescLinkRel">معرفی کلی</a></li>
+                                <li>
+                                    <a class="tabLinkMainWrap similarLocationsBtnTopBar" href="#similarLocationsMainDiv">مکان‌های مشابه</a>
+                                </li>
+                                <li>
+                                    <a class="tabLinkMainWrap QAndAsBtnTopBar" href="#QAndAMainDivId">سؤالات</a>
+                                </li>
+                                <li>
+                                    <a id="pcPostButton" class="tabLinkMainWrap postsBtnTopBar" href="#mainDivPlacePost">پست</a>
+                                </li>
+                                <li>
+                                    <a class="tabLinkMainWrap generalDescBtnTopBar" href="#generalDescLinkRel">معرفی کلی</a>
+                                </li>
                             </ul>
                         </div>
                     </div>
