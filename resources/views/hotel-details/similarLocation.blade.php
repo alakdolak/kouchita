@@ -24,7 +24,7 @@
         <div class="shelf_header">
             <div class="shelf_title">
                 <div class="shelf_title_container h3">
-                    <h3>مکان‌های نزدیک</h3>
+                    <h3>جاذبه های نزدیک</h3>
                 </div>
             </div>
         </div>
@@ -74,7 +74,7 @@
         <div class="shelf_header">
             <div class="shelf_title">
                 <div class="shelf_title_container h3">
-                    <h3>ماجراهای نزدیک</h3>
+                    <h3>طبیعت گردی های نزدیک</h3>
                 </div>
             </div>
         </div>

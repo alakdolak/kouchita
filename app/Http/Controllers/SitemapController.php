@@ -14,7 +14,7 @@ class SitemapController extends Controller
 {
     public function index()
     {
-        return response()->view('sitemap.index')->header('Content-Type', 'text/xml');
+        return response()->view('sitemap.index')->header('Content-Type', 'application/xml');
     }
 
     public function places()

@@ -70,6 +70,15 @@ if ($total == 0)
         <script src="{{URL::asset('vr2/videojs-vr.js')}}"></script>
     @endif
 
+
+    <style>
+        .affix{
+            max-width: 100%;
+            left: 0px;
+            box-shadow: 0 -20px 20px 20px lightgrey;
+        }
+    </style>
+
 @stop
 
 @section('main')
@@ -1167,8 +1176,10 @@ if ($total == 0)
                                                         </div>
                                                         <div id="tagsName">
                                                         <h3>برچسب‌ها:</h3>
-                                                        @foreach($place->tags as $item)
-                                                            <span class="tag">{{$item}}</span>
+                                                        @foreach($place->tags as $key => $item)
+                                                            @if($key <= 5)
+                                                                <span class="tag">{{$item}}</span>
+                                                            @endif
                                                         @endforeach
                                                     </div>
                                                     </div>
@@ -1311,8 +1322,10 @@ if ($total == 0)
                                                         </div>
                                                         <div id="tagsName">
                                                             <h3>برچسب‌ها:</h3>
-                                                            @foreach($place->tags as $item)
-                                                                <span class="tag">{{$item}}</span>
+                                                            @foreach($place->tags as $key => $item)
+                                                                @if($key <= 5)
+                                                                    <span class="tag">{{$item}}</span>
+                                                                @endif
                                                             @endforeach
                                                         </div>
                                                     </div>
