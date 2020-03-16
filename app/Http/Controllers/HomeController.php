@@ -1759,31 +1759,39 @@ class HomeController extends Controller
              * function. We store the resultant access token
              * bundle in the session, and redirect to ourself.
              */
-
             $client->authenticate($_GET['code']);
 
             $user = $service->userinfo->get(); //get user info
-            $user_count = User::whereUserName($user->id)->count();
-
-            if ($user_count == 0) {
-
-                $tmpUser = new User();
-                $tmpUser->username = $user->name;
-                $tmpUser->password = Hash::make($user->link);
+            $userCheckEmail = User::where('email', $user->email)->first();
+            if($userCheckEmail != null){
+                if($userCheckEmail->googleId == null){
+                    $userCheckEmail->googleId = $user->id;
+                    $userCheckEmail->password = Hash::make($user->id);
+                    try {
+                        $userCheckEmail->save();
+                    }
+                    catch (Exception $x) {
+                    }
+                }
+            }
+            else{
+                $userCheckEmail = new User();
+                $userCheckEmail->username = $user->givenName;
+                $userCheckEmail->password = Hash::make($user->id);
                 $name = explode(' ', $user->name);
-                $tmpUser->first_name = $name[0];
-                $tmpUser->last_name = $name[1];
-                $tmpUser->email = $user->email;
-                $tmpUser->picture = $user->picture;
-
+                $userCheckEmail->first_name = $name[0];
+                $userCheckEmail->last_name = $name[1];
+                $userCheckEmail->email = $user->email;
+                $userCheckEmail->picture = $user->picture;
+                $userCheckEmail->googleId = $user->id;
                 try {
-                    $tmpUser->save();
+                    $userCheckEmail->save();
                 }
                 catch (Exception $x) {
                 }
             }
 
-            Auth::attempt(array('username' => $user->name, 'password' => $user->link), true);
+            Auth::attempt(array('username' => $userCheckEmail->username, 'password' => $user->id), true);
         }
 
         return Redirect::to(route('main'));
