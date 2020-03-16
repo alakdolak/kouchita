@@ -1,4 +1,3 @@
-
 /*header1 styles*/
 
 
@@ -140,9 +139,11 @@ DIV.ppr_rup.ppr_priv_global_nav .global-nav-bar-container .global-nav-actions {
     display: flex;
     align-items: center;
     padding: 0;
+    position: absolute;
+    left: 0;
 }
 
-DIV.ppr_rup.ppr_priv_global_nav .global-nav-actions>div {
+DIV.ppr_rup.ppr_priv_global_nav .global-nav-actions > div {
     line-height: 1.5;
     display: flex;
     align-items: center;
@@ -192,6 +193,9 @@ DIV.ppr_rup.ppr_priv_global_nav_action_profile .username::before {
     width: 50px;
     height: 50px;
     z-index: 10;
+    position: absolute;
+    left: 5px;
+    top: -3px;
 }
 
 .collapseBtnActions::before {
@@ -205,13 +209,14 @@ DIV.ppr_rup.ppr_priv_global_nav_action_profile .username::before {
 .ui_jewel.marked_for_attention:before {
     display: none;
 }
+
 @media (max-width: 992px) {
 
     DIV.ppr_rup.ppr_priv_global_nav .global-nav-green .global-nav-link {
         font-size: 13px;
     }
 
-    DIV.ppr_rup.ppr_priv_global_nav .global-nav-links-container .global-nav-links-menu{
+    DIV.ppr_rup.ppr_priv_global_nav .global-nav-links-container .global-nav-links-menu {
         font-size: 0;
     }
 
@@ -227,10 +232,10 @@ DIV.ppr_rup.ppr_priv_global_nav_action_profile .username::before {
         display: none;
         position: absolute;
         background: #ffe3b1;
-        left: 45px;
+        left: 30px;
         padding-right: 20px;
         border-radius: 0 25px 25px 0;
-        top: 10px;
+        top: -3px;
     }
 
     DIV.ppr_rup.ppr_priv_global_nav_action_profile .username::before {
@@ -246,16 +251,17 @@ DIV.ppr_rup.ppr_priv_global_nav_action_profile .username::before {
     }
 }
 
-.ui_tab{
+.ui_tab {
     color: black !important;
 }
-.mag_glass_parent{
+
+.mag_glass_parent {
     width: 100%;
     height: 100%;
 }
 
 
-.mainLoginButton{
+.mainLoginButton {
     padding: 2px 20px;
     font-size: 20px;
     color: #eafbff !important;

@@ -3,7 +3,7 @@
 
     <div class="descriptionSections">
         <div class="row">
-            <div class="col-sm-6" style="float: right">
+            <div class="col-xs-6" style="float: right">
                 <div class="titleSection">
                     <span class="titleSectionSpan">
                         نوع غذا
@@ -11,7 +11,7 @@
                 </div>
                 <div class="contentSection col-xs-4">{{$place->kindName}}</div>
             </div>
-            <div class="col-sm-6" style="float: right">
+            <div class="col-xs-6" style="float: right">
                 <div class="titleSection">
                     <span class="titleSectionSpan">
                         نوع سرو

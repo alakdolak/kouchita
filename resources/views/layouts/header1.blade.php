@@ -329,7 +329,7 @@ if(Auth::check()) {
 
                         </div>
 
-                        <div class="global-nav-actions flex" style="position: absolute; left: 0px;">
+                        <div class="global-nav-actions flex">
 
                             @if(Auth::check())
 
@@ -650,7 +650,7 @@ if(Auth::check()) {
                 });
         }
         else {
-            $('.global-nav-actions').animate({width: "270px"});
+            $('.global-nav-actions').animate({width: "300px"});
             $('.global-nav-actions').toggleClass('display-flexImp');
         }
     }

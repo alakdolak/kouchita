@@ -1071,12 +1071,18 @@ if ($total == 0)
                                                                 @foreach($place->material as $item)
                                                                     <div class="col-sm-6 float-right">
                                                                         <div class="row font-size-20">
+                                                                            <div class="col-sm-6 color-green float-right">{{$item[0]}}</div>
                                                                             <div class="col-sm-6">{{$item[1]}}</div>
-                                                                            <div class="col-sm-6" style="color: #4dc7bc">{{$item[0]}}</div>
                                                                         </div>
                                                                     </div>
                                                                 @endforeach
                                                             @endif
+                                                                <div class="col-sm-6 float-right">
+                                                                    <div class="row font-size-20">
+                                                                        <div class="col-sm-6 color-green float-right">امشنستاینشسات</div>
+                                                                        <div class="col-sm-6">تنسشلینتشسذزپ</div>
+                                                                    </div>
+                                                                </div>
                                                         </div>
                                                     </div>
                                                 </div>
