@@ -1,9 +1,11 @@
 <?php
 $config = \App\models\ConfigModel::first();
-$userLevelFooter = auth()->user()->getUserNearestLevel();
-$userTotalPointFooter = auth()->user()->getUserTotalPoint();
+    if(auth()->check()){
+        $userLevelFooter = auth()->user()->getUserNearestLevel();
+        $userTotalPointFooter = auth()->user()->getUserTotalPoint();
 
-$nextLevelFooter = $userLevelFooter[1]->floor - $userTotalPointFooter;
+        $nextLevelFooter = $userLevelFooter[1]->floor - $userTotalPointFooter;
+    }
 ?>
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/footer.css')}}' />
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/icons.css?v=1')}}'/>
@@ -920,7 +922,8 @@ $nextLevelFooter = $userLevelFooter[1]->floor - $userTotalPointFooter;
             </div>
         </div>
 
-        <div class="modal fade" id="profile">
+        @if(auth()->check())
+            <div class="modal fade" id="profile">
             <div class="mainPopUp rightPopUp">
                 <div id="lp_register">
                     <div>
@@ -1176,6 +1179,7 @@ $nextLevelFooter = $userLevelFooter[1]->floor - $userTotalPointFooter;
                 </div>
             </div>
         </div>
+        @endif
     </div>
     </div>
 
