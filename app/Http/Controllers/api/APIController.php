@@ -576,7 +576,7 @@ class APIController extends Controller {
             require_once __DIR__ . '/../glogin/libraries/Google/autoload.php';
             // Get $id_token via HTTPS POST.
 
-            $client = new Google_Client(['client_id' => '774684902659-20aeg6um0856j5li2uuu9ombu2pcbqv9.apps.googleusercontent.com']);
+            $client = new Google_Client(['client_id' => '774684902659-1tdvb7r1v765b3dh7k5n7bu4gpilaepe.apps.googleusercontent.com']);
             $payload = $client->verifyIdToken($id_token);
             if ($payload) {
                 $userId = $payload['sub'];
