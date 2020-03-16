@@ -629,7 +629,12 @@ function compressImage($source, $destination, $quality){
     elseif ($info['mime'] == 'image/png')
         $image = imagecreatefrompng($source);
 
-    return imagejpeg($image, $destination, $quality);
+    try{
+        return imagejpeg($image, $destination, $quality);
+    }
+    catch (Exception $x) {
+        return false;
+    }
 }
 
 function getAllPlacePicsByKind($kindPlaceId, $placeId){

@@ -129,12 +129,12 @@
                         <a id="messageLinkColor2" href="{{URL('messages')}}">پیام‌ها</a>
                     </li>
                 @endif
-                <li id="Bookings" class="bookings">
-                    <a id="bookingLinkColor2" href="{{route('soon')}}">رزروها</a>
-                </li>
-                <li id="PaymentOptions" class="paymentOptions">
-                    <a id="paymentOptionsLinkColor2" href="{{route('soon')}}">پروازها</a>
-                </li>
+                {{--<li id="Bookings" class="bookings">--}}
+                    {{--<a id="bookingLinkColor2" href="{{route('soon')}}">رزروها</a>--}}
+                {{--</li>--}}
+                {{--<li id="PaymentOptions" class="paymentOptions">--}}
+                    {{--<a id="paymentOptionsLinkColor2" href="{{route('soon')}}">پروازها</a>--}}
+                {{--</li>--}}
                 @if($mode == "setting")
                     <li id="Settings" class="settingColor1 settings">
                 @else

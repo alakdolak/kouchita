@@ -424,7 +424,10 @@ class ProfileController extends Controller {
             $photo = "userProfile/" . $user->picture;
         }
         else {
-            $photo = URL::asset("defaultPic/" . DefaultPic::whereId($user->picture)->name);
+            if(strpos($user->picture, 'https3') > -1 || strpos($user->picture, 'http') > -1 )
+                $photo = $user->picture;
+            else
+                $photo = URL::asset("defaultPic/" . DefaultPic::whereId($user->picture)->name);
         }
 
         return view("editPhoto", array('msg' => $msg, 'photo' => $photo));
@@ -476,25 +479,29 @@ class ProfileController extends Controller {
 
             if($user->uploadPhoto == 0 || $user->picture != $file["name"]) {
 
-                $targetFile = __DIR__ . "/../../../../assets/userProfile/" . $file["name"];
+                $fileName = time() . $file["name"];
+                $targetFile = __DIR__ . "/../../../../assets/userProfile/" . $fileName;
 
                 if (!file_exists($targetFile)) {
                     $err = uploadCheck($targetFile, "newPic", "تغییر تصویر کاربری", 3000000, -1);
                     if (empty($err)) {
-                        $err = upload($targetFile, "newPic", "تغییر تصویر کاربری");
-                        if(empty($err)) {
-                            if($user->uploadPhoto == 1)
+                        $destinationMainPic = $targetFile;
+
+                        $err = compressImage($_FILES['newPic']['tmp_name'], $destinationMainPic, 60);
+                        if($err) {
+                            if($user->uploadPhoto == 1 && file_exists(__DIR__ . "/../../../../assets/userProfile/" . $user->picture))
                                 unlink(__DIR__ . "/../../../../assets/userProfile/" . $user->picture);
-                            $user->picture = $file["name"];
+                            $user->picture = $fileName;
                             $user->uploadPhoto = 1;
                             $user->save();
+                            $err = '';
                         }
                     }
                 }
             }
         }
 
-        if(empty($err)) {
+        if(empty($err) ) {
             return Redirect::to("editPhoto");
         }
 
