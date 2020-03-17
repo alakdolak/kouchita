@@ -3,234 +3,10 @@
 use App\models\ConfigModel;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Route;
-
-Route::get('deleteCols', function(){
-    $kindPlace = \App\models\Place::all();
-    foreach ($kindPlace as $item){
-        if($item->tableName != null){
-            \DB::select('ALTER TABLE ' . $item->tableName . ' DROP `tag1`, DROP `tag2`, DROP `tag3`, DROP `tag4`, DROP `tag5`, DROP `tag6`, DROP `tag7`, DROP `tag8`, DROP `tag9`, DROP `tag10`, DROP `tag11`, DROP `tag12`, DROP `tag13`, DROP `tag14`, DROP `tag15`;');
-        }
-    }
-    dd('done');
+Route::get('resizePostImagesPage', function(){
+    return view('notUse.compressImage');
 });
-Route::get('databaseforall', function (){
-    $kindPlace = \App\models\Place::all();
-    $count = 0;
-    foreach ($kindPlace as $item1){
-        if($item1->tableName != null){
-            $places = DB::table($item1->tableName)->get()->toArray();
-
-            $query = "INSERT INTO placeTags (id, kindPlaceId, placeId, tag) VALUES ";
-            $qu = '';
-            foreach ($places as $item){
-                foreach ($item as $key => $value){
-                    if(strpos($key, 'tag') !== false && $value != null) {
-                        if($qu != '')
-                            $qu .= ', ';
-                        $qu .= '(null, ' . $item1->id . ', ' . $item->id . ', "' . $value . '")';
-                        $count++;
-                    }
-                }
-            }
-            $query .= $qu;
-            \DB::select($query);
-        }
-    }
-    dd($count);
-});
-
-
-Route::get('/loginTo/{id}', function($id){
-   auth()->loginUsingId($id);
-   return redirect()->back();
-});
-
-Route::get('fillHotelPic', function(){
-    $Place = \App\models\Hotel::all();
-    foreach ($Place as $item){
-        if($item->file != null && $item->file != 'none'){
-            $text = 'VALUES';
-            $first = false;
-
-
-            if($item->pic_1 != null){
-                $item->picNumber = '1.jpg';
-                if($item->alt1 != null)
-                    $item->alt = $item->alt1;
-                $item->save();
-            }
-            if($item->pic_2 != null){
-                $first = true;
-                $text .= " (NULL, '2.jpg', '" . $item->id . "', '" . 4 . "', '" . $item->alt2 . "')";
-            }
-            if($item->pic_3 != null){
-                if($first)
-                    $text .= ',';
-                else
-                    $first = true;
-                $text .= " (NULL, '3.jpg', '" . $item->id . "', '" . 4 . "', '" . $item->alt4 . "')";
-            }
-            if($item->pic_4 != null){
-                if($first)
-                    $text .= ',';
-                else
-                    $first = true;
-                $text .= " (NULL, '4.jpg', '" . $item->id . "', '" . 4 . "', '" . $item->alt4 . "')";
-            }
-            if($item->pic_5 != null){
-                if($first)
-                    $text .= ',';
-                else
-                    $first = true;
-                $text .= " (NULL, '5.jpg', '" . $item->id . "', '" . 4 . "', '" . $item->alt5 . "')";
-            }
-
-            if($text != 'VALUES')
-                \DB::insert("INSERT INTO `placepics` (`id`, `picNumber`, `placeId`, `kindPlaceId`, `alt`) " . $text . ";");
-        }
-    }
-
-    dd('done');
-});
-Route::get('fillAmakenPic', function(){
-    $Place = \App\models\Amaken::all();
-    foreach ($Place as $item){
-        if($item->file != null && $item->file != 'none'){
-            $text = 'VALUES';
-            $first = false;
-
-            if($item->pic_1 != null){
-                $item->picNumber = '1.jpg';
-                if($item->alt1 != null)
-                    $item->alt = $item->alt1;
-                $item->save();
-            }
-            if($item->pic_2 != null){
-                $first = true;
-                $text .= " (NULL, '2.jpg', '" . $item->id . "', '" . 1 . "', '" . $item->alt2 . "')";
-            }
-            if($item->pic_3 != null){
-                if($first)
-                    $text .= ',';
-                else
-                    $first = true;
-                $text .= " (NULL, '3.jpg', '" . $item->id . "', '" . 1 . "', '" . $item->alt4 . "')";
-            }
-            if($item->pic_4 != null){
-                if($first)
-                    $text .= ',';
-                else
-                    $first = true;
-                $text .= " (NULL, '4.jpg', '" . $item->id . "', '" . 1 . "', '" . $item->alt4 . "')";
-            }
-            if($item->pic_5 != null){
-                if($first)
-                    $text .= ',';
-                else
-                    $first = true;
-                $text .= " (NULL, '5.jpg', '" . $item->id . "', '" . 1 . "', '" . $item->alt5 . "')";
-            }
-
-            if($text != 'VALUES')
-                \DB::insert("INSERT INTO `placepics` (`id`, `picNumber`, `placeId`, `kindPlaceId`, `alt`) " . $text . ";");
-        }
-    }
-
-    dd('done');
-});
-Route::get('fillRestPic', function(){
-    $Place = \App\models\Restaurant::all();
-    foreach ($Place as $item){
-        if($item->file != null && $item->file != 'none'){
-            $text = 'VALUES';
-            $first = false;
-
-            if($item->pic_1 != null){
-                $item->picNumber = '1.jpg';
-                if($item->alt1 != null)
-                    $item->alt = $item->alt1;
-                $item->save();
-            }
-            if($item->pic_2 != null){
-                $first = true;
-                $text .= " (NULL, '2.jpg', '" . $item->id . "', '" . 3 . "', '" . $item->alt2 . "')";
-            }
-            if($item->pic_3 != null){
-                if($first)
-                    $text .= ',';
-                else
-                    $first = true;
-                $text .= " (NULL, '3.jpg', '" . $item->id . "', '" . 3 . "', '" . $item->alt4 . "')";
-            }
-            if($item->pic_4 != null){
-                if($first)
-                    $text .= ',';
-                else
-                    $first = true;
-                $text .= " (NULL, '4.jpg', '" . $item->id . "', '" . 3 . "', '" . $item->alt4 . "')";
-            }
-            if($item->pic_5 != null){
-                if($first)
-                    $text .= ',';
-                else
-                    $first = true;
-                $text .= " (NULL, '5.jpg', '" . $item->id . "', '" . 3 . "', '" . $item->alt5 . "')";
-            }
-
-            if($text != 'VALUES')
-                \DB::insert("INSERT INTO `placepics` (`id`, `picNumber`, `placeId`, `kindPlaceId`, `alt`) " . $text . ";");
-        }
-    }
-
-    dd('done');
-});
-Route::get('fillMajaraPic', function(){
-    $Place = \App\models\Majara::all();
-    foreach ($Place as $item){
-        if($item->file != null && $item->file != 'none'){
-            $text = 'VALUES';
-            $first = false;
-
-
-            if($item->pic_1 != null){
-                $item->picNumber = '1.jpg';
-                if($item->alt1 != null)
-                    $item->alt = $item->alt1;
-                $item->save();
-            }
-            if($item->pic_2 != null){
-                $first = true;
-                $text .= " (NULL, '2.jpg', '" . $item->id . "', '" . 6 . "', '" . $item->alt2 . "')";
-            }
-            if($item->pic_3 != null){
-                if($first)
-                    $text .= ',';
-                else
-                    $first = true;
-                $text .= " (NULL, '3.jpg', '" . $item->id . "', '" . 6 . "', '" . $item->alt4 . "')";
-            }
-            if($item->pic_4 != null){
-                if($first)
-                    $text .= ',';
-                else
-                    $first = true;
-                $text .= " (NULL, '4.jpg', '" . $item->id . "', '" . 6 . "', '" . $item->alt4 . "')";
-            }
-            if($item->pic_5 != null){
-                if($first)
-                    $text .= ',';
-                else
-                    $first = true;
-                $text .= " (NULL, '5.jpg', '" . $item->id . "', '" . 6 . "', '" . $item->alt5 . "')";
-            }
-
-            if($text != 'VALUES')
-                \DB::insert("INSERT INTO `placepics` (`id`, `picNumber`, `placeId`, `kindPlaceId`, `alt`) " . $text . ";");
-        }
-    }
-
-    dd('done');
-});
+Route::post('resizePostImages', 'HomeController@resizePostImages');
 
 Route::get('userQuestions', function(){
     return view('userActivities.userQuestions');
@@ -261,6 +37,11 @@ Route::get('userActivitiesProfile', function(){
     return view('profile.userActivitiesProfile');
 });
 
+Route::get('/sitemap.xml', 'SitemapController@index');
+Route::get('/sitemap.xml/places', 'SitemapController@places');
+Route::get('/sitemap.xml/lists', 'SitemapController@lists');
+Route::get('/sitemap.xml/posts', 'SitemapController@posts');
+Route::get('/sitemap.xml/city', 'SitemapController@city');
 
 Route::post('likePost', ['as' => 'likePost', 'uses' => 'PostController@likePost']);
 
@@ -571,156 +352,6 @@ Route::group(array('middleware' => ['throttle:30', 'nothing']), function () {
     Route::post('getBookMarks', array('as' => 'getBookMarks', 'uses' => 'ActivityController@getBookMarks'));
 });
 
-Route::group(array('middleware' => ['throttle:30', 'nothing', 'auth']), function () {
-
-    Route::post('getTripStyles', array('as' => 'getTripStyles', 'uses' => 'TripStyleController@getTripStyles'));
-
-    Route::post('updateTripStyles', array('as' => 'updateTripStyles', 'uses' => 'TripStyleController@updateTripStyles'));
-
-    Route::post('sendMyInvitationCode', array('as' => 'sendMyInvitationCode', 'uses' => 'ProfileController@sendMyInvitationCode'));
-
-    Route::get('messages', array('as' => 'msgs', 'uses' => 'MessageController@showMessages'));
-
-    Route::get('messagesErr/{err}', array('as' => 'msgsErr', 'uses' => 'MessageController@showMessages'));
-
-    Route::post('opOnMsgs', array('as' => 'opOnMsgs', 'uses' => 'MessageController@opOnMsgs'));
-
-    Route::post('sendMsg/{srcName?}', array('as' => 'sendMsg', 'uses' => 'MessageController@sendMsg'));
-
-    Route::post('sendMsgAjax', array('as' => 'sendMsgAjax', 'uses' => 'MessageController@sendMsgAjax'));
-
-    Route::post('sendReceiveReport', array('as' => 'sendReceiveReport', 'uses' => 'MessageController@sendReceiveReport'));
-
-    Route::post('getMessage', array('as' => 'getMessage', 'uses' => 'MessageController@getMessage'));
-
-    Route::post('getListOfMsgs', array('as' => 'getListOfMsgsDir', 'uses' => 'MessageController@getListOfMsgs'));
-
-    Route::post('sendReport', array('as' => 'sendReport', 'uses' => 'MessageController@sendReport'));
-
-    Route::post('blockUser', array('as' => 'block', 'uses' => 'MessageController@blockUser'));
-
-    Route::post('blockList', array('as' => 'getBlockListDir', 'uses' => 'MessageController@blockList'));
-
-    Route::get('badge', array('as' => 'badge', 'uses' => 'BadgeController@showBadges'));
-
-    Route::post('deleteAccount', array('as' => 'deleteAccount', 'uses' => 'ProfileController@deleteAccount'));
-
-    Route::get('profile', array('as' => 'profile', 'uses' => 'ProfileController@showProfile'));
-
-    Route::get('accountInfo', array('as' => 'accountInfo', 'uses' => 'ProfileController@accountInfo'));
-
-    Route::get('accountInfo/{status}', array('as' => 'accountInfo2', 'uses' => 'ProfileController@accountInfo2'));
-
-    Route::post('searchInCities', array('as' => 'searchInCities', 'uses' => 'ProfileController@searchInCities'));
-
-    Route::get('editPhoto', array('as' => 'editPhoto', 'uses' => 'ProfileController@editPhoto'));
-
-    Route::post('doEditPhoto', array('as' => 'doEditPhoto', 'uses' => 'ProfileController@doEditPhoto'));
-
-    Route::post('getDefaultPics', array('as' => 'getDefaultPics', 'uses' => 'ProfileController@getDefaultPics'));
-
-    Route::post('submitPhoto', array('as' => 'submitPhoto', 'uses' => 'ProfileController@submitPhoto'));
-
-    Route::post('updateProfile1', array('as' => 'updateProfile1', 'uses' => 'ProfileController@updateProfile1'));
-
-    Route::post('checkAuthCode', array('as' => 'checkAuthCode', 'uses' => 'ProfileController@checkAuthCode'));
-
-    Route::post('resendAuthCode', array('as' => 'resendAuthCode', 'uses' => 'ProfileController@resendAuthCode'));
-
-    Route::post('updateProfile2', array('as' => 'updateProfile2', 'uses' => 'ProfileController@updateProfile2'));
-
-    Route::post('updateProfile3', array('as' => 'changePas', 'uses' => 'ProfileController@updateProfile3'));
-
-    Route::get('myTrips', array('as' => 'myTrips', 'uses' => 'MyTripsController@myTrips'));
-
-    Route::get('tripPlaces/{tripId}/{sortMode?}', array('as' => 'tripPlaces', 'uses' => 'MyTripsController@myTripsInner'));
-
-    Route::post('addTripPlace', array('as' => 'addTripPlace', 'uses' => 'MyTripsController@addTripPlace'));
-
-    Route::post('addTrip', array('as' => 'addTrip', 'uses' => 'MyTripsController@addTrip'));
-
-    Route::post('editTrip', array('as' => 'editTrip', 'uses' => 'MyTripsController@editTrip'));
-
-    Route::post('placeTrips', array('as' => 'placeTrips', 'uses' => 'MyTripsController@placeTrips'));
-
-    Route::post('assignPlaceToTrip', array('as' => 'assignPlaceToTrip', 'uses' => 'MyTripsController@assignPlaceToTrip'));
-
-    Route::post('changeDateTrip', array('as' => 'changeDateTrip', 'uses' => 'MyTripsController@changeDateTrip'));
-
-    Route::post('deleteTrip', array('as' => 'deleteTrip', 'uses' => 'MyTripsController@deleteTrip'));
-
-    Route::post('placeInfo', array('as' => 'placeInfo', 'uses' => 'MyTripsController@placeInfo'));
-
-    Route::post('getNotes', array('as' => 'getNotes', 'uses' => 'MyTripsController@getNotes'));
-
-    Route::post('addNote', array('as' => 'addNote', 'uses' => 'MyTripsController@addNote'));
-
-    Route::post('assignDateToPlace', array('as' => 'assignDateToPlace', 'uses' => 'MyTripsController@assignDateToPlace'));
-
-    Route::post('inviteFriend', array('as' => 'inviteFriend', 'uses' => 'MyTripsController@inviteFriend'));
-
-    Route::get('recentlyView', array('as' => 'recentlyViewTotal', 'uses' => 'MyTripsController@recentlyViewTotal'));
-
-    Route::post('getRecentlyViewElems', array('as' => 'getRecentlyViewElems', 'uses' => 'MyTripsController@getRecentlyViewElems'));
-
-    Route::post('getBookmarkElems', array('as' => 'getBookmarkElems', 'uses' => 'MyTripsController@getBookmarkElems'));
-
-    Route::get('bookmark', array('as' => 'bookmark', 'uses' => 'MyTripsController@bookmark'));
-
-    Route::get('seeTrip/{tripId}', array('as' => 'seeTrip', 'uses' => 'MyTripsController@tripHistory'));
-
-    Route::get('acceptTrip/{tripId}', array('as' => 'acceptTrip', 'uses' => 'MyTripsController@acceptTrip'));
-
-    Route::get('rejectInvitation/{tripId}', array('as' => 'rejectInvitation', 'uses' => 'MyTripsController@rejectInvitation'));
-
-    Route::post('getTripMembers', array('as' => 'getTripMembers', 'uses' => 'MyTripsController@getTripMembers'));
-
-    Route::post('deleteMember', array('as' => 'deleteMember', 'uses' => 'MyTripsController@deleteMember'));
-
-    Route::post('getMemberAccessLevel', array('as' => 'getMemberAccessLevel', 'uses' => 'MyTripsController@getMemberAccessLevel'));
-
-    Route::post('changeAddPlace', array('as' => 'changeAddPlace', 'uses' => 'MyTripsController@changeAddPlace'));
-
-    Route::post('changeAddFriend', array('as' => 'changeAddFriend', 'uses' => 'MyTripsController@changeAddFriend'));
-
-    Route::post('changePlaceDate', array('as' => 'changePlaceDate', 'uses' => 'MyTripsController@changePlaceDate'));
-
-    Route::post('changeTripDate', array('as' => 'changeTripDate', 'uses' => 'MyTripsController@changeTripDate'));
-
-    Route::post('deletePlace', array('as' => 'deletePlace', 'uses' => 'MyTripsController@deletePlace'));
-
-    Route::post('addComment', array('as' => 'addComment', 'uses' => 'MyTripsController@addComment'));
-
-    Route::get('travel', array('as' => 'travel', 'uses' => 'TravelController@showTravel'));
-
-    Route::post('sendAns', array('as' => 'sendAns', 'uses' => 'PlaceController@sendAns'));
-
-    Route::post('sendAns2', array('as' => 'sendAns2', 'uses' => 'PlaceController@sendAns2'));
-
-    Route::post('sendReport2', array('as' => 'sendReport2', 'uses' => 'PlaceController@sendReport'));
-
-//    Route::post('addPhotoToPlace/{placeId}/{kindPlaceId}', array('as' => 'addPhotoToPlace', 'uses' => 'PlaceController@addPhotoToPlace'));
-    Route::post('addPhotoToPlace', array('as' => 'addPhotoToPlace', 'uses' => 'PlaceController@addPhotoToPlace'));
-
-    Route::post('likePhotographer', 'PlaceController@likePhotographer')->name('likePhotographer');
-
-    Route::post('addPhotoToComment/{placeId}/{kindPlaceId}', array('as' => 'addPhotoToComment', 'uses' => 'PlaceController@addPhotoToComment'));
-
-    Route::post('sendComment', array('as' => 'sendComment', 'uses' => 'PlaceController@sendComment'));
-
-    Route::post('setPlaceRate', array('as' => 'setPlaceRate', 'uses' => 'PlaceController@setPlaceRate'));
-
-    Route::post('bookMark', array('as' => 'bookMark', 'uses' => 'PlaceController@bookMark'));
-
-    Route::post('getAlerts', array('as' => 'getAlerts', 'uses' => 'HomeController@getAlerts'));
-
-    Route::post('getAlertsNum', array('as' => 'getAlertsNum', 'uses' => 'HomeController@getAlertsCount'));
-
-    Route::post('opOnComment', array('as' => 'opOnComment', 'uses' => 'PlaceController@opOnComment'));
-
-    Route::post('deleteUserPicFromComment', array('as' => 'deleteUserPicFromComment', 'uses' => 'PlaceController@deleteUserPicFromComment'));
-});
-
 Route::group(array('middleware' => ['throttle:30', 'auth', 'adminAccess']), function () {
 
     Route::post('mainSliderStore', 'HomeController@mainSliderStore')->name('mainSlider.image.store');
@@ -778,7 +409,7 @@ Route::group(array('middleware' => ['throttle:30', 'nothing', 'auth', 'operatorA
 Route::get('place-details/{kindPlaceId}/{placeId}', 'HomeController@setPlaceDetailsURL')->name('placeDetails');
 Route::group(array('middleware' => ['throttle:30', 'nothing', 'setSession']), function (){
 
-    Route::get('show-place-details/{kindPlaceName}/{slug}', 'PlaceController@showPlaceDetails')->name('show.place.details');
+        Route::get('show-place-details/{kindPlaceName}/{slug}', 'PlaceController@showPlaceDetails')->name('show.place.details');
 
     Route::get('cityPage/{kind}/{city}', 'HomeController@cityPage')->name('cityPage');
 
@@ -889,6 +520,156 @@ Route::group(array('middleware' => 'nothing'), function () {
     Route::any('placeList/{kindPlaceId}/{mode}/{city?}', 'PlaceController@showPlaceList')->name('place.list');
 
     Route::post('getPlaceListElems', 'PlaceController@getPlaceListElems')->name('getPlaceListElems');
+});
+
+// profile
+Route::group(array('middleware' => ['throttle:30', 'nothing', 'auth']), function () {
+
+    Route::post('getTripStyles', array('as' => 'getTripStyles', 'uses' => 'TripStyleController@getTripStyles'));
+
+    Route::post('updateTripStyles', array('as' => 'updateTripStyles', 'uses' => 'TripStyleController@updateTripStyles'));
+
+    Route::post('sendMyInvitationCode', array('as' => 'sendMyInvitationCode', 'uses' => 'ProfileController@sendMyInvitationCode'));
+
+    Route::get('messages', array('as' => 'msgs', 'uses' => 'MessageController@showMessages'));
+
+    Route::get('messagesErr/{err}', array('as' => 'msgsErr', 'uses' => 'MessageController@showMessages'));
+
+    Route::post('opOnMsgs', array('as' => 'opOnMsgs', 'uses' => 'MessageController@opOnMsgs'));
+
+    Route::post('sendMsg/{srcName?}', array('as' => 'sendMsg', 'uses' => 'MessageController@sendMsg'));
+
+    Route::post('sendMsgAjax', array('as' => 'sendMsgAjax', 'uses' => 'MessageController@sendMsgAjax'));
+
+    Route::post('sendReceiveReport', array('as' => 'sendReceiveReport', 'uses' => 'MessageController@sendReceiveReport'));
+
+    Route::post('getMessage', array('as' => 'getMessage', 'uses' => 'MessageController@getMessage'));
+
+    Route::post('getListOfMsgs', array('as' => 'getListOfMsgsDir', 'uses' => 'MessageController@getListOfMsgs'));
+
+    Route::post('sendReport', array('as' => 'sendReport', 'uses' => 'MessageController@sendReport'));
+
+    Route::post('blockUser', array('as' => 'block', 'uses' => 'MessageController@blockUser'));
+
+    Route::post('blockList', array('as' => 'getBlockListDir', 'uses' => 'MessageController@blockList'));
+
+    Route::get('badge', array('as' => 'badge', 'uses' => 'BadgeController@showBadges'));
+
+    Route::post('deleteAccount', array('as' => 'deleteAccount', 'uses' => 'ProfileController@deleteAccount'));
+
+    Route::get('profile', array('as' => 'profile', 'uses' => 'ProfileController@showProfile'));
+
+    Route::get('accountInfo', array('as' => 'accountInfo', 'uses' => 'ProfileController@accountInfo'));
+
+    Route::post('searchInCities', array('as' => 'searchInCities', 'uses' => 'ProfileController@searchInCities'));
+
+    Route::get('editPhoto', array('as' => 'editPhoto', 'uses' => 'ProfileController@editPhoto'));
+
+    Route::post('doEditPhoto', array('as' => 'doEditPhoto', 'uses' => 'ProfileController@doEditPhoto'));
+
+    Route::post('getDefaultPics', array('as' => 'getDefaultPics', 'uses' => 'ProfileController@getDefaultPics'));
+
+    Route::post('submitPhoto', array('as' => 'submitPhoto', 'uses' => 'ProfileController@submitPhoto'));
+
+    Route::post('updateProfile1', array('as' => 'updateProfile1', 'uses' => 'ProfileController@updateProfile1'));
+
+    Route::post('checkAuthCode', array('as' => 'checkAuthCode', 'uses' => 'ProfileController@checkAuthCode'));
+
+    Route::post('resendAuthCode', array('as' => 'resendAuthCode', 'uses' => 'ProfileController@resendAuthCode'));
+
+    Route::post('updateProfile2', array('as' => 'updateProfile2', 'uses' => 'ProfileController@updateProfile2'));
+
+    Route::post('updateProfile3', array('as' => 'changePas', 'uses' => 'ProfileController@updateProfile3'));
+
+    Route::get('myTrips', array('as' => 'myTrips', 'uses' => 'MyTripsController@myTrips'));
+
+    Route::get('tripPlaces/{tripId}/{sortMode?}', array('as' => 'tripPlaces', 'uses' => 'MyTripsController@myTripsInner'));
+
+    Route::post('addTripPlace', array('as' => 'addTripPlace', 'uses' => 'MyTripsController@addTripPlace'));
+
+    Route::post('addTrip', array('as' => 'addTrip', 'uses' => 'MyTripsController@addTrip'));
+
+    Route::post('editTrip', array('as' => 'editTrip', 'uses' => 'MyTripsController@editTrip'));
+
+    Route::post('placeTrips', array('as' => 'placeTrips', 'uses' => 'MyTripsController@placeTrips'));
+
+    Route::post('assignPlaceToTrip', array('as' => 'assignPlaceToTrip', 'uses' => 'MyTripsController@assignPlaceToTrip'));
+
+    Route::post('changeDateTrip', array('as' => 'changeDateTrip', 'uses' => 'MyTripsController@changeDateTrip'));
+
+    Route::post('deleteTrip', array('as' => 'deleteTrip', 'uses' => 'MyTripsController@deleteTrip'));
+
+    Route::post('placeInfo', array('as' => 'placeInfo', 'uses' => 'MyTripsController@placeInfo'));
+
+    Route::post('getNotes', array('as' => 'getNotes', 'uses' => 'MyTripsController@getNotes'));
+
+    Route::post('addNote', array('as' => 'addNote', 'uses' => 'MyTripsController@addNote'));
+
+    Route::post('assignDateToPlace', array('as' => 'assignDateToPlace', 'uses' => 'MyTripsController@assignDateToPlace'));
+
+    Route::post('inviteFriend', array('as' => 'inviteFriend', 'uses' => 'MyTripsController@inviteFriend'));
+
+    Route::get('recentlyView', array('as' => 'recentlyViewTotal', 'uses' => 'MyTripsController@recentlyViewTotal'));
+
+    Route::post('getRecentlyViewElems', array('as' => 'getRecentlyViewElems', 'uses' => 'MyTripsController@getRecentlyViewElems'));
+
+    Route::post('getBookmarkElems', array('as' => 'getBookmarkElems', 'uses' => 'MyTripsController@getBookmarkElems'));
+
+    Route::get('bookmark', array('as' => 'bookmark', 'uses' => 'MyTripsController@bookmark'));
+
+    Route::get('seeTrip/{tripId}', array('as' => 'seeTrip', 'uses' => 'MyTripsController@tripHistory'));
+
+    Route::get('acceptTrip/{tripId}', array('as' => 'acceptTrip', 'uses' => 'MyTripsController@acceptTrip'));
+
+    Route::get('rejectInvitation/{tripId}', array('as' => 'rejectInvitation', 'uses' => 'MyTripsController@rejectInvitation'));
+
+    Route::post('getTripMembers', array('as' => 'getTripMembers', 'uses' => 'MyTripsController@getTripMembers'));
+
+    Route::post('deleteMember', array('as' => 'deleteMember', 'uses' => 'MyTripsController@deleteMember'));
+
+    Route::post('getMemberAccessLevel', array('as' => 'getMemberAccessLevel', 'uses' => 'MyTripsController@getMemberAccessLevel'));
+
+    Route::post('changeAddPlace', array('as' => 'changeAddPlace', 'uses' => 'MyTripsController@changeAddPlace'));
+
+    Route::post('changeAddFriend', array('as' => 'changeAddFriend', 'uses' => 'MyTripsController@changeAddFriend'));
+
+    Route::post('changePlaceDate', array('as' => 'changePlaceDate', 'uses' => 'MyTripsController@changePlaceDate'));
+
+    Route::post('changeTripDate', array('as' => 'changeTripDate', 'uses' => 'MyTripsController@changeTripDate'));
+
+    Route::post('deletePlace', array('as' => 'deletePlace', 'uses' => 'MyTripsController@deletePlace'));
+
+    Route::post('addComment', array('as' => 'addComment', 'uses' => 'MyTripsController@addComment'));
+
+    Route::get('travel', array('as' => 'travel', 'uses' => 'TravelController@showTravel'));
+
+    Route::post('sendAns', array('as' => 'sendAns', 'uses' => 'PlaceController@sendAns'));
+
+    Route::post('sendAns2', array('as' => 'sendAns2', 'uses' => 'PlaceController@sendAns2'));
+
+    Route::post('sendReport2', array('as' => 'sendReport2', 'uses' => 'PlaceController@sendReport'));
+
+//    Route::post('addPhotoToPlace/{placeId}/{kindPlaceId}', array('as' => 'addPhotoToPlace', 'uses' => 'PlaceController@addPhotoToPlace'));
+    Route::post('addPhotoToPlace', array('as' => 'addPhotoToPlace', 'uses' => 'PlaceController@addPhotoToPlace'));
+
+    Route::post('likePhotographer', 'PlaceController@likePhotographer')->name('likePhotographer');
+
+    Route::post('addPhotoToComment/{placeId}/{kindPlaceId}', array('as' => 'addPhotoToComment', 'uses' => 'PlaceController@addPhotoToComment'));
+
+    Route::post('sendComment', array('as' => 'sendComment', 'uses' => 'PlaceController@sendComment'));
+
+    Route::post('setPlaceRate', array('as' => 'setPlaceRate', 'uses' => 'PlaceController@setPlaceRate'));
+
+    Route::post('bookMark', array('as' => 'bookMark', 'uses' => 'PlaceController@bookMark'));
+
+    Route::post('getAlerts', array('as' => 'getAlerts', 'uses' => 'HomeController@getAlerts'));
+
+    Route::post('getAlertsNum', array('as' => 'getAlertsNum', 'uses' => 'HomeController@getAlertsCount'));
+
+    Route::post('opOnComment', array('as' => 'opOnComment', 'uses' => 'PlaceController@opOnComment'));
+
+    Route::post('deleteUserPicFromComment', array('as' => 'deleteUserPicFromComment', 'uses' => 'PlaceController@deleteUserPicFromComment'));
+
 });
 
 //tour

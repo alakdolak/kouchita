@@ -52,6 +52,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use Illuminate\Http\Request;
+use function Sodium\crypto_box_publickey_from_secretkey;
 
 
 class HomeController extends Controller
@@ -1258,11 +1259,17 @@ class HomeController extends Controller
 
     public function checkEmail()
     {
-        if (isset($_POST["email"])) {
-            echo (User::whereEmail(makeValidInput($_POST["email"]))->count() > 0) ? 'nok' : 'ok';
+
+        if (isset($_POST["email"]) && $_POST['email'] != '') {
+
+            if(\auth()->check())
+                echo (User::whereEmail(makeValidInput($_POST["email"]))->where('id', '!=', \auth()->user()->id)->count() > 0) ? 'nok' : 'ok';
+            else
+                echo (User::whereEmail(makeValidInput($_POST["email"]))->count() > 0) ? 'nok' : 'ok';
             return;
         }
-        echo "nok";
+        echo "nok1";
+        return;
     }
 
     public function checkUserName()
@@ -1272,15 +1279,23 @@ class HomeController extends Controller
 
             $invitationCode = "";
 
-            if (isset($_POST["invitationCode"]))
-                $invitationCode = makeValidInput($_POST["invitationCode"]);
+            if(\auth()->check()){
+                if(User::whereUserName(makeValidInput($_POST['username']))->where('id', '!=', \auth()->user()->id)->count() > 0)
+                    echo 'nok1';
+                else
+                    echo 'ok';
+            }
+            else {
+                if (isset($_POST["invitationCode"]))
+                    $invitationCode = makeValidInput($_POST["invitationCode"]);
 
-            if (User::whereUserName(makeValidInput($_POST["username"]))->count() > 0)
-                echo "nok1";
-            else if (!empty($invitationCode) && User::whereInvitationCode($invitationCode)->count() == 0)
-                echo 'nok';
-            else
-                echo 'ok';
+                if (User::whereUserName(makeValidInput($_POST["username"]))->count() > 0)
+                    echo "nok1";
+                else if (!empty($invitationCode) && User::whereInvitationCode($invitationCode)->count() == 0)
+                    echo 'nok';
+                else
+                    echo 'ok';
+            }
 
             return;
         }
@@ -1289,6 +1304,8 @@ class HomeController extends Controller
 
     public function checkReCaptcha()
     {
+        echo 'ok';
+        return;
 
         if (isset($_POST["captcha"])) {
             $response = $_POST["captcha"];
@@ -1414,37 +1431,45 @@ class HomeController extends Controller
 
             $phoneNum = makeValidInput($_POST["phoneNum"]);
 
-            if (User::wherePhone($phoneNum)->count() > 0)
-                echo json_encode(['status' => 'nok']);
+            if(\auth()->check()){
+                if (User::wherePhone($phoneNum)->where('id', '!=', \auth()->user()->id)->count() > 0)
+                    echo 'nok';
+                else
+                    echo 'ok';
+            }
             else {
+                if (User::wherePhone($phoneNum)->count() > 0)
+                    echo json_encode(['status' => 'nok']);
+                else {
 
-                $activation = ActivationCode::wherePhoneNum($phoneNum)->first();
-                if ($activation != null) {
-                    echo json_encode(['status' => 'ok', 'reminder' => (90 - time() + $activation->sendTime)]);
-                    return;
-                }
+                    $activation = ActivationCode::wherePhoneNum($phoneNum)->first();
+                    if ($activation != null) {
+                        echo json_encode(['status' => 'ok', 'reminder' => (90 - time() + $activation->sendTime)]);
+                        return;
+                    }
 
-                $code = createCode();
-                while (ActivationCode::whereCode($code)->count() > 0)
                     $code = createCode();
+                    while (ActivationCode::whereCode($code)->count() > 0)
+                        $code = createCode();
 
-                if ($activation == null) {
-                    $activation = new ActivationCode();
-                    $activation->phoneNum = $phoneNum;
-                }
+                    if ($activation == null) {
+                        $activation = new ActivationCode();
+                        $activation->phoneNum = $phoneNum;
+                    }
 
-                $msgId = sendSMS($phoneNum, $code, 'sms');
-                if ($msgId == -1) {
-                    echo json_encode(['status' => 'nok3']);
-                    return;
-                }
+                    $msgId = sendSMS($phoneNum, $code, 'sms');
+                    if ($msgId == -1) {
+                        echo json_encode(['status' => 'nok3']);
+                        return;
+                    }
 
-                $activation->sendTime = time();
-                $activation->code = $code;
-                try {
-                    $activation->save();
-                    echo json_encode(['status' => 'ok', 'reminder' => 90]);
-                } catch (Exception $x) {
+                    $activation->sendTime = time();
+                    $activation->code = $code;
+                    try {
+                        $activation->save();
+                        echo json_encode(['status' => 'ok', 'reminder' => 90]);
+                    } catch (Exception $x) {
+                    }
                 }
             }
             return;
@@ -1466,7 +1491,6 @@ class HomeController extends Controller
             $user->password = Hash::make(makeValidInput($_POST["password"]));
             $user->email = makeValidInput($_POST["email"]);
             $user->level = 0;
-            $user->cityId = Cities::first()->id;
             $user->created_at = date('Y-m-d h:m:s');
             $user->updated_at = date('Y-m-d h:m:s');
             $user->invitationCode = $invitationCode;
@@ -1621,8 +1645,7 @@ class HomeController extends Controller
 
     public function registerAndLogin2()
     {
-
-        if (isset($_POST["username"]) && isset($_POST["password"]) && isset($_POST["email"]) && isset($_POST["invitationCode"])) {
+        if (isset($_POST["username"]) && isset($_POST["password"])) {
 
             $invitationCode = createCode();
             while (User::whereInvitationCode($invitationCode)->count() > 0)
@@ -1683,6 +1706,7 @@ class HomeController extends Controller
                 echo "ok";
                 return;
             } catch (Exception $x) {
+                dd($x);
                 echo "nok";
                 return;
             }
@@ -1703,8 +1727,8 @@ class HomeController extends Controller
 
             //Insert your cient ID and sexcret
             //You can get it from : https://console.developers.google.com/
-            $client_id = '774684902659-20aeg6um0856j5li2uuu9ombu2pcbqv9.apps.googleusercontent.com';
-            $client_secret = 'ARyU8-RXFJZD5jl5QawhpHne';
+            $client_id = '774684902659-1tdvb7r1v765b3dh7k5n7bu4gpilaepe.apps.googleusercontent.com';
+            $client_secret = '8NM4weptz-Pz-6gbolI5J0yi';
             $redirect_uri = route('loginWithGoogle');
 
             /************************************************
@@ -1735,31 +1759,39 @@ class HomeController extends Controller
              * function. We store the resultant access token
              * bundle in the session, and redirect to ourself.
              */
-
             $client->authenticate($_GET['code']);
 
             $user = $service->userinfo->get(); //get user info
-            $user_count = User::whereUserName($user->id)->count();
-
-            if ($user_count == 0) {
-
-                $tmpUser = new User();
-                $tmpUser->username = $user->name;
-                $tmpUser->password = Hash::make($user->link);
+            $userCheckEmail = User::where('email', $user->email)->first();
+            if($userCheckEmail != null){
+                if($userCheckEmail->googleId == null){
+                    $userCheckEmail->googleId = $user->id;
+                    $userCheckEmail->password = Hash::make($user->id);
+                    try {
+                        $userCheckEmail->save();
+                    }
+                    catch (Exception $x) {
+                    }
+                }
+            }
+            else{
+                $userCheckEmail = new User();
+                $userCheckEmail->username = $user->givenName;
+                $userCheckEmail->password = Hash::make($user->id);
                 $name = explode(' ', $user->name);
-                $tmpUser->first_name = $name[0];
-                $tmpUser->last_name = $name[1];
-                $tmpUser->email = $user->email;
-                $tmpUser->picture = $user->picture;
-
+                $userCheckEmail->first_name = $name[0];
+                $userCheckEmail->last_name = $name[1];
+                $userCheckEmail->email = $user->email;
+                $userCheckEmail->picture = $user->picture;
+                $userCheckEmail->googleId = $user->id;
                 try {
-                    $tmpUser->save();
+                    $userCheckEmail->save();
                 }
                 catch (Exception $x) {
                 }
             }
 
-            Auth::attempt(array('username' => $user->name, 'password' => $user->link), true);
+            Auth::attempt(array('username' => $userCheckEmail->username, 'password' => $user->id), true);
         }
 
         return Redirect::to(route('main'));
@@ -2900,10 +2932,14 @@ class HomeController extends Controller
             $sqlQuery .= '( kindPlaceId = 11 AND placeId IN (' . implode(",", $allMahaliFood) . ') )';
         }
 
-        if(count($notIn) == 0)
-            $lastReview = DB::select('SELECT * FROM log WHERE activityId = ' . $reviewActivity->id . ' AND confirm = 1 AND (' . $sqlQuery . ') ORDER BY `date` DESC LIMIT ' . $take);
-        else
-            $lastReview = DB::select('SELECT * FROM log WHERE activityId = ' . $reviewActivity->id . ' AND confirm = 1 AND (' . $sqlQuery . ') AND id NOT IN (' . implode(",", $notIn) . ') ORDER BY `date` DESC LIMIT ' . $take);
+        $lastReview = [];
+
+        if($sqlQuery != '') {
+            if (count($notIn) == 0)
+                $lastReview = DB::select('SELECT * FROM log WHERE activityId = ' . $reviewActivity->id . ' AND confirm = 1 AND (' . $sqlQuery . ') ORDER BY `date` DESC LIMIT ' . $take);
+            else
+                $lastReview = DB::select('SELECT * FROM log WHERE activityId = ' . $reviewActivity->id . ' AND confirm = 1 AND (' . $sqlQuery . ') AND id NOT IN (' . implode(",", $notIn) . ') ORDER BY `date` DESC LIMIT ' . $take);
+        }
 
         return $lastReview;
     }
@@ -3032,6 +3068,43 @@ class HomeController extends Controller
 
         dd('finniish');
     }
+
+    public function resizePostImages(Request $request)
+    {
+        $location = __DIR__ . '../../../../../assets/_images/' . $request->file;
+        if(is_dir($location)) {
+            $this->goToFolder($location);
+        }
+
+        echo 'ok';
+        return;
+    }
+    private function goToFolder($location){
+        if(is_dir($location)) {
+            $dir = scandir($location);
+
+            foreach ($dir as $item) {
+
+                if ($item != '' && $item != '.' && $item != '..' && $item != 'sliderPic') {
+                    $nLocatino = $location . '/' . $item;
+                    if(is_dir($nLocatino))
+                        $this->goToFolder($nLocatino);
+                    else{
+                        $image = ['png', 'jpg', 'jpeg'];
+                        $file = pathinfo($nLocatino, PATHINFO_EXTENSION);
+                        if(in_array($file, $image)){
+                            compressImage($nLocatino, $nLocatino, 80);
+                        }
+                    }
+                }
+
+            }
+        }
+
+        return;
+    }
+
 }
+
 
 

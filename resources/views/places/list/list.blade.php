@@ -21,6 +21,7 @@
     <meta name="title" content="{{$meta['title']}}" />
     <meta name="og:title" content="{{$meta['title']}}" />
     <meta name='description' content='{{$meta['description']}}' />
+    <meta name='og:description' content='{{$meta['description']}}' />
     <meta name='keywords' content='{{$meta['keyword']}}' />
     <meta property="og:image" content="{{URL::asset('_images/nopic/blank.jpg')}}"/>
     <meta property="og:image:secure_url" content="{{URL::asset('_images/nopic/blank.jpg')}}"/>
@@ -95,6 +96,9 @@
         }
         .hl_compareBtn:hover {
             opacity: 0.75;
+        }
+        .filterGroupTitle{
+            overflow: visible !important;
         }
     </style>
 
@@ -296,11 +300,11 @@
                                             <div id="jfy_filter_bar_establishmentTypeFilters"
                                                  class="lhrFilterBlock jfy_filter_bar_establishmentTypeFilters collapsible">
                                                 <div class="col-md-12 hl_compareBtn" id="compareButton">هم‌اکنون مقایسه کنید</div>
-                                                <div id="filterBox" style="flex-direction: column;">
+                                                <div id="filterBox" style="flex-direction: column; display: none;">
                                                     <div style="font-size: 15px; margin: 10px 0px;">
                                                         <span>فیلترهای اعمال شده</span>
                                                         <span style="float: left">
-                                                            <span>----</span><span style="margin: 0 5px">مورد از</span><span>----</span>
+                                                            <span id="filterShowCount">----</span><span style="margin: 0 5px">مورد از</span><span id="totalPlaceCount"> </span>
                                                         </span>
                                                     </div>
                                                     <div style="cursor: pointer; font-size: 12px; color: #050c93; margin-bottom: 7px;" onclick="closeFilters()">
@@ -586,6 +590,9 @@
                 if (response.data != null && response.data.places != null && response.data.places.length > 0)
                     $scope.show = true;
 
+                $('#totalPlaceCount').text(response.data.totalCount);
+                $('#filterShowCount').text(response.data.placeCount);
+
                 for(j = 0; j < response.data.places.length; j++){
                     var k = $scope.packets.length;
                     $scope.packets[$scope.packets.length] = response.data.places[j];
@@ -788,18 +795,24 @@
 
     function createFilter(){
         var text = '';
-        $('.filterShow').html('');
-        if(rateFilter != 0)
-            text += '<div class="filtersExist">\n' +
-                    '<div>امتیاز کاربر</div>\n' +
-                    '<div onclick="cancelRateFilter()" class="icons iconClose filterCloseIcon"></div>\n' +
-                    '</div>';
+        var hasFilter = false;
 
-        if(nameFilter.trim().length > 2)
+        $('.filterShow').html('');
+        if(rateFilter != 0) {
             text += '<div class="filtersExist">\n' +
-                    '<div>نام</div>\n' +
-                    '<div onclick="cancelNameFilter()" class="icons iconClose filterCloseIcon"></div>\n' +
-                    '</div>';
+                '<div>امتیاز کاربر</div>\n' +
+                '<div onclick="cancelRateFilter()" class="icons iconClose filterCloseIcon"></div>\n' +
+                '</div>';
+            hasFilter = true;
+        }
+
+        if(nameFilter.trim().length > 2) {
+            text += '<div class="filtersExist">\n' +
+                '<div>نام</div>\n' +
+                '<div onclick="cancelNameFilter()" class="icons iconClose filterCloseIcon"></div>\n' +
+                '</div>';
+            hasFilter = true;
+        }
 
         for(i = 0; i < featureFilter.length; i++){
             if(featureFilter[i] != 0) {
@@ -808,6 +821,7 @@
                         '<div>' + name + '</div>\n' +
                         '<div onclick="cancelFeatureFilter(' + featureFilter[i] + ')" class="icons iconClose filterCloseIcon"></div>\n' +
                         '</div>';
+                hasFilter = true;
             }
         }
 
@@ -818,10 +832,15 @@
                         '<div>' + name + '</div>\n' +
                         '<div onclick="cancelKindFilter(\'' + specialFilters[i]['kind'] + '\', \'' + specialFilters[i]['value'] + '\')" class="icons iconClose filterCloseIcon"></div>\n' +
                         '</div>';
+                hasFilter = true;
             }
         }
 
         $('.filterShow').html(text);
+        if(hasFilter)
+            $('#filterBox').css('display', 'block');
+        else
+            $('#filterBox').css('display', 'none');
     }
 
     function cancelKindFilter(_kind, _value, _ref = 'refresh'){

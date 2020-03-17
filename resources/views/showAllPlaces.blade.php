@@ -308,15 +308,13 @@
 
 
                                     @if($placeModes[$k] == "hotel")
-                                        <span onclick="document.location.href = '{{route('hotelDetails', ['placeId' => $places[$k]->id, 'placeName' => $places[$k]->name])}}'" class="ui_button small secondary ui_icon">مشاهده به صورت تکی</span>
+                                        <span onclick="document.location.href = '{{route('show.place.details', ['kindPlaceName' => 'hotels', 'slug' => $places[$k]->slug])}}'" class="ui_button small secondary ui_icon">مشاهده به صورت تکی</span>
                                     @elseif($placeModes[$k] == "restaurant")
-                                        <span onclick="document.location.href = '{{route('restaurantDetails', ['placeId' => $places[$k]->id, 'placeName' => $places[$k]->name])}}'" class="ui_button small secondary ui_icon">مشاهده به صورت تکی</span>
+                                        <span onclick="document.location.href = '{{route('show.place.details', ['kindPlaceName' => 'restaurant', 'slug' => $places[$k]->slug])}}'" class="ui_button small secondary ui_icon">مشاهده به صورت تکی</span>
                                     @elseif($placeModes[$k] == "amaken")
-                                        <span onclick="document.location.href = '{{route('amakenDetails', ['placeId' => $places[$k]->id, 'placeName' => $places[$k]->name])}}'" class="ui_button small secondary ui_icon">مشاهده به صورت تکی</span>
+                                        <span onclick="document.location.href = '{{route('show.place.details', ['kindPlaceName' => 'amaken', 'slug' => $places[$k]->slug])}}'" class="ui_button small secondary ui_icon">مشاهده به صورت تکی</span>
                                     @elseif($placeModes[$k] == "majara")
-                                        <span onclick="document.location.href = '{{route('majaraDetails', ['placeId' => $places[$k]->id, 'placeName' => $places[$k]->name])}}'" class="ui_button small secondary ui_icon">مشاهده به صورت تکی</span>
-                                    @elseif($placeModes[$k] == "soghat" || $placeModes[$k] == "sanaye" || $placeModes[$k] == "ghazamahali")
-                                        <span onclick="document.location.href = '{{route('adabDetails', ['placeId' => $places[$k]->id, 'placeName' => $places[$k]->name])}}'" class="ui_button small secondary ui_icon">مشاهده به صورت تکی</span>
+                                        <span onclick="document.location.href = '{{route('show.place.details', ['kindPlaceName' => 'majara', 'slug' => $places[$k]->slug])}}'" class="ui_button small secondary ui_icon">مشاهده به صورت تکی</span>
                                     @endif
                                     <span class="btnoverlay loading"><span class="bubbles small"><span></span><span></span><span></span></span></span>
                                  </span>

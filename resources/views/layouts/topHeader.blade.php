@@ -15,10 +15,10 @@
 
 <script src="{{URL::asset('js/jQuery.js')}}"></script>
 <script src="{{URL::asset('js/angular.js')}}"></script>
-<script src="https://apis.google.com/js/platform.js" async defer></script>
 
-<meta name="google-signin-scope" content="profile email">
-<meta name="google-signin-client_id" content="774684902659-20aeg6um0856j5li2uuu9ombu2pcbqv9.apps.googleusercontent.com">
+{{--<script src="https://apis.google.com/js/platform.js" async defer></script>--}}
+{{--<meta name="google-signin-scope" content="profile email">--}}
+{{--<meta name="google-signin-client_id" content="774684902659-1tdvb7r1v765b3dh7k5n7bu4gpilaepe.apps.googleusercontent.com">--}}
 
 <meta name="csrf-token" content="{{ csrf_token() }}"/>
 
@@ -60,6 +60,7 @@
         }
         return true;
     }
+
 </script>
 
 <script>

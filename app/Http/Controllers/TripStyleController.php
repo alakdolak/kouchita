@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\models\Trip;
 use App\models\TripStyle;
 use App\models\UserTripStyles;
 use Exception;
@@ -37,20 +38,20 @@ class TripStyleController extends Controller {
 
         $uId = makeValidInput($_POST['uId']);
         $tripStyles = $_POST["tripStyles"];
-
-
         UserTripStyles::where('uId', '=', $uId)->delete();
 
         for($i = 0; $i < count($tripStyles); $i++) {
 
             $userTripStyle = new UserTripStyles();
-
             $userTripStyle->uId = $uId;
             $userTripStyle->tripStyleId = $tripStyles[$i];
-
             $userTripStyle->save();
-
         }
+        $tripStyles = UserTripStyles::join('tripStyle', 'tripStyle.id', 'userTripStyles.tripStyleId')
+            ->where('uId', $uId)->get();
+
+        echo json_encode(['status' => 'ok', 'tripStyles' => $tripStyles]);
+        return;
 
     }
 

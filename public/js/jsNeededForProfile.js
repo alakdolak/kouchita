@@ -18,29 +18,21 @@ function hideElement2(id) {
 var tripStyles = [];
 
 function toggleTripStyles(id) {
-
     for(i = 0; i < tripStyles.length; i++) {
-
         if(tripStyles[i] == id) {
-            $("#tripStyle_" + id).css("background-color", 'white');
-            $("#tripStyle_" + id).css("color", 'black');
-            $("#tripStylePic_" + id).css("visibility", 'hidden');
+            $("#tripStyle_" + id).removeClass('activeTripStyle');
             tripStyles.splice(i, 1);
-            if(tripStyles.length < 3) {
+            if(tripStyles.length < 3)
                 $("#submitBtnTripStyle").attr("disabled", true);
-            }
             return;
         }
-
     }
 
     tripStyles[tripStyles.length] = id;
-    $("#tripStyle_" + id).css("background-color", '#4dc7bc');
-    $("#tripStyle_" + id).css("color", 'white');
-    $("#tripStylePic_" + id).css("visibility", 'visible');
-    if(tripStyles.length >= 3) {
+    $("#tripStyle_" + id).addClass('activeTripStyle');
+
+    if(tripStyles.length >= 3)
         $("#submitBtnTripStyle").attr("disabled", false);
-    }
 }
 
 function closeTripStyles(element) {
@@ -175,7 +167,7 @@ function sendAjaxRequestToGiveActivity(activityId, uId, kindPlaceId, menuId, con
 function sendAjaxRequestToGiveTripStyles(uId, containerId) {
 
     $('.dark').show();
-
+    tripStyles = [];
     $("#" + containerId).empty();
 
     $.ajax({
@@ -193,8 +185,7 @@ function sendAjaxRequestToGiveTripStyles(uId, containerId) {
                 element = "<div class='tagContainer'>";
                 element += "<input class='tagSelection' name='memberTag' value='" + response[i].id + "' type='checkbox'>";
                 if (response[i].selected) {
-                    element += "<label id='tripStyle_" + response[i].id + "' style='color: white; background-color: #4dc7bc;' class='tag tagBubble' onclick='toggleTripStyles(" + response[i].id + ")'>";
-
+                    element += "<label id='tripStyle_" + response[i].id + "' class='tag tagBubble activeTripStyle' onclick='toggleTripStyles(" + response[i].id + ")'>";
                     element += "<div class='tagText'  style='padding-left: 12px; padding-right: 12px'>" + response[i].name + "</div>";
                     tripStyles[tripStyles.length] = response[i].id;
                 }
@@ -228,6 +219,19 @@ function updateMyTripStyle(uId, element) {
             tripStyles : tripStyles
         },
         success: function (response) {
+            response = JSON.parse(response);
+            if(response['status'] == 'ok'){
+                text = '';
+                for(var i = 0; i < response['tripStyles'].length; i++) {
+                    text += '<div class="tagContainer">\n' +
+                        '<label id="tripStyle_12" class="tag tagBubble activeTripStyle">\n' +
+                        '<div class="tagText tagTextBodyPlace" style="color: white">' + response["tripStyles"][i]["name"] + '</div>\n' +
+                        '</label>\n' +
+                        '</div>';
+                }
+
+                $('#myTripStyles').html(text);
+            }
             closeTripStyles(element);
         }
     });

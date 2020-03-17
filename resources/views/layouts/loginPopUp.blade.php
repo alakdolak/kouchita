@@ -3,16 +3,16 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
-if(Auth::check())
+if (Auth::check())
     return Redirect::to(route('main'));
 
-require_once (__DIR__ . '/../../../app/Http/Controllers/glogin/libraries/Google/autoload.php');
+require_once(__DIR__ . '/../../../app/Http/Controllers/glogin/libraries/Google/autoload.php');
 
 //Insert your cient ID and secret
 //You can get it from : https://console.developers.google.com/
-$client_id = '774684902659-20aeg6um0856j5li2uuu9ombu2pcbqv9.apps.googleusercontent.com';
+$client_id = '774684902659-1tdvb7r1v765b3dh7k5n7bu4gpilaepe.apps.googleusercontent.com';
 $client_secret = 'ARyU8-RXFJZD5jl5QawhpHne';
-$redirect_uri =  route('loginWithGoogle');
+$redirect_uri = route('loginWithGoogle');
 
 /************************************************
 Make an API request on behalf of a user. In
@@ -38,6 +38,15 @@ $service = new \Google_Service_Oauth2($client);
 $authUrl = $client->createAuthUrl();
 
 ?>
+
+<style>
+    .googleA{
+        color: black;
+    }
+    .googleA:hover{
+        color: #4dc7bc;
+    }
+</style>
 
 <script>
 
@@ -77,8 +86,8 @@ $authUrl = $client->createAuthUrl();
 
                 reminderTime = response.reminder;
 
-                if(response.status == "ok") {
-                    if(reminderTime > 0) {
+                if (response.status == "ok") {
+                    if (reminderTime > 0) {
                         $("#reminderTimePane").removeClass('hidden');
                         $("#resendActivationCode").attr('disabled', 'disabled');
                         setTimeout("decreaseTime()", 1000);
@@ -100,7 +109,7 @@ $authUrl = $client->createAuthUrl();
 
     function resendActivationCodeForget() {
 
-        if(phoneNum.length == 0)
+        if (phoneNum.length == 0)
             return;
 
         $.ajax({
@@ -114,8 +123,8 @@ $authUrl = $client->createAuthUrl();
                 response = JSON.parse(response);
 
                 reminderTime2 = response.reminder;
-                if(response.status == "ok") {
-                    if(reminderTime2 > 0) {
+                if (response.status == "ok") {
+                    if (reminderTime2 > 0) {
                         $("#reminderTimePaneForget").removeClass('hidden');
                         $("#resendActivationCodeForget").attr('disabled', 'disabled');
                         setTimeout("decreaseTime2()", 1000);
@@ -136,7 +145,7 @@ $authUrl = $client->createAuthUrl();
 
     function login(username, password) {
 
-        if(username != "" && password != "") {
+        if (username != "" && password != "") {
             $.ajax({
                 type: 'post',
                 url: loginDir,
@@ -145,7 +154,7 @@ $authUrl = $client->createAuthUrl();
                     'password': password
                 },
                 success: function (response) {
-                    if(response == "ok") {
+                    if (response == "ok") {
                         hideElement('loginPopUp');
                         // return document.location.href = selectedUrl;
                         // document.location.reload();
@@ -154,7 +163,7 @@ $authUrl = $client->createAuthUrl();
 
                         $('#second_login').submit();
                     }
-                    else if(response == "nok2") {
+                    else if (response == "nok2") {
                         $("#loginErr").empty().append('حساب کاربری شما غیر فعال شده است');
                     }
                     else {
@@ -162,7 +171,7 @@ $authUrl = $client->createAuthUrl();
                     }
                 },
                 error: function (xhr, status, error) {
-                    if(xhr.responseText == "Too Many Attempts.")
+                    if (xhr.responseText == "Too Many Attempts.")
                         $("#loginErr").empty().append('تعداد درخواست های شما بیش از حد مجاز است. لطفا تا 5 دقیقه دیگر تلاش نفرمایید');
                 }
             });
@@ -203,7 +212,7 @@ $authUrl = $client->createAuthUrl();
 
         $("#reminderTime").text((reminderTime % 60) + " : " + Math.floor(reminderTime / 60));
 
-        if(reminderTime > 0) {
+        if (reminderTime > 0) {
             reminderTime--;
             setTimeout("decreaseTime()", 1000);
         }
@@ -217,7 +226,7 @@ $authUrl = $client->createAuthUrl();
 
         $("#reminderTimeForget").text((reminderTime2 % 60) + " : " + Math.floor(reminderTime2 / 60));
 
-        if(reminderTime2 > 0) {
+        if (reminderTime2 > 0) {
             reminderTime2--;
             setTimeout("decreaseTime2()", 1000);
         }
@@ -239,11 +248,11 @@ $authUrl = $client->createAuthUrl();
 
                 response = JSON.parse(response);
 
-                if(response.status == "ok") {
+                if (response.status == "ok") {
 
                     phoneNum = $("#phoneNum").val();
                     reminderTime = response.reminder;
-                    if(reminderTime > 0) {
+                    if (reminderTime > 0) {
                         $("#reminderTimePane").removeClass('hidden');
                         $("#resendActivationCode").attr('disabled', 'disabled');
                         setTimeout("decreaseTime()", 1000);
@@ -257,10 +266,10 @@ $authUrl = $client->createAuthUrl();
                     $('#Send_AND_EnterCode-loginPopUp').removeClass('hidden');
                     $(".dark").show();
                 }
-                else if(response.status == "nok") {
+                else if (response.status == "nok") {
                     $("#loginErrPhonePass1").empty().append('شماره شما پیش از این در سامانه ثبت گردیده است.');
                 }
-                else if(response.status == "nok3") {
+                else if (response.status == "nok3") {
                     $("#loginErrPhonePass1").empty().append('اشکالی در ارسال پیام رخ داده است');
                 }
                 else {
@@ -273,7 +282,7 @@ $authUrl = $client->createAuthUrl();
 
     function showLoginCode() {
 
-        if($("#phoneNum").val() != "") {
+        if ($("#phoneNum").val() != "") {
             checkPhoneNum();
         }
     }
@@ -288,7 +297,7 @@ $authUrl = $client->createAuthUrl();
                 'activationCode': $("#activationCode").val()
             },
             success: function (response) {
-                if(response == "ok") {
+                if (response == "ok") {
                     back = "phone";
                     $("#password_In_Phone_registry").val("");
                     $(".pop-up").addClass('hidden');
@@ -305,7 +314,7 @@ $authUrl = $client->createAuthUrl();
 
     function showLoginPassword() {
 
-        if($("#activationCode").val() != "") {
+        if ($("#activationCode").val() != "") {
             checkActivationCode();
         }
     }
@@ -319,7 +328,7 @@ $authUrl = $client->createAuthUrl();
                 'email': mail
             },
             success: function (response) {
-                if(response == "ok") {
+                if (response == "ok") {
                     email = mail;
                     pas = $("#password_In_Email_registry").val();
 
@@ -336,7 +345,7 @@ $authUrl = $client->createAuthUrl();
 
     function checkUserName() {
 
-        if($("#invitationCode").val() != "") {
+        if ($("#invitationCode").val() != "") {
             $.ajax({
                 type: 'post',
                 url: checkUserNameDir,
@@ -428,7 +437,7 @@ $authUrl = $client->createAuthUrl();
                         },
                         success: function (response) {
                             if (response == "ok") {
-                                document.location.href = '{{route('main')}}';
+                                document.location.reload();
                             }
                         }
                     });
@@ -451,15 +460,15 @@ $authUrl = $client->createAuthUrl();
             data: {
                 captcha: grecaptcha.getResponse()
             },
-            success: function(response) {
-                if(response == "ok") {
-                    if(back == "email") {
-                        if($("#username_final").val() != "") {
+            success: function (response) {
+                if (response == "ok") {
+                    if (back == "email") {
+                        if ($("#username_final").val() != "") {
                             checkUserName();
                         }
                     }
                     else {
-                        if($("#username_final").val() != "") {
+                        if ($("#username_final").val() != "") {
                             checkUserName2();
                         }
                     }
@@ -480,7 +489,7 @@ $authUrl = $client->createAuthUrl();
 
         $("#username_final").val("");
 
-        if(back == "email") {
+        if (back == "email") {
             if ($("#email").val() != "" && $("#password_In_Email_registry").val() != "") {
                 if (validateEmail($("#email").val())) {
                     checkEmail($("#email").val());
@@ -520,7 +529,7 @@ $authUrl = $client->createAuthUrl();
     }
 
     function goBack() {
-        if(back == "email")
+        if (back == "email")
             showLoginEmail();
         else
             showLoginPassword();
@@ -536,7 +545,7 @@ $authUrl = $client->createAuthUrl();
             success: function (response) {
 
                 $("#loginErrResetPasByEmail").empty();
-                if(response == "ok") {
+                if (response == "ok") {
                     $("#loginErrResetPasByEmail").append('رمزعبور جدید به ایمیل وارد شده ارسال گردید');
                 }
                 else {
@@ -548,8 +557,8 @@ $authUrl = $client->createAuthUrl();
 
     function retrievePasByEmail() {
 
-        if($("#forget_email").val() != "") {
-            if(validateEmail($("#forget_email").val()))
+        if ($("#forget_email").val() != "") {
+            if (validateEmail($("#forget_email").val()))
                 doRetrievePasByEmail();
             else {
                 $("#loginErrResetPasByEmail").empty().append('ایمیل وارد شده معتبر نمی باشد');
@@ -558,7 +567,7 @@ $authUrl = $client->createAuthUrl();
     }
 
     function retrievePasByPhone() {
-        if($("#forget_phone").val() != "") {
+        if ($("#forget_phone").val() != "") {
             $.ajax({
                 type: 'post',
                 url: retrievePasByPhoneDir,
@@ -570,7 +579,7 @@ $authUrl = $client->createAuthUrl();
                     response = JSON.parse(response);
 
                     $("#loginErrResetPasByPhone").empty();
-                    if(response.status == "ok") {
+                    if (response.status == "ok") {
                         phoneNum = $("#forget_phone").val();
                         $("#loginErrResetPasByPhone").append('پسورد جدید به شماره وارد شده ارسال شده است');
                         $("#reminderTimePaneForget").removeClass('hidden');
@@ -578,7 +587,7 @@ $authUrl = $client->createAuthUrl();
                         reminderTime2 = response.reminder;
                         setTimeout("decreaseTime2()", 1000);
                     }
-                    else if(response.status == "nok"){
+                    else if (response.status == "nok") {
                         $("#loginErrResetPasByPhone").append('شماره وارد شده معتبر نمی باشد');
                     }
                     else {
@@ -595,7 +604,7 @@ $authUrl = $client->createAuthUrl();
 
     function checkedCheckBox() {
 
-        if($("#checked").is(":checked")) {
+        if ($("#checked").is(":checked")) {
             $("#submitAndFinishBtn").removeAttr('disabled');
         }
         else {
@@ -606,8 +615,8 @@ $authUrl = $client->createAuthUrl();
 </script>
 
 
-<link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/loginPopUp.css')}}' />
-<link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/abbreviations.css')}}' />
+<link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/loginPopUp.css')}}'/>
+<link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/abbreviations.css')}}'/>
 
 {{--loginPopUp--}}
 <form id="second_login" method="post" action="{{route('checkLogin')}}">
@@ -616,7 +625,8 @@ $authUrl = $client->createAuthUrl();
     <input id="form_pass" name="password" type="hidden">
 </form>
 
-<span id="loginPopUp" onkeyup="if(event.keyCode == 13) login($('#username_main').val(), $('#password_main').val())" class="pop-up ui_modal hidden">
+<span id="loginPopUp" onkeyup="if(event.keyCode == 13) login($('#username_main').val(), $('#password_main').val())"
+      class="pop-up ui_modal hidden">
     <div class="mainDivLoginMainLogo">
         <img class="loginMainLogo" src="{{URL::asset('images/icons/mainIcon.svg')}}">
     </div>
@@ -641,9 +651,38 @@ $authUrl = $client->createAuthUrl();
             <div class="pd-tp-8">
                 <div class="loginButtonsMainDiv">
                     <div class="signInBtnMainDiv">
-                        <button onclick="login($('#username_main').val(), $('#password_main').val())" class="loginSubBtn btn btn-info active">ورود</button>
+                        <button onclick="login($('#username_main').val(), $('#password_main').val())"
+                                class="loginSubBtn btn btn-info active">ورود</button>
                     </div>
-                    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                    {{--<div class="g-signin2" data-onsuccess="onSignIn"></div>--}}
+                    <a href="{{$authUrl}}" class="googleA">
+                        <div class="g-signin2">
+                        <div style="height:36px;width:120px;" class="abcRioButton abcRioButtonLightBlue">
+                            <div class="abcRioButtonContentWrapper" style="display: flex; box-shadow: 0 2px 4px 0 rgba(0,0,0,.25); direction: ltr; cursor: pointer">
+                                <div class="abcRioButtonIcon" style="padding:8px">
+                                    <div style="width:18px;height:18px;" class="abcRioButtonSvgImageWithFallback abcRioButtonIconImage abcRioButtonIconImage18">
+                                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 48 48" class="abcRioButtonSvg">
+                                            <g>
+                                                <path fill="#EA4335"
+                                                        d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"></path><path
+                                                        fill="#4285F4"
+                                                        d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"></path><path
+                                                        fill="#FBBC05"
+                                                        d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"></path><path
+                                                        fill="#34A853"
+                                                        d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"></path><path
+                                                        fill="none" d="M0 0h48v48H0z"></path>
+                                            </g>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <span style="font-size:13px;line-height:34px; margin-left: 15px;" class="abcRioButtonContents">
+                                    <span id="not_signed_inyx5syaq6qblq">Sign in</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    </a>
                 </div>
                 <p id="loginErr"></p>
             </div>
@@ -659,7 +698,7 @@ $authUrl = $client->createAuthUrl();
             <button class="btn" onclick="showLoginPhone()">
                 {{--<img src="{{URL::asset('images/Telephone.png')}}">--}}
                 <div></div>
-                <span  >تلفن همراه</span></button>
+                <span>تلفن همراه</span></button>
             <button class="btn" onclick="document.location.href = '{{$authUrl}}'">
                 {{--<img src="{{URL::asset('images/google.png')}}">--}}
                 <div></div>
@@ -672,53 +711,59 @@ $authUrl = $client->createAuthUrl();
 </span>
 
 {{--Enter Email in login PopUp--}}
-<span id="EnterEmail-loginPopUp" onkeyup="if(event.keyCode == 13) login($('#username_email').val(), $('#password_email').val())" class="pop-up ui_modal hidden">
+<span id="EnterEmail-loginPopUp"
+      onkeyup="if(event.keyCode == 13) login($('#username_email').val(), $('#password_email').val())"
+      class="pop-up ui_modal hidden">
     <div>
         <img class="loginMainLogo" src="{{URL::asset('images/icons/mainIcon.svg')}}">
     </div>
     <div class="col-xs-12 rtl mainContentInfos">
-        <div class="loginDividerBorder col-xs-6">
-            <div class="header_text font-size-14Imp">در حال حاضر عضو کوچیتا هستید؟!</div>
-            <div>
-                <div>
-                    <label class="full-width">
-                        <span class="pd-tp-8 inputLabelText"> نام کاربری </span>
-                        <input class="loginInputTemp" type="text" id="username_email" maxlength="40" required autofocus>
-                    </label>
-                </div>
-                <div>
-                    <label class="full-width">
-                        <span class="pd-tp-8 inputLabelText">رمز عبور</span>
-                        <input class="loginInputTemp password" type="password" id="password_email" maxlength="40" required>
-                        <a class="forgetPassLink" onclick="ShowForgetPass()">رمز عبور خود را فراموش کردید؟</a>
-                    </label>
-                </div>
-            </div>
-            <div class="pd-tp-8">
-                <button onclick="login($('#username_email').val(), $('#password_email').val())" class="loginSubBtn btn btn-info active">ورود</button>
-                <p id="loginErr"></p>
-            </div>
-        </div>
-        <div class="col-xs-6">
+        {{--<div class="loginDividerBorder col-xs-6">--}}
+        {{--<div class="header_text font-size-14Imp">در حال حاضر عضو کوچیتا هستید؟!</div>--}}
+        {{--<div>--}}
+        {{--<div>--}}
+        {{--<label class="full-width">--}}
+        {{--<span class="pd-tp-8 inputLabelText"> نام کاربری </span>--}}
+        {{--<input class="loginInputTemp" type="text" id="username_email" maxlength="40" required autofocus>--}}
+        {{--</label>--}}
+        {{--</div>--}}
+        {{--<div>--}}
+        {{--<label class="full-width">--}}
+        {{--<span class="pd-tp-8 inputLabelText">رمز عبور</span>--}}
+        {{--<input class="loginInputTemp password" type="password" id="password_email" maxlength="40" required>--}}
+        {{--<a class="forgetPassLink" onclick="ShowForgetPass()">رمز عبور خود را فراموش کردید؟</a>--}}
+        {{--</label>--}}
+        {{--</div>--}}
+        {{--</div>--}}
+        {{--<div class="pd-tp-8">--}}
+        {{--<button onclick="login($('#username_email').val(), $('#password_email').val())" class="loginSubBtn btn btn-info active">ورود</button>--}}
+        {{--<p id="loginErr"></p>--}}
+        {{--</div>--}}
+        {{--</div>--}}
+        <div class="col-xs-12">
             <div class="header_text font-size-14Imp">عضو شوید:</div>
             <div>
                 <div>
-                    <label class="full-width">
-                        <span class="pd-tp-8 inputLabelText"> آدرس ایمیل </span>
+                    <label class="full-width" style="display: flex; align-items: center;">
+                        <span class="pd-tp-8 inputLabelText" style="width: 15%"> آدرس ایمیل </span>
                         <input class="loginInputTemp" type="email" id="email" maxlength="40" required autofocus>
                     </label>
                 </div>
                 <div>
-                    <label class="full-width">
-                        <span class="pd-tp-8 inputLabelText">رمز عبور</span>
-                        <input class="loginInputTemp" type="password" id="password_In_Email_registry" maxlength="40" required>
+                    <label class="full-width" style="display: flex; align-items: center;">
+                        <span class="pd-tp-8 inputLabelText" style="width: 15%">رمز عبور</span>
+                        <input class="loginInputTemp" type="password" id="password_In_Email_registry" maxlength="40"
+                               required>
                     </label>
                 </div>
             </div>
             <div class="pd-tp-8">
-                <button type="button" onclick="showLoginUsername()" class="loginSubBtn btn btn-info active">ثبت</button>
-                <button type="button" onclick="Return()" class="loginReturnBtn btn btn-default">بازگشت</button>
-                <p id="loginErrEmail"></p>
+                <p id="loginErrEmail" style="text-align: center"></p>
+                <div style="display: flex; justify-content: center">
+                    <button type="button" onclick="showLoginUsername()" class="loginSubBtn btn btn-info active"
+                            style="margin-left: 10px">ثبت</button>
+                    <button type="button" onclick="Return()" class="loginReturnBtn btn btn-default">بازگشت</button>
+                </div>
             </div>
         </div>
     </div>
@@ -726,47 +771,53 @@ $authUrl = $client->createAuthUrl();
 </span>
 
 {{--Enter Phone in login PopUp--}}
-<span id="EnterPhone-loginPopUp" onkeyup="if(event.keyCode == 13) login($('#username_phone').val(), $('#password_phone').val())" class="pop-up ui_modal hidden">
+<span id="EnterPhone-loginPopUp"
+      onkeyup="if(event.keyCode == 13) login($('#username_phone').val(), $('#password_phone').val())"
+      class="pop-up ui_modal hidden">
     <div>
         <img class="loginMainLogo" src="{{URL::asset('images/icons/mainIcon.svg')}}">
     </div>
     <div class="col-xs-12 rtl mainContentInfos">
-        <div class="loginDividerBorder col-xs-6">
-            <div class="header_text font-size-14Imp">در حال حاضر عضو کوچیتا هستید؟!</div>
-            <div>
-                <div>
-                    <label class="full-width">
-                        <span class="pd-tp-8"> نام کاربری </span>
-                        <input class="loginInputTemp" type="text" id="username_phone" maxlength="40" required autofocus>
-                    </label>
-                </div>
-                <div>
-                    <label class="full-width">
-                        <span>رمز عبور</span>
-                        <input type="password" id="password_phone" class="loginInputTemp password" maxlength="40" required>
-                        <a class="forgetPassLink" onclick="ShowForgetPass()">رمز عبور خود را فراموش کردید؟</a>
-                    </label>
-                </div>
-            </div>
-            <div class="pd-tp-8">
-                <button onclick="login($('#username_phone').val(), $('#password_phone').val())" class="loginSubBtn btn btn-info active">ورود</button>
-                <p id="loginErr"></p>
-            </div>
-        </div>
-        <div class="col-xs-6">
+        {{--<div class="loginDividerBorder col-xs-6">--}}
+        {{--<div class="header_text font-size-14Imp">در حال حاضر عضو کوچیتا هستید؟!</div>--}}
+        {{--<div>--}}
+        {{--<div>--}}
+        {{--<label class="full-width">--}}
+        {{--<span class="pd-tp-8"> نام کاربری </span>--}}
+        {{--<input class="loginInputTemp" type="text" id="username_phone" maxlength="40" required autofocus>--}}
+        {{--</label>--}}
+        {{--</div>--}}
+        {{--<div>--}}
+        {{--<label class="full-width">--}}
+        {{--<span>رمز عبور</span>--}}
+        {{--<input type="password" id="password_phone" class="loginInputTemp password" maxlength="40" required>--}}
+        {{--<a class="forgetPassLink" onclick="ShowForgetPass()">رمز عبور خود را فراموش کردید؟</a>--}}
+        {{--</label>--}}
+        {{--</div>--}}
+        {{--</div>--}}
+        {{--<div class="pd-tp-8">--}}
+        {{--<button onclick="login($('#username_phone').val(), $('#password_phone').val())" class="loginSubBtn btn btn-info active">ورود</button>--}}
+        {{--<p id="loginErr"></p>--}}
+        {{--</div>--}}
+        {{--</div>--}}
+        <div class="col-xs-12">
             <div class="header_text font-size-14Imp">عضو شوید:</div>
             <div>
                 <div>
                     <label>
                         <span>موبایل خود را وارد کنید </span>
-                        <input class="loginInputTemp" placeholder="09xxxxxxxxx" type="tel" id="phoneNum" maxlength="40" required autofocus>
+                        <input class="loginInputTemp" placeholder="09xxxxxxxxx" type="tel" id="phoneNum" maxlength="40"
+                               required autofocus>
                     </label>
                 </div>
             </div>
             <div class="pd-tp-8">
-                <button type="button" onclick="showLoginCode()" class="loginSubBtn btn btn-info active">ثبت</button>
-                <button type="button" onclick="Return()" class="loginReturnBtn btn btn-default">بازگشت</button>
-                <p id="loginErrPhonePass1"></p>
+                <p id="loginErrPhonePass1" style="color: #963019; text-align: center"></p>
+                <div style="display: flex; justify-content: center;">
+                    <button type="button" onclick="showLoginCode()" class="loginSubBtn btn btn-info active"
+                            style="margin-left: 10px;">ثبت</button>
+                    <button type="button" onclick="Return()" class="loginReturnBtn btn btn-default">بازگشت</button>
+                </div>
             </div>
         </div>
     </div>
@@ -774,34 +825,36 @@ $authUrl = $client->createAuthUrl();
 </span>
 
 {{--Send & Enter Code in login PopUp--}}
-<span id="Send_AND_EnterCode-loginPopUp" onkeyup="if(event.keyCode == 13) login($('#username_2').val(), $('#password_2').val())" class="pop-up ui_modal hidden">
+<span id="Send_AND_EnterCode-loginPopUp"
+      onkeyup="if(event.keyCode == 13) login($('#username_2').val(), $('#password_2').val())"
+      class="pop-up ui_modal hidden">
     <div>
         <img class="loginMainLogo" src="{{URL::asset('images/icons/mainIcon.svg')}}">
     </div>
     <div class="col-xs-12 rtl mainContentInfos">
-        <div class="loginDividerBorder col-xs-6">
-            <div class="header_text font-size-14Imp">در حال حاضر عضو کوچیتا هستید؟!</div>
-            <div>
-                <div>
-                    <label class="full-width">
-                        <span class="pd-tp-8 inputLabelText"> نام کاربری </span>
-                        <input type="text" id="username_2" class="loginInputTemp" maxlength="40" required autofocus>
-                    </label>
-                </div>
-                <div>
-                    <label class="full-width">
-                        <span class="pd-tp-8 inputLabelText">رمز عبور</span>
-                        <input id="password_2" class="password loginInputTemp" maxlength="40" required>
-                        <a class="forgetPassLink" onclick="ShowForgetPass()">رمز عبور خود را فراموش کردید؟</a>
-                    </label>
-                </div>
-            </div>
-            <div class="pd-tp-8">
-                <button onclick="login($('#username_2').val(), $('#password_2').val())" class="loginSubBtn btn btn-info active">ورود</button>
-                <p id="loginErr"></p>
-            </div>
-        </div>
-        <div class="col-xs-6">
+        {{--<div class="loginDividerBorder col-xs-6">--}}
+        {{--<div class="header_text font-size-14Imp">در حال حاضر عضو کوچیتا هستید؟!</div>--}}
+        {{--<div>--}}
+        {{--<div>--}}
+        {{--<label class="full-width">--}}
+        {{--<span class="pd-tp-8 inputLabelText"> نام کاربری </span>--}}
+        {{--<input type="text" id="username_2" class="loginInputTemp" maxlength="40" required autofocus>--}}
+        {{--</label>--}}
+        {{--</div>--}}
+        {{--<div>--}}
+        {{--<label class="full-width">--}}
+        {{--<span class="pd-tp-8 inputLabelText">رمز عبور</span>--}}
+        {{--<input id="password_2" class="password loginInputTemp" maxlength="40" required>--}}
+        {{--<a class="forgetPassLink" onclick="ShowForgetPass()">رمز عبور خود را فراموش کردید؟</a>--}}
+        {{--</label>--}}
+        {{--</div>--}}
+        {{--</div>--}}
+        {{--<div class="pd-tp-8">--}}
+        {{--<button onclick="login($('#username_2').val(), $('#password_2').val())" class="loginSubBtn btn btn-info active">ورود</button>--}}
+        {{--<p id="loginErr"></p>--}}
+        {{--</div>--}}
+        {{--</div>--}}
+        <div class="col-xs-12">
             <div class="header_text font-size-14Imp">لطفا کد اعتبار سنجی را وارد نمایید:</div>
             <div>
                 <div>
@@ -814,7 +867,8 @@ $authUrl = $client->createAuthUrl();
                             <span>  زمان باقی مانده برای ارسال مجدد کد اعتبار سنجی شما :</span>
                             <span id="reminderTime"></span>
                         </p>
-                        <button onclick="resendActivationCode()" disabled id="resendActivationCode" class="btn btn-success"> ارسال مجدد کد اعتبار سنجی </button>
+                        <button onclick="resendActivationCode()" disabled id="resendActivationCode"
+                                class="btn btn-success"> ارسال مجدد کد اعتبار سنجی </button>
                     </label>
                 </div>
             </div>
@@ -828,45 +882,48 @@ $authUrl = $client->createAuthUrl();
 </span>
 
 {{--Enter Password in login PopUp--}}
-<span id="EnterPassword-loginPopUp" onkeyup="if(event.keyCode == 13) login($('#username_3').val(), $('#password_3').val())" class="pop-up ui_modal hidden">
+<span id="EnterPassword-loginPopUp"
+      onkeyup="if(event.keyCode == 13) login($('#username_3').val(), $('#password_3').val())"
+      class="pop-up ui_modal hidden">
     <div>
         <img class="loginMainLogo" src="{{URL::asset('images/icons/mainIcon.svg')}}">
     </div>
     <div class="col-xs-12 rtl mainContentInfos">
-        <div class="loginDividerBorder col-xs-6">
-            <div class="header_text font-size-14Imp">در حال حاضر عضو کوچیتا هستید؟!</div>
-            <div>
-                <div>
-                    <label class="full-width">
-                        <span class="pd-tp-8 inputLabelText"> نام کاربری </span>
-                        <input class="loginInputTemp" type="text" id="username_3" maxlength="40" required autofocus>
-                    </label>
-                </div>
-                <div>
-                    <label class="full-width">
-                        <span class="pd-tp-8 inputLabelText">رمز عبور</span>
-                        <input type="password" id="password_3" class="loginInputTemp" maxlength="40" required>
-                        <a class="forgetPassLink" onclick="ShowForgetPass()">رمز عبور خود را فراموش کردید؟</a>
-                    </label>
-                </div>
-            </div>
-            <div class="pd-tp-8">
-                <button onclick="login($('#username_3').val(), $('#password_3').val())" class="loginSubBtn btn btn-info active">ورود</button>
-                <p id="loginErr"></p>
-            </div>
-        </div>
-        <div class="col-xs-6">
+        {{--<div class="loginDividerBorder col-xs-6">--}}
+        {{--<div class="header_text font-size-14Imp">در حال حاضر عضو کوچیتا هستید؟!</div>--}}
+        {{--<div>--}}
+        {{--<div>--}}
+        {{--<label class="full-width">--}}
+        {{--<span class="pd-tp-8 inputLabelText"> نام کاربری </span>--}}
+        {{--<input class="loginInputTemp" type="text" id="username_3" maxlength="40" required autofocus>--}}
+        {{--</label>--}}
+        {{--</div>--}}
+        {{--<div>--}}
+        {{--<label class="full-width">--}}
+        {{--<span class="pd-tp-8 inputLabelText">رمز عبور</span>--}}
+        {{--<input type="password" id="password_3" class="loginInputTemp" maxlength="40" required>--}}
+        {{--<a class="forgetPassLink" onclick="ShowForgetPass()">رمز عبور خود را فراموش کردید؟</a>--}}
+        {{--</label>--}}
+        {{--</div>--}}
+        {{--</div>--}}
+        {{--<div class="pd-tp-8">--}}
+        {{--<button onclick="login($('#username_3').val(), $('#password_3').val())" class="loginSubBtn btn btn-info active">ورود</button>--}}
+        {{--<p id="loginErr"></p>--}}
+        {{--</div>--}}
+        {{--</div>--}}
+        <div class="col-xs-12">
             <div class="header_text">رمز عبور خود را وارد نمایید:</div>
             <div>
                 <div>
                     <label class="full-width">
                         <span>رمز عبور</span>
-                        <input type="password" id="password_In_Phone_registry" class="loginInputTemp" maxlength="40" required>
+                        <input type="password" id="password_In_Phone_registry" class="loginInputTemp" maxlength="40"
+                               required>
                     </label>
                 </div>
             </div>
             <div class="pd-tp-8">
-                <button type="button" onclick="showLoginUsername()" class="loginSubBtn btn btn-info active" >ثبت</button>
+                <button type="button" onclick="showLoginUsername()" class="loginSubBtn btn btn-info active">ثبت</button>
                 <p id="loginErr"></p>
             </div>
         </div>
@@ -880,25 +937,7 @@ $authUrl = $client->createAuthUrl();
         <img class="loginMainLogo" src="{{URL::asset('images/icons/mainIcon.svg')}}">
     </div>
     <div class="col-xs-12 rtl mainContentInfos">
-        <div class="loginDividerBorder col-xs-6">
-            <script async src='https://www.google.com/recaptcha/api.js'></script>
-
-            <input id='checked' onchange='checkedCheckBox()' type='checkbox' value='-1'>
-            <label class='labelForCheckBox' for='checked'>
-                <span></span>&nbsp;
-            </label>
-            <span> شرایط استفاده و
-                <a target="_blank" href="{{route('policies')}}">قوانین سایت</a>
-                را مطالعه کرده و با آن موافقم.
-            </span>
-            <div>
-                <div class="g-recaptcha" data-sitekey="6LfiELsUAAAAAO3Pk-c6cKm1HhvifWx9S8nUtxTb"></div>
-            </div>
-            <br>
-            <button id="submitAndFinishBtn" type="button" onclick="registerAndLogin()" class="loginSubBtn btn btn-info active" disabled>ثبت</button>
-            <p id="loginErrUserName"></p>
-        </div>
-        <div class="col-xs-6">
+        <div class="col-xs-12">
             <div class="header_text font-size-14Imp font-weight-700">قدم آخر!</div>
             <div>
                 <label>
@@ -913,6 +952,25 @@ $authUrl = $client->createAuthUrl();
                 </label>
             </div>
             <div class="pd-tp-8"></div>
+</div>
+        <div class="col-xs-12">
+            <script async src='https://www.google.com/recaptcha/api.js'></script>
+
+            <input id='checked' onchange='checkedCheckBox()' type='checkbox' value='-1'>
+            <label class='labelForCheckBox' for='checked'>
+                <span></span>&nbsp;
+            </label>
+            <span> شرایط استفاده و
+                <a target="_blank" href="{{route('policies')}}" style="color: blue;">قوانین سایت</a>
+                را مطالعه کرده و با آن موافقم.
+            </span>
+            <div>
+                <div class="g-recaptcha" data-sitekey="6LfiELsUAAAAAO3Pk-c6cKm1HhvifWx9S8nUtxTb"></div>
+            </div>
+            <br>
+            <button id="submitAndFinishBtn" type="button" onclick="registerAndLogin()"
+                    class="loginSubBtn btn btn-info active" disabled>ثبت</button>
+            <p id="loginErrUserName"></p>
         </div>
     </div>
     <div class="ui_close_x" onclick="document.location.href = '{{route('main')}}'"></div>
@@ -958,8 +1016,8 @@ $authUrl = $client->createAuthUrl();
             </label>
         </div>
         <div class="pd-tp-8">
-            <button type="button" onclick="retrievePasByEmail()" class="loginSubBtn btn btn-info active" >ثبت</button>
-            <button type="button" onclick="ShowForgetPass()" class="loginReturnBtn btn btn-default" >بازگشت</button>
+            <button type="button" onclick="retrievePasByEmail()" class="loginSubBtn btn btn-info active">ثبت</button>
+            <button type="button" onclick="ShowForgetPass()" class="loginReturnBtn btn btn-default">بازگشت</button>
             <p id="loginErrResetPasByEmail"></p>
         </div>
     </div>
@@ -975,12 +1033,14 @@ $authUrl = $client->createAuthUrl();
         <div>
             <label>
                 <span class="pd-tp-8"> شماره موبایل خود را وارد نمایید </span>
-                <input class="loginInputTemp" placeholder="09xxxxxxxxx" type="tel" id="forget_phone" maxlength="40" required autofocus>
+                <input class="loginInputTemp" placeholder="09xxxxxxxxx" type="tel" id="forget_phone" maxlength="40"
+                       required autofocus>
                 <p id="reminderTimePaneForget" class="hidden pd-tp-8">
                     <span> : زمان باقی مانده برای ارسال مجدد پسورد جدید </span>
                     <span id="reminderTimeForget"></span>
                 </p>
-                <button onclick="resendActivationCodeForget()" disabled id="resendActivationCodeForget" class="btn btn-success hidden"> ارسال مجدد کد فعال سازی </button>
+                <button onclick="resendActivationCodeForget()" disabled id="resendActivationCodeForget"
+                        class="btn btn-success hidden"> ارسال مجدد کد فعال سازی </button>
             </label>
         </div>
         <div class="pd-tp-8">

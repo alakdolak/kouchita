@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="{{URL::asset('css/common/alertPage.css')}}">
-{{--
+
 <div class="alertDarkBack">
     <div class="alertBox">
         <div class="alertTitle warningTitle">
@@ -7,7 +7,7 @@
         </div>
         <div class="alertDescriptionBox">
             <div class="alertDescription">
-                سلام. <br> من سیدامیرعباس میرمحدصادقی هستم
+                لورم ایپسون
             </div>
             <div>
                 <button class="alertBtn rightBtn">خیر</button>
@@ -22,7 +22,7 @@
         </div>
         <div class="alertDescriptionBox">
             <div class="alertDescription">
-                سلام. <br> من سیدامیرعباس میرمحدصادقی هستم <br> و می خواهم در اینجا به شما اخطار دهم که این کاری که انجام دادید ایراد دارد و لطف کنید و گند نزنید به همه فرآیندی که ما برای شما در نطر رفتیم
+                لورم ایپسون
             </div>
             <div>
                 <button class="alertBtn rightBtn">فعلا، نه</button>
@@ -31,7 +31,7 @@
         </div>
     </div>
 </div>
---}}
+
 
 <div id="successNotifiAlert" class="notifAlert">
     پست شما با موفقیت ثبت شد

@@ -24,7 +24,7 @@
         <div class="shelf_header">
             <div class="shelf_title">
                 <div class="shelf_title_container h3">
-                    <h3>مکان‌های نزدیک</h3>
+                    <h3>جاذبه های نزدیک</h3>
                 </div>
             </div>
         </div>
@@ -74,7 +74,7 @@
         <div class="shelf_header">
             <div class="shelf_title">
                 <div class="shelf_title_container h3">
-                    <h3>ماجراهای نزدیک</h3>
+                    <h3>طبیعت گردی های نزدیک</h3>
                 </div>
             </div>
         </div>
@@ -138,7 +138,7 @@
     function createSwiperContent(_places, _kind){
 
         var text = '';
-        if(_kind == 'article'){
+        if(_kind == 'article') {
             for(var i = 0; i < _places.length; i++){
                 text += '<div class="swiper-slide">\n' +
                     '                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column ng-scope">\n' +

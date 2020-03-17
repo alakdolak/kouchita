@@ -388,8 +388,8 @@ class PlaceController extends Controller {
                 $nearbys = DB::select("SELECT *, acos(" . sin($D) . " * sin(D / 180 * 3.14) + " . cos($D) . " * cos(D / 180 * 3.14) * cos(C / 180 * 3.14 - " . $C . ")) * 6371 as distance FROM " . $tableName . " HAVING distance between 0.001 and " . ConfigModel::first()->radius . " order by distance ASC limit 0, " . $count);
                 foreach ($nearbys as $nearby) {
 
-                    if (file_exists((__DIR__ . '/../../../../assets/_images/hotels/' . $nearby->file . '/f-' . $nearby->picNumber)))
-                        $nearby->pic = URL::asset("_images/hotels/" . $nearby->file . '/f-' . $nearby->picNumber);
+                    if (file_exists((__DIR__ . '/../../../../assets/_images/' . $kindPlace->fileName . '/' . $nearby->file . '/f-' . $nearby->picNumber)))
+                        $nearby->pic = URL::asset("_images/" . $kindPlace->fileName . "/" . $nearby->file . '/f-' . $nearby->picNumber);
                     else
                         $nearby->pic = URL::asset("_images/nopic/blank.jpg");
 
@@ -434,22 +434,13 @@ class PlaceController extends Controller {
                 $count = 4;
 
             $kindPlaceId = makeValidInput($_POST["kindPlaceId"]);
-
-            switch ($kindPlaceId) {
-                case 1:
-                    $place = Amaken::whereId(makeValidInput($_POST["placeId"]));
-                    break;
-                case 3:
-                    $place = Restaurant::whereId(makeValidInput($_POST["placeId"]));
-                    break;
-                case 4:
-                default:
-                    $place = Hotel::whereId(makeValidInput($_POST["placeId"]));
-                    break;
-                case 8:
-                    $place = Majara::whereId(makeValidInput($_POST["placeId"]));
-                    break;
+            $kindPlace = Place::find($_POST["kindPlaceId"]);
+            if($kindPlace == null){
+                echo 'nok';
+                return;
             }
+            else
+                $place = DB::table($kindPlace->tableName)->find($_POST["placeId"]);
 
             if ($place != null) {
                 $today = getToday()["date"];
@@ -494,18 +485,17 @@ class PlaceController extends Controller {
                         foreach ($alP as $i)
                             array_push($allPosts, $i);
                     }
+                }
 
-                    foreach ($allPosts as $item) {
-                        $item->msgs = PostComment::wherePostId($item->id)->whereStatus(true)->count();
-                        $item->pic = \URL::asset('_images/posts/' . $item->id . '/' . $item->pic);
-                        if ($item->date == null)
-                            $item->date = \verta($item->created_at)->format('Ym%d');
-                        $item->date = convertJalaliToText($item->date);
-                        $mainCategory = PostCategoryRelation::where('postId', $item->id)->where('isMain', 1)->first();
-                        $item->category = PostCategory::find($mainCategory->categoryId)->name;
-                        $item->url = route('article.show', ['slug' => $item->slug]);
-                    }
-
+                foreach ($allPosts as $item) {
+                    $item->msgs = PostComment::wherePostId($item->id)->whereStatus(true)->count();
+                    $item->pic = \URL::asset('_images/posts/' . $item->id . '/' . $item->pic);
+                    if ($item->date == null)
+                        $item->date = \verta($item->created_at)->format('Ym%d');
+                    $item->date = convertJalaliToText($item->date);
+                    $mainCategory = PostCategoryRelation::where('postId', $item->id)->where('isMain', 1)->first();
+                    $item->category = PostCategory::find($mainCategory->categoryId)->name;
+                    $item->url = route('article.show', ['slug' => $item->slug]);
                 }
 
                 $places = $this->getNearbies($place->C, $place->D, $count);
@@ -3773,7 +3763,7 @@ class PlaceController extends Controller {
                     $kindPlace->title = 'جاذبه های';
                     $meta['title'] = 'کوچیتا';
                     $meta['keyword'] = 'کوچیتا';
-                    $meta['description'] = 'کوچیتا';
+                    $meta['description'] = 'کوچیتا، سامانه جامع گردشگری ایران و شبکه اجتماعی گردشگران. اطلاعات اماکن و جاذبه ها، هتل ها، بوم گردی، ماجراجویی، آموزش سفر، فروشگاه صنایع دستی ، پادکست سفر';
                     break;
                 case 3:
                     $placeMode = 'restaurant';
@@ -3801,14 +3791,14 @@ class PlaceController extends Controller {
                     $kindPlace->title = 'صنایع دستی و سوغات';
                     $meta['title'] = 'کوچیتا';
                     $meta['keyword'] = 'کوچیتا';
-                    $meta['description'] = 'کوچیتا';
+                    $meta['description'] = 'کوچیتا، سامانه جامع گردشگری ایران و شبکه اجتماعی گردشگران. اطلاعات اماکن و جاذبه ها، هتل ها، بوم گردی، ماجراجویی، آموزش سفر، فروشگاه صنایع دستی ، پادکست سفر';
                     break;
                 case 11:
                     $placeMode = 'mahaliFood';
                     $kindPlace->title = 'غذاهای محلی';
                     $meta['title'] = 'کوچیتا';
                     $meta['keyword'] = 'کوچیتا';
-                    $meta['description'] = 'کوچیتا';
+                    $meta['description'] = 'کوچیتا، سامانه جامع گردشگری ایران و شبکه اجتماعی گردشگران. اطلاعات اماکن و جاذبه ها، هتل ها، بوم گردی، ماجراجویی، آموزش سفر، فروشگاه صنایع دستی ، پادکست سفر';
                     break;
             }
             $kindPlaceId = $kindPlace->id;
@@ -3881,17 +3871,22 @@ class PlaceController extends Controller {
         $rateActivityId = Activity::whereName('امتیاز')->first()->id;
 
         //first get all places in state or city
-        if($request->mode == 'country')
-            $placeIds = DB::table($table)->where('name', 'LIKE', '%'.$nameFilter.'%')->pluck('id')->toArray();
+        if($request->mode == 'country') {
+            $placeIds = DB::table($table)->where('name', 'LIKE', '%' . $nameFilter . '%')->pluck('id')->toArray();
+            $totalCount = DB::table($table)->count();
+        }
         else if($request->mode == 'state'){
             $cities = Cities::where('stateId', $request->city)->pluck('id')->toArray();
             $placeIds = DB::table($table)->whereIn('cityId', $cities)->where('name', 'LIKE', '%'.$nameFilter.'%')->pluck('id')->toArray();
+            $totalCount = DB::table($table)->whereIn('cityId', $cities)->count();
         }
-        else
-            $placeIds = DB::table($table)->where('cityId', $request->city)->where('name', 'LIKE', '%'.$nameFilter.'%')->pluck('id')->toArray();
+        else {
+            $placeIds = DB::table($table)->where('cityId', $request->city)->where('name', 'LIKE', '%' . $nameFilter . '%')->pluck('id')->toArray();
+            $totalCount = DB::table($table)->where('cityId', $request->city)->count();
+        }
 
         if(count($placeIds) == 0){
-            echo json_encode(['places' => array()]);
+            echo json_encode(['places' => array(), 'placeCount' => 0, 'totalCount' => $totalCount]);
             return;
         }
 
@@ -3918,7 +3913,7 @@ class PlaceController extends Controller {
             }
         }
         if(count($placeIds) == 0){
-            echo json_encode(['places' => array()]);
+            echo json_encode(['places' => array(), 'placeCount' => 0, 'totalCount' => $totalCount]);
             return;
         }
 
@@ -3939,7 +3934,7 @@ class PlaceController extends Controller {
             }
         }
         if(count($placeIds) == 0){
-            echo json_encode(['places' => array()]);
+            echo json_encode(['places' => array(), 'placeCount' => 0, 'totalCount' => $totalCount]);
             return;
         }
 
@@ -3965,13 +3960,15 @@ class PlaceController extends Controller {
             }
         }
         if(count($placeIds) == 0){
-            echo json_encode(['places' => array()]);
+            echo json_encode(['places' => array(), 'placeCount' => 0, 'totalCount' => $totalCount]);
             return;
         }
+        $placeCount = count($placeIds);
 
         // and sort results by kind
-        if($sort == 'alphabet')
+        if($sort == 'alphabet') {
             $places = DB::table($table)->whereIn('id', $placeIds)->orderBy('name')->skip(($page - 1) * $take)->take($take)->get();
+        }
         else if($sort == 'distance' && $nearPlaceIdFilter != 0 && $nearKindPlaceIdFilter != 0){
             $nearKind = Place::find($nearKindPlaceIdFilter);
             $nearPlace = DB::table($nearKind->tableName)->find($nearPlaceIdFilter);
@@ -4060,7 +4057,7 @@ class PlaceController extends Controller {
             }
         }
 
-        echo json_encode(['places' => $places]);
+        echo json_encode(['places' => $places, 'placeCount' => $placeCount, 'totalCount' => $totalCount]);
         return;
     }
 

@@ -157,7 +157,7 @@
             $.ajax({
 
                 type: 'post',
-                url: defaultPics,
+                url: '{{route("getDefaultPics")}}',
                 data: {},
 
                 success: function (response) {

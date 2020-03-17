@@ -45,8 +45,6 @@
             }
         };
     </script>
-
-    <script src="{{URL::asset('js/middleBanner.js')}}"></script>
 </head>
 
 <body class="rebrand_2017 desktop HomeRebranded  js_logging" ng-app="mainApp" style="background-color: #EAFBFF;">

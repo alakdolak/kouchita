@@ -6,6 +6,7 @@
         padding: 0px 20px;
         background-color: #fcc156;
     }
+
     .secHeadTabs{
         margin-right: 20px;
         font-size: 13px;
@@ -18,6 +19,7 @@
         cursor: pointer;
         height: 40px;
     }
+
     .secHeadNavs{
         display: flex;
     }
@@ -43,16 +45,23 @@
         font-size: 12px;
         text-align: center;
     }
+
     .secHeadTabsSubList > a:hover{
         background-color: #88070B;
         color: white;
     }
+
     .linkRoute{
         color: #16174f !important;
         font-size: 15px;
     }
+
     .spanMarginSecHead > span {
         margin: 0px 7px;
+    }
+
+    .secHeadTabsSubList > a:last-child {
+        border-radius:  0 0 10px 10px;
     }
 
     @media (max-width: 889px) {
