@@ -165,7 +165,7 @@
                                              <img id="rectanglePicUploadPhoto">
                                          </div>
                                      </div>
-                                     <div class="step6picText">قاب مستطیل</div>
+                                     <div class="step6picText epicText">قاب مستطیل</div>
                                      <div class="epEditPicText" onclick="doEdit(213 / 168, 'rectanglePicUploadPhoto');" style="cursor: pointer;">ویرایش</div>
                                  </div>
                                  <div class="epPicBox">
@@ -178,7 +178,14 @@
                                      <div class="epEditPicText" onclick="doEdit(1, 'squarePicUploadPhoto');" style="cursor: pointer;">ویرایش</div>
                                  </div>
                              </div>
-                             <div style="">عکس های ما در دو نوع قاب مختلف نمایش داده می شودمی توانید خود نسبت به برش نمایش مناسب عکس در داخل قاب اقدام نمایید در غیر اینصورت تصویر به صورت اتوماتیک برش می خورد</div>
+                             <div class="photoTemplateTypeDesc">عکس‌های ما در دو نوع قاب مختلف نمایش داده می‌شود می‌توانید خود نسبت به برش نمایش مناسب عکس در داخل قاب اقدام نمایید در غیر اینصورت تصویر به صورت اتوماتیک برش می‌خورد</div>
+
+                             <div class="imageVerificationBtn">
+                                     <button onclick="newUploadPic()">
+                                         تغییر عکس
+                                     </button>
+                            </div>
+
                          </div>
                          <div class="col-xs-5">
 
@@ -225,11 +232,7 @@
                              {{--</form>--}}
                          </div>
                          <div class="col-xs-12 footer secondStepFooter">
-                             <div class="imageVerificationBtn">
-                                     <button onclick="newUploadPic()">
-                                         تغییر عکس
-                                     </button>
-                            </div>
+
                              <div class="termsLabel">
                                  <div>
                                      <div class="secondStepPolicyCheckBox">

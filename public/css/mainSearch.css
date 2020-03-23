@@ -97,11 +97,10 @@ div.prw_rup.prw_search_typeahead .typeahead_align {
 
 .spGoWhere {
     color: #0076a3;
-    /*font-size: 20px;*/
     font-weight: 500;
     float: right;
     margin-left: 5px;
-    font-size: 35px;
+    font-size: 30px;
 }
 
 div.prw_rup.prw_search_typeahead .typeahead_align .typeahead_input {
@@ -111,7 +110,7 @@ div.prw_rup.prw_search_typeahead .typeahead_align .typeahead_input {
     height: 40px;
     border: none;
     box-shadow: none !important;
-    font-size: 25px;
+    font-size: 20px;
 }
 
 .spBorderBottom {

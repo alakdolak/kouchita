@@ -4381,7 +4381,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     .footerOptimizer {
         display: flex !important;
         width: 100%;
-        height: 75px;
+        height: 10px;
     }
 
     .commentsContentMainBox {
