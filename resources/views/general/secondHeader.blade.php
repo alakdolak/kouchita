@@ -154,7 +154,7 @@
             </div>
         </div>
         <div class="secHeadTabs ">
-            <a href="{{route('mainArticle')}}" style="color: #16174f">سفرنامه ها</a>
+            <a href="{{route('mainArticle')}}" style="color: #16174f">سفرنامه‌ها</a>
         </div>
     </div>
 </div>
