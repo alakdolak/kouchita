@@ -36,7 +36,7 @@
 @media (max-width:766px) {
     .notifAlert {
         position: fixed;
-        bottom: 0%;
+        bottom: -10%;
         right: 50%;
         transform: translate(50%);
         z-index: 9;
