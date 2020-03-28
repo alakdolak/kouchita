@@ -211,10 +211,10 @@ function removeAssignedUserToReview(element, _email){
 function uploadReviewPics(input){
 
     if (input.files && input.files[0]) {
-        if(input.files[0].size >= 2000000){
-            alert('حجم عکس باید زیر 2MB  باشد');
-            return;
-        }
+        // if(input.files[0].size >= 8000000){
+        //     alert('حجم عکس باید زیر 8MB  باشد');
+        //     return;
+        // }
         var lastNumber = reviewPicNumber;
         var text = '<div id="reviewPic_' + reviewPicNumber + '" class="commentPhotosDiv commentPhotosAndVideos">\n' +
             '<div id="reviewPicLoader_' + reviewPicNumber + '" class="loaderReviewPiUpload"></div>\n' +
