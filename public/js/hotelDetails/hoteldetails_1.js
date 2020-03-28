@@ -215,8 +215,7 @@ function uploadReviewPics(input){
         //     alert('حجم عکس باید زیر 8MB  باشد');
         //     return;
         // }
-        var lastNumber = reviewPicNumber;
-        var text = '<div id="reviewPic_' + reviewPicNumber + '" class="commentPhotosDiv commentPhotosAndVideos">\n' +
+        var lastNumber = reviewPicNumber;var text = '<div id="reviewPic_' + reviewPicNumber + '" class="commentPhotosDiv commentPhotosAndVideos">\n' +
             '<div id="reviewPicLoader_' + reviewPicNumber + '" class="loaderReviewPiUpload"></div>\n' +
             '<img id="showPic' + reviewPicNumber + '" src="#" style="width: 100%; height: 100px;">\n' +
             '<input type="hidden" id="fileName_' + reviewPicNumber + '" >\n' +
