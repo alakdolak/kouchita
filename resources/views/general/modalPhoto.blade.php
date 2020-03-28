@@ -66,7 +66,7 @@
     }
 </style>
 <div class="modal showingPhotosModal" id="photoAlbumModal" role="dialog" style="display: none">
-    <div class="modal-dialog" style="margin-bottom: 0px; margin-top: 5px">
+    <div class="modal-dialog" style="margin-top: 15%">
         <div class="modal-content" style="background-color: #141518; border: none;">
             <div id="showingPhotosMainDivHeader">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
