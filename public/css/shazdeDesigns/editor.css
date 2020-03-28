@@ -1,3 +1,4 @@
+
 /*1st box of styles*/
 
 .errorField {
@@ -302,9 +303,10 @@
 }
 
 .itemRow .row .col-xs-7 {
-    padding: 15px;
+    padding: 15px 15px 50px;
     border-left: 1px solid #cccccc;
     float: right;
+    position: relative;
 }
 
 .itemRow .row .col-xs-7 .epPicBox:first-child {
@@ -320,6 +322,14 @@
 .itemRow .row .col-xs-7 div:last-child {
     margin: 10px 0;
     text-align: justify
+}
+
+.photoTemplateTypeDesc {
+    text-align: justify;
+}
+
+#photoEditor.ui_overlay:before {
+    display: none;
 }
 
 #photoEditor .secondStepFooter {
@@ -349,7 +359,7 @@
 
 .imageVerificationBtn {
     position: absolute;
-    top: -35px;
+    bottom: 0;
     width: 71px;
     left: 10px;
 }
@@ -521,6 +531,7 @@
     color: blue;
     cursor: pointer;
 }
+
 .uploadedImgDiv{
     width: 100%;
     justify-content: space-around;
@@ -531,6 +542,7 @@
     overflow-y: scroll;
     flex-direction: row;
 }
+
 .uploadedImgShowDiv{
     position: relative;
     display: flex;
@@ -538,6 +550,7 @@
     align-items: center;
     overflow: hidden;
 }
+
 .uploadedImgPic{
     width: 100%;
 }

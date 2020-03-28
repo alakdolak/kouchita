@@ -22,16 +22,16 @@
 
 
     <?php if($mode == "badge"): ?>
-        <title>کوچیتا | مدال های گردشگری</title>
+        <title>کوچیتا | مدال‌های گردشگری</title>
     <?php endif; ?>
     <?php if($mode == "profile"): ?>
     <title>کوچیتا | صفحه کاربری</title>
     <?php endif; ?>
     <?php if($mode == "message"): ?>
-    <title>کوچیتا | پیام های من</title>
+    <title>کوچیتا | پیام‌های من</title>
     <?php endif; ?>
     <?php if($mode == "message"): ?>
-        <title>کوچیتا | پیام های من</title>
+        <title>کوچیتا | پیام‌های من</title>
         <?php endif; ?>
         <link rel="stylesheet" type="text/css" media="screen, print" href="{{URL::asset('css/theme2/mbr_profile.css?v=1')}}"/>
         <!--[if IE 6]>

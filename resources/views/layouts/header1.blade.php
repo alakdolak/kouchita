@@ -329,7 +329,7 @@ if(Auth::check()) {
 
                         </div>
 
-                        <div class="global-nav-actions flex" style="position: absolute; left: 0px;">
+                        <div class="global-nav-actions flex">
 
                             @if(Auth::check())
 
@@ -346,7 +346,7 @@ if(Auth::check()) {
                                     <div id="bookmarkicon" class="ppr_rup ppr_priv_global_nav_action_profile"  title="نشانه گذاری شده ها" style="font-size: 10px">
                                         <span class="ui_icon casino" style="justify-content: center"></span>
                                         <div class="nameOfIconHeaders">
-                                            نشون کرده
+                                            نشون‌کرده
                                         </div>
                                     </div>
 
@@ -467,11 +467,11 @@ if(Auth::check()) {
                                             <div class="masthead_notifctr_btn">
                                                 <div class="masthead_notifctr_sprite ui_icon notification-bell"></div>
                                                 <div class="nameOfIconHeaders">
-                                                    پیام ها
+                                                    پیام‌ها
                                                 </div>
                                                 <div id="alertPane" class="ui_jewel marked_for_attention">0</div>
                                                 <div id="alert" class="masthead_notifctr_dropdown hidden">
-                                                    <div class="notifdd_title">پیام ها</div>
+                                                    <div class="notifdd_title">پیام‌ها</div>
 
                                                     <div id="alertLoader" class="notifdd_loading hidden">
                                                         <div class="ui_spinner"></div>
@@ -504,7 +504,7 @@ if(Auth::check()) {
                                                     <a href="{{URL('profile')}}" class="subLink" data-tracking-label="UserProfile_viewProfile">صفحه کاربری</a>
                                                 </li>
                                                 <li class="subItemHeaderNavBar rule">
-                                                    <a href="{{URL('messages')}}" class="subLink global-nav-submenu-divided" data-tracking-label="UserProfile_messages">پیام ها</a>
+                                                    <a href="{{URL('messages')}}" class="subLink global-nav-submenu-divided" data-tracking-label="UserProfile_messages">پیام‌ها</a>
                                                 </li>
                                                 <li class="subItemHeaderNavBar">
                                                     <a href="{{URL('accountInfo')}}" class="subLink" data-tracking-label="UserProfile_settings">اطلاعات کاربر </a>
@@ -554,7 +554,7 @@ if(Auth::check()) {
                                                 <span class="unscoped global-nav-link ui_tab" onclick="openMainSearch(11)  // in mainSearch.blade.php">غذای محلی</span>
                                             </li>
                                             <li>
-                                                <a href="{{route('mainArticle')}}" class="unscoped global-nav-link ui_tab " data-tracking-label="Flights">سفرنامه ها</a>
+                                                <a href="{{route('mainArticle')}}" class="unscoped global-nav-link ui_tab " data-tracking-label="Flights">سفرنامه‌ها</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -650,7 +650,7 @@ if(Auth::check()) {
                 });
         }
         else {
-            $('.global-nav-actions').animate({width: "270px"});
+            $('.global-nav-actions').animate({width: "300px"});
             $('.global-nav-actions').toggleClass('display-flexImp');
         }
     }

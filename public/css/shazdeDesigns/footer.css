@@ -23,7 +23,9 @@ footer ul {
 }
 
 .footTitle {
-    font-size: 18px;
+    font-size: 17px;
+    font-weight: 500;
+    padding: 0 4px 4px;
 }
 
 footer li > a {
@@ -56,36 +58,27 @@ footer li > img, .small-ico {
     height: 22px;
 }
 
-.footDown {
-    float: right;
-    width: 100%;
-    padding-left: 10px;
-}
-
-.footDown a {
-    text-decoration: underline;
-}
-
-.footDown a:hover {
-    text-decoration: underline !important;
-}
-
-.footDown li {
-    margin-top: -3px;
-}
-
 .socialLink {
-    font-size: 12px;
-    color: black;
+    font-size: 14px;
+    color: #16174f;
 }
 
 .footerIcon {
     background-image: url('../../images/footer.png');
+    background-repeat: no-repeat;
+    display: inline-block;
+}
+
+.footerIconVer {
     width: 22px;
     height: 22px;
     background-size: 22px;
-    background-repeat: no-repeat;
-    display: inline-block;
+}
+
+.footerIconHor {
+    width: 50px;
+    height: 50px;
+    background-size: 50px;
 }
 
 .gardeshname {
@@ -110,23 +103,33 @@ footer li > img, .small-ico {
 }
 
 .linkedin {
-    background-position: 0 -91px;
+    background-image: url('../../images/footer/linkedin.png');
+    background-repeat: no-repeat;
+    display: inline-block;
 }
 
 .facebook {
-    background-position: 0 -1px;
+    background-image: url('../../images/footer/facebook.png');
+    background-repeat: no-repeat;
+    display: inline-block;
 }
 
 .pinterest {
-    background-position: 0 -114px;
+    background-image: url('../../images/footer/pinterest.png');
+    background-repeat: no-repeat;
+    display: inline-block;
 }
 
 .twitter {
-    background-position: 0 -159px;
+    background-image: url('../../images/footer/twitter.png');
+    background-repeat: no-repeat;
+    display: inline-block;
 }
 
 .googlePlus {
-    background-position: 0 -46px;
+    background-image: url('../../images/footer/googlePlus.png');
+    background-repeat: no-repeat;
+    display: inline-block;
 }
 
 .selectLanguage {
@@ -135,131 +138,60 @@ footer li > img, .small-ico {
     font-size: 12px;
 }
 
+.footerLogoSocialBox {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
 .footerLogo {
     width: 18%;
     clear: right;
 }
 
+.footerSocialMediaBox {
+    width: 19%;
+    margin-left: 5%;
+    padding-top: 5px;
+}
+
 .aboutShazde {
+    float: right;
+    width: 66%;
     font-size: 10px !important;
     line-height: 24px !important;
     text-align: justify;
 }
 
-#knowOurPartnersDiv , #ourDescriptionDiv {
-    float: right;
-    width: 65%;
+.aboutShazdeLink > a {
+    color: #16174f !important;
+    font-size: 10px;
+    font-weight: 600;
 }
 
-.footerMainBoxes {
-    float: right;
-    width: 10.5%;
-    margin: -5px 85px 0 0;
+.aboutShazdeLink > a:hover {
+    text-decoration: underline !important;
 }
 
-#beWithUsInSocialMedia > ul > li:not(:first-child) {
+.footerOtherBoxes {
+    float: right;
+    width: 11%;
+    margin-right: 6%;
+}
+
+#socialMedias > ul > li:not(:first-child) {
     padding: 0 4px;
 }
 
-#beWithUsInSocialMedia > ul > li:not(:first-child) > div:nth-child(2) {
+#socialMedias > ul > li:not(:first-child) > div:nth-child(2) {
     display: inline-block;
     position: absolute;
     margin-right: 4px;
 }
 
-#beWithUsInSocialMedia > ul > li:last-child > a {
+#socialMedias > ul > li:last-child > a {
     margin-right: 4px
 }
-
-/*.footerLogo > img {*/
-/*    margin-top: 10px;*/
-/*}*/
-
-
-/*@media screen and (max-width: 900px) {*/
-/*.phoneStyle {*/
-/*width: 50% !important;*/
-/*}*/
-
-/*.footTitle {*/
-/*font-size: 36px;*/
-/*}*/
-
-/*.selectLanguage {*/
-/*border: 4px solid;*/
-/*font-size: 24px;*/
-/*}*/
-
-/*.socialLink {*/
-/*font-size: 24px;*/
-/*}*/
-
-/*.footerIcon {*/
-/*width: 44px;*/
-/*height: 44px;*/
-/*background-size: 44px;*/
-/*background-repeat: no-repeat;*/
-/*display: inline-block;*/
-/*}*/
-
-/*.gardeshname {*/
-/*background-position: 0 -47px;*/
-/*}*/
-
-/*.instagram {*/
-/*background-position: 0 -138px;*/
-/*}*/
-
-/*.telegram {*/
-/*background-position: 0 -274px;*/
-/*}*/
-
-/*.aparat {*/
-/*background-position: 0 -364px;*/
-/*}*/
-
-/*.bogendesign {*/
-/*background-position: 0 -410px;*/
-/*}*/
-
-/*.linkedin {*/
-/*background-position: 0 -183px;*/
-/*}*/
-
-/*.facebook {*/
-/*background-position: 0 -2px;*/
-/*}*/
-
-/*.pinterest {*/
-/*background-position: 0 -229px;*/
-/*}*/
-
-/*.twitter {*/
-/*background-position: 0 -319px;*/
-/*}*/
-
-/*.googlePlus {*/
-/*background-position: 0 -93px;*/
-/*}*/
-
-/*.footerLogo {*/
-/*width: 100%;*/
-/*clear: both;*/
-/*}*/
-
-/*.footDown {*/
-/*width: 100%;*/
-/*clear: both;*/
-/*}*/
-
-/*.aboutShazde {*/
-/*font-size: 40px;*/
-/*}*/
-
-/*footer li > a {*/
-/*font-size: 24px;*/
-/*}*/
-/*}*/
 
 
 /*phone style*/
@@ -270,7 +202,7 @@ footer li > img, .small-ico {
     background-color: #fcc156;
     color: #16174f;
     direction: rtl;
-    padding: 20px;
+    padding: 20px 10px;
     display: flex;
     justify-content: center;
 }
@@ -278,7 +210,7 @@ footer li > img, .small-ico {
 .phoneFooterLogo {
     width: 80px;
     position: absolute;
-    top: -50px;
+    top: -25px;
 }
 
 .phoneDescription {
@@ -295,6 +227,7 @@ footer li > img, .small-ico {
 
 .phoneDescriptionText {
     overflow: auto;
+    padding: 0 5px;
 }
 
 .footerPhoneMenuBar {
@@ -386,6 +319,7 @@ footer li > img, .small-ico {
     font-family: Shazde_Regular2 !important;
 
 }
+
 /*pop up on phone( phone popUp : pp)*/
 
 .mainPopUp {
@@ -537,6 +471,47 @@ footer li > img, .small-ico {
     display: flex;
 }
 
+
+/*the style of article footer & menu in phone*/
+.lp_ar_searchTitle {
+    color: #761c19;
+    text-align: center;
+    font-weight: 600;
+}
+
+.lp_ar_filters {
+    border-bottom: 3px solid rgba(0, 0, 0, .075);
+    display: flex;
+    margin: 5px 0;
+}
+
+.lp_ar_eachFilters {
+    width: 50%;
+    text-align: center;
+    line-height: 30px;
+}
+
+.lp_ar_selectedMenu {
+    border-bottom: 5px solid #761c19;
+}
+
+.lp_ar_rightFilters {
+    border-left: 2px solid rgba(0, 0, 0, .075);
+}
+
+.lp_ar_borderBottom {
+    border-bottom: 10px solid #f3f3f3;
+    margin: 10px -7px;
+}
+
+.lp_ar_contentOfFilters{
+    max-height: 80vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+
+
 footer .modules-membercenter-member-profile {
     width: 60%;
 }
@@ -601,6 +576,7 @@ footer .editProfileMenu {
 
 footer .editProfileMenu > a {
     padding: 5px;
+    color: #16174f;
 }
 
 footer .profileBtnActionMobile {
@@ -1162,14 +1138,8 @@ footer .profileMenuLinks {
     border-width: 2px 0;
 }
 
-@media (min-width: 767px) {
-    .footerPhoneMenuBar {
-        display: none;
-    }
-}
 
-@media (max-width: 767px){
-
+@media (max-width: 992px){
     .FilterTopController{
         display: flex;
         justify-content: center;
@@ -1183,6 +1153,58 @@ footer .profileMenuLinks {
     .orders{
         padding: 20px 5px;
         margin: 10px 0;
+    }
+
+    .footerPhoneMenuBar {
+        display: none;
+    }
+
+    /*.aboutShazde {*/
+    /*    width: 100%;*/
+    /*}*/
+    /*.footerOtherBoxes {*/
+    /*    width: 25%;*/
+    /*}*/
+}
+
+@media (max-width: 767px){
+    .FilterTopController{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column-reverse;
+    }
+    .ordering{
+        font-size: 20px !important;
+        width: 75%;
+    }
+    .orders{
+        padding: 20px 5px;
+        margin: 10px 0;
+    }
+
+    .footerPhoneMenuBar {
+        display: none;
+    }
+}
+
+@media (max-height: 700px) {
+
+    .overflowOptimizer {
+        display: block;
+    }
+
+    .pSC_boxOfDetails {
+        overflow: auto;
+        height: inherit;
+    }
+
+    .pSC_tilte {
+        padding: 15px 20px;
+    }
+
+    .pSC_boxOfCityDetailsText, .pSC_cityDetails {
+        padding: 10px 0;
     }
 }
 
@@ -1213,7 +1235,11 @@ footer .profileMenuLinks {
         margin: 20px;
     }
 
-    .phoneDescriptionText, .pSC_cityDetails {
+    .phoneDescriptionText {
+        font-size: 12px;
+    }
+
+    .pSC_cityDetails {
         font-size: 14px;
     }
 
@@ -1405,60 +1431,6 @@ footer .profileMenuLinks {
     }
 }
 
-@media (max-height: 700px) {
-
-    .overflowOptimizer {
-        display: block;
-    }
-
-    .pSC_boxOfDetails {
-        overflow: auto;
-        height: inherit;
-    }
-
-    .pSC_tilte {
-        padding: 15px 20px;
-    }
-
-    .pSC_boxOfCityDetailsText, .pSC_cityDetails {
-        padding: 10px 0;
-    }
-}
-
-/*the style of article footer & menu in phone*/
-.lp_ar_searchTitle {
-    color: #761c19;
-    text-align: center;
-    font-weight: 600;
-}
-
-.lp_ar_filters {
-    border-bottom: 3px solid rgba(0, 0, 0, .075);
-    display: flex;
-    margin: 5px 0;
-}
-
-.lp_ar_eachFilters {
-    width: 50%;
-    text-align: center;
-    line-height: 30px;
-}
-
-.lp_ar_selectedMenu {
-    border-bottom: 5px solid #761c19;
-}
-
-.lp_ar_rightFilters {
-    border-left: 2px solid rgba(0, 0, 0, .075);
-}
-
-.lp_ar_borderBottom {
-    border-bottom: 10px solid #f3f3f3;
-    margin: 10px -7px;
-}
-
-.lp_ar_contentOfFilters{
-    max-height: 80vh;
-    overflow-y: auto;
-    overflow-x: hidden;
+.fassadsad {
+    width: 20%;
 }

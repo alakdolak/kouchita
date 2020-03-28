@@ -317,7 +317,8 @@
             @foreach($articleBanner as $item)
                 <div class="swiper-slide position-relative">
                     <div class="card transition">
-                        <h2 class="h2MidBanerArticle transition">{{$item->title}}</h2>
+                        <h2 class="h2MidBanerArticle transition"
+                            onmouseenter="showAlt(this)" onmouseleave="hideAlt(this)" title="{{$item->title}}">{{$item->title}}</h2>
                         <p class="pMidBanerArticle">
                             {{$item->meta}}
                         </p>
@@ -326,6 +327,9 @@
                         </div>
                         <div class="card_circle transition" style="background: url('{{$item->pic}}') no-repeat center bottom; background-size: cover;"></div>
                     </div>
+{{--                    <p class="titleAlt display-none">--}}
+{{--                        {{$item->title}}--}}
+{{--                    </p>--}}
                 </div>
             @endforeach
                 </div>
@@ -366,7 +370,7 @@
                                             </div>
                                         </a>
                                         <div class="detail rtl">
-                                            <a href="[[place.url]]" class="item poi_name ui_link ng-binding">[[place.name]]</a>
+                                            <a href="[[place.url]]" class="item poi_name ui_link ng-binding" title="[[place.name]]">[[place.name]]</a>
                                             <div class="item rating-widget">
                                                 <div class="prw_rup prw_common_location_rating_simple">
                                                     <span class="ui_bubble_rating bubble_[[place.placeRate]]0"></span>
@@ -433,7 +437,7 @@
                                             </div>
                                         </a>
                                         <div class="detail rtl">
-                                            <a href="[[place.url]]" class="item poi_name ui_link ng-binding">[[place.name]]</a>
+                                            <a href="[[place.url]]" class="item poi_name ui_link ng-binding" title="[[place.name]]">[[place.name]]</a>
                                             <div class="item rating-widget">
                                                 <div class="prw_rup prw_common_location_rating_simple">
                                                     <span class="ui_bubble_rating bubble_[[place.placeRate]]0"></span>
@@ -675,7 +679,7 @@
                                             </div>
                                         </a>
                                         <div class="detail rtl">
-                                            <a href="[[place.url]]" class="item poi_name ui_link ng-binding">[[place.name]]</a>
+                                            <a href="[[place.url]]" class="item poi_name ui_link ng-binding" title="[[place.name]]">[[place.name]]</a>
                                             <div class="item rating-widget">
                                                 <div class="prw_rup prw_common_location_rating_simple">
                                                     <span class="ui_bubble_rating bubble_[[place.placeRate]]0"></span>
@@ -760,7 +764,7 @@
                                             </div>
                                         </a>
                                         <div class="detail rtl">
-                                            <a href="[[place.url]]" class="item poi_name ui_link ng-binding">[[place.name]]</a>
+                                            <a href="[[place.url]]" class="item poi_name ui_link ng-binding" title="[[place.name]]">[[place.name]]</a>
                                             <div class="item rating-widget">
                                                 <div class="prw_rup prw_common_location_rating_simple">
                                                     <span class="ui_bubble_rating bubble_[[place.placeRate]]0"></span>
@@ -889,7 +893,7 @@
                                             </div>
                                         </a>
                                         <div class="detail rtl">
-                                            <a href="[[place.url]]" class="item poi_name ui_link ng-binding">[[place.name]]</a>
+                                            <a href="[[place.url]]" class="item poi_name ui_link ng-binding" title="[[place.name]]">[[place.name]]</a>
                                             <div class="item rating-widget">
                                                 <div class="prw_rup prw_common_location_rating_simple">
                                                     <span class="ui_bubble_rating bubble_[[place.placeRate]]0"></span>
@@ -958,7 +962,7 @@
                                                 </div>
                                             </a>
                                             <div class="detail rtl">
-                                                <a href="[[place.url]]" class="item poi_name ui_link ng-binding">[[place.title]]</a>
+                                                <a href="[[place.url]]" class="item poi_name ui_link ng-binding" title="[[place.title]]">[[place.title]]</a>
                                                 <div class="item rating-widget">
                                                     {{--<div class="prw_rup prw_common_location_rating_simple">--}}
                                                         {{--<span class="ui_bubble_rating bubble_[[place.placeRate]]0"></span>--}}
@@ -1047,4 +1051,16 @@
             }
         }
     });
+</script>
+
+<script>
+
+    function showAlt(elm) {
+        $(elm).parent().next().removeClass('display-none')
+    }
+
+    function hideAlt(elm) {
+        $(elm).parent().next().addClass('display-none')
+    }
+
 </script>

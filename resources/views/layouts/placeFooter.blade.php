@@ -15,136 +15,143 @@ $config = \App\models\ConfigModel::first();
 
 <footer>
     <div class="hideOnPhone screenFooterStyle">
-        {{--top footer--}}
-        {{--    <div class="hideOnPhone" id="knowOurPartnersDiv">--}}
-        {{--        <ul>--}}
-        {{--            <li class="footTitle"><b> شرکای ما را بشناسید</b></li>--}}
-        {{--        </ul>--}}
-        {{--    </div>--}}
-        <div class="footerLogo">
-            <img src="{{URL::asset('images/icons/mainLogo.png')}}" class="content-icon" width="100%">
-        </div>
-        <div id="ourDescriptionDiv">
-            <div class="clear-both hideOnScreen"></div>
-            <div class="footDown">
-                <ul>
-                    <li>
-                        <p class="aboutShazde">
-                            کوچیتا، پلتفرم و شبکه‌ای اجتماعی در حوزه گردشگری است که با هدف ارتقاء سواد گردشگری، افزایش کیفیت سفر و سهولت استفاده افراد جامعه، اعم از داخلی و بین‌المللی، از خدمات گردشگری ایجاد شده است.
-                            ارائه اطلاعات جامع، به‌روز و صحیح گردشگری در زمینه: مراکز اقامتی اعم از: هتل، مسافرخانه، مراکز بوم‌گردی، کمپ، ویلا و خانه اجاره‌ای، رستوران‌ها، جاذبه‌ها و اماکن گردشگری، سوغات و صنایع دستی، آداب و رسوم محلی شامل: غذاهای محلی، اصطلاحات محلی، لباس محلی، گویش محلی و دانش محلی، جشنواره‌ها، آئین‌ها و رویدادهای فرهنگی، خدمات تسهیلگر گردشگری از جمله وسایل نقلیه و تورهای گردشگری و سایر خدمات مکمل؛ امکان ایجاد شبکه‌ای اجتماعی به‌منظور تبادل اطلاعات و دیدگاه‌ها که در آن کاربران می‌توانند: عکس‌های خود را به اشتراک بگذارند؛ اطلاعات و تجربیات خود در خصوص هریک از اطلاعات گردشگری را به اشتراک بگذارند؛ پرسش خود را در خصوص هریک از اطلاعات گردشگری مطرح نمایند و به یکدیگر پاسخ دهند؛ عکس‌ها و اطلاعات به اشتراک گذاشته شده توسط سایر کاربران را بپسندند و در خصوص آن دیدگاه مطرح نمایند و یکدیگر را دنبال نمایند و امکان مقایسه قیمت، خرید و رزرو خدمات تسهیلگر سفر از جمله رزرو وسایل نقلیه شامل هواپیما، قطار و اتوبوس، رزرو مراکز اقامتی، رزرو رستوران، خرید تورهای گردشگری، خرید سوغات و صنابع دستی، خرید اقلام سفر، خرید بلیت اماکن و جاذبه‌های گردشگری و خرید بلیت جشنواره‌ها، آئین‌ها و رویدادهای فرهنگی از مهم‌ترین امکاناتی است که این پلتفرم در اختیار کاربران قرار می‌دهد.
-                        </p>
-                    </li>
-                    <li class="aboutShazde" style="margin-top: -24px">
-                        شاید بخواهید در خصوص
-                        <a href="{{route('policies')}}"> حریم خصوصی و قوانین سایت </a>
-                        بیشتر بدانید.
-                        در صورت نیاز به کمک، صفحه
-                        <a href="#"> راهنما </a>
-                        را بخوانید و در صورت نیاز
-                        <a href="#"> با ما تماس بگیرید. </a>
-                    </li>
-{{--                    <li class="aboutShazde">--}}
-{{--                        در صورت نیاز به کمک، صفحه--}}
-{{--                        <a href="#"> راهنما </a>--}}
-{{--                        را بخوانید و در صورت نیاز--}}
-{{--                        <a href="#"> با ما تماس بگیرید. </a>--}}
-{{--                    </li>--}}
-                    <li class="aboutShazde" style="margin-top: 40px">
-                        این سایت متعلق به مجموعه کوچیتا می باشد؛
-                        <a href="#"> درباره ما </a>
-                        بیشتر بدانید.
-                        کوچیتا محصولی از
-                        <a href="#"> بوگن دیزاین </a>
-                        می باشد؛ ما را بیشتر بشناسید.
-                    </li>
-{{--                    <li class="aboutShazde">--}}
-{{--                        کوچیتا محصولی از--}}
-{{--                        <a href="#"> بوگن دیزاین </a>--}}
-{{--                        می باشد؛ ما را بیشتر بشناسید.--}}
-{{--                    </li>--}}
-                </ul>
+        <div class="footerLogoSocialBox">
+            <div class="footerLogo">
+                <img src="{{URL::asset('images/icons/mainLogo.png')}}" class="content-icon" width="100%">
+            </div>
+            <div class="footerSocialMediaBox">
+{{--                <div class="fassadsad">--}}
+{{--                    <a {{($config->linkedinNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://www.linkedin.com/in/shazde-mosafer-652817143/">--}}
+{{--                        <div class="footerIcon footerIconHor linkedin"></div>--}}
+{{--                    </a>--}}
+{{--                </div>--}}
+{{--                <div class="fassadsad">--}}
+{{--                    <a {{($config->facebookNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://www.facebook.com/profile.php?id=100016313805277&ref=br_rs">--}}
+{{--                        <div class="footerIcon footerIconHor facebook"></div>--}}
+{{--                    </a>--}}
+{{--                </div>--}}
+{{--                <div class="fassadsad">--}}
+{{--                    <a target="_blank" {{($config->pinterestNoFollow) ? 'rel="nofollow"' : ''}} href="https://www.pinterest.co.uk/shazdemosafer/">--}}
+{{--                        <div class="footerIcon footerIconHor pinterest"></div>--}}
+{{--                    </a>--}}
+{{--                </div>--}}
+{{--                <div class="fassadsad">--}}
+{{--                    <a target="_blank" {{($config->twitterNoFollow) ? 'rel="nofollow"' : ''}} href="https://twitter.com/shazdemosafer">--}}
+{{--                        <div class="footerIcon footerIconHor twitter"></div>--}}
+{{--                    </a>--}}
+{{--                </div>--}}
+{{--                <div class="fassadsad">--}}
+{{--                    <a target="_blank" {{($config->googlePlusNoFollow) ? 'rel="nofollow"' : ''}} href="https://plus.google.com/113786987503996741617">--}}
+{{--                        <div class="footerIcon footerIconHor googlePlus"></div>--}}
+{{--                    </a>--}}
+{{--                </div>--}}
+                <a {{($config->linkedinNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://www.linkedin.com/in/shazde-mosafer-652817143/">
+                    <div class="footerIconHor linkedin"></div>
+                </a>
+                <a {{($config->facebookNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://www.facebook.com/profile.php?id=100016313805277&ref=br_rs">
+                    <div class="footerIconHor facebook"></div>
+                </a>
+                <a target="_blank" {{($config->pinterestNoFollow) ? 'rel="nofollow"' : ''}} href="https://www.pinterest.co.uk/shazdemosafer/">
+                    <div class="footerIconHor pinterest"></div>
+                </a>
+                <a target="_blank" {{($config->twitterNoFollow) ? 'rel="nofollow"' : ''}} href="https://twitter.com/shazdemosafer">
+                    <div class="footerIconHor twitter"></div>
+                </a>
+                <a target="_blank" {{($config->googlePlusNoFollow) ? 'rel="nofollow"' : ''}} href="https://plus.google.com/113786987503996741617">
+                    <div class="footerIconHor googlePlus"></div>
+                </a>
             </div>
         </div>
-        <div class="footerMainBoxes" id="beWithUsInSocialMedia">
+
+        <div class="aboutShazde">
+            <div class="clear-both hideOnScreen"></div>
+            <div>
+                کوچیتا، پلتفرم و شبکه‌ای اجتماعی در حوزه گردشگری است که با هدف ارتقاء سواد گردشگری، افزایش کیفیت سفر و سهولت استفاده افراد جامعه، اعم از داخلی و بین‌المللی، از خدمات گردشگری ایجاد شده است.
+                ارائه اطلاعات جامع، به‌روز و صحیح گردشگری در زمینه: مراکز اقامتی اعم از: هتل، مسافرخانه، مراکز بوم‌گردی، کمپ، ویلا و خانه اجاره‌ای، رستوران‌ها، جاذبه‌ها و اماکن گردشگری، سوغات و صنایع‌دستی، آداب و رسوم محلی شامل: غذاهای محلی، اصطلاحات محلی، لباس محلی، گویش محلی و دانش محلی، جشنواره‌ها، آئین‌ها و رویدادهای فرهنگی، خدمات تسهیلگر گردشگری از جمله وسایل نقلیه و تورهای گردشگری و سایر خدمات مکمل؛ امکان ایجاد شبکه‌ای اجتماعی به‌منظور تبادل اطلاعات و دیدگاه‌ها که در آن کاربران می‌توانند: عکس‌های خود را به اشتراک بگذارند؛ اطلاعات و تجربیات خود در خصوص هریک از اطلاعات گردشگری را به اشتراک بگذارند؛ پرسش خود را در خصوص هریک از اطلاعات گردشگری مطرح نمایند و به یکدیگر پاسخ دهند؛ عکس‌ها و اطلاعات به اشتراک گذاشته شده توسط سایر کاربران را بپسندند و در خصوص آن دیدگاه مطرح نمایند و یکدیگر را دنبال نمایند و امکان مقایسه قیمت، خرید و رزرو خدمات تسهیلگر سفر از جمله رزرو وسایل نقلیه شامل هواپیما، قطار و اتوبوس، رزرو مراکز اقامتی، رزرو رستوران، خرید تورهای گردشگری، خرید سوغات و صنابع دستی، خرید اقلام سفر، خرید بلیت اماکن و جاذبه‌های گردشگری و خرید بلیت جشنواره‌ها، آئین‌ها و رویدادهای فرهنگی از مهم‌ترین امکاناتی است که این پلتفرم در اختیار کاربران قرار می‌دهد.
+            </div>
+            <div class="aboutShazdeLink">
+                شاید بخواهید در خصوص
+                <a href="{{route('policies')}}"> حریم خصوصی و قوانین سایت </a>
+                بیشتر بدانید.
+                در صورت نیاز به کمک، صفحه
+                <a href="#"> راهنما </a>
+                را بخوانید و در صورت نیاز
+                <a href="#"> با ما تماس بگیرید. </a>
+            </div>
+            <div class="aboutShazdeLink" style="margin-top: 60px">
+                این سایت متعلق به مجموعه کوچیتا می باشد؛
+                <a href="#"> درباره ما </a>
+                بیشتر بدانید.
+                کوچیتا محصولی از
+                <a href="#"> بوگن دیزاین </a>
+                می باشد؛ ما را بیشتر بشناسید.
+            </div>
+        </div>
+
+        <div class="footerOtherBoxes" id="socialMedias">
             <ul>
                 <li class="footTitle">در رسانه ها با ما باشید</li>
                 <li>
-                    <div class="footerIcon gardeshname"></div>
+                    <div class="footerIcon footerIconVer gardeshname"></div>
                     <div>
                         <a class="socialLink" {{($config->gardeshnameNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="http://gardeshname.shazdemosafer.com/">گردشنامه</a>
                     </div>
                 </li>
                 <li>
-                    <div class="footerIcon instagram"></div>
+                    <div class="footerIcon footerIconVer instagram"></div>
                     <div>
                         <a class="socialLink" {{($config->instagramNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://www.instagram.com/shazdehmosafer/">اینستاگرام</a>
                     </div>
                 </li>
                 <li>
-                    <div class="footerIcon telegram"></div>
+                    <div class="footerIcon footerIconVer telegram"></div>
                     <div>
                         <a class="socialLink" {{($config->telegramNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://t.me/shazdehmosafer">تلگرام</a>
                     </div>
                 </li>
                 <li>
-                    <div class="footerIcon aparat"></div>
+                    <div class="footerIcon footerIconVer aparat"></div>
                     <div>
                         <a class="socialLink" {{($config->aparatNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://www.aparat.com/shazdehmosafer">آپارات</a>
                     </div>
                 </li>
                 <li>
-                    <div class="footerIcon bogendesign"></div>
+                    <div class="footerIcon footerIconVer bogendesign"></div>
                     <div>
                         <a class="socialLink" {{($config->bogenNoFollow) ? 'rel="nofollow"' : ''}}  target="_blank" href="http://bogendesign.co">بوگن دیزاین</a>
                     </div>
                 </li>
-                <li>
-                    <a {{($config->linkedinNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://www.linkedin.com/in/shazde-mosafer-652817143/">
-                        <div class="footerIcon linkedin"></div>
-                    </a>
-                    <a {{($config->facebookNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://www.facebook.com/profile.php?id=100016313805277&ref=br_rs">
-                        <div class="footerIcon facebook"></div>
-                    </a>
-                    <a target="_blank" {{($config->pinterestNoFollow) ? 'rel="nofollow"' : ''}} href="https://www.pinterest.co.uk/shazdemosafer/">
-                        <div class="footerIcon pinterest"></div>
-                    </a>
-                    <a target="_blank" {{($config->twitterNoFollow) ? 'rel="nofollow"' : ''}} href="https://twitter.com/shazdemosafer">
-                        <div class="footerIcon twitter"></div>
-                    </a>
-                    <a target="_blank" {{($config->googlePlusNoFollow) ? 'rel="nofollow"' : ''}} href="https://plus.google.com/113786987503996741617">
-                        <div class="footerIcon googlePlus"></div>
-                    </a>
-                </li>
+
             </ul>
         </div>
-        <div class="footerMainBoxes" >
-            <ul>
-{{--                <li class="footTitle">شازده در زبان های دیگر</li>--}}
-{{--                <li>--}}
-{{--                    <select class="selectLanguage">--}}
-{{--                        <option value="persian" selected>فارسی</option>--}}
-{{--                        <option value="english" disabled>English</option>--}}
-{{--                        <option value="spanish" disabled>العربية</option>--}}
-{{--                        <option value="french" disabled>Türkçe</option>--}}
-{{--                    </select>--}}
-{{--                </li>--}}
 
+        <div class="footerOtherBoxes" >
+            <ul>
                 <li class="footTitle hideOnPhone">دقیق تر شوید</li>
                 <li class="hideOnPhone">
-                    <a href="#">سفرهای ماجراجویی</a>
+                    <a href="{{route('place.list', ['kindPlaceId' => 4, 'mode' => 'country'])}}">اقامتگاه‌ها</a>
                 </li>
                 <li class="hideOnPhone">
-                    <a href="#">طبیعت گردی</a>
+                    <a href="{{route('place.list', ['kindPlaceId' => 3, 'mode' => 'country'])}}">رستوران‌ها</a>
                 </li>
                 <li class="hideOnPhone">
-                    <a href="#">بوم گردی</a>
+                    <a href="{{route('place.list', ['kindPlaceId' => 1, 'mode' => 'country'])}}">جاذبه‌‌ها</a>
                 </li>
                 <li class="hideOnPhone">
-                    <a href="#">گردشنامه</a>
+                    <a href="{{route('place.list', ['kindPlaceId' => 6, 'mode' => 'country'])}}">طبیعت‌گردی</a>
+                </li>
+                <li class="hideOnPhone">
+                    <a href="{{route('place.list', ['kindPlaceId' => 10, 'mode' => 'country'])}}">سوغات و صنایع‌دستی</a>
+                </li>
+                <li class="hideOnPhone">
+                    <a href="{{route('place.list', ['kindPlaceId' => 11, 'mode' => 'country'])}}">غذاهای محلی</a>
+                </li>
+                <li class="hideOnPhone">
+                    <a href="{{route('mainArticle')}}">سفرنامه‌ها</a>
                 </li>
             </ul>
         </div>
-        {{--down footer--}}
+
         <div class="clear-both"></div>
     </div>
 
@@ -861,7 +868,7 @@ $config = \App\models\ConfigModel::first();
 
                 <div class="hideOnScreen phoneFooterStyle">
                     <div class="phoneFooterLogo">
-                        <img src="{{URL::asset('images/icons/mainLogo.png')}}" class="content-icon" width="100%">
+                        <img src="{{URL::asset('images/icons/mainIcon.svg')}}" class="content-icon" width="100%">
                     </div>
                     <div class="phoneDescription">
                         <div class="phoneDescriptionText">
@@ -869,7 +876,7 @@ $config = \App\models\ConfigModel::first();
                             و سهولت استفاده افراد جامعه، اعم از داخلی و بین‌المللی، از خدمات گردشگری ایجاد شده است.
                             ارائه اطلاعات جامع، به‌روز و صحیح گردشگری در
                             زمینه: مراکز اقامتی اعم از: هتل، مسافرخانه، مراکز بوم‌گردی، کمپ، ویلا و خانه اجاره‌ای، رستوران‌ها
-                            ، جاذبه‌ها و اماکن گردشگری، سوغات و صنایع دستی، آداب و رسوم محلی شامل: غذاهای محلی، اصطلاحات
+                            ، جاذبه‌ها و اماکن گردشگری، سوغات و صنایع‌دستی، آداب و رسوم محلی شامل: غذاهای محلی، اصطلاحات
                             محلی، لباس محلی، گویش محلی و دانش محلی، جشنواره‌ها، آئین‌ها و رویدادهای فرهنگی، خدمات تسهیلگر
                             گردشگری از جمله وسایل نقلیه و تورهای گردشگری و سایر خدمات مکمل؛ امکان ایجاد شبکه‌ای اجتماعی
                             به‌منظور تبادل اطلاعات و دیدگاه‌ها که در آن کاربران می‌توانند: عکس‌های خود را به اشتراک بگذارند؛
@@ -1180,7 +1187,6 @@ $config = \App\models\ConfigModel::first();
             </div>
         </div>
         @endif
-    </div>
     </div>
 
     <script>

@@ -105,7 +105,17 @@
                     {{--</div>--}}
                 {{--</div>--}}
             {{--</div>--}}
-
+            <div class="userInfoPhotoAlbum hideOnScreen">
+                <div class="circleBase type2 commentWriterPicShow">
+                    <img id="photoAlbumUserPicOnScreen" class="koochitaCircleLogo" src="" style="border-radius: 50%;">
+                </div>
+                <div class="commentWriterExperienceDetails" style="width: auto; padding: 0px;">
+                    <b id="photoAlbumUserNameOnScreen" class="userProfileName"></b>
+                    <div>
+                        <div id="photoAlbumUploadTimeOnScreen" style="color: #9aa0a6;"></div>
+                    </div>
+                </div>
+            </div>
             <div class="clear-both"></div>
             <div class="display-flex">
                 <div class="col-xs-12 col-sm-9 leftColPhotosModalMainDiv" style="display: flex; margin-bottom: 20px;">
@@ -147,14 +157,14 @@
                     </div>
                 </div>
                 <div id="rightColPhotosModalMainDiv" class="col-xs-12 col-sm-3 rightColPhotosModalMainDiv" style="max-height: 85vh;">
-                    <div class="userInfoPhotoAlbum">
+                    <div class="userInfoPhotoAlbum hideOnPhone">
                         <div class="circleBase type2 commentWriterPicShow">
-                            <img id="photoAlbumUserPic" class="koochitaCircleLogo" src="" style="border-radius: 50%;">
+                            <img id="photoAlbumUserPicOnPhone" class="koochitaCircleLogo" src="" style="border-radius: 50%;">
                         </div>
                         <div class="commentWriterExperienceDetails" style="width: auto; padding: 0px;">
-                            <b id="photoAlbumUserName" class="userProfileName"></b>
+                            <b id="photoAlbumUserNameOnPhone" class="userProfileName"></b>
                             <div>
-                                <div id="photoAlbumUploadTime" style="color: #9aa0a6;"></div>
+                                <div id="photoAlbumUploadTimeOnPhone" style="color: #9aa0a6;"></div>
                             </div>
                         </div>
                     </div>
@@ -221,9 +231,12 @@
         $('.chooseSidePhotoAlbum').removeClass('chooseSidePhotoAlbum');
         $('#photoAlbumDescription').text('');
 
-        $('#photoAlbumUploadTime').text(sidePics[_index]['uploadTime']);
-        $('#photoAlbumUserName').text(sidePics[_index]['userName']);
-        $('#photoAlbumUserPic').attr('src', sidePics[_index]['userPic']);
+        $('#photoAlbumUploadTimeOnScreen').text(sidePics[_index]['uploadTime']);
+        $('#photoAlbumUploadTimeOnPhone').text(sidePics[_index]['uploadTime']);
+        $('#photoAlbumUserNameOnScreen').text(sidePics[_index]['userName']);
+        $('#photoAlbumUserNameOnPhone').text(sidePics[_index]['userName']);
+        $('#photoAlbumUserPicOnScreen').attr('src', sidePics[_index]['userPic']);
+        $('#photoAlbumUserPicOnPhone').attr('src', sidePics[_index]['userPic']);
 
         $('#sideAlbumPic' + _index).addClass('chooseSidePhotoAlbum');
 

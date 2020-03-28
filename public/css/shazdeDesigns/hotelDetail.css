@@ -46,6 +46,10 @@ DIV.ppr_rup.ppr_priv_hr_atf_north_star_nostalgic .atf_meta_and_photos_wrapper::b
     display: none !important;
 }
 
+DIV.ppr_rup.ppr_priv_location_detail_header {
+    margin-bottom: 45px;
+}
+
 .ui_overlay:before {
     right: 120px;
     left: auto;
@@ -3321,6 +3325,8 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
 .questionSubMenuBar {
     padding: 8px 0;
+    display: inline-block;
+    width: 100%;
 }
 
 .numberOfAnswers {
@@ -3863,6 +3869,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 @media only screen and (max-width: 1187px) and (min-width: 1024px) {
     .tabLinkMainWrapMainDivPC {
         width: 976px;
+        left: inherit !important;
     }
 }
 
@@ -4374,7 +4381,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     .footerOptimizer {
         display: flex !important;
         width: 100%;
-        height: 75px;
+        height: 10px;
     }
 
     .commentsContentMainBox {

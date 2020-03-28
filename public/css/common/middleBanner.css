@@ -577,10 +577,13 @@ DIV.ppr_rup.ppr_priv_homepage_shelves .homepage_shelves_widget .prw_shelves_shel
     overflow-x: auto;
     white-space: nowrap;
     direction: rtl;
-    padding: 15px 8px 5px;
+    padding: 15px 8px;
     display: flex;
     justify-content: space-evenly;
-    /*height: 320px;*/
+}
+
+.titleAlt {
+    position: absolute;
 }
 
 .mainSuggestionMainDiv #restaurantSuggestion {
@@ -711,9 +714,11 @@ DIV.ppr_rup.ppr_priv_homepage_shelves .homepage_shelves_widget .prw_shelves_shel
     margin-top: 100px;
     padding: 5px;
 }
+
 .card:hover h2 small {
     color: #fff;
 }
+
 .card:hover p {
     margin-top: 300px;
 }
@@ -728,6 +733,7 @@ DIV.ppr_rup.ppr_priv_homepage_shelves .homepage_shelves_widget .prw_shelves_shel
     position: absolute;
     width: 450px;
 }
+
 .h2MidBanerArticle{
     color: #3487f7;
     font-family: "Raleway", sans-serif;
@@ -738,7 +744,12 @@ DIV.ppr_rup.ppr_priv_homepage_shelves .homepage_shelves_widget .prw_shelves_shel
     text-align: center;
     width: 100%;
     z-index: 9999;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    cursor: pointer;
 }
+
 .pMidBanerArticle{
     height: 90px;
     overflow: hidden;
@@ -752,6 +763,7 @@ DIV.ppr_rup.ppr_priv_homepage_shelves .homepage_shelves_widget .prw_shelves_shel
     z-index: 9999;
     white-space: normal;
 }
+
 .cta-container {
     display: none;
     bottom: 0px;
@@ -761,6 +773,7 @@ DIV.ppr_rup.ppr_priv_homepage_shelves .homepage_shelves_widget .prw_shelves_shel
     width: 100%;
     z-index: 9999;
 }
+
 .cta {
     -moz-border-radius: 2px;
     -moz-transition: 0.2s ease-out;

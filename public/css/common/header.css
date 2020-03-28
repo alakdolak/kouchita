@@ -70,14 +70,14 @@
     margin-left: -10px;
     width: 0;
     height: 0;
-    border-left: 20px solid transparent;
-    border-right: 20px solid transparent;
-    border-bottom: 15px solid #f9f9f9;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 8px solid white;
     -webkit-filter: drop-shadow(0 0 0 #b7b7b7);
     filter: drop-shadow(0 0 0 #b7b7b7);
     box-shadow: 0 0 0 #b7b7b7 \9;
     -webkit-filter: drop-shadow(0 0 0 #999);
-    filter: drop-shadow(0 1px 0 #999);
+    filter: drop-shadow(0 0 0 #999);
     z-index: 10;
 }
 
@@ -87,7 +87,26 @@
     left: -20px;
     position: absolute;
     box-shadow: 0 4px 16px 0 rgba(0, 0, 0, .2);
-    top: 45px;
+    top: 55px;
+}
+
+#bookmarkmenu.ui_overlay:before {
+    content: '';
+    position: absolute;
+    left: 45px;
+    top: -8px;
+    margin-left: -10px;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 8px solid white;
+    -webkit-filter: drop-shadow(0 0 0 #b7b7b7);
+    filter: drop-shadow(0 0 0 #b7b7b7);
+    box-shadow: 0 0 0 #b7b7b7 \9;
+    -webkit-filter: drop-shadow(0 0 0 #999);
+    filter: drop-shadow(0 0 0 #999);
+    z-index: 10;
 }
 
 #masthead-recent {
@@ -112,18 +131,40 @@
     background: rgb(255, 255, 255) none repeat scroll 0% 0%;
     padding: 0 18px;
     left: -13px;
-    top: 43px;
+    top: 55px;
     box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.2);
     text-align: center;
 }
+
+#profile-drop.ui_overlay:before {
+    content: '';
+    position: absolute;
+    left: 30px;
+    top: -8px;
+    margin-left: -10px;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 8px solid white;
+    -webkit-filter: drop-shadow(0 0 0 #b7b7b7);
+    filter: drop-shadow(0 0 0 #b7b7b7);
+    box-shadow: 0 0 0 #b7b7b7 \9;
+    -webkit-filter: drop-shadow(0 0 0 #999);
+    filter: drop-shadow(0 0px 0 #999);
+    z-index: 10;
+}
+
 .subItemHeaderNavBar{
     list-style-type: none;
     margin: 10px 0px;
     color: black;
 }
+
 .subItemHeaderNavBar > a{
     color: black;
 }
+
 .subItemHeaderNavBar:hover > a{
     color: #4dc7bc !important;
 }
@@ -131,7 +172,6 @@
 .global-nav-profile-menu{
     width: 80px;
 }
-
 
 .bubble_40:after {
     content: "\e00d\e00b\e00b\e00b\e00b" !important;
@@ -148,6 +188,7 @@
 .bubble_10:after {
     content: "\e00d\e00d\e00d\e00d\e00b" !important;
 }
+
 .photoviewerSidebarWrapper .captionArea {
     direction: rtl !important;
 }
@@ -163,4 +204,9 @@ DIV.ppr_rup.ppr_priv_global_nav .global-nav-logo img {
 .nameOfIconHeaders{
     font-size: 12px !important;
     color: black;
+    text-align: center;
+}
+
+#searchPane.ui_overlay:before {
+    display: none;
 }
