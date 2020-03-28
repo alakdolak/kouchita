@@ -506,6 +506,13 @@ class ReviewsController extends Controller
                     }
 
                     $time = $item->date;
+                    if($item->time < 10)
+                        $item->time = '000' . $item->time;
+                    else if($item->time < 100)
+                        $item->time = '00' . $item->time;
+                    else if($item->time < 1000)
+                        $item->time = '0' . $item->time;
+
                     $time .= ' ' . substr($item->time, 0, 2) . ':' . substr($item->time, 2, 2);
 
                     $item->timeAgo = getDifferenceTimeString($time);
