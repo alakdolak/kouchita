@@ -3849,6 +3849,18 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     height: 50px;
 }
 
+.traditionalFoodDescription {
+    float: right;
+}
+
+.traditionalFoodDescription > div {
+    font-size: 20px;
+}
+
+.traditionalFoodDescription > div > div:last-child {
+    margin-bottom: 5px;
+}
+
 @media only screen and (min-width: 992px) {
 
     .mobile-mode, #share_pic_mobile, #mobileIntroductionMainDivId .tabLinkMainDiv {
@@ -4815,6 +4827,13 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
     .actionToAnswer {
         margin: 15px 10px 0 0;
+    }
+}
+
+@media (max-width: 400px) {
+
+    .traditionalFoodDescription > div {
+        font-size: 17px;
     }
 }
 

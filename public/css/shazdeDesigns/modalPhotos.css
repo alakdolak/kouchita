@@ -151,7 +151,7 @@
     border-left: 2px solid #3c4043;
     overflow: auto;
     height: auto;
-    min-height: 70vh;
+    /*min-height: 70vh;*/
     margin: 0;
     background-color: #141518;
     padding: 0;

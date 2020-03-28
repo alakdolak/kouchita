@@ -1077,20 +1077,15 @@ if ($total == 0)
                                                         <div class="row">
                                                             @if(isset($place->material) && is_array($place->material))
                                                                 @foreach($place->material as $item)
-                                                                    <div class="col-sm-6 float-right">
+                                                                    <div class="col-sm-6 col-xs-6 float-right traditionalFoodDescription">
                                                                         <div class="row font-size-20">
-                                                                            <div class="col-sm-6 color-green float-right">{{$item[0]}}</div>
-                                                                            <div class="col-sm-6">{{$item[1]}}</div>
+                                                                            <div class="col-sm-6 col-xs-12 color-green float-right">{{$item[0]}}</div>
+                                                                            <div class="col-sm-6 col-xs-12">{{$item[1]}}</div>
                                                                         </div>
                                                                     </div>
                                                                 @endforeach
                                                             @endif
-                                                                <div class="col-sm-6 float-right">
-                                                                    <div class="row font-size-20">
-                                                                        <div class="col-sm-6 color-green float-right">امشنستاینشسات</div>
-                                                                        <div class="col-sm-6">تنسشلینتشسذزپ</div>
-                                                                    </div>
-                                                                </div>
+
                                                         </div>
                                                     </div>
                                                 </div>
