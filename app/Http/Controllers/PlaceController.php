@@ -3633,6 +3633,14 @@ class PlaceController extends Controller {
                 $log->state = State::find($log->city->stateId);
 
                 $time = $log->date;
+
+                if($log->time < 10)
+                    $log->time = '000' . $log->time;
+                else if($log->time < 100)
+                    $log->time = '00' . $log->time;
+                else if($log->time < 1000)
+                    $log->time = '0' . $log->time;
+
                 $time .= ' ' . substr($log->time, 0, 2) . ':' . substr($log->time, 2, 2);
                 $log->timeAgo = getDifferenceTimeString($time);
 
