@@ -56,6 +56,10 @@
         font-size: 15px;
     }
 
+    .spanMarginSecHead{
+        flex-wrap: wrap;
+    }
+
     .spanMarginSecHead > span {
         margin: 0px 7px;
     }
@@ -70,7 +74,15 @@
             font-size: 10px;
             font-weight: 800;
         }
+    }
 
+    @media (max-width: 650px){
+        .linkRoute {
+            font-size: 12px;
+        }
+        .spanMarginSecHead{
+            padding: 0px;
+        }
     }
 </style>
 <div class="container-fluid secHeadMain hideOnPhone">
@@ -158,8 +170,9 @@
         </div>
     </div>
 </div>
+
 @if(isset($kindPlace))
-    <div class="container-fluid secHeadMain hideOnPhone" style="background-color: unset; margin-top: 10px;">
+    <div class="container-fluid secHeadMain" style="background-color: unset; margin-top: 10px;">
 
         <div class="ui_container secHeadNavs spanMarginSecHead" style="font-size: 20px">
             <a class="linkRoute" href="{{url('/')}}" style="margin-right: 20px;">
