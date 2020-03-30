@@ -3646,7 +3646,7 @@ class PlaceController extends Controller {
                     $log->timeAgo = getDifferenceTimeString($time);
                 }
                 else
-                    $item->timeAgo = '';
+                    $log->timeAgo = '';
 
                 $log->date = convertDate($log->date);
             }
