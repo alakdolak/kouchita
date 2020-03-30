@@ -3632,17 +3632,21 @@ class PlaceController extends Controller {
                 $log->city = Cities::find($log->place->cityId);
                 $log->state = State::find($log->city->stateId);
 
-                $time = $log->date;
 
-                if($log->time < 10)
+                $time = $log->date . '';
+                if(strlen($log->time) == 1)
                     $log->time = '000' . $log->time;
-                else if($log->time < 100)
+                else if(strlen($log->time) == 2)
                     $log->time = '00' . $log->time;
-                else if($log->time < 1000)
+                else if(strlen($log->time) == 3)
                     $log->time = '0' . $log->time;
 
-                $time .= ' ' . substr($log->time, 0, 2) . ':' . substr($log->time, 2, 2);
-                $log->timeAgo = getDifferenceTimeString($time);
+                if(strlen($log->time) == 4) {
+                    $time .= ' ' . substr($log->time, 0, 2) . ':' . substr($log->time, 2, 2);
+                    $log->timeAgo = getDifferenceTimeString($time);
+                }
+                else
+                    $item->timeAgo = '';
 
                 $log->date = convertDate($log->date);
             }
