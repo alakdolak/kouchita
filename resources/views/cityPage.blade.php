@@ -174,7 +174,7 @@
         <div id="cpBorderLeft" class="col-lg-9 col-sm-9 cpBorderLeft">
 
             <div class="row cpMainBox">
-                <div class="col-md-8 col-xs-12 pd-0Imp">
+                <div class="col-md-8 col-xs-12 pd-0Imp mg-bt-10">
                     <img class="cpPic" src="{{$place->image}}">
                 </div>
                 <div class="col-md-4 col-xs-12 pd-0Imp">

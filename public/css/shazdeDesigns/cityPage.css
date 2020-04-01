@@ -137,6 +137,7 @@
 .cpBorderBottom {
     border-bottom: 2px solid #f3f3f3;
     margin: 2px 0;
+    cursor: default;
 }
 
 /*end of css of borders*/
@@ -481,6 +482,15 @@
 .nagLogo{
     width: 50px;
 }
+
+@media (max-width: 992px) {
+
+    .cpMainBox {
+        padding: 15px !important;
+    }
+
+}
+
 @media (max-width:768px) {
     .widget-title {
         font-size: 14px
@@ -495,9 +505,6 @@
         font-size: 13px
     }
 
-    .cpMainBox {
-        padding: 15px !important;
-    }
     .cpMapList {
         justify-content: space-around;
         overflow: auto;

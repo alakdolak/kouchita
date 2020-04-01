@@ -228,6 +228,7 @@ footer li > img, .small-ico {
 .phoneDescriptionText {
     overflow: auto;
     padding: 0 5px;
+    cursor: default;
 }
 
 .footerPhoneMenuBar {
@@ -879,6 +880,10 @@ footer .activityNumbers {
     color: #0076a3;
 }
 
+.pSC_tilte > div:first-child {
+    cursor: pointer;
+}
+
 .pSC_tilte .btn-danger {
     background-color: darkred;
     border-color: darkred;
@@ -896,6 +901,7 @@ footer .activityNumbers {
     padding: 5px 20px;
     text-align: center;
     line-height: 1.8;
+    cursor: pointer;
 }
 
 .pSC_boxOfDetails {
@@ -918,11 +924,17 @@ footer .activityNumbers {
     padding: 15px 0 13px;
     font-weight: 700;
     border-bottom: 2px solid white;
+    cursor: default;
+}
+
+.pSC_boxOfCityDetailsText span {
+    cursor: pointer;
 }
 
 .pSC_boxOfCityDetailsText2 {
     font-size: 9px;
     font-weight: 600;
+    cursor: pointer;
 }
 
 .pSC_boxOfCityDetails {
@@ -936,6 +948,7 @@ footer .activityNumbers {
     padding: 15px 0;
     border-width: 2px 2px 2px 0;
     border-bottom: solid white;
+    cursor: pointer;
 }
 
 .pSC_cityDetails.pSC_cityDetails_selected {
