@@ -619,7 +619,7 @@ if ($total == 0)
                     <div class="clear-both"></div>
                     @if($hasLogin)
                         <div id="targetHelp_8" class="wideScreen targets float-left col-xs-6 pd-0">
-                            <span onclick="bookMark()"
+                            <span onclick="bookMark(); changeBookmarkIcon()"
                                   class="ui_button save-location-7306673 saveAsBookmarkMainDiv">
                                 <div id="bookMarkIcon" class="saveAsBookmarkIcon {{($bookMark) ? "castle-fill" : "castle"}}"></div>
                                 <div class="saveAsBookmarkLabel">

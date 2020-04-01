@@ -81,9 +81,9 @@
                     </div>
 {{--                            @if($hasLogin)--}}
                         <div id="targetHelp_8" class="targets float-left col-xs-6 pd-0 mobile-mode">
-                                <span onclick="bookMark()"
+                                <span onclick="bookMark(); changeBookmarkIcon()"
                                       class="ui_button save-location-7306673 saveAsBookmarkMainDiv">
-                                    <div class="saveAsBookmarkIcon {{($bookMark) ? "castle-fill" : "castle"}} "></div>
+                                    <div class="saveAsBookmarkIcon {{($bookMark) ? "castle-fill" : "castles"}} "></div>
                                     <div class="saveAsBookmarkLabel">
                                         ذخیره این صفحه
                                     </div>
@@ -210,6 +210,20 @@
 
 
 <script>
+
+    function changeBookmarkIcon() {
+            // $('.saveAsBookmarkIcon').toggleClass('castle-fill');
+            // $('.saveAsBookmarkIcon').toggleClass('castles');
+
+        var icon = $('.saveAsBookmarkIcon').hasClass('castles');
+
+        if(icon) {
+            $('.saveAsBookmarkIcon').addClass('castle-fill').removeClass('castles');
+        }
+        else {
+            $('.saveAsBookmarkIcon').addClass('castles').removeClass('castle-fill');
+        }
+    }
 
     function toggleShareIcon(elmt) {
         $(elmt).children('div.first').toggleClass('sharePageIcon');
