@@ -1,7 +1,7 @@
 <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/hotelDetailsPopUp.css')}}'/>
 
 <span id="addPlaceToTripPrompt"
-      class="pop-up ui_overlay ui_modal find-location-modal-container fade_short fade_in hidden">
+      class="pop-up ui_overlay ui_modal find-location-modal-container fade_short fade_in hidden details-pop-up">
     <div class="body_text">
         <div>
             <div class="find_location_modal">
@@ -125,9 +125,9 @@
                 response = JSON.parse(response);
                 console.log(response)
 
-                var newElement = "<div class='row'>";
+                var newElement = "<center class='row'>";
                 for (i = 0; i < response.length; i++) {
-                    newElement += "<div class='col-xs-3' class='cursor-pointer' onclick='addToSelectedTrips(\"" + response[i].id + "\")'>";
+                    newElement += "<div class='addPlaceBoxes cursor-pointer' onclick='addToSelectedTrips(\"" + response[i].id + "\")'>";
                     if (response[i].select == "1") {
                         newElement += "<div id='trip_" + response[i].id + "' onclick='' class='trip-images ui_columns is-gapless is-multiline is-mobile tripResponse'>";
                         selectedTrips[selectedTrips.length] = response[i].id;
@@ -161,7 +161,7 @@
                     newElement += "</div><div class='create-trip-text font-size-12em'>" + response[i].name + "</div>";
                     newElement += "</div>";
                 }
-                newElement += "<div class='col-xs-3'>";
+                newElement += "<div class='addPlaceBoxes'>";
                 newElement += "<a onclick='showPopUp()' class='single-tile is-create-trip'>";
                 newElement += "<div class='tile-content text-align-center font-size-20Imp'>";
                 newElement += "<span class='ui_icon plus'></span>";

@@ -137,7 +137,7 @@ DIV.ppr_rup.ppr_priv_location_detail_header {
     cursor: pointer;
 }
 
-.castle:before {
+.castles:before {
     content: "\e0dd";
     font-family: Shazde_Regular2 !important;
     float: right;

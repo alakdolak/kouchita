@@ -109,10 +109,10 @@
                 <div class="circleBase type2 commentWriterPicShow">
                     <img id="photoAlbumUserPicOnScreen" class="koochitaCircleLogo" src="" style="border-radius: 50%;">
                 </div>
-                <div class="commentWriterExperienceDetails" style="width: auto; padding: 0px;">
+                <div class="commentWriterExperienceDetails">
                     <b id="photoAlbumUserNameOnScreen" class="userProfileName"></b>
                     <div>
-                        <div id="photoAlbumUploadTimeOnScreen" style="color: #9aa0a6;"></div>
+                        <div id="photoAlbumUploadTimeOnScreen"></div>
                     </div>
                 </div>
             </div>
@@ -161,7 +161,7 @@
                         <div class="circleBase type2 commentWriterPicShow">
                             <img id="photoAlbumUserPicOnPhone" class="koochitaCircleLogo" src="" style="border-radius: 50%;">
                         </div>
-                        <div class="commentWriterExperienceDetails" style="width: auto; padding: 0px;">
+                        <div class="commentWriterExperienceDetails">
                             <b id="photoAlbumUserNameOnPhone" class="userProfileName"></b>
                             <div>
                                 <div id="photoAlbumUploadTimeOnPhone" style="color: #9aa0a6;"></div>
