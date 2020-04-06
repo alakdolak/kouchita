@@ -98,6 +98,7 @@
                 '</div>\n' +
                 '<div class="commentWriterExperienceDetails">\n' +
                 '<b class="userProfileName">' + reviews[i]["usernameReviewWriter"] + '</b>\n' +
+                '<div class="postPlaceAndTime"> \n' +
                 '<div class="display-inline-block">در\n' +
                 '<span class="commentWriterExperiencePlace">' + reviews[i]["place"]["name"] + '، شهر ' + reviews[i]["city"]["name"] + '، استان ' + reviews[i]["state"]["name"] + '</span>\n';
 
@@ -118,8 +119,9 @@
             text += '<div>' + reviews[i]["timeAgo"] + '</div>\n' +
                 '</div>\n' +
                 '</div>\n' +
+                '</div>\n' +
                 '<div class="commentContentsShow">\n';
-            text += '<div style="font-size: 18px; margin: 25px; white-space: pre-line">' + reviews[i]["text"] + '</div>\n' +
+            text += '<div style="font-size: 18px; margin: 10px 0; white-space: pre-line">' + reviews[i]["text"] + '</div>\n' +
                 '</div>\n';
 
             text += '<div class="commentPhotosShow">\n';

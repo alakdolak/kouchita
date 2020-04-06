@@ -858,7 +858,7 @@ $config = \App\models\ConfigModel::first();
                             <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/3/" . $locationName['kindState'] . "/" . $locationName['cityNameUrl'])}}'">رستوران‌های {{$locationName['cityName']}}</div>
                         </div>
                         <div class="pSC_boxOfCityDetails">
-                            <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/10/" . $locationName['kindState'] . "/" . $locationName['cityNameUrl'])}}'">صنایع دستی‌های {{$locationName['cityName']}}</div>
+                            <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/10/" . $locationName['kindState'] . "/" . $locationName['cityNameUrl'])}}'">صنایع‌دستی‌های {{$locationName['cityName']}}</div>
                             <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/11/" . $locationName['kindState'] . "/" . $locationName['cityNameUrl'])}}'">غذاهای محلی‌ {{$locationName['cityName']}}</div>
                         </div>
                     </div>

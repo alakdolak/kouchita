@@ -115,7 +115,7 @@
                     </div>
                     <div class="categories" onclick="selectCategoriesColor(this);">
                         <div class="icons iconsOfCategories sanaye"></div>
-                        <div>صنایع دستی</div>
+                        <div>صنایع‌دستی</div>
                     </div>
                     <div class="categories" onclick="selectCategoriesColor(this);">
                         <div class="icons iconsOfCategories lebas"></div>

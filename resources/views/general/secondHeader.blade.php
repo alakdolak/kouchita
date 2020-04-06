@@ -7,8 +7,12 @@
         background-color: #fcc156;
     }
 
-    .secHeadTabs{
+    .secHeadTabs:not(:first-child) {
+
         margin-right: 20px;
+    }
+
+    .secHeadTabs {
         font-size: 13px;
         display: flex;
         justify-content: center;
@@ -61,7 +65,12 @@
     }
 
     .spanMarginSecHead > span {
-        margin: 0px 7px;
+        margin: 3px 7px 0;
+    }
+
+    .spanMarginSecHead > a {
+        display: flex;
+        align-items: center;
     }
 
     .secHeadTabsSubList > a:last-child {
@@ -101,56 +110,56 @@
         </div>
         <div class="secHeadTabs arrowAfter">
             <span>
-                اقامتگاه ها
+                اقامتگاه‌ها
             </span>
             <div class="secHeadTabsSubList">
-                <a href="{{route('place.list', ['kindPlaceId' => 4, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">اقامتگاه های {{$locationName['cityName']}}</a>
+                <a href="{{route('place.list', ['kindPlaceId' => 4, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">اقامتگاه‌های {{$locationName['cityName']}}</a>
                 @if(isset($locationName['state']) && $locationName['kindState'] == 'city')
-                    <a href="{{route('place.list', ['kindPlaceId' => 4, 'mode' => 'state', 'city' => $locationName['state']])}}">اقامتگاه های استان {{$locationName['state']}}</a>
+                    <a href="{{route('place.list', ['kindPlaceId' => 4, 'mode' => 'state', 'city' => $locationName['state']])}}">اقامتگاه‌های استان {{$locationName['state']}}</a>
                 @endif
             </div>
         </div>
         <div class="secHeadTabs arrowAfter">
             <span>
-                رستوران ها
+                رستوران‌ها
             </span>
             <div class="secHeadTabsSubList">
-                <a href="{{route('place.list', ['kindPlaceId' => 3, 'mode' =>  $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">رستوران های {{$locationName['cityName']}}</a>
+                <a href="{{route('place.list', ['kindPlaceId' => 3, 'mode' =>  $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">رستوران‌های {{$locationName['cityName']}}</a>
                 @if(isset($locationName['state']) && $locationName['kindState'] == 'city')
-                    <a href="{{route('place.list', ['kindPlaceId' => 3, 'mode' => 'state', 'city' => $locationName['state']])}}">رستوران های استان {{$locationName['state']}}</a>
+                    <a href="{{route('place.list', ['kindPlaceId' => 3, 'mode' => 'state', 'city' => $locationName['state']])}}">رستوران‌های استان {{$locationName['state']}}</a>
                 @endif
             </div>
         </div>
         <div class="secHeadTabs arrowAfter">
             <span>
-                جاذبه ها
+                جاذبه‌ها
             </span>
             <div class="secHeadTabsSubList">
-                <a href="{{route('place.list', ['kindPlaceId' => 1, 'mode' =>  $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">جاذبه های {{$locationName['cityName']}}</a>
+                <a href="{{route('place.list', ['kindPlaceId' => 1, 'mode' =>  $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">جاذبه‌های {{$locationName['cityName']}}</a>
                 @if(isset($locationName['state'])  && $locationName['kindState'] == 'city')
-                    <a href="{{route('place.list', ['kindPlaceId' => 1, 'mode' => 'state', 'city' => $locationName['state']])}}">جاذبه های استان {{$locationName['state']}}</a>
+                    <a href="{{route('place.list', ['kindPlaceId' => 1, 'mode' => 'state', 'city' => $locationName['state']])}}">جاذبه‌های استان {{$locationName['state']}}</a>
                 @endif
             </div>
         </div>
         <div class="secHeadTabs arrowAfter">
             <span>
-                طبیعت گردی
+                طبیعت‌گردی
             </span>
             <div class="secHeadTabsSubList">
-                <a href="{{route('place.list', ['kindPlaceId' => 6, 'mode' =>  $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">طبیعت گردی های {{$locationName['cityName']}}</a>
+                <a href="{{route('place.list', ['kindPlaceId' => 6, 'mode' =>  $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">طبیعت‌گردی‌های {{$locationName['cityName']}}</a>
                 @if(isset($locationName['state']) && $locationName['kindState'] == 'city')
-                    <a href="{{route('place.list', ['kindPlaceId' => 6, 'mode' => 'state', 'city' => $locationName['state']])}}">طبیعت گردی های استان {{$locationName['state']}}</a>
+                    <a href="{{route('place.list', ['kindPlaceId' => 6, 'mode' => 'state', 'city' => $locationName['state']])}}">طبیعت‌گردی‌های استان {{$locationName['state']}}</a>
                 @endif
             </div>
         </div>
         <div class="secHeadTabs arrowAfter">
             <span>
-                سوغات و صنایع دستی
+                سوغات و صنایع‌دستی
             </span>
             <div class="secHeadTabsSubList">
-                <a href="{{route('place.list', ['kindPlaceId' => 10, 'mode' =>  $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">سوغات و صنایع دستی {{$locationName['cityName']}}</a>
+                <a href="{{route('place.list', ['kindPlaceId' => 10, 'mode' =>  $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">سوغات و صنایع‌دستی {{$locationName['cityName']}}</a>
                 @if(isset($locationName['state'])  && $locationName['kindState'] == 'city')
-                    <a href="{{route('place.list', ['kindPlaceId' => 10, 'mode' => 'state', 'city' => $locationName['state']])}}">سوغات و صنایع دستی استان {{$locationName['state']}}</a>
+                    <a href="{{route('place.list', ['kindPlaceId' => 10, 'mode' => 'state', 'city' => $locationName['state']])}}">سوغات و صنایع‌دستی استان {{$locationName['state']}}</a>
                 @endif
             </div>
         </div>
@@ -175,7 +184,7 @@
     <div class="container-fluid secHeadMain" style="background-color: unset; margin-top: 10px;">
 
         <div class="ui_container secHeadNavs spanMarginSecHead" style="font-size: 20px">
-            <a class="linkRoute" href="{{url('/')}}" style="margin-right: 20px;">
+            <a class="linkRoute" href="{{url('/')}}">
                 صفحه اصلی
             </a>
             @if($locationName['kindState'] != 'country')

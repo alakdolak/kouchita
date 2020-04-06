@@ -2733,6 +2733,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 .commentRatingsFiltersChoices .overallBubbleRating > div, .commentRatingsDetailsBox .overallBubbleRating > div {
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .inputBoxSearchFilter {
@@ -3574,6 +3575,15 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
 /*posts page styles*/
 
+.postMainDivShown .commentWriterPicShow {
+    width: 55px;
+    height: 55px;
+    background-color: #E5E5E5;
+    display: inline-block;
+    float: right;
+    margin-left: 10px;
+}
+
 .postsMainFiltrationBar, .questionsMainFiltrationBar {
     background-color: #eaeaea;
     color: #777777;
@@ -3679,6 +3689,12 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 .userProfileName {
     display: inline-block;
     font-size: 15px;
+    width: 65%;
+}
+
+.postPlaceAndTime {
+    display: flex;
+    flex-direction: column;
 }
 
 .commentWriterExperiencePlace, .answersWriterExperiencePlace {
@@ -4998,5 +5014,13 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 
     #MAINWRAP .tabLinkMainWrapMainDiv a:nth-child(4) {
         width: 30%;
+    }
+
+    .postMainDivShown .commentWriterPicShow {
+        margin-right: 5px;
+    }
+
+    .postPlaceAndTime .commentWriterExperiencePlace {
+        font-size: 10px;
     }
 }

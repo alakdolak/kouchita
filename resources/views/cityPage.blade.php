@@ -8,7 +8,7 @@
         صفحه
         {{$place->name}}</title>
     <meta content="article" property="og:type"/>
-    <meta name="title" content="{{$place->name}} | اطلاعات گردشگری {{$place->name}} – جاذبه های {{$place->name}} – هتل های {{$place->name}} – رستوران های {{$place->name}}- صنایع دستی و سوغات {{$place->name}} | کوچیتا " />
+    <meta name="title" content="{{$place->name}} | اطلاعات گردشگری {{$place->name}} – جاذبه های {{$place->name}} – هتل های {{$place->name}} – رستوران های {{$place->name}}- صنایع‌دستی و سوغات {{$place->name}} | کوچیتا " />
     <meta name='description' content='. هر چه یک گردشگر باید بداند   اطلاعات جامع و کامل {{$place->name}}. اصلاعات عمومی و تخصصی گردشگری ' />
     <meta name='keywords' content='جاذبه های  {{$place->name}} – اطلاعات گردشگری {{$place->name}} – نقد و بررسی {{$place->name}} ' />
 
@@ -221,7 +221,7 @@
                         </a>
                         <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/10/' . $kind . '/' . $place->listName)}}">
                             <div class="cityPageIcon sanaye"></div>
-                            <div class="textCityPageIcon">صنایع دستی</div>
+                            <div class="textCityPageIcon">صنایع‌دستی</div>
                             <div class="textCityPageIcon">{{count($allSogatSanaie)}}</div>
                         </a>
                         <div class="col-xs-4 cpLittleMenu">
@@ -514,7 +514,7 @@
                                         <img src="{{URL::asset('images/icons/iconneg.svg')}}" class="nagLogo" alt="کوچیتا">
                                         <a href="{{route('place.list', ['kindPlaceId' => 10, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">
                                             <div class="shelf_title_container h3">
-                                                <h3>محبوب‌ترین سوغات و صنایع دستی&zwnj;</h3>
+                                                <h3>محبوب‌ترین سوغات و صنایع‌دستی&zwnj;</h3>
                                             </div>
                                         </a>
                                     </div>

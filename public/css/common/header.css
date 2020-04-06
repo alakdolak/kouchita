@@ -197,6 +197,10 @@
     text-align: center;
 }
 
+DIV.ppr_rup.ppr_priv_global_nav .global-nav-logo {
+    margin-right: 0;
+}
+
 DIV.ppr_rup.ppr_priv_global_nav .global-nav-logo img {
     width: 50px;
 }
