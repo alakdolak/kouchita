@@ -440,7 +440,6 @@ if ($total == 0)
                         @endif
                         @if($hasLogin)
                             @include('layouts.shareBox')
-
                         @endif
                     </div>
 

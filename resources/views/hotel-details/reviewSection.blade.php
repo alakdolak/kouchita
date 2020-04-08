@@ -132,21 +132,21 @@
                 text += '<div class="commentPhotosMainDiv quintupletPhotoDiv">\n' +
                     '<div class="photosCol secondCol col-xs-6">\n' +
                     '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
-                    '<img src="' + reviews[i]["pics"][0]["url"] + '" class="mainReviewPic" style="">\n'+
+                    '<img src="' + reviews[i]["pics"][0]["url"] + '" class="mainReviewPic resizeImgClass" style="">\n'+
                     '</div>\n' +
                     '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
-                    '<img src="' + reviews[i]["pics"][1]["url"] + '" class="mainReviewPic">\n'+
+                    '<img src="' + reviews[i]["pics"][1]["url"] + '" class="mainReviewPic resizeImgClass">\n'+
                     '</div>\n' +
                     '</div>\n' +
                     '<div class="photosCol firstCol col-xs-6">\n' +
                     '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
-                    '<img src="' + reviews[i]["pics"][2]["url"] + '" class="mainReviewPic">\n'+
+                    '<img src="' + reviews[i]["pics"][2]["url"] + '" class="mainReviewPic resizeImgClass">\n'+
                     '</div>\n' +
                     '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
-                    '<img src="' + reviews[i]["pics"][3]["url"] + '" class="mainReviewPic">\n'+
+                    '<img src="' + reviews[i]["pics"][3]["url"] + '" class="mainReviewPic resizeImgClass">\n'+
                     '</div>\n' +
                     '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">\n' +
-                    '<img src="' + reviews[i]["pics"][4]["url"] + '" class="mainReviewPic">\n'+
+                    '<img src="' + reviews[i]["pics"][4]["url"] + '" class="mainReviewPic resizeImgClass">\n'+
                     '<div class="morePhotoLinkPosts">\n' +
                     'به علاوه\n' +
                     '<span>' + (reviewPicsCount - 4) + '</span>\n' +
@@ -160,21 +160,21 @@
                 text += '<div class="commentPhotosMainDiv quintupletPhotoDiv">\n' +
                     '<div class="photosCol secondCol col-xs-6">\n' +
                     '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
-                    '<img id="reviewImage_' + reviews[i]["id"] + '_0"  src="' + reviews[i]["pics"][0]["url"] + '" class="mainReviewPic">\n'+
+                    '<img id="reviewImage_' + reviews[i]["id"] + '_0"  src="' + reviews[i]["pics"][0]["url"] + '" class="mainReviewPic resizeImgClass">\n'+
                     '</div>\n' +
                     '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
-                    '<img  id="reviewImage_' + reviews[i]["id"] + '_1" src="' + reviews[i]["pics"][1]["url"] + '" class="mainReviewPic">\n'+
+                    '<img  id="reviewImage_' + reviews[i]["id"] + '_1" src="' + reviews[i]["pics"][1]["url"] + '" class="mainReviewPic resizeImgClass">\n'+
                     '</div>\n' +
                     '</div>\n' +
                     '<div class="photosCol firstCol col-xs-6">\n' +
                     '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
-                    '<img id="reviewImage_' + reviews[i]["id"] + '_2"  src="' + reviews[i]["pics"][2]["url"] + '" class="mainReviewPic">\n'+
+                    '<img id="reviewImage_' + reviews[i]["id"] + '_2"  src="' + reviews[i]["pics"][2]["url"] + '" class="mainReviewPic resizeImgClass">\n'+
                     '</div>\n' +
                     '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
-                    '<img id="reviewImage_' + reviews[i]["id"] + '_3"  src="' + reviews[i]["pics"][3]["url"] + '" class="mainReviewPic">\n'+
+                    '<img id="reviewImage_' + reviews[i]["id"] + '_3"  src="' + reviews[i]["pics"][3]["url"] + '" class="mainReviewPic resizeImgClass">\n'+
                     '</div>\n' +
                     '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
-                    '<img id="reviewImage_' + reviews[i]["id"] + '_4" src="' + reviews[i]["pics"][4]["url"] + '" class="mainReviewPic">\n'+
+                    '<img id="reviewImage_' + reviews[i]["id"] + '_4" src="' + reviews[i]["pics"][4]["url"] + '" class="mainReviewPic resizeImgClass">\n'+
                     '</div>\n' +
                     '</div>\n' +
                     '</div>\n';
@@ -183,18 +183,18 @@
                 text += '<div class="commentPhotosMainDiv quadruplePhotoDiv">\n' +
                     '<div class="photosCol secondCol col-xs-6">\n' +
                     '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
-                    '<img id="reviewImage_' + reviews[i]["id"] + '_0" src="' + reviews[i]["pics"][0]["url"] + '" class="mainReviewPic">\n'+
+                    '<img id="reviewImage_' + reviews[i]["id"] + '_0" src="' + reviews[i]["pics"][0]["url"] + '" class="mainReviewPic resizeImgClass">\n'+
                     '</div>\n' +
                     '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
-                    '<img id="reviewImage_' + reviews[i]["id"] + '_1" src="' + reviews[i]["pics"][1]["url"] + '" class="mainReviewPic">\n'+
+                    '<img id="reviewImage_' + reviews[i]["id"] + '_1" src="' + reviews[i]["pics"][1]["url"] + '" class="mainReviewPic resizeImgClass">\n'+
                     '</div>\n' +
                     '</div>\n' +
                     '<div class="photosCol firstCol col-xs-6">\n' +
                     '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
-                    '<img id="reviewImage_' + reviews[i]["id"] + '_2" src="' + reviews[i]["pics"][2]["url"] + '" class="mainReviewPic">\n'+
+                    '<img id="reviewImage_' + reviews[i]["id"] + '_2" src="' + reviews[i]["pics"][2]["url"] + '" class="mainReviewPic resizeImgClass">\n'+
                     '</div>\n' +
                     '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
-                    '<img id="reviewImage_' + reviews[i]["id"] + '_3" src="' + reviews[i]["pics"][3]["url"] + '" class="mainReviewPic">\n'+
+                    '<img id="reviewImage_' + reviews[i]["id"] + '_3" src="' + reviews[i]["pics"][3]["url"] + '" class="mainReviewPic resizeImgClass">\n'+
                     '</div>\n' +
                     '</div>\n' +
                     '</div>\n';
@@ -203,15 +203,15 @@
                 text += '<div class="commentPhotosMainDiv tripletPhotoDiv">\n' +
                     '<div class="photosCol secondCol col-xs-6">\n' +
                     '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
-                    '<img id="reviewImage_' + reviews[i]["id"] + '_0" src="' + reviews[i]["pics"][0]["url"] + '" class="mainReviewPic">\n'+
+                    '<img id="reviewImage_' + reviews[i]["id"] + '_0" src="' + reviews[i]["pics"][0]["url"] + '" class="mainReviewPic resizeImgClass">\n'+
                     '</div>\n' +
                     '</div>\n' +
                     '<div class="photosCol firstCol col-xs-6">\n' +
                     '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
-                    '<img id="reviewImage_' + reviews[i]["id"] + '_1" src="' + reviews[i]["pics"][1]["url"] + '" class="mainReviewPic">\n'+
+                    '<img id="reviewImage_' + reviews[i]["id"] + '_1" src="' + reviews[i]["pics"][1]["url"] + '" class="mainReviewPic resizeImgClass">\n'+
                     '</div>\n' +
                     '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
-                    '<img id="reviewImage_' + reviews[i]["id"] + '_2" src="' + reviews[i]["pics"][2]["url"] + '" class="mainReviewPic">\n'+
+                    '<img id="reviewImage_' + reviews[i]["id"] + '_2" src="' + reviews[i]["pics"][2]["url"] + '" class="mainReviewPic resizeImgClass">\n'+
                     '</div>\n' +
                     '</div>\n' +
                     '</div>\n';
@@ -220,12 +220,12 @@
                 text += '<div class="commentPhotosMainDiv doublePhotoDiv">\n' +
                     '<div class="photosCol secondCol col-xs-6">\n' +
                     '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
-                    '<img id="reviewImage_' + reviews[i]["id"] + '_0" src="' + reviews[i]["pics"][0]["url"] + '" class="mainReviewPic">\n'+
+                    '<img id="reviewImage_' + reviews[i]["id"] + '_0" src="' + reviews[i]["pics"][0]["url"] + '" class="mainReviewPic resizeImgClass">\n'+
                     '</div>\n' +
                     '</div>\n' +
                     '<div class="photosCol firstCol col-xs-6">\n' +
                     '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
-                    '<img id="reviewImage_' + reviews[i]["id"] + '_1" src="' + reviews[i]["pics"][1]["url"] + '" class="mainReviewPic">\n'+
+                    '<img id="reviewImage_' + reviews[i]["id"] + '_1" src="' + reviews[i]["pics"][1]["url"] + '" class="mainReviewPic resizeImgClass">\n'+
                     '</div>\n' +
                     '</div>\n' +
                     '</div>\n';
@@ -234,7 +234,7 @@
                 text += '<div class="commentPhotosMainDiv doublePhotoDiv">\n' +
                     '<div class="photosCol firstCol col-xs-12">\n' +
                     '<div class="topMainReviewPic" onclick="showReviewPics(' + i + ')">' +
-                    '<img id="reviewImage_' + reviews[i]["id"] + '_0" src="' + reviews[i]["pics"][0]["url"] + '" class="mainReviewPic">\n'+
+                    '<img id="reviewImage_' + reviews[i]["id"] + '_0" src="' + reviews[i]["pics"][0]["url"] + '" class="mainReviewPic resizeImgClass">\n'+
                     '</div>\n' +
                     '</div>\n' +
                     '</div>\n';
@@ -494,6 +494,10 @@
         }
 
         document.getElementById('showReviewsMain').innerHTML = text;
+
+        setTimeout(function(){
+            resizeFitImg('resizeImgClass');
+        }, 500);
     }
 
     function likeReview(_logId, _like, _element){

@@ -1,6 +1,7 @@
 <?php
 $config = \App\models\ConfigModel::first();
     if(auth()->check()){
+        $user = Auth::user();
         $userLevelFooter = auth()->user()->getUserNearestLevel();
         $userTotalPointFooter = auth()->user()->getUserTotalPoint();
 
@@ -942,7 +943,7 @@ $config = \App\models\ConfigModel::first();
 
                                     <p class="since">
                                         <b>
-    {{--                                        {{(!empty($user->first_name)) ? $user->first_name : $user->username}}--}}سینا عادلی
+                                            {{isset($user->first_name) ? $user->first_name : $user->username}}
                                         </b>
                                     </p>
                                     <div class="ageSince">

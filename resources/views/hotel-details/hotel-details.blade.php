@@ -494,128 +494,8 @@ if ($total == 0)
                 <div id="bestPrice" class="meta position-relative"
                      style="@if(session('goDate') != null && session('backDate') != null) display: none @endif ">
                     <div id="targetHelp_9" class="targets  float-left">
-                        {{--@if($place->reserveId == null)--}}
-                        {{--<div class="offlineReserveErr" >--}}
-                        {{--<div>--}}
-                        {{--متاسفانه در حال حاضر امکان رزرو انلاین برای این مرکز موجود نمی باشد.--}}
-                        {{--</div>--}}
-                        {{--</div>--}}
-                        {{--@endif--}}
-                        <div class="meta_inner" id="bestPriceInnerDiv">
-                            {{--                                <form id="form_hotel" method="post" action="{{route('makeSessionHotel')}}">--}}
-                            {{--                                    {{csrf_field()}}--}}
-                            {{--                                    <input type="hidden" name="adult" id="form_adult">--}}
-                            {{--                                    <input type="hidden" name="room" id="form_room">--}}
-                            {{--                                    <input type="hidden" name="children" id="form_children">--}}
-                            {{--                                    <input type="hidden" name="goDate" id="form_goDate">--}}
-                            {{--                                    <input type="hidden" name="backDate" id="form_backDate">--}}
-                            {{--                                    <input type="hidden" name="ageOfChild" id="form_ageOfChild">--}}
-                            {{--                                    <input type="hidden" name="city" value="{{$city->name}}">--}}
-                            {{--                                    <input type="hidden" name="name" value="{{$city->name}}">--}}
-                            {{--                                    <input type="hidden" name="mode" value="city">--}}
-                            {{--                                    <input type="hidden" name="name" value="{{$place->name}}">--}}
-                            {{--                                    <input type="hidden" name="id" value="{{$place->id}}">--}}
-                            {{--                                </form>--}}
-                            {{--                                <div class="ppr_rup ppr_priv_hr_atf_north_star_traveler_info_nostalgic display-none">--}}
-                            {{--                                    <div class="title">بهترین قیمت اقامت</div>--}}
-                            {{--                                    <div class="metaDatePicker easyClear">--}}
-                            {{--                                        <div class="prw_rup prw_datepickers_hr_north_star_dates_nostalgic">--}}
-                            {{--                                            <label class="lableCalender">--}}
-                            {{--                                                    <span onclick="changeTwoCalendar(2); nowCalendar()"--}}
-                            {{--                                                          class="ui_icon calendar calendarIcon"></span>--}}
-                            {{--                                                <input name="GoDate" type="text" id="goDate" placeholder="تاریخ رفت"--}}
-                            {{--                                                       class="inputLableCalender" readonly value="{{session('goDate')}}">--}}
-                            {{--                                            </label>--}}
-                            {{--                                            <label class="lableCalender">--}}
-                            {{--                                                <span class="ui_icon calendar"></span>--}}
-                            {{--                                                <input value="{{session('backDate')}}" name="BackDate" type="text"--}}
-                            {{--                                                       id="backDate"--}}
-                            {{--                                                       placeholder="تاریخ برگشت" readonly class="inputLableCalender">--}}
-                            {{--                                            </label>--}}
-                            {{--                                            <div>--}}
-                            {{--                                                @include('layouts.calendar')--}}
-                            {{--                                            </div>--}}
-                            {{--                                        </div>--}}
-                            {{--                                        <div class="roomBox">--}}
-                            {{--                                            <div class="shTIcon passengerIcon" onclick="togglePassengerNoSelectPane()"></div>--}}
-                            {{--                                            <div id="roomDetail" onclick="togglePassengerNoSelectPane()">--}}
-                            {{--                                                <span class="room" id="num_room">--}}{{----}}{{--{{$room}}--}}{{----}}{{--</span>&nbsp;--}}
-                            {{--                                                <span>اتاق</span>&nbsp;-&nbsp;--}}
-                            {{--                                                <span class="adult" id="num_adult">--}}{{----}}{{--{{$adult}}--}}{{----}}{{--</span>--}}
-                            {{--                                                <span>بزرگسال</span>&nbsp;--}}
-                            {{--                                                --}}{{----}}{{--<span class="children" id="num_child">--}}{{----}}{{----}}{{----}}{{--{{$children}}--}}{{----}}{{----}}{{----}}{{--</span>--}}
-                            {{--                                                --}}{{----}}{{--<span>بچه</span>&nbsp;--}}
-                            {{--                                            </div>--}}
-                            {{--                                            <div id="passengerArrowDown" onclick="togglePassengerNoSelectPane()"--}}
-                            {{--                                                 class="shTIcon searchBottomArrowIcone arrowPassengerIcone display-inline-block"></div>--}}
-                            {{--                                            <div id="passengerArrowUp" onclick="togglePassengerNoSelectPane()"--}}
-                            {{--                                                 class="shTIcon searchTopArrowIcone arrowPassengerIcone hidden display-inline-block"></div>--}}
-
-                            {{--                                            <div class="roomPassengerPopUp hidden" id="passengerNoSelectPane"--}}
-                            {{--                                                 onmouseleave="addClassHidden('passengerNoSelectPane'); passengerNoSelect = false;">--}}
-                            {{--                                                <div class="rowOfPopUp">--}}
-                            {{--                                                    <span class="float-left">اتاق</span>--}}
-                            {{--                                                    <div>--}}
-                            {{--                                                        <div onclick="changeRoomPassengersNum(-1, 3)"--}}
-                            {{--                                                             class="shTIcon minusPlusIcons minus"></div>--}}
-                            {{--                                                        <span class='numBetweenMinusPlusBtn room'--}}
-                            {{--                                                              id="roomNumInSelect">--}}{{--{{$room}}--}}{{--</span>--}}
-                            {{--                                                        <div onclick="changeRoomPassengersNum(1, 3)"--}}
-                            {{--                                                             class="shTIcon minusPlusIcons plus"></div>--}}
-                            {{--                                                    </div>--}}
-                            {{--                                                </div>--}}
-                            {{--                                                <div class="rowOfPopUp">--}}
-                            {{--                                                    <span class="float-left">بزرگسال</span>--}}
-                            {{--                                                    <div class="float-left">--}}
-                            {{--                                                        <div onclick="changeRoomPassengersNum(-1, 2)"--}}
-                            {{--                                                             class="shTIcon minusPlusIcons minus"></div>--}}
-                            {{--                                                        <span class='numBetweenMinusPlusBtn adult'--}}
-                            {{--                                                              id="adultPassengerNumInSelect">--}}{{--{{$adult}}--}}{{--</span>--}}
-                            {{--                                                        <div onclick="changeRoomPassengersNum(1, 2)"--}}
-                            {{--                                                             class="shTIcon minusPlusIcons plus"></div>--}}
-                            {{--                                                    </div>--}}
-                            {{--                                                </div>--}}
-                            {{--                                                <div class="rowOfPopUp">--}}
-                            {{--                                                    --}}{{--<span class="float-left">بچه</span>--}}
-                            {{--                                                    --}}{{--<div class="float-left">--}}
-                            {{--                                                    --}}{{--<div onclick="changeRoomPassengersNum(-1, 1)"--}}
-                            {{--                                                    --}}{{--class="shTIcon minusPlusIcons minus"></div>--}}
-                            {{--                                                    --}}{{--<span class='numBetweenMinusPlusBtn children'--}}
-                            {{--                                                    --}}{{--id="childrenPassengerNumInSelect">--}}{{----}}{{--{{$children}}--}}{{----}}{{--</span>--}}
-                            {{--                                                    --}}{{--<div onclick="changeRoomPassengersNum(1, 1)"--}}
-                            {{--                                                    --}}{{--class="shTIcon minusPlusIcons plus"></div>--}}
-                            {{--                                                    --}}{{--</div>--}}
-                            {{--                                                </div>--}}
-                            {{--                                                --}}{{--<div class="childrenPopUpAlert">سن بچه را در زمان ورود به هتل وارد--}}
-                            {{--                                                --}}{{--کنید--}}
-                            {{--                                                --}}{{--</div>--}}
-                            {{--                                                --}}{{--<div class="childBox"></div>--}}
-                            {{--                                            </div>--}}
-                            {{--                                        </div>--}}
-                            {{--                                        <div class="srchBox">--}}
-                            {{--                                            <button class="srchBtn" onclick="inputSearch(0)">جستجو و رزرو</button>--}}
-                            {{--                                        </div>--}}
-                            {{--                                        <div class="explainSrch">--}}
-                            {{--                                            با جستجو در بین سایر ارایه دهندگان خدمات، بهترین قیمت را از بین تمامی قیمت--}}
-                            {{--                                            های موجود در بازار به شما پیشنهاد می دهیم.--}}
-                            {{--                                        </div>--}}
-                            {{--                                        <div class="explainRoom">--}}
-                            {{--                                            ** قیمت های ارایه شده بر اساس قیمت ارزان ترین اتاق و برای یک شب اقامت ارایه--}}
-                            {{--                                            می گردد. ممکن است با توجه به نوع اتاق انتخابی و تعداد نفرات این قیمت متغیر--}}
-                            {{--                                            باشد.--}}
-                            {{--                                        </div>--}}
-                            {{--                                    </div>--}}
-                            {{--                                </div>--}}
-                        </div>
+                        <div class="meta_inner" id="bestPriceInnerDiv"></div>
                     </div>
-                    {{--                        <div id="helpSpan_9" class="helpSpans hidden">--}}
-                    {{--                            <span class="introjs-arrow"></span>--}}
-                    {{--                            <p>در این قسمت هتل خود را به سادگی چند دکمه رزرو کنید. البته این سیستم برای ما آنچنان--}}
-                    {{--                                ساده نیست. این سرویس هنوز آماده استفاده نمی باشد.</p>--}}
-                    {{--                            <button data-val="9" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_9">بعدی</button>--}}
-                    {{--                            <button data-val="9" class="btn btn-primary backBtnsHelp" id="backBtnHelp_9">قبلی</button>--}}
-                    {{--                            <button class="btn btn-danger exitBtnHelp">خروج</button>--}}
-                    {{--                        </div>--}}
                     <div class="clear-both"></div>
                     @if($hasLogin)
                         <div id="targetHelp_8" class="wideScreen targets float-left col-xs-6 pd-0">
@@ -638,137 +518,25 @@ if ($total == 0)
                             </div>
                         </div>
                     @endif
-                    @if($hasLogin)
-                        @include('layouts.shareBox')
 
-                    @endif
+                    <div id="share_pic" class="wideScreen targets float-left col-xs-6 pd-0">
+    <span class="ui_button save-location-7306673 sharePageMainDiv" onclick="toggleShareIcon(this)">
+        <div class="sharePageIcon first"></div>
+        <div class="sharePageLabel">
+            اشتراک‌گذاری صفحه
+        </div>
+    </span>
+                        <div id="helpSpan_8" class="helpSpans hidden row">
+                            <span class="introjs-arrow"></span>
+                            <p>شاید بعدا بخواهید دوباره به همین مکان باز گردید. پس آن را نشان کنید تا از منوی بالا هر وقت که خواستید دوباره به آن باز گردید.</p>
+                            <button data-val="8" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_8">بعدی</button>
+                            <button data-val="8" class="btn btn-primary backBtnsHelp" id="backBtnHelp_8">قبلی</button>
+                            <button class="btn btn-danger exitBtnHelp">خروج</button>
+                        </div>
+                    </div>
+                    @include('layouts.shareBox')
+
                 </div>
-                {{--                    <div id="bestPriceRezerved" class="meta position-relative"--}}
-                {{--                         style="@if(session('goDate') == null && session('backDate') == null) display: none @endif">--}}
-                {{--                        <div id="targetHelp_9" class="targets float-left">--}}
-                {{--                            @if($place->reserveId == null)--}}
-                {{--                                <div class="offlineReserveErr">--}}
-                {{--                                    <div>--}}
-                {{--                                        متاسفانه در حال حاضر امکان رزرو انلاین برای این مرکز موجود نمی باشد.--}}
-                {{--                                    </div>--}}
-                {{--                                </div>--}}
-                {{--                            @endif--}}
-                {{--                            @if(session('goDate') != null)--}}
-                {{--                                <div class="meta_inner" id="">--}}
-                {{--                                    <div class="ppr_rup ppr_priv_hr_atf_north_star_traveler_info_nostalgic display-none">--}}
-                {{--                                        <div class="metaDatePicker easyClear">--}}
-                {{--                                            <div id="date_input_main_div">--}}
-                {{--                                                <div class="shTIcon closeXicon closeXicon2" onclick="changeStatetounReserved()"></div>--}}
-                {{--                                                <div class="prw_rup prw_datepickers_hr_north_star_dates_nostalgic">--}}
-                {{--                                                    <label class="lableCalender" id="date_input_label">--}}
-                {{--                                                        <span class="ui_icon calendar"></span>--}}
-                {{--                                                        <input type="text" id="date_input" placeholder="{{session('goDate')}}" class="inputLableCalender">--}}
-                {{--                                                    </label>--}}
-                {{--                                                    <label class="lableCalender">--}}
-                {{--                                                        <span class="ui_icon calendar"></span>--}}
-                {{--                                                        <input type="text" id="date_input_end_inHotel"--}}
-                {{--                                                               placeholder="{{session('backDate')}}"--}}
-                {{--                                                               class="inputLableCalender">--}}
-                {{--                                                    </label>--}}
-                {{--                                                </div>--}}
-                {{--                                            </div>--}}
-                {{--                                            <div class="offerBox">--}}
-                {{--                                                @if($rooms != null)--}}
-                {{--                                                    <div id="bestPriceTitleWithRoom">بهترین قیمت</div>--}}
-                {{--                                                    <div>کمترین قیمت برای هرشب اقامت</div>--}}
-                {{--                                                    <div>--}}
-                {{--                                                        <div id="minimumPrice">{{$place->minPrice}}--}}
-                {{--                                                            --}}{{--<div class="salePrice">550.000</div>--}}
-                {{--                                                        </div>--}}
-                {{--                                                        <div class="float-left">--}}
-                {{--                                                            <div id="fromAliBabaLink">--}}
-                {{--                                                                <div>از علی بابا</div>--}}
-                {{--                                                                <img src="" alt="">--}}
-                {{--                                                            </div>--}}
-                {{--                                                            <button class="btn viewOffersBtn" type="button"--}}
-                {{--                                                                    onclick="scrollToBed()">انتخاب--}}
-                {{--                                                            </button>--}}
-                {{--                                                        </div>--}}
-                {{--                                                    </div>--}}
-                {{--                                                    <div id="savePercentage">--}}
-                {{--                                                        --}}{{--<div class="display-inline-block">ده درصد تخفیف ویژه نوروز</div>--}}
-                {{--                                                        <div class="float-left">{{$place->savePercent}} درصد ذخیره--}}
-                {{--                                                        </div>--}}
-                {{--                                                    </div>--}}
-                {{--                                                    <div id="bestPriceBtn">--}}
-                {{--                                                        --}}{{--<button class="btn specOfferBtn" type="button">پیشنهاد ویژه</button>--}}
-                {{--                                                        <button class="btn specOfferBtn"--}}
-                {{--                                                                type="button">{{$place->service}}</button>--}}
-                {{--                                                        --}}{{--<button class="btn reservBtn float-left" type="button">رزرو آنی</button>--}}
-                {{--                                                    </div>--}}
-                {{--                                                @else--}}
-                {{--                                                    <div>--}}
-                {{--                                                        متاسفانه در بازه زمانی و یا تعداد نفرات برای این هتل اتاقی یافت--}}
-                {{--                                                        نشد.--}}
-                {{--                                                    </div>--}}
-                {{--                                                @endif--}}
-                {{--                                            </div>--}}
-
-                {{--                                            --}}{{--<div class="offerBox">--}}
-                {{--                                            --}}{{--<div>--}}
-                {{--                                            --}}{{--<div class="font-size-14em display-inline-block">650.000--}}
-                {{--                                            --}}{{--<div class="salePrice" style="width: 54px; margin: -14px 0 0 0">550.000</div>--}}
-                {{--                                            --}}{{--</div>--}}
-                {{--                                            --}}{{--<div class="float-left">--}}
-                {{--                                            --}}{{--<div style="float:right; margin: 2px 10px;">--}}
-                {{--                                            --}}{{--<div>از علی بابا</div>--}}
-                {{--                                            --}}{{--<img src="" alt="">--}}
-                {{--                                            --}}{{--</div>--}}
-                {{--                                            --}}{{--<button class="btn viewOffersBtn" type="button">انتخاب</button>--}}
-                {{--                                            --}}{{--</div>--}}
-                {{--                                            --}}{{--</div>--}}
-                {{--                                            --}}{{--<div style="font-size: 0.9em; color: red; margin: 2px 0;">--}}
-                {{--                                            --}}{{--<div class="display-inline-block">ده درصد تخفیف ویژه نوروز</div>--}}
-                {{--                                            --}}{{--</div>--}}
-                {{--                                            --}}{{--<div style="margin: 1% 0;">--}}
-                {{--                                            --}}{{--<button class="btn specOfferBtn" type="button">پیشنهاد ویژه</button>--}}
-                {{--                                            --}}{{--<button class="btn reservBtn float-left" type="button">رزرو آنی</button>--}}
-                {{--                                            --}}{{--</div>--}}
-                {{--                                            --}}{{--</div>--}}
-
-                {{--                                            --}}{{--<div class="offerBox">--}}
-                {{--                                            --}}{{--<div>--}}
-                {{--                                            --}}{{--<div style="font-size-14em display-inline-block; line-height: 40px;">650.000</div>--}}
-                {{--                                            --}}{{--<div class="float-left">--}}
-                {{--                                            --}}{{--<div style="float:right; margin: 2px 10px;">--}}
-                {{--                                            --}}{{--<div>از علی بابا</div>--}}
-                {{--                                            --}}{{--<img src="" alt="">--}}
-                {{--                                            --}}{{--</div>--}}
-                {{--                                            --}}{{--<button class="btn viewOffersBtn" type="button">انتخاب</button>--}}
-                {{--                                            --}}{{--</div>--}}
-                {{--                                            --}}{{--</div>--}}
-                {{--                                            --}}{{--</div>--}}
-
-                {{--                                            <div class="hidden other10_Offer">به همراه {{$place->otherRoom}} پیشنهاد دیگر</div>--}}
-
-                {{--                                            <div class="explainRoom">--}}
-                {{--                                                ** قیمت های ارایه شده بر اساس قیمت ارزان ترین اتاق و برای یک شب اقامت--}}
-                {{--                                                ارایه--}}
-                {{--                                                می گردد. ممکن است با توجه به نوع اتاق انتخابی و تعداد نفرات این قیمت--}}
-                {{--                                                متغیر--}}
-                {{--                                                باشد.--}}
-                {{--                                            </div>--}}
-                {{--                                        </div>--}}
-                {{--                                    </div>--}}
-                {{--                                </div>--}}
-                {{--                            @endif--}}
-                {{--                        </div>--}}
-                {{--                        <div id="helpSpan_9" class="helpSpans hidden">--}}
-                {{--                            <span class="introjs-arrow"></span>--}}
-                {{--                            <p>در این قسمت هتل خود را به سادگی چند دکمه رزرو کنید. البته این سیستم برای ما آنچنان--}}
-                {{--                                ساده نیست. این سرویس هنوز آماده استفاده نمی باشد.</p>--}}
-                {{--                            <button data-val="9" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_9">بعدی</button>--}}
-                {{--                            <button data-val="9" class="btn btn-primary backBtnsHelp" id="backBtnHelp_9">قبلی</button>--}}
-                {{--                            <button class="btn btn-danger exitBtnHelp">خروج</button>--}}
-                {{--                        </div>--}}
-                {{--                    </div>--}}
-                {{--                @endif--}}
-
                 <div class="prw_rup prw_common_location_photos photos position-relative">
                     <div id="targetHelp_10" class="targets">
                         <div class="inner">

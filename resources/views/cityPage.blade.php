@@ -147,7 +147,7 @@
                             @if(count($item->pics) > 0)
                             <div class="photosCol col-xs-12" onclick="showReviewPics({{$item->id}})">
                                 <div style="position: relative; overflow: hidden; display: flex; justify-content: center; align-items: center;">
-                                    <img src="{{$item->pics[0]->picUrl}}" style="position: absolute;">
+                                    <img src="{{$item->pics[0]->picUrl}}" class="resizeImgClass" style="position: absolute; width: 100%;">
                                 </div>
                                 @if(count($item->pics) > 1)
                                     <div class="numberOfPhotosMainDiv">
@@ -756,6 +756,9 @@
 <script defer src="{{URL::asset('js/cityPage/cityPageOffer.js')}}"></script>
 
 <script>
+
+    resizeFitImg('resizeImgClass');
+
     var reviews = {!! json_encode($reviews) !!};
 
     function showReviewPics(_id){

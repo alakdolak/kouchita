@@ -80,7 +80,7 @@ class PlaceController extends Controller {
                 break;
             case 6:
                 $placeMode = 'majara';
-                $kindPlace->title = 'ماجراهای';
+                $kindPlace->title = 'طبیعت گردی های';
                 break;
             case 10:
                 $placeMode = 'sogatSanaies';

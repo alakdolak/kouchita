@@ -145,11 +145,12 @@
                                 {{--<b>راهنمای صفحات</b>--}}
                             {{--</a>--}}
                         {{--</div>--}}
-                        <div class="ui_button sharePageMainDiv" onclick="toggleShareIcon(this)">
+                        <div id="share_pic" class="ui_button sharePageMainDiv" onclick="toggleShareIcon(this)">
                             <div class="sharePageIcon first"></div>
                             <div class="sharePageLabel">
                                 اشتراک&zwnj;گذاری صفحه
                             </div>
+                            @include('layouts.shareBox')
                         </div>
                     </div>
                 </div>

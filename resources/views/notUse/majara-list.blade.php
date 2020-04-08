@@ -22,7 +22,7 @@
                         <div class="restaurants_list no_bottom_padding">
                             <div class="easyClear">
                                 <h1 id="HEADING" class="p13n_geo_hotels ">
-                                    ماجراهای
+                                    طبیعت گردی های
 
                                     @if($mode == "state")
                                         استان
