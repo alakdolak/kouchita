@@ -378,8 +378,8 @@ class PlaceController extends Controller {
 
     private function getNearbies($C, $D, $count)
     {
-        $D *= 3.14 / 180;
-        $C *= 3.14 / 180;
+        $D = (float)$D * 3.14 / 180;
+        $C = (float)$C * 3.14 / 180;
 
         $tableNames = ['hotels', 'restaurant', 'amaken', 'majara'];
         foreach ($tableNames as $tableName){

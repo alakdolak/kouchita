@@ -56,7 +56,7 @@
   'session' => 
   array (
     'driver' => 'file',
-    'lifetime' => 120,
+    'lifetime' => 1314000,
     'expire_on_close' => false,
     'encrypt' => false,
     'files' => '/var/www/koochita/storage/framework/sessions',
