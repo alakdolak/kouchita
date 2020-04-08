@@ -254,6 +254,9 @@
         var windowWidth = $(window).width();
         if(windowWidth <= 767){
             window.location.href = 'geo:{{$place->C}},{{$place->D}}';
+            {{--window.open("https://maps.google.com/maps?daddr={{$place->C}},{{$place->D}}&amp;ll=");--}}
+            //     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:<lat>,<long>?q=<lat>,<long>(Label+Name)"));
+            // startActivity(intent);
             return;
         }
 

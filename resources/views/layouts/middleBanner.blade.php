@@ -7,49 +7,29 @@
         <div class="hideOnScreen row">
             <div class="boxOFSquareDiv">
 
-                <div class="squareDiv" onclick="$('#phoneSearchPopUp').removeClass('hidden')">
+                <div class="squareDiv" onclick="openMainSearch(11)">
                     <div class="phoneIcon ghazamahali"></div>
                     <div class="textIcon">غذای محلی</div>
                 </div>
-                <div class="squareDiv" onclick="$('#phoneSearchPopUp').removeClass('hidden')">
+                <div class="squareDiv" onclick="openMainSearch(10)">
                     <div class="phoneIcon soghat"></div>
                     <div class="textIcon">سوغات</div>
                 </div>
-                @if($placeMode == "amaken")
-                    <a class="squareDivSelected" href="{{route('mainMode', ['mode' => 'amaken'])}}">
-                        <div class="phoneIcon atraction"></div>
-                        <div class="textIcon">جاذبه</div>
-                    </a>
-                @else
-                    <a class="squareDiv" href="{{route('mainMode', ['mode' => 'amaken'])}}">
-                        <div class="phoneIcon atraction"></div>
-                        <div class="textIcon">جاذبه</div>
-                    </a>
-                @endif
 
-                @if($placeMode == "restaurant")
-                    <a class="squareDivSelected" href="{{route('mainMode', ['mode' => 'restaurant'])}}" >
-                        <div class="phoneIcon restaurant"></div>
-                        <div class="textIcon">رستوران</div>
-                    </a>
-                @else
-                    <a class="squareDiv" href="{{route('mainMode', ['mode' => 'restaurant'])}}" >
-                        <div class="phoneIcon restaurant"></div>
-                        <div class="textIcon">رستوران</div>
-                    </a>
-                @endif
+                <div class="squareDiv" onclick="openMainSearch(1)">
+                    <div class="phoneIcon atraction"></div>
+                    <div class="textIcon">جاذبه</div>
+                </div>
 
-                @if($placeMode == "hotel")
-                    <a class="squareDivSelected" href="{{route('mainMode', ['mode' => 'hotel'])}}">
-                        <div class="phoneIcon hotel"></div>
-                        <div class="textIcon">هتل</div>
-                    </a>
-                @else
-                    <a class="squareDiv" href="{{route('mainMode', ['mode' => 'hotel'])}}">
-                        <div class="phoneIcon hotel"></div>
-                        <div class="textIcon">هتل</div>
-                    </a>
-                @endif
+                <div class="squareDiv" onclick="openMainSearch(3)">
+                    <div class="phoneIcon restaurant"></div>
+                    <div class="textIcon">رستوران</div>
+                </div>
+
+                <div class="squareDiv" onclick="openMainSearch(4)">
+                    <div class="phoneIcon hotel"></div>
+                    <div class="textIcon">هتل</div>
+                </div>
                 {{--<a class="col-xs-4 squareDiv" href="{{route('tickets')}}">--}}
                 {{--<div class="phoneIcon ticket"></div>--}}
                 {{--<div class="textIcon">بلیط</div>--}}
