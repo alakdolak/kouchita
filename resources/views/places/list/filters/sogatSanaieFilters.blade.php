@@ -5,7 +5,7 @@
             <div class="filterItem lhrFilter filter selected">
                 <input ng-disabled="isDisable()" class="eatable0" onchange="doKindFilter('eatable', 0)" type="radio" name="eatableFilter" id="eatable0" value="صنایع دستی"/>
                 {{--غیر خوراکی--}}
-                <label for="eatable0"><span></span>&nbsp;&nbsp; صنایع دستی  </label>
+                <label for="eatable0"><span></span>&nbsp;&nbsp; صنایع‌دستی  </label>
             </div>
             <div class="filterItem lhrFilter filter selected">
                 {{--خوراکی--}}

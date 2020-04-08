@@ -127,10 +127,10 @@
                                             </div>
                                         </div>
                                         <div id="targetHelp_8" class="targets" style="width: 37%; float: right;">
-                                            <a data-tab-link="all_saves" href="{{route('bookmark')}}" class="ui_tab">نشانه گذاری شده ها</a>
+                                            <a data-tab-link="all_saves" href="{{route('bookmark')}}" class="ui_tab">نشانه‌گذاری شده‌ها</a>
                                             <div id="helpSpan_8" class="helpSpans hidden row">
                                                 <span class="introjs-arrow"></span>
-                                                <p>در این قسمت می توانید صفحاتی را که رجوع بعدی نشانه گذاری کرده اید مشاهده نمایید.</p>
+                                                <p>در این قسمت می‌توانید صفحاتی را که رجوع بعدی نشانه‌گذاری کرده‌اید مشاهده نمایید.</p>
                                                 <button data-val="8" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_8">بعدی</button>
                                                 <button data-val="8" class="btn btn-primary backBtnsHelp" id="backBtnHelp_8">قبلی</button>
                                                 <button class="btn btn-danger exitBtnHelp">خروج</button>

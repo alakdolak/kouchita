@@ -355,7 +355,7 @@ if(Auth::check()) {
                                             <div class="styleguide" id="masthead-saves-container">
                                                 <div id="masthead-recent" style="background-color: white">
                                                     <div class="recent-header-container">
-                                                        <a class="recent-header" href="{{route('recentlyViewTotal')}}" target="_self"> نشانه گذاری شده ها </a>
+                                                        <a class="recent-header" href="{{route('recentlyViewTotal')}}" target="_self"> نشانه‌گذاری شده‌ها </a>
                                                     </div>
                                                     <div class="masthead-recent-cards-container" id="bookMarksDiv"></div>
                                                     {{--<div class="see-all-button-container"><a href="{{route('recentlyViewTotal')}}" target="_self" class="see-all-button">مشاهده تمامی موارد </a></div>--}}
@@ -548,7 +548,7 @@ if(Auth::check()) {
                                                 <span id="global-nav-restaurants" class="unscoped global-nav-link ui_tab" onclick="openMainSearch(1)  // in mainSearch.blade.php">جاذبه</span>
                                             </li>
                                             <li class="" data-element=".masthead-dropdown-Flights">
-                                                <span class="unscoped global-nav-link ui_tab " onclick="openMainSearch(10)  // in mainSearch.blade.php">سوغات و صنایع دستی</span>
+                                                <span class="unscoped global-nav-link ui_tab " onclick="openMainSearch(10)  // in mainSearch.blade.php">سوغات و صنایع‌دستی</span>
                                             </li>
                                             <li class="" data-element=".masthead-dropdown-Flights">
                                                 <span class="unscoped global-nav-link ui_tab" onclick="openMainSearch(11)  // in mainSearch.blade.php">غذای محلی</span>

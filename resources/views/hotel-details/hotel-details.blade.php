@@ -75,7 +75,7 @@ if ($total == 0)
         .affix{
             max-width: 100%;
             left: 0px;
-            box-shadow: 0 -20px 20px 20px lightgrey;
+            box-shadow: 20px -10px 20px 20px darkgrey;
         }
     </style>
 
@@ -988,7 +988,7 @@ if ($total == 0)
     <div id="MAINWRAP" class="full_meta_photos_v3  full_meta_photos_v4  big_pic_mainwrap_tweaks horizontal_xsell ui_container is-mobile position-relative">
         <div id="MAIN" class="Hotel_Review prodp13n_jfy_overflow_visible position-relative">
             <div id="BODYCON" class="col easyClear bodLHN poolB adjust_padding new_meta_chevron new_meta_chevron_v2 position-relative">
-                <nav class="tabLinkMainWrapMainDivPC navbar navbar-inverse" data-spy="affix" data-offset-top="700">
+                <nav class="tabLinkMainWrapMainDivPC navbar navbar-inverse" data-spy="affix" data-offset-top="800">
                     <div class="container-fluid tabLinkMainWrapMainDiv">
                         <div class="collapse navbar-collapse" id="myNavbar">
                             <ul class="nav navbar-nav">
@@ -1009,13 +1009,13 @@ if ($total == 0)
                     </div>
                 </nav>
 
-                <div class="tabLinkMainWrapMainDivMobile" data-spy="affix" data-offset-top="790">
+                <div class="tabLinkMainWrapMainDivMobile" data-spy="affix" data-offset-top="860">
                     <div class="tabLinkMainWrapMainDiv">
                         <a href="#bodyLinks">
                             <button class="tabLinkMainWrap" onclick="openTab('similarLocationsMainDiv', this, '#4dc7bc')">مکان‌های مشابه</button>
                         </a><!--
                      --><a href="#bodyLinks">
-                            <button class="tabLinkMainWrap" onclick="openTab('QAndAMainDivId', this, '#4dc7bc')">سؤالات</button>
+                            <button class="tabLinkMainWrap" onclick="openTab('QAn8dAMainDivId', this, '#4dc7bc')">سؤالات</button>
                         </a><!--
                      --><a href="#bodyLinks">
                             <button id="openPostPhone" class="tabLinkMainWrap" onclick="openTab('mainDivPlacePost', this, '#4dc7bc')">پست</button>
@@ -1034,6 +1034,27 @@ if ($total == 0)
                                 <div class="overviewContent">
                                     <div id="mobileIntroductionMainDivId"
                                          class="mobileIntroductionMainDiv tabContentMainWrap">
+                                        @if($placeMode == 'mahaliFood')
+
+                                        <div class="tabLinkMainDiv">
+                                            <button class="tabLink"
+                                                    onclick="openCity('commentsAndAddressMobile', this, 'white', '#4dc7bc')">
+                                                دستور پخت
+                                            </button><!--
+                                         -->
+                                            <button class="tabLink"
+                                                    onclick="openCity('detailsAndFeaturesMobile', this, 'white', '#4dc7bc')">
+                                                کالری
+                                            </button><!--
+                                         -->
+                                            <button class="tabLink"
+                                                    onclick="openCity('generalDescriptionMobile', this, 'white', '#4dc7bc')"
+                                                    id="defaultOpen">
+                                                مواد و لوازم
+                                            </button>
+                                        </div>
+
+                                        @else
                                         <div class="tabLinkMainDiv">
                                             <button class="tabLink"
                                                     onclick="openCity('commentsAndAddressMobile', this, 'white', '#4dc7bc')">
@@ -1050,7 +1071,10 @@ if ($total == 0)
                                                     id="defaultOpen">معرفی کلی
                                             </button>
                                         </div>
-                                        <?php
+
+                                        @endif
+
+                                            <?php
                                             if($kindPlaceId == 4){
                                                 $showInfo = 12;
                                                 $showReviewRate = 4;
@@ -1063,7 +1087,7 @@ if ($total == 0)
                                                 $showFeatures = 4;
                                                 $mainInfoClass = 'mainInfo';
                                             }
-                                        ?>
+                                            ?>
 
                                         @if($placeMode == 'mahaliFood')
                                             <div class="ui_columns is-multiline is-mobile reviewsAndDetails direction-rtlImp">
@@ -1742,14 +1766,47 @@ if ($total == 0)
 
         <script>
             $(document).ready(function() {
-                if($(window).width() < 630) {
-                    $('.tabLinkMainWrapMainDivMobile').affix({offset: {top: 930}});
+
+                var a = $(window).width();
+                // console.log(a);
+
+                if(630 < a && a <= 768) {
+                    // alert('a');
+                    $('.tabLinkMainWrapMainDivMobile').affix({offset: {top: 820}});
+                }
+                else if(415 < a && a <= 630){
+                    // alert('b');
+                    $('.tabLinkMainWrapMainDivMobile').affix({offset: {top: 1000}});
+                }
+                else if(a <= 415){
+                    // alert('c');
+                    $('.tabLinkMainWrapMainDivMobile').affix({offset: {top: 1050}});
+
                 }
 
-                $( window ).resize(function() {
-                    if($(window).width() < 630) {
-                        $('.tabLinkMainWrapMainDivMobile').affix({offset: {top: 930}});
-                    }
+                // $( window ).resize(function() {
+                //     if(768 < a ) {
+                //          // alert('a');
+                //         $('.tabLinkMainWrapMainDivMobile').affix({offset: {top: 860}});
+                //     }
+                //
+                //     else if( 630 < a && a <= 768) {
+                //          // alert('b');
+                //         $('.tabLinkMainWrapMainDivMobile').affix({offset: {top: 820}});
+                //
+                //     }
+                //
+                //     else if( 415 < a && a <= 630) {
+                //          // alert('b');
+                //         $('.tabLinkMainWrapMainDivMobile').affix({offset: {top: 1000}});
+                //
+                //     }
+                //
+                //     else if(a <= 415) {
+                //          // alert('c');
+                //         $('.tabLinkMainWrapMainDivMobile').affix({offset: {top: 190}});
+                //
+                //     }
                 })
             })
         </script>

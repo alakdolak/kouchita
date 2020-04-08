@@ -434,7 +434,7 @@ if(Auth::check()) {
         <div class="styleguide" id="masthead-saves-container">
             <div id="masthead-recent" class="masthead-recent-class">
                 <div class="recent-header-container">
-                    <a class="recent-header" href="{{route('recentlyViewTotal')}}" target="_self"> نشانه گذاری شده ها </a>
+                    <a class="recent-header" href="{{route('recentlyViewTotal')}}" target="_self"> نشانه‌گذاری شده‌ها </a>
                 </div>
                 <div class="masthead-recent-cards-container" id="bookMarksDiv">
 
