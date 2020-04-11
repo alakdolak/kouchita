@@ -29,12 +29,12 @@ class UserLoginController extends Controller
 
                 if(Auth::user()->status != 0) {
                     RetrievePas::whereUId(Auth::user()->id)->delete();
-                    return Redirect::intended('/');
+                    return \Redirect::intended('/');
                 }
             }
         }
 
-        return Redirect::route('main');
+        return \Redirect::route('main');
     }
 
     public function doLogin()
@@ -100,7 +100,7 @@ class UserLoginController extends Controller
     public function logout()
     {
         Auth::logout();
-        Session::flush();
+        \Session::flush();
 //        return Redirect::route('main');
         return \redirect()->back();
     }
@@ -547,7 +547,7 @@ class UserLoginController extends Controller
     {
 
         if (Auth::check())
-            return Redirect::to(route('main'));
+            return \Redirect::to(route('main'));
 
         if (isset($_GET['code'])) {
 
@@ -620,7 +620,7 @@ class UserLoginController extends Controller
             }
             Auth::attempt(['username' => $userCheckEmail->username, 'password' => $user->id], true);
         }
-        return Redirect::to(route('main'));
+        return \Redirect::to(route('main'));
     }
 
 
