@@ -626,7 +626,6 @@ class UserLoginController extends Controller
 
     private function generatePassword()
     {
-
         $init = 65;
         $init2 = 97;
         $code = "";
