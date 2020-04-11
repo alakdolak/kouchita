@@ -184,21 +184,10 @@ $config = \App\models\ConfigModel::first();
                     <span>{{auth()->user()->username}}</span>
                 </div>
                 <?php
-                    if(auth()->check()){
-                        $u = Auth::user();
-                        $uId = $u->id;
-                        $userCode = $uId . '_' . rand(10000,99999);
-                        if($u->uploadPhoto == 0){
-                            $deffPic = App\models\DefaultPic::find($u->picture);
-
-                            if($deffPic != null)
-                                $buPic = URL::asset('defaultPic/' . $deffPic->name);
-                            else
-                                $buPic = URL::asset('_images/nopic/blank.jpg');
-                        }
-                        else
-                            $buPic = URL::asset('userProfile/' . $u->picture);
-                    }
+                    if(auth()->check())
+                        $buPic = getUserPic(auth()->user()->id);
+                    else
+                        $buPic = getUserPic();
                 ?>
                 <div class="profilePicFooter circleBase type2">
                     <img src="{{isset($buPic) ? $buPic : ''}}" style="width: 100%; border-radius: 50%">

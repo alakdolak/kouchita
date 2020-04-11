@@ -115,13 +115,7 @@ class ProfileController extends Controller {
             }
         }
 
-        if(!$user->uploadPhoto) {
-            $photo = DefaultPic::whereId($user->picture);
-            if($photo == null)
-                $user->picture = DefaultPic::first()->name;
-            else
-                $user->picture = $photo->name;
-        }
+        $user->picture = getUserPic($user->id);
 
         $medals = getMedals($user->id);
         $nearestMedals = getNearestMedals($user->id);
@@ -160,13 +154,7 @@ class ProfileController extends Controller {
             $counts[$counter++] = LogModel::where($condition)->count();
         }
 
-        if(!$user->uploadPhoto) {
-            $photo = DefaultPic::whereId($user->picture);
-            if($photo == null)
-                $user->picture = DefaultPic::first()->name;
-            else
-                $user->picture = $photo->name;
-        }
+        $user->picture = getUserPic($user->id);
 
         $recentlyBadges = [['badgeId' => -1, 'badgeDate' => -1],
             ['badgeId' => -1, 'badgeDate' => -1],
@@ -420,18 +408,9 @@ class ProfileController extends Controller {
     public function editPhoto($msg = "") {
         $user = Auth::user();
 
-        if($user->uploadPhoto) {
-            $photo = "userProfile/" . $user->picture;
-        }
-        else {
-            if(strpos($user->picture, 'https3') > -1 || strpos($user->picture, 'http') > -1 )
-                $photo = $user->picture;
-            else
-                $photo = URL::asset("defaultPic/" . DefaultPic::whereId($user->picture)->name);
-        }
+        $photo = getUserPic($user->id);
 
         return view("editPhoto", array('msg' => $msg, 'photo' => $photo));
-
     }
 
     public function getDefaultPics() {

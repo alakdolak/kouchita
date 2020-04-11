@@ -370,11 +370,7 @@
 
 
                                 <div class="col-xs-4">
-                                    @if(!$user->uploadPhoto)
-                                        <img class="avatarUrl" src="{{URL::asset('defaultPic') . '/' . $user->picture}}" height="60" width="60"/>
-                                    @else
-                                        <img class="avatarUrl" src="{{URL::asset('userProfile') . "/" . $user->picture}}" height="60" width="60"/>
-                                    @endif
+                                    <img class="avatarUrl" src="{{ $user->picture }}" height="60" width="60"/>
                                 </div>
 
                                 <div class="nameContent">

@@ -108,12 +108,14 @@ class PlaceController extends Controller {
             $u = Auth::user();
             $uId = $u->id;
             $userCode = $uId . '_' . rand(10000,99999);
+            $uPic = getUserPic(\auth()->user()->id); // common.php
         }
         else{
             $userCode = null;
             $hasLogin = false;
+            $uPic = getUserPic(); // common.php
         }
-        $uPic = getUserPic(); // common.php
+
 
         saveViewPerPage($kindPlaceId, $place->id); // common.php
 
@@ -1266,7 +1268,6 @@ class PlaceController extends Controller {
 
     function filterComments()
     {
-
         if (isset($_POST["filters"]) && isset($_POST["placeId"]) && isset($_POST["kindPlaceId"]) &&
             isset($_POST["tag"]) && isset($_POST["page"])) {
 

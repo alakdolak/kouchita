@@ -450,22 +450,13 @@ class ReviewsController extends Controller
                     else
                         $item->comment = array();
 
-                    $item->user = User::select(['first_name', 'last_name', 'username', 'picture', 'uploadPhoto'])->find($item->visitorId);
+                    $item->user = User::select(['id', 'first_name', 'last_name', 'username', 'picture', 'uploadPhoto'])->find($item->visitorId);
                     if ($item->user->first_name != null)
                         $item->usernameReviewWriter = $item->user->first_name . ' ' . $item->user->last_name;
                     else
                         $item->usernameReviewWriter = $item->user->username;
 
-                    if($item->user->uploadPhoto == 0){
-                        $deffPic = DefaultPic::find($item->user->picture);
-                        if($deffPic != null)
-                            $item->userPic = URL::asset('defaultPic/' . $deffPic->name);
-                        else
-                            $item->userPic = URL::asset('_images/nopic/blank.jpg');
-                    }
-                    else{
-                        $item->userPic = URL::asset('userProfile/' . $item->user->picture);
-                    }
+                    $item->userPic = getUserPic($item->user->id);
 
                     $item->assigned = ReviewUserAssigned::where('logId', $item->id)->get();
 
