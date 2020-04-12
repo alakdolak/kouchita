@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 class NotUseController extends Controller
 {
     public function showHotelList($city, $mode) {
+        return redirect(route(['place.list', ['kindPlaceId' => 4, 'mode' => $mode, 'city' => $city]]));
 
         session()->forget(['goDate', 'backDate', 'room', 'adult', 'children', 'ageOfChild', 'reserve_room']);
         if ($mode == "state") {
@@ -176,7 +177,7 @@ class NotUseController extends Controller
         echo \GuzzleHttp\json_encode(['places' => $hotels]);
     }
     public function showRestaurantList($city, $mode) {
-
+        return redirect(route(['place.list', ['kindPlaceId' => 3, 'mode' => $mode, 'city' => $city]]));
         if ($mode == "state") {
 
             $state = State::whereName($city)->first();
@@ -309,6 +310,8 @@ class NotUseController extends Controller
 
     }
     public function showMajaraList($city, $mode) {
+        return redirect(route(['place.list', ['kindPlaceId' => 6, 'mode' => $mode, 'city' => $city]]));
+
         if ($mode == "state") {
 
             $state = State::whereName($city)->first();
@@ -439,8 +442,10 @@ class NotUseController extends Controller
         echo \GuzzleHttp\json_encode(['places' => $hotels]);
     }
     public function showAmakenList($city, $mode) {
-        if ($mode == "state") {
 
+        return redirect(route(['place.list', ['kindPlaceId' => 1, 'mode' => $mode, 'city' => $city]]));
+
+        if ($mode == "state") {
             $state = State::whereName($city)->first();
             if ($state == null)
                 return "نتیجه ای یافت نشد";
