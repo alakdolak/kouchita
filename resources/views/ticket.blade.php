@@ -302,7 +302,7 @@ $kindPlaceId = 10; ?>
         }
 
         .loader {
-            background-image: url("{{URL::asset('images/loading.svg')}}");
+            background-image: url("{{URL::asset('images/loading.gif')}}");
             width: 100px;
             height: 100px;
         }

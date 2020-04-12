@@ -8,7 +8,7 @@ if ($total == 0)
 @section('title')
     <script async src="{{URL::asset("js/bootstrap-datepicker.js")}}"></script>
     <link rel="stylesheet" href="{{URL::asset('css/theme2/bootstrap-datepicker.css?v=1')}}">
-    <title>{{$place->setTitle}} </title>
+    <title>{{isset($place->setTitle) ? $place->setTitle : $place->name}} </title>
 @stop
 
 @section('meta')

@@ -4,7 +4,9 @@
 <div id="darkModeMainPage" class="ui_backdrop dark" ></div>
 
 <div class="loaderDiv" id="fullPageLoader" style="display: none">
-    <div class="loader_200" style="background-image: url('{{URL::asset('images/loading.svg')}}');"></div>
+    <div class="loader_200">
+        <img src="{{URL::asset('images/loading.gif')}}" style="width: 300px;">
+    </div>
 </div>
 
 @include('general.adminInPage')

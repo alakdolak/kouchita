@@ -16,7 +16,7 @@ DIV.ppr_rup.ppr_priv_photoviewer .heroNav.left, .rtl DIV.ppr_rup.ppr_priv_photov
 }
 
 .loader {
-    background-image: url("../../images/loading.svg");
+    background-image: url("../../images/loading.gif");
     width: 100px;
     height: 100px;
 }
