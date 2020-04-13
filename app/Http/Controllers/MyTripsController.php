@@ -139,49 +139,18 @@ class MyTripsController extends Controller {
 
         $tripPlaces = TripPlace::whereTripId($tripId)->orderBy('date', $sortMode)->get();
         foreach ($tripPlaces as $tripPlace) {
-            $kindPlaceId = $tripPlace->kindPlaceId;
-            switch ($kindPlaceId) {
-                case 1:
-                    $amaken = Amaken::whereId($tripPlace->placeId);
-                    if(file_exists((__DIR__ . '/../../../../assets/_images/amaken/' . $amaken->file . '/f-1.jpg')))
-                        $tripPlace->pic = URL::asset('_images/amaken/' . $amaken->file . '/f-1.jpg');
-                    else
-                        $tripPlace->pic = URL::asset('_images/nopic/blank.jpg');
-                    $tripPlace->x = $amaken->C;
-                    $tripPlace->y = $amaken->D;
-                    $tripPlace->url = route('amakenDetails', ['placeId' => $tripPlace->placeId, 'placeName' => Amaken::whereId($tripPlace->placeId)->name]);
-                    break;
-                case 3:
-                    $restaurant = Restaurant::whereId($tripPlace->placeId);
-                    if(file_exists((__DIR__ . '/../../../../assets/_images/restaurant/' . $restaurant->file . '/f-1.jpg')))
-                        $tripPlace->pic = URL::asset('_images/restaurant/' . $restaurant->file . '/f-1.jpg');
-                    else
-                        $tripPlace->pic = URL::asset('_images/nopic/blank.jpg');
-                    $tripPlace->x = $restaurant->C;
-                    $tripPlace->y = $restaurant->D;
-                    $tripPlace->url = route('restaurantDetails', ['placeId' => $tripPlace->placeId, 'placeName' => Restaurant::whereId($tripPlace->placeId)->name]);
-                    break;
-                case 4:
-                    $hotel = Hotel::whereId($tripPlace->placeId);
-                    if(file_exists((__DIR__ . '/../../../../assets/_images/hotels/' . $hotel->file . '/f-1.jpg')))
-                        $tripPlace->pic = URL::asset('_images/hotels/' . $hotel->file . '/f-1.jpg');
-                    else
-                        $tripPlace->pic = URL::asset('_images/nopic/blank.jpg');
-                    $tripPlace->x = $hotel->C;
-                    $tripPlace->y = $hotel->D;
-                    $tripPlace->url = route('hotelDetails', ['placeId' => $tripPlace->placeId, 'placeName' => Hotel::whereId($tripPlace->placeId)->name]);
-                    break;
-                case 6:
-                    $majara = Majara::whereId($tripPlace->placeId);
-                    if(file_exists((__DIR__ . '/../../../../assets/_images/majara/' . $majara->file . '/f-1.jog')))
-                        $tripPlace->pic = URL::asset('_images/majara/' . $majara->file . '/f-1.jpg');
-                    else
-                        $tripPlace->pic = URL::asset('_images/nopic/blank.jpg');
-                    $tripPlace->x = $majara->C;
-                    $tripPlace->y = $majara->D;
-                    $tripPlace->url = route('majaraDetails', ['placeId' => $tripPlace->placeId, 'placeName' => Majara::whereId($tripPlace->placeId)->name]);
-                    break;
-            }
+
+            $kindPlace = Place::find($tripPlace->kindPlaceId);
+            $plc = \DB::table($kindPlace->tableName)->find($tripPlace->placeId);
+
+            if(file_exists((__DIR__ . '/../../../../assets/_images/' . $kindPlace->fileName. '/' . $plc->file . '/f-1.jpg')))
+                $tripPlace->pic = \URL::asset('_images/' . $kindPlace->fileName. '/' . $plc->file . '/f-1.jpg');
+            else
+                $tripPlace->pic = \URL::asset('_images/nopic/blank.jpg');
+
+            $tripPlace->x = $plc->C;
+            $tripPlace->y = $plc->D;
+            $tripPlace->url = route('show.place.details', ['kindPlaceName' => $kindPlace->fileName, 'slug' => $plc->slug]);
 
             if($tripPlace->date != "")
                 $tripPlace->date = formatDate($tripPlace->date);
@@ -482,54 +451,21 @@ class MyTripsController extends Controller {
 
             $out = [];
 
-            switch ($kindPlaceId) {
-                case 1:
-                default:
-                    $target = Amaken::whereId($placeId);
-                    if(file_exists((__DIR__ . '/../../../../assets/_images/amaken/' . $target->file . '/' . $target->pic_1)))
-                        $out['pic'] = URL::asset('_images/amaken/' . $target->file . '/' . $target->pic_1);
-                    else
-                        $out['pic'] = URL::asset('_images/nopic/blank.jpg');
-                    $out['phone'] = "";
-
-                    $out['url'] = route('amakenDetails', ['placeId' => $placeId, 'placeName' => $target->name]);
-
-                    break;
-                case 3:
-                    $target = Restaurant::whereId($placeId);
-                    if(file_exists((__DIR__ . '/../../../../assets/_images/restaurant/' . $target->file . '/' . $target->pic_1)))
-                        $out['pic'] = URL::asset('_images/restaurant/' . $target->file . '/' . $target->pic_1);
-                    else
-                        $out['pic'] = URL::asset('_images/nopic/blank.jpg');
-                    $out['phone'] = "";
-                    $out['url'] = route('restaurantDetails', ['placeId' => $placeId, 'placeName' => $target->name]);
-                    break;
-                case 4:
-                    $target = Hotel::whereId($placeId);
-                    if(file_exists((__DIR__ . '/../../../../assets/_images/hotels/' . $target->file . '/' . $target->pic_1)))
-                        $out['pic'] = URL::asset('_images/hotels/' . $target->file . '/' . $target->pic_1);
-                    else
-                        $out['pic'] = URL::asset('_images/nopic/blank.jpg');
-                    $out['phone'] = $target->phone;
-                    $out['url'] = route('hotelDetails', ['placeId' => $placeId, 'placeName' => $target->name]);
-                    break;
-                case 6:
-                    $target = Majara::whereId($placeId);
-                    if(file_exists((__DIR__ . '/../../../../assets/_images/majara/' . $target->file . '/' . $target->pic_1)))
-                        $out['pic'] = URL::asset('_images/majara/' . $target->file . '/' . $target->pic_1);
-                    else
-                        $out['pic'] = URL::asset('_images/nopic/blank.jpg');
-                    $out['phone'] = "";
-                    $out['url'] = route('majaraDetails', ['placeId' => $placeId, 'placeName' => $target->name]);
-                    break;
-            }
-
+            $kindPlace = Place::find($kindPlaceId);
+            $target = \DB::table($kindPlace->tableName)->find($placeId);
             $out['name'] = $target->name;
             $out['address'] = $target->address;
             $out['point'] = getRate($placeId, $kindPlaceId)[1];
             $city = Cities::whereId($target->cityId);
             $out['city'] = $city->name;
             $out['state'] = State::whereId($city->stateId)->name;
+            if(file_exists((__DIR__ . '/../../../../assets/_images/' . $kindPlace->fileName . '/' . $target->file . '/' . $target->pic_1)))
+                $out['pic'] = URL::asset('_images/' . $kindPlace->fileName . '/' . $target->file . '/' . $target->pic_1);
+            else
+                $out['pic'] = URL::asset('_images/nopic/blank.jpg');
+
+            $out['phone'] = isset($target->phone) && $target->phone != null ? $target->phone : "";
+            $out['url'] = route('show.place.details', ['kindPlaceName' => $kindPlace->fileName, 'slug' => $target->slug]);
 
             $tripPlaceId = makeValidInput($_POST["tripPlaceId"]);
             if($tripPlaceId != -1) {
@@ -590,86 +526,22 @@ class MyTripsController extends Controller {
 
             foreach ($amakens as $amaken) {
                 $kindPlaceId = $amaken->kindPlaceId;
-                switch ($kindPlaceId) {
-                    case 1:
-                        $target = Amaken::whereId($amaken->placeId);
 
-                        if($target == null){
-                            $amaken->delete();
-                            break;
-                        }
-
-                        $amaken->name = $target->name;
-
-                        if(file_exists((__DIR__ . '/../../../../assets/_images/amaken/' . $target->file . '/f-1.jpg')))
-                            $amaken->placePic = URL::asset('_images/amaken/' . $target->file . '/f-1.jpg');
-                        else
-                            $amaken->placePic = URL::asset('_images/nopic/blank.jpg');
-
-                        $amaken->x = $target->C;
-                        $amaken->y = $target->D;
-                        $amaken->url = route('amakenDetails', ['placeId' => $amaken->placeId, 'placeName' => $amaken->name]);
-                        break;
-
-                    case 3:
-                        $target = Restaurant::whereId($amaken->placeId);
-
-                        if($target == null) {
-                            $amaken->delete();
-                            break;
-                        }
-
-                        $amaken->name = $target->name;
-
-                        if(file_exists((__DIR__ . '/../../../../assets/_images/restaurant/' . $target->file . '/f-1.jpg')))
-                            $amaken->placePic = URL::asset('_images/restaurant/' . $target->file . '/f-1.jpg');
-                        else
-                            $amaken->placePic = URL::asset('_images/nopic/blank.jpg');
-
-                        $amaken->x = $target->C;
-                        $amaken->y = $target->D;
-                        $amaken->url = route('restaurantDetails', ['placeId' => $amaken->placeId, 'placeName' => $amaken->name]);
-                        break;
-
-                    case 4:
-                        $target = Hotel::whereId($amaken->placeId);
-
-                        if($target == null) {
-                            $amaken->delete();
-                            break;
-                        }
-
-                        $amaken->name = $target->name;
-
-                        if(file_exists((__DIR__ . '/../../../../assets/_images/hotels/' . $target->file . '/f-1.jpg')))
-                            $amaken->placePic = URL::asset('_images/hotels/' . $target->file . '/f-1.jpg');
-                        else
-                            $amaken->placePic = URL::asset('_images/nopic/blank.jpg');
-
-                        $amaken->x = $target->C;
-                        $amaken->y = $target->D;
-                        $amaken->url = route('hotelDetails', ['placeId' => $amaken->placeId, 'placeName' => $amaken->name]);
-                        break;
-                    case 6:
-                        $target = Majara::whereId($amaken->placeId);
-
-                        if($target == null) {
-                            $amaken->delete();
-                            break;
-                        }
-
-                        $amaken->name = $target->name;
-
-                        if(file_exists((__DIR__ . '/../../../../assets/_images/majara/' . $target->file . '/f-1.jpg')))
-                            $amaken->placePic = URL::asset('_images/majara/' . $target->file . '/f-1.jpg');
-                        else
-                            $amaken->placePic = URL::asset('_images/nopic/blank.jpg');
-                        $amaken->x = $target->C;
-                        $amaken->y = $target->D;
-                        $amaken->url = route('majaraDetails', ['placeId' => $amaken->placeId, 'placeName' => $amaken->name]);
-                        break;
-
+                $kindPlace = Place::find($kindPlaceId);
+                $target = \DB::table($kindPlace->tableName)->find($amaken->placeId);
+                if($target == null){
+                    $amaken->delete();
+                    break;
                 }
+                $amaken->name = $target->name;
+                if(file_exists((__DIR__ . '/../../../../assets/_images/' . $kindPlace->fileName . '/' . $target->file . '/f-1.jpg')))
+                    $amaken->placePic = URL::asset('_images/' . $kindPlace->fileName . '/' . $target->file . '/f-1.jpg');
+                else
+                    $amaken->placePic = URL::asset('_images/nopic/blank.jpg');
+
+                $amaken->x = $target->C;
+                $amaken->y = $target->D;
+                $amaken->url = route('show.place.details', ['kindPlaceName' => $kindPlace->fileName, 'slug' => $target->slug]);
             }
 
             echo \GuzzleHttp\json_encode(['places' => $amakens]);
@@ -698,83 +570,22 @@ class MyTripsController extends Controller {
             if($amakens != null) {
                 foreach ($amakens as $amaken) {
                     $kindPlaceId = $amaken->kindPlaceId;
-                    switch ($kindPlaceId) {
-                        case 1:
-                            $target = Amaken::whereId($amaken->placeId);
-
-                            if($target == null) {
-                                $amaken->delete();
-                                break;
-                            }
-
-                            $amaken->name = $target->name;
-
-                            if(file_exists((__DIR__ . '/../../../../assets/_images/amaken/' . $target->file . '/f-1.jpg')))
-                                $amaken->placePic = URL::asset('_images/amaken/' . $target->file . '/f-1.jpg');
-                            else
-                                $amaken->placePic = URL::asset('_images/nopic/blank.jpg');
-
-                            $amaken->x = $target->C;
-                            $amaken->y = $target->D;
-                            $amaken->url = route('amakenDetails', ['placeId' => $amaken->placeId]);
-                            break;
-
-                        case 3:
-                            $target = Restaurant::whereId($amaken->placeId);
-
-                            if($target == null) {
-                                $amaken->delete();
-                                break;
-                            }
-
-                            $amaken->name = $target->name;
-
-                            if(file_exists((__DIR__ . '/../../../../assets/_images/restaurant/' . $target->file . '/f-1.jpg')))
-                                $amaken->placePic = URL::asset('_images/restaurant/' . $target->file . '/f-1.jpg');
-                            else
-                                $amaken->placePic = URL::asset('_images/nopic/blank.jpg');
-
-                            $amaken->x = $target->C;
-                            $amaken->y = $target->D;
-                            $amaken->url = route('restaurantDetails', ['placeId' => $amaken->placeId]);
-                            break;
-                        case 4:
-                            $target = Hotel::whereId($amaken->placeId);
-
-                            if($target == null) {
-                                $amaken->delete();
-                                break;
-                            }
-
-                            $amaken->name = $target->name;
-
-                            if(file_exists((__DIR__ . '/../../../../assets/_images/hotels/' . $target->file . '/f-1.jpg')))
-                                $amaken->placePic = URL::asset('_images/hotels/' . $target->file . '/f-1.jpg');
-                            else
-                                $amaken->placePic = URL::asset('_images/nopic/blank.jpg');
-
-                            $amaken->x = $target->C;
-                            $amaken->y = $target->D;
-                            $amaken->url = route('hotelDetails', ['placeId' => $amaken->placeId, 'placeName' => $target->name]);
-                            break;
-                        case 6:
-                            $target = Majara::whereId($amaken->placeId);
-
-                            if($target == null) {
-                                $amaken->delete();
-                                break;
-                            }
-
-                            $amaken->name = $target->name;
-
-                            if(file_exists((__DIR__ . '/../../../../assets/_images/majara/' . $target->file . '/f-1.jpg')))
-                                $amaken->placePic = URL::asset('_images/majara/' . $target->file . '/f-1.jpg');
-                            else
-                                $amaken->placePic = URL::asset('_images/nopic/blank.jpg');
-                            $amaken->x = $target->C;
-                            $amaken->y = $target->D;
-                            break;
+                    $kindPlace = Place::find($kindPlaceId);
+                    $target = \DB::table($kindPlace->tableName)->find($amaken->placeId);
+                    if($target == null) {
+                        $amaken->delete();
+                        break;
                     }
+                    $amaken->name = $target->name;
+                    if(file_exists((__DIR__ . '/../../../../assets/_images/' . $kindPlace->fileName . '/' . $target->file . '/f-1.jpg')))
+                        $amaken->placePic = URL::asset('_images/' . $kindPlace->fileName . '/' . $target->file . '/f-1.jpg');
+                    else
+                        $amaken->placePic = URL::asset('_images/nopic/blank.jpg');
+
+                    $amaken->x = $target->C;
+                    $amaken->y = $target->D;
+                    $amaken->url = route('show.place.details', ['kindPlaceName' => $kindPlace->fileName, 'slug' => $target->slug]);
+
                 }
 
                 echo \GuzzleHttp\json_encode(['places' => $amakens]);

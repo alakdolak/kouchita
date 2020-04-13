@@ -1033,21 +1033,23 @@ function getReviewPicsURL($review){
     return $review;
 }
 
-function getUserPic(){
-    if (Auth::check()) {
-        $u = Auth::user();
-        $uId = $u->id;
+function getUserPic($id = 0){
+    $user = User::find($id);
+    if($user != null){
+        if(strpos($user->picture, 'http') !== false)
+            return $user->picture;
+        else{
+            if($user->uploadPhoto == 0){
+                $deffPic = DefaultPic::find($user->picture);
 
-        if($u->uploadPhoto == 0){
-            $deffPic = DefaultPic::find($u->picture);
-
-            if($deffPic != null)
-                $uPic = URL::asset('defaultPic/' . $deffPic->name);
+                if($deffPic != null)
+                    $uPic = URL::asset('defaultPic/' . $deffPic->name);
+                else
+                    $uPic = URL::asset('_images/nopic/blank.jpg');
+            }
             else
-                $uPic = URL::asset('_images/nopic/blank.jpg');
+                $uPic = URL::asset('userProfile/' . $user->picture);
         }
-        else
-            $uPic = URL::asset('userProfile/' . $u->picture);
     }
     else
         $uPic = URL::asset('_images/nopic/blank.jpg');

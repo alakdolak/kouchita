@@ -301,7 +301,7 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
 .loader {
     /*border: 16px solid #f3f3f3;*/
     /*border-radius: 50%;*/
-    background-image: url('../../images/loading.svg');
+    background-image: url('../../images/loading.gif');
     /*border-top: 16px solid blue;*/
     /*border-right: 16px solid green;*/
     /*border-bottom: 16px solid red;*/

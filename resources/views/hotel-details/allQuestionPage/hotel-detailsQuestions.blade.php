@@ -619,34 +619,6 @@ if ($total == 0)
         for (i = 0; i < rateQuestion.length; i++)
             rateQuestionAns[i] = 2;
 
-        if (placeMode == "hotel") {
-            hotelDetails = '{{route('hotelDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';
-            hotelDetailsInBookMarkMode = '{{route('hotelDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'bookMark'])}}';
-            hotelDetailsInAskQuestionMode = '{{route('hotelDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'question'])}}';
-            hotelDetailsInAnsMode = '{{route('hotelDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'ans'])}}';
-            hotelDetailsInSaveToTripMode = '{{route('hotelDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'saveToTrip'])}}';
-        }
-        else if (placeMode == "restaurant") {
-            hotelDetails = '{{route('restaurantDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';
-            hotelDetailsInBookMarkMode = '{{route('restaurantDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'bookMark'])}}';
-            hotelDetailsInAskQuestionMode = '{{route('restaurantDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'question'])}}';
-            hotelDetailsInAnsMode = '{{route('restaurantDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'ans'])}}';
-            hotelDetailsInSaveToTripMode = '{{route('restaurantDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'saveToTrip'])}}';
-        }
-        else if (placeMode == "amaken") {
-            hotelDetails = '{{route('amakenDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';
-            hotelDetailsInBookMarkMode = '{{route('amakenDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'bookMark'])}}';
-            hotelDetailsInAskQuestionMode = '{{route('amakenDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'question'])}}';
-            hotelDetailsInAnsMode = '{{route('amakenDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'ans'])}}';
-            hotelDetailsInSaveToTripMode = '{{route('amakenDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'saveToTrip'])}}';
-        }
-        else {
-            hotelDetails = '{{route('majaraDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';
-            hotelDetailsInBookMarkMode = '{{route('majaraDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'bookMark'])}}';
-            hotelDetailsInAskQuestionMode = '{{route('majaraDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'question'])}}';
-            hotelDetailsInAnsMode = '{{route('majaraDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'ans'])}}';
-            hotelDetailsInSaveToTripMode = '{{route('majaraDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'saveToTrip'])}}';
-        }
     </script>
 
     <script src="{{URL::asset('js/hotelDetails/hoteldetails_1.js')}}"></script>
@@ -890,7 +862,7 @@ if ($total == 0)
                 hotelMap[i].kind = 4;
                 hotelMap[i].url = hotelDetail.url;
                 hotelMap[i].first = true;
-                hotelMap[i].pic = "{{URL::asset('images/loading.svg')}}";
+                hotelMap[i].pic = "{{URL::asset('images/loading.gif')}}";
                 availableHotelIdMarker[i] = hotelMap[i].id;
                 numOfNewHotel = hotelMap.length;
                 clickable(markersHotel[i], hotelMap[i]);
@@ -917,7 +889,7 @@ if ($total == 0)
                 restMap[i].kind = 3;
                 restMap[i].url = restDetail.url;
                 restMap[i].first = true;
-                restMap[i].pic = "{{URL::asset('images/loading.svg')}}";
+                restMap[i].pic = "{{URL::asset('images/loading.gif')}}";
                 numOfNewRest = restMap.length;
                 availableRestIdMarker[i] = restMap[i].id;
                 clickable(marker, restMap[i]);
@@ -960,7 +932,7 @@ if ($total == 0)
                 amakenMap[i].first = true;
                 numOfNewAmaken = amakenMap.length;
                 availableAmakenlIdMarker[i] = amakenMap[i].id;
-                amakenMap[i].pic = "{{URL::asset('images/loading.svg')}}";
+                amakenMap[i].pic = "{{URL::asset('images/loading.gif')}}";
                 clickable(marker, amakenMap[i]);
                 if (amakenMap[i].mooze == 1)
                     markersMus[markersMus.length] = marker;
@@ -994,7 +966,7 @@ if ($total == 0)
                 majaraMap[i].kind = 6;
                 majaraMap[i].url = majaraDetail;
                 majaraMap[i].first = true;
-                majaraMap[i].pic = "{{URL::asset('images/loading.svg')}}";
+                majaraMap[i].pic = "{{URL::asset('images/loading.gif')}}";
                 majaraMap[i].address = majaraMap[i].dastresi;
                 numOfNewMajara = majaraMap.length;
                 availableMajaraIdMarker[i] = majaraMap[i].id;
@@ -1163,7 +1135,7 @@ if ($total == 0)
                     // classRatingHover.content = '5';
                     break;
             }
-            var hoverContent = "<div id='myTotalPane'><img id='itemPicInExtendedMap' src=" + '{{URL::asset('images/loading.svg')}}' + " >" +
+            var hoverContent = "<div id='myTotalPane'><img id='itemPicInExtendedMap' src=" + '{{URL::asset('images/loading.gif')}}' + " >" +
                 "<a href='" + name.url + ">" + name.name + "</a>" +
                 "<div class='rating'>" +
                 "<span id='rateNum1' class='overallRating'> </span>" +
@@ -1812,18 +1784,6 @@ if ($total == 0)
 
     <script>
         $(document).ready(function () {
-            $('.login-button').click(function () {
-                var url;
-                if (placeMode == "hotel")
-                    url = '{{route('hotelDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';
-                else if (placeMode == "amaken")
-                    url = '{{route('amakenDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';
-                else
-                    url = '{{route('restaurantDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';
-                $(".dark").show();
-                showLoginPrompt(url);
-            });
-
             $('#share_pic_mobile').click(function () {
                 if ($('#share_box_mobile').is(":hidden")) {
                     $('#share_box_mobile').show();

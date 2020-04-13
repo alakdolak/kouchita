@@ -238,7 +238,13 @@ a:link {
     background-color: #000000c7;
 }
 .loader_200 {
-    width: 200px !important;
-    height: 200px !important;
-    background-size: 200px 200px;
+    width: 260px !important;
+    height: 290px !important;
+    background-size: 300px;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fcc15690;
 }

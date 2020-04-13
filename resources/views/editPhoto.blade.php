@@ -24,7 +24,7 @@
 
                 <div class="currentAvatar">
                     <div class="circularAvWrap">
-                        <img id="secondaryContainer" src="{{URL::asset($photo)}}" class="circularAvatar" alt="Photo"/>
+                        <img id="secondaryContainer" src="{{$photo}}" class="circularAvatar" alt="Photo"/>
                     </div>
                     <div class="description">
                         <span>عکس صفحه کاربری شما</span>
@@ -89,7 +89,7 @@
 
                         <div class="avatarPreview">
                             <div class="circularAvWrap">
-                                <img id="mainContainer" src="{{URL::asset($photo)}}" class="circularAvatar"/>
+                                <img id="mainContainer" src="{{$photo}}" class="circularAvatar"/>
                             </div>
 
                         </div>

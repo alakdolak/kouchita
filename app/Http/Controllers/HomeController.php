@@ -555,100 +555,6 @@ class HomeController extends Controller
         return view('cityPage', compact(['place', 'kind', 'localStorageData', 'locationName', 'post', 'map', 'allPlaces', 'allAmaken', 'allHotels', 'allRestaurant', 'allMajara', 'allMahaliFood', 'allSogatSanaie', 'reviews', 'topPlaces']));
     }
 
-    public function getCityOpinion()
-    {
-        $city = Cities::find($_POST['cityId']);
-        $opinion = array();
-        $placeId = Place::where('name', 'اماکن')->orwhere('name', 'رستوران')->orwhere('name', 'هتل')->get();
-        $opinionKindId = Activity::where('name', 'نظر')->first();
-        $rateActivityId = Activity::whereName('امتیاز')->first()->id;
-
-        foreach ($placeId as $item){
-            $table = '';
-
-            if($item->name == 'اماکن')
-                $table = 'amaken';
-            elseif($item->name == 'هتل')
-                $table = 'hotels';
-            elseif($item->name == 'رستوران')
-                $table = 'restaurant';
-
-            $places = DB::select('SELECT * FROM `log` INNER JOIN `' . $table . '` ON ' . $table . '.id = placeId AND ' . $table . '.cityId = ' . $city->id . ' WHERE kindPlaceId = ' . $item->id . ' and confirm = 1 and activityId = ' . $opinionKindId->id);
-            $opinion = array_merge($opinion, $places);
-        }
-        for ($i = 0; $i < count($opinion); $i++){
-            for($j = $i+1; $j < count($opinion); $j++){
-                if($opinion[$i]->date < $opinion[$j]->date){
-                    $d  = $opinion[$i];
-                    $opinion[$i] = $opinion[$j];
-                    $opinion[$j] = $d;
-                }
-            }
-        }
-
-        $opinion = array_slice($opinion,0 ,4);
-        foreach ($opinion as $log) {
-            $log->id = LogModel::where('subject', $log->subject)->where('date', $log->date)->first()->id;
-
-            $condition = ["activityId" => $opinionKindId, 'visitorId' => $log->visitorId];
-            $log->comments = LogModel::where($condition)->count();
-
-            $condition = ["activityId" => $rateActivityId, 'visitorId' => $log->visitorId,
-                'placeId' => $log->placeId, 'kindPlaceId' => $log->kindPlaceId];
-            $logId = LogModel::where($condition)->first()->id;
-            $log->rate = ceil(DB::select('Select AVG(rate) as avgRate from userOpinions WHERE logId = ' . $logId)[0]->avgRate);
-            $user = User::whereId($log->visitorId);
-            $log->visitorId = $user->username;
-
-            $userPic = $user->picture;
-
-            if (count(explode('.', $userPic)) == 2) {
-                $log->visitorPic = URL::asset('userPhoto/' . $userPic);
-            } else {
-                $defaultPic = DefaultPic::whereId($userPic);
-                if ($defaultPic == null)
-                    $defaultPic = DefaultPic::first();
-                $log->visitorPic = URL::asset('defaultPic/' . $defaultPic->name);
-            }
-
-            $condition = ["logId" => $log->id, "like_" => 1];
-//            if($log->id == 8)
-//                dd($log);
-            $log->likes = OpOnActivity::where($condition)->count();
-            $condition = ["logId" => $log->id, "dislike" => 1];
-            $log->dislikes = OpOnActivity::where($condition)->count();
-
-            if (!empty($log->pic))
-                $log->pic = URL::asset('userPhoto/comments/' . $log->kindPlaceId . '/' . $log->pic);
-            else
-                $log->pic = -1;
-
-            $log->date = convertDate($log->date);
-            $log->kindPlaceName = Place::find($log->kindPlaceId)->name;
-
-            if($log->kindPlaceName == 'اماکن'){
-                $fileName = 'amaken';
-                $urlKind = 'amakenDetails';
-            }
-            elseif($log->kindPlaceName == 'هتل'){
-                $fileName = 'hotels';
-                $urlKind = 'hotelDetails';
-            }
-            elseif($log->kindPlaceName == 'رستوران'){
-                $fileName = 'restaurant';
-                $urlKind = 'restaurantDetails';
-            }
-
-            $log->url = route($urlKind, ['placeId' => $log->placeId, 'placeName' => $log->name]);
-        }
-
-        $picKindId = Activity::where('name', 'عکس')->first();
-
-        $people_pic = [1];
-
-        echo json_encode([$opinion, $people_pic]);
-    }
-
     public function abbas()
     {
         return view('addPlaceByUser');
@@ -2015,25 +1921,13 @@ class HomeController extends Controller
         }
 
         for ($i = 0; $i < count($result); $i++) {
-            switch ($result[$i]['kindPlaceId']) {
-                case -1:
-                    $result[$i]['url'] = -1;
-                    break;
-                case 1:
-                    $result[$i]['url'] = route('amakenDetails', ['placeId' => $result[$i]['placeId'], 'kindPlaceId' => $result[$i]['kindPlaceId']]);
-                    $place = Amaken::whereId($result[$i]['placeId']);
-                    $targetFile = URL::asset('_images/amaken/' . $place->file . '/f-1.jpg');
-                    break;
-                case 3:
-                    $result[$i]['url'] = route('restaurantDetails', ['placeId' => $result[$i]['placeId'], 'kindPlaceId' => $result[$i]['kindPlaceId']]);
-                    $place = Restaurant::whereId($result[$i]['placeId']);
-                    $targetFile = URL::asset('_images/restaurant/' . $place->file . '/f-1.jpg');
-                    break;
-                case 4:
-                    $result[$i]['url'] = route('hotelDetails', ['placeId' => $result[$i]['placeId'], 'kindPlaceId' => $result[$i]['kindPlaceId']]);
-                    $place = Hotel::whereId($result[$i]['placeId']);
-                    $targetFile = URL::asset('_images/hotels/' . $place->file . '/f-1.jpg');
-                    break;
+            if($result[$i]['kindPlaceId'] == -1)
+                $result[$i]['url'] = -1;
+            else{
+                $kindPlace = Place::find($result[$i]['kindPlaceId']);
+                $place = \DB::table($kindPlace->tableName)->find($result[$i]['placeId']);
+                $result[$i]['url'] = route('show.place.details', ['kindPlaceName' => $kindPlace->fileName, 'slug' => $place->slug]);
+                $targetFile = URL::asset('_images/' . $kindPlace->fileName . '/' . $place->file . '/f-1.jpg');
             }
 
             if (isset($targetFile) && $targetFile != "") {

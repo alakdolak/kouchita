@@ -5,7 +5,7 @@
     <meta property="og:type" content="website" />
     <title>
         کوچیتا |
-        {{$kindPlace->title}}
+        {{$meta['title']}}
         @if($mode != 'country')
             @if($mode == 'state')
                 استان

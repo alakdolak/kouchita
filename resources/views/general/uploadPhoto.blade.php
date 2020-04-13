@@ -145,7 +145,7 @@
 
                          <div id="photographerLoadingPic" class="progressScreen infoScreen hidden">
                              <div class="inner">
-                                 <img src="{{URL::asset('images/loading.svg')}}">
+                                 <img src="{{URL::asset('images/loading.gif')}}">
                              </div>
                          </div>
 

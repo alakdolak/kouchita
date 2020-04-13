@@ -24,12 +24,6 @@ $kindPlaceId = 10; ?>
         var getStates = '{{route('getStates')}}';
         var getGoyesh = '{{route('getGoyesh')}}';
         var imageBasePath = '{{URL::asset('images')}}';
-        var getLastRecentlyMainPath = '{{route('getLastRecentlyMain')}}';
-        var getAdviceMainPath = '{{route('getAdviceMain')}}';
-        var getHotelsMainPath = '{{route('getHotelsMain')}}';
-        var getAmakensMainPath = '{{route('getAmakensMain')}}';
-        var getRestaurantsMainPath = '{{route('getRestaurantsMain')}}';
-        var getFoodsMainPath = '{{route('getFoodsMain')}}';
         var getCitiesDir = "{{route('getCitiesDir')}}";
         var checkOpen = false;
 
@@ -302,7 +296,7 @@ $kindPlaceId = 10; ?>
         }
 
         .loader {
-            background-image: url("{{URL::asset('images/loading.svg')}}");
+            background-image: url("{{URL::asset('images/loading.gif')}}");
             width: 100px;
             height: 100px;
         }

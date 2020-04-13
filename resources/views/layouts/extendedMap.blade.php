@@ -565,7 +565,7 @@
                 // classRatingHover.content = '5';
                 break;
         }
-        var hoverContent = "<div id='myTotalPane'><img id='itemPicInExtendedMap' src=" + '{{URL::asset('images/loading.svg')}}' + " >" +
+        var hoverContent = "<div id='myTotalPane'><img id='itemPicInExtendedMap' src=" + '{{URL::asset('images/loading.gif')}}' + " >" +
             "<a href='" + name.url + ">" + name.name + "</a>" +
             "<div class='rating'>" +
             "<span id='rateNum1' class='overallRating'> </span>" +
@@ -662,7 +662,7 @@
             hotelMap[i].kind = 4;
             hotelMap[i].url = hotelDetail.url;
             hotelMap[i].first = true;
-            hotelMap[i].pic = "{{URL::asset('images/loading.svg')}}";
+            hotelMap[i].pic = "{{URL::asset('images/loading.gif')}}";
             availableHotelIdMarker[i] = hotelMap[i].id;
             numOfNewHotel = hotelMap.length;
             clickable(markersHotel[i], hotelMap[i]);
@@ -689,7 +689,7 @@
             restMap[i].kind = 3;
             restMap[i].url = restDetail.url;
             restMap[i].first = true;
-            restMap[i].pic = "{{URL::asset('images/loading.svg')}}";
+            restMap[i].pic = "{{URL::asset('images/loading.gif')}}";
             numOfNewRest = restMap.length;
             availableRestIdMarker[i] = restMap[i].id;
             clickable(marker, restMap[i]);
@@ -732,7 +732,7 @@
             amakenMap[i].first = true;
             numOfNewAmaken = amakenMap.length;
             availableAmakenlIdMarker[i] = amakenMap[i].id;
-            amakenMap[i].pic = "{{URL::asset('images/loading.svg')}}";
+            amakenMap[i].pic = "{{URL::asset('images/loading.gif')}}";
             clickable(marker, amakenMap[i]);
             if (amakenMap[i].mooze == 1)
                 markersMus[markersMus.length] = marker;
@@ -766,7 +766,7 @@
             majaraMap[i].kind = 6;
             majaraMap[i].url = majaraDetail;
             majaraMap[i].first = true;
-            majaraMap[i].pic = "{{URL::asset('images/loading.svg')}}";
+            majaraMap[i].pic = "{{URL::asset('images/loading.gif')}}";
             majaraMap[i].address = majaraMap[i].dastresi;
             numOfNewMajara = majaraMap.length;
             availableMajaraIdMarker[i] = majaraMap[i].id;
