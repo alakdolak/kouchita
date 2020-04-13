@@ -15,11 +15,11 @@
     var compareList = [];
 
     $(document).ready(function () {
-        elemRect = document.getElementById('addToFilterCityBtn').getBoundingClientRect();
-        bodyRect = document.body.getBoundingClientRect();
-        windowW = screen.width;
-        element = document.getElementById('filters').getBoundingClientRect();
-        destY = element.top + 55;
+        // elemRect = document.getElementById('addToFilterCityBtn').getBoundingClientRect();
+        // bodyRect = document.body.getBoundingClientRect();
+        // windowW = screen.width;
+        // element = document.getElementById('filters').getBoundingClientRect();
+        // destY = element.top + 55;
     });
 
     function movement() {
@@ -618,11 +618,11 @@
                             </div>
                             <div class='ui_input_checkbox' style="cursor: pointer;">
                                 <img data-val="{{(isset($kindPlaceId) && ($kindPlaceId == 6 || $kindPlaceId == 0)) || !isset($kindPlaceId)  ? 'on' : 'off'}}" class="lantern" id="majaraFilter" width="40px" height="80px" src="{{(isset($kindPlaceId) && ($kindPlaceId == 6 || $kindPlaceId == 0)) || !isset($kindPlaceId) ? $onLampImg : $offLampImg}}">
-                                <div>ماجراجویی</div>
+                                <div>طبیعت‌گردی</div>
                             </div>
                             <div class='ui_input_checkbox' style="cursor: pointer;">
                                 <img data-val="{{(isset($kindPlaceId) && ($kindPlaceId == 10 || $kindPlaceId == 0)) || !isset($kindPlaceId)  ? 'on' : 'off'}}" class="lantern" id="sogatSanaieFilter" width="40px" height="80px" src="{{(isset($kindPlaceId) && ($kindPlaceId == 10 || $kindPlaceId == 0)) || !isset($kindPlaceId) ? $onLampImg : $offLampImg}}">
-                                <div>صنایع دستی</div>
+                                <div>صنایع‌دستی</div>
                             </div>
                             <div class='ui_input_checkbox' style="cursor: pointer;">
                                 <img data-val="{{(isset($kindPlaceId) && ($kindPlaceId == 10 || $kindPlaceId == 0)) || !isset($kindPlaceId)  ? 'on' : 'off'}}" class="lantern" id="sogatSanaieFilter" width="40px" height="80px" src="{{(isset($kindPlaceId) && ($kindPlaceId == 10 || $kindPlaceId == 0)) || !isset($kindPlaceId) ? $onLampImg : $offLampImg}}">

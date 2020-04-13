@@ -344,7 +344,7 @@ if(Auth::check()) {
                                                 <span class="unscoped global-nav-link ui_tab color-whiteImp" onclick="openMainSearch(1)// in mainSearch.blade.php">جاذبه‌</span>
                                             </li>
                                             <li>
-                                                <span class="unscoped global-nav-link ui_tab color-whiteImp" onclick="openMainSearch(10)// in mainSearch.blade.php">سوغات و صنایع دستی</span>
+                                                <span class="unscoped global-nav-link ui_tab color-whiteImp" onclick="openMainSearch(10)// in mainSearch.blade.php">سوغات و صنایع‌دستی</span>
                                             </li>
                                             <li>
                                                 <span class="unscoped global-nav-link ui_tab color-whiteImp" onclick="openMainSearch(11)// in mainSearch.blade.php">غذای محلی‌</span>
@@ -616,7 +616,7 @@ if(Auth::check()) {
                             <div class="sidebar-nav-close">
                                 <div class="ui_icon times"></div>
                             </div>
-                            <a href="/" class="global-nav-logo"><img src='{{URL::asset('images/logo.png')}}' alt="کوچیتا" class="global-nav-img"/></a>
+                            <a href="/" class="global-nav-logo"><img src='{{URL::asset('images/icons/logo.png')}}' alt="کوچیتا" class="global-nav-img"/></a>
                         </div>
                         <div class="sidebar-nav-profile-container">
                             @if(Auth::check())

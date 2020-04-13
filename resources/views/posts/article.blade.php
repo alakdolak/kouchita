@@ -214,10 +214,14 @@
                             <span class="showCommentsIconFeedback" onclick="showPostsComments(0)"></span>
                             <span class="mg-rt-32 cursor-pointer" onclick="showPostsComments(0)">مشاهده نظرها</span>
                         </div>
-                        <div class="postsActionsChoices postShareChoice col-xs-6 col-md-3">
+                        <div id="share_pic" class="postsActionsChoices postShareChoice col-xs-6 col-md-3">
                             <span class="commentsShareIconFeedback"></span>
                             <span class="mg-rt-32 cursor-pointer">اشتراک‌گذاری</span>
+                            @include('layouts.shareBox')
+
                         </div>
+
+
                     </div>
                     <div class="quantityOfLikes">
                         <span id="countLike">{{$post->like}}</span>

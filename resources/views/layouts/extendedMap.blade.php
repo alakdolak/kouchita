@@ -254,6 +254,7 @@
         var windowWidth = $(window).width();
         if(windowWidth <= 767){
             window.location.href = 'geo:{{$place->C}},{{$place->D}}';
+            {{--window.open("https://maps.google.com/maps?daddr={{$place->C}},{{$place->D}}&amp;ll=");--}}
             return;
         }
 

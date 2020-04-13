@@ -112,8 +112,8 @@
                                 <div>اشتراک صفحه در توییتر</div>
                             </a>
                             <a target="_blank" class="link mg-tp-5" {{($config->whatsAppFollow) ? 'rel="nofollow"' : ''}}
-                                    {{--    href="https://whatsApp.com/share?url={{s mg-tp-5tr_replace('%20', '', Request::url())}}"--}}
-                            >
+                                href="https://whatsApp.com/share?url={{str_replace('%20', '', Request::url())}}">
+
                                 <img src="{{URL::asset("images/shareBoxImg/whatsapp.png")}}" class="display-inline-block float-right">
                                 <div>اشتراک صفحه واتس اپ</div>
                             </a>

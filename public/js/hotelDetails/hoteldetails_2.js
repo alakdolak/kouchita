@@ -38,7 +38,7 @@ $(window).ready(function () {
 
     checkOverFlow();
     $('.menu').addClass('original').clone().insertAfter('.menu').addClass('cloned').css('position', 'fixed').css('top', '0').css('margin-top', '0').css('z-index', '500').removeClass('original').hide();
-    scrollIntervalID = setInterval(stickIt, 10);
+    // scrollIntervalID = setInterval(stickIt, 10);
     $(".close_album").click(function () {
         $("#photo_album_span").hide();
     });
@@ -545,7 +545,12 @@ function questions() {
             'page': currPageQuestions
         },
         success: function (response) {
-            showQuestions(JSON.parse(response));
+            try{
+                showQuestions(JSON.parse(response));
+            }
+            catch{
+
+            }
         }
     });
 }
@@ -1020,7 +1025,12 @@ function filter() {
             'page': currPage
         },
         success: function (response) {
-            showComments(JSON.parse(response));
+            try {
+                showComments(JSON.parse(response));
+            }
+            catch{
+
+            }
         }
     });
 }

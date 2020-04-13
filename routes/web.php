@@ -3,6 +3,7 @@
 use App\models\ConfigModel;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Route;
+
 Route::get('resizePostImagesPage', function(){
     return view('notUse.compressImage');
 });
@@ -208,14 +209,6 @@ Route::group(array('middleware' => ['throttle:30']), function () {
 
 });
 
-Route::group(array('middleware' => [ 'nothing']), function () {
-//    'throttle:3,5',
-    Route::post('login', array('as' => 'login', 'uses' => 'HomeController@mainDoLogin'));
-
-    Route::post('login2', array('as' => 'login2', 'uses' => 'HomeController@doLogin'));
-
-});
-
 Route::group(array('middleware' => ['throttle:30', 'nothing']), function () {
 
     Route::post('getAdviceMain', array('as' => 'getAdviceMain', 'uses' => 'PlaceController@getAdviceMain'));
@@ -238,34 +231,6 @@ Route::group(array('middleware' => ['throttle:30', 'nothing']), function () {
     Route::get('alaki/{tripId}', array('as' => 'alaki', 'uses' => 'HomeController@alaki'));
 
     Route::get('printPage/{tripId}', array('as' => 'printPage', 'uses' => 'HomeController@printPage'));
-
-    Route::get('login', 'HomeController@login');
-
-    Route::post('checkEmail', array('as' => 'checkEmail', 'uses' => 'HomeController@checkEmail'));
-
-    Route::post('checkUserName', array('as' => 'checkUserName', 'uses' => 'HomeController@checkUserName'));
-
-    Route::post('registerAndLogin', array('as' => 'registerAndLogin', 'uses' => 'HomeController@registerAndLogin'));
-
-    Route::post('registerAndLogin2', array('as' => 'registerAndLogin2', 'uses' => 'HomeController@registerAndLogin2'));
-
-    Route::post('retrievePasByEmail', array('as' => 'retrievePasByEmail', 'uses' => 'HomeController@retrievePasByEmail'));
-
-    Route::post('retrievePasByPhone', array('as' => 'retrievePasByPhone', 'uses' => 'HomeController@retrievePasByPhone'));
-
-    Route::post('checkPhoneNum', array('as' => 'checkPhoneNum', 'uses' => 'HomeController@checkPhoneNum'));
-
-    Route::post('checkActivationCode', array('as' => 'checkActivationCode', 'uses' => 'HomeController@checkActivationCode'));
-
-    Route::post('resendActivationCode', array('as' => 'resendActivationCode', 'uses' => 'HomeController@resendActivationCode'));
-
-    Route::post('resendActivationCodeForget', array('as' => 'resendActivationCodeForget', 'uses' => 'HomeController@resendActivationCodeForget'));
-
-    Route::post('checkReCaptcha', array('as' => 'checkReCaptcha', 'uses' => 'HomeController@checkReCaptcha'));
-
-    Route::get('loginWithGoogle', array('as' => 'loginWithGoogle', 'uses' => 'HomeController@loginWithGoogle'));
-
-    Route::get('logout', array('as' => 'logout', 'uses' => 'HomeController@logout'));
 
     Route::get('soon', array('as' => 'soon', 'uses' => 'HomeController@soon'));
 
@@ -403,6 +368,44 @@ Route::group(array('middleware' => ['throttle:30', 'nothing', 'auth', 'operatorA
     Route::get('getReports', array('as' => 'getReports', 'uses' => 'ReportController@getReports'));
 
     Route::get('getReports/{page}', array('as' => 'getReports2', 'uses' => 'ReportController@getReports'));
+});
+
+
+//auth controller
+Route::group(array('middleware' => ['nothing', 'throttle:30']), function(){
+    Route::get('login', 'UserLoginController@login');
+
+    Route::post('login', array('as' => 'login', 'uses' => 'UserLoginController@mainDoLogin'));
+
+    Route::post('checkLogin', array('as' => 'checkLogin', 'uses' => 'UserLoginController@checkLogin'));
+
+    Route::post('login2', array('as' => 'login2', 'uses' => 'UserLoginController@doLogin'));
+
+    Route::post('checkEmail', array('as' => 'checkEmail', 'uses' => 'UserLoginController@checkEmail'));
+
+    Route::post('checkUserName', array('as' => 'checkUserName', 'uses' => 'UserLoginController@checkUserName'));
+
+    Route::post('registerAndLogin', array('as' => 'registerAndLogin', 'uses' => 'UserLoginController@registerAndLogin'));
+
+    Route::post('registerAndLogin2', array('as' => 'registerAndLogin2', 'uses' => 'UserLoginController@registerAndLogin2'));
+
+    Route::post('retrievePasByEmail', array('as' => 'retrievePasByEmail', 'uses' => 'UserLoginController@retrievePasByEmail'));
+
+    Route::post('retrievePasByPhone', array('as' => 'retrievePasByPhone', 'uses' => 'UserLoginController@retrievePasByPhone'));
+
+    Route::post('checkPhoneNum', array('as' => 'checkPhoneNum', 'uses' => 'UserLoginController@checkPhoneNum'));
+
+    Route::post('checkActivationCode', array('as' => 'checkActivationCode', 'uses' => 'UserLoginController@checkActivationCode'));
+
+    Route::post('resendActivationCode', array('as' => 'resendActivationCode', 'uses' => 'UserLoginController@resendActivationCode'));
+
+    Route::post('resendActivationCodeForget', array('as' => 'resendActivationCodeForget', 'uses' => 'UserLoginController@resendActivationCodeForget'));
+
+    Route::post('checkReCaptcha', array('as' => 'checkReCaptcha', 'uses' => 'UserLoginController@checkReCaptcha'));
+
+    Route::get('loginWithGoogle', array('as' => 'loginWithGoogle', 'uses' => 'UserLoginController@loginWithGoogle'));
+
+    Route::get('logout', array('as' => 'logout', 'uses' => 'UserLoginController@logout'));
 });
 
 //detailsPage
@@ -717,8 +720,6 @@ Route::group(array('middleware' => 'auth'), function () {
     });
 });
 
-
-Route::post('checkLogin', array('as' => 'checkLogin', 'uses' => 'HomeController@checkLogin'));
 
 Route::get('emailtest', 'HomeController@emailtest');
 

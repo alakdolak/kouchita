@@ -1,6 +1,7 @@
 <?php
 $config = \App\models\ConfigModel::first();
     if(auth()->check()){
+        $user = Auth::user();
         $userLevelFooter = auth()->user()->getUserNearestLevel();
         $userTotalPointFooter = auth()->user()->getUserTotalPoint();
 
@@ -858,7 +859,7 @@ $config = \App\models\ConfigModel::first();
                             <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/3/" . $locationName['kindState'] . "/" . $locationName['cityNameUrl'])}}'">رستوران‌های {{$locationName['cityName']}}</div>
                         </div>
                         <div class="pSC_boxOfCityDetails">
-                            <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/10/" . $locationName['kindState'] . "/" . $locationName['cityNameUrl'])}}'">صنایع دستی‌های {{$locationName['cityName']}}</div>
+                            <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/10/" . $locationName['kindState'] . "/" . $locationName['cityNameUrl'])}}'">صنایع‌دستی‌های {{$locationName['cityName']}}</div>
                             <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/11/" . $locationName['kindState'] . "/" . $locationName['cityNameUrl'])}}'">غذاهای محلی‌ {{$locationName['cityName']}}</div>
                         </div>
                     </div>
@@ -942,7 +943,7 @@ $config = \App\models\ConfigModel::first();
 
                                     <p class="since">
                                         <b>
-    {{--                                        {{(!empty($user->first_name)) ? $user->first_name : $user->username}}--}}سینا عادلی
+                                            {{isset($user->first_name) ? $user->first_name : $user->username}}
                                         </b>
                                     </p>
                                     <div class="ageSince">

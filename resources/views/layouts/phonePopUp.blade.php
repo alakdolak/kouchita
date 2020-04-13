@@ -108,12 +108,12 @@
                 </div>
                 <div class="col-xs-4 squareDiv" onclick="searchModePhone = 1; $('#phoneSearchPopUp').removeClass('hidden');">
                     <div class="phoneIcon sanaye"></div>
-                    <div class="textIcon">صنایع دستی</div>
+                    <div class="textIcon">صنایع‌دستی</div>
                 </div>
 
                 <div class="col-xs-4 squareDiv">
                     <div class="phoneIcon majara" onclick="searchModePhone = 1; $('#phoneSearchPopUp').removeClass('hidden');"></div>
-                    <div class="textIcon">ماجراجویی</div>
+                    <div class="textIcon">طبیعت‌گردی</div>
                 </div>
             </div>
             <div class="col-xs-12">

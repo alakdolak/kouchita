@@ -836,7 +836,7 @@
                 <span>بیش از</span>
                 <span>{{$count['sogatSanaie']}}</span>
             </div>
-            <div class="eachPartStatisticTitle">صنایع دستی</div>
+            <div class="eachPartStatisticTitle">صنایع‌دستی</div>
         </div>{{--
     --}}<div class="eachPartStatistic">
             <div class="eachPartStatisticIcons attractionStatisticIcon"></div>
