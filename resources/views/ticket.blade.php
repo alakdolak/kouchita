@@ -24,12 +24,6 @@ $kindPlaceId = 10; ?>
         var getStates = '{{route('getStates')}}';
         var getGoyesh = '{{route('getGoyesh')}}';
         var imageBasePath = '{{URL::asset('images')}}';
-        var getLastRecentlyMainPath = '{{route('getLastRecentlyMain')}}';
-        var getAdviceMainPath = '{{route('getAdviceMain')}}';
-        var getHotelsMainPath = '{{route('getHotelsMain')}}';
-        var getAmakensMainPath = '{{route('getAmakensMain')}}';
-        var getRestaurantsMainPath = '{{route('getRestaurantsMain')}}';
-        var getFoodsMainPath = '{{route('getFoodsMain')}}';
         var getCitiesDir = "{{route('getCitiesDir')}}";
         var checkOpen = false;
 

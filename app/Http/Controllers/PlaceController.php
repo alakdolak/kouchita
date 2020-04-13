@@ -2917,163 +2917,6 @@ class PlaceController extends Controller {
 
     }
 
-    public function getAdviceMain() {
-
-//        if (Cache::has('suggestedPlaces')) {
-//            echo \GuzzleHttp\json_encode(Cache::get('suggestedPlaces'));
-//            return;
-//        }
-
-        $activityId = Activity::whereName('نظر')->first()->id;
-        $places = SpecialAdvice::where('cityId', 0)->get();
-
-        for ($i = 0; $i < count($places); $i++) {
-            $kindPlaceIdTmp = $places[$i]->kindPlaceId;
-            switch ($kindPlaceIdTmp) {
-                case 1:
-                default:
-                    $places[$i] = Amaken::whereId($places[$i]->placeId);
-
-                    if (file_exists((__DIR__ . '/../../../../assets/_images/amaken/' . $places[$i]->file . '/f-1.jpg')))
-                        $places[$i]->pic = URL::asset('_images/amaken/' . $places[$i]->file . '/f-1.jpg');
-                    else
-                        $places[$i]->pic = URL::asset('_images/nopic/blank.jpg');
-
-                    $places[$i]->url = route('amakenDetails', ['placeId' => $places[$i]->id, 'placeName' => $places[$i]->name]);
-                    break;
-                case 3:
-                    $places[$i] = Restaurant::whereId($places[$i]->placeId);
-
-                    if (file_exists(__DIR__ . '/../../../../assets/_images/restaurant/' . $places[$i]->file . '/f-1.jpg'))
-                        $places[$i]->pic = URL::asset('_images/restaurant/' . $places[$i]->file . '/f-1.jpg');
-                    else
-                        $places[$i]->pic = URL::asset('_images/nopic/blank.jpg');
-
-                    $places[$i]->url = route('restaurantDetails', ['placeId' => $places[$i]->id, 'placeName' => $places[$i]->name]);
-                    break;
-                case 4:
-                    $places[$i] = Hotel::whereId($places[$i]->placeId);
-                    if (file_exists((__DIR__ . '/../../../../assets/_images/hotels/' . $places[$i]->file . '/f-1.jpg')))
-                        $places[$i]->pic = URL::asset('_images/hotels/' . $places[$i]->file . '/f-1.jpg');
-                    else
-                        $places[$i]->pic = URL::asset('_images/nopic/blank.jpg');
-
-                    $places[$i]->url = route('hotelDetails', ['placeId' => $places[$i]->id, 'placeName' => $places[$i]->name]);
-                    break;
-            }
-
-            $places[$i]->rate = getRate($places[$i]->id, $kindPlaceIdTmp)[1];
-            $condition = ['placeId' => $places[$i]->id, 'kindPlaceId' => $kindPlaceIdTmp,
-                'confirm' => 1, 'activityId' => $activityId];
-            $places[$i]->reviews = LogModel::where($condition)->count();
-        }
-        foreach ($places as $itr) {
-
-            if ($itr == null) {
-                $itr = null;
-                continue;
-            }
-
-            $itr->present = true;
-
-            if ($itr->kindPlaceId != 8) {
-                $city = Cities::whereId($itr->cityId);
-                if ($city == null) {
-                    $itr->present = false;
-                    continue;
-
-                }
-
-                $itr->city = $city->name;
-                $itr->state = State::whereId($city->stateId)->name;
-            } else {
-                $city = State::whereId($itr->stateId);
-                if ($city == null) {
-                    $itr = null;
-                    continue;
-                }
-                $itr->state = $itr->city = $city->name;
-            }
-        }
-
-        Cache::add('suggestedPlaces', $places, 60 * 24 * 30);
-
-        echo json_encode($places);
-    }
-
-    public function getAdviceCity()
-    {
-        $city = Cities::find($_POST['cityId']);
-        $special = SpecialAdvice::where('cityId', $city->id)->get();
-        $place1 = array();
-
-        foreach ($special as $item) {
-
-            $kindPlaceId = $item->kindPlaceId;
-            $kindPlace = Place::find($kindPlaceId);
-
-            if($kindPlace->name == 'اماکن'){
-                $fileName = 'amaken';
-                $urlKind = 'amakenDetails';
-                $place = Amaken::select(['name', 'id', 'cityId', 'file', 'pic_1'])->find($item->placeId);
-            }
-            elseif($kindPlace->name == 'هتل'){
-                $fileName = 'hotels';
-                $urlKind = 'hotelDetails';
-                $place = Hotel::select(['name', 'id', 'cityId', 'file', 'pic_1'])->find($item->placeId);
-            }
-            elseif($kindPlace->name == 'رستوران'){
-                $fileName = 'restaurant';
-                $urlKind = 'restaurantDetails';
-                $place = Restaurant::select(['name', 'id', 'cityId', 'file', 'pic_1'])->find($item->placeId);
-            }
-            $activityId = Activity::whereName('نظر')->first()->id;
-
-            $condition = ['activityId' => $activityId, 'placeId' => $place->id, 'kindPlaceId' => $kindPlaceId];
-            $match = LogModel::where($condition)->count();
-
-            if (file_exists((__DIR__ . '/../../../../assets/_images/' . $fileName . '/' . $place->file . '/f-1.jpg')))
-                $place->pic = URL::asset('_images/' . $fileName . '/' . $place->file . '/f-1.jpg');
-            else
-                $place->pic = URL::asset('_images/nopic/blank.jpg');
-
-            $place->reviews = $match;
-            $place->rate = getRate($place->id, $kindPlaceId)[1];
-            $place->url = route($urlKind, ['placeId' => $place->id, 'placeName' => $place->name]);
-            $place->kindPlaceId = $kindPlaceId;
-
-            if ($place == null) {
-                $place = null;
-                continue;
-            }
-
-            $place->present = true;
-
-            if ($place->kindPlaceId != 8) {
-                $city = Cities::whereId($place->cityId);
-                if ($city == null) {
-                    $place->present = false;
-                    continue;
-
-                }
-
-                $place->city = $city->name;
-                $place->state = State::whereId($city->stateId)->name;
-            } else {
-                $city = State::whereId($place->stateId);
-                if ($city == null) {
-                    $itr = null;
-                    continue;
-                }
-                $place->state = $place->city = $city->name;
-            }
-
-            array_push($place1, $place);
-        }
-
-        echo json_encode($place1);
-    }
-
     public function showMainPage($mode = "mainPage") {
 
         switch ($mode) {
@@ -3770,50 +3613,6 @@ class PlaceController extends Controller {
             $meta = [];
             $mode = strtolower($mode);
 
-            switch ($kindPlaceId){
-                case 1:
-                    $placeMode = 'amaken';
-                    $kindPlace->title = ' جاذبه های';
-                    $meta['title'] = 'لیست-عکس-آدرس تمامی جاذبه های گردشگری و اماکن';
-                    $meta['keyword'] = 'کوچیتا';
-                    $meta['description'] = 'کوچیتا، سامانه جامع گردشگری ایران و شبکه اجتماعی گردشگران. اطلاعات اماکن و جاذبه ها، هتل ها، بوم گردی، ماجراجویی، آموزش سفر، فروشگاه صنایع دستی ، پادکست سفر';
-                    break;
-                case 3:
-                    $placeMode = 'restaurant';
-                    $kindPlace->title = ' رستوران های';
-                    $meta['title'] = 'رستوران ها | لیست رستوران های ایران - نقد و بررسی به همراه عکس از کاربران | کوچیتا';
-                    $meta['keyword'] = 'رستوران های ایران، رتبه بندی رستوران های ایران، نقد و بررسی رستوران های ایران، غذا در سفر';
-                    $meta['description'] = 'رستوران های ایران رو تو مسافرتت بشناس و برای رستورانایی که رفتی نقد بنویس و نظر بده. منوی رستورانا رو ببین و از الان رزروشون کن. ساعات کاری و قیمتاشون رو ببین. ';
-                    break;
-                case 4:
-                    $placeMode = 'hotel';
-                    $kindPlace->title = 'اقامتگاه های ';
-                    $meta['title'] = 'هتل ها | لیست قیمت – نقد و بررسی به همراه عکس از کاربران - بوم گردی ها | کوچیتا';
-                    $meta['keyword'] = 'لیست هتل های ایران، لیست قیمت هتل های ایران، نقد و بررسی هتل های ایران ، هتل های ارزان ایران، مقایسه ی هتل ها';
-                    $meta['description'] = 'آخرین وضعبت قیمت و رزور هتل ها را ببینید، نظرات و نقد های مشتریان هتل ها را همراه عکس ببینید و هتل ها را مقایسه کنید.بهترین قیمت رزرو در کوچیتا';
-                    break;
-                case 6:
-                    $placeMode = 'majara';
-                    $kindPlace->title = ' طبیعت گردی های ';
-                    $meta['title'] = 'ماجرا | لیست اماکن طبیعت گردی ایران– تجهیزات مورد نیاز | ماجراجویی خودتو آغاز کن';
-                    $meta['keyword'] = 'ماجراجویی در ایران، مکان های خاص ایران، گردشگری در ایران، می خوام برم سفر';
-                    $meta['description'] = 'اماکن ماجراجویی رو بشناس، سختی سفرشون رو ببین و تججهیزاتتو آماده کن. کوچیتا بهترین';
-                    break;
-                case 10:
-                    $placeMode = 'sogatSanaies';
-                    $kindPlace->title = 'سوغات و صنایع دستی ';
-                    $meta['title'] = 'لیست ، عکس و معرفی تمامی صنایع دستی و سوغات';
-                    $meta['keyword'] = 'لیست صنایع دستی و سوغات';
-                    $meta['description'] = 'کوچیتا، سامانه جامع گردشگری ایران و شبکه اجتماعی گردشگران. اطلاعات اماکن و جاذبه ها، هتل ها، بوم گردی، ماجراجویی، آموزش سفر، فروشگاه صنایع دستی ، پادکست سفر';
-                    break;
-                case 11:
-                    $placeMode = 'mahaliFood';
-                    $kindPlace->title = 'غذاهای محلی ';
-                    $meta['title'] = 'لیت ، عکس، دستورپخت غذاهای محلی';
-                    $meta['keyword'] = 'لیت ، عکس، دستورپخت غذاهای محلی';
-                    $meta['description'] = 'کوچیتا، سامانه جامع گردشگری ایران و شبکه اجتماعی گردشگران. اطلاعات اماکن و جاذبه ها، هتل ها، بوم گردی، ماجراجویی، آموزش سفر، فروشگاه صنایع دستی ، پادکست سفر';
-                    break;
-            }
             $kindPlaceId = $kindPlace->id;
 
             if($mode == 'country'){
@@ -3846,6 +3645,53 @@ class PlaceController extends Controller {
                 $n = ' شهر ' . $city->name;
                 $locationName = ["name" => $n, 'state' => $state->name, 'cityName' => $n, 'cityNameUrl' => $city->name, 'articleUrl' => $articleUrl, 'kindState' => 'city', 'kindPage' => 'list'];
             }
+
+
+            switch ($kindPlaceId){
+                case 1:
+                    $placeMode = 'amaken';
+                    $kindPlace->title = ' جاذبه های';
+                    $meta['title'] = 'عکس+آدرس لیست تمامی جاذبه های گردشگری و اماکن';
+                    $meta['keyword'] = 'جاذبه های گردشگری ' . $locationName['name'] . ' + جاهای دیدنی' . $locationName['name'] . ' + اماکن گردشگری' . $locationName['name'] . ' + اماکن تاریخی' . $locationName['name'];
+                    $meta['description'] = 'لیست تمامی جاذبه های گردشگری و تفریحی ' . $locationName['name'] . ' برای سفر شما ، ما اطلاعات کاملی به همراه عکس اماکن، نقشه و آدرس و تاریخچه همراه با امتیازبندی کاربران در بستر شبکه‌ی اجتماعی جمع آوری کرده ایم تا سفر آسوده‌ای داشته باشید. ';
+                    break;
+                case 3:
+                    $placeMode = 'restaurant';
+                    $kindPlace->title = ' رستوران های';
+                    $meta['title'] = 'عکس+آدرس+شماره تلفن + لیست تمامی رستوران ها و فست فود های ';
+                    $meta['keyword'] = 'رستوران‌های ' . $locationName['name'] . ', رستوران‌های ' . $locationName["name"] . ' با عکس , لیست تمامی رستوران های ' . $locationName["name"] . ' , بهترین رستوران‌های ' . $locationName["name"] . ' , لیست رستوران ها و فست فود ها و رستوران های سنتی ' . $locationName["name"] ;
+                    $meta['description'] = 'قبل از سفر رستوران های ' . $locationName["name"] . ' رو بشناس و برای رستورانایی که رفتی  نقد بنویس و نظر بده. ما اطلاعات کاملی از رستوران ها و فست فود ها به همراه عکس ا، نقشه و آدرس و معرفی ، همراه با امتیاز بندی کاربران در بستر شبکه‌ی اجتماعی جمع آوری کرده ایم تا سفر آسوده‌ای داشته باشید. ';
+                    break;
+                case 4:
+                    $placeMode = 'hotel';
+                    $kindPlace->title = 'اقامتگاه های ';
+                    $meta['title'] = 'عکس+آدرس+شماره تلفن + لیست تمامی اماکن اقامتی و هتل ها و مهمانسراهای ';
+                    $meta['keyword'] = 'هتل در ' . $locationName["name"] . ' , هتل در ' . $locationName["name"] . ' با قیمت مناسب , هتل ارزان در ' . $locationName["name"] . '  , رزرو هتل در ' . $locationName["name"] . ' ,لیست مراکزاقامتی ' . $locationName["name"] . ' , لیست هتل های ' . $locationName["name"] . ', لیست مهمانسرا های ' . $locationName["name"];
+                    $meta['description'] = 'لیست تمامی مراکز اقامتی و هتل ها و مهمانسراهای ' . $locationName['name'] . ' برای سفر شما ، ما اطلاعات کاملی به همراه عکس ، نقشه و آدرس و شماره تلفن و معرفی همراه با امتیازبندی کاربران در بستر شبکه‌ی اجتماعی جمع آوری کرده ایم تا بهترین اقامت خود را در سفر داشته باشید. ';
+                    break;
+                case 6:
+                    $placeMode = 'majara';
+                    $kindPlace->title = ' طبیعت گردی های ';
+                    $meta['title'] = 'عکس+آدرس+تجهیزات لازم + لیست تمامی جاهای مناسب طبیعت گردی و سفرهای ماجراجویانه ';
+                    $meta['keyword'] = 'کوه نوردی در ' . $locationName["name"] . ' ، پیاده‌روی در ' . $locationName["name"] . ' ، غار‌نوردی در ' . $locationName["name"] . ' ، صحرانوردی در ' . $locationName["name"] . ' ، یخ‌نوردی در ' . $locationName["name"] . ' ، پیک نیک در ' . $locationName["name"] . ' ، محل های مناسب شنا در ' . $locationName["name"] . ' ، آفرود در ' . $locationName["name"] . ' ، رفتینگ در ' . $locationName["name"] . ' ، صخره‌نوردی در ' . $locationName["name"] . ' ، قایق‌سواری در ' . $locationName["name"] . ' ، سنگ‌نوردی در ' . $locationName["name"] . ' ، موج سواری در ' . $locationName["name"] . ' ، دره‌نوردی در ' . $locationName["name"] . ' ، کمپ (چادر زدن) در ' . $locationName["name"];
+                    $meta['description'] = 'لیست تمامی اماکن مناسب برای طبیعت گردی ، زیباترین روستاها، ییلاق ها و جاذبه های طبیعی ' . $locationName['name'] . ' برای سفر شما ، ما اطلاعات کاملی به همراه عکس ، نقشه و آدرس و تجهیزات لازم و توضیحات همراه با عکس کاربران در بستر شبکه‌ی اجتماعی جمع آوری کرده ایم تا سفر خاطره انگیزی داشته باشید. ';
+                    break;
+                case 10:
+                    $placeMode = 'sogatSanaies';
+                    $kindPlace->title = 'سوغات و صنایع دستی ';
+                    $meta['title'] = 'عکس+ویژگی+معرفی کامل+ فروشندگان لیست تمامی صنایع دستی و سوغات ';
+                    $meta['keyword'] = 'لیست صنایع دستی ... ، لیست سوغات ... ،  طرز تهیه سوغات ... ، ویژگی های سوغات ... ، ویژگی های صنایع دستی ... ، قیمت های سوغات ... ، قیمت های صنایع دستی ... ، سوغات ... چیست ، صنایع دستی ... چیست ، معرفی سوغات ... ، معرفی صنایع دستی ... ';
+                    $meta['description'] = 'لیست تمامی صنایع دستی و سوغات ' . $locationName['name'] . ' که به دست هنرمندان بومی این شهر درست شده است و ما برای شما اطلاعات کاملی به همراه عکس ، ویژگی ها و چگومگی ساخت صنایع دستی و طرز تهیه سوغات خوراکی همراه با توضیحات و عکس و معرفی بهترین فروشندگان توسط کاربران در بستر شبکه‌ی اجتماعی جمع آوری کرده ایم تا بهترین خرید ها را در سفر داشته باشید. ';
+                    break;
+                case 11:
+                    $placeMode = 'mahaliFood';
+                    $kindPlace->title = 'غذاهای محلی ';
+                    $meta['title'] = 'عکس+دستور پخت+میزان کالری+ لیست تمامی غذاهای محلی ';
+                    $meta['keyword'] = 'غذاهای محلی ' . $locationName['name'] . ' ، غذاهای سنتی ' . $locationName['name'] . ' ، طرز تهیه غذای محلی ' . $locationName['name'] . ' ، دستور پخت غذای محلی ' . $locationName['name'] . ' ، غذای محلی ' . $locationName['name'] . ' چیست ، غذای سنتی ' . $locationName['name'] . ' چیست ، غذای مناسب برای افراد گیاه خوار، غذاهای مناسب برای افراد وگان ، غذاهای مناسب برای افراد دیابتی ، آش های محلی ' . $locationName['name'] . ' ، خورشت های ' . $locationName['name'] . ' ، خورش های ' . $locationName['name'] . ' ، خوراک های ' . $locationName['name'] ;
+                    $meta['description'] = 'ما برای شما غذاهای محلی و سنتی ... همراه با دستور پخت و عکس و میزان کالری که شامل آش ها، سوپ ها، خورشت ها، خوراک ها ،شیرینی ها، نان ها، مربا ها و سالاد ها می باشد را جمع اوری کرده ایم.';
+                    break;
+            }
+
 
             $features = PlaceFeatures::where('kindPlaceId', $kindPlaceId)->where('parent', 0)->get();
             foreach ($features as $feature)

@@ -14,39 +14,6 @@
 @stop
 
 @section('meta')
-    {{--<meta name="keywords" content="{{$place->keyword}}">--}}
-    {{--<meta property="og:description" content="{{$place->meta}}"/>--}}
-    {{--<meta property="article:tag" content="{{$place->tag1}}"/>--}}
-    {{--<meta property="article:tag" content="{{$place->tag2}}"/>--}}
-    {{--<meta property="article:tag" content="{{$place->tag3}}"/>--}}
-    {{--<meta property="article:tag" content="{{$place->tag4}}"/>--}}
-    {{--<meta property="article:tag" content="{{$place->tag5}}"/>--}}
-    {{--<meta property="article:tag" content="{{$place->tag6}}"/>--}}
-    {{--<meta property="article:tag" content="{{$place->tag7}}"/>--}}
-    {{--<meta property="article:tag" content="{{$place->tag8}}"/>--}}
-    {{--<meta property="article:tag" content="{{$place->tag9}}"/>--}}
-    {{--<meta property="article:tag" content="{{$place->tag10}}"/>--}}
-    {{--<meta property="article:tag" content="{{$place->tag11}}"/>--}}
-    {{--<meta property="article:tag" content="{{$place->tag12}}"/>--}}
-    {{--<meta property="article:tag" content="{{$place->tag13}}"/>--}}
-    {{--<meta property="article:tag" content="{{$place->tag14}}"/>--}}
-    {{--<meta property="article:tag" content="{{$place->tag15}}"/>--}}
-    {{--<meta name="twitter:card" content="summary_large_image"/>--}}
-    {{--<meta name="twitter:description" content="{{$place->meta}}"/>--}}
-    {{--<meta name="twitter:title" content="{{$place->name}} | {{$city->name}} | کوچیتا"/>--}}
-    {{--<meta property="og:url" content="{{Request::url()}}"/>--}}
-    {{--@if(count($photos) > 0)--}}
-    {{--<meta property="og:image" content="{{$photos[0]}}"/>--}}
-    {{--<meta property="og:image:secure_url" content="{{$photos[0]}}"/>--}}
-    {{--<meta property="og:image:width" content="550"/>--}}
-    {{--<meta property="og:image:height" content="367"/>--}}
-    {{--<meta name="twitter:image" content="{{$photos[0]}}"/>--}}
-    {{--@endif--}}
-    {{--<meta content="article" property="og:type"/>--}}
-    {{--<meta property="og:title" content="{{$place->name}} | {{$city->name}} | کوچیتا"/>--}}
-
-
-
 @stop
 
 @section('header')
@@ -72,8 +39,10 @@
     <style>
         .changeWidth {
             @if(session('goDate'))
-                      width: 14% !important;
+                        width: 14% !important;
         @endif
+
+
 
 
 
@@ -1245,10 +1214,10 @@
                                                 </div>
 
 @include('hotelDetailsPopUp')
-@include('editor')
+                                                @include('editor')
 
-<script>
-            var hotelMap = [];
+                                                        <script>
+                                                                    var hotelMap = [];
             var amakenMap = [];
             var restMap = [];
             var majaraMap = [];
@@ -2403,52 +2372,13 @@
         <script async src="{{URL::asset('js/album.js')}}"></script>
 
         <script>
-                    {{--var hasLogin = '{{$hasLogin}}';--}}
-                                                        var bookMarkDir = '{{route('bookMark')}}';
+            var bookMarkDir = '{{route('bookMark')}}';
             var getPlaceTrips = '{{route('placeTrips')}}';
             var assignPlaceToTripDir = '{{route('assignPlaceToTrip')}}';
             var soon = '{{route('soon')}}';
-                    {{--var placeMode = '{{$placeMode}}';--}}
-                                                        var hotelDetails;
-                                                        var hotelDetailsInBookMarkMode;
-                                                        var hotelDetailsInAskQuestionMode;
-                                                        var hotelDetailsInAnsMode;
-                                                        var hotelDetailsInSaveToTripMode;
-{{--if (placeMode == "hotel") {--}}
-                                                {{--hotelDetails = '{{route('hotelDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';--}}
-                                                {{--hotelDetailsInBookMarkMode = '{{route('hotelDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'bookMark'])}}';--}}
-                                                {{--hotelDetailsInAskQuestionMode = '{{route('hotelDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'question'])}}';--}}
-                                                {{--hotelDetailsInAnsMode = '{{route('hotelDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'ans'])}}';--}}
-                                                {{--hotelDetailsInSaveToTripMode = '{{route('hotelDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'saveToTrip'])}}';--}}
-                                                {{--}--}}
-                                                {{--else if (placeMode == "restaurant") {--}}
-                                                {{--hotelDetails = '{{route('restaurantDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';--}}
-                                                {{--hotelDetailsInBookMarkMode = '{{route('restaurantDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'bookMark'])}}';--}}
-                                                {{--hotelDetailsInAskQuestionMode = '{{route('restaurantDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'question'])}}';--}}
-                                                {{--hotelDetailsInAnsMode = '{{route('restaurantDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'ans'])}}';--}}
-                                                {{--hotelDetailsInSaveToTripMode = '{{route('restaurantDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'saveToTrip'])}}';--}}
-                                                {{--}--}}
-                                                {{--else if (placeMode == "amaken") {--}}
-                                                {{--hotelDetails = '{{route('amakenDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';--}}
-                                                {{--hotelDetailsInBookMarkMode = '{{route('amakenDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'bookMark'])}}';--}}
-                                                {{--hotelDetailsInAskQuestionMode = '{{route('amakenDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'question'])}}';--}}
-                                                {{--hotelDetailsInAnsMode = '{{route('amakenDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'ans'])}}';--}}
-                                                {{--hotelDetailsInSaveToTripMode = '{{route('amakenDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'saveToTrip'])}}';--}}
-                                                {{--}--}}
-                                                {{--else {--}}
-                                                {{--hotelDetails = '{{route('majaraDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';--}}
-                                                {{--hotelDetailsInBookMarkMode = '{{route('majaraDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'bookMark'])}}';--}}
-                                                {{--hotelDetailsInAskQuestionMode = '{{route('majaraDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'question'])}}';--}}
-                                                {{--hotelDetailsInAnsMode = '{{route('majaraDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'ans'])}}';--}}
-                                                {{--hotelDetailsInSaveToTripMode = '{{route('majaraDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'saveToTrip'])}}';--}}
-                                                {{--}--}}
-                                                        var getQuestions = '{{route('getQuestions')}}';
-                    {{--var placeId = '{{$place->id}}';--}}
-                                                {{--var kindPlaceId = '{{$kindPlaceId}}';--}}
-                                                        var getCommentsCount = '{{route('getCommentsCount')}}';
-                    {{--var totalPhotos = '{{$sitePhotos + $userPhotos}}';--}}
-                                                {{--var sitePhotosCount = '{{$sitePhotos}}';--}}
-                                                        var opOnComment = '{{route('opOnComment')}}';
+            var getQuestions = '{{route('getQuestions')}}';
+            var getCommentsCount = '{{route('getCommentsCount')}}';
+            var opOnComment = '{{route('opOnComment')}}';
             var askQuestionDir = '{{route('askQuestion')}}';
             var sendAnsDir = '{{route('sendAns')}}';
             var showAllAnsDir = '{{route('showAllAns')}}';

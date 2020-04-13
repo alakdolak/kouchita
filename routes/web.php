@@ -210,22 +210,6 @@ Route::group(array('middleware' => ['throttle:30']), function () {
 
 Route::group(array('middleware' => ['throttle:30', 'nothing']), function () {
 
-    Route::post('getAdviceMain', array('as' => 'getAdviceMain', 'uses' => 'PlaceController@getAdviceMain'));
-
-    Route::post('getAdviceCity', array('as' => 'getAdviceCity', 'uses' => 'PlaceController@getAdviceCity'));
-
-    Route::post('getHotelsMain', array('as' => 'getHotelsMain', 'uses' => 'HotelController@getHotelsMain'));
-
-    Route::post('getAmakensMain', array('as' => 'getAmakensMain', 'uses' => 'AmakenController@getAmakensMain'));
-
-    Route::post('getRandomAmaken', array('as' => 'getRandomAmaken', 'uses' => 'AmakenController@getRandomAmaken'));
-
-    Route::post('getRandomHotel', array('as' => 'getRandomHotel', 'uses' => 'HotelController@getRandomHotel'));
-
-    Route::post('getRestaurantsMain', array('as' => 'getRestaurantsMain', 'uses' => 'RestaurantController@getRestaurantsMain'));
-
-    Route::post('getLastRecentlyMain', array('as' => 'getLastRecentlyMain', 'uses' => 'HotelController@getLastRecentlyMain'));
-
     //PDF creator
     Route::get('alaki/{tripId}', array('as' => 'alaki', 'uses' => 'HomeController@alaki'));
 
@@ -411,11 +395,9 @@ Route::group(array('middleware' => ['nothing', 'throttle:30']), function(){
 Route::get('place-details/{kindPlaceId}/{placeId}', 'HomeController@setPlaceDetailsURL')->name('placeDetails');
 Route::group(array('middleware' => ['throttle:30', 'nothing', 'setSession']), function (){
 
-        Route::get('show-place-details/{kindPlaceName}/{slug}', 'PlaceController@showPlaceDetails')->name('show.place.details');
+    Route::get('show-place-details/{kindPlaceName}/{slug}', 'PlaceController@showPlaceDetails')->name('show.place.details');
 
     Route::get('cityPage/{kind}/{city}', 'HomeController@cityPage')->name('cityPage');
-
-    Route::post('/city/Page/getCityOpinion', 'HomeController@getCityOpinion')->name('cityPage.getCityOpinion');
 
     Route::get('amaken-details/{placeId}/{placeName}/{mode?}', 'AmakenController@showAmakenDetail')->name('amakenDetails');
     Route::get('restaurant-details/{placeId}/{placeName}/{mode?}', 'RestaurantController@showRestaurantDetail')->name('restaurantDetails');

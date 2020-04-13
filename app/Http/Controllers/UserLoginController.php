@@ -252,7 +252,7 @@ class UserLoginController extends Controller
                 $msgId = sendSMS($user->phone, $newPas, 'sms');
 
                 if ($msgId != -1) {
-                    $user->password = Hash::make($newPas);
+                    $user->password = \Hash::make($newPas);
                     $retrievePas->sendTime = time();
                     try {
                         $user->save();
@@ -333,7 +333,7 @@ class UserLoginController extends Controller
 
             $user = new User();
             $user->username = makeValidInput($_POST["username"]);
-            $user->password = Hash::make(makeValidInput($_POST["password"]));
+            $user->password = \Hash::make(makeValidInput($_POST["password"]));
             $user->email = makeValidInput($_POST["email"]);
             $user->level = 0;
             $user->created_at = date('Y-m-d h:m:s');
@@ -409,7 +409,7 @@ class UserLoginController extends Controller
             if ($user != null) {
 
                 $newPas = $this->generatePassword();
-                $user->password = Hash::make($newPas);
+                $user->password = \Hash::make($newPas);
 
                 try {
                     $text = 'رمزعبور جدید شما در سایت کوچیتا:' . '<br/>' . $newPas .
@@ -453,7 +453,7 @@ class UserLoginController extends Controller
 
                     $retrievePas = new RetrievePas();
                     $retrievePas->uId = $user->id;
-                    $user->password = Hash::make($newPas);
+                    $user->password = \Hash::make($newPas);
                     $retrievePas->sendTime = time();
 
                     try {
@@ -481,7 +481,7 @@ class UserLoginController extends Controller
 
             $user = new User();
             $user->username = makeValidInput($_POST["username"]);
-            $user->password = Hash::make(makeValidInput($_POST["password"]));
+            $user->password = \Hash::make(makeValidInput($_POST["password"]));
             $user->email = makeValidInput($_POST["email"]);
             $user->level = 0;
             $user->created_at = date('Y-m-d h:m:s');
@@ -594,7 +594,7 @@ class UserLoginController extends Controller
             if($userCheckEmail != null){
                 if($userCheckEmail->googleId == null){
                     $userCheckEmail->googleId = $user->id;
-                    $userCheckEmail->password = Hash::make($user->id);
+                    $userCheckEmail->password = \Hash::make($user->id);
                     try {
                         $userCheckEmail->save();
                     }
@@ -604,8 +604,8 @@ class UserLoginController extends Controller
             }
             else{
                 $userCheckEmail = new User();
-                $userCheckEmail->username = $user->givenName;
-                $userCheckEmail->password = Hash::make($user->id);
+                $userCheckEmail->username = explode('@', $user->email)[0];
+                $userCheckEmail->password = \Hash::make($user->id);
                 $name = explode(' ', $user->name);
                 $userCheckEmail->first_name = $name[0];
                 $userCheckEmail->last_name = $name[1];

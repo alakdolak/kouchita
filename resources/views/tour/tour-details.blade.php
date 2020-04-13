@@ -3943,34 +3943,6 @@
             var hotelDetailsInAskQuestionMode;
             var hotelDetailsInAnsMode;
             var hotelDetailsInSaveToTripMode;
-                    {{--if (placeMode == "hotel") {--}}
-                    {{--hotelDetails = '{{route('hotelDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';--}}
-                    {{--hotelDetailsInBookMarkMode = '{{route('hotelDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'bookMark'])}}';--}}
-                    {{--hotelDetailsInAskQuestionMode = '{{route('hotelDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'question'])}}';--}}
-                    {{--hotelDetailsInAnsMode = '{{route('hotelDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'ans'])}}';--}}
-                    {{--hotelDetailsInSaveToTripMode = '{{route('hotelDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'saveToTrip'])}}';--}}
-                    {{--}--}}
-                    {{--else if (placeMode == "restaurant") {--}}
-                    {{--hotelDetails = '{{route('restaurantDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';--}}
-                    {{--hotelDetailsInBookMarkMode = '{{route('restaurantDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'bookMark'])}}';--}}
-                    {{--hotelDetailsInAskQuestionMode = '{{route('restaurantDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'question'])}}';--}}
-                    {{--hotelDetailsInAnsMode = '{{route('restaurantDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'ans'])}}';--}}
-                    {{--hotelDetailsInSaveToTripMode = '{{route('restaurantDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'saveToTrip'])}}';--}}
-                    {{--}--}}
-                    {{--else if (placeMode == "amaken") {--}}
-                    {{--hotelDetails = '{{route('amakenDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';--}}
-                    {{--hotelDetailsInBookMarkMode = '{{route('amakenDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'bookMark'])}}';--}}
-                    {{--hotelDetailsInAskQuestionMode = '{{route('amakenDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'question'])}}';--}}
-                    {{--hotelDetailsInAnsMode = '{{route('amakenDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'ans'])}}';--}}
-                    {{--hotelDetailsInSaveToTripMode = '{{route('amakenDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'saveToTrip'])}}';--}}
-                    {{--}--}}
-                    {{--else {--}}
-                    {{--hotelDetails = '{{route('majaraDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';--}}
-                    {{--hotelDetailsInBookMarkMode = '{{route('majaraDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'bookMark'])}}';--}}
-                    {{--hotelDetailsInAskQuestionMode = '{{route('majaraDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'question'])}}';--}}
-                    {{--hotelDetailsInAnsMode = '{{route('majaraDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'ans'])}}';--}}
-                    {{--hotelDetailsInSaveToTripMode = '{{route('majaraDetails', ['placeId' => $place->id, 'placeName' => $place->name, 'mode' => 'saveToTrip'])}}';--}}
-                    {{--}--}}
             var getQuestions = '{{route('getQuestions')}}';
                     {{--var placeId = '{{$place->id}}';--}}
                     {{--var kindPlaceId = '{{$kindPlaceId}}';--}}
@@ -4221,16 +4193,6 @@
                 });
             }
 
-            {{--function closePublish() {--}}
-            {{--var url;--}}
-            {{--if (placeMode == "hotel")--}}
-            {{--url = '{{route('hotelDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';--}}
-            {{--else if (placeMode == "amaken")--}}
-            {{--url = '{{route('amakenDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';--}}
-            {{--else--}}
-            {{--url = '{{route('restaurantDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';--}}
-            {{--document.location.href = url;--}}
-            {{--}--}}
 
             function comments(tag) {
                 selectedTag = tag;
@@ -5152,55 +5114,6 @@
         </script>
 
         @include('layouts.pop-up-create-trip_in_hotel_details')
-
-        <script>
-            $(document).ready(function () {
-                $('.login-button').click(function () {
-                    var url;
-                    {{--if (placeMode == "hotel")--}}
-                    {{--url = '{{route('hotelDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';--}}
-                    {{--else if (placeMode == "amaken")--}}
-                    {{--url = '{{route('amakenDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';--}}
-                    {{--else--}}
-                    {{--url = '{{route('restaurantDetails', ['placeId' => $place->id, 'placeName' => $place->name])}}';--}}
-                    {{--$(".dark").show();--}}
-                    {{--showLoginPrompt(url);--}}
-                });
-                $('#share_pic').click(function () {
-                    if ($('#share_box').is(":hidden")) {
-                        $('#share_box').show();
-                    } else {
-                        $('#share_box').hide();
-                    }
-                });
-                {{--@if($mode == "bookMark")--}}
-                {{--bookMark();--}}
-                {{--@elseif($mode == "saveToTrip")--}}
-                {{--saveToTrip();--}}
-                {{--@elseif($mode == "question")--}}
-                {{--showAskQuestion();--}}
-                {{--@elseif($mode == "addPhotoSuccessfully")--}}
-                {{--$(".dark").css('display', '');--}}
-                {{--$("#photoSubmitted").removeClass('hidden');--}}
-                {{--@elseif($mode == 'err')--}}
-                {{--showAddPhotoPane();--}}
-                {{--$("#errMsgAddPhoto").append('{{$err}}');--}}
-                {{--@elseif($mode == "addPhoto")--}}
-                {{--showAddPhotoPane();--}}
-                {{--@endif--}}
-                // $("#date_input").datepicker({
-                //     numberOfMonths: 2,
-                //     showButtonPanel: true,
-                //     dateFormat: "yy/mm/dd"
-                // });
-                //
-                // $("#date_input_end_inHotel").datepicker({
-                //     numberOfMonths: 2,
-                //     showButtonPanel: true,
-                //     dateFormat: "yy/mm/dd"
-                // });
-            });
-        </script>
 
         <script>
             var total;

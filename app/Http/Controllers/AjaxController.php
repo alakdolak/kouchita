@@ -404,29 +404,8 @@ class AjaxController extends Controller {
             }
 
 
-            foreach ($target as $item){
-                switch ($item->kindPlaceId){
-                    case 1:
-                        $item->url = route('amakenDetails', ['placeId' => $item->id, 'placeName' => $item->name]);
-                        break;
-                    case 3:
-                        $item->url = route('restaurantDetails', ['placeId' => $item->id, 'placeName' => $item->name]);
-                        break;
-                    case 4:
-                        $item->url = route('hotelDetails', ['placeId' => $item->id, 'placeName' => $item->name]);
-                        break;
-                    case 6:
-                        $item->url = route('majaraDetails', ['placeId' => $item->id, 'placeName' => $item->name]);
-                        break;
-                    case 10:
-                        $item->url = route('sanaiesogatDetails', ['placeId' => $item->id, 'placeName' => $item->name]);
-                        break;
-                    case 11:
-                        $item->url = route('mahaliFoodDetails', ['placeId' => $item->id, 'placeName' => $item->name]);
-                        break;
-                }
-            }
-//            dd($target);
+            foreach ($target as $item)
+                $item->url = route('placeDetails', ['kindPlaceId' => $item->kindPlaceId, 'placeId' => $item->id]);
 
             echo json_encode($target);
         }
