@@ -15,11 +15,11 @@
     var compareList = [];
 
     $(document).ready(function () {
-        elemRect = document.getElementById('addToFilterCityBtn').getBoundingClientRect();
-        bodyRect = document.body.getBoundingClientRect();
-        windowW = screen.width;
-        element = document.getElementById('filters').getBoundingClientRect();
-        destY = element.top + 55;
+        // elemRect = document.getElementById('addToFilterCityBtn').getBoundingClientRect();
+        // bodyRect = document.body.getBoundingClientRect();
+        // windowW = screen.width;
+        // element = document.getElementById('filters').getBoundingClientRect();
+        // destY = element.top + 55;
     });
 
     function movement() {

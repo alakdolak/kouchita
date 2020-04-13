@@ -94,7 +94,7 @@ if ($total == 0)
         var userPic = '{{$userPic}}';
         var userPhotos = {!! $userPhotosJson !!};
         var placeMode = '{{$placeMode}}';
-
+        var getQuestions = '{{route('getQuestions')}}';
         var likeLog = '{{route('likeLog')}}';
         var reviewUploadPic = '{{route('reviewUploadPic')}}';
         var doEditReviewPic = '{{route('doEditReviewPic')}}';
