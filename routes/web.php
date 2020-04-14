@@ -702,6 +702,14 @@ Route::group(array('middleware' => 'auth'), function () {
 });
 
 
+//streaming
+Route::middleware(['web'])->group(function (){
+    Route::get('streaming/index', 'StreamingController@indexStreaming')->name('streaming.index');
+
+    Route::get('streaming/show', 'StreamingController@showStreaming')->name('streaming.show');
+});
+
+
 Route::get('emailtest', 'HomeController@emailtest');
 
 Route::get('exportToExcelTT', 'HomeController@exportExcel');
