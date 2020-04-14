@@ -1,0 +1,81 @@
+body{
+    background: #232323 !important;
+}
+
+.secHeader{
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 0px;
+}
+.secHeaderTabs{
+    cursor: pointer;
+    padding: 15px 0px;
+    margin-left: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.secHeaderTabs:hover{
+    border-bottom: solid 3px red;
+    padding-bottom: 12px;
+}
+.secHeaderTabsChoose{
+    border-bottom: solid 3px red;
+    padding-bottom: 12px;
+}
+.liveIcon{
+    padding: 2px 4px;
+    background: red;
+    border-radius: 7px;
+    font-size: 13px;
+}
+.liveText{
+    color: red;
+}
+.mainShowBase{
+    background: #3a3a3a;
+    padding: 15px;
+    border-radius: 8px;
+    position: relative;
+}
+
+
+.headerWithLine{
+    color: white;
+    position: relative;
+    margin: 15px 0px;
+}
+.headerWithLineText{
+    font-size: 22px;
+    position: absolute;
+    background-color: #3a3a3a;
+    padding-left: 10px;
+    bottom: -10px;
+    cursor: context-menu;
+}
+.headerWithLineLine{
+    background: red;
+    height: 5px;
+    border-radius: 20px;
+    width: 100%;
+}
+.descriptionSectionBody{
+    font-size: 14px;
+    padding: 0px 35px;
+    text-align: justify;
+    cursor: context-menu;
+}
+.eyeClass{
+    width: 15px;
+    margin-right: 5px;
+}
+
+.LivePngClass{
+    width: 35px;
+    margin-left: 5px;
+}
+.TvPngClass{
+    width: 20px;
+    margin-left: 5px;
+}

@@ -82,7 +82,9 @@ class PostController extends Controller {
         // end get lastMonthPost
 
         //this section get 5 most like post from lastMonthPost
-        $likePost = \DB::select('SELECT post.id, COUNT(postLike.id) as likeCount FROM post JOIN postLike ON postLike.like = 1 AND postLike.postId = post.id AND post.id IN (' . implode(",", $lastMonthPostId) . ')  GROUP BY post.id ORDER BY likeCount DESC');
+        $likePost = [];
+        if(count($lastMonthPostId) > 0)
+            $likePost = \DB::select('SELECT post.id, COUNT(postLike.id) as likeCount FROM post JOIN postLike ON postLike.like = 1 AND postLike.postId = post.id AND post.id IN (' . implode(",", $lastMonthPostId) . ')  GROUP BY post.id ORDER BY likeCount DESC');
 
         $mostLike = array();
         $mostLikeId = array();
@@ -145,9 +147,11 @@ class PostController extends Controller {
 
 
         //this section get mostComment Post from lastMonthPost
-        $commentPost = \DB::select('SELECT post.id, COUNT(postComment.id) as CommentCount FROM post JOIN postComment ON postComment.status = 1 AND postComment.postId = post.id AND post.id IN (' . implode(",", $lastMonthPostId) . ')  GROUP BY post.id ORDER BY CommentCount DESC');
-        $mostCommentPost = array();
-        $mostCommentPostId = array();
+        $commentPost = [];
+        if(count($lastMonthPostId) > 0)
+            $commentPost = \DB::select('SELECT post.id, COUNT(postComment.id) as CommentCount FROM post JOIN postComment ON postComment.status = 1 AND postComment.postId = post.id AND post.id IN (' . implode(",", $lastMonthPostId) . ')  GROUP BY post.id ORDER BY CommentCount DESC');
+        $mostCommentPost = [];
+        $mostCommentPostId = [];
         foreach ($commentPost as $item){
             foreach ($lastMonthPost as $item2){
                 if($item->id == $item2->id){

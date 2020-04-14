@@ -1,0 +1,457 @@
+
+.userPicDiv{
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.userPicDiv > img{
+    width: 50px;
+    height: 50px;
+}
+.showVideo{
+    width: 100%;
+}
+.videoInfos{
+    color: white;
+    padding: 10px 40px;
+    width: 100%;
+    padding-bottom: 0px;
+}
+.videoInfosVideoName{
+    font-size: 1.2em;
+    cursor: context-menu;
+}
+.mainUserPicSection{
+    width: 100%;
+    margin: 10px 0px;
+    padding: 0;
+    display: flex;
+}
+.mainUserPic{
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+.mainUserInfos{
+    margin-right: 10px;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.mainUseruserName{
+    color: #0076a3;
+}
+.videoUploadTime{
+    font-size: 10px;
+}
+.toolSection{
+    width: 100%;
+    background: #232323;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0px;
+    border-radius: 5px;
+}
+.toolSectionButtons{
+    display: flex;
+}
+.toolSectionButtonsCircle{
+    width: 40px;
+    height: 40px;
+    margin: 0px 5px;
+    background: #3a3a3a;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    cursor: pointer;
+    position: relative;
+}
+
+
+.HeartIconSett{
+    font-size: 33px;
+    padding-top: 6px;
+}
+.BookMarkIconSett{
+    font-size: 22px;
+}
+.ShareIconSett{
+    position: absolute;
+    right: 33px;
+    font-size: 30px;
+    top: -4px;
+}
+.CommentIconSett{
+    font-size: 33px;
+    position: absolute;
+    top: -2px;
+}
+
+.toolSectionButtonsCircle:hover .LikeIcon{
+    color: red;
+}
+.toolSectionButtonsCircle:hover .DisLikeIcon{
+    color: darkred;
+}
+.toolSectionButtonsCircle:hover .CommentIcon{
+    color: #0076a3;
+}
+.toolSectionButtonsCircle:hover .ShareIcon{
+    color: darkred;
+}
+.toolSectionButtonsCircle:hover .HeartIcon{
+    color: red;
+}
+.toolSectionButtonsCircle:hover .BookMarkIcon{
+    color: #fcc156;
+}
+
+
+.toolSectionInfos{
+    display: flex;
+    color: white;
+    font-size: 24px;
+    direction: ltr;
+    cursor: context-menu;
+}
+.toolSectionInfosTab{
+    margin: 0px 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.toolSectionInfosTabNumber{
+
+}
+.likeInfoTab{
+    font-size: 35px;
+    line-height: 0px;
+}
+.disLikeInfoTab{
+    font-size: 35px;
+    line-height: 0px;
+}
+
+.descriptionSection{
+    color: white;
+    margin-top: 35px;
+}
+.commentSection{
+    margin-top: 35px;
+}
+.commentSectionBody{
+    background: white;
+    width: 100%;
+    border-radius: 6px;
+    padding: 15px;
+}
+.commentInputSection{
+    display: flex;
+    align-items: flex-start;
+}
+.commentAnsesSection{
+    width: 100%;
+}
+.commentInput{
+    width: 88%;
+    margin-right: 11px;
+    padding: 10px;
+    border-radius: 5px;
+    background: #ebebeb;
+    resize: none;
+    border: none;
+}
+.commentAnsTextSection{
+    width: 98%;
+    margin-right: 11px;
+    padding: 10px;
+    border-radius: 5px;
+    background: #ebebeb;
+    border: none;
+    font-size: 14px;
+}
+.topOfcommentAnsTextSection{
+    width: 70%;
+}
+.topWho{
+    display: flex;
+    align-items: center;
+}
+.whoAns{
+    font-size: 20px;
+    color: #0076a3;
+    font-weight: bold;
+    margin-left: 5px;
+}
+.whoAnsTo{
+    font-weight: bold;
+    color: darkgray;
+}
+.commentAnsToAns{
+    margin-right: 12px;
+}
+.commentAnsInfos{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    margin: 5px;
+}
+.commentAnsRight{
+    display: flex;
+    font-size: 20px;
+    margin-right: 10px;
+}
+.commentAnsLeft{
+    color: blue;
+    cursor: pointer;
+}
+.commentAnsLikeSection{
+    display: flex;
+    justify-content: space-around;
+    font-size: 30px;
+    line-height: 25px;
+}
+.likeAnsIconDiv{
+    width: 26px;
+    height: 26px;
+    position: relative;
+    cursor: pointer;
+}
+.disLikeAnsIconDiv{
+    width: 26px;
+    height: 26px;
+    position: relative;
+    cursor: pointer;
+}
+.LikeIconEmptySett:before, .DisLikeIconEmptySett:before{
+    position: absolute;
+    left: 0px;
+}
+
+
+.disLikeAnsIconDiv:hover .DisLikeIconEmptySett:before{
+    content: '\E058';
+    color: darkred;
+}
+.likeAnsIconDiv:hover .LikeIconEmptySett:before{
+    content: '\E057';
+    color: red;
+}
+.redLikeIcon:before{
+    content: '\E057' !important;
+    font-family: Shazde_Regular2 !important;
+    color: red;
+}
+.redDisLikeIcon:before{
+    content: '\E058' !important;
+    font-family: Shazde_Regular2 !important;
+    color: darkred;
+}
+
+
+.commentInputSendButton{
+    background: #0076a3;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    margin-right: 10px;
+}
+.acceptedComment{}
+.acceptedCommentText{
+    white-space: pre-line;
+    text-align: justify;
+    padding: 0px 25px;
+}
+.acceptedCommentSett{
+    padding: 0px 15px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    /*border-top: solid 1px lightgray;*/
+    padding-top: 4px;
+}
+.acceptedCommentRight{
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+}
+.acceptedCommentLeft{
+
+}
+.acceptedCommentAnsButton{
+    color: black;
+    padding: 2px 8px;
+    background-color: #fcc156;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+
+
+.otherSection{
+    margin-top: 35px;
+}
+.otherSectionBody{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-top: 25px;
+}
+.videoSuggestion{
+    width: 30%;
+    background-color: #232323;
+    border-radius: 8px;
+    padding: 10px;
+}
+.videoSugPicSection{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    height: 165px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    position: relative;
+}
+.videoSugPic{
+    width: 100%;
+}
+.videoSugInfo{
+    display: flex;
+    padding: 0px 15px;
+    color: white;
+}
+.videoSugUserPic{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.videoSugUserInfo{
+    margin-right: 10px;
+}
+.videoSugName{
+
+}
+.videoSugUserName{
+    font-size: 12px;
+    color: #0076a3;
+}
+.videoSugTime{
+    font-size: 12px;
+}
+.overPicSug{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 17px;
+    padding: 2px 11px;
+    left: 13px;
+    border-radius: 8px;
+    color: white;
+    background-color: #000000d1;
+}
+.likeOverPic{
+    bottom: 13px;
+}
+.seenOverPic{
+    top: 13px;
+}
+.userPicAnsToReviewMobile{
+    display: none;
+}
+
+
+.playIconDiv{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #00000085;
+}
+
+@media (max-width: 767px) {
+    .videoInfosVideoName{
+        font-size: 1em;
+    }
+    .videoInfos{
+        padding: 10px 10px;
+    }
+    .toolSection{
+        justify-content: center;
+        flex-direction: column-reverse;
+    }
+    .toolSectionButtons{
+        margin: 5px 0px;
+        padding-top: 10px;
+        border-top: solid white;
+        width: 92%;
+        justify-content: space-evenly;
+    }
+    .toolSectionButtonsCircle{
+        /*margin: 0px 15px;*/
+    }
+    .descriptionSectionBody{
+        padding: 0px 10px;
+    }
+    .otherSectionBody{
+        flex-direction: column;
+    }
+    .videoSuggestion{
+        width: 90%;
+        margin-bottom: 15px;
+    }
+    .videoSugPicSection{
+        height: 230px;
+    }
+    .videoSugInfo{
+        padding: 0px;
+    }
+    .commentAnsesSection{
+        width: 100%;
+    }
+    .userPicAnsToReviewPc{
+        display: none;
+    }
+    .userPicAnsToReviewMobile{
+        display: flex;
+    }
+    .topWho{
+        align-items: flex-start;
+        flex-direction: column;
+        margin-right: 10px;
+    }
+    .topOfcommentAnsTextSection{
+        width: 100%;
+    }
+    .disLikeAnsIconDiv{
+        margin: 0px 20px;
+    }
+}
+
+@media (max-width: 400px) {
+    .toolSectionInfos{
+        font-size: 1em;
+    }
+    .likeInfoTab{
+        font-size: 25px;
+    }
+    .disLikeInfoTab{
+        font-size: 25px;
+    }
+}
