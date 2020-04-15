@@ -12,6 +12,9 @@ use App\models\Level;
 use App\models\LogModel;
 use App\models\Medal;
 use App\models\PhotographersPic;
+use App\models\Place;
+use App\models\PlaceFeatures;
+use App\models\State;
 use App\models\User;
 use App\models\UserTripStyles;
 use Exception;
@@ -510,5 +513,40 @@ class ProfileController extends Controller {
         }
 
         echo "ok";
+    }
+
+    public function addPlaceByUserPage()
+    {
+        $states = State::all();
+        $kindPlace = [
+            'amaken' => [
+                'id' => 1,
+            ],
+            'restaurant' => [
+                'id' => 3,
+            ],
+            'hotel' => [
+                'id' => 4,
+            ]
+        ];
+
+        foreach ($kindPlace as $key => $item2){
+            $features = PlaceFeatures::where('kindPlaceId', $kindPlace[$key]['id'])->where('parent', 0)->get();
+            foreach ($features as $item)
+                $item->subFeat = PlaceFeatures::where('parent', $item->id)->get();
+            $kindPlace[$key]['features'] = $features;
+        }
+
+        return view('profile.addPlaceByUser', compact(['states', 'kindPlace']));
+    }
+
+    public function storeAddPlaceByUser(\Request $request)
+    {
+        dd($request->all());
+    }
+
+    public function storeImgAddPlaceByUser(Request $request)
+    {
+
     }
 }

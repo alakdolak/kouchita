@@ -31,6 +31,13 @@
 <script>
     var hasLogin = {{auth()->check() ? 1 : 0}};
 
+    function openLoading(){
+        $('#fullPageLoader').css('display', 'flex');
+    }
+    function closeLoading(){
+        $('#fullPageLoader').css('display', 'none');
+    }
+
     function checkLogin(){
         if (!hasLogin) {
             showLoginPrompt('{{Request::url()}}');

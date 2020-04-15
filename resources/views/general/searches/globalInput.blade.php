@@ -17,7 +17,9 @@
 </div>
 
 <script>
+
     function createSearchInput(_doFuncName, _placeHolderTxt){
+        // _doFuncName must be string
 
         $('#globalSearchInput').attr('onkeyup', _doFuncName+'(this)');
         $('#globalSearchInput').attr('placeholder', _placeHolderTxt);

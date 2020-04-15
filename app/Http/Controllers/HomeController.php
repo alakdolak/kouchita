@@ -555,11 +555,6 @@ class HomeController extends Controller
         return view('cityPage', compact(['place', 'kind', 'localStorageData', 'locationName', 'post', 'map', 'allPlaces', 'allAmaken', 'allHotels', 'allRestaurant', 'allMajara', 'allMahaliFood', 'allSogatSanaie', 'reviews', 'topPlaces']));
     }
 
-    public function abbas()
-    {
-        return view('addPlaceByUser');
-    }
-
     public function checkUserNameAndPass()
     {
 
@@ -2340,41 +2335,6 @@ class HomeController extends Controller
         $writer->save('exportAmaken.xlsx');
 
         dd('finniish');
-    }
-
-    public function resizePostImages(Request $request)
-    {
-        $location = __DIR__ . '../../../../../assets/_images/' . $request->file;
-        if(is_dir($location)) {
-            $this->goToFolder($location);
-        }
-
-        echo 'ok';
-        return;
-    }
-    private function goToFolder($location){
-        if(is_dir($location)) {
-            $dir = scandir($location);
-
-            foreach ($dir as $item) {
-
-                if ($item != '' && $item != '.' && $item != '..' && $item != 'sliderPic') {
-                    $nLocatino = $location . '/' . $item;
-                    if(is_dir($nLocatino))
-                        $this->goToFolder($nLocatino);
-                    else{
-                        $image = ['png', 'jpg', 'jpeg'];
-                        $file = pathinfo($nLocatino, PATHINFO_EXTENSION);
-                        if(in_array($file, $image)){
-                            compressImage($nLocatino, $nLocatino, 80);
-                        }
-                    }
-                }
-
-            }
-        }
-
-        return;
     }
 
 }
