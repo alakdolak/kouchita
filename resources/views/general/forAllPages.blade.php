@@ -1,3 +1,6 @@
+<script src="{{URL::asset('js/jquery.farsiInput.js')}}"></script>
+
+
 <div id="darkModal" class="display-none" role="dialog"></div>
 
 {{--this dark modal with blur--}}

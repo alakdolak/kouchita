@@ -16,6 +16,7 @@ use App\models\Place;
 use App\models\PlaceFeatures;
 use App\models\State;
 use App\models\User;
+use App\models\UserAddPlace;
 use App\models\UserTripStyles;
 use Exception;
 use Illuminate\Support\Facades\Auth;
@@ -25,6 +26,8 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
+use Illuminate\Http\Request;
+
 
 class ProfileController extends Controller {
 
@@ -540,13 +543,138 @@ class ProfileController extends Controller {
         return view('profile.addPlaceByUser', compact(['states', 'kindPlace']));
     }
 
-    public function storeAddPlaceByUser(\Request $request)
+    public function storeAddPlaceByUser(Request $request)
     {
-        dd($request->all());
+        $data = json_decode($request->data);
+
+        if(isset($data->kindPlaceId) && isset($data->name) && isset($data->cityId)){
+            $place = new UserAddPlace();
+            $place->userId = \auth()->user()->id;
+            $place->kindPlaceId = $data->kindPlaceId;
+            $place->name = $data->name;
+            $place->city = $data->cityId;
+            $place->address = $data->address;
+            $place->lat = $data->lat;
+            $place->lng = $data->lng;
+            $place->phone = $data->phone;
+            $place->fixPhone = $data->fixPhone;
+            $place->email = $data->email;
+            $place->website = $data->website;
+            $place->description = $data->description;
+
+            if(in_array($place->kindPlaceId, [1, 3, 4])){
+                $features['featuresId'] = $data->features;
+                if($place->kindPlaceId == 3)
+                    $features['kind'] = $data->restaurantKind;
+                else if($place->kindPlaceId == 4){
+                    $features['kind_id'] = $data->hotelKind;
+                    $features['rate_int'] = $data->hotelStar;
+                }
+            }
+            else if($place->kindPlaceId == 10){
+                $features['eatable'] = $data->eatable;
+                if(isset($data->size))
+                    $features['size'] = $data->size;
+                else
+                    $features['size'] = null;
+
+                if(isset($data->weight))
+                    $features['weight'] = $data->weight;
+                else
+                    $features['weight'] = null;
+
+                if(isset($data->size))
+                    $features['price'] = $data->price;
+                else
+                    $features['price'] = null;
+
+                $features['features'] = $data->features;
+            }
+            else if($place->kindPlaceId == 11){
+                $features['kind'] = $data->kind;
+                $features['material'] = $data->material;
+                $features['recipes'] = $data->recipes;
+                if(isset($data->hotFood))
+                    $features['hotFood'] = $data->hotFood;
+                else
+                    $features['hotFood'] = null;
+                $features['features'] = $data->features;
+            }
+
+            $place->features = json_encode($features);
+            $place->save();
+
+            echo json_encode(['status' => 'ok', 'result' => $place->id]);
+        }
+        else
+            echo json_encode(['status' => 'nok']);
+
+        return;
     }
 
     public function storeImgAddPlaceByUser(Request $request)
     {
+        if(isset($request->id) && $request->id != 0){
+            if(isset($_FILES['pic']) && $_FILES['pic']['error'] == 0){
+                $place = UserAddPlace::find($request->id);
+                if($place != null){
+                    $fileName = time().$_FILES['pic']['name'];
+                    $location = __DIR__ .'/../../../../assets/_images/addPlaceByUser';
+                    if(!is_dir($location))
+                        mkdir($location);
+                    $location .= '/' . $fileName;
 
+                    if(move_uploaded_file($_FILES['pic']['tmp_name'], $location)){
+                        $pics = $place->pics;
+                        $pics = json_decode($pics);
+                        if($pics == null)
+                            $pics = [];
+                        array_push($pics, $fileName);
+                        $place->pics = json_encode($pics);
+                        $place->save();
+
+                        echo json_encode(['status' => 'ok', 'result' => $fileName]);
+                    }
+                    else
+                        echo json_encode(['status' => 'nok3']);
+                }
+                else
+                    echo json_encode(['status' => 'nok2']);
+            }
+            else
+                echo json_encode(['status' => 'nok1']);
+        }
+        else
+            echo json_encode(['status' => 'nok']);
+
+        return;
+    }
+
+    public function deleteImgAddPlaceByUser(Request $request)
+    {
+        if(isset($request->id) && isset($request->name)){
+            $addPlace = UserAddPlace::find($request->id);
+            if($addPlace != null){
+                $pic = $addPlace->pics;
+                $pic = json_decode($pic);
+                $index = array_search($request->name, $pic);
+                if($index !== false){
+                    $location = __DIR__ .'/../../../../assets/_images/addPlaceByUser/' . $request->name;
+                    if(is_file($location))
+                        unlink($location);
+
+                    $pic[$index] = null;
+                    echo json_encode(['status' => 'ok']);
+                }
+                else
+                    echo json_encode(['status' => 'nok2']);
+            }
+            else
+                echo json_encode(['status' => 'nok1']);
+        }
+        else
+            echo json_encode(['status' => 'nok']);
+
+        return;
     }
 }

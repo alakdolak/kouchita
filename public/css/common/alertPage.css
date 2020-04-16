@@ -87,16 +87,20 @@
     border-radius: 10px 10px 0 0;
 }
 .offerTitle {
-    background-color: #f0ad4e;
+    background-color: #eab836;
 }
 .warningTitle {
     background-color: #761c19;
 }
 .alertDescriptionBox {
     padding: 10px 20px;
+    min-width: 800px;
+    text-align: center;
 }
 .alertDescription {
+    font-size: 25px;
     padding: 5px 0 25px;
+    font-weight: bold;
 }
 .alertBtn {
     width: 150px;
@@ -118,7 +122,7 @@
 }
 .leftBtn {
     float: left;
-    background-color: #4cadc9;
+    background-color: #0d6650;
     margin-right: 15px;
 }
 

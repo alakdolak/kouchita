@@ -1,46 +1,56 @@
 .stepsMilestoneMainDiv {
+    display: inline-block;
     position: relative;
-    width: 25%;
-    top: 15%;
-    margin: 0 60% 0 0;
 }
 
 .bodyStyle {
     width: 100%;
-    height: 120vh;
-    background-color: white;
+    min-height: 35vh;
+    background-color: whitesmoke;
     direction: rtl;
     position: relative;
+    display: flex;
+    justify-content: center;
+    padding-top: 30px;
+    font-size: 1em !important;
+    flex-direction: column;
+    align-items: center;
 }
-
+.topSection{
+    border: 3px solid #eab836;
+    border-radius: 20px;
+    background: white;
+}
 .box {
-    position: absolute;
-    width: 50%;
+    position: relative;
     height: auto;
-    border: 2px solid #4DC7BC;
-    left: 50%;
-    top: 180px;
-    transform: translate(-50%, -50%);
-    border-radius: 10px;
-    box-shadow: 0 0 30px #e0e0e0;
 }
-
+.lineBetweenDot{
+    width: 3px;
+    height: 5px;
+    background-color: #053a3e;
+}
 .headerOfBox {
-    background-color: #4DC7BC;
+    background-color: #053a3e;
     color: white;
-    padding: 8px 10px;
+    padding: 15px;
     font-size: 2em;
-    border-radius: 5px 5px 0 0;
+    border-radius: 18px 18px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .bodyOfBox {
-    height: 80px;
-    padding: 5px 20px 0;
     position: relative;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    padding-top: 10px;
 }
 
 .stepTitle {
-    font-size: 1.25em;
+    font-size: 17px;
     font-weight: 600;
 }
 
@@ -49,26 +59,32 @@
     position: relative;
     bottom: 0;
     color: #963019;
+    font-size: 17px;
 }
 
 .stepNotice {
-    font-size: 0.88em;
+    font-size: 17px;
     color: #963019;
 }
 
 .bodyOfSteps {
-    position: absolute;
+    position: relative;
     margin: 0 2%;
     width: 96%;
-    box-shadow: 0px 0px 30px #e0e0e0;
     padding: 3%;
+    padding-top: 0px;
 }
-
+.footerBox1{
+    background-color: #053a3e;
+    padding: 5px;
+    border: 3px solid #eab836;
+    display: inline-block;
+    justify-content: space-between;
+    width: calc(100% - 230px);
+    height: 56px;
+}
 .footerOfBox {
     height: 45px;
-    margin: 5px 20px 25px;
-    padding-top: 10px;
-    border-top: 1px solid #4DC7BC;
 }
 
 .btn:hover, .btn:active {
@@ -83,23 +99,36 @@
 }
 
 .boxNextBtn {
-    background: #4DC7BC;
-    border-color: #4DC7BC;
+    background: #0d6650;
+    border-color: #0d6650;
     float: left;
     color: white;
+    font-size: 30px;
+    border-radius: 16px 0px 0px 16px;
+    width: 115px;
+    transition: .2s;
+}
+.boxNextBtn:hover{
+    border-radius: 30px 0px 0px 30px !important;
 }
 
 .boxPreviousBtn {
-    background: #963019;
-    border-color: #963019;
+    background: #720d19;
+    border-color: #720d19;
     float: right;
     color: white;
+    font-size: 30px;
+    border-radius: 0px 16px 16px 0px;
+    width: 115px;
+    transition: .2s;
+}
+.boxPreviousBtn:hover{
+    border-radius: 0px 30px 30px 0px !important;
 }
 
 .steps {
-    position: absolute;
     border-radius: 50%;
-    background-color: #E5E5E5;
+    background-color: #053a3e;
 }
 
 .bigCircle {
@@ -113,27 +142,43 @@
     margin: 4px;
     z-index: 10;
     background-color: #ffffff;
+    position: absolute;
+    top: 0px;
 }
 
 .littleCircle {
     width: 9px;
     height: 9px;
-    margin: 8px;
+    margin: 5px;
     z-index: 100;
+    margin-right: 8px;
+    position: absolute;
+    top: 3px;
 }
 
 .completeStep {
-    background-color: #4DC7BC;
+    background-color: #720d19;
+}
+.completeStepCenter{
+    background: #eab836;
+}
+#selectCategoryDiv{
+    display: flex;
+    justify-content: space-between;
 }
 
 .categories {
     margin: 1px;
     padding: 10px 0;
-    width: 12%;
+    width: 15%;
     display: inline-block;
-    border: 1.5px solid #e5e5e5;
+    border: 3px solid #eab836;
     border-radius: 6px;
     cursor: pointer;
+    font-size: 25px;
+    transition: .2s;
+    color: #eab836;
+    background-color: #053a3e;
 }
 
 .categories:hover {
@@ -141,20 +186,27 @@
 }
 
 .selectCategoryDiv {
-    padding: 0px 10px;
-    width: 20%;
-    border: 1.5px solid #e5e5e5;
-    border-radius: 6px;
-    position: absolute;
-    left: 20px;
-    top: 8%;
+    width: 25%;
+    display: flex;
+    background-color: #053a3e;
+    border-radius: 0px 0px 0px 17px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 5px 0px;
+    border: solid 3px #4dc7bc;
 }
-
+.stepHeader{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 150%;
+    padding-left: 20px;
+}
 .nameOfSelectCategory {
-    position: absolute;
-    left: 6%;
-    top: 30%;
     font-weight: 500;
+    color: #30b4a6;
+    font-size: 17px;
 }
 
 .iconsOfCategories {
@@ -164,39 +216,53 @@
     line-height: 40px;
     color: black;
     cursor: pointer;
+    color: #eab836;
 }
 
 .iconOfSelectCategory {
     font-size: 30px;
     margin: 0;
     line-height: 40px;
-    color: black;
     cursor: default;
+    color: #4dc7bc;
 }
 
 .stepInputBox {
-    width: 40%;
-    display: inline-block;
-    padding: 2px 7px;
-    border: 1px solid #cccccc;
+    display: flex !important;
+    padding: 10px 7px;
+    border: 2px solid #eab836;
     border-radius: 5px;
     background-color: #ebebeb;
-    line-height: 30px;
     margin: 10px 0;
+    font-size: 18px;
 }
 
 .stepInputBoxText {
-    padding-left: 15px;
-    border-left: 1px solid #d8d8d8;
+    padding-left: 10px;
+    border-left: 2px solid #eab836;
     display: inline-block;
 }
-
+.overMapButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+}
+.mapButton{
+    font-size: 25px;
+    background: #0d6650;
+    border-radius: 15px;
+}
+.mapButton:hover{
+    font-size: 25px;
+    background: #0d6650;
+    border-radius: 15px;
+}
 .stepInputBoxInput {
-    width: 80%;
-    padding-left: 3%;
+    /*padding-left: 20%;*/
+    width: 200px;
     text-align: center;
     border: none;
-    float: left;
     background-color: transparent;
 }
 
@@ -206,13 +272,14 @@
 }
 
 .stepInputIconRequired {
-    font-size: 0.5em;
+    font-size: 15px;
     color: #92321b;
-    position: absolute;
-    top: -5px;
-    left: -10px;
+    margin-left: 10px;
 }
-
+.inputFliedRow{
+    display: flex;
+    align-items: center;
+}
 .addresText {
     width: 100%;
     resize: none;
@@ -220,15 +287,23 @@
     background-color: #EEEEEE;
     padding: 8px;
     margin: 12px 0 0;
+    border: 2px solid #eab836;
 }
-
+.dotDiv{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 13px 0px 0px 0px;
+    border: solid 1px;
+    padding: 0px 10px;
+    background-color: #0d6650;
+}
 #stepName {
-    color: #4dc7bc;
-    font-size: 1.5em;
-    position: absolute;
-    left: 47%;
+    font-size: 1em;
+    position: relative;
     margin: 6px;
-    transform: translate(-50%);
+    font-weight: bold;
+    color: #eab836;
 }
 
 #map {
@@ -248,7 +323,7 @@
 
 .listItem {
     padding: 10px 0px;
-    border-bottom: 1px solid #cccccc;
+    border-bottom: 1px solid #eab836;
 }
 
 .subListItem {
@@ -259,13 +334,46 @@
 .detailListItem {
     width: 30%;
     display: inline-block;
+    padding-left: 20px;
 }
+.selectInput{
+    border: 3px solid #eab836;
+    padding: 0px 15px;
+    font-size: 20px;
+    border-radius: 9px;
+}
+.deletedSlid{
+    position: absolute;
+    width: 100%;
+    height: 0;
+    background-color: #000000c7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transition: .2s;
+}
+.step6pic:hover .deletedSlid{
+    height: 100%;
+}
+
 
 .step5Title {
     display: inline-block;
-    width: 20%;
     float: right;
-    font-weight: 500;
+    font-weight: bold;
+    font-size: 24px;
+    margin-left: 22px;
+    padding-left: 26px;
+    width: 100%;
+    margin-bottom: 26px;
+}
+.detailListItem > div{
+    font-size: 15px;
+    margin: 5px 0px;
+}
+.detailListItem > div > label{
+    cursor: pointer;
 }
 
 .step5Description {
@@ -320,9 +428,79 @@
 
 .step6plusIcon {
     position: relative;
-    font-size: 5em;
+    font-size: 3em;
 }
 
 .step6picText {
     padding: 10px;
+}
+
+/* Customize the label (the checkBoxDiv) */
+.checkBoxDiv {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-weight: 400;
+    font-size: 20px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.checkBoxDiv input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 2px;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #a7a7a7;
+    border-radius: 8px;
+}
+
+/* On mouse-over, add a grey background color */
+.checkBoxDiv:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.checkBoxDiv input:checked ~ .checkmark {
+    background-color: #44b390;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.checkBoxDiv input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.checkBoxDiv .checkmark:after {
+    left: 10px;
+    top: 7px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
 }

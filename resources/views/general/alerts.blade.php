@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="{{URL::asset('css/common/alertPage.css')}}">
 
-<div class="alertDarkBack">
+<div id="alertBoxDiv" class="alertDarkBack">
     <div class="alertBox">
         <div class="alertTitle warningTitle">
             آیا مطمین هستید
@@ -15,21 +15,22 @@
             </div>
         </div>
     </div>
+</div>
 
-    <div class="alertBox ">
+<div id="warningBoxDiv" class="alertDarkBack">
+    <div class="alertBox">
         <div class="alertTitle offerTitle">
             یک لحظه درنگ کنید
         </div>
         <div class="alertDescriptionBox">
-            <div class="alertDescription">
-                لورم ایپسون
-            </div>
-            <div>
-                <button class="alertBtn rightBtn">فعلا، نه</button>
-                <button class="alertBtn leftBtn">بزن بریم</button>
+            <div id="warningBody" class="alertDescription"></div>
+            <div style="display: flex; justify-content: center; align-items: center">
+{{--                <button class="alertBtn rightBtn" onclick="closeWarning()">فعلا، نه</button>--}}
+                <button class="alertBtn leftBtn" onclick="closeWarning()">بسیار خب</button>
             </div>
         </div>
     </div>
+
 </div>
 
 
@@ -64,5 +65,15 @@
             }, 1000);
 
         }, 5000);
+    }
+
+
+    function openWarning(_text){
+        $('#warningBody').text(_text);
+        $('#warningBoxDiv').css('display', 'flex');
+    }
+
+    function closeWarning(){
+        $('#warningBoxDiv').css('display', 'none');
     }
 </script>

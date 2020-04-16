@@ -7,5 +7,4 @@ use Illuminate\Database\Eloquent\Model;
 class UserAddPlace extends Model
 {
     protected $table = 'userAddPlaces';
-    public $timestamps = false;
 }
