@@ -664,6 +664,9 @@ class ProfileController extends Controller {
                         unlink($location);
 
                     $pic[$index] = null;
+                    $addPlace->pics = json_encode($pic);
+                    $addPlace->save();
+
                     echo json_encode(['status' => 'ok']);
                 }
                 else
