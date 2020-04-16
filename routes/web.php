@@ -177,8 +177,6 @@ Route::group(array('middleware' => ['throttle:30']), function () {
 
     Route::any('searchForStates', array('as' => 'searchForStates', 'uses' => 'HomeController@searchForStates'));
 
-    Route::get('abbas', 'HomeController@abbas');
-
     Route::any('hotelList2/{city}/{mode}', array('as' => 'hotelList2', 'uses' => 'HotelReservationController@showHotelList2'));
 
     Route::post('notifyFlight/{code}', ['as' => 'notifyFlight', 'uses' => 'TicketController@notifyFlight']);
@@ -355,7 +353,7 @@ Route::group(array('middleware' => ['throttle:30', 'nothing', 'auth', 'operatorA
 });
 
 
-//auth controller
+//authenticated controller
 Route::group(array('middleware' => ['nothing', 'throttle:30']), function(){
     Route::get('login', 'UserLoginController@login');
 
@@ -393,8 +391,9 @@ Route::group(array('middleware' => ['nothing', 'throttle:30']), function(){
 });
 
 //detailsPage
-Route::get('place-details/{kindPlaceId}/{placeId}', 'HomeController@setPlaceDetailsURL')->name('placeDetails');
 Route::group(array('middleware' => ['throttle:30', 'nothing', 'setSession']), function (){
+
+    Route::get('place-details/{kindPlaceId}/{placeId}', 'HomeController@setPlaceDetailsURL')->name('placeDetails');
 
     Route::get('show-place-details/{kindPlaceName}/{slug}', 'PlaceController@showPlaceDetails')->name('show.place.details');
 
@@ -414,7 +413,7 @@ Route::group(array('middleware' => ['throttle:30', 'nothing', 'setSession']), fu
 //ajaxController
 Route::group(array('middleware' => 'nothing'), function () {
 
-    Route::post('getCities', array('as' => 'getCitiesDir', 'uses' => 'AjaxController@getCitiesDir'));
+    Route::post('getCities', 'AjaxController@getCitiesDir')->name('getCitiesDir');
 
     Route::post('getReports', array('as' => 'getReportsDir', 'uses' => 'AjaxController@getReports'));
 
@@ -509,6 +508,12 @@ Route::group(array('middleware' => 'nothing'), function () {
 
 // profile
 Route::group(array('middleware' => ['throttle:30', 'nothing', 'auth']), function () {
+
+    Route::get('addPlace/index', 'ProfileController@addPlaceByUserPage')->name('addPlaceByUser.index');
+
+    Route::post('addPlace/store', 'ProfileController@storeAddPlaceByUser')->name('addPlaceByUser.store');
+    Route::post('addPlace/storeImg', 'ProfileController@storeImgAddPlaceByUser')->name('addPlaceByUser.storeImg');
+    Route::post('addPlace/deleteImg', 'ProfileController@deleteImgAddPlaceByUser')->name('addPlaceByUser.deleteImg');
 
     Route::post('getTripStyles', array('as' => 'getTripStyles', 'uses' => 'TripStyleController@getTripStyles'));
 

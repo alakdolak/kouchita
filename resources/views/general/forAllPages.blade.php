@@ -1,3 +1,6 @@
+<script src="{{URL::asset('js/jquery.farsiInput.js')}}"></script>
+
+
 <div id="darkModal" class="display-none" role="dialog"></div>
 
 {{--this dark modal with blur--}}
@@ -30,6 +33,13 @@
 
 <script>
     var hasLogin = {{auth()->check() ? 1 : 0}};
+
+    function openLoading(){
+        $('#fullPageLoader').css('display', 'flex');
+    }
+    function closeLoading(){
+        $('#fullPageLoader').css('display', 'none');
+    }
 
     function checkLogin(){
         if (!hasLogin) {

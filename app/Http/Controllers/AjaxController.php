@@ -14,6 +14,7 @@ use App\models\MahaliFood;
 use App\models\MainSuggestion;
 use App\models\Majara;
 use App\models\Place;
+use App\models\PlaceFeatures;
 use App\models\Post;
 use App\models\PostComment;
 use App\models\QuestionAns;
@@ -644,6 +645,26 @@ class AjaxController extends Controller {
         }
 
         echo json_encode([$result, $suggestions]);
+
+        return;
+    }
+
+    public function getkindPlaceFeatures(Request $request)
+    {
+        if(isset($request->id)){
+            $kindPlace = Place::find($request->id);
+            if($kindPlace != null){
+                $features = PlaceFeatures::where('kindPlaceId', $kindPlace->id)->where('parent', 0)->get();
+                foreach ($features as $item)
+                    $item->subFeat = PlaceFeatures::where('parent', $item->id)->get();
+
+                echo json_encode(['status' => 'ok', 'result' => $features]);
+            }
+            else
+                echo json_encode(['status' => 'nok1']);
+        }
+        else
+            echo json_encode(['status' => 'nok']);
 
         return;
     }
