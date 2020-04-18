@@ -52,25 +52,89 @@ $config = \App\models\ConfigModel::first();
                 <a {{($config->facebookNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://www.facebook.com/profile.php?id=100016313805277&ref=br_rs">
                     <div class="footerIconHor facebook"></div>
                 </a>
-                <a target="_blank" {{($config->pinterestNoFollow) ? 'rel="nofollow"' : ''}} href="https://www.pinterest.co.uk/shazdemosafer/">
-                    <div class="footerIconHor pinterest"></div>
-                </a>
-                <a target="_blank" {{($config->twitterNoFollow) ? 'rel="nofollow"' : ''}} href="https://twitter.com/shazdemosafer">
+                <a {{($config->twitterNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://twitter.com/shazdemosafer">
                     <div class="footerIconHor twitter"></div>
                 </a>
-                <a target="_blank" {{($config->googlePlusNoFollow) ? 'rel="nofollow"' : ''}} href="https://plus.google.com/113786987503996741617">
-                    <div class="footerIconHor googlePlus"></div>
+                <a {{($config->instagramNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://www.instagram.com/shazdehmosafer/">
+                    <div class="footerIconHor instagram"></div>
+                </a>
+                <a class="socialLink" {{($config->telegramNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://t.me/shazdehmosafer">
+                    <div class="footerIconHor telegram"></div>
+                </a>
+                <a class="socialLink" {{($config->telegramNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="">
+                    <div class="footerIconHor aparat"></div>
                 </a>
             </div>
         </div>
 
-        <div class="aboutShazde">
+        <div id="aboutShazde" class="aboutShazde aboutShazdeMoreLess">
             <div class="clear-both hideOnScreen"></div>
             <div>
                 کوچیتا، پلتفرم و شبکه‌ای اجتماعی در حوزه گردشگری است که با هدف ارتقاء سواد گردشگری، افزایش کیفیت سفر و سهولت استفاده افراد جامعه، اعم از داخلی و بین‌المللی، از خدمات گردشگری ایجاد شده است.
                 ارائه اطلاعات جامع، به‌روز و صحیح گردشگری در زمینه: مراکز اقامتی اعم از: هتل، مسافرخانه، مراکز بوم‌گردی، کمپ، ویلا و خانه اجاره‌ای، رستوران‌ها، جاذبه‌ها و اماکن گردشگری، سوغات و صنایع‌دستی، آداب و رسوم محلی شامل: غذاهای محلی، اصطلاحات محلی، لباس محلی، گویش محلی و دانش محلی، جشنواره‌ها، آئین‌ها و رویدادهای فرهنگی، خدمات تسهیلگر گردشگری از جمله وسایل نقلیه و تورهای گردشگری و سایر خدمات مکمل؛ امکان ایجاد شبکه‌ای اجتماعی به‌منظور تبادل اطلاعات و دیدگاه‌ها که در آن کاربران می‌توانند: عکس‌های خود را به اشتراک بگذارند؛ اطلاعات و تجربیات خود در خصوص هریک از اطلاعات گردشگری را به اشتراک بگذارند؛ پرسش خود را در خصوص هریک از اطلاعات گردشگری مطرح نمایند و به یکدیگر پاسخ دهند؛ عکس‌ها و اطلاعات به اشتراک گذاشته شده توسط سایر کاربران را بپسندند و در خصوص آن دیدگاه مطرح نمایند و یکدیگر را دنبال نمایند و امکان مقایسه قیمت، خرید و رزرو خدمات تسهیلگر سفر از جمله رزرو وسایل نقلیه شامل هواپیما، قطار و اتوبوس، رزرو مراکز اقامتی، رزرو رستوران، خرید تورهای گردشگری، خرید سوغات و صنابع دستی، خرید اقلام سفر، خرید بلیت اماکن و جاذبه‌های گردشگری و خرید بلیت جشنواره‌ها، آئین‌ها و رویدادهای فرهنگی از مهم‌ترین امکاناتی است که این پلتفرم در اختیار کاربران قرار می‌دهد.
             </div>
-            <div class="aboutShazdeLink">
+        </div>
+
+        <div class="footerOtherBoxes footHideTabletMenu" >
+            <ul>
+                <li class="footTitle hideOnPhone">دقیق تر شوید</li>
+                <li class="footMenu hideOnPhone">
+                    <a href="{{route('place.list', ['kindPlaceId' => 6, 'mode' => 'country'])}}">طبیعت‌گردی</a>
+                </li>
+                <li class="footMenu hideOnPhone">
+                    <a href="{{route('place.list', ['kindPlaceId' => 3, 'mode' => 'country'])}}">رستوران‌ها</a>
+                </li>
+                <li class="footMenu hideOnPhone">
+                    <a href="{{route('place.list', ['kindPlaceId' => 4, 'mode' => 'country'])}}">اقامتگاه‌ها</a>
+                </li>
+                <li class="footMenu hideOnPhone">
+                    <a href="{{route('place.list', ['kindPlaceId' => 1, 'mode' => 'country'])}}">جاذبه‌‌ها</a>
+                </li>
+            </ul>
+        </div>
+
+        <div id="footerOtherBoxes" class="footerOtherBoxes" >
+            <ul>
+                <li class="footTitle hideOnPhone">دقیق تر شوید</li>
+                <li class="footMenu hideOnPhone">
+                    <a href="{{route('place.list', ['kindPlaceId' => 10, 'mode' => 'country'])}}">سوغات و صنایع‌دستی</a>
+                </li>
+                <li class="footMenu hideOnPhone">
+                    <a href="{{route('place.list', ['kindPlaceId' => 11, 'mode' => 'country'])}}">غذاهای محلی</a>
+                </li>
+
+                <li class="footMenu footShowTabletMenu hideOnPhone">
+                    <a href="{{route('place.list', ['kindPlaceId' => 6, 'mode' => 'country'])}}">طبیعت‌گردی</a>
+                </li>
+                <li class="footMenu footShowTabletMenu hideOnPhone">
+                    <a href="{{route('place.list', ['kindPlaceId' => 3, 'mode' => 'country'])}}">رستوران‌ها</a>
+                </li>
+                <li class="footMenu footShowTabletMenu hideOnPhone">
+                    <a href="{{route('place.list', ['kindPlaceId' => 4, 'mode' => 'country'])}}">اقامتگاه‌ها</a>
+                </li>
+
+                <li class="footMenu hideOnPhone">
+                    <a href="{{route('mainArticle')}}">سفرنامه‌ها</a>
+                </li>
+                <li class="footMenu hideOnPhone">
+                    <a href="{{route('mainArticle')}}">بوم گردی</a>
+                </li>
+
+                <li class="footMenu footShowTabletMenu hideOnPhone">
+                    <a href="{{route('place.list', ['kindPlaceId' => 1, 'mode' => 'country'])}}">جاذبه‌‌ها</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="clear-both"></div>
+
+        <div class="footMoreLessBtn" onclick="showMorefooter()">
+            <span class="footMoreLessBtnText">نمایش بیشتر</span>
+            <span class="footMoreLessBtnText hidden">نمایش کمتر</span>
+        </div>
+
+        <div class="aboutShazde">
+            <div class="aboutShazdeLink aboutShazdeLinkMargin">
                 شاید بخواهید در خصوص
                 <a href="{{route('policies')}}"> حریم خصوصی و قوانین سایت </a>
                 بیشتر بدانید.
@@ -79,78 +143,14 @@ $config = \App\models\ConfigModel::first();
                 را بخوانید و در صورت نیاز
                 <a href="#"> با ما تماس بگیرید. </a>
             </div>
-            <div class="aboutShazdeLink" style="margin-top: 60px">
+            <div class="aboutShazdeLink">
                 این سایت متعلق به مجموعه کوچیتا می باشد؛
                 <a href="#"> درباره ما </a>
                 بیشتر بدانید.
                 کوچیتا محصولی از
-                <a href="#"> بوگن دیزاین </a>
+                <a href="http://bogendesign.co" style="color: #053a3e !important;"> بوگن دیزاین </a>
                 می باشد؛ ما را بیشتر بشناسید.
             </div>
-        </div>
-
-        <div class="footerOtherBoxes" id="socialMedias">
-            <ul>
-                <li class="footTitle">در رسانه ها با ما باشید</li>
-                <li>
-                    <div class="footerIcon footerIconVer gardeshname"></div>
-                    <div>
-                        <a class="socialLink" {{($config->gardeshnameNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="http://gardeshname.shazdemosafer.com/">گردشنامه</a>
-                    </div>
-                </li>
-                <li>
-                    <div class="footerIcon footerIconVer instagram"></div>
-                    <div>
-                        <a class="socialLink" {{($config->instagramNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://www.instagram.com/shazdehmosafer/">اینستاگرام</a>
-                    </div>
-                </li>
-                <li>
-                    <div class="footerIcon footerIconVer telegram"></div>
-                    <div>
-                        <a class="socialLink" {{($config->telegramNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://t.me/shazdehmosafer">تلگرام</a>
-                    </div>
-                </li>
-                <li>
-                    <div class="footerIcon footerIconVer aparat"></div>
-                    <div>
-                        <a class="socialLink" {{($config->aparatNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://www.aparat.com/shazdehmosafer">آپارات</a>
-                    </div>
-                </li>
-                <li>
-                    <div class="footerIcon footerIconVer bogendesign"></div>
-                    <div>
-                        <a class="socialLink" {{($config->bogenNoFollow) ? 'rel="nofollow"' : ''}}  target="_blank" href="http://bogendesign.co">بوگن دیزاین</a>
-                    </div>
-                </li>
-
-            </ul>
-        </div>
-
-        <div class="footerOtherBoxes" >
-            <ul>
-                <li class="footTitle hideOnPhone">دقیق تر شوید</li>
-                <li class="hideOnPhone">
-                    <a href="{{route('place.list', ['kindPlaceId' => 4, 'mode' => 'country'])}}">اقامتگاه‌ها</a>
-                </li>
-                <li class="hideOnPhone">
-                    <a href="{{route('place.list', ['kindPlaceId' => 3, 'mode' => 'country'])}}">رستوران‌ها</a>
-                </li>
-                <li class="hideOnPhone">
-                    <a href="{{route('place.list', ['kindPlaceId' => 1, 'mode' => 'country'])}}">جاذبه‌‌ها</a>
-                </li>
-                <li class="hideOnPhone">
-                    <a href="{{route('place.list', ['kindPlaceId' => 6, 'mode' => 'country'])}}">طبیعت‌گردی</a>
-                </li>
-                <li class="hideOnPhone">
-                    <a href="{{route('place.list', ['kindPlaceId' => 10, 'mode' => 'country'])}}">سوغات و صنایع‌دستی</a>
-                </li>
-                <li class="hideOnPhone">
-                    <a href="{{route('place.list', ['kindPlaceId' => 11, 'mode' => 'country'])}}">غذاهای محلی</a>
-                </li>
-                <li class="hideOnPhone">
-                    <a href="{{route('mainArticle')}}">سفرنامه‌ها</a>
-                </li>
-            </ul>
         </div>
 
         <div class="clear-both"></div>
@@ -1204,6 +1204,13 @@ $config = \App\models\ConfigModel::first();
             $('#' + id).removeClass('hidden');
         }
 
+    </script>
+
+    <script>
+        function showMorefooter() {
+            $('.footMoreLessBtnText').toggleClass('hidden');
+            $('#aboutShazde').toggleClass('aboutShazdeMoreLess');
+        }
     </script>
 
     @if(Auth::check())
