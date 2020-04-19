@@ -3,7 +3,6 @@
 use App\models\ConfigModel;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Route;
-
 Route::get('resizePostImagesPage', function(){
     return view('notUse.compressImage');
 });
@@ -455,7 +454,9 @@ Route::group(array('middleware' => 'nothing'), function () {
 
     Route::post('getMainPageSuggestion', 'AjaxController@getMainPageSuggestion')->name('getMainPageSuggestion');
 });
-
+Route::get('streaming/live', function(){
+   return view('streaming.test');
+});
 //review section
 Route::group(array('middleware' => 'nothing'), function () {
     Route::post('reviewUploadPic', 'ReviewsController@reviewUploadPic')->name('reviewUploadPic');
