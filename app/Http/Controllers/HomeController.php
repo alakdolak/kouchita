@@ -9,6 +9,7 @@ use App\models\AirLine;
 use App\models\Amaken;
 use App\models\BannerPics;
 use App\models\Cities;
+use App\models\CityPic;
 use App\models\ConfigModel;
 use App\models\DefaultPic;
 use App\models\GoyeshCity;
@@ -292,7 +293,8 @@ class HomeController extends Controller
             $allMahaliFood = MahaliFood::where('cityId', $place->id)->get();
             $allSogatSanaie = SogatSanaie::where('cityId', $place->id)->get();
 
-            if($place->image == null){
+            $pics = CityPic::where('cityId', $place->id)->get();
+            if(count($pics) == 0){
                 $seenActivity = Activity::whereName('مشاهده')->first();
                 $ala = Amaken::where('cityId', $place->id)->pluck('id')->toArray();
                 $mostSeen = [];
@@ -314,8 +316,14 @@ class HomeController extends Controller
                 else
                     $place->image = URL::asset('_images/noPic/blank.jpg');
             }
-            else
-                $place->image = URL::asset('_images/city/'.$place->image);
+            else{
+                foreach ($pics as $pic)
+                    $pic->pic = URL::asset('_images/city/' . $place->id  . '/' . $pic->pic);
+
+                $place->pic = $pics;
+                $place->image = $place->pic[0]->pic;
+            }
+//            dd($place->pic);
 
             $topAmaken = $this->getTopPlaces(1, 'city', $place->id);
             $topRestaurant = $this->getTopPlaces(3, 'city', $place->id);

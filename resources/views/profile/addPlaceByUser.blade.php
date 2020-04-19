@@ -18,29 +18,79 @@
     <script src="{{URL::asset('js/autosize.min.js')}}"></script>
 
     <style>
-        .choosedCategory{
-            border-color: #30b4a6;
-            color :#30b4a6;
-            border-radius: 50px;
-            background-color: #053a3e;
+        .innerPicAddPlace{
+            width: 263px;
+            height: 285px;
+            position: absolute;
+            top: -65px;
+            left: -75px;
+            z-index: 12;
         }
-        .choosedCategory > div{
-            color :#30b4a6 !important;
+        .footerTextBoxAddPlace{
+            padding: 10px 15px;
+            font-size: 12px;
+            line-height: 2;
+            position: relative;
+            text-align: center;
+            bottom: 0px;
+            right: 0px;
+        }
+        .addPlaceDropZone{
+            min-height: 340px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .dragDropTextAddPlace{
+            font-size: 14px;
+            font-weight: bold;
+            border: 2px dashed #9996;
+            padding-top: 20px;
+            text-align: center;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 20px;
+            min-height: 300px;
+        }
+        .sampleDescription{
+            border: solid 1px #eab836;
+            border-radius: 8px;
+            color: gray;
+            padding: 15px;
+            text-align: justify;
+            font-size: 14px;
+            margin-top: 15px;
+        }
+        .plusIcon{
+            background: green;
+            color: white;
+            font-size: 35px;
+            margin-right: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .showOnMobile{
+            display: none;
+        }
+        .showOnPc{
+            display: flex;
+        }
+        @media (max-width: 900px){
+            .showOnMobile{
+                display: flex;
+            }
+            .showOnPc{
+                display: none;
+            }
         }
 
-        .resultSearch{
-            padding: 5px 10px;
-            transition: .2s;
-        }
-        .resultSearch:hover{
-            background: #4DC7BC;
-            border-radius: 10px;
-        }
-        .addressSection{
-            padding-bottom: 20px;
-            margin-bottom: 10px;
-            border-bottom: solid 1px;
-        }
     </style>
 @stop
 
@@ -58,7 +108,7 @@
 
                     <div class="headerOfBox">
                         <div style="display: inline-block">
-                            برای دوران پسا کرونا با قدرت ، تبلیغات رایگان و برنامه ریزی بهتری کنید.
+                            معرفی و تبلیغ فعالیت شما به تمامی علاقه مندان به سفر
                         </div>
 
                         <div class="stepsMilestoneMainDiv">
@@ -127,7 +177,7 @@
                         </div>
                         <div class="step4 stepHeader hidden">
                             <div class="stepTitle">اگر توضیحات خاصی در مورد <span class="headerCategoryName"></span> دارید در این قسمت با ما در میان بگذارید</div>
-                            <div class="boxNotice">از بین گزینه های زیر، مواردی را که <span class="headerCategoryName"></span> را توصیف می نماید اضافه کنید. سپاسگذاریم.</div>
+{{--                            <div class="boxNotice">از بین گزینه های زیر، مواردی را که <span class="headerCategoryName"></span> را توصیف می نماید اضافه کنید. سپاسگذاریم.</div>--}}
                         </div>
                         <div class="step5 stepHeader hidden">
                             <div class="stepTitle">اگر عکسی از <span class="headerCategoryName"></span> دارید آن را بارگذاری نمایید</div>
@@ -149,7 +199,7 @@
 
                 <div class="bodySection">
                     <div class="step1 bodyOfSteps">
-                        <div style="text-align: center; font-size: 30px; padding: 15px; font-weight: bold">لطفا دسته مناسب را با توجه به مقصد خود انتخاب کنید.</div>
+                        <div style="text-align: center; font-size: 30px; padding: 15px; font-weight: bold">لطفا دسته مناسب را با توجه به فعالیت خود انتخاب کنید.</div>
                         <div id="selectCategoryDiv" class="text-align-center"></div>
                     </div>
 
@@ -212,7 +262,7 @@
                                 <input type="hidden" name="lng" id="lng" value="0">
 
                                 <div class="overMapButton">
-                                    <button class="btn btn-success mapButton" onclick="$('#mapModal').modal('show')">محل را از روی نقشه مشخص کنید</button>
+                                    <button class="btn btn-success mapButton" onclick="openMap()">محل را از روی نقشه مشخص کنید</button>
                                 </div>
 
                                 <div class="mg-tp-5" style="font-size: 20px; text-align: center">موقعیت موردنظر را بر روی نقشه پیدا نموده و پین را بر روی آن قرار دهید. (کلیک در کامپیوتر و لمس نقشه در گوشی)</div>
@@ -277,8 +327,8 @@
 
                                                         <label class="checkBoxDiv">
                                                             <input id="amaken_{{$sub->id}}" name="amakenFeature[]" value="{{$sub->id}}" type="checkbox">
-                                                            <span class="checkmark"></span>
                                                             {{$sub->name}}
+                                                            <span class="checkmark"></span>
                                                         </label>
                                                     </div>
                                                 </div>
@@ -310,8 +360,8 @@
                                                 <div class="detailListItem">
                                                     <label class="checkBoxDiv">
                                                         <input id="amaken_{{$sub->id}}" name="restaurantFeature[]" value="{{$sub->id}}" type="checkbox">
-                                                        <span class="checkmark"></span>
                                                         {{$sub->name}}
+                                                        <span class="checkmark"></span>
                                                     </label>
                                                 </div>
                                             @endforeach
@@ -365,8 +415,8 @@
                                                 <div class="detailListItem">
                                                     <label class="checkBoxDiv">
                                                         <input id="amaken_{{$sub->id}}" name="hotelFeature[]" value="{{$sub->id}}" type="checkbox">
-                                                        <span class="checkmark"></span>
                                                         {{$sub->name}}
+                                                        <span class="checkmark"></span>
                                                     </label>
                                                 </div>
                                             @endforeach
@@ -383,30 +433,30 @@
                                         <div class="detailListItem">
                                             <label class="checkBoxDiv">
                                                 <input id="sanaye_1" name="sanayeFeature[]" value="jewelry" type="checkbox">
-                                                <span class="checkmark"></span>
                                                 زیورآلات
+                                                <span class="checkmark"></span>
                                             </label>
                                         </div>
                                         <div class="detailListItem">
 
                                             <label class="checkBoxDiv">
                                                 <input id="sanaye_2" name="sanayeFeature[]" value="cloth" type="checkbox">
-                                                <span class="checkmark"></span>
                                                 پارچه و پوشیدنی
+                                                <span class="checkmark"></span>
                                             </label>
                                         </div>
                                         <div class="detailListItem">
                                             <label class="checkBoxDiv">
                                                 <input id="sanaye_3" name="sanayeFeature[]" value="decorative" type="checkbox">
-                                                <span class="checkmark"></span>
                                                 لوازم تزئینی
+                                                <span class="checkmark"></span>
                                             </label>
                                         </div>
                                         <div class="detailListItem">
                                             <label class="checkBoxDiv">
                                                 <input id="sanaye_4" name="sanayeFeature[]" value="applied" type="checkbox">
-                                                <span class="checkmark"></span>
                                                 لوازم کاربردی منزل
+                                                <span class="checkmark"></span>
                                             </label>
                                         </div>
 
@@ -419,24 +469,24 @@
                                         <div class="detailListItem">
                                             <label class="checkBoxDiv">
                                                 <input name="sanayeFeature[]" value="style_1" type="checkbox">
-                                                <span class="checkmark"></span>
                                                 سنتی
+                                                <span class="checkmark"></span>
                                             </label>
                                         </div>
                                         <div class="detailListItem">
 
                                             <label class="checkBoxDiv">
                                                 <input name="sanayeFeature[]" value="style_2" type="checkbox">
-                                                <span class="checkmark"></span>
                                                 مدرن
+                                                <span class="checkmark"></span>
                                             </label>
 
                                         </div>
                                         <div class="detailListItem">
                                             <label class="checkBoxDiv">
                                                 <input name="sanayeFeature[]" value="style_3" type="checkbox">
-                                                <span class="checkmark"></span>
                                                 تلفیقی
+                                                <span class="checkmark"></span>
                                             </label>
                                         </div>
                                     </div>
@@ -450,8 +500,8 @@
 
                                             <label class="checkBoxDiv">
                                                 <input name="sanayeFeature[]" value="fragile" type="checkbox">
-                                                <span class="checkmark"></span>
                                                 شکستنی
+                                                <span class="checkmark"></span>
                                             </label>
 
                                         </div>
@@ -467,24 +517,24 @@
 
                                             <label class="checkBoxDiv">
                                                 <input name="sizeSanaye" value="1" type="radio">
-                                                <span class="checkmark"></span>
                                                 کوچک
+                                                <span class="checkmark"></span>
                                             </label>
 
                                         </div>
                                         <div class="detailListItem">
                                             <label class="checkBoxDiv">
                                                 <input name="sizeSanaye" value="2" type="radio">
-                                                <span class="checkmark"></span>
                                                 متوسط
+                                                <span class="checkmark"></span>
                                             </label>
                                         </div>
                                         <div class="detailListItem">
 
                                             <label class="checkBoxDiv">
                                                 <input name="sizeSanaye" value="3" type="radio">
-                                                <span class="checkmark"></span>
                                                 بزرگ
+                                                <span class="checkmark"></span>
                                             </label>
 
                                         </div>
@@ -499,16 +549,16 @@
                                         <div class="detailListItem">
                                             <label class="checkBoxDiv">
                                                 <input name="weiSanaye" value="1" type="radio">
-                                                <span class="checkmark"></span>
                                                 سبک
+                                                <span class="checkmark"></span>
                                             </label>
                                         </div>
                                         <div class="detailListItem">
 
                                             <label class="checkBoxDiv">
                                                 <input name="weiSanaye" value="2" type="radio">
-                                                <span class="checkmark"></span>
                                                 متوسط
+                                                <span class="checkmark"></span>
                                             </label>
 
                                         </div>
@@ -516,8 +566,8 @@
 
                                             <label class="checkBoxDiv">
                                                 <input name="weiSanaye" value="3" type="radio">
-                                                <span class="checkmark"></span>
                                                 سنگین
+                                                <span class="checkmark"></span>
                                             </label>
 
                                         </div>
@@ -532,8 +582,8 @@
                                         <div class="detailListItem">
                                             <label class="checkBoxDiv">
                                                 <input name="priceSanaye" value="1" type="radio">
-                                                <span class="checkmark"></span>
                                                 ارزان
+                                                <span class="checkmark"></span>
                                             </label>
 
                                         </div>
@@ -541,8 +591,8 @@
 
                                             <label class="checkBoxDiv">
                                                 <input name="priceSanaye" value="2" type="radio">
-                                                <span class="checkmark"></span>
                                                 متوسط
+                                                <span class="checkmark"></span>
                                             </label>
 
                                         </div>
@@ -550,8 +600,8 @@
 
                                             <label class="checkBoxDiv">
                                                 <input name="priceSanaye" value="3" type="radio">
-                                                <span class="checkmark"></span>
                                                 گران
+                                                <span class="checkmark"></span>
                                             </label>
 
                                         </div>
@@ -570,43 +620,43 @@
                                         <div class="detailListItem">
                                             <label class="checkBoxDiv">
                                                 <input name="soghatFeatures[]" value="torsh" type="checkbox">
-                                                <span class="checkmark"></span>
                                                 ترش
+                                                <span class="checkmark"></span>
                                             </label>
                                         </div>
                                         <div class="detailListItem">
                                             <label class="checkBoxDiv">
                                                 <input name="soghatFeatures[]" value="shirin" type="checkbox">
-                                                <span class="checkmark"></span>
                                                 شیرین
+                                                <span class="checkmark"></span>
                                             </label>
                                         </div>
                                         <div class="detailListItem">
                                             <label class="checkBoxDiv">
                                                 <input name="soghatFeatures[]" value="talkh" type="checkbox">
-                                                <span class="checkmark"></span>
                                                 تلخ
+                                                <span class="checkmark"></span>
                                             </label>
                                         </div>
                                         <div class="detailListItem">
                                             <label class="checkBoxDiv">
                                                 <input name="soghatFeatures[]" value="malas" type="checkbox">
-                                                <span class="checkmark"></span>
                                                 ملس
+                                                <span class="checkmark"></span>
                                             </label>
                                         </div>
                                         <div class="detailListItem">
                                             <label class="checkBoxDiv">
                                                 <input name="soghatFeatures[]" value="shor" type="checkbox">
-                                                <span class="checkmark"></span>
                                                 شور
+                                                <span class="checkmark"></span>
                                             </label>
                                         </div>
                                         <div class="detailListItem">
                                             <label class="checkBoxDiv">
                                                 <input name="soghatFeatures[]" value="tond" type="checkbox">
-                                                <span class="checkmark"></span>
                                                 تند
+                                                <span class="checkmark"></span>
                                             </label>
                                         </div>
 
@@ -620,22 +670,22 @@
                                         <div class="detailListItem">
                                             <label class="checkBoxDiv">
                                                 <input name="sizeSoghat" value="1" type="radio">
-                                                <span class="checkmark"></span>
                                                 کوچک
+                                                <span class="checkmark"></span>
                                             </label>
                                         </div>
                                         <div class="detailListItem">
                                             <label class="checkBoxDiv">
                                                 <input name="sizeSoghat" value="2" type="radio">
-                                                <span class="checkmark"></span>
                                                 متوسط
+                                                <span class="checkmark"></span>
                                             </label>
                                         </div>
                                         <div class="detailListItem">
                                             <label class="checkBoxDiv">
                                                 <input name="sizeSoghat" value="3" type="radio">
-                                                <span class="checkmark"></span>
                                                 بزرگ
+                                                <span class="checkmark"></span>
                                             </label>
                                         </div>
 
@@ -648,22 +698,22 @@
                                         <div class="detailListItem">
                                             <label class="checkBoxDiv">
                                                 <input name="weiSoghat" value="1" type="radio">
-                                                <span class="checkmark"></span>
                                                 سبک
+                                                <span class="checkmark"></span>
                                             </label>
                                         </div>
                                         <div class="detailListItem">
                                             <label class="checkBoxDiv">
                                                 <input name="weiSoghat" value="2" type="radio">
-                                                <span class="checkmark"></span>
                                                 متوسط
+                                                <span class="checkmark"></span>
                                             </label>
                                         </div>
                                         <div class="detailListItem">
                                             <label class="checkBoxDiv">
                                                 <input name="weiSoghat" value="3" type="radio">
-                                                <span class="checkmark"></span>
                                                 سنگین
+                                                <span class="checkmark"></span>
                                             </label>
                                         </div>
                                     </div>
@@ -676,22 +726,22 @@
                                         <div class="detailListItem">
                                             <label class="checkBoxDiv">
                                                 <input name="priceSoghat" value="1" type="radio">
-                                                <span class="checkmark"></span>
                                                 ارزان
+                                                <span class="checkmark"></span>
                                             </label>
                                         </div>
                                         <div class="detailListItem">
                                             <label class="checkBoxDiv">
                                                 <input name="priceSoghat" value="2" type="radio">
-                                                <span class="checkmark"></span>
                                                 متوسط
+                                                <span class="checkmark"></span>
                                             </label>
                                         </div>
                                         <div class="detailListItem">
                                             <label class="checkBoxDiv">
                                                 <input name="priceSoghat" value="3" type="radio">
-                                                <span class="checkmark"></span>
                                                 گران
+                                                <span class="checkmark"></span>
                                             </label>
                                         </div>
 
@@ -725,15 +775,15 @@
                                         <div class="detailListItem">
                                             <label class="checkBoxDiv">
                                                 <input name="hotFood" value="cold" type="radio">
-                                                <span class="checkmark"></span>
                                                 سرد
+                                                <span class="checkmark"></span>
                                             </label>
                                         </div>
                                         <div class="detailListItem">
                                             <label class="checkBoxDiv">
                                                 <input name="hotFood" value="hot" type="radio">
-                                                <span class="checkmark"></span>
                                                 گرم
+                                                <span class="checkmark"></span>
                                             </label>
                                         </div>
                                     </div>
@@ -745,38 +795,80 @@
                                         <div class="detailListItem">
                                             <label class="checkBoxDiv">
                                                 <input name="foodFeatures[]" value="vegetarian" type="checkbox">
-                                                <span class="checkmark"></span>
                                                 افراد گیاه‌خوار
+                                                <span class="checkmark"></span>
                                             </label>
                                         </div>
                                         <div class="detailListItem">
                                             <label class="checkBoxDiv">
                                                 <input name="foodFeatures[]" value="vegan" type="checkbox">
-                                                <span class="checkmark"></span>
                                                 وگان
+                                                <span class="checkmark"></span>
                                             </label>
                                         </div>
                                         <div class="detailListItem">
                                             <label class="checkBoxDiv">
                                                 <input name="foodFeatures[]" value="diabet" type="checkbox">
-                                                <span class="checkmark"></span>
                                                 افراد مبتلا به دیابت
+                                                <span class="checkmark"></span>
                                             </label>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="listItem">
-                                    <div class="step5Title"> مواد لازم</div>
-                                    <div class="subListItem">
-                                        <textarea class="addresText" name="material" id="material" rows="2" placeholder="مواد لازم" style="width: 100%; padding: 10px"> </textarea>
+                                    <div class="step5Title" style="display: flex; align-items: center;">
+                                        مواد لازم
+{{--                                        <span class="ui_icon addPostIcon plusIcon"></span>--}}
+                                    </div>
+                                    <div id="materialRow" class="subListItem">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="stepInputBox">
+                                                    <input class="stepInputBoxInput" id="materialVol_1" style="text-align: right; padding-right: 10px;" placeholder="مقدار" onchange="addNewRow(1)">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="stepInputBox">
+                                                    <input class="stepInputBoxInput" id="materialName_1" style="text-align: right; padding-right: 10px;" placeholder="چه چیزی نیاز است" onkeyup="changeMaterialName(this, 1)" onchange="addNewRow(1)">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="stepInputBox">
+                                                    <input class="stepInputBoxInput" id="materialVol_2" style="text-align: right; padding-right: 10px;" placeholder="مقدار" onchange="addNewRow(2)">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="stepInputBox">
+                                                    <input class="stepInputBoxInput" id="materialName_2" style="text-align: right; padding-right: 10px;" placeholder="چه چیزی نیاز است" onkeyup="changeMaterialName(this, 1)" onchange="addNewRow(2)">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="stepInputBox">
+                                                    <input class="stepInputBoxInput" id="materialVol_3" style="text-align: right; padding-right: 10px;" placeholder="مقدار" onchange="addNewRow(3)">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="stepInputBox">
+                                                    <input class="stepInputBoxInput" id="materialName_3" style="text-align: right; padding-right: 10px;" placeholder="چه چیزی نیاز است" onkeyup="changeMaterialName(this, 3)" onchange="addNewRow(2)">
+                                                </div>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
 
                                 <div class="listItem">
-                                    <div class="step5Title">دستور پخت</div>
+                                    <div class="step5Title" style="margin-bottom: 0px">دستور پخت</div>
                                     <div class="subListItem">
-                                        <textarea class="addresText" name="recipes" id="recipes" rows="2" placeholder="دستور پخت" style="width: 100%; padding: 10px"> </textarea>
+                                        <textarea class="addresText" name="recipes" id="recipes" rows="5" placeholder=" دستور پخت را اینجا وارد کنید..." style="width: 100%; padding: 10px; font-size: 20px"> </textarea>
                                     </div>
                                 </div>
 
@@ -785,12 +877,20 @@
                     </div>
 
                     <div class="step4 bodyOfSteps hidden" style="display: flex; flex-wrap: wrap; justify-content: space-around;">
-                        <textarea class="addresText" name="placedescription" id="placedescription" rows="10" style="width: 100%; font-size: 20px" placeholder="متن مورد نظر خود را وارد کنید" ></textarea>
+                        <textarea class="addresText" name="placedescription" id="placedescription" rows="10" style="width: 100%; font-size: 20px" placeholder="توضیحات خود با توجه به نمونه متن پایین وارد کنید." ></textarea>
+                        <div class="sampleDescription">
+                            <div>نمونه متن</div>
+                        </div>
                     </div>
 
                     <div class="step5 bodyOfSteps hidden" style="display: flex; flex-wrap: wrap; justify-content: space-around;">
                         <div id="addNewPic" class="step6picBox">
-                            <div class="step6pic" onclick="$('#dropModal').modal('show');">
+                            <label for="newPicAddPlace" class="step6pic showOnMobile">
+                                <div class="step6plusText">اضافه کنید</div>
+                                <div class="icons plus2 step6plusIcon"></div>
+                            </label>
+                            <input id="newPicAddPlace" type="file" style="display: none" onchange="addPhotoInMobile(this)">
+                            <div class="step6pic showOnPc" onclick="$('#dropModal').modal('show');">
                                 <div class="step6plusText">اضافه کنید</div>
                                 <div class="icons plus2 step6plusIcon"></div>
                             </div>
@@ -828,10 +928,23 @@
     </div>
 
     <div class="modal fade" id="dropModal">
-        <div class="modal-dialog modal-lg" style="width: 95%;">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="modal-body" style="direction: rtl">
-                    <div id="dropzone" class="dropzone"></div>
+                <div class="modal-body" style="direction: rtl; overflow: hidden">
+
+                    <div class="startScreen infoScreen addPlaceDropZone">
+                        <div class="inner" style="width: 100%">
+                            <div class="innerPicAddPlace">
+                                <img src="{{URL::asset('images/cropImagesIcons/bck.png')}}" width="100%">
+                            </div>
+                            <div id="dropzone" class="dropzone dragDropTextAddPlace"></div>
+                        </div>
+                        <div class="footerTextBoxAddPlace stFooter">
+                            <span>توجه نمایید که عکس‌ما می‌بایست در فرمت های رایج تصویر و با حداکثر سایز 500 مگابایت باشد. تصاویر پیش از انتشار توسط ما بازبینی می‌گردد. لطفاً از بارگزاری تصاویری که با قوانین سایت مغایرت دارند اجتناب کنید.</span>
+                            <span class="footerPolicyLink">صفحه مقررات</span>
+                        </div>
+                    </div>
+
                 </div>
 
                 <!-- Modal footer -->
@@ -867,42 +980,53 @@
             {
                 'name': 'مرکز اقامتی',
                 'icon': 'hotel',
-                'id'  : 4
+                'id'  : 4,
+                'text' : 'مهمانسرای ورزش شهر زیبا و دیدنی همدان از اقامتگاه‌های خوب این شهره که مجهز به امکانات رفاهی شایسته‌ای برای رفاه مسافران و مهمانان عزیزه. ورزشکاران محترم و تیم‌های ورزشی می تونن با اقامات توی این مهمانسرا علاوه بر استراحت از امکانات ویژه اون هم بهره ببرند. این مهمانسرا که در نزدیکی ورزشگاه شهید حاجی بابایی افتتاح شده، دارای چندین سالن مجزا و استاندار از جمله بدنسازی، زمین چمن و سالن‌های چندمنظوره انواع رشته‌های ورزشی هست که آماده میزبانی اقشار مختلف و به طور ویژه ورزشکاران عزیز هست.'
             },
             {
                 'name': 'جاذبه',
                 'icon': 'atraction',
-                'id'  : 1
+                'id'  : 1,
+                'text' : 'منطقه حفاظت شده یخاب اصفهان به عنوان پناهگاه حیات وحش یخاب نیز شناخته می‌شود و در فاصله 20 کیلومتری از شهر ابوزیدآباد و در نزدیکی بند ریگ و کویر سیازگه ابوزیدآباد قرار دارد. وه تسمیه اسم این منطقه به دلیل وجود چشمه یخاب در دل ارتفاعات این منطقه است که در هوای گرم و سوزان تابستان نیز آبی خنک دارد.\n' +
+                    'انواع پستانداران منطقه حفاظت شده یخاب شامل: کل و بز، قوچ و میش، گرگ، کفتار، گربه شنی، کاراکال و... است و پرندگانی مانند: عقاب طلائی، بالابان، هوبره، کبک، دودوک و... در این منطقه زندگی می‌کنند.\n' +
+                    'اکو سیستم این منطقه و تنوع زیستگاه‌های موجود در آن جاذبه فراوانی برای علاقمندان به طبیعت و طبیعت‌گردی دارد. ورود به این منطقه دارای محدودیت‌هایی است. به دلیل قرار داشتن منطقه حفاظت شده یخاب در مجاورت پارک ملی و مهاجرت حیوانات به این منطقه در برخی فصول نیروهای حفاظتی این منطقه اقدام به گشت و کنترل در این منطقه می‌کنند. منطقه حفاظت شده یخاب در اوایل سال 1392 رسما به عنوان منطقه شکار ممنوع معرفی شد.'
             },
             {
                 'name': 'رستوران',
                 'icon': 'restaurant',
-                'id'  : 3
+                'id'  : 3,
+                'text' : ''
             },
             {
                 'name': 'سوغات',
                 'icon': 'soghat',
-                'id'  : 10
+                'id'  : 10,
+                'text' : ''
             },
             {
                 'name': 'صنایع دستی',
                 'icon': 'sanaye',
-                'id'  : 10
+                'id'  : 10,
+                'text' : ''
             },
             {
                 'name': 'غذای محلی',
                 'icon': 'ghazamahali',
-                'id'  : 11
+                'id'  : 11,
+                'text' : ''
             }
         ];
         let selectedCategory = null;
         let isPlace = true;
         let tryToGetFeatures = 3;
-        let newPlaceId = 0;
+        // let newPlaceId = 0;
+        let newPlaceId = 21;
 
         let myDropzone = new Dropzone("div#dropzone", {
             url: '{{route("addPlaceByUser.storeImg")}}',
             paramName: "pic",
+            dictDefaultMessage: 'به سادگی عکس های خود را در این قاب بی اندازید و یا کلیک کنید',
+            timeout: 60000,
             headers: {
                 'X-CSRF-TOKEN': '{{csrf_token()}}'
             },
@@ -930,6 +1054,8 @@
             else
                 myDropzone.removeFile(file);
 
+        }).on('error', function(file, response, err){
+            $(file.previewElement).find('.dz-error-message').find('span').text('آپود عکس شما با مشکل مواجه شد دوباره تلاش کنید');
         });
 
         categories.forEach((item, index) => {
@@ -984,7 +1110,8 @@
                 $('#nextStep').attr('disabled', false);
             }
 
-            console.log(currentSteps);
+            doChangeStep(inc);
+            return;
 
             if(inc == 1) {
                 if (currentSteps == 0 || currentSteps == 1)
@@ -1150,7 +1277,14 @@
                 case 'ghazamahali':
                     featureName = 'foodFeatures[]';
                     data['kind'] = $('#foodKind').val();
-                    data['material'] = $('#material').val();
+                    let material = [];
+                    for(let i = 1; i <= nowMaterialRow; i++){
+                        let mat = [];
+                        mat[0] = $("#materialName_" + i).val();
+                        mat[1] = $("#materialVol_" + i).val();
+                        material.push(mat);
+                    }
+                    data['material'] = material;
                     data['recipes'] = $('#recipes').val();
                     data['hotFood'] = $('input[name="hotFood"]:checked').val();
                     break;
@@ -1278,11 +1412,94 @@
                 $('#hotelRate').css('display', 'none');
         }
 
+        function changeMaterialName(_element, _num){
+            let value = $(_element).val();
+            text = 'مقدار ' + value;
+            $('#materialVol_' + _num).attr('placeholder', text);
+        }
+
+        nowMaterialRow = 1;
+        numMaterialRow = 3;
+        function addNewRow(_num){
+            if(nowMaterialRow == _num){
+                let name = $('#materialName_' + _num).val();
+                let vol = $('#materialVol_' + _num).val();
+                if(name.trim().length > 0 && vol.trim().length > 0){
+                    nowMaterialRow++;
+                    numMaterialRow++;
+                    text = '<div class="row">\n' +
+                        '<div class="col-md-6">\n' +
+                        '<div class="stepInputBox">\n' +
+                        '<input class="stepInputBoxInput" id="materialVol_' + numMaterialRow + '" style="text-align: right; padding-right: 10px;" placeholder="مقدار" onchange="addNewRow(' + numMaterialRow + ')">\n' +
+                        '</div>\n' +
+                        '</div>\n' +
+                        '<div class="col-md-6">\n' +
+                        '<div class="stepInputBox">\n' +
+                        '<input class="stepInputBoxInput" id="materialName_' + numMaterialRow + '" style="text-align: right; padding-right: 10px;" placeholder="چه چیزی نیاز است" onkeyup="changeMaterialName(this, ' + numMaterialRow + ')" onchange="addNewRow(' + numMaterialRow + ')">\n' +
+                        '</div>\n' +
+                        '</div>\n' +
+                        '</div>';
+
+                    $('#materialRow').append(text);
+                }
+            }
+
+        }
+
+        function addPhotoInMobile(input){
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    formData = new FormData();
+                    formData.append("_token", '{{csrf_token()}}');
+                    formData.append("id", newPlaceId);
+                    formData.append("pic", input.files[0]);
+
+                    $.ajax({
+                        type: 'post',
+                        url : '{{route("addPlaceByUser.storeImg")}}',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function(response){
+                            try{
+                                response = JSON.parse(response);
+                                if(response['status'] == 'ok'){
+                                    text =  '<div class="step6picBox">\n' +
+                                        '  <div class="step6pic">' +
+                                        '    <div class="deletedSlid">' +
+                                        '             <button class="btn btn-danger" onclick="deleteThisPic(this, \'' + response['result'] + '\')">حذف تصویر</button>' +
+                                        '        </div>\n' +
+                                        '    <img src="' + e.target.result + '" style="max-height: 100%; max-width: 100%;">\n' +
+                                        '  </div>\n' +
+                                        '  <div class="step6picText">نام عکس</div>\n' +
+                                        '</div>';
+
+                                    $(text).insertBefore($('#addNewPic'));
+                                }
+                            }
+                            catch (e) {}
+
+                            $(input).val('');
+                            $(input).files = null;
+
+                        }
+                    });
+
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
     </script>
 
     <script>
         let cities = null;
         function changeState(_value){
+            $('#cityId').val(0);
+            $('#cityName').val('');
+
             if($('#noneState'))
                 $('#noneState').remove();
 
@@ -1316,22 +1533,25 @@
             let likeCity = [];
             let value = _element.value;
 
-            if(value.trim().length > 1){
+            valeu = value.trim();
+            if(value.length > 1){
                 for(city of cities){
                     if(city.name.indexOf(value) > -1)
                         likeCity.push(city);
                 }
-
-                result +=   '<div onclick="selectCity(this)" class="resultSearch" cityId="-1">' +
-                    '   <p class="suggest cursor-pointer font-weight-700" id="suggest_1" style="margin: 0px; color: blue; font-size: 20px !important;">' +
-                    '<span id="newCityName">' + value + '</span> را اضافه کن</p>' +
-                    '</div>';
 
                 likeCity.forEach(item => {
                     result +=   '<div onclick="selectCity(this)" class="resultSearch" cityId="' + item.id + '">' +
                         '   <p class="suggest cursor-pointer font-weight-700" id="suggest_1" style="margin: 0px">شهر ' + item.name + '</p>' +
                         '</div>';
                 });
+
+                if(result == ''){
+                    result =   '<div onclick="selectCity(this)" class="resultSearch" cityId="-1">' +
+                        '   <p class="suggest cursor-pointer font-weight-700" id="suggest_1" style="margin: 0px; color: blue; font-size: 20px !important;">' +
+                        '<span id="newCityName">' + value + '</span> را اضافه کن</p>' +
+                        '</div>';
+                }
 
                 setResultToGlobalSearch(result);
             }
@@ -1356,7 +1576,7 @@
 
         function chooseCity(){
             if(cities == null){
-                openWarning('ابتدا استان خود را مشخص کنید.')
+                openWarning('ابتدا استان خود را مشخص کنید.');
                 return;
             }
             else
@@ -1421,6 +1641,45 @@
                 position: new google.maps.LatLng(lat, lng),
                 map: map,
             });
+        }
+
+        function openMap(){
+            let lat = 0;
+            let lng = 0;
+            let zoom = 10;
+            let cityId = $('#cityId').val();
+
+            var numbers = /^[0-9]+$/;
+
+            if(cityId != 0 && cityId.match(numbers)){
+                for(city of cities){
+                    if(city['id'] == cityId){
+                       lat = city['x'];
+                       lng = city['y'];
+                       zoom = 10;
+                        break;
+                    }
+                }
+            }
+            else if(cityId != 0 && !cityId.match(numbers)){
+                for(city of cities){
+                    lat += city['x'];
+                    lng += city['y'];
+                }
+                lat /= cities.length;
+                lng /= cities.length;
+                zoom = 8;
+            }
+
+            if(lat != 0 && lng != 0){
+                map.setZoom(zoom);
+                map.panTo({
+                    lat: parseFloat(lat),
+                    lng: parseFloat(lng)
+                });
+            }
+
+            $('#mapModal').modal('show');
         }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyCdVEd4L2687AfirfAnUY1yXkx-7IsCER0&callback=init"></script>

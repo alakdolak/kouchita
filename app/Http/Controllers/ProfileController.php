@@ -583,7 +583,7 @@ class ProfileController extends Controller {
                 else
                     $features['weight'] = null;
 
-                if(isset($data->size))
+                if(isset($data->price))
                     $features['price'] = $data->price;
                 else
                     $features['price'] = null;
@@ -592,7 +592,7 @@ class ProfileController extends Controller {
             }
             else if($place->kindPlaceId == 11){
                 $features['kind'] = $data->kind;
-                $features['material'] = $data->material;
+                $features['material'] = json_encode($data->material);
                 $features['recipes'] = $data->recipes;
                 if(isset($data->hotFood))
                     $features['hotFood'] = $data->hotFood;

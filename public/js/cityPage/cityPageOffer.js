@@ -1,6 +1,5 @@
 
 (function () {
-
     var app = angular.module("mainApp", ['infinite-scroll'], function ($interpolateProvider) {
         $interpolateProvider.startSymbol('[[');
         $interpolateProvider.endSymbol(']]')
@@ -210,6 +209,5 @@
                 console.log(err)
             })
         }
-    })
-
+    });
 })();
