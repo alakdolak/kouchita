@@ -105,6 +105,27 @@
     <script src= {{URL::asset("js/calendar.js") }}></script>
     <script src= {{URL::asset("js/jalali.js") }}></script>
 
+    <style>
+        @media (max-width: 992px) {
+            .ordering {
+                width: 15% !important;
+                font-size: 11px !important;
+            }
+            .sorting {
+                font-size: 9px !important;
+            }
+        }
+        @media (max-width: 845px) {
+            .ordering {
+                width: 15% !important;
+                font-size: 10px !important;
+            }
+            .sorting {
+                font-size: 8px !important;
+            }
+        }
+    </style>
+
 </head>
 
 <body id="BODY_BLOCK_JQUERY_REFLOW"
