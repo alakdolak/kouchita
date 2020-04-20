@@ -276,11 +276,12 @@
 }
 
 .ui_close_x {
-    right: 94.5%;
+    /*right: 94.5%;*/
+    right: 511px;
 }
 
 .ui_close_x:before {
-    color: white;
+    color: #4DC7BC;
     left: 0;
 }
 

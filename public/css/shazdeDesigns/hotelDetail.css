@@ -47,7 +47,7 @@ DIV.ppr_rup.ppr_priv_hr_atf_north_star_nostalgic .atf_meta_and_photos_wrapper::b
 }
 
 DIV.ppr_rup.ppr_priv_location_detail_header {
-    margin-bottom: 45px;
+    margin: 35px 0 30px;
 }
 
 .ui_overlay:before {
@@ -3557,6 +3557,10 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     text-align: center;
 }
 
+.tabLinkMainWrapMainDiv_Food > a, #MAINWRAP .tabLinkMainWrapMainDiv_Food li {
+    width: 33.33% !important;
+}
+
 #MAINWRAP .tabLinkMainWrapMainDiv a {
     color: black;
 }
@@ -3833,11 +3837,11 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     padding-top: 70px;
 }
 
-.tabLinkMainWrapMainDivPC {
+.tabLinkMainWrapMainDIV {
     max-width: 1140px;
 }
 
-.tabLinkMainWrapMainDivPC .tabLinkMainWrap {
+.tabLinkMainWrapMainDIV .tabLinkMainWrap {
     padding: 0;
 }
 
@@ -3853,7 +3857,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     width: 100%;
 }
 
-.tabLinkMainWrapMainDivPC.navbar-inverse {
+.tabLinkMainWrapMainDIV.navbar-inverse {
     margin: 0;
     border: none;
 }
@@ -3889,24 +3893,12 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     #detailsAndFeaturesMobile, #commentsAndAddressMobile {
         display: block !important;
     }
-
-    .tabLinkMainWrapMainDivMobile {
-        display: none;
-    }
 }
 
 /*responsive for tablets*/
 
-@media only screen and (max-width: 1187px) and (min-width: 1024px) {
-    .tabLinkMainWrapMainDivPC {
-        width: 976px;
-        left: inherit !important;
-    }
-}
-
 @media only screen and (max-width: 1024px) and (min-width: 992px) {
-    .tabLinkMainWrapMainDivPC.affix {
-        margin: 0 24px;
+    .tabLinkMainWrapMainDIV.affix {
         right: 0;
         left: 0;
         width: auto;
@@ -4074,14 +4066,14 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     #targetHelp_7 {
         position: absolute;
         left: -35px;
-        top: -52px;
+        top: -90px;
         width: 190px;
     }
 
     #targetHelp_8 {
         position: absolute;
         left: -35px;
-        top: -20px;
+        top: -60px;
         width: 167px;
     }
 
@@ -4106,7 +4098,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     #share_pic_mobile {
         position: absolute;
         left: -35px;
-        top: 20px;
+        top: -23px;
         width: 175px;
     }
 
@@ -4147,9 +4139,6 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     }
 
     /*introduction bar*/
-    .tabLinkMainWrapMainDivPC {
-        display: none;
-    }
 
     body.nostalgic .hr_btf_wrap {
         padding: 0;
@@ -4245,11 +4234,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     #BODYCON .tabLinkMainWrapMainDiv {
         display: flex;
     }
-
-    #QAndAMainDivId, #mainDivPlacePost, #similarLocationsMainDiv {
-        display: none;
-    }
-
+    
     #mainDivPlacePost .topHeaderBarPosts {
         display: inline-block;
     }
@@ -4266,13 +4251,6 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 @media only screen and (min-width: 768px) {
     .postsMainDivInSpecificMode > div:nth-child(1) {
         padding-right: 10px !important;
-    }
-
-    .tabLinkMainWrapMainDivMobile.affix {
-        width: auto;
-        margin: 0 24px;
-        left: 0;
-        right: 0;
     }
 }
 

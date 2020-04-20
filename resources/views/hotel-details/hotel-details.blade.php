@@ -756,46 +756,50 @@ if ($total == 0)
     <div id="MAINWRAP" class="full_meta_photos_v3  full_meta_photos_v4  big_pic_mainwrap_tweaks horizontal_xsell ui_container is-mobile position-relative">
         <div id="MAIN" class="Hotel_Review prodp13n_jfy_overflow_visible position-relative">
             <div id="BODYCON" class="col easyClear bodLHN poolB adjust_padding new_meta_chevron new_meta_chevron_v2 position-relative">
-                <nav class="tabLinkMainWrapMainDivPC navbar navbar-inverse" data-spy="affix" data-offset-top="800">
-                    <div class="container-fluid tabLinkMainWrapMainDiv">
-                        <div class="collapse navbar-collapse" id="myNavbar">
-                            <ul class="nav navbar-nav">
-                                <li>
-                                    <a class="tabLinkMainWrap similarLocationsBtnTopBar" href="#similarLocationsMainDiv">مکان‌های مشابه</a>
-                                </li>
-                                <li>
-                                    <a class="tabLinkMainWrap QAndAsBtnTopBar" href="#QAndAMainDivId">سؤالات</a>
-                                </li>
-                                <li>
-                                    <a id="pcPostButton" class="tabLinkMainWrap postsBtnTopBar" href="#mainDivPlacePost">پست</a>
-                                </li>
-                                <li>
-                                    <a class="tabLinkMainWrap generalDescBtnTopBar" href="#generalDescLinkRel">معرفی کلی</a>
-                                </li>
-                            </ul>
+                @if($placeMode == 'mahaliFood')
+                    <nav class="tabLinkMainWrapMainDIV navbar navbar-inverse" data-spy="affix" data-offset-top="800">
+                        <div class="container-fluid tabLinkMainWrapMainDiv tabLinkMainWrapMainDiv_Food">
+                            <div class="collapse navbar-collapse" id="myNavbar">
+                                <ul class="nav navbar-nav">
+                                    <li>
+                                        <a class="tabLinkMainWrap QAndAsBtnTopBar" href="#QAndAMainDivId">سؤالات</a>
+                                    </li>
+                                    <li>
+                                        <a id="pcPostButton" class="tabLinkMainWrap postsBtnTopBar" href="#mainDivPlacePost">پست</a>
+                                    </li>
+                                    <li>
+                                        <a class="tabLinkMainWrap generalDescBtnTopBar" href="#generalDescLinkRel">دستور پخت</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
-                </nav>
-
-                <div class="tabLinkMainWrapMainDivMobile" data-spy="affix" data-offset-top="860">
-                    <div class="tabLinkMainWrapMainDiv">
-                        <a href="#bodyLinks">
-                            <button class="tabLinkMainWrap" onclick="openTab('similarLocationsMainDiv', this, '#4dc7bc')">مکان‌های مشابه</button>
-                        </a><!--
-                     --><a href="#bodyLinks">
-                            <button class="tabLinkMainWrap" onclick="openTab('QAn8dAMainDivId', this, '#4dc7bc')">سؤالات</button>
-                        </a><!--
-                     --><a href="#bodyLinks">
-                            <button id="openPostPhone" class="tabLinkMainWrap" onclick="openTab('mainDivPlacePost', this, '#4dc7bc')">پست</button>
-                        </a><!--
-                     --><a href="#bodyLinks">
-                            <button class="tabLinkMainWrap" onclick="openTab('mobileIntroductionMainDivId', this, '#4dc7bc')" id="defaultOpenMainWrap">معرفی کلی</button>
-                        </a>
-                    </div>
-                </div>
+                    </nav>
+                @else
+                    <nav class="tabLinkMainWrapMainDIV navbar navbar-inverse" data-spy="affix" data-offset-top="800">
+                        <div class="container-fluid tabLinkMainWrapMainDiv">
+                            <div class="collapse navbar-collapse" id="myNavbar">
+                                <ul class="nav navbar-nav">
+                                    <li>
+                                        <a class="tabLinkMainWrap similarLocationsBtnTopBar" href="#similarLocationsMainDiv">مکان‌های مشابه</a>
+                                    </li>
+                                    <li>
+                                        <a class="tabLinkMainWrap QAndAsBtnTopBar" href="#QAndAMainDivId">سؤالات</a>
+                                    </li>
+                                    <li>
+                                        <a id="pcPostButton" class="tabLinkMainWrap postsBtnTopBar" href="#mainDivPlacePost">پست</a>
+                                    </li>
+                                    <li>
+                                        <a class="tabLinkMainWrap generalDescBtnTopBar" href="#generalDescLinkRel">معرفی کلی</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                @endif
 
                 <div class="exceptQAndADiv" id="generalDescLinkRel">
                     <div class="topBarContainerGeneralDesc display-none"></div>
+
                     <div class="hr_btf_wrap position-relative">
                         <div id="introduction" class="ppr_rup ppr_priv_location_detail_overview">
                             <div class="block_wrap" data-tab="TABS_OVERVIEW">
@@ -803,43 +807,40 @@ if ($total == 0)
                                     <div id="mobileIntroductionMainDivId"
                                          class="mobileIntroductionMainDiv tabContentMainWrap">
                                         @if($placeMode == 'mahaliFood')
-
-                                        <div class="tabLinkMainDiv">
-                                            <button class="tabLink"
-                                                    onclick="openCity('commentsAndAddressMobile', this, 'white', '#4dc7bc')">
-                                                دستور پخت
-                                            </button><!--
-                                         -->
-                                            <button class="tabLink"
-                                                    onclick="openCity('detailsAndFeaturesMobile', this, 'white', '#4dc7bc')">
-                                                کالری
-                                            </button><!--
-                                         -->
-                                            <button class="tabLink"
-                                                    onclick="openCity('generalDescriptionMobile', this, 'white', '#4dc7bc')"
-                                                    id="defaultOpen">
-                                                مواد و لوازم
-                                            </button>
-                                        </div>
-
+                                            <div class="tabLinkMainDiv">
+                                                <button class="tabLink"
+                                                        onclick="openCity('commentsAndAddressMobile', this, 'white', '#4dc7bc')">
+                                                    دستور پخت
+                                                </button><!--
+                                             -->
+                                                <button class="tabLink"
+                                                        onclick="openCity('detailsAndFeaturesMobile', this, 'white', '#4dc7bc')">
+                                                    کالری
+                                                </button><!--
+                                             -->
+                                                <button class="tabLink"
+                                                        onclick="openCity('generalDescriptionMobile', this, 'white', '#4dc7bc')"
+                                                        id="defaultOpen">
+                                                    مواد و لوازم
+                                                </button>
+                                            </div>
                                         @else
-                                        <div class="tabLinkMainDiv">
-                                            <button class="tabLink"
-                                                    onclick="openCity('commentsAndAddressMobile', this, 'white', '#4dc7bc')">
-                                                نظرات و آدرس
-                                            </button><!--
-                                         -->
-                                            <button class="tabLink"
-                                                    onclick="openCity('detailsAndFeaturesMobile', this, 'white', '#4dc7bc')">
-                                                امکانات و ویژگی‌ها
-                                            </button><!--
-                                         -->
-                                            <button class="tabLink"
-                                                    onclick="openCity('generalDescriptionMobile', this, 'white', '#4dc7bc')"
-                                                    id="defaultOpen">معرفی کلی
-                                            </button>
-                                        </div>
-
+                                            <div class="tabLinkMainDiv">
+                                                <button class="tabLink"
+                                                        onclick="openCity('commentsAndAddressMobile', this, 'white', '#4dc7bc')">
+                                                    نظرات و آدرس
+                                                </button><!--
+                                             -->
+                                                <button class="tabLink"
+                                                        onclick="openCity('detailsAndFeaturesMobile', this, 'white', '#4dc7bc')">
+                                                    امکانات و ویژگی‌ها
+                                                </button><!--
+                                             -->
+                                                <button class="tabLink"
+                                                        onclick="openCity('generalDescriptionMobile', this, 'white', '#4dc7bc')"
+                                                        id="defaultOpen">معرفی کلی
+                                                </button>
+                                            </div>
                                         @endif
 
                                             <?php
@@ -1462,7 +1463,6 @@ if ($total == 0)
                         {{--                    @endif--}}
                     </div>
 
-
                     <div id="mainDivPlacePost" class="tabContentMainWrap">
                         <div class="topHeaderBarPosts display-none">
                             <span class="float-right text-align-right">جستجوی‌ بیشتر در پست‌ها</span>
@@ -1484,7 +1484,6 @@ if ($total == 0)
                         @include('hotel-details.reviewSection')
 
                 </div>
-
                 <div class="clear-both"></div>
                 @include('hotel-details.questionSection')
             </div>
@@ -1540,42 +1539,18 @@ if ($total == 0)
 
                 if(630 < a && a <= 768) {
                     // alert('a');
-                    $('.tabLinkMainWrapMainDivMobile').affix({offset: {top: 820}});
+                    $('.tabLinkMainWrapMainDIV').affix({offset: {top: 820}});
                 }
                 else if(415 < a && a <= 630){
                     // alert('b');
-                    $('.tabLinkMainWrapMainDivMobile').affix({offset: {top: 1000}});
+                    $('.tabLinkMainWrapMainDIV').affix({offset: {top: 1000}});
                 }
                 else if(a <= 415){
                     // alert('c');
-                    $('.tabLinkMainWrapMainDivMobile').affix({offset: {top: 1050}});
+                    $('.tabLinkMainWrapMainDIV').affix({offset: {top: 1050}});
 
                 }
 
-                // $( window ).resize(function() {
-                //     if(768 < a ) {
-                //          // alert('a');
-                //         $('.tabLinkMainWrapMainDivMobile').affix({offset: {top: 860}});
-                //     }
-                //
-                //     else if( 630 < a && a <= 768) {
-                //          // alert('b');
-                //         $('.tabLinkMainWrapMainDivMobile').affix({offset: {top: 820}});
-                //
-                //     }
-                //
-                //     else if( 415 < a && a <= 630) {
-                //          // alert('b');
-                //         $('.tabLinkMainWrapMainDivMobile').affix({offset: {top: 1000}});
-                //
-                //     }
-                //
-                //     else if(a <= 415) {
-                //          // alert('c');
-                //         $('.tabLinkMainWrapMainDivMobile').affix({offset: {top: 190}});
-                //
-                //     }
-                })
             })
         </script>
 
@@ -1598,7 +1573,6 @@ if ($total == 0)
                 $('#myModal').modal('toggle');
                 player.play();
             }
-
         </script>
     @endif
 
@@ -1690,17 +1664,17 @@ if ($total == 0)
         }
 
         // Get the element with id="defaultOpen" and click on it
-        document.getElementById("defaultOpen").click();
-        function hideMobileTabLink() {
-            if($(window).width() < 992) {
-                $('.tabLinkMainWrapMainDivMobile').hide();
-            }
-        }
-        function showMobileTabLink() {
-            if($(window).width() < 992) {
-                $('.tabLinkMainWrapMainDivMobile').show()
-            }
-        }
+        // document.getElementById("defaultOpen").click();
+        // function hideMobileTabLink() {
+        //     if($(window).width() < 992) {
+        //         $('.tabLinkMainWrapMainDivMobile').hide();
+        //     }
+        // }
+        // function showMobileTabLink() {
+        //     if($(window).width() < 992) {
+        //         $('.tabLinkMainWrapMainDivMobile').show()
+        //     }
+        // }
 
 
         function newPostModal(kind = '') {
@@ -1822,14 +1796,14 @@ if ($total == 0)
         });
 
         $(window).scroll(function() {
-            if(!$('.tabLinkMainWrapMainDivPC').hasClass('affix')){
+            if(!$('.tabLinkMainWrapMainDIV').hasClass('affix')){
                 $('.topBarContainerGeneralDesc').addClass('display-none');
             }
         });
 
         $(document).ready(function() {
             $('.generalDescBtnTopBar').click(function() {
-                $('.tabLinkMainWrapMainDivPC').addClass('affix');
+                $('.tabLinkMainWrapMainDIV').addClass('affix');
                 $('.topBarContainerGeneralDesc').removeClass('display-none');
                 $('.topBarContainerPosts').addClass('display-none');
                 $('.topBarContainerQAndAs').addClass('display-none');
@@ -1845,7 +1819,7 @@ if ($total == 0)
             });
 
             $('.postsBtnTopBar').click(function() {
-                $('.tabLinkMainWrapMainDivPC').addClass('affix');
+                $('.tabLinkMainWrapMainDIV').addClass('affix');
                 $('.topBarContainerGeneralDesc').addClass('display-none');
                 $('.topBarContainerPosts').removeClass('display-none');
                 $('.topBarContainerQAndAs').addClass('display-none');
@@ -1861,7 +1835,7 @@ if ($total == 0)
             });
 
             $('.QAndAsBtnTopBar').click(function() {
-                $('.tabLinkMainWrapMainDivPC').addClass('affix');
+                $('.tabLinkMainWrapMainDIV').addClass('affix');
                 $('.topBarContainerGeneralDesc').addClass('display-none');
                 $('.topBarContainerPosts').addClass('display-none');
                 $('.topBarContainerQAndAs').removeClass('display-none');
@@ -1877,7 +1851,7 @@ if ($total == 0)
             });
 
             $('.similarLocationsBtnTopBar').click(function() {
-                $('.tabLinkMainWrapMainDivPC').addClass('affix');
+                $('.tabLinkMainWrapMainDIV').addClass('affix');
                 $('.topBarContainerGeneralDesc').addClass('display-none');
                 $('.topBarContainerPosts').addClass('display-none');
                 $('.topBarContainerQAndAs').addClass('display-none');
@@ -1956,21 +1930,21 @@ if ($total == 0)
                 createPhotoModal('عکس های کاربران', userPhotosForAlbum);
         }
 
-        function openTab(tabName, elmnt, fontColor) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tabContentMainWrap");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-            }
-            tablinks = document.getElementsByClassName("tabLinkMainWrap");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].style.color = "";
-            }
-            document.getElementById(tabName).style.display = "block";
-            elmnt.style.color = fontColor;
-
-            initSwiper();
-        }
+        // function openTab(tabName, elmnt, fontColor) {
+        //     var i, tabcontent, tablinks;
+        //     tabcontent = document.getElementsByClassName("tabContentMainWrap");
+        //     for (i = 0; i < tabcontent.length; i++) {
+        //         tabcontent[i].style.display = "none";
+        //     }
+        //     tablinks = document.getElementsByClassName("tabLinkMainWrap");
+        //     for (i = 0; i < tablinks.length; i++) {
+        //         tablinks[i].style.color = "";
+        //     }
+        //     document.getElementById(tabName).style.display = "block";
+        //     elmnt.style.color = fontColor;
+        //
+        //     initSwiper();
+        // }
 
         // Get the element with id="defaultOpen" and click on it
         document.getElementById("defaultOpenMainWrap").style.color = "rgb(77, 199, 188)";
