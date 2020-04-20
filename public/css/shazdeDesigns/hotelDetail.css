@@ -4234,7 +4234,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     #BODYCON .tabLinkMainWrapMainDiv {
         display: flex;
     }
-    
+
     #mainDivPlacePost .topHeaderBarPosts {
         display: inline-block;
     }
@@ -4251,6 +4251,12 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 @media only screen and (min-width: 768px) {
     .postsMainDivInSpecificMode > div:nth-child(1) {
         padding-right: 10px !important;
+    }
+
+    .tabLinkMainWrapMainDIV.affix {
+        width: auto;
+        left: 0;
+        right: 0;
     }
 }
 
@@ -4404,6 +4410,20 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     .replyToCommentMainDiv {
         width: 99%;
         margin: 40px 0 15px;
+    }
+
+
+    .navbar-collapse.collapse {
+        display: block!important;
+        border: none;
+    }
+
+    .navbar-nav {
+        margin: 0;
+    }
+
+    .navbar-nav>li {
+        float: left;
     }
 }
 
