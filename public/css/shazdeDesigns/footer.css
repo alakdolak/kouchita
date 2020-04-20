@@ -154,13 +154,17 @@ footer li > img, .small-ico {
     align-items: center;
 }
 
-.aboutShazde {
+.footerRside {
     float: right;
     width: 75%;
     font-size: 14px !important;
     font-weight: 500;
     line-height: 24px !important;
     text-align: justify;
+}
+
+#aboutShazde {
+    overflow: hidden;
 }
 
 .aboutShazdeLink > a {
@@ -174,10 +178,10 @@ footer li > img, .small-ico {
 }
 
 .aboutShazdeLinkMargin {
-    margin: 60px 0 5px;
+    margin-top: 60px;
 }
 
-.footerOtherBoxes {
+.footerLsideBoxes {
     float: left;
     margin-right: 4%;
 }
@@ -197,17 +201,16 @@ footer li > img, .small-ico {
 }
 
 .footMoreLessBtn {
-    width: 80%;
     color: #053a3e;
     text-align: center;
     font-size: 14px;
     font-weight: 800;
-    margin-top: 3px;
+    margin-top: 5px;
     display: none;
 }
 
 .aboutShazdeMoreLess {
-    height: 79px !important;
+    height: auto !important;
 }
 
 
@@ -1170,7 +1173,7 @@ footer .profileMenuLinks {
 
 
 @media (max-width: 1300px) {
-    .aboutShazde {
+    .footerRside {
         font-size: 13px !important;
         line-height: 22px !important;
     }
@@ -1183,13 +1186,13 @@ footer .profileMenuLinks {
         height: 35px;
         background-size: 35px;
     }
-    .footerOtherBoxes {
+    .footerLsideBoxes {
         margin-right: 3%;
     }
 }
 
 @media (max-width: 1175px) {
-    .aboutShazde {
+    .footerRside {
         font-size: 12px !important;
         line-height: 20px !important;
     }
@@ -1202,13 +1205,13 @@ footer .profileMenuLinks {
         height: 32px;
         background-size: 32px;
     }
-    .footerOtherBoxes {
+    .footerLsideBoxes {
         margin-right: 2%;
     }
 }
 
 @media (max-width: 1055px) {
-    .aboutShazde {
+    .footerRside {
         font-size: 11px !important;
         line-height: 19px !important;
     }
@@ -1217,7 +1220,7 @@ footer .profileMenuLinks {
         height: 30px;
         background-size: 30px;
     }
-    .footerOtherBoxes {
+    .footerLsideBoxes {
         margin-right: 1%;
     }
 }
@@ -1234,16 +1237,19 @@ footer .profileMenuLinks {
         display: none;
     }
 
-    .aboutShazde {
+    .footerRside {
         width: 80%;
         overflow: hidden;
+    }
+    .aboutShazdeMoreLess {
+        height: 95px !important;
     }
     .aboutShazdeLink > a {
         font-size: 11px;
         font-weight: 800;
     }
     .aboutShazdeLinkMargin {
-        margin: 20px 0 5px;
+        margin-top: 20px;
     }
     .footerIconHor {
         width: 25px;
@@ -1253,7 +1259,7 @@ footer .profileMenuLinks {
     .footMoreLessBtn {
         display: block;
     }
-    .footerOtherBoxes {
+    .footerLsideBoxes {
         text-align: center;
         line-height: 12px;
         margin: 0 4%;
@@ -1271,17 +1277,10 @@ footer .profileMenuLinks {
     .footHideTabletMenu {
         display: none;
     }
-
-    /*.aboutShazde {*/
-    /*    width: 100%;*/
-    /*}*/
-    /*.footerOtherBoxes {*/
-    /*    width: 25%;*/
-    /*}*/
 }
 
 @media (max-width: 880px) {
-    .aboutShazde {
+    .footerRside {
         font-size: 10px !important;
     }
     .aboutShazdeLink > a {
@@ -1293,7 +1292,7 @@ footer .profileMenuLinks {
         height: 23px;
         background-size: 23px;
     }
-    .footerOtherBoxes {
+    .footerLsideBoxes {
         margin: 0 3%;
     }
 }
