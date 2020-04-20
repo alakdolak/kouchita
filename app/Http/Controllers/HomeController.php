@@ -323,7 +323,6 @@ class HomeController extends Controller
                 $place->pic = $pics;
                 $place->image = $place->pic[0]->pic;
             }
-//            dd($place->pic);
 
             $topAmaken = $this->getTopPlaces(1, 'city', $place->id);
             $topRestaurant = $this->getTopPlaces(3, 'city', $place->id);

@@ -181,11 +181,11 @@
                     @if(isset($place->pic))
                         <div class="cityPagePics swiper-container">
                             <div class="swiper-wrapper position-relative"  style="height: 100%">
-                                @foreach($place->pic as $item)
+                                @for($i = 0; $i < count($place->pic) && $i < 5; $i++)
                                     <div class="swiper-slide position-relative cityImgSlider" onclick="showSliderPic()">
-                                        <img src="{{$item->pic}}" class="resizeImgClass" style="width: 100%;" alt="{{$place->name}}">
+                                        <img src="{{$place->pic[$i]->pic}}" class="resizeImgClass" style="width: 100%;" alt="{{$place->name}}">
                                     </div>
-                                @endforeach
+                                @endfor
                             </div>
                             <!-- Add Pagination -->
                             <div class="swiper-pagination"></div>
@@ -782,6 +782,7 @@
 
     var reviews = {!! json_encode($reviews) !!};
     var cityPic = {!! $place->pic !!};
+    var showCityPicNumber = 5;
     var cityName1 = '{{ $place->name }}';
 
     function showSliderPic(){
@@ -803,7 +804,6 @@
     };
 
     function showReviewPics(_id){
-        console.log('in')
         var selectReview = 0;
         var reviewPicForAlbum = [];
 
@@ -1151,6 +1151,29 @@
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
         },
+    });
+
+    var changeSliderNum = 0;
+    picSwiper.on('slideChange', function () {
+
+        if(showCityPicNumber < cityPic.length) {
+            if (changeSliderNum == 3) {
+                let nuum = 0;
+                while (nuum < 5 && showCityPicNumber < cityPic.length) {
+                    slide = '<div class="swiper-slide position-relative cityImgSlider" onclick="showSliderPic()">\n' +
+                        '                                        <img src="' + cityPic[showCityPicNumber]['pic'] + '" class="resizeImgClass" style="width: 100%;" alt="' + cityName1 + '">\n' +
+                        '                                    </div>';
+                    picSwiper.addSlide(showCityPicNumber + 1, slide);
+                    nuum++;
+                    showCityPicNumber++;
+                }
+                resizeFitImg('resizeImgClass');
+
+                changeSliderNum = 0;
+            } else
+                changeSliderNum++;
+        }
+
     });
 </script>
 
