@@ -66,90 +66,90 @@ $config = \App\models\ConfigModel::first();
                 </a>
             </div>
         </div>
-
-        <div id="aboutShazde" class="aboutShazde aboutShazdeMoreLess">
-            <div class="clear-both hideOnScreen"></div>
+{{--        aboutShazdeMoreLess--}}
+        <div>
+            <div class="footerRside">
+                <div id="aboutShazde" class="aboutShazdeMoreLess">
+                    <div class="clear-both hideOnScreen"></div>
+                    <div>
+                        کوچیتا، پلتفرم و شبکه‌ای اجتماعی در حوزه گردشگری است که با هدف ارتقاء سواد گردشگری، افزایش کیفیت سفر و سهولت استفاده افراد جامعه، اعم از داخلی و بین‌المللی، از خدمات گردشگری ایجاد شده است.
+                        ارائه اطلاعات جامع، به‌روز و صحیح گردشگری در زمینه: مراکز اقامتی اعم از: هتل، مسافرخانه، مراکز بوم‌گردی، کمپ، ویلا و خانه اجاره‌ای، رستوران‌ها، جاذبه‌ها و اماکن گردشگری، سوغات و صنایع‌دستی، آداب و رسوم محلی شامل: غذاهای محلی، اصطلاحات محلی، لباس محلی، گویش محلی و دانش محلی، جشنواره‌ها، آئین‌ها و رویدادهای فرهنگی، خدمات تسهیلگر گردشگری از جمله وسایل نقلیه و تورهای گردشگری و سایر خدمات مکمل؛ امکان ایجاد شبکه‌ای اجتماعی به‌منظور تبادل اطلاعات و دیدگاه‌ها که در آن کاربران می‌توانند: عکس‌های خود را به اشتراک بگذارند؛ اطلاعات و تجربیات خود در خصوص هریک از اطلاعات گردشگری را به اشتراک بگذارند؛ پرسش خود را در خصوص هریک از اطلاعات گردشگری مطرح نمایند و به یکدیگر پاسخ دهند؛ عکس‌ها و اطلاعات به اشتراک گذاشته شده توسط سایر کاربران را بپسندند و در خصوص آن دیدگاه مطرح نمایند و یکدیگر را دنبال نمایند و امکان مقایسه قیمت، خرید و رزرو خدمات تسهیلگر سفر از جمله رزرو وسایل نقلیه شامل هواپیما، قطار و اتوبوس، رزرو مراکز اقامتی، رزرو رستوران، خرید تورهای گردشگری، خرید سوغات و صنابع دستی، خرید اقلام سفر، خرید بلیت اماکن و جاذبه‌های گردشگری و خرید بلیت جشنواره‌ها، آئین‌ها و رویدادهای فرهنگی از مهم‌ترین امکاناتی است که این پلتفرم در اختیار کاربران قرار می‌دهد.
+                    </div>
+                </div>
+                <div class="footMoreLessBtn" onclick="showMorefooter()">
+                    <span class="footMoreLessBtnText">نمایش بیشتر</span>
+                    <span class="footMoreLessBtnText hidden">نمایش کمتر</span>
+                </div>
+                <div class="aboutShazdeLinkMargin">
+                    <div class="aboutShazdeLink" style="margin-bottom: 5px">
+                        شاید بخواهید در خصوص
+                        <a href="{{route('policies')}}"> حریم خصوصی و قوانین سایت </a>
+                        بیشتر بدانید.
+                        در صورت نیاز به کمک، صفحه
+                        <a href="#"> راهنما </a>
+                        را بخوانید و در صورت نیاز
+                        <a href="#"> با ما تماس بگیرید. </a>
+                    </div>
+                    <div class="aboutShazdeLink">
+                        این سایت متعلق به مجموعه کوچیتا می باشد؛
+                        <a href="#"> درباره ما </a>
+                        بیشتر بدانید.
+                        کوچیتا محصولی از
+                        <a href="http://bogendesign.co" style="color: #053a3e !important;"> بوگن دیزاین </a>
+                        می باشد؛ ما را بیشتر بشناسید.
+                    </div>
+                </div>
+            </div>
             <div>
-                کوچیتا، پلتفرم و شبکه‌ای اجتماعی در حوزه گردشگری است که با هدف ارتقاء سواد گردشگری، افزایش کیفیت سفر و سهولت استفاده افراد جامعه، اعم از داخلی و بین‌المللی، از خدمات گردشگری ایجاد شده است.
-                ارائه اطلاعات جامع، به‌روز و صحیح گردشگری در زمینه: مراکز اقامتی اعم از: هتل، مسافرخانه، مراکز بوم‌گردی، کمپ، ویلا و خانه اجاره‌ای، رستوران‌ها، جاذبه‌ها و اماکن گردشگری، سوغات و صنایع‌دستی، آداب و رسوم محلی شامل: غذاهای محلی، اصطلاحات محلی، لباس محلی، گویش محلی و دانش محلی، جشنواره‌ها، آئین‌ها و رویدادهای فرهنگی، خدمات تسهیلگر گردشگری از جمله وسایل نقلیه و تورهای گردشگری و سایر خدمات مکمل؛ امکان ایجاد شبکه‌ای اجتماعی به‌منظور تبادل اطلاعات و دیدگاه‌ها که در آن کاربران می‌توانند: عکس‌های خود را به اشتراک بگذارند؛ اطلاعات و تجربیات خود در خصوص هریک از اطلاعات گردشگری را به اشتراک بگذارند؛ پرسش خود را در خصوص هریک از اطلاعات گردشگری مطرح نمایند و به یکدیگر پاسخ دهند؛ عکس‌ها و اطلاعات به اشتراک گذاشته شده توسط سایر کاربران را بپسندند و در خصوص آن دیدگاه مطرح نمایند و یکدیگر را دنبال نمایند و امکان مقایسه قیمت، خرید و رزرو خدمات تسهیلگر سفر از جمله رزرو وسایل نقلیه شامل هواپیما، قطار و اتوبوس، رزرو مراکز اقامتی، رزرو رستوران، خرید تورهای گردشگری، خرید سوغات و صنابع دستی، خرید اقلام سفر، خرید بلیت اماکن و جاذبه‌های گردشگری و خرید بلیت جشنواره‌ها، آئین‌ها و رویدادهای فرهنگی از مهم‌ترین امکاناتی است که این پلتفرم در اختیار کاربران قرار می‌دهد.
-            </div>
-        </div>
+                <div class="footerLsideBoxes footHideTabletMenu" >
+                    <ul>
+                        <li class="footTitle hideOnPhone">دقیق تر شوید</li>
+                        <li class="footMenu hideOnPhone">
+                            <a href="{{route('place.list', ['kindPlaceId' => 6, 'mode' => 'country'])}}">طبیعت‌گردی</a>
+                        </li>
+                        <li class="footMenu hideOnPhone">
+                            <a href="{{route('place.list', ['kindPlaceId' => 3, 'mode' => 'country'])}}">رستوران‌ها</a>
+                        </li>
+                        <li class="footMenu hideOnPhone">
+                            <a href="{{route('place.list', ['kindPlaceId' => 4, 'mode' => 'country'])}}">اقامتگاه‌ها</a>
+                        </li>
+                        <li class="footMenu hideOnPhone">
+                            <a href="{{route('place.list', ['kindPlaceId' => 1, 'mode' => 'country'])}}">جاذبه‌‌ها</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footerLsideBoxes" >
+                    <ul>
+                        <li class="footTitle hideOnPhone">دقیق تر شوید</li>
+                        <li class="footMenu hideOnPhone">
+                            <a href="{{route('place.list', ['kindPlaceId' => 10, 'mode' => 'country'])}}">سوغات و صنایع‌دستی</a>
+                        </li>
+                        <li class="footMenu hideOnPhone">
+                            <a href="{{route('place.list', ['kindPlaceId' => 11, 'mode' => 'country'])}}">غذاهای محلی</a>
+                        </li>
 
-        <div class="footerOtherBoxes footHideTabletMenu" >
-            <ul>
-                <li class="footTitle hideOnPhone">دقیق تر شوید</li>
-                <li class="footMenu hideOnPhone">
-                    <a href="{{route('place.list', ['kindPlaceId' => 6, 'mode' => 'country'])}}">طبیعت‌گردی</a>
-                </li>
-                <li class="footMenu hideOnPhone">
-                    <a href="{{route('place.list', ['kindPlaceId' => 3, 'mode' => 'country'])}}">رستوران‌ها</a>
-                </li>
-                <li class="footMenu hideOnPhone">
-                    <a href="{{route('place.list', ['kindPlaceId' => 4, 'mode' => 'country'])}}">اقامتگاه‌ها</a>
-                </li>
-                <li class="footMenu hideOnPhone">
-                    <a href="{{route('place.list', ['kindPlaceId' => 1, 'mode' => 'country'])}}">جاذبه‌‌ها</a>
-                </li>
-            </ul>
-        </div>
+                        <li class="footMenu footShowTabletMenu hideOnPhone">
+                            <a href="{{route('place.list', ['kindPlaceId' => 6, 'mode' => 'country'])}}">طبیعت‌گردی</a>
+                        </li>
+                        <li class="footMenu footShowTabletMenu hideOnPhone">
+                            <a href="{{route('place.list', ['kindPlaceId' => 3, 'mode' => 'country'])}}">رستوران‌ها</a>
+                        </li>
+                        <li class="footMenu footShowTabletMenu hideOnPhone">
+                            <a href="{{route('place.list', ['kindPlaceId' => 4, 'mode' => 'country'])}}">اقامتگاه‌ها</a>
+                        </li>
 
-        <div id="footerOtherBoxes" class="footerOtherBoxes" >
-            <ul>
-                <li class="footTitle hideOnPhone">دقیق تر شوید</li>
-                <li class="footMenu hideOnPhone">
-                    <a href="{{route('place.list', ['kindPlaceId' => 10, 'mode' => 'country'])}}">سوغات و صنایع‌دستی</a>
-                </li>
-                <li class="footMenu hideOnPhone">
-                    <a href="{{route('place.list', ['kindPlaceId' => 11, 'mode' => 'country'])}}">غذاهای محلی</a>
-                </li>
+                        <li class="footMenu hideOnPhone">
+                            <a href="{{route('mainArticle')}}">سفرنامه‌ها</a>
+                        </li>
+                        <li class="footMenu hideOnPhone">
+                            <a href="{{route('mainArticle')}}">بوم گردی</a>
+                        </li>
 
-                <li class="footMenu footShowTabletMenu hideOnPhone">
-                    <a href="{{route('place.list', ['kindPlaceId' => 6, 'mode' => 'country'])}}">طبیعت‌گردی</a>
-                </li>
-                <li class="footMenu footShowTabletMenu hideOnPhone">
-                    <a href="{{route('place.list', ['kindPlaceId' => 3, 'mode' => 'country'])}}">رستوران‌ها</a>
-                </li>
-                <li class="footMenu footShowTabletMenu hideOnPhone">
-                    <a href="{{route('place.list', ['kindPlaceId' => 4, 'mode' => 'country'])}}">اقامتگاه‌ها</a>
-                </li>
-
-                <li class="footMenu hideOnPhone">
-                    <a href="{{route('mainArticle')}}">سفرنامه‌ها</a>
-                </li>
-                <li class="footMenu hideOnPhone">
-                    <a href="{{route('mainArticle')}}">بوم گردی</a>
-                </li>
-
-                <li class="footMenu footShowTabletMenu hideOnPhone">
-                    <a href="{{route('place.list', ['kindPlaceId' => 1, 'mode' => 'country'])}}">جاذبه‌‌ها</a>
-                </li>
-            </ul>
-        </div>
-
-        <div class="clear-both"></div>
-
-        <div class="footMoreLessBtn" onclick="showMorefooter()">
-            <span class="footMoreLessBtnText">نمایش بیشتر</span>
-            <span class="footMoreLessBtnText hidden">نمایش کمتر</span>
-        </div>
-
-        <div class="aboutShazde">
-            <div class="aboutShazdeLink aboutShazdeLinkMargin">
-                شاید بخواهید در خصوص
-                <a href="{{route('policies')}}"> حریم خصوصی و قوانین سایت </a>
-                بیشتر بدانید.
-                در صورت نیاز به کمک، صفحه
-                <a href="#"> راهنما </a>
-                را بخوانید و در صورت نیاز
-                <a href="#"> با ما تماس بگیرید. </a>
-            </div>
-            <div class="aboutShazdeLink">
-                این سایت متعلق به مجموعه کوچیتا می باشد؛
-                <a href="#"> درباره ما </a>
-                بیشتر بدانید.
-                کوچیتا محصولی از
-                <a href="http://bogendesign.co" style="color: #053a3e !important;"> بوگن دیزاین </a>
-                می باشد؛ ما را بیشتر بشناسید.
+                        <li class="footMenu footShowTabletMenu hideOnPhone">
+                            <a href="{{route('place.list', ['kindPlaceId' => 1, 'mode' => 'country'])}}">جاذبه‌‌ها</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
 
