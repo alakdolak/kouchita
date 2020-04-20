@@ -15,7 +15,6 @@ footer ul {
 .screenFooterStyle {
     height: auto;
     background-color: #fcc156;
-    color: #16174f;
     direction: rtl;
     padding: 20px;
     text-align: right;
@@ -24,8 +23,21 @@ footer ul {
 
 .footTitle {
     font-size: 17px;
-    font-weight: 500;
+    font-weight: 800;
     padding: 0 4px 4px;
+    color: #053a3e;
+}
+
+.footMenu {
+    font-weight: 800;
+}
+
+.footMenu > a {
+    color: #720d19 !important;
+}
+
+.footShowTabletMenu {
+    display: none;
 }
 
 footer li > a {
@@ -69,65 +81,51 @@ footer li > img, .small-ico {
     display: inline-block;
 }
 
-.footerIconVer {
-    width: 22px;
-    height: 22px;
-    background-size: 22px;
-}
-
 .footerIconHor {
-    width: 50px;
-    height: 50px;
-    background-size: 50px;
-}
-
-.gardeshname {
-    background-position: 0 -24px;
-    font-size: 24px;
-}
-
-.instagram {
-    background-position: 0 -69px;
-}
-
-.telegram {
-    background-position: 0 -137px;
-}
-
-.aparat {
-    background-position: 0 -182px;
-}
-
-.bogendesign {
-    background-position: 0 -205px;
+    width: 40px;
+    height: 40px;
+    background-size: 40px;
+    margin-top: 7px;
 }
 
 .linkedin {
-    background-image: url('../../images/footer/linkedin.png');
+    background-image: url('../../images/icons/linkedin.png');
     background-repeat: no-repeat;
     display: inline-block;
 }
 
 .facebook {
-    background-image: url('../../images/footer/facebook.png');
+    background-image: url('../../images/icons/facebook.png');
     background-repeat: no-repeat;
     display: inline-block;
 }
 
 .pinterest {
-    background-image: url('../../images/footer/pinterest.png');
+    background-image: url('../../images/icons/pintrest.png');
+    background-repeat: no-repeat;
+    display: inline-block;
+}
+
+.instagram {
+    background-image: url('../../images/icons/instagram.png');
+    background-repeat: no-repeat;
+    display: inline-block;
+}
+
+.telegram {
+    background-image: url('../../images/icons/telegram.png');
+    background-repeat: no-repeat;
+    display: inline-block;
+}
+
+.aparat {
+    background-image: url('../../images/icons/aparat.png');
     background-repeat: no-repeat;
     display: inline-block;
 }
 
 .twitter {
-    background-image: url('../../images/footer/twitter.png');
-    background-repeat: no-repeat;
-    display: inline-block;
-}
-
-.googlePlus {
-    background-image: url('../../images/footer/googlePlus.png');
+    background-image: url('../../images/icons/twitter.png');
     background-repeat: no-repeat;
     display: inline-block;
 }
@@ -145,38 +143,43 @@ footer li > img, .small-ico {
 }
 
 .footerLogo {
-    width: 18%;
+    width: 19%;
     clear: right;
 }
 
 .footerSocialMediaBox {
     width: 19%;
-    margin-left: 5%;
-    padding-top: 5px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
 .aboutShazde {
     float: right;
-    width: 66%;
-    font-size: 10px !important;
+    width: 75%;
+    font-size: 14px !important;
+    font-weight: 500;
     line-height: 24px !important;
     text-align: justify;
 }
 
 .aboutShazdeLink > a {
-    color: #16174f !important;
-    font-size: 10px;
-    font-weight: 600;
+    color: #720d19 !important;
+    font-size: 14px;
+    font-weight: 800;
 }
 
 .aboutShazdeLink > a:hover {
     text-decoration: underline !important;
 }
 
+.aboutShazdeLinkMargin {
+    margin: 60px 0 5px;
+}
+
 .footerOtherBoxes {
-    float: right;
-    width: 11%;
-    margin-right: 6%;
+    float: left;
+    margin-right: 4%;
 }
 
 #socialMedias > ul > li:not(:first-child) {
@@ -191,6 +194,20 @@ footer li > img, .small-ico {
 
 #socialMedias > ul > li:last-child > a {
     margin-right: 4px
+}
+
+.footMoreLessBtn {
+    width: 80%;
+    color: #053a3e;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 800;
+    margin-top: 3px;
+    display: none;
+}
+
+.aboutShazdeMoreLess {
+    height: 79px !important;
 }
 
 
@@ -1152,6 +1169,59 @@ footer .profileMenuLinks {
 }
 
 
+@media (max-width: 1300px) {
+    .aboutShazde {
+        font-size: 13px !important;
+        line-height: 22px !important;
+    }
+    .aboutShazdeLink > a {
+        font-size: 13px;
+        font-weight: 800;
+    }
+    .footerIconHor {
+        width: 35px;
+        height: 35px;
+        background-size: 35px;
+    }
+    .footerOtherBoxes {
+        margin-right: 3%;
+    }
+}
+
+@media (max-width: 1175px) {
+    .aboutShazde {
+        font-size: 12px !important;
+        line-height: 20px !important;
+    }
+    .aboutShazdeLink > a {
+        font-size: 12px;
+        font-weight: 800;
+    }
+    .footerIconHor {
+        width: 32px;
+        height: 32px;
+        background-size: 32px;
+    }
+    .footerOtherBoxes {
+        margin-right: 2%;
+    }
+}
+
+@media (max-width: 1055px) {
+    .aboutShazde {
+        font-size: 11px !important;
+        line-height: 19px !important;
+    }
+    .footerIconHor {
+        width: 30px;
+        height: 30px;
+        background-size: 30px;
+    }
+    .footerOtherBoxes {
+        margin-right: 1%;
+    }
+}
+
 @media (max-width: 992px){
     .FilterTopController{
         display: flex;
@@ -1159,16 +1229,46 @@ footer .profileMenuLinks {
         align-items: center;
         flex-direction: column-reverse;
     }
-    .ordering{
-        font-size: 20px !important;
-        width: 75%;
-    }
-    .orders{
-        padding: 20px 5px;
-        margin: 10px 0;
-    }
 
     .footerPhoneMenuBar {
+        display: none;
+    }
+
+    .aboutShazde {
+        width: 80%;
+        overflow: hidden;
+    }
+    .aboutShazdeLink > a {
+        font-size: 11px;
+        font-weight: 800;
+    }
+    .aboutShazdeLinkMargin {
+        margin: 20px 0 5px;
+    }
+    .footerIconHor {
+        width: 25px;
+        height: 25px;
+        background-size: 25px;
+    }
+    .footMoreLessBtn {
+        display: block;
+    }
+    .footerOtherBoxes {
+        text-align: center;
+        line-height: 12px;
+        margin: 0 4%;
+        overflow: hidden;
+    }
+    .footTitle {
+        line-height: 20px !important;
+    }
+    .footMenu > a {
+        font-size: 10px !important;
+    }
+    .footShowTabletMenu {
+        display: block;
+    }
+    .footHideTabletMenu {
         display: none;
     }
 
@@ -1180,20 +1280,30 @@ footer .profileMenuLinks {
     /*}*/
 }
 
+@media (max-width: 880px) {
+    .aboutShazde {
+        font-size: 10px !important;
+    }
+    .aboutShazdeLink > a {
+        font-size: 10px;
+        font-weight: 800;
+    }
+    .footerIconHor {
+        width: 23px;
+        height: 23px;
+        background-size: 23px;
+    }
+    .footerOtherBoxes {
+        margin: 0 3%;
+    }
+}
+
 @media (max-width: 767px){
     .FilterTopController{
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column-reverse;
-    }
-    .ordering{
-        font-size: 20px !important;
-        width: 75%;
-    }
-    .orders{
-        padding: 20px 5px;
-        margin: 10px 0;
     }
 
     .footerPhoneMenuBar {

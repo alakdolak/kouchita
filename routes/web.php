@@ -3,6 +3,7 @@
 use App\models\ConfigModel;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Route;
+
 Route::get('resizePostImagesPage', function(){
     return view('notUse.compressImage');
 });

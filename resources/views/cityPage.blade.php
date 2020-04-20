@@ -39,7 +39,6 @@
     <meta property="article:tag" content="اطلاعات {{$place->name}}"/>
 
 
-
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/home_rebranded.css?v=4')}}"/>
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/long_lived_global_legacy_2.css?v=2')}}"/>
@@ -60,7 +59,6 @@
 
     <script>
         var searchDir = '{{route('totalSearch')}}';
-        {{--var kindPlaceId = '{{$kindPlaceId}}';--}}
         var getStates = '{{route('getStates')}}';
         var getGoyesh = '{{route('getGoyesh')}}';
         var url;
@@ -70,6 +68,11 @@
 
         h3{
             margin: 0px;
+        }
+
+        .cityImgSlider{
+            overflow: hidden;
+            height: 340px;
         }
     </style>
 
@@ -133,12 +136,12 @@
                                     {{$item->summery}}
                                     <span class="showMoreText" onclick="showMoreText(this)"></span>
                                 </p>
-                                <p class="completePostTextShown display-none" style="white-space: pre-line">
+                                <p class="compvarePostTextShown display-none" style="white-space: pre-line">
                                     {{$item->text}}
                                     <span class="showLessText" onclick="showLessText(this)">کمتر</span>
                                 </p>
                             @else
-                                <p class="completePostTextShown">
+                                <p class="compvarePostTextShown">
                                     {{$item->text}}
                                 </p>
                             @endif
@@ -175,7 +178,24 @@
 
             <div class="row cpMainBox">
                 <div class="col-md-8 col-xs-12 pd-0Imp mg-bt-10">
-                    <img class="cpPic" src="{{$place->image}}">
+                    @if(isset($place->pic))
+                        <div class="cityPagePics swiper-container">
+                            <div class="swiper-wrapper position-relative"  style="height: 100%">
+                                @foreach($place->pic as $item)
+                                    <div class="swiper-slide position-relative cityImgSlider" onclick="showSliderPic()">
+                                        <img src="{{$item->pic}}" class="resizeImgClass" style="width: 100%;" alt="{{$place->name}}">
+                                    </div>
+                                @endforeach
+                            </div>
+                            <!-- Add Pagination -->
+                            <div class="swiper-pagination"></div>
+                            <!-- Add Arrows -->
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
+                        </div>
+                    @else
+                        <img class="cpPic" src="{{$place->image}}">
+                    @endif
                 </div>
                 <div class="col-md-4 col-xs-12 pd-0Imp">
                     <div class="col-xs-12">
@@ -749,19 +769,41 @@
     </div>
 </div>
 
+
+
 @include('layouts.placeFooter')
 
 @include('hotelDetailsPopUp')
 
-<script defer src="{{URL::asset('js/cityPage/cityPageOffer.js')}}"></script>
-
+<script src="{{URL::asset('js/cityPage/cityPageOffer.js')}}"></script>
+{{--<script !src="">console.log('hello')</script>--}}
 <script>
-
     resizeFitImg('resizeImgClass');
 
     var reviews = {!! json_encode($reviews) !!};
+    var cityPic = {!! $place->pic !!};
+    var cityName1 = '{{ $place->name }}';
+
+    function showSliderPic(){
+        var cityPicForAlbum = [];
+
+        for(var i = 0; i < cityPic.length; i++){
+            cityPicForAlbum[i] = {
+                'id' : cityPic[i]['id'],
+                'sidePic' : cityPic[i]['pic'],
+                'mainPic' : cityPic[i]['pic'],
+                'userPic' : '',
+                'userName' : 'کوچیتا',
+                'uploadTime' : '',
+                'showInfo' : false,
+            }
+        }
+
+        createPhotoModal('عکس های شهر '+ cityName1, cityPicForAlbum);
+    };
 
     function showReviewPics(_id){
+        console.log('in')
         var selectReview = 0;
         var reviewPicForAlbum = [];
 
@@ -1095,6 +1137,20 @@
                 spaceBetween: 20,
             }
         }
+    });
+
+    var picSwiper = new Swiper('.cityPagePics', {
+        slidesPerGroup: 1,
+        loop: true,
+        autoplay: {
+            delay: 4000,
+            disableOnInteraction: false,
+        },
+        loopFillGroupWithBlank: true,
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
     });
 </script>
 
