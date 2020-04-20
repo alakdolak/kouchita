@@ -337,7 +337,7 @@ class HomeController extends Controller
             $articleUrl = \url('/article/list/state/' . $place->listName);
             $locationName = ["name" => $place->name, 'cityName' => $place->name, 'cityNameUrl' => $place->listName, 'articleUrl' => $articleUrl, 'kindState' => 'state', 'state' => $place->name];
 
-            $allCities = Cities::where('stateId', $place->id)->pluck('id')->toArray();
+            $allCities = Cities::where('stateId', $place->id)->where('isVillage', '>', 0)->pluck('id')->toArray();
 
             $allAmakenId = Amaken::whereIn('cityId', $allCities)->pluck('id')->toArray();
             $allAmaken = Amaken::whereIn('cityId', $allCities)->get();
@@ -959,9 +959,9 @@ class HomeController extends Controller
             }
 
             if (!empty($key2))
-                $tmp = DB::select("SELECT cities.name as targetName, state.name as stateName, cities.id as id from cities, state WHERE (replace(cities.name, ' ', '') LIKE '%$key%' or replace(cities.name, ' ', '') LIKE '%$key2%') and stateId = state.id");
+                $tmp = DB::select("SELECT cities.name as targetName, state.name as stateName, cities.id as id from cities, state WHERE (replace(cities.name, ' ', '') LIKE '%$key%' or replace(cities.name, ' ', '') LIKE '%$key2%') and stateId = state.id and isVillage = 0");
             else
-                $tmp = DB::select("SELECT cities.name as targetName, state.name as stateName, cities.id as id from cities, state WHERE replace(cities.name, ' ', '') LIKE '%$key%' and  stateId = state.id");
+                $tmp = DB::select("SELECT cities.name as targetName, state.name as stateName, cities.id as id from cities, state WHERE replace(cities.name, ' ', '') LIKE '%$key%' and  stateId = state.id and isVillage = 0");
 
             foreach ($tmp as $itr) {
                 $itr->amakenCount = Amaken::where('cityId', $itr->id)->count();
@@ -2159,7 +2159,7 @@ class HomeController extends Controller
             $allSogatSanaie = SogatSanaie::where('cityId', $id)->pluck('id')->toArray();
         }
         else if($kind == 'state'){
-            $allCities = Cities::where('stateId', $id)->pluck('id')->toArray();
+            $allCities = Cities::where('stateId', $id)->where('isVillage', '>', 0)->pluck('id')->toArray();
 
             $allAmaken = Amaken::whereIn('cityId', $allCities)->pluck('id')->toArray();
             $allMajara = Majara::whereIn('cityId', $allCities)->pluck('id')->toArray();
@@ -2235,7 +2235,7 @@ class HomeController extends Controller
         if($kind == 'city')
             $cId[0] = $cityId;
         else
-            $cId = Cities::where('stateId', $cityId)->pluck('id')->toArray();
+            $cId = Cities::where('stateId', $cityId)->where('isVillage', '>', 0)->pluck('id')->toArray();
 
         $allPlace = DB::table($kindPlace->tableName)->whereIn('cityId', $cId)->pluck('id')->toArray();
 
