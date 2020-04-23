@@ -20,13 +20,8 @@ class StreamingController extends Controller
     public function streamingLive($room)
     {
         $name = random_int(10000, 99999);
-        if(auth()->check() && isset($_GET['name'])){
-            $user = User::where('username', $_GET['name'])->first();
-            if($user !=  null && $user->id == auth()->user()->id)
-                $kind = 'streamer';
-            else
-                $kind = 'see';
-        }
+        if(auth()->check())
+            $kind = 'streamer';
         else
             $kind = 'see';
 
