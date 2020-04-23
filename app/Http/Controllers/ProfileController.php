@@ -680,4 +680,12 @@ class ProfileController extends Controller {
 
         return;
     }
+
+    public function authLive()
+    {
+        $name = $_GET['name'];
+        $user = \auth()->user();
+
+        return \redirect(\url('streaming/live/' . $name . '?name=' . $user->username));
+    }
 }

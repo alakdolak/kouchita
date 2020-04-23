@@ -509,6 +509,8 @@ Route::group(array('middleware' => 'nothing'), function () {
 // profile
 Route::group(array('middleware' => ['throttle:30', 'nothing', 'auth']), function () {
 
+    Route::get('authLive', 'ProfileController@authLive')->name('authLive');
+
     Route::get('addPlace/index', 'ProfileController@addPlaceByUserPage')->name('addPlaceByUser.index');
 
     Route::post('addPlace/store', 'ProfileController@storeAddPlaceByUser')->name('addPlaceByUser.store');
@@ -713,6 +715,8 @@ Route::middleware(['web'])->group(function (){
     Route::get('streaming/index', 'StreamingController@indexStreaming')->name('streaming.index');
 
     Route::get('streaming/show', 'StreamingController@showStreaming')->name('streaming.show');
+
+    Route::get('streaming/live/{room}', 'StreamingController@streamingLive')->name('streaming.live');
 });
 
 
@@ -733,4 +737,62 @@ Route::group(array('middleware' => 'nothing'), function () {
 
     Route::any('amakenList/{city}/{mode}', array('as' => 'amakenList', 'uses' => 'NotUseController@showAmakenList'));
     Route::post('getAmakenListElems/{city}/{mode}', array('as' => 'getAmakenListElems', 'uses' => 'NotUseController@getAmakenListElems'));
+});
+
+
+
+Route::get('webrtcN', function(){
+    return view('webrtc.webrtcn');
+});
+Route::post('signalWebrtc', function(\Illuminate\Http\Request $request){
+    dd($request->all());
+});
+
+
+Route::get('webrtcTech', function(){
+    return redirect(url('webrtcPage?kind=teacher&name=teacher'));
+});
+
+Route::get('webrtcStudent', function(){
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < 10; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return redirect(url('webrtcPage?kind=student&name='.$randomString));
+});
+
+Route::get('webrtcPage', function(){
+
+    $data = array( "format" => "urls" );
+    $data_json = json_encode($data);
+
+    $curl = curl_init();
+    curl_setopt_array( $curl, array (
+        CURLOPT_HTTPHEADER => array("Content-Type: application/json","Content-Length: " . strlen($data_json)),
+        CURLOPT_POSTFIELDS => $data_json,
+        CURLOPT_URL => "https://global.xirsys.net/_turn/MyFirstApp",
+        CURLOPT_USERPWD => "kiavash:89364dca-82f5-11ea-9fb1-0242ac130003",
+        CURLOPT_HTTPAUTH => CURLAUTH_BASIC,
+        CURLOPT_CUSTOMREQUEST => "PUT",
+        CURLOPT_RETURNTRANSFER => 1
+    ));
+
+    $resp = curl_exec($curl);
+    if(curl_error($curl)){
+        echo "Curl error: " . curl_error($curl);
+    };
+    curl_close($curl);
+    $urls = $resp;
+//    $urls = json_decode($resp);
+//dd($urls);
+    $kind = $_GET['kind'];
+    $name = $_GET['name'];
+
+    return view('webrtc.webrtc', compact(['kind', 'name', 'urls']));
+});
+
+Route::post('webrtcTurn', function (\Illuminate\Http\Request $request){
+    dd($request);
 });
