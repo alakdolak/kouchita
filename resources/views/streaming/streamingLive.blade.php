@@ -4,6 +4,13 @@
     <link rel="stylesheet" href="{{URL::asset('css/streaming/mainStreaming.css')}}">
     <link rel="stylesheet" href="{{URL::asset('css/streaming/showStreaming.css')}}">
 
+    <script>
+        if(!location.hash.replace('#', '').length) {
+            location.href = location.href.split('#')[0] + '#' + (Math.random() * 100).toString().replace('.', '');
+            location.reload();
+        }
+    </script>
+
     <style>
         video{
             width: 100%;
