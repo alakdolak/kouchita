@@ -109,9 +109,6 @@ Route::group(array('middleware' => ['throttle:30']), function () {
 
 });
 
-Route::post('uploadExcels', 'HomeController@uploadExcels');
-Route::post('doUploadExcels', 'HomeController@doUploadExcels');
-
 Route::group(array('middleware' => ['throttle:30']), function () {
     Route::get('fillTable', function(){
 
@@ -209,6 +206,18 @@ Route::group(array('middleware' => ['throttle:30']), function () {
 
 Route::group(array('middleware' => ['throttle:30', 'nothing']), function () {
 
+    Route::get('/landingPage', 'MainController@landigPage')->name('landingPage');
+
+    Route::get('/', array('as' => 'home', 'uses' => 'PlaceController@showMainPage'));
+
+    Route::get('main', function (){
+        return redirect(url('/'));
+    })->name('main');
+
+    Route::get('main/{mode}', function(){
+        return redirect(url('/'));
+    })->name('mainMode');
+
     //PDF creator
     Route::get('alaki/{tripId}', array('as' => 'alaki', 'uses' => 'HomeController@alaki'));
 
@@ -263,16 +272,6 @@ Route::group(array('middleware' => ['throttle:30', 'nothing']), function () {
     Route::post('getPhotos', array('as' => 'getPhotos', 'uses' => 'PlaceController@getPhotos'));
 
     Route::post('getPhotoFilter', array('as' => 'getPhotoFilter', 'uses' => 'PlaceController@getPhotoFilter'));
-
-    Route::get('/', array('as' => 'home', 'uses' => 'PlaceController@showMainPage'));
-
-    Route::get('main', function (){
-        return redirect(url('/'));
-    })->name('main');
-
-    Route::get('main/{mode}', function(){
-        return redirect(url('/'));
-    })->name('mainMode');
 
     Route::get('showAllPlaces/{placeId1}/{kindPlaceId1}/{placeId2?}/{kindPlaceId2?}/{placeId3?}/{kindPlaceId3?}/{placeId4?}/{kindPlaceId4?}', array('as' => 'showAllPlaces4', 'uses' => 'PlaceController@showAllPlaces'));
 
