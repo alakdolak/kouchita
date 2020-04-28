@@ -530,6 +530,9 @@ class ProfileController extends Controller {
             ],
             'hotel' => [
                 'id' => 4,
+            ],
+            'boomgardy' => [
+                'id' => 12,
             ]
         ];
 
@@ -562,13 +565,16 @@ class ProfileController extends Controller {
             $place->website = $data->website;
             $place->description = $data->description;
 
-            if(in_array($place->kindPlaceId, [1, 3, 4])){
+            if(in_array($place->kindPlaceId, [1, 3, 4, 12])){
                 $features['featuresId'] = $data->features;
                 if($place->kindPlaceId == 3)
                     $features['kind'] = $data->restaurantKind;
                 else if($place->kindPlaceId == 4){
                     $features['kind_id'] = $data->hotelKind;
                     $features['rate_int'] = $data->hotelStar;
+                }
+                else if($place->kindPlaceId == 12){
+                    $features['room_num'] = $data->room_num;
                 }
             }
             else if($place->kindPlaceId == 10){

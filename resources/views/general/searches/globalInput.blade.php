@@ -16,7 +16,7 @@
     </div>
 </div>
 
-{{--<script src="{{URL::asset('js/jquery.farsiInput.js')}}"></script>--}}
+<script src="{{URL::asset('js/jquery.farsiInput.js')}}"></script>
 <script>
     // $(document).ready(function() {
     //     $("#globalSearchInput").farsiInput();
