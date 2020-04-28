@@ -1,3 +1,9 @@
+<style>
+    .settingImg{
+        max-width: 100%;
+    }
+</style>
+
 <div class="row">
     <div class="settingTabs" onclick="toggleSettingSection(this)">
         تغییر اسلایدرها
@@ -24,7 +30,7 @@
                             <div class="col-md-10">
                                 <div class="row">
                                     <div class="col-md-6">
-                                         <img id="showUploadImgSlider0##number##" src="##pic##" style="height: 100px; ">
+                                         <img id="showUploadImgSlider0##number##" class="settingImg" src="##pic##" style="height: 100px;">
                                     </div>
                                     <div class="col-md-6">
                                         <input type="file" id="uploadImgSlider0##number##" accept="image/*" onchange="showPicInput(this, 'showUploadImgSlider0##number##')">
@@ -109,7 +115,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <img src="{{isset($middleBan['5']) && isset($middleBan['5'][$i]) ? $middleBan['5'][$i]['pic'] : ''}}"
-                                                 id="showMiddleBannerInput5{{$i}}" style="height: 100px; ">
+                                                 id="showMiddleBannerInput5{{$i}}" class="settingImg" style="height: 100px; ">
                                         </div>
                                         <div class="col-md-6">
                                             <input type="file" id="uploadImgBanner5{{$i}}" accept="image/*"
@@ -164,7 +170,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <img src="{{isset($middleBan['6']) ? $middleBan['6']['pic'] : ''}}"
-                                             id="showMiddleBannerInput60" style="height: 100px; ">
+                                             id="showMiddleBannerInput60" class="settingImg" style="height: 100px; ">
                                     </div>
                                     <div class="col-md-6">
                                         <input type="file" id="uploadImgBanner60" accept="image/*"
@@ -334,7 +340,7 @@
                 '                            <div class="col-md-10">\n' +
                 '                            <div class="row">\n' +
                 '                                <div class="col-md-6">\n' +
-                '                                    <img src="' + sil[i]["pic"] + '" id="showMiddleBannerInput' + kind + '' + ss + '" style="height: 100px; ">\n' +
+                '                                    <img src="' + sil[i]["pic"] + '" class="settingImg" id="showMiddleBannerInput' + kind + '' + ss + '" style="height: 100px; ">\n' +
                 '                                </div>\n' +
                 '                                <div class="col-md-6">\n' +
                 '                                    <input type="file" id="uploadImgBanner' + kind + '' + ss + '" accept="image/*" onchange="showPicInput(this, \'showMiddleBannerInput' + kind + '' + ss + '\')">\n' +
@@ -386,7 +392,7 @@
             '                            <div class="col-md-10">\n' +
             '                            <div class="row">\n' +
             '                                <div class="col-md-6">\n' +
-            '                                    <img src="#" id="showMiddleBannerInput' + kind + '' + ss + '" style="height: 100px;">\n' +
+            '                                    <img src="#" class="settingImg" id="showMiddleBannerInput' + kind + '' + ss + '" style="height: 100px;">\n' +
             '                                </div>\n' +
             '                                <div class="col-md-6">\n' +
             '                                    <input type="file" id="uploadImgBanner' + kind + '' + ss + '" accept="image/*" onchange="showPicInput(this, \'showMiddleBannerInput' + kind + '' + ss + '\')">\n' +

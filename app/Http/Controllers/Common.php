@@ -1027,8 +1027,6 @@ function getReviewPicsURL($review){
         else{
             $item2->picUrl = URL::asset('userPhoto/' . $review->mainFile . '/' . $review->place->file . '/' . $item2->pic);
         }
-        $item2->width = getimagesize($item2->picUrl)[0];
-        $item2->height = getimagesize($item2->picUrl)[1];
     }
     return $review;
 }
