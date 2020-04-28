@@ -18,6 +18,9 @@
     <script src="{{URL::asset('js/autosize.min.js')}}"></script>
 
     <style>
+        body{
+            min-width: auto;
+        }
         .innerPicAddPlace{
             width: 263px;
             height: 285px;
@@ -82,12 +85,110 @@
         .showOnPc{
             display: flex;
         }
+        .step1Header{
+            text-align: center;
+            font-size: 30px;
+            padding: 15px;
+            font-weight: bold
+        }
+        .marginRight{
+            margin-right: 40px
+        }
+        .matInputTopDiv{
+            width: 49%;
+        }
+        .endSectionButton{
+            width: 100%;
+            border-radius: 30px 30px 30px 30px !important;
+        }
+        .endSectionFooter{
+            display: none;
+        }
+
+        #materialRow{
+            width: 100%;
+        }
+        .stepInputBoxMat{
+            width: 100%;
+        }
+        @media (max-width: 1200px) {
+            .container{
+                width: auto;
+            }
+        }
+        @media (max-width: 992px){
+            .categories{
+                font-size: 18px;
+            }
+        }
+
         @media (max-width: 900px){
             .showOnMobile{
                 display: flex;
             }
             .showOnPc{
                 display: none;
+            }
+            .stepTitle{
+                font-size: 15px;
+            }
+            .headerOfBox{
+                font-size: 1.6em;
+            }
+        }
+
+        @media (max-width: 800px) {
+            .step1Header{
+                font-size: 25px;
+            }
+            .headerOfBox{
+                flex-direction: column;
+                text-align: center;
+            }
+            .stepsMilestoneMainDiv{
+                margin-top: 15px;
+            }
+        }
+
+        @media (max-width: 700px) {
+            #selectCategoryDiv{
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .categories{
+                width: 30%;
+            }
+            .box{
+                width: 100%;
+            }
+            .inputFliedRow{
+                flex-direction: column;
+                align-items: baseline;
+            }
+            .inputFlied{
+                flex-direction: row;
+                width: 100%;
+            }
+            .marginRight{
+                margin-right: 0px;
+            }
+            .stepInputBox{
+                width: 100%;
+            }
+            .detailListItem{
+                min-width: 49%;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .stepTitle{
+                font-size: 18px !important;
+            }
+            .stepHeader{
+                width: auto;
+            }
+            .addresText{
+                font-size: 15px !important;
             }
         }
 
@@ -98,7 +199,7 @@
     <div class="container">
         <div class="bodyStyle">
 
-            <div style=" font-size: 22px; font-weight: bold; padding-bottom: 15px;">
+            <div style=" font-size: 22px; font-weight: bold; padding-bottom: 15px; text-align: center">
                 امروز از هم جداییم ، اما برای فردای با هم بودن تلاش می کنیم
             </div>
 
@@ -199,12 +300,12 @@
 
                 <div class="bodySection">
                     <div class="step1 bodyOfSteps">
-                        <div style="text-align: center; font-size: 30px; padding: 15px; font-weight: bold">لطفا دسته مناسب را با توجه به فعالیت خود انتخاب کنید.</div>
+                        <div class="step1Header">لطفا دسته مناسب را با توجه به فعالیت خود انتخاب کنید.</div>
                         <div id="selectCategoryDiv" class="text-align-center"></div>
                     </div>
 
                     <div class="step2 bodyOfSteps hidden">
-                        <div class="inputFliedRow">
+                        <div class="inputFliedRow inputFlied">
                             <div class="icons stepInputIconRequired redStar"></div>
                             <div class="stepInputBox">
                                 <div class="stepInputBoxText">
@@ -218,7 +319,7 @@
                         </div>
 
                         <div class="inputFliedRow">
-                            <div class="inputFliedRow">
+                            <div class="inputFliedRow inputFlied">
                                 <div class="icons stepInputIconRequired redStar"></div>
                                 <div class="stepInputBox">
                                     <div style="display: flex; align-items: center">
@@ -240,7 +341,7 @@
                                 </div>
                             </div>
 
-                            <div class="inputFliedRow" style="margin-right: 40px">
+                            <div class="inputFliedRow inputFlied marginRight">
                                 <div class="icons stepInputIconRequired redStar"></div>
                                 <div class="stepInputBox float-left">
                                     <div class="stepInputBoxText">
@@ -268,40 +369,41 @@
                                 <div class="mg-tp-5" style="font-size: 20px; text-align: center">موقعیت موردنظر را بر روی نقشه پیدا نموده و پین را بر روی آن قرار دهید. (کلیک در کامپیوتر و لمس نقشه در گوشی)</div>
                             </div>
 
-                            <div class="row onlyForHotelsRest">
-                                <div class="col-md-6" style="display: flex; align-items: center">
+                            <div class="row inputFliedRow onlyForHotelsRestBoom ">
+                                <div class="inputFliedRow inputFlied" style="display: flex; align-items: center">
                                     <div class="icons stepInputIconRequired redStar"></div>
-                                    <div class="stepInputBox" style="width: 100%">
-                                        <div class="stepInputBoxText" style="width: 45%;">
+                                    <div class="stepInputBox">
+                                        <div class="stepInputBoxText">
                                             <div class="stepInputBoxRequired" style=" font-size: 13px; font-weight: bold;"> تلفن ثابت <span class="headerCategoryName"></span> </div>
                                         </div>
-                                        <input class="stepInputBoxInput" id="fixPhone" style="width: 100%">
+                                        <input class="stepInputBoxInput" id="fixPhone">
                                     </div>
                                 </div>
 
-                                <div class="col-md-6">
-                                    <div class="stepInputBox" style="width: 100%">
-                                        <div class="stepInputBoxText" style="width: 20%">
+                                <div class="inputFliedRow inputFlied marginRight">
+                                    <div class="stepInputBox">
+                                        <div class="stepInputBoxText">
                                             <div class="stepInputBoxRequired" style=" font-weight: bold; font-size: 13px;">تلفن همراه</div>
                                         </div>
-                                        <div style="width: 100%;">
-                                            <input class="stepInputBoxInput" id="phone" placeholder="09xxxxxxxxx" style="width: 100%; text-align: right; padding-right: 15px">
+                                        <div>
+                                            <input class="stepInputBoxInput" id="phone" placeholder="09xxxxxxxxx" style="text-align: right; padding-right: 15px">
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="stepNotice">شماره را همانگونه که با موبایل خود تماس می گیرید وارد نمایید. در صورت وجود بیش از یک شماره با استفاده از - شماره ها را جدا نمایید</div>
-                            <div class="row" style="margin-top: 20px;">
-                                <div class="col-md-6">
-                                    <div class="stepInputBox" style="width: 100%">
+                            <div class="stepNotice onlyForHotelsRestBoom">شماره را همانگونه که با موبایل خود تماس می گیرید وارد نمایید. در صورت وجود بیش از یک شماره با استفاده از - شماره ها را جدا نمایید</div>
+
+                            <div class="row inputFliedRow onlyForHotelsRest" style="margin-top: 20px;">
+                                <div class="inputFliedRow inputFlied">
+                                    <div class="stepInputBox">
                                         <div class="stepInputBoxText">
                                             <div class="stepInputBoxRequired">سایت</div>
                                         </div>
                                         <input class="stepInputBoxInput" id="website" type="url">
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="stepInputBox" style="width: 100%">
+                                <div class="inputFliedRow inputFlied marginRight">
+                                    <div class="stepInputBox">
                                         <div class="stepInputBoxText">
                                             <div class="stepInputBoxRequired">ایمیل</div>
                                         </div>
@@ -819,45 +921,44 @@
                                 <div class="listItem">
                                     <div class="step5Title" style="display: flex; align-items: center;">
                                         مواد لازم
-{{--                                        <span class="ui_icon addPostIcon plusIcon"></span>--}}
                                     </div>
                                     <div id="materialRow" class="subListItem">
-                                        <div class="row">
-                                            <div class="col-md-6">
+                                        <div class="row" style="display: flex; justify-content: space-around; direction: ltr">
+                                            <div class="matInputTopDiv">
                                                 <div class="stepInputBox">
-                                                    <input class="stepInputBoxInput" id="materialVol_1" style="text-align: right; padding-right: 10px;" placeholder="مقدار" onchange="addNewRow(1)">
+                                                    <input class="stepInputBoxInput stepInputBoxMat" id="materialVol_1" style="text-align: right; padding-right: 10px;" placeholder="مقدار" onchange="addNewRow(1)">
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-6">
-                                                <div class="stepInputBox">
-                                                    <input class="stepInputBoxInput" id="materialName_1" style="text-align: right; padding-right: 10px;" placeholder="چه چیزی نیاز است" onkeyup="changeMaterialName(this, 1)" onchange="addNewRow(1)">
+                                            <div class="matInputTopDiv">
+                                                <div class="stepInputBox ">
+                                                    <input class="stepInputBoxInput stepInputBoxMat" id="materialName_1" style="text-align: right; padding-right: 10px;" placeholder="چه چیزی نیاز است" onkeyup="changeMaterialName(this, 1)" onchange="addNewRow(1)">
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="stepInputBox">
-                                                    <input class="stepInputBoxInput" id="materialVol_2" style="text-align: right; padding-right: 10px;" placeholder="مقدار" onchange="addNewRow(2)">
+                                        <div class="row" style="display: flex; justify-content: space-around; direction: ltr">
+                                            <div class="matInputTopDiv">
+                                                <div class="stepInputBox ">
+                                                    <input class="stepInputBoxInput stepInputBoxMat" id="materialVol_2" style="text-align: right; padding-right: 10px;" placeholder="مقدار" onchange="addNewRow(2)">
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-6">
-                                                <div class="stepInputBox">
-                                                    <input class="stepInputBoxInput" id="materialName_2" style="text-align: right; padding-right: 10px;" placeholder="چه چیزی نیاز است" onkeyup="changeMaterialName(this, 1)" onchange="addNewRow(2)">
+                                            <div class="matInputTopDiv">
+                                                <div class="stepInputBox ">
+                                                    <input class="stepInputBoxInput stepInputBoxMat" id="materialName_2" style="text-align: right; padding-right: 10px;" placeholder="چه چیزی نیاز است" onkeyup="changeMaterialName(this, 2)" onchange="addNewRow(2)">
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="stepInputBox">
-                                                    <input class="stepInputBoxInput" id="materialVol_3" style="text-align: right; padding-right: 10px;" placeholder="مقدار" onchange="addNewRow(3)">
+                                        <div class="row" style="display: flex; justify-content: space-around; direction: ltr">
+                                            <div class="matInputTopDiv">
+                                                <div class="stepInputBox ">
+                                                    <input class="stepInputBoxInput stepInputBoxMat" id="materialVol_3" style="text-align: right; padding-right: 10px;" placeholder="مقدار" onchange="addNewRow(3)">
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-6">
-                                                <div class="stepInputBox">
-                                                    <input class="stepInputBoxInput" id="materialName_3" style="text-align: right; padding-right: 10px;" placeholder="چه چیزی نیاز است" onkeyup="changeMaterialName(this, 3)" onchange="addNewRow(2)">
+                                            <div class="matInputTopDiv">
+                                                <div class="stepInputBox ">
+                                                    <input class="stepInputBoxInput stepInputBoxMat" id="materialName_3" style="text-align: right; padding-right: 10px;" placeholder="چه چیزی نیاز است" onkeyup="changeMaterialName(this, 3)" onchange="addNewRow(3)">
                                                 </div>
                                             </div>
                                         </div>
@@ -867,19 +968,49 @@
 
                                 <div class="listItem">
                                     <div class="step5Title" style="margin-bottom: 0px">دستور پخت</div>
-                                    <div class="subListItem">
+                                    <div class="subListItem" style="width: 100%;">
                                         <textarea class="addresText" name="recipes" id="recipes" rows="5" placeholder=" دستور پخت را اینجا وارد کنید..." style="width: 100%; padding: 10px; font-size: 20px"> </textarea>
                                     </div>
                                 </div>
 
                             </div>
+
+                            <div class="inputBody_12 inputBody">
+
+                                <div class="listItem" style="display: flex;">
+                                    <div class="step5Title" style="width: auto">تعداد اتاق</div>
+                                    <div class="subListItem">
+                                        <div class="detailListItem">
+                                            <input type="number" class="selectInput" id="room_num" name="room_num">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @foreach($kindPlace['boomgardy']['features'] as $kind)
+                                    <div class="listItem">
+                                        <div class="step5Title">{{$kind->name}}</div>
+                                        <div class="subListItem">
+                                            @foreach($kind->subFeat as $sub)
+                                                <div class="detailListItem">
+                                                    <label class="checkBoxDiv">
+                                                        <input id="amaken_{{$sub->id}}" name="boomgardyFeature[]" value="{{$sub->id}}" type="checkbox">
+                                                        {{$sub->name}}
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+
                         </div>
                     </div>
 
                     <div class="step4 bodyOfSteps hidden" style="display: flex; flex-wrap: wrap; justify-content: space-around;">
                         <textarea class="addresText" name="placedescription" id="placedescription" rows="10" style="width: 100%; font-size: 20px" placeholder="توضیحات خود با توجه به نمونه متن پایین وارد کنید." ></textarea>
                         <div class="sampleDescription">
-                            <div>نمونه متن</div>
+                            <div id="sampleText"></div>
                         </div>
                     </div>
 
@@ -896,6 +1027,13 @@
                             </div>
                             <div class="step6picText">نام عکس</div>
                         </div>
+                    </div>
+
+                    <div class="step6 bodyOfSteps hidden" style="display: flex; flex-wrap: wrap; justify-content: space-around;">
+                        <div style="font-size: 20px; margin-top: 23px; text-align: center">
+                            پس از بررسی و ویرایش اطلاعات وارد شده به بهترین نحو ممکن ،<span class="headerCategoryName"></span>شما مانند نمونه زیر به نمایش در خواهد امد.
+                        </div>
+                        <a id="sampleLink" href="" target="_blank" style="font-size: 30px; margin-top: 15px;"></a>
                     </div>
                 </div>
 
@@ -971,7 +1109,6 @@
             $("#placedescription").farsiInput();
 
             autosize($('textarea'));
-
         });
     </script>
 
@@ -979,48 +1116,88 @@
         let categories = [
             {
                 'name': 'مرکز اقامتی',
+                'kind': 'hotel',
                 'icon': 'hotel',
                 'id'  : 4,
-                'text' : 'مهمانسرای ورزش شهر زیبا و دیدنی همدان از اقامتگاه‌های خوب این شهره که مجهز به امکانات رفاهی شایسته‌ای برای رفاه مسافران و مهمانان عزیزه. ورزشکاران محترم و تیم‌های ورزشی می تونن با اقامات توی این مهمانسرا علاوه بر استراحت از امکانات ویژه اون هم بهره ببرند. این مهمانسرا که در نزدیکی ورزشگاه شهید حاجی بابایی افتتاح شده، دارای چندین سالن مجزا و استاندار از جمله بدنسازی، زمین چمن و سالن‌های چندمنظوره انواع رشته‌های ورزشی هست که آماده میزبانی اقشار مختلف و به طور ویژه ورزشکاران عزیز هست.'
+                'text' : 'مهمانسرای ورزش شهر زیبا و دیدنی همدان از اقامتگاه‌های خوب این شهره که مجهز به امکانات رفاهی شایسته‌ای برای رفاه مسافران و مهمانان عزیزه. ورزشکاران محترم و تیم‌های ورزشی می تونن با اقامات توی این مهمانسرا علاوه بر استراحت از امکانات ویژه اون هم بهره ببرند. این مهمانسرا که در نزدیکی ورزشگاه شهید حاجی بابایی افتتاح شده، دارای چندین سالن مجزا و استاندار از جمله بدنسازی، زمین چمن و سالن‌های چندمنظوره انواع رشته‌های ورزشی هست که آماده میزبانی اقشار مختلف و به طور ویژه ورزشکاران عزیز هست.',
+                'sample': {
+                    'name': 'smaple',
+                    'link': 'koochita.com'
+                }
             },
             {
                 'name': 'جاذبه',
+                'kind': 'atraction',
                 'icon': 'atraction',
                 'id'  : 1,
                 'text' : 'منطقه حفاظت شده یخاب اصفهان به عنوان پناهگاه حیات وحش یخاب نیز شناخته می‌شود و در فاصله 20 کیلومتری از شهر ابوزیدآباد و در نزدیکی بند ریگ و کویر سیازگه ابوزیدآباد قرار دارد. وه تسمیه اسم این منطقه به دلیل وجود چشمه یخاب در دل ارتفاعات این منطقه است که در هوای گرم و سوزان تابستان نیز آبی خنک دارد.\n' +
                     'انواع پستانداران منطقه حفاظت شده یخاب شامل: کل و بز، قوچ و میش، گرگ، کفتار، گربه شنی، کاراکال و... است و پرندگانی مانند: عقاب طلائی، بالابان، هوبره، کبک، دودوک و... در این منطقه زندگی می‌کنند.\n' +
-                    'اکو سیستم این منطقه و تنوع زیستگاه‌های موجود در آن جاذبه فراوانی برای علاقمندان به طبیعت و طبیعت‌گردی دارد. ورود به این منطقه دارای محدودیت‌هایی است. به دلیل قرار داشتن منطقه حفاظت شده یخاب در مجاورت پارک ملی و مهاجرت حیوانات به این منطقه در برخی فصول نیروهای حفاظتی این منطقه اقدام به گشت و کنترل در این منطقه می‌کنند. منطقه حفاظت شده یخاب در اوایل سال 1392 رسما به عنوان منطقه شکار ممنوع معرفی شد.'
+                    'اکو سیستم این منطقه و تنوع زیستگاه‌های موجود در آن جاذبه فراوانی برای علاقمندان به طبیعت و طبیعت‌گردی دارد. ورود به این منطقه دارای محدودیت‌هایی است. به دلیل قرار داشتن منطقه حفاظت شده یخاب در مجاورت پارک ملی و مهاجرت حیوانات به این منطقه در برخی فصول نیروهای حفاظتی این منطقه اقدام به گشت و کنترل در این منطقه می‌کنند. منطقه حفاظت شده یخاب در اوایل سال 1392 رسما به عنوان منطقه شکار ممنوع معرفی شد.',
+                'sample': {
+                    'name': 'smaple',
+                    'link': 'koochita.com'
+                }
             },
             {
                 'name': 'رستوران',
+                'kind': 'restaurant',
                 'icon': 'restaurant',
                 'id'  : 3,
-                'text' : ''
+                'text' : '',
+                'sample': {
+                    'name': 'smaple',
+                    'link': 'koochita.com'
+                }
             },
             {
                 'name': 'سوغات',
                 'icon': 'soghat',
+                'kind': 'soghat',
                 'id'  : 10,
-                'text' : ''
+                'text' : '',
+                'sample': {
+                    'name': 'smaple',
+                    'link': 'koochita.com'
+                }
             },
             {
                 'name': 'صنایع دستی',
+                'kind': 'sanaye',
                 'icon': 'sanaye',
                 'id'  : 10,
-                'text' : ''
+                'text' : '',
+                'sample': {
+                    'name': 'smaple',
+                    'link': 'koochita.com'
+                }
             },
             {
                 'name': 'غذای محلی',
                 'icon': 'ghazamahali',
+                'kind': 'ghazamahali',
                 'id'  : 11,
-                'text' : ''
+                'text' : '',
+                'sample': {
+                    'name': 'smaple',
+                    'link': 'koochita.com'
+                }
+            },
+            {
+                'name': 'بوم گردی',
+                'kind': 'boomgardy',
+                'icon': 'hotel',
+                'id'  : 12,
+                'text' : '',
+                'sample': {
+                    'name': 'smaple',
+                    'link': 'koochita.com'
+                }
             }
         ];
         let selectedCategory = null;
         let isPlace = true;
         let tryToGetFeatures = 3;
-        // let newPlaceId = 0;
-        let newPlaceId = 21;
+        let newPlaceId = 0;
 
         let myDropzone = new Dropzone("div#dropzone", {
             url: '{{route("addPlaceByUser.storeImg")}}',
@@ -1082,8 +1259,13 @@
             $('.headerCategoryName').text(selectedCategory['name']);
 
             $('.onlyForHotelsRest').css('display', 'none');
-            if(selectedCategory['id'] == 4 || selectedCategory['id'] == 3)
+            $('.onlyForHotelsRestBoom').css('display', 'none');
+
+            if(selectedCategory['id'] == 4 || selectedCategory['id'] == 3 )
                 $('.onlyForHotelsRest').css('display', 'flex');
+
+            if(selectedCategory['id'] == 4 || selectedCategory['id'] == 3 || selectedCategory['id'] == 12)
+                $('.onlyForHotelsRestBoom').css('display', 'flex');
 
             if(selectedCategory['id'] == 10 || selectedCategory['id'] == 11) {
                 $('#textForChooseCity').hide();
@@ -1095,6 +1277,10 @@
                 $('#textForChooseCity').show();
                 isPlace = true;
             }
+
+            $('#sampleText').text(selectedCategory['text']);
+            $('#sampleLink').text(selectedCategory['sample']['name']);
+            $('#sampleLink').attr('src', selectedCategory['sample']['link']);
 
             createInputPlace();
         }
@@ -1110,9 +1296,9 @@
                 $('#nextStep').attr('disabled', false);
             }
 
-            doChangeStep(inc);
-            return;
-
+            // doChangeStep(inc);
+            // return;
+console.log(currentSteps)
             if(inc == 1) {
                 if (currentSteps == 0 || currentSteps == 1)
                     doChangeStep(inc);
@@ -1122,6 +1308,8 @@
                     doChangeStep(inc);
                 else if(currentSteps == 4)
                     storeData();
+                else if(currentSteps == 5 || currentSteps == 6)
+                    doChangeStep(inc);
             }
             else
                 doChangeStep(inc);
@@ -1194,15 +1382,12 @@
                 $('#previousStep').css('display', 'none');
             }
             else if(currentSteps == 6){
-                $('#nextStep').html('تکمیل');
+                $('#nextStep').html('اتمام و بازگشت به صفحه اصلی');
+                $('#nextStep').addClass('endSectionButton');
+                $('.footerBox1').addClass('endSectionFooter');
             }
             else if(currentSteps == 7){
-                $('#nextStep').html('اتمام');
-                $('#previousStep').addClass('hidden');
-            }
-            else if(currentSteps == 8){
-                {{--document.location.href = '{{route('main')}}';--}}
-                currentSteps = 7;
+                document.location.href = '{{route('main')}}';
             }
 //for change color of each box of step
             $('.step' + currentSteps).removeClass('hidden');
@@ -1247,7 +1432,7 @@
             data['website'] = $('#website').val();
             data['description'] = $('#placedescription').val();
 
-            switch(selectedCategory['icon']){
+            switch(selectedCategory['kind']){
                 case 'atraction':
                     featureName = 'amakenFeature[]';
                     break;
@@ -1259,6 +1444,10 @@
                     featureName = 'hotelFeature[]';
                     data['hotelKind'] = $('#hotelKind').val();
                     data['hotelStar'] = $('#hotelStar').val();
+                    break;
+                case 'boomgardy':
+                    featureName = 'boomgardyFeature[]';
+                    data['room_num'] = $('#room_num').val();
                     break;
                 case 'soghat':
                     featureName = 'soghatFeatures[]';
@@ -1370,7 +1559,7 @@
                     error = false;
                 }
 
-                if(selectedCategory['id'] == 3 || selectedCategory['id'] == 4){
+                if(selectedCategory['id'] == 3 || selectedCategory['id'] == 4 || selectedCategory['id'] == 12){
                     let fixPhone = $('#fixPhone').val();
                     if(fixPhone.trim().length == 0){
                         $('#fixPhone').parent().css('background', '#ffafaf');
@@ -1427,15 +1616,15 @@
                 if(name.trim().length > 0 && vol.trim().length > 0){
                     nowMaterialRow++;
                     numMaterialRow++;
-                    text = '<div class="row">\n' +
-                        '<div class="col-md-6">\n' +
-                        '<div class="stepInputBox">\n' +
-                        '<input class="stepInputBoxInput" id="materialVol_' + numMaterialRow + '" style="text-align: right; padding-right: 10px;" placeholder="مقدار" onchange="addNewRow(' + numMaterialRow + ')">\n' +
+                    text = '<div class="row" style="display: flex; justify-content: space-around; direction: ltr">\n' +
+                        '<div class="matInputTopDiv">\n' +
+                        '<div class="stepInputBox ">\n' +
+                        '<input class="stepInputBoxInput stepInputBoxMat" id="materialVol_' + numMaterialRow + '" style="text-align: right; padding-right: 10px;" placeholder="مقدار" onchange="addNewRow(' + numMaterialRow + ')">\n' +
                         '</div>\n' +
                         '</div>\n' +
-                        '<div class="col-md-6">\n' +
-                        '<div class="stepInputBox">\n' +
-                        '<input class="stepInputBoxInput" id="materialName_' + numMaterialRow + '" style="text-align: right; padding-right: 10px;" placeholder="چه چیزی نیاز است" onkeyup="changeMaterialName(this, ' + numMaterialRow + ')" onchange="addNewRow(' + numMaterialRow + ')">\n' +
+                        '<div class="matInputTopDiv">\n' +
+                        '<div class="stepInputBox ">\n' +
+                        '<input class="stepInputBoxInput stepInputBoxMat" id="materialName_' + numMaterialRow + '" style="text-align: right; padding-right: 10px;" placeholder="چه چیزی نیاز است" onkeyup="changeMaterialName(this, ' + numMaterialRow + ')" onchange="addNewRow(' + numMaterialRow + ')">\n' +
                         '</div>\n' +
                         '</div>\n' +
                         '</div>';
@@ -1541,8 +1730,13 @@
                 }
 
                 likeCity.forEach(item => {
+                    if(item.isVillage == 0)
+                        cityKind = 'شهر' ;
+                    else
+                        cityKind = 'روستا' ;
+
                     result +=   '<div onclick="selectCity(this)" class="resultSearch" cityId="' + item.id + '">' +
-                        '   <p class="suggest cursor-pointer font-weight-700" id="suggest_1" style="margin: 0px">شهر ' + item.name + '</p>' +
+                        '   <p class="suggest cursor-pointer font-weight-700" id="suggest_1" style="margin: 0px">' + cityKind + ' ' + item.name + '</p>' +
                         '</div>';
                 });
 
@@ -1662,12 +1856,16 @@
                 }
             }
             else if(cityId != 0 && !cityId.match(numbers)){
+                $numsss = 0;
                 for(city of cities){
-                    lat += city['x'];
-                    lng += city['y'];
+                    if(city['x'] != 0 && city['y'] != 0){
+                        lat += city['x'];
+                        lng += city['y'];
+                        $numsss++;
+                    }
                 }
-                lat /= cities.length;
-                lng /= cities.length;
+                lat /= $numsss;
+                lng /= $numsss;
                 zoom = 8;
             }
 

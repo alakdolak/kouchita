@@ -17,26 +17,29 @@
 }
 .videoInfos{
     color: white;
-    padding: 10px 40px;
     width: 100%;
-    padding-bottom: 0px;
 }
+
 .videoInfosVideoName{
-    font-size: 1.2em;
+    font-size: 16px;
     cursor: context-menu;
+    font-weight: 600;
 }
+
 .mainUserPicSection{
     width: 100%;
     margin: 10px 0px;
     padding: 0;
     display: flex;
 }
+
 .mainUserPic{
     width: 50px;
     height: 50px;
     overflow: hidden;
     border-radius: 50%;
 }
+
 .mainUserInfos{
     margin-right: 10px;
     font-size: 16px;
@@ -44,12 +47,185 @@
     flex-direction: column;
     justify-content: center;
 }
+
 .mainUseruserName{
     color: #0076a3;
 }
+
 .videoUploadTime{
     font-size: 10px;
 }
+
+.liveComments {
+    background: white;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 50px;
+}
+
+.liveCommentsFirstLine {
+    color: #0076a3;
+    display: flex;
+    padding: 5px;
+    border-bottom: 2px solid #E5E5E5;
+    align-items: center;
+}
+
+.liveCommentsTitle {
+    font-size: 14px;
+    font-weight: 600;
+    width: 50%;
+}
+
+.liveCommentStatistics {
+    display: flex;
+    width: 50%;
+    flex-flow: row-reverse;
+}
+
+.liveCommentStatisticsDivs {
+    display: flex;
+    margin-right: 8px;
+    align-items: center;
+}
+
+.liveCommentsNums {
+    font-size: 14px;
+}
+
+.liveCommentsQuantityIcon:before {
+    font-family: Shazde_Regular2 !important;
+    content: '\E06C';
+}
+
+.liveCommentsWriterIcon:before {
+    font-family: Shazde_Regular2 !important;
+    content: '\E06E';
+    font-size: 13px;
+}
+
+.liveCommentsMainDiv {
+    max-height: 200px;
+    overflow: auto;
+}
+
+.eachLiveCommentMainDiv {
+    display: flex;
+    align-items: end;
+    padding: 5px;
+}
+
+.eachLiveCommentMainDiv .userPicDiv {
+    width: 30px;
+    height: 30px;
+}
+
+.eachLiveCommentMainDiv .mainUserInfos {
+    margin: 5px 5px 0;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.liveCommentContents {
+    text-align: justify;
+    color: black;
+    font-size: 14px;
+    width: 60%;
+    margin-top: 5px;
+}
+
+.liveComments .commentInputSection {
+    align-items: center;
+    padding: 5px;
+}
+
+.liveComments .userPicDiv {
+    width: 30px;
+    height: 30px;
+}
+
+.liveComments .commentInput {
+    padding: 2px;
+    font-size: 14px;
+    margin-right:5px;
+}
+
+.liveComments .commentInputSendButton {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 3px;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+
+.moreInfoMainDiv {
+    position: relative;
+    padding-bottom: 20px;
+}
+
+.moreInfoMainDiv .headerWithLine {
+    margin: 30px 0;
+}
+
+.moreInfoEachItem {
+    display: flex;
+    margin: 15px 0;
+}
+
+.mainDivImgMoreInfoItems {
+    display: flex;
+    background: white;
+    padding: 5px;
+    width: 130px;
+    align-items: center;
+    justify-content: center;
+}
+
+.moreInfoItemsDetails {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+.moreInfoItemsDetails .placeName {
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.moreInfoItemsDetails .placeRates {
+    display: flex;
+}
+
+.moreInfoItemsDetails .placeRates span {
+    display: inline-block;
+    float: right;
+    margin-left: 3px;
+}
+
+.moreInfoMainDiv .moreBtn,
+.descriptionSection .moreBtn {
+    border-radius: 5px;
+    color: white;
+    background: black;
+    padding: 2px 6px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+}
+
+.moreInfoMainDiv .moreBtn::after,
+.descriptionSection .moreBtn::after{
+    font-family: Shazde_Regular2 !important;
+    content: '\E03E';
+    margin-right: 5px;
+    font-size: 15px;
+}
+
 .toolSection{
     width: 100%;
     background: #232323;
@@ -59,9 +235,22 @@
     padding: 5px 0px;
     border-radius: 5px;
 }
+
+.fromThisPerson .videoSuggestion {
+    width: 100%;
+    background: transparent;
+}
+
+.liveIconDiv {
+    position: absolute;
+    top: 13px;
+    right: 13px;
+}
+
 .toolSectionButtons{
     display: flex;
 }
+
 .toolSectionButtonsCircle{
     width: 40px;
     height: 40px;
@@ -145,7 +334,32 @@
 .descriptionSection{
     color: white;
     margin-top: 35px;
+    position: relative;
+    padding-bottom: 25px;
 }
+
+.descriptionSectionBody {
+    padding: 0;
+    line-height: 1.8;
+}
+
+.interestingSlider {
+    display: flex;
+}
+
+.interestingSlider .videoSuggestion {
+    width: 32%;
+    background: transparent;
+}
+
+.interestingSlider .videoSugInfo {
+    padding: 0;
+}
+
+.interestingSlider .videoSuggestion:not(:last-child) {
+    margin-left: 2%;
+}
+
 .commentSection{
     margin-top: 35px;
 }

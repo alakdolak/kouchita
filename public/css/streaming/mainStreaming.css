@@ -33,11 +33,37 @@ body{
 .liveText{
     color: red;
 }
+
+.streamBody {
+    direction: rtl;
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mainDivStream {
+    display: flex;
+    flex-direction: row;
+    max-width: 1170px;
+}
+
+.mainDivStream > div:last-child {
+    margin-right: 5px;
+    width: 70%;
+}
+
+.mainDivStream > div:first-child {
+    margin-left: 5px;
+    width: 30%;
+}
+
 .mainShowBase{
     background: #3a3a3a;
     padding: 15px;
     border-radius: 8px;
     position: relative;
+    width: auto;
 }
 
 

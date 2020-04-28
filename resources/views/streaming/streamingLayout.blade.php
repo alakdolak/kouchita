@@ -59,7 +59,7 @@
 </div>
 
 
-<div style="direction: rtl; text-align: right">
+<div class="streamBody">
 
     <div class="container secHeader">
         <div class="secHeaderTabs">
@@ -68,7 +68,7 @@
         </div>
         <div class="secHeaderTabs">
             <img src="{{URL::asset('images/streaming/tv.png')}}" class="TvPngClass">
-            <span>مجموعه ها</span>
+            <span>مجموعه‌ها</span>
         </div>
         <div class="secHeaderTabs">
             <img src="{{URL::asset('images/streaming/play-button.png')}}" class="TvPngClass">
@@ -76,11 +76,11 @@
         </div>
         <div class="secHeaderTabs secHeaderTabsChoose">
             <span></span>
-            <span>مورد علاقه ها</span>
+            <span>موردعلاقه‌ها</span>
         </div>
         <div class="secHeaderTabs">
             <span></span>
-            <span>ذخیره شده ها</span>
+            <span>ذخیره‌شده‌ها</span>
         </div>
     </div>
 

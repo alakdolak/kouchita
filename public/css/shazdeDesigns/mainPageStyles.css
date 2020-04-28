@@ -653,11 +653,12 @@ div.prw_rup.prw_shelves_rebrand_poi_shelf_item_widget .detail {
 .imgOfSliderBox {
     position: relative;
     background: none;
+    overflow: hidden;
 }
 
 .imgOfSlider {
     position: absolute;
-    left: 0px;
+    right: 0px;
     bottom: 0px;
     max-height: 100%;
 }

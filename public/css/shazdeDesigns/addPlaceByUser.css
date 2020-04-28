@@ -52,6 +52,7 @@
 .stepTitle {
     font-size: 17px;
     font-weight: 600;
+    text-align: justify;
 }
 
 .boxNotice {
@@ -200,7 +201,7 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
-    width: 150%;
+    width: 100%;
     padding-left: 20px;
 }
 .nameOfSelectCategory {
@@ -259,8 +260,7 @@
     border-radius: 15px;
 }
 .stepInputBoxInput {
-    /*padding-left: 20%;*/
-    width: 200px;
+    direction: rtl;
     text-align: center;
     border: none;
     background-color: transparent;
@@ -328,13 +328,13 @@
 
 .subListItem {
     display: inline-block;
-    width: 80%;
+    width: auto;
 }
 
 .detailListItem {
-    width: 30%;
     display: inline-block;
     padding-left: 20px;
+    min-width: 30%;
 }
 .selectInput{
     border: 3px solid #eab836;
@@ -401,7 +401,7 @@
 }
 
 .step6picBox {
-    width: 22%;
+    width: 150px;
     padding: 7px;
     border: 1px solid #cccccc;
     border-radius: 5px;

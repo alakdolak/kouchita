@@ -62,7 +62,7 @@ class SitemapController extends Controller
                 }
             }
 
-            $cities = Cities::where('stateId', $item->id)->get();
+            $cities = Cities::where('stateId', $item->id)->where('isVillage', 0)->get();
             foreach ($cities as $city) {
                 foreach ($kindPlaces as $kindPlace){
                     if($kindPlace->tableName != null){
