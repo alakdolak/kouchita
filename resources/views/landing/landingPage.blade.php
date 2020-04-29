@@ -30,9 +30,10 @@
         .topPic{
             width: 100%;
             position: relative;
+            display: flex;
+            justify-content: center;
         }
         .mainPic{
-            width: 100%;
             height: 100%;
         }
         .sidePics{
@@ -47,19 +48,21 @@
             align-items: center;
         }
         .sidePics1{
-            bottom: 0px;
             position: absolute;
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 32%;
+            width: 600px;
             flex-direction: column;
         }
         .topSidePic1{
 
         }
         .bottomSidePic1{
-
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
         }
         .topStartButton{
             width: 49%;
@@ -69,6 +72,9 @@
             font-weight: bold;
             background: #307da2;
         }
+        .travelUsImg{
+            width: 50%
+        }
         .startChar{
             font-size: 45px;
             font-weight: bold;
@@ -77,6 +83,9 @@
             position: absolute;
             top: 65px;
             left: 80px;
+            width: 290px;
+        }
+        .sidePic2Content{
             font-size: 29px;
             color: white;
             font-weight: bold;
@@ -102,6 +111,24 @@
             top: -39px;
             right: 10px;
             font-weight: 400;
+            font-size: 25px;
+            cursor: pointer;
+            width: 100%;
+            text-align: right;
+            display: flex;
+            justify-content: space-between;
+            direction: rtl;
+            align-items: center;
+        }
+        .arrowDiv{
+            height: 10px;
+        }
+        #arrowImg{
+            transition: .5s;
+            width: 20px;
+        }
+        .arrowImgTop{
+            transform: rotate(180deg);
         }
         .introChar{
             font-size: 40px;
@@ -116,27 +143,6 @@
             border-radius: 50%;
             bottom: 14px;
         }
-        .slidePic2ArrowBottom{
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            top: 0;
-            left: -22px;
-        }
-        .redSquer{
-            background: red;
-            width: 12px;
-            height: 10px;
-        }
-        .redTri{
-            background: red;
-            width: 9px;
-            height: 9px;
-            transform: rotate(45deg);
-            position: absolute;
-            top: 5px;
-            right: 0px;
-        }
         .otherPics{
             width: 100%;
         }
@@ -147,10 +153,34 @@
         .otherPicImg{
             width: 100%;
         }
+
+        @media (max-width: 650px) {
+            body{
+                overflow: hidden;
+            }
+            .sidePic2{
+                left: auto;
+            }
+        }
+
+        @media (max-width: 620px) {
+            .sidePics1{
+                width: calc(100% - 50px);
+            }
+            .bottomSidePic1{
+                flex-direction: column;
+            }
+            .topStartButton{
+                width: 300px;
+            }
+            .travelUsImg{
+                width: 300px;
+            }
+        }
     </style>
 
 </head>
-<body style="background: black">
+<body style="background: black; overflow-x: hidden">
 
     <div class="topPic">
         <img class="mainPic" src="{{URL::asset('images/camping/Layer 5.jpg')}}">
@@ -160,45 +190,50 @@
                     <img src="{{URL::asset('images/camping/www.koochita.com.png')}}" style="width: 100%">
                 </div>
                 <div class="bottomSidePic1">
-                    <img src="{{URL::asset('images/camping/Layer 14.png')}}" style="width: 50%">
+                    <img class="travelUsImg" src="{{URL::asset('images/camping/Layer 14.png')}}">
                     <button class="btn btn-primary topStartButton">همین حالا <span class="startChar">شروع</span> کنید</button>
                 </div>
             </div>
 
             <div class="sidePic2">
-                <div class="slidePic2ArrowBottom">
-                    <div class="redSquer"></div>
-                    <div class="redTri"></div>
+                <div class="topSidePic2" onclick="toggleBottom()">
+                    <div>
+                        <span class="introChar">معرفی</span>  کنید
+                    </div>
+
+                    <div class="arrowDiv">
+                        <img id="arrowImg" class="arrowImgTop" src="{{URL::asset('images/camping/box.png')}}">
+                    </div>
                 </div>
-                <div class="topSidePic2">
-                    <span class="introChar">معرفی</span>  کنید
-                </div>
-                <div class="sidePic2Links">
-                    اقامتگاه بوم
-                    گردی
-                    <div class="circleRed"></div>
-                </div>
-                <div class="sidePic2Links">
-{{--                    <a href="{{route('place.list', ['kindPlaceId' => 3, 'mode' => 'country'])}}" style="color: white">--}}
+                <div id="topSidePic2Content" class="sidePic2Content" style="display: none;">
+
+                    <div class="sidePic2Links">
+                        اقامتگاه بوم
+                        گردی
+                        <div class="circleRed"></div>
+                    </div>
+                    <div class="sidePic2Links">
+                        {{--                    <a href="{{route('place.list', ['kindPlaceId' => 3, 'mode' => 'country'])}}" style="color: white">--}}
                         رستوران
                         <div class="circleRed"></div>
-{{--                    </a>--}}
-                </div>
-                <div class="sidePic2Links">
-                    جاذبه های دیدنی
-                    <div class="circleRed"></div>
-                </div>
-                <div class="sidePic2Links">
-                    صنایع دستی
-                    <div class="circleRed"></div>
-                </div>
-                <div class="sidePic2Links">
-                    غذای محلی
-                    <div class="circleRed"></div>
-                </div>
-                <div class="sidePic2Links lastSidePic2Lind">
-                    سوغات
-                    <div class="circleRed"></div>
+                        {{--                    </a>--}}
+                    </div>
+                    <div class="sidePic2Links">
+                        جاذبه های دیدنی
+                        <div class="circleRed"></div>
+                    </div>
+                    <div class="sidePic2Links">
+                        صنایع دستی
+                        <div class="circleRed"></div>
+                    </div>
+                    <div class="sidePic2Links">
+                        غذای محلی
+                        <div class="circleRed"></div>
+                    </div>
+                    <div class="sidePic2Links lastSidePic2Lind">
+                        سوغات
+                        <div class="circleRed"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -217,4 +252,12 @@
     </div>
 
 </body>
+
+<script>
+    function toggleBottom(){
+        $('#topSidePic2Content').slideToggle(500);
+        $('#arrowImg').toggleClass('arrowImgTop')
+    }
+</script>
+
 </html>
