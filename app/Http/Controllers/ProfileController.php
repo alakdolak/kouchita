@@ -18,10 +18,12 @@ use App\models\State;
 use App\models\User;
 use App\models\UserAddPlace;
 use App\models\UserTripStyles;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\URL;
@@ -543,7 +545,20 @@ class ProfileController extends Controller {
             $kindPlace[$key]['features'] = $features;
         }
 
+        $logs = createSeeLog(0, 0, 'addPlace', 'start');
+        $getLog = LogModel::where(['placeId' => 0, 'kindPlaceId' => 0, 'subject' => 'addPlace', 'text' => 'start', 'time' => $logs[0], 'date' => $logs[1], 'activityId' => 1, 'visitorId' => \auth()->user()->id])->get();
+        for($i = 1; $i < count($getLog); $i++){
+            if(isset($getLog[$i]))
+                $getLog[$i]->delete();
+        }
+
         return view('profile.addPlaceByUser', compact(['states', 'kindPlace']));
+    }
+
+    public function createStepLog(Request $request)
+    {
+        createSeeLog(0, 0, 'addPlace', $request->step);
+        return;
     }
 
     public function storeAddPlaceByUser(Request $request)

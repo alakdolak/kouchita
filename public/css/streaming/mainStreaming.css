@@ -45,7 +45,7 @@ body{
 .mainDivStream {
     display: flex;
     flex-direction: row;
-    max-width: 1170px;
+    width: calc(100% - 50px);
 }
 
 .mainDivStream > div:last-child {
@@ -63,7 +63,7 @@ body{
     padding: 15px;
     border-radius: 8px;
     position: relative;
-    width: auto;
+    width: calc(100% - 50px);
 }
 
 

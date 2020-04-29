@@ -1,7 +1,6 @@
 @extends('streaming.streamingLayout')
 
 @section('head')
-    <link rel="stylesheet" href="{{URL::asset('css/streaming/mainStreaming.css')}}">
     <link rel="stylesheet" href="{{URL::asset('css/streaming/showStreaming.css')}}">
 @endsection
 
@@ -324,123 +323,17 @@
                 </div>
                 <div class="headerWithLineLine"></div>
             </div>
+
             <div class="otherSectionBody">
 
-                <div class="videoSuggestion">
-                    <a href="#" class="videoSugPicSection">
-                        <img src="https://static.koochita.com/_images/posts/5/mainPic.jpg" class="resizeImgClass videoSugPic">
-                        <div class="overPicSug likeOverPic">
-                            <div style="display: flex; margin-left: 10px;">
-                                <span class="likeOverPicNum">100</span>
-                                <span class="DisLikeIcon likeOverPicIcon"></span>
-                            </div>
-                            <div style="display: flex;">
-                                <span class="likeOverPicNum">100</span>
-                                <span class="LikeIcon likeOverPicIcon"></span>
-                            </div>
-                        </div>
-                        <div class="overPicSug seenOverPic">
-                            <span>100,000</span>
-                            <img src="{{URL::asset('images/streaming/eye.png')}}" class="eyeClass">
-                        </div>
-                        <div class="playIconDiv">
-                            <img src="{{URL::asset('images/streaming/play.png')}}" class="playIconDivIcon">
-                        </div>
-                    </a>
-                    <div class="videoSugInfo">
-                        <div class="videoSugUserPic">
-                            <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita" style="width: 100%; height: 100%;">
-                        </div>
-                        <div class="videoSugUserInfo">
-                            <a href="#" class="videoSugName">
-                                صحبت های زنده ی محمد جواد
-                            </a>
-                            <div class="videoSugUserName">
-                                shazdesina
-                            </div>
-                            <div class="videoSugTime">
-                                10 ساعت پیش
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <div class="videoSuggestionSwiper swiper-container">
 
-                <div class="videoSuggestion">
-                    <a href="#" class="videoSugPicSection">
-                        <img src="https://static.koochita.com/_images/posts/45/1585227039-mainPic.jpg" class="resizeImgClass videoSugPic">
-                        <div class="overPicSug likeOverPic">
-                            <div style="display: flex; margin-left: 10px;">
-                                <span class="likeOverPicNum">100</span>
-                                <span class="DisLikeIcon likeOverPicIcon"></span>
-                            </div>
-                            <div style="display: flex;">
-                                <span class="likeOverPicNum">100</span>
-                                <span class="LikeIcon likeOverPicIcon"></span>
-                            </div>
-                        </div>
-                        <div class="overPicSug seenOverPic">
-                            <span>100,000</span>
-                            <img src="{{URL::asset('images/streaming/eye.png')}}" class="eyeClass">
-                        </div>
-                        <div class="playIconDiv">
-                            <img src="{{URL::asset('images/streaming/play.png')}}" class="playIconDivIcon">
-                        </div>
-                    </a>
-                    <div class="videoSugInfo">
-                        <div class="videoSugUserPic">
-                            <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita" style="width: 100%; height: 100%;">
-                        </div>
-                        <div class="videoSugUserInfo">
-                            <a href="#" class="videoSugName">
-                                صحبت های زنده ی محمد جواد
-                            </a>
-                            <div class="videoSugUserName">
-                                shazdesina
-                            </div>
-                            <div class="videoSugTime">
-                                10 ساعت پیش
-                            </div>
-                        </div>
+                    <div id="mebyInterestedVideo" class="swiper-wrapper">
+                        {{--fill with js videoSuggestion()--}}
                     </div>
-                </div>
 
-                <div class="videoSuggestion">
-                    <a href="#" class="videoSugPicSection">
-                        <img src="https://static.koochita.com/_images/posts/91/1586792425-mainPic.jpg" class="resizeImgClass videoSugPic">
-                        <div class="overPicSug likeOverPic">
-                            <div style="display: flex; margin-left: 10px;">
-                                <span class="likeOverPicNum">100</span>
-                                <span class="DisLikeIcon likeOverPicIcon"></span>
-                            </div>
-                            <div style="display: flex;">
-                                <span class="likeOverPicNum">100</span>
-                                <span class="LikeIcon likeOverPicIcon"></span>
-                            </div>
-                        </div>
-                        <div class="overPicSug seenOverPic">
-                            <span>100,000</span>
-                            <img src="{{URL::asset('images/streaming/eye.png')}}" class="eyeClass">
-                        </div>
-                        <div class="playIconDiv">
-                            <img src="{{URL::asset('images/streaming/play.png')}}" class="playIconDivIcon">
-                        </div>
-                    </a>
-                    <div class="videoSugInfo">
-                        <div class="videoSugUserPic">
-                            <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita" style="width: 100%; height: 100%;">
-                        </div>
-                        <div class="videoSugUserInfo">
-                            <a href="#" class="videoSugName">
-                                صحبت های زنده ی محمد جواد
-                            </a>
-                            <div class="videoSugUserName">
-                                shazdesina
-                            </div>
-                            <div class="videoSugTime">
-                                10 ساعت پیش
-                            </div>
-                        </div>
-                    </div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
                 </div>
 
             </div>
@@ -453,9 +346,83 @@
 @section('script')
     <script src="{{URL::asset('js/autosize.min.js')}}"></script>
     <script>
+        let nonPic = '{{URL::asset('_images/nopic/blank.jpg')}}';
         $(window).ready(function(){
             autosize($('textarea'));
         });
+
+        function videoSuggestion(){
+            let pack = [
+                {
+                    id : 'video1',
+                    name: 'صخبت با مخمد جواد',
+                    url : '#',
+                    img : 'https://static.koochita.com/_images/posts/5/mainPic.jpg',
+                    like: 100,
+                    dislike: 3,
+                    see : 245,
+                    userPic : nonPic,
+                    username : 'shazesina',
+                    time : '10 ساعت قبل',
+                },
+                {
+                    id : 'video1',
+                    name: 'صخبت با مخمد جواد',
+                    url : '#',
+                    img : 'https://static.koochita.com/_images/posts/91/1586792425-mainPic.jpg',
+                    like: 100,
+                    dislike: 3,
+                    see : 245,
+                    userPic : nonPic,
+                    username : 'shazesina',
+                    time : '10 ساعت قبل',
+                },
+                {
+                    id : 'video1',
+                    name: 'صخبت با مخمد جواد',
+                    url : '#',
+                    img : 'https://static.koochita.com/_images/posts/45/1585227039-mainPic.jpg',
+                    like: 100,
+                    dislike: 3,
+                    see : 245,
+                    userPic : nonPic,
+                    username : 'shazesina',
+                    time : '10 ساعت قبل',
+                },
+            ]
+            createVideoSuggestionDiv(pack, 'mebyInterestedVideo');
+        }
+        videoSuggestion();
+
+        var swiper = new Swiper('.videoSuggestionSwiper', {
+            slidesPerGroup: 1,
+            // width: 300,
+            loop: true,
+            loopFillGroupWithBlank: true,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            breakpoints: {
+                650: {
+                    slidesPerView: 1,
+                    spaceBetween: 0,
+                },
+                860: {
+                    slidesPerView: 2,
+                    spaceBetween: 20,
+                },
+                1200: {
+                    slidesPerView: 3,
+                    spaceBetween: 20,
+                },
+                10000: {
+                    slidesPerView: 4,
+                    spaceBetween: 20,
+                }
+            }
+        });
+
 
         function openAnsToComment(_id){
             $('#ansTo_' + _id).toggle();

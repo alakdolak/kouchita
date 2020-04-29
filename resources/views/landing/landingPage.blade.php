@@ -179,8 +179,10 @@
                     <div class="circleRed"></div>
                 </div>
                 <div class="sidePic2Links">
-                    رستوران
-                    <div class="circleRed"></div>
+{{--                    <a href="{{route('place.list', ['kindPlaceId' => 3, 'mode' => 'country'])}}" style="color: white">--}}
+                        رستوران
+                        <div class="circleRed"></div>
+{{--                    </a>--}}
                 </div>
                 <div class="sidePic2Links">
                     جاذبه های دیدنی

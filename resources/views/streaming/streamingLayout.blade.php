@@ -28,6 +28,10 @@
 
     <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/icons.css')}}">
 
+    <link rel="stylesheet" href="{{URL::asset('css/theme2/swiper.css')}}">
+
+    <link rel="stylesheet" href="{{URL::asset('css/streaming/mainStreaming.css')}}">
+
     <style>
         #openSearch{
             transform: rotate(0deg) !important;
@@ -57,6 +61,8 @@
 <div class="hideOnScreen">
     @include('layouts.header1Phone')
 </div>
+
+@include('streaming.videoSuggestionPack')
 
 
 <div class="streamBody">
@@ -92,6 +98,9 @@
 
 </body>
 
+
+<script src="{{URL::asset('js/swiper/swiper.min.js')}}"></script>
+
 <script>
     function resizeFitImg(_class) {
         var imgs = $('.' + _class);
@@ -120,9 +129,31 @@
     $(window).resize(function(){
         resizeFitImg('resizeImgClass');
     });
+
+    swiper
 </script>
 
 @yield('script')
+
+<script>
+
+    // suggestion swiper
+    new Swiper('.suggestionSwiper', {
+        spaceBetween: 30,
+        centeredSlides: true,
+        slidesPerView: 4,
+        slidesPerGroup: 1,
+        loop: true,
+        // autoplay: {
+        //     delay: 50000,
+        //     disableOnInteraction: false,
+        // },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+    });
+</script>
 
 </html>
 
