@@ -162,6 +162,7 @@
             border-radius: 10px;
             margin-top: 40px;
             cursor: pointer;
+            width: 100%;
         }
         .registerNow{
             text-align: center;
@@ -286,9 +287,9 @@
                         </div>
                     </div>
                     <p id="loginErrUserName" style="color: red"></p>
-                    <div class="loginButtonsMainDiv" style="background: #0d6650" onclick="checkRecaptcha()">
+                    <button id="submitAndFinishBtn" class="loginButtonsMainDiv" style="background: #0d6650" onclick="checkRecaptcha()" disabled>
                         ثبت نام
-                    </div>
+                    </button>
                 </div>
             </div>
 
@@ -320,18 +321,9 @@
         $('#arrowImg').toggleClass('arrowImgTop')
     }
 
-
-    function registerInKoochita(){
-        let firstName = $('#firstName').val();
-        let lastName = $('#lastName').val();
-        let phone = $('#phone').val();
-        let username = $('#usernameInput').val();
-        let passInput = $('#passInput').val();
-        let rePassInput = $('#rePassInput').val();
-    }
-
-
     function checkRecaptcha() {
+        openLoading();
+
         $.ajax({
             type: 'post',
             url: '{{route('checkReCaptcha')}}',
@@ -339,20 +331,36 @@
                 captcha: grecaptcha.getResponse()
             },
             success: function (response) {
+                closeLoading();
                 if (response == "ok") {
                     if ($("#usernameInput").val().trim().length > 0)
                         checkUserName2();
                     else
                         $("#loginErrUserName").text('پر کردن تمام فیلدها اجباری است');
                 }
-                else {
+                else
                     $("#loginErrUserName").text('لطفا ربات نبودن خود را ثابت کنید');
-                }
+            },
+            error: function(err){
+                console.log(err);
+                closeLoading();
+                $("#loginErrUserName").text('در فرایند ثبت نام مشکلی پیش آمده لطفا دوباره تلاش کنید');
             }
         });
     }
 
+    function checkedCheckBox() {
+
+        if ($("#checked").is(":checked")) {
+            $("#submitAndFinishBtn").removeAttr('disabled');
+        }
+        else {
+            $("#submitAndFinishBtn").attr('disabled', 'disabled');
+        }
+    }
+
     function checkUserName2() {
+        openLoading();
         let username = $('#usernameInput').val();
         let pass = $('#passInput').val();
         let rePassInput = $('#rePassInput').val();
@@ -382,12 +390,26 @@
                                 },
                                 success: function (response) {
                                     if (response == "ok")
-                                        window.location.href = '{{route("addPlaceByUser.index")}}'
+                                        window.location.href = '{{route("addPlaceByUser.index")}}';
+                                    else
+                                        closeLoading();
+                                },
+                                error: function(err){
+                                    console.log('registerWithPhone');
+                                    console.log(err);
+                                    closeLoading();
+                                    $("#loginErrUserName").text('در فرایند ثبت نام مشکلی پیش آمده لطفا دوباره تلاش کنید');
                                 }
                             });
                         }
                         else if (response == "nok1")
                             $("#loginErrUserName").text('نام کاربری وارد شده در سامانه موجود است');
+                    },
+                    error: function(err){
+                        console.log('checkUserName');
+                        console.log(err);
+                        closeLoading();
+                        $("#loginErrUserName").text('در فرایند ثبت نام مشکلی پیش آمده لطفا دوباره تلاش کنید');
                     }
                 });
             }
@@ -398,11 +420,6 @@
             $("#loginErrUserName").text('پر کردن تمام فیلدها اجباری است');
 
     }
-
-
-</script>
-
-<script>
 
     function login() {
         let username = $('#username').val();
@@ -473,6 +490,7 @@
     }
 
     function checkActivationCode() {
+        openLoading();
 
         $.ajax({
             type: 'post',
@@ -482,12 +500,17 @@
                 'activationCode': $("#activationCode").val()
             },
             success: function (response) {
+                closeLoading();
                 if (response == "ok") {
                     $('#phoneRegister').hide();
                     $('#registerSection').show();
                 }
                 else
-                    $("#loginErrActivationCode").empty().append('کد وارد شده معتبر نمی باشد');
+                    $("#loginErrActivationCode").text('کد وارد شده معتبر نمی باشد');
+            },
+            error: function(err){
+                closeLoading();
+                $("#loginErrActivationCode").text('در فرایند ثبت نام مشکلی پیش امده لطفا دوباره تلاش کنید');
             }
         });
 
@@ -501,7 +524,7 @@
     }
 
     function checkPhoneNum() {
-
+        openLoading();
         $.ajax({
             type: 'post',
             url: '{{route('checkPhoneNum')}}',
@@ -509,7 +532,7 @@
                 'phoneNum': $("#phone").val()
             },
             success: function (response) {
-
+                closeLoading();
                 response = JSON.parse(response);
 
                 if (response.status == "ok") {
@@ -539,6 +562,12 @@
                     $("#phoneError").text('اشکالی در ارسال پیام رخ داده است');
                 else
                     $("#loginErrPhonePass1").empty().append('کد اعتبار سنجی برای شما ارسال شده است. برای ارسال مجدد کد باید 5 دقیقه منتظر بمانید');
+            },
+            error: function (err){
+                closeLoading();
+                console.log('checkPhoneNum');
+                console.log(err);
+                $("#phoneError").text('در فرایند ثبت نام مشکلی پیش امده لطفا دوباره تلاش کنید.');
             }
         });
 
@@ -557,6 +586,7 @@
             $("#resendActivationCode").removeAttr('disabled');
         }
     }
+
 </script>
 
 </html>
