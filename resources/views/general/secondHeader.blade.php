@@ -105,7 +105,7 @@
                 @if(isset($locationName['state']) && $locationName['kindState'] == 'city')
                     <a href="{{route('cityPage', ['kind' => 'state', 'city' => $locationName['state'] ])}}" target="_blank" >استان {{$locationName['state']}}</a>
                 @endif
-                <a href="{{url('/')}}">صفحه اصلی</a>
+                <a href="{{url('/main')}}">صفحه اصلی</a>
             </div>
         </div>
         <div class="secHeadTabs arrowAfter">
