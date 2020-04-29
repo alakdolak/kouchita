@@ -1,0 +1,154 @@
+
+body {
+    font-family: 'IRANSansWeb' !important;
+}
+.topPic{
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+.mainPic{
+    height: 100%;
+}
+.sidePics{
+    width: 100%;
+    height: 100%;
+    max-height: 100vh;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.sidePics1{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 600px;
+    flex-direction: column;
+}
+.topSidePic1{
+
+}
+.bottomSidePic1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+.topStartButton{
+    width: 49%;
+    font-size: 26px;
+    border-radius: 15px;
+    height: 100px;
+    font-weight: bold;
+    background: #307da2;
+}
+.travelUsImg{
+    width: 50%
+}
+.startChar{
+    font-size: 45px;
+    font-weight: bold;
+}
+.sidePic2{
+    position: absolute;
+    top: 65px;
+    left: 80px;
+    width: 290px;
+}
+.sidePic2Content{
+    font-size: 29px;
+    color: white;
+    font-weight: bold;
+    padding: 20px;
+    background-color: #0000006e;
+}
+.sidePic2Links{
+    border-bottom: solid red 2px;
+    margin-bottom: 10px;
+    padding: 0px 18px;
+    padding-bottom: 5px;
+    cursor: pointer;
+    position: relative;
+}
+.lastSidePic2Lind{
+    border-bottom: none;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+}
+.topSidePic2{
+    color: black;
+    position: absolute;
+    top: -39px;
+    right: 10px;
+    font-weight: 400;
+    font-size: 25px;
+    cursor: pointer;
+    width: 100%;
+    text-align: right;
+    display: flex;
+    justify-content: space-between;
+    direction: rtl;
+    align-items: center;
+}
+.arrowDiv{
+    height: 10px;
+}
+#arrowImg{
+    transition: .5s;
+    width: 20px;
+}
+.arrowImgTop{
+    transform: rotate(180deg);
+}
+.introChar{
+    font-size: 40px;
+    font-weight: bold;
+}
+.circleRed{
+    width: 13px;
+    height: 13px;
+    background: red;
+    position: absolute;
+    left: -44px;
+    border-radius: 50%;
+    bottom: 14px;
+}
+.otherPics{
+    width: 100%;
+}
+.otherPicCommon{
+    margin-top: 25px;
+    width: 100%;
+}
+.otherPicImg{
+    width: 100%;
+}
+
+@media (max-width: 767px) {
+    body{
+        overflow: hidden;
+    }
+    .sidePic2{
+        left: auto;
+    }
+}
+
+@media (max-width: 620px) {
+    .sidePics1{
+        width: calc(100% - 50px);
+    }
+    .bottomSidePic1{
+        flex-direction: column;
+    }
+    .topStartButton{
+        width: 300px;
+    }
+    .travelUsImg{
+        width: 300px;
+    }
+}
