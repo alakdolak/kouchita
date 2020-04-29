@@ -236,7 +236,7 @@
     border-radius: 5px;
 }
 
-.fromThisPerson .videoSuggestion {
+.fromThisPerson  {
     width: 100%;
     background: transparent;
 }
@@ -347,7 +347,7 @@
     display: flex;
 }
 
-.interestingSlider .videoSuggestion {
+.interestingSlider {
     width: 32%;
     background: transparent;
 }
@@ -522,82 +522,11 @@
     justify-content: space-evenly;
     margin-top: 25px;
 }
-.videoSuggestion{
-    width: 30%;
-    background-color: #232323;
-    border-radius: 8px;
-    padding: 10px;
-}
-.videoSugPicSection{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    height: 165px;
-    border-radius: 10px;
-    margin-bottom: 10px;
-    position: relative;
-}
-.videoSugPic{
-    width: 100%;
-}
-.videoSugInfo{
-    display: flex;
-    padding: 0px 15px;
-    color: white;
-}
-.videoSugUserPic{
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    overflow: hidden;
-}
-.videoSugUserInfo{
-    margin-right: 10px;
-}
-.videoSugName{
 
-}
-.videoSugUserName{
-    font-size: 12px;
-    color: #0076a3;
-}
-.videoSugTime{
-    font-size: 12px;
-}
-.overPicSug{
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 17px;
-    padding: 2px 11px;
-    left: 13px;
-    border-radius: 8px;
-    color: white;
-    background-color: #000000d1;
-}
-.likeOverPic{
-    bottom: 13px;
-}
-.seenOverPic{
-    top: 13px;
-}
 .userPicAnsToReviewMobile{
     display: none;
 }
 
-
-.playIconDiv{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #00000085;
-}
 
 @media (max-width: 767px) {
     .videoInfosVideoName{
@@ -622,19 +551,6 @@
     }
     .descriptionSectionBody{
         padding: 0px 10px;
-    }
-    .otherSectionBody{
-        flex-direction: column;
-    }
-    .videoSuggestion{
-        width: 90%;
-        margin-bottom: 15px;
-    }
-    .videoSugPicSection{
-        height: 230px;
-    }
-    .videoSugInfo{
-        padding: 0px;
     }
     .commentAnsesSection{
         width: 100%;

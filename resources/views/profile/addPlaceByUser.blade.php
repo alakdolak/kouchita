@@ -1296,20 +1296,27 @@
                 $('#nextStep').attr('disabled', false);
             }
 
-            // doChangeStep(inc);
-            // return;
-console.log(currentSteps)
             if(inc == 1) {
-                if (currentSteps == 0 || currentSteps == 1)
+                if (currentSteps == 0 || currentSteps == 1) {
+                    stepLog(currentSteps);
                     doChangeStep(inc);
-                else if (currentSteps == 2 && checkStep2())
+                }
+                else if (currentSteps == 2 && checkStep2()) {
+                    stepLog(currentSteps);
                     doChangeStep(inc);
-                else if(currentSteps == 3 && checkStep3())
+                }
+                else if(currentSteps == 3 && checkStep3()) {
+                    stepLog(currentSteps);
                     doChangeStep(inc);
-                else if(currentSteps == 4)
+                }
+                else if(currentSteps == 4) {
+                    stepLog(currentSteps);
                     storeData();
-                else if(currentSteps == 5 || currentSteps == 6)
+                }
+                else if(currentSteps == 5 || currentSteps == 6) {
+                    stepLog(currentSteps);
                     doChangeStep(inc);
+                }
             }
             else
                 doChangeStep(inc);
@@ -1679,6 +1686,19 @@ console.log(currentSteps)
 
                 reader.readAsDataURL(input.files[0]);
             }
+        }
+
+        function stepLog(_step){
+            $.ajax({
+                type: 'post',
+                url: '{{route("addPlaceByUser.createStepLog")}}',
+                data: {
+                    _token: '{{csrf_token()}}',
+                    step: _step
+                },
+                success: function(){},
+                error: function(){}
+            })
         }
 
     </script>

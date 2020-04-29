@@ -505,12 +505,12 @@ Route::group(array('middleware' => 'nothing'), function () {
 });
 
 // profile
-Route::group(array('middleware' => ['throttle:30', 'nothing', 'auth']), function () {
+Route::group(array('middleware' => ['throttle:30', 'auth']), function () {
 
     Route::get('authLive', 'ProfileController@authLive')->name('authLive');
 
     Route::get('addPlace/index', 'ProfileController@addPlaceByUserPage')->name('addPlaceByUser.index');
-
+    Route::post('addPlace/createStepLog', 'ProfileController@createStepLog')->name('addPlaceByUser.createStepLog');
     Route::post('addPlace/store', 'ProfileController@storeAddPlaceByUser')->name('addPlaceByUser.store');
     Route::post('addPlace/storeImg', 'ProfileController@storeImgAddPlaceByUser')->name('addPlaceByUser.storeImg');
     Route::post('addPlace/deleteImg', 'ProfileController@deleteImgAddPlaceByUser')->name('addPlaceByUser.deleteImg');

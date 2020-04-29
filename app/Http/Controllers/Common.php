@@ -1091,27 +1091,27 @@ function createPicUrl($articleId){
     }
 }
 
-function createSeeLog($placeId = 0, $kindPlaceId = 0, $subject = '', $text = ''){
+function createSeeLog($placeId, $kindPlaceId, $subject, $text){
 
-    try{
-        $userId = 0;
-        if(auth()->check())
-            $userId = auth()->user()->id;
+    $time = getToday()['time'];
+    $today = Carbon::now()->format('Y-m-d');
 
-        $log = new LogModel();
-        $log->visitorId = $userId;
-        $log->placeId = $placeId;
-        $log->kindPlaceId = $kindPlaceId;
-        $log->date = Carbon::now()->format('Y-m-d');
-        $log->time = getToday()['time'];
-        $log->activityId = 1;
-        $log->subject = $subject;
-        $log->text = $text;
-        $log->save();
-    }
-    catch(\Exception $exception){}
+    $userId = 0;
+    if(auth()->check())
+        $userId = auth()->user()->id;
 
-    return;
+    $log = new LogModel();
+    $log->visitorId = $userId;
+    $log->placeId = $placeId;
+    $log->kindPlaceId = $kindPlaceId;
+    $log->date = $today;
+    $log->time = $time;
+    $log->activityId = 1;
+    $log->subject = $subject;
+    $log->text = $text;
+    $log->save();
+
+    return [$time, $today, $log->id];
 }
 
 //time
