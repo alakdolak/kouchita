@@ -56,7 +56,9 @@ class UserLoginController extends Controller
 
                     echo "ok";
                     return;
-                } else {
+                }
+                else {
+                    auth()->logout();
                     echo "nok2";
                     return;
                 }
@@ -623,6 +625,77 @@ class UserLoginController extends Controller
         return \Redirect::to(route('main'));
     }
 
+    public function registerWithPhone(Request $request)
+    {
+        if (isset($request->username) && isset($request->password) && isset($request->phone)) {
+
+            $invitationCode = createCode();
+            while (User::whereInvitationCode($invitationCode)->count() > 0)
+                $invitationCode = createCode();
+
+            $user = new User();
+            $user->username = $request->username;
+            $user->password = \Hash::make(makeValidInput($request->password));
+            $user->phone = makeValidInput($request->phone);
+            $user->first_name = $request->firsName;
+            $user->last_name = $request->lastName;
+            $user->level = 0;
+            $user->invitationCode = $invitationCode;
+
+            try {
+                $user->save();
+                auth()->loginUsingId($user->id);
+
+                $invitationCode = makeValidInput($_POST["invitationCode"]);
+
+                if (!empty($invitationCode)) {
+                    $dest = User::whereInvitationCode($invitationCode)->first();
+
+                    if ($dest != null) {
+                        $log = new LogModel();
+                        $log->visitorId = $user->id;
+                        $log->date = date('Y-m-d');
+                        $log->activityId = Activity::whereName('دعوت')->first()->id;
+                        $log->kindPlaceId = -1;
+                        $log->time = getToday()["time"];
+                        $log->confirm = 1;
+                        $log->placeId = -1;
+                        try {
+                            $log->save();
+                        } catch (Exception $x) {
+                            echo $x->getMessage();
+                            return;
+                        }
+
+                        $log = new LogModel();
+                        $log->visitorId = $dest->id;
+                        $log->date = date('Y-m-d');
+                        $log->time = getToday()["time"];
+                        $log->activityId = Activity::whereName('دعوت')->first()->id;
+                        $log->kindPlaceId = -1;
+                        $log->confirm = 1;
+                        $log->placeId = -1;
+                        try {
+                            $log->save();
+                        } catch (Exception $x) {
+                            echo $x->getMessage();
+                            return;
+                        }
+                    }
+                }
+
+                echo "ok";
+            }
+            catch (Exception $x) {
+                dd($x);
+                echo "nok";
+            }
+        }
+        else
+            echo 'nok';
+
+        return;
+    }
 
     private function generatePassword()
     {
