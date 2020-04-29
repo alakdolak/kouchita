@@ -1080,7 +1080,6 @@ function createUrl($kindPlaceId, $placeId, $stateId, $cityId, $articleId = 0){
         else
             return false;
     }
-
 }
 
 function createPicUrl($articleId){
@@ -1092,6 +1091,28 @@ function createPicUrl($articleId){
     }
 }
 
+function createSeeLog($placeId = 0, $kindPlaceId = 0, $subject = '', $text = ''){
+
+    try{
+        $userId = 0;
+        if(auth()->check())
+            $userId = auth()->user()->id;
+
+        $log = new LogModel();
+        $log->visitorId = $userId;
+        $log->placeId = $placeId;
+        $log->kindPlaceId = $kindPlaceId;
+        $log->date = Carbon::now()->format('Y-m-d');
+        $log->time = getToday()['time'];
+        $log->activityId = 1;
+        $log->subject = $subject;
+        $log->text = $text;
+        $log->save();
+    }
+    catch(\Exception $exception){}
+
+    return;
+}
 
 //time
 function jalaliToGregorian($time){

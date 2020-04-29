@@ -208,11 +208,10 @@ Route::group(array('middleware' => ['throttle:30', 'nothing']), function () {
 
     Route::get('/landingPage', 'MainController@landigPage')->name('landingPage');
 
-    Route::get('/', array('as' => 'home', 'uses' => 'PlaceController@showMainPage'));
+//    Route::get('/', 'PlaceController@showMainPage')->name('home');
+    Route::get('/', 'MainController@landingPage')->name('home');
 
-    Route::get('main', function (){
-        return redirect(url('/'));
-    })->name('main');
+    Route::get('main', 'PlaceController@showMainPage')->name('main');
 
     Route::get('main/{mode}', function(){
         return redirect(url('/'));
