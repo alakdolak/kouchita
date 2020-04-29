@@ -90,6 +90,10 @@ class PlaceController extends Controller {
                 $placeMode = 'mahaliFood';
                 $kindPlace->title = 'غذاهای محلی';
                 break;
+            case 12:
+                $placeMode = 'boomgardy';
+                $kindPlace->title = 'بوم گردی های';
+                break;
         }
 
         if(is_numeric($slug))
@@ -3668,6 +3672,13 @@ class PlaceController extends Controller {
                     $meta['keyword'] = 'غذاهای محلی ' . $locationName['name'] . ' ، غذاهای سنتی ' . $locationName['name'] . ' ، طرز تهیه غذای محلی ' . $locationName['name'] . ' ، دستور پخت غذای محلی ' . $locationName['name'] . ' ، غذای محلی ' . $locationName['name'] . ' چیست ، غذای سنتی ' . $locationName['name'] . ' چیست ، غذای مناسب برای افراد گیاه خوار، غذاهای مناسب برای افراد وگان ، غذاهای مناسب برای افراد دیابتی ، آش های محلی ' . $locationName['name'] . ' ، خورشت های ' . $locationName['name'] . ' ، خورش های ' . $locationName['name'] . ' ، خوراک های ' . $locationName['name'] ;
                     $meta['description'] = 'ما برای شما غذاهای محلی و سنتی ... همراه با دستور پخت و عکس و میزان کالری که شامل آش ها، سوپ ها، خورشت ها، خوراک ها ،شیرینی ها، نان ها، مربا ها و سالاد ها می باشد را جمع اوری کرده ایم.';
                     break;
+                case 12:
+                    $placeMode = 'boomgardy';
+                    $kindPlace->title = 'بوم گردی های ';
+                    $meta['title'] = 'عکس+آدرس+شماره تلفن + لیست تمامی بوم گردی های ';
+                    $meta['keyword'] = 'لیست بوم گردی های ' . $locationName['name'];
+                    $meta['description'] = 'لیست تمامی بوم گردی های ' . $locationName['name'] . ' برای سفر شما ، ما اطلاعات کاملی به همراه عکس ، نقشه و آدرس و شماره تلفن و معرفی همراه با امتیازبندی کاربران در بستر شبکه‌ی اجتماعی جمع آوری کرده ایم تا بهترین اقامت خود را در سفر داشته باشید. ';
+                    break;
             }
 
 
@@ -3881,9 +3892,16 @@ class PlaceController extends Controller {
                 'activityId' => $activityId, 'confirm' => 1];
             $place->reviews = LogModel::where($condition)->count();
             $cityObj = Cities::whereId($place->cityId);
-            $place->city = $cityObj->name;
-            $place->state = State::whereId($cityObj->stateId)->name;
+            if($cityObj != null) {
+                $place->city = $cityObj->name;
+                $place->state = State::whereId($cityObj->stateId)->name;
+            }
+            else{
+                $place->city = '';
+                $place->state = '';
+            }
             $place->avgRate = getRate($place->id, $request->kindPlaceId)[1];
+            $place->avgRate = 0;
             $place->inTrip = 0;
             $place->redirect = createUrl($kindPlace->id, $place->id, 0, 0);
             if(\auth()->check()){

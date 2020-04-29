@@ -174,6 +174,17 @@
                 @endif
             </div>
         </div>
+        <div class="secHeadTabs arrowAfter">
+            <span>
+                بوم گردی ها
+            </span>
+            <div class="secHeadTabsSubList">
+                <a href="{{route('place.list', ['kindPlaceId' => 12, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">بوم گردی های {{$locationName['cityName']}}</a>
+                @if(isset($locationName['state']) && $locationName['kindState'] == 'city')
+                    <a href="{{route('place.list', ['kindPlaceId' => 12, 'mode' => 'state', 'state' => $locationName['state']])}}">بوم گردی های استان {{$locationName['state']}}</a>
+                @endif
+            </div>
+        </div>
         <div class="secHeadTabs ">
             <a href="{{route('mainArticle')}}" style="color: #16174f">سفرنامه‌ها</a>
         </div>

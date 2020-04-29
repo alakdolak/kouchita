@@ -8,6 +8,7 @@ use App\models\Adab;
 use App\models\AirLine;
 use App\models\Amaken;
 use App\models\BannerPics;
+use App\models\Boomgardy;
 use App\models\Cities;
 use App\models\CityPic;
 use App\models\ConfigModel;
@@ -294,6 +295,7 @@ class HomeController extends Controller
             $allRestaurant = Restaurant::where('cityId', $place->id)->get();
             $allMahaliFood = MahaliFood::where('cityId', $place->id)->get();
             $allSogatSanaie = SogatSanaie::where('cityId', $place->id)->get();
+            $allBoomgardy = Boomgardy::where('cityId', $place->id)->get();
 
             $pics = CityPic::where('cityId', $place->id)->get();
             if(count($pics) == 0){
@@ -356,6 +358,7 @@ class HomeController extends Controller
             $allRestaurant = Restaurant::whereIn('cityId', $allCities)->get();
             $allMahaliFood = MahaliFood::whereIn('cityId', $allCities)->get();
             $allSogatSanaie = SogatSanaie::whereIn('cityId', $allCities)->get();
+            $allBoomgardy = Boomgardy::whereIn('cityId', $allCities)->get();
 
             if($place->image == null){
                 $seenActivity = Activity::whereName('مشاهده')->first();
@@ -569,7 +572,7 @@ class HomeController extends Controller
             $localStorageData = ['kind' => 'city', 'name' => $place->name , 'city' => '', 'state' => $place->state, 'mainPic' => $place->image, 'redirect' => $mainWebSiteUrl];
 
 //        dd($locationName);
-        return view('cityPage', compact(['place', 'kind', 'localStorageData', 'locationName', 'post', 'map', 'allPlaces', 'allAmaken', 'allHotels', 'allRestaurant', 'allMajara', 'allMahaliFood', 'allSogatSanaie', 'reviews', 'topPlaces']));
+        return view('cityPage', compact(['place', 'kind', 'localStorageData', 'locationName', 'post', 'map', 'allPlaces', 'allAmaken', 'allHotels', 'allRestaurant', 'allMajara', 'allMahaliFood', 'allSogatSanaie', 'allBoomgardy', 'reviews', 'topPlaces']));
     }
 
     public function checkUserNameAndPass()
@@ -1707,6 +1710,7 @@ class HomeController extends Controller
             $allRestaurant = Restaurant::where('cityId', $id)->pluck('id')->toArray();
             $allMahaliFood = MahaliFood::where('cityId', $id)->pluck('id')->toArray();
             $allSogatSanaie = SogatSanaie::where('cityId', $id)->pluck('id')->toArray();
+            $allBoomgardy = Boomgardy::where('cityId', $id)->pluck('id')->toArray();
         }
         else if($kind == 'state'){
             $allCities = Cities::where('stateId', $id)->where('isVillage', 0)->pluck('id')->toArray();
@@ -1717,6 +1721,7 @@ class HomeController extends Controller
             $allRestaurant = Restaurant::whereIn('cityId', $allCities)->pluck('id')->toArray();
             $allMahaliFood = MahaliFood::whereIn('cityId', $allCities)->pluck('id')->toArray();
             $allSogatSanaie = SogatSanaie::whereIn('cityId', $allCities)->pluck('id')->toArray();
+            $allBoomgardy = Boomgardy::whereIn('cityId', $allCities)->pluck('id')->toArray();
         }
         else{
             if(count($notIn) == 0)
@@ -1755,6 +1760,11 @@ class HomeController extends Controller
             if($sqlQuery != '')
                 $sqlQuery .= ' OR ';
             $sqlQuery .= '( kindPlaceId = 11 AND placeId IN (' . implode(",", $allMahaliFood) . ') )';
+        }
+        if(count($allBoomgardy) != 0){
+            if($sqlQuery != '')
+                $sqlQuery .= ' OR ';
+            $sqlQuery .= '( kindPlaceId = 12 AND placeId IN (' . implode(",", $allBoomgardy) . ') )';
         }
 
         $lastReview = [];

@@ -77,6 +77,13 @@ if ($total == 0)
                         left: 0px;
                         box-shadow: 20px -10px 20px 20px darkgrey;
                     }
+                    .truePhone{
+                        display: flex;
+                        align-items: center;
+                        direction: ltr;
+                        justify-content: flex-start;
+                        flex-direction: row-reverse;
+                    }
                 </style>
 
             @stop
@@ -497,35 +504,33 @@ width: 14% !important;
                                     <div class="meta_inner" id="bestPriceInnerDiv"></div>
                                 </div>
                                 <div class="clear-both"></div>
-                                @if($hasLogin)
-                                    <div id="targetHelp_8" class="wideScreen targets float-left col-xs-6 pd-0">
-                            <span onclick="bookMark(); changeBookmarkIcon()"
-                                  class="ui_button save-location-7306673 saveAsBookmarkMainDiv">
-                                <div id="bookMarkIcon" class="saveAsBookmarkIcon {{($bookMark) ? "castle-fill" : "castle"}}"></div>
-                                <div class="saveAsBookmarkLabel">
-                                    ذخیره این صفحه
-                                </div>
-                            </span>
-                                        <div id="helpSpan_8" class="helpSpans hidden row">
-                                            <span class="introjs-arrow"></span>
-                                            <p>شاید بعدا بخواهید دوباره به همین مکان باز گردید. پس آن را نشان کنید تا از منوی بالا
-                                                هر وقت که خواستید دوباره به آن باز گردید.</p>
-                                            <button data-val="8" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_8">بعدی
-                                            </button>
-                                            <button data-val="8" class="btn btn-primary backBtnsHelp" id="backBtnHelp_8">قبلی
-                                            </button>
-                                            <button class="btn btn-danger exitBtnHelp">خروج</button>
+                                <div id="targetHelp_8" class="wideScreen targets float-left col-xs-6 pd-0">
+                                    <span onclick="bookMark(); changeBookmarkIcon()"
+                                          class="ui_button save-location-7306673 saveAsBookmarkMainDiv">
+                                        <div id="bookMarkIcon" class="saveAsBookmarkIcon {{auth()->check() && ($bookMark) ? "castle-fill" : "castles"}}"></div>
+                                        <div class="saveAsBookmarkLabel">
+                                            ذخیره این صفحه
                                         </div>
+                                    </span>
+                                    <div id="helpSpan_8" class="helpSpans hidden row">
+                                        <span class="introjs-arrow"></span>
+                                        <p>شاید بعدا بخواهید دوباره به همین مکان باز گردید. پس آن را نشان کنید تا از منوی بالا
+                                            هر وقت که خواستید دوباره به آن باز گردید.</p>
+                                        <button data-val="8" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_8">بعدی
+                                        </button>
+                                        <button data-val="8" class="btn btn-primary backBtnsHelp" id="backBtnHelp_8">قبلی
+                                        </button>
+                                        <button class="btn btn-danger exitBtnHelp">خروج</button>
                                     </div>
-                                @endif
+                                </div>
 
                                 <div id="share_pic" class="wideScreen targets float-left col-xs-6 pd-0">
-    <span class="ui_button save-location-7306673 sharePageMainDiv" onclick="toggleShareIcon(this)">
-        <div class="sharePageIcon first"></div>
-        <div class="sharePageLabel">
-            اشتراک‌گذاری صفحه
-        </div>
-    </span>
+                                    <span class="ui_button save-location-7306673 sharePageMainDiv" onclick="toggleShareIcon(this)">
+                                        <div class="sharePageIcon first"></div>
+                                        <div class="sharePageLabel">
+                                            اشتراک‌گذاری صفحه
+                                        </div>
+                                    </span>
                                     <div id="helpSpan_8" class="helpSpans hidden row">
                                         <span class="introjs-arrow"></span>
                                         <p>شاید بعدا بخواهید دوباره به همین مکان باز گردید. پس آن را نشان کنید تا از منوی بالا هر وقت که خواستید دوباره به آن باز گردید.</p>
@@ -1014,6 +1019,8 @@ width: 14% !important;
                                                                         @include('hotel-details.tables.majara-details-table')
                                                                     @elseif($placeMode == "sogatSanaies")
                                                                         @include('hotel-details.tables.sogatsanaie-details-table')
+                                                                    @elseif($placeMode == "boomgardies")
+                                                                        @include('hotel-details.tables.boomgardies-details-table')
                                                                     @endif
                                                                 </div>
                                                             </div>
@@ -1101,7 +1108,7 @@ width: 14% !important;
                                                                             @endif
                                                                         </div>
                                                                         @if(!empty($place->phone))
-                                                                            <div class="blEntry phone mg-bt-10" id="clientConnectionsPhone">
+                                                                            <div class="blEntry phone mg-bt-10 truePhone" id="clientConnectionsPhone">
                                                                                 <span class="ui_icon phone"></span>
                                                                                 <a href="tel:{{$place->phone}}" >{{$place->phone}}</a>
                                                                             </div>

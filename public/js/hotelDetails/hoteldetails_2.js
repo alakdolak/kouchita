@@ -375,7 +375,7 @@ function hideElement(element) {
 function bookMark() {
 
     if (!hasLogin) {
-        showLoginPrompt(hotelDetailsInBookMarkMode);
+        showLoginPrompt();
         return;
     }
 

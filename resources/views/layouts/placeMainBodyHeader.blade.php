@@ -182,7 +182,7 @@
                             @endif
                         </div>
                         @if(!empty($place->phone))
-                            <div class="blEntry blEn phone">
+                            <div class="blEntry blEn phone truePhone">
                                 <span class="ui_icon phone"></span>
                                 <a href="tel:{{$place->phone}}">
                                     {{$place->phone}}
