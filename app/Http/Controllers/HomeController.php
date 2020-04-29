@@ -278,6 +278,8 @@ class HomeController extends Controller
         if($place == null)
             return Redirect::route('home');
 
+        $locationPic = __DIR__ . '/../../../../assets/_images/city';
+
         if($kind == 'city') {
             $place->state = State::whereId($place->stateId)->name;
             $place->listName = $place->name;
@@ -311,17 +313,25 @@ class HomeController extends Controller
                         }
                     }
                     if($place->image == null || $place->image == '')
-                        $place->image = URL::asset('_images/noPic/blank.jpg');
+                        $place->image = URL::asset('_images/nopic/blank.jpg');
                 }
                 else
-                    $place->image = URL::asset('_images/noPic/blank.jpg');
+                    $place->image = URL::asset('_images/nopic/blank.jpg');
             }
             else{
                 foreach ($pics as $pic)
                     $pic->pic = URL::asset('_images/city/' . $place->id  . '/' . $pic->pic);
 
                 $place->pic = $pics;
-                $place->image = $place->pic[0]->pic;
+                if($place->image != null){
+                    $locationPic1 = $locationPic .'/' . $place->id . '/' . $place->image;
+                    if(is_file($locationPic1))
+                        $place->image = URL::asset('_images/city/' . $place->id  . '/' . $place->image);
+                    else
+                        $place->image = $place->pic[0]->pic;
+                }
+                    $place->image = $place->pic[0]->pic;
+
             }
 
             $topAmaken = $this->getTopPlaces(1, 'city', $place->id);
@@ -337,7 +347,7 @@ class HomeController extends Controller
             $articleUrl = \url('/article/list/state/' . $place->listName);
             $locationName = ["name" => $place->name, 'cityName' => $place->name, 'cityNameUrl' => $place->listName, 'articleUrl' => $articleUrl, 'kindState' => 'state', 'state' => $place->name];
 
-            $allCities = Cities::where('stateId', $place->id)->where('isVillage', '>', 0)->pluck('id')->toArray();
+            $allCities = Cities::where('stateId', $place->id)->where('isVillage',0)->pluck('id')->toArray();
 
             $allAmakenId = Amaken::whereIn('cityId', $allCities)->pluck('id')->toArray();
             $allAmaken = Amaken::whereIn('cityId', $allCities)->get();
@@ -353,7 +363,7 @@ class HomeController extends Controller
                 if($allAmakenId != null)
                     $mostSeen = DB::select('SELECT placeId, COUNT(id) as seen FROM log WHERE activityId = ' .$seenActivity->id. ' AND kindPlaceId = 1 AND placeId IN (' . implode(",", $allAmakenId) . ') GROUP BY placeId ORDER BY seen DESC');
                 else
-                    $place->image = URL::asset('_images/noPic/blank.jpg');
+                    $place->image = URL::asset('_images/nopic/blank.jpg');
                 if(count($mostSeen) != 0){
                     foreach ($mostSeen as $item){
                         $p = Amaken::find($item->placeId);
@@ -364,13 +374,13 @@ class HomeController extends Controller
                         }
                     }
                     if($place->image == null || $place->image == '')
-                        $place->image = URL::asset('_images/noPic/blank.jpg');
+                        $place->image = URL::asset('_images/nopic/blank.jpg');
                 }
                 else
-                    $place->image = URL::asset('_images/noPic/blank.jpg');
+                    $place->image = URL::asset('_images/nopic/blank.jpg');
             }
             else
-                $place->image = URL::asset('_images/city/'.$place->image);
+                $place->image = URL::asset('_images/city/' . $place->id . '/'.$place->image);
 
             $topAmaken = $this->getTopPlaces(1, 'state', $place->id);
             $topRestaurant = $this->getTopPlaces(3, 'state', $place->id);
@@ -1699,7 +1709,7 @@ class HomeController extends Controller
             $allSogatSanaie = SogatSanaie::where('cityId', $id)->pluck('id')->toArray();
         }
         else if($kind == 'state'){
-            $allCities = Cities::where('stateId', $id)->where('isVillage', '>', 0)->pluck('id')->toArray();
+            $allCities = Cities::where('stateId', $id)->where('isVillage', 0)->pluck('id')->toArray();
 
             $allAmaken = Amaken::whereIn('cityId', $allCities)->pluck('id')->toArray();
             $allMajara = Majara::whereIn('cityId', $allCities)->pluck('id')->toArray();
@@ -1775,7 +1785,7 @@ class HomeController extends Controller
         if($kind == 'city')
             $cId[0] = $cityId;
         else
-            $cId = Cities::where('stateId', $cityId)->where('isVillage', '>', 0)->pluck('id')->toArray();
+            $cId = Cities::where('stateId', $cityId)->where('isVillage',0)->pluck('id')->toArray();
 
         $allPlace = DB::table($kindPlace->tableName)->whereIn('cityId', $cId)->pluck('id')->toArray();
 
