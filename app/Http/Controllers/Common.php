@@ -390,87 +390,92 @@ function getNearestMedals($uId) {
 
 function getRate($placeId, $kindPlaceId) {
 
-    switch ($kindPlaceId) {
-        case 1:
-            $place = Amaken::select(['id', 'name', 'cityId', 'file'])->find($placeId);
-            break;
-        case 3:
-            $place = Restaurant::select(['id', 'name', 'cityId', 'file'])->find($placeId);
-            break;
-        case 4:
-            $place = Hotel::select(['id', 'name', 'cityId', 'file'])->find($placeId);
-            break;
-        case 6:
-            $place = Majara::select(['id', 'name', 'cityId', 'file'])->find($placeId);
-            break;
-        case 10:
-            $place = SogatSanaie::select(['id', 'name', 'cityId', 'file'])->find($placeId);
-            break;
-        case 11:
-            $place = MahaliFood::select(['id', 'name', 'cityId', 'file'])->find($placeId);
-            break;
-    }
+    try {
+        switch ($kindPlaceId) {
+            case 1:
+                $place = Amaken::select(['id', 'name', 'cityId', 'file'])->find($placeId);
+                break;
+            case 3:
+                $place = Restaurant::select(['id', 'name', 'cityId', 'file'])->find($placeId);
+                break;
+            case 4:
+                $place = Hotel::select(['id', 'name', 'cityId', 'file'])->find($placeId);
+                break;
+            case 6:
+                $place = Majara::select(['id', 'name', 'cityId', 'file'])->find($placeId);
+                break;
+            case 10:
+                $place = SogatSanaie::select(['id', 'name', 'cityId', 'file'])->find($placeId);
+                break;
+            case 11:
+                $place = MahaliFood::select(['id', 'name', 'cityId', 'file'])->find($placeId);
+                break;
+        }
 
-    $city = Cities::find($place->cityId);
-    $state = State::find($city->stateId);
+        $city = Cities::find($place->cityId);
+        $state = State::find($city->stateId);
 
-    $section = \DB::select('SELECT questionId FROM questionSections WHERE (kindPlaceId = 0 OR kindPlaceId = ' . $kindPlaceId . ') AND (stateId = 0 OR stateId = ' . $state->id . ') AND (cityId = 0 OR cityId = ' . $city->id . ') GROUP BY questionId');
+        $section = \DB::select('SELECT questionId FROM questionSections WHERE (kindPlaceId = 0 OR kindPlaceId = ' . $kindPlaceId . ') AND (stateId = 0 OR stateId = ' . $state->id . ') AND (cityId = 0 OR cityId = ' . $city->id . ') GROUP BY questionId');
 
-    $questionId = array();
-    foreach ($section as $item)
-        array_push($questionId, $item->questionId);
+        $questionId = array();
+        foreach ($section as $item)
+            array_push($questionId, $item->questionId);
 
-    if($questionId != null && count($questionId) != 0)
-        $questions = \DB::select('SELECT * FROM questions WHERE id IN (' . implode(",", $questionId) . ') AND ansType = "rate"');
-    else
-        $questions = array();
+        if($questionId != null && count($questionId) != 0)
+            $questions = \DB::select('SELECT * FROM questions WHERE id IN (' . implode(",", $questionId) . ') AND ansType = "rate"');
+        else
+            $questions = array();
 
-    $questionId = array();
-    foreach ($questions as $item)
-        array_push($questionId, $item->id);
+        $questionId = array();
+        foreach ($questions as $item)
+            array_push($questionId, $item->id);
 
-    $avgRate = 0;
+        $avgRate = 0;
 
 //    $rates = DB::select('select avg(rate) as avgRate from log, questionUserAns WHERE log.id = logId and placeId = ' . $placeId . " and kindPlaceId = " . $kindPlaceId . " and activityId = " . Activity::whereName('امتیاز')->first()->id . " group by(visitorId)");
-    if($questionId != null && count($questionId) != 0)
-        $rates = DB::select('select avg(ans) as avgRate from log, questionUserAns As qua WHERE log.id = qua.logId and log.placeId = ' . $placeId . " and log.kindPlaceId = " . $kindPlaceId . " and qua.questionId IN (" . implode(',', $questionId) . ") group by(log.visitorId)");
-    else
-        $rates = array();
-
-    $separatedRates = [0, 0, 0, 0, 0];
-    foreach ($rates as $rate) {
-        $avgRate += $rate->avgRate;
-
-        if($rate->avgRate > 4)
-            $separatedRates[4] = $separatedRates[4] + 1;
-        elseif($rate->avgRate > 3)
-            $separatedRates[3] = $separatedRates[3] + 1;
-        elseif($rate->avgRate > 2)
-            $separatedRates[2] = $separatedRates[2] + 1;
-        elseif($rate->avgRate > 1)
-            $separatedRates[1] = $separatedRates[1] + 1;
+        if($questionId != null && count($questionId) != 0)
+            $rates = DB::select('select avg(ans) as avgRate from log, questionUserAns As qua WHERE log.id = qua.logId and log.placeId = ' . $placeId . " and log.kindPlaceId = " . $kindPlaceId . " and qua.questionId IN (" . implode(',', $questionId) . ") group by(log.visitorId)");
         else
-            $separatedRates[0] = $separatedRates[0] + 1;
+            $rates = array();
+
+        $separatedRates = [0, 0, 0, 0, 0];
+        foreach ($rates as $rate) {
+            $avgRate += $rate->avgRate;
+
+            if($rate->avgRate > 4)
+                $separatedRates[4] = $separatedRates[4] + 1;
+            elseif($rate->avgRate > 3)
+                $separatedRates[3] = $separatedRates[3] + 1;
+            elseif($rate->avgRate > 2)
+                $separatedRates[2] = $separatedRates[2] + 1;
+            elseif($rate->avgRate > 1)
+                $separatedRates[1] = $separatedRates[1] + 1;
+            else
+                $separatedRates[0] = $separatedRates[0] + 1;
+        }
+
+        if(count($rates) != 0)
+            $avgRate /= count($rates);
+
+        if($avgRate == 0)
+            $avgRate = 2;
+
+        elseif($avgRate > 4)
+            $avgRate = 5;
+        elseif($avgRate > 3)
+            $avgRate = 4;
+        elseif($avgRate > 2)
+            $avgRate = 3;
+        elseif($avgRate > 1)
+            $avgRate = 2;
+        else
+            $avgRate = 1;
+
+        return [$separatedRates, $avgRate];
     }
-
-    if(count($rates) != 0)
-        $avgRate /= count($rates);
-
-    if($avgRate == 0)
-        $avgRate = 2;
-
-    elseif($avgRate > 4)
-        $avgRate = 5;
-    elseif($avgRate > 3)
-        $avgRate = 4;
-    elseif($avgRate > 2)
-        $avgRate = 3;
-    elseif($avgRate > 1)
-        $avgRate = 2;
-    else
-        $avgRate = 1;
-
-    return [$separatedRates, $avgRate];
+    catch (\Exception $exception){
+        return [[0, 0, 0, 0, 0], 0];
+    }
 }
 
 function uploadCheck($target_file, $name, $section, $limitSize, $ext) {

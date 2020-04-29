@@ -251,10 +251,11 @@
                     </div>
                     <div class="clear-both"></div>
                     <div class="col-xs-12">
-                        <div class="col-xs-4 cpLittleMenu">
+                        <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/12/' . $kind . '/' . $place->listName)}}">
                             <div class="cityPageIcon boom"></div>
                             <div class="textCityPageIcon">بوم گردی</div>
-                        </div>
+                            <div class="textCityPageIcon">{{count($allBoomgardy)}}</div>
+                        </a>
                         <div class="col-xs-4 cpLittleMenu">
                             <div class="cityPageIcon estelah"></div>
                             <div class="textCityPageIcon">اصطلاحات محلی</div>
