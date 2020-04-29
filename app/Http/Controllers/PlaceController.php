@@ -2919,29 +2919,7 @@ class PlaceController extends Controller {
 
     public function showMainPage($mode = "mainPage") {
 
-        switch ($mode) {
-            case "amaken":
-                $kindPlaceId = 1;
-                break;
-            case "restaurant":
-                $kindPlaceId = 3;
-                break;
-            case "hotel":
-                $kindPlaceId = 4;
-                break;
-            case "majara":
-                $kindPlaceId = 6;
-                break;
-            case "sogatsanaie":
-                $kindPlaceId = 10;
-                break;
-            case "mahaliFood":
-                $kindPlaceId = 11;
-                break;
-            default:
-                $kindPlaceId= 0;
-                break;
-        }
+        $kindPlaceId= 0;
 
         $sliderPic = MainSliderPic::all();
         foreach ($sliderPic as $item)

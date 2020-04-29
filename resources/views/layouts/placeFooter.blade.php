@@ -17,9 +17,9 @@ $config = \App\models\ConfigModel::first();
 <footer>
     <div class="hideOnPhone screenFooterStyle">
         <div class="footerLogoSocialBox">
-            <div class="footerLogo">
+            <a href="{{route('main')}}" class="footerLogo">
                 <img src="{{URL::asset('images/icons/mainLogo.png')}}" class="content-icon" width="100%">
-            </div>
+            </a>
             <div class="footerSocialMediaBox">
 {{--                <div class="fassadsad">--}}
 {{--                    <a {{($config->linkedinNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://www.linkedin.com/in/shazde-mosafer-652817143/">--}}
