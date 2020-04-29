@@ -190,7 +190,6 @@ class UserLoginController extends Controller
 
     public function resendActivationCode()
     {
-
         if (isset($_POST["phoneNum"])) {
 
             $phoneNum = makeValidInput($_POST["phoneNum"]);
@@ -291,7 +290,11 @@ class UserLoginController extends Controller
 
                     $activation = ActivationCode::wherePhoneNum($phoneNum)->first();
                     if ($activation != null) {
-                        echo json_encode(['status' => 'ok', 'reminder' => (90 - time() + $activation->sendTime)]);
+                        if((90 - time() + $activation->sendTime) < 0)
+                            $this->resendActivationCode();
+                        else
+                            echo json_encode(['status' => 'ok', 'reminder' => (90 - time() + $activation->sendTime)]);
+
                         return;
                     }
 
@@ -646,40 +649,42 @@ class UserLoginController extends Controller
                 $user->save();
                 auth()->loginUsingId($user->id);
 
-                $invitationCode = makeValidInput($_POST["invitationCode"]);
+                if(isset($_POST["invitationCode"])) {
+                    $invitationCode = makeValidInput($_POST["invitationCode"]);
 
-                if (!empty($invitationCode)) {
-                    $dest = User::whereInvitationCode($invitationCode)->first();
+                    if (!empty($invitationCode)) {
+                        $dest = User::whereInvitationCode($invitationCode)->first();
 
-                    if ($dest != null) {
-                        $log = new LogModel();
-                        $log->visitorId = $user->id;
-                        $log->date = date('Y-m-d');
-                        $log->activityId = Activity::whereName('دعوت')->first()->id;
-                        $log->kindPlaceId = -1;
-                        $log->time = getToday()["time"];
-                        $log->confirm = 1;
-                        $log->placeId = -1;
-                        try {
-                            $log->save();
-                        } catch (Exception $x) {
-                            echo $x->getMessage();
-                            return;
-                        }
+                        if ($dest != null) {
+                            $log = new LogModel();
+                            $log->visitorId = $user->id;
+                            $log->date = date('Y-m-d');
+                            $log->activityId = Activity::whereName('دعوت')->first()->id;
+                            $log->kindPlaceId = -1;
+                            $log->time = getToday()["time"];
+                            $log->confirm = 1;
+                            $log->placeId = -1;
+                            try {
+                                $log->save();
+                            } catch (Exception $x) {
+                                echo $x->getMessage();
+                                return;
+                            }
 
-                        $log = new LogModel();
-                        $log->visitorId = $dest->id;
-                        $log->date = date('Y-m-d');
-                        $log->time = getToday()["time"];
-                        $log->activityId = Activity::whereName('دعوت')->first()->id;
-                        $log->kindPlaceId = -1;
-                        $log->confirm = 1;
-                        $log->placeId = -1;
-                        try {
-                            $log->save();
-                        } catch (Exception $x) {
-                            echo $x->getMessage();
-                            return;
+                            $log = new LogModel();
+                            $log->visitorId = $dest->id;
+                            $log->date = date('Y-m-d');
+                            $log->time = getToday()["time"];
+                            $log->activityId = Activity::whereName('دعوت')->first()->id;
+                            $log->kindPlaceId = -1;
+                            $log->confirm = 1;
+                            $log->placeId = -1;
+                            try {
+                                $log->save();
+                            } catch (Exception $x) {
+                                echo $x->getMessage();
+                                return;
+                            }
                         }
                     }
                 }
