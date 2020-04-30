@@ -1577,8 +1577,11 @@
 
                             <div class="inputBody_12 inputBody">
 
-                                <div class="listItem" style="display: flex;">
-                                    <div class="step5Title" style="width: auto">تعداد اتاق</div>
+                                <div class="listItem listItemHotelKind" style="display: flex">
+                                    <div style="display: flex; align-items: center">
+                                        <div class="icons stepInputIconRequired redStar"></div>
+                                        <div class="step5Title" style="width: auto">تعداد اتاق</div>
+                                    </div>
                                     <div class="subListItem">
                                         <div class="detailListItem">
                                             <input type="number" class="selectInput" id="room_num" name="room_num">
@@ -1631,7 +1634,7 @@
 
                     <div class="step6 bodyOfSteps hidden" style="display: flex; flex-wrap: wrap; justify-content: space-around; flex-direction: column; text-align: center">
                         <div style="font-size: 20px; margin-top: 23px; text-align: center">
-                            پس از بررسی و ویرایش اطلاعات وارد شده به بهترین نحو ممکن ،  <span class="headerCategoryName" style="font-size: 20px;"></span>  شما مانند نمونه زیر به نمایش در خواهد امد.
+                            پس از بررسی اطلاعات <span class="headerCategoryName" style="font-size: 20px !important;"></span> شما به لیست <span class="headerCategoryName" style="font-size: 20px !important;"></span> های ما اضافه خواهد شد.
                         </div>
                         <a id="sampleLink" href="" target="_blank" style="font-size: 30px; margin-top: 15px;"></a>
                     </div>
@@ -1721,8 +1724,63 @@
                 'id'  : 12,
                 'text' : '',
                 'sample': {
-                    'name': 'smaple',
-                    'link': 'koochita.com'
+                    'name': 'لیست تمامی بوم گردی ها',
+                    'link': 'https://koochita.com/placeList/12/country'
+                }
+            },
+            {
+                'name': 'جاذبه',
+                'kind': 'atraction',
+                'icon': 'atraction',
+                'id'  : 1,
+                'text' : 'دریاچه سد زاینده رود روی رودخونه زاینده رود یا زنده رود و در منطقه کوهستانی آبادچی،کنار شهر چادگان قرار گرفته. اطراف این سد هم امکانات خوبی برای مسافرها وجود داره. اطراف اون هم پر از فضای سبز و درخت‌های میوه هست که لذت کنار آب بودن رو دو برابر می‌کنه. اینجا میشه قایقرانی و ماهی گیری کرد. به خاطر آب و هوای این منطقه ماهی قزل‌آلای رنگین کمان، کپور و زردک رو میشه اینجا صید کرد. ',
+                'sample': {
+                'name': 'لیست تمامی جاذبه ها',
+                'link': 'https://koochita.com/placeList/1/country'
+                }
+            },
+            {
+                'name': 'رستوران',
+                'kind': 'restaurant',
+                'icon': 'restaurant',
+                'id'  : 3,
+                'text' : 'رستوران شهرزاد یکی از رستوران‌های لوکس و قدیمی اصفهانه که تزئینات نقاشی و آئینه کاری‌های سنتی وشیکی داره که فقط و فقط مخصوصه اصفهان و نصف جهانه. در این رستوران انواع غذاهای ایرانی و فرنگی سرو می‌شه و موقع نوش جان کردن غذات می‌تونی از موسیقی زنده هم لذت ببری.',
+                'sample': {
+                    'name': 'لیست تمامی رستوران ها',
+                    'link': 'https://koochita.com/placeList/3/country'
+                }
+            },
+            {
+                'name': 'سوغات',
+                'icon': 'soghat',
+                'kind': 'soghat',
+                'id'  : 10,
+                'text' : 'خیلی‌ها معتقدن هنر مینیاتور از چین وارد ایران شده. در واقع این هنر در دوره صفویه پیشرفت کرد و از مینیاتوری چینی خیلی فاصله گرفت. اکثر هنرمندهای مینیاتور از رنگ دست ساز برای کارهاشون استفاده میکنن. آبرنگ روحي، سياه قلم رنگي، سفيد قلم و زيرروغني از شیوه‌های مختلف این هنر هستن. در بناهای تاریخی اصفهان مثل كاخ‌هاي عالي قاپو و چهلستون و هشت بهشت و ... میتونید تزئینات مینیاتوری رو به خوبی ببینید. اگر به دنبال مینیاتورهای خوب برای سوغاتی هستید، بهتره به خیابون چهارباغ برید.',
+                'sample': {
+                    'name': 'لیست تمامی سوغات',
+                    'link': 'https://koochita.com/placeList/10/country'
+                }
+            },
+            {
+                'name': 'صنایع دستی',
+                'kind': 'sanaye',
+                'icon': 'sanaye',
+                'id'  : 10,
+                'text' : 'خیلی‌ها معتقدن هنر مینیاتور از چین وارد ایران شده. در واقع این هنر در دوره صفویه پیشرفت کرد و از مینیاتوری چینی خیلی فاصله گرفت. اکثر هنرمندهای مینیاتور از رنگ دست ساز برای کارهاشون استفاده میکنن. آبرنگ روحي، سياه قلم رنگي، سفيد قلم و زيرروغني از شیوه‌های مختلف این هنر هستن. در بناهای تاریخی اصفهان مثل كاخ‌هاي عالي قاپو و چهلستون و هشت بهشت و ... میتونید تزئینات مینیاتوری رو به خوبی ببینید. اگر به دنبال مینیاتورهای خوب برای سوغاتی هستید، بهتره به خیابون چهارباغ برید.',
+                'sample': {
+                    'name': 'لیست تمامی صنایع دستی',
+                    'link': 'https://koochita.com/placeList/10/country'
+                }
+            },
+            {
+                'name': 'غذای محلی',
+                'icon': 'ghazamahali',
+                'kind': 'ghazamahali',
+                'id'  : 11,
+                'text' : 'غذای محلی مد نظر خود را به صورت مختصر توضیح دهید. سعی کنید ابتدا آن را توصیف کنید، در مورد تاریخچه آن مختصری بنویسید، مزه آن را شرح دهید. راحت باشید و کاملا ساده بنویسید.',
+                'sample': {
+                    'name': 'لیست تمامی غذاهای محلی',
+                    'link': 'https://koochita.com/placeList/11/country'
                 }
             },
             {
@@ -1732,65 +1790,8 @@
                 'id'  : 4,
                 'text' : 'مهمانسرای ورزش شهر زیبا و دیدنی همدان از اقامتگاه‌های خوب این شهره که مجهز به امکانات رفاهی شایسته‌ای برای رفاه مسافران و مهمانان عزیزه. ورزشکاران محترم و تیم‌های ورزشی می تونن با اقامات توی این مهمانسرا علاوه بر استراحت از امکانات ویژه اون هم بهره ببرند. این مهمانسرا که در نزدیکی ورزشگاه شهید حاجی بابایی افتتاح شده، دارای چندین سالن مجزا و استاندار از جمله بدنسازی، زمین چمن و سالن‌های چندمنظوره انواع رشته‌های ورزشی هست که آماده میزبانی اقشار مختلف و به طور ویژه ورزشکاران عزیز هست.',
                 'sample': {
-                    'name': 'هتل کوثر',
-                    'link': 'https://koochita.com/show-place-details/hotels/%D9%87%D8%AA%D9%84_%DA%A9%D9%88%D8%AB%D8%B1'
-                }
-            },
-            {
-                'name': 'جاذبه',
-                'kind': 'atraction',
-                'icon': 'atraction',
-                'id'  : 1,
-                'text' : 'منطقه حفاظت شده یخاب اصفهان به عنوان پناهگاه حیات وحش یخاب نیز شناخته می‌شود و در فاصله 20 کیلومتری از شهر ابوزیدآباد و در نزدیکی بند ریگ و کویر سیازگه ابوزیدآباد قرار دارد. وه تسمیه اسم این منطقه به دلیل وجود چشمه یخاب در دل ارتفاعات این منطقه است که در هوای گرم و سوزان تابستان نیز آبی خنک دارد.\n' +
-                    'انواع پستانداران منطقه حفاظت شده یخاب شامل: کل و بز، قوچ و میش، گرگ، کفتار، گربه شنی، کاراکال و... است و پرندگانی مانند: عقاب طلائی، بالابان، هوبره، کبک، دودوک و... در این منطقه زندگی می‌کنند.\n' +
-                    'اکو سیستم این منطقه و تنوع زیستگاه‌های موجود در آن جاذبه فراوانی برای علاقمندان به طبیعت و طبیعت‌گردی دارد. ورود به این منطقه دارای محدودیت‌هایی است. به دلیل قرار داشتن منطقه حفاظت شده یخاب در مجاورت پارک ملی و مهاجرت حیوانات به این منطقه در برخی فصول نیروهای حفاظتی این منطقه اقدام به گشت و کنترل در این منطقه می‌کنند. منطقه حفاظت شده یخاب در اوایل سال 1392 رسما به عنوان منطقه شکار ممنوع معرفی شد.',
-                'sample': {
-                    'name': 'حافظیه',
-                    'link': 'https://koochita.com/show-place-details/amaken/%D8%AD%D8%A7%D9%81%D8%B8%DB%8C%D9%87'
-                }
-            },
-            {
-                'name': 'رستوران',
-                'kind': 'restaurant',
-                'icon': 'restaurant',
-                'id'  : 3,
-                'text' : '',
-                'sample': {
-                    'name': 'رستوران برادران کریم',
-                    'link': 'https://koochita.com/show-place-details/restaurant/%D8%B1%D8%B3%D8%AA%D9%88%D8%B1%D8%A7%D9%86_%D8%A8%D8%B1%D8%A7%D8%AF%D8%B1%D8%A7%D9%86_%DA%A9%D8%B1%DB%8C%D9%85'
-                }
-            },
-            {
-                'name': 'سوغات',
-                'icon': 'soghat',
-                'kind': 'soghat',
-                'id'  : 10,
-                'text' : '',
-                'sample': {
-                    'name': 'کماج',
-                    'link': 'https://koochita.com/show-place-details/sogatsanaie/%DA%A9%D9%85%D8%A7%D8%AC'
-                }
-            },
-            {
-                'name': 'صنایع دستی',
-                'kind': 'sanaye',
-                'icon': 'sanaye',
-                'id'  : 10,
-                'text' : '',
-                'sample': {
-                    'name': 'ترمه',
-                    'link': 'https://koochita.com/show-place-details/sogatsanaie/%D8%AA%D8%B1%D9%85%D9%87'
-                }
-            },
-            {
-                'name': 'غذای محلی',
-                'icon': 'ghazamahali',
-                'kind': 'ghazamahali',
-                'id'  : 11,
-                'text' : '',
-                'sample': {
-                    'name': 'پلا کباب',
-                    'link': 'https://koochita.com/show-place-details/mahalifood/%D9%BE%D9%84%D8%A7_%DA%A9%D8%A8%D8%A7%D8%A8'
+                'name': 'لیست تمامی هتل ها',
+                'link': 'https://koochita.com/placeList/4/country'
                 }
             },
         ];
@@ -1949,6 +1950,8 @@
         }
 
         function doChangeStep(inc){
+            $('html, body').animate({ scrollTop: 0 }, 'fast');
+
             $('.bodyOfSteps').addClass('hidden');
             $('.stepHeader').addClass('hidden');
             currentSteps += inc;
@@ -2192,6 +2195,13 @@
         }
 
         function checkStep3(){
+            if(selectedCategory['id'] == 12){
+                let room_num = $('#room_num').val();
+                if(room_num == 0 || room_num == null){
+                    openWarning('تعداد اتاق ها را مشخص کنید.');
+                    return false;
+                }
+            }
             if(selectedCategory['id'] == 4){
                 let kind = $('#hotelKind').val();
                 if(kind == 0){
@@ -2200,12 +2210,6 @@
                 }
             }
             if(selectedCategory['id'] == 11){
-                let recipes = $('#recipes').val();
-                if(recipes.trim().length > 2){
-                    openWarning('پر کردن دستور پهت غذا الزامی است.');
-                    return false;
-                }
-
                 let haveMaterial = 0;
                 for(let i = 1; i <= nowMaterialRow; i++){
                     let mat = [];
@@ -2217,6 +2221,13 @@
                 }
                 if(haveMaterial == 0){
                     openWarning('پر کردن مواد لازم برای غذا الزامی است.');
+                    return false;
+                }
+
+
+                let recipes = $('#recipes').val();
+                if(recipes.trim().length < 2){
+                    openWarning('پر کردن دستور پهت غذا الزامی است.');
                     return false;
                 }
             }
