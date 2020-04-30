@@ -175,8 +175,11 @@ class UserLoginController extends Controller
 
         if (isset($_POST["activationCode"]) && isset($_POST["phoneNum"])) {
 
+            $phoneNum = $_POST["phoneNum"];
+            $phoneNum = convertNumber('en', $phoneNum);
+
             $condition = ['code' => makeValidInput($_POST["activationCode"]),
-                'phoneNum' => makeValidInput($_POST["phoneNum"])];
+                'phoneNum' => makeValidInput($phoneNum)];
 
             $activation = ActivationCode::where($condition)->first();
             if ($activation != null) {
@@ -232,8 +235,10 @@ class UserLoginController extends Controller
     {
 
         if (isset($_POST["phoneNum"])) {
+            $phoneNum = $_POST["phoneNum"];
+            $phoneNum = convertNumber('en', $phoneNum);
 
-            $user = User::wherePhone(makeValidInput($_POST["phoneNum"]))->first();
+            $user = User::wherePhone(makeValidInput($phoneNum))->first();
 
             if ($user != null) {
 
@@ -276,6 +281,7 @@ class UserLoginController extends Controller
         if (isset($_POST["phoneNum"])) {
 
             $phoneNum = makeValidInput($_POST["phoneNum"]);
+            $phoneNum = convertNumber('en', $phoneNum);
 
             if(\auth()->check()){
                 if (User::wherePhone($phoneNum)->where('id', '!=', \auth()->user()->id)->count() > 0)
