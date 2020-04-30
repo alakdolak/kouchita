@@ -107,7 +107,7 @@
             border: 3px solid #eab836;
             display: inline-block;
             justify-content: space-between;
-            width: calc(100% - 230px);
+            width: calc(100% - 115px);
             height: 56px;
         }
         .footerOfBox {
@@ -691,6 +691,10 @@
         }
 
         @media (max-width: 700px) {
+            .stepNotice{
+                font-size: 13px;
+                text-align: center;
+            }
             .headerCategoryName, .stepInputBoxRequired, .stepInputBoxInput, .addresText, .mapButton{
                 font-size: 11px !important;
                 font-weight: bold;
@@ -774,9 +778,6 @@
         @media (max-width: 500px) {
             .stepHeader{
                 width: auto;
-            }
-            .addresText{
-                font-size: 15px !important;
             }
         }
     </style>
@@ -1626,7 +1627,7 @@
                 </div>
 
                 <div class="downBody">
-                    <button class="btn boxPreviousBtn" type="button" id="previousStep" onclick="changeSteps(-1)">بازگشت</button>
+                    <button class="btn boxPreviousBtn" type="button" id="previousStep" onclick="changeSteps(-1)" style="display: none">بازگشت</button>
                     <div class="footerBox1"></div>
                     <button class="btn boxNextBtn" type="button" id="nextStep" onclick="changeSteps(1)" >شروع</button>
                 </div>
@@ -1954,6 +1955,16 @@
                 $('.steps').addClass('hidden');
             else
                 $('.steps').removeClass('hidden');
+
+            if(currentSteps > 1) {
+                $('#previousStep').show();
+                $('.footerBox1').css('width', 'calc(100% - 230px)')
+            }
+            else {
+                alert('in');
+                $('#previousStep').hide();
+                $('.footerBox1').css('width', 'calc(100% - 115px)')
+            }
 
 //for change name of button in steps
             if (currentSteps < 0){
