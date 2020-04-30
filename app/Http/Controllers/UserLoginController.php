@@ -619,7 +619,7 @@ class UserLoginController extends Controller
                 }
 
                 $userCheckEmail = new User();
-                $userCheckEmail->username = explode('@', $user->email)[0];
+                $userCheckEmail->username = $usernameCheck;
                 $userCheckEmail->password = \Hash::make($user->id);
                 $name = explode(' ', $user->name);
                 $userCheckEmail->first_name = $name[0];
