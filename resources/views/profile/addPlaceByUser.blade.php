@@ -1656,7 +1656,7 @@
 
                 <!-- Modal footer -->
                 <div class="modal-footer" style="text-align: center">
-                    <button class="btn nextStepBtnTourCreation" data-dismiss="modal">
+                    <button class="btn btn-success" data-dismiss="modal">
                         تایید
                     </button>
                 </div>
