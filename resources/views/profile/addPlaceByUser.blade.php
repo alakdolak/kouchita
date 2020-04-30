@@ -692,7 +692,8 @@
 
         @media (max-width: 700px) {
             .headerCategoryName, .stepInputBoxRequired, .stepInputBoxInput, .addresText, .mapButton{
-                font-size: 14px !important;
+                font-size: 11px !important;
+                font-weight: bold;
             }
             .boxNotice{
                 width: 100%;
@@ -1638,7 +1639,7 @@
         <div class="modal-dialog modal-lg" style="width: 95%;">
             <div class="modal-content">
                 <div class="modal-body" style="direction: rtl">
-                    <div id="map" style="width: 100%; height: 85vh; background-color: red"></div>
+                    <div id="map" style="width: 100%; height: 80vh; background-color: red"></div>
                 </div>
 
                 <!-- Modal footer -->
