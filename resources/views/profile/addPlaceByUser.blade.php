@@ -691,6 +691,9 @@
         }
 
         @media (max-width: 700px) {
+            .headerCategoryName, .stepInputBoxRequired, .stepInputBoxInput, .addresText, .mapButton{
+                font-size: 14px !important;
+            }
             .boxNotice{
                 width: 100%;
                 font-size: 13px;
