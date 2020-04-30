@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/popUp.css?v=1')}}">
     <link rel="stylesheet" href="{{URL::asset('css/theme2/help.css?v=1')}}">
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/icons.css?v=2')}}' />
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/addPlaceByUser.css?v=1')}}' />
+    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/addPlaceByUser.css')}}' />
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/abbreviations.css')}}' />
 
     <link rel="stylesheet" href="{{asset('packages/dropzone/basic.css')}}">
@@ -17,182 +17,6 @@
 
     <script src="{{URL::asset('js/autosize.min.js')}}"></script>
 
-    <style>
-        body{
-            min-width: auto;
-        }
-        .innerPicAddPlace{
-            width: 263px;
-            height: 285px;
-            position: absolute;
-            top: -65px;
-            left: -75px;
-            z-index: 12;
-        }
-        .footerTextBoxAddPlace{
-            padding: 10px 15px;
-            font-size: 12px;
-            line-height: 2;
-            position: relative;
-            text-align: center;
-            bottom: 0px;
-            right: 0px;
-        }
-        .addPlaceDropZone{
-            min-height: 340px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-        .dragDropTextAddPlace{
-            font-size: 14px;
-            font-weight: bold;
-            border: 2px dashed #9996;
-            padding-top: 20px;
-            text-align: center;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            padding: 20px;
-            min-height: 300px;
-        }
-        .sampleDescription{
-            border: solid 1px #eab836;
-            border-radius: 8px;
-            color: gray;
-            padding: 15px;
-            text-align: justify;
-            font-size: 14px;
-            margin-top: 15px;
-        }
-        .plusIcon{
-            background: green;
-            color: white;
-            font-size: 35px;
-            margin-right: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 50%;
-            cursor: pointer;
-        }
-        .showOnMobile{
-            display: none;
-        }
-        .showOnPc{
-            display: flex;
-        }
-        .step1Header{
-            text-align: center;
-            font-size: 30px;
-            padding: 15px;
-            font-weight: bold
-        }
-        .marginRight{
-            margin-right: 40px
-        }
-        .matInputTopDiv{
-            width: 49%;
-        }
-        .endSectionButton{
-            width: 100%;
-            border-radius: 30px 30px 30px 30px !important;
-        }
-        .endSectionFooter{
-            display: none;
-        }
-
-        #materialRow{
-            width: 100%;
-        }
-        .stepInputBoxMat{
-            width: 100%;
-        }
-        @media (max-width: 1200px) {
-            .container{
-                width: auto;
-            }
-        }
-        @media (max-width: 992px){
-            .categories{
-                font-size: 18px;
-            }
-        }
-
-        @media (max-width: 900px){
-            .showOnMobile{
-                display: flex;
-            }
-            .showOnPc{
-                display: none;
-            }
-            .stepTitle{
-                font-size: 15px;
-            }
-            .headerOfBox{
-                font-size: 1.6em;
-            }
-        }
-
-        @media (max-width: 800px) {
-            .step1Header{
-                font-size: 25px;
-            }
-            .headerOfBox{
-                flex-direction: column;
-                text-align: center;
-            }
-            .stepsMilestoneMainDiv{
-                margin-top: 15px;
-            }
-        }
-
-        @media (max-width: 700px) {
-            #selectCategoryDiv{
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            .categories{
-                width: 30%;
-            }
-            .box{
-                width: 100%;
-            }
-            .inputFliedRow{
-                flex-direction: column;
-                align-items: baseline;
-            }
-            .inputFlied{
-                flex-direction: row;
-                width: 100%;
-            }
-            .marginRight{
-                margin-right: 0px;
-            }
-            .stepInputBox{
-                width: 100%;
-            }
-            .detailListItem{
-                min-width: 49%;
-            }
-        }
-
-        @media (max-width: 500px) {
-            .stepTitle{
-                font-size: 18px !important;
-            }
-            .stepHeader{
-                width: auto;
-            }
-            .addresText{
-                font-size: 15px !important;
-            }
-        }
-
-    </style>
 @stop
 
 @section('main')
@@ -366,7 +190,7 @@
                                     <button class="btn btn-success mapButton" onclick="openMap()">محل را از روی نقشه مشخص کنید</button>
                                 </div>
 
-                                <div class="mg-tp-5" style="font-size: 20px; text-align: center">موقعیت موردنظر را بر روی نقشه پیدا نموده و پین را بر روی آن قرار دهید. (کلیک در کامپیوتر و لمس نقشه در گوشی)</div>
+                                <div class="mg-tp-5" style="font-size: 15px; text-align: center">موقعیت موردنظر را بر روی نقشه پیدا نموده و پین را بر روی آن قرار دهید. (کلیک در کامپیوتر و لمس نقشه در گوشی)</div>
                             </div>
 
                             <div class="row inputFliedRow onlyForHotelsRestBoom ">
