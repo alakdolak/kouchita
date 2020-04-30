@@ -608,6 +608,16 @@ class UserLoginController extends Controller
                 }
             }
             else{
+
+                $usernameCheck =  explode('@', $user->email)[0];
+                while (true){
+                    $checkUser = \App\User::where('username', $usernameCheck)->first();
+                    if($checkUser == null)
+                        break;
+                    else
+                        $usernameCheck = random_int(1000, 9999) . explode('@', $user->email)[0];
+                }
+
                 $userCheckEmail = new User();
                 $userCheckEmail->username = explode('@', $user->email)[0];
                 $userCheckEmail->password = \Hash::make($user->id);
