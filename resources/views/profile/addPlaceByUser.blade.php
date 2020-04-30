@@ -688,6 +688,13 @@
         }
 
         @media (max-width: 700px) {
+            .step1Header{
+                font-size: 15px;
+                font-weight: bold;
+            }
+            #stepName{
+                font-size: 14px;
+            }
             .bodyStyle{
                 padding-top: 10px !important;
             }
@@ -700,6 +707,7 @@
             }
             .categories{
                 width: 30%;
+                font-size: 13px;
             }
             .box{
                 width: 100%;
@@ -749,9 +757,6 @@
         }
 
         @media (max-width: 500px) {
-            .stepTitle{
-                font-size: 18px !important;
-            }
             .stepHeader{
                 width: auto;
             }
