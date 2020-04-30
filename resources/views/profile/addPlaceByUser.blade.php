@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/popUp.css?v=1')}}">
     <link rel="stylesheet" href="{{URL::asset('css/theme2/help.css?v=1')}}">
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/icons.css?v=2')}}' />
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/addPlaceByUser.css?v=1')}}' />
+    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/addPlaceByUser.css')}}' />
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/abbreviations.css')}}' />
 
     <link rel="stylesheet" href="{{asset('packages/dropzone/basic.css')}}">
@@ -17,182 +17,6 @@
 
     <script src="{{URL::asset('js/autosize.min.js')}}"></script>
 
-    <style>
-        body{
-            min-width: auto;
-        }
-        .innerPicAddPlace{
-            width: 263px;
-            height: 285px;
-            position: absolute;
-            top: -65px;
-            left: -75px;
-            z-index: 12;
-        }
-        .footerTextBoxAddPlace{
-            padding: 10px 15px;
-            font-size: 12px;
-            line-height: 2;
-            position: relative;
-            text-align: center;
-            bottom: 0px;
-            right: 0px;
-        }
-        .addPlaceDropZone{
-            min-height: 340px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-        .dragDropTextAddPlace{
-            font-size: 14px;
-            font-weight: bold;
-            border: 2px dashed #9996;
-            padding-top: 20px;
-            text-align: center;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            padding: 20px;
-            min-height: 300px;
-        }
-        .sampleDescription{
-            border: solid 1px #eab836;
-            border-radius: 8px;
-            color: gray;
-            padding: 15px;
-            text-align: justify;
-            font-size: 14px;
-            margin-top: 15px;
-        }
-        .plusIcon{
-            background: green;
-            color: white;
-            font-size: 35px;
-            margin-right: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 50%;
-            cursor: pointer;
-        }
-        .showOnMobile{
-            display: none;
-        }
-        .showOnPc{
-            display: flex;
-        }
-        .step1Header{
-            text-align: center;
-            font-size: 30px;
-            padding: 15px;
-            font-weight: bold
-        }
-        .marginRight{
-            margin-right: 40px
-        }
-        .matInputTopDiv{
-            width: 49%;
-        }
-        .endSectionButton{
-            width: 100%;
-            border-radius: 30px 30px 30px 30px !important;
-        }
-        .endSectionFooter{
-            display: none;
-        }
-
-        #materialRow{
-            width: 100%;
-        }
-        .stepInputBoxMat{
-            width: 100%;
-        }
-        @media (max-width: 1200px) {
-            .container{
-                width: auto;
-            }
-        }
-        @media (max-width: 992px){
-            .categories{
-                font-size: 18px;
-            }
-        }
-
-        @media (max-width: 900px){
-            .showOnMobile{
-                display: flex;
-            }
-            .showOnPc{
-                display: none;
-            }
-            .stepTitle{
-                font-size: 15px;
-            }
-            .headerOfBox{
-                font-size: 1.6em;
-            }
-        }
-
-        @media (max-width: 800px) {
-            .step1Header{
-                font-size: 25px;
-            }
-            .headerOfBox{
-                flex-direction: column;
-                text-align: center;
-            }
-            .stepsMilestoneMainDiv{
-                margin-top: 15px;
-            }
-        }
-
-        @media (max-width: 700px) {
-            #selectCategoryDiv{
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            .categories{
-                width: 30%;
-            }
-            .box{
-                width: 100%;
-            }
-            .inputFliedRow{
-                flex-direction: column;
-                align-items: baseline;
-            }
-            .inputFlied{
-                flex-direction: row;
-                width: 100%;
-            }
-            .marginRight{
-                margin-right: 0px;
-            }
-            .stepInputBox{
-                width: 100%;
-            }
-            .detailListItem{
-                min-width: 49%;
-            }
-        }
-
-        @media (max-width: 500px) {
-            .stepTitle{
-                font-size: 18px !important;
-            }
-            .stepHeader{
-                width: auto;
-            }
-            .addresText{
-                font-size: 15px !important;
-            }
-        }
-
-    </style>
 @stop
 
 @section('main')
@@ -366,7 +190,7 @@
                                     <button class="btn btn-success mapButton" onclick="openMap()">محل را از روی نقشه مشخص کنید</button>
                                 </div>
 
-                                <div class="mg-tp-5" style="font-size: 20px; text-align: center">موقعیت موردنظر را بر روی نقشه پیدا نموده و پین را بر روی آن قرار دهید. (کلیک در کامپیوتر و لمس نقشه در گوشی)</div>
+                                <div class="mg-tp-5" style="font-size: 15px; text-align: center">موقعیت موردنظر را بر روی نقشه پیدا نموده و پین را بر روی آن قرار دهید. (کلیک در کامپیوتر و لمس نقشه در گوشی)</div>
                             </div>
 
                             <div class="row inputFliedRow onlyForHotelsRestBoom ">
@@ -1029,7 +853,7 @@
                         </div>
                     </div>
 
-                    <div class="step6 bodyOfSteps hidden" style="display: flex; flex-wrap: wrap; justify-content: space-around;">
+                    <div class="step6 bodyOfSteps hidden" style="display: flex; flex-wrap: wrap; justify-content: space-around; flex-direction: column; text-align: center">
                         <div style="font-size: 20px; margin-top: 23px; text-align: center">
                             پس از بررسی و ویرایش اطلاعات وارد شده به بهترین نحو ممکن ،<span class="headerCategoryName"></span>شما مانند نمونه زیر به نمایش در خواهد امد.
                         </div>
@@ -1121,8 +945,8 @@
                 'id'  : 4,
                 'text' : 'مهمانسرای ورزش شهر زیبا و دیدنی همدان از اقامتگاه‌های خوب این شهره که مجهز به امکانات رفاهی شایسته‌ای برای رفاه مسافران و مهمانان عزیزه. ورزشکاران محترم و تیم‌های ورزشی می تونن با اقامات توی این مهمانسرا علاوه بر استراحت از امکانات ویژه اون هم بهره ببرند. این مهمانسرا که در نزدیکی ورزشگاه شهید حاجی بابایی افتتاح شده، دارای چندین سالن مجزا و استاندار از جمله بدنسازی، زمین چمن و سالن‌های چندمنظوره انواع رشته‌های ورزشی هست که آماده میزبانی اقشار مختلف و به طور ویژه ورزشکاران عزیز هست.',
                 'sample': {
-                    'name': 'smaple',
-                    'link': 'koochita.com'
+                    'name': 'هتل کوثر',
+                    'link': 'https://koochita.com/show-place-details/hotels/%D9%87%D8%AA%D9%84_%DA%A9%D9%88%D8%AB%D8%B1'
                 }
             },
             {
@@ -1134,8 +958,8 @@
                     'انواع پستانداران منطقه حفاظت شده یخاب شامل: کل و بز، قوچ و میش، گرگ، کفتار، گربه شنی، کاراکال و... است و پرندگانی مانند: عقاب طلائی، بالابان، هوبره، کبک، دودوک و... در این منطقه زندگی می‌کنند.\n' +
                     'اکو سیستم این منطقه و تنوع زیستگاه‌های موجود در آن جاذبه فراوانی برای علاقمندان به طبیعت و طبیعت‌گردی دارد. ورود به این منطقه دارای محدودیت‌هایی است. به دلیل قرار داشتن منطقه حفاظت شده یخاب در مجاورت پارک ملی و مهاجرت حیوانات به این منطقه در برخی فصول نیروهای حفاظتی این منطقه اقدام به گشت و کنترل در این منطقه می‌کنند. منطقه حفاظت شده یخاب در اوایل سال 1392 رسما به عنوان منطقه شکار ممنوع معرفی شد.',
                 'sample': {
-                    'name': 'smaple',
-                    'link': 'koochita.com'
+                    'name': 'حافظیه',
+                    'link': 'https://koochita.com/show-place-details/amaken/%D8%AD%D8%A7%D9%81%D8%B8%DB%8C%D9%87'
                 }
             },
             {
@@ -1145,8 +969,8 @@
                 'id'  : 3,
                 'text' : '',
                 'sample': {
-                    'name': 'smaple',
-                    'link': 'koochita.com'
+                    'name': 'رستوران برادران کریم',
+                    'link': 'https://koochita.com/show-place-details/restaurant/%D8%B1%D8%B3%D8%AA%D9%88%D8%B1%D8%A7%D9%86_%D8%A8%D8%B1%D8%A7%D8%AF%D8%B1%D8%A7%D9%86_%DA%A9%D8%B1%DB%8C%D9%85'
                 }
             },
             {
@@ -1156,8 +980,8 @@
                 'id'  : 10,
                 'text' : '',
                 'sample': {
-                    'name': 'smaple',
-                    'link': 'koochita.com'
+                    'name': 'کماج',
+                    'link': 'https://koochita.com/show-place-details/sogatsanaie/%DA%A9%D9%85%D8%A7%D8%AC'
                 }
             },
             {
@@ -1167,8 +991,8 @@
                 'id'  : 10,
                 'text' : '',
                 'sample': {
-                    'name': 'smaple',
-                    'link': 'koochita.com'
+                    'name': 'ترمه',
+                    'link': 'https://koochita.com/show-place-details/sogatsanaie/%D8%AA%D8%B1%D9%85%D9%87'
                 }
             },
             {
@@ -1178,8 +1002,8 @@
                 'id'  : 11,
                 'text' : '',
                 'sample': {
-                    'name': 'smaple',
-                    'link': 'koochita.com'
+                    'name': 'پلا کباب',
+                    'link': 'https://koochita.com/show-place-details/mahalifood/%D9%BE%D9%84%D8%A7_%DA%A9%D8%A8%D8%A7%D8%A8'
                 }
             },
             {
@@ -1280,7 +1104,7 @@
 
             $('#sampleText').text(selectedCategory['text']);
             $('#sampleLink').text(selectedCategory['sample']['name']);
-            $('#sampleLink').attr('src', selectedCategory['sample']['link']);
+            $('#sampleLink').attr('href', selectedCategory['sample']['link']);
 
             createInputPlace();
         }
@@ -1430,7 +1254,7 @@
             data['kindPlaceId'] = selectedCategory['id'];
             data['name'] = $('#name').val();
             data['cityId'] = $('#cityId').val();
-            data['stateId'] = $('#state').val();
+                data['stateId'] = $('#state').val();
             data['address'] = $('#address').val();
             data['lat'] = $('#lat').val();
             data['lng'] = $('#lng').val();
