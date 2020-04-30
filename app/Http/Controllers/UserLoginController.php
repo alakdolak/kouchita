@@ -615,7 +615,7 @@ class UserLoginController extends Controller
                     if($checkUser == null)
                         break;
                     else
-                        $usernameCheck = random_int(1000, 9999) . explode('@', $user->email)[0];
+                        $usernameCheck = explode('@', $user->email)[0] .  random_int(1000, 9999);
                 }
 
                 $userCheckEmail = new User();
