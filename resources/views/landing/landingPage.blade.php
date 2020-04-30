@@ -360,7 +360,6 @@
     }
 
     function checkUserName2() {
-        openLoading();
         let username = $('#usernameInput').val();
         let pass = $('#passInput').val();
         let rePassInput = $('#rePassInput').val();
@@ -370,6 +369,8 @@
         if(username.trim().length > 0 && pass.trim().length > 0 && rePassInput.trim().length > 0 && firstName.trim().length > 0 && lastName.trim().length > 0){
 
             if(pass == rePassInput){
+                openLoading();
+
                 $.ajax({
                     type: 'post',
                     url: '{{route('checkUserName')}}',
@@ -377,7 +378,10 @@
                         'username': username,
                     },
                     success: function (response) {
+                        closeLoading();
                         if (response == "ok") {
+                            openLoading();
+
                             $.ajax({
                                 type: 'post',
                                 url: '{{route('registerWithPhone')}}',
