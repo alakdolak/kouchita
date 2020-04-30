@@ -691,6 +691,12 @@
         }
 
         @media (max-width: 700px) {
+            .step5Title{
+                margin-bottom: 10px;
+            }
+            .listItemHotelKind{
+                flex-direction: column;
+            }
             .stepNotice{
                 font-size: 13px;
                 text-align: center;
@@ -1063,9 +1069,11 @@
 
                             <div class="inputBody_4 inputBody">
 
-                                <div class="listItem" style="display: flex">
-                                    <div class="icons stepInputIconRequired redStar"></div>
-                                    <div class="step5Title" style="width: auto;">نوع اقامتگاه</div>
+                                <div class="listItem listItemHotelKind" style="display: flex">
+                                    <div style="display: flex; align-items: center">
+                                        <div class="icons stepInputIconRequired redStar"></div>
+                                        <div class="step5Title" style="width: auto;">نوع اقامتگاه</div>
+                                    </div>
                                     <div class="subListItem">
                                         <div class="detailListItem">
                                             <select name="hotelKind" id="hotelKind" class="selectInput" onchange="changHotelKind(this.value)">
@@ -1638,9 +1646,9 @@
 
     <div class="modal fade" id="mapModal">
         <div class="modal-dialog modal-lg" style="width: 95%;">
-            <div class="modal-content">
+            <div class="modal-content" style="height: 100vh;">
                 <div class="modal-body" style="direction: rtl">
-                    <div id="map" style="width: 100%; height: 80vh; background-color: red"></div>
+                    <div id="map" style="width: 100%; height: calc(100vh - 115px); background-color: red"></div>
                 </div>
 
                 <!-- Modal footer -->
@@ -1961,7 +1969,6 @@
                 $('.footerBox1').css('width', 'calc(100% - 230px)')
             }
             else {
-                alert('in');
                 $('#previousStep').hide();
                 $('.footerBox1').css('width', 'calc(100% - 115px)')
             }
@@ -2133,7 +2140,7 @@
             let name = $('#name').val();
             let city = $('#cityId').val();
             let error = true;
-
+            let errorText = '';
 
             if(name.trim().length == 0) {
                 $('#name').parent().css('background', '#ffafaf');
@@ -2162,7 +2169,7 @@
                     $('#address').css('background', '#ebebeb');
 
                 if(lat == 0 || lng == 0){
-                    openWarning('فیلد های ستاره دار پر کنید و محل را بر روی نقشه مشخص کنید');
+                    openWarning('محل را بر روی نقشه مشخص کنید');
                     error = false;
                 }
 
