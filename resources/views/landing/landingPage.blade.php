@@ -521,7 +521,7 @@
     }
 
     function phoneRegister(){
-        if ($("#phone").val().trim().length == 11 && $("#phone").val()[0] == 0)
+        if ($("#phone").val().trim().length == 11)
             checkPhoneNum();
         else
             $('#phoneError').text('شماره تماس خود را به درستی وارد کنید.');
