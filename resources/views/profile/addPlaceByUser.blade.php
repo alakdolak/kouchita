@@ -23,7 +23,7 @@
     <div class="container">
         <div class="bodyStyle">
 
-            <div style=" font-size: 22px; font-weight: bold; padding-bottom: 15px; text-align: center">
+            <div class="textTopHeader">
                 امروز از هم جداییم ، اما برای فردای با هم بودن تلاش می کنیم
             </div>
 

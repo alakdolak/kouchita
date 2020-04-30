@@ -2,6 +2,12 @@
     display: inline-block;
     position: relative;
 }
+.textTopHeader{
+    font-size: 22px;
+    font-weight: bold;
+    padding-bottom: 15px;
+    text-align: center
+}
 
 .bodyStyle {
     width: 100%;
@@ -662,6 +668,12 @@ body{
 }
 
 @media (max-width: 700px) {
+    .bodyStyle{
+        padding-top: 10px !important;
+    }
+    .textTopHeader{
+        font-size: 18px;
+    }
     #selectCategoryDiv{
         flex-wrap: wrap;
         justify-content: center;
