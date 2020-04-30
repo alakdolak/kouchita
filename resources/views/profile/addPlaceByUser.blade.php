@@ -691,6 +691,9 @@
         }
 
         @media (max-width: 700px) {
+            .endSectionButton{
+                font-size: 14px;
+            }
             .step5Title{
                 margin-bottom: 10px;
             }
@@ -1628,7 +1631,7 @@
 
                     <div class="step6 bodyOfSteps hidden" style="display: flex; flex-wrap: wrap; justify-content: space-around; flex-direction: column; text-align: center">
                         <div style="font-size: 20px; margin-top: 23px; text-align: center">
-                            پس از بررسی و ویرایش اطلاعات وارد شده به بهترین نحو ممکن ،<span class="headerCategoryName"></span>شما مانند نمونه زیر به نمایش در خواهد امد.
+                            پس از بررسی و ویرایش اطلاعات وارد شده به بهترین نحو ممکن ،  <span class="headerCategoryName" style="font-size: 20px;"></span>  شما مانند نمونه زیر به نمایش در خواهد امد.
                         </div>
                         <a id="sampleLink" href="" target="_blank" style="font-size: 30px; margin-top: 15px;"></a>
                     </div>
@@ -1996,6 +1999,7 @@
             }
             else if(currentSteps == 6){
                 $('#nextStep').html('اتمام و بازگشت به صفحه اصلی');
+                $('#previousStep').css('display', 'none');
                 $('#nextStep').addClass('endSectionButton');
                 $('.footerBox1').addClass('endSectionFooter');
             }
