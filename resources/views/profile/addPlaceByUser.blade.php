@@ -1029,7 +1029,7 @@
                         </div>
                     </div>
 
-                    <div class="step6 bodyOfSteps hidden" style="display: flex; flex-wrap: wrap; justify-content: space-around;">
+                    <div class="step6 bodyOfSteps hidden" style="display: flex; flex-wrap: wrap; justify-content: space-around; flex-direction: column; text-align: center">
                         <div style="font-size: 20px; margin-top: 23px; text-align: center">
                             پس از بررسی و ویرایش اطلاعات وارد شده به بهترین نحو ممکن ،<span class="headerCategoryName"></span>شما مانند نمونه زیر به نمایش در خواهد امد.
                         </div>
@@ -1121,8 +1121,8 @@
                 'id'  : 4,
                 'text' : 'مهمانسرای ورزش شهر زیبا و دیدنی همدان از اقامتگاه‌های خوب این شهره که مجهز به امکانات رفاهی شایسته‌ای برای رفاه مسافران و مهمانان عزیزه. ورزشکاران محترم و تیم‌های ورزشی می تونن با اقامات توی این مهمانسرا علاوه بر استراحت از امکانات ویژه اون هم بهره ببرند. این مهمانسرا که در نزدیکی ورزشگاه شهید حاجی بابایی افتتاح شده، دارای چندین سالن مجزا و استاندار از جمله بدنسازی، زمین چمن و سالن‌های چندمنظوره انواع رشته‌های ورزشی هست که آماده میزبانی اقشار مختلف و به طور ویژه ورزشکاران عزیز هست.',
                 'sample': {
-                    'name': 'smaple',
-                    'link': 'koochita.com'
+                    'name': 'هتل کوثر',
+                    'link': 'https://koochita.com/show-place-details/hotels/%D9%87%D8%AA%D9%84_%DA%A9%D9%88%D8%AB%D8%B1'
                 }
             },
             {
@@ -1134,8 +1134,8 @@
                     'انواع پستانداران منطقه حفاظت شده یخاب شامل: کل و بز، قوچ و میش، گرگ، کفتار، گربه شنی، کاراکال و... است و پرندگانی مانند: عقاب طلائی، بالابان، هوبره، کبک، دودوک و... در این منطقه زندگی می‌کنند.\n' +
                     'اکو سیستم این منطقه و تنوع زیستگاه‌های موجود در آن جاذبه فراوانی برای علاقمندان به طبیعت و طبیعت‌گردی دارد. ورود به این منطقه دارای محدودیت‌هایی است. به دلیل قرار داشتن منطقه حفاظت شده یخاب در مجاورت پارک ملی و مهاجرت حیوانات به این منطقه در برخی فصول نیروهای حفاظتی این منطقه اقدام به گشت و کنترل در این منطقه می‌کنند. منطقه حفاظت شده یخاب در اوایل سال 1392 رسما به عنوان منطقه شکار ممنوع معرفی شد.',
                 'sample': {
-                    'name': 'smaple',
-                    'link': 'koochita.com'
+                    'name': 'حافظیه',
+                    'link': 'https://koochita.com/show-place-details/amaken/%D8%AD%D8%A7%D9%81%D8%B8%DB%8C%D9%87'
                 }
             },
             {
@@ -1145,8 +1145,8 @@
                 'id'  : 3,
                 'text' : '',
                 'sample': {
-                    'name': 'smaple',
-                    'link': 'koochita.com'
+                    'name': 'رستوران برادران کریم',
+                    'link': 'https://koochita.com/show-place-details/restaurant/%D8%B1%D8%B3%D8%AA%D9%88%D8%B1%D8%A7%D9%86_%D8%A8%D8%B1%D8%A7%D8%AF%D8%B1%D8%A7%D9%86_%DA%A9%D8%B1%DB%8C%D9%85'
                 }
             },
             {
@@ -1156,8 +1156,8 @@
                 'id'  : 10,
                 'text' : '',
                 'sample': {
-                    'name': 'smaple',
-                    'link': 'koochita.com'
+                    'name': 'کماج',
+                    'link': 'https://koochita.com/show-place-details/sogatsanaie/%DA%A9%D9%85%D8%A7%D8%AC'
                 }
             },
             {
@@ -1167,8 +1167,8 @@
                 'id'  : 10,
                 'text' : '',
                 'sample': {
-                    'name': 'smaple',
-                    'link': 'koochita.com'
+                    'name': 'ترمه',
+                    'link': 'https://koochita.com/show-place-details/sogatsanaie/%D8%AA%D8%B1%D9%85%D9%87'
                 }
             },
             {
@@ -1178,8 +1178,8 @@
                 'id'  : 11,
                 'text' : '',
                 'sample': {
-                    'name': 'smaple',
-                    'link': 'koochita.com'
+                    'name': 'پلا کباب',
+                    'link': 'https://koochita.com/show-place-details/mahalifood/%D9%BE%D9%84%D8%A7_%DA%A9%D8%A8%D8%A7%D8%A8'
                 }
             },
             {
@@ -1280,7 +1280,7 @@
 
             $('#sampleText').text(selectedCategory['text']);
             $('#sampleLink').text(selectedCategory['sample']['name']);
-            $('#sampleLink').attr('src', selectedCategory['sample']['link']);
+            $('#sampleLink').attr('href', selectedCategory['sample']['link']);
 
             createInputPlace();
         }
@@ -1430,7 +1430,7 @@
             data['kindPlaceId'] = selectedCategory['id'];
             data['name'] = $('#name').val();
             data['cityId'] = $('#cityId').val();
-            data['stateId'] = $('#state').val();
+                data['stateId'] = $('#state').val();
             data['address'] = $('#address').val();
             data['lat'] = $('#lat').val();
             data['lng'] = $('#lng').val();
