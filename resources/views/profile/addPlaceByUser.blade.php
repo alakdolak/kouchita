@@ -641,6 +641,9 @@
         .endSectionFooter{
             display: none;
         }
+        .textTopTopHeader{
+            display: inline-block
+        }
 
         #materialRow{
             width: 100%;
@@ -688,6 +691,14 @@
         }
 
         @media (max-width: 700px) {
+            .boxNotice{
+                width: 100%;
+                font-size: 13px;
+                margin-bottom: 15px;
+            }
+            .textTopTopHeader{
+                font-size: 15px;
+            }
             .step1Header{
                 font-size: 15px;
                 font-weight: bold;
@@ -781,7 +792,7 @@
                 <div class="topSection">
 
                     <div class="headerOfBox">
-                        <div style="display: inline-block">
+                        <div class="textTopTopHeader">
                             معرفی و تبلیغ فعالیت شما به تمامی علاقه مندان به سفر
                         </div>
 
@@ -842,7 +853,7 @@
                             <div class="stepTitle">پس از شیوع کرونا و با توجه به مشکلاتی که برای کسب و کار ها در حوزه سفر و گردشگری ایجاد شده ، تصمیم گرفتیم که بستری را به صورت رایگان فراهم کنیم تا صاحبان مشاغل و ایران گردان به معرفی کسب و کار خود و معرفی ایران عزیزمان بپردازید. لطفا در چند مرحله ساده، به پرسش های ما پاسخ دهید.</div>
                         </div>
                         <div class="step2 stepHeader hidden">
-                            <div class="stepTitle" style="font-size: 23px">لطفا اطلاعات پایه را وارد نمایید.</div>
+                            <div class="stepTitle">لطفا اطلاعات پایه را وارد نمایید.</div>
                             <div class="boxNotice">وارد نمودن اطلاعات ستاره دار اجباری است.</div>
                         </div>
                         <div class="step3 stepHeader hidden">
