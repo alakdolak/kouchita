@@ -1577,8 +1577,11 @@
 
                             <div class="inputBody_12 inputBody">
 
-                                <div class="listItem" style="display: flex;">
-                                    <div class="step5Title" style="width: auto">تعداد اتاق</div>
+                                <div class="listItem listItemHotelKind" style="display: flex">
+                                    <div style="display: flex; align-items: center">
+                                        <div class="icons stepInputIconRequired redStar"></div>
+                                        <div class="step5Title" style="width: auto">تعداد اتاق</div>
+                                    </div>
                                     <div class="subListItem">
                                         <div class="detailListItem">
                                             <input type="number" class="selectInput" id="room_num" name="room_num">
@@ -1726,17 +1729,6 @@
                 }
             },
             {
-                'name': 'مرکز اقامتی',
-                'kind': 'hotel',
-                'icon': 'hotel',
-                'id'  : 4,
-                'text' : 'مهمانسرای ورزش شهر زیبا و دیدنی همدان از اقامتگاه‌های خوب این شهره که مجهز به امکانات رفاهی شایسته‌ای برای رفاه مسافران و مهمانان عزیزه. ورزشکاران محترم و تیم‌های ورزشی می تونن با اقامات توی این مهمانسرا علاوه بر استراحت از امکانات ویژه اون هم بهره ببرند. این مهمانسرا که در نزدیکی ورزشگاه شهید حاجی بابایی افتتاح شده، دارای چندین سالن مجزا و استاندار از جمله بدنسازی، زمین چمن و سالن‌های چندمنظوره انواع رشته‌های ورزشی هست که آماده میزبانی اقشار مختلف و به طور ویژه ورزشکاران عزیز هست.',
-                'sample': {
-                    'name': 'هتل کوثر',
-                    'link': 'https://koochita.com/show-place-details/hotels/%D9%87%D8%AA%D9%84_%DA%A9%D9%88%D8%AB%D8%B1'
-                }
-            },
-            {
                 'name': 'جاذبه',
                 'kind': 'atraction',
                 'icon': 'atraction',
@@ -1791,6 +1783,17 @@
                 'sample': {
                     'name': 'پلا کباب',
                     'link': 'https://koochita.com/show-place-details/mahalifood/%D9%BE%D9%84%D8%A7_%DA%A9%D8%A8%D8%A7%D8%A8'
+                }
+            },
+            {
+                'name': 'مرکز اقامتی',
+                'kind': 'hotel',
+                'icon': 'hotel',
+                'id'  : 4,
+                'text' : 'مهمانسرای ورزش شهر زیبا و دیدنی همدان از اقامتگاه‌های خوب این شهره که مجهز به امکانات رفاهی شایسته‌ای برای رفاه مسافران و مهمانان عزیزه. ورزشکاران محترم و تیم‌های ورزشی می تونن با اقامات توی این مهمانسرا علاوه بر استراحت از امکانات ویژه اون هم بهره ببرند. این مهمانسرا که در نزدیکی ورزشگاه شهید حاجی بابایی افتتاح شده، دارای چندین سالن مجزا و استاندار از جمله بدنسازی، زمین چمن و سالن‌های چندمنظوره انواع رشته‌های ورزشی هست که آماده میزبانی اقشار مختلف و به طور ویژه ورزشکاران عزیز هست.',
+                'sample': {
+                    'name': 'هتل کوثر',
+                    'link': 'https://koochita.com/show-place-details/hotels/%D9%87%D8%AA%D9%84_%DA%A9%D9%88%D8%AB%D8%B1'
                 }
             },
         ];
@@ -1949,6 +1952,8 @@
         }
 
         function doChangeStep(inc){
+            $('html, body').animate({ scrollTop: 0 }, 'fast');
+
             $('.bodyOfSteps').addClass('hidden');
             $('.stepHeader').addClass('hidden');
             currentSteps += inc;
@@ -2192,6 +2197,13 @@
         }
 
         function checkStep3(){
+            if(selectedCategory['id'] == 12){
+                let room_num = $('#room_num').val();
+                if(room_num == 0 || room_num == null){
+                    openWarning('تعداد اتاق ها را مشخص کنید.');
+                    return false;
+                }
+            }
             if(selectedCategory['id'] == 4){
                 let kind = $('#hotelKind').val();
                 if(kind == 0){
@@ -2200,12 +2212,6 @@
                 }
             }
             if(selectedCategory['id'] == 11){
-                let recipes = $('#recipes').val();
-                if(recipes.trim().length > 2){
-                    openWarning('پر کردن دستور پهت غذا الزامی است.');
-                    return false;
-                }
-
                 let haveMaterial = 0;
                 for(let i = 1; i <= nowMaterialRow; i++){
                     let mat = [];
@@ -2217,6 +2223,13 @@
                 }
                 if(haveMaterial == 0){
                     openWarning('پر کردن مواد لازم برای غذا الزامی است.');
+                    return false;
+                }
+
+
+                let recipes = $('#recipes').val();
+                if(recipes.trim().length < 2){
+                    openWarning('پر کردن دستور پهت غذا الزامی است.');
                     return false;
                 }
             }
