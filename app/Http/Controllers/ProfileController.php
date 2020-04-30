@@ -571,6 +571,7 @@ class ProfileController extends Controller {
             $place->kindPlaceId = $data->kindPlaceId;
             $place->name = $data->name;
             $place->city = $data->cityId;
+            $place->stateId = $data->stateId;
             $place->address = $data->address;
             $place->lat = $data->lat;
             $place->lng = $data->lng;

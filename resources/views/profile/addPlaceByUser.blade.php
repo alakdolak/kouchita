@@ -1430,6 +1430,7 @@
             data['kindPlaceId'] = selectedCategory['id'];
             data['name'] = $('#name').val();
             data['cityId'] = $('#cityId').val();
+            data['stateId'] = $('#state').val();
             data['address'] = $('#address').val();
             data['lat'] = $('#lat').val();
             data['lng'] = $('#lng').val();

@@ -19,6 +19,7 @@ class CreateUserAddPlacesTable extends Migration
             $table->unsignedInteger('kindPlaceId');
             $table->string('name');
             $table->string('city');
+            $table->string('stateId');
             $table->string('address', 300)->nullable();
             $table->string('lat')->nullable();
             $table->string('lng')->nullable();
