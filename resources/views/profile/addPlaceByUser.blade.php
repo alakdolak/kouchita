@@ -1651,12 +1651,12 @@
         <div class="modal-dialog modal-lg" style="width: 95%;">
             <div class="modal-content" style="height: 100vh;">
                 <div class="modal-body" style="direction: rtl">
-                    <div id="map" style="width: 100%; height: calc(100vh - 115px); background-color: red"></div>
+                    <div id="map" style="width: 100%; height: calc(100vh - 200px); background-color: red"></div>
                 </div>
 
                 <!-- Modal footer -->
                 <div class="modal-footer" style="text-align: center">
-                    <button class="btn nextStepBtnTourCreation" data-dismiss="modal">
+                    <button class="btn btn-success" data-dismiss="modal">
                         تایید
                     </button>
                 </div>
@@ -1714,6 +1714,17 @@
 
     <script>
         let categories = [
+            {
+                'name': 'بوم گردی',
+                'kind': 'boomgardy',
+                'icon': 'hotel',
+                'id'  : 12,
+                'text' : '',
+                'sample': {
+                    'name': 'smaple',
+                    'link': 'koochita.com'
+                }
+            },
             {
                 'name': 'مرکز اقامتی',
                 'kind': 'hotel',
@@ -1782,17 +1793,6 @@
                     'link': 'https://koochita.com/show-place-details/mahalifood/%D9%BE%D9%84%D8%A7_%DA%A9%D8%A8%D8%A7%D8%A8'
                 }
             },
-            {
-                'name': 'بوم گردی',
-                'kind': 'boomgardy',
-                'icon': 'hotel',
-                'id'  : 12,
-                'text' : '',
-                'sample': {
-                    'name': 'smaple',
-                    'link': 'koochita.com'
-                }
-            }
         ];
         let selectedCategory = null;
         let isPlace = true;
@@ -2196,6 +2196,27 @@
                 let kind = $('#hotelKind').val();
                 if(kind == 0){
                     openWarning('نوع اقامتگاه خود را مشخص کنید.');
+                    return false;
+                }
+            }
+            if(selectedCategory['id'] == 11){
+                let recipes = $('#recipes').val();
+                if(recipes.trim().length > 2){
+                    openWarning('پر کردن دستور پهت غذا الزامی است.');
+                    return false;
+                }
+
+                let haveMaterial = 0;
+                for(let i = 1; i <= nowMaterialRow; i++){
+                    let mat = [];
+                    mat[0] = $("#materialName_" + i).val();
+                    mat[1] = $("#materialVol_" + i).val();
+
+                    if(mat[0].trim().length > 0 && mat[1].trim().length > 0)
+                        haveMaterial++;
+                }
+                if(haveMaterial == 0){
+                    openWarning('پر کردن مواد لازم برای غذا الزامی است.');
                     return false;
                 }
             }
