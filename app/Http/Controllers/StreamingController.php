@@ -39,6 +39,8 @@ class StreamingController extends Controller
         foreach ($videos as $video){
             $vidLoc = $loc . '/' . $video;
             if(is_file($vidLoc)) {
+                $thumbnailName = explode('.', $video)[0].'.jpg';
+
                 $nVid = new Video();
                 $nVid->userId = auth()->user()->id;
                 $nVid->title = explode('.', $video)[0];
@@ -46,7 +48,7 @@ class StreamingController extends Controller
                 $nVid->file = $video;
                 $nVid->categoryId = 1;
                 $nVid->subtitle = null;
-                $nVid->thumbnail = null;
+                $nVid->thumbnail = $thumbnailName;
                 $nVid->save();
 
                 $nloc = $loc . '/' . auth()->user()->id;
@@ -60,7 +62,7 @@ class StreamingController extends Controller
                 $ffmpeg = \FFMpeg\FFMpeg::create();
                 $video = $ffmpeg->open($vidLoc);
                 $frame = $video->frame(\FFMpeg\Coordinate\TimeCode::fromSeconds(42));
-                $frame->save($nloc . '/image.jpg');
+                $frame->save($nloc . '/'. $thumbnailName);
             }
         }
         dd('done');
