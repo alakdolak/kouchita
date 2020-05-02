@@ -11,15 +11,27 @@ class StreamingController extends Controller
     public function indexStreaming()
     {
         $videos = Video::all();
-        foreach ($videos as $video)
-            $video->pic = \URL::asset('_images/video/' . $video->userId .'/' . $video->thumbnail);
+        foreach ($videos as $video) {
+            $video->pic = \URL::asset('_images/video/' . $video->userId . '/' . $video->thumbnail);
+            $video->url = route('streaming.show', ['id' => $video->id]);
+            $video->username = User::find($video->userId)->username;
+        }
 
         return view('streaming.streamingIndex', compact(['videos']));
     }
 
-    public function showStreaming()
+    public function showStreaming($id)
     {
-        return view('streaming.streamingShow');
+        $video = Video::find($id);
+        if($video == null)
+            return redirect(route('streaming.index'));
+
+        $video->video = \URL::asset('_images/video/' . $video->userId . '/' . $video->file);
+        $video->pic = \URL::asset('_images/video/' . $video->userId . '/' . $video->thumbnail);
+        $video->url = route('streaming.show', ['id' => $video->id]);
+        $video->username = User::find($video->userId)->username;
+
+        return view('streaming.streamingShow', compact(['video']));
     }
 
     public function streamingLive($room)
