@@ -35,25 +35,51 @@ class StreamingController extends Controller
     {
         $loc = __DIR__ . '/../../../../assets/video';
 
-        $thumbnail_path = '/var/www/assets/videoPicThumnails';
-        $second             = 1;
-        $thumbSize       = '150x150';
+//        $thumbnail_path = '/var/www/assets/videoPicThumnails';
+//        $second             = 1;
+//        $thumbSize       = '150x150';
+//
+//        $videoname  = '/var/www/assets/video/YouTube.mp4';
+//
+//        $cmd = "/usr/bin/ffmpeg -i " . $videoname . " -deinterlace -an -ss {$second} -t 00:00:01  -s {$thumbSize} -r 1 -y -vcodec mjpeg -f mjpeg {$thumbnail_path} 2>&1";
+//
+//        exec($cmd, $output, $retval);
+//
+//        if ($retval)
+//        {
+//            echo 'error in generating video thumbnail';
+//        }
+//        else
+//        {
+//            echo 'Thumbnail generated successfully';
+//            echo $thumb_path = $thumbnail_path . $videoname . '.jpg';
+//        }
 
-        $videoname  = '/var/www/assets/video/YouTube.mp4';
+        $ffmpeg = '/usr/bin/ffmpeg';
 
-        $cmd = "/usr/bin/ffmpeg -i " . $videoname . " -deinterlace -an -ss {$second} -t 00:00:01  -s {$thumbSize} -r 1 -y -vcodec mjpeg -f mjpeg {$thumbnail_path} 2>&1";
+// the input video file
+        $video  = '/var/www/assets/video/YouTube.mp4';
 
-        exec($cmd, $output, $retval);
+// where you'll save the image
+        $image  = '/var/www/assets/videoPicThumnails/demo.jpg';
 
-        if ($retval)
-        {
-            echo 'error in generating video thumbnail';
+// default time to get the image
+        $second = 1;
+
+// get the duration and a random place within that
+        $cmd = "$ffmpeg -i $video 2>&1";
+        if (preg_match('/Duration: ((\d+):(\d+):(\d+))/s', $cmd, $time)) {
+            $total = ($time[2] * 3600) + ($time[3] * 60) + $time[4];
+            $second = rand(1, ($total - 1));
         }
-        else
-        {
-            echo 'Thumbnail generated successfully';
-            echo $thumb_path = $thumbnail_path . $videoname . '.jpg';
-        }
+
+// get the screenshot
+//$cmd = "$ffmpeg -i $video -deinterlace -an -ss $second -t 00:00:01 -r 1 -y -vcodec mjpeg -f mjpeg $image 2>&1";
+        $return = $cmd;
+
+// done! <img src="http://blog.amnuts.com/wp-includes/images/smilies/icon_wink.gif" alt=";-)" class="wp-smiley">
+        echo 'done!';
+
 
 
         return;
