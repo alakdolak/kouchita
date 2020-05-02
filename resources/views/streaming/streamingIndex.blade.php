@@ -5,6 +5,17 @@
 
     <link rel="stylesheet" href="{{URL::asset('css/streaming/indexStreaming.css')}}">
 
+    <style>
+        .videoList{
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .videoSuggestion{
+            margin: 10px 5px;
+        }
+    </style>
 @endsection
 
 @section('body')
@@ -64,15 +75,20 @@
                 <div class="headerWithLineLine"></div>
             </div>
             <div class="otherSectionBody">
-                <div class="videoSuggestionSwiper swiper-container">
 
-                    <div id="lastVideosDiv" class="swiper-wrapper">
-                        {{--fill with js lastVideoSuggestion()--}}
-                    </div>
-
-                    <div class="swiper-button-next"></div>
-                    <div class="swiper-button-prev"></div>
+                <div id="lastVideosDiv" class="videoList">
+                    {{--fill with js lastVideoSuggestion()--}}
                 </div>
+
+{{--                <div class="videoSuggestionSwiper swiper-container">--}}
+
+{{--                    <div id="lastVideosDiv" class="swiper-wrapper">--}}
+{{--                        --}}{{--fill with js lastVideoSuggestion()--}}
+{{--                    </div>--}}
+
+{{--                    <div class="swiper-button-next"></div>--}}
+{{--                    <div class="swiper-button-prev"></div>--}}
+{{--                </div>--}}
             </div>
         </div>
 
@@ -105,46 +121,26 @@
 
     <script>
         let nonPic = '{{URL::asset('_images/nopic/blank.jpg')}}';
+        let videos = {!! $videos !!};
 
         function lastVideoSuggestion(){
-            let pack = [
-                {
-                    id : 'video1',
-                    name: 'صخبت با مخمد جواد',
+            let pack = [];
+            for(let i = 0; i < videos.length; i++){
+                let p = {
+                    id : videos[i]['id'],
+                    name: videos[i]['name'],
                     url : '#',
-                    img : 'https://static.koochita.com/_images/posts/5/mainPic.jpg',
-                    like: 100,
-                    dislike: 3,
-                    see : 245,
+                    img : videos[i]['pic'],
+                    like: 0,
+                    dislike: 0,
+                    see : videos[i]['seen'],
                     userPic : nonPic,
                     username : 'shazesina',
                     time : '10 ساعت قبل',
-                },
-                {
-                    id : 'video1',
-                    name: 'صخبت با مخمد جواد',
-                    url : '#',
-                    img : 'https://static.koochita.com/_images/posts/91/1586792425-mainPic.jpg',
-                    like: 100,
-                    dislike: 3,
-                    see : 245,
-                    userPic : nonPic,
-                    username : 'shazesina',
-                    time : '10 ساعت قبل',
-                },
-                {
-                    id : 'video1',
-                    name: 'صخبت با مخمد جواد',
-                    url : '#',
-                    img : 'https://static.koochita.com/_images/posts/45/1585227039-mainPic.jpg',
-                    like: 100,
-                    dislike: 3,
-                    see : 245,
-                    userPic : nonPic,
-                    username : 'shazesina',
-                    time : '10 ساعت قبل',
-                },
-            ]
+                }
+                pack.push(p);
+            }
+
             createVideoSuggestionDiv(pack, 'lastVideosDiv');
         }
         lastVideoSuggestion();
