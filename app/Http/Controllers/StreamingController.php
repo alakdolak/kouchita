@@ -61,8 +61,8 @@ class StreamingController extends Controller
                 $video = $ffmpeg->open($vidLoc);
                 $frame = $video->frame(\FFMpeg\Coordinate\TimeCode::fromSeconds(42));
                 $frame->save($nloc . '/image.jpg');
-                dd('done');
             }
         }
+        dd('done');
     }
 }
