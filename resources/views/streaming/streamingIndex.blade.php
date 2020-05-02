@@ -128,16 +128,16 @@
             for(let i = 0; i < videos.length; i++){
                 let p = {
                     id : videos[i]['id'],
-                    name: videos[i]['name'],
-                    url : '#',
+                    name: videos[i]['title'],
+                    url : videos[i]['url'],
                     img : videos[i]['pic'],
                     like: 0,
                     dislike: 0,
                     see : videos[i]['seen'],
                     userPic : nonPic,
-                    username : 'shazesina',
+                    username : videos[i]['username'],
                     time : '10 ساعت قبل',
-                }
+                };
                 pack.push(p);
             }
 

@@ -8,12 +8,12 @@
 
     <div class="container mainShowBase">
         <div class="showVideo">
-            <div id="46671937617"><script type="text/JavaScript" src="https://www.aparat.com/embed/BEpeL?data[rnddiv]=46671937617&data[responsive]=yes"></script></div>
+            <video src="{{$video->video}}" controls poster="{{$video->pic}}" style="width: 1300px"></video>
         </div>
 
         <div class="videoInfos">
             <div class="videoInfosVideoName">
-                معرفی آئودی ای ترون اسپرت بک
+                {{$video->title}}
             </div>
             <div class="row mainUserPicSection">
                 <div class="userPicDiv">
@@ -21,7 +21,7 @@
                 </div>
                 <div class="mainUserInfos">
                     <div class="mainUseruserName">
-                        shazdesina
+                        {{$video->username}}
                     </div>
                     <div class="videoUploadTime">
                         هم اکنون
@@ -80,16 +80,7 @@
                 <div class="headerWithLineLine"></div>
             </div>
             <div class="descriptionSectionBody">
-                لورم ایپسوم متن ساختگی
-                با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها
-                و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط
-                فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد،
-                کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و م
-                تخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی
-                الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت
-                می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها، و شرایط
-                سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و
-                جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
+                {!! $video->description !!}
             </div>
         </div>
 
