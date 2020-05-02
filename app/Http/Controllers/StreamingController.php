@@ -75,7 +75,7 @@ class StreamingController extends Controller
 
 // get the screenshot
 //$cmd = "$ffmpeg -i $video -deinterlace -an -ss $second -t 00:00:01 -r 1 -y -vcodec mjpeg -f mjpeg $image 2>&1";
-        $return = $cmd;
+        $return = `$cmd`;
 
 // done! <img src="http://blog.amnuts.com/wp-includes/images/smilies/icon_wink.gif" alt=";-)" class="wp-smiley">
         echo 'done!';
