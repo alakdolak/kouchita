@@ -10,7 +10,11 @@ class StreamingController extends Controller
 {
     public function indexStreaming()
     {
-        return view('streaming.streamingIndex');
+        $videos = Video::all();
+        foreach ($videos as $video)
+            $video->pic = \URL::asset('_images/video/' . $video->userId .'/' . $video->thumbnail);
+
+        return view('streaming.streamingIndex', compact(['videos']));
     }
 
     public function showStreaming()
@@ -33,7 +37,7 @@ class StreamingController extends Controller
 
     public function importVideoToDB()
     {
-        $loc = __DIR__ . '/../../../../assets/video';
+        $loc = __DIR__ . '/../../../../assets/_images/video';
 
         $videos = scandir($loc);
         foreach ($videos as $video){
