@@ -35,11 +35,11 @@ class StreamingController extends Controller
     {
         $loc = __DIR__ . '/../../../../assets/video';
 
-        $thumbnail_path = __DIR__ . '/../../../../assets/videoPicThumnails';
+        $thumbnail_path = '/var/www/assets/videoPicThumnails';
         $second             = 1;
         $thumbSize       = '150x150';
 
-        $videoname  = __DIR__ . '/../../../../assets/video/YouTube.mp4';
+        $videoname  = '/var/www/assets/video/YouTube.mp4';
 
         $cmd = "/usr/bin/ffmpeg -i " . $videoname . " -deinterlace -an -ss {$second} -t 00:00:01  -s {$thumbSize} -r 1 -y -vcodec mjpeg -f mjpeg {$thumbnail_path} 2>&1";
 
