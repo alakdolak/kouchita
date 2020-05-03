@@ -13,6 +13,9 @@
     height: 50px;
 }
 .showVideo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
 }
 .videoInfos{

@@ -6,149 +6,29 @@
 
 @section('body')
 
-    <div class="mainDivStream">
-        <div class="container mainShowBase">
-
-            <div class="videoInfos">
-                <div class="videoInfosVideoName">
-                    معرفی آئودی ای ترون اسپرت بک
-                </div>
-                <div class="row mainUserPicSection">
-                    <div class="userPicDiv">
-                        <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
-                    </div>
-                    <div class="mainUserInfos">
-                        <div class="mainUseruserName">
-                            shazdesina
-                        </div>
-                        <div class="videoUploadTime">
-                            هم اکنون
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="descriptionSection">
-                <div class="headerWithLine">
-                    <div class="headerWithLineText">
-                        معرفی کلی
-                    </div>
-                    <div class="headerWithLineLine"></div>
-                </div>
-                <div class="descriptionSectionBody">
-                    لورم ایپسوم متن ساختگی
-                    با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها
-                    و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط
-                    فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد،
-                    کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و م
-                    تخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی
-                    الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت
-                    می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها، و شرایط
-                    سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و
-                    جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
-                </div>
-            </div>
-
-            <div class="moreInfoMainDiv">
-                <div class="headerWithLine">
-                    <div class="headerWithLineText">
-                        اطلاعات بیشتر
-                    </div>
-                    <div class="headerWithLineLine"></div>
-                </div>
-                <div class="moreInfoEachItem">
-                    <div class="mainDivImgMoreInfoItems">
-                        <img>
-                    </div>
-                    <div class="moreInfoItemsDetails">
-                        <div class="placeName">هتل کوثر</div>
-                        <div class="placeRates">
-                            <div class="rating_and_popularity">
-                                <span class="header_rating">
-                                   <div class="rs rating" rel="v:rating">
-                                       <div class="prw_rup prw_common_bubble_rating overallBubbleRating float-left">
-                                               <span class="ui_bubble_rating bubble_30
-{{--                                                    {{$avgRate}}0 --}}
-                                                       font-size-16" property="ratingValue"
-{{--                                                     content="{{$avgRate}}" alt='{{$avgRate}} of {{$avgRate}} bubbles'--}}
-                                               ></span>
-                                       </div>
-                                   </div>
-                                </span>
-                                <span class="header_popularity popIndexValidation" id="scoreSpanHeader">
-                                    <a>
-{{--                                        {{$reviewCount}}--}}0
-                                        نقد
-                                    </a>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="placeState">استان:
-                            <span>اصفهان</span>
-                        </div>
-                        <div class="placeCity">شهر:
-                            <span>اصفهان</span>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="moreInfoEachItem">
-                    <div class="mainDivImgMoreInfoItems">
-                        <img>
-                    </div>
-                    <div class="moreInfoItemsDetails">
-                        <div class="placeName">هتل کوثر</div>
-                        <div class="placeRates">
-                            <div class="rating_and_popularity">
-                                <span class="header_rating">
-                                   <div class="rs rating" rel="v:rating">
-                                       <div class="prw_rup prw_common_bubble_rating overallBubbleRating float-left">
-                                               <span class="ui_bubble_rating bubble_30
-{{--                                                    {{$avgRate}}0 --}}
-                                                       font-size-16" property="ratingValue"
-{{--                                                     content="{{$avgRate}}" alt='{{$avgRate}} of {{$avgRate}} bubbles'--}}
-                                               ></span>
-                                       </div>
-                                   </div>
-                                </span>
-                                <span class="header_popularity popIndexValidation" id="scoreSpanHeader">
-                                    <a>
-{{--                                        {{$reviewCount}}--}}0
-                                        نقد
-                                    </a>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="placeState">استان:
-                            <span>اصفهان</span>
-                        </div>
-                        <div class="placeCity">شهر:
-                            <span>اصفهان</span>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="moreBtn">بیشتر</div>
-            </div>
-
-            <div class="fromThisPerson">
-                <div class="headerWithLine">
-                    <div class="headerWithLineText">
-                        از همین کاربر
-                    </div>
-                    <div class="headerWithLineLine"></div>
-                </div>
-
-                <div id="videoThisVideo"></div>
-            </div>
-
+    <div class="container mainShowBase">
+        <div class="showVideo">
+            <video src="{{$video->video}}" controls poster="{{$video->pic}}" style="width: 1300px"></video>
         </div>
-        <div class="container mainShowBase">
-            <div class="showVideo">
-                <div id="46671937617"><script type="text/JavaScript" src="https://www.aparat.com/embed/BEpeL?data[rnddiv]=46671937617&data[responsive]=yes"></script></div>
-            </div>
 
+        <div class="videoInfos">
+            <div class="videoInfosVideoName">
+                {{$video->title}}
+            </div>
+            <div class="row mainUserPicSection">
+                <div class="userPicDiv">
+                    <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
+                </div>
+                <div class="mainUserInfos">
+                    <div class="mainUseruserName">
+                        {{$video->username}}
+                    </div>
+                    <div class="videoUploadTime">
+                        هم اکنون
+                    </div>
+                </div>
+            </div>
+        </div>
 
             <div class="toolSection">
                 <div class="toolSectionButtons">
@@ -192,21 +72,33 @@
                 </div>
             </div>
 
-            <div class="commentSection">
-                <div class="headerWithLine">
-                    <div class="headerWithLineText">
-                        نظرها
-                    </div>
-                    <div class="headerWithLineLine"></div>
+        <div class="descriptionSection">
+            <div class="headerWithLine">
+                <div class="headerWithLineText">
+                    معرفی کلی
                 </div>
-                <div class="commentSectionBody">
-                    <div class="commentInputSection">
-                        <div class="userPicDiv">
-                            <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
-                        </div>
-                        <textarea class="commentInput" name="comment" id="comment" placeholder="شما چه نظری دارید؟" rows="1"></textarea>
-                        <div class="commentInputSendButton">ارسال</div>
+                <div class="headerWithLineLine"></div>
+            </div>
+            <div class="descriptionSectionBody">
+                {!! $video->description !!}
+            </div>
+        </div>
+
+        <div class="commentSection">
+            <div class="headerWithLine">
+                <div class="headerWithLineText">
+                    نظرها
+                </div>
+                <div class="headerWithLineLine"></div>
+            </div>
+            <div class="commentSectionBody">
+                <div class="commentInputSection">
+                    <div class="userPicDiv">
+                        <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
                     </div>
+                    <textarea class="commentInput" name="comment" id="comment" placeholder="شما چه نظری دارید؟" rows="1"></textarea>
+                    <div class="commentInputSendButton">ارسال</div>
+                </div>
 
                     <hr style="border-color:darkgray; margin: 10px 0px">
 

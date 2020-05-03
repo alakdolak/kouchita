@@ -714,9 +714,13 @@ Route::group(array('middleware' => 'auth'), function () {
 Route::middleware(['web'])->group(function (){
     Route::get('streaming/index', 'StreamingController@indexStreaming')->name('streaming.index');
 
-    Route::get('streaming/show', 'StreamingController@showStreaming')->name('streaming.show');
+    Route::get('streaming/show/{id}', 'StreamingController@showStreaming')->name('streaming.show');
 
     Route::get('streaming/live/{room}', 'StreamingController@streamingLive')->name('streaming.live');
+
+    Route::get('/importVideoToDB', 'StreamingController@importVideoToDB');
+
+    Route::get('/setVideoDuration', 'StreamingController@setVideoDuration');
 });
 
 
