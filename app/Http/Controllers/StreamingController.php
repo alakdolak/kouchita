@@ -89,7 +89,7 @@ class StreamingController extends Controller
         $video = Video::all();
         foreach ($video as $item){
             $loc = __DIR__.'/../../../../assets/_images/video/' . $item->userId. '/' . $item->video;
-            $ffprobe = FFMpeg\FFProbe::create();
+            $ffprobe = \FFMpeg\FFProbe::create();
             $duration = $ffprobe->format($loc)->get('duration');
             $item->duration = $duration;
             $item->save();
