@@ -266,6 +266,15 @@
     position: relative;
 }
 
+/*.toolSectionButtonsCircle > span {*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    justify-content: center;*/
+/*}*/
+
+/*.toolSectionButtonsCircle > span::before {*/
+/*    font-size: 20px;*/
+/*}*/
 
 .HeartIconSett{
     font-size: 33px;
@@ -360,22 +369,72 @@
     margin-left: 2%;
 }
 
+.videoContainer {
+    position: relative;
+}
+
+.liveCommentsOnFS {
+    position:absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 1 !important;
+    width: 33.3333%;
+}
+
+.liveCommentsOnFS .videoInfos {
+    background: rgb(129,129,129);
+    background: linear-gradient(90deg, rgba(76,76,76,1) 0%, rgba(0,0,0,1) 100%);
+    padding: 10px 40px;
+}
+
+.liveCommentsOnFS .liveComments {
+    background: rgba(250,250,250,0.75);
+    padding: 0 10px;
+}
+
+.liveCommentsToggleBar {
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    padding: 10px;
+}
+
+.liveCommentsToggleBar > div {
+    width: 50%;
+}
+
+.liveCommentsToggleBar .textToggle {
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.liveCommentsToggleBar .iconToggle.glyphicon {
+    font-family: "Glyphicons Halflings" !important;
+    text-align: left;
+}
+
 .commentSection{
     margin-top: 35px;
 }
+
 .commentSectionBody{
     background: white;
     width: 100%;
-    border-radius: 6px;
+    /*border-radius: 6px;*/
     padding: 15px;
 }
+
 .commentInputSection{
     display: flex;
     align-items: flex-start;
 }
+
 .commentAnsesSection{
     width: 100%;
 }
+
 .commentInput{
     width: 88%;
     margin-right: 11px;
@@ -481,19 +540,21 @@
     border-radius: 10px;
     margin-right: 10px;
 }
+
 .acceptedComment{}
+
 .acceptedCommentText{
     white-space: pre-line;
     text-align: justify;
     padding: 0px 25px;
 }
 .acceptedCommentSett{
-    padding: 0px 15px;
+    padding: 4px 15px;
     display: flex;
     justify-content: space-between;
-    margin-top: 20px;
-    /*border-top: solid 1px lightgray;*/
-    padding-top: 4px;
+    margin-top: 10px;
+    border-top: solid 1px lightgray;
+    border-bottom: solid 1px lightgray;
 }
 .acceptedCommentRight{
     display: flex;
