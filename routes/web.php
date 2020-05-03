@@ -719,6 +719,8 @@ Route::middleware(['web'])->group(function (){
     Route::get('streaming/live/{room}', 'StreamingController@streamingLive')->name('streaming.live');
 
     Route::get('/importVideoToDB', 'StreamingController@importVideoToDB');
+
+    Route::get('/setVideoDuration', 'StreamingController@setVideoDuration');
 });
 
 
