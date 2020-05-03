@@ -65,6 +65,20 @@ class StreamingController extends Controller
                 $nVid->categoryId = 1;
                 $nVid->subtitle = null;
                 $nVid->thumbnail = $thumbnailName;
+
+                $ffprobe = \FFMpeg\FFProbe::create();
+                $duration = (int)$ffprobe->format($vidLoc)->get('duration');
+                $second = $duration % 60;
+                $duration = (int)($duration / 60);
+                $min = $duration % 60;
+                $duration = (int)($duration / 60);
+
+                if($second < 10)
+                    $second = '0' . $second;
+                if($min < 10)
+                    $min = '0' . $min;
+                $nVid->duration = $duration . ':' . $min . ':' . $second;
+
                 $nVid->save();
 
                 $nloc = $loc . '/' . auth()->user()->id;
@@ -89,9 +103,19 @@ class StreamingController extends Controller
         $video = Video::all();
         foreach ($video as $item){
             $loc = __DIR__.'/../../../../assets/_images/video/' . $item->userId. '/' . $item->file;
+
             $ffprobe = \FFMpeg\FFProbe::create();
-            $duration = $ffprobe->format($loc)->get('duration');
-            $item->duration = $duration;
+            $duration = (int)$ffprobe->format($loc)->get('duration');
+            $second = $duration % 60;
+            $duration = (int)($duration / 60);
+            $min = $duration % 60;
+            $duration = (int)($duration / 60);
+
+            if($second < 10)
+                $second = '0' . $second;
+            if($min < 10)
+                $min = '0' . $min;
+            $item->duration = $duration . ':' . $min . ':' . $second;
             $item->save();
         }
 
