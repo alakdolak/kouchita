@@ -23,18 +23,23 @@
             </div>
         </a>
         <div class="videoSugInfo">
-            <div class="videoSugUserPic">
-                <img src="##userPic##" alt="koochita" style="width: 100%; height: 100%;">
-            </div>
             <div class="videoSugUserInfo">
                 <a href="##url##" class="videoSugName">
                     ##name##
                 </a>
-                <div class="videoSugUserName">
-                    ##username##
+            </div>
+
+            <div class="videoSugUserPic">
+                <div class="videoSugUserPicDiv">
+                    <img src="##userPic##" alt="koochita" style="width: 100%; height: 100%;">
                 </div>
-                <div class="videoSugTime">
-                    ##time##
+                <div class="videoUserInfoName">
+                    <div class="videoSugUserName">
+                        ##username##
+                    </div>
+                    <div class="videoSugTime">
+                        ##time##
+                    </div>
                 </div>
             </div>
         </div>
