@@ -3,18 +3,10 @@
 
 @section('head')
 
-{{--    <link rel="stylesheet" href="{{asset('packages/dropzone/basic.css')}}">--}}
-{{--    <link rel="stylesheet" href="{{asset('packages/dropzone/dropzone.css')}}">--}}
     <link rel="stylesheet" type="text/css" href="{{asset('semanticUi/semantic.css')}}">
-
-
     <link rel="stylesheet" href="{{URL::asset('css/streaming/uploadVideoVod.css')}}">
 
     <script src="{{asset('semanticUi/semantic.js')}}"></script>
-
-    <style>
-
-    </style>
 @endsection
 
 @section('body')
@@ -183,5 +175,4 @@
     </script>
 
     <script src="{{URL::asset('js/stream/uploadVideoVod.js')}}"></script>
-
 @endsection
