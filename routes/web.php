@@ -280,7 +280,7 @@ Route::group(array('middleware' => ['throttle:30', 'nothing']), function () {
 
 //    Route::post('getTags', array('as' => 'getTags', 'uses' => 'PlaceController@getTags'));
 
-    Route::get('policies', array('as' => 'policies', 'uses' => 'HomeController@showPoliciess'));
+    Route::get('policiess', array('as' => 'policies', 'uses' => 'HomeController@showPoliciess'));
 
     Route::get('estelahat/{goyesh}', array('as' => 'estelahat', 'uses' => 'HomeController@estelahat'));
 
