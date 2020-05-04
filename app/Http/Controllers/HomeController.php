@@ -661,7 +661,7 @@ class HomeController extends Controller
 
     public function showPoliciess()
     {
-        return view('policies');
+        return view('policies2');
     }
 
     public function removeDuplicate($key)
