@@ -11,6 +11,8 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
+            max-height: 530px;
+            overflow: auto;
         }
         #videoThisVideo > div{
             margin-bottom: 10px;
@@ -236,8 +238,141 @@
         <div class="container mainShowBase">
 
             <div class="showVideo">
-                <div id="46671937617"><script type="text/JavaScript" src="https://www.aparat.com/embed/BEpeL?data[rnddiv]=46671937617&data[responsive]=yes"></script></div>
+                <div id="46671937617" class="videoContainer">
+                    <video controls>
+                        <source src="{{URL::asset('videos/live.mp4')}}">
+                    </video>
+                    <div class="liveCommentsOnFS">
+
+                        <div class="videoInfos">
+                            <div class="videoInfosVideoName">
+                                معرفی آئودی ای ترون اسپرت بک
+                                <img class="float-left" src="{{URL::asset('images/streaming/live.png')}}">
+                            </div>
+                            <div class="row mainUserPicSection">
+                                <div class="userPicDiv">
+                                    <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
+                                </div>
+                                <div class="mainUserInfos">
+                                    <div class="mainUseruserName">
+                                        shazdesina
+                                    </div>
+                                    <div class="videoUploadTime">
+                                        هم اکنون
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="liveCommentsToggleBar" onclick="liveCMToggle(this)">
+                            <div class="textToggle">نمایش پنل گفتگو</div>
+                            <div class="iconToggle glyphicon glyphicon-chevron-down"></div>
+                        </div>
+
+                        <div class="liveComments display-none">
+                            <div class="liveCommentsFirstLine">
+                                <div class="liveCommentsTitle">
+                                    در گفتگو شرکت کنید
+                                </div>
+                                <div class="liveCommentStatistics">
+                                    <div class="liveCommentsQuantity liveCommentStatisticsDivs">
+                                        <div class="liveCommentsNums">31</div>
+                                        <div class="liveCommentsQuantityIcon"></div>
+                                    </div>
+                                    <div class="liveCommentWriters liveCommentStatisticsDivs">
+                                        <div class="liveCommentsNums">31</div>
+                                        <div class="liveCommentsWriterIcon"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="liveCommentsMainDiv">
+                                <div class="eachLiveCommentMainDiv">
+                                    <div class="userPicDiv">
+                                        <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
+                                    </div>
+                                    <div class="mainUserInfos">
+                                        <div class="mainUseruserName">
+                                            shazdesina
+                                        </div>
+                                    </div>
+                                    <div class="liveCommentContents">
+                                        شیا شتنیل نشت یای نشان ایش سنتیا نشت سای نتشاس نت یاشن تسای نتشسا نیتاشن تسای نتا منشای نتسا شنت یاشن تسا ینت شسا یمن
+                                    </div>
+                                </div>
+                                <div class="eachLiveCommentMainDiv">
+                                    <div class="userPicDiv">
+                                        <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
+                                    </div>
+                                    <div class="mainUserInfos">
+                                        <div class="mainUseruserName">
+                                            shazdesina
+                                        </div>
+                                    </div>
+                                    <div class="liveCommentContents">
+                                        شیا شان ایش سنتیا نشت سای نتشاس نت یاشن تسای نتشسا نیتاشن
+                                    </div>
+                                </div>
+                                <div class="eachLiveCommentMainDiv">
+                                    <div class="userPicDiv">
+                                        <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
+                                    </div>
+                                    <div class="mainUserInfos">
+                                        <div class="mainUseruserName">
+                                            shazdesina
+                                        </div>
+                                    </div>
+                                    <div class="liveCommentContents">
+                                        نت یاشن تسا ینت شسا یمن
+                                    </div>
+                                </div>
+                                <div class="eachLiveCommentMainDiv">
+                                    <div class="userPicDiv">
+                                        <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
+                                    </div>
+                                    <div class="mainUserInfos">
+                                        <div class="mainUseruserName">
+                                            shazdesina
+                                        </div>
+                                    </div>
+                                    <div class="liveCommentContents">
+                                        تسا ینت شسا یمن
+                                    </div>
+                                </div>
+                                <div class="eachLiveCommentMainDiv">
+                                    <div class="userPicDiv">
+                                        <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
+                                    </div>
+                                    <div class="mainUserInfos">
+                                        <div class="mainUseruserName">
+                                            shazdesina
+                                        </div>
+                                    </div>
+                                    <div class="liveCommentContents">
+                                        شیا شتنیل نشت یای نشان
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="commentInputSection">
+                                <div class="userPicDiv">
+                                    <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
+                                </div>
+                                <textarea class="commentInput" name="comment" id="comment" placeholder="شما چه نظری دارید؟" rows="1"></textarea>
+                                <div class="commentInputSendButton">ارسال</div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
             </div>
+
+            <script>
+                function liveCMToggle(element) {
+                    $(element).next().toggle()
+                }
+            </script>
+
 
             <table style="width: 100%;" id="rooms-list"></table>
 

@@ -3,15 +3,13 @@
 <div id="alertBoxDiv" class="alertDarkBack">
     <div class="alertBox">
         <div class="alertTitle warningTitle">
-            آیا مطمین هستید
+            درخواست شما با مشکل مواجه شد
         </div>
         <div class="alertDescriptionBox">
-            <div class="alertDescription">
-                لورم ایپسون
-            </div>
+            <div id="alertBodyDiv" class="alertDescription"></div>
             <div>
-                <button class="alertBtn rightBtn">خیر</button>
-                <button class="alertBtn leftBtn">بله</button>
+{{--                <button class="alertBtn rightBtn">خیر</button>--}}
+                <button class="alertBtn leftBtn" onclick="closeErrorAlert()">متوجه شدم</button>
             </div>
         </div>
     </div>
@@ -69,11 +67,19 @@
 
 
     function openWarning(_text){
-        $('#warningBody').text(_text);
+        $('#warningBody').html(_text);
         $('#warningBoxDiv').css('display', 'flex');
     }
 
     function closeWarning(){
         $('#warningBoxDiv').css('display', 'none');
+    }
+
+    function openErrorAlert(_text){
+        $('#alertBodyDiv').html(_text);
+        $('#alertBoxDiv').css('display', 'flex');
+    }
+    function closeErrorAlert(){
+        $('#alertBoxDiv').css('display', 'none');
     }
 </script>

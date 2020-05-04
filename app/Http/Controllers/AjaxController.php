@@ -668,4 +668,17 @@ class AjaxController extends Controller {
 
         return;
     }
+
+    public function getTags(Request $request)
+    {
+        $tag = [
+            'kiavash',
+            'kia',
+            'heelo'
+        ];
+
+        echo json_encode(['tags' => $tag]);
+
+        return;
+    }
 }
