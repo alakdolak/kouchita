@@ -24,6 +24,7 @@ use App\models\Majara;
 use App\models\Message;
 use App\models\OpOnActivity;
 use App\models\Place;
+use App\models\PlaceTag;
 use App\models\Post;
 use App\models\PostCategory;
 use App\models\PostCategoryRelation;
@@ -1776,4 +1777,29 @@ class HomeController extends Controller
         dd('finniish');
     }
 
+
+    public function updateTags()
+    {
+        $tags = DB::select('SELECT tag, COUNT(*) as num FROM `placeTags` GROUP BY tag ORDER BY `num` DESC');
+        $sql = 'INSERT INTO tag (`id`, `name`, `kindPlaceId`) VALUES ';
+
+        $count = 0;
+        $num = 0;
+        $value = '';
+        foreach ($tags as $tag){
+            $count++;
+            $num++;
+            if($value != '')
+                $value .= ' ,';
+            $value .= ' (NULL, "' . $tag->tag . '", NULL)';
+
+            if($count == 1000){
+                $count = 0;
+                DB::select($sql . $value);
+                $value = '';
+                echo $num;
+                echo '<br>';
+            }
+        }
+    }
 }
