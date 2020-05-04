@@ -154,6 +154,7 @@
     <script>
         let thumbnail = '';
         let newThumbnailCrop;
+        let uploadCompleted = false;
 
 
         $('#videoTags').dropdown({
@@ -171,7 +172,6 @@
                     return settings
                 },
                 onResponse: (response) => {
-                    console.log(response.tags);
                     let result = [];
                     if(response.tags.length == 0){
                         result = [{
@@ -277,9 +277,6 @@
 
             var video = document.createElement('video');
             video.preload = 'metadata';
-            // video.onloadedmetadata = function() {
-            //     console.log('onloadedmetadata')
-            // }
             video.src = URL.createObjectURL(_file);
             $('#thumbnailVideoVideo').attr('src', URL.createObjectURL(_file));
 
@@ -375,6 +372,7 @@
                         if(response['status'] == 'ok') {
                             $('#progressStatus').text('ویدیوی شما با موفقیت بارگزاری شد');
                             $('#duration').val(response['duration']);
+                            uploadCompleted = true;
                         }
                         else
                             errorUploadVideo();
@@ -417,6 +415,11 @@
             if(categoryId == 0){
                 error = true;
                 errorText += '<li>لطفا دسته بندی ویدیوی خود را مشخص کنید</li>';
+            }
+
+            if(!uploadCompleted){
+                error = true;
+                errorText += '<li>ویدیوی شما بارگذاری نشده است. لطفا تا بارگذاری کامل صبر کنید.</li>';
             }
 
             if(error){
