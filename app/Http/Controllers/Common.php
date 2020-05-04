@@ -1070,13 +1070,9 @@ function createUrl($kindPlaceId, $placeId, $stateId, $cityId, $articleId = 0){
         return url('cityPage/city/' . $city->name);
     }
     else if($kindPlaceId != 0){
-        $kindPlace = Place::find($kindPlaceId);
-        $place = DB::table($kindPlace->tableName)->find($placeId);
-
-        if(isset($place->slug) && $place->slug != null && strlen($place->slug) > 2)
-            return url('show-place-details/' . $kindPlace->fileName . '/' . $place->slug);
-        else if(isset($place->id))
-            return url('show-place-details/' . $kindPlace->fileName . '/' . $place->id);
+//        $kindPlace = Place::find($kindPlaceId);
+//        $place = DB::table($kindPlace->tableName)->find($placeId);
+        return route('placeDetails', ['kindPlaceId' => $kindPlaceId, 'placeId' => $placeId]);
     }
     else if($articleId != 0){
         $post = \App\models\Post::find($articleId);
@@ -1117,6 +1113,19 @@ function createSeeLog($placeId, $kindPlaceId, $subject, $text){
     $log->save();
 
     return [$time, $today, $log->id];
+}
+
+function storeNewTag($tag){
+    $check = \App\models\Tag::where('name', $tag)->first();
+    if($check == null){
+        $newTag = new \App\models\Tag();
+        $newTag->name = $tag;
+        $newTag->save();
+
+        return $newTag->id;
+    }
+    else
+        return false;
 }
 
 //time

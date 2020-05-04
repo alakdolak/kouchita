@@ -10,226 +10,10 @@
 
     <link rel="stylesheet" href="{{URL::asset('css/streaming/uploadVideoVod.css')}}">
 
-    <script src="{{asset('semanticUi/semantic.min.js')}}"></script>
+    <script src="{{asset('semanticUi/semantic.js')}}"></script>
 
     <style>
-        .row{
-            width: 100%;
-            margin: 0px;
-        }
-        .uploadBase{
-            background: #3a3a3a;
-            padding: 15px;
-            border-radius: 8px;
-            position: relative;
-        }
-        .uploadDiv{
-            border: dashed 4px #232323;
-            border-radius: 10px;
-            width: 100%;
-            cursor: pointer;
-        }
-        .uploadText{
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 20px;
-            height: 300px;
-        }
 
-        .videoSetting{
-            display: none;
-            width: 100%;
-        }
-        .videoUploadProgressDiv{
-            width: 100%;
-            margin: 0;
-            padding: 15px;
-            border: dashed 5px #232323;
-            border-radius: 10px 10px 0px 0px;
-        }
-        .videoProgressPicDiv{
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .progressDiv{
-            height: 150px;
-            display: flex;
-            justify-content: center;
-            flex-direction: column;
-        }
-        .progressStatus{
-            color: #4dc7bc;
-            margin-bottom: 20px;
-        }
-        .progressBar{
-            width: 100%;
-            background: white;
-            border-radius: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-        }
-        .progressColor{
-            position: absolute;
-            background-color: #fcc156;
-            top: 0px;
-            right: 0px;
-            width: 0%;
-            height: 100%;
-            border-radius: 10px;
-            transition: .2s;
-        }
-        .progressText{
-            z-index: 1;
-        }
-
-        .videoInfos{
-            width: 100%;
-            margin: 0;
-            padding: 15px;
-            border: dashed 5px #232323;
-            margin-top: 20px;
-            border-radius: 0px 0px 10px 10px;
-        }
-        .inputVideoLabel{
-            color: white;
-            font-weight: 400;
-            margin-bottom: 10px;
-        }
-        .rtlMultiSelect{
-            direction: rtl;
-            text-align: right;
-        }
-        .ui.dropdown .menu > .item{
-            text-align: right;
-            direction: rtl;
-        }
-        .ui.multiple.search.dropdown, .ui.multiple.search.dropdown > input.search{
-            text-align: right;
-            direction: rtl;
-        }
-        .buttonDiv{
-            display: flex;
-            justify-content: flex-end;
-        }
-        .saveButton{
-            width: 200px;
-            height: 50px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-        }
-        .releaseButton{
-            color: white;
-            background-color: #ffb227;
-            border-radius: 10px 0px 0px 10px;
-            transition: .5s;
-        }
-        .releaseButton:hover{
-            background-color: #fcc156;
-        }
-
-        .notReleaseButton{
-            color: white;
-            background: #2e9087;
-            border-radius: 0px 10px 10px 0px;
-            margin-left: 10px;
-            transition: .5s;
-        }
-        .notReleaseButton:hover{
-            background-color: #4dc7bc;
-        }
-        .thumbnailSelectDiv{
-            display: flex;
-            flex-wrap: wrap;
-        }
-        .thumbnailSelectImgDiv{
-            width: 48%;
-            margin: 4px;
-        }
-        .thumbnailSelectImg{
-            max-width: 100%;
-            max-height: 100%;
-            border-radius: 10px;
-            cursor: pointer;
-            height: 140px;
-        }
-        .thumbnailSelectImgChoose{
-            border: solid 8px #2e9087 !important;
-        }
-        .newThumbnailChoose{
-            color: white;
-            border-radius: 10px;
-            border: solid 4px white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 20px;
-            height: 140px;
-            cursor: pointer;
-        }
-        .newThumbnailModal{
-            display: none;
-            /*display: flex;*/
-            justify-content: center;
-            align-items: center;
-            opacity: 1 !important;
-        }
-        .closeDivVideoSection{
-            position: absolute;
-            left: 10px;
-            top: 10px;
-            cursor: pointer;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1;
-        }
-        .closeDivVideoSection:before{
-            content: "\00d7";
-            font-size: 40px;
-        }
-        .selectThumbnailDiv{
-            background: white;
-            border-radius: 10px;
-            opacity: 1;
-            width: 438px;
-            max-width: 100%;
-        }
-        .selectThumbnailDivVideoSection{
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            padding: 20px;
-        }
-        .resultThumbnail{
-            padding: 20px;
-            width: 100%;
-        }
-        @media (min-width: 992px){
-            .videoSetting .col-md-6, .col-md-8, .col-md-4{
-                float: right;
-            }
-        }
-        @media (max-width: 992px) {
-            .progressDiv{
-                height: 100px;
-            }
-            .progressStatus{
-                text-align: center;
-            }
-        }
     </style>
 @endsection
 
@@ -240,7 +24,7 @@
 
     <div class="container uploadBase">
         <input type="file" id="videoFile" accept="video/*" style="display: none" onchange="inputVideo(this)">
-        <label for="videoFile" id="uploadVideoDiv" class="uploadDiv">
+        <label for="videoFile" id="uploadVideoDiv" class="uploadDiv" style="display: block">
             <div class="row" style="width: 100%; margin: 0">
                 <div class="col-md-6"></div>
                 <div class="col-md-6 uploadText" >
@@ -249,7 +33,7 @@
             </div>
         </label>
 
-        <div id="videoSetting" class="videoSetting">
+        <div id="videoSetting" class="videoSetting" style="display: none">
             <div class="row videoUploadProgressDiv">
 
                 <div class="col-md-4">
@@ -304,11 +88,15 @@
                                 <label for="videoTags" class="inputVideoLabel">برچسپ ها</label>
                                 <select id="videoTags" name="videoTags" class="ui fluid search dropdown rtlMultiSelect" multiple=""></select>
                             </div>
+                            <div class="form-group">
+                                <label for="videoPlaceRel" class="inputVideoLabel">ویدیوی شما مربوط به شهر و یا مکان خاصی می شود؟</label>
+                                <select id="videoPlaceRel" name="videoPlaceRel" class="ui fluid search dropdown rtlMultiSelect" multiple=""></select>
+                            </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="videoTags" class="inputVideoLabel">عکس پیش نمایش</label>
-                                <div class="thumbnailSelectDiv">
+                                <label for="thumb" class="inputVideoLabel">عکس پیش نمایش</label>
+                                <div id="thumb" class="thumbnailSelectDiv">
                                     <div class="thumbnailSelectImgDiv">
                                         <img src="" class="showThumbnail0 thumbnailSelectImg thumbnailSelectImgChoose" onclick="selectNewThumbnail(0, this)">
                                     </div>
@@ -378,21 +166,78 @@
                 },
                 beforeSend: (settings) => {
                     settings.data = JSON.stringify({
-                        Tag: settings.urlData.query,
+                        tag: settings.urlData.query,
                     });
                     return settings
                 },
                 onResponse: (response) => {
-                    console.log(response);
+                    console.log(response.tags);
+                    let result = [];
+                    if(response.tags.length == 0){
+                        result = [{
+                            "name" : response.send,
+                            "value" : 'new_' + response.send,
+                            "text" : response.send
+                        }]
+                    }
+                    else{
+                        for(let i = 0; i < response.tags.length; i++){
+                            result.push({
+                                "name" : response.tags[i].name,
+                                "value" : 'old_' + response.tags[i].id,
+                                "text" : response.tags[i].name
+                            })
+                        }
+                    }
                     response = {
                         "success": true,
-                        "results": [
-                            {
-                                "name"  : "Choice 2",
-                                "value" : "value2",
-                                "text"  : "Choice 2"
-                            },
-                        ]
+                        "results": result
+                    };
+                    // Modify your JSON response into the format SUI wants
+                    return response
+                }
+            }
+        });
+
+        $('#videoPlaceRel').dropdown({
+            apiSettings: {
+                url: '{{route('totalSearch')}}',
+                method: 'POST',
+                cache: false,
+                beforeXHR: (xhr) => {
+                    xhr.setRequestHeader('Content-Type', 'application/json');
+                },
+                beforeSend: (settings) => {
+                    settings.data = JSON.stringify({
+                        kindPlaceId: 0,
+                        key: settings.urlData.query,
+                        _token: '{{csrf_token()}}'
+                    });
+                    return settings
+                },
+                onResponse: (response) => {
+                    let result = [];
+                    let success = false;
+                    for(let i = 0; i < response[1].length; i++){
+                        success = true;
+                        let name;
+                        let place = response[1][i];
+                        if(place['mode'] == 'state')
+                            name = ' استان ' + place['targetName'];
+                        else if(place['mode'] == 'city')
+                            name = ' شهر ' + place['targetName'] + ' در ' + place['stateName'];
+                        else
+                            name = place['targetName'] + ' در ' + place["cityName"];
+
+                        result.push({
+                            "name" : name,
+                            "value" : place['kindPlaceId'] + '_' + place['id'],
+                            "text" : name,
+                        })
+                    }
+                    response = {
+                        "success": success,
+                        "results": result
                     };
                     // Modify your JSON response into the format SUI wants
                     return response
@@ -558,6 +403,7 @@
             let categoryId = $('#videoCategory').val();
             let description = $('#videoText').val();
             let tags = $('#videoTags').val();
+            let places = $('#videoPlaceRel').val();
             let duration = $('#duration').val();
             let kind = 'setting';
             let error = false;
@@ -584,7 +430,7 @@
                 settingFormData.append('code', videoCode);
                 settingFormData.append('name', name);
                 settingFormData.append('kind', kind);
-                settingFormData.append('kind', kind);
+                settingFormData.append('places', places);
                 settingFormData.append('categoryId', categoryId);
                 settingFormData.append('description', description);
                 settingFormData.append('tags', tags);

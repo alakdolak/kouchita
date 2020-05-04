@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\models\Video;
 use App\models\VideoCategory;
 use App\models\VideoLimbo;
+use App\models\VideoPlaceRelation;
+use App\models\VideoTagRelation;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -145,6 +147,7 @@ class StreamingController extends Controller
         }
         else if(isset($request->kind) && $request->kind == 'setting'){
             if(isset($request->name) && isset($request->code) && isset($request->categoryId)){
+
                 $limbo = VideoLimbo::where('code', $request->code)->where('userId', $user->id)->first();
                 if($limbo != null){
 
@@ -187,6 +190,40 @@ class StreamingController extends Controller
                     $nLoc .= '/' . $limbo->video;
                     rename($limboLoc, $nLoc);
 
+                    if(isset($request->places) && $request->places != null){
+                        $places = explode(',', $request->places);
+                        foreach ($places as $place){
+                            $p = explode('_', $place);
+                            $check = VideoPlaceRelation::where('videoId', $newVideo->id)
+                                                        ->where('kindPlaceId', $p[0])
+                                                        ->where('placeId', $p[1])
+                                                        ->first();
+                            if($check == null) {
+                                $newRel = new VideoPlaceRelation();
+                                $newRel->videoId = $newVideo->id;
+                                $newRel->kindPlaceId = (int)$p[0];
+                                $newRel->placeId = (int)$p[1];
+                                $newRel->save();
+                            }
+                        }
+                    }
+
+                    if(isset($request->tags) && $request->tags != null){
+                        $tags = explode(',', $request->tags);
+                        foreach ($tags as $tag){
+                            $t = explode('_', $tag);
+                            if($t[0] == 'old')
+                                $tagId = $t[1];
+                            else
+                                $tagId = storeNewTag($t[1]);
+
+                            $newTagRel = new VideoTagRelation();
+                            $newTagRel->videoId = $newVideo->id;
+                            $newTagRel->tagId = $tagId;
+                            $newTagRel->save();
+                        }
+                    }
+
                     echo json_encode(['status' => 'ok']);
                 }
                 else
@@ -211,10 +248,6 @@ class StreamingController extends Controller
         }
         dd('done');
     }
-
-
-
-
 
 
 
