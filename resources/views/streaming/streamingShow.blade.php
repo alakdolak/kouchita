@@ -30,47 +30,47 @@
             </div>
         </div>
 
-        <div class="toolSection">
-            <div class="toolSectionButtons">
-                <div class="toolSectionButtonsCircle">
-                    <span class="DisLikeIcon"></span>
+            <div class="toolSection">
+                <div class="toolSectionButtons">
+                    <div class="toolSectionButtonsCircle">
+                        <span class="DisLikeIcon"></span>
+                    </div>
+                    <div class="toolSectionButtonsCircle">
+                        <span class="LikeIcon"></span>
+                    </div>
+                    <div class="toolSectionButtonsCircle">
+                        <span class="CommentIcon CommentIconSett"></span>
+                    </div>
+                    <div class="toolSectionButtonsCircle">
+                        <span class="ShareIcon ShareIconSett"></span>
+                    </div>
+                    <div class="toolSectionButtonsCircle">
+                        <span class="HeartIcon HeartIconSett"></span>
+                    </div>
+                    <div class="toolSectionButtonsCircle">
+                        <span class="BookMarkIcon BookMarkIconSett"></span>
+                    </div>
                 </div>
-                <div class="toolSectionButtonsCircle">
-                    <span class="LikeIcon"></span>
-                </div>
-                <div class="toolSectionButtonsCircle">
-                    <span class="CommentIcon CommentIconSett"></span>
-                </div>
-                <div class="toolSectionButtonsCircle">
-                    <span class="ShareIcon ShareIconSett"></span>
-                </div>
-                <div class="toolSectionButtonsCircle">
-                    <span class="HeartIcon HeartIconSett"></span>
-                </div>
-                <div class="toolSectionButtonsCircle">
-                    <span class="BookMarkIcon BookMarkIconSett"></span>
+                <div class="toolSectionInfos">
+                    <div class="toolSectionInfosTab">
+                        <span class="CommentIcon commentInfoTab"></span>
+                        <span class="toolSectionInfosTabNumber">100,000</span>
+                    </div>
+                    <div class="toolSectionInfosTab">
+                        <span class="LikeIcon likeInfoTab"></span>
+                        <span class="toolSectionInfosTabNumber">100</span>
+                    </div>
+                    <div class="toolSectionInfosTab">
+                        <span class="DisLikeIcon disLikeInfoTab"></span>
+                        <span class="toolSectionInfosTabNumber">100,000,000</span>
+                    </div>
+                    <div class="toolSectionInfosTab">
+                        <i class="fa fa-eye"></i>
+                        {{--                    <span class="ViewIcon viewInfoTab"></span>--}}
+                        <span class="toolSectionInfosTabNumber">100</span>
+                    </div>
                 </div>
             </div>
-            <div class="toolSectionInfos">
-                <div class="toolSectionInfosTab">
-                    <span class="CommentIcon commentInfoTab"></span>
-                    <span class="toolSectionInfosTabNumber">100,000</span>
-                </div>
-                <div class="toolSectionInfosTab">
-                    <span class="LikeIcon likeInfoTab"></span>
-                    <span class="toolSectionInfosTabNumber">100</span>
-                </div>
-                <div class="toolSectionInfosTab">
-                    <span class="DisLikeIcon disLikeInfoTab"></span>
-                    <span class="toolSectionInfosTabNumber">100,000,000</span>
-                </div>
-                <div class="toolSectionInfosTab">
-                    <i class="fa fa-eye"></i>
-                    {{--                    <span class="ViewIcon viewInfoTab"></span>--}}
-                    <span class="toolSectionInfosTabNumber">100</span>
-                </div>
-            </div>
-        </div>
 
         <div class="descriptionSection">
             <div class="headerWithLine">
@@ -100,236 +100,237 @@
                     <div class="commentInputSendButton">ارسال</div>
                 </div>
 
-                <hr style="border-color:darkgray; margin: 10px 0px">
+                    <hr style="border-color:darkgray; margin: 10px 0px">
 
-                <div class="acceptedComment">
-                    <div class="mainUserPicSection">
-                        <div class="userPicDiv">
-                            <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
-                        </div>
-                        <div class="mainUserInfos">
-                            <div class="mainUseruserName">
-                                shazdesina
+                    <div class="acceptedComment">
+                        <div class="mainUserPicSection">
+                            <div class="userPicDiv">
+                                <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
                             </div>
-                            <div class="videoUploadTime">
-                                هم اکنون
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="acceptedCommentText">                        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و م تخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
-                    </div>
-
-                    <div class="acceptedCommentSett">
-                        <div class="acceptedCommentRight">
-                            <div style="margin-left: 15px;">
-                                <span style="color: #0076a3">31</span>
-                                <span>پاسخ دادند</span>
-                            </div>
-                            <div style="color: blue; cursor: pointer" onclick="openAnsOnReview(1)">
-                                مشاهده پاسخ ها
-                                <i class="downArrowIcon"></i>
-                            </div>
-                        </div>
-                        <div class="acceptedCommentLeft">
-                            <div class="acceptedCommentAnsButton" onclick="openAnsToComment(1)">
-                                پاسخ دهید
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="ansTo_1" class="commentInputSection" style="margin-top: 10px; display: none;">
-                        <div class="userPicDiv">
-                            <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
-                        </div>
-                        <textarea class="commentInput" name="AnsToComment_1" id="AnsToComment_1" placeholder="شما چه نظری دارید؟" rows="1"></textarea>
-                        <div class="commentInputSendButton">ارسال</div>
-                    </div>
-                    <div id="ansOf_1" style="display: none;">
-                        <div class="commentAnsesSection">
-
-                            <div class="commentInputSection" style="margin-top: 10px;">
-                                <div class="userPicDiv userPicAnsToReviewPc">
-                                    <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
+                            <div class="mainUserInfos">
+                                <div class="mainUseruserName">
+                                    shazdesina
                                 </div>
-                                <div class="topOfcommentAnsTextSection">
-                                    <div class="commentAnsTextSection">
-                                        <div style="display: flex">
-                                            <div class="userPicDiv userPicAnsToReviewMobile">
+                                <div class="videoUploadTime">
+                                    هم اکنون
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="acceptedCommentText">                        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و م تخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
+                        </div>
+
+                        <div class="acceptedCommentSett">
+                            <div class="acceptedCommentRight">
+                                <div style="margin-left: 15px;">
+                                    <span style="color: #0076a3">31</span>
+                                    <span>پاسخ دادند</span>
+                                </div>
+                                <div style="color: blue; cursor: pointer" onclick="openAnsOnReview(1)">
+                                    مشاهده پاسخ ها
+                                    <i class="downArrowIcon"></i>
+                                </div>
+                            </div>
+                            <div class="acceptedCommentLeft">
+                                <div class="acceptedCommentAnsButton" onclick="openAnsToComment(1)">
+                                    پاسخ دهید
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="ansTo_1" class="commentInputSection" style="margin-top: 10px; display: none;">
+                            <div class="userPicDiv">
+                                <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
+                            </div>
+                            <textarea class="commentInput" name="AnsToComment_1" id="AnsToComment_1" placeholder="شما چه نظری دارید؟" rows="1"></textarea>
+                            <div class="commentInputSendButton">ارسال</div>
+                        </div>
+                        <div id="ansOf_1" style="display: none;">
+                            <div class="commentAnsesSection">
+
+                                <div class="commentInputSection" style="margin-top: 10px;">
+                                    <div class="userPicDiv userPicAnsToReviewPc">
+                                        <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
+                                    </div>
+                                    <div class="topOfcommentAnsTextSection">
+                                        <div class="commentAnsTextSection">
+                                            <div style="display: flex">
+                                                <div class="userPicDiv userPicAnsToReviewMobile">
+                                                    <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
+                                                </div>
+                                                <div class="topWho">
+                                                    <div class="whoAns">
+                                                        kiavash
+                                                    </div>
+                                                    <div class="whoAnsTo">
+                                                        در پاسخ به shazdesina
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div style="text-align: justify; white-space: pre-line">  نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد. نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.</div>
+                                            <div class="commentAnsToAns hideOnPc" style="justify-content: flex-end;">
+                                                <div class="commentAnsLikeSection">
+                                                    <div class="likeAnsIconDiv" onclick="toggleLikeIcon(true, 1)">
+                                                        <div class="LikeIconEmpty LikeIconEmptySett likeIcon_1"></div>
+                                                    </div>
+                                                    <div class="disLikeAnsIconDiv" onclick="toggleLikeIcon(false, 1)">
+                                                        <div class="DisLikeIconEmpty DisLikeIconEmptySett dislikeIcon_1"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="acceptedCommentAnsButton" style="font-size: 12px;" onclick="openAnsToComment(2)">
+                                                    پاسخ دهید
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div id="ansTo_2" class="commentInputSection" style="margin-top: 10px; display: none;">
+                                            <div class="userPicDiv ">
                                                 <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
                                             </div>
-                                            <div class="topWho">
-                                                <div class="whoAns">
-                                                    kiavash
-                                                </div>
-                                                <div class="whoAnsTo">
-                                                    در پاسخ به shazdesina
-                                                </div>
-                                            </div>
+                                            <textarea class="commentInput" name="AnsToComment_1" id="AnsToComment_1" placeholder="شما چه نظری دارید؟" rows="1"></textarea>
+                                            <div class="commentInputSendButton">ارسال</div>
                                         </div>
-                                        <div style="text-align: justify; white-space: pre-line">  نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد. نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.</div>
-                                        <div class="commentAnsToAns hideOnPc" style="justify-content: flex-end;">
-                                            <div class="commentAnsLikeSection">
-                                                <div class="likeAnsIconDiv" onclick="toggleLikeIcon(true, 1)">
-                                                    <div class="LikeIconEmpty LikeIconEmptySett likeIcon_1"></div>
+
+                                        <div class="commentAnsInfos">
+                                            <div class="commentAnsRight">
+                                                <div style="color: red; display: flex">
+                                                    <span>20</span>
+                                                    <span class="LikeIcon"></span>
                                                 </div>
-                                                <div class="disLikeAnsIconDiv" onclick="toggleLikeIcon(false, 1)">
-                                                    <div class="DisLikeIconEmpty DisLikeIconEmptySett dislikeIcon_1"></div>
+                                                <div style="color: darkred; display: flex; margin-right: 10px;">
+                                                    <span>0</span>
+                                                    <span class="DisLikeIcon"></span>
+                                                </div>
+                                                <div style="color: #0076a3; display: flex; margin-right: 10px;">
+                                                    <span>20</span>
+                                                    <span class="CommentIcon"></span>
                                                 </div>
                                             </div>
-                                            <div class="acceptedCommentAnsButton" style="font-size: 12px;" onclick="openAnsToComment(2)">
-                                                پاسخ دهید
+                                            <div class="commentAnsLeft" onclick="openAnsOnReview(2)">
+                                                مشاهده پاسخ ها
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div id="ansTo_2" class="commentInputSection" style="margin-top: 10px; display: none;">
-                                        <div class="userPicDiv ">
-                                            <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
-                                        </div>
-                                        <textarea class="commentInput" name="AnsToComment_1" id="AnsToComment_1" placeholder="شما چه نظری دارید؟" rows="1"></textarea>
-                                        <div class="commentInputSendButton">ارسال</div>
-                                    </div>
-
-                                    <div class="commentAnsInfos">
-                                        <div class="commentAnsRight">
-                                            <div style="color: red; display: flex">
-                                                <span>20</span>
-                                                <span class="LikeIcon"></span>
+                                    <div class="commentAnsToAns hideOnPhone">
+                                        <div class="commentAnsLikeSection">
+                                            <div class="likeAnsIconDiv" onclick="toggleLikeIcon(true, 1)">
+                                                <div class="LikeIconEmpty LikeIconEmptySett likeIcon_1"></div>
                                             </div>
-                                            <div style="color: darkred; display: flex; margin-right: 10px;">
-                                                <span>0</span>
-                                                <span class="DisLikeIcon"></span>
-                                            </div>
-                                            <div style="color: #0076a3; display: flex; margin-right: 10px;">
-                                                <span>20</span>
-                                                <span class="CommentIcon"></span>
+                                            <div class="disLikeAnsIconDiv" onclick="toggleLikeIcon(false, 1)">
+                                                <div class="DisLikeIconEmpty DisLikeIconEmptySett dislikeIcon_1"></div>
                                             </div>
                                         </div>
-                                        <div class="commentAnsLeft" onclick="openAnsOnReview(2)">
-                                            مشاهده پاسخ ها
+                                        <div class="acceptedCommentAnsButton" style="font-size: 12px;" onclick="openAnsToComment(2)">
+                                            پاسخ دهید
                                         </div>
                                     </div>
                                 </div>
-                                <div class="commentAnsToAns hideOnPhone">
-                                    <div class="commentAnsLikeSection">
-                                        <div class="likeAnsIconDiv" onclick="toggleLikeIcon(true, 1)">
-                                            <div class="LikeIconEmpty LikeIconEmptySett likeIcon_1"></div>
-                                        </div>
-                                        <div class="disLikeAnsIconDiv" onclick="toggleLikeIcon(false, 1)">
-                                            <div class="DisLikeIconEmpty DisLikeIconEmptySett dislikeIcon_1"></div>
-                                        </div>
-                                    </div>
-                                    <div class="acceptedCommentAnsButton" style="font-size: 12px;" onclick="openAnsToComment(2)">
-                                        پاسخ دهید
-                                    </div>
-                                </div>
-                            </div>
 
 
 
-                            <div id="ansOf_2" style="display: none;">
-                                <div class="commentAnsesSection">
-                                    <div class="commentInputSection" style="margin-top: 10px;">
-                                        <div class="userPicDiv userPicAnsToReviewPc">
-                                            <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
-                                        </div>
-                                        <div class="topOfcommentAnsTextSection">
-                                            <div class="commentAnsTextSection">
-                                                <div style="display: flex">
-                                                    <div class="userPicDiv userPicAnsToReviewMobile">
-                                                        <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
-                                                    </div>
-                                                    <div class="topWho">
-                                                        <div class="whoAns">
-                                                            kiavash3
+                                <div id="ansOf_2" style="display: none;">
+                                    <div class="commentAnsesSection">
+                                        <div class="commentInputSection" style="margin-top: 10px;">
+                                            <div class="userPicDiv userPicAnsToReviewPc">
+                                                <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
+                                            </div>
+                                            <div class="topOfcommentAnsTextSection">
+                                                <div class="commentAnsTextSection">
+                                                    <div style="display: flex">
+                                                        <div class="userPicDiv userPicAnsToReviewMobile">
+                                                            <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
                                                         </div>
-                                                        <div class="whoAnsTo">
-                                                            در پاسخ به 3shazdesina
+                                                        <div class="topWho">
+                                                            <div class="whoAns">
+                                                                kiavash3
+                                                            </div>
+                                                            <div class="whoAnsTo">
+                                                                در پاسخ به 3shazdesina
+                                                            </div>
                                                         </div>
                                                     </div>
+                                                    <div style="text-align: justify; white-space: pre-line">  نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد. نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.</div>
                                                 </div>
-                                                <div style="text-align: justify; white-space: pre-line">  نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد. نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.</div>
+                                                <div class="commentAnsInfos">
+                                                    <div class="commentAnsRight">
+                                                        <div style="color: red; display: flex">
+                                                            <span>20</span>
+                                                            <span class="LikeIcon"></span>
+                                                        </div>
+                                                        <div style="color: darkred; display: flex; margin-right: 10px;">
+                                                            <span>0</span>
+                                                            <span class="DisLikeIcon"></span>
+                                                        </div>
+                                                        <div style="color: #0076a3; display: flex; margin-right: 10px;">
+                                                            <span>20</span>
+                                                            <span class="CommentIcon"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="commentAnsLeft">
+                                                        مشاهده پاسخ ها
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="commentAnsInfos">
-                                                <div class="commentAnsRight">
-                                                    <div style="color: red; display: flex">
-                                                        <span>20</span>
-                                                        <span class="LikeIcon"></span>
-                                                    </div>
-                                                    <div style="color: darkred; display: flex; margin-right: 10px;">
-                                                        <span>0</span>
-                                                        <span class="DisLikeIcon"></span>
-                                                    </div>
-                                                    <div style="color: #0076a3; display: flex; margin-right: 10px;">
-                                                        <span>20</span>
-                                                        <span class="CommentIcon"></span>
-                                                    </div>
-                                                </div>
-                                                <div class="commentAnsLeft">
-                                                    مشاهده پاسخ ها
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="commentAnsToAns ">
-                                            <div class="commentAnsLikeSection">
+                                            <div class="commentAnsToAns ">
+                                                <div class="commentAnsLikeSection">
 
-                                                <div class="likeAnsIconDiv" onclick="toggleLikeIcon(true, 3)">
-                                                    <div class="LikeIconEmpty LikeIconEmptySett likeIcon_3"></div>
-                                                </div>
-                                                <div class="disLikeAnsIconDiv" onclick="toggleLikeIcon(false, 3)">
-                                                    <div class="DisLikeIconEmpty DisLikeIconEmptySett dislikeIcon_3"></div>
-                                                </div>
+                                                    <div class="likeAnsIconDiv" onclick="toggleLikeIcon(true, 3)">
+                                                        <div class="LikeIconEmpty LikeIconEmptySett likeIcon_3"></div>
+                                                    </div>
+                                                    <div class="disLikeAnsIconDiv" onclick="toggleLikeIcon(false, 3)">
+                                                        <div class="DisLikeIconEmpty DisLikeIconEmptySett dislikeIcon_3"></div>
+                                                    </div>
 
-                                            </div>
-                                            <div class="acceptedCommentAnsButton" style="font-size: 12px;" onclick="openAnsToComment(3)">
-                                                پاسخ دهید
+                                                </div>
+                                                <div class="acceptedCommentAnsButton" style="font-size: 12px;" onclick="openAnsToComment(3)">
+                                                    پاسخ دهید
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div id="ansTo_3" class="commentInputSection" style="margin-top: 10px; display: none;">
-                                        <div class="userPicDiv">
-                                            <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
+                                        <div id="ansTo_3" class="commentInputSection" style="margin-top: 10px; display: none;">
+                                            <div class="userPicDiv">
+                                                <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
+                                            </div>
+                                            <textarea class="commentInput" name="AnsToComment_3" id="AnsToComment_3" placeholder="شما چه نظری دارید؟" rows="1"></textarea>
+                                            <div class="commentInputSendButton">ارسال</div>
                                         </div>
-                                        <textarea class="commentInput" name="AnsToComment_3" id="AnsToComment_3" placeholder="شما چه نظری دارید؟" rows="1"></textarea>
-                                        <div class="commentInputSendButton">ارسال</div>
                                     </div>
                                 </div>
-                            </div>
 
+                            </div>
                         </div>
+
+                    </div>
+
+{{--                    <hr style="border-color:darkgray; margin: 3px 0px">--}}
+
+                </div>
+            </div>
+
+            <div class="otherSection">
+                <div class="headerWithLine">
+                    <div class="headerWithLineText">
+                        شاید جالب باشد
+                    </div>
+                    <div class="headerWithLineLine"></div>
+                </div>
+
+                <div class="otherSectionBody">
+
+                    <div class="videoSuggestionSwiper swiper-container">
+
+                        <div id="mebyInterestedVideo" class="swiper-wrapper">
+                            {{--fill with js videoSuggestion()--}}
+                        </div>
+
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
                     </div>
 
                 </div>
-
-                <hr style="border-color:darkgray; margin: 3px 0px">
-
             </div>
+
         </div>
-
-        <div class="otherSection">
-            <div class="headerWithLine">
-                <div class="headerWithLineText">
-                    شاید جالب باشد
-                </div>
-                <div class="headerWithLineLine"></div>
-            </div>
-
-            <div class="otherSectionBody">
-
-                <div class="videoSuggestionSwiper swiper-container">
-
-                    <div id="mebyInterestedVideo" class="swiper-wrapper">
-                        {{--fill with js videoSuggestion()--}}
-                    </div>
-
-                    <div class="swiper-button-next"></div>
-                    <div class="swiper-button-prev"></div>
-                </div>
-
-            </div>
-        </div>
-
     </div>
 
 @endsection
