@@ -661,7 +661,6 @@ class HomeController extends Controller
 
     public function showPolicies()
     {
-        dd('fjdkfjd');
         return view('policies');
     }
 
