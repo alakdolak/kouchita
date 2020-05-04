@@ -13,28 +13,36 @@ class StreamingController extends Controller
 {
     public function indexStreaming()
     {
-        $videos = Video::all();
+        $videos = Video::where('confirm' , 1)->where('state', 1)->get();
         foreach ($videos as $video) {
             $video->pic = \URL::asset('_images/video/' . $video->userId . '/' . $video->thumbnail);
-            $video->url = route('streaming.show', ['id' => $video->id]);
+            $video->url = route('streaming.show', ['code' => $video->code]);
             $video->username = User::find($video->userId)->username;
         }
 
         return view('streaming.streamingIndex', compact(['videos']));
     }
 
-    public function showStreaming($id)
+    public function showStreaming($code)
     {
-        $video = Video::find($id);
+        $video = Video::where('code', $code)->first();
         if($video == null)
             return redirect(route('streaming.index'));
 
-        $video->video = \URL::asset('_images/video/' . $video->userId . '/' . $video->video);
-        $video->pic = \URL::asset('_images/video/' . $video->userId . '/' . $video->thumbnail);
-        $video->url = route('streaming.show', ['id' => $video->id]);
-        $video->username = User::find($video->userId)->username;
+        $uId = 0;
+        if(auth()->check())
+            $uId = auth()->user()->id;
 
-        return view('streaming.streamingShow', compact(['video']));
+        if(($video->confirm == 1 && $video->state == 1) || ($video->userId == $uId)) {
+            $video->video = \URL::asset('_images/video/' . $video->userId . '/' . $video->video);
+            $video->pic = \URL::asset('_images/video/' . $video->userId . '/' . $video->thumbnail);
+            $video->url = route('streaming.show', ['id' => $video->id]);
+            $video->username = User::find($video->userId)->username;
+            return view('streaming.streamingShow', compact(['video']));
+        }
+
+        return redirect(route('streaming.index'));
+
     }
 
     public function streamingLive($room)
@@ -74,8 +82,10 @@ class StreamingController extends Controller
         $limbos = VideoLimbo::all();
         foreach ($limbos as $item){
             $diff = Carbon::now()->diffInHours($item->created_at);
-            if($diff > 2){
-                \File::delete('_images/video/limbo/'. $item->video);
+            if($diff > 3){
+                $location = __DIR__ .'/../../../../assets/_images/video/limbo/' . $item->video;
+                if(is_file($location))
+                    unlink($location);
                 $item->delete();
             }
         }
@@ -191,6 +201,17 @@ class StreamingController extends Controller
         return;
     }
 
+    public function confirmAll()
+    {
+        $videos = Video::all();
+        foreach ($videos as $video) {
+            $video->confirm = 1;
+            $video->state = 1;
+            $video->save();
+        }
+        dd('done');
+    }
+
 
 
 
@@ -272,19 +293,4 @@ class StreamingController extends Controller
         dd('done');
     }
 
-    public function setCode()
-    {
-        $videos = Video::all();
-        foreach ($videos as $video) {
-            while(true){
-                $sCode = generateRandomString(10);
-                $check = Video::where('code', $sCode)->first();
-                if($check == null)
-                    break;
-            }
-            $video->code = $sCode;
-            $video->save();
-        }
-        dd('done');
-    }
 }
