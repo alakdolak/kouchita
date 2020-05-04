@@ -815,5 +815,3 @@ Route::post('webrtcTurn', function (\Illuminate\Http\Request $request){
     dd($request);
 });
 
-
-Route::get('updateTags', 'HomeController@updateTags');
