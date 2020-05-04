@@ -146,6 +146,77 @@
         .notReleaseButton:hover{
             background-color: #4dc7bc;
         }
+        .thumbnailSelectDiv{
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .thumbnailSelectImgDiv{
+            width: 48%;
+            margin: 4px;
+        }
+        .thumbnailSelectImg{
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 10px;
+            cursor: pointer;
+            height: 140px;
+        }
+        .thumbnailSelectImgChoose{
+            border: solid 8px #2e9087 !important;
+        }
+        .newThumbnailChoose{
+            color: white;
+            border-radius: 10px;
+            border: solid 4px white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            height: 140px;
+            cursor: pointer;
+        }
+        .newThumbnailModal{
+            display: none;
+            /*display: flex;*/
+            justify-content: center;
+            align-items: center;
+            opacity: 1 !important;
+        }
+        .closeDivVideoSection{
+            position: absolute;
+            left: 10px;
+            top: 10px;
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1;
+        }
+        .closeDivVideoSection:before{
+            content: "\00d7";
+            font-size: 40px;
+        }
+        .selectThumbnailDiv{
+            background: white;
+            border-radius: 10px;
+            opacity: 1;
+            width: 438px;
+            max-width: 100%;
+        }
+        .selectThumbnailDivVideoSection{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding: 20px;
+        }
+        .resultThumbnail{
+            padding: 20px;
+            width: 100%;
+        }
         @media (min-width: 992px){
             .videoSetting .col-md-6, .col-md-8, .col-md-4{
                 float: right;
@@ -183,7 +254,7 @@
 
                 <div class="col-md-4">
                     <div class="videoProgressPicDiv">
-                        <img id="showThumbnail" src="" style="height: 150px; border-radius: 10px">
+                        <img class="showThumbnailMain" src="" style="height: 150px; border-radius: 10px">
                     </div>
                 </div>
                 <div class="col-md-8 progressDiv">
@@ -211,12 +282,9 @@
                                 <label for="videoCategory" class="inputVideoLabel">دسته بندی ویدیو</label>
                                 <select name="videoCategory" id="videoCategory" class="form-control">
                                     <option value="0">...</option>
-                                    <option value="1">دسته بندی 1</option>
-                                    <option value="2">دسته بندی 2</option>
-                                    <option value="3">دسته بندی 3</option>
-                                    <option value="4">دسته بندی 4</option>
-                                    <option value="5">دسته بندی 5</option>
-                                    <option value="6">دسته بندی 6</option>
+                                    @foreach($categories as $item)
+                                        <option value="{{$item->id}}">{{$item->name}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -237,14 +305,35 @@
                                 <select id="videoTags" name="videoTags" class="ui fluid search dropdown rtlMultiSelect" multiple=""></select>
                             </div>
                         </div>
-                        <div class="col-md-6"></div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="videoTags" class="inputVideoLabel">عکس پیش نمایش</label>
+                                <div class="thumbnailSelectDiv">
+                                    <div class="thumbnailSelectImgDiv">
+                                        <img src="" class="showThumbnail0 thumbnailSelectImg thumbnailSelectImgChoose" onclick="selectNewThumbnail(0, this)">
+                                    </div>
+                                    <div class="thumbnailSelectImgDiv">
+                                        <img src="" class="showThumbnail1 thumbnailSelectImg" onclick="selectNewThumbnail(1, this)">
+                                    </div>
+                                    <div class="thumbnailSelectImgDiv">
+                                        <img src="" class="showThumbnail2 thumbnailSelectImg" onclick="selectNewThumbnail(2, this)">
+                                    </div>
+                                    <div class="thumbnailSelectImgDiv">
+                                        <img src="" class="showThumbnail3 thumbnailSelectImg" onclick="selectNewThumbnail(3, this)">
+                                    </div>
+                                    <div id="creatCropThumbnailDiv" class="thumbnailSelectImgDiv newThumbnailChoose" onclick="selectNewThumbnail(4, this)">
+                                        انتخاب عکس
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="row">
                         <div class="buttonDiv">
-                            <div class="saveButton notReleaseButton" onclick="storeInfoVideos(0)">
-                                ذخیره شود و بعدا منتشر می کنم
-                            </div>
+{{--                            <div class="saveButton notReleaseButton" onclick="storeInfoVideos(0)">--}}
+{{--                                ذخیره شود و بعدا منتشر می کنم--}}
+{{--                            </div>--}}
                             <div class="saveButton releaseButton" onclick="storeInfoVideos(1)">
                                 انتشار ویدیو
                             </div>
@@ -255,14 +344,28 @@
         </div>
     </div>
 
+    <div id="newThumbnailModal" class="ui_backdrop dark newThumbnailModal">
+        <div class="selectThumbnailDiv">
+            <div class="row selectThumbnailDivVideoSection">
+                <div class="closeDivVideoSection" onclick="$('#newThumbnailModal').css('display', 'none')"></div>
+                <video id="thumbnailVideoVideo" src="" style="width: 400px" controls muted></video>
+                <button onclick="cropVideoPic()" style="margin-top: 20px">برش تصویر</button>
+            </div>
+
+            <div class="row" style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+                <canvas id="resultThumbnail" class="resultThumbnail"></canvas>
+                <button class="btn btn-success" onclick="setCropThumbnail()">تایید</button>
+            </div>
+        </div>
+    </div>
+
 @endsection
 
 @section('script')
 
-    {{--    <script src="{{URL::asset('packages/dropzone/dropzone.js')}}"></script>--}}
-    {{--    <script src="{{URL::asset('packages/dropzone/dropzone-amd-module.js')}}"></script>--}}
     <script>
         let thumbnail = '';
+        let newThumbnailCrop;
 
 
         $('#videoTags').dropdown({
@@ -322,36 +425,50 @@
                 storeVideo(_input.files[0]);
         }
 
+        let canvas = 0;
         function storeVideo(_file){
 
             window.URL = window.URL || window.webkitURL;
 
             var video = document.createElement('video');
             video.preload = 'metadata';
-            video.onloadedmetadata = function() {
-                window.URL.revokeObjectURL(video.src);
-            }
+            // video.onloadedmetadata = function() {
+            //     console.log('onloadedmetadata')
+            // }
             video.src = URL.createObjectURL(_file);
+            $('#thumbnailVideoVideo').attr('src', URL.createObjectURL(_file));
 
             var file = _file;
             var fileReader = new FileReader();
             fileReader.onload = function() {
                 var blob = new Blob([fileReader.result], {type: _file.type});
                 var url = URL.createObjectURL(blob);
-                var timeupdate = function() {
-                    if (snapImage()) {
-                        video.removeEventListener('timeupdate', timeupdate);
-                        video.pause();
-                    }
-                };
+
                 video.addEventListener('loadeddata', function() {
-                    if (snapImage()) {
-                        video.removeEventListener('timeupdate', timeupdate);
+
+                    if(snapImage('showThumbnailMain')){
+                        video.currentTime = video.duration/3;
+                        setTimeout(function(){
+                            if(snapImage('showThumbnail1')){
+                                video.currentTime = (video.duration/3) * 2;
+                                setTimeout(function(){
+                                    if(snapImage('showThumbnail2')){
+                                        video.currentTime = video.duration - 1;
+                                        setTimeout(function(){
+                                            snapImage('showThumbnail3');
+                                            window.URL.revokeObjectURL(video.src);
+                                        }, 200)
+                                    }
+                                }, 200);
+                            }
+                        }, 200);
                     }
                 });
 
-                var snapImage = function() {
-                    var canvas = document.createElement('canvas');
+                var snapImage = function(_result) {
+                    if(canvas == 0)
+                        canvas = document.createElement('canvas');
+
                     canvas.width = video.videoWidth;
                     canvas.height = video.videoHeight;
                     canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
@@ -359,14 +476,14 @@
                     var success = image.length > 100000;
 
                     if (success) {
-                        var img = document.getElementById('showThumbnail');
-                        img.src = image;
-                        thumbnail = image;
-                        URL.revokeObjectURL(url);
+                        $('.' + _result).attr('src', image);
+                        if(_result == 'showThumbnailMain') {
+                            $('.showThumbnail0').attr('src', image);
+                            thumbnail = image;
+                        }
                     }
                     return success;
                 };
-                video.addEventListener('timeupdate', timeupdate);
                 video.preload = 'metadata';
                 video.src = url;
                 video.muted = true;
@@ -374,7 +491,6 @@
                 video.play();
             };
             fileReader.readAsArrayBuffer(_file);
-
 
             $('#uploadVideoDiv').hide();
             $('#videoSetting').show();
@@ -508,7 +624,36 @@
             }
         }
 
+        function selectNewThumbnail(_num, _element){
+            $('.thumbnailSelectImgChoose').removeClass('thumbnailSelectImgChoose');
+            $(_element).addClass('thumbnailSelectImgChoose');
 
+            if(_num == 4)
+                $('#newThumbnailModal').css('display', 'flex');
+            else{
+                thumbnail = $(_element).attr('src');
+                $('.showThumbnailMain').attr('src', thumbnail);
+            }
+        }
+
+        function cropVideoPic(){
+            let videoThumbnailDiv = document.getElementById('thumbnailVideoVideo');
+            var canvasThumbnail = document.getElementById('resultThumbnail');
+            canvasThumbnail.width = videoThumbnailDiv.videoWidth;
+            canvasThumbnail.height = videoThumbnailDiv.videoHeight;
+            canvasThumbnail.getContext('2d').drawImage(videoThumbnailDiv, 0, 0, canvasThumbnail.width, canvasThumbnail.height);
+            newThumbnailCrop = canvasThumbnail.toDataURL();
+        }
+
+        function setCropThumbnail(){
+            $('.showThumbnailMain').attr('src', newThumbnailCrop);
+            thumbnail = newThumbnailCrop;
+
+            $('.thumbnailSelectImgChoose').removeClass('thumbnailSelectImgChoose');
+            $('#creatCropThumbnailDiv').addClass('thumbnailSelectImgChoose');
+
+            $('#newThumbnailModal').css('display', 'none');
+        }
 
         function errorUploadSettingVideo(){
             openErrorAlert('ثبت ویدیو با مشکلی مواجه شد لطفا دوباره تلاش کنید');
