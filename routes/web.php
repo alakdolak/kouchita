@@ -732,6 +732,8 @@ Route::middleware(['web'])->group(function (){
     Route::get('/importVideoToDB', 'StreamingController@importVideoToDB');
 
     Route::get('/setVideoDuration', 'StreamingController@setVideoDuration');
+
+    Route::get('/setCode', 'StreamingController@setCode');
 });
 
 
