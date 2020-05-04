@@ -271,4 +271,20 @@ class StreamingController extends Controller
 
         dd('done');
     }
+
+    public function setCode()
+    {
+        $videos = Video::all();
+        foreach ($videos as $video) {
+            while(true){
+                $sCode = generateRandomString(10);
+                $check = Video::where('code', $sCode)->first();
+                if($check == null)
+                    break;
+            }
+            $video->code = $sCode;
+            $video->save();
+        }
+        dd('done');
+    }
 }
