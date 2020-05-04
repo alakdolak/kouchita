@@ -130,30 +130,9 @@
         resizeFitImg('resizeImgClass');
     });
 
-    swiper
 </script>
 
 @yield('script')
-
-<script>
-
-    // suggestion swiper
-    new Swiper('.suggestionSwiper', {
-        spaceBetween: 30,
-        centeredSlides: true,
-        slidesPerView: 4,
-        slidesPerGroup: 1,
-        loop: true,
-        // autoplay: {
-        //     delay: 50000,
-        //     disableOnInteraction: false,
-        // },
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
-    });
-</script>
 
 </html>
 

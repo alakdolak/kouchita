@@ -16,13 +16,17 @@ class CreateVideosTable extends Migration
         Schema::create('videos', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('userId');
+            $table->string('code', 10);
             $table->string('title');
             $table->string('description', 255)->nullable();
-            $table->string('file');
+            $table->string('video');
             $table->unsignedInteger('categoryId');
             $table->string('subtitle')->nullable();
             $table->string('thumbnail')->nullable();
+            $table->string('duration', 15)->nullable();
             $table->integer('seen')->default(0);
+            $table->tinyInteger('confirm')->default(0);
+            $table->tinyInteger('state')->default(0);
             $table->timestamps();
         });
     }

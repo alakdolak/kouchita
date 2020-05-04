@@ -376,7 +376,6 @@
         $(".action").css('display', 'block');
         $(".footer").removeClass('hidden');
         reader.readAsDataURL(input);
-
     }
 
     function doEdit(ratio, result) {

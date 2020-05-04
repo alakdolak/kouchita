@@ -278,7 +278,7 @@ Route::group(array('middleware' => ['throttle:30', 'nothing']), function () {
 
     Route::post('getSrcCities', array('as' => 'getSrcCities', 'uses' => 'PlaceController@getSrcCities'));
 
-    Route::post('getTags', array('as' => 'getTags', 'uses' => 'PlaceController@getTags'));
+//    Route::post('getTags', array('as' => 'getTags', 'uses' => 'PlaceController@getTags'));
 
     Route::get('policies', array('as' => 'policies', 'uses' => 'HomeController@showPolicies'));
 
@@ -412,6 +412,8 @@ Route::group(array('middleware' => ['throttle:30', 'nothing', 'setSession']), fu
 
 //ajaxController
 Route::group(array('middleware' => 'nothing'), function () {
+
+    Route::post('getTags', 'AjaxController@getTags')->name('getTags');
 
     Route::post('getCities', 'AjaxController@getCitiesDir')->name('getCitiesDir');
 
@@ -717,6 +719,13 @@ Route::middleware(['web'])->group(function (){
     Route::get('streaming/show/{id}', 'StreamingController@showStreaming')->name('streaming.show');
 
     Route::get('streaming/live/{room}', 'StreamingController@streamingLive')->name('streaming.live');
+
+    Route::middleware(['auth'])->group(function () {
+        Route::get('streaming/uploadPage', 'StreamingController@uploadVideoPage')->name('streaming.uploadPage');
+
+        Route::post('streaming/storeVideo', 'StreamingController@storeVideo')->name('streaming.storeVideo');
+    });
+
 
     Route::get('/importVideoToDB', 'StreamingController@importVideoToDB');
 
