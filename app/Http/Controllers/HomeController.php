@@ -659,7 +659,7 @@ class HomeController extends Controller
         curl_close($ch);
     }
 
-    public function showPolicies()
+    public function showPoliciess()
     {
         return view('policies');
     }
