@@ -27,6 +27,7 @@ use App\models\ReviewPic;
 use App\models\ReviewUserAssigned;
 use App\models\SogatSanaie;
 use App\models\State;
+use App\models\Tag;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -671,13 +672,20 @@ class AjaxController extends Controller {
 
     public function getTags(Request $request)
     {
-        $tag = [
-            'kiavash',
-            'kia',
-            'heelo'
-        ];
+        $tag = $request->tag;
+        $tags = [];
 
-        echo json_encode(['tags' => $tag]);
+        if(strlen($tag) != 0 ) {
+            $similar = Tag::where('name', 'LIKE', '%' . $tag . '%')->get();
+
+            foreach ($similar as $t) {
+                array_push($tags, [
+                    'name' => $t->name,
+                    'id' => $t->id
+                ]);
+            }
+            echo json_encode(['tags' => $tags, 'send' => $tag]);
+        }
 
         return;
     }

@@ -8170,7 +8170,7 @@ $.fn.dropdown.settings = {
     addResult     : 'Add <b>{term}</b>',
     count         : '{count} selected',
     maxSelections : 'Max {maxCount} selections',
-    noResults     : 'No results found.',
+    noResults     : 'نتیجه ای یافت نشد',
     serverError   : 'There was an error contacting the server'
   },
 
