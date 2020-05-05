@@ -6,6 +6,22 @@
     <link rel="stylesheet" type="text/css" href="{{asset('semanticUi/semantic.css')}}">
     <link rel="stylesheet" href="{{URL::asset('css/streaming/uploadVideoVod.css')}}">
 
+    <style>
+        .uploadLaw{
+            margin-top: 10px;
+            background: #3a3a3a;
+            border-radius: 8px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 16px;
+            text-align: justify;
+            padding: 50px 15px;
+
+        }
+    </style>
     <script src="{{asset('semanticUi/semantic.js')}}"></script>
 @endsection
 
@@ -120,6 +136,17 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container uploadLaw">
+        <div class="row">
+            <div class="col-md-6">
+                در سیستم بارگذاری کوچیتا ، برای بارگذاری ویدئوهای خود از آخرین نسخه مرورگرهای به روز همچون کروم ، فایرفاکس ، سافاری استفاده نمایید.
+            </div>
+            <div class="col-md-6">
+                به جهت حفظ حقوق مؤلفین و رونق تجاری سینمای کشور، لطفاً از بارگذاری ویدیوهایی که دارای حق نشر می باشند و در شبکه نمایش خانگی به فروش می رسند، خودداری فرمایید.
             </div>
         </div>
     </div>

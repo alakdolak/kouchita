@@ -1130,6 +1130,30 @@ function storeNewTag($tag){
         return false;
 }
 
+//    http://image.intervention.io/
+function resizeImage($pic, $size){
+    try {
+        $image = $pic;
+        $randNum = random_int(100,999);
+        $fileName = time() . $randNum. '.' . $image->getClientOriginalExtension();
+
+        foreach ($size as $item){
+            $input['imagename'] = $item['name'] .  $fileName ;
+            $destinationPath = public_path($item['destination']);
+            $img = \Image::make($image->getRealPath());
+            $img->resize($item['width'], $item['height'], function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($destinationPath.'/'.$input['imagename']);
+        }
+        return $fileName;
+    }
+    catch (Exception $exception){
+        return 'error';
+    }
+}
+
+
+
 //time
 function jalaliToGregorian($time){
     include_once 'jdate.php';
