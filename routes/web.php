@@ -33,6 +33,10 @@ Route::get('business', function(){
     return view('business');
 });
 
+Route::get('streamingShow', function(){
+    return view('streaming.streamingShow');
+});
+
 
 Route::get('userActivitiesProfile', function(){
     return view('profile.userActivitiesProfile');

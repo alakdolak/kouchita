@@ -50,12 +50,12 @@ body{
 
 .mainDivStream > div:last-child {
     margin-right: 5px;
-    width: 70%;
+    width: 65%;
 }
 
 .mainDivStream > div:first-child {
     margin-left: 5px;
-    width: 30%;
+    width: 35%;
 }
 
 .mainShowBase{
@@ -63,7 +63,7 @@ body{
     padding: 15px;
     border-radius: 8px;
     position: relative;
-    width: calc(100% - 50px);
+    /*width: calc(100% - 50px);*/
 }
 
 
