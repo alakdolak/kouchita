@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\CommentBroadCast;
 use App\models\ActivationCode;
 use App\models\Activity;
 use App\models\Adab;
@@ -1775,5 +1776,13 @@ class HomeController extends Controller
         $writer->save('exportAmaken.xlsx');
 
         dd('finniish');
+    }
+
+
+    public function sendBroad(Request $request)
+    {
+        broadcast(new CommentBroadCast($request->msg, 10));
+//        broadcast(new CommentBroadCast($request->msg, 10))->toOthers();
+//        event(new CommentBroadCast($request->msg));
     }
 }

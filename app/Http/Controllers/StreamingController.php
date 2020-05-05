@@ -25,8 +25,10 @@ class StreamingController extends Controller
         return view('streaming.streamingIndex', compact(['videos']));
     }
 
-    public function showStreaming($code)
+    public function showStreaming(Request $request, $code)
     {
+
+
         $video = Video::where('code', $code)->first();
         if($video == null)
             return redirect(route('streaming.index'));
@@ -36,28 +38,31 @@ class StreamingController extends Controller
             $uId = auth()->user()->id;
 
         if(($video->confirm == 1 && $video->state == 1) || ($video->userId == $uId)) {
+
+            if(!\Cookie::has('video_' . $video->code)){
+                \Cookie::queue(\Cookie::make('video_' . $video->code, 1, 5));
+                $video->seen++;
+                $video->save();
+            }
+
             $video->video = \URL::asset('_images/video/' . $video->userId . '/' . $video->video);
             $video->pic = \URL::asset('_images/video/' . $video->userId . '/' . $video->thumbnail);
             $video->url = route('streaming.show', ['id' => $video->id]);
             $video->username = User::find($video->userId)->username;
+
+            $videoLog = $this->getVideoLog($video->id);
+            $video->like = $videoLog['like'];
+            $video->disLike = $videoLog['disLike'];
+            $video->comments = $videoLog['comments'];
+            $video->commentsCount = $videoLog['commentsCount'];
+
             return view('streaming.streamingShow', compact(['video']));
         }
 
+
+
         return redirect(route('streaming.index'));
 
-    }
-
-    public function streamingLive($room)
-    {
-        $name = random_int(10000, 99999);
-        if(auth()->check())
-            $kind = 'streamer';
-        else
-            $kind = 'see';
-
-//        $kind = 'streamer';
-
-        return view('streaming.streamingLive', compact(['kind', 'room', 'name']));
     }
 
     public function uploadVideoPage()
@@ -98,7 +103,6 @@ class StreamingController extends Controller
     public function storeVideo(Request $request)
     {
         $user = auth()->user();
-
         if(isset($request->kind) && $request->kind == 'video'){
             if(isset($_FILES['video']) && isset($request->code) && $_FILES['video']['error'] == 0){
                 $limbo = VideoLimbo::where('code', $request->code)->where('userId', $user->id)->first();
@@ -236,6 +240,28 @@ class StreamingController extends Controller
             echo json_encode(['status' => 'nok']);
 
         return;
+    }
+
+    public function streamingLive($room){
+        $name = random_int(10000, 99999);
+        if(auth()->check())
+            $kind = 'streamer';
+        else
+            $kind = 'see';
+
+//        $kind = 'streamer';
+
+        return view('streaming.streamingLive', compact(['kind', 'room', 'name']));
+    }
+
+    private function getVideoLog($vId){
+
+        return [
+            'like' => 0,
+            'disLike' => 0,
+            'comments' => [],
+            'commentsCount' => 0
+        ];
     }
 
     public function confirmAll()

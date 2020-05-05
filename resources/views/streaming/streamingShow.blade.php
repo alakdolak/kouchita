@@ -11,8 +11,7 @@
 
             <div class="videoInfos">
                 <div class="videoInfosVideoName">
-{{--                    {{$video->title}}--}}
-                    معرفی فلان و بهمان
+                    {{$video->title}}
 {{--                    <img class="float-left" src="{{URL::asset('images/streaming/live.png')}}">--}}
                 </div>
                 <div class="row mainUserPicSection">
@@ -21,8 +20,7 @@
                     </div>
                     <div class="mainUserInfos">
                         <div class="mainUseruserName">
-                            shazdesina
-{{--                            {{$video->username}}--}}
+                            {{$video->username}}
                         </div>
                         <div class="videoUploadTime">
                             هم اکنون
@@ -39,7 +37,7 @@
                     <div class="headerWithLineLine"></div>
                 </div>
                 <div class="descriptionSectionBody">
-{{--                    {!! $video->description !!}--}}سایشنیا تشلی اتشلی تدد ت بتل ت نذت ذستا تاس تس  تس تنسی بتسی تبسیت بلسیات بلتسی لن
+                    {!! $video->description !!}سایشنیا تشلی اتشلی تدد ت بتل ت نذت ذستا تاس تس  تس تنسی بتسی تبسیت بلسیات بلتسی لن
                 </div>
             </div>
 
@@ -432,6 +430,7 @@
                 </div>
 
             </div>
+
         </div>
     </div>
 

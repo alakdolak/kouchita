@@ -817,3 +817,7 @@ Route::post('webrtcTurn', function (\Illuminate\Http\Request $request){
     dd($request);
 });
 
+Route::get('/broadCastTest', function(){
+    return view('test.test');
+});
+Route::post('sendBroad', 'HomeController@sendBroad')->name('sendBroad');
