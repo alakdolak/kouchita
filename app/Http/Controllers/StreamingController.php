@@ -16,6 +16,7 @@ use App\models\VideoTagRelation;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+//use Intervention\Image\Image;
 
 class StreamingController extends Controller
 {
@@ -24,13 +25,13 @@ class StreamingController extends Controller
         $confirmContidition = ['state' => 1, 'confirm' => 1];
         $lastVideos = Video::where($confirmContidition)->take(5)->orderByDesc('created_at')->get();
         foreach ($lastVideos as $lvid)
-            $lvid = $this->getVideoFullInfo($lvid);
+            $lvid = $this->getVideoFullInfo($lvid, false);
 
         $videoCategory = VideoCategory::all();
         foreach ($videoCategory as $vic) {
             $vic->video = Video::where($confirmContidition)->where('categoryId', $vic->id)->take(5)->orderByDesc('created_at')->get();
             foreach ($vic->video as $catVid)
-                $catVid = $this->getVideoFullInfo($catVid);
+                $catVid = $this->getVideoFullInfo($catVid, false);
         }
 
         return view('streaming.streamingIndex', compact(['lastVideos', 'videoCategory']));
@@ -54,15 +55,15 @@ class StreamingController extends Controller
                 $video->save();
             }
             $video->video = \URL::asset('_images/video/' . $video->userId . '/' . $video->video);
-            $video = $this->getVideoFullInfo($video, true, true);
+            $video = $this->getVideoFullInfo($video, true);
 
             $userMoreVideo = Video::where('userId', $video->userId)->where('id', '!=', $video->id)->take(4)->orderByDesc('created_at')->get();
             foreach ($userMoreVideo as $vid)
-                $vid = $this->getVideoFullInfo($vid, false, false);
+                $vid = $this->getVideoFullInfo($vid, false);
 
             $sameCategory = Video::where('categoryId', $video->categoryId)->where('id', '!=', $video->id)->take(4)->orderByDesc('created_at')->get();
             foreach ($sameCategory as $vid)
-                $vid = $this->getVideoFullInfo($vid, false, false);
+                $vid = $this->getVideoFullInfo($vid, false);
 
 
             return view('streaming.streamingShow', compact(['video', 'userMoreVideo', 'sameCategory']));
@@ -169,14 +170,21 @@ class StreamingController extends Controller
                 if (!is_dir($nLoc))
                     mkdir($nLoc);
 
+
+
                 $img = $_POST['thumbnail'];
                 $img = str_replace('data:image/png;base64,', '', $img);
                 $img = str_replace(' ', '+', $img);
                 $data = base64_decode($img);
-                $thumbanil = time() . rand(100, 999) . '.png';
+                $thumbanil = time() . rand(100, 999) . '.jpg';
 
                 $file = $nLoc . '/' . $thumbanil;
                 $success = file_put_contents($file, $data);
+
+                $img = \Image::make($file);
+                $img->resize(null, 160, function ($constraint) {
+                    $constraint->aspectRatio();
+                })->save($nLoc . '/min_' . $thumbanil);
 
                 while (true) {
                     $sCode = generateRandomString(10);
@@ -307,7 +315,7 @@ class StreamingController extends Controller
                 else
                     echo json_encode(['status' => 'nok2']);
 
-                $fullInfo = $this->getVideoFullInfo($video);
+                $fullInfo = $this->getVideoFullInfo($video, false);
                 echo json_encode(['status' => 'ok', 'like' => $fullInfo->like, 'disLike' => $fullInfo->disLike, 'commentsCount' => $fullInfo->commentsCount]);
 
             }
@@ -321,11 +329,16 @@ class StreamingController extends Controller
         return;
     }
 
-    private function getVideoFullInfo($video, $comment = false, $samePlace = false)
+    private function getVideoFullInfo($video, $main = false)
     {
         $userLogin = auth()->check();
 
-        $video->pic = \URL::asset('_images/video/' . $video->userId . '/' . $video->thumbnail);
+        $loc = __DIR__ .'/../../../../assets/_images/video/' . $video->userId;
+        if(is_file($loc .'/min_'. $video->thumbnail))
+            $video->pic = \URL::asset('_images/video/' . $video->userId . '/min_' . $video->thumbnail);
+        else
+            $video->pic = \URL::asset('_images/video/' . $video->userId . '/' . $video->thumbnail);
+
         $video->url = route('streaming.show', ['code' => $video->code]);
         $video->username = User::find($video->userId)->username;
         $video->userPic = getUserPic($video->userId);
@@ -335,13 +348,12 @@ class StreamingController extends Controller
         $video->disLike = VideoFeedback::where('videoId', $video->id)->where('like', -1)->count();
         $video->commentsCount = VideoComment::where('videoId', $video->id)->count();
         $video->comments = [];
-        if($comment){
-            $video->comments = [];
-        }
-
         $video->places = [];
 
-        if($samePlace) {
+        if($main){
+            $video->pic = \URL::asset('_images/video/' . $video->userId . '/' . $video->thumbnail);
+            $video->comments = [];
+
             $activityId = Activity::whereName('نظر')->first()->id;
             $places = VideoPlaceRelation::where('videoId', $video->id)->get();
             $result = [];
@@ -373,6 +385,7 @@ class StreamingController extends Controller
             }
             $video->places = $result;
         }
+
 
         $video->uLike = 0;
         if($userLogin){
