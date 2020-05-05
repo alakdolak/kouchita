@@ -62,7 +62,6 @@
         resizeFitImg('resizeImgClass');
     });
     $(window).resize(function(){
-        console.log('in')
         resizeFitImg('resizeImgClass');
     });
 </script>

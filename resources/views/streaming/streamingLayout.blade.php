@@ -88,6 +88,10 @@
             <span></span>
             <span>ذخیره‌شده‌ها</span>
         </div>
+
+        <a href="{{route('streaming.uploadPage')}}" class="addVideoSecHeader">
+            <span>+ افزودن ویدیو</span>
+        </a>
     </div>
 
     @yield('body')
@@ -102,26 +106,7 @@
 <script src="{{URL::asset('js/swiper/swiper.min.js')}}"></script>
 
 <script>
-    function resizeFitImg(_class) {
-        var imgs = $('.' + _class);
-        for(i = 0; i < imgs.length; i++){
-            var img = $(imgs[i]);
-            var imgW = img.width();
-            var imgH = img.height();
-
-            var secW = img.parent().width();
-            var secH = img.parent().height();
-
-            if(imgH < secH){
-                img.css('height', '100%');
-                img.css('width', 'auto');
-            }
-            else if(imgW < secW){
-                img.css('width', '100%');
-                img.css('height', 'auto');
-            }
-        }
-    }
+    resizeFitImg('resizeImgClass');
 
     $(document).ready(function(){
         resizeFitImg('resizeImgClass');

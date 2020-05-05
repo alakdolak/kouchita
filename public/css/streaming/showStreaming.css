@@ -193,6 +193,7 @@
 .moreInfoEachItem {
     display: flex;
     margin: 15px 0;
+    margin-left: 25px;
 }
 
 .mainDivImgMoreInfoItems {
@@ -239,6 +240,7 @@
     font-size: 12px;
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
 
 .moreInfoMainDiv .moreBtn::after,

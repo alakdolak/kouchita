@@ -3,10 +3,10 @@
 <div id="videoSuggestionSample" style="display: none">
     <div id="##id##" class="swiper-slide videoSuggestion">
         <a href="##url##" class="videoSugPicSection">
-            <img src="##img##" class="resizeImgClass videoSugPic">
+            <img src="##pic##" class="resizeImgClass videoSugPic">
             <div class="overPicSug likeOverPic">
                 <div style="display: flex; margin-left: 10px;">
-                    <span class="likeOverPicNum">##dislike##</span>
+                    <span class="likeOverPicNum">##disLike##</span>
                     <span class="DisLikeIcon likeOverPicIcon"></span>
                 </div>
                 <div style="display: flex;">
@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="overPicSug seenOverPic">
-                <span>##see##</span>
+                <span>##seen##</span>
                 <img src="{{URL::asset('images/streaming/eye.png')}}" class="eyeClass">
             </div>
             <div class="playIconDiv">
@@ -25,7 +25,7 @@
         <div class="videoSugInfo">
             <div class="videoSugUserInfo">
                 <a href="##url##" class="videoSugName">
-                    ##name##
+                    ##title##
                 </a>
             </div>
 
@@ -54,12 +54,12 @@
     function createVideoSuggestionDiv(_pack, _destId){
         // _pack = {
         //     id : ,
-        //     name: ,
+        //     title: ,
         //     url : ,
-        //     img : ,
+        //     pic : ,
         //     like : ,
-        //     dislike: ,
-        //     see : ,
+        //     disLike: ,
+        //     seen : ,
         //     userPic : ,
         //     username : ,
         //     time : ,
@@ -73,6 +73,7 @@
                 text = text.replace(re, _pack[i][x]);
             }
             $('#' + _destId).append(text);
+            resizeFitImg('resizeImgClass');
         }
     }
 </script>
