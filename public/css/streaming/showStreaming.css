@@ -69,9 +69,14 @@
 .liveCommentsFirstLine {
     color: #0076a3;
     display: flex;
-    padding: 5px;
+    padding: 5px 0;
+    margin: 0 5px;
     border-bottom: 2px solid #E5E5E5;
     align-items: center;
+}
+
+.liveCommentsOnFS .liveCommentsFirstLine {
+    padding: 7px 0;
 }
 
 .liveCommentsTitle {
@@ -101,6 +106,10 @@
     content: '\E06C';
 }
 
+.liveCommentsOnFS .liveCommentsQuantityIcon:before {
+    font-size: 17px;
+}
+
 .liveCommentsWriterIcon:before {
     font-family: Shazde_Regular2 !important;
     content: '\E06E';
@@ -110,10 +119,13 @@
 .liveCommentsMainDiv {
     max-height: 200px;
     overflow: auto;
+    margin: 0 5px;
+    border-bottom: 2px solid #e5e5e5;
 }
 
 .eachLiveCommentMainDiv {
     display: flex;
+    flex-direction: column;
     align-items: end;
     padding: 5px;
 }
@@ -129,12 +141,19 @@
     font-weight: 600;
 }
 
+.eachLiveCommentTitle {
+    display: flex;
+    width: 100%;
+}
+
 .liveCommentContents {
     text-align: justify;
     color: black;
     font-size: 14px;
-    width: 60%;
-    margin-top: 5px;
+    /*width: 60%;*/
+    /*margin-top: 5px;*/
+    line-height: 1.5;
+    padding: 5px 10px;
 }
 
 .liveComments .commentInputSection {
@@ -148,15 +167,16 @@
 }
 
 .liveComments .commentInput {
-    padding: 2px;
+    padding: 5px;
     font-size: 14px;
     margin-right:5px;
+    overflow: hidden;
 }
 
 .liveComments .commentInputSendButton {
     font-size: 12px;
     font-weight: 600;
-    padding: 3px;
+    padding: 5px;
     border-radius: 5px;
     margin-right: 5px;
 }
@@ -372,8 +392,13 @@
     margin-left: 2%;
 }
 
+.hid {
+    display: none;
+}
+
 .videoContainer {
     position: relative;
+    width: 100%;
 }
 
 .liveCommentsOnFS {
@@ -381,7 +406,7 @@
     top: 15px;
     right: 15px;
     z-index: 1 !important;
-    width: 33.3333%;
+    width: 36%;
 }
 
 .liveCommentsOnFS .videoInfos {

@@ -33,6 +33,10 @@ Route::get('business', function(){
     return view('business');
 });
 
+Route::get('streamingShow', function(){
+    return view('streaming.streamingShow');
+});
+
 
 Route::get('userActivitiesProfile', function(){
     return view('profile.userActivitiesProfile');
@@ -815,3 +819,7 @@ Route::post('webrtcTurn', function (\Illuminate\Http\Request $request){
     dd($request);
 });
 
+Route::get('/broadCastTest', function(){
+    return view('test.test');
+});
+Route::post('sendBroad', 'HomeController@sendBroad')->name('sendBroad');

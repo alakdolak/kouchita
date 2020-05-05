@@ -183,6 +183,7 @@ return [
         Barryvdh\Cors\ServiceProvider::class,
 
         Hekmatinasser\Verta\VertaServiceProvider::class,
+
     ],
 
     /*
@@ -233,6 +234,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Throttle' => GrahamCampbell\Throttle\Facades\Throttle::class,
         'Verta' => Hekmatinasser\Verta\Verta::class,
+        'Pusher' => Pusher\Pusher::class
     ],
 
 ];

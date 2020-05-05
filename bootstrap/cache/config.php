@@ -76,17 +76,19 @@
   ),
   'broadcasting' => 
   array (
-    'default' => 'log',
+    'default' => 'pusher',
     'connections' => 
     array (
       'pusher' => 
       array (
         'driver' => 'pusher',
-        'key' => '',
-        'secret' => '',
-        'app_id' => '',
+        'key' => '8e4c0c95f6f9483f2676',
+        'secret' => 'fbfc1b8f7a0bbffa6829',
+        'app_id' => '989285',
         'options' => 
         array (
+          'cluster' => 'eu',
+          'encrypted' => true,
         ),
       ),
       'redis' => 
@@ -188,6 +190,7 @@
       'View' => 'Illuminate\\Support\\Facades\\View',
       'Throttle' => 'GrahamCampbell\\Throttle\\Facades\\Throttle',
       'Verta' => 'Hekmatinasser\\Verta\\Verta',
+      'Pusher' => 'Pusher\\Pusher',
     ),
   ),
   'cache' => 

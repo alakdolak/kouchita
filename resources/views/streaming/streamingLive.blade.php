@@ -3,6 +3,14 @@
 @section('head')
     <link rel="stylesheet" href="{{URL::asset('css/streaming/showStreaming.css')}}">
 
+    <link href="https://vjs.zencdn.net/7.7.5/video-js.css" rel="stylesheet" />
+
+    <!-- If you'd like to support IE8 (for Video.js versions prior to v7) -->
+    <script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
+
+    <script src="https://vjs.zencdn.net/7.7.5/video.js"></script>
+
+
     <style>
         video{
             width: 100%;
@@ -18,6 +26,19 @@
             margin-bottom: 10px;
             width: 49%;
         }
+
+        .video_1-dimensions {
+            width: 100%;
+            height: 442px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-js .vjs-big-play-button {
+            position: relative;
+        }
+
     </style>
 @endsection
 
@@ -65,12 +86,14 @@
 
                 <div class="liveCommentsMainDiv">
                     <div class="eachLiveCommentMainDiv">
-                        <div class="userPicDiv">
-                            <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
-                        </div>
-                        <div class="mainUserInfos">
-                            <div class="mainUseruserName">
-                                shazdesina
+                        <div class="eachLiveCommentTitle">
+                            <div class="userPicDiv">
+                                <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
+                            </div>
+                            <div class="mainUserInfos">
+                                <div class="mainUseruserName">
+                                    shazdesina
+                                </div>
                             </div>
                         </div>
                         <div class="liveCommentContents">
@@ -78,12 +101,14 @@
                         </div>
                     </div>
                     <div class="eachLiveCommentMainDiv">
-                        <div class="userPicDiv">
-                            <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
-                        </div>
-                        <div class="mainUserInfos">
-                            <div class="mainUseruserName">
-                                shazdesina
+                        <div class="eachLiveCommentTitle">
+                            <div class="userPicDiv">
+                                <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
+                            </div>
+                            <div class="mainUserInfos">
+                                <div class="mainUseruserName">
+                                    shazdesina
+                                </div>
                             </div>
                         </div>
                         <div class="liveCommentContents">
@@ -91,12 +116,14 @@
                         </div>
                     </div>
                     <div class="eachLiveCommentMainDiv">
-                        <div class="userPicDiv">
-                            <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
-                        </div>
-                        <div class="mainUserInfos">
-                            <div class="mainUseruserName">
-                                shazdesina
+                        <div class="eachLiveCommentTitle">
+                            <div class="userPicDiv">
+                                <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
+                            </div>
+                            <div class="mainUserInfos">
+                                <div class="mainUseruserName">
+                                    shazdesina
+                                </div>
                             </div>
                         </div>
                         <div class="liveCommentContents">
@@ -104,12 +131,14 @@
                         </div>
                     </div>
                     <div class="eachLiveCommentMainDiv">
-                        <div class="userPicDiv">
-                            <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
-                        </div>
-                        <div class="mainUserInfos">
-                            <div class="mainUseruserName">
-                                shazdesina
+                        <div class="eachLiveCommentTitle">
+                            <div class="userPicDiv">
+                                <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
+                            </div>
+                            <div class="mainUserInfos">
+                                <div class="mainUseruserName">
+                                    shazdesina
+                                </div>
                             </div>
                         </div>
                         <div class="liveCommentContents">
@@ -117,12 +146,14 @@
                         </div>
                     </div>
                     <div class="eachLiveCommentMainDiv">
-                        <div class="userPicDiv">
-                            <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
-                        </div>
-                        <div class="mainUserInfos">
-                            <div class="mainUseruserName">
-                                shazdesina
+                        <div class="eachLiveCommentTitle">
+                            <div class="userPicDiv">
+                                <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
+                            </div>
+                            <div class="mainUserInfos">
+                                <div class="mainUseruserName">
+                                    shazdesina
+                                </div>
                             </div>
                         </div>
                         <div class="liveCommentContents">
@@ -235,14 +266,15 @@
             </div>
 
         </div>
+
         <div class="container mainShowBase">
 
             <div class="showVideo">
                 <div id="46671937617" class="videoContainer">
-                    <video controls>
+                    <video id="video_1" class="video-js playads" video-url="http://vjs.zencdn.net/v/oceans.mp4" mimetype="video/mp4" controls controlsList="nodownload" data-setup=''>
                         <source src="{{URL::asset('videos/live.mp4')}}">
                     </video>
-                    <div class="liveCommentsOnFS">
+                    <div class="liveCommentsOnFS display-none">
 
                         <div class="videoInfos">
                             <div class="videoInfosVideoName">
@@ -288,12 +320,14 @@
 
                             <div class="liveCommentsMainDiv">
                                 <div class="eachLiveCommentMainDiv">
-                                    <div class="userPicDiv">
-                                        <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
-                                    </div>
-                                    <div class="mainUserInfos">
-                                        <div class="mainUseruserName">
-                                            shazdesina
+                                    <div class="eachLiveCommentTitle">
+                                        <div class="userPicDiv">
+                                            <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
+                                        </div>
+                                        <div class="mainUserInfos">
+                                            <div class="mainUseruserName">
+                                                shazdesina
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="liveCommentContents">
@@ -301,12 +335,14 @@
                                     </div>
                                 </div>
                                 <div class="eachLiveCommentMainDiv">
-                                    <div class="userPicDiv">
-                                        <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
-                                    </div>
-                                    <div class="mainUserInfos">
-                                        <div class="mainUseruserName">
-                                            shazdesina
+                                    <div class="eachLiveCommentTitle">
+                                        <div class="userPicDiv">
+                                            <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
+                                        </div>
+                                        <div class="mainUserInfos">
+                                            <div class="mainUseruserName">
+                                                shazdesina
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="liveCommentContents">
@@ -314,12 +350,14 @@
                                     </div>
                                 </div>
                                 <div class="eachLiveCommentMainDiv">
-                                    <div class="userPicDiv">
-                                        <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
-                                    </div>
-                                    <div class="mainUserInfos">
-                                        <div class="mainUseruserName">
-                                            shazdesina
+                                    <div class="eachLiveCommentTitle">
+                                        <div class="userPicDiv">
+                                            <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
+                                        </div>
+                                        <div class="mainUserInfos">
+                                            <div class="mainUseruserName">
+                                                shazdesina
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="liveCommentContents">
@@ -327,12 +365,14 @@
                                     </div>
                                 </div>
                                 <div class="eachLiveCommentMainDiv">
-                                    <div class="userPicDiv">
-                                        <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
-                                    </div>
-                                    <div class="mainUserInfos">
-                                        <div class="mainUseruserName">
-                                            shazdesina
+                                    <div class="eachLiveCommentTitle">
+                                        <div class="userPicDiv">
+                                            <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
+                                        </div>
+                                        <div class="mainUserInfos">
+                                            <div class="mainUseruserName">
+                                                shazdesina
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="liveCommentContents">
@@ -340,12 +380,14 @@
                                     </div>
                                 </div>
                                 <div class="eachLiveCommentMainDiv">
-                                    <div class="userPicDiv">
-                                        <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
-                                    </div>
-                                    <div class="mainUserInfos">
-                                        <div class="mainUseruserName">
-                                            shazdesina
+                                    <div class="eachLiveCommentTitle">
+                                        <div class="userPicDiv">
+                                            <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
+                                        </div>
+                                        <div class="mainUserInfos">
+                                            <div class="mainUseruserName">
+                                                shazdesina
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="liveCommentContents">
@@ -569,6 +611,56 @@
                     spaceBetween: 20,
                 }
             }
+        });
+    </script>
+
+    <script>
+        $(document).ready(function(){
+            var videotag = $('.playads');
+            var myPlayer = videojs('video_1');
+
+
+            $(".liveCommentsOnFS")
+                .appendTo($('#video_1'));
+
+            // myPlayer.FullscreenToggle()
+
+            // show advertisement label while play advertisement
+            myPlayer.on('fullscreenchange', function() {
+                // if(myPlayer.hasClass("playads")){
+                    $('.liveCommentsOnFS').toggle();
+                // }
+            });
+            //
+            // myPlayer.on('fullscreenchange', function () {
+            //     console.log('test');
+            // });
+            // // Stop from seeking while playing advertisement
+            // myPlayer.on("seeking", function(event) {
+            //     if (currentTime < myPlayer.currentTime() && myPlayer.hasClass("playads")) {
+            //         myPlayer.currentTime(currentTime);
+            //     }
+            // });
+            // myPlayer.on("seeked", function(event) {
+            //     if (currentTime < myPlayer.currentTime() && myPlayer.hasClass("playads")) {
+            //         myPlayer.currentTime(currentTime);
+            //     }
+            // });
+            // setInterval(function() {
+            //     if (!myPlayer.paused() && myPlayer.hasClass("playads")) {
+            //         currentTime = myPlayer.currentTime();
+            //     }
+            // }, 1000);
+            //
+            // // Hide Advertisement label and change data-src of player to play actual video
+            // myPlayer.on('ended', function() {
+            //     if(this.hasClass("playads")){
+            //         this.src({type: videotag.attr('mimetype'), src: videotag.attr('video-url')});
+            //         this.play();
+            //         this.removeClass('playads');
+            //         $('.advertisement').addClass('hid');
+            //     }
+            // });
         });
     </script>
 
