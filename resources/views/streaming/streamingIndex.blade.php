@@ -15,6 +15,16 @@
         .videoSuggestion{
             margin: 10px 5px;
         }
+        .allVideo{
+            z-index: 1;
+            position: absolute;
+            left: -2px;
+            top: -20px;
+            padding: 10px;
+            background-color: #3a3a3a;
+            cursor: pointer;
+            color: #fcc156;
+        }
     </style>
 @endsection
 
@@ -73,22 +83,19 @@
                    آخرین ویدیو ها
                 </div>
                 <div class="headerWithLineLine"></div>
+
             </div>
             <div class="otherSectionBody">
+                <div class="videoSuggestionSwiper swiper-container">
 
-                <div id="lastVideosDiv" class="videoList">
-                    {{--fill with js lastVideoSuggestion()--}}
+                    <div id="lastVideosDiv" class="swiper-wrapper">
+{{--                        fill with js lastVideoSuggestion()--}}
+{{--                        streaming.videoSuggestion--}}
+                    </div>
+
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
                 </div>
-
-{{--                <div class="videoSuggestionSwiper swiper-container">--}}
-
-{{--                    <div id="lastVideosDiv" class="swiper-wrapper">--}}
-{{--                        --}}{{--fill with js lastVideoSuggestion()--}}
-{{--                    </div>--}}
-
-{{--                    <div class="swiper-button-next"></div>--}}
-{{--                    <div class="swiper-button-prev"></div>--}}
-{{--                </div>--}}
             </div>
         </div>
 
@@ -112,6 +119,34 @@
             </div>
         </div>
 
+        @foreach($videoCategory as $cat)
+            @if(count($cat->video) > 0)
+                <div class="otherSection">
+                    <div class="headerWithLine">
+                        <div class="headerWithLineText">
+                            {{$cat->name}}
+                        </div>
+                        <div class="headerWithLineLine"></div>
+
+                        <div class="allVideo">
+                            مشاهده همه
+                        </div>
+                    </div>
+                    <div class="otherSectionBody">
+                        <div class="videoSuggestionSwiper swiper-container">
+
+                            <div id="catVideoDiv_{{$cat->id}}" class="swiper-wrapper">
+                                {{--fill with js topVideoSuggenstion()--}}
+                            </div>
+
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
+                        </div>
+                    </div>
+                </div>
+            @endif
+        @endforeach
+
     </div>
 
 @endsection
@@ -121,78 +156,29 @@
 
     <script>
         let nonPic = '{{URL::asset('_images/nopic/blank.jpg')}}';
-        let videos = {!! $videos !!};
+        let lastVideos = {!! $lastVideos !!};
+        let videoCategory = {!! $videoCategory !!};
 
-        function lastVideoSuggestion(){
-            let pack = [];
-            for(let i = 0; i < videos.length; i++){
-                let p = {
-                    id : videos[i]['id'],
-                    name: videos[i]['title'],
-                    url : videos[i]['url'],
-                    img : videos[i]['pic'],
-                    like: 0,
-                    dislike: 0,
-                    see : videos[i]['seen'],
-                    userPic : nonPic,
-                    username : videos[i]['username'],
-                    time : '10 ساعت قبل',
-                };
-                pack.push(p);
+
+        createVideoSuggestionDiv(lastVideos, 'lastVideosDiv');
+
+        // function topVideoSuggenstion(){
+        //     createVideoSuggestionDiv(pack, 'topVideosDiv');
+        // }
+        // topVideoSuggenstion();
+
+        function categoryVideoSuggestion(){
+            for(let j = 0; j < videoCategory.length; j++){
+                createVideoSuggestionDiv(videoCategory[j].video, 'catVideoDiv_' + videoCategory[j]['id']);
             }
-
-            createVideoSuggestionDiv(pack, 'lastVideosDiv');
         }
-        lastVideoSuggestion();
-
-        function topVideoSuggenstion(){
-            let pack = [
-                {
-                    id : 'video1',
-                    name: 'صخبت با مخمد جواد',
-                    url : '#',
-                    img : 'https://static.koochita.com/_images/posts/5/mainPic.jpg',
-                    like: 100,
-                    dislike: 3,
-                    see : 245,
-                    userPic : nonPic,
-                    username : 'shazesina',
-                    time : '10 ساعت قبل',
-                },
-                {
-                    id : 'video1',
-                    name: 'صخبت با مخمد جواد',
-                    url : '#',
-                    img : 'https://static.koochita.com/_images/posts/91/1586792425-mainPic.jpg',
-                    like: 100,
-                    dislike: 3,
-                    see : 245,
-                    userPic : nonPic,
-                    username : 'shazesina',
-                    time : '10 ساعت قبل',
-                },
-                {
-                    id : 'video1',
-                    name: 'صخبت با مخمد جواد',
-                    url : '#',
-                    img : 'https://static.koochita.com/_images/posts/45/1585227039-mainPic.jpg',
-                    like: 100,
-                    dislike: 3,
-                    see : 245,
-                    userPic : nonPic,
-                    username : 'shazesina',
-                    time : '10 ساعت قبل',
-                },
-            ]
-            createVideoSuggestionDiv(pack, 'topVideosDiv');
-        }
-        topVideoSuggenstion();
+        categoryVideoSuggestion();
 
         var swipersuggestion = new Swiper('.videoSuggestionSwiper', {
             slidesPerGroup: 1,
-            // width: 300,
+            slidesPerView: 4,
             loop: true,
-            loopFillGroupWithBlank: true,
+            // loopFillGroupWithBlank: true,
             navigation: {
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
@@ -200,19 +186,19 @@
             breakpoints: {
                 650: {
                     slidesPerView: 1,
-                    spaceBetween: 0,
+                    // spaceBetween: 0,
                 },
                 860: {
                     slidesPerView: 2,
-                    spaceBetween: 20,
+                    // spaceBetween: 20,
                 },
                 1200: {
                     slidesPerView: 3,
-                    spaceBetween: 20,
+                    // spaceBetween: 20,
                 },
                 10000: {
                     slidesPerView: 4,
-                    spaceBetween: 20,
+                    // spaceBetween: 20,
                 }
             }
         });

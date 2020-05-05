@@ -16,14 +16,21 @@ $('#videoTags').dropdown({
         },
         onResponse: (response) => {
             let result = [];
-            if(response.tags.length == 0){
+            if(response.same == 0) {
                 result = [{
-                    "name" : response.send,
-                    "value" : 'new_' + response.send,
-                    "text" : response.send
+                    "name": response.send,
+                    "value": 'new_' + response.send,
+                    "text": response.send
                 }]
             }
             else{
+                result = [{
+                    "name": response.same.name,
+                    "value": 'new_' + response.same.id,
+                    "text": response.same.name
+                }]
+            }
+            if(response.tags.length != 0){
                 for(let i = 0; i < response.tags.length; i++){
                     result.push({
                         "name" : response.tags[i].name,
@@ -261,7 +268,7 @@ function storeInfoVideos(_state){
         openLoading();
         $.ajax({
             type: 'post',
-            url: storeVideoURL,
+            url: storeVideoInfoURL,
             data: settingFormData,
             processData: false,
             contentType: false,

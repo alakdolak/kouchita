@@ -728,8 +728,11 @@ Route::middleware(['web'])->group(function (){
         Route::get('streaming/uploadPage', 'StreamingController@uploadVideoPage')->name('streaming.uploadPage');
 
         Route::post('streaming/storeVideo', 'StreamingController@storeVideo')->name('streaming.storeVideo');
-    });
 
+        Route::post('streaming/storeVideoInfo', 'StreamingController@storeVideoInfo')->name('streaming.storeVideoInfo');
+
+        Route::post('streaming/setVideoFeedback', 'StreamingController@setVideoFeedback')->name('streaming.setVideoFeedback');
+    });
 
     Route::get('/importVideoToDB', 'StreamingController@importVideoToDB');
 

@@ -16,6 +16,21 @@ body{
     justify-content: center;
     align-items: center;
 }
+.addVideoSecHeader{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 0;
+    margin-right: auto;
+    background: red;
+    padding: 10px;
+    border-radius: 40px;
+    cursor: pointer;
+    color: white;
+}
+.addVideoSecHeader:hover{
+    color: white;
+}
 .secHeaderTabs:hover{
     border-bottom: solid 3px red;
     padding-bottom: 12px;
@@ -104,4 +119,11 @@ body{
 .TvPngClass{
     width: 20px;
     margin-left: 5px;
+}
+
+.fullLikeColor{
+    color: red;
+}
+.fullDisLikeColor{
+    color: darkred;
 }

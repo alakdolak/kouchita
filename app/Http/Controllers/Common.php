@@ -1037,7 +1037,9 @@ function getReviewPicsURL($review){
 }
 
 function getUserPic($id = 0){
+
     $user = User::find($id);
+//    dd($user);
     if($user != null){
         if(strpos($user->picture, 'http') !== false)
             return $user->picture;

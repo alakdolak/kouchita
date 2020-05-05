@@ -72,7 +72,10 @@ class HomeController extends Controller
         if($place == null)
             return \redirect(\url('/'));
 
-        return \redirect(url('show-place-details/' . $kindPlace->fileName . '/' . $place->slug));
+        if($place->slug != null)
+            return \redirect(url('show-place-details/' . $kindPlace->fileName . '/' . $place->slug));
+        else
+            return \redirect(url('show-place-details/' . $kindPlace->fileName . '/' . $place->id));
     }
 
     public function mainSliderStore(Request $request)

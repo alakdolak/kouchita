@@ -147,6 +147,7 @@
         let getTagsURL = "{{route('getTags')}}";
         let totalSearchURL = "{{route('totalSearch')}}";
         let storeVideoURL = '{{route("streaming.storeVideo")}}';
+        let storeVideoInfoURL = '{{route("streaming.storeVideoInfo")}}';
         let csrfToken = "{{csrf_token()}}";
 
         let thumbnail = '';

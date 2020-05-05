@@ -676,7 +676,7 @@ class AjaxController extends Controller {
         $tags = [];
 
         if(strlen($tag) != 0 ) {
-            $similar = Tag::where('name', 'LIKE', '%' . $tag . '%')->get();
+            $similar = Tag::where('name', 'LIKE', '%' . $tag . '%')->where('name', '!=', $tag)->get();
 
             foreach ($similar as $t) {
                 array_push($tags, [
@@ -684,7 +684,17 @@ class AjaxController extends Controller {
                     'id' => $t->id
                 ]);
             }
-            echo json_encode(['tags' => $tags, 'send' => $tag]);
+
+            $same = Tag::where('name', $tag)->first();
+            if($same == null)
+                $same = 0;
+            else{
+                $same = [
+                    'name' => $same->name,
+                    'id' => $same->id
+                ];
+            }
+            echo json_encode(['tags' => $tags, 'send' => $tag, 'same' => $same]);
         }
 
         return;
