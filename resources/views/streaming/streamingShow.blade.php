@@ -30,7 +30,7 @@
             </div>
         </div>
 
-            <div class="toolSection">
+        <div class="toolSection">
                 <div class="toolSectionButtons">
                     <div class="toolSectionButtonsCircle">
                         <span class="DisLikeIcon"></span>
@@ -54,23 +54,24 @@
                 <div class="toolSectionInfos">
                     <div class="toolSectionInfosTab">
                         <span class="CommentIcon commentInfoTab"></span>
-                        <span class="toolSectionInfosTabNumber">100,000</span>
+                        <span class="toolSectionInfosTabNumber">{{$video->commentsCount}}</span>
                     </div>
                     <div class="toolSectionInfosTab">
                         <span class="LikeIcon likeInfoTab"></span>
-                        <span class="toolSectionInfosTabNumber">100</span>
+                        <span class="toolSectionInfosTabNumber">{{$video->like}}</span>
                     </div>
                     <div class="toolSectionInfosTab">
                         <span class="DisLikeIcon disLikeInfoTab"></span>
-                        <span class="toolSectionInfosTabNumber">100,000,000</span>
+                        <span class="toolSectionInfosTabNumber">{{$video->disLike}}</span>
                     </div>
                     <div class="toolSectionInfosTab">
                         <i class="fa fa-eye"></i>
-                        {{--                    <span class="ViewIcon viewInfoTab"></span>--}}
-                        <span class="toolSectionInfosTabNumber">100</span>
+                        <img src="{{URL::asset('images/streaming/eye.png')}}" class="eyeClass" style="width: 25px">
+                        <span class="toolSectionInfosTabNumber">{{$video->seen}}</span>
                     </div>
                 </div>
             </div>
+
 
         <div class="descriptionSection">
             <div class="headerWithLine">
@@ -307,7 +308,7 @@
                 </div>
             </div>
 
-            <div class="otherSection">
+        <div class="otherSection">
                 <div class="headerWithLine">
                     <div class="headerWithLineText">
                         شاید جالب باشد
@@ -330,7 +331,6 @@
                 </div>
             </div>
 
-        </div>
     </div>
 
 @endsection
