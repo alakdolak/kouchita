@@ -95,6 +95,7 @@ $('#videoPlaceRel').dropdown({
     }
 });
 
+let storeVideoAjax;
 function storeVideo(_file){
 
     window.URL = window.URL || window.webkitURL;
@@ -123,11 +124,11 @@ function storeVideo(_file){
                                 setTimeout(function(){
                                     snapImage('showThumbnail3');
                                     window.URL.revokeObjectURL(video.src);
-                                }, 200)
+                                }, 1000)
                             }
-                        }, 200);
+                        }, 1000);
                     }
-                }, 200);
+                }, 1000);
             }
         });
 
@@ -167,7 +168,7 @@ function storeVideo(_file){
     formData.append('kind', 'video');
     formData.append('_token', csrfToken);
 
-    $.ajax({
+    storeVideoAjax = $.ajax({
         type: 'post',
         url: storeVideoURL,
         data: formData,
@@ -276,17 +277,18 @@ function storeInfoVideos(_state){
                 try{
                     response = JSON.parse(response);
                     if(response['status'] == 'ok')
-                        alert('ویدیوی شما با موفقیت ثبت شد');
+                        location.href = response['url'];
                     else{
                         console.log(response);
+                        closeLoading();
                         errorUploadSettingVideo();
                     }
                 }
                 catch(e){
                     console.log(e);
+                    closeLoading();
                     errorUploadSettingVideo();
                 }
-                closeLoading();
             },
             error: function(err){
                 console.log(err);
@@ -335,4 +337,12 @@ function errorUploadSettingVideo(){
 function inputVideo(_input){
     if(_input.files[0]['type'].includes('video/'))
         storeVideo(_input.files[0]);
+}
+
+function cancelUploadVideo(){
+    storeVideoAjax.abort();
+    $('#videoFile').val('');
+
+    $('#uploadVideoDiv').show();
+    $('#videoSetting').hide();
 }

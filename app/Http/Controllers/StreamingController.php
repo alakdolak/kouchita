@@ -245,7 +245,9 @@ class StreamingController extends Controller
                     }
                 }
 
-                echo json_encode(['status' => 'ok']);
+                $url = route('streaming.show', ['code' => $newVideo->code]);
+
+                echo json_encode(['status' => 'ok', 'url' => $url]);
             } else
                 echo json_encode(['status' => 'nok1']);
         } else
