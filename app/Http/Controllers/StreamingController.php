@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\models\Activity;
+use App\models\Amaken;
 use App\models\Cities;
+use App\models\CityPic;
 use App\models\Place;
 use App\models\State;
 use App\models\Video;
@@ -378,11 +380,47 @@ class StreamingController extends Controller
                         $place->placeReviews = \DB::select('select count(*) as countNum from log, comment WHERE logId = log.id and status = 1 and placeId = ' . $place->id .
                             ' and kindPlaceId = ' . $kindPlace->id . ' and activityId = ' . $activityId)[0]->countNum;
 
+                        $place->kindPlaceId = $kindPlace->id;
+
                         array_push($result, $place);
                     }
                 }
                 else {
+                    if($place->kindPlaceId == -1){
+                        $place = State::find($place->placeId);
+                        if($place != null){
+                            $place->placePic = null;
+                            $cities = Cities::where('stateId', $place->id)->get();
+                            foreach ($cities as $city){
+                                $p = getCityPic($city->id);
+                                if($p != null){
+                                    $place->placePic = $p;
+                                    break;
+                                }
+                            }
+                            if($place->placePic == null)
+                                $place->placePic = URL::asset('_images/nopic/blank.jpg');
 
+                            $place->kindPlaceId = -1;
+                            $place->url = route('cityPage', ['kind' => 'state', 'city' => $place->name]);
+                            $place->name = 'استان '  . $place->name;
+                            array_push($result, $place);
+                        }
+                    }
+                    else{
+                        $place = Cities::find($place->placeId);
+                        if($place != null){
+                            $place->placePic = getCityPic($place->id);
+                            if($place->placePic == null)
+                                $place->placePic = URL::asset('_images/nopic/blank.jpg');
+
+                            $place->placeState = State::find($place->stateId)->name;
+                            $place->kindPlaceId = 0;
+                            $place->url = route('cityPage', ['kind' => 'city', 'city' => $place->name]);
+                            $place->name = 'شهر '  . $place->name;
+                            array_push($result, $place);
+                        }
+                    }
                 }
             }
             $video->places = $result;
