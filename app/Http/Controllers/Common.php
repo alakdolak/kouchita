@@ -4,6 +4,7 @@ use App\models\ActivationCode;
 use App\models\Activity;
 use App\models\Amaken;
 use App\models\Cities;
+use App\models\CityPic;
 use App\models\DefaultPic;
 use App\models\Hotel;
 use App\models\Level;
@@ -1128,6 +1129,53 @@ function storeNewTag($tag){
     }
     else
         return false;
+}
+
+function getCityPic($cityId){
+    $resultPic = null;
+    $city = Cities::find($cityId);
+    if($cityId != null) {
+        $loc = __DIR__ .'/../../../../assets/_images/city/' . $city->id;
+
+        if($city->image == null){
+            $pics = CityPic::where("cityId", $city->ic)->get();
+            if(count($pics) != 0) {
+                foreach ($pics as $pic) {
+                    if(is_file($loc . '/' . $pic->pic)) {
+                        $resultPic = \URL::asset('_images/city/' . $city->id . '/' . $pic->pic);
+                        break;
+                    }
+                }
+            }
+            else{
+                $seenActivity = Activity::whereName('مشاهده')->first();
+                $ala = Amaken::where('cityId', $cityId)->pluck('id')->toArray();
+                $mostSeen = [];
+                if (count($ala) != 0)
+                    $mostSeen = DB::select('SELECT placeId, COUNT(id) as seen FROM log WHERE activityId = ' . $seenActivity->id . ' AND kindPlaceId = 1 AND placeId IN (' . implode(",", $ala) . ') GROUP BY placeId ORDER BY seen DESC');
+
+                if (count($mostSeen) != 0) {
+                    foreach ($mostSeen as $item) {
+                        $p = Amaken::find($item->placeId);
+                        $location = __DIR__ . '/../../../../assets/_images/amaken/' . $p->file . '/s-' . $p->picNumber;
+                        if (file_exists($location)) {
+                            $resultPic = URL::asset('_images/amaken/' . $p->file . '/s-' . $p->picNumber);
+                            break;
+                        }
+                    }
+//                    if ($resultPic == null || $resultPic == '')
+//                        $resultPic = URL::asset('_images/nopic/blank.jpg');
+                }
+//                else
+//                    $resultPic = URL::asset('_images/nopic/blank.jpg');
+            }
+        }
+        else
+            $resultPic = \URL::asset('_images/city/' . $city->id . '/' . $city->image);
+
+    }
+
+    return $resultPic;
 }
 
 //    http://image.intervention.io/

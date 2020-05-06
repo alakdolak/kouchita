@@ -21,6 +21,14 @@
     align-items: center;
     font-size: 20px;
     height: 300px;
+    flex-direction: column;
+}
+.clickUpload{
+    background: white;
+    color: #3a3a3a;
+    padding: 10px;
+    border-radius: 50px;
+    margin-top: 15px;
 }
 
 .videoSetting{
@@ -48,7 +56,16 @@
 }
 .progressStatus{
     color: #4dc7bc;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+.cancelUpload{
+    padding: 10px;
+    background: red;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
 }
 .progressBar{
     width: 100%;

@@ -11,6 +11,7 @@
         }
         .moreVideoPlaces{
             display: none;
+            flex-wrap: wrap;
         }
     </style>
 @endsection
@@ -66,35 +67,41 @@
                         @for($i = 0; $i < 4 && $i < count($video->places); $i++)
                             <div class="moreInfoEachItem">
                                 <a href="{{$video->places[$i]->url}}" target="_blank" class="mainDivImgMoreInfoItems">
-                                    <img src="{{$video->places[$i]->placePic}}" class="resizeImgClass" style="width: 100%">
+                                    <img src="{{$video->places[$i]->placePic}}" style="width: 100%">
                                 </a>
                                 <div class="moreInfoItemsDetails">
                                     <a href="{{$video->places[$i]->url}}" target="_blank" class="placeName">
                                         {{$video->places[$i]->name}}
                                     </a>
-                                    <div class="placeRates">
-                                        <div class="rating_and_popularity">
-                                                <span class="header_rating">
-                                                   <div class="rs rating" rel="v:rating">
-                                                       <div class="prw_rup prw_common_bubble_rating overallBubbleRating float-left">
-                                                           <span class="ui_bubble_rating bubble_{{$video->places[$i]->placeRate}}0 font-size-16" property="ratingValue"></span>
+                                    @if($video->places[$i]->kindPlaceId > 0)
+                                        <div class="placeRates">
+                                            <div class="rating_and_popularity">
+                                                    <span class="header_rating">
+                                                       <div class="rs rating" rel="v:rating">
+                                                           <div class="prw_rup prw_common_bubble_rating overallBubbleRating float-left">
+                                                               <span class="ui_bubble_rating bubble_{{$video->places[$i]->placeRate}}0 font-size-16" property="ratingValue"></span>
+                                                           </div>
                                                        </div>
-                                                   </div>
-                                                </span>
-                                            <span class="header_popularity popIndexValidation" id="scoreSpanHeader">
+                                                    </span>
+                                                <span class="header_popularity popIndexValidation" id="scoreSpanHeader">
                                                     <a>
                                                         {{$video->places[$i]->placeReviews}}
                                                         نقد
                                                     </a>
                                                 </span>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="placeState">استان:
-                                        <span>{{$video->places[$i]->placeState}}</span>
-                                    </div>
-                                    <div class="placeCity">شهر:
-                                        <span>{{$video->places[$i]->placeCity}}</span>
-                                    </div>
+                                    @endif
+                                    @if($video->places[$i]->kindPlaceId > -1)
+                                        <div class="placeState">استان:
+                                            <span>{{$video->places[$i]->placeState}}</span>
+                                        </div>
+                                    @endif
+                                    @if($video->places[$i]->kindPlaceId > 0)
+                                        <div class="placeCity">شهر:
+                                            <span>{{$video->places[$i]->placeCity}}</span>
+                                        </div>
+                                    @endif
 
                                 </div>
                             </div>
@@ -105,35 +112,42 @@
                                 @for($i = 4; $i < count($video->places); $i++)
                                     <div class="moreInfoEachItem">
                                         <div class="mainDivImgMoreInfoItems">
-                                            <img src="{{$video->places[$i]->placePic}}" class="resizeImgClass" style="width: 100%">
+                                            <img src="{{$video->places[$i]->placePic}}" style="width: 100%">
                                         </div>
                                         <div class="moreInfoItemsDetails">
                                             <a href="{{$video->places[$i]->url}}" class="placeName">
                                                 {{$video->places[$i]->name}}
                                             </a>
-                                            <div class="placeRates">
-                                                <div class="rating_and_popularity">
-                                                <span class="header_rating">
-                                                   <div class="rs rating" rel="v:rating">
-                                                       <div class="prw_rup prw_common_bubble_rating overallBubbleRating float-left">
-                                                           <span class="ui_bubble_rating bubble_{{$video->places[$i]->placeRate}}0 font-size-16" property="ratingValue"></span>
+
+                                            @if($video->places[$i]->kindPlaceId > 0)
+                                                <div class="placeRates">
+                                                    <div class="rating_and_popularity">
+                                                    <span class="header_rating">
+                                                       <div class="rs rating" rel="v:rating">
+                                                           <div class="prw_rup prw_common_bubble_rating overallBubbleRating float-left">
+                                                               <span class="ui_bubble_rating bubble_{{$video->places[$i]->placeRate}}0 font-size-16" property="ratingValue"></span>
+                                                           </div>
                                                        </div>
-                                                   </div>
-                                                </span>
-                                                    <span class="header_popularity popIndexValidation" id="scoreSpanHeader">
+                                                    </span>
+                                                        <span class="header_popularity popIndexValidation" id="scoreSpanHeader">
                                                     <a>
                                                         {{$video->places[$i]->placeReviews}}
                                                         نقد
                                                     </a>
                                                 </span>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="placeState">استان:
-                                                <span>{{$video->places[$i]->placeState}}</span>
-                                            </div>
-                                            <div class="placeCity">شهر:
-                                                <span>{{$video->places[$i]->placeCity}}</span>
-                                            </div>
+                                            @endif
+                                            @if($video->places[$i]->kindPlaceId > -1)
+                                                <div class="placeState">استان:
+                                                    <span>{{$video->places[$i]->placeState}}</span>
+                                                </div>
+                                            @endif
+                                            @if($video->places[$i]->kindPlaceId > 0)
+                                                <div class="placeCity">شهر:
+                                                    <span>{{$video->places[$i]->placeCity}}</span>
+                                                </div>
+                                            @endif
 
                                         </div>
                                     </div>
@@ -590,7 +604,7 @@
                 $(_element).text('بیشتر');
             }
         }
-        resizeFitImg('resizeImgClass');
+        // resizeFitImg('resizeImgClass');
     </script>
 
 @endsection

@@ -191,6 +191,7 @@
 }
 
 .moreInfoEachItem {
+    width: 270px;
     display: flex;
     margin: 15px 0;
     margin-left: 25px;

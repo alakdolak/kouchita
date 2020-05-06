@@ -34,9 +34,17 @@
         <input type="file" id="videoFile" accept="video/*" style="display: none" onchange="inputVideo(this)">
         <label for="videoFile" id="uploadVideoDiv" class="uploadDiv" style="display: block">
             <div class="row" style="width: 100%; margin: 0">
-                <div class="col-md-6"></div>
-                <div class="col-md-6 uploadText" >
-                    ویدیو خود را در اینجا قرار دهید
+{{--                <div class="col-md-6"></div>--}}
+                <div class="col-md-12 uploadText" >
+                    <div>
+                        ویدیو خود را در اینجا قرار دهید
+                    </div>
+                    <div style="font-size: 15px; font-weight: 500; margin-top: 16px;">
+                        و یا
+                    </div>
+                    <div class="clickUpload">
+                        کلیک کنید
+                    </div>
                 </div>
             </div>
         </label>
@@ -50,12 +58,17 @@
                     </div>
                 </div>
                 <div class="col-md-8 progressDiv">
-                    <div id="progressStatus" class="progressStatus">
-                        ویدیو شما در حال بارگذاری می باشد
+                    <div class="progressStatus">
+                        <div id="progressStatus">
+                            ویدیو شما در حال بارگذاری می باشد
+                        </div>
+                        <div class="cancelUpload" onclick="cancelUploadVideo()">
+                            لغو آپلود
+                        </div>
                     </div>
                     <div class="progressBar">
                         <div id="progressColor" class="progressColor"></div>
-                        <div id="progressText" class="progressText">10%</div>
+                        <div id="progressText" class="progressText">0%</div>
                     </div>
                 </div>
             </div>
