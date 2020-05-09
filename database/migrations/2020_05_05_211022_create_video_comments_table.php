@@ -15,10 +15,12 @@ class CreateVideoCommentsTable extends Migration
     {
         Schema::create('videoComments', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('userId');
             $table->unsignedInteger('videoId');
             $table->unsignedInteger('parent')->nullable();
             $table->string('comment');
             $table->tinyInteger('haveAns')->nullable();
+            $table->tinyInteger('confirm')->default(0);
             $table->timestamps();
         });
     }

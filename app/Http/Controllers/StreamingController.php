@@ -22,6 +22,17 @@ use Illuminate\Http\Request;
 
 class StreamingController extends Controller
 {
+    public function __construct()
+    {
+        $userPicture = null;
+        if(auth()->check())
+            $userPicture = getUserPic(auth()->user()->id);
+        else
+            $userPicture = getUserPic(0);
+
+        \View::share(['userPicture' => $userPicture]);
+    }
+
     public function indexStreaming()
     {
         $confirmContidition = ['state' => 1, 'confirm' => 1];
@@ -58,6 +69,7 @@ class StreamingController extends Controller
             }
             $video->video = \URL::asset('_images/video/' . $video->userId . '/' . $video->video);
             $video = $this->getVideoFullInfo($video, true);
+//            dd($video);
 
             $userMoreVideo = Video::where('userId', $video->userId)->where('id', '!=', $video->id)->take(4)->orderByDesc('created_at')->get();
             foreach ($userMoreVideo as $vid)
@@ -356,7 +368,8 @@ class StreamingController extends Controller
 
         if($main){
             $video->pic = \URL::asset('_images/video/' . $video->userId . '/' . $video->thumbnail);
-            $video->comments = [];
+            $resultComment = [];
+            $video->comments = $this->getVideoComments($video->id, 0);
 
             $activityId = Activity::whereName('نظر')->first()->id;
             $places = VideoPlaceRelation::where('videoId', $video->id)->get();
@@ -436,6 +449,59 @@ class StreamingController extends Controller
 
         return $video;
     }
+
+    private function getVideoComments($videoId, $parent){
+        $comments = VideoComment::where('videoId', $videoId)->where('confirm', 0)->where('parent', $parent)->get();
+        foreach ($comments as $comment) {
+            $ucomment = User::find($comment->userId);
+            if ($ucomment != null) {
+                $comment->username = $ucomment->username;
+                $comment->userPic = getUserPic($ucomment->id);
+                $comment->like = VideoFeedback::where('videoId', $videoId)->where('commentId', $comment->id)->where('like', 1)->count();
+                $comment->disLike = VideoFeedback::where('videoId', $videoId)->where('commentId', $comment->id)->where('like', -1)->count();
+                $comment->time = getDifferenceTimeString($comment->created_at);
+                $comment->comments = $this->getVideoComments($videoId, $comment->id);
+                if($comment->parent != 0)
+                    $comment->ansToUsername = User::find(VideoComment::find($comment->parent)->userId)->username;
+                $comment->ansCount = count($comment->comments);
+            }
+        }
+        return $comments;
+    }
+
+    public function setVideoComment(Request $request)
+    {
+        $videoId = json_decode($request->data)->videoId;
+        $video = Video::find($videoId);
+        if($video != null){
+            $newComment = new VideoComment();
+            $newComment->videoId = $video->id;
+            $newComment->parent = $request->ansTo;
+            $newComment->text = $request->text;
+            $newComment->userId = auth()->user()->id;
+            $newComment->save();
+
+            echo json_encode(['status' => 'ok', 'comment' => $newComment]);
+        }
+        else
+            echo json_encode(['status' => 'nok', 'msg' => 'not find video']);
+
+        return;
+    }
+
+    public function setVideoCommentFeedback(Request $request)
+    {
+        dd($request->all());
+        $comment = VideoComment::find($request->commentId);
+        if($comment != null){
+
+        }
+
+    }
+
+
+
+
 
     public function confirmAll()
     {
@@ -536,5 +602,7 @@ class StreamingController extends Controller
 
         dd('done');
     }
+
+
 
 }
