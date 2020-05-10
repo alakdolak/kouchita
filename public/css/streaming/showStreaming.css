@@ -450,160 +450,6 @@
     margin-top: 35px;
 }
 
-.commentSectionBody{
-    background: white;
-    width: 100%;
-    /*border-radius: 6px;*/
-    padding: 15px;
-}
-
-.commentInputSection{
-    display: flex;
-    align-items: flex-start;
-}
-
-.commentAnsesSection{
-    width: 100%;
-}
-
-.commentInput{
-    width: 88%;
-    margin-right: 11px;
-    padding: 10px;
-    border-radius: 5px;
-    background: #ebebeb;
-    resize: none;
-    border: none;
-}
-.commentAnsTextSection{
-    width: 98%;
-    margin-right: 11px;
-    padding: 10px;
-    border-radius: 5px;
-    background: #ebebeb;
-    border: none;
-    font-size: 14px;
-}
-.topOfcommentAnsTextSection{
-    width: 70%;
-}
-.topWho{
-    display: flex;
-    align-items: center;
-}
-.whoAns{
-    font-size: 20px;
-    color: #0076a3;
-    font-weight: bold;
-    margin-left: 5px;
-}
-.whoAnsTo{
-    font-weight: bold;
-    color: darkgray;
-}
-.commentAnsToAns{
-    margin-right: 12px;
-}
-.commentAnsInfos{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 13px;
-    margin: 5px;
-}
-.commentAnsRight{
-    display: flex;
-    font-size: 20px;
-    margin-right: 10px;
-}
-.commentAnsLeft{
-    color: blue;
-    cursor: pointer;
-}
-.commentAnsLikeSection{
-    display: flex;
-    justify-content: space-around;
-    font-size: 30px;
-    line-height: 25px;
-}
-.likeAnsIconDiv{
-    width: 26px;
-    height: 26px;
-    position: relative;
-    cursor: pointer;
-}
-.disLikeAnsIconDiv{
-    width: 26px;
-    height: 26px;
-    position: relative;
-    cursor: pointer;
-}
-.LikeIconEmptySett:before, .DisLikeIconEmptySett:before{
-    position: absolute;
-    left: 0px;
-}
-
-
-.disLikeAnsIconDiv:hover .DisLikeIconEmptySett:before{
-    content: '\E058';
-    color: darkred;
-}
-.likeAnsIconDiv:hover .LikeIconEmptySett:before{
-    content: '\E057';
-    color: red;
-}
-.redLikeIcon:before{
-    content: '\E057' !important;
-    font-family: Shazde_Regular2 !important;
-    color: red;
-}
-.redDisLikeIcon:before{
-    content: '\E058' !important;
-    font-family: Shazde_Regular2 !important;
-    color: darkred;
-}
-
-
-.commentInputSendButton{
-    background: #0076a3;
-    color: white;
-    padding: 10px;
-    border-radius: 10px;
-    margin-right: 10px;
-}
-
-.acceptedComment{}
-
-.acceptedCommentText{
-    white-space: pre-line;
-    text-align: justify;
-    padding: 0px 25px;
-}
-.acceptedCommentSett{
-    padding: 4px 15px;
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-    border-top: solid 1px lightgray;
-    border-bottom: solid 1px lightgray;
-}
-.acceptedCommentRight{
-    display: flex;
-    align-items: center;
-    font-size: 12px;
-}
-.acceptedCommentLeft{
-
-}
-.acceptedCommentAnsButton{
-    color: black;
-    padding: 2px 8px;
-    background-color: #fcc156;
-    border-radius: 6px;
-    cursor: pointer;
-}
-
-
 
 .otherSection{
     margin-top: 35px;
@@ -619,6 +465,87 @@
     display: none;
 }
 
+@media (max-width: 1300px) {
+    #videoThisVideo > div {
+        width: 100% !important;
+    }
+}
+
+@media (max-width: 1160px) {
+    .toolSectionInfos {
+        font-size: 18px;
+    }
+
+    .toolSectionButtonsCircle {
+        width: 35px;
+        height: 35px;
+        font-size: 30px;
+        margin: 0 3px;
+    }
+
+    .CommentIconSett {
+        font-size: 25px;
+        position: absolute;
+        top: 1px;
+    }
+
+    .ShareIconSett {
+        position: absolute;
+        right: 28px;
+        font-size: 23px;
+        top: -1px;
+    }
+
+    .HeartIconSett {
+        font-size: 28px;
+        padding-top: 3px;
+    }
+
+    .BookMarkIconSett {
+        font-size: 17px;
+    }
+}
+
+@media (min-width: 992px) {
+    .hideOnWide {
+        display: none;
+    }
+}
+
+@media (max-width: 992px) {
+    .mainShowBase:first-child {
+        display: none;
+    }
+
+    .mainDivStream > div:last-child {
+        width: 100%;
+    }
+
+    .mainDivStream > div:last-child {
+        margin-right: 0;
+    }
+}
+
+@media (max-width: 992px) and (min-width: 767px) {
+    .descriptionSection {
+        width: 48%;
+        display: inline-block;
+        float: right;
+        margin-top: 15px;
+        margin-left: 4%;
+    }
+
+    .moreInfoMainDiv {
+        width: 48%;
+        display: inline-block;
+        float: right;
+    }
+
+    .otherSection {
+        display: inline-block;
+        width: 100%;
+    }
+}
 
 @media (max-width: 767px) {
     .videoInfosVideoName{
@@ -666,6 +593,51 @@
     }
 }
 
+@media (max-width: 700px) {
+
+    .secHeaderTabs {
+        margin: 0 15px;
+    }
+
+    .addVideoSecHeader {
+        padding: 5px;
+        position: absolute;
+        font-size: 10px;
+        top: 80px;
+        right: 43%;
+        left: 43%;
+    }
+}
+
+@media (max-width: 600px) {
+    .secHeaderTabs {
+        margin: 0 9px;
+    }
+}
+
+@media (max-width: 510px) {
+    .addVideoSecHeader {
+        right: 40%;
+        left: 40%;
+    }
+
+    .secHeaderTabs {
+        font-size: 11px;
+    }
+
+    .LivePngClass {
+        width: 20px;
+    }
+
+    .TvPngClass {
+        width: 13px;
+    }
+
+    .mainDivStream {
+         width: calc(100% - 20px);
+     }
+}
+
 @media (max-width: 400px) {
     .toolSectionInfos{
         font-size: 1em;
@@ -675,5 +647,20 @@
     }
     .disLikeInfoTab{
         font-size: 25px;
+    }
+}
+
+@media (max-width: 380px) {
+    .secHeaderTabs {
+        margin: 0 5px;
+    }
+
+    .addVideoSecHeader {
+        right: 37%;
+        left: 37%;
+    }
+
+    .secHeaderTabs {
+        font-size: 10px;
     }
 }

@@ -143,15 +143,16 @@
       19 => 'Illuminate\\Translation\\TranslationServiceProvider',
       20 => 'Illuminate\\Validation\\ValidationServiceProvider',
       21 => 'Illuminate\\View\\ViewServiceProvider',
-      22 => 'Laravel\\Tinker\\TinkerServiceProvider',
-      23 => 'App\\Providers\\AppServiceProvider',
-      24 => 'App\\Providers\\AuthServiceProvider',
-      25 => 'App\\Providers\\EventServiceProvider',
-      26 => 'App\\Providers\\RouteServiceProvider',
-      27 => 'GrahamCampbell\\Throttle\\ThrottleServiceProvider',
-      28 => 'Laravel\\Passport\\PassportServiceProvider',
-      29 => 'Barryvdh\\Cors\\ServiceProvider',
-      30 => 'Hekmatinasser\\Verta\\VertaServiceProvider',
+      22 => 'Intervention\\Image\\ImageServiceProvider',
+      23 => 'Laravel\\Tinker\\TinkerServiceProvider',
+      24 => 'App\\Providers\\AppServiceProvider',
+      25 => 'App\\Providers\\AuthServiceProvider',
+      26 => 'App\\Providers\\EventServiceProvider',
+      27 => 'App\\Providers\\RouteServiceProvider',
+      28 => 'GrahamCampbell\\Throttle\\ThrottleServiceProvider',
+      29 => 'Laravel\\Passport\\PassportServiceProvider',
+      30 => 'Barryvdh\\Cors\\ServiceProvider',
+      31 => 'Hekmatinasser\\Verta\\VertaServiceProvider',
     ),
     'aliases' => 
     array (
@@ -191,6 +192,7 @@
       'Throttle' => 'GrahamCampbell\\Throttle\\Facades\\Throttle',
       'Verta' => 'Hekmatinasser\\Verta\\Verta',
       'Pusher' => 'Pusher\\Pusher',
+      'Image' => 'Intervention\\Image\\Facades\\Image',
     ),
   ),
   'cache' => 
@@ -446,6 +448,10 @@
         'expire' => 60,
       ),
     ),
+  ),
+  'image' => 
+  array (
+    'driver' => 'gd',
   ),
   'throttle' => 
   array (
