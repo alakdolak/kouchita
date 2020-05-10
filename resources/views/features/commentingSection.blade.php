@@ -1,5 +1,8 @@
 <style>
-
+    .LikeIcon:before{
+        content: '\B' !important;
+        font-family: Shazde_Regular2 !important;
+    }
     .mainUseruserNameComment{
         font-size: 22px;
         color: #0076a3;
@@ -182,6 +185,24 @@
         font-size: 16px;
         margin-right: 10px;
     }
+    .mainAnsOf{
+        display: flex;
+        width: 85%;
+        margin-right: auto;
+        margin-left: auto;
+    }
+    .ansOf{
+        display: none;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    @media (max-width: 767px) {
+        .topOfcommentAnsTextSection{
+            width: 100% ;
+        }
+    }
 </style>
 
 
@@ -215,9 +236,6 @@
                                     <div class="whoAns">
                                         ##username##
                                     </div>
-                                    {{--                                <div class="whoAnsTo">--}}
-                                    {{--                                    در پاسخ به ##ansToUsername##--}}
-                                    {{--                                </div>--}}
                                 </div>
                             </div>
                             <div style="text-align: justify; white-space: pre-line">##text##</div>
@@ -235,7 +253,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="acceptedCommentAnsButton" onclick="openAnsToComment(##id##)">
+                        <div class="acceptedCommentAnsButton hideOnPhone" onclick="openAnsToComment(##id##)">
                             پاسخ دهید
                         </div>
                     </div>
@@ -250,12 +268,12 @@
 
                     <div class="commentAnsInfos">
                         <div class="commentAnsRight">
-                            <div style="color: #0076a3; display: flex">
-                                <span style="color: white">##like##</span>
-                                <span class="LikeIcon" style="font-size: 30px"></span>
+                            <div style="color: #0076a3; display: flex;" onclick="commentFeedBack(##id##, 1)">
+                                <span id="likeCount_##id##" style="color: white;">##like##</span>
+                                <span class="LikeIcon" style="font-size: 30px;"></span>
                             </div>
-                            <div style="color: #0076a3; display: flex; margin-right: 10px;">
-                                <span style="color: white">##disLike##</span>
+                            <div style="color: #0076a3; display: flex; margin-right: 10px;" onclick="commentFeedBack(##id##, -1)">
+                                <span id="disLikeCount_##id##" style="color: white">##disLike##</span>
                                 <span class="DisLikeIcon" style="font-size: 30px"></span>
                             </div>
                             <div style="color: #0076a3; display: flex; margin-right: 10px;">
@@ -271,7 +289,7 @@
                 </div>
             </div>
 
-            <div id="ansOf_##id##" style="display: none; justify-content: center; align-items: center"></div>
+            <div id="ansOf_##id##" class="ansOf mainAnsOf"></div>
         </div>
 
         {{--        <div id="comment_##id##" class="acceptedComment">--}}
@@ -339,7 +357,7 @@
     </div>
 
     <div id="ansCommentSample" style="display: none;">
-        <div id="comment_##id##" class="commentAnsesSection" style="width: 87%;">
+        <div id="comment_##id##" class="commentAnsesSection" style="border: none">
 
             <div class="commentInputSection" style="margin-top: 10px;">
                 <div class="userPicDiv userPicAnsToReviewPc">
@@ -377,7 +395,7 @@
                             </div>
                         </div>
 
-                        <div class="acceptedCommentAnsButton" onclick="openAnsToComment(##id##)">
+                        <div class="acceptedCommentAnsButton hideOnPhone" onclick="openAnsToComment(##id##)">
                             پاسخ دهید
                         </div>
                     </div>
@@ -392,12 +410,12 @@
 
                     <div class="commentAnsInfos">
                         <div class="commentAnsRight">
-                            <div style="color: #0076a3; display: flex">
-                                <span style="color: white">##like##</span>
+                            <div style="color: #0076a3; display: flex" onclick="commentFeedBack(##id##, 1)">
+                                <span id="likeCount_##id##" style="color: white">##like##</span>
                                 <span class="LikeIcon" style="font-size: 30px"></span>
                             </div>
-                            <div style="color: #0076a3; display: flex; margin-right: 10px;">
-                                <span style="color: white">##disLike##</span>
+                            <div style="color: #0076a3; display: flex; margin-right: 10px;" onclick="commentFeedBack(##id##, -1)">
+                                <span id="disLikeCount_##id##" style="color: white">##disLike##</span>
                                 <span class="DisLikeIcon" style="font-size: 30px"></span>
                             </div>
                             <div style="color: #0076a3; display: flex; margin-right: 10px;">
@@ -414,7 +432,7 @@
 
             </div>
 
-            <div id="ansOf_##id##" style="display: none; justify-content: center; align-items: center"></div>
+            <div id="ansOf_##id##" class="ansOf"></div>
         </div>
     </div>
     
@@ -450,8 +468,6 @@
 
     function sendCommentTo(_kind){
         let text = $('#AnsToComment_' + _kind).val();
-        console.log(text);
-        console.log(_kind);
         if(text.trim().length > 0 && commentingStoreUrl != null){
             $.ajax({
                 type: 'post',
@@ -538,9 +554,6 @@
         }
     }
 
-
-
-
     function openAnsToComment(_id){
         $('#ansTo_' + _id).toggle();
     }
@@ -583,6 +596,40 @@
             },
             error: function(err){
                 alert('در ثبت نظر شما مشکلی پیش آمده لطفا دوباره تلاش کنید')
+            }
+        })
+    }
+
+    function commentFeedBack(_id, _like){
+        if (!hasLogin) {
+            showLoginPrompt();
+            return;
+        }
+
+        $.ajax({
+            type: 'post',
+            url: '{{route("streaming.setVideoFeedback")}}',
+            data: {
+                _token: '{{csrf_token()}}',
+                commentId: _id,
+                kind: 'likeComment',
+                videoId: video.id,
+                like: _like
+            },
+            success: function(response){
+                try{
+                    response = JSON.parse(response);
+                    if(response['status'] == 'ok'){
+                        $('#likeCount_' + _id).text(response['like']);
+                        $('#disLikeCount_' + _id).text(response['disLike']);
+                    }
+                }
+                catch (e) {
+                    console.log(e)
+                }
+            },
+            error: function(err){
+
             }
         })
     }

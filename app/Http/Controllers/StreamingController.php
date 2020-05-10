@@ -299,9 +299,15 @@ class StreamingController extends Controller
                                                 ->where('commentId', $request->commentId)
                                                 ->where('userId', $user->id)
                                                 ->whereNotNull('like')->first();
-                    if ($feedback != null && $request->like == 0)
-                        $feedback->delete();
-                    elseif ($feedback == null) {
+                    if ($feedback != null) {
+                        if($feedback->like == $request->like)
+                            $feedback->like = 0;
+                        else
+                            $feedback->like = $request->like;
+
+                        $feedback->save();
+                    }
+                    else {
                         $feedback = new VideoFeedback();
                         $feedback->videoId = $request->videoId;
                         $feedback->commentId = $request->commentId;
@@ -309,24 +315,12 @@ class StreamingController extends Controller
                         $feedback->like = $request->like;
                         $feedback->save();
                     }
-                    else {
-                        $feedback->like = $request->like;
-                        $feedback->save();
-                    }
 
-                }
-                else if ($request->kind == 'comment') {
-                    $feedback = new VideoFeedback();
-                    $feedback->videoId = $request->videoId;
-                    $feedback->userId = $user->id;
-                    $feedback->comment = $request->comment;
-                    if (isset($request->ans) && $request->ans != 0) {
-                        $feedback->parent = $request->ans;
-                        $parent = VideoFeedback::find($request->ans);
-                        $parent->haveAns = 1;
-                        $parent->save();
-                    }
-                    $feedback->save();
+                    $likeCount = VideoFeedback::where('videoId', $request->videoId)->where('commentId', $request->commentId)->where('like', 1)->count();
+                    $disLikeCount = VideoFeedback::where('videoId', $request->videoId)->where('commentId', $request->commentId)->where('like', -1)->count();
+
+                    echo json_encode(['status' => 'ok', 'like' => $likeCount, 'disLike' => $disLikeCount]);
+                    return;
                 }
                 else
                     echo json_encode(['status' => 'nok2']);
