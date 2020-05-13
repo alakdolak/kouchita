@@ -78,7 +78,7 @@ body{
     padding: 15px;
     border-radius: 8px;
     position: relative;
-    /*width: calc(100% - 50px);*/
+    width: calc(100% - 50px);
 }
 
 
