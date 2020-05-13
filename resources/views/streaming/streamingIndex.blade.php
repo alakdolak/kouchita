@@ -6,14 +6,8 @@
     <link rel="stylesheet" href="{{URL::asset('css/streaming/indexStreaming.css')}}">
 
     <style>
-        .videoList{
-            width: 100%;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        .videoSuggestion{
-            margin: 10px 5px;
+        .swiper-container{
+            padding: 10px;
         }
         .allVideo{
             z-index: 1;
@@ -176,9 +170,8 @@
 
         var swipersuggestion = new Swiper('.videoSuggestionSwiper', {
             slidesPerGroup: 1,
-            slidesPerView: 4,
+            spaceBetween: 10,
             loop: true,
-            // loopFillGroupWithBlank: true,
             navigation: {
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
@@ -186,22 +179,19 @@
             breakpoints: {
                 650: {
                     slidesPerView: 1,
-                    // spaceBetween: 0,
                 },
                 860: {
                     slidesPerView: 2,
-                    // spaceBetween: 20,
                 },
                 1200: {
                     slidesPerView: 3,
-                    // spaceBetween: 20,
                 },
                 10000: {
                     slidesPerView: 4,
-                    // spaceBetween: 20,
                 }
             }
         });
+        swipersuggestion.update();
 
         // mainSlider
         new Swiper('#mainSlider', {
