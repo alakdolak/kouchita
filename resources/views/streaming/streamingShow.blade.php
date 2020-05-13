@@ -13,6 +13,15 @@
             display: none;
             flex-wrap: wrap;
         }
+        .showInPhone{
+            display: none;
+        }
+        @media (max-width: 992px) {
+            .showInPhone{
+                display: flex;
+                flex-direction: column;
+            }
+        }
     </style>
 @endsection
 
@@ -24,7 +33,6 @@
             <div class="videoInfos">
                 <div class="videoInfosVideoName">
                     {{$video->title}}
-{{--                    <img class="float-left" src="{{URL::asset('images/streaming/live.png')}}">--}}
                 </div>
                 <div class="row mainUserPicSection">
                     <div class="userPicDiv">
@@ -217,6 +225,144 @@
                         </div>
                     </div>
                 </div>
+            
+            <div class="showInPhone">
+                <div class="videoInfos" style="width: 100%">
+                    <div class="videoInfosVideoName">
+                        {{$video->title}}
+                    </div>
+                    <div class="row mainUserPicSection">
+                        <div class="userPicDiv">
+                            <img src="{{$video->userPic}}" alt="koochita">
+                        </div>
+                        <div class="mainUserInfos">
+                            <div class="mainUseruserName">
+                                {{$video->username}}
+                            </div>
+                            <div class="videoUploadTime">
+                                {{$video->time}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                @if($video->description != null && $video->description != '')
+                    <div class="descriptionSection" style="width: 100%">
+                        <div class="headerWithLine">
+                            <div class="headerWithLineText">
+                                معرفی کلی
+                            </div>
+                            <div class="headerWithLineLine"></div>
+                        </div>
+                        <div class="descriptionSectionBody">
+                            {!! $video->description !!}
+                        </div>
+                    </div>
+                @endif
+
+                @if(isset($video->places) && count($video->places) > 0)
+                    <div class="moreInfoMainDiv" style="width: 100%">
+                        <div class="headerWithLine">
+                            <div class="headerWithLineText">
+                                اطلاعات بیشتر
+                            </div>
+                            <div class="headerWithLineLine"></div>
+                        </div>
+                        <div class="videoPlaces">
+                            @for($i = 0; $i < 4 && $i < count($video->places); $i++)
+                                <div class="moreInfoEachItem">
+                                    <a href="{{$video->places[$i]->url}}" target="_blank" class="mainDivImgMoreInfoItems">
+                                        <img src="{{$video->places[$i]->placePic}}" style="width: 100%">
+                                    </a>
+                                    <div class="moreInfoItemsDetails">
+                                        <a href="{{$video->places[$i]->url}}" target="_blank" class="placeName">
+                                            {{$video->places[$i]->name}}
+                                        </a>
+                                        @if($video->places[$i]->kindPlaceId > 0)
+                                            <div class="placeRates">
+                                                <div class="rating_and_popularity">
+                                                    <span class="header_rating">
+                                                       <div class="rs rating" rel="v:rating">
+                                                           <div class="prw_rup prw_common_bubble_rating overallBubbleRating float-left">
+                                                               <span class="ui_bubble_rating bubble_{{$video->places[$i]->placeRate}}0 font-size-16" property="ratingValue"></span>
+                                                           </div>
+                                                       </div>
+                                                    </span>
+                                                    <span class="header_popularity popIndexValidation" id="scoreSpanHeader">
+                                                    <a>
+                                                        {{$video->places[$i]->placeReviews}}
+                                                        نقد
+                                                    </a>
+                                                </span>
+                                                </div>
+                                            </div>
+                                        @endif
+                                        @if($video->places[$i]->kindPlaceId > -1)
+                                            <div class="placeState">استان:
+                                                <span>{{$video->places[$i]->placeState}}</span>
+                                            </div>
+                                        @endif
+                                        @if($video->places[$i]->kindPlaceId > 0)
+                                            <div class="placeCity">شهر:
+                                                <span>{{$video->places[$i]->placeCity}}</span>
+                                            </div>
+                                        @endif
+
+                                    </div>
+                                </div>
+                            @endfor
+                            @if(count($video->places) > 4)
+                                <div class="moreBtn" onclick="openMorePlace(this)">بیشتر</div>
+                                <div class="moreVideoPlaces">
+                                    @for($i = 4; $i < count($video->places); $i++)
+                                        <div class="moreInfoEachItem">
+                                            <div class="mainDivImgMoreInfoItems">
+                                                <img src="{{$video->places[$i]->placePic}}" style="width: 100%">
+                                            </div>
+                                            <div class="moreInfoItemsDetails">
+                                                <a href="{{$video->places[$i]->url}}" class="placeName">
+                                                    {{$video->places[$i]->name}}
+                                                </a>
+
+                                                @if($video->places[$i]->kindPlaceId > 0)
+                                                    <div class="placeRates">
+                                                        <div class="rating_and_popularity">
+                                                    <span class="header_rating">
+                                                       <div class="rs rating" rel="v:rating">
+                                                           <div class="prw_rup prw_common_bubble_rating overallBubbleRating float-left">
+                                                               <span class="ui_bubble_rating bubble_{{$video->places[$i]->placeRate}}0 font-size-16" property="ratingValue"></span>
+                                                           </div>
+                                                       </div>
+                                                    </span>
+                                                            <span class="header_popularity popIndexValidation" id="scoreSpanHeader">
+                                                    <a>
+                                                        {{$video->places[$i]->placeReviews}}
+                                                        نقد
+                                                    </a>
+                                                </span>
+                                                        </div>
+                                                    </div>
+                                                @endif
+                                                @if($video->places[$i]->kindPlaceId > -1)
+                                                    <div class="placeState">استان:
+                                                        <span>{{$video->places[$i]->placeState}}</span>
+                                                    </div>
+                                                @endif
+                                                @if($video->places[$i]->kindPlaceId > 0)
+                                                    <div class="placeCity">شهر:
+                                                        <span>{{$video->places[$i]->placeCity}}</span>
+                                                    </div>
+                                                @endif
+
+                                            </div>
+                                        </div>
+                                    @endfor
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                @endif
+            </div>
 
             <div id="commentSection" class="commentSection">
                 <div class="headerWithLine">
@@ -259,8 +405,6 @@
 
                     </div>
                 </div>
-
-            </div>
 
         </div>
     </div>
@@ -305,11 +449,11 @@
                     slidesPerView: 1,
                     spaceBetween: 0,
                 },
-                860: {
+                1250: {
                     slidesPerView: 2,
                     spaceBetween: 20,
                 },
-                1200: {
+                1550: {
                     slidesPerView: 3,
                     spaceBetween: 20,
                 },
