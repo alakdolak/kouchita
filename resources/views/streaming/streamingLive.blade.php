@@ -273,8 +273,8 @@
 
             <div class="showVideo">
                 <div id="46671937617" class="videoContainer">
-                    <video id="video_1" class="video-js playads" video-url="http://vjs.zencdn.net/v/oceans.mp4" mimetype="video/mp4" controls controlsList="nodownload" data-setup=''>
-                        <source src="{{URL::asset('videos/live.mp4')}}">
+<video id="video_1" class="video-js playads" controls controlsList="nodownload" data-setup=''>
+                        <source src="https://streaming.koochita.com/hls/test22.m3u8">
                     </video>
                     <div class="liveCommentsOnFS display-none">
 

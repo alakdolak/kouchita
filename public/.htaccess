@@ -19,8 +19,7 @@
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 
 RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
-
-RewriteRule ^(.*)$ https://%1/$1 [R=302,L]
+RewriteRule ^(.*)$ http://%1%{REQUEST_URI} [R=302,QSA,NC,L]
 </IfModule>
 
 <ifModule mod_gzip.c>
