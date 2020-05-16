@@ -828,14 +828,3 @@ Route::get('/broadCastTest', function(){
     return view('test.test');
 });
 Route::post('sendBroad', 'HomeController@sendBroad')->name('sendBroad');
-
-Route::get('setFileName', function (){
-   $boomgardi = \App\models\Boomgardy::where('file', 'none')->get();
-   foreach ($boomgardi as $item){
-       $rand = random_int(1000, 99999);
-       if(!\App\models\Boomgardy::where('file', $rand)->first()){
-           $item->file = $rand;
-           $item->save();
-       }
-   }
-});
