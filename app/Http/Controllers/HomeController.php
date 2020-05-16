@@ -1712,7 +1712,11 @@ class HomeController extends Controller
 
             $places = DB::table($kindPlace->tableName)->whereIn('id', $placeId)->select(['id', 'cityId','name', 'file', 'picNumber', 'keyword'])->get();
             foreach ($places as $item){
-                $item->pic = URL::asset('_images/' . $kindPlace->fileName .'/' . $item->file . '/f-' . $item->picNumber);
+                if($item->file != 'none' && $item->file != null)
+                    $item->pic = URL::asset('_images/' . $kindPlace->fileName .'/' . $item->file . '/f-' . $item->picNumber);
+                else
+                    $item->pic = URL::asset('images/mainPics/nopicv01.jpg');
+
                 $item->url = createUrl($kindPlace->id, $item->id, 0, 0);
                 $item->rate = getRate($item->id, $kindPlace->id)[1];
                 $item->city = Cities::find($item->cityId);
