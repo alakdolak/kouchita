@@ -79,6 +79,9 @@
             justify-content: center;
             align-items: center;
         }
+        #newKoochita, #foodSuggestion, #tabiatSuggestion, #safaranameSuggestions, #restaurantSuggestion, #tarikhiSuggestion, #kharidSuggestion, #articleSuggestion{
+            margin-left: 10px;
+        }
     </style>
 
 </head>
