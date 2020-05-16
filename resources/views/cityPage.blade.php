@@ -301,7 +301,7 @@
                                                                 <div class="prw_rup prw_common_thumbnail_no_style_responsive">
                                                                     <div class="prv_thumb has_image">
                                                                         <div class="image_wrapper landscape landscapeWide">
-                                                                            <img src="{{$item->pic}}" alt="{{$item->keyword}}" class="image">
+                                                                            <img src="{{$item->pic}}" alt="{{$item->keyword}}" class="resizeImgClass">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -364,7 +364,7 @@
                                                             <div class="prw_rup prw_common_thumbnail_no_style_responsive">
                                                                 <div class="prv_thumb has_image">
                                                                     <div class="image_wrapper landscape landscapeWide">
-                                                                        <img src="{{$item->pic}}" alt="{{$item->keyword}}" class="image">
+                                                                        <img src="{{$item->pic}}" alt="{{$item->keyword}}" class="resizeImgClass">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -427,7 +427,7 @@
                                                                 <div class="prw_rup prw_common_thumbnail_no_style_responsive">
                                                                     <div class="prv_thumb has_image">
                                                                         <div class="image_wrapper landscape landscapeWide">
-                                                                            <img src="{{$item->pic}}" alt="{{$item->keyword}}" class="image">
+                                                                            <img src="{{$item->pic}}" alt="{{$item->keyword}}" class="resizeImgClass">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -490,7 +490,7 @@
                                                                 <div class="prw_rup prw_common_thumbnail_no_style_responsive">
                                                                     <div class="prv_thumb has_image">
                                                                         <div class="image_wrapper landscape landscapeWide">
-                                                                            <img src="{{$item->pic}}" alt="{{$item->keyword}}" class="image">
+                                                                            <img src="{{$item->pic}}" alt="{{$item->keyword}}" class="resizeImgClass">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -553,7 +553,7 @@
                                                                 <div class="prw_rup prw_common_thumbnail_no_style_responsive">
                                                                     <div class="prv_thumb has_image">
                                                                         <div class="image_wrapper landscape landscapeWide">
-                                                                            <img src="{{$item->pic}}" alt="{{$item->keyword}}" class="image">
+                                                                            <img src="{{$item->pic}}" alt="{{$item->keyword}}" class="resizeImgClass">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -616,7 +616,7 @@
                                                                 <div class="prw_rup prw_common_thumbnail_no_style_responsive">
                                                                     <div class="prv_thumb has_image">
                                                                         <div class="image_wrapper landscape landscapeWide">
-                                                                            <img src="{{$item->pic}}" alt="{{$item->keyword}}" class="image">
+                                                                            <img src="{{$item->pic}}" alt="{{$item->keyword}}" class="resizeImgClass">
                                                                         </div>
                                                                     </div>
                                                                 </div>
