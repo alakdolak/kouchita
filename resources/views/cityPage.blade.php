@@ -82,6 +82,13 @@
         #newKoochita, #foodSuggestion, #tabiatSuggestion, #safaranameSuggestions, #restaurantSuggestion, #tarikhiSuggestion, #kharidSuggestion, #articleSuggestion{
             margin-left: 10px;
         }
+        .navigatorLinks{
+            color: #053a3e;
+            transition: .2s !important;
+        }
+        .navigatorLinks:hover{
+            color: #eab836;
+        }
     </style>
 
 </head>
@@ -98,18 +105,18 @@
     <div class="cpBorderBottom cpHeader">
 
         <div class="cpHeaderRouteOfCityName">
-            <a href="{{url('/')}}">
+            <a href="{{url('/')}}" class="navigatorLinks">
                 <span>صفحه اصلی</span>
             </a>
-            <span> > </span>
+            <span style="color: #eab836"> > </span>
             @if(isset($place->state))
-                <a href="{{url('cityPage/state/'.$place->state)}}">
+                <a href="{{url('cityPage/state/'.$place->state)}}" class="navigatorLinks">
                     <span>استان {{$place->state}}</span>
                 </a>
-                <span> > </span>
-                <span>{{$place->name}}</span>
+                <span style="color: #eab836"> > </span>
+                <span class="navigatorLinks">{{$place->name}}</span>
             @else
-                <span>{{$place->name}}</span>
+                <span class="navigatorLinks">{{$place->name}}</span>
             @endif
             {{--<div class="ui_close_x" style="left: 30px !important; top: 15px !important;"></div>--}}
         </div>

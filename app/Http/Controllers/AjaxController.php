@@ -591,11 +591,7 @@ class AjaxController extends Controller {
             if($place != null) {
                 $file = $kindPlace->fileName;
                 $url = createUrl($kindPlace->id, $place->id, 0, 0);
-
-                if (file_exists((__DIR__ . '/../../../../assets/_images/' . $file . '/' . $place->file . '/f-' . $place->picNumber)))
-                    $place->placePic = URL::asset('_images/' . $file . '/' . $place->file . '/f-' . $place->picNumber);
-                else
-                    $place->placePic = URL::asset("_images/nopic/blank.jpg");
+                $place->placePic = getPlacePic($place->id, $kindPlace->id);
                 $place->url = $url;
                 $city = Cities::whereId($place->cityId);
                 $place->placeCity = $city->name;
@@ -618,10 +614,7 @@ class AjaxController extends Controller {
             $kindPlaceId = $kindPlace->id;
 
             if($place != null && $file != null) {
-                if (file_exists((__DIR__ . '/../../../../assets/_images/' . $file . '/' . $place->file . '/f-' . $place->picNumber)))
-                    $place->placePic = URL::asset('_images/' . $file . '/' . $place->file . '/f-' . $place->picNumber);
-                else
-                    $place->placePic = URL::asset("_images/nopic/blank.jpg");
+                $place->placePic = getPlacePic($place->id, $kindPlace->id);
                 $place->url = $url;
                 $city = Cities::whereId($place->cityId);
                 $place->placeCity = $city->name;

@@ -3000,8 +3000,8 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
 }
 
 .modal-details-content .commentMoreSettingBar {
-    margin: 0 55px;
-    width: 85%;
+    /*margin: 0 55px;*/
+    /*width: 85%;*/
     border: none;
     border-bottom: 1px solid #e5e5e5;
     display: flex;
