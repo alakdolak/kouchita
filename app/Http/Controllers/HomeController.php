@@ -1712,8 +1712,13 @@ class HomeController extends Controller
 
             $places = DB::table($kindPlace->tableName)->whereIn('id', $placeId)->select(['id', 'cityId','name', 'file', 'picNumber', 'keyword'])->get();
             foreach ($places as $item){
-                if($item->file != 'none' && $item->file != null)
-                    $item->pic = URL::asset('_images/' . $kindPlace->fileName .'/' . $item->file . '/f-' . $item->picNumber);
+                if($item->file != 'none' && $item->file != null) {
+                    $location = __DIR__ . '/../../../../assets/_images/' . $kindPlace->fileName . '/' . $item->file . '/f-' . $item->picNumber;
+                    if(is_file($location))
+                        $item->pic = URL::asset('_images/' . $kindPlace->fileName . '/' . $item->file . '/f-' . $item->picNumber);
+                    else
+                        $item->pic = URL::asset('images/mainPics/nopicv01.jpg');
+                }
                 else
                     $item->pic = URL::asset('images/mainPics/nopicv01.jpg');
 

@@ -74,6 +74,11 @@
             overflow: hidden;
             height: 340px;
         }
+        .topImage{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     </style>
 
 </head>
@@ -300,7 +305,7 @@
                                                             <a href="{{$item->url}}" class="thumbnail">
                                                                 <div class="prw_rup prw_common_thumbnail_no_style_responsive">
                                                                     <div class="prv_thumb has_image">
-                                                                        <div class="image_wrapper landscape landscapeWide">
+                                                                        <div class="image_wrapper landscape landscapeWide topImage">
                                                                             <img src="{{$item->pic}}" alt="{{$item->keyword}}" class="resizeImgClass">
                                                                         </div>
                                                                     </div>
@@ -363,7 +368,7 @@
                                                         <a href="{{$item->url}}" class="thumbnail">
                                                             <div class="prw_rup prw_common_thumbnail_no_style_responsive">
                                                                 <div class="prv_thumb has_image">
-                                                                    <div class="image_wrapper landscape landscapeWide">
+                                                                    <div class="image_wrapper landscape landscapeWide topImage">
                                                                         <img src="{{$item->pic}}" alt="{{$item->keyword}}" class="resizeImgClass">
                                                                     </div>
                                                                 </div>
@@ -426,7 +431,7 @@
                                                             <a href="{{$item->url}}" class="thumbnail">
                                                                 <div class="prw_rup prw_common_thumbnail_no_style_responsive">
                                                                     <div class="prv_thumb has_image">
-                                                                        <div class="image_wrapper landscape landscapeWide">
+                                                                        <div class="image_wrapper landscape landscapeWide topImage">
                                                                             <img src="{{$item->pic}}" alt="{{$item->keyword}}" class="resizeImgClass">
                                                                         </div>
                                                                     </div>
@@ -489,7 +494,7 @@
                                                             <a href="{{$item->url}}" class="thumbnail">
                                                                 <div class="prw_rup prw_common_thumbnail_no_style_responsive">
                                                                     <div class="prv_thumb has_image">
-                                                                        <div class="image_wrapper landscape landscapeWide">
+                                                                        <div class="image_wrapper landscape landscapeWide topImage">
                                                                             <img src="{{$item->pic}}" alt="{{$item->keyword}}" class="resizeImgClass">
                                                                         </div>
                                                                     </div>
@@ -552,7 +557,7 @@
                                                             <a href="{{$item->url}}" class="thumbnail">
                                                                 <div class="prw_rup prw_common_thumbnail_no_style_responsive">
                                                                     <div class="prv_thumb has_image">
-                                                                        <div class="image_wrapper landscape landscapeWide">
+                                                                        <div class="image_wrapper landscape landscapeWide topImage">
                                                                             <img src="{{$item->pic}}" alt="{{$item->keyword}}" class="resizeImgClass">
                                                                         </div>
                                                                     </div>
@@ -615,7 +620,7 @@
                                                             <a href="{{$item->url}}" class="thumbnail">
                                                                 <div class="prw_rup prw_common_thumbnail_no_style_responsive">
                                                                     <div class="prv_thumb has_image">
-                                                                        <div class="image_wrapper landscape landscapeWide">
+                                                                        <div class="image_wrapper landscape landscapeWide topImage">
                                                                             <img src="{{$item->pic}}" alt="{{$item->keyword}}" class="resizeImgClass">
                                                                         </div>
                                                                     </div>
@@ -782,7 +787,7 @@
     resizeFitImg('resizeImgClass');
 
     var reviews = {!! json_encode($reviews) !!};
-    var cityPic = {!! $place->pic !!};
+    var cityPic = JSON.parse('{!! $place->pic !!}');
     var showCityPicNumber = 5;
     var cityName1 = '{{ $place->name }}';
 
