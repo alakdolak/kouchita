@@ -6,6 +6,7 @@ use App\models\Activity;
 use App\models\Adab;
 use App\models\Amaken;
 use App\models\BannerPics;
+use App\models\Boomgardy;
 use App\models\Cities;
 use App\models\Comment;
 use App\models\ConfigModel;
