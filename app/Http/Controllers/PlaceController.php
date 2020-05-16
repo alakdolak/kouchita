@@ -2751,7 +2751,6 @@ class PlaceController extends Controller {
                     if($place != null) {
 
                         $location = __DIR__ . '/../../../../assets/userPhoto/' . $kindPlaceName . '/' . $place->file;
-
                         if(!file_exists($location))
                             mkdir($location);
 

@@ -89,9 +89,9 @@
             <span>ذخیره‌شده‌ها</span>
         </div>
 
-        <a href="{{route('streaming.uploadPage')}}" class="addVideoSecHeader">
+        <div class="addVideoSecHeader" onclick="goToUpload()">
             <span>+ افزودن ویدیو</span>
-        </a>
+        </div>
     </div>
 
     @yield('body')
@@ -115,6 +115,14 @@
         resizeFitImg('resizeImgClass');
     });
 
+    function goToUpload() {
+        if (!hasLogin) {
+            showLoginPrompt();
+            return;
+        }
+
+        location.href = "{{route('streaming.uploadPage')}}";
+    }
 </script>
 
 @yield('script')

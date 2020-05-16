@@ -774,11 +774,12 @@ if ($total == 0)
                                     });
                                 }
                                 else{
+                                    alert('in')
                                     $('.mainSliderNavBut').css('display', 'none');
                                     $('.see_all_count_wrap').css('display', 'none');
                                     text =  '<div class="swiper-slide">\n' +
                                             '<img class="eachPicOfSlider" src="{{URL::asset('images/mainPics/nopictext1.jpg')}}" style="width: 100%;">\n' +
-                                            '</div>\n';
+                                            '</div>';
                                     $('#mainSliderWrapper').append(text);
                                 }
                             </script>
@@ -1969,22 +1970,6 @@ if ($total == 0)
                         else if(_kind == 'userPics')
                             createPhotoModal('عکس های کاربران', userPhotosForAlbum);
                     }
-
-                    // function openTab(tabName, elmnt, fontColor) {
-                    //     var i, tabcontent, tablinks;
-                    //     tabcontent = document.getElementsByClassName("tabContentMainWrap");
-                    //     for (i = 0; i < tabcontent.length; i++) {
-                    //         tabcontent[i].style.display = "none";
-                    //     }
-                    //     tablinks = document.getElementsByClassName("tabLinkMainWrap");
-                    //     for (i = 0; i < tablinks.length; i++) {
-                    //         tablinks[i].style.color = "";
-                    //     }
-                    //     document.getElementById(tabName).style.display = "block";
-                    //     elmnt.style.color = fontColor;
-                    //
-                    //     initSwiper();
-                    // }
 
                     // Get the element with id="defaultOpen" and click on it
                     document.getElementById("defaultOpenMainWrap").style.color = "rgb(77, 199, 188)";
