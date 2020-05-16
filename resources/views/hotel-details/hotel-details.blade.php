@@ -774,7 +774,6 @@ if ($total == 0)
                                     });
                                 }
                                 else{
-                                    alert('in')
                                     $('.mainSliderNavBut').css('display', 'none');
                                     $('.see_all_count_wrap').css('display', 'none');
                                     text =  '<div class="swiper-slide">\n' +
