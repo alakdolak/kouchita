@@ -682,28 +682,13 @@ function getAllPlacePicsByKind($kindPlaceId, $placeId){
     $userPhotosJSON = json_encode($userPhotos);
 
     $koochitaPic = URL::asset('images/icons/mainIcon.svg');
-    $s = [  'id' => 0,
-        's' => URL::asset('_images/' . $MainFile . '/' . $place->file . '/s-' . $place->picNumber),
-        'f' => URL::asset('_images/' . $MainFile . '/' . $place->file . '/f-' . $place->picNumber),
-        'l' => URL::asset('_images/' . $MainFile . '/' . $place->file . '/l-' . $place->picNumber),
-        't' => URL::asset('_images/' . $MainFile . '/' . $place->file . '/t-' . $place->picNumber),
-        'mainPic' => URL::asset('_images/' . $MainFile . '/' . $place->file . '/' . $place->picNumber),
-        'alt' => $place->alt,
-        'name' => 'کوچیتا',
-        'userPic' => $koochitaPic,
-        'showInfo' => false,
-        'like' => 0,
-        'dislike' => 0,
-        'description' => '',
-        'fromUpload' => ''];
-    array_push($sitePics, $s);
-    foreach ($place->pics as $item){
-        $s = [ 'id' => 0,
-            's' => URL::asset('_images/' . $MainFile . '/' . $place->file . '/s-' . $item->picNumber),
-            'f' => URL::asset('_images/' . $MainFile . '/' . $place->file . '/f-' . $item->picNumber),
-            'l' => URL::asset('_images/' . $MainFile . '/' . $place->file . '/l-' . $item->picNumber),
-            't' => URL::asset('_images/' . $MainFile . '/' . $place->file . '/t-' . $item->picNumber),
-            'mainPic' => URL::asset('_images/' . $MainFile . '/' . $place->file . '/' . $item->picNumber),
+    if(is_file(__DIR__ .'/../../../../assets/_images/' . $MainFile . '/' . $place->file . '/f-' . $place->picNumber)) {
+        $s = ['id' => 0,
+            's' => URL::asset('_images/' . $MainFile . '/' . $place->file . '/s-' . $place->picNumber),
+            'f' => URL::asset('_images/' . $MainFile . '/' . $place->file . '/f-' . $place->picNumber),
+            'l' => URL::asset('_images/' . $MainFile . '/' . $place->file . '/l-' . $place->picNumber),
+            't' => URL::asset('_images/' . $MainFile . '/' . $place->file . '/t-' . $place->picNumber),
+            'mainPic' => URL::asset('_images/' . $MainFile . '/' . $place->file . '/' . $place->picNumber),
             'alt' => $place->alt,
             'name' => 'کوچیتا',
             'userPic' => $koochitaPic,
@@ -715,7 +700,25 @@ function getAllPlacePicsByKind($kindPlaceId, $placeId){
 
         array_push($sitePics, $s);
     }
-
+    foreach ($place->pics as $item){
+        if(is_file(__DIR__ .'/../../../../assets/_images/' . $MainFile . '/' . $place->file . '/f-' . $item->picNumber)) {
+            $s = ['id' => $place->id,
+                's' => URL::asset('_images/' . $MainFile . '/' . $place->file . '/s-' . $item->picNumber),
+                'f' => URL::asset('_images/' . $MainFile . '/' . $place->file . '/f-' . $item->picNumber),
+                'l' => URL::asset('_images/' . $MainFile . '/' . $place->file . '/l-' . $item->picNumber),
+                't' => URL::asset('_images/' . $MainFile . '/' . $place->file . '/t-' . $item->picNumber),
+                'mainPic' => URL::asset('_images/' . $MainFile . '/' . $place->file . '/' . $item->picNumber),
+                'alt' => $place->alt,
+                'name' => 'کوچیتا',
+                'userPic' => $koochitaPic,
+                'showInfo' => false,
+                'like' => 0,
+                'dislike' => 0,
+                'description' => '',
+                'fromUpload' => ''];
+            array_push($sitePics, $s);
+        }
+    }
     $sitePicsJSON = json_encode($sitePics);
 
     if(\auth()->check())
@@ -795,6 +798,8 @@ function getAllPlacePicsByKind($kindPlaceId, $placeId){
         }
     }
     $photographerPicsJSON = json_encode($photographerPics);
+
+
 
     return [$sitePics, $sitePicsJSON, $photographerPics, $photographerPicsJSON, $userPhotos, $userPhotosJSON];
 }
@@ -1062,12 +1067,12 @@ function getUserPic($id = 0){
     return $uPic;
 }
 
-function getPlacePic($placeId = 0, $kindPlaceId = 0){
+function getPlacePic($placeId = 0, $kindPlaceId = 0, $kind = 'f'){
     if($placeId != 0) {
         $kindPlace = Place::find($kindPlaceId);
         $place = DB::table($kindPlace->tableName)->where('id', $placeId)->select(['id', 'cityId','name', 'file', 'picNumber', 'keyword'])->first();
         if($place != null && $place->file != 'none' && $place->file != null){
-            $location = __DIR__ . '/../../../../assets/_images/' . $kindPlace->fileName . '/' . $place->file . '/f-' . $place->picNumber;
+            $location = __DIR__ . '/../../../../assets/_images/' . $kindPlace->fileName . '/' . $place->file . '/' . $kind . '-' . $place->picNumber;
             if (is_file($location))
                 return URL::asset('_images/' . $kindPlace->fileName . '/' . $place->file . '/f-' . $place->picNumber);
         }

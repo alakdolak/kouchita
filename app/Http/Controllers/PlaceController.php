@@ -140,19 +140,8 @@ class PlaceController extends Controller {
 
         $photos = [];
 
-        if (!empty($place->picNumber)) {
-            if (file_exists((__DIR__ . '/../../../../assets/_images/' . $kindPlace->fileName . '/' . $place->file . '/s-' . $place->picNumber))) {
-                $photos[count($photos)] = URL::asset('_images/'. $kindPlace->fileName . '/' . $place->file . '/s-' . $place->picNumber) ;
-                $thumbnail = URL::asset('_images/' . $kindPlace->fileName . '/' . $place->file . '/f-' . $place->picNumber);
-            } else {
-                $photos[count($photos)] = URL::asset('_images/nopic/blank.jpg');
-                $thumbnail = URL::asset('_images/nopic/blank.jpg');
-            }
-        }
-        else {
-            $photos[count($photos)] = URL::asset('_images/nopic/blank.jpg');
-            $thumbnail = URL::asset('_images/nopic/blank.jpg');
-        }
+        $photos[count($photos)] = getPlacePic($place->id, $kindPlaceId, 'f');
+        $thumbnail = getPlacePic($place->id, $kindPlaceId, 's');
 
         $allState = State::all();
 
@@ -208,7 +197,13 @@ class PlaceController extends Controller {
 
         $mainWebSiteUrl = \url('/');
         $mainWebSiteUrl .= '/' . $request->path();
-        $localStorageData = ['kind' => 'place', 'name' => $place->name, 'city' => $city->name, 'state' => $state->name, 'mainPic' => $sitePics[0]['f'], 'redirect' => $mainWebSiteUrl];
+
+        if(count($sitePics) > 0)
+            $mainPic = $sitePics[0]['f'];
+        else
+            $mainPic = URL::asset('images/mainPics/nopicv01.jpg');
+
+        $localStorageData = ['kind' => 'place', 'name' => $place->name, 'city' => $city->name, 'state' => $state->name, 'mainPic' => $mainPic, 'redirect' => $mainWebSiteUrl];
 
         return view('hotel-details.hotel-details', array('place' => $place, 'features' => $features , 'save' => $save, 'city' => $city, 'thumbnail' => $thumbnail,
             'state' => $state, 'avgRate' => $rates[1], 'locationName' => $locationName, 'localStorageData' => $localStorageData,

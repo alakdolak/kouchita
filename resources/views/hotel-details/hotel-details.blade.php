@@ -579,9 +579,9 @@ if ($total == 0)
                                             <div class="prw_rup prw_common_mercury_photo_carousel">
                                                 <div class="carousel bignav">
                                                     <div class="carousel_images carousel_images_header">
-                                                        <div id="photographerAlbum" onclick="showPhotoAlbum('photographer')">
+                                                        <div id="photographerAlbum" {{count($photographerPics) > 0 ? "onclick=showPhotoAlbum('photographer')" : ''}}>
                                                             <div id="mainSlider" class="swiper-container">
-                                                                <div class="swiper-wrapper">
+                                                                <div id="mainSliderWrapper" class="swiper-wrapper">
 
                                                                     @for($i = 0; $i < count($photographerPics); $i++)
                                                                         <div class="swiper-slide">
@@ -589,17 +589,16 @@ if ($total == 0)
                                                                                  src="{{$photographerPics[$i]['s']}}"
                                                                                  alt="{{$photographerPics[$i]['alt']}}"
                                                                                  style="width: 100%;">
-
                                                                             <div class="see_all_count_wrap">
-                                                                    <span class="see_all_count">
-                                                                        <div class="circleBase type2" id="photographerIdPic" style="background-color: #4DC7BC;">
-                                                                            <img src="{{$photographerPics[$i]['userPic']}}" style="width: 100%; height: 100%; border-radius: 50%;">
-                                                                        </div>
-                                                                        <div class="display-inline-block mg-rt-10 mg-tp-2">
-                                                                            <span class="display-block font-size-12">عکس از</span>
-                                                                            <span class="display-block">{{$photographerPics[$i]['name']}}</span>
-                                                                        </div>
-                                                                    </span>
+                                                                            <span class="see_all_count">
+                                                                                <div class="circleBase type2" id="photographerIdPic" style="background-color: #4DC7BC;">
+                                                                                    <img src="{{$photographerPics[$i]['userPic']}}" style="width: 100%; height: 100%; border-radius: 50%;">
+                                                                                </div>
+                                                                                <div class="display-inline-block mg-rt-10 mg-tp-2">
+                                                                                    <span class="display-block font-size-12">عکس از</span>
+                                                                                    <span class="display-block">{{$photographerPics[$i]['name']}}</span>
+                                                                                </div>
+                                                                            </span>
                                                                             </div>
 
                                                                         </div>
@@ -613,8 +612,8 @@ if ($total == 0)
                                                             عکاس هستید؟ کلیک کنید
                                                         </a>
                                                     </div>
-                                                    <div class="left-nav left-nav-header swiper-button-next"></div>
-                                                    <div class="right-nav right-nav-header swiper-button-prev"></div>
+                                                    <div class="left-nav left-nav-header swiper-button-next mainSliderNavBut"></div>
+                                                    <div class="right-nav right-nav-header swiper-button-prev mainSliderNavBut"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -641,25 +640,19 @@ if ($total == 0)
                                                         <div class="prw_rup prw_common_centered_image">
                                                             @if(count($sitePics) != 0)
                                                                 <span class="imgWrap imgWrap1stTemp" onclick="showPhotoAlbum('sitePics')">
-                                                        <img alt="{{$place->alt}}" src="{{$thumbnail}}"
-                                                             class="centeredImg" width="100%"/>
-                                                    </span>
+                                                                    <img alt="{{$place->alt}}" src="{{$thumbnail}}"
+                                                                         class="centeredImg" width="100%"/>
+                                                                </span>
                                                             @else
                                                                 <span class="imgWrap imgWrap1stTemp"></span>
                                                             @endif
                                                         </div>
-                                                        @if(count($sitePics) != 0)
-                                                            <div class="albumInfo" data-toggle="modal"
-                                                                 data-target="#showingSitePicsModal">
-                                                                <span class="ui_icon camera">&nbsp;</span>عکس‌های
-                                                                سایت - {{count($sitePics)}}
-                                                            </div>
-                                                        @else
-                                                            <div class="albumInfo">
-                                                                <span class="ui_icon camera">&nbsp;</span>عکس‌های
-                                                                سایت - {{count($sitePics)}}
-                                                            </div>
-                                                        @endif
+
+                                                        <div class="albumInfo" {{count($sitePics) != 0 ? 'data-toggle="modal" data-target="#showingSitePicsModal"' : ''}}>
+                                                            <span class="ui_icon camera">&nbsp;</span>
+                                                            عکس‌های سایت - {{count($sitePics)}}
+                                                        </div>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -765,19 +758,29 @@ if ($total == 0)
                                 </a>
                             </div>
                             <script>
-                                var mainSlideSwiper = new Swiper('#mainSlider', {
-                                    spaceBetween: 30,
-                                    centeredSlides: true,
-                                    loop: true,
-                                    autoplay: {
-                                        delay: 5000,
-                                        disableOnInteraction: false,
-                                    },
-                                    navigation: {
-                                        prevEl: '.swiper-button-next',
-                                        nextEl: '.swiper-button-prev',
-                                    },
-                                });
+                                if(photographerPics.length > 0) {
+                                    var mainSlideSwiper = new Swiper('#mainSlider', {
+                                        spaceBetween: 30,
+                                        centeredSlides: true,
+                                        loop: true,
+                                        autoplay: {
+                                            delay: 5000,
+                                            disableOnInteraction: false,
+                                        },
+                                        navigation: {
+                                            prevEl: '.swiper-button-next',
+                                            nextEl: '.swiper-button-prev',
+                                        },
+                                    });
+                                }
+                                else{
+                                    $('.mainSliderNavBut').css('display', 'none');
+                                    $('.see_all_count_wrap').css('display', 'none');
+                                    text =  '<div class="swiper-slide">\n' +
+                                            '<img class="eachPicOfSlider" src="{{URL::asset('images/mainPics/nopictext1.jpg')}}" style="width: 100%;">\n' +
+                                            '</div>\n';
+                                    $('#mainSliderWrapper').append(text);
+                                }
                             </script>
                         </div>
                     </div>
