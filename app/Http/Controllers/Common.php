@@ -1040,7 +1040,6 @@ function getReviewPicsURL($review){
 function getUserPic($id = 0){
 
     $user = User::find($id);
-//    dd($user);
     if($user != null){
         if(strpos($user->picture, 'http') !== false)
             return $user->picture;
@@ -1061,6 +1060,20 @@ function getUserPic($id = 0){
         $uPic = URL::asset('_images/nopic/blank.jpg');
 
     return $uPic;
+}
+
+function getPlacePic($placeId = 0, $kindPlaceId = 0){
+    if($placeId != 0) {
+        $kindPlace = Place::find($kindPlaceId);
+        $place = DB::table($kindPlace->tableName)->where('id', $placeId)->select(['id', 'cityId','name', 'file', 'picNumber', 'keyword'])->first();
+        if($place != null && $place->file != 'none' && $place->file != null){
+            $location = __DIR__ . '/../../../../assets/_images/' . $kindPlace->fileName . '/' . $place->file . '/f-' . $place->picNumber;
+            if (is_file($location))
+                return URL::asset('_images/' . $kindPlace->fileName . '/' . $place->file . '/f-' . $place->picNumber);
+        }
+    }
+
+    return URL::asset('images/mainPics/nopicv01.jpg');
 }
 
 function createUrl($kindPlaceId, $placeId, $stateId, $cityId, $articleId = 0){

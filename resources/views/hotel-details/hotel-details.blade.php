@@ -146,12 +146,42 @@ if ($total == 0)
                 <style>
                     .changeWidth {
                         @if(session('goDate'))
-width: 14% !important;
-                    @endif
-}
+                            width: 14% !important;
+                        @endif
+                    }
                     .rtl .ui_bubble_rating:after, .rtl .ui_bubble_rating:before{
                         transform: scale(1, 1);
                     }
+                    .sharePageIcon:before{
+                        content: '\e1f5' !important;
+                        font-family: Shazde_Regular2 !important;
+                        font-size: 18px;
+                        position: absolute;
+                        right: 15px;
+                        top: 4px;
+                    }
+                    .commentOptionsBoxes label{
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
+                    .add360VideoCommentIcon, .tagFriendCommentIcon, .addPhotoCommentIcon, .addVideoCommentIcon{
+                        position: relative;
+                        line-height: 10px;
+                        right: auto;
+                        top: auto;
+                    }
+                    .commentOptionsText{
+                        margin-right: 10px;
+                    }
+                    .commentMoreSettingBar{
+                        justify-content: space-evenly;
+                    }
+                    .commentOptionsBoxes{
+                        display: flex;
+                        align-items: center;
+                    }
+
                 </style>
 
                 {{--alarm--}}
@@ -211,7 +241,7 @@ width: 14% !important;
                                         <input type="hidden" name="rateQuestion" id="rateQuestionInput">
 
                                         <div class="modal-content">
-                                            <div class="postMainDivHeader">
+                                            <div class="postMainDivHeader" style="display: flex; justify-content: space-between">
                                                 <button type="button" class="close closeBtnPostModal" data-dismiss="modal"
                                                         onclick="closeNewPostModal(); showMobileTabLink()">&times;
                                                 </button>

@@ -434,16 +434,7 @@ class HomeController extends Controller
             $item->comments = getAnsToComments($item->id)[1];
 
             $item->user = User::select(['first_name', 'last_name', 'username', 'picture', 'uploadPhoto'])->find($item->visitorId);
-
-            if($item->user->uploadPhoto == 0){
-                $deffPic = DefaultPic::find($item->user->picture);
-                if($deffPic != null)
-                    $item->userPic = URL::asset('defaultPic/' . $deffPic->name);
-                else
-                    $item->userPic = URL::asset('_images/nopic/blank.jpg');
-            }
-            else
-                $item->userPic = URL::asset('userProfile/' . $item->user->picture);
+            $item->userPic = getUserPic($item->user->id);
 
             $kindPlace = Place::find($item->kindPlaceId);
             $item->mainFile = $kindPlace->fileName;
@@ -523,6 +514,10 @@ class HomeController extends Controller
         if($count > 0) {
             $C /= $count;
             $D /= $count;
+        }
+        else{
+            $C = 32.681757;
+            $D = 53.498319;
         }
         $map = ['C' => $C, 'D' => $D, 'maxLat' => $maxLat, 'maxLng' => $maxLng, 'minLng' => $minLng, 'minLat' => $minLat];
 
@@ -1712,16 +1707,8 @@ class HomeController extends Controller
 
             $places = DB::table($kindPlace->tableName)->whereIn('id', $placeId)->select(['id', 'cityId','name', 'file', 'picNumber', 'keyword'])->get();
             foreach ($places as $item){
-                if($item->file != 'none' && $item->file != null) {
-                    $location = __DIR__ . '/../../../../assets/_images/' . $kindPlace->fileName . '/' . $item->file . '/f-' . $item->picNumber;
-                    if(is_file($location))
-                        $item->pic = URL::asset('_images/' . $kindPlace->fileName . '/' . $item->file . '/f-' . $item->picNumber);
-                    else
-                        $item->pic = URL::asset('images/mainPics/nopicv01.jpg');
-                }
-                else
-                    $item->pic = URL::asset('images/mainPics/nopicv01.jpg');
 
+                $item->pic = getPlacePic($item->id, $kindPlace->id);
                 $item->url = createUrl($kindPlace->id, $item->id, 0, 0);
                 $item->rate = getRate($item->id, $kindPlace->id)[1];
                 $item->city = Cities::find($item->cityId);

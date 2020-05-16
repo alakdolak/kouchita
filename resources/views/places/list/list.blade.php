@@ -100,6 +100,19 @@
         .filterGroupTitle{
             overflow: visible !important;
         }
+        div.prw_rup.prw_common_centered_thumbnail .centering_wrapper{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            position: relative;
+            top: auto;
+        }
+        div.prw_rup.prw_common_centered_thumbnail .sizing_wrapper{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     </style>
 
     <script src= {{URL::asset("js/calendar.js") }}></script>

@@ -120,7 +120,6 @@ class PlaceController extends Controller {
             $uPic = getUserPic(); // common.php
         }
 
-
         saveViewPerPage($kindPlaceId, $place->id); // common.php
 
         $bookMark = false;
@@ -393,14 +392,10 @@ class PlaceController extends Controller {
             if($kindPlace != null) {
                 $nearbys = DB::select("SELECT *, acos(" . sin($D) . " * sin(D / 180 * 3.14) + " . cos($D) . " * cos(D / 180 * 3.14) * cos(C / 180 * 3.14 - " . $C . ")) * 6371 as distance FROM " . $tableName . " HAVING distance between 0.001 and " . ConfigModel::first()->radius . " order by distance ASC limit 0, " . $count);
                 foreach ($nearbys as $nearby) {
-
-                    if (file_exists((__DIR__ . '/../../../../assets/_images/' . $kindPlace->fileName . '/' . $nearby->file . '/f-' . $nearby->picNumber)))
-                        $nearby->pic = URL::asset("_images/" . $kindPlace->fileName . "/" . $nearby->file . '/f-' . $nearby->picNumber);
-                    else
-                        $nearby->pic = URL::asset("_images/nopic/blank.jpg");
+                    $nearby->pic = getPlacePic($nearby->id, $kindPlace->id);
 
                     $condition = ['placeId' => $nearby->id, 'kindPlaceId' => $kindPlace->id, 'confirm' => 1,
-                        'activityId' => Activity::whereName('نظر')->first()->id];
+                                  'activityId' => Activity::whereName('نظر')->first()->id];
                     $nearby->reviews = LogModel::where($condition)->count();
                     $nearby->distance = round($nearby->distance, 2);
                     $nearby->rate = getRate($nearby->id, $kindPlace->id)[1];
@@ -3882,12 +3877,7 @@ class PlaceController extends Controller {
         }
 
         foreach ($places as $place) {
-
-            if (file_exists((__DIR__ . '/../../../../assets/_images/' . $file . '/' . $place->file . '/f-' . $place->picNumber)))
-                $place->pic = URL::asset('_images/' . $file .'/' . $place->file . '/f-' . $place->picNumber);
-            else
-                $place->pic = URL::asset('_images/nopic/blank.jpg');
-
+            $place->pic = getPlacePic($place->id, $kindPlace->id);
             $condition = ['placeId' => $place->id, 'kindPlaceId' => $request->kindPlaceId,
                 'activityId' => $activityId, 'confirm' => 1];
             $place->reviews = LogModel::where($condition)->count();
