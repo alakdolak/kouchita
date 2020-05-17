@@ -3600,6 +3600,10 @@ class PlaceController extends Controller {
                 if ($state == null)
                     return "نتیجه ای یافت نشد";
 
+                $contentCount = \DB::table($kindPlace->tableName)->where('cityId', $city->id)->count();
+                if($contentCount < 10)
+                    return \redirect(route('place.list', ['kindPlaceId' => $kindPlaceId, 'mode' => 'country']));
+
                 $articleUrl = \url('/article/list/city/' . $state->name);
                 $n = ' استان ' . $state->name;
                 $locationName = ["name" => $n, 'state' => $state->name, 'cityName' => $n, 'cityNameUrl' => $state->name, 'articleUrl' => $articleUrl, 'kindState' => 'state', 'kindPage' => 'list'];
@@ -3613,10 +3617,15 @@ class PlaceController extends Controller {
                 if ($state == null)
                     return "نتیجه ای یافت نشد";
 
+                $contentCount = \DB::table($kindPlace->tableName)->where('cityId', $city->id)->count();
+                if($contentCount < 10)
+                    return \redirect(route('place.list', ['kindPlaceId' => $kindPlaceId, 'mode' => 'state', 'city' => $state->name]));
+
                 $articleUrl = \url('/article/list/city/' . $city->name);
                 $n = ' شهر ' . $city->name;
                 $locationName = ["name" => $n, 'state' => $state->name, 'cityName' => $n, 'cityNameUrl' => $city->name, 'articleUrl' => $articleUrl, 'kindState' => 'city', 'kindPage' => 'list'];
             }
+
 
 
             switch ($kindPlaceId){
