@@ -108,7 +108,7 @@
 <script>
     resizeFitImg('resizeImgClass');
 
-    $(document).ready(function(){
+    $(window).ready(function(){
         resizeFitImg('resizeImgClass');
     });
     $(window).resize(function(){

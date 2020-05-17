@@ -4,7 +4,7 @@
     width: 300px;
     background-color: #232323;
     border-radius: 8px;
-    padding: 10px;
+    padding: 5px;
     align-items: flex-start;
     margin-bottom: 10px;
 }
@@ -34,6 +34,7 @@
     /*border-radius: 50%;*/
     overflow: hidden;
     display: flex;
+    align-items: center;
 }
 .videoUserInfoName{
     margin-right: 13px;
@@ -42,16 +43,16 @@
     justify-content: center;
 }
 .videoSugUserPicDiv{
-    width: 60px;
-    height: 60px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     overflow: hidden;
 }
 .videoSugUserInfo{
     margin-bottom: 10px;
-}
-.videoSugName{
-
+     overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .videoSugUserName{
     font-size: 12px;
@@ -93,6 +94,9 @@
 .videoSugPicSection:hover .playIconDiv{
     display: flex;
 }
+.swiper-button-prev, .swiper-button-next{
+    opacity: .5;
+}
 @media (max-width: 767px) {
     .otherSectionBody{
         flex-direction: column;
@@ -101,9 +105,40 @@
         margin-bottom: 15px;
     }
     .videoSugPicSection{
-        height: 230px;
+        height: 130px;
     }
     .videoSugInfo{
         padding: 0px;
+    }
+    .videoSugName{
+        font-size: 11px;
+    }
+    .videoSugUserInfo{
+        margin: 0;
+        margin-top: 3px;
+    }
+    .videoSugUserName{
+        display: none;
+    }
+    .videoSugUserPicDiv{
+        display: none;
+    }
+    .videoSugUserPic{
+        height: auto;
+    }
+    .videoUserInfoName{
+        margin-right: 0;
+        color: grey;
+    }
+}
+@media (max-width: 450px){
+    .overPicSug{
+        font-size: 13px;
+    }
+    .mainShowBase{
+        width: calc(100% - 10px);
+    }
+    .videoSugPicSection{
+        height: 110px;
     }
 }

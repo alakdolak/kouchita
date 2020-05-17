@@ -371,7 +371,7 @@
                     </div>
                     <div class="headerWithLineLine"></div>
                 </div>
-                @include('features.commentingSection')
+                @include('streaming.commentingSection')
                 <script !src="">
                     commentingInitdata = {
                         'videoId': {{$video->id}}
@@ -445,13 +445,9 @@
                 prevEl: '.swiper-button-prev',
             },
             breakpoints: {
-                650: {
-                    slidesPerView: 1,
-                    spaceBetween: 0,
-                },
                 1250: {
                     slidesPerView: 2,
-                    spaceBetween: 20,
+                    spaceBetween: 5,
                 },
                 1550: {
                     slidesPerView: 3,

@@ -196,7 +196,7 @@ class StreamingController extends Controller
                 $success = file_put_contents($file, $data);
 
                 $img = \Image::make($file);
-                $img->resize(null, 160, function ($constraint) {
+                $img->resize(400, null, function ($constraint) {
                     $constraint->aspectRatio();
                 })->save($nLoc . '/min_' . $thumbanil);
 
