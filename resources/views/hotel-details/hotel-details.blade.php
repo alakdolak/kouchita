@@ -909,14 +909,28 @@ if ($total == 0)
                                                                 <div>
                                                                     <div class="row">
                                                                         @if(isset($place->material) && is_array($place->material))
-                                                                            @foreach($place->material as $item)
-                                                                                <div class="col-sm-6 col-xs-6 float-right traditionalFoodDescription">
-                                                                                    <div class="row font-size-20">
-                                                                                        <div class="col-sm-6 col-xs-12 color-green float-right">{{$item[0]}}</div>
-                                                                                        <div class="col-sm-6 col-xs-12">{{$item[1]}}</div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            @endforeach
+                                                                            <div class="col-sm-6">
+                                                                                @foreach($place->material as $key => $item)
+                                                                                    @if($key%2 == 0)
+                                                                                        <div class="row font-size-20">
+                                                                                            <div class="col-sm-6 col-xs-12 float-right">{{$item[0]}}</div>
+                                                                                            <div class="col-sm-6 col-xs-12 color-green">{{$item[1]}}</div>
+                                                                                        </div>
+                                                                                        <hr>
+                                                                                    @endif
+                                                                                @endforeach
+                                                                            </div>
+                                                                            <div class="col-sm-6" style="border-left: 1px solid #eee;">
+                                                                                @foreach($place->material as $key => $item)
+                                                                                    @if($key%2 != 0)
+                                                                                        <div class="row font-size-20">
+                                                                                            <div class="col-sm-6 col-xs-12 float-right">{{$item[0]}}</div>
+                                                                                            <div class="col-sm-6 col-xs-12 color-green">{{$item[1]}}</div>
+                                                                                        </div>
+                                                                                        <hr>
+                                                                                    @endif
+                                                                                @endforeach
+                                                                            </div>
                                                                         @endif
 
                                                                     </div>

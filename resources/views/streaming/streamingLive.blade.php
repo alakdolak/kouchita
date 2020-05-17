@@ -273,11 +273,7 @@
 
             <div class="showVideo">
                 <div id="46671937617" class="videoContainer">
-<<<<<<< HEAD
-<video id="video_1" class="video-js playads" controls controlsList="nodownload" data-setup=''>
-=======
                     <video id="video_1" class="video-js playads" controls controlsList="nodownload" data-setup=''>
->>>>>>> 744e2e0410faa708e809489a5e9df999f8087c53
                         <source src="https://streaming.koochita.com/hls/test22.m3u8">
                     </video>
                     <div class="liveCommentsOnFS display-none">

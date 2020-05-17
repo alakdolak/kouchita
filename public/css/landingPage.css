@@ -9,7 +9,7 @@ body {
     justify-content: center;
 }
 .mainPic{
-    height: 100vh;
+    min-height: 100vh;
 }
 .sidePics{
     width: 100%;
