@@ -2283,7 +2283,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     font-size: 25px;
     position: absolute;
     top: -9px;
-    right: 30px;
+    right: 0px;
     cursor: pointer;
 }
 
@@ -2303,7 +2303,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     font-size: 25px;
     position: absolute;
     top: -4px;
-    right: 30px;
+    right: 0px;
     cursor: pointer;
 }
 
@@ -2343,7 +2343,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     font-size: 20px;
     position: absolute;
     top: -4px;
-    right: 25px;
+    right: 0px;
     cursor: pointer;
 }
 

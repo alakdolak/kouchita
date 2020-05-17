@@ -439,6 +439,10 @@
             slidesPerGroup: 1,
             // width: 300,
             loop: true,
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+            },
             loopFillGroupWithBlank: true,
             navigation: {
                 nextEl: '.swiper-button-next',
