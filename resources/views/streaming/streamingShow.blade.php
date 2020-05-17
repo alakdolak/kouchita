@@ -6,15 +6,22 @@
     <style>
         .videoPlaces{
             display: flex;
-            align-items: center;
+            justify-content: space-around;
             flex-wrap: wrap;
-        }
-        .moreVideoPlaces{
-            display: none;
-            flex-wrap: wrap;
+            /*height: 400px;*/
+            transition: .4s;
+            overflow: hidden;
         }
         .showInPhone{
             display: none;
+        }
+        .sideSuggestion{
+            width: 49% !important;
+        }
+        @media (max-width: 1400px) {
+            .sideSuggestion .videoSugPicSection{
+                height: 120px !important;
+            }
         }
         @media (max-width: 992px) {
             .showInPhone{
@@ -71,8 +78,8 @@
                         </div>
                         <div class="headerWithLineLine"></div>
                     </div>
-                    <div class="videoPlaces">
-                        @for($i = 0; $i < 4 && $i < count($video->places); $i++)
+                    <div id="pcVideoPlace" class="videoPlaces">
+                        @for($i = 0; $i < count($video->places); $i++)
                             <div class="moreInfoEachItem">
                                 <a href="{{$video->places[$i]->url}}" target="_blank" class="mainDivImgMoreInfoItems">
                                     <img src="{{$video->places[$i]->placePic}}" style="width: 100%">
@@ -114,55 +121,27 @@
                                 </div>
                             </div>
                         @endfor
-                        @if(count($video->places) > 4)
-                            <div class="moreBtn" onclick="openMorePlace(this)">بیشتر</div>
-                            <div class="moreVideoPlaces">
-                                @for($i = 4; $i < count($video->places); $i++)
-                                    <div class="moreInfoEachItem">
-                                        <div class="mainDivImgMoreInfoItems">
-                                            <img src="{{$video->places[$i]->placePic}}" style="width: 100%">
-                                        </div>
-                                        <div class="moreInfoItemsDetails">
-                                            <a href="{{$video->places[$i]->url}}" class="placeName">
-                                                {{$video->places[$i]->name}}
-                                            </a>
-
-                                            @if($video->places[$i]->kindPlaceId > 0)
-                                                <div class="placeRates">
-                                                    <div class="rating_and_popularity">
-                                                    <span class="header_rating">
-                                                       <div class="rs rating" rel="v:rating">
-                                                           <div class="prw_rup prw_common_bubble_rating overallBubbleRating float-left">
-                                                               <span class="ui_bubble_rating bubble_{{$video->places[$i]->placeRate}}0 font-size-16" property="ratingValue"></span>
-                                                           </div>
-                                                       </div>
-                                                    </span>
-                                                        <span class="header_popularity popIndexValidation" id="scoreSpanHeader">
-                                                    <a>
-                                                        {{$video->places[$i]->placeReviews}}
-                                                        نقد
-                                                    </a>
-                                                </span>
-                                                    </div>
-                                                </div>
-                                            @endif
-                                            @if($video->places[$i]->kindPlaceId > -1)
-                                                <div class="placeState">استان:
-                                                    <span>{{$video->places[$i]->placeState}}</span>
-                                                </div>
-                                            @endif
-                                            @if($video->places[$i]->kindPlaceId > 0)
-                                                <div class="placeCity">شهر:
-                                                    <span>{{$video->places[$i]->placeCity}}</span>
-                                                </div>
-                                            @endif
-
-                                        </div>
-                                    </div>
-                                @endfor
-                            </div>
-                        @endif
+{{--                        <div id="pcMoreBtn" class="moreBtn" onclick="openMorePlace(this)">بیشتر</div>--}}
                     </div>
+
+{{--                    <script>--}}
+
+{{--                        if($('#pcVideoPlace').height() < 400)--}}
+{{--                            $('#pcMoreBtn').hide();--}}
+{{--                        else--}}
+{{--                            $('#pcVideoPlace').css('height', '400px');--}}
+
+{{--                        $(window).resize(function(){--}}
+{{--                            $('#pcVideoPlace').css('height', 'auto');--}}
+
+{{--                            if($('#pcVideoPlace').height() < 400)--}}
+{{--                                $('#pcMoreBtn').hide();--}}
+{{--                            else--}}
+{{--                                $('#pcVideoPlace').css('height', '400px');--}}
+
+{{--                        });--}}
+{{--                    </script>--}}
+
                 </div>
             @endif
 
@@ -174,7 +153,7 @@
                         </div>
                         <div class="headerWithLineLine"></div>
                     </div>
-                    <div id="videoThisVideo" style="display: flex; align-items: center; flex-wrap: wrap; justify-content: space-between"></div>
+                    <div id="videoThisVideo" style="display: flex; align-items: center; flex-wrap: wrap; justify-content: space-evenly"></div>
                 </div>
             @endif
 
@@ -268,8 +247,8 @@
                             </div>
                             <div class="headerWithLineLine"></div>
                         </div>
-                        <div class="videoPlaces">
-                            @for($i = 0; $i < 4 && $i < count($video->places); $i++)
+                        <div id="mobileVideoPlace" class="videoPlaces">
+                            @for($i = 0; $i < count($video->places); $i++)
                                 <div class="moreInfoEachItem">
                                     <a href="{{$video->places[$i]->url}}" target="_blank" class="mainDivImgMoreInfoItems">
                                         <img src="{{$video->places[$i]->placePic}}" style="width: 100%">
@@ -311,55 +290,9 @@
                                     </div>
                                 </div>
                             @endfor
-                            @if(count($video->places) > 4)
-                                <div class="moreBtn" onclick="openMorePlace(this)">بیشتر</div>
-                                <div class="moreVideoPlaces">
-                                    @for($i = 4; $i < count($video->places); $i++)
-                                        <div class="moreInfoEachItem">
-                                            <div class="mainDivImgMoreInfoItems">
-                                                <img src="{{$video->places[$i]->placePic}}" style="width: 100%">
-                                            </div>
-                                            <div class="moreInfoItemsDetails">
-                                                <a href="{{$video->places[$i]->url}}" class="placeName">
-                                                    {{$video->places[$i]->name}}
-                                                </a>
-
-                                                @if($video->places[$i]->kindPlaceId > 0)
-                                                    <div class="placeRates">
-                                                        <div class="rating_and_popularity">
-                                                    <span class="header_rating">
-                                                       <div class="rs rating" rel="v:rating">
-                                                           <div class="prw_rup prw_common_bubble_rating overallBubbleRating float-left">
-                                                               <span class="ui_bubble_rating bubble_{{$video->places[$i]->placeRate}}0 font-size-16" property="ratingValue"></span>
-                                                           </div>
-                                                       </div>
-                                                    </span>
-                                                            <span class="header_popularity popIndexValidation" id="scoreSpanHeader">
-                                                    <a>
-                                                        {{$video->places[$i]->placeReviews}}
-                                                        نقد
-                                                    </a>
-                                                </span>
-                                                        </div>
-                                                    </div>
-                                                @endif
-                                                @if($video->places[$i]->kindPlaceId > -1)
-                                                    <div class="placeState">استان:
-                                                        <span>{{$video->places[$i]->placeState}}</span>
-                                                    </div>
-                                                @endif
-                                                @if($video->places[$i]->kindPlaceId > 0)
-                                                    <div class="placeCity">شهر:
-                                                        <span>{{$video->places[$i]->placeCity}}</span>
-                                                    </div>
-                                                @endif
-
-                                            </div>
-                                        </div>
-                                    @endfor
-                                </div>
-                            @endif
+{{--                            <div id="mobileMoreBtn" class="moreBtn" onclick="openMorePlace(this)">بیشتر</div>--}}
                         </div>
+
                     </div>
                 @endif
             </div>
@@ -431,7 +364,10 @@
 
         @if(isset($userMoreVideo) && count($userMoreVideo) > 0)
             userMoreVideo = {!! $userMoreVideo !!}
-            createVideoSuggestionDiv(userMoreVideo, 'videoThisVideo');
+            createVideoSuggestionDiv(userMoreVideo, 'videoThisVideo', function(){
+                $('#videoThisVideo').find('.videoSuggestion').addClass('sideSuggestion');
+                resizeFitImg('resizeImgClass');
+            });
         @endif
 
 

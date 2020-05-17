@@ -51,7 +51,7 @@
     let videoSample = $('#videoSuggestionSample').html();
     $('#videoSuggestionSample').remove();
 
-    function createVideoSuggestionDiv(_pack, _destId){
+    function createVideoSuggestionDiv(_pack, _destId, _callBack = ''){
         // _pack = {
         //     id : ,
         //     title: ,
@@ -75,5 +75,8 @@
             $('#' + _destId).append(text);
             resizeFitImg('resizeImgClass');
         }
+
+        if(typeof _callBack === 'function')
+            _callBack();
     }
 </script>

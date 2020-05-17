@@ -191,10 +191,10 @@
 }
 
 .moreInfoEachItem {
-    width: 270px;
     display: flex;
-    margin: 15px 0;
-    margin-left: 25px;
+    min-height: 160px;
+    margin: 10px;
+    flex-direction: column;
     align-items: center;
 }
 
@@ -212,12 +212,16 @@
     flex-direction: column;
     color: white;
     font-size: 14px;
-    margin-right: 10px;
+    text-align: center;
+    width: 130px;
 }
 
 .moreInfoItemsDetails .placeName {
     font-weight: 600;
     font-size: 18px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .moreInfoItemsDetails .placeRates {
@@ -464,12 +468,6 @@
 
 .userPicAnsToReviewMobile{
     display: none;
-}
-
-@media (max-width: 1300px) {
-    #videoThisVideo > div {
-        width: 100% !important;
-    }
 }
 
 @media (max-width: 1160px) {
