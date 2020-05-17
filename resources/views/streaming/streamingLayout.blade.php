@@ -72,22 +72,22 @@
             <img src="{{URL::asset('images/streaming/Live.png')}}" class="LivePngClass">
             <span class="liveText">نمایش زنده</span>
         </div>
-        <div class="secHeaderTabs">
-            <img src="{{URL::asset('images/streaming/tv.png')}}" class="TvPngClass">
-            <span>مجموعه‌ها</span>
-        </div>
-        <div class="secHeaderTabs">
-            <img src="{{URL::asset('images/streaming/play-button.png')}}" class="TvPngClass">
-            <span>کلیپ</span>
-        </div>
-        <div class="secHeaderTabs secHeaderTabsChoose">
-            <span></span>
-            <span>موردعلاقه‌ها</span>
-        </div>
-        <div class="secHeaderTabs">
-            <span></span>
-            <span>ذخیره‌شده‌ها</span>
-        </div>
+{{--        <div class="secHeaderTabs">--}}
+{{--            <img src="{{URL::asset('images/streaming/tv.png')}}" class="TvPngClass">--}}
+{{--            <span>مجموعه‌ها</span>--}}
+{{--        </div>--}}
+{{--        <div class="secHeaderTabs">--}}
+{{--            <img src="{{URL::asset('images/streaming/play-button.png')}}" class="TvPngClass">--}}
+{{--            <span>کلیپ</span>--}}
+{{--        </div>--}}
+{{--        <div class="secHeaderTabs secHeaderTabsChoose">--}}
+{{--            <span></span>--}}
+{{--            <span>موردعلاقه‌ها</span>--}}
+{{--        </div>--}}
+{{--        <div class="secHeaderTabs">--}}
+{{--            <span></span>--}}
+{{--            <span>ذخیره‌شده‌ها</span>--}}
+{{--        </div>--}}
 
         <div class="addVideoSecHeader" onclick="goToUpload()">
             <span>+ افزودن ویدیو</span>
