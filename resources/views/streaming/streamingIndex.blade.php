@@ -6,9 +6,6 @@
     <link rel="stylesheet" href="{{URL::asset('css/streaming/indexStreaming.css')}}">
 
     <style>
-        .swiper-container{
-            padding: 10px;
-        }
         .allVideo{
             z-index: 1;
             position: absolute;
@@ -170,16 +167,13 @@
 
         var swipersuggestion = new Swiper('.videoSuggestionSwiper', {
             slidesPerGroup: 1,
-            spaceBetween: 10,
+            spaceBetween: 5,
             loop: true,
             navigation: {
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
             },
             breakpoints: {
-                650: {
-                    slidesPerView: 1,
-                },
                 860: {
                     slidesPerView: 2,
                 },
@@ -189,7 +183,14 @@
                 10000: {
                     slidesPerView: 4,
                 }
-            }
+            },
+            on: {
+                init: function () {
+                    setTimeout(function(){
+                        resizeFitImg('resizeImgClass')
+                    },300);
+                },
+            },
         });
         swipersuggestion.update();
 

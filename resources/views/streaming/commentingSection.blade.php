@@ -203,6 +203,17 @@
             width: 100% ;
         }
     }
+    @media (max-width: 600px) {
+        .commentSectionBody{
+            padding: 5px;
+        }
+        .commentAnsTextSection{
+            margin-right: 0px;
+        }
+        .mainAnsOf{
+            width: 90%;
+        }
+    }
 </style>
 
 

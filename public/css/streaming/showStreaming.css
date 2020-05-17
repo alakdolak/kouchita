@@ -613,6 +613,9 @@
     .secHeaderTabs {
         margin: 0 9px;
     }
+    .commentSectionBody{
+        padding: 5px;
+    }
 }
 
 @media (max-width: 510px) {

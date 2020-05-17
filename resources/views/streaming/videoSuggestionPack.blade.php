@@ -5,7 +5,7 @@
         <a href="##url##" class="videoSugPicSection">
             <img src="##pic##" class="resizeImgClass videoSugPic">
             <div class="overPicSug likeOverPic">
-                <div style="display: flex; margin-left: 10px;">
+                <div style="display: flex; margin-left: 5px;">
                     <span class="likeOverPicNum">##disLike##</span>
                     <span class="DisLikeIcon likeOverPicIcon"></span>
                 </div>
