@@ -530,9 +530,9 @@ if ($total == 0)
 
                             <div id="bestPrice" class="meta position-relative"
                                  style="@if(session('goDate') != null && session('backDate') != null) display: none @endif ">
-                                <div id="targetHelp_9" class="targets  float-left">
+                                <a id="targetHelp_9" href="{{route('streaming.index')}}" target="_blank" class="targets  float-left">
                                     <div class="meta_inner" id="bestPriceInnerDiv"></div>
-                                </div>
+                                </a>
                                 <div class="clear-both"></div>
                                 <div id="targetHelp_8" class="wideScreen targets float-left col-xs-6 pd-0">
                                     <span onclick="bookMark(); changeBookmarkIcon()"
@@ -640,11 +640,12 @@ if ($total == 0)
                                                         <div class="prw_rup prw_common_centered_image">
                                                             @if(count($sitePics) != 0)
                                                                 <span class="imgWrap imgWrap1stTemp" onclick="showPhotoAlbum('sitePics')">
-                                                                    <img alt="{{$place->alt}}" src="{{$thumbnail}}"
-                                                                         class="centeredImg" width="100%"/>
+                                                                    <img alt="{{$place->alt}}" src="{{$thumbnail}}" class="centeredImg" width="100%"/>
                                                                 </span>
                                                             @else
-                                                                <span class="imgWrap imgWrap1stTemp"></span>
+                                                                <span class="imgWrap imgWrap1stTemp">
+                                                                    <img src="{{URL::asset('images/mainPics/nopictext1.jpg')}}" class="centeredImg" width="100%"/>
+                                                                </span>
                                                             @endif
                                                         </div>
 
@@ -659,11 +660,12 @@ if ($total == 0)
                                             <div class="tileWrap">
                                                 <div class="prw_rup prw_hotels_flexible_album_thumb tile">
                                                     <div class="albumThumbnail">
-                                                        <div class="prw_rup prw_common_centered_image"
-                                                                {{(count($userPhotos) != 0) ? 'onclick=showPhotoAlbum("userPics")' : "" }}>
+                                                        <div class="prw_rup prw_common_centered_image" {{(count($userPhotos) != 0) ? 'onclick=showPhotoAlbum("userPics")' : "" }}>
                                                 <span class="imgWrap imgWrap1stTemp">
                                                     @if(count($userPhotos) != 0)
                                                         <img src="{{$userPhotos[0]->pic}}" class="centeredImg" width="100%"/>
+                                                    @else
+                                                        <img src="{{URL::asset('images/mainPics/nopictext1.jpg')}}" class="centeredImg" width="100%"/>
                                                     @endif
                                                 </span>
                                                         </div>

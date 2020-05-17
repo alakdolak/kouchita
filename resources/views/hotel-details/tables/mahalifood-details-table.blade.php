@@ -9,7 +9,7 @@
                         نوع غذا
                     </span>
                 </div>
-                <div class="contentSection col-xs-4">{{$place->kindName}}</div>
+                <div class="contentSection">{{$place->kindName}}</div>
             </div>
             <div class="col-xs-6" style="float: right">
                 <div class="titleSection">
@@ -17,7 +17,7 @@
                         نوع سرو
                     </span>
                 </div>
-                <div class="contentSection col-xs-4">{{$place->hotOrCold}}</div>
+                <div class="contentSection">{{$place->hotOrCold}}</div>
             </div>
         </div>
 
