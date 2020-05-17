@@ -195,6 +195,7 @@
     display: flex;
     margin: 15px 0;
     margin-left: 25px;
+    align-items: center;
 }
 
 .mainDivImgMoreInfoItems {
@@ -615,6 +616,18 @@
     }
     .commentSectionBody{
         padding: 5px;
+    }
+    .mainShowBase{
+        padding: 5px;
+    }
+    .descriptionSection{
+        margin-top: 10px;
+    }
+    .moreInfoItemsDetails{
+        font-size: 10px;
+    }
+    .moreInfoItemsDetails .placeName{
+        font-size: 13px;
     }
 }
 
