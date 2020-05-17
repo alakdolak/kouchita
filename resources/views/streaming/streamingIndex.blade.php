@@ -187,9 +187,12 @@
             on: {
                 init: function () {
                     setTimeout(function(){
-                        resizeFitImg('resizeImgClass')
+                        resizeFitImg('resizeImgClass');
                     },300);
                 },
+                slideChange: function(){
+                    resizeFitImg('resizeImgClass');
+                }
             },
         });
         swipersuggestion.update();

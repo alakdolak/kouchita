@@ -184,8 +184,6 @@ class StreamingController extends Controller
                 if (!is_dir($nLoc))
                     mkdir($nLoc);
 
-
-
                 $img = $_POST['thumbnail'];
                 $img = str_replace('data:image/png;base64,', '', $img);
                 $img = str_replace(' ', '+', $img);
