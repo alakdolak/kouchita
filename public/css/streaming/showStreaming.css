@@ -594,26 +594,7 @@
     }
 }
 
-@media (max-width: 700px) {
-
-    .secHeaderTabs {
-        margin: 0 15px;
-    }
-
-    .addVideoSecHeader {
-        padding: 5px;
-        position: absolute;
-        font-size: 10px;
-        top: 80px;
-        right: 43%;
-        left: 43%;
-    }
-}
-
 @media (max-width: 600px) {
-    .secHeaderTabs {
-        margin: 0 9px;
-    }
     .commentSectionBody{
         padding: 5px;
     }
@@ -632,14 +613,6 @@
 }
 
 @media (max-width: 510px) {
-    .addVideoSecHeader {
-        right: 40%;
-        left: 40%;
-    }
-
-    .secHeaderTabs {
-        font-size: 11px;
-    }
 
     .LivePngClass {
         width: 20px;
@@ -663,20 +636,5 @@
     }
     .disLikeInfoTab{
         font-size: 25px;
-    }
-}
-
-@media (max-width: 380px) {
-    .secHeaderTabs {
-        margin: 0 5px;
-    }
-
-    .addVideoSecHeader {
-        right: 37%;
-        left: 37%;
-    }
-
-    .secHeaderTabs {
-        font-size: 10px;
     }
 }
