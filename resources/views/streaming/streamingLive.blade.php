@@ -186,15 +186,9 @@
 
                     <script>
                         var myPlayer = videojs('video_1', {autoplay: 'any'});
-                        {{--myPlayer.src({--}}
-                        {{--    src: 'https://streaming.koochita.com/hls/{{$room}}.m3u8',--}}
-                        {{--    type: 'application/x-mpegURL',--}}
-                        {{--    withCredentials: false--}}
-                        {{--});--}}
-
                         myPlayer.src({
-                            src: 'https://streaming.koochita.com/videos/535186.flv',
-                            type: 'video/x-flv',
+                            src: 'https://streaming.koochita.com/hls/{{$room}}.m3u8',
+                            type: 'application/x-mpegURL',
                             withCredentials: false
                         });
                     </script>
