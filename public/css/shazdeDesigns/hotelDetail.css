@@ -4464,7 +4464,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     }
 
     .sharePageIcon::before, .sharePageIconFill::before {
-        right: 25px;
+        right: 10px;
     }
 
     #share_box_mobile {
@@ -5002,7 +5002,7 @@ DIV.ppr_rup.ppr_priv_hr_btf_similar_hotels .hotelName {
     }
 
     #MAINWRAP .tabLinkMainWrapMainDiv a:nth-child(1) {
-        width: 35%;
+        width: 100%;
     }
 
     #MAINWRAP .tabLinkMainWrapMainDiv a:nth-child(2) {

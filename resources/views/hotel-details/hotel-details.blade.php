@@ -584,8 +584,8 @@ if ($total == 0)
                                                                 <div id="mainSliderWrapper" class="swiper-wrapper">
 
                                                                     @for($i = 0; $i < count($photographerPics); $i++)
-                                                                        <div class="swiper-slide">
-                                                                            <img class="eachPicOfSlider"
+                                                                        <div class="swiper-slide" style="overflow: hidden">
+                                                                            <img class="eachPicOfSlider resizeImgClass"
                                                                                  src="{{$photographerPics[$i]['s']}}"
                                                                                  alt="{{$photographerPics[$i]['alt']}}"
                                                                                  style="width: 100%;">
@@ -617,22 +617,6 @@ if ($total == 0)
                                                 </div>
                                             </div>
                                         </div>
-                                        {{--<script>--}}
-                                        {{--var mainSlideSwiper = new Swiper('#mainSlider', {--}}
-                                        {{--spaceBetween: 30,--}}
-                                        {{--centeredSlides: true,--}}
-                                        {{--loop: true,--}}
-                                        {{--autoplay: {--}}
-                                        {{--delay: 2500,--}}
-                                        {{--disableOnInteraction: false,--}}
-                                        {{--},--}}
-                                        {{--navigation: {--}}
-                                        {{--nextEl: '.swiper-button-next',--}}
-                                        {{--prevEl: '.swiper-button-prev',--}}
-                                        {{--},--}}
-                                        {{--});--}}
-
-                                        {{--</script>--}}
                                         <div class="secondaryWrap">
                                             <div class="tileWrap">
                                                 <div class="prw_rup prw_hotels_flexible_album_thumb tile">
@@ -762,7 +746,7 @@ if ($total == 0)
                             <script>
                                 if(photographerPics.length > 0) {
                                     var mainSlideSwiper = new Swiper('#mainSlider', {
-                                        spaceBetween: 30,
+                                        spaceBetween: 0,
                                         centeredSlides: true,
                                         loop: true,
                                         autoplay: {
@@ -778,8 +762,8 @@ if ($total == 0)
                                 else{
                                     $('.mainSliderNavBut').css('display', 'none');
                                     $('.see_all_count_wrap').css('display', 'none');
-                                    text =  '<div class="swiper-slide">\n' +
-                                            '<img class="eachPicOfSlider" src="{{URL::asset('images/mainPics/nopictext1.jpg')}}" style="width: 100%;">\n' +
+                                    text =  '<div class="swiper-slide" style="overflow: hidden">\n' +
+                                            '<img class="eachPicOfSlider resizeImgClass" src="{{URL::asset('images/mainPics/nopictext1.jpg')}}" style="width: 100%;">\n' +
                                             '</div>';
                                     $('#mainSliderWrapper').append(text);
                                 }
