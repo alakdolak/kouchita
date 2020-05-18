@@ -781,7 +781,7 @@ if ($total == 0)
                     <div id="MAIN" class="Hotel_Review prodp13n_jfy_overflow_visible position-relative">
                         <div id="BODYCON" class="col easyClear bodLHN poolB adjust_padding new_meta_chevron new_meta_chevron_v2 position-relative">
                             @if($placeMode == 'mahaliFood')
-                                <nav class="tabLinkMainWrapMainDIV navbar navbar-inverse" data-spy="affix" data-offset-top="800">
+                                <nav id="sticky" class="tabLinkMainWrapMainDIV navbar navbar-inverse" data-spy="affix" data-offset-top="800">
                                     <div class="container-fluid tabLinkMainWrapMainDiv tabLinkMainWrapMainDiv_Food">
                                         <div class="collapse navbar-collapse" id="myNavbar">
                                             <ul class="nav navbar-nav">
@@ -1565,34 +1565,12 @@ if ($total == 0)
                                     <video id="my-video" class="video-js vjs-default-skin" controls style=" max-height: 80vh;">
                                         <source src="{{URL::asset('vr2/contents/' . $video)}}" type="video/mp4">
                                     </video>
-                                    {{--ویدیویی برای نمایش موجود--}}
+                                    ویدیویی برای نمایش موجود
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <script>
-                        $(document).ready(function() {
-
-                            var a = $(window).width();
-                            // console.log(a);
-
-                            if(630 < a && a <= 768) {
-                                // alert('a');
-                                $('.tabLinkMainWrapMainDIV').affix({offset: {top: 820}});
-                            }
-                            else if(415 < a && a <= 630){
-                                // alert('b');
-                                $('.tabLinkMainWrapMainDIV').affix({offset: {top: 1000}});
-                            }
-                            else if(a <= 415){
-                                // alert('c');
-                                $('.tabLinkMainWrapMainDIV').affix({offset: {top: 1050}});
-
-                            }
-
-                        })
-                    </script>
 
                     <script>
                         var player;
@@ -1617,6 +1595,21 @@ if ($total == 0)
                 @endif
 
                 @include('hotelDetailsPopUp')
+
+                <script>
+                    $(document).ready(function() {
+
+                        var a = $(window).width();
+                        if(630 < a && a <= 768)
+                            $('.tabLinkMainWrapMainDIV').affix({offset: {top: 820}});
+                        else if(415 < a && a <= 630)
+                            $('.tabLinkMainWrapMainDIV').affix({offset: {top: 1000}});
+                        else if(a <= 415)
+                            $('.tabLinkMainWrapMainDIV').affix({offset: {top: 1050}});
+
+                    });
+                </script>
+
 
                 <script>
                     var heightOfDescription = $('.descriptionOfPlaceMiddleContent').height();

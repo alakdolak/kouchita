@@ -14,6 +14,7 @@
 </script>
 
 <script src="{{URL::asset('js/jQuery.js')}}"></script>
+{{--<script src="{{URL::asset('js/jquery-3.4.1.min.js')}}"></script>--}}
 <script src="{{URL::asset('js/angular.js')}}"></script>
 
 {{--<script src="https://apis.google.com/js/platform.js" async defer></script>--}}
