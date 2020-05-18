@@ -722,7 +722,7 @@ Route::middleware(['web'])->group(function (){
 
     Route::get('streaming/show/{code}', 'StreamingController@showStreaming')->name('streaming.show');
 
-    Route::get('streaming/live/{room}', 'StreamingController@streamingLive')->name('streaming.live');
+    Route::get('streaming/live/{room?}', 'StreamingController@streamingLive')->name('streaming.live');
 
     Route::middleware(['auth'])->group(function () {
         Route::get('streaming/uploadPage', 'StreamingController@uploadVideoPage')->name('streaming.uploadPage');

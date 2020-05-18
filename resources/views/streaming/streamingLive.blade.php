@@ -48,225 +48,133 @@
     <div class="mainDivStream">
         <div class="container mainShowBase">
 
-            <div class="liveInfosAndComments">
-                <div class="videoInfos">
-                    <div class="videoInfosVideoName">
-                        معرفی آئودی ای ترون اسپرت بک
-                        <img class="float-left" src="{{URL::asset('images/streaming/live.png')}}">
-                    </div>
-                    <div class="row mainUserPicSection">
-                        <div class="userPicDiv">
-                            <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
+            @if($data['haveVideo'])
+                <div class="liveInfosAndComments">
+                    <div class="videoInfos">
+                        <div class="videoInfosVideoName">
+                            {{$data['title']}}
+                            <img class="float-left" src="{{URL::asset('images/streaming/live.png')}}">
                         </div>
-                        <div class="mainUserInfos">
-                            <div class="mainUseruserName">
-                                shazdesina
+                        <div class="row mainUserPicSection">
+                            <div class="userPicDiv">
+                                <img src="{{$data['userPic']}}" alt="koochita">
                             </div>
-                            <div class="videoUploadTime">
-                                هم اکنون
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="liveComments">
-                    <div class="liveCommentsFirstLine">
-                        <div class="liveCommentsTitle">
-                            در گفتگو شرکت کنید
-                        </div>
-                        <div class="liveCommentStatistics">
-                            <div class="liveCommentsQuantity liveCommentStatisticsDivs">
-                                <div class="liveCommentsNums">31</div>
-                                <div class="liveCommentsQuantityIcon"></div>
-                            </div>
-                            <div class="liveCommentWriters liveCommentStatisticsDivs">
-                                <div class="liveCommentsNums">31</div>
-                                <div class="liveCommentsWriterIcon"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="liveCommentsMainDiv">
-                        <div class="eachLiveCommentMainDiv">
-                            <div class="eachLiveCommentTitle">
-                                <div class="userPicDiv">
-                                    <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
+                            <div class="mainUserInfos">
+                                <div class="mainUseruserName">
+                                    {{isset($data['user']) && $data['user'] != '' ? $data['user']->username : ''}}
                                 </div>
-                                <div class="mainUserInfos">
-                                    <div class="mainUseruserName">
-                                        shazdesina
+                                <div class="videoUploadTime">
+                                    هم اکنون
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="liveComments">
+                        <div class="liveCommentsFirstLine">
+                            <div class="liveCommentsTitle">
+                                در گفتگو شرکت کنید
+                            </div>
+                            <div class="liveCommentStatistics">
+                                <div class="liveCommentsQuantity liveCommentStatisticsDivs">
+                                    <div class="liveCommentsNums">31</div>
+                                    <div class="liveCommentsQuantityIcon"></div>
+                                </div>
+                                <div class="liveCommentWriters liveCommentStatisticsDivs">
+                                    <div class="liveCommentsNums">31</div>
+                                    <div class="liveCommentsWriterIcon"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="liveCommentsMainDiv">
+                            <div class="eachLiveCommentMainDiv">
+                                <div class="eachLiveCommentTitle">
+                                    <div class="userPicDiv">
+                                        <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
+                                    </div>
+                                    <div class="mainUserInfos">
+                                        <div class="mainUseruserName">
+                                            shazdesina
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="liveCommentContents">
-                                شیا شتنیل نشت یای نشان ایش سنتیا نشت سای نتشاس نت یاشن تسای نتشسا نیتاشن تسای نتا منشای نتسا شنت یاشن تسا ینت شسا یمن
-                            </div>
-                        </div>
-                        <div class="eachLiveCommentMainDiv">
-                            <div class="eachLiveCommentTitle">
-                                <div class="userPicDiv">
-                                    <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
+                                <div class="liveCommentContents">
+                                    شیا شتنیل نشت یای نشان ایش سنتیا نشت سای نتشاس نت یاشن تسای نتشسا نیتاشن تسای نتا منشای نتسا شنت یاشن تسا ینت شسا یمن
                                 </div>
-                                <div class="mainUserInfos">
-                                    <div class="mainUseruserName">
-                                        shazdesina
+                            </div>
+                            <div class="eachLiveCommentMainDiv">
+                                <div class="eachLiveCommentTitle">
+                                    <div class="userPicDiv">
+                                        <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
+                                    </div>
+                                    <div class="mainUserInfos">
+                                        <div class="mainUseruserName">
+                                            shazdesina
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="liveCommentContents">
-                                شیا شان ایش سنتیا نشت سای نتشاس نت یاشن تسای نتشسا نیتاشن
-                            </div>
-                        </div>
-                        <div class="eachLiveCommentMainDiv">
-                            <div class="eachLiveCommentTitle">
-                                <div class="userPicDiv">
-                                    <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
+                                <div class="liveCommentContents">
+                                    شیا شان ایش سنتیا نشت سای نتشاس نت یاشن تسای نتشسا نیتاشن
                                 </div>
-                                <div class="mainUserInfos">
-                                    <div class="mainUseruserName">
-                                        shazdesina
+                            </div>
+                            <div class="eachLiveCommentMainDiv">
+                                <div class="eachLiveCommentTitle">
+                                    <div class="userPicDiv">
+                                        <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
+                                    </div>
+                                    <div class="mainUserInfos">
+                                        <div class="mainUseruserName">
+                                            shazdesina
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="liveCommentContents">
-                                نت یاشن تسا ینت شسا یمن
-                            </div>
-                        </div>
-                        <div class="eachLiveCommentMainDiv">
-                            <div class="eachLiveCommentTitle">
-                                <div class="userPicDiv">
-                                    <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
+                                <div class="liveCommentContents">
+                                    نت یاشن تسا ینت شسا یمن
                                 </div>
-                                <div class="mainUserInfos">
-                                    <div class="mainUseruserName">
-                                        shazdesina
+                            </div>
+                            <div class="eachLiveCommentMainDiv">
+                                <div class="eachLiveCommentTitle">
+                                    <div class="userPicDiv">
+                                        <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
+                                    </div>
+                                    <div class="mainUserInfos">
+                                        <div class="mainUseruserName">
+                                            shazdesina
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="liveCommentContents">
-                                تسا ینت شسا یمن
-                            </div>
-                        </div>
-                        <div class="eachLiveCommentMainDiv">
-                            <div class="eachLiveCommentTitle">
-                                <div class="userPicDiv">
-                                    <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
+                                <div class="liveCommentContents">
+                                    تسا ینت شسا یمن
                                 </div>
-                                <div class="mainUserInfos">
-                                    <div class="mainUseruserName">
-                                        shazdesina
+                            </div>
+                            <div class="eachLiveCommentMainDiv">
+                                <div class="eachLiveCommentTitle">
+                                    <div class="userPicDiv">
+                                        <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
+                                    </div>
+                                    <div class="mainUserInfos">
+                                        <div class="mainUseruserName">
+                                            shazdesina
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="liveCommentContents">
-                                شیا شتنیل نشت یای نشان
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="commentInputSection">
-                        <div class="userPicDiv">
-                            <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
-                        </div>
-                        <textarea class="commentInput" name="comment" id="comment" placeholder="شما چه نظری دارید؟" rows="1"></textarea>
-                        <div class="commentInputSendButton">ارسال</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="moreInfoMainDiv">
-                <div class="headerWithLine">
-                    <div class="headerWithLineText">
-                        اطلاعات بیشتر
-                    </div>
-                    <div class="headerWithLineLine"></div>
-                </div>
-                <div class="moreInfoEachItem">
-                    <div class="mainDivImgMoreInfoItems">
-                        <img>
-                    </div>
-                    <div class="moreInfoItemsDetails">
-                        <div class="placeName">هتل کوثر</div>
-                        <div class="placeRates">
-                            <div class="rating_and_popularity">
-                                <span class="header_rating">
-                                   <div class="rs rating" rel="v:rating">
-                                       <div class="prw_rup prw_common_bubble_rating overallBubbleRating float-left">
-                                               <span class="ui_bubble_rating bubble_30
-{{--                                                    {{$avgRate}}0 --}}
-                                                    font-size-16" property="ratingValue"
-{{--                                                     content="{{$avgRate}}" alt='{{$avgRate}} of {{$avgRate}} bubbles'--}}
-                                               ></span>
-                                       </div>
-                                   </div>
-                                </span>
-                                <span class="header_popularity popIndexValidation" id="scoreSpanHeader">
-                                    <a>
-{{--                                        {{$reviewCount}}--}}0
-                                        نقد
-                                    </a>
-                                </span>
+                                <div class="liveCommentContents">
+                                    شیا شتنیل نشت یای نشان
+                                </div>
                             </div>
                         </div>
-                        <div class="placeState">استان:
-                            <span>اصفهان</span>
-                        </div>
-                        <div class="placeCity">شهر:
-                            <span>اصفهان</span>
-                        </div>
 
-                    </div>
-                </div>
-                <div class="moreInfoEachItem">
-                    <div class="mainDivImgMoreInfoItems">
-                        <img>
-                    </div>
-                    <div class="moreInfoItemsDetails">
-                        <div class="placeName">هتل کوثر</div>
-                        <div class="placeRates">
-                            <div class="rating_and_popularity">
-                                <span class="header_rating">
-                                   <div class="rs rating" rel="v:rating">
-                                       <div class="prw_rup prw_common_bubble_rating overallBubbleRating float-left">
-                                               <span class="ui_bubble_rating bubble_30
-{{--                                                    {{$avgRate}}0 --}}
-                                                    font-size-16" property="ratingValue"
-{{--                                                     content="{{$avgRate}}" alt='{{$avgRate}} of {{$avgRate}} bubbles'--}}
-                                               ></span>
-                                       </div>
-                                   </div>
-                                </span>
-                                <span class="header_popularity popIndexValidation" id="scoreSpanHeader">
-                                    <a>
-{{--                                        {{$reviewCount}}--}}0
-                                        نقد
-                                    </a>
-                                </span>
+                        <div class="commentInputSection">
+                            <div class="userPicDiv">
+                                <img src="{{URL::asset('_images/nopic/blank.jpg')}}" alt="koochita">
                             </div>
+                            <textarea class="commentInput" name="comment" id="comment" placeholder="شما چه نظری دارید؟" rows="1"></textarea>
+                            <div class="commentInputSendButton">ارسال</div>
                         </div>
-                        <div class="placeState">استان:
-                            <span>اصفهان</span>
-                        </div>
-                        <div class="placeCity">شهر:
-                            <span>اصفهان</span>
-                        </div>
-
                     </div>
                 </div>
-
-                <div class="moreBtn">بیشتر</div>
-            </div>
-
-            <div class="fromThisPerson">
-                <div class="headerWithLine">
-                    <div class="headerWithLineText">
-                        از همین کاربر
-                    </div>
-                    <div class="headerWithLineLine"></div>
-                </div>
-
-                <div id="videoThisVideo"></div>
-            </div>
+            @endif
 
         </div>
 
@@ -275,16 +183,20 @@
             <div class="showVideo">
                 <div class="videoContainer">
                     <video id="video_1" class="video-js playads" controls style="width: 100%" data-setup='{"fluid": true}'></video>
+
                     <script>
                         var myPlayer = videojs('video_1', {autoplay: 'any'});
+                        {{--myPlayer.src({--}}
+                        {{--    src: 'https://streaming.koochita.com/hls/{{$room}}.m3u8',--}}
+                        {{--    type: 'application/x-mpegURL',--}}
+                        {{--    withCredentials: false--}}
+                        {{--});--}}
+
                         myPlayer.src({
-                            src: 'https://streaming.koochita.com/hls/{{$room}}.m3u8',
-                            type: 'application/x-mpegURL',
+                            src: 'https://streaming.koochita.com/videos/535186.flv',
+                            type: 'video/x-flv',
                             withCredentials: false
                         });
-                        var qualityLevels = myPlayer.qualityLevels();
-                        console.log(qualityLevels)
-
                     </script>
                     <div class="liveCommentsOnFS display-none">
 
@@ -598,28 +510,20 @@
                 </div>
             </div>
 
-            <div class="descriptionSection">
-                <div class="headerWithLine">
-                    <div class="headerWithLineText">
-                        معرفی کلی
+            @if($data['desc'] != '')
+                <div class="descriptionSection">
+                    <div class="headerWithLine">
+                        <div class="headerWithLineText">
+                            معرفی کلی
+                        </div>
+                        <div class="headerWithLineLine"></div>
                     </div>
-                    <div class="headerWithLineLine"></div>
+                    <div class="descriptionSectionBody">
+                        {{$data['desc']}}
+                    </div>
+    {{--                <div class="moreBtn">بیشتر</div>--}}
                 </div>
-                <div class="descriptionSectionBody">
-                    لورم ایپسوم متن ساختگی
-                    با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها
-                    و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط
-                    فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد،
-                    کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و م
-                    تخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی
-                    الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت
-                    می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها، و شرایط
-                    سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و
-                    جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
-                </div>
-
-                <div class="moreBtn">بیشتر</div>
-            </div>
+            @endif
 
             <div class="moreInfoMainDiv hideOnWide">
                 <div class="headerWithLine">
@@ -808,8 +712,8 @@
                 },
             ]
 
-            createVideoSuggestionDiv(pack, 'mebyInterestedVideo');
-            createVideoSuggestionDiv(pack, 'videoThisVideo');
+            // createVideoSuggestionDiv(pack, 'mebyInterestedVideo');
+            // createVideoSuggestionDiv(pack, 'videoThisVideo');
 
         }
         videoSuggestion();
@@ -848,46 +752,11 @@
     <script>
         $(document).ready(function(){
             var videotag = $('.playads');
-            // var myPlayer = videojs('video_1');
 
-
-            $(".liveCommentsOnFS").appendTo($('#video_1'));
-
-            // myPlayer.FullscreenToggle()
-
-            // show advertisement label while play advertisement
-            myPlayer.on('fullscreenchange', function() {
-                $('.liveCommentsOnFS').toggle();
-            });
+            // $(".liveCommentsOnFS").appendTo($('#video_1'));
             //
-            // myPlayer.on('fullscreenchange', function () {
-            //     console.log('test');
-            // });
-            // // Stop from seeking while playing advertisement
-            // myPlayer.on("seeking", function(event) {
-            //     if (currentTime < myPlayer.currentTime() && myPlayer.hasClass("playads")) {
-            //         myPlayer.currentTime(currentTime);
-            //     }
-            // });
-            // myPlayer.on("seeked", function(event) {
-            //     if (currentTime < myPlayer.currentTime() && myPlayer.hasClass("playads")) {
-            //         myPlayer.currentTime(currentTime);
-            //     }
-            // });
-            // setInterval(function() {
-            //     if (!myPlayer.paused() && myPlayer.hasClass("playads")) {
-            //         currentTime = myPlayer.currentTime();
-            //     }
-            // }, 1000);
-            //
-            // // Hide Advertisement label and change data-src of player to play actual video
-            // myPlayer.on('ended', function() {
-            //     if(this.hasClass("playads")){
-            //         this.src({type: videotag.attr('mimetype'), src: videotag.attr('video-url')});
-            //         this.play();
-            //         this.removeClass('playads');
-            //         $('.advertisement').addClass('hid');
-            //     }
+            // myPlayer.on('fullscreenchange', function() {
+            //     $('.liveCommentsOnFS').toggle();
             // });
         });
     </script>

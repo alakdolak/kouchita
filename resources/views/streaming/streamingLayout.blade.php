@@ -39,6 +39,9 @@
         .hideOnPc{
             display: none;
         }
+        .fullOpacity{
+            opacity: 1 !important;
+        }
         @media (max-width: 767px) {
             .hideOnPc{
                 display: flex;
@@ -68,11 +71,20 @@
 <div class="streamBody">
 
     <div class="container secHeader">
-        <div class="secHeaderTabs">
-            <img src="{{URL::asset('images/streaming/Live.png')}}" class="LivePngClass">
+        <a href="{{route('streaming.live', ['room' => $hasLive])}}" class="secHeaderTabs ">
+            <img id="liveIcon" src="{{URL::asset('images/streaming/Live.png')}}" class="LivePngClass fullOpacity" style="transition: 1s; opacity: .2">
             <span class="liveText">نمایش زنده</span>
-        </div>
-{{--        <div class="secHeaderTabs">--}}
+        </a>
+
+        @if($hasLive != false)
+            <script>
+                setInterval(function () {
+                    $('#liveIcon').toggleClass('fullOpacity');
+                }, 1000);
+            </script>
+        @endif
+
+        {{--        <div class="secHeaderTabs">--}}
 {{--            <img src="{{URL::asset('images/streaming/tv.png')}}" class="TvPngClass">--}}
 {{--            <span>مجموعه‌ها</span>--}}
 {{--        </div>--}}
@@ -107,6 +119,8 @@
 
 <script>
     resizeFitImg('resizeImgClass');
+
+
 
     $(window).ready(function(){
         resizeFitImg('resizeImgClass');

@@ -305,13 +305,13 @@
                     <div class="headerWithLineLine"></div>
                 </div>
                 @include('streaming.commentingSection')
-                <script !src="">
+                <script>
                     commentingInitdata = {
                         'videoId': {{$video->id}}
                     };
                     let videoComments = {!! $video->comments !!};
 
-                    initCommentingSection('{{route('streaming.setVideoComment')}}', '{{route("streaming.video.comment.feedback")}}', commentingInitdata);
+                    initCommentingSection('{{route('streaming.setVideoComment')}}', commentingInitdata);
                     fillMainCommentSection(videoComments);
                 </script>
             </div>

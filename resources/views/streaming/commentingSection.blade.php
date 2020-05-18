@@ -251,14 +251,6 @@
                             </div>
                             <div style="text-align: justify; white-space: pre-line">##text##</div>
                             <div class="commentAnsToAns hideOnPc" style="justify-content: flex-end;">
-                                {{--                            <div class="commentAnsLikeSection">--}}
-                                {{--                                <div class="likeAnsIconDiv" onclick="toggleCommentLikeIcon(true, ##id##)">--}}
-                                {{--                                    <div class="LikeIconEmpty LikeIconEmptySett likeIcon_##id##"></div>--}}
-                                {{--                                </div>--}}
-                                {{--                                <div class="disLikeAnsIconDiv" onclick="toggleCommentLikeIcon(false, ##id##)">--}}
-                                {{--                                    <div class="DisLikeIconEmpty DisLikeIconEmptySett dislikeIcon_##id##"></div>--}}
-                                {{--                                </div>--}}
-                                {{--                            </div>--}}
                                 <div class="acceptedCommentAnsButton" onclick="openAnsToComment(##id##)">
                                     پاسخ دهید
                                 </div>
@@ -392,14 +384,6 @@
                             </div>
                             <div style="text-align: justify; white-space: pre-line">##text##</div>
                             <div class="commentAnsToAns hideOnPc" style="justify-content: flex-end;">
-                                {{--                            <div class="commentAnsLikeSection">--}}
-                                {{--                                <div class="likeAnsIconDiv" onclick="toggleCommentLikeIcon(true, ##id##)">--}}
-                                {{--                                    <div class="LikeIconEmpty LikeIconEmptySett likeIcon_##id##"></div>--}}
-                                {{--                                </div>--}}
-                                {{--                                <div class="disLikeAnsIconDiv" onclick="toggleCommentLikeIcon(false, ##id##)">--}}
-                                {{--                                    <div class="DisLikeIconEmpty DisLikeIconEmptySett dislikeIcon_##id##"></div>--}}
-                                {{--                                </div>--}}
-                                {{--                            </div>--}}
                                 <div class="acceptedCommentAnsButton" onclick="openAnsToComment(##id##)">
                                     پاسخ دهید
                                 </div>
@@ -452,7 +436,6 @@
 <script>
     let userPicture = '{{$userPicture}}';
     let commentingStoreUrl = null;
-    let commentingFeedBackStoreUrl = null;
     let commentingDefaultData = null;
     let mainCommentSample = null;
     let ansCommentSample = null;
@@ -471,9 +454,8 @@
         }
     }
 
-    function initCommentingSection(_sendUrl, _feedback,_defaultData){
+    function initCommentingSection(_sendUrl,_defaultData){
         commentingStoreUrl = _sendUrl;
-        commentingFeedBackStoreUrl = _feedback;
         commentingDefaultData = JSON.stringify(_defaultData);
     }
 
@@ -573,42 +555,6 @@
             $('#ansOf_' + _id).css('display', 'none');
         else
             $('#ansOf_' + _id).css('display', 'flex');
-    }
-
-    function toggleCommentLikeIcon(_kind, _id){
-        $.ajax({
-            type: 'post',
-            url: commentingFeedBackStoreUrl,
-            data: {
-                _token: '{{csrf_token()}}',
-                commentId: _id,
-                like: _kind
-            },
-            success: function(response){
-                try{
-                    response = JSON.parse(response);
-                    if(response['status'] == 'ok'){
-                        if(_kind){
-                            $('.dislikeIcon_' + _id).removeClass('redDisLikeIcon');
-                            $('.likeIcon_' + _id).toggleClass('redLikeIcon');
-                        }
-                        else{
-                            $('.dislikeIcon_' + _id).toggleClass('redDisLikeIcon');
-                            $('.likeIcon_' + _id).removeClass('redLikeIcon');
-                        }
-                    }
-                    else
-                        alert('در ثبت نظر شما مشکلی پیش آمده لطفا دوباره تلاش کنید')
-                }
-                catch (e) {
-                    console.log(e);
-                    alert('در ثبت نظر شما مشکلی پیش آمده لطفا دوباره تلاش کنید')
-                }
-            },
-            error: function(err){
-                alert('در ثبت نظر شما مشکلی پیش آمده لطفا دوباره تلاش کنید')
-            }
-        })
     }
 
     function commentFeedBack(_id, _like){
