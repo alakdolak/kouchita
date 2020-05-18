@@ -13,6 +13,7 @@ use App\models\VideoCategory;
 use App\models\VideoComment;
 use App\models\VideoFeedback;
 use App\models\VideoLimbo;
+use App\models\VideoLive;
 use App\models\VideoPlaceRelation;
 use App\models\VideoTagRelation;
 use App\User;
@@ -30,7 +31,15 @@ class StreamingController extends Controller
         else
             $userPicture = getUserPic(0);
 
-        \View::share(['userPicture' => $userPicture]);
+        $today = Carbon::now()->format('Y-m-d');
+        $nowTime = Carbon::now()->format('H:i');
+        $todayVid = VideoLive::where('sDate', $today)->where('isLive', 1)->orderBy('sTime')->first();
+        if($todayVid != null && $nowTime > $todayVid->sTime)
+            $hasLive = $todayVid->code;
+        else
+            $hasLive = '';
+
+        \View::share(['userPicture' => $userPicture, 'hasLive' => $hasLive]);
     }
 
     public function indexStreaming()
@@ -495,28 +504,42 @@ class StreamingController extends Controller
 
 
 
-    public function confirmAll()
+//    public function confirmAll()
+//    {
+//        $videos = Video::all();
+//        foreach ($videos as $video) {
+//            $video->confirm = 1;
+//            $video->state = 1;
+//            $video->save();
+//        }
+//        dd('done');
+//    }
+
+    public function streamingLive($room = '')
     {
-        $videos = Video::all();
-        foreach ($videos as $video) {
-            $video->confirm = 1;
-            $video->state = 1;
-            $video->save();
+        $data = [
+            'title' => '',
+            'desc' => '',
+            'user' => '',
+            'userPic' => getUserPic(0),
+            'like' => 0,
+            'disLike' => 0,
+            'haveVideo' => false
+        ];
+        if($room != null){
+            $video = VideoLive::where('code', $room)->where('isLive', 1)->first();
+            $today = Carbon::now()->format('Y-m-d');
+            $nowTime = Carbon::now()->format('H:i');
+            if($video != null){
+                $data['title'] = $video->title;
+                $data['desc'] = $video->description;
+                $user = User::find($video->userId);
+                $user->pic = getUserPic($user->id);
+                $data['user'] = $user;
+                $data['haveVideo'] = true;
+            }
         }
-        dd('done');
-    }
-
-    public function streamingLive($room)
-    {
-        $name = random_int(10000, 99999);
-        if (auth()->check())
-            $kind = 'streamer';
-        else
-            $kind = 'see';
-
-//        $kind = 'streamer';
-
-        return view('streaming.streamingLive', compact(['kind', 'room', 'name']));
+        return view('streaming.streamingLive', compact(['room', 'data']));
     }
 
 
