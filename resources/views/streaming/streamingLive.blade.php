@@ -9,12 +9,13 @@
     <script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
 
     <script src="https://vjs.zencdn.net/7.7.5/video.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/5.15.0/videojs-contrib-hls.min.js"></script>
 
 
     <style>
-        video{
-            width: 100%;
-        }
+        /*video{*/
+        /*    width: 100%;*/
+        /*}*/
         #videoThisVideo{
             display: flex;
             flex-wrap: wrap;
@@ -272,15 +273,24 @@
         <div class="container mainShowBase">
 
             <div class="showVideo">
-                <div id="46671937617" class="videoContainer">
-                    <video id="video_1" class="video-js playads" controls controlsList="nodownload" data-setup=''>
-                        <source src="https://streaming.koochita.com/hls/test22.m3u8">
-                    </video>
+                <div class="videoContainer">
+                    <video id="video_1" class="video-js playads" controls style="width: 100%" data-setup='{"fluid": true}'></video>
+                    <script>
+                        var myPlayer = videojs('video_1', {autoplay: 'any'});
+                        myPlayer.src({
+                            src: 'https://streaming.koochita.com/hls/{{$room}}.m3u8',
+                            type: 'application/x-mpegURL',
+                            withCredentials: false
+                        });
+                        var qualityLevels = myPlayer.qualityLevels();
+                        console.log(qualityLevels)
+
+                    </script>
                     <div class="liveCommentsOnFS display-none">
 
                         <div class="videoInfos">
                             <div class="videoInfosVideoName">
-                                معرفی آئودی ای ترون اسپرت بک
+                                NAME
                                 <img class="float-left" src="{{URL::asset('images/streaming/live.png')}}">
                             </div>
                             <div class="row mainUserPicSection">
@@ -289,7 +299,7 @@
                                 </div>
                                 <div class="mainUserInfos">
                                     <div class="mainUseruserName">
-                                        shazdesina
+                                        koochita
                                     </div>
                                     <div class="videoUploadTime">
                                         هم اکنون
@@ -838,19 +848,16 @@
     <script>
         $(document).ready(function(){
             var videotag = $('.playads');
-            var myPlayer = videojs('video_1');
+            // var myPlayer = videojs('video_1');
 
 
-            $(".liveCommentsOnFS")
-                .appendTo($('#video_1'));
+            $(".liveCommentsOnFS").appendTo($('#video_1'));
 
             // myPlayer.FullscreenToggle()
 
             // show advertisement label while play advertisement
             myPlayer.on('fullscreenchange', function() {
-                // if(myPlayer.hasClass("playads")){
-                    $('.liveCommentsOnFS').toggle();
-                // }
+                $('.liveCommentsOnFS').toggle();
             });
             //
             // myPlayer.on('fullscreenchange', function () {
