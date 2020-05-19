@@ -3,6 +3,12 @@
 <link rel="stylesheet" href="{{URL::asset('css/theme2/media_uploader.css')}}">
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/icons.css?v=2')}}' />
 
+<style>
+    .whiteClose:before{
+        color: white;
+    }
+</style>
+
 <!--[if lt IE 9]>
 <div class="alert alert-warning alert-dismissible fade show m-0 rounded-0" role="alert">
     You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.
@@ -303,7 +309,7 @@
          </div>
      </div>
 
-     <div class="ui_close_x" onclick="$('#photoEditor').addClass('hidden'); $('#darkModeMainPage').hide()"></div>
+     <div class="ui_close_x whiteClose" onclick="$('#photoEditor').addClass('hidden'); $('#darkModeMainPage').hide()"></div>
     <img src="" id="mainPicUploadPhotoImg" style="display: none">
 </span>
 {{--</div>--}}

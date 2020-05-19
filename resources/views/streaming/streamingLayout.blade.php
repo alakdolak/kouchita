@@ -58,11 +58,11 @@
 @include('general.forAllPages')
 
 <div class="hideOnPhone">
-    @include('layouts.placeHeader')
+    @include('streaming.layout.pcHeader')
 </div>
 
 <div class="hideOnScreen">
-    @include('layouts.header1Phone')
+    @include('streaming.layout.mobileHeader')
 </div>
 
 @include('streaming.videoSuggestionPack')
@@ -101,16 +101,13 @@
 {{--            <span>ذخیره‌شده‌ها</span>--}}
 {{--        </div>--}}
 
-        <div class="addVideoSecHeader" onclick="goToUpload()">
-            <span>+ افزودن ویدیو</span>
-        </div>
     </div>
 
     @yield('body')
 </div>
 
 
-@include('layouts.placeFooter')
+@include('streaming.layout.pcFooter')
 
 </body>
 
