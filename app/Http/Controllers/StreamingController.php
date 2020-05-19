@@ -526,7 +526,6 @@ class StreamingController extends Controller
             }
             $room = '';
         }
-        dd($data);
         return view('streaming.streamingLive', compact(['room', 'data']));
     }
 
