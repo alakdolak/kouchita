@@ -34,11 +34,11 @@
                 <div class="uploadAvatarOptions" style="display: block;">
                     <div class="optionWebcam"></div>
                     <div id="upload_but" class="avatarOption optionUpload">
-                        <img src="../public/images/cp.png">
+                        <img src="{{URL::asset('images/cp.png')}}">
                         <span>بارگذاری از روی کامپیوتر</span>
                     </div>
                     <div id="change_but" onclick="getDefaultPics('change-picture')" class="avatarOption optionList">
-                        <img src="../public/images/sp.png">
+                        <img src="{{URL::asset('images/sp.png')}}">
                         <span>از عکس‌های ما انتخاب کنید</span>
                     </div>
                 </div>
