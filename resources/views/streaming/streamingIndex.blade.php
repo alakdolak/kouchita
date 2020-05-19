@@ -28,7 +28,7 @@
                 <div class="swiper-wrapper">
 
                     <div class="swiper-slide mobileHeight imgOfSliderBox">
-                        <img src="https://static.koochita.com/_images/posts/85/1586599288-mainPic.jpg" class="resizeImgClass">
+                        <img src="{{URL::asset('images/streaming/liveBanner.jpg')}}" class="resizeImgClass">
                         <div class="nowSeeThisVideoDiv">
                             <img src="{{URL::asset('images/streaming/playb.png')}}" class="nowSeeThisVideoButtonImage">
                             <a href="#" class="nowSeeThisVideoButton">
@@ -37,21 +37,7 @@
                         </div>
                         <div class="nowSeeThisVideoNameDiv">
                             <a href="#" class="nowSeeThisVideoName">
-                                صحبت با محمد جواد در موضوع کرونا
-                            </a>
-                        </div>
-                    </div>
-                    <div class="swiper-slide mobileHeight imgOfSliderBox">
-                        <img src="https://static.koochita.com/_images/posts/83/1586277150-mainPic.jpg" class="resizeImgClass">
-                        <div class="nowSeeThisVideoDiv">
-                            <img src="{{URL::asset('images/streaming/playb.png')}}" class="nowSeeThisVideoButtonImage">
-                            <a href="#" class="nowSeeThisVideoButton">
-                                همین حالا ببینید
-                            </a>
-                        </div>
-                        <div class="nowSeeThisVideoNameDiv">
-                            <a href="#" class="nowSeeThisVideoName">
-                                2 صحبت با محمد جواد در موضوع کرونا
+                                گفتگوی زنده
                             </a>
                         </div>
                     </div>
@@ -199,7 +185,6 @@
                 }
             },
         });
-        swipersuggestion.update();
 
         // mainSlider
         new Swiper('#mainSlider', {
