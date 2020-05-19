@@ -39,6 +39,8 @@ class StreamingController extends Controller
         else
             $hasLive = '';
 
+        dd($hasLive);
+
         \View::share(['userPicture' => $userPicture, 'hasLive' => $hasLive]);
     }
 
