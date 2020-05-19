@@ -179,16 +179,20 @@
         <div class="container mainShowBase">
             <div class="showVideo">
                 <div class="videoContainer">
-                    <video id="video_1" class="video-js playads" controls style="width: 100%" data-setup='{"fluid": true}'></video>
+                    @if($data['haveVideo'] == true)
+                        <video id="video_1" class="video-js playads" controls style="width: 100%" data-setup='{"fluid": true}'></video>
 
-                    <script>
-                        var myPlayer = videojs('video_1', {autoplay: 'any'});
-                        myPlayer.src({
-                            src: 'https://streaming.koochita.com/hls/{{$room}}.m3u8',
-                            type: 'application/x-mpegURL',
-                            withCredentials: false
-                        });
-                    </script>
+                        <script>
+                            var myPlayer = videojs('video_1', {autoplay: 'any'});
+                            myPlayer.src({
+                                src: 'https://streaming.koochita.com/hls/{{$room}}.m3u8',
+                                type: 'application/x-mpegURL',
+                                withCredentials: false
+                            });
+                        </script>
+                    @else
+                        <img src="{{URL::asset('images/streaming/liveBanner.jpg')}}" style="width: 100%">
+                    @endif
                     <div class="liveCommentsOnFS display-none">
 
                         <div class="videoInfos">

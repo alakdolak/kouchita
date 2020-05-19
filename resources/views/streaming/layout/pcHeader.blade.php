@@ -6,18 +6,30 @@
         $user = auth()->user();
 ?>
 
+<style>
+    .masthead > div > div > div > div{
+        background: red !important;
+    }
+    .centeredHeader{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+
 <div class="masthead position-relative">
     <div class="ppr_rup ppr_priv_global_nav position-relative">
         <div class="global-nav global-nav-single-line position-relative">
             <div class="global-nav-top position-relative">
-                <div class="global-nav-bar global-nav-green" style="padding-top: 5px;">
+                <div class="global-nav-bar" style="padding: 3px 0px;">
                     <div class="ui_container global-nav-bar-container direction-rtl position-relative">
                         <div class="global-nav-hamburger is-hidden-tablet">
                             <span class="ui_icon menu-bars"></span>
                         </div>
 
                         <a href="{{route('main')}}" class="global-nav-logo" style="display: flex; align-items: center">
-                            <img src="{{URL::asset('images/icons/mainLogo.png')}}" alt="کوچیتا" style="width: auto; height: 70%;"/>
+                            <img src="{{URL::asset('images/streaming/vodLobo.png')}}" alt="کوچیتا" style="width: auto; height: 70%;"/>
                         </a>
 
                         <div class="global-nav-links ui_tabs inverted" style="display: flex; align-items: center">
@@ -35,20 +47,20 @@
                         <div class="global-nav-actions position-relative" >
                             @if(Auth::check())
                                 <a href="{{route('streaming.uploadPage')}}" class="ppr_rup ppr_priv_global_nav_action_trips" style="margin-left: 10px; line-height: 1.5; display: flex; align-items: center;">
-                                    <div class="ppr_rup ppr_priv_global_nav_action_profile"  title="ویدیو" style="font-size: 10px">
+                                    <div class="ppr_rup ppr_priv_global_nav_action_profile centeredHeader"  title="ویدیو" style="font-size: 10px">
                                         <span class="ui_icon addPostIcon" style="justify-content: center"></span>
                                         <div class="nameOfIconHeaders" style="color: white;">
-                                            ویدیو
+                                            بارگزاری ویدیو
                                         </div>
                                     </div>
                                 </a>
 
                                 <div class="ppr_rup ppr_priv_global_nav_action_trips position-relative">
                                     <div id="targetHelp_1" class="targets">
-                                        <div id="bookmarkicon" class="ppr_rup ppr_priv_global_nav_action_profile" title="نشانه گذاری شده ها" style="font-size: 10px">
+                                        <div id="bookmarkicon" class="ppr_rup ppr_priv_global_nav_action_profile centeredHeader" title="نشانه گذاری شده ها" style="font-size: 10px">
                                             <span class="ui_icon casino" style="justify-content: center"></span>
                                             <div class="nameOfIconHeaders" style="color: white;">
-                                                نشون کرده
+                                                نشان کرده
                                             </div>
                                         </div>
 

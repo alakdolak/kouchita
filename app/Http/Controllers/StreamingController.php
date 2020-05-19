@@ -524,7 +524,8 @@ class StreamingController extends Controller
                 $data['user'] = $user;
                 $data['haveVideo'] = true;
             }
-            $room = '';
+            else
+                $room = '';
         }
         return view('streaming.streamingLive', compact(['room', 'data']));
     }

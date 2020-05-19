@@ -68,7 +68,7 @@
 @include('streaming.videoSuggestionPack')
 
 
-<div class="streamBody">
+<div class="streamBody" style="padding-top: 10px">
 
     <div class="container secHeader">
         <a href="{{route('streaming.live', ['room' => $hasLive])}}" class="secHeaderTabs ">
@@ -83,23 +83,6 @@
                 }, 1000);
             </script>
         @endif
-
-        {{--        <div class="secHeaderTabs">--}}
-{{--            <img src="{{URL::asset('images/streaming/tv.png')}}" class="TvPngClass">--}}
-{{--            <span>مجموعه‌ها</span>--}}
-{{--        </div>--}}
-{{--        <div class="secHeaderTabs">--}}
-{{--            <img src="{{URL::asset('images/streaming/play-button.png')}}" class="TvPngClass">--}}
-{{--            <span>کلیپ</span>--}}
-{{--        </div>--}}
-{{--        <div class="secHeaderTabs secHeaderTabsChoose">--}}
-{{--            <span></span>--}}
-{{--            <span>موردعلاقه‌ها</span>--}}
-{{--        </div>--}}
-{{--        <div class="secHeaderTabs">--}}
-{{--            <span></span>--}}
-{{--            <span>ذخیره‌شده‌ها</span>--}}
-{{--        </div>--}}
 
     </div>
 
