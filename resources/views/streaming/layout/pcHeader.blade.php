@@ -28,7 +28,7 @@
                             <span class="ui_icon menu-bars"></span>
                         </div>
 
-                        <a href="{{route('main')}}" class="global-nav-logo" style="display: flex; align-items: center">
+                        <a href="{{route('streaming.index')}}" class="global-nav-logo" style="display: flex; align-items: center">
                             <img src="{{URL::asset('images/streaming/vodLobo.png')}}" alt="کوچیتا" style="width: auto; height: 70%;"/>
                         </a>
 
