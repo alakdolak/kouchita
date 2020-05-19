@@ -66,12 +66,12 @@ body{
 
 .mainDivStream > div:last-child {
     margin-right: 5px;
-    width: 65%;
+    width: 75%;
 }
 
 .mainDivStream > div:first-child {
     margin-left: 5px;
-    width: 35%;
+    width: 25%;
 }
 
 .mainShowBase{

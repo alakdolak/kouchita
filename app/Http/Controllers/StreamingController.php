@@ -25,7 +25,7 @@ class StreamingController extends Controller
 {
     public function __construct()
     {
-	date_default_timezone_set('Asia/Tehran');
+        date_default_timezone_set('Asia/Tehran');
         $userPicture = null;
         if(auth()->check())
             $userPicture = getUserPic(auth()->user()->id);
@@ -39,7 +39,6 @@ class StreamingController extends Controller
             $hasLive = $todayVid->code;
         else
             $hasLive = '';
-
 
         \View::share(['userPicture' => $userPicture, 'hasLive' => $hasLive]);
     }
@@ -501,21 +500,6 @@ class StreamingController extends Controller
         }
 
     }
-
-
-
-
-
-//    public function confirmAll()
-//    {
-//        $videos = Video::all();
-//        foreach ($videos as $video) {
-//            $video->confirm = 1;
-//            $video->state = 1;
-//            $video->save();
-//        }
-//        dd('done');
-//    }
 
     public function streamingLive($room = '')
     {
