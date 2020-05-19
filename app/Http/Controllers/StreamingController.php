@@ -25,6 +25,7 @@ class StreamingController extends Controller
 {
     public function __construct()
     {
+	date_default_timezone_set('Asia/Tehran');
         $userPicture = null;
         if(auth()->check())
             $userPicture = getUserPic(auth()->user()->id);
@@ -39,7 +40,6 @@ class StreamingController extends Controller
         else
             $hasLive = '';
 
-        dd($hasLive);
 
         \View::share(['userPicture' => $userPicture, 'hasLive' => $hasLive]);
     }
