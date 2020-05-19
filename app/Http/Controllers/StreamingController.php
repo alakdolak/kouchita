@@ -501,21 +501,6 @@ class StreamingController extends Controller
 
     }
 
-
-
-
-
-//    public function confirmAll()
-//    {
-//        $videos = Video::all();
-//        foreach ($videos as $video) {
-//            $video->confirm = 1;
-//            $video->state = 1;
-//            $video->save();
-//        }
-//        dd('done');
-//    }
-
     public function streamingLive($room = '')
     {
         $data = [

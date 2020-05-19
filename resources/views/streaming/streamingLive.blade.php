@@ -47,7 +47,6 @@
 
     <div class="mainDivStream">
         <div class="container mainShowBase">
-
             @if($data['haveVideo'])
                 <div class="liveInfosAndComments">
                     <div class="videoInfos">
@@ -175,11 +174,9 @@
                     </div>
                 </div>
             @endif
-
         </div>
 
         <div class="container mainShowBase">
-
             <div class="showVideo">
                 <div class="videoContainer">
                     <video id="video_1" class="video-js playads" controls style="width: 100%" data-setup='{"fluid": true}'></video>
@@ -326,7 +323,6 @@
                     </div>
                 </div>
             </div>
-
             <script>
                 function liveCMToggle(element) {
                     $(element).next().toggle()
