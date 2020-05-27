@@ -1,4 +1,4 @@
-@extends('streaming.streamingLayout')
+@extends('streaming.layout.streamingLayout')
 
 @section('head')
     <link rel="stylesheet" href="{{URL::asset('css/streaming/showStreaming.css')}}">
@@ -198,7 +198,6 @@
                             <span id="disLikeCount" class="toolSectionInfosTabNumber">{{$video->disLike}}</span>
                         </div>
                         <div class="toolSectionInfosTab">
-                            <i class="fa fa-eye"></i>
                             <img src="{{URL::asset('images/streaming/eye.png')}}" class="eyeClass" style="width: 25px">
                             <span class="toolSectionInfosTabNumber">{{$video->seen}}</span>
                         </div>

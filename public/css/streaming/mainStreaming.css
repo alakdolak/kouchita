@@ -1,6 +1,36 @@
+*{
+    font-family: IRANSansWeb;
+}
 body{
     background: #232323 !important;
 }
+a{
+    color: white;
+}
+input{
+    color: #232323;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #bebebe;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #969696;
+}
+
 
 .secHeader{
     color: white;

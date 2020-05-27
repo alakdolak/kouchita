@@ -1,4 +1,4 @@
-@extends('streaming.streamingLayout')
+@extends('streaming.layout.streamingLayout')
 
 
 @section('head')

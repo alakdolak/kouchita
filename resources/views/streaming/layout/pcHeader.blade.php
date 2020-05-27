@@ -1,5 +1,4 @@
-<link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/placeHeader.css')}}' data-rup='long_lived_global_legacy'/>
-<link rel="stylesheet" type='text/css' href="{{URL::asset('css/common/header.css')}}">
+<link rel="stylesheet" href="{{URL::asset('css/streaming/header.css')}}">
 
 <?php
     if(auth()->check())
@@ -7,177 +6,159 @@
 ?>
 
 <style>
-    .masthead > div > div > div > div{
-        background: red !important;
-    }
-    .centeredHeader{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
+
 </style>
 
-<div class="masthead position-relative">
-    <div class="ppr_rup ppr_priv_global_nav position-relative">
-        <div class="global-nav global-nav-single-line position-relative">
-            <div class="global-nav-top position-relative">
-                <div class="global-nav-bar" style="padding: 3px 0px;">
-                    <div class="ui_container global-nav-bar-container direction-rtl position-relative">
-                        <div class="global-nav-hamburger is-hidden-tablet">
-                            <span class="ui_icon menu-bars"></span>
-                        </div>
+<nav>
+    <div class="headerLogo">
+        <a href="{{route('streaming.index')}}" class="global-nav-logo" style="display: flex; align-items: center; height: 100%; padding: 7px 0px;">
+            <img src="{{URL::asset('images/streaming/vodLobo.png')}}" alt="کوچیتا" style="width: auto; height: 100%;"/>
+        </a>
+    </div>
 
-                        <a href="{{route('streaming.index')}}" class="global-nav-logo" style="display: flex; align-items: center">
-                            <img src="{{URL::asset('images/streaming/vodLobo.png')}}" alt="کوچیتا" style="width: auto; height: 70%;"/>
-                        </a>
+    <div class="headerTab">
+        <div class="headerNavTitle">
+            <img src="{{URL::asset('images/streaming/anten.png')}}" class="antenIcon1">
+            نمایش زنده
+        </div>
+        <div class="headerNavTitle headerNavTitleActive" onclick="openCategoryMenu()">دسته بندی ها</div>
+        <div class="headerNavTitle">فراخوان</div>
+        <div class="headerNavTitle">همکاری با ما</div>
+        <div class="headerNavTitle">جستجو</div>
+    </div>
 
-                        <div class="global-nav-links ui_tabs inverted" style="display: flex; align-items: center">
-                            <div id="taplc_global_nav_links_0" class="ppr_rup ppr_priv_global_nav_links" data-placement-name="global_nav_links">
-                                <div class="global-nav-links-container">
-                                    <ul class="global-nav-links-menu">
-                                        <li>
-                                            <span class="unscoped global-nav-link ui_tab color-whiteImp" onclick="openMainSearch(4)// in mainSearch.blade.php">اقامتگاه</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="global-nav-actions position-relative" >
-                            @if(Auth::check())
-                                <a href="{{route('streaming.uploadPage')}}" class="ppr_rup ppr_priv_global_nav_action_trips" style="margin-left: 10px; line-height: 1.5; display: flex; align-items: center;">
-                                    <div class="ppr_rup ppr_priv_global_nav_action_profile centeredHeader"  title="ویدیو" style="font-size: 10px">
-                                        <span class="ui_icon addPostIcon" style="justify-content: center"></span>
-                                        <div class="nameOfIconHeaders" style="color: white;">
-                                            بارگزاری ویدیو
-                                        </div>
-                                    </div>
-                                </a>
-
-                                <div class="ppr_rup ppr_priv_global_nav_action_trips position-relative">
-                                    <div id="targetHelp_1" class="targets">
-                                        <div id="bookmarkicon" class="ppr_rup ppr_priv_global_nav_action_profile centeredHeader" title="نشانه گذاری شده ها" style="font-size: 10px">
-                                            <span class="ui_icon casino" style="justify-content: center"></span>
-                                            <div class="nameOfIconHeaders" style="color: white;">
-                                                نشان کرده
-                                            </div>
-                                        </div>
-
-                                        <div id="bookmarkmenu" class="ui_overlay ui_flyout global-nav-flyout global-nav-utility trips-flyout-container" style="direction: rtl;">
-                                            <div>
-                                                <div class="styleguide" id="masthead-saves-container">
-                                                    <div id="masthead-recent" style="background-color: white">
-                                                        <div class="recent-header-container">
-                                                            <a class="recent-header" href="{{route('recentlyViewTotal')}}" target="_self"> نشانه گذاری شده ها </a>
-
-                                                        </div>
-                                                        <div class="masthead-recent-cards-container" id="bookMarksDiv"></div>
-                                                        {{--<div class="see-all-button-container"><a href="{{route('recentlyViewTotal')}}" target="_self" class="see-all-button">مشاهده تمامی موارد </a></div>--}}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                            @endif
-
-                            <div id="taplc_global_nav_action_profile_0" class="ppr_rup ppr_priv_global_nav_action_profile position-relative" style="margin: 0px;">
-                                <div class="global-nav-profile global-nav-utility position-relative">
-                                    @if(Auth::check())
-                                        <div id="targetHelp_5" class="targets" title="Profile" class="position-relative">
-                                            <div class="global-nav-utility-activator" title="Profile" style="flex-direction: column;">
-                                                <span id="nameTop" class="ui_icon member" style="justify-content: center;"></span>
-                                                <div class="nameOfIconHeaders" style="color: white; ">
-                                                    {{$user->username}}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endif
-                                    <div class="global-nav-overlays-container">
-                                        <div id="profile-drop" class="ui_overlay ui_flyout global-nav-flyout global-nav-utility">
-                                            <ul class="global-nav-profile-menu">
-                                                <li class="subItemHeaderNavBar"><a href="{{URL('profile')}}" class="subLink" data-tracking-label="UserProfile_viewProfile">صفحه کاربری</a></li>
-                                                <li class="subItemHeaderNavBar rule"><a href="{{URL('messages')}}" class="subLink global-nav-submenu-divided" data-tracking-label="UserProfile_messages">پیام ها</a> </li>
-                                                <li class="subItemHeaderNavBar"><a href="{{URL('accountInfo')}}" class="subLink" data-tracking-label="UserProfile_settings">اطلاعات کاربر </a></li>
-                                                <li class="subItemHeaderNavBar"><a href="{{route('logout')}}" class="subLink" data-tracking-label="UserProfile_signout">خروج</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div id="taplc_masthead_search_0" class="ppr_rup ppr_priv_masthead_search position-relative" data-placement-name="masthead_search">
-                                <div class="mag_glass_parent position-relative" title="Search">
-                                    <div id="targetHelp_6" class="targets">
-                                        <span class="ui_icon search" id="openSearch" style="transform: rotate(90deg); border: none;"></span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            @if(!auth()->check())
-                                <div class="ppr_rup ppr_priv_global_nav_action_trips position-relative">
-                                    <div id="targetHelp_4" class="targets">
-                                        <div id="entryBtnId" class="ppr_rup ppr_priv_global_nav_action_profile">
-                                            <div class="global-nav-profile global-nav-utility">
-                                                <a class="ui_button secondary small login-button" title="Join">ورود / ثبت نام</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endif
-                        </div>
-
-                        <div class="clear-both"></div>
-                    </div>
-                </div>
-
+    <div class="headerLeftSection">
+        <div class="loginButton" onclick="goToUpload()" style="padding-left: 5px; margin-left: 10px">
+            <div>بارگذاری محتوا</div>
+            <div class="addIcon">
+                <i class="fa fa-plus" aria-hidden="true"></i>
             </div>
-            <div class="sidebar-nav-wrapper hidden">
-                <div class="sidebar-nav-backdrop"></div>
-                <div class="sidebar-nav-container">
-                    <div class="ui_container">
-                        <div class="sidebar-nav-header">
-                            <div class="sidebar-nav-close">
-                                <div class="ui_icon times"></div>
-                            </div>
-                            <a href="/" class="global-nav-logo"><img src='{{URL::asset('images/icons/logo.png')}}' alt="کوچیتا" class="global-nav-img"/></a>
-                        </div>
-                        <div class="sidebar-nav-profile-container">
-                            @if(Auth::check())
-                                <div class="sidebar-nav-profile-linker position-relative">
-                                    <a class="global-nav-profile-linker">
-                                        <span onclick="document.location.href = '{{route('profile')}}'" class="ui_icon member"></span>
-                                        <div class="profile-link">
-                                            <div class="profile-name">{{$user->username}}</div>
-                                            <div class="profile-link-text">صفحه کاربری</div>
-                                        </div>
-                                    </a>
-                                </div>
-                            @endif
-                            <p class="sidebar-nav-title">اکانت من</p>
-                            <div class="sidebar-nav-profile">
-                                <li class="subItem"><a href="{{route('soon')}}" class="subLink global-nav-submenu-divided">سفرهای من</a></li>
-                                <li class="subItem"><a href="{{route('logout')}}" class="subLink" data-tracking-label="UserProfile_signout">خروج</a></li>
-                            </div>
-                        </div>
-                        <div class="sidebar-nav-links-container">
-                            <p class="sidebar-nav-title">Browse</p>
-                            <div class="sidebar-nav-links"></div>
-                            <div class="sidebar-nav-links-more"></div>
-                        </div>
-                    </div>
+        </div>
+        @if(auth()->check())
+            <div class="loginButton bookMarkHeaderIcon"></div>
+            <div class="loginButton userNameHeader" style="padding-left: 10px">
+                <div style="z-index: 9">
+                    {{auth()->user()->username}}
+                </div>
+                <div class="userHeaderIcon"></div>
+                <div class="userHeaderMenu">
+                    <a href="{{URL('profile')}}" class="userHeaderMenuTab">
+                        صفحه ی کاربری
+                    </a>
+                    <a href="{{route('logout')}}" class="userHeaderMenuTab">
+                        خروج
+                    </a>
                 </div>
             </div>
-            <div class="clear-both"></div>
+        @else
+            <a class="login-button loginButton" title="Join">ورود / ثبت نام</a>
+        @endif
+    </div>
+
+    <div class="headerRightSection" onclick="showHideMenu()">
+        <div class="headerLine headerLine1"></div>
+        <div class="headerLine headerLine2"></div>
+        <div class="headerLine headerLine3"></div>
+    </div>
+
+    <div class="headerRightTabs">
+        <div class="headerNavTitle">
+            <img src="{{URL::asset('images/streaming/anten.png')}}" class="antenIcon1">
+            نمایش زنده
+        </div>
+        <div class="headerNavTitle headerNavTitleActive" onclick="openCategoryMenu()">دسته بندی ها</div>
+        <div class="headerNavTitle">فراخوان</div>
+        <div class="headerNavTitle">همکاری با ما</div>
+        <div class="headerNavTitle">جستجو</div>
+    </div>
+
+</nav>
+
+<div class="categoryBackBody">
+    <div class="categoryBody">
+        <div class="row" style="height: 100%; padding: 10px; padding-right: 0px; position: relative">
+
+            <div class="ui_close_x closeCategoryBodyDiv" onclick="closeCategoryMenu()">
+                بستن
+            </div>
+
+            <div class="col-lg-10 col-md-8 categoryBodySection categoryBodySectionRight showCategoryBodySectionRight">
+                <div class="categoryMainHeader" style="padding-right: 0;">
+                    انتخاب کنید
+                    <span id="categoryHeaderName" class="categoryHeaderName"></span>
+                </div>
+                <div class=" closeCategoryBodyDiv backCategory" onclick="backCategoryMenu()">
+                    <div class="backArrow"></div>
+                    بازگشت
+                </div>
+
+                @foreach($vodCategory as $mainCat)
+                    <div id="subCategoryMenu_{{$mainCat->id}}" class="subCategoryBody">
+                        @foreach($mainCat->sub as $item)
+                            <div class="subCategoryDiv">
+                                <img src="{{$item->offIcon}}" class="categoryIcon offIcon">
+                                <img src="{{$item->onIcon}}" class="categoryIcon onIcon">
+                                <div class="subCategoryName">
+                                    {{$item->name}}
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                @endforeach
+            </div>
+
+            <div class="col-lg-2 col-md-4 categoryBodySection categoryBodySectionLeft">
+                <div class="categoryMainHeader">
+                    دسته بندی های موجود
+                </div>
+
+                @foreach($vodCategory as $mainCat)
+                    <div class="categoryTabs" onclick="openSubCategoryMenuTab({{$mainCat->id}}, this)">
+                        <div class="categoryTabName">
+                            {{$mainCat->name}}
+                        </div>
+                        <div class="categoryLeftArrow"></div>
+                    </div>
+                @endforeach
+            </div>
         </div>
     </div>
 </div>
 
 <script>
     var getBookMarksPath = '{{route('getBookMarks')}}';
+
+    function showHideMenu(){
+        $('.headerLine').toggleClass('change');
+        $('.headerRightSection').toggleClass('change');
+        $('.headerRightTabs').toggleClass('change');
+    }
+
+    function openCategoryMenu(){
+        $('.categoryBodySectionRight').addClass('showCategoryBodySectionRight');
+        $('.categoryBodySectionLeft').removeClass('showCategoryBodySectionRight');
+        $('.categoryBackBody').css('display', 'flex');
+    }
+    function backCategoryMenu(){
+        $('.categoryBodySectionRight').addClass('showCategoryBodySectionRight');
+        $('.categoryBodySectionLeft').removeClass('showCategoryBodySectionRight');
+    }
+    function closeCategoryMenu(){
+        $('.categoryBackBody').css('display', 'none');
+    }
+
+    function openSubCategoryMenuTab(_id, _element){
+        $('.categoryBodySectionRight').removeClass('showCategoryBodySectionRight');
+        $('.categoryBodySectionLeft').addClass('showCategoryBodySectionRight');
+        $('.subCategoryBody').css('display', 'none');
+        $('#subCategoryMenu_' + _id).css('display', 'flex');
+        $('.categoryTabsActive').removeClass('categoryTabsActive');
+        $(_element).addClass('categoryTabsActive');
+
+        let name = $($(_element).children()[0]).text();
+        $('#categoryHeaderName').text(name)
+    }
+
 
     function hideAllTopNavs(){
         $("#alert").hide();
@@ -218,17 +199,13 @@
         }
     }
 
-    $('#close_span_search').click(function(e) {
-        hideAllTopNavs();
-        $('#searchspan').animate({height: '0vh'});
-        $("#myCloseBtn").addClass('hidden');
-    });
-
-    $('#openSearch').click(function(e) {
-        hideAllTopNavs();
-        $("#myCloseBtn").removeClass('hidden');
-        $('#searchspan').animate({height: '100vh'});
-    });
+    function goToUpload() {
+        if (!hasLogin) {
+            showLoginPrompt();
+            return;
+        }
+        location.href = "{{route('streaming.uploadPage')}}";
+    }
 
 </script>
 
@@ -372,8 +349,6 @@
                 hideAllTopNavs();
         }
 
-        function openUploadPost(){
-            openUploadPhotoModal('', '{{route('addPhotoToPlace')}}', 0, 0, '');
-        }
+
     </script>
 @endif

@@ -21,31 +21,6 @@ if(auth()->check()){
                 <img src="{{URL::asset('images/icons/mainLogo.png')}}" class="content-icon" width="100%">
             </a>
             <div class="footerSocialMediaBox">
-                {{--                <div class="fassadsad">--}}
-                {{--                    <a {{($config->linkedinNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://www.linkedin.com/in/shazde-mosafer-652817143/">--}}
-                {{--                        <div class="footerIcon footerIconHor linkedin"></div>--}}
-                {{--                    </a>--}}
-                {{--                </div>--}}
-                {{--                <div class="fassadsad">--}}
-                {{--                    <a {{($config->facebookNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://www.facebook.com/profile.php?id=100016313805277&ref=br_rs">--}}
-                {{--                        <div class="footerIcon footerIconHor facebook"></div>--}}
-                {{--                    </a>--}}
-                {{--                </div>--}}
-                {{--                <div class="fassadsad">--}}
-                {{--                    <a target="_blank" {{($config->pinterestNoFollow) ? 'rel="nofollow"' : ''}} href="https://www.pinterest.co.uk/shazdemosafer/">--}}
-                {{--                        <div class="footerIcon footerIconHor pinterest"></div>--}}
-                {{--                    </a>--}}
-                {{--                </div>--}}
-                {{--                <div class="fassadsad">--}}
-                {{--                    <a target="_blank" {{($config->twitterNoFollow) ? 'rel="nofollow"' : ''}} href="https://twitter.com/shazdemosafer">--}}
-                {{--                        <div class="footerIcon footerIconHor twitter"></div>--}}
-                {{--                    </a>--}}
-                {{--                </div>--}}
-                {{--                <div class="fassadsad">--}}
-                {{--                    <a target="_blank" {{($config->googlePlusNoFollow) ? 'rel="nofollow"' : ''}} href="https://plus.google.com/113786987503996741617">--}}
-                {{--                        <div class="footerIcon footerIconHor googlePlus"></div>--}}
-                {{--                    </a>--}}
-                {{--                </div>--}}
                 <a {{($config->linkedinNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://www.linkedin.com/in/shazde-mosafer-652817143/">
                     <div class="footerIconHor linkedin"></div>
                 </a>
@@ -67,7 +42,7 @@ if(auth()->check()){
             </div>
         </div>
         {{--        aboutShazdeMoreLess--}}
-        <div>
+        <div style="display: flex">
             <div class="footerRside">
                 <div id="aboutShazde" class="aboutShazdeMoreLess">
                     <div class="clear-both hideOnScreen"></div>
@@ -99,7 +74,7 @@ if(auth()->check()){
                     </div>
                 </div>
             </div>
-            <div>
+            <div style="display: flex">
                 <div class="footerLsideBoxes footHideTabletMenu" >
                     <ul>
                         <li class="footTitle hideOnPhone">دقیق تر شوید</li>
