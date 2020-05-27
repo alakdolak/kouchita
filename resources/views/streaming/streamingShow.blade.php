@@ -303,7 +303,7 @@
                     </div>
                     <div class="headerWithLineLine"></div>
                 </div>
-                @include('streaming.commentingSection')
+                @include('streaming.component.commentingSection')
                 <script>
                     commentingInitdata = {
                         'videoId': {{$video->id}}

@@ -1,5 +1,28 @@
 <link rel="stylesheet" href="{{URL::asset('css/streaming/component/searchPan.css')}}">
 
+<style>
+    .placeHolderAnime{
+        /*background: rgb(107,107,107);*/
+        background: radial-gradient(circle, #6b6b6b 0%, rgba(58,58,58,1) 35%);
+        background-size: 400% 400%;
+        animation: gradient 1.5s infinite;
+    }
+    .resultLine{
+        width: 60%;
+        height: 10px;
+        margin-bottom: 10px;
+    }
+
+    @keyframes gradient {
+        0% {
+            background-position: 0% 50%;
+        }
+        100% {
+            background-position: 100% 50%;
+        }
+    }
+</style>
+
 <span id="searchPane" class="hidden searchPanes">
         <div id="searchDivForScroll" class="prw_rup prw_search_typeahead spSearchDivForScroll">
             <div>
@@ -12,6 +35,16 @@
                 <div class="mainContainerSearch">
                     <div class="data_holder searchPangResultSection display-none">
                         <div id="searchPangResult"></div>
+                        <div id="placeHolderResult" style="display: none;">
+                            <div style="margin-bottom: 40px">
+                                <div class="resultLine placeHolderAnime"></div>
+                                <div class="resultLine placeHolderAnime" style="width: 30%"></div>
+                            </div>
+                            <div>
+                                <div class="resultLine placeHolderAnime"></div>
+                                <div class="resultLine placeHolderAnime" style="width: 30%"></div>
+                            </div>
+                        </div>
                     </div>
                     <div class="visitSuggestionDiv">
                             <div class="visitSuggestionText">بازدید های اخیر شما</div>
@@ -64,6 +97,10 @@
         }
         else {
             searchRequestNumber++;
+            $('.searchPangResultSection').removeClass('display-none');
+            $('#placeHolderResult').show();
+            $('#searchPangResult').hide();
+
             $.ajax({
                 type: "post",
                 url: '{{route("streaming.search")}}',
@@ -82,7 +119,6 @@
                     }
                 }
             });
-
         }
     }
 
@@ -104,8 +140,12 @@
             $('.searchPangResultSection').removeClass('display-none');
         else
             $('.searchPangResultSection').addClass('display-none');
-
         $("#searchPangResult").empty().append(newElement);
+
+
+        $('#placeHolderResult').hide();
+        $('#searchPangResult').show();
+
     }
 
 
