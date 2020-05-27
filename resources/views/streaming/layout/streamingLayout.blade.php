@@ -58,32 +58,25 @@
 
 <body class="rebrand_2017 desktop HomeRebranded  js_logging" ng-app="mainApp" style="background-color: #EAFBFF;">
 
-<div id="darkModeMainPage" class="ui_backdrop dark" ></div>
-@include('general.loading')
+    <div id="darkModeMainPage" class="ui_backdrop dark" ></div>
+    @include('general.loading')
+    @include('general.alerts')
+    @include('streaming.component.videoSuggestionPack')
+    @include('streaming.component.searchPan')
+    @include('streaming.component.categoryTable')
+    @if(!Auth::check())
+        @include('streaming.component.loginPopup')
+    @endif
 
-@include('general.alerts')
-
-@include('streaming.videoSuggestionPack')
-
-@include('streaming.component.searchPan')
-
-@if(!Auth::check())
-    @include('streaming.component.loginPopup')
-@endif
-
-
-{{--<div class="hideOnPhone">--}}
     @include('streaming.layout.pcHeader')
-{{--</div>--}}
 
-@include('streaming.layout.categoryTable')
+    <div id="like_button_container"></div>
 
-<div class="streamBody" style="padding-top: 10px">
-    @yield('body')
-</div>
+    <div class="streamBody" style="padding-top: 10px">
+        @yield('body')
+    </div>
 
-
-@include('streaming.layout.pcFooter')
+    @include('streaming.layout.pcFooter')
 
 </body>
 

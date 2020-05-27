@@ -153,6 +153,11 @@ div.prw_rup.prw_search_typeahead .typeahead_align .typeahead_input {
     white-space: normal;
     color: white !important;
     background-color: #000000d6;
+
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
 }
 
 .hotelIcon::before {
@@ -301,6 +306,7 @@ div.prw_rup.prw_shelves_rebrand_poi_shelf_item_widget .detail {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    max-height: 73%;
 }
 
 .prw_common_thumbnail_no_style_responsive22{
