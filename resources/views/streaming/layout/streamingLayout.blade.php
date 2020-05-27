@@ -30,6 +30,7 @@
 
     <link rel="stylesheet" href="{{URL::asset('css/streaming/iranSansFont.css')}}">
     <link rel="stylesheet" href="{{URL::asset('css/streaming/mainStreaming.css')}}">
+    <link rel="stylesheet" href="{{URL::asset('css/streaming/layout/vodCommon.css')}}">
 
     <style>
         *{
@@ -44,7 +45,7 @@
         .fullOpacity{
             opacity: 1 !important;
         }
-        @media (max-width: 767px) {
+        @media (max-width: 768px) {
             .hideOnPc{
                 display: flex;
             }
@@ -64,14 +65,18 @@
 
 @include('streaming.videoSuggestionPack')
 
+@include('streaming.component.searchPan')
+
 @if(!Auth::check())
-    @include('streaming.layout.loginPopup')
+    @include('streaming.component.loginPopup')
 @endif
 
 
-<div class="hideOnPhone">
+{{--<div class="hideOnPhone">--}}
     @include('streaming.layout.pcHeader')
-</div>
+{{--</div>--}}
+
+@include('streaming.layout.categoryTable')
 
 <div class="streamBody" style="padding-top: 10px">
     @yield('body')
@@ -121,6 +126,9 @@
     $(window).resize(function(){
         resizeFitImg('resizeImgClass');
     });
+
+    $('.openSearchPanPage').on('click', openMainSearch);
+
 </script>
 
 @yield('script')

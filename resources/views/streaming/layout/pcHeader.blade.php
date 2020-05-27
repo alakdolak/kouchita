@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="{{URL::asset('css/streaming/header.css')}}">
+<link rel="stylesheet" href="{{URL::asset('css/streaming/layout/vodHeader.css')}}">
 
 <?php
     if(auth()->check())
@@ -10,24 +10,25 @@
 </style>
 
 <nav>
-    <div class="headerLogo">
+    <div class="headerLogo ">
         <a href="{{route('streaming.index')}}" class="global-nav-logo" style="display: flex; align-items: center; height: 100%; padding: 7px 0px;">
             <img src="{{URL::asset('images/streaming/vodLobo.png')}}" alt="کوچیتا" style="width: auto; height: 100%;"/>
         </a>
     </div>
 
-    <div class="headerTab">
+    <div class="headerTab hideOnPhone">
         <div class="headerNavTitle">
             <img src="{{URL::asset('images/streaming/anten.png')}}" class="antenIcon1">
             نمایش زنده
         </div>
-        <div class="headerNavTitle headerNavTitleActive" onclick="openCategoryMenu()">دسته بندی ها</div>
+{{--        headerNavTitleActive--}}
+        <div class="headerNavTitle " onclick="openCategoryMenu()">دسته بندی ها</div>
         <div class="headerNavTitle">فراخوان</div>
         <div class="headerNavTitle">همکاری با ما</div>
-        <div class="headerNavTitle">جستجو</div>
+        <div class="headerNavTitle openSearchPanPage">جستجو</div>
     </div>
 
-    <div class="headerLeftSection">
+    <div class="headerLeftSection hideOnPhone">
         <div class="loginButton" onclick="goToUpload()" style="padding-left: 5px; margin-left: 10px">
             <div>بارگذاری محتوا</div>
             <div class="addIcon">
@@ -55,75 +56,25 @@
         @endif
     </div>
 
-    <div class="headerRightSection" onclick="showHideMenu()">
+    <div class="headerRightSection hideOnPhone" onclick="showHideMenu()">
         <div class="headerLine headerLine1"></div>
         <div class="headerLine headerLine2"></div>
         <div class="headerLine headerLine3"></div>
     </div>
 
-    <div class="headerRightTabs">
+    <div class="headerRightTabs hideOnPhone">
         <div class="headerNavTitle">
             <img src="{{URL::asset('images/streaming/anten.png')}}" class="antenIcon1">
             نمایش زنده
         </div>
-        <div class="headerNavTitle headerNavTitleActive" onclick="openCategoryMenu()">دسته بندی ها</div>
+        <div class="headerNavTitle" onclick="openCategoryMenu()">دسته بندی ها</div>
         <div class="headerNavTitle">فراخوان</div>
         <div class="headerNavTitle">همکاری با ما</div>
-        <div class="headerNavTitle">جستجو</div>
+        <div class="headerNavTitle openSearchPanPage">جستجو</div>
     </div>
 
 </nav>
 
-<div class="categoryBackBody">
-    <div class="categoryBody">
-        <div class="row" style="height: 100%; padding: 10px; padding-right: 0px; position: relative">
-
-            <div class="ui_close_x closeCategoryBodyDiv" onclick="closeCategoryMenu()">
-                بستن
-            </div>
-
-            <div class="col-lg-10 col-md-8 categoryBodySection categoryBodySectionRight showCategoryBodySectionRight">
-                <div class="categoryMainHeader" style="padding-right: 0;">
-                    انتخاب کنید
-                    <span id="categoryHeaderName" class="categoryHeaderName"></span>
-                </div>
-                <div class=" closeCategoryBodyDiv backCategory" onclick="backCategoryMenu()">
-                    <div class="backArrow"></div>
-                    بازگشت
-                </div>
-
-                @foreach($vodCategory as $mainCat)
-                    <div id="subCategoryMenu_{{$mainCat->id}}" class="subCategoryBody">
-                        @foreach($mainCat->sub as $item)
-                            <div class="subCategoryDiv">
-                                <img src="{{$item->offIcon}}" class="categoryIcon offIcon">
-                                <img src="{{$item->onIcon}}" class="categoryIcon onIcon">
-                                <div class="subCategoryName">
-                                    {{$item->name}}
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                @endforeach
-            </div>
-
-            <div class="col-lg-2 col-md-4 categoryBodySection categoryBodySectionLeft">
-                <div class="categoryMainHeader">
-                    دسته بندی های موجود
-                </div>
-
-                @foreach($vodCategory as $mainCat)
-                    <div class="categoryTabs" onclick="openSubCategoryMenuTab({{$mainCat->id}}, this)">
-                        <div class="categoryTabName">
-                            {{$mainCat->name}}
-                        </div>
-                        <div class="categoryLeftArrow"></div>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    </div>
-</div>
 
 <script>
     var getBookMarksPath = '{{route('getBookMarks')}}';
@@ -134,30 +85,6 @@
         $('.headerRightTabs').toggleClass('change');
     }
 
-    function openCategoryMenu(){
-        $('.categoryBodySectionRight').addClass('showCategoryBodySectionRight');
-        $('.categoryBodySectionLeft').removeClass('showCategoryBodySectionRight');
-        $('.categoryBackBody').css('display', 'flex');
-    }
-    function backCategoryMenu(){
-        $('.categoryBodySectionRight').addClass('showCategoryBodySectionRight');
-        $('.categoryBodySectionLeft').removeClass('showCategoryBodySectionRight');
-    }
-    function closeCategoryMenu(){
-        $('.categoryBackBody').css('display', 'none');
-    }
-
-    function openSubCategoryMenuTab(_id, _element){
-        $('.categoryBodySectionRight').removeClass('showCategoryBodySectionRight');
-        $('.categoryBodySectionLeft').addClass('showCategoryBodySectionRight');
-        $('.subCategoryBody').css('display', 'none');
-        $('#subCategoryMenu_' + _id).css('display', 'flex');
-        $('.categoryTabsActive').removeClass('categoryTabsActive');
-        $(_element).addClass('categoryTabsActive');
-
-        let name = $($(_element).children()[0]).text();
-        $('#categoryHeaderName').text(name)
-    }
 
 
     function hideAllTopNavs(){
