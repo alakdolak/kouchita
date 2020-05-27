@@ -461,9 +461,7 @@ Route::group(array('middleware' => 'nothing'), function () {
 
     Route::post('getMainPageSuggestion', 'AjaxController@getMainPageSuggestion')->name('getMainPageSuggestion');
 });
-Route::get('streaming/live', function(){
-   return view('streaming.test');
-});
+
 //review section
 Route::group(array('middleware' => 'nothing'), function () {
     Route::post('reviewUploadPic', 'ReviewsController@reviewUploadPic')->name('reviewUploadPic');
