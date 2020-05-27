@@ -60,6 +60,25 @@ class StreamingController extends Controller
         return view('streaming.streamingIndex', compact(['lastVideos', 'videoCategory']));
     }
 
+    public function search(Request $request)
+    {
+        if(isset($request->value)){
+            $videos = Video::where('title', 'LIKE', '%' . $request->value . '%')
+                            ->where(['state' => 1, 'confirm' => 1])
+                            ->select(['id', 'title', 'code', 'categoryId'])->get();
+
+            foreach ($videos as $item) {
+                $item->category = VideoCategory::find($item->categoryId)->name;
+                $item->url = route('streaming.show', ['code' => $item->code]);
+            }
+            echo json_encode(['status' => 'ok', 'num' => $request->num, 'result' => $videos]);
+        }
+        else
+            echo json_encode(['status' => 'nok']);
+
+        return;
+    }
+
     public function showStreaming(Request $request, $code)
     {
         $video = Video::where('code', $code)->first();
@@ -79,7 +98,6 @@ class StreamingController extends Controller
             }
             $video->video = \URL::asset('_images/video/' . $video->userId . '/' . $video->video);
             $video = $this->getVideoFullInfo($video, true);
-//            dd($video);
 
             $userMoreVideo = Video::where('userId', $video->userId)->where('id', '!=', $video->id)->take(4)->orderByDesc('created_at')->get();
             foreach ($userMoreVideo as $vid)
@@ -89,8 +107,15 @@ class StreamingController extends Controller
             foreach ($sameCategory as $vid)
                 $vid = $this->getVideoFullInfo($vid, false);
 
+            $thumbLoc = '_images/video/' . $video->userId . '/min_'. $video->thumbnail;
+            if(is_file(__DIR__.'/../../../../assets/' . $thumbLoc))
+                $thumbnail = \URL::asset($thumbLoc);
+            else
+                $thumbnail = \URL::asset('images/streaming/vodLobo.png');
 
-            return view('streaming.streamingShow', compact(['video', 'userMoreVideo', 'sameCategory']));
+            $localStorageData = ['title' => $video->title, 'pic' => $thumbnail , 'redirect' => route('streaming.show', ['code' => $video->code])];
+
+            return view('streaming.streamingShow', compact(['video', 'userMoreVideo', 'sameCategory', 'localStorageData']));
         }
 
         return redirect(route('streaming.index'));

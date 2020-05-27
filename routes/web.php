@@ -724,6 +724,8 @@ Route::middleware(['web', 'vodShareData'])->group(function (){
 
     Route::get('streaming/live/{room?}', 'StreamingController@streamingLive')->name('streaming.live');
 
+    Route::post('streaming/search', 'StreamingController@search')->name('streaming.search');
+
     Route::middleware(['auth'])->group(function () {
         Route::get('streaming/uploadPage', 'StreamingController@uploadVideoPage')->name('streaming.uploadPage');
 
