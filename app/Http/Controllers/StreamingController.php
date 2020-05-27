@@ -107,9 +107,11 @@ class StreamingController extends Controller
             foreach ($sameCategory as $vid)
                 $vid = $this->getVideoFullInfo($vid, false);
 
-            $thumbLoc = '_images/video/' . $video->userId . '/min_'. $video->thumbnail;
-            if(is_file(__DIR__.'/../../../../assets/' . $thumbLoc))
-                $thumbnail = \URL::asset($thumbLoc);
+            $thumbLoc = '_images/video/' . $video->userId;
+            if(is_file(__DIR__.'/../../../../assets/' . $thumbLoc . '/min_' . $video->thumbnail))
+                $thumbnail = \URL::asset($thumbLoc . '/min_' . $video->thumbnail);
+            else if(is_file(__DIR__.'/../../../../assets/' . $thumbLoc . '/' . $video->thumbnail))
+                $thumbnail = \URL::asset($thumbLoc . '/' . $video->thumbnail);
             else
                 $thumbnail = \URL::asset('images/streaming/vodLobo.png');
 
