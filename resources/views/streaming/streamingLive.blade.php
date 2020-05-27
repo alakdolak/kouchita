@@ -1,4 +1,4 @@
-@extends('streaming.streamingLayout')
+@extends('streaming.layout.streamingLayout')
 
 @section('head')
     <link rel="stylesheet" href="{{URL::asset('css/streaming/showStreaming.css')}}">
@@ -371,8 +371,6 @@
                         <span class="toolSectionInfosTabNumber">100,000,000</span>
                     </div>
                     <div class="toolSectionInfosTab">
-                        <i class="fa fa-eye"></i>
-                        {{--                    <span class="ViewIcon viewInfoTab"></span>--}}
                         <span class="toolSectionInfosTabNumber">100</span>
                     </div>
                 </div>

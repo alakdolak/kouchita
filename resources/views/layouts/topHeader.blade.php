@@ -1,9 +1,7 @@
 
-{{--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">--}}
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/topHeaderStyles.css')}}' />
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/bootstrap.min.css')}}' />
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158914626-1"></script>
 <script>
     window.dataLayer = window.dataLayer || [];
@@ -14,7 +12,6 @@
 </script>
 
 <script src="{{URL::asset('js/jQuery.js')}}"></script>
-{{--<script src="{{URL::asset('js/jquery-3.4.1.min.js')}}"></script>--}}
 <script src="{{URL::asset('js/angular.js')}}"></script>
 
 {{--<script src="https://apis.google.com/js/platform.js" async defer></script>--}}
@@ -23,10 +20,8 @@
 
 <meta name="csrf-token" content="{{ csrf_token() }}"/>
 
-<!-- Link Swiper's CSS -->
 <link rel="stylesheet" href="{{URL::asset('css/theme2/swiper.css')}}">
 
-<!-- Swiper JS -->
 <script src="{{URL::asset('js/swiper/swiper.min.js')}}"></script>
 
 <meta charset="UTF-8">

@@ -4,7 +4,6 @@
 <head>
     @include('layouts.topHeader')
 
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/home_rebranded.css?v=4')}}"/>
     <meta property="og:locale" content="fa_IR" />
     {{--<meta property="og:locale:alternate" content="fa_IR" />--}}
     <meta property="og:type" content="website" />
@@ -19,20 +18,23 @@
     <meta name="twitter:image" content="{{URL::asset('_images/nopic/blank.jpg')}}"/>
 
 
+{{--    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/masthead-saves.css?v=2')}}'/>--}}
+{{--    <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/hr_north_star.css?v=2')}}'/>--}}
+{{--    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/icons.css?v=1')}}'/>--}}
+{{--    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/abbreviations.css?v=1')}}'/>--}}
+{{--    <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/icons.css')}}">--}}
+
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/long_lived_global_legacy_2.css?v=2')}}"/>
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/masthead-saves.css?v=2')}}'/>
-    <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/hr_north_star.css?v=2')}}'/>
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/icons.css?v=1')}}'/>
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/mainPageStyles.css')}}'/>
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/abbreviations.css?v=1')}}'/>
 
-    <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/icons.css')}}">
+    <link rel="stylesheet" href="{{URL::asset('css/font-awesome.min.css')}}">
 
-    <link rel="stylesheet" href="{{URL::asset('css/theme2/swiper.css')}}">
-
+    <link rel="stylesheet" href="{{URL::asset('css/streaming/iranSansFont.css')}}">
     <link rel="stylesheet" href="{{URL::asset('css/streaming/mainStreaming.css')}}">
 
     <style>
+        *{
+            direction: rtl;
+        }
         #openSearch{
             transform: rotate(0deg) !important;
         }
@@ -55,37 +57,23 @@
 
 <body class="rebrand_2017 desktop HomeRebranded  js_logging" ng-app="mainApp" style="background-color: #EAFBFF;">
 
-@include('general.forAllPages')
+<div id="darkModeMainPage" class="ui_backdrop dark" ></div>
+@include('general.loading')
+
+@include('general.alerts')
+
+@include('streaming.videoSuggestionPack')
+
+@if(!Auth::check())
+    @include('streaming.layout.loginPopup')
+@endif
+
 
 <div class="hideOnPhone">
     @include('streaming.layout.pcHeader')
 </div>
 
-<div class="hideOnScreen">
-    @include('streaming.layout.mobileHeader')
-</div>
-
-@include('streaming.videoSuggestionPack')
-
-
 <div class="streamBody" style="padding-top: 10px">
-
-    <div class="container secHeader">
-        <a href="{{route('streaming.live', ['room' => $hasLive])}}" class="secHeaderTabs ">
-            <img id="liveIcon" src="{{URL::asset('images/streaming/Live.png')}}" class="LivePngClass fullOpacity" style="transition: 1s; opacity: .2">
-            <span class="liveText">نمایش زنده</span>
-        </a>
-
-        @if($hasLive != false)
-            <script>
-                setInterval(function () {
-                    $('#liveIcon').toggleClass('fullOpacity');
-                }, 1000);
-            </script>
-        @endif
-
-    </div>
-
     @yield('body')
 </div>
 
@@ -94,29 +82,45 @@
 
 </body>
 
-
-<script src="{{URL::asset('js/swiper/swiper.min.js')}}"></script>
-
 <script>
-    resizeFitImg('resizeImgClass');
+    var hasLogin = {{auth()->check() ? 1 : 0}};
 
+    function checkLogin(){
+        if (!hasLogin) {
+            showLoginPrompt('{{Request::url()}}');
+            return false;
+        }
+        else
+            return true;
+    }
 
+    function resizeFitImg(_class) {
+        var imgs = $('.' + _class);
+        for(i = 0; i < imgs.length; i++){
+            var img = $(imgs[i]);
+            var imgW = img.width();
+            var imgH = img.height();
 
-    $(window).ready(function(){
+            var secW = img.parent().width();
+            var secH = img.parent().height();
+
+            if(imgH < secH){
+                img.css('height', '100%');
+                img.css('width', 'auto');
+            }
+            else if(imgW < secW){
+                img.css('width', '100%');
+                img.css('height', 'auto');
+            }
+        }
+    }
+
+    $(document).ready(function(){
         resizeFitImg('resizeImgClass');
     });
     $(window).resize(function(){
         resizeFitImg('resizeImgClass');
     });
-
-    function goToUpload() {
-        if (!hasLogin) {
-            showLoginPrompt();
-            return;
-        }
-
-        location.href = "{{route('streaming.uploadPage')}}";
-    }
 </script>
 
 @yield('script')
