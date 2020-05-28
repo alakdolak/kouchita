@@ -132,8 +132,8 @@
 
         for (i = 0; i < response.length; i++) {
             newElement += '<a class="aSearchResult" href="' + response[i].url + '">\n';
-            newElement += "<div class='searchPanSuggest' id='suggest_" + i + "' style='margin: 0px; font-size: 25px'>" + response[i].title + "</div>";
-            newElement += "<div class='searchPanSuggest' id='suggest_" + i + "' style='margin: 5px 20px 0px 0px; font-weight: bold; font-size: 14px'>" + response[i].category + "</div></a>";
+            newElement += "<div class='searchPanSuggest searchPanSuggestName' id='suggest_" + i + "'>" + response[i].title + "</div>";
+            newElement += "<div class='searchPanSuggest searchPanSuggestCategory' id='suggest_" + i + "'>" + response[i].category + "</div></a>";
         }
 
         if (response.length != 0)

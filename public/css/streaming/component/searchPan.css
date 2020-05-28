@@ -63,7 +63,6 @@
     right: 10%;
     top: 10%;
     bottom: auto;
-    overflow: auto;
     max-height: 80%;
     z-index: 10000001;
     padding: 48px 16px;
@@ -71,6 +70,7 @@
     box-shadow: none;
     background-color: #232323;
     border-radius: 20px;
+    overflow: hidden;
 }
 
 .searchPanes > div:nth-child(3) > select, .searchPanes > div:nth-child(3) > div {
@@ -337,6 +337,15 @@ div.prw_rup.prw_shelves_rebrand_poi_shelf_item_widget .detail {
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+.searchPanSuggestName{
+    margin: 0px;
+    font-size: 25px;
+}
+.searchPanSuggestCategory{
+    margin: 5px 20px 0px 0px;
+    font-weight: bold;
+    font-size: 14px
+}
 
 .searchPaneInput::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: white;
@@ -416,6 +425,18 @@ div.prw_rup.prw_shelves_rebrand_poi_shelf_item_widget .detail {
     }
 }
 
+@media (max-width: 500px) {
+    .searchPanes {
+        top: 1%;
+    }
+    .searchPanSuggestCategory{
+        font-size: 11px;
+    }
+    .searchPanSuggestName{
+        font-size: 17px;
+    }
+}
+
 @media (max-width: 480px) {
     .spGoWhere{
         font-size: 25px;
@@ -430,9 +451,14 @@ div.prw_rup.prw_shelves_rebrand_poi_shelf_item_widget .detail {
     }
 }
 
+
 @media (max-width: 400px) {
     #searchDivForScroll > div:nth-child(1) {
         padding: 10px 0 !important;
+    }
+    #searchDivForScroll{
+        overflow-y: auto;
+        height: 400px;
     }
     .searchPangResultSection {
         margin: 0;
