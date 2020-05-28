@@ -2,7 +2,6 @@
 
 <style>
     .placeHolderAnime{
-        /*background: rgb(107,107,107);*/
         background: radial-gradient(circle, #6b6b6b 0%, rgba(58,58,58,1) 35%);
         background-size: 400% 400%;
         animation: gradient 1.5s infinite;
