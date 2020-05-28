@@ -726,6 +726,10 @@ Route::middleware(['web', 'vodShareData'])->group(function (){
 
     Route::post('streaming/search', 'StreamingController@search')->name('streaming.search');
 
+    Route::get('streaming/list/{kind}/{value}', 'StreamingController@videoList')->name('streaming.list');
+
+    Route::post('streaming/getListElems', 'StreamingController@getVideoListElems')->name('streaming.list.getElems');
+
     Route::middleware(['auth'])->group(function () {
         Route::get('streaming/uploadPage', 'StreamingController@uploadVideoPage')->name('streaming.uploadPage');
 
@@ -737,7 +741,6 @@ Route::middleware(['web', 'vodShareData'])->group(function (){
 
         Route::post('streaming/setVideoComment', 'StreamingController@setVideoComment')->name('streaming.setVideoComment');
 
-        Route::post('streaming/comment/feedback/store', 'StreamingController@setVideoCommentFeedback')->name('streaming.video.comment.feedback');
     });
 
     Route::get('/importVideoToDB', 'StreamingController@importVideoToDB');
@@ -745,7 +748,6 @@ Route::middleware(['web', 'vodShareData'])->group(function (){
     Route::get('/setVideoDuration', 'StreamingController@setVideoDuration');
 
     Route::get('/confirmAll', 'StreamingController@confirmAll');
-
 });
 
 

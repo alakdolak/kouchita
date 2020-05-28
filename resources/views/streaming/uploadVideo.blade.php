@@ -74,25 +74,41 @@
             </div>
 
             <div class="row videoInfos">
+                <div class="col-md-12 warningText">
+                    برای بارگذاری محتوا باید موارد ستاره دار را پر کنید.
+                </div>
                 <div class="col-md-12">
-                    <div class="row">
+                    <div class="row" style="display: flex;">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="videoName" class="inputVideoLabel">نام ویدیو</label>
+                                <label for="videoName" class="inputVideoLabel importantIcon">
+                                    نام ویدیو
+                                </label>
                                 <input type="text" class="form-control" id="videoName">
                             </div>
                         </div>
-                        <div class="col-md-6">
+
+                        <div class="col-md-3">
                             <div class="form-group">
-                                <label for="videoCategory" class="inputVideoLabel">دسته بندی ویدیو</label>
-                                <select name="videoCategory" id="videoCategory" class="form-control">
-                                    <option value="0">...</option>
+                                <label for="videoCategory" class="inputVideoLabel importantIcon">دسته بندی ویدیو</label>
+                                <select name="videoCategory" id="videoCategory" class="form-control" onchange="changeCategoryVideo(this.value)">
+                                    <option id="zeroValue" value="0">...</option>
                                     @foreach($categories as $item)
                                         <option value="{{$item->id}}">{{$item->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
+
+                        <div id="subCategorySection" class="col-md-3" style="display: none">
+                            <div class="form-group">
+                                <label for="videoSubCategory" class="inputVideoLabel importantIcon">زیر دسته بندی ویدیو</label>
+                                <select name="videoSubCategory" id="videoSubCategory" class="form-control">
+                                    <option value="0" selected></option>
+                                </select>
+                            </div>
+                        </div>
+
                     </div>
                     <div class="row">
                         <div class="col-md-12">
@@ -189,6 +205,7 @@
         let storeVideoURL = '{{route("streaming.storeVideo")}}';
         let storeVideoInfoURL = '{{route("streaming.storeVideoInfo")}}';
         let csrfToken = "{{csrf_token()}}";
+        let categoryies = {!! $categories !!};
 
         let thumbnail = '';
         let newThumbnailCrop;
@@ -213,6 +230,32 @@
             if(files[0]['type'].includes('video/'))
                 storeVideo(files[0]);
         });
+
+        function changeCategoryVideo(_value){
+            $('#zeroValue').remove();
+            if(_value != 0){
+                let cat = null;
+                categoryies.forEach(item => {
+                    if(item.id == _value)
+                        cat = item;
+                });
+
+                if(cat != null){
+                    let option = '<option value="0" selected>...</option>';
+                    cat.sub.forEach(item => {
+                        option += '<option value="' + item.id + '">' + item.name + '</option>';
+                    });
+
+                    $('#videoSubCategory').html(option);
+                    $('#subCategorySection').show();
+                }
+                else {
+                    $('#subCategorySection').hide();
+                    $('#videoSubCategory').val(0);
+                }
+            }
+            $('#videoSubCategory').val(0);
+        }
     </script>
 
     <script src="{{URL::asset('js/stream/uploadVideoVod.js')}}"></script>

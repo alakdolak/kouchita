@@ -4,19 +4,6 @@
 @section('head')
 
     <link rel="stylesheet" href="{{URL::asset('css/streaming/indexStreaming.css')}}">
-
-    <style>
-        .allVideo{
-            z-index: 1;
-            position: absolute;
-            left: -2px;
-            top: -20px;
-            padding: 10px;
-            background-color: #3a3a3a;
-            cursor: pointer;
-            color: #fcc156;
-        }
-    </style>
 @endsection
 
 @section('body')
@@ -68,6 +55,26 @@
                     <div id="lastVideosDiv" class="swiper-wrapper">
 {{--                        fill with js lastVideoSuggestion()--}}
 {{--                        streaming.videoSuggestion--}}
+
+                        {{--this bellow code only for not empty in begining and auto deleted--}}
+                        <div class="swiper-slide videoSuggestion">
+                            <div class="videoSuggPlaceHolderDiv" style=" width: 100%;">
+                                <div class="videoSugPicSection placeHolderAnime"></div>
+                                <div class="videoSugInfo">
+                                    <div class="videoSugUserInfo videoSugUserInfoPlaceHolder">
+                                        <div class="videoSugName videoSuggNamePlaceHolder placeHolderAnime" style="height: 15px"></div>
+                                    </div>
+
+                                    <div class="videoSugUserPic">
+                                        <div class="videoSugUserPicDiv placeHolderAnime"></div>
+                                        <div class="videoUserInfoName">
+                                            <div class="videoSugUserName videoSuggNamePlaceHolder placeHolderAnime" style="margin-bottom: 5px"></div>
+                                            <div class="videoSugTime videoSuggNamePlaceHolder placeHolderAnime"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="swiper-button-next"></div>
@@ -105,15 +112,35 @@
                         </div>
                         <div class="headerWithLineLine"></div>
 
-                        <div class="allVideo">
+                        <a href="{{route('streaming.list', ['kind' => 'category', 'value' => $cat->id])}}" class="allVideoButton">
                             مشاهده همه
-                        </div>
+                        </a>
                     </div>
                     <div class="otherSectionBody">
                         <div class="videoSuggestionSwiper swiper-container">
 
                             <div id="catVideoDiv_{{$cat->id}}" class="swiper-wrapper">
                                 {{--fill with js topVideoSuggenstion()--}}
+
+                                {{--this bellow code only for not empty in begining and auto deleted--}}
+                                <div class="swiper-slide videoSuggestion">
+                                    <div class="videoSuggPlaceHolderDiv" style=" width: 100%;">
+                                        <div class="videoSugPicSection placeHolderAnime"></div>
+                                        <div class="videoSugInfo">
+                                            <div class="videoSugUserInfo videoSugUserInfoPlaceHolder">
+                                                <div class="videoSugName videoSuggNamePlaceHolder placeHolderAnime" style="height: 15px"></div>
+                                            </div>
+
+                                            <div class="videoSugUserPic">
+                                                <div class="videoSugUserPicDiv placeHolderAnime"></div>
+                                                <div class="videoUserInfoName">
+                                                    <div class="videoSugUserName videoSuggNamePlaceHolder placeHolderAnime" style="margin-bottom: 5px"></div>
+                                                    <div class="videoSugTime videoSuggNamePlaceHolder placeHolderAnime"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="swiper-button-next"></div>
@@ -147,14 +174,10 @@
         var swipersuggestion = new Swiper('.videoSuggestionSwiper', {
             slidesPerGroup: 1,
             spaceBetween: 5,
-            loop: true,
-            // autoplay: {
-                // delay: 3000,
-                // disableOnInteraction: false,
-            // },
+            watchOverflow: true,
             navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
+                nextEl: '.swiper-button-prev',
+                prevEl: '.swiper-button-next',
             },
             breakpoints: {
                 700: {
@@ -172,12 +195,42 @@
             },
             on: {
                 init: function () {
-                    setTimeout(function(){
-                        resizeFitImg('resizeImgClass');
-                    },300);
+
+                    let slideCount = this.slides.length;
+                    if(slideCount <= this.params.slidesPerView){
+                        $(this.el).find(this.params.navigation.nextEl).css('display', 'none');
+                        $(this.el).find(this.params.navigation.prevEl).css('display', 'none');
+                    }
+                    else{
+                        $(this.el).find(this.params.navigation.nextEl).css('display', 'block');
+                        $(this.el).find(this.params.navigation.prevEl).css('display', 'block');
+                    }
+
+                    $(this.el).find(this.params.navigation.prevEl).css('display', 'none');
+                },
+                resize: function(){
+                    let slideCount = this.slides.length;
+                    if(slideCount <= this.params.slidesPerView){
+                        $(this.el).find(this.params.navigation.nextEl).css('display', 'none');
+                        $(this.el).find(this.params.navigation.prevEl).css('display', 'none');
+                    }
+                    else{
+                        $(this.el).find(this.params.navigation.nextEl).css('display', 'block');
+                        $(this.el).find(this.params.navigation.prevEl).css('display', 'block');
+                    }
+
+                    resizeFitImg('resizeImgClass');
                 },
                 slideChange: function(){
-                    resizeFitImg('resizeImgClass');
+                    if(this.isBeginning)
+                        $(this.el).find(this.params.navigation.prevEl).css('display', 'none');
+                    else
+                        $(this.el).find(this.params.navigation.prevEl).css('display', 'block');
+
+                    if(this.isEnd)
+                        $(this.el).find(this.params.navigation.nextEl).css('display', 'none');
+                    else
+                        $(this.el).find(this.params.navigation.nextEl).css('display', 'block');
                 }
             },
         });

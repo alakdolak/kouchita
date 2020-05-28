@@ -36,13 +36,13 @@
                 @foreach($vodCategory as $mainCat)
                     <div id="subCategoryMenu_{{$mainCat->id}}" class="subCategoryBody">
                         @foreach($mainCat->sub as $item)
-                            <div class="subCategoryDiv">
+                            <a href="{{route('streaming.list', ['kind' => 'category', 'value' => $item->id])}}" class="subCategoryDiv">
                                 <img src="{{$item->offIcon}}" class="categoryIcon offIcon">
                                 <img src="{{$item->onIcon}}" class="categoryIcon onIcon">
                                 <div class="subCategoryName">
                                     {{$item->name}}
                                 </div>
-                            </div>
+                            </a>
                         @endforeach
                     </div>
                 @endforeach
@@ -80,5 +80,6 @@
         let name = $($(_element).children()[0]).text();
         $('#categoryHeaderName').text(name)
     }
+
 
 </script>

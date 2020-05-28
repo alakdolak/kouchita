@@ -107,7 +107,7 @@
 
     }
 
-    function createVideoSuggestionDiv(_pack, _destId, _callBack = ''){
+    function createVideoSuggestionDiv(_pack, _destId, _callBack = '', _append = false){
         // _pack = {
         //     id : ,
         //     title: ,
@@ -120,6 +120,9 @@
         //     username : ,
         //     time : ,
         // }
+
+        if(!_append)
+            $('#' + _destId).html('');
 
         for(let i = 0; i < _pack.length; i++){
             let text = videoSample;
