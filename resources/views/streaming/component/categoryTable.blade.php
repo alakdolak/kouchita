@@ -8,7 +8,22 @@
                 بستن
             </div>
 
-            <div class="col-lg-10 col-md-9 categoryBodySection categoryBodySectionRight showCategoryBodySectionRight">
+            <div class="categoryBodySection categoryBodySectionLeft">
+                <div class="categoryMainHeader">
+                    دسته بندی های موجود
+                </div>
+
+                @foreach($vodCategory as $mainCat)
+                    <div class="categoryTabs" onclick="openSubCategoryMenuTab({{$mainCat->id}}, this)">
+                        <div class="categoryTabName">
+                            {{$mainCat->name}}
+                        </div>
+                        <div class="categoryLeftArrow"></div>
+                    </div>
+                @endforeach
+            </div>
+
+            <div class="categoryBodySection categoryBodySectionRight showCategoryBodySectionRight">
                 <div class="categoryMainHeader" style="padding-right: 0;">
                     انتخاب کنید
                     <span id="categoryHeaderName" class="categoryHeaderName"></span>
@@ -33,20 +48,6 @@
                 @endforeach
             </div>
 
-            <div class="col-lg-2 col-md-3 categoryBodySection categoryBodySectionLeft">
-                <div class="categoryMainHeader">
-                    دسته بندی های موجود
-                </div>
-
-                @foreach($vodCategory as $mainCat)
-                    <div class="categoryTabs" onclick="openSubCategoryMenuTab({{$mainCat->id}}, this)">
-                        <div class="categoryTabName">
-                            {{$mainCat->name}}
-                        </div>
-                        <div class="categoryLeftArrow"></div>
-                    </div>
-                @endforeach
-            </div>
         </div>
     </div>
 </div>
