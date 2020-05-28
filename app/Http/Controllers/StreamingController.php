@@ -46,18 +46,88 @@ class StreamingController extends Controller
     public function indexStreaming()
     {
         $confirmContidition = ['state' => 1, 'confirm' => 1];
-        $lastVideos = Video::where($confirmContidition)->take(5)->orderByDesc('created_at')->get();
+        $lastVideos = Video::where($confirmContidition)->take(10)->orderByDesc('created_at')->get();
         foreach ($lastVideos as $lvid)
             $lvid = $this->getVideoFullInfo($lvid, false);
 
-        $videoCategory = VideoCategory::all();
+        $videoCategory = VideoCategory::where('parent', 0)->get();
         foreach ($videoCategory as $vic) {
-            $vic->video = Video::where($confirmContidition)->where('categoryId', $vic->id)->take(5)->orderByDesc('created_at')->get();
+            $catId = VideoCategory::where('parent', $vic->id)->pluck('id')->toArray();
+            $vic->video = Video::where($confirmContidition)->whereIn('categoryId', $catId)->take(10)->orderByDesc('created_at')->get();
             foreach ($vic->video as $catVid)
                 $catVid = $this->getVideoFullInfo($catVid, false);
         }
 
         return view('streaming.streamingIndex', compact(['lastVideos', 'videoCategory']));
+    }
+
+    public function videoList($kind, $value){
+        if($kind == 'category'){
+            $category = VideoCategory::find($value);
+            if($category == null)
+                return redirect(route('streaming.index'));
+            else{
+                if($category->parent == 0) {
+                    $confirmContidition = ['state' => 1, 'confirm' => 1];
+
+                    $category->subs = VideoCategory::where('parent', $category->id)->get();
+                    foreach ($category->subs as $item)
+                        $item->icon = \URL::asset('_images/video/category/'.$item->offIcon);
+
+                    $subsId = VideoCategory::where('parent', $category->id)->pluck('id')->toArray();
+                    $category->lastVideo = Video::where($confirmContidition)->whereIn('categoryId', $subsId)->take(10)->orderByDesc('created_at')->get();
+                    foreach ($category->lastVideo  as $catVid)
+                        $catVid = $this->getVideoFullInfo($catVid, false);
+
+                    foreach ($category->subs as $item){
+                        $item->video = Video::where($confirmContidition)->where('categoryId', $item->id)->take(10)->orderByDesc('created_at')->get();
+                        $item->totalCount = Video::where($confirmContidition)->where('categoryId', $item->id)->count();
+                        foreach ($item->video as $catVid)
+                            $catVid = $this->getVideoFullInfo($catVid, false);
+                    }
+
+                }
+                else {
+                    $category->icon = \URL::asset('_images/video/category/' . $category->onIcon);
+                    $category->showList = true;
+                }
+
+                $content = $category;
+                return view('streaming.page.videoList', compact(['kind', 'value', 'content']));
+
+            }
+        }
+        return view('streaming.page.videoList', compact(['kind', 'value']));
+    }
+
+    public function getVideoListElems(Request $request)
+    {
+        $kind = $request->kind;
+        $value = $request->value;
+        $perPage = $request->perPage;
+        $page = $request->page;
+
+        $confirmContidition = ['state' => 1, 'confirm' => 1];
+
+        if($kind == 'category'){
+            $category = VideoCategory::find($value);
+
+            if($category != null){
+                if($category->parent == 0)
+                    $catId = VideoCategory::where('parent', $category->id)->pluck('id')->toArray();
+                else
+                    $catId = [$category->id];
+
+                $videos = Video::where($confirmContidition)->whereIn('categoryId', $catId)->skip(($page - 1) * $perPage)->take($perPage)->orderByDesc('created_at')->get();
+                foreach ($videos as $item)
+                    $item = $this->getVideoFullInfo($item, false);
+
+                echo json_encode(['status' => 'ok', 'videos' => $videos]);
+            }
+            else
+                echo json_encode(['status' => 'nok']);
+            return;
+        }
     }
 
     public function search(Request $request)
@@ -128,7 +198,10 @@ class StreamingController extends Controller
     {
         $this->deleteLimbo();
 
-        $categories = VideoCategory::all();
+        $categories = VideoCategory::where('parent', 0)->get();
+        foreach ($categories as $item)
+            $item->sub = VideoCategory::where('parent', $item->id)->get();
+
         while (true) {
             $code = random_int(10000, 99999);
             $check = VideoLimbo::where('code', $code)->first();
@@ -468,7 +541,6 @@ class StreamingController extends Controller
             $video->places = $result;
         }
 
-
         $video->uLike = 0;
         if($userLogin){
             $uLike = VideoFeedback::where('videoId', $video->id)->where('userId', auth()->user()->id)->first();
@@ -516,16 +588,6 @@ class StreamingController extends Controller
             echo json_encode(['status' => 'nok', 'msg' => 'not find video']);
 
         return;
-    }
-
-    public function setVideoCommentFeedback(Request $request)
-    {
-        dd($request->all());
-        $comment = VideoComment::find($request->commentId);
-        if($comment != null){
-
-        }
-
     }
 
     public function streamingLive($room = '')
@@ -632,7 +694,5 @@ class StreamingController extends Controller
 
         dd('done');
     }
-
-
 
 }

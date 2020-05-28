@@ -97,7 +97,6 @@ $('#videoPlaceRel').dropdown({
 
 let storeVideoAjax;
 function storeVideo(_file){
-
     window.URL = window.URL || window.webkitURL;
 
     var video = document.createElement('video');
@@ -223,7 +222,7 @@ function errorUploadVideo(){
 
 function storeInfoVideos(_state){
     let name = $('#videoName').val();
-    let categoryId = $('#videoCategory').val();
+    let categoryId = $('#videoSubCategory').val();
     let description = $('#videoText').val();
     let tags = $('#videoTags').val();
     let places = $('#videoPlaceRel').val();
@@ -239,7 +238,7 @@ function storeInfoVideos(_state){
 
     if(categoryId == 0){
         error = true;
-        errorText += '<li>لطفا دسته بندی ویدیوی خود را مشخص کنید</li>';
+        errorText += '<li>لطفا زیر دسته بندی ویدیوی خود را مشخص کنید</li>';
     }
 
     if(!uploadCompleted){
