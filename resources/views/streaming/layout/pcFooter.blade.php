@@ -496,9 +496,6 @@ if(auth()->check()){
             $('#' + id).removeClass('hidden');
         }
 
-    </script>
-
-    <script>
         function showMorefooter() {
             $('.footMoreLessBtnText').toggleClass('hidden');
             $('#aboutShazde').toggleClass('aboutShazdeMoreLess');
@@ -507,64 +504,64 @@ if(auth()->check()){
 
     @if(Auth::check())
         <script>
-            var recentlySample = 0;
-            var bookMarkSample = 0;
+            // var recentlySample = 0;
+            {{--var bookMarkSample = 0;--}}
 
-            function getAlertItemsPhone() {
-                $.ajax({
-                    type: 'post',
-                    url: '{{route('getAlerts')}}',
-                    success: function (response) {
+            {{--function getAlertItemsPhone() {--}}
+            {{--    $.ajax({--}}
+            {{--        type: 'post',--}}
+            {{--        url: '{{route('getAlerts')}}',--}}
+            {{--        success: function (response) {--}}
 
-                        response = JSON.parse(response);
+            {{--            response = JSON.parse(response);--}}
 
-                        if(response.length == 0)
-                            $('#noMessagePhone').css('display', '');
-                        else{
-                            $('#noMessagePhone').css('display', 'none');
-                            var newElement = "";
+            {{--            if(response.length == 0)--}}
+            {{--                $('#noMessagePhone').css('display', '');--}}
+            {{--            else{--}}
+            {{--                $('#noMessagePhone').css('display', 'none');--}}
+            {{--                var newElement = "";--}}
 
-                            for(i = 0; i < response.length; i++) {
-                                if (response[i].url != -1)
-                                    newElement += '<div id="notificationBox"><div class="modules-engagement-notification-dropdown"><div><img onclick="document.location.href = \'' + response[i].url + '\'" width="50px" height="50px" src="' + response[i].pic + '"></div><div class="notifdd_empty"><span>' + response[i].customText + '</span></div></div></div>';
-                                else
-                                    newElement += '<div onclick="document.location.href = \'{{route('msgs')}}\'" style="cursor: pointer; min-height: 60px"><div class="modules-engagement-notification-dropdown"><div style="float: right; margin: 10px; padding-top: 0; height: 50px; margin-top: 0; width: 50px; z-index: 10000000000001 !important;"></div><div style="margin-right: 70px" class="notifdd_empty"><span>' + response[i].customText + '</span></div></div></div>';
-                            }
+            {{--                for(i = 0; i < response.length; i++) {--}}
+            {{--                    if (response[i].url != -1)--}}
+            {{--                        newElement += '<div id="notificationBox"><div class="modules-engagement-notification-dropdown"><div><img onclick="document.location.href = \'' + response[i].url + '\'" width="50px" height="50px" src="' + response[i].pic + '"></div><div class="notifdd_empty"><span>' + response[i].customText + '</span></div></div></div>';--}}
+            {{--                    else--}}
+            {{--                        newElement += '<div onclick="document.location.href = \'{{route('msgs')}}\'" style="cursor: pointer; min-height: 60px"><div class="modules-engagement-notification-dropdown"><div style="float: right; margin: 10px; padding-top: 0; height: 50px; margin-top: 0; width: 50px; z-index: 10000000000001 !important;"></div><div style="margin-right: 70px" class="notifdd_empty"><span>' + response[i].customText + '</span></div></div></div>';--}}
+            {{--                }--}}
 
-                            $('#phoneMessages').append(newElement);
-                        }
-                    }
-                });
-            }
+            {{--                $('#phoneMessages').append(newElement);--}}
+            {{--            }--}}
+            {{--        }--}}
+            {{--    });--}}
+            {{--}--}}
 
-            function showBookMarksPhone() {
+            {{--function showBookMarksPhone() {--}}
 
-                if(bookMarkSample == 0)
-                    bookMarkSample = $('#phoneBookMarks').html();
+            {{--    if(bookMarkSample == 0)--}}
+            {{--        bookMarkSample = $('#phoneBookMarks').html();--}}
 
-                $('#phoneBookMarks').html('');
+            {{--    $('#phoneBookMarks').html('');--}}
 
-                $.ajax({
-                    type: 'post',
-                    url: '{{route('getBookMarks')}}',
-                    success: function (response) {
-                        response = JSON.parse(response);
-                        for(i = 0; i < response.length; i++){
-                            var text = bookMarkSample;
-                            var fk = Object.keys(response[i]);
-                            for (var x of fk) {
-                                var t = '##' + x + '##';
-                                var re = new RegExp(t, "g");
-                                text = text.replace(re, response[i][x]);
-                            }
-                            $('#phoneBookMarks').append(text);
-                        }
-                    }
-                });
-            }
+            {{--    $.ajax({--}}
+            {{--        type: 'post',--}}
+            {{--        url: '{{route('getBookMarks')}}',--}}
+            {{--        success: function (response) {--}}
+            {{--            response = JSON.parse(response);--}}
+            {{--            for(i = 0; i < response.length; i++){--}}
+            {{--                var text = bookMarkSample;--}}
+            {{--                var fk = Object.keys(response[i]);--}}
+            {{--                for (var x of fk) {--}}
+            {{--                    var t = '##' + x + '##';--}}
+            {{--                    var re = new RegExp(t, "g");--}}
+            {{--                    text = text.replace(re, response[i][x]);--}}
+            {{--                }--}}
+            {{--                $('#phoneBookMarks').append(text);--}}
+            {{--            }--}}
+            {{--        }--}}
+            {{--    });--}}
+            {{--}--}}
 
-            getAlertItemsPhone();
-            showBookMarksPhone();
+            {{--getAlertItemsPhone();--}}
+            {{--showBookMarksPhone();--}}
 
             function initialProgressFooter() {
                 var b = "{{$userTotalPointFooter / $userLevelFooter[1]->floor}}" * 100;

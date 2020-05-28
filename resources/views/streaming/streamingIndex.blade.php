@@ -136,18 +136,11 @@
         let lastVideos = {!! $lastVideos !!};
         let videoCategory = {!! $videoCategory !!};
 
-
         createVideoSuggestionDiv(lastVideos, 'lastVideosDiv');
 
-        // function topVideoSuggenstion(){
-        //     createVideoSuggestionDiv(pack, 'topVideosDiv');
-        // }
-        // topVideoSuggenstion();
-
         function categoryVideoSuggestion(){
-            for(let j = 0; j < videoCategory.length; j++){
+            for(let j = 0; j < videoCategory.length; j++)
                 createVideoSuggestionDiv(videoCategory[j].video, 'catVideoDiv_' + videoCategory[j]['id']);
-            }
         }
         categoryVideoSuggestion();
 
@@ -155,23 +148,26 @@
             slidesPerGroup: 1,
             spaceBetween: 5,
             loop: true,
-            autoplay: {
-                delay: 3000,
-                disableOnInteraction: false,
-            },
+            // autoplay: {
+                // delay: 3000,
+                // disableOnInteraction: false,
+            // },
             navigation: {
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
             },
             breakpoints: {
-                860: {
+                700: {
                     slidesPerView: 2,
                 },
-                1200: {
+                900: {
                     slidesPerView: 3,
                 },
-                10000: {
+                1200: {
                     slidesPerView: 4,
+                },
+                10000: {
+                    slidesPerView: 5,
                 }
             },
             on: {
