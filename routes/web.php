@@ -716,6 +716,7 @@ Route::group(array('middleware' => 'auth'), function () {
 });
 
 
+
 //streaming
 Route::middleware(['web', 'vodShareData'])->group(function (){
     Route::get('streaming/index', 'StreamingController@indexStreaming')->name('streaming.index');

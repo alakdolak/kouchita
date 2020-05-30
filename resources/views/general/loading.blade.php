@@ -4,13 +4,11 @@
     </div>
 </div>
 
-<script !src="">
-
+<script>
     function openLoading(){
         $('#fullPageLoader').css('display', 'flex');
     }
     function closeLoading(){
         $('#fullPageLoader').css('display', 'none');
     }
-
 </script>

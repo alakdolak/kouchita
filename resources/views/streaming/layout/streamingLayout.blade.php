@@ -2,10 +2,10 @@
 <html lang="fa">
 
 <head>
+
     @include('layouts.topHeader')
 
     <meta property="og:locale" content="fa_IR" />
-    {{--<meta property="og:locale:alternate" content="fa_IR" />--}}
     <meta property="og:type" content="website" />
     <title> کوچیتا، سامانه جامع گردشگری ایران </title>
     <meta name="title" content="کوچیتا | سامانه جامع گردشگری ایران و شبکه اجتماعی گردشگران" />
@@ -17,17 +17,8 @@
     <meta property="og:image:height" content="367"/>
     <meta name="twitter:image" content="{{URL::asset('_images/nopic/blank.jpg')}}"/>
 
-
-{{--    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/masthead-saves.css?v=2')}}'/>--}}
-{{--    <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/hr_north_star.css?v=2')}}'/>--}}
-{{--    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/icons.css?v=1')}}'/>--}}
-{{--    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/abbreviations.css?v=1')}}'/>--}}
-{{--    <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/icons.css')}}">--}}
-
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/long_lived_global_legacy_2.css?v=2')}}"/>
-
     <link rel="stylesheet" href="{{URL::asset('css/font-awesome.min.css')}}">
-
     <link rel="stylesheet" href="{{URL::asset('css/streaming/iranSansFont.css')}}">
     <link rel="stylesheet" href="{{URL::asset('css/streaming/mainStreaming.css')}}">
     <link rel="stylesheet" href="{{URL::asset('css/streaming/layout/vodCommon.css')}}">

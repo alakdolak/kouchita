@@ -1,6 +1,14 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="theme-color" content="#4dc7bc"/>
+<meta name="msapplication-TileColor" content="#4dc7bc">
+<meta name="msapplication-TileImage" content="{{URL::asset('images/icons/mainIcon.png')}}">
+<meta name="twitter:card" content="summary"/>
+<meta property="og:url" content="{{Request::url()}}" />
+<meta property="og:site_name" content="سامانه جامع گردشگری کوچیتا" />
 
-<link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/topHeaderStyles.css')}}' />
-<link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/bootstrap.min.css')}}' />
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158914626-1"></script>
 <script>
@@ -11,39 +19,27 @@
     gtag('config', 'UA-158914626-1');
 </script>
 
-<script src="{{URL::asset('js/jQuery.js')}}"></script>
-<script src="{{URL::asset('js/angular.js')}}"></script>
 
 {{--<script src="https://apis.google.com/js/platform.js" async defer></script>--}}
 {{--<meta name="google-signin-scope" content="profile email">--}}
 {{--<meta name="google-signin-client_id" content="774684902659-1tdvb7r1v765b3dh7k5n7bu4gpilaepe.apps.googleusercontent.com">--}}
 
-<meta name="csrf-token" content="{{ csrf_token() }}"/>
+{{--<meta name="csrf-token" content="{{ csrf_token() }}"/>--}}
 
-<link rel="stylesheet" href="{{URL::asset('css/theme2/swiper.css')}}">
-
-<script src="{{URL::asset('js/swiper/swiper.min.js')}}"></script>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<meta name="theme-color" content="#4dc7bc"/>
+<link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/topHeaderStyles.css')}}' />
+<link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/bootstrap.min.css')}}' />
 <link rel="icon" href="{{URL::asset('images/icons/mainIcon.svg')}}" sizes="any" type="image/svg+xml">
 <link rel="apple-touch-icon-precomposed" href="{{URL::asset('images/icons/mainIcon.svg')}}" sizes="any" type="image/svg+xml">
-<meta name="msapplication-TileColor" content="#4dc7bc">
-<meta name="msapplication-TileImage" content="{{URL::asset('images/icons/   mainIcon.png')}}">
+<link rel="stylesheet" href="{{URL::asset('css/theme2/swiper.css')}}">
 
-<meta name="twitter:card" content="summary"/>
+<script src="{{URL::asset('js/jquery-3.4.1.min.js')}}"></script>
+<script src="{{URL::asset('js/angular.js')}}"></script>
+<script src="{{URL::asset('js/swiper/swiper.min.js')}}"></script>
 
-<meta property="og:url" content="{{Request::url()}}" />
-<meta property="og:site_name" content="سامانه جامع گردشگری کوچیتا" />
-{{--<meta name="twitter:site" content="@اکانت توییتر کوچیتا">--}}
 
 <script type="text/javascript">
     $.ajaxSetup({
         headers: {
-            // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             'X-CSRF-TOKEN': '{{csrf_token()}}'
         }
     });
@@ -56,10 +52,6 @@
         }
         return true;
     }
-
-</script>
-
-<script>
 
     var homeURL = "{{route('home')}}";
 
