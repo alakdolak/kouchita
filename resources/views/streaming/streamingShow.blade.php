@@ -8,7 +8,6 @@
             display: flex;
             justify-content: space-around;
             flex-wrap: wrap;
-            /*height: 400px;*/
             transition: .4s;
             overflow: hidden;
         }
@@ -18,7 +17,14 @@
         .sideSuggestion{
             width: 49% !important;
         }
+        .notShowPlace{
+            display: none;
+        }
         @media (max-width: 1400px) {
+
+            .sideSuggestion{
+                width: 100% !important;
+            }
             .sideSuggestion .videoSugPicSection{
                 height: 120px !important;
             }
@@ -80,7 +86,7 @@
                     </div>
                     <div id="pcVideoPlace" class="videoPlaces">
                         @for($i = 0; $i < count($video->places); $i++)
-                            <div class="moreInfoEachItem">
+                            <div class="moreInfoEachItem {{$i >= 4 ? 'notShowPlace' : ''}}">
                                 <a href="{{$video->places[$i]->url}}" target="_blank" class="mainDivImgMoreInfoItems">
                                     <img src="{{$video->places[$i]->placePic}}" style="width: 100%">
                                 </a>
@@ -121,26 +127,11 @@
                                 </div>
                             </div>
                         @endfor
-{{--                        <div id="pcMoreBtn" class="moreBtn" onclick="openMorePlace(this)">بیشتر</div>--}}
+
+                        @if(count($video->places) > 4)
+                            <div id="pcMoreBtn" class="moreBtn" onclick="openMorePlace(this)">بیشتر</div>
+                        @endif
                     </div>
-
-{{--                    <script>--}}
-
-{{--                        if($('#pcVideoPlace').height() < 400)--}}
-{{--                            $('#pcMoreBtn').hide();--}}
-{{--                        else--}}
-{{--                            $('#pcVideoPlace').css('height', '400px');--}}
-
-{{--                        $(window).resize(function(){--}}
-{{--                            $('#pcVideoPlace').css('height', 'auto');--}}
-
-{{--                            if($('#pcVideoPlace').height() < 400)--}}
-{{--                                $('#pcMoreBtn').hide();--}}
-{{--                            else--}}
-{{--                                $('#pcVideoPlace').css('height', '400px');--}}
-
-{{--                        });--}}
-{{--                    </script>--}}
 
                 </div>
             @endif
@@ -248,7 +239,7 @@
                         </div>
                         <div id="mobileVideoPlace" class="videoPlaces">
                             @for($i = 0; $i < count($video->places); $i++)
-                                <div class="moreInfoEachItem">
+                                <div class="moreInfoEachItem {{$i >= 5 ? 'notShowPlace' : ''}}">
                                     <a href="{{$video->places[$i]->url}}" target="_blank" class="mainDivImgMoreInfoItems">
                                         <img src="{{$video->places[$i]->placePic}}" style="width: 100%">
                                     </a>
@@ -289,9 +280,12 @@
                                     </div>
                                 </div>
                             @endfor
-{{--                            <div id="mobileMoreBtn" class="moreBtn" onclick="openMorePlace(this)">بیشتر</div>--}}
-                        </div>
 
+                            @if(count($video->places) > 5)
+                                <div id="mobileMoreBtn" class="moreBtn" onclick="openMorePlace(this)">بیشتر</div>
+                            @endif
+
+                        </div>
                     </div>
                 @endif
             </div>
@@ -310,7 +304,7 @@
                     };
                     let videoComments = {!! $video->comments !!};
 
-                    initCommentingSection('{{route('streaming.setVideoComment')}}', commentingInitdata);
+                    initCommentingSection(commentingInitdata);
                     fillMainCommentSection(videoComments);
                 </script>
             </div>
@@ -327,7 +321,7 @@
 
                         <div class="videoSuggestionSwiper swiper-container">
 
-                            <div id="mebyInterestedVideo" class="swiper-wrapper">
+                            <div id="maybeInterestedVideo" class="swiper-wrapper">
                                 {{--fill with js videoSuggestion()--}}
                             </div>
 
@@ -358,7 +352,7 @@
 
         @if(isset($sameCategory) && count($sameCategory) > 0)
             sameCategory = {!! $sameCategory !!};
-            createVideoSuggestionDiv(sameCategory, 'mebyInterestedVideo');
+            createVideoSuggestionDiv(sameCategory, 'maybeInterestedVideo');
         @endif
 
         @if(isset($userMoreVideo) && count($userMoreVideo) > 0)
@@ -372,31 +366,66 @@
 
         var swiper = new Swiper('.videoSuggestionSwiper', {
             slidesPerGroup: 1,
-            // width: 300,
-            loop: true,
-            autoplay: {
-                delay: 3000,
-                disableOnInteraction: false,
-            },
-            loopFillGroupWithBlank: true,
+            spaceBetween: 5,
+            watchOverflow: true,
             navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
+                nextEl: '.swiper-button-prev',
+                prevEl: '.swiper-button-next',
             },
             breakpoints: {
-                1250: {
+                700: {
                     slidesPerView: 2,
-                    spaceBetween: 5,
                 },
-                1550: {
+                900: {
                     slidesPerView: 3,
-                    spaceBetween: 20,
+                },
+                1200: {
+                    slidesPerView: 4,
                 },
                 10000: {
-                    slidesPerView: 4,
-                    spaceBetween: 20,
+                    slidesPerView: 5,
                 }
-            }
+            },
+            on: {
+                init: function () {
+
+                    let slideCount = this.slides.length;
+                    if(slideCount <= this.params.slidesPerView){
+                        $(this.el).find(this.params.navigation.nextEl).css('display', 'none');
+                        $(this.el).find(this.params.navigation.prevEl).css('display', 'none');
+                    }
+                    else{
+                        $(this.el).find(this.params.navigation.nextEl).css('display', 'block');
+                        $(this.el).find(this.params.navigation.prevEl).css('display', 'block');
+                    }
+
+                    $(this.el).find(this.params.navigation.prevEl).css('display', 'none');
+                },
+                resize: function(){
+                    let slideCount = this.slides.length;
+                    if(slideCount <= this.params.slidesPerView){
+                        $(this.el).find(this.params.navigation.nextEl).css('display', 'none');
+                        $(this.el).find(this.params.navigation.prevEl).css('display', 'none');
+                    }
+                    else{
+                        $(this.el).find(this.params.navigation.nextEl).css('display', 'block');
+                        $(this.el).find(this.params.navigation.prevEl).css('display', 'block');
+                    }
+
+                    resizeFitImg('resizeImgClass');
+                },
+                slideChange: function(){
+                    if(this.isBeginning)
+                        $(this.el).find(this.params.navigation.prevEl).css('display', 'none');
+                    else
+                        $(this.el).find(this.params.navigation.prevEl).css('display', 'block');
+
+                    if(this.isEnd)
+                        $(this.el).find(this.params.navigation.nextEl).css('display', 'none');
+                    else
+                        $(this.el).find(this.params.navigation.nextEl).css('display', 'block');
+                }
+            },
         });
 
         function setFeedback(_kind, _value){
@@ -449,15 +478,24 @@
         }
 
         function openMorePlace(_element){
+            let notShowPlace = $(_element).parent().find('.notShowPlace');
 
-            if($(_element).next().css('display') == 'none') {
-                $(_element).next().css('display', 'flex');
+            if(notShowPlace.css('display') == 'none'){
+                notShowPlace.css('display', 'flex');
                 $(_element).text('کمتر');
             }
-            else {
-                $(_element).next().css('display', 'none');
+            else{
+                notShowPlace.css('display', 'none');
                 $(_element).text('بیشتر');
             }
+            // if($(_element).next().css('display') == 'none') {
+            //     $(_element).next().css('display', 'flex');
+            //     $(_element).text('کمتر');
+            // }
+            // else {
+            //     $(_element).next().css('display', 'none');
+            //     $(_element).text('بیشتر');
+            // }
         }
         // resizeFitImg('resizeImgClass');
     </script>

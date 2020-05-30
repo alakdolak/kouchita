@@ -61,7 +61,7 @@
 
         <div class="mainSlider">
             <div id="mainSlider" class="swiper-container backgroundColorForSlider">
-                <img src="https://www.aparat.com/public/public/images/etc/category/5_pattern.jpg?29" class="resizeImgClass" style="width: 100%; position: absolute">
+                <img src="{{$content->banner}}" class="resizeImgClass" style="width: 100%; position: absolute">
                 <div class="overMainPicDiv">
                     <div class="overMainPicPic">
                         <img class="resizeImgClass" src="{{$content->icon}}" style="width: 100%">
@@ -72,6 +72,7 @@
                 </div>
             </div>
         </div>
+        <div class="pushTopMainSlider"></div>
 
         @if(isset($content->lastVideo))
             <div class="otherSection">
@@ -333,6 +334,7 @@
                 });
             }
         }
+        getVideo();
 
         $(window).resize(function(){
             resizeRows('videoInList')

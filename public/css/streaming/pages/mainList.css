@@ -1,4 +1,6 @@
 .mainSlider{
     height: 30vh;
-    position: relative;
+}
+.pushTopMainSlider{
+    height: 30vh;
 }

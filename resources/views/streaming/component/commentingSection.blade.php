@@ -1,4 +1,9 @@
 <style>
+    .successLabel{
+        background: green !important;
+        font-size: 13px ;
+        margin-right: 10px;
+    }
     .LikeIcon:before{
         content: '\B' !important;
         font-family: Shazde_Regular2 !important;
@@ -64,6 +69,8 @@
         font-size: 20px;
         color: #0076a3;
         font-weight: bold;
+        display: flex;
+        align-items: center;
         margin-left: 5px;
     }
     .whoAnsTo{
@@ -198,9 +205,12 @@
         flex-wrap: wrap;
     }
 
-    @media (max-width: 767px) {
+    @media (max-width: 768px) {
         .topOfcommentAnsTextSection{
             width: 100% ;
+        }
+        .topWho{
+            align-items: flex-start;
         }
     }
     @media (max-width: 600px) {
@@ -222,13 +232,14 @@
         <div class="userPicDiv">
             <img id="userPictureCommenting" src="" alt="koochita">
         </div>
-        <textarea class="commentInput" name="AnsToComment_0" id="AnsToComment_0" placeholder="شما چه نظری دارید؟" rows="1" maxlength="255" onclick="checkLoginForCommenting()"></textarea>
+        <textarea class="commentInput" name="AnsToComment_0" id="AnsToComment_0" placeholder="شما چه نظری دارید؟" rows="1" maxlength="255" onclick="checkLoginForCommenting(this)"></textarea>
         <div class="commentInputSendButton" onclick="sendCommentTo(0)">ارسال</div>
     </div>
     <hr style="border-color:darkgray; margin: 10px 0px">
 
-    <div id="mainCommentSample" style="display: none">
+    <div id="commentsDiv" class="commentSectionBody"></div>
 
+    <div id="mainCommentSample" style="display: none">
         <div id="comment_##id##" class="commentAnsesSection">
 
             <div class="commentInputSection" style="margin-top: 10px;">
@@ -246,6 +257,7 @@
                                 <div class="topWho">
                                     <div class="whoAns">
                                         ##username##
+                                        <span class="label label-success successLabel" style="display: ##newLabel##">در انتظار تایید</span>
                                     </div>
                                 </div>
                             </div>
@@ -280,11 +292,11 @@
                                 <span class="DisLikeIcon" style="font-size: 30px"></span>
                             </div>
                             <div style="color: #0076a3; display: flex; margin-right: 10px;">
-                                <span style="color: white">##ansCount##</span>
+                                <span id="ansCountComment_##id##" style="color: white">##ansCount##</span>
                                 <span class="CommentIcon"></span>
                             </div>
                         </div>
-                        <div class="commentAnsLeft" onclick="openAnsOnReview(##id##)">
+                        <div id="showAnsButton_##id##"  class="commentAnsLeft" onclick="openAnsOnReview(##id##)" style="display: none">
                             مشاهده پاسخ ها
                         </div>
                     </div>
@@ -294,69 +306,6 @@
 
             <div id="ansOf_##id##" class="ansOf mainAnsOf"></div>
         </div>
-
-        {{--        <div id="comment_##id##" class="acceptedComment">--}}
-{{--            <div class="mainUserPicSection">--}}
-{{--                <div class="userPicDiv">--}}
-{{--                    <img src="##userPic##" alt="##username##">--}}
-{{--                </div>--}}
-{{--                <div class="mainUserInfos">--}}
-{{--                    <div class="mainUseruserNameComment">--}}
-{{--                        ##username##--}}
-{{--                    </div>--}}
-{{--                    <div class="videoUploadTime">--}}
-{{--                        ##time##--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-
-{{--            <div class="acceptedCommentText">##text##</div>--}}
-
-{{--            <div class="acceptedCommentSett">--}}
-{{--                <div class="acceptedCommentRight">--}}
-{{--                    <div style="margin-left: 15px;">--}}
-{{--                        <span style="color: #0076a3">##ansCount##</span>--}}
-{{--                        <span>پاسخ دادند</span>--}}
-{{--                    </div>--}}
-{{--                    <div style="margin-left: 15px;">--}}
-{{--                        <span style="color: #0076a3">##like##</span>--}}
-{{--                        <span>دوست داشتند</span>--}}
-{{--                    </div>--}}
-{{--                    <div style="margin-left: 15px;">--}}
-{{--                        <span style="color: #0076a3">##disLike##</span>--}}
-{{--                        <span>دوست نداشتند</span>--}}
-{{--                    </div>--}}
-{{--                    <div style="color: #fcc156; cursor: pointer" onclick="openAnsOnReview(##id##)">--}}
-{{--                        مشاهده پاسخ ها--}}
-{{--                        <i class="downArrowIcon"></i>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--                <div class="acceptedCommentLeft">--}}
-{{--                    <div class="commentAnsLikeSection" style="width: 70px">--}}
-{{--                        <div class="likeAnsIconDiv" onclick="toggleCommentLikeIcon(true, ##id##)">--}}
-{{--                            <div class="LikeIconEmpty LikeIconEmptySett likeIcon_##id##"></div>--}}
-{{--                        </div>--}}
-{{--                        <div class="disLikeAnsIconDiv" onclick="toggleCommentLikeIcon(false, ##id##)">--}}
-{{--                            <div class="DisLikeIconEmpty DisLikeIconEmptySett dislikeIcon_##id##"></div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                    <div class="acceptedCommentAnsButton" onclick="openAnsToComment(##id##)">--}}
-{{--                        پاسخ دهید--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-
-{{--            <div id="ansTo_##id##" class="commentInputSection" style="margin-top: 10px; display: none;">--}}
-{{--                <div class="userPicDiv">--}}
-{{--                    <img src="##authPicture##">--}}
-{{--                </div>--}}
-{{--                <textarea class="commentInput" name="AnsToComment_##id##" id="AnsToComment_##id##" placeholder="شما چه نظری دارید؟" rows="1" maxlength="255"></textarea>--}}
-{{--                <div class="commentInputSendButton" onclick="sendCommentTo(##id##)">ارسال</div>--}}
-{{--            </div>--}}
-
-{{--            <div id="ansOf_##id##" style="display: none"></div>--}}
-
-{{--        </div>--}}
     </div>
 
     <div id="ansCommentSample" style="display: none;">
@@ -376,6 +325,7 @@
                                 <div class="topWho">
                                     <div class="whoAns">
                                         ##username##
+                                        <span class="label label-success successLabel" style="display: ##newLabel##">در انتظار تایید</span>
                                     </div>
                                     <div class="whoAnsTo">
                                         در پاسخ به ##ansToUsername##
@@ -414,11 +364,11 @@
                                 <span class="DisLikeIcon" style="font-size: 30px"></span>
                             </div>
                             <div style="color: #0076a3; display: flex; margin-right: 10px;">
-                                <span style="color: white">##ansCount##</span>
+                                <span id="ansCountComment_##id##" style="color: white">##ansCount##</span>
                                 <span class="CommentIcon"></span>
                             </div>
                         </div>
-                        <div class="commentAnsLeft" onclick="openAnsOnReview(##id##)">
+                        <div id="showAnsButton_##id##" class="commentAnsLeft" onclick="openAnsOnReview(##id##)" style="display: none">
                             مشاهده پاسخ ها
                         </div>
                     </div>
@@ -430,7 +380,6 @@
             <div id="ansOf_##id##" class="ansOf"></div>
         </div>
     </div>
-    
 </div>
 
 <script>
@@ -447,24 +396,29 @@
 
     $('#userPictureCommenting').attr('src', userPicture);
 
-    function checkLoginForCommenting(){
+    function checkLoginForCommenting(_element){
         if (!hasLogin) {
             showLoginPrompt();
+            $(_element).prop('readonly', true);
             return;
         }
     }
 
-    function initCommentingSection(_sendUrl,_defaultData){
-        commentingStoreUrl = _sendUrl;
+    function initCommentingSection(_defaultData){
         commentingDefaultData = JSON.stringify(_defaultData);
     }
 
     function sendCommentTo(_kind){
+        if (!hasLogin) {
+            showLoginPrompt();
+            return;
+        }
+
         let text = $('#AnsToComment_' + _kind).val();
-        if(text.trim().length > 0 && commentingStoreUrl != null){
+        if(text.trim().length > 0){
             $.ajax({
                 type: 'post',
-                url: commentingStoreUrl,
+                url: '{{route('streaming.setVideoComment')}}',
                 data: {
                     _token: '{{csrf_token()}}',
                     data: commentingDefaultData,
@@ -475,11 +429,11 @@
                     try{
                         response = JSON.parse(response);
                         if(response['status'] == 'ok'){
-                            console.log(response['comment']);
-                            alert('نظر شما با موفقیت ثبت شد')
-                        }
-                        else{
+                            $('#AnsToComment_' + _kind).val('');
+                            let ansCount = parseInt($('#ansCountComment_' + _kind).text());
+                            $('#ansCountComment_' + _kind).text(ansCount+1);
 
+                            fillMainCommentSection([response.comment], _kind);
                         }
                     }
                     catch (e) {
@@ -493,8 +447,7 @@
         }
     }
 
-
-    function fillMainCommentSection(_comment){
+    function fillMainCommentSection(_comment, _id = 0){
         // _comment = [
             // {
             //   id,
@@ -511,7 +464,12 @@
             // }
         // ];
         for(let i = 0; i < _comment.length; i++){
-            let text = mainCommentSample;
+            let text;
+            if(_id == 0)
+                text = mainCommentSample;
+            else
+                text = ansCommentSample;
+
             let fk = Object.keys(_comment[i]);
             for (let x of fk) {
                 t = '##' + x + '##';
@@ -522,34 +480,35 @@
             re = new RegExp(t, "g");
             text = text.replace(re, userPicture);
 
-            $('#commentSectionBody').append(text);
+            if(_comment[i]['confirm'] == 1)
+                showNewLabel = 'none';
+            else
+                showNewLabel = 'block';
 
-            fillAnsCommentSection(_comment[i]['comments'], _comment[i]['id'])
-        }
-    }
-
-    function fillAnsCommentSection(_comment, _id){
-        for(let i = 0; i < _comment.length; i++){
-            let text = ansCommentSample;
-            let fk = Object.keys(_comment[i]);
-            for (let x of fk) {
-                t = '##' + x + '##';
-                re = new RegExp(t, "g");
-                text = text.replace(re, _comment[i][x]);
-            }
-            t = '##authPicture##';
+            t = '##newLabel##';
             re = new RegExp(t, "g");
-            text = text.replace(re, userPicture);
+            text = text.replace(re, showNewLabel);
 
-            $('#ansOf_' + _id).append(text);
+            if(_id == 0)
+                $('#commentsDiv').prepend(text);
+            else {
+                $('#showAnsButton_' + _id).show();
+                $('#ansOf_' + _id).prepend(text);
+            }
 
-            fillAnsCommentSection(_comment[i]['comments'], _comment[i]['id'])
+            fillMainCommentSection(_comment[i]['comments'], _comment[i]['id']);
         }
     }
 
     function openAnsToComment(_id){
+        if (!hasLogin) {
+            showLoginPrompt();
+            return;
+        }
+
         $('#ansTo_' + _id).toggle();
     }
+
     function openAnsOnReview(_id){
         if($('#ansOf_' + _id).css('display') == 'flex')
             $('#ansOf_' + _id).css('display', 'none');
