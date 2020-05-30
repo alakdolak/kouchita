@@ -86,10 +86,28 @@ class StreamingController extends Controller
                             $catVid = $this->getVideoFullInfo($catVid, false);
                     }
 
-                }
-                else
-                    $category->icon = \URL::asset('_images/video/category/' . $category->onIcon);
+                    if($category->onIcon != null)
+                        $category->icon = \URL::asset('_images/video/category/' . $category->onIcon);
 
+                    if($category->banner != null)
+                        $category->banner = \URL::asset('_images/video/category/' . $category->banner);
+                    else
+                        $category->banner = \URL::asset('images/streaming/defaultBanner.jpg');
+                }
+                else {
+                    $category->icon = \URL::asset('_images/video/category/' . $category->onIcon);
+                    $mainCat = VideoCategory::find($category->parent);
+
+                    if($category->banner == null) {
+                        if ($mainCat->banner != null)
+                            $category->banner = \URL::asset('_images/video/category/' . $mainCat->banner);
+                        else
+                            $category->banner = \URL::asset('images/streaming/defaultBanner.jpg');
+                    }
+                    else
+                        $category->banner = \URL::asset('_images/video/category/' . $category->banner);
+
+                }
 
                 $content = $category;
                 return view('streaming.page.videoList', compact(['kind', 'value', 'content']));
@@ -172,7 +190,7 @@ class StreamingController extends Controller
             foreach ($userMoreVideo as $vid)
                 $vid = $this->getVideoFullInfo($vid, false);
 
-            $sameCategory = Video::where('categoryId', $video->categoryId)->where('id', '!=', $video->id)->take(4)->orderByDesc('created_at')->get();
+            $sameCategory = Video::where('categoryId', $video->categoryId)->where('id', '!=', $video->id)->take(7)->orderByDesc('created_at')->get();
             foreach ($sameCategory as $vid)
                 $vid = $this->getVideoFullInfo($vid, false);
 
@@ -275,7 +293,8 @@ class StreamingController extends Controller
                     echo json_encode(['status' => 'nok2']);
             } else
                 echo json_encode(['status' => 'nok1']);
-        } else
+        }
+        else
             echo json_encode(['status' => 'nok']);
 
         return;
@@ -461,8 +480,8 @@ class StreamingController extends Controller
         $video->userPic = getUserPic($video->userId);
         $video->time = getDifferenceTimeString($video->created_at);
 
-        $video->like = VideoFeedback::where('videoId', $video->id)->where('like', 1)->count();
-        $video->disLike = VideoFeedback::where('videoId', $video->id)->where('like', -1)->count();
+        $video->like = VideoFeedback::where('videoId', $video->id)->whereNull('commentId')->where('like', 1)->count();
+        $video->disLike = VideoFeedback::where('videoId', $video->id)->whereNull('commentId')->where('like', -1)->count();
         $video->commentsCount = VideoComment::where('videoId', $video->id)->count();
         $video->comments = [];
         $video->places = [];
@@ -551,22 +570,45 @@ class StreamingController extends Controller
     }
 
     private function getVideoComments($videoId, $parent){
-        $comments = VideoComment::where('videoId', $videoId)->where('confirm', 0)->where('parent', $parent)->get();
-        foreach ($comments as $comment) {
-            $ucomment = User::find($comment->userId);
-            if ($ucomment != null) {
-                $comment->username = $ucomment->username;
-                $comment->userPic = getUserPic($ucomment->id);
-                $comment->like = VideoFeedback::where('videoId', $videoId)->where('commentId', $comment->id)->where('like', 1)->count();
-                $comment->disLike = VideoFeedback::where('videoId', $videoId)->where('commentId', $comment->id)->where('like', -1)->count();
-                $comment->time = getDifferenceTimeString($comment->created_at);
-                $comment->comments = $this->getVideoComments($videoId, $comment->id);
-                if($comment->parent != 0)
-                    $comment->ansToUsername = User::find(VideoComment::find($comment->parent)->userId)->username;
-                $comment->ansCount = count($comment->comments);
-            }
-        }
+        $comments = VideoComment::where('videoId', $videoId)
+                                ->where(function ($query) {
+                                    $uId = 0;
+                                    if(auth()->check())
+                                        $uId = auth()->user()->id;
+
+                                    $query->where('confirm', 1)
+                                        ->orWhere('userId', $uId);
+                                })
+                                ->where('parent', $parent)
+                                ->orderBy('created_at')->get();
+
+        foreach ($comments as $comment)
+            $comment = $this->getVideoCommentInfos($comment);
+
         return $comments;
+    }
+
+    private function getVideoCommentInfos($_comment){
+        $comment = $_comment;
+        $ucomment = User::find($comment->userId);
+        if ($ucomment != null) {
+            $comment->username = $ucomment->username;
+            $comment->userPic = getUserPic($ucomment->id);
+            $comment->like = VideoFeedback::where('videoId', $comment->videoId)->where('commentId', $comment->id)->where('like', 1)->count();
+            $comment->disLike = VideoFeedback::where('videoId', $comment->videoId)->where('commentId', $comment->id)->where('like', -1)->count();
+            $comment->time = getDifferenceTimeString($comment->created_at);
+
+            if($comment->haveAns == 1)
+                $comment->comments = $this->getVideoComments($comment->videoId, $comment->id);
+            else
+                $comment->comments = [];
+
+            if($comment->parent != 0)
+                $comment->ansToUsername = User::find(VideoComment::find($comment->parent)->userId)->username;
+            $comment->ansCount = count($comment->comments);
+        }
+
+        return $comment;
     }
 
     public function setVideoComment(Request $request)
@@ -581,7 +623,15 @@ class StreamingController extends Controller
             $newComment->userId = auth()->user()->id;
             $newComment->save();
 
-            echo json_encode(['status' => 'ok', 'comment' => $newComment]);
+            if($request->ansTo != 0){
+                $parent = VideoComment::find($request->ansTo);
+                $parent->haveAns = 1;
+                $parent->save();
+            }
+
+            $comment = $this->getVideoCommentInfos($newComment);
+
+            echo json_encode(['status' => 'ok', 'comment' => $comment]);
         }
         else
             echo json_encode(['status' => 'nok', 'msg' => 'not find video']);

@@ -9,7 +9,6 @@
 <meta property="og:url" content="{{Request::url()}}" />
 <meta property="og:site_name" content="سامانه جامع گردشگری کوچیتا" />
 
-
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158914626-1"></script>
 <script>
     window.dataLayer = window.dataLayer || [];
@@ -36,8 +35,9 @@
 <script src="{{URL::asset('js/angular.js')}}"></script>
 <script src="{{URL::asset('js/swiper/swiper.min.js')}}"></script>
 
-
 <script type="text/javascript">
+    var homeURL = "{{route('home')}}";
+
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': '{{csrf_token()}}'
@@ -53,8 +53,6 @@
         return true;
     }
 
-    var homeURL = "{{route('home')}}";
-
     function hideElement(e) {
         $(".dark").hide();
         $("#" + e).addClass("hidden");
@@ -64,6 +62,5 @@
         $("#" + e).removeClass("hidden");
         $(".dark").show();
     }
-
 </script>
 
