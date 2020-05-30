@@ -87,10 +87,9 @@ class StreamingController extends Controller
                     }
 
                 }
-                else {
+                else
                     $category->icon = \URL::asset('_images/video/category/' . $category->onIcon);
-                    $category->showList = true;
-                }
+
 
                 $content = $category;
                 return view('streaming.page.videoList', compact(['kind', 'value', 'content']));

@@ -8,12 +8,12 @@
 
     <style>
         .overMainPicDiv{
-            position: absolute;
+            position: relative;
             display: flex;
             align-items: center;
             font-size: 25px;
             top: 10vh;
-            right: 100px;
+            margin-right: 100px;
         }
         .overMainPicPic{
             width: 80px;
@@ -38,6 +38,20 @@
             margin: 5px 2px ;
         }
 
+        @media (max-width: 700px) {
+            .videoInList{
+                width: calc(49% - 4px) !important;
+            }
+            .allVideoList{
+                width: 100% !important;
+                margin: 0 !important;
+            }
+            .overMainPicDiv{
+                justify-content: center;
+                margin-right: 0px;
+            }
+
+        }
     </style>
 @endsection
 
@@ -47,7 +61,7 @@
 
         <div class="mainSlider">
             <div id="mainSlider" class="swiper-container backgroundColorForSlider">
-                <img src="https://www.aparat.com/public/public/images/etc/category/5_pattern.jpg?29" style="width: 100%">
+                <img src="https://www.aparat.com/public/public/images/etc/category/5_pattern.jpg?29" class="resizeImgClass" style="width: 100%; position: absolute">
                 <div class="overMainPicDiv">
                     <div class="overMainPicPic">
                         <img class="resizeImgClass" src="{{$content->icon}}" style="width: 100%">
@@ -161,11 +175,15 @@
         @endforeach
         @endif
 
-        @if(isset($content->showList) && $content->showList == true)
-            <div id="allVideoDiv">
-                <div id="allVideo" class="allVideoList"></div>
+        <div id="allVideoDiv">
+            <div class="headerWithLine">
+                <div class="headerWithLineText">
+                    تمامی ویدیوها
+                </div>
+                <div class="headerWithLineLine"></div>
             </div>
-        @endif
+            <div id="allVideo" class="allVideoList"></div>
+        </div>
 
     </div>
 
@@ -262,67 +280,77 @@
         });
         @endif
 
+        let kind = '{{$kind}}';
+        let value = '{{$value}}';
+        let page = 0;
+        let perPage = 5;
+        let isEnd = false;
+        let inGet = false;
 
-        @if(isset($content->showList) && $content->showList == true)
-            let kind = '{{$kind}}';
-            let value = '{{$value}}';
-            let page = 0;
-            let perPage = 5;
-            let isEnd = false;
-            let inGet = false;
+        function getVideo(){
+            if(!isEnd && !inGet) {
+                inGet = true;
+                openLoading();
 
-            function getVideo(){
-                if(!isEnd && !inGet) {
-                    inGet = true;
-                    openLoading();
+                $.ajax({
+                    type: 'post',
+                    url: '{{route("streaming.list.getElems")}}',
+                    data: {
+                        _token: '{{csrf_token()}}',
+                        kind: kind,
+                        value: value,
+                        page: page,
+                        perPage: perPage
+                    },
+                    success: function (response) {
+                        closeLoading();
+                        try {
+                            response = JSON.parse(response);
+                            if (response['status'] == 'ok') {
+                                page++;
 
-                    $.ajax({
-                        type: 'post',
-                        url: '{{route("streaming.list.getElems")}}',
-                        data: {
-                            _token: '{{csrf_token()}}',
-                            kind: kind,
-                            value: value,
-                            page: page,
-                            perPage: perPage
-                        },
-                        success: function (response) {
-                            closeLoading();
-                            try {
-                                response = JSON.parse(response);
-                                if (response['status'] == 'ok') {
-                                    page++;
+                                if(response.videos.length < perPage)
+                                    isEnd = true;
 
-                                    if(response.videos.length < perPage)
-                                        isEnd = true;
+                                createVideoSuggestionDiv(response.videos, 'allVideo', function(){
+                                    $('#allVideo').find('.videoSuggestion').addClass('videoInList');
+                                    resizeFitImg('resizeImgClass');
+                                    inGet = false;
 
-                                    createVideoSuggestionDiv(response.videos, 'allVideo', function(){
-                                        $('#allVideo').find('.videoSuggestion').addClass('videoInList');
-                                        resizeFitImg('resizeImgClass');
-                                        inGet = false;
-
-                                        resizeRows('videoInList');
-                                        getVideo();
-                                    }, true);
-
-                                }
-                            }
-                            catch (e) {
+                                    resizeRows('videoInList');
+                                    loadMoreCheck();
+                                }, true);
 
                             }
-                        },
-                        error: function (err) {
-                            closeLoading();
                         }
-                    });
-                }
-            }
-            getVideo();
+                        catch (e) {
 
-            $(window).resize(function(){
-                resizeRows('videoInList')
-            });
-        @endif
+                        }
+                    },
+                    error: function (err) {
+                        closeLoading();
+                    }
+                });
+            }
+        }
+
+        $(window).resize(function(){
+            resizeRows('videoInList')
+        });
+
+        function loadMoreCheck(){
+            let allVideoElem = document.getElementById('allVideo').getBoundingClientRect();
+            let view = allVideoElem.y + allVideoElem.height - $(window).height();
+
+            if (view < 0)
+                getVideo();
+        }
+
+        $(window).on('scroll', function(e){
+            if(!isEnd && !inGet)
+                loadMoreCheck();
+        });
+
 
     </script>
 @endsection
