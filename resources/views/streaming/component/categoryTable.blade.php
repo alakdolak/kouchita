@@ -81,5 +81,9 @@
         $('#categoryHeaderName').text(name)
     }
 
+    $(window).keydown(function (e) {
+        if(e.keyCode == 27 && $('.categoryBackBody').css('display') != 'none')
+            closeCategoryMenu();
+    })
 
 </script>

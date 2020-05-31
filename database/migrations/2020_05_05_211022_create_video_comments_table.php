@@ -18,7 +18,7 @@ class CreateVideoCommentsTable extends Migration
             $table->unsignedInteger('userId');
             $table->unsignedInteger('videoId');
             $table->unsignedInteger('parent')->nullable();
-            $table->string('comment');
+            $table->string('text');
             $table->tinyInteger('haveAns')->nullable();
             $table->tinyInteger('confirm')->default(0);
             $table->timestamps();

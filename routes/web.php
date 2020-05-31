@@ -725,6 +725,8 @@ Route::middleware(['web', 'vodShareData'])->group(function (){
 
     Route::get('streaming/live/{room?}', 'StreamingController@streamingLive')->name('streaming.live');
 
+    Route::post('streaming/live/sendBroadcastMsg', 'StreamingController@sendBroadcastMsg')->name('sendBroadcastMsg');
+
     Route::post('streaming/search', 'StreamingController@search')->name('streaming.search');
 
     Route::get('streaming/list/{kind}/{value}', 'StreamingController@videoList')->name('streaming.list');
@@ -829,7 +831,6 @@ Route::post('webrtcTurn', function (\Illuminate\Http\Request $request){
     dd($request);
 });
 
-Route::get('/broadCastTest', function(){
-    return view('test.test');
+Route::get('broadCastTest/{room}', function($room){
+    return view('test.test', compact(['room']));
 });
-Route::post('sendBroad', 'HomeController@sendBroad')->name('sendBroad');

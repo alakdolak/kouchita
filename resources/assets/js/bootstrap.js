@@ -51,5 +51,6 @@ window.Echo = new Echo({
     broadcaster: 'pusher',
     key : "8e4c0c95f6f9483f2676",
     cluster : "eu",
-    encrypted: true
+    encrypted: true,
+    authEndpoint: 'http://localhost/kouchita/public/streaming/auth',
 });

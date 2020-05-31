@@ -19,6 +19,7 @@ class CreateVideoCategoriesTable extends Migration
             $table->unsignedInteger('parent')->default(0);
             $table->string('onIcon')->nullable();
             $table->string('offIcon')->nullable();
+            $table->string('banner')->nullable();
         });
     }
 

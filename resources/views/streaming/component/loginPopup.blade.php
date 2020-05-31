@@ -150,6 +150,7 @@ $authUrl = $client->createAuthUrl();
                 type: 'post',
                 url: loginDir,
                 data: {
+                    '_token': '{{csrf_token()}}',
                     'username': username,
                     'password': password
                 },

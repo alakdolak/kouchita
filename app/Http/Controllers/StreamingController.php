@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\CommentBroadCast;
+use App\Events\UserOnline;
 use App\models\Activity;
 use App\models\Amaken;
 use App\models\Cities;
@@ -14,6 +16,7 @@ use App\models\VideoComment;
 use App\models\VideoFeedback;
 use App\models\VideoLimbo;
 use App\models\VideoLive;
+use App\models\VideoLiveGuest;
 use App\models\VideoPlaceRelation;
 use App\models\VideoTagRelation;
 use App\User;
@@ -23,26 +26,6 @@ use Illuminate\Http\Request;
 
 class StreamingController extends Controller
 {
-    public function __construct()
-    {
-        date_default_timezone_set('Asia/Tehran');
-        $userPicture = null;
-        if(auth()->check())
-            $userPicture = getUserPic(auth()->user()->id);
-        else
-            $userPicture = getUserPic(0);
-
-        $today = Carbon::now()->format('Y-m-d');
-        $nowTime = Carbon::now()->format('H:i');
-        $todayVid = VideoLive::where('sDate', $today)->where('isLive', 1)->orderBy('sTime')->first();
-        if($todayVid != null && $nowTime > $todayVid->sTime)
-            $hasLive = $todayVid->code;
-        else
-            $hasLive = '';
-
-        \View::share(['userPicture' => $userPicture, 'hasLive' => $hasLive]);
-    }
-
     public function indexStreaming()
     {
         $confirmContidition = ['state' => 1, 'confirm' => 1];
@@ -661,11 +644,21 @@ class StreamingController extends Controller
                 $user->pic = getUserPic($user->id);
                 $data['user'] = $user;
                 $data['haveVideo'] = true;
+
+                $data['guest'] = VideoLiveGuest::where('videoId', $video->id)->get();
+                foreach ($data['guest'] as $guest)
+                    $guest->pic = \URL::asset('_images/video/live/'.$guest->videoId.'/'.$guest->pic);
             }
             else
                 $room = '';
         }
         return view('streaming.streamingLive', compact(['room', 'data']));
+    }
+
+    public function sendBroadcastMsg(Request $request)
+    {
+        if(\auth()->check())
+            broadcast(new CommentBroadCast($request->msg, $request->room, $request->userName, $request->userPic));
     }
 
 

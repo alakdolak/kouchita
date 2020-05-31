@@ -94,11 +94,6 @@ input{
     width: calc(100% - 50px);
 }
 
-.mainDivStream > div:last-child {
-    margin-right: 5px;
-    width: 75%;
-}
-
 .mainDivStream > div:first-child {
     margin-left: 5px;
     width: 25%;

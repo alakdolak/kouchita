@@ -38,16 +38,17 @@
         </div>
     </div>
 
-    <script !src="">
+    <script>
         function sendMsg(){
             let msg = $('#msg').val();
             $('#msg').val('');
             $.ajax({
                 type: 'post',
-                url: '{{route("sendBroad")}}',
+                url: '{{route("sendBroadcastMsg")}}',
                 data: {
                     _token: '{{csrf_token()}}',
                     msg: msg,
+                    room: '{{$room}}',
                 },
                 success: function(response){
                     console.log('success')
@@ -62,12 +63,14 @@
     <script src="{{URL::asset('js/app.js')}}"></script>
 {{--    <script src="https://js.pusher.com/6.0/pusher.min.js"></script>--}}
 
-    <script !src="">
-        window.Echo.channel('liveComments').listen('CommentBroadCast', (e) => {
-            console.log(e)
-            let text = '<div class="ms">' + e.message + '</div>';
-            $('#showMsgs').append(text);
-        });
+    <script>
+        window.Echo.channel('liveComments.{{$room}}')
+            .listen('CommentBroadCast', (e) => {
+                console.log('listen ');
+
+                let text = '<div class="ms">' + e.message + '</div>';
+                $('#showMsgs').append(text);
+            });
     </script>
 </body>
 </html>
