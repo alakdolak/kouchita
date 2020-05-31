@@ -1,6 +1,9 @@
 .masthead > div > div > div > div{
     background: red !important;
 }
+.headerNavTitle:hover{
+    color: white;
+}
 .row{
     width: 100%;
     margin: 0px;

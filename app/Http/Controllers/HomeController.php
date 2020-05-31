@@ -1776,12 +1776,4 @@ class HomeController extends Controller
 
         dd('finniish');
     }
-
-
-    public function sendBroad(Request $request)
-    {
-        broadcast(new CommentBroadCast($request->msg, 10));
-//        broadcast(new CommentBroadCast($request->msg, 10))->toOthers();
-//        event(new CommentBroadCast($request->msg));
-    }
 }

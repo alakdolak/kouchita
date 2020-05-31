@@ -14,17 +14,21 @@ class CommentBroadCast implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $id;
+    public $room;
     public $message;
+    public $username;
+    public $userPic;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($message, $id)
+    public function __construct($message, $room, $userName, $userPic)
     {
         $this->message = $message;
-        $this->id = $id;
+        $this->room = $room;
+        $this->userPic = $userPic;
+        $this->username = $userName;
     }
 
     /**
@@ -34,7 +38,7 @@ class CommentBroadCast implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('liveComments');
+        return new Channel('liveComments.'. $this->room);
     }
 
 }

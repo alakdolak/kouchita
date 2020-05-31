@@ -17,8 +17,8 @@ class CreateVideoLiveGuestsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('videoId');
             $table->string('name');
-            $table->string('action');
-            $table->mediumText('text');
+            $table->string('action')->nullable();
+            $table->mediumText('text')->nullable();
             $table->string('pic');
         });
     }
