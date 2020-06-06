@@ -12,784 +12,16 @@
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/addPlaceByUser.css')}}' />
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/abbreviations.css')}}' />
 
+    <link rel="stylesheet" href="{{URL::asset('css/pages/addPlaceByUser.css')}}">
+
     <link rel="stylesheet" href="{{asset('packages/dropzone/basic.css')}}">
     <link rel="stylesheet" href="{{asset('packages/dropzone/dropzone.css')}}">
 
     <script src="{{URL::asset('js/autosize.min.js')}}"></script>
 
-    <style>
-        .stepsMilestoneMainDiv {
-            display: inline-block;
-            position: relative;
-        }
-        .textTopHeader{
-            font-size: 22px;
-            font-weight: bold;
-            padding-bottom: 15px;
-            text-align: center
-        }
-
-        .bodyStyle {
-            width: 100%;
-            min-height: 35vh;
-            background-color: whitesmoke;
-            direction: rtl;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            padding-top: 30px;
-            font-size: 1em !important;
-            flex-direction: column;
-            align-items: center;
-        }
-        .topSection{
-            border: 3px solid #eab836;
-            border-radius: 20px;
-            background: white;
-        }
-        .box {
-            position: relative;
-            height: auto;
-        }
-        .lineBetweenDot{
-            width: 3px;
-            height: 5px;
-            background-color: #053a3e;
-        }
-        .headerOfBox {
-            background-color: #053a3e;
-            color: white;
-            padding: 15px;
-            font-size: 2em;
-            border-radius: 18px 18px 0 0;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .bodyOfBox {
-            position: relative;
-            display: flex;
-            justify-content: space-between;
-            padding: 15px;
-            padding-top: 10px;
-        }
-
-        .stepTitle {
-            font-size: 17px;
-            font-weight: 600;
-            text-align: justify;
-        }
-
-        .boxNotice {
-            width: 75%;
-            position: relative;
-            bottom: 0;
-            color: #963019;
-            font-size: 17px;
-        }
-
-        .stepNotice {
-            font-size: 17px;
-            color: #963019;
-        }
-
-        .bodyOfSteps {
-            position: relative;
-            margin: 0 2%;
-            width: 96%;
-            padding: 3%;
-            padding-top: 0px;
-        }
-        .footerBox1{
-            background-color: #053a3e;
-            padding: 5px;
-            border: 3px solid #eab836;
-            display: inline-block;
-            justify-content: space-between;
-            width: calc(100% - 115px);
-            height: 56px;
-        }
-        .footerOfBox {
-            height: 45px;
-        }
-
-        .btn:hover, .btn:active {
-            color: white;
-            opacity: 0.8;
-            border-radius: 5px;
-        }
-
-        .btn:focus {
-            color: white;
-            border-radius: 5px;
-        }
-
-        .boxNextBtn {
-            background: #0d6650;
-            border-color: #0d6650;
-            float: left;
-            color: white;
-            font-size: 30px;
-            border-radius: 16px 0px 0px 16px;
-            width: 115px;
-            transition: .2s;
-        }
-        .boxNextBtn:hover{
-            border-radius: 30px 0px 0px 30px !important;
-        }
-
-        .boxPreviousBtn {
-            background: #720d19;
-            border-color: #720d19;
-            float: right;
-            color: white;
-            font-size: 30px;
-            border-radius: 0px 16px 16px 0px;
-            width: 115px;
-            transition: .2s;
-        }
-        .boxPreviousBtn:hover{
-            border-radius: 0px 30px 30px 0px !important;
-        }
-
-        .steps {
-            border-radius: 50%;
-            background-color: #053a3e;
-        }
-
-        .bigCircle {
-            width: 25px;
-            height: 25px;
-        }
-
-        .middleCircle {
-            width: 17px;
-            height: 17px;
-            margin: 4px;
-            z-index: 10;
-            background-color: #ffffff;
-            position: absolute;
-            top: 0px;
-        }
-
-        .littleCircle {
-            width: 9px;
-            height: 9px;
-            margin: 5px;
-            z-index: 100;
-            margin-right: 8px;
-            position: absolute;
-            top: 3px;
-        }
-
-        .completeStep {
-            background-color: #720d19;
-        }
-        .completeStepCenter{
-            background: #eab836;
-        }
-        #selectCategoryDiv{
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .categories {
-            margin: 1px;
-            padding: 10px 0;
-            width: 15%;
-            display: inline-block;
-            border: 3px solid #eab836;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 25px;
-            transition: .2s;
-            color: #eab836;
-            background-color: #053a3e;
-        }
-
-        .categories:hover {
-            border: 1.5px solid #30b4a6;
-        }
-
-        .selectCategoryDiv {
-            width: 25%;
-            display: flex;
-            background-color: #053a3e;
-            border-radius: 0px 0px 0px 17px;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            padding: 5px 0px;
-            border: solid 3px #4dc7bc;
-        }
-        .stepHeader{
-            display: flex;
-            justify-content: center;
-            flex-direction: column;
-            width: 100%;
-            padding-left: 20px;
-        }
-        .nameOfSelectCategory {
-            font-weight: 500;
-            color: #30b4a6;
-            font-size: 17px;
-        }
-
-        .iconsOfCategories {
-            font-size: 40px;
-            direction: rtl;
-            margin: 4% 1%;
-            line-height: 40px;
-            color: black;
-            cursor: pointer;
-            color: #eab836;
-        }
-
-        .iconOfSelectCategory {
-            font-size: 30px;
-            margin: 0;
-            line-height: 40px;
-            cursor: default;
-            color: #4dc7bc;
-        }
-
-        .stepInputBox {
-            display: flex !important;
-            padding: 10px 7px;
-            border: 2px solid #eab836;
-            border-radius: 5px;
-            background-color: #ebebeb;
-            margin: 10px 0;
-            font-size: 18px;
-        }
-
-        .stepInputBoxText {
-            padding-left: 10px;
-            border-left: 2px solid #eab836;
-            display: inline-block;
-        }
-        .overMapButton{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 15px;
-        }
-        .mapButton{
-            font-size: 25px;
-            background: #0d6650;
-            border-radius: 15px;
-        }
-        .mapButton:hover{
-            font-size: 25px;
-            background: #0d6650;
-            border-radius: 15px;
-        }
-        .stepInputBoxInput {
-            direction: rtl;
-            text-align: center;
-            border: none;
-            background-color: transparent;
-        }
-
-        .stepInputBoxRequired {
-            display: inline-block;
-            position: relative
-        }
-
-        .stepInputIconRequired {
-            font-size: 15px;
-            color: #92321b;
-            margin-left: 10px;
-        }
-        .inputFliedRow{
-            display: flex;
-            align-items: center;
-        }
-        .addresText {
-            width: 100%;
-            resize: none;
-            border-radius: 5px;
-            background-color: #EEEEEE;
-            padding: 8px;
-            margin: 12px 0 0;
-            border: 2px solid #eab836;
-        }
-        .dotDiv{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 13px 0px 0px 0px;
-            border: solid 1px;
-            padding: 0px 10px;
-            background-color: #0d6650;
-        }
-        #stepName {
-            font-size: 1em;
-            position: relative;
-            margin: 6px;
-            font-weight: bold;
-            color: #eab836;
-        }
-
-        #map {
-            height: 150px;
-            border: 1px solid #4DC7BC;
-            border-radius: 5px;
-            padding: 10px;
-        }
-
-        .mapBtn {
-            background: #4DC7BC;
-            border-color: #4DC7BC;
-            color: white;
-            width: 100%;
-            margin: 10px 0;
-        }
-
-        .listItem {
-            padding: 10px 0px;
-            border-bottom: 1px solid #eab836;
-        }
-
-        .subListItem {
-            display: inline-block;
-            width: auto;
-        }
-
-        .detailListItem {
-            display: inline-block;
-            padding-left: 20px;
-            min-width: 30%;
-        }
-        .selectInput{
-            border: 3px solid #eab836;
-            padding: 0px 15px;
-            font-size: 20px;
-            border-radius: 9px;
-        }
-        .deletedSlid{
-            position: absolute;
-            width: 100%;
-            height: 0;
-            background-color: #000000c7;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            transition: .2s;
-        }
-        .step6pic:hover .deletedSlid{
-            height: 100%;
-        }
-
-
-        .step5Title {
-            display: inline-block;
-            float: right;
-            font-weight: bold;
-            font-size: 24px;
-            margin-left: 22px;
-            padding-left: 26px;
-            width: 100%;
-            margin-bottom: 26px;
-        }
-        .detailListItem > div{
-            font-size: 15px;
-            margin: 5px 0px;
-        }
-        .detailListItem > div > label{
-            cursor: pointer;
-        }
-
-        .step5Description {
-            font-weight: 500;
-            margin: 5px 0;
-        }
-
-        .step5NewPlace {
-            margin: 5px 10px;
-            display: inline-block;
-            width: 100%;
-        }
-
-        .step5AddPlace {
-            background: #4DC7BC;
-            border-color: #4DC7BC;
-            color: white;
-            margin: 0 5px;
-        }
-
-        .step5RemovePlace {
-            background: #963019;
-            border-color: #963019;
-            color: white;
-        }
-
-        .step6picBox {
-            width: 150px;
-            padding: 7px;
-            border: 1px solid #cccccc;
-            border-radius: 5px;
-        }
-
-        .step6pic {
-            height: 130px;
-            position: relative;
-            color: #4DC7BC;
-            background-color: #e5e5e5;
-            border: 1px solid #cccccc;
-            border-radius: 5px;
-            display: flex;
-            justify-content: center;
-            cursor: pointer;
-            align-items: center;
-        }
-
-        .step6plusText {
-            position: relative;
-            font-size: 1.1em;
-            font-weight: 500;
-        }
-
-        .step6plusIcon {
-            position: relative;
-            font-size: 3em;
-        }
-
-        .step6picText {
-            padding: 10px;
-        }
-
-        /* Customize the label (the checkBoxDiv) */
-        .checkBoxDiv {
-            display: block;
-            position: relative;
-            padding-left: 35px;
-            margin-bottom: 12px;
-            cursor: pointer;
-            font-weight: 400;
-            font-size: 19px;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-            padding-right: 30px;
-        }
-
-        /* Hide the browser's default checkbox */
-        .checkBoxDiv input {
-            position: absolute;
-            opacity: 0;
-            cursor: pointer;
-            height: 0;
-            width: 0;
-        }
-
-        /* Create a custom checkbox */
-        .checkmark {
-            position: absolute;
-            top: 2px;
-            height: 25px;
-            right: 0px;
-            width: 25px;
-            background-color: #a7a7a7;
-            border-radius: 8px;
-        }
-
-        /* On mouse-over, add a grey background color */
-        .checkBoxDiv:hover input ~ .checkmark {
-            background-color: #ccc;
-        }
-
-        /* When the checkbox is checked, add a blue background */
-        .checkBoxDiv input:checked ~ .checkmark {
-            background-color: #44b390;
-        }
-
-        /* Create the checkmark/indicator (hidden when not checked) */
-        .checkmark:after {
-            content: "";
-            position: absolute;
-            display: none;
-        }
-
-        /* Show the checkmark when checked */
-        .checkBoxDiv input:checked ~ .checkmark:after {
-            display: block;
-        }
-
-        /* Style the checkmark/indicator */
-        .checkBoxDiv .checkmark:after {
-            left: 10px;
-            top: 7px;
-            width: 5px;
-            height: 10px;
-            border: solid white;
-            border-width: 0 3px 3px 0;
-            -webkit-transform: rotate(45deg);
-            -ms-transform: rotate(45deg);
-            transform: rotate(45deg);
-        }
-
-        .choosedCategory{
-            border-color: #30b4a6;
-            color :#30b4a6;
-            border-radius: 50px;
-            background-color: #053a3e;
-        }
-        .choosedCategory > div{
-            color :#30b4a6 !important;
-        }
-
-        .resultSearch{
-            padding: 5px 10px;
-            transition: .2s;
-        }
-        .resultSearch:hover{
-            background: #4DC7BC;
-            border-radius: 10px;
-        }
-        .addressSection{
-            padding-bottom: 20px;
-            margin-bottom: 10px;
-            border-bottom: solid 1px;
-        }
-        body{
-            min-width: auto;
-        }
-        .innerPicAddPlace{
-            width: 263px;
-            height: 285px;
-            position: absolute;
-            top: -65px;
-            left: -75px;
-            z-index: 12;
-        }
-        .footerTextBoxAddPlace{
-            padding: 10px 15px;
-            font-size: 12px;
-            line-height: 2;
-            position: relative;
-            text-align: center;
-            bottom: 0px;
-            right: 0px;
-        }
-        .addPlaceDropZone{
-            min-height: 340px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-        .dragDropTextAddPlace{
-            font-size: 14px;
-            font-weight: bold;
-            border: 2px dashed #9996;
-            padding-top: 20px;
-            text-align: center;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            padding: 20px;
-            min-height: 300px;
-        }
-        .sampleDescription{
-            border: solid 1px #eab836;
-            border-radius: 8px;
-            color: gray;
-            padding: 15px;
-            text-align: justify;
-            font-size: 14px;
-            margin-top: 15px;
-        }
-        .plusIcon{
-            background: green;
-            color: white;
-            font-size: 35px;
-            margin-right: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 50%;
-            cursor: pointer;
-        }
-        .showOnMobile{
-            display: none;
-        }
-        .showOnPc{
-            display: flex;
-        }
-        .step1Header{
-            text-align: center;
-            font-size: 30px;
-            padding: 15px;
-            font-weight: bold
-        }
-        .marginRight{
-            margin-right: 40px
-        }
-        .matInputTopDiv{
-            width: 49%;
-        }
-        .endSectionButton{
-            width: 100%;
-            border-radius: 30px 30px 30px 30px !important;
-        }
-        .endSectionFooter{
-            display: none;
-        }
-        .textTopTopHeader{
-            display: inline-block
-        }
-
-        #materialRow{
-            width: 100%;
-        }
-        .stepInputBoxMat{
-            width: 100%;
-        }
-        @media (max-width: 1200px) {
-            .container{
-                width: auto;
-            }
-        }
-        @media (max-width: 992px){
-            .categories{
-                font-size: 18px;
-            }
-        }
-
-        @media (max-width: 900px){
-            .showOnMobile{
-                display: flex;
-            }
-            .showOnPc{
-                display: none;
-            }
-            .stepTitle{
-                font-size: 15px;
-            }
-            .headerOfBox{
-                font-size: 1.6em;
-            }
-        }
-
-        @media (max-width: 800px) {
-            .step1Header{
-                font-size: 25px;
-            }
-            .headerOfBox{
-                flex-direction: column;
-                text-align: center;
-            }
-            .stepsMilestoneMainDiv{
-                margin-top: 15px;
-            }
-        }
-
-        @media (max-width: 700px) {
-            .endSectionButton{
-                font-size: 14px;
-            }
-            .step5Title{
-                margin-bottom: 10px;
-            }
-            .listItemHotelKind{
-                flex-direction: column;
-            }
-            .stepNotice{
-                font-size: 13px;
-                text-align: center;
-            }
-            .headerCategoryName, .stepInputBoxRequired, .stepInputBoxInput, .addresText, .mapButton{
-                font-size: 11px !important;
-                font-weight: bold;
-            }
-            .boxNotice{
-                width: 100%;
-                font-size: 13px;
-                margin-bottom: 15px;
-            }
-            .textTopTopHeader{
-                font-size: 15px;
-            }
-            .step1Header{
-                font-size: 15px;
-                font-weight: bold;
-            }
-            #stepName{
-                font-size: 14px;
-            }
-            .bodyStyle{
-                padding-top: 10px !important;
-            }
-            .textTopHeader{
-                font-size: 18px;
-            }
-            #selectCategoryDiv{
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            .categories{
-                width: 30%;
-                font-size: 13px;
-            }
-            .box{
-                width: 100%;
-            }
-            .inputFliedRow{
-                flex-direction: column;
-                align-items: baseline;
-            }
-            .inputFlied{
-                flex-direction: row;
-                width: 100%;
-            }
-            .marginRight{
-                margin-right: 0px;
-            }
-            .stepInputBox{
-                width: 100%;
-            }
-            .detailListItem{
-                min-width: 49%;
-            }
-            .stepTitle{
-                font-weight: 400;
-                width: 100%;
-                padding: 0;
-                text-align: center;
-                font-size: 14px;
-                margin-bottom: 14px;
-            }
-            .bodyOfBox{
-                flex-direction: column;
-                align-items: center;
-            }
-            .selectCategoryDiv{
-                width: 100%;
-                align-items: center;
-                flex-direction: row;
-                justify-content: space-evenly;
-            }
-            .stepHeader{
-                text-align: center;
-                width: 100%;
-                justify-content: center;
-                align-items: center;
-                padding: 0px;
-            }
-        }
-
-        @media (max-width: 500px) {
-            .stepHeader{
-                width: auto;
-            }
-        }
-    </style>
+    @if(app()->getLocale() == 'en')
+        <link rel="stylesheet" href="{{URL::asset('css/pages/ltr/addPlaceByUser.css')}}">
+    @endif
 
 @stop
 
@@ -798,7 +30,7 @@
         <div class="bodyStyle">
 
             <div class="textTopHeader">
-                امروز از هم جداییم ، اما برای فردای با هم بودن تلاش می کنیم
+                {{__('addPlaceByUser.امروز از هم جداییم ، اما برای فردای با هم بودن تلاش می کنیم')}}
             </div>
 
             <div class="box">
@@ -807,12 +39,12 @@
 
                     <div class="headerOfBox">
                         <div class="textTopTopHeader">
-                            معرفی و تبلیغ فعالیت شما به تمامی علاقه مندان به سفر
+                            {{__('addPlaceByUser.معرفی و تبلیغ فعالیت شما به تمامی علاقه مندان به سفر')}}
                         </div>
 
                         <div class="stepsMilestoneMainDiv">
                             <div class="dotDiv">
-                                <div id="stepName">اولین مرحله</div>
+                                <div id="stepName">{{__('addPlaceByUser.اولین مرحله')}}</div>
                                 <div style="position: relative">
                                     <div data-val="1" class="steps bigCircle completeStep"></div>
                                     <div data-val="1" class="steps middleCircle"></div>
@@ -864,27 +96,28 @@
 
                     <div class="bodyOfBox">
                         <div class="step1 stepHeader">
-                            <div class="stepTitle">پس از شیوع کرونا و با توجه به مشکلاتی که برای کسب و کار ها در حوزه سفر و گردشگری ایجاد شده ، تصمیم گرفتیم که بستری را به صورت رایگان فراهم کنیم تا صاحبان مشاغل و ایران گردان به معرفی کسب و کار خود و معرفی ایران عزیزمان بپردازید. لطفا در چند مرحله ساده، به پرسش های ما پاسخ دهید.</div>
+                            <div class="stepTitle">
+                            {{__('addPlaceByUser.پس از شیوع کرونا و با توجه به مشکلاتی که برای کسب و کار ها در حوزه سفر و گردشگری ایجاد شده ، تصمیم گرفتیم که بستری را به صورت رایگان فراهم کنیم تا صاحبان مشاغل و ایران گردان به معرفی کسب و کار خود و معرفی ایران عزیزمان بپردازید. لطفا در چند مرحله ساده، به پرسش های ما پاسخ دهید.')}}
+                            </div>
                         </div>
                         <div class="step2 stepHeader hidden">
-                            <div class="stepTitle">لطفا اطلاعات پایه را وارد نمایید.</div>
-                            <div class="boxNotice">وارد نمودن اطلاعات ستاره دار اجباری است.</div>
+                            <div class="stepTitle">{{__('addPlaceByUser.لطفا اطلاعات پایه را وارد نمایید.')}}</div>
+                            <div class="boxNotice">{{__('addPlaceByUser.وارد نمودن اطلاعات ستاره دار اجباری است.')}}</div>
                         </div>
                         <div class="step3 stepHeader hidden">
-                            <div class="stepTitle">مهم ترین بخش ، توصیف <span class="headerCategoryName"></span> است</div>
-                            <div class="boxNotice">از بین گزینه های زیر، مواردی را که <span class="headerCategoryName"></span> را توصیف می نماید اضافه کنید. سپاسگذاریم.</div>
+                            <div id="step3MainTitle" class="stepTitle">مهم ترین بخش ، توصیف <span class="headerCategoryName"></span> است</div>
+                            <div id="step3MainUnderTitle" class="boxNotice">از بین گزینه های زیر، مواردی را که <span class="headerCategoryName"></span> را توصیف می نماید اضافه کنید. سپاسگذاریم.</div>
                         </div>
                         <div class="step4 stepHeader hidden">
-                            <div class="stepTitle">اگر توضیحات خاصی در مورد <span class="headerCategoryName"></span> دارید در این قسمت با ما در میان بگذارید</div>
-{{--                            <div class="boxNotice">از بین گزینه های زیر، مواردی را که <span class="headerCategoryName"></span> را توصیف می نماید اضافه کنید. سپاسگذاریم.</div>--}}
+                            <div id="step4MainTitle" class="stepTitle">اگر توضیحات خاصی در مورد <span class="headerCategoryName"></span> دارید در این قسمت با ما در میان بگذارید</div>
                         </div>
                         <div class="step5 stepHeader hidden">
-                            <div class="stepTitle">اگر عکسی از <span class="headerCategoryName"></span> دارید آن را بارگذاری نمایید</div>
-                            <div class="boxNotice">شما می توانید به هر تعداد عکس که در اختیار دارید بارگزاری نمایید. در این صورت علاوه بر امتیاز تعریف و یا ویرایش مکان، امتیاز عکس نیز به شما تعلق می گیرد</div>
+                            <div id="step5MainTitle" class="stepTitle">اگر عکسی از <span class="headerCategoryName"></span> دارید آن را بارگذاری نمایید</div>
+                            <div class="boxNotice">{{__('addPlaceByUser.شما می توانید به هر تعداد عکس که در اختیار دارید بارگزاری نمایید. در این صورت علاوه بر امتیاز تعریف و یا ویرایش مکان، امتیاز عکس نیز به شما تعلق می گیرد')}}</div>
                         </div>
                         <div class="step6 stepHeader hidden">
                             <div class="stepTitle">
-                                تمام اطلاعات به طور کامل دریافت شد. این اطلاعات پس از بررسی اعمال خواهد شد و امتیاز شما در پروفایل افزایش خواهد یافت. به ویرایش و اضافه کردن مقصد های جدید ادامه دهید تا علاوه بر افزایش امتیاز، نشان های افتخار متفاوتی برنده شوید.
+                                {{__('addPlaceByUser.تمام اطلاعات به طور کامل دریافت شد. این اطلاعات پس از بررسی اعمال خواهد شد و امتیاز شما در پروفایل افزایش خواهد یافت. به ویرایش و اضافه کردن مقصد های جدید ادامه دهید تا علاوه بر افزایش امتیاز، نشان های افتخار متفاوتی برنده شوید.')}}
                             </div>
                         </div>
 
@@ -898,7 +131,7 @@
 
                 <div class="bodySection">
                     <div class="step1 bodyOfSteps">
-                        <div class="step1Header">لطفا دسته مناسب را با توجه به فعالیت خود انتخاب کنید.</div>
+                        <div class="step1Header">{{__('addPlaceByUser.لطفا دسته مناسب را با توجه به فعالیت خود انتخاب کنید.')}}</div>
                         <div id="selectCategoryDiv" class="text-align-center"></div>
                     </div>
 
@@ -908,7 +141,7 @@
                             <div class="stepInputBox">
                                 <div class="stepInputBoxText">
                                     <div class="stepInputBoxRequired">
-                                        نام
+                                        {{__('نام')}}
                                         <span class="headerCategoryName"></span>
                                     </div>
                                 </div>
@@ -923,15 +156,14 @@
                                     <div style="display: flex; align-items: center">
                                         <div class="stepInputBoxText">
                                             <div class="stepInputBoxRequired">
-
-                                                استان
+                                                {{__('استان')}}
                                             </div>
                                         </div>
                                         <select class="stepInputBoxInput" name="state" id="state" onchange="changeState(this.value)" style="padding-left: 20px">
-                                            <option id="noneState" value="0">استان را انتخاب کنید</option>
+                                            <option id="noneState" value="0">{{__('استان را انتخاب کنید')}}</option>
                                             @foreach($states as $item)
                                                 <option value="{{$item->id}}">
-                                                    {{$item->name    }}
+                                                    {{$item->name}}
                                                 </option>
                                             @endforeach
                                         </select>
@@ -943,7 +175,7 @@
                                 <div class="icons stepInputIconRequired redStar"></div>
                                 <div class="stepInputBox float-left">
                                     <div class="stepInputBoxText">
-                                        <div class="stepInputBoxRequired">شهر</div>
+                                        <div class="stepInputBoxRequired">{{__('شهر')}}</div>
                                     </div>
                                     <input id="cityName" class="stepInputBoxInput" onclick="chooseCity()" readonly>
                                     <input id="cityId" type="hidden" value="0">
@@ -955,16 +187,16 @@
                             <div class="addressSection">
                                 <div style="display: flex; justify-content: center; align-items: center">
                                     <div class="icons stepInputIconRequired redStar"></div>
-                                    <textarea accept-charset="character_set" class="addresText" id="address" name="address" placeholder="آدرس دقیق محل را وارد نمایید - حداقل 100 کاراکتر" rows="2" style="font-size: 20px"></textarea>
+                                    <textarea accept-charset="character_set" class="addresText" id="address" name="address" placeholder="{{__('addPlaceByUser.آدرس دقیق محل را وارد نمایید - حداقل 100 کاراکتر')}}" rows="2" style="font-size: 20px"></textarea>
                                 </div>
                                 <input type="hidden" name="lat" id="lat" value="0">
                                 <input type="hidden" name="lng" id="lng" value="0">
 
                                 <div class="overMapButton">
-                                    <button class="btn btn-success mapButton" onclick="openMap()">محل را از روی نقشه مشخص کنید</button>
+                                    <button class="btn btn-success mapButton" onclick="openMap()">{{__('addPlaceByUser.محل را از روی نقشه مشخص کنید')}}</button>
                                 </div>
 
-                                <div class="mg-tp-5" style="font-size: 15px; text-align: center">موقعیت موردنظر را بر روی نقشه پیدا نموده و پین را بر روی آن قرار دهید. (کلیک در کامپیوتر و لمس نقشه در گوشی)</div>
+                                <div class="mg-tp-5" style="font-size: 15px; text-align: center">{{__('addPlaceByUser.موقعیت موردنظر را بر روی نقشه پیدا نموده و پین را بر روی آن قرار دهید. (کلیک در کامپیوتر و لمس نقشه در گوشی)')}}</div>
                             </div>
 
                             <div class="row inputFliedRow onlyForHotelsRestBoom ">
@@ -972,7 +204,7 @@
                                     <div class="icons stepInputIconRequired redStar"></div>
                                     <div class="stepInputBox">
                                         <div class="stepInputBoxText">
-                                            <div class="stepInputBoxRequired" style=" font-size: 13px; font-weight: bold;"> تلفن ثابت <span class="headerCategoryName"></span> </div>
+                                            <div class="stepInputBoxRequired" style=" font-size: 13px; font-weight: bold;"> {{__('تلفن ثابت')}} <span class="headerCategoryName"></span> </div>
                                         </div>
                                         <input class="stepInputBoxInput" id="fixPhone">
                                     </div>
@@ -981,7 +213,7 @@
                                 <div class="inputFliedRow inputFlied marginRight">
                                     <div class="stepInputBox">
                                         <div class="stepInputBoxText">
-                                            <div class="stepInputBoxRequired" style=" font-weight: bold; font-size: 13px;">تلفن همراه</div>
+                                            <div class="stepInputBoxRequired" style=" font-weight: bold; font-size: 13px;">{{__('تلفن همراه')}}</div>
                                         </div>
                                         <div>
                                             <input class="stepInputBoxInput" id="phone" placeholder="09xxxxxxxxx" style="text-align: right; padding-right: 15px">
@@ -989,13 +221,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="stepNotice onlyForHotelsRestBoom">شماره را همانگونه که با موبایل خود تماس می گیرید وارد نمایید. در صورت وجود بیش از یک شماره با استفاده از - شماره ها را جدا نمایید</div>
+                            <div class="stepNotice onlyForHotelsRestBoom">{{__('addPlaceByUser.شماره را همانگونه که با موبایل خود تماس می گیرید وارد نمایید. در صورت وجود بیش از یک شماره با استفاده از - شماره ها را جدا نمایید')}}</div>
 
                             <div class="row inputFliedRow onlyForHotelsRest" style="margin-top: 20px;">
                                 <div class="inputFliedRow inputFlied">
                                     <div class="stepInputBox">
                                         <div class="stepInputBoxText">
-                                            <div class="stepInputBoxRequired">سایت</div>
+                                            <div class="stepInputBoxRequired">{{__('سایت')}}</div>
                                         </div>
                                         <input class="stepInputBoxInput" id="website" type="url">
                                     </div>
@@ -1003,7 +235,7 @@
                                 <div class="inputFliedRow inputFlied marginRight">
                                     <div class="stepInputBox">
                                         <div class="stepInputBoxText">
-                                            <div class="stepInputBoxRequired">ایمیل</div>
+                                            <div class="stepInputBoxRequired">{{__('ایمیل')}}</div>
                                         </div>
                                         <input class="stepInputBoxInput" id="email" type="email">
                                     </div>
@@ -1019,7 +251,7 @@
                             <div class="inputBody_1 inputBody">
                                 @foreach($kindPlace['amaken']['features'] as $kind)
                                     <div class="listItem">
-                                        <div class="step5Title">{{$kind->name}}</div>
+                                        <div class="step5Title">{{__('amaken.'.$kind->name)}}</div>
                                         <div class="subListItem">
                                             @foreach($kind->subFeat as $sub)
                                                 <div class="detailListItem">
@@ -1027,7 +259,7 @@
 
                                                         <label class="checkBoxDiv">
                                                             <input id="amaken_{{$sub->id}}" name="amakenFeature[]" value="{{$sub->id}}" type="checkbox">
-                                                            {{$sub->name}}
+                                                            {{__('amaken.'. $sub->name)}}
                                                             <span class="checkmark"></span>
                                                         </label>
                                                     </div>
@@ -1041,12 +273,12 @@
                             <div class="inputBody_3 inputBody">
 
                                 <div class="listItem">
-                                    <div class="step5Title">نوع رستوران</div>
+                                    <div class="step5Title">{{__('restaurant.نوع رستوران')}}</div>
                                     <div class="subListItem">
                                         <div class="detailListItem">
                                             <select class="selectInput" id="restaurantKind">
-                                                <option value="rest">رستوران</option>
-                                                <option value="fastfood">فست فود</option>
+                                                <option value="rest">{{__('restaurant.رستوران')}}</option>
+                                                <option value="fastfood">{{__('restaurant.فست فود')}}</option>
                                             </select>
                                         </div>
                                     </div>
@@ -1054,13 +286,13 @@
 
                                 @foreach($kindPlace['restaurant']['features'] as $kind)
                                     <div class="listItem">
-                                        <div class="step5Title">{{$kind->name}}</div>
+                                        <div class="step5Title">{{__('restaurant.'.$kind->name)}}</div>
                                         <div class="subListItem">
                                             @foreach($kind->subFeat as $sub)
                                                 <div class="detailListItem">
                                                     <label class="checkBoxDiv">
                                                         <input id="amaken_{{$sub->id}}" name="restaurantFeature[]" value="{{$sub->id}}" type="checkbox">
-                                                        {{$sub->name}}
+                                                        {{__('restaurant.'.$sub->name)}}
                                                         <span class="checkmark"></span>
                                                     </label>
                                                 </div>
@@ -1075,27 +307,26 @@
                                 <div class="listItem listItemHotelKind" style="display: flex">
                                     <div style="display: flex; align-items: center">
                                         <div class="icons stepInputIconRequired redStar"></div>
-                                        <div class="step5Title" style="width: auto;">نوع اقامتگاه</div>
+                                        <div class="step5Title" style="width: auto;">{{__('hotel.نوع اقامتگاه')}}</div>
                                     </div>
                                     <div class="subListItem">
                                         <div class="detailListItem">
                                             <select name="hotelKind" id="hotelKind" class="selectInput" onchange="changHotelKind(this.value)">
                                                 <option value="0">...</option>
-                                                <option value="1">هتل</option>
-                                                <option value="2">هتل آپارتمان</option>
-                                                <option value="3">مهمان سرا</option>
-                                                <option value="4">ویلا</option>
-                                                <option value="5">متل</option>
-                                                <option value="6">مجتمع تفریحی</option>
-                                                <option value="7">پانسیون</option>
-                                                <option value="8">بوم گردی</option>
+                                                <option value="1">{{__('hotel.هتل')}}</option>
+                                                <option value="2">{{__('hotel.هتل آپارتمان')}}</option>
+                                                <option value="3">{{__('hotel.مهمان سرا')}}</option>
+                                                <option value="4">{{__('hotel.ویلا')}}</option>
+                                                <option value="5">{{__('hotel.متل')}}</option>
+                                                <option value="6">{{__('hotel.مجتمع تفریحی')}}</option>
+                                                <option value="7">{{__('hotel.پانسیون')}}</option>
                                             </select>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div id="hotelRate" class="listItem" style="display: none">
-                                    <div class="step5Title">هتل چند ستاره است؟</div>
+                                    <div class="step5Title">{{__('addPlaceByUser.هتل چند ستاره است؟')}}</div>
                                     <div class="subListItem">
                                         <div class="detailListItem">
                                             <select name="hotelStar" id="hotelStar" class="selectInput">
@@ -1111,13 +342,13 @@
 
                                 @foreach($kindPlace['hotel']['features'] as $kind)
                                     <div class="listItem">
-                                        <div class="step5Title">{{$kind->name}}</div>
+                                        <div class="step5Title">{{__('hotel.'.$kind->name)}}</div>
                                         <div class="subListItem">
                                             @foreach($kind->subFeat as $sub)
                                                 <div class="detailListItem">
                                                     <label class="checkBoxDiv">
                                                         <input id="amaken_{{$sub->id}}" name="hotelFeature[]" value="{{$sub->id}}" type="checkbox">
-                                                        {{$sub->name}}
+                                                        {{__('hotel.'.$sub->name)}}
                                                         <span class="checkmark"></span>
                                                     </label>
                                                 </div>
@@ -1129,13 +360,13 @@
 
                             <div class="inputBody_10_sanaye inputBody">
                                 <div class="listItem">
-                                    <div class="step5Title">نوع</div>
+                                    <div class="step5Title">{{__('handicrafts.نوع')}}</div>
                                     <div class="subListItem">
 
                                         <div class="detailListItem">
                                             <label class="checkBoxDiv">
                                                 <input id="sanaye_1" name="sanayeFeature[]" value="jewelry" type="checkbox">
-                                                زیورآلات
+                                                {{__('handicrafts.زیورآلات')}}
                                                 <span class="checkmark"></span>
                                             </label>
                                         </div>
@@ -1143,21 +374,21 @@
 
                                             <label class="checkBoxDiv">
                                                 <input id="sanaye_2" name="sanayeFeature[]" value="cloth" type="checkbox">
-                                                پارچه و پوشیدنی
+                                                {{__('handicrafts.پارچه و پوشیدنی')}}
                                                 <span class="checkmark"></span>
                                             </label>
                                         </div>
                                         <div class="detailListItem">
                                             <label class="checkBoxDiv">
                                                 <input id="sanaye_3" name="sanayeFeature[]" value="decorative" type="checkbox">
-                                                لوازم تزئینی
+                                                {{__('handicrafts.لوازم تزئینی')}}
                                                 <span class="checkmark"></span>
                                             </label>
                                         </div>
                                         <div class="detailListItem">
                                             <label class="checkBoxDiv">
                                                 <input id="sanaye_4" name="sanayeFeature[]" value="applied" type="checkbox">
-                                                لوازم کاربردی منزل
+                                                {{__('handicrafts.لوازم کاربردی منزل')}}
                                                 <span class="checkmark"></span>
                                             </label>
                                         </div>
@@ -1166,12 +397,12 @@
                                 </div>
 
                                 <div class="listItem">
-                                    <div class="step5Title">سبک</div>
+                                    <div class="step5Title">{{__('handicrafts.سبک')}}</div>
                                     <div class="subListItem">
                                         <div class="detailListItem">
                                             <label class="checkBoxDiv">
                                                 <input name="sanayeFeature[]" value="style_1" type="checkbox">
-                                                سنتی
+                                                {{__('handicrafts.سنتی')}}
                                                 <span class="checkmark"></span>
                                             </label>
                                         </div>
@@ -1179,7 +410,7 @@
 
                                             <label class="checkBoxDiv">
                                                 <input name="sanayeFeature[]" value="style_2" type="checkbox">
-                                                مدرن
+                                                {{__('handicrafts.مدرن')}}
                                                 <span class="checkmark"></span>
                                             </label>
 
@@ -1187,7 +418,7 @@
                                         <div class="detailListItem">
                                             <label class="checkBoxDiv">
                                                 <input name="sanayeFeature[]" value="style_3" type="checkbox">
-                                                تلفیقی
+                                                {{__('handicrafts.تلفیقی')}}
                                                 <span class="checkmark"></span>
                                             </label>
                                         </div>
@@ -1202,7 +433,7 @@
 
                                             <label class="checkBoxDiv">
                                                 <input name="sanayeFeature[]" value="fragile" type="checkbox">
-                                                شکستنی
+                                                {{__('handicrafts.شکستنی')}}
                                                 <span class="checkmark"></span>
                                             </label>
 
@@ -1212,14 +443,14 @@
                                 </div>
 
                                 <div class="listItem">
-                                    <div class="step5Title">ابعاد</div>
+                                    <div class="step5Title">{{__('handicrafts.ابعاد')}}</div>
                                     <div class="subListItem">
 
                                         <div class="detailListItem">
 
                                             <label class="checkBoxDiv">
                                                 <input name="sizeSanaye" value="1" type="radio">
-                                                کوچک
+                                                {{__('handicrafts.کوچک')}}
                                                 <span class="checkmark"></span>
                                             </label>
 
@@ -1227,7 +458,7 @@
                                         <div class="detailListItem">
                                             <label class="checkBoxDiv">
                                                 <input name="sizeSanaye" value="2" type="radio">
-                                                متوسط
+                                                {{__('handicrafts.متوسط')}}
                                                 <span class="checkmark"></span>
                                             </label>
                                         </div>
@@ -1235,7 +466,7 @@
 
                                             <label class="checkBoxDiv">
                                                 <input name="sizeSanaye" value="3" type="radio">
-                                                بزرگ
+                                                {{__('handicrafts.بزرگ')}}
                                                 <span class="checkmark"></span>
                                             </label>
 
@@ -1245,13 +476,13 @@
                                 </div>
 
                                 <div class="listItem">
-                                    <div class="step5Title">وزن</div>
+                                    <div class="step5Title">{{__('handicrafts.وزن')}}</div>
                                     <div class="subListItem">
 
                                         <div class="detailListItem">
                                             <label class="checkBoxDiv">
                                                 <input name="weiSanaye" value="1" type="radio">
-                                                سبک
+                                                {{__('handicrafts.سبک')}}
                                                 <span class="checkmark"></span>
                                             </label>
                                         </div>
@@ -1259,7 +490,7 @@
 
                                             <label class="checkBoxDiv">
                                                 <input name="weiSanaye" value="2" type="radio">
-                                                متوسط
+                                                {{__('handicrafts.متوسط')}}
                                                 <span class="checkmark"></span>
                                             </label>
 
@@ -1268,7 +499,7 @@
 
                                             <label class="checkBoxDiv">
                                                 <input name="weiSanaye" value="3" type="radio">
-                                                سنگین
+                                                {{__('handicrafts.سنگین')}}
                                                 <span class="checkmark"></span>
                                             </label>
 
@@ -1278,13 +509,13 @@
                                 </div>
 
                                 <div class="listItem">
-                                    <div class="step5Title">کلاس قیمتی</div>
+                                    <div class="step5Title">{{__('handicrafts.کلاس قیمتی')}}</div>
                                     <div class="subListItem">
 
                                         <div class="detailListItem">
                                             <label class="checkBoxDiv">
                                                 <input name="priceSanaye" value="1" type="radio">
-                                                ارزان
+                                                {{__('handicrafts.ارزان')}}
                                                 <span class="checkmark"></span>
                                             </label>
 
@@ -1293,7 +524,7 @@
 
                                             <label class="checkBoxDiv">
                                                 <input name="priceSanaye" value="2" type="radio">
-                                                متوسط
+                                                {{__('handicrafts.متوسط')}}
                                                 <span class="checkmark"></span>
                                             </label>
 
@@ -1302,7 +533,7 @@
 
                                             <label class="checkBoxDiv">
                                                 <input name="priceSanaye" value="3" type="radio">
-                                                گران
+                                                {{__('handicrafts.گران')}}
                                                 <span class="checkmark"></span>
                                             </label>
 
@@ -1316,48 +547,48 @@
                             <div class="inputBody_10_soghat inputBody">
 
                                 <div class="listItem">
-                                    <div class="step5Title">مزه</div>
+                                    <div class="step5Title">{{__('souvenir.مزه')}}</div>
                                     <div class="subListItem">
 
                                         <div class="detailListItem">
                                             <label class="checkBoxDiv">
                                                 <input name="soghatFeatures[]" value="torsh" type="checkbox">
-                                                ترش
+                                                {{__('souvenir.ترش')}}
                                                 <span class="checkmark"></span>
                                             </label>
                                         </div>
                                         <div class="detailListItem">
                                             <label class="checkBoxDiv">
                                                 <input name="soghatFeatures[]" value="shirin" type="checkbox">
-                                                شیرین
+                                                {{__('souvenir.شیرین')}}
                                                 <span class="checkmark"></span>
                                             </label>
                                         </div>
                                         <div class="detailListItem">
                                             <label class="checkBoxDiv">
                                                 <input name="soghatFeatures[]" value="talkh" type="checkbox">
-                                                تلخ
+                                                {{__('souvenir.تلخ')}}
                                                 <span class="checkmark"></span>
                                             </label>
                                         </div>
                                         <div class="detailListItem">
                                             <label class="checkBoxDiv">
                                                 <input name="soghatFeatures[]" value="malas" type="checkbox">
-                                                ملس
+                                                {{__('souvenir.ملس')}}
                                                 <span class="checkmark"></span>
                                             </label>
                                         </div>
                                         <div class="detailListItem">
                                             <label class="checkBoxDiv">
                                                 <input name="soghatFeatures[]" value="shor" type="checkbox">
-                                                شور
+                                                {{__('souvenir.شور')}}
                                                 <span class="checkmark"></span>
                                             </label>
                                         </div>
                                         <div class="detailListItem">
                                             <label class="checkBoxDiv">
                                                 <input name="soghatFeatures[]" value="tond" type="checkbox">
-                                                تند
+                                                {{__('souvenir.تند')}}
                                                 <span class="checkmark"></span>
                                             </label>
                                         </div>
@@ -1366,27 +597,27 @@
                                 </div>
 
                                 <div class="listItem">
-                                    <div class="step5Title">ابعاد</div>
+                                    <div class="step5Title">{{__('souvenir.ابعاد')}}</div>
                                     <div class="subListItem">
 
                                         <div class="detailListItem">
                                             <label class="checkBoxDiv">
                                                 <input name="sizeSoghat" value="1" type="radio">
-                                                کوچک
+                                                {{__('souvenir.کوچک')}}
                                                 <span class="checkmark"></span>
                                             </label>
                                         </div>
                                         <div class="detailListItem">
                                             <label class="checkBoxDiv">
                                                 <input name="sizeSoghat" value="2" type="radio">
-                                                متوسط
+                                                {{__('souvenir.متوسط')}}
                                                 <span class="checkmark"></span>
                                             </label>
                                         </div>
                                         <div class="detailListItem">
                                             <label class="checkBoxDiv">
                                                 <input name="sizeSoghat" value="3" type="radio">
-                                                بزرگ
+                                                {{__('souvenir.بزرگ')}}
                                                 <span class="checkmark"></span>
                                             </label>
                                         </div>
@@ -1395,26 +626,26 @@
                                 </div>
 
                                 <div class="listItem">
-                                    <div class="step5Title">وزن</div>
+                                    <div class="step5Title">{{__('souvenir.وزن')}}</div>
                                     <div class="subListItem">
                                         <div class="detailListItem">
                                             <label class="checkBoxDiv">
                                                 <input name="weiSoghat" value="1" type="radio">
-                                                سبک
+                                                {{__('souvenir.سبک')}}
                                                 <span class="checkmark"></span>
                                             </label>
                                         </div>
                                         <div class="detailListItem">
                                             <label class="checkBoxDiv">
                                                 <input name="weiSoghat" value="2" type="radio">
-                                                متوسط
+                                                {{__('souvenir.متوسط')}}
                                                 <span class="checkmark"></span>
                                             </label>
                                         </div>
                                         <div class="detailListItem">
                                             <label class="checkBoxDiv">
                                                 <input name="weiSoghat" value="3" type="radio">
-                                                سنگین
+                                                {{__('souvenir.سنگین')}}
                                                 <span class="checkmark"></span>
                                             </label>
                                         </div>
@@ -1422,27 +653,27 @@
                                 </div>
 
                                 <div class="listItem">
-                                    <div class="step5Title">کلاس قیمتی</div>
+                                    <div class="step5Title">{{__('souvenir.کلاس قیمتی')}}</div>
                                     <div class="subListItem">
 
                                         <div class="detailListItem">
                                             <label class="checkBoxDiv">
                                                 <input name="priceSoghat" value="1" type="radio">
-                                                ارزان
+                                                {{__('souvenir.ارزان')}}
                                                 <span class="checkmark"></span>
                                             </label>
                                         </div>
                                         <div class="detailListItem">
                                             <label class="checkBoxDiv">
                                                 <input name="priceSoghat" value="2" type="radio">
-                                                متوسط
+                                                {{__('souvenir.متوسط')}}
                                                 <span class="checkmark"></span>
                                             </label>
                                         </div>
                                         <div class="detailListItem">
                                             <label class="checkBoxDiv">
                                                 <input name="priceSoghat" value="3" type="radio">
-                                                گران
+                                                {{__('souvenir.گران')}}
                                                 <span class="checkmark"></span>
                                             </label>
                                         </div>
@@ -1454,37 +685,37 @@
                             <div class="inputBody_11 inputBody">
 
                                 <div class="listItem">
-                                    <div class="step5Title">نوع غذا</div>
+                                    <div class="step5Title">{{__('food.نوع غذا')}}</div>
                                     <div class="subListItem">
                                         <div class="detailListItem">
                                             <select id="foodKind" name="foodKind"  class="selectInput">
-                                                <option value="1">چلوخورش</option>
-                                                <option value="2">خوراک</option>
-                                                <option value="8">سوپ و آش</option>
-                                                <option value="3">سالاد و پیش غذا</option>
-                                                <option value="4">ساندویچ</option>
-                                                <option value="5" selected="">کباب</option>
-                                                <option value="6">دسر</option>
-                                                <option value="7">نوشیدنی</option>
+                                                <option value="1">{{__('food.چلوخورش')}}</option>
+                                                <option value="2">{{__('food.خوراک')}}</option>
+                                                <option value="8">{{__('food.سوپ و آش')}}</option>
+                                                <option value="3">{{__('food.سالاد و پیش غذا')}}</option>
+                                                <option value="4">{{__('food.ساندویچ')}}</option>
+                                                <option value="5" selected="">{{__('food.کباب')}}</option>
+                                                <option value="6">{{__('food.دسر')}}</option>
+                                                <option value="7">{{__('food.نوشیدنی')}}</option>
                                             </select>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="listItem">
-                                    <div class="step5Title">غذا سرد است و یا گرم؟</div>
+                                    <div class="step5Title">{{__('food.غذا سرد است و یا گرم؟')}}</div>
                                     <div class="subListItem">
                                         <div class="detailListItem">
                                             <label class="checkBoxDiv">
                                                 <input name="hotFood" value="cold" type="radio">
-                                                سرد
+                                                {{__('food.سرد')}}
                                                 <span class="checkmark"></span>
                                             </label>
                                         </div>
                                         <div class="detailListItem">
                                             <label class="checkBoxDiv">
                                                 <input name="hotFood" value="hot" type="radio">
-                                                گرم
+                                                {{__('food.گرم')}}
                                                 <span class="checkmark"></span>
                                             </label>
                                         </div>
@@ -1492,26 +723,26 @@
                                 </div>
 
                                 <div class="listItem">
-                                    <div class="step5Title"> مناسب چه افرادی است؟</div>
+                                    <div class="step5Title">{{__('addPlaceByUser.مناسب چه افرادی است؟')}}</div>
                                     <div class="subListItem">
                                         <div class="detailListItem">
                                             <label class="checkBoxDiv">
                                                 <input name="foodFeatures[]" value="vegetarian" type="checkbox">
-                                                افراد گیاه‌خوار
+                                                {{__('food.افراد گیاه‌خوار')}}
                                                 <span class="checkmark"></span>
                                             </label>
                                         </div>
                                         <div class="detailListItem">
                                             <label class="checkBoxDiv">
                                                 <input name="foodFeatures[]" value="vegan" type="checkbox">
-                                                وگان
+                                                {{__('food.وگان')}}
                                                 <span class="checkmark"></span>
                                             </label>
                                         </div>
                                         <div class="detailListItem">
                                             <label class="checkBoxDiv">
                                                 <input name="foodFeatures[]" value="diabet" type="checkbox">
-                                                افراد مبتلا به دیابت
+                                                {{__('food.افراد مبتلا به دیابت')}}
                                                 <span class="checkmark"></span>
                                             </label>
                                         </div>
@@ -1520,45 +751,45 @@
 
                                 <div class="listItem">
                                     <div class="step5Title" style="display: flex; align-items: center;">
-                                        مواد لازم
+                                        {{__('مواد لازم')}}
                                     </div>
                                     <div id="materialRow" class="subListItem">
                                         <div class="row" style="display: flex; justify-content: space-around; direction: ltr">
                                             <div class="matInputTopDiv">
                                                 <div class="stepInputBox">
-                                                    <input class="stepInputBoxInput stepInputBoxMat" id="materialVol_1" style="text-align: right; padding-right: 10px;" placeholder="مقدار" onchange="addNewRow(1)">
+                                                    <input class="stepInputBoxInput stepInputBoxMat" id="materialVol_1" style="text-align: right; padding-right: 10px;" placeholder="{{__('مقدار')}}" onchange="addNewRow(1)">
                                                 </div>
                                             </div>
 
                                             <div class="matInputTopDiv">
                                                 <div class="stepInputBox ">
-                                                    <input class="stepInputBoxInput stepInputBoxMat" id="materialName_1" style="text-align: right; padding-right: 10px;" placeholder="چه چیزی نیاز است" onkeyup="changeMaterialName(this, 1)" onchange="addNewRow(1)">
+                                                    <input class="stepInputBoxInput stepInputBoxMat" id="materialName_1" style="text-align: right; padding-right: 10px;" placeholder="{{__('addPlaceByUser.چه چیزی نیاز است')}}" onkeyup="changeMaterialName(this, 1)" onchange="addNewRow(1)">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row" style="display: flex; justify-content: space-around; direction: ltr">
                                             <div class="matInputTopDiv">
                                                 <div class="stepInputBox ">
-                                                    <input class="stepInputBoxInput stepInputBoxMat" id="materialVol_2" style="text-align: right; padding-right: 10px;" placeholder="مقدار" onchange="addNewRow(2)">
+                                                    <input class="stepInputBoxInput stepInputBoxMat" id="materialVol_2" style="text-align: right; padding-right: 10px;" placeholder="{{__('مقدار')}}" onchange="addNewRow(2)">
                                                 </div>
                                             </div>
 
                                             <div class="matInputTopDiv">
                                                 <div class="stepInputBox ">
-                                                    <input class="stepInputBoxInput stepInputBoxMat" id="materialName_2" style="text-align: right; padding-right: 10px;" placeholder="چه چیزی نیاز است" onkeyup="changeMaterialName(this, 2)" onchange="addNewRow(2)">
+                                                    <input class="stepInputBoxInput stepInputBoxMat" id="materialName_2" style="text-align: right; padding-right: 10px;" placeholder="{{__('addPlaceByUser.چه چیزی نیاز است')}}" onkeyup="changeMaterialName(this, 2)" onchange="addNewRow(2)">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row" style="display: flex; justify-content: space-around; direction: ltr">
                                             <div class="matInputTopDiv">
                                                 <div class="stepInputBox ">
-                                                    <input class="stepInputBoxInput stepInputBoxMat" id="materialVol_3" style="text-align: right; padding-right: 10px;" placeholder="مقدار" onchange="addNewRow(3)">
+                                                    <input class="stepInputBoxInput stepInputBoxMat" id="materialVol_3" style="text-align: right; padding-right: 10px;" placeholder="{{__('مقدار')}}" onchange="addNewRow(3)">
                                                 </div>
                                             </div>
 
                                             <div class="matInputTopDiv">
                                                 <div class="stepInputBox ">
-                                                    <input class="stepInputBoxInput stepInputBoxMat" id="materialName_3" style="text-align: right; padding-right: 10px;" placeholder="چه چیزی نیاز است" onkeyup="changeMaterialName(this, 3)" onchange="addNewRow(3)">
+                                                    <input class="stepInputBoxInput stepInputBoxMat" id="materialName_3" style="text-align: right; padding-right: 10px;" placeholder="{{__('addPlaceByUser.چه چیزی نیاز است')}}" onkeyup="changeMaterialName(this, 3)" onchange="addNewRow(3)">
                                                 </div>
                                             </div>
                                         </div>
@@ -1567,9 +798,9 @@
                                 </div>
 
                                 <div class="listItem">
-                                    <div class="step5Title" style="margin-bottom: 0px">دستور پخت</div>
+                                    <div class="step5Title" style="margin-bottom: 0px">{{__('food.دستور پخت')}}</div>
                                     <div class="subListItem" style="width: 100%;">
-                                        <textarea class="addresText" name="recipes" id="recipes" rows="5" placeholder=" دستور پخت را اینجا وارد کنید..." style="width: 100%; padding: 10px; font-size: 20px"> </textarea>
+                                        <textarea class="addresText" name="recipes" id="recipes" rows="5" placeholder="{{__('addPlaceByUser.دستور پخت را اینجا وارد کنید...')}}" style="width: 100%; padding: 10px; font-size: 20px"> </textarea>
                                     </div>
                                 </div>
 
@@ -1580,7 +811,7 @@
                                 <div class="listItem listItemHotelKind" style="display: flex">
                                     <div style="display: flex; align-items: center">
                                         <div class="icons stepInputIconRequired redStar"></div>
-                                        <div class="step5Title" style="width: auto">تعداد اتاق</div>
+                                        <div class="step5Title" style="width: auto; margin-bottom: 0px">{{__('تعداد اتاق')}}</div>
                                     </div>
                                     <div class="subListItem">
                                         <div class="detailListItem">
@@ -1591,13 +822,13 @@
 
                                 @foreach($kindPlace['boomgardy']['features'] as $kind)
                                     <div class="listItem">
-                                        <div class="step5Title">{{$kind->name}}</div>
+                                        <div class="step5Title">{{__('boomgardy.'.$kind->name)}}</div>
                                         <div class="subListItem">
                                             @foreach($kind->subFeat as $sub)
                                                 <div class="detailListItem">
                                                     <label class="checkBoxDiv">
                                                         <input id="amaken_{{$sub->id}}" name="boomgardyFeature[]" value="{{$sub->id}}" type="checkbox">
-                                                        {{$sub->name}}
+                                                        {{__('boomgardy.'.$sub->name)}}
                                                         <span class="checkmark"></span>
                                                     </label>
                                                 </div>
@@ -1611,7 +842,7 @@
                     </div>
 
                     <div class="step4 bodyOfSteps hidden" style="display: flex; flex-wrap: wrap; justify-content: space-around;">
-                        <textarea class="addresText" name="placedescription" id="placedescription" rows="10" style="width: 100%; font-size: 20px" placeholder="توضیحات خود با توجه به نمونه متن پایین وارد کنید." ></textarea>
+                        <textarea class="addresText" name="placedescription" id="placedescription" rows="10" style="width: 100%; font-size: 20px" placeholder="{{__('addPlaceByUser.توضیحات خود با توجه به نمونه متن پایین وارد کنید.')}}" ></textarea>
                         <div class="sampleDescription">
                             <div id="sampleText"></div>
                         </div>
@@ -1620,30 +851,30 @@
                     <div class="step5 bodyOfSteps hidden" style="display: flex; flex-wrap: wrap; justify-content: space-around;">
                         <div id="addNewPic" class="step6picBox">
                             <label for="newPicAddPlace" class="step6pic showOnMobile">
-                                <div class="step6plusText">اضافه کنید</div>
+                                <div class="step6plusText">{{__('addPlaceByUser.اضافه کنید')}}</div>
                                 <div class="icons plus2 step6plusIcon"></div>
                             </label>
                             <input id="newPicAddPlace" type="file" style="display: none" onchange="addPhotoInMobile(this)">
                             <div class="step6pic showOnPc" onclick="$('#dropModal').modal('show');">
-                                <div class="step6plusText">اضافه کنید</div>
+                                <div class="step6plusText">{{__('addPlaceByUser.اضافه کنید')}}</div>
                                 <div class="icons plus2 step6plusIcon"></div>
                             </div>
-                            <div class="step6picText">نام عکس</div>
+                            <div class="step6picText">{{__('addPlaceByUser.نام عکس')}}</div>
                         </div>
                     </div>
 
                     <div class="step6 bodyOfSteps hidden" style="display: flex; flex-wrap: wrap; justify-content: space-around; flex-direction: column; text-align: center">
-                        <div style="font-size: 20px; margin-top: 23px; text-align: center">
+                        <div id="step6MainTitle" style="font-size: 20px; margin-top: 23px; text-align: center">
                             پس از بررسی اطلاعات <span class="headerCategoryName" style="font-size: 20px !important;"></span> شما به لیست <span class="headerCategoryName" style="font-size: 20px !important;"></span> های ما اضافه خواهد شد.
                         </div>
-                        <a id="sampleLink" href="" target="_blank" style="font-size: 25px; margin-top: 15px;"></a>
+                        <a id="sampleLink" href="" target="_blank" style="font-size: 25px; margin-top: 15px; text-align: center"></a>
                     </div>
                 </div>
 
                 <div class="downBody">
-                    <button class="btn boxPreviousBtn" type="button" id="previousStep" onclick="changeSteps(-1)" style="display: none">بازگشت</button>
+                    <button class="btn boxPreviousBtn" type="button" id="previousStep" onclick="changeSteps(-1)" style="display: none">{{__('بازگشت')}}</button>
                     <div class="footerBox1"></div>
-                    <button class="btn boxNextBtn" type="button" id="nextStep" onclick="changeSteps(1)" >شروع</button>
+                    <button class="btn boxNextBtn" type="button" id="nextStep" onclick="changeSteps(1)" >{{__('شروع')}}</button>
                 </div>
             </div>
         </div>
@@ -1660,7 +891,7 @@
                 <!-- Modal footer -->
                 <div class="modal-footer" style="text-align: center">
                     <button class="btn btn-success" data-dismiss="modal">
-                        تایید
+                        {{__('تایید')}}
                     </button>
                 </div>
 
@@ -1681,8 +912,8 @@
                             <div id="dropzone" class="dropzone dragDropTextAddPlace"></div>
                         </div>
                         <div class="footerTextBoxAddPlace stFooter">
-                            <span>توجه نمایید که عکس‌ما می‌بایست در فرمت های رایج تصویر و با حداکثر سایز 500 مگابایت باشد. تصاویر پیش از انتشار توسط ما بازبینی می‌گردد. لطفاً از بارگزاری تصاویری که با قوانین سایت مغایرت دارند اجتناب کنید.</span>
-                            <span class="footerPolicyLink">صفحه مقررات</span>
+                            <span>{{__('توجه نمایید که عکس‌ما می‌بایست در فرمت های رایج تصویر و با حداکثر سایز 500 مگابایت باشد. تصاویر پیش از انتشار توسط ما بازبینی می‌گردد. لطفاً از بارگزاری تصاویری که با قوانین سایت مغایرت دارند اجتناب کنید.')}}</span>
+                            <span class="footerPolicyLink">{{__('صفحه مقررات')}}</span>
                         </div>
                     </div>
 
@@ -1691,7 +922,7 @@
                 <!-- Modal footer -->
                 <div class="modal-footer" style="text-align: center">
                     <button class="btn nextStepBtnTourCreation" data-dismiss="modal">
-                        تایید
+                        {{__('تایید')}}
                     </button>
                 </div>
 
@@ -1705,12 +936,13 @@
     <script defer>
         $(document).ready(function() {
             $('[data-toggle="tooltip"]').tooltip();
-            $("#name").farsiInput();
-            $("#address").farsiInput();
-            $("#recipes").farsiInput();
-            $("#material").farsiInput();
-            $("#placedescription").farsiInput();
-
+            @if(app()->getLocale() == 'fa')
+                $("#name").farsiInput();
+                $("#address").farsiInput();
+                $("#recipes").farsiInput();
+                $("#material").farsiInput();
+                $("#placedescription").farsiInput();
+            @endif
             autosize($('textarea'));
         });
     </script>
@@ -1718,81 +950,116 @@
     <script>
         let categories = [
             {
-                'name': 'بوم گردی',
+                'name': '{{__('بوم گردی')}}',
                 'kind': 'boomgardy',
                 'icon': 'hotel',
                 'id'  : 12,
                 'text' : 'اقامتگاه بوم گردی بابامیرزا واقع در روستای کاغذی، از توابع ابوزیدآباد شهرستان کاشان می‌باشد.این اقامتگاه اولین خانه ساخته شده در روستای کاغذی می‌باشد که متعلق به خان روستا بوده و قدمتی 220 ساله دارد فضای داخلی و بیرونی بنا نمایی از کاهگل داشته و تنور کاهگلی آن نیز در حیاط همچنان مورد استفاده قرار می‌گیرد.  ظرفیت کلی پذیرش مسافر در این مجموعه تا سقف 50 نفر بوده و تمامی اتاق‌های آن به صورت کف‌خواب است و در صورت نیاز لحاف و تشک در اختیار مهمانان قرار خواهد گرفت. اتاق‌های اقامتگاه دارای کرسی به عنوان سیستم گرمایشی و کولر به عنوان سیستم سرمایشی می‌باشند؛ همچنین آشپزخانه با امکاناتی همچون گازو یخچال در حیاط واقع شده و گردشگران می‌توانند به صورت مشترک از آن استفاده کنند.حیاط اقامتگاه 250متر بوده که کف آن سنگ فرش شده است. قسمت دیگری از حیاط به پارک ماشین‌ها اختصاص یافته که قابلیت گنجایش 5 ماشین در آن وجود دارد. در قسمت بیرونی اقامتگاه نیز میدان بسیار بزرگی قرار گرفته است که متعلق به همین اقامتگاه بوده و به عنوان پارکینگ مسقف، با ظرفیت 50 ماشین از آن استفاده می‌شود. در قسمتی دیگر از حیاط سکویی به وسعت 40 متر ساخته شده که به عنوان بهارخواب مورد استفاده قرار می‌گیرد و در شب‌های تابستان مکان مناسبی برای رصد آسمان شب است. کویر سیازگه، نخلستان چاه عروس، دریاچه نمک و قلعه کشایی از مکان دیدنی اطراف این اقامتگاه است.از دیگر خدمات ارائه شده در این مجموعه پرسنل مسلط به زبان انگلیسی و راهنمای تور برای گردشگران می‌باشد.حلیم بادمجان، کشک بادمجان، شیربرنج، پلو جوجه، کالاجوش، کاچی و آش محلی از جمله غذاهای سرو شده توسط اقامتگاه است. جاذبه‌های گردشگری اطراف به علت قرار گرفتن این اقامتگاه بوم گردی بر روی تپه‌ای بلند، حیاط و بام آن مشرف به زیبایی‌های اطراف روستا از جمله رمل، کوه و دشت می‌باشد.',
                 'sample': {
-                    'name': 'لیست تمامی بوم گردی ها',
+                    'name': '{{__('addPlaceByUser.لیست تمامی بوم گردی ها')}}',
                     'link': 'https://koochita.com/placeList/12/country'
-                }
+                },
+                'step3' : '{{__('addPlaceByUser.مهم ترین بخش ، توصیف بوم گردی است')}}',
+                'step3Under' : '{{__('addPlaceByUser.از بین گزینه های زیر، مواردی را که بوم گردی را توصیف می نماید اضافه کنید. سپاسگذاریم.')}}',
+                'step4' : '{{__('addPlaceByUser.اگر توضیحات خاصی در مورد بوم گردی دارید در این قسمت با ما در میان بگذارید')}}',
+                'step5' : '{{__('addPlaceByUser.اگر عکسی از بوم گردی دارید آن را بارگذاری نمایید')}}',
+                'step6' : '{{__('addPlaceByUser.پس از بررسی اطلاعات بوم گردی شما به لیست بوم گردی های ما اضافه خواهد شد.')}}',
             },
             {
-                'name': 'رستوران',
+                'name': '{{__('رستوران')}}',
                 'kind': 'restaurant',
                 'icon': 'restaurant',
                 'id'  : 3,
                 'text' : 'رستوران شهرزاد یکی از رستوران‌های لوکس و قدیمی اصفهانه که تزئینات نقاشی و آئینه کاری‌های سنتی وشیکی داره که فقط و فقط مخصوصه اصفهان و نصف جهانه. در این رستوران انواع غذاهای ایرانی و فرنگی سرو می‌شه و موقع نوش جان کردن غذات می‌تونی از موسیقی زنده هم لذت ببری.',
                 'sample': {
-                    'name': 'لیست تمامی رستوران ها',
+                    'name': '{{__('addPlaceByUser.لیست تمامی رستوران ها')}}',
                     'link': 'https://koochita.com/placeList/3/country'
-                }
+                },
+                'step3' : '{{__('addPlaceByUser.مهم ترین بخش ، توصیف رستوران است')}}',
+                'step3Under' : '{{__('addPlaceByUser.از بین گزینه های زیر، مواردی را که رستوران را توصیف می نماید اضافه کنید. سپاسگذاریم.')}}',
+                'step4' : '{{__('addPlaceByUser.اگر توضیحات خاصی در مورد رستوران دارید در این قسمت با ما در میان بگذارید')}}',
+                'step5' : '{{__('addPlaceByUser.اگر عکسی از رستوران دارید آن را بارگذاری نمایید')}}',
+                'step6' : '{{__('addPlaceByUser.پس از بررسی اطلاعات رستوران شما به لیست رستوران های ما اضافه خواهد شد.')}}',
             },
             {
-                'name': 'سوغات',
+                'name': '{{__('سوغات')}}',
                 'icon': 'soghat',
                 'kind': 'soghat',
                 'id'  : 10,
                 'text' : 'خیلی‌ها معتقدن هنر مینیاتور از چین وارد ایران شده. در واقع این هنر در دوره صفویه پیشرفت کرد و از مینیاتوری چینی خیلی فاصله گرفت. اکثر هنرمندهای مینیاتور از رنگ دست ساز برای کارهاشون استفاده میکنن. آبرنگ روحي، سياه قلم رنگي، سفيد قلم و زيرروغني از شیوه‌های مختلف این هنر هستن. در بناهای تاریخی اصفهان مثل كاخ‌هاي عالي قاپو و چهلستون و هشت بهشت و ... میتونید تزئینات مینیاتوری رو به خوبی ببینید. اگر به دنبال مینیاتورهای خوب برای سوغاتی هستید، بهتره به خیابون چهارباغ برید.',
                 'sample': {
-                    'name': 'لیست تمامی سوغات',
+                    'name': '{{__('addPlaceByUser.لیست تمامی سوغات')}}',
                     'link': 'https://koochita.com/placeList/10/country'
-                }
+                },
+                'step3' : '{{__('addPlaceByUser.مهم ترین بخش ، توصیف سوغات است')}}',
+                'step3Under' : '{{__('addPlaceByUser.از بین گزینه های زیر، مواردی را که سوغات را توصیف می نماید اضافه کنید. سپاسگذاریم.')}}',
+                'step4' : '{{__('addPlaceByUser.اگر توضیحات خاصی در مورد سوغات دارید در این قسمت با ما در میان بگذارید')}}',
+                'step5' : '{{__('addPlaceByUser.اگر عکسی از سوغات دارید آن را بارگذاری نمایید')}}',
+                'step6' : '{{__('addPlaceByUser.پس از بررسی اطلاعات سوغات شما به لیست سوغات های ما اضافه خواهد شد.')}}',
             },
             {
-                'name': 'صنایع دستی',
+                'name': '{{__('صنایع دستی')}}',
                 'kind': 'sanaye',
                 'icon': 'sanaye',
                 'id'  : 10,
                 'text' : 'خیلی‌ها معتقدن هنر مینیاتور از چین وارد ایران شده. در واقع این هنر در دوره صفویه پیشرفت کرد و از مینیاتوری چینی خیلی فاصله گرفت. اکثر هنرمندهای مینیاتور از رنگ دست ساز برای کارهاشون استفاده میکنن. آبرنگ روحي، سياه قلم رنگي، سفيد قلم و زيرروغني از شیوه‌های مختلف این هنر هستن. در بناهای تاریخی اصفهان مثل كاخ‌هاي عالي قاپو و چهلستون و هشت بهشت و ... میتونید تزئینات مینیاتوری رو به خوبی ببینید. اگر به دنبال مینیاتورهای خوب برای سوغاتی هستید، بهتره به خیابون چهارباغ برید.',
                 'sample': {
-                    'name': 'لیست تمامی صنایع دستی',
+                    'name': '{{__('addPlaceByUser.لیست تمامی صنایع دستی')}}',
                     'link': 'https://koochita.com/placeList/10/country'
-                }
+                },
+                'step3' : '{{__('addPlaceByUser.مهم ترین بخش ، توصیف صنایع دستی است')}}',
+                'step3Under' : '{{__('addPlaceByUser.از بین گزینه های زیر، مواردی را که صنایع دستی را توصیف می نماید اضافه کنید. سپاسگذاریم.')}}',
+                'step4' : '{{__('addPlaceByUser.اگر توضیحات خاصی در مورد صنایع دستی دارید در این قسمت با ما در میان بگذارید')}}',
+                'step5' : '{{__('addPlaceByUser.اگر عکسی از صنایع دستی دارید آن را بارگذاری نمایید')}}',
+                'step6' : '{{__('addPlaceByUser.پس از بررسی اطلاعات صنایع دستی شما به لیست صنایع دستی های ما اضافه خواهد شد.')}}',
             },
             {
-                'name': 'غذای محلی',
+                'name': '{{__('غذای محلی')}}',
                 'icon': 'ghazamahali',
                 'kind': 'ghazamahali',
                 'id'  : 11,
                 'text' : 'غذای محلی مد نظر خود را به صورت مختصر توضیح دهید. سعی کنید ابتدا آن را توصیف کنید، در مورد تاریخچه آن مختصری بنویسید، مزه آن را شرح دهید. راحت باشید و کاملا ساده بنویسید.',
                 'sample': {
-                    'name': 'لیست تمامی غذاهای محلی',
+                    'name': '{{__('addPlaceByUser.لیست تمامی غذاهای محلی')}}',
                     'link': 'https://koochita.com/placeList/11/country'
-                }
+                },
+                'step3' : '{{__('addPlaceByUser.مهم ترین بخش ، توصیف غذای محلی است')}}',
+                'step3Under' : '{{__('addPlaceByUser.از بین گزینه های زیر، مواردی را که غذای محلی را توصیف می نماید اضافه کنید. سپاسگذاریم.')}}',
+                'step4' : '{{__('addPlaceByUser.اگر توضیحات خاصی در مورد غذای محلی دارید در این قسمت با ما در میان بگذارید')}}',
+                'step5' : '{{__('addPlaceByUser.اگر عکسی از غذای محلی دارید آن را بارگذاری نمایید')}}',
+                'step6' : '{{__('addPlaceByUser.پس از بررسی اطلاعات غذای محلی شما به لیست غذای محلی های ما اضافه خواهد شد.')}}',
             },
             {
-                'name': 'مرکز اقامتی',
+                'name': '{{__('مرکز اقامتی')}}',
                 'kind': 'hotel',
                 'icon': 'hotel',
                 'id'  : 4,
                 'text' : 'مهمانسرای ورزش شهر زیبا و دیدنی همدان از اقامتگاه‌های خوب این شهره که مجهز به امکانات رفاهی شایسته‌ای برای رفاه مسافران و مهمانان عزیزه. ورزشکاران محترم و تیم‌های ورزشی می تونن با اقامات توی این مهمانسرا علاوه بر استراحت از امکانات ویژه اون هم بهره ببرند. این مهمانسرا که در نزدیکی ورزشگاه شهید حاجی بابایی افتتاح شده، دارای چندین سالن مجزا و استاندار از جمله بدنسازی، زمین چمن و سالن‌های چندمنظوره انواع رشته‌های ورزشی هست که آماده میزبانی اقشار مختلف و به طور ویژه ورزشکاران عزیز هست.',
                 'sample': {
-                'name': 'لیست تمامی هتل ها',
+                'name': '{{__('addPlaceByUser.لیست تمامی هتل ها')}}',
                 'link': 'https://koochita.com/placeList/4/country'
-                }
+                },
+                'step3' : '{{__('addPlaceByUser.مهم ترین بخش ، توصیف مرکز اقامتی است')}}',
+                'step3Under' : '{{__('addPlaceByUser.از بین گزینه های زیر، مواردی را که مرکز اقامتی را توصیف می نماید اضافه کنید. سپاسگذاریم.')}}',
+                'step4' : '{{__('addPlaceByUser.اگر توضیحات خاصی در مورد مرکز اقامتی دارید در این قسمت با ما در میان بگذارید')}}',
+                'step5' : '{{__('addPlaceByUser.اگر عکسی از مرکز اقامتی دارید آن را بارگذاری نمایید')}}',
+                'step6' : '{{__('addPlaceByUser.پس از بررسی اطلاعات مرکز اقامتی شما به لیست مرکز اقامتی های ما اضافه خواهد شد.')}}',
             },
             {
-                'name': 'جاذبه',
+                'name': '{{__('جاذبه')}}',
                 'kind': 'atraction',
                 'icon': 'atraction',
                 'id'  : 1,
                 'text' : 'دریاچه سد زاینده رود روی رودخونه زاینده رود یا زنده رود و در منطقه کوهستانی آبادچی،کنار شهر چادگان قرار گرفته. اطراف این سد هم امکانات خوبی برای مسافرها وجود داره. اطراف اون هم پر از فضای سبز و درخت‌های میوه هست که لذت کنار آب بودن رو دو برابر می‌کنه. اینجا میشه قایقرانی و ماهی گیری کرد. به خاطر آب و هوای این منطقه ماهی قزل‌آلای رنگین کمان، کپور و زردک رو میشه اینجا صید کرد. ',
                 'sample': {
-                    'name': 'لیست تمامی جاذبه ها',
+                    'name': '{{__('addPlaceByUser.لیست تمامی جاذبه ها')}}',
                     'link': 'https://koochita.com/placeList/1/country'
-                }
+                },
+                'step3' : '{{__('addPlaceByUser.مهم ترین بخش ، توصیف جاذبه است')}}',
+                'step3Under' : '{{__('addPlaceByUser.از بین گزینه های زیر، مواردی را که جاذبه را توصیف می نماید اضافه کنید. سپاسگذاریم.')}}',
+                'step4' : '{{__('addPlaceByUser.اگر توضیحات خاصی در مورد جاذبه دارید در این قسمت با ما در میان بگذارید')}}',
+                'step5' : '{{__('addPlaceByUser.اگر عکسی از جاذبه دارید آن را بارگذاری نمایید')}}',
+                'step6' : '{{__('addPlaceByUser.پس از بررسی اطلاعات جاذبه شما به لیست جاذبه های ما اضافه خواهد شد.')}}',
             },
         ];
         let selectedCategory = null;
@@ -1803,7 +1070,7 @@
         let myDropzone = new Dropzone("div#dropzone", {
             url: '{{route("addPlaceByUser.storeImg")}}',
             paramName: "pic",
-            dictDefaultMessage: 'به سادگی عکس های خود را در این قاب بی اندازید و یا کلیک کنید',
+            dictDefaultMessage: '{{__('به سادگی عکس های خود را در این قاب بی اندازید و یا کلیک کنید')}}',
             timeout: 60000,
             headers: {
                 'X-CSRF-TOKEN': '{{csrf_token()}}'
@@ -1858,6 +1125,13 @@
             });
             $('.headerCategoryIcon').addClass(selectedCategory['icon']);
             $('.headerCategoryName').text(selectedCategory['name']);
+
+            $('#step3MainTitle').text(selectedCategory['step3']);
+            $('#step3MainUnderTitle').text(selectedCategory['step3Under']);
+            $('#step4MainTitle').text(selectedCategory['step4']);
+            $('#step5MainTitle').text(selectedCategory['step5']);
+            $('#step6MainTitle').text(selectedCategory['step6']);
+
 
             $('.onlyForHotelsRest').css('display', 'none');
             $('.onlyForHotelsRestBoom').css('display', 'none');
@@ -1985,23 +1259,23 @@
                 currentSteps = 0;
             } else if(currentSteps == 0){
                 $('#nextStep').html('شروع');
-                $('#previousStep').html('بازگشت');
+                $('#previousStep').html('{{__('بازگشت')}}');
             }
             else if(currentSteps > 0 && currentSteps < 3){
-                $('#nextStep').html('بعدی');
-                $('#previousStep').html('بازگشت');
+                $('#nextStep').html('{{__('بعدی')}}');
+                $('#previousStep').html('{{__('بازگشت')}}');
             }
             else if(currentSteps == 4){
-                $('#nextStep').html('ذخیره');
-                $('#previousStep').html('بازگشت');
+                $('#nextStep').html('{{__('ذخیره')}}');
+                $('#previousStep').html('{{__('بازگشت')}}');
             }
             else if(currentSteps == 5){
-                $('#nextStep').html('بعدی');
+                $('#nextStep').html('{{__('بعدی')}}');
                 $('.footerBox1').css('width', 'calc(100% - 115px)');
                 $('#previousStep').css('display', 'none');
             }
             else if(currentSteps == 6){
-                $('#nextStep').html('اتمام و بازگشت به صفحه اصلی');
+                $('#nextStep').html('{{__('addPlaceByUser.اتمام و بازگشت به صفحه اصلی')}}');
                 $('#previousStep').css('display', 'none');
                 $('#nextStep').addClass('endSectionButton');
                 $('.footerBox1').addClass('endSectionFooter');
@@ -2018,19 +1292,19 @@
             });
 //for change name of step
             if (currentSteps == 1){
-                $('#stepName').html('اولین مرحله');
+                $('#stepName').html('{{__('addPlaceByUser.اولین مرحله')}}');
             } else if(currentSteps == 2){
-                $('#stepName').html('دومین مرحله');
+                $('#stepName').html('{{__('addPlaceByUser.دومین مرحله')}}');
             } else if(currentSteps == 3){
-                $('#stepName').html('سومین مرحله');
+                $('#stepName').html('{{__('addPlaceByUser.سومین مرحله')}}');
             } else if(currentSteps == 4){
-                $('#stepName').html('چهارمین مرحله');
+                $('#stepName').html('{{__('addPlaceByUser.چهارمین مرحله')}}');
             } else if(currentSteps == 5){
-                $('#stepName').html('پنجمین مرحله');
+                $('#stepName').html('{{__('addPlaceByUser.پنجمین مرحله')}}');
             } else if(currentSteps == 6){
-                $('#stepName').html('ششمین مرحله');
+                $('#stepName').html('{{__('addPlaceByUser.ششمین مرحله')}}');
             } else if(currentSteps == 7) {
-                $('#stepName').html('موفق شدید');
+                $('#stepName').html('{{__('addPlaceByUser.موفق شدید')}}');
             }
         }
 
@@ -2176,7 +1450,7 @@
                     $('#address').css('background', '#ebebeb');
 
                 if(lat == 0 || lng == 0){
-                    openWarning('محل را بر روی نقشه مشخص کنید');
+                    openWarning('{{__('addPlaceByUser.محل را بر روی نقشه مشخص کنید')}}');
                     error = false;
                 }
 
@@ -2198,14 +1472,14 @@
             if(selectedCategory['id'] == 12){
                 let room_num = $('#room_num').val();
                 if(room_num == 0 || room_num == null){
-                    openWarning('تعداد اتاق ها را مشخص کنید.');
+                    openWarning('{{__('addPlaceByUser.تعداد اتاق ها را مشخص کنید.')}}');
                     return false;
                 }
             }
             if(selectedCategory['id'] == 4){
                 let kind = $('#hotelKind').val();
                 if(kind == 0){
-                    openWarning('نوع اقامتگاه خود را مشخص کنید.');
+                    openWarning('{{__('addPlaceByUser.نوع اقامتگاه خود را مشخص کنید.')}}');
                     return false;
                 }
             }
@@ -2220,14 +1494,14 @@
                         haveMaterial++;
                 }
                 if(haveMaterial == 0){
-                    openWarning('پر کردن مواد لازم برای غذا الزامی است.');
+                    openWarning('{{__('پر کردن مواد لازم برای غذا الزامی است.')}}');
                     return false;
                 }
 
 
                 let recipes = $('#recipes').val();
                 if(recipes.trim().length < 2){
-                    openWarning('پر کردن دستور پهت غذا الزامی است.');
+                    openWarning('{{__('پر کردن دستور پخت غذا الزامی است.')}}');
                     return false;
                 }
             }
@@ -2253,7 +1527,7 @@
 
         function changeMaterialName(_element, _num){
             let value = $(_element).val();
-            text = 'مقدار ' + value;
+            text = '{{__('مقدار')}} ' + value;
             $('#materialVol_' + _num).attr('placeholder', text);
         }
 
@@ -2269,12 +1543,12 @@
                     text = '<div class="row" style="display: flex; justify-content: space-around; direction: ltr">\n' +
                         '<div class="matInputTopDiv">\n' +
                         '<div class="stepInputBox ">\n' +
-                        '<input class="stepInputBoxInput stepInputBoxMat" id="materialVol_' + numMaterialRow + '" style="text-align: right; padding-right: 10px;" placeholder="مقدار" onchange="addNewRow(' + numMaterialRow + ')">\n' +
+                        '<input class="stepInputBoxInput stepInputBoxMat" id="materialVol_' + numMaterialRow + '" style="text-align: right; padding-right: 10px;" placeholder="{{__('مقدار')}}" onchange="addNewRow(' + numMaterialRow + ')">\n' +
                         '</div>\n' +
                         '</div>\n' +
                         '<div class="matInputTopDiv">\n' +
                         '<div class="stepInputBox ">\n' +
-                        '<input class="stepInputBoxInput stepInputBoxMat" id="materialName_' + numMaterialRow + '" style="text-align: right; padding-right: 10px;" placeholder="چه چیزی نیاز است" onkeyup="changeMaterialName(this, ' + numMaterialRow + ')" onchange="addNewRow(' + numMaterialRow + ')">\n' +
+                        '<input class="stepInputBoxInput stepInputBoxMat" id="materialName_' + numMaterialRow + '" style="text-align: right; padding-right: 10px;" placeholder="{{__('addPlaceByUser.چه چیزی نیاز است')}}" onkeyup="changeMaterialName(this, ' + numMaterialRow + ')" onchange="addNewRow(' + numMaterialRow + ')">\n' +
                         '</div>\n' +
                         '</div>\n' +
                         '</div>';
@@ -2366,7 +1640,7 @@
                 success: function(response){
                     try{
                         cities = JSON.parse(response);
-                        createSearchInput('findCity' ,'شهر خود را وارد کنید...');
+                        createSearchInput('findCity' ,'{{__('شهر مورد نظر را وارد کنید...')}}');
                     }
                     catch (e) {
                         console.log(e)
@@ -2433,7 +1707,7 @@
 
         function chooseCity(){
             if(cities == null){
-                openWarning('ابتدا استان خود را مشخص کنید.');
+                openWarning('{{__('addPlaceByUser.ابتدا استان خود را مشخص کنید.')}}');
                 return;
             }
             else

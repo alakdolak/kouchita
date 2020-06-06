@@ -166,35 +166,35 @@
             flex-wrap: wrap;
         }
 
-        @media (max-width: 1300px) {
-            .guestRow{
-                width: 75px !important;
-                height: 90px;
-            }
-            .guestPicSection{
-                width: 75px;
-                height: 75px;
-            }
-            .guestName{
-                display: none;
-                font-size: 10px;
-            }
-            .guestAction{
-                font-size: 9px;
-                display: none;
-            }
-            .guestText{
-                font-size: 13px;
-            }
-            .guestHeader{
-                font-size: 11px;
-            }
-            .guestRow:hover{
-                height: 110px !important;
-            }
-        }
+        /*@media (max-width: 1300px) {*/
+        /*    .guestRow{*/
+        /*        width: 75px !important;*/
+        /*        height: 90px;*/
+        /*    }*/
+        /*    .guestPicSection{*/
+        /*        width: 75px;*/
+        /*        height: 75px;*/
+        /*    }*/
+        /*    .guestName{*/
+        /*        display: none;*/
+        /*        font-size: 10px;*/
+        /*    }*/
+        /*    .guestAction{*/
+        /*        font-size: 9px;*/
+        /*        display: none;*/
+        /*    }*/
+        /*    .guestText{*/
+        /*        font-size: 13px;*/
+        /*    }*/
+        /*    .guestHeader{*/
+        /*        font-size: 11px;*/
+        /*    }*/
+        /*    .guestRow:hover{*/
+        /*        height: 110px !important;*/
+        /*    }*/
+        /*}*/
 
-        @media (max-width: 1015px){
+        @media (max-width: 1300px){
             .lestSideLiveVideo{
                 display: none;
             }
@@ -236,7 +236,9 @@
         }
 
         @media (max-width: 991px){
-
+            .hideOnSmall{
+                display: none;
+            }
         }
 
         @media (max-width: 767px){
@@ -256,7 +258,7 @@
 @section('body')
 
     <div class="mainDivStream">
-        <div class="container mainShowBase">
+        <div class="container mainShowBase hideOnSmall">
             @if($data['haveVideo'])
                 <div class="liveInfosAndComments">
                     <div class="videoInfos">
@@ -286,12 +288,12 @@
                             </div>
                             <div class="liveCommentStatistics">
                                 <div class="liveCommentsQuantity liveCommentStatisticsDivs">
-                                    <div class="liveCommentsNums">31</div>
+                                    <div class="liveCommentsNums chatCount">{{count($data['chats'])}}</div>
                                     <div class="liveCommentsQuantityIcon"></div>
                                 </div>
                                 <div class="liveCommentWriters liveCommentStatisticsDivs">
-                                    <div class="liveCommentsNums">31</div>
-                                    <div class="liveCommentsWriterIcon"></div>
+                                    <div class="liveCommentsNums uniqueUserChat">{{$data['uniqueUser']}}</div>
+                                    <div class="liveCommentsWriterIcon "></div>
                                 </div>
                             </div>
                         </div>
@@ -368,12 +370,12 @@
                                 </div>
                                 <div class="liveCommentStatistics">
                                     <div class="liveCommentsQuantity liveCommentStatisticsDivs">
-                                        <div class="liveCommentsNums">31</div>
+                                        <div class="liveCommentsNums chatCount">{{count($data['chats'])}}</div>
                                         <div class="liveCommentsQuantityIcon"></div>
                                     </div>
                                     <div class="liveCommentWriters liveCommentStatisticsDivs">
-                                        <div class="liveCommentsNums">31</div>
-                                        <div class="liveCommentsWriterIcon"></div>
+                                        <div class="liveCommentsNums uniqueUserChat">{{$data['uniqueUser']}}</div>
+                                        <div class="liveCommentsWriterIcon "></div>
                                     </div>
                                 </div>
                             </div>
@@ -408,10 +410,10 @@
 
             <div class="toolSection">
                 <div class="toolSectionButtons">
-                    <div class="toolSectionButtonsCircle">
+                    <div class="toolSectionButtonsCircle" onclick="feedBack(-1)">
                         <span class="DisLikeIcon"></span>
                     </div>
-                    <div class="toolSectionButtonsCircle">
+                    <div class="toolSectionButtonsCircle" onclick="feedBack(1)">
                         <span class="LikeIcon"></span>
                     </div>
                     <div class="toolSectionButtonsCircle">
@@ -428,20 +430,21 @@
                     </div>
                 </div>
                 <div class="toolSectionInfos">
-                    <div class="toolSectionInfosTab">
-                        <span class="CommentIcon commentInfoTab"></span>
-                        <span class="toolSectionInfosTabNumber">100,000</span>
-                    </div>
+{{--                    <div class="toolSectionInfosTab">--}}
+{{--                        <span class="CommentIcon commentInfoTab"></span>--}}
+{{--                        <span class="toolSectionInfosTabNumber">100,000</span>--}}
+{{--                    </div>--}}
                     <div class="toolSectionInfosTab">
                         <span class="LikeIcon likeInfoTab"></span>
-                        <span class="toolSectionInfosTabNumber">100</span>
+                        <span id="liveLikeCount" class="toolSectionInfosTabNumber">{{$data['likeCount']}}</span>
                     </div>
                     <div class="toolSectionInfosTab">
                         <span class="DisLikeIcon disLikeInfoTab"></span>
-                        <span class="toolSectionInfosTabNumber">100,000,000</span>
+                        <span id="liveDisLikeCount" class="toolSectionInfosTabNumber">{{$data['disLikeCount']}}</span>
                     </div>
                     <div class="toolSectionInfosTab">
                         <span class="toolSectionInfosTabNumber">100</span>
+                        <img src="{{URL::asset('images/streaming/eye.png')}}" class="eyeClass" style="width: 25px">
                     </div>
                 </div>
             </div>
@@ -474,12 +477,12 @@
                         </div>
                         <div class="liveCommentStatistics">
                             <div class="liveCommentsQuantity liveCommentStatisticsDivs">
-                                <div class="liveCommentsNums">31</div>
+                                <div class="liveCommentsNums chatCount">{{count($data['chats'])}}</div>
                                 <div class="liveCommentsQuantityIcon"></div>
                             </div>
                             <div class="liveCommentWriters liveCommentStatisticsDivs">
-                                <div class="liveCommentsNums">31</div>
-                                <div class="liveCommentsWriterIcon"></div>
+                                <div class="liveCommentsNums uniqueUserChat">{{$data['uniqueUser']}}</div>
+                                <div class="liveCommentsWriterIcon "></div>
                             </div>
                         </div>
                     </div>
@@ -488,9 +491,9 @@
 
                     @if(auth()->check())
                         <div class="commentInputSection">
-                            <div class="userPicDiv">
-                                <img src="{{$userPicture}}" alt="koochita">
-                            </div>
+{{--                            <div class="userPicDiv">--}}
+{{--                                <img src="{{$userPicture}}" alt="koochita">--}}
+{{--                            </div>--}}
                             <textarea class="commentInput" name="comment" id="comment" placeholder="شما چه نظری دارید؟" rows="1"></textarea>
                             <div class="commentInputSendButton" onclick="sendMsg(this)">ارسال</div>
                         </div>
@@ -624,9 +627,12 @@
         });
     </script>
 
-
     <script src="{{URL::asset('js/app.js')}}"></script>
+
     <script>
+        let videoData = {!! json_encode($data) !!};
+        let lastChats = videoData.chats;
+
         @if(auth()->check())
             let userPic = '{{$userPicture}}';
             let userName = '{{auth()->user()->username}}';
@@ -653,7 +659,14 @@
                         room: room,
                     },
                     success: function (response) {
-                        console.log('success')
+                        try{
+                            response = JSON.parse(response);
+                            $('.chatCount').text(response.count);
+                            $('.uniqueUserChat').text(response.uniqueUser);
+                        }
+                        catch (e) {
+                            console.log('error in send chat');
+                        }
                     },
                     error: function (err) {
                         console.log('err')
@@ -689,9 +702,9 @@
         function createCommentRow(_txt, _name, _pic){
             let text = '                      <div class="eachLiveCommentMainDiv">\n' +
                 '                                <div class="eachLiveCommentTitle">\n' +
-                // '                                    <div class="userPicDiv">\n' +
-                // '                                        <img src="' + _pic + '" alt="koochita">\n' +
-                // '                                    </div>\n' +
+                '                                    <div class="userPicDiv">\n' +
+                '                                        <img src="' + _pic + '" alt="koochita">\n' +
+                '                                    </div>\n' +
                 '                                    <div class="mainUserInfos">\n' +
                 '                                        <div class="mainUseruserName">' + _name + '</div>\n' +
                 '                                    </div>\n' +
@@ -703,6 +716,36 @@
             if(setBottom)
                 $('.liveCommentsMainDiv').scrollTop($(this).height());
         }
+        lastChats.forEach(item => {
+           createCommentRow(item.text, item.username, item.userPic);
+        });
+
+        function feedBack(_like){
+            if (!hasLogin) {
+                showLoginPrompt();
+                return;
+            }
+
+            $.ajax({
+                type: 'post',
+                url: '{{route("streaming.live.setLiveFeedback")}}',
+                data :{
+                    _token: '{{csrf_token()}}',
+                    room: room,
+                    like: _like,
+                },
+                success: function(response){
+                    response = JSON.parse(response);
+                    if(response.status == 'ok'){
+                        $('#liveLikeCount').text(response.like);
+                        $('#liveDisLikeCount').text(response.disLike);
+                    }
+                    else
+                        console.log(response);
+                }
+            })
+        }
+
 
         $(window).resize(function(){
             if($(window).width() > 991) {
@@ -717,6 +760,11 @@
 
         $(document).ready(function(){
             var videotag = $('.playads');
+
+            if($(window).width() > 991) {
+                let height = $('#video_1_html5_api').height();
+                $('.liveCommentsMainDiv').css('max-height', height - 200);
+            }
 
             // $(".liveCommentsOnFS").appendTo($('#video_1'));
             //

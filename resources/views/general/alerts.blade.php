@@ -18,13 +18,13 @@
 <div id="warningBoxDiv" class="alertDarkBack">
     <div class="alertBox">
         <div class="alertTitle offerTitle">
-            یک لحظه درنگ کنید
+            {{__('یک لحظه درنگ کنید')}}
         </div>
         <div class="alertDescriptionBox">
             <div id="warningBody" class="alertDescription"></div>
             <div style="display: flex; justify-content: center; align-items: center">
 {{--                <button class="alertBtn rightBtn" onclick="closeWarning()">فعلا، نه</button>--}}
-                <button class="alertBtn leftBtn" onclick="closeWarning()">بسیار خب</button>
+                <button class="alertBtn leftBtn" onclick="closeWarning()">{{__('بسیار خب')}}</button>
             </div>
         </div>
     </div>
@@ -33,7 +33,7 @@
 
 
 <div id="successNotifiAlert" class="notifAlert">
-    پست شما با موفقیت ثبت شد
+    {{__('پست شما با موفقیت ثبت شد')}}
 </div>
 
 <script>

@@ -4,6 +4,13 @@ use App\models\ConfigModel;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Route;
 
+Route::get('language/{lang}', function($lang){
+    Session::put('lang', $lang);
+    return redirect(url('/'));
+});
+
+Route::get('/tranfa', 'MainController@tranfa');
+
 Route::get('resizePostImagesPage', function(){
     return view('notUse.compressImage');
 });
@@ -208,7 +215,7 @@ Route::group(array('middleware' => ['throttle:30']), function () {
 
 });
 
-Route::group(array('middleware' => ['throttle:30', 'nothing']), function () {
+Route::group(array('middleware' => ['throttle:30', 'nothing', 'web']), function () {
 
     Route::get('/landingPage', 'MainController@landigPage')->name('landingPage');
 
@@ -725,8 +732,6 @@ Route::middleware(['web', 'vodShareData'])->group(function (){
 
     Route::get('streaming/live/{room?}', 'StreamingController@streamingLive')->name('streaming.live');
 
-    Route::post('streaming/live/sendBroadcastMsg', 'StreamingController@sendBroadcastMsg')->name('sendBroadcastMsg');
-
     Route::post('streaming/search', 'StreamingController@search')->name('streaming.search');
 
     Route::get('streaming/list/{kind}/{value}', 'StreamingController@videoList')->name('streaming.list');
@@ -743,6 +748,9 @@ Route::middleware(['web', 'vodShareData'])->group(function (){
         Route::post('streaming/setVideoFeedback', 'StreamingController@setVideoFeedback')->name('streaming.setVideoFeedback');
 
         Route::post('streaming/setVideoComment', 'StreamingController@setVideoComment')->name('streaming.setVideoComment');
+
+        Route::post('streaming/live/sendBroadcastMsg', 'StreamingController@sendBroadcastMsg')->name('sendBroadcastMsg');
+        Route::post('streaming/live/setVideoFeedback', 'StreamingController@setLiveFeedback')->name('streaming.live.setLiveFeedback');
 
     });
 
