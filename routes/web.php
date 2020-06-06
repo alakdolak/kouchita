@@ -4,6 +4,13 @@ use App\models\ConfigModel;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Route;
 
+Route::get('language/{lang}', function($lang){
+    Session::put('lang', $lang);
+    return redirect(url('/'));
+});
+
+Route::get('/tranfa', 'MainController@tranfa');
+
 Route::get('resizePostImagesPage', function(){
     return view('notUse.compressImage');
 });
@@ -208,7 +215,7 @@ Route::group(array('middleware' => ['throttle:30']), function () {
 
 });
 
-Route::group(array('middleware' => ['throttle:30', 'nothing']), function () {
+Route::group(array('middleware' => ['throttle:30', 'nothing', 'web']), function () {
 
     Route::get('/landingPage', 'MainController@landigPage')->name('landingPage');
 

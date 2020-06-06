@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\Localization;
 use App\Http\Middleware\setSession;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -38,6 +39,7 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Barryvdh\Cors\HandleCors::class,
+            \App\Http\Middleware\Localization::class
         ],
 
         'api' => [
