@@ -16,6 +16,8 @@ use App\models\VideoComment;
 use App\models\VideoFeedback;
 use App\models\VideoLimbo;
 use App\models\VideoLive;
+use App\models\VideoLiveChats;
+use App\models\VideoLiveFeedBack;
 use App\models\VideoLiveGuest;
 use App\models\VideoPlaceRelation;
 use App\models\VideoTagRelation;
@@ -645,6 +647,13 @@ class StreamingController extends Controller
                 $data['user'] = $user;
                 $data['haveVideo'] = true;
 
+                $data['likeCount'] = VideoLiveFeedBack::where('videoId', $video->id)->where('like', 1)->count();
+                $data['disLikeCount'] = VideoLiveFeedBack::where('videoId', $video->id)->where('like', -1)->count();
+
+                $data['chats'] = VideoLiveChats::where('videoId', $video->id)->select(['id', 'text', 'username', 'userPic'])->get();
+                $uniqueUser = VideoLiveChats::where('videoId', $video->id)->groupBy('userId')->get();
+                $data['uniqueUser'] = count($uniqueUser);
+
                 $data['guest'] = VideoLiveGuest::where('videoId', $video->id)->get();
                 foreach ($data['guest'] as $guest)
                     $guest->pic = \URL::asset('_images/video/live/'.$guest->videoId.'/'.$guest->pic);
@@ -657,8 +666,56 @@ class StreamingController extends Controller
 
     public function sendBroadcastMsg(Request $request)
     {
-        if(\auth()->check())
+        if(\auth()->check()) {
             broadcast(new CommentBroadCast($request->msg, $request->room, $request->userName, $request->userPic));
+            $live = VideoLive::where('code', $request->room)->first();
+
+            $chat = new VideoLiveChats();
+            $chat->videoId = $live->id;
+            $chat->userId = \auth()->user()->id;
+            $chat->text = $request->msg;
+            $chat->username = $request->userName;
+            $chat->userPic = $request->userPic;
+            $chat->save();
+
+            $count = VideoLiveChats::where('videoId', $live->id)->count();
+            $uniqueUser = VideoLiveChats::where('videoId', $live->id)->groupBy('userId')->get();
+            $uniqueUser = count($uniqueUser);
+            echo json_encode(['count' => $count, 'uniqueUser' => $uniqueUser]);
+        }
+    }
+
+    public function setLiveFeedback(Request $request)
+    {
+        if(isset($request->room) && isset($request->like)){
+            $video = VideoLive::where('code', $request->room)->first();
+            if($video != null){
+                $like = VideoLiveFeedBack::where('videoId', $video->id)->where('userId', auth()->user()->id)->first();
+                if($like == null){
+                    $like = new VideoLiveFeedBack();
+                    $like->videoId = $video->id;
+                    $like->userId = auth()->user()->id;
+                }
+
+                if($request->like == $like->like)
+                    $like->like = 0;
+                else
+                    $like->like = $request->like;
+
+                $like->save();
+
+                $likeCount = VideoLiveFeedBack::where('videoId', $video->id)->where('like', 1)->count();
+                $disLikeCount = VideoLiveFeedBack::where('videoId', $video->id)->where('like', -1)->count();
+
+                echo json_encode(['status' => 'ok', 'like' => $likeCount, 'disLike' => $disLikeCount]);
+            }
+            else
+                echo json_encode(['status' => 'nok1']);
+        }
+        else
+            echo json_encode(['status' => 'nok']);
+
+        return;
     }
 
 

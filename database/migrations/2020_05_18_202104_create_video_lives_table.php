@@ -22,6 +22,7 @@ class CreateVideoLivesTable extends Migration
             $table->string('sTime');
             $table->string('sDate');
             $table->tinyInteger('isLive')->default(1);
+            $table->tinyInteger('haveChat')->default(1);
             $table->timestamps();
         });
     }
