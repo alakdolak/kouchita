@@ -128,6 +128,80 @@ body {
 .otherPicImg{
     width: 100%;
 }
+.loginPopUp{
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background: #000000c2;
+    top: 0;
+    right: 0;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+.loginDiv{
+    width: 400px;
+    background: white;
+    border-radius: 10px;
+    border: solid 5px #0d6650;
+    max-height: 100vh;
+    overflow: auto;
+}
+.topIconDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0px;
+    position: relative;
+}
+.loginInputDiv{
+    direction: rtl;
+    text-align: right;
+    padding: 30px;
+    font-size: 22px;
+    padding-top: 10px;
+}
+.closeButton{
+    color: #4DC7BC;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+}
+.closeButton:before{
+    font-size: 32px;
+    line-height: 48px;
+    color: #4dc7bc;
+    content: "\00d7";
+}
+.loginText{
+    font-size: 25px;
+    color: #053a3e;
+    font-weight: bold;
+    text-align: center;
+    margin: 10px 0px;
+}
+.loginButtonsMainDiv{
+    background: #053a3e;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+    padding: 12px;
+    border-radius: 10px;
+    margin-top: 40px;
+    cursor: pointer;
+    width: 100%;
+}
+.registerNow{
+    text-align: center;
+    margin-top: 20px;
+    color: #00388c;
+    cursor: pointer;
+}
+.registerNow:hover{
+    color: #007dc5;
+}
 
 @media (max-width: 767px) {
     body{
