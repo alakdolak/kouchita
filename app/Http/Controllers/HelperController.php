@@ -32,4 +32,9 @@ class HelperController extends Controller
         dd('done');
     }
 
+    public function testPage()
+    {
+        return view('component.suggestionPack');
+    }
+
 }

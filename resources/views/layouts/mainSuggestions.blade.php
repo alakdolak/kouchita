@@ -252,14 +252,12 @@
     <div class="loader hidden"></div>
 </div>
 
-<div  ng-controller="getMainPageSuggestion" class="mainSuggestionMainDiv">
-
+<div class="mainSuggestionMainDiv">
     <div id="newKoochita" class="homepage_shelves_widget ng-scope">
-        <div class="prw_rup prw_shelves_shelf_widget" ng-show="show">
+        <div class="prw_rup prw_shelves_shelf_widget">
             <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
                 <div class="shelf_header">
                     <div class="shelf_title">
-                        {{--<span class="shelf_header_icon ui_icon travelers-choice-badge"></span>--}}
                         <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا" style="width: 50px;">
                         <div class="shelf_title_container h3">
                             <h3>تازه‌های کوچیتا</h3>
@@ -268,39 +266,9 @@
                 </div>
                 <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
                     <div class="mainSuggestion swiper-container">
-                        <div class="swiper-wrapper position-relative">
-                            <div class="swiper-slide position-relative" ng-repeat="place in records">
-                                <img src="{{URL::asset('images/pin.png')}}" class="imageGoldPin">
-                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
-                                    <div class="poi">
-                                        <a href="[[place.url]]" class="thumbnail">
-                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                <div class="prv_thumb has_image">
-                                                    <div class="image_wrapper landscape landscapeWide">
-                                                        <img src="[[place.placePic]]" alt="[[place.alt]]" class="image">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="detail rtl">
-                                            <a href="[[place.url]]" class="item poi_name ui_link ng-binding">[[place.name]]</a>
-                                            <div class="item rating-widget">
-                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                    <span class="ui_bubble_rating bubble_[[place.placeRate]]0"></span>
-                                                </div>
-                                                <span class="reviewCount ng-binding">[[place.placeReviews]] </span><span>نقد </span>
-                                            </div>
-                                            <div class="item tags ng-binding">[[place.placeCity]] <span>در </span>
-                                                <span class="ng-binding">[[place.placeState]]</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div id="newInKoochita" class="swiper-wrapper position-relative">
+{{--                            fill with createMainPageSuggestion function--}}
                         </div>
-                        <!-- Add Pagination -->
-                        <div class="swiper-pagination"></div>
-                        <!-- Add Arrows -->
                         <div class="swiper-button-next"></div>
                         <div class="swiper-button-prev"></div>
                     </div>
@@ -339,13 +307,12 @@
         @endif
     </div>
 
-    <div id="foodSuggestion" class="homepage_shelves_widget ng-scope" style="display: none">
+    <div id="foodSuggestion" class="homepage_shelves_widget ng-scope">
         <div class="prw_rup prw_shelves_shelf_widget">
             <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
                 <div class="shelf_header">
                     <div class="shelf_title">
                         <a class="shelf_title" href="{{route('place.list', ['kindPlaceId' => 11, 'mode' => 'country'])}}" target="_blank">
-                            {{--<span class="shelf_header_icon ui_icon travelers-choice-badge"></span>--}}
                             <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا" style="width: 50px;">
                             <div class="shelf_title_container h3">
                                 <h3>محبوب‌ترین غذا‌ها</h3>
@@ -355,38 +322,9 @@
                 </div>
                 <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
                     <div id="mainSuggestion" class="mainSuggestion swiper-container">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide position-relative" ng-repeat="place in foodRecords">
-                                <img src="{{URL::asset('images/pin.png')}}" class="imageGoldPin">
-                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
-                                    <div class="poi">
-                                        <a href="[[place.url]]" class="thumbnail">
-                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                <div class="prv_thumb has_image">
-                                                    <div class="image_wrapper landscape landscapeWide">
-                                                        <img src="[[place.placePic]]" alt="[[place.alt]]" class="image">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="detail rtl">
-                                            <a href="[[place.url]]" class="item poi_name ui_link ng-binding" title="[[place.name]]">[[place.name]]</a>
-                                            <div class="item rating-widget">
-                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                    <span class="ui_bubble_rating bubble_[[place.placeRate]]0"></span>
-                                                </div>
-                                                <span class="reviewCount ng-binding">[[place.placeReviews]] </span><span>نقد </span>
-                                            </div>
-                                            <div class="item tags ng-binding">[[place.placeCity]] <span>در </span>
-                                                <span class="ng-binding">[[place.placeState]]</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div id="topFood" class="swiper-wrapper">
+{{--                            fill with createMainPageSuggestion function--}}
                         </div>
-                        <!-- Add Pagination -->
-                        <div class="swiper-pagination"></div>
-                        <!-- Add Arrows -->
                         <div class="swiper-button-next"></div>
                         <div class="swiper-button-prev"></div>
                     </div>
@@ -406,13 +344,12 @@
         با هم
     </div>
 
-    <div id="tabiatSuggestion" class="homepage_shelves_widget ng-scope" style="display: none">
+    <div id="tabiatSuggestion" class="homepage_shelves_widget ng-scope">
         <div class="prw_rup prw_shelves_shelf_widget" style="">
             <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
                 <div class="shelf_header">
                     <div class="shelf_title" >
                         <a class="shelf_title" href="{{route('place.list', ['kindPlaceId' => 6, 'mode' => 'country'])}}" target="_blank">
-                            {{--<span class="shelf_header_icon ui_icon travelers-choice-badge"></span>--}}
                             <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا" style="width: 50px;">
                             <div class="shelf_title_container h3">
                                 <h3>سفر طبیعت‌گردی</h3>
@@ -422,38 +359,9 @@
                 </div>
                 <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
                     <div class="mainSuggestion swiper-container">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide position-relative" ng-repeat="place in tabiatRecords">
-                                <img src="{{URL::asset('images/pin.png')}}" class="imageGoldPin">
-                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
-                                    <div class="poi">
-                                        <a href="[[place.url]]" class="thumbnail">
-                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                <div class="prv_thumb has_image">
-                                                    <div class="image_wrapper landscape landscapeWide">
-                                                        <img src="[[place.placePic]]" alt="[[place.alt]]" class="image">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="detail rtl">
-                                            <a href="[[place.url]]" class="item poi_name ui_link ng-binding" title="[[place.name]]">[[place.name]]</a>
-                                            <div class="item rating-widget">
-                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                    <span class="ui_bubble_rating bubble_[[place.placeRate]]0"></span>
-                                                </div>
-                                                <span class="reviewCount ng-binding">[[place.placeReviews]] </span><span>نقد </span>
-                                            </div>
-                                            <div class="item tags ng-binding">[[place.placeCity]] <span>در </span>
-                                                <span class="ng-binding">[[place.placeState]]</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div id="topTabiat" class="swiper-wrapper">
+{{--                            fill with createMainPageSuggestion function--}}
                         </div>
-                        <!-- Add Pagination -->
-                        <div class="swiper-pagination"></div>
-                        <!-- Add Arrows -->
                         <div class="swiper-button-next"></div>
                         <div class="swiper-button-prev"></div>
                     </div>
@@ -648,13 +556,12 @@
         </script>
     @endif
 
-    <div id="restaurantSuggestion" class="homepage_shelves_widget ng-scope" style="display: none">
-        <div class="prw_rup prw_shelves_shelf_widget" style="">
+    <div id="restaurantSuggestion" class="homepage_shelves_widget ng-scope">
+        <div class="prw_rup prw_shelves_shelf_widget">
             <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
                 <div class="shelf_header">
                     <div class="shelf_title">
                         <a class="shelf_title" href="{{route('place.list', ['kindPlaceId' => 3, 'mode' => 'country'])}}" target="_blank">
-                            {{--<span class="shelf_header_icon ui_icon travelers-choice-badge"></span>--}}
                             <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا" style="width: 50px;">
                             <div class="shelf_title_container h3">
                                 <h3>محبوب‌ترین رستوران‌ها</h3>
@@ -664,38 +571,9 @@
                 </div>
                 <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
                     <div class="mainSuggestion swiper-container">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide position-relative" ng-repeat="place in restaurantRecords">
-                                <img src="{{URL::asset('images/pin.png')}}" class="imageGoldPin">
-                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
-                                    <div class="poi">
-                                        <a href="[[place.url]]" class="thumbnail">
-                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                <div class="prv_thumb has_image">
-                                                    <div class="image_wrapper landscape landscapeWide">
-                                                        <img src="[[place.placePic]]" alt="[[place.alt]]" class="image">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="detail rtl">
-                                            <a href="[[place.url]]" class="item poi_name ui_link ng-binding" title="[[place.name]]">[[place.name]]</a>
-                                            <div class="item rating-widget">
-                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                    <span class="ui_bubble_rating bubble_[[place.placeRate]]0"></span>
-                                                </div>
-                                                <span class="reviewCount ng-binding">[[place.placeReviews]] </span><span>نقد </span>
-                                            </div>
-                                            <div class="item tags ng-binding">[[place.placeCity]] <span>در </span>
-                                                <span class="ng-binding">[[place.placeState]]</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div id="topRestaurant" class="swiper-wrapper">
+{{--                            fill with createMainPageSuggestion function--}}
                         </div>
-                        <!-- Add Pagination -->
-                        <div class="swiper-pagination"></div>
-                        <!-- Add Arrows -->
                         <div class="swiper-button-next"></div>
                         <div class="swiper-button-prev"></div>
                     </div>
@@ -733,13 +611,12 @@
         </div>
     @endif
 
-    <div id="tarikhiSuggestion" class="homepage_shelves_widget ng-scope" style="display: none">
+    <div id="tarikhiSuggestion" class="homepage_shelves_widget ng-scope">
         <div class="prw_rup prw_shelves_shelf_widget" style="">
             <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
                 <div class="shelf_header">
                     <div class="shelf_title">
                         <a class="shelf_title" href="{{route('place.list', ['kindPlaceId' => 1, 'mode' => 'country'])}}" target="_blank">
-                            {{--<span class="shelf_header_icon ui_icon travelers-choice-badge"></span>--}}
                             <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا" style="width: 50px;">
                             <div class="shelf_title_container h3">
                                 <h3>سفر تاریخی-فرهنگی</h3>
@@ -749,38 +626,9 @@
                 </div>
                 <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
                     <div class="mainSuggestion swiper-container">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide position-relative" ng-repeat="place in tarikhiRecords">
-                                <img src="{{URL::asset('images/pin.png')}}" class="imageGoldPin">
-                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
-                                    <div class="poi">
-                                        <a href="[[place.url]]" class="thumbnail">
-                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                <div class="prv_thumb has_image">
-                                                    <div class="image_wrapper landscape landscapeWide">
-                                                        <img src="[[place.placePic]]" alt="[[place.alt]]" class="image">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="detail rtl">
-                                            <a href="[[place.url]]" class="item poi_name ui_link ng-binding" title="[[place.name]]">[[place.name]]</a>
-                                            <div class="item rating-widget">
-                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                    <span class="ui_bubble_rating bubble_[[place.placeRate]]0"></span>
-                                                </div>
-                                                <span class="reviewCount ng-binding">[[place.placeReviews]] </span><span>نقد </span>
-                                            </div>
-                                            <div class="item tags ng-binding">[[place.placeCity]] <span>در </span>
-                                                <span class="ng-binding">[[place.placeState]]</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div id="topTarikhi" class="swiper-wrapper">
+{{--                            fill with createMainPageSuggestion function--}}
                         </div>
-                        <!-- Add Pagination -->
-                        <div class="swiper-pagination"></div>
-                        <!-- Add Arrows -->
                         <div class="swiper-button-next"></div>
                         <div class="swiper-button-prev"></div>
                     </div>
@@ -864,12 +712,11 @@
         </div>
     </center>
 
-    <div id="kharidSuggestion" class="homepage_shelves_widget ng-scope" style="display: none">
-        <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" style="">
+    <div id="kharidSuggestion" class="homepage_shelves_widget ng-scope">
+        <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget">
             <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
                 <div class="shelf_header">
                     <div class="shelf_title">
-                        {{--<span class="shelf_header_icon ui_icon travelers-choice-badge"></span>--}}
                         <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا" style="width: 50px;">
                         <div class="shelf_title_container h3">
                             <h3>مراکز خرید</h3>
@@ -878,38 +725,9 @@
                 </div>
                 <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
                     <div class="mainSuggestion swiper-container">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide position-relative" ng-repeat="place in kharidRecords">
-                                <img src="{{URL::asset('images/pin.png')}}" class="imageGoldPin">
-                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
-                                    <div class="poi">
-                                        <a href="[[place.url]]" class="thumbnail">
-                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                <div class="prv_thumb has_image">
-                                                    <div class="image_wrapper landscape landscapeWide">
-                                                        <img src="[[place.placePic]]" alt="[[place.alt]]" class="image">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="detail rtl">
-                                            <a href="[[place.url]]" class="item poi_name ui_link ng-binding" title="[[place.name]]">[[place.name]]</a>
-                                            <div class="item rating-widget">
-                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                    <span class="ui_bubble_rating bubble_[[place.placeRate]]0"></span>
-                                                </div>
-                                                <span class="reviewCount ng-binding">[[place.placeReviews]] </span><span>نقد </span>
-                                            </div>
-                                            <div class="item tags ng-binding">[[place.placeCity]] <span>در </span>
-                                                <span class="ng-binding">[[place.placeState]]</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div id="topKharid" class="swiper-wrapper">
+{{--                            fill with createMainPageSuggestion function--}}
                         </div>
-                        <!-- Add Pagination -->
-                        <div class="swiper-pagination"></div>
-                        <!-- Add Arrows -->
                         <div class="swiper-button-next"></div>
                         <div class="swiper-button-prev"></div>
                     </div>
@@ -936,7 +754,6 @@
                 <div class="shelf_header">
                     <div class="shelf_title">
                         <a class="shelf_title" href="{{route('mainArticle')}}" target="_blank">
-                            {{--<span class="shelf_header_icon ui_icon travelers-choice-badge"></span>--}}
                             <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا" style="width: 50px;">
                             <div class="shelf_title_container h3">
                                 <h3>محبوب‌ترین سفرنامه‌ها</h3>
@@ -947,41 +764,9 @@
 
                     <div class="shelf_item_container ui_columns is-mobile is-multiline">
                         <div class="mainSuggestion swiper-container">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide position-relative" ng-repeat="place in articleRecords">
-                                    <img src="{{URL::asset('images/pin.png')}}" class="imageGoldPin">
-                                    <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope">
-                                        <div class="poi">
-                                            <a href="[[place.url]]" class="thumbnail">
-                                                <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                    <div class="prv_thumb has_image">
-                                                        <div class="image_wrapper landscape landscapeWide">
-                                                            <img src="[[place.placePic]]" alt="[[place.keyword]]" class="image">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <div class="detail rtl">
-                                                <a href="[[place.url]]" class="item poi_name ui_link ng-binding" title="[[place.title]]">[[place.title]]</a>
-                                                <div class="item rating-widget">
-                                                    {{--<div class="prw_rup prw_common_location_rating_simple">--}}
-                                                        {{--<span class="ui_bubble_rating bubble_[[place.placeRate]]0"></span>--}}
-                                                    {{--</div>--}}
-                                                    <span class="reviewCount ng-binding">[[place.msg]] </span><span>نقد </span>
-                                                </div>
-                                                <div class="item tags ng-binding">
-                                                        {{--[[place.placeCity]] --}}
-                                                        {{--<span>در </span>--}}
-                                                        {{--<span class="ng-binding">[[place.placeState]]</span>--}}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div id="topArticle" class="swiper-wrapper">
+{{--                            fill with createMainPageSuggestion function--}}
                             </div>
-                            <!-- Add Pagination -->
-                            <div class="swiper-pagination"></div>
-                            <!-- Add Arrows -->
                             <div class="swiper-button-next"></div>
                             <div class="swiper-button-prev"></div>
                         </div>
@@ -991,8 +776,113 @@
         </div>
 </div>
 
+
 <script>
-    var swiper = new Swiper('.mainSuggestion', {
+    function ajaxToFillMainPageSuggestion(){
+        console.log('{{csrf_token()}}');
+        console.log('{!! csrf_token() !!}');
+
+        $.ajax({
+            type: 'post',
+            url: '{{route("getMainPageSuggestion")}}',
+            data: {
+                _token: '{{csrf_token()}}',
+            },
+            success: function(response){
+                response = JSON.parse(response);
+                createMainPageSuggestion(response);
+            }
+        })
+    }
+
+    function createMainPageSuggestion(_result){
+        let section2 = _result[1];
+        let food = [];
+        let tarikhi = [];
+        let tabiat = [];
+        let restaurant = [];
+        let kharid = [];
+        let article = [];
+        section2.forEach(item => {
+            if(item.section == 'محبوب‌ترین غذا‌ها')
+                food.push(item);
+            else if(item.section == 'سفر طبیعت‌گردی')
+                tabiat.push(item);
+            else if(item.section == 'محبوب‌ترین رستوران‌ها')
+                restaurant.push(item);
+            else if(item.section == 'سفر تاریخی-فرهنگی')
+                tarikhi.push(item);
+            else if(item.section == 'مراکز خرید')
+                kharid.push(item);
+            else if(item.section == 'مقالات')
+                article.push(item);
+        });
+
+    // createSuggestionPack in suggestionPack.blade.php
+        createSuggestionPack('newInKoochita', _result[0], function() {
+            $('#newInKoochita').find('.suggestionPackDiv').addClass('swiper-slide');
+        });
+
+        createSuggestionPack('topFood', food, function() {
+            $('#topFood').find('.suggestionPackDiv').addClass('swiper-slide');
+        });
+
+        createSuggestionPack('topTabiat', tabiat, function() {
+            $('#topTabiat').find('.suggestionPackDiv').addClass('swiper-slide');
+        });
+
+        createSuggestionPack('topRestaurant', restaurant, function() {
+            $('#topRestaurant').find('.suggestionPackDiv').addClass('swiper-slide');
+        });
+
+        createSuggestionPack('topTarikhi', tarikhi, function() {
+            $('#topTarikhi').find('.suggestionPackDiv').addClass('swiper-slide');
+        });
+
+        createSuggestionPack('topKharid', kharid, function() {
+            $('#topKharid').find('.suggestionPackDiv').addClass('swiper-slide');
+        });
+
+        createSuggestionPack('topArticle', article, function() {
+            $('#topArticle').find('.suggestionPackDiv').addClass('swiper-slide');
+
+            new Swiper('.mainSuggestion', {
+                slidesPerGroup: 1,
+                loop: true,
+                loopFillGroupWithBlank: true,
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                breakpoints: {
+                    450: {
+                        slidesPerView: 1,
+                        spaceBetween: 0,
+                    },
+                    520: {
+                        slidesPerView: 2,
+                        spaceBetween: 20,
+                    },
+                    768: {
+                        slidesPerView: 2,
+                        spaceBetween: 20,
+                    },
+                    992: {
+                        slidesPerView: 3,
+                        spaceBetween: 20,
+                    },
+                    10000: {
+                        slidesPerView: 4,
+                        spaceBetween: 20,
+                    }
+                }
+            });
+        });
+    }
+
+    ajaxToFillMainPageSuggestion();
+
+    new Swiper('.threeSlider', {
         slidesPerGroup: 1,
         loop: true,
         loopFillGroupWithBlank: true,
@@ -1013,47 +903,12 @@
                 slidesPerView: 2,
                 spaceBetween: 20,
             },
-            992: {
-                slidesPerView: 3,
-                spaceBetween: 20,
-            },
-            10000: {
-                slidesPerView: 4,
-                spaceBetween: 20,
-            }
-        }
-    });
-
-    var swiper = new Swiper('.threeSlider', {
-        slidesPerGroup: 1,
-        loop: true,
-        loopFillGroupWithBlank: true,
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
-        breakpoints: {
-            450: {
-                slidesPerView: 1,
-                spaceBetween: 0,
-            },
-            520: {
-                slidesPerView: 2,
-                spaceBetween: 20,
-            },
-            768: {
-                slidesPerView: 2,
-                spaceBetween: 20,
-            },
             10000: {
                 slidesPerView: 3,
                 spaceBetween: 20,
             }
         }
     });
-</script>
-
-<script>
 
     function showAlt(elm) {
         $(elm).parent().next().removeClass('display-none')

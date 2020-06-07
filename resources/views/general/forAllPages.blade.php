@@ -18,6 +18,9 @@
 
 @include('general.alerts')
 
+@include('component.suggestionPack')
+
+
 
 @if(!Auth::check())
     @include('layouts.loginPopUp')
@@ -38,23 +41,26 @@
     }
 
     function resizeFitImg(_class) {
-        var imgs = $('.' + _class);
-        for(i = 0; i < imgs.length; i++){
-            var img = $(imgs[i]);
-            var imgW = img.width();
-            var imgH = img.height();
+        let imgs = $('.' + _class);
+        for(let i = 0; i < imgs.length; i++)
+            fitThisImg(imgs[i]);
+    }
 
-            var secW = img.parent().width();
-            var secH = img.parent().height();
+    function fitThisImg(_element){
+        var img = $(_element);
+        var imgW = img.width();
+        var imgH = img.height();
 
-            if(imgH < secH){
-                img.css('height', '100%');
-                img.css('width', 'auto');
-            }
-            else if(imgW < secW){
-                img.css('width', '100%');
-                img.css('height', 'auto');
-            }
+        var secW = img.parent().width();
+        var secH = img.parent().height();
+
+        if(imgH < secH){
+            img.css('height', '100%');
+            img.css('width', 'auto');
+        }
+        else if(imgW < secW){
+            img.css('width', '100%');
+            img.css('height', 'auto');
         }
     }
 

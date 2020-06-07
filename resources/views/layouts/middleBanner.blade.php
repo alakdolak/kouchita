@@ -30,10 +30,6 @@
                     <div class="phoneIcon hotel"></div>
                     <div class="textIcon">هتل</div>
                 </div>
-                {{--<a class="col-xs-4 squareDiv" href="{{route('tickets')}}">--}}
-                {{--<div class="phoneIcon ticket"></div>--}}
-                {{--<div class="textIcon">بلیط</div>--}}
-                {{--</a>--}}
             </div>
 
             <div class="clear-both"></div>

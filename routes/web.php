@@ -9,6 +9,7 @@ Route::get('language/{lang}', function($lang){
     return redirect(url('/'));
 });
 Route::get('/tranfa', 'HelperController@tranfa');
+Route::get('/testPage', 'HelperController@testPage');
 
 Route::post('resizePostImages', 'HomeController@resizePostImages');
 
@@ -814,3 +815,10 @@ Route::group(array(), function(){
         dd($request);
     });
 });
+
+
+//<Directory /var/www/dev/public>
+//        Options Indexes FollowSymLinks
+//        AllowOverride All
+//        Require all granted
+//</Directory>
