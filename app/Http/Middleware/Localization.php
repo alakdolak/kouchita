@@ -5,6 +5,8 @@ namespace App\Http\Middleware;
 use App\models\Language;
 use Closure;
 
+include_once __DIR__ .'/../Controllers/Common.php';
+
 class Localization
 {
     /**
@@ -18,6 +20,13 @@ class Localization
     {
         if(\Session::has('lang'))
             \App::setlocale(\Session::get('lang'));
+        else{
+            $country = ip_info("Visitor", "Country");
+            if($country == 'Iran')
+                \App::setlocale('fa');
+            else
+                \App::setlocale('en');
+        }
 
         return $next($request);
     }

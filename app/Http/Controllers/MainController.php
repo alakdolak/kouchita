@@ -24,6 +24,7 @@ class MainController extends Controller
 {
     public function __construct()
     {
+//        dd('const');
         if(\Session::get('lang'))
             app()->setLocale(\Session::get('lang'));
     }
@@ -115,8 +116,8 @@ class MainController extends Controller
         }
         $middleBan['6']  = $middleBan6;
 
-        dd(ip_info("Visitor", "Country"));
-
+//        dd(ip_info("Visitor", "Country"));
+        dd(app()->getLocale());
         return view('pages.main',
                 ['placeMode' => $mode, 'kindPlaceId' => $kindPlaceId, 'sliderPic' => $sliderPic, 'count' => $counts,
                 'sections' => SectionPage::wherePage(getValueInfo('hotel-detail'))->get(),  'articleBanner' => $articleBanner,
