@@ -5,10 +5,7 @@
     @include('layouts.topHeader')
 
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/home_rebranded.css?v=4')}}"/>
-    {{--<meta name="description" content="متن توضیحات متا"/>--}}
-    {{--<meta name="keywords" content="کیورد 1, کیورد دو, کی ورد سه">--}}
     <meta property="og:locale" content="fa_IR" />
-    {{--<meta property="og:locale:alternate" content="fa_IR" />--}}
     <meta property="og:type" content="website" />
     <title> کوچیتا، سامانه جامع گردشگری ایران </title>
     <meta name="title" content="کوچیتا | سامانه جامع گردشگری ایران و شبکه اجتماعی گردشگران" />

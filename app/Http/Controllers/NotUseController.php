@@ -464,4 +464,40 @@ class NotUseController extends Controller
             'sections' => SectionPage::wherePage(getValueInfo('hotel-detail'))->get()));
 
     }
+
+    public function userQuestions()
+    {
+        return view('userActivities.userQuestions');
+    }
+
+    public function userPosts()
+    {
+        return view('userActivities.userPosts');
+    }
+
+    public function userPhotosAndVideos()
+    {
+        return view('userActivities.userPhotosAndVideos');
+    }
+
+    public function gardeshnameEdit()
+    {
+        return view('gardeshnameEdit');
+    }
+
+    public function myTripInner()
+    {
+        return view('myTripInner');
+    }
+
+    public function business()
+    {
+        return view('business');
+    }
+
+    public function userActivitiesProfile()
+    {
+        return view('profile.userActivitiesProfile');
+    }
+
 }
