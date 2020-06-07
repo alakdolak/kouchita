@@ -724,14 +724,19 @@ DIV.ppr_rup.ppr_priv_homepage_shelves .homepage_shelves_widget .prw_shelves_shel
 }
 .card_circle {
     /*background: url("http://lorempixel.com/400/200") no-repeat center bottom;*/
-    background-color: #3487f7;
-    background-size: cover;
+    /*background-color: #3487f7;*/
+    /*background-size: cover;*/
     border-radius: 50%;
     height: 400px;
     margin-left: -75px;
     margin-top: -270px;
     position: absolute;
     width: 450px;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    overflow: hidden;
 }
 
 .h2MidBanerArticle{

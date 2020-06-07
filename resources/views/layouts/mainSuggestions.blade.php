@@ -293,11 +293,11 @@
                         <div class="cta-container transition" style="left: 0px">
                             <a href="{{$item->url}}" class="cta">مشاهده مقاله</a>
                         </div>
-                        <div class="card_circle transition" style="background: url('{{$item->pic}}') no-repeat center bottom; background-size: cover;"></div>
+{{--                        <div class="card_circle transition" style="background: url('{{$item->pic}}') no-repeat center bottom; background-size: cover;"></div>--}}
+                        <div class="card_circle transition">
+                            <img src="{{$item->pic}}" class="resizeImgClass" style="width: 100%;">
+                        </div>
                     </div>
-{{--                    <p class="titleAlt display-none">--}}
-{{--                        {{$item->title}}--}}
-{{--                    </p>--}}
                 </div>
             @endforeach
                 </div>
@@ -847,17 +847,26 @@
             $('#topArticle').find('.suggestionPackDiv').addClass('swiper-slide');
 
             new Swiper('.mainSuggestion', {
-                slidesPerGroup: 1,
                 loop: true,
-                loopFillGroupWithBlank: true,
+                updateOnWindowResize: true,
+                centeredSlides: true,
                 navigation: {
                     nextEl: '.swiper-button-next',
                     prevEl: '.swiper-button-prev',
                 },
+                on: {
+                    init: function(){
+                        this.update();
+                    },
+                    resize: function () {
+                        resizeFitImg('resizeImgClass');
+                        this.update()
+                    },
+                },
                 breakpoints: {
                     450: {
                         slidesPerView: 1,
-                        spaceBetween: 0,
+                        spaceBetween: 20,
                     },
                     520: {
                         slidesPerView: 2,
@@ -877,6 +886,7 @@
                     }
                 }
             });
+
         });
     }
 
