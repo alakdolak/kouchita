@@ -779,6 +779,9 @@
 
 <script>
     function ajaxToFillMainPageSuggestion(){
+        console.log('{{csrf_token()}}');
+        console.log('{!! csrf_token() !!}');
+
         $.ajax({
             type: 'post',
             url: '{{route("getMainPageSuggestion")}}',

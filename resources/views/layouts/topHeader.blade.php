@@ -11,6 +11,7 @@
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158914626-1"></script>
 <script>
+    console.log('{{csrf_token()}}');
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
@@ -23,7 +24,7 @@
 {{--<meta name="google-signin-scope" content="profile email">--}}
 {{--<meta name="google-signin-client_id" content="774684902659-1tdvb7r1v765b3dh7k5n7bu4gpilaepe.apps.googleusercontent.com">--}}
 
-{{--<meta name="csrf-token" content="{{ csrf_token() }}"/>--}}
+<meta name="csrf-token" content="{{ csrf_token() }}"/>
 
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/topHeaderStyles.css')}}' />
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/bootstrap.min.css')}}' />
@@ -38,10 +39,11 @@
 
 <script type="text/javascript">
     var homeURL = "{{route('home')}}";
+    console.log('{{csrf_token()}}');
 
     $.ajaxSetup({
         headers: {
-            'X-CSRF-TOKEN': '{{csrf_token()}}'
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
     });
 
@@ -64,7 +66,5 @@
         $(".dark").show();
     }
 </script>
-
-{{--<script src="{{URL::asset('js/app.js')}}"></script>--}}
 
 

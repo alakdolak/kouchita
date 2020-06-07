@@ -27,12 +27,12 @@
 
     {{--urls--}}
     <script>
-        {{--var searchDir = '{{route('totalSearch')}}';--}}
-        {{--var kindPlaceId = '{{$kindPlaceId}}';--}}
-{{--        var recentlyUrl =  '{{route("recentlyViewed")}}';--}}
+        var searchDir = '{{route('totalSearch')}}';
+        var kindPlaceId = '{{$kindPlaceId}}';
+        var recentlyUrl =  '{{route("recentlyViewed")}}';
         var getMainPageSuggestion =  '{{route("getMainPageSuggestion")}}';
         var imageBasePath = '{{URL::asset('images')}}';
-        {{--var getCitiesDir = "{{route('getCitiesDir')}}";--}}
+        var getCitiesDir = "{{route('getCitiesDir')}}";
         var url;
 
         var config = {
