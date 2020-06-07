@@ -36,7 +36,6 @@
 <script src="{{URL::asset('js/angular.js')}}"></script>
 <script src="{{URL::asset('js/swiper/swiper.min.js')}}"></script>
 
-
 <script type="text/javascript">
     var homeURL = "{{route('home')}}";
 
