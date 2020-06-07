@@ -34,15 +34,15 @@
 <script src="{{URL::asset('js/jquery-3.4.1.min.js')}}"></script>
 <script src="{{URL::asset('js/angular.js')}}"></script>
 <script src="{{URL::asset('js/swiper/swiper.min.js')}}"></script>
-<script src="{{URL::asset('js/app.js')}}"></script>
+
 <script type="text/javascript">
     var homeURL = "{{route('home')}}";
 
-    {{--$.ajaxSetup({--}}
-    {{--    headers: {--}}
-    {{--        'X-CSRF-TOKEN': '{{csrf_token()}}'--}}
-    {{--    }--}}
-    {{--});--}}
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': '{{csrf_token()}}'
+        }
+    });
 
     function isNumber(evt) {
         evt = (evt) ? evt : window.event;
@@ -63,4 +63,7 @@
         $(".dark").show();
     }
 </script>
+
+<script src="{{URL::asset('js/app.js')}}"></script>
+
 
