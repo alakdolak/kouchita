@@ -9,6 +9,7 @@ Route::get('language/{lang}', function($lang){
     return redirect(url('/'));
 });
 Route::get('/tranfa', 'HelperController@tranfa');
+Route::get('/testPage', 'HelperController@testPage');
 
 Route::post('resizePostImages', 'HomeController@resizePostImages');
 

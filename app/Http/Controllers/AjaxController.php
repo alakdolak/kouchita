@@ -582,48 +582,22 @@ class AjaxController extends Controller {
 
     public function getMainPageSuggestion()
     {
-        $activityId = Activity::whereName('نظر')->first()->id;
         $kindPlaceId = [1, 3, 4, 6, 10, 11];
         $result = array();
         for($i = 0; $i < 6; $i++){
             $kindPlace = Place::find($kindPlaceId[$i]);
-            $place = DB::table($kindPlace->tableName)->latest('id')->select(['name', 'id', 'file', 'picNumber', 'alt', 'cityId'])->first();
-            if($place != null) {
-                $file = $kindPlace->fileName;
-                $url = createUrl($kindPlace->id, $place->id, 0, 0);
-                $place->placePic = getPlacePic($place->id, $kindPlace->id);
-                $place->url = $url;
-                $city = Cities::whereId($place->cityId);
-                $place->placeCity = $city->name;
-                $place->placeState = State::whereId($city->stateId)->name;
-                $place->placeRate = getRate($place->id, $kindPlaceId[$i])[1];
-                $place->placeReviews = DB::select('select count(*) as countNum from log, comment WHERE logId = log.id and status = 1 and placeId = ' . $place->id .
-                    ' and kindPlaceId = ' . $kindPlaceId[$i] . ' and activityId = ' . $activityId)[0]->countNum;
-
+            $placeId = DB::table($kindPlace->tableName)->latest('id')->select(['id'])->first();
+            $place = createSuggestionPack($kindPlaceId[$i], $placeId->id);
+            if($place != null)
                 array_push($result, $place);
-            }
         }
 
         $suggest = MainSuggestion::all();
-        $suggestions = array();
+        $suggestions = [];
         foreach ($suggest as $item){
-            $kindPlace = Place::find($item->kindPlaceId);
-            $place = DB::table($kindPlace->tableName)->select(['name', 'id', 'file', 'picNumber', 'alt', 'cityId'])->find($item->placeId);
-            $file = $kindPlace->fileName;
-            $url = createUrl($item->kindPlaceId, $item->placeId, 0, 0);
-            $kindPlaceId = $kindPlace->id;
-
-            if($place != null && $file != null) {
-                $place->placePic = getPlacePic($place->id, $kindPlace->id);
-                $place->url = $url;
-                $city = Cities::whereId($place->cityId);
-                $place->placeCity = $city->name;
-                $place->placeState = State::whereId($city->stateId)->name;
-                $place->placeRate = getRate($place->id, $kindPlaceId)[1];
+            $place = createSuggestionPack($item->kindPlaceId, $item->placeId);
+            if($place != null) {
                 $place->section = $item->section;
-                $place->placeReviews = DB::select('select count(*) as countNum from log, comment WHERE logId = log.id and status = 1 and placeId = ' . $place->id .
-                    ' and kindPlaceId = ' . $kindPlaceId . ' and activityId = ' . $activityId)[0]->countNum;
-
                 array_push($suggestions, $place);
             }
         }
@@ -632,8 +606,9 @@ class AjaxController extends Controller {
         $post = Post::where('date', '<=', $today)->where('release', '!=', 'draft')->select(['id', 'title', 'slug', 'meta', 'pic', 'date', 'creator', 'keyword', 'seen'])->orderBy('date', 'DESC')->take('5')->get();
         foreach ($post as $item){
             $item->url = route('article.show', ['slug' => $item->slug]);
-            $item->placePic = URL::asset('_images/posts/' . $item->id . '/' . $item->pic);
-            $item->msg = PostComment::where('status', 1)->where('postId', $item->id)->count();
+            $item->name = $item->title;
+            $item->pic = URL::asset('_images/posts/' . $item->id . '/' . $item->pic);
+            $item->review = PostComment::where('status', 1)->where('postId', $item->id)->count();
             $item->section = 'مقالات';
             array_push($suggestions, $item);
         }

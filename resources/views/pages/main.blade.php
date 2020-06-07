@@ -21,18 +21,18 @@
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/long_lived_global_legacy_2.css?v=2')}}"/>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/masthead-saves.css?v=2')}}'/>
     <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/hr_north_star.css?v=2')}}'/>
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/icons.css?v=1')}}'/>
+    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/icons.css')}}'/>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/mainPageStyles.css')}}'/>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/abbreviations.css?v=1')}}'/>
 
     {{--urls--}}
     <script>
-        var searchDir = '{{route('totalSearch')}}';
-        var kindPlaceId = '{{$kindPlaceId}}';
-        var recentlyUrl =  '{{route("recentlyViewed")}}';
+        {{--var searchDir = '{{route('totalSearch')}}';--}}
+        {{--var kindPlaceId = '{{$kindPlaceId}}';--}}
+{{--        var recentlyUrl =  '{{route("recentlyViewed")}}';--}}
         var getMainPageSuggestion =  '{{route("getMainPageSuggestion")}}';
         var imageBasePath = '{{URL::asset('images')}}';
-        var getCitiesDir = "{{route('getCitiesDir')}}";
+        {{--var getCitiesDir = "{{route('getCitiesDir')}}";--}}
         var url;
 
         var config = {
@@ -63,7 +63,6 @@
                 <div class="placement_wrap">
                     <div class="placement_wrap_row">
                         <div class="placement_wrap_cell">
-                            {{--<div id="sliderBarDIV" class="ppr_rup ppr_priv_trip_search hideOnPhone">--}}
                             <div class="ppr_rup ppr_priv_trip_search mainBannerSlider">
                                 <!-- Swiper -->
                                 <div id="mainSlider" class="swiper-container backgroundColorForSlider">
@@ -127,8 +126,6 @@
 
     <script src="{{URL::asset('js/adv.js')}}"></script>
 
-    <script defer src="{{URL::asset('js/mainPageSuggestions.js')}}"></script>
-
     <!-- Initialize Swiper Of mainSlider -->
     <script>
     var mainSliderPics = {!! $sliderPic !!};
@@ -185,7 +182,7 @@
                     var usedWord = words.shift();
                     words.push(usedWord);
                     x = 1;
-                    target.setAttribute('style', 'color:' + color)
+                    target.setAttribute('style', 'color:' + color);
                     letterCount += x;
                     waiting = false;
                 }, 10)

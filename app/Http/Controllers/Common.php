@@ -1218,6 +1218,28 @@ function resizeImage($pic, $size){
     }
 }
 
+function createSuggestionPack($_kindPlaceId, $_placeId){
+    $activityId = Activity::whereName('نظر')->first()->id;
+
+    $kindPlace = Place::find($_kindPlaceId);
+    $place = DB::table($kindPlace->tableName)->select(['name', 'id', 'file', 'picNumber', 'alt', 'cityId'])->find($_placeId);
+    if($place != null) {
+        $file = $kindPlace->fileName;
+        $url = createUrl($kindPlace->id, $place->id, 0, 0);
+        $city = Cities::whereId($place->cityId);
+
+        $place->pic = getPlacePic($place->id, $kindPlace->id);
+        $place->url = $url;
+        $place->city = $city->name;
+        $place->state = State::whereId($city->stateId)->name;
+        $place->rate = getRate($place->id, $_kindPlaceId)[1];
+        $place->review = DB::select('select count(*) as countNum from log, comment WHERE logId = log.id and status = 1 and placeId = ' . $place->id .
+            ' and kindPlaceId = ' . $_kindPlaceId . ' and activityId = ' . $activityId)[0]->countNum;
+        return $place;
+    }
+    return null;
+}
+
 
 function ip_info($ip = NULL, $purpose = "location", $deep_detect = TRUE) {
     $output = NULL;
