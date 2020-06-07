@@ -38,11 +38,11 @@
 <script type="text/javascript">
     var homeURL = "{{route('home')}}";
 
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': '{{csrf_token()}}'
-        }
-    });
+    {{--$.ajaxSetup({--}}
+    {{--    headers: {--}}
+    {{--        'X-CSRF-TOKEN': '{{csrf_token()}}'--}}
+    {{--    }--}}
+    {{--});--}}
 
     function isNumber(evt) {
         evt = (evt) ? evt : window.event;
