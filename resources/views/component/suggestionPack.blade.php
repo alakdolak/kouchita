@@ -2,43 +2,44 @@
 
 <div id="suggestionSample">
     <div class="suggestionPackDiv">
-        <img src="{{URL::asset('images/pin.png')}}" class="imageGoldPin">
-        <div class="suggestionPackMainBody" style="display: none">
-            <a href="##url##" class="suggestionPackPicLink">
-                <div class="suggestionPackPicDiv">
-                    <img src="##pic##" alt="##alt##" class="suggestionPackPic resizeImgClass" onload="loadSuggestionPack(this)">
+        <div class="suggestionPackContent">
+            <img src="{{URL::asset('images/pin.png')}}" class="imageGoldPin">
+            <div class="suggestionPackMainBody" style="display: none">
+                <a href="##url##" class="suggestionPackPicLink">
+                    <div class="suggestionPackPicDiv">
+                        <img src="##pic##" alt="##alt##" class="suggestionPackPic resizeImgClass" onload="loadSuggestionPack(this)">
+                    </div>
+                </a>
+                <div class="suggestionPackDetailDiv">
+                    <a href="##url##" class="suggestionPackName">##name##</a>
+                    <div class="suggestionPackReviewRow" style="display: ##citySection##">
+                        <span class="ui_bubble_rating bubble_##rate##0"></span>
+                        <span class="suggestionPackReviewCount"> ##review## </span>
+                        <span>نقد </span>
+                    </div>
+                    <div class="suggestionPackReviewRow" style="display: ##articleSetion##">
+                        <span class="suggestionPackReviewCount"> ##review## </span>
+                        <span>نقد </span>
+                    </div>
+                    <div class="suggestionPackCityRow" style="display: ##citySection##">
+                        ##city##
+                        <span> در</span>
+                        <span>##state##</span>
+                    </div>
                 </div>
-            </a>
-            <div class="suggestionPackDetailDiv">
-                <a href="##url##" class="suggestionPackName">##name##</a>
-                <div class="suggestionPackReviewRow" style="display: ##citySection##">
-                    <span class="ui_bubble_rating bubble_##rate##0"></span>
-                    <span class="suggestionPackReviewCount"> ##review## </span>
-                    <span>نقد </span>
+            </div>
+
+            <div class="suggestionPackMainBody suggestionPlaceHolderDiv">
+                <div class="suggestionPackPicLink">
+                    <div class="placeHolderAnime"></div>
                 </div>
-                <div class="suggestionPackReviewRow" style="display: ##articleSetion##">
-                    <span class="suggestionPackReviewCount"> ##review## </span>
-                    <span>نقد </span>
-                </div>
-                <div class="suggestionPackCityRow" style="display: ##citySection##">
-                    ##city##
-                    <span> در</span>
-                    <span>##state##</span>
+                <div class="suggestionPackDetailDiv">
+                    <div class="suggestionPackName placeHolderAnime resultLineAnim" style="width: 80%;"></div>
+                    <div class="suggestionPackReviewRow placeHolderAnime resultLineAnim" style="width: 60%;"></div>
+                    <div class="suggestionPackCityRow placeHolderAnime resultLineAnim" style="width: 40%;"></div>
                 </div>
             </div>
         </div>
-
-        <div class="suggestionPackMainBody suggestionPlaceHolderDiv">
-            <div class="suggestionPackPicLink">
-                <div class="suggestionPackPlaceHolderAnime"></div>
-            </div>
-            <div class="suggestionPackDetailDiv">
-                <div class="suggestionPackName suggestionPackPlaceHolderAnime suggestionPackResultLine" style="width: 80%;"></div>
-                <div class="suggestionPackReviewRow suggestionPackPlaceHolderAnime suggestionPackResultLine"></div>
-                <div class="suggestionPackCityRow suggestionPackPlaceHolderAnime suggestionPackResultLine" style="width: 40%;"></div>
-            </div>
-        </div>
-
     </div>
 </div>
 

@@ -1,10 +1,14 @@
 .suggestionPackDiv{
     position: relative;
-    display: flex;
+    display: block;
     justify-content: center;
     align-items: center;
     max-width: 350px;
+    background: transparent !important;
+}
+.suggestionPackContent{
     padding: 12px;
+    background: white;
 }
 .imageGoldPin{
     position: absolute;
@@ -100,25 +104,4 @@
 
 .suggestionPlaceHolderDiv{
     width: 100%;
-}
-.suggestionPackPlaceHolderAnime{
-    background: radial-gradient(circle,white 0%, #d2d2d2 35%);
-    background-size: 400% 400%;
-    animation: gradient 1.2s infinite;
-    height: 100%;
-    width: 100%;
-}
-.suggestionPackResultLine{
-    width: 60%;
-    height: 10px;
-    margin-bottom: 10px;
-}
-
-@keyframes gradient {
-    0% {
-        background-position: 0% 50%;
-    }
-    100% {
-        background-position: 100% 50%;
-    }
 }
