@@ -32,8 +32,10 @@
 <link rel="stylesheet" href="{{URL::asset('css/theme2/swiper.css')}}">
 
 <script src="{{URL::asset('js/jquery-3.4.1.min.js')}}"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="{{URL::asset('js/angular.js')}}"></script>
 <script src="{{URL::asset('js/swiper/swiper.min.js')}}"></script>
+
 
 <script type="text/javascript">
     var homeURL = "{{route('home')}}";
@@ -41,7 +43,7 @@
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': '{{csrf_token()}}'
-        }
+        },
     });
 
     function isNumber(evt) {
@@ -64,6 +66,6 @@
     }
 </script>
 
-<script src="{{URL::asset('js/app.js')}}"></script>
+{{--<script src="{{URL::asset('js/app.js')}}"></script>--}}
 
 
