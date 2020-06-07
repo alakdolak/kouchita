@@ -705,9 +705,6 @@ div.prw_rup.prw_shelves_rebrand_poi_shelf_item_widget .detail {
         position: absolute;
         height: 100%;
     }
-    .swiper-slide{
-        overflow: hidden !important;
-    }
 
 
     div.prw_rup.prw_search_typeahead .typeahead_align {
