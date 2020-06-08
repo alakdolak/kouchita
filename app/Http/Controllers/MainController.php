@@ -22,12 +22,6 @@ use Illuminate\Http\Request;
 
 class MainController extends Controller
 {
-    public function __construct()
-    {
-//        dd('const');
-        if(\Session::get('lang'))
-            app()->setLocale(\Session::get('lang'));
-    }
     public function landingPage()
     {
         createSeeLog(0, 0, 'landing', '');

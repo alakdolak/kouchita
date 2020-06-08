@@ -8,6 +8,9 @@ Route::get('language/{lang}', function($lang){
     Session::put('lang', $lang);
     return redirect(url('/'));
 });
+Route::get('seeLanguage', function(){
+   dd(app()->getLocale());
+});
 Route::get('/tranfa', 'HelperController@tranfa');
 Route::get('/testPage', 'HelperController@testPage');
 
