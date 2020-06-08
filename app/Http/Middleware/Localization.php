@@ -20,13 +20,13 @@ class Localization
     {
         if(\Session::has('lang'))
             \App::setlocale(\Session::get('lang'));
-        else{
-            $country = ip_info("Visitor", "Country");
-            if($country == 'Iran')
-                \App::setlocale('fa');
-            else
-                \App::setlocale('en');
-        }
+//        else{
+//            $country = ip_info("Visitor", "Country");
+//            if($country == 'Iran')
+//                \App::setlocale('fa');
+//            else
+//                \App::setlocale('en');
+//        }
 
         return $next($request);
     }
