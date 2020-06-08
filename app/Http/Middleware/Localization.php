@@ -20,6 +20,8 @@ class Localization
     {
         if(\Session::has('lang'))
             \App::setlocale(\Session::get('lang'));
+        else
+            \App::setLocale('fa');
 //        else{
 //            $country = ip_info("Visitor", "Country");
 //            if($country == 'Iran')
