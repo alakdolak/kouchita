@@ -5,14 +5,26 @@
                 <div class="typeahead_align ui_typeahead full-width display-flex">
 
                     <div id="firstPanSearchText" class="spGoWhere">به کجا</div>
-                    <input onkeyup="searchMain(event, this.value)" type="text" id="placeName" class="typeahead_input searchPaneInput" placeholder="دوست دارید سفر کنید؟"/>
+                    <input onkeyup="searchMain(event, this.value)" type="text" id="mainSearchInput" class="typeahead_input searchPaneInput" placeholder="دوست دارید سفر کنید؟"/>
                     <input type="hidden" id="kindPlaceIdForMainSearch" value="0">
                     <input type="hidden" id="placeId">
 
                 </div>
                 <div class="spBorderBottom"></div>
                 <div class="mainContainerSearch">
-                    <div id="result" class="data_holder display-noneImp"></div>
+                    <div id="result" class="data_holder searchPangResultSection display-none">
+                        <div id="mainSearchResult" style="display:block;"></div>
+                        <div id="placeHolderResult" style="display: none;">
+                            <div style="margin-bottom: 40px">
+                                <div class="resultLineAnim placeHolderAnime"></div>
+                                <div class="resultLineAnim placeHolderAnime" style="width: 30%"></div>
+                            </div>
+                            <div>
+                                <div class="resultLineAnim placeHolderAnime"></div>
+                                <div class="resultLineAnim placeHolderAnime" style="width: 30%"></div>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="visitSuggestionDiv">
                             <div class="visitSuggestionText">بازدید های اخیر شما</div>
@@ -87,14 +99,14 @@
 
         $('#kindPlaceIdForMainSearch').val(_kindPlaceId);
         $('#firstPanSearchText').text(fpst);
-        $('#placeName').attr('placeholder', pn);
+        $('#mainSearchInput').attr('placeholder', pn);
 
         $('#searchPane').removeClass('hidden');
         $('#darkModeMainPage').toggle();
-        $('#placeName').val('');
-        $('#placeName').focus();
+        $('#mainSearchInput').val('');
+        $('#mainSearchInput').focus();
 
-        $("#result").empty();
+        $("#mainSearchResult").empty();
     }
 
     function redirect() {
@@ -103,14 +115,14 @@
 
     function searchMain(e, val = '') {
         if (val == '')
-            val = $("#placeName").val();
+            val = $("#mainSearchInput").val();
 
         var kindPlaceId = $('#kindPlaceIdForMainSearch').val();
 
         $(".suggest").css("background-color", "transparent").css("padding", "0").css("border-radius", "0");
         if (null == val || "" == val || val.length < 2) {
             $('#result').addClass('display-noneImp');
-            $("#result").empty();
+            $("#mainSearchResult").empty();
         }
         else {
             var scrollVal = $("#searchDivForScroll").scrollTop();
@@ -156,6 +168,9 @@
                 return;
             }
 
+            $('#result').removeClass('display-noneImp');
+            $('#placeHolderResult').show();
+            $('#mainSearchResult').hide();
             if ("ا" == val[0]) {
                 for (val2 = "آ", i = 1; i < val.length; i++) val2 += val[i];
                 $.ajax({
@@ -172,25 +187,36 @@
                     }
                 })
             }
-            else $.ajax({
-                type: "post",
-                url: searchDir,
-                data: {
-                    kindPlaceId: kindPlaceId,
-                    key: val,
-                    _token: '{{csrf_token()}}'
-                },
-                success: function (response) {
-                    createSearchResponse(response);
-                }
-            })
+            else {
+                $.ajax({
+                    type: "post",
+                    url: searchDir,
+                    data: {
+                        kindPlaceId: kindPlaceId,
+                        key: val,
+                        _token: '{{csrf_token()}}'
+                    },
+                    success: function (response) {
+                        createSearchResponse(response);
+                    }
+                });
+            }
         }
     }
 
     function createSearchResponse(response){
         newElement = "";
+        let searchText = $('#mainSearchInput').val();
+        if(searchText.trim().length < 3){
+            $('#result').addClass('display-noneImp');
+            $('#placeHolderResult').hide();
+            $('#mainSearchResult').hide();
+            return;
+        }
 
         if (response.length == 0) {
+            $('#placeHolderResult').hide();
+            $('#mainSearchResult').hide();
             newElement = "موردی یافت نشد";
             $("#placeId").val("");
             return;
@@ -201,7 +227,6 @@
         suggestions = resutl[1];
 
         response = resutl[1];
-        console.log(resutl[0]);
         if(lastTimeMainSearch == 0 || lastTimeMainSearch <= resutl[0]) {
             lastTimeMainSearch = resutl[0];
             var icon;
@@ -236,11 +261,13 @@
             }
 
             if (response.length != 0)
-                $('#result').removeClass('display-noneImp')
+                $('#result').removeClass('display-noneImp');
             else
                 $('#result').addClass('display-noneImp');
 
-            $("#result").empty().append(newElement);
+            $("#mainSearchResult").empty().append(newElement);
+            $('#placeHolderResult').hide();
+            $('#mainSearchResult').show();
         }
     }
 

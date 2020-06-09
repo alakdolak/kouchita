@@ -221,7 +221,7 @@ div.prw_rup.prw_search_typeahead .typeahead_align .typeahead_input {
 }
 
 #result > div {
-    display: flex;
+    /*display: flex;*/
     align-items: center;
     margin-bottom: 4px;
 }

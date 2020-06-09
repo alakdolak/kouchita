@@ -118,6 +118,10 @@
     src: url('../../fonts/AFSANEH.ttf');
 }
 
+*{
+    font-family: IRANSansWeb;
+}
+
 h1 {
     font-size: 28px !important;
 }
@@ -261,6 +265,7 @@ a:link {
     width: 60%;
     height: 10px;
     margin-bottom: 10px;
+    border-radius: 10px;
 }
 
 @keyframes gradient {

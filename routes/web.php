@@ -818,10 +818,3 @@ Route::group(array(), function(){
         dd($request);
     });
 });
-
-
-//<Directory /var/www/dev/public>
-//        Options Indexes FollowSymLinks
-//        AllowOverride All
-//        Require all granted
-//</Directory>
