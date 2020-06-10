@@ -170,23 +170,7 @@
 }
 
 .global-nav-profile-menu{
-    width: 80px;
-}
-
-.bubble_40:after {
-    content: "\e00d\e00b\e00b\e00b\e00b" !important;
-}
-
-.bubble_30:after {
-    content: "\e00d\e00d\e00b\e00b\e00b" !important;
-}
-
-.bubble_20:after {
-    content: "\e00d\e00d\e00d\e00b\e00b" !important;
-}
-
-.bubble_10:after {
-    content: "\e00d\e00d\e00d\e00d\e00b" !important;
+    width: 100px;
 }
 
 .photoviewerSidebarWrapper .captionArea {

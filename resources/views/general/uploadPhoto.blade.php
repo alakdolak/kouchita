@@ -1,25 +1,9 @@
 <link rel="stylesheet" href="{{URL::asset('css/theme2/cropper.css')}}">
-<link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/shazdeDesigns/editor.css')}}'/>
+<link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/component/editor.css')}}'/>
 <link rel="stylesheet" href="{{URL::asset('css/theme2/media_uploader.css')}}">
-<link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/icons.css?v=2')}}' />
 
-<style>
-    .whiteClose:before{
-        color: white;
-    }
-</style>
-
-<!--[if lt IE 9]>
-<div class="alert alert-warning alert-dismissible fade show m-0 rounded-0" role="alert">
-    You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
-<![endif]-->
-
-{{--<div class="darkModalEditor">--}}
-<span id="editPane" class="ui_overlay ui_modal photoUploadOverlay hidden">
+<div id="addPhotographerModal" class="addPhotographerModal hidden">
+    <span id="editPane" class="ui_overlay ui_modal photoUploadOverlay hidden">
     <div class="body_text photoUploader">
          <div class="headerBar">
              <h3 id="photoUploadHeader" class="photoUploadHeader">
@@ -74,19 +58,6 @@
                                 <div onclick="cancelCrop()" class="returnBtnEditPhoto">بازگشت</div>
                             </div>
                         </div>
-                    {{--<div class="btn-group btn-group-crop">--}}
-                    {{--<button id="saveBtn" type="button" onclick="successBtnClicked(this)" class="btn btn-success" data-method="getCroppedCanvas" data-option="{ &quot;width&quot;: 466, &quot;height&quot;: 367 }">--}}
-                    {{--<span class="docs-tooltip" data-toggle="tooltip" id="saveBtnSpan" title="cropper.getCroppedCanvas({ width: 466, height: 367 })">--}}
-                    {{--ذخیره--}}
-                    {{--</span>--}}
-                    {{--</button>--}}
-
-                    {{--<button id="saveBtn2" type="button" onclick="successBtnClicked(this)" class="btn btn-success hidden" data-method="getCroppedCanvas" data-option="{ &quot;width&quot;: 100, &quot;height&quot;: 100 }">--}}
-                    {{--<span class="docs-tooltip" data-toggle="tooltip" id="saveBtnSpan" title="cropper.getCroppedCanvas({ width: 100, height: 100 })">--}}
-                    {{--ذخیره--}}
-                    {{--</span>--}}
-                    {{--</button>--}}
-                    {{--</div>--}}
 
                     <!-- Show the cropped image in modal -->
                         <div class="modal fade docs-cropped" id="getCroppedCanvasModal" role="dialog" aria-hidden="true" aria-labelledby="getCroppedCanvasTitle" tabindex="-1">
@@ -105,213 +76,213 @@
                              </div>
                           </div>
                        </div>
-                    </div><!-- /.modal -->
+                    </div>
 
-                 </div><!-- /.docs-buttons -->
+                 </div>
                </div>
        </div>
     </div>
     <div class="ui_close_x" onclick="$('#editPane').addClass('hidden'); $('#darkModeMainPage').hide()"></div>
 </span>
 
-<input id="uploadPhotoInputPic" type="file" style="display: none;">
-
-<span id="photoEditor" class="ui_overlay ui_modal photoUploadOverlay hidden">
-     <div class="body_text">
-         <div class="photoUploader">
-             <div class="headerBar">
-                 <h3 id="photoUploadHeader" class="photoUploadHeader">
-                     <span>افزودن تصویر به </span>
-                     <span class="titleOfUploadPhoto"></span>
-                 </h3>
-             </div>
-             <div id="uploader-dlg" class="uploaderDlg hasFiles">
-                 <div id="dropArea" class="startScreen infoScreen">
-                     <div class="inner">
-                         <div class="innerPic"></div>
-                         <div style="height: 185px; position: relative;">
-                             <label for="uploadPhotoInputPic" class="choosePic">
-                                 <div class="ui_button primary addPhotoBtn">
-                                     <span>عکس خود را انتخاب کنید</span>
-                                 </div>
-                             </label>
-                         </div>
-
-                         <div class="separator">
-                             <span class="text">یا</span>
-                         </div>
-                         <div class="dragDropText">به سادگی عکس خود را در این قاب بی اندازید</div>
-
-                         <div class="invalidDragScreen infoScreen hidden">
-                             <div class="inner">
-                                 <div class="dropText">That image type is not supported. Please use a jpeg or png.</div>
-                             </div>
-                             <div class="dropOverlay"></div>
-                         </div>
-
-                         <div id="photographerLoadingPic" class="progressScreen infoScreen hidden">
-                             <div class="inner">
-                                 <img src="{{URL::asset('images/loading.gif')}}">
-                             </div>
-                         </div>
-
-                     </div>
-                     <div class="footerTextBox stFooter">
-                         <span>توجه نمایید که عکس‌ما می‌بایست در فرمت های رایج تصویر و با حداکثر سایز 500 مگابایت باشد. تصاویر پیش از انتشار توسط ما بازبینی می‌گردد. لطفاً از بارگزاری تصاویری که با قوانین سایت مغایرت دارند اجتناب کنید.</span>
-                         <span class="footerPolicyLink">صفحه مقررات</span>
-                     </div>
+    <input id="uploadPhotoInputPic" type="file" style="display: none;">
+    <span id="photoEditor" class="ui_overlay ui_modal photoUploadOverlay">
+         <div class="body_text">
+             <div class="photoUploader">
+                 <div class="headerBar">
+                     <h3 id="photoUploadHeader" class="photoUploadHeader">
+                         <span>افزودن تصویر به </span>
+                         <span class="titleOfUploadPhoto"></span>
+                     </h3>
                  </div>
-                 <div class="template itemRow loading">
-                     <div class="row">
-                         <div class="col-xs-7">
-                             <div>
-                                 <div class="epPicBox">
-                                     <div class="epPic">
-                                         <div class="imgContainer">
-                                             <img id="rectanglePicUploadPhoto">
-                                         </div>
+                 <div id="uploader-dlg" class="uploaderDlg hasFiles">
+                     <div id="dropArea" class="startScreen infoScreen">
+                         <div class="inner">
+                             <div class="innerPic"></div>
+                             <div style="height: 185px; position: relative;">
+                                 <label for="uploadPhotoInputPic" class="choosePic">
+                                     <div class="ui_button primary addPhotoBtn">
+                                         <span>عکس خود را انتخاب کنید</span>
                                      </div>
-                                     <div class="step6picText epicText">قاب مستطیل</div>
-                                     <div class="epEditPicText" onclick="doEdit(213 / 168, 'rectanglePicUploadPhoto');" style="cursor: pointer;">ویرایش</div>
+                                 </label>
+                             </div>
+
+                             <div class="separator">
+                                 <span class="text">یا</span>
+                             </div>
+                             <div class="dragDropText">به سادگی عکس خود را در این قاب بی اندازید</div>
+
+                             <div class="invalidDragScreen infoScreen hidden">
+                                 <div class="inner">
+                                     <div class="dropText">That image type is not supported. Please use a jpeg or png.</div>
                                  </div>
-                                 <div class="epPicBox">
-                                     <div class="epPic">
-                                         <div class="imgContainer">
-                                             <img id="squarePicUploadPhoto">
-                                         </div>
-                                     </div>
-                                     <div class="epPicText">قاب مربع</div>
-                                     <div class="epEditPicText" onclick="doEdit(1, 'squarePicUploadPhoto');" style="cursor: pointer;">ویرایش</div>
+                                 <div class="dropOverlay"></div>
+                             </div>
+
+                             <div id="photographerLoadingPic" class="progressScreen infoScreen hidden">
+                                 <div class="inner">
+                                     <img src="{{URL::asset('images/loading.gif')}}">
                                  </div>
                              </div>
-                             <div class="photoTemplateTypeDesc">عکس‌های ما در دو نوع قاب مختلف نمایش داده می‌شود می‌توانید خود نسبت به برش نمایش مناسب عکس در داخل قاب اقدام نمایید در غیر اینصورت تصویر به صورت اتوماتیک برش می‌خورد</div>
-
-                             <div class="imageVerificationBtn">
-                                     <button onclick="newUploadPic()">
-                                         تغییر عکس
-                                     </button>
-                            </div>
 
                          </div>
-                         <div class="col-xs-5">
-
-                             <div id="uploadPhotoPicAltDiv" class="epInputBox">
-                                <div class="epInputBoxText">
-                                    <div class="epInputBoxRequired"><div class="icons epInputIconRequired redStar"></div>عکس برای:</div>
-                                </div>
-                                <input class="epInputBoxInput" id="placeNameUploadPhoto" onclick="searchPlaceForUploadPhoto()" readonly>
-                                <input type="hidden" class="epInputBoxInput" id="placeIdUploadPhoto">
-                                <input type="hidden" class="epInputBoxInput" id="kindPlaceIdUploadPhoto" >
-                            </div>
-
-                            <div id="uploadPhotoPicNameDiv" class="epInputBox">
-                                <div class="epInputBoxText">
-                                    <div class="epInputBoxRequired"><div class="icons epInputIconRequired redStar"></div>نام عکس</div>
-                                </div>
-                                <input class="epInputBoxInput" id="uploadPhotoPicName" onkeydown="document.getElementById('uploadPhotoPicNameDiv').classList.remove('errorField')">
-                            </div>
-                            <div id="uploadPhotoPicAltDiv" class="epInputBox">
-                                <div class="epInputBoxText">
-                                    <div class="epInputBoxRequired"><div class="icons epInputIconRequired redStar"></div>نام جایگزین</div>
-                                </div>
-                                <input class="epInputBoxInput" id="uploadPhotoPicAlt" onkeydown="document.getElementById('uploadPhotoPicAltDiv').classList.remove('errorField')">
-                            </div>
-                            <div class="epRedNotice">نام جایگزین توصیف کننده موضوعی است که از تصویر استنباط می شود</div>
-
-                            <div>
-                               <div class="epTitle">توضیحات</div>
-                               <textarea class="epAddresText" placeholder="توضیحات همراه با عکس برای دوستانتان نمایش داده می شود.           حداقل 100 کاراکتر" maxlength="100" id="uploadPhotoDescription"></textarea>
-                            </div>
-
-                             <div id="photographerErrors" style="color: red;"></div>
-
-
-                             {{--<form class="photoForm roomType">--}}
-                             {{--<div class="field category">--}}
-                             {{--<div class="formFieldTitle text-align-center">دسته <span>(الزامی)</span></div>--}}
-                             {{--<div id="photoTags" class="column first"></div>--}}
-                             {{--</div>--}}
-                             {{--<div class="field description">--}}
-                             {{--<div class="maxChars"><span>توضیحات</span><span>(اختیاری)</span></div>--}}
-                             {{--<input type="text" id="description" placeholder="حداکثر 100 کاراکتر" maxlength="100" onkeypress="return event.keyCode != 13;">--}}
-                             {{--</div>--}}
-                             {{--</form>--}}
+                         <div class="footerTextBox stFooter">
+                             <span>توجه نمایید که عکس‌ما می‌بایست در فرمت های رایج تصویر و با حداکثر سایز 500 مگابایت باشد. تصاویر پیش از انتشار توسط ما بازبینی می‌گردد. لطفاً از بارگزاری تصاویری که با قوانین سایت مغایرت دارند اجتناب کنید.</span>
+                             <span class="footerPolicyLink">صفحه مقررات</span>
                          </div>
-                         <div class="col-xs-12 footer secondStepFooter">
-
-                             <div class="termsLabel">
+                     </div>
+                     <div class="template itemRow loading">
+                         <div class="row">
+                             <div class="col-xs-7">
                                  <div>
-                                     <div class="secondStepPolicyCheckBox">
-                                         <input id="uploadPhotoRole" type="checkbox">
-                                         <label for="uploadPhotoRole">
-                                             <span></span>
-                                         </label>
+                                     <div class="epPicBox">
+                                         <div class="epPic">
+                                             <div class="imgContainer">
+                                                 <img id="rectanglePicUploadPhoto">
+                                             </div>
+                                         </div>
+                                         <div class="step6picText epicText">قاب مستطیل</div>
+                                         <div class="epEditPicText" onclick="doEdit(213 / 168, 'rectanglePicUploadPhoto');" style="cursor: pointer;">ویرایش</div>
                                      </div>
-                                     <div class="secondStepPolicyText">
-                                         تایید میکنم تمامی حقوق مرتبط با انتشار این تصویر متعلق به من می باشد. تایید می نمایم در صورت حضور چهره دیگران در تصویر، آن ها نیز از انتشار این عکس راضی می باشند.
-                                         <div id="photoUploadTipsLink" class="headerLink tipsLink" style="display: inline-block">
-                                             <span onclick="$('#guidelinesOverlay').removeClass('hidden')">صفحه مقررات</span>
-                                             <span id="guidelinesOverlay" class="hidden ui_overlay ui_popover arrow_top guidelinesOverlayParent ui_tooltip">
-                                                 <div class="header_text"></div>
-                                                 <div class="body_text">
-                                                     <div class="guidelinesOverlay">
-                                                         <div class="listHdr">All photos must be...</div>
-                                                         <ul class="listBody">
-                                                             <li>Family-friendly</li>
-                                                             <li>Original, non-copyrighted images</li>
-                                                             <li>Non-commercial</li>
-                                                             <li>Virus-free</li>
-                                                             <li>In
-                                                                <b>.gif</b>,
-                                                                <b>.jpg</b>, or
-                                                                <b>.png</b> format</li>
-                                                             <li>No more than 50 photos per upload</li>
-                                                         </ul>
-                                                         <div class="listFtr">Read our complete <a href="https://www.tripadvisorsupport.com/hc/en-us/articles/200615067-Photo-Guidelines" target="_blank" class="js_popFraud">photo submission guidelines</a>.</div>
+                                     <div class="epPicBox">
+                                         <div class="epPic">
+                                             <div class="imgContainer">
+                                                 <img id="squarePicUploadPhoto">
+                                             </div>
+                                         </div>
+                                         <div class="epPicText">قاب مربع</div>
+                                         <div class="epEditPicText" onclick="doEdit(1, 'squarePicUploadPhoto');" style="cursor: pointer;">ویرایش</div>
+                                     </div>
+                                 </div>
+                                 <div class="photoTemplateTypeDesc">عکس‌های ما در دو نوع قاب مختلف نمایش داده می‌شود می‌توانید خود نسبت به برش نمایش مناسب عکس در داخل قاب اقدام نمایید در غیر اینصورت تصویر به صورت اتوماتیک برش می‌خورد</div>
+
+                                 <div class="imageVerificationBtn">
+                                         <button onclick="newUploadPic()">
+                                             تغییر عکس
+                                         </button>
+                                </div>
+
+                             </div>
+                             <div class="col-xs-5">
+
+                                 <div id="uploadPhotoPicAltDiv" class="epInputBox">
+                                    <div class="epInputBoxText">
+                                        <div class="epInputBoxRequired"><div class="icons epInputIconRequired redStar"></div>عکس برای:</div>
+                                    </div>
+                                    <input class="epInputBoxInput" id="placeNameUploadPhoto" onclick="searchPlaceForUploadPhoto()" readonly>
+                                    <input type="hidden" class="epInputBoxInput" id="placeIdUploadPhoto">
+                                    <input type="hidden" class="epInputBoxInput" id="kindPlaceIdUploadPhoto" >
+                                </div>
+
+                                <div id="uploadPhotoPicNameDiv" class="epInputBox">
+                                    <div class="epInputBoxText">
+                                        <div class="epInputBoxRequired"><div class="icons epInputIconRequired redStar"></div>نام عکس</div>
+                                    </div>
+                                    <input class="epInputBoxInput" id="uploadPhotoPicName" onkeydown="document.getElementById('uploadPhotoPicNameDiv').classList.remove('errorField')">
+                                </div>
+                                <div id="uploadPhotoPicAltDiv" class="epInputBox">
+                                    <div class="epInputBoxText">
+                                        <div class="epInputBoxRequired"><div class="icons epInputIconRequired redStar"></div>نام جایگزین</div>
+                                    </div>
+                                    <input class="epInputBoxInput" id="uploadPhotoPicAlt" onkeydown="document.getElementById('uploadPhotoPicAltDiv').classList.remove('errorField')">
+                                </div>
+                                <div class="epRedNotice">نام جایگزین توصیف کننده موضوعی است که از تصویر استنباط می شود</div>
+
+                                <div>
+                                   <div class="epTitle">توضیحات</div>
+                                   <textarea class="epAddresText" placeholder="توضیحات همراه با عکس برای دوستانتان نمایش داده می شود.           حداقل 100 کاراکتر" maxlength="100" id="uploadPhotoDescription"></textarea>
+                                </div>
+
+                                 <div id="photographerErrors" style="color: red;"></div>
+
+
+                                 {{--<form class="photoForm roomType">--}}
+                                 {{--<div class="field category">--}}
+                                 {{--<div class="formFieldTitle text-align-center">دسته <span>(الزامی)</span></div>--}}
+                                 {{--<div id="photoTags" class="column first"></div>--}}
+                                 {{--</div>--}}
+                                 {{--<div class="field description">--}}
+                                 {{--<div class="maxChars"><span>توضیحات</span><span>(اختیاری)</span></div>--}}
+                                 {{--<input type="text" id="description" placeholder="حداکثر 100 کاراکتر" maxlength="100" onkeypress="return event.keyCode != 13;">--}}
+                                 {{--</div>--}}
+                                 {{--</form>--}}
+                             </div>
+                             <div class="col-xs-12 footer secondStepFooter">
+
+                                 <div class="termsLabel">
+                                     <div>
+                                         <div class="secondStepPolicyCheckBox">
+                                             <input id="uploadPhotoRole" type="checkbox">
+                                             <label for="uploadPhotoRole">
+                                                 <span></span>
+                                             </label>
+                                         </div>
+                                         <div class="secondStepPolicyText">
+                                             تایید میکنم تمامی حقوق مرتبط با انتشار این تصویر متعلق به من می باشد. تایید می نمایم در صورت حضور چهره دیگران در تصویر، آن ها نیز از انتشار این عکس راضی می باشند.
+                                             <div id="photoUploadTipsLink" class="headerLink tipsLink" style="display: inline-block">
+                                                 <span onclick="$('#guidelinesOverlay').removeClass('hidden')">صفحه مقررات</span>
+                                                 <span id="guidelinesOverlay" class="hidden ui_overlay ui_popover arrow_top guidelinesOverlayParent ui_tooltip">
+                                                     <div class="header_text"></div>
+                                                     <div class="body_text">
+                                                         <div class="guidelinesOverlay">
+                                                             <div class="listHdr">All photos must be...</div>
+                                                             <ul class="listBody">
+                                                                 <li>Family-friendly</li>
+                                                                 <li>Original, non-copyrighted images</li>
+                                                                 <li>Non-commercial</li>
+                                                                 <li>Virus-free</li>
+                                                                 <li>In
+                                                                    <b>.gif</b>,
+                                                                    <b>.jpg</b>, or
+                                                                    <b>.png</b> format</li>
+                                                                 <li>No more than 50 photos per upload</li>
+                                                             </ul>
+                                                             <div class="listFtr">Read our complete <a href="https://www.tripadvisorsupport.com/hc/en-us/articles/200615067-Photo-Guidelines" target="_blank" class="js_popFraud">photo submission guidelines</a>.</div>
+                                                         </div>
                                                      </div>
-                                                 </div>
-                                                 <div class="ui_close_x" onclick="$('#guidelinesOverlay').addClass('hidden')"></div>
-                                             </span>
+                                                     <div class="ui_close_x" onclick="$('#guidelinesOverlay').addClass('hidden')"></div>
+                                                 </span>
+                                             </div>
                                          </div>
                                      </div>
                                  </div>
-                             </div>
-                             <div class="upload secondFooterVerification">
-                                 <div onclick="resizeImg()" class="uploadBtn ui_button primary">تایید</div>
-                                 {{--<div onclick="goToPage3()" class="uploadBtn ui_button primary">1111</div>--}}
+                                 <div class="upload secondFooterVerification">
+                                     <div onclick="resizeImg()" class="uploadBtn ui_button primary">تایید</div>
+                                     {{--<div onclick="goToPage3()" class="uploadBtn ui_button primary">1111</div>--}}
+                                 </div>
                              </div>
                          </div>
+                         {{--<div onclick="back()" class="removeBtn action ui_close_x"></div>--}}
                      </div>
-                     {{--<div onclick="back()" class="removeBtn action ui_close_x"></div>--}}
-                 </div>
-                 <div class="successScreen hidden">
-                     <div class="successTextBox">
-                        <div class="successText">موفق شدید</div>
-                        <div class="successTextDes">عکس شما برای ما ارسال گردید و پس از بررسی بارگزاری خواهد شد</div>
+                     <div class="successScreen hidden">
+                         <div class="successTextBox">
+                            <div class="successText">موفق شدید</div>
+                            <div class="successTextDes">عکس شما برای ما ارسال گردید و پس از بررسی بارگزاری خواهد شد</div>
+                         </div>
+                         <div class="uploadNextPicBtnBox">
+
+                             <label for="uploadPhotoInputPic" style="width: 250px;">
+                                 <div class="uploadNextPicBtn ui_button primary">بارگزاری عکس بعدی</div>
+                             </label>
+
+                             <div class="uploadNextPicDeny" onclick="closePhotoModal()">نه، برای بعد</div>
+
+                         </div>
+                         <div id="uploadedImgDiv" class="uploadedImgDiv"></div>
+                         <div class="footerTextBox" style="position: absolute; bottom: 0">
+                             <span>پس از تایید عکس امتیاز شما در پروفایل افزایش خواهد یافت. به گزاشتن عکس ادامه دهید تا علاوه بر امتیاز بتوانید نشان های افتخار مخصوص عکس را برنده شوید.</span>
+                             <span class="footerPolicyLink" onclick="">صفحه مقررات</span>
+                         </div>
+
                      </div>
-                     <div class="uploadNextPicBtnBox">
-
-                         <label for="uploadPhotoInputPic" style="width: 250px;">
-                             <div class="uploadNextPicBtn ui_button primary">بارگزاری عکس بعدی</div>
-                         </label>
-
-                         <div class="uploadNextPicDeny" onclick="closePhotoModal()">نه، برای بعد</div>
-
-                     </div>
-                     <div id="uploadedImgDiv" class="uploadedImgDiv"></div>
-                     <div class="footerTextBox" style="position: absolute; bottom: 0">
-                         <span>پس از تایید عکس امتیاز شما در پروفایل افزایش خواهد یافت. به گزاشتن عکس ادامه دهید تا علاوه بر امتیاز بتوانید نشان های افتخار مخصوص عکس را برنده شوید.</span>
-                         <span class="footerPolicyLink" onclick="">صفحه مقررات</span>
-                     </div>
-
                  </div>
              </div>
          </div>
-     </div>
 
-     <div class="ui_close_x whiteClose" onclick="$('#photoEditor').addClass('hidden'); $('#darkModeMainPage').hide()"></div>
-    <img src="" id="mainPicUploadPhotoImg" style="display: none">
-</span>
+         <div class="iconFamily iconClose closeAddPhotographer" onclick="$('#addPhotographerModal').addClass('hidden');"></div>
+        <img src="" id="mainPicUploadPhotoImg" style="display: none">
+    </span>
+</div>
 {{--</div>--}}
 
 <script src="{{URL::asset('js/cropper.js')}}"></script>
@@ -336,6 +307,9 @@
     var mainImage;
     var mainFileName = null;
     var mainFilesUploaded = [];
+    var placeIdUploadPhoto;
+    var kindPlaceIdUploadPhoto;
+    var repeatTime = 3;
 
     //drag and drop file
     dropzone.on('dragover', function() {
@@ -361,7 +335,31 @@
             submitPhoto(this.files[0]);
         });
     });
-    
+
+    function openUploadPhotoModal(_title, _uploadUrl, _placeId = 0, _kindPlaceId = 0, _additionalData){
+
+        $('#placeIdUploadPhoto').val(_placeId);
+        $('#kindPlaceIdUploadPhoto').val(_kindPlaceId);
+        $('#placeNameUploadPhoto').val(_title);
+
+        $('.titleOfUploadPhoto').text(_title);
+        uploadPhotoUrl = _uploadUrl;
+        //aditionalData must be json format
+        additionalData = _additionalData;
+
+        if(!checkLogin())
+            return;
+
+        $("#addPhotographerModal").removeClass('hidden');
+    }
+
+    function closePhotoModal(){
+        $(".successScreen").addClass('hidden');
+
+        newUploadPic();
+
+        $('#addPhotographerModal').addClass('hidden');
+    }
 
     function submitPhoto(input) {
 
@@ -406,9 +404,6 @@
         $('#photoEditor').addClass('hidden');
         $('#editPane').removeClass('hidden');
     }
-
-    var placeIdUploadPhoto;
-    var kindPlaceIdUploadPhoto;
 
     function resizeImg(){
         var name = document.getElementById('uploadPhotoPicName').value;
@@ -525,7 +520,6 @@
         }
     }
 
-    var repeatTime = 3;
     function submitUpload(type){
         var im;
         switch (type){
@@ -670,33 +664,6 @@
 
         $('.uploadedImgShowDiv').css('width', withOfDiv);
         $('.uploadedImgShowDiv').css('height', withOfDiv);
-    }
-
-    function openUploadPhotoModal(_title, _uploadUrl, _placeId = 0, _kindPlaceId = 0, _additionalData){
-
-        $('#placeIdUploadPhoto').val(_placeId);
-        $('#kindPlaceIdUploadPhoto').val(_kindPlaceId);
-        $('#placeNameUploadPhoto').val(_title);
-
-        $('.titleOfUploadPhoto').text(_title);
-        uploadPhotoUrl = _uploadUrl;
-        //aditionalData must be json format
-        additionalData = _additionalData;
-
-        if(!checkLogin())
-            return;
-
-        $('#darkModeMainPage').show();
-        $("#photoEditor").removeClass('hidden');
-    }
-
-    function closePhotoModal(){
-        $(".successScreen").addClass('hidden');
-
-        newUploadPic();
-
-        $('#photoEditor').addClass('hidden');
-        $('#darkModeMainPage').hide();
     }
 
     function b64toBlob(dataURI) {

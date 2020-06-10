@@ -64,6 +64,12 @@
 .redStar:before {
     content: '\E00B';
 }
+.iconFamily:before{
+    font-family: 'Shazde_Regular' !important;
+}
+.searchIcon:before{
+    content: "\e056";
+}
 
 /*..........city page Icons..........*/
 .cityPageIcon {
@@ -120,6 +126,18 @@
 .BookMarkIcon:before{
     content: "\E0DE" !important;
     font-family: Shazde_Regular2 !important;
+}
+.BookMarkIconEmpty:before{
+    content: "\e0dd" !important;
+}
+.MyTripsIcon:before{
+    content: "\e0c5" !important;
+}
+.MsgIcon:before{
+    content: "\e05f" !important;
+}
+.UserIcon:before{
+    content: "\e0aa" !important;
 }
 .downArrowIcon:before{
     content: '\E04A';
@@ -210,6 +228,23 @@
     -ms-transform: scale(-1, 1);
     -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=0,mirror=1)";
     transform: scale(-1, 1);
+}
+
+
+.bubble_40:after {
+    content: "\e00d\e00b\e00b\e00b\e00b" !important;
+}
+
+.bubble_30:after {
+    content: "\e00d\e00d\e00b\e00b\e00b" !important;
+}
+
+.bubble_20:after {
+    content: "\e00d\e00d\e00d\e00b\e00b" !important;
+}
+
+.bubble_10:after {
+    content: "\e00d\e00d\e00d\e00d\e00b" !important;
 }
 
 

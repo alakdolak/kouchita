@@ -306,202 +306,394 @@ if(Auth::check()) {
 <link rel="stylesheet" href="{{URL::asset('css/common/header.css')}}">
 <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/header1.css')}}">
 
+<style>
+    .headerContainer{
+        padding: 0px 24px;
+        display: flex;
+        align-items: center;
+        position: relative;
+        direction: rtl;
+    }
+    .headerPcLogoDiv{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 50px;
+    }
+    .headerPcLogo{
+        height: 70%;
+        width: auto;
+    }
+    .headerSearchBar{
+        width: 300px;
+        height: 35px;
+        background-color: lightgrey;
+        border-radius: 4px
+    }
+    .headerSearchIcon{
+        -webkit-transform: scale(-1, 1);
+        transform: scale(-1, 1);
+        font-size: 25px;
+        margin-left: 2px;
+        cursor: pointer;
+        width: 100%;
+        justify-content: flex-end;
+        display: flex;
+        color: black;
+    }
+    .headerSearchIcon:hover{
+        color: #4DC7BC;
+    }
+    .headerButtonsSection{
+        display: flex;
+        align-items: center;
+        padding: 0;
+        position: absolute;
+        left: 0;
+    }
+    .headerSecondSection{
+        border-top: solid 1px lightgrey;
+    }
+    .headerSecondContainer{
+        height: auto;
+        direction: rtl;
+    }
+    .headerSecondContentDiv{
+        overflow: hidden;
+        overflow-x: auto;
+        white-space: nowrap;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        font-size: 14px;
+        line-height: 18px;
+    }
+    .headerSecondTabs{
+        display: flex;
+    }
+
+    .headerSecondLi{
+        padding: 0 12px;
+        text-align: center;
+        cursor: pointer;
+        color: black;
+        vertical-align: middle;
+        height: 49px;
+        display: flex;
+        align-items: center;
+        font-weight: bold;
+    }
+    .headerIconCommon{
+        display: flex;
+        font-size: 28px;
+    }
+    .headerIconCommon:before{
+        display: inline-block;
+        font-style: normal;
+        font-weight: 400;
+        font-variant: normal;
+        font-size: inherit;
+        line-height: 1;
+        -ms-transform: rotate(-.001deg);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        speak: none;
+        color: black;
+    }
+    .headerAuthButton{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        cursor: pointer;
+        position: relative;
+        margin-right: 10px;
+    }
+    .headerAuthButton:hover .nameOfIconHeaders{
+        color: #4DC7BC;
+    }
+    .headerAuthButton:hover .headerIconCommon:before{
+        color: #4DC7BC;
+    }
+
+    .headerAlertNumber{
+        min-height: 16px;
+        position: absolute;
+        z-index: 1;
+        top: 6px;
+        right: auto;
+        bottom: auto;
+        left: 12px;
+        display: inline-block;
+        min-width: 16px;
+        padding: 3px 5px;
+        border-radius: 100%;
+        box-sizing: border-box;
+        background-color: #EF6945;
+        font-weight: bold;
+        font-size: 10px;
+        line-height: 1;
+        color: #fff;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .headerBookMarkMenu{
+        display: none;
+        direction: rtl;
+        text-align: right;
+        bottom: auto;
+        left: -20px;
+        position: absolute;
+        box-shadow: 0 4px 16px 0 rgba(0, 0, 0, .2);
+        top: 55px;
+        padding: 0 !important;
+        line-height: initial
+    }
+    .arrowTopDiv:before{
+        content: '';
+        position: absolute;
+        left: 45px;
+        top: -8px;
+        margin-left: -10px;
+        width: 0;
+        height: 0;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-bottom: 8px solid white;
+        -webkit-filter: drop-shadow(0 0 0 #b7b7b7);
+        filter: drop-shadow(0 0 0 #b7b7b7);
+        box-shadow: 0 0 0 #b7b7b7 \9;
+        -webkit-filter: drop-shadow(0 0 0 #999);
+        filter: drop-shadow(0 0 0 #999);
+        z-index: 10;
+    }
+    .headerBookMarkBody{
+        box-sizing: border-box;
+        font-family: Arial, Tahoma, "Bitstream Vera Sans", sans-serif;
+        font-size: 1rem;
+        color: #2c2c2c;
+        font-weight: 400;
+        line-height: 1.4;
+
+        background-color: white;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        flex-direction: column;
+        padding-top: 18px;
+        text-align: center;
+        max-height: 400px;
+        position: relative;
+        z-index: 1000000000 !important;
+    }
+    .headerBookMarkHeader{
+        text-align: right;
+        padding-right: 24px;
+        border-bottom: 1px solid #e5e5e5;
+    }
+    .headerBookMarkHeaderName{
+        white-space: nowrap;
+        font-size: 16px;
+        color: #333;
+        margin-bottom: 16px;
+        text-align: left;
+        font-weight: bold;
+        display: inline-block;
+    }
+    .headerBookMarkContentDiv{
+        min-height: 120px;
+        max-height: 343px;
+        width: 290px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        -webkit-box-flex: 1;
+        flex-grow: 1;
+        border-bottom: 1px solid #e5e5e5;
+    }
+    .headerBookMarkLink{
+        display: flex;
+        align-items: center;
+        margin: 5px 20px;
+        border-bottom: solid lightgray 1px;
+        padding-bottom: 5px;
+    }
+    .headerBookMarContentImgDiv{
+        width: 85px;
+        height: 85px;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+    }
+    .headerBookMarkPlaceholder{
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+    }
+    .headerBookMarContentImg{
+        height: 100%;
+        border-radius: 10px;
+    }
+    .bookMarkContent{
+        color: #b7b7b7;
+        font-size: 12px;
+        text-align: right;
+        margin-right: 15px;
+    }
+    .bookMarkContentTitle{
+        display: inline-block;
+        font-size: 14px;
+        color: #4a4a4a;
+        line-height: 15px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        max-width: 170px;
+        overflow: hidden;
+    }
+    .bookMarkContentCity{
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        max-width: 170px;
+        overflow: hidden;
+    }
+    .notifdd_empty{
+        margin: 24px;
+        font-size: 13px;
+        line-height: 17px;
+        color: #b7b7b7;
+    }
+    .headerAuthMenu{
+        list-style-type: none;
+        text-align: center;
+    }
+</style>
+
 <div class="masthead">
     <div id="taplc_global_nav_0" class="ppr_rup ppr_priv_global_nav">
         <div class="global-nav global-nav-single-line">
             <div class="global-nav-top">
                 <div class="global-nav-bar global-nav-green" style="padding-top: 5px;">
-                    <div class="ui_container global-nav-bar-container rtl" style="padding: 0px 24px;">
-                        <div class="global-nav-hamburger is-hidden-tablet">
-                            <span class="ui_icon menu-bars"></span>
-                        </div>
-                        <a href="{{route('main')}}" class="global-nav-logo" style="display: flex; justify-content: center; align-items: center">
-                            <img src="{{URL::asset('images/icons/mainLogo.png')}}" alt="کوچیتا" style="height: 70%; width: auto"/>
+
+                    <div class="container headerContainer">
+                        <a href="{{route('main')}}" class="headerPcLogoDiv" >
+                            <img src="{{URL::asset('images/icons/mainLogo.png')}}" alt="کوچیتا" class="headerPcLogo"/>
                         </a>
-                        <div style="width: 300px; height: 35px; background-color: lightgrey; border-radius: 4px">
-                            <div id="taplc_masthead_search_0" class="ppr_rup ppr_priv_masthead_search position-relative" data-placement-name="masthead_search">
-                                <div class="mag_glass_parent position-relative" title="Search">
-                                    <div id="targetHelp_6" class="targets">
-                                        <span class="ui_icon search" id="openSearch"></span>
-                                    </div>
-                                </div>
-                            </div>
 
+                        <div class="headerSearchBar">
+                            <span class="headerSearchIcon iconFamily searchIcon" id="openSearch"></span>
                         </div>
 
-                        <div class="global-nav-actions flex">
+                        <div class="headerButtonsSection">
 
                             @if(Auth::check())
 
-                                <div class="ppr_rup ppr_priv_global_nav_action_trips" onclick="openUploadPost()">
-                                    <div class="ppr_rup ppr_priv_global_nav_action_profile"  title="پست" style="font-size: 10px">
-                                        <span class="ui_icon addPostIcon" style="justify-content: center"></span>
-                                        <div class="nameOfIconHeaders">
-                                            پست
-                                        </div>
+                                <div class="headerAuthButton" onclick="openUploadPost()">
+                                    <span class="headerIconCommon iconFamily addPostIcon"></span>
+                                    <div class="nameOfIconHeaders">
+                                        پست
                                     </div>
                                 </div>
 
-                                <div class="ppr_rup ppr_priv_global_nav_action_trips">
-                                    <div id="bookmarkicon" class="ppr_rup ppr_priv_global_nav_action_profile"  title="نشانه گذاری شده ها" style="font-size: 10px">
-                                        <span class="ui_icon casino" style="justify-content: center"></span>
-                                        <div class="nameOfIconHeaders">
-                                            نشون‌کرده
-                                        </div>
+                                <div id="bookmarkicon" class="headerAuthButton" title="نشانه گذاری شده ها">
+                                    <span class="headerIconCommon iconFamily BookMarkIconEmpty"></span>
+                                    <div class="nameOfIconHeaders">
+                                        نشون‌کرده
                                     </div>
 
-                                    <div id="bookmarkmenu" class="ui_overlay ui_flyout global-nav-flyout global-nav-utility trips-flyout-container" style="direction: rtl">
-                                        <div>
-                                            <div class="styleguide" id="masthead-saves-container">
-                                                <div id="masthead-recent" style="background-color: white">
-                                                    <div class="recent-header-container">
-                                                        <a class="recent-header" href="{{route('recentlyViewTotal')}}" target="_self"> نشانه‌گذاری شده‌ها </a>
+                                    <div id="bookmarkmenu" class="arrowTopDiv headerBookMarkMenu">
+                                        <div class="headerBookMarkBody">
+                                            <div class="headerBookMarkHeader">
+                                                <a class="headerBookMarkHeaderName" href="{{route('recentlyViewTotal')}}" target="_self"> نشانه‌گذاری شده‌ها </a>
+                                            </div>
+                                            <div id="bookMarksDiv" class="headerBookMarkContentDiv" style="display: none"></div>
+                                            <div id="headerBookMarkPlaceHolder">
+                                                <div class="headerBookMarkLink">
+                                                    <div class="headerBookMarContentImgDiv">
+                                                        <div class="headerBookMarkPlaceholder placeHolderAnime"></div>
                                                     </div>
-                                                    <div class="masthead-recent-cards-container" id="bookMarksDiv"></div>
-                                                    {{--<div class="see-all-button-container"><a href="{{route('recentlyViewTotal')}}" target="_self" class="see-all-button">مشاهده تمامی موارد </a></div>--}}
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="ppr_rup ppr_priv_global_nav_action_trips">
-                                    <div class="masthead-saves" title="سفرهای من">
-                                        <a class="trips-icon"  href="{{route('myTrips')}}" >
-                                            <span class="ui_icon my-trips" style="justify-content: center"></span>
-                                            <div class="nameOfIconHeaders">
-                                                سفرهای من
-                                            </div>
-                                        </a>
-
-                                    </div>
-                                    {{--<div id="my-trips-not" class="ui_overlay ui_flyout global-nav-flyout global-nav-utility trips-flyout-container" style="direction: rtl">--}}
-                                        {{--<div>--}}
-                                            {{--<div class="styleguide" id="masthead-saves-container">--}}
-                                                {{--<div id="masthead-recent" style="background-color: white">--}}
-                                                    {{--<div class="recent-header-container">--}}
-                                                        {{--<a class="recent-header" href="{{route('recentlyViewTotal')}}" target="_self">بازدیدهای اخیر </a>--}}
-                                                    {{--</div>--}}
-                                                    {{--<div class="masthead-recent-cards-container">--}}
-                                                        {{--<div id="dropdown-test3-card">--}}
-                                                            {{--<div class="ui_close_x"></div>--}}
-                                                            {{--<div class="test-title">خوش آمدید</div>--}}
-                                                            {{--<div class="test-content">شما می توانید بازدیدهای اخیرتان را در اینجا ببینید</div>>--}}
-                                                        {{--</div>--}}
-                                                        {{--<div id="masthead-recent-cards-region">--}}
-                                                            {{--<div id="recentlyViewed"></div>--}}
-                                                        {{--</div>--}}
-                                                    {{--</div>--}}
-                                                    {{--<div class="see-all-button-container"><a href="{{route('recentlyViewTotal')}}" target="_self" class="see-all-button">مشاهده تمامی موارد </a></div>--}}
-                                                {{--</div>--}}
-                                                {{--<div id="masthead-trips">--}}
-                                                    {{--<div class="trips-header-container"><a class="trips-header" target="_self" href="{{URL('myTrips')}}">سفر های من </a></div>--}}
-                                                    {{--<div id="masthead-trips-tiles-region">--}}
-                                                        {{--<div id="trips-tiles" class="column">--}}
-                                                            {{--<div>--}}
-                                                                {{--<a onclick="showPopUp()" class="single-tile is-create-trip">--}}
-                                                                    {{--<div class="tile-content">--}}
-                                                                        {{--<span class="ui_icon plus"></span>--}}
-                                                                        {{--<div class="create-trip-text">ایجاد سفر</div>--}}
-                                                                    {{--</div>--}}
-                                                                {{--</a>--}}
-
-                                                                {{--@foreach($trips as $trip)--}}
-                                                                    {{--<div onclick="document.location.href = '{{route('tripPlaces', ['tripId' => $trip->id])}}'" class="trip-images ui_columns is-gapless is-multiline is-mobile">--}}
-                                                                        {{--@if($trip->placeCount > 0)--}}
-                                                                            {{--<div class="trip-image ui_column is-6 placeCount0" style="background: url('{{$trip->pic1}}')" ></div>--}}
-                                                                        {{--@else--}}
-                                                                            {{--<div class="trip-image trip-image-empty ui_column is-6 placeCount0Else"></div>--}}
-                                                                        {{--@endif--}}
-                                                                        {{--@if($trip->placeCount > 1)--}}
-                                                                            {{--<div class="trip-image ui_column is-6 placeCount0" style="background: url('{{$trip->pic1}}')" ></div>--}}
-                                                                        {{--@else--}}
-                                                                            {{--<div class="trip-image trip-image-empty ui_column is-6  placeCount0Else"></div>--}}
-                                                                        {{--@endif--}}
-                                                                        {{--@if($trip->placeCount > 2)--}}
-                                                                            {{--<div class="trip-image ui_column is-6 placeCount0" style="background: url('{{$trip->pic1}}')" ></div>--}}
-                                                                        {{--@else--}}
-                                                                            {{--<div class="trip-image trip-image-empty ui_column is-6 placeCount0Else"></div>--}}
-                                                                        {{--@endif--}}
-                                                                        {{--@if($trip->placeCount > 3)--}}
-                                                                            {{--<div class="trip-image ui_column is-6 placeCount0" style="background: url('{{$trip->pic1}}')" ></div>--}}
-                                                                        {{--@else--}}
-                                                                            {{--<div class="trip-image trip-image-empty ui_column is-6 placeCount0Else"></div>--}}
-                                                                        {{--@endif--}}
-                                                                    {{--</div>--}}
-                                                                    {{--<div class="create-trip-text">{{$trip->name}} </div>--}}
-                                                                    {{--@if($trip->to_ != "" && $trip->from_ != "")--}}
-                                                                        {{--<div class="create-trip-text">--}}
-                                                                            {{--{{convertStringToDate2($trip->to_)}}--}}
-                                                                            {{--<p>الی</p>--}}
-                                                                            {{--{{convertStringToDate2($trip->from_)}}--}}
-                                                                        {{--</div>--}}
-                                                                    {{--@else--}}
-                                                                        {{--<div class="create-trip-text">بدون تاریخ</div>--}}
-                                                                    {{--@endif--}}
-                                                                {{--@endforeach--}}
-                                                            {{--</div>--}}
-                                                        {{--</div>--}}
-                                                    {{--</div>--}}
-                                                {{--</div>--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
-
-                                </div>
-
-                            @else
-                                <div class="ppr_rup ppr_priv_global_nav_action_trips">
-                                    <div id="entryBtnId" class="ppr_rup ppr_priv_global_nav_action_profile">
-                                        <div class="global-nav-profile global-nav-utility">
-                                            <a class="login-button mainLoginButton" title="ورود / ثبت نام"> ورود / ثبت نام</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endif
-
-                            @if(Auth::check())
-                                <div id="alertBtn" onclick="getAlertItems()" class="ppr_rup ppr_priv_global_nav_action_notif">
-                                        <div class="masthead_notification" title="اعلانات">
-                                            <div class="masthead_notifctr_btn">
-                                                <div class="masthead_notifctr_sprite ui_icon notification-bell"></div>
-                                                <div class="nameOfIconHeaders">
-                                                    پیام‌ها
-                                                </div>
-                                                <div id="alertPane" class="ui_jewel marked_for_attention">0</div>
-                                                <div id="alert" class="masthead_notifctr_dropdown hidden">
-                                                    <div class="notifdd_title">پیام‌ها</div>
-
-                                                    <div id="alertLoader" class="notifdd_loading hidden">
-                                                        <div class="ui_spinner"></div>
+                                                   <div class="bookMarkContent" style="width: 90px">
+                                                        <div class="bookMarkContentTitle placeHolderAnime resultLineAnim" style="width: 100%"></div>
+                                                        <div class="bookMarkContentRating placeHolderAnime resultLineAnim" style="width: 100%"></div>
+                                                        <div class="bookMarkContentCity placeHolderAnime resultLineAnim" style="width: 100%"></div>
                                                     </div>
-
-                                                    <div onscroll="scrolled(this)" id="alertItems"></div>
-                                                    <div onclick="superAccess = true; getAlertItems();" id="showMoreItemsAlert" class="btn btn-success"> نمایش موارد بیشتر</div>
-
+                                                </div>
+                                                <div class="headerBookMarkLink">
+                                                    <div class="headerBookMarContentImgDiv">
+                                                        <div class="headerBookMarkPlaceholder placeHolderAnime"></div>
+                                                    </div>
+                                                   <div class="bookMarkContent" style="width: 90px">
+                                                        <div class="bookMarkContentTitle placeHolderAnime resultLineAnim" style="width: 100%"></div>
+                                                        <div class="bookMarkContentRating placeHolderAnime resultLineAnim" style="width: 100%"></div>
+                                                        <div class="bookMarkContentCity placeHolderAnime resultLineAnim" style="width: 100%"></div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                            @endif
+                                </div>
 
-                            <div class="ppr_rup ppr_priv_global_nav_action_profile">
-                                <div class="global-nav-profile global-nav-utility">
-                                    @if(Auth::check())
-                                        <div class="global-nav-utility-activator" title="صفحه کاربری" style="flex-direction: column;">
-                                            <span id="memberTop" class="ui_icon member" style="margin: 0px; justify-content: center"></span>
-                                            {{--<span id="memberTop" class="username"></span>--}}
-                                            <div class="nameOfIconHeaders">
-                                                {{$user->username}}
+                                <a href="{{route('myTrips')}}" class="headerAuthButton" title="سفرهای منا">
+                                    <span class="headerIconCommon iconFamily MyTripsIcon"></span>
+                                    <div class="nameOfIconHeaders">
+                                        سفرهای من
+                                    </div>
+                                </a>
+
+                                <div class="headerAuthButton" onclick="hideAllTopNavs(); getAlertItems()">
+                                    <span class="headerIconCommon iconFamily MsgIcon"></span>
+                                    <div class="nameOfIconHeaders">
+                                        پیام‌ها
+                                    </div>
+                                    <div id="alertPane" class="headerAlertNumber">0</div>
+
+                                    <div id="alert" class="arrowTopDiv headerBookMarkMenu">
+                                        <div class="headerBookMarkBody">
+                                            <div class="headerBookMarkHeader">
+                                                <a class="headerBookMarkHeaderName" href="#" target="_self"> تمامی پیام ها</a>
+                                            </div>
+                                            <div id="alertItems" class="headerBookMarkContentDiv" style="display: none"></div>
+                                            <div id="headerMsgPlaceHolder">
+                                                <div class="headerBookMarkLink">
+                                                    <div class="headerBookMarContentImgDiv">
+                                                        <div class="headerBookMarkPlaceholder placeHolderAnime"></div>
+                                                    </div>
+                                                    <div class="bookMarkContent" style="width: 90px">
+                                                        <div class="bookMarkContentTitle placeHolderAnime resultLineAnim" style="width: 100%"></div>
+                                                        <div class="bookMarkContentRating placeHolderAnime resultLineAnim" style="width: 100%"></div>
+                                                        <div class="bookMarkContentCity placeHolderAnime resultLineAnim" style="width: 100%"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="headerBookMarkLink">
+                                                    <div class="headerBookMarContentImgDiv">
+                                                        <div class="headerBookMarkPlaceholder placeHolderAnime"></div>
+                                                    </div>
+                                                    <div class="bookMarkContent" style="width: 90px">
+                                                        <div class="bookMarkContentTitle placeHolderAnime resultLineAnim" style="width: 100%"></div>
+                                                        <div class="bookMarkContentRating placeHolderAnime resultLineAnim" style="width: 100%"></div>
+                                                        <div class="bookMarkContentCity placeHolderAnime resultLineAnim" style="width: 100%"></div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    @endif
-                                    <div id="profile-drop-mainDiv" class="global-nav-overlays-container">
-                                        <div id="profile-drop" class="ui_overlay ui_flyout global-nav-flyout global-nav-utility" style="list-style-type: none; text-align: center">
+                                    </div>
+                                </div>
+
+                                <div id="memberTop" class="headerAuthButton">
+                                    <span class="headerIconCommon iconFamily UserIcon"></span>
+                                    <div class="nameOfIconHeaders">
+                                        {{$user->username}}
+                                    </div>
+                                    <div>
+                                        <div id="profile-drop" class="arrowTopDiv headerAuthMenu">
                                             <ul class="global-nav-profile-menu">
                                                 <li class="subItemHeaderNavBar">
                                                     <a href="{{URL('profile')}}" class="subLink" data-tracking-label="UserProfile_viewProfile">صفحه کاربری</a>
+                                                </li>
+                                                <li class="subItemHeaderNavBar">
+                                                    <a href="{{URL('badge')}}" class="subLink" data-tracking-label="UserProfile_viewProfile">جوایز و مدال ها</a>
                                                 </li>
                                                 <li class="subItemHeaderNavBar rule">
                                                     <a href="{{URL('messages')}}" class="subLink global-nav-submenu-divided" data-tracking-label="UserProfile_messages">پیام‌ها</a>
@@ -515,114 +707,44 @@ if(Auth::check()) {
                                             </ul>
                                         </div>
                                     </div>
+
                                 </div>
-                            </div>
-
-                            {{--<div class="global-nav-overlays-container">--}}
-                                {{--@include('layouts.recentlyViewAndMyTripsInMain')--}}
-                            {{--</div>--}}
-                        </div>
-
-                        <div class="collapseBtnActions" onclick="headerActionsToggle()">
-{{--                            <div class="linesCollapseBtn"></div>--}}
-{{--                            <div class="linesCollapseBtn"></div>--}}
-{{--                            <div class="linesCollapseBtn"></div>--}}
-                        </div>
-
-                        <div style="clear: both;"></div>
-                    </div>
-
-                    <div style="border-top: solid 1px lightgrey;">
-                        <div class="ui_container global-nav-bar-container rtl" style="height: auto">
-                            <div class="global-nav-links ui_tabs inverted is-hidden-mobile">
-                                <div id="taplc_global_nav_links_0" class="ppr_rup ppr_priv_global_nav_links" data-placement-name="global_nav_links">
-                                    <div class="global-nav-links-container">
-                                        <ul class="global-nav-links-menu headerMainList">
-                                            <li>
-                                                <span id="global-nav-hotels" class="unscoped global-nav-link ui_tab" onclick="openMainSearch(4)  // in mainSearch.blade.php" data-tracking-label="hotels">هتل</span>
-                                            </li>
-                                            <li>
-                                                <span id="global-nav-vr" class="unscoped global-nav-link ui_tab" onclick="openMainSearch(3)  // in mainSearch.blade.php">رستوران</span>
-                                            </li>
-                                            <li>
-                                                <span id="global-nav-restaurants" class="unscoped global-nav-link ui_tab" onclick="openMainSearch(1)  // in mainSearch.blade.php">جاذبه</span>
-                                            </li>
-                                            <li class="" data-element=".masthead-dropdown-Flights">
-                                                <span class="unscoped global-nav-link ui_tab " onclick="openMainSearch(10)  // in mainSearch.blade.php">سوغات و صنایع‌دستی</span>
-                                            </li>
-                                            <li class="" data-element=".masthead-dropdown-Flights">
-                                                <span class="unscoped global-nav-link ui_tab" onclick="openMainSearch(11)  // in mainSearch.blade.php">غذای محلی</span>
-                                            </li>
-                                            <li>
-                                                <a href="{{route('mainArticle')}}" class="unscoped global-nav-link ui_tab " data-tracking-label="Flights">سفرنامه‌ها</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="sidebar-nav-wrapper hidden">
-                <div class="sidebar-nav-backdrop"></div>
-                <div class="sidebar-nav-container">
-                    <div class="ui_container">
-                        <div class="sidebar-nav-header">
-                            <div class="sidebar-nav-close">
-                                <div class="ui_icon times"></div>
-                            </div>
-                            <a href="/" class="global-nav-logo">
-                                <img src='{{URL::asset('images/icons/mainLogo.png')}}' alt="کوچیتا" class="global-nav-img"/>
-                            </a>
-                        </div>
-                        <div class="sidebar-nav-profile-container">
-                            @if(Auth::check())
-                                <div class="sidebar-nav-profile-linker">
-                                    <a href="" class="global-nav-profile-linker">
-                                        <span onclick="document.location.href = '{{route('profile')}}'" class="ui_icon member"></span>
-                                        <div class="profile-link">
-                                            <div class="profile-name">{{$user->username}}</div>
-                                            <div class="profile-link-text">صفحه کاربری</div>
-                                        </div>
-                                    </a>
-                                </div>
+                            @else
+                                <div class="login-button mainLoginButton" title="ورود / ثبت نام"> ورود / ثبت نام</div>
                             @endif
-                            <p class="sidebar-nav-title">اکانت من</p>
-                            <div class="sidebar-nav-profile">
-                                <li class="subItem"><a href="{{route('soon')}}" class="subLink global-nav-submenu-divided">سفرهای من</a></li>
-                                <li class="subItem"><a href="{{route('soon')}}" class="subLink global-nav-submenu-divided" data-tracking-label="UserProfile_ManagementCenter">رزروها</a></li>
-                                <li class="subItem"><a href="{{route('soon')}}" class="subLink" data-tracking-label="UserProfile_inbox">پروازها</a></li>
-                                <li class="subItem"><a href="{{route('logout')}}" class="subLink" data-tracking-label="UserProfile_signout">خروج</a></li>
-                            </div>
-                        </div>
-                        <div class="sidebar-nav-links-container">
-                            <p class="sidebar-nav-title">Browse</p>
-                            <div class="sidebar-nav-links"></div>
-                            <div class="sidebar-nav-links-more"></div>
                         </div>
                     </div>
+
+                    <div class="headerSecondSection">
+                        <div class="container headerSecondContainer">
+                            <div class="headerSecondContentDiv">
+                                <div class="headerSecondTabs">
+                                    <span class="headerSecondLi" onclick="openMainSearch(4)  // in mainSearch.blade.php">هتل</span>
+                                    <span class="headerSecondLi" onclick="openMainSearch(3)  // in mainSearch.blade.php">رستوران</span>
+                                    <span class="headerSecondLi" onclick="openMainSearch(1)  // in mainSearch.blade.php">جاذبه</span>
+                                    <span class="headerSecondLi" onclick="openMainSearch(10)  // in mainSearch.blade.php">سوغات و صنایع‌دستی</span>
+                                    <span class="headerSecondLi" onclick="openMainSearch(11)  // in mainSearch.blade.php">غذای محلی</span>
+                                    <a href="{{route('mainArticle')}}" class="headerSecondLi" data-tracking-label="Flights">سفرنامه‌ها</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
-
-            <div style="clear: both;"></div>
-
         </div>
     </div>
     <!--etk-->
 </div>
-
-
-@include('layouts.pop-up-create-trip')
 
 <script>
     var getBookMarksPath = '{{route('getBookMarks')}}';
 
     function hideAllTopNavs(){
         $("#alert").hide();
+        $("#bookmarkmenu").hide();
         $("#my-trips-not").hide();
         $("#profile-drop").hide();
-        $("#bookmarkmenu").hide();
     }
 
     $(document).ready(function(){
@@ -636,24 +758,6 @@ if(Auth::check()) {
             $("#menu_res").addClass('off-canvas');
         });
     });
-    
-    function headerActionsToggle() {
-
-        $('.collapseBtnActions').animate({transform: 'rotate(90deg)'})
-
-
-        if($('.global-nav-actions').hasClass('display-flexImp')) {
-
-            $('.global-nav-actions').animate({width: "0"},
-                function () {
-                    $('.global-nav-actions').toggleClass('display-flexImp');
-                });
-        }
-        else {
-            $('.global-nav-actions').animate({width: "300px"});
-            $('.global-nav-actions').toggleClass('display-flexImp');
-        }
-    }
 
     $('#close_span_search').click(function(e) {
         hideAllTopNavs();
@@ -671,6 +775,9 @@ if(Auth::check()) {
 
 @if(Auth::check())
     <script>
+        let bookMarksData = null;
+        let msgHeaderData = null;
+
         var locked = false;
         var superAccess = false;
         var getRecentlyPath = '{{route('recentlyViewed')}}';
@@ -704,51 +811,42 @@ if(Auth::check()) {
         }
 
         function getAlertItems() {
+            $('#alert').toggle();
 
-            var items = $('#alertItems');
-            var pane = $('#alert');
+            if(msgHeaderData == null) {
+                $.ajax({
+                    type: 'post',
+                    url: '{{route('getAlerts')}}',
+                    success: function (response) {
+                        response = JSON.parse(response);
+                        var newElement = "";
 
-            if(!superAccess && !pane.hasClass('hidden')) {
-                pane.addClass('hidden');
-                return;
-            }
-
-            locked = true;
-            items.empty();
-            $("#alertLoader").removeClass('hidden');
-
-            $.ajax({
-                type: 'post',
-                url: '{{route('getAlerts')}}',
-                success: function (response) {
-
-                    response = JSON.parse(response);
-                    var newElement = "";
-
-                    if(response.length < 5 && response.length > 0)
-                        $("#showMoreItemsAlert").removeClass('hidden');
-                    else
-                        $("#showMoreItemsAlert").addClass('hidden');
-                    for(i = 0; i < response.length; i++) {
-
-                        if(response[i].url != -1)
-                            newElement += '<div id="notificationBox"><div class="modules-engagement-notification-dropdown"><div><img onclick="document.location.href = \'' + response[i].url + '\'" width="50px" height="50px" src="' + response[i].pic + '"></div><div class="notifdd_empty"><span>' + response[i].customText + '</span></div></div></div>';
+                        if (response.length < 5 && response.length > 0)
+                            $("#showMoreItemsAlert").removeClass('hidden');
                         else
-                            newElement += '<div onclick="document.location.href = \'{{route('msgs')}}\'" style="cursor: pointer; min-height: 60px"><div class="modules-engagement-notification-dropdown"><div style="float: right; margin: 10px; padding-top: 0; height: 50px; margin-top: 0; width: 50px; z-index: 10000000000001 !important;"></div><div style="margin-right: 70px" class="notifdd_empty"><span>' + response[i].customText + '</span></div></div></div>';
+                            $("#showMoreItemsAlert").addClass('hidden');
+                        for (i = 0; i < response.length; i++) {
+
+                            if (response[i].url != -1)
+                                newElement += '<div id="notificationBox"><div class="modules-engagement-notification-dropdown"><div><img onclick="document.location.href = \'' + response[i].url + '\'" width="50px" height="50px" src="' + response[i].pic + '"></div><div class="notifdd_empty"><span>' + response[i].customText + '</span></div></div></div>';
+                            else
+                                newElement += '<div onclick="document.location.href = \'{{route('msgs')}}\'" style="cursor: pointer; min-height: 60px"><div class="modules-engagement-notification-dropdown"><div style="float: right; margin: 10px; padding-top: 0; height: 50px; margin-top: 0; width: 50px; z-index: 10000000000001 !important;"></div><div style="margin-right: 70px" class="notifdd_empty"><span>' + response[i].customText + '</span></div></div></div>';
+                        }
+
+                        if (response.length == 0)
+                            newElement += '<div><div class="modules-engagement-notification-dropdown"><div class="notifdd_empty">هیچ پیامی موجود نیست </div></div></div>';
+                        else
+                            getAlertsCount();
+
+                        locked = false;
+                        superAccess = false;
+                        $('#alertItems').empty().append(newElement);
+
+                        $('#headerMsgPlaceHolder').hide();
+                        $('#alertItems').show();
                     }
-
-                    if(response.length == 0)
-                        newElement += '<div><div class="modules-engagement-notification-dropdown"><div class="notifdd_empty">هیچ پیامی موجود نیست </div></div></div>';
-                    else
-                        getAlertsCount();
-
-                    locked = false;
-                    superAccess = false;
-                    pane.removeClass('hidden');
-                    $("#alertLoader").addClass('hidden');
-                    items.empty().append(newElement);
-                }
-            });
+                });
+            }
         }
 
         $('#memberTop').click(function(e) {
@@ -767,9 +865,8 @@ if(Auth::check()) {
                 $("#bookmarkmenu").css('display', 'block');
                 showBookMarks('bookMarksDiv');
             }
-            else {
+            else
                 hideAllTopNavs();
-            }
         });
 
         $('.notification-bell').click(function(e) {
@@ -789,38 +886,44 @@ if(Auth::check()) {
                 $(".settingsDropDown").hide()
             }
         });
+
         function showBookMarks(containerId) {
-
-            $("#" + containerId).empty();
-
-            $.ajax({
-                type: 'post',
-                url: getBookMarksPath,
-                success: function (response) {
-
-                    response = JSON.parse(response);
-
-                    for(i = 0; i < response.length; i++) {
-                        element = "<div>";
-                        element += "<a class='masthead-recent-card' target='_self' href='" + response[i].placeRedirect + "'>";
-                        element += "<div class='media-left'>";
-                        element += "<div class='thumbnail' style='background-image: url(" + response[i].placePic + ");'></div>";
-                        element += "</div>";
-                        element += "<div class='content-right'>";
-                        element += "<div class='poi-title'>" + response[i].placeName + "</div>";
-                        element += "<div class='rating'>";
-                        element += "<div class='ui_bubble_rating bubble_45'></div><br/>" + response[i].placeReviews + " مشاهده ";
-                        element += "</div>";
-                        element += "<div class='geo'>" + response[i].placeCity + "</div>";
-                        element += "</div>";
-                        element += "</a></div>";
-
-                        $("#" + containerId).append(element);
+            if(bookMarksData == null) {
+                $("#" + containerId).empty();
+                $.ajax({
+                    type: 'post',
+                    url: getBookMarksPath,
+                    success: function (response) {
+                        let element = '';
+                        response = JSON.parse(response);
+                        $('#headerBookMarkPlaceHolder').hide();
+                        $('#' + containerId).show();
+                        for (i = 0; i < response.length; i++) {
+                            element +=  '<a class="headerBookMarkLink" target="_blank" href="' + response[i].placeRedirect + '">\n' +
+                                        '<div class="headerBookMarContentImgDiv">\n' +
+                                        '<img src="' + response[i].placePic + '" class="headerBookMarContentImg">' +
+                                        '</div>\n' +
+                                        '<div class="bookMarkContent">\n' +
+                                        '<div class="bookMarkContentTitle">' + response[i].placeName + '</div>\n' +
+                                        '<div class="bookMarkContentRating">\n' +
+                                        '<div class="ui_bubble_rating bubble_' + response[i].placeRate + '0"></div>\n' +
+                                        '<div>' + response[i].seen + ' مشاهده</div>\n' +
+                                        '</div>\n' +
+                                        '<div class="bookMarkContentCity">' + response[i].placeCity + '</div>\n' +
+                                        '</div>\n' +
+                                        '</a>';
+                        }
+                        if(bookMarksData == null) {
+                            bookMarksData = element;
+                            $("#" + containerId).append(bookMarksData);
+                        }
                     }
-
-                }
-            });
+                });
+            }
+            $("#" + containerId).empty();
+            $("#" + containerId).append(bookMarksData);
         }
+
         function getRecentlyViews(containerId) {
             $("#" + containerId).empty();
 
@@ -877,5 +980,6 @@ if(Auth::check()) {
         function openUploadPost(){
             openUploadPhotoModal('', '{{route('addPhotoToPlace')}}', 0, 0, '');
         }
+
     </script>
 @endif

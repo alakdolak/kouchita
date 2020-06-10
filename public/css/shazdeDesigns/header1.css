@@ -159,13 +159,6 @@ DIV.ppr_rup.ppr_priv_global_nav_action_profile .global-nav-utility-activator {
     flex-direction: row;
 }
 
-#memberTop {
-    font-size: 14px;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    z-index: 2;
-}
 
 DIV.ppr_rup.ppr_priv_global_nav_action_profile .username::before {
     display: inline-block;
@@ -241,11 +234,6 @@ DIV.ppr_rup.ppr_priv_global_nav_action_profile .username::before {
     DIV.ppr_rup.ppr_priv_global_nav_action_profile .username::before {
         margin-left: 5px;
     }
-
-    #memberTop {
-        font-size: 12px;
-    }
-
     .collapseBtnActions {
         display: flex;
     }
@@ -262,11 +250,12 @@ DIV.ppr_rup.ppr_priv_global_nav_action_profile .username::before {
 
 
 .mainLoginButton {
-    padding: 2px 20px;
+    padding: 4px 20px;
     font-size: 20px;
     color: #eafbff !important;
     background-color: #0E3A46;
     border-radius: 10px;
     border: none;
     font-weight: 600;
+    cursor: pointer;
 }

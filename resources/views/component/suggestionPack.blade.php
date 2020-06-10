@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="{{URL::asset('css/component/suggestionPack.css')}}">
 
-<div id="suggestionSample">
+<div id="suggestionSample" style="display: none;">
     <div class="suggestionPackDiv">
         <div class="suggestionPackContent">
             <img src="{{URL::asset('images/pin.png')}}" class="imageGoldPin">
