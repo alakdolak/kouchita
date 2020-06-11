@@ -296,7 +296,7 @@
                         </div>
                         <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
                             <div class="mainSuggestion swiper-container">
-                                <div id="newInKoochita" class="swiper-wrapper position-relative">
+                                <div id="newInKoochita" class="swiper-wrapper suggestionBody">
                                     {{--                            fill with createMainPageSuggestion function--}}
                                 </div>
                                 <div class="swiper-button-next"></div>
@@ -310,7 +310,7 @@
             {{--banner_2--}}
             <div class="siteArticlesMainDiv">
                 @if(isset($articleBanner) && count($articleBanner) > 0)
-                    <div class="mainSuggestion swiper-container">
+                    <div class="mainArticlaSwiperMainPage swiper-container">
                         <div class="swiper-wrapper position-relative">
                             @foreach($articleBanner as $item)
                                 <div class="swiper-slide position-relative">
@@ -323,7 +323,6 @@
                                         <div class="cta-container transition" style="left: 0px">
                                             <a href="{{$item->url}}" class="cta">مشاهده مقاله</a>
                                         </div>
-                                        {{--                        <div class="card_circle transition" style="background: url('{{$item->pic}}') no-repeat center bottom; background-size: cover;"></div>--}}
                                         <div class="card_circle transition">
                                             <img src="{{$item->pic}}" class="resizeImgClass" style="width: 100%;">
                                         </div>
@@ -352,7 +351,7 @@
                         </div>
                         <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
                             <div id="mainSuggestion" class="mainSuggestion swiper-container">
-                                <div id="topFood" class="swiper-wrapper">
+                                <div id="topFood" class="swiper-wrapper suggestionBody">
                                     {{--                            fill with createMainPageSuggestion function--}}
                                 </div>
                                 <div class="swiper-button-next"></div>
@@ -389,7 +388,7 @@
                         </div>
                         <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
                             <div class="mainSuggestion swiper-container">
-                                <div id="topTabiat" class="swiper-wrapper">
+                                <div id="topTabiat" class="swiper-wrapper suggestionBody">
                                     {{--                            fill with createMainPageSuggestion function--}}
                                 </div>
                                 <div class="swiper-button-next"></div>
@@ -601,7 +600,7 @@
                         </div>
                         <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
                             <div class="mainSuggestion swiper-container">
-                                <div id="topRestaurant" class="swiper-wrapper">
+                                <div id="topRestaurant" class="swiper-wrapper suggestionBody">
                                     {{--                            fill with createMainPageSuggestion function--}}
                                 </div>
                                 <div class="swiper-button-next"></div>
@@ -655,7 +654,7 @@
                         </div>
                         <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
                             <div class="mainSuggestion swiper-container">
-                                <div id="topTarikhi" class="swiper-wrapper">
+                                <div id="topTarikhi" class="swiper-wrapper suggestionBody">
                                     {{--                            fill with createMainPageSuggestion function--}}
                                 </div>
                                 <div class="swiper-button-next"></div>
@@ -754,7 +753,7 @@
                         </div>
                         <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
                             <div class="mainSuggestion swiper-container">
-                                <div id="topKharid" class="swiper-wrapper">
+                                <div id="topKharid" class="swiper-wrapper suggestionBody">
                                     {{--                            fill with createMainPageSuggestion function--}}
                                 </div>
                                 <div class="swiper-button-next"></div>
@@ -793,7 +792,7 @@
 
                         <div class="shelf_item_container ui_columns is-mobile is-multiline">
                             <div class="mainSuggestion swiper-container">
-                                <div id="topArticle" class="swiper-wrapper">
+                                <div id="topArticle" class="swiper-wrapper suggestionBody">
                                     {{--                            fill with createMainPageSuggestion function--}}
                                 </div>
                                 <div class="swiper-button-next"></div>
@@ -810,6 +809,12 @@
 </div>
 
 <script>
+    let loadSuggestion = false;
+    let divNames = ['newInKoochita', 'topFood', 'topTabiat', 'topRestaurant', 'topTarikhi', 'topKharid', 'topArticle'];
+    divNames.forEach(item => {
+        createSuggestionPackPlaceHolder(item);
+    })
+
     function ajaxToFillMainPageSuggestion(){
 
         $.ajax({
@@ -851,75 +856,85 @@
         // createSuggestionPack in suggestionPack.blade.php
         createSuggestionPack('newInKoochita', _result[0], function() {
             $('#newInKoochita').find('.suggestionPackDiv').addClass('swiper-slide');
+            $('#newInKoochita').css('direction', 'ltr');
         });
 
         createSuggestionPack('topFood', food, function() {
             $('#topFood').find('.suggestionPackDiv').addClass('swiper-slide');
+            $('#topFood').css('direction', 'ltr');
         });
 
         createSuggestionPack('topTabiat', tabiat, function() {
             $('#topTabiat').find('.suggestionPackDiv').addClass('swiper-slide');
+            $('#topTabiat').css('direction', 'ltr');
         });
 
         createSuggestionPack('topRestaurant', restaurant, function() {
             $('#topRestaurant').find('.suggestionPackDiv').addClass('swiper-slide');
+            $('#topRestaurant').css('direction', 'ltr');
         });
 
         createSuggestionPack('topTarikhi', tarikhi, function() {
             $('#topTarikhi').find('.suggestionPackDiv').addClass('swiper-slide');
+            $('#topTarikhi').css('direction', 'ltr');
         });
 
         createSuggestionPack('topKharid', kharid, function() {
             $('#topKharid').find('.suggestionPackDiv').addClass('swiper-slide');
+            $('#topKharid').css('direction', 'ltr');
         });
 
         createSuggestionPack('topArticle', article, function() {
             $('#topArticle').find('.suggestionPackDiv').addClass('swiper-slide');
-
-            new Swiper('.mainSuggestion', {
-                loop: true,
-                updateOnWindowResize: true,
-                navigation: {
-                    prevEl: '.swiper-button-next',
-                    nextEl: '.swiper-button-prev',
-                },
-                on: {
-                    init: function(){
-                        this.update();
-                    },
-                    resize: function () {
-                        resizeFitImg('resizeImgClass');
-                        this.update()
-                    },
-                },
-                breakpoints: {
-                    450: {
-                        slidesPerView: 1,
-                        spaceBetween: 20,
-                    },
-                    520: {
-                        slidesPerView: 2,
-                        spaceBetween: 20,
-                    },
-                    768: {
-                        slidesPerView: 2,
-                        spaceBetween: 20,
-                    },
-                    992: {
-                        slidesPerView: 3,
-                        spaceBetween: 20,
-                    },
-                    10000: {
-                        slidesPerView: 4,
-                        spaceBetween: 20,
-                    }
-                }
-            });
-
+            $('#topArticle').css('direction', 'ltr');
+            runMainSwiper('mainSuggestion')
         });
     }
 
-    ajaxToFillMainPageSuggestion();
+    function runMainSwiper(_class){
+        new Swiper('.' + _class, {
+            loop: true,
+            updateOnWindowResize: true,
+            navigation: {
+                prevEl: '.swiper-button-next',
+                nextEl: '.swiper-button-prev',
+            },
+            on: {
+                init: function(){
+                    this.update();
+                },
+                resize: function () {
+                    resizeFitImg('resizeImgClass');
+                    this.update()
+                },
+            },
+            breakpoints: {
+                450: {
+                    slidesPerView: 1,
+                    spaceBetween: 20,
+                },
+                520: {
+                    slidesPerView: 2,
+                    spaceBetween: 20,
+                },
+                768: {
+                    slidesPerView: 2,
+                    spaceBetween: 20,
+                },
+                992: {
+                    slidesPerView: 3,
+                    spaceBetween: 20,
+                },
+                10000: {
+                    slidesPerView: 4,
+                    spaceBetween: 20,
+                }
+            }
+        });
+    }
+
+    // this run function for mainArticlaSwiperMainPage
+    runMainSwiper('mainArticlaSwiperMainPage');
 
     new Swiper('.threeSlider', {
         slidesPerGroup: 1,
@@ -957,6 +972,24 @@
         $(elm).parent().next().addClass('display-none')
     }
 
+
+    let newKoochitaTop = document.getElementById('newKoochita').offsetTop;
+    let windwoY = window.scrollY + $(window).height();
+    if (windwoY >= newKoochitaTop) {
+        loadSuggestion = true;
+        ajaxToFillMainPageSuggestion();
+    }
+
+    $(window).on('scroll', function(e){
+        if(!loadSuggestion) {
+            let newKoochitaTop = document.getElementById('newKoochita').offsetTop;
+            let windwoY = window.scrollY + $(window).height();
+            if (windwoY >= newKoochitaTop) {
+                loadSuggestion = true;
+                ajaxToFillMainPageSuggestion();
+            }
+        }
+    })
 </script>
 
 

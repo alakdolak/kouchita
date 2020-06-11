@@ -66,9 +66,10 @@
     overflow: auto;
     max-height: 80%;
     z-index: 10000001;
-    padding: 48px 16px;
+    padding: 20px 16px;
     direction: rtl;
     box-shadow: none;
+    background: white;
 }
 
 .searchPanes > div:nth-child(3) > select, .searchPanes > div:nth-child(3) > div {
@@ -100,17 +101,17 @@ div.prw_rup.prw_search_typeahead .typeahead_align {
     font-weight: 500;
     float: right;
     margin-left: 5px;
-    font-size: 30px;
+    font-size: 25px;
 }
 
 div.prw_rup.prw_search_typeahead .typeahead_align .typeahead_input {
     float: right;
-    width: 90%;
+    width: auto;
     padding: 0;
     height: 40px;
     border: none;
     box-shadow: none !important;
-    font-size: 20px;
+    font-size: inherit;
 }
 
 .spBorderBottom {
@@ -221,7 +222,7 @@ div.prw_rup.prw_search_typeahead .typeahead_align .typeahead_input {
 }
 
 #result > div {
-    /*display: flex;*/
+    display: block;
     align-items: center;
     margin-bottom: 4px;
 }
@@ -244,6 +245,7 @@ div.prw_rup.prw_search_typeahead .typeahead_align .typeahead_input {
 }
 
 .visitSuggestionText {
+    font-size: 18px;
     text-align: center;
     padding: 5px 0 10px;
     color: gray;
@@ -308,7 +310,27 @@ a:hover {
     color: #4DC7BC;
 }
 
+.searchPaneDiv{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    z-index: 999;
+    background-color: #000000b5;
+}
+
+.closeSearchPan{
+    position: absolute;
+    left: 10px;
+    top: 0px;
+    COLOR: #4DC7BC;
+    font-size: 40px;
+    cursor: pointer;
+}
+
 @media (max-width: 992px) {
+
     .searchPanes {
         left: 5%;
         right: 5%;
@@ -326,6 +348,9 @@ a:hover {
 
 @media (max-width: 767px) {
 
+    .spGoWhere{
+        font-size: 17px;
+    }
     div.prw_rup.prw_search_typeahead .typeahead_align {
         margin-top: 20px;
     }
@@ -374,14 +399,6 @@ a:hover {
 }
 
 @media (max-width: 480px) {
-    .spGoWhere{
-        font-size: 25px;
-    }
-
-    div.prw_rup.prw_search_typeahead .typeahead_align .typeahead_input {
-        font-size: 20px;
-    }
-
     .spBoxOfSuggestion {
         width: 50%;
     }

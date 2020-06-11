@@ -1,6 +1,8 @@
 /*header1 styles*/
 
-
+.mainHeader{
+    padding-top: 5px;
+}
 .glyphicon {
     font-family: 'Glyphicons Halflings' !important;
 }
@@ -392,7 +394,7 @@ DIV.ppr_rup.ppr_priv_global_nav_action_profile .username::before {
     vertical-align: middle;
 }
 
-.headerBookMarkMenu{
+.headerSubMenu{
     display: none;
     direction: rtl;
     text-align: right;
@@ -424,7 +426,6 @@ DIV.ppr_rup.ppr_priv_global_nav_action_profile .username::before {
 }
 .headerBookMarkBody{
     box-sizing: border-box;
-    font-family: Arial, Tahoma, "Bitstream Vera Sans", sans-serif;
     font-size: 1rem;
     color: #2c2c2c;
     font-weight: 400;
@@ -439,7 +440,7 @@ DIV.ppr_rup.ppr_priv_global_nav_action_profile .username::before {
     text-align: center;
     max-height: 400px;
     position: relative;
-    z-index: 1000000000 !important;
+    z-index: 9;
 }
 .headerBookMarkHeader{
     text-align: right;
@@ -500,7 +501,7 @@ DIV.ppr_rup.ppr_priv_global_nav_action_profile .username::before {
     display: inline-block;
     font-size: 14px;
     color: #4a4a4a;
-    line-height: 15px;
+    line-height: normal;
     white-space: nowrap;
     text-overflow: ellipsis;
     max-width: 170px;
@@ -521,4 +522,13 @@ DIV.ppr_rup.ppr_priv_global_nav_action_profile .username::before {
 .headerAuthMenu{
     list-style-type: none;
     text-align: center;
+}
+.mobileHeader{
+    direction: rtl;
+    background-color: #30b4a6;
+    height: 12vh !important;
+    padding: 0px 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

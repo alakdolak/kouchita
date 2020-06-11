@@ -741,7 +741,6 @@ DIV.ppr_rup.ppr_priv_homepage_shelves .homepage_shelves_widget .prw_shelves_shel
 
 .h2MidBanerArticle{
     color: #3487f7;
-    font-family: "Raleway", sans-serif;
     font-size: 24px;
     font-weight: 200;
     margin-top: 150px;
@@ -753,13 +752,13 @@ DIV.ppr_rup.ppr_priv_homepage_shelves .homepage_shelves_widget .prw_shelves_shel
     white-space: nowrap;
     overflow: hidden;
     cursor: pointer;
+    line-height: normal;
 }
 
 .pMidBanerArticle{
     height: 90px;
     overflow: hidden;
     color: rgba(0, 0, 0, 0.6);
-    font-family: "Raleway", sans-serif;
     font-size: 100%;
     font-weight: normal;
     margin-top: 200px;
@@ -791,7 +790,6 @@ DIV.ppr_rup.ppr_priv_homepage_shelves .homepage_shelves_widget .prw_shelves_shel
     border-radius: 2px;
     color: #3487f7;
     display: inline-block;
-    font-family: "Raleway", sans-serif;
     font-size: 17px;
     font-weight: 400;
     height: 36px;
@@ -1204,6 +1202,27 @@ figure.snip1091.hover figcaption:after {
     animation: roll2 5s linear infinite 3s;
 }
 
+.shelf_header{
+    margin: 5px 0px;
+}
+.shelf_title{
+    display: flex;
+    direction: rtl;
+    align-items: center;
+}
+.shelf_title_container{
+    display: flex;
+    align-items: center;
+    margin: 0 5px;
+    color: #eab836;
+}
+.shelf_title_container h3{
+    margin: 0px;
+}
+.suggestionBody{
+    direction: rtl;
+    position: relative;
+}
 
 @media (max-width: 1188px) {
     .middleBannerPhotoDiv .clear-both {

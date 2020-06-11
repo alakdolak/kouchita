@@ -306,171 +306,170 @@ if(Auth::check()) {
 <link rel="stylesheet" href="{{URL::asset('css/common/header.css')}}">
 <link rel="stylesheet" href="{{URL::asset('css/common/header1.css')}}">
 
-<div class="masthead">
-    <div id="taplc_global_nav_0" class="ppr_rup ppr_priv_global_nav">
-        <div class="global-nav global-nav-single-line">
-            <div class="global-nav-top">
-                <div class="global-nav-bar global-nav-green" style="padding-top: 5px;">
+{{--pc header--}}
+<div class="mainHeader hideOnPhone">
+    <div class="container headerContainer">
+        <a href="{{route('main')}}" class="headerPcLogoDiv" >
+            <img src="{{URL::asset('images/icons/mainLogo.png')}}" alt="کوچیتا" class="headerPcLogo"/>
+        </a>
 
-                    <div class="container headerContainer">
-                        <a href="{{route('main')}}" class="headerPcLogoDiv" >
-                            <img src="{{URL::asset('images/icons/mainLogo.png')}}" alt="کوچیتا" class="headerPcLogo"/>
-                        </a>
+        <div class="headerSearchBar">
+            <span class="headerSearchIcon iconFamily searchIcon" onclick="openMainSearch(0) // in mainSearch.blade.php"></span>
+        </div>
 
-                        <div class="headerSearchBar">
-                            <span class="headerSearchIcon iconFamily searchIcon" id="openSearch"></span>
-                        </div>
+        <div class="headerButtonsSection">
 
-                        <div class="headerButtonsSection">
+            @if(Auth::check())
 
-                            @if(Auth::check())
+                <div class="headerAuthButton" onclick="openUploadPost()">
+                    <span class="headerIconCommon iconFamily addPostIcon"></span>
+                    <div class="nameOfIconHeaders">
+                        پست
+                    </div>
+                </div>
 
-                                <div class="headerAuthButton" onclick="openUploadPost()">
-                                    <span class="headerIconCommon iconFamily addPostIcon"></span>
-                                    <div class="nameOfIconHeaders">
-                                        پست
-                                    </div>
-                                </div>
-
-                                <div id="bookmarkicon" class="headerAuthButton" title="نشانه گذاری شده ها">
-                                    <span class="headerIconCommon iconFamily BookMarkIconEmpty"></span>
-                                    <div class="nameOfIconHeaders">
-                                        نشون‌کرده
-                                    </div>
-
-                                    <div id="bookmarkmenu" class="arrowTopDiv headerBookMarkMenu">
-                                        <div class="headerBookMarkBody">
-                                            <div class="headerBookMarkHeader">
-                                                <a class="headerBookMarkHeaderName" href="{{route('recentlyViewTotal')}}" target="_self"> نشانه‌گذاری شده‌ها </a>
-                                            </div>
-                                            <div id="bookMarksDiv" class="headerBookMarkContentDiv" style="display: none"></div>
-                                            <div id="headerBookMarkPlaceHolder">
-                                                <div class="headerBookMarkLink">
-                                                    <div class="headerBookMarContentImgDiv">
-                                                        <div class="headerBookMarkPlaceholder placeHolderAnime"></div>
-                                                    </div>
-                                                   <div class="bookMarkContent" style="width: 90px">
-                                                        <div class="bookMarkContentTitle placeHolderAnime resultLineAnim" style="width: 100%"></div>
-                                                        <div class="bookMarkContentRating placeHolderAnime resultLineAnim" style="width: 100%"></div>
-                                                        <div class="bookMarkContentCity placeHolderAnime resultLineAnim" style="width: 100%"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="headerBookMarkLink">
-                                                    <div class="headerBookMarContentImgDiv">
-                                                        <div class="headerBookMarkPlaceholder placeHolderAnime"></div>
-                                                    </div>
-                                                   <div class="bookMarkContent" style="width: 90px">
-                                                        <div class="bookMarkContentTitle placeHolderAnime resultLineAnim" style="width: 100%"></div>
-                                                        <div class="bookMarkContentRating placeHolderAnime resultLineAnim" style="width: 100%"></div>
-                                                        <div class="bookMarkContentCity placeHolderAnime resultLineAnim" style="width: 100%"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <a href="{{route('myTrips')}}" class="headerAuthButton" title="سفرهای منا">
-                                    <span class="headerIconCommon iconFamily MyTripsIcon"></span>
-                                    <div class="nameOfIconHeaders">
-                                        سفرهای من
-                                    </div>
-                                </a>
-
-                                <div class="headerAuthButton" onclick="hideAllTopNavs(); getAlertItems()">
-                                    <span class="headerIconCommon iconFamily MsgIcon"></span>
-                                    <div class="nameOfIconHeaders">
-                                        پیام‌ها
-                                    </div>
-                                    <div id="alertPane" class="headerAlertNumber">0</div>
-
-                                    <div id="alert" class="arrowTopDiv headerBookMarkMenu">
-                                        <div class="headerBookMarkBody">
-                                            <div class="headerBookMarkHeader">
-                                                <a class="headerBookMarkHeaderName" href="#" target="_self"> تمامی پیام ها</a>
-                                            </div>
-                                            <div id="alertItems" class="headerBookMarkContentDiv" style="display: none"></div>
-                                            <div id="headerMsgPlaceHolder">
-                                                <div class="headerBookMarkLink">
-                                                    <div class="headerBookMarContentImgDiv">
-                                                        <div class="headerBookMarkPlaceholder placeHolderAnime"></div>
-                                                    </div>
-                                                    <div class="bookMarkContent" style="width: 90px">
-                                                        <div class="bookMarkContentTitle placeHolderAnime resultLineAnim" style="width: 100%"></div>
-                                                        <div class="bookMarkContentRating placeHolderAnime resultLineAnim" style="width: 100%"></div>
-                                                        <div class="bookMarkContentCity placeHolderAnime resultLineAnim" style="width: 100%"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="headerBookMarkLink">
-                                                    <div class="headerBookMarContentImgDiv">
-                                                        <div class="headerBookMarkPlaceholder placeHolderAnime"></div>
-                                                    </div>
-                                                    <div class="bookMarkContent" style="width: 90px">
-                                                        <div class="bookMarkContentTitle placeHolderAnime resultLineAnim" style="width: 100%"></div>
-                                                        <div class="bookMarkContentRating placeHolderAnime resultLineAnim" style="width: 100%"></div>
-                                                        <div class="bookMarkContentCity placeHolderAnime resultLineAnim" style="width: 100%"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div id="memberTop" class="headerAuthButton">
-                                    <span class="headerIconCommon iconFamily UserIcon"></span>
-                                    <div class="nameOfIconHeaders">
-                                        {{$user->username}}
-                                    </div>
-                                    <div>
-                                        <div id="profile-drop" class="arrowTopDiv headerAuthMenu">
-                                            <ul class="global-nav-profile-menu">
-                                                <li class="subItemHeaderNavBar">
-                                                    <a href="{{URL('profile')}}" class="subLink" data-tracking-label="UserProfile_viewProfile">صفحه کاربری</a>
-                                                </li>
-                                                <li class="subItemHeaderNavBar">
-                                                    <a href="{{URL('badge')}}" class="subLink" data-tracking-label="UserProfile_viewProfile">جوایز و مدال ها</a>
-                                                </li>
-                                                <li class="subItemHeaderNavBar rule">
-                                                    <a href="{{URL('messages')}}" class="subLink global-nav-submenu-divided" data-tracking-label="UserProfile_messages">پیام‌ها</a>
-                                                </li>
-                                                <li class="subItemHeaderNavBar">
-                                                    <a href="{{URL('accountInfo')}}" class="subLink" data-tracking-label="UserProfile_settings">اطلاعات کاربر </a>
-                                                </li>
-                                                <li class="subItemHeaderNavBar">
-                                                    <a href="{{route('logout')}}" class="subLink" data-tracking-label="UserProfile_signout">خروج</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            @else
-                                <div class="login-button mainLoginButton" title="ورود / ثبت نام"> ورود / ثبت نام</div>
-                            @endif
-                        </div>
+                <div id="bookmarkicon" class="headerAuthButton" title="نشانه گذاری شده ها">
+                    <span class="headerIconCommon iconFamily BookMarkIconEmpty"></span>
+                    <div class="nameOfIconHeaders">
+                        نشون‌کرده
                     </div>
 
-                    <div class="headerSecondSection">
-                        <div class="container headerSecondContainer">
-                            <div class="headerSecondContentDiv">
-                                <div class="headerSecondTabs">
-                                    <span class="headerSecondLi" onclick="openMainSearch(4)  // in mainSearch.blade.php">هتل</span>
-                                    <span class="headerSecondLi" onclick="openMainSearch(3)  // in mainSearch.blade.php">رستوران</span>
-                                    <span class="headerSecondLi" onclick="openMainSearch(1)  // in mainSearch.blade.php">جاذبه</span>
-                                    <span class="headerSecondLi" onclick="openMainSearch(10)  // in mainSearch.blade.php">سوغات و صنایع‌دستی</span>
-                                    <span class="headerSecondLi" onclick="openMainSearch(11)  // in mainSearch.blade.php">غذای محلی</span>
-                                    <a href="{{route('mainArticle')}}" class="headerSecondLi" data-tracking-label="Flights">سفرنامه‌ها</a>
+                    <div id="bookmarkmenu" class="arrowTopDiv headerSubMenu">
+                        <div class="headerBookMarkBody">
+                            <div class="headerBookMarkHeader">
+                                <a class="headerBookMarkHeaderName" href="{{route('recentlyViewTotal')}}" target="_self"> نشانه‌گذاری شده‌ها </a>
+                            </div>
+                            <div id="bookMarksDiv" class="headerBookMarkContentDiv" style="display: none"></div>
+                            <div id="headerBookMarkPlaceHolder">
+                                <div class="headerBookMarkLink">
+                                    <div class="headerBookMarContentImgDiv">
+                                        <div class="headerBookMarkPlaceholder placeHolderAnime"></div>
+                                    </div>
+                                    <div class="bookMarkContent" style="width: 90px">
+                                        <div class="bookMarkContentTitle placeHolderAnime resultLineAnim" style="width: 100%"></div>
+                                        <div class="bookMarkContentRating placeHolderAnime resultLineAnim" style="width: 100%"></div>
+                                        <div class="bookMarkContentCity placeHolderAnime resultLineAnim" style="width: 100%"></div>
+                                    </div>
+                                </div>
+                                <div class="headerBookMarkLink">
+                                    <div class="headerBookMarContentImgDiv">
+                                        <div class="headerBookMarkPlaceholder placeHolderAnime"></div>
+                                    </div>
+                                    <div class="bookMarkContent" style="width: 90px">
+                                        <div class="bookMarkContentTitle placeHolderAnime resultLineAnim" style="width: 100%"></div>
+                                        <div class="bookMarkContentRating placeHolderAnime resultLineAnim" style="width: 100%"></div>
+                                        <div class="bookMarkContentCity placeHolderAnime resultLineAnim" style="width: 100%"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
 
+                <a href="{{route('myTrips')}}" class="headerAuthButton" title="سفرهای منا">
+                    <span class="headerIconCommon iconFamily MyTripsIcon"></span>
+                    <div class="nameOfIconHeaders">
+                        سفرهای من
+                    </div>
+                </a>
+
+                <div class="notification-bell headerAuthButton">
+                    <span class="headerIconCommon iconFamily MsgIcon"></span>
+                    <div class="nameOfIconHeaders">
+                        پیام‌ها
+                    </div>
+                    <div id="alertPane" class="headerAlertNumber">0</div>
+
+                    <div id="alert" class="arrowTopDiv headerSubMenu">
+                        <div class="headerBookMarkBody">
+                            <div class="headerBookMarkHeader">
+                                <a class="headerBookMarkHeaderName" href="#" target="_self"> تمامی پیام ها</a>
+                            </div>
+                            <div id="alertItems" class="headerBookMarkContentDiv" style="display: none"></div>
+                            <div id="headerMsgPlaceHolder">
+                                <div class="headerBookMarkLink">
+                                    <div class="headerBookMarContentImgDiv">
+                                        <div class="headerBookMarkPlaceholder placeHolderAnime"></div>
+                                    </div>
+                                    <div class="bookMarkContent" style="width: 90px">
+                                        <div class="bookMarkContentTitle placeHolderAnime resultLineAnim" style="width: 100%"></div>
+                                        <div class="bookMarkContentRating placeHolderAnime resultLineAnim" style="width: 100%"></div>
+                                        <div class="bookMarkContentCity placeHolderAnime resultLineAnim" style="width: 100%"></div>
+                                    </div>
+                                </div>
+                                <div class="headerBookMarkLink">
+                                    <div class="headerBookMarContentImgDiv">
+                                        <div class="headerBookMarkPlaceholder placeHolderAnime"></div>
+                                    </div>
+                                    <div class="bookMarkContent" style="width: 90px">
+                                        <div class="bookMarkContentTitle placeHolderAnime resultLineAnim" style="width: 100%"></div>
+                                        <div class="bookMarkContentRating placeHolderAnime resultLineAnim" style="width: 100%"></div>
+                                        <div class="bookMarkContentCity placeHolderAnime resultLineAnim" style="width: 100%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="memberTop" class="headerAuthButton">
+                    <span class="headerIconCommon iconFamily UserIcon"></span>
+                    <div class="nameOfIconHeaders">
+                        {{$user->username}}
+                    </div>
+                    <div>
+                        <div id="profile-drop" class="arrowTopDiv headerAuthMenu">
+                            <ul class="global-nav-profile-menu">
+                                <li class="subItemHeaderNavBar">
+                                    <a href="{{URL('profile')}}" class="subLink" data-tracking-label="UserProfile_viewProfile">صفحه کاربری</a>
+                                </li>
+                                <li class="subItemHeaderNavBar">
+                                    <a href="{{URL('badge')}}" class="subLink" data-tracking-label="UserProfile_viewProfile">جوایز و مدال ها</a>
+                                </li>
+                                <li class="subItemHeaderNavBar rule">
+                                    <a href="{{URL('messages')}}" class="subLink global-nav-submenu-divided" data-tracking-label="UserProfile_messages">پیام‌ها</a>
+                                </li>
+                                <li class="subItemHeaderNavBar">
+                                    <a href="{{URL('accountInfo')}}" class="subLink" data-tracking-label="UserProfile_settings">اطلاعات کاربر </a>
+                                </li>
+                                <li class="subItemHeaderNavBar">
+                                    <a href="{{route('logout')}}" class="subLink" data-tracking-label="UserProfile_signout">خروج</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            @else
+                <div class="login-button mainLoginButton" title="ورود / ثبت نام"> ورود / ثبت نام</div>
+            @endif
+        </div>
+    </div>
+
+    <div class="headerSecondSection">
+        <div class="container headerSecondContainer">
+            <div class="headerSecondContentDiv">
+                <div class="headerSecondTabs">
+                    <span class="headerSecondLi" onclick="openMainSearch(4)  // in mainSearch.blade.php">هتل</span>
+                    <span class="headerSecondLi" onclick="openMainSearch(3)  // in mainSearch.blade.php">رستوران</span>
+                    <span class="headerSecondLi" onclick="openMainSearch(1)  // in mainSearch.blade.php">جاذبه</span>
+                    <span class="headerSecondLi" onclick="openMainSearch(10)  // in mainSearch.blade.php">سوغات و صنایع‌دستی</span>
+                    <span class="headerSecondLi" onclick="openMainSearch(11)  // in mainSearch.blade.php">غذای محلی</span>
+                    <a href="{{route('mainArticle')}}" class="headerSecondLi" data-tracking-label="Flights">سفرنامه‌ها</a>
                 </div>
             </div>
         </div>
     </div>
-    <!--etk-->
 </div>
+
+{{--mobile header--}}
+<div class="hideOnScreen mobileHeader">
+    <a href="{{route('main')}}" class="global-nav-logo" >
+        <img src="{{URL::asset('images/icons/mainLogo.png')}}" alt="کوچیتا" style="height: 60px; width: auto;"/>
+    </a>
+</div>
+
+
 
 <script>
     var getBookMarksPath = '{{route('getBookMarks')}}';
@@ -481,18 +480,6 @@ if(Auth::check()) {
         $("#my-trips-not").hide();
         $("#profile-drop").hide();
     }
-
-    $(document).ready(function(){
-
-        $(".menu-bars").click(function(){
-            $("#menu_res").removeClass('off-canvas');
-        });
-
-        $("#close_menu_res").click(function(){
-
-            $("#menu_res").addClass('off-canvas');
-        });
-    });
 
     $('#close_span_search').click(function(e) {
         hideAllTopNavs();
@@ -546,7 +533,6 @@ if(Auth::check()) {
         }
 
         function getAlertItems() {
-            $('#alert').toggle();
 
             if(msgHeaderData == null) {
                 $.ajax({
@@ -608,6 +594,7 @@ if(Auth::check()) {
             if( $("#alert").is(":hidden")) {
                 hideAllTopNavs();
                 $("#alert").css('display', 'block');
+                getAlertItems();
             }
             else {
                 hideAllTopNavs();

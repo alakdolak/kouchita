@@ -1,5 +1,7 @@
 <link rel="stylesheet" href="{{URL::asset('css/mainSearch.css')}}">
-<span id="searchPane" class="statePane ui_overlay ui_modal editTags hidden searchPanes">
+
+<div id="searchPane" class="searchPaneDiv hidden">
+    <span class="statePane ui_overlay ui_modal editTags searchPanes">
         <div id="searchDivForScroll" class="prw_rup prw_search_typeahead spSearchDivForScroll">
             <div class="ui_picker">
                 <div class="typeahead_align ui_typeahead full-width display-flex">
@@ -12,7 +14,7 @@
                 </div>
                 <div class="spBorderBottom"></div>
                 <div class="mainContainerSearch">
-                    <div id="result" class="data_holder searchPangResultSection display-none">
+                    <div id="result" class="data_holder searchPangResultSection hidden">
                         <div id="mainSearchResult" style="display:block;"></div>
                         <div id="placeHolderResult" style="display: none;">
                             <div style="margin-bottom: 40px">
@@ -53,8 +55,9 @@
 
             </div>
         </div>
-        <div onclick="$('#searchPane').addClass('hidden'); $('.dark').hide()" class="ui_close_x"></div>
+        <div class="iconFamily iconClose closeSearchPan" onclick="$('#searchPane').addClass('hidden');"></div>
     </span>
+</div>
 
 <script>
     var searchDir = '{{route('totalSearch')}}';
@@ -121,7 +124,7 @@
 
         $(".suggest").css("background-color", "transparent").css("padding", "0").css("border-radius", "0");
         if (null == val || "" == val || val.length < 2) {
-            $('#result').addClass('display-noneImp');
+            $('#result').addClass('hidden');
             $("#mainSearchResult").empty();
         }
         else {
@@ -168,9 +171,10 @@
                 return;
             }
 
-            $('#result').removeClass('display-noneImp');
+            $('#result').removeClass('hidden');
             $('#placeHolderResult').show();
             $('#mainSearchResult').hide();
+
             if ("ا" == val[0]) {
                 for (val2 = "آ", i = 1; i < val.length; i++) val2 += val[i];
                 $.ajax({
@@ -207,8 +211,9 @@
     function createSearchResponse(response){
         newElement = "";
         let searchText = $('#mainSearchInput').val();
+
         if(searchText.trim().length < 3){
-            $('#result').addClass('display-noneImp');
+            $('#result').addClass('hidden');
             $('#placeHolderResult').hide();
             $('#mainSearchResult').hide();
             return;
@@ -261,9 +266,9 @@
             }
 
             if (response.length != 0)
-                $('#result').removeClass('display-noneImp');
+                $('#result').removeClass('hidden');
             else
-                $('#result').addClass('display-noneImp');
+                $('#result').addClass('hidden');
 
             $("#mainSearchResult").empty().append(newElement);
             $('#placeHolderResult').hide();
