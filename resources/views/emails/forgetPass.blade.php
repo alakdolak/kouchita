@@ -16,9 +16,15 @@
         .redirectButton{
             padding: 15px 40px;
             background: #053a3e;
-            color: white;
+            color: white !important;
             text-decoration: none;
             border-radius: 24px;
+            margin: 0px auto;
+        }
+        .redirectButton:hover{
+            color: white;
+            text-decoration: none;
+
         }
         .mainLink{
             font-size: 14px;
