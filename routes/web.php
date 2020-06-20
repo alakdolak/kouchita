@@ -337,7 +337,7 @@ Route::group(array('middleware' => ['nothing', 'throttle:30']), function(){
 
     Route::get('login', array('as' => 'login', 'uses' => 'UserLoginController@mainDoLogin'));
 
-    Route::post('doLogin', array('as' => 'doLogin', 'uses' => 'UserLoginController@doLogin'));
+    Route::post('login2', array('as' => 'login2', 'uses' => 'UserLoginController@doLogin'));
 
     Route::post('checkEmail', array('as' => 'checkEmail', 'uses' => 'UserLoginController@checkEmail'));
 
