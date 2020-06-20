@@ -1565,12 +1565,13 @@ class HomeController extends Controller
 
     public function emailtest($email)
     {
-        $header = 'به کوچیتا خوش آمدید';
+        $header = 'فراموشی رمز عبور';
         $userName = 'koochita';
-        $view = \View::make('emails.welcomeEmail', compact(['header', 'userName']));
+        $link = 'https://kiavashzp.ir/newPass?code=dljfdlsfjlkd';
+        $view = \View::make('emails.forgetPass', compact(['header', 'userName', 'link']));
         $html = $view->render();
         echo $html;
-        sendEmail($html, $header, $email);
+//        sendEmail($html, $header, $email);
 //        dd('send to ' . $email);
     }
 

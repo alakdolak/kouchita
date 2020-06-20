@@ -283,6 +283,7 @@ $authUrl = $client->createAuthUrl();
                         </div>
                     </div>
                 </span>
+
                 {{--Enter Email for ForgetPass in login PopUp--}}
                 <span id="Email_ForgetPass" class="hidden">
                     <div class="col-xs-12 rtl mainContentInfos">
@@ -290,8 +291,12 @@ $authUrl = $client->createAuthUrl();
                             <span class="pd-tp-8"> آدرس ایمیل </span>
                             <input class="loginInputTemp" type="email" id="forget_email" maxlength="40" required autofocus>
                         </div>
+                        <div id="reminderTimeEmailForgetPassDiv" class="reminderTimeDiv hidden" style="font-size: 13px; margin-bottom: 0px">
+                            <span>  زمان باقی مانده برای ارسال مجدد لینک بازیابی رمز عبور :</span>
+                            <span id="reminderTimeEmailForgetPass" class="reminderTime"></span>
+                        </div>
+                        <button onclick="retrievePasByEmail()" id="resendForgetPassEmailButton" class="btn btn-success resendActivationCode" style="margin-top: 15px;"> ارسال لینک بازیابی </button>
                         <div class="pd-tp-8">
-                            <button type="button" onclick="retrievePasByEmail()" class="loginSubBtn btn btn-info active">ثبت</button>
                             <button type="button" onclick="Return('Email_ForgetPass')" class="loginReturnBtn btn btn-default">بازگشت</button>
                             <p id="loginErrResetPasByEmail"></p>
                         </div>
@@ -594,8 +599,7 @@ $authUrl = $client->createAuthUrl();
     }
 
 
-    function decreaseTime(_kind) {
-
+    function decreaseTime() {
         $(".reminderTime").text((reminderTime % 60) + " : " + Math.floor(reminderTime / 60));
 
         if (reminderTime > 0)
@@ -838,40 +842,6 @@ $authUrl = $client->createAuthUrl();
         }
     }
 
-    function resendActivationCodeForget() {
-
-        if (phoneNum.length == 0)
-            return;
-
-        $.ajax({
-            type: 'post',
-            url: resendActivationCodeForgetDir,
-            data: {
-                'phoneNum': phoneNum
-            },
-            success: function (response) {
-
-                response = JSON.parse(response);
-
-                reminderTime2 = response.reminder;
-                if (response.status == "ok") {
-                    if (reminderTime2 > 0) {
-                        $("#reminderTimePaneForget").removeClass('hidden');
-                        $("#resendActivationCodeForget").attr('disabled', 'disabled');
-                        setTimeout("decreaseTime2()", 1000);
-                    } else {
-                        $("#reminderTimePaneForget").addClass('hidden');
-                        $("#resendActivationCodeForget").removeAttr('disabled');
-                    }
-                } else {
-                    $("#reminderTimePaneForget").removeClass('hidden');
-                    $("#resendActivationCodeForget").attr('disabled', 'disabled');
-                    setTimeout("decreaseTime2()", 1000);
-                }
-            }
-        })
-    }
-
     function showLoginPrompt(url) {
         selectedUrl = url;
         $("#username_main").val("");
@@ -882,7 +852,7 @@ $authUrl = $client->createAuthUrl();
     function retrievePasByEmail(){
         let email = $('#forget_email').val();
         if(email.trim().length > 0){
-            // openLoading();
+            openLoading();
             $.ajax({
                 type: 'post',
                 url: '{{route('retrievePasByEmail')}}',
@@ -891,10 +861,39 @@ $authUrl = $client->createAuthUrl();
                     email: email
                 },
                 success:function(response){
-                    console.log(response);
+                    closeLoading();
+                    try{
+                        response = JSON.parse(response);
+                        if(response.status == 'ok'){
+                            alert('لینک بازیابی به لینک شما ارسال شد');
+                            $('#reminderTimeEmailForgetPassDiv').removeClass('hidden');
+                            $('#resendForgetPassEmailButton').addClass('hidden');
+                            reminderTime = response.remainder;
+                            phoneCodeRegister = setInterval("decreaseTime()", 1000);
+                        }
+                        else if(response.status == 'nok')
+                            openErrorAlert('در بازیبای رمز عبور مشکلی پیش امده لطفا دوباره تلاش نمایید');
+                        else if(response.status == 'nok1')
+                            $('#loginErrResetPasByEmail').text('کاربری با این ایمیل در سامانه ثبت نشده است');
+                        else if(response.status == 'nok2')
+                            openErrorAlert('در بازیبای رمز عبور مشکلی پیش امده لطفا دوباره تلاش نمایید');
+                        else if(response.status == 'nok3') {
+                            reminderTime = response.remainder;
+                            phoneCodeRegister = setInterval("decreaseTime()", 1000);
+                            $('#reminderTimeEmailForgetPassDiv').removeClass('hidden');
+                            $('#resendForgetPassEmailButton').addClass('hidden');
+                        }
+
+                    }
+                    catch (e) {
+                        console.log(e)
+                        openErrorAlert('در بازیبای رمز عبور مشکلی پیش امده لطفا دوباره تلاش نمایید');
+                    }
                 },
                 error: function(err){
                     console.log(err);
+                    closeLoading();
+                    openErrorAlert('در بازیبای رمز عبور مشکلی پیش امده لطفا دوباره تلاش نمایید');
                 }
             })
         }

@@ -16,6 +16,8 @@ class CreateRetrievePasTable extends Migration
         Schema::create('retrievePas', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('uId');
+            $table->string('email', 100);
+            $table->string('code', 30);
             $table->string('sendTime', 16);
             $table->index('uId');
             $table->foreign('uId')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');

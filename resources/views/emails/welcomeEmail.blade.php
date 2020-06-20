@@ -57,16 +57,7 @@
 @endsection
 
 @section('body')
-    <table style="background: rgb(233, 251, 255); padding: 15px; width: 100%">
-        <tr>
-            <td style="font-weight: bold">
-                سلام
-            </td>
-        </tr>
-        <tr>
-            <td> {{$userName}} عزیز </td>
-        </tr>
-    </table>
+
     <table style="padding: 15px;">
         <tr>
             <td style="font-size: 20px; text-align: justify;">

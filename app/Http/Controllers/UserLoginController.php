@@ -417,37 +417,89 @@ class UserLoginController extends Controller
 
     public function retrievePasByEmail()
     {
-        sendEmail('text', 'test', $_POST['email']);
-        return;
-
         if (isset($_POST["email"])) {
-
             $email = makeValidInput($_POST["email"]);
-
             $user = User::whereEmail($email)->first();
 
             if ($user != null) {
 
-                $newPas = $this->generatePassword();
-                $user->password = \Hash::make($newPas);
+                $code = generateRandomString(10);
+                while(RetrievePas::where('code', $code)->count() != 0)
+                    $code = generateRandomString(10);
 
-                try {
-                    $text = 'رمزعبور جدید شما در سایت کوچیتا:' . '<br/>' . $newPas .
-                        '<center>به ما سر بزنید</center><br/><center><a href="www.shazdemosafer.com">www.shazdemosafer.com</a></center>';
-                    if (sendMail($text, $email, 'بازیابی رمزعبور'))
-                        echo "ok";
-                    else
-                        echo "nok2";
-
-                    $user->save();
-                } catch (Exception $x) {
-                    echo $x->getMessage();
+                $ret = RetrievePas::where('email', $email)->first();
+                if($ret != null){
+                    if(300 + $ret->sendTime < time()){
+                        $ret->code = $code;
+                        $ret->sendTime = time();
+                        $ret->save();
+                    }
+                    else{
+                        echo json_encode(['status' => 'nok3', 'remainder' => 300 + $ret->sendTime - time()]);
+                        return;
+                    }
+                }
+                else {
+                    $ret = new RetrievePas();
+                    $ret->uId = $user->id;
+                    $ret->code = $code;
+                    $ret->email = $_POST['email'];
+                    $ret->sendTime = time();
+                    $ret->save();
                 }
 
-                return;
+                $link = route('newPasswordEmail', ['code' => $code]);
+                try {
+                    forgetPassEmail($user->username, $link, $user->email);
+                    echo json_encode(['status' => 'ok', 'remainder' => 300 + $ret->sendTime - time()]);
+                }
+                catch (\Exception $exception){
+                    $ret->delete();
+                    echo json_encode(['status' => 'nok2']);
+                }
             }
+            else
+                echo json_encode(['status' => 'nok1']);
         }
-        echo "nok";
+        else
+            echo json_encode(['status' => 'nok']);
+
+        return;
+    }
+
+    public function newPasswordEmailPage($code)
+    {
+        $retPass = RetrievePas::where('code', $code)->first();
+        if( !($retPass != null && (300 - time() + $retPass->sendTime) > 0) ) {
+            if($retPass != null)
+                $retPass->delete();
+
+            return \redirect(url('main'));
+        }
+
+        return view('pages.newPasswordEmail', compact(['code']));
+    }
+
+    public function setNewPasswordEmail(Request $request)
+    {
+        if(isset($request->code) && isset($request->password)){
+            $retPass = RetrievePas::where('code', $request->code)->first();
+            if($retPass != null){
+                $user = User::find($retPass->uId);
+                $user->password = \Hash::make($request->password);
+                $user->save();
+
+                $retPass->delete();
+
+                echo 'ok';
+            }
+            else
+                echo 'nok1';
+        }
+        else
+            echo 'nok';
+
+        return;
     }
 
     public function retrievePasByPhone()

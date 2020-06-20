@@ -332,6 +332,9 @@ Route::group(array('middleware' => ['throttle:30', 'nothing', 'auth', 'operatorA
 //authenticated controller
 Route::group(array('middleware' => ['nothing', 'throttle:30']), function(){
 //    Route::get('login', 'UserLoginController@login');
+    Route::get('newPasswordEmail/{code}', 'UserLoginController@newPasswordEmailPage')->name('newPasswordEmail');
+
+    Route::post('setNewPasswordEmail', 'UserLoginController@setNewPasswordEmail')->name('setNewPasswordEmail');
 
     Route::post('checkLogin', array('as' => 'checkLogin', 'uses' => 'UserLoginController@checkLogin'));
 

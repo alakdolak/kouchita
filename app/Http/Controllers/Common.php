@@ -586,6 +586,15 @@ function welcomeEmail($username, $email){
     else
         return false;
 }
+function forgetPassEmail($userName, $link, $email){
+    $header = 'فراموشی رمز عبور';
+    $view = \View::make('emails.forgetPass', compact(['header', 'userName', 'link']));
+    $html = $view->render();
+    if(sendEmail($html, $header, $email))
+        return true;
+    else
+        return false;
+}
 function sendEmail($text, $subject, $to){
     $mail = new PHPMailer(true);
     try {
