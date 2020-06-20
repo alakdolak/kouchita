@@ -331,13 +331,13 @@ Route::group(array('middleware' => ['throttle:30', 'nothing', 'auth', 'operatorA
 
 //authenticated controller
 Route::group(array('middleware' => ['nothing', 'throttle:30']), function(){
-    Route::get('login', 'UserLoginController@login');
-
-    Route::post('login', array('as' => 'login', 'uses' => 'UserLoginController@mainDoLogin'));
+//    Route::get('login', 'UserLoginController@login');
 
     Route::post('checkLogin', array('as' => 'checkLogin', 'uses' => 'UserLoginController@checkLogin'));
 
-    Route::post('login2', array('as' => 'login2', 'uses' => 'UserLoginController@doLogin'));
+    Route::get('login', array('as' => 'login', 'uses' => 'UserLoginController@mainDoLogin'));
+
+    Route::post('doLogin', array('as' => 'doLogin', 'uses' => 'UserLoginController@doLogin'));
 
     Route::post('checkEmail', array('as' => 'checkEmail', 'uses' => 'UserLoginController@checkEmail'));
 
@@ -352,6 +352,8 @@ Route::group(array('middleware' => ['nothing', 'throttle:30']), function(){
     Route::post('retrievePasByEmail', array('as' => 'retrievePasByEmail', 'uses' => 'UserLoginController@retrievePasByEmail'));
 
     Route::post('retrievePasByPhone', array('as' => 'retrievePasByPhone', 'uses' => 'UserLoginController@retrievePasByPhone'));
+
+    Route::post('setNewPassword', 'UserLoginController@setNewPassword')->name('user.setNewPassword');
 
     Route::post('checkPhoneNum', array('as' => 'checkPhoneNum', 'uses' => 'UserLoginController@checkPhoneNum'));
 
@@ -732,7 +734,7 @@ Route::middleware(['web', 'vodShareData'])->group(function (){
 });
 
 
-Route::get('emailtest', 'HomeController@emailtest');
+Route::get('emailtest/{email}', 'HomeController@emailtest');
 
 Route::get('exportToExcelTT', 'HomeController@exportExcel');
 

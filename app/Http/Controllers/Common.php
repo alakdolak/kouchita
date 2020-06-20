@@ -303,18 +303,15 @@ function getUserPoints($uId) {
 function nearestLevel($uId) {
 
     $points = getUserPoints($uId);
-
-    // some thing must be done
-
     $currLevel = Level::where('floor', '<=', $points)->orderBy('floor', 'DESC')->first();
 
-//    if($currLevel == null || count($currLevel) == 0)
-//        $currLevel = Level::orderBy('floor', 'ASC')->first();
+    if($currLevel == null)
+        $currLevel = Level::orderBy('floor', 'ASC')->first();
 
     $nextLevel = Level::where('floor', '>', $points)->orderBy('floor', 'ASC')->first();
 
-//    if($nextLevel == null || count($nextLevel) == 0)
-//        $nextLevel = Level::orderBy('floor', 'ASC')->first();
+    if($nextLevel == null)
+        $nextLevel = Level::orderBy('floor', 'ASC')->first();
 
     return [$currLevel, $nextLevel];
 }
@@ -577,42 +574,68 @@ function sendSMS($destNum, $text, $template, $token2 = "") {
     }
 }
 
-function sendEmail($text, $subject, $to){
-    $mail = new PHPMailer(true);// Passing `true` enables exceptions
+//email
 
+function welcomeEmail($username, $email){
+    $header = 'به کوچیتا خوش آمدید';
+    $userName = $username;
+    $view = \View::make('emails.welcomeEmail', compact(['header', 'userName']));
+    $html = $view->render();
+    if(sendEmail($html, $header, $email))
+        return true;
+    else
+        return false;
+}
+function sendEmail($text, $subject, $to){
+    $mail = new PHPMailer(true);
     try {
-        //Server settings
-        $mail->SMTPDebug = 2;                                 // Enable verbose debug output
-        $mail->isSMTP();                                      // Set mailer to use SMTP
-        $mail->Host = env('mail_host_main', 'mail.koochita.com');  // Specify main and backup SMTP servers
-        $mail->SMTPAuth = true;             // Enable SMTP authentication
-        $mail->CharSet = 'UTF-8';
-        $mail->Username = env('mail_username_main', 'info@koochita.com');                 // SMTP username
-        $mail->Password = env('mail_password_main', 'pass123456');                           // SMTP password
+        $mail->SMTPDebug = 0;
+        $mail->CharSet = "UTF-8";
+        $mail->isHTML(true);
+        $mail->Subject = $subject;
+        $mail->Body    = $text;
+        $mail->AltBody = $text;
+        $mail->setFrom('info@koochita.com', 'Koochita');
+        $mail->addAddress($to);
         $mail->SMTPOptions = array(
             'ssl' => array(
-                'verify_peer' => false,
-                'verify_peer_name' => false,
+                'verify_peer' => true,
+                'verify_peer_name' => true,
                 'allow_self_signed' => true
             )
         );
-        $mail->Port = 587;                                    // TCP port to connect to
-
-        //Recipients
-        $mail->setFrom( env('mail_username_main', 'info@koochita.com'), 'koochita');
-        $mail->addAddress($to);
-
-        //Content
-        $mail->isHTML(true);                                  // Set email format to HTML
-        $mail->Subject = $subject;
-        $mail->Body = $text;
+//        $mail->addReplyTo('ghane@shazdemosafer.com', 'Information');
+//        $mail->addCC('cc@example.com');
+//        $mail->addBCC('bcc@example.com');
         $mail->send();
+        return true;
+
+//        $mail->isSMTP();                                      // Set mailer to use SMTP
+//        $mail->SMTPAuth = true;             // Enable SMTP authentication
+//        $mail->CharSet = 'UTF-8';
+//        $mail->SMTPDebug = 2;                                 // Enable verbose debug output
+//        $mail->Host = '127.0.0.1';  // Specify main and backup SMTP servers
+//        $mail->Username = 'info';                 // SMTP username
+//        $mail->Password = 'adeli1982';                           // SMTP password
+//        $mail->SMTPOptions = array(
+//            'ssl' => array(
+//                'verify_peer' => false,
+//                'verify_peer_name' => false,
+//                'allow_self_signed' => true
+//            )
+//        );
+//        $mail->setFrom( 'info@koochita.com', 'koochita');
+//        $mail->addAddress($to);
+//        $mail->isHTML(true);                                  // Set email format to HTML
+//        $mail->Subject = $subject;
+//        $mail->Body = $text;
+//        $mail->send();
     }
     catch (Exception $e) {
-        echo 'nok';
-        dd($e);
+        return false;
     }
 }
+
 
 function convertNumber($kind , $number){
 

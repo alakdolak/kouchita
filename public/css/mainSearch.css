@@ -86,11 +86,6 @@
     position: relative;
 }
 
-input[type="text"].searchPaneInput::-webkit-input-placeholder {
-    font-size: 1.3em;
-    font-weight: 500;
-}
-
 div.prw_rup.prw_search_typeahead .typeahead_align {
     display: flex;
     align-items: center;
@@ -317,7 +312,8 @@ a:hover {
     top: 0px;
     left: 0px;
     z-index: 999;
-    background-color: #000000b5;
+    backdrop-filter: blur(2px);
+    background-color: #000000bf;
 }
 
 .closeSearchPan{

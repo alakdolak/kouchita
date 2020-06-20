@@ -275,27 +275,6 @@ if(Auth::check()) {
                             $trip->pic4 = URL::asset('_images/nopic/blank.jpg');
                         }
                         break;
-                    case 8:
-                        $adab = Adab::whereId($tripPlaces[0]->placeId);
-                        if($adab->category == 3) {
-                            try {
-                                if(file_get_contents(URL::asset('_images/adab/ghazamahali/' . $adab->file . '/t-1.jpg')))
-                                    $trip->pic4 = URL::asset('_images/adab/ghazamahali/' . $adab->file . '/' . $adab->pic_1);
-                            }
-                            catch (Exception $x) {
-                                $trip->pic4 = URL::asset('_images/nopic/blank.jpg');
-                            }
-                        }
-                        else {
-                            try{
-                                if(file_get_contents(URL::asset('_images/adab/soghat/' . $adab->file . '/t-1.jpg')))
-                                    $trip->pic4 = URL::asset('_images/adab/soghat/' . $adab->file . '/' . $adab->pic_1);
-                            }
-                            catch (Exception $x) {
-                                $trip->pic4 = URL::asset('_images/nopic/blank.jpg');
-                            }
-                        }
-                        break;
                 }
             }
         }
@@ -341,6 +320,7 @@ if(Auth::check()) {
                             </div>
                             <div id="bookMarksDiv" class="headerBookMarkContentDiv" style="display: none"></div>
                             <div id="headerBookMarkPlaceHolder">
+
                                 <div class="headerBookMarkLink">
                                     <div class="headerBookMarContentImgDiv">
                                         <div class="headerBookMarkPlaceholder placeHolderAnime"></div>
@@ -351,16 +331,7 @@ if(Auth::check()) {
                                         <div class="bookMarkContentCity placeHolderAnime resultLineAnim" style="width: 100%"></div>
                                     </div>
                                 </div>
-                                <div class="headerBookMarkLink">
-                                    <div class="headerBookMarContentImgDiv">
-                                        <div class="headerBookMarkPlaceholder placeHolderAnime"></div>
-                                    </div>
-                                    <div class="bookMarkContent" style="width: 90px">
-                                        <div class="bookMarkContentTitle placeHolderAnime resultLineAnim" style="width: 100%"></div>
-                                        <div class="bookMarkContentRating placeHolderAnime resultLineAnim" style="width: 100%"></div>
-                                        <div class="bookMarkContentCity placeHolderAnime resultLineAnim" style="width: 100%"></div>
-                                    </div>
-                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -387,16 +358,6 @@ if(Auth::check()) {
                             </div>
                             <div id="alertItems" class="headerBookMarkContentDiv" style="display: none"></div>
                             <div id="headerMsgPlaceHolder">
-                                <div class="headerBookMarkLink">
-                                    <div class="headerBookMarContentImgDiv">
-                                        <div class="headerBookMarkPlaceholder placeHolderAnime"></div>
-                                    </div>
-                                    <div class="bookMarkContent" style="width: 90px">
-                                        <div class="bookMarkContentTitle placeHolderAnime resultLineAnim" style="width: 100%"></div>
-                                        <div class="bookMarkContentRating placeHolderAnime resultLineAnim" style="width: 100%"></div>
-                                        <div class="bookMarkContentCity placeHolderAnime resultLineAnim" style="width: 100%"></div>
-                                    </div>
-                                </div>
                                 <div class="headerBookMarkLink">
                                     <div class="headerBookMarContentImgDiv">
                                         <div class="headerBookMarkPlaceholder placeHolderAnime"></div>
@@ -450,6 +411,7 @@ if(Auth::check()) {
         <div class="container headerSecondContainer">
             <div class="headerSecondContentDiv">
                 <div class="headerSecondTabs">
+                    <span class="headerSecondLi" onclick="openMainSearch(12)  // in mainSearch.blade.php">بوم گردی</span>
                     <span class="headerSecondLi" onclick="openMainSearch(4)  // in mainSearch.blade.php">هتل</span>
                     <span class="headerSecondLi" onclick="openMainSearch(3)  // in mainSearch.blade.php">رستوران</span>
                     <span class="headerSecondLi" onclick="openMainSearch(1)  // in mainSearch.blade.php">جاذبه</span>

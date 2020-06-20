@@ -14,27 +14,30 @@ class UserLoginController extends Controller
 {
     public function login()
     {
+        dd('in1');
         return redirect(route('main'));
     }
 
     public function mainDoLogin()
     {
-
-        if (isset($_POST["username"]) && isset($_POST["password"])) {
-
-            $username = makeValidInput($_POST['username']);
-            $password = makeValidInput($_POST['password']);
-
-            if (Auth::attempt(['username' => $username, 'password' => $password], true)) {
-
-                if(Auth::user()->status != 0) {
-                    RetrievePas::whereUId(Auth::user()->id)->delete();
-                    return \Redirect::intended('/');
-                }
-            }
-        }
-
-        return \Redirect::route('main');
+//        dd('in');
+        echo 'ok';
+        return;
+        //        if (isset($_POST["username"]) && isset($_POST["password"])) {
+//
+//            $username = makeValidInput($_POST['username']);
+//            $password = makeValidInput($_POST['password']);
+//
+//            if (Auth::attempt(['username' => $username, 'password' => $password], true)) {
+//                if(Auth::user()->status != 0) {
+//                    RetrievePas::whereUId(Auth::user()->id)->delete();
+////                    return \Redirect::intended('/');
+//                }
+//            }
+//        }
+//
+//        return;
+//        return \Redirect::route('main');
     }
 
     public function doLogin()
@@ -51,58 +54,48 @@ class UserLoginController extends Controller
                 if ($user->status != 0) {
                     RetrievePas::whereUId(Auth::user()->id)->delete();
 
-                    if(!Auth::check())
+                    if(!Auth::check()) {
+                        dd('in');
                         Auth::login($user);
+                    }
 
                     echo "ok";
-                    return;
                 }
                 else {
                     auth()->logout();
                     echo "nok2";
-                    return;
                 }
             }
         }
         else
             echo "nok";
+
+        return;
     }
 
     public function checkLogin() {
-
-        if(Auth::check()) {
-            return \redirect()->back();
-        }
-        else{
+        if(!Auth::check()) {
             if (isset($_POST["username"]) && isset($_POST["password"])) {
-
                 $username = makeValidInput($_POST['username']);
                 $password = makeValidInput($_POST['password']);
-
                 $credentials  = ['username' => $username, 'password' => $password];
-
                 if (Auth::attempt($credentials, true)) {
-
                     $user = Auth::user();
                     if ($user->status != 0) {
-
-                        if(!Auth::check()) {
+                        if(!Auth::check())
                             Auth::login($user);
-                        }
-                        return \redirect()->back();
-
-                    } else {
-                        return \redirect()->back();
                     }
                 }
             }
         }
+
+        return \redirect()->back();
     }
 
     public function logout()
     {
         Auth::logout();
-//        \Session::flush();
+        \Session::flush();
         return \redirect()->back();
     }
 
@@ -171,23 +164,18 @@ class UserLoginController extends Controller
 
     public function checkActivationCode()
     {
-
         if (isset($_POST["activationCode"]) && isset($_POST["phoneNum"])) {
-
-            $phoneNum = $_POST["phoneNum"];
-            $phoneNum = convertNumber('en', $phoneNum);
-
-            $condition = ['code' => makeValidInput($_POST["activationCode"]),
-                'phoneNum' => makeValidInput($phoneNum)];
-
+            $phoneNum = convertNumber('en', $_POST["phoneNum"]);
+            $code = convertNumber('en', $_POST["activationCode"]);
+            $condition = ['code' => $code, 'phoneNum' => $phoneNum];
             $activation = ActivationCode::where($condition)->first();
             if ($activation != null) {
-                $activation->delete();
                 echo "ok";
                 return;
             }
         }
         echo "nok";
+        return;
     }
 
     public function resendActivationCode()
@@ -332,89 +320,111 @@ class UserLoginController extends Controller
         echo json_encode(['status' => 'nok']);
     }
 
-    public function registerAndLogin()
+    public function registerAndLogin(Request $request)
     {
+        if (isset($_POST["username"]) && isset($_POST["password"]) && (isset($_POST["email"]) || isset($_POST["phone"]))) {
 
-        if (isset($_POST["username"]) && isset($_POST["password"]) && isset($_POST["email"])) {
+            $uInvitationCode = createCode();
+            while (User::whereInvitationCode($uInvitationCode)->count() > 0)
+                $uInvitationCode = createCode();
 
-            $invitationCode = createCode();
-            while (User::whereInvitationCode($invitationCode)->count() > 0)
-                $invitationCode = createCode();
+            $checkUserName = User::where('username', $request->username)->count();
+            if($checkUserName > 0){
+                echo 'nok1';
+                return;
+            }
+
+            if(isset($request->phone) && isset($request->actCode) && $request->phone != ''){
+                $phone = convertNumber('en', $request->phone);
+                $actCode = convertNumber('en', $request->actCode);
+                $check = ActivationCode::where('phoneNum', $phone)->where('code', $actCode)->first();
+                if($check == null){
+                    echo 'nok5';
+                    return;
+                }
+                $check->delete();
+            }
+
+            $invitationCode = "";
+            if (isset($request->invitationCode) && $request->invitationCode != '') {
+                $invitationCode = makeValidInput($request->invitationCode);
+                if (!empty($invitationCode)) {
+                    $dest = User::whereInvitationCode($invitationCode)->first();
+                    if ($dest == null) {
+                        echo 'nok3';
+                        return;
+                    }
+                }
+            }
 
             $user = new User();
-            $user->username = makeValidInput($_POST["username"]);
-            $user->password = \Hash::make(makeValidInput($_POST["password"]));
-            $user->email = makeValidInput($_POST["email"]);
+            $user->username = makeValidInput($request->username);
+            $user->password = \Hash::make(makeValidInput($request->password));
+            $user->email = makeValidInput($request->email);
+            $user->phone = convertNumber('en', makeValidInput($request->phone));
+            $user->invitationCode = $uInvitationCode;
             $user->level = 0;
-            $user->created_at = date('Y-m-d h:m:s');
-            $user->updated_at = date('Y-m-d h:m:s');
-            $user->invitationCode = $invitationCode;
 
             try {
                 $user->save();
-
-                Auth::attempt(['username' => makeValidInput($_POST["username"]), 'password' => makeValidInput($_POST["password"])], true);
-
-                $invitationCode = "";
-
-                if (isset($_POST["invitationCode"]))
-                    $invitationCode = makeValidInput($_POST["invitationCode"]);
-
-                if (!empty($invitationCode)) {
-                    $dest = User::whereInvitationCode($invitationCode)->first();
-
-                    if ($dest != null) {
-                        $log = new LogModel();
-                        $log->visitorId = $user->id;
-                        $log->date = date('Y-m-d');
-                        $log->time = getToday()["time"];
-                        $log->activityId = Activity::whereName('دعوت')->first()->id;
-                        $log->kindPlaceId = -1;
-                        $log->confirm = 1;
-                        $log->placeId = -1;
-                        try {
-                            $log->save();
-                        } catch (Exception $x) {
-                            echo $x->getMessage();
-                            return;
-                        }
-
-                        $log = new LogModel();
-                        $log->visitorId = $dest->id;
-                        $log->date = date('Y-m-d');
-                        $log->time = getToday()["time"];
-                        $log->activityId = Activity::whereName('دعوت')->first()->id;
-                        $log->kindPlaceId = -1;
-                        $log->confirm = 1;
-                        $log->placeId = -1;
-                        try {
-                            $log->save();
-                        } catch (Exception $x) {
-                            echo $x->getMessage();
-                            return;
-                        }
-                    }
-                }
-
-                echo "ok";
-                return;
             } catch (Exception $x) {
-                echo "nok " . $x->getMessage();
+                echo "nok1 " . $x->getMessage();
                 return;
             }
-        }
 
-        echo "nok2";
+            try {
+                if (isset($request->email))
+                    welcomeEmail($user->username, $user->email);
+            } catch (Exception $x) {
+                echo "nok2";
+                return;
+            }
+
+            if (isset($dest) && $dest != null && isset($request->invitationCode) && $request->invitationCode != null ) {
+                $log = new LogModel();
+                $log->visitorId = $user->id;
+                $log->date = date('Y-m-d');
+                $log->time = getToday()["time"];
+                $log->activityId = Activity::whereName('دعوت')->first()->id;
+                $log->kindPlaceId = -1;
+                $log->confirm = 1;
+                $log->placeId = -1;
+                try {
+                    $log->save();
+                } catch (Exception $x) {}
+
+                $log = new LogModel();
+                $log->visitorId = $dest->id;
+                $log->date = date('Y-m-d');
+                $log->time = getToday()["time"];
+                $log->activityId = Activity::whereName('دعوت')->first()->id;
+                $log->kindPlaceId = -1;
+                $log->confirm = 1;
+                $log->placeId = -1;
+                try {
+                    $log->save();
+                } catch (Exception $x) {}
+            }
+
+            Auth::loginUsingId($user->id);
+            echo "ok";
+        }
+        else
+            echo "nok";
+
+        return;
     }
 
     public function retrievePasByEmail()
     {
+        sendEmail('text', 'test', $_POST['email']);
+        return;
 
         if (isset($_POST["email"])) {
 
             $email = makeValidInput($_POST["email"]);
 
-            $user = User::whereEmail($email)->where('link', '', '')->first();
+            $user = User::whereEmail($email)->first();
 
             if ($user != null) {
 
@@ -442,43 +452,45 @@ class UserLoginController extends Controller
 
     public function retrievePasByPhone()
     {
-
         if (isset($_POST["phone"])) {
-
-            $user = User::wherePhone(makeValidInput($_POST["phone"]))->first();
+            $phoneNum = convertNumber('en', $_POST["phone"]);
+            $user = User::wherePhone(makeValidInput($phoneNum))->first();
 
             if ($user != null) {
 
-                $retrievePas = RetrievePas::whereUId($user->id)->first();
-
-                if ($retrievePas != null) {
-                    echo json_encode(['status' => 'ok', 'reminder' => 90 - time() + $retrievePas->sendTime]);
+                $activeCode = ActivationCode::where('userId', $user->id)->where('phoneNum', $phoneNum)->first();
+                if ($activeCode != null && (90 - time() + $activeCode->sendTime) > 0) {
+                    echo json_encode(['status' => 'ok', 'reminder' => 90 - time() + $activeCode->sendTime]);
                     return;
                 }
 
-                $newPas = $this->generatePassword();
-                $msgId = sendSMS($user->phone, $newPas, 'pass');
-
+                $code = createCode();
+                while (ActivationCode::where('code', $code)->count() > 0)
+                    $code = createCode();
+                $msgId = sendSMS($user->phone, $code, 'sms');
                 if ($msgId != -1) {
-
-                    $retrievePas = new RetrievePas();
-                    $retrievePas->uId = $user->id;
-                    $user->password = \Hash::make($newPas);
-                    $retrievePas->sendTime = time();
-
-                    try {
-                        $user->save();
-                        $retrievePas->save();
-                        echo json_encode(['status' => 'ok', 'reminder' => 90]);
-                    } catch (Exception $x) {
+                    $activeCode = ActivationCode::where('userId', $user->id)->where('phoneNum', $phoneNum)->first();
+                    if($activeCode == null) {
+                        $activeCode = new ActivationCode();
+                        $activeCode->userId = $user->id;
+                        $activeCode->phoneNum = $user->phone;
                     }
-                } else {
-                    echo json_encode(['status' => 'nok2', 'reminder' => 90]);
+                    $activeCode->sendTime = time();
+                    $activeCode->code = $code;
+                    $activeCode->save();
+
+                    echo json_encode(['status' => 'ok', 'reminder' => 90]);
                 }
+                else
+                    echo json_encode(['status' => 'nok2', 'reminder' => 90]);
+
                 return;
             }
+            else
+                echo json_encode(['status' => 'nok1', 'reminder' => 90]);
         }
         echo json_encode(['status' => 'nok', 'reminder' => 90]);
+        return;
     }
 
     public function registerAndLogin2()
@@ -717,6 +729,31 @@ class UserLoginController extends Controller
         return;
     }
 
+    public function setNewPassword(Request $request)
+    {
+        if(isset($request->pass) && isset($request->phone) && isset($request->code)){
+            $checkPhone = ActivationCode::where('phoneNum', $request->phone)->where('code', $request->code)->first();
+            if($checkPhone != null && ($checkPhone->sendTime + 600) - time() > 0 ){
+                $user = User::where('phone', $request->phone)->first();
+                if($user != null && $checkPhone->userId == $user->id){
+                    $user->password = \Hash::make($request->pass);
+                    $user->save();
+                    $checkPhone->delete();
+
+                    echo 'ok';
+                }
+                else
+                    echo 'nok1';
+            }
+            else
+                echo 'nok5';
+        }
+        else
+            echo 'nok';
+
+        return;
+    }
+
     private function generatePassword()
     {
         $init = 65;
@@ -732,6 +769,5 @@ class UserLoginController extends Controller
 
         return $code;
     }
-
 
 }

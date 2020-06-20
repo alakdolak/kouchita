@@ -1563,12 +1563,15 @@ class HomeController extends Controller
         }
     }
 
-    public function emailtest()
+    public function emailtest($email)
     {
-        $text = '<h1>welcome to koochita</h1>';
-        $to = 'kiavashbc@gmail.com';
-        $subject = 'welcome massage';
-        sendEmail($text, $subject, $to);
+        $header = 'به کوچیتا خوش آمدید';
+        $userName = 'koochita';
+        $view = \View::make('emails.welcomeEmail', compact(['header', 'userName']));
+        $html = $view->render();
+        echo $html;
+        sendEmail($html, $header, $email);
+//        dd('send to ' . $email);
     }
 
     private function getCityReviews($kind, $id, $take, $notIn = []){

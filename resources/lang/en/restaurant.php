@@ -12,7 +12,7 @@ return [
     'دریایی' => 'Marine',
     'کافی شاپ' => 'coffee shop',
     'محدوده قرار گیری' => 'Location',
-    'مرکز شهر' => 'downtown',
+    'داخل شهر' => 'downtown',
     'حومه شهر' => 'countryside',
     'خارج شهر' => 'out of the city',
     'جاده ای' => 'Road',

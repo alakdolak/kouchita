@@ -19,7 +19,7 @@ return [
     'غذای ایرانی' => 'iranian food',
     'غذای فرنگی' => 'international food',
     'غذای محلی' => 'traditional food',
-    'مرکز شهر' => 'downtown',
+    'داخل شهر' => 'downtown',
     'حومه شهر' => 'countryside',
     'کم‌ازدحام' => 'Solitude',
     'پرازدحام' => 'crowd',

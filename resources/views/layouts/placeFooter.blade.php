@@ -3,17 +3,15 @@ $config = \App\models\ConfigModel::first();
     if(auth()->check()){
         $user = Auth::user();
         $userLevelFooter = auth()->user()->getUserNearestLevel();
+//        dd($userLevelFooter);
         $userTotalPointFooter = auth()->user()->getUserTotalPoint();
 
         $nextLevelFooter = $userLevelFooter[1]->floor - $userTotalPointFooter;
     }
 ?>
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/footer.css')}}' />
-<link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/icons.css?v=1')}}'/>
 
 {{--footer html--}}
-<div class="clear-both" style="height: 75px"></div>
-
 <footer>
     <div class="hideOnPhone screenFooterStyle">
         <div class="footerLogoSocialBox">
@@ -21,31 +19,6 @@ $config = \App\models\ConfigModel::first();
                 <img src="{{URL::asset('images/icons/mainLogo.png')}}" class="content-icon" width="100%">
             </a>
             <div class="footerSocialMediaBox">
-{{--                <div class="fassadsad">--}}
-{{--                    <a {{($config->linkedinNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://www.linkedin.com/in/shazde-mosafer-652817143/">--}}
-{{--                        <div class="footerIcon footerIconHor linkedin"></div>--}}
-{{--                    </a>--}}
-{{--                </div>--}}
-{{--                <div class="fassadsad">--}}
-{{--                    <a {{($config->facebookNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://www.facebook.com/profile.php?id=100016313805277&ref=br_rs">--}}
-{{--                        <div class="footerIcon footerIconHor facebook"></div>--}}
-{{--                    </a>--}}
-{{--                </div>--}}
-{{--                <div class="fassadsad">--}}
-{{--                    <a target="_blank" {{($config->pinterestNoFollow) ? 'rel="nofollow"' : ''}} href="https://www.pinterest.co.uk/shazdemosafer/">--}}
-{{--                        <div class="footerIcon footerIconHor pinterest"></div>--}}
-{{--                    </a>--}}
-{{--                </div>--}}
-{{--                <div class="fassadsad">--}}
-{{--                    <a target="_blank" {{($config->twitterNoFollow) ? 'rel="nofollow"' : ''}} href="https://twitter.com/shazdemosafer">--}}
-{{--                        <div class="footerIcon footerIconHor twitter"></div>--}}
-{{--                    </a>--}}
-{{--                </div>--}}
-{{--                <div class="fassadsad">--}}
-{{--                    <a target="_blank" {{($config->googlePlusNoFollow) ? 'rel="nofollow"' : ''}} href="https://plus.google.com/113786987503996741617">--}}
-{{--                        <div class="footerIcon footerIconHor googlePlus"></div>--}}
-{{--                    </a>--}}
-{{--                </div>--}}
                 <a {{($config->linkedinNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://www.linkedin.com/in/shazde-mosafer-652817143/">
                     <div class="footerIconHor linkedin"></div>
                 </a>
@@ -61,7 +34,7 @@ $config = \App\models\ConfigModel::first();
                 <a class="socialLink" {{($config->telegramNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://t.me/shazdehmosafer">
                     <div class="footerIconHor telegram"></div>
                 </a>
-                <a class="socialLink" {{($config->telegramNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="">
+                <a class="socialLink" {{($config->telegramNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://koochitatv.com">
                     <div class="footerIconHor aparat"></div>
                 </a>
             </div>
@@ -88,14 +61,16 @@ $config = \App\models\ConfigModel::first();
                         در صورت نیاز به کمک، صفحه
                         <a href="#"> راهنما </a>
                         را بخوانید و در صورت نیاز
-                        <a href="#"> با ما تماس بگیرید. </a>
+                        <a href="{{route('policies')}}"> با ما تماس بگیرید. </a>
                     </div>
                     <div class="aboutShazdeLink">
                         این سایت متعلق به مجموعه کوچیتا می باشد؛
-                        <a href="#"> درباره ما </a>
+                        <a href="{{route('policies')}}"> درباره ما </a>
                         بیشتر بدانید.
                         کوچیتا محصولی از
-                        <a href="http://bogendesign.co" style="color: #053a3e !important;"> بوگن دیزاین </a>
+                        <a href="http://www.sisootech.com/" style="color: #053a3e !important;">شتاب دهنده سی سو تک </a>
+                        و
+                        <a href="http://www.bogenstudio.com/" style="color: #053a3e !important;"> بوگن دیزاین </a>
                         می باشد؛ ما را بیشتر بشناسید.
                     </div>
                 </div>
@@ -137,12 +112,11 @@ $config = \App\models\ConfigModel::first();
                         <li class="footMenu footShowTabletMenu hideOnPhone">
                             <a href="{{route('place.list', ['kindPlaceId' => 4, 'mode' => 'country'])}}">اقامتگاه‌ها</a>
                         </li>
-
-                        <li class="footMenu hideOnPhone">
-                            <a href="{{route('mainArticle')}}">سفرنامه‌ها</a>
+                        <li class="footMenu footShowTabletMenu hideOnPhone">
+                            <a href="{{route('place.list', ['kindPlaceId' => 12, 'mode' => 'country'])}}">بوم گردی</a>
                         </li>
                         <li class="footMenu hideOnPhone">
-                            <a href="{{route('mainArticle')}}">بوم گردی</a>
+                            <a href="{{route('mainArticle')}}">سفرنامه‌ها</a>
                         </li>
 
                         <li class="footMenu footShowTabletMenu hideOnPhone">
@@ -173,7 +147,7 @@ $config = \App\models\ConfigModel::first();
             </span>
             <span class="ui_icon memberPossibilities"></span>
         </div>
-        <div onclick="openProSearch()">
+        <div onclick="openMainSearch(0) // in mainSearch.blade.php">
             <span class="footerMenuBarLinks">جست‌و‌جو</span>
             <span class="ui_icon search"></span>
         </div>

@@ -4,10 +4,10 @@
     <span class="statePane ui_overlay ui_modal editTags searchPanes">
         <div id="searchDivForScroll" class="prw_rup prw_search_typeahead spSearchDivForScroll">
             <div class="ui_picker">
-                <div class="typeahead_align ui_typeahead full-width display-flex">
+                <div class="typeahead_align ui_typeahead full-width display-flex" style="font-size: 20px">
 
                     <div id="firstPanSearchText" class="spGoWhere">به کجا</div>
-                    <input onkeyup="searchMain(event, this.value)" type="text" id="mainSearchInput" class="typeahead_input searchPaneInput" placeholder="دوست دارید سفر کنید؟"/>
+                    <input onkeyup="searchMain(event, this.value)" type="text" id="mainSearchInput" class="typeahead_input" placeholder="دوست دارید سفر کنید؟"/>
                     <input type="hidden" id="kindPlaceIdForMainSearch" value="0">
                     <input type="hidden" id="placeId">
 
@@ -96,6 +96,10 @@
                 break;
             case 11:
                 fpst = 'کدام غذای محلی';
+                pn = 'را می‌خواهید تجربه کنید؟';
+                break;
+            case 12:
+                fpst = 'کدام بوم گردی';
                 pn = 'را می‌خواهید تجربه کنید؟';
                 break;
         }
