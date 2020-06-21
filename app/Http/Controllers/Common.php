@@ -604,7 +604,7 @@ function sendEmail($text, $subject, $to){
         $mail->Subject = $subject;
         $mail->Body    = $text;
         $mail->AltBody = $text;
-        $mail->setFrom('info@koochita.com', 'Koochita');
+        $mail->setFrom('support@koochita.com', 'Koochita');
         $mail->addAddress($to);
         $mail->SMTPOptions = array(
             'ssl' => array(

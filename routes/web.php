@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('language/{lang}', function($lang){
     Session::put('lang', $lang);
-    return redirect(url('/'));
+    return redirect()->back();
 });
 Route::get('seeLanguage', function(){
    dd(app()->getLocale());
@@ -310,6 +310,7 @@ Route::group(array('middleware' => ['throttle:30', 'nothing', 'auth', 'adminAcce
     Route::get('test/{c}', array('as' => 'test', 'uses' => 'TestController@start'));
 
     Route::post('testMethod', array('as' => 'testMethod', 'uses' => 'TestController@methodTest'));
+
     Route::post('changeMeta/kind={kind}/id={id}', 'MetaController@changeMeta');
 
     Route::post('findPlace', array('as' => 'findPlace', 'uses' => 'HomeController@findPlace'));
@@ -326,6 +327,7 @@ Route::group(array('middleware' => ['throttle:30', 'nothing', 'auth', 'operatorA
     Route::get('getReports', array('as' => 'getReports', 'uses' => 'ReportController@getReports'));
 
     Route::get('getReports/{page}', array('as' => 'getReports2', 'uses' => 'ReportController@getReports'));
+
 });
 
 

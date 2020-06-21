@@ -1,0 +1,22 @@
+.headerContainer{
+    direction: ltr;
+}
+.headerButtonsSection{
+    right: 0;
+    left: auto;
+}
+.headerSearchIcon{
+    transform: scale(1, 1);
+    margin-left: 2px;
+    justify-content: flex-start;
+}
+.headerBookMarkHeader{
+    text-align: left;
+    padding-left: 24px;
+    padding-right: 0px;
+}
+.bookMarkContent{
+    text-align: left;
+    margin-left: 15px;
+    margin-right: 0px;
+}

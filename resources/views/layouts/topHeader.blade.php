@@ -13,16 +13,33 @@
 <link rel="icon" href="{{URL::asset('images/icons/mainIcon.svg')}}" sizes="any" type="image/svg+xml">
 <link rel="apple-touch-icon-precomposed" href="{{URL::asset('images/icons/mainIcon.svg')}}" sizes="any" type="image/svg+xml">
 
+<link rel='stylesheet' type='text/css' href='{{URL::asset('css/fonts.css')}}' />
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/bootstrap.min.css')}}' />
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/topHeaderStyles.css')}}' />
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/icons.css')}}'/>
 <link rel="stylesheet" type='text/css' href="{{URL::asset('css/theme2/swiper.css')}}">
 
-
 <script src="{{URL::asset('js/jquery-3.4.1.min.js')}}"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="{{URL::asset('js/angular.js')}}"></script>
 <script src="{{URL::asset('js/swiper/swiper.min.js')}}"></script>
+
+<style>
+
+@if(\App::getLocale() == 'en')
+
+    *{
+        font-family: enFonts;
+        direction: ltr;
+        text-align: left;
+    }
+@else
+    *{
+        font-family: IRANSansWeb;
+    }
+@endif
+</style>
+
 
 {{--<script src="https://apis.google.com/js/platform.js" async defer></script>--}}
 {{--<meta name="google-signin-scope" content="profile email">--}}

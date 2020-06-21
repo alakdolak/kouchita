@@ -285,11 +285,15 @@ if(Auth::check()) {
 <link rel="stylesheet" href="{{URL::asset('css/common/header.css')}}">
 <link rel="stylesheet" href="{{URL::asset('css/common/header1.css')}}">
 
+@if(\App::getLocale() == 'en')
+    <link rel="stylesheet" href="{{URL::asset('css/ltr/mainPageHeader.css')}}">
+@endif
+
 {{--pc header--}}
 <div class="mainHeader hideOnPhone">
     <div class="container headerContainer">
         <a href="{{route('main')}}" class="headerPcLogoDiv" >
-            <img src="{{URL::asset('images/icons/mainLogo.png')}}" alt="کوچیتا" class="headerPcLogo"/>
+            <img src="{{URL::asset('images/icons/mainLogo.png')}}" alt="{{__('کوچیتا')}}" class="headerPcLogo"/>
         </a>
 
         <div class="headerSearchBar">
@@ -303,20 +307,20 @@ if(Auth::check()) {
                 <div class="headerAuthButton" onclick="openUploadPost()">
                     <span class="headerIconCommon iconFamily addPostIcon"></span>
                     <div class="nameOfIconHeaders">
-                        پست
+                        {{__('پست')}}
                     </div>
                 </div>
 
-                <div id="bookmarkicon" class="headerAuthButton" title="نشانه گذاری شده ها">
+                <div id="bookmarkicon" class="headerAuthButton" title="{{__('نشانه گذاری شده ها')}}">
                     <span class="headerIconCommon iconFamily BookMarkIconEmpty"></span>
                     <div class="nameOfIconHeaders">
-                        نشون‌کرده
+                        {{__('نشون‌کرده')}}
                     </div>
 
                     <div id="bookmarkmenu" class="arrowTopDiv headerSubMenu">
                         <div class="headerBookMarkBody">
                             <div class="headerBookMarkHeader">
-                                <a class="headerBookMarkHeaderName" href="{{route('recentlyViewTotal')}}" target="_self"> نشانه‌گذاری شده‌ها </a>
+                                <a class="headerBookMarkHeaderName" href="{{route('recentlyViewTotal')}}" target="_self"> {{__('نشانه‌گذاری شده‌ها')}} </a>
                             </div>
                             <div id="bookMarksDiv" class="headerBookMarkContentDiv" style="display: none"></div>
                             <div id="headerBookMarkPlaceHolder">
@@ -337,24 +341,24 @@ if(Auth::check()) {
                     </div>
                 </div>
 
-                <a href="{{route('myTrips')}}" class="headerAuthButton" title="سفرهای منا">
+                <a href="{{route('myTrips')}}" class="headerAuthButton" title="{{__('سفرهای من')}}">
                     <span class="headerIconCommon iconFamily MyTripsIcon"></span>
                     <div class="nameOfIconHeaders">
-                        سفرهای من
+                        {{__('سفرهای من')}}
                     </div>
                 </a>
 
                 <div class="notification-bell headerAuthButton">
                     <span class="headerIconCommon iconFamily MsgIcon"></span>
                     <div class="nameOfIconHeaders">
-                        پیام‌ها
+                        {{__('پیام‌ها')}}
                     </div>
                     <div id="alertPane" class="headerAlertNumber">0</div>
 
                     <div id="alert" class="arrowTopDiv headerSubMenu">
                         <div class="headerBookMarkBody">
                             <div class="headerBookMarkHeader">
-                                <a class="headerBookMarkHeaderName" href="#" target="_self"> تمامی پیام ها</a>
+                                <a class="headerBookMarkHeaderName" href="#" target="_self"> {{__('تمامی پیام ها')}}</a>
                             </div>
                             <div id="alertItems" class="headerBookMarkContentDiv" style="display: none"></div>
                             <div id="headerMsgPlaceHolder">
@@ -382,19 +386,19 @@ if(Auth::check()) {
                         <div id="profile-drop" class="arrowTopDiv headerAuthMenu">
                             <ul class="global-nav-profile-menu">
                                 <li class="subItemHeaderNavBar">
-                                    <a href="{{URL('profile')}}" class="subLink" data-tracking-label="UserProfile_viewProfile">صفحه کاربری</a>
+                                    <a href="{{URL('profile')}}" class="subLink" data-tracking-label="UserProfile_viewProfile">{{__('صفحه کاربری')}}</a>
                                 </li>
                                 <li class="subItemHeaderNavBar">
-                                    <a href="{{URL('badge')}}" class="subLink" data-tracking-label="UserProfile_viewProfile">جوایز و مدال ها</a>
+                                    <a href="{{URL('badge')}}" class="subLink" data-tracking-label="UserProfile_viewProfile">{{__('جوایز و مدال ها')}}</a>
                                 </li>
                                 <li class="subItemHeaderNavBar rule">
-                                    <a href="{{URL('messages')}}" class="subLink global-nav-submenu-divided" data-tracking-label="UserProfile_messages">پیام‌ها</a>
+                                    <a href="{{URL('messages')}}" class="subLink global-nav-submenu-divided" data-tracking-label="UserProfile_messages">{{__('پیام‌ها')}}</a>
                                 </li>
                                 <li class="subItemHeaderNavBar">
-                                    <a href="{{URL('accountInfo')}}" class="subLink" data-tracking-label="UserProfile_settings">اطلاعات کاربر </a>
+                                    <a href="{{URL('accountInfo')}}" class="subLink" data-tracking-label="UserProfile_settings">{{__('اطلاعات کاربر')}}</a>
                                 </li>
                                 <li class="subItemHeaderNavBar">
-                                    <a href="{{route('logout')}}" class="subLink" data-tracking-label="UserProfile_signout">خروج</a>
+                                    <a href="{{route('logout')}}" class="subLink" data-tracking-label="UserProfile_signout">{{__('auth.خروج')}}</a>
                                 </li>
                             </ul>
                         </div>
@@ -402,7 +406,7 @@ if(Auth::check()) {
 
                 </div>
             @else
-                <div class="login-button mainLoginButton" title="ورود / ثبت نام"> ورود / ثبت نام</div>
+                <div class="login-button mainLoginButton" title="{{__('auth.ورود / ثبت نام')}}"> {{__('auth.ورود / ثبت نام')}}</div>
             @endif
         </div>
     </div>
@@ -411,13 +415,13 @@ if(Auth::check()) {
         <div class="container headerSecondContainer">
             <div class="headerSecondContentDiv">
                 <div class="headerSecondTabs">
-                    <span class="headerSecondLi" onclick="openMainSearch(12)  // in mainSearch.blade.php">بوم گردی</span>
-                    <span class="headerSecondLi" onclick="openMainSearch(4)  // in mainSearch.blade.php">هتل</span>
-                    <span class="headerSecondLi" onclick="openMainSearch(3)  // in mainSearch.blade.php">رستوران</span>
-                    <span class="headerSecondLi" onclick="openMainSearch(1)  // in mainSearch.blade.php">جاذبه</span>
-                    <span class="headerSecondLi" onclick="openMainSearch(10)  // in mainSearch.blade.php">سوغات و صنایع‌دستی</span>
-                    <span class="headerSecondLi" onclick="openMainSearch(11)  // in mainSearch.blade.php">غذای محلی</span>
-                    <a href="{{route('mainArticle')}}" class="headerSecondLi" data-tracking-label="Flights">سفرنامه‌ها</a>
+                    <span class="headerSecondLi" onclick="openMainSearch(12)  // in mainSearch.blade.php">{{__('بوم گردی')}}</span>
+                    <span class="headerSecondLi" onclick="openMainSearch(4)  // in mainSearch.blade.php">{{__('هتل')}}</span>
+                    <span class="headerSecondLi" onclick="openMainSearch(3)  // in mainSearch.blade.php">{{__('رستوران')}}</span>
+                    <span class="headerSecondLi" onclick="openMainSearch(1)  // in mainSearch.blade.php">{{__('جاذبه')}}</span>
+                    <span class="headerSecondLi" onclick="openMainSearch(10)  // in mainSearch.blade.php">{{__('سوغات و صنایع‌دستی')}}</span>
+                    <span class="headerSecondLi" onclick="openMainSearch(11)  // in mainSearch.blade.php">{{__('غذای محلی')}}</span>
+                    <a href="{{route('mainArticle')}}" class="headerSecondLi" data-tracking-label="Flights">{{__('سفرنامه‌ها')}}</a>
                 </div>
             </div>
         </div>
@@ -427,7 +431,7 @@ if(Auth::check()) {
 {{--mobile header--}}
 <div class="hideOnScreen mobileHeader">
     <a href="{{route('main')}}" class="global-nav-logo" >
-        <img src="{{URL::asset('images/icons/mainLogo.png')}}" alt="کوچیتا" style="height: 60px; width: auto;"/>
+        <img src="{{URL::asset('images/icons/mainLogo.png')}}" alt="{{__('کوچیتا')}}" style="height: 60px; width: auto;"/>
     </a>
 </div>
 
@@ -517,7 +521,7 @@ if(Auth::check()) {
                         }
 
                         if (response.length == 0)
-                            newElement += '<div><div class="modules-engagement-notification-dropdown"><div class="notifdd_empty">هیچ پیامی موجود نیست </div></div></div>';
+                            newElement += '<div><div class="modules-engagement-notification-dropdown"><div class="notifdd_empty">{{__('هیچ پیامی موجود نیست')}} </div></div></div>';
                         else
                             getAlertsCount();
 
@@ -591,7 +595,7 @@ if(Auth::check()) {
                                         '<div class="bookMarkContentTitle">' + response[i].placeName + '</div>\n' +
                                         '<div class="bookMarkContentRating">\n' +
                                         '<div class="ui_bubble_rating bubble_' + response[i].placeRate + '0"></div>\n' +
-                                        '<div>' + response[i].seen + ' مشاهده</div>\n' +
+                                        '<div>' + response[i].seen + ' {{__('نقد')}}</div>\n' +
                                         '</div>\n' +
                                         '<div class="bookMarkContentCity">' + response[i].placeCity + '</div>\n' +
                                         '</div>\n' +
@@ -639,7 +643,7 @@ if(Auth::check()) {
                         else
                             element += "<div class='ui_bubble_rating bubble_10'></div>";
 
-                        element += "<br/>" + response[i].placeReviews + " نقد ";
+                        element += "<br/>" + response[i].placeReviews + " {{__('نقد')}} ";
                         element += "</div>";
                         element += "<div class='geo'>" + response[i].placeCity + "/ " + response[i].placeState + "</div>";
                         element += "</div>";

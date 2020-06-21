@@ -1,5 +1,13 @@
 <link rel="stylesheet" href="{{URL::asset('css/component/suggestionPack.css')}}">
 
+@if(\App::getLocale() == 'en')
+    <style>
+        .suggestionPackDetailDiv{
+            direction: ltr;
+        }
+    </style>
+@endif
+
 <div id="suggestionSample" style="display: none;">
     <div class="suggestionPackDiv">
         <div class="suggestionPackContent">
@@ -15,11 +23,11 @@
                     <div class="suggestionPackReviewRow" style="display: ##citySection##">
                         <span class="ui_bubble_rating bubble_##rate##0"></span>
                         <span class="suggestionPackReviewCount"> ##review## </span>
-                        <span>نقد </span>
+                        <span>{{__('نقد')}}</span>
                     </div>
                     <div class="suggestionPackReviewRow" style="display: ##articleSetion##">
                         <span class="suggestionPackReviewCount"> ##review## </span>
-                        <span>نقد </span>
+                        <span>{{__('نقد')}}</span>
                     </div>
                     <div class="suggestionPackCityRow" style="display: ##citySection##">
                         ##city##

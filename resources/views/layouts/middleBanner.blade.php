@@ -10,26 +10,26 @@
 
                     <div class="squareDiv" onclick="openMainSearch(11)">
                         <div class="phoneIcon ghazamahali"></div>
-                        <div class="textIcon">غذای محلی</div>
+                        <div class="textIcon">{{__('غذای محلی')}}</div>
                     </div>
                     <div class="squareDiv" onclick="openMainSearch(10)">
                         <div class="phoneIcon soghat"></div>
-                        <div class="textIcon">سوغات</div>
+                        <div class="textIcon">{{__('سوغات')}}</div>
                     </div>
 
                     <div class="squareDiv" onclick="openMainSearch(1)">
                         <div class="phoneIcon atraction"></div>
-                        <div class="textIcon">جاذبه</div>
+                        <div class="textIcon">{{__('جاذبه')}}</div>
                     </div>
 
                     <div class="squareDiv" onclick="openMainSearch(3)">
                         <div class="phoneIcon restaurant"></div>
-                        <div class="textIcon">رستوران</div>
+                        <div class="textIcon">{{__('رستوران')}}</div>
                     </div>
 
                     <div class="squareDiv" onclick="openMainSearch(4)">
                         <div class="phoneIcon hotel"></div>
-                        <div class="textIcon">هتل</div>
+                        <div class="textIcon">{{__('هتل')}}</div>
                     </div>
                 </div>
             </div>
@@ -288,9 +288,9 @@
                     <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
                         <div class="shelf_header">
                             <div class="shelf_title">
-                                <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا" style="width: 50px;">
+                                <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="{{__('کوچیتا')}}" style="width: 50px;">
                                 <div class="shelf_title_container h3">
-                                    <h3>تازه‌های کوچیتا</h3>
+                                    <h3>{{__('تازه‌های کوچیتا')}}</h3>
                                 </div>
                             </div>
                         </div>
@@ -321,7 +321,7 @@
                                             {{$item->meta}}
                                         </p>
                                         <div class="cta-container transition" style="left: 0px">
-                                            <a href="{{$item->url}}" class="cta">مشاهده مقاله</a>
+                                            <a href="{{$item->url}}" class="cta">{{__('مشاهده مقاله')}}</a>
                                         </div>
                                         <div class="card_circle transition">
                                             <img src="{{$item->pic}}" class="resizeImgClass" style="width: 100%;">
@@ -342,9 +342,9 @@
                         <div class="shelf_header">
                             <div class="shelf_title">
                                 <a class="shelf_title" href="{{route('place.list', ['kindPlaceId' => 11, 'mode' => 'country'])}}" target="_blank">
-                                    <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا" style="width: 50px;">
+                                    <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="{{__('کوچیتا')}}" style="width: 50px;">
                                     <div class="shelf_title_container h3">
-                                        <h3>محبوب‌ترین غذا‌ها</h3>
+                                        <h3>{{__('محبوب‌ترین غذا‌ها')}}</h3>
                                     </div>
                                 </a>
                             </div>
@@ -379,9 +379,9 @@
                         <div class="shelf_header">
                             <div class="shelf_title" >
                                 <a class="shelf_title" href="{{route('place.list', ['kindPlaceId' => 6, 'mode' => 'country'])}}" target="_blank">
-                                    <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا" style="width: 50px;">
+                                    <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="{{__('کوچیتا')}}" style="width: 50px;">
                                     <div class="shelf_title_container h3">
-                                        <h3>سفر طبیعت‌گردی</h3>
+                                        <h3>{{__('سفر طبیعت‌گردی')}}</h3>
                                     </div>
                                 </a>
                             </div>
@@ -591,9 +591,9 @@
                         <div class="shelf_header">
                             <div class="shelf_title">
                                 <a class="shelf_title" href="{{route('place.list', ['kindPlaceId' => 3, 'mode' => 'country'])}}" target="_blank">
-                                    <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا" style="width: 50px;">
+                                    <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="{{__('کوچیتا')}}" style="width: 50px;">
                                     <div class="shelf_title_container h3">
-                                        <h3>محبوب‌ترین رستوران‌ها</h3>
+                                        <h3>{{__('محبوب‌ترین رستوران‌ها')}}</h3>
                                     </div>
                                 </a>
                             </div>
@@ -645,9 +645,9 @@
                         <div class="shelf_header">
                             <div class="shelf_title">
                                 <a class="shelf_title" href="{{route('place.list', ['kindPlaceId' => 1, 'mode' => 'country'])}}" target="_blank">
-                                    <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا" style="width: 50px;">
+                                    <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="{{__('کوچیتا')}}" style="width: 50px;">
                                     <div class="shelf_title_container h3">
-                                        <h3>سفر تاریخی-فرهنگی</h3>
+                                        <h3>{{__('سفر تاریخی-فرهنگی')}}</h3>
                                     </div>
                                 </a>
                             </div>
@@ -669,74 +669,74 @@
                 <div class="eachPartStatistic">
                     <div class="eachPartStatisticIcons articleStatisticIcon"></div>
                     <div class="eachPartStatisticNums">
-                        <span>بیش از</span>
+                        <span>{{__('بیش از')}}</span>
                         <span>{{$count['article']}}</span>
                     </div>
-                    <div class="eachPartStatisticTitle">مقاله</div>
+                    <div class="eachPartStatisticTitle">{{__('مقاله')}}</div>
                 </div>{{--
     --}}<div class="eachPartStatistic">
                     <div class="eachPartStatisticIcons friendStatisticIcon"></div>
                     <div class="eachPartStatisticNums">
-                        <span>بیش از</span>
+                        <span>{{__('بیش از')}}</span>
                         <span>{{$count['userCount']}}</span>
                     </div>
-                    <div class="eachPartStatisticTitle">دوست</div>
+                    <div class="eachPartStatisticTitle">{{__('دوست')}}</div>
                 </div>{{--
     --}}<div class="eachPartStatistic">
                     <div class="eachPartStatisticIcons commentStatisticIcon"></div>
                     <div class="eachPartStatisticNums">
-                        <span>بیش از</span>
+                        <span>{{__('بیش از')}}</span>
                         <span>{{$count['comment']}}</span>
                     </div>
-                    <div class="eachPartStatisticTitle">نظر</div>
+                    <div class="eachPartStatisticTitle">{{__('نظر')}}</div>
                 </div>{{--
     --}}<div class="eachPartStatistic">
                     <div class="eachPartStatisticIcons traditionalFoodStatisticIcon"></div>
                     <div class="eachPartStatisticNums">
-                        <span>بیش از</span>
+                        <span>{{__('بیش از')}}</span>
                         <span>{{$count['mahaliFood']}}</span>
                     </div>
-                    <div class="eachPartStatisticTitle">غذای محلی</div>
+                    <div class="eachPartStatisticTitle">{{__('غذای محلی')}}</div>
                 </div>{{--
     --}}<div class="eachPartStatistic">
                     <div class="eachPartStatisticIcons souvenirStatisticIcon"></div>
                     <div class="eachPartStatisticNums">
-                        <span>بیش از</span>
+                        <span>{{__('بیش از')}}</span>
                         <span>{{$count['sogatSanaie']}}</span>
                     </div>
-                    <div class="eachPartStatisticTitle">سوغات</div>
+                    <div class="eachPartStatisticTitle">{{__('سوغات')}}</div>
                 </div>{{--
     --}}<div class="eachPartStatistic">
                     <div class="eachPartStatisticIcons handcraftStatisticIcon"></div>
                     <div class="eachPartStatisticNums">
-                        <span>بیش از</span>
+                        <span>{{__('بیش از')}}</span>
                         <span>{{$count['sogatSanaie']}}</span>
                     </div>
-                    <div class="eachPartStatisticTitle">صنایع‌دستی</div>
+                    <div class="eachPartStatisticTitle">{{__('صنایع‌دستی')}}</div>
                 </div>{{--
     --}}<div class="eachPartStatistic">
                     <div class="eachPartStatisticIcons attractionStatisticIcon"></div>
                     <div class="eachPartStatisticNums">
-                        <span>بیش از</span>
+                        <span>{{__('بیش از')}}</span>
                         <span>{{$count['amaken']}}</span>
                     </div>
-                    <div class="eachPartStatisticTitle">جاذبه</div>
+                    <div class="eachPartStatisticTitle">{{__('جاذبه')}}</div>
                 </div>{{--
     --}}<div class="eachPartStatistic">
                     <div class="eachPartStatisticIcons restaurantStatisticIcon"></div>
                     <div class="eachPartStatisticNums">
-                        <span>بیش از</span>
+                        <span>{{__('بیش از')}}</span>
                         <span>{{$count['restaurant']}}</span>
                     </div>
-                    <div class="eachPartStatisticTitle">رستوران</div>
+                    <div class="eachPartStatisticTitle">{{__("رستوران")}}</div>
                 </div>{{--
     --}}<div class="eachPartStatistic">
                     <div class="eachPartStatisticIcons residenceStatisticIcon"></div>
                     <div class="eachPartStatisticNums">
-                        <span>بیش از</span>
+                        <span>{{__('بیش از')}}</span>
                         <span>{{$count['hotel']}}</span>
                     </div>
-                    <div class="eachPartStatisticTitle">اقامت‌گاه</div>
+                    <div class="eachPartStatisticTitle">{{__('اقامتگاه')}}</div>
                 </div>
             </center>
 
@@ -745,9 +745,9 @@
                     <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
                         <div class="shelf_header">
                             <div class="shelf_title">
-                                <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا" style="width: 50px;">
+                                <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="{{__('کوچیتا')}}" style="width: 50px;">
                                 <div class="shelf_title_container h3">
-                                    <h3>مراکز خرید</h3>
+                                    <h3>{{__('مراکز خرید')}}</h3>
                                 </div>
                             </div>
                         </div>
@@ -782,9 +782,9 @@
                         <div class="shelf_header">
                             <div class="shelf_title">
                                 <a class="shelf_title" href="{{route('mainArticle')}}" target="_blank">
-                                    <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="کوچیتا" style="width: 50px;">
+                                    <img src="{{URL::asset('images/icons/iconneg.svg')}}" alt="{{__('کوچیتا')}}" style="width: 50px;">
                                     <div class="shelf_title_container h3">
-                                        <h3>محبوب‌ترین سفرنامه‌ها</h3>
+                                        <h3>{{__('محبوب‌ترین سفرنامه‌ها')}}</h3>
                                     </div>
                                 </a>
                             </div>

@@ -375,6 +375,7 @@
     position: relative;
     margin: 30px 0;
     font-style: italic;
+    text-align: center;
     font-size: 14px;
     color: #999;
 }
@@ -403,6 +404,9 @@
     border: 2px dashed #9996;
     margin: 20px 8% 10px;
     padding-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .uploaderDlg .dragScreen {

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="{{\App::getLocale()}}">
 
 <head>
     @include('layouts.topHeader')
@@ -17,6 +17,11 @@
     <meta name="twitter:image" content="{{URL::asset('_images/nopic/blank.jpg')}}"/>
 
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/mainPageStyles.css')}}'/>
+
+
+    @if(\App::getLocale() == 'en')
+        <link rel="stylesheet" href="{{URL::asset('css/ltr/mainPage.css')}}">
+    @endif
 
     {{--urls--}}
     <script>
@@ -62,7 +67,7 @@
             </div>
             <div class="mainDivSearchInputMainPage">
                 <div class="searchDivForScrollClass mainSearchDivPcSize">
-                    <div onclick="openMainSearch(0) // in mainSearch.blade.php" style="text-align: center; font-size: 25px;">به کجا می‌روید؟</div>
+                    <div onclick="openMainSearch(0) // in mainSearch.blade.php" style="text-align: center; font-size: 25px;">{{__('به کجا می‌روید؟')}}</div>
                 </div>
                 <div class="clear-both"></div>
             </div>

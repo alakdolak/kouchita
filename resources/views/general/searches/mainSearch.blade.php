@@ -1,4 +1,7 @@
 <link rel="stylesheet" href="{{URL::asset('css/mainSearch.css')}}">
+@if(\App::getLocale() == 'en')
+    <link rel="stylesheet" href="{{URL::asset('css/ltr/mainSearch.css')}}">
+@endif
 
 <div id="searchPane" class="searchPaneDiv hidden">
     <span class="statePane ui_overlay ui_modal editTags searchPanes">
@@ -6,8 +9,8 @@
             <div class="ui_picker">
                 <div class="typeahead_align ui_typeahead full-width display-flex" style="font-size: 20px">
 
-                    <div id="firstPanSearchText" class="spGoWhere">به کجا</div>
-                    <input onkeyup="searchMain(event, this.value)" type="text" id="mainSearchInput" class="typeahead_input" placeholder="دوست دارید سفر کنید؟"/>
+                    <div id="firstPanSearchText" class="spGoWhere">{{__('به کجا')}}</div>
+                    <input onkeyup="searchMain(event, this.value)" type="text" id="mainSearchInput" class="typeahead_input" placeholder="{{__('دوست دارید سفر کنید؟')}}"/>
                     <input type="hidden" id="kindPlaceIdForMainSearch" value="0">
                     <input type="hidden" id="placeId">
 
@@ -29,7 +32,7 @@
                     </div>
 
                     <div class="visitSuggestionDiv">
-                            <div class="visitSuggestionText">بازدید های اخیر شما</div>
+                            <div class="visitSuggestionText">{{__('بازدید های اخیر شما')}}</div>
 
                             <div id="recentlyRowMainSearch" class="visitSuggestion4Box">
                                 <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget spBoxOfSuggestion">
@@ -75,32 +78,32 @@
         var pn;
         switch (_kindPlaceId){
             case 0:
-                fpst = 'به کجا';
-                pn = 'دوست دارید سفر کنید؟';
+                fpst = '{{__('به کجا')}}';
+                pn = '{{__('دوست دارید سفر کنید؟')}}';
                 break;
             case 1:
-                fpst = 'کدام جاذبه';
-                pn = 'را می‌خواهید تجربه کنید؟';
+                fpst = '{{__('کدام جاذبه')}}';
+                pn = '{{__('را می‌خواهید تجربه کنید؟')}}';
                 break;
             case 3:
-                fpst = 'در کدام رستوران';
-                pn = 'دوست دارید غذا بخورید؟';
+                fpst = '{{__('در کدام رستوران')}}';
+                pn = '{{__('دوست دارید غذا بخورید؟')}}';
                 break;
             case 4:
-                fpst = 'در کدام هتل';
-                pn = 'دوست دارید اقامت کنید؟';
+                fpst = '{{__('در کدام هتل')}}';
+                pn = '{{__('دوست دارید اقامت کنید؟')}}';
                 break;
             case 10:
-                fpst = 'کدام صنایع‌دستی یا سوغات ';
-                pn = 'را دوست دارید بشناسید؟';
+                fpst = '{{__('کدام صنایع‌دستی یا سوغات')}}';
+                pn = '{{__('را دوست دارید بشناسید؟')}}';
                 break;
             case 11:
-                fpst = 'کدام غذای محلی';
-                pn = 'را می‌خواهید تجربه کنید؟';
+                fpst = '{{__('کدام غذای محلی')}}';
+                pn = '{{__('را می‌خواهید تجربه کنید؟')}}';
                 break;
             case 12:
-                fpst = 'کدام بوم گردی';
-                pn = 'را می‌خواهید تجربه کنید؟';
+                fpst = '{{__('کدام بوم گردی')}}';
+                pn = '{{__('را می‌خواهید تجربه کنید؟')}}';
                 break;
         }
 
@@ -226,7 +229,7 @@
         if (response.length == 0) {
             $('#placeHolderResult').hide();
             $('#mainSearchResult').hide();
-            newElement = "موردی یافت نشد";
+            newElement = "{{__('موردی یافت نشد')}}";
             $("#placeId").val("");
             return;
         }
