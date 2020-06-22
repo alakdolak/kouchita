@@ -192,22 +192,6 @@ body {
     background-size: 72px;
 }
 
-@media screen and (max-width: 600px) {
-    .minusPlusBtn {
-        width: 44px;
-        height: 44px;
-        background-size: 185px;
-    }
-}
-
-/*{{--.minusPlusBtn_phone {--}}*/
-/*{{--width: 26px;--}}*/
-/*{{--height: 26px;--}}*/
-/*{{--display: inline-block;--}}*/
-/*{{--background-image: url('{{URL::asset('images') . 'icons.jpg'}}');--}}*/
-/*{{--background-size: 115px;--}}*/
-/*{{--background-repeat: no-repeat;--}}*/
-/*{{--}--}}*/
 
 .searchDivForScrollClass {
     max-height: 390px;
@@ -237,40 +221,6 @@ body {
     border-style: inherit !important;
     border-radius: 0 0 0 10px !important;
     font-size: 20px;
-}
-
-.mainBannerSlider {
-     position: absolute;
-     top: 0;
-     width: 100%;
-     height: 450px;
-     margin-bottom: 40px;
- }
-
-.eachPicOfSlider {
-    width: 100%;
-}
-
-.textInSlideMain {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(45deg, rgba(0, 0, 0, 0.6) 0%, transparent 70%);
-}
-
-.textInSlide {
-    position: absolute;
-    left: 10px;
-    bottom: 10px;
-    padding: 30px;
-    font-size: 20px;
-}
-
-.stateName {
-    font-size: 12px;
-    padding-right: 21px;
 }
 
 /*inline styles*/
@@ -480,6 +430,8 @@ div.prw_rup.prw_search_typeahead .typeahead_align .typeahead_input {
 
 .mainSearchDivPcSize {
     width: 40%;
+    padding: 10px 0px;
+    background: white;
 }
 
 #searchDivForScroll > div:nth-child(1) {
@@ -569,10 +521,6 @@ div.ppr_rup.ppr_priv_homepage_hero .placement_wrap .placement_wrap_cell {
     display: block;
 }
 
-.placement_wrap_cell .mainBannerSlider {
-    position: inherit;
-}
-
 .prw_rup.prw_shelves_rebrand_poi_shelf_item_widget.ui_column.is-6-mobile.ng-scope,
 .prw_rup.prw_shelves_rebrand_poi_shelf_item_widget.ui_column.is-6-mobile.ng-scope .poi {
     width: 100%;
@@ -600,7 +548,7 @@ div.prw_rup.prw_shelves_rebrand_poi_shelf_item_widget .detail {
 /*slider styles*/
 
 .mainBannerSlider {
-    position: absolute;
+    position: relative;
     top: 0;
     width: 100%;
     height: 450px;
@@ -726,10 +674,6 @@ div.prw_rup.prw_shelves_rebrand_poi_shelf_item_widget .detail {
         width: initial;
     }
 
-    #searchDivForScroll {
-        width: 100%;
-    }
-
     .console-container {
         width: 100%;
     }
@@ -774,10 +718,15 @@ div.prw_rup.prw_shelves_rebrand_poi_shelf_item_widget .detail {
     }
 }
 
-@media (max-width: 400px) {
-    #searchDivForScroll > div:nth-child(1) {
-        padding: 10px 0 !important;
+@media screen and (max-width: 600px) {
+    .minusPlusBtn {
+        width: 44px;
+        height: 44px;
+        background-size: 185px;
     }
+}
+
+@media (max-width: 400px) {
 
     #result {
         margin: 0;

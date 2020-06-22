@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('language/{lang}', function($lang){
     Session::put('lang', $lang);
-    return redirect(url('/'));
+    return redirect()->back();
 });
 Route::get('seeLanguage', function(){
    dd(app()->getLocale());
@@ -310,6 +310,7 @@ Route::group(array('middleware' => ['throttle:30', 'nothing', 'auth', 'adminAcce
     Route::get('test/{c}', array('as' => 'test', 'uses' => 'TestController@start'));
 
     Route::post('testMethod', array('as' => 'testMethod', 'uses' => 'TestController@methodTest'));
+
     Route::post('changeMeta/kind={kind}/id={id}', 'MetaController@changeMeta');
 
     Route::post('findPlace', array('as' => 'findPlace', 'uses' => 'HomeController@findPlace'));
@@ -326,16 +327,20 @@ Route::group(array('middleware' => ['throttle:30', 'nothing', 'auth', 'operatorA
     Route::get('getReports', array('as' => 'getReports', 'uses' => 'ReportController@getReports'));
 
     Route::get('getReports/{page}', array('as' => 'getReports2', 'uses' => 'ReportController@getReports'));
+
 });
 
 
 //authenticated controller
 Route::group(array('middleware' => ['nothing', 'throttle:30']), function(){
-    Route::get('login', 'UserLoginController@login');
+//    Route::get('login', 'UserLoginController@login');
+    Route::get('newPasswordEmail/{code}', 'UserLoginController@newPasswordEmailPage')->name('newPasswordEmail');
 
-    Route::post('login', array('as' => 'login', 'uses' => 'UserLoginController@mainDoLogin'));
+    Route::post('setNewPasswordEmail', 'UserLoginController@setNewPasswordEmail')->name('setNewPasswordEmail');
 
     Route::post('checkLogin', array('as' => 'checkLogin', 'uses' => 'UserLoginController@checkLogin'));
+
+    Route::get('login', array('as' => 'login', 'uses' => 'UserLoginController@mainDoLogin'));
 
     Route::post('login2', array('as' => 'login2', 'uses' => 'UserLoginController@doLogin'));
 
@@ -352,6 +357,8 @@ Route::group(array('middleware' => ['nothing', 'throttle:30']), function(){
     Route::post('retrievePasByEmail', array('as' => 'retrievePasByEmail', 'uses' => 'UserLoginController@retrievePasByEmail'));
 
     Route::post('retrievePasByPhone', array('as' => 'retrievePasByPhone', 'uses' => 'UserLoginController@retrievePasByPhone'));
+
+    Route::post('setNewPassword', 'UserLoginController@setNewPassword')->name('user.setNewPassword');
 
     Route::post('checkPhoneNum', array('as' => 'checkPhoneNum', 'uses' => 'UserLoginController@checkPhoneNum'));
 
@@ -732,7 +739,7 @@ Route::middleware(['web', 'vodShareData'])->group(function (){
 });
 
 
-Route::get('emailtest', 'HomeController@emailtest');
+Route::get('emailtest/{email}', 'HomeController@emailtest');
 
 Route::get('exportToExcelTT', 'HomeController@exportExcel');
 
@@ -818,10 +825,3 @@ Route::group(array(), function(){
         dd($request);
     });
 });
-
-
-//<Directory /var/www/dev/public>
-//        Options Indexes FollowSymLinks
-//        AllowOverride All
-//        Require all granted
-//</Directory>

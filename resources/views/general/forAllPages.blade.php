@@ -4,6 +4,10 @@
 {{--this dark modal with blur--}}
 <div id="darkModeMainPage" class="ui_backdrop dark" ></div>
 
+<div style="display: none;">
+    @include('layouts.pop-up-create-trip')
+</div>
+
 @include('general.loading')
 
 @include('general.adminInPage')

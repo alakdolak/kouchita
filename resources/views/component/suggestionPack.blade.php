@@ -1,6 +1,14 @@
 <link rel="stylesheet" href="{{URL::asset('css/component/suggestionPack.css')}}">
 
-<div id="suggestionSample">
+@if(\App::getLocale() == 'en')
+    <style>
+        .suggestionPackDetailDiv{
+            direction: ltr;
+        }
+    </style>
+@endif
+
+<div id="suggestionSample" style="display: none;">
     <div class="suggestionPackDiv">
         <div class="suggestionPackContent">
             <img src="{{URL::asset('images/pin.png')}}" class="imageGoldPin">
@@ -15,11 +23,11 @@
                     <div class="suggestionPackReviewRow" style="display: ##citySection##">
                         <span class="ui_bubble_rating bubble_##rate##0"></span>
                         <span class="suggestionPackReviewCount"> ##review## </span>
-                        <span>نقد </span>
+                        <span>{{__('نقد')}}</span>
                     </div>
                     <div class="suggestionPackReviewRow" style="display: ##articleSetion##">
                         <span class="suggestionPackReviewCount"> ##review## </span>
-                        <span>نقد </span>
+                        <span>{{__('نقد')}}</span>
                     </div>
                     <div class="suggestionPackCityRow" style="display: ##citySection##">
                         ##city##
@@ -43,10 +51,31 @@
     </div>
 </div>
 
+<div id="suggestionPlaceHolderSample" style="display: none;">
+    <div class="suggestionPackDiv" style="width: 250px">
+        <div class="suggestionPackContent">
+            <img src="{{URL::asset('images/pin.png')}}" class="imageGoldPin">
+            <div class="suggestionPackMainBody suggestionPlaceHolderDiv">
+                <div class="suggestionPackPicLink">
+                    <div class="placeHolderAnime"></div>
+                </div>
+                <div class="suggestionPackDetailDiv">
+                    <div class="suggestionPackName placeHolderAnime resultLineAnim" style="width: 80%;"></div>
+                    <div class="suggestionPackReviewRow placeHolderAnime resultLineAnim" style="width: 60%;"></div>
+                    <div class="suggestionPackCityRow placeHolderAnime resultLineAnim" style="width: 40%;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <script>
     let suggestionPackSample = $('#suggestionSample').html();
     $('#suggestionSample').remove();
+
+    let suggestionPlaceHolderSample = $('#suggestionPlaceHolderSample').html();
+    $('#suggestionPlaceHolderSample').remove();
 
     function createSuggestionPack(_id, _data, _callback = ''){
         // _data = [{
@@ -59,6 +88,9 @@
         //     'city': '',
         //     'state': '',
         // }];
+
+        $('#'+_id).html('');
+
         _data.forEach(item => {
             let text = suggestionPackSample;
             let fk = Object.keys(item);
@@ -99,6 +131,12 @@
         $(_element).parent().parent().parent().next().remove();
 
         fitThisImg(_element); // in forAllPages
+    }
+
+    function createSuggestionPackPlaceHolder(_id, _callback = ''){
+        $('#' + _id).append(suggestionPlaceHolderSample);
+        if(typeof _callback == 'function')
+            _callback();
     }
 
 </script>

@@ -53,6 +53,8 @@
         .settingSubSection{
             width: 100%;
             background-color: #bbbbbb;
+            padding: 15px;
+            border-radius: 10px;
         }
         @media screen and (max-height: 450px) {
             .sidenav {padding-top: 15px;}

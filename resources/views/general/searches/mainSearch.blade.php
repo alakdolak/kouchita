@@ -1,21 +1,38 @@
 <link rel="stylesheet" href="{{URL::asset('css/mainSearch.css')}}">
-<span id="searchPane" class="statePane ui_overlay ui_modal editTags hidden searchPanes">
+@if(\App::getLocale() == 'en')
+    <link rel="stylesheet" href="{{URL::asset('css/ltr/mainSearch.css')}}">
+@endif
+
+<div id="searchPane" class="searchPaneDiv hidden">
+    <span class="statePane ui_overlay ui_modal editTags searchPanes">
         <div id="searchDivForScroll" class="prw_rup prw_search_typeahead spSearchDivForScroll">
             <div class="ui_picker">
-                <div class="typeahead_align ui_typeahead full-width display-flex">
+                <div class="typeahead_align ui_typeahead full-width display-flex" style="font-size: 20px">
 
-                    <div id="firstPanSearchText" class="spGoWhere">به کجا</div>
-                    <input onkeyup="searchMain(event, this.value)" type="text" id="placeName" class="typeahead_input searchPaneInput" placeholder="دوست دارید سفر کنید؟"/>
+                    <div id="firstPanSearchText" class="spGoWhere">{{__('به کجا')}}</div>
+                    <input onkeyup="searchMain(event, this.value)" type="text" id="mainSearchInput" class="typeahead_input" placeholder="{{__('دوست دارید سفر کنید؟')}}"/>
                     <input type="hidden" id="kindPlaceIdForMainSearch" value="0">
                     <input type="hidden" id="placeId">
 
                 </div>
                 <div class="spBorderBottom"></div>
                 <div class="mainContainerSearch">
-                    <div id="result" class="data_holder display-noneImp"></div>
+                    <div id="result" class="data_holder searchPangResultSection hidden">
+                        <div id="mainSearchResult" style="display:block;"></div>
+                        <div id="placeHolderResult" style="display: none;">
+                            <div style="margin-bottom: 40px">
+                                <div class="resultLineAnim placeHolderAnime"></div>
+                                <div class="resultLineAnim placeHolderAnime" style="width: 30%"></div>
+                            </div>
+                            <div>
+                                <div class="resultLineAnim placeHolderAnime"></div>
+                                <div class="resultLineAnim placeHolderAnime" style="width: 30%"></div>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="visitSuggestionDiv">
-                            <div class="visitSuggestionText">بازدید های اخیر شما</div>
+                            <div class="visitSuggestionText">{{__('بازدید های اخیر شما')}}</div>
 
                             <div id="recentlyRowMainSearch" class="visitSuggestion4Box">
                                 <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget spBoxOfSuggestion">
@@ -41,10 +58,14 @@
 
             </div>
         </div>
-        <div onclick="$('#searchPane').addClass('hidden'); $('.dark').hide()" class="ui_close_x"></div>
+        <div class="iconFamily iconClose closeSearchPan" onclick="$('#searchPane').addClass('hidden');"></div>
     </span>
+</div>
 
 <script>
+    console.log('in');
+
+    var numOfMainSearchResult = 0;
     var searchDir = '{{route('totalSearch')}}';
     var lastTimeMainSearch = 0;
     var recentlyMainSearchSample = 0;
@@ -53,6 +74,7 @@
         localStorageData = {!! json_encode($localStorageData) !!}
     @endif
 
+
     function openMainSearch(_kindPlaceId){
         showLastPages();
 
@@ -60,41 +82,45 @@
         var pn;
         switch (_kindPlaceId){
             case 0:
-                fpst = 'به کجا';
-                pn = 'دوست دارید سفر کنید؟';
+                fpst = '{{__('به کجا')}}';
+                pn = '{{__('دوست دارید سفر کنید؟')}}';
                 break;
             case 1:
-                fpst = 'کدام جاذبه';
-                pn = 'را می‌خواهید تجربه کنید؟';
+                fpst = '{{__('کدام جاذبه')}}';
+                pn = '{{__('را می‌خواهید تجربه کنید؟')}}';
                 break;
             case 3:
-                fpst = 'در کدام رستوران';
-                pn = 'دوست دارید غذا بخورید؟';
+                fpst = '{{__('در کدام رستوران')}}';
+                pn = '{{__('دوست دارید غذا بخورید؟')}}';
                 break;
             case 4:
-                fpst = 'در کدام هتل';
-                pn = 'دوست دارید اقامت کنید؟';
+                fpst = '{{__('در کدام هتل')}}';
+                pn = '{{__('دوست دارید اقامت کنید؟')}}';
                 break;
             case 10:
-                fpst = 'کدام صنایع‌دستی یا سوغات ';
-                pn = 'را دوست دارید بشناسید؟';
+                fpst = '{{__('کدام صنایع‌دستی یا سوغات')}}';
+                pn = '{{__('را دوست دارید بشناسید؟')}}';
                 break;
             case 11:
-                fpst = 'کدام غذای محلی';
-                pn = 'را می‌خواهید تجربه کنید؟';
+                fpst = '{{__('کدام غذای محلی')}}';
+                pn = '{{__('را می‌خواهید تجربه کنید؟')}}';
+                break;
+            case 12:
+                fpst = '{{__('کدام بوم گردی')}}';
+                pn = '{{__('دوست دارید اقامت کنید؟')}}';
                 break;
         }
 
         $('#kindPlaceIdForMainSearch').val(_kindPlaceId);
         $('#firstPanSearchText').text(fpst);
-        $('#placeName').attr('placeholder', pn);
+        $('#mainSearchInput').attr('placeholder', pn);
 
         $('#searchPane').removeClass('hidden');
         $('#darkModeMainPage').toggle();
-        $('#placeName').val('');
-        $('#placeName').focus();
+        $('#mainSearchInput').val('');
+        $('#mainSearchInput').focus();
 
-        $("#result").empty();
+        $("#mainSearchResult").empty();
     }
 
     function redirect() {
@@ -103,14 +129,14 @@
 
     function searchMain(e, val = '') {
         if (val == '')
-            val = $("#placeName").val();
+            val = $("#mainSearchInput").val();
 
         var kindPlaceId = $('#kindPlaceIdForMainSearch').val();
 
         $(".suggest").css("background-color", "transparent").css("padding", "0").css("border-radius", "0");
         if (null == val || "" == val || val.length < 2) {
-            $('#result').addClass('display-noneImp');
-            $("#result").empty();
+            $('#result').addClass('hidden');
+            $("#mainSearchResult").empty();
         }
         else {
             var scrollVal = $("#searchDivForScroll").scrollTop();
@@ -156,42 +182,67 @@
                 return;
             }
 
+            $('#result').removeClass('hidden');
+            $('#placeHolderResult').show();
+            $('#mainSearchResult').hide();
+
             if ("ا" == val[0]) {
                 for (val2 = "آ", i = 1; i < val.length; i++) val2 += val[i];
+
+                numOfMainSearchResult++;
                 $.ajax({
                     type: "post",
                     url: searchDir,
                     data: {
                         kindPlaceId: kindPlaceId,
+                        num: numOfMainSearchResult,
                         key: val,
                         key2: val2,
                         _token: '{{csrf_token()}}'
                     },
                     success: function (response) {
-                        createSearchResponse(response);
+                        let check = JSON.parse(response);
+                        if(check[2] == numOfMainSearchResult)
+                            createSearchResponse(response);
                     }
                 })
             }
-            else $.ajax({
-                type: "post",
-                url: searchDir,
-                data: {
-                    kindPlaceId: kindPlaceId,
-                    key: val,
-                    _token: '{{csrf_token()}}'
-                },
-                success: function (response) {
-                    createSearchResponse(response);
-                }
-            })
+            else {
+                numOfMainSearchResult++;
+                $.ajax({
+                    type: "post",
+                    url: searchDir,
+                    data: {
+                        kindPlaceId: kindPlaceId,
+                        num: numOfMainSearchResult,
+                        key: val,
+                        _token: '{{csrf_token()}}'
+                    },
+                    success: function (response) {
+                        let check = JSON.parse(response);
+                        if(check[2] == numOfMainSearchResult)
+                            createSearchResponse(response);
+                    }
+                });
+            }
         }
     }
 
     function createSearchResponse(response){
-        newElement = "";
+        let newElement = "";
+        let searchText = $('#mainSearchInput').val();
+
+        if(searchText.trim().length < 3){
+            $('#result').addClass('hidden');
+            $('#placeHolderResult').hide();
+            $('#mainSearchResult').hide();
+            return;
+        }
 
         if (response.length == 0) {
-            newElement = "موردی یافت نشد";
+            $('#placeHolderResult').hide();
+            $('#mainSearchResult').hide();
+            newElement = "{{__('موردی یافت نشد')}}";
             $("#placeId").val("");
             return;
         }
@@ -201,7 +252,6 @@
         suggestions = resutl[1];
 
         response = resutl[1];
-        console.log(resutl[0]);
         if(lastTimeMainSearch == 0 || lastTimeMainSearch <= resutl[0]) {
             lastTimeMainSearch = resutl[0];
             var icon;
@@ -236,11 +286,13 @@
             }
 
             if (response.length != 0)
-                $('#result').removeClass('display-noneImp')
+                $('#result').removeClass('hidden');
             else
-                $('#result').addClass('display-noneImp');
+                $('#result').addClass('hidden');
 
-            $("#result").empty().append(newElement);
+            $("#mainSearchResult").empty().append(newElement);
+            $('#placeHolderResult').hide();
+            $('#mainSearchResult').show();
         }
     }
 

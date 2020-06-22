@@ -30,6 +30,7 @@ class CreateUserAddPlacesTable extends Migration
             $table->text('features')->nullable();
             $table->longText('pics')->nullable();
             $table->text('description')->nullable();
+            $table->tinyInteger('archive')->default(0);
             $table->timestamps();
         });
     }

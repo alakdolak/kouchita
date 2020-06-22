@@ -96,47 +96,48 @@
                                     <button class="btn btn-danger exitBtnHelp">خروج</button>
                                 </div>
                             </div>
-{{--                            @endif--}}
-{{--                            @if($hasLogin)--}}
 
                         <div id="share_box_mobile" class="display-none">
-
                             <a target="_blank" class="link mg-tp-5" {{($config->facebookNoFollow) ? 'rel="nofollow"' : ''}}
-                            href="https://www.facebook.com/sharer/sharer.php?u={{Request::url()}}">
+                                                    href="https://www.facebook.com/sharer/sharer.php?u={{Request::url()}}">
                                 <img src="{{URL::asset("images/shareBoxImg/facebook.png")}}" class="display-inline-block float-right">
-                                <div>اشتراک صفحه در فیسبوک</div>
+                                <div class="display-inline-block float-right mg-rt-5">اشتراک صفحه در فیسبوک</div>
                             </a>
                             <a target="_blank" class="link mg-tp-5" {{($config->twitterNoFollow) ? 'rel="nofollow"' : ''}}
                             href="https://twitter.com/home?status={{Request::url()}}">
                                 <img src="{{URL::asset("images/shareBoxImg/twitter.png")}}" class="display-inline-block float-right">
-                                <div>اشتراک صفحه در توییتر</div>
+                                <div class="display-inline-block float-right mg-rt-5">اشتراک صفحه در توییتر</div>
                             </a>
-                            <a target="_blank" class="link mg-tp-5" {{($config->whatsAppFollow) ? 'rel="nofollow"' : ''}}
-                                href="https://whatsApp.com/share?url={{str_replace('%20', '', Request::url())}}">
+                        {{--    در کوچیتا ببینید--}}
+                            <a target="_blank" class="link mg-tp-5 whatsappLink" {{($config->whatsAppFollow) ? 'rel="nofollow"' : ''}} href="#">
+                                    <img src="{{URL::asset("images/shareBoxImg/whatsapp.png")}}" class="display-inline-block float-right">
+                                    <div class="display-inline-block float-right mg-rt-5">اشتراک صفحه واتس اپ</div>
+                            </a>
+                            <script>
+                                let encodeurl = encodeURIComponent('{{Request::url()}}');
+                                let text = 'whatsapp://send?text=';
+                                text += 'در کوچیتا ببینید:' + '%0a' + encodeurl;
+                                $('.whatsappLink').attr('href', text);
+                            </script>
 
-                                <img src="{{URL::asset("images/shareBoxImg/whatsapp.png")}}" class="display-inline-block float-right">
-                                <div>اشتراک صفحه واتس اپ</div>
-                            </a>
                             <a target="_blank" class="link mg-tp-5" {{($config->telegramNoFollow) ? 'rel="nofollow"' : ''}}
                             href="https://telegram.me/share/url?url={{Request::url()}}">
                                 <img src="{{URL::asset("images/shareBoxImg/telegram.png")}}" class="display-inline-block float-right">
-                                <div>اشتراک صفحه تلگرام</div>
+                                <div class="display-inline-block float-right mg-rt-5">اشتراک صفحه تلگرام</div>
                             </a>
                             <a target="_blank" class="link mg-tp-5" {{($config->instagramFollow) ? 'rel="nofollow"' : ''}}
-                                    {{--    href="https://instagram.com/share?url={{ str_replace('%20', '', Request::url())}}"--}}
-                            >
+                            href="https://instagram.com/share?url={{ str_replace('%20', '', Request::url())}}">
                                 <img src="{{URL::asset("images/shareBoxImg/instagram.png")}}" class="display-inline-block float-right">
-                                <div>اشتراک صفحه اینستاگرام</div>
+                                <div class="display-inline-block float-right mg-rt-5">اشتراک صفحه اینستاگرام</div>
                             </a>
                             <a target="_blank" class="link mg-tp-5" {{($config->pinterestFollow) ? 'rel="nofollow"' : ''}}
-                                    {{--    href="https://pinterest.com/home?status={{Request::url()}}"--}}
-                            >
+                            href="https://pinterest.com/home?status={{Request::url()}}">
                                 <img src="{{URL::asset("images/shareBoxImg/pinterest.png")}}" class="display-inline-block float-right">
-                                <div>اشتراک صفحه پین ترست</div>
+                                <div class="display-inline-block float-right mg-rt-5">اشتراک صفحه پین ترست</div>
                             </a>
                             <div class="position-relative inputBoxSharePage mg-tp-5">
-                                <input class="full-width inputBoxInputSharePage" placeholder="www.koochita.com/abhoes">
-                                <img src="{{URL::asset("images/tourCreation/copy.png")}}" id="copyImgInputShareLink">
+                                <input id="shareLinkInput" class="full-width inputBoxInputSharePage" value="{{Request::url()}}" readonly onclick="copyLinkAddress('shareLinkInput')" style="cursor: pointer;">
+                                <img src="{{URL::asset("images/shareBoxImg/copy.png")}}" id="copyImgInputShareLink">
                             </div>
                         </div>
                         <div id="share_pic_mobile" class="targets float-left col-xs-6 pd-0">

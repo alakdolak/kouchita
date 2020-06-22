@@ -2,6 +2,17 @@
     .settingImg{
         max-width: 100%;
     }
+    .addButtonRowAdminSetting{
+        display: flex;
+        justify-content: center;
+        margin-bottom: 15px;
+    }
+    .addButtonAdminSetting{
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        box-shadow: 0 0 20px 0px green;
+    }
 </style>
 
 <div class="row">
@@ -12,15 +23,17 @@
         <div class="settingSection container">
 
             <div class="row">
-                <div style="width: 100%; height: 45px; cursor: pointer" onclick="toggleSettingSection(this)">
+                <div style="width: 100%; cursor: pointer" onclick="toggleSettingSection(this)">
                     <h3 style="display: inline-block">تغییر اسلاید اصلی:</h3>
                 </div>
 
                 <div class="container settingSubSection" style="display: none;">
-                    <button class="btn btn-primary" style="width: auto; position: relative" onclick="addNewMainSliderSetting()">افزودن
-                    </button>
+                    <div class="row addButtonRowAdminSetting">
+                        <button class="btn btn-success addButtonAdminSetting" onclick="addNewMainSliderSetting()">
+                            افزودن
+                        </button>
+                    </div>
                     <div id="sliderPicSection0">
-
                         <div id="rowSlide0##number##" class="row">
                             <div class="col-md-2">
                                 <button class="btn btn-danger" style="position: relative; width: auto" onclick="deleteMainSLiderSetting(##number##)">حذف</button>
@@ -53,42 +66,98 @@
                             </div>
                         </div>
                         <hr>
-
                     </div>
                 </div>
             </div>
             <hr>
 
             <div class="row">
-                <div style="width: 100%; height: 45px; cursor: pointer" onclick="toggleSettingSection(this)">
+                <div style="width: 100%; cursor: pointer" onclick="toggleSettingSection(this)">
                     <h3 style="display: inline-block">تغییر اسلایدر1:</h3>
                 </div>
 
                 <div class="container settingSubSection" style="display: none;">
-                    <button class="btn btn-primary" style="width: auto; position: relative" onclick="addSliderPicTo(1)">
-                        افزودن
-                    </button>
+                    <div class="row addButtonRowAdminSetting">
+                        <button class="btn btn-success addButtonAdminSetting" style="width: auto; position: relative" onclick="addSliderPicTo(1)">
+                            افزودن
+                        </button>
+                    </div>
                     <div id="sliderPicSection1"></div>
                 </div>
             </div>
             <hr>
 
             <div class="row">
-                <div style="width: 100%; height: 45px; cursor: pointer" onclick="toggleSettingSection(this)">
+                <div style="width: 100%; cursor: pointer" onclick="toggleSettingSection(this)">
+                    <h3 style="display: inline-block">تغییر اسلایدر2:</h3>
+                </div>
+
+                <div class="container settingSubSection" style="display: none;">
+
+                    <div id="sliderPicSection2">
+                        <div id="rowSlideId2" class="row">
+                            <div class="col-md-2">
+                                <input type="hidden" id="slideId20" value="{{isset($middleBan['2']['id']) ? $middleBan['2']['id'] : 0}}">
+                                @if(isset($middleBan['2']['id']))
+                                    <button class="btn btn-primary" onclick="submitSlide({{$middleBan['2']['id']}}, 0, 2)" style="position: relative; width: auto">
+                                        ویرایش
+                                    </button>
+
+                                    <button class="btn btn-danger" onclick="deleteSlideCommon(0, 2)">
+                                        حذف
+                                    </button>
+                                @else
+                                    <button class="btn btn-primary" onclick="submitSlide(0, 0, 2)"style="position: relative; width: auto">
+                                        تایید
+                                    </button>
+                                @endif
+                            </div>
+                            <div class="col-md-10">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <img src="{{isset($middleBan['2']['pic']) ? $middleBan['2']['pic'] : ''}}"
+                                             id="showMiddleBannerInput20" class="settingImg" style="height: 100px; ">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="file" id="uploadImgBanner20" accept="image/*" onchange="showPicInput(this, 'showMiddleBannerInput20')">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6" style="float: right">
+                                        <label for="linkForBannerId60">لینک:</label>
+                                        <input type="text" id="linkForBanner20" class="form-control" value="{{isset($middleBan['2']['link']) ? $middleBan['2']['link'] : ''}}">
+                                    </div>
+                                    <div class="col-md-6 hidden">
+                                        <label for="textForBannerId20">متن:</label>
+                                        <input type="hidden" id="textForBanner20" class="form-control" value="{{isset($middleBan['2']['text'])? $middleBan['2']['text'] : ''}}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+            <hr>
+
+            <div class="row">
+                <div style="width: 100%; cursor: pointer" onclick="toggleSettingSection(this)">
                     <h3 style="display: inline-block">تغییر اسلایدر4:</h3>
                 </div>
 
                 <div class="container settingSubSection" style="display: none;">
-                    <button class="btn btn-primary" style="width: auto; position: relative" onclick="addSliderPicTo(4)">
-                        افزودن
-                    </button>
+                    <div class="row addButtonRowAdminSetting">
+                        <button class="btn btn-success addButtonAdminSetting" style="width: auto; position: relative" onclick="addSliderPicTo(4)">
+                            افزودن
+                        </button>
+                    </div>
                     <div id="sliderPicSection4"></div>
                 </div>
             </div>
             <hr>
 
             <div class="row">
-                <div style="width: 100%; height: 45px; cursor: pointer" onclick="toggleSettingSection(this)">
+                <div style="width: 100%; cursor: pointer" onclick="toggleSettingSection(this)">
                     <h3 style="display: inline-block">تغییر اسلایدر5:</h3>
                 </div>
 
@@ -145,7 +214,7 @@
             <hr>
 
             <div class="row">
-                <div style="width: 100%; height: 45px; cursor: pointer" onclick="toggleSettingSection(this)">
+                <div style="width: 100%; cursor: pointer" onclick="toggleSettingSection(this)">
                     <h3 style="display: inline-block">تغییر اسلایدر6:</h3>
                 </div>
 
@@ -156,9 +225,8 @@
                                 <input type="hidden" id="slideId60"
                                        value="{{isset($middleBan['6']['id']) ? $middleBan['6']['id'] : 0}}">
                                 @if(isset($middleBan['6']))
-                                    <button class="btn btn-primary"
-                                            onclick="submitSlide({{$middleBan['6']['id']}}, 0, 6)"
-                                            style="position: relative; width: auto">ویرایش
+                                    <button class="btn btn-primary" onclick="submitSlide({{$middleBan['6']['id']}}, 0, 6)">
+                                        ویرایش
                                     </button>
                                 @else
                                     <button class="btn btn-primary" onclick="submitSlide(0, 0, 6)"
@@ -466,8 +534,7 @@
     }
 
     function deleteSlideCommon(num, kind) {
-        var id = $('#slideId' + kind + '' + num).val();
-
+        let id = $('#slideId' + kind + '' + num).val();
         $.ajax({
             type: 'post',
             url: '{{route("middleBanner.image.delete")}}',
@@ -476,10 +543,15 @@
                 id: id
             },
             success: function (response) {
-                if (response == 'ok') {
-                    $('#rowSlide' + kind + '' + num).remove();
+                if (response == 'ok'){
+                    if(kind == 2){
+                        $('#showMiddleBannerInput20').attr('src', '');
+                        $('#linkForBanner20').text('');
+                    }
+                    else {
+                        $('#rowSlide' + kind + '' + num).remove();
+                    }
                 }
-
             }
         })
     }
@@ -517,4 +589,5 @@
             }
         });
     }
+
 </script>

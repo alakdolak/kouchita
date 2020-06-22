@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="{{\App::getLocale()}}">
 
 <head>
     @include('layouts.topHeader')
 
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/home_rebranded.css?v=4')}}"/>
     <meta property="og:locale" content="fa_IR" />
     <meta property="og:type" content="website" />
     <title> کوچیتا، سامانه جامع گردشگری ایران </title>
@@ -17,13 +16,12 @@
     <meta property="og:image:height" content="367"/>
     <meta name="twitter:image" content="{{URL::asset('_images/nopic/blank.jpg')}}"/>
 
-
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/long_lived_global_legacy_2.css?v=2')}}"/>
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/masthead-saves.css?v=2')}}'/>
-    <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/hr_north_star.css?v=2')}}'/>
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/icons.css')}}'/>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/mainPageStyles.css')}}'/>
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/abbreviations.css?v=1')}}'/>
+
+
+    @if(\App::getLocale() == 'en')
+        <link rel="stylesheet" href="{{URL::asset('css/ltr/mainPage.css')}}">
+    @endif
 
     {{--urls--}}
     <script>
@@ -44,75 +42,55 @@
     </script>
 </head>
 
-<body class="rebrand_2017 desktop HomeRebranded  js_logging" ng-app="mainApp" style="background-color: #EAFBFF;">
+<body style="background-color: #EAFBFF;">
 
     @include('general.forAllPages')
 
-    <div class="header hideOnPhone">
-        @include('layouts.header1')
-    </div>
+    @include('layouts.header1')
 
-    <div class="hideOnScreen">
-        @include('layouts.header1Phone')
-    </div>
-
-{{--        <div class="page" ng-app="mainApp">--}}
-    <div class="ppr_rup ppr_priv_homepage_hero ">
-        <div id="homeHero-id" class="homeHero default_home">
-            <div class="ui_container container" id="mainDivContainerMainPage">
-                <div class="placement_wrap">
-                    <div class="placement_wrap_row">
-                        <div class="placement_wrap_cell">
-                            <div class="ppr_rup ppr_priv_trip_search mainBannerSlider">
-                                <!-- Swiper -->
-                                <div id="mainSlider" class="swiper-container backgroundColorForSlider">
-                                    <div class="swiper-wrapper">
-                                    @foreach($sliderPic as $item)
-                                        <div class="swiper-slide mobileHeight imgOfSliderBox">
-                                            <img src="{{$item->pic}}" class="imgOfSlider">
-                                        </div>
-                                    @endforeach
-                                    </div>
-                                    <!-- Add Pagination -->
-                                    <div class="swiper-pagination"></div>
-                                    <!-- Add Arrows -->
-                                    <div class="swiper-button-next"></div>
-                                    <div class="swiper-button-prev"></div>
-                                </div>
-                                <div class="ui_columns datepicker_box trip_search metaDatePicker rounded_lockup usePickerTypeIcons preDates noDates with_children mainDivSearchInputMainPage">
-                                    <div id="searchDivForScroll" class="prw_rup prw_search_typeahead ui_column is-4 search_typeahead wctx-tripsearch searchDivForScrollClass mainSearchDivPcSize">
-                                        <div onclick="openMainSearch(0) // in mainSearch.blade.php" style="text-align: center; font-size: 25px;">به کجا می‌روید؟</div>
-                                    </div>
-                                    <div class="clear-both"></div>
-                                </div>
-                                <div class="sliderTextBox">
-                                    <div class="console-container">
-                                        <span id='text' class="sliderText"></span>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="ppr_rup ppr_priv_trip_search display-none hideOnScreen">
-                                <!-- Swiper -->
-                                <div id="mainSlider" class="swiper-container backgroundColorForSlider">
-                                    <div class="swiper-wrapper">
-                                        @foreach($sliderPic as $item)
-                                            <div class="swiper-slide mobileHeight imgOfSliderBox">
-                                                <img src="{{$item->pic}}" class="imgOfSlider">
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                    <!-- Add Pagination -->
-                                    <div class="swiper-pagination"></div>
-                                    <!-- Add Arrows -->
-                                    <div class="swiper-button-next"></div>
-                                    <div class="swiper-button-prev"></div>
-                                </div>
-                            </div>
+    <div id="mainDivContainerMainPage">
+        <div class="mainBannerSlider">
+            <!-- Swiper -->
+            <div id="mainSlider" class="swiper-container backgroundColorForSlider">
+                <div class="swiper-wrapper">
+                    @foreach($sliderPic as $item)
+                        <div class="swiper-slide mobileHeight imgOfSliderBox">
+                            <img src="{{$item->pic}}" class="imgOfSlider">
                         </div>
-                    </div>
+                    @endforeach
                 </div>
+                <!-- Add Pagination -->
+                <div class="swiper-pagination"></div>
+                <!-- Add Arrows -->
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+            <div class="mainDivSearchInputMainPage">
+                <div class="searchDivForScrollClass mainSearchDivPcSize">
+                    <div onclick="openMainSearch(0) // in mainSearch.blade.php" style="text-align: center; font-size: 25px;">{{__('به کجا می‌روید؟')}}</div>
+                </div>
+                <div class="clear-both"></div>
+            </div>
+            <div class="sliderTextBox">
+                <div class="console-container">
+                    <span id='text' class="sliderText"></span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="hideOnScreen">
+            <div id="mainSlider" class="swiper-container backgroundColorForSlider">
+                <div class="swiper-wrapper">
+                    @foreach($sliderPic as $item)
+                        <div class="swiper-slide mobileHeight imgOfSliderBox">
+                            <img src="{{$item->pic}}" class="imgOfSlider">
+                        </div>
+                    @endforeach
+                </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
             </div>
         </div>
     </div>
@@ -121,12 +99,6 @@
 
     @include('layouts.placeFooter')
 
-
-    <script async src="{{URL::asset('js/slideBar.js')}}"></script>
-
-    <script src="{{URL::asset('js/adv.js')}}"></script>
-
-    <!-- Initialize Swiper Of mainSlider -->
     <script>
     var mainSliderPics = {!! $sliderPic !!};
 

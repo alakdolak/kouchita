@@ -1017,7 +1017,7 @@ class HomeController extends Controller
                 }
             }
 
-            echo json_encode([$time, $result]);
+            echo json_encode([$time, $result, $request->num]);
         }
     }
 
@@ -1563,12 +1563,16 @@ class HomeController extends Controller
         }
     }
 
-    public function emailtest()
+    public function emailtest($email)
     {
-        $text = '<h1>welcome to koochita</h1>';
-        $to = 'kiavashbc@gmail.com';
-        $subject = 'welcome massage';
-        sendEmail($text, $subject, $to);
+        $header = 'فراموشی رمز عبور';
+        $userName = 'koochita';
+        $link = 'https://kiavashzp.ir/newPass?code=dljfdlsfjlkd';
+        $view = \View::make('emails.forgetPass', compact(['header', 'userName', 'link']));
+        $html = $view->render();
+        echo $html;
+//        sendEmail($html, $header, $email);
+//        dd('send to ' . $email);
     }
 
     private function getCityReviews($kind, $id, $take, $notIn = []){

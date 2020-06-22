@@ -884,6 +884,9 @@
                     <button class="btn boxPreviousBtn" type="button" id="previousStep" onclick="changeSteps(-1)" style="display: none">{{__('بازگشت')}}</button>
                     <div class="footerBox1"></div>
                     <button class="btn boxNextBtn" type="button" id="nextStep" onclick="changeSteps(1)" >{{__('شروع')}}</button>
+                    <a href="{{route('main')}}" id="lastButton" class="hidden" style="width: 100%; display: flex;">
+                        <button class="btn boxNextBtn" type="button" style="width: 100%; border-radius: 50px;">{{__('addPlaceByUser.اتمام و بازگشت به صفحه اصلی')}}</button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -1284,7 +1287,8 @@
                 $('#previousStep').css('display', 'none');
             }
             else if(currentSteps == 6){
-                $('#nextStep').html('{{__('addPlaceByUser.اتمام و بازگشت به صفحه اصلی')}}');
+                $('#nextStep').addClass('hidden');
+                $('#lastButton').removeClass('hidden');
                 $('#previousStep').css('display', 'none');
                 $('#nextStep').addClass('endSectionButton');
                 $('.footerBox1').addClass('endSectionFooter');

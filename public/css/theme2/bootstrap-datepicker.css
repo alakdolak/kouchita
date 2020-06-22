@@ -7,9 +7,9 @@
 /* Layout helpers
 ----------------------------------*/
 
-span{
-    font-family: 'IRANSansWeb' !important;
-}
+/*span{*/
+/*    font-family: 'IRANSansWeb' !important;*/
+/*}*/
 
 .ui-helper-hidden { display: none; }
 .ui-helper-hidden-accessible { position: absolute !important; clip: rect(1px 1px 1px 1px); clip: rect(1px,1px,1px,1px); }
