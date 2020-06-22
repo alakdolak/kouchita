@@ -15,7 +15,7 @@ return [
     'تجاری' => 'commercial',
     'مذهبی' => 'religious',
     'صنعتی' => 'industrial',
-    'مرکز شهر' => 'downtown',
+    'داخل شهر' => 'downtown',
     'حومه شهر' => 'countryside',
     'کم ازدحام' => 'Solitude',
     'پر ازدحام' => 'crowd',

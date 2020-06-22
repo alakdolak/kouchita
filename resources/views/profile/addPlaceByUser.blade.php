@@ -276,7 +276,7 @@
                                     <div class="step5Title">{{__('restaurant.نوع رستوران')}}</div>
                                     <div class="subListItem">
                                         <div class="detailListItem">
-                                            <select class="selectInput" id="restaurantKind">
+                                            <select class="selectInput" id="restaurantKind" onchange="changeRestaurantKind(this.value)">
                                                 <option value="rest">{{__('restaurant.رستوران')}}</option>
                                                 <option value="fastfood">{{__('restaurant.فست فود')}}</option>
                                             </select>
@@ -285,7 +285,7 @@
                                 </div>
 
                                 @foreach($kindPlace['restaurant']['features'] as $kind)
-                                    <div class="listItem">
+                                    <div {{$kind->name == 'نوع غذای رستوران' ? 'id=restaurantFoodKind' : ''}} class="listItem">
                                         <div class="step5Title">{{__('restaurant.'.$kind->name)}}</div>
                                         <div class="subListItem">
                                             @foreach($kind->subFeat as $sub)
@@ -301,6 +301,15 @@
                                     </div>
                                 @endforeach
                             </div>
+
+                            <script>
+                                function changeRestaurantKind(_value){
+                                    if(_value == 'rest')
+                                        $('#restaurantFoodKind').show();
+                                    else
+                                        $('#restaurantFoodKind').hide();
+                                }
+                            </script>
 
                             <div class="inputBody_4 inputBody">
 
@@ -1317,7 +1326,7 @@
             data['kindPlaceId'] = selectedCategory['id'];
             data['name'] = $('#name').val();
             data['cityId'] = $('#cityId').val();
-                data['stateId'] = $('#state').val();
+            data['stateId'] = $('#state').val();
             data['address'] = $('#address').val();
             data['lat'] = $('#lat').val();
             data['lng'] = $('#lng').val();

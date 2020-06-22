@@ -721,53 +721,62 @@ class StreamingController extends Controller
 
     public function importVideoToDB()
     {
-        $loc = __DIR__ . '/../../../../assets/_images/video';
+        if(auth()->check()) {
+            $loc = __DIR__ . '/../../../../assets/_images/video/'. auth()->user()->id;
+            $mainLoc = __DIR__ . '/../../../../youtubeSite/categorized';
+            $folders = scandir($mainLoc);
+            foreach ($folders as $item) {
+                if ($item != '.' && $item != '..') {
+                    $mLoc = $mainLoc . '/' . $item;
+                    $files = scandir($mLoc);
+                    foreach ($files as $file) {
+                        $vidLoc = $mLoc . '/' . $file;
+                        if (is_file($vidLoc)) {
+                            $thumbnailName = explode('.', $file)[0] . '.jpg';
+                            $vidName = $item.'_'.$file;
+                            rename($vidLoc, $loc . '/' . $vidName);
 
-        $videos = scandir($loc);
-        foreach ($videos as $video) {
-            $vidLoc = $loc . '/' . $video;
-            if (is_file($vidLoc)) {
-                $thumbnailName = explode('.', $video)[0] . '.jpg';
+                            $newLoc = $loc . '/' . $vidName;
 
-                $nVid = new Video();
-                $nVid->userId = auth()->user()->id;
-                $nVid->title = explode('.', $video)[0];
-                $nVid->description = '';
-                $nVid->video = $video;
-                $nVid->categoryId = 1;
-                $nVid->subtitle = null;
-                $nVid->thumbnail = $thumbnailName;
+                            $ffmpeg = \FFMpeg\FFMpeg::create();
+                            $video = $ffmpeg->open($newLoc);
+                            $frame = $video->frame(\FFMpeg\Coordinate\TimeCode::fromSeconds(42));
+                            $frame->save($loc . '/' . $thumbnailName);
 
-                $ffprobe = \FFMpeg\FFProbe::create();
-                $duration = (int)$ffprobe->format($vidLoc)->get('duration');
-                $second = $duration % 60;
-                $duration = (int)($duration / 60);
-                $min = $duration % 60;
-                $duration = (int)($duration / 60);
+                            $ffprobe = \FFMpeg\FFProbe::create();
+                            $duration = (int)$ffprobe->format($newLoc)->get('duration');
+                            $second = $duration % 60;
+                            $duration = (int)($duration / 60);
+                            $min = $duration % 60;
+                            $duration = (int)($duration / 60);
+                            if ($second < 10)
+                                $second = '0' . $second;
+                            if ($min < 10)
+                                $min = '0' . $min;
 
-                if ($second < 10)
-                    $second = '0' . $second;
-                if ($min < 10)
-                    $min = '0' . $min;
-                $nVid->duration = $duration . ':' . $min . ':' . $second;
+                            while (true) {
+                                $sCode = generateRandomString(10);
+                                $check = Video::where('code', $sCode)->first();
+                                if ($check == null)
+                                    break;
+                            }
 
-                $nVid->save();
-
-                $nloc = $loc . '/' . auth()->user()->id;
-                if (!is_dir($nloc))
-                    mkdir($nloc);
-
-                rename($loc . '/' . $video, $nloc . '/' . $video);
-
-                $vidLoc = $nloc . '/' . $video;
-
-                $ffmpeg = \FFMpeg\FFMpeg::create();
-                $video = $ffmpeg->open($vidLoc);
-                $frame = $video->frame(\FFMpeg\Coordinate\TimeCode::fromSeconds(42));
-                $frame->save($nloc . '/' . $thumbnailName);
+                            $nVid = new Video();
+                            $nVid->userId = auth()->user()->id;
+                            $nVid->title = $item . '_' . explode('.', $file)[0];
+                            $nVid->video = $vidName;
+                            $nVid->categoryId = 172;
+                            $nVid->subtitle = null;
+                            $nVid->state = 1;
+                            $nVid->code = $sCode;
+                            $nVid->thumbnail = $thumbnailName;
+                            $nVid->duration = $duration . ':' . $min . ':' . $second;
+                            $nVid->save();
+                        }
+                    }
+                }
             }
         }
-        dd('done');
     }
 
     public function setVideoDuration()
