@@ -800,7 +800,8 @@ class AjaxController extends Controller {
             ->whereIn('id', $postIds)
             ->orderBy('date', 'DESC')
             ->take('8')
-            ->get();
+            ->pluck('id')
+            ->toArray();
 
         if(count($post) < 8){
             $remind = 8 - count($post);
