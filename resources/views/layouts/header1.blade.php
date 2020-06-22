@@ -303,6 +303,43 @@ if(Auth::check()) {
         <div class="headerButtonsSection">
 
             @if(Auth::check())
+                <div id="languageIcon" class="headerAuthButton" title="{{__('زبان')}}">
+                    <span class="headerIconCommon iconFamily languageIcon"></span>
+                    <div class="nameOfIconHeaders">
+                        فارسی
+                    </div>
+                    <style>
+                        .authLanguageMenu{
+                            display: flex;
+                            flex-direction: column;
+                            min-height: auto;
+                            padding-top: 12px;
+                            width: 88px;
+                            text-align: center;
+                        }
+                        .authLang{
+                            white-space: nowrap;
+                            font-size: 16px;
+                            color: #333;
+                            margin-bottom: 16px;
+                            font-weight: bold;
+                            display: inline-block;
+                            text-align: center;
+                        }
+                    </style>
+                    <div id="languageMenu" class="arrowTopDiv headerSubMenu">
+                        <div class="headerBookMarkBody" style="padding-top: 0;">
+                            <div id="authLanguageMenu" class="headerBookMarkContentDiv authLanguageMenu">
+                                <a href="{{url('language/fa')}}" class="authLang" style="color: #4DC7BC;">
+                                    فارسی
+                                </a>
+                                <a href="{{url('language/en')}}" class="authLang">
+                                    English
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="headerAuthButton" onclick="openUploadPost()">
                     <span class="headerIconCommon iconFamily addPostIcon"></span>
@@ -406,6 +443,14 @@ if(Auth::check()) {
 
                 </div>
             @else
+                <div class="mainLoginButton languageButton">
+                    <a style="color: #0e3a46;" href="{{url('language/fa')}}">
+                        فارسی
+                    </a>
+                    <div class="languagePopUp">
+                        <a class="languageSelect" style="margin: 10px 0px" href="{{url('language/en')}}">English</a>
+                    </div>
+                </div>
                 <div class="login-button mainLoginButton" title="{{__('auth.ورود / ثبت نام')}}"> {{__('auth.ورود / ثبت نام')}}</div>
             @endif
         </div>
@@ -443,6 +488,7 @@ if(Auth::check()) {
     function hideAllTopNavs(){
         $("#alert").hide();
         $("#bookmarkmenu").hide();
+        $("#languageMenu").hide();
         $("#my-trips-not").hide();
         $("#profile-drop").hide();
     }
@@ -551,6 +597,15 @@ if(Auth::check()) {
                 hideAllTopNavs();
                 $("#bookmarkmenu").css('display', 'block');
                 showBookMarks('bookMarksDiv');
+            }
+            else
+                hideAllTopNavs();
+        });
+
+        $('#languageIcon').click(function(e) {
+            if( $("#languageMenu").is(":hidden")){
+                hideAllTopNavs();
+                $("#languageMenu").css('display', 'block');
             }
             else
                 hideAllTopNavs();

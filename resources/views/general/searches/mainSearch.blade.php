@@ -63,6 +63,9 @@
 </div>
 
 <script>
+    console.log('in');
+
+    var numOfMainSearchResult = 0;
     var searchDir = '{{route('totalSearch')}}';
     var lastTimeMainSearch = 0;
     var recentlyMainSearchSample = 0;
@@ -70,6 +73,7 @@
     @if(isset($localStorageData))
         localStorageData = {!! json_encode($localStorageData) !!}
     @endif
+
 
     function openMainSearch(_kindPlaceId){
         showLastPages();
@@ -184,31 +188,40 @@
 
             if ("ا" == val[0]) {
                 for (val2 = "آ", i = 1; i < val.length; i++) val2 += val[i];
+
+                numOfMainSearchResult++;
                 $.ajax({
                     type: "post",
                     url: searchDir,
                     data: {
                         kindPlaceId: kindPlaceId,
+                        num: numOfMainSearchResult,
                         key: val,
                         key2: val2,
                         _token: '{{csrf_token()}}'
                     },
                     success: function (response) {
-                        createSearchResponse(response);
+                        let check = JSON.parse(response);
+                        if(check[2] == numOfMainSearchResult)
+                            createSearchResponse(response);
                     }
                 })
             }
             else {
+                numOfMainSearchResult++;
                 $.ajax({
                     type: "post",
                     url: searchDir,
                     data: {
                         kindPlaceId: kindPlaceId,
+                        num: numOfMainSearchResult,
                         key: val,
                         _token: '{{csrf_token()}}'
                     },
                     success: function (response) {
-                        createSearchResponse(response);
+                        let check = JSON.parse(response);
+                        if(check[2] == numOfMainSearchResult)
+                            createSearchResponse(response);
                     }
                 });
             }
@@ -216,7 +229,7 @@
     }
 
     function createSearchResponse(response){
-        newElement = "";
+        let newElement = "";
         let searchText = $('#mainSearchInput').val();
 
         if(searchText.trim().length < 3){

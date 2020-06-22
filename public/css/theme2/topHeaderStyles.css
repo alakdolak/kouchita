@@ -74,7 +74,9 @@ a:link {
     z-index: 998;
     backdrop-filter: blur(2px);
 }
-
+.languageIcon:before{
+    content: "\E017";
+}
 .addPostIcon:before{
     content: "\e030";
     display: inline-block;

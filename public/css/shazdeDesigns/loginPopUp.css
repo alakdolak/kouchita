@@ -231,11 +231,11 @@ input[type="checkbox"]:checked + label span {
     height: 100%;
     top: 0px;
     left: 0px;
-    z-index: 999;
     backdrop-filter: blur(2px);
     background-color: #000000bf;
     display: flex;
     justify-content: center;
+    z-index: 9999;
 }
 .loginCloseIcon{
     position: absolute;
@@ -322,6 +322,7 @@ input[type="checkbox"]:checked + label span {
         left: 1%;
         right: 1%;
         padding: 40px 0 !important;
+
     }
 }
 
@@ -338,6 +339,13 @@ input[type="checkbox"]:checked + label span {
 }
 
 @media (max-width:480px) {
+
+    .loginPopUpContent{
+        height: 100vh !important;
+        top: 0px !important;
+        left: 0px !important;
+        overflow-y: scroll;
+    }
 
     .mainContentInfos > div {
         width: 100%;

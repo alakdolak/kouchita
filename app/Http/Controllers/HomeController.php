@@ -1017,7 +1017,7 @@ class HomeController extends Controller
                 }
             }
 
-            echo json_encode([$time, $result]);
+            echo json_encode([$time, $result, $request->num]);
         }
     }
 

@@ -363,15 +363,27 @@
             </div>
 
             {{--banner_6--}}
-            <div class="middleBannerPhotoBanner">
-                <div class="dropping-texts">
-                    <div>بشینیم</div>
-                    <div>برنامه ریزی کنیم</div>
-                    <div>سفر کنیم</div>
-                    <div>بخندیم</div>
+            @if(!isset($middleBan['2']) || $middleBan['2'] == null)
+                <div class="middleBannerPhotoBanner">
+                    <div class="dropping-texts">
+                        <div>بشینیم</div>
+                        <div>برنامه ریزی کنیم</div>
+                        <div>سفر کنیم</div>
+                        <div>بخندیم</div>
+                    </div>
+                    با هم
                 </div>
-                با هم
-            </div>
+            @else
+                <div class="middleBannerPhotoBanner middleBannerPB">
+                    @if($middleBan['2']['link'] != '')
+                        <a href="{{$middleBan['2']['link']}}" target="_blank" >
+                            <img src="{{$middleBan['2']['pic']}}" style="width: 100%;">
+                        </a>
+                    @else
+                        <img src="{{$middleBan['2']['pic']}}" style="width: 100%;">
+                    @endif
+                </div>
+            @endif
 
             <div id="tabiatSuggestion" class="homepage_shelves_widget ng-scope">
                 <div class="prw_rup prw_shelves_shelf_widget" style="">
@@ -737,6 +749,14 @@
                         <span>{{$count['hotel']}}</span>
                     </div>
                     <div class="eachPartStatisticTitle">{{__('اقامتگاه')}}</div>
+                </div>{{--
+                --}}<div class="eachPartStatistic">
+                    <div class="eachPartStatisticIcons boom"></div>
+                    <div class="eachPartStatisticNums">
+                        <span>{{__('بیش از')}}</span>
+                        <span>{{$count['boomgardy']}}</span>
+                    </div>
+                    <div class="eachPartStatisticTitle">{{__('بوم گردی')}}</div>
                 </div>
             </center>
 

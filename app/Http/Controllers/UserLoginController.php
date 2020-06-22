@@ -94,8 +94,15 @@ class UserLoginController extends Controller
 
     public function logout()
     {
+        if(\Session::has('lang'))
+            $language = \Session::get('lang');
+
         Auth::logout();
         \Session::flush();
+
+        if(isset($language))
+            \Session::put('lang', $language);
+
         return \redirect()->back();
     }
 

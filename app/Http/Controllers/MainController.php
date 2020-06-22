@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\models\Activity;
 use App\models\Amaken;
 use App\models\BannerPics;
+use App\models\Boomgardy;
 use App\models\Hotel;
 use App\models\LogModel;
 use App\models\MahaliFood;
@@ -59,7 +60,9 @@ class MainController extends Controller
             'mahaliFood' => $mahaliFoodCount,
             'article' => $postCount,
             'comment' => $commentCount,
-            'userCount' => $userCount];
+            'userCount' => $userCount,
+            'boomgardy' => Boomgardy::all()->count()
+        ];
 
         $articleBannerId = DB::table('bannerPosts')->pluck('postId')->toArray();
         $articleBanner = Post::whereIn('id', $articleBannerId)->get();
@@ -79,6 +82,16 @@ class MainController extends Controller
                 $item->link = '';
         }
         $middleBan['1']  = $middleBan1;
+
+        $middleBan2 = BannerPics::where('page', 'mainPage')->where('section', 2)->first();
+        if($middleBan2 != null) {
+            $middleBan2->pic = URL::asset('_images/bannerPic/' . $middleBan2->page . '/' . $middleBan2->pic);
+            if ($middleBan2->text == null)
+                $middleBan2->text = '';
+            if ($middleBan2->link == 'https://')
+                $middleBan2->link = '';
+        }
+        $middleBan['2'] = $middleBan2;
 
         $middleBan4 = BannerPics::where('page', 'mainPage')->where('section', 4)->get();
         foreach ($middleBan4 as $item){

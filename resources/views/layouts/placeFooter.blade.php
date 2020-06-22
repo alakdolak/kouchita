@@ -84,7 +84,7 @@ $config = \App\models\ConfigModel::first();
                     <ul>
                         <li class="footTitle hideOnPhone">{{__('دقیق تر شوید')}}</li>
                         <li class="footMenu hideOnPhone">
-                            <a href="{{route('place.list', ['kindPlaceId' => 6, 'mode' => 'country'])}}">{{__('طبیعت‌گردی')}}</a>
+                            <a href="{{route('place.list', ['kindPlaceId' => 6, 'mode' => 'country'])}}">{{__('طبیعت گردی')}}</a>
                         </li>
                         <li class="footMenu hideOnPhone">
                             <a href="{{route('place.list', ['kindPlaceId' => 3, 'mode' => 'country'])}}">{{__('رستوران‌ها')}}</a>

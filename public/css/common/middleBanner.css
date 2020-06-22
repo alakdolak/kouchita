@@ -410,11 +410,11 @@ DIV.ppr_rup.ppr_priv_homepage_shelves .homepage_shelves_widget .prw_shelves_shel
 }
 
 .mainPageStatistics {
-    /*display: flex;*/
+    display: flex;
     align-items: center;
     margin: 0 1%;
     padding: 20px 0;
-    justify-content: center;
+    justify-content: space-around;
     background-color: white;
     direction: rtl;
     overflow-x: auto;
@@ -423,7 +423,6 @@ DIV.ppr_rup.ppr_priv_homepage_shelves .homepage_shelves_widget .prw_shelves_shel
 
 .eachPartStatistic {
     display: inline-block;
-    width: 9%;
     margin: 0 0.85%;
 }
 
@@ -1181,7 +1180,7 @@ figure.snip1091.hover figcaption:after {
 .dropping-texts > div {
     font-size: 0px;
     opacity: 0;
-    margin-right: -30px;
+    margin-right: 0px;
     position: absolute;
     font-weight: 300;
     box-shadow: 0px 60px 25px -20px rgba(0, 0, 0, 0.5);
@@ -1223,6 +1222,10 @@ figure.snip1091.hover figcaption:after {
 .suggestionBody{
     direction: rtl;
     position: relative;
+}
+.eachPartStatisticIcons{
+    font-family: Shazde_Regular2 !important;
+    font-size: 40px;
 }
 
 @media (max-width: 1188px) {
