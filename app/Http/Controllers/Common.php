@@ -1265,8 +1265,10 @@ function createSuggestionPack($_kindPlaceId, $_placeId){
         $place->city = $city->name;
         $place->state = State::whereId($city->stateId)->name;
         $place->rate = getRate($place->id, $_kindPlaceId)[1];
-        $place->review = DB::select('select count(*) as countNum from log, comment WHERE logId = log.id and status = 1 and placeId = ' . $place->id .
-            ' and kindPlaceId = ' . $_kindPlaceId . ' and activityId = ' . $activityId)[0]->countNum;
+        $condition = ['placeId' => $place->id, 'kindPlaceId' => $_kindPlaceId,
+            'activityId' => $activityId, 'confirm' => 1];
+        $place->review = LogModel::where($condition)->count();
+//        $place->review = DB::select('select count(*) as countNum from log, comment WHERE logId = log.id and status = 1 and placeId = ' . $place->id .' and kindPlaceId = ' . $_kindPlaceId . ' and activityId = ' . $activityId)[0]->countNum;
         return $place;
     }
     return null;

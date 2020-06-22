@@ -660,16 +660,31 @@ class AjaxController extends Controller {
         $topRestuarant = [];
         $topAmaken = [];
         $topBazar = [];
-        foreach ($topFoodId as $item)
-            array_push($topFood, createSuggestionPack(11, $item));
-        foreach ($topMajaraId as $item)
-            array_push($topMajara, createSuggestionPack(6, $item));
-        foreach ($topRestuarantId as $item)
-            array_push($topRestuarant, createSuggestionPack(3, $item));
-        foreach ($topAmakenId as $item)
-            array_push($topAmaken, createSuggestionPack(1, $item));
-        foreach ($topBazarId as $item)
-            array_push($topBazar, createSuggestionPack(1, $item));
+        foreach ($topFoodId as $item){
+            $true = createSuggestionPack(11, $item);
+            if($true != null)
+                array_push($topFood, $true);
+        }
+        foreach ($topMajaraId as $item){
+            $true = createSuggestionPack(6, $item);
+            if($true != null)
+                array_push($topMajara, $true);
+        }
+        foreach ($topRestuarantId as $item){
+            $true = createSuggestionPack(3, $item);
+            if($true != null)
+                array_push($topRestuarant, $true);
+        }
+        foreach ($topAmakenId as $item){
+            $true = createSuggestionPack(1, $item);
+            if($true != null)
+                array_push($topAmaken, $true);
+        }
+        foreach ($topBazarId as $item){
+            $true = createSuggestionPack(1, $item);
+            if($true != null)
+                array_push($topBazar, $true);
+        }
 
         $posts = Post::whereIn('id', $posts)->select(['id', 'title', 'slug', 'meta', 'pic', 'date', 'creator', 'keyword', 'seen'])->get();
         foreach ($posts as $item){
@@ -744,9 +759,10 @@ class AjaxController extends Controller {
                 $placeGetCount = $getCount;
 
             $topInCity = $this->getTopInIds(3, $restId, $placeGetCount, $questionRate, $reviewId, $ansId, $quesActivityId);
-            if (count($topInCity) > 0 && $topInCity[0] != 0)
+            if (count($topInCity) > 0)
                 $topRestuarant = array_merge($topRestuarant, $topInCity);
         }
+
 
         $amakenFeatParent = PlaceFeatures::where('name', 'کاربری')->where('kindPlaceId', 1)->where('parent', 0)->first()->id;
         $amakenFeat = PlaceFeatures::where('parent', $amakenFeatParent)->where(function($query){
@@ -837,7 +853,6 @@ class AjaxController extends Controller {
             foreach ($p as $item)
                 array_push($topIdInCity, $item->placeId);
         }
-
 
         $remind = $getCount - count($topIdInCity);
         if($remind > 0){
