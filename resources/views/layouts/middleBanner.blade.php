@@ -810,10 +810,18 @@
 
 <script>
     let loadSuggestion = false;
+    let lastPageForSuggestion = null;
     let divNames = ['newInKoochita', 'topFood', 'topTabiat', 'topRestaurant', 'topTarikhi', 'topKharid', 'topArticle'];
     divNames.forEach(item => {
         createSuggestionPackPlaceHolder(item);
-    })
+    });
+
+    if (typeof(Storage) !== "undefined") {
+        let lastPages;
+        lastPages = localStorage.getItem('lastPages');
+        lastPageForSuggestion = JSON.parse(lastPages);
+    } else
+        console.log('your browser not support localStorage');
 
     function ajaxToFillMainPageSuggestion(){
 
@@ -822,6 +830,7 @@
             url: '{{route("getMainPageSuggestion")}}',
             data: {
                 _token: '{{csrf_token()}}',
+                lastPage: lastPageForSuggestion
             },
             success: function(response){
                 response = JSON.parse(response);
@@ -831,30 +840,15 @@
     }
 
     function createMainPageSuggestion(_result){
-        let section2 = _result[1];
-        let food = [];
-        let tarikhi = [];
-        let tabiat = [];
-        let restaurant = [];
-        let kharid = [];
-        let article = [];
-        section2.forEach(item => {
-            if(item.section == 'محبوب‌ترین غذا‌ها')
-                food.push(item);
-            else if(item.section == 'سفر طبیعت‌گردی')
-                tabiat.push(item);
-            else if(item.section == 'محبوب‌ترین رستوران‌ها')
-                restaurant.push(item);
-            else if(item.section == 'سفر تاریخی-فرهنگی')
-                tarikhi.push(item);
-            else if(item.section == 'مراکز خرید')
-                kharid.push(item);
-            else if(item.section == 'مقالات')
-                article.push(item);
-        });
+        let food = _result.topFood;
+        let tarikhi = _result.amaken;
+        let tabiat = _result.majara;
+        let restaurant = _result.restaurant;
+        let kharid = _result.bazar;
+        let article = _result.post;
 
         // createSuggestionPack in suggestionPack.blade.php
-        createSuggestionPack('newInKoochita', _result[0], function() {
+        createSuggestionPack('newInKoochita', _result.result, function() {
             $('#newInKoochita').find('.suggestionPackDiv').addClass('swiper-slide');
             $('#newInKoochita').css('direction', 'ltr');
         });

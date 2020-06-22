@@ -14,11 +14,18 @@ $config = \App\models\ConfigModel::first();
         <img src="{{URL::asset("images/shareBoxImg/twitter.png")}}" class="display-inline-block float-right">
         <div class="display-inline-block float-right mg-rt-5">اشتراک صفحه در توییتر</div>
     </a>
-    <a target="_blank" class="link mg-tp-5" {{($config->whatsAppFollow) ? 'rel="nofollow"' : ''}}
-    href="whatsapp://send?text=در کوچیتا ببینید{{str_replace('%20', '', Request::url())}}">
+    <a target="_blank" class="link mg-tp-5 whatsappLink" {{($config->whatsAppFollow) ? 'rel="nofollow"' : ''}}
+    href="#">
         <img src="{{URL::asset("images/shareBoxImg/whatsapp.png")}}" class="display-inline-block float-right">
         <div class="display-inline-block float-right mg-rt-5">اشتراک صفحه واتس اپ</div>
     </a>
+    <script>
+        let encodeurl = encodeURIComponent('{{Request::url()}}');
+        let text = 'whatsapp://send?text=';
+        text += 'در کوچیتا ببینید:' + ' %0a ' + encodeurl;
+        $('.whatsappLink').attr('href', text);
+    </script>
+
     <a target="_blank" class="link mg-tp-5" {{($config->telegramNoFollow) ? 'rel="nofollow"' : ''}}
     href="https://telegram.me/share/url?url={{Request::url()}}">
         <img src="{{URL::asset("images/shareBoxImg/telegram.png")}}" class="display-inline-block float-right">

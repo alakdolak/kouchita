@@ -106,6 +106,9 @@ $config = \App\models\ConfigModel::first();
                         <li class="footMenu hideOnPhone">
                             <a href="{{route('place.list', ['kindPlaceId' => 11, 'mode' => 'country'])}}">{{__('غذاهای محلی')}}</a>
                         </li>
+                        <li class="footMenu hideOnPhone">
+                            <a href="{{route('place.list', ['kindPlaceId' => 12, 'mode' => 'country'])}}">{{__('بوم گردی')}}</a>
+                        </li>
 
                         <li class="footMenu footShowTabletMenu hideOnPhone">
                             <a href="{{route('place.list', ['kindPlaceId' => 6, 'mode' => 'country'])}}">{{__('طبیعت‌گردی')}}</a>
@@ -116,9 +119,7 @@ $config = \App\models\ConfigModel::first();
                         <li class="footMenu footShowTabletMenu hideOnPhone">
                             <a href="{{route('place.list', ['kindPlaceId' => 4, 'mode' => 'country'])}}">{{__('اقامتگاه‌ها')}}</a>
                         </li>
-                        <li class="footMenu footShowTabletMenu hideOnPhone">
-                            <a href="{{route('place.list', ['kindPlaceId' => 12, 'mode' => 'country'])}}">{{__('بوم گردی')}}</a>
-                        </li>
+
                         <li class="footMenu hideOnPhone">
                             <a href="{{route('mainArticle')}}">{{__('سفرنامه‌ها')}}</a>
                         </li>
