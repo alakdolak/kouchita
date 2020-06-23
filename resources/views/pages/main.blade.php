@@ -39,10 +39,13 @@
                 'X-CSRF-TOKEN': '{{csrf_token()}}'
             }
         };
+
+        window.history.forward();
+        function noBack(){ window.history.forward();}
     </script>
 </head>
 
-<body style="background-color: #EAFBFF;">
+<body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="" style="background-color: #EAFBFF;">
 
     @include('general.forAllPages')
 
