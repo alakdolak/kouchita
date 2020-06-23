@@ -2,8 +2,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<meta name="theme-color" content="#4dc7bc"/>
-<meta name="msapplication-TileColor" content="#4dc7bc">
+<meta name="theme-color" content="#30b4a6"/>
+<meta name="msapplication-TileColor" content="#30b4a6">
 <meta name="msapplication-TileImage" content="{{URL::asset('images/icons/mainIcon.png')}}">
 <meta name="twitter:card" content="summary"/>
 <meta property="og:url" content="{{Request::url()}}" />

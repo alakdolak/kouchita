@@ -143,23 +143,16 @@ class ActivityController extends Controller {
                 continue;
 
             $kindPlaceItr = Place::find($itr->kindPlaceId);
-            $itrFile = $kindPlaceItr->fileName;
             $tmp = DB::table($kindPlaceItr->tableName)->find($itr->placeId);
             if($tmp != null){
-                if(file_exists(__DIR__ . '/../../../../assets/_images/' . $itrFile . '/' . $tmp->file . "/f-1.jpg"))
-                    $itr->placePic = URL::asset("_images/" . $itrFile . "/" . $tmp->file . "/f-1.jpg");
-                else
-                    $itr->placePic = URL::asset("_images/nopic/blank.jpg");
-                $itr->placeRedirect = createUrl($kindPlaceItr->id, $tmp->id, 0, 0, 0);
-
-                $city = Cities::whereId($tmp->cityId);
-                $itr->placeCity = $city->name;
-                $itr->placeState = State::whereId($city->stateId)->name;
-                $itr->placeName = $tmp->name;
-                $itr->placeRate = getRate($itr->placeId, $itr->kindPlaceId)[1];
-
-                $itr->placeReviews = DB::select('select count(*) as countNum from log, comment WHERE logId = log.id and status = 1 and placeId = ' . $itr->placeId .
-                    ' and kindPlaceId = ' . $itr->kindPlaceId . ' and activityId = ' . $activityId)[0]->countNum;
+                $pack = createSuggestionPack($kindPlaceItr->id, $itr->placeId);
+                $itr->placePic = $pack->pic;
+                $itr->placeRedirect = $pack->url;
+                $itr->placeCity = $pack->city;
+                $itr->placeState = $pack->state;
+                $itr->placeName = $pack->name;
+                $itr->placeRate = $pack->rate;
+                $itr->placeReviews = $pack->review;
             }
         }
 

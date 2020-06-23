@@ -904,7 +904,7 @@ $authUrl = $client->createAuthUrl();
 <script>
     $(document).ready(function () {
         $(".login-button").click(function () {
-            $(".dark").show(), showLoginPrompt('{{Request::url()}}')
+            showLoginPrompt('{{Request::url()}}')
         })
     });
 </script>

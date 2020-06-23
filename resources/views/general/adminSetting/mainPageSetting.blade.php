@@ -91,9 +91,7 @@
                 <div style="width: 100%; cursor: pointer" onclick="toggleSettingSection(this)">
                     <h3 style="display: inline-block">تغییر اسلایدر2:</h3>
                 </div>
-
                 <div class="container settingSubSection" style="display: none;">
-
                     <div id="sliderPicSection2">
                         <div id="rowSlideId2" class="row">
                             <div class="col-md-2">
@@ -102,7 +100,6 @@
                                     <button class="btn btn-primary" onclick="submitSlide({{$middleBan['2']['id']}}, 0, 2)" style="position: relative; width: auto">
                                         ویرایش
                                     </button>
-
                                     <button class="btn btn-danger" onclick="deleteSlideCommon(0, 2)">
                                         حذف
                                     </button>
@@ -162,52 +159,57 @@
                 </div>
 
                 <div class="container settingSubSection" style="display: none;">
+                    <div class="row addButtonRowAdminSetting">
+                        <button class="btn btn-success addButtonAdminSetting" onclick="addSliderPicTo(5)">
+                            افزودن
+                        </button>
+                    </div>
                     <div id="sliderPicSection5">
 
-                        @for($i = 0; $i < 3; $i++)
-                            <div id="rowSlideId5{{$i}}" class="row">
-                                <div class="col-md-2">
-                                    <input type="hidden" id="slideId5{{$i}}"
-                                           value="{{isset($middleBan['5'][$i]['id']) ? $middleBan['5'][$i]['id'] : 0}}">
-                                    @if(isset($middleBan['5']) && isset($middleBan['5'][$i]))
-                                        <button class="btn btn-primary"
-                                                onclick="submitSlide({{$middleBan['5'][$i]['id']}}, {{$i}}, 5)"
-                                                style="position: relative; width: auto">ویرایش
-                                        </button>
-                                    @else
-                                        <button class="btn btn-primary" onclick="submitSlide(0, {{$i}}, 5)"
-                                                style="position: relative; width: auto">تایید
-                                        </button>
-                                    @endif
-                                </div>
-                                <div class="col-md-10">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <img src="{{isset($middleBan['5']) && isset($middleBan['5'][$i]) ? $middleBan['5'][$i]['pic'] : ''}}"
-                                                 id="showMiddleBannerInput5{{$i}}" class="settingImg" style="height: 100px; ">
-                                        </div>
-                                        <div class="col-md-6">
-                                            <input type="file" id="uploadImgBanner5{{$i}}" accept="image/*"
-                                                   onchange="showPicInput(this, 'showMiddleBannerInput5{{$i}}')">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label for="linkForBannerId5{{$i}}">لینک:</label>
-                                            <input type="text" id="linkForBanner5{{$i}}" class="form-control"
-                                                   value="{{isset($middleBan['5']) && isset($middleBan['5'][$i]) ? $middleBan['5'][$i]['link'] : ''}}">
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="textForBannerId5{{$i}}">متن:</label>
-                                            <input type="text" id="textForBanner5{{$i}}" class="form-control"
-                                                   value="{{isset($middleBan['5']) && isset($middleBan['5'][$i]) ? $middleBan['5'][$i]['text'] : ''}}">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        @endfor
+{{--                        @for($i = 0; $i < 3; $i++)--}}
+{{--                            <div id="rowSlideId5{{$i}}" class="row">--}}
+{{--                                <div class="col-md-2">--}}
+{{--                                    <input type="hidden" id="slideId5{{$i}}"--}}
+{{--                                           value="{{isset($middleBan['5'][$i]['id']) ? $middleBan['5'][$i]['id'] : 0}}">--}}
+{{--                                    @if(isset($middleBan['5']) && isset($middleBan['5'][$i]))--}}
+{{--                                        <button class="btn btn-primary"--}}
+{{--                                                onclick="submitSlide({{$middleBan['5'][$i]['id']}}, {{$i}}, 5)"--}}
+{{--                                                style="position: relative; width: auto">ویرایش--}}
+{{--                                        </button>--}}
+{{--                                    @else--}}
+{{--                                        <button class="btn btn-primary" onclick="submitSlide(0, {{$i}}, 5)"--}}
+{{--                                                style="position: relative; width: auto">تایید--}}
+{{--                                        </button>--}}
+{{--                                    @endif--}}
+{{--                                </div>--}}
+{{--                                <div class="col-md-10">--}}
+{{--                                    <div class="row">--}}
+{{--                                        <div class="col-md-6">--}}
+{{--                                            <img src="{{isset($middleBan['5']) && isset($middleBan['5'][$i]) ? $middleBan['5'][$i]['pic'] : ''}}"--}}
+{{--                                                 id="showMiddleBannerInput5{{$i}}" class="settingImg" style="height: 100px; ">--}}
+{{--                                        </div>--}}
+{{--                                        <div class="col-md-6">--}}
+{{--                                            <input type="file" id="uploadImgBanner5{{$i}}" accept="image/*"--}}
+{{--                                                   onchange="showPicInput(this, 'showMiddleBannerInput5{{$i}}')">--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="row">--}}
+{{--                                        <div class="col-md-6">--}}
+{{--                                            <label for="linkForBannerId5{{$i}}">لینک:</label>--}}
+{{--                                            <input type="text" id="linkForBanner5{{$i}}" class="form-control"--}}
+{{--                                                   value="{{isset($middleBan['5']) && isset($middleBan['5'][$i]) ? $middleBan['5'][$i]['link'] : ''}}">--}}
+{{--                                        </div>--}}
+{{--                                        <div class="col-md-6">--}}
+{{--                                            <label for="textForBannerId5{{$i}}">متن:</label>--}}
+{{--                                            <input type="text" id="textForBanner5{{$i}}" class="form-control"--}}
+{{--                                                   value="{{isset($middleBan['5']) && isset($middleBan['5'][$i]) ? $middleBan['5'][$i]['text'] : ''}}">--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        @endfor--}}
 
-                        <hr>
+{{--                        <hr>--}}
                     </div>
                 </div>
             </div>
@@ -382,22 +384,15 @@
     }
 </script>
 <script>
+    var silde5 = 0;
     var silde4 = 0;
     var silde1 = 0;
     var middleBan = {!! json_encode($middleBan) !!};
+    var slide5Pics;
     var slide4Pics;
     var slide1Pics;
 
-    function createRowSlid(kind) {
-        if (kind == 4) {
-            var ss = silde4;
-            var sil = slide4Pics;
-        }
-        else {
-            var ss = silde1;
-            var sil = slide1Pics;
-        }
-
+    function createRowSlid(kind, ss, sil) {
         for (var i = 0; i < sil.length; i++) {
             var text = '                        <div id="rowSlide' + kind + '' + ss + '" class="row">\n' +
                 '                            <div class="col-md-2">\n' +
@@ -431,6 +426,8 @@
 
             if (kind == 4)
                 silde4++;
+            else if (kind == 5)
+                silde5++;
             else
                 silde1++;
             ss++;
@@ -439,11 +436,15 @@
 
     if (middleBan['1']) {
         slide1Pics = middleBan['1'];
-        createRowSlid(1);
+        createRowSlid(1, silde1, slide1Pics);
     }
     if (middleBan['4']) {
         slide4Pics = middleBan['4'];
-        createRowSlid(4);
+        createRowSlid(4, silde4, slide4Pics);
+    }
+    if (middleBan['5']) {
+        slide5Pics = middleBan['5'];
+        createRowSlid(5, silde5, slide5Pics);
     }
 
     function addSliderPicTo(kind) {

@@ -116,8 +116,8 @@ div.prw_rup.prw_search_typeahead .typeahead_align .typeahead_input {
 
 .spIcons {
     float: right;
-    margin: -3px 0 0 3px;
-    padding-top: 3px;
+    margin: 0px 0 0 3px;
+    padding-top: 5px;
 }
 
 .textsOfRecently {
@@ -145,36 +145,6 @@ div.prw_rup.prw_search_typeahead .typeahead_align .typeahead_input {
     white-space: normal;
     color: white !important;
     background-color: #000000d6;
-}
-
-.hotelIcon::before {
-    font-family: Shazde_Regular2 !important;
-    content: '\e000';
-}
-
-.restaurantIcon::before {
-    font-family: Shazde_Regular2 !important;
-    content: '\e001';
-}
-
-.touristAttractions::before {
-    font-family: Shazde_Regular2 !important;
-    content: '\e002';
-}
-
-.souvenirIcon::before {
-    font-family: Shazde_Regular2 !important;
-    content: '\e005';
-}
-
-.traditionalFood::before {
-    font-family: Shazde_Regular2 !important;
-    content: '\e006';
-}
-
-.adventure::before {
-    font-family: Shazde_Regular2 !important;
-    content: '\e009';
 }
 
 .pop-up-Panes {
@@ -311,7 +281,7 @@ a:hover {
     height: 100%;
     top: 0px;
     left: 0px;
-    z-index: 999;
+    z-index: 9999;
     backdrop-filter: blur(2px);
     background-color: #000000bf;
 }
@@ -361,18 +331,30 @@ a:hover {
 
     .ui_modal.searchPanes {
         padding: 16px;
+        left: 2%;
+        right: 2%;
+        top: 1%;
+        max-height: 98%;
+        overflow: hidden;
     }
 
     .mainContainerSearch {
         display: flex;
         flex-direction: column;
         justify-content: center;
+        position: relative;
     }
 
     #result {
         display: block;
-        width: auto;
-        margin: 0 20px;
+        /*width: auto;*/
+        margin: 0;
+        position: absolute;
+        z-index: 9;
+        background: white;
+        width: 100%;
+        top: 0;
+        max-height: 85%;
     }
 
     .visitSuggestionDiv {
@@ -411,10 +393,10 @@ a:hover {
 
 @media (max-width: 375px) {
     .spGoWhere{
-        font-size: 20px;
+        font-size: 14px;
     }
     div.prw_rup.prw_search_typeahead .typeahead_align .typeahead_input {
-        font-size: 15px;
+        font-size: 13px;
     }
 }
 

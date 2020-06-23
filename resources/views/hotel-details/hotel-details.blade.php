@@ -1982,11 +1982,11 @@ if ($total == 0)
 
                 <script>
                     $(document).ready(function () {
-                        $('.login-button').click(function () {
-                            var url = '{{Request::url()}}';
-                            $(".dark").show();
-                            showLoginPrompt(url);
-                        });
+                        {{--$('.login-button').click(function () {--}}
+                        {{--    var url = '{{Request::url()}}';--}}
+                        {{--    $(".dark").show();--}}
+                        {{--    showLoginPrompt(url);--}}
+                        {{--});--}}
                         @if($mode == "bookMark")
                         bookMark();
                         @elseif($mode == "saveToTrip")

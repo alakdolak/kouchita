@@ -18,7 +18,7 @@
                 <div class="spBorderBottom"></div>
                 <div class="mainContainerSearch">
                     <div id="result" class="data_holder searchPangResultSection hidden">
-                        <div id="mainSearchResult" style="display:block;"></div>
+                        <div id="mainSearchResult" style="display:none;"></div>
                         <div id="placeHolderResult" style="display: none;">
                             <div style="margin-bottom: 40px">
                                 <div class="resultLineAnim placeHolderAnime"></div>
@@ -34,7 +34,7 @@
                     <div class="visitSuggestionDiv">
                             <div class="visitSuggestionText">{{__('بازدید های اخیر شما')}}</div>
 
-                            <div id="recentlyRowMainSearch" class="visitSuggestion4Box">
+                            <div id="recentlyRowMainSearch" class="visitSuggestion4Box recentlyRowMainSearch">
                                 <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget spBoxOfSuggestion">
                                     <div class="mainSearchpoi">
                                         <div class="prw_rup prw_common_thumbnail_no_style_responsive prw_common_thumbnail_no_style_responsive22">
@@ -247,8 +247,8 @@
             return;
         }
 
-        var resutl = JSON.parse(response);
         currIdx = -1;
+        var resutl = JSON.parse(response);
         suggestions = resutl[1];
 
         response = resutl[1];
@@ -266,18 +266,21 @@
                     newElement += "<p class='suggest cursor-pointer stateName' id='suggest_" + i + "'>" + response[i].stateName + "</p></a>";
                 }
                 else {
+                    console.log(response[i]);
                     if (response[i].mode == 'amaken')
                         icon = 'touristAttractions';
                     else if (response[i].mode == 'restaurant')
-                        icon = 'touristAttractions';
-                    else if (response[i].mode == 'hotel')
+                        icon = 'restaurantIcon';
+                    else if (response[i].mode == 'hotels')
                         icon = 'hotelIcon';
                     else if (response[i].mode == 'sogatSanaies')
                         icon = 'souvenirIcon';
                     else if (response[i].mode == 'mahaliFood')
                         icon = 'traditionalFood';
                     else if (response[i].mode == 'majara')
-                        icon = 'adventure';
+                        icon = 'adventureIcon';
+                    else if (response[i].mode == 'boomgardies')
+                        icon = 'boomIcon';
 
                     newElement += '<a href="' + response[i].url + '" style="color: black;"><div class="icons ' + icon + ' spIcons"></div>\n';
                     newElement += "<p class='suggest cursor-pointer' id='suggest_" + i + "' style='margin: 0px'>" + response[i].targetName + "</p>";
@@ -325,14 +328,13 @@
         console.log('your browser not support localStorage');
 
     function showLastPages(){
-
-        var lastPages = localStorage.getItem('lastPages');
+        let lastPages = localStorage.getItem('lastPages');
         lastPages = JSON.parse(lastPages);
 
         if(recentlyMainSearchSample == 0)
-            recentlyMainSearchSample = $('#recentlyRowMainSearch').html();
+            recentlyMainSearchSample = $('.recentlyRowMainSearch').html();
 
-        $('#recentlyRowMainSearch').html('');
+        $('.recentlyRowMainSearch').html('');
 
         if(lastPages != null){
             for(i = 0; i < lastPages.length; i++){
@@ -361,7 +363,7 @@
                         text = text.replace(re, lastPages[i][x]);
                 }
 
-                $('#recentlyRowMainSearch').append(text);
+                $('.recentlyRowMainSearch').append(text);
             }
         }
     }

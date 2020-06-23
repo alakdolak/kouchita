@@ -714,13 +714,13 @@ box-shadow: 0 2px 3px 0px #CCC;padding-left: 0;padding-right:0;">
             $("#photo_album_span").hide();
         });
 
-        $('.login-button').click(function() {
+        {{--$('.login-button').click(function() {--}}
 
-            var url = '{{route('showReview', ['id' => $log->id])}}';
+        {{--    var url = '{{route('showReview', ['id' => $log->id])}}';--}}
 
-            $(".dark").show();
-            showLoginPrompt(url);
-        });
+        {{--    // $(".dark").show();--}}
+        {{--    showLoginPrompt(url);--}}
+        {{--});--}}
 
     });
 </script>

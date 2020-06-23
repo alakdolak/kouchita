@@ -33,6 +33,10 @@
 .boom:before {
     content: '\E05B';
 }
+.boomIcon:before {
+    content: '\E05B';
+}
+
 .estelah:before {
     content: '\E06C';
 }
@@ -69,6 +73,42 @@
 }
 .searchIcon:before{
     content: "\e056";
+}
+
+
+.hotelIcon::before {
+    font-family: Shazde_Regular2 !important;
+    content: '\E000';
+}
+
+.restaurantIcon::before {
+    font-family: Shazde_Regular2 !important;
+    content: '\E001';
+}
+
+.touristAttractions::before {
+    font-family: Shazde_Regular2 !important;
+    content: '\E002';
+}
+
+.souvenirIcon::before {
+    font-family: Shazde_Regular2 !important;
+    content: '\E005';
+}
+
+.traditionalFood::before {
+    font-family: Shazde_Regular2 !important;
+    content: '\E006';
+}
+
+.adventure::before {
+    font-family: Shazde_Regular2 !important;
+    content: '\E009';
+}
+
+.adventureIcon::before {
+    font-family: Shazde_Regular2 !important;
+    content: '\E009';
 }
 
 /*..........city page Icons..........*/
@@ -130,6 +170,11 @@
 }
 .BookMarkIconEmpty:before{
     content: "\e0dd" !important;
+}
+.safarnameIcon:before{
+    content: '\E0D9' !important;
+    font-family: Shazde_Regular2 !important;
+
 }
 .MyTripsIcon:before{
     content: "\e0c5" !important;
