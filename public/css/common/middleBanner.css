@@ -238,6 +238,7 @@ html {
 .boxOFSquareDiv {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     margin-bottom: 40px;
 }
 
@@ -1060,7 +1061,6 @@ figure.snip1091 * {
 
 figure.snip1091 img {
     opacity: 0.25;
-    max-width: 100%;
     position: relative;
     top: 0;
     left: 0;
@@ -1278,7 +1278,9 @@ figure.snip1091.hover figcaption:after {
 }
 
 @media (max-width: 767px) {
-
+    .mainBannerSlider{
+        margin-bottom: 0px;
+    }
     DIV.prw_rup.prw_shelves_shelf_widget .shelf_container.rebrand .shelf_header .ui_icon.travelers-choice-badge {
         display: inherit;
     }

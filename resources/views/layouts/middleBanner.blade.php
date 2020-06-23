@@ -8,28 +8,40 @@
             <div class="hideOnScreen row">
                 <div class="boxOFSquareDiv">
 
+
                     <div class="squareDiv" onclick="openMainSearch(11)">
                         <div class="phoneIcon ghazamahali"></div>
                         <div class="textIcon">{{__('غذای محلی')}}</div>
                     </div>
-                    <div class="squareDiv" onclick="openMainSearch(10)">
-                        <div class="phoneIcon soghat"></div>
-                        <div class="textIcon">{{__('سوغات')}}</div>
+                    <div class="squareDiv" onclick="openMainSearch(3)">
+                        <div class="phoneIcon restaurantIcon"></div>
+                        <div class="textIcon">{{__('رستوران')}}</div>
                     </div>
-
                     <div class="squareDiv" onclick="openMainSearch(1)">
                         <div class="phoneIcon atraction"></div>
                         <div class="textIcon">{{__('جاذبه')}}</div>
                     </div>
-
-                    <div class="squareDiv" onclick="openMainSearch(3)">
-                        <div class="phoneIcon restaurant"></div>
-                        <div class="textIcon">{{__('رستوران')}}</div>
-                    </div>
-
                     <div class="squareDiv" onclick="openMainSearch(4)">
                         <div class="phoneIcon hotel"></div>
-                        <div class="textIcon">{{__('هتل')}}</div>
+                        <div class="textIcon">{{__('اقامتگاه')}}</div>
+                    </div>
+                    <div class="squareDiv" onclick="openMainSearch(12)">
+                        <div class="phoneIcon boomIcon"></div>
+                        <div class="textIcon">{{__('بوم گردی')}}</div>
+                    </div>
+
+
+                    <div class="squareDiv" onclick="openMainSearch(6)" style="width: 40%">
+                        <div class="phoneIcon adventureIcon"></div>
+                        <div class="textIcon">{{__('طبیعت گردی')}}</div>
+                    </div>
+                    <div class="squareDiv" onclick="location.href = '{{route('mainArticle')}}'">
+                        <div class="phoneIcon safarnameIcon"></div>
+                        <div class="textIcon">{{__('سفرنامه')}}</div>
+                    </div>
+                    <div class="squareDiv" onclick="openMainSearch(10)" style="width: 40%">
+                        <div class="phoneIcon restaurant"></div>
+                        <div class="textIcon">{{__('سوغات و صنایع دستی')}}</div>
                     </div>
                 </div>
             </div>
@@ -632,8 +644,8 @@
                         ?>
                         @for($i = 0; $i < count($middleBan['5']); $i++)
                             <div class="swiper-slide position-relative">
-                                <figure class="snip1091 {{$middleBanColor5[$i]}}">
-                                    <img src="{{$middleBan['5'][$i]['pic']}}" alt="sq-sample6"/>
+                                <figure class="snip1091 {{$middleBanColor5[$i%3]}}">
+                                    <img src="{{$middleBan['5'][$i]['pic']}}" class="resizeImgClass" style="width: 100%"/>
                                     <figcaption>
                                         <h2>
                                             {{$middleBan['5'][$i]['text']}}

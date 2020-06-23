@@ -129,6 +129,282 @@ class MainController extends Controller
                 'middleBan' => $middleBan ]);
     }
 
+    public function getTrip()
+    {
+//        $user = Auth::user();
+//        $trips = [];
+//
+//        function convertStringToDate2($date) {
+//            if($date == "")
+//                return $date;
+//            return $date[0] . $date[1] . $date[2] . $date[3] . '/' . $date[4] . $date[5] . '/' . $date[6] . $date[7];
+//        }
+//
+//        if(Auth::check()) {
+//
+//            $uId = Auth::user()->id;
+//            $trips = Trip::whereUId($uId)->get();
+//
+//            $condition = ['uId' => $uId, 'status' => 1];
+//            $invitedTrips = TripMember::where($condition)->select('tripId')->get();
+//
+//            foreach ($invitedTrips as $invitedTrip) {
+//                $trips[count($trips)] = Trip::find($invitedTrip->tripId);
+//            }
+//
+//            if($trips != null && count($trips) != 0) {
+//                foreach ($trips as $trip) {
+//                    $trip->placeCount = TripPlace::whereTripId($trip->id)->count();
+//                    $limit = ($trip->placeCount > 4) ? 4 : $trip->placeCount;
+//                    $tripPlaces = TripPlace::whereTripId($trip->id)->take($limit)->get();
+//                    if($trip->placeCount > 0) {
+//                        $kindPlaceId = $tripPlaces[0]->kindPlaceId;
+//                        switch ($kindPlaceId) {
+//                            case 1:
+//                                $amaken = Amaken::whereId($tripPlaces[0]->placeId);
+//                                try{
+//                                    if(file_get_contents(URL::asset('_images/amaken/' . $amaken->file . '/t-1.jpg')))
+//                                        $trip->pic1 = URL::asset('_images/amaken/' . $amaken->file . '/t-1.jpg');
+//                                }
+//                                catch (Exception $x) {
+//                                    $trip->pic1 = URL::asset('_images/nopic/blank.jpg');
+//                                }
+//                                break;
+//                            case 3:
+//                                $restaurant = Restaurant::whereId($tripPlaces[0]->placeId);
+//                                try {
+//                                    if(file_get_contents(URL::asset('_images/restaurant/' . $restaurant->file . '/t-1.jpg')))
+//                                        $trip->pic1 = URL::asset('_images/restaurant/' . $restaurant->file . '/t-1.jpg');
+//                                }
+//                                catch (Exception $x) {
+//                                    $trip->pic1 = URL::asset('_images/nopic/blank.jpg');
+//                                }
+//                                break;
+//                            case 4:
+//                                $hotel = Hotel::whereId($tripPlaces[0]->placeId);
+//                                try {
+//                                    if(file_get_contents(URL::asset('_images/hotels/' . $hotel->file . '/t-1.jpg')))
+//                                        $trip->pic1 = URL::asset('_images/hotels/' . $hotel->file . '/' . $hotel->pic_1);
+//                                }
+//                                catch (Exception $x) {
+//                                    $trip->pic1 = URL::asset('_images/nopic/blank.jpg');
+//                                }
+//                                break;
+//                            case 6:
+//                                $majara = Majara::whereId($tripPlaces[0]->placeId);
+//                                try {
+//                                    if(file_get_contents(URL::asset('_images/majara/' . $majara->file . '/t-1.jpg')))
+//                                        $trip->pic1 = URL::asset('_images/hotels/' . $majara->file . '/' . $majara->pic_1);
+//                                }
+//                                catch (Exception $x) {
+//                                    $trip->pic1 = URL::asset('_images/nopic/blank.jpg');
+//                                }
+//                                break;
+//                            case 8:
+//                                $adab = Adab::whereId($tripPlaces[0]->placeId);
+//                                if($adab->category == 3) {
+//                                    try {
+//                                        if(file_get_contents(URL::asset('_images/adab/ghazamahali/' . $adab->file . '/t-1.jpg')))
+//                                            $trip->pic1 = URL::asset('_images/adab/ghazamahali/' . $adab->file . '/' . $adab->pic_1);
+//                                    }
+//                                    catch (Exception $x) {
+//                                        $trip->pic1 = URL::asset('_images/nopic/blank.jpg');
+//                                    }
+//                                }
+//                                else {
+//                                    try{
+//                                        if(file_get_contents(URL::asset('_images/adab/soghat/' . $adab->file . '/t-1.jpg')))
+//                                            $trip->pic1 = URL::asset('_images/adab/soghat/' . $adab->file . '/' . $adab->pic_1);
+//                                    }
+//                                    catch (Exception $x) {
+//                                        $trip->pic1 = URL::asset('_images/nopic/blank.jpg');
+//                                    }
+//                                }
+//                                break;
+//                        }
+//                    }
+//                    if($trip->placeCount > 1) {
+//                        $kindPlaceId = $tripPlaces[1]->kindPlaceId;
+//                        switch ($kindPlaceId) {
+//                            case 1:
+//                                $amaken = Amaken::whereId($tripPlaces[0]->placeId);
+//                                try{
+//                                    if(file_get_contents(URL::asset('_images/amaken/' . $amaken->file . '/t-1.jpg')))
+//                                        $trip->pic2 = URL::asset('_images/amaken/' . $amaken->file . '/t-1.jpg');
+//                                }
+//                                catch (Exception $x) {
+//                                    $trip->pic2 = URL::asset('_images/nopic/blank.jpg');
+//                                }
+//                                break;
+//                            case 3:
+//                                $restaurant = Restaurant::whereId($tripPlaces[0]->placeId);
+//                                try {
+//                                    if(file_get_contents(URL::asset('_images/restaurant/' . $restaurant->file . '/t-1.jpg')))
+//                                        $trip->pic2 = URL::asset('_images/restaurant/' . $restaurant->file . '/t-1.jpg');
+//                                }
+//                                catch (Exception $x) {
+//                                    $trip->pic2 = URL::asset('_images/nopic/blank.jpg');
+//                                }
+//                                break;
+//                            case 4:
+//                                $hotel = Hotel::whereId($tripPlaces[0]->placeId);
+//                                try {
+//                                    if(file_get_contents(URL::asset('_images/hotels/' . $hotel->file . '/t-1.jpg')))
+//                                        $trip->pic2 = URL::asset('_images/hotels/' . $hotel->file . '/' . $hotel->pic_1);
+//                                }
+//                                catch (Exception $x) {
+//                                    $trip->pic2 = URL::asset('_images/nopic/blank.jpg');
+//                                }
+//                                break;
+//                            case 6:
+//                                $majara = Majara::whereId($tripPlaces[0]->placeId);
+//                                try {
+//                                    if(file_get_contents(URL::asset('_images/majara/' . $majara->file . '/t-1.jpg')))
+//                                        $trip->pic2 = URL::asset('_images/hotels/' . $majara->file . '/' . $majara->pic_1);
+//                                }
+//                                catch (Exception $x) {
+//                                    $trip->pic2 = URL::asset('_images/nopic/blank.jpg');
+//                                }
+//                                break;
+//                            case 8:
+//                                $adab = Adab::whereId($tripPlaces[0]->placeId);
+//                                if($adab->category == 3) {
+//                                    try {
+//                                        if(file_get_contents(URL::asset('_images/adab/ghazamahali/' . $adab->file . '/t-1.jpg')))
+//                                            $trip->pic2 = URL::asset('_images/adab/ghazamahali/' . $adab->file . '/' . $adab->pic_1);
+//                                    }
+//                                    catch (Exception $x) {
+//                                        $trip->pic2 = URL::asset('_images/nopic/blank.jpg');
+//                                    }
+//                                }
+//                                else {
+//                                    try{
+//                                        if(file_get_contents(URL::asset('_images/adab/soghat/' . $adab->file . '/t-1.jpg')))
+//                                            $trip->pic2 = URL::asset('_images/adab/soghat/' . $adab->file . '/' . $adab->pic_1);
+//                                    }
+//                                    catch (Exception $x) {
+//                                        $trip->pic2 = URL::asset('_images/nopic/blank.jpg');
+//                                    }
+//                                }
+//                                break;
+//                        }
+//                    }
+//                    if($trip->placeCount > 2) {
+//                        $kindPlaceId = $tripPlaces[2]->kindPlaceId;
+//                        switch ($kindPlaceId) {
+//                            case 1:
+//                                $amaken = Amaken::whereId($tripPlaces[0]->placeId);
+//                                try{
+//                                    if(file_get_contents(URL::asset('_images/amaken/' . $amaken->file . '/t-1.jpg')))
+//                                        $trip->pic3 = URL::asset('_images/amaken/' . $amaken->file . '/t-1.jpg');
+//                                }
+//                                catch (Exception $x) {
+//                                    $trip->pic3 = URL::asset('_images/nopic/blank.jpg');
+//                                }
+//                                break;
+//                            case 3:
+//                                $restaurant = Restaurant::whereId($tripPlaces[0]->placeId);
+//                                try {
+//                                    if(file_get_contents(URL::asset('_images/restaurant/' . $restaurant->file . '/t-1.jpg')))
+//                                        $trip->pic3 = URL::asset('_images/restaurant/' . $restaurant->file . '/t-1.jpg');
+//                                }
+//                                catch (Exception $x) {
+//                                    $trip->pic3 = URL::asset('_images/nopic/blank.jpg');
+//                                }
+//                                break;
+//                            case 4:
+//                                $hotel = Hotel::whereId($tripPlaces[0]->placeId);
+//                                try {
+//                                    if(file_get_contents(URL::asset('_images/hotels/' . $hotel->file . '/t-1.jpg')))
+//                                        $trip->pic3 = URL::asset('_images/hotels/' . $hotel->file . '/' . $hotel->pic_1);
+//                                }
+//                                catch (Exception $x) {
+//                                    $trip->pic3 = URL::asset('_images/nopic/blank.jpg');
+//                                }
+//                                break;
+//                            case 6:
+//                                $majara = Majara::whereId($tripPlaces[0]->placeId);
+//                                try {
+//                                    if(file_get_contents(URL::asset('_images/majara/' . $majara->file . '/t-1.jpg')))
+//                                        $trip->pic3 = URL::asset('_images/hotels/' . $majara->file . '/' . $majara->pic_1);
+//                                }
+//                                catch (Exception $x) {
+//                                    $trip->pic3 = URL::asset('_images/nopic/blank.jpg');
+//                                }
+//                                break;
+//                            case 8:
+//                                $adab = Adab::whereId($tripPlaces[0]->placeId);
+//                                if($adab->category == 3) {
+//                                    try {
+//                                        if(file_get_contents(URL::asset('_images/adab/ghazamahali/' . $adab->file . '/t-1.jpg')))
+//                                            $trip->pic3 = URL::asset('_images/adab/ghazamahali/' . $adab->file . '/' . $adab->pic_1);
+//                                    }
+//                                    catch (Exception $x) {
+//                                        $trip->pic3 = URL::asset('_images/nopic/blank.jpg');
+//                                    }
+//                                }
+//                                else {
+//                                    try{
+//                                        if(file_get_contents(URL::asset('_images/adab/soghat/' . $adab->file . '/t-1.jpg')))
+//                                            $trip->pic3 = URL::asset('_images/adab/soghat/' . $adab->file . '/' . $adab->pic_1);
+//                                    }
+//                                    catch (Exception $x) {
+//                                        $trip->pic3 = URL::asset('_images/nopic/blank.jpg');
+//                                    }
+//                                }
+//                                break;
+//                        }
+//                    }
+//                    if($trip->placeCount > 3) {
+//                        $kindPlaceId = $tripPlaces[3]->kindPlaceId;
+//                        switch ($kindPlaceId) {
+//                            case 1:
+//                                $amaken = Amaken::whereId($tripPlaces[0]->placeId);
+//                                try{
+//                                    if(file_get_contents(URL::asset('_images/amaken/' . $amaken->file . '/t-1.jpg')))
+//                                        $trip->pic4 = URL::asset('_images/amaken/' . $amaken->file . '/t-1.jpg');
+//                                }
+//                                catch (Exception $x) {
+//                                    $trip->pic4 = URL::asset('_images/nopic/blank.jpg');
+//                                }
+//                                break;
+//                            case 3:
+//                                $restaurant = Restaurant::whereId($tripPlaces[0]->placeId);
+//                                try {
+//                                    if(file_get_contents(URL::asset('_images/restaurant/' . $restaurant->file . '/t-1.jpg')))
+//                                        $trip->pic4 = URL::asset('_images/restaurant/' . $restaurant->file . '/t-1.jpg');
+//                                }
+//                                catch (Exception $x) {
+//                                    $trip->pic4 = URL::asset('_images/nopic/blank.jpg');
+//                                }
+//                                break;
+//                            case 4:
+//                                $hotel = Hotel::whereId($tripPlaces[0]->placeId);
+//                                try {
+//                                    if(file_get_contents(URL::asset('_images/hotels/' . $hotel->file . '/t-1.jpg')))
+//                                        $trip->pic4 = URL::asset('_images/hotels/' . $hotel->file . '/' . $hotel->pic_1);
+//                                }
+//                                catch (Exception $x) {
+//                                    $trip->pic4 = URL::asset('_images/nopic/blank.jpg');
+//                                }
+//                                break;
+//                            case 6:
+//                                $majara = Majara::whereId($tripPlaces[0]->placeId);
+//                                try {
+//                                    if(file_get_contents(URL::asset('_images/majara/' . $majara->file . '/t-1.jpg')))
+//                                        $trip->pic4 = URL::asset('_images/hotels/' . $majara->file . '/' . $majara->pic_1);
+//                                }
+//                                catch (Exception $x) {
+//                                    $trip->pic4 = URL::asset('_images/nopic/blank.jpg');
+//                                }
+//                                break;
+//                        }
+//                    }
+//                }
+//            }
+//        }
+    }
+
 
 
 }
