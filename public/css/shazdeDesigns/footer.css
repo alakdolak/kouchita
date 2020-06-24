@@ -228,9 +228,9 @@ footer li > img, .small-ico {
 }
 
 .phoneFooterLogo {
-    width: 80px;
+    width: 190px;
     position: absolute;
-    top: -25px;
+    top: -22px;
 }
 
 .phoneDescription {
@@ -913,7 +913,7 @@ footer .activityNumbers {
 }
 
 .pSC_cityTilte {
-    font-weight: 500;
+    font-weight: bold;
 }
 
 .pSC_cityDescription {
@@ -965,10 +965,16 @@ footer .activityNumbers {
     border-bottom: solid #a1a1a1 1px;
 }
 
-
+.newCityInPhoneFooter{
+    background: darkred;
+    border: none;
+    font-size: 13px;
+    padding: 7px;
+    border-radius: 5px;
+}
 .pSC_cityDetails {
     width: 50%;
-    padding: 5px 12px;
+    padding: 10px 12px;
     text-align: right;
     border-width: 2px 2px 2px 0;
     cursor: pointer;
@@ -1192,6 +1198,35 @@ footer .profileMenuLinks {
 }
 .footerSocialDivPhone a{
     min-width: 15%;
+}
+.footerLanguageSectionPhone{
+    display: flex;
+    margin-top: 11px;
+    padding: 0px 10px;
+}
+.footerLanguageDivPhone{
+    display: flex;
+    direction: ltr;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffdd9e;
+    border-radius: 5px;
+    padding: 0px 5px;
+    font-size: 12px;
+    border: #FCC156 solid 2px;
+}
+.footerLanguageTextPhone{
+    height: 100%;
+    border-right: solid 1px gray;
+    padding-right: 5px;
+    margin-right: 5px;
+}
+.footerLanguageInputPhone{
+
+}
+.chooseLanguagePhone{
+    border: none;
+    background: inherit;
 }
 
 @media (max-width: 1300px) {

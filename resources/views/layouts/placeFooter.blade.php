@@ -523,22 +523,7 @@ $config = \App\models\ConfigModel::first();
                             <div class="lp_others_titles"> {{__('بازدید‌های اخیر')}} </div>
                             <div class="mainContainerBookmarked">
                                 <div id="phoneRecentlyView">
-                                    <div class="masthead-recent-class recentlyRowMainSearch" style="display: flex; flex-wrap: wrap">
-{{--                                        <a class="lp_others_recentView" target="_self" href="##placeRedirect##">--}}
-{{--                                            <div class="lp_others_rvPicBox col-xs-8">--}}
-{{--                                                <img src="##placePic##" style="width: 100%;">--}}
-{{--                                            </div>--}}
-{{--                                            <div class="col-xs-4 placeDetailsLeftBar">--}}
-{{--                                                <div class="">##placeName##</div>--}}
-{{--                                                <div class="lp_others_rating">--}}
-{{--                                                    <div class="ui_bubble_rating bubble_##placeRate##0"></div>--}}
-{{--                                                    <br>##placeReviews## {{__('نقد')}}--}}
-{{--                                                </div>--}}
-{{--                                                <div class="">##placeCity##</div>--}}
-{{--                                            </div>--}}
-{{--                                        </a>--}}
-                                    </div>
-
+                                    <div class="masthead-recent-class recentlyRowMainSearch" style="display: flex; flex-wrap: wrap"></div>
                                 </div>
                                 <div class="bottomBarContainer"></div>
                             </div>
@@ -569,7 +554,7 @@ $config = \App\models\ConfigModel::first();
                                                 </div>
                                             </a>
                                         @else
-                                            <div style="display: flex; justify-content: center; align-items: center; margin-top: 50px">
+                                            <div style="display: flex; justify-content: center; align-items: center; height: 50vh; background: white;">
                                                 <div class="login-button mainLoginButton" title="{{__('auth.ورود / ثبت نام')}}" style="text-align: center;"> {{__('auth.ورود / ثبت نام')}}</div>
                                             </div>
                                         @endif
@@ -623,43 +608,88 @@ $config = \App\models\ConfigModel::first();
             <div class="mainPopUp leftPopUp" style="overflow-y: auto">
 
                 @if(isset($locationName))
+{{--                    <div class="pSC_tilte">--}}
+{{--                        <div>--}}
+{{--                            {{__('شما در حال حاضر در')}}--}}
+{{--                            <span class="pSC_cityTilte">{{$locationName['name']}}</span>--}}
+{{--                            {{__('هستید')}}--}}
+{{--                        </div>--}}
+{{--                        <button type="button" class="btn btn-danger" onclick="openProSearch()">{{__('تغییر دهید')}}</button>--}}
+{{--                    </div>--}}
+{{--                    <div class="pSC_cityDescription">--}}
+{{--                        {{__('شما می‌توانید به راحتی صفحات زیر را در')}}--}}
+{{--                        <span>{{$locationName['name']}}</span>--}}
+{{--                        {{__('مشاهده نمایید')}}--}}
+{{--                    </div>--}}
+{{--                    <div class="pSC_boxOfDetails">--}}
+{{--                        <div class="pSC_choiseDetailsText">{{__('به سادگی انتخاب کنید')}}</div>--}}
+{{--                        <div class="pSC_boxOfCityDetailsText">--}}
+{{--                            <span onclick="window.location.href = '{{url("cityPage/" . $locationName['kindState'] . "/" . $locationName["cityNameUrl"])}}'">{{__('مشاهده صفحه')}}{{$locationName['cityName']}}</span>--}}
+{{--                            @if(isset($locationName['state']))--}}
+{{--                                <span class="pSC_boxOfCityDetailsText2">{{__('در استان')}} {{$locationName['state']}}</span>--}}
+{{--                            @endif--}}
+{{--                        </div>--}}
+{{--                        <div>--}}
+{{--                            <div class="pSC_boxOfCityDetails">--}}
+{{--                                <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/1/" . $locationName['kindState'] . "/" . $locationName['cityNameUrl'])}}'">{{__('جاذبه‌های')}} {{$locationName['cityName']}}</div>--}}
+{{--                                <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/4/" . $locationName['kindState'] . "/" . $locationName['cityNameUrl'])}}'">{{__('هتل‌های')}} {{$locationName['cityName']}}</div>--}}
+{{--                            </div>--}}
+{{--                            <div class="pSC_boxOfCityDetails">--}}
+{{--                                <div class="pSC_cityDetails" onclick="window.location.href = '{{$locationName['articleUrl']}}'">مقاله‌های {{$locationName['name']}}</div>--}}
+{{--                                <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/3/" . $locationName['kindState'] . "/" . $locationName['cityNameUrl'])}}'">{{__('رستوران‌های')}} {{$locationName['cityName']}}</div>--}}
+{{--                            </div>--}}
+{{--                            <div class="pSC_boxOfCityDetails">--}}
+{{--                                <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/10/" . $locationName['kindState'] . "/" . $locationName['cityNameUrl'])}}'">{{__('صنایع‌دستی‌های')}} {{$locationName['cityName']}}</div>--}}
+{{--                                <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/11/" . $locationName['kindState'] . "/" . $locationName['cityNameUrl'])}}'">{{__('غذاهای محلی‌')}}{{$locationName['cityName']}}</div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="overflowOptimizer"></div>--}}
+{{--                    </div>--}}
+                    <script !src="">
+                        let locn = {!! json_encode($locationName) !!}
+                        console.log(locn)
+                    </script>
                     <div class="pSC_tilte">
-                        <div>
-                            {{__('شما در حال حاضر در')}}
-                            <span class="pSC_cityTilte">{{$locationName['name']}}</span>
-                            {{__('هستید')}}
+                        <div style="text-align: center">
+                            {{__('در')}}
+                            <span class="pSC_cityTilte" >{{$locationName['name']}}</span>
+                            {{__('بیشتر مشاهده کنید')}}
                         </div>
-                        <button type="button" class="btn btn-danger" onclick="openProSearch()">{{__('تغییر دهید')}}</button>
-                    </div>
-                    <div class="pSC_cityDescription">
-                        {{__('شما می‌توانید به راحتی صفحات زیر را در')}}
-                        <span>{{$locationName['name']}}</span>
-                        {{__('مشاهده نمایید')}}
                     </div>
                     <div class="pSC_boxOfDetails">
                         <div class="pSC_choiseDetailsText">{{__('به سادگی انتخاب کنید')}}</div>
-                        <div class="pSC_boxOfCityDetailsText">
-                            <span onclick="window.location.href = '{{url("cityPage/" . $locationName['kindState'] . "/" . $locationName["cityNameUrl"])}}'">{{__('مشاهده صفحه')}}{{$locationName['cityName']}}</span>
-                            @if(isset($locationName['state']))
-                                <span class="pSC_boxOfCityDetailsText2">{{__('در استان')}} {{$locationName['state']}}</span>
-                            @endif
-                        </div>
                         <div>
-                            <div class="pSC_boxOfCityDetails">
-                                <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/1/" . $locationName['kindState'] . "/" . $locationName['cityNameUrl'])}}'">{{__('جاذبه‌های')}} {{$locationName['cityName']}}</div>
-                                <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/4/" . $locationName['kindState'] . "/" . $locationName['cityNameUrl'])}}'">{{__('هتل‌های')}} {{$locationName['cityName']}}</div>
+                            <div class="pSC_boxOfCityDetails" style="display: flex; flex-wrap: wrap;">
+                                <a href="{{route('cityPage', ['kind' => $locationName['kindState'], 'city' => $locationName['cityNameUrl'] ])}}" class="pSC_cityDetails" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                    {{__('اطالاعات')}} {{$locationName['cityNameUrl']}}
+                                </a>
+                                <a href="{{route('place.list', ['kindPlaceId' => 4, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl'] ])}}" class="pSC_cityDetails">{{__('اقامتگاه ها')}} </a>
+                                <a href="{{route('place.list', ['kindPlaceId' => 12, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']  ])}}" class="pSC_cityDetails">{{__('بوم گردی ها')}} </a>
+                                <a href="{{route('place.list', ['kindPlaceId' => 3, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']  ])}}" class="pSC_cityDetails">{{__('رستوران ها')}} </a>
+                                <a href="{{route('place.list', ['kindPlaceId' => 1, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']  ])}}" class="pSC_cityDetails">{{__('جاذبه‌ها')}} </a>
+                                <a href="{{route('place.list', ['kindPlaceId' => 6, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']  ])}}" class="pSC_cityDetails">{{__('طبیعت گردی')}} </a>
+                                <a href="{{route('place.list', ['kindPlaceId' => 11, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']  ])}}" class="pSC_cityDetails">{{__('غذاهای محلی')}} </a>
+                                <a href="{{route('mainArticle')}}" class="pSC_cityDetails">{{__('سفرنامه')}} </a>
+                                <a href="https://koochitatv.com" class="pSC_cityDetails koochitaTvRowPhoneFooter noneBorder">
+                                    {{__('تلویزیون گردشگری کوچیتا')}}
+                                    <img src="{{URL::asset('images/mainPics/vodLobo.png')}}" alt="koochitatv" style="height: 25px">
+                                </a>
+
+                                @if($locationName['kindState'] == 'city')
+                                    <a href="{{route('cityPage', ['kind' => 'state', 'city' => $locationName['state'] ])}}" class="pSC_cityDetails koochitaTvRowPhoneFooter noneBorder" style="border-top: solid #a1a1a1 1px !important;">
+                                        {{__('مشاهده')}}
+                                        {{__('استان')}}
+                                        {{$locationName['state']}}
+                                    </a>
+                                @endif
                             </div>
-                            <div class="pSC_boxOfCityDetails">
-                                <div class="pSC_cityDetails" onclick="window.location.href = '{{$locationName['articleUrl']}}'">مقاله‌های {{$locationName['name']}}</div>
-                                <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/3/" . $locationName['kindState'] . "/" . $locationName['cityNameUrl'])}}'">{{__('رستوران‌های')}} {{$locationName['cityName']}}</div>
-                            </div>
-                            <div class="pSC_boxOfCityDetails">
-                                <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/10/" . $locationName['kindState'] . "/" . $locationName['cityNameUrl'])}}'">{{__('صنایع‌دستی‌های')}} {{$locationName['cityName']}}</div>
-                                <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/11/" . $locationName['kindState'] . "/" . $locationName['cityNameUrl'])}}'">{{__('غذاهای محلی‌')}}{{$locationName['cityName']}}</div>
+                            <div style="margin-top: 15px; text-align: left;">
+                                <button type="button" class="btn btn-danger newCityInPhoneFooter" onclick="openMainSearch(0) // in mainSearch.blade.php">{{__('انتخاب شهر جدید')}}</button>
                             </div>
                         </div>
                         <div class="overflowOptimizer"></div>
                     </div>
+
                 @else
                     <div class="pSC_tilte">
                         <div>
@@ -673,7 +703,7 @@ $config = \App\models\ConfigModel::first();
                                 <a href="{{route('place.list', ['kindPlaceId' => 4, 'mode' => 'country'])}}" class="pSC_cityDetails">{{__('اقامتگاه ها')}} </a>
                                 <a href="{{route('place.list', ['kindPlaceId' => 12, 'mode' => 'country'])}}" class="pSC_cityDetails">{{__('بوم گردی ها')}} </a>
                                 <a href="{{route('place.list', ['kindPlaceId' => 3, 'mode' => 'country'])}}" class="pSC_cityDetails">{{__('رستوران ها')}} </a>
-                                <a href="{{route('place.list', ['kindPlaceId' => 1, 'mode' => 'country'])}}" class="pSC_cityDetails">{{__('جاذبه‌های')}} </a>
+                                <a href="{{route('place.list', ['kindPlaceId' => 1, 'mode' => 'country'])}}" class="pSC_cityDetails">{{__('جاذبه‌ها')}} </a>
                                 <a href="{{route('place.list', ['kindPlaceId' => 6, 'mode' => 'country'])}}" class="pSC_cityDetails">{{__('طبیعت گردی')}} </a>
                                 <a href="{{route('place.list', ['kindPlaceId' => 11, 'mode' => 'country'])}}" class="pSC_cityDetails">{{__('غذاهای محلی')}} </a>
                                 <a href="{{route('mainArticle')}}" class="pSC_cityDetails" style="width: 100%">{{__('سفرنامه')}} </a>
@@ -683,12 +713,14 @@ $config = \App\models\ConfigModel::first();
                                 </a>
                             </div>
                             <div style="margin-top: 15px; text-align: left;">
-                                <button type="button" class="btn btn-danger" style="background: darkred; border: none; font-size: 9px; padding: 5px;" onclick="openMainSearch(0) // in mainSearch.blade.php">{{__('انتخاب شهر جدید')}}</button>
+                                <button type="button" class="btn btn-danger newCityInPhoneFooter" onclick="openMainSearch(0) // in mainSearch.blade.php">{{__('انتخاب شهر جدید')}}</button>
                             </div>
                         </div>
                         <div class="overflowOptimizer"></div>
                     </div>
-                    <div class="footerSocialDivPhone">
+                @endif
+
+                <div class="footerSocialDivPhone">
                         <a {{($config->linkedinNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://www.linkedin.com/in/shazde-mosafer-652817143/">
                             <div class="footerIconHor linkedin"></div>
                         </a>
@@ -726,57 +758,25 @@ $config = \App\models\ConfigModel::first();
                         <a class="socialLink" {{($config->telegramNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://koochitatv.com">
                             <div class="footerIconHor aparat"></div>
                         </a>
-                    </div>
-                    <style>
-                        .footerLanguageSectionPhone{
-                            display: flex;
-                            margin-top: 11px;
-                            padding: 0px 10px;
-                        }
-                        .footerLanguageDivPhone{
-                            display: flex;
-                            direction: ltr;
-                            justify-content: center;
-                            align-items: center;
-                            background-color: #ffdd9e;
-                            border-radius: 5px;
-                            padding: 0px 5px;
-                            font-size: 12px;
-                            border: #FCC156 solid 2px;
-                        }
-                        .footerLanguageTextPhone{
-                            height: 100%;
-                            border-right: solid 1px gray;
-                            padding-right: 5px;
-                            margin-right: 5px;
-                        }
-                        .footerLanguageInputPhone{
-                            
-                        }
-                        .chooseLanguagePhone{
-                            border: none;
-                            background: inherit;
-                        }
-                    </style>
-                    <div class="footerLanguageSectionPhone">
-                        <div class="footerLanguageDivPhone">
-                            <div class="footerLanguageTextPhone">
-                                {{__('زبان')}}
-                            </div>
-                            <div class="footerLanguageInputPhone">
-                                <select class="chooseLanguagePhone" onchange="goToLanguage(this.value)">
-                                    <option value="0">انتخاب زبان</option>
-                                    <option value="fa">فارسی</option>
-                                    <option value="en">Englisg</option>
-                                </select>
-                            </div>
+                </div>
+                <div class="footerLanguageSectionPhone">
+                    <div class="footerLanguageDivPhone">
+                        <div class="footerLanguageTextPhone">
+                            {{__('زبان')}}
+                        </div>
+                        <div class="footerLanguageInputPhone">
+                            <select class="chooseLanguagePhone" onchange="goToLanguage(this.value)">
+                                <option value="0">انتخاب زبان</option>
+                                <option value="fa">فارسی</option>
+                                <option value="en">Englisg</option>
+                            </select>
                         </div>
                     </div>
-                @endif
+                </div>
 
                 <div class="hideOnScreen phoneFooterStyle">
                     <div class="phoneFooterLogo">
-                        <img src="{{URL::asset('images/icons/mainIcon.svg')}}" class="content-icon" width="100%">
+                        <img src="{{URL::asset('images/icons/mainLogo.png')}}" class="content-icon" width="100%">
                     </div>
                     <div class="phoneDescription">
                         <div class="phoneDescriptionText" style="overflow: hidden">
