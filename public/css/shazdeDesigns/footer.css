@@ -216,7 +216,7 @@ footer li > img, .small-ico {
 /*phone style*/
 
 .phoneFooterStyle {
-    position: absolute;
+    position: relative;
     bottom: 0;
     background-color: #fcc156;
     color: #16174f;
@@ -224,6 +224,7 @@ footer li > img, .small-ico {
     padding: 20px 10px;
     display: flex;
     justify-content: center;
+    margin-top: 35px;
 }
 
 .phoneFooterLogo {
@@ -241,7 +242,6 @@ footer li > img, .small-ico {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    height: 135px;
 }
 
 .phoneDescriptionText {
@@ -897,6 +897,7 @@ footer .activityNumbers {
     font-size: 1em;
     padding: 30px 20px;
     color: #0076a3;
+    padding-bottom: 0px !important;
 }
 
 .pSC_tilte > div:first-child {
@@ -927,6 +928,7 @@ footer .activityNumbers {
     font-size: 1em;
     text-align: center;
     padding: 20px 10px;
+    padding-bottom: 10px;
 }
 
 .pSC_choiseDetailsText {
@@ -958,16 +960,21 @@ footer .activityNumbers {
 
 .pSC_boxOfCityDetails {
     display: flex;
-    justify-content: center;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    border-bottom: solid #a1a1a1 1px;
 }
+
 
 .pSC_cityDetails {
     width: 50%;
-    border: solid #a1a1a1;
-    padding: 15px 0;
+    padding: 5px 12px;
+    text-align: right;
     border-width: 2px 2px 2px 0;
-    border-bottom: solid white;
     cursor: pointer;
+    color: black;
+    border: none;
+    border-bottom: solid #a1a1a1 1px;
 }
 
 .pSC_cityDetails.pSC_cityDetails_selected {
@@ -978,8 +985,15 @@ footer .activityNumbers {
     border-bottom: solid #f0ad4e;
 }
 
-.pSC_cityDetails:nth-child(1) {
-    border-right: none;
+.pSC_cityDetails:nth-of-type(even){
+    border-right: solid #a1a1a1 1px;
+}
+.koochitaTvRowPhoneFooter{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: none !important;
 }
 
 .pSC_boxOfCityDetails:last-child  {
@@ -1170,6 +1184,15 @@ footer .profileMenuLinks {
     border-width: 2px 0;
 }
 
+.footerSocialDivPhone{
+    background-color: #fcc156;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.footerSocialDivPhone a{
+    min-width: 15%;
+}
 
 @media (max-width: 1300px) {
     .footerRside {
@@ -1307,6 +1330,11 @@ footer .profileMenuLinks {
     .footerPhoneMenuBar {
         display: flex;
     }
+    .footerIconHor{
+        width: 40px;
+        height: 35px;
+        background-size: 35px;
+    }
 }
 
 @media (max-height: 700px) {
@@ -1317,16 +1345,13 @@ footer .profileMenuLinks {
 
     .pSC_boxOfDetails {
         overflow: auto;
-        height: inherit;
+        /*height: inherit;*/
     }
 
     .pSC_tilte {
         padding: 15px 20px;
     }
 
-    .pSC_boxOfCityDetailsText, .pSC_cityDetails {
-        padding: 10px 0;
-    }
 }
 
 @media (max-width: 630px) {
@@ -1361,7 +1386,7 @@ footer .profileMenuLinks {
     }
 
     .pSC_cityDetails {
-        font-size: 14px;
+        font-size: 13px;
     }
 
     footer .modules-membercenter-total-points .targets {

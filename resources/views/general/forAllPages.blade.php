@@ -68,6 +68,11 @@
         }
     }
 
+    function goToLanguage(_lang){
+        if(_lang != 0)
+            location.href = '{{url('language/')}}/' + _lang;
+    }
+
     $(document).ready(function(){
         resizeFitImg('resizeImgClass');
     });
