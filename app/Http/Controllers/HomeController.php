@@ -567,11 +567,10 @@ class HomeController extends Controller
         $mainWebSiteUrl = \url('/');
         $mainWebSiteUrl .= '/' . $request->path();
         if($kind == 'state')
-            $localStorageData = ['kind' => 'state', 'name' => $place->name , 'city' => '', 'state' => '', 'mainPic' => $place->image, 'redirect' => $mainWebSiteUrl];
+            $localStorageData = ['kind' => 'state', 'name' => $place->name , 'city' => '', 'state' => $place->listName, 'mainPic' => $place->image, 'redirect' => $mainWebSiteUrl];
         else
-            $localStorageData = ['kind' => 'city', 'name' => $place->name , 'city' => '', 'state' => $place->state, 'mainPic' => $place->image, 'redirect' => $mainWebSiteUrl];
+            $localStorageData = ['kind' => 'city', 'name' => $place->name , 'city' => $place->listName, 'state' => $place->state, 'mainPic' => $place->image, 'redirect' => $mainWebSiteUrl];
 
-//        dd($locationName);
         return view('cityPage', compact(['place', 'kind', 'localStorageData', 'locationName', 'post', 'map', 'allPlaces', 'allAmaken', 'allHotels', 'allRestaurant', 'allMajara', 'allMahaliFood', 'allSogatSanaie', 'allBoomgardy', 'reviews', 'topPlaces']));
     }
 

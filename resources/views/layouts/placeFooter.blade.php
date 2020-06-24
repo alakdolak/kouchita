@@ -721,43 +721,44 @@ $config = \App\models\ConfigModel::first();
                 @endif
 
                 <div class="footerSocialDivPhone">
-                        <a {{($config->linkedinNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://www.linkedin.com/in/shazde-mosafer-652817143/">
-                            <div class="footerIconHor linkedin"></div>
-                        </a>
-                        <a {{($config->facebookNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://www.facebook.com/profile.php?id=100016313805277&ref=br_rs">
-                            <div class="footerIconHor facebook"></div>
-                        </a>
-                        <a {{($config->twitterNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://twitter.com/shazdemosafer">
-                            <div class="footerIconHor twitter"></div>
-                        </a>
-                        <a {{($config->instagramNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://www.instagram.com/shazdehmosafer/">
-                            <div class="footerIconHor instagram"></div>
-                        </a>
-                        <a class="socialLink" {{($config->telegramNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://t.me/shazdehmosafer">
-                            <div class="footerIconHor telegram"></div>
-                        </a>
-                        <a class="socialLink" {{($config->telegramNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://koochitatv.com">
-                            <div class="footerIconHor aparat"></div>
-                        </a>
 
-                        <a {{($config->linkedinNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://www.linkedin.com/in/shazde-mosafer-652817143/">
-                            <div class="footerIconHor linkedin"></div>
-                        </a>
-                        <a {{($config->facebookNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://www.facebook.com/profile.php?id=100016313805277&ref=br_rs">
-                            <div class="footerIconHor facebook"></div>
-                        </a>
-                        <a {{($config->twitterNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://twitter.com/shazdemosafer">
-                            <div class="footerIconHor twitter"></div>
-                        </a>
-                        <a {{($config->instagramNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://www.instagram.com/shazdehmosafer/">
-                            <div class="footerIconHor instagram"></div>
-                        </a>
-                        <a class="socialLink" {{($config->telegramNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://t.me/shazdehmosafer">
-                            <div class="footerIconHor telegram"></div>
-                        </a>
-                        <a class="socialLink" {{($config->telegramNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://koochitatv.com">
-                            <div class="footerIconHor aparat"></div>
-                        </a>
+                    <a {{($config->twitterNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://twitter.com/shazdemosafer">
+                        <div class="footerIconHor twitter"></div>
+                    </a>
+                    <a {{($config->facebookNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://www.facebook.com/profile.php?id=100016313805277&ref=br_rs">
+                        <div class="footerIconHor facebook"></div>
+                    </a>
+                    <a rel="nofollow" target="_blank" href="#">
+                        <div class="footerIconHor youtubeBackground"></div>
+                    </a>
+                    <a class="socialLink" {{($config->telegramNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://t.me/shazdehmosafer">
+                        <div class="footerIconHor telegram"></div>
+                    </a>
+                    <a {{($config->linkedinNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://www.linkedin.com/in/shazde-mosafer-652817143/">
+                        <div class="footerIconHor linkedin"></div>
+                    </a>
+                    <a rel="nofollow" target="_blank" href="#">
+                        <div class="footerIconHor pinterest"></div>
+                    </a>
+                    <a rel="nofollow" target="_blank" href="#">
+                        <div class="footerIconHor whatsappBackground"></div>
+                    </a>
+                    <a class="socialLink" {{($config->telegramNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://aparat.com">
+                        <div class="footerIconHor aparat"></div>
+                    </a>
+                    <a {{($config->instagramNoFollow) ? 'rel="nofollow"' : ''}} target="_blank" href="https://www.instagram.com/shazdehmosafer/">
+                        <div class="footerIconHor instagram"></div>
+                    </a>
+                    <a rel="nofollow" target="_blank" href="#">
+                        <div class="footerIconHor newsBackground"></div>
+                    </a>
+                    <a rel="nofollow" target="_blank" href="http://www.bogenstudio.com/">
+                        <div class="footerIconHor bogenBackground"></div>
+                    </a>
+                    <a rel="nofollow" target="_blank" href="http://www.sisootech.com/">
+                        <div class="footerIconHor sisootechBackground"></div>
+                    </a>
+
                 </div>
                 <div class="footerLanguageSectionPhone">
                     <div class="footerLanguageDivPhone">
@@ -877,14 +878,16 @@ $config = \App\models\ConfigModel::first();
 
                             <div class="aboutMeDesc">
                                 <div class="editInfoBtn" onclick="toggleEditInfoMenu(this)">
-                                    {{__('ویرایش اطلاعات')}}
+                                    {{__('اطلاعات کاربری')}}
                                     <div class="glyphicon glyphicon-chevron-down"></div>
                                     <div class="glyphicon glyphicon-chevron-up display-none"></div>
                                 </div>
                                 <div class="editProfileMenu item display-none">
-                                    <a name="edit-profile" class="menu-link" href="{{URL('accountInfo')}}">{{__('ویرایش اطلاعات کاربری')}}</a>
-                                    <a name="edit-photo" class="menu-link" href="{{URL('editPhoto')}}">{{__('ویرایش عکس')}}</a>
-                                    <a name="subscriptions" class="menu-link" href="">{{__('اشتراک ها')}}</a>
+                                    <a name="edit-profile" class="menu-link " href="{{URL('profile')}}">{{__('صفحه کاربری')}}</a>
+                                    <a name="edit-profile" class="menu-link " href="{{URL('badge')}}">{{__('جوایز و مدال ها')}}</a>
+                                    <a name="edit-profile" class="menu-link " href="{{URL('messages')}}">{{__('پیام‌ها')}}</a>
+                                    <a name="edit-photo" class="menu-link " href="{{URL('accountInfo')}}">{{__('اطلاعات کاربر')}}</a>
+                                    <a name="edit-photo" class="menu-link " href="{{URL('editPhoto')}}">{{__('ویرایش عکس')}}</a>
                                 </div>
                             </div>
                         </div>

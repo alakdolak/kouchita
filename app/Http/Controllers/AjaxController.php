@@ -590,8 +590,6 @@ class AjaxController extends Controller {
 
         $reviewId = Activity::where('name', 'نظر')->first()->id;
         $ansId = Activity::where('name', 'پاسخ')->first()->id;
-        $quesActivityId = Activity::where('name', 'سوال')->first()->id;
-        $seeActivityId = Activity::where('name', 'مشاهده')->first()->id;
 
         $kindPlaceId = [1, 3, 4, 6, 10, 11, 12];
         $result = array();
@@ -611,17 +609,6 @@ class AjaxController extends Controller {
                 array_push($result, $place);
         }
 
-        if($lastPages != null){
-            foreach ($lastPages as $lp){
-                if(!in_array($lp['state'], $lastState) && $lp['state'] != null && count($lastState) < 3)
-                    array_push($lastState, $lp['state']);
-            }
-        }
-        $lastStateId = State::whereIn('name', $lastState)->pluck('id')->toArray();
-        $citiesId = [];
-        foreach ($lastStateId as $lsi)
-            array_push($citiesId, Cities::where('stateId', $lsi)->where('isVillage', 0)->pluck('id')->toArray());
-
         $topFoodId = [];
         $topMajaraId = [];
         $topRestuarantId = [];
@@ -629,6 +616,18 @@ class AjaxController extends Controller {
         $topBazarId = [];
         $posts = [];
         $today = getToday()['date'];
+
+        if($lastPages != null){
+            foreach ($lastPages as $lp){
+                if(!in_array($lp['state'], $lastState) && $lp['state'] != null && count($lastState) < 3)
+                    array_push($lastState, $lp['state']);
+            }
+        }
+        $lastStateId = State::whereIn('name', $lastState)->pluck('id')->toArray();
+
+        $citiesId = [];
+        foreach ($lastStateId as $lsi)
+            array_push($citiesId, Cities::where('stateId', $lsi)->where('isVillage', 0)->pluck('id')->toArray());
 
         if(count($citiesId) > 0){
             $getCount = (int)(8 / count($citiesId))+1;
@@ -699,118 +698,59 @@ class AjaxController extends Controller {
 
         return;
     }
-
     private function getMainPageSuggestionPackWithCityIds($cityIds, $getCount){
-
-        $questionRate = Question::where('ansType', 'rate')->pluck('id')->toArray();
-        $reviewId = Activity::where('name', 'نظر')->first()->id;
-        $ansId = Activity::where('name', 'پاسخ')->first()->id;
-        $quesActivityId = Activity::where('name', 'سوال')->first()->id;
-        $seeActivityId = Activity::where('name', 'مشاهده')->first()->id;
-
-        $topFoodId = [];
-        $topMajara = [];
-        $topRestuarant = [];
-        $topAmaken = [];
-        $topBazar = [];
-        $posts = [];
-        $today = getToday()['date'];
 
         if(count($cityIds) > 0)
             $foodId = MahaliFood::whereIn('cityId', $cityIds)->pluck('id')->toArray();
         else
             $foodId = MahaliFood::pluck('id')->toArray();
-
-        if (count($foodId) > 0) {
-            if(count($foodId) <= $getCount)
-                $placeGetCount = count($foodId)-1;
-            else
-                $placeGetCount = $getCount;
-
-            $topInCity = $this->getTopInIds(11, $foodId, $placeGetCount, $questionRate, $reviewId, $ansId, $quesActivityId);
-            if (count($topInCity) > 0)
-                $topFoodId = array_merge($topFoodId, $topInCity);
-        }
+        $allFoodId = MahaliFood::pluck('id')->toArray();
+        $foodId = $this->getPlaceInKindPlaceId($foodId, $allFoodId, 11, $getCount);
 
         if(count($cityIds) > 0)
             $majaraId = Majara::whereIn('cityId', $cityIds)->pluck('id')->toArray();
         else
             $majaraId = Majara::pluck('id')->toArray();
-
-        if (count($majaraId) > 0) {
-            if(count($majaraId) <= $getCount)
-                $placeGetCount = count($majaraId)-1;
-            else
-                $placeGetCount = $getCount;
-
-            $topInCity = $this->getTopInIds(6, $majaraId, $placeGetCount, $questionRate, $reviewId, $ansId, $quesActivityId, $seeActivityId);
-            if (count($topInCity) > 0)
-                $topMajara = array_merge($topMajara, $topInCity);
-        }
+        $allMajara = Majara::pluck('id')->toArray();
+        $majaraId = $this->getPlaceInKindPlaceId($majaraId, $allMajara, 6, $getCount);
 
         if(count($cityIds) > 0)
             $restId = Restaurant::whereIn('cityId', $cityIds)->pluck('id')->toArray();
         else
             $restId = Restaurant::pluck('id')->toArray();
-        if (count($restId) > 0) {
-            if(count($restId) <= $getCount)
-                $placeGetCount = count($restId)-1;
-            else
-                $placeGetCount = $getCount;
-
-            $topInCity = $this->getTopInIds(3, $restId, $placeGetCount, $questionRate, $reviewId, $ansId, $quesActivityId);
-            if (count($topInCity) > 0)
-                $topRestuarant = array_merge($topRestuarant, $topInCity);
-        }
-
+        $allRest = Restaurant::pluck('id')->toArray();
+        $restId = $this->getPlaceInKindPlaceId($restId, $allRest,3, $getCount);
 
         $amakenFeatParent = PlaceFeatures::where('name', 'کاربری')->where('kindPlaceId', 1)->where('parent', 0)->first()->id;
         $amakenFeat = PlaceFeatures::where('parent', $amakenFeatParent)->where(function($query){
             $query->where('name', 'تاریخی')->orWhere('name', 'مذهبی');
         })->pluck('id')->toArray();
-        $amakenId = PlaceFeatureRelation::where('kindPlaceId', 1)->whereIn('featureId', $amakenFeat)->pluck('placeId')->toArray();
-        if(count($amakenId) > 0){
+        $allAmakenId = PlaceFeatureRelation::where('kindPlaceId', 1)->whereIn('featureId', $amakenFeat)->pluck('placeId')->toArray();
+        if(count($allAmakenId) > 0){
             if(count($cityIds) > 0)
-                $amakenId = Amaken::whereIn('id', $amakenId)->whereIn('cityId', $cityIds)->pluck('id')->toArray();
+                $regionalId = Amaken::whereIn('id', $allAmakenId)->whereIn('cityId', $cityIds)->pluck('id')->toArray();
             else
-                $amakenId = Amaken::whereIn('id', $amakenId)->pluck('id')->toArray();
+                $regionalId = Amaken::whereIn('id', $allAmakenId)->pluck('id')->toArray();
 
-            if (count($amakenId) > 0) {
-                if(count($amakenId) <= $getCount)
-                    $placeGetCount = count($amakenId)-1;
-                else
-                    $placeGetCount = $getCount;
-
-                $topInCity = $this->getTopInIds(1, $amakenId, $placeGetCount, $questionRate, $reviewId, $ansId, $quesActivityId, $seeActivityId);
-                if (count($topInCity) > 0)
-                    $topAmaken = array_merge($topAmaken, $topInCity);
-            }
+            $regionalId = $this->getPlaceInKindPlaceId($regionalId, $allAmakenId, 1, $getCount);
         }
 
         $amakenFeat = PlaceFeatures::where('parent', $amakenFeatParent)->where('name', 'تجاری')->pluck('id')->toArray();
-        $amakenId = PlaceFeatureRelation::where('kindPlaceId', 1)->whereIn('featureId', $amakenFeat)->pluck('placeId')->toArray();
-        if(count($amakenId) > 0){
+        $allAmakenId = PlaceFeatureRelation::where('kindPlaceId', 1)->whereIn('featureId', $amakenFeat)->pluck('placeId')->toArray();
+        if(count($allAmakenId) > 0){
             if(count($cityIds) > 0)
-                $amakenId = Amaken::whereIn('id', $amakenId)->whereIn('cityId', $cityIds)->pluck('id')->toArray();
+                $bazarId = Amaken::whereIn('id', $allAmakenId)->whereIn('cityId', $cityIds)->pluck('id')->toArray();
             else
-                $amakenId = Amaken::whereIn('id', $amakenId)->pluck('id')->toArray();
-
-            if (count($amakenId) > 0) {
-                if(count($amakenId) <= $getCount)
-                    $placeGetCount = count($amakenId);
-                else
-                    $placeGetCount = $getCount;
-
-                $topInCity = $this->getTopInIds(1, $amakenId, $placeGetCount, $questionRate, $reviewId, $ansId, $quesActivityId, $seeActivityId);
-                if (count($topInCity) > 0)
-                    $topBazar = array_merge($topBazar, $topInCity);
-            }
+                $bazarId = Amaken::whereIn('id', $allAmakenId)->pluck('id')->toArray();
+            $bazarId = $this->getPlaceInKindPlaceId($bazarId, $allAmakenId, 1, $getCount);
         }
+
         if(count($cityIds) > 0)
             $postIds = PostCityRelation::whereIn('cityId', $cityIds)->pluck('postId')->toArray();
         else
             $postIds = PostCityRelation::pluck('postId')->toArray();
 
+        $today = getToday()['date'];
         $post = Post::where('date', '<=', $today)
             ->where('release', '!=', 'draft')
             ->whereIn('id', $postIds)
@@ -830,9 +770,37 @@ class AjaxController extends Controller {
                 ->toArray();
         }
 
-        return [$topFoodId, $topMajara, $topRestuarant, $topAmaken, $topBazar, $post];
+        return [$foodId, $majaraId, $restId, $regionalId, $bazarId, $post];
     }
+    private function getPlaceInKindPlaceId($placeId, $allPlace, $kindPlaceId, $getCount){
+        $questionRate = Question::where('ansType', 'rate')->pluck('id')->toArray();
+        $reviewId = Activity::where('name', 'نظر')->first()->id;
+        $ansId = Activity::where('name', 'پاسخ')->first()->id;
+        $quesActivityId = Activity::where('name', 'سوال')->first()->id;
+        $seeActivityId = Activity::where('name', 'مشاهده')->first()->id;
 
+        if (count($placeId) > $getCount) {
+
+            $topInCity = $this->getTopInIds($kindPlaceId, $placeId, $getCount, $questionRate, $reviewId, $ansId, $quesActivityId);
+            $placeId = [];
+            if (count($topInCity) > 0)
+                $placeId = array_merge($placeId, $topInCity);
+        }
+        else{
+            $notIn = $placeId;
+            if(count($placeId) == 0)
+                $notIn = [0];
+            $remind = $getCount - count($placeId);
+            $kinPlace = Place::find($kindPlaceId);
+            $allPlaces = \DB::table($kinPlace->tableName)->whereIn('id', $allPlace)->whereNotIn('id', $notIn)->pluck('id')->toArray();
+
+            $topInCity = $this->getTopInIds($kindPlaceId, $allPlaces, $remind, $questionRate, $reviewId, $ansId, $quesActivityId);
+            if (count($topInCity) > 0)
+                $placeId = array_merge($placeId, $topInCity);
+        }
+
+        return $placeId;
+    }
     private function getTopInIds($_kindPlaceId, $_placeIds, $getCount, $questionRate, $reviewId, $ansId, $quesActivityId, $seeActivityId = ''){
 
         $topIdInCity = [];
@@ -859,7 +827,7 @@ class AjaxController extends Controller {
             if($topIdInCity[0] == 0)
                 $topIdInCity = [];
 
-            while($getCount - count($topIdInCity) > 0){
+            while($getCount - count($topIdInCity) > 0 && count($_placeIds) > count($topIdInCity)){
                 $randId = $_placeIds[rand(0, count($_placeIds)-1)];
                 while(in_array($randId, $topIdInCity))
                     $randId = $_placeIds[rand(0, count($_placeIds)-1)];
@@ -869,26 +837,6 @@ class AjaxController extends Controller {
         }
 
         return $topIdInCity;
-    }
-
-    public function getkindPlaceFeatures(Request $request)
-    {
-        if(isset($request->id)){
-            $kindPlace = Place::find($request->id);
-            if($kindPlace != null){
-                $features = PlaceFeatures::where('kindPlaceId', $kindPlace->id)->where('parent', 0)->get();
-                foreach ($features as $item)
-                    $item->subFeat = PlaceFeatures::where('parent', $item->id)->get();
-
-                echo json_encode(['status' => 'ok', 'result' => $features]);
-            }
-            else
-                echo json_encode(['status' => 'nok1']);
-        }
-        else
-            echo json_encode(['status' => 'nok']);
-
-        return;
     }
 
     public function getTags(Request $request)
