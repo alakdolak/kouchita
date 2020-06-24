@@ -30,11 +30,8 @@ class MainController extends Controller
     }
 
     public function showMainPage($mode = "mainPage") {
-        $kindPlaceId= 0;
 
-        $sliderPic = MainSliderPic::all();
-        foreach ($sliderPic as $item)
-            $item->pic = URL::asset('_images/sliderPic/'. $item->pic);
+        $kindPlaceId= 0;
 
         $today = getToday()['date'];
         $hotelCount = Hotel::all()->count();
@@ -69,6 +66,13 @@ class MainController extends Controller
         foreach ($articleBanner as $item){
             $item->url = createUrl(0, 0, 0, 0, $item->id);
             $item->pic = createPicUrl($item->id);
+        }
+
+        $sliderPic = MainSliderPic::all();
+        foreach ($sliderPic as $item) {
+            $item->pic = URL::asset('_images/sliderPic/' . $item->pic);
+            if($item->backgroundPic != null)
+                $item->backgroundPic = URL::asset('_images/sliderPic/' . $item->backgroundPic);
         }
 
         $middleBan = [];

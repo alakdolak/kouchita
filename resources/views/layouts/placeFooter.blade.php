@@ -3,10 +3,12 @@ $config = \App\models\ConfigModel::first();
     if(auth()->check()){
         $user = Auth::user();
         $userLevelFooter = auth()->user()->getUserNearestLevel();
-//        dd($userLevelFooter);
+
         $userTotalPointFooter = auth()->user()->getUserTotalPoint();
 
         $nextLevelFooter = $userLevelFooter[1]->floor - $userTotalPointFooter;
+
+        $registerUser = verta(\auth()->user()->created_at)->format('Y/m/d');
     }
 ?>
 <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/footer.css')}}' />
@@ -138,7 +140,7 @@ $config = \App\models\ConfigModel::first();
     <div class="footerPhoneMenuBar hideOnScreen">
         <div data-toggle="modal" data-target="#otherPossibilities">
             <span class="footerMenuBarLinks">{{__('منو')}}</span>
-            <span class="ui_icon more-horizontal"></span>
+            <span class="ui_icon threeDotIcon"></span>
         </div>
         <div data-toggle="modal" data-target="#profilePossibilities" onclick="showLastPages();// this function in mainSearch.blade.php">
             <span class="footerMenuBarLinks">
@@ -854,10 +856,10 @@ $config = \App\models\ConfigModel::first();
                                             {{isset($user->first_name) ? $user->first_name : $user->username}}
                                         </b>
                                     </p>
-                                    <div class="ageSince">
+                                    <div class="ageSince" style="flex-direction: column;">
                                         <div class="since">{{__('عضو شده از')}}</div>
                                         <div class="since">
-    {{--                                        {{$user->created}}--}}
+                                            {{$registerUser}}
                                         </div>
                                     </div>
                                 </div>
@@ -892,7 +894,7 @@ $config = \App\models\ConfigModel::first();
                             </div>
                         </div>
                         <div class="profileBtnActionMobile">
-                            <a type="button" class="btn btn-warning pp_btns" href="{{route('profile')}}">{{__('صفحه پروفایل')}}</a>
+                            <div type="button" class="btn btn-warning pp_btns" onclick="$('#profile').modal('hide'); openUploadPost()">{{__('پست')}}</div>
                             <a type="button" class="btn btn-primary pp_btns">{{__('صفحه من')}}</a>
                             <a type="button" class="btn btn-danger pp_btns" href="{{route('logout')}}">{{__('خروج')}}</a>
                         </div>
@@ -955,31 +957,30 @@ $config = \App\models\ConfigModel::first();
                         </div>
                     @else
                         <div class="profileScoreMainDiv">
-                            <div class="modules-membercenter-progress-header " data-backbone-name="modules.membercenter.ProgressHeader" data-backbone-context="Social_CompositeMember, Member">
-                                <div class="title" id="myHonorsText">
-                                    <h3>{{__('امتیازات من')}}</h3>
-                                </div>
-
-                                <a class="link" {{--onclick="initHelp(16, [], 'MAIN', 100, 400)"--}}>
-                                    <div></div>
-                                </a>
-                            </div>
-
                             <div class="memberPointInfo">
-                                <div class="modules-membercenter-total-points">
-                                    <div data-direction="left" class="targets">
-                                        <div class="points_info tripcollectiveinfo" onclick="showElement('activityDiv')">
-                                            <div class="label"> {{__('امتیاز کل شما')}} </div>
-                                        </div>
+                                <div style=" color: #0076ac; font-size: 20px; margin-top: 5px; display: flex; justify-content: space-between; align-items: center">
+                                    <div>
+                                        {{__('امتیازات من')}}
                                     </div>
-                                    <div class="mainDivTotalPoint">
-                                        <div class="points">{{$userTotalPointFooter}}</div>
+                                    <div style="font-size: 10px">
                                         <a href="">{{__('سیستم امتیازدهی')}}</a>
                                     </div>
+                                </div>
+
+                                <div class="modules-membercenter-total-points" style="padding-top: 2px;">
+{{--                                    <div data-direction="left" class="targets">--}}
+{{--                                        <div class="points_info tripcollectiveinfo" onclick="showElement('activityDiv')">--}}
+{{--                                            --}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+                                    <div class="mainDivTotalPoint">
+                                        <div class="label" style="font-size: 17px;"> {{__('امتیاز کل شما')}} </div>
+                                        <div class="points">{{$userTotalPointFooter}}</div>
+                                    </div>
                                     <div class="points_to_go">
-                                    <span>
+                                    <span style="justify-content: space-between;">
                                         <b class="points"> {{$nextLevelFooter}} </b>
-                                        <span>{{__('امتیاز  مانده به مرحله بعد')}}</span>
+                                        <span style="text-align: center;    font-size: 16px;">{{__('امتیاز  مانده به مرحله بعد')}}</span>
                                     </span>
                                     </div>
                                 </div>

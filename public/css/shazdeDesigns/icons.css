@@ -197,6 +197,10 @@
     content: '\E1F8';
     font-family: Shazde_Regular2 !important;
 }
+.threeDotIcon:before{
+    content: '\E091';
+    font-family: Shazde_Regular2 !important;
+}
 
 
 .ui_bubble_rating {

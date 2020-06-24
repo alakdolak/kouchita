@@ -80,6 +80,7 @@ class HomeController extends Controller
 
     public function mainSliderStore(Request $request)
     {
+//        dd($request->all());
         if(\auth()->check() && \auth()->user()->level == 1) {
             $location = __DIR__ . '/../../../../assets/_images/sliderPic';
 
@@ -95,14 +96,21 @@ class HomeController extends Controller
                     $slider->alt = 'کوچیتا';
 
                     if (isset($_FILES['pic']) && $_FILES['pic']['error'] == 0){
-
-                        if (file_exists($location . '/' . $slider->pic))
+                        if (is_file($location . '/' . $slider->pic))
                             unlink($location . '/' . $slider->pic);
-
                         $fileName =  time() . $_FILES['pic']['name'];
                         $destinationPic = $location . '/' . $fileName;
                         move_uploaded_file( $_FILES['pic']['tmp_name'], $destinationPic);
                         $slider->pic = $fileName;
+                    }
+
+                    if (isset($_FILES['backPic']) && $_FILES['backPic']['error'] == 0){
+                        if (is_file($location . '/' . $slider->backgroundPic))
+                            unlink($location . '/' . $slider->backgroundPic);
+                        $fileName =  (time()+1) . $_FILES['backPic']['name'];
+                        $destinationPic = $location . '/' . $fileName;
+                        move_uploaded_file( $_FILES['backPic']['tmp_name'], $destinationPic);
+                        $slider->backgroundPic = $fileName;
                     }
                     $slider->save();
                     echo json_encode(['ok', $slider->id]);
@@ -123,6 +131,13 @@ class HomeController extends Controller
                     $destinationPic = $location . '/' . $fileName;
                     compressImage($_FILES['pic']['tmp_name'], $destinationPic, 80);
                     $slider->pic = $fileName;
+
+                    if (isset($_FILES['backPic']) && $_FILES['backPic']['error'] == 0){
+                        $fileName =  (time()+1) . $_FILES['backPic']['name'];
+                        $destinationPic = $location . '/' . $fileName;
+                        move_uploaded_file( $_FILES['backPic']['tmp_name'], $destinationPic);
+                        $slider->backgroundPic = $fileName;
+                    }
 
                     $slider->save();
 
@@ -147,6 +162,9 @@ class HomeController extends Controller
 
                 if (file_exists($location . '/' . $slider->pic))
                     unlink($location . '/' . $slider->pic);
+
+                if (file_exists($location . '/' . $slider->backgroundPic))
+                    unlink($location . '/' . $slider->backgroundPic);
 
                 $slider->delete();
                 echo 'ok';

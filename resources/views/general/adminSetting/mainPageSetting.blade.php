@@ -50,6 +50,14 @@
                                     </div>
                                 </div>
                                 <div class="row">
+                                    <div class="col-md-6">
+                                         <img id="showUploadBackImgSlider0##number##" class="settingImg" src="##backgroundPic##" style="height: 100px;">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="file" id="uploadBackImgSlider0##number##" accept="image/*" onchange="showPicInput(this, 'showUploadBackImgSlider0##number##')">
+                                    </div>
+                                </div>
+                                <div class="row">
                                     <div class="col-md-3">
                                         <label for="colorForSlider0##number##">رنگ پس زمینه:</label>
                                         <input type="text" id="colorForSlider0##number##" class="form-control" value="##textBackground##">
@@ -279,13 +287,10 @@
     var slider1Setting = {!! $sliderPic !!};
 
     function showMainSliderSetting(){
-
         if(mainSliderSettingSample == 0){
             mainSliderSettingSample = $('#sliderPicSection0').html();
             $('#sliderPicSection0').html('');
         }
-
-
         for(var i = 0; i < slider1Setting.length; i++){
             var text = mainSliderSettingSample;
             var fk = Object.keys(slider1Setting[i]);
@@ -316,6 +321,7 @@
             'number' : sild0,
             'id' : 0,
             'pic' : '',
+            'backgroundPic': '',
             'textBackground' : '',
             'textColor' : '',
             'text' : ''
@@ -337,11 +343,15 @@
         var textColor = $('#colorTextForSlider0' + _number).val();
         var text = $('#textForSlider0' + _number).val();
         var inputPic = $('#uploadImgSlider0' + _number)[0];
+        var inputBackPic = $('#uploadBackImgSlider0' + _number)[0];
         var id = $('#idForImgSlider0' + _number).val();
 
         var data = new FormData();
         if (inputPic)
             data.append('pic', inputPic.files[0]);
+        if (inputBackPic)
+            data.append('backPic', inputBackPic.files[0]);
+
         data.append('color', color);
         data.append('text', text);
         data.append('textColor', textColor);
