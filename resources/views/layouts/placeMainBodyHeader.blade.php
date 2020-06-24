@@ -136,7 +136,7 @@
                                 <div class="display-inline-block float-right mg-rt-5">اشتراک صفحه پین ترست</div>
                             </a>
                             <div class="position-relative inputBoxSharePage mg-tp-5">
-                                <input id="shareLinkInput" class="full-width inputBoxInputSharePage" value="{{Request::url()}}" readonly onclick="copyLinkAddress('shareLinkInput')" style="cursor: pointer;">
+                                <input id="shareLinkInput" class="full-width inputBoxInputSharePage" value="{{Request::url()}}" readonly onclick="copyLinkAddress(this)" style="cursor: pointer;">
                                 <img src="{{URL::asset("images/shareBoxImg/copy.png")}}" id="copyImgInputShareLink">
                             </div>
                         </div>
