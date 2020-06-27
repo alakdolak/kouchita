@@ -463,7 +463,10 @@
 
             var cropperSqu = new Cropper(squ, {
                 ready: function () {
-                    var squerCanvas = cropperSqu.getCroppedCanvas();
+                    var squerCanvas = cropperSqu.getCroppedCanvas({
+                        width: 250,
+                        height: 250,
+                    });
                     squerCanvas.toBlob(function (blob){
                         squerImg = blob;
                         cropperSqu.destroy();
@@ -471,7 +474,10 @@
 
                         var cropperReq = new Cropper(req, {
                             ready: function () {
-                                var reqCanvas = cropperReq.getCroppedCanvas();
+                                var reqCanvas = cropperReq.getCroppedCanvas({
+                                    width: 600,
+                                    height: 400,
+                                });
                                 reqCanvas.toBlob(function (blob) {
                                     reqImg = blob;
 
@@ -598,11 +604,13 @@
     }
 
     function cropImg(){
+        openLoading();
         var canvas1;
         canvas1 = cropper.getCroppedCanvas();
         $('#' + cropResult).attr('src', canvas1.toDataURL());
 
         cancelCrop();
+        closeLoading();
     }
 
     function cancelCrop(){
