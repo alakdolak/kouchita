@@ -1209,6 +1209,7 @@ figure.snip1091.hover figcaption:after {
     display: flex;
     direction: rtl;
     align-items: center;
+    margin: 5px 0px;
 }
 .shelf_title_container{
     display: flex;

@@ -4,25 +4,17 @@
 <head>
     @include('layouts.topHeader')
     <title>
-        کوچیتا |
-        صفحه
+        {{__('کوچیتا |صفحه')}}
         {{$place->name}}</title>
+
     <meta content="article" property="og:type"/>
     <meta name="title" content="{{$place->name}} | اطلاعات گردشگری {{$place->name}} – جاذبه های {{$place->name}} – هتل های {{$place->name}} – رستوران های {{$place->name}}- صنایع‌دستی و سوغات {{$place->name}} | کوچیتا " />
+    <meta name="og:title" content="{{$place->name}} | اطلاعات گردشگری {{$place->name}} – جاذبه های {{$place->name}} – هتل های {{$place->name}} – رستوران های {{$place->name}}- صنایع‌دستی و سوغات {{$place->name}} | کوچیتا " />
+    <meta name="twitter:title" content="{{$place->name}} | اطلاعات گردشگری {{$place->name}} – جاذبه های {{$place->name}} – هتل های {{$place->name}} – رستوران های {{$place->name}}- صنایع‌دستی و سوغات {{$place->name}} | کوچیتا " />
     <meta name='description' content='. هر چه یک گردشگر باید بداند   اطلاعات جامع و کامل {{$place->name}}. اصلاعات عمومی و تخصصی گردشگری ' />
+    <meta name='og:description' content='. هر چه یک گردشگر باید بداند   اطلاعات جامع و کامل {{$place->name}}. اصلاعات عمومی و تخصصی گردشگری ' />
+    <meta name='twitter:description' content='. هر چه یک گردشگر باید بداند   اطلاعات جامع و کامل {{$place->name}}. اصلاعات عمومی و تخصصی گردشگری ' />
     <meta name='keywords' content='جاذبه های  {{$place->name}} – اطلاعات گردشگری {{$place->name}} – نقد و بررسی {{$place->name}} ' />
-
-    {{--<meta name="keywords" content="{{$post->keyword}}">--}}
-    {{--<meta property="og:title" content=" {{$post->seoTitle}} " />--}}
-    {{--<meta property="og:description" content=" {{$post->meta}}" />--}}
-    {{--<meta name="twitter:title" content=" {{$post->seoTitle}} " />--}}
-    {{--<meta name="twitter:description" content=" {{$post->meta}}" />--}}
-    {{--<meta name="description" content=" {{$post->meta}}"/>--}}
-    {{--<meta property="article:author " content="{{$post->user->username}}" />--}}
-    {{--<meta property="article:section" content="article" />--}}
-    {{--<meta property="article:published_time" content="2019-05-28T13:32:55+00:00" /> زمان انتشار--}}
-    {{--<meta property="article:modified_time" content="2020-01-14T10:43:11+00:00" />زمان آخریت تغییر--}}
-    {{--<meta property="og:updated_time" content="2020-01-14T10:43:11+00:00" /> زمان آخرین آپدیت--}}
 
     @if(isset($place->image))
         <meta property="og:image" content="{{URL::asset($place->image)}}"/>
@@ -39,74 +31,71 @@
     <meta property="article:tag" content="اطلاعات {{$place->name}}"/>
 
 
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/home_rebranded.css?v=4')}}"/>
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/long_lived_global_legacy_2.css?v=2')}}"/>
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/theme2/masthead-saves.css?v=2')}}'/>
-    <link rel='stylesheet' type='text/css' media='screen, print'
-          href='{{URL::asset('css/theme2/hr_north_star.css?v=2')}}'/>
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/icons.css?v=2')}}'/>
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/cityPage.css?v=1')}}'/>
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/abbreviations.css?v=1')}}'/>
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/mainPageStyles.css')}}'/>
-
     <script type='text/javascript' src='{{URL::asset('js/jquery_12.js')}}'></script>
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/article.min.css')}}"/>
-    <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/usersActivities.css')}}">
 
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/article.min.css')}}"/>
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/common/middleBanner.css')}}'/>
-
-    <script>
-        var searchDir = '{{route('totalSearch')}}';
-        var getStates = '{{route('getStates')}}';
-        var getGoyesh = '{{route('getGoyesh')}}';
-        var url;
-    </script>
-
-    <style>
-
-        h3{
-            margin: 0px;
-        }
-
-        .cityImgSlider{
-            overflow: hidden;
-            height: 340px;
-        }
-        .topImage{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        #newKoochita, #foodSuggestion, #tabiatSuggestion, #safaranameSuggestions, #restaurantSuggestion, #tarikhiSuggestion, #kharidSuggestion, #articleSuggestion{
-            margin-left: 10px;
-        }
-        .navigatorLinks{
-            color: #053a3e;
-            transition: .2s !important;
-        }
-        .navigatorLinks:hover{
-            color: #eab836;
-        }
-    </style>
+    <link rel="stylesheet" type='text/css' href="{{URL::asset('css/shazdeDesigns/usersActivities.css')}}">
+    <link rel="stylesheet" type='text/css' href="{{URL::asset('css/theme2/article.min.css')}}"/>
+    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/cityPage.css')}}'/>
 
 </head>
 
-<body class="rebrand_2017 desktop HomeRebranded  js_logging">
+<body>
 
 @include('general.forAllPages')
 
-<div class="header hideOnPhone">
-    @include('layouts.placeHeader')
-</div>
+@include('layouts.header1')
 
-<div class="ui_container cpBody">
+<script>
+    function runMainSwiper(){
+        var swiper = new Swiper('.mainSuggestion', {
+            loop: true,
+            updateOnWindowResize: true,
+            navigation: {
+                prevEl: '.swiper-button-next',
+                nextEl: '.swiper-button-prev',
+            },
+            on: {
+                init: function(){
+                    this.update();
+                },
+                resize: function () {
+                    resizeFitImg('resizeImgClass');
+                    this.update()
+                },
+            },
+            breakpoints: {
+                450: {
+                    slidesPerView: 1,
+                    spaceBetween: 20,
+                },
+                991: {
+                    slidesPerView: 2,
+                    spaceBetween: 20,
+                },
+                10000: {
+                    slidesPerView: 3,
+                    spaceBetween: 20,
+                }
+            }
+        });
+    }
+
+    function createCityPageSuggestion(_id, _item, _callBack){
+        createSuggestionPack(_id, _item, function() {
+            $('#' + _id).find('.suggestionPackDiv').addClass('swiper-slide');
+
+            if(_callBack === 'function')
+                _callBack();
+        });
+    }
+</script>
+
+<div class="container cpBody">
     <div class="cpBorderBottom cpHeader">
 
         <div class="cpHeaderRouteOfCityName">
             <a href="{{url('/')}}" class="navigatorLinks">
-                <span>صفحه اصلی</span>
+                <span>{{__('صفحه اصلی')}}</span>
             </a>
             <span style="color: #eab836"> > </span>
             @if(isset($place->state))
@@ -114,18 +103,20 @@
                     <span>استان {{$place->state}}</span>
                 </a>
                 <span style="color: #eab836"> > </span>
-                <span class="navigatorLinks">{{$place->name}}</span>
+                <span class="navigatorLinks" style="font-size: 13px">{{$place->name}}</span>
             @else
-                <span class="navigatorLinks">{{$place->name}}</span>
+                <span class="navigatorLinks" style="font-size: 13px">{{$place->name}}</span>
             @endif
-            {{--<div class="ui_close_x" style="left: 30px !important; top: 15px !important;"></div>--}}
         </div>
 
         <div class="cpHeaderCityName">{{$place->name}}</div>
     </div>
 
     <div class="row">
-        <div class="col-lg-3 col-sm-3 text-align-right hideOnPhone" style="float: left; padding: 0 !important;">
+        <div id="commentSection" class="col-lg-3 col-sm-3 text-align-right hideOnPhone" style="float: left; padding: 0 !important; overflow: hidden">
+            <div class="row" style="font-size: 25px; margin: 5px 10px; border-bottom: solid 1px #f3f3f3;">
+                {{__('تازه ترین پست ها')}}
+            </div>
             <div class="postsMainDivInSpecificMode cpCommentBox cpBorderBottom">
                 @foreach($reviews as $item)
                     <div class="postMainDivShown float-right position-relative">
@@ -135,25 +126,25 @@
                             </div>
                             <div class="commentWriterExperienceDetails">
                                 <b class="userProfileName">{{$item->user->username}}</b>
-                                <div style="font-size: 10px">در
+                                <div style="font-size: 10px">{{__('در')}}
                                     <a href="{{$item->url}}" target="_blank">
-                                        <span class="commentWriterExperiencePlace">{{$item->place->name}}، شهر {{$item->city->name}}، استان {{$item->state->name}}</span>
+                                        <span class="commentWriterExperiencePlace">{{$item->place->name}}، {{__('شهر')}} {{$item->city->name}}، {{__('استان')}} {{$item->state->name}}</span>
                                     </a>
                                 </div>
-                                <div style="font-size: 10px;">
+                                <div style="font-size: 12px;">
                                     {{$item->timeAgo}}
                                 </div>
                             </div>
                         </div>
                         <div class="commentContentsShow position-relative">
                             @if(isset($item->summery))
-                                <p class="SummarizedPostTextShown" style="white-space: pre-line">
+                                <p class="SummarizedPostTextShown">
                                     {{$item->summery}}
                                     <span class="showMoreText" onclick="showMoreText(this)"></span>
                                 </p>
-                                <p class="compvarePostTextShown display-none" style="white-space: pre-line">
+                                <p class="compvarePostTextShown display-none">
                                     {{$item->text}}
-                                    <span class="showLessText" onclick="showLessText(this)">کمتر</span>
+                                    <span class="showLessText" onclick="showLessText(this)">{{__('کمتر')}}</span>
                                 </p>
                             @else
                                 <p class="compvarePostTextShown">
@@ -170,18 +161,24 @@
                                 @if(count($item->pics) > 1)
                                     <div class="numberOfPhotosMainDiv">
                                         <div class="numberOfPhotos">{{count($item->pics) - 1}}+</div>
-                                        <div>عکس</div>
+                                        <div>{{__('عکس')}}</div>
                                     </div>
                                 @endif
                             </div>
                             @endif
                             <div class="quantityOfLikes">
-                                <span>{{$item->like}}</span>
-                                نفر دوست داشتند،
-                                <span>{{$item->disLike}}</span>
-                                نفر دوست نداشتند و
-                                <span>{{$item->comments}}</span>
-                                نفر نظر دادند.
+                                <div>
+                                    <span>{{$item->like}}</span>
+                                    <span class="iconFamily LikeIcon" style="color: #666666;"></span>
+                                </div>
+                                <div>
+                                    <span>{{$item->disLike}}</span>
+                                    <span class="iconFamily DisLikeIcon" style="color: #666666;"></span>
+                                </div>
+                                <div>
+                                    <span>{{$item->comments}}</span>
+                                    <span class="iconFamily CommentIcon" style="color: #666666;"></span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -190,7 +187,6 @@
         </div>
 
         <div id="cpBorderLeft" class="col-lg-9 col-sm-9 cpBorderLeft">
-
             <div class="row cpMainBox">
                 <div class="col-md-8 col-xs-12 pd-0Imp mg-bt-10">
                     @if(isset($place->pic))
@@ -202,9 +198,7 @@
                                     </div>
                                 @endfor
                             </div>
-                            <!-- Add Pagination -->
                             <div class="swiper-pagination"></div>
-                            <!-- Add Arrows -->
                             <div class="swiper-button-next"></div>
                             <div class="swiper-button-prev"></div>
                         </div>
@@ -216,64 +210,64 @@
                     <div class="col-xs-12">
                         <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/4/' . $kind . '/' . $place->listName)}}">
                             <div class="cityPageIcon hotel"></div>
-                            <div class="textCityPageIcon">هتل</div>
-                            <div class="textCityPageIcon">{{count($allHotels)}}</div>
+                            <div class="textCityPageIcon">{{__('هتل')}}</div>
+                            <div class="textCityPageIcon" style="color: #0076a3">{{count($allHotels)}}</div>
                         </a>
                         <a class="col-xs-4 cpLittleMenu" href="#">
                             <div class="cityPageIcon ticket"></div>
-                            <div class="textCityPageIcon">بلیط</div>
+                            <div class="textCityPageIcon">{{__('بلیط')}}</div>
                         </a>
                         <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/1/' . $kind . '/' . $place->listName)}}">
                             <div class="cityPageIcon atraction"></div>
-                            <div class="textCityPageIcon">جاذبه ها</div>
-                            <div class="textCityPageIcon">{{count($allAmaken)}}</div>
+                            <div class="textCityPageIcon">{{__('جاذبه ها')}}</div>
+                            <div class="textCityPageIcon" style="color: #0076a3">{{count($allAmaken)}}</div>
                         </a>
                     </div>
                     <div class="clear-both"></div>
                     <div class="col-xs-12">
                         <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/3/' . $kind. '/' . $place->listName )}}">
                             <div class="cityPageIcon restaurant"></div>
-                            <div class="textCityPageIcon">رستوران</div>
-                            <div class="textCityPageIcon">{{count($allRestaurant)}}</div>
+                            <div class="textCityPageIcon">{{__('رستوران')}}</div>
+                            <div class="textCityPageIcon" style="color: #0076a3">{{count($allRestaurant)}}</div>
                         </a>
                         <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/10/' . $kind . '/' . $place->listName)}}">
                             <div class="cityPageIcon soghat"></div>
-                            <div class="textCityPageIcon">سوغات</div>
-                            <div class="textCityPageIcon">{{count($allSogatSanaie)}}</div>
+                            <div class="textCityPageIcon">{{__('سوغات')}}</div>
+                            <div class="textCityPageIcon" style="color: #0076a3">{{count($allSogatSanaie)}}</div>
                         </a>
                         <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/11/' . $kind . '/' . $place->listName)}}">
                             <div class="cityPageIcon ghazamahali"></div>
-                            <div class="textCityPageIcon">غذای محلی</div>
-                            <div class="textCityPageIcon">{{count($allMahaliFood)}}</div>
+                            <div class="textCityPageIcon">{{__('غذای محلی')}}</div>
+                            <div class="textCityPageIcon" style="color: #0076a3">{{count($allMahaliFood)}}</div>
                         </a>
                     </div>
                     <div class="clear-both"></div>
                     <div class="col-xs-12">
                         <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/6/' . $kind . '/' . $place->listName)}}">
                             <div class="cityPageIcon majara"></div>
-                            <div class="textCityPageIcon">طبیعت گردی</div>
-                            <div class="textCityPageIcon">{{count($allMajara)}}</div>
+                            <div class="textCityPageIcon">{{__('طبیعت گردی')}}</div>
+                            <div class="textCityPageIcon" style="color: #0076a3">{{count($allMajara)}}</div>
                         </a>
                         <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/10/' . $kind . '/' . $place->listName)}}">
                             <div class="cityPageIcon sanaye"></div>
-                            <div class="textCityPageIcon">صنایع‌دستی</div>
-                            <div class="textCityPageIcon">{{count($allSogatSanaie)}}</div>
+                            <div class="textCityPageIcon">{{__('صنایع‌دستی')}}</div>
+                            <div class="textCityPageIcon" style="color: #0076a3">{{count($allSogatSanaie)}}</div>
                         </a>
                         <div class="col-xs-4 cpLittleMenu">
                             <div class="cityPageIcon lebas"></div>
-                            <div class="textCityPageIcon">لباس محلی</div>
+                            <div class="textCityPageIcon">{{__('لباس محلی')}}</div>
                         </div>
                     </div>
                     <div class="clear-both"></div>
                     <div class="col-xs-12">
                         <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/12/' . $kind . '/' . $place->listName)}}">
                             <div class="cityPageIcon boom"></div>
-                            <div class="textCityPageIcon">بوم گردی</div>
-                            <div class="textCityPageIcon">{{count($allBoomgardy)}}</div>
+                            <div class="textCityPageIcon">{{__('بوم گردی')}}</div>
+                            <div class="textCityPageIcon" style="color: #0076a3">{{count($allBoomgardy)}}</div>
                         </a>
                         <div class="col-xs-4 cpLittleMenu">
                             <div class="cityPageIcon estelah"></div>
-                            <div class="textCityPageIcon">اصطلاحات محلی</div>
+                            <div class="textCityPageIcon">{{__('اصطلاحات محلی')}}</div>
                         </div>
                         {{--<div class="col-xs-4 cpLittleMenu"></div>--}}
                     </div>
@@ -281,412 +275,162 @@
             </div>
 
             <div class="row">
-                <div class="cpDescription cpBorderBottom" style="white-space: pre-line;">
-                    {{$place->description}}
-                </div>
+                @if(strlen($place->description) > 10)
+                    <div class="cpDescription cpBorderBottom" style="white-space: pre-line;">
+                        {{$place->description}}
+                    </div>
+                @endif
 
                 <div class="mainSuggestionMainDiv cpBorderBottom ng-scope">
-
                     @if(count($topPlaces['amaken']) > 4)
-                        <div id="newKoochita" class="homepage_shelves_widget ng-scope">
-                            <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show">
-                                <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
-
-                                    <div class="shelf_header">
-                                        <div class="shelf_title">
-                                            {{--<span class="shelf_header_icon ui_icon travelers-choice-badge"></span>--}}
-                                            <img src="{{URL::asset('images/icons/iconneg.svg')}}" class="nagLogo" alt="کوچیتا">
-                                            <a href="{{route('place.list', ['kindPlaceId' => 1, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">
-                                                <div class="shelf_title_container h3">
-                                                    <h3>محبوب‌ترین جاذبه‌ها&zwnj;</h3>
-                                                </div>
-                                            </a>
-                                        </div>
+                        <div class="topPlacesDivInCity">
+                            <div class="topPlacesDivInCityHeader">
+                                <img src="{{URL::asset('images/icons/iconneg.svg')}}" class="nagLogo" alt="کوچیتا">
+                                <a href="{{route('place.list', ['kindPlaceId' => 1, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">
+                                    <div class="shelf_title_container h3">
+                                        <h3>{{__('محبوب‌ترین جاذبه‌ها')}}</h3>
                                     </div>
-
-                                    <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
-                                        <div class="cpMainSug swiper-container">
-                                            <div class="swiper-wrapper position-relative">
-                                                @foreach($topPlaces['amaken'] as $item)
-                                                    <div class="swiper-slide position-relative">
-                                                    <img src="{{URL::asset('images/pin.png')}}" class="imageGoldPin">
-                                                    <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
-                                                        <div class="poi">
-                                                            <a href="{{$item->url}}" class="thumbnail">
-                                                                <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                                    <div class="prv_thumb has_image">
-                                                                        <div class="image_wrapper landscape landscapeWide topImage">
-                                                                            <img src="{{$item->pic}}" alt="{{$item->keyword}}" class="resizeImgClass">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-                                                            <div class="detail rtl">
-                                                                <a href="{{$item->url}}" class="item poi_name ui_link ng-binding">{{$item->name}}</a>
-                                                                <div class="item rating-widget">
-                                                                    <div class="prw_rup prw_common_location_rating_simple">
-                                                                        <span class="ui_bubble_rating bubble_{{$item->rate}}0"></span>
-                                                                    </div>
-                                                                    <span class="reviewCount ng-binding">{{$item->reviews}} </span><span>نقد </span>
-                                                                </div>
-                                                                <div class="item tags ng-binding">{{$item->city->name}} <span>در </span>
-                                                                    <span class="ng-binding">{{$item->state->name}}</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                @endforeach
-                                            </div>
-                                            <!-- Add Pagination -->
-                                            <div class="swiper-pagination"></div>
-                                            <!-- Add Arrows -->
-                                            <div class="swiper-button-next"></div>
-                                            <div class="swiper-button-prev"></div>
-                                        </div>
-                                    </div>
-                                </div>
+                                </a>
+                            </div>
+                            <div class="swiper-container mainSuggestion">
+                                <div id="topAmakenCityPage" class="swiper-wrapper" style="direction: rtl; position: relative;"></div>
+                                <div class="swiper-pagination"></div>
+                                <div class="swiper-button-next"></div>
+                                <div class="swiper-button-prev"></div>
                             </div>
                         </div>
+
+                        <script>
+                            createCityPageSuggestion('topAmakenCityPage', {!! $topPlaces['amaken'] !!});
+                        </script>
                     @endif
 
                     @if(count($topPlaces['restaurant']) > 4)
-                        <div id="newKoochita" class="homepage_shelves_widget ng-scope">
-                        <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show" style="">
-                            <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
-
-                                <div class="shelf_header">
-                                    <div class="shelf_title">
-                                        {{--<span class="shelf_header_icon ui_icon travelers-choice-badge"></span>--}}
-                                        <img src="{{URL::asset('images/icons/iconneg.svg')}}" class="nagLogo" alt="کوچیتا">
-                                        <a href="{{route('place.list', ['kindPlaceId' => 3, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">
-                                            <div class="shelf_title_container h3">
-                                                <h3>محبوب‌ترین رستوران‌ها&zwnj;</h3>
-                                            </div>
-                                        </a>
+                        <div class="topPlacesDivInCity">
+                            <div class="topPlacesDivInCityHeader">
+                                <img src="{{URL::asset('images/icons/iconneg.svg')}}" class="nagLogo" alt="کوچیتا">
+                                <a href="{{route('place.list', ['kindPlaceId' => 3, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">
+                                    <div class="shelf_title_container h3">
+                                        <h3>{{__('محبوب‌ترین رستوران‌ها')}}</h3>
                                     </div>
-                                </div>
-
-                                <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
-                                    <div class="cpMainSug swiper-container">
-                                        <div class="swiper-wrapper position-relative">
-                                            @foreach($topPlaces['restaurant'] as $item)
-                                                <div class="swiper-slide position-relative">
-                                                <img src="{{URL::asset('images/pin.png')}}" class="imageGoldPin">
-                                                <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
-                                                    <div class="poi">
-                                                        <a href="{{$item->url}}" class="thumbnail">
-                                                            <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                                <div class="prv_thumb has_image">
-                                                                    <div class="image_wrapper landscape landscapeWide topImage">
-                                                                        <img src="{{$item->pic}}" alt="{{$item->keyword}}" class="resizeImgClass">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <div class="detail rtl">
-                                                            <a href="{{$item->url}}" class="item poi_name ui_link ng-binding">{{$item->name}}</a>
-                                                            <div class="item rating-widget">
-                                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                                    <span class="ui_bubble_rating bubble_{{$item->rate}}0"></span>
-                                                                </div>
-                                                                <span class="reviewCount ng-binding">{{$item->reviews}} </span><span>نقد </span>
-                                                            </div>
-                                                            <div class="item tags ng-binding">{{$item->city->name}} <span>در </span>
-                                                                <span class="ng-binding">{{$item->state->name}}</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            @endforeach
-                                        </div>
-                                        <!-- Add Pagination -->
-                                        <div class="swiper-pagination"></div>
-                                        <!-- Add Arrows -->
-                                        <div class="swiper-button-next"></div>
-                                        <div class="swiper-button-prev"></div>
-                                    </div>
-                                </div>
+                                </a>
+                            </div>
+                            <div class="swiper-container mainSuggestion">
+                                <div id="topRestaurantInCity" class="swiper-wrapper" style="direction: rtl; position: relative;"></div>
+                                <div class="swiper-pagination"></div>
+                                <div class="swiper-button-next"></div>
+                                <div class="swiper-button-prev"></div>
                             </div>
                         </div>
-                    </div>
+                        <script>
+                            createCityPageSuggestion('topRestaurantInCity', {!! $topPlaces['restaurant'] !!});
+                        </script>
                     @endif
 
                     @if(count($topPlaces['hotels']) > 4)
-                        <div id="newKoochita" class="homepage_shelves_widget ng-scope">
-                        <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show" style="">
-                            <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
-
-                                <div class="shelf_header">
-                                    <div class="shelf_title">
-                                        {{--<span class="shelf_header_icon ui_icon travelers-choice-badge"></span>--}}
-                                        <img src="{{URL::asset('images/icons/iconneg.svg')}}" class="nagLogo" alt="کوچیتا">
-                                        <a href="{{route('place.list', ['kindPlaceId' => 4, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">
-                                            <div class="shelf_title_container h3">
-                                                <h3>محبوب‌ترین هتل‌ها&zwnj;</h3>
-                                            </div>
-                                        </a>
+                        <div class="topPlacesDivInCity">
+                            <div class="topPlacesDivInCityHeader">
+                                <img src="{{URL::asset('images/icons/iconneg.svg')}}" class="nagLogo" alt="کوچیتا">
+                                <a href="{{route('place.list', ['kindPlaceId' => 4, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">
+                                    <div class="shelf_title_container h3">
+                                        <h3>{{__('محبوب‌ترین هتل‌ها')}}</h3>
                                     </div>
-                                </div>
-
-                                <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
-                                    <div class="cpMainSug swiper-container">
-                                        <div class="swiper-wrapper position-relative">
-                                            @foreach($topPlaces['hotels'] as $item)
-                                                <div class="swiper-slide position-relative">
-                                                    <img src="{{URL::asset('images/pin.png')}}" class="imageGoldPin">
-                                                    <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
-                                                        <div class="poi">
-                                                            <a href="{{$item->url}}" class="thumbnail">
-                                                                <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                                    <div class="prv_thumb has_image">
-                                                                        <div class="image_wrapper landscape landscapeWide topImage">
-                                                                            <img src="{{$item->pic}}" alt="{{$item->keyword}}" class="resizeImgClass">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-                                                            <div class="detail rtl">
-                                                                <a href="{{$item->url}}" class="item poi_name ui_link ng-binding">{{$item->name}}</a>
-                                                                <div class="item rating-widget">
-                                                                    <div class="prw_rup prw_common_location_rating_simple">
-                                                                        <span class="ui_bubble_rating bubble_{{$item->rate}}0"></span>
-                                                                    </div>
-                                                                    <span class="reviewCount ng-binding">{{$item->reviews}} </span><span>نقد </span>
-                                                                </div>
-                                                                <div class="item tags ng-binding">{{$item->city->name}} <span>در </span>
-                                                                    <span class="ng-binding">{{$item->state->name}}</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                        <!-- Add Pagination -->
-                                        <div class="swiper-pagination"></div>
-                                        <!-- Add Arrows -->
-                                        <div class="swiper-button-next"></div>
-                                        <div class="swiper-button-prev"></div>
-                                    </div>
-                                </div>
+                                </a>
+                            </div>
+                            <div class="swiper-container mainSuggestion">
+                                <div id="topHotelCityPage" class="swiper-wrapper" style="direction: rtl; position: relative;"></div>
+                                <div class="swiper-pagination"></div>
+                                <div class="swiper-button-next"></div>
+                                <div class="swiper-button-prev"></div>
                             </div>
                         </div>
-                    </div>
+                        <script>
+                            createCityPageSuggestion('topHotelCityPage', {!! $topPlaces['hotels'] !!});
+                        </script>
                     @endif
 
                     @if(count($topPlaces['majara']) > 4)
-                        <div id="newKoochita" class="homepage_shelves_widget ng-scope">
-                        <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show" style="">
-                            <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
-
-                                <div class="shelf_header">
-                                    <div class="shelf_title">
-                                        {{--<span class="shelf_header_icon ui_icon travelers-choice-badge"></span>--}}
-                                        <img src="{{URL::asset('images/icons/iconneg.svg')}}" class="nagLogo" alt="کوچیتا">
-                                        <a href="{{route('place.list', ['kindPlaceId' => 6, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">
-                                            <div class="shelf_title_container h3">
-                                                <h3>محبوب‌ترین طبیعت گردی&zwnj;</h3>
-                                            </div>
-                                        </a>
+                        <div class="topPlacesDivInCity">
+                            <div class="topPlacesDivInCityHeader">
+                                <img src="{{URL::asset('images/icons/iconneg.svg')}}" class="nagLogo" alt="کوچیتا">
+                                    <a href="{{route('place.list', ['kindPlaceId' => 6, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">
+                                    <div class="shelf_title_container h3">
+                                        <h3>{{__('محبوب‌ترین طبیعت گردی')}}</h3>
                                     </div>
-                                </div>
-
-                                <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
-                                    <div class="cpMainSug swiper-container">
-                                        <div class="swiper-wrapper position-relative">
-                                            @foreach($topPlaces['majara'] as $item)
-                                                <div class="swiper-slide position-relative">
-                                                    <img src="{{URL::asset('images/pin.png')}}" class="imageGoldPin">
-                                                    <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
-                                                        <div class="poi">
-                                                            <a href="{{$item->url}}" class="thumbnail">
-                                                                <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                                    <div class="prv_thumb has_image">
-                                                                        <div class="image_wrapper landscape landscapeWide topImage">
-                                                                            <img src="{{$item->pic}}" alt="{{$item->keyword}}" class="resizeImgClass">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-                                                            <div class="detail rtl">
-                                                                <a href="{{$item->url}}" class="item poi_name ui_link ng-binding">{{$item->name}}</a>
-                                                                <div class="item rating-widget">
-                                                                    <div class="prw_rup prw_common_location_rating_simple">
-                                                                        <span class="ui_bubble_rating bubble_{{$item->rate}}0"></span>
-                                                                    </div>
-                                                                    <span class="reviewCount ng-binding">{{$item->reviews}} </span><span>نقد </span>
-                                                                </div>
-                                                                <div class="item tags ng-binding">{{$item->city->name}} <span>در </span>
-                                                                    <span class="ng-binding">{{$item->state->name}}</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                        <!-- Add Pagination -->
-                                        <div class="swiper-pagination"></div>
-                                        <!-- Add Arrows -->
-                                        <div class="swiper-button-next"></div>
-                                        <div class="swiper-button-prev"></div>
-                                    </div>
-                                </div>
+                                </a>
+                            </div>
+                            <div class="swiper-container mainSuggestion">
+                                <div id="topMajaraCityPage" class="swiper-wrapper" style="direction: rtl; position: relative;"></div>
+                                <div class="swiper-pagination"></div>
+                                <div class="swiper-button-next"></div>
+                                <div class="swiper-button-prev"></div>
                             </div>
                         </div>
-                    </div>
+                        <script>
+                            createCityPageSuggestion('topMajaraCityPage', {!! $topPlaces['majara'] !!});
+                        </script>
                     @endif
 
                     @if(count($topPlaces['sogatSanaie']) > 4)
-                        <div id="newKoochita" class="homepage_shelves_widget ng-scope">
-                        <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show">
-                            <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
-
-                                <div class="shelf_header">
-                                    <div class="shelf_title">
-                                        {{--<span class="shelf_header_icon ui_icon travelers-choice-badge"></span>--}}
-                                        <img src="{{URL::asset('images/icons/iconneg.svg')}}" class="nagLogo" alt="کوچیتا">
-                                        <a href="{{route('place.list', ['kindPlaceId' => 10, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">
-                                            <div class="shelf_title_container h3">
-                                                <h3>محبوب‌ترین سوغات و صنایع‌دستی&zwnj;</h3>
-                                            </div>
-                                        </a>
+                        <div class="topPlacesDivInCity">
+                            <div class="topPlacesDivInCityHeader">
+                                <img src="{{URL::asset('images/icons/iconneg.svg')}}" class="nagLogo" alt="کوچیتا">
+                                <a href="{{route('place.list', ['kindPlaceId' => 10, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">
+                                    <div class="shelf_title_container h3">
+                                        <h3>{{__('محبوب‌ترین سوغات و صنایع‌دستی')}}</h3>
                                     </div>
-                                </div>
-
-                                <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
-                                    <div class="cpMainSug swiper-container">
-                                        <div class="swiper-wrapper position-relative">
-                                            @foreach($topPlaces['sogatSanaie'] as $item)
-                                                <div class="swiper-slide position-relative">
-                                                    <img src="{{URL::asset('images/pin.png')}}" class="imageGoldPin">
-                                                    <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
-                                                        <div class="poi">
-                                                            <a href="{{$item->url}}" class="thumbnail">
-                                                                <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                                    <div class="prv_thumb has_image">
-                                                                        <div class="image_wrapper landscape landscapeWide topImage">
-                                                                            <img src="{{$item->pic}}" alt="{{$item->keyword}}" class="resizeImgClass">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-                                                            <div class="detail rtl">
-                                                                <a href="{{$item->url}}" class="item poi_name ui_link ng-binding">{{$item->name}}</a>
-                                                                <div class="item rating-widget">
-                                                                    <div class="prw_rup prw_common_location_rating_simple">
-                                                                        <span class="ui_bubble_rating bubble_{{$item->rate}}0"></span>
-                                                                    </div>
-                                                                    <span class="reviewCount ng-binding">{{$item->reviews}} </span><span>نقد </span>
-                                                                </div>
-                                                                <div class="item tags ng-binding">{{$item->city->name}} <span>در </span>
-                                                                    <span class="ng-binding">{{$item->state->name}}</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                        <!-- Add Pagination -->
-                                        <div class="swiper-pagination"></div>
-                                        <!-- Add Arrows -->
-                                        <div class="swiper-button-next"></div>
-                                        <div class="swiper-button-prev"></div>
-                                    </div>
-                                </div>
+                                </a>
+                            </div>
+                            <div class="swiper-container mainSuggestion">
+                                <div id="topSogatCityPage" class="swiper-wrapper" style="direction: rtl; position: relative;"></div>
+                                <div class="swiper-pagination"></div>
+                                <div class="swiper-button-next"></div>
+                                <div class="swiper-button-prev"></div>
                             </div>
                         </div>
-                    </div>
+                        <script>
+                            createCityPageSuggestion('topSogatCityPage', {!! $topPlaces['sogatSanaie'] !!});
+                        </script>
                     @endif
 
                     @if(count($topPlaces['mahaliFood']) > 4)
-                        <div id="newKoochita" class="homepage_shelves_widget ng-scope">
-                        <div infinite-scroll="myPagingFunction()" class="prw_rup prw_shelves_shelf_widget" ng-show="show" style="">
-                            <div class="shelf_container poi_by_tag rebrand shelf_row_3 loaderOff">
-
-                                <div class="shelf_header">
-                                    <div class="shelf_title">
-                                        {{--<span class="shelf_header_icon ui_icon travelers-choice-badge"></span>--}}
-                                        <img src="{{URL::asset('images/icons/iconneg.svg')}}" class="nagLogo" alt="کوچیتا">
-                                        <a href="{{route('place.list', ['kindPlaceId' => 11, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">
-                                            <div class="shelf_title_container h3">
-                                                <h3>محبوب‌ترین غذاهای محلی&zwnj;</h3>
-                                            </div>
-                                        </a>
+                        <div class="topPlacesDivInCity">
+                            <div class="topPlacesDivInCityHeader">
+                                <img src="{{URL::asset('images/icons/iconneg.svg')}}" class="nagLogo" alt="کوچیتا">
+                                <a href="{{route('place.list', ['kindPlaceId' => 11, 'mode' => $locationName['kindState'], 'city' => $locationName['cityNameUrl']])}}">
+                                    <div class="shelf_title_container h3">
+                                        <h3>{{__('محبوب‌ترین غذاهای محلی')}}</h3>
                                     </div>
-                                </div>
-
-                                <div class="shelf_item_container ui_columns is-mobile is-multiline" style="width: 100%">
-                                    <div class="cpMainSug swiper-container">
-                                        <div class="swiper-wrapper position-relative">
-                                            @foreach($topPlaces['mahaliFood'] as $item)
-                                                <div class="swiper-slide position-relative">
-                                                    <img src="{{URL::asset('images/pin.png')}}" class="imageGoldPin">
-                                                    <div class="prw_rup prw_shelves_rebrand_poi_shelf_item_widget ui_column is-6-mobile ng-scope position-relative">
-                                                        <div class="poi">
-                                                            <a href="{{$item->url}}" class="thumbnail">
-                                                                <div class="prw_rup prw_common_thumbnail_no_style_responsive">
-                                                                    <div class="prv_thumb has_image">
-                                                                        <div class="image_wrapper landscape landscapeWide topImage">
-                                                                            <img src="{{$item->pic}}" alt="{{$item->keyword}}" class="resizeImgClass">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-                                                            <div class="detail rtl">
-                                                                <a href="{{$item->url}}" class="item poi_name ui_link ng-binding">{{$item->name}}</a>
-                                                                <div class="item rating-widget">
-                                                                    <div class="prw_rup prw_common_location_rating_simple">
-                                                                        <span class="ui_bubble_rating bubble_{{$item->rate}}0"></span>
-                                                                    </div>
-                                                                    <span class="reviewCount ng-binding">{{$item->reviews}} </span><span>نقد </span>
-                                                                </div>
-                                                                <div class="item tags ng-binding">{{$item->city->name}} <span>در </span>
-                                                                    <span class="ng-binding">{{$item->state->name}}</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                        <!-- Add Pagination -->
-                                        <div class="swiper-pagination"></div>
-                                        <!-- Add Arrows -->
-                                        <div class="swiper-button-next"></div>
-                                        <div class="swiper-button-prev"></div>
-                                    </div>
-                                </div>
+                                </a>
+                            </div>
+                            <div class="swiper-container mainSuggestion">
+                                <div id="topFoodCityPage" class="swiper-wrapper" style="direction: rtl; position: relative;"></div>
+                                <div class="swiper-pagination"></div>
+                                <div class="swiper-button-next"></div>
+                                <div class="swiper-button-prev"></div>
                             </div>
                         </div>
-                    </div>
+                        <script>
+                            createCityPageSuggestion('topFoodCityPage', {!! $topPlaces['mahaliFood'] !!});
+                        </script>
                     @endif
+
                 </div>
 
             </div>
 
-            <div class="col-xs-12">
-                <div class="widget-head widget-head-45">
-                    <strong class="widget-title">پر طرفدار ها</strong>
-                    <div class="widget-head-bar"></div>
-                    <div class="widget-head-line"></div>
-                </div>
+            <div class="col-xs-12 articleDiv">
                 <div class="row">
                     <article class="im-article content-2col col-md-6 col-sm-12">
                         <div class="im-entry-thumb">
-                            <a class="im-entry-thumb-link" href="{{$post[0]->url}}"
-                               title="{{$post[0]->slug}}">
+                            <a class="im-entry-thumb-link" href="{{$post[0]->url}}" title="{{$post[0]->slug}}">
                                 <img class="lazy-img" src="{{$post[0]->pic}}" alt="{{$post[0]->keyword}}" style="opacity: 1;">
                             </a>
                             <header class="im-entry-header">
                                 <div class="im-entry-category">
                                     <div class="iranomag-meta clearfix">
                                         <div class="cat-links im-meta-item">
-                                            <a style="background-color: #666; color: #fff !important;" href="{{$post[0]->catURL}}"
-                                               title="{{$post[0]->category}}">{{$post[0]->category}}</a>
+                                            <a style="background-color: #666; color: #fff !important;" href="{{$post[0]->catURL}}"title="{{$post[0]->category}}">{{$post[0]->category}}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -721,16 +465,15 @@
                                 @for($i = 1; $i <= 4 && $i < count($post); $i++)
                                     <li class="widget-10104im-widgetclearfix">
                                     <figure class="im-widget-thumb">
-                                        <a href="{{$post[$i]->url}}" title="{{$post[$i]->title}}">
-                                            <img src="{{$post[$i]->pic}}" alt="{{$post[$i]->keyword}}">
+                                        <a href="{{$post[$i]->url}}" title="{{$post[$i]->title}}" style="height: 100%;">
+                                            <img src="{{$post[$i]->pic}}" alt="{{$post[$i]->keyword}}" class="resizeImgClass" style="width: 100%">
                                         </a>
                                     </figure>
                                     <div class="im-widget-entry">
                                         <header class="im-widget-entry-header">
-                                            <h4 class="im-widget-entry-title">
-                                                <a href="{{$post[$i]->url}}"
-                                                   title="{{$post[$i]->title}}">{{$post[$i]->title}}</a>
-                                            </h4>
+                                            <a class="im-widget-entry-title lessShowText" href="{{$post[$i]->url}}" title="{{$post[$i]->title}}">
+                                                {{$post[$i]->title}}
+                                            </a>
                                         </header>
                                         <div class="iranomag-meta clearfix">
                                             <div class="posted-on im-meta-item">
@@ -755,29 +498,29 @@
                 </div>
             </div>
 
-            <div class="col-xs-12 cpBorderBottom">
+            <div class="col-xs-12 cpBorderBottom" style="padding: 0px">
                 <div class="cpMap" style="background-color: darkred">
                     <div id="cpMap" class="prv_map clickable full-width full-height"></div>
                 </div>
                 <div class="cpMapList" id="show">
-                    <img class="cpMapCategory" id="hotelImg" src="{{URL::asset('images/mapIcon/mhotel.png')}}"
-                         onclick="toggleIconInMap('hotelImg')">
-                    <img class="cpMapCategory" id="restImg" src="{{URL::asset('images/mapIcon/mrest.png')}}"
-                         onclick="toggleIconInMap('restImg')">
-                    <img class="cpMapCategory" id="fastImg" src="{{URL::asset('images/mapIcon/mfast.png')}}"
-                         onclick="toggleIconInMap('fastImg')">
-                    <img class="cpMapCategory" id="musImg" src="{{URL::asset('images/mapIcon/matr_mus.png')}}"
-                         onclick="toggleIconInMap('musImg')">
-                    <img class="cpMapCategory" id="plaImg" src="{{URL::asset('images/mapIcon/matr_pla.png')}}"
-                         onclick="toggleIconInMap('plaImg')">
-                    <img class="cpMapCategory" id="shcImg" src="{{URL::asset('images/mapIcon/matr_shc.png')}}"
-                         onclick="toggleIconInMap('shcImg')">
-                    <img class="cpMapCategory" id="funImg" src="{{URL::asset('images/mapIcon/matr_fun.png')}}"
-                         onclick="toggleIconInMap('funImg')">
-                    <img class="cpMapCategory" id="advImg" src="{{URL::asset('images/mapIcon/matr_adv.png')}}"
-                         onclick="toggleIconInMap('advImg')">
-                    <img class="cpMapCategory" id="natImg" src="{{URL::asset('images/mapIcon/matr_nat.png')}}"
-                         onclick="toggleIconInMap('natImg')">
+                    <span class="mapIconsCommon boomgardyMapIcon" onclick="toggleIconInMap(this, 'boomgardy')">
+                        <span class="mapIconIcon boomIcon"></span>
+                    </span>
+                    <span class="mapIconsCommon hotelMapIcon" onclick="toggleIconInMap(this, 'hotel')">
+                        <span class="mapIconIcon hotelIcon"></span>
+                    </span>
+                    <span class="mapIconsCommon amakenMapIcon" onclick="toggleIconInMap(this, 'amaken')">
+                        <span class="mapIconIcon atraction"></span>
+                    </span>
+                    <span class="mapIconsCommon restaurantMapIcon" onclick="toggleIconInMap(this, 'restaurant')">
+                        <span class="mapIconIcon restaurantIcon"></span>
+                    </span>
+                    <span class="mapIconsCommon majaraMapIcon" onclick="toggleIconInMap(this, 'majara')">
+                        <span class="mapIconIcon majaraIcon"></span>
+                    </span>
+                    <span class="mapIconsCommon moreInfoMapIcon" onclick="toggleIconInMap(this, 'moreInfo')">
+                        <span class="mapIconIcon moreInfoIcon">i</span>
+                    </span>
                 </div>
             </div>
 
@@ -785,15 +528,16 @@
     </div>
 </div>
 
-
-
 @include('layouts.placeFooter')
 
-@include('hotelDetailsPopUp')
-
-<script src="{{URL::asset('js/cityPage/cityPageOffer.js')}}"></script>
-{{--<script !src="">console.log('hello')</script>--}}
 <script>
+
+    $(window).ready(function(){
+        var height = $('#cpBorderLeft').height();
+        $('#commentSection').css('height', height);
+    });
+
+    runMainSwiper();
     resizeFitImg('resizeImgClass');
 
     var reviews = {!! json_encode($reviews) !!};
@@ -859,10 +603,6 @@
         $(element).parent().prev().removeClass('display-none');
     }
 
-    $(window).ready(function(){
-        var height = $('#cpBorderLeft').height();
-        $('.cpCommentBox').css('max-height', height);
-    });
 </script>
 
 {{--map--}}
@@ -1066,7 +806,9 @@
         }
     }
 
-    function toggleIconInMap(_id) {
+    function toggleIconInMap(_element, _id) {
+        $(_element).toggleClass('offMapIcons');
+
         var src = document.getElementById(_id).src;
         var sec = src.split('.');
         var kind;
@@ -1123,37 +865,6 @@
 
 <script src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyCdVEd4L2687AfirfAnUY1yXkx-7IsCER0&callback=init"></script>
 <script>
-    var swiper = new Swiper('.cpMainSug', {
-        slidesPerGroup: 1,
-        loop: true,
-        loopFillGroupWithBlank: true,
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
-        breakpoints: {
-            450: {
-                slidesPerView: 1,
-                spaceBetween: 0,
-            },
-            520: {
-                slidesPerView: 2,
-                spaceBetween: 20,
-            },
-            768: {
-                slidesPerView: 2,
-                spaceBetween: 20,
-            },
-            992: {
-                slidesPerView: 3,
-                spaceBetween: 20,
-            },
-            10000: {
-                slidesPerView: 4,
-                spaceBetween: 20,
-            }
-        }
-    });
 
     var picSwiper = new Swiper('.cityPagePics', {
         slidesPerGroup: 1,

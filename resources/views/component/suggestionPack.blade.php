@@ -19,7 +19,7 @@
                     </div>
                 </a>
                 <div class="suggestionPackDetailDiv">
-                    <a href="##url##" class="suggestionPackName">##name##</a>
+                    <a href="##url##" class="suggestionPackName lessShowText">##name##</a>
                     <div class="suggestionPackReviewRow" style="display: ##citySection##">
                         <span class="ui_bubble_rating bubble_##rate##0"></span>
                         <span class="suggestionPackReviewCount"> ##review## </span>

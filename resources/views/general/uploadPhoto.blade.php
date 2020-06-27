@@ -604,19 +604,20 @@
     }
 
     function cropImg(){
-        openLoading();
+        $('#fullPageLoader').css('display', 'flex');
         var canvas1;
         canvas1 = cropper.getCroppedCanvas();
         $('#' + cropResult).attr('src', canvas1.toDataURL());
 
         cancelCrop();
-        closeLoading();
     }
 
     function cancelCrop(){
         $('#modal').modal('hide');
         $('#photoEditor').removeClass('hidden');
         $('#editPane').addClass('hidden');
+
+        $('#fullPageLoader').css('display', 'none');
     }
 
     function goToPage3() {

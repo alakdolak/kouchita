@@ -409,13 +409,21 @@ DIV.ppr_rup.ppr_priv_global_nav_action_profile .username::before {
     z-index: 999;
 }
 
-
+.mainHeaderSearch{
+    margin-right: 30px;
+    background-color: white;
+    padding: 7px 10px;
+    border-radius: 30px;
+    font-weight: 600;
+    color: #4dc7bc;
+    cursor: pointer;
+}
 .authLanguageMenu{
     display: flex;
     flex-direction: column;
-    min-height: auto;
+    min-height: auto !important;
     padding-top: 12px;
-    width: 88px;
+    width: 88px !important;
     text-align: center;
 }
 .authLang{

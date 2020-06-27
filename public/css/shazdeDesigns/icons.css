@@ -11,6 +11,7 @@
 }
 .atraction:before {
     content: '\E002';
+    font-family: 'Shazde_Regular2' !important;
 }
 .restaurant:before {
     content: '\E001';
@@ -24,6 +25,13 @@
 .majara:before {
     content: '\E009';
 }
+.majaraIcon:before {
+    content: '\E009';
+    font-family: Shazde_Regular2 !important;
+}
+.moreInfoIcon{
+    font-family: monospace;
+}
 .sanaye:before {
     content: '\E00A';
 }
@@ -35,6 +43,8 @@
 }
 .boomIcon:before {
     content: '\E05B';
+    font-family: 'Shazde_Regular2' !important;
+
 }
 
 .estelah:before {
@@ -142,6 +152,10 @@
     font-weight: 700;
     margin-bottom: 5px;
     text-align: center;
+}
+.mirorIcon{
+    display: inline-block;
+    transform: rotate(90deg);
 }
 
 .LikeIcon:before{

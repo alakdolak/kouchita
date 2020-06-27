@@ -6,16 +6,48 @@
     <link rel="stylesheet" href="{{URL::asset('css/ltr/mainPageHeader.css')}}">
 @endif
 
-{{--pc header--}}
+@if(!Request::is('main') && !Request::is('main/*') && !Request::is('/'))
+    <style>
+        .headerSecondSection{
+            display: none;
+        }
+        .mainHeader{
+            background: #4DC7BC;
+        }
+        .headerIconCommon:before{
+            color: white;
+        }
+        .nameOfIconHeaders{
+            color: white;
+        }
+        .headerAuthButton:hover .headerIconCommon:before{
+            color: white;
+        }
+        .headerAuthButton:hover .nameOfIconHeaders{
+            color: white;
+        }
+    </style>
+@endif
+
+
+    {{--pc header--}}
 <div class="mainHeader hideOnPhone">
     <div class="container headerContainer">
         <a href="{{route('main')}}" class="headerPcLogoDiv" >
             <img src="{{URL::asset('images/icons/mainLogo.png')}}" alt="{{__('کوچیتا')}}" class="headerPcLogo"/>
         </a>
-
-        <div class="headerSearchBar">
-            <span class="headerSearchIcon iconFamily searchIcon" onclick="openMainSearch(0) // in mainSearch.blade.php"></span>
-        </div>
+        @if(Request::is('main') || Request::is('main/*') || Request::is('/'))
+            <div class="headerSearchBar">
+                <span class="headerSearchIcon iconFamily searchIcon" onclick="openMainSearch(0) // in mainSearch.blade.php"></span>
+            </div>
+        @else
+            @if(isset($locationName['cityNameUrl']))
+                <div class="mainHeaderSearch arrowAfter" onclick="openMainSearch(0)">
+                    <span class="iconFamily searchIcon mirorIcon" style="font-size: 17px"></span>
+                    {{$locationName['cityName']}}
+                </div>
+            @endif
+        @endif
 
         <div class="headerButtonsSection">
 

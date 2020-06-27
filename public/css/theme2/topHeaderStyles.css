@@ -150,6 +150,58 @@ a:link {
     color: white;
     border-radius: 5px;
     text-align: center;
+    cursor: pointer;
+}
+.lessShowText{
+    vertical-align: middle;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.mapIconsCommon{
+    width: 60px;
+    height: 60px;
+    background: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: .2s;
+    margin-left: 10px;
+}
+.offMapIcons{
+    background: #494949 !important;
+}
+.mapIconIcon{
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: solid 2px;
+    font-size: 32px;
+}
+.boomgardyMapIcon{
+    background: #00aeef;
+}
+.hotelMapIcon{
+    background: #00516f;
+}
+.amakenMapIcon{
+    background: #ec008c;
+}
+.restaurantMapIcon{
+    background: #fff200;
+}
+.majaraMapIcon{
+    background: #ed1c24;
+}
+.moreInfoMapIcon{
+    background: #01771a;
 }
 
 @keyframes gradient {

@@ -40,11 +40,6 @@
     color: #333333;
     display: block;
     margin-bottom: 4px;
-    vertical-align: middle;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    outline: none;
     text-decoration: none !important;
 }
 

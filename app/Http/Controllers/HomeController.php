@@ -482,8 +482,8 @@ class HomeController extends Controller
             else
                 $item->timeAgo = '';
 
-            if(strlen($item->text) > 80)
-                $item->summery = mb_substr($item->text, 0, 80, 'utf-8');
+            if(strlen($item->text) > 180)
+                $item->summery = mb_substr($item->text, 0, 180, 'utf-8');
 
         }
 
@@ -1732,11 +1732,12 @@ class HomeController extends Controller
                 $item->pic = getPlacePic($item->id, $kindPlace->id);
                 $item->url = createUrl($kindPlace->id, $item->id, 0, 0);
                 $item->rate = getRate($item->id, $kindPlace->id)[1];
-                $item->city = Cities::find($item->cityId);
-                $item->state = State::find($item->city->stateId);
+                $item->cityV = Cities::find($item->cityId);
+                $item->city =  $item->cityV->name;
+                $item->state = State::find($item->cityV->stateId)->name;
 
                 $condition = ['activityId' => $activityId, 'placeId' => $item->id, 'kindPlaceId' => $kindPlace->id, 'confirm' => 1, 'relatedTo' => 0];
-                $item->reviews = LogModel::where($condition)->count();
+                $item->review = LogModel::where($condition)->count();
             }
         }
 
