@@ -1229,20 +1229,47 @@ function getCityPic($cityId){
 }
 
 //    http://image.intervention.io/
-function resizeImage($pic, $size){
+function resizeImage($pic, $size, $fileName = ''){
     try {
         $image = $pic;
-        $randNum = random_int(100,999);
-        $fileName = time() . $randNum. '.' . $image->getClientOriginalExtension();
+        if($fileName == '') {
+            $randNum = random_int(100, 999);
+            $fileName = time() . $randNum . '.' . $image->getClientOriginalExtension();
+        }
 
         foreach ($size as $item){
             $input['imagename'] = $item['name'] .  $fileName ;
-            $destinationPath = public_path($item['destination']);
+            $destinationPath = $item['destination'];
             $img = \Image::make($image->getRealPath());
-            $img->resize($item['width'], $item['height'], function ($constraint) {
+            $width = $img->width();
+            $height = $img->height();
+
+            if($item['height'] != null && $item['width'] != null){
+                $ration = $width/$height;
+                $nWidth = $ration * $item['height'];
+                $nHeight = $item['width'] / $ration;
+                if($nWidth < $item['width']) {
+                    $height = $nHeight;
+                    $width = $item['width'];
+                }
+                else if($nHeight < $item['height']) {
+                    $width = $nWidth;
+                    $height = $item['height'];
+                }
+            }
+            else {
+                if ($item['width'] == null || $width > $item['width'])
+                    $width = $item['width'];
+
+                if ($item['height'] == null || $height > $item['height'])
+                    $height = $item['height'];
+            }
+
+            $img->resize($width, $height, function ($constraint) {
                 $constraint->aspectRatio();
             })->save($destinationPath.'/'.$input['imagename']);
         }
+
         return $fileName;
     }
     catch (Exception $exception){

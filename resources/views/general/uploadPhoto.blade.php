@@ -374,7 +374,6 @@
 
         $('.titleOfUploadPhoto').text(_title);
         uploadPhotoUrl = _uploadUrl;
-        //aditionalData must be json format
         additionalData = _additionalData;
 
         if(!checkLogin())
@@ -435,6 +434,9 @@
         $('#editPane').removeClass('hidden');
     }
 
+
+    var squerImg;
+    var reqImg;
     function resizeImg(){
         var name = document.getElementById('uploadPhotoPicName').value;
         var alt = document.getElementById('uploadPhotoPicAlt').value;
@@ -442,6 +444,8 @@
 
         placeIdUploadPhoto = $('#placeIdUploadPhoto').val();
         kindPlaceIdUploadPhoto = $('#kindPlaceIdUploadPhoto').val();
+
+        document.getElementById('photographerErrors').innerText = '';
 
         if($('#uploadPhotoRole').is(":checked") && name.trim().length > 0 && description.trim().length <= 100 && kindPlaceIdUploadPhoto != 0 && placeIdUploadPhoto != 0) {
 
@@ -458,68 +462,37 @@
             var squ = document.getElementById('squarePicUploadPhoto');
 
             var cropperSqu = new Cropper(squ, {
-                viewMode: 3,
-                aspectRatio: 1 / 1,
-                autoCropArea: 1,
                 ready: function () {
-                    var canvasl = cropperSqu.getCroppedCanvas({
-                        width: 250,
-                        height: 250,
-                    });
-                    var canvast = cropperSqu.getCroppedCanvas({
-                        width: 150,
-                        height: 150,
-                    });
+                    var squerCanvas = cropperSqu.getCroppedCanvas();
+                    squerCanvas.toBlob(function (blob){
+                        squerImg = blob;
+                        cropperSqu.destroy();
+                        cropperSqu = null;
 
-                    canvasl.toBlob(function (blob) {
-                        lImage = blob;
-                        canvast.toBlob(function (blob) {
-                            tImage = blob;
-                            cropperSqu.destroy();
-                            cropperSqu = null;
+                        var cropperReq = new Cropper(req, {
+                            ready: function () {
+                                var reqCanvas = cropperReq.getCroppedCanvas();
+                                reqCanvas.toBlob(function (blob) {
+                                    reqImg = blob;
 
-                            var cropperReq = new Cropper(req, {
-                                viewMode: 3,
-                                aspectRatio: 3 / 2,
-                                autoCropArea: 1,
-                                ready: function () {
-                                    var canvasf = cropperReq.getCroppedCanvas({
-                                        width: 300,
-                                        height: 200
-                                    });
-                                    var canvass = cropperReq.getCroppedCanvas({
-                                        width: 610,
-                                        height: 406,
-                                    });
+                                    cropperReq.destroy();
+                                    cropperReq = null;
 
-                                    canvasf.toBlob(function (blob) {
-                                        fImage = blob;
-                                        canvass.toBlob(function (blob) {
-                                            sImage = blob;
-                                            cropperReq.destroy();
-                                            cropperReq = null;
+                                    // uploadPhotoFormData.append('pic', '');
+                                    // uploadPhotoFormData.append('fileName', '');
+                                    // uploadPhotoFormData.append('fileKind', '');
 
-                                            uploadPhotoFormData.append('pic', '');
-                                            uploadPhotoFormData.append('fileName', '');
-                                            uploadPhotoFormData.append('fileKind', '');
+                                    mainImage = b64toBlob(mainPicUploadPhoto);
+                                    submitUpload('mainFile');
+                                });
 
-                                            mainImage = b64toBlob(mainPicUploadPhoto);
-                                            submitUpload('mainFile');
-                                        });
-                                    });
-
-                                }
-                            });
-
+                            }
                         });
                     });
-
                 }
             });
         }
         else {
-            var fieldError = false;
-            var checkboxError = false;
             var text = '';
             if(name == null || name == '') {
                 document.getElementById('uploadPhotoPicNameDiv').classList.add('errorField');
@@ -535,9 +508,8 @@
                 text += '{{__('لطفا مشخص کنید که عکس برای چه مکانی است.')}}\n';
             }
 
-            if(!$('#photographerRole').is(":checked")){
+            if(!$('#photographerRole').is(":checked"))
                 text += '{{__('تایید مقررات اجباری است')}}';
-            }
 
             document.getElementById('photographerErrors').innerText = text;
         }
@@ -549,17 +521,11 @@
             case 'mainFile':
                 im = mainImage;
                 break;
-            case 'l':
-                im = lImage;
+            case 'req':
+                im = reqImg;
                 break;
-            case 's':
-                im = sImage;
-                break;
-            case 't':
-                im = tImage;
-                break;
-            case 'f':
-                im = fImage;
+            case 'squ':
+                im = squerImg;
                 break;
         }
 
@@ -581,21 +547,16 @@
                     mainFileName = response[1];
                     switch (type){
                         case 'mainFile':
-                            submitUpload('l');
+                            submitUpload('req');
                             break;
-                        case 'l':
-                            submitUpload('s');
+                        case 'req':
+                            submitUpload('squ');
                             break;
-                        case 's':
-                            submitUpload('f');
-                            break;
-                        case 'f':
-                            submitUpload('t');
-                            break;
-                        case 't':
+                        case 'squ':
                             mainFilesUploaded[mainFilesUploaded.length] = mainPicUploadPhoto;
                             goToPage3();
                             break;
+
                     }
                 }
                 else if(response[0] == 'nok1'){
@@ -717,6 +678,7 @@
             majaraFilter = 1;
             sogatSanaieFilter = 1;
             mahaliFoodFilter = 1;
+            boomgardyFilter = 1;
 
 
             $.ajax({
@@ -730,6 +692,7 @@
                     'majaraFilter': majaraFilter,
                     'sogatSanaieFilter': sogatSanaieFilter,
                     'mahaliFoodFilter': mahaliFoodFilter,
+                    'boomgardyFilter': boomgardyFilter,
                     'selectedCities': cities,
                     'mode': 'city'
                 },
@@ -756,6 +719,8 @@
                             icon = '<div class="icons traditionalFood spIcons"></div>';
                         else if(response[i].kindPlace == 'صنایع سوغات')
                             icon = '<div class="icons souvenirIcon spIcons"></div>';
+                        else if(response[i].kindPlace == 'بوم گردی')
+                            icon = '<div class="icons boomIcon spIcons"></div>';
                         else
                             icon = '<div class="icons touristAttractions spIcons"></div>';
 

@@ -318,7 +318,7 @@ class AjaxController extends Controller {
 
         if(isset($_POST["hotelFilter"]) && isset($_POST["amakenFilter"]) && isset($_POST["restaurantFilter"])
             && isset($_POST["majaraFilter"]) && isset($_POST["mahaliFoodFilter"])
-            && isset($_POST["key"]) && isset($_POST["selectedCities"]) && isset($_POST["sogatSanaieFilter"])) {
+            && isset($_POST["key"]) && isset($_POST["selectedCities"]) && isset($_POST["sogatSanaieFilter"]) && isset($_POST["boomgardyFilter"])) {
 
             $cities = $_POST["selectedCities"];
 
@@ -406,6 +406,12 @@ class AjaxController extends Controller {
                     $target = array_merge($target, DB::select("select mahaliFood.name, mahaliFood.id, cities.name as cityName, state.name as stateName, place.id as kindPlaceId, place.name as kindPlace from mahaliFood, cities, place, state WHERE place.name = 'غذای محلی' and cities.id = cityId AND cities.stateId = state.id and mahaliFood.name LIKE '%$key%'"));
                 else
                     $target = array_merge($target, DB::select("select mahaliFood.name, mahaliFood.id, cities.name as cityName, state.name as stateName, place.id as kindPlaceId, place.name as kindPlace from mahaliFood, cities, place, state WHERE place.name = 'غذای محلی' and cities.id = cityId AND cities.stateId = state.id and mahaliFood.name LIKE '%$key%' and cityId IN (" . $cityConstraint . ")"));
+            }
+            if($_POST["boomgardyFilter"] == 1) {
+                if($allow)
+                    $target = array_merge($target, DB::select("select boomgardies.name, boomgardies.id, cities.name as cityName, state.name as stateName, place.id as kindPlaceId, place.name as kindPlace from boomgardies, cities, place, state WHERE place.name = 'بوم گردی' and cities.id = cityId AND cities.stateId = state.id and boomgardies.name LIKE '%$key%'"));
+                else
+                    $target = array_merge($target, DB::select("select boomgardies.name, boomgardies.id, cities.name as cityName, state.name as stateName, place.id as kindPlaceId, place.name as kindPlace from boomgardies, cities, place, state WHERE place.name = 'بوم گردی' and cities.id = cityId AND cities.stateId = state.id and boomgardies.name LIKE '%$key%' and cityId IN (" . $cityConstraint . ")"));
             }
 
 

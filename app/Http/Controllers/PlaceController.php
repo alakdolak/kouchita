@@ -2732,69 +2732,95 @@ class PlaceController extends Controller {
         $placeId = $request->placeId;
         $kindPlaceId = $request->kindPlaceId;
 
-        if( isset($_FILES['pic']) && $_FILES['pic']['error'] == 0 &&
-            isset($request->name) && isset($placeId) && isset($kindPlaceId)){
+        if( isset($_FILES['pic']) && $_FILES['pic']['error'] == 0 && isset($request->name) && isset($placeId) && isset($kindPlaceId)){
 
             $valid_ext = array('image/jpeg','image/png');
             if(in_array($_FILES['pic']['type'], $valid_ext)){
-                if($_FILES['pic']['size'] < 2000000){
-                    $id = $placeId;
+                $id = $placeId;
 
-                    $kindPlace = Place::find($kindPlaceId);
-                    if($kindPlace == null){
-                        echo 'nok9';
-                        return;
+                $kindPlace = Place::find($kindPlaceId);
+                if($kindPlace == null){
+                    echo 'nok9';
+                    return;
+                }
+                $kindPlaceName = $kindPlace->fileName;
+                $place = DB::table($kindPlace->tableName)->find($id);
+
+                if($place != null) {
+
+                    $location = __DIR__ . '/../../../../assets/userPhoto/' . $kindPlaceName . '/' . $place->file;
+                    if(!file_exists($location))
+                        mkdir($location);
+
+                    if($request->fileKind == 'mainFile'){
+                        $filename = time() . '_' . str_random(3) . '.jpg';
+                        $destination = $location . '/' . $filename;
+                        $result = compressImage($_FILES['pic']['tmp_name'], $destination, 80);
+
+                        if($result) {
+                            $photographer = new PhotographersPic();
+                            $photographer->userId = Auth::user()->id;
+                            $photographer->name = $request->name;
+                            $photographer->pic = $filename;
+                            $photographer->kindPlaceId = $kindPlaceId;
+                            $photographer->placeId = $placeId;
+                            $photographer->alt = $request->alt;
+                            $photographer->description = $request->description;
+                            $photographer->like = 0;
+                            $photographer->dislike = 0;
+                            $photographer->isSitePic = 0;
+                            $photographer->isPostPic = 0;
+                            $photographer->status = 0;
+                            $photographer->save();
+
+                            echo json_encode(['ok', $filename]);
+                        }
+                        else
+                            echo json_encode(['nok4']);
                     }
-                    $kindPlaceName = $kindPlace->fileName;
-                    $place = DB::table($kindPlace->tableName)->find($id);
-
-                    if($place != null) {
-
-                        $location = __DIR__ . '/../../../../assets/userPhoto/' . $kindPlaceName . '/' . $place->file;
-                        if(!file_exists($location))
-                            mkdir($location);
-
-                        if($request->fileKind == 'mainFile'){
-                            $filename = time() . '_' . str_random(3) . '.jpg';
-                            $destination = $location . '/' . $filename;
-                            $result = compressImage($_FILES['pic']['tmp_name'], $destination, 80);
-
-                            if($result) {
-                                $photographer = new PhotographersPic();
-                                $photographer->userId = Auth::user()->id;
-                                $photographer->name = $request->name;
-                                $photographer->pic = $filename;
-                                $photographer->kindPlaceId = $kindPlaceId;
-                                $photographer->placeId = $placeId;
-                                $photographer->alt = $request->alt;
-                                $photographer->description = $request->description;
-                                $photographer->like = 0;
-                                $photographer->dislike = 0;
-                                $photographer->isSitePic = 0;
-                                $photographer->isPostPic = 0;
-                                $photographer->status = 0;
-                                $photographer->save();
-
-                                echo json_encode(['ok', $filename]);
-                            }
-                            else
-                                echo json_encode(['nok4']);
+                    else{
+                        if($request->fileKind == 'squ'){
+                            $size = [
+                                [
+                                    'width' => 150,
+                                    'height' => null,
+                                    'name' => 't-',
+                                    'destination' => $location
+                                ],
+                                [
+                                    'width' => 200,
+                                    'height' => null,
+                                    'name' => 'l-',
+                                    'destination' => $location
+                                ],
+                            ];
                         }
                         else{
-                            $filename = $request->fileName;
-                            $destination = $location . '/' . $request->fileKind . '-' . $filename;
-                            $result = compressImage($_FILES['pic']['tmp_name'], $destination, 60);
-                            if($result)
-                                echo json_encode(['ok', $filename]);
-                            else
-                                echo json_encode(['nok5']);
+                            $size = [
+                                [
+                                    'width' => 350,
+                                    'height' => 250,
+                                    'name' => 'f-',
+                                    'destination' => $location
+                                ],
+                                [
+                                    'width' => 600,
+                                    'height' => 400,
+                                    'name' => 's-',
+                                    'destination' => $location
+                                ],
+                            ];
                         }
+                        $image = $request->file('pic');
+                        $result = resizeImage($image, $size, $request->fileName);
+                        if($result)
+                            echo json_encode(['ok', $request->fileName]);
+                        else
+                            echo json_encode(['nok5']);
                     }
-                    else
-                        echo json_encode(['nok3']);
                 }
                 else
-                    echo json_encode(['sizeError']);
+                    echo json_encode(['nok3']);
             }
             else
                 echo json_encode(['nok2']);
