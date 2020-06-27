@@ -26,6 +26,7 @@
     <style>
         .backgroundColorForSlider{
             background-size: cover;
+            background-position: right;
         }
     </style>
 

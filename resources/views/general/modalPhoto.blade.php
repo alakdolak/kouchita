@@ -1,70 +1,5 @@
 <link rel="stylesheet" href="{{URL::asset('css/shazdeDesigns/modalPhotos.css')}}">
-<style>
-    .photoAlbumLikeSection{
-        color: rgb(154, 160, 166);
-        display: block;
-        justify-content: center;
-        align-items: center;
-    }
-    
-    .photoAlbumTopLike{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: relative;
-        cursor: pointer;
-        padding: 0px;
-    }
-    .likePhotoAlbum{
-        border-radius: 50px;
-        background-color: #303134;
-        float: right;
-        padding: 0px 10px;
-        color: #609beb;
-    }
-    .likePhotoAlbum:before{
-        content: '\E1F9';
-        font-family: Shazde_Regular2 !important;
-        font-size: 35px;
-        width: 35px;
-    }
-    .fullLikePhotoAlbum{
-        color: red;
-    }
-    .fullLikePhotoAlbum:before{
-        content: '\E057';
-        font-family: Shazde_Regular2 !important;
-        font-size: 35px;
-        width: 35px;
-    }
-    .disLikePhotoAlbum{
-        border-radius: 50px;
-        background-color: #303134;
-        margin-right: 11px;
-        float: left;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 0px 10px;
-        color: #609beb;
-    }
-    .disLikePhotoAlbum:before{
-        content: '\E1F8';
-        font-family: Shazde_Regular2 !important;
-        font-size: 35px;
-        width: 35px;
-    }
 
-    .fullDisLikePhotoAlbum{
-        color: darkred;
-    }
-    .fullDisLikePhotoAlbum:before{
-        content: '\E058';
-        font-family: Shazde_Regular2 !important;
-        font-size: 35px;
-        width: 35px;
-    }
-</style>
 <div class="modal showingPhotosModal" id="photoAlbumModal" role="dialog" style="display: none">
     <div class="modal-dialog" style="margin-top: 2%">
         <div class="modal-content" style="background-color: #141518; border: none;">
@@ -73,38 +8,6 @@
                 <div id="photoAlbumTitle" class="showingPhotosTitle"></div>
             </div>
 
-            {{--<div class="commentWriterDetailsShow">--}}
-                {{--<div class="circleBase type2 commentWriterPicShow">--}}
-                    {{--<img id="photoAlbumUserPic" class="koochitaCircleLogo" src="" style="border-radius: 50%;">--}}
-                {{--</div>--}}
-                {{--<div class="commentWriterExperienceDetails" style="width: auto; padding: 0px;">--}}
-                    {{--<b id="photoAlbumUserName" class="userProfileName"></b>--}}
-                    {{--<div>--}}
-                        {{--<div class="display-inline-block">در--}}
-                        {{--<span class="commentWriterExperiencePlace">هتل عباسی، شهر یزد، استان یزد</span>--}}
-                        {{--</div>--}}
-                        {{--<div>با--}}
-                        {{--<span class="commentWriterExperienceParticipation">احتشام الدوله توفیقی</span>،--}}
-                        {{--<span class="commentWriterExperienceParticipation">حمیدرضا عسگرزاده </span>و--}}
-                        {{--<span class="commentWriterExperienceParticipation">علی اصر همتی</span>--}}
-                        {{--</div>--}}
-                        {{--<div id="photoAlbumUploadTime" style="color: #9aa0a6;"></div>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-
-                {{--<div id="photoAlbumLikeSection" style="color: #9aa0a6; display: none">--}}
-                    {{--<div class="photosFeedBackBtn" style="width: 15%">--}}
-                        {{--<div class="feedBackBtn">--}}
-                            {{--<div id="photoAlbumTopDisLike" class="col-xs-6 dislikeBox photoAlbumTopLike disLikePhotoAlbum">--}}
-                                {{--<div id="photoAlbumDisLikeCount" style="font-size: 25px"></div>--}}
-                            {{--</div>--}}
-                            {{--<div id="photoAlbumTopLike" class="col-xs-6 likeBox photoAlbumTopLike likePhotoAlbum">--}}
-                                {{--<div id="photoAlbumLikeCount" style="font-size: 25px"></div>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-            {{--</div>--}}
             <div class="userInfoPhotoAlbum hideOnScreen">
                 <div class="circleBase type2 commentWriterPicShow">
                     <img id="photoAlbumUserPicOnScreen" class="koochitaCircleLogo" src="" style="border-radius: 50%;">

@@ -529,14 +529,6 @@
 <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/shazdeDesigns/proSearch.css')}}'/>
 <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/shazdeDesigns/abbreviations.css')}}'/>
 
-<style>
-    .proSearchFindCityList{
-        cursor: pointer;
-    }
-    .proSearchFindCityList:hover{
-        background-color: lightgrey;
-    }
-</style>
 
 <div id="searchspan" class="ui_modal fullwidth no_padding ppr_rup ppr_priv_masthead_search">
     <div class="body_text">

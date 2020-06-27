@@ -201,6 +201,10 @@
     content: '\E091';
     font-family: Shazde_Regular2 !important;
 }
+.threeLineIcon:before{
+    content: '\E035';
+    font-family: Shazde_Regular2 !important;
+}
 
 
 .ui_bubble_rating {

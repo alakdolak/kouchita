@@ -2733,7 +2733,7 @@ class PlaceController extends Controller {
         $kindPlaceId = $request->kindPlaceId;
 
         if( isset($_FILES['pic']) && $_FILES['pic']['error'] == 0 &&
-            isset($request->name) && isset($request->alt) && isset($placeId) && isset($kindPlaceId)){
+            isset($request->name) && isset($placeId) && isset($kindPlaceId)){
 
             $valid_ext = array('image/jpeg','image/png');
             if(in_array($_FILES['pic']['type'], $valid_ext)){

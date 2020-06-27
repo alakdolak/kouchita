@@ -1,3 +1,4 @@
+{{--<link rel="stylesheet" href="{{URL::asset('css/pages/allCssForAllPages.css')}}">--}}
 
 <div id="darkModal" class="display-none" role="dialog"></div>
 

@@ -8,7 +8,6 @@
         <div class="alertDescriptionBox">
             <div id="alertBodyDiv" class="alertDescription"></div>
             <div>
-{{--                <button class="alertBtn rightBtn">خیر</button>--}}
                 <button class="alertBtn leftBtn" onclick="closeErrorAlert()">متوجه شدم</button>
             </div>
         </div>

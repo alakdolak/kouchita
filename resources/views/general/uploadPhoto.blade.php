@@ -1,6 +1,5 @@
 <link rel="stylesheet" href="{{URL::asset('css/theme2/cropper.css')}}">
 <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/component/editor.css')}}'/>
-<link rel="stylesheet" href="{{URL::asset('css/theme2/media_uploader.css')}}">
 
 @if(\App::getLocale() == 'en')
     <style>
@@ -53,7 +52,7 @@
          </div>
         <div class="bodyEditFrame">
            <div class="row">
-              <div class="col-md-12">
+              <div class="col-md-12" style="padding: 0px">
                  <div class="img-container img-container-photogrpher" style="position: relative">
                     <img class="imgInEditor" id="editUploadPhoto" alt="Picture" style="width: 100%;">
                  </div>
@@ -62,7 +61,8 @@
            <div class="row" id="actions" style="">
                     <div class="col-md-12 docs-buttons">
 
-                        <div class="editBtnsGroup">
+                        <div class="uploadPicCropLeftSection">
+                            <div class="editBtnsGroup">
                             <div class="editBtns">
                                <div class="flipVertical" data-toggle="tooltip" data-placement="top" title="Flip Horizontal" onclick="rotateUploadPhoto('Y')"></div>
                             </div>
@@ -71,16 +71,16 @@
                             </div>
                         </div>
 
-                        <div class="editBtnsGroup">
-                            <div class="editBtns">
-                               <div class="rotateLeft" data-toggle="tooltip" data-placement="top" title="{{__('چرخش 45 درجه ای به سمت چپ')}}" onclick="cropper.rotate(-45)"></div>
+                            <div class="editBtnsGroup">
+                                <div class="editBtns">
+                                   <div class="rotateLeft" data-toggle="tooltip" data-placement="top" title="{{__('چرخش 45 درجه ای به سمت چپ')}}" onclick="cropper.rotate(-45)"></div>
+                                </div>
+                                <div class="editBtns">
+                                   <div class="rotateRight" data-toggle="tooltip" data-placement="top" title="{{__('چرخش 45 درجه ای به سمت راست')}}" onclick="cropper.rotate(45)"></div>
+                                </div>
                             </div>
-                            <div class="editBtns">
-                               <div class="rotateRight" data-toggle="tooltip" data-placement="top" title="{{__('چرخش 45 درجه ای به سمت راست')}}" onclick="cropper.rotate(45)"></div>
-                            </div>
-                        </div>
 
-                        <div class="editBtnsGroup">
+                            <div class="editBtnsGroup">
                             <div class="editBtns">
                                <div class="cropping" data-toggle="tooltip" data-placement="top" title="{{__('برش')}}" onclick="cropper.crop()"></div>
                             </div>
@@ -88,10 +88,11 @@
                                 <div class="clearing" data-toggle="tooltip" data-placement="top" title="{{__('بازگشت به اول')}}" onclick="cropper.clear()"></div>
                             </div>
                         </div>
+                        </div>
 
                         <div class="btnActionEditFrame">
-                            <div class="upload">
-                                <div onclick="cropImg()" class="uploadBtn ui_button primary">{{__('تایید')}}</div>
+                            <div class="upload" style="margin-left: 10px">
+                                <div onclick="cropImg()" class="uploadBtn ui_button primary confirmButton">{{__('تایید')}}</div>
                             </div>
 
                             <div class="return">
@@ -135,17 +136,17 @@
                          <span class="titleOfUploadPhoto"></span>
                      </h3>
                  </div>
-                 <div id="uploader-dlg" class="uploaderDlg hasFiles">
+                 <div id="uploader-dlg" class="uploaderDlg hasFiles" style="height: calc(100% - 48px);">
                      <div id="dropArea" class="startScreen infoScreen">
                          <div class="inner">
                              <div class="innerPic"></div>
-                             <div style="height: 185px; position: relative;">
-                                 <label for="uploadPhotoInputPic" class="choosePic">
+{{--                             <div  style="height: 185px; position: relative;">--}}
+                                 <label for="uploadPhotoInputPic" class="uploadPicChoosePic">
                                      <div class="ui_button primary addPhotoBtn">
                                          <span>{{__('عکس خود را انتخاب کنید')}}</span>
                                      </div>
                                  </label>
-                             </div>
+{{--                             </div>--}}
 
                              <div class="separator">
                                  <span class="text">{{__('یا')}}</span>
@@ -168,10 +169,10 @@
                          </div>
                          <div class="footerTextBox stFooter">
                              <span>{{__('توجه نمایید که عکس‌ما می‌بایست در فرمت های رایج تصویر و با حداکثر سایز 500 مگابایت باشد. تصاویر پیش از انتشار توسط ما بازبینی می‌گردد. لطفاً از بارگزاری تصاویری که با قوانین سایت مغایرت دارند اجتناب کنید.')}}</span>
-                             <span class="footerPolicyLink">{{__('صفحه مقررات')}}</span>
+                             <a href="{{route('policies')}}" class="footerPolicyLink">{{__('صفحه مقررات')}}</a>
                          </div>
                      </div>
-                     <div class="template itemRow loading">
+                     <div class="template itemRow loading" style="height: 100%; overflow-y: auto;">
                          <div class="row">
                              <div class="col-xs-7">
                                  <div>
@@ -203,7 +204,7 @@
                                 </div>
 
                              </div>
-                             <div class="col-xs-5">
+                             <div class="col-xs-5 uploadPicInfoSection">
 
                                  <div id="uploadPhotoPicAltDiv" class="epInputBox">
                                     <div class="epInputBoxText">
@@ -222,7 +223,7 @@
                                 </div>
                                 <div id="uploadPhotoPicAltDiv" class="epInputBox">
                                     <div class="epInputBoxText">
-                                        <div class="epInputBoxRequired"><div class="icons epInputIconRequired redStar"></div>{{__('نام جایگزین')}}</div>
+                                        <div class="epInputBoxRequired">{{__('نام جایگزین')}}</div>
                                     </div>
                                     <input class="epInputBoxInput" id="uploadPhotoPicAlt" onkeydown="document.getElementById('uploadPhotoPicAltDiv').classList.remove('errorField')">
                                 </div>
@@ -276,7 +277,7 @@
                                      </div>
                                  </div>
                                  <div class="upload secondFooterVerification">
-                                     <div onclick="resizeImg()" class="uploadBtn ui_button primary">{{__('تایید')}}</div>
+                                     <div onclick="resizeImg()" class="uploadBtn ui_button primary confirmButton">{{__('تایید')}}</div>
                                      {{--<div onclick="goToPage3()" class="uploadBtn ui_button primary">1111</div>--}}
                                  </div>
                              </div>
@@ -291,7 +292,7 @@
                          <div class="uploadNextPicBtnBox">
 
                              <label for="uploadPhotoInputPic" style="width: 250px;">
-                                 <div class="uploadNextPicBtn ui_button primary">{{__('بارگزاری عکس بعدی')}}</div>
+                                 <div class="uploadNextPicBtn ui_button primary confirmButton">{{__('بارگزاری عکس بعدی')}}</div>
                              </label>
 
                              <div class="uploadNextPicDeny" onclick="closePhotoModal()">{{__('نه، برای بعد')}}</div>
@@ -300,7 +301,7 @@
                          <div id="uploadedImgDiv" class="uploadedImgDiv"></div>
                          <div class="footerTextBox" style="position: absolute; bottom: 0">
                              <span>{{__('پس از تایید عکس امتیاز شما در پروفایل افزایش خواهد یافت. به گزاشتن عکس ادامه دهید تا علاوه بر امتیاز بتوانید نشان های افتخار مخصوص عکس را برنده شوید.')}}</span>
-                             <span class="footerPolicyLink" onclick="">{{__('صفحه مقررات')}}</span>
+                             <a href="{{route('policies')}}" class="footerPolicyLink" onclick="">{{__('صفحه مقررات')}}</a>
                          </div>
 
                      </div>
@@ -442,7 +443,7 @@
         placeIdUploadPhoto = $('#placeIdUploadPhoto').val();
         kindPlaceIdUploadPhoto = $('#kindPlaceIdUploadPhoto').val();
 
-        if($('#uploadPhotoRole').is(":checked") && name.trim().length > 0 && alt.trim().length > 0 && description.trim().length <= 100 && kindPlaceIdUploadPhoto != 0 && placeIdUploadPhoto != 0) {
+        if($('#uploadPhotoRole').is(":checked") && name.trim().length > 0 && description.trim().length <= 100 && kindPlaceIdUploadPhoto != 0 && placeIdUploadPhoto != 0) {
 
             $("#fullPageLoader").css('display', 'flex');
 
@@ -524,13 +525,6 @@
                 document.getElementById('uploadPhotoPicNameDiv').classList.add('errorField');
                 text = '{{__('فیلد های بالا را پر کنید.')}}\n';
             }
-
-            if(alt == null || alt == ''){
-                document.getElementById('uploadPhotoPicAltDiv').classList.add('errorField');
-                if(text == '')
-                    text = '{{__('فیلد های بالا را پر کنید.')}}\n';
-            }
-
             if(description.trim().length > 100){
                 document.getElementById('uploadPhotoPicAltDiv').classList.add('errorField');
                 text += '{{__('توضیح باید کمتر از 100 کاراکتر باشد.')}}\n';

@@ -145,6 +145,12 @@ a:link {
     margin-bottom: 10px;
     border-radius: 10px;
 }
+.confirmButton{
+    background-color: #4dc7bc;
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+}
 
 @keyframes gradient {
     0% {

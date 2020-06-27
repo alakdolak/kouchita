@@ -140,7 +140,7 @@ $config = \App\models\ConfigModel::first();
     <div class="footerPhoneMenuBar hideOnScreen">
         <div data-toggle="modal" data-target="#otherPossibilities">
             <span class="footerMenuBarLinks">{{__('منو')}}</span>
-            <span class="ui_icon threeDotIcon"></span>
+            <span class="ui_icon threeLineIcon"></span>
         </div>
         <div data-toggle="modal" data-target="#profilePossibilities" onclick="showLastPages();// this function in mainSearch.blade.php">
             <span class="footerMenuBarLinks">
@@ -156,7 +156,7 @@ $config = \App\models\ConfigModel::first();
         </div>
         <div onclick="openMainSearch(0) // in mainSearch.blade.php">
             <span class="footerMenuBarLinks">{{__('جست‌و‌جو')}}</span>
-            <span class="ui_icon search"></span>
+            <span class="iconFamily searchIcon" style="font-size: 20px;"></span>
         </div>
         @if(Auth::check())
             <div data-toggle="modal" data-target="#profile" class="profileBtn">
@@ -176,7 +176,10 @@ $config = \App\models\ConfigModel::first();
             </div>
         @else
             <div class="login-button">
-                <span class="footerMenuBarLinks">ورود</span>
+                <span class="footerMenuBarLinks" style="display: flex; align-items: center">
+                    ورود
+                    <span class="iconFamily UserIcon" style="font-size: 20px; margin-left: 2px"></span>
+                </span>
                 <span class="ui_icon member"></span>
             </div>
         @endif
@@ -189,6 +192,8 @@ $config = \App\models\ConfigModel::first();
         <div class="modal fade" id="profilePossibilities">
             @if(Request::is('article/*') || Request::is('mainArticle'))
                 <div class="mainPopUp leftPopUp" style="padding: 7px">
+                    <div class="closeFooterPopupIcon iconFamily iconClose" onclick="$('#profilePossibilities').modal('hide')"></div>
+
                     <div class="lp_ar_searchTitle">{{__('جستجو خود را محدودتر کنید')}}</div>
 
                     <div class="lp_ar_filters">
@@ -341,6 +346,8 @@ $config = \App\models\ConfigModel::first();
                 </div>
             @elseif(Request::is('placeList/*'))
                 <div ng-app="mainApp" class="mainPopUp leftPopUp PlaceController" style="padding: 7px">
+                    <div class="closeFooterPopupIcon iconFamily iconClose" onclick="$('#profilePossibilities').modal('hide')"></div>
+
                     <div class="lp_ar_searchTitle">{{__('جستجو خود را محدودتر کنید')}}</div>
 
                     <div class="lp_ar_filters">
@@ -519,6 +526,8 @@ $config = \App\models\ConfigModel::first();
                 </div>
             @else
                 <div class="mainPopUp leftPopUp recentViewLeftBar">
+                    <div class="closeFooterPopupIcon iconFamily iconClose" onclick="$('#profilePossibilities').modal('hide')"></div>
+
                     {{--each menu--}}
                     <div>
                         <div class="lp_others_content" id="lp_others_recentlyViews">
@@ -608,49 +617,8 @@ $config = \App\models\ConfigModel::first();
 
         <div class="modal fade" id="otherPossibilities">
             <div class="mainPopUp leftPopUp" style="overflow-y: auto">
-
+                <div class="closeFooterPopupIcon iconFamily iconClose" onclick="$('#otherPossibilities').modal('hide')"></div>
                 @if(isset($locationName))
-{{--                    <div class="pSC_tilte">--}}
-{{--                        <div>--}}
-{{--                            {{__('شما در حال حاضر در')}}--}}
-{{--                            <span class="pSC_cityTilte">{{$locationName['name']}}</span>--}}
-{{--                            {{__('هستید')}}--}}
-{{--                        </div>--}}
-{{--                        <button type="button" class="btn btn-danger" onclick="openProSearch()">{{__('تغییر دهید')}}</button>--}}
-{{--                    </div>--}}
-{{--                    <div class="pSC_cityDescription">--}}
-{{--                        {{__('شما می‌توانید به راحتی صفحات زیر را در')}}--}}
-{{--                        <span>{{$locationName['name']}}</span>--}}
-{{--                        {{__('مشاهده نمایید')}}--}}
-{{--                    </div>--}}
-{{--                    <div class="pSC_boxOfDetails">--}}
-{{--                        <div class="pSC_choiseDetailsText">{{__('به سادگی انتخاب کنید')}}</div>--}}
-{{--                        <div class="pSC_boxOfCityDetailsText">--}}
-{{--                            <span onclick="window.location.href = '{{url("cityPage/" . $locationName['kindState'] . "/" . $locationName["cityNameUrl"])}}'">{{__('مشاهده صفحه')}}{{$locationName['cityName']}}</span>--}}
-{{--                            @if(isset($locationName['state']))--}}
-{{--                                <span class="pSC_boxOfCityDetailsText2">{{__('در استان')}} {{$locationName['state']}}</span>--}}
-{{--                            @endif--}}
-{{--                        </div>--}}
-{{--                        <div>--}}
-{{--                            <div class="pSC_boxOfCityDetails">--}}
-{{--                                <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/1/" . $locationName['kindState'] . "/" . $locationName['cityNameUrl'])}}'">{{__('جاذبه‌های')}} {{$locationName['cityName']}}</div>--}}
-{{--                                <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/4/" . $locationName['kindState'] . "/" . $locationName['cityNameUrl'])}}'">{{__('هتل‌های')}} {{$locationName['cityName']}}</div>--}}
-{{--                            </div>--}}
-{{--                            <div class="pSC_boxOfCityDetails">--}}
-{{--                                <div class="pSC_cityDetails" onclick="window.location.href = '{{$locationName['articleUrl']}}'">مقاله‌های {{$locationName['name']}}</div>--}}
-{{--                                <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/3/" . $locationName['kindState'] . "/" . $locationName['cityNameUrl'])}}'">{{__('رستوران‌های')}} {{$locationName['cityName']}}</div>--}}
-{{--                            </div>--}}
-{{--                            <div class="pSC_boxOfCityDetails">--}}
-{{--                                <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/10/" . $locationName['kindState'] . "/" . $locationName['cityNameUrl'])}}'">{{__('صنایع‌دستی‌های')}} {{$locationName['cityName']}}</div>--}}
-{{--                                <div class="pSC_cityDetails" onclick="window.location.href = '{{url("placeList/11/" . $locationName['kindState'] . "/" . $locationName['cityNameUrl'])}}'">{{__('غذاهای محلی‌')}}{{$locationName['cityName']}}</div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        <div class="overflowOptimizer"></div>--}}
-{{--                    </div>--}}
-                    <script !src="">
-                        let locn = {!! json_encode($locationName) !!}
-                        console.log(locn)
-                    </script>
                     <div class="pSC_tilte">
                         <div style="text-align: center">
                             {{__('در')}}
@@ -842,234 +810,230 @@ $config = \App\models\ConfigModel::first();
 
         @if(auth()->check())
             <div class="modal fade" id="profile">
-            <div class="mainPopUp rightPopUp">
-                <div id="lp_register">
-                    <div>
-                        <div class="modules-membercenter-member-profile position-relative">
+                <div class="mainPopUp rightPopUp">
+                    <div class="closeFooterPopupIcon iconFamily iconClose" onclick="$('#profile').modal('hide')" style="top: -10px"></div>
+                    <div id="lp_register">
+                        <div>
+                            <div class="modules-membercenter-member-profile position-relative">
 
-                            <div class="profileBlock">
+                                <div class="profileBlock">
 
-                                <div id="" class="targets profileInfosDetails col-xs-8">
+                                    <div id="" class="targets profileInfosDetails col-xs-8">
 
-                                    <p class="since">
-                                        <b>
-                                            {{isset($user->first_name) ? $user->first_name : $user->username}}
-                                        </b>
-                                    </p>
-                                    <div class="ageSince" style="flex-direction: column;">
-                                        <div class="since">{{__('عضو شده از')}}</div>
-                                        <div class="since">
-                                            {{$registerUser}}
+                                        <p class="since">
+                                            <b>
+                                                {{isset($user->first_name) ? $user->first_name : $user->username}}
+                                            </b>
+                                        </p>
+                                        <div class="ageSince" style="flex-direction: column;">
+                                            <div class="since">{{__('عضو شده از')}}</div>
+                                            <div class="since">
+                                                {{$registerUser}}
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-xs-4">
+        {{--                                @if(!$user->uploadPhoto)--}}
+                                            <img class="avatarUrl"
+                                                 src="{{isset($buPic) ? $buPic : ''}}"
+                                                 height="60" width="60"/>
+        {{--                                @else--}}
+        {{--                                    <img class="avatarUrl"--}}
+        {{--                                         src="{{URL::asset('userProfile') . "/" . $user->picture}}"--}}
+        {{--                                         height="60" width="60"/>--}}
+        {{--                                @endif--}}
+                                    </div>
+                                </div>
+
+                                <div class="aboutMeDesc">
+                                    <div class="editInfoBtn" onclick="toggleEditInfoMenu(this)">
+                                        {{__('اطلاعات کاربری')}}
+                                        <div class="glyphicon glyphicon-chevron-down"></div>
+                                        <div class="glyphicon glyphicon-chevron-up display-none"></div>
+                                    </div>
+                                    <div class="editProfileMenu item display-none">
+                                        <a name="edit-profile" class="menu-link " href="{{URL('profile')}}">{{__('صفحه کاربری')}}</a>
+                                        <a name="edit-profile" class="menu-link " href="{{URL('badge')}}">{{__('جوایز و مدال ها')}}</a>
+                                        <a name="edit-profile" class="menu-link " href="{{URL('messages')}}">{{__('پیام‌ها')}}</a>
+                                        <a name="edit-photo" class="menu-link " href="{{URL('accountInfo')}}">{{__('اطلاعات کاربر')}}</a>
+                                        <a name="edit-photo" class="menu-link " href="{{URL('editPhoto')}}">{{__('ویرایش عکس')}}</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="profileBtnActionMobile">
+                                <div type="button" class="btn btn-warning pp_btns" onclick="$('#profile').modal('hide'); openUploadPost()">{{__('پست')}}</div>
+                                <a type="button" class="btn btn-primary pp_btns">{{__('صفحه من')}}</a>
+                                <a type="button" class="btn btn-danger pp_btns" href="{{route('logout')}}">{{__('خروج')}}</a>
+                            </div>
+                        </div>
+                        @if(isset($profilePage) && $profilePage == 1)
+                            <div class="profileMenuResponsive">
+                                @if($mode == "profile")
+                                    <div id="Profile" class="profile col-xs-6 profileMenuLinks">
+                                        <a id="profileLinkColor1" href="{{URL('profile')}}">{{__('صفحه کاربری')}}</a>
+                                    </div>
+                                @else
+                                    <div id="Profile" class="profile col-xs-6 profileMenuLinks">
+                                        <a id="profileLinkColor2" href="{{URL('profile')}}">{{__('صفحه کاربری')}}</a>
+                                    </div>
+                                @endif
+                                @if($mode == "profileActivities")
+                                    <div id="ProfileActivities" class="profileActivities col-xs-6 profileMenuLinks">
+                                        <a id="profileLinkColor1" href="{{URL('profile')}}">{{__('فعالیت‌های من')}}</a>
+                                    </div>
+                                @else
+                                    <div id="Profile" class="profileActivities col-xs-6 profileMenuLinks">
+                                        <a id="profileLinkColor2" href="{{URL('profile')}}">{{__('فعالیت‌های من')}}</a>
+                                    </div>
+                                @endif
+                                @if($mode == "badge")
+                                    <div id="BadgeCollection" class="badgeCollection col-xs-6 profileMenuLinks">
+                                        <a id="BadgeCollectionLinkColor1" href="{{route('badge')}}">{{__('مدال‌های گردشگری')}}</a>
+                                    </div>
+                                @else
+                                    <div id="BadgeCollection" class="badgeCollection col-xs-6 profileMenuLinks">
+                                        <a id="BadgeCollectionLinkColor2" href="{{route('badge')}}">{{__('مدال‌های گردشگری')}}</a>
+                                    </div>
+                                @endif
+
+                                <div class="travelMap targets position-relative col-xs-6 profileMenuLinks" id="targetHelp_5">
+                                    <a href="{{route('soon')}}">سفرنامه من</a>
+                                    <div id="helpSpan_5" class="helpSpans hidden row">
+                                        <span class="introjs-arrow"></span>
+                                        <div class="col-xs-12">
+                                            <p>{{__('با استفاده از این منو می‌توانید به سایر بخش‌های پروفایل کاربری خود بروید.')}}</p>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <button data-val="5" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_5">{{__('بعدی')}}</button>
+                                            <button data-val="5" class="btn btn-primary backBtnsHelp" id="backBtnHelp_5">{{__('قبلی')}}</button>
+                                            <button class="btn btn-danger exitBtnHelp">{{__('خروج')}}</button>
                                         </div>
                                     </div>
                                 </div>
 
-
-                                <div class="col-xs-4">
-    {{--                                @if(!$user->uploadPhoto)--}}
-                                        <img class="avatarUrl"
-                                             src="{{isset($buPic) ? $buPic : ''}}"
-                                             height="60" width="60"/>
-    {{--                                @else--}}
-    {{--                                    <img class="avatarUrl"--}}
-    {{--                                         src="{{URL::asset('userProfile') . "/" . $user->picture}}"--}}
-    {{--                                         height="60" width="60"/>--}}
-    {{--                                @endif--}}
-                                </div>
+                                {{--                <li id="Saves" class="saves"></li>--}}
+                                @if($mode == "message")
+                                    <div id="Messages" class="messages col-xs-6 profileMenuLinks">
+                                        <a id="messageLinkColor1" href="{{URL('messages')}}">{{__('پیام‌ها')}}</a>
+                                    </div>
+                                @else
+                                    <div id="Messages" class="messages col-xs-6 profileMenuLinks">
+                                        <a id="messageLinkColor2" href="{{URL('messages')}}">{{__('پیام‌ها')}}</a>
+                                    </div>
+                                @endif
                             </div>
+                        @else
+                            <div class="profileScoreMainDiv">
+                                <div class="memberPointInfo">
+                                    <div style=" color: #0076ac; font-size: 20px; margin-top: 5px; display: flex; justify-content: space-between; align-items: center">
+                                        <div>
+                                            {{__('امتیازات من')}}
+                                        </div>
+                                        <div style="font-size: 10px">
+                                            <a href="">{{__('سیستم امتیازدهی')}}</a>
+                                        </div>
+                                    </div>
 
-                            <div class="aboutMeDesc">
-                                <div class="editInfoBtn" onclick="toggleEditInfoMenu(this)">
-                                    {{__('اطلاعات کاربری')}}
-                                    <div class="glyphicon glyphicon-chevron-down"></div>
-                                    <div class="glyphicon glyphicon-chevron-up display-none"></div>
-                                </div>
-                                <div class="editProfileMenu item display-none">
-                                    <a name="edit-profile" class="menu-link " href="{{URL('profile')}}">{{__('صفحه کاربری')}}</a>
-                                    <a name="edit-profile" class="menu-link " href="{{URL('badge')}}">{{__('جوایز و مدال ها')}}</a>
-                                    <a name="edit-profile" class="menu-link " href="{{URL('messages')}}">{{__('پیام‌ها')}}</a>
-                                    <a name="edit-photo" class="menu-link " href="{{URL('accountInfo')}}">{{__('اطلاعات کاربر')}}</a>
-                                    <a name="edit-photo" class="menu-link " href="{{URL('editPhoto')}}">{{__('ویرایش عکس')}}</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="profileBtnActionMobile">
-                            <div type="button" class="btn btn-warning pp_btns" onclick="$('#profile').modal('hide'); openUploadPost()">{{__('پست')}}</div>
-                            <a type="button" class="btn btn-primary pp_btns">{{__('صفحه من')}}</a>
-                            <a type="button" class="btn btn-danger pp_btns" href="{{route('logout')}}">{{__('خروج')}}</a>
-                        </div>
-                    </div>
-                    @if(isset($profilePage) && $profilePage == 1)
-                        <div class="profileMenuResponsive">
-                            @if($mode == "profile")
-                                <div id="Profile" class="profile col-xs-6 profileMenuLinks">
-                                    <a id="profileLinkColor1" href="{{URL('profile')}}">{{__('صفحه کاربری')}}</a>
-                                </div>
-                            @else
-                                <div id="Profile" class="profile col-xs-6 profileMenuLinks">
-                                    <a id="profileLinkColor2" href="{{URL('profile')}}">{{__('صفحه کاربری')}}</a>
-                                </div>
-                            @endif
-                            @if($mode == "profileActivities")
-                                <div id="ProfileActivities" class="profileActivities col-xs-6 profileMenuLinks">
-                                    <a id="profileLinkColor1" href="{{URL('profile')}}">{{__('فعالیت‌های من')}}</a>
-                                </div>
-                            @else
-                                <div id="Profile" class="profileActivities col-xs-6 profileMenuLinks">
-                                    <a id="profileLinkColor2" href="{{URL('profile')}}">{{__('فعالیت‌های من')}}</a>
-                                </div>
-                            @endif
-                            @if($mode == "badge")
-                                <div id="BadgeCollection" class="badgeCollection col-xs-6 profileMenuLinks">
-                                    <a id="BadgeCollectionLinkColor1" href="{{route('badge')}}">{{__('مدال‌های گردشگری')}}</a>
-                                </div>
-                            @else
-                                <div id="BadgeCollection" class="badgeCollection col-xs-6 profileMenuLinks">
-                                    <a id="BadgeCollectionLinkColor2" href="{{route('badge')}}">{{__('مدال‌های گردشگری')}}</a>
-                                </div>
-                            @endif
-
-                            <div class="travelMap targets position-relative col-xs-6 profileMenuLinks" id="targetHelp_5">
-                                <a href="{{route('soon')}}">سفرنامه من</a>
-                                <div id="helpSpan_5" class="helpSpans hidden row">
-                                    <span class="introjs-arrow"></span>
-                                    <div class="col-xs-12">
-                                        <p>{{__('با استفاده از این منو می‌توانید به سایر بخش‌های پروفایل کاربری خود بروید.')}}</p>
+                                    <div class="modules-membercenter-total-points" style="padding-top: 2px;">
+                                        <div class="mainDivTotalPoint">
+                                            <div class="label" style="font-size: 17px;"> {{__('امتیاز کل شما')}} </div>
+                                            <div class="points">{{$userTotalPointFooter}}</div>
+                                        </div>
+                                        <div class="points_to_go">
+                                        <span style="justify-content: space-between;">
+                                            <b class="points"> {{$nextLevelFooter}} </b>
+                                            <span style="text-align: center;    font-size: 16px;">{{__('امتیاز  مانده به مرحله بعد')}}</span>
+                                        </span>
+                                        </div>
                                     </div>
-                                    <div class="col-xs-12">
-                                        <button data-val="5" class="btn btn-success nextBtnsHelp" id="nextBtnHelp_5">{{__('بعدی')}}</button>
-                                        <button data-val="5" class="btn btn-primary backBtnsHelp" id="backBtnHelp_5">{{__('قبلی')}}</button>
-                                        <button class="btn btn-danger exitBtnHelp">{{__('خروج')}}</button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {{--                <li id="Saves" class="saves"></li>--}}
-                            @if($mode == "message")
-                                <div id="Messages" class="messages col-xs-6 profileMenuLinks">
-                                    <a id="messageLinkColor1" href="{{URL('messages')}}">{{__('پیام‌ها')}}</a>
-                                </div>
-                            @else
-                                <div id="Messages" class="messages col-xs-6 profileMenuLinks">
-                                    <a id="messageLinkColor2" href="{{URL('messages')}}">{{__('پیام‌ها')}}</a>
-                                </div>
-                            @endif
-                        </div>
-                    @else
-                        <div class="profileScoreMainDiv">
-                            <div class="memberPointInfo">
-                                <div style=" color: #0076ac; font-size: 20px; margin-top: 5px; display: flex; justify-content: space-between; align-items: center">
-                                    <div>
-                                        {{__('امتیازات من')}}
-                                    </div>
-                                    <div style="font-size: 10px">
-                                        <a href="">{{__('سیستم امتیازدهی')}}</a>
-                                    </div>
-                                </div>
-
-                                <div class="modules-membercenter-total-points" style="padding-top: 2px;">
-{{--                                    <div data-direction="left" class="targets">--}}
-{{--                                        <div class="points_info tripcollectiveinfo" onclick="showElement('activityDiv')">--}}
-{{--                                            --}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-                                    <div class="mainDivTotalPoint">
-                                        <div class="label" style="font-size: 17px;"> {{__('امتیاز کل شما')}} </div>
-                                        <div class="points">{{$userTotalPointFooter}}</div>
-                                    </div>
-                                    <div class="points_to_go">
-                                    <span style="justify-content: space-between;">
-                                        <b class="points"> {{$nextLevelFooter}} </b>
-                                        <span style="text-align: center;    font-size: 16px;">{{__('امتیاز  مانده به مرحله بعد')}}</span>
-                                    </span>
-                                    </div>
-                                </div>
-                                <div class="modules-membercenter-level-progress">
-                                    <div data-direction="left" id="targetHelp_9" class="targets progress_info tripcollectiveinfo">
-                                        <div onclick="showElement('levelDiv')">
-                                            <div class="labels">
-                                                <div class="right label">{{__('مرحله فعلی')}}</div>
-                                                <div class="float-leftImp label">{{__('مرحله بعدی')}}</div>
-                                            </div>
-                                            <div class="progress_indicator">
-
-                                                <div class="next_badge myBadge">{{$userLevelFooter[0]->name}} </div>
-                                                <div class="meter">
-                                                    <span id="progressIdPhone" class="progress"></span>
+                                    <div class="modules-membercenter-level-progress">
+                                        <div data-direction="left" id="targetHelp_9" class="targets progress_info tripcollectiveinfo">
+                                            <div onclick="showElement('levelDiv')">
+                                                <div class="labels">
+                                                    <div class="right label">{{__('مرحله فعلی')}}</div>
+                                                    <div class="float-leftImp label">{{__('مرحله بعدی')}}</div>
                                                 </div>
-                                                <div class="current_badge myBadge">{{$userLevelFooter[1]->name}} </div>
+                                                <div class="progress_indicator">
+
+                                                    <div class="next_badge myBadge">{{$userLevelFooter[0]->name}} </div>
+                                                    <div class="meter">
+                                                        <span id="progressIdPhone" class="progress"></span>
+                                                    </div>
+                                                    <div class="current_badge myBadge">{{$userLevelFooter[1]->name}} </div>
+                                                </div>
+                                                <div class="text-align-center">
+                                                    <a class="cursor-pointer color-black">{{__('مشاهده سیستم سطح بندی')}}</a>
+                                                </div>
+                                                <div class="clear fix"></div>
                                             </div>
-                                            <div class="text-align-center">
-                                                <a class="cursor-pointer color-black">{{__('مشاهده سیستم سطح بندی')}}</a>
-                                            </div>
-                                            <div class="clear fix"></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    @endif
-                    <div class="userProfileActivitiesMainDiv rightColBoxes">
-                        <div class="mainDivHeaderText">
-                            <h3>{{__('شرح فعالیت‌ها')}}</h3>
-                        </div>
-                        <?php
-                            $userInfo = auth()->user()->getUserActivityCount();
-                        ?>
-                        <div class="activitiesMainDiv">
-                            <div class="activitiesLinesDiv">
-                                <div class="activityTitle">{{__('گذاشتن پست')}}</div>
-                                <div class="activityNumbers">{{__('پست')}} {{$userInfo['postCount']}}</div>
+                        @endif
+                        <div class="userProfileActivitiesMainDiv rightColBoxes">
+                            <div class="mainDivHeaderText">
+                                <h3>{{__('شرح فعالیت‌ها')}}</h3>
                             </div>
-                            <div class="activitiesLinesDiv">
-                                <div class="activityTitle">{{__('آپلود عکس')}}</div>
-                                <div class="activityNumbers">{{__('عکس')}}  {{$userInfo['picCount']}}</div>
-                            </div>
-                            <div class="activitiesLinesDiv">
-                                <div class="activityTitle">{{__('آپلود فیلم')}}</div>
-                                <div class="activityNumbers">{{__('فیلم')}}  {{$userInfo['videoCount']}}</div>
-                            </div>
-                            <div class="activitiesLinesDiv">
-                                <div class="activityTitle">{{__('آپلود فیلم 360')}}</div>
-                                <div class="activityNumbers">{{__('فیلم')}}  {{$userInfo['video360Count']}}</div>
-                            </div>
-                            <div class="activitiesLinesDiv">
-                                <div class="activityTitle">{{__('پرسیدن سؤال')}}</div>
-                                <div class="activityNumbers">{{__('سؤال')}}  {{$userInfo['questionCount']}}</div>
-                            </div>
-                            <div class="activitiesLinesDiv">
-                                <div class="activityTitle">{{__('پاسخ به سؤال دیگران')}}</div>
-                                <div class="activityNumbers">{{__('پاسخ')}}  {{$userInfo['ansCount']}}</div>
-                            </div>
-                            <div class="activitiesLinesDiv">
-                                <div class="activityTitle">{{__('امتیازدهی')}}</div>
-                                <div class="activityNumbers">{{__('مکان')}}  {{$userInfo['scoreCount']}}</div>
-                            </div>
-                            <div class="activitiesLinesDiv">
-                                <div class="activityTitle">{{__('پاسخ به سؤالات اختیاری')}}</div>
-                                <div class="activityNumbers">{{__('پاسخ')}} 0</div>
-                            </div>
-                            <div class="activitiesLinesDiv">
-                                <div class="activityTitle">{{__('ویرایش مکان')}}</div>
-                                <div class="activityNumbers">{{__('مکان')}} 0</div>
-                            </div>
-                            <div class="activitiesLinesDiv">
-                                <div class="activityTitle">{{__('پیشنهاد مکان جدید')}}</div>
-                                <div class="activityNumbers">{{__('مکان')}} 0</div>
-                            </div>
-                            <div class="activitiesLinesDiv">
-                                <div class="activityTitle">{{__('نوشتن مقاله')}}</div>
-                                <div class="activityNumbers">{{__('مقاله')}} 0</div>
-                            </div>
-                            <div class="activitiesLinesDiv">
-                                <div class="activityTitle">{{__('معرفی دوستان')}}</div>
-                                <div class="activityNumbers">{{__('معرفی')}} 7</div>
+                            <?php
+                                $userInfo = auth()->user()->getUserActivityCount();
+                            ?>
+                            <div class="activitiesMainDiv">
+                                <div class="activitiesLinesDiv">
+                                    <div class="activityTitle">{{__('گذاشتن پست')}}</div>
+                                    <div class="activityNumbers">{{__('پست')}} {{$userInfo['postCount']}}</div>
+                                </div>
+                                <div class="activitiesLinesDiv">
+                                    <div class="activityTitle">{{__('آپلود عکس')}}</div>
+                                    <div class="activityNumbers">{{__('عکس')}}  {{$userInfo['picCount']}}</div>
+                                </div>
+                                <div class="activitiesLinesDiv">
+                                    <div class="activityTitle">{{__('آپلود فیلم')}}</div>
+                                    <div class="activityNumbers">{{__('فیلم')}}  {{$userInfo['videoCount']}}</div>
+                                </div>
+                                <div class="activitiesLinesDiv">
+                                    <div class="activityTitle">{{__('آپلود فیلم 360')}}</div>
+                                    <div class="activityNumbers">{{__('فیلم')}}  {{$userInfo['video360Count']}}</div>
+                                </div>
+                                <div class="activitiesLinesDiv">
+                                    <div class="activityTitle">{{__('پرسیدن سؤال')}}</div>
+                                    <div class="activityNumbers">{{__('سؤال')}}  {{$userInfo['questionCount']}}</div>
+                                </div>
+                                <div class="activitiesLinesDiv">
+                                    <div class="activityTitle">{{__('پاسخ به سؤال دیگران')}}</div>
+                                    <div class="activityNumbers">{{__('پاسخ')}}  {{$userInfo['ansCount']}}</div>
+                                </div>
+                                <div class="activitiesLinesDiv">
+                                    <div class="activityTitle">{{__('امتیازدهی')}}</div>
+                                    <div class="activityNumbers">{{__('مکان')}}  {{$userInfo['scoreCount']}}</div>
+                                </div>
+                                <div class="activitiesLinesDiv">
+                                    <div class="activityTitle">{{__('پاسخ به سؤالات اختیاری')}}</div>
+                                    <div class="activityNumbers">{{__('پاسخ')}} 0</div>
+                                </div>
+                                <div class="activitiesLinesDiv">
+                                    <div class="activityTitle">{{__('ویرایش مکان')}}</div>
+                                    <div class="activityNumbers">{{__('مکان')}} 0</div>
+                                </div>
+                                <div class="activitiesLinesDiv">
+                                    <div class="activityTitle">{{__('پیشنهاد مکان جدید')}}</div>
+                                    <div class="activityNumbers">{{__('مکان')}} 0</div>
+                                </div>
+                                <div class="activitiesLinesDiv">
+                                    <div class="activityTitle">{{__('نوشتن مقاله')}}</div>
+                                    <div class="activityNumbers">{{__('مقاله')}} 0</div>
+                                </div>
+                                <div class="activitiesLinesDiv">
+                                    <div class="activityTitle">{{__('معرفی دوستان')}}</div>
+                                    <div class="activityNumbers">{{__('معرفی')}} 7</div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
         @endif
     </div>
 

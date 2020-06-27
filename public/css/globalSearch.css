@@ -10,6 +10,7 @@
     display: none;
     justify-content: center;
 }
+
 .globalSearchWithBox{
     width: 100%;
     max-width: 800px;
@@ -25,6 +26,7 @@
     flex-direction: column;
     position: relative;
 }
+
 .globalSearchInputField{
     border: none;
     border-bottom: solid lightgray;
@@ -32,10 +34,12 @@
     text-align: center;
     width: 100%;
 }
+
 .globalSearchInputField:focus{
     outline: none;
     box-shadow: none;
 }
+
 .globalSearchResult{
     width: 100%;
     text-align: right;

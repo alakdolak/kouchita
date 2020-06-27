@@ -1251,6 +1251,13 @@ footer .profileMenuLinks {
     border: none;
     background: inherit;
 }
+.closeFooterPopupIcon{
+    position: absolute;
+    left: 5px;
+    top: 0px;
+    font-size: 40px;
+    color: #4DC7BC;
+}
 
 @media (max-width: 1300px) {
     .footerRside {

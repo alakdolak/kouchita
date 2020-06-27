@@ -628,7 +628,6 @@ Route::group(array('middleware' => ['throttle:30', 'auth']), function () {
 
     Route::post('sendReport2', array('as' => 'sendReport2', 'uses' => 'PlaceController@sendReport'));
 
-//    Route::post('addPhotoToPlace/{placeId}/{kindPlaceId}', array('as' => 'addPhotoToPlace', 'uses' => 'PlaceController@addPhotoToPlace'));
     Route::post('addPhotoToPlace', array('as' => 'addPhotoToPlace', 'uses' => 'PlaceController@addPhotoToPlace'));
 
     Route::post('likePhotographer', 'PlaceController@likePhotographer')->name('likePhotographer');
