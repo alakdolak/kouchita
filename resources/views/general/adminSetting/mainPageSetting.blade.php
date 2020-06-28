@@ -399,60 +399,54 @@
     var silde1 = 0;
     var middleBan = {!! json_encode($middleBan) !!};
 
-    function createRowSlid(kind, ss, sil) {
-        if (kind == 4)
-            ss = silde4;
-        else if (kind == 5)
-            ss = silde5;
-        else
-            ss = silde1;
-
+    function createRowSlid(kind, sil) {
         for (var i = 0; i < sil.length; i++) {
-            var text = '                        <div id="rowSlide' + kind + '' + ss + '" class="row">\n' +
+            var text = '                        <div id="rowSlide' + kind + '' + sil[i].number + '" class="row">\n' +
                 '                            <div class="col-md-2">\n' +
-                '                                <button class="btn btn-danger" onclick="deleteSlideCommon(' + ss + ', ' + kind + ')" style="position: relative; width: auto">حذف</button>\n' +
-                '                                <button class="btn btn-primary" onclick="submitSlideCommon(' + ss + ', ' + kind + ')" style="position: relative; width: auto">ویرایش</button>\n' +
-                '                                <input type="hidden" id="slideId' + kind + '' + ss + '" value="' + sil[i]["id"] + '">' +
+                '                                <button class="btn btn-danger" onclick="deleteSlideCommon(' + sil[i].number + ', ' + kind + ')" style="position: relative; width: auto">حذف</button>\n' +
+                '                                <button class="btn btn-primary" onclick="submitSlideCommon(' + sil[i].number + ', ' + kind + ')" style="position: relative; width: auto">ویرایش</button>\n' +
+                '                                <input type="hidden" id="slideId' + kind + '' + sil[i].number + '" value="' + sil[i]["id"] + '">' +
                 '                            </div>\n' +
                 '                            <div class="col-md-10">\n' +
                 '                            <div class="row">\n' +
                 '                                <div class="col-md-6">\n' +
-                '                                    <img src="' + sil[i]["pic"] + '" class="settingImg" id="showMiddleBannerInput' + kind + '' + ss + '" style="height: 100px; ">\n' +
+                '                                    <img src="' + sil[i]["pic"] + '" class="settingImg" id="showMiddleBannerInput' + kind + '' + sil[i].number + '" style="height: 100px; ">\n' +
                 '                                </div>\n' +
                 '                                <div class="col-md-6">\n' +
-                '                                    <input type="file" id="uploadImgBanner' + kind + '' + ss + '" accept="image/*" onchange="showPicInput(this, \'showMiddleBannerInput' + kind + '' + ss + '\')">\n' +
+                '                                    <input type="file" id="uploadImgBanner' + kind + '' + sil[i].number + '" accept="image/*" onchange="showPicInput(this, \'showMiddleBannerInput' + kind + '' + sil[i].number + '\')">\n' +
                 '                                </div>\n' +
                 '                            </div>\n' +
                 '                            <div class="row">\n' +
                 '                                <div class="col-md-6">\n' +
-                '                                    <label for="linkForBanner' + kind + '' + ss + '">لینک:</label>\n' +
-                '                                    <input type="text" id="linkForBanner' + kind + '' + ss + '" class="form-control" value="' + sil[i]["link"] + '">\n' +
+                '                                    <label for="linkForBanner' + kind + '' + sil[i].number + '">لینک:</label>\n' +
+                '                                    <input type="text" id="linkForBanner' + kind + '' + sil[i].number + '" class="form-control" value="' + sil[i]["link"] + '">\n' +
                 '                                </div>\n' +
                 '                                <div class="col-md-6">\n' +
-                '                                    <label for="textForBanner' + kind + '' + ss + '">متن:</label>\n' +
-                '                                    <input type="text" id="textForBanner' + kind + '' + ss + '" class="form-control" value="' + sil[i]["text"] + '">\n' +
+                '                                    <label for="textForBanner' + kind + '' + sil[i].number + '">متن:</label>\n' +
+                '                                    <input type="text" id="textForBanner' + kind + '' + sil[i].number + '" class="form-control" value="' + sil[i]["text"] + '">\n' +
                 '                                </div>\n' +
                 '                            </div>\n' +
                 '                        </div>\n' +
                 '                        </div>\n' +
                 '                        <hr>';
+
             $('#sliderPicSection' + kind).append(text);
 
-            if (kind == 4)
-                silde4++;
-            else if (kind == 5)
-                silde5++;
-            else
-                silde1++;
+            if (kind == 4 && sil[i].number >= silde4)
+                silde4 = parseInt(sil[i].number) + 1;
+            else if (kind == 5 && sil[i].number >= silde5)
+                silde5 = parseInt(sil[i].number) + 1;
+            else if(kind == 1  && sil[i].number >= silde1)
+                silde1 = parseInt(sil[i].number) + 1;
         }
     }
 
     if (middleBan['1'])
-        createRowSlid(1, silde1, middleBan['1']);
+        createRowSlid(1, middleBan['1']);
     if (middleBan['4'])
-        createRowSlid(4, silde4, middleBan['4']);
+        createRowSlid(4, middleBan['4']);
     if (middleBan['5'])
-        createRowSlid(5, silde5, middleBan['5']);
+        createRowSlid(5, middleBan['5']);
 
     function addSliderPicTo(kind) {
         if (kind == 4)
@@ -523,7 +517,7 @@
 
         data.append('section', numKind);
         data.append('page', 'mainPage');
-        data.append('number', 0);
+        data.append('number', num);
         data.append('link', link);
         data.append('text', text);
         data.append('id', id);
