@@ -137,6 +137,7 @@ $config = \App\models\ConfigModel::first();
         <div class="clear-both"></div>
     </div>
 
+    <div class="hideOnScreen" style="width: 100%; height: 100px;"></div>
     <div class="footerPhoneMenuBar hideOnScreen">
         <div data-toggle="modal" data-target="#otherPossibilities">
             <span class="footerMenuBarLinks">{{__('منو')}}</span>
@@ -1061,9 +1062,6 @@ $config = \App\models\ConfigModel::first();
             $('#' + id).removeClass('hidden');
         }
 
-    </script>
-
-    <script>
         function showMorefooter() {
             $('.footMoreLessBtnText').toggleClass('hidden');
             $('#aboutShazde').toggleClass('aboutShazdeMoreLess');

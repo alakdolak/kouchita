@@ -704,6 +704,7 @@ class AjaxController extends Controller {
 
         return;
     }
+
     private function getMainPageSuggestionPackWithCityIds($cityIds, $getCount){
 
         if(count($cityIds) > 0)
@@ -778,6 +779,7 @@ class AjaxController extends Controller {
 
         return [$foodId, $majaraId, $restId, $regionalId, $bazarId, $post];
     }
+
     private function getPlaceInKindPlaceId($placeId, $allPlace, $kindPlaceId, $getCount){
         $questionRate = Question::where('ansType', 'rate')->pluck('id')->toArray();
         $reviewId = Activity::where('name', 'نظر')->first()->id;
@@ -807,6 +809,7 @@ class AjaxController extends Controller {
 
         return $placeId;
     }
+
     private function getTopInIds($_kindPlaceId, $_placeIds, $getCount, $questionRate, $reviewId, $ansId, $quesActivityId, $seeActivityId = ''){
 
         $topIdInCity = [];

@@ -26,7 +26,6 @@
 @include('component.suggestionPack')
 
 
-
 @if(!Auth::check())
     @include('layouts.loginPopUp')
 @else

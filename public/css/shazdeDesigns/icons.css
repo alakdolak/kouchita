@@ -178,6 +178,15 @@
     content: '\e012' !important;
     font-family: Shazde_Regular2 !important;
 }
+.empty-heart:before{
+    content: '\e011' !important;
+    font-family: Shazde_Regular2 !important;
+}
+.fill-heart:before{
+    content: '\e012' !important;
+    font-family: Shazde_Regular2 !important;
+}
+
 .BookMarkIcon:before{
     content: "\E0DE" !important;
     font-family: Shazde_Regular2 !important;

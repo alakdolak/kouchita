@@ -398,11 +398,15 @@
     var silde4 = 0;
     var silde1 = 0;
     var middleBan = {!! json_encode($middleBan) !!};
-    var slide5Pics;
-    var slide4Pics;
-    var slide1Pics;
 
     function createRowSlid(kind, ss, sil) {
+        if (kind == 4)
+            ss = silde4;
+        else if (kind == 5)
+            ss = silde5;
+        else
+            ss = silde1;
+
         for (var i = 0; i < sil.length; i++) {
             var text = '                        <div id="rowSlide' + kind + '' + ss + '" class="row">\n' +
                 '                            <div class="col-md-2">\n' +
@@ -440,26 +444,21 @@
                 silde5++;
             else
                 silde1++;
-            ss++;
         }
     }
 
-    if (middleBan['1']) {
-        slide1Pics = middleBan['1'];
-        createRowSlid(1, silde1, slide1Pics);
-    }
-    if (middleBan['4']) {
-        slide4Pics = middleBan['4'];
-        createRowSlid(4, silde4, slide4Pics);
-    }
-    if (middleBan['5']) {
-        slide5Pics = middleBan['5'];
-        createRowSlid(5, silde5, slide5Pics);
-    }
+    if (middleBan['1'])
+        createRowSlid(1, silde1, middleBan['1']);
+    if (middleBan['4'])
+        createRowSlid(4, silde4, middleBan['4']);
+    if (middleBan['5'])
+        createRowSlid(5, silde5, middleBan['5']);
 
     function addSliderPicTo(kind) {
         if (kind == 4)
             ss = silde4;
+        else if (kind == 5)
+            ss = silde5;
         else
             ss = silde1;
 
@@ -495,6 +494,8 @@
 
         if (kind == 4)
             silde4++;
+        else if(kind == 5)
+            silde5++;
         else
             silde1++;
     }

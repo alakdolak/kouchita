@@ -385,6 +385,7 @@ Route::group(array('middleware' => ['throttle:30', 'nothing', 'setSession']), fu
     Route::get('cityPage/{kind}/{city}', 'HomeController@cityPage')->name('cityPage');
     Route::post('getCityPageReview', 'HomeController@getCityPageReview')->name('getCityPageReview');
     Route::post('getCityPageTopPlace', 'HomeController@getCityPageTopPlace')->name('getCityPageTopPlace');
+    Route::post('getCityAllPlaces', 'HomeController@getCityAllPlaces')->name('getCityAllPlaces');
 
     Route::get('amaken-details/{placeId}/{placeName}/{mode?}', 'AmakenController@showAmakenDetail')->name('amakenDetails');
     Route::get('restaurant-details/{placeId}/{placeName}/{mode?}', 'RestaurantController@showRestaurantDetail')->name('restaurantDetails');

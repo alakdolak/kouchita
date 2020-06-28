@@ -37,6 +37,19 @@
     <link rel="stylesheet" type='text/css' href="{{URL::asset('css/theme2/article.min.css')}}"/>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/cityPage.css')}}'/>
 
+    <style>
+        .mainArticleDiv{
+            position: absolute;
+            bottom: 0px;
+            color: white;
+            z-index: 9;
+            padding-right: 30px;
+        }
+        .withColor{
+            color: white !important;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -45,50 +58,6 @@
 
 @include('layouts.header1')
 
-<script>
-    function runMainSwiper(){
-        var swiper = new Swiper('.mainSuggestion', {
-            loop: true,
-            updateOnWindowResize: true,
-            navigation: {
-                prevEl: '.swiper-button-next',
-                nextEl: '.swiper-button-prev',
-            },
-            on: {
-                init: function(){
-                    this.update();
-                },
-                resize: function () {
-                    resizeFitImg('resizeImgClass');
-                    this.update()
-                },
-            },
-            breakpoints: {
-                450: {
-                    slidesPerView: 1,
-                    spaceBetween: 20,
-                },
-                991: {
-                    slidesPerView: 2,
-                    spaceBetween: 20,
-                },
-                10000: {
-                    slidesPerView: 3,
-                    spaceBetween: 20,
-                }
-            }
-        });
-    }
-
-    function createCityPageSuggestion(_id, _item, _callBack){
-        createSuggestionPack(_id, _item, function() {
-            $('#' + _id).find('.suggestionPackDiv').addClass('swiper-slide');
-
-            if(_callBack === 'function')
-                _callBack();
-        });
-    }
-</script>
 
 <div class="container cpBody">
     <div class="cpBorderBottom cpHeader">
@@ -113,7 +82,7 @@
     </div>
 
     <div class="row">
-        <div id="commentSection" class="col-lg-3 col-sm-3 text-align-right hideOnPhone" style="float: left; padding: 0 !important; overflow: hidden">
+        <div id="commentSection" class="col-lg-3 col-sm-3 text-align-right hideOnPhone" style="float: left; overflow: hidden; padding-right: 10px; padding-left: 0;margin-top: 13px; border-right: 2px solid #f3f3f3;">
             <div class="row" style="font-size: 25px; margin: 5px 10px; border-bottom: solid 1px #f3f3f3;">
                 {{__('تازه ترین پست ها')}}
             </div>
@@ -149,7 +118,7 @@
                     <div class="commentPhotosShow">
                         <div class="photosCol col-xs-12" onclick="showReviewPics(##id##)" style="display: ##havePic##">
                             <div style="position: relative; overflow: hidden; display: flex; justify-content: center; align-items: center;">
-                                <img src="##firstPic##" class="resizeImgClass" style="position: absolute; width: 100%;">
+                                <img src="##firstPic##" class="resizeImgClass" style="position: absolute; width: 100%;" onload="fitThisImg(this)">
                             </div>
                             <div class="numberOfPhotosMainDiv" style="display: ##morePic##">
                                 <div class="numberOfPhotos">##picCount##+</div>
@@ -201,7 +170,7 @@
             </div>
         </div>
 
-        <div id="cpBorderLeft" class="col-lg-9 col-sm-9 cpBorderLeft">
+        <div id="cpBorderLeft" class="col-lg-9 col-sm-9">
             <div class="row cpMainBox">
                 <div class="col-md-8 col-xs-12 pd-0Imp mg-bt-10">
                     @if(isset($place->pic))
@@ -226,7 +195,7 @@
                         <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/4/' . $kind . '/' . $place->listName)}}">
                             <div class="cityPageIcon hotel"></div>
                             <div class="textCityPageIcon">{{__('هتل')}}</div>
-                            <div class="textCityPageIcon" style="color: #0076a3">{{count($allHotels)}}</div>
+                            <div class="textCityPageIcon" style="color: #0076a3">{{$placeCounts['hotel']}}</div>
                         </a>
                         <a class="col-xs-4 cpLittleMenu" href="#">
                             <div class="cityPageIcon ticket"></div>
@@ -235,7 +204,7 @@
                         <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/1/' . $kind . '/' . $place->listName)}}">
                             <div class="cityPageIcon atraction"></div>
                             <div class="textCityPageIcon">{{__('جاذبه ها')}}</div>
-                            <div class="textCityPageIcon" style="color: #0076a3">{{count($allAmaken)}}</div>
+                            <div class="textCityPageIcon" style="color: #0076a3">{{$placeCounts['amaken']}}</div>
                         </a>
                     </div>
                     <div class="clear-both"></div>
@@ -243,17 +212,17 @@
                         <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/3/' . $kind. '/' . $place->listName )}}">
                             <div class="cityPageIcon restaurant"></div>
                             <div class="textCityPageIcon">{{__('رستوران')}}</div>
-                            <div class="textCityPageIcon" style="color: #0076a3">{{count($allRestaurant)}}</div>
+                            <div class="textCityPageIcon" style="color: #0076a3">{{$placeCounts['restaurant']}}</div>
                         </a>
                         <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/10/' . $kind . '/' . $place->listName)}}">
                             <div class="cityPageIcon soghat"></div>
                             <div class="textCityPageIcon">{{__('سوغات')}}</div>
-                            <div class="textCityPageIcon" style="color: #0076a3">{{count($allSogatSanaie)}}</div>
+                            <div class="textCityPageIcon" style="color: #0076a3">{{$placeCounts['sogatSanaie']}}</div>
                         </a>
                         <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/11/' . $kind . '/' . $place->listName)}}">
                             <div class="cityPageIcon ghazamahali"></div>
                             <div class="textCityPageIcon">{{__('غذای محلی')}}</div>
-                            <div class="textCityPageIcon" style="color: #0076a3">{{count($allMahaliFood)}}</div>
+                            <div class="textCityPageIcon" style="color: #0076a3">{{$placeCounts['mahaliFood']}}</div>
                         </a>
                     </div>
                     <div class="clear-both"></div>
@@ -261,12 +230,12 @@
                         <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/6/' . $kind . '/' . $place->listName)}}">
                             <div class="cityPageIcon majara"></div>
                             <div class="textCityPageIcon">{{__('طبیعت گردی')}}</div>
-                            <div class="textCityPageIcon" style="color: #0076a3">{{count($allMajara)}}</div>
+                            <div class="textCityPageIcon" style="color: #0076a3">{{$placeCounts['majara']}}</div>
                         </a>
                         <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/10/' . $kind . '/' . $place->listName)}}">
                             <div class="cityPageIcon sanaye"></div>
                             <div class="textCityPageIcon">{{__('صنایع‌دستی')}}</div>
-                            <div class="textCityPageIcon" style="color: #0076a3">{{count($allSogatSanaie)}}</div>
+                            <div class="textCityPageIcon" style="color: #0076a3">{{$placeCounts['sogatSanaie']}}</div>
                         </a>
                         <div class="col-xs-4 cpLittleMenu">
                             <div class="cityPageIcon lebas"></div>
@@ -278,7 +247,7 @@
                         <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/12/' . $kind . '/' . $place->listName)}}">
                             <div class="cityPageIcon boom"></div>
                             <div class="textCityPageIcon">{{__('بوم گردی')}}</div>
-                            <div class="textCityPageIcon" style="color: #0076a3">{{count($allBoomgardy)}}</div>
+                            <div class="textCityPageIcon" style="color: #0076a3">{{$placeCounts['boomgardy']}}</div>
                         </a>
                         <div class="col-xs-4 cpLittleMenu">
                             <div class="cityPageIcon estelah"></div>
@@ -340,21 +309,21 @@
                                 </h3>
                             </header>
                         </div>
-                        <div class="im-entry">
+                        <div class="im-entry mainArticleDiv">
                             <div class="iranomag-meta clearfix">
                                 <div class="posted-on im-meta-item">
-                                    <span class="entry-date published updated">{{$post[0]->date}}</span>
+                                    <span class="entry-date published updated withColor">{{$post[0]->date}}</span>
                                 </div>
 
-                                <div class="comments-link im-meta-item">
+                                <div class="comments-link im-meta-item withColor">
                                     <i class="fa fa-comment-o"></i>{{$post[0]->msgs}}
                                 </div>
 
-                                <div class="author vcard im-meta-item">
+                                <div class="author vcard im-meta-item withColor">
                                     <i class="fa fa-user"></i>{{$post[0]->username}}
                                 </div>
 
-                                <div class="post-views im-meta-item">
+                                <div class="post-views im-meta-item withColor">
                                     <i class="fa fa-eye"></i>{{$post[0]->seen}}
                                 </div>
                             </div>
@@ -376,7 +345,7 @@
                                                 {{$post[$i]->title}}
                                             </a>
                                         </header>
-                                        <div class="iranomag-meta clearfix">
+                                        <div class="iranomag-meta clearfix marg5">
                                             <div class="posted-on im-meta-item">
                                                 <span class="entry-date published updated">{{$post[$i]->date}}</span>
                                             </div>
@@ -400,29 +369,7 @@
             </div>
 
             <div class="col-xs-12 cpBorderBottom" style="padding: 0px">
-                <div class="cpMap" style="background-color: darkred">
-                    <div id="cpMap" class="prv_map clickable full-width full-height"></div>
-                </div>
-                <div class="cpMapList" id="show">
-                    <span class="mapIconsCommon boomgardyMapIcon" onclick="toggleIconInMap(this, 'boomgardy')">
-                        <span class="mapIconIcon boomIcon"></span>
-                    </span>
-                    <span class="mapIconsCommon hotelMapIcon" onclick="toggleIconInMap(this, 'hotel')">
-                        <span class="mapIconIcon hotelIcon"></span>
-                    </span>
-                    <span class="mapIconsCommon amakenMapIcon" onclick="toggleIconInMap(this, 'amaken')">
-                        <span class="mapIconIcon atraction"></span>
-                    </span>
-                    <span class="mapIconsCommon restaurantMapIcon" onclick="toggleIconInMap(this, 'restaurant')">
-                        <span class="mapIconIcon restaurantIcon"></span>
-                    </span>
-                    <span class="mapIconsCommon majaraMapIcon" onclick="toggleIconInMap(this, 'majara')">
-                        <span class="mapIconIcon majaraIcon"></span>
-                    </span>
-                    <span class="mapIconsCommon moreInfoMapIcon" onclick="toggleIconInMap(this, 'moreInfo')">
-                        <span class="mapIconIcon moreInfoIcon">i</span>
-                    </span>
-                </div>
+                <div id="cpMap" class="cpMap placeHolderAnime" style="height: 500px"></div>
             </div>
 
         </div>
@@ -430,6 +377,8 @@
 </div>
 
 @include('layouts.placeFooter')
+
+@include('component.mapMenu')
 
 <script>
 
@@ -551,6 +500,48 @@
         $('#reviewSection').html('');
     }
 
+    function runMainSwiper(){
+        var swiper = new Swiper('.mainSuggestion', {
+            loop: true,
+            updateOnWindowResize: true,
+            navigation: {
+                prevEl: '.swiper-button-next',
+                nextEl: '.swiper-button-prev',
+            },
+            on: {
+                init: function(){
+                    this.update();
+                },
+                resize: function () {
+                    resizeFitImg('resizeImgClass');
+                    this.update()
+                },
+            },
+            breakpoints: {
+                450: {
+                    slidesPerView: 1,
+                    spaceBetween: 20,
+                },
+                991: {
+                    slidesPerView: 2,
+                    spaceBetween: 20,
+                },
+                10000: {
+                    slidesPerView: 3,
+                    spaceBetween: 20,
+                }
+            }
+        });
+    }
+    function createCityPageSuggestion(_id, _item, _callBack){
+        createSuggestionPack(_id, _item, function() {
+            $('#' + _id).find('.suggestionPackDiv').addClass('swiper-slide');
+
+            if(_callBack === 'function')
+                _callBack();
+        });
+    }
+
     function getReviews(){
 
         $.ajax({
@@ -558,7 +549,7 @@
             url : '{{route("getCityPageReview")}}',
             data: {
                 _token: '{{csrf_token()}}',
-                placeId: {{$place->id}},
+                placeId: '{{$place->id}}',
                 kind: '{{$kind}}'
             },
             success: function(response){
@@ -593,7 +584,7 @@
             url : '{{route("getCityPageTopPlace")}}',
             data: {
                 _token: '{{csrf_token()}}',
-                id: {{$place->id}},
+                id: '{{$place->id}}',
                 kind: '{{$kind}}',
                 city: '{{$locationName['cityNameUrl']}}'
             },
@@ -625,6 +616,37 @@
         $('#commentSection').css('height', height);
     }
     getTopPlaces();
+
+    function getAllPlacesForMap(){
+        $.ajax({
+            type: 'post',
+            url: '{{route("getCityAllPlaces")}}',
+            data: {
+                _token: '{{csrf_token()}}',
+                kind : '{{$kind}}',
+                id: '{{$place->id}}'
+            },
+            success: function(response){
+                response = JSON.parse(response);
+                let map = response.map;
+                let allPlaces = response.allPlaces;
+
+                let center = {
+                    x: map.C,
+                    y: map.D
+                };
+                let bound = {
+                    minLat : parseFloat(map.minLat),
+                    maxLat : parseFloat(map.maxLat),
+                    minLng : parseFloat(map.minLng),
+                    maxLng : parseFloat(map.maxLng),
+                };
+
+                createMap('cpMap', center, bound, allPlaces);
+            }
+        })
+    }
+    getAllPlacesForMap();
 
     function showReviewPics(_id){
         var selectReview = 0;
@@ -668,265 +690,6 @@
 
 </script>
 
-{{--map--}}
-<script>
-    var x = '{{$place->x}}';
-    var y = '{{$place->y}}';
-    var all_amaken = {!! $allPlaces[0] !!};
-    var all_majara = {!! $allPlaces[3] !!};
-    var all_hotels = {!! $allPlaces[1] !!};
-    var all_restaurant = {!! $allPlaces[2] !!};
-    var iconBase = '{{URL::asset('images/mapIcon') . '/'}}';
-    var icons = {
-        hotel: {
-            icon: iconBase + 'mhotel.png'
-        },
-        amaken1: {
-            icon: iconBase + 'matr_pla.png'
-        },
-        amaken2: {
-            icon: iconBase + 'matr_mus.png'
-        },
-        amaken3: {
-            icon: iconBase + 'matr_shc.png'
-        },
-        amaken4: {
-            icon: iconBase + 'matr_nat.png'
-        },
-        amaken5: {
-            icon: iconBase + 'matr_fun.png'
-        },
-        fastfood: {
-            icon: iconBase + 'mfast.png'
-        },
-        rest: {
-            icon: iconBase + 'mrest.png'
-        },
-        adv: {
-            icon: iconBase + 'matr_adv.png'
-        },
-    };
-
-    var markersHotel = [];
-    var markersRest = [];
-    var markersFast = [];
-    var markersMus = [];
-    var markersPla = [];
-    var markersShc = [];
-    var markersFun = [];
-    var markersAdv = [];
-    var markersNat = [];
-    var majaraMap = [];
-    var map2;
-
-    function init() {
-        var x = '{{$map["C"]}}';
-        var y = '{{$map["D"]}}';
-        var minLat = parseFloat("{{$map['minLat']}}");
-        var maxLat = parseFloat("{{$map['maxLat']}}");
-        var minLng = parseFloat("{{$map['minLng']}}");
-        var maxLng = parseFloat("{{$map['maxLng']}}");
-
-        var mapOptions = {
-            center: new google.maps.LatLng(x, y),
-            zoom: 5,
-            // How you would like to style the map.
-            // This is where you would paste any style found on Snazzy Maps.
-            styles: [{
-                "featureType": "landscape",
-                "stylers": [{"hue": "#FFA800"}, {"saturation": 0}, {"lightness": 0}, {"gamma": 1}]
-            }, {
-                "featureType": "road.highway",
-                "stylers": [{"hue": "#53FF00"}, {"saturation": -73}, {"lightness": 40}, {"gamma": 1}]
-            }, {
-                "featureType": "road.arterial",
-                "stylers": [{"hue": "#FBFF00"}, {"saturation": 0}, {"lightness": 0}, {"gamma": 1}]
-            }, {
-                "featureType": "road.local",
-                "stylers": [{"hue": "#00FFFD"}, {"saturation": 0}, {"lightness": 30}, {"gamma": 1}]
-            }, {
-                "featureType": "water",
-                "stylers": [{"hue": "#00BFFF"}, {"saturation": 6}, {"lightness": 8}, {"gamma": 1}]
-            }, {
-                "featureType": "poi",
-                "stylers": [{"hue": "#679714"}, {"saturation": 33.4}, {"lightness": -25.4}, {"gamma": 1}]
-            }]
-        };
-        var mapElementSmall = document.getElementById('cpMap');
-        map2 = new google.maps.Map(mapElementSmall, mapOptions);
-
-        var bounds = new google.maps.LatLngBounds({lat: minLat, lng: minLng}, {lat: maxLat, lng: maxLng});
-        map2.fitBounds(bounds);
-
-        var marker;
-
-        // set amaken marker
-        for (i = 0; i < all_amaken.length; i++) {
-            if (all_amaken[i].mooze == 1)
-                kindAmaken = 'amaken2';
-            else if (all_amaken[i].tarikhi == 1)
-                kindAmaken = 'amaken1';
-            else if (all_amaken[i].tabiatgardi == 1)
-                kindAmaken = 'amaken4';
-            else if (all_amaken[i].tafrihi == 1)
-                kindAmaken = 'amaken5';
-            else if (all_amaken[i].markazkharid == 1)
-                kindAmaken = 'amaken3';
-            else
-                kindAmaken = 'amaken2';
-
-            marker = new google.maps.Marker({
-                position: new google.maps.LatLng(all_amaken[i]['C'], all_amaken[i]['D']),
-                icon: {
-                    url: icons[kindAmaken].icon,
-                    scaledSize: new google.maps.Size(35, 35)
-                },
-                map: map2,
-                title: all_amaken[i]['name'],
-                url: all_amaken[i]['url']
-            }).addListener('click', function() {
-                var win = window.open(this.url, '_blank');
-                win.focus();
-            });
-
-            if (all_amaken[i].mooze == 1)
-                markersMus[markersMus.length] = marker;
-            else if (all_amaken[i].tarikhi == 1)
-                markersPla[markersPla.length] = marker;
-            else if (all_amaken[i].tabiatgardi == 1)
-                markersNat[markersNat.length] = marker;
-            else if (all_amaken[i].tafrihi == 1)
-                markersFun[markersFun.length] = marker;
-            else if (all_amaken[i].markazkharid == 1)
-                markersShc[markersShc.length] = marker;
-            else
-                markersMus[markersMus.length] = marker;
-        }
-
-        // set hotels marker
-        for (i = 0; i < all_hotels.length; i++) {
-            marker = new google.maps.Marker({
-                position: new google.maps.LatLng(all_hotels[i]['C'], all_hotels[i]['D']),
-                icon: {
-                    url: icons['hotel'].icon,
-                    scaledSize: new google.maps.Size(35, 35)
-                },
-                map: map2,
-                title: all_hotels[i]['name'],
-                url: all_hotels[i]['url']
-            }).addListener('click', function() {
-                var win = window.open(this.url, '_blank');
-                win.focus();
-            });
-
-            markersHotel[i] = marker;
-        }
-
-        // set majara marker
-        for (i = 0; i < all_majara.length; i++) {
-            marker = new google.maps.Marker({
-                position: new google.maps.LatLng(all_majara[i]['C'], all_majara[i]['D']),
-                icon: {
-                    url: icons['adv'].icon,
-                    scaledSize: new google.maps.Size(35, 35)
-                },
-                map: map2,
-                title: all_majara[i]['name'],
-                url: all_majara[i]['url']
-            }).addListener('click', function() {
-                var win = window.open(this.url, '_blank');
-                win.focus();
-            });
-            majaraMap[i] = marker;
-        }
-
-        // set restaurant marker
-        for (i = 0; i < all_restaurant.length; i++) {
-            if (all_restaurant[i].kind_id == 1)
-                kindRestaurant = 'rest';
-            else
-                kindRestaurant = 'fastfood';
-
-            marker = new google.maps.Marker({
-                position: new google.maps.LatLng(all_restaurant[i]['C'], all_restaurant[i]['D']),
-                icon: {
-                    url: icons[kindRestaurant].icon,
-                    scaledSize: new google.maps.Size(35, 35)
-                },
-                map: map2,
-                title: all_restaurant[i]['name'],
-                url: all_restaurant[i]['url']
-            }).addListener('click', function() {
-                var win = window.open(this.url, '_blank');
-                win.focus();
-            });
-
-
-            if (all_restaurant[i].kind_id == 1)
-                markersRest[markersRest.length] = marker;
-            else
-                markersFast[markersFast.length] = marker;
-        }
-    }
-
-    function toggleIconInMap(_element, _id) {
-        $(_element).toggleClass('offMapIcons');
-
-        var src = document.getElementById(_id).src;
-        var sec = src.split('.');
-        var kind;
-
-        if (src.includes('off')) {
-            src = src.replace('off', '');
-            src2 = src;
-            kind = 1;
-        } else {
-            src2 = sec[0];
-            for(i = 1; i < sec.length; i++){
-                if(i == sec.length-1)
-                    src2 +=  'off.' + sec[i];
-                else
-                    src2 += '.' + sec[i];
-            }
-            kind = 0;
-        }
-        document.getElementById(_id).src = src2;
-
-        if (_id == 'hotelImg') {
-            setInMap(kind, markersHotel);
-        } else if (_id == 'restImg') {
-            setInMap(kind, markersRest);
-        } else if (_id == 'fastImg') {
-            setInMap(kind, markersFast);
-        } else if (_id == 'musImg') {
-            setInMap(kind, markersMus);
-        } else if (_id == 'plaImg') {
-            setInMap(kind, markersPla);
-        } else if (_id == 'shcImg') {
-            setInMap(kind, markersShc);
-        } else if (_id == 'funImg') {
-            setInMap(kind, markersFun);
-        } else if (_id == 'advImg') {
-            setInMap(kind, majaraMap);
-        } else if (_id == 'natImg') {
-            setInMap(kind, markersNat);
-        }
-    }
-
-    function setInMap(isSet, marker) {
-        if (isSet == 1) {
-            for (var i = 0; i < marker.length; i++)
-                marker[i]['i'].setMap(map2)
-        }
-        else {
-            for (var i = 0; i < marker.length; i++)
-                marker[i]['i'].setMap(null)
-        }
-
-    }
-</script>
-
-<script src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyCdVEd4L2687AfirfAnUY1yXkx-7IsCER0&callback=init"></script>
 
 </body>
 
