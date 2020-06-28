@@ -636,6 +636,12 @@ class HomeController extends Controller
                     break;
             }
             foreach ($plac as $item){
+                if($item->C > 39.817043976810254 || $item->D > 62.148940583173776 || $item->C < 24.337168697512585 || $item->D < 43.75341666481935){
+                    $item->C = 37.404470200738906;
+                    $item->D = 51.81568255996895;
+                    $item->save();
+                }
+
                 $location = __DIR__ .'/../../../../assets/_images/' . $kindPlace->fileName . '/' . $item->file;
                 $item->pic = null;
                 if(is_file($location . '/f-' . $item->picNumber))

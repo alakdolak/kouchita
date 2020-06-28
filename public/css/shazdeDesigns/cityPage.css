@@ -390,6 +390,25 @@
     margin-top: -2px
 }
 
+.mainArticleDiv{
+    position: absolute;
+    bottom: 0px;
+    color: white;
+    z-index: 9;
+    padding-right: 30px;
+}
+.withColor{
+    color: white !important;
+}
+.mainReviewSection{
+    float: left;
+    overflow: hidden;
+    padding-right: 10px;
+    padding-left: 0;
+    margin-top: 13px;
+    border-right: 2px solid #f3f3f3;
+}
+
 .im-widget-entry-featured-title a {
     color: #fff!important;
     display: block!important;
@@ -627,6 +646,9 @@ h3{
     .cpDescription{
         padding: 25px 5px;
     }
+    .im-entry-title{
+        padding-bottom: 50px !important;
+    }
 }
 
 
@@ -636,12 +658,30 @@ h3{
     }
 }
 
+@media (max-width: 991px) {
+    .cpBody{
+        width: 95% !important;
+        max-width: 100%;
+    }
+    .widget ul{
+        padding-top: 20px;
+    }
+}
+
 @media (max-width:540px) {
+
     .cpMapCategory {
         width: 50px;
         margin: 0px 2px;
     }
     .cpMapList {
         justify-content: flex-start;
+    }
+}
+
+@media (max-width:400px) {
+
+    .posted-on .im-meta-item{
+        width: 100% !important;
     }
 }

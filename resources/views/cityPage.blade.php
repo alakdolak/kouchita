@@ -37,19 +37,6 @@
     <link rel="stylesheet" type='text/css' href="{{URL::asset('css/theme2/article.min.css')}}"/>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/cityPage.css')}}'/>
 
-    <style>
-        .mainArticleDiv{
-            position: absolute;
-            bottom: 0px;
-            color: white;
-            z-index: 9;
-            padding-right: 30px;
-        }
-        .withColor{
-            color: white !important;
-        }
-    </style>
-
 </head>
 
 <body>
@@ -82,7 +69,7 @@
     </div>
 
     <div class="row">
-        <div id="commentSection" class="col-lg-3 col-sm-3 text-align-right hideOnPhone" style="float: left; overflow: hidden; padding-right: 10px; padding-left: 0;margin-top: 13px; border-right: 2px solid #f3f3f3;">
+        <div id="commentSection" class="col-lg-3 col-sm-3 text-align-right mainReviewSection hideOnPhone">
             <div class="row" style="font-size: 25px; margin: 5px 10px; border-bottom: solid 1px #f3f3f3;">
                 {{__('تازه ترین پست ها')}}
             </div>
@@ -266,7 +253,7 @@
                 @endif
 
                 <div id="topPlacesSection" class="mainSuggestionMainDiv cpBorderBottom ng-scope" style="display: none">
-                    <div class="topPlacesDivInCity">
+                    <div id="##id##" class="topPlacesDivInCity">
                         <div class="topPlacesDivInCityHeader">
                             <img src="{{URL::asset('images/icons/iconneg.svg')}}" class="nagLogo" alt="کوچیتا">
                             <a href="##url##">
@@ -276,7 +263,7 @@
                             </a>
                         </div>
                         <div class="swiper-container mainSuggestion" style="padding-top: 15px">
-                            <div id="##id##" class="swiper-wrapper thisfirsPlaceHolder" style="direction: rtl; position: relative;"></div>
+                            <div id="##id##Content" class="swiper-wrapper thisfirsPlaceHolder" style="direction: rtl; position: relative;"></div>
                             <div class="swiper-pagination"></div>
                             <div class="swiper-button-next"></div>
                             <div class="swiper-button-prev"></div>
@@ -305,7 +292,7 @@
                                     </div>
                                 </div>
                                 <h3 class="im-entry-title">
-                                    <a href="{{$post[0]->url}}" rel="bookmark">{{$post[0]->title}}</a>
+                                    <a href="{{$post[0]->url}}" style="font-size: 20px">{{$post[0]->title}}</a>
                                 </h3>
                             </header>
                         </div>
@@ -383,65 +370,65 @@
 <script>
 
     @if(isset($place->pic))
-    var cityPic = JSON.parse('{!! $place->pic !!}');
+        var cityPic = JSON.parse('{!! $place->pic !!}');
 
-    function showSliderPic(){
-        var cityPicForAlbum = [];
+        function showSliderPic(){
+            var cityPicForAlbum = [];
 
-        for(var i = 0; i < cityPic.length; i++){
-            cityPicForAlbum[i] = {
-                'id' : cityPic[i]['id'],
-                'sidePic' : cityPic[i]['pic'],
-                'mainPic' : cityPic[i]['pic'],
-                'userPic' : '',
-                'userName' : 'کوچیتا',
-                'uploadTime' : '',
-                'showInfo' : false,
-            }
-        }
-
-        createPhotoModal('عکس های شهر '+ cityName1, cityPicForAlbum);
-    };
-
-
-    var picSwiper = new Swiper('.cityPagePics', {
-        slidesPerGroup: 1,
-        loop: true,
-        autoplay: {
-            delay: 4000,
-            disableOnInteraction: false,
-        },
-        loopFillGroupWithBlank: true,
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
-    });
-
-    var changeSliderNum = 0;
-    picSwiper.on('slideChange', function () {
-
-        if(showCityPicNumber < cityPic.length) {
-            if (changeSliderNum == 3) {
-                let nuum = 0;
-                while (nuum < 5 && showCityPicNumber < cityPic.length) {
-                    slide = '<div class="swiper-slide position-relative cityImgSlider" onclick="showSliderPic()">\n' +
-                        '                                        <img src="' + cityPic[showCityPicNumber]['pic'] + '" class="resizeImgClass" style="width: 100%;" alt="' + cityName1 + '">\n' +
-                        '                                    </div>';
-                    picSwiper.addSlide(showCityPicNumber + 1, slide);
-                    nuum++;
-                    showCityPicNumber++;
+            for(var i = 0; i < cityPic.length; i++){
+                cityPicForAlbum[i] = {
+                    'id' : cityPic[i]['id'],
+                    'sidePic' : cityPic[i]['pic'],
+                    'mainPic' : cityPic[i]['pic'],
+                    'userPic' : '',
+                    'userName' : 'کوچیتا',
+                    'uploadTime' : '',
+                    'showInfo' : false,
                 }
-                resizeFitImg('resizeImgClass');
+            }
 
-                changeSliderNum = 0;
-            } else
-                changeSliderNum++;
-        }
+            createPhotoModal('عکس های شهر '+ cityName1, cityPicForAlbum);
+        };
 
-    });
 
-@endif
+        var picSwiper = new Swiper('.cityPagePics', {
+            slidesPerGroup: 1,
+            loop: true,
+            autoplay: {
+                delay: 4000,
+                disableOnInteraction: false,
+            },
+            loopFillGroupWithBlank: true,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+
+        var changeSliderNum = 0;
+        picSwiper.on('slideChange', function () {
+
+            if(showCityPicNumber < cityPic.length) {
+                if (changeSliderNum == 3) {
+                    let nuum = 0;
+                    while (nuum < 5 && showCityPicNumber < cityPic.length) {
+                        slide = '<div class="swiper-slide position-relative cityImgSlider" onclick="showSliderPic()">\n' +
+                            '                                        <img src="' + cityPic[showCityPicNumber]['pic'] + '" class="resizeImgClass" style="width: 100%;" alt="' + cityName1 + '">\n' +
+                            '                                    </div>';
+                        picSwiper.addSlide(showCityPicNumber + 1, slide);
+                        nuum++;
+                        showCityPicNumber++;
+                    }
+                    resizeFitImg('resizeImgClass');
+
+                    changeSliderNum = 0;
+                } else
+                    changeSliderNum++;
+            }
+
+        });
+
+    @endif
 
     resizeFitImg('resizeImgClass');
 
@@ -575,7 +562,6 @@
 
         resizeFitImg('resizeImgClass');
     }
-    getReviews();
 
     function getTopPlaces(){
 
@@ -608,14 +594,18 @@
     }
     function createTopPlacesDiv(_result){
         let fk = Object.keys(_result);
-        for (let x of fk)
-            createCityPageSuggestion(x, _result[x] , () => resizeFitImg('resizeImgClass'));
+
+        for (let x of fk) {
+            if(_result[x].length > 4)
+                createCityPageSuggestion(x + 'Content', _result[x], () => resizeFitImg('resizeImgClass'));
+            else
+                $('#' + x).hide();
+        }
 
         runMainSwiper();
         var height = $('#cpBorderLeft').height();
         $('#commentSection').css('height', height);
     }
-    getTopPlaces();
 
     function getAllPlacesForMap(){
         $.ajax({
@@ -646,7 +636,6 @@
             }
         })
     }
-    getAllPlacesForMap();
 
     function showReviewPics(_id){
         var selectReview = 0;
@@ -687,6 +676,12 @@
         $(element).parent().addClass('display-none');
         $(element).parent().prev().removeClass('display-none');
     }
+
+    $(window).ready(function(){
+        getReviews();
+        getTopPlaces();
+        getAllPlacesForMap();
+    })
 
 </script>
 
