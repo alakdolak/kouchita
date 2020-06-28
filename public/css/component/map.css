@@ -87,6 +87,11 @@
 .contentMapMore{
     padding-right: 10px;
 }
+.linkMapMore div{
+    width: 100%;
+    height: 150px;
+    overflow: hidden;
+}
 .nameMapMore{
     color: black;
     font-size: 20px;

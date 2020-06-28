@@ -18,7 +18,9 @@
         <div class="iconFamily iconClose closeMapMoreInfo" onclick="$('#mapMoreInfoPlace').hide();"></div>
         <div class="imgMapMoreDiv">
             <a class="linkMapMore" target="_blank">
-                <img id="mapMoreInfoImg" class="mapMoreInfoImg" src=""  onload="fitThisImg(this)">
+                <div>
+                    <img id="mapMoreInfoImg" class="mapMoreInfoImg" src=""  onload="fitThisImg(this)">
+                </div>
             </a>
 
             @if(\auth()->check())
