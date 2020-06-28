@@ -359,12 +359,6 @@ class HomeController extends Controller
 
             }
 
-            $topAmaken = $this->getTopPlaces(1, 'city', $place->id);
-            $topRestaurant = $this->getTopPlaces(3, 'city', $place->id);
-            $topHotel = $this->getTopPlaces(4, 'city', $place->id);
-            $topMajra = $this->getTopPlaces(6, 'city', $place->id);
-            $topSogatSanaies = $this->getTopPlaces(10, 'city', $place->id);
-            $topMahaliFood = $this->getTopPlaces(11, 'city', $place->id);
         }
         else {
             $place->listName = $place->name;
@@ -407,85 +401,9 @@ class HomeController extends Controller
             }
             else
                 $place->image = URL::asset('_images/city/' . $place->id . '/'.$place->image);
-
-            $topAmaken = $this->getTopPlaces(1, 'state', $place->id);
-            $topRestaurant = $this->getTopPlaces(3, 'state', $place->id);
-            $topHotel = $this->getTopPlaces(4, 'state', $place->id);
-            $topMajra = $this->getTopPlaces(6, 'state', $place->id);
-            $topSogatSanaies = $this->getTopPlaces(10, 'state', $place->id);
-            $topMahaliFood = $this->getTopPlaces(11, 'state', $place->id);
         }
 
-        $topPlaces = ['amaken' => $topAmaken, 'restaurant' => $topRestaurant, 'hotels' => $topHotel, 'majara' => $topMajra, 'sogatSanaie' => $topSogatSanaies, 'mahaliFood' => $topMahaliFood];
         $allPlaces = [$allAmaken, $allHotels, $allRestaurant, $allMajara];
-
-        $take = 15;
-        $reviews = $this->getCityReviews($kind, $place->id, $take);
-        if(count($reviews) != $take){
-            $lessReview = [];
-            $notIn = [];
-            foreach ($reviews as $item)
-                array_push($notIn, $item->id);
-
-            if($kind == 'city'){
-                $less = $take - count($reviews);
-                $lessReview = $this->getCityReviews('state', $place->stateId, $less, $notIn);
-                foreach ($lessReview as $item)
-                    array_push($reviews, $item);
-            }
-
-            $less = $take - count($reviews);
-            if($less != 0){
-                $notIn = [];
-                foreach ($reviews as $item)
-                    array_push($notIn, $item->id);
-
-                $lessReview = $this->getCityReviews('country', 0, $less, $notIn);
-                foreach ($lessReview as $item)
-                    array_push($reviews, $item);
-            }
-        }
-
-        foreach ($reviews as $item) {
-            $item->like = LogFeedBack::where('logId', $item->id)->where('like', 1)->count();
-            $item->disLike = LogFeedBack::where('logId', $item->id)->where('like', -1)->count();
-            $item->comments = getAnsToComments($item->id)[1];
-
-            $item->user = User::select(['first_name', 'last_name', 'username', 'picture', 'uploadPhoto'])->find($item->visitorId);
-            $item->userPic = getUserPic($item->user->id);
-
-            $kindPlace = Place::find($item->kindPlaceId);
-            $item->mainFile = $kindPlace->fileName;
-            $item->place = DB::table($kindPlace->tableName)->select(['id', 'name', 'cityId', 'file'])->find($item->placeId);
-            $item->kindPlace = $kindPlace->name;
-            $item->url = createUrl($kindPlace->id, $item->place->id, 0, 0);
-
-            $item->pics = ReviewPic::where('logId', $item->id)->get();
-            $item = getReviewPicsURL($item);
-
-            $item->city = Cities::find($item->place->cityId);
-            $item->state = State::find($item->city->stateId);
-
-
-            $time = $item->date . '';
-            if(strlen($item->time) == 1)
-                $item->time = '000' . $item->time;
-            else if(strlen($item->time) == 2)
-                $item->time = '00' . $item->time;
-            else if(strlen($item->time) == 3)
-                $item->time = '0' . $item->time;
-
-            if(strlen($item->time) == 4) {
-                $time .= ' ' . substr($item->time, 0, 2) . ':' . substr($item->time, 2, 2);
-                $item->timeAgo = getDifferenceTimeString($time);
-            }
-            else
-                $item->timeAgo = '';
-
-            if(strlen($item->text) > 180)
-                $item->summery = mb_substr($item->text, 0, 180, 'utf-8');
-
-        }
 
         $count = 0;
         $C = 0;
@@ -589,7 +507,126 @@ class HomeController extends Controller
         else
             $localStorageData = ['kind' => 'city', 'name' => $place->name , 'city' => $place->listName, 'state' => $place->state, 'mainPic' => $place->image, 'redirect' => $mainWebSiteUrl];
 
-        return view('cityPage', compact(['place', 'kind', 'localStorageData', 'locationName', 'post', 'map', 'allPlaces', 'allAmaken', 'allHotels', 'allRestaurant', 'allMajara', 'allMahaliFood', 'allSogatSanaie', 'allBoomgardy', 'reviews', 'topPlaces']));
+        return view('cityPage', compact(['place', 'kind', 'localStorageData', 'locationName', 'post', 'map', 'allPlaces', 'allAmaken', 'allHotels', 'allRestaurant', 'allMajara', 'allMahaliFood', 'allSogatSanaie', 'allBoomgardy']));
+    }
+
+    public function getCityPageReview(Request $request)
+    {
+        $take = 15;
+        $reviews = $this->getCityReviews($request->kind, $request->placeId, $take);
+        if(count($reviews) != $take){
+            $lessReview = [];
+            $notIn = [];
+            foreach ($reviews as $item)
+                array_push($notIn, $item->id);
+
+            if($request->kind == 'city'){
+                $place = Cities::find($request->placeId);
+                $less = $take - count($reviews);
+                $lessReview = $this->getCityReviews('state', $place->stateId, $less, $notIn);
+                foreach ($lessReview as $item)
+                    array_push($reviews, $item);
+            }
+
+            $less = $take - count($reviews);
+            if($less != 0){
+                $notIn = [];
+                foreach ($reviews as $item)
+                    array_push($notIn, $item->id);
+
+                $lessReview = $this->getCityReviews('country', 0, $less, $notIn);
+                foreach ($lessReview as $item)
+                    array_push($reviews, $item);
+            }
+        }
+
+        foreach ($reviews as $item) {
+            $item->like = LogFeedBack::where('logId', $item->id)->where('like', 1)->count();
+            $item->disLike = LogFeedBack::where('logId', $item->id)->where('like', -1)->count();
+            $item->comments = getAnsToComments($item->id)[1];
+
+            $item->user = User::select(['first_name', 'last_name', 'username', 'picture', 'uploadPhoto'])->find($item->visitorId);
+            $item->userName = $item->user->username;
+            $item->userPic = getUserPic($item->user->id);
+
+            $kindPlace = Place::find($item->kindPlaceId);
+            $item->mainFile = $kindPlace->fileName;
+            $item->place = DB::table($kindPlace->tableName)->select(['id', 'name', 'cityId', 'file'])->find($item->placeId);
+            $item->placeName = $item->place->name;
+            $item->kindPlace = $kindPlace->name;
+            $item->url = createUrl($kindPlace->id, $item->place->id, 0, 0);
+
+            $item->pics = ReviewPic::where('logId', $item->id)->get();
+            $item = getReviewPicsURL($item);
+            if(count($item->pics) > 0){
+                $item->havePic = 'block';
+                $item->firstPic = $item->pics[0]->picUrl;
+                if(count($item->pics) > 1){
+                    $item->morePic = 'block';
+                    $item->picCount = count($item->pics) - 1;
+                }
+                else{
+                    $item->morePic = 'none';
+                }
+            }
+            else
+                $item->havePic = 'none';
+
+            $item->city = Cities::find($item->place->cityId);
+            $item->state = State::find($item->city->stateId);
+            $item->placeCity = $item->city->name;
+            $item->placeState = $item->state->name;
+
+            $time = $item->date . '';
+            if(strlen($item->time) == 1)
+                $item->time = '000' . $item->time;
+            else if(strlen($item->time) == 2)
+                $item->time = '00' . $item->time;
+            else if(strlen($item->time) == 3)
+                $item->time = '0' . $item->time;
+
+            if(strlen($item->time) == 4) {
+                $time .= ' ' . substr($item->time, 0, 2) . ':' . substr($item->time, 2, 2);
+                $item->timeAgo = getDifferenceTimeString($time);
+            }
+            else
+                $item->timeAgo = '';
+
+            if(strlen($item->text) > 180) {
+                $item->summery = mb_substr($item->text, 0, 180, 'utf-8');
+                $item->haveSummery = '';
+                $item->notSummery = 'none';
+            }
+            else {
+                $item->haveSummery = 'display-none';
+                $item->notSummery = 'block';
+            }
+
+        }
+
+        echo json_encode($reviews);
+        return;
+    }
+
+    public function getCityPageTopPlace(Request $request)
+    {
+        $topAmaken = $this->getTopPlaces(1, $request->kind, $request->id);
+        $topRestaurant = $this->getTopPlaces(3, $request->kind, $request->id);
+        $topHotel = $this->getTopPlaces(4, $request->kind, $request->id);
+        $topMajra = $this->getTopPlaces(6, $request->kind, $request->id);
+        $topSogatSanaies = $this->getTopPlaces(10, $request->kind, $request->id);
+        $topMahaliFood = $this->getTopPlaces(11, $request->kind, $request->id);
+        $topBoomgardy = $this->getTopPlaces(12, $request->kind, $request->id);
+        $topPlaces = [  'topBoomgardyCityPage' => $topBoomgardy,
+                        'topAmakenCityPage' => $topAmaken,
+                        'topRestaurantInCity' => $topRestaurant,
+                        'topHotelCityPage' => $topHotel,
+                        'topMajaraCityPage' => $topMajra,
+                        'topSogatCityPage' => $topSogatSanaies,
+                        'topFoodCityPage' => $topMahaliFood];
+
+        echo json_encode($topPlaces);
+        return;
     }
 
     public function checkUserNameAndPass()
@@ -1740,8 +1777,6 @@ class HomeController extends Controller
                 $item->review = LogModel::where($condition)->count();
             }
         }
-
-
         return $places;
     }
 

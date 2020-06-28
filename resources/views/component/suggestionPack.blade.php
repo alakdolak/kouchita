@@ -138,5 +138,10 @@
         if(typeof _callback == 'function')
             _callback();
     }
+    function createSuggestionPackPlaceHolderClassName(_class, _callback = ''){
+        $('.' + _class).append(suggestionPlaceHolderSample);
+        if(typeof _callback == 'function')
+            _callback();
+    }
 
 </script>
