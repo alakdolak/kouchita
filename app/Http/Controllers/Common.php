@@ -1367,8 +1367,6 @@ function ip_info($ip = NULL, $purpose = "location", $deep_detect = TRUE) {
 }
 
 
-
-
 //time
 function jalaliToGregorian($time){
     include_once 'jdate.php';

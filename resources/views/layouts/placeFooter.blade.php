@@ -194,7 +194,6 @@ $config = \App\models\ConfigModel::first();
             @if(Request::is('article/*') || Request::is('mainArticle'))
                 <div class="mainPopUp leftPopUp" style="padding: 7px">
                     <div class="closeFooterPopupIcon iconFamily iconClose" onclick="$('#profilePossibilities').modal('hide')"></div>
-
                     <div class="lp_ar_searchTitle">{{__('جستجو خود را محدودتر کنید')}}</div>
 
                     <div class="lp_ar_filters">
@@ -204,7 +203,7 @@ $config = \App\models\ConfigModel::first();
                             <div class="lp_ar_eachFilters lp_ar_rightFilters lp_ar_selectedMenu" onclick="lp_selectArticleFilter('lp_ar_rightFilters' ,this)">{{__('دسته‌بندی مطالب')}}</div>
                             <div class="lp_ar_eachFilters" onclick="lp_selectArticleFilter('lp_ar_leftFilters' ,this)">{{__('مطالب مشابه')}}</div>
                         @endif
-                         </div>
+                    </div>
                     {{--right menu--}}
                     <div id="lp_ar_rightFilters" class="lp_ar_contentOfFilters">
                         <div class="gnContentsCategory">
@@ -348,33 +347,39 @@ $config = \App\models\ConfigModel::first();
             @elseif(Request::is('placeList/*'))
                 <div ng-app="mainApp" class="mainPopUp leftPopUp PlaceController" style="padding: 7px">
                     <div class="closeFooterPopupIcon iconFamily iconClose" onclick="$('#profilePossibilities').modal('hide')"></div>
+                    <div style="min-height: 60px">
+                        <div class="lp_ar_searchTitle">{{__('جستجو خود را محدودتر کنید')}}</div>
 
-                    <div class="lp_ar_searchTitle">{{__('جستجو خود را محدودتر کنید')}}</div>
-
-                    <div class="lp_ar_filters">
-                        <div class="lp_ar_eachFilters lp_ar_rightFilters lp_ar_selectedMenu" onclick="lp_selectArticleFilter('lp_ar_rightFilters' ,this)">{{__('اعمال فیلتر')}}</div>
-                        <div class="lp_ar_eachFilters" onclick="lp_selectArticleFilter('lp_ar_leftFilters' ,this)">{{__('نحوه مرتب‌سازی')}}</div>
+                        <div class="lp_ar_filters">
+                            <div class="lp_ar_eachFilters lp_ar_rightFilters lp_ar_selectedMenu" onclick="lp_selectArticleFilter('lp_ar_rightFilters' ,this)">{{__('اعمال فیلتر')}}</div>
+                            <div class="lp_ar_eachFilters" onclick="lp_selectArticleFilter('lp_ar_leftFilters' ,this)">{{__('نحوه مرتب‌سازی')}}</div>
+                        </div>
                     </div>
+
                     {{--right menu--}}
-                    <div id="lp_ar_rightFilters" class="lp_ar_contentOfFilters" ng-controller="FilterController">
-                        <div id="EATERY_FILTERS_CONT" class="eatery_filters">
-                            <div class="prw_rup prw_restaurants_restaurant_filters">
-                                <div id="jfy_filter_bar_establishmentTypeFilters"
-                                     class="lhrFilterBlock jfy_filter_bar_establishmentTypeFilters collapsible">
-                                    <div id="filterBox" style="flex-direction: column;">
-                                        <div style="font-size: 15px; margin: 10px 0px;">
-                                            <span>{{__('فیلترهای اعمال شده')}}</span>
-                                            <span style="float: left">
-                                                <span>----</span><span style="margin: 0 5px">{{__('مورد از')}}</span><span>----</span>
-                                            </span>
-                                        </div>
-                                        <div style="cursor: pointer; font-size: 12px; color: #050c93; margin-bottom: 7px;" onclick="closeFilters()">
-                                            {{__('پاک کردن فیلترها')}}
-                                        </div>
-                                        <div class="filterShow" style="display: flex; flex-direction: row; flex-wrap: wrap;"></div>
+                    <div id="lp_ar_rightFilters" class="lp_ar_contentOfFilters" ng-controller="FilterController" style="overflow: hidden; height: auto">
+
+                        <div class="bottomLightBorder prw_rup prw_restaurants_restaurant_filters">
+                            <div id="jfy_filter_bar_establishmentTypeFilters" class="lhrFilterBlock jfy_filter_bar_establishmentTypeFilters collapsible">
+                                <div id="filterBox" style="flex-direction: column;">
+                                    <div style="font-size: 15px; margin: 10px 0px;">
+                                        <span>{{__('فیلترهای اعمال شده')}}</span>
+                                        <span style="float: left">
+                                            <span class="filterShowCount">----</span>
+                                            <span style="margin: 0 5px">{{__('مورد از')}}</span>
+                                            <span class="totalPlaceCount">----</span>
+                                        </span>
                                     </div>
+                                    <div style="cursor: pointer; font-size: 12px; color: #050c93; margin-bottom: 7px;" onclick="closeFilters()">
+                                        {{__('پاک کردن فیلترها')}}
+                                    </div>
+                                    <div class="filterShow" style="display: flex; flex-direction: row; flex-wrap: wrap;"></div>
                                 </div>
                             </div>
+                        </div>
+
+                        <div id="EATERY_FILTERS_CONT" class="eatery_filters">
+
                             <div class="prw_rup prw_restaurants_restaurant_filters">
                                 <div id="jfy_filter_bar_establishmentTypeFilters" class="lhrFilterBlock jfy_filter_bar_establishmentTypeFilters collapsible">
                                     <div class="filterGroupTitle">{{__('جستجو‌ی نام')}}</div>

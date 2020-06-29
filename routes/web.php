@@ -484,8 +484,16 @@ Route::group(array('middleware' => 'nothing'), function () {
 
     Route::post('/article/comment/like', 'PostController@likeArticleComment')->name('article.comment.like');
 
-    Route::get('userArticles', function(){
-        return view('userActivities.userArticles');
+    Route::get('userArticles/{page}', function($page){
+        if($page == 'article')
+            return view('userActivities.userArticles');
+        elseif($page == 'post')
+            return view('userActivities.userPosts');
+        elseif($page == 'photo')
+            return view('userActivities.userPhotosAndVideos');
+        elseif($page == 'question')
+            return view('userActivities.userQuestions');
+
     });
 });
 

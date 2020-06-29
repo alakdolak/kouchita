@@ -3541,7 +3541,7 @@ class PlaceController extends Controller {
 
                 $cityIds = Cities::where('stateId', $city->id)->pluck('id')->toArray();
                 $contentCount = \DB::table($kindPlace->tableName)->whereIn('cityId', $cityIds)->count();
-                if($contentCount < 10)
+                if($contentCount < 5)
                     return \redirect(route('place.list', ['kindPlaceId' => $kindPlaceId, 'mode' => 'country']));
 
                 $articleUrl = \url('/article/list/city/' . $state->name);
@@ -3558,7 +3558,7 @@ class PlaceController extends Controller {
                     return "نتیجه ای یافت نشد";
 
                 $contentCount = \DB::table($kindPlace->tableName)->where('cityId', $city->id)->count();
-                if($contentCount < 10)
+                if($contentCount < 5)
                     return \redirect(route('place.list', ['kindPlaceId' => $kindPlaceId, 'mode' => 'state', 'city' => $state->name]));
 
                 $articleUrl = \url('/article/list/city/' . $city->name);

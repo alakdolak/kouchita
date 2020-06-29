@@ -547,12 +547,10 @@ footer li > img, .small-ico {
 }
 
 .lp_ar_contentOfFilters{
-    max-height: 80vh;
+    height: calc(100vh - 145px);
     overflow-y: auto;
     overflow-x: hidden;
 }
-
-
 
 footer .modules-membercenter-member-profile {
     width: 60%;
@@ -1251,12 +1249,22 @@ footer .profileMenuLinks {
     border: none;
     background: inherit;
 }
+
 .closeFooterPopupIcon{
     position: absolute;
     left: 5px;
     top: 0px;
     font-size: 40px;
     color: #4DC7BC;
+}
+
+.eatery_filters{
+    height: auto;
+    overflow: hidden;
+}
+
+.shareSection{
+    position: relative;
 }
 
 @media (max-width: 1300px) {
@@ -1317,7 +1325,7 @@ footer .profileMenuLinks {
         display: flex;
         justify-content: center;
         align-items: center;
-        flex-direction: column-reverse;
+        flex-direction: column;
     }
 
     .footerPhoneMenuBar {
@@ -1385,6 +1393,16 @@ footer .profileMenuLinks {
 }
 
 @media (max-width: 767px){
+
+    .eatery_filters{
+        height: calc(100vh - 225px);
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+    .shareSection{
+        position: absolute;
+        top: 0px;
+    }
     .FilterTopController{
         display: flex;
         justify-content: center;

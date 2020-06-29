@@ -38,19 +38,13 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     background: url('../../images/check_radio_sheet.png') -19px top no-repeat;
 }
 
-.moreItems {
+.moreItems, .lessItems {
     display: block;
     cursor: pointer;
-    padding: 23px 0 11px;
     line-height: 30px;
+    font-size: 12px;
 }
 
-.lessItems {
-    display: block;
-    cursor: pointer;
-    padding: 23px 0 11px;
-    line-height: 30px;
-}
 
 .moreItems2 {
     display: block;
@@ -329,18 +323,18 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     }
 }
 
-.listBoxesMainDivs > a:nth-child(1) > div > div {
-    width: 200px;
-    height: 120px;
-}
+/*.listBoxesMainDivs > a:nth-child(1) > div > div {*/
+/*    width: 200px;*/
+/*    height: 120px;*/
+/*}*/
 
-.listBoxesMainDivs > a:nth-child(1) > div > div > div {
-    margin-top: -66px;
-}
+/*.listBoxesMainDivs > a:nth-child(1) > div > div > div {*/
+/*    margin-top: -66px;*/
+/*}*/
 
-.listBoxesMainDivs > a:nth-child(1) > div:nth-child(3) > div:nth-child(2) > a > span {
-    color: #16174F;
-}
+/*.listBoxesMainDivs > a:nth-child(1) > div:nth-child(3) > div:nth-child(2) > a > span {*/
+/*    color: #16174F;*/
+/*}*/
 
 #EATERY_FILTERS_CONT > div:nth-child(1) > div > div > img:nth-child(1) {
     width: 100%;
@@ -426,7 +420,7 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
 }
 
 .placeListHeader {
-    /*margin-top: 65px;*/
+    height: 100px;
     position: relative;
 }
 
@@ -435,10 +429,17 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     font-size: 2.5em;
     font-weight: 600;
 }
-
+.saveAsBookmarkMainDiv, .sharePageMainDiv{
+    padding: 5px 20px;
+    background: #c3c3c3 !important;
+    margin-top: 10px;
+    border-radius: 10px;
+}
 .sharePageMainDiv {
-    margin-top: 40px !important;
     padding: 7px 20px !important;
+    position: relative;
+    font-weight: bold;
+    /*display: flex;*/
 }
 
 .ui_icon.heart:before {
@@ -453,19 +454,47 @@ input[type="checkbox"]:checked + label span, input[type="radio"]:checked + label
     float: right;
     display: flex;
     justify-content: space-around;
+    padding: 0px 2px;
+    margin-bottom: 15px;
 }
 
 div.prw_rup.prw_restaurants_restaurants_coverpage_content .item.name {
     max-width: 200px;
 }
 
-@media (max-width: 450px) {
-    .eachPlace {
-        display: block;
+@media (min-width: 992px) and (max-width: 1189px) {
+    .lhr .filterGroupTitle {
+        font-size: 18px !important;
+    }
+    .sorting {
+        font-size: 12px !important;
+    }
+}
+@media (max-width: 992px) {
+    .sorting {
+        width: 100% !important;
+        font-size: 14px !important;
+    }
+    .ordering {
+        width: 18%;
+        font-size: 13px;
+    }
+    .sharePageMainDiv {
+        margin-left: -15px;
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 835px) {
+    .lhr .filterGroupTitle {
+        font-size: 18px !important;
+    }
+    .ordering {
+        font-size: 11px !important;
+    }
+}
+
+
+@media (max-width: 767px) {
     #PlaceController {
         padding: 5px 15px !important;
         border-right: none;
@@ -487,7 +516,7 @@ div.prw_rup.prw_restaurants_restaurants_coverpage_content .item.name {
         right: 33px !important;
     }
     .sharePageMainDiv {
-        margin-left: -157px !important;
+        margin-left: -170px !important;
         padding: 7px 27px !important;
     }
     .eatery_filters {
@@ -519,6 +548,10 @@ div.prw_rup.prw_restaurants_restaurants_coverpage_content .item.name {
         border: 2px solid #4DC7BC;
         border-radius: 10px;
         color: #4DC7BC;
+        min-height: 70px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     .selectOrder {
         background-color: #4DC7BC;
@@ -526,34 +559,11 @@ div.prw_rup.prw_restaurants_restaurants_coverpage_content .item.name {
     }
 }
 
-@media (max-width: 835px) {
-    .lhr .filterGroupTitle {
-        font-size: 18px !important;
-    }
-    .ordering {
-        font-size: 11px !important;
+@media (max-width: 450px) {
+    .eachPlace {
+        display: block;
     }
 }
 
-@media (max-width: 992px) {
-    .sorting {
-        width: 100% !important;
-        font-size: 14px !important;
-    }
-    .ordering {
-        width: 18%;
-        font-size: 13px;
-    }
-    .sharePageMainDiv {
-        margin-left: -15px;
-    }
-}
 
-@media (min-width: 992px) and (max-width: 1189px) {
-    .lhr .filterGroupTitle {
-        font-size: 18px !important;
-    }
-    .sorting {
-        font-size: 12px !important;
-    }
-}
+

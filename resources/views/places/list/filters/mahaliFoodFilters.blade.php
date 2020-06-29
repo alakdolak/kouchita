@@ -1,5 +1,5 @@
 
-<div class="prw_rup prw_restaurants_restaurant_filters">
+<div class="bottomLightBorder headerFilter">
     <div class="lhrFilterBlock jfy_filter_bar_establishmentTypeFilters collapsible">
         <div style="display: flex; justify-content: space-between;">
             <div class="filterGroupTitle">{{__('نوع غذا')}}</div>

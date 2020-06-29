@@ -174,6 +174,10 @@
     content: '\E1F6';
     font-family: Shazde_Regular2 !important;
 }
+.emptyShareIcon:before{
+    content: '\e1f5' !important;
+    font-family: Shazde_Regular2 !important;
+}
 .HeartIcon:before{
     content: '\e012' !important;
     font-family: Shazde_Regular2 !important;

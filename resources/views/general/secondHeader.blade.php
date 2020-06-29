@@ -95,7 +95,7 @@
     }
 </style>
 <div class="container-fluid secHeadMain hideOnPhone">
-    <div class="ui_container secHeadNavs">
+    <div class="container listContainer secHeadNavs">
         <div class="secHeadTabs arrowAfter">
             <span>
                 {{$locationName['cityName']}}
@@ -194,7 +194,7 @@
 @if(isset($kindPlace))
     <div class="container-fluid secHeadMain" style="background-color: unset; margin-top: 10px;">
 
-        <div class="ui_container secHeadNavs spanMarginSecHead" style="font-size: 20px">
+        <div class="container listContainer secHeadNavs spanMarginSecHead" style="font-size: 20px">
             <a class="linkRoute" href="{{url('/')}}">
                 صفحه اصلی
             </a>

@@ -1,5 +1,5 @@
 
-<div class="prw_rup prw_restaurants_restaurant_filters">
+<div class="bottomLightBorder headerFilter">
     <div class="lhrFilterBlock jfy_filter_bar_establishmentTypeFilters collapsible">
         <div class="filterContent ui_label_group inline specialFiltersSection">
             <div class="filterItem lhrFilter filter selected">
@@ -17,12 +17,9 @@
 </div>
 
 
-<div class="filterForEatable0" style="display: none">
-    <div class="prw_rup prw_restaurants_restaurant_filters">
+<div class="filterForEatable0 " style="display: none">
+    <div class="bottomLightBorder headerFilter">
         <div class="lhrFilterBlock jfy_filter_bar_establishmentTypeFilters collapsible">
-            {{--<div style="display: flex; justify-content: space-between;">--}}
-                {{--<div class="filterGroupTitle">سبک</div>--}}
-            {{--</div>--}}
             <div class="filterContent ui_label_group inline specialFiltersSection">
                 <div class="filterItem lhrFilter filter selected">
                     <input ng-disabled="isDisable()" class="fragile1" name="fragile" onclick="doKindFilter('fragile', 1)" type="radio" id="fragile1" value="شکستنی"/>
@@ -37,7 +34,7 @@
         </div>
     </div>
 
-    <div class="prw_rup prw_restaurants_restaurant_filters">
+    <div class="bottomLightBorder headerFilter">
         <div class="lhrFilterBlock jfy_filter_bar_establishmentTypeFilters collapsible">
             <div style="display: flex; justify-content: space-between;">
                 <div class="filterGroupTitle">{{__('نوع')}}</div>
@@ -64,7 +61,7 @@
         </div>
     </div>
 
-    <div class="prw_rup prw_restaurants_restaurant_filters">
+    <div class="bottomLightBorder headerFilter">
         <div class="lhrFilterBlock jfy_filter_bar_establishmentTypeFilters collapsible">
             <div style="display: flex; justify-content: space-between;">
                 <div class="filterGroupTitle">{{__('سبک')}}</div>
@@ -89,7 +86,7 @@
 </div>
 
 <div class="filterForEatable1" style="display: none">
-    <div class="prw_rup prw_restaurants_restaurant_filters">
+    <div class="bottomLightBorder headerFilter">
     <div class="lhrFilterBlock jfy_filter_bar_establishmentTypeFilters collapsible">
         <div style="display: flex; justify-content: space-between;">
             <div class="filterGroupTitle">{{__('مزه')}}</div>
@@ -127,7 +124,7 @@
 
 
 {{--common in sogatSanaie--}}
-<div class="prw_rup prw_restaurants_restaurant_filters">
+<div class="bottomLightBorder headerFilter">
     <div class="lhrFilterBlock jfy_filter_bar_establishmentTypeFilters collapsible">
         <div style="display: flex; justify-content: space-between;">
             <div class="filterGroupTitle">{{__('ابعاد')}}</div>
@@ -150,7 +147,7 @@
     </div>
 </div>
 
-<div class="prw_rup prw_restaurants_restaurant_filters">
+<div class="bottomLightBorder headerFilter">
     <div class="lhrFilterBlock jfy_filter_bar_establishmentTypeFilters collapsible">
         <div style="display: flex; justify-content: space-between;">
             <div class="filterGroupTitle">{{__('وزن')}}</div>
@@ -173,7 +170,7 @@
     </div>
 </div>
 
-<div class="prw_rup prw_restaurants_restaurant_filters">
+<div class="bottomLightBorder headerFilter">
     <div class="lhrFilterBlock jfy_filter_bar_establishmentTypeFilters collapsible">
         <div style="display: flex; justify-content: space-between;">
             <div class="filterGroupTitle">{{__('کلاس قیمتی')}}</div>
@@ -195,8 +192,6 @@
 
     </div>
 </div>
-
-
 
 <script>
 

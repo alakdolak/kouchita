@@ -160,6 +160,7 @@
             majaraFilter = ($("#majaraFilter").attr('data-val') == 'off') ? 0 : 1;
             sogatSanaieFilter = ($("#sogatSanaieFilter").attr('data-val') == 'off') ? 0 : 1;
             mahaliFoodFilter = ($("#mahaliFoodFilter").attr('data-val') == 'off') ? 0 : 1;
+            boomgardyFilter = ($("#boomgardyFilter").attr('data-val') == 'off') ? 0 : 1;
 
 
             $.ajax({

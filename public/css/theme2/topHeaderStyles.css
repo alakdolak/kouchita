@@ -124,12 +124,41 @@ a:link {
 .showOnTablet{
     display: none;
 }
+
+.topLightBorder{
+    border-top: 1px solid #e5e5e5;
+}
+.leftLightBorder{
+    border-left: 1px solid #e5e5e5;
+}
+.rightLightBorder{
+    border-right: 1px solid #e5e5e5;
+}
+.bottomLightBorder{
+    border-bottom: 1px solid #e5e5e5;
+}
+.unselectedText{
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+
 @media (max-width: 991px) {
     .hideOnTablet{
         display: none !important;
     }
     .showOnTablet{
         display: inherit;
+    }
+    .listContainer{
+        position: relative;
+        padding: 0 24px;
+        box-sizing: border-box;
+        width: 100%;
     }
 }
 

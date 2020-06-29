@@ -420,6 +420,7 @@ class AjaxController extends Controller {
 
             echo json_encode($target);
         }
+        return;
     }
 
     public function findCityWithState(Request $request)

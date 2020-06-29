@@ -29,13 +29,11 @@
     <meta property="og:image:height" content="367"/>
     <meta name="twitter:image" content="{{URL::asset('_images/nopic/blank.jpg')}}"/>
 
-    <script src="{{URL::asset('js/angular.js')}}"></script>
-    <link rel='stylesheet' type='text/css' media='screen, print' href='{{URL::asset('css/theme2/eatery_overview.css?v=2')}}'/>
-    <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/long_lived_global_legacy_2.css?v=2')}}"/>
     <link rel="stylesheet" type="text/css" href="{{URL::asset('css/theme2/hotelLists.css')}}"/>
     <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/mainPageStyles.css')}}'/>
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/icons.css?v=2')}}' />
-    <link rel='stylesheet' type='text/css' href='{{URL::asset('css/shazdeDesigns/hotelDetail.css?v=2')}}' />
+
+    <script src= {{URL::asset("js/calendar.js") }}></script>
+    <script src= {{URL::asset("js/jalali.js") }}></script>
 
     <title>
         {{$kindPlace->name}}
@@ -112,13 +110,9 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            overflow: hidden;
         }
-    </style>
 
-    <script src= {{URL::asset("js/calendar.js") }}></script>
-    <script src= {{URL::asset("js/jalali.js") }}></script>
-
-    <style>
         @media (max-width: 992px) {
             .ordering {
                 width: 15% !important;
@@ -137,350 +131,390 @@
                 font-size: 8px !important;
             }
         }
+        @media (max-width: 767px) {
+            .ordering {
+                width: 100% !important;
+                font-size: 17px !important;
+            }
+            .sorting {
+                font-size: 8px !important;
+            }
+        }
+
+        .listShareIconPc{
+            display: inline-block;
+            float: right;
+            font-size: 17px;
+            line-height: 15px;
+            margin-right: 10px;
+        }
+        .sharePageLabel{
+            display: inline-block;
+            margin-right: 10px;
+        }
+        .placeListBody{
+            border-top: 1px solid #e5e5e5;
+            margin-top: 10px;
+        }
+        .placeListSortDiv{
+            margin-bottom: 10px;
+            padding-top: 5px;
+        }
+        .placeListBodyContentSection{
+            direction: rtl;
+            padding: 9px 18px;
+            border-right: 1px solid #e5e5e5;
+        }
+        .placeListBodyFilterSection{
+            direction: rtl;
+            padding: 10px;
+            padding-right: 0px;
+        }
+        .filterGroupTitle{
+            padding: 0 0 11px !important;
+            font-size: 20px;
+        }
+        .poiTitle{
+            font-size: 16px;
+            font-weight: normal;
+            color: #000000;
+        }
+        .contentDetailName{
+            width: 95%;
+            margin: 7px 0px;
+        }
+        .listBoxesMainDivs{
+            width: 100%;
+        }
+        .contentImgSection{
+
+        }
+        .contentImg{
+            height: 120px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            transition: .3s;
+        }
+        .contentImg:hover{
+            opacity: 0.8;
+        }
+        .rating-count{
+            display: flex;
+            align-items: center;
+        }
+        .rating-widget{
+            margin-left: 5px;
+        }
+        .review_count{
+            color: #666666;
+            font-size: 13px;
+        }
+        .itemState{
+            float: right;
+            padding: 0;
+            font-size: 0.75em;
+            color: #666666;
+        }
+        .heartOnPic{
+            position: absolute;
+            top: 0;
+            right: 3px;
+            font-size: 24px;
+            color: black;
+            cursor: pointer;
+        }
+        .heartOnPic:hover{
+            color: red;
+        }
+        .filterItem{
+            color: #666666;
+            font-size: 0.75em;
+            padding: 6px 0;
+        }
+        .headerFilter{
+            margin-bottom: 15px;
+        }
+        .option{
+            padding: 0px 5px;
+        }
     </style>
 
 </head>
 
-<body id="BODY_BLOCK_JQUERY_REFLOW"
-      class=" r_map_position_ul_fake ltr domn_en_US lang_en long_prices globalNav2011_reset
-      rebrand_2017 css_commerce_buttons flat_buttons sitewide xo_pin_user_review_to_top track_back">
+<body id="BODY_BLOCK_JQUERY_REFLOW">
 
 @include('general.forAllPages')
 
 <div id="PAGE" class="filterSearch redesign_2015 non_hotels_like desktop scopedSearch">
-    @include('layouts.placeHeader')
+
+    @include('layouts.header1')
 
     @include('general.secondHeader')
 
-    <div class=" hotels_lf_redesign ui_container responsive_body">
-        
-        <div style="height: 100px;">
+    <div class="container listContainer">
 
-            {{--@include('general.headerSearch')--}}
-            <div class="placeListHeader">
-                <div class="placeListTitle">
-                    {{$kindPlace->title}}
-                    @if($mode != 'country')
-                        @if($mode == 'state')
-                            استان
-                        @else
-                            شهر
-                        @endif
-                        {{$city->name}}
+        <div class="placeListHeader">
+            <div class="placeListTitle">
+                {{$kindPlace->title}}
+                @if($mode != 'country')
+                    @if($mode == 'state')
+                        {{__('استان')}}
                     @else
-                        ایران من
+                        {{__('شهر')}}
                     @endif
-                </div>
-                <div style="position: relative; top: -25px">
-                    <div>
-                        {{--<div id="helpBtnMainDiv" style="top: 0">--}}
-                            {{--<a class="link">--}}
-                                {{--<div class="circleBase type2 helpBtnIconMainDiv"></div>--}}
-                                {{--<b>راهنمای صفحات</b>--}}
-                            {{--</a>--}}
-                        {{--</div>--}}
-                        <div id="share_pic" class="ui_button sharePageMainDiv" onclick="toggleShareIcon(this)">
-                            <div class="sharePageIcon first"></div>
-                            <div class="sharePageLabel">
-                                اشتراک&zwnj;گذاری صفحه
-                            </div>
-                            @include('layouts.shareBox')
-                        </div>
+                    {{$city->name}}
+                @else
+                    {{__('ایران من')}}
+                @endif
+            </div>
+            <div class="shareSection">
+                <div id="share_pic" class="btn sharePageMainDiv" onclick="toggleShareIcon(this)">
+                    <div class="emptyShareIcon listShareIconPc"></div>
+                    <div class="sharePageLabel">
+                        {{__('اشتراک&zwnj;گذاری صفحه')}}
                     </div>
+                    @include('layouts.shareBox')
                 </div>
-
             </div>
         </div>
 
-        <div class="Restaurants prodp13n_jfy_overflow_visible">
-
-            <div class="wrap"></div>
-
-            <div id="BODYCON" ng-app="mainApp">
-                <div class="eateryOverviewContent">
-                    <div class="ui_columns is-partitioned">
-                        <div class="ui_column col-md-9 col-sm-8 PlaceController" ng-controller="PlaceController as cntr" style="direction: rtl; padding: 9px 24px;">
-                            <div infinite-scroll="myPagingFunction()" class="coverpage">
-                                <div class="ppr_rup ppr_priv_restaurants_coverpage_content">
-                                    <div>
-                                        <div class="prw_rup prw_restaurants_restaurants_coverpage_content">
-                                            <div class="coverpage_widget">
-                                                <div class="section">
-                                                    <div class="single_filter_pois">
-                                                        <div id="FilterTopController" class="title ui_columns hideOnPhone" style="border-bottom: 1px solid lightgray;">
-                                                            <div class="ordering sorting" style="font-weight: bold">مرتب سازی بر
-                                                                اساس:
-                                                            </div>
-                                                            <div class="ordering">
-                                                                <div class="orders" onclick="selectingOrder($(this),'review')" id="z1">
-                                                                    بیشترین نظر
-                                                                </div>
-                                                            </div>
-                                                            <div class="ordering">
-                                                                <div class="orders selectOrder" onclick="selectingOrder($(this), 'rate')" id="z2">
-                                                                    بهترین بازخورد
-                                                                </div>
-                                                            </div>
-                                                            <div class="ordering">
-                                                                <div class="orders" onclick="selectingOrder($(this), 'seen')" id="z3">
-                                                                    بیشترین بازدید
-                                                                </div>
-                                                            </div>
-                                                            <div class="ordering">
-                                                                <div class="orders" onclick="selectingOrder($(this), 'alphabet')" id="z4" >
-                                                                    حروف الفبا
-                                                                </div>
-                                                            </div>
-                                                            @if($kindPlace->id != 10 && $kindPlace->id != 11)
-                                                                <div class="ordering"  >
-                                                                    <div id="distanceNav" class="orders" style="width: 140% !important;" onclick="openGlobalSearch(); selectingOrder($(this), 'distance')">کمترین فاصله تا
-                                                                        <span id="selectDistance">__ __ __</span>
-                                                                    </div>
-                                                                </div>
-                                                            @endif
-                                                        </div>
-                                                        <div  class="option">
-                                                            <div class="row">
-                                                                <div ng-repeat="place in packets" class="ui_column col-lg-3 col-md-4 col-xs-6 eachPlace">
-                                                                    <div class="poi listBoxesMainDivs">
-                                                                        <a href="[[place.redirect]]" class="thumbnail" style="margin-bottom: 5px !important;">
-                                                                            <div class="prw_rup prw_common_centered_thumbnail">
-                                                                                <div class="sizing_wrapper">
-                                                                                    <div class="centering_wrapper">
-                                                                                        <img ng-src='[[place.pic]]'
-                                                                                             width="100%" height="100%"
-                                                                                             class='photo_image'
-                                                                                             alt='[[place.name]]'>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </a>
-
-                                                                        @if(auth()->check())
-                                                                            <div class="prw_rup prw_meta_saves_badge">
-                                                                                <div class="savesButton">
-                                                                                    {{--red-heart-fill--}}
-                                                                                    <span class="saves-widget-button saves secondary save-location-5247712 ui_icon heart saves-icon-locator [[place.inTrip]]" onclick="saveToTripList(this)" value="[[place.id]]"></span>
-                                                                                </div>
-                                                                            </div>
-                                                                        @endif
-
-                                                                        <div class="detail">
-
-                                                                        <div class="item name "
-                                                                             title="[[place.name]]">
-                                                                            <a class="poiTitle" target="_blank"
-                                                                               href="[[place.redirect]]">
-                                                                                [[place.name]]
-                                                                            </a>
-                                                                        </div>
-
-                                                                        <div class="item rating-count">
-                                                                            <div class="rating-widget">
-                                                                                <div class="prw_rup prw_common_location_rating_simple">
-                                                                                    <span class="[[place.ngClass]]"></span>
-                                                                                </div>
-                                                                            </div>
-                                                                            <a target="_blank" class="review_count" href="">
-                                                                                [[place.reviews]]
-                                                                                <span>نقد</span>
-                                                                            </a>
-                                                                        </div>
-                                                                        <div class="item col-md-12 col-xs-6 itemState" style="float: right;">استان:
-                                                                            <span>[[place.state]]</span>
-                                                                        </div>
-                                                                        <div class="item col-md-12 col-xs-6 itemState">شهر:
-                                                                            <span>[[place.city]]</span>
-                                                                        </div>
-                                                                        <div class="booking"></div>
-                                                                    </div>
-                                                                    </div>
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div>
-                                                            <div class="loader hidden"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="coverpage_tracking"></div>
+        <div id="BODYCON" class="row placeListBody" ng-app="mainApp">
+            <div class=" col-md-9 col-sm-8 rightLightBorder placeListBodyContentSection PlaceController" ng-controller="PlaceController as cntr">
+                <div infinite-scroll="myPagingFunction()" class="coverpage">
+                    <div id="FilterTopController" class="placeListSortDiv bottomLightBorder hideOnPhone">
+                        <div class="ordering sorting" style="font-weight: bold">
+                            {{__('مرتب سازی بر اساس')}}:
+                        </div>
+                        <div class="ordering">
+                            <div class="orders" onclick="selectingOrder($(this),'review')" id="z1">
+                                {{__('بیشترین نظر')}}
+                            </div>
+                        </div>
+                        <div class="ordering">
+                            <div class="orders selectOrder" onclick="selectingOrder($(this), 'rate')" id="z2">
+                                {{__('بهترین بازخورد')}}
+                            </div>
+                        </div>
+                        <div class="ordering">
+                            <div class="orders" onclick="selectingOrder($(this), 'seen')" id="z3">
+                                {{__('بیشترین بازدید')}}
+                            </div>
+                        </div>
+                        <div class="ordering">
+                            <div class="orders" onclick="selectingOrder($(this), 'alphabet')" id="z4" >
+                                {{__('حروف الفبا')}}
+                            </div>
+                        </div>
+                        @if($kindPlace->id != 10 && $kindPlace->id != 11)
+                            <div class="ordering"  >
+                                <div id="distanceNav" class="orders" style="width: 140% !important;" onclick="openGlobalSearch(); selectingOrder($(this), 'distance')">{{__('کمترین فاصله تا')}}
+                                    <span id="selectDistance">__ __ __</span>
                                 </div>
                             </div>
-                            <div id="bottomMainList" style="width: 100%; height: 5px;"></div>
-                        </div>
-                        <div class="lhr ui_column col-md-3 col-sm-4 hideOnPhone" id="FilterController" ng-controller="FilterController" style="direction: rtl; padding: 10px;">
-                            <div class="ppr_rup ppr_priv_restaurant_filters">
-                                <div class="verticalFilters placements">
-                                    <div id="EATERY_FILTERS_CONT" class="eatery_filters">
-                                        <div class="prw_rup prw_restaurants_restaurant_filters">
-                                            <div id="jfy_filter_bar_establishmentTypeFilters"
-                                                 class="lhrFilterBlock jfy_filter_bar_establishmentTypeFilters collapsible">
-                                                <div class="filterGroupTitle" style="padding: 0 0 11px !important;">
-                                                    جستجو خود را محدود تر کنید
-                                                </div>
+                        @endif
+                    </div>
+                    <div class="option">
+                        <div class="row">
+                            <div ng-repeat="place in packets" class="ui_column col-lg-3 col-md-4 col-xs-6 eachPlace">
+                                <div class="poi listBoxesMainDivs">
+                                    <div class="contentImgSection">
+                                        <a href="[[place.redirect]]" class="thumbnail" style="margin-bottom: 5px !important; height: 100%">
+                                            <div class="contentImg">
+                                                <img ng-src='[[place.pic]]' class='resizeImgClass' alt='[[place.keyword]]' style="width: 100%">
                                             </div>
-                                        </div>
+                                        </a>
 
-                                        <div class="prw_rup prw_restaurants_restaurant_filters">
-                                            <div id="jfy_filter_bar_establishmentTypeFilters" class="lhrFilterBlock jfy_filter_bar_establishmentTypeFilters collapsible" style="display: flex;justify-content: center;margin: 10px;">
-                                                <img src="http://localhost/assets/_images/majara/kohmare/f-1.jpg" alt="آبشار کوهمره سرخی" class="image">
+                                        @if(auth()->check())
+                                            <div id="moreMapHeart" class="heartOnPic" onclick="saveToTripList(this)" value="">
+                                                {{--fill-heart--}}
+                                                <span class="empty-heart"></span>
                                             </div>
-                                        </div>
-
-                                        <div class="prw_rup prw_restaurants_restaurant_filters">
-                                            <div id="jfy_filter_bar_establishmentTypeFilters"
-                                                 class="lhrFilterBlock jfy_filter_bar_establishmentTypeFilters collapsible">
-                                                <div class="col-md-12 hl_compareBtn" id="compareButton">هم‌اکنون مقایسه کنید</div>
-                                                <div id="filterBox" style="flex-direction: column; display: none;">
-                                                    <div style="font-size: 15px; margin: 10px 0px;">
-                                                        <span>فیلترهای اعمال شده</span>
-                                                        <span style="float: left">
-                                                            <span id="filterShowCount">----</span><span style="margin: 0 5px">مورد از</span><span id="totalPlaceCount"> </span>
-                                                        </span>
-                                                    </div>
-                                                    <div style="cursor: pointer; font-size: 12px; color: #050c93; margin-bottom: 7px;" onclick="closeFilters()">
-                                                        پاک کردن فیلتر ها
-                                                    </div>
-                                                    <div class="filterShow" style="display: flex; flex-direction: row; flex-wrap: wrap;"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="prw_rup prw_restaurants_restaurant_filters">
-                                            <div id="jfy_filter_bar_establishmentTypeFilters" class="lhrFilterBlock jfy_filter_bar_establishmentTypeFilters collapsible">
-                                                <div class="filterGroupTitle">جستجو‌ی نام</div>
-                                                <input id="nameSearch" class="hl_inputBox" placeholder="جستجو کنید" onchange="nameFilterFunc(this.value)">
-                                            </div>
-                                        </div>
-                                        <div class="prw_rup prw_restaurants_restaurant_filters">
-                                            <div id="jfy_filter_bar_establishmentTypeFilters"
-                                                 class="lhrFilterBlock jfy_filter_bar_establishmentTypeFilters collapsible">
-                                                <div class="filterGroupTitle">امتیاز کاربران</div>
-                                                <div class="filterContent ui_label_group inline">
-                                                    <div class="filterItem lhrFilter filter selected">
-                                                        <input onclick="rateFilterFunc(5)" type="radio" name="AVGrate" id="c5" value="5"/>
-                                                        <label for="c5"
-                                                               style="display:inline-block;"><span></span></label>
-                                                        <div class="rating-widget"
-                                                             style="font-size: 1.2em; display: inline-block">
-                                                            <div class="prw_rup prw_common_location_rating_simple">
-                                                                <span class="ui_bubble_rating bubble_50"></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="filterItem lhrFilter filter selected">
-                                                        <input  onclick="rateFilterFunc(4)" type="radio" name="AVGrate" id="c4" value="4"/>
-                                                        <label for="c4"
-                                                               style="display:inline-block;"><span></span></label>
-                                                        <div class="rating-widget"
-                                                             style="font-size: 1.2em; display: inline-block">
-                                                            <div class="prw_rup prw_common_location_rating_simple">
-                                                                <span class="ui_bubble_rating bubble_40"></span>
-                                                            </div>
-                                                        </div>
-                                                        <span> به بالا</span>
-                                                    </div>
-                                                    <div class="filterItem lhrFilter filter selected">
-                                                        <input onclick="rateFilterFunc(3)" type="radio" name="AVGrate" id="c3" value="3"/>
-                                                        <label for="c3"
-                                                               style="display:inline-block;"><span></span></label>
-                                                        <div class="rating-widget"
-                                                             style="font-size: 1.2em; display: inline-block">
-                                                            <div class="prw_rup prw_common_location_rating_simple">
-                                                                <span class="ui_bubble_rating bubble_30"></span>
-                                                            </div>
-                                                        </div>
-                                                        <span> به بالا</span>
-                                                    </div>
-                                                    <div class="filterItem lhrFilter filter selected">
-                                                        <input onclick="rateFilterFunc(2)" type="radio" name="AVGrate" id="c2" value="2"/>
-                                                        <label for="c2"
-                                                               style="display:inline-block;"><span></span></label>
-                                                        <div class="rating-widget"
-                                                             style="font-size: 1.2em; display: inline-block">
-                                                            <div class="prw_rup prw_common_location_rating_simple">
-                                                                <span class="ui_bubble_rating bubble_20"></span>
-                                                            </div>
-                                                        </div>
-                                                        <span> به بالا</span>
-                                                    </div>
-                                                    <div class="filterItem lhrFilter filter selected">
-                                                        <input onclick="rateFilterFunc(1)" type="radio" name="AVGrate" id="c1" value="1"/>
-                                                        <label for="c1"
-                                                               style="display:inline-block;"><span></span></label>
-                                                        <div class="rating-widget"
-                                                             style="font-size: 1.2em; display: inline-block">
-                                                            <div class="prw_rup prw_common_location_rating_simple">
-                                                                <span class="ui_bubble_rating bubble_10"></span>
-                                                            </div>
-                                                        </div>
-                                                        <span> به بالا</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        @if($kindPlace->id == 4)
-                                            @include('places.list.filters.hotelFilters')
-                                        @elseif($kindPlace->id == 10)
-                                            @include('places.list.filters.sogatSanaieFilters')
-                                        @elseif($kindPlace->id == 11)
-                                            @include('places.list.filters.mahaliFoodFilters')
                                         @endif
+                                    </div>
 
-                                        @foreach($features as $feature)
-                                            <div class="prw_rup prw_restaurants_restaurant_filters">
-                                                <div class="lhrFilterBlock jfy_filter_bar_establishmentTypeFilters collapsible">
-                                                    <div style="display: flex; justify-content: space-between;">
-                                                        <div class="filterGroupTitle">{{$feature->name}}</div>
-                                                        @if(count($feature->subFeat) > 5)
-                                                            <span onclick="showMoreItems({{$feature->id}})" class="moreItems{{$feature->id}} moreItems">نمایش کامل فیلترها</span>
-                                                            <span onclick="showLessItems({{$feature->id}})" class="lessItems hidden extraItem{{$feature->id}} moreItems">پنهان سازی فیلتر‌ها</span>
-                                                        @endif
-                                                    </div>
+                                    <div class="detail">
+                                        <div class="contentDetailName lessShowText" title="[[place.name]]">
+                                            <a class="poiTitle" target="_blank"
+                                               href="[[place.redirect]]">
+                                                [[place.name]]
+                                            </a>
+                                        </div>
 
-                                                    <div class="filterContent ui_label_group inline">
-                                                        @for($i = 0; $i < 5 && $i < count($feature->subFeat); $i++)
-                                                            <div class="filterItem lhrFilter filter selected">
-                                                                <input ng-disabled="isDisable()" onclick="doFilterFeature({{$feature->subFeat[$i]->id}})" type="checkbox" id="feat{{$feature->subFeat[$i]->id}}" value="{{$feature->subFeat[$i]->name}}"/>
-                                                                <label for="feat{{$feature->subFeat[$i]->id}}"><span></span>&nbsp;&nbsp;{{$feature->subFeat[$i]->name}}  </label>
-                                                            </div>
-                                                        @endfor
-
-                                                        @if(count($feature->subFeat) > 5)
-                                                            @for($i = 5; $i < count($feature->subFeat); $i++)
-                                                                <div class="filterItem lhrFilter filter extraItem{{$feature->id}}">
-                                                                    <input ng-disabled="isDisable()" onclick="doFilterFeature({{$feature->subFeat[$i]->id}})" type="checkbox" id="feat{{$feature->subFeat[$i]->id}}" value="{{$feature->subFeat[$i]->name}}"/>
-                                                                    <label for="feat{{$feature->subFeat[$i]->id}}"><span></span>&nbsp;&nbsp; {{$feature->subFeat[$i]->name}} </label>
-                                                                </div>
-                                                            @endfor
-                                                        @endif
-                                                    </div>
+                                        <div class="item rating-count">
+                                            <div class="rating-widget">
+                                                <div class="prw_rup prw_common_location_rating_simple">
+                                                    <span class="[[place.ngClass]]"></span>
                                                 </div>
                                             </div>
-                                        @endforeach
-
+                                            <div target="_blank" class="review_count">
+                                                [[place.reviews]]
+                                                <span>{{__('نقد')}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="item col-md-12 col-xs-6 itemState" style="margin-top: 5px">
+                                            {{__('استان')}}:
+                                            <span>[[place.state]]</span>
+                                        </div>
+                                        <div class="item col-md-12 col-xs-6 itemState" style="margin-top: 3px">
+                                            {{__('شهر')}}:
+                                            <span>[[place.city]]</span>
+                                        </div>
+                                        <div class="booking"></div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="ad iab_medRec">
-                                <div id="gpt-ad-300x250-300x600-bottom" class="adInner gptAd delayAd"></div>
-                            </div>
-                            <div class="ad iab_supSky">
-                                <div id="gpt-ad-160x600" class="adInner gptAd delayAd"></div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div id="bottomMainList" style="width: 100%; height: 5px;"></div>
             </div>
 
-            <div class="clearFix"></div>
+            <div class="col-md-3 col-sm-4 placeListBodyFilterSection hideOnPhone" id="FilterController" ng-controller="FilterController">
 
+                <div id="EATERY_FILTERS_CONT" class="eatery_filters lhr">
+
+                    <div class="filterGroupTitle bottomLightBorder">
+                        {{__('جستجو خود را محدود تر کنید')}}
+                    </div>
+
+                    <div style="display: flex;justify-content: center;margin: 10px;">
+                        <img src="http://localhost/assets/_images/majara/kohmare/f-1.jpg" alt="آبشار کوهمره سرخی" class="image">
+                    </div>
+
+                    <div class="bottomLightBorder headerFilter" >
+                        <div class="col-md-12 hl_compareBtn" id="compareButton">{{__('هم‌اکنون مقایسه کنید')}}</div>
+                        <div id="filterBox" style="flex-direction: column; display: none;">
+                            <div style="font-size: 15px; margin: 10px 0px;">
+                                <span>{{__('فیلترهای اعمال شده')}}</span>
+                                <span style="float: left">
+                                    <span class="filterShowCount">----</span>
+                                    <span style="margin: 0 5px">{{__('مورد از')}}</span>
+                                    <span class="totalPlaceCount"></span>
+                                </span>
+                            </div>
+                            <div style="cursor: pointer; font-size: 0.75em; color: #050c93; margin-bottom: 7px;" onclick="closeFilters()">
+                                {{__('پاک کردن فیلتر ها')}}
+                            </div>
+                            <div class="filterShow" style="display: flex; flex-direction: row; flex-wrap: wrap;"></div>
+                        </div>
+                    </div>
+
+                    <div class="bottomLightBorder headerFilter">
+                        <div class="filterGroupTitle">{{__('جستجو‌ی نام')}}</div>
+                        <input id="nameSearch" class="hl_inputBox" placeholder="جستجو کنید" onchange="nameFilterFunc(this.value)">
+                    </div>
+
+                    <div class="bottomLightBorder headerFilter">
+                        <div class="filterGroupTitle">{{__('امتیاز کاربران')}}</div>
+                        <div class="filterContent ui_label_group inline">
+                            <div class="filterItem lhrFilter filter selected">
+                                <input onclick="rateFilterFunc(5)" type="radio" name="AVGrate" id="c5" value="5"/>
+                                <label for="c5" style="display:inline-block;"><span></span></label>
+                                <div class="rating-widget" style="font-size: 1.2em; display: inline-block">
+                                    <div class="prw_rup prw_common_location_rating_simple">
+                                        <span class="ui_bubble_rating bubble_50"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="filterItem lhrFilter filter selected">
+                                <input  onclick="rateFilterFunc(4)" type="radio" name="AVGrate" id="c4" value="4"/>
+                                <label for="c4" style="display:inline-block;"><span></span></label>
+                                <div class="rating-widget" style="font-size: 1.2em; display: inline-block">
+                                    <div class="prw_rup prw_common_location_rating_simple">
+                                        <span class="ui_bubble_rating bubble_40"></span>
+                                    </div>
+                                </div>
+                                <span> {{__('به بالا')}}</span>
+                            </div>
+                            <div class="filterItem lhrFilter filter selected">
+                                <input onclick="rateFilterFunc(3)" type="radio" name="AVGrate" id="c3" value="3"/>
+                                <label for="c3" style="display:inline-block;"><span></span></label>
+                                <div class="rating-widget" style="font-size: 1.2em; display: inline-block">
+                                    <div class="prw_rup prw_common_location_rating_simple">
+                                        <span class="ui_bubble_rating bubble_30"></span>
+                                    </div>
+                                </div>
+                                <span> {{__('به بالا')}}</span>
+                            </div>
+                            <div class="filterItem lhrFilter filter selected">
+                                <input onclick="rateFilterFunc(2)" type="radio" name="AVGrate" id="c2" value="2"/>
+                                <label for="c2"
+                                       style="display:inline-block;"><span></span></label>
+                                <div class="rating-widget"
+                                     style="font-size: 1.2em; display: inline-block">
+                                    <div class="prw_rup prw_common_location_rating_simple">
+                                        <span class="ui_bubble_rating bubble_20"></span>
+                                    </div>
+                                </div>
+                                <span> {{__('به بالا')}}</span>
+                            </div>
+                            <div class="filterItem lhrFilter filter selected">
+                                <input onclick="rateFilterFunc(1)" type="radio" name="AVGrate" id="c1" value="1"/>
+                                <label for="c1"
+                                       style="display:inline-block;"><span></span></label>
+                                <div class="rating-widget"
+                                     style="font-size: 1.2em; display: inline-block">
+                                    <div class="prw_rup prw_common_location_rating_simple">
+                                        <span class="ui_bubble_rating bubble_10"></span>
+                                    </div>
+                                </div>
+                                <span> {{__('به بالا')}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    @if($kindPlace->id == 4)
+                        @include('places.list.filters.hotelFilters')
+                    @elseif($kindPlace->id == 10)
+                        @include('places.list.filters.sogatSanaieFilters')
+                    @elseif($kindPlace->id == 11)
+                        @include('places.list.filters.mahaliFoodFilters')
+                    @endif
+
+                    @foreach($features as $feature)
+                        <div class="bottomLightBorder headerFilter">
+                            <div style="display: flex; justify-content: space-between;">
+                                <div class="filterGroupTitle">{{$feature->name}}</div>
+                                @if(count($feature->subFeat) > 5)
+                                    <span onclick="showMoreItems({{$feature->id}})" class="moreItems{{$feature->id}} moreItems">نمایش کامل فیلترها</span>
+                                    <span onclick="showLessItems({{$feature->id}})" class="lessItems hidden extraItem{{$feature->id}} moreItems">پنهان سازی فیلتر‌ها</span>
+                                @endif
+                            </div>
+
+                            <div class="filterContent ui_label_group inline">
+                                @for($i = 0; $i < 5 && $i < count($feature->subFeat); $i++)
+                                    <div class="filterItem lhrFilter filter selected">
+                                        <input ng-disabled="isDisable()" onclick="doFilterFeature({{$feature->subFeat[$i]->id}})" type="checkbox" id="feat{{$feature->subFeat[$i]->id}}" value="{{$feature->subFeat[$i]->name}}"/>
+                                        <label for="feat{{$feature->subFeat[$i]->id}}"><span></span>&nbsp;&nbsp;{{$feature->subFeat[$i]->name}}  </label>
+                                    </div>
+                                @endfor
+
+                                @if(count($feature->subFeat) > 5)
+                                    @for($i = 5; $i < count($feature->subFeat); $i++)
+                                        <div class="filterItem lhrFilter filter extraItem{{$feature->id}} hidden">
+                                            <input ng-disabled="isDisable()" onclick="doFilterFeature({{$feature->subFeat[$i]->id}})" type="checkbox" id="feat{{$feature->subFeat[$i]->id}}" value="{{$feature->subFeat[$i]->name}}"/>
+                                            <label for="feat{{$feature->subFeat[$i]->id}}"><span></span>&nbsp;&nbsp; {{$feature->subFeat[$i]->name}} </label>
+                                        </div>
+                                    @endfor
+                                @endif
+                            </div>
+                        </div>
+
+                    @endforeach
+
+                </div>
+                <div class="ad iab_medRec">
+                    <div id="gpt-ad-300x250-300x600-bottom" class="adInner gptAd delayAd"></div>
+                </div>
+                <div class="ad iab_supSky">
+                    <div id="gpt-ad-160x600" class="adInner gptAd delayAd"></div>
+                </div>
+            </div>
         </div>
+
     </div>
 
     @include('hotelDetailsPopUp')
@@ -625,8 +659,8 @@
                 if (response.data != null && response.data.places != null && response.data.places.length > 0)
                     $scope.show = true;
 
-                $('#totalPlaceCount').text(response.data.totalCount);
-                $('#filterShowCount').text(response.data.placeCount);
+                $('.totalPlaceCount').text(response.data.totalCount);
+                $('.filterShowCount').text(response.data.placeCount);
 
                 for(j = 0; j < response.data.places.length; j++){
                     var k = $scope.packets.length;
@@ -966,6 +1000,7 @@
                     'majaraFilter': 1,
                     'sogatSanaieFilter': 1,
                     'mahaliFoodFilter': 1,
+                    'boomgardyFilter': 1,
                     'selectedCities': cityId,
                     'mode': '{{$mode}}'
                 },
