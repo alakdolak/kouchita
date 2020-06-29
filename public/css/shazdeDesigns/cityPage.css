@@ -31,7 +31,29 @@
 .cpPic {
     width: 100%;
     height: auto;
-    max-height: 340px;
+    max-height: 330px;
+}
+
+.zpr{
+    padding-right: 0px;
+}
+.underSlider{
+    display: flex;
+    padding: 0;
+    margin-top: 10px;
+}
+.cityPagePics{
+    width: 98%;
+    margin-right: 0;
+}
+.infoLittleMenu{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+}
+.cpLittleMenuImg{
+    margin-bottom: 10px;
 }
 
 /*css of little menu*/
@@ -42,6 +64,10 @@
     cursor: pointer;
     padding: 1px !important;
     height: 85px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .cpLittleMenu:hover {
@@ -524,7 +550,7 @@ h3{
 
 .cityImgSlider{
     overflow: hidden;
-    height: 340px;
+    height: 330px;
 }
 .topImage{
     display: flex;

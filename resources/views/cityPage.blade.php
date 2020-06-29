@@ -69,7 +69,7 @@
     </div>
 
     <div class="row">
-        <div id="commentSection" class="col-lg-3 col-sm-3 text-align-right mainReviewSection hideOnPhone">
+        <div id="commentSection" class="col-lg-3 col-sm-3 text-align-right mainReviewSection hideOnTablet">
             <div class="row" style="font-size: 25px; margin: 5px 10px; border-bottom: solid 1px #f3f3f3;">
                 {{__('تازه ترین پست ها')}}
             </div>
@@ -157,9 +157,9 @@
             </div>
         </div>
 
-        <div id="cpBorderLeft" class="col-lg-9 col-sm-9">
+        <div id="cpBorderLeft" class="col-lg-9 col-md-12">
             <div class="row cpMainBox">
-                <div class="col-md-8 col-xs-12 pd-0Imp mg-bt-10">
+                <div class="col-md-8 col-xs-12 pd-0Imp">
                     @if(isset($place->pic))
                         <div class="cityPagePics swiper-container">
                             <div class="swiper-wrapper position-relative"  style="height: 100%">
@@ -174,11 +174,46 @@
                             <div class="swiper-button-prev"></div>
                         </div>
                     @else
-                        <img class="cpPic" src="{{$place->image}}">
+                        <img class="cityPagePics cpPic" src="{{$place->image}}">
                     @endif
+                    <div class="col-xs-12 underSlider hideOnTablet">
+                            <div class="cpLittleMenu infoLittleMenu">
+                                <img src="{{URL::asset('images/icons/info.png')}}" style="">
+                            </div>
+                            <a class="col-xs-2 cpLittleMenu" href="#">
+                                <img class="cpLittleMenuImg" src="{{URL::asset('images/icons/cinema.png')}}" alt="{{__('سینما')}}">
+                                <div class="textCityPageIcon">{{__('سینما')}}</div>
+                                {{--<div class="textCityPageIcon" style="color: #0076a3">1000</div>--}}
+                            </a>
+                            <a class="col-xs-2 cpLittleMenu" href="#">
+                                <img class="cpLittleMenuImg" src="{{URL::asset('images/icons/bakery.png')}}" alt="{{__('قتادی')}}">
+                                <div class="textCityPageIcon">{{__('قتادی')}}</div>
+                                {{--<div class="textCityPageIcon" style="color: #0076a3">1000</div>--}}
+                            </a>
+                            <a class="col-xs-2 cpLittleMenu" href="#">
+                                <img class="cpLittleMenuImg" src="{{URL::asset('images/icons/mortarboard(1).png')}}" alt="{{__('آموزش')}}">
+                                <div class="textCityPageIcon">{{__('آموزش')}}</div>
+                                {{--<div class="textCityPageIcon" style="color: #0076a3">1000</div>--}}
+                            </a>
+                            <a class="col-xs-2 cpLittleMenu" href="#">
+                                <img class="cpLittleMenuImg" src="{{URL::asset('images/icons/culture.png')}}" alt="{{__('فرهنگ')}}">
+                                <div class="textCityPageIcon">{{__('فرهنگ')}}</div>
+                                {{--<div class="textCityPageIcon" style="color: #0076a3">1000</div>--}}
+                            </a>
+                            <a class="col-xs-2 cpLittleMenu" href="#">
+                                <img class="cpLittleMenuImg" src="{{URL::asset('images/icons/barbershop.png')}}" alt="{{__('آرایشگاه')}}">
+                                <div class="textCityPageIcon">{{__('آرایشگاه')}}</div>
+                                {{--<div class="textCityPageIcon" style="color: #0076a3">1000</div>--}}
+                            </a>
+                            <a class="col-xs-2 cpLittleMenu" href="#">
+                                <img class="cpLittleMenuImg" src="{{URL::asset('images/icons/fuel.png')}}" alt="{{__('سوخت')}}">
+                                <div class="textCityPageIcon">{{__('سوخت')}}</div>
+                                {{--<div class="textCityPageIcon" style="color: #0076a3">1000</div>--}}
+                            </a>
+                        </div>
                 </div>
                 <div class="col-md-4 col-xs-12 pd-0Imp">
-                    <div class="col-xs-12">
+                    <div class="col-xs-12 zpr">
                         <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/4/' . $kind . '/' . $place->listName)}}">
                             <div class="cityPageIcon hotel"></div>
                             <div class="textCityPageIcon">{{__('هتل')}}</div>
@@ -194,8 +229,7 @@
                             <div class="textCityPageIcon" style="color: #0076a3">{{$placeCounts['amaken']}}</div>
                         </a>
                     </div>
-                    <div class="clear-both"></div>
-                    <div class="col-xs-12">
+                    <div class="col-xs-12 zpr">
                         <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/3/' . $kind. '/' . $place->listName )}}">
                             <div class="cityPageIcon restaurant"></div>
                             <div class="textCityPageIcon">{{__('رستوران')}}</div>
@@ -212,8 +246,7 @@
                             <div class="textCityPageIcon" style="color: #0076a3">{{$placeCounts['mahaliFood']}}</div>
                         </a>
                     </div>
-                    <div class="clear-both"></div>
-                    <div class="col-xs-12">
+                    <div class="col-xs-12 zpr">
                         <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/6/' . $kind . '/' . $place->listName)}}">
                             <div class="cityPageIcon majara"></div>
                             <div class="textCityPageIcon">{{__('طبیعت گردی')}}</div>
@@ -229,8 +262,7 @@
                             <div class="textCityPageIcon">{{__('لباس محلی')}}</div>
                         </div>
                     </div>
-                    <div class="clear-both"></div>
-                    <div class="col-xs-12">
+                    <div class="col-xs-12 zpr">
                         <a class="col-xs-4 cpLittleMenu" href="{{url('placeList/12/' . $kind . '/' . $place->listName)}}">
                             <div class="cityPageIcon boom"></div>
                             <div class="textCityPageIcon">{{__('بوم گردی')}}</div>
@@ -240,9 +272,64 @@
                             <div class="cityPageIcon estelah"></div>
                             <div class="textCityPageIcon">{{__('اصطلاحات محلی')}}</div>
                         </div>
-                        {{--<div class="col-xs-4 cpLittleMenu"></div>--}}
+                        <div class="col-xs-4 cpLittleMenu">
+                            <div class="cityPageIcon safarnameIcon"></div>
+                            <div class="textCityPageIcon">{{__('سفر نامه')}}</div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 zpr">
+                        <a class="col-xs-4 cpLittleMenu" href="#">
+                            <img class="cpLittleMenuImg" src="{{URL::asset('images/icons/gym.png')}}" alt="{{__('ورزشی')}}">
+                            <div class="textCityPageIcon">{{__('ورزشی')}}</div>
+                            {{--<div class="textCityPageIcon" style="color: #0076a3">1000</div>--}}
+                        </a>
+                        <a class="col-xs-4 cpLittleMenu" href="#">
+                            <img class="cpLittleMenuImg" src="{{URL::asset('images/icons/tag.png')}}" alt="{{__('فروشگاه')}}">
+                            <div class="textCityPageIcon">{{__('فروشگاه')}}</div>
+                            {{--<div class="textCityPageIcon" style="color: #0076a3">1000</div>--}}
+                        </a>
+                        <a class="col-xs-4 cpLittleMenu" href="#">
+                            <img class="cpLittleMenuImg" src="{{URL::asset('images/icons/hospital(1).png')}}" alt="{{__('پزشکی')}}">
+                            <div class="textCityPageIcon">{{__('پزشکی')}}</div>
+                            {{--<div class="textCityPageIcon" style="color: #0076a3">1000</div>--}}
+                        </a>
+                    </div>
+                    <div class="col-xs-12 zpr showOnTablet">
+                        <a class="col-xs-4 cpLittleMenu" href="#">
+                            <img class="cpLittleMenuImg" src="{{URL::asset('images/icons/cinema.png')}}" alt="{{__('سینما')}}">
+                            <div class="textCityPageIcon">{{__('سینما')}}</div>
+                            {{--<div class="textCityPageIcon" style="color: #0076a3">1000</div>--}}
+                        </a>
+                        <a class="col-xs-4 cpLittleMenu" href="#">
+                            <img class="cpLittleMenuImg" src="{{URL::asset('images/icons/bakery.png')}}" alt="{{__('قتادی')}}">
+                            <div class="textCityPageIcon">{{__('قتادی')}}</div>
+                            {{--<div class="textCityPageIcon" style="color: #0076a3">1000</div>--}}
+                        </a>
+                        <a class="col-xs-4 cpLittleMenu" href="#">
+                            <img class="cpLittleMenuImg" src="{{URL::asset('images/icons/mortarboard(1).png')}}" alt="{{__('آموزش')}}">
+                            <div class="textCityPageIcon">{{__('آموزش')}}</div>
+                            {{--<div class="textCityPageIcon" style="color: #0076a3">1000</div>--}}
+                        </a>
+                    </div>
+                    <div class="col-xs-12 zpr showOnTablet">
+                        <a class="col-xs-4 cpLittleMenu" href="#">
+                            <img class="cpLittleMenuImg" src="{{URL::asset('images/icons/culture.png')}}" alt="{{__('فرهنگ')}}">
+                            <div class="textCityPageIcon">{{__('فرهنگ')}}</div>
+                            {{--<div class="textCityPageIcon" style="color: #0076a3">1000</div>--}}
+                        </a>
+                        <a class="col-xs-4 cpLittleMenu" href="#">
+                            <img class="cpLittleMenuImg" src="{{URL::asset('images/icons/barbershop.png')}}" alt="{{__('آرایشگاه')}}">
+                            <div class="textCityPageIcon">{{__('آرایشگاه')}}</div>
+                            {{--<div class="textCityPageIcon" style="color: #0076a3">1000</div>--}}
+                        </a>
+                        <a class="col-xs-4 cpLittleMenu" href="#">
+                            <img class="cpLittleMenuImg" src="{{URL::asset('images/icons/fuel.png')}}" alt="{{__('سوخت')}}">
+                            <div class="textCityPageIcon">{{__('سوخت')}}</div>
+                            {{--<div class="textCityPageIcon" style="color: #0076a3">1000</div>--}}
+                        </a>
                     </div>
                 </div>
+
             </div>
 
             <div class="row">
@@ -509,8 +596,16 @@
                     slidesPerView: 1,
                     spaceBetween: 20,
                 },
-                991: {
+                550: {
                     slidesPerView: 2,
+                    spaceBetween: 10,
+                },
+                768: {
+                    slidesPerView: 2,
+                    spaceBetween: 20,
+                },
+                991: {
+                    slidesPerView: 3,
                     spaceBetween: 20,
                 },
                 10000: {

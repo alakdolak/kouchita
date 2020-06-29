@@ -1,21 +1,9 @@
 <link rel="stylesheet" href="{{URL::asset('css/component/map.css')}}">
 
-<style>
-    .moreMapSaveButtonDiv{
-        position: absolute;
-        top: 0px;
-        font-size: 25px;
-        right: 5px;
-        cursor: pointer;
-    }
-    .moreMapSaveButtonDiv:hover .empty-heart{
-        color: red;
-    }
-</style>
 
 <div id="mapDivSample" style="display: none">
     <div id="mapMoreInfoPlace" class="mapMoreInfoPlace">
-        <div class="iconFamily iconClose closeMapMoreInfo" onclick="$('#mapMoreInfoPlace').hide();"></div>
+        <div class="iconFamily iconClose closeMapMoreInfo" onclick="$('#mapMoreInfoPlace').removeClass('showMapMoreInfo');"></div>
         <div class="imgMapMoreDiv">
             <a class="linkMapMore" target="_blank">
                 <div>
@@ -41,12 +29,12 @@
             <div class="mapMoreState">
                 <div>
                     {{__('استان')}}
-                    <span id="moreMapCity"></span>
+                    <span id="moreMapState"></span>
                 </div>
 
                 <div>
                     {{__('شهر')}}
-                    <span id="moreMapState"></span>
+                    <span id="moreMapCity"></span>
                 </div>
             </div>
             <div class="mapMoreIcon">
@@ -80,6 +68,9 @@
 </div>
 
 <script>
+    let mapDivs = $('#mapDivSample').html();
+    $('#mapDivSample').remove();
+
     let mainMap;
     let mapId;
     let mapData;
@@ -351,15 +342,12 @@
         moreInfo: '{{URL::asset('images/mapIcon/info.png')}}',
     };
 
-    let mapDivs = $('#mapDivSample').html();
-    $('#mapDivSample').remove();
-
     function createMap(_id, _center, _bounds, _data) {
         mapId = _id;
         mapData = _data;
         mapCenter = _center;
         mapBound = _bounds;
-        $('#' + _id).html(mapDivs);
+        $('#' + mapId).html(mapDivs);
         initMap();
     }
 
@@ -419,7 +407,7 @@
         $('#moreMapState').text(place.stateName);
         $('#moreMapHeart').attr('value', place.id);
 
-        $('#mapMoreInfoPlace').show();
+        $('#mapMoreInfoPlace').addClass('showMapMoreInfo');
     }
 
     function toggleIconInMap(_element, _kind) {
