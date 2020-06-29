@@ -165,7 +165,7 @@
                             <div class="swiper-wrapper position-relative"  style="height: 100%">
                                 @for($i = 0; $i < count($place->pic) && $i < 5; $i++)
                                     <div class="swiper-slide position-relative cityImgSlider" onclick="showSliderPic()">
-                                        <img src="{{$place->pic[$i]->pic}}" class="resizeImgClass" style="width: 100%;" alt="{{$place->name}}">
+                                        <img src="{{$place->pic[$i]->pic}}" class="resizeImgClass" style="width: 100%;" alt="{{$place->name}}" onload="resizeFitImg(this)">
                                     </div>
                                 @endfor
                             </div>
@@ -410,7 +410,7 @@
                                     <li class="widget-10104im-widgetclearfix">
                                     <figure class="im-widget-thumb">
                                         <a href="{{$post[$i]->url}}" title="{{$post[$i]->title}}" style="height: 100%;">
-                                            <img src="{{$post[$i]->pic}}" alt="{{$post[$i]->keyword}}" class="resizeImgClass" style="width: 100%">
+                                            <img src="{{$post[$i]->pic}}" alt="{{$post[$i]->keyword}}" class="resizeImgClass" style="width: 100%" onload="resizeFitImg(this)">
                                         </a>
                                     </figure>
                                     <div class="im-widget-entry">
@@ -500,7 +500,7 @@
                     let nuum = 0;
                     while (nuum < 5 && showCityPicNumber < cityPic.length) {
                         slide = '<div class="swiper-slide position-relative cityImgSlider" onclick="showSliderPic()">\n' +
-                            '                                        <img src="' + cityPic[showCityPicNumber]['pic'] + '" class="resizeImgClass" style="width: 100%;" alt="' + cityName1 + '">\n' +
+                            '                                        <img src="' + cityPic[showCityPicNumber]['pic'] + '" class="resizeImgClass" style="width: 100%;" alt="' + cityName1 + '" onload="resizeFitImg(this)">\n' +
                             '                                    </div>';
                         picSwiper.addSlide(showCityPicNumber + 1, slide);
                         nuum++;
