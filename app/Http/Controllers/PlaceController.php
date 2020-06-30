@@ -120,7 +120,6 @@ class PlaceController extends Controller {
             $hasLogin = false;
             $uPic = getUserPic(); // common.php
         }
-
         saveViewPerPage($kindPlaceId, $place->id); // common.php
 
         $bookMark = false;

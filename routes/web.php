@@ -4,6 +4,7 @@ use App\models\ConfigModel;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Route;
 
+
 Route::get('language/{lang}', function($lang){
     Session::put('lang', $lang);
     return redirect()->back();
@@ -835,3 +836,7 @@ Route::group(array(), function(){
         dd($request);
     });
 });
+
+Route::get('updateSeen', 'MainController@updateSeen');
+Route::get('updateReviewCount', 'MainController@updateReview');
+Route::get('updateRate', 'MainController@updateRate');

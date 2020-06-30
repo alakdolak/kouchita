@@ -389,31 +389,13 @@ function getNearestMedals($uId) {
 function getRate($placeId, $kindPlaceId) {
 
     try {
-        switch ($kindPlaceId) {
-            case 1:
-                $place = Amaken::select(['id', 'name', 'cityId', 'file'])->find($placeId);
-                break;
-            case 3:
-                $place = Restaurant::select(['id', 'name', 'cityId', 'file'])->find($placeId);
-                break;
-            case 4:
-                $place = Hotel::select(['id', 'name', 'cityId', 'file'])->find($placeId);
-                break;
-            case 6:
-                $place = Majara::select(['id', 'name', 'cityId', 'file'])->find($placeId);
-                break;
-            case 10:
-                $place = SogatSanaie::select(['id', 'name', 'cityId', 'file'])->find($placeId);
-                break;
-            case 11:
-                $place = MahaliFood::select(['id', 'name', 'cityId', 'file'])->find($placeId);
-                break;
-        }
+        $kindPlace = Place::find($kindPlaceId);
+        $place = \DB::table($kindPlace->tableName)->find($placeId);
 
         $city = Cities::find($place->cityId);
         $state = State::find($city->stateId);
 
-        $section = \DB::select('SELECT questionId FROM questionSections WHERE (kindPlaceId = 0 OR kindPlaceId = ' . $kindPlaceId . ') AND (stateId = 0 OR stateId = ' . $state->id . ') AND (cityId = 0 OR cityId = ' . $city->id . ') GROUP BY questionId');
+        $section = \DB::select('SELECT questionId FROM questionSections WHERE (kindPlaceId = 0 OR kindPlaceId = ' . $kindPlaceId . ' ) AND (stateId = 0 OR stateId = ' . $state->id . ') AND (cityId = 0 OR cityId = ' . $city->id . ') GROUP BY questionId');
 
         $questionId = array();
         foreach ($section as $item)
@@ -430,11 +412,12 @@ function getRate($placeId, $kindPlaceId) {
 
         $avgRate = 0;
 
-//    $rates = DB::select('select avg(rate) as avgRate from log, questionUserAns WHERE log.id = logId and placeId = ' . $placeId . " and kindPlaceId = " . $kindPlaceId . " and activityId = " . Activity::whereName('امتیاز')->first()->id . " group by(visitorId)");
+
         if($questionId != null && count($questionId) != 0)
-            $rates = DB::select('select avg(ans) as avgRate from log, questionUserAns As qua WHERE log.id = qua.logId and log.placeId = ' . $placeId . " and log.kindPlaceId = " . $kindPlaceId . " and qua.questionId IN (" . implode(',', $questionId) . ") group by(log.visitorId)");
+            $rates = DB::select('select avg(ans) as avgRate from log, questionUserAns As qua WHERE log.id = qua.logId and log.placeId = ' . $placeId . " and  log.confirm = 1 and log.kindPlaceId = " . $kindPlaceId . " and  qua.questionId IN (" . implode(',', $questionId) . ") group by(log.visitorId)");
         else
             $rates = array();
+
 
         $separatedRates = [0, 0, 0, 0, 0];
         foreach ($rates as $rate) {
@@ -1042,6 +1025,14 @@ function saveViewPerPage($kindPlaceId, $placeId){
 
     $value = 'kindPlaceId:'.$kindPlaceId.'Id:'.$placeId;
     if(!(Cookie::has($value) == $value)) {
+
+        try {
+            $kindPlace = Place::find($kindPlaceId);
+            if ($kindPlace != null)
+                \DB::select('UPDATE `' . $kindPlace->tableName . '` SET `seen`= `seen`+1  WHERE `id` = ' . $placeId);
+        }
+        catch (\Exception $exception){}
+
         $activityId = Activity::whereName('مشاهده')->first()->id;
         $log = new LogModel();
         $log->time = getToday()["time"];
