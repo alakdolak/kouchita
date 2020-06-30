@@ -836,7 +836,3 @@ Route::group(array(), function(){
         dd($request);
     });
 });
-
-Route::get('updateSeen', 'MainController@updateSeen');
-Route::get('updateReviewCount', 'MainController@updateReview');
-Route::get('updateRate', 'MainController@updateRate');

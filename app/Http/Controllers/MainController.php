@@ -136,81 +136,6 @@ class MainController extends Controller
                 'middleBan' => $middleBan ]);
     }
 
-    public function updateSeen()
-    {
-        $count = 0;
-        $activityId = Activity::whereName('مشاهده')->first()->id;
-        $log = LogModel::where('activityId', $activityId)->where('kindPlaceId', '!=', 0)->where('placeId', '!=', 0)->get();
-        foreach ($log as $item){
-            $kindPlace = Place::find($item->kindPlaceId);
-            if($kindPlace != null && $kindPlace->tableName != null && $kindPlace->tableName != '') {
-                $count++;
-                \DB::select('UPDATE `' . $kindPlace->tableName . '` SET `seen`= `seen`+1  WHERE `id` = ' . $item->placeId);
-            }
-        }
-        dd($count);
-    }
-    public function updateReview()
-    {
-        $count = 0;
-        $activityId = Activity::whereName('نظر')->first()->id;
-        $log = LogModel::where('activityId', $activityId)->where('kindPlaceId', '!=', 0)->where('placeId', '!=', 0)->get();
-        foreach ($log as $item){
-            $kindPlace = Place::find($item->kindPlaceId);
-            if($kindPlace != null && $kindPlace->tableName != null && $kindPlace->tableName != '') {
-                $count++;
-                \DB::select('UPDATE `' . $kindPlace->tableName . '` SET `reviewCount`= `reviewCount`+1  WHERE `id` = ' . $item->placeId);
-            }
-        }
-        dd($count);
-    }
-
-    public function updateRate()
-    {
-        $activityId = Activity::whereName('نظر')->first()->id;
-        $log = LogModel::where('activityId', $activityId)->where('kindPlaceId', '!=', 0)->where('placeId', '!=', 0)->get();
-        foreach ($log as $item){
-            $kindPlace = Place::find($item->kindPlaceId);
-            $place = \DB::table($kindPlace->tableName)->find($item->placeId);
-
-            $city = Cities::find($place->cityId);
-            $state = State::find($city->stateId);
-
-            $section = \DB::select('SELECT questionId FROM questionSections WHERE (kindPlaceId = 0 OR kindPlaceId = ' . $kindPlace->id . ' ) AND (stateId = 0 OR stateId = ' . $state->id . ') AND (cityId = 0 OR cityId = ' . $city->id . ') GROUP BY questionId');
-
-            $questionId = array();
-            foreach ($section as $item)
-                array_push($questionId, $item->questionId);
-
-            if($questionId != null && count($questionId) != 0)
-                $questions = \DB::select('SELECT * FROM questions WHERE id IN (' . implode(",", $questionId) . ') AND ansType = "rate"');
-            else
-                $questions = array();
-
-            $questionId = array();
-            foreach ($questions as $item)
-                array_push($questionId, $item->id);
-
-            $avgRate = 0;
-
-            if($questionId != null && count($questionId) != 0)
-                $rates = \DB::select('select avg(ans) as avgRate from log, questionUserAns As qua WHERE log.id = qua.logId and log.placeId = ' . $place->id . " and log.kindPlaceId = " . $kindPlace->id . " and  qua.questionId IN (" . implode(',', $questionId) . ") group by(log.visitorId)");
-            else
-                $rates = array();
-
-            foreach ($rates as $rate)
-                $avgRate += $rate->avgRate;
-
-            if(count($rates) != 0)
-                $avgRate /= count($rates);
-            else
-                $avgRate = 2;
-
-            \DB::select('UPDATE `' . $kindPlace->tableName . '` SET `fullRate`= ' . $avgRate . '  WHERE `id` = ' . $place->id);
-        }
-
-    }
-
     public function getTrip()
     {
 //        $user = Auth::user();
@@ -486,7 +411,5 @@ class MainController extends Controller
 //            }
 //        }
     }
-
-
 
 }
